@@ -7,431 +7,377 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetActionRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetActionRecommendations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/action-recommendations",
-	Code: 200})
-
-var GetPersonalizedRanking = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetPersonalizedRanking",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/personalize-ranking",
-	Code: 200})
-
-var GetRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetRecommendations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/recommendations",
-	Code: 200})
-
-var _AmazonPersonalizeRuntime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "AmazonPersonalizeRuntime",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonPersonalizeRuntime = smithy.NewServiceSchema(_AmazonPersonalizeRuntime, "2018-05-22")
-
-var _ActionID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ActionID",
-}, smithy.ShapeTypeString, 0)
-
-var _ActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ActionList",
-}, smithy.ShapeTypeList, 1)
-var _ActionList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ColumnName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ColumnName",
-}, smithy.ShapeTypeString, 0)
-
-var _ColumnNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ColumnNamesList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnNamesList_member *smithy.Schema
-
-var _ColumnValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ColumnValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Context = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Context",
-}, smithy.ShapeTypeMap, 2)
-var _Context_key *smithy.Schema
-
-var _Context_value *smithy.Schema
-
-var _DatasetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "DatasetType",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "FilterAttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "FilterAttributeValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeMap, 2)
-var _FilterValues_key *smithy.Schema
-
-var _FilterValues_value *smithy.Schema
-
-var _InputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "InputList",
-}, smithy.ShapeTypeList, 1)
-var _InputList_member *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_message *smithy.Schema
-
-var _ItemID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ItemID",
-}, smithy.ShapeTypeString, 0)
-
-var _ItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ItemList",
-}, smithy.ShapeTypeList, 1)
-var _ItemList_member *smithy.Schema
-
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Metadata",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _Metadata_key *smithy.Schema
-
-var _Metadata_value *smithy.Schema
-
-var _MetadataColumns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "MetadataColumns",
-}, smithy.ShapeTypeMap, 2)
-var _MetadataColumns_key *smithy.Schema
-
-var _MetadataColumns_value *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NumResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "NumResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PercentPromotedItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "PercentPromotedItems",
-}, smithy.ShapeTypeInteger, 0)
-
-var PredictedAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "PredictedAction",
-}, smithy.ShapeTypeStructure, 2)
-var PredictedAction_actionId *smithy.Schema
-
-var PredictedAction_score *smithy.Schema
-
-var PredictedItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "PredictedItem",
-}, smithy.ShapeTypeStructure, 5)
-var PredictedItem_itemId *smithy.Schema
-
-var PredictedItem_score *smithy.Schema
-
-var PredictedItem_promotionName *smithy.Schema
-
-var PredictedItem_metadata *smithy.Schema
-
-var PredictedItem_reason *smithy.Schema
-
-var Promotion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Promotion",
-}, smithy.ShapeTypeStructure, 4)
-var Promotion_name *smithy.Schema
-
-var Promotion_percentPromotedItems *smithy.Schema
-
-var Promotion_filterArn *smithy.Schema
-
-var Promotion_filterValues *smithy.Schema
-
-var _PromotionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "PromotionList",
-}, smithy.ShapeTypeList, 1)
-var _PromotionList_member *smithy.Schema
-
-var _Reason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Reason",
-}, smithy.ShapeTypeString, 0)
-
-var _ReasonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ReasonList",
-}, smithy.ShapeTypeList, 1)
-var _ReasonList_member *smithy.Schema
-
-var _RecommendationID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "RecommendationID",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _Score = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Score",
-}, smithy.ShapeTypeDouble, 0)
-
-var _UserID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "UserID",
-}, smithy.ShapeTypeString, 0)
-
-var GetActionRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetActionRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetActionRecommendationsRequest_campaignArn *smithy.Schema
-
-var GetActionRecommendationsRequest_userId *smithy.Schema
-
-var GetActionRecommendationsRequest_numResults *smithy.Schema
-
-var GetActionRecommendationsRequest_filterArn *smithy.Schema
-
-var GetActionRecommendationsRequest_filterValues *smithy.Schema
-
-var GetActionRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetActionRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetActionRecommendationsResponse_actionList *smithy.Schema
-
-var GetActionRecommendationsResponse_recommendationId *smithy.Schema
-
-var GetPersonalizedRankingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetPersonalizedRankingRequest",
-}, smithy.ShapeTypeStructure, 7)
-var GetPersonalizedRankingRequest_campaignArn *smithy.Schema
-
-var GetPersonalizedRankingRequest_inputList *smithy.Schema
-
-var GetPersonalizedRankingRequest_userId *smithy.Schema
-
-var GetPersonalizedRankingRequest_context *smithy.Schema
-
-var GetPersonalizedRankingRequest_filterArn *smithy.Schema
-
-var GetPersonalizedRankingRequest_filterValues *smithy.Schema
-
-var GetPersonalizedRankingRequest_metadataColumns *smithy.Schema
-
-var GetPersonalizedRankingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetPersonalizedRankingResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPersonalizedRankingResponse_personalizedRanking *smithy.Schema
-
-var GetPersonalizedRankingResponse_recommendationId *smithy.Schema
-
-var GetRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 10)
-var GetRecommendationsRequest_campaignArn *smithy.Schema
-
-var GetRecommendationsRequest_itemId *smithy.Schema
-
-var GetRecommendationsRequest_userId *smithy.Schema
-
-var GetRecommendationsRequest_numResults *smithy.Schema
-
-var GetRecommendationsRequest_context *smithy.Schema
-
-var GetRecommendationsRequest_filterArn *smithy.Schema
-
-var GetRecommendationsRequest_filterValues *smithy.Schema
-
-var GetRecommendationsRequest_recommenderArn *smithy.Schema
-
-var GetRecommendationsRequest_promotions *smithy.Schema
-
-var GetRecommendationsRequest_metadataColumns *smithy.Schema
-
-var GetRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRecommendationsResponse_itemList *smithy.Schema
-
-var GetRecommendationsResponse_recommendationId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	PredictedAction_actionId = PredictedAction.AddMember("actionId", _ActionID)
-
-	PredictedAction_score = PredictedAction.AddMember("score", _Score)
-
-	_ActionList_member = _ActionList.AddMember("member", PredictedAction)
-
-	_ColumnNamesList_member = _ColumnNamesList.AddMember("member", _ColumnName)
-
-	_Context_key = _Context.AddMember("key", _AttributeName)
-
-	_Context_value = _Context.AddMember("value", _AttributeValue)
-
-	_FilterValues_key = _FilterValues.AddMember("key", _FilterAttributeName)
-
-	_FilterValues_value = _FilterValues.AddMember("value", _FilterAttributeValue)
-
-	_InputList_member = _InputList.AddMember("member", _ItemID)
-
-	InvalidInputException_message = InvalidInputException.AddMember("message", _ErrorMessage)
-
-	_Metadata_key = _Metadata.AddMember("key", _ColumnName)
-
-	_Metadata_value = _Metadata.AddMember("value", _ColumnValue)
-
-	_ReasonList_member = _ReasonList.AddMember("member", _Reason)
-
-	PredictedItem_itemId = PredictedItem.AddMember("itemId", _ItemID)
-
-	PredictedItem_score = PredictedItem.AddMember("score", _Score)
-
-	PredictedItem_promotionName = PredictedItem.AddMember("promotionName", _Name)
-
-	PredictedItem_metadata = PredictedItem.AddMember("metadata", _Metadata)
-
-	PredictedItem_reason = PredictedItem.AddMember("reason", _ReasonList)
-
-	_ItemList_member = _ItemList.AddMember("member", PredictedItem)
-
-	_MetadataColumns_key = _MetadataColumns.AddMember("key", _DatasetType)
-
-	_MetadataColumns_value = _MetadataColumns.AddMember("value", _ColumnNamesList)
-
-	Promotion_name = Promotion.AddMember("name", _Name)
-
-	Promotion_percentPromotedItems = Promotion.AddMember("percentPromotedItems", _PercentPromotedItems)
-
-	Promotion_filterArn = Promotion.AddMember("filterArn", _Arn)
-
-	Promotion_filterValues = Promotion.AddMember("filterValues", _FilterValues)
-
-	_PromotionList_member = _PromotionList.AddMember("member", Promotion)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	GetActionRecommendationsRequest_campaignArn = GetActionRecommendationsRequest.AddMember("campaignArn", _Arn)
-
-	GetActionRecommendationsRequest_userId = GetActionRecommendationsRequest.AddMember("userId", _UserID)
-
-	GetActionRecommendationsRequest_numResults = GetActionRecommendationsRequest.AddMember("numResults", _NumResults)
-
-	GetActionRecommendationsRequest_filterArn = GetActionRecommendationsRequest.AddMember("filterArn", _Arn)
-
-	GetActionRecommendationsRequest_filterValues = GetActionRecommendationsRequest.AddMember("filterValues", _FilterValues)
-
-	GetActionRecommendationsResponse_actionList = GetActionRecommendationsResponse.AddMember("actionList", _ActionList)
-
-	GetActionRecommendationsResponse_recommendationId = GetActionRecommendationsResponse.AddMember("recommendationId", _RecommendationID)
-
-	GetPersonalizedRankingRequest_campaignArn = GetPersonalizedRankingRequest.AddMember("campaignArn", _Arn)
-
-	GetPersonalizedRankingRequest_inputList = GetPersonalizedRankingRequest.AddMember("inputList", _InputList)
-
-	GetPersonalizedRankingRequest_userId = GetPersonalizedRankingRequest.AddMember("userId", _UserID)
-
-	GetPersonalizedRankingRequest_context = GetPersonalizedRankingRequest.AddMember("context", _Context)
-
-	GetPersonalizedRankingRequest_filterArn = GetPersonalizedRankingRequest.AddMember("filterArn", _Arn)
-
-	GetPersonalizedRankingRequest_filterValues = GetPersonalizedRankingRequest.AddMember("filterValues", _FilterValues)
-
-	GetPersonalizedRankingRequest_metadataColumns = GetPersonalizedRankingRequest.AddMember("metadataColumns", _MetadataColumns)
-
-	GetPersonalizedRankingResponse_personalizedRanking = GetPersonalizedRankingResponse.AddMember("personalizedRanking", _ItemList)
-
-	GetPersonalizedRankingResponse_recommendationId = GetPersonalizedRankingResponse.AddMember("recommendationId", _RecommendationID)
-
-	GetRecommendationsRequest_campaignArn = GetRecommendationsRequest.AddMember("campaignArn", _Arn)
-
-	GetRecommendationsRequest_itemId = GetRecommendationsRequest.AddMember("itemId", _ItemID)
-
-	GetRecommendationsRequest_userId = GetRecommendationsRequest.AddMember("userId", _UserID)
-
-	GetRecommendationsRequest_numResults = GetRecommendationsRequest.AddMember("numResults", _NumResults)
-
-	GetRecommendationsRequest_context = GetRecommendationsRequest.AddMember("context", _Context)
-
-	GetRecommendationsRequest_filterArn = GetRecommendationsRequest.AddMember("filterArn", _Arn)
-
-	GetRecommendationsRequest_filterValues = GetRecommendationsRequest.AddMember("filterValues", _FilterValues)
-
-	GetRecommendationsRequest_recommenderArn = GetRecommendationsRequest.AddMember("recommenderArn", _Arn)
-
-	GetRecommendationsRequest_promotions = GetRecommendationsRequest.AddMember("promotions", _PromotionList)
-
-	GetRecommendationsRequest_metadataColumns = GetRecommendationsRequest.AddMember("metadataColumns", _MetadataColumns)
-
-	GetRecommendationsResponse_itemList = GetRecommendationsResponse.AddMember("itemList", _ItemList)
-
-	GetRecommendationsResponse_recommendationId = GetRecommendationsResponse.AddMember("recommendationId", _RecommendationID)
-
+const blob = "" +
+	"GetActionRecommendationsResponseGetActionRecommendationsRequestGetPersonalizedRankingResponseGetPers" +
+	"onalizedRankingRequestGetRecommendationsResponseGetRecommendationsRequestResourceNotFoundExceptionAm" +
+	"azonPersonalizeRuntimeInvalidInputExceptionFilterAttributeValuePercentPromotedItemspercentPromotedIt" +
+	"emsFilterAttributeNamepersonalizedRankingRecommendationIDrecommendationIdColumnNamesListMetadataColu" +
+	"mnsPredictedActionmetadataColumnsrecommenderArnPredictedItemPromotionListpromotionNameErrorMessageFi" +
+	"lterValuesfilterValuesColumnValueDatasetTypecampaignArnActionListNumResultsReasonListactionListnumRe" +
+	"sultspromotionsInputListfilterArninputListActionIDItemListactionIditemListContextcontextmessageItemI" +
+	"DUserIDitemIdmemberreasonuserIdScorescorevaluenamekey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.personalizeruntime"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 63, Target: 1, Traits: 1, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 122, Target: 2, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 198, Target: 3, Traits: 3, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 642, Target: 4, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 555, Target: 5, Traits: 3, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 40, Traits: 3, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 444, Target: 7, Traits: 3, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 309, Target: 8, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 249, Target: 9, Traits: 4, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 373, Target: 10, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 373, Target: 11, Traits: 3, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 10, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 522, Target: 13, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 674, Target: 14, Traits: 3, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 750, Target: 8, Traits: 3, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 741, Target: 9, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 533, Target: 17, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 486, Target: 18, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 303, Target: 19, Traits: 3, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 243, Target: 20, Traits: 4, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 498, Target: 21, Traits: 3, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 750, Target: 19, Traits: 3, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 741, Target: 20, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 615, Target: 24, Traits: 3, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 28, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 222, Target: 26, Traits: 6, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 688, Target: 18, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 695, Target: 28, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 650, Target: 29, Traits: 3, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 43, Traits: 3, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 388, Target: 31, Traits: 4, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 750, Target: 10, Traits: 3, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 741, Target: 13, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 388, Target: 34, Traits: 3, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 750, Target: 17, Traits: 3, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 741, Target: 11, Traits: 3, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 318, Target: 37, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 565, Target: 38, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 263, Target: 39, Traits: 3, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 403, Target: 40, Traits: 3, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 658, Target: 4, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 736, Target: 62, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 447, Target: 43, Traits: 3, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 707, Target: 28, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 736, Target: 62, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 473, Target: 37, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 418, Target: 31, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 719, Target: 57, Traits: 3, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 460, Target: 49, Traits: 3, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 746, Target: 37, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 283, Target: 39, Traits: 3, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 624, Target: 7, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 510, Target: 21, Traits: 3, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 460, Target: 54, Traits: 3, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 49, Traits: 3, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 575, Target: 56, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 575, Target: 57, Traits: 3, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 56, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 341, Target: 59, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 173, Target: 60, Traits: 7, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 688, Target: 18, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 731, Target: 62, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 701, Target: 63, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 32, Target: 64, Traits: 3, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 544, Target: 7, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 725, Target: 63, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 595, Target: 38, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 624, Target: 7, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 510, Target: 21, Traits: 3, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 0, Target: 70, Traits: 3, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 585, Target: 5, Traits: 3, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 357, Target: 59, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 93, Target: 73, Traits: 3, StrLen: 29, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 544, Target: 7, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 633, Target: 24, Traits: 3, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 725, Target: 63, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 681, Target: 14, Traits: 3, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 624, Target: 7, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 510, Target: 21, Traits: 3, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 418, Target: 34, Traits: 3, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 63, Target: 81, Traits: 3, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 322, Target: 29, Traits: 3, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 357, Target: 59, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 148, Target: 84, Traits: 3, StrLen: 25, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 544, Target: 7, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 707, Target: 28, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 725, Target: 63, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 595, Target: 38, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 681, Target: 14, Traits: 3, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 624, Target: 7, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 510, Target: 21, Traits: 3, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 433, Target: 7, Traits: 3, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 605, Target: 54, Traits: 3, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 418, Target: 34, Traits: 3, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 122, Target: 95, Traits: 3, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 666, Target: 29, Traits: 3, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 357, Target: 59, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/action-recommendations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/personalize-ranking",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/recommendations",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [98]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+}
+
+var GetActionRecommendations = &handles[0]
+
+var GetPersonalizedRanking = &handles[1]
+
+var GetRecommendations = &handles[2]
+
+var _AmazonPersonalizeRuntime = &handles[3]
+
+var _ActionID = &handles[4]
+
+var _ActionList = &handles[5]
+var _ActionList_member = &handles[6]
+
+var _Arn = &handles[7]
+
+var _AttributeName = &handles[8]
+
+var _AttributeValue = &handles[9]
+
+var _ColumnName = &handles[10]
+
+var _ColumnNamesList = &handles[11]
+var _ColumnNamesList_member = &handles[12]
+
+var _ColumnValue = &handles[13]
+
+var _Context = &handles[14]
+var _Context_key = &handles[15]
+var _Context_value = &handles[16]
+
+var _DatasetType = &handles[17]
+
+var _ErrorMessage = &handles[18]
+
+var _FilterAttributeName = &handles[19]
+
+var _FilterAttributeValue = &handles[20]
+
+var _FilterValues = &handles[21]
+var _FilterValues_key = &handles[22]
+var _FilterValues_value = &handles[23]
+
+var _InputList = &handles[24]
+var _InputList_member = &handles[25]
+
+var InvalidInputException = &handles[26]
+var InvalidInputException_message = &handles[27]
+
+var _ItemID = &handles[28]
+
+var _ItemList = &handles[29]
+var _ItemList_member = &handles[30]
+
+var _Metadata = &handles[31]
+var _Metadata_key = &handles[32]
+var _Metadata_value = &handles[33]
+
+var _MetadataColumns = &handles[34]
+var _MetadataColumns_key = &handles[35]
+var _MetadataColumns_value = &handles[36]
+
+var _Name = &handles[37]
+
+var _NumResults = &handles[38]
+
+var _PercentPromotedItems = &handles[39]
+
+var PredictedAction = &handles[40]
+var PredictedAction_actionId = &handles[41]
+var PredictedAction_score = &handles[42]
+
+var PredictedItem = &handles[43]
+var PredictedItem_itemId = &handles[44]
+var PredictedItem_score = &handles[45]
+var PredictedItem_promotionName = &handles[46]
+var PredictedItem_metadata = &handles[47]
+var PredictedItem_reason = &handles[48]
+
+var Promotion = &handles[49]
+var Promotion_name = &handles[50]
+var Promotion_percentPromotedItems = &handles[51]
+var Promotion_filterArn = &handles[52]
+var Promotion_filterValues = &handles[53]
+
+var _PromotionList = &handles[54]
+var _PromotionList_member = &handles[55]
+
+var _Reason = &handles[56]
+
+var _ReasonList = &handles[57]
+var _ReasonList_member = &handles[58]
+
+var _RecommendationID = &handles[59]
+
+var ResourceNotFoundException = &handles[60]
+var ResourceNotFoundException_message = &handles[61]
+
+var _Score = &handles[62]
+
+var _UserID = &handles[63]
+
+var GetActionRecommendationsRequest = &handles[64]
+var GetActionRecommendationsRequest_campaignArn = &handles[65]
+var GetActionRecommendationsRequest_userId = &handles[66]
+var GetActionRecommendationsRequest_numResults = &handles[67]
+var GetActionRecommendationsRequest_filterArn = &handles[68]
+var GetActionRecommendationsRequest_filterValues = &handles[69]
+
+var GetActionRecommendationsResponse = &handles[70]
+var GetActionRecommendationsResponse_actionList = &handles[71]
+var GetActionRecommendationsResponse_recommendationId = &handles[72]
+
+var GetPersonalizedRankingRequest = &handles[73]
+var GetPersonalizedRankingRequest_campaignArn = &handles[74]
+var GetPersonalizedRankingRequest_inputList = &handles[75]
+var GetPersonalizedRankingRequest_userId = &handles[76]
+var GetPersonalizedRankingRequest_context = &handles[77]
+var GetPersonalizedRankingRequest_filterArn = &handles[78]
+var GetPersonalizedRankingRequest_filterValues = &handles[79]
+var GetPersonalizedRankingRequest_metadataColumns = &handles[80]
+
+var GetPersonalizedRankingResponse = &handles[81]
+var GetPersonalizedRankingResponse_personalizedRanking = &handles[82]
+var GetPersonalizedRankingResponse_recommendationId = &handles[83]
+
+var GetRecommendationsRequest = &handles[84]
+var GetRecommendationsRequest_campaignArn = &handles[85]
+var GetRecommendationsRequest_itemId = &handles[86]
+var GetRecommendationsRequest_userId = &handles[87]
+var GetRecommendationsRequest_numResults = &handles[88]
+var GetRecommendationsRequest_context = &handles[89]
+var GetRecommendationsRequest_filterArn = &handles[90]
+var GetRecommendationsRequest_filterValues = &handles[91]
+var GetRecommendationsRequest_recommenderArn = &handles[92]
+var GetRecommendationsRequest_promotions = &handles[93]
+var GetRecommendationsRequest_metadataColumns = &handles[94]
+
+var GetRecommendationsResponse = &handles[95]
+var GetRecommendationsResponse_itemList = &handles[96]
+var GetRecommendationsResponse_recommendationId = &handles[97]
+
+var AmazonPersonalizeRuntime = &smithy.ServiceSchema{Schema: &handles[3], Version: "2018-05-22"}

@@ -4,475 +4,415 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ListRealtimeContactAnalysisSegments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ListRealtimeContactAnalysisSegments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/realtime-contact-analysis/analysis-segments",
-	Code: 200})
-
-var _AmazonConnectContactLens = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "AmazonConnectContactLens",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonConnectContactLens = smithy.NewServiceSchema(_AmazonConnectContactLens, "2020-08-21")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var Categories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "Categories",
-}, smithy.ShapeTypeStructure, 2)
-var Categories_MatchedCategories *smithy.Schema
-
-var Categories_MatchedDetails *smithy.Schema
-
-var CategoryDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "CategoryDetails",
-}, smithy.ShapeTypeStructure, 1)
-var CategoryDetails_PointsOfInterest *smithy.Schema
-
-var _CategoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "CategoryName",
-}, smithy.ShapeTypeString, 0)
-
-var _CharacterOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "CharacterOffset",
-}, smithy.ShapeTypeInteger, 0)
-
-var CharacterOffsets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "CharacterOffsets",
-}, smithy.ShapeTypeStructure, 2)
-var CharacterOffsets_BeginOffsetChar *smithy.Schema
-
-var CharacterOffsets_EndOffsetChar *smithy.Schema
-
-var _ContactId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ContactId",
-}, smithy.ShapeTypeString, 0)
-
-var ExtractedInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ExtractedInformation",
-}, smithy.ShapeTypeStructure, 5)
-var ExtractedInformation_ExtractionDefinitionId *smithy.Schema
-
-var ExtractedInformation_ExtractionDefinitionName *smithy.Schema
-
-var ExtractedInformation_ExtractionDefinitionDisplayLabel *smithy.Schema
-
-var ExtractedInformation_ExtractedValues *smithy.Schema
-
-var ExtractedInformation_FailureCode *smithy.Schema
-
-var _ExtractedInformationContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ExtractedInformationContent",
-}, smithy.ShapeTypeString, 0)
-
-var ExtractedInformationFailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ExtractedInformationFailureCode",
-}, smithy.ShapeTypeEnum, 5)
-var ExtractedInformationFailureCode_QUOTA_EXCEEDED *smithy.Schema
-
-var ExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT *smithy.Schema
-
-var ExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES *smithy.Schema
-
-var ExtractedInformationFailureCode_INTERNAL_ERROR *smithy.Schema
-
-var ExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY *smithy.Schema
-
-var ExtractedInformationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ExtractedInformationValue",
-}, smithy.ShapeTypeStructure, 2)
-var ExtractedInformationValue_Content *smithy.Schema
-
-var ExtractedInformationValue_PointsOfInterest *smithy.Schema
-
-var _ExtractedInformationValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ExtractedInformationValues",
-}, smithy.ShapeTypeList, 1)
-var _ExtractedInformationValues_member *smithy.Schema
-
-var _ExtractionDefinitionDisplayLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ExtractionDefinitionDisplayLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _ExtractionDefinitionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ExtractionDefinitionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ExtractionDefinitionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ExtractionDefinitionName",
-}, smithy.ShapeTypeString, 0)
-
-var _InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var IssueDetected = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "IssueDetected",
-}, smithy.ShapeTypeStructure, 1)
-var IssueDetected_CharacterOffsets *smithy.Schema
-
-var _IssuesDetected = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "IssuesDetected",
-}, smithy.ShapeTypeList, 1)
-var _IssuesDetected_member *smithy.Schema
-
-var _MatchedCategories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "MatchedCategories",
-}, smithy.ShapeTypeList, 1)
-var _MatchedCategories_member *smithy.Schema
-
-var _MatchedDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "MatchedDetails",
-}, smithy.ShapeTypeMap, 2)
-var _MatchedDetails_key *smithy.Schema
-
-var _MatchedDetails_value *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OffsetMillis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "OffsetMillis",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ParticipantId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ParticipantId",
-}, smithy.ShapeTypeString, 0)
-
-var _ParticipantRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ParticipantRole",
-}, smithy.ShapeTypeString, 0)
-
-var PointOfInterest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "PointOfInterest",
-}, smithy.ShapeTypeStructure, 2)
-var PointOfInterest_BeginOffsetMillis *smithy.Schema
-
-var PointOfInterest_EndOffsetMillis *smithy.Schema
-
-var _PointsOfInterest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "PointsOfInterest",
-}, smithy.ShapeTypeList, 1)
-var _PointsOfInterest_member *smithy.Schema
-
-var PostContactSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "PostContactSummary",
-}, smithy.ShapeTypeStructure, 3)
-var PostContactSummary_Content *smithy.Schema
-
-var PostContactSummary_Status *smithy.Schema
-
-var PostContactSummary_FailureCode *smithy.Schema
-
-var _PostContactSummaryContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "PostContactSummaryContent",
-}, smithy.ShapeTypeString, 0)
-
-var PostContactSummaryFailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "PostContactSummaryFailureCode",
-}, smithy.ShapeTypeEnum, 5)
-var PostContactSummaryFailureCode_QUOTA_EXCEEDED *smithy.Schema
-
-var PostContactSummaryFailureCode_INSUFFICIENT_CONVERSATION_CONTENT *smithy.Schema
-
-var PostContactSummaryFailureCode_FAILED_SAFETY_GUIDELINES *smithy.Schema
-
-var PostContactSummaryFailureCode_INVALID_ANALYSIS_CONFIGURATION *smithy.Schema
-
-var PostContactSummaryFailureCode_INTERNAL_ERROR *smithy.Schema
-
-var PostContactSummaryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "PostContactSummaryStatus",
-}, smithy.ShapeTypeEnum, 2)
-var PostContactSummaryStatus_FAILED *smithy.Schema
-
-var PostContactSummaryStatus_COMPLETED *smithy.Schema
-
-var RealtimeContactAnalysisSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "RealtimeContactAnalysisSegment",
-}, smithy.ShapeTypeStructure, 4)
-var RealtimeContactAnalysisSegment_Transcript *smithy.Schema
-
-var RealtimeContactAnalysisSegment_Categories *smithy.Schema
-
-var RealtimeContactAnalysisSegment_PostContactSummary *smithy.Schema
-
-var RealtimeContactAnalysisSegment_ExtractedInformation *smithy.Schema
-
-var _RealtimeContactAnalysisSegments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "RealtimeContactAnalysisSegments",
-}, smithy.ShapeTypeList, 1)
-var _RealtimeContactAnalysisSegments_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var SentimentValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "SentimentValue",
-}, smithy.ShapeTypeEnum, 3)
-var SentimentValue_POSITIVE *smithy.Schema
-
-var SentimentValue_NEUTRAL *smithy.Schema
-
-var SentimentValue_NEGATIVE *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var Transcript = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "Transcript",
-}, smithy.ShapeTypeStructure, 8)
-var Transcript_Id *smithy.Schema
-
-var Transcript_ParticipantId *smithy.Schema
-
-var Transcript_ParticipantRole *smithy.Schema
-
-var Transcript_Content *smithy.Schema
-
-var Transcript_BeginOffsetMillis *smithy.Schema
-
-var Transcript_EndOffsetMillis *smithy.Schema
-
-var Transcript_Sentiment *smithy.Schema
-
-var Transcript_IssuesDetected *smithy.Schema
-
-var _TranscriptContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "TranscriptContent",
-}, smithy.ShapeTypeString, 0)
-
-var _TranscriptId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "TranscriptId",
-}, smithy.ShapeTypeString, 0)
-
-var ListRealtimeContactAnalysisSegmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ListRealtimeContactAnalysisSegmentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRealtimeContactAnalysisSegmentsRequest_InstanceId *smithy.Schema
-
-var ListRealtimeContactAnalysisSegmentsRequest_ContactId *smithy.Schema
-
-var ListRealtimeContactAnalysisSegmentsRequest_MaxResults *smithy.Schema
-
-var ListRealtimeContactAnalysisSegmentsRequest_NextToken *smithy.Schema
-
-var ListRealtimeContactAnalysisSegmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcontactlens",
-	Name:      "ListRealtimeContactAnalysisSegmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRealtimeContactAnalysisSegmentsResponse_Segments *smithy.Schema
-
-var ListRealtimeContactAnalysisSegmentsResponse_NextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _Message)
-
-	_MatchedCategories_member = _MatchedCategories.AddMember("member", _CategoryName)
-
-	PointOfInterest_BeginOffsetMillis = PointOfInterest.AddMember("BeginOffsetMillis", _OffsetMillis)
-
-	PointOfInterest_EndOffsetMillis = PointOfInterest.AddMember("EndOffsetMillis", _OffsetMillis)
-
-	_PointsOfInterest_member = _PointsOfInterest.AddMember("member", PointOfInterest)
-
-	CategoryDetails_PointsOfInterest = CategoryDetails.AddMember("PointsOfInterest", _PointsOfInterest)
-
-	_MatchedDetails_key = _MatchedDetails.AddMember("key", _CategoryName)
-
-	_MatchedDetails_value = _MatchedDetails.AddMember("value", CategoryDetails)
-
-	Categories_MatchedCategories = Categories.AddMember("MatchedCategories", _MatchedCategories)
-
-	Categories_MatchedDetails = Categories.AddMember("MatchedDetails", _MatchedDetails)
-
-	CharacterOffsets_BeginOffsetChar = CharacterOffsets.AddMember("BeginOffsetChar", _CharacterOffset)
-
-	CharacterOffsets_EndOffsetChar = CharacterOffsets.AddMember("EndOffsetChar", _CharacterOffset)
-
-	ExtractedInformationValue_Content = ExtractedInformationValue.AddMember("Content", _ExtractedInformationContent)
-
-	ExtractedInformationValue_PointsOfInterest = ExtractedInformationValue.AddMember("PointsOfInterest", _PointsOfInterest)
-
-	_ExtractedInformationValues_member = _ExtractedInformationValues.AddMember("member", ExtractedInformationValue)
-
-	ExtractedInformationFailureCode_QUOTA_EXCEEDED = ExtractedInformationFailureCode.AddMember("QUOTA_EXCEEDED", smithyprelude.Unit)
-
-	ExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = ExtractedInformationFailureCode.AddMember("INSUFFICIENT_CONVERSATION_CONTENT", smithyprelude.Unit)
-
-	ExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES = ExtractedInformationFailureCode.AddMember("FAILED_SAFETY_GUIDELINES", smithyprelude.Unit)
-
-	ExtractedInformationFailureCode_INTERNAL_ERROR = ExtractedInformationFailureCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	ExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY = ExtractedInformationFailureCode.AddMember("MAX_PACKAGE_FEATURE_ONLY", smithyprelude.Unit)
-
-	ExtractedInformation_ExtractionDefinitionId = ExtractedInformation.AddMember("ExtractionDefinitionId", _ExtractionDefinitionId)
-
-	ExtractedInformation_ExtractionDefinitionName = ExtractedInformation.AddMember("ExtractionDefinitionName", _ExtractionDefinitionName)
-
-	ExtractedInformation_ExtractionDefinitionDisplayLabel = ExtractedInformation.AddMember("ExtractionDefinitionDisplayLabel", _ExtractionDefinitionDisplayLabel)
-
-	ExtractedInformation_ExtractedValues = ExtractedInformation.AddMember("ExtractedValues", _ExtractedInformationValues)
-
-	ExtractedInformation_FailureCode = ExtractedInformation.AddMember("FailureCode", ExtractedInformationFailureCode)
-
-	InternalServiceException_Message = InternalServiceException.AddMember("Message", _Message)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _Message)
-
-	IssueDetected_CharacterOffsets = IssueDetected.AddMember("CharacterOffsets", CharacterOffsets)
-
-	_IssuesDetected_member = _IssuesDetected.AddMember("member", IssueDetected)
-
-	PostContactSummaryStatus_FAILED = PostContactSummaryStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	PostContactSummaryStatus_COMPLETED = PostContactSummaryStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	PostContactSummaryFailureCode_QUOTA_EXCEEDED = PostContactSummaryFailureCode.AddMember("QUOTA_EXCEEDED", smithyprelude.Unit)
-
-	PostContactSummaryFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = PostContactSummaryFailureCode.AddMember("INSUFFICIENT_CONVERSATION_CONTENT", smithyprelude.Unit)
-
-	PostContactSummaryFailureCode_FAILED_SAFETY_GUIDELINES = PostContactSummaryFailureCode.AddMember("FAILED_SAFETY_GUIDELINES", smithyprelude.Unit)
-
-	PostContactSummaryFailureCode_INVALID_ANALYSIS_CONFIGURATION = PostContactSummaryFailureCode.AddMember("INVALID_ANALYSIS_CONFIGURATION", smithyprelude.Unit)
-
-	PostContactSummaryFailureCode_INTERNAL_ERROR = PostContactSummaryFailureCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	PostContactSummary_Content = PostContactSummary.AddMember("Content", _PostContactSummaryContent)
-
-	PostContactSummary_Status = PostContactSummary.AddMember("Status", PostContactSummaryStatus)
-
-	PostContactSummary_FailureCode = PostContactSummary.AddMember("FailureCode", PostContactSummaryFailureCode)
-
-	SentimentValue_POSITIVE = SentimentValue.AddMember("POSITIVE", smithyprelude.Unit)
-
-	SentimentValue_NEUTRAL = SentimentValue.AddMember("NEUTRAL", smithyprelude.Unit)
-
-	SentimentValue_NEGATIVE = SentimentValue.AddMember("NEGATIVE", smithyprelude.Unit)
-
-	Transcript_Id = Transcript.AddMember("Id", _TranscriptId)
-
-	Transcript_ParticipantId = Transcript.AddMember("ParticipantId", _ParticipantId)
-
-	Transcript_ParticipantRole = Transcript.AddMember("ParticipantRole", _ParticipantRole)
-
-	Transcript_Content = Transcript.AddMember("Content", _TranscriptContent)
-
-	Transcript_BeginOffsetMillis = Transcript.AddMember("BeginOffsetMillis", _OffsetMillis)
-
-	Transcript_EndOffsetMillis = Transcript.AddMember("EndOffsetMillis", _OffsetMillis)
-
-	Transcript_Sentiment = Transcript.AddMember("Sentiment", SentimentValue)
-
-	Transcript_IssuesDetected = Transcript.AddMember("IssuesDetected", _IssuesDetected)
-
-	RealtimeContactAnalysisSegment_Transcript = RealtimeContactAnalysisSegment.AddMember("Transcript", Transcript)
-
-	RealtimeContactAnalysisSegment_Categories = RealtimeContactAnalysisSegment.AddMember("Categories", Categories)
-
-	RealtimeContactAnalysisSegment_PostContactSummary = RealtimeContactAnalysisSegment.AddMember("PostContactSummary", PostContactSummary)
-
-	RealtimeContactAnalysisSegment_ExtractedInformation = RealtimeContactAnalysisSegment.AddMember("ExtractedInformation", ExtractedInformation)
-
-	_RealtimeContactAnalysisSegments_member = _RealtimeContactAnalysisSegments.AddMember("member", RealtimeContactAnalysisSegment)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _Message)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _Message)
-
-	ListRealtimeContactAnalysisSegmentsRequest_InstanceId = ListRealtimeContactAnalysisSegmentsRequest.AddMember("InstanceId", _InstanceId)
-
-	ListRealtimeContactAnalysisSegmentsRequest_ContactId = ListRealtimeContactAnalysisSegmentsRequest.AddMember("ContactId", _ContactId)
-
-	ListRealtimeContactAnalysisSegmentsRequest_MaxResults = ListRealtimeContactAnalysisSegmentsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRealtimeContactAnalysisSegmentsRequest_NextToken = ListRealtimeContactAnalysisSegmentsRequest.AddMember("NextToken", _NextToken)
-
-	ListRealtimeContactAnalysisSegmentsResponse_Segments = ListRealtimeContactAnalysisSegmentsResponse.AddMember("Segments", _RealtimeContactAnalysisSegments)
-
-	ListRealtimeContactAnalysisSegmentsResponse_NextToken = ListRealtimeContactAnalysisSegmentsResponse.AddMember("NextToken", _NextToken)
-
+const blob = "" +
+	"ListRealtimeContactAnalysisSegmentsResponseListRealtimeContactAnalysisSegmentsRequestINSUFFICIENT_CO" +
+	"NVERSATION_CONTENTExtractionDefinitionDisplayLabelExtractedInformationFailureCodeINVALID_ANALYSIS_CO" +
+	"NFIGURATIONPostContactSummaryFailureCodeExtractedInformationContentExtractedInformationValuesPostCon" +
+	"tactSummaryContentResourceNotFoundExceptionAmazonConnectContactLensExtractionDefinitionNameFAILED_SA" +
+	"FETY_GUIDELINESInternalServiceExceptionMAX_PACKAGE_FEATURE_ONLYPostContactSummaryStatusInvalidReques" +
+	"tExceptionExtractionDefinitionIdAccessDeniedExceptionThrottlingExceptionBeginOffsetMillisMatchedCate" +
+	"goriesTranscriptContentCharacterOffsetsPointsOfInterestBeginOffsetCharCategoryDetailsEndOffsetMillis" +
+	"ExtractedValuesParticipantRolePointOfInterestINTERNAL_ERRORIssuesDetectedMatchedDetailsQUOTA_EXCEEDE" +
+	"DSentimentValueEndOffsetCharIssueDetectedParticipantIdCategoryNameTranscriptIdInstanceIdMaxResultsCO" +
+	"MPLETEDContactIdNextTokenNEGATIVEPOSITIVEMessageNEUTRALmembervalueUnitkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.connectcontactlens", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 343, Target: 1, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 532, Target: 2, Traits: 2, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 941, Target: 51, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 596, Target: 4, Traits: 1, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 589, Target: 45, Traits: 1, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 773, Target: 47, Traits: 1, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 670, Target: 7, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 639, Target: 59, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 854, Target: 9, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 623, Target: 10, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 623, Target: 11, Traits: 1, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 655, Target: 10, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 815, Target: 10, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 907, Target: 14, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 150, Target: 15, Traits: 1, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 510, Target: 34, Traits: 1, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 367, Target: 35, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 118, Target: 33, Traits: 1, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 700, Target: 31, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 170, Target: 22, Traits: 1, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 240, Target: 21, Traits: 1, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 150, Target: 22, Traits: 1, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 787, Target: 109, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 85, Target: 109, Traits: 1, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 391, Target: 109, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 745, Target: 109, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 439, Target: 109, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 267, Target: 28, Traits: 1, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 260, Target: 21, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 639, Target: 59, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 267, Target: 31, Traits: 1, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 955, Target: 28, Traits: 1, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 118, Target: 33, Traits: 1, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 510, Target: 34, Traits: 1, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 367, Target: 35, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 878, Target: 36, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 415, Target: 37, Traits: 3, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 941, Target: 51, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 487, Target: 39, Traits: 4, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 941, Target: 51, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 828, Target: 41, Traits: 1, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 623, Target: 11, Traits: 1, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 759, Target: 43, Traits: 1, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 955, Target: 41, Traits: 1, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 589, Target: 45, Traits: 1, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 955, Target: 9, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 773, Target: 47, Traits: 1, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 970, Target: 9, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 961, Target: 7, Traits: 1, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 888, Target: 50, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 941, Target: 51, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 916, Target: 52, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 577, Target: 53, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 841, Target: 54, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 715, Target: 55, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 730, Target: 56, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 572, Target: 53, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 685, Target: 53, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 639, Target: 59, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 955, Target: 56, Traits: 1, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 211, Target: 61, Traits: 1, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 260, Target: 65, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 481, Target: 72, Traits: 1, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 170, Target: 66, Traits: 1, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 293, Target: 65, Traits: 1, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 211, Target: 66, Traits: 1, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 787, Target: 109, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 85, Target: 109, Traits: 1, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 391, Target: 109, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 181, Target: 109, Traits: 1, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 745, Target: 109, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 72, Traits: 1, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 391, Target: 109, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 898, Target: 109, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4, Target: 75, Traits: 1, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 606, Target: 90, Traits: 1, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 596, Target: 4, Traits: 1, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 211, Target: 61, Traits: 1, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 150, Target: 15, Traits: 1, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4, Target: 80, Traits: 1, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 955, Target: 75, Traits: 1, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 318, Target: 82, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 941, Target: 51, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 801, Target: 84, Traits: 1, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 933, Target: 109, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 948, Target: 109, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 925, Target: 109, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 553, Target: 88, Traits: 6, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 941, Target: 51, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 606, Target: 90, Traits: 1, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 530, Target: 100, Traits: 1, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 841, Target: 54, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 715, Target: 55, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 260, Target: 99, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 572, Target: 53, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 685, Target: 53, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 801, Target: 84, Traits: 1, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 759, Target: 43, Traits: 1, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 606, Target: 99, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 866, Target: 100, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 43, Target: 101, Traits: 1, StrLen: 42, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 878, Target: 36, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 907, Target: 14, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 888, Target: 50, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 916, Target: 52, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 106, Traits: 1, StrLen: 43, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 27, Target: 80, Traits: 1, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 916, Target: 52, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 109, Traits: 1, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/realtime-contact-analysis/analysis-segments",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [110]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+}
+
+var ListRealtimeContactAnalysisSegments = &handles[0]
+
+var _AmazonConnectContactLens = &handles[1]
+
+var AccessDeniedException = &handles[2]
+var AccessDeniedException_Message = &handles[3]
+
+var Categories = &handles[4]
+var Categories_MatchedCategories = &handles[5]
+var Categories_MatchedDetails = &handles[6]
+
+var CategoryDetails = &handles[7]
+var CategoryDetails_PointsOfInterest = &handles[8]
+
+var _CategoryName = &handles[9]
+
+var _CharacterOffset = &handles[10]
+
+var CharacterOffsets = &handles[11]
+var CharacterOffsets_BeginOffsetChar = &handles[12]
+var CharacterOffsets_EndOffsetChar = &handles[13]
+
+var _ContactId = &handles[14]
+
+var ExtractedInformation = &handles[15]
+var ExtractedInformation_ExtractionDefinitionId = &handles[16]
+var ExtractedInformation_ExtractionDefinitionName = &handles[17]
+var ExtractedInformation_ExtractionDefinitionDisplayLabel = &handles[18]
+var ExtractedInformation_ExtractedValues = &handles[19]
+var ExtractedInformation_FailureCode = &handles[20]
+
+var _ExtractedInformationContent = &handles[21]
+
+var ExtractedInformationFailureCode = &handles[22]
+var ExtractedInformationFailureCode_QUOTA_EXCEEDED = &handles[23]
+var ExtractedInformationFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = &handles[24]
+var ExtractedInformationFailureCode_FAILED_SAFETY_GUIDELINES = &handles[25]
+var ExtractedInformationFailureCode_INTERNAL_ERROR = &handles[26]
+var ExtractedInformationFailureCode_MAX_PACKAGE_FEATURE_ONLY = &handles[27]
+
+var ExtractedInformationValue = &handles[28]
+var ExtractedInformationValue_Content = &handles[29]
+var ExtractedInformationValue_PointsOfInterest = &handles[30]
+
+var _ExtractedInformationValues = &handles[31]
+var _ExtractedInformationValues_member = &handles[32]
+
+var _ExtractionDefinitionDisplayLabel = &handles[33]
+
+var _ExtractionDefinitionId = &handles[34]
+
+var _ExtractionDefinitionName = &handles[35]
+
+var _InstanceId = &handles[36]
+
+var InternalServiceException = &handles[37]
+var InternalServiceException_Message = &handles[38]
+
+var InvalidRequestException = &handles[39]
+var InvalidRequestException_Message = &handles[40]
+
+var IssueDetected = &handles[41]
+var IssueDetected_CharacterOffsets = &handles[42]
+
+var _IssuesDetected = &handles[43]
+var _IssuesDetected_member = &handles[44]
+
+var _MatchedCategories = &handles[45]
+var _MatchedCategories_member = &handles[46]
+
+var _MatchedDetails = &handles[47]
+var _MatchedDetails_key = &handles[48]
+var _MatchedDetails_value = &handles[49]
+
+var _MaxResults = &handles[50]
+
+var _Message = &handles[51]
+
+var _NextToken = &handles[52]
+
+var _OffsetMillis = &handles[53]
+
+var _ParticipantId = &handles[54]
+
+var _ParticipantRole = &handles[55]
+
+var PointOfInterest = &handles[56]
+var PointOfInterest_BeginOffsetMillis = &handles[57]
+var PointOfInterest_EndOffsetMillis = &handles[58]
+
+var _PointsOfInterest = &handles[59]
+var _PointsOfInterest_member = &handles[60]
+
+var PostContactSummary = &handles[61]
+var PostContactSummary_Content = &handles[62]
+var PostContactSummary_Status = &handles[63]
+var PostContactSummary_FailureCode = &handles[64]
+
+var _PostContactSummaryContent = &handles[65]
+
+var PostContactSummaryFailureCode = &handles[66]
+var PostContactSummaryFailureCode_QUOTA_EXCEEDED = &handles[67]
+var PostContactSummaryFailureCode_INSUFFICIENT_CONVERSATION_CONTENT = &handles[68]
+var PostContactSummaryFailureCode_FAILED_SAFETY_GUIDELINES = &handles[69]
+var PostContactSummaryFailureCode_INVALID_ANALYSIS_CONFIGURATION = &handles[70]
+var PostContactSummaryFailureCode_INTERNAL_ERROR = &handles[71]
+
+var PostContactSummaryStatus = &handles[72]
+var PostContactSummaryStatus_FAILED = &handles[73]
+var PostContactSummaryStatus_COMPLETED = &handles[74]
+
+var RealtimeContactAnalysisSegment = &handles[75]
+var RealtimeContactAnalysisSegment_Transcript = &handles[76]
+var RealtimeContactAnalysisSegment_Categories = &handles[77]
+var RealtimeContactAnalysisSegment_PostContactSummary = &handles[78]
+var RealtimeContactAnalysisSegment_ExtractedInformation = &handles[79]
+
+var _RealtimeContactAnalysisSegments = &handles[80]
+var _RealtimeContactAnalysisSegments_member = &handles[81]
+
+var ResourceNotFoundException = &handles[82]
+var ResourceNotFoundException_Message = &handles[83]
+
+var SentimentValue = &handles[84]
+var SentimentValue_POSITIVE = &handles[85]
+var SentimentValue_NEUTRAL = &handles[86]
+var SentimentValue_NEGATIVE = &handles[87]
+
+var ThrottlingException = &handles[88]
+var ThrottlingException_Message = &handles[89]
+
+var Transcript = &handles[90]
+var Transcript_Id = &handles[91]
+var Transcript_ParticipantId = &handles[92]
+var Transcript_ParticipantRole = &handles[93]
+var Transcript_Content = &handles[94]
+var Transcript_BeginOffsetMillis = &handles[95]
+var Transcript_EndOffsetMillis = &handles[96]
+var Transcript_Sentiment = &handles[97]
+var Transcript_IssuesDetected = &handles[98]
+
+var _TranscriptContent = &handles[99]
+
+var _TranscriptId = &handles[100]
+
+var ListRealtimeContactAnalysisSegmentsRequest = &handles[101]
+var ListRealtimeContactAnalysisSegmentsRequest_InstanceId = &handles[102]
+var ListRealtimeContactAnalysisSegmentsRequest_ContactId = &handles[103]
+var ListRealtimeContactAnalysisSegmentsRequest_MaxResults = &handles[104]
+var ListRealtimeContactAnalysisSegmentsRequest_NextToken = &handles[105]
+
+var ListRealtimeContactAnalysisSegmentsResponse = &handles[106]
+var ListRealtimeContactAnalysisSegmentsResponse_Segments = &handles[107]
+var ListRealtimeContactAnalysisSegmentsResponse_NextToken = &handles[108]
+
+var AmazonConnectContactLens = &smithy.ServiceSchema{Schema: &handles[1], Version: "2020-08-21"}

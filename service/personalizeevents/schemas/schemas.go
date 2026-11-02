@@ -7,409 +7,358 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var PutActionInteractions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutActionInteractions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/action-interactions",
-	Code: 200})
-
-var PutActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutActions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/actions",
-	Code: 200})
-
-var PutEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/events",
-	Code: 200})
-
-var PutItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutItems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/items",
-	Code: 200})
-
-var PutUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/users",
-	Code: 200})
-
-var _AmazonPersonalizeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "AmazonPersonalizeEvents",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonPersonalizeEvents = smithy.NewServiceSchema(_AmazonPersonalizeEvents, "2018-03-22")
-
-var Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Action",
-}, smithy.ShapeTypeStructure, 2)
-var Action_actionId *smithy.Schema
-
-var Action_properties *smithy.Schema
-
-var _ActionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ActionImpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionImpression",
-}, smithy.ShapeTypeList, 1)
-var _ActionImpression_member *smithy.Schema
-
-var ActionInteraction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionInteraction",
-}, smithy.ShapeTypeStructure, 9)
-var ActionInteraction_actionId *smithy.Schema
-
-var ActionInteraction_userId *smithy.Schema
-
-var ActionInteraction_sessionId *smithy.Schema
-
-var ActionInteraction_timestamp *smithy.Schema
-
-var ActionInteraction_eventType *smithy.Schema
-
-var ActionInteraction_eventId *smithy.Schema
-
-var ActionInteraction_recommendationId *smithy.Schema
-
-var ActionInteraction_impression *smithy.Schema
-
-var ActionInteraction_properties *smithy.Schema
-
-var _ActionInteractionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionInteractionsList",
-}, smithy.ShapeTypeList, 1)
-var _ActionInteractionsList_member *smithy.Schema
-
-var _ActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ActionList",
-}, smithy.ShapeTypeList, 1)
-var _ActionList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Event = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Event",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Sensitive{})
-var Event_eventId *smithy.Schema
-
-var Event_eventType *smithy.Schema
-
-var Event_eventValue *smithy.Schema
-
-var Event_itemId *smithy.Schema
-
-var Event_properties *smithy.Schema
-
-var Event_sentAt *smithy.Schema
-
-var Event_recommendationId *smithy.Schema
-
-var Event_impression *smithy.Schema
-
-var Event_metricAttribution *smithy.Schema
-
-var _EventAttributionSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "EventAttributionSource",
-}, smithy.ShapeTypeString, 0)
-
-var _EventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "EventList",
-}, smithy.ShapeTypeList, 1)
-var _EventList_member *smithy.Schema
-
-var _FloatType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "FloatType",
-}, smithy.ShapeTypeFloat, 0)
-
-var _Impression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Impression",
-}, smithy.ShapeTypeList, 1)
-var _Impression_member *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_message *smithy.Schema
-
-var Item = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "Item",
-}, smithy.ShapeTypeStructure, 2)
-var Item_itemId *smithy.Schema
-
-var Item_properties *smithy.Schema
-
-var _ItemId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ItemId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ItemList",
-}, smithy.ShapeTypeList, 1)
-var _ItemList_member *smithy.Schema
-
-var MetricAttribution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "MetricAttribution",
-}, smithy.ShapeTypeStructure, 1)
-var MetricAttribution_eventAttributionSource *smithy.Schema
-
-var _RecommendationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "RecommendationId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceInUseException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _StringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "StringType",
-}, smithy.ShapeTypeString, 0)
-
-var _SynthesizedJsonActionInteractionProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonActionInteractionProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonActionProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonActionProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonEventPropertiesJSON = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonEventPropertiesJSON",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonItemProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonItemProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonUserProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "SynthesizedJsonUserProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-
-	&smithytraits.Sensitive{})
-
-var User = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "User",
-}, smithy.ShapeTypeStructure, 2)
-var User_userId *smithy.Schema
-
-var User_properties *smithy.Schema
-
-var _UserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "UserId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _UserList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "UserList",
-}, smithy.ShapeTypeList, 1)
-var _UserList_member *smithy.Schema
-
-var PutActionInteractionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutActionInteractionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutActionInteractionsRequest_trackingId *smithy.Schema
-
-var PutActionInteractionsRequest_actionInteractions *smithy.Schema
-
-var PutActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutActionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutActionsRequest_datasetArn *smithy.Schema
-
-var PutActionsRequest_actions *smithy.Schema
-
-var PutEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutEventsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutEventsRequest_trackingId *smithy.Schema
-
-var PutEventsRequest_userId *smithy.Schema
-
-var PutEventsRequest_sessionId *smithy.Schema
-
-var PutEventsRequest_eventList *smithy.Schema
-
-var PutItemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutItemsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutItemsRequest_datasetArn *smithy.Schema
-
-var PutItemsRequest_items *smithy.Schema
-
-var PutUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeevents",
-	Name:      "PutUsersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutUsersRequest_datasetArn *smithy.Schema
-
-var PutUsersRequest_users *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Action_actionId = Action.AddMember("actionId", _StringType)
-
-	Action_properties = Action.AddMember("properties", _SynthesizedJsonActionProperties)
-
-	_ActionImpression_member = _ActionImpression.AddMember("member", _ActionId)
-
-	ActionInteraction_actionId = ActionInteraction.AddMember("actionId", _ActionId)
-
-	ActionInteraction_userId = ActionInteraction.AddMember("userId", _UserId)
-
-	ActionInteraction_sessionId = ActionInteraction.AddMember("sessionId", _StringType)
-
-	ActionInteraction_timestamp = ActionInteraction.AddMember("timestamp", _Date)
-
-	ActionInteraction_eventType = ActionInteraction.AddMember("eventType", _StringType)
-
-	ActionInteraction_eventId = ActionInteraction.AddMember("eventId", _StringType)
-
-	ActionInteraction_recommendationId = ActionInteraction.AddMember("recommendationId", _RecommendationId)
-
-	ActionInteraction_impression = ActionInteraction.AddMember("impression", _ActionImpression)
-
-	ActionInteraction_properties = ActionInteraction.AddMember("properties", _SynthesizedJsonActionInteractionProperties)
-
-	_ActionInteractionsList_member = _ActionInteractionsList.AddMember("member", ActionInteraction)
-
-	_ActionList_member = _ActionList.AddMember("member", Action)
-
-	_Impression_member = _Impression.AddMember("member", _ItemId)
-
-	MetricAttribution_eventAttributionSource = MetricAttribution.AddMember("eventAttributionSource", _EventAttributionSource)
-
-	Event_eventId = Event.AddMember("eventId", _StringType)
-
-	Event_eventType = Event.AddMember("eventType", _StringType)
-
-	Event_eventValue = Event.AddMember("eventValue", _FloatType)
-
-	Event_itemId = Event.AddMember("itemId", _ItemId)
-
-	Event_properties = Event.AddMember("properties", _SynthesizedJsonEventPropertiesJSON)
-
-	Event_sentAt = Event.AddMember("sentAt", _Date)
-
-	Event_recommendationId = Event.AddMember("recommendationId", _RecommendationId)
-
-	Event_impression = Event.AddMember("impression", _Impression)
-
-	Event_metricAttribution = Event.AddMember("metricAttribution", MetricAttribution)
-
-	_EventList_member = _EventList.AddMember("member", Event)
-
-	InvalidInputException_message = InvalidInputException.AddMember("message", _ErrorMessage)
-
-	Item_itemId = Item.AddMember("itemId", _StringType)
-
-	Item_properties = Item.AddMember("properties", _SynthesizedJsonItemProperties)
-
-	_ItemList_member = _ItemList.AddMember("member", Item)
-
-	ResourceInUseException_message = ResourceInUseException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	User_userId = User.AddMember("userId", _StringType)
-
-	User_properties = User.AddMember("properties", _SynthesizedJsonUserProperties)
-
-	_UserList_member = _UserList.AddMember("member", User)
-
-	PutActionInteractionsRequest_trackingId = PutActionInteractionsRequest.AddMember("trackingId", _StringType)
-
-	PutActionInteractionsRequest_actionInteractions = PutActionInteractionsRequest.AddMember("actionInteractions", _ActionInteractionsList)
-
-	PutActionsRequest_datasetArn = PutActionsRequest.AddMember("datasetArn", _Arn)
-
-	PutActionsRequest_actions = PutActionsRequest.AddMember("actions", _ActionList)
-
-	PutEventsRequest_trackingId = PutEventsRequest.AddMember("trackingId", _StringType)
-
-	PutEventsRequest_userId = PutEventsRequest.AddMember("userId", _UserId)
-
-	PutEventsRequest_sessionId = PutEventsRequest.AddMember("sessionId", _StringType)
-
-	PutEventsRequest_eventList = PutEventsRequest.AddMember("eventList", _EventList)
-
-	PutItemsRequest_datasetArn = PutItemsRequest.AddMember("datasetArn", _Arn)
-
-	PutItemsRequest_items = PutItemsRequest.AddMember("items", _ItemList)
-
-	PutUsersRequest_datasetArn = PutUsersRequest.AddMember("datasetArn", _Arn)
-
-	PutUsersRequest_users = PutUsersRequest.AddMember("users", _UserList)
-
+const blob = "" +
+	"SynthesizedJsonActionInteractionPropertiesSynthesizedJsonEventPropertiesJSONSynthesizedJsonActionPro" +
+	"pertiesSynthesizedJsonItemPropertiesSynthesizedJsonUserPropertiesPutActionInteractionsRequestResourc" +
+	"eNotFoundExceptionAmazonPersonalizeEventsActionInteractionsListEventAttributionSourceResourceInUseEx" +
+	"ceptioneventAttributionSourceInvalidInputExceptionactionInteractionsMetricAttributionPutActionsReque" +
+	"stmetricAttributionActionImpressionPutEventsRequestRecommendationIdrecommendationIdPutItemsRequestPu" +
+	"tUsersRequestErrorMessageActionListStringTypedatasetArneventValueimpressionpropertiestrackingIdEvent" +
+	"ListFloatTypeeventListeventTypesessionIdtimestampActionIdItemListUserListactionIdeventIdmessageItemI" +
+	"dUserIditemIdmembersentAtuserIditemsusersDate"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.personalizeevents"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 165, Target: 0, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 385, Target: 1, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 435, Target: 2, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 483, Target: 3, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 498, Target: 4, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 218, Target: 5, Traits: 5, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 15, Target: 6, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 673, Target: 60, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 575, Target: 62, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 649, Target: 9, Traits: 7, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 419, Target: 10, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 9, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15, Target: 12, Traits: 5, StrLen: 17, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 673, Target: 9, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 725, Target: 69, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 631, Target: 60, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 640, Target: 27, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 622, Target: 60, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 681, Target: 60, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 467, Target: 55, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 565, Target: 10, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 575, Target: 61, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 241, Target: 22, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 12, Traits: 5, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 525, Target: 24, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 6, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 552, Target: 26, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 741, Target: 27, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 513, Target: 28, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 57, Target: 29, Traits: 7, StrLen: 5, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 681, Target: 60, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 622, Target: 60, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 555, Target: 42, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 707, Target: 50, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 575, Target: 63, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 719, Target: 27, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 467, Target: 55, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 565, Target: 43, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 402, Target: 53, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 263, Target: 39, Traits: 5, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 595, Target: 40, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 29, Traits: 8, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 604, Target: 42, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 0},
+		{StrOff: 425, Target: 43, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 50, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 329, Target: 45, Traits: 9, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 688, Target: 28, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 122, Target: 47, Traits: 5, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 707, Target: 60, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 575, Target: 64, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 695, Target: 50, Traits: 7, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 657, Target: 51, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 47, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 368, Target: 53, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 307, Target: 39, Traits: 5, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 451, Target: 55, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 285, Target: 56, Traits: 10, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 688, Target: 28, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 193, Target: 58, Traits: 11, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 688, Target: 28, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 535, Target: 60, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 61, Traits: 12, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 76, Target: 62, Traits: 12, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 42, Target: 63, Traits: 12, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 107, Target: 64, Traits: 12, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 136, Target: 65, Traits: 12, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 151, Target: 66, Traits: 5, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 725, Target: 60, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 575, Target: 65, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 701, Target: 69, Traits: 7, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 665, Target: 70, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 713, Target: 66, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 165, Target: 72, Traits: 5, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 585, Target: 60, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 350, Target: 22, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 385, Target: 75, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 545, Target: 26, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 179, Target: 24, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 435, Target: 78, Traits: 5, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 585, Target: 60, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 725, Target: 69, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 631, Target: 60, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 613, Target: 40, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 483, Target: 83, Traits: 5, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 545, Target: 26, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 731, Target: 51, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 498, Target: 86, Traits: 5, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 545, Target: 26, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 736, Target: 70, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/action-interactions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/actions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/events",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/items",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/users",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40100},
+	},
 }
+
+var handles = [89]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+}
+
+var PutActionInteractions = &handles[0]
+
+var PutActions = &handles[1]
+
+var PutEvents = &handles[2]
+
+var PutItems = &handles[3]
+
+var PutUsers = &handles[4]
+
+var _AmazonPersonalizeEvents = &handles[5]
+
+var Action = &handles[6]
+var Action_actionId = &handles[7]
+var Action_properties = &handles[8]
+
+var _ActionId = &handles[9]
+
+var _ActionImpression = &handles[10]
+var _ActionImpression_member = &handles[11]
+
+var ActionInteraction = &handles[12]
+var ActionInteraction_actionId = &handles[13]
+var ActionInteraction_userId = &handles[14]
+var ActionInteraction_sessionId = &handles[15]
+var ActionInteraction_timestamp = &handles[16]
+var ActionInteraction_eventType = &handles[17]
+var ActionInteraction_eventId = &handles[18]
+var ActionInteraction_recommendationId = &handles[19]
+var ActionInteraction_impression = &handles[20]
+var ActionInteraction_properties = &handles[21]
+
+var _ActionInteractionsList = &handles[22]
+var _ActionInteractionsList_member = &handles[23]
+
+var _ActionList = &handles[24]
+var _ActionList_member = &handles[25]
+
+var _Arn = &handles[26]
+
+var _Date = &handles[27]
+
+var _ErrorMessage = &handles[28]
+
+var Event = &handles[29]
+var Event_eventId = &handles[30]
+var Event_eventType = &handles[31]
+var Event_eventValue = &handles[32]
+var Event_itemId = &handles[33]
+var Event_properties = &handles[34]
+var Event_sentAt = &handles[35]
+var Event_recommendationId = &handles[36]
+var Event_impression = &handles[37]
+var Event_metricAttribution = &handles[38]
+
+var _EventAttributionSource = &handles[39]
+
+var _EventList = &handles[40]
+var _EventList_member = &handles[41]
+
+var _FloatType = &handles[42]
+
+var _Impression = &handles[43]
+var _Impression_member = &handles[44]
+
+var InvalidInputException = &handles[45]
+var InvalidInputException_message = &handles[46]
+
+var Item = &handles[47]
+var Item_itemId = &handles[48]
+var Item_properties = &handles[49]
+
+var _ItemId = &handles[50]
+
+var _ItemList = &handles[51]
+var _ItemList_member = &handles[52]
+
+var MetricAttribution = &handles[53]
+var MetricAttribution_eventAttributionSource = &handles[54]
+
+var _RecommendationId = &handles[55]
+
+var ResourceInUseException = &handles[56]
+var ResourceInUseException_message = &handles[57]
+
+var ResourceNotFoundException = &handles[58]
+var ResourceNotFoundException_message = &handles[59]
+
+var _StringType = &handles[60]
+
+var _SynthesizedJsonActionInteractionProperties = &handles[61]
+
+var _SynthesizedJsonActionProperties = &handles[62]
+
+var _SynthesizedJsonEventPropertiesJSON = &handles[63]
+
+var _SynthesizedJsonItemProperties = &handles[64]
+
+var _SynthesizedJsonUserProperties = &handles[65]
+
+var User = &handles[66]
+var User_userId = &handles[67]
+var User_properties = &handles[68]
+
+var _UserId = &handles[69]
+
+var _UserList = &handles[70]
+var _UserList_member = &handles[71]
+
+var PutActionInteractionsRequest = &handles[72]
+var PutActionInteractionsRequest_trackingId = &handles[73]
+var PutActionInteractionsRequest_actionInteractions = &handles[74]
+
+var PutActionsRequest = &handles[75]
+var PutActionsRequest_datasetArn = &handles[76]
+var PutActionsRequest_actions = &handles[77]
+
+var PutEventsRequest = &handles[78]
+var PutEventsRequest_trackingId = &handles[79]
+var PutEventsRequest_userId = &handles[80]
+var PutEventsRequest_sessionId = &handles[81]
+var PutEventsRequest_eventList = &handles[82]
+
+var PutItemsRequest = &handles[83]
+var PutItemsRequest_datasetArn = &handles[84]
+var PutItemsRequest_items = &handles[85]
+
+var PutUsersRequest = &handles[86]
+var PutUsersRequest_datasetArn = &handles[87]
+var PutUsersRequest_users = &handles[88]
+
+var AmazonPersonalizeEvents = &smithy.ServiceSchema{Schema: &handles[5], Version: "2018-03-22"}

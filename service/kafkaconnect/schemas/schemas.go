@@ -7,2040 +7,1759 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/connectors",
-	Code: 200})
-
-var CreateCustomPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateCustomPlugin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/custom-plugins",
-	Code: 200})
-
-var CreateWorkerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateWorkerConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/worker-configurations",
-	Code: 200})
-
-var DeleteConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/connectors/{connectorArn}",
-	Code: 200})
-
-var DeleteCustomPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteCustomPlugin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/custom-plugins/{customPluginArn}",
-	Code: 200})
-
-var DeleteWorkerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteWorkerConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/worker-configurations/{workerConfigurationArn}",
-	Code: 200})
-
-var DescribeConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/connectors/{connectorArn}",
-	Code: 200})
-
-var DescribeConnectorOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorOperation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/connectorOperations/{connectorOperationArn}",
-	Code: 200})
-
-var DescribeCustomPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeCustomPlugin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/custom-plugins/{customPluginArn}",
-	Code: 200})
-
-var DescribeWorkerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeWorkerConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/worker-configurations/{workerConfigurationArn}",
-	Code: 200})
-
-var ListConnectorOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorOperations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/connectors/{connectorArn}/operations",
-	Code: 200})
-
-var ListConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/connectors",
-	Code: 200})
-
-var ListCustomPlugins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListCustomPlugins",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/custom-plugins",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var ListWorkerConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListWorkerConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/worker-configurations",
-	Code: 200})
-
-var PauseConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PauseConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/v1/connectors/{connectorArn}/pause",
-	Code: 200})
-
-var RestartConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "RestartConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/connectors/{connectorArn}/restart",
-	Code: 200})
-
-var ResumeConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ResumeConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/v1/connectors/{connectorArn}/resume",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UpdateConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/v1/connectors/{connectorArn}",
-	Code: 200})
-
-var _KafkaConnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaConnect",
-}, smithy.ShapeTypeService, 0)
-
-var KafkaConnect = smithy.NewServiceSchema(_KafkaConnect, "2021-09-14")
-
-var ___boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ___integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1Max100 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__integerMin1Max100",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___integerMin1Max8 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__integerMin1Max8",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___listOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOf__string",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__string_member *smithy.Schema
-
-var ___listOfConnectorOperationStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfConnectorOperationStep",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConnectorOperationStep_member *smithy.Schema
-
-var ___listOfConnectorOperationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfConnectorOperationSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConnectorOperationSummary_member *smithy.Schema
-
-var ___listOfConnectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfConnectorSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfConnectorSummary_member *smithy.Schema
-
-var ___listOfCustomPluginSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfCustomPluginSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfCustomPluginSummary_member *smithy.Schema
-
-var ___listOfPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfPlugin",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPlugin_member *smithy.Schema
-
-var ___listOfPluginDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfPluginDescription",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPluginDescription_member *smithy.Schema
-
-var ___listOfPluginUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfPluginUpdate",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPluginUpdate_member *smithy.Schema
-
-var ___listOfWorkerConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__listOfWorkerConfigurationSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfWorkerConfigurationSummary_member *smithy.Schema
-
-var ___long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__long",
-}, smithy.ShapeTypeLong, 0)
-
-var ___longMin1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__longMin1",
-}, smithy.ShapeTypeLong, 0)
-
-var ___sensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__sensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMax1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__stringMax1024",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__stringMin1Max128",
-}, smithy.ShapeTypeString, 0)
-
-var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "__timestampIso8601",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ApacheKafkaCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ApacheKafkaCluster",
-}, smithy.ShapeTypeStructure, 2)
-var ApacheKafkaCluster_bootstrapServers *smithy.Schema
-
-var ApacheKafkaCluster_vpc *smithy.Schema
-
-var ApacheKafkaClusterDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ApacheKafkaClusterDescription",
-}, smithy.ShapeTypeStructure, 2)
-var ApacheKafkaClusterDescription_bootstrapServers *smithy.Schema
-
-var ApacheKafkaClusterDescription_vpc *smithy.Schema
-
-var AutoScaling = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "AutoScaling",
-}, smithy.ShapeTypeStructure, 6)
-var AutoScaling_maxWorkerCount *smithy.Schema
-
-var AutoScaling_mcuCount *smithy.Schema
-
-var AutoScaling_minWorkerCount *smithy.Schema
-
-var AutoScaling_scaleInPolicy *smithy.Schema
-
-var AutoScaling_scaleOutPolicy *smithy.Schema
-
-var AutoScaling_maxAutoscalingTaskCount *smithy.Schema
-
-var AutoScalingDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "AutoScalingDescription",
-}, smithy.ShapeTypeStructure, 6)
-var AutoScalingDescription_maxWorkerCount *smithy.Schema
-
-var AutoScalingDescription_mcuCount *smithy.Schema
-
-var AutoScalingDescription_minWorkerCount *smithy.Schema
-
-var AutoScalingDescription_scaleInPolicy *smithy.Schema
-
-var AutoScalingDescription_scaleOutPolicy *smithy.Schema
-
-var AutoScalingDescription_maxAutoscalingTaskCount *smithy.Schema
-
-var AutoScalingUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "AutoScalingUpdate",
-}, smithy.ShapeTypeStructure, 6)
-var AutoScalingUpdate_maxWorkerCount *smithy.Schema
-
-var AutoScalingUpdate_mcuCount *smithy.Schema
-
-var AutoScalingUpdate_minWorkerCount *smithy.Schema
-
-var AutoScalingUpdate_scaleInPolicy *smithy.Schema
-
-var AutoScalingUpdate_scaleOutPolicy *smithy.Schema
-
-var AutoScalingUpdate_maxAutoscalingTaskCount *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var Capacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "Capacity",
-}, smithy.ShapeTypeStructure, 2)
-var Capacity_autoScaling *smithy.Schema
-
-var Capacity_provisionedCapacity *smithy.Schema
-
-var CapacityDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CapacityDescription",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityDescription_autoScaling *smithy.Schema
-
-var CapacityDescription_provisionedCapacity *smithy.Schema
-
-var CapacityUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CapacityUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityUpdate_autoScaling *smithy.Schema
-
-var CapacityUpdate_provisionedCapacity *smithy.Schema
-
-var CloudWatchLogsLogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CloudWatchLogsLogDelivery",
-}, smithy.ShapeTypeStructure, 2)
-var CloudWatchLogsLogDelivery_enabled *smithy.Schema
-
-var CloudWatchLogsLogDelivery_logGroup *smithy.Schema
-
-var CloudWatchLogsLogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CloudWatchLogsLogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 2)
-var CloudWatchLogsLogDeliveryDescription_enabled *smithy.Schema
-
-var CloudWatchLogsLogDeliveryDescription_logGroup *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _ConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorConfiguration",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ConnectorConfiguration_key *smithy.Schema
-
-var _ConnectorConfiguration_value *smithy.Schema
-
-var _ConnectorConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorConfigurationUpdate",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ConnectorConfigurationUpdate_key *smithy.Schema
-
-var _ConnectorConfigurationUpdate_value *smithy.Schema
-
-var _ConnectorOperationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationState",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorOperationStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationStep",
-}, smithy.ShapeTypeStructure, 2)
-var ConnectorOperationStep_stepType *smithy.Schema
-
-var ConnectorOperationStep_stepState *smithy.Schema
-
-var _ConnectorOperationStepState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationStepState",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorOperationStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationStepType",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorOperationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ConnectorOperationSummary_connectorOperationArn *smithy.Schema
-
-var ConnectorOperationSummary_connectorOperationType *smithy.Schema
-
-var ConnectorOperationSummary_connectorOperationState *smithy.Schema
-
-var ConnectorOperationSummary_creationTime *smithy.Schema
-
-var ConnectorOperationSummary_endTime *smithy.Schema
-
-var _ConnectorOperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorOperationType",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorState",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ConnectorSummary",
-}, smithy.ShapeTypeStructure, 16)
-var ConnectorSummary_capacity *smithy.Schema
-
-var ConnectorSummary_connectorArn *smithy.Schema
-
-var ConnectorSummary_connectorDescription *smithy.Schema
-
-var ConnectorSummary_connectorName *smithy.Schema
-
-var ConnectorSummary_connectorState *smithy.Schema
-
-var ConnectorSummary_creationTime *smithy.Schema
-
-var ConnectorSummary_currentVersion *smithy.Schema
-
-var ConnectorSummary_kafkaCluster *smithy.Schema
-
-var ConnectorSummary_kafkaClusterClientAuthentication *smithy.Schema
-
-var ConnectorSummary_kafkaClusterEncryptionInTransit *smithy.Schema
-
-var ConnectorSummary_kafkaConnectVersion *smithy.Schema
-
-var ConnectorSummary_logDelivery *smithy.Schema
-
-var ConnectorSummary_networkType *smithy.Schema
-
-var ConnectorSummary_plugins *smithy.Schema
-
-var ConnectorSummary_serviceExecutionRoleArn *smithy.Schema
-
-var ConnectorSummary_workerConfiguration *smithy.Schema
-
-var CustomPlugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPlugin",
-}, smithy.ShapeTypeStructure, 2)
-var CustomPlugin_customPluginArn *smithy.Schema
-
-var CustomPlugin_revision *smithy.Schema
-
-var _CustomPluginContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginContentType",
-}, smithy.ShapeTypeString, 0)
-
-var CustomPluginDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginDescription",
-}, smithy.ShapeTypeStructure, 2)
-var CustomPluginDescription_customPluginArn *smithy.Schema
-
-var CustomPluginDescription_revision *smithy.Schema
-
-var CustomPluginFileDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginFileDescription",
-}, smithy.ShapeTypeStructure, 2)
-var CustomPluginFileDescription_fileMd5 *smithy.Schema
-
-var CustomPluginFileDescription_fileSize *smithy.Schema
-
-var CustomPluginLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginLocation",
-}, smithy.ShapeTypeStructure, 1)
-var CustomPluginLocation_s3Location *smithy.Schema
-
-var CustomPluginLocationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginLocationDescription",
-}, smithy.ShapeTypeStructure, 1)
-var CustomPluginLocationDescription_s3Location *smithy.Schema
-
-var CustomPluginRevisionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginRevisionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var CustomPluginRevisionSummary_contentType *smithy.Schema
-
-var CustomPluginRevisionSummary_creationTime *smithy.Schema
-
-var CustomPluginRevisionSummary_description *smithy.Schema
-
-var CustomPluginRevisionSummary_fileDescription *smithy.Schema
-
-var CustomPluginRevisionSummary_location *smithy.Schema
-
-var CustomPluginRevisionSummary_revision *smithy.Schema
-
-var _CustomPluginState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginState",
-}, smithy.ShapeTypeString, 0)
-
-var CustomPluginSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginSummary",
-}, smithy.ShapeTypeStructure, 6)
-var CustomPluginSummary_creationTime *smithy.Schema
-
-var CustomPluginSummary_customPluginArn *smithy.Schema
-
-var CustomPluginSummary_customPluginState *smithy.Schema
-
-var CustomPluginSummary_description *smithy.Schema
-
-var CustomPluginSummary_latestRevision *smithy.Schema
-
-var CustomPluginSummary_name *smithy.Schema
-
-var CustomPluginUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CustomPluginUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var CustomPluginUpdate_customPluginArn *smithy.Schema
-
-var CustomPluginUpdate_revision *smithy.Schema
-
-var FirehoseLogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "FirehoseLogDelivery",
-}, smithy.ShapeTypeStructure, 2)
-var FirehoseLogDelivery_deliveryStream *smithy.Schema
-
-var FirehoseLogDelivery_enabled *smithy.Schema
-
-var FirehoseLogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "FirehoseLogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 2)
-var FirehoseLogDeliveryDescription_deliveryStream *smithy.Schema
-
-var FirehoseLogDeliveryDescription_enabled *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerErrorException_message *smithy.Schema
-
-var KafkaCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaCluster",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaCluster_apacheKafkaCluster *smithy.Schema
-
-var KafkaClusterClientAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterClientAuthentication",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterClientAuthentication_authenticationType *smithy.Schema
-
-var KafkaClusterClientAuthenticationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterClientAuthenticationDescription",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterClientAuthenticationDescription_authenticationType *smithy.Schema
-
-var _KafkaClusterClientAuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterClientAuthenticationType",
-}, smithy.ShapeTypeString, 0)
-
-var KafkaClusterDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterDescription",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterDescription_apacheKafkaCluster *smithy.Schema
-
-var KafkaClusterEncryptionInTransit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterEncryptionInTransit",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterEncryptionInTransit_encryptionType *smithy.Schema
-
-var KafkaClusterEncryptionInTransitDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterEncryptionInTransitDescription",
-}, smithy.ShapeTypeStructure, 1)
-var KafkaClusterEncryptionInTransitDescription_encryptionType *smithy.Schema
-
-var _KafkaClusterEncryptionInTransitType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "KafkaClusterEncryptionInTransitType",
-}, smithy.ShapeTypeString, 0)
-
-var LogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "LogDelivery",
-}, smithy.ShapeTypeStructure, 1)
-var LogDelivery_workerLogDelivery *smithy.Schema
-
-var LogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "LogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 1)
-var LogDeliveryDescription_workerLogDelivery *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "NetworkType",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var Plugin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "Plugin",
-}, smithy.ShapeTypeStructure, 1)
-var Plugin_customPlugin *smithy.Schema
-
-var PluginDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PluginDescription",
-}, smithy.ShapeTypeStructure, 1)
-var PluginDescription_customPlugin *smithy.Schema
-
-var PluginUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PluginUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var PluginUpdate_customPlugin *smithy.Schema
-
-var ProvisionedCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ProvisionedCapacity",
-}, smithy.ShapeTypeStructure, 2)
-var ProvisionedCapacity_mcuCount *smithy.Schema
-
-var ProvisionedCapacity_workerCount *smithy.Schema
-
-var ProvisionedCapacityDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ProvisionedCapacityDescription",
-}, smithy.ShapeTypeStructure, 2)
-var ProvisionedCapacityDescription_mcuCount *smithy.Schema
-
-var ProvisionedCapacityDescription_workerCount *smithy.Schema
-
-var ProvisionedCapacityUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ProvisionedCapacityUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var ProvisionedCapacityUpdate_mcuCount *smithy.Schema
-
-var ProvisionedCapacityUpdate_workerCount *smithy.Schema
-
-var S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "S3Location",
-}, smithy.ShapeTypeStructure, 3)
-var S3Location_bucketArn *smithy.Schema
-
-var S3Location_fileKey *smithy.Schema
-
-var S3Location_objectVersion *smithy.Schema
-
-var S3LocationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "S3LocationDescription",
-}, smithy.ShapeTypeStructure, 3)
-var S3LocationDescription_bucketArn *smithy.Schema
-
-var S3LocationDescription_fileKey *smithy.Schema
-
-var S3LocationDescription_objectVersion *smithy.Schema
-
-var S3LogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "S3LogDelivery",
-}, smithy.ShapeTypeStructure, 3)
-var S3LogDelivery_bucket *smithy.Schema
-
-var S3LogDelivery_enabled *smithy.Schema
-
-var S3LogDelivery_prefix *smithy.Schema
-
-var S3LogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "S3LogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 3)
-var S3LogDeliveryDescription_bucket *smithy.Schema
-
-var S3LogDeliveryDescription_enabled *smithy.Schema
-
-var S3LogDeliveryDescription_prefix *smithy.Schema
-
-var ScaleInPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleInPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleInPolicy_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleInPolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleInPolicyDescription",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleInPolicyDescription_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleInPolicyUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleInPolicyUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleInPolicyUpdate_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleOutPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleOutPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleOutPolicy_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleOutPolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleOutPolicyDescription",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleOutPolicyDescription_cpuUtilizationPercentage *smithy.Schema
-
-var ScaleOutPolicyUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ScaleOutPolicyUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var ScaleOutPolicyUpdate_cpuUtilizationPercentage *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var StateDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "StateDescription",
-}, smithy.ShapeTypeStructure, 2)
-var StateDescription_code *smithy.Schema
-
-var StateDescription_message *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
-
-var Vpc = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "Vpc",
-}, smithy.ShapeTypeStructure, 2)
-var Vpc_securityGroups *smithy.Schema
-
-var Vpc_subnets *smithy.Schema
-
-var VpcDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "VpcDescription",
-}, smithy.ShapeTypeStructure, 2)
-var VpcDescription_securityGroups *smithy.Schema
-
-var VpcDescription_subnets *smithy.Schema
-
-var WorkerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var WorkerConfiguration_revision *smithy.Schema
-
-var WorkerConfiguration_workerConfigurationArn *smithy.Schema
-
-var WorkerConfigurationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationDescription",
-}, smithy.ShapeTypeStructure, 2)
-var WorkerConfigurationDescription_revision *smithy.Schema
-
-var WorkerConfigurationDescription_workerConfigurationArn *smithy.Schema
-
-var WorkerConfigurationRevisionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationRevisionDescription",
-}, smithy.ShapeTypeStructure, 4)
-var WorkerConfigurationRevisionDescription_creationTime *smithy.Schema
-
-var WorkerConfigurationRevisionDescription_description *smithy.Schema
-
-var WorkerConfigurationRevisionDescription_propertiesFileContent *smithy.Schema
-
-var WorkerConfigurationRevisionDescription_revision *smithy.Schema
-
-var WorkerConfigurationRevisionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationRevisionSummary",
-}, smithy.ShapeTypeStructure, 3)
-var WorkerConfigurationRevisionSummary_creationTime *smithy.Schema
-
-var WorkerConfigurationRevisionSummary_description *smithy.Schema
-
-var WorkerConfigurationRevisionSummary_revision *smithy.Schema
-
-var _WorkerConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationState",
-}, smithy.ShapeTypeString, 0)
-
-var WorkerConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationSummary",
-}, smithy.ShapeTypeStructure, 6)
-var WorkerConfigurationSummary_creationTime *smithy.Schema
-
-var WorkerConfigurationSummary_description *smithy.Schema
-
-var WorkerConfigurationSummary_latestRevision *smithy.Schema
-
-var WorkerConfigurationSummary_name *smithy.Schema
-
-var WorkerConfigurationSummary_workerConfigurationArn *smithy.Schema
-
-var WorkerConfigurationSummary_workerConfigurationState *smithy.Schema
-
-var WorkerConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerConfigurationUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var WorkerConfigurationUpdate_revision *smithy.Schema
-
-var WorkerConfigurationUpdate_workerConfigurationArn *smithy.Schema
-
-var WorkerLogDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerLogDelivery",
-}, smithy.ShapeTypeStructure, 3)
-var WorkerLogDelivery_cloudWatchLogs *smithy.Schema
-
-var WorkerLogDelivery_firehose *smithy.Schema
-
-var WorkerLogDelivery_s3 *smithy.Schema
-
-var WorkerLogDeliveryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerLogDeliveryDescription",
-}, smithy.ShapeTypeStructure, 3)
-var WorkerLogDeliveryDescription_cloudWatchLogs *smithy.Schema
-
-var WorkerLogDeliveryDescription_firehose *smithy.Schema
-
-var WorkerLogDeliveryDescription_s3 *smithy.Schema
-
-var WorkerSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "WorkerSetting",
-}, smithy.ShapeTypeStructure, 4)
-var WorkerSetting_capacity *smithy.Schema
-
-var WorkerSetting_plugins *smithy.Schema
-
-var WorkerSetting_workerConfiguration *smithy.Schema
-
-var WorkerSetting_useDefaultWorkerConfiguration *smithy.Schema
-
-var CreateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateConnectorRequest",
-}, smithy.ShapeTypeStructure, 14)
-var CreateConnectorRequest_capacity *smithy.Schema
-
-var CreateConnectorRequest_connectorConfiguration *smithy.Schema
-
-var CreateConnectorRequest_connectorDescription *smithy.Schema
-
-var CreateConnectorRequest_connectorName *smithy.Schema
-
-var CreateConnectorRequest_kafkaCluster *smithy.Schema
-
-var CreateConnectorRequest_kafkaClusterClientAuthentication *smithy.Schema
-
-var CreateConnectorRequest_kafkaClusterEncryptionInTransit *smithy.Schema
-
-var CreateConnectorRequest_kafkaConnectVersion *smithy.Schema
-
-var CreateConnectorRequest_logDelivery *smithy.Schema
-
-var CreateConnectorRequest_networkType *smithy.Schema
-
-var CreateConnectorRequest_plugins *smithy.Schema
-
-var CreateConnectorRequest_serviceExecutionRoleArn *smithy.Schema
-
-var CreateConnectorRequest_workerConfiguration *smithy.Schema
-
-var CreateConnectorRequest_tags *smithy.Schema
-
-var CreateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateConnectorResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateConnectorResponse_connectorArn *smithy.Schema
-
-var CreateConnectorResponse_connectorName *smithy.Schema
-
-var CreateConnectorResponse_connectorState *smithy.Schema
-
-var CreateCustomPluginRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateCustomPluginRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateCustomPluginRequest_contentType *smithy.Schema
-
-var CreateCustomPluginRequest_description *smithy.Schema
-
-var CreateCustomPluginRequest_location *smithy.Schema
-
-var CreateCustomPluginRequest_name *smithy.Schema
-
-var CreateCustomPluginRequest_tags *smithy.Schema
-
-var CreateCustomPluginResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateCustomPluginResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCustomPluginResponse_customPluginArn *smithy.Schema
-
-var CreateCustomPluginResponse_customPluginState *smithy.Schema
-
-var CreateCustomPluginResponse_name *smithy.Schema
-
-var CreateCustomPluginResponse_revision *smithy.Schema
-
-var CreateWorkerConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateWorkerConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWorkerConfigurationRequest_description *smithy.Schema
-
-var CreateWorkerConfigurationRequest_name *smithy.Schema
-
-var CreateWorkerConfigurationRequest_propertiesFileContent *smithy.Schema
-
-var CreateWorkerConfigurationRequest_tags *smithy.Schema
-
-var CreateWorkerConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "CreateWorkerConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWorkerConfigurationResponse_creationTime *smithy.Schema
-
-var CreateWorkerConfigurationResponse_latestRevision *smithy.Schema
-
-var CreateWorkerConfigurationResponse_name *smithy.Schema
-
-var CreateWorkerConfigurationResponse_workerConfigurationArn *smithy.Schema
-
-var CreateWorkerConfigurationResponse_workerConfigurationState *smithy.Schema
-
-var DeleteConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteConnectorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConnectorRequest_connectorArn *smithy.Schema
-
-var DeleteConnectorRequest_currentVersion *smithy.Schema
-
-var DeleteConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteConnectorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConnectorResponse_connectorArn *smithy.Schema
-
-var DeleteConnectorResponse_connectorState *smithy.Schema
-
-var DeleteCustomPluginRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteCustomPluginRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCustomPluginRequest_customPluginArn *smithy.Schema
-
-var DeleteCustomPluginResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteCustomPluginResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCustomPluginResponse_customPluginArn *smithy.Schema
-
-var DeleteCustomPluginResponse_customPluginState *smithy.Schema
-
-var DeleteWorkerConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteWorkerConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWorkerConfigurationRequest_workerConfigurationArn *smithy.Schema
-
-var DeleteWorkerConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DeleteWorkerConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWorkerConfigurationResponse_workerConfigurationArn *smithy.Schema
-
-var DeleteWorkerConfigurationResponse_workerConfigurationState *smithy.Schema
-
-var DescribeConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectorRequest_connectorArn *smithy.Schema
-
-var DescribeConnectorOperationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorOperationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectorOperationRequest_connectorOperationArn *smithy.Schema
-
-var DescribeConnectorOperationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorOperationResponse",
-}, smithy.ShapeTypeStructure, 12)
-var DescribeConnectorOperationResponse_connectorArn *smithy.Schema
-
-var DescribeConnectorOperationResponse_connectorOperationArn *smithy.Schema
-
-var DescribeConnectorOperationResponse_connectorOperationState *smithy.Schema
-
-var DescribeConnectorOperationResponse_connectorOperationType *smithy.Schema
-
-var DescribeConnectorOperationResponse_operationSteps *smithy.Schema
-
-var DescribeConnectorOperationResponse_originWorkerSetting *smithy.Schema
-
-var DescribeConnectorOperationResponse_originConnectorConfiguration *smithy.Schema
-
-var DescribeConnectorOperationResponse_targetWorkerSetting *smithy.Schema
-
-var DescribeConnectorOperationResponse_targetConnectorConfiguration *smithy.Schema
-
-var DescribeConnectorOperationResponse_errorInfo *smithy.Schema
-
-var DescribeConnectorOperationResponse_creationTime *smithy.Schema
-
-var DescribeConnectorOperationResponse_endTime *smithy.Schema
-
-var DescribeConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeConnectorResponse",
-}, smithy.ShapeTypeStructure, 18)
-var DescribeConnectorResponse_capacity *smithy.Schema
-
-var DescribeConnectorResponse_connectorArn *smithy.Schema
-
-var DescribeConnectorResponse_connectorConfiguration *smithy.Schema
-
-var DescribeConnectorResponse_connectorDescription *smithy.Schema
-
-var DescribeConnectorResponse_connectorName *smithy.Schema
-
-var DescribeConnectorResponse_connectorState *smithy.Schema
-
-var DescribeConnectorResponse_creationTime *smithy.Schema
-
-var DescribeConnectorResponse_currentVersion *smithy.Schema
-
-var DescribeConnectorResponse_kafkaCluster *smithy.Schema
-
-var DescribeConnectorResponse_kafkaClusterClientAuthentication *smithy.Schema
-
-var DescribeConnectorResponse_kafkaClusterEncryptionInTransit *smithy.Schema
-
-var DescribeConnectorResponse_kafkaConnectVersion *smithy.Schema
-
-var DescribeConnectorResponse_logDelivery *smithy.Schema
-
-var DescribeConnectorResponse_networkType *smithy.Schema
-
-var DescribeConnectorResponse_plugins *smithy.Schema
-
-var DescribeConnectorResponse_serviceExecutionRoleArn *smithy.Schema
-
-var DescribeConnectorResponse_workerConfiguration *smithy.Schema
-
-var DescribeConnectorResponse_stateDescription *smithy.Schema
-
-var DescribeCustomPluginRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeCustomPluginRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomPluginRequest_customPluginArn *smithy.Schema
-
-var DescribeCustomPluginResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeCustomPluginResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeCustomPluginResponse_creationTime *smithy.Schema
-
-var DescribeCustomPluginResponse_customPluginArn *smithy.Schema
-
-var DescribeCustomPluginResponse_customPluginState *smithy.Schema
-
-var DescribeCustomPluginResponse_description *smithy.Schema
-
-var DescribeCustomPluginResponse_latestRevision *smithy.Schema
-
-var DescribeCustomPluginResponse_name *smithy.Schema
-
-var DescribeCustomPluginResponse_stateDescription *smithy.Schema
-
-var DescribeWorkerConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeWorkerConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkerConfigurationRequest_workerConfigurationArn *smithy.Schema
-
-var DescribeWorkerConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "DescribeWorkerConfigurationResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeWorkerConfigurationResponse_creationTime *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_description *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_latestRevision *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_name *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_workerConfigurationArn *smithy.Schema
-
-var DescribeWorkerConfigurationResponse_workerConfigurationState *smithy.Schema
-
-var ListConnectorOperationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorOperationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConnectorOperationsRequest_connectorArn *smithy.Schema
-
-var ListConnectorOperationsRequest_maxResults *smithy.Schema
-
-var ListConnectorOperationsRequest_nextToken *smithy.Schema
-
-var ListConnectorOperationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorOperationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorOperationsResponse_connectorOperations *smithy.Schema
-
-var ListConnectorOperationsResponse_nextToken *smithy.Schema
-
-var ListConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConnectorsRequest_connectorNamePrefix *smithy.Schema
-
-var ListConnectorsRequest_maxResults *smithy.Schema
-
-var ListConnectorsRequest_nextToken *smithy.Schema
-
-var ListConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsResponse_connectors *smithy.Schema
-
-var ListConnectorsResponse_nextToken *smithy.Schema
-
-var ListCustomPluginsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListCustomPluginsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCustomPluginsRequest_maxResults *smithy.Schema
-
-var ListCustomPluginsRequest_nextToken *smithy.Schema
-
-var ListCustomPluginsRequest_namePrefix *smithy.Schema
-
-var ListCustomPluginsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListCustomPluginsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomPluginsResponse_customPlugins *smithy.Schema
-
-var ListCustomPluginsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListWorkerConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListWorkerConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWorkerConfigurationsRequest_maxResults *smithy.Schema
-
-var ListWorkerConfigurationsRequest_nextToken *smithy.Schema
-
-var ListWorkerConfigurationsRequest_namePrefix *smithy.Schema
-
-var ListWorkerConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ListWorkerConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkerConfigurationsResponse_nextToken *smithy.Schema
-
-var ListWorkerConfigurationsResponse_workerConfigurations *smithy.Schema
-
-var PauseConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PauseConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PauseConnectorRequest_connectorArn *smithy.Schema
-
-var PauseConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "PauseConnectorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PauseConnectorResponse_connectorArn *smithy.Schema
-
-var PauseConnectorResponse_connectorOperationArn *smithy.Schema
-
-var RestartConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "RestartConnectorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RestartConnectorRequest_connectorArn *smithy.Schema
-
-var RestartConnectorRequest_onlyFailedTasks *smithy.Schema
-
-var RestartConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "RestartConnectorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var RestartConnectorResponse_connectorArn *smithy.Schema
-
-var RestartConnectorResponse_connectorOperationArn *smithy.Schema
-
-var ResumeConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ResumeConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResumeConnectorRequest_connectorArn *smithy.Schema
-
-var ResumeConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "ResumeConnectorResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ResumeConnectorResponse_connectorArn *smithy.Schema
-
-var ResumeConnectorResponse_connectorOperationArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UpdateConnectorRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateConnectorRequest_capacity *smithy.Schema
-
-var UpdateConnectorRequest_connectorConfiguration *smithy.Schema
-
-var UpdateConnectorRequest_skipHealthValidation *smithy.Schema
-
-var UpdateConnectorRequest_connectorArn *smithy.Schema
-
-var UpdateConnectorRequest_currentVersion *smithy.Schema
-
-var UpdateConnectorRequest_plugins *smithy.Schema
-
-var UpdateConnectorRequest_workerConfiguration *smithy.Schema
-
-var UpdateConnectorRequest_useDefaultWorkerConfiguration *smithy.Schema
-
-var UpdateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kafkaconnect",
-	Name:      "UpdateConnectorResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConnectorResponse_connectorArn *smithy.Schema
-
-var UpdateConnectorResponse_connectorState *smithy.Schema
-
-var UpdateConnectorResponse_connectorOperationArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	___listOf__string_member = ___listOf__string.AddMember("member", ___string)
-
-	ConnectorOperationStep_stepType = ConnectorOperationStep.AddMember("stepType", _ConnectorOperationStepType)
-
-	ConnectorOperationStep_stepState = ConnectorOperationStep.AddMember("stepState", _ConnectorOperationStepState)
-
-	___listOfConnectorOperationStep_member = ___listOfConnectorOperationStep.AddMember("member", ConnectorOperationStep)
-
-	ConnectorOperationSummary_connectorOperationArn = ConnectorOperationSummary.AddMember("connectorOperationArn", ___string)
-
-	ConnectorOperationSummary_connectorOperationType = ConnectorOperationSummary.AddMember("connectorOperationType", _ConnectorOperationType)
-
-	ConnectorOperationSummary_connectorOperationState = ConnectorOperationSummary.AddMember("connectorOperationState", _ConnectorOperationState)
-
-	ConnectorOperationSummary_creationTime = ConnectorOperationSummary.AddMember("creationTime", ___timestampIso8601)
-
-	ConnectorOperationSummary_endTime = ConnectorOperationSummary.AddMember("endTime", ___timestampIso8601)
-
-	___listOfConnectorOperationSummary_member = ___listOfConnectorOperationSummary.AddMember("member", ConnectorOperationSummary)
-
-	ScaleInPolicyDescription_cpuUtilizationPercentage = ScaleInPolicyDescription.AddMember("cpuUtilizationPercentage", ___integer)
-
-	ScaleOutPolicyDescription_cpuUtilizationPercentage = ScaleOutPolicyDescription.AddMember("cpuUtilizationPercentage", ___integer)
-
-	AutoScalingDescription_maxWorkerCount = AutoScalingDescription.AddMember("maxWorkerCount", ___integer)
-
-	AutoScalingDescription_mcuCount = AutoScalingDescription.AddMember("mcuCount", ___integer)
-
-	AutoScalingDescription_minWorkerCount = AutoScalingDescription.AddMember("minWorkerCount", ___integer)
-
-	AutoScalingDescription_scaleInPolicy = AutoScalingDescription.AddMember("scaleInPolicy", ScaleInPolicyDescription)
-
-	AutoScalingDescription_scaleOutPolicy = AutoScalingDescription.AddMember("scaleOutPolicy", ScaleOutPolicyDescription)
-
-	AutoScalingDescription_maxAutoscalingTaskCount = AutoScalingDescription.AddMember("maxAutoscalingTaskCount", ___integer)
-
-	ProvisionedCapacityDescription_mcuCount = ProvisionedCapacityDescription.AddMember("mcuCount", ___integer)
-
-	ProvisionedCapacityDescription_workerCount = ProvisionedCapacityDescription.AddMember("workerCount", ___integer)
-
-	CapacityDescription_autoScaling = CapacityDescription.AddMember("autoScaling", AutoScalingDescription)
-
-	CapacityDescription_provisionedCapacity = CapacityDescription.AddMember("provisionedCapacity", ProvisionedCapacityDescription)
-
-	VpcDescription_securityGroups = VpcDescription.AddMember("securityGroups", ___listOf__string)
-
-	VpcDescription_subnets = VpcDescription.AddMember("subnets", ___listOf__string)
-
-	ApacheKafkaClusterDescription_bootstrapServers = ApacheKafkaClusterDescription.AddMember("bootstrapServers", ___string)
-
-	ApacheKafkaClusterDescription_vpc = ApacheKafkaClusterDescription.AddMember("vpc", VpcDescription)
-
-	KafkaClusterDescription_apacheKafkaCluster = KafkaClusterDescription.AddMember("apacheKafkaCluster", ApacheKafkaClusterDescription)
-
-	KafkaClusterClientAuthenticationDescription_authenticationType = KafkaClusterClientAuthenticationDescription.AddMember("authenticationType", _KafkaClusterClientAuthenticationType)
-
-	KafkaClusterEncryptionInTransitDescription_encryptionType = KafkaClusterEncryptionInTransitDescription.AddMember("encryptionType", _KafkaClusterEncryptionInTransitType)
-
-	CloudWatchLogsLogDeliveryDescription_enabled = CloudWatchLogsLogDeliveryDescription.AddMember("enabled", ___boolean)
-
-	CloudWatchLogsLogDeliveryDescription_logGroup = CloudWatchLogsLogDeliveryDescription.AddMember("logGroup", ___string)
-
-	FirehoseLogDeliveryDescription_deliveryStream = FirehoseLogDeliveryDescription.AddMember("deliveryStream", ___string)
-
-	FirehoseLogDeliveryDescription_enabled = FirehoseLogDeliveryDescription.AddMember("enabled", ___boolean)
-
-	S3LogDeliveryDescription_bucket = S3LogDeliveryDescription.AddMember("bucket", ___string)
-
-	S3LogDeliveryDescription_enabled = S3LogDeliveryDescription.AddMember("enabled", ___boolean)
-
-	S3LogDeliveryDescription_prefix = S3LogDeliveryDescription.AddMember("prefix", ___string)
-
-	WorkerLogDeliveryDescription_cloudWatchLogs = WorkerLogDeliveryDescription.AddMember("cloudWatchLogs", CloudWatchLogsLogDeliveryDescription)
-
-	WorkerLogDeliveryDescription_firehose = WorkerLogDeliveryDescription.AddMember("firehose", FirehoseLogDeliveryDescription)
-
-	WorkerLogDeliveryDescription_s3 = WorkerLogDeliveryDescription.AddMember("s3", S3LogDeliveryDescription)
-
-	LogDeliveryDescription_workerLogDelivery = LogDeliveryDescription.AddMember("workerLogDelivery", WorkerLogDeliveryDescription)
-
-	CustomPluginDescription_customPluginArn = CustomPluginDescription.AddMember("customPluginArn", ___string)
-
-	CustomPluginDescription_revision = CustomPluginDescription.AddMember("revision", ___long)
-
-	PluginDescription_customPlugin = PluginDescription.AddMember("customPlugin", CustomPluginDescription)
-
-	___listOfPluginDescription_member = ___listOfPluginDescription.AddMember("member", PluginDescription)
-
-	WorkerConfigurationDescription_revision = WorkerConfigurationDescription.AddMember("revision", ___long)
-
-	WorkerConfigurationDescription_workerConfigurationArn = WorkerConfigurationDescription.AddMember("workerConfigurationArn", ___string)
-
-	ConnectorSummary_capacity = ConnectorSummary.AddMember("capacity", CapacityDescription)
-
-	ConnectorSummary_connectorArn = ConnectorSummary.AddMember("connectorArn", ___string)
-
-	ConnectorSummary_connectorDescription = ConnectorSummary.AddMember("connectorDescription", ___string)
-
-	ConnectorSummary_connectorName = ConnectorSummary.AddMember("connectorName", ___string)
-
-	ConnectorSummary_connectorState = ConnectorSummary.AddMember("connectorState", _ConnectorState)
-
-	ConnectorSummary_creationTime = ConnectorSummary.AddMember("creationTime", ___timestampIso8601)
-
-	ConnectorSummary_currentVersion = ConnectorSummary.AddMember("currentVersion", ___string)
-
-	ConnectorSummary_kafkaCluster = ConnectorSummary.AddMember("kafkaCluster", KafkaClusterDescription)
-
-	ConnectorSummary_kafkaClusterClientAuthentication = ConnectorSummary.AddMember("kafkaClusterClientAuthentication", KafkaClusterClientAuthenticationDescription)
-
-	ConnectorSummary_kafkaClusterEncryptionInTransit = ConnectorSummary.AddMember("kafkaClusterEncryptionInTransit", KafkaClusterEncryptionInTransitDescription)
-
-	ConnectorSummary_kafkaConnectVersion = ConnectorSummary.AddMember("kafkaConnectVersion", ___string)
-
-	ConnectorSummary_logDelivery = ConnectorSummary.AddMember("logDelivery", LogDeliveryDescription)
-
-	ConnectorSummary_networkType = ConnectorSummary.AddMember("networkType", _NetworkType)
-
-	ConnectorSummary_plugins = ConnectorSummary.AddMember("plugins", ___listOfPluginDescription)
-
-	ConnectorSummary_serviceExecutionRoleArn = ConnectorSummary.AddMember("serviceExecutionRoleArn", ___string)
-
-	ConnectorSummary_workerConfiguration = ConnectorSummary.AddMember("workerConfiguration", WorkerConfigurationDescription)
-
-	___listOfConnectorSummary_member = ___listOfConnectorSummary.AddMember("member", ConnectorSummary)
-
-	CustomPluginFileDescription_fileMd5 = CustomPluginFileDescription.AddMember("fileMd5", ___string)
-
-	CustomPluginFileDescription_fileSize = CustomPluginFileDescription.AddMember("fileSize", ___long)
-
-	S3LocationDescription_bucketArn = S3LocationDescription.AddMember("bucketArn", ___string)
-
-	S3LocationDescription_fileKey = S3LocationDescription.AddMember("fileKey", ___string)
-
-	S3LocationDescription_objectVersion = S3LocationDescription.AddMember("objectVersion", ___string)
-
-	CustomPluginLocationDescription_s3Location = CustomPluginLocationDescription.AddMember("s3Location", S3LocationDescription)
-
-	CustomPluginRevisionSummary_contentType = CustomPluginRevisionSummary.AddMember("contentType", _CustomPluginContentType)
-
-	CustomPluginRevisionSummary_creationTime = CustomPluginRevisionSummary.AddMember("creationTime", ___timestampIso8601)
-
-	CustomPluginRevisionSummary_description = CustomPluginRevisionSummary.AddMember("description", ___string)
-
-	CustomPluginRevisionSummary_fileDescription = CustomPluginRevisionSummary.AddMember("fileDescription", CustomPluginFileDescription)
-
-	CustomPluginRevisionSummary_location = CustomPluginRevisionSummary.AddMember("location", CustomPluginLocationDescription)
-
-	CustomPluginRevisionSummary_revision = CustomPluginRevisionSummary.AddMember("revision", ___long)
-
-	CustomPluginSummary_creationTime = CustomPluginSummary.AddMember("creationTime", ___timestampIso8601)
-
-	CustomPluginSummary_customPluginArn = CustomPluginSummary.AddMember("customPluginArn", ___string)
-
-	CustomPluginSummary_customPluginState = CustomPluginSummary.AddMember("customPluginState", _CustomPluginState)
-
-	CustomPluginSummary_description = CustomPluginSummary.AddMember("description", ___string)
-
-	CustomPluginSummary_latestRevision = CustomPluginSummary.AddMember("latestRevision", CustomPluginRevisionSummary)
-
-	CustomPluginSummary_name = CustomPluginSummary.AddMember("name", ___string)
-
-	___listOfCustomPluginSummary_member = ___listOfCustomPluginSummary.AddMember("member", CustomPluginSummary)
-
-	CustomPlugin_customPluginArn = CustomPlugin.AddMember("customPluginArn", ___string)
-
-	CustomPlugin_revision = CustomPlugin.AddMember("revision", ___longMin1)
-
-	Plugin_customPlugin = Plugin.AddMember("customPlugin", CustomPlugin)
-
-	___listOfPlugin_member = ___listOfPlugin.AddMember("member", Plugin)
-
-	CustomPluginUpdate_customPluginArn = CustomPluginUpdate.AddMember("customPluginArn", ___string)
-
-	CustomPluginUpdate_revision = CustomPluginUpdate.AddMember("revision", ___longMin1)
-
-	PluginUpdate_customPlugin = PluginUpdate.AddMember("customPlugin", CustomPluginUpdate)
-
-	___listOfPluginUpdate_member = ___listOfPluginUpdate.AddMember("member", PluginUpdate)
-
-	WorkerConfigurationRevisionSummary_creationTime = WorkerConfigurationRevisionSummary.AddMember("creationTime", ___timestampIso8601)
-
-	WorkerConfigurationRevisionSummary_description = WorkerConfigurationRevisionSummary.AddMember("description", ___string)
-
-	WorkerConfigurationRevisionSummary_revision = WorkerConfigurationRevisionSummary.AddMember("revision", ___long)
-
-	WorkerConfigurationSummary_creationTime = WorkerConfigurationSummary.AddMember("creationTime", ___timestampIso8601)
-
-	WorkerConfigurationSummary_description = WorkerConfigurationSummary.AddMember("description", ___string)
-
-	WorkerConfigurationSummary_latestRevision = WorkerConfigurationSummary.AddMember("latestRevision", WorkerConfigurationRevisionSummary)
-
-	WorkerConfigurationSummary_name = WorkerConfigurationSummary.AddMember("name", ___string)
-
-	WorkerConfigurationSummary_workerConfigurationArn = WorkerConfigurationSummary.AddMember("workerConfigurationArn", ___string)
-
-	WorkerConfigurationSummary_workerConfigurationState = WorkerConfigurationSummary.AddMember("workerConfigurationState", _WorkerConfigurationState)
-
-	___listOfWorkerConfigurationSummary_member = ___listOfWorkerConfigurationSummary.AddMember("member", WorkerConfigurationSummary)
-
-	Vpc_securityGroups = Vpc.AddMember("securityGroups", ___listOf__string)
-
-	Vpc_subnets = Vpc.AddMember("subnets", ___listOf__string)
-
-	ApacheKafkaCluster_bootstrapServers = ApacheKafkaCluster.AddMember("bootstrapServers", ___string)
-
-	ApacheKafkaCluster_vpc = ApacheKafkaCluster.AddMember("vpc", Vpc)
-
-	ScaleInPolicy_cpuUtilizationPercentage = ScaleInPolicy.AddMember("cpuUtilizationPercentage", ___integerMin1Max100)
-
-	ScaleOutPolicy_cpuUtilizationPercentage = ScaleOutPolicy.AddMember("cpuUtilizationPercentage", ___integerMin1Max100)
-
-	AutoScaling_maxWorkerCount = AutoScaling.AddMember("maxWorkerCount", ___integer)
-
-	AutoScaling_mcuCount = AutoScaling.AddMember("mcuCount", ___integerMin1Max8)
-
-	AutoScaling_minWorkerCount = AutoScaling.AddMember("minWorkerCount", ___integer)
-
-	AutoScaling_scaleInPolicy = AutoScaling.AddMember("scaleInPolicy", ScaleInPolicy)
-
-	AutoScaling_scaleOutPolicy = AutoScaling.AddMember("scaleOutPolicy", ScaleOutPolicy)
-
-	AutoScaling_maxAutoscalingTaskCount = AutoScaling.AddMember("maxAutoscalingTaskCount", ___integer)
-
-	ScaleInPolicyUpdate_cpuUtilizationPercentage = ScaleInPolicyUpdate.AddMember("cpuUtilizationPercentage", ___integerMin1Max100)
-
-	ScaleOutPolicyUpdate_cpuUtilizationPercentage = ScaleOutPolicyUpdate.AddMember("cpuUtilizationPercentage", ___integerMin1Max100)
-
-	AutoScalingUpdate_maxWorkerCount = AutoScalingUpdate.AddMember("maxWorkerCount", ___integer)
-
-	AutoScalingUpdate_mcuCount = AutoScalingUpdate.AddMember("mcuCount", ___integerMin1Max8)
-
-	AutoScalingUpdate_minWorkerCount = AutoScalingUpdate.AddMember("minWorkerCount", ___integer)
-
-	AutoScalingUpdate_scaleInPolicy = AutoScalingUpdate.AddMember("scaleInPolicy", ScaleInPolicyUpdate)
-
-	AutoScalingUpdate_scaleOutPolicy = AutoScalingUpdate.AddMember("scaleOutPolicy", ScaleOutPolicyUpdate)
-
-	AutoScalingUpdate_maxAutoscalingTaskCount = AutoScalingUpdate.AddMember("maxAutoscalingTaskCount", ___integer)
-
-	BadRequestException_message = BadRequestException.AddMember("message", ___string)
-
-	ProvisionedCapacity_mcuCount = ProvisionedCapacity.AddMember("mcuCount", ___integerMin1Max8)
-
-	ProvisionedCapacity_workerCount = ProvisionedCapacity.AddMember("workerCount", ___integer)
-
-	Capacity_autoScaling = Capacity.AddMember("autoScaling", AutoScaling)
-
-	Capacity_provisionedCapacity = Capacity.AddMember("provisionedCapacity", ProvisionedCapacity)
-
-	ProvisionedCapacityUpdate_mcuCount = ProvisionedCapacityUpdate.AddMember("mcuCount", ___integerMin1Max8)
-
-	ProvisionedCapacityUpdate_workerCount = ProvisionedCapacityUpdate.AddMember("workerCount", ___integer)
-
-	CapacityUpdate_autoScaling = CapacityUpdate.AddMember("autoScaling", AutoScalingUpdate)
-
-	CapacityUpdate_provisionedCapacity = CapacityUpdate.AddMember("provisionedCapacity", ProvisionedCapacityUpdate)
-
-	CloudWatchLogsLogDelivery_enabled = CloudWatchLogsLogDelivery.AddMember("enabled", ___boolean)
-
-	CloudWatchLogsLogDelivery_logGroup = CloudWatchLogsLogDelivery.AddMember("logGroup", ___string)
-
-	ConflictException_message = ConflictException.AddMember("message", ___string)
-
-	_ConnectorConfiguration_key = _ConnectorConfiguration.AddMember("key", ___string)
-
-	_ConnectorConfiguration_value = _ConnectorConfiguration.AddMember("value", ___string)
-
-	_ConnectorConfigurationUpdate_key = _ConnectorConfigurationUpdate.AddMember("key", ___string)
-
-	_ConnectorConfigurationUpdate_value = _ConnectorConfigurationUpdate.AddMember("value", ___string)
-
-	S3Location_bucketArn = S3Location.AddMember("bucketArn", ___string)
-
-	S3Location_fileKey = S3Location.AddMember("fileKey", ___string)
-
-	S3Location_objectVersion = S3Location.AddMember("objectVersion", ___string)
-
-	CustomPluginLocation_s3Location = CustomPluginLocation.AddMember("s3Location", S3Location)
-
-	FirehoseLogDelivery_deliveryStream = FirehoseLogDelivery.AddMember("deliveryStream", ___string)
-
-	FirehoseLogDelivery_enabled = FirehoseLogDelivery.AddMember("enabled", ___boolean)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", ___string)
-
-	InternalServerErrorException_message = InternalServerErrorException.AddMember("message", ___string)
-
-	KafkaCluster_apacheKafkaCluster = KafkaCluster.AddMember("apacheKafkaCluster", ApacheKafkaCluster)
-
-	KafkaClusterClientAuthentication_authenticationType = KafkaClusterClientAuthentication.AddMember("authenticationType", _KafkaClusterClientAuthenticationType)
-
-	KafkaClusterEncryptionInTransit_encryptionType = KafkaClusterEncryptionInTransit.AddMember("encryptionType", _KafkaClusterEncryptionInTransitType)
-
-	S3LogDelivery_bucket = S3LogDelivery.AddMember("bucket", ___string)
-
-	S3LogDelivery_enabled = S3LogDelivery.AddMember("enabled", ___boolean)
-
-	S3LogDelivery_prefix = S3LogDelivery.AddMember("prefix", ___string)
-
-	WorkerLogDelivery_cloudWatchLogs = WorkerLogDelivery.AddMember("cloudWatchLogs", CloudWatchLogsLogDelivery)
-
-	WorkerLogDelivery_firehose = WorkerLogDelivery.AddMember("firehose", FirehoseLogDelivery)
-
-	WorkerLogDelivery_s3 = WorkerLogDelivery.AddMember("s3", S3LogDelivery)
-
-	LogDelivery_workerLogDelivery = LogDelivery.AddMember("workerLogDelivery", WorkerLogDelivery)
-
-	NotFoundException_message = NotFoundException.AddMember("message", ___string)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", ___string)
-
-	StateDescription_code = StateDescription.AddMember("code", ___string)
-
-	StateDescription_message = StateDescription.AddMember("message", ___string)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", ___string)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", ___string)
-
-	WorkerConfiguration_revision = WorkerConfiguration.AddMember("revision", ___longMin1)
-
-	WorkerConfiguration_workerConfigurationArn = WorkerConfiguration.AddMember("workerConfigurationArn", ___string)
-
-	WorkerConfigurationRevisionDescription_creationTime = WorkerConfigurationRevisionDescription.AddMember("creationTime", ___timestampIso8601)
-
-	WorkerConfigurationRevisionDescription_description = WorkerConfigurationRevisionDescription.AddMember("description", ___string)
-
-	WorkerConfigurationRevisionDescription_propertiesFileContent = WorkerConfigurationRevisionDescription.AddMember("propertiesFileContent", ___sensitiveString)
-
-	WorkerConfigurationRevisionDescription_revision = WorkerConfigurationRevisionDescription.AddMember("revision", ___long)
-
-	WorkerConfigurationUpdate_revision = WorkerConfigurationUpdate.AddMember("revision", ___longMin1)
-
-	WorkerConfigurationUpdate_workerConfigurationArn = WorkerConfigurationUpdate.AddMember("workerConfigurationArn", ___string)
-
-	WorkerSetting_capacity = WorkerSetting.AddMember("capacity", CapacityDescription)
-
-	WorkerSetting_plugins = WorkerSetting.AddMember("plugins", ___listOfPluginDescription)
-
-	WorkerSetting_workerConfiguration = WorkerSetting.AddMember("workerConfiguration", WorkerConfigurationDescription)
-
-	WorkerSetting_useDefaultWorkerConfiguration = WorkerSetting.AddMember("useDefaultWorkerConfiguration", ___boolean)
-
-	CreateConnectorRequest_capacity = CreateConnectorRequest.AddMember("capacity", Capacity)
-
-	CreateConnectorRequest_connectorConfiguration = CreateConnectorRequest.AddMember("connectorConfiguration", _ConnectorConfiguration)
-
-	CreateConnectorRequest_connectorDescription = CreateConnectorRequest.AddMember("connectorDescription", ___stringMax1024)
-
-	CreateConnectorRequest_connectorName = CreateConnectorRequest.AddMember("connectorName", ___stringMin1Max128)
-
-	CreateConnectorRequest_kafkaCluster = CreateConnectorRequest.AddMember("kafkaCluster", KafkaCluster)
-
-	CreateConnectorRequest_kafkaClusterClientAuthentication = CreateConnectorRequest.AddMember("kafkaClusterClientAuthentication", KafkaClusterClientAuthentication)
-
-	CreateConnectorRequest_kafkaClusterEncryptionInTransit = CreateConnectorRequest.AddMember("kafkaClusterEncryptionInTransit", KafkaClusterEncryptionInTransit)
-
-	CreateConnectorRequest_kafkaConnectVersion = CreateConnectorRequest.AddMember("kafkaConnectVersion", ___string)
-
-	CreateConnectorRequest_logDelivery = CreateConnectorRequest.AddMember("logDelivery", LogDelivery)
-
-	CreateConnectorRequest_networkType = CreateConnectorRequest.AddMember("networkType", _NetworkType)
-
-	CreateConnectorRequest_plugins = CreateConnectorRequest.AddMember("plugins", ___listOfPlugin)
-
-	CreateConnectorRequest_serviceExecutionRoleArn = CreateConnectorRequest.AddMember("serviceExecutionRoleArn", ___string)
-
-	CreateConnectorRequest_workerConfiguration = CreateConnectorRequest.AddMember("workerConfiguration", WorkerConfiguration)
-
-	CreateConnectorRequest_tags = CreateConnectorRequest.AddMember("tags", _Tags)
-
-	CreateConnectorResponse_connectorArn = CreateConnectorResponse.AddMember("connectorArn", ___string)
-
-	CreateConnectorResponse_connectorName = CreateConnectorResponse.AddMember("connectorName", ___string)
-
-	CreateConnectorResponse_connectorState = CreateConnectorResponse.AddMember("connectorState", _ConnectorState)
-
-	CreateCustomPluginRequest_contentType = CreateCustomPluginRequest.AddMember("contentType", _CustomPluginContentType)
-
-	CreateCustomPluginRequest_description = CreateCustomPluginRequest.AddMember("description", ___stringMax1024)
-
-	CreateCustomPluginRequest_location = CreateCustomPluginRequest.AddMember("location", CustomPluginLocation)
-
-	CreateCustomPluginRequest_name = CreateCustomPluginRequest.AddMember("name", ___stringMin1Max128)
-
-	CreateCustomPluginRequest_tags = CreateCustomPluginRequest.AddMember("tags", _Tags)
-
-	CreateCustomPluginResponse_customPluginArn = CreateCustomPluginResponse.AddMember("customPluginArn", ___string)
-
-	CreateCustomPluginResponse_customPluginState = CreateCustomPluginResponse.AddMember("customPluginState", _CustomPluginState)
-
-	CreateCustomPluginResponse_name = CreateCustomPluginResponse.AddMember("name", ___string)
-
-	CreateCustomPluginResponse_revision = CreateCustomPluginResponse.AddMember("revision", ___long)
-
-	CreateWorkerConfigurationRequest_description = CreateWorkerConfigurationRequest.AddMember("description", ___stringMax1024)
-
-	CreateWorkerConfigurationRequest_name = CreateWorkerConfigurationRequest.AddMember("name", ___stringMin1Max128)
-
-	CreateWorkerConfigurationRequest_propertiesFileContent = CreateWorkerConfigurationRequest.AddMember("propertiesFileContent", ___sensitiveString)
-
-	CreateWorkerConfigurationRequest_tags = CreateWorkerConfigurationRequest.AddMember("tags", _Tags)
-
-	CreateWorkerConfigurationResponse_creationTime = CreateWorkerConfigurationResponse.AddMember("creationTime", ___timestampIso8601)
-
-	CreateWorkerConfigurationResponse_latestRevision = CreateWorkerConfigurationResponse.AddMember("latestRevision", WorkerConfigurationRevisionSummary)
-
-	CreateWorkerConfigurationResponse_name = CreateWorkerConfigurationResponse.AddMember("name", ___string)
-
-	CreateWorkerConfigurationResponse_workerConfigurationArn = CreateWorkerConfigurationResponse.AddMember("workerConfigurationArn", ___string)
-
-	CreateWorkerConfigurationResponse_workerConfigurationState = CreateWorkerConfigurationResponse.AddMember("workerConfigurationState", _WorkerConfigurationState)
-
-	DeleteConnectorRequest_connectorArn = DeleteConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteConnectorRequest_currentVersion = DeleteConnectorRequest.AddMember("currentVersion", ___string, &smithytraits.HTTPQuery{Name: "currentVersion"})
-
-	DeleteConnectorResponse_connectorArn = DeleteConnectorResponse.AddMember("connectorArn", ___string)
-
-	DeleteConnectorResponse_connectorState = DeleteConnectorResponse.AddMember("connectorState", _ConnectorState)
-
-	DeleteCustomPluginRequest_customPluginArn = DeleteCustomPluginRequest.AddMember("customPluginArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteCustomPluginResponse_customPluginArn = DeleteCustomPluginResponse.AddMember("customPluginArn", ___string)
-
-	DeleteCustomPluginResponse_customPluginState = DeleteCustomPluginResponse.AddMember("customPluginState", _CustomPluginState)
-
-	DeleteWorkerConfigurationRequest_workerConfigurationArn = DeleteWorkerConfigurationRequest.AddMember("workerConfigurationArn", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteWorkerConfigurationResponse_workerConfigurationArn = DeleteWorkerConfigurationResponse.AddMember("workerConfigurationArn", ___string)
-
-	DeleteWorkerConfigurationResponse_workerConfigurationState = DeleteWorkerConfigurationResponse.AddMember("workerConfigurationState", _WorkerConfigurationState)
-
-	DescribeConnectorRequest_connectorArn = DescribeConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConnectorOperationRequest_connectorOperationArn = DescribeConnectorOperationRequest.AddMember("connectorOperationArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeConnectorOperationResponse_connectorArn = DescribeConnectorOperationResponse.AddMember("connectorArn", ___string)
-
-	DescribeConnectorOperationResponse_connectorOperationArn = DescribeConnectorOperationResponse.AddMember("connectorOperationArn", ___string)
-
-	DescribeConnectorOperationResponse_connectorOperationState = DescribeConnectorOperationResponse.AddMember("connectorOperationState", _ConnectorOperationState)
-
-	DescribeConnectorOperationResponse_connectorOperationType = DescribeConnectorOperationResponse.AddMember("connectorOperationType", _ConnectorOperationType)
-
-	DescribeConnectorOperationResponse_operationSteps = DescribeConnectorOperationResponse.AddMember("operationSteps", ___listOfConnectorOperationStep)
-
-	DescribeConnectorOperationResponse_originWorkerSetting = DescribeConnectorOperationResponse.AddMember("originWorkerSetting", WorkerSetting)
-
-	DescribeConnectorOperationResponse_originConnectorConfiguration = DescribeConnectorOperationResponse.AddMember("originConnectorConfiguration", _ConnectorConfiguration)
-
-	DescribeConnectorOperationResponse_targetWorkerSetting = DescribeConnectorOperationResponse.AddMember("targetWorkerSetting", WorkerSetting)
-
-	DescribeConnectorOperationResponse_targetConnectorConfiguration = DescribeConnectorOperationResponse.AddMember("targetConnectorConfiguration", _ConnectorConfiguration)
-
-	DescribeConnectorOperationResponse_errorInfo = DescribeConnectorOperationResponse.AddMember("errorInfo", StateDescription)
-
-	DescribeConnectorOperationResponse_creationTime = DescribeConnectorOperationResponse.AddMember("creationTime", ___timestampIso8601)
-
-	DescribeConnectorOperationResponse_endTime = DescribeConnectorOperationResponse.AddMember("endTime", ___timestampIso8601)
-
-	DescribeConnectorResponse_capacity = DescribeConnectorResponse.AddMember("capacity", CapacityDescription)
-
-	DescribeConnectorResponse_connectorArn = DescribeConnectorResponse.AddMember("connectorArn", ___string)
-
-	DescribeConnectorResponse_connectorConfiguration = DescribeConnectorResponse.AddMember("connectorConfiguration", _ConnectorConfiguration)
-
-	DescribeConnectorResponse_connectorDescription = DescribeConnectorResponse.AddMember("connectorDescription", ___string)
-
-	DescribeConnectorResponse_connectorName = DescribeConnectorResponse.AddMember("connectorName", ___string)
-
-	DescribeConnectorResponse_connectorState = DescribeConnectorResponse.AddMember("connectorState", _ConnectorState)
-
-	DescribeConnectorResponse_creationTime = DescribeConnectorResponse.AddMember("creationTime", ___timestampIso8601)
-
-	DescribeConnectorResponse_currentVersion = DescribeConnectorResponse.AddMember("currentVersion", ___string)
-
-	DescribeConnectorResponse_kafkaCluster = DescribeConnectorResponse.AddMember("kafkaCluster", KafkaClusterDescription)
-
-	DescribeConnectorResponse_kafkaClusterClientAuthentication = DescribeConnectorResponse.AddMember("kafkaClusterClientAuthentication", KafkaClusterClientAuthenticationDescription)
-
-	DescribeConnectorResponse_kafkaClusterEncryptionInTransit = DescribeConnectorResponse.AddMember("kafkaClusterEncryptionInTransit", KafkaClusterEncryptionInTransitDescription)
-
-	DescribeConnectorResponse_kafkaConnectVersion = DescribeConnectorResponse.AddMember("kafkaConnectVersion", ___string)
-
-	DescribeConnectorResponse_logDelivery = DescribeConnectorResponse.AddMember("logDelivery", LogDeliveryDescription)
-
-	DescribeConnectorResponse_networkType = DescribeConnectorResponse.AddMember("networkType", _NetworkType)
-
-	DescribeConnectorResponse_plugins = DescribeConnectorResponse.AddMember("plugins", ___listOfPluginDescription)
-
-	DescribeConnectorResponse_serviceExecutionRoleArn = DescribeConnectorResponse.AddMember("serviceExecutionRoleArn", ___string)
-
-	DescribeConnectorResponse_workerConfiguration = DescribeConnectorResponse.AddMember("workerConfiguration", WorkerConfigurationDescription)
-
-	DescribeConnectorResponse_stateDescription = DescribeConnectorResponse.AddMember("stateDescription", StateDescription)
-
-	DescribeCustomPluginRequest_customPluginArn = DescribeCustomPluginRequest.AddMember("customPluginArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeCustomPluginResponse_creationTime = DescribeCustomPluginResponse.AddMember("creationTime", ___timestampIso8601)
-
-	DescribeCustomPluginResponse_customPluginArn = DescribeCustomPluginResponse.AddMember("customPluginArn", ___string)
-
-	DescribeCustomPluginResponse_customPluginState = DescribeCustomPluginResponse.AddMember("customPluginState", _CustomPluginState)
-
-	DescribeCustomPluginResponse_description = DescribeCustomPluginResponse.AddMember("description", ___string)
-
-	DescribeCustomPluginResponse_latestRevision = DescribeCustomPluginResponse.AddMember("latestRevision", CustomPluginRevisionSummary)
-
-	DescribeCustomPluginResponse_name = DescribeCustomPluginResponse.AddMember("name", ___string)
-
-	DescribeCustomPluginResponse_stateDescription = DescribeCustomPluginResponse.AddMember("stateDescription", StateDescription)
-
-	DescribeWorkerConfigurationRequest_workerConfigurationArn = DescribeWorkerConfigurationRequest.AddMember("workerConfigurationArn", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeWorkerConfigurationResponse_creationTime = DescribeWorkerConfigurationResponse.AddMember("creationTime", ___timestampIso8601)
-
-	DescribeWorkerConfigurationResponse_description = DescribeWorkerConfigurationResponse.AddMember("description", ___string)
-
-	DescribeWorkerConfigurationResponse_latestRevision = DescribeWorkerConfigurationResponse.AddMember("latestRevision", WorkerConfigurationRevisionDescription)
-
-	DescribeWorkerConfigurationResponse_name = DescribeWorkerConfigurationResponse.AddMember("name", ___string)
-
-	DescribeWorkerConfigurationResponse_workerConfigurationArn = DescribeWorkerConfigurationResponse.AddMember("workerConfigurationArn", ___string)
-
-	DescribeWorkerConfigurationResponse_workerConfigurationState = DescribeWorkerConfigurationResponse.AddMember("workerConfigurationState", _WorkerConfigurationState)
-
-	ListConnectorOperationsRequest_connectorArn = ListConnectorOperationsRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListConnectorOperationsRequest_maxResults = ListConnectorOperationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConnectorOperationsRequest_nextToken = ListConnectorOperationsRequest.AddMember("nextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConnectorOperationsResponse_connectorOperations = ListConnectorOperationsResponse.AddMember("connectorOperations", ___listOfConnectorOperationSummary)
-
-	ListConnectorOperationsResponse_nextToken = ListConnectorOperationsResponse.AddMember("nextToken", ___string)
-
-	ListConnectorsRequest_connectorNamePrefix = ListConnectorsRequest.AddMember("connectorNamePrefix", ___string, &smithytraits.HTTPQuery{Name: "connectorNamePrefix"})
-
-	ListConnectorsRequest_maxResults = ListConnectorsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConnectorsRequest_nextToken = ListConnectorsRequest.AddMember("nextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConnectorsResponse_connectors = ListConnectorsResponse.AddMember("connectors", ___listOfConnectorSummary)
-
-	ListConnectorsResponse_nextToken = ListConnectorsResponse.AddMember("nextToken", ___string)
-
-	ListCustomPluginsRequest_maxResults = ListCustomPluginsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCustomPluginsRequest_nextToken = ListCustomPluginsRequest.AddMember("nextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCustomPluginsRequest_namePrefix = ListCustomPluginsRequest.AddMember("namePrefix", ___string, &smithytraits.HTTPQuery{Name: "namePrefix"})
-
-	ListCustomPluginsResponse_customPlugins = ListCustomPluginsResponse.AddMember("customPlugins", ___listOfCustomPluginSummary)
-
-	ListCustomPluginsResponse_nextToken = ListCustomPluginsResponse.AddMember("nextToken", ___string)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	ListWorkerConfigurationsRequest_maxResults = ListWorkerConfigurationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkerConfigurationsRequest_nextToken = ListWorkerConfigurationsRequest.AddMember("nextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkerConfigurationsRequest_namePrefix = ListWorkerConfigurationsRequest.AddMember("namePrefix", ___string, &smithytraits.HTTPQuery{Name: "namePrefix"})
-
-	ListWorkerConfigurationsResponse_nextToken = ListWorkerConfigurationsResponse.AddMember("nextToken", ___string)
-
-	ListWorkerConfigurationsResponse_workerConfigurations = ListWorkerConfigurationsResponse.AddMember("workerConfigurations", ___listOfWorkerConfigurationSummary)
-
-	PauseConnectorRequest_connectorArn = PauseConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	PauseConnectorResponse_connectorArn = PauseConnectorResponse.AddMember("connectorArn", ___string)
-
-	PauseConnectorResponse_connectorOperationArn = PauseConnectorResponse.AddMember("connectorOperationArn", ___string)
-
-	RestartConnectorRequest_connectorArn = RestartConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	RestartConnectorRequest_onlyFailedTasks = RestartConnectorRequest.AddMember("onlyFailedTasks", ___boolean, &smithytraits.HTTPQuery{Name: "onlyFailedTasks"})
-
-	RestartConnectorResponse_connectorArn = RestartConnectorResponse.AddMember("connectorArn", ___string)
-
-	RestartConnectorResponse_connectorOperationArn = RestartConnectorResponse.AddMember("connectorOperationArn", ___string)
-
-	ResumeConnectorRequest_connectorArn = ResumeConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	ResumeConnectorResponse_connectorArn = ResumeConnectorResponse.AddMember("connectorArn", ___string)
-
-	ResumeConnectorResponse_connectorOperationArn = ResumeConnectorResponse.AddMember("connectorOperationArn", ___string)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateConnectorRequest_capacity = UpdateConnectorRequest.AddMember("capacity", CapacityUpdate)
-
-	UpdateConnectorRequest_connectorConfiguration = UpdateConnectorRequest.AddMember("connectorConfiguration", _ConnectorConfigurationUpdate)
-
-	UpdateConnectorRequest_skipHealthValidation = UpdateConnectorRequest.AddMember("skipHealthValidation", ___boolean)
-
-	UpdateConnectorRequest_connectorArn = UpdateConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateConnectorRequest_currentVersion = UpdateConnectorRequest.AddMember("currentVersion", ___string, &smithytraits.HTTPQuery{Name: "currentVersion"})
-
-	UpdateConnectorRequest_plugins = UpdateConnectorRequest.AddMember("plugins", ___listOfPluginUpdate)
-
-	UpdateConnectorRequest_workerConfiguration = UpdateConnectorRequest.AddMember("workerConfiguration", WorkerConfigurationUpdate)
-
-	UpdateConnectorRequest_useDefaultWorkerConfiguration = UpdateConnectorRequest.AddMember("useDefaultWorkerConfiguration", ___boolean)
-
-	UpdateConnectorResponse_connectorArn = UpdateConnectorResponse.AddMember("connectorArn", ___string)
-
-	UpdateConnectorResponse_connectorState = UpdateConnectorResponse.AddMember("connectorState", _ConnectorState)
-
-	UpdateConnectorResponse_connectorOperationArn = UpdateConnectorResponse.AddMember("connectorOperationArn", ___string)
-
+const blob = "" +
+	"KafkaClusterClientAuthenticationDescriptionKafkaClusterEncryptionInTransitDescriptionWorkerConfigura" +
+	"tionRevisionDescriptionCloudWatchLogsLogDeliveryDescriptionKafkaClusterClientAuthenticationTypeDescr" +
+	"ibeWorkerConfigurationResponseKafkaClusterEncryptionInTransitTypeDescribeConnectorOperationResponseD" +
+	"escribeWorkerConfigurationRequestWorkerConfigurationRevisionSummary__listOfWorkerConfigurationSummar" +
+	"yCreateWorkerConfigurationResponseDeleteWorkerConfigurationResponseDescribeConnectorOperationRequest" +
+	"__listOfConnectorOperationSummaryCreateWorkerConfigurationRequestDeleteWorkerConfigurationRequestLis" +
+	"tWorkerConfigurationsResponsekafkaClusterClientAuthenticationCustomPluginLocationDescriptionListConn" +
+	"ectorOperationsResponseListWorkerConfigurationsRequestkafkaClusterEncryptionInTransitFirehoseLogDeli" +
+	"veryDescriptionListConnectorOperationsRequestProvisionedCapacityDescriptionWorkerConfigurationDescri" +
+	"ption__listOfConnectorOperationStepApacheKafkaClusterDescriptionuseDefaultWorkerConfigurationConnect" +
+	"orConfigurationUpdateDescribeCustomPluginResponseInternalServerErrorExceptionWorkerLogDeliveryDescri" +
+	"ptionoriginConnectorConfigurationtargetConnectorConfigurationConnectorOperationStepStateCustomPlugin" +
+	"FileDescriptionCustomPluginRevisionSummaryDescribeCustomPluginRequestListTagsForResourceResponseServ" +
+	"iceUnavailableException__listOfCustomPluginSummaryConnectorOperationStepTypeCreateCustomPluginRespon" +
+	"seDeleteCustomPluginResponseListTagsForResourceRequestCreateCustomPluginRequestDeleteCustomPluginReq" +
+	"uestDescribeConnectorResponseListCustomPluginsResponseProvisionedCapacityUpdateScaleOutPolicyDescrip" +
+	"tionWorkerConfigurationUpdate__listOfPluginDescriptionDescribeConnectorRequestListCustomPluginsReque" +
+	"stRestartConnectorResponseS3LogDeliveryDescriptionScaleInPolicyDescriptionTooManyRequestsExceptionWo" +
+	"rkerConfigurationState__listOfConnectorSummarycpuUtilizationPercentageworkerConfigurationStateConnec" +
+	"torOperationStateCreateConnectorResponseCustomPluginContentTypeCustomPluginDescriptionDeleteConnecto" +
+	"rResponseRestartConnectorRequestResumeConnectorResponseUpdateConnectorResponseconnectorOperationStat" +
+	"emaxAutoscalingTaskCountserviceExecutionRoleArnAutoScalingDescriptionConnectorOperationTypeCreateCon" +
+	"nectorRequestDeleteConnectorRequestListConnectorsResponsePauseConnectorResponseResumeConnectorReques" +
+	"tUpdateConnectorRequestconnectorConfigurationconnectorOperationTypeworkerConfigurationArnListConnect" +
+	"orsRequestPauseConnectorRequestS3LocationDescriptionUnauthorizedExceptionUntagResourceResponseconnec" +
+	"torOperationArnpropertiesFileContentScaleOutPolicyUpdateUntagResourceRequest__listOfPluginUpdateconn" +
+	"ectorDescriptionskipHealthValidationworkerConfigurationsBadRequestExceptionScaleInPolicyUpdateTagRes" +
+	"ourceResponse__integerMin1Max100connectorNamePrefixconnectorOperationskafkaConnectVersionoriginWorke" +
+	"rSettingprovisionedCapacitytargetWorkerSettingCustomPluginUpdateForbiddenExceptionTagResourceRequest" +
+	"__stringMin1Max128__timestampIso8601apacheKafkaClusterauthenticationTypeAutoScalingUpdateConflictExc" +
+	"eptionCustomPluginStateNotFoundException__integerMin1Max8__sensitiveStringcustomPluginStateworkerLog" +
+	"DeliveryStateDescription__listOf__stringbootstrapServersstateDescription__stringMax1024customPluginA" +
+	"rnfileDescriptiononlyFailedTasksConnectorStateVpcDescriptioncloudWatchLogsconnectorStatecurrentVersi" +
+	"ondeliveryStreamencryptionTypelatestRevisionmaxWorkerCountminWorkerCountoperationStepsscaleOutPolicy" +
+	"securityGroupscustomPluginsobjectVersionscaleInPolicyKafkaConnectconnectorArncreationTimeNetworkType" +
+	"autoScalingcontentTypedescriptionlogDeliverynetworkTyperesourceArnworkerCountMaxResultsTagKeyList__l" +
+	"ongMin1connectorsmaxResultsnamePrefixs3Location__booleanbucketArnerrorInfonextTokenstepStateTagValue" +
+	"capacityfileSizefirehoselocationlogGroupmcuCountrevisionstepTypeenabledendTimefileKeyfileMd5messagep" +
+	"luginssubnetstagKeysmemberprefixvaluecodetagskeyvpc"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.kafkaconnect"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1917, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1376, Target: 1, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 401, Target: 2, Traits: 2, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1986, Target: 3, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1402, Target: 4, Traits: 4, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 434, Target: 5, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 265, Target: 6, Traits: 6, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 265, Target: 7, Traits: 7, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1021, Target: 8, Traits: 8, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 195, Target: 9, Traits: 9, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 692, Target: 10, Traits: 10, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2235, Target: 11, Traits: 11, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1529, Target: 12, Traits: 12, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1269, Target: 13, Traits: 13, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 597, Target: 14, Traits: 14, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2257, Target: 15, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1702, Target: 16, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2032, Target: 17, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2694, Target: 18, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2473, Target: 19, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2055, Target: 20, Traits: 20, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3453, Target: 21, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 3647, Target: 22, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 2713, Target: 23, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2713, Target: 24, Traits: 21, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3040, Target: 25, Traits: 21, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3124, Target: 26, Traits: 21, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 47, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 905, Target: 28, Traits: 21, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 104, Traits: 21, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 500, Target: 30, Traits: 21, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 109, Traits: 21, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1822, Target: 32, Traits: 21, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 117, Traits: 21, StrLen: 6, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1323, Target: 34, Traits: 21, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 156, Traits: 21, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1629, Target: 36, Traits: 21, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 198, Traits: 21, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1629, Target: 38, Traits: 21, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 200, Traits: 21, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2576, Target: 40, Traits: 21, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 202, Traits: 21, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 367, Target: 42, Traits: 21, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 279, Traits: 21, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3597, Target: 44, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 3597, Target: 45, Traits: 21, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 3057, Target: 46, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2900, Target: 47, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3172, Target: 48, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2900, Target: 49, Traits: 21, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2918, Target: 50, Traits: 23, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 935, Target: 51, Traits: 21, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3140, Target: 47, Traits: 21, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3848, Target: 257, Traits: 21, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 935, Target: 54, Traits: 21, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3140, Target: 47, Traits: 21, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3848, Target: 260, Traits: 21, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2147, Target: 57, Traits: 21, StrLen: 11, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3344, Target: 23, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3740, Target: 25, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3358, Target: 23, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3440, Target: 229, Traits: 21, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3386, Target: 235, Traits: 21, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2101, Target: 23, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2147, Target: 64, Traits: 21, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3344, Target: 23, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3740, Target: 23, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3358, Target: 23, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3440, Target: 231, Traits: 21, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3386, Target: 237, Traits: 21, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2101, Target: 23, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2972, Target: 71, Traits: 21, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3344, Target: 23, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3740, Target: 25, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3358, Target: 23, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3440, Target: 233, Traits: 21, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3386, Target: 239, Traits: 21, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2101, Target: 23, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2656, Target: 78, Traits: 24, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 856, Target: 80, Traits: 21, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3500, Target: 57, Traits: 21, StrLen: 11, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2808, Target: 204, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 856, Target: 83, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3500, Target: 64, Traits: 21, StrLen: 11, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2808, Target: 207, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1565, Target: 86, Traits: 21, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3500, Target: 71, Traits: 21, StrLen: 11, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2808, Target: 210, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 123, Target: 89, Traits: 21, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3764, Target: 22, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3732, Target: 47, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 123, Target: 92, Traits: 21, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3764, Target: 22, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3732, Target: 47, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2989, Target: 95, Traits: 25, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 993, Target: 97, Traits: 22, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3845, Target: 47, Traits: 21, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3832, Target: 47, Traits: 21, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 993, Target: 100, Traits: 22, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3845, Target: 47, Traits: 21, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3832, Target: 47, Traits: 21, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1894, Target: 103, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 913, Target: 104, Traits: 21, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3756, Target: 108, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3683, Target: 107, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1161, Target: 107, Traits: 21, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1350, Target: 108, Traits: 21, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 508, Target: 109, Traits: 21, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2494, Target: 47, Traits: 21, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2345, Target: 115, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2078, Target: 103, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3771, Target: 50, Traits: 26, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2169, Target: 115, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3232, Target: 116, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1830, Target: 117, Traits: 21, StrLen: 16, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3700, Target: 83, Traits: 21, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2596, Target: 47, Traits: 21, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2732, Target: 47, Traits: 21, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3274, Target: 116, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3288, Target: 47, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 629, Target: 183, Traits: 21, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 629, Target: 180, Traits: 21, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 754, Target: 187, Traits: 21, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2770, Target: 47, Traits: 21, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3533, Target: 192, Traits: 21, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3544, Target: 195, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3799, Target: 38, Traits: 21, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2124, Target: 47, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 266, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 661, Target: 134, Traits: 21, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3187, Target: 47, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 45, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1940, Target: 137, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1963, Target: 138, Traits: 21, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3187, Target: 47, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 44, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1188, Target: 141, Traits: 21, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3785, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 44, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 661, Target: 144, Traits: 21, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3637, Target: 213, Traits: 21, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 661, Target: 146, Traits: 21, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3637, Target: 217, Traits: 21, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1215, Target: 148, Traits: 21, StrLen: 27, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 137, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3522, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3202, Target: 141, Traits: 21, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3724, Target: 146, Traits: 21, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3748, Target: 44, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3006, Target: 155, Traits: 21, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1331, Target: 156, Traits: 21, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3187, Target: 47, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3074, Target: 155, Traits: 21, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3522, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3330, Target: 148, Traits: 21, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3627, Target: 47, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2846, Target: 163, Traits: 21, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3187, Target: 47, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 45, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 785, Target: 166, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3302, Target: 47, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3764, Target: 22, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 785, Target: 169, Traits: 21, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3302, Target: 47, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3764, Target: 22, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2864, Target: 172, Traits: 27, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1049, Target: 174, Traits: 28, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 176, Traits: 21, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 51, Traits: 21, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 178, Traits: 21, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2954, Target: 182, Traits: 21, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 180, Traits: 21, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2954, Target: 182, Traits: 21, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 159, Target: 182, Traits: 21, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 941, Target: 183, Traits: 21, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 54, Traits: 21, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 43, Target: 185, Traits: 21, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3316, Target: 189, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 43, Target: 187, Traits: 21, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3316, Target: 189, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 230, Target: 189, Traits: 21, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 137, Target: 190, Traits: 21, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3091, Target: 289, Traits: 21, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 137, Target: 192, Traits: 21, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3091, Target: 293, Traits: 21, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3577, Target: 194, Traits: 21, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3489, Target: 195, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3023, Target: 196, Traits: 29, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 667, Target: 198, Traits: 21, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3074, Target: 134, Traits: 21, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1637, Target: 200, Traits: 21, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3074, Target: 138, Traits: 21, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2584, Target: 202, Traits: 21, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3074, Target: 163, Traits: 21, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 845, Target: 204, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3740, Target: 25, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3566, Target: 23, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 845, Target: 207, Traits: 21, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3740, Target: 23, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3566, Target: 23, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1554, Target: 210, Traits: 21, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3740, Target: 25, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3566, Target: 23, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2431, Target: 213, Traits: 21, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3656, Target: 47, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3778, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3427, Target: 47, Traits: 21, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2431, Target: 217, Traits: 21, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3656, Target: 47, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3778, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3427, Target: 47, Traits: 21, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1726, Target: 221, Traits: 21, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3656, Target: 47, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3764, Target: 22, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3826, Target: 47, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1726, Target: 225, Traits: 21, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3656, Target: 47, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3764, Target: 22, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3826, Target: 47, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1750, Target: 229, Traits: 21, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1846, Target: 24, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1750, Target: 231, Traits: 21, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1846, Target: 23, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2675, Target: 233, Traits: 21, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1846, Target: 24, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1579, Target: 235, Traits: 21, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1846, Target: 24, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1579, Target: 237, Traits: 21, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1846, Target: 23, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2536, Target: 239, Traits: 21, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1846, Target: 24, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1296, Target: 241, Traits: 30, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3108, Target: 243, Traits: 21, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3837, Target: 47, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3587, Target: 246, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3587, Target: 247, Traits: 21, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3820, Target: 246, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1273, Target: 249, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3845, Target: 246, Traits: 21, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3832, Target: 252, Traits: 21, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3692, Target: 252, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1774, Target: 253, Traits: 31, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2452, Target: 255, Traits: 32, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3792, Target: 47, Traits: 21, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3246, Target: 257, Traits: 21, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3400, Target: 26, Traits: 21, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3806, Target: 26, Traits: 21, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3246, Target: 260, Traits: 21, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3400, Target: 26, Traits: 21, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3806, Target: 26, Traits: 21, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 85, Target: 263, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3748, Target: 45, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2367, Target: 47, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 875, Target: 266, Traits: 21, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3748, Target: 44, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2367, Target: 47, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 85, Target: 269, Traits: 21, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3522, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2515, Target: 46, Traits: 33, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 44, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 333, Target: 274, Traits: 21, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3522, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 44, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1798, Target: 278, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 375, Target: 279, Traits: 21, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3522, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3330, Target: 274, Traits: 21, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3627, Target: 47, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2367, Target: 47, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 278, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1604, Target: 286, Traits: 21, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3748, Target: 45, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2367, Target: 47, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1077, Target: 289, Traits: 21, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3260, Target: 89, Traits: 21, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3716, Target: 166, Traits: 21, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3637, Target: 221, Traits: 21, StrLen: 2, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1077, Target: 293, Traits: 21, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3260, Target: 92, Traits: 21, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3716, Target: 169, Traits: 21, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3637, Target: 225, Traits: 21, StrLen: 2, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2795, Target: 297, Traits: 21, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3700, Target: 83, Traits: 21, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3799, Target: 38, Traits: 21, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1870, Target: 266, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 964, Target: 22, Traits: 21, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2191, Target: 302, Traits: 21, StrLen: 22, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3700, Target: 80, Traits: 21, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2323, Target: 97, Traits: 33, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2596, Target: 48, Traits: 21, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2732, Target: 49, Traits: 21, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 629, Target: 176, Traits: 21, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 629, Target: 178, Traits: 21, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 754, Target: 185, Traits: 21, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2770, Target: 47, Traits: 21, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3533, Target: 190, Traits: 21, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3544, Target: 195, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3799, Target: 36, Traits: 21, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2124, Target: 47, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 263, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3841, Target: 249, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1917, Target: 317, Traits: 21, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2732, Target: 47, Traits: 21, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3274, Target: 116, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1454, Target: 321, Traits: 21, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 137, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3522, Target: 48, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3724, Target: 144, Traits: 21, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3627, Target: 49, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3841, Target: 249, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1376, Target: 327, Traits: 21, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3187, Target: 47, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3074, Target: 155, Traits: 21, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3627, Target: 47, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 44, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 533, Target: 332, Traits: 21, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 48, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3627, Target: 49, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2515, Target: 46, Traits: 33, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3841, Target: 249, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 401, Target: 337, Traits: 21, StrLen: 33, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3330, Target: 274, Traits: 21, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3627, Target: 47, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2367, Target: 47, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 278, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2213, Target: 343, Traits: 21, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 34, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3288, Target: 47, Traits: 35, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1986, Target: 346, Traits: 21, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3274, Target: 116, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1479, Target: 349, Traits: 21, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3187, Target: 47, Traits: 34, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1402, Target: 351, Traits: 21, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3187, Target: 47, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3074, Target: 155, Traits: 21, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 565, Target: 354, Traits: 21, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2367, Target: 47, Traits: 34, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 434, Target: 356, Traits: 21, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2367, Target: 47, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 278, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 359, Traits: 21, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 34, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 467, Target: 361, Traits: 21, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2494, Target: 47, Traits: 34, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 265, Target: 363, Traits: 21, StrLen: 34, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2494, Target: 47, Traits: 21, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2078, Target: 103, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2345, Target: 115, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3372, Target: 28, Traits: 21, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2789, Target: 297, Traits: 21, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1105, Target: 97, Traits: 33, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2827, Target: 297, Traits: 21, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1133, Target: 97, Traits: 33, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3665, Target: 243, Traits: 21, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3771, Target: 50, Traits: 26, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1504, Target: 376, Traits: 21, StrLen: 25, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3700, Target: 83, Traits: 21, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2323, Target: 97, Traits: 33, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2596, Target: 47, Traits: 21, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2732, Target: 47, Traits: 21, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3274, Target: 116, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3288, Target: 47, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 629, Target: 183, Traits: 21, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 629, Target: 180, Traits: 21, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 754, Target: 187, Traits: 21, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2770, Target: 47, Traits: 21, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3533, Target: 192, Traits: 21, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3544, Target: 195, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3799, Target: 38, Traits: 21, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2124, Target: 47, Traits: 21, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 266, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3156, Target: 243, Traits: 21, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1242, Target: 395, Traits: 21, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3187, Target: 47, Traits: 34, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1021, Target: 397, Traits: 21, StrLen: 28, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3187, Target: 47, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3074, Target: 155, Traits: 21, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3522, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3330, Target: 148, Traits: 21, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3627, Target: 47, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3156, Target: 243, Traits: 21, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 299, Target: 405, Traits: 21, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2367, Target: 47, Traits: 34, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 195, Target: 407, Traits: 21, StrLen: 35, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3477, Target: 50, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3522, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3330, Target: 269, Traits: 21, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3627, Target: 47, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2367, Target: 47, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 278, Traits: 21, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 815, Target: 414, Traits: 21, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 34, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3617, Target: 194, Traits: 36, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3674, Target: 47, Traits: 37, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 692, Target: 418, Traits: 21, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2751, Target: 30, Traits: 21, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3674, Target: 47, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2389, Target: 421, Traits: 21, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2732, Target: 47, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3617, Target: 194, Traits: 36, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3674, Target: 47, Traits: 37, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2235, Target: 425, Traits: 21, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3607, Target: 32, Traits: 21, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3674, Target: 47, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1678, Target: 428, Traits: 21, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3617, Target: 194, Traits: 36, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3674, Target: 47, Traits: 37, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3627, Target: 47, Traits: 39, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1529, Target: 432, Traits: 21, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 34, Traits: 21, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3674, Target: 47, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1428, Target: 435, Traits: 21, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3555, Target: 47, Traits: 34, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1269, Target: 437, Traits: 21, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3841, Target: 249, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 723, Target: 439, Traits: 21, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3617, Target: 194, Traits: 36, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3674, Target: 47, Traits: 37, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3627, Target: 47, Traits: 39, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 597, Target: 443, Traits: 21, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3674, Target: 47, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 42, Traits: 21, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2410, Target: 446, Traits: 21, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 34, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2257, Target: 448, Traits: 21, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2494, Target: 47, Traits: 21, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2009, Target: 451, Traits: 21, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 34, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3217, Target: 22, Traits: 40, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1702, Target: 454, Traits: 21, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2494, Target: 47, Traits: 21, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2279, Target: 457, Traits: 21, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 34, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2032, Target: 459, Traits: 21, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2494, Target: 47, Traits: 21, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2882, Target: 462, Traits: 21, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3555, Target: 47, Traits: 34, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3841, Target: 249, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2694, Target: 465, Traits: 21, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2556, Target: 466, Traits: 21, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3555, Target: 47, Traits: 34, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3813, Target: 247, Traits: 41, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2473, Target: 469, Traits: 21, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2301, Target: 470, Traits: 21, StrLen: 22, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3700, Target: 86, Traits: 21, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2323, Target: 100, Traits: 33, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2616, Target: 22, Traits: 21, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3465, Target: 47, Traits: 34, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3288, Target: 47, Traits: 35, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3799, Target: 40, Traits: 21, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1870, Target: 286, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 964, Target: 22, Traits: 21, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2055, Target: 479, Traits: 21, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3465, Target: 47, Traits: 21, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3274, Target: 116, Traits: 21, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2494, Target: 47, Traits: 21, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/connectors",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/custom-plugins",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/worker-configurations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/connectors/{connectorArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/custom-plugins/{customPluginArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/worker-configurations/{workerConfigurationArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/connectors/{connectorArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/connectorOperations/{connectorOperationArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/custom-plugins/{customPluginArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/worker-configurations/{workerConfigurationArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/connectors/{connectorArn}/operations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/connectors",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/custom-plugins",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/worker-configurations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/v1/connectors/{connectorArn}/pause",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/connectors/{connectorArn}/restart",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/v1/connectors/{connectorArn}/resume",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/v1/connectors/{connectorArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "currentVersion"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "connectorNamePrefix"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "namePrefix"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "onlyFailedTasks"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [483]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+}
+
+var CreateConnector = &handles[0]
+
+var CreateCustomPlugin = &handles[1]
+
+var CreateWorkerConfiguration = &handles[2]
+
+var DeleteConnector = &handles[3]
+
+var DeleteCustomPlugin = &handles[4]
+
+var DeleteWorkerConfiguration = &handles[5]
+
+var DescribeConnector = &handles[6]
+
+var DescribeConnectorOperation = &handles[7]
+
+var DescribeCustomPlugin = &handles[8]
+
+var DescribeWorkerConfiguration = &handles[9]
+
+var ListConnectorOperations = &handles[10]
+
+var ListConnectors = &handles[11]
+
+var ListCustomPlugins = &handles[12]
+
+var ListTagsForResource = &handles[13]
+
+var ListWorkerConfigurations = &handles[14]
+
+var PauseConnector = &handles[15]
+
+var RestartConnector = &handles[16]
+
+var ResumeConnector = &handles[17]
+
+var TagResource = &handles[18]
+
+var UntagResource = &handles[19]
+
+var UpdateConnector = &handles[20]
+
+var _KafkaConnect = &handles[21]
+
+var ___boolean = &handles[22]
+
+var ___integer = &handles[23]
+
+var ___integerMin1Max100 = &handles[24]
+
+var ___integerMin1Max8 = &handles[25]
+
+var ___listOf__string = &handles[26]
+var ___listOf__string_member = &handles[27]
+
+var ___listOfConnectorOperationStep = &handles[28]
+var ___listOfConnectorOperationStep_member = &handles[29]
+
+var ___listOfConnectorOperationSummary = &handles[30]
+var ___listOfConnectorOperationSummary_member = &handles[31]
+
+var ___listOfConnectorSummary = &handles[32]
+var ___listOfConnectorSummary_member = &handles[33]
+
+var ___listOfCustomPluginSummary = &handles[34]
+var ___listOfCustomPluginSummary_member = &handles[35]
+
+var ___listOfPlugin = &handles[36]
+var ___listOfPlugin_member = &handles[37]
+
+var ___listOfPluginDescription = &handles[38]
+var ___listOfPluginDescription_member = &handles[39]
+
+var ___listOfPluginUpdate = &handles[40]
+var ___listOfPluginUpdate_member = &handles[41]
+
+var ___listOfWorkerConfigurationSummary = &handles[42]
+var ___listOfWorkerConfigurationSummary_member = &handles[43]
+
+var ___long = &handles[44]
+
+var ___longMin1 = &handles[45]
+
+var ___sensitiveString = &handles[46]
+
+var ___string = &handles[47]
+
+var ___stringMax1024 = &handles[48]
+
+var ___stringMin1Max128 = &handles[49]
+
+var ___timestampIso8601 = &handles[50]
+
+var ApacheKafkaCluster = &handles[51]
+var ApacheKafkaCluster_bootstrapServers = &handles[52]
+var ApacheKafkaCluster_vpc = &handles[53]
+
+var ApacheKafkaClusterDescription = &handles[54]
+var ApacheKafkaClusterDescription_bootstrapServers = &handles[55]
+var ApacheKafkaClusterDescription_vpc = &handles[56]
+
+var AutoScaling = &handles[57]
+var AutoScaling_maxWorkerCount = &handles[58]
+var AutoScaling_mcuCount = &handles[59]
+var AutoScaling_minWorkerCount = &handles[60]
+var AutoScaling_scaleInPolicy = &handles[61]
+var AutoScaling_scaleOutPolicy = &handles[62]
+var AutoScaling_maxAutoscalingTaskCount = &handles[63]
+
+var AutoScalingDescription = &handles[64]
+var AutoScalingDescription_maxWorkerCount = &handles[65]
+var AutoScalingDescription_mcuCount = &handles[66]
+var AutoScalingDescription_minWorkerCount = &handles[67]
+var AutoScalingDescription_scaleInPolicy = &handles[68]
+var AutoScalingDescription_scaleOutPolicy = &handles[69]
+var AutoScalingDescription_maxAutoscalingTaskCount = &handles[70]
+
+var AutoScalingUpdate = &handles[71]
+var AutoScalingUpdate_maxWorkerCount = &handles[72]
+var AutoScalingUpdate_mcuCount = &handles[73]
+var AutoScalingUpdate_minWorkerCount = &handles[74]
+var AutoScalingUpdate_scaleInPolicy = &handles[75]
+var AutoScalingUpdate_scaleOutPolicy = &handles[76]
+var AutoScalingUpdate_maxAutoscalingTaskCount = &handles[77]
+
+var BadRequestException = &handles[78]
+var BadRequestException_message = &handles[79]
+
+var Capacity = &handles[80]
+var Capacity_autoScaling = &handles[81]
+var Capacity_provisionedCapacity = &handles[82]
+
+var CapacityDescription = &handles[83]
+var CapacityDescription_autoScaling = &handles[84]
+var CapacityDescription_provisionedCapacity = &handles[85]
+
+var CapacityUpdate = &handles[86]
+var CapacityUpdate_autoScaling = &handles[87]
+var CapacityUpdate_provisionedCapacity = &handles[88]
+
+var CloudWatchLogsLogDelivery = &handles[89]
+var CloudWatchLogsLogDelivery_enabled = &handles[90]
+var CloudWatchLogsLogDelivery_logGroup = &handles[91]
+
+var CloudWatchLogsLogDeliveryDescription = &handles[92]
+var CloudWatchLogsLogDeliveryDescription_enabled = &handles[93]
+var CloudWatchLogsLogDeliveryDescription_logGroup = &handles[94]
+
+var ConflictException = &handles[95]
+var ConflictException_message = &handles[96]
+
+var _ConnectorConfiguration = &handles[97]
+var _ConnectorConfiguration_key = &handles[98]
+var _ConnectorConfiguration_value = &handles[99]
+
+var _ConnectorConfigurationUpdate = &handles[100]
+var _ConnectorConfigurationUpdate_key = &handles[101]
+var _ConnectorConfigurationUpdate_value = &handles[102]
+
+var _ConnectorOperationState = &handles[103]
+
+var ConnectorOperationStep = &handles[104]
+var ConnectorOperationStep_stepType = &handles[105]
+var ConnectorOperationStep_stepState = &handles[106]
+
+var _ConnectorOperationStepState = &handles[107]
+
+var _ConnectorOperationStepType = &handles[108]
+
+var ConnectorOperationSummary = &handles[109]
+var ConnectorOperationSummary_connectorOperationArn = &handles[110]
+var ConnectorOperationSummary_connectorOperationType = &handles[111]
+var ConnectorOperationSummary_connectorOperationState = &handles[112]
+var ConnectorOperationSummary_creationTime = &handles[113]
+var ConnectorOperationSummary_endTime = &handles[114]
+
+var _ConnectorOperationType = &handles[115]
+
+var _ConnectorState = &handles[116]
+
+var ConnectorSummary = &handles[117]
+var ConnectorSummary_capacity = &handles[118]
+var ConnectorSummary_connectorArn = &handles[119]
+var ConnectorSummary_connectorDescription = &handles[120]
+var ConnectorSummary_connectorName = &handles[121]
+var ConnectorSummary_connectorState = &handles[122]
+var ConnectorSummary_creationTime = &handles[123]
+var ConnectorSummary_currentVersion = &handles[124]
+var ConnectorSummary_kafkaCluster = &handles[125]
+var ConnectorSummary_kafkaClusterClientAuthentication = &handles[126]
+var ConnectorSummary_kafkaClusterEncryptionInTransit = &handles[127]
+var ConnectorSummary_kafkaConnectVersion = &handles[128]
+var ConnectorSummary_logDelivery = &handles[129]
+var ConnectorSummary_networkType = &handles[130]
+var ConnectorSummary_plugins = &handles[131]
+var ConnectorSummary_serviceExecutionRoleArn = &handles[132]
+var ConnectorSummary_workerConfiguration = &handles[133]
+
+var CustomPlugin = &handles[134]
+var CustomPlugin_customPluginArn = &handles[135]
+var CustomPlugin_revision = &handles[136]
+
+var _CustomPluginContentType = &handles[137]
+
+var CustomPluginDescription = &handles[138]
+var CustomPluginDescription_customPluginArn = &handles[139]
+var CustomPluginDescription_revision = &handles[140]
+
+var CustomPluginFileDescription = &handles[141]
+var CustomPluginFileDescription_fileMd5 = &handles[142]
+var CustomPluginFileDescription_fileSize = &handles[143]
+
+var CustomPluginLocation = &handles[144]
+var CustomPluginLocation_s3Location = &handles[145]
+
+var CustomPluginLocationDescription = &handles[146]
+var CustomPluginLocationDescription_s3Location = &handles[147]
+
+var CustomPluginRevisionSummary = &handles[148]
+var CustomPluginRevisionSummary_contentType = &handles[149]
+var CustomPluginRevisionSummary_creationTime = &handles[150]
+var CustomPluginRevisionSummary_description = &handles[151]
+var CustomPluginRevisionSummary_fileDescription = &handles[152]
+var CustomPluginRevisionSummary_location = &handles[153]
+var CustomPluginRevisionSummary_revision = &handles[154]
+
+var _CustomPluginState = &handles[155]
+
+var CustomPluginSummary = &handles[156]
+var CustomPluginSummary_creationTime = &handles[157]
+var CustomPluginSummary_customPluginArn = &handles[158]
+var CustomPluginSummary_customPluginState = &handles[159]
+var CustomPluginSummary_description = &handles[160]
+var CustomPluginSummary_latestRevision = &handles[161]
+var CustomPluginSummary_name = &handles[162]
+
+var CustomPluginUpdate = &handles[163]
+var CustomPluginUpdate_customPluginArn = &handles[164]
+var CustomPluginUpdate_revision = &handles[165]
+
+var FirehoseLogDelivery = &handles[166]
+var FirehoseLogDelivery_deliveryStream = &handles[167]
+var FirehoseLogDelivery_enabled = &handles[168]
+
+var FirehoseLogDeliveryDescription = &handles[169]
+var FirehoseLogDeliveryDescription_deliveryStream = &handles[170]
+var FirehoseLogDeliveryDescription_enabled = &handles[171]
+
+var ForbiddenException = &handles[172]
+var ForbiddenException_message = &handles[173]
+
+var InternalServerErrorException = &handles[174]
+var InternalServerErrorException_message = &handles[175]
+
+var KafkaCluster = &handles[176]
+var KafkaCluster_apacheKafkaCluster = &handles[177]
+
+var KafkaClusterClientAuthentication = &handles[178]
+var KafkaClusterClientAuthentication_authenticationType = &handles[179]
+
+var KafkaClusterClientAuthenticationDescription = &handles[180]
+var KafkaClusterClientAuthenticationDescription_authenticationType = &handles[181]
+
+var _KafkaClusterClientAuthenticationType = &handles[182]
+
+var KafkaClusterDescription = &handles[183]
+var KafkaClusterDescription_apacheKafkaCluster = &handles[184]
+
+var KafkaClusterEncryptionInTransit = &handles[185]
+var KafkaClusterEncryptionInTransit_encryptionType = &handles[186]
+
+var KafkaClusterEncryptionInTransitDescription = &handles[187]
+var KafkaClusterEncryptionInTransitDescription_encryptionType = &handles[188]
+
+var _KafkaClusterEncryptionInTransitType = &handles[189]
+
+var LogDelivery = &handles[190]
+var LogDelivery_workerLogDelivery = &handles[191]
+
+var LogDeliveryDescription = &handles[192]
+var LogDeliveryDescription_workerLogDelivery = &handles[193]
+
+var _MaxResults = &handles[194]
+
+var _NetworkType = &handles[195]
+
+var NotFoundException = &handles[196]
+var NotFoundException_message = &handles[197]
+
+var Plugin = &handles[198]
+var Plugin_customPlugin = &handles[199]
+
+var PluginDescription = &handles[200]
+var PluginDescription_customPlugin = &handles[201]
+
+var PluginUpdate = &handles[202]
+var PluginUpdate_customPlugin = &handles[203]
+
+var ProvisionedCapacity = &handles[204]
+var ProvisionedCapacity_mcuCount = &handles[205]
+var ProvisionedCapacity_workerCount = &handles[206]
+
+var ProvisionedCapacityDescription = &handles[207]
+var ProvisionedCapacityDescription_mcuCount = &handles[208]
+var ProvisionedCapacityDescription_workerCount = &handles[209]
+
+var ProvisionedCapacityUpdate = &handles[210]
+var ProvisionedCapacityUpdate_mcuCount = &handles[211]
+var ProvisionedCapacityUpdate_workerCount = &handles[212]
+
+var S3Location = &handles[213]
+var S3Location_bucketArn = &handles[214]
+var S3Location_fileKey = &handles[215]
+var S3Location_objectVersion = &handles[216]
+
+var S3LocationDescription = &handles[217]
+var S3LocationDescription_bucketArn = &handles[218]
+var S3LocationDescription_fileKey = &handles[219]
+var S3LocationDescription_objectVersion = &handles[220]
+
+var S3LogDelivery = &handles[221]
+var S3LogDelivery_bucket = &handles[222]
+var S3LogDelivery_enabled = &handles[223]
+var S3LogDelivery_prefix = &handles[224]
+
+var S3LogDeliveryDescription = &handles[225]
+var S3LogDeliveryDescription_bucket = &handles[226]
+var S3LogDeliveryDescription_enabled = &handles[227]
+var S3LogDeliveryDescription_prefix = &handles[228]
+
+var ScaleInPolicy = &handles[229]
+var ScaleInPolicy_cpuUtilizationPercentage = &handles[230]
+
+var ScaleInPolicyDescription = &handles[231]
+var ScaleInPolicyDescription_cpuUtilizationPercentage = &handles[232]
+
+var ScaleInPolicyUpdate = &handles[233]
+var ScaleInPolicyUpdate_cpuUtilizationPercentage = &handles[234]
+
+var ScaleOutPolicy = &handles[235]
+var ScaleOutPolicy_cpuUtilizationPercentage = &handles[236]
+
+var ScaleOutPolicyDescription = &handles[237]
+var ScaleOutPolicyDescription_cpuUtilizationPercentage = &handles[238]
+
+var ScaleOutPolicyUpdate = &handles[239]
+var ScaleOutPolicyUpdate_cpuUtilizationPercentage = &handles[240]
+
+var ServiceUnavailableException = &handles[241]
+var ServiceUnavailableException_message = &handles[242]
+
+var StateDescription = &handles[243]
+var StateDescription_code = &handles[244]
+var StateDescription_message = &handles[245]
+
+var _TagKey = &handles[246]
+
+var _TagKeyList = &handles[247]
+var _TagKeyList_member = &handles[248]
+
+var _Tags = &handles[249]
+var _Tags_key = &handles[250]
+var _Tags_value = &handles[251]
+
+var _TagValue = &handles[252]
+
+var TooManyRequestsException = &handles[253]
+var TooManyRequestsException_message = &handles[254]
+
+var UnauthorizedException = &handles[255]
+var UnauthorizedException_message = &handles[256]
+
+var Vpc = &handles[257]
+var Vpc_securityGroups = &handles[258]
+var Vpc_subnets = &handles[259]
+
+var VpcDescription = &handles[260]
+var VpcDescription_securityGroups = &handles[261]
+var VpcDescription_subnets = &handles[262]
+
+var WorkerConfiguration = &handles[263]
+var WorkerConfiguration_revision = &handles[264]
+var WorkerConfiguration_workerConfigurationArn = &handles[265]
+
+var WorkerConfigurationDescription = &handles[266]
+var WorkerConfigurationDescription_revision = &handles[267]
+var WorkerConfigurationDescription_workerConfigurationArn = &handles[268]
+
+var WorkerConfigurationRevisionDescription = &handles[269]
+var WorkerConfigurationRevisionDescription_creationTime = &handles[270]
+var WorkerConfigurationRevisionDescription_description = &handles[271]
+var WorkerConfigurationRevisionDescription_propertiesFileContent = &handles[272]
+var WorkerConfigurationRevisionDescription_revision = &handles[273]
+
+var WorkerConfigurationRevisionSummary = &handles[274]
+var WorkerConfigurationRevisionSummary_creationTime = &handles[275]
+var WorkerConfigurationRevisionSummary_description = &handles[276]
+var WorkerConfigurationRevisionSummary_revision = &handles[277]
+
+var _WorkerConfigurationState = &handles[278]
+
+var WorkerConfigurationSummary = &handles[279]
+var WorkerConfigurationSummary_creationTime = &handles[280]
+var WorkerConfigurationSummary_description = &handles[281]
+var WorkerConfigurationSummary_latestRevision = &handles[282]
+var WorkerConfigurationSummary_name = &handles[283]
+var WorkerConfigurationSummary_workerConfigurationArn = &handles[284]
+var WorkerConfigurationSummary_workerConfigurationState = &handles[285]
+
+var WorkerConfigurationUpdate = &handles[286]
+var WorkerConfigurationUpdate_revision = &handles[287]
+var WorkerConfigurationUpdate_workerConfigurationArn = &handles[288]
+
+var WorkerLogDelivery = &handles[289]
+var WorkerLogDelivery_cloudWatchLogs = &handles[290]
+var WorkerLogDelivery_firehose = &handles[291]
+var WorkerLogDelivery_s3 = &handles[292]
+
+var WorkerLogDeliveryDescription = &handles[293]
+var WorkerLogDeliveryDescription_cloudWatchLogs = &handles[294]
+var WorkerLogDeliveryDescription_firehose = &handles[295]
+var WorkerLogDeliveryDescription_s3 = &handles[296]
+
+var WorkerSetting = &handles[297]
+var WorkerSetting_capacity = &handles[298]
+var WorkerSetting_plugins = &handles[299]
+var WorkerSetting_workerConfiguration = &handles[300]
+var WorkerSetting_useDefaultWorkerConfiguration = &handles[301]
+
+var CreateConnectorRequest = &handles[302]
+var CreateConnectorRequest_capacity = &handles[303]
+var CreateConnectorRequest_connectorConfiguration = &handles[304]
+var CreateConnectorRequest_connectorDescription = &handles[305]
+var CreateConnectorRequest_connectorName = &handles[306]
+var CreateConnectorRequest_kafkaCluster = &handles[307]
+var CreateConnectorRequest_kafkaClusterClientAuthentication = &handles[308]
+var CreateConnectorRequest_kafkaClusterEncryptionInTransit = &handles[309]
+var CreateConnectorRequest_kafkaConnectVersion = &handles[310]
+var CreateConnectorRequest_logDelivery = &handles[311]
+var CreateConnectorRequest_networkType = &handles[312]
+var CreateConnectorRequest_plugins = &handles[313]
+var CreateConnectorRequest_serviceExecutionRoleArn = &handles[314]
+var CreateConnectorRequest_workerConfiguration = &handles[315]
+var CreateConnectorRequest_tags = &handles[316]
+
+var CreateConnectorResponse = &handles[317]
+var CreateConnectorResponse_connectorArn = &handles[318]
+var CreateConnectorResponse_connectorName = &handles[319]
+var CreateConnectorResponse_connectorState = &handles[320]
+
+var CreateCustomPluginRequest = &handles[321]
+var CreateCustomPluginRequest_contentType = &handles[322]
+var CreateCustomPluginRequest_description = &handles[323]
+var CreateCustomPluginRequest_location = &handles[324]
+var CreateCustomPluginRequest_name = &handles[325]
+var CreateCustomPluginRequest_tags = &handles[326]
+
+var CreateCustomPluginResponse = &handles[327]
+var CreateCustomPluginResponse_customPluginArn = &handles[328]
+var CreateCustomPluginResponse_customPluginState = &handles[329]
+var CreateCustomPluginResponse_name = &handles[330]
+var CreateCustomPluginResponse_revision = &handles[331]
+
+var CreateWorkerConfigurationRequest = &handles[332]
+var CreateWorkerConfigurationRequest_description = &handles[333]
+var CreateWorkerConfigurationRequest_name = &handles[334]
+var CreateWorkerConfigurationRequest_propertiesFileContent = &handles[335]
+var CreateWorkerConfigurationRequest_tags = &handles[336]
+
+var CreateWorkerConfigurationResponse = &handles[337]
+var CreateWorkerConfigurationResponse_creationTime = &handles[338]
+var CreateWorkerConfigurationResponse_latestRevision = &handles[339]
+var CreateWorkerConfigurationResponse_name = &handles[340]
+var CreateWorkerConfigurationResponse_workerConfigurationArn = &handles[341]
+var CreateWorkerConfigurationResponse_workerConfigurationState = &handles[342]
+
+var DeleteConnectorRequest = &handles[343]
+var DeleteConnectorRequest_connectorArn = &handles[344]
+var DeleteConnectorRequest_currentVersion = &handles[345]
+
+var DeleteConnectorResponse = &handles[346]
+var DeleteConnectorResponse_connectorArn = &handles[347]
+var DeleteConnectorResponse_connectorState = &handles[348]
+
+var DeleteCustomPluginRequest = &handles[349]
+var DeleteCustomPluginRequest_customPluginArn = &handles[350]
+
+var DeleteCustomPluginResponse = &handles[351]
+var DeleteCustomPluginResponse_customPluginArn = &handles[352]
+var DeleteCustomPluginResponse_customPluginState = &handles[353]
+
+var DeleteWorkerConfigurationRequest = &handles[354]
+var DeleteWorkerConfigurationRequest_workerConfigurationArn = &handles[355]
+
+var DeleteWorkerConfigurationResponse = &handles[356]
+var DeleteWorkerConfigurationResponse_workerConfigurationArn = &handles[357]
+var DeleteWorkerConfigurationResponse_workerConfigurationState = &handles[358]
+
+var DescribeConnectorRequest = &handles[359]
+var DescribeConnectorRequest_connectorArn = &handles[360]
+
+var DescribeConnectorOperationRequest = &handles[361]
+var DescribeConnectorOperationRequest_connectorOperationArn = &handles[362]
+
+var DescribeConnectorOperationResponse = &handles[363]
+var DescribeConnectorOperationResponse_connectorArn = &handles[364]
+var DescribeConnectorOperationResponse_connectorOperationArn = &handles[365]
+var DescribeConnectorOperationResponse_connectorOperationState = &handles[366]
+var DescribeConnectorOperationResponse_connectorOperationType = &handles[367]
+var DescribeConnectorOperationResponse_operationSteps = &handles[368]
+var DescribeConnectorOperationResponse_originWorkerSetting = &handles[369]
+var DescribeConnectorOperationResponse_originConnectorConfiguration = &handles[370]
+var DescribeConnectorOperationResponse_targetWorkerSetting = &handles[371]
+var DescribeConnectorOperationResponse_targetConnectorConfiguration = &handles[372]
+var DescribeConnectorOperationResponse_errorInfo = &handles[373]
+var DescribeConnectorOperationResponse_creationTime = &handles[374]
+var DescribeConnectorOperationResponse_endTime = &handles[375]
+
+var DescribeConnectorResponse = &handles[376]
+var DescribeConnectorResponse_capacity = &handles[377]
+var DescribeConnectorResponse_connectorArn = &handles[378]
+var DescribeConnectorResponse_connectorConfiguration = &handles[379]
+var DescribeConnectorResponse_connectorDescription = &handles[380]
+var DescribeConnectorResponse_connectorName = &handles[381]
+var DescribeConnectorResponse_connectorState = &handles[382]
+var DescribeConnectorResponse_creationTime = &handles[383]
+var DescribeConnectorResponse_currentVersion = &handles[384]
+var DescribeConnectorResponse_kafkaCluster = &handles[385]
+var DescribeConnectorResponse_kafkaClusterClientAuthentication = &handles[386]
+var DescribeConnectorResponse_kafkaClusterEncryptionInTransit = &handles[387]
+var DescribeConnectorResponse_kafkaConnectVersion = &handles[388]
+var DescribeConnectorResponse_logDelivery = &handles[389]
+var DescribeConnectorResponse_networkType = &handles[390]
+var DescribeConnectorResponse_plugins = &handles[391]
+var DescribeConnectorResponse_serviceExecutionRoleArn = &handles[392]
+var DescribeConnectorResponse_workerConfiguration = &handles[393]
+var DescribeConnectorResponse_stateDescription = &handles[394]
+
+var DescribeCustomPluginRequest = &handles[395]
+var DescribeCustomPluginRequest_customPluginArn = &handles[396]
+
+var DescribeCustomPluginResponse = &handles[397]
+var DescribeCustomPluginResponse_creationTime = &handles[398]
+var DescribeCustomPluginResponse_customPluginArn = &handles[399]
+var DescribeCustomPluginResponse_customPluginState = &handles[400]
+var DescribeCustomPluginResponse_description = &handles[401]
+var DescribeCustomPluginResponse_latestRevision = &handles[402]
+var DescribeCustomPluginResponse_name = &handles[403]
+var DescribeCustomPluginResponse_stateDescription = &handles[404]
+
+var DescribeWorkerConfigurationRequest = &handles[405]
+var DescribeWorkerConfigurationRequest_workerConfigurationArn = &handles[406]
+
+var DescribeWorkerConfigurationResponse = &handles[407]
+var DescribeWorkerConfigurationResponse_creationTime = &handles[408]
+var DescribeWorkerConfigurationResponse_description = &handles[409]
+var DescribeWorkerConfigurationResponse_latestRevision = &handles[410]
+var DescribeWorkerConfigurationResponse_name = &handles[411]
+var DescribeWorkerConfigurationResponse_workerConfigurationArn = &handles[412]
+var DescribeWorkerConfigurationResponse_workerConfigurationState = &handles[413]
+
+var ListConnectorOperationsRequest = &handles[414]
+var ListConnectorOperationsRequest_connectorArn = &handles[415]
+var ListConnectorOperationsRequest_maxResults = &handles[416]
+var ListConnectorOperationsRequest_nextToken = &handles[417]
+
+var ListConnectorOperationsResponse = &handles[418]
+var ListConnectorOperationsResponse_connectorOperations = &handles[419]
+var ListConnectorOperationsResponse_nextToken = &handles[420]
+
+var ListConnectorsRequest = &handles[421]
+var ListConnectorsRequest_connectorNamePrefix = &handles[422]
+var ListConnectorsRequest_maxResults = &handles[423]
+var ListConnectorsRequest_nextToken = &handles[424]
+
+var ListConnectorsResponse = &handles[425]
+var ListConnectorsResponse_connectors = &handles[426]
+var ListConnectorsResponse_nextToken = &handles[427]
+
+var ListCustomPluginsRequest = &handles[428]
+var ListCustomPluginsRequest_maxResults = &handles[429]
+var ListCustomPluginsRequest_nextToken = &handles[430]
+var ListCustomPluginsRequest_namePrefix = &handles[431]
+
+var ListCustomPluginsResponse = &handles[432]
+var ListCustomPluginsResponse_customPlugins = &handles[433]
+var ListCustomPluginsResponse_nextToken = &handles[434]
+
+var ListTagsForResourceRequest = &handles[435]
+var ListTagsForResourceRequest_resourceArn = &handles[436]
+
+var ListTagsForResourceResponse = &handles[437]
+var ListTagsForResourceResponse_tags = &handles[438]
+
+var ListWorkerConfigurationsRequest = &handles[439]
+var ListWorkerConfigurationsRequest_maxResults = &handles[440]
+var ListWorkerConfigurationsRequest_nextToken = &handles[441]
+var ListWorkerConfigurationsRequest_namePrefix = &handles[442]
+
+var ListWorkerConfigurationsResponse = &handles[443]
+var ListWorkerConfigurationsResponse_nextToken = &handles[444]
+var ListWorkerConfigurationsResponse_workerConfigurations = &handles[445]
+
+var PauseConnectorRequest = &handles[446]
+var PauseConnectorRequest_connectorArn = &handles[447]
+
+var PauseConnectorResponse = &handles[448]
+var PauseConnectorResponse_connectorArn = &handles[449]
+var PauseConnectorResponse_connectorOperationArn = &handles[450]
+
+var RestartConnectorRequest = &handles[451]
+var RestartConnectorRequest_connectorArn = &handles[452]
+var RestartConnectorRequest_onlyFailedTasks = &handles[453]
+
+var RestartConnectorResponse = &handles[454]
+var RestartConnectorResponse_connectorArn = &handles[455]
+var RestartConnectorResponse_connectorOperationArn = &handles[456]
+
+var ResumeConnectorRequest = &handles[457]
+var ResumeConnectorRequest_connectorArn = &handles[458]
+
+var ResumeConnectorResponse = &handles[459]
+var ResumeConnectorResponse_connectorArn = &handles[460]
+var ResumeConnectorResponse_connectorOperationArn = &handles[461]
+
+var TagResourceRequest = &handles[462]
+var TagResourceRequest_resourceArn = &handles[463]
+var TagResourceRequest_tags = &handles[464]
+
+var TagResourceResponse = &handles[465]
+
+var UntagResourceRequest = &handles[466]
+var UntagResourceRequest_resourceArn = &handles[467]
+var UntagResourceRequest_tagKeys = &handles[468]
+
+var UntagResourceResponse = &handles[469]
+
+var UpdateConnectorRequest = &handles[470]
+var UpdateConnectorRequest_capacity = &handles[471]
+var UpdateConnectorRequest_connectorConfiguration = &handles[472]
+var UpdateConnectorRequest_skipHealthValidation = &handles[473]
+var UpdateConnectorRequest_connectorArn = &handles[474]
+var UpdateConnectorRequest_currentVersion = &handles[475]
+var UpdateConnectorRequest_plugins = &handles[476]
+var UpdateConnectorRequest_workerConfiguration = &handles[477]
+var UpdateConnectorRequest_useDefaultWorkerConfiguration = &handles[478]
+
+var UpdateConnectorResponse = &handles[479]
+var UpdateConnectorResponse_connectorArn = &handles[480]
+var UpdateConnectorResponse_connectorState = &handles[481]
+var UpdateConnectorResponse_connectorOperationArn = &handles[482]
+
+var KafkaConnect = &smithy.ServiceSchema{Schema: &handles[21], Version: "2021-09-14"}

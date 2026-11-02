@@ -4,2281 +4,1928 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateMicrovmAuthToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmAuthToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2025-09-09/microvms/{microvmIdentifier}/auth-token",
-	Code: 200})
-
-var CreateMicrovmImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmImage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2025-09-09/microvm-images",
-	Code: 201})
-
-var CreateMicrovmShellAuthToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmShellAuthToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2025-09-09/microvms/{microvmIdentifier}/shell-auth-token",
-	Code: 200})
-
-var DeleteMicrovmImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "DeleteMicrovmImage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}",
-	Code: 200})
-
-var DeleteMicrovmImageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "DeleteMicrovmImageVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}",
-	Code: 200})
-
-var GetMicrovm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/microvms/{microvmIdentifier}",
-	Code: 200})
-
-var GetMicrovmImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}",
-	Code: 200})
-
-var GetMicrovmImageBuild = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImageBuild",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}/builds/{buildId}",
-	Code: 200})
-
-var GetMicrovmImageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImageVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}",
-	Code: 200})
-
-var ListManagedMicrovmImages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListManagedMicrovmImages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/managed-microvm-images",
-	Code: 200})
-
-var ListManagedMicrovmImageVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListManagedMicrovmImageVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/managed-microvm-images/{imageIdentifier}/versions",
-	Code: 200})
-
-var ListMicrovmImageBuilds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImageBuilds",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}/builds",
-	Code: 200})
-
-var ListMicrovmImages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/microvm-images",
-	Code: 200})
-
-var ListMicrovmImageVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImageVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions",
-	Code: 200})
-
-var ListMicrovms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2025-09-09/microvms",
-	Code: 200})
-
-var ListTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/2017-03-31/tags/{Resource}",
-	Code: 200})
-
-var ResumeMicrovm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ResumeMicrovm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2025-09-09/microvms/{microvmIdentifier}/resume",
-	Code: 200})
-
-var RunMicrovm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "RunMicrovm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2025-09-09/microvms",
-	Code: 200})
-
-var SuspendMicrovm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "SuspendMicrovm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2025-09-09/microvms/{microvmIdentifier}/suspend",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2017-03-31/tags/{Resource}",
-	Code: 204})
-
-var TerminateMicrovm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TerminateMicrovm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/2025-09-09/microvms/{microvmIdentifier}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/2017-03-31/tags/{Resource}",
-	Code: 204})
-
-var UpdateMicrovmImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "UpdateMicrovmImage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}",
-	Code: 200})
-
-var UpdateMicrovmImageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "UpdateMicrovmImageVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}",
-	Code: 200})
-
-var _LambdaMicrovms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "LambdaMicrovms",
-}, smithy.ShapeTypeService, 0)
-
-var LambdaMicrovms = smithy.NewServiceSchema(_LambdaMicrovms, "2025-09-09")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var Architecture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "Architecture",
-}, smithy.ShapeTypeEnum, 1)
-var Architecture_ARM_64 *smithy.Schema
-
-var _AuthTokenKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "AuthTokenKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthTokenValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "AuthTokenValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var BuildState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "BuildState",
-}, smithy.ShapeTypeEnum, 4)
-var BuildState_PENDING *smithy.Schema
-
-var BuildState_IN_PROGRESS *smithy.Schema
-
-var BuildState_SUCCESSFUL *smithy.Schema
-
-var BuildState_FAILED *smithy.Schema
-
-var Capability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "Capability",
-}, smithy.ShapeTypeEnum, 1)
-var Capability_ALL *smithy.Schema
-
-var _CapabilityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CapabilityList",
-}, smithy.ShapeTypeList, 1)
-var _CapabilityList_member *smithy.Schema
-
-var Chipset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "Chipset",
-}, smithy.ShapeTypeEnum, 1)
-var Chipset_GRAVITON *smithy.Schema
-
-var CloudWatchLogging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CloudWatchLogging",
-}, smithy.ShapeTypeStructure, 2)
-var CloudWatchLogging_logGroup *smithy.Schema
-
-var CloudWatchLogging_logStream *smithy.Schema
-
-var CodeArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CodeArtifact",
-}, smithy.ShapeTypeUnion, 1)
-var CodeArtifact_uri *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CpuConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CpuConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CpuConfiguration_architecture *smithy.Schema
-
-var _CpuConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CpuConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _CpuConfigurationList_member *smithy.Schema
-
-var _EnvironmentVariableKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "EnvironmentVariableKey",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentVariableMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "EnvironmentVariableMap",
-}, smithy.ShapeTypeMap, 2)
-var _EnvironmentVariableMap_key *smithy.Schema
-
-var _EnvironmentVariableMap_value *smithy.Schema
-
-var _EnvironmentVariableValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "EnvironmentVariableValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Hooks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "Hooks",
-}, smithy.ShapeTypeStructure, 3)
-var Hooks_port *smithy.Schema
-
-var Hooks_microvmHooks *smithy.Schema
-
-var Hooks_microvmImageHooks *smithy.Schema
-
-var HookState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "HookState",
-}, smithy.ShapeTypeEnum, 2)
-var HookState_DISABLED *smithy.Schema
-
-var HookState_ENABLED *smithy.Schema
-
-var IdlePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "IdlePolicy",
-}, smithy.ShapeTypeStructure, 3)
-var IdlePolicy_maxIdleDurationSeconds *smithy.Schema
-
-var IdlePolicy_suspendedDurationSeconds *smithy.Schema
-
-var IdlePolicy_autoResumeEnabled *smithy.Schema
-
-var _ImageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ImageName",
-}, smithy.ShapeTypeString, 0)
-
-var InsufficientCapacityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "InsufficientCapacityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InsufficientCapacityException_message *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterValueException_Type *smithy.Schema
-
-var InvalidParameterValueException_message *smithy.Schema
-
-var _ListOfPortSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListOfPortSpecification",
-}, smithy.ShapeTypeList, 1)
-var _ListOfPortSpecification_member *smithy.Schema
-
-var Logging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "Logging",
-}, smithy.ShapeTypeUnion, 2)
-var Logging_disabled *smithy.Schema
-
-var Logging_cloudWatch *smithy.Schema
-
-var LoggingDisabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "LoggingDisabled",
-}, smithy.ShapeTypeStructure, 0)
-
-var ManagedMicrovmImageSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ManagedMicrovmImageSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ManagedMicrovmImageSummary_imageArn *smithy.Schema
-
-var ManagedMicrovmImageSummary_createdAt *smithy.Schema
-
-var ManagedMicrovmImageSummary_updatedAt *smithy.Schema
-
-var _ManagedMicrovmImageSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ManagedMicrovmImageSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ManagedMicrovmImageSummaryList_member *smithy.Schema
-
-var ManagedMicrovmImageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ManagedMicrovmImageVersion",
-}, smithy.ShapeTypeStructure, 5)
-var ManagedMicrovmImageVersion_imageArn *smithy.Schema
-
-var ManagedMicrovmImageVersion_imageVersion *smithy.Schema
-
-var ManagedMicrovmImageVersion_status *smithy.Schema
-
-var ManagedMicrovmImageVersion_createdAt *smithy.Schema
-
-var ManagedMicrovmImageVersion_updatedAt *smithy.Schema
-
-var _ManagedMicrovmImageVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ManagedMicrovmImageVersionList",
-}, smithy.ShapeTypeList, 1)
-var _ManagedMicrovmImageVersionList_member *smithy.Schema
-
-var ManagedMicrovmImageVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ManagedMicrovmImageVersionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ManagedMicrovmImageVersionStatus_AVAILABLE *smithy.Schema
-
-var ManagedMicrovmImageVersionStatus_DEPRECATED *smithy.Schema
-
-var MicrovmHooks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmHooks",
-}, smithy.ShapeTypeStructure, 8)
-var MicrovmHooks_run *smithy.Schema
-
-var MicrovmHooks_runTimeoutInSeconds *smithy.Schema
-
-var MicrovmHooks_resume *smithy.Schema
-
-var MicrovmHooks_resumeTimeoutInSeconds *smithy.Schema
-
-var MicrovmHooks_suspend *smithy.Schema
-
-var MicrovmHooks_suspendTimeoutInSeconds *smithy.Schema
-
-var MicrovmHooks_terminate *smithy.Schema
-
-var MicrovmHooks_terminateTimeoutInSeconds *smithy.Schema
-
-var _MicrovmIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _MicrovmImageArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MicrovmImageBuildSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageBuildSummaries",
-}, smithy.ShapeTypeList, 1)
-var _MicrovmImageBuildSummaries_member *smithy.Schema
-
-var MicrovmImageBuildSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageBuildSummary",
-}, smithy.ShapeTypeStructure, 9)
-var MicrovmImageBuildSummary_imageArn *smithy.Schema
-
-var MicrovmImageBuildSummary_imageVersion *smithy.Schema
-
-var MicrovmImageBuildSummary_buildId *smithy.Schema
-
-var MicrovmImageBuildSummary_buildState *smithy.Schema
-
-var MicrovmImageBuildSummary_architecture *smithy.Schema
-
-var MicrovmImageBuildSummary_chipset *smithy.Schema
-
-var MicrovmImageBuildSummary_chipsetGeneration *smithy.Schema
-
-var MicrovmImageBuildSummary_stateReason *smithy.Schema
-
-var MicrovmImageBuildSummary_createdAt *smithy.Schema
-
-var MicrovmImageHooks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageHooks",
-}, smithy.ShapeTypeStructure, 4)
-var MicrovmImageHooks_ready *smithy.Schema
-
-var MicrovmImageHooks_readyTimeoutInSeconds *smithy.Schema
-
-var MicrovmImageHooks_validate *smithy.Schema
-
-var MicrovmImageHooks_validateTimeoutInSeconds *smithy.Schema
-
-var _MicrovmImageIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var MicrovmImageState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageState",
-}, smithy.ShapeTypeEnum, 9)
-var MicrovmImageState_CREATING *smithy.Schema
-
-var MicrovmImageState_CREATED *smithy.Schema
-
-var MicrovmImageState_CREATE_FAILED *smithy.Schema
-
-var MicrovmImageState_UPDATING *smithy.Schema
-
-var MicrovmImageState_UPDATED *smithy.Schema
-
-var MicrovmImageState_UPDATE_FAILED *smithy.Schema
-
-var MicrovmImageState_DELETING *smithy.Schema
-
-var MicrovmImageState_DELETE_FAILED *smithy.Schema
-
-var MicrovmImageState_DELETED *smithy.Schema
-
-var _MicrovmImageSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageSummaries",
-}, smithy.ShapeTypeList, 1)
-var _MicrovmImageSummaries_member *smithy.Schema
-
-var MicrovmImageSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageSummary",
-}, smithy.ShapeTypeStructure, 6)
-var MicrovmImageSummary_imageArn *smithy.Schema
-
-var MicrovmImageSummary_name *smithy.Schema
-
-var MicrovmImageSummary_state *smithy.Schema
-
-var MicrovmImageSummary_latestActiveImageVersion *smithy.Schema
-
-var MicrovmImageSummary_latestFailedImageVersion *smithy.Schema
-
-var MicrovmImageSummary_createdAt *smithy.Schema
-
-var MicrovmImageVersionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageVersionState",
-}, smithy.ShapeTypeEnum, 7)
-var MicrovmImageVersionState_PENDING *smithy.Schema
-
-var MicrovmImageVersionState_IN_PROGRESS *smithy.Schema
-
-var MicrovmImageVersionState_SUCCESSFUL *smithy.Schema
-
-var MicrovmImageVersionState_FAILED *smithy.Schema
-
-var MicrovmImageVersionState_DELETING *smithy.Schema
-
-var MicrovmImageVersionState_DELETED *smithy.Schema
-
-var MicrovmImageVersionState_DELETE_FAILED *smithy.Schema
-
-var MicrovmImageVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageVersionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var MicrovmImageVersionStatus_ACTIVE *smithy.Schema
-
-var MicrovmImageVersionStatus_INACTIVE *smithy.Schema
-
-var MicrovmImageVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageVersionSummary",
-}, smithy.ShapeTypeStructure, 20)
-var MicrovmImageVersionSummary_baseImageArn *smithy.Schema
-
-var MicrovmImageVersionSummary_baseImageVersion *smithy.Schema
-
-var MicrovmImageVersionSummary_buildRoleArn *smithy.Schema
-
-var MicrovmImageVersionSummary_description *smithy.Schema
-
-var MicrovmImageVersionSummary_codeArtifact *smithy.Schema
-
-var MicrovmImageVersionSummary_logging *smithy.Schema
-
-var MicrovmImageVersionSummary_egressNetworkConnectors *smithy.Schema
-
-var MicrovmImageVersionSummary_cpuConfigurations *smithy.Schema
-
-var MicrovmImageVersionSummary_resources *smithy.Schema
-
-var MicrovmImageVersionSummary_additionalOsCapabilities *smithy.Schema
-
-var MicrovmImageVersionSummary_hooks *smithy.Schema
-
-var MicrovmImageVersionSummary_environmentVariables *smithy.Schema
-
-var MicrovmImageVersionSummary_imageArn *smithy.Schema
-
-var MicrovmImageVersionSummary_imageVersion *smithy.Schema
-
-var MicrovmImageVersionSummary_state *smithy.Schema
-
-var MicrovmImageVersionSummary_status *smithy.Schema
-
-var MicrovmImageVersionSummary_createdAt *smithy.Schema
-
-var MicrovmImageVersionSummary_updatedAt *smithy.Schema
-
-var MicrovmImageVersionSummary_stateReason *smithy.Schema
-
-var MicrovmImageVersionSummary_tags *smithy.Schema
-
-var _MicrovmImageVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmImageVersionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MicrovmImageVersionSummaryList_member *smithy.Schema
-
-var MicrovmItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmItem",
-}, smithy.ShapeTypeStructure, 5)
-var MicrovmItem_microvmId *smithy.Schema
-
-var MicrovmItem_state *smithy.Schema
-
-var MicrovmItem_imageArn *smithy.Schema
-
-var MicrovmItem_imageVersion *smithy.Schema
-
-var MicrovmItem_startedAt *smithy.Schema
-
-var _MicrovmItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmItemList",
-}, smithy.ShapeTypeList, 1)
-var _MicrovmItemList_member *smithy.Schema
-
-var MicrovmState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "MicrovmState",
-}, smithy.ShapeTypeEnum, 6)
-var MicrovmState_PENDING *smithy.Schema
-
-var MicrovmState_RUNNING *smithy.Schema
-
-var MicrovmState_SUSPENDING *smithy.Schema
-
-var MicrovmState_SUSPENDED *smithy.Schema
-
-var MicrovmState_TERMINATING *smithy.Schema
-
-var MicrovmState_TERMINATED *smithy.Schema
-
-var _NetworkConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "NetworkConnector",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkConnectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "NetworkConnectorList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkConnectorList_member *smithy.Schema
-
-var _NonBlankString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "NonBlankString",
-}, smithy.ShapeTypeString, 0)
-
-var _PortNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "PortNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var PortRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "PortRange",
-}, smithy.ShapeTypeStructure, 2)
-var PortRange_startPort *smithy.Schema
-
-var PortRange_endPort *smithy.Schema
-
-var PortSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "PortSpecification",
-}, smithy.ShapeTypeUnion, 3)
-var PortSpecification_port *smithy.Schema
-
-var PortSpecification_range *smithy.Schema
-
-var PortSpecification_allPorts *smithy.Schema
-
-var _PositiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "PositiveInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceConflictException_Type *smithy.Schema
-
-var ResourceConflictException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var Resources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "Resources",
-}, smithy.ShapeTypeStructure, 1)
-var Resources_minimumMemoryInMiB *smithy.Schema
-
-var _ResourcesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ResourcesList",
-}, smithy.ShapeTypeList, 1)
-var _ResourcesList_member *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RunHookPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "RunHookPayload",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServiceException_Type *smithy.Schema
-
-var ServiceException_message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var SnapshotBuild = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "SnapshotBuild",
-}, smithy.ShapeTypeStructure, 3)
-var SnapshotBuild_memorySnapshotSizeInBytes *smithy.Schema
-
-var SnapshotBuild_codeInstallSizeInBytes *smithy.Schema
-
-var SnapshotBuild_diskSnapshotSizeInBytes *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TaggableResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TaggableResource",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _TokenParts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TokenParts",
-}, smithy.ShapeTypeMap, 2)
-var _TokenParts_key *smithy.Schema
-
-var _TokenParts_value *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Type *smithy.Schema
-
-var TooManyRequestsException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var CreateMicrovmAuthTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmAuthTokenRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateMicrovmAuthTokenRequest_microvmIdentifier *smithy.Schema
-
-var CreateMicrovmAuthTokenRequest_expirationInMinutes *smithy.Schema
-
-var CreateMicrovmAuthTokenRequest_allowedPorts *smithy.Schema
-
-var CreateMicrovmAuthTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmAuthTokenResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMicrovmAuthTokenResponse_authToken *smithy.Schema
-
-var CreateMicrovmImageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmImageRequest",
-}, smithy.ShapeTypeStructure, 15)
-var CreateMicrovmImageRequest_baseImageArn *smithy.Schema
-
-var CreateMicrovmImageRequest_baseImageVersion *smithy.Schema
-
-var CreateMicrovmImageRequest_buildRoleArn *smithy.Schema
-
-var CreateMicrovmImageRequest_description *smithy.Schema
-
-var CreateMicrovmImageRequest_codeArtifact *smithy.Schema
-
-var CreateMicrovmImageRequest_logging *smithy.Schema
-
-var CreateMicrovmImageRequest_egressNetworkConnectors *smithy.Schema
-
-var CreateMicrovmImageRequest_cpuConfigurations *smithy.Schema
-
-var CreateMicrovmImageRequest_resources *smithy.Schema
-
-var CreateMicrovmImageRequest_additionalOsCapabilities *smithy.Schema
-
-var CreateMicrovmImageRequest_hooks *smithy.Schema
-
-var CreateMicrovmImageRequest_environmentVariables *smithy.Schema
-
-var CreateMicrovmImageRequest_name *smithy.Schema
-
-var CreateMicrovmImageRequest_tags *smithy.Schema
-
-var CreateMicrovmImageRequest_clientToken *smithy.Schema
-
-var CreateMicrovmImageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmImageResponse",
-}, smithy.ShapeTypeStructure, 21)
-var CreateMicrovmImageResponse_imageArn *smithy.Schema
-
-var CreateMicrovmImageResponse_name *smithy.Schema
-
-var CreateMicrovmImageResponse_state *smithy.Schema
-
-var CreateMicrovmImageResponse_latestActiveImageVersion *smithy.Schema
-
-var CreateMicrovmImageResponse_latestFailedImageVersion *smithy.Schema
-
-var CreateMicrovmImageResponse_createdAt *smithy.Schema
-
-var CreateMicrovmImageResponse_baseImageArn *smithy.Schema
-
-var CreateMicrovmImageResponse_baseImageVersion *smithy.Schema
-
-var CreateMicrovmImageResponse_buildRoleArn *smithy.Schema
-
-var CreateMicrovmImageResponse_description *smithy.Schema
-
-var CreateMicrovmImageResponse_codeArtifact *smithy.Schema
-
-var CreateMicrovmImageResponse_logging *smithy.Schema
-
-var CreateMicrovmImageResponse_egressNetworkConnectors *smithy.Schema
-
-var CreateMicrovmImageResponse_cpuConfigurations *smithy.Schema
-
-var CreateMicrovmImageResponse_resources *smithy.Schema
-
-var CreateMicrovmImageResponse_additionalOsCapabilities *smithy.Schema
-
-var CreateMicrovmImageResponse_hooks *smithy.Schema
-
-var CreateMicrovmImageResponse_environmentVariables *smithy.Schema
-
-var CreateMicrovmImageResponse_tags *smithy.Schema
-
-var CreateMicrovmImageResponse_updatedAt *smithy.Schema
-
-var CreateMicrovmImageResponse_imageVersion *smithy.Schema
-
-var CreateMicrovmShellAuthTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmShellAuthTokenRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateMicrovmShellAuthTokenRequest_microvmIdentifier *smithy.Schema
-
-var CreateMicrovmShellAuthTokenRequest_expirationInMinutes *smithy.Schema
-
-var CreateMicrovmShellAuthTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "CreateMicrovmShellAuthTokenResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMicrovmShellAuthTokenResponse_authToken *smithy.Schema
-
-var DeleteMicrovmImageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "DeleteMicrovmImageInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMicrovmImageInput_imageIdentifier *smithy.Schema
-
-var DeleteMicrovmImageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "DeleteMicrovmImageOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteMicrovmImageOutput_imageIdentifier *smithy.Schema
-
-var DeleteMicrovmImageOutput_state *smithy.Schema
-
-var DeleteMicrovmImageVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "DeleteMicrovmImageVersionInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteMicrovmImageVersionInput_imageIdentifier *smithy.Schema
-
-var DeleteMicrovmImageVersionInput_imageVersion *smithy.Schema
-
-var DeleteMicrovmImageVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "DeleteMicrovmImageVersionOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteMicrovmImageVersionOutput_imageIdentifier *smithy.Schema
-
-var DeleteMicrovmImageVersionOutput_imageVersion *smithy.Schema
-
-var DeleteMicrovmImageVersionOutput_state *smithy.Schema
-
-var GetMicrovmImageBuildInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImageBuildInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMicrovmImageBuildInput_imageIdentifier *smithy.Schema
-
-var GetMicrovmImageBuildInput_imageVersion *smithy.Schema
-
-var GetMicrovmImageBuildInput_buildId *smithy.Schema
-
-var GetMicrovmImageBuildOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImageBuildOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetMicrovmImageBuildOutput_imageArn *smithy.Schema
-
-var GetMicrovmImageBuildOutput_imageVersion *smithy.Schema
-
-var GetMicrovmImageBuildOutput_buildId *smithy.Schema
-
-var GetMicrovmImageBuildOutput_buildState *smithy.Schema
-
-var GetMicrovmImageBuildOutput_architecture *smithy.Schema
-
-var GetMicrovmImageBuildOutput_chipset *smithy.Schema
-
-var GetMicrovmImageBuildOutput_chipsetGeneration *smithy.Schema
-
-var GetMicrovmImageBuildOutput_stateReason *smithy.Schema
-
-var GetMicrovmImageBuildOutput_createdAt *smithy.Schema
-
-var GetMicrovmImageBuildOutput_snapshotBuild *smithy.Schema
-
-var GetMicrovmImageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImageInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMicrovmImageInput_imageIdentifier *smithy.Schema
-
-var GetMicrovmImageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImageOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetMicrovmImageOutput_imageArn *smithy.Schema
-
-var GetMicrovmImageOutput_name *smithy.Schema
-
-var GetMicrovmImageOutput_state *smithy.Schema
-
-var GetMicrovmImageOutput_latestActiveImageVersion *smithy.Schema
-
-var GetMicrovmImageOutput_latestFailedImageVersion *smithy.Schema
-
-var GetMicrovmImageOutput_createdAt *smithy.Schema
-
-var GetMicrovmImageOutput_tags *smithy.Schema
-
-var GetMicrovmImageOutput_updatedAt *smithy.Schema
-
-var GetMicrovmImageVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImageVersionInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMicrovmImageVersionInput_imageIdentifier *smithy.Schema
-
-var GetMicrovmImageVersionInput_imageVersion *smithy.Schema
-
-var GetMicrovmImageVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmImageVersionOutput",
-}, smithy.ShapeTypeStructure, 20)
-var GetMicrovmImageVersionOutput_baseImageArn *smithy.Schema
-
-var GetMicrovmImageVersionOutput_baseImageVersion *smithy.Schema
-
-var GetMicrovmImageVersionOutput_buildRoleArn *smithy.Schema
-
-var GetMicrovmImageVersionOutput_description *smithy.Schema
-
-var GetMicrovmImageVersionOutput_codeArtifact *smithy.Schema
-
-var GetMicrovmImageVersionOutput_logging *smithy.Schema
-
-var GetMicrovmImageVersionOutput_egressNetworkConnectors *smithy.Schema
-
-var GetMicrovmImageVersionOutput_cpuConfigurations *smithy.Schema
-
-var GetMicrovmImageVersionOutput_resources *smithy.Schema
-
-var GetMicrovmImageVersionOutput_additionalOsCapabilities *smithy.Schema
-
-var GetMicrovmImageVersionOutput_hooks *smithy.Schema
-
-var GetMicrovmImageVersionOutput_environmentVariables *smithy.Schema
-
-var GetMicrovmImageVersionOutput_imageArn *smithy.Schema
-
-var GetMicrovmImageVersionOutput_imageVersion *smithy.Schema
-
-var GetMicrovmImageVersionOutput_state *smithy.Schema
-
-var GetMicrovmImageVersionOutput_status *smithy.Schema
-
-var GetMicrovmImageVersionOutput_createdAt *smithy.Schema
-
-var GetMicrovmImageVersionOutput_updatedAt *smithy.Schema
-
-var GetMicrovmImageVersionOutput_stateReason *smithy.Schema
-
-var GetMicrovmImageVersionOutput_tags *smithy.Schema
-
-var GetMicrovmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMicrovmRequest_microvmIdentifier *smithy.Schema
-
-var GetMicrovmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "GetMicrovmResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetMicrovmResponse_microvmId *smithy.Schema
-
-var GetMicrovmResponse_state *smithy.Schema
-
-var GetMicrovmResponse_endpoint *smithy.Schema
-
-var GetMicrovmResponse_imageArn *smithy.Schema
-
-var GetMicrovmResponse_imageVersion *smithy.Schema
-
-var GetMicrovmResponse_executionRoleArn *smithy.Schema
-
-var GetMicrovmResponse_idlePolicy *smithy.Schema
-
-var GetMicrovmResponse_maximumDurationInSeconds *smithy.Schema
-
-var GetMicrovmResponse_startedAt *smithy.Schema
-
-var GetMicrovmResponse_terminatedAt *smithy.Schema
-
-var GetMicrovmResponse_stateReason *smithy.Schema
-
-var GetMicrovmResponse_ingressNetworkConnectors *smithy.Schema
-
-var GetMicrovmResponse_egressNetworkConnectors *smithy.Schema
-
-var ListManagedMicrovmImagesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListManagedMicrovmImagesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedMicrovmImagesInput_maxResults *smithy.Schema
-
-var ListManagedMicrovmImagesInput_nextToken *smithy.Schema
-
-var ListManagedMicrovmImagesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListManagedMicrovmImagesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedMicrovmImagesOutput_nextToken *smithy.Schema
-
-var ListManagedMicrovmImagesOutput_items *smithy.Schema
-
-var ListManagedMicrovmImageVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListManagedMicrovmImageVersionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListManagedMicrovmImageVersionsInput_maxResults *smithy.Schema
-
-var ListManagedMicrovmImageVersionsInput_nextToken *smithy.Schema
-
-var ListManagedMicrovmImageVersionsInput_imageIdentifier *smithy.Schema
-
-var ListManagedMicrovmImageVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListManagedMicrovmImageVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedMicrovmImageVersionsOutput_nextToken *smithy.Schema
-
-var ListManagedMicrovmImageVersionsOutput_items *smithy.Schema
-
-var ListMicrovmImageBuildsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImageBuildsInput",
-}, smithy.ShapeTypeStructure, 7)
-var ListMicrovmImageBuildsInput_maxResults *smithy.Schema
-
-var ListMicrovmImageBuildsInput_nextToken *smithy.Schema
-
-var ListMicrovmImageBuildsInput_imageIdentifier *smithy.Schema
-
-var ListMicrovmImageBuildsInput_imageVersion *smithy.Schema
-
-var ListMicrovmImageBuildsInput_architecture *smithy.Schema
-
-var ListMicrovmImageBuildsInput_chipset *smithy.Schema
-
-var ListMicrovmImageBuildsInput_chipsetGeneration *smithy.Schema
-
-var ListMicrovmImageBuildsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImageBuildsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMicrovmImageBuildsOutput_nextToken *smithy.Schema
-
-var ListMicrovmImageBuildsOutput_items *smithy.Schema
-
-var ListMicrovmImagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImagesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMicrovmImagesRequest_maxResults *smithy.Schema
-
-var ListMicrovmImagesRequest_nextToken *smithy.Schema
-
-var ListMicrovmImagesRequest_nameFilter *smithy.Schema
-
-var ListMicrovmImagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImagesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMicrovmImagesResponse_nextToken *smithy.Schema
-
-var ListMicrovmImagesResponse_items *smithy.Schema
-
-var ListMicrovmImageVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImageVersionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListMicrovmImageVersionsInput_maxResults *smithy.Schema
-
-var ListMicrovmImageVersionsInput_nextToken *smithy.Schema
-
-var ListMicrovmImageVersionsInput_imageIdentifier *smithy.Schema
-
-var ListMicrovmImageVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmImageVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMicrovmImageVersionsOutput_nextToken *smithy.Schema
-
-var ListMicrovmImageVersionsOutput_items *smithy.Schema
-
-var ListMicrovmsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMicrovmsRequest_maxResults *smithy.Schema
-
-var ListMicrovmsRequest_nextToken *smithy.Schema
-
-var ListMicrovmsRequest_imageIdentifier *smithy.Schema
-
-var ListMicrovmsRequest_imageVersion *smithy.Schema
-
-var ListMicrovmsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListMicrovmsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMicrovmsResponse_nextToken *smithy.Schema
-
-var ListMicrovmsResponse_items *smithy.Schema
-
-var ListTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListTagsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsRequest_Resource *smithy.Schema
-
-var ListTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ListTagsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsResponse_Tags *smithy.Schema
-
-var ResumeMicrovmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ResumeMicrovmRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResumeMicrovmRequest_microvmIdentifier *smithy.Schema
-
-var ResumeMicrovmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "ResumeMicrovmResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RunMicrovmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "RunMicrovmRequest",
-}, smithy.ShapeTypeStructure, 10)
-var RunMicrovmRequest_ingressNetworkConnectors *smithy.Schema
-
-var RunMicrovmRequest_egressNetworkConnectors *smithy.Schema
-
-var RunMicrovmRequest_imageIdentifier *smithy.Schema
-
-var RunMicrovmRequest_imageVersion *smithy.Schema
-
-var RunMicrovmRequest_executionRoleArn *smithy.Schema
-
-var RunMicrovmRequest_idlePolicy *smithy.Schema
-
-var RunMicrovmRequest_logging *smithy.Schema
-
-var RunMicrovmRequest_runHookPayload *smithy.Schema
-
-var RunMicrovmRequest_maximumDurationInSeconds *smithy.Schema
-
-var RunMicrovmRequest_clientToken *smithy.Schema
-
-var RunMicrovmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "RunMicrovmResponse",
-}, smithy.ShapeTypeStructure, 13)
-var RunMicrovmResponse_microvmId *smithy.Schema
-
-var RunMicrovmResponse_state *smithy.Schema
-
-var RunMicrovmResponse_endpoint *smithy.Schema
-
-var RunMicrovmResponse_imageArn *smithy.Schema
-
-var RunMicrovmResponse_imageVersion *smithy.Schema
-
-var RunMicrovmResponse_executionRoleArn *smithy.Schema
-
-var RunMicrovmResponse_idlePolicy *smithy.Schema
-
-var RunMicrovmResponse_maximumDurationInSeconds *smithy.Schema
-
-var RunMicrovmResponse_startedAt *smithy.Schema
-
-var RunMicrovmResponse_terminatedAt *smithy.Schema
-
-var RunMicrovmResponse_stateReason *smithy.Schema
-
-var RunMicrovmResponse_ingressNetworkConnectors *smithy.Schema
-
-var RunMicrovmResponse_egressNetworkConnectors *smithy.Schema
-
-var SuspendMicrovmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "SuspendMicrovmRequest",
-}, smithy.ShapeTypeStructure, 1)
-var SuspendMicrovmRequest_microvmIdentifier *smithy.Schema
-
-var SuspendMicrovmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "SuspendMicrovmResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_Resource *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TerminateMicrovmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TerminateMicrovmRequest",
-}, smithy.ShapeTypeStructure, 1)
-var TerminateMicrovmRequest_microvmIdentifier *smithy.Schema
-
-var TerminateMicrovmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "TerminateMicrovmResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_Resource *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateMicrovmImageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "UpdateMicrovmImageRequest",
-}, smithy.ShapeTypeStructure, 14)
-var UpdateMicrovmImageRequest_baseImageArn *smithy.Schema
-
-var UpdateMicrovmImageRequest_baseImageVersion *smithy.Schema
-
-var UpdateMicrovmImageRequest_buildRoleArn *smithy.Schema
-
-var UpdateMicrovmImageRequest_description *smithy.Schema
-
-var UpdateMicrovmImageRequest_codeArtifact *smithy.Schema
-
-var UpdateMicrovmImageRequest_logging *smithy.Schema
-
-var UpdateMicrovmImageRequest_egressNetworkConnectors *smithy.Schema
-
-var UpdateMicrovmImageRequest_cpuConfigurations *smithy.Schema
-
-var UpdateMicrovmImageRequest_resources *smithy.Schema
-
-var UpdateMicrovmImageRequest_additionalOsCapabilities *smithy.Schema
-
-var UpdateMicrovmImageRequest_hooks *smithy.Schema
-
-var UpdateMicrovmImageRequest_environmentVariables *smithy.Schema
-
-var UpdateMicrovmImageRequest_imageIdentifier *smithy.Schema
-
-var UpdateMicrovmImageRequest_clientToken *smithy.Schema
-
-var UpdateMicrovmImageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "UpdateMicrovmImageResponse",
-}, smithy.ShapeTypeStructure, 20)
-var UpdateMicrovmImageResponse_imageArn *smithy.Schema
-
-var UpdateMicrovmImageResponse_name *smithy.Schema
-
-var UpdateMicrovmImageResponse_state *smithy.Schema
-
-var UpdateMicrovmImageResponse_latestActiveImageVersion *smithy.Schema
-
-var UpdateMicrovmImageResponse_latestFailedImageVersion *smithy.Schema
-
-var UpdateMicrovmImageResponse_createdAt *smithy.Schema
-
-var UpdateMicrovmImageResponse_baseImageArn *smithy.Schema
-
-var UpdateMicrovmImageResponse_baseImageVersion *smithy.Schema
-
-var UpdateMicrovmImageResponse_buildRoleArn *smithy.Schema
-
-var UpdateMicrovmImageResponse_description *smithy.Schema
-
-var UpdateMicrovmImageResponse_codeArtifact *smithy.Schema
-
-var UpdateMicrovmImageResponse_logging *smithy.Schema
-
-var UpdateMicrovmImageResponse_egressNetworkConnectors *smithy.Schema
-
-var UpdateMicrovmImageResponse_cpuConfigurations *smithy.Schema
-
-var UpdateMicrovmImageResponse_resources *smithy.Schema
-
-var UpdateMicrovmImageResponse_additionalOsCapabilities *smithy.Schema
-
-var UpdateMicrovmImageResponse_hooks *smithy.Schema
-
-var UpdateMicrovmImageResponse_environmentVariables *smithy.Schema
-
-var UpdateMicrovmImageResponse_updatedAt *smithy.Schema
-
-var UpdateMicrovmImageResponse_imageVersion *smithy.Schema
-
-var UpdateMicrovmImageVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "UpdateMicrovmImageVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateMicrovmImageVersionRequest_imageIdentifier *smithy.Schema
-
-var UpdateMicrovmImageVersionRequest_imageVersion *smithy.Schema
-
-var UpdateMicrovmImageVersionRequest_status *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdamicrovms",
-	Name:      "UpdateMicrovmImageVersionResponse",
-}, smithy.ShapeTypeStructure, 20)
-var UpdateMicrovmImageVersionResponse_baseImageArn *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_baseImageVersion *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_buildRoleArn *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_description *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_codeArtifact *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_logging *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_egressNetworkConnectors *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_cpuConfigurations *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_resources *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_additionalOsCapabilities *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_hooks *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_environmentVariables *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_imageArn *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_imageVersion *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_state *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_status *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_createdAt *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_updatedAt *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_stateReason *smithy.Schema
-
-var UpdateMicrovmImageVersionResponse_tags *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	Architecture_ARM_64 = Architecture.AddMember("ARM_64", smithyprelude.Unit)
-
-	BuildState_PENDING = BuildState.AddMember("PENDING", smithyprelude.Unit)
-
-	BuildState_IN_PROGRESS = BuildState.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	BuildState_SUCCESSFUL = BuildState.AddMember("SUCCESSFUL", smithyprelude.Unit)
-
-	BuildState_FAILED = BuildState.AddMember("FAILED", smithyprelude.Unit)
-
-	Capability_ALL = Capability.AddMember("ALL", smithyprelude.Unit)
-
-	_CapabilityList_member = _CapabilityList.AddMember("member", Capability)
-
-	Chipset_GRAVITON = Chipset.AddMember("GRAVITON", smithyprelude.Unit)
-
-	CloudWatchLogging_logGroup = CloudWatchLogging.AddMember("logGroup", _String)
-
-	CloudWatchLogging_logStream = CloudWatchLogging.AddMember("logStream", _String)
-
-	CodeArtifact_uri = CodeArtifact.AddMember("uri", _NonBlankString)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	CpuConfiguration_architecture = CpuConfiguration.AddMember("architecture", Architecture)
-
-	_CpuConfigurationList_member = _CpuConfigurationList.AddMember("member", CpuConfiguration)
-
-	_EnvironmentVariableMap_key = _EnvironmentVariableMap.AddMember("key", _EnvironmentVariableKey)
-
-	_EnvironmentVariableMap_value = _EnvironmentVariableMap.AddMember("value", _EnvironmentVariableValue)
-
-	HookState_DISABLED = HookState.AddMember("DISABLED", smithyprelude.Unit)
-
-	HookState_ENABLED = HookState.AddMember("ENABLED", smithyprelude.Unit)
-
-	MicrovmHooks_run = MicrovmHooks.AddMember("run", HookState)
-
-	MicrovmHooks_runTimeoutInSeconds = MicrovmHooks.AddMember("runTimeoutInSeconds", smithyprelude.Integer)
-
-	MicrovmHooks_resume = MicrovmHooks.AddMember("resume", HookState)
-
-	MicrovmHooks_resumeTimeoutInSeconds = MicrovmHooks.AddMember("resumeTimeoutInSeconds", smithyprelude.Integer)
-
-	MicrovmHooks_suspend = MicrovmHooks.AddMember("suspend", HookState)
-
-	MicrovmHooks_suspendTimeoutInSeconds = MicrovmHooks.AddMember("suspendTimeoutInSeconds", smithyprelude.Integer)
-
-	MicrovmHooks_terminate = MicrovmHooks.AddMember("terminate", HookState)
-
-	MicrovmHooks_terminateTimeoutInSeconds = MicrovmHooks.AddMember("terminateTimeoutInSeconds", smithyprelude.Integer)
-
-	MicrovmImageHooks_ready = MicrovmImageHooks.AddMember("ready", HookState)
-
-	MicrovmImageHooks_readyTimeoutInSeconds = MicrovmImageHooks.AddMember("readyTimeoutInSeconds", smithyprelude.Integer)
-
-	MicrovmImageHooks_validate = MicrovmImageHooks.AddMember("validate", HookState)
-
-	MicrovmImageHooks_validateTimeoutInSeconds = MicrovmImageHooks.AddMember("validateTimeoutInSeconds", smithyprelude.Integer)
-
-	Hooks_port = Hooks.AddMember("port", smithyprelude.Integer)
-
-	Hooks_microvmHooks = Hooks.AddMember("microvmHooks", MicrovmHooks)
-
-	Hooks_microvmImageHooks = Hooks.AddMember("microvmImageHooks", MicrovmImageHooks)
-
-	IdlePolicy_maxIdleDurationSeconds = IdlePolicy.AddMember("maxIdleDurationSeconds", smithyprelude.Integer)
-
-	IdlePolicy_suspendedDurationSeconds = IdlePolicy.AddMember("suspendedDurationSeconds", smithyprelude.Integer)
-
-	IdlePolicy_autoResumeEnabled = IdlePolicy.AddMember("autoResumeEnabled", smithyprelude.Boolean)
-
-	InsufficientCapacityException_message = InsufficientCapacityException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	InvalidParameterValueException_Type = InvalidParameterValueException.AddMember("Type", smithyprelude.String)
-
-	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", smithyprelude.String)
-
-	PortRange_startPort = PortRange.AddMember("startPort", _PortNumber)
-
-	PortRange_endPort = PortRange.AddMember("endPort", _PortNumber)
-
-	PortSpecification_port = PortSpecification.AddMember("port", _PortNumber)
-
-	PortSpecification_range = PortSpecification.AddMember("range", PortRange)
-
-	PortSpecification_allPorts = PortSpecification.AddMember("allPorts", smithyprelude.Unit)
-
-	_ListOfPortSpecification_member = _ListOfPortSpecification.AddMember("member", PortSpecification)
-
-	Logging_disabled = Logging.AddMember("disabled", LoggingDisabled)
-
-	Logging_cloudWatch = Logging.AddMember("cloudWatch", CloudWatchLogging)
-
-	ManagedMicrovmImageSummary_imageArn = ManagedMicrovmImageSummary.AddMember("imageArn", _NonBlankString)
-
-	ManagedMicrovmImageSummary_createdAt = ManagedMicrovmImageSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ManagedMicrovmImageSummary_updatedAt = ManagedMicrovmImageSummary.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	_ManagedMicrovmImageSummaryList_member = _ManagedMicrovmImageSummaryList.AddMember("member", ManagedMicrovmImageSummary)
-
-	ManagedMicrovmImageVersionStatus_AVAILABLE = ManagedMicrovmImageVersionStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ManagedMicrovmImageVersionStatus_DEPRECATED = ManagedMicrovmImageVersionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	ManagedMicrovmImageVersion_imageArn = ManagedMicrovmImageVersion.AddMember("imageArn", _NonBlankString)
-
-	ManagedMicrovmImageVersion_imageVersion = ManagedMicrovmImageVersion.AddMember("imageVersion", _NonBlankString)
-
-	ManagedMicrovmImageVersion_status = ManagedMicrovmImageVersion.AddMember("status", ManagedMicrovmImageVersionStatus)
-
-	ManagedMicrovmImageVersion_createdAt = ManagedMicrovmImageVersion.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ManagedMicrovmImageVersion_updatedAt = ManagedMicrovmImageVersion.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	_ManagedMicrovmImageVersionList_member = _ManagedMicrovmImageVersionList.AddMember("member", ManagedMicrovmImageVersion)
-
-	MicrovmImageBuildSummary_imageArn = MicrovmImageBuildSummary.AddMember("imageArn", _NonBlankString)
-
-	MicrovmImageBuildSummary_imageVersion = MicrovmImageBuildSummary.AddMember("imageVersion", _NonBlankString)
-
-	MicrovmImageBuildSummary_buildId = MicrovmImageBuildSummary.AddMember("buildId", _NonBlankString)
-
-	MicrovmImageBuildSummary_buildState = MicrovmImageBuildSummary.AddMember("buildState", BuildState)
-
-	MicrovmImageBuildSummary_architecture = MicrovmImageBuildSummary.AddMember("architecture", Architecture)
-
-	MicrovmImageBuildSummary_chipset = MicrovmImageBuildSummary.AddMember("chipset", Chipset)
-
-	MicrovmImageBuildSummary_chipsetGeneration = MicrovmImageBuildSummary.AddMember("chipsetGeneration", _NonBlankString)
-
-	MicrovmImageBuildSummary_stateReason = MicrovmImageBuildSummary.AddMember("stateReason", smithyprelude.String)
-
-	MicrovmImageBuildSummary_createdAt = MicrovmImageBuildSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	_MicrovmImageBuildSummaries_member = _MicrovmImageBuildSummaries.AddMember("member", MicrovmImageBuildSummary)
-
-	MicrovmImageState_CREATING = MicrovmImageState.AddMember("CREATING", smithyprelude.Unit)
-
-	MicrovmImageState_CREATED = MicrovmImageState.AddMember("CREATED", smithyprelude.Unit)
-
-	MicrovmImageState_CREATE_FAILED = MicrovmImageState.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	MicrovmImageState_UPDATING = MicrovmImageState.AddMember("UPDATING", smithyprelude.Unit)
-
-	MicrovmImageState_UPDATED = MicrovmImageState.AddMember("UPDATED", smithyprelude.Unit)
-
-	MicrovmImageState_UPDATE_FAILED = MicrovmImageState.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	MicrovmImageState_DELETING = MicrovmImageState.AddMember("DELETING", smithyprelude.Unit)
-
-	MicrovmImageState_DELETE_FAILED = MicrovmImageState.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	MicrovmImageState_DELETED = MicrovmImageState.AddMember("DELETED", smithyprelude.Unit)
-
-	MicrovmImageSummary_imageArn = MicrovmImageSummary.AddMember("imageArn", _NonBlankString)
-
-	MicrovmImageSummary_name = MicrovmImageSummary.AddMember("name", _ImageName)
-
-	MicrovmImageSummary_state = MicrovmImageSummary.AddMember("state", MicrovmImageState)
-
-	MicrovmImageSummary_latestActiveImageVersion = MicrovmImageSummary.AddMember("latestActiveImageVersion", _NonBlankString)
-
-	MicrovmImageSummary_latestFailedImageVersion = MicrovmImageSummary.AddMember("latestFailedImageVersion", _NonBlankString)
-
-	MicrovmImageSummary_createdAt = MicrovmImageSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	_MicrovmImageSummaries_member = _MicrovmImageSummaries.AddMember("member", MicrovmImageSummary)
-
-	MicrovmImageVersionState_PENDING = MicrovmImageVersionState.AddMember("PENDING", smithyprelude.Unit)
-
-	MicrovmImageVersionState_IN_PROGRESS = MicrovmImageVersionState.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	MicrovmImageVersionState_SUCCESSFUL = MicrovmImageVersionState.AddMember("SUCCESSFUL", smithyprelude.Unit)
-
-	MicrovmImageVersionState_FAILED = MicrovmImageVersionState.AddMember("FAILED", smithyprelude.Unit)
-
-	MicrovmImageVersionState_DELETING = MicrovmImageVersionState.AddMember("DELETING", smithyprelude.Unit)
-
-	MicrovmImageVersionState_DELETED = MicrovmImageVersionState.AddMember("DELETED", smithyprelude.Unit)
-
-	MicrovmImageVersionState_DELETE_FAILED = MicrovmImageVersionState.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	MicrovmImageVersionStatus_ACTIVE = MicrovmImageVersionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	MicrovmImageVersionStatus_INACTIVE = MicrovmImageVersionStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	_NetworkConnectorList_member = _NetworkConnectorList.AddMember("member", _NetworkConnector)
-
-	Resources_minimumMemoryInMiB = Resources.AddMember("minimumMemoryInMiB", smithyprelude.Integer)
-
-	_ResourcesList_member = _ResourcesList.AddMember("member", Resources)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	MicrovmImageVersionSummary_baseImageArn = MicrovmImageVersionSummary.AddMember("baseImageArn", _NonBlankString)
-
-	MicrovmImageVersionSummary_baseImageVersion = MicrovmImageVersionSummary.AddMember("baseImageVersion", _Version)
-
-	MicrovmImageVersionSummary_buildRoleArn = MicrovmImageVersionSummary.AddMember("buildRoleArn", _RoleArn)
-
-	MicrovmImageVersionSummary_description = MicrovmImageVersionSummary.AddMember("description", smithyprelude.String)
-
-	MicrovmImageVersionSummary_codeArtifact = MicrovmImageVersionSummary.AddMember("codeArtifact", CodeArtifact)
-
-	MicrovmImageVersionSummary_logging = MicrovmImageVersionSummary.AddMember("logging", Logging)
-
-	MicrovmImageVersionSummary_egressNetworkConnectors = MicrovmImageVersionSummary.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	MicrovmImageVersionSummary_cpuConfigurations = MicrovmImageVersionSummary.AddMember("cpuConfigurations", _CpuConfigurationList)
-
-	MicrovmImageVersionSummary_resources = MicrovmImageVersionSummary.AddMember("resources", _ResourcesList)
-
-	MicrovmImageVersionSummary_additionalOsCapabilities = MicrovmImageVersionSummary.AddMember("additionalOsCapabilities", _CapabilityList)
-
-	MicrovmImageVersionSummary_hooks = MicrovmImageVersionSummary.AddMember("hooks", Hooks)
-
-	MicrovmImageVersionSummary_environmentVariables = MicrovmImageVersionSummary.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	MicrovmImageVersionSummary_imageArn = MicrovmImageVersionSummary.AddMember("imageArn", _NonBlankString)
-
-	MicrovmImageVersionSummary_imageVersion = MicrovmImageVersionSummary.AddMember("imageVersion", _NonBlankString)
-
-	MicrovmImageVersionSummary_state = MicrovmImageVersionSummary.AddMember("state", MicrovmImageVersionState)
-
-	MicrovmImageVersionSummary_status = MicrovmImageVersionSummary.AddMember("status", MicrovmImageVersionStatus)
-
-	MicrovmImageVersionSummary_createdAt = MicrovmImageVersionSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	MicrovmImageVersionSummary_updatedAt = MicrovmImageVersionSummary.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	MicrovmImageVersionSummary_stateReason = MicrovmImageVersionSummary.AddMember("stateReason", smithyprelude.String)
-
-	MicrovmImageVersionSummary_tags = MicrovmImageVersionSummary.AddMember("tags", _Tags)
-
-	_MicrovmImageVersionSummaryList_member = _MicrovmImageVersionSummaryList.AddMember("member", MicrovmImageVersionSummary)
-
-	MicrovmState_PENDING = MicrovmState.AddMember("PENDING", smithyprelude.Unit)
-
-	MicrovmState_RUNNING = MicrovmState.AddMember("RUNNING", smithyprelude.Unit)
-
-	MicrovmState_SUSPENDING = MicrovmState.AddMember("SUSPENDING", smithyprelude.Unit)
-
-	MicrovmState_SUSPENDED = MicrovmState.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	MicrovmState_TERMINATING = MicrovmState.AddMember("TERMINATING", smithyprelude.Unit)
-
-	MicrovmState_TERMINATED = MicrovmState.AddMember("TERMINATED", smithyprelude.Unit)
-
-	MicrovmItem_microvmId = MicrovmItem.AddMember("microvmId", _MicrovmIdentifier)
-
-	MicrovmItem_state = MicrovmItem.AddMember("state", MicrovmState)
-
-	MicrovmItem_imageArn = MicrovmItem.AddMember("imageArn", _MicrovmImageArn)
-
-	MicrovmItem_imageVersion = MicrovmItem.AddMember("imageVersion", _Version)
-
-	MicrovmItem_startedAt = MicrovmItem.AddMember("startedAt", smithyprelude.Timestamp)
-
-	_MicrovmItemList_member = _MicrovmItemList.AddMember("member", MicrovmItem)
-
-	ResourceConflictException_Type = ResourceConflictException.AddMember("Type", smithyprelude.String)
-
-	ResourceConflictException_message = ResourceConflictException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceException_Type = ServiceException.AddMember("Type", smithyprelude.String)
-
-	ServiceException_message = ServiceException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	SnapshotBuild_memorySnapshotSizeInBytes = SnapshotBuild.AddMember("memorySnapshotSizeInBytes", smithyprelude.Long)
-
-	SnapshotBuild_codeInstallSizeInBytes = SnapshotBuild.AddMember("codeInstallSizeInBytes", smithyprelude.Long)
-
-	SnapshotBuild_diskSnapshotSizeInBytes = SnapshotBuild.AddMember("diskSnapshotSizeInBytes", smithyprelude.Long)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey, &smithytraits.XMLName{Name: "Key"})
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	_TokenParts_key = _TokenParts.AddMember("key", _AuthTokenKey)
-
-	_TokenParts_value = _TokenParts.AddMember("value", _AuthTokenValue)
-
-	TooManyRequestsException_Type = TooManyRequestsException.AddMember("Type", smithyprelude.String)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateMicrovmAuthTokenRequest_microvmIdentifier = CreateMicrovmAuthTokenRequest.AddMember("microvmIdentifier", _MicrovmIdentifier, &smithytraits.HTTPLabel{})
-
-	CreateMicrovmAuthTokenRequest_expirationInMinutes = CreateMicrovmAuthTokenRequest.AddMember("expirationInMinutes", _PositiveInteger)
-
-	CreateMicrovmAuthTokenRequest_allowedPorts = CreateMicrovmAuthTokenRequest.AddMember("allowedPorts", _ListOfPortSpecification)
-
-	CreateMicrovmAuthTokenResponse_authToken = CreateMicrovmAuthTokenResponse.AddMember("authToken", _TokenParts)
-
-	CreateMicrovmImageRequest_baseImageArn = CreateMicrovmImageRequest.AddMember("baseImageArn", _NonBlankString)
-
-	CreateMicrovmImageRequest_baseImageVersion = CreateMicrovmImageRequest.AddMember("baseImageVersion", _Version)
-
-	CreateMicrovmImageRequest_buildRoleArn = CreateMicrovmImageRequest.AddMember("buildRoleArn", _RoleArn)
-
-	CreateMicrovmImageRequest_description = CreateMicrovmImageRequest.AddMember("description", smithyprelude.String)
-
-	CreateMicrovmImageRequest_codeArtifact = CreateMicrovmImageRequest.AddMember("codeArtifact", CodeArtifact)
-
-	CreateMicrovmImageRequest_logging = CreateMicrovmImageRequest.AddMember("logging", Logging)
-
-	CreateMicrovmImageRequest_egressNetworkConnectors = CreateMicrovmImageRequest.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	CreateMicrovmImageRequest_cpuConfigurations = CreateMicrovmImageRequest.AddMember("cpuConfigurations", _CpuConfigurationList)
-
-	CreateMicrovmImageRequest_resources = CreateMicrovmImageRequest.AddMember("resources", _ResourcesList)
-
-	CreateMicrovmImageRequest_additionalOsCapabilities = CreateMicrovmImageRequest.AddMember("additionalOsCapabilities", _CapabilityList)
-
-	CreateMicrovmImageRequest_hooks = CreateMicrovmImageRequest.AddMember("hooks", Hooks)
-
-	CreateMicrovmImageRequest_environmentVariables = CreateMicrovmImageRequest.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	CreateMicrovmImageRequest_name = CreateMicrovmImageRequest.AddMember("name", _ImageName)
-
-	CreateMicrovmImageRequest_tags = CreateMicrovmImageRequest.AddMember("tags", _Tags)
-
-	CreateMicrovmImageRequest_clientToken = CreateMicrovmImageRequest.AddMember("clientToken", smithyprelude.String)
-
-	CreateMicrovmImageResponse_imageArn = CreateMicrovmImageResponse.AddMember("imageArn", _NonBlankString)
-
-	CreateMicrovmImageResponse_name = CreateMicrovmImageResponse.AddMember("name", _ImageName)
-
-	CreateMicrovmImageResponse_state = CreateMicrovmImageResponse.AddMember("state", MicrovmImageState)
-
-	CreateMicrovmImageResponse_latestActiveImageVersion = CreateMicrovmImageResponse.AddMember("latestActiveImageVersion", _NonBlankString)
-
-	CreateMicrovmImageResponse_latestFailedImageVersion = CreateMicrovmImageResponse.AddMember("latestFailedImageVersion", _NonBlankString)
-
-	CreateMicrovmImageResponse_createdAt = CreateMicrovmImageResponse.AddMember("createdAt", smithyprelude.Timestamp)
-
-	CreateMicrovmImageResponse_baseImageArn = CreateMicrovmImageResponse.AddMember("baseImageArn", _NonBlankString)
-
-	CreateMicrovmImageResponse_baseImageVersion = CreateMicrovmImageResponse.AddMember("baseImageVersion", _Version)
-
-	CreateMicrovmImageResponse_buildRoleArn = CreateMicrovmImageResponse.AddMember("buildRoleArn", _RoleArn)
-
-	CreateMicrovmImageResponse_description = CreateMicrovmImageResponse.AddMember("description", smithyprelude.String)
-
-	CreateMicrovmImageResponse_codeArtifact = CreateMicrovmImageResponse.AddMember("codeArtifact", CodeArtifact)
-
-	CreateMicrovmImageResponse_logging = CreateMicrovmImageResponse.AddMember("logging", Logging)
-
-	CreateMicrovmImageResponse_egressNetworkConnectors = CreateMicrovmImageResponse.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	CreateMicrovmImageResponse_cpuConfigurations = CreateMicrovmImageResponse.AddMember("cpuConfigurations", _CpuConfigurationList)
-
-	CreateMicrovmImageResponse_resources = CreateMicrovmImageResponse.AddMember("resources", _ResourcesList)
-
-	CreateMicrovmImageResponse_additionalOsCapabilities = CreateMicrovmImageResponse.AddMember("additionalOsCapabilities", _CapabilityList)
-
-	CreateMicrovmImageResponse_hooks = CreateMicrovmImageResponse.AddMember("hooks", Hooks)
-
-	CreateMicrovmImageResponse_environmentVariables = CreateMicrovmImageResponse.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	CreateMicrovmImageResponse_tags = CreateMicrovmImageResponse.AddMember("tags", _Tags)
-
-	CreateMicrovmImageResponse_updatedAt = CreateMicrovmImageResponse.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	CreateMicrovmImageResponse_imageVersion = CreateMicrovmImageResponse.AddMember("imageVersion", _NonBlankString)
-
-	CreateMicrovmShellAuthTokenRequest_microvmIdentifier = CreateMicrovmShellAuthTokenRequest.AddMember("microvmIdentifier", _MicrovmIdentifier, &smithytraits.HTTPLabel{})
-
-	CreateMicrovmShellAuthTokenRequest_expirationInMinutes = CreateMicrovmShellAuthTokenRequest.AddMember("expirationInMinutes", _PositiveInteger)
-
-	CreateMicrovmShellAuthTokenResponse_authToken = CreateMicrovmShellAuthTokenResponse.AddMember("authToken", _TokenParts)
-
-	DeleteMicrovmImageInput_imageIdentifier = DeleteMicrovmImageInput.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteMicrovmImageOutput_imageIdentifier = DeleteMicrovmImageOutput.AddMember("imageIdentifier", _MicrovmImageIdentifier)
-
-	DeleteMicrovmImageOutput_state = DeleteMicrovmImageOutput.AddMember("state", MicrovmImageState)
-
-	DeleteMicrovmImageVersionInput_imageIdentifier = DeleteMicrovmImageVersionInput.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteMicrovmImageVersionInput_imageVersion = DeleteMicrovmImageVersionInput.AddMember("imageVersion", _NonBlankString, &smithytraits.HTTPLabel{})
-
-	DeleteMicrovmImageVersionOutput_imageIdentifier = DeleteMicrovmImageVersionOutput.AddMember("imageIdentifier", _MicrovmImageIdentifier)
-
-	DeleteMicrovmImageVersionOutput_imageVersion = DeleteMicrovmImageVersionOutput.AddMember("imageVersion", _NonBlankString)
-
-	DeleteMicrovmImageVersionOutput_state = DeleteMicrovmImageVersionOutput.AddMember("state", MicrovmImageVersionState)
-
-	GetMicrovmImageBuildInput_imageIdentifier = GetMicrovmImageBuildInput.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	GetMicrovmImageBuildInput_imageVersion = GetMicrovmImageBuildInput.AddMember("imageVersion", _NonBlankString, &smithytraits.HTTPLabel{})
-
-	GetMicrovmImageBuildInput_buildId = GetMicrovmImageBuildInput.AddMember("buildId", _NonBlankString, &smithytraits.HTTPLabel{})
-
-	GetMicrovmImageBuildOutput_imageArn = GetMicrovmImageBuildOutput.AddMember("imageArn", _NonBlankString)
-
-	GetMicrovmImageBuildOutput_imageVersion = GetMicrovmImageBuildOutput.AddMember("imageVersion", _NonBlankString)
-
-	GetMicrovmImageBuildOutput_buildId = GetMicrovmImageBuildOutput.AddMember("buildId", _NonBlankString)
-
-	GetMicrovmImageBuildOutput_buildState = GetMicrovmImageBuildOutput.AddMember("buildState", BuildState)
-
-	GetMicrovmImageBuildOutput_architecture = GetMicrovmImageBuildOutput.AddMember("architecture", Architecture)
-
-	GetMicrovmImageBuildOutput_chipset = GetMicrovmImageBuildOutput.AddMember("chipset", Chipset)
-
-	GetMicrovmImageBuildOutput_chipsetGeneration = GetMicrovmImageBuildOutput.AddMember("chipsetGeneration", _NonBlankString)
-
-	GetMicrovmImageBuildOutput_stateReason = GetMicrovmImageBuildOutput.AddMember("stateReason", smithyprelude.String)
-
-	GetMicrovmImageBuildOutput_createdAt = GetMicrovmImageBuildOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GetMicrovmImageBuildOutput_snapshotBuild = GetMicrovmImageBuildOutput.AddMember("snapshotBuild", SnapshotBuild)
-
-	GetMicrovmImageInput_imageIdentifier = GetMicrovmImageInput.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	GetMicrovmImageOutput_imageArn = GetMicrovmImageOutput.AddMember("imageArn", _NonBlankString)
-
-	GetMicrovmImageOutput_name = GetMicrovmImageOutput.AddMember("name", _ImageName)
-
-	GetMicrovmImageOutput_state = GetMicrovmImageOutput.AddMember("state", MicrovmImageState)
-
-	GetMicrovmImageOutput_latestActiveImageVersion = GetMicrovmImageOutput.AddMember("latestActiveImageVersion", _NonBlankString)
-
-	GetMicrovmImageOutput_latestFailedImageVersion = GetMicrovmImageOutput.AddMember("latestFailedImageVersion", _NonBlankString)
-
-	GetMicrovmImageOutput_createdAt = GetMicrovmImageOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GetMicrovmImageOutput_tags = GetMicrovmImageOutput.AddMember("tags", _Tags)
-
-	GetMicrovmImageOutput_updatedAt = GetMicrovmImageOutput.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	GetMicrovmImageVersionInput_imageIdentifier = GetMicrovmImageVersionInput.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	GetMicrovmImageVersionInput_imageVersion = GetMicrovmImageVersionInput.AddMember("imageVersion", _NonBlankString, &smithytraits.HTTPLabel{})
-
-	GetMicrovmImageVersionOutput_baseImageArn = GetMicrovmImageVersionOutput.AddMember("baseImageArn", _NonBlankString)
-
-	GetMicrovmImageVersionOutput_baseImageVersion = GetMicrovmImageVersionOutput.AddMember("baseImageVersion", _Version)
-
-	GetMicrovmImageVersionOutput_buildRoleArn = GetMicrovmImageVersionOutput.AddMember("buildRoleArn", _RoleArn)
-
-	GetMicrovmImageVersionOutput_description = GetMicrovmImageVersionOutput.AddMember("description", smithyprelude.String)
-
-	GetMicrovmImageVersionOutput_codeArtifact = GetMicrovmImageVersionOutput.AddMember("codeArtifact", CodeArtifact)
-
-	GetMicrovmImageVersionOutput_logging = GetMicrovmImageVersionOutput.AddMember("logging", Logging)
-
-	GetMicrovmImageVersionOutput_egressNetworkConnectors = GetMicrovmImageVersionOutput.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	GetMicrovmImageVersionOutput_cpuConfigurations = GetMicrovmImageVersionOutput.AddMember("cpuConfigurations", _CpuConfigurationList)
-
-	GetMicrovmImageVersionOutput_resources = GetMicrovmImageVersionOutput.AddMember("resources", _ResourcesList)
-
-	GetMicrovmImageVersionOutput_additionalOsCapabilities = GetMicrovmImageVersionOutput.AddMember("additionalOsCapabilities", _CapabilityList)
-
-	GetMicrovmImageVersionOutput_hooks = GetMicrovmImageVersionOutput.AddMember("hooks", Hooks)
-
-	GetMicrovmImageVersionOutput_environmentVariables = GetMicrovmImageVersionOutput.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	GetMicrovmImageVersionOutput_imageArn = GetMicrovmImageVersionOutput.AddMember("imageArn", _NonBlankString)
-
-	GetMicrovmImageVersionOutput_imageVersion = GetMicrovmImageVersionOutput.AddMember("imageVersion", _NonBlankString)
-
-	GetMicrovmImageVersionOutput_state = GetMicrovmImageVersionOutput.AddMember("state", MicrovmImageVersionState)
-
-	GetMicrovmImageVersionOutput_status = GetMicrovmImageVersionOutput.AddMember("status", MicrovmImageVersionStatus)
-
-	GetMicrovmImageVersionOutput_createdAt = GetMicrovmImageVersionOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GetMicrovmImageVersionOutput_updatedAt = GetMicrovmImageVersionOutput.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	GetMicrovmImageVersionOutput_stateReason = GetMicrovmImageVersionOutput.AddMember("stateReason", smithyprelude.String)
-
-	GetMicrovmImageVersionOutput_tags = GetMicrovmImageVersionOutput.AddMember("tags", _Tags)
-
-	GetMicrovmRequest_microvmIdentifier = GetMicrovmRequest.AddMember("microvmIdentifier", _MicrovmIdentifier, &smithytraits.HTTPLabel{})
-
-	GetMicrovmResponse_microvmId = GetMicrovmResponse.AddMember("microvmId", _MicrovmIdentifier)
-
-	GetMicrovmResponse_state = GetMicrovmResponse.AddMember("state", MicrovmState)
-
-	GetMicrovmResponse_endpoint = GetMicrovmResponse.AddMember("endpoint", smithyprelude.String)
-
-	GetMicrovmResponse_imageArn = GetMicrovmResponse.AddMember("imageArn", _MicrovmImageArn)
-
-	GetMicrovmResponse_imageVersion = GetMicrovmResponse.AddMember("imageVersion", _Version)
-
-	GetMicrovmResponse_executionRoleArn = GetMicrovmResponse.AddMember("executionRoleArn", _RoleArn)
-
-	GetMicrovmResponse_idlePolicy = GetMicrovmResponse.AddMember("idlePolicy", IdlePolicy)
-
-	GetMicrovmResponse_maximumDurationInSeconds = GetMicrovmResponse.AddMember("maximumDurationInSeconds", smithyprelude.Integer)
-
-	GetMicrovmResponse_startedAt = GetMicrovmResponse.AddMember("startedAt", smithyprelude.Timestamp)
-
-	GetMicrovmResponse_terminatedAt = GetMicrovmResponse.AddMember("terminatedAt", smithyprelude.Timestamp)
-
-	GetMicrovmResponse_stateReason = GetMicrovmResponse.AddMember("stateReason", _NonBlankString)
-
-	GetMicrovmResponse_ingressNetworkConnectors = GetMicrovmResponse.AddMember("ingressNetworkConnectors", _NetworkConnectorList)
-
-	GetMicrovmResponse_egressNetworkConnectors = GetMicrovmResponse.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	ListManagedMicrovmImagesInput_maxResults = ListManagedMicrovmImagesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListManagedMicrovmImagesInput_nextToken = ListManagedMicrovmImagesInput.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListManagedMicrovmImagesOutput_nextToken = ListManagedMicrovmImagesOutput.AddMember("nextToken", _String)
-
-	ListManagedMicrovmImagesOutput_items = ListManagedMicrovmImagesOutput.AddMember("items", _ManagedMicrovmImageSummaryList)
-
-	ListManagedMicrovmImageVersionsInput_maxResults = ListManagedMicrovmImageVersionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListManagedMicrovmImageVersionsInput_nextToken = ListManagedMicrovmImageVersionsInput.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListManagedMicrovmImageVersionsInput_imageIdentifier = ListManagedMicrovmImageVersionsInput.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	ListManagedMicrovmImageVersionsOutput_nextToken = ListManagedMicrovmImageVersionsOutput.AddMember("nextToken", _String)
-
-	ListManagedMicrovmImageVersionsOutput_items = ListManagedMicrovmImageVersionsOutput.AddMember("items", _ManagedMicrovmImageVersionList)
-
-	ListMicrovmImageBuildsInput_maxResults = ListMicrovmImageBuildsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMicrovmImageBuildsInput_nextToken = ListMicrovmImageBuildsInput.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMicrovmImageBuildsInput_imageIdentifier = ListMicrovmImageBuildsInput.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	ListMicrovmImageBuildsInput_imageVersion = ListMicrovmImageBuildsInput.AddMember("imageVersion", _NonBlankString, &smithytraits.HTTPLabel{})
-
-	ListMicrovmImageBuildsInput_architecture = ListMicrovmImageBuildsInput.AddMember("architecture", Architecture, &smithytraits.HTTPQuery{Name: "architecture"})
-
-	ListMicrovmImageBuildsInput_chipset = ListMicrovmImageBuildsInput.AddMember("chipset", Chipset, &smithytraits.HTTPQuery{Name: "chipset"})
-
-	ListMicrovmImageBuildsInput_chipsetGeneration = ListMicrovmImageBuildsInput.AddMember("chipsetGeneration", _NonBlankString, &smithytraits.HTTPQuery{Name: "chipsetGeneration"})
-
-	ListMicrovmImageBuildsOutput_nextToken = ListMicrovmImageBuildsOutput.AddMember("nextToken", _String)
-
-	ListMicrovmImageBuildsOutput_items = ListMicrovmImageBuildsOutput.AddMember("items", _MicrovmImageBuildSummaries)
-
-	ListMicrovmImagesRequest_maxResults = ListMicrovmImagesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMicrovmImagesRequest_nextToken = ListMicrovmImagesRequest.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMicrovmImagesRequest_nameFilter = ListMicrovmImagesRequest.AddMember("nameFilter", _NonBlankString, &smithytraits.HTTPQuery{Name: "nameFilter"})
-
-	ListMicrovmImagesResponse_nextToken = ListMicrovmImagesResponse.AddMember("nextToken", _String)
-
-	ListMicrovmImagesResponse_items = ListMicrovmImagesResponse.AddMember("items", _MicrovmImageSummaries)
-
-	ListMicrovmImageVersionsInput_maxResults = ListMicrovmImageVersionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMicrovmImageVersionsInput_nextToken = ListMicrovmImageVersionsInput.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMicrovmImageVersionsInput_imageIdentifier = ListMicrovmImageVersionsInput.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	ListMicrovmImageVersionsOutput_nextToken = ListMicrovmImageVersionsOutput.AddMember("nextToken", _String)
-
-	ListMicrovmImageVersionsOutput_items = ListMicrovmImageVersionsOutput.AddMember("items", _MicrovmImageVersionSummaryList)
-
-	ListMicrovmsRequest_maxResults = ListMicrovmsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMicrovmsRequest_nextToken = ListMicrovmsRequest.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMicrovmsRequest_imageIdentifier = ListMicrovmsRequest.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPQuery{Name: "imageIdentifier"})
-
-	ListMicrovmsRequest_imageVersion = ListMicrovmsRequest.AddMember("imageVersion", smithyprelude.String, &smithytraits.HTTPQuery{Name: "imageVersion"})
-
-	ListMicrovmsResponse_nextToken = ListMicrovmsResponse.AddMember("nextToken", _String)
-
-	ListMicrovmsResponse_items = ListMicrovmsResponse.AddMember("items", _MicrovmItemList)
-
-	ListTagsRequest_Resource = ListTagsRequest.AddMember("Resource", _TaggableResource, &smithytraits.HTTPLabel{})
-
-	ListTagsResponse_Tags = ListTagsResponse.AddMember("Tags", _Tags)
-
-	ResumeMicrovmRequest_microvmIdentifier = ResumeMicrovmRequest.AddMember("microvmIdentifier", _MicrovmIdentifier, &smithytraits.HTTPLabel{})
-
-	RunMicrovmRequest_ingressNetworkConnectors = RunMicrovmRequest.AddMember("ingressNetworkConnectors", _NetworkConnectorList)
-
-	RunMicrovmRequest_egressNetworkConnectors = RunMicrovmRequest.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	RunMicrovmRequest_imageIdentifier = RunMicrovmRequest.AddMember("imageIdentifier", _MicrovmImageIdentifier)
-
-	RunMicrovmRequest_imageVersion = RunMicrovmRequest.AddMember("imageVersion", _Version)
-
-	RunMicrovmRequest_executionRoleArn = RunMicrovmRequest.AddMember("executionRoleArn", _RoleArn)
-
-	RunMicrovmRequest_idlePolicy = RunMicrovmRequest.AddMember("idlePolicy", IdlePolicy)
-
-	RunMicrovmRequest_logging = RunMicrovmRequest.AddMember("logging", Logging)
-
-	RunMicrovmRequest_runHookPayload = RunMicrovmRequest.AddMember("runHookPayload", _RunHookPayload)
-
-	RunMicrovmRequest_maximumDurationInSeconds = RunMicrovmRequest.AddMember("maximumDurationInSeconds", smithyprelude.Integer)
-
-	RunMicrovmRequest_clientToken = RunMicrovmRequest.AddMember("clientToken", smithyprelude.String)
-
-	RunMicrovmResponse_microvmId = RunMicrovmResponse.AddMember("microvmId", _MicrovmIdentifier)
-
-	RunMicrovmResponse_state = RunMicrovmResponse.AddMember("state", MicrovmState)
-
-	RunMicrovmResponse_endpoint = RunMicrovmResponse.AddMember("endpoint", smithyprelude.String)
-
-	RunMicrovmResponse_imageArn = RunMicrovmResponse.AddMember("imageArn", _MicrovmImageArn)
-
-	RunMicrovmResponse_imageVersion = RunMicrovmResponse.AddMember("imageVersion", _Version)
-
-	RunMicrovmResponse_executionRoleArn = RunMicrovmResponse.AddMember("executionRoleArn", _RoleArn)
-
-	RunMicrovmResponse_idlePolicy = RunMicrovmResponse.AddMember("idlePolicy", IdlePolicy)
-
-	RunMicrovmResponse_maximumDurationInSeconds = RunMicrovmResponse.AddMember("maximumDurationInSeconds", smithyprelude.Integer)
-
-	RunMicrovmResponse_startedAt = RunMicrovmResponse.AddMember("startedAt", smithyprelude.Timestamp)
-
-	RunMicrovmResponse_terminatedAt = RunMicrovmResponse.AddMember("terminatedAt", smithyprelude.Timestamp)
-
-	RunMicrovmResponse_stateReason = RunMicrovmResponse.AddMember("stateReason", _NonBlankString)
-
-	RunMicrovmResponse_ingressNetworkConnectors = RunMicrovmResponse.AddMember("ingressNetworkConnectors", _NetworkConnectorList)
-
-	RunMicrovmResponse_egressNetworkConnectors = RunMicrovmResponse.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	SuspendMicrovmRequest_microvmIdentifier = SuspendMicrovmRequest.AddMember("microvmIdentifier", _MicrovmIdentifier, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Resource = TagResourceRequest.AddMember("Resource", _TaggableResource, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	TerminateMicrovmRequest_microvmIdentifier = TerminateMicrovmRequest.AddMember("microvmIdentifier", _MicrovmIdentifier, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_Resource = UntagResourceRequest.AddMember("Resource", _TaggableResource, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateMicrovmImageRequest_baseImageArn = UpdateMicrovmImageRequest.AddMember("baseImageArn", _NonBlankString)
-
-	UpdateMicrovmImageRequest_baseImageVersion = UpdateMicrovmImageRequest.AddMember("baseImageVersion", _Version)
-
-	UpdateMicrovmImageRequest_buildRoleArn = UpdateMicrovmImageRequest.AddMember("buildRoleArn", _RoleArn)
-
-	UpdateMicrovmImageRequest_description = UpdateMicrovmImageRequest.AddMember("description", smithyprelude.String)
-
-	UpdateMicrovmImageRequest_codeArtifact = UpdateMicrovmImageRequest.AddMember("codeArtifact", CodeArtifact)
-
-	UpdateMicrovmImageRequest_logging = UpdateMicrovmImageRequest.AddMember("logging", Logging)
-
-	UpdateMicrovmImageRequest_egressNetworkConnectors = UpdateMicrovmImageRequest.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	UpdateMicrovmImageRequest_cpuConfigurations = UpdateMicrovmImageRequest.AddMember("cpuConfigurations", _CpuConfigurationList)
-
-	UpdateMicrovmImageRequest_resources = UpdateMicrovmImageRequest.AddMember("resources", _ResourcesList)
-
-	UpdateMicrovmImageRequest_additionalOsCapabilities = UpdateMicrovmImageRequest.AddMember("additionalOsCapabilities", _CapabilityList)
-
-	UpdateMicrovmImageRequest_hooks = UpdateMicrovmImageRequest.AddMember("hooks", Hooks)
-
-	UpdateMicrovmImageRequest_environmentVariables = UpdateMicrovmImageRequest.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	UpdateMicrovmImageRequest_imageIdentifier = UpdateMicrovmImageRequest.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateMicrovmImageRequest_clientToken = UpdateMicrovmImageRequest.AddMember("clientToken", smithyprelude.String)
-
-	UpdateMicrovmImageResponse_imageArn = UpdateMicrovmImageResponse.AddMember("imageArn", _NonBlankString)
-
-	UpdateMicrovmImageResponse_name = UpdateMicrovmImageResponse.AddMember("name", _ImageName)
-
-	UpdateMicrovmImageResponse_state = UpdateMicrovmImageResponse.AddMember("state", MicrovmImageState)
-
-	UpdateMicrovmImageResponse_latestActiveImageVersion = UpdateMicrovmImageResponse.AddMember("latestActiveImageVersion", _NonBlankString)
-
-	UpdateMicrovmImageResponse_latestFailedImageVersion = UpdateMicrovmImageResponse.AddMember("latestFailedImageVersion", _NonBlankString)
-
-	UpdateMicrovmImageResponse_createdAt = UpdateMicrovmImageResponse.AddMember("createdAt", smithyprelude.Timestamp)
-
-	UpdateMicrovmImageResponse_baseImageArn = UpdateMicrovmImageResponse.AddMember("baseImageArn", _NonBlankString)
-
-	UpdateMicrovmImageResponse_baseImageVersion = UpdateMicrovmImageResponse.AddMember("baseImageVersion", _Version)
-
-	UpdateMicrovmImageResponse_buildRoleArn = UpdateMicrovmImageResponse.AddMember("buildRoleArn", _RoleArn)
-
-	UpdateMicrovmImageResponse_description = UpdateMicrovmImageResponse.AddMember("description", smithyprelude.String)
-
-	UpdateMicrovmImageResponse_codeArtifact = UpdateMicrovmImageResponse.AddMember("codeArtifact", CodeArtifact)
-
-	UpdateMicrovmImageResponse_logging = UpdateMicrovmImageResponse.AddMember("logging", Logging)
-
-	UpdateMicrovmImageResponse_egressNetworkConnectors = UpdateMicrovmImageResponse.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	UpdateMicrovmImageResponse_cpuConfigurations = UpdateMicrovmImageResponse.AddMember("cpuConfigurations", _CpuConfigurationList)
-
-	UpdateMicrovmImageResponse_resources = UpdateMicrovmImageResponse.AddMember("resources", _ResourcesList)
-
-	UpdateMicrovmImageResponse_additionalOsCapabilities = UpdateMicrovmImageResponse.AddMember("additionalOsCapabilities", _CapabilityList)
-
-	UpdateMicrovmImageResponse_hooks = UpdateMicrovmImageResponse.AddMember("hooks", Hooks)
-
-	UpdateMicrovmImageResponse_environmentVariables = UpdateMicrovmImageResponse.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	UpdateMicrovmImageResponse_updatedAt = UpdateMicrovmImageResponse.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	UpdateMicrovmImageResponse_imageVersion = UpdateMicrovmImageResponse.AddMember("imageVersion", _NonBlankString)
-
-	UpdateMicrovmImageVersionRequest_imageIdentifier = UpdateMicrovmImageVersionRequest.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateMicrovmImageVersionRequest_imageVersion = UpdateMicrovmImageVersionRequest.AddMember("imageVersion", _NonBlankString, &smithytraits.HTTPLabel{})
-
-	UpdateMicrovmImageVersionRequest_status = UpdateMicrovmImageVersionRequest.AddMember("status", MicrovmImageVersionStatus)
-
-	UpdateMicrovmImageVersionResponse_baseImageArn = UpdateMicrovmImageVersionResponse.AddMember("baseImageArn", _NonBlankString)
-
-	UpdateMicrovmImageVersionResponse_baseImageVersion = UpdateMicrovmImageVersionResponse.AddMember("baseImageVersion", _Version)
-
-	UpdateMicrovmImageVersionResponse_buildRoleArn = UpdateMicrovmImageVersionResponse.AddMember("buildRoleArn", _RoleArn)
-
-	UpdateMicrovmImageVersionResponse_description = UpdateMicrovmImageVersionResponse.AddMember("description", smithyprelude.String)
-
-	UpdateMicrovmImageVersionResponse_codeArtifact = UpdateMicrovmImageVersionResponse.AddMember("codeArtifact", CodeArtifact)
-
-	UpdateMicrovmImageVersionResponse_logging = UpdateMicrovmImageVersionResponse.AddMember("logging", Logging)
-
-	UpdateMicrovmImageVersionResponse_egressNetworkConnectors = UpdateMicrovmImageVersionResponse.AddMember("egressNetworkConnectors", _NetworkConnectorList)
-
-	UpdateMicrovmImageVersionResponse_cpuConfigurations = UpdateMicrovmImageVersionResponse.AddMember("cpuConfigurations", _CpuConfigurationList)
-
-	UpdateMicrovmImageVersionResponse_resources = UpdateMicrovmImageVersionResponse.AddMember("resources", _ResourcesList)
-
-	UpdateMicrovmImageVersionResponse_additionalOsCapabilities = UpdateMicrovmImageVersionResponse.AddMember("additionalOsCapabilities", _CapabilityList)
-
-	UpdateMicrovmImageVersionResponse_hooks = UpdateMicrovmImageVersionResponse.AddMember("hooks", Hooks)
-
-	UpdateMicrovmImageVersionResponse_environmentVariables = UpdateMicrovmImageVersionResponse.AddMember("environmentVariables", _EnvironmentVariableMap)
-
-	UpdateMicrovmImageVersionResponse_imageArn = UpdateMicrovmImageVersionResponse.AddMember("imageArn", _NonBlankString)
-
-	UpdateMicrovmImageVersionResponse_imageVersion = UpdateMicrovmImageVersionResponse.AddMember("imageVersion", _NonBlankString)
-
-	UpdateMicrovmImageVersionResponse_state = UpdateMicrovmImageVersionResponse.AddMember("state", MicrovmImageVersionState)
-
-	UpdateMicrovmImageVersionResponse_status = UpdateMicrovmImageVersionResponse.AddMember("status", MicrovmImageVersionStatus)
-
-	UpdateMicrovmImageVersionResponse_createdAt = UpdateMicrovmImageVersionResponse.AddMember("createdAt", smithyprelude.Timestamp)
-
-	UpdateMicrovmImageVersionResponse_updatedAt = UpdateMicrovmImageVersionResponse.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	UpdateMicrovmImageVersionResponse_stateReason = UpdateMicrovmImageVersionResponse.AddMember("stateReason", smithyprelude.String)
-
-	UpdateMicrovmImageVersionResponse_tags = UpdateMicrovmImageVersionResponse.AddMember("tags", _Tags)
-
+const blob = "" +
+	"ListManagedMicrovmImageVersionsOutputListManagedMicrovmImageVersionsInputCreateMicrovmShellAuthToken" +
+	"ResponseCreateMicrovmShellAuthTokenRequestUpdateMicrovmImageVersionResponseManagedMicrovmImageVersio" +
+	"nStatusUpdateMicrovmImageVersionRequestDeleteMicrovmImageVersionOutputCreateMicrovmAuthTokenResponse" +
+	"DeleteMicrovmImageVersionInputInvalidParameterValueExceptionListManagedMicrovmImagesOutputListMicrov" +
+	"mImageVersionsOutputManagedMicrovmImageSummaryListManagedMicrovmImageVersionListMicrovmImageVersionS" +
+	"ummaryListCreateMicrovmAuthTokenRequestInsufficientCapacityExceptionListManagedMicrovmImagesInputLis" +
+	"tMicrovmImageVersionsInputServiceQuotaExceededExceptionGetMicrovmImageVersionOutputListMicrovmImageB" +
+	"uildsOutputGetMicrovmImageVersionInputListMicrovmImageBuildsInputCreateMicrovmImageResponseGetMicrov" +
+	"mImageBuildOutputMicrovmImageBuildSummariesUpdateMicrovmImageResponseCreateMicrovmImageRequestGetMic" +
+	"rovmImageBuildInputListMicrovmImagesResponseResourceConflictExceptionResourceNotFoundExceptionUpdate" +
+	"MicrovmImageRequestmemorySnapshotSizeInBytesterminateTimeoutInSecondsDeleteMicrovmImageOutputEnviron" +
+	"mentVariableValueListMicrovmImagesRequestMicrovmImageBuildSummaryMicrovmImageVersionStateTerminateMi" +
+	"crovmResponseTooManyRequestsExceptionadditionalOsCapabilitiesingressNetworkConnectorslatestActiveIma" +
+	"geVersionlatestFailedImageVersionmaximumDurationInSecondssuspendedDurationSecondsvalidateTimeoutInSe" +
+	"condsDeleteMicrovmImageInputInternalServerExceptionListOfPortSpecificationTerminateMicrovmRequestdis" +
+	"kSnapshotSizeInBytesegressNetworkConnectorssuspendTimeoutInSecondsEnvironmentVariableKeyEnvironmentV" +
+	"ariableMapMicrovmImageIdentifierSuspendMicrovmResponsecodeInstallSizeInBytesmaxIdleDurationSecondsre" +
+	"sumeTimeoutInSecondsAccessDeniedExceptionGetMicrovmImageOutputMicrovmImageSummariesResumeMicrovmResp" +
+	"onseSuspendMicrovmRequestreadyTimeoutInSecondsCpuConfigurationListGetMicrovmImageInputListMicrovmsRe" +
+	"sponseNetworkConnectorListResumeMicrovmRequestUntagResourceRequestenvironmentVariablesListMicrovmsRe" +
+	"questThrottlingExceptionValidationExceptionexpirationInMinutesrunTimeoutInSecondsGetMicrovmResponseR" +
+	"unMicrovmResponseTagResourceRequestminimumMemoryInMiBCloudWatchLoggingGetMicrovmRequestMicrovmIdenti" +
+	"fierMicrovmImageHooksMicrovmImageStateRunMicrovmRequestautoResumeEnabledchipsetGenerationcpuConfigur" +
+	"ationsmicrovmIdentifiermicrovmImageHooksretryAfterSecondsListTagsResponseServiceExceptionTaggableRes" +
+	"ourcebaseImageVersionexecutionRoleArnListTagsRequestLoggingDisabledMicrovmImageArnMicrovmItemListPos" +
+	"itiveIntegerimageIdentifierAuthTokenValueCapabilityListLambdaMicrovmsNonBlankStringRunHookPayloadrun" +
+	"HookPayloadCREATE_FAILEDDELETE_FAILEDResourcesListSnapshotBuildUPDATE_FAILEDsnapshotBuildArchitectur" +
+	"eAuthTokenKeyCodeArtifactMicrovmHooksMicrovmStateallowedPortsarchitecturebaseImageArnbuildRoleArncod" +
+	"eArtifactimageVersionmicrovmHooksresourceTypeterminatedAtIN_PROGRESSTERMINATINGclientTokendescriptio" +
+	"nserviceCodestateReasonBuildStateDEPRECATEDIdlePolicyPortNumberSUCCESSFULSUSPENDINGTERMINATEDTagKeyL" +
+	"istTokenPartsbuildStatecloudWatchidlePolicymaxResultsnameFilterresourceIdAVAILABLEHookStateImageName" +
+	"PortRangeSUSPENDEDTimestampauthTokencreatedAtlogStreamnextTokenquotaCoderesourcesstartPortstartedAtu" +
+	"pdatedAtCREATINGDELETINGDISABLEDGRAVITONINACTIVETagValueUPDATINGallPortsdisabledendpointimageArnlogG" +
+	"roupBooleanCREATEDChipsetDELETEDENABLEDRUNNINGTagKeysUPDATEDbuildIdendPortloggingmessageARM_64member" +
+	"statushooksitemsrangevalueLongUnitporttagsALLkeyuri"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.lambdamicrovms", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 270, Target: 0, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 765, Target: 1, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 73, Target: 2, Traits: 2, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 239, Target: 3, Traits: 3, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 239, Target: 4, Traits: 4, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 655, Target: 5, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 655, Target: 6, Traits: 6, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 791, Target: 7, Traits: 7, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 655, Target: 8, Traits: 8, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 360, Target: 9, Traits: 9, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 10, Traits: 10, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 683, Target: 11, Traits: 11, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 919, Target: 12, Traits: 12, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 390, Target: 13, Traits: 13, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1886, Target: 14, Traits: 14, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2357, Target: 15, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1783, Target: 16, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2099, Target: 17, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1632, Target: 18, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2117, Target: 19, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1189, Target: 20, Traits: 20, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1946, Target: 21, Traits: 21, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 142, Target: 22, Traits: 22, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 142, Target: 23, Traits: 23, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2555, Target: 24, Traits: 24, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1720, Target: 25, Traits: 25, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2689, Target: 27, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3388, Target: 541, Traits: 24, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2701, Target: 29, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2527, Target: 30, Traits: 26, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2923, Target: 31, Traits: 24, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2976, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2857, Target: 541, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2963, Target: 541, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2618, Target: 541, Traits: 24, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2541, Target: 36, Traits: 24, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3442, Target: 541, Traits: 24, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2541, Target: 38, Traits: 24, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 36, Traits: 24, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3318, Target: 40, Traits: 24, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3232, Target: 541, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2153, Target: 42, Traits: 24, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3296, Target: 239, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3145, Target: 239, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2713, Target: 45, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3448, Target: 203, Traits: 24, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 952, Target: 47, Traits: 27, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3063, Target: 540, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2833, Target: 540, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1846, Target: 51, Traits: 24, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2761, Target: 27, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1846, Target: 53, Traits: 24, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 51, Traits: 24, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1566, Target: 55, Traits: 24, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1588, Target: 56, Traits: 24, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3445, Target: 55, Traits: 24, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3421, Target: 59, Traits: 28, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1093, Target: 59, Traits: 26, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2216, Target: 60, Traits: 24, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3434, Target: 542, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2821, Target: 103, Traits: 24, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2323, Target: 126, Traits: 24, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3082, Target: 64, Traits: 24, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3224, Target: 541, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3332, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2943, Target: 67, Traits: 24, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1676, Target: 542, Traits: 24, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1357, Target: 542, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2255, Target: 543, Traits: 24, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3091, Target: 71, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 539, Target: 72, Traits: 29, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1428, Target: 74, Traits: 29, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2340, Target: 542, Traits: 30, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 330, Target: 77, Traits: 31, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2841, Target: 540, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1451, Target: 80, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 208, Traits: 24, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2163, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3272, Target: 85, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3023, Target: 42, Traits: 24, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2452, Target: 85, Traits: 24, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 420, Target: 86, Traits: 24, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3199, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 420, Target: 90, Traits: 24, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 86, Traits: 24, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4, Target: 92, Traits: 24, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3400, Target: 100, Traits: 24, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3199, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 450, Target: 98, Traits: 24, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 92, Traits: 24, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 175, Target: 100, Traits: 24, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3073, Target: 541, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2933, Target: 541, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2725, Target: 103, Traits: 24, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2062, Target: 64, Traits: 24, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2062, Target: 542, Traits: 24, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1698, Target: 64, Traits: 24, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1698, Target: 542, Traits: 24, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1357, Target: 64, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1543, Target: 542, Traits: 24, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1044, Target: 64, Traits: 24, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1044, Target: 542, Traits: 24, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2187, Target: 112, Traits: 24, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2467, Target: 113, Traits: 24, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 817, Target: 114, Traits: 24, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 116, Traits: 24, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1141, Target: 116, Traits: 24, StrLen: 24, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3360, Target: 203, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3013, Target: 31, Traits: 24, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2761, Target: 27, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2272, Target: 40, Traits: 24, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2272, Target: 203, Traits: 24, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2204, Target: 126, Traits: 24, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1825, Target: 64, Traits: 24, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1825, Target: 542, Traits: 24, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1381, Target: 64, Traits: 24, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1381, Target: 542, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1610, Target: 131, Traits: 24, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2221, Target: 132, Traits: 24, StrLen: 17, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3208, Target: 541, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3311, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2611, Target: 541, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3256, Target: 541, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3353, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 541, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3216, Target: 541, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2624, Target: 541, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3325, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1762, Target: 142, Traits: 24, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 144, Traits: 24, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 427, Target: 144, Traits: 24, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3053, Target: 71, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 132, Traits: 24, StrLen: 5, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1285, Target: 203, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1309, Target: 203, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1165, Target: 151, Traits: 24, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2976, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2857, Target: 541, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2963, Target: 541, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2618, Target: 541, Traits: 24, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3216, Target: 541, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3325, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2624, Target: 541, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 182, Target: 159, Traits: 24, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3242, Target: 541, Traits: 24, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3240, Target: 541, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 480, Target: 162, Traits: 24, StrLen: 26, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2405, Target: 261, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2785, Target: 224, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2890, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2797, Target: 45, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3374, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2289, Target: 53, Traits: 24, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3172, Target: 222, Traits: 24, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1237, Target: 38, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3406, Target: 60, Traits: 24, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1966, Target: 56, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 151, Traits: 24, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3400, Target: 159, Traits: 24, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3199, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2912, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3438, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 480, Target: 183, Traits: 24, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 162, Traits: 24, StrLen: 6, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2482, Target: 185, Traits: 24, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 193, Traits: 24, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3288, Target: 113, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 261, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3190, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2482, Target: 191, Traits: 24, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 185, Traits: 24, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2737, Target: 193, Traits: 24, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2976, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3339, Target: 541, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2973, Target: 541, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3109, Target: 541, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2868, Target: 541, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2983, Target: 541, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1268, Target: 200, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1906, Target: 201, Traits: 24, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 200, Traits: 24, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2569, Target: 203, Traits: 24, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2953, Target: 204, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3100, Target: 205, Traits: 24, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3181, Target: 204, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3367, Target: 204, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1457, Target: 208, Traits: 24, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3434, Target: 204, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3416, Target: 205, Traits: 24, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3264, Target: 541, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2497, Target: 212, Traits: 24, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 944, Target: 213, Traits: 27, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2841, Target: 540, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 969, Target: 216, Traits: 32, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2833, Target: 540, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3063, Target: 540, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2637, Target: 220, Traits: 24, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2135, Target: 542, Traits: 24, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2637, Target: 222, Traits: 24, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 220, Traits: 24, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2430, Target: 224, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2583, Target: 225, Traits: 26, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2373, Target: 226, Traits: 29, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2841, Target: 540, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 626, Target: 229, Traits: 33, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3063, Target: 540, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2833, Target: 540, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3163, Target: 540, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2650, Target: 235, Traits: 24, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 545, Traits: 24, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1654, Target: 545, Traits: 24, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1497, Target: 545, Traits: 24, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2577, Target: 239, Traits: 24, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2389, Target: 240, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2993, Target: 241, Traits: 24, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2993, Target: 242, Traits: 24, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3394, Target: 241, Traits: 34, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2361, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3445, Target: 241, Traits: 24, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3421, Target: 247, Traits: 24, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3248, Target: 247, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2005, Target: 248, Traits: 35, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3163, Target: 540, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2340, Target: 542, Traits: 30, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3003, Target: 253, Traits: 24, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3445, Target: 29, Traits: 24, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3421, Target: 30, Traits: 28, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1213, Target: 256, Traits: 35, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2841, Target: 540, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2024, Target: 259, Traits: 31, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3381, Target: 540, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 23, Target: 261, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 510, Target: 262, Traits: 24, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 36, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2043, Target: 212, Traits: 24, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2749, Target: 80, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 270, Target: 266, Traits: 24, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3127, Target: 253, Traits: 24, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 869, Target: 268, Traits: 24, StrLen: 25, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2405, Target: 261, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2785, Target: 224, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2890, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2797, Target: 45, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3374, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2289, Target: 53, Traits: 24, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3172, Target: 222, Traits: 24, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1237, Target: 38, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3406, Target: 60, Traits: 24, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1966, Target: 56, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3053, Target: 71, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3438, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2879, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 765, Target: 284, Traits: 24, StrLen: 26, Count: 21, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3053, Target: 71, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 132, Traits: 24, StrLen: 5, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1285, Target: 203, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1309, Target: 203, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2773, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2405, Target: 261, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2785, Target: 224, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2890, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2797, Target: 45, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3374, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2289, Target: 53, Traits: 24, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3172, Target: 222, Traits: 24, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1237, Target: 38, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3406, Target: 60, Traits: 24, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1966, Target: 56, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3438, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3199, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 108, Target: 306, Traits: 24, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 36, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2043, Target: 212, Traits: 24, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 73, Target: 309, Traits: 24, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3127, Target: 253, Traits: 24, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1405, Target: 311, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1069, Target: 313, Traits: 24, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2512, Target: 131, Traits: 24, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 132, Traits: 24, StrLen: 5, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 300, Target: 316, Traits: 24, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 36, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 239, Target: 319, Traits: 24, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2512, Target: 131, Traits: 24, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 151, Traits: 24, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 894, Target: 323, Traits: 24, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 36, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3360, Target: 203, Traits: 36, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 791, Target: 327, Traits: 24, StrLen: 26, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3360, Target: 203, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3013, Target: 31, Traits: 24, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2761, Target: 27, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2272, Target: 40, Traits: 24, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2272, Target: 203, Traits: 24, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2676, Target: 235, Traits: 24, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1866, Target: 338, Traits: 24, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1741, Target: 340, Traits: 24, StrLen: 21, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3053, Target: 71, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 132, Traits: 24, StrLen: 5, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1285, Target: 203, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1309, Target: 203, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3438, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3199, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 711, Target: 349, Traits: 24, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 36, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 655, Target: 352, Traits: 24, StrLen: 28, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2405, Target: 261, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2785, Target: 224, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2890, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2797, Target: 45, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3374, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2289, Target: 53, Traits: 24, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3172, Target: 222, Traits: 24, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1237, Target: 38, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3406, Target: 60, Traits: 24, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1966, Target: 56, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 151, Traits: 24, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3400, Target: 159, Traits: 24, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3199, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2912, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3438, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2170, Target: 373, Traits: 24, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 36, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2081, Target: 375, Traits: 24, StrLen: 18, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 193, Traits: 24, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3280, Target: 540, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3288, Target: 113, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 261, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2421, Target: 224, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3033, Target: 67, Traits: 24, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1333, Target: 542, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3190, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2845, Target: 544, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2912, Target: 203, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1261, Target: 201, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 568, Target: 389, Traits: 24, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3043, Target: 542, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3154, Target: 239, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 360, Target: 392, Traits: 24, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3154, Target: 239, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3411, Target: 90, Traits: 24, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 37, Target: 395, Traits: 24, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3043, Target: 542, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3154, Target: 239, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 399, Traits: 24, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3154, Target: 239, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3411, Target: 98, Traits: 24, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 738, Target: 402, Traits: 24, StrLen: 27, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3043, Target: 542, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3154, Target: 239, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 36, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2761, Target: 27, Traits: 39, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2272, Target: 40, Traits: 40, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2272, Target: 203, Traits: 41, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 683, Target: 410, Traits: 24, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3154, Target: 239, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3411, Target: 114, Traits: 24, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1117, Target: 413, Traits: 24, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3043, Target: 542, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3154, Target: 239, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3053, Target: 203, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 919, Target: 417, Traits: 24, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3154, Target: 239, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3411, Target: 142, Traits: 24, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 597, Target: 420, Traits: 24, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3043, Target: 542, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3154, Target: 239, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 390, Target: 424, Traits: 24, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3154, Target: 239, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3411, Target: 183, Traits: 24, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1986, Target: 427, Traits: 24, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3043, Target: 542, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3154, Target: 239, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2512, Target: 131, Traits: 43, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 540, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1886, Target: 432, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3154, Target: 239, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3411, Target: 191, Traits: 24, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2437, Target: 435, Traits: 24, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 944, Target: 240, Traits: 36, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2357, Target: 437, Traits: 24, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2361, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1926, Target: 439, Traits: 24, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 36, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1783, Target: 441, Traits: 24, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2238, Target: 442, Traits: 24, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1261, Target: 201, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2512, Target: 131, Traits: 24, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 261, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2421, Target: 224, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3033, Target: 67, Traits: 24, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3374, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2597, Target: 225, Traits: 28, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1333, Target: 542, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2879, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2099, Target: 453, Traits: 24, StrLen: 18, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 193, Traits: 24, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3280, Target: 540, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3288, Target: 113, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 261, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2421, Target: 224, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3033, Target: 67, Traits: 24, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1333, Target: 542, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3190, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2845, Target: 544, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2912, Target: 203, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1261, Target: 201, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1804, Target: 467, Traits: 24, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 36, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1632, Target: 469, Traits: 24, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2117, Target: 470, Traits: 24, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 944, Target: 240, Traits: 36, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2361, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1474, Target: 473, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2306, Target: 112, Traits: 36, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1189, Target: 475, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1946, Target: 476, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 944, Target: 240, Traits: 36, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3346, Target: 242, Traits: 45, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 994, Target: 479, Traits: 24, StrLen: 25, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2405, Target: 261, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2785, Target: 224, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2890, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2797, Target: 45, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3374, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2289, Target: 53, Traits: 24, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3172, Target: 222, Traits: 24, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1237, Target: 38, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3406, Target: 60, Traits: 24, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1966, Target: 56, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2879, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 843, Target: 494, Traits: 24, StrLen: 26, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3053, Target: 71, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 132, Traits: 24, StrLen: 5, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1285, Target: 203, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1309, Target: 203, Traits: 24, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2773, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2405, Target: 261, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2785, Target: 224, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2890, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2797, Target: 45, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3374, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2289, Target: 53, Traits: 24, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3172, Target: 222, Traits: 24, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1237, Target: 38, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3406, Target: 60, Traits: 24, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1966, Target: 56, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3199, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 207, Target: 515, Traits: 24, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2512, Target: 131, Traits: 36, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 36, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3400, Target: 159, Traits: 24, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 142, Target: 519, Traits: 24, StrLen: 33, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2405, Target: 261, Traits: 24, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2785, Target: 224, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2890, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2797, Target: 45, Traits: 24, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3374, Target: 82, Traits: 24, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1520, Target: 201, Traits: 24, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2289, Target: 53, Traits: 24, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3172, Target: 222, Traits: 24, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1237, Target: 38, Traits: 24, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3406, Target: 60, Traits: 24, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1966, Target: 56, Traits: 24, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3288, Target: 203, Traits: 24, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2809, Target: 203, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2912, Target: 151, Traits: 24, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3400, Target: 159, Traits: 24, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3136, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3199, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2912, Target: 540, Traits: 24, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3438, Target: 244, Traits: 24, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2577, Target: 540, Traits: 24, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 3430, Target: 541, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 2505, Target: 542, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 3304, Target: 543, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 3118, Target: 544, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 3426, Target: 545, Traits: 24, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2025-09-09/microvms/{microvmIdentifier}/auth-token",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2025-09-09/microvm-images",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2025-09-09/microvms/{microvmIdentifier}/shell-auth-token",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/microvms/{microvmIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}/builds/{buildId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/managed-microvm-images",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/managed-microvm-images/{imageIdentifier}/versions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}/builds",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/microvm-images",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2025-09-09/microvms",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/2017-03-31/tags/{Resource}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2025-09-09/microvms/{microvmIdentifier}/resume",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2025-09-09/microvms",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2025-09-09/microvms/{microvmIdentifier}/suspend",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2017-03-31/tags/{Resource}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/2025-09-09/microvms/{microvmIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/2017-03-31/tags/{Resource}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/2025-09-09/microvm-images/{imageIdentifier}/versions/{imageVersion}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Key"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "architecture"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "chipset"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "chipsetGeneration"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nameFilter"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "imageIdentifier"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "imageVersion"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [546]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+}
+
+var CreateMicrovmAuthToken = &handles[0]
+
+var CreateMicrovmImage = &handles[1]
+
+var CreateMicrovmShellAuthToken = &handles[2]
+
+var DeleteMicrovmImage = &handles[3]
+
+var DeleteMicrovmImageVersion = &handles[4]
+
+var GetMicrovm = &handles[5]
+
+var GetMicrovmImage = &handles[6]
+
+var GetMicrovmImageBuild = &handles[7]
+
+var GetMicrovmImageVersion = &handles[8]
+
+var ListManagedMicrovmImages = &handles[9]
+
+var ListManagedMicrovmImageVersions = &handles[10]
+
+var ListMicrovmImageBuilds = &handles[11]
+
+var ListMicrovmImages = &handles[12]
+
+var ListMicrovmImageVersions = &handles[13]
+
+var ListMicrovms = &handles[14]
+
+var ListTags = &handles[15]
+
+var ResumeMicrovm = &handles[16]
+
+var RunMicrovm = &handles[17]
+
+var SuspendMicrovm = &handles[18]
+
+var TagResource = &handles[19]
+
+var TerminateMicrovm = &handles[20]
+
+var UntagResource = &handles[21]
+
+var UpdateMicrovmImage = &handles[22]
+
+var UpdateMicrovmImageVersion = &handles[23]
+
+var _LambdaMicrovms = &handles[24]
+
+var AccessDeniedException = &handles[25]
+var AccessDeniedException_message = &handles[26]
+
+var Architecture = &handles[27]
+var Architecture_ARM_64 = &handles[28]
+
+var _AuthTokenKey = &handles[29]
+
+var _AuthTokenValue = &handles[30]
+
+var BuildState = &handles[31]
+var BuildState_PENDING = &handles[32]
+var BuildState_IN_PROGRESS = &handles[33]
+var BuildState_SUCCESSFUL = &handles[34]
+var BuildState_FAILED = &handles[35]
+
+var Capability = &handles[36]
+var Capability_ALL = &handles[37]
+
+var _CapabilityList = &handles[38]
+var _CapabilityList_member = &handles[39]
+
+var Chipset = &handles[40]
+var Chipset_GRAVITON = &handles[41]
+
+var CloudWatchLogging = &handles[42]
+var CloudWatchLogging_logGroup = &handles[43]
+var CloudWatchLogging_logStream = &handles[44]
+
+var CodeArtifact = &handles[45]
+var CodeArtifact_uri = &handles[46]
+
+var ConflictException = &handles[47]
+var ConflictException_message = &handles[48]
+var ConflictException_resourceId = &handles[49]
+var ConflictException_resourceType = &handles[50]
+
+var CpuConfiguration = &handles[51]
+var CpuConfiguration_architecture = &handles[52]
+
+var _CpuConfigurationList = &handles[53]
+var _CpuConfigurationList_member = &handles[54]
+
+var _EnvironmentVariableKey = &handles[55]
+
+var _EnvironmentVariableMap = &handles[56]
+var _EnvironmentVariableMap_key = &handles[57]
+var _EnvironmentVariableMap_value = &handles[58]
+
+var _EnvironmentVariableValue = &handles[59]
+
+var Hooks = &handles[60]
+var Hooks_port = &handles[61]
+var Hooks_microvmHooks = &handles[62]
+var Hooks_microvmImageHooks = &handles[63]
+
+var HookState = &handles[64]
+var HookState_DISABLED = &handles[65]
+var HookState_ENABLED = &handles[66]
+
+var IdlePolicy = &handles[67]
+var IdlePolicy_maxIdleDurationSeconds = &handles[68]
+var IdlePolicy_suspendedDurationSeconds = &handles[69]
+var IdlePolicy_autoResumeEnabled = &handles[70]
+
+var _ImageName = &handles[71]
+
+var InsufficientCapacityException = &handles[72]
+var InsufficientCapacityException_message = &handles[73]
+
+var InternalServerException = &handles[74]
+var InternalServerException_message = &handles[75]
+var InternalServerException_retryAfterSeconds = &handles[76]
+
+var InvalidParameterValueException = &handles[77]
+var InvalidParameterValueException_Type = &handles[78]
+var InvalidParameterValueException_message = &handles[79]
+
+var _ListOfPortSpecification = &handles[80]
+var _ListOfPortSpecification_member = &handles[81]
+
+var Logging = &handles[82]
+var Logging_disabled = &handles[83]
+var Logging_cloudWatch = &handles[84]
+
+var LoggingDisabled = &handles[85]
+
+var ManagedMicrovmImageSummary = &handles[86]
+var ManagedMicrovmImageSummary_imageArn = &handles[87]
+var ManagedMicrovmImageSummary_createdAt = &handles[88]
+var ManagedMicrovmImageSummary_updatedAt = &handles[89]
+
+var _ManagedMicrovmImageSummaryList = &handles[90]
+var _ManagedMicrovmImageSummaryList_member = &handles[91]
+
+var ManagedMicrovmImageVersion = &handles[92]
+var ManagedMicrovmImageVersion_imageArn = &handles[93]
+var ManagedMicrovmImageVersion_imageVersion = &handles[94]
+var ManagedMicrovmImageVersion_status = &handles[95]
+var ManagedMicrovmImageVersion_createdAt = &handles[96]
+var ManagedMicrovmImageVersion_updatedAt = &handles[97]
+
+var _ManagedMicrovmImageVersionList = &handles[98]
+var _ManagedMicrovmImageVersionList_member = &handles[99]
+
+var ManagedMicrovmImageVersionStatus = &handles[100]
+var ManagedMicrovmImageVersionStatus_AVAILABLE = &handles[101]
+var ManagedMicrovmImageVersionStatus_DEPRECATED = &handles[102]
+
+var MicrovmHooks = &handles[103]
+var MicrovmHooks_run = &handles[104]
+var MicrovmHooks_runTimeoutInSeconds = &handles[105]
+var MicrovmHooks_resume = &handles[106]
+var MicrovmHooks_resumeTimeoutInSeconds = &handles[107]
+var MicrovmHooks_suspend = &handles[108]
+var MicrovmHooks_suspendTimeoutInSeconds = &handles[109]
+var MicrovmHooks_terminate = &handles[110]
+var MicrovmHooks_terminateTimeoutInSeconds = &handles[111]
+
+var _MicrovmIdentifier = &handles[112]
+
+var _MicrovmImageArn = &handles[113]
+
+var _MicrovmImageBuildSummaries = &handles[114]
+var _MicrovmImageBuildSummaries_member = &handles[115]
+
+var MicrovmImageBuildSummary = &handles[116]
+var MicrovmImageBuildSummary_imageArn = &handles[117]
+var MicrovmImageBuildSummary_imageVersion = &handles[118]
+var MicrovmImageBuildSummary_buildId = &handles[119]
+var MicrovmImageBuildSummary_buildState = &handles[120]
+var MicrovmImageBuildSummary_architecture = &handles[121]
+var MicrovmImageBuildSummary_chipset = &handles[122]
+var MicrovmImageBuildSummary_chipsetGeneration = &handles[123]
+var MicrovmImageBuildSummary_stateReason = &handles[124]
+var MicrovmImageBuildSummary_createdAt = &handles[125]
+
+var MicrovmImageHooks = &handles[126]
+var MicrovmImageHooks_ready = &handles[127]
+var MicrovmImageHooks_readyTimeoutInSeconds = &handles[128]
+var MicrovmImageHooks_validate = &handles[129]
+var MicrovmImageHooks_validateTimeoutInSeconds = &handles[130]
+
+var _MicrovmImageIdentifier = &handles[131]
+
+var MicrovmImageState = &handles[132]
+var MicrovmImageState_CREATING = &handles[133]
+var MicrovmImageState_CREATED = &handles[134]
+var MicrovmImageState_CREATE_FAILED = &handles[135]
+var MicrovmImageState_UPDATING = &handles[136]
+var MicrovmImageState_UPDATED = &handles[137]
+var MicrovmImageState_UPDATE_FAILED = &handles[138]
+var MicrovmImageState_DELETING = &handles[139]
+var MicrovmImageState_DELETE_FAILED = &handles[140]
+var MicrovmImageState_DELETED = &handles[141]
+
+var _MicrovmImageSummaries = &handles[142]
+var _MicrovmImageSummaries_member = &handles[143]
+
+var MicrovmImageSummary = &handles[144]
+var MicrovmImageSummary_imageArn = &handles[145]
+var MicrovmImageSummary_name = &handles[146]
+var MicrovmImageSummary_state = &handles[147]
+var MicrovmImageSummary_latestActiveImageVersion = &handles[148]
+var MicrovmImageSummary_latestFailedImageVersion = &handles[149]
+var MicrovmImageSummary_createdAt = &handles[150]
+
+var MicrovmImageVersionState = &handles[151]
+var MicrovmImageVersionState_PENDING = &handles[152]
+var MicrovmImageVersionState_IN_PROGRESS = &handles[153]
+var MicrovmImageVersionState_SUCCESSFUL = &handles[154]
+var MicrovmImageVersionState_FAILED = &handles[155]
+var MicrovmImageVersionState_DELETING = &handles[156]
+var MicrovmImageVersionState_DELETED = &handles[157]
+var MicrovmImageVersionState_DELETE_FAILED = &handles[158]
+
+var MicrovmImageVersionStatus = &handles[159]
+var MicrovmImageVersionStatus_ACTIVE = &handles[160]
+var MicrovmImageVersionStatus_INACTIVE = &handles[161]
+
+var MicrovmImageVersionSummary = &handles[162]
+var MicrovmImageVersionSummary_baseImageArn = &handles[163]
+var MicrovmImageVersionSummary_baseImageVersion = &handles[164]
+var MicrovmImageVersionSummary_buildRoleArn = &handles[165]
+var MicrovmImageVersionSummary_description = &handles[166]
+var MicrovmImageVersionSummary_codeArtifact = &handles[167]
+var MicrovmImageVersionSummary_logging = &handles[168]
+var MicrovmImageVersionSummary_egressNetworkConnectors = &handles[169]
+var MicrovmImageVersionSummary_cpuConfigurations = &handles[170]
+var MicrovmImageVersionSummary_resources = &handles[171]
+var MicrovmImageVersionSummary_additionalOsCapabilities = &handles[172]
+var MicrovmImageVersionSummary_hooks = &handles[173]
+var MicrovmImageVersionSummary_environmentVariables = &handles[174]
+var MicrovmImageVersionSummary_imageArn = &handles[175]
+var MicrovmImageVersionSummary_imageVersion = &handles[176]
+var MicrovmImageVersionSummary_state = &handles[177]
+var MicrovmImageVersionSummary_status = &handles[178]
+var MicrovmImageVersionSummary_createdAt = &handles[179]
+var MicrovmImageVersionSummary_updatedAt = &handles[180]
+var MicrovmImageVersionSummary_stateReason = &handles[181]
+var MicrovmImageVersionSummary_tags = &handles[182]
+
+var _MicrovmImageVersionSummaryList = &handles[183]
+var _MicrovmImageVersionSummaryList_member = &handles[184]
+
+var MicrovmItem = &handles[185]
+var MicrovmItem_microvmId = &handles[186]
+var MicrovmItem_state = &handles[187]
+var MicrovmItem_imageArn = &handles[188]
+var MicrovmItem_imageVersion = &handles[189]
+var MicrovmItem_startedAt = &handles[190]
+
+var _MicrovmItemList = &handles[191]
+var _MicrovmItemList_member = &handles[192]
+
+var MicrovmState = &handles[193]
+var MicrovmState_PENDING = &handles[194]
+var MicrovmState_RUNNING = &handles[195]
+var MicrovmState_SUSPENDING = &handles[196]
+var MicrovmState_SUSPENDED = &handles[197]
+var MicrovmState_TERMINATING = &handles[198]
+var MicrovmState_TERMINATED = &handles[199]
+
+var _NetworkConnector = &handles[200]
+
+var _NetworkConnectorList = &handles[201]
+var _NetworkConnectorList_member = &handles[202]
+
+var _NonBlankString = &handles[203]
+
+var _PortNumber = &handles[204]
+
+var PortRange = &handles[205]
+var PortRange_startPort = &handles[206]
+var PortRange_endPort = &handles[207]
+
+var PortSpecification = &handles[208]
+var PortSpecification_port = &handles[209]
+var PortSpecification_range = &handles[210]
+var PortSpecification_allPorts = &handles[211]
+
+var _PositiveInteger = &handles[212]
+
+var ResourceConflictException = &handles[213]
+var ResourceConflictException_Type = &handles[214]
+var ResourceConflictException_message = &handles[215]
+
+var ResourceNotFoundException = &handles[216]
+var ResourceNotFoundException_message = &handles[217]
+var ResourceNotFoundException_resourceType = &handles[218]
+var ResourceNotFoundException_resourceId = &handles[219]
+
+var Resources = &handles[220]
+var Resources_minimumMemoryInMiB = &handles[221]
+
+var _ResourcesList = &handles[222]
+var _ResourcesList_member = &handles[223]
+
+var _RoleArn = &handles[224]
+
+var _RunHookPayload = &handles[225]
+
+var ServiceException = &handles[226]
+var ServiceException_Type = &handles[227]
+var ServiceException_message = &handles[228]
+
+var ServiceQuotaExceededException = &handles[229]
+var ServiceQuotaExceededException_message = &handles[230]
+var ServiceQuotaExceededException_resourceId = &handles[231]
+var ServiceQuotaExceededException_resourceType = &handles[232]
+var ServiceQuotaExceededException_serviceCode = &handles[233]
+var ServiceQuotaExceededException_quotaCode = &handles[234]
+
+var SnapshotBuild = &handles[235]
+var SnapshotBuild_memorySnapshotSizeInBytes = &handles[236]
+var SnapshotBuild_codeInstallSizeInBytes = &handles[237]
+var SnapshotBuild_diskSnapshotSizeInBytes = &handles[238]
+
+var _String = &handles[239]
+
+var _TaggableResource = &handles[240]
+
+var _TagKey = &handles[241]
+
+var _TagKeyList = &handles[242]
+var _TagKeyList_member = &handles[243]
+
+var _Tags = &handles[244]
+var _Tags_key = &handles[245]
+var _Tags_value = &handles[246]
+
+var _TagValue = &handles[247]
+
+var ThrottlingException = &handles[248]
+var ThrottlingException_message = &handles[249]
+var ThrottlingException_serviceCode = &handles[250]
+var ThrottlingException_quotaCode = &handles[251]
+var ThrottlingException_retryAfterSeconds = &handles[252]
+
+var _TokenParts = &handles[253]
+var _TokenParts_key = &handles[254]
+var _TokenParts_value = &handles[255]
+
+var TooManyRequestsException = &handles[256]
+var TooManyRequestsException_Type = &handles[257]
+var TooManyRequestsException_message = &handles[258]
+
+var ValidationException = &handles[259]
+var ValidationException_message = &handles[260]
+
+var _Version = &handles[261]
+
+var CreateMicrovmAuthTokenRequest = &handles[262]
+var CreateMicrovmAuthTokenRequest_microvmIdentifier = &handles[263]
+var CreateMicrovmAuthTokenRequest_expirationInMinutes = &handles[264]
+var CreateMicrovmAuthTokenRequest_allowedPorts = &handles[265]
+
+var CreateMicrovmAuthTokenResponse = &handles[266]
+var CreateMicrovmAuthTokenResponse_authToken = &handles[267]
+
+var CreateMicrovmImageRequest = &handles[268]
+var CreateMicrovmImageRequest_baseImageArn = &handles[269]
+var CreateMicrovmImageRequest_baseImageVersion = &handles[270]
+var CreateMicrovmImageRequest_buildRoleArn = &handles[271]
+var CreateMicrovmImageRequest_description = &handles[272]
+var CreateMicrovmImageRequest_codeArtifact = &handles[273]
+var CreateMicrovmImageRequest_logging = &handles[274]
+var CreateMicrovmImageRequest_egressNetworkConnectors = &handles[275]
+var CreateMicrovmImageRequest_cpuConfigurations = &handles[276]
+var CreateMicrovmImageRequest_resources = &handles[277]
+var CreateMicrovmImageRequest_additionalOsCapabilities = &handles[278]
+var CreateMicrovmImageRequest_hooks = &handles[279]
+var CreateMicrovmImageRequest_environmentVariables = &handles[280]
+var CreateMicrovmImageRequest_name = &handles[281]
+var CreateMicrovmImageRequest_tags = &handles[282]
+var CreateMicrovmImageRequest_clientToken = &handles[283]
+
+var CreateMicrovmImageResponse = &handles[284]
+var CreateMicrovmImageResponse_imageArn = &handles[285]
+var CreateMicrovmImageResponse_name = &handles[286]
+var CreateMicrovmImageResponse_state = &handles[287]
+var CreateMicrovmImageResponse_latestActiveImageVersion = &handles[288]
+var CreateMicrovmImageResponse_latestFailedImageVersion = &handles[289]
+var CreateMicrovmImageResponse_createdAt = &handles[290]
+var CreateMicrovmImageResponse_baseImageArn = &handles[291]
+var CreateMicrovmImageResponse_baseImageVersion = &handles[292]
+var CreateMicrovmImageResponse_buildRoleArn = &handles[293]
+var CreateMicrovmImageResponse_description = &handles[294]
+var CreateMicrovmImageResponse_codeArtifact = &handles[295]
+var CreateMicrovmImageResponse_logging = &handles[296]
+var CreateMicrovmImageResponse_egressNetworkConnectors = &handles[297]
+var CreateMicrovmImageResponse_cpuConfigurations = &handles[298]
+var CreateMicrovmImageResponse_resources = &handles[299]
+var CreateMicrovmImageResponse_additionalOsCapabilities = &handles[300]
+var CreateMicrovmImageResponse_hooks = &handles[301]
+var CreateMicrovmImageResponse_environmentVariables = &handles[302]
+var CreateMicrovmImageResponse_tags = &handles[303]
+var CreateMicrovmImageResponse_updatedAt = &handles[304]
+var CreateMicrovmImageResponse_imageVersion = &handles[305]
+
+var CreateMicrovmShellAuthTokenRequest = &handles[306]
+var CreateMicrovmShellAuthTokenRequest_microvmIdentifier = &handles[307]
+var CreateMicrovmShellAuthTokenRequest_expirationInMinutes = &handles[308]
+
+var CreateMicrovmShellAuthTokenResponse = &handles[309]
+var CreateMicrovmShellAuthTokenResponse_authToken = &handles[310]
+
+var DeleteMicrovmImageInput = &handles[311]
+var DeleteMicrovmImageInput_imageIdentifier = &handles[312]
+
+var DeleteMicrovmImageOutput = &handles[313]
+var DeleteMicrovmImageOutput_imageIdentifier = &handles[314]
+var DeleteMicrovmImageOutput_state = &handles[315]
+
+var DeleteMicrovmImageVersionInput = &handles[316]
+var DeleteMicrovmImageVersionInput_imageIdentifier = &handles[317]
+var DeleteMicrovmImageVersionInput_imageVersion = &handles[318]
+
+var DeleteMicrovmImageVersionOutput = &handles[319]
+var DeleteMicrovmImageVersionOutput_imageIdentifier = &handles[320]
+var DeleteMicrovmImageVersionOutput_imageVersion = &handles[321]
+var DeleteMicrovmImageVersionOutput_state = &handles[322]
+
+var GetMicrovmImageBuildInput = &handles[323]
+var GetMicrovmImageBuildInput_imageIdentifier = &handles[324]
+var GetMicrovmImageBuildInput_imageVersion = &handles[325]
+var GetMicrovmImageBuildInput_buildId = &handles[326]
+
+var GetMicrovmImageBuildOutput = &handles[327]
+var GetMicrovmImageBuildOutput_imageArn = &handles[328]
+var GetMicrovmImageBuildOutput_imageVersion = &handles[329]
+var GetMicrovmImageBuildOutput_buildId = &handles[330]
+var GetMicrovmImageBuildOutput_buildState = &handles[331]
+var GetMicrovmImageBuildOutput_architecture = &handles[332]
+var GetMicrovmImageBuildOutput_chipset = &handles[333]
+var GetMicrovmImageBuildOutput_chipsetGeneration = &handles[334]
+var GetMicrovmImageBuildOutput_stateReason = &handles[335]
+var GetMicrovmImageBuildOutput_createdAt = &handles[336]
+var GetMicrovmImageBuildOutput_snapshotBuild = &handles[337]
+
+var GetMicrovmImageInput = &handles[338]
+var GetMicrovmImageInput_imageIdentifier = &handles[339]
+
+var GetMicrovmImageOutput = &handles[340]
+var GetMicrovmImageOutput_imageArn = &handles[341]
+var GetMicrovmImageOutput_name = &handles[342]
+var GetMicrovmImageOutput_state = &handles[343]
+var GetMicrovmImageOutput_latestActiveImageVersion = &handles[344]
+var GetMicrovmImageOutput_latestFailedImageVersion = &handles[345]
+var GetMicrovmImageOutput_createdAt = &handles[346]
+var GetMicrovmImageOutput_tags = &handles[347]
+var GetMicrovmImageOutput_updatedAt = &handles[348]
+
+var GetMicrovmImageVersionInput = &handles[349]
+var GetMicrovmImageVersionInput_imageIdentifier = &handles[350]
+var GetMicrovmImageVersionInput_imageVersion = &handles[351]
+
+var GetMicrovmImageVersionOutput = &handles[352]
+var GetMicrovmImageVersionOutput_baseImageArn = &handles[353]
+var GetMicrovmImageVersionOutput_baseImageVersion = &handles[354]
+var GetMicrovmImageVersionOutput_buildRoleArn = &handles[355]
+var GetMicrovmImageVersionOutput_description = &handles[356]
+var GetMicrovmImageVersionOutput_codeArtifact = &handles[357]
+var GetMicrovmImageVersionOutput_logging = &handles[358]
+var GetMicrovmImageVersionOutput_egressNetworkConnectors = &handles[359]
+var GetMicrovmImageVersionOutput_cpuConfigurations = &handles[360]
+var GetMicrovmImageVersionOutput_resources = &handles[361]
+var GetMicrovmImageVersionOutput_additionalOsCapabilities = &handles[362]
+var GetMicrovmImageVersionOutput_hooks = &handles[363]
+var GetMicrovmImageVersionOutput_environmentVariables = &handles[364]
+var GetMicrovmImageVersionOutput_imageArn = &handles[365]
+var GetMicrovmImageVersionOutput_imageVersion = &handles[366]
+var GetMicrovmImageVersionOutput_state = &handles[367]
+var GetMicrovmImageVersionOutput_status = &handles[368]
+var GetMicrovmImageVersionOutput_createdAt = &handles[369]
+var GetMicrovmImageVersionOutput_updatedAt = &handles[370]
+var GetMicrovmImageVersionOutput_stateReason = &handles[371]
+var GetMicrovmImageVersionOutput_tags = &handles[372]
+
+var GetMicrovmRequest = &handles[373]
+var GetMicrovmRequest_microvmIdentifier = &handles[374]
+
+var GetMicrovmResponse = &handles[375]
+var GetMicrovmResponse_microvmId = &handles[376]
+var GetMicrovmResponse_state = &handles[377]
+var GetMicrovmResponse_endpoint = &handles[378]
+var GetMicrovmResponse_imageArn = &handles[379]
+var GetMicrovmResponse_imageVersion = &handles[380]
+var GetMicrovmResponse_executionRoleArn = &handles[381]
+var GetMicrovmResponse_idlePolicy = &handles[382]
+var GetMicrovmResponse_maximumDurationInSeconds = &handles[383]
+var GetMicrovmResponse_startedAt = &handles[384]
+var GetMicrovmResponse_terminatedAt = &handles[385]
+var GetMicrovmResponse_stateReason = &handles[386]
+var GetMicrovmResponse_ingressNetworkConnectors = &handles[387]
+var GetMicrovmResponse_egressNetworkConnectors = &handles[388]
+
+var ListManagedMicrovmImagesInput = &handles[389]
+var ListManagedMicrovmImagesInput_maxResults = &handles[390]
+var ListManagedMicrovmImagesInput_nextToken = &handles[391]
+
+var ListManagedMicrovmImagesOutput = &handles[392]
+var ListManagedMicrovmImagesOutput_nextToken = &handles[393]
+var ListManagedMicrovmImagesOutput_items = &handles[394]
+
+var ListManagedMicrovmImageVersionsInput = &handles[395]
+var ListManagedMicrovmImageVersionsInput_maxResults = &handles[396]
+var ListManagedMicrovmImageVersionsInput_nextToken = &handles[397]
+var ListManagedMicrovmImageVersionsInput_imageIdentifier = &handles[398]
+
+var ListManagedMicrovmImageVersionsOutput = &handles[399]
+var ListManagedMicrovmImageVersionsOutput_nextToken = &handles[400]
+var ListManagedMicrovmImageVersionsOutput_items = &handles[401]
+
+var ListMicrovmImageBuildsInput = &handles[402]
+var ListMicrovmImageBuildsInput_maxResults = &handles[403]
+var ListMicrovmImageBuildsInput_nextToken = &handles[404]
+var ListMicrovmImageBuildsInput_imageIdentifier = &handles[405]
+var ListMicrovmImageBuildsInput_imageVersion = &handles[406]
+var ListMicrovmImageBuildsInput_architecture = &handles[407]
+var ListMicrovmImageBuildsInput_chipset = &handles[408]
+var ListMicrovmImageBuildsInput_chipsetGeneration = &handles[409]
+
+var ListMicrovmImageBuildsOutput = &handles[410]
+var ListMicrovmImageBuildsOutput_nextToken = &handles[411]
+var ListMicrovmImageBuildsOutput_items = &handles[412]
+
+var ListMicrovmImagesRequest = &handles[413]
+var ListMicrovmImagesRequest_maxResults = &handles[414]
+var ListMicrovmImagesRequest_nextToken = &handles[415]
+var ListMicrovmImagesRequest_nameFilter = &handles[416]
+
+var ListMicrovmImagesResponse = &handles[417]
+var ListMicrovmImagesResponse_nextToken = &handles[418]
+var ListMicrovmImagesResponse_items = &handles[419]
+
+var ListMicrovmImageVersionsInput = &handles[420]
+var ListMicrovmImageVersionsInput_maxResults = &handles[421]
+var ListMicrovmImageVersionsInput_nextToken = &handles[422]
+var ListMicrovmImageVersionsInput_imageIdentifier = &handles[423]
+
+var ListMicrovmImageVersionsOutput = &handles[424]
+var ListMicrovmImageVersionsOutput_nextToken = &handles[425]
+var ListMicrovmImageVersionsOutput_items = &handles[426]
+
+var ListMicrovmsRequest = &handles[427]
+var ListMicrovmsRequest_maxResults = &handles[428]
+var ListMicrovmsRequest_nextToken = &handles[429]
+var ListMicrovmsRequest_imageIdentifier = &handles[430]
+var ListMicrovmsRequest_imageVersion = &handles[431]
+
+var ListMicrovmsResponse = &handles[432]
+var ListMicrovmsResponse_nextToken = &handles[433]
+var ListMicrovmsResponse_items = &handles[434]
+
+var ListTagsRequest = &handles[435]
+var ListTagsRequest_Resource = &handles[436]
+
+var ListTagsResponse = &handles[437]
+var ListTagsResponse_Tags = &handles[438]
+
+var ResumeMicrovmRequest = &handles[439]
+var ResumeMicrovmRequest_microvmIdentifier = &handles[440]
+
+var ResumeMicrovmResponse = &handles[441]
+
+var RunMicrovmRequest = &handles[442]
+var RunMicrovmRequest_ingressNetworkConnectors = &handles[443]
+var RunMicrovmRequest_egressNetworkConnectors = &handles[444]
+var RunMicrovmRequest_imageIdentifier = &handles[445]
+var RunMicrovmRequest_imageVersion = &handles[446]
+var RunMicrovmRequest_executionRoleArn = &handles[447]
+var RunMicrovmRequest_idlePolicy = &handles[448]
+var RunMicrovmRequest_logging = &handles[449]
+var RunMicrovmRequest_runHookPayload = &handles[450]
+var RunMicrovmRequest_maximumDurationInSeconds = &handles[451]
+var RunMicrovmRequest_clientToken = &handles[452]
+
+var RunMicrovmResponse = &handles[453]
+var RunMicrovmResponse_microvmId = &handles[454]
+var RunMicrovmResponse_state = &handles[455]
+var RunMicrovmResponse_endpoint = &handles[456]
+var RunMicrovmResponse_imageArn = &handles[457]
+var RunMicrovmResponse_imageVersion = &handles[458]
+var RunMicrovmResponse_executionRoleArn = &handles[459]
+var RunMicrovmResponse_idlePolicy = &handles[460]
+var RunMicrovmResponse_maximumDurationInSeconds = &handles[461]
+var RunMicrovmResponse_startedAt = &handles[462]
+var RunMicrovmResponse_terminatedAt = &handles[463]
+var RunMicrovmResponse_stateReason = &handles[464]
+var RunMicrovmResponse_ingressNetworkConnectors = &handles[465]
+var RunMicrovmResponse_egressNetworkConnectors = &handles[466]
+
+var SuspendMicrovmRequest = &handles[467]
+var SuspendMicrovmRequest_microvmIdentifier = &handles[468]
+
+var SuspendMicrovmResponse = &handles[469]
+
+var TagResourceRequest = &handles[470]
+var TagResourceRequest_Resource = &handles[471]
+var TagResourceRequest_Tags = &handles[472]
+
+var TerminateMicrovmRequest = &handles[473]
+var TerminateMicrovmRequest_microvmIdentifier = &handles[474]
+
+var TerminateMicrovmResponse = &handles[475]
+
+var UntagResourceRequest = &handles[476]
+var UntagResourceRequest_Resource = &handles[477]
+var UntagResourceRequest_TagKeys = &handles[478]
+
+var UpdateMicrovmImageRequest = &handles[479]
+var UpdateMicrovmImageRequest_baseImageArn = &handles[480]
+var UpdateMicrovmImageRequest_baseImageVersion = &handles[481]
+var UpdateMicrovmImageRequest_buildRoleArn = &handles[482]
+var UpdateMicrovmImageRequest_description = &handles[483]
+var UpdateMicrovmImageRequest_codeArtifact = &handles[484]
+var UpdateMicrovmImageRequest_logging = &handles[485]
+var UpdateMicrovmImageRequest_egressNetworkConnectors = &handles[486]
+var UpdateMicrovmImageRequest_cpuConfigurations = &handles[487]
+var UpdateMicrovmImageRequest_resources = &handles[488]
+var UpdateMicrovmImageRequest_additionalOsCapabilities = &handles[489]
+var UpdateMicrovmImageRequest_hooks = &handles[490]
+var UpdateMicrovmImageRequest_environmentVariables = &handles[491]
+var UpdateMicrovmImageRequest_imageIdentifier = &handles[492]
+var UpdateMicrovmImageRequest_clientToken = &handles[493]
+
+var UpdateMicrovmImageResponse = &handles[494]
+var UpdateMicrovmImageResponse_imageArn = &handles[495]
+var UpdateMicrovmImageResponse_name = &handles[496]
+var UpdateMicrovmImageResponse_state = &handles[497]
+var UpdateMicrovmImageResponse_latestActiveImageVersion = &handles[498]
+var UpdateMicrovmImageResponse_latestFailedImageVersion = &handles[499]
+var UpdateMicrovmImageResponse_createdAt = &handles[500]
+var UpdateMicrovmImageResponse_baseImageArn = &handles[501]
+var UpdateMicrovmImageResponse_baseImageVersion = &handles[502]
+var UpdateMicrovmImageResponse_buildRoleArn = &handles[503]
+var UpdateMicrovmImageResponse_description = &handles[504]
+var UpdateMicrovmImageResponse_codeArtifact = &handles[505]
+var UpdateMicrovmImageResponse_logging = &handles[506]
+var UpdateMicrovmImageResponse_egressNetworkConnectors = &handles[507]
+var UpdateMicrovmImageResponse_cpuConfigurations = &handles[508]
+var UpdateMicrovmImageResponse_resources = &handles[509]
+var UpdateMicrovmImageResponse_additionalOsCapabilities = &handles[510]
+var UpdateMicrovmImageResponse_hooks = &handles[511]
+var UpdateMicrovmImageResponse_environmentVariables = &handles[512]
+var UpdateMicrovmImageResponse_updatedAt = &handles[513]
+var UpdateMicrovmImageResponse_imageVersion = &handles[514]
+
+var UpdateMicrovmImageVersionRequest = &handles[515]
+var UpdateMicrovmImageVersionRequest_imageIdentifier = &handles[516]
+var UpdateMicrovmImageVersionRequest_imageVersion = &handles[517]
+var UpdateMicrovmImageVersionRequest_status = &handles[518]
+
+var UpdateMicrovmImageVersionResponse = &handles[519]
+var UpdateMicrovmImageVersionResponse_baseImageArn = &handles[520]
+var UpdateMicrovmImageVersionResponse_baseImageVersion = &handles[521]
+var UpdateMicrovmImageVersionResponse_buildRoleArn = &handles[522]
+var UpdateMicrovmImageVersionResponse_description = &handles[523]
+var UpdateMicrovmImageVersionResponse_codeArtifact = &handles[524]
+var UpdateMicrovmImageVersionResponse_logging = &handles[525]
+var UpdateMicrovmImageVersionResponse_egressNetworkConnectors = &handles[526]
+var UpdateMicrovmImageVersionResponse_cpuConfigurations = &handles[527]
+var UpdateMicrovmImageVersionResponse_resources = &handles[528]
+var UpdateMicrovmImageVersionResponse_additionalOsCapabilities = &handles[529]
+var UpdateMicrovmImageVersionResponse_hooks = &handles[530]
+var UpdateMicrovmImageVersionResponse_environmentVariables = &handles[531]
+var UpdateMicrovmImageVersionResponse_imageArn = &handles[532]
+var UpdateMicrovmImageVersionResponse_imageVersion = &handles[533]
+var UpdateMicrovmImageVersionResponse_state = &handles[534]
+var UpdateMicrovmImageVersionResponse_status = &handles[535]
+var UpdateMicrovmImageVersionResponse_createdAt = &handles[536]
+var UpdateMicrovmImageVersionResponse_updatedAt = &handles[537]
+var UpdateMicrovmImageVersionResponse_stateReason = &handles[538]
+var UpdateMicrovmImageVersionResponse_tags = &handles[539]
+
+var LambdaMicrovms = &smithy.ServiceSchema{Schema: &handles[24], Version: "2025-09-09"}

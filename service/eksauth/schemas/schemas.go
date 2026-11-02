@@ -4,220 +4,206 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssumeRoleForPodIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "AssumeRoleForPodIdentity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/clusters/{clusterName}/assume-role-for-pod-identity",
-	Code: 200})
+const blob = "" +
+	"AssumeRoleForPodIdentityResponseAssumeRoleForPodIdentityRequestServiceUnavailableExceptionInvalidPar" +
+	"ameterExceptionResourceNotFoundExceptionInternalServerExceptionInvalidRequestExceptionPodIdentityAss" +
+	"ociationpodIdentityAssociationAccessDeniedExceptionExpiredTokenExceptionInvalidTokenExceptionThrottl" +
+	"ingExceptionAssumedRoleUserEKSAuthFrontendassumedRoleUsersecretAccessKeyassociationArnserviceAccount" +
+	"associationIdassumeRoleIdsessionTokenClusterNameCredentialsaccessKeyIdclusterNamecredentialseksNodeN" +
+	"ameexpirationinstanceIdTimestampnamespaceJwtTokenaudienceSubjectmessagesubjectStringtokenzonearn"
 
-var _EKSAuthFrontend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "EKSAuthFrontend",
-}, smithy.ShapeTypeService, 0)
-
-var EKSAuthFrontend = smithy.NewServiceSchema(_EKSAuthFrontend, "2023-11-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AccessDeniedException_message *smithy.Schema
-
-var AssumedRoleUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "AssumedRoleUser",
-}, smithy.ShapeTypeStructure, 2)
-var AssumedRoleUser_arn *smithy.Schema
-
-var AssumedRoleUser_assumeRoleId *smithy.Schema
-
-var _ClusterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "ClusterName",
-}, smithy.ShapeTypeString, 0)
-
-var Credentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "Credentials",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var Credentials_sessionToken *smithy.Schema
-
-var Credentials_secretAccessKey *smithy.Schema
-
-var Credentials_accessKeyId *smithy.Schema
-
-var Credentials_expiration *smithy.Schema
-
-var ExpiredTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "ExpiredTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ExpiredTokenException_message *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterException_message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_message *smithy.Schema
-
-var InvalidTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "InvalidTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidTokenException_message *smithy.Schema
-
-var _JwtToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "JwtToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PodIdentityAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "PodIdentityAssociation",
-}, smithy.ShapeTypeStructure, 2)
-var PodIdentityAssociation_associationArn *smithy.Schema
-
-var PodIdentityAssociation_associationId *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var Subject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "Subject",
-}, smithy.ShapeTypeStructure, 2)
-var Subject_namespace *smithy.Schema
-
-var Subject_serviceAccount *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var AssumeRoleForPodIdentityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "AssumeRoleForPodIdentityRequest",
-}, smithy.ShapeTypeStructure, 5)
-var AssumeRoleForPodIdentityRequest_clusterName *smithy.Schema
-
-var AssumeRoleForPodIdentityRequest_token *smithy.Schema
-
-var AssumeRoleForPodIdentityRequest_eksNodeName *smithy.Schema
-
-var AssumeRoleForPodIdentityRequest_instanceId *smithy.Schema
-
-var AssumeRoleForPodIdentityRequest_zone *smithy.Schema
-
-var AssumeRoleForPodIdentityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eksauth",
-	Name:      "AssumeRoleForPodIdentityResponse",
-}, smithy.ShapeTypeStructure, 5)
-var AssumeRoleForPodIdentityResponse_subject *smithy.Schema
-
-var AssumeRoleForPodIdentityResponse_audience *smithy.Schema
-
-var AssumeRoleForPodIdentityResponse_podIdentityAssociation *smithy.Schema
-
-var AssumeRoleForPodIdentityResponse_assumedRoleUser *smithy.Schema
-
-var AssumeRoleForPodIdentityResponse_credentials *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AssumedRoleUser_arn = AssumedRoleUser.AddMember("arn", smithyprelude.String)
-
-	AssumedRoleUser_assumeRoleId = AssumedRoleUser.AddMember("assumeRoleId", smithyprelude.String)
-
-	Credentials_sessionToken = Credentials.AddMember("sessionToken", smithyprelude.String)
-
-	Credentials_secretAccessKey = Credentials.AddMember("secretAccessKey", smithyprelude.String)
-
-	Credentials_accessKeyId = Credentials.AddMember("accessKeyId", smithyprelude.String)
-
-	Credentials_expiration = Credentials.AddMember("expiration", smithyprelude.Timestamp)
-
-	ExpiredTokenException_message = ExpiredTokenException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", smithyprelude.String)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", smithyprelude.String)
-
-	InvalidTokenException_message = InvalidTokenException.AddMember("message", smithyprelude.String)
-
-	PodIdentityAssociation_associationArn = PodIdentityAssociation.AddMember("associationArn", smithyprelude.String)
-
-	PodIdentityAssociation_associationId = PodIdentityAssociation.AddMember("associationId", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", smithyprelude.String)
-
-	Subject_namespace = Subject.AddMember("namespace", smithyprelude.String)
-
-	Subject_serviceAccount = Subject.AddMember("serviceAccount", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	AssumeRoleForPodIdentityRequest_clusterName = AssumeRoleForPodIdentityRequest.AddMember("clusterName", _ClusterName, &smithytraits.HTTPLabel{})
-
-	AssumeRoleForPodIdentityRequest_token = AssumeRoleForPodIdentityRequest.AddMember("token", _JwtToken)
-
-	AssumeRoleForPodIdentityRequest_eksNodeName = AssumeRoleForPodIdentityRequest.AddMember("eksNodeName", smithyprelude.String)
-
-	AssumeRoleForPodIdentityRequest_instanceId = AssumeRoleForPodIdentityRequest.AddMember("instanceId", smithyprelude.String)
-
-	AssumeRoleForPodIdentityRequest_zone = AssumeRoleForPodIdentityRequest.AddMember("zone", smithyprelude.String)
-
-	AssumeRoleForPodIdentityResponse_subject = AssumeRoleForPodIdentityResponse.AddMember("subject", Subject)
-
-	AssumeRoleForPodIdentityResponse_audience = AssumeRoleForPodIdentityResponse.AddMember("audience", smithyprelude.String)
-
-	AssumeRoleForPodIdentityResponse_podIdentityAssociation = AssumeRoleForPodIdentityResponse.AddMember("podIdentityAssociation", PodIdentityAssociation)
-
-	AssumeRoleForPodIdentityResponse_assumedRoleUser = AssumeRoleForPodIdentityResponse.AddMember("assumedRoleUser", AssumedRoleUser)
-
-	AssumeRoleForPodIdentityResponse_credentials = AssumeRoleForPodIdentityResponse.AddMember("credentials", Credentials)
-
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.eksauth", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 327, Target: 1, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 230, Target: 2, Traits: 2, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 312, Target: 4, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 593, Target: 48, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 413, Target: 48, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 437, Target: 7, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 448, Target: 8, Traits: 3, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 425, Target: 48, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 357, Target: 48, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 459, Target: 48, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 503, Target: 49, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 251, Target: 13, Traits: 2, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 140, Target: 15, Traits: 4, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 90, Target: 17, Traits: 2, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 163, Target: 19, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 272, Target: 21, Traits: 2, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 541, Target: 23, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 186, Target: 24, Traits: 1, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 372, Target: 48, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 400, Target: 48, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 115, Target: 27, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 63, Target: 29, Traits: 6, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 557, Target: 31, Traits: 1, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 532, Target: 48, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 386, Target: 48, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 293, Target: 34, Traits: 7, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 564, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 32, Target: 36, Traits: 1, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 470, Target: 7, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 584, Target: 23, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 492, Target: 48, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 513, Target: 48, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 589, Target: 48, Traits: 1, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 42, Traits: 1, StrLen: 32, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 571, Target: 31, Traits: 1, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 549, Target: 48, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 208, Target: 24, Traits: 1, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 342, Target: 4, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 481, Target: 8, Traits: 9, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 578, Target: 48, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 523, Target: 49, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/clusters/{clusterName}/assume-role-for-pod-identity",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+	},
 }
+
+var handles = [50]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+}
+
+var AssumeRoleForPodIdentity = &handles[0]
+
+var _EKSAuthFrontend = &handles[1]
+
+var AccessDeniedException = &handles[2]
+var AccessDeniedException_message = &handles[3]
+
+var AssumedRoleUser = &handles[4]
+var AssumedRoleUser_arn = &handles[5]
+var AssumedRoleUser_assumeRoleId = &handles[6]
+
+var _ClusterName = &handles[7]
+
+var Credentials = &handles[8]
+var Credentials_sessionToken = &handles[9]
+var Credentials_secretAccessKey = &handles[10]
+var Credentials_accessKeyId = &handles[11]
+var Credentials_expiration = &handles[12]
+
+var ExpiredTokenException = &handles[13]
+var ExpiredTokenException_message = &handles[14]
+
+var InternalServerException = &handles[15]
+var InternalServerException_message = &handles[16]
+
+var InvalidParameterException = &handles[17]
+var InvalidParameterException_message = &handles[18]
+
+var InvalidRequestException = &handles[19]
+var InvalidRequestException_message = &handles[20]
+
+var InvalidTokenException = &handles[21]
+var InvalidTokenException_message = &handles[22]
+
+var _JwtToken = &handles[23]
+
+var PodIdentityAssociation = &handles[24]
+var PodIdentityAssociation_associationArn = &handles[25]
+var PodIdentityAssociation_associationId = &handles[26]
+
+var ResourceNotFoundException = &handles[27]
+var ResourceNotFoundException_message = &handles[28]
+
+var ServiceUnavailableException = &handles[29]
+var ServiceUnavailableException_message = &handles[30]
+
+var Subject = &handles[31]
+var Subject_namespace = &handles[32]
+var Subject_serviceAccount = &handles[33]
+
+var ThrottlingException = &handles[34]
+var ThrottlingException_message = &handles[35]
+
+var AssumeRoleForPodIdentityRequest = &handles[36]
+var AssumeRoleForPodIdentityRequest_clusterName = &handles[37]
+var AssumeRoleForPodIdentityRequest_token = &handles[38]
+var AssumeRoleForPodIdentityRequest_eksNodeName = &handles[39]
+var AssumeRoleForPodIdentityRequest_instanceId = &handles[40]
+var AssumeRoleForPodIdentityRequest_zone = &handles[41]
+
+var AssumeRoleForPodIdentityResponse = &handles[42]
+var AssumeRoleForPodIdentityResponse_subject = &handles[43]
+var AssumeRoleForPodIdentityResponse_audience = &handles[44]
+var AssumeRoleForPodIdentityResponse_podIdentityAssociation = &handles[45]
+var AssumeRoleForPodIdentityResponse_assumedRoleUser = &handles[46]
+var AssumeRoleForPodIdentityResponse_credentials = &handles[47]
+
+var EKSAuthFrontend = &smithy.ServiceSchema{Schema: &handles[1], Version: "2023-11-26"}

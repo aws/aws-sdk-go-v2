@@ -4,98 +4,101 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var JoinStorageSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "JoinStorageSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/joinStorageSession",
-	Code: 200})
+const blob = "" +
+	"JoinStorageSessionAsViewerInputAWSAcuityRoutingServiceLambdaClientLimitExceededExceptionResourceNotF" +
+	"oundExceptionInvalidArgumentExceptionJoinStorageSessionInputAccessDeniedExceptionChannelArnchannelAr" +
+	"nClientIdclientIdmessageString"
 
-var JoinStorageSessionAsViewer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "JoinStorageSessionAsViewer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/joinStorageSessionAsViewer",
-	Code: 200})
-
-var _AWSAcuityRoutingServiceLambda = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "AWSAcuityRoutingServiceLambda",
-}, smithy.ShapeTypeService, 0)
-
-var AWSAcuityRoutingServiceLambda = smithy.NewServiceSchema(_AWSAcuityRoutingServiceLambda, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ChannelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "ChannelArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0)
-
-var ClientLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "ClientLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ClientLimitExceededException_message *smithy.Schema
-
-var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidArgumentException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var JoinStorageSessionAsViewerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "JoinStorageSessionAsViewerInput",
-}, smithy.ShapeTypeStructure, 2)
-var JoinStorageSessionAsViewerInput_channelArn *smithy.Schema
-
-var JoinStorageSessionAsViewerInput_clientId *smithy.Schema
-
-var JoinStorageSessionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideowebrtcstorage",
-	Name:      "JoinStorageSessionInput",
-}, smithy.ShapeTypeStructure, 1)
-var JoinStorageSessionInput_channelArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	ClientLimitExceededException_message = ClientLimitExceededException.AddMember("message", smithyprelude.String)
-
-	InvalidArgumentException_message = InvalidArgumentException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	JoinStorageSessionAsViewerInput_channelArn = JoinStorageSessionAsViewerInput.AddMember("channelArn", _ChannelArn)
-
-	JoinStorageSessionAsViewerInput_clientId = JoinStorageSessionAsViewerInput.AddMember("clientId", _ClientId)
-
-	JoinStorageSessionInput_channelArn = JoinStorageSessionInput.AddMember("channelArn", _ChannelArn)
-
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.kinesisvideowebrtcstorage", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 1, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 31, Target: 2, Traits: 2, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 160, Target: 3, Traits: 3, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 217, Target: 18, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 181, Target: 5, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 201, Target: 6, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 60, Target: 7, Traits: 4, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 217, Target: 18, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 113, Target: 9, Traits: 4, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 217, Target: 18, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 88, Target: 11, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 217, Target: 18, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 13, Traits: 2, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 191, Target: 5, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 209, Target: 6, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 137, Target: 16, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 191, Target: 5, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 18, Traits: 2, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/joinStorageSession",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/joinStorageSessionAsViewer",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [19]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+}
+
+var JoinStorageSession = &handles[0]
+
+var JoinStorageSessionAsViewer = &handles[1]
+
+var _AWSAcuityRoutingServiceLambda = &handles[2]
+
+var AccessDeniedException = &handles[3]
+var AccessDeniedException_message = &handles[4]
+
+var _ChannelArn = &handles[5]
+
+var _ClientId = &handles[6]
+
+var ClientLimitExceededException = &handles[7]
+var ClientLimitExceededException_message = &handles[8]
+
+var InvalidArgumentException = &handles[9]
+var InvalidArgumentException_message = &handles[10]
+
+var ResourceNotFoundException = &handles[11]
+var ResourceNotFoundException_message = &handles[12]
+
+var JoinStorageSessionAsViewerInput = &handles[13]
+var JoinStorageSessionAsViewerInput_channelArn = &handles[14]
+var JoinStorageSessionAsViewerInput_clientId = &handles[15]
+
+var JoinStorageSessionInput = &handles[16]
+var JoinStorageSessionInput_channelArn = &handles[17]
+
+var AWSAcuityRoutingServiceLambda = &smithy.ServiceSchema{Schema: &handles[2], Version: "2018-05-10"}

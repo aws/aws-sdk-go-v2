@@ -4,4822 +4,4232 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociatePhoneNumbersWithVoiceConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AssociatePhoneNumbersWithVoiceConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}?operation=associate-phone-numbers",
-	Code: 200})
-
-var AssociatePhoneNumbersWithVoiceConnectorGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AssociatePhoneNumbersWithVoiceConnectorGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connector-groups/{VoiceConnectorGroupId}?operation=associate-phone-numbers",
-	Code: 200})
-
-var BatchDeletePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "BatchDeletePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/phone-numbers?operation=batch-delete",
-	Code: 200})
-
-var BatchUpdatePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "BatchUpdatePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/phone-numbers?operation=batch-update",
-	Code: 200})
-
-var CreatePhoneNumberOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreatePhoneNumberOrder",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/phone-number-orders",
-	Code: 201})
-
-var CreateProxySession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateProxySession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions",
-	Code: 201})
-
-var CreateSipMediaApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipMediaApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/sip-media-applications",
-	Code: 201})
-
-var CreateSipMediaApplicationCall = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipMediaApplicationCall",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}/calls",
-	Code: 201})
-
-var CreateSipRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/sip-rules",
-	Code: 201})
-
-var CreateVoiceConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors",
-	Code: 201})
-
-var CreateVoiceConnectorGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceConnectorGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connector-groups",
-	Code: 201})
-
-var CreateVoiceProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-profiles",
-	Code: 201})
-
-var CreateVoiceProfileDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceProfileDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-profile-domains",
-	Code: 201})
-
-var DeletePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeletePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/phone-numbers/{PhoneNumberId}",
-	Code: 204})
-
-var DeleteProxySession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteProxySession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
-	Code: 204})
-
-var DeleteSipMediaApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteSipMediaApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}",
-	Code: 204})
-
-var DeleteSipRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteSipRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/sip-rules/{SipRuleId}",
-	Code: 204})
-
-var DeleteVoiceConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connectors/{VoiceConnectorId}",
-	Code: 204})
-
-var DeleteVoiceConnectorEmergencyCallingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorEmergencyCallingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connectors/{VoiceConnectorId}/emergency-calling-configuration",
-	Code: 204})
-
-var DeleteVoiceConnectorExternalSystemsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorExternalSystemsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
-	Code: 204})
-
-var DeleteVoiceConnectorGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connector-groups/{VoiceConnectorGroupId}",
-	Code: 204})
-
-var DeleteVoiceConnectorOrigination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorOrigination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connectors/{VoiceConnectorId}/origination",
-	Code: 204})
-
-var DeleteVoiceConnectorProxy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorProxy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
-	Code: 204})
-
-var DeleteVoiceConnectorStreamingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorStreamingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connectors/{VoiceConnectorId}/streaming-configuration",
-	Code: 204})
-
-var DeleteVoiceConnectorTermination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorTermination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-connectors/{VoiceConnectorId}/termination",
-	Code: 204})
-
-var DeleteVoiceConnectorTerminationCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorTerminationCredentials",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}/termination/credentials?operation=delete",
-	Code: 204})
-
-var DeleteVoiceProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-profiles/{VoiceProfileId}",
-	Code: 204})
-
-var DeleteVoiceProfileDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceProfileDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/voice-profile-domains/{VoiceProfileDomainId}",
-	Code: 204})
-
-var DisassociatePhoneNumbersFromVoiceConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DisassociatePhoneNumbersFromVoiceConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}?operation=disassociate-phone-numbers",
-	Code: 200})
-
-var DisassociatePhoneNumbersFromVoiceConnectorGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DisassociatePhoneNumbersFromVoiceConnectorGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connector-groups/{VoiceConnectorGroupId}?operation=disassociate-phone-numbers",
-	Code: 200})
-
-var GetGlobalSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetGlobalSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/settings",
-	Code: 200})
-
-var GetPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetPhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/phone-numbers/{PhoneNumberId}",
-	Code: 200})
-
-var GetPhoneNumberOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetPhoneNumberOrder",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/phone-number-orders/{PhoneNumberOrderId}",
-	Code: 200})
-
-var GetPhoneNumberSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetPhoneNumberSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/settings/phone-number",
-	Code: 200})
-
-var GetProxySession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetProxySession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
-	Code: 200})
-
-var GetSipMediaApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}",
-	Code: 200})
-
-var GetSipMediaApplicationAlexaSkillConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplicationAlexaSkillConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}/alexa-skill-configuration",
-	Code: 200})
-
-var GetSipMediaApplicationLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplicationLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}/logging-configuration",
-	Code: 200})
-
-var GetSipRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/sip-rules/{SipRuleId}",
-	Code: 200})
-
-var GetSpeakerSearchTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSpeakerSearchTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks/{SpeakerSearchTaskId}",
-	Code: 200})
-
-var GetVoiceConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}",
-	Code: 200})
-
-var GetVoiceConnectorEmergencyCallingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorEmergencyCallingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/emergency-calling-configuration",
-	Code: 200})
-
-var GetVoiceConnectorExternalSystemsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorExternalSystemsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
-	Code: 200})
-
-var GetVoiceConnectorGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connector-groups/{VoiceConnectorGroupId}",
-	Code: 200})
-
-var GetVoiceConnectorLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/logging-configuration",
-	Code: 200})
-
-var GetVoiceConnectorOrigination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorOrigination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/origination",
-	Code: 200})
-
-var GetVoiceConnectorProxy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorProxy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
-	Code: 200})
-
-var GetVoiceConnectorStreamingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorStreamingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/streaming-configuration",
-	Code: 200})
-
-var GetVoiceConnectorTermination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorTermination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/termination",
-	Code: 200})
-
-var GetVoiceConnectorTerminationHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorTerminationHealth",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/termination/health",
-	Code: 200})
-
-var GetVoiceProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-profiles/{VoiceProfileId}",
-	Code: 200})
-
-var GetVoiceProfileDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceProfileDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-profile-domains/{VoiceProfileDomainId}",
-	Code: 200})
-
-var GetVoiceToneAnalysisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceToneAnalysisTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}",
-	Code: 200})
-
-var ListAvailableVoiceConnectorRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListAvailableVoiceConnectorRegions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connector-regions",
-	Code: 200})
-
-var ListPhoneNumberOrders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListPhoneNumberOrders",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/phone-number-orders",
-	Code: 200})
-
-var ListPhoneNumbers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListPhoneNumbers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/phone-numbers",
-	Code: 200})
-
-var ListProxySessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListProxySessions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions",
-	Code: 200})
-
-var ListSipMediaApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSipMediaApplications",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/sip-media-applications",
-	Code: 200})
-
-var ListSipRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSipRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/sip-rules",
-	Code: 200})
-
-var ListSupportedPhoneNumberCountries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSupportedPhoneNumberCountries",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/phone-number-countries",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags",
-	Code: 200})
-
-var ListVoiceConnectorGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectorGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connector-groups",
-	Code: 200})
-
-var ListVoiceConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors",
-	Code: 200})
-
-var ListVoiceConnectorTerminationCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectorTerminationCredentials",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-connectors/{VoiceConnectorId}/termination/credentials",
-	Code: 200})
-
-var ListVoiceProfileDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceProfileDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-profile-domains",
-	Code: 200})
-
-var ListVoiceProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/voice-profiles",
-	Code: 200})
-
-var PutSipMediaApplicationAlexaSkillConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutSipMediaApplicationAlexaSkillConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}/alexa-skill-configuration",
-	Code: 200})
-
-var PutSipMediaApplicationLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutSipMediaApplicationLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}/logging-configuration",
-	Code: 200})
-
-var PutVoiceConnectorEmergencyCallingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorEmergencyCallingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connectors/{VoiceConnectorId}/emergency-calling-configuration",
-	Code: 200})
-
-var PutVoiceConnectorExternalSystemsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorExternalSystemsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
-	Code: 200})
-
-var PutVoiceConnectorLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connectors/{VoiceConnectorId}/logging-configuration",
-	Code: 200})
-
-var PutVoiceConnectorOrigination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorOrigination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connectors/{VoiceConnectorId}/origination",
-	Code: 200})
-
-var PutVoiceConnectorProxy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorProxy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
-	Code: 200})
-
-var PutVoiceConnectorStreamingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorStreamingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connectors/{VoiceConnectorId}/streaming-configuration",
-	Code: 200})
-
-var PutVoiceConnectorTermination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorTermination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connectors/{VoiceConnectorId}/termination",
-	Code: 200})
-
-var PutVoiceConnectorTerminationCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorTerminationCredentials",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}/termination/credentials?operation=put",
-	Code: 204})
-
-var RestorePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "RestorePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/phone-numbers/{PhoneNumberId}?operation=restore",
-	Code: 200})
-
-var SearchAvailablePhoneNumbers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SearchAvailablePhoneNumbers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/search?type=phone-numbers",
-	Code: 200})
-
-var StartSpeakerSearchTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StartSpeakerSearchTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks",
-	Code: 201})
-
-var StartVoiceToneAnalysisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StartVoiceToneAnalysisTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks",
-	Code: 201})
-
-var StopSpeakerSearchTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StopSpeakerSearchTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks/{SpeakerSearchTaskId}?operation=stop",
-	Code: 204})
-
-var StopVoiceToneAnalysisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StopVoiceToneAnalysisTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}?operation=stop",
-	Code: 204})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags?operation=tag-resource",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags?operation=untag-resource",
-	Code: 204})
-
-var UpdateGlobalSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateGlobalSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/settings",
-	Code: 204})
-
-var UpdatePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdatePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/phone-numbers/{PhoneNumberId}",
-	Code: 200})
-
-var UpdatePhoneNumberSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdatePhoneNumberSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/settings/phone-number",
-	Code: 204})
-
-var UpdateProxySession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateProxySession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
-	Code: 201})
-
-var UpdateSipMediaApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipMediaApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}",
-	Code: 200})
-
-var UpdateSipMediaApplicationCall = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipMediaApplicationCall",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/sip-media-applications/{SipMediaApplicationId}/calls/{TransactionId}",
-	Code: 202})
-
-var UpdateSipRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/sip-rules/{SipRuleId}",
-	Code: 202})
-
-var UpdateVoiceConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connectors/{VoiceConnectorId}",
-	Code: 200})
-
-var UpdateVoiceConnectorGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceConnectorGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-connector-groups/{VoiceConnectorGroupId}",
-	Code: 202})
-
-var UpdateVoiceProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-profiles/{VoiceProfileId}",
-	Code: 200})
-
-var UpdateVoiceProfileDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceProfileDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/voice-profile-domains/{VoiceProfileDomainId}",
-	Code: 200})
-
-var ValidateE911Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ValidateE911Address",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/emergency-calling/address",
-	Code: 202})
-
-var _ChimeSDKTelephonyService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ChimeSDKTelephonyService",
-}, smithy.ShapeTypeService, 0)
-
-var ChimeSDKTelephonyService = smithy.NewServiceSchema(_ChimeSDKTelephonyService, "2022-08-03")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Code *smithy.Schema
-
-var AccessDeniedException_Message *smithy.Schema
-
-var Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Address",
-}, smithy.ShapeTypeStructure, 10)
-var Address_streetName *smithy.Schema
-
-var Address_streetSuffix *smithy.Schema
-
-var Address_postDirectional *smithy.Schema
-
-var Address_preDirectional *smithy.Schema
-
-var Address_streetNumber *smithy.Schema
-
-var Address_city *smithy.Schema
-
-var Address_state *smithy.Schema
-
-var Address_postalCode *smithy.Schema
-
-var Address_postalCodePlus4 *smithy.Schema
-
-var Address_country *smithy.Schema
-
-var _AlexaSkillId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AlexaSkillId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AlexaSkillIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AlexaSkillIdList",
-}, smithy.ShapeTypeList, 1)
-var _AlexaSkillIdList_member *smithy.Schema
-
-var AlexaSkillStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AlexaSkillStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AlexaSkillStatus_ACTIVE *smithy.Schema
-
-var AlexaSkillStatus_INACTIVE *smithy.Schema
-
-var _Alpha2CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Alpha2CountryCode",
-}, smithy.ShapeTypeString, 0)
-
-var _AreaCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AreaCode",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Code *smithy.Schema
-
-var BadRequestException_Message *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CallDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CallDetails",
-}, smithy.ShapeTypeStructure, 3)
-var CallDetails_VoiceConnectorId *smithy.Schema
-
-var CallDetails_TransactionId *smithy.Schema
-
-var CallDetails_IsCaller *smithy.Schema
-
-var CallDistributionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CallDistributionType",
-}, smithy.ShapeTypeEnum, 2)
-var CallDistributionType_PriorityWeightedDistribution *smithy.Schema
-
-var CallDistributionType_LoadBalancedDistribution *smithy.Schema
-
-var _CallingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CallingName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CallingNameStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CallingNameStatus",
-}, smithy.ShapeTypeEnum, 4)
-var CallingNameStatus_Unassigned *smithy.Schema
-
-var CallingNameStatus_UpdateInProgress *smithy.Schema
-
-var CallingNameStatus_UpdateSucceeded *smithy.Schema
-
-var CallingNameStatus_UpdateFailed *smithy.Schema
-
-var _CallingRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CallingRegion",
-}, smithy.ShapeTypeString, 0)
-
-var _CallingRegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CallingRegionList",
-}, smithy.ShapeTypeList, 1)
-var _CallingRegionList_member *smithy.Schema
-
-var CallLegType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CallLegType",
-}, smithy.ShapeTypeEnum, 2)
-var CallLegType_CALLER *smithy.Schema
-
-var CallLegType_CALLEE *smithy.Schema
-
-var CandidateAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CandidateAddress",
-}, smithy.ShapeTypeStructure, 7)
-var CandidateAddress_streetInfo *smithy.Schema
-
-var CandidateAddress_streetNumber *smithy.Schema
-
-var CandidateAddress_city *smithy.Schema
-
-var CandidateAddress_state *smithy.Schema
-
-var CandidateAddress_postalCode *smithy.Schema
-
-var CandidateAddress_postalCodePlus4 *smithy.Schema
-
-var CandidateAddress_country *smithy.Schema
-
-var _CandidateAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CandidateAddressList",
-}, smithy.ShapeTypeList, 1)
-var _CandidateAddressList_member *smithy.Schema
-
-var Capability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Capability",
-}, smithy.ShapeTypeEnum, 2)
-var Capability_Voice *smithy.Schema
-
-var Capability_SMS *smithy.Schema
-
-var _CapabilityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CapabilityList",
-}, smithy.ShapeTypeList, 1)
-var _CapabilityList_member *smithy.Schema
-
-var _ClientRequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ClientRequestId",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfidenceScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ConfidenceScore",
-}, smithy.ShapeTypeFloat, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Code *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var ContactCenterSystemType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ContactCenterSystemType",
-}, smithy.ShapeTypeEnum, 4)
-var ContactCenterSystemType_GENESYS_ENGAGE_ON_PREMISES *smithy.Schema
-
-var ContactCenterSystemType_AVAYA_AURA_CALL_CENTER_ELITE *smithy.Schema
-
-var ContactCenterSystemType_AVAYA_AURA_CONTACT_CENTER *smithy.Schema
-
-var ContactCenterSystemType_CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE *smithy.Schema
-
-var _ContactCenterSystemTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ContactCenterSystemTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ContactCenterSystemTypeList_member *smithy.Schema
-
-var _Country = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Country",
-}, smithy.ShapeTypeString, 0)
-
-var _CountryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CountryList",
-}, smithy.ShapeTypeList, 1)
-var _CountryList_member *smithy.Schema
-
-var _CpsLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CpsLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var Credential = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Credential",
-}, smithy.ShapeTypeStructure, 2)
-var Credential_Username *smithy.Schema
-
-var Credential_Password *smithy.Schema
-
-var _CredentialList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CredentialList",
-}, smithy.ShapeTypeList, 1)
-var _CredentialList_member *smithy.Schema
-
-var _DataRetentionInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DataRetentionInHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var DNISEmergencyCallingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DNISEmergencyCallingConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var DNISEmergencyCallingConfiguration_EmergencyPhoneNumber *smithy.Schema
-
-var DNISEmergencyCallingConfiguration_TestPhoneNumber *smithy.Schema
-
-var DNISEmergencyCallingConfiguration_CallingCountry *smithy.Schema
-
-var _DNISEmergencyCallingConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DNISEmergencyCallingConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _DNISEmergencyCallingConfigurationList_member *smithy.Schema
-
-var _E164PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "E164PhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _E164PhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "E164PhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _E164PhoneNumberList_member *smithy.Schema
-
-var EmergencyCallingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "EmergencyCallingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EmergencyCallingConfiguration_DNIS *smithy.Schema
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 17)
-var ErrorCode_BadRequest *smithy.Schema
-
-var ErrorCode_Conflict *smithy.Schema
-
-var ErrorCode_Forbidden *smithy.Schema
-
-var ErrorCode_NotFound *smithy.Schema
-
-var ErrorCode_PreconditionFailed *smithy.Schema
-
-var ErrorCode_ResourceLimitExceeded *smithy.Schema
-
-var ErrorCode_ServiceFailure *smithy.Schema
-
-var ErrorCode_AccessDenied *smithy.Schema
-
-var ErrorCode_ServiceUnavailable *smithy.Schema
-
-var ErrorCode_Throttled *smithy.Schema
-
-var ErrorCode_Throttling *smithy.Schema
-
-var ErrorCode_Unauthorized *smithy.Schema
-
-var ErrorCode_Unprocessable *smithy.Schema
-
-var ErrorCode_VoiceConnectorGroupAssociationsExist *smithy.Schema
-
-var ErrorCode_PhoneNumberAssociationsExist *smithy.Schema
-
-var ErrorCode_Gone *smithy.Schema
-
-var ErrorCode_Validation *smithy.Schema
-
-var ExternalSystemsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ExternalSystemsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ExternalSystemsConfiguration_SessionBorderControllerTypes *smithy.Schema
-
-var ExternalSystemsConfiguration_ContactCenterSystemTypes *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_Code *smithy.Schema
-
-var ForbiddenException_Message *smithy.Schema
-
-var _FunctionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "FunctionArn",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var GeoMatchLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GeoMatchLevel",
-}, smithy.ShapeTypeEnum, 2)
-var GeoMatchLevel_Country *smithy.Schema
-
-var GeoMatchLevel_AreaCode *smithy.Schema
-
-var GeoMatchParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GeoMatchParams",
-}, smithy.ShapeTypeStructure, 2)
-var GeoMatchParams_Country *smithy.Schema
-
-var GeoMatchParams_AreaCode *smithy.Schema
-
-var GoneException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GoneException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 410})
-var GoneException_Code *smithy.Schema
-
-var GoneException_Message *smithy.Schema
-
-var _GuidString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GuidString",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Iso8601Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Iso8601Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var LanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "LanguageCode",
-}, smithy.ShapeTypeEnum, 1)
-var LanguageCode_EN_US *smithy.Schema
-
-var LoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "LoggingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LoggingConfiguration_EnableSIPLogs *smithy.Schema
-
-var LoggingConfiguration_EnableMediaMetricLogs *smithy.Schema
-
-var MediaInsightsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "MediaInsightsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MediaInsightsConfiguration_Disabled *smithy.Schema
-
-var MediaInsightsConfiguration_ConfigurationArn *smithy.Schema
-
-var NetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NetworkType",
-}, smithy.ShapeTypeEnum, 2)
-var NetworkType_IPV4_ONLY *smithy.Schema
-
-var NetworkType_DUAL_STACK *smithy.Schema
-
-var _NextTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NextTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NonEmptyString128",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NonEmptyString256",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NonEmptyStringList",
-}, smithy.ShapeTypeList, 1)
-var _NonEmptyStringList_member *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Code *smithy.Schema
-
-var NotFoundException_Message *smithy.Schema
-
-var NotificationTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NotificationTarget",
-}, smithy.ShapeTypeEnum, 3)
-var NotificationTarget_EventBridge *smithy.Schema
-
-var NotificationTarget_SNS *smithy.Schema
-
-var NotificationTarget_SQS *smithy.Schema
-
-var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NullableBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var NumberSelectionBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "NumberSelectionBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var NumberSelectionBehavior_PreferSticky *smithy.Schema
-
-var NumberSelectionBehavior_AvoidSticky *smithy.Schema
-
-var OrderedPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "OrderedPhoneNumber",
-}, smithy.ShapeTypeStructure, 2)
-var OrderedPhoneNumber_E164PhoneNumber *smithy.Schema
-
-var OrderedPhoneNumber_Status *smithy.Schema
-
-var _OrderedPhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "OrderedPhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _OrderedPhoneNumberList_member *smithy.Schema
-
-var OrderedPhoneNumberStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "OrderedPhoneNumberStatus",
-}, smithy.ShapeTypeEnum, 3)
-var OrderedPhoneNumberStatus_Processing *smithy.Schema
-
-var OrderedPhoneNumberStatus_Acquired *smithy.Schema
-
-var OrderedPhoneNumberStatus_Failed *smithy.Schema
-
-var Origination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Origination",
-}, smithy.ShapeTypeStructure, 2)
-var Origination_Routes *smithy.Schema
-
-var Origination_Disabled *smithy.Schema
-
-var OriginationRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "OriginationRoute",
-}, smithy.ShapeTypeStructure, 5)
-var OriginationRoute_Host *smithy.Schema
-
-var OriginationRoute_Port *smithy.Schema
-
-var OriginationRoute_Protocol *smithy.Schema
-
-var OriginationRoute_Priority *smithy.Schema
-
-var OriginationRoute_Weight *smithy.Schema
-
-var _OriginationRouteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "OriginationRouteList",
-}, smithy.ShapeTypeList, 1)
-var _OriginationRouteList_member *smithy.Schema
-
-var _OriginationRoutePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "OriginationRoutePriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var OriginationRouteProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "OriginationRouteProtocol",
-}, smithy.ShapeTypeEnum, 2)
-var OriginationRouteProtocol_TCP *smithy.Schema
-
-var OriginationRouteProtocol_UDP *smithy.Schema
-
-var _OriginationRouteWeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "OriginationRouteWeight",
-}, smithy.ShapeTypeInteger, 0)
-
-var Participant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Participant",
-}, smithy.ShapeTypeStructure, 2)
-var Participant_PhoneNumber *smithy.Schema
-
-var Participant_ProxyPhoneNumber *smithy.Schema
-
-var _ParticipantPhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ParticipantPhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _ParticipantPhoneNumberList_member *smithy.Schema
-
-var _Participants = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Participants",
-}, smithy.ShapeTypeList, 1)
-var _Participants_member *smithy.Schema
-
-var PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumber",
-}, smithy.ShapeTypeStructure, 16)
-var PhoneNumber_PhoneNumberId *smithy.Schema
-
-var PhoneNumber_E164PhoneNumber *smithy.Schema
-
-var PhoneNumber_PhoneNumberArn *smithy.Schema
-
-var PhoneNumber_Country *smithy.Schema
-
-var PhoneNumber_Type *smithy.Schema
-
-var PhoneNumber_ProductType *smithy.Schema
-
-var PhoneNumber_Status *smithy.Schema
-
-var PhoneNumber_Capabilities *smithy.Schema
-
-var PhoneNumber_Associations *smithy.Schema
-
-var PhoneNumber_CallingName *smithy.Schema
-
-var PhoneNumber_CallingNameStatus *smithy.Schema
-
-var PhoneNumber_CreatedTimestamp *smithy.Schema
-
-var PhoneNumber_UpdatedTimestamp *smithy.Schema
-
-var PhoneNumber_DeletionTimestamp *smithy.Schema
-
-var PhoneNumber_OrderId *smithy.Schema
-
-var PhoneNumber_Name *smithy.Schema
-
-var PhoneNumberAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberAssociation",
-}, smithy.ShapeTypeStructure, 3)
-var PhoneNumberAssociation_Value *smithy.Schema
-
-var PhoneNumberAssociation_Name *smithy.Schema
-
-var PhoneNumberAssociation_AssociatedTimestamp *smithy.Schema
-
-var _PhoneNumberAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberAssociationList_member *smithy.Schema
-
-var PhoneNumberAssociationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberAssociationName",
-}, smithy.ShapeTypeEnum, 3)
-var PhoneNumberAssociationName_VoiceConnectorId *smithy.Schema
-
-var PhoneNumberAssociationName_VoiceConnectorGroupId *smithy.Schema
-
-var PhoneNumberAssociationName_SipRuleId *smithy.Schema
-
-var PhoneNumberCapabilities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberCapabilities",
-}, smithy.ShapeTypeStructure, 6)
-var PhoneNumberCapabilities_InboundCall *smithy.Schema
-
-var PhoneNumberCapabilities_OutboundCall *smithy.Schema
-
-var PhoneNumberCapabilities_InboundSMS *smithy.Schema
-
-var PhoneNumberCapabilities_OutboundSMS *smithy.Schema
-
-var PhoneNumberCapabilities_InboundMMS *smithy.Schema
-
-var PhoneNumberCapabilities_OutboundMMS *smithy.Schema
-
-var _PhoneNumberCountriesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberCountriesList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberCountriesList_member *smithy.Schema
-
-var PhoneNumberCountry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberCountry",
-}, smithy.ShapeTypeStructure, 2)
-var PhoneNumberCountry_CountryCode *smithy.Schema
-
-var PhoneNumberCountry_SupportedPhoneNumberTypes *smithy.Schema
-
-var PhoneNumberError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberError",
-}, smithy.ShapeTypeStructure, 3)
-var PhoneNumberError_PhoneNumberId *smithy.Schema
-
-var PhoneNumberError_ErrorCode *smithy.Schema
-
-var PhoneNumberError_ErrorMessage *smithy.Schema
-
-var _PhoneNumberErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberErrorList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberErrorList_member *smithy.Schema
-
-var _PhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberList_member *smithy.Schema
-
-var _PhoneNumberMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PhoneNumberName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PhoneNumberOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberOrder",
-}, smithy.ShapeTypeStructure, 8)
-var PhoneNumberOrder_PhoneNumberOrderId *smithy.Schema
-
-var PhoneNumberOrder_ProductType *smithy.Schema
-
-var PhoneNumberOrder_Status *smithy.Schema
-
-var PhoneNumberOrder_OrderType *smithy.Schema
-
-var PhoneNumberOrder_OrderedPhoneNumbers *smithy.Schema
-
-var PhoneNumberOrder_CreatedTimestamp *smithy.Schema
-
-var PhoneNumberOrder_UpdatedTimestamp *smithy.Schema
-
-var PhoneNumberOrder_FocDate *smithy.Schema
-
-var _PhoneNumberOrderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberOrderList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberOrderList_member *smithy.Schema
-
-var PhoneNumberOrderStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberOrderStatus",
-}, smithy.ShapeTypeEnum, 11)
-var PhoneNumberOrderStatus_Processing *smithy.Schema
-
-var PhoneNumberOrderStatus_Successful *smithy.Schema
-
-var PhoneNumberOrderStatus_Failed *smithy.Schema
-
-var PhoneNumberOrderStatus_Partial *smithy.Schema
-
-var PhoneNumberOrderStatus_PendingDocuments *smithy.Schema
-
-var PhoneNumberOrderStatus_Submitted *smithy.Schema
-
-var PhoneNumberOrderStatus_FOC *smithy.Schema
-
-var PhoneNumberOrderStatus_ChangeRequested *smithy.Schema
-
-var PhoneNumberOrderStatus_Exception *smithy.Schema
-
-var PhoneNumberOrderStatus_CancelRequested *smithy.Schema
-
-var PhoneNumberOrderStatus_Cancelled *smithy.Schema
-
-var PhoneNumberOrderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberOrderType",
-}, smithy.ShapeTypeEnum, 2)
-var PhoneNumberOrderType_New *smithy.Schema
-
-var PhoneNumberOrderType_Porting *smithy.Schema
-
-var PhoneNumberProductType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberProductType",
-}, smithy.ShapeTypeEnum, 2)
-var PhoneNumberProductType_VoiceConnector *smithy.Schema
-
-var PhoneNumberProductType_SipMediaApplicationDialIn *smithy.Schema
-
-var PhoneNumberStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberStatus",
-}, smithy.ShapeTypeEnum, 11)
-var PhoneNumberStatus_Cancelled *smithy.Schema
-
-var PhoneNumberStatus_PortinCancelRequested *smithy.Schema
-
-var PhoneNumberStatus_PortinInProgress *smithy.Schema
-
-var PhoneNumberStatus_AcquireInProgress *smithy.Schema
-
-var PhoneNumberStatus_AcquireFailed *smithy.Schema
-
-var PhoneNumberStatus_Unassigned *smithy.Schema
-
-var PhoneNumberStatus_Assigned *smithy.Schema
-
-var PhoneNumberStatus_ReleaseInProgress *smithy.Schema
-
-var PhoneNumberStatus_DeleteInProgress *smithy.Schema
-
-var PhoneNumberStatus_ReleaseFailed *smithy.Schema
-
-var PhoneNumberStatus_DeleteFailed *smithy.Schema
-
-var PhoneNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberType",
-}, smithy.ShapeTypeEnum, 2)
-var PhoneNumberType_Local *smithy.Schema
-
-var PhoneNumberType_TollFree *smithy.Schema
-
-var _PhoneNumberTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PhoneNumberTypeList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberTypeList_member *smithy.Schema
-
-var _Port = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Port",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PositiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PositiveInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var Proxy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Proxy",
-}, smithy.ShapeTypeStructure, 4)
-var Proxy_DefaultSessionExpiryMinutes *smithy.Schema
-
-var Proxy_Disabled *smithy.Schema
-
-var Proxy_FallBackPhoneNumber *smithy.Schema
-
-var Proxy_PhoneNumberCountries *smithy.Schema
-
-var ProxySession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ProxySession",
-}, smithy.ShapeTypeStructure, 13)
-var ProxySession_VoiceConnectorId *smithy.Schema
-
-var ProxySession_ProxySessionId *smithy.Schema
-
-var ProxySession_Name *smithy.Schema
-
-var ProxySession_Status *smithy.Schema
-
-var ProxySession_ExpiryMinutes *smithy.Schema
-
-var ProxySession_Capabilities *smithy.Schema
-
-var ProxySession_CreatedTimestamp *smithy.Schema
-
-var ProxySession_UpdatedTimestamp *smithy.Schema
-
-var ProxySession_EndedTimestamp *smithy.Schema
-
-var ProxySession_Participants *smithy.Schema
-
-var ProxySession_NumberSelectionBehavior *smithy.Schema
-
-var ProxySession_GeoMatchLevel *smithy.Schema
-
-var ProxySession_GeoMatchParams *smithy.Schema
-
-var _ProxySessionNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ProxySessionNameString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ProxySessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ProxySessions",
-}, smithy.ShapeTypeList, 1)
-var _ProxySessions_member *smithy.Schema
-
-var ProxySessionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ProxySessionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ProxySessionStatus_Open *smithy.Schema
-
-var ProxySessionStatus_InProgress *smithy.Schema
-
-var ProxySessionStatus_Closed *smithy.Schema
-
-var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceLimitExceededException_Code *smithy.Schema
-
-var ResourceLimitExceededException_Message *smithy.Schema
-
-var _ResultMax = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ResultMax",
-}, smithy.ShapeTypeInteger, 0)
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveNonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SensitiveNonEmptyString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SensitiveStringList",
-}, smithy.ShapeTypeList, 1)
-var _SensitiveStringList_member *smithy.Schema
-
-var ServerSideEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ServerSideEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ServerSideEncryptionConfiguration_KmsKeyArn *smithy.Schema
-
-var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ServiceFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServiceFailureException_Code *smithy.Schema
-
-var ServiceFailureException_Message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Code *smithy.Schema
-
-var ServiceUnavailableException_Message *smithy.Schema
-
-var SessionBorderControllerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SessionBorderControllerType",
-}, smithy.ShapeTypeEnum, 5)
-var SessionBorderControllerType_RIBBON_SBC *smithy.Schema
-
-var SessionBorderControllerType_ORACLE_ACME_PACKET_SBC *smithy.Schema
-
-var SessionBorderControllerType_AVAYA_SBCE *smithy.Schema
-
-var SessionBorderControllerType_CISCO_UNIFIED_BORDER_ELEMENT *smithy.Schema
-
-var SessionBorderControllerType_AUDIOCODES_MEDIANT_SBC *smithy.Schema
-
-var _SessionBorderControllerTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SessionBorderControllerTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SessionBorderControllerTypeList_member *smithy.Schema
-
-var _SipApplicationPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipApplicationPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SipHeadersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipHeadersMap",
-}, smithy.ShapeTypeMap, 2)
-var _SipHeadersMap_key *smithy.Schema
-
-var _SipHeadersMap_value *smithy.Schema
-
-var SipMediaApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipMediaApplication",
-}, smithy.ShapeTypeStructure, 7)
-var SipMediaApplication_SipMediaApplicationId *smithy.Schema
-
-var SipMediaApplication_AwsRegion *smithy.Schema
-
-var SipMediaApplication_Name *smithy.Schema
-
-var SipMediaApplication_Endpoints *smithy.Schema
-
-var SipMediaApplication_CreatedTimestamp *smithy.Schema
-
-var SipMediaApplication_UpdatedTimestamp *smithy.Schema
-
-var SipMediaApplication_SipMediaApplicationArn *smithy.Schema
-
-var SipMediaApplicationAlexaSkillConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipMediaApplicationAlexaSkillConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SipMediaApplicationAlexaSkillConfiguration_AlexaSkillStatus *smithy.Schema
-
-var SipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds *smithy.Schema
-
-var SipMediaApplicationCall = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipMediaApplicationCall",
-}, smithy.ShapeTypeStructure, 1)
-var SipMediaApplicationCall_TransactionId *smithy.Schema
-
-var SipMediaApplicationEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipMediaApplicationEndpoint",
-}, smithy.ShapeTypeStructure, 1)
-var SipMediaApplicationEndpoint_LambdaArn *smithy.Schema
-
-var _SipMediaApplicationEndpointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipMediaApplicationEndpointList",
-}, smithy.ShapeTypeList, 1)
-var _SipMediaApplicationEndpointList_member *smithy.Schema
-
-var _SipMediaApplicationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipMediaApplicationList",
-}, smithy.ShapeTypeList, 1)
-var _SipMediaApplicationList_member *smithy.Schema
-
-var SipMediaApplicationLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipMediaApplicationLoggingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SipMediaApplicationLoggingConfiguration_EnableSipMediaApplicationMessageLogs *smithy.Schema
-
-var _SipMediaApplicationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipMediaApplicationName",
-}, smithy.ShapeTypeString, 0)
-
-var SipRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipRule",
-}, smithy.ShapeTypeStructure, 8)
-var SipRule_SipRuleId *smithy.Schema
-
-var SipRule_Name *smithy.Schema
-
-var SipRule_Disabled *smithy.Schema
-
-var SipRule_TriggerType *smithy.Schema
-
-var SipRule_TriggerValue *smithy.Schema
-
-var SipRule_TargetApplications *smithy.Schema
-
-var SipRule_CreatedTimestamp *smithy.Schema
-
-var SipRule_UpdatedTimestamp *smithy.Schema
-
-var _SipRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipRuleList",
-}, smithy.ShapeTypeList, 1)
-var _SipRuleList_member *smithy.Schema
-
-var _SipRuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipRuleName",
-}, smithy.ShapeTypeString, 0)
-
-var SipRuleTargetApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipRuleTargetApplication",
-}, smithy.ShapeTypeStructure, 3)
-var SipRuleTargetApplication_SipMediaApplicationId *smithy.Schema
-
-var SipRuleTargetApplication_Priority *smithy.Schema
-
-var SipRuleTargetApplication_AwsRegion *smithy.Schema
-
-var _SipRuleTargetApplicationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipRuleTargetApplicationList",
-}, smithy.ShapeTypeList, 1)
-var _SipRuleTargetApplicationList_member *smithy.Schema
-
-var SipRuleTriggerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SipRuleTriggerType",
-}, smithy.ShapeTypeEnum, 2)
-var SipRuleTriggerType_ToPhoneNumber *smithy.Schema
-
-var SipRuleTriggerType_RequestUriHostname *smithy.Schema
-
-var _SMACreateCallArgumentsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SMACreateCallArgumentsMap",
-}, smithy.ShapeTypeMap, 2)
-var _SMACreateCallArgumentsMap_key *smithy.Schema
-
-var _SMACreateCallArgumentsMap_value *smithy.Schema
-
-var _SMAUpdateCallArgumentsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SMAUpdateCallArgumentsMap",
-}, smithy.ShapeTypeMap, 2)
-var _SMAUpdateCallArgumentsMap_key *smithy.Schema
-
-var _SMAUpdateCallArgumentsMap_value *smithy.Schema
-
-var SpeakerSearchDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SpeakerSearchDetails",
-}, smithy.ShapeTypeStructure, 2)
-var SpeakerSearchDetails_Results *smithy.Schema
-
-var SpeakerSearchDetails_VoiceprintGenerationStatus *smithy.Schema
-
-var SpeakerSearchResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SpeakerSearchResult",
-}, smithy.ShapeTypeStructure, 2)
-var SpeakerSearchResult_ConfidenceScore *smithy.Schema
-
-var SpeakerSearchResult_VoiceProfileId *smithy.Schema
-
-var _SpeakerSearchResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SpeakerSearchResultList",
-}, smithy.ShapeTypeList, 1)
-var _SpeakerSearchResultList_member *smithy.Schema
-
-var SpeakerSearchTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SpeakerSearchTask",
-}, smithy.ShapeTypeStructure, 8)
-var SpeakerSearchTask_SpeakerSearchTaskId *smithy.Schema
-
-var SpeakerSearchTask_SpeakerSearchTaskStatus *smithy.Schema
-
-var SpeakerSearchTask_CallDetails *smithy.Schema
-
-var SpeakerSearchTask_SpeakerSearchDetails *smithy.Schema
-
-var SpeakerSearchTask_CreatedTimestamp *smithy.Schema
-
-var SpeakerSearchTask_UpdatedTimestamp *smithy.Schema
-
-var SpeakerSearchTask_StartedTimestamp *smithy.Schema
-
-var SpeakerSearchTask_StatusMessage *smithy.Schema
-
-var StreamingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StreamingConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var StreamingConfiguration_DataRetentionInHours *smithy.Schema
-
-var StreamingConfiguration_Disabled *smithy.Schema
-
-var StreamingConfiguration_StreamingNotificationTargets *smithy.Schema
-
-var StreamingConfiguration_MediaInsightsConfiguration *smithy.Schema
-
-var StreamingNotificationTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StreamingNotificationTarget",
-}, smithy.ShapeTypeStructure, 1)
-var StreamingNotificationTarget_NotificationTarget *smithy.Schema
-
-var _StreamingNotificationTargetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StreamingNotificationTargetList",
-}, smithy.ShapeTypeList, 1)
-var _StreamingNotificationTargetList_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _String128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "String128",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Termination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "Termination",
-}, smithy.ShapeTypeStructure, 5)
-var Termination_CpsLimit *smithy.Schema
-
-var Termination_DefaultPhoneNumber *smithy.Schema
-
-var Termination_CallingRegions *smithy.Schema
-
-var Termination_CidrAllowedList *smithy.Schema
-
-var Termination_Disabled *smithy.Schema
-
-var TerminationHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "TerminationHealth",
-}, smithy.ShapeTypeStructure, 2)
-var TerminationHealth_Timestamp *smithy.Schema
-
-var TerminationHealth_Source *smithy.Schema
-
-var ThrottledClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ThrottledClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottledClientException_Code *smithy.Schema
-
-var ThrottledClientException_Message *smithy.Schema
-
-var _TollFreePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "TollFreePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var UnauthorizedClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UnauthorizedClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedClientException_Code *smithy.Schema
-
-var UnauthorizedClientException_Message *smithy.Schema
-
-var UnprocessableEntityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UnprocessableEntityException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 422})
-var UnprocessableEntityException_Code *smithy.Schema
-
-var UnprocessableEntityException_Message *smithy.Schema
-
-var UpdatePhoneNumberRequestItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdatePhoneNumberRequestItem",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePhoneNumberRequestItem_PhoneNumberId *smithy.Schema
-
-var UpdatePhoneNumberRequestItem_ProductType *smithy.Schema
-
-var UpdatePhoneNumberRequestItem_CallingName *smithy.Schema
-
-var UpdatePhoneNumberRequestItem_Name *smithy.Schema
-
-var _UpdatePhoneNumberRequestItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdatePhoneNumberRequestItemList",
-}, smithy.ShapeTypeList, 1)
-var _UpdatePhoneNumberRequestItemList_member *smithy.Schema
-
-var _ValidationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ValidationResult",
-}, smithy.ShapeTypeInteger, 0)
-
-var VoiceConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnector",
-}, smithy.ShapeTypeStructure, 10)
-var VoiceConnector_VoiceConnectorId *smithy.Schema
-
-var VoiceConnector_AwsRegion *smithy.Schema
-
-var VoiceConnector_Name *smithy.Schema
-
-var VoiceConnector_OutboundHostName *smithy.Schema
-
-var VoiceConnector_RequireEncryption *smithy.Schema
-
-var VoiceConnector_CreatedTimestamp *smithy.Schema
-
-var VoiceConnector_UpdatedTimestamp *smithy.Schema
-
-var VoiceConnector_VoiceConnectorArn *smithy.Schema
-
-var VoiceConnector_IntegrationType *smithy.Schema
-
-var VoiceConnector_NetworkType *smithy.Schema
-
-var VoiceConnectorAwsRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorAwsRegion",
-}, smithy.ShapeTypeEnum, 10)
-var VoiceConnectorAwsRegion_US_EAST_1 *smithy.Schema
-
-var VoiceConnectorAwsRegion_US_WEST_2 *smithy.Schema
-
-var VoiceConnectorAwsRegion_CA_CENTRAL_1 *smithy.Schema
-
-var VoiceConnectorAwsRegion_EU_CENTRAL_1 *smithy.Schema
-
-var VoiceConnectorAwsRegion_EU_WEST_1 *smithy.Schema
-
-var VoiceConnectorAwsRegion_EU_WEST_2 *smithy.Schema
-
-var VoiceConnectorAwsRegion_AP_NORTHEAST_2 *smithy.Schema
-
-var VoiceConnectorAwsRegion_AP_NORTHEAST_1 *smithy.Schema
-
-var VoiceConnectorAwsRegion_AP_SOUTHEAST_1 *smithy.Schema
-
-var VoiceConnectorAwsRegion_AP_SOUTHEAST_2 *smithy.Schema
-
-var _VoiceConnectorAwsRegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorAwsRegionList",
-}, smithy.ShapeTypeList, 1)
-var _VoiceConnectorAwsRegionList_member *smithy.Schema
-
-var VoiceConnectorGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorGroup",
-}, smithy.ShapeTypeStructure, 7)
-var VoiceConnectorGroup_VoiceConnectorGroupId *smithy.Schema
-
-var VoiceConnectorGroup_Name *smithy.Schema
-
-var VoiceConnectorGroup_VoiceConnectorItems *smithy.Schema
-
-var VoiceConnectorGroup_CreatedTimestamp *smithy.Schema
-
-var VoiceConnectorGroup_UpdatedTimestamp *smithy.Schema
-
-var VoiceConnectorGroup_VoiceConnectorGroupArn *smithy.Schema
-
-var VoiceConnectorGroup_CallDistributionType *smithy.Schema
-
-var _VoiceConnectorGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorGroupList",
-}, smithy.ShapeTypeList, 1)
-var _VoiceConnectorGroupList_member *smithy.Schema
-
-var _VoiceConnectorGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _VoiceConnectorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorId",
-}, smithy.ShapeTypeString, 0)
-
-var VoiceConnectorIntegrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorIntegrationType",
-}, smithy.ShapeTypeEnum, 2)
-var VoiceConnectorIntegrationType_CONNECT_CALL_TRANSFER_CONNECTOR *smithy.Schema
-
-var VoiceConnectorIntegrationType_CONNECT_ANALYTICS_CONNECTOR *smithy.Schema
-
-var VoiceConnectorItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorItem",
-}, smithy.ShapeTypeStructure, 2)
-var VoiceConnectorItem_VoiceConnectorId *smithy.Schema
-
-var VoiceConnectorItem_Priority *smithy.Schema
-
-var _VoiceConnectorItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorItemList",
-}, smithy.ShapeTypeList, 1)
-var _VoiceConnectorItemList_member *smithy.Schema
-
-var _VoiceConnectorItemPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorItemPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var _VoiceConnectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorList",
-}, smithy.ShapeTypeList, 1)
-var _VoiceConnectorList_member *smithy.Schema
-
-var _VoiceConnectorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorName",
-}, smithy.ShapeTypeString, 0)
-
-var VoiceConnectorSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceConnectorSettings",
-}, smithy.ShapeTypeStructure, 1)
-var VoiceConnectorSettings_CdrBucket *smithy.Schema
-
-var VoiceProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceProfile",
-}, smithy.ShapeTypeStructure, 6)
-var VoiceProfile_VoiceProfileId *smithy.Schema
-
-var VoiceProfile_VoiceProfileArn *smithy.Schema
-
-var VoiceProfile_VoiceProfileDomainId *smithy.Schema
-
-var VoiceProfile_CreatedTimestamp *smithy.Schema
-
-var VoiceProfile_UpdatedTimestamp *smithy.Schema
-
-var VoiceProfile_ExpirationTimestamp *smithy.Schema
-
-var VoiceProfileDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceProfileDomain",
-}, smithy.ShapeTypeStructure, 7)
-var VoiceProfileDomain_VoiceProfileDomainId *smithy.Schema
-
-var VoiceProfileDomain_VoiceProfileDomainArn *smithy.Schema
-
-var VoiceProfileDomain_Name *smithy.Schema
-
-var VoiceProfileDomain_Description *smithy.Schema
-
-var VoiceProfileDomain_ServerSideEncryptionConfiguration *smithy.Schema
-
-var VoiceProfileDomain_CreatedTimestamp *smithy.Schema
-
-var VoiceProfileDomain_UpdatedTimestamp *smithy.Schema
-
-var _VoiceProfileDomainDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceProfileDomainDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _VoiceProfileDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceProfileDomainName",
-}, smithy.ShapeTypeString, 0)
-
-var VoiceProfileDomainSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceProfileDomainSummary",
-}, smithy.ShapeTypeStructure, 6)
-var VoiceProfileDomainSummary_VoiceProfileDomainId *smithy.Schema
-
-var VoiceProfileDomainSummary_VoiceProfileDomainArn *smithy.Schema
-
-var VoiceProfileDomainSummary_Name *smithy.Schema
-
-var VoiceProfileDomainSummary_Description *smithy.Schema
-
-var VoiceProfileDomainSummary_CreatedTimestamp *smithy.Schema
-
-var VoiceProfileDomainSummary_UpdatedTimestamp *smithy.Schema
-
-var _VoiceProfileDomainSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceProfileDomainSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _VoiceProfileDomainSummaryList_member *smithy.Schema
-
-var VoiceProfileSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceProfileSummary",
-}, smithy.ShapeTypeStructure, 6)
-var VoiceProfileSummary_VoiceProfileId *smithy.Schema
-
-var VoiceProfileSummary_VoiceProfileArn *smithy.Schema
-
-var VoiceProfileSummary_VoiceProfileDomainId *smithy.Schema
-
-var VoiceProfileSummary_CreatedTimestamp *smithy.Schema
-
-var VoiceProfileSummary_UpdatedTimestamp *smithy.Schema
-
-var VoiceProfileSummary_ExpirationTimestamp *smithy.Schema
-
-var _VoiceProfileSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceProfileSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _VoiceProfileSummaryList_member *smithy.Schema
-
-var VoiceToneAnalysisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "VoiceToneAnalysisTask",
-}, smithy.ShapeTypeStructure, 7)
-var VoiceToneAnalysisTask_VoiceToneAnalysisTaskId *smithy.Schema
-
-var VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus *smithy.Schema
-
-var VoiceToneAnalysisTask_CallDetails *smithy.Schema
-
-var VoiceToneAnalysisTask_CreatedTimestamp *smithy.Schema
-
-var VoiceToneAnalysisTask_UpdatedTimestamp *smithy.Schema
-
-var VoiceToneAnalysisTask_StartedTimestamp *smithy.Schema
-
-var VoiceToneAnalysisTask_StatusMessage *smithy.Schema
-
-var AssociatePhoneNumbersWithVoiceConnectorGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AssociatePhoneNumbersWithVoiceConnectorGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociatePhoneNumbersWithVoiceConnectorGroupRequest_VoiceConnectorGroupId *smithy.Schema
-
-var AssociatePhoneNumbersWithVoiceConnectorGroupRequest_E164PhoneNumbers *smithy.Schema
-
-var AssociatePhoneNumbersWithVoiceConnectorGroupRequest_ForceAssociate *smithy.Schema
-
-var AssociatePhoneNumbersWithVoiceConnectorGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AssociatePhoneNumbersWithVoiceConnectorGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors *smithy.Schema
-
-var AssociatePhoneNumbersWithVoiceConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AssociatePhoneNumbersWithVoiceConnectorRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId *smithy.Schema
-
-var AssociatePhoneNumbersWithVoiceConnectorRequest_E164PhoneNumbers *smithy.Schema
-
-var AssociatePhoneNumbersWithVoiceConnectorRequest_ForceAssociate *smithy.Schema
-
-var AssociatePhoneNumbersWithVoiceConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "AssociatePhoneNumbersWithVoiceConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociatePhoneNumbersWithVoiceConnectorResponse_PhoneNumberErrors *smithy.Schema
-
-var BatchDeletePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "BatchDeletePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeletePhoneNumberRequest_PhoneNumberIds *smithy.Schema
-
-var BatchDeletePhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "BatchDeletePhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeletePhoneNumberResponse_PhoneNumberErrors *smithy.Schema
-
-var BatchUpdatePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "BatchUpdatePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems *smithy.Schema
-
-var BatchUpdatePhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "BatchUpdatePhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUpdatePhoneNumberResponse_PhoneNumberErrors *smithy.Schema
-
-var CreatePhoneNumberOrderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreatePhoneNumberOrderRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreatePhoneNumberOrderRequest_ProductType *smithy.Schema
-
-var CreatePhoneNumberOrderRequest_E164PhoneNumbers *smithy.Schema
-
-var CreatePhoneNumberOrderRequest_Name *smithy.Schema
-
-var CreatePhoneNumberOrderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreatePhoneNumberOrderResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePhoneNumberOrderResponse_PhoneNumberOrder *smithy.Schema
-
-var CreateProxySessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateProxySessionRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateProxySessionRequest_VoiceConnectorId *smithy.Schema
-
-var CreateProxySessionRequest_ParticipantPhoneNumbers *smithy.Schema
-
-var CreateProxySessionRequest_Name *smithy.Schema
-
-var CreateProxySessionRequest_ExpiryMinutes *smithy.Schema
-
-var CreateProxySessionRequest_Capabilities *smithy.Schema
-
-var CreateProxySessionRequest_NumberSelectionBehavior *smithy.Schema
-
-var CreateProxySessionRequest_GeoMatchLevel *smithy.Schema
-
-var CreateProxySessionRequest_GeoMatchParams *smithy.Schema
-
-var CreateProxySessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateProxySessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateProxySessionResponse_ProxySession *smithy.Schema
-
-var CreateSipMediaApplicationCallRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipMediaApplicationCallRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateSipMediaApplicationCallRequest_FromPhoneNumber *smithy.Schema
-
-var CreateSipMediaApplicationCallRequest_ToPhoneNumber *smithy.Schema
-
-var CreateSipMediaApplicationCallRequest_SipMediaApplicationId *smithy.Schema
-
-var CreateSipMediaApplicationCallRequest_SipHeaders *smithy.Schema
-
-var CreateSipMediaApplicationCallRequest_ArgumentsMap *smithy.Schema
-
-var CreateSipMediaApplicationCallResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipMediaApplicationCallResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSipMediaApplicationCallResponse_SipMediaApplicationCall *smithy.Schema
-
-var CreateSipMediaApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipMediaApplicationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSipMediaApplicationRequest_AwsRegion *smithy.Schema
-
-var CreateSipMediaApplicationRequest_Name *smithy.Schema
-
-var CreateSipMediaApplicationRequest_Endpoints *smithy.Schema
-
-var CreateSipMediaApplicationRequest_Tags *smithy.Schema
-
-var CreateSipMediaApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipMediaApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSipMediaApplicationResponse_SipMediaApplication *smithy.Schema
-
-var CreateSipRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipRuleRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateSipRuleRequest_Name *smithy.Schema
-
-var CreateSipRuleRequest_TriggerType *smithy.Schema
-
-var CreateSipRuleRequest_TriggerValue *smithy.Schema
-
-var CreateSipRuleRequest_Disabled *smithy.Schema
-
-var CreateSipRuleRequest_TargetApplications *smithy.Schema
-
-var CreateSipRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateSipRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSipRuleResponse_SipRule *smithy.Schema
-
-var CreateVoiceConnectorGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceConnectorGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateVoiceConnectorGroupRequest_Name *smithy.Schema
-
-var CreateVoiceConnectorGroupRequest_VoiceConnectorItems *smithy.Schema
-
-var CreateVoiceConnectorGroupRequest_CallDistributionType *smithy.Schema
-
-var CreateVoiceConnectorGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceConnectorGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVoiceConnectorGroupResponse_VoiceConnectorGroup *smithy.Schema
-
-var CreateVoiceConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceConnectorRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateVoiceConnectorRequest_Name *smithy.Schema
-
-var CreateVoiceConnectorRequest_AwsRegion *smithy.Schema
-
-var CreateVoiceConnectorRequest_RequireEncryption *smithy.Schema
-
-var CreateVoiceConnectorRequest_Tags *smithy.Schema
-
-var CreateVoiceConnectorRequest_IntegrationType *smithy.Schema
-
-var CreateVoiceConnectorRequest_NetworkType *smithy.Schema
-
-var CreateVoiceConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVoiceConnectorResponse_VoiceConnector *smithy.Schema
-
-var CreateVoiceProfileDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceProfileDomainRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateVoiceProfileDomainRequest_Name *smithy.Schema
-
-var CreateVoiceProfileDomainRequest_Description *smithy.Schema
-
-var CreateVoiceProfileDomainRequest_ServerSideEncryptionConfiguration *smithy.Schema
-
-var CreateVoiceProfileDomainRequest_ClientRequestToken *smithy.Schema
-
-var CreateVoiceProfileDomainRequest_Tags *smithy.Schema
-
-var CreateVoiceProfileDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceProfileDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVoiceProfileDomainResponse_VoiceProfileDomain *smithy.Schema
-
-var CreateVoiceProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVoiceProfileRequest_SpeakerSearchTaskId *smithy.Schema
-
-var CreateVoiceProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "CreateVoiceProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVoiceProfileResponse_VoiceProfile *smithy.Schema
-
-var DeletePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeletePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePhoneNumberRequest_PhoneNumberId *smithy.Schema
-
-var DeleteProxySessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteProxySessionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProxySessionRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteProxySessionRequest_ProxySessionId *smithy.Schema
-
-var DeleteSipMediaApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteSipMediaApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSipMediaApplicationRequest_SipMediaApplicationId *smithy.Schema
-
-var DeleteSipRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteSipRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSipRuleRequest_SipRuleId *smithy.Schema
-
-var DeleteVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorEmergencyCallingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorExternalSystemsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteVoiceConnectorGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceConnectorGroupRequest_VoiceConnectorGroupId *smithy.Schema
-
-var DeleteVoiceConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceConnectorRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteVoiceConnectorOriginationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorOriginationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceConnectorOriginationRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteVoiceConnectorProxyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorProxyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceConnectorProxyRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteVoiceConnectorStreamingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorStreamingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteVoiceConnectorTerminationCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorTerminationCredentialsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteVoiceConnectorTerminationCredentialsRequest_Usernames *smithy.Schema
-
-var DeleteVoiceConnectorTerminationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceConnectorTerminationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceConnectorTerminationRequest_VoiceConnectorId *smithy.Schema
-
-var DeleteVoiceProfileDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceProfileDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceProfileDomainRequest_VoiceProfileDomainId *smithy.Schema
-
-var DeleteVoiceProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DeleteVoiceProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVoiceProfileRequest_VoiceProfileId *smithy.Schema
-
-var DisassociatePhoneNumbersFromVoiceConnectorGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DisassociatePhoneNumbersFromVoiceConnectorGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_VoiceConnectorGroupId *smithy.Schema
-
-var DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers *smithy.Schema
-
-var DisassociatePhoneNumbersFromVoiceConnectorGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DisassociatePhoneNumbersFromVoiceConnectorGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors *smithy.Schema
-
-var DisassociatePhoneNumbersFromVoiceConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DisassociatePhoneNumbersFromVoiceConnectorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId *smithy.Schema
-
-var DisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers *smithy.Schema
-
-var DisassociatePhoneNumbersFromVoiceConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "DisassociatePhoneNumbersFromVoiceConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors *smithy.Schema
-
-var GetGlobalSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetGlobalSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetGlobalSettingsResponse_VoiceConnector *smithy.Schema
-
-var GetPhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetPhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPhoneNumberRequest_PhoneNumberId *smithy.Schema
-
-var GetPhoneNumberOrderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetPhoneNumberOrderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPhoneNumberOrderRequest_PhoneNumberOrderId *smithy.Schema
-
-var GetPhoneNumberOrderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetPhoneNumberOrderResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPhoneNumberOrderResponse_PhoneNumberOrder *smithy.Schema
-
-var GetPhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetPhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPhoneNumberResponse_PhoneNumber *smithy.Schema
-
-var GetPhoneNumberSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetPhoneNumberSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPhoneNumberSettingsResponse_CallingName *smithy.Schema
-
-var GetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp *smithy.Schema
-
-var GetProxySessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetProxySessionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetProxySessionRequest_VoiceConnectorId *smithy.Schema
-
-var GetProxySessionRequest_ProxySessionId *smithy.Schema
-
-var GetProxySessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetProxySessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetProxySessionResponse_ProxySession *smithy.Schema
-
-var GetSipMediaApplicationAlexaSkillConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplicationAlexaSkillConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId *smithy.Schema
-
-var GetSipMediaApplicationAlexaSkillConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplicationAlexaSkillConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration *smithy.Schema
-
-var GetSipMediaApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSipMediaApplicationRequest_SipMediaApplicationId *smithy.Schema
-
-var GetSipMediaApplicationLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplicationLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId *smithy.Schema
-
-var GetSipMediaApplicationLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplicationLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration *smithy.Schema
-
-var GetSipMediaApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipMediaApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSipMediaApplicationResponse_SipMediaApplication *smithy.Schema
-
-var GetSipRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSipRuleRequest_SipRuleId *smithy.Schema
-
-var GetSipRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSipRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSipRuleResponse_SipRule *smithy.Schema
-
-var GetSpeakerSearchTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSpeakerSearchTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSpeakerSearchTaskRequest_VoiceConnectorId *smithy.Schema
-
-var GetSpeakerSearchTaskRequest_SpeakerSearchTaskId *smithy.Schema
-
-var GetSpeakerSearchTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetSpeakerSearchTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSpeakerSearchTaskResponse_SpeakerSearchTask *smithy.Schema
-
-var GetVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorEmergencyCallingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorEmergencyCallingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorEmergencyCallingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration *smithy.Schema
-
-var GetVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorExternalSystemsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorExternalSystemsConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorExternalSystemsConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration *smithy.Schema
-
-var GetVoiceConnectorGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorGroupRequest_VoiceConnectorGroupId *smithy.Schema
-
-var GetVoiceConnectorGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorGroupResponse_VoiceConnectorGroup *smithy.Schema
-
-var GetVoiceConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration *smithy.Schema
-
-var GetVoiceConnectorOriginationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorOriginationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorOriginationRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorOriginationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorOriginationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorOriginationResponse_Origination *smithy.Schema
-
-var GetVoiceConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorResponse_VoiceConnector *smithy.Schema
-
-var GetVoiceConnectorProxyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorProxyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorProxyRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorProxyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorProxyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorProxyResponse_Proxy *smithy.Schema
-
-var GetVoiceConnectorStreamingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorStreamingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorStreamingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorStreamingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration *smithy.Schema
-
-var GetVoiceConnectorTerminationHealthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorTerminationHealthRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorTerminationHealthRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorTerminationHealthResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorTerminationHealthResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorTerminationHealthResponse_TerminationHealth *smithy.Schema
-
-var GetVoiceConnectorTerminationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorTerminationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorTerminationRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceConnectorTerminationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceConnectorTerminationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceConnectorTerminationResponse_Termination *smithy.Schema
-
-var GetVoiceProfileDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceProfileDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceProfileDomainRequest_VoiceProfileDomainId *smithy.Schema
-
-var GetVoiceProfileDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceProfileDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceProfileDomainResponse_VoiceProfileDomain *smithy.Schema
-
-var GetVoiceProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceProfileRequest_VoiceProfileId *smithy.Schema
-
-var GetVoiceProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceProfileResponse_VoiceProfile *smithy.Schema
-
-var GetVoiceToneAnalysisTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceToneAnalysisTaskRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetVoiceToneAnalysisTaskRequest_VoiceConnectorId *smithy.Schema
-
-var GetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId *smithy.Schema
-
-var GetVoiceToneAnalysisTaskRequest_IsCaller *smithy.Schema
-
-var GetVoiceToneAnalysisTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "GetVoiceToneAnalysisTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask *smithy.Schema
-
-var ListAvailableVoiceConnectorRegionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListAvailableVoiceConnectorRegionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions *smithy.Schema
-
-var ListPhoneNumberOrdersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListPhoneNumberOrdersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPhoneNumberOrdersRequest_NextToken *smithy.Schema
-
-var ListPhoneNumberOrdersRequest_MaxResults *smithy.Schema
-
-var ListPhoneNumberOrdersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListPhoneNumberOrdersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPhoneNumberOrdersResponse_PhoneNumberOrders *smithy.Schema
-
-var ListPhoneNumberOrdersResponse_NextToken *smithy.Schema
-
-var ListPhoneNumbersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListPhoneNumbersRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListPhoneNumbersRequest_Status *smithy.Schema
-
-var ListPhoneNumbersRequest_ProductType *smithy.Schema
-
-var ListPhoneNumbersRequest_FilterName *smithy.Schema
-
-var ListPhoneNumbersRequest_FilterValue *smithy.Schema
-
-var ListPhoneNumbersRequest_MaxResults *smithy.Schema
-
-var ListPhoneNumbersRequest_NextToken *smithy.Schema
-
-var ListPhoneNumbersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListPhoneNumbersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPhoneNumbersResponse_PhoneNumbers *smithy.Schema
-
-var ListPhoneNumbersResponse_NextToken *smithy.Schema
-
-var ListProxySessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListProxySessionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListProxySessionsRequest_VoiceConnectorId *smithy.Schema
-
-var ListProxySessionsRequest_Status *smithy.Schema
-
-var ListProxySessionsRequest_NextToken *smithy.Schema
-
-var ListProxySessionsRequest_MaxResults *smithy.Schema
-
-var ListProxySessionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListProxySessionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProxySessionsResponse_ProxySessions *smithy.Schema
-
-var ListProxySessionsResponse_NextToken *smithy.Schema
-
-var ListSipMediaApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSipMediaApplicationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSipMediaApplicationsRequest_MaxResults *smithy.Schema
-
-var ListSipMediaApplicationsRequest_NextToken *smithy.Schema
-
-var ListSipMediaApplicationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSipMediaApplicationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSipMediaApplicationsResponse_SipMediaApplications *smithy.Schema
-
-var ListSipMediaApplicationsResponse_NextToken *smithy.Schema
-
-var ListSipRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSipRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSipRulesRequest_SipMediaApplicationId *smithy.Schema
-
-var ListSipRulesRequest_MaxResults *smithy.Schema
-
-var ListSipRulesRequest_NextToken *smithy.Schema
-
-var ListSipRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSipRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSipRulesResponse_SipRules *smithy.Schema
-
-var ListSipRulesResponse_NextToken *smithy.Schema
-
-var ListSupportedPhoneNumberCountriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSupportedPhoneNumberCountriesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListSupportedPhoneNumberCountriesRequest_ProductType *smithy.Schema
-
-var ListSupportedPhoneNumberCountriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListSupportedPhoneNumberCountriesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListVoiceConnectorGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectorGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListVoiceConnectorGroupsRequest_NextToken *smithy.Schema
-
-var ListVoiceConnectorGroupsRequest_MaxResults *smithy.Schema
-
-var ListVoiceConnectorGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectorGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVoiceConnectorGroupsResponse_VoiceConnectorGroups *smithy.Schema
-
-var ListVoiceConnectorGroupsResponse_NextToken *smithy.Schema
-
-var ListVoiceConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListVoiceConnectorsRequest_NextToken *smithy.Schema
-
-var ListVoiceConnectorsRequest_MaxResults *smithy.Schema
-
-var ListVoiceConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVoiceConnectorsResponse_VoiceConnectors *smithy.Schema
-
-var ListVoiceConnectorsResponse_NextToken *smithy.Schema
-
-var ListVoiceConnectorTerminationCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectorTerminationCredentialsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId *smithy.Schema
-
-var ListVoiceConnectorTerminationCredentialsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceConnectorTerminationCredentialsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListVoiceConnectorTerminationCredentialsResponse_Usernames *smithy.Schema
-
-var ListVoiceProfileDomainsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceProfileDomainsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListVoiceProfileDomainsRequest_NextToken *smithy.Schema
-
-var ListVoiceProfileDomainsRequest_MaxResults *smithy.Schema
-
-var ListVoiceProfileDomainsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceProfileDomainsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVoiceProfileDomainsResponse_VoiceProfileDomains *smithy.Schema
-
-var ListVoiceProfileDomainsResponse_NextToken *smithy.Schema
-
-var ListVoiceProfilesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceProfilesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListVoiceProfilesRequest_VoiceProfileDomainId *smithy.Schema
-
-var ListVoiceProfilesRequest_NextToken *smithy.Schema
-
-var ListVoiceProfilesRequest_MaxResults *smithy.Schema
-
-var ListVoiceProfilesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ListVoiceProfilesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVoiceProfilesResponse_VoiceProfiles *smithy.Schema
-
-var ListVoiceProfilesResponse_NextToken *smithy.Schema
-
-var PutSipMediaApplicationAlexaSkillConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutSipMediaApplicationAlexaSkillConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId *smithy.Schema
-
-var PutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationAlexaSkillConfiguration *smithy.Schema
-
-var PutSipMediaApplicationAlexaSkillConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutSipMediaApplicationAlexaSkillConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration *smithy.Schema
-
-var PutSipMediaApplicationLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutSipMediaApplicationLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId *smithy.Schema
-
-var PutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationLoggingConfiguration *smithy.Schema
-
-var PutSipMediaApplicationLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutSipMediaApplicationLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration *smithy.Schema
-
-var PutVoiceConnectorEmergencyCallingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorEmergencyCallingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var PutVoiceConnectorEmergencyCallingConfigurationRequest_EmergencyCallingConfiguration *smithy.Schema
-
-var PutVoiceConnectorEmergencyCallingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorEmergencyCallingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration *smithy.Schema
-
-var PutVoiceConnectorExternalSystemsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorExternalSystemsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var PutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes *smithy.Schema
-
-var PutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes *smithy.Schema
-
-var PutVoiceConnectorExternalSystemsConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorExternalSystemsConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration *smithy.Schema
-
-var PutVoiceConnectorLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var PutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration *smithy.Schema
-
-var PutVoiceConnectorLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration *smithy.Schema
-
-var PutVoiceConnectorOriginationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorOriginationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutVoiceConnectorOriginationRequest_VoiceConnectorId *smithy.Schema
-
-var PutVoiceConnectorOriginationRequest_Origination *smithy.Schema
-
-var PutVoiceConnectorOriginationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorOriginationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutVoiceConnectorOriginationResponse_Origination *smithy.Schema
-
-var PutVoiceConnectorProxyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorProxyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutVoiceConnectorProxyRequest_VoiceConnectorId *smithy.Schema
-
-var PutVoiceConnectorProxyRequest_DefaultSessionExpiryMinutes *smithy.Schema
-
-var PutVoiceConnectorProxyRequest_PhoneNumberPoolCountries *smithy.Schema
-
-var PutVoiceConnectorProxyRequest_FallBackPhoneNumber *smithy.Schema
-
-var PutVoiceConnectorProxyRequest_Disabled *smithy.Schema
-
-var PutVoiceConnectorProxyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorProxyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutVoiceConnectorProxyResponse_Proxy *smithy.Schema
-
-var PutVoiceConnectorStreamingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorStreamingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId *smithy.Schema
-
-var PutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration *smithy.Schema
-
-var PutVoiceConnectorStreamingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorStreamingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration *smithy.Schema
-
-var PutVoiceConnectorTerminationCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorTerminationCredentialsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId *smithy.Schema
-
-var PutVoiceConnectorTerminationCredentialsRequest_Credentials *smithy.Schema
-
-var PutVoiceConnectorTerminationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorTerminationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutVoiceConnectorTerminationRequest_VoiceConnectorId *smithy.Schema
-
-var PutVoiceConnectorTerminationRequest_Termination *smithy.Schema
-
-var PutVoiceConnectorTerminationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "PutVoiceConnectorTerminationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutVoiceConnectorTerminationResponse_Termination *smithy.Schema
-
-var RestorePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "RestorePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RestorePhoneNumberRequest_PhoneNumberId *smithy.Schema
-
-var RestorePhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "RestorePhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RestorePhoneNumberResponse_PhoneNumber *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SearchAvailablePhoneNumbersRequest",
-}, smithy.ShapeTypeStructure, 8)
-var SearchAvailablePhoneNumbersRequest_AreaCode *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_City *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_Country *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_State *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_TollFreePrefix *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_PhoneNumberType *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_MaxResults *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_NextToken *smithy.Schema
-
-var SearchAvailablePhoneNumbersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "SearchAvailablePhoneNumbersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchAvailablePhoneNumbersResponse_E164PhoneNumbers *smithy.Schema
-
-var SearchAvailablePhoneNumbersResponse_NextToken *smithy.Schema
-
-var StartSpeakerSearchTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StartSpeakerSearchTaskRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartSpeakerSearchTaskRequest_VoiceConnectorId *smithy.Schema
-
-var StartSpeakerSearchTaskRequest_TransactionId *smithy.Schema
-
-var StartSpeakerSearchTaskRequest_VoiceProfileDomainId *smithy.Schema
-
-var StartSpeakerSearchTaskRequest_ClientRequestToken *smithy.Schema
-
-var StartSpeakerSearchTaskRequest_CallLeg *smithy.Schema
-
-var StartSpeakerSearchTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StartSpeakerSearchTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSpeakerSearchTaskResponse_SpeakerSearchTask *smithy.Schema
-
-var StartVoiceToneAnalysisTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StartVoiceToneAnalysisTaskRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartVoiceToneAnalysisTaskRequest_VoiceConnectorId *smithy.Schema
-
-var StartVoiceToneAnalysisTaskRequest_TransactionId *smithy.Schema
-
-var StartVoiceToneAnalysisTaskRequest_LanguageCode *smithy.Schema
-
-var StartVoiceToneAnalysisTaskRequest_ClientRequestToken *smithy.Schema
-
-var StartVoiceToneAnalysisTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StartVoiceToneAnalysisTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask *smithy.Schema
-
-var StopSpeakerSearchTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StopSpeakerSearchTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StopSpeakerSearchTaskRequest_VoiceConnectorId *smithy.Schema
-
-var StopSpeakerSearchTaskRequest_SpeakerSearchTaskId *smithy.Schema
-
-var StopVoiceToneAnalysisTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "StopVoiceToneAnalysisTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StopVoiceToneAnalysisTaskRequest_VoiceConnectorId *smithy.Schema
-
-var StopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateGlobalSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateGlobalSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGlobalSettingsRequest_VoiceConnector *smithy.Schema
-
-var UpdatePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdatePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePhoneNumberRequest_PhoneNumberId *smithy.Schema
-
-var UpdatePhoneNumberRequest_ProductType *smithy.Schema
-
-var UpdatePhoneNumberRequest_CallingName *smithy.Schema
-
-var UpdatePhoneNumberRequest_Name *smithy.Schema
-
-var UpdatePhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdatePhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePhoneNumberResponse_PhoneNumber *smithy.Schema
-
-var UpdatePhoneNumberSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdatePhoneNumberSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePhoneNumberSettingsRequest_CallingName *smithy.Schema
-
-var UpdateProxySessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateProxySessionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateProxySessionRequest_VoiceConnectorId *smithy.Schema
-
-var UpdateProxySessionRequest_ProxySessionId *smithy.Schema
-
-var UpdateProxySessionRequest_Capabilities *smithy.Schema
-
-var UpdateProxySessionRequest_ExpiryMinutes *smithy.Schema
-
-var UpdateProxySessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateProxySessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateProxySessionResponse_ProxySession *smithy.Schema
-
-var UpdateSipMediaApplicationCallRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipMediaApplicationCallRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSipMediaApplicationCallRequest_SipMediaApplicationId *smithy.Schema
-
-var UpdateSipMediaApplicationCallRequest_TransactionId *smithy.Schema
-
-var UpdateSipMediaApplicationCallRequest_Arguments *smithy.Schema
-
-var UpdateSipMediaApplicationCallResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipMediaApplicationCallResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSipMediaApplicationCallResponse_SipMediaApplicationCall *smithy.Schema
-
-var UpdateSipMediaApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipMediaApplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSipMediaApplicationRequest_SipMediaApplicationId *smithy.Schema
-
-var UpdateSipMediaApplicationRequest_Name *smithy.Schema
-
-var UpdateSipMediaApplicationRequest_Endpoints *smithy.Schema
-
-var UpdateSipMediaApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipMediaApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSipMediaApplicationResponse_SipMediaApplication *smithy.Schema
-
-var UpdateSipRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipRuleRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateSipRuleRequest_SipRuleId *smithy.Schema
-
-var UpdateSipRuleRequest_Name *smithy.Schema
-
-var UpdateSipRuleRequest_Disabled *smithy.Schema
-
-var UpdateSipRuleRequest_TargetApplications *smithy.Schema
-
-var UpdateSipRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateSipRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSipRuleResponse_SipRule *smithy.Schema
-
-var UpdateVoiceConnectorGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceConnectorGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId *smithy.Schema
-
-var UpdateVoiceConnectorGroupRequest_Name *smithy.Schema
-
-var UpdateVoiceConnectorGroupRequest_VoiceConnectorItems *smithy.Schema
-
-var UpdateVoiceConnectorGroupRequest_CallDistributionType *smithy.Schema
-
-var UpdateVoiceConnectorGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceConnectorGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVoiceConnectorGroupResponse_VoiceConnectorGroup *smithy.Schema
-
-var UpdateVoiceConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceConnectorRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateVoiceConnectorRequest_VoiceConnectorId *smithy.Schema
-
-var UpdateVoiceConnectorRequest_Name *smithy.Schema
-
-var UpdateVoiceConnectorRequest_RequireEncryption *smithy.Schema
-
-var UpdateVoiceConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVoiceConnectorResponse_VoiceConnector *smithy.Schema
-
-var UpdateVoiceProfileDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceProfileDomainRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateVoiceProfileDomainRequest_VoiceProfileDomainId *smithy.Schema
-
-var UpdateVoiceProfileDomainRequest_Name *smithy.Schema
-
-var UpdateVoiceProfileDomainRequest_Description *smithy.Schema
-
-var UpdateVoiceProfileDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceProfileDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVoiceProfileDomainResponse_VoiceProfileDomain *smithy.Schema
-
-var UpdateVoiceProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceProfileRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateVoiceProfileRequest_VoiceProfileId *smithy.Schema
-
-var UpdateVoiceProfileRequest_SpeakerSearchTaskId *smithy.Schema
-
-var UpdateVoiceProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "UpdateVoiceProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVoiceProfileResponse_VoiceProfile *smithy.Schema
-
-var ValidateE911AddressRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ValidateE911AddressRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ValidateE911AddressRequest_AwsAccountId *smithy.Schema
-
-var ValidateE911AddressRequest_StreetNumber *smithy.Schema
-
-var ValidateE911AddressRequest_StreetInfo *smithy.Schema
-
-var ValidateE911AddressRequest_City *smithy.Schema
-
-var ValidateE911AddressRequest_State *smithy.Schema
-
-var ValidateE911AddressRequest_Country *smithy.Schema
-
-var ValidateE911AddressRequest_PostalCode *smithy.Schema
-
-var ValidateE911AddressResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkvoice",
-	Name:      "ValidateE911AddressResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ValidateE911AddressResponse_ValidationResult *smithy.Schema
-
-var ValidateE911AddressResponse_AddressExternalId *smithy.Schema
-
-var ValidateE911AddressResponse_Address *smithy.Schema
-
-var ValidateE911AddressResponse_CandidateAddressList *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ErrorCode_BadRequest = ErrorCode.AddMember("BadRequest", smithyprelude.Unit)
-
-	ErrorCode_Conflict = ErrorCode.AddMember("Conflict", smithyprelude.Unit)
-
-	ErrorCode_Forbidden = ErrorCode.AddMember("Forbidden", smithyprelude.Unit)
-
-	ErrorCode_NotFound = ErrorCode.AddMember("NotFound", smithyprelude.Unit)
-
-	ErrorCode_PreconditionFailed = ErrorCode.AddMember("PreconditionFailed", smithyprelude.Unit)
-
-	ErrorCode_ResourceLimitExceeded = ErrorCode.AddMember("ResourceLimitExceeded", smithyprelude.Unit)
-
-	ErrorCode_ServiceFailure = ErrorCode.AddMember("ServiceFailure", smithyprelude.Unit)
-
-	ErrorCode_AccessDenied = ErrorCode.AddMember("AccessDenied", smithyprelude.Unit)
-
-	ErrorCode_ServiceUnavailable = ErrorCode.AddMember("ServiceUnavailable", smithyprelude.Unit)
-
-	ErrorCode_Throttled = ErrorCode.AddMember("Throttled", smithyprelude.Unit)
-
-	ErrorCode_Throttling = ErrorCode.AddMember("Throttling", smithyprelude.Unit)
-
-	ErrorCode_Unauthorized = ErrorCode.AddMember("Unauthorized", smithyprelude.Unit)
-
-	ErrorCode_Unprocessable = ErrorCode.AddMember("Unprocessable", smithyprelude.Unit)
-
-	ErrorCode_VoiceConnectorGroupAssociationsExist = ErrorCode.AddMember("VoiceConnectorGroupAssociationsExist", smithyprelude.Unit)
-
-	ErrorCode_PhoneNumberAssociationsExist = ErrorCode.AddMember("PhoneNumberAssociationsExist", smithyprelude.Unit)
-
-	ErrorCode_Gone = ErrorCode.AddMember("Gone", smithyprelude.Unit)
-
-	ErrorCode_Validation = ErrorCode.AddMember("Validation", smithyprelude.Unit)
-
-	AccessDeniedException_Code = AccessDeniedException.AddMember("Code", ErrorCode)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
-
-	Address_streetName = Address.AddMember("streetName", _SensitiveNonEmptyString)
-
-	Address_streetSuffix = Address.AddMember("streetSuffix", _SensitiveNonEmptyString)
-
-	Address_postDirectional = Address.AddMember("postDirectional", _SensitiveNonEmptyString)
-
-	Address_preDirectional = Address.AddMember("preDirectional", _SensitiveNonEmptyString)
-
-	Address_streetNumber = Address.AddMember("streetNumber", _SensitiveNonEmptyString)
-
-	Address_city = Address.AddMember("city", _SensitiveNonEmptyString)
-
-	Address_state = Address.AddMember("state", _SensitiveNonEmptyString)
-
-	Address_postalCode = Address.AddMember("postalCode", _SensitiveNonEmptyString)
-
-	Address_postalCodePlus4 = Address.AddMember("postalCodePlus4", _SensitiveNonEmptyString)
-
-	Address_country = Address.AddMember("country", _SensitiveNonEmptyString)
-
-	_AlexaSkillIdList_member = _AlexaSkillIdList.AddMember("member", _AlexaSkillId)
-
-	AlexaSkillStatus_ACTIVE = AlexaSkillStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AlexaSkillStatus_INACTIVE = AlexaSkillStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	BadRequestException_Code = BadRequestException.AddMember("Code", ErrorCode)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _String)
-
-	CallDetails_VoiceConnectorId = CallDetails.AddMember("VoiceConnectorId", _VoiceConnectorId)
-
-	CallDetails_TransactionId = CallDetails.AddMember("TransactionId", _NonEmptyString256)
-
-	CallDetails_IsCaller = CallDetails.AddMember("IsCaller", _Boolean)
-
-	CallDistributionType_PriorityWeightedDistribution = CallDistributionType.AddMember("PriorityWeightedDistribution", smithyprelude.Unit)
-
-	CallDistributionType_LoadBalancedDistribution = CallDistributionType.AddMember("LoadBalancedDistribution", smithyprelude.Unit)
-
-	CallingNameStatus_Unassigned = CallingNameStatus.AddMember("Unassigned", smithyprelude.Unit)
-
-	CallingNameStatus_UpdateInProgress = CallingNameStatus.AddMember("UpdateInProgress", smithyprelude.Unit)
-
-	CallingNameStatus_UpdateSucceeded = CallingNameStatus.AddMember("UpdateSucceeded", smithyprelude.Unit)
-
-	CallingNameStatus_UpdateFailed = CallingNameStatus.AddMember("UpdateFailed", smithyprelude.Unit)
-
-	_CallingRegionList_member = _CallingRegionList.AddMember("member", _CallingRegion)
-
-	CallLegType_CALLER = CallLegType.AddMember("CALLER", smithyprelude.Unit)
-
-	CallLegType_CALLEE = CallLegType.AddMember("CALLEE", smithyprelude.Unit)
-
-	CandidateAddress_streetInfo = CandidateAddress.AddMember("streetInfo", _SensitiveNonEmptyString)
-
-	CandidateAddress_streetNumber = CandidateAddress.AddMember("streetNumber", _SensitiveNonEmptyString)
-
-	CandidateAddress_city = CandidateAddress.AddMember("city", _SensitiveNonEmptyString)
-
-	CandidateAddress_state = CandidateAddress.AddMember("state", _SensitiveNonEmptyString)
-
-	CandidateAddress_postalCode = CandidateAddress.AddMember("postalCode", _SensitiveNonEmptyString)
-
-	CandidateAddress_postalCodePlus4 = CandidateAddress.AddMember("postalCodePlus4", _SensitiveNonEmptyString)
-
-	CandidateAddress_country = CandidateAddress.AddMember("country", _SensitiveNonEmptyString)
-
-	_CandidateAddressList_member = _CandidateAddressList.AddMember("member", CandidateAddress, &smithytraits.XMLName{Name: "CandidateAddress"})
-
-	Capability_Voice = Capability.AddMember("Voice", smithyprelude.Unit)
-
-	Capability_SMS = Capability.AddMember("SMS", smithyprelude.Unit)
-
-	_CapabilityList_member = _CapabilityList.AddMember("member", Capability)
-
-	ConflictException_Code = ConflictException.AddMember("Code", ErrorCode)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	ContactCenterSystemType_GENESYS_ENGAGE_ON_PREMISES = ContactCenterSystemType.AddMember("GENESYS_ENGAGE_ON_PREMISES", smithyprelude.Unit)
-
-	ContactCenterSystemType_AVAYA_AURA_CALL_CENTER_ELITE = ContactCenterSystemType.AddMember("AVAYA_AURA_CALL_CENTER_ELITE", smithyprelude.Unit)
-
-	ContactCenterSystemType_AVAYA_AURA_CONTACT_CENTER = ContactCenterSystemType.AddMember("AVAYA_AURA_CONTACT_CENTER", smithyprelude.Unit)
-
-	ContactCenterSystemType_CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE = ContactCenterSystemType.AddMember("CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE", smithyprelude.Unit)
-
-	_ContactCenterSystemTypeList_member = _ContactCenterSystemTypeList.AddMember("member", ContactCenterSystemType)
-
-	_CountryList_member = _CountryList.AddMember("member", _Country)
-
-	Credential_Username = Credential.AddMember("Username", _SensitiveString)
-
-	Credential_Password = Credential.AddMember("Password", _SensitiveString)
-
-	_CredentialList_member = _CredentialList.AddMember("member", Credential)
-
-	DNISEmergencyCallingConfiguration_EmergencyPhoneNumber = DNISEmergencyCallingConfiguration.AddMember("EmergencyPhoneNumber", _E164PhoneNumber)
-
-	DNISEmergencyCallingConfiguration_TestPhoneNumber = DNISEmergencyCallingConfiguration.AddMember("TestPhoneNumber", _E164PhoneNumber)
-
-	DNISEmergencyCallingConfiguration_CallingCountry = DNISEmergencyCallingConfiguration.AddMember("CallingCountry", _Alpha2CountryCode)
-
-	_DNISEmergencyCallingConfigurationList_member = _DNISEmergencyCallingConfigurationList.AddMember("member", DNISEmergencyCallingConfiguration)
-
-	_E164PhoneNumberList_member = _E164PhoneNumberList.AddMember("member", _E164PhoneNumber)
-
-	EmergencyCallingConfiguration_DNIS = EmergencyCallingConfiguration.AddMember("DNIS", _DNISEmergencyCallingConfigurationList)
-
-	SessionBorderControllerType_RIBBON_SBC = SessionBorderControllerType.AddMember("RIBBON_SBC", smithyprelude.Unit)
-
-	SessionBorderControllerType_ORACLE_ACME_PACKET_SBC = SessionBorderControllerType.AddMember("ORACLE_ACME_PACKET_SBC", smithyprelude.Unit)
-
-	SessionBorderControllerType_AVAYA_SBCE = SessionBorderControllerType.AddMember("AVAYA_SBCE", smithyprelude.Unit)
-
-	SessionBorderControllerType_CISCO_UNIFIED_BORDER_ELEMENT = SessionBorderControllerType.AddMember("CISCO_UNIFIED_BORDER_ELEMENT", smithyprelude.Unit)
-
-	SessionBorderControllerType_AUDIOCODES_MEDIANT_SBC = SessionBorderControllerType.AddMember("AUDIOCODES_MEDIANT_SBC", smithyprelude.Unit)
-
-	_SessionBorderControllerTypeList_member = _SessionBorderControllerTypeList.AddMember("member", SessionBorderControllerType)
-
-	ExternalSystemsConfiguration_SessionBorderControllerTypes = ExternalSystemsConfiguration.AddMember("SessionBorderControllerTypes", _SessionBorderControllerTypeList)
-
-	ExternalSystemsConfiguration_ContactCenterSystemTypes = ExternalSystemsConfiguration.AddMember("ContactCenterSystemTypes", _ContactCenterSystemTypeList)
-
-	ForbiddenException_Code = ForbiddenException.AddMember("Code", ErrorCode)
-
-	ForbiddenException_Message = ForbiddenException.AddMember("Message", _String)
-
-	GeoMatchLevel_Country = GeoMatchLevel.AddMember("Country", smithyprelude.Unit)
-
-	GeoMatchLevel_AreaCode = GeoMatchLevel.AddMember("AreaCode", smithyprelude.Unit)
-
-	GeoMatchParams_Country = GeoMatchParams.AddMember("Country", _Country)
-
-	GeoMatchParams_AreaCode = GeoMatchParams.AddMember("AreaCode", _AreaCode)
-
-	GoneException_Code = GoneException.AddMember("Code", ErrorCode)
-
-	GoneException_Message = GoneException.AddMember("Message", _String)
-
-	LanguageCode_EN_US = LanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	LoggingConfiguration_EnableSIPLogs = LoggingConfiguration.AddMember("EnableSIPLogs", _Boolean)
-
-	LoggingConfiguration_EnableMediaMetricLogs = LoggingConfiguration.AddMember("EnableMediaMetricLogs", _Boolean)
-
-	MediaInsightsConfiguration_Disabled = MediaInsightsConfiguration.AddMember("Disabled", _Boolean)
-
-	MediaInsightsConfiguration_ConfigurationArn = MediaInsightsConfiguration.AddMember("ConfigurationArn", _Arn)
-
-	NetworkType_IPV4_ONLY = NetworkType.AddMember("IPV4_ONLY", smithyprelude.Unit)
-
-	NetworkType_DUAL_STACK = NetworkType.AddMember("DUAL_STACK", smithyprelude.Unit)
-
-	_NonEmptyStringList_member = _NonEmptyStringList.AddMember("member", _String)
-
-	NotFoundException_Code = NotFoundException.AddMember("Code", ErrorCode)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _String)
-
-	NotificationTarget_EventBridge = NotificationTarget.AddMember("EventBridge", smithyprelude.Unit)
-
-	NotificationTarget_SNS = NotificationTarget.AddMember("SNS", smithyprelude.Unit)
-
-	NotificationTarget_SQS = NotificationTarget.AddMember("SQS", smithyprelude.Unit)
-
-	NumberSelectionBehavior_PreferSticky = NumberSelectionBehavior.AddMember("PreferSticky", smithyprelude.Unit)
-
-	NumberSelectionBehavior_AvoidSticky = NumberSelectionBehavior.AddMember("AvoidSticky", smithyprelude.Unit)
-
-	OrderedPhoneNumberStatus_Processing = OrderedPhoneNumberStatus.AddMember("Processing", smithyprelude.Unit)
-
-	OrderedPhoneNumberStatus_Acquired = OrderedPhoneNumberStatus.AddMember("Acquired", smithyprelude.Unit)
-
-	OrderedPhoneNumberStatus_Failed = OrderedPhoneNumberStatus.AddMember("Failed", smithyprelude.Unit)
-
-	OrderedPhoneNumber_E164PhoneNumber = OrderedPhoneNumber.AddMember("E164PhoneNumber", _E164PhoneNumber)
-
-	OrderedPhoneNumber_Status = OrderedPhoneNumber.AddMember("Status", OrderedPhoneNumberStatus)
-
-	_OrderedPhoneNumberList_member = _OrderedPhoneNumberList.AddMember("member", OrderedPhoneNumber)
-
-	OriginationRouteProtocol_TCP = OriginationRouteProtocol.AddMember("TCP", smithyprelude.Unit)
-
-	OriginationRouteProtocol_UDP = OriginationRouteProtocol.AddMember("UDP", smithyprelude.Unit)
-
-	OriginationRoute_Host = OriginationRoute.AddMember("Host", _String)
-
-	OriginationRoute_Port = OriginationRoute.AddMember("Port", _Port)
-
-	OriginationRoute_Protocol = OriginationRoute.AddMember("Protocol", OriginationRouteProtocol)
-
-	OriginationRoute_Priority = OriginationRoute.AddMember("Priority", _OriginationRoutePriority)
-
-	OriginationRoute_Weight = OriginationRoute.AddMember("Weight", _OriginationRouteWeight)
-
-	_OriginationRouteList_member = _OriginationRouteList.AddMember("member", OriginationRoute)
-
-	Origination_Routes = Origination.AddMember("Routes", _OriginationRouteList)
-
-	Origination_Disabled = Origination.AddMember("Disabled", _Boolean)
-
-	Participant_PhoneNumber = Participant.AddMember("PhoneNumber", _E164PhoneNumber)
-
-	Participant_ProxyPhoneNumber = Participant.AddMember("ProxyPhoneNumber", _E164PhoneNumber)
-
-	_ParticipantPhoneNumberList_member = _ParticipantPhoneNumberList.AddMember("member", _E164PhoneNumber)
-
-	_Participants_member = _Participants.AddMember("member", Participant)
-
-	PhoneNumberType_Local = PhoneNumberType.AddMember("Local", smithyprelude.Unit)
-
-	PhoneNumberType_TollFree = PhoneNumberType.AddMember("TollFree", smithyprelude.Unit)
-
-	PhoneNumberProductType_VoiceConnector = PhoneNumberProductType.AddMember("VoiceConnector", smithyprelude.Unit)
-
-	PhoneNumberProductType_SipMediaApplicationDialIn = PhoneNumberProductType.AddMember("SipMediaApplicationDialIn", smithyprelude.Unit)
-
-	PhoneNumberStatus_Cancelled = PhoneNumberStatus.AddMember("Cancelled", smithyprelude.Unit)
-
-	PhoneNumberStatus_PortinCancelRequested = PhoneNumberStatus.AddMember("PortinCancelRequested", smithyprelude.Unit)
-
-	PhoneNumberStatus_PortinInProgress = PhoneNumberStatus.AddMember("PortinInProgress", smithyprelude.Unit)
-
-	PhoneNumberStatus_AcquireInProgress = PhoneNumberStatus.AddMember("AcquireInProgress", smithyprelude.Unit)
-
-	PhoneNumberStatus_AcquireFailed = PhoneNumberStatus.AddMember("AcquireFailed", smithyprelude.Unit)
-
-	PhoneNumberStatus_Unassigned = PhoneNumberStatus.AddMember("Unassigned", smithyprelude.Unit)
-
-	PhoneNumberStatus_Assigned = PhoneNumberStatus.AddMember("Assigned", smithyprelude.Unit)
-
-	PhoneNumberStatus_ReleaseInProgress = PhoneNumberStatus.AddMember("ReleaseInProgress", smithyprelude.Unit)
-
-	PhoneNumberStatus_DeleteInProgress = PhoneNumberStatus.AddMember("DeleteInProgress", smithyprelude.Unit)
-
-	PhoneNumberStatus_ReleaseFailed = PhoneNumberStatus.AddMember("ReleaseFailed", smithyprelude.Unit)
-
-	PhoneNumberStatus_DeleteFailed = PhoneNumberStatus.AddMember("DeleteFailed", smithyprelude.Unit)
-
-	PhoneNumberCapabilities_InboundCall = PhoneNumberCapabilities.AddMember("InboundCall", _NullableBoolean)
-
-	PhoneNumberCapabilities_OutboundCall = PhoneNumberCapabilities.AddMember("OutboundCall", _NullableBoolean)
-
-	PhoneNumberCapabilities_InboundSMS = PhoneNumberCapabilities.AddMember("InboundSMS", _NullableBoolean)
-
-	PhoneNumberCapabilities_OutboundSMS = PhoneNumberCapabilities.AddMember("OutboundSMS", _NullableBoolean)
-
-	PhoneNumberCapabilities_InboundMMS = PhoneNumberCapabilities.AddMember("InboundMMS", _NullableBoolean)
-
-	PhoneNumberCapabilities_OutboundMMS = PhoneNumberCapabilities.AddMember("OutboundMMS", _NullableBoolean)
-
-	PhoneNumberAssociationName_VoiceConnectorId = PhoneNumberAssociationName.AddMember("VoiceConnectorId", smithyprelude.Unit)
-
-	PhoneNumberAssociationName_VoiceConnectorGroupId = PhoneNumberAssociationName.AddMember("VoiceConnectorGroupId", smithyprelude.Unit)
-
-	PhoneNumberAssociationName_SipRuleId = PhoneNumberAssociationName.AddMember("SipRuleId", smithyprelude.Unit)
-
-	PhoneNumberAssociation_Value = PhoneNumberAssociation.AddMember("Value", _String)
-
-	PhoneNumberAssociation_Name = PhoneNumberAssociation.AddMember("Name", PhoneNumberAssociationName)
-
-	PhoneNumberAssociation_AssociatedTimestamp = PhoneNumberAssociation.AddMember("AssociatedTimestamp", _Iso8601Timestamp)
-
-	_PhoneNumberAssociationList_member = _PhoneNumberAssociationList.AddMember("member", PhoneNumberAssociation)
-
-	PhoneNumber_PhoneNumberId = PhoneNumber.AddMember("PhoneNumberId", _SensitiveNonEmptyString)
-
-	PhoneNumber_E164PhoneNumber = PhoneNumber.AddMember("E164PhoneNumber", _E164PhoneNumber)
-
-	PhoneNumber_PhoneNumberArn = PhoneNumber.AddMember("PhoneNumberArn", _NonEmptyString)
-
-	PhoneNumber_Country = PhoneNumber.AddMember("Country", _Alpha2CountryCode)
-
-	PhoneNumber_Type = PhoneNumber.AddMember("Type", PhoneNumberType)
-
-	PhoneNumber_ProductType = PhoneNumber.AddMember("ProductType", PhoneNumberProductType)
-
-	PhoneNumber_Status = PhoneNumber.AddMember("Status", PhoneNumberStatus)
-
-	PhoneNumber_Capabilities = PhoneNumber.AddMember("Capabilities", PhoneNumberCapabilities)
-
-	PhoneNumber_Associations = PhoneNumber.AddMember("Associations", _PhoneNumberAssociationList)
-
-	PhoneNumber_CallingName = PhoneNumber.AddMember("CallingName", _CallingName)
-
-	PhoneNumber_CallingNameStatus = PhoneNumber.AddMember("CallingNameStatus", CallingNameStatus)
-
-	PhoneNumber_CreatedTimestamp = PhoneNumber.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	PhoneNumber_UpdatedTimestamp = PhoneNumber.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	PhoneNumber_DeletionTimestamp = PhoneNumber.AddMember("DeletionTimestamp", _Iso8601Timestamp)
-
-	PhoneNumber_OrderId = PhoneNumber.AddMember("OrderId", _GuidString)
-
-	PhoneNumber_Name = PhoneNumber.AddMember("Name", _PhoneNumberName)
-
-	_PhoneNumberTypeList_member = _PhoneNumberTypeList.AddMember("member", PhoneNumberType)
-
-	PhoneNumberCountry_CountryCode = PhoneNumberCountry.AddMember("CountryCode", _Alpha2CountryCode)
-
-	PhoneNumberCountry_SupportedPhoneNumberTypes = PhoneNumberCountry.AddMember("SupportedPhoneNumberTypes", _PhoneNumberTypeList)
-
-	_PhoneNumberCountriesList_member = _PhoneNumberCountriesList.AddMember("member", PhoneNumberCountry)
-
-	PhoneNumberError_PhoneNumberId = PhoneNumberError.AddMember("PhoneNumberId", _SensitiveNonEmptyString)
-
-	PhoneNumberError_ErrorCode = PhoneNumberError.AddMember("ErrorCode", ErrorCode)
-
-	PhoneNumberError_ErrorMessage = PhoneNumberError.AddMember("ErrorMessage", _String)
-
-	_PhoneNumberErrorList_member = _PhoneNumberErrorList.AddMember("member", PhoneNumberError)
-
-	_PhoneNumberList_member = _PhoneNumberList.AddMember("member", PhoneNumber)
-
-	PhoneNumberOrderStatus_Processing = PhoneNumberOrderStatus.AddMember("Processing", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Successful = PhoneNumberOrderStatus.AddMember("Successful", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Failed = PhoneNumberOrderStatus.AddMember("Failed", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Partial = PhoneNumberOrderStatus.AddMember("Partial", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_PendingDocuments = PhoneNumberOrderStatus.AddMember("PendingDocuments", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Submitted = PhoneNumberOrderStatus.AddMember("Submitted", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_FOC = PhoneNumberOrderStatus.AddMember("FOC", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_ChangeRequested = PhoneNumberOrderStatus.AddMember("ChangeRequested", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Exception = PhoneNumberOrderStatus.AddMember("Exception", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_CancelRequested = PhoneNumberOrderStatus.AddMember("CancelRequested", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Cancelled = PhoneNumberOrderStatus.AddMember("Cancelled", smithyprelude.Unit)
-
-	PhoneNumberOrderType_New = PhoneNumberOrderType.AddMember("New", smithyprelude.Unit)
-
-	PhoneNumberOrderType_Porting = PhoneNumberOrderType.AddMember("Porting", smithyprelude.Unit)
-
-	PhoneNumberOrder_PhoneNumberOrderId = PhoneNumberOrder.AddMember("PhoneNumberOrderId", _GuidString)
-
-	PhoneNumberOrder_ProductType = PhoneNumberOrder.AddMember("ProductType", PhoneNumberProductType)
-
-	PhoneNumberOrder_Status = PhoneNumberOrder.AddMember("Status", PhoneNumberOrderStatus)
-
-	PhoneNumberOrder_OrderType = PhoneNumberOrder.AddMember("OrderType", PhoneNumberOrderType)
-
-	PhoneNumberOrder_OrderedPhoneNumbers = PhoneNumberOrder.AddMember("OrderedPhoneNumbers", _OrderedPhoneNumberList)
-
-	PhoneNumberOrder_CreatedTimestamp = PhoneNumberOrder.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	PhoneNumberOrder_UpdatedTimestamp = PhoneNumberOrder.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	PhoneNumberOrder_FocDate = PhoneNumberOrder.AddMember("FocDate", _String)
-
-	_PhoneNumberOrderList_member = _PhoneNumberOrderList.AddMember("member", PhoneNumberOrder)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	Proxy_DefaultSessionExpiryMinutes = Proxy.AddMember("DefaultSessionExpiryMinutes", _Integer)
-
-	Proxy_Disabled = Proxy.AddMember("Disabled", _Boolean)
-
-	Proxy_FallBackPhoneNumber = Proxy.AddMember("FallBackPhoneNumber", _E164PhoneNumber)
-
-	Proxy_PhoneNumberCountries = Proxy.AddMember("PhoneNumberCountries", _StringList)
-
-	ProxySessionStatus_Open = ProxySessionStatus.AddMember("Open", smithyprelude.Unit)
-
-	ProxySessionStatus_InProgress = ProxySessionStatus.AddMember("InProgress", smithyprelude.Unit)
-
-	ProxySessionStatus_Closed = ProxySessionStatus.AddMember("Closed", smithyprelude.Unit)
-
-	ProxySession_VoiceConnectorId = ProxySession.AddMember("VoiceConnectorId", _VoiceConnectorId)
-
-	ProxySession_ProxySessionId = ProxySession.AddMember("ProxySessionId", _NonEmptyString128)
-
-	ProxySession_Name = ProxySession.AddMember("Name", _String128)
-
-	ProxySession_Status = ProxySession.AddMember("Status", ProxySessionStatus)
-
-	ProxySession_ExpiryMinutes = ProxySession.AddMember("ExpiryMinutes", _PositiveInteger)
-
-	ProxySession_Capabilities = ProxySession.AddMember("Capabilities", _CapabilityList)
-
-	ProxySession_CreatedTimestamp = ProxySession.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	ProxySession_UpdatedTimestamp = ProxySession.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	ProxySession_EndedTimestamp = ProxySession.AddMember("EndedTimestamp", _Iso8601Timestamp)
-
-	ProxySession_Participants = ProxySession.AddMember("Participants", _Participants)
-
-	ProxySession_NumberSelectionBehavior = ProxySession.AddMember("NumberSelectionBehavior", NumberSelectionBehavior)
-
-	ProxySession_GeoMatchLevel = ProxySession.AddMember("GeoMatchLevel", GeoMatchLevel)
-
-	ProxySession_GeoMatchParams = ProxySession.AddMember("GeoMatchParams", GeoMatchParams)
-
-	_ProxySessions_member = _ProxySessions.AddMember("member", ProxySession)
-
-	ResourceLimitExceededException_Code = ResourceLimitExceededException.AddMember("Code", ErrorCode)
-
-	ResourceLimitExceededException_Message = ResourceLimitExceededException.AddMember("Message", _String)
-
-	_SensitiveStringList_member = _SensitiveStringList.AddMember("member", _SensitiveString)
-
-	ServerSideEncryptionConfiguration_KmsKeyArn = ServerSideEncryptionConfiguration.AddMember("KmsKeyArn", _Arn)
-
-	ServiceFailureException_Code = ServiceFailureException.AddMember("Code", ErrorCode)
-
-	ServiceFailureException_Message = ServiceFailureException.AddMember("Message", _String)
-
-	ServiceUnavailableException_Code = ServiceUnavailableException.AddMember("Code", ErrorCode)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _String)
-
-	_SipHeadersMap_key = _SipHeadersMap.AddMember("key", _SensitiveString)
-
-	_SipHeadersMap_value = _SipHeadersMap.AddMember("value", _SensitiveString)
-
-	SipMediaApplicationEndpoint_LambdaArn = SipMediaApplicationEndpoint.AddMember("LambdaArn", _FunctionArn)
-
-	_SipMediaApplicationEndpointList_member = _SipMediaApplicationEndpointList.AddMember("member", SipMediaApplicationEndpoint)
-
-	SipMediaApplication_SipMediaApplicationId = SipMediaApplication.AddMember("SipMediaApplicationId", _NonEmptyString)
-
-	SipMediaApplication_AwsRegion = SipMediaApplication.AddMember("AwsRegion", _String)
-
-	SipMediaApplication_Name = SipMediaApplication.AddMember("Name", _SipMediaApplicationName)
-
-	SipMediaApplication_Endpoints = SipMediaApplication.AddMember("Endpoints", _SipMediaApplicationEndpointList)
-
-	SipMediaApplication_CreatedTimestamp = SipMediaApplication.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	SipMediaApplication_UpdatedTimestamp = SipMediaApplication.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	SipMediaApplication_SipMediaApplicationArn = SipMediaApplication.AddMember("SipMediaApplicationArn", _NonEmptyString)
-
-	SipMediaApplicationAlexaSkillConfiguration_AlexaSkillStatus = SipMediaApplicationAlexaSkillConfiguration.AddMember("AlexaSkillStatus", AlexaSkillStatus)
-
-	SipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds = SipMediaApplicationAlexaSkillConfiguration.AddMember("AlexaSkillIds", _AlexaSkillIdList)
-
-	SipMediaApplicationCall_TransactionId = SipMediaApplicationCall.AddMember("TransactionId", _GuidString)
-
-	_SipMediaApplicationList_member = _SipMediaApplicationList.AddMember("member", SipMediaApplication)
-
-	SipMediaApplicationLoggingConfiguration_EnableSipMediaApplicationMessageLogs = SipMediaApplicationLoggingConfiguration.AddMember("EnableSipMediaApplicationMessageLogs", _Boolean)
-
-	SipRuleTriggerType_ToPhoneNumber = SipRuleTriggerType.AddMember("ToPhoneNumber", smithyprelude.Unit)
-
-	SipRuleTriggerType_RequestUriHostname = SipRuleTriggerType.AddMember("RequestUriHostname", smithyprelude.Unit)
-
-	SipRuleTargetApplication_SipMediaApplicationId = SipRuleTargetApplication.AddMember("SipMediaApplicationId", _NonEmptyString)
-
-	SipRuleTargetApplication_Priority = SipRuleTargetApplication.AddMember("Priority", _SipApplicationPriority)
-
-	SipRuleTargetApplication_AwsRegion = SipRuleTargetApplication.AddMember("AwsRegion", _String)
-
-	_SipRuleTargetApplicationList_member = _SipRuleTargetApplicationList.AddMember("member", SipRuleTargetApplication)
-
-	SipRule_SipRuleId = SipRule.AddMember("SipRuleId", _NonEmptyString)
-
-	SipRule_Name = SipRule.AddMember("Name", _SipRuleName)
-
-	SipRule_Disabled = SipRule.AddMember("Disabled", _Boolean)
-
-	SipRule_TriggerType = SipRule.AddMember("TriggerType", SipRuleTriggerType)
-
-	SipRule_TriggerValue = SipRule.AddMember("TriggerValue", _NonEmptyString)
-
-	SipRule_TargetApplications = SipRule.AddMember("TargetApplications", _SipRuleTargetApplicationList)
-
-	SipRule_CreatedTimestamp = SipRule.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	SipRule_UpdatedTimestamp = SipRule.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	_SipRuleList_member = _SipRuleList.AddMember("member", SipRule)
-
-	_SMACreateCallArgumentsMap_key = _SMACreateCallArgumentsMap.AddMember("key", _SensitiveString)
-
-	_SMACreateCallArgumentsMap_value = _SMACreateCallArgumentsMap.AddMember("value", _SensitiveString)
-
-	_SMAUpdateCallArgumentsMap_key = _SMAUpdateCallArgumentsMap.AddMember("key", _SensitiveString)
-
-	_SMAUpdateCallArgumentsMap_value = _SMAUpdateCallArgumentsMap.AddMember("value", _SensitiveString)
-
-	SpeakerSearchResult_ConfidenceScore = SpeakerSearchResult.AddMember("ConfidenceScore", _ConfidenceScore)
-
-	SpeakerSearchResult_VoiceProfileId = SpeakerSearchResult.AddMember("VoiceProfileId", _NonEmptyString256)
-
-	_SpeakerSearchResultList_member = _SpeakerSearchResultList.AddMember("member", SpeakerSearchResult)
-
-	SpeakerSearchDetails_Results = SpeakerSearchDetails.AddMember("Results", _SpeakerSearchResultList)
-
-	SpeakerSearchDetails_VoiceprintGenerationStatus = SpeakerSearchDetails.AddMember("VoiceprintGenerationStatus", _NonEmptyString256)
-
-	SpeakerSearchTask_SpeakerSearchTaskId = SpeakerSearchTask.AddMember("SpeakerSearchTaskId", _NonEmptyString256)
-
-	SpeakerSearchTask_SpeakerSearchTaskStatus = SpeakerSearchTask.AddMember("SpeakerSearchTaskStatus", _NonEmptyString)
-
-	SpeakerSearchTask_CallDetails = SpeakerSearchTask.AddMember("CallDetails", CallDetails)
-
-	SpeakerSearchTask_SpeakerSearchDetails = SpeakerSearchTask.AddMember("SpeakerSearchDetails", SpeakerSearchDetails)
-
-	SpeakerSearchTask_CreatedTimestamp = SpeakerSearchTask.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	SpeakerSearchTask_UpdatedTimestamp = SpeakerSearchTask.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	SpeakerSearchTask_StartedTimestamp = SpeakerSearchTask.AddMember("StartedTimestamp", _Iso8601Timestamp)
-
-	SpeakerSearchTask_StatusMessage = SpeakerSearchTask.AddMember("StatusMessage", _String)
-
-	StreamingNotificationTarget_NotificationTarget = StreamingNotificationTarget.AddMember("NotificationTarget", NotificationTarget)
-
-	_StreamingNotificationTargetList_member = _StreamingNotificationTargetList.AddMember("member", StreamingNotificationTarget)
-
-	StreamingConfiguration_DataRetentionInHours = StreamingConfiguration.AddMember("DataRetentionInHours", _DataRetentionInHours)
-
-	StreamingConfiguration_Disabled = StreamingConfiguration.AddMember("Disabled", _Boolean)
-
-	StreamingConfiguration_StreamingNotificationTargets = StreamingConfiguration.AddMember("StreamingNotificationTargets", _StreamingNotificationTargetList)
-
-	StreamingConfiguration_MediaInsightsConfiguration = StreamingConfiguration.AddMember("MediaInsightsConfiguration", MediaInsightsConfiguration)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	Termination_CpsLimit = Termination.AddMember("CpsLimit", _CpsLimit)
-
-	Termination_DefaultPhoneNumber = Termination.AddMember("DefaultPhoneNumber", _E164PhoneNumber)
-
-	Termination_CallingRegions = Termination.AddMember("CallingRegions", _CallingRegionList)
-
-	Termination_CidrAllowedList = Termination.AddMember("CidrAllowedList", _StringList)
-
-	Termination_Disabled = Termination.AddMember("Disabled", _Boolean)
-
-	TerminationHealth_Timestamp = TerminationHealth.AddMember("Timestamp", _Iso8601Timestamp)
-
-	TerminationHealth_Source = TerminationHealth.AddMember("Source", _String)
-
-	ThrottledClientException_Code = ThrottledClientException.AddMember("Code", ErrorCode)
-
-	ThrottledClientException_Message = ThrottledClientException.AddMember("Message", _String)
-
-	UnauthorizedClientException_Code = UnauthorizedClientException.AddMember("Code", ErrorCode)
-
-	UnauthorizedClientException_Message = UnauthorizedClientException.AddMember("Message", _String)
-
-	UnprocessableEntityException_Code = UnprocessableEntityException.AddMember("Code", ErrorCode)
-
-	UnprocessableEntityException_Message = UnprocessableEntityException.AddMember("Message", _String)
-
-	UpdatePhoneNumberRequestItem_PhoneNumberId = UpdatePhoneNumberRequestItem.AddMember("PhoneNumberId", _SensitiveNonEmptyString)
-
-	UpdatePhoneNumberRequestItem_ProductType = UpdatePhoneNumberRequestItem.AddMember("ProductType", PhoneNumberProductType)
-
-	UpdatePhoneNumberRequestItem_CallingName = UpdatePhoneNumberRequestItem.AddMember("CallingName", _CallingName)
-
-	UpdatePhoneNumberRequestItem_Name = UpdatePhoneNumberRequestItem.AddMember("Name", _PhoneNumberName)
-
-	_UpdatePhoneNumberRequestItemList_member = _UpdatePhoneNumberRequestItemList.AddMember("member", UpdatePhoneNumberRequestItem)
-
-	VoiceConnectorAwsRegion_US_EAST_1 = VoiceConnectorAwsRegion.AddMember("US_EAST_1", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_US_WEST_2 = VoiceConnectorAwsRegion.AddMember("US_WEST_2", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_CA_CENTRAL_1 = VoiceConnectorAwsRegion.AddMember("CA_CENTRAL_1", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_EU_CENTRAL_1 = VoiceConnectorAwsRegion.AddMember("EU_CENTRAL_1", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_EU_WEST_1 = VoiceConnectorAwsRegion.AddMember("EU_WEST_1", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_EU_WEST_2 = VoiceConnectorAwsRegion.AddMember("EU_WEST_2", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_AP_NORTHEAST_2 = VoiceConnectorAwsRegion.AddMember("AP_NORTHEAST_2", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_AP_NORTHEAST_1 = VoiceConnectorAwsRegion.AddMember("AP_NORTHEAST_1", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_AP_SOUTHEAST_1 = VoiceConnectorAwsRegion.AddMember("AP_SOUTHEAST_1", smithyprelude.Unit)
-
-	VoiceConnectorAwsRegion_AP_SOUTHEAST_2 = VoiceConnectorAwsRegion.AddMember("AP_SOUTHEAST_2", smithyprelude.Unit)
-
-	VoiceConnectorIntegrationType_CONNECT_CALL_TRANSFER_CONNECTOR = VoiceConnectorIntegrationType.AddMember("CONNECT_CALL_TRANSFER_CONNECTOR", smithyprelude.Unit)
-
-	VoiceConnectorIntegrationType_CONNECT_ANALYTICS_CONNECTOR = VoiceConnectorIntegrationType.AddMember("CONNECT_ANALYTICS_CONNECTOR", smithyprelude.Unit)
-
-	VoiceConnector_VoiceConnectorId = VoiceConnector.AddMember("VoiceConnectorId", _VoiceConnectorId)
-
-	VoiceConnector_AwsRegion = VoiceConnector.AddMember("AwsRegion", VoiceConnectorAwsRegion)
-
-	VoiceConnector_Name = VoiceConnector.AddMember("Name", _VoiceConnectorName)
-
-	VoiceConnector_OutboundHostName = VoiceConnector.AddMember("OutboundHostName", _String)
-
-	VoiceConnector_RequireEncryption = VoiceConnector.AddMember("RequireEncryption", _Boolean)
-
-	VoiceConnector_CreatedTimestamp = VoiceConnector.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	VoiceConnector_UpdatedTimestamp = VoiceConnector.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	VoiceConnector_VoiceConnectorArn = VoiceConnector.AddMember("VoiceConnectorArn", _NonEmptyString)
-
-	VoiceConnector_IntegrationType = VoiceConnector.AddMember("IntegrationType", VoiceConnectorIntegrationType)
-
-	VoiceConnector_NetworkType = VoiceConnector.AddMember("NetworkType", NetworkType)
-
-	_VoiceConnectorAwsRegionList_member = _VoiceConnectorAwsRegionList.AddMember("member", VoiceConnectorAwsRegion)
-
-	VoiceConnectorItem_VoiceConnectorId = VoiceConnectorItem.AddMember("VoiceConnectorId", _VoiceConnectorId)
-
-	VoiceConnectorItem_Priority = VoiceConnectorItem.AddMember("Priority", _VoiceConnectorItemPriority)
-
-	_VoiceConnectorItemList_member = _VoiceConnectorItemList.AddMember("member", VoiceConnectorItem)
-
-	VoiceConnectorGroup_VoiceConnectorGroupId = VoiceConnectorGroup.AddMember("VoiceConnectorGroupId", _NonEmptyString)
-
-	VoiceConnectorGroup_Name = VoiceConnectorGroup.AddMember("Name", _VoiceConnectorGroupName)
-
-	VoiceConnectorGroup_VoiceConnectorItems = VoiceConnectorGroup.AddMember("VoiceConnectorItems", _VoiceConnectorItemList)
-
-	VoiceConnectorGroup_CreatedTimestamp = VoiceConnectorGroup.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	VoiceConnectorGroup_UpdatedTimestamp = VoiceConnectorGroup.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	VoiceConnectorGroup_VoiceConnectorGroupArn = VoiceConnectorGroup.AddMember("VoiceConnectorGroupArn", _NonEmptyString)
-
-	VoiceConnectorGroup_CallDistributionType = VoiceConnectorGroup.AddMember("CallDistributionType", CallDistributionType)
-
-	_VoiceConnectorGroupList_member = _VoiceConnectorGroupList.AddMember("member", VoiceConnectorGroup)
-
-	_VoiceConnectorList_member = _VoiceConnectorList.AddMember("member", VoiceConnector)
-
-	VoiceConnectorSettings_CdrBucket = VoiceConnectorSettings.AddMember("CdrBucket", _S3BucketName)
-
-	VoiceProfile_VoiceProfileId = VoiceProfile.AddMember("VoiceProfileId", _NonEmptyString256)
-
-	VoiceProfile_VoiceProfileArn = VoiceProfile.AddMember("VoiceProfileArn", _Arn)
-
-	VoiceProfile_VoiceProfileDomainId = VoiceProfile.AddMember("VoiceProfileDomainId", _NonEmptyString256)
-
-	VoiceProfile_CreatedTimestamp = VoiceProfile.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	VoiceProfile_UpdatedTimestamp = VoiceProfile.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	VoiceProfile_ExpirationTimestamp = VoiceProfile.AddMember("ExpirationTimestamp", _Iso8601Timestamp)
-
-	VoiceProfileDomain_VoiceProfileDomainId = VoiceProfileDomain.AddMember("VoiceProfileDomainId", _NonEmptyString256)
-
-	VoiceProfileDomain_VoiceProfileDomainArn = VoiceProfileDomain.AddMember("VoiceProfileDomainArn", _Arn)
-
-	VoiceProfileDomain_Name = VoiceProfileDomain.AddMember("Name", _VoiceProfileDomainName)
-
-	VoiceProfileDomain_Description = VoiceProfileDomain.AddMember("Description", _VoiceProfileDomainDescription)
-
-	VoiceProfileDomain_ServerSideEncryptionConfiguration = VoiceProfileDomain.AddMember("ServerSideEncryptionConfiguration", ServerSideEncryptionConfiguration)
-
-	VoiceProfileDomain_CreatedTimestamp = VoiceProfileDomain.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	VoiceProfileDomain_UpdatedTimestamp = VoiceProfileDomain.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	VoiceProfileDomainSummary_VoiceProfileDomainId = VoiceProfileDomainSummary.AddMember("VoiceProfileDomainId", _NonEmptyString256)
-
-	VoiceProfileDomainSummary_VoiceProfileDomainArn = VoiceProfileDomainSummary.AddMember("VoiceProfileDomainArn", _Arn)
-
-	VoiceProfileDomainSummary_Name = VoiceProfileDomainSummary.AddMember("Name", _VoiceProfileDomainName)
-
-	VoiceProfileDomainSummary_Description = VoiceProfileDomainSummary.AddMember("Description", _VoiceProfileDomainDescription)
-
-	VoiceProfileDomainSummary_CreatedTimestamp = VoiceProfileDomainSummary.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	VoiceProfileDomainSummary_UpdatedTimestamp = VoiceProfileDomainSummary.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	_VoiceProfileDomainSummaryList_member = _VoiceProfileDomainSummaryList.AddMember("member", VoiceProfileDomainSummary)
-
-	VoiceProfileSummary_VoiceProfileId = VoiceProfileSummary.AddMember("VoiceProfileId", _NonEmptyString256)
-
-	VoiceProfileSummary_VoiceProfileArn = VoiceProfileSummary.AddMember("VoiceProfileArn", _Arn)
-
-	VoiceProfileSummary_VoiceProfileDomainId = VoiceProfileSummary.AddMember("VoiceProfileDomainId", _NonEmptyString256)
-
-	VoiceProfileSummary_CreatedTimestamp = VoiceProfileSummary.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	VoiceProfileSummary_UpdatedTimestamp = VoiceProfileSummary.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	VoiceProfileSummary_ExpirationTimestamp = VoiceProfileSummary.AddMember("ExpirationTimestamp", _Iso8601Timestamp)
-
-	_VoiceProfileSummaryList_member = _VoiceProfileSummaryList.AddMember("member", VoiceProfileSummary)
-
-	VoiceToneAnalysisTask_VoiceToneAnalysisTaskId = VoiceToneAnalysisTask.AddMember("VoiceToneAnalysisTaskId", _NonEmptyString256)
-
-	VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus = VoiceToneAnalysisTask.AddMember("VoiceToneAnalysisTaskStatus", _NonEmptyString)
-
-	VoiceToneAnalysisTask_CallDetails = VoiceToneAnalysisTask.AddMember("CallDetails", CallDetails)
-
-	VoiceToneAnalysisTask_CreatedTimestamp = VoiceToneAnalysisTask.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	VoiceToneAnalysisTask_UpdatedTimestamp = VoiceToneAnalysisTask.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	VoiceToneAnalysisTask_StartedTimestamp = VoiceToneAnalysisTask.AddMember("StartedTimestamp", _Iso8601Timestamp)
-
-	VoiceToneAnalysisTask_StatusMessage = VoiceToneAnalysisTask.AddMember("StatusMessage", _String)
-
-	AssociatePhoneNumbersWithVoiceConnectorGroupRequest_VoiceConnectorGroupId = AssociatePhoneNumbersWithVoiceConnectorGroupRequest.AddMember("VoiceConnectorGroupId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	AssociatePhoneNumbersWithVoiceConnectorGroupRequest_E164PhoneNumbers = AssociatePhoneNumbersWithVoiceConnectorGroupRequest.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
-
-	AssociatePhoneNumbersWithVoiceConnectorGroupRequest_ForceAssociate = AssociatePhoneNumbersWithVoiceConnectorGroupRequest.AddMember("ForceAssociate", _NullableBoolean)
-
-	AssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors = AssociatePhoneNumbersWithVoiceConnectorGroupResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
-
-	AssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId = AssociatePhoneNumbersWithVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	AssociatePhoneNumbersWithVoiceConnectorRequest_E164PhoneNumbers = AssociatePhoneNumbersWithVoiceConnectorRequest.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
-
-	AssociatePhoneNumbersWithVoiceConnectorRequest_ForceAssociate = AssociatePhoneNumbersWithVoiceConnectorRequest.AddMember("ForceAssociate", _NullableBoolean)
-
-	AssociatePhoneNumbersWithVoiceConnectorResponse_PhoneNumberErrors = AssociatePhoneNumbersWithVoiceConnectorResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
-
-	BatchDeletePhoneNumberRequest_PhoneNumberIds = BatchDeletePhoneNumberRequest.AddMember("PhoneNumberIds", _NonEmptyStringList)
-
-	BatchDeletePhoneNumberResponse_PhoneNumberErrors = BatchDeletePhoneNumberResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
-
-	BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems = BatchUpdatePhoneNumberRequest.AddMember("UpdatePhoneNumberRequestItems", _UpdatePhoneNumberRequestItemList)
-
-	BatchUpdatePhoneNumberResponse_PhoneNumberErrors = BatchUpdatePhoneNumberResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
-
-	CreatePhoneNumberOrderRequest_ProductType = CreatePhoneNumberOrderRequest.AddMember("ProductType", PhoneNumberProductType)
-
-	CreatePhoneNumberOrderRequest_E164PhoneNumbers = CreatePhoneNumberOrderRequest.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
-
-	CreatePhoneNumberOrderRequest_Name = CreatePhoneNumberOrderRequest.AddMember("Name", _PhoneNumberName)
-
-	CreatePhoneNumberOrderResponse_PhoneNumberOrder = CreatePhoneNumberOrderResponse.AddMember("PhoneNumberOrder", PhoneNumberOrder)
-
-	CreateProxySessionRequest_VoiceConnectorId = CreateProxySessionRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	CreateProxySessionRequest_ParticipantPhoneNumbers = CreateProxySessionRequest.AddMember("ParticipantPhoneNumbers", _ParticipantPhoneNumberList)
-
-	CreateProxySessionRequest_Name = CreateProxySessionRequest.AddMember("Name", _ProxySessionNameString)
-
-	CreateProxySessionRequest_ExpiryMinutes = CreateProxySessionRequest.AddMember("ExpiryMinutes", _PositiveInteger)
-
-	CreateProxySessionRequest_Capabilities = CreateProxySessionRequest.AddMember("Capabilities", _CapabilityList)
-
-	CreateProxySessionRequest_NumberSelectionBehavior = CreateProxySessionRequest.AddMember("NumberSelectionBehavior", NumberSelectionBehavior)
-
-	CreateProxySessionRequest_GeoMatchLevel = CreateProxySessionRequest.AddMember("GeoMatchLevel", GeoMatchLevel)
-
-	CreateProxySessionRequest_GeoMatchParams = CreateProxySessionRequest.AddMember("GeoMatchParams", GeoMatchParams)
-
-	CreateProxySessionResponse_ProxySession = CreateProxySessionResponse.AddMember("ProxySession", ProxySession)
-
-	CreateSipMediaApplicationCallRequest_FromPhoneNumber = CreateSipMediaApplicationCallRequest.AddMember("FromPhoneNumber", _E164PhoneNumber)
-
-	CreateSipMediaApplicationCallRequest_ToPhoneNumber = CreateSipMediaApplicationCallRequest.AddMember("ToPhoneNumber", _E164PhoneNumber)
-
-	CreateSipMediaApplicationCallRequest_SipMediaApplicationId = CreateSipMediaApplicationCallRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	CreateSipMediaApplicationCallRequest_SipHeaders = CreateSipMediaApplicationCallRequest.AddMember("SipHeaders", _SipHeadersMap)
-
-	CreateSipMediaApplicationCallRequest_ArgumentsMap = CreateSipMediaApplicationCallRequest.AddMember("ArgumentsMap", _SMACreateCallArgumentsMap)
-
-	CreateSipMediaApplicationCallResponse_SipMediaApplicationCall = CreateSipMediaApplicationCallResponse.AddMember("SipMediaApplicationCall", SipMediaApplicationCall)
-
-	CreateSipMediaApplicationRequest_AwsRegion = CreateSipMediaApplicationRequest.AddMember("AwsRegion", _String)
-
-	CreateSipMediaApplicationRequest_Name = CreateSipMediaApplicationRequest.AddMember("Name", _SipMediaApplicationName)
-
-	CreateSipMediaApplicationRequest_Endpoints = CreateSipMediaApplicationRequest.AddMember("Endpoints", _SipMediaApplicationEndpointList)
-
-	CreateSipMediaApplicationRequest_Tags = CreateSipMediaApplicationRequest.AddMember("Tags", _TagList)
-
-	CreateSipMediaApplicationResponse_SipMediaApplication = CreateSipMediaApplicationResponse.AddMember("SipMediaApplication", SipMediaApplication)
-
-	CreateSipRuleRequest_Name = CreateSipRuleRequest.AddMember("Name", _SipRuleName)
-
-	CreateSipRuleRequest_TriggerType = CreateSipRuleRequest.AddMember("TriggerType", SipRuleTriggerType)
-
-	CreateSipRuleRequest_TriggerValue = CreateSipRuleRequest.AddMember("TriggerValue", _NonEmptyString)
-
-	CreateSipRuleRequest_Disabled = CreateSipRuleRequest.AddMember("Disabled", _NullableBoolean)
-
-	CreateSipRuleRequest_TargetApplications = CreateSipRuleRequest.AddMember("TargetApplications", _SipRuleTargetApplicationList)
-
-	CreateSipRuleResponse_SipRule = CreateSipRuleResponse.AddMember("SipRule", SipRule)
-
-	CreateVoiceConnectorGroupRequest_Name = CreateVoiceConnectorGroupRequest.AddMember("Name", _VoiceConnectorGroupName)
-
-	CreateVoiceConnectorGroupRequest_VoiceConnectorItems = CreateVoiceConnectorGroupRequest.AddMember("VoiceConnectorItems", _VoiceConnectorItemList)
-
-	CreateVoiceConnectorGroupRequest_CallDistributionType = CreateVoiceConnectorGroupRequest.AddMember("CallDistributionType", CallDistributionType)
-
-	CreateVoiceConnectorGroupResponse_VoiceConnectorGroup = CreateVoiceConnectorGroupResponse.AddMember("VoiceConnectorGroup", VoiceConnectorGroup)
-
-	CreateVoiceConnectorRequest_Name = CreateVoiceConnectorRequest.AddMember("Name", _VoiceConnectorName)
-
-	CreateVoiceConnectorRequest_AwsRegion = CreateVoiceConnectorRequest.AddMember("AwsRegion", VoiceConnectorAwsRegion)
-
-	CreateVoiceConnectorRequest_RequireEncryption = CreateVoiceConnectorRequest.AddMember("RequireEncryption", _Boolean)
-
-	CreateVoiceConnectorRequest_Tags = CreateVoiceConnectorRequest.AddMember("Tags", _TagList)
-
-	CreateVoiceConnectorRequest_IntegrationType = CreateVoiceConnectorRequest.AddMember("IntegrationType", VoiceConnectorIntegrationType)
-
-	CreateVoiceConnectorRequest_NetworkType = CreateVoiceConnectorRequest.AddMember("NetworkType", NetworkType)
-
-	CreateVoiceConnectorResponse_VoiceConnector = CreateVoiceConnectorResponse.AddMember("VoiceConnector", VoiceConnector)
-
-	CreateVoiceProfileDomainRequest_Name = CreateVoiceProfileDomainRequest.AddMember("Name", _VoiceProfileDomainName)
-
-	CreateVoiceProfileDomainRequest_Description = CreateVoiceProfileDomainRequest.AddMember("Description", _VoiceProfileDomainDescription)
-
-	CreateVoiceProfileDomainRequest_ServerSideEncryptionConfiguration = CreateVoiceProfileDomainRequest.AddMember("ServerSideEncryptionConfiguration", ServerSideEncryptionConfiguration)
-
-	CreateVoiceProfileDomainRequest_ClientRequestToken = CreateVoiceProfileDomainRequest.AddMember("ClientRequestToken", _ClientRequestId)
-
-	CreateVoiceProfileDomainRequest_Tags = CreateVoiceProfileDomainRequest.AddMember("Tags", _TagList)
-
-	CreateVoiceProfileDomainResponse_VoiceProfileDomain = CreateVoiceProfileDomainResponse.AddMember("VoiceProfileDomain", VoiceProfileDomain)
-
-	CreateVoiceProfileRequest_SpeakerSearchTaskId = CreateVoiceProfileRequest.AddMember("SpeakerSearchTaskId", _NonEmptyString256)
-
-	CreateVoiceProfileResponse_VoiceProfile = CreateVoiceProfileResponse.AddMember("VoiceProfile", VoiceProfile)
-
-	DeletePhoneNumberRequest_PhoneNumberId = DeletePhoneNumberRequest.AddMember("PhoneNumberId", _SensitiveNonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteProxySessionRequest_VoiceConnectorId = DeleteProxySessionRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteProxySessionRequest_ProxySessionId = DeleteProxySessionRequest.AddMember("ProxySessionId", _NonEmptyString128, &smithytraits.HTTPLabel{})
-
-	DeleteSipMediaApplicationRequest_SipMediaApplicationId = DeleteSipMediaApplicationRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteSipRuleRequest_SipRuleId = DeleteSipRuleRequest.AddMember("SipRuleId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorGroupRequest_VoiceConnectorGroupId = DeleteVoiceConnectorGroupRequest.AddMember("VoiceConnectorGroupId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorRequest_VoiceConnectorId = DeleteVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorOriginationRequest_VoiceConnectorId = DeleteVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorProxyRequest_VoiceConnectorId = DeleteVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = DeleteVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = DeleteVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceConnectorTerminationCredentialsRequest_Usernames = DeleteVoiceConnectorTerminationCredentialsRequest.AddMember("Usernames", _SensitiveStringList)
-
-	DeleteVoiceConnectorTerminationRequest_VoiceConnectorId = DeleteVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceProfileDomainRequest_VoiceProfileDomainId = DeleteVoiceProfileDomainRequest.AddMember("VoiceProfileDomainId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	DeleteVoiceProfileRequest_VoiceProfileId = DeleteVoiceProfileRequest.AddMember("VoiceProfileId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_VoiceConnectorGroupId = DisassociatePhoneNumbersFromVoiceConnectorGroupRequest.AddMember("VoiceConnectorGroupId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers = DisassociatePhoneNumbersFromVoiceConnectorGroupRequest.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
-
-	DisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors = DisassociatePhoneNumbersFromVoiceConnectorGroupResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
-
-	DisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId = DisassociatePhoneNumbersFromVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	DisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers = DisassociatePhoneNumbersFromVoiceConnectorRequest.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
-
-	DisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors = DisassociatePhoneNumbersFromVoiceConnectorResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
-
-	GetGlobalSettingsResponse_VoiceConnector = GetGlobalSettingsResponse.AddMember("VoiceConnector", VoiceConnectorSettings)
-
-	GetPhoneNumberRequest_PhoneNumberId = GetPhoneNumberRequest.AddMember("PhoneNumberId", _SensitiveNonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetPhoneNumberOrderRequest_PhoneNumberOrderId = GetPhoneNumberOrderRequest.AddMember("PhoneNumberOrderId", _GuidString, &smithytraits.HTTPLabel{})
-
-	GetPhoneNumberOrderResponse_PhoneNumberOrder = GetPhoneNumberOrderResponse.AddMember("PhoneNumberOrder", PhoneNumberOrder)
-
-	GetPhoneNumberResponse_PhoneNumber = GetPhoneNumberResponse.AddMember("PhoneNumber", PhoneNumber)
-
-	GetPhoneNumberSettingsResponse_CallingName = GetPhoneNumberSettingsResponse.AddMember("CallingName", _CallingName)
-
-	GetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp = GetPhoneNumberSettingsResponse.AddMember("CallingNameUpdatedTimestamp", _Iso8601Timestamp)
-
-	GetProxySessionRequest_VoiceConnectorId = GetProxySessionRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetProxySessionRequest_ProxySessionId = GetProxySessionRequest.AddMember("ProxySessionId", _NonEmptyString128, &smithytraits.HTTPLabel{})
-
-	GetProxySessionResponse_ProxySession = GetProxySessionResponse.AddMember("ProxySession", ProxySession)
-
-	GetSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId = GetSipMediaApplicationAlexaSkillConfigurationRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration = GetSipMediaApplicationAlexaSkillConfigurationResponse.AddMember("SipMediaApplicationAlexaSkillConfiguration", SipMediaApplicationAlexaSkillConfiguration)
-
-	GetSipMediaApplicationRequest_SipMediaApplicationId = GetSipMediaApplicationRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId = GetSipMediaApplicationLoggingConfigurationRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = GetSipMediaApplicationLoggingConfigurationResponse.AddMember("SipMediaApplicationLoggingConfiguration", SipMediaApplicationLoggingConfiguration)
-
-	GetSipMediaApplicationResponse_SipMediaApplication = GetSipMediaApplicationResponse.AddMember("SipMediaApplication", SipMediaApplication)
-
-	GetSipRuleRequest_SipRuleId = GetSipRuleRequest.AddMember("SipRuleId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetSipRuleResponse_SipRule = GetSipRuleResponse.AddMember("SipRule", SipRule)
-
-	GetSpeakerSearchTaskRequest_VoiceConnectorId = GetSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetSpeakerSearchTaskRequest_SpeakerSearchTaskId = GetSpeakerSearchTaskRequest.AddMember("SpeakerSearchTaskId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	GetSpeakerSearchTaskResponse_SpeakerSearchTask = GetSpeakerSearchTaskResponse.AddMember("SpeakerSearchTask", SpeakerSearchTask)
-
-	GetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = GetVoiceConnectorEmergencyCallingConfigurationResponse.AddMember("EmergencyCallingConfiguration", EmergencyCallingConfiguration)
-
-	GetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = GetVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = GetVoiceConnectorExternalSystemsConfigurationResponse.AddMember("ExternalSystemsConfiguration", ExternalSystemsConfiguration)
-
-	GetVoiceConnectorGroupRequest_VoiceConnectorGroupId = GetVoiceConnectorGroupRequest.AddMember("VoiceConnectorGroupId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorGroupResponse_VoiceConnectorGroup = GetVoiceConnectorGroupResponse.AddMember("VoiceConnectorGroup", VoiceConnectorGroup)
-
-	GetVoiceConnectorRequest_VoiceConnectorId = GetVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorLoggingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = GetVoiceConnectorLoggingConfigurationResponse.AddMember("LoggingConfiguration", LoggingConfiguration)
-
-	GetVoiceConnectorOriginationRequest_VoiceConnectorId = GetVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorOriginationResponse_Origination = GetVoiceConnectorOriginationResponse.AddMember("Origination", Origination)
-
-	GetVoiceConnectorResponse_VoiceConnector = GetVoiceConnectorResponse.AddMember("VoiceConnector", VoiceConnector)
-
-	GetVoiceConnectorProxyRequest_VoiceConnectorId = GetVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorProxyResponse_Proxy = GetVoiceConnectorProxyResponse.AddMember("Proxy", Proxy)
-
-	GetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = GetVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = GetVoiceConnectorStreamingConfigurationResponse.AddMember("StreamingConfiguration", StreamingConfiguration)
-
-	GetVoiceConnectorTerminationHealthRequest_VoiceConnectorId = GetVoiceConnectorTerminationHealthRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorTerminationHealthResponse_TerminationHealth = GetVoiceConnectorTerminationHealthResponse.AddMember("TerminationHealth", TerminationHealth)
-
-	GetVoiceConnectorTerminationRequest_VoiceConnectorId = GetVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceConnectorTerminationResponse_Termination = GetVoiceConnectorTerminationResponse.AddMember("Termination", Termination)
-
-	GetVoiceProfileDomainRequest_VoiceProfileDomainId = GetVoiceProfileDomainRequest.AddMember("VoiceProfileDomainId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	GetVoiceProfileDomainResponse_VoiceProfileDomain = GetVoiceProfileDomainResponse.AddMember("VoiceProfileDomain", VoiceProfileDomain)
-
-	GetVoiceProfileRequest_VoiceProfileId = GetVoiceProfileRequest.AddMember("VoiceProfileId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	GetVoiceProfileResponse_VoiceProfile = GetVoiceProfileResponse.AddMember("VoiceProfile", VoiceProfile)
-
-	GetVoiceToneAnalysisTaskRequest_VoiceConnectorId = GetVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	GetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = GetVoiceToneAnalysisTaskRequest.AddMember("VoiceToneAnalysisTaskId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	GetVoiceToneAnalysisTaskRequest_IsCaller = GetVoiceToneAnalysisTaskRequest.AddMember("IsCaller", _Boolean, &smithytraits.HTTPQuery{Name: "isCaller"})
-
-	GetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = GetVoiceToneAnalysisTaskResponse.AddMember("VoiceToneAnalysisTask", VoiceToneAnalysisTask)
-
-	ListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions = ListAvailableVoiceConnectorRegionsResponse.AddMember("VoiceConnectorRegions", _VoiceConnectorAwsRegionList)
-
-	ListPhoneNumberOrdersRequest_NextToken = ListPhoneNumberOrdersRequest.AddMember("NextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPhoneNumberOrdersRequest_MaxResults = ListPhoneNumberOrdersRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListPhoneNumberOrdersResponse_PhoneNumberOrders = ListPhoneNumberOrdersResponse.AddMember("PhoneNumberOrders", _PhoneNumberOrderList)
-
-	ListPhoneNumberOrdersResponse_NextToken = ListPhoneNumberOrdersResponse.AddMember("NextToken", _String)
-
-	ListPhoneNumbersRequest_Status = ListPhoneNumbersRequest.AddMember("Status", _String, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListPhoneNumbersRequest_ProductType = ListPhoneNumbersRequest.AddMember("ProductType", PhoneNumberProductType, &smithytraits.HTTPQuery{Name: "product-type"})
-
-	ListPhoneNumbersRequest_FilterName = ListPhoneNumbersRequest.AddMember("FilterName", PhoneNumberAssociationName, &smithytraits.HTTPQuery{Name: "filter-name"})
-
-	ListPhoneNumbersRequest_FilterValue = ListPhoneNumbersRequest.AddMember("FilterValue", _String, &smithytraits.HTTPQuery{Name: "filter-value"})
-
-	ListPhoneNumbersRequest_MaxResults = ListPhoneNumbersRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListPhoneNumbersRequest_NextToken = ListPhoneNumbersRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPhoneNumbersResponse_PhoneNumbers = ListPhoneNumbersResponse.AddMember("PhoneNumbers", _PhoneNumberList)
-
-	ListPhoneNumbersResponse_NextToken = ListPhoneNumbersResponse.AddMember("NextToken", _String)
-
-	ListProxySessionsRequest_VoiceConnectorId = ListProxySessionsRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	ListProxySessionsRequest_Status = ListProxySessionsRequest.AddMember("Status", ProxySessionStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListProxySessionsRequest_NextToken = ListProxySessionsRequest.AddMember("NextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListProxySessionsRequest_MaxResults = ListProxySessionsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListProxySessionsResponse_ProxySessions = ListProxySessionsResponse.AddMember("ProxySessions", _ProxySessions)
-
-	ListProxySessionsResponse_NextToken = ListProxySessionsResponse.AddMember("NextToken", _NextTokenString)
-
-	ListSipMediaApplicationsRequest_MaxResults = ListSipMediaApplicationsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListSipMediaApplicationsRequest_NextToken = ListSipMediaApplicationsRequest.AddMember("NextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListSipMediaApplicationsResponse_SipMediaApplications = ListSipMediaApplicationsResponse.AddMember("SipMediaApplications", _SipMediaApplicationList)
-
-	ListSipMediaApplicationsResponse_NextToken = ListSipMediaApplicationsResponse.AddMember("NextToken", _NextTokenString)
-
-	ListSipRulesRequest_SipMediaApplicationId = ListSipRulesRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPQuery{Name: "sip-media-application"})
-
-	ListSipRulesRequest_MaxResults = ListSipRulesRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListSipRulesRequest_NextToken = ListSipRulesRequest.AddMember("NextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListSipRulesResponse_SipRules = ListSipRulesResponse.AddMember("SipRules", _SipRuleList)
-
-	ListSipRulesResponse_NextToken = ListSipRulesResponse.AddMember("NextToken", _NextTokenString)
-
-	ListSupportedPhoneNumberCountriesRequest_ProductType = ListSupportedPhoneNumberCountriesRequest.AddMember("ProductType", PhoneNumberProductType, &smithytraits.HTTPQuery{Name: "product-type"})
-
-	ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries = ListSupportedPhoneNumberCountriesResponse.AddMember("PhoneNumberCountries", _PhoneNumberCountriesList)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _Arn, &smithytraits.HTTPQuery{Name: "arn"})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListVoiceConnectorGroupsRequest_NextToken = ListVoiceConnectorGroupsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListVoiceConnectorGroupsRequest_MaxResults = ListVoiceConnectorGroupsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListVoiceConnectorGroupsResponse_VoiceConnectorGroups = ListVoiceConnectorGroupsResponse.AddMember("VoiceConnectorGroups", _VoiceConnectorGroupList)
-
-	ListVoiceConnectorGroupsResponse_NextToken = ListVoiceConnectorGroupsResponse.AddMember("NextToken", _String)
-
-	ListVoiceConnectorsRequest_NextToken = ListVoiceConnectorsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListVoiceConnectorsRequest_MaxResults = ListVoiceConnectorsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListVoiceConnectorsResponse_VoiceConnectors = ListVoiceConnectorsResponse.AddMember("VoiceConnectors", _VoiceConnectorList)
-
-	ListVoiceConnectorsResponse_NextToken = ListVoiceConnectorsResponse.AddMember("NextToken", _String)
-
-	ListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = ListVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	ListVoiceConnectorTerminationCredentialsResponse_Usernames = ListVoiceConnectorTerminationCredentialsResponse.AddMember("Usernames", _SensitiveStringList)
-
-	ListVoiceProfileDomainsRequest_NextToken = ListVoiceProfileDomainsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListVoiceProfileDomainsRequest_MaxResults = ListVoiceProfileDomainsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListVoiceProfileDomainsResponse_VoiceProfileDomains = ListVoiceProfileDomainsResponse.AddMember("VoiceProfileDomains", _VoiceProfileDomainSummaryList)
-
-	ListVoiceProfileDomainsResponse_NextToken = ListVoiceProfileDomainsResponse.AddMember("NextToken", _String)
-
-	ListVoiceProfilesRequest_VoiceProfileDomainId = ListVoiceProfilesRequest.AddMember("VoiceProfileDomainId", _NonEmptyString256, &smithytraits.HTTPQuery{Name: "voice-profile-domain-id"})
-
-	ListVoiceProfilesRequest_NextToken = ListVoiceProfilesRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListVoiceProfilesRequest_MaxResults = ListVoiceProfilesRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListVoiceProfilesResponse_VoiceProfiles = ListVoiceProfilesResponse.AddMember("VoiceProfiles", _VoiceProfileSummaryList)
-
-	ListVoiceProfilesResponse_NextToken = ListVoiceProfilesResponse.AddMember("NextToken", _String)
-
-	PutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId = PutSipMediaApplicationAlexaSkillConfigurationRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	PutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationAlexaSkillConfiguration = PutSipMediaApplicationAlexaSkillConfigurationRequest.AddMember("SipMediaApplicationAlexaSkillConfiguration", SipMediaApplicationAlexaSkillConfiguration)
-
-	PutSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration = PutSipMediaApplicationAlexaSkillConfigurationResponse.AddMember("SipMediaApplicationAlexaSkillConfiguration", SipMediaApplicationAlexaSkillConfiguration)
-
-	PutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId = PutSipMediaApplicationLoggingConfigurationRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	PutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationLoggingConfiguration = PutSipMediaApplicationLoggingConfigurationRequest.AddMember("SipMediaApplicationLoggingConfiguration", SipMediaApplicationLoggingConfiguration)
-
-	PutSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = PutSipMediaApplicationLoggingConfigurationResponse.AddMember("SipMediaApplicationLoggingConfiguration", SipMediaApplicationLoggingConfiguration)
-
-	PutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	PutVoiceConnectorEmergencyCallingConfigurationRequest_EmergencyCallingConfiguration = PutVoiceConnectorEmergencyCallingConfigurationRequest.AddMember("EmergencyCallingConfiguration", EmergencyCallingConfiguration)
-
-	PutVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = PutVoiceConnectorEmergencyCallingConfigurationResponse.AddMember("EmergencyCallingConfiguration", EmergencyCallingConfiguration)
-
-	PutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = PutVoiceConnectorExternalSystemsConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	PutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes = PutVoiceConnectorExternalSystemsConfigurationRequest.AddMember("SessionBorderControllerTypes", _SessionBorderControllerTypeList)
-
-	PutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes = PutVoiceConnectorExternalSystemsConfigurationRequest.AddMember("ContactCenterSystemTypes", _ContactCenterSystemTypeList)
-
-	PutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = PutVoiceConnectorExternalSystemsConfigurationResponse.AddMember("ExternalSystemsConfiguration", ExternalSystemsConfiguration)
-
-	PutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorLoggingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	PutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration = PutVoiceConnectorLoggingConfigurationRequest.AddMember("LoggingConfiguration", LoggingConfiguration)
-
-	PutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = PutVoiceConnectorLoggingConfigurationResponse.AddMember("LoggingConfiguration", LoggingConfiguration)
-
-	PutVoiceConnectorOriginationRequest_VoiceConnectorId = PutVoiceConnectorOriginationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	PutVoiceConnectorOriginationRequest_Origination = PutVoiceConnectorOriginationRequest.AddMember("Origination", Origination)
-
-	PutVoiceConnectorOriginationResponse_Origination = PutVoiceConnectorOriginationResponse.AddMember("Origination", Origination)
-
-	PutVoiceConnectorProxyRequest_VoiceConnectorId = PutVoiceConnectorProxyRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	PutVoiceConnectorProxyRequest_DefaultSessionExpiryMinutes = PutVoiceConnectorProxyRequest.AddMember("DefaultSessionExpiryMinutes", _Integer)
-
-	PutVoiceConnectorProxyRequest_PhoneNumberPoolCountries = PutVoiceConnectorProxyRequest.AddMember("PhoneNumberPoolCountries", _CountryList)
-
-	PutVoiceConnectorProxyRequest_FallBackPhoneNumber = PutVoiceConnectorProxyRequest.AddMember("FallBackPhoneNumber", _E164PhoneNumber)
-
-	PutVoiceConnectorProxyRequest_Disabled = PutVoiceConnectorProxyRequest.AddMember("Disabled", _Boolean)
-
-	PutVoiceConnectorProxyResponse_Proxy = PutVoiceConnectorProxyResponse.AddMember("Proxy", Proxy)
-
-	PutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = PutVoiceConnectorStreamingConfigurationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	PutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration = PutVoiceConnectorStreamingConfigurationRequest.AddMember("StreamingConfiguration", StreamingConfiguration)
-
-	PutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = PutVoiceConnectorStreamingConfigurationResponse.AddMember("StreamingConfiguration", StreamingConfiguration)
-
-	PutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = PutVoiceConnectorTerminationCredentialsRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	PutVoiceConnectorTerminationCredentialsRequest_Credentials = PutVoiceConnectorTerminationCredentialsRequest.AddMember("Credentials", _CredentialList)
-
-	PutVoiceConnectorTerminationRequest_VoiceConnectorId = PutVoiceConnectorTerminationRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	PutVoiceConnectorTerminationRequest_Termination = PutVoiceConnectorTerminationRequest.AddMember("Termination", Termination)
-
-	PutVoiceConnectorTerminationResponse_Termination = PutVoiceConnectorTerminationResponse.AddMember("Termination", Termination)
-
-	RestorePhoneNumberRequest_PhoneNumberId = RestorePhoneNumberRequest.AddMember("PhoneNumberId", _SensitiveNonEmptyString, &smithytraits.HTTPLabel{})
-
-	RestorePhoneNumberResponse_PhoneNumber = RestorePhoneNumberResponse.AddMember("PhoneNumber", PhoneNumber)
-
-	SearchAvailablePhoneNumbersRequest_AreaCode = SearchAvailablePhoneNumbersRequest.AddMember("AreaCode", _String, &smithytraits.HTTPQuery{Name: "area-code"})
-
-	SearchAvailablePhoneNumbersRequest_City = SearchAvailablePhoneNumbersRequest.AddMember("City", _String, &smithytraits.HTTPQuery{Name: "city"})
-
-	SearchAvailablePhoneNumbersRequest_Country = SearchAvailablePhoneNumbersRequest.AddMember("Country", _Alpha2CountryCode, &smithytraits.HTTPQuery{Name: "country"})
-
-	SearchAvailablePhoneNumbersRequest_State = SearchAvailablePhoneNumbersRequest.AddMember("State", _String, &smithytraits.HTTPQuery{Name: "state"})
-
-	SearchAvailablePhoneNumbersRequest_TollFreePrefix = SearchAvailablePhoneNumbersRequest.AddMember("TollFreePrefix", _TollFreePrefix, &smithytraits.HTTPQuery{Name: "toll-free-prefix"})
-
-	SearchAvailablePhoneNumbersRequest_PhoneNumberType = SearchAvailablePhoneNumbersRequest.AddMember("PhoneNumberType", PhoneNumberType, &smithytraits.HTTPQuery{Name: "phone-number-type"})
-
-	SearchAvailablePhoneNumbersRequest_MaxResults = SearchAvailablePhoneNumbersRequest.AddMember("MaxResults", _PhoneNumberMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	SearchAvailablePhoneNumbersRequest_NextToken = SearchAvailablePhoneNumbersRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	SearchAvailablePhoneNumbersResponse_E164PhoneNumbers = SearchAvailablePhoneNumbersResponse.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
-
-	SearchAvailablePhoneNumbersResponse_NextToken = SearchAvailablePhoneNumbersResponse.AddMember("NextToken", _String)
-
-	StartSpeakerSearchTaskRequest_VoiceConnectorId = StartSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	StartSpeakerSearchTaskRequest_TransactionId = StartSpeakerSearchTaskRequest.AddMember("TransactionId", _NonEmptyString256)
-
-	StartSpeakerSearchTaskRequest_VoiceProfileDomainId = StartSpeakerSearchTaskRequest.AddMember("VoiceProfileDomainId", _NonEmptyString256)
-
-	StartSpeakerSearchTaskRequest_ClientRequestToken = StartSpeakerSearchTaskRequest.AddMember("ClientRequestToken", _ClientRequestId)
-
-	StartSpeakerSearchTaskRequest_CallLeg = StartSpeakerSearchTaskRequest.AddMember("CallLeg", CallLegType)
-
-	StartSpeakerSearchTaskResponse_SpeakerSearchTask = StartSpeakerSearchTaskResponse.AddMember("SpeakerSearchTask", SpeakerSearchTask)
-
-	StartVoiceToneAnalysisTaskRequest_VoiceConnectorId = StartVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	StartVoiceToneAnalysisTaskRequest_TransactionId = StartVoiceToneAnalysisTaskRequest.AddMember("TransactionId", _NonEmptyString256)
-
-	StartVoiceToneAnalysisTaskRequest_LanguageCode = StartVoiceToneAnalysisTaskRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartVoiceToneAnalysisTaskRequest_ClientRequestToken = StartVoiceToneAnalysisTaskRequest.AddMember("ClientRequestToken", _ClientRequestId)
-
-	StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = StartVoiceToneAnalysisTaskResponse.AddMember("VoiceToneAnalysisTask", VoiceToneAnalysisTask)
-
-	StopSpeakerSearchTaskRequest_VoiceConnectorId = StopSpeakerSearchTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	StopSpeakerSearchTaskRequest_SpeakerSearchTaskId = StopSpeakerSearchTaskRequest.AddMember("SpeakerSearchTaskId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	StopVoiceToneAnalysisTaskRequest_VoiceConnectorId = StopVoiceToneAnalysisTaskRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	StopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = StopVoiceToneAnalysisTaskRequest.AddMember("VoiceToneAnalysisTaskId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _Arn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _Arn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateGlobalSettingsRequest_VoiceConnector = UpdateGlobalSettingsRequest.AddMember("VoiceConnector", VoiceConnectorSettings)
-
-	UpdatePhoneNumberRequest_PhoneNumberId = UpdatePhoneNumberRequest.AddMember("PhoneNumberId", _SensitiveNonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdatePhoneNumberRequest_ProductType = UpdatePhoneNumberRequest.AddMember("ProductType", PhoneNumberProductType)
-
-	UpdatePhoneNumberRequest_CallingName = UpdatePhoneNumberRequest.AddMember("CallingName", _CallingName)
-
-	UpdatePhoneNumberRequest_Name = UpdatePhoneNumberRequest.AddMember("Name", _PhoneNumberName)
-
-	UpdatePhoneNumberResponse_PhoneNumber = UpdatePhoneNumberResponse.AddMember("PhoneNumber", PhoneNumber)
-
-	UpdatePhoneNumberSettingsRequest_CallingName = UpdatePhoneNumberSettingsRequest.AddMember("CallingName", _CallingName)
-
-	UpdateProxySessionRequest_VoiceConnectorId = UpdateProxySessionRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	UpdateProxySessionRequest_ProxySessionId = UpdateProxySessionRequest.AddMember("ProxySessionId", _NonEmptyString128, &smithytraits.HTTPLabel{})
-
-	UpdateProxySessionRequest_Capabilities = UpdateProxySessionRequest.AddMember("Capabilities", _CapabilityList)
-
-	UpdateProxySessionRequest_ExpiryMinutes = UpdateProxySessionRequest.AddMember("ExpiryMinutes", _PositiveInteger)
-
-	UpdateProxySessionResponse_ProxySession = UpdateProxySessionResponse.AddMember("ProxySession", ProxySession)
-
-	UpdateSipMediaApplicationCallRequest_SipMediaApplicationId = UpdateSipMediaApplicationCallRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateSipMediaApplicationCallRequest_TransactionId = UpdateSipMediaApplicationCallRequest.AddMember("TransactionId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateSipMediaApplicationCallRequest_Arguments = UpdateSipMediaApplicationCallRequest.AddMember("Arguments", _SMAUpdateCallArgumentsMap)
-
-	UpdateSipMediaApplicationCallResponse_SipMediaApplicationCall = UpdateSipMediaApplicationCallResponse.AddMember("SipMediaApplicationCall", SipMediaApplicationCall)
-
-	UpdateSipMediaApplicationRequest_SipMediaApplicationId = UpdateSipMediaApplicationRequest.AddMember("SipMediaApplicationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateSipMediaApplicationRequest_Name = UpdateSipMediaApplicationRequest.AddMember("Name", _SipMediaApplicationName)
-
-	UpdateSipMediaApplicationRequest_Endpoints = UpdateSipMediaApplicationRequest.AddMember("Endpoints", _SipMediaApplicationEndpointList)
-
-	UpdateSipMediaApplicationResponse_SipMediaApplication = UpdateSipMediaApplicationResponse.AddMember("SipMediaApplication", SipMediaApplication)
-
-	UpdateSipRuleRequest_SipRuleId = UpdateSipRuleRequest.AddMember("SipRuleId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateSipRuleRequest_Name = UpdateSipRuleRequest.AddMember("Name", _SipRuleName)
-
-	UpdateSipRuleRequest_Disabled = UpdateSipRuleRequest.AddMember("Disabled", _NullableBoolean)
-
-	UpdateSipRuleRequest_TargetApplications = UpdateSipRuleRequest.AddMember("TargetApplications", _SipRuleTargetApplicationList)
-
-	UpdateSipRuleResponse_SipRule = UpdateSipRuleResponse.AddMember("SipRule", SipRule)
-
-	UpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId = UpdateVoiceConnectorGroupRequest.AddMember("VoiceConnectorGroupId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateVoiceConnectorGroupRequest_Name = UpdateVoiceConnectorGroupRequest.AddMember("Name", _VoiceConnectorGroupName)
-
-	UpdateVoiceConnectorGroupRequest_VoiceConnectorItems = UpdateVoiceConnectorGroupRequest.AddMember("VoiceConnectorItems", _VoiceConnectorItemList)
-
-	UpdateVoiceConnectorGroupRequest_CallDistributionType = UpdateVoiceConnectorGroupRequest.AddMember("CallDistributionType", CallDistributionType)
-
-	UpdateVoiceConnectorGroupResponse_VoiceConnectorGroup = UpdateVoiceConnectorGroupResponse.AddMember("VoiceConnectorGroup", VoiceConnectorGroup)
-
-	UpdateVoiceConnectorRequest_VoiceConnectorId = UpdateVoiceConnectorRequest.AddMember("VoiceConnectorId", _VoiceConnectorId, &smithytraits.HTTPLabel{})
-
-	UpdateVoiceConnectorRequest_Name = UpdateVoiceConnectorRequest.AddMember("Name", _VoiceConnectorName)
-
-	UpdateVoiceConnectorRequest_RequireEncryption = UpdateVoiceConnectorRequest.AddMember("RequireEncryption", _Boolean)
-
-	UpdateVoiceConnectorResponse_VoiceConnector = UpdateVoiceConnectorResponse.AddMember("VoiceConnector", VoiceConnector)
-
-	UpdateVoiceProfileDomainRequest_VoiceProfileDomainId = UpdateVoiceProfileDomainRequest.AddMember("VoiceProfileDomainId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	UpdateVoiceProfileDomainRequest_Name = UpdateVoiceProfileDomainRequest.AddMember("Name", _VoiceProfileDomainName)
-
-	UpdateVoiceProfileDomainRequest_Description = UpdateVoiceProfileDomainRequest.AddMember("Description", _VoiceProfileDomainDescription)
-
-	UpdateVoiceProfileDomainResponse_VoiceProfileDomain = UpdateVoiceProfileDomainResponse.AddMember("VoiceProfileDomain", VoiceProfileDomain)
-
-	UpdateVoiceProfileRequest_VoiceProfileId = UpdateVoiceProfileRequest.AddMember("VoiceProfileId", _NonEmptyString256, &smithytraits.HTTPLabel{})
-
-	UpdateVoiceProfileRequest_SpeakerSearchTaskId = UpdateVoiceProfileRequest.AddMember("SpeakerSearchTaskId", _NonEmptyString256)
-
-	UpdateVoiceProfileResponse_VoiceProfile = UpdateVoiceProfileResponse.AddMember("VoiceProfile", VoiceProfile)
-
-	ValidateE911AddressRequest_AwsAccountId = ValidateE911AddressRequest.AddMember("AwsAccountId", _NonEmptyString)
-
-	ValidateE911AddressRequest_StreetNumber = ValidateE911AddressRequest.AddMember("StreetNumber", _SensitiveNonEmptyString)
-
-	ValidateE911AddressRequest_StreetInfo = ValidateE911AddressRequest.AddMember("StreetInfo", _SensitiveNonEmptyString)
-
-	ValidateE911AddressRequest_City = ValidateE911AddressRequest.AddMember("City", _SensitiveNonEmptyString)
-
-	ValidateE911AddressRequest_State = ValidateE911AddressRequest.AddMember("State", _SensitiveNonEmptyString)
-
-	ValidateE911AddressRequest_Country = ValidateE911AddressRequest.AddMember("Country", _SensitiveNonEmptyString)
-
-	ValidateE911AddressRequest_PostalCode = ValidateE911AddressRequest.AddMember("PostalCode", _SensitiveNonEmptyString)
-
-	ValidateE911AddressResponse_ValidationResult = ValidateE911AddressResponse.AddMember("ValidationResult", _ValidationResult)
-
-	ValidateE911AddressResponse_AddressExternalId = ValidateE911AddressResponse.AddMember("AddressExternalId", _String)
-
-	ValidateE911AddressResponse_Address = ValidateE911AddressResponse.AddMember("Address", Address)
-
-	ValidateE911AddressResponse_CandidateAddressList = ValidateE911AddressResponse.AddMember("CandidateAddressList", _CandidateAddressList)
-
+const blob = "" +
+	"DeleteVoiceConnectorEmergencyCallingConfigurationRequestDeleteVoiceConnectorExternalSystemsConfigura" +
+	"tionRequestDisassociatePhoneNumbersFromVoiceConnectorGroupResponseDisassociatePhoneNumbersFromVoiceC" +
+	"onnectorGroupRequestGetVoiceConnectorEmergencyCallingConfigurationResponsePutVoiceConnectorEmergency" +
+	"CallingConfigurationResponseGetSipMediaApplicationAlexaSkillConfigurationResponseGetVoiceConnectorEm" +
+	"ergencyCallingConfigurationRequestGetVoiceConnectorExternalSystemsConfigurationResponsePutSipMediaAp" +
+	"plicationAlexaSkillConfigurationResponsePutVoiceConnectorEmergencyCallingConfigurationRequestPutVoic" +
+	"eConnectorExternalSystemsConfigurationResponseAssociatePhoneNumbersWithVoiceConnectorGroupResponseGe" +
+	"tSipMediaApplicationAlexaSkillConfigurationRequestGetVoiceConnectorExternalSystemsConfigurationReque" +
+	"stPutSipMediaApplicationAlexaSkillConfigurationRequestPutVoiceConnectorExternalSystemsConfigurationR" +
+	"equestAssociatePhoneNumbersWithVoiceConnectorGroupRequestDisassociatePhoneNumbersFromVoiceConnectorR" +
+	"esponseGetSipMediaApplicationLoggingConfigurationResponsePutSipMediaApplicationLoggingConfigurationR" +
+	"esponseDeleteVoiceConnectorStreamingConfigurationRequestDeleteVoiceConnectorTerminationCredentialsRe" +
+	"questDisassociatePhoneNumbersFromVoiceConnectorRequestGetSipMediaApplicationLoggingConfigurationRequ" +
+	"estPutSipMediaApplicationLoggingConfigurationRequestListVoiceConnectorTerminationCredentialsResponse" +
+	"AssociatePhoneNumbersWithVoiceConnectorResponseGetVoiceConnectorStreamingConfigurationResponseListVo" +
+	"iceConnectorTerminationCredentialsRequestPutVoiceConnectorStreamingConfigurationResponseAssociatePho" +
+	"neNumbersWithVoiceConnectorRequestGetVoiceConnectorStreamingConfigurationRequestPutVoiceConnectorStr" +
+	"eamingConfigurationRequestPutVoiceConnectorTerminationCredentialsRequestGetVoiceConnectorLoggingConf" +
+	"igurationResponsePutVoiceConnectorLoggingConfigurationResponseGetVoiceConnectorLoggingConfigurationR" +
+	"equestPutVoiceConnectorLoggingConfigurationRequestGetVoiceConnectorTerminationHealthResponseListAvai" +
+	"lableVoiceConnectorRegionsResponseGetVoiceConnectorTerminationHealthRequestListSupportedPhoneNumberC" +
+	"ountriesResponseListSupportedPhoneNumberCountriesRequestCISCO_UNIFIED_CONTACT_CENTER_ENTERPRISEDelet" +
+	"eVoiceConnectorOriginationRequestDeleteVoiceConnectorTerminationRequestCreateSipMediaApplicationCall" +
+	"ResponseDNISEmergencyCallingConfigurationListUpdateSipMediaApplicationCallResponseCreateSipMediaAppl" +
+	"icationCallRequestEnableSipMediaApplicationMessageLogsGetVoiceConnectorOriginationResponseGetVoiceCo" +
+	"nnectorTerminationResponsePutVoiceConnectorOriginationResponsePutVoiceConnectorTerminationResponseUp" +
+	"dateSipMediaApplicationCallRequestVoiceConnectorGroupAssociationsExistGetVoiceConnectorOriginationRe" +
+	"questGetVoiceConnectorTerminationRequestPutVoiceConnectorOriginationRequestPutVoiceConnectorTerminat" +
+	"ionRequestSearchAvailablePhoneNumbersResponseSearchAvailablePhoneNumbersRequestStartVoiceToneAnalysi" +
+	"sTaskResponseCreateSipMediaApplicationResponseCreateVoiceConnectorGroupResponseServerSideEncryptionC" +
+	"onfigurationStartVoiceToneAnalysisTaskRequestUpdateSipMediaApplicationResponseUpdateVoiceConnectorGr" +
+	"oupResponseCreateSipMediaApplicationRequestCreateVoiceConnectorGroupRequestCreateVoiceProfileDomainR" +
+	"esponseDeleteSipMediaApplicationRequestDeleteVoiceConnectorGroupRequestDeleteVoiceConnectorProxyRequ" +
+	"estGetVoiceToneAnalysisTaskResponseListSipMediaApplicationsResponseListVoiceConnectorGroupsResponseS" +
+	"topVoiceToneAnalysisTaskRequestUpdatePhoneNumberRequestItemListUpdatePhoneNumberSettingsRequestUpdat" +
+	"eSipMediaApplicationRequestUpdateVoiceConnectorGroupRequestUpdateVoiceProfileDomainResponseCONNECT_C" +
+	"ALL_TRANSFER_CONNECTORCreateVoiceProfileDomainRequestDeleteVoiceProfileDomainRequestGetVoiceToneAnal" +
+	"ysisTaskRequestListSipMediaApplicationsRequestListVoiceConnectorGroupsRequestListVoiceProfileDomains" +
+	"ResponseSessionBorderControllerTypeListSipMediaApplicationEndpointListStreamingNotificationTargetLis" +
+	"tUpdateVoiceProfileDomainRequestBatchDeletePhoneNumberResponseBatchUpdatePhoneNumberResponseCreatePh" +
+	"oneNumberOrderResponseGetPhoneNumberSettingsResponseGetSipMediaApplicationResponseGetVoiceConnectorG" +
+	"roupResponseGetVoiceConnectorProxyResponseListVoiceProfileDomainsRequestPutVoiceConnectorProxyRespon" +
+	"seResourceLimitExceededExceptionStartSpeakerSearchTaskResponseBatchDeletePhoneNumberRequestBatchUpda" +
+	"tePhoneNumberRequestCreatePhoneNumberOrderRequestGetSipMediaApplicationRequestGetVoiceConnectorGroup" +
+	"RequestGetVoiceConnectorProxyRequestGetVoiceProfileDomainResponseListPhoneNumberOrdersResponsePutVoi" +
+	"ceConnectorProxyRequestStartSpeakerSearchTaskRequestUpdatePhoneNumberRequestItemsVoiceConnectorInteg" +
+	"rationTypeVoiceProfileDomainDescriptionVoiceProfileDomainSummaryListAVAYA_AURA_CALL_CENTER_ELITECISC" +
+	"O_UNIFIED_BORDER_ELEMENTCreateVoiceConnectorResponseGetSpeakerSearchTaskResponseGetVoiceProfileDomai" +
+	"nRequestListPhoneNumberOrdersRequestPhoneNumberAssociationsExistPriorityWeightedDistributionSessionB" +
+	"orderControllerTypesSipRuleTargetApplicationListStopSpeakerSearchTaskRequestStreamingNotificationTar" +
+	"getsUnprocessableEntityExceptionUpdateVoiceConnectorResponseCONNECT_ANALYTICS_CONNECTORCallingNameUp" +
+	"datedTimestampContactCenterSystemTypeListCreateVoiceConnectorRequestDefaultSessionExpiryMinutesDelet" +
+	"eVoiceConnectorRequestGetPhoneNumberOrderResponseGetSpeakerSearchTaskRequestListTagsForResourceRespo" +
+	"nseListVoiceConnectorsResponseServiceUnavailableExceptionUnauthorizedClientExceptionUpdateGlobalSett" +
+	"ingsRequestUpdateVoiceConnectorRequestValidateE911AddressResponseVoiceConnectorAwsRegionListVoiceTon" +
+	"eAnalysisTaskStatusCreateProxySessionResponseCreateVoiceProfileResponseGENESYS_ENGAGE_ON_PREMISESGet" +
+	"PhoneNumberOrderRequestListTagsForResourceRequestListVoiceConnectorsRequestMediaInsightsConfiguratio" +
+	"nParticipantPhoneNumberListPhoneNumberAssociationListPhoneNumberAssociationNameRestorePhoneNumberRes" +
+	"ponseUpdateProxySessionResponseUpdateVoiceProfileResponseValidateE911AddressRequestVoiceConnectorIte" +
+	"mPriorityVoiceprintGenerationStatusAVAYA_AURA_CONTACT_CENTERCreateProxySessionRequestCreateVoiceProf" +
+	"ileRequestDeleteProxySessionRequestDeleteVoiceProfileRequestGetGlobalSettingsResponseGetVoiceConnect" +
+	"orResponseListProxySessionsResponseListVoiceProfilesResponseRestorePhoneNumberRequestSMACreateCallAr" +
+	"gumentsMapSMAUpdateCallArgumentsMapSipMediaApplicationDialInSupportedPhoneNumberTypesUpdateProxySess" +
+	"ionRequestUpdateVoiceProfileRequestChimeSDKTelephonyServiceContactCenterSystemTypesGetVoiceConnector" +
+	"RequestListPhoneNumbersResponseListProxySessionsRequestListVoiceProfilesRequestLoadBalancedDistribut" +
+	"ionOrderedPhoneNumberStatusOriginationRoutePriorityOriginationRouteProtocolPhoneNumberCountriesListP" +
+	"honeNumberPoolCountriesThrottledClientExceptionGetProxySessionResponseGetVoiceProfileResponseListPho" +
+	"neNumbersRequestNumberSelectionBehaviorParticipantPhoneNumbersPhoneNumberCapabilitiesSensitiveNonEmp" +
+	"tyStringServiceFailureExceptionSipMediaApplicationListSipMediaApplicationNameSpeakerSearchResultList" +
+	"SpeakerSearchTaskStatusVoiceConnectorGroupListVoiceConnectorGroupNameVoiceProfileSummaryListVoiceTon" +
+	"eAnalysisTaskIdAUDIOCODES_MEDIANT_SBCGetPhoneNumberResponseGetProxySessionRequestGetVoiceProfileRequ" +
+	"estORACLE_ACME_PACKET_SBCOrderedPhoneNumberListOriginationRouteWeightPhoneNumberOrderStatusPhoneNumb" +
+	"erProductTypeProxySessionNameStringSipApplicationPrioritySipMediaApplicationArnVoiceConnectorGroupAr" +
+	"nVoiceConnectorItemListVoiceConnectorSettingsVoiceProfileDomainNameAccessDeniedExceptionCreateSipRul" +
+	"eResponseEnableMediaMetricLogsGetPhoneNumberRequestPhoneNumberMaxResultsPortinCancelRequestedSipMedi" +
+	"aApplicationIdUpdateSipRuleResponseVoiceConnectorGroupIdVoiceProfileDomainArnCallDistributionTypeCan" +
+	"didateAddressListCreateSipRuleRequestDataRetentionInHoursDeleteSipRuleRequestEmergencyPhoneNumberLis" +
+	"tSipRulesResponseOriginationRouteListPhoneNumberErrorListPhoneNumberOrderListPhoneNumberOrderTypeSpe" +
+	"akerSearchDetailsUntagResourceRequestUpdateSipRuleRequestVoiceProfileDomainIdAssociatedTimestampBadR" +
+	"equestExceptionE164PhoneNumberListExpirationTimestampFallBackPhoneNumberListSipRulesRequestOrderedPh" +
+	"oneNumbersPhoneNumberTypeListSensitiveStringListSpeakerSearchTaskIdVoiceConnectorItemsClientRequestT" +
+	"okenDefaultPhoneNumberForbiddenExceptionGetSipRuleResponseNonEmptyStringListPhoneNumberCountryPhoneN" +
+	"umberOrderIdPreconditionFailedProxySessionStatusRequestUriHostnameSipRuleTriggerTypeTagResourceReque" +
+	"stTargetApplicationsVoiceConnectorListVoiceConnectorNameAcquireInProgressAddressExternalIdAlpha2Coun" +
+	"tryCodeCallingNameStatusCallingRegionListConflictExceptionDeletionTimestampGetSipRuleRequestNonEmpty" +
+	"String128NonEmptyString256NotFoundExceptionPhoneNumberErrorsReleaseInProgressRequireEncryptionVoiceC" +
+	"onnectorArnAlexaSkillIdListAlexaSkillStatusConfigurationArnCreatedTimestampDeleteInProgressE164Phone" +
+	"NumbersIso8601TimestampOutboundHostNamePendingDocumentsPortinInProgressProxyPhoneNumberStartedTimest" +
+	"ampUpdateInProgressValidationResultVoiceConnectorIdChangeRequestedCidrAllowedListClientRequestIdConf" +
+	"idenceScoreFromPhoneNumberNextTokenStringNullableBooleanPhoneNumberNamePositiveIntegerTestPhoneNumbe" +
+	"rUpdateSucceededVoiceProfileArnpostDirectionalpostalCodePlus4AP_NORTHEAST_1AP_NORTHEAST_2AP_SOUTHEAS" +
+	"T_1AP_SOUTHEAST_2CallingCountryCallingRegionsCapabilityListCredentialListEndedTimestampForceAssociat" +
+	"eGeoMatchParamsPhoneNumberArnPhoneNumberIdsProxySessionIdTollFreePrefixVoiceProfileIdpreDirectionalA" +
+	"cquireFailedAlexaSkillIdsEnableSIPLogsGeoMatchLevelGoneExceptionReleaseFailedSipHeadersMapStatusMess" +
+	"ageToPhoneNumberTransactionIdAwsAccountIdCA_CENTRAL_1DeleteFailedEU_CENTRAL_1ErrorMessageLanguageCod" +
+	"eOutboundCallParticipantsPreferStickyS3BucketNameStreetNumberTriggerValueUpdateFailedstreetNumberstr" +
+	"eetSuffixAvoidStickyCallDetailsCallLegTypeCountryListEventBridgeFilterValueFunctionArnInboundCallNet" +
+	"workTypeOutboundMMSOutboundSMSResourceARNSipRuleListSipRuleNameAVAYA_SBCEDUAL_STACKFilterNameGuidStr" +
+	"ingInboundMMSInboundSMSPostalCodeProcessingRIBBON_SBCStreetInfoSuccessfulTagKeyListThrottlingUnassig" +
+	"nedstreetInfostreetNameCancelledCdrBucketEU_WEST_1EU_WEST_2EndpointsErrorCodeIPV4_ONLYKmsKeyArnLambd" +
+	"aArnResultMaxSipRuleIdSubmittedUS_EAST_1US_WEST_2UsernamesAcquiredAreaCodeAssignedCpsLimitDisabledIN" +
+	"ACTIVEIsCallerPasswordTagValueFocDatePartialPortingTagKeysTagListcountryCALLEECALLERClosedRoutesSour" +
+	"cememberEN_USLocalStatestatevalueCityOpenUnitcityFOCNewSNSSQSTCPUDPkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.chimesdkvoice", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 646, Target: 0, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 646, Target: 1, Traits: 1, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3932, Target: 2, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3962, Target: 3, Traits: 3, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3992, Target: 4, Traits: 4, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5519, Target: 5, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2271, Target: 6, Traits: 6, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2271, Target: 7, Traits: 7, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7388, Target: 8, Traits: 8, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2946, Target: 9, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2946, Target: 10, Traits: 10, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3175, Target: 11, Traits: 11, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3175, Target: 12, Traits: 12, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3937, Target: 13, Traits: 13, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6010, Target: 14, Traits: 14, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3207, Target: 15, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7657, Target: 16, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 17, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 18, Traits: 18, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 56, Target: 19, Traits: 19, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3239, Target: 20, Traits: 20, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2195, Target: 21, Traits: 21, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3271, Target: 22, Traits: 22, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1107, Target: 23, Traits: 23, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1156, Target: 24, Traits: 24, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1156, Target: 25, Traits: 25, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3653, Target: 26, Traits: 26, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3653, Target: 27, Traits: 27, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 111, Target: 28, Traits: 28, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 111, Target: 29, Traits: 29, StrLen: 47, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6060, Target: 30, Traits: 30, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4022, Target: 31, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5222, Target: 32, Traits: 32, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4022, Target: 33, Traits: 33, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6647, Target: 34, Traits: 34, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 328, Target: 35, Traits: 35, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 328, Target: 36, Traits: 36, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1007, Target: 37, Traits: 37, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8140, Target: 38, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4752, Target: 39, Traits: 39, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 220, Target: 40, Traits: 40, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 220, Target: 41, Traits: 41, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 434, Target: 42, Traits: 42, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4082, Target: 43, Traits: 43, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1772, Target: 44, Traits: 44, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2454, Target: 45, Traits: 45, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4112, Target: 46, Traits: 46, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1447, Target: 47, Traits: 47, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1950, Target: 48, Traits: 48, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1950, Target: 49, Traits: 49, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4436, Target: 50, Traits: 50, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4436, Target: 51, Traits: 51, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3303, Target: 52, Traits: 52, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1992, Target: 53, Traits: 53, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4465, Target: 54, Traits: 54, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6407, Target: 55, Traits: 55, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6110, Target: 56, Traits: 56, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3335, Target: 57, Traits: 57, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7697, Target: 58, Traits: 58, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2075, Target: 59, Traits: 59, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5276, Target: 60, Traits: 60, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3367, Target: 61, Traits: 61, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5303, Target: 62, Traits: 62, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1352, Target: 63, Traits: 63, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3777, Target: 64, Traits: 64, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6135, Target: 65, Traits: 65, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 487, Target: 66, Traits: 66, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1057, Target: 67, Traits: 67, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 274, Target: 68, Traits: 68, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 593, Target: 69, Traits: 69, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1817, Target: 70, Traits: 70, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2526, Target: 71, Traits: 71, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4172, Target: 72, Traits: 72, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1541, Target: 73, Traits: 73, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1726, Target: 74, Traits: 74, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1726, Target: 75, Traits: 75, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5779, Target: 76, Traits: 76, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2810, Target: 77, Traits: 77, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4232, Target: 78, Traits: 78, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2879, Target: 79, Traits: 79, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4948, Target: 80, Traits: 80, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3399, Target: 81, Traits: 81, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8284, Target: 82, Traits: 82, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7817, Target: 83, Traits: 83, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5384, Target: 84, Traits: 84, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3431, Target: 85, Traits: 85, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3463, Target: 86, Traits: 86, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5805, Target: 87, Traits: 87, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2345, Target: 88, Traits: 88, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2345, Target: 89, Traits: 89, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7514, Target: 90, Traits: 90, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3078, Target: 91, Traits: 91, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3078, Target: 92, Traits: 92, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3559, Target: 93, Traits: 93, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3559, Target: 94, Traits: 94, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5438, Target: 95, Traits: 95, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6335, Target: 96, Traits: 96, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 7367, Target: 97, Traits: 97, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5450, Target: 100, Traits: 96, StrLen: 7, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9913, Target: 416, Traits: 98, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9597, Target: 416, Traits: 98, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9031, Target: 416, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9285, Target: 416, Traits: 98, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9585, Target: 416, Traits: 98, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10245, Target: 416, Traits: 98, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10223, Target: 416, Traits: 98, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9046, Target: 416, Traits: 98, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9046, Target: 416, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10165, Target: 416, Traits: 98, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8611, Target: 111, Traits: 99, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8611, Target: 112, Traits: 96, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 111, Traits: 98, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8627, Target: 114, Traits: 96, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10100, Target: 1115, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10098, Target: 1115, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8390, Target: 117, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10066, Target: 118, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7276, Target: 119, Traits: 99, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7896, Target: 120, Traits: 100, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8949, Target: 123, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 9620, Target: 124, Traits: 96, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9416, Target: 242, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10106, Target: 123, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7577, Target: 128, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4864, Target: 1115, Traits: 96, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6479, Target: 1115, Traits: 96, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5087, Target: 131, Traits: 99, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8407, Target: 132, Traits: 96, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9893, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8803, Target: 1115, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9001, Target: 1115, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9573, Target: 1115, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8424, Target: 137, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8424, Target: 138, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 137, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9631, Target: 140, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10178, Target: 1115, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10172, Target: 1115, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7597, Target: 143, Traits: 96, StrLen: 16, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9903, Target: 416, Traits: 98, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9585, Target: 416, Traits: 98, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10245, Target: 416, Traits: 98, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10223, Target: 416, Traits: 98, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9046, Target: 416, Traits: 98, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9046, Target: 416, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10165, Target: 416, Traits: 98, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7597, Target: 151, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 143, Traits: 101, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9145, Target: 153, Traits: 96, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6, Target: 1115, Traits: 96, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9727, Target: 1115, Traits: 96, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9145, Target: 156, Traits: 96, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 153, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8881, Target: 158, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8896, Target: 159, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 0},
+		{StrOff: 8441, Target: 160, Traits: 102, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5114, Target: 163, Traits: 96, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5571, Target: 1115, Traits: 96, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4668, Target: 1115, Traits: 96, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5935, Target: 1115, Traits: 96, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2156, Target: 1115, Traits: 96, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5114, Target: 168, Traits: 96, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 163, Traits: 96, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8187, Target: 170, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9642, Target: 171, Traits: 96, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 170, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10082, Target: 173, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1187, Target: 174, Traits: 96, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10049, Target: 417, Traits: 98, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10114, Target: 417, Traits: 98, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9159, Target: 177, Traits: 96, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 174, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7637, Target: 179, Traits: 96, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2308, Target: 180, Traits: 96, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7677, Target: 186, Traits: 98, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8986, Target: 186, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9117, Target: 117, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2308, Target: 184, Traits: 96, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 180, Traits: 96, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7915, Target: 186, Traits: 99, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7915, Target: 187, Traits: 96, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 186, Traits: 98, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20, Target: 189, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2308, Target: 184, Traits: 96, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9968, Target: 191, Traits: 96, StrLen: 9, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7896, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8441, Target: 1115, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8122, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8526, Target: 1115, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8212, Target: 1115, Traits: 96, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4202, Target: 1115, Traits: 96, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6808, Target: 1115, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7367, Target: 1115, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5330, Target: 1115, Traits: 96, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6623, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9883, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5357, Target: 1115, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5004, Target: 1115, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2634, Target: 1115, Traits: 96, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4836, Target: 1115, Traits: 96, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9351, Target: 1115, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8819, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 76, Target: 209, Traits: 96, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4892, Target: 434, Traits: 96, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6359, Target: 168, Traits: 96, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8122, Target: 212, Traits: 97, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9675, Target: 215, Traits: 99, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9338, Target: 216, Traits: 96, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8187, Target: 1115, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10066, Target: 1115, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9201, Target: 219, Traits: 96, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8187, Target: 170, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10066, Target: 118, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9351, Target: 222, Traits: 103, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9793, Target: 225, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8979, Target: 226, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 8707, Target: 227, Traits: 104, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 9489, Target: 228, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10208, Target: 1115, Traits: 96, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1029, Target: 230, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9325, Target: 123, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7409, Target: 123, Traits: 96, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5675, Target: 233, Traits: 96, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10090, Target: 123, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8643, Target: 119, Traits: 98, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9697, Target: 236, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9977, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9773, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8926, Target: 239, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6794, Target: 240, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8492, Target: 241, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8509, Target: 242, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8158, Target: 243, Traits: 96, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 515, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8526, Target: 245, Traits: 105, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3879, Target: 248, Traits: 96, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9653, Target: 1115, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10255, Target: 1115, Traits: 96, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10258, Target: 1115, Traits: 96, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8941, Target: 252, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 6716, Target: 253, Traits: 96, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9525, Target: 1115, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9609, Target: 1115, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6503, Target: 256, Traits: 96, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7915, Target: 186, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5513, Target: 261, Traits: 96, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7125, Target: 259, Traits: 96, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 256, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6503, Target: 261, Traits: 96, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9833, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10058, Target: 1115, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8224, Target: 1115, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2215, Target: 265, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10190, Target: 274, Traits: 96, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10090, Target: 123, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6527, Target: 268, Traits: 96, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8258, Target: 515, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7472, Target: 383, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6567, Target: 277, Traits: 96, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4864, Target: 276, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4872, Target: 280, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7717, Target: 274, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 268, Traits: 96, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6527, Target: 276, Traits: 96, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 6551, Target: 277, Traits: 96, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10261, Target: 1115, Traits: 96, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10264, Target: 1115, Traits: 96, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7147, Target: 280, Traits: 96, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 5701, Target: 281, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 123, Target: 186, Traits: 98, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8771, Target: 186, Traits: 98, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5701, Target: 284, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 186, Traits: 98, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9513, Target: 286, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 281, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 123, Target: 288, Traits: 96, StrLen: 11, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9229, Target: 416, Traits: 98, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7915, Target: 186, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9215, Target: 240, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8187, Target: 117, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3831, Target: 378, Traits: 96, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7202, Target: 363, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5513, Target: 366, Traits: 96, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6773, Target: 315, Traits: 96, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2653, Target: 309, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5087, Target: 131, Traits: 98, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8407, Target: 132, Traits: 96, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8458, Target: 227, Traits: 106, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8205, Target: 225, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 336, Traits: 98, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4836, Target: 305, Traits: 96, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9568, Target: 515, Traits: 96, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 311, Traits: 96, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7877, Target: 227, Traits: 106, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5727, Target: 309, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 305, Traits: 96, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5753, Target: 311, Traits: 96, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8835, Target: 1115, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7535, Target: 1115, Traits: 96, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10013, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6762, Target: 315, Traits: 96, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9686, Target: 252, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9501, Target: 252, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9813, Target: 252, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9719, Target: 252, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9803, Target: 252, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9708, Target: 252, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6575, Target: 322, Traits: 96, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 324, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8176, Target: 324, Traits: 96, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8396, Target: 117, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6260, Target: 381, Traits: 96, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7737, Target: 327, Traits: 96, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9229, Target: 416, Traits: 98, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9968, Target: 191, Traits: 96, StrLen: 9, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9477, Target: 515, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7737, Target: 331, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 327, Traits: 96, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5712, Target: 333, Traits: 96, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 288, Traits: 96, StrLen: 6, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7451, Target: 335, Traits: 96, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 8956, Target: 336, Traits: 99, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3998, Target: 337, Traits: 96, StrLen: 16, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8194, Target: 225, Traits: 96, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7202, Target: 363, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5513, Target: 348, Traits: 96, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7788, Target: 360, Traits: 96, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7991, Target: 259, Traits: 96, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 10130, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7757, Target: 346, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 337, Traits: 96, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7169, Target: 348, Traits: 96, StrLen: 22, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9833, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9863, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8224, Target: 1115, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10137, Target: 1115, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8739, Target: 1115, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10022, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10249, Target: 1115, Traits: 96, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8851, Target: 1115, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4223, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7478, Target: 1115, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9923, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7777, Target: 360, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10252, Target: 1115, Traits: 96, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10144, Target: 1115, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7191, Target: 363, Traits: 96, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6, Target: 1115, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6235, Target: 1115, Traits: 96, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6510, Target: 366, Traits: 96, StrLen: 17, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9923, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7472, Target: 1115, Traits: 96, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8755, Target: 1115, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8356, Target: 1115, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9299, Target: 1115, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9893, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10074, Target: 1115, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8560, Target: 1115, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8675, Target: 1115, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9364, Target: 1115, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9453, Target: 1115, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6269, Target: 378, Traits: 96, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10213, Target: 1115, Traits: 96, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9257, Target: 1115, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8010, Target: 381, Traits: 96, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 378, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7472, Target: 383, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 8971, Target: 384, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3291, Target: 385, Traits: 96, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5168, Target: 226, Traits: 96, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10090, Target: 123, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7953, Target: 186, Traits: 98, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2088, Target: 517, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5525, Target: 390, Traits: 96, StrLen: 12, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9243, Target: 241, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 516, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5513, Target: 407, Traits: 96, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5182, Target: 384, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6773, Target: 156, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9173, Target: 227, Traits: 106, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9513, Target: 286, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6716, Target: 253, Traits: 96, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9338, Target: 216, Traits: 96, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9201, Target: 219, Traits: 96, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7213, Target: 404, Traits: 99, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6114, Target: 405, Traits: 96, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 390, Traits: 96, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8230, Target: 407, Traits: 96, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10237, Target: 1115, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8363, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10184, Target: 1115, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4202, Target: 411, Traits: 100, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10004, Target: 414, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 9537, Target: 415, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6785, Target: 416, Traits: 99, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8029, Target: 417, Traits: 99, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8029, Target: 418, Traits: 96, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 417, Traits: 98, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 420, Traits: 96, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9986, Target: 119, Traits: 98, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6808, Target: 422, Traits: 107, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5330, Target: 425, Traits: 108, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3808, Target: 428, Traits: 96, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9843, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7103, Target: 1115, Traits: 96, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9763, Target: 1115, Traits: 96, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4696, Target: 1115, Traits: 96, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7015, Target: 1115, Traits: 96, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3808, Target: 434, Traits: 96, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 428, Traits: 96, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7235, Target: 436, Traits: 96, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 9377, Target: 437, Traits: 96, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 10267, Target: 417, Traits: 98, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10228, Target: 417, Traits: 98, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 331, Target: 440, Traits: 96, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 96, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5479, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 461, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9959, Target: 455, Traits: 96, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7257, Target: 240, Traits: 96, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 331, Target: 448, Traits: 96, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8627, Target: 114, Traits: 96, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9312, Target: 112, Traits: 96, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2277, Target: 451, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9416, Target: 225, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3839, Target: 453, Traits: 96, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9995, Target: 215, Traits: 98, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3839, Target: 455, Traits: 96, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 453, Traits: 96, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6831, Target: 457, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 440, Traits: 96, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1010, Target: 459, Traits: 96, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2418, Target: 123, Traits: 96, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6854, Target: 461, Traits: 96, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4920, Target: 462, Traits: 96, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10013, Target: 240, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 473, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10090, Target: 123, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8273, Target: 480, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9561, Target: 240, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8302, Target: 478, Traits: 96, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9741, Target: 471, Traits: 96, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 462, Traits: 96, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9752, Target: 473, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4920, Target: 474, Traits: 96, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 96, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4864, Target: 436, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5479, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4920, Target: 478, Traits: 96, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 474, Traits: 96, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8266, Target: 480, Traits: 96, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9403, Target: 1115, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8248, Target: 1115, Traits: 96, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6185, Target: 483, Traits: 96, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 10267, Target: 417, Traits: 98, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10228, Target: 417, Traits: 98, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6210, Target: 486, Traits: 96, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 10267, Target: 417, Traits: 98, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10228, Target: 417, Traits: 98, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7797, Target: 489, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7465, Target: 495, Traits: 96, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5909, Target: 242, Traits: 96, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6877, Target: 492, Traits: 96, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8896, Target: 159, Traits: 96, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 9271, Target: 242, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6877, Target: 495, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 492, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4237, Target: 497, Traits: 96, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8048, Target: 242, Traits: 96, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6900, Target: 240, Traits: 96, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9620, Target: 124, Traits: 96, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7797, Target: 489, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8787, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9390, Target: 515, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1127, Target: 506, Traits: 96, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7637, Target: 179, Traits: 96, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10090, Target: 123, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4976, Target: 513, Traits: 96, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5675, Target: 233, Traits: 96, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3870, Target: 511, Traits: 96, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3879, Target: 248, Traits: 96, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3870, Target: 513, Traits: 96, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 511, Traits: 96, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6802, Target: 515, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8500, Target: 516, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8038, Target: 517, Traits: 96, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 515, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5280, Target: 519, Traits: 96, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9876, Target: 522, Traits: 98, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9568, Target: 527, Traits: 98, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9873, Target: 522, Traits: 99, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9873, Target: 523, Traits: 96, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 522, Traits: 98, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10158, Target: 525, Traits: 96, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 519, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10122, Target: 527, Traits: 99, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1176, Target: 528, Traits: 96, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10082, Target: 173, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8104, Target: 186, Traits: 98, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9131, Target: 138, Traits: 96, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8866, Target: 517, Traits: 96, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10090, Target: 123, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1967, Target: 534, Traits: 96, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5105, Target: 227, Traits: 106, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 10196, Target: 515, Traits: 96, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6623, Target: 537, Traits: 109, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9257, Target: 540, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5357, Target: 541, Traits: 110, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5004, Target: 544, Traits: 111, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8403, Target: 191, Traits: 96, StrLen: 4, Count: 17, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2443, Target: 515, Traits: 96, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3431, Target: 547, Traits: 96, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9229, Target: 416, Traits: 98, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7202, Target: 363, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5087, Target: 131, Traits: 98, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 336, Traits: 98, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3431, Target: 552, Traits: 96, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 547, Traits: 96, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8819, Target: 554, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 6, Target: 555, Traits: 96, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5479, Target: 566, Traits: 96, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5094, Target: 602, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8723, Target: 515, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8577, Target: 123, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8594, Target: 240, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4595, Target: 591, Traits: 96, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9697, Target: 236, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5465, Target: 566, Traits: 96, StrLen: 23, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10031, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10040, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9441, Target: 1115, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9465, Target: 1115, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9941, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9950, Target: 1115, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9075, Target: 1115, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9061, Target: 1115, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9089, Target: 1115, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9103, Target: 1115, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5465, Target: 577, Traits: 96, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 566, Traits: 96, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 139, Target: 579, Traits: 96, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7535, Target: 240, Traits: 96, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 589, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8067, Target: 597, Traits: 96, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7279, Target: 240, Traits: 96, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7577, Target: 128, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6923, Target: 587, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 579, Traits: 96, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6946, Target: 589, Traits: 96, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4581, Target: 591, Traits: 96, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3591, Target: 1115, Traits: 96, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5060, Target: 1115, Traits: 96, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5883, Target: 594, Traits: 96, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4864, Target: 599, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7301, Target: 597, Traits: 96, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 594, Traits: 96, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5883, Target: 599, Traits: 96, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 8320, Target: 600, Traits: 96, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 555, Traits: 96, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8338, Target: 602, Traits: 96, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7323, Target: 603, Traits: 96, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9932, Target: 415, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3181, Target: 605, Traits: 96, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9271, Target: 242, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9016, Target: 119, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7857, Target: 242, Traits: 96, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7934, Target: 227, Traits: 106, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3181, Target: 612, Traits: 96, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7857, Target: 242, Traits: 96, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7556, Target: 119, Traits: 98, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 621, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4628, Target: 620, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 420, Traits: 96, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4610, Target: 620, Traits: 96, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7345, Target: 621, Traits: 96, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4639, Target: 622, Traits: 96, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7857, Target: 242, Traits: 96, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7556, Target: 119, Traits: 98, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 621, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4628, Target: 620, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4639, Target: 629, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 622, Traits: 96, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6969, Target: 631, Traits: 96, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9271, Target: 242, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9016, Target: 119, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7857, Target: 242, Traits: 96, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7934, Target: 227, Traits: 106, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6969, Target: 638, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 10202, Target: 631, Traits: 96, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2884, Target: 640, Traits: 96, StrLen: 21, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6992, Target: 242, Traits: 96, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5492, Target: 240, Traits: 96, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9620, Target: 124, Traits: 96, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8659, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5098, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8787, Target: 227, Traits: 106, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9390, Target: 515, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 906, Target: 648, Traits: 96, StrLen: 51, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7535, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8691, Target: 187, Traits: 96, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9187, Target: 252, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 646, Target: 652, Traits: 96, StrLen: 52, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8543, Target: 331, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1588, Target: 654, Traits: 96, StrLen: 46, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8691, Target: 187, Traits: 96, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9187, Target: 252, Traits: 96, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1400, Target: 658, Traits: 96, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8543, Target: 331, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4262, Target: 660, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9229, Target: 243, Traits: 96, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3932, Target: 662, Traits: 96, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8543, Target: 331, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4291, Target: 664, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4552, Target: 552, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3962, Target: 666, Traits: 96, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8543, Target: 331, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4320, Target: 668, Traits: 96, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7202, Target: 363, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8691, Target: 187, Traits: 96, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5094, Target: 336, Traits: 98, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3992, Target: 672, Traits: 96, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3998, Target: 337, Traits: 96, StrLen: 16, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5960, Target: 674, Traits: 96, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6739, Target: 284, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5094, Target: 404, Traits: 98, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5182, Target: 384, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6773, Target: 156, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6716, Target: 253, Traits: 96, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9338, Target: 216, Traits: 96, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9201, Target: 219, Traits: 96, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5519, Target: 683, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5525, Target: 390, Traits: 96, StrLen: 12, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2382, Target: 685, Traits: 96, StrLen: 36, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8911, Target: 186, Traits: 98, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9403, Target: 186, Traits: 98, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9377, Target: 437, Traits: 96, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 6198, Target: 483, Traits: 96, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2271, Target: 691, Traits: 96, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2277, Target: 451, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3111, Target: 693, Traits: 96, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5479, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 461, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9959, Target: 455, Traits: 96, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5280, Target: 525, Traits: 96, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2913, Target: 698, Traits: 96, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 331, Target: 440, Traits: 96, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7617, Target: 700, Traits: 96, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5094, Target: 473, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8273, Target: 480, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9561, Target: 240, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10090, Target: 252, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8302, Target: 478, Traits: 96, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7388, Target: 706, Traits: 96, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4920, Target: 462, Traits: 96, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3143, Target: 708, Traits: 96, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5094, Target: 589, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8067, Target: 597, Traits: 96, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7577, Target: 128, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2946, Target: 712, Traits: 96, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 139, Target: 579, Traits: 96, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5141, Target: 714, Traits: 96, StrLen: 27, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5094, Target: 602, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5479, Target: 566, Traits: 96, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8577, Target: 123, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5280, Target: 525, Traits: 96, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4595, Target: 591, Traits: 96, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9697, Target: 236, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4724, Target: 721, Traits: 96, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6, Target: 555, Traits: 96, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3622, Target: 723, Traits: 96, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5094, Target: 621, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4628, Target: 620, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 420, Traits: 96, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8086, Target: 158, Traits: 96, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5280, Target: 525, Traits: 96, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3175, Target: 729, Traits: 96, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3181, Target: 612, Traits: 96, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5985, Target: 731, Traits: 96, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8048, Target: 242, Traits: 96, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5545, Target: 733, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3181, Target: 605, Traits: 96, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4267, Target: 735, Traits: 96, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9229, Target: 416, Traits: 113, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6010, Target: 737, Traits: 96, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9243, Target: 241, Traits: 112, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3207, Target: 740, Traits: 96, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7657, Target: 742, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10013, Target: 240, Traits: 112, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 744, Traits: 96, StrLen: 56, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 56, Target: 746, Traits: 96, StrLen: 55, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3239, Target: 748, Traits: 96, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7535, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5195, Target: 750, Traits: 96, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2195, Target: 752, Traits: 96, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3271, Target: 754, Traits: 96, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1107, Target: 756, Traits: 96, StrLen: 49, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1156, Target: 758, Traits: 96, StrLen: 49, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10049, Target: 418, Traits: 96, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2233, Target: 761, Traits: 96, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3653, Target: 763, Traits: 96, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7857, Target: 242, Traits: 112, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6035, Target: 765, Traits: 96, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9271, Target: 242, Traits: 112, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 166, Target: 767, Traits: 96, StrLen: 54, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7535, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8691, Target: 187, Traits: 96, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 111, Target: 770, Traits: 96, StrLen: 55, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8543, Target: 331, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1205, Target: 772, Traits: 96, StrLen: 49, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8691, Target: 187, Traits: 96, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 957, Target: 775, Traits: 96, StrLen: 50, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8543, Target: 331, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6060, Target: 777, Traits: 96, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6, Target: 603, Traits: 96, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7430, Target: 779, Traits: 96, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9229, Target: 416, Traits: 113, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5597, Target: 781, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8194, Target: 225, Traits: 112, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5222, Target: 783, Traits: 96, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3998, Target: 337, Traits: 96, StrLen: 16, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7037, Target: 785, Traits: 96, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 123, Target: 288, Traits: 96, StrLen: 11, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4022, Target: 787, Traits: 96, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5087, Target: 131, Traits: 98, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5087, Target: 227, Traits: 106, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7059, Target: 790, Traits: 96, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9243, Target: 241, Traits: 112, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6647, Target: 793, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5525, Target: 390, Traits: 96, StrLen: 12, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 698, Target: 795, Traits: 96, StrLen: 52, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 328, Target: 797, Traits: 96, StrLen: 53, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 331, Target: 448, Traits: 96, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4349, Target: 799, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1254, Target: 801, Traits: 96, StrLen: 49, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1007, Target: 803, Traits: 96, StrLen: 50, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1010, Target: 459, Traits: 96, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4052, Target: 805, Traits: 96, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 331, Target: 440, Traits: 96, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8475, Target: 807, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10013, Target: 240, Traits: 112, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8140, Target: 809, Traits: 96, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4920, Target: 462, Traits: 96, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5249, Target: 811, Traits: 96, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8048, Target: 242, Traits: 112, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4752, Target: 814, Traits: 96, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4237, Target: 497, Traits: 96, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 381, Target: 816, Traits: 96, StrLen: 53, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 220, Target: 818, Traits: 96, StrLen: 54, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20, Target: 189, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 750, Target: 820, Traits: 96, StrLen: 52, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 434, Target: 822, Traits: 96, StrLen: 53, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 76, Target: 209, Traits: 96, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4378, Target: 824, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7535, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4082, Target: 826, Traits: 96, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 139, Target: 579, Traits: 96, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6383, Target: 828, Traits: 96, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1862, Target: 830, Traits: 96, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 832, Traits: 96, StrLen: 45, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1029, Target: 230, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2670, Target: 834, Traits: 96, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2454, Target: 836, Traits: 96, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2215, Target: 265, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6085, Target: 838, Traits: 96, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6, Target: 555, Traits: 96, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4407, Target: 840, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4112, Target: 842, Traits: 96, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3291, Target: 385, Traits: 96, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1634, Target: 844, Traits: 96, StrLen: 46, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1447, Target: 846, Traits: 96, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1127, Target: 506, Traits: 96, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2034, Target: 848, Traits: 96, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1950, Target: 850, Traits: 96, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1967, Target: 534, Traits: 96, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2705, Target: 852, Traits: 96, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2490, Target: 854, Traits: 96, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1176, Target: 528, Traits: 96, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4780, Target: 856, Traits: 96, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7857, Target: 242, Traits: 112, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4436, Target: 858, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3181, Target: 612, Traits: 96, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7081, Target: 860, Traits: 96, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9271, Target: 242, Traits: 112, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6670, Target: 862, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3181, Target: 605, Traits: 96, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3684, Target: 864, Traits: 96, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6992, Target: 242, Traits: 112, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10106, Target: 123, Traits: 114, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3303, Target: 868, Traits: 96, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2884, Target: 640, Traits: 96, StrLen: 21, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1992, Target: 870, Traits: 96, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2005, Target: 577, Traits: 96, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4808, Target: 872, Traits: 96, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8926, Target: 239, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4465, Target: 875, Traits: 96, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4469, Target: 346, Traits: 96, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6693, Target: 878, Traits: 96, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5513, Target: 515, Traits: 117, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7202, Target: 363, Traits: 118, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9783, Target: 311, Traits: 119, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9664, Target: 515, Traits: 120, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6407, Target: 885, Traits: 96, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 123, Target: 333, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6431, Target: 888, Traits: 96, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5513, Target: 407, Traits: 117, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8926, Target: 239, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6110, Target: 893, Traits: 96, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6114, Target: 405, Traits: 96, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 239, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3715, Target: 896, Traits: 96, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8926, Target: 239, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3335, Target: 899, Traits: 96, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3339, Target: 457, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 239, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7972, Target: 902, Traits: 96, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 121, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8926, Target: 239, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7697, Target: 906, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7701, Target: 471, Traits: 96, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 239, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2116, Target: 909, Traits: 96, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7202, Target: 363, Traits: 118, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2075, Target: 911, Traits: 96, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2088, Target: 322, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5623, Target: 913, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9730, Target: 119, Traits: 122, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5276, Target: 915, Traits: 96, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5280, Target: 525, Traits: 96, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3746, Target: 917, Traits: 96, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8926, Target: 515, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3367, Target: 920, Traits: 96, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3371, Target: 587, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5649, Target: 923, Traits: 96, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8926, Target: 515, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5303, Target: 926, Traits: 96, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5307, Target: 600, Traits: 96, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1494, Target: 929, Traits: 96, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1352, Target: 931, Traits: 96, StrLen: 48, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10049, Target: 418, Traits: 96, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4142, Target: 933, Traits: 96, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8926, Target: 515, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3777, Target: 936, Traits: 96, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3781, Target: 629, Traits: 96, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6455, Target: 939, Traits: 96, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7857, Target: 242, Traits: 123, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7462, Target: 414, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6135, Target: 943, Traits: 96, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6139, Target: 638, Traits: 96, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 802, Target: 946, Traits: 96, StrLen: 52, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 331, Target: 448, Traits: 96, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 487, Target: 949, Traits: 96, StrLen: 53, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 331, Target: 448, Traits: 96, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1303, Target: 951, Traits: 96, StrLen: 49, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1010, Target: 459, Traits: 96, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1057, Target: 954, Traits: 96, StrLen: 50, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1010, Target: 459, Traits: 96, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 540, Target: 956, Traits: 96, StrLen: 53, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20, Target: 189, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 274, Target: 959, Traits: 96, StrLen: 54, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20, Target: 189, Traits: 96, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 854, Target: 961, Traits: 96, StrLen: 52, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4892, Target: 434, Traits: 96, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6359, Target: 168, Traits: 96, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 593, Target: 965, Traits: 96, StrLen: 53, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 76, Target: 209, Traits: 96, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1906, Target: 967, Traits: 96, StrLen: 44, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1029, Target: 230, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1817, Target: 970, Traits: 96, StrLen: 45, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1029, Target: 230, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2740, Target: 972, Traits: 96, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2215, Target: 265, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2526, Target: 975, Traits: 96, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2215, Target: 265, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4494, Target: 977, Traits: 96, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5168, Target: 226, Traits: 96, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6599, Target: 171, Traits: 96, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7953, Target: 186, Traits: 98, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10090, Target: 123, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4172, Target: 983, Traits: 96, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3291, Target: 385, Traits: 96, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1680, Target: 985, Traits: 96, StrLen: 46, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1127, Target: 506, Traits: 96, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1541, Target: 988, Traits: 96, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1127, Target: 506, Traits: 96, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1726, Target: 990, Traits: 96, StrLen: 46, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1187, Target: 177, Traits: 96, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2775, Target: 993, Traits: 96, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1176, Target: 528, Traits: 96, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2562, Target: 996, Traits: 96, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1176, Target: 528, Traits: 96, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6160, Target: 998, Traits: 96, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9229, Target: 416, Traits: 113, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5779, Target: 1000, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 123, Target: 288, Traits: 96, StrLen: 11, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2845, Target: 1002, Traits: 96, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10066, Target: 515, Traits: 124, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10233, Target: 515, Traits: 125, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8187, Target: 117, Traits: 126, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10218, Target: 515, Traits: 127, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9257, Target: 540, Traits: 128, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6269, Target: 378, Traits: 129, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7462, Target: 335, Traits: 116, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 115, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2810, Target: 1011, Traits: 96, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8691, Target: 187, Traits: 96, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8926, Target: 515, Traits: 96, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4523, Target: 1014, Traits: 96, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9416, Target: 242, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7857, Target: 242, Traits: 96, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8086, Target: 158, Traits: 96, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9631, Target: 140, Traits: 96, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4232, Target: 1020, Traits: 96, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4237, Target: 497, Traits: 96, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3012, Target: 1022, Traits: 96, StrLen: 33, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9416, Target: 242, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9489, Target: 228, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8086, Target: 158, Traits: 96, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2879, Target: 1027, Traits: 96, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2884, Target: 640, Traits: 96, StrLen: 21, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4948, Target: 1029, Traits: 96, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8048, Target: 242, Traits: 112, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3399, Target: 1032, Traits: 96, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6992, Target: 242, Traits: 112, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8284, Target: 1035, Traits: 96, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9730, Target: 119, Traits: 98, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5280, Target: 525, Traits: 96, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7817, Target: 1038, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9730, Target: 119, Traits: 98, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10151, Target: 523, Traits: 96, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5384, Target: 1041, Traits: 96, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6, Target: 603, Traits: 96, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3431, Target: 1043, Traits: 96, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9229, Target: 416, Traits: 113, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7202, Target: 363, Traits: 96, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5087, Target: 131, Traits: 98, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 336, Traits: 98, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3967, Target: 1048, Traits: 96, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 123, Target: 288, Traits: 96, StrLen: 11, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3463, Target: 1050, Traits: 96, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5087, Target: 131, Traits: 98, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6285, Target: 1052, Traits: 96, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9243, Target: 241, Traits: 112, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6773, Target: 156, Traits: 96, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5182, Target: 384, Traits: 96, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5805, Target: 1057, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5525, Target: 390, Traits: 96, StrLen: 12, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2598, Target: 1059, Traits: 96, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9416, Target: 240, Traits: 112, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6198, Target: 486, Traits: 96, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2345, Target: 1063, Traits: 96, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2277, Target: 451, Traits: 96, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3495, Target: 1065, Traits: 96, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7493, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 461, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9959, Target: 455, Traits: 96, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3045, Target: 1069, Traits: 96, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 331, Target: 440, Traits: 96, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7837, Target: 1071, Traits: 96, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10013, Target: 240, Traits: 112, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 473, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10090, Target: 252, Traits: 96, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8302, Target: 478, Traits: 96, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7514, Target: 1076, Traits: 96, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4920, Target: 462, Traits: 96, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3527, Target: 1078, Traits: 96, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7535, Target: 240, Traits: 112, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 589, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8067, Target: 597, Traits: 96, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7577, Target: 128, Traits: 96, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3078, Target: 1083, Traits: 96, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 139, Target: 579, Traits: 96, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5411, Target: 1085, Traits: 96, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8835, Target: 590, Traits: 112, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 602, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8577, Target: 123, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5032, Target: 1089, Traits: 96, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6, Target: 555, Traits: 96, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3901, Target: 1091, Traits: 96, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7857, Target: 242, Traits: 112, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5094, Target: 621, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4628, Target: 620, Traits: 96, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3559, Target: 1095, Traits: 96, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3181, Target: 612, Traits: 96, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6310, Target: 1097, Traits: 96, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9271, Target: 242, Traits: 112, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8048, Target: 242, Traits: 96, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5831, Target: 1100, Traits: 96, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3181, Target: 605, Traits: 96, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5857, Target: 1102, Traits: 96, StrLen: 26, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9429, Target: 240, Traits: 96, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9549, Target: 416, Traits: 98, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9853, Target: 416, Traits: 98, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10233, Target: 416, Traits: 98, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10218, Target: 416, Traits: 98, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8187, Target: 416, Traits: 98, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9823, Target: 416, Traits: 98, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5438, Target: 1110, Traits: 96, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8819, Target: 554, Traits: 96, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8373, Target: 515, Traits: 96, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5450, Target: 100, Traits: 96, StrLen: 7, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7597, Target: 151, Traits: 96, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10241, Target: 1115, Traits: 96, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}?operation=associate-phone-numbers",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connector-groups/{VoiceConnectorGroupId}?operation=associate-phone-numbers",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/phone-numbers?operation=batch-delete",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/phone-numbers?operation=batch-update",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/phone-number-orders",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/sip-media-applications",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}/calls",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/sip-rules",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connector-groups",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-profiles",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-profile-domains",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/phone-numbers/{PhoneNumberId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/sip-rules/{SipRuleId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connectors/{VoiceConnectorId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connectors/{VoiceConnectorId}/emergency-calling-configuration",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connector-groups/{VoiceConnectorGroupId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connectors/{VoiceConnectorId}/origination",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connectors/{VoiceConnectorId}/streaming-configuration",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-connectors/{VoiceConnectorId}/termination",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}/termination/credentials?operation=delete",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-profiles/{VoiceProfileId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/voice-profile-domains/{VoiceProfileDomainId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}?operation=disassociate-phone-numbers",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connector-groups/{VoiceConnectorGroupId}?operation=disassociate-phone-numbers",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/settings",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/phone-numbers/{PhoneNumberId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/phone-number-orders/{PhoneNumberOrderId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/settings/phone-number",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}/alexa-skill-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}/logging-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/sip-rules/{SipRuleId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks/{SpeakerSearchTaskId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/emergency-calling-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connector-groups/{VoiceConnectorGroupId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/logging-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/origination",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/streaming-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/termination",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/termination/health",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-profiles/{VoiceProfileId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-profile-domains/{VoiceProfileDomainId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connector-regions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/phone-number-orders",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/phone-numbers",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/sip-media-applications",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/sip-rules",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/phone-number-countries",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connector-groups",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-connectors/{VoiceConnectorId}/termination/credentials",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-profile-domains",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/voice-profiles",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}/alexa-skill-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}/logging-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connectors/{VoiceConnectorId}/emergency-calling-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connectors/{VoiceConnectorId}/external-systems-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connectors/{VoiceConnectorId}/logging-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connectors/{VoiceConnectorId}/origination",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connectors/{VoiceConnectorId}/streaming-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connectors/{VoiceConnectorId}/termination",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}/termination/credentials?operation=put",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/phone-numbers/{PhoneNumberId}?operation=restore",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/search?type=phone-numbers",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}/speaker-search-tasks/{SpeakerSearchTaskId}?operation=stop",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}?operation=stop",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags?operation=tag-resource",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags?operation=untag-resource",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/settings",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/phone-numbers/{PhoneNumberId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/settings/phone-number",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/sip-media-applications/{SipMediaApplicationId}/calls/{TransactionId}",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/sip-rules/{SipRuleId}",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connectors/{VoiceConnectorId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-connector-groups/{VoiceConnectorGroupId}",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-profiles/{VoiceProfileId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/voice-profile-domains/{VoiceProfileDomainId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/emergency-calling/address",
+			Code: 202}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "CandidateAddress"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 410}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 422}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "isCaller"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "next-token"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "max-results"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "product-type"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "filter-name"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "filter-value"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sip-media-application"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "arn"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "voice-profile-domain-id"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "area-code"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "city"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "country"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "state"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "toll-free-prefix"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "phone-number-type"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [1116]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+	smithy.NewStaticSchema(&set, 884),
+	smithy.NewStaticSchema(&set, 885),
+	smithy.NewStaticSchema(&set, 886),
+	smithy.NewStaticSchema(&set, 887),
+	smithy.NewStaticSchema(&set, 888),
+	smithy.NewStaticSchema(&set, 889),
+	smithy.NewStaticSchema(&set, 890),
+	smithy.NewStaticSchema(&set, 891),
+	smithy.NewStaticSchema(&set, 892),
+	smithy.NewStaticSchema(&set, 893),
+	smithy.NewStaticSchema(&set, 894),
+	smithy.NewStaticSchema(&set, 895),
+	smithy.NewStaticSchema(&set, 896),
+	smithy.NewStaticSchema(&set, 897),
+	smithy.NewStaticSchema(&set, 898),
+	smithy.NewStaticSchema(&set, 899),
+	smithy.NewStaticSchema(&set, 900),
+	smithy.NewStaticSchema(&set, 901),
+	smithy.NewStaticSchema(&set, 902),
+	smithy.NewStaticSchema(&set, 903),
+	smithy.NewStaticSchema(&set, 904),
+	smithy.NewStaticSchema(&set, 905),
+	smithy.NewStaticSchema(&set, 906),
+	smithy.NewStaticSchema(&set, 907),
+	smithy.NewStaticSchema(&set, 908),
+	smithy.NewStaticSchema(&set, 909),
+	smithy.NewStaticSchema(&set, 910),
+	smithy.NewStaticSchema(&set, 911),
+	smithy.NewStaticSchema(&set, 912),
+	smithy.NewStaticSchema(&set, 913),
+	smithy.NewStaticSchema(&set, 914),
+	smithy.NewStaticSchema(&set, 915),
+	smithy.NewStaticSchema(&set, 916),
+	smithy.NewStaticSchema(&set, 917),
+	smithy.NewStaticSchema(&set, 918),
+	smithy.NewStaticSchema(&set, 919),
+	smithy.NewStaticSchema(&set, 920),
+	smithy.NewStaticSchema(&set, 921),
+	smithy.NewStaticSchema(&set, 922),
+	smithy.NewStaticSchema(&set, 923),
+	smithy.NewStaticSchema(&set, 924),
+	smithy.NewStaticSchema(&set, 925),
+	smithy.NewStaticSchema(&set, 926),
+	smithy.NewStaticSchema(&set, 927),
+	smithy.NewStaticSchema(&set, 928),
+	smithy.NewStaticSchema(&set, 929),
+	smithy.NewStaticSchema(&set, 930),
+	smithy.NewStaticSchema(&set, 931),
+	smithy.NewStaticSchema(&set, 932),
+	smithy.NewStaticSchema(&set, 933),
+	smithy.NewStaticSchema(&set, 934),
+	smithy.NewStaticSchema(&set, 935),
+	smithy.NewStaticSchema(&set, 936),
+	smithy.NewStaticSchema(&set, 937),
+	smithy.NewStaticSchema(&set, 938),
+	smithy.NewStaticSchema(&set, 939),
+	smithy.NewStaticSchema(&set, 940),
+	smithy.NewStaticSchema(&set, 941),
+	smithy.NewStaticSchema(&set, 942),
+	smithy.NewStaticSchema(&set, 943),
+	smithy.NewStaticSchema(&set, 944),
+	smithy.NewStaticSchema(&set, 945),
+	smithy.NewStaticSchema(&set, 946),
+	smithy.NewStaticSchema(&set, 947),
+	smithy.NewStaticSchema(&set, 948),
+	smithy.NewStaticSchema(&set, 949),
+	smithy.NewStaticSchema(&set, 950),
+	smithy.NewStaticSchema(&set, 951),
+	smithy.NewStaticSchema(&set, 952),
+	smithy.NewStaticSchema(&set, 953),
+	smithy.NewStaticSchema(&set, 954),
+	smithy.NewStaticSchema(&set, 955),
+	smithy.NewStaticSchema(&set, 956),
+	smithy.NewStaticSchema(&set, 957),
+	smithy.NewStaticSchema(&set, 958),
+	smithy.NewStaticSchema(&set, 959),
+	smithy.NewStaticSchema(&set, 960),
+	smithy.NewStaticSchema(&set, 961),
+	smithy.NewStaticSchema(&set, 962),
+	smithy.NewStaticSchema(&set, 963),
+	smithy.NewStaticSchema(&set, 964),
+	smithy.NewStaticSchema(&set, 965),
+	smithy.NewStaticSchema(&set, 966),
+	smithy.NewStaticSchema(&set, 967),
+	smithy.NewStaticSchema(&set, 968),
+	smithy.NewStaticSchema(&set, 969),
+	smithy.NewStaticSchema(&set, 970),
+	smithy.NewStaticSchema(&set, 971),
+	smithy.NewStaticSchema(&set, 972),
+	smithy.NewStaticSchema(&set, 973),
+	smithy.NewStaticSchema(&set, 974),
+	smithy.NewStaticSchema(&set, 975),
+	smithy.NewStaticSchema(&set, 976),
+	smithy.NewStaticSchema(&set, 977),
+	smithy.NewStaticSchema(&set, 978),
+	smithy.NewStaticSchema(&set, 979),
+	smithy.NewStaticSchema(&set, 980),
+	smithy.NewStaticSchema(&set, 981),
+	smithy.NewStaticSchema(&set, 982),
+	smithy.NewStaticSchema(&set, 983),
+	smithy.NewStaticSchema(&set, 984),
+	smithy.NewStaticSchema(&set, 985),
+	smithy.NewStaticSchema(&set, 986),
+	smithy.NewStaticSchema(&set, 987),
+	smithy.NewStaticSchema(&set, 988),
+	smithy.NewStaticSchema(&set, 989),
+	smithy.NewStaticSchema(&set, 990),
+	smithy.NewStaticSchema(&set, 991),
+	smithy.NewStaticSchema(&set, 992),
+	smithy.NewStaticSchema(&set, 993),
+	smithy.NewStaticSchema(&set, 994),
+	smithy.NewStaticSchema(&set, 995),
+	smithy.NewStaticSchema(&set, 996),
+	smithy.NewStaticSchema(&set, 997),
+	smithy.NewStaticSchema(&set, 998),
+	smithy.NewStaticSchema(&set, 999),
+	smithy.NewStaticSchema(&set, 1000),
+	smithy.NewStaticSchema(&set, 1001),
+	smithy.NewStaticSchema(&set, 1002),
+	smithy.NewStaticSchema(&set, 1003),
+	smithy.NewStaticSchema(&set, 1004),
+	smithy.NewStaticSchema(&set, 1005),
+	smithy.NewStaticSchema(&set, 1006),
+	smithy.NewStaticSchema(&set, 1007),
+	smithy.NewStaticSchema(&set, 1008),
+	smithy.NewStaticSchema(&set, 1009),
+	smithy.NewStaticSchema(&set, 1010),
+	smithy.NewStaticSchema(&set, 1011),
+	smithy.NewStaticSchema(&set, 1012),
+	smithy.NewStaticSchema(&set, 1013),
+	smithy.NewStaticSchema(&set, 1014),
+	smithy.NewStaticSchema(&set, 1015),
+	smithy.NewStaticSchema(&set, 1016),
+	smithy.NewStaticSchema(&set, 1017),
+	smithy.NewStaticSchema(&set, 1018),
+	smithy.NewStaticSchema(&set, 1019),
+	smithy.NewStaticSchema(&set, 1020),
+	smithy.NewStaticSchema(&set, 1021),
+	smithy.NewStaticSchema(&set, 1022),
+	smithy.NewStaticSchema(&set, 1023),
+	smithy.NewStaticSchema(&set, 1024),
+	smithy.NewStaticSchema(&set, 1025),
+	smithy.NewStaticSchema(&set, 1026),
+	smithy.NewStaticSchema(&set, 1027),
+	smithy.NewStaticSchema(&set, 1028),
+	smithy.NewStaticSchema(&set, 1029),
+	smithy.NewStaticSchema(&set, 1030),
+	smithy.NewStaticSchema(&set, 1031),
+	smithy.NewStaticSchema(&set, 1032),
+	smithy.NewStaticSchema(&set, 1033),
+	smithy.NewStaticSchema(&set, 1034),
+	smithy.NewStaticSchema(&set, 1035),
+	smithy.NewStaticSchema(&set, 1036),
+	smithy.NewStaticSchema(&set, 1037),
+	smithy.NewStaticSchema(&set, 1038),
+	smithy.NewStaticSchema(&set, 1039),
+	smithy.NewStaticSchema(&set, 1040),
+	smithy.NewStaticSchema(&set, 1041),
+	smithy.NewStaticSchema(&set, 1042),
+	smithy.NewStaticSchema(&set, 1043),
+	smithy.NewStaticSchema(&set, 1044),
+	smithy.NewStaticSchema(&set, 1045),
+	smithy.NewStaticSchema(&set, 1046),
+	smithy.NewStaticSchema(&set, 1047),
+	smithy.NewStaticSchema(&set, 1048),
+	smithy.NewStaticSchema(&set, 1049),
+	smithy.NewStaticSchema(&set, 1050),
+	smithy.NewStaticSchema(&set, 1051),
+	smithy.NewStaticSchema(&set, 1052),
+	smithy.NewStaticSchema(&set, 1053),
+	smithy.NewStaticSchema(&set, 1054),
+	smithy.NewStaticSchema(&set, 1055),
+	smithy.NewStaticSchema(&set, 1056),
+	smithy.NewStaticSchema(&set, 1057),
+	smithy.NewStaticSchema(&set, 1058),
+	smithy.NewStaticSchema(&set, 1059),
+	smithy.NewStaticSchema(&set, 1060),
+	smithy.NewStaticSchema(&set, 1061),
+	smithy.NewStaticSchema(&set, 1062),
+	smithy.NewStaticSchema(&set, 1063),
+	smithy.NewStaticSchema(&set, 1064),
+	smithy.NewStaticSchema(&set, 1065),
+	smithy.NewStaticSchema(&set, 1066),
+	smithy.NewStaticSchema(&set, 1067),
+	smithy.NewStaticSchema(&set, 1068),
+	smithy.NewStaticSchema(&set, 1069),
+	smithy.NewStaticSchema(&set, 1070),
+	smithy.NewStaticSchema(&set, 1071),
+	smithy.NewStaticSchema(&set, 1072),
+	smithy.NewStaticSchema(&set, 1073),
+	smithy.NewStaticSchema(&set, 1074),
+	smithy.NewStaticSchema(&set, 1075),
+	smithy.NewStaticSchema(&set, 1076),
+	smithy.NewStaticSchema(&set, 1077),
+	smithy.NewStaticSchema(&set, 1078),
+	smithy.NewStaticSchema(&set, 1079),
+	smithy.NewStaticSchema(&set, 1080),
+	smithy.NewStaticSchema(&set, 1081),
+	smithy.NewStaticSchema(&set, 1082),
+	smithy.NewStaticSchema(&set, 1083),
+	smithy.NewStaticSchema(&set, 1084),
+	smithy.NewStaticSchema(&set, 1085),
+	smithy.NewStaticSchema(&set, 1086),
+	smithy.NewStaticSchema(&set, 1087),
+	smithy.NewStaticSchema(&set, 1088),
+	smithy.NewStaticSchema(&set, 1089),
+	smithy.NewStaticSchema(&set, 1090),
+	smithy.NewStaticSchema(&set, 1091),
+	smithy.NewStaticSchema(&set, 1092),
+	smithy.NewStaticSchema(&set, 1093),
+	smithy.NewStaticSchema(&set, 1094),
+	smithy.NewStaticSchema(&set, 1095),
+	smithy.NewStaticSchema(&set, 1096),
+	smithy.NewStaticSchema(&set, 1097),
+	smithy.NewStaticSchema(&set, 1098),
+	smithy.NewStaticSchema(&set, 1099),
+	smithy.NewStaticSchema(&set, 1100),
+	smithy.NewStaticSchema(&set, 1101),
+	smithy.NewStaticSchema(&set, 1102),
+	smithy.NewStaticSchema(&set, 1103),
+	smithy.NewStaticSchema(&set, 1104),
+	smithy.NewStaticSchema(&set, 1105),
+	smithy.NewStaticSchema(&set, 1106),
+	smithy.NewStaticSchema(&set, 1107),
+	smithy.NewStaticSchema(&set, 1108),
+	smithy.NewStaticSchema(&set, 1109),
+	smithy.NewStaticSchema(&set, 1110),
+	smithy.NewStaticSchema(&set, 1111),
+	smithy.NewStaticSchema(&set, 1112),
+	smithy.NewStaticSchema(&set, 1113),
+	smithy.NewStaticSchema(&set, 1114),
+	smithy.NewStaticSchema(&set, 1115),
+}
+
+var AssociatePhoneNumbersWithVoiceConnector = &handles[0]
+
+var AssociatePhoneNumbersWithVoiceConnectorGroup = &handles[1]
+
+var BatchDeletePhoneNumber = &handles[2]
+
+var BatchUpdatePhoneNumber = &handles[3]
+
+var CreatePhoneNumberOrder = &handles[4]
+
+var CreateProxySession = &handles[5]
+
+var CreateSipMediaApplication = &handles[6]
+
+var CreateSipMediaApplicationCall = &handles[7]
+
+var CreateSipRule = &handles[8]
+
+var CreateVoiceConnector = &handles[9]
+
+var CreateVoiceConnectorGroup = &handles[10]
+
+var CreateVoiceProfile = &handles[11]
+
+var CreateVoiceProfileDomain = &handles[12]
+
+var DeletePhoneNumber = &handles[13]
+
+var DeleteProxySession = &handles[14]
+
+var DeleteSipMediaApplication = &handles[15]
+
+var DeleteSipRule = &handles[16]
+
+var DeleteVoiceConnector = &handles[17]
+
+var DeleteVoiceConnectorEmergencyCallingConfiguration = &handles[18]
+
+var DeleteVoiceConnectorExternalSystemsConfiguration = &handles[19]
+
+var DeleteVoiceConnectorGroup = &handles[20]
+
+var DeleteVoiceConnectorOrigination = &handles[21]
+
+var DeleteVoiceConnectorProxy = &handles[22]
+
+var DeleteVoiceConnectorStreamingConfiguration = &handles[23]
+
+var DeleteVoiceConnectorTermination = &handles[24]
+
+var DeleteVoiceConnectorTerminationCredentials = &handles[25]
+
+var DeleteVoiceProfile = &handles[26]
+
+var DeleteVoiceProfileDomain = &handles[27]
+
+var DisassociatePhoneNumbersFromVoiceConnector = &handles[28]
+
+var DisassociatePhoneNumbersFromVoiceConnectorGroup = &handles[29]
+
+var GetGlobalSettings = &handles[30]
+
+var GetPhoneNumber = &handles[31]
+
+var GetPhoneNumberOrder = &handles[32]
+
+var GetPhoneNumberSettings = &handles[33]
+
+var GetProxySession = &handles[34]
+
+var GetSipMediaApplication = &handles[35]
+
+var GetSipMediaApplicationAlexaSkillConfiguration = &handles[36]
+
+var GetSipMediaApplicationLoggingConfiguration = &handles[37]
+
+var GetSipRule = &handles[38]
+
+var GetSpeakerSearchTask = &handles[39]
+
+var GetVoiceConnector = &handles[40]
+
+var GetVoiceConnectorEmergencyCallingConfiguration = &handles[41]
+
+var GetVoiceConnectorExternalSystemsConfiguration = &handles[42]
+
+var GetVoiceConnectorGroup = &handles[43]
+
+var GetVoiceConnectorLoggingConfiguration = &handles[44]
+
+var GetVoiceConnectorOrigination = &handles[45]
+
+var GetVoiceConnectorProxy = &handles[46]
+
+var GetVoiceConnectorStreamingConfiguration = &handles[47]
+
+var GetVoiceConnectorTermination = &handles[48]
+
+var GetVoiceConnectorTerminationHealth = &handles[49]
+
+var GetVoiceProfile = &handles[50]
+
+var GetVoiceProfileDomain = &handles[51]
+
+var GetVoiceToneAnalysisTask = &handles[52]
+
+var ListAvailableVoiceConnectorRegions = &handles[53]
+
+var ListPhoneNumberOrders = &handles[54]
+
+var ListPhoneNumbers = &handles[55]
+
+var ListProxySessions = &handles[56]
+
+var ListSipMediaApplications = &handles[57]
+
+var ListSipRules = &handles[58]
+
+var ListSupportedPhoneNumberCountries = &handles[59]
+
+var ListTagsForResource = &handles[60]
+
+var ListVoiceConnectorGroups = &handles[61]
+
+var ListVoiceConnectors = &handles[62]
+
+var ListVoiceConnectorTerminationCredentials = &handles[63]
+
+var ListVoiceProfileDomains = &handles[64]
+
+var ListVoiceProfiles = &handles[65]
+
+var PutSipMediaApplicationAlexaSkillConfiguration = &handles[66]
+
+var PutSipMediaApplicationLoggingConfiguration = &handles[67]
+
+var PutVoiceConnectorEmergencyCallingConfiguration = &handles[68]
+
+var PutVoiceConnectorExternalSystemsConfiguration = &handles[69]
+
+var PutVoiceConnectorLoggingConfiguration = &handles[70]
+
+var PutVoiceConnectorOrigination = &handles[71]
+
+var PutVoiceConnectorProxy = &handles[72]
+
+var PutVoiceConnectorStreamingConfiguration = &handles[73]
+
+var PutVoiceConnectorTermination = &handles[74]
+
+var PutVoiceConnectorTerminationCredentials = &handles[75]
+
+var RestorePhoneNumber = &handles[76]
+
+var SearchAvailablePhoneNumbers = &handles[77]
+
+var StartSpeakerSearchTask = &handles[78]
+
+var StartVoiceToneAnalysisTask = &handles[79]
+
+var StopSpeakerSearchTask = &handles[80]
+
+var StopVoiceToneAnalysisTask = &handles[81]
+
+var TagResource = &handles[82]
+
+var UntagResource = &handles[83]
+
+var UpdateGlobalSettings = &handles[84]
+
+var UpdatePhoneNumber = &handles[85]
+
+var UpdatePhoneNumberSettings = &handles[86]
+
+var UpdateProxySession = &handles[87]
+
+var UpdateSipMediaApplication = &handles[88]
+
+var UpdateSipMediaApplicationCall = &handles[89]
+
+var UpdateSipRule = &handles[90]
+
+var UpdateVoiceConnector = &handles[91]
+
+var UpdateVoiceConnectorGroup = &handles[92]
+
+var UpdateVoiceProfile = &handles[93]
+
+var UpdateVoiceProfileDomain = &handles[94]
+
+var ValidateE911Address = &handles[95]
+
+var _ChimeSDKTelephonyService = &handles[96]
+
+var AccessDeniedException = &handles[97]
+var AccessDeniedException_Code = &handles[98]
+var AccessDeniedException_Message = &handles[99]
+
+var Address = &handles[100]
+var Address_streetName = &handles[101]
+var Address_streetSuffix = &handles[102]
+var Address_postDirectional = &handles[103]
+var Address_preDirectional = &handles[104]
+var Address_streetNumber = &handles[105]
+var Address_city = &handles[106]
+var Address_state = &handles[107]
+var Address_postalCode = &handles[108]
+var Address_postalCodePlus4 = &handles[109]
+var Address_country = &handles[110]
+
+var _AlexaSkillId = &handles[111]
+
+var _AlexaSkillIdList = &handles[112]
+var _AlexaSkillIdList_member = &handles[113]
+
+var AlexaSkillStatus = &handles[114]
+var AlexaSkillStatus_ACTIVE = &handles[115]
+var AlexaSkillStatus_INACTIVE = &handles[116]
+
+var _Alpha2CountryCode = &handles[117]
+
+var _AreaCode = &handles[118]
+
+var _Arn = &handles[119]
+
+var BadRequestException = &handles[120]
+var BadRequestException_Code = &handles[121]
+var BadRequestException_Message = &handles[122]
+
+var _Boolean = &handles[123]
+
+var CallDetails = &handles[124]
+var CallDetails_VoiceConnectorId = &handles[125]
+var CallDetails_TransactionId = &handles[126]
+var CallDetails_IsCaller = &handles[127]
+
+var CallDistributionType = &handles[128]
+var CallDistributionType_PriorityWeightedDistribution = &handles[129]
+var CallDistributionType_LoadBalancedDistribution = &handles[130]
+
+var _CallingName = &handles[131]
+
+var CallingNameStatus = &handles[132]
+var CallingNameStatus_Unassigned = &handles[133]
+var CallingNameStatus_UpdateInProgress = &handles[134]
+var CallingNameStatus_UpdateSucceeded = &handles[135]
+var CallingNameStatus_UpdateFailed = &handles[136]
+
+var _CallingRegion = &handles[137]
+
+var _CallingRegionList = &handles[138]
+var _CallingRegionList_member = &handles[139]
+
+var CallLegType = &handles[140]
+var CallLegType_CALLER = &handles[141]
+var CallLegType_CALLEE = &handles[142]
+
+var CandidateAddress = &handles[143]
+var CandidateAddress_streetInfo = &handles[144]
+var CandidateAddress_streetNumber = &handles[145]
+var CandidateAddress_city = &handles[146]
+var CandidateAddress_state = &handles[147]
+var CandidateAddress_postalCode = &handles[148]
+var CandidateAddress_postalCodePlus4 = &handles[149]
+var CandidateAddress_country = &handles[150]
+
+var _CandidateAddressList = &handles[151]
+var _CandidateAddressList_member = &handles[152]
+
+var Capability = &handles[153]
+var Capability_Voice = &handles[154]
+var Capability_SMS = &handles[155]
+
+var _CapabilityList = &handles[156]
+var _CapabilityList_member = &handles[157]
+
+var _ClientRequestId = &handles[158]
+
+var _ConfidenceScore = &handles[159]
+
+var ConflictException = &handles[160]
+var ConflictException_Code = &handles[161]
+var ConflictException_Message = &handles[162]
+
+var ContactCenterSystemType = &handles[163]
+var ContactCenterSystemType_GENESYS_ENGAGE_ON_PREMISES = &handles[164]
+var ContactCenterSystemType_AVAYA_AURA_CALL_CENTER_ELITE = &handles[165]
+var ContactCenterSystemType_AVAYA_AURA_CONTACT_CENTER = &handles[166]
+var ContactCenterSystemType_CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE = &handles[167]
+
+var _ContactCenterSystemTypeList = &handles[168]
+var _ContactCenterSystemTypeList_member = &handles[169]
+
+var _Country = &handles[170]
+
+var _CountryList = &handles[171]
+var _CountryList_member = &handles[172]
+
+var _CpsLimit = &handles[173]
+
+var Credential = &handles[174]
+var Credential_Username = &handles[175]
+var Credential_Password = &handles[176]
+
+var _CredentialList = &handles[177]
+var _CredentialList_member = &handles[178]
+
+var _DataRetentionInHours = &handles[179]
+
+var DNISEmergencyCallingConfiguration = &handles[180]
+var DNISEmergencyCallingConfiguration_EmergencyPhoneNumber = &handles[181]
+var DNISEmergencyCallingConfiguration_TestPhoneNumber = &handles[182]
+var DNISEmergencyCallingConfiguration_CallingCountry = &handles[183]
+
+var _DNISEmergencyCallingConfigurationList = &handles[184]
+var _DNISEmergencyCallingConfigurationList_member = &handles[185]
+
+var _E164PhoneNumber = &handles[186]
+
+var _E164PhoneNumberList = &handles[187]
+var _E164PhoneNumberList_member = &handles[188]
+
+var EmergencyCallingConfiguration = &handles[189]
+var EmergencyCallingConfiguration_DNIS = &handles[190]
+
+var ErrorCode = &handles[191]
+var ErrorCode_BadRequest = &handles[192]
+var ErrorCode_Conflict = &handles[193]
+var ErrorCode_Forbidden = &handles[194]
+var ErrorCode_NotFound = &handles[195]
+var ErrorCode_PreconditionFailed = &handles[196]
+var ErrorCode_ResourceLimitExceeded = &handles[197]
+var ErrorCode_ServiceFailure = &handles[198]
+var ErrorCode_AccessDenied = &handles[199]
+var ErrorCode_ServiceUnavailable = &handles[200]
+var ErrorCode_Throttled = &handles[201]
+var ErrorCode_Throttling = &handles[202]
+var ErrorCode_Unauthorized = &handles[203]
+var ErrorCode_Unprocessable = &handles[204]
+var ErrorCode_VoiceConnectorGroupAssociationsExist = &handles[205]
+var ErrorCode_PhoneNumberAssociationsExist = &handles[206]
+var ErrorCode_Gone = &handles[207]
+var ErrorCode_Validation = &handles[208]
+
+var ExternalSystemsConfiguration = &handles[209]
+var ExternalSystemsConfiguration_SessionBorderControllerTypes = &handles[210]
+var ExternalSystemsConfiguration_ContactCenterSystemTypes = &handles[211]
+
+var ForbiddenException = &handles[212]
+var ForbiddenException_Code = &handles[213]
+var ForbiddenException_Message = &handles[214]
+
+var _FunctionArn = &handles[215]
+
+var GeoMatchLevel = &handles[216]
+var GeoMatchLevel_Country = &handles[217]
+var GeoMatchLevel_AreaCode = &handles[218]
+
+var GeoMatchParams = &handles[219]
+var GeoMatchParams_Country = &handles[220]
+var GeoMatchParams_AreaCode = &handles[221]
+
+var GoneException = &handles[222]
+var GoneException_Code = &handles[223]
+var GoneException_Message = &handles[224]
+
+var _GuidString = &handles[225]
+
+var _Integer = &handles[226]
+
+var _Iso8601Timestamp = &handles[227]
+
+var LanguageCode = &handles[228]
+var LanguageCode_EN_US = &handles[229]
+
+var LoggingConfiguration = &handles[230]
+var LoggingConfiguration_EnableSIPLogs = &handles[231]
+var LoggingConfiguration_EnableMediaMetricLogs = &handles[232]
+
+var MediaInsightsConfiguration = &handles[233]
+var MediaInsightsConfiguration_Disabled = &handles[234]
+var MediaInsightsConfiguration_ConfigurationArn = &handles[235]
+
+var NetworkType = &handles[236]
+var NetworkType_IPV4_ONLY = &handles[237]
+var NetworkType_DUAL_STACK = &handles[238]
+
+var _NextTokenString = &handles[239]
+
+var _NonEmptyString = &handles[240]
+
+var _NonEmptyString128 = &handles[241]
+
+var _NonEmptyString256 = &handles[242]
+
+var _NonEmptyStringList = &handles[243]
+var _NonEmptyStringList_member = &handles[244]
+
+var NotFoundException = &handles[245]
+var NotFoundException_Code = &handles[246]
+var NotFoundException_Message = &handles[247]
+
+var NotificationTarget = &handles[248]
+var NotificationTarget_EventBridge = &handles[249]
+var NotificationTarget_SNS = &handles[250]
+var NotificationTarget_SQS = &handles[251]
+
+var _NullableBoolean = &handles[252]
+
+var NumberSelectionBehavior = &handles[253]
+var NumberSelectionBehavior_PreferSticky = &handles[254]
+var NumberSelectionBehavior_AvoidSticky = &handles[255]
+
+var OrderedPhoneNumber = &handles[256]
+var OrderedPhoneNumber_E164PhoneNumber = &handles[257]
+var OrderedPhoneNumber_Status = &handles[258]
+
+var _OrderedPhoneNumberList = &handles[259]
+var _OrderedPhoneNumberList_member = &handles[260]
+
+var OrderedPhoneNumberStatus = &handles[261]
+var OrderedPhoneNumberStatus_Processing = &handles[262]
+var OrderedPhoneNumberStatus_Acquired = &handles[263]
+var OrderedPhoneNumberStatus_Failed = &handles[264]
+
+var Origination = &handles[265]
+var Origination_Routes = &handles[266]
+var Origination_Disabled = &handles[267]
+
+var OriginationRoute = &handles[268]
+var OriginationRoute_Host = &handles[269]
+var OriginationRoute_Port = &handles[270]
+var OriginationRoute_Protocol = &handles[271]
+var OriginationRoute_Priority = &handles[272]
+var OriginationRoute_Weight = &handles[273]
+
+var _OriginationRouteList = &handles[274]
+var _OriginationRouteList_member = &handles[275]
+
+var _OriginationRoutePriority = &handles[276]
+
+var OriginationRouteProtocol = &handles[277]
+var OriginationRouteProtocol_TCP = &handles[278]
+var OriginationRouteProtocol_UDP = &handles[279]
+
+var _OriginationRouteWeight = &handles[280]
+
+var Participant = &handles[281]
+var Participant_PhoneNumber = &handles[282]
+var Participant_ProxyPhoneNumber = &handles[283]
+
+var _ParticipantPhoneNumberList = &handles[284]
+var _ParticipantPhoneNumberList_member = &handles[285]
+
+var _Participants = &handles[286]
+var _Participants_member = &handles[287]
+
+var PhoneNumber = &handles[288]
+var PhoneNumber_PhoneNumberId = &handles[289]
+var PhoneNumber_E164PhoneNumber = &handles[290]
+var PhoneNumber_PhoneNumberArn = &handles[291]
+var PhoneNumber_Country = &handles[292]
+var PhoneNumber_Type = &handles[293]
+var PhoneNumber_ProductType = &handles[294]
+var PhoneNumber_Status = &handles[295]
+var PhoneNumber_Capabilities = &handles[296]
+var PhoneNumber_Associations = &handles[297]
+var PhoneNumber_CallingName = &handles[298]
+var PhoneNumber_CallingNameStatus = &handles[299]
+var PhoneNumber_CreatedTimestamp = &handles[300]
+var PhoneNumber_UpdatedTimestamp = &handles[301]
+var PhoneNumber_DeletionTimestamp = &handles[302]
+var PhoneNumber_OrderId = &handles[303]
+var PhoneNumber_Name = &handles[304]
+
+var PhoneNumberAssociation = &handles[305]
+var PhoneNumberAssociation_Value = &handles[306]
+var PhoneNumberAssociation_Name = &handles[307]
+var PhoneNumberAssociation_AssociatedTimestamp = &handles[308]
+
+var _PhoneNumberAssociationList = &handles[309]
+var _PhoneNumberAssociationList_member = &handles[310]
+
+var PhoneNumberAssociationName = &handles[311]
+var PhoneNumberAssociationName_VoiceConnectorId = &handles[312]
+var PhoneNumberAssociationName_VoiceConnectorGroupId = &handles[313]
+var PhoneNumberAssociationName_SipRuleId = &handles[314]
+
+var PhoneNumberCapabilities = &handles[315]
+var PhoneNumberCapabilities_InboundCall = &handles[316]
+var PhoneNumberCapabilities_OutboundCall = &handles[317]
+var PhoneNumberCapabilities_InboundSMS = &handles[318]
+var PhoneNumberCapabilities_OutboundSMS = &handles[319]
+var PhoneNumberCapabilities_InboundMMS = &handles[320]
+var PhoneNumberCapabilities_OutboundMMS = &handles[321]
+
+var _PhoneNumberCountriesList = &handles[322]
+var _PhoneNumberCountriesList_member = &handles[323]
+
+var PhoneNumberCountry = &handles[324]
+var PhoneNumberCountry_CountryCode = &handles[325]
+var PhoneNumberCountry_SupportedPhoneNumberTypes = &handles[326]
+
+var PhoneNumberError = &handles[327]
+var PhoneNumberError_PhoneNumberId = &handles[328]
+var PhoneNumberError_ErrorCode = &handles[329]
+var PhoneNumberError_ErrorMessage = &handles[330]
+
+var _PhoneNumberErrorList = &handles[331]
+var _PhoneNumberErrorList_member = &handles[332]
+
+var _PhoneNumberList = &handles[333]
+var _PhoneNumberList_member = &handles[334]
+
+var _PhoneNumberMaxResults = &handles[335]
+
+var _PhoneNumberName = &handles[336]
+
+var PhoneNumberOrder = &handles[337]
+var PhoneNumberOrder_PhoneNumberOrderId = &handles[338]
+var PhoneNumberOrder_ProductType = &handles[339]
+var PhoneNumberOrder_Status = &handles[340]
+var PhoneNumberOrder_OrderType = &handles[341]
+var PhoneNumberOrder_OrderedPhoneNumbers = &handles[342]
+var PhoneNumberOrder_CreatedTimestamp = &handles[343]
+var PhoneNumberOrder_UpdatedTimestamp = &handles[344]
+var PhoneNumberOrder_FocDate = &handles[345]
+
+var _PhoneNumberOrderList = &handles[346]
+var _PhoneNumberOrderList_member = &handles[347]
+
+var PhoneNumberOrderStatus = &handles[348]
+var PhoneNumberOrderStatus_Processing = &handles[349]
+var PhoneNumberOrderStatus_Successful = &handles[350]
+var PhoneNumberOrderStatus_Failed = &handles[351]
+var PhoneNumberOrderStatus_Partial = &handles[352]
+var PhoneNumberOrderStatus_PendingDocuments = &handles[353]
+var PhoneNumberOrderStatus_Submitted = &handles[354]
+var PhoneNumberOrderStatus_FOC = &handles[355]
+var PhoneNumberOrderStatus_ChangeRequested = &handles[356]
+var PhoneNumberOrderStatus_Exception = &handles[357]
+var PhoneNumberOrderStatus_CancelRequested = &handles[358]
+var PhoneNumberOrderStatus_Cancelled = &handles[359]
+
+var PhoneNumberOrderType = &handles[360]
+var PhoneNumberOrderType_New = &handles[361]
+var PhoneNumberOrderType_Porting = &handles[362]
+
+var PhoneNumberProductType = &handles[363]
+var PhoneNumberProductType_VoiceConnector = &handles[364]
+var PhoneNumberProductType_SipMediaApplicationDialIn = &handles[365]
+
+var PhoneNumberStatus = &handles[366]
+var PhoneNumberStatus_Cancelled = &handles[367]
+var PhoneNumberStatus_PortinCancelRequested = &handles[368]
+var PhoneNumberStatus_PortinInProgress = &handles[369]
+var PhoneNumberStatus_AcquireInProgress = &handles[370]
+var PhoneNumberStatus_AcquireFailed = &handles[371]
+var PhoneNumberStatus_Unassigned = &handles[372]
+var PhoneNumberStatus_Assigned = &handles[373]
+var PhoneNumberStatus_ReleaseInProgress = &handles[374]
+var PhoneNumberStatus_DeleteInProgress = &handles[375]
+var PhoneNumberStatus_ReleaseFailed = &handles[376]
+var PhoneNumberStatus_DeleteFailed = &handles[377]
+
+var PhoneNumberType = &handles[378]
+var PhoneNumberType_Local = &handles[379]
+var PhoneNumberType_TollFree = &handles[380]
+
+var _PhoneNumberTypeList = &handles[381]
+var _PhoneNumberTypeList_member = &handles[382]
+
+var _Port = &handles[383]
+
+var _PositiveInteger = &handles[384]
+
+var Proxy = &handles[385]
+var Proxy_DefaultSessionExpiryMinutes = &handles[386]
+var Proxy_Disabled = &handles[387]
+var Proxy_FallBackPhoneNumber = &handles[388]
+var Proxy_PhoneNumberCountries = &handles[389]
+
+var ProxySession = &handles[390]
+var ProxySession_VoiceConnectorId = &handles[391]
+var ProxySession_ProxySessionId = &handles[392]
+var ProxySession_Name = &handles[393]
+var ProxySession_Status = &handles[394]
+var ProxySession_ExpiryMinutes = &handles[395]
+var ProxySession_Capabilities = &handles[396]
+var ProxySession_CreatedTimestamp = &handles[397]
+var ProxySession_UpdatedTimestamp = &handles[398]
+var ProxySession_EndedTimestamp = &handles[399]
+var ProxySession_Participants = &handles[400]
+var ProxySession_NumberSelectionBehavior = &handles[401]
+var ProxySession_GeoMatchLevel = &handles[402]
+var ProxySession_GeoMatchParams = &handles[403]
+
+var _ProxySessionNameString = &handles[404]
+
+var _ProxySessions = &handles[405]
+var _ProxySessions_member = &handles[406]
+
+var ProxySessionStatus = &handles[407]
+var ProxySessionStatus_Open = &handles[408]
+var ProxySessionStatus_InProgress = &handles[409]
+var ProxySessionStatus_Closed = &handles[410]
+
+var ResourceLimitExceededException = &handles[411]
+var ResourceLimitExceededException_Code = &handles[412]
+var ResourceLimitExceededException_Message = &handles[413]
+
+var _ResultMax = &handles[414]
+
+var _S3BucketName = &handles[415]
+
+var _SensitiveNonEmptyString = &handles[416]
+
+var _SensitiveString = &handles[417]
+
+var _SensitiveStringList = &handles[418]
+var _SensitiveStringList_member = &handles[419]
+
+var ServerSideEncryptionConfiguration = &handles[420]
+var ServerSideEncryptionConfiguration_KmsKeyArn = &handles[421]
+
+var ServiceFailureException = &handles[422]
+var ServiceFailureException_Code = &handles[423]
+var ServiceFailureException_Message = &handles[424]
+
+var ServiceUnavailableException = &handles[425]
+var ServiceUnavailableException_Code = &handles[426]
+var ServiceUnavailableException_Message = &handles[427]
+
+var SessionBorderControllerType = &handles[428]
+var SessionBorderControllerType_RIBBON_SBC = &handles[429]
+var SessionBorderControllerType_ORACLE_ACME_PACKET_SBC = &handles[430]
+var SessionBorderControllerType_AVAYA_SBCE = &handles[431]
+var SessionBorderControllerType_CISCO_UNIFIED_BORDER_ELEMENT = &handles[432]
+var SessionBorderControllerType_AUDIOCODES_MEDIANT_SBC = &handles[433]
+
+var _SessionBorderControllerTypeList = &handles[434]
+var _SessionBorderControllerTypeList_member = &handles[435]
+
+var _SipApplicationPriority = &handles[436]
+
+var _SipHeadersMap = &handles[437]
+var _SipHeadersMap_key = &handles[438]
+var _SipHeadersMap_value = &handles[439]
+
+var SipMediaApplication = &handles[440]
+var SipMediaApplication_SipMediaApplicationId = &handles[441]
+var SipMediaApplication_AwsRegion = &handles[442]
+var SipMediaApplication_Name = &handles[443]
+var SipMediaApplication_Endpoints = &handles[444]
+var SipMediaApplication_CreatedTimestamp = &handles[445]
+var SipMediaApplication_UpdatedTimestamp = &handles[446]
+var SipMediaApplication_SipMediaApplicationArn = &handles[447]
+
+var SipMediaApplicationAlexaSkillConfiguration = &handles[448]
+var SipMediaApplicationAlexaSkillConfiguration_AlexaSkillStatus = &handles[449]
+var SipMediaApplicationAlexaSkillConfiguration_AlexaSkillIds = &handles[450]
+
+var SipMediaApplicationCall = &handles[451]
+var SipMediaApplicationCall_TransactionId = &handles[452]
+
+var SipMediaApplicationEndpoint = &handles[453]
+var SipMediaApplicationEndpoint_LambdaArn = &handles[454]
+
+var _SipMediaApplicationEndpointList = &handles[455]
+var _SipMediaApplicationEndpointList_member = &handles[456]
+
+var _SipMediaApplicationList = &handles[457]
+var _SipMediaApplicationList_member = &handles[458]
+
+var SipMediaApplicationLoggingConfiguration = &handles[459]
+var SipMediaApplicationLoggingConfiguration_EnableSipMediaApplicationMessageLogs = &handles[460]
+
+var _SipMediaApplicationName = &handles[461]
+
+var SipRule = &handles[462]
+var SipRule_SipRuleId = &handles[463]
+var SipRule_Name = &handles[464]
+var SipRule_Disabled = &handles[465]
+var SipRule_TriggerType = &handles[466]
+var SipRule_TriggerValue = &handles[467]
+var SipRule_TargetApplications = &handles[468]
+var SipRule_CreatedTimestamp = &handles[469]
+var SipRule_UpdatedTimestamp = &handles[470]
+
+var _SipRuleList = &handles[471]
+var _SipRuleList_member = &handles[472]
+
+var _SipRuleName = &handles[473]
+
+var SipRuleTargetApplication = &handles[474]
+var SipRuleTargetApplication_SipMediaApplicationId = &handles[475]
+var SipRuleTargetApplication_Priority = &handles[476]
+var SipRuleTargetApplication_AwsRegion = &handles[477]
+
+var _SipRuleTargetApplicationList = &handles[478]
+var _SipRuleTargetApplicationList_member = &handles[479]
+
+var SipRuleTriggerType = &handles[480]
+var SipRuleTriggerType_ToPhoneNumber = &handles[481]
+var SipRuleTriggerType_RequestUriHostname = &handles[482]
+
+var _SMACreateCallArgumentsMap = &handles[483]
+var _SMACreateCallArgumentsMap_key = &handles[484]
+var _SMACreateCallArgumentsMap_value = &handles[485]
+
+var _SMAUpdateCallArgumentsMap = &handles[486]
+var _SMAUpdateCallArgumentsMap_key = &handles[487]
+var _SMAUpdateCallArgumentsMap_value = &handles[488]
+
+var SpeakerSearchDetails = &handles[489]
+var SpeakerSearchDetails_Results = &handles[490]
+var SpeakerSearchDetails_VoiceprintGenerationStatus = &handles[491]
+
+var SpeakerSearchResult = &handles[492]
+var SpeakerSearchResult_ConfidenceScore = &handles[493]
+var SpeakerSearchResult_VoiceProfileId = &handles[494]
+
+var _SpeakerSearchResultList = &handles[495]
+var _SpeakerSearchResultList_member = &handles[496]
+
+var SpeakerSearchTask = &handles[497]
+var SpeakerSearchTask_SpeakerSearchTaskId = &handles[498]
+var SpeakerSearchTask_SpeakerSearchTaskStatus = &handles[499]
+var SpeakerSearchTask_CallDetails = &handles[500]
+var SpeakerSearchTask_SpeakerSearchDetails = &handles[501]
+var SpeakerSearchTask_CreatedTimestamp = &handles[502]
+var SpeakerSearchTask_UpdatedTimestamp = &handles[503]
+var SpeakerSearchTask_StartedTimestamp = &handles[504]
+var SpeakerSearchTask_StatusMessage = &handles[505]
+
+var StreamingConfiguration = &handles[506]
+var StreamingConfiguration_DataRetentionInHours = &handles[507]
+var StreamingConfiguration_Disabled = &handles[508]
+var StreamingConfiguration_StreamingNotificationTargets = &handles[509]
+var StreamingConfiguration_MediaInsightsConfiguration = &handles[510]
+
+var StreamingNotificationTarget = &handles[511]
+var StreamingNotificationTarget_NotificationTarget = &handles[512]
+
+var _StreamingNotificationTargetList = &handles[513]
+var _StreamingNotificationTargetList_member = &handles[514]
+
+var _String = &handles[515]
+
+var _String128 = &handles[516]
+
+var _StringList = &handles[517]
+var _StringList_member = &handles[518]
+
+var Tag = &handles[519]
+var Tag_Key = &handles[520]
+var Tag_Value = &handles[521]
+
+var _TagKey = &handles[522]
+
+var _TagKeyList = &handles[523]
+var _TagKeyList_member = &handles[524]
+
+var _TagList = &handles[525]
+var _TagList_member = &handles[526]
+
+var _TagValue = &handles[527]
+
+var Termination = &handles[528]
+var Termination_CpsLimit = &handles[529]
+var Termination_DefaultPhoneNumber = &handles[530]
+var Termination_CallingRegions = &handles[531]
+var Termination_CidrAllowedList = &handles[532]
+var Termination_Disabled = &handles[533]
+
+var TerminationHealth = &handles[534]
+var TerminationHealth_Timestamp = &handles[535]
+var TerminationHealth_Source = &handles[536]
+
+var ThrottledClientException = &handles[537]
+var ThrottledClientException_Code = &handles[538]
+var ThrottledClientException_Message = &handles[539]
+
+var _TollFreePrefix = &handles[540]
+
+var UnauthorizedClientException = &handles[541]
+var UnauthorizedClientException_Code = &handles[542]
+var UnauthorizedClientException_Message = &handles[543]
+
+var UnprocessableEntityException = &handles[544]
+var UnprocessableEntityException_Code = &handles[545]
+var UnprocessableEntityException_Message = &handles[546]
+
+var UpdatePhoneNumberRequestItem = &handles[547]
+var UpdatePhoneNumberRequestItem_PhoneNumberId = &handles[548]
+var UpdatePhoneNumberRequestItem_ProductType = &handles[549]
+var UpdatePhoneNumberRequestItem_CallingName = &handles[550]
+var UpdatePhoneNumberRequestItem_Name = &handles[551]
+
+var _UpdatePhoneNumberRequestItemList = &handles[552]
+var _UpdatePhoneNumberRequestItemList_member = &handles[553]
+
+var _ValidationResult = &handles[554]
+
+var VoiceConnector = &handles[555]
+var VoiceConnector_VoiceConnectorId = &handles[556]
+var VoiceConnector_AwsRegion = &handles[557]
+var VoiceConnector_Name = &handles[558]
+var VoiceConnector_OutboundHostName = &handles[559]
+var VoiceConnector_RequireEncryption = &handles[560]
+var VoiceConnector_CreatedTimestamp = &handles[561]
+var VoiceConnector_UpdatedTimestamp = &handles[562]
+var VoiceConnector_VoiceConnectorArn = &handles[563]
+var VoiceConnector_IntegrationType = &handles[564]
+var VoiceConnector_NetworkType = &handles[565]
+
+var VoiceConnectorAwsRegion = &handles[566]
+var VoiceConnectorAwsRegion_US_EAST_1 = &handles[567]
+var VoiceConnectorAwsRegion_US_WEST_2 = &handles[568]
+var VoiceConnectorAwsRegion_CA_CENTRAL_1 = &handles[569]
+var VoiceConnectorAwsRegion_EU_CENTRAL_1 = &handles[570]
+var VoiceConnectorAwsRegion_EU_WEST_1 = &handles[571]
+var VoiceConnectorAwsRegion_EU_WEST_2 = &handles[572]
+var VoiceConnectorAwsRegion_AP_NORTHEAST_2 = &handles[573]
+var VoiceConnectorAwsRegion_AP_NORTHEAST_1 = &handles[574]
+var VoiceConnectorAwsRegion_AP_SOUTHEAST_1 = &handles[575]
+var VoiceConnectorAwsRegion_AP_SOUTHEAST_2 = &handles[576]
+
+var _VoiceConnectorAwsRegionList = &handles[577]
+var _VoiceConnectorAwsRegionList_member = &handles[578]
+
+var VoiceConnectorGroup = &handles[579]
+var VoiceConnectorGroup_VoiceConnectorGroupId = &handles[580]
+var VoiceConnectorGroup_Name = &handles[581]
+var VoiceConnectorGroup_VoiceConnectorItems = &handles[582]
+var VoiceConnectorGroup_CreatedTimestamp = &handles[583]
+var VoiceConnectorGroup_UpdatedTimestamp = &handles[584]
+var VoiceConnectorGroup_VoiceConnectorGroupArn = &handles[585]
+var VoiceConnectorGroup_CallDistributionType = &handles[586]
+
+var _VoiceConnectorGroupList = &handles[587]
+var _VoiceConnectorGroupList_member = &handles[588]
+
+var _VoiceConnectorGroupName = &handles[589]
+
+var _VoiceConnectorId = &handles[590]
+
+var VoiceConnectorIntegrationType = &handles[591]
+var VoiceConnectorIntegrationType_CONNECT_CALL_TRANSFER_CONNECTOR = &handles[592]
+var VoiceConnectorIntegrationType_CONNECT_ANALYTICS_CONNECTOR = &handles[593]
+
+var VoiceConnectorItem = &handles[594]
+var VoiceConnectorItem_VoiceConnectorId = &handles[595]
+var VoiceConnectorItem_Priority = &handles[596]
+
+var _VoiceConnectorItemList = &handles[597]
+var _VoiceConnectorItemList_member = &handles[598]
+
+var _VoiceConnectorItemPriority = &handles[599]
+
+var _VoiceConnectorList = &handles[600]
+var _VoiceConnectorList_member = &handles[601]
+
+var _VoiceConnectorName = &handles[602]
+
+var VoiceConnectorSettings = &handles[603]
+var VoiceConnectorSettings_CdrBucket = &handles[604]
+
+var VoiceProfile = &handles[605]
+var VoiceProfile_VoiceProfileId = &handles[606]
+var VoiceProfile_VoiceProfileArn = &handles[607]
+var VoiceProfile_VoiceProfileDomainId = &handles[608]
+var VoiceProfile_CreatedTimestamp = &handles[609]
+var VoiceProfile_UpdatedTimestamp = &handles[610]
+var VoiceProfile_ExpirationTimestamp = &handles[611]
+
+var VoiceProfileDomain = &handles[612]
+var VoiceProfileDomain_VoiceProfileDomainId = &handles[613]
+var VoiceProfileDomain_VoiceProfileDomainArn = &handles[614]
+var VoiceProfileDomain_Name = &handles[615]
+var VoiceProfileDomain_Description = &handles[616]
+var VoiceProfileDomain_ServerSideEncryptionConfiguration = &handles[617]
+var VoiceProfileDomain_CreatedTimestamp = &handles[618]
+var VoiceProfileDomain_UpdatedTimestamp = &handles[619]
+
+var _VoiceProfileDomainDescription = &handles[620]
+
+var _VoiceProfileDomainName = &handles[621]
+
+var VoiceProfileDomainSummary = &handles[622]
+var VoiceProfileDomainSummary_VoiceProfileDomainId = &handles[623]
+var VoiceProfileDomainSummary_VoiceProfileDomainArn = &handles[624]
+var VoiceProfileDomainSummary_Name = &handles[625]
+var VoiceProfileDomainSummary_Description = &handles[626]
+var VoiceProfileDomainSummary_CreatedTimestamp = &handles[627]
+var VoiceProfileDomainSummary_UpdatedTimestamp = &handles[628]
+
+var _VoiceProfileDomainSummaryList = &handles[629]
+var _VoiceProfileDomainSummaryList_member = &handles[630]
+
+var VoiceProfileSummary = &handles[631]
+var VoiceProfileSummary_VoiceProfileId = &handles[632]
+var VoiceProfileSummary_VoiceProfileArn = &handles[633]
+var VoiceProfileSummary_VoiceProfileDomainId = &handles[634]
+var VoiceProfileSummary_CreatedTimestamp = &handles[635]
+var VoiceProfileSummary_UpdatedTimestamp = &handles[636]
+var VoiceProfileSummary_ExpirationTimestamp = &handles[637]
+
+var _VoiceProfileSummaryList = &handles[638]
+var _VoiceProfileSummaryList_member = &handles[639]
+
+var VoiceToneAnalysisTask = &handles[640]
+var VoiceToneAnalysisTask_VoiceToneAnalysisTaskId = &handles[641]
+var VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus = &handles[642]
+var VoiceToneAnalysisTask_CallDetails = &handles[643]
+var VoiceToneAnalysisTask_CreatedTimestamp = &handles[644]
+var VoiceToneAnalysisTask_UpdatedTimestamp = &handles[645]
+var VoiceToneAnalysisTask_StartedTimestamp = &handles[646]
+var VoiceToneAnalysisTask_StatusMessage = &handles[647]
+
+var AssociatePhoneNumbersWithVoiceConnectorGroupRequest = &handles[648]
+var AssociatePhoneNumbersWithVoiceConnectorGroupRequest_VoiceConnectorGroupId = &handles[649]
+var AssociatePhoneNumbersWithVoiceConnectorGroupRequest_E164PhoneNumbers = &handles[650]
+var AssociatePhoneNumbersWithVoiceConnectorGroupRequest_ForceAssociate = &handles[651]
+
+var AssociatePhoneNumbersWithVoiceConnectorGroupResponse = &handles[652]
+var AssociatePhoneNumbersWithVoiceConnectorGroupResponse_PhoneNumberErrors = &handles[653]
+
+var AssociatePhoneNumbersWithVoiceConnectorRequest = &handles[654]
+var AssociatePhoneNumbersWithVoiceConnectorRequest_VoiceConnectorId = &handles[655]
+var AssociatePhoneNumbersWithVoiceConnectorRequest_E164PhoneNumbers = &handles[656]
+var AssociatePhoneNumbersWithVoiceConnectorRequest_ForceAssociate = &handles[657]
+
+var AssociatePhoneNumbersWithVoiceConnectorResponse = &handles[658]
+var AssociatePhoneNumbersWithVoiceConnectorResponse_PhoneNumberErrors = &handles[659]
+
+var BatchDeletePhoneNumberRequest = &handles[660]
+var BatchDeletePhoneNumberRequest_PhoneNumberIds = &handles[661]
+
+var BatchDeletePhoneNumberResponse = &handles[662]
+var BatchDeletePhoneNumberResponse_PhoneNumberErrors = &handles[663]
+
+var BatchUpdatePhoneNumberRequest = &handles[664]
+var BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems = &handles[665]
+
+var BatchUpdatePhoneNumberResponse = &handles[666]
+var BatchUpdatePhoneNumberResponse_PhoneNumberErrors = &handles[667]
+
+var CreatePhoneNumberOrderRequest = &handles[668]
+var CreatePhoneNumberOrderRequest_ProductType = &handles[669]
+var CreatePhoneNumberOrderRequest_E164PhoneNumbers = &handles[670]
+var CreatePhoneNumberOrderRequest_Name = &handles[671]
+
+var CreatePhoneNumberOrderResponse = &handles[672]
+var CreatePhoneNumberOrderResponse_PhoneNumberOrder = &handles[673]
+
+var CreateProxySessionRequest = &handles[674]
+var CreateProxySessionRequest_VoiceConnectorId = &handles[675]
+var CreateProxySessionRequest_ParticipantPhoneNumbers = &handles[676]
+var CreateProxySessionRequest_Name = &handles[677]
+var CreateProxySessionRequest_ExpiryMinutes = &handles[678]
+var CreateProxySessionRequest_Capabilities = &handles[679]
+var CreateProxySessionRequest_NumberSelectionBehavior = &handles[680]
+var CreateProxySessionRequest_GeoMatchLevel = &handles[681]
+var CreateProxySessionRequest_GeoMatchParams = &handles[682]
+
+var CreateProxySessionResponse = &handles[683]
+var CreateProxySessionResponse_ProxySession = &handles[684]
+
+var CreateSipMediaApplicationCallRequest = &handles[685]
+var CreateSipMediaApplicationCallRequest_FromPhoneNumber = &handles[686]
+var CreateSipMediaApplicationCallRequest_ToPhoneNumber = &handles[687]
+var CreateSipMediaApplicationCallRequest_SipMediaApplicationId = &handles[688]
+var CreateSipMediaApplicationCallRequest_SipHeaders = &handles[689]
+var CreateSipMediaApplicationCallRequest_ArgumentsMap = &handles[690]
+
+var CreateSipMediaApplicationCallResponse = &handles[691]
+var CreateSipMediaApplicationCallResponse_SipMediaApplicationCall = &handles[692]
+
+var CreateSipMediaApplicationRequest = &handles[693]
+var CreateSipMediaApplicationRequest_AwsRegion = &handles[694]
+var CreateSipMediaApplicationRequest_Name = &handles[695]
+var CreateSipMediaApplicationRequest_Endpoints = &handles[696]
+var CreateSipMediaApplicationRequest_Tags = &handles[697]
+
+var CreateSipMediaApplicationResponse = &handles[698]
+var CreateSipMediaApplicationResponse_SipMediaApplication = &handles[699]
+
+var CreateSipRuleRequest = &handles[700]
+var CreateSipRuleRequest_Name = &handles[701]
+var CreateSipRuleRequest_TriggerType = &handles[702]
+var CreateSipRuleRequest_TriggerValue = &handles[703]
+var CreateSipRuleRequest_Disabled = &handles[704]
+var CreateSipRuleRequest_TargetApplications = &handles[705]
+
+var CreateSipRuleResponse = &handles[706]
+var CreateSipRuleResponse_SipRule = &handles[707]
+
+var CreateVoiceConnectorGroupRequest = &handles[708]
+var CreateVoiceConnectorGroupRequest_Name = &handles[709]
+var CreateVoiceConnectorGroupRequest_VoiceConnectorItems = &handles[710]
+var CreateVoiceConnectorGroupRequest_CallDistributionType = &handles[711]
+
+var CreateVoiceConnectorGroupResponse = &handles[712]
+var CreateVoiceConnectorGroupResponse_VoiceConnectorGroup = &handles[713]
+
+var CreateVoiceConnectorRequest = &handles[714]
+var CreateVoiceConnectorRequest_Name = &handles[715]
+var CreateVoiceConnectorRequest_AwsRegion = &handles[716]
+var CreateVoiceConnectorRequest_RequireEncryption = &handles[717]
+var CreateVoiceConnectorRequest_Tags = &handles[718]
+var CreateVoiceConnectorRequest_IntegrationType = &handles[719]
+var CreateVoiceConnectorRequest_NetworkType = &handles[720]
+
+var CreateVoiceConnectorResponse = &handles[721]
+var CreateVoiceConnectorResponse_VoiceConnector = &handles[722]
+
+var CreateVoiceProfileDomainRequest = &handles[723]
+var CreateVoiceProfileDomainRequest_Name = &handles[724]
+var CreateVoiceProfileDomainRequest_Description = &handles[725]
+var CreateVoiceProfileDomainRequest_ServerSideEncryptionConfiguration = &handles[726]
+var CreateVoiceProfileDomainRequest_ClientRequestToken = &handles[727]
+var CreateVoiceProfileDomainRequest_Tags = &handles[728]
+
+var CreateVoiceProfileDomainResponse = &handles[729]
+var CreateVoiceProfileDomainResponse_VoiceProfileDomain = &handles[730]
+
+var CreateVoiceProfileRequest = &handles[731]
+var CreateVoiceProfileRequest_SpeakerSearchTaskId = &handles[732]
+
+var CreateVoiceProfileResponse = &handles[733]
+var CreateVoiceProfileResponse_VoiceProfile = &handles[734]
+
+var DeletePhoneNumberRequest = &handles[735]
+var DeletePhoneNumberRequest_PhoneNumberId = &handles[736]
+
+var DeleteProxySessionRequest = &handles[737]
+var DeleteProxySessionRequest_VoiceConnectorId = &handles[738]
+var DeleteProxySessionRequest_ProxySessionId = &handles[739]
+
+var DeleteSipMediaApplicationRequest = &handles[740]
+var DeleteSipMediaApplicationRequest_SipMediaApplicationId = &handles[741]
+
+var DeleteSipRuleRequest = &handles[742]
+var DeleteSipRuleRequest_SipRuleId = &handles[743]
+
+var DeleteVoiceConnectorEmergencyCallingConfigurationRequest = &handles[744]
+var DeleteVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = &handles[745]
+
+var DeleteVoiceConnectorExternalSystemsConfigurationRequest = &handles[746]
+var DeleteVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = &handles[747]
+
+var DeleteVoiceConnectorGroupRequest = &handles[748]
+var DeleteVoiceConnectorGroupRequest_VoiceConnectorGroupId = &handles[749]
+
+var DeleteVoiceConnectorRequest = &handles[750]
+var DeleteVoiceConnectorRequest_VoiceConnectorId = &handles[751]
+
+var DeleteVoiceConnectorOriginationRequest = &handles[752]
+var DeleteVoiceConnectorOriginationRequest_VoiceConnectorId = &handles[753]
+
+var DeleteVoiceConnectorProxyRequest = &handles[754]
+var DeleteVoiceConnectorProxyRequest_VoiceConnectorId = &handles[755]
+
+var DeleteVoiceConnectorStreamingConfigurationRequest = &handles[756]
+var DeleteVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = &handles[757]
+
+var DeleteVoiceConnectorTerminationCredentialsRequest = &handles[758]
+var DeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = &handles[759]
+var DeleteVoiceConnectorTerminationCredentialsRequest_Usernames = &handles[760]
+
+var DeleteVoiceConnectorTerminationRequest = &handles[761]
+var DeleteVoiceConnectorTerminationRequest_VoiceConnectorId = &handles[762]
+
+var DeleteVoiceProfileDomainRequest = &handles[763]
+var DeleteVoiceProfileDomainRequest_VoiceProfileDomainId = &handles[764]
+
+var DeleteVoiceProfileRequest = &handles[765]
+var DeleteVoiceProfileRequest_VoiceProfileId = &handles[766]
+
+var DisassociatePhoneNumbersFromVoiceConnectorGroupRequest = &handles[767]
+var DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_VoiceConnectorGroupId = &handles[768]
+var DisassociatePhoneNumbersFromVoiceConnectorGroupRequest_E164PhoneNumbers = &handles[769]
+
+var DisassociatePhoneNumbersFromVoiceConnectorGroupResponse = &handles[770]
+var DisassociatePhoneNumbersFromVoiceConnectorGroupResponse_PhoneNumberErrors = &handles[771]
+
+var DisassociatePhoneNumbersFromVoiceConnectorRequest = &handles[772]
+var DisassociatePhoneNumbersFromVoiceConnectorRequest_VoiceConnectorId = &handles[773]
+var DisassociatePhoneNumbersFromVoiceConnectorRequest_E164PhoneNumbers = &handles[774]
+
+var DisassociatePhoneNumbersFromVoiceConnectorResponse = &handles[775]
+var DisassociatePhoneNumbersFromVoiceConnectorResponse_PhoneNumberErrors = &handles[776]
+
+var GetGlobalSettingsResponse = &handles[777]
+var GetGlobalSettingsResponse_VoiceConnector = &handles[778]
+
+var GetPhoneNumberRequest = &handles[779]
+var GetPhoneNumberRequest_PhoneNumberId = &handles[780]
+
+var GetPhoneNumberOrderRequest = &handles[781]
+var GetPhoneNumberOrderRequest_PhoneNumberOrderId = &handles[782]
+
+var GetPhoneNumberOrderResponse = &handles[783]
+var GetPhoneNumberOrderResponse_PhoneNumberOrder = &handles[784]
+
+var GetPhoneNumberResponse = &handles[785]
+var GetPhoneNumberResponse_PhoneNumber = &handles[786]
+
+var GetPhoneNumberSettingsResponse = &handles[787]
+var GetPhoneNumberSettingsResponse_CallingName = &handles[788]
+var GetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp = &handles[789]
+
+var GetProxySessionRequest = &handles[790]
+var GetProxySessionRequest_VoiceConnectorId = &handles[791]
+var GetProxySessionRequest_ProxySessionId = &handles[792]
+
+var GetProxySessionResponse = &handles[793]
+var GetProxySessionResponse_ProxySession = &handles[794]
+
+var GetSipMediaApplicationAlexaSkillConfigurationRequest = &handles[795]
+var GetSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId = &handles[796]
+
+var GetSipMediaApplicationAlexaSkillConfigurationResponse = &handles[797]
+var GetSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration = &handles[798]
+
+var GetSipMediaApplicationRequest = &handles[799]
+var GetSipMediaApplicationRequest_SipMediaApplicationId = &handles[800]
+
+var GetSipMediaApplicationLoggingConfigurationRequest = &handles[801]
+var GetSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId = &handles[802]
+
+var GetSipMediaApplicationLoggingConfigurationResponse = &handles[803]
+var GetSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = &handles[804]
+
+var GetSipMediaApplicationResponse = &handles[805]
+var GetSipMediaApplicationResponse_SipMediaApplication = &handles[806]
+
+var GetSipRuleRequest = &handles[807]
+var GetSipRuleRequest_SipRuleId = &handles[808]
+
+var GetSipRuleResponse = &handles[809]
+var GetSipRuleResponse_SipRule = &handles[810]
+
+var GetSpeakerSearchTaskRequest = &handles[811]
+var GetSpeakerSearchTaskRequest_VoiceConnectorId = &handles[812]
+var GetSpeakerSearchTaskRequest_SpeakerSearchTaskId = &handles[813]
+
+var GetSpeakerSearchTaskResponse = &handles[814]
+var GetSpeakerSearchTaskResponse_SpeakerSearchTask = &handles[815]
+
+var GetVoiceConnectorEmergencyCallingConfigurationRequest = &handles[816]
+var GetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = &handles[817]
+
+var GetVoiceConnectorEmergencyCallingConfigurationResponse = &handles[818]
+var GetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = &handles[819]
+
+var GetVoiceConnectorExternalSystemsConfigurationRequest = &handles[820]
+var GetVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = &handles[821]
+
+var GetVoiceConnectorExternalSystemsConfigurationResponse = &handles[822]
+var GetVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = &handles[823]
+
+var GetVoiceConnectorGroupRequest = &handles[824]
+var GetVoiceConnectorGroupRequest_VoiceConnectorGroupId = &handles[825]
+
+var GetVoiceConnectorGroupResponse = &handles[826]
+var GetVoiceConnectorGroupResponse_VoiceConnectorGroup = &handles[827]
+
+var GetVoiceConnectorRequest = &handles[828]
+var GetVoiceConnectorRequest_VoiceConnectorId = &handles[829]
+
+var GetVoiceConnectorLoggingConfigurationRequest = &handles[830]
+var GetVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = &handles[831]
+
+var GetVoiceConnectorLoggingConfigurationResponse = &handles[832]
+var GetVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = &handles[833]
+
+var GetVoiceConnectorOriginationRequest = &handles[834]
+var GetVoiceConnectorOriginationRequest_VoiceConnectorId = &handles[835]
+
+var GetVoiceConnectorOriginationResponse = &handles[836]
+var GetVoiceConnectorOriginationResponse_Origination = &handles[837]
+
+var GetVoiceConnectorResponse = &handles[838]
+var GetVoiceConnectorResponse_VoiceConnector = &handles[839]
+
+var GetVoiceConnectorProxyRequest = &handles[840]
+var GetVoiceConnectorProxyRequest_VoiceConnectorId = &handles[841]
+
+var GetVoiceConnectorProxyResponse = &handles[842]
+var GetVoiceConnectorProxyResponse_Proxy = &handles[843]
+
+var GetVoiceConnectorStreamingConfigurationRequest = &handles[844]
+var GetVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = &handles[845]
+
+var GetVoiceConnectorStreamingConfigurationResponse = &handles[846]
+var GetVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = &handles[847]
+
+var GetVoiceConnectorTerminationHealthRequest = &handles[848]
+var GetVoiceConnectorTerminationHealthRequest_VoiceConnectorId = &handles[849]
+
+var GetVoiceConnectorTerminationHealthResponse = &handles[850]
+var GetVoiceConnectorTerminationHealthResponse_TerminationHealth = &handles[851]
+
+var GetVoiceConnectorTerminationRequest = &handles[852]
+var GetVoiceConnectorTerminationRequest_VoiceConnectorId = &handles[853]
+
+var GetVoiceConnectorTerminationResponse = &handles[854]
+var GetVoiceConnectorTerminationResponse_Termination = &handles[855]
+
+var GetVoiceProfileDomainRequest = &handles[856]
+var GetVoiceProfileDomainRequest_VoiceProfileDomainId = &handles[857]
+
+var GetVoiceProfileDomainResponse = &handles[858]
+var GetVoiceProfileDomainResponse_VoiceProfileDomain = &handles[859]
+
+var GetVoiceProfileRequest = &handles[860]
+var GetVoiceProfileRequest_VoiceProfileId = &handles[861]
+
+var GetVoiceProfileResponse = &handles[862]
+var GetVoiceProfileResponse_VoiceProfile = &handles[863]
+
+var GetVoiceToneAnalysisTaskRequest = &handles[864]
+var GetVoiceToneAnalysisTaskRequest_VoiceConnectorId = &handles[865]
+var GetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = &handles[866]
+var GetVoiceToneAnalysisTaskRequest_IsCaller = &handles[867]
+
+var GetVoiceToneAnalysisTaskResponse = &handles[868]
+var GetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = &handles[869]
+
+var ListAvailableVoiceConnectorRegionsResponse = &handles[870]
+var ListAvailableVoiceConnectorRegionsResponse_VoiceConnectorRegions = &handles[871]
+
+var ListPhoneNumberOrdersRequest = &handles[872]
+var ListPhoneNumberOrdersRequest_NextToken = &handles[873]
+var ListPhoneNumberOrdersRequest_MaxResults = &handles[874]
+
+var ListPhoneNumberOrdersResponse = &handles[875]
+var ListPhoneNumberOrdersResponse_PhoneNumberOrders = &handles[876]
+var ListPhoneNumberOrdersResponse_NextToken = &handles[877]
+
+var ListPhoneNumbersRequest = &handles[878]
+var ListPhoneNumbersRequest_Status = &handles[879]
+var ListPhoneNumbersRequest_ProductType = &handles[880]
+var ListPhoneNumbersRequest_FilterName = &handles[881]
+var ListPhoneNumbersRequest_FilterValue = &handles[882]
+var ListPhoneNumbersRequest_MaxResults = &handles[883]
+var ListPhoneNumbersRequest_NextToken = &handles[884]
+
+var ListPhoneNumbersResponse = &handles[885]
+var ListPhoneNumbersResponse_PhoneNumbers = &handles[886]
+var ListPhoneNumbersResponse_NextToken = &handles[887]
+
+var ListProxySessionsRequest = &handles[888]
+var ListProxySessionsRequest_VoiceConnectorId = &handles[889]
+var ListProxySessionsRequest_Status = &handles[890]
+var ListProxySessionsRequest_NextToken = &handles[891]
+var ListProxySessionsRequest_MaxResults = &handles[892]
+
+var ListProxySessionsResponse = &handles[893]
+var ListProxySessionsResponse_ProxySessions = &handles[894]
+var ListProxySessionsResponse_NextToken = &handles[895]
+
+var ListSipMediaApplicationsRequest = &handles[896]
+var ListSipMediaApplicationsRequest_MaxResults = &handles[897]
+var ListSipMediaApplicationsRequest_NextToken = &handles[898]
+
+var ListSipMediaApplicationsResponse = &handles[899]
+var ListSipMediaApplicationsResponse_SipMediaApplications = &handles[900]
+var ListSipMediaApplicationsResponse_NextToken = &handles[901]
+
+var ListSipRulesRequest = &handles[902]
+var ListSipRulesRequest_SipMediaApplicationId = &handles[903]
+var ListSipRulesRequest_MaxResults = &handles[904]
+var ListSipRulesRequest_NextToken = &handles[905]
+
+var ListSipRulesResponse = &handles[906]
+var ListSipRulesResponse_SipRules = &handles[907]
+var ListSipRulesResponse_NextToken = &handles[908]
+
+var ListSupportedPhoneNumberCountriesRequest = &handles[909]
+var ListSupportedPhoneNumberCountriesRequest_ProductType = &handles[910]
+
+var ListSupportedPhoneNumberCountriesResponse = &handles[911]
+var ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries = &handles[912]
+
+var ListTagsForResourceRequest = &handles[913]
+var ListTagsForResourceRequest_ResourceARN = &handles[914]
+
+var ListTagsForResourceResponse = &handles[915]
+var ListTagsForResourceResponse_Tags = &handles[916]
+
+var ListVoiceConnectorGroupsRequest = &handles[917]
+var ListVoiceConnectorGroupsRequest_NextToken = &handles[918]
+var ListVoiceConnectorGroupsRequest_MaxResults = &handles[919]
+
+var ListVoiceConnectorGroupsResponse = &handles[920]
+var ListVoiceConnectorGroupsResponse_VoiceConnectorGroups = &handles[921]
+var ListVoiceConnectorGroupsResponse_NextToken = &handles[922]
+
+var ListVoiceConnectorsRequest = &handles[923]
+var ListVoiceConnectorsRequest_NextToken = &handles[924]
+var ListVoiceConnectorsRequest_MaxResults = &handles[925]
+
+var ListVoiceConnectorsResponse = &handles[926]
+var ListVoiceConnectorsResponse_VoiceConnectors = &handles[927]
+var ListVoiceConnectorsResponse_NextToken = &handles[928]
+
+var ListVoiceConnectorTerminationCredentialsRequest = &handles[929]
+var ListVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = &handles[930]
+
+var ListVoiceConnectorTerminationCredentialsResponse = &handles[931]
+var ListVoiceConnectorTerminationCredentialsResponse_Usernames = &handles[932]
+
+var ListVoiceProfileDomainsRequest = &handles[933]
+var ListVoiceProfileDomainsRequest_NextToken = &handles[934]
+var ListVoiceProfileDomainsRequest_MaxResults = &handles[935]
+
+var ListVoiceProfileDomainsResponse = &handles[936]
+var ListVoiceProfileDomainsResponse_VoiceProfileDomains = &handles[937]
+var ListVoiceProfileDomainsResponse_NextToken = &handles[938]
+
+var ListVoiceProfilesRequest = &handles[939]
+var ListVoiceProfilesRequest_VoiceProfileDomainId = &handles[940]
+var ListVoiceProfilesRequest_NextToken = &handles[941]
+var ListVoiceProfilesRequest_MaxResults = &handles[942]
+
+var ListVoiceProfilesResponse = &handles[943]
+var ListVoiceProfilesResponse_VoiceProfiles = &handles[944]
+var ListVoiceProfilesResponse_NextToken = &handles[945]
+
+var PutSipMediaApplicationAlexaSkillConfigurationRequest = &handles[946]
+var PutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationId = &handles[947]
+var PutSipMediaApplicationAlexaSkillConfigurationRequest_SipMediaApplicationAlexaSkillConfiguration = &handles[948]
+
+var PutSipMediaApplicationAlexaSkillConfigurationResponse = &handles[949]
+var PutSipMediaApplicationAlexaSkillConfigurationResponse_SipMediaApplicationAlexaSkillConfiguration = &handles[950]
+
+var PutSipMediaApplicationLoggingConfigurationRequest = &handles[951]
+var PutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationId = &handles[952]
+var PutSipMediaApplicationLoggingConfigurationRequest_SipMediaApplicationLoggingConfiguration = &handles[953]
+
+var PutSipMediaApplicationLoggingConfigurationResponse = &handles[954]
+var PutSipMediaApplicationLoggingConfigurationResponse_SipMediaApplicationLoggingConfiguration = &handles[955]
+
+var PutVoiceConnectorEmergencyCallingConfigurationRequest = &handles[956]
+var PutVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId = &handles[957]
+var PutVoiceConnectorEmergencyCallingConfigurationRequest_EmergencyCallingConfiguration = &handles[958]
+
+var PutVoiceConnectorEmergencyCallingConfigurationResponse = &handles[959]
+var PutVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration = &handles[960]
+
+var PutVoiceConnectorExternalSystemsConfigurationRequest = &handles[961]
+var PutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId = &handles[962]
+var PutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes = &handles[963]
+var PutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes = &handles[964]
+
+var PutVoiceConnectorExternalSystemsConfigurationResponse = &handles[965]
+var PutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration = &handles[966]
+
+var PutVoiceConnectorLoggingConfigurationRequest = &handles[967]
+var PutVoiceConnectorLoggingConfigurationRequest_VoiceConnectorId = &handles[968]
+var PutVoiceConnectorLoggingConfigurationRequest_LoggingConfiguration = &handles[969]
+
+var PutVoiceConnectorLoggingConfigurationResponse = &handles[970]
+var PutVoiceConnectorLoggingConfigurationResponse_LoggingConfiguration = &handles[971]
+
+var PutVoiceConnectorOriginationRequest = &handles[972]
+var PutVoiceConnectorOriginationRequest_VoiceConnectorId = &handles[973]
+var PutVoiceConnectorOriginationRequest_Origination = &handles[974]
+
+var PutVoiceConnectorOriginationResponse = &handles[975]
+var PutVoiceConnectorOriginationResponse_Origination = &handles[976]
+
+var PutVoiceConnectorProxyRequest = &handles[977]
+var PutVoiceConnectorProxyRequest_VoiceConnectorId = &handles[978]
+var PutVoiceConnectorProxyRequest_DefaultSessionExpiryMinutes = &handles[979]
+var PutVoiceConnectorProxyRequest_PhoneNumberPoolCountries = &handles[980]
+var PutVoiceConnectorProxyRequest_FallBackPhoneNumber = &handles[981]
+var PutVoiceConnectorProxyRequest_Disabled = &handles[982]
+
+var PutVoiceConnectorProxyResponse = &handles[983]
+var PutVoiceConnectorProxyResponse_Proxy = &handles[984]
+
+var PutVoiceConnectorStreamingConfigurationRequest = &handles[985]
+var PutVoiceConnectorStreamingConfigurationRequest_VoiceConnectorId = &handles[986]
+var PutVoiceConnectorStreamingConfigurationRequest_StreamingConfiguration = &handles[987]
+
+var PutVoiceConnectorStreamingConfigurationResponse = &handles[988]
+var PutVoiceConnectorStreamingConfigurationResponse_StreamingConfiguration = &handles[989]
+
+var PutVoiceConnectorTerminationCredentialsRequest = &handles[990]
+var PutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId = &handles[991]
+var PutVoiceConnectorTerminationCredentialsRequest_Credentials = &handles[992]
+
+var PutVoiceConnectorTerminationRequest = &handles[993]
+var PutVoiceConnectorTerminationRequest_VoiceConnectorId = &handles[994]
+var PutVoiceConnectorTerminationRequest_Termination = &handles[995]
+
+var PutVoiceConnectorTerminationResponse = &handles[996]
+var PutVoiceConnectorTerminationResponse_Termination = &handles[997]
+
+var RestorePhoneNumberRequest = &handles[998]
+var RestorePhoneNumberRequest_PhoneNumberId = &handles[999]
+
+var RestorePhoneNumberResponse = &handles[1000]
+var RestorePhoneNumberResponse_PhoneNumber = &handles[1001]
+
+var SearchAvailablePhoneNumbersRequest = &handles[1002]
+var SearchAvailablePhoneNumbersRequest_AreaCode = &handles[1003]
+var SearchAvailablePhoneNumbersRequest_City = &handles[1004]
+var SearchAvailablePhoneNumbersRequest_Country = &handles[1005]
+var SearchAvailablePhoneNumbersRequest_State = &handles[1006]
+var SearchAvailablePhoneNumbersRequest_TollFreePrefix = &handles[1007]
+var SearchAvailablePhoneNumbersRequest_PhoneNumberType = &handles[1008]
+var SearchAvailablePhoneNumbersRequest_MaxResults = &handles[1009]
+var SearchAvailablePhoneNumbersRequest_NextToken = &handles[1010]
+
+var SearchAvailablePhoneNumbersResponse = &handles[1011]
+var SearchAvailablePhoneNumbersResponse_E164PhoneNumbers = &handles[1012]
+var SearchAvailablePhoneNumbersResponse_NextToken = &handles[1013]
+
+var StartSpeakerSearchTaskRequest = &handles[1014]
+var StartSpeakerSearchTaskRequest_VoiceConnectorId = &handles[1015]
+var StartSpeakerSearchTaskRequest_TransactionId = &handles[1016]
+var StartSpeakerSearchTaskRequest_VoiceProfileDomainId = &handles[1017]
+var StartSpeakerSearchTaskRequest_ClientRequestToken = &handles[1018]
+var StartSpeakerSearchTaskRequest_CallLeg = &handles[1019]
+
+var StartSpeakerSearchTaskResponse = &handles[1020]
+var StartSpeakerSearchTaskResponse_SpeakerSearchTask = &handles[1021]
+
+var StartVoiceToneAnalysisTaskRequest = &handles[1022]
+var StartVoiceToneAnalysisTaskRequest_VoiceConnectorId = &handles[1023]
+var StartVoiceToneAnalysisTaskRequest_TransactionId = &handles[1024]
+var StartVoiceToneAnalysisTaskRequest_LanguageCode = &handles[1025]
+var StartVoiceToneAnalysisTaskRequest_ClientRequestToken = &handles[1026]
+
+var StartVoiceToneAnalysisTaskResponse = &handles[1027]
+var StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = &handles[1028]
+
+var StopSpeakerSearchTaskRequest = &handles[1029]
+var StopSpeakerSearchTaskRequest_VoiceConnectorId = &handles[1030]
+var StopSpeakerSearchTaskRequest_SpeakerSearchTaskId = &handles[1031]
+
+var StopVoiceToneAnalysisTaskRequest = &handles[1032]
+var StopVoiceToneAnalysisTaskRequest_VoiceConnectorId = &handles[1033]
+var StopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = &handles[1034]
+
+var TagResourceRequest = &handles[1035]
+var TagResourceRequest_ResourceARN = &handles[1036]
+var TagResourceRequest_Tags = &handles[1037]
+
+var UntagResourceRequest = &handles[1038]
+var UntagResourceRequest_ResourceARN = &handles[1039]
+var UntagResourceRequest_TagKeys = &handles[1040]
+
+var UpdateGlobalSettingsRequest = &handles[1041]
+var UpdateGlobalSettingsRequest_VoiceConnector = &handles[1042]
+
+var UpdatePhoneNumberRequest = &handles[1043]
+var UpdatePhoneNumberRequest_PhoneNumberId = &handles[1044]
+var UpdatePhoneNumberRequest_ProductType = &handles[1045]
+var UpdatePhoneNumberRequest_CallingName = &handles[1046]
+var UpdatePhoneNumberRequest_Name = &handles[1047]
+
+var UpdatePhoneNumberResponse = &handles[1048]
+var UpdatePhoneNumberResponse_PhoneNumber = &handles[1049]
+
+var UpdatePhoneNumberSettingsRequest = &handles[1050]
+var UpdatePhoneNumberSettingsRequest_CallingName = &handles[1051]
+
+var UpdateProxySessionRequest = &handles[1052]
+var UpdateProxySessionRequest_VoiceConnectorId = &handles[1053]
+var UpdateProxySessionRequest_ProxySessionId = &handles[1054]
+var UpdateProxySessionRequest_Capabilities = &handles[1055]
+var UpdateProxySessionRequest_ExpiryMinutes = &handles[1056]
+
+var UpdateProxySessionResponse = &handles[1057]
+var UpdateProxySessionResponse_ProxySession = &handles[1058]
+
+var UpdateSipMediaApplicationCallRequest = &handles[1059]
+var UpdateSipMediaApplicationCallRequest_SipMediaApplicationId = &handles[1060]
+var UpdateSipMediaApplicationCallRequest_TransactionId = &handles[1061]
+var UpdateSipMediaApplicationCallRequest_Arguments = &handles[1062]
+
+var UpdateSipMediaApplicationCallResponse = &handles[1063]
+var UpdateSipMediaApplicationCallResponse_SipMediaApplicationCall = &handles[1064]
+
+var UpdateSipMediaApplicationRequest = &handles[1065]
+var UpdateSipMediaApplicationRequest_SipMediaApplicationId = &handles[1066]
+var UpdateSipMediaApplicationRequest_Name = &handles[1067]
+var UpdateSipMediaApplicationRequest_Endpoints = &handles[1068]
+
+var UpdateSipMediaApplicationResponse = &handles[1069]
+var UpdateSipMediaApplicationResponse_SipMediaApplication = &handles[1070]
+
+var UpdateSipRuleRequest = &handles[1071]
+var UpdateSipRuleRequest_SipRuleId = &handles[1072]
+var UpdateSipRuleRequest_Name = &handles[1073]
+var UpdateSipRuleRequest_Disabled = &handles[1074]
+var UpdateSipRuleRequest_TargetApplications = &handles[1075]
+
+var UpdateSipRuleResponse = &handles[1076]
+var UpdateSipRuleResponse_SipRule = &handles[1077]
+
+var UpdateVoiceConnectorGroupRequest = &handles[1078]
+var UpdateVoiceConnectorGroupRequest_VoiceConnectorGroupId = &handles[1079]
+var UpdateVoiceConnectorGroupRequest_Name = &handles[1080]
+var UpdateVoiceConnectorGroupRequest_VoiceConnectorItems = &handles[1081]
+var UpdateVoiceConnectorGroupRequest_CallDistributionType = &handles[1082]
+
+var UpdateVoiceConnectorGroupResponse = &handles[1083]
+var UpdateVoiceConnectorGroupResponse_VoiceConnectorGroup = &handles[1084]
+
+var UpdateVoiceConnectorRequest = &handles[1085]
+var UpdateVoiceConnectorRequest_VoiceConnectorId = &handles[1086]
+var UpdateVoiceConnectorRequest_Name = &handles[1087]
+var UpdateVoiceConnectorRequest_RequireEncryption = &handles[1088]
+
+var UpdateVoiceConnectorResponse = &handles[1089]
+var UpdateVoiceConnectorResponse_VoiceConnector = &handles[1090]
+
+var UpdateVoiceProfileDomainRequest = &handles[1091]
+var UpdateVoiceProfileDomainRequest_VoiceProfileDomainId = &handles[1092]
+var UpdateVoiceProfileDomainRequest_Name = &handles[1093]
+var UpdateVoiceProfileDomainRequest_Description = &handles[1094]
+
+var UpdateVoiceProfileDomainResponse = &handles[1095]
+var UpdateVoiceProfileDomainResponse_VoiceProfileDomain = &handles[1096]
+
+var UpdateVoiceProfileRequest = &handles[1097]
+var UpdateVoiceProfileRequest_VoiceProfileId = &handles[1098]
+var UpdateVoiceProfileRequest_SpeakerSearchTaskId = &handles[1099]
+
+var UpdateVoiceProfileResponse = &handles[1100]
+var UpdateVoiceProfileResponse_VoiceProfile = &handles[1101]
+
+var ValidateE911AddressRequest = &handles[1102]
+var ValidateE911AddressRequest_AwsAccountId = &handles[1103]
+var ValidateE911AddressRequest_StreetNumber = &handles[1104]
+var ValidateE911AddressRequest_StreetInfo = &handles[1105]
+var ValidateE911AddressRequest_City = &handles[1106]
+var ValidateE911AddressRequest_State = &handles[1107]
+var ValidateE911AddressRequest_Country = &handles[1108]
+var ValidateE911AddressRequest_PostalCode = &handles[1109]
+
+var ValidateE911AddressResponse = &handles[1110]
+var ValidateE911AddressResponse_ValidationResult = &handles[1111]
+var ValidateE911AddressResponse_AddressExternalId = &handles[1112]
+var ValidateE911AddressResponse_Address = &handles[1113]
+var ValidateE911AddressResponse_CandidateAddressList = &handles[1114]
+
+var ChimeSDKTelephonyService = &smithy.ServiceSchema{Schema: &handles[96], Version: "2022-08-03"}

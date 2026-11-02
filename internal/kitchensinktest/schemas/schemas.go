@@ -4,261 +4,242 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetItem",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetMaps",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutCompressedData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "PutCompressedData",
-}, smithy.ShapeTypeOperation, 0)
-
-var SubscribeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "SubscribeEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AwsJson1KitchenSink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "AwsJson1KitchenSink",
-}, smithy.ShapeTypeService, 0)
-
-var AwsJson1KitchenSink = smithy.NewServiceSchema(_AwsJson1KitchenSink, "2025-03-01")
-
-var _DenseIntegerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "DenseIntegerList",
-}, smithy.ShapeTypeList, 1)
-var _DenseIntegerList_member *smithy.Schema
-
-var _DenseIntegerMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "DenseIntegerMap",
-}, smithy.ShapeTypeMap, 2)
-var _DenseIntegerMap_key *smithy.Schema
-
-var _DenseIntegerMap_value *smithy.Schema
-
-var _DenseStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "DenseStringList",
-}, smithy.ShapeTypeList, 1)
-var _DenseStringList_member *smithy.Schema
-
-var _DenseStringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "DenseStringMap",
-}, smithy.ShapeTypeMap, 2)
-var _DenseStringMap_key *smithy.Schema
-
-var _DenseStringMap_value *smithy.Schema
-
-var _DenseStructList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "DenseStructList",
-}, smithy.ShapeTypeList, 1)
-var _DenseStructList_member *smithy.Schema
-
-var _DenseStructMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "DenseStructMap",
-}, smithy.ShapeTypeMap, 2)
-var _DenseStructMap_key *smithy.Schema
-
-var _DenseStructMap_value *smithy.Schema
-
-var Events = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "Events",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Streaming{})
-var Events_message *smithy.Schema
-
-var Item = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "Item",
-}, smithy.ShapeTypeStructure, 0)
-
-var ItemNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "ItemNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ItemNotFound_message *smithy.Schema
-
-var ListValueStruct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "ListValueStruct",
-}, smithy.ShapeTypeStructure, 1)
-var ListValueStruct_name *smithy.Schema
-
-var MapValueStruct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "MapValueStruct",
-}, smithy.ShapeTypeStructure, 1)
-var MapValueStruct_name *smithy.Schema
-
-var MessageEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "MessageEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MessageEvent_body *smithy.Schema
-
-var _SparseStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "SparseStringList",
-}, smithy.ShapeTypeList, 1)
-var _SparseStringList_member *smithy.Schema
-
-var _SparseStringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "SparseStringMap",
-}, smithy.ShapeTypeMap, 2)
-var _SparseStringMap_key *smithy.Schema
-
-var _SparseStringMap_value *smithy.Schema
-
-var GetItemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetItemInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetItemInput_item *smithy.Schema
-
-var GetItemInput_id *smithy.Schema
-
-var GetItemOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetItemOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetListsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetListsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetListsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetListsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetListsOutput_strings *smithy.Schema
-
-var GetListsOutput_integers *smithy.Schema
-
-var GetListsOutput_structs *smithy.Schema
-
-var GetListsOutput_sparseStrings *smithy.Schema
-
-var GetMapsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetMapsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetMapsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "GetMapsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetMapsOutput_strings *smithy.Schema
-
-var GetMapsOutput_integers *smithy.Schema
-
-var GetMapsOutput_structs *smithy.Schema
-
-var GetMapsOutput_sparseStrings *smithy.Schema
-
-var PutCompressedDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "PutCompressedDataInput",
-}, smithy.ShapeTypeStructure, 1)
-var PutCompressedDataInput_data *smithy.Schema
-
-var PutCompressedDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "PutCompressedDataOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SubscribeEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "SubscribeEventsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SubscribeEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktest",
-	Name:      "SubscribeEventsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SubscribeEventsOutput_events *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_DenseIntegerList_member = _DenseIntegerList.AddMember("member", smithyprelude.Integer)
-
-	_DenseIntegerMap_key = _DenseIntegerMap.AddMember("key", smithyprelude.String)
-
-	_DenseIntegerMap_value = _DenseIntegerMap.AddMember("value", smithyprelude.Integer)
-
-	_DenseStringList_member = _DenseStringList.AddMember("member", smithyprelude.String)
-
-	_DenseStringMap_key = _DenseStringMap.AddMember("key", smithyprelude.String)
-
-	_DenseStringMap_value = _DenseStringMap.AddMember("value", smithyprelude.String)
-
-	ListValueStruct_name = ListValueStruct.AddMember("name", smithyprelude.String)
-
-	_DenseStructList_member = _DenseStructList.AddMember("member", ListValueStruct)
-
-	MapValueStruct_name = MapValueStruct.AddMember("name", smithyprelude.String)
-
-	_DenseStructMap_key = _DenseStructMap.AddMember("key", smithyprelude.String)
-
-	_DenseStructMap_value = _DenseStructMap.AddMember("value", MapValueStruct)
-
-	MessageEvent_body = MessageEvent.AddMember("body", smithyprelude.String)
-
-	Events_message = Events.AddMember("message", MessageEvent)
-
-	ItemNotFound_message = ItemNotFound.AddMember("message", smithyprelude.String)
-
-	_SparseStringList_member = _SparseStringList.AddMember("member", smithyprelude.String)
-
-	_SparseStringMap_key = _SparseStringMap.AddMember("key", smithyprelude.String)
-
-	_SparseStringMap_value = _SparseStringMap.AddMember("value", smithyprelude.String)
-
-	GetItemInput_item = GetItemInput.AddMember("item", Item)
-
-	GetItemInput_id = GetItemInput.AddMember("id", smithyprelude.String, &smithytraits.ContextParam{})
-
-	GetListsOutput_strings = GetListsOutput.AddMember("strings", _DenseStringList)
-
-	GetListsOutput_integers = GetListsOutput.AddMember("integers", _DenseIntegerList)
-
-	GetListsOutput_structs = GetListsOutput.AddMember("structs", _DenseStructList)
-
-	GetListsOutput_sparseStrings = GetListsOutput.AddMember("sparseStrings", _SparseStringList)
-
-	GetMapsOutput_strings = GetMapsOutput.AddMember("strings", _DenseStringMap)
-
-	GetMapsOutput_integers = GetMapsOutput.AddMember("integers", _DenseIntegerMap)
-
-	GetMapsOutput_structs = GetMapsOutput.AddMember("structs", _DenseStructMap)
-
-	GetMapsOutput_sparseStrings = GetMapsOutput.AddMember("sparseStrings", _SparseStringMap)
-
-	PutCompressedDataInput_data = PutCompressedDataInput.AddMember("data", smithyprelude.String)
-
-	SubscribeEventsOutput_events = SubscribeEventsOutput.AddMember("events", Events)
-
+const blob = "" +
+	"PutCompressedDataOutputPutCompressedDataInputSubscribeEventsOutputSubscribeEventsInputAwsJson1Kitche" +
+	"nSinkDenseIntegerListSparseStringListDenseIntegerMapDenseStringListDenseStructListListValueStructSpa" +
+	"rseStringMapDenseStringMapDenseStructMapGetListsOutputMapValueStructGetItemOutputGetListsInputGetMap" +
+	"sOutputsparseStringsGetItemInputGetMapsInputItemNotFoundMessageEventintegersmessagestringsstructseve" +
+	"ntsmembervaluebodydataitemnamekeyid"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"aws.kitchensinktest", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 268, Target: 0, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 240, Target: 1, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 294, Target: 2, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 3, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 45, Target: 4, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 86, Target: 5, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 105, Target: 6, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 403, Target: 59, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 137, Target: 8, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 430, Target: 60, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 409, Target: 59, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 152, Target: 11, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 403, Target: 60, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 212, Target: 13, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 430, Target: 60, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 409, Target: 60, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 167, Target: 16, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 403, Target: 26, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 226, Target: 18, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 430, Target: 60, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 409, Target: 28, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 54, Target: 21, Traits: 1, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 376, Target: 30, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 271, Target: 23, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 344, Target: 24, Traits: 2, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 376, Target: 60, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 182, Target: 26, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 426, Target: 60, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 254, Target: 28, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 426, Target: 60, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 356, Target: 30, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 414, Target: 60, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 32, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 403, Target: 60, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 197, Target: 34, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 430, Target: 60, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 409, Target: 60, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 320, Target: 37, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 422, Target: 23, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 433, Target: 60, Traits: 3, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 268, Target: 40, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 281, Target: 41, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 240, Target: 42, Traits: 0, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 383, Target: 11, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 368, Target: 6, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 390, Target: 16, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 307, Target: 32, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 332, Target: 47, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 294, Target: 48, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 383, Target: 13, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 368, Target: 8, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 390, Target: 18, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 307, Target: 34, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 23, Target: 53, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 418, Target: 60, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 55, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 66, Target: 56, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 45, Target: 57, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 397, Target: 21, Traits: 4, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 110, Target: 59, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 127, Target: 60, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.ContextParam{}}, DirectMask: 0x1000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}},
+	},
 }
+
+var handles = [61]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+}
+
+var GetItem = &handles[0]
+
+var GetLists = &handles[1]
+
+var GetMaps = &handles[2]
+
+var PutCompressedData = &handles[3]
+
+var SubscribeEvents = &handles[4]
+
+var _AwsJson1KitchenSink = &handles[5]
+
+var _DenseIntegerList = &handles[6]
+var _DenseIntegerList_member = &handles[7]
+
+var _DenseIntegerMap = &handles[8]
+var _DenseIntegerMap_key = &handles[9]
+var _DenseIntegerMap_value = &handles[10]
+
+var _DenseStringList = &handles[11]
+var _DenseStringList_member = &handles[12]
+
+var _DenseStringMap = &handles[13]
+var _DenseStringMap_key = &handles[14]
+var _DenseStringMap_value = &handles[15]
+
+var _DenseStructList = &handles[16]
+var _DenseStructList_member = &handles[17]
+
+var _DenseStructMap = &handles[18]
+var _DenseStructMap_key = &handles[19]
+var _DenseStructMap_value = &handles[20]
+
+var Events = &handles[21]
+var Events_message = &handles[22]
+
+var Item = &handles[23]
+
+var ItemNotFound = &handles[24]
+var ItemNotFound_message = &handles[25]
+
+var ListValueStruct = &handles[26]
+var ListValueStruct_name = &handles[27]
+
+var MapValueStruct = &handles[28]
+var MapValueStruct_name = &handles[29]
+
+var MessageEvent = &handles[30]
+var MessageEvent_body = &handles[31]
+
+var _SparseStringList = &handles[32]
+var _SparseStringList_member = &handles[33]
+
+var _SparseStringMap = &handles[34]
+var _SparseStringMap_key = &handles[35]
+var _SparseStringMap_value = &handles[36]
+
+var GetItemInput = &handles[37]
+var GetItemInput_item = &handles[38]
+var GetItemInput_id = &handles[39]
+
+var GetItemOutput = &handles[40]
+
+var GetListsInput = &handles[41]
+
+var GetListsOutput = &handles[42]
+var GetListsOutput_strings = &handles[43]
+var GetListsOutput_integers = &handles[44]
+var GetListsOutput_structs = &handles[45]
+var GetListsOutput_sparseStrings = &handles[46]
+
+var GetMapsInput = &handles[47]
+
+var GetMapsOutput = &handles[48]
+var GetMapsOutput_strings = &handles[49]
+var GetMapsOutput_integers = &handles[50]
+var GetMapsOutput_structs = &handles[51]
+var GetMapsOutput_sparseStrings = &handles[52]
+
+var PutCompressedDataInput = &handles[53]
+var PutCompressedDataInput_data = &handles[54]
+
+var PutCompressedDataOutput = &handles[55]
+
+var SubscribeEventsInput = &handles[56]
+
+var SubscribeEventsOutput = &handles[57]
+var SubscribeEventsOutput_events = &handles[58]
+
+var AwsJson1KitchenSink = &smithy.ServiceSchema{Schema: &handles[5], Version: "2025-03-01"}

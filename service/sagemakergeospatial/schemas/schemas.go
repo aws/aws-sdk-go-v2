@@ -4,2128 +4,1835 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteEarthObservationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DeleteEarthObservationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/earth-observation-jobs/{Arn}",
-	Code: 200})
-
-var DeleteVectorEnrichmentJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DeleteVectorEnrichmentJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/vector-enrichment-jobs/{Arn}",
-	Code: 200})
-
-var ExportEarthObservationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportEarthObservationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/export-earth-observation-job",
-	Code: 200})
-
-var ExportVectorEnrichmentJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportVectorEnrichmentJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/export-vector-enrichment-jobs",
-	Code: 200})
-
-var GetEarthObservationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetEarthObservationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/earth-observation-jobs/{Arn}",
-	Code: 200})
-
-var GetRasterDataCollection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetRasterDataCollection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/raster-data-collection/{Arn}",
-	Code: 200})
-
-var GetTile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetTile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tile/{z}/{x}/{y}",
-	Code: 200})
-
-var GetVectorEnrichmentJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetVectorEnrichmentJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/vector-enrichment-jobs/{Arn}",
-	Code: 200})
-
-var ListEarthObservationJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListEarthObservationJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/list-earth-observation-jobs",
-	Code: 200})
-
-var ListRasterDataCollections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListRasterDataCollections",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/raster-data-collections",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var ListVectorEnrichmentJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListVectorEnrichmentJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/list-vector-enrichment-jobs",
-	Code: 200})
-
-var SearchRasterDataCollection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "SearchRasterDataCollection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/search-raster-data-collection",
-	Code: 200})
-
-var StartEarthObservationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StartEarthObservationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/earth-observation-jobs",
-	Code: 200})
-
-var StartVectorEnrichmentJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StartVectorEnrichmentJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/vector-enrichment-jobs",
-	Code: 200})
-
-var StopEarthObservationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StopEarthObservationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/earth-observation-jobs/stop",
-	Code: 200})
-
-var StopVectorEnrichmentJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StopVectorEnrichmentJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/vector-enrichment-jobs/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var _SageMakerGeospatial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "SageMakerGeospatial",
-}, smithy.ShapeTypeService, 0)
-
-var SageMakerGeospatial = smithy.NewServiceSchema(_SageMakerGeospatial, "2020-05-27")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AlgorithmNameCloudRemoval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "AlgorithmNameCloudRemoval",
-}, smithy.ShapeTypeString, 0)
-
-var _AlgorithmNameGeoMosaic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "AlgorithmNameGeoMosaic",
-}, smithy.ShapeTypeString, 0)
-
-var _AlgorithmNameResampling = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "AlgorithmNameResampling",
-}, smithy.ShapeTypeString, 0)
-
-var AreaOfInterest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "AreaOfInterest",
-}, smithy.ShapeTypeUnion, 1)
-var AreaOfInterest_AreaOfInterestGeometry *smithy.Schema
-
-var AreaOfInterestGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "AreaOfInterestGeometry",
-}, smithy.ShapeTypeUnion, 2)
-var AreaOfInterestGeometry_PolygonGeometry *smithy.Schema
-
-var AreaOfInterestGeometry_MultiPolygonGeometry *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssetsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "AssetsMap",
-}, smithy.ShapeTypeMap, 2)
-var _AssetsMap_key *smithy.Schema
-
-var _AssetsMap_value *smithy.Schema
-
-var AssetValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "AssetValue",
-}, smithy.ShapeTypeStructure, 1)
-var AssetValue_Href *smithy.Schema
-
-var BandMathConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "BandMathConfigInput",
-}, smithy.ShapeTypeStructure, 2)
-var BandMathConfigInput_PredefinedIndices *smithy.Schema
-
-var BandMathConfigInput_CustomIndices *smithy.Schema
-
-var _BinaryFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "BinaryFile",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{},
-	&smithytraits.MediaType{Type: "application/x-binary"})
-
-var CloudMaskingConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "CloudMaskingConfigInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CloudRemovalConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "CloudRemovalConfigInput",
-}, smithy.ShapeTypeStructure, 3)
-var CloudRemovalConfigInput_AlgorithmName *smithy.Schema
-
-var CloudRemovalConfigInput_InterpolationValue *smithy.Schema
-
-var CloudRemovalConfigInput_TargetBands *smithy.Schema
-
-var _ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ComparisonOperator",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ResourceId *smithy.Schema
-
-var CustomIndicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "CustomIndicesInput",
-}, smithy.ShapeTypeStructure, 1)
-var CustomIndicesInput_Operations *smithy.Schema
-
-var _DataCollectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DataCollectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DataCollectionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DataCollectionsList",
-}, smithy.ShapeTypeList, 1)
-var _DataCollectionsList_member *smithy.Schema
-
-var _DataCollectionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DataCollectionType",
-}, smithy.ShapeTypeString, 0)
-
-var _EarthObservationJobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "EarthObservationJobArn",
-}, smithy.ShapeTypeString, 0)
-
-var EarthObservationJobErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "EarthObservationJobErrorDetails",
-}, smithy.ShapeTypeStructure, 2)
-var EarthObservationJobErrorDetails_Type *smithy.Schema
-
-var EarthObservationJobErrorDetails_Message *smithy.Schema
-
-var _EarthObservationJobErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "EarthObservationJobErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var _EarthObservationJobExportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "EarthObservationJobExportStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _EarthObservationJobList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "EarthObservationJobList",
-}, smithy.ShapeTypeList, 1)
-var _EarthObservationJobList_member *smithy.Schema
-
-var _EarthObservationJobOutputBands = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "EarthObservationJobOutputBands",
-}, smithy.ShapeTypeList, 1)
-var _EarthObservationJobOutputBands_member *smithy.Schema
-
-var _EarthObservationJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "EarthObservationJobStatus",
-}, smithy.ShapeTypeString, 0)
-
-var EoCloudCoverInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "EoCloudCoverInput",
-}, smithy.ShapeTypeStructure, 2)
-var EoCloudCoverInput_LowerBound *smithy.Schema
-
-var EoCloudCoverInput_UpperBound *smithy.Schema
-
-var _ExecutionRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExecutionRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ExportErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportErrorDetails",
-}, smithy.ShapeTypeStructure, 2)
-var ExportErrorDetails_ExportResults *smithy.Schema
-
-var ExportErrorDetails_ExportSourceImages *smithy.Schema
-
-var ExportErrorDetailsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportErrorDetailsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ExportErrorDetailsOutput_Type *smithy.Schema
-
-var ExportErrorDetailsOutput_Message *smithy.Schema
-
-var _ExportErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var ExportS3DataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportS3DataInput",
-}, smithy.ShapeTypeStructure, 2)
-var ExportS3DataInput_S3Uri *smithy.Schema
-
-var ExportS3DataInput_KmsKeyId *smithy.Schema
-
-var ExportVectorEnrichmentJobOutputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportVectorEnrichmentJobOutputConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ExportVectorEnrichmentJobOutputConfig_S3Data *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 4)
-var Filter_Name *smithy.Schema
-
-var Filter_Type *smithy.Schema
-
-var Filter_Minimum *smithy.Schema
-
-var Filter_Maximum *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var Geometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Geometry",
-}, smithy.ShapeTypeStructure, 2)
-var Geometry_Type *smithy.Schema
-
-var Geometry_Coordinates *smithy.Schema
-
-var GeoMosaicConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GeoMosaicConfigInput",
-}, smithy.ShapeTypeStructure, 2)
-var GeoMosaicConfigInput_AlgorithmName *smithy.Schema
-
-var GeoMosaicConfigInput_TargetBands *smithy.Schema
-
-var _GroupBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GroupBy",
-}, smithy.ShapeTypeString, 0)
-
-var _ImageSourceBandList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ImageSourceBandList",
-}, smithy.ShapeTypeList, 1)
-var _ImageSourceBandList_member *smithy.Schema
-
-var InputConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "InputConfigInput",
-}, smithy.ShapeTypeStructure, 2)
-var InputConfigInput_PreviousEarthObservationJobArn *smithy.Schema
-
-var InputConfigInput_RasterDataCollectionQuery *smithy.Schema
-
-var InputConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "InputConfigOutput",
-}, smithy.ShapeTypeStructure, 2)
-var InputConfigOutput_PreviousEarthObservationJobArn *smithy.Schema
-
-var InputConfigOutput_RasterDataCollectionQuery *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InternalServerException_ResourceId *smithy.Schema
-
-var ItemSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ItemSource",
-}, smithy.ShapeTypeStructure, 5)
-var ItemSource_Id *smithy.Schema
-
-var ItemSource_Geometry *smithy.Schema
-
-var ItemSource_Assets *smithy.Schema
-
-var ItemSource_DateTime *smithy.Schema
-
-var ItemSource_Properties *smithy.Schema
-
-var _ItemSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ItemSourceList",
-}, smithy.ShapeTypeList, 1)
-var _ItemSourceList_member *smithy.Schema
-
-var JobConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "JobConfigInput",
-}, smithy.ShapeTypeUnion, 9)
-var JobConfigInput_BandMathConfig *smithy.Schema
-
-var JobConfigInput_ResamplingConfig *smithy.Schema
-
-var JobConfigInput_TemporalStatisticsConfig *smithy.Schema
-
-var JobConfigInput_CloudRemovalConfig *smithy.Schema
-
-var JobConfigInput_ZonalStatisticsConfig *smithy.Schema
-
-var JobConfigInput_GeoMosaicConfig *smithy.Schema
-
-var JobConfigInput_StackConfig *smithy.Schema
-
-var JobConfigInput_CloudMaskingConfig *smithy.Schema
-
-var JobConfigInput_LandCoverSegmentationConfig *smithy.Schema
-
-var _KmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "KmsKey",
-}, smithy.ShapeTypeString, 0)
-
-var LandCoverSegmentationConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "LandCoverSegmentationConfigInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var LandsatCloudCoverLandInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "LandsatCloudCoverLandInput",
-}, smithy.ShapeTypeStructure, 2)
-var LandsatCloudCoverLandInput_LowerBound *smithy.Schema
-
-var LandsatCloudCoverLandInput_UpperBound *smithy.Schema
-
-var _LinearRing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "LinearRing",
-}, smithy.ShapeTypeList, 1)
-var _LinearRing_member *smithy.Schema
-
-var _LinearRings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "LinearRings",
-}, smithy.ShapeTypeList, 1)
-var _LinearRings_member *smithy.Schema
-
-var _LinearRingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "LinearRingsList",
-}, smithy.ShapeTypeList, 1)
-var _LinearRingsList_member *smithy.Schema
-
-var ListEarthObservationJobOutputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListEarthObservationJobOutputConfig",
-}, smithy.ShapeTypeStructure, 7)
-var ListEarthObservationJobOutputConfig_Arn *smithy.Schema
-
-var ListEarthObservationJobOutputConfig_Name *smithy.Schema
-
-var ListEarthObservationJobOutputConfig_CreationTime *smithy.Schema
-
-var ListEarthObservationJobOutputConfig_DurationInSeconds *smithy.Schema
-
-var ListEarthObservationJobOutputConfig_Status *smithy.Schema
-
-var ListEarthObservationJobOutputConfig_OperationType *smithy.Schema
-
-var ListEarthObservationJobOutputConfig_Tags *smithy.Schema
-
-var ListVectorEnrichmentJobOutputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListVectorEnrichmentJobOutputConfig",
-}, smithy.ShapeTypeStructure, 7)
-var ListVectorEnrichmentJobOutputConfig_Arn *smithy.Schema
-
-var ListVectorEnrichmentJobOutputConfig_Name *smithy.Schema
-
-var ListVectorEnrichmentJobOutputConfig_Type *smithy.Schema
-
-var ListVectorEnrichmentJobOutputConfig_CreationTime *smithy.Schema
-
-var ListVectorEnrichmentJobOutputConfig_DurationInSeconds *smithy.Schema
-
-var ListVectorEnrichmentJobOutputConfig_Status *smithy.Schema
-
-var ListVectorEnrichmentJobOutputConfig_Tags *smithy.Schema
-
-var _LogicalOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "LogicalOperator",
-}, smithy.ShapeTypeString, 0)
-
-var MapMatchingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "MapMatchingConfig",
-}, smithy.ShapeTypeStructure, 4)
-var MapMatchingConfig_IdAttributeName *smithy.Schema
-
-var MapMatchingConfig_YAttributeName *smithy.Schema
-
-var MapMatchingConfig_XAttributeName *smithy.Schema
-
-var MapMatchingConfig_TimestampAttributeName *smithy.Schema
-
-var MultiPolygonGeometryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "MultiPolygonGeometryInput",
-}, smithy.ShapeTypeStructure, 1)
-var MultiPolygonGeometryInput_Coordinates *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Operation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Operation",
-}, smithy.ShapeTypeStructure, 3)
-var Operation_Name *smithy.Schema
-
-var Operation_Equation *smithy.Schema
-
-var Operation_OutputType *smithy.Schema
-
-var _OperationsListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "OperationsListInput",
-}, smithy.ShapeTypeList, 1)
-var _OperationsListInput_member *smithy.Schema
-
-var OutputBand = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "OutputBand",
-}, smithy.ShapeTypeStructure, 2)
-var OutputBand_BandName *smithy.Schema
-
-var OutputBand_OutputDataType *smithy.Schema
-
-var OutputConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "OutputConfigInput",
-}, smithy.ShapeTypeStructure, 1)
-var OutputConfigInput_S3Data *smithy.Schema
-
-var OutputResolutionResamplingInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "OutputResolutionResamplingInput",
-}, smithy.ShapeTypeStructure, 1)
-var OutputResolutionResamplingInput_UserDefined *smithy.Schema
-
-var OutputResolutionStackInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "OutputResolutionStackInput",
-}, smithy.ShapeTypeStructure, 2)
-var OutputResolutionStackInput_Predefined *smithy.Schema
-
-var OutputResolutionStackInput_UserDefined *smithy.Schema
-
-var _OutputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "OutputType",
-}, smithy.ShapeTypeString, 0)
-
-var PlatformInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "PlatformInput",
-}, smithy.ShapeTypeStructure, 2)
-var PlatformInput_Value *smithy.Schema
-
-var PlatformInput_ComparisonOperator *smithy.Schema
-
-var PolygonGeometryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "PolygonGeometryInput",
-}, smithy.ShapeTypeStructure, 1)
-var PolygonGeometryInput_Coordinates *smithy.Schema
-
-var _Position = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Position",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _Position_member *smithy.Schema
-
-var _PredefinedResolution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "PredefinedResolution",
-}, smithy.ShapeTypeString, 0)
-
-var Properties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Properties",
-}, smithy.ShapeTypeStructure, 6)
-var Properties_EoCloudCover *smithy.Schema
-
-var Properties_ViewOffNadir *smithy.Schema
-
-var Properties_ViewSunAzimuth *smithy.Schema
-
-var Properties_ViewSunElevation *smithy.Schema
-
-var Properties_Platform *smithy.Schema
-
-var Properties_LandsatCloudCoverLand *smithy.Schema
-
-var Property = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Property",
-}, smithy.ShapeTypeUnion, 6)
-var Property_EoCloudCover *smithy.Schema
-
-var Property_ViewOffNadir *smithy.Schema
-
-var Property_ViewSunAzimuth *smithy.Schema
-
-var Property_ViewSunElevation *smithy.Schema
-
-var Property_Platform *smithy.Schema
-
-var Property_LandsatCloudCoverLand *smithy.Schema
-
-var PropertyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "PropertyFilter",
-}, smithy.ShapeTypeStructure, 1)
-var PropertyFilter_Property *smithy.Schema
-
-var PropertyFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "PropertyFilters",
-}, smithy.ShapeTypeStructure, 2)
-var PropertyFilters_Properties *smithy.Schema
-
-var PropertyFilters_LogicalOperator *smithy.Schema
-
-var _PropertyFiltersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "PropertyFiltersList",
-}, smithy.ShapeTypeList, 1)
-var _PropertyFiltersList_member *smithy.Schema
-
-var RasterDataCollectionMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "RasterDataCollectionMetadata",
-}, smithy.ShapeTypeStructure, 7)
-var RasterDataCollectionMetadata_Name *smithy.Schema
-
-var RasterDataCollectionMetadata_Arn *smithy.Schema
-
-var RasterDataCollectionMetadata_Type *smithy.Schema
-
-var RasterDataCollectionMetadata_Description *smithy.Schema
-
-var RasterDataCollectionMetadata_DescriptionPageUrl *smithy.Schema
-
-var RasterDataCollectionMetadata_SupportedFilters *smithy.Schema
-
-var RasterDataCollectionMetadata_Tags *smithy.Schema
-
-var RasterDataCollectionQueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "RasterDataCollectionQueryInput",
-}, smithy.ShapeTypeStructure, 4)
-var RasterDataCollectionQueryInput_RasterDataCollectionArn *smithy.Schema
-
-var RasterDataCollectionQueryInput_TimeRangeFilter *smithy.Schema
-
-var RasterDataCollectionQueryInput_AreaOfInterest *smithy.Schema
-
-var RasterDataCollectionQueryInput_PropertyFilters *smithy.Schema
-
-var RasterDataCollectionQueryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "RasterDataCollectionQueryOutput",
-}, smithy.ShapeTypeStructure, 5)
-var RasterDataCollectionQueryOutput_RasterDataCollectionArn *smithy.Schema
-
-var RasterDataCollectionQueryOutput_RasterDataCollectionName *smithy.Schema
-
-var RasterDataCollectionQueryOutput_TimeRangeFilter *smithy.Schema
-
-var RasterDataCollectionQueryOutput_AreaOfInterest *smithy.Schema
-
-var RasterDataCollectionQueryOutput_PropertyFilters *smithy.Schema
-
-var RasterDataCollectionQueryWithBandFilterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "RasterDataCollectionQueryWithBandFilterInput",
-}, smithy.ShapeTypeStructure, 4)
-var RasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter *smithy.Schema
-
-var RasterDataCollectionQueryWithBandFilterInput_AreaOfInterest *smithy.Schema
-
-var RasterDataCollectionQueryWithBandFilterInput_PropertyFilters *smithy.Schema
-
-var RasterDataCollectionQueryWithBandFilterInput_BandFilter *smithy.Schema
-
-var ResamplingConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ResamplingConfigInput",
-}, smithy.ShapeTypeStructure, 3)
-var ResamplingConfigInput_OutputResolution *smithy.Schema
-
-var ResamplingConfigInput_AlgorithmName *smithy.Schema
-
-var ResamplingConfigInput_TargetBands *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ReverseGeocodingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ReverseGeocodingConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ReverseGeocodingConfig_YAttributeName *smithy.Schema
-
-var ReverseGeocodingConfig_XAttributeName *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceId *smithy.Schema
-
-var _SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeString, 0)
-
-var StackConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StackConfigInput",
-}, smithy.ShapeTypeStructure, 2)
-var StackConfigInput_OutputResolution *smithy.Schema
-
-var StackConfigInput_TargetBands *smithy.Schema
-
-var _StringListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StringListInput",
-}, smithy.ShapeTypeList, 1)
-var _StringListInput_member *smithy.Schema
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TargetOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TargetOptions",
-}, smithy.ShapeTypeString, 0)
-
-var _TemporalStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TemporalStatistics",
-}, smithy.ShapeTypeString, 0)
-
-var TemporalStatisticsConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TemporalStatisticsConfigInput",
-}, smithy.ShapeTypeStructure, 3)
-var TemporalStatisticsConfigInput_GroupBy *smithy.Schema
-
-var TemporalStatisticsConfigInput_Statistics *smithy.Schema
-
-var TemporalStatisticsConfigInput_TargetBands *smithy.Schema
-
-var _TemporalStatisticsListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TemporalStatisticsListInput",
-}, smithy.ShapeTypeList, 1)
-var _TemporalStatisticsListInput_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_ResourceId *smithy.Schema
-
-var TimeRangeFilterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TimeRangeFilterInput",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var TimeRangeFilterInput_StartTime *smithy.Schema
-
-var TimeRangeFilterInput_EndTime *smithy.Schema
-
-var TimeRangeFilterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TimeRangeFilterOutput",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var TimeRangeFilterOutput_StartTime *smithy.Schema
-
-var TimeRangeFilterOutput_EndTime *smithy.Schema
-
-var _Unit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "Unit",
-}, smithy.ShapeTypeString, 0)
-
-var UserDefined = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "UserDefined",
-}, smithy.ShapeTypeStructure, 2)
-var UserDefined_Value *smithy.Schema
-
-var UserDefined_Unit *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_ResourceId *smithy.Schema
-
-var _VectorEnrichmentJobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobArn",
-}, smithy.ShapeTypeString, 0)
-
-var VectorEnrichmentJobConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobConfig",
-}, smithy.ShapeTypeUnion, 2)
-var VectorEnrichmentJobConfig_ReverseGeocodingConfig *smithy.Schema
-
-var VectorEnrichmentJobConfig_MapMatchingConfig *smithy.Schema
-
-var VectorEnrichmentJobDataSourceConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobDataSourceConfigInput",
-}, smithy.ShapeTypeUnion, 1)
-var VectorEnrichmentJobDataSourceConfigInput_S3Data *smithy.Schema
-
-var _VectorEnrichmentJobDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobDocumentType",
-}, smithy.ShapeTypeString, 0)
-
-var VectorEnrichmentJobErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobErrorDetails",
-}, smithy.ShapeTypeStructure, 2)
-var VectorEnrichmentJobErrorDetails_ErrorType *smithy.Schema
-
-var VectorEnrichmentJobErrorDetails_ErrorMessage *smithy.Schema
-
-var _VectorEnrichmentJobErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var VectorEnrichmentJobExportErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobExportErrorDetails",
-}, smithy.ShapeTypeStructure, 2)
-var VectorEnrichmentJobExportErrorDetails_Type *smithy.Schema
-
-var VectorEnrichmentJobExportErrorDetails_Message *smithy.Schema
-
-var _VectorEnrichmentJobExportErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobExportErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var _VectorEnrichmentJobExportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobExportStatus",
-}, smithy.ShapeTypeString, 0)
-
-var VectorEnrichmentJobInputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobInputConfig",
-}, smithy.ShapeTypeStructure, 2)
-var VectorEnrichmentJobInputConfig_DocumentType *smithy.Schema
-
-var VectorEnrichmentJobInputConfig_DataSourceConfig *smithy.Schema
-
-var _VectorEnrichmentJobList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobList",
-}, smithy.ShapeTypeList, 1)
-var _VectorEnrichmentJobList_member *smithy.Schema
-
-var VectorEnrichmentJobS3Data = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobS3Data",
-}, smithy.ShapeTypeStructure, 2)
-var VectorEnrichmentJobS3Data_S3Uri *smithy.Schema
-
-var VectorEnrichmentJobS3Data_KmsKeyId *smithy.Schema
-
-var _VectorEnrichmentJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _VectorEnrichmentJobType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "VectorEnrichmentJobType",
-}, smithy.ShapeTypeString, 0)
-
-var ViewOffNadirInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ViewOffNadirInput",
-}, smithy.ShapeTypeStructure, 2)
-var ViewOffNadirInput_LowerBound *smithy.Schema
-
-var ViewOffNadirInput_UpperBound *smithy.Schema
-
-var ViewSunAzimuthInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ViewSunAzimuthInput",
-}, smithy.ShapeTypeStructure, 2)
-var ViewSunAzimuthInput_LowerBound *smithy.Schema
-
-var ViewSunAzimuthInput_UpperBound *smithy.Schema
-
-var ViewSunElevationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ViewSunElevationInput",
-}, smithy.ShapeTypeStructure, 2)
-var ViewSunElevationInput_LowerBound *smithy.Schema
-
-var ViewSunElevationInput_UpperBound *smithy.Schema
-
-var _ZonalStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ZonalStatistics",
-}, smithy.ShapeTypeString, 0)
-
-var ZonalStatisticsConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ZonalStatisticsConfigInput",
-}, smithy.ShapeTypeStructure, 4)
-var ZonalStatisticsConfigInput_ZoneS3Path *smithy.Schema
-
-var ZonalStatisticsConfigInput_Statistics *smithy.Schema
-
-var ZonalStatisticsConfigInput_TargetBands *smithy.Schema
-
-var ZonalStatisticsConfigInput_ZoneS3PathKmsKeyId *smithy.Schema
-
-var _ZonalStatisticsListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ZonalStatisticsListInput",
-}, smithy.ShapeTypeList, 1)
-var _ZonalStatisticsListInput_member *smithy.Schema
-
-var DeleteEarthObservationJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DeleteEarthObservationJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEarthObservationJobInput_Arn *smithy.Schema
-
-var DeleteEarthObservationJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DeleteEarthObservationJobOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteVectorEnrichmentJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DeleteVectorEnrichmentJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVectorEnrichmentJobInput_Arn *smithy.Schema
-
-var DeleteVectorEnrichmentJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "DeleteVectorEnrichmentJobOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ExportEarthObservationJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportEarthObservationJobInput",
-}, smithy.ShapeTypeStructure, 5)
-var ExportEarthObservationJobInput_Arn *smithy.Schema
-
-var ExportEarthObservationJobInput_ClientToken *smithy.Schema
-
-var ExportEarthObservationJobInput_ExecutionRoleArn *smithy.Schema
-
-var ExportEarthObservationJobInput_OutputConfig *smithy.Schema
-
-var ExportEarthObservationJobInput_ExportSourceImages *smithy.Schema
-
-var ExportEarthObservationJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportEarthObservationJobOutput",
-}, smithy.ShapeTypeStructure, 6)
-var ExportEarthObservationJobOutput_Arn *smithy.Schema
-
-var ExportEarthObservationJobOutput_CreationTime *smithy.Schema
-
-var ExportEarthObservationJobOutput_ExportStatus *smithy.Schema
-
-var ExportEarthObservationJobOutput_ExecutionRoleArn *smithy.Schema
-
-var ExportEarthObservationJobOutput_OutputConfig *smithy.Schema
-
-var ExportEarthObservationJobOutput_ExportSourceImages *smithy.Schema
-
-var ExportVectorEnrichmentJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportVectorEnrichmentJobInput",
-}, smithy.ShapeTypeStructure, 4)
-var ExportVectorEnrichmentJobInput_Arn *smithy.Schema
-
-var ExportVectorEnrichmentJobInput_ClientToken *smithy.Schema
-
-var ExportVectorEnrichmentJobInput_ExecutionRoleArn *smithy.Schema
-
-var ExportVectorEnrichmentJobInput_OutputConfig *smithy.Schema
-
-var ExportVectorEnrichmentJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ExportVectorEnrichmentJobOutput",
-}, smithy.ShapeTypeStructure, 5)
-var ExportVectorEnrichmentJobOutput_Arn *smithy.Schema
-
-var ExportVectorEnrichmentJobOutput_CreationTime *smithy.Schema
-
-var ExportVectorEnrichmentJobOutput_ExecutionRoleArn *smithy.Schema
-
-var ExportVectorEnrichmentJobOutput_ExportStatus *smithy.Schema
-
-var ExportVectorEnrichmentJobOutput_OutputConfig *smithy.Schema
-
-var GetEarthObservationJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetEarthObservationJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEarthObservationJobInput_Arn *smithy.Schema
-
-var GetEarthObservationJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetEarthObservationJobOutput",
-}, smithy.ShapeTypeStructure, 14)
-var GetEarthObservationJobOutput_Arn *smithy.Schema
-
-var GetEarthObservationJobOutput_Name *smithy.Schema
-
-var GetEarthObservationJobOutput_CreationTime *smithy.Schema
-
-var GetEarthObservationJobOutput_DurationInSeconds *smithy.Schema
-
-var GetEarthObservationJobOutput_Status *smithy.Schema
-
-var GetEarthObservationJobOutput_KmsKeyId *smithy.Schema
-
-var GetEarthObservationJobOutput_InputConfig *smithy.Schema
-
-var GetEarthObservationJobOutput_JobConfig *smithy.Schema
-
-var GetEarthObservationJobOutput_OutputBands *smithy.Schema
-
-var GetEarthObservationJobOutput_ExecutionRoleArn *smithy.Schema
-
-var GetEarthObservationJobOutput_ErrorDetails *smithy.Schema
-
-var GetEarthObservationJobOutput_ExportStatus *smithy.Schema
-
-var GetEarthObservationJobOutput_ExportErrorDetails *smithy.Schema
-
-var GetEarthObservationJobOutput_Tags *smithy.Schema
-
-var GetRasterDataCollectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetRasterDataCollectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetRasterDataCollectionInput_Arn *smithy.Schema
-
-var GetRasterDataCollectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetRasterDataCollectionOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetRasterDataCollectionOutput_Name *smithy.Schema
-
-var GetRasterDataCollectionOutput_Arn *smithy.Schema
-
-var GetRasterDataCollectionOutput_Type *smithy.Schema
-
-var GetRasterDataCollectionOutput_Description *smithy.Schema
-
-var GetRasterDataCollectionOutput_DescriptionPageUrl *smithy.Schema
-
-var GetRasterDataCollectionOutput_SupportedFilters *smithy.Schema
-
-var GetRasterDataCollectionOutput_ImageSourceBands *smithy.Schema
-
-var GetRasterDataCollectionOutput_Tags *smithy.Schema
-
-var GetTileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetTileInput",
-}, smithy.ShapeTypeStructure, 12)
-var GetTileInput_x *smithy.Schema
-
-var GetTileInput_y *smithy.Schema
-
-var GetTileInput_z *smithy.Schema
-
-var GetTileInput_ImageAssets *smithy.Schema
-
-var GetTileInput_Target *smithy.Schema
-
-var GetTileInput_Arn *smithy.Schema
-
-var GetTileInput_ImageMask *smithy.Schema
-
-var GetTileInput_OutputFormat *smithy.Schema
-
-var GetTileInput_TimeRangeFilter *smithy.Schema
-
-var GetTileInput_PropertyFilters *smithy.Schema
-
-var GetTileInput_OutputDataType *smithy.Schema
-
-var GetTileInput_ExecutionRoleArn *smithy.Schema
-
-var GetTileOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetTileOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTileOutput_BinaryFile *smithy.Schema
-
-var GetVectorEnrichmentJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetVectorEnrichmentJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetVectorEnrichmentJobInput_Arn *smithy.Schema
-
-var GetVectorEnrichmentJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "GetVectorEnrichmentJobOutput",
-}, smithy.ShapeTypeStructure, 14)
-var GetVectorEnrichmentJobOutput_Arn *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_Type *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_Name *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_CreationTime *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_DurationInSeconds *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_Status *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_KmsKeyId *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_InputConfig *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_JobConfig *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_ExecutionRoleArn *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_ErrorDetails *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_ExportStatus *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_ExportErrorDetails *smithy.Schema
-
-var GetVectorEnrichmentJobOutput_Tags *smithy.Schema
-
-var ListEarthObservationJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListEarthObservationJobInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListEarthObservationJobInput_StatusEquals *smithy.Schema
-
-var ListEarthObservationJobInput_SortOrder *smithy.Schema
-
-var ListEarthObservationJobInput_SortBy *smithy.Schema
-
-var ListEarthObservationJobInput_NextToken *smithy.Schema
-
-var ListEarthObservationJobInput_MaxResults *smithy.Schema
-
-var ListEarthObservationJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListEarthObservationJobOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEarthObservationJobOutput_EarthObservationJobSummaries *smithy.Schema
-
-var ListEarthObservationJobOutput_NextToken *smithy.Schema
-
-var ListRasterDataCollectionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListRasterDataCollectionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRasterDataCollectionsInput_NextToken *smithy.Schema
-
-var ListRasterDataCollectionsInput_MaxResults *smithy.Schema
-
-var ListRasterDataCollectionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListRasterDataCollectionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRasterDataCollectionsOutput_RasterDataCollectionSummaries *smithy.Schema
-
-var ListRasterDataCollectionsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListVectorEnrichmentJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListVectorEnrichmentJobInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListVectorEnrichmentJobInput_StatusEquals *smithy.Schema
-
-var ListVectorEnrichmentJobInput_SortOrder *smithy.Schema
-
-var ListVectorEnrichmentJobInput_SortBy *smithy.Schema
-
-var ListVectorEnrichmentJobInput_NextToken *smithy.Schema
-
-var ListVectorEnrichmentJobInput_MaxResults *smithy.Schema
-
-var ListVectorEnrichmentJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "ListVectorEnrichmentJobOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries *smithy.Schema
-
-var ListVectorEnrichmentJobOutput_NextToken *smithy.Schema
-
-var SearchRasterDataCollectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "SearchRasterDataCollectionInput",
-}, smithy.ShapeTypeStructure, 3)
-var SearchRasterDataCollectionInput_Arn *smithy.Schema
-
-var SearchRasterDataCollectionInput_RasterDataCollectionQuery *smithy.Schema
-
-var SearchRasterDataCollectionInput_NextToken *smithy.Schema
-
-var SearchRasterDataCollectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "SearchRasterDataCollectionOutput",
-}, smithy.ShapeTypeStructure, 3)
-var SearchRasterDataCollectionOutput_ApproximateResultCount *smithy.Schema
-
-var SearchRasterDataCollectionOutput_NextToken *smithy.Schema
-
-var SearchRasterDataCollectionOutput_Items *smithy.Schema
-
-var StartEarthObservationJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StartEarthObservationJobInput",
-}, smithy.ShapeTypeStructure, 7)
-var StartEarthObservationJobInput_Name *smithy.Schema
-
-var StartEarthObservationJobInput_ClientToken *smithy.Schema
-
-var StartEarthObservationJobInput_KmsKeyId *smithy.Schema
-
-var StartEarthObservationJobInput_InputConfig *smithy.Schema
-
-var StartEarthObservationJobInput_JobConfig *smithy.Schema
-
-var StartEarthObservationJobInput_ExecutionRoleArn *smithy.Schema
-
-var StartEarthObservationJobInput_Tags *smithy.Schema
-
-var StartEarthObservationJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StartEarthObservationJobOutput",
-}, smithy.ShapeTypeStructure, 10)
-var StartEarthObservationJobOutput_Name *smithy.Schema
-
-var StartEarthObservationJobOutput_Arn *smithy.Schema
-
-var StartEarthObservationJobOutput_CreationTime *smithy.Schema
-
-var StartEarthObservationJobOutput_DurationInSeconds *smithy.Schema
-
-var StartEarthObservationJobOutput_Status *smithy.Schema
-
-var StartEarthObservationJobOutput_KmsKeyId *smithy.Schema
-
-var StartEarthObservationJobOutput_InputConfig *smithy.Schema
-
-var StartEarthObservationJobOutput_JobConfig *smithy.Schema
-
-var StartEarthObservationJobOutput_ExecutionRoleArn *smithy.Schema
-
-var StartEarthObservationJobOutput_Tags *smithy.Schema
-
-var StartVectorEnrichmentJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StartVectorEnrichmentJobInput",
-}, smithy.ShapeTypeStructure, 7)
-var StartVectorEnrichmentJobInput_Name *smithy.Schema
-
-var StartVectorEnrichmentJobInput_ClientToken *smithy.Schema
-
-var StartVectorEnrichmentJobInput_KmsKeyId *smithy.Schema
-
-var StartVectorEnrichmentJobInput_InputConfig *smithy.Schema
-
-var StartVectorEnrichmentJobInput_JobConfig *smithy.Schema
-
-var StartVectorEnrichmentJobInput_ExecutionRoleArn *smithy.Schema
-
-var StartVectorEnrichmentJobInput_Tags *smithy.Schema
-
-var StartVectorEnrichmentJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StartVectorEnrichmentJobOutput",
-}, smithy.ShapeTypeStructure, 11)
-var StartVectorEnrichmentJobOutput_Name *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_Arn *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_Type *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_CreationTime *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_DurationInSeconds *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_Status *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_KmsKeyId *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_InputConfig *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_JobConfig *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_ExecutionRoleArn *smithy.Schema
-
-var StartVectorEnrichmentJobOutput_Tags *smithy.Schema
-
-var StopEarthObservationJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StopEarthObservationJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopEarthObservationJobInput_Arn *smithy.Schema
-
-var StopEarthObservationJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StopEarthObservationJobOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopVectorEnrichmentJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StopVectorEnrichmentJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopVectorEnrichmentJobInput_Arn *smithy.Schema
-
-var StopVectorEnrichmentJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "StopVectorEnrichmentJobOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakergeospatial",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	_Position_member = _Position.AddMember("member", smithyprelude.Double)
-
-	_LinearRing_member = _LinearRing.AddMember("member", _Position)
-
-	_LinearRings_member = _LinearRings.AddMember("member", _LinearRing)
-
-	PolygonGeometryInput_Coordinates = PolygonGeometryInput.AddMember("Coordinates", _LinearRings)
-
-	_LinearRingsList_member = _LinearRingsList.AddMember("member", _LinearRings)
-
-	MultiPolygonGeometryInput_Coordinates = MultiPolygonGeometryInput.AddMember("Coordinates", _LinearRingsList)
-
-	AreaOfInterestGeometry_PolygonGeometry = AreaOfInterestGeometry.AddMember("PolygonGeometry", PolygonGeometryInput)
-
-	AreaOfInterestGeometry_MultiPolygonGeometry = AreaOfInterestGeometry.AddMember("MultiPolygonGeometry", MultiPolygonGeometryInput)
-
-	AreaOfInterest_AreaOfInterestGeometry = AreaOfInterest.AddMember("AreaOfInterestGeometry", AreaOfInterestGeometry)
-
-	AssetValue_Href = AssetValue.AddMember("Href", smithyprelude.String)
-
-	_AssetsMap_key = _AssetsMap.AddMember("key", smithyprelude.String)
-
-	_AssetsMap_value = _AssetsMap.AddMember("value", AssetValue)
-
-	_StringListInput_member = _StringListInput.AddMember("member", smithyprelude.String)
-
-	Operation_Name = Operation.AddMember("Name", smithyprelude.String)
-
-	Operation_Equation = Operation.AddMember("Equation", smithyprelude.String)
-
-	Operation_OutputType = Operation.AddMember("OutputType", _OutputType)
-
-	_OperationsListInput_member = _OperationsListInput.AddMember("member", Operation)
-
-	CustomIndicesInput_Operations = CustomIndicesInput.AddMember("Operations", _OperationsListInput)
-
-	BandMathConfigInput_PredefinedIndices = BandMathConfigInput.AddMember("PredefinedIndices", _StringListInput)
-
-	BandMathConfigInput_CustomIndices = BandMathConfigInput.AddMember("CustomIndices", CustomIndicesInput)
-
-	CloudRemovalConfigInput_AlgorithmName = CloudRemovalConfigInput.AddMember("AlgorithmName", _AlgorithmNameCloudRemoval)
-
-	CloudRemovalConfigInput_InterpolationValue = CloudRemovalConfigInput.AddMember("InterpolationValue", smithyprelude.String)
-
-	CloudRemovalConfigInput_TargetBands = CloudRemovalConfigInput.AddMember("TargetBands", _StringListInput)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ConflictException_ResourceId = ConflictException.AddMember("ResourceId", smithyprelude.String)
-
-	Filter_Name = Filter.AddMember("Name", smithyprelude.String)
-
-	Filter_Type = Filter.AddMember("Type", smithyprelude.String)
-
-	Filter_Minimum = Filter.AddMember("Minimum", smithyprelude.Float)
-
-	Filter_Maximum = Filter.AddMember("Maximum", smithyprelude.Float)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	_Tags_key = _Tags.AddMember("key", smithyprelude.String)
-
-	_Tags_value = _Tags.AddMember("value", smithyprelude.String)
-
-	RasterDataCollectionMetadata_Name = RasterDataCollectionMetadata.AddMember("Name", smithyprelude.String)
-
-	RasterDataCollectionMetadata_Arn = RasterDataCollectionMetadata.AddMember("Arn", _DataCollectionArn)
-
-	RasterDataCollectionMetadata_Type = RasterDataCollectionMetadata.AddMember("Type", _DataCollectionType)
-
-	RasterDataCollectionMetadata_Description = RasterDataCollectionMetadata.AddMember("Description", smithyprelude.String)
-
-	RasterDataCollectionMetadata_DescriptionPageUrl = RasterDataCollectionMetadata.AddMember("DescriptionPageUrl", smithyprelude.String)
-
-	RasterDataCollectionMetadata_SupportedFilters = RasterDataCollectionMetadata.AddMember("SupportedFilters", _FilterList)
-
-	RasterDataCollectionMetadata_Tags = RasterDataCollectionMetadata.AddMember("Tags", _Tags)
-
-	_DataCollectionsList_member = _DataCollectionsList.AddMember("member", RasterDataCollectionMetadata)
-
-	EarthObservationJobErrorDetails_Type = EarthObservationJobErrorDetails.AddMember("Type", _EarthObservationJobErrorType)
-
-	EarthObservationJobErrorDetails_Message = EarthObservationJobErrorDetails.AddMember("Message", smithyprelude.String)
-
-	ListEarthObservationJobOutputConfig_Arn = ListEarthObservationJobOutputConfig.AddMember("Arn", smithyprelude.String)
-
-	ListEarthObservationJobOutputConfig_Name = ListEarthObservationJobOutputConfig.AddMember("Name", smithyprelude.String)
-
-	ListEarthObservationJobOutputConfig_CreationTime = ListEarthObservationJobOutputConfig.AddMember("CreationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ListEarthObservationJobOutputConfig_DurationInSeconds = ListEarthObservationJobOutputConfig.AddMember("DurationInSeconds", smithyprelude.Integer)
-
-	ListEarthObservationJobOutputConfig_Status = ListEarthObservationJobOutputConfig.AddMember("Status", _EarthObservationJobStatus)
-
-	ListEarthObservationJobOutputConfig_OperationType = ListEarthObservationJobOutputConfig.AddMember("OperationType", smithyprelude.String)
-
-	ListEarthObservationJobOutputConfig_Tags = ListEarthObservationJobOutputConfig.AddMember("Tags", _Tags)
-
-	_EarthObservationJobList_member = _EarthObservationJobList.AddMember("member", ListEarthObservationJobOutputConfig)
-
-	OutputBand_BandName = OutputBand.AddMember("BandName", smithyprelude.String)
-
-	OutputBand_OutputDataType = OutputBand.AddMember("OutputDataType", _OutputType)
-
-	_EarthObservationJobOutputBands_member = _EarthObservationJobOutputBands.AddMember("member", OutputBand)
-
-	EoCloudCoverInput_LowerBound = EoCloudCoverInput.AddMember("LowerBound", smithyprelude.Float)
-
-	EoCloudCoverInput_UpperBound = EoCloudCoverInput.AddMember("UpperBound", smithyprelude.Float)
-
-	ExportErrorDetailsOutput_Type = ExportErrorDetailsOutput.AddMember("Type", _ExportErrorType)
-
-	ExportErrorDetailsOutput_Message = ExportErrorDetailsOutput.AddMember("Message", smithyprelude.String)
-
-	ExportErrorDetails_ExportResults = ExportErrorDetails.AddMember("ExportResults", ExportErrorDetailsOutput)
-
-	ExportErrorDetails_ExportSourceImages = ExportErrorDetails.AddMember("ExportSourceImages", ExportErrorDetailsOutput)
-
-	ExportS3DataInput_S3Uri = ExportS3DataInput.AddMember("S3Uri", _S3Uri)
-
-	ExportS3DataInput_KmsKeyId = ExportS3DataInput.AddMember("KmsKeyId", _KmsKey)
-
-	VectorEnrichmentJobS3Data_S3Uri = VectorEnrichmentJobS3Data.AddMember("S3Uri", _S3Uri)
-
-	VectorEnrichmentJobS3Data_KmsKeyId = VectorEnrichmentJobS3Data.AddMember("KmsKeyId", _KmsKey)
-
-	ExportVectorEnrichmentJobOutputConfig_S3Data = ExportVectorEnrichmentJobOutputConfig.AddMember("S3Data", VectorEnrichmentJobS3Data)
-
-	Geometry_Type = Geometry.AddMember("Type", smithyprelude.String)
-
-	Geometry_Coordinates = Geometry.AddMember("Coordinates", _LinearRings)
-
-	GeoMosaicConfigInput_AlgorithmName = GeoMosaicConfigInput.AddMember("AlgorithmName", _AlgorithmNameGeoMosaic)
-
-	GeoMosaicConfigInput_TargetBands = GeoMosaicConfigInput.AddMember("TargetBands", _StringListInput)
-
-	_ImageSourceBandList_member = _ImageSourceBandList.AddMember("member", smithyprelude.String)
-
-	TimeRangeFilterInput_StartTime = TimeRangeFilterInput.AddMember("StartTime", smithyprelude.Timestamp)
-
-	TimeRangeFilterInput_EndTime = TimeRangeFilterInput.AddMember("EndTime", smithyprelude.Timestamp)
-
-	ViewOffNadirInput_LowerBound = ViewOffNadirInput.AddMember("LowerBound", smithyprelude.Float)
-
-	ViewOffNadirInput_UpperBound = ViewOffNadirInput.AddMember("UpperBound", smithyprelude.Float)
-
-	ViewSunAzimuthInput_LowerBound = ViewSunAzimuthInput.AddMember("LowerBound", smithyprelude.Float)
-
-	ViewSunAzimuthInput_UpperBound = ViewSunAzimuthInput.AddMember("UpperBound", smithyprelude.Float)
-
-	ViewSunElevationInput_LowerBound = ViewSunElevationInput.AddMember("LowerBound", smithyprelude.Float)
-
-	ViewSunElevationInput_UpperBound = ViewSunElevationInput.AddMember("UpperBound", smithyprelude.Float)
-
-	PlatformInput_Value = PlatformInput.AddMember("Value", smithyprelude.String)
-
-	PlatformInput_ComparisonOperator = PlatformInput.AddMember("ComparisonOperator", _ComparisonOperator)
-
-	LandsatCloudCoverLandInput_LowerBound = LandsatCloudCoverLandInput.AddMember("LowerBound", smithyprelude.Float)
-
-	LandsatCloudCoverLandInput_UpperBound = LandsatCloudCoverLandInput.AddMember("UpperBound", smithyprelude.Float)
-
-	Property_EoCloudCover = Property.AddMember("EoCloudCover", EoCloudCoverInput)
-
-	Property_ViewOffNadir = Property.AddMember("ViewOffNadir", ViewOffNadirInput)
-
-	Property_ViewSunAzimuth = Property.AddMember("ViewSunAzimuth", ViewSunAzimuthInput)
-
-	Property_ViewSunElevation = Property.AddMember("ViewSunElevation", ViewSunElevationInput)
-
-	Property_Platform = Property.AddMember("Platform", PlatformInput)
-
-	Property_LandsatCloudCoverLand = Property.AddMember("LandsatCloudCoverLand", LandsatCloudCoverLandInput)
-
-	PropertyFilter_Property = PropertyFilter.AddMember("Property", Property)
-
-	_PropertyFiltersList_member = _PropertyFiltersList.AddMember("member", PropertyFilter)
-
-	PropertyFilters_Properties = PropertyFilters.AddMember("Properties", _PropertyFiltersList)
-
-	PropertyFilters_LogicalOperator = PropertyFilters.AddMember("LogicalOperator", _LogicalOperator)
-
-	RasterDataCollectionQueryInput_RasterDataCollectionArn = RasterDataCollectionQueryInput.AddMember("RasterDataCollectionArn", _DataCollectionArn)
-
-	RasterDataCollectionQueryInput_TimeRangeFilter = RasterDataCollectionQueryInput.AddMember("TimeRangeFilter", TimeRangeFilterInput)
-
-	RasterDataCollectionQueryInput_AreaOfInterest = RasterDataCollectionQueryInput.AddMember("AreaOfInterest", AreaOfInterest)
-
-	RasterDataCollectionQueryInput_PropertyFilters = RasterDataCollectionQueryInput.AddMember("PropertyFilters", PropertyFilters)
-
-	InputConfigInput_PreviousEarthObservationJobArn = InputConfigInput.AddMember("PreviousEarthObservationJobArn", _EarthObservationJobArn)
-
-	InputConfigInput_RasterDataCollectionQuery = InputConfigInput.AddMember("RasterDataCollectionQuery", RasterDataCollectionQueryInput)
-
-	TimeRangeFilterOutput_StartTime = TimeRangeFilterOutput.AddMember("StartTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TimeRangeFilterOutput_EndTime = TimeRangeFilterOutput.AddMember("EndTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	RasterDataCollectionQueryOutput_RasterDataCollectionArn = RasterDataCollectionQueryOutput.AddMember("RasterDataCollectionArn", _DataCollectionArn)
-
-	RasterDataCollectionQueryOutput_RasterDataCollectionName = RasterDataCollectionQueryOutput.AddMember("RasterDataCollectionName", smithyprelude.String)
-
-	RasterDataCollectionQueryOutput_TimeRangeFilter = RasterDataCollectionQueryOutput.AddMember("TimeRangeFilter", TimeRangeFilterOutput)
-
-	RasterDataCollectionQueryOutput_AreaOfInterest = RasterDataCollectionQueryOutput.AddMember("AreaOfInterest", AreaOfInterest)
-
-	RasterDataCollectionQueryOutput_PropertyFilters = RasterDataCollectionQueryOutput.AddMember("PropertyFilters", PropertyFilters)
-
-	InputConfigOutput_PreviousEarthObservationJobArn = InputConfigOutput.AddMember("PreviousEarthObservationJobArn", _EarthObservationJobArn)
-
-	InputConfigOutput_RasterDataCollectionQuery = InputConfigOutput.AddMember("RasterDataCollectionQuery", RasterDataCollectionQueryOutput)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	InternalServerException_ResourceId = InternalServerException.AddMember("ResourceId", smithyprelude.String)
-
-	Properties_EoCloudCover = Properties.AddMember("EoCloudCover", smithyprelude.Float)
-
-	Properties_ViewOffNadir = Properties.AddMember("ViewOffNadir", smithyprelude.Float)
-
-	Properties_ViewSunAzimuth = Properties.AddMember("ViewSunAzimuth", smithyprelude.Float)
-
-	Properties_ViewSunElevation = Properties.AddMember("ViewSunElevation", smithyprelude.Float)
-
-	Properties_Platform = Properties.AddMember("Platform", smithyprelude.String)
-
-	Properties_LandsatCloudCoverLand = Properties.AddMember("LandsatCloudCoverLand", smithyprelude.Float)
-
-	ItemSource_Id = ItemSource.AddMember("Id", smithyprelude.String)
-
-	ItemSource_Geometry = ItemSource.AddMember("Geometry", Geometry)
-
-	ItemSource_Assets = ItemSource.AddMember("Assets", _AssetsMap)
-
-	ItemSource_DateTime = ItemSource.AddMember("DateTime", smithyprelude.Timestamp)
-
-	ItemSource_Properties = ItemSource.AddMember("Properties", Properties)
-
-	_ItemSourceList_member = _ItemSourceList.AddMember("member", ItemSource)
-
-	UserDefined_Value = UserDefined.AddMember("Value", smithyprelude.Float)
-
-	UserDefined_Unit = UserDefined.AddMember("Unit", _Unit)
-
-	OutputResolutionResamplingInput_UserDefined = OutputResolutionResamplingInput.AddMember("UserDefined", UserDefined)
-
-	ResamplingConfigInput_OutputResolution = ResamplingConfigInput.AddMember("OutputResolution", OutputResolutionResamplingInput)
-
-	ResamplingConfigInput_AlgorithmName = ResamplingConfigInput.AddMember("AlgorithmName", _AlgorithmNameResampling)
-
-	ResamplingConfigInput_TargetBands = ResamplingConfigInput.AddMember("TargetBands", _StringListInput)
-
-	_TemporalStatisticsListInput_member = _TemporalStatisticsListInput.AddMember("member", _TemporalStatistics)
-
-	TemporalStatisticsConfigInput_GroupBy = TemporalStatisticsConfigInput.AddMember("GroupBy", _GroupBy)
-
-	TemporalStatisticsConfigInput_Statistics = TemporalStatisticsConfigInput.AddMember("Statistics", _TemporalStatisticsListInput)
-
-	TemporalStatisticsConfigInput_TargetBands = TemporalStatisticsConfigInput.AddMember("TargetBands", _StringListInput)
-
-	_ZonalStatisticsListInput_member = _ZonalStatisticsListInput.AddMember("member", _ZonalStatistics)
-
-	ZonalStatisticsConfigInput_ZoneS3Path = ZonalStatisticsConfigInput.AddMember("ZoneS3Path", _S3Uri)
-
-	ZonalStatisticsConfigInput_Statistics = ZonalStatisticsConfigInput.AddMember("Statistics", _ZonalStatisticsListInput)
-
-	ZonalStatisticsConfigInput_TargetBands = ZonalStatisticsConfigInput.AddMember("TargetBands", _StringListInput)
-
-	ZonalStatisticsConfigInput_ZoneS3PathKmsKeyId = ZonalStatisticsConfigInput.AddMember("ZoneS3PathKmsKeyId", _KmsKey)
-
-	OutputResolutionStackInput_Predefined = OutputResolutionStackInput.AddMember("Predefined", _PredefinedResolution)
-
-	OutputResolutionStackInput_UserDefined = OutputResolutionStackInput.AddMember("UserDefined", UserDefined)
-
-	StackConfigInput_OutputResolution = StackConfigInput.AddMember("OutputResolution", OutputResolutionStackInput)
-
-	StackConfigInput_TargetBands = StackConfigInput.AddMember("TargetBands", _StringListInput)
-
-	JobConfigInput_BandMathConfig = JobConfigInput.AddMember("BandMathConfig", BandMathConfigInput)
-
-	JobConfigInput_ResamplingConfig = JobConfigInput.AddMember("ResamplingConfig", ResamplingConfigInput)
-
-	JobConfigInput_TemporalStatisticsConfig = JobConfigInput.AddMember("TemporalStatisticsConfig", TemporalStatisticsConfigInput)
-
-	JobConfigInput_CloudRemovalConfig = JobConfigInput.AddMember("CloudRemovalConfig", CloudRemovalConfigInput)
-
-	JobConfigInput_ZonalStatisticsConfig = JobConfigInput.AddMember("ZonalStatisticsConfig", ZonalStatisticsConfigInput)
-
-	JobConfigInput_GeoMosaicConfig = JobConfigInput.AddMember("GeoMosaicConfig", GeoMosaicConfigInput)
-
-	JobConfigInput_StackConfig = JobConfigInput.AddMember("StackConfig", StackConfigInput)
-
-	JobConfigInput_CloudMaskingConfig = JobConfigInput.AddMember("CloudMaskingConfig", CloudMaskingConfigInput)
-
-	JobConfigInput_LandCoverSegmentationConfig = JobConfigInput.AddMember("LandCoverSegmentationConfig", LandCoverSegmentationConfigInput)
-
-	ListVectorEnrichmentJobOutputConfig_Arn = ListVectorEnrichmentJobOutputConfig.AddMember("Arn", _VectorEnrichmentJobArn)
-
-	ListVectorEnrichmentJobOutputConfig_Name = ListVectorEnrichmentJobOutputConfig.AddMember("Name", smithyprelude.String)
-
-	ListVectorEnrichmentJobOutputConfig_Type = ListVectorEnrichmentJobOutputConfig.AddMember("Type", _VectorEnrichmentJobType)
-
-	ListVectorEnrichmentJobOutputConfig_CreationTime = ListVectorEnrichmentJobOutputConfig.AddMember("CreationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ListVectorEnrichmentJobOutputConfig_DurationInSeconds = ListVectorEnrichmentJobOutputConfig.AddMember("DurationInSeconds", smithyprelude.Integer)
-
-	ListVectorEnrichmentJobOutputConfig_Status = ListVectorEnrichmentJobOutputConfig.AddMember("Status", _VectorEnrichmentJobStatus)
-
-	ListVectorEnrichmentJobOutputConfig_Tags = ListVectorEnrichmentJobOutputConfig.AddMember("Tags", _Tags)
-
-	MapMatchingConfig_IdAttributeName = MapMatchingConfig.AddMember("IdAttributeName", smithyprelude.String)
-
-	MapMatchingConfig_YAttributeName = MapMatchingConfig.AddMember("YAttributeName", smithyprelude.String)
-
-	MapMatchingConfig_XAttributeName = MapMatchingConfig.AddMember("XAttributeName", smithyprelude.String)
-
-	MapMatchingConfig_TimestampAttributeName = MapMatchingConfig.AddMember("TimestampAttributeName", smithyprelude.String)
-
-	OutputConfigInput_S3Data = OutputConfigInput.AddMember("S3Data", ExportS3DataInput)
-
-	RasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter = RasterDataCollectionQueryWithBandFilterInput.AddMember("TimeRangeFilter", TimeRangeFilterInput)
-
-	RasterDataCollectionQueryWithBandFilterInput_AreaOfInterest = RasterDataCollectionQueryWithBandFilterInput.AddMember("AreaOfInterest", AreaOfInterest)
-
-	RasterDataCollectionQueryWithBandFilterInput_PropertyFilters = RasterDataCollectionQueryWithBandFilterInput.AddMember("PropertyFilters", PropertyFilters)
-
-	RasterDataCollectionQueryWithBandFilterInput_BandFilter = RasterDataCollectionQueryWithBandFilterInput.AddMember("BandFilter", _StringListInput)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", smithyprelude.String)
-
-	ReverseGeocodingConfig_YAttributeName = ReverseGeocodingConfig.AddMember("YAttributeName", smithyprelude.String)
-
-	ReverseGeocodingConfig_XAttributeName = ReverseGeocodingConfig.AddMember("XAttributeName", smithyprelude.String)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_ResourceId = ServiceQuotaExceededException.AddMember("ResourceId", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", smithyprelude.String)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ThrottlingException_ResourceId = ThrottlingException.AddMember("ResourceId", smithyprelude.String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_ResourceId = ValidationException.AddMember("ResourceId", smithyprelude.String)
-
-	VectorEnrichmentJobConfig_ReverseGeocodingConfig = VectorEnrichmentJobConfig.AddMember("ReverseGeocodingConfig", ReverseGeocodingConfig)
-
-	VectorEnrichmentJobConfig_MapMatchingConfig = VectorEnrichmentJobConfig.AddMember("MapMatchingConfig", MapMatchingConfig)
-
-	VectorEnrichmentJobDataSourceConfigInput_S3Data = VectorEnrichmentJobDataSourceConfigInput.AddMember("S3Data", VectorEnrichmentJobS3Data)
-
-	VectorEnrichmentJobErrorDetails_ErrorType = VectorEnrichmentJobErrorDetails.AddMember("ErrorType", _VectorEnrichmentJobErrorType)
-
-	VectorEnrichmentJobErrorDetails_ErrorMessage = VectorEnrichmentJobErrorDetails.AddMember("ErrorMessage", smithyprelude.String)
-
-	VectorEnrichmentJobExportErrorDetails_Type = VectorEnrichmentJobExportErrorDetails.AddMember("Type", _VectorEnrichmentJobExportErrorType)
-
-	VectorEnrichmentJobExportErrorDetails_Message = VectorEnrichmentJobExportErrorDetails.AddMember("Message", smithyprelude.String)
-
-	VectorEnrichmentJobInputConfig_DocumentType = VectorEnrichmentJobInputConfig.AddMember("DocumentType", _VectorEnrichmentJobDocumentType)
-
-	VectorEnrichmentJobInputConfig_DataSourceConfig = VectorEnrichmentJobInputConfig.AddMember("DataSourceConfig", VectorEnrichmentJobDataSourceConfigInput)
-
-	_VectorEnrichmentJobList_member = _VectorEnrichmentJobList.AddMember("member", ListVectorEnrichmentJobOutputConfig)
-
-	DeleteEarthObservationJobInput_Arn = DeleteEarthObservationJobInput.AddMember("Arn", _EarthObservationJobArn, &smithytraits.HTTPLabel{})
-
-	DeleteVectorEnrichmentJobInput_Arn = DeleteVectorEnrichmentJobInput.AddMember("Arn", _VectorEnrichmentJobArn, &smithytraits.HTTPLabel{})
-
-	ExportEarthObservationJobInput_Arn = ExportEarthObservationJobInput.AddMember("Arn", _EarthObservationJobArn)
-
-	ExportEarthObservationJobInput_ClientToken = ExportEarthObservationJobInput.AddMember("ClientToken", smithyprelude.String)
-
-	ExportEarthObservationJobInput_ExecutionRoleArn = ExportEarthObservationJobInput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	ExportEarthObservationJobInput_OutputConfig = ExportEarthObservationJobInput.AddMember("OutputConfig", OutputConfigInput)
-
-	ExportEarthObservationJobInput_ExportSourceImages = ExportEarthObservationJobInput.AddMember("ExportSourceImages", smithyprelude.Boolean)
-
-	ExportEarthObservationJobOutput_Arn = ExportEarthObservationJobOutput.AddMember("Arn", _EarthObservationJobArn)
-
-	ExportEarthObservationJobOutput_CreationTime = ExportEarthObservationJobOutput.AddMember("CreationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExportEarthObservationJobOutput_ExportStatus = ExportEarthObservationJobOutput.AddMember("ExportStatus", _EarthObservationJobExportStatus)
-
-	ExportEarthObservationJobOutput_ExecutionRoleArn = ExportEarthObservationJobOutput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	ExportEarthObservationJobOutput_OutputConfig = ExportEarthObservationJobOutput.AddMember("OutputConfig", OutputConfigInput)
-
-	ExportEarthObservationJobOutput_ExportSourceImages = ExportEarthObservationJobOutput.AddMember("ExportSourceImages", smithyprelude.Boolean)
-
-	ExportVectorEnrichmentJobInput_Arn = ExportVectorEnrichmentJobInput.AddMember("Arn", _VectorEnrichmentJobArn)
-
-	ExportVectorEnrichmentJobInput_ClientToken = ExportVectorEnrichmentJobInput.AddMember("ClientToken", smithyprelude.String)
-
-	ExportVectorEnrichmentJobInput_ExecutionRoleArn = ExportVectorEnrichmentJobInput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	ExportVectorEnrichmentJobInput_OutputConfig = ExportVectorEnrichmentJobInput.AddMember("OutputConfig", ExportVectorEnrichmentJobOutputConfig)
-
-	ExportVectorEnrichmentJobOutput_Arn = ExportVectorEnrichmentJobOutput.AddMember("Arn", _VectorEnrichmentJobArn)
-
-	ExportVectorEnrichmentJobOutput_CreationTime = ExportVectorEnrichmentJobOutput.AddMember("CreationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExportVectorEnrichmentJobOutput_ExecutionRoleArn = ExportVectorEnrichmentJobOutput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	ExportVectorEnrichmentJobOutput_ExportStatus = ExportVectorEnrichmentJobOutput.AddMember("ExportStatus", _VectorEnrichmentJobExportStatus)
-
-	ExportVectorEnrichmentJobOutput_OutputConfig = ExportVectorEnrichmentJobOutput.AddMember("OutputConfig", ExportVectorEnrichmentJobOutputConfig)
-
-	GetEarthObservationJobInput_Arn = GetEarthObservationJobInput.AddMember("Arn", _EarthObservationJobArn, &smithytraits.HTTPLabel{})
-
-	GetEarthObservationJobOutput_Arn = GetEarthObservationJobOutput.AddMember("Arn", smithyprelude.String)
-
-	GetEarthObservationJobOutput_Name = GetEarthObservationJobOutput.AddMember("Name", smithyprelude.String)
-
-	GetEarthObservationJobOutput_CreationTime = GetEarthObservationJobOutput.AddMember("CreationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetEarthObservationJobOutput_DurationInSeconds = GetEarthObservationJobOutput.AddMember("DurationInSeconds", smithyprelude.Integer)
-
-	GetEarthObservationJobOutput_Status = GetEarthObservationJobOutput.AddMember("Status", _EarthObservationJobStatus)
-
-	GetEarthObservationJobOutput_KmsKeyId = GetEarthObservationJobOutput.AddMember("KmsKeyId", _KmsKey)
-
-	GetEarthObservationJobOutput_InputConfig = GetEarthObservationJobOutput.AddMember("InputConfig", InputConfigOutput)
-
-	GetEarthObservationJobOutput_JobConfig = GetEarthObservationJobOutput.AddMember("JobConfig", JobConfigInput)
-
-	GetEarthObservationJobOutput_OutputBands = GetEarthObservationJobOutput.AddMember("OutputBands", _EarthObservationJobOutputBands)
-
-	GetEarthObservationJobOutput_ExecutionRoleArn = GetEarthObservationJobOutput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	GetEarthObservationJobOutput_ErrorDetails = GetEarthObservationJobOutput.AddMember("ErrorDetails", EarthObservationJobErrorDetails)
-
-	GetEarthObservationJobOutput_ExportStatus = GetEarthObservationJobOutput.AddMember("ExportStatus", _EarthObservationJobExportStatus)
-
-	GetEarthObservationJobOutput_ExportErrorDetails = GetEarthObservationJobOutput.AddMember("ExportErrorDetails", ExportErrorDetails)
-
-	GetEarthObservationJobOutput_Tags = GetEarthObservationJobOutput.AddMember("Tags", _Tags)
-
-	GetRasterDataCollectionInput_Arn = GetRasterDataCollectionInput.AddMember("Arn", _DataCollectionArn, &smithytraits.HTTPLabel{})
-
-	GetRasterDataCollectionOutput_Name = GetRasterDataCollectionOutput.AddMember("Name", smithyprelude.String)
-
-	GetRasterDataCollectionOutput_Arn = GetRasterDataCollectionOutput.AddMember("Arn", _DataCollectionArn)
-
-	GetRasterDataCollectionOutput_Type = GetRasterDataCollectionOutput.AddMember("Type", _DataCollectionType)
-
-	GetRasterDataCollectionOutput_Description = GetRasterDataCollectionOutput.AddMember("Description", smithyprelude.String)
-
-	GetRasterDataCollectionOutput_DescriptionPageUrl = GetRasterDataCollectionOutput.AddMember("DescriptionPageUrl", smithyprelude.String)
-
-	GetRasterDataCollectionOutput_SupportedFilters = GetRasterDataCollectionOutput.AddMember("SupportedFilters", _FilterList)
-
-	GetRasterDataCollectionOutput_ImageSourceBands = GetRasterDataCollectionOutput.AddMember("ImageSourceBands", _ImageSourceBandList)
-
-	GetRasterDataCollectionOutput_Tags = GetRasterDataCollectionOutput.AddMember("Tags", _Tags)
-
-	GetTileInput_x = GetTileInput.AddMember("x", smithyprelude.Integer, &smithytraits.HTTPLabel{})
-
-	GetTileInput_y = GetTileInput.AddMember("y", smithyprelude.Integer, &smithytraits.HTTPLabel{})
-
-	GetTileInput_z = GetTileInput.AddMember("z", smithyprelude.Integer, &smithytraits.HTTPLabel{})
-
-	GetTileInput_ImageAssets = GetTileInput.AddMember("ImageAssets", _StringListInput, &smithytraits.HTTPQuery{Name: "ImageAssets"})
-
-	GetTileInput_Target = GetTileInput.AddMember("Target", _TargetOptions, &smithytraits.HTTPQuery{Name: "Target"})
-
-	GetTileInput_Arn = GetTileInput.AddMember("Arn", _EarthObservationJobArn, &smithytraits.HTTPQuery{Name: "Arn"})
-
-	GetTileInput_ImageMask = GetTileInput.AddMember("ImageMask", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "ImageMask"})
-
-	GetTileInput_OutputFormat = GetTileInput.AddMember("OutputFormat", smithyprelude.String, &smithytraits.HTTPQuery{Name: "OutputFormat"})
-
-	GetTileInput_TimeRangeFilter = GetTileInput.AddMember("TimeRangeFilter", smithyprelude.String, &smithytraits.HTTPQuery{Name: "TimeRangeFilter"})
-
-	GetTileInput_PropertyFilters = GetTileInput.AddMember("PropertyFilters", smithyprelude.String, &smithytraits.HTTPQuery{Name: "PropertyFilters"})
-
-	GetTileInput_OutputDataType = GetTileInput.AddMember("OutputDataType", _OutputType, &smithytraits.HTTPQuery{Name: "OutputDataType"})
-
-	GetTileInput_ExecutionRoleArn = GetTileInput.AddMember("ExecutionRoleArn", _ExecutionRoleArn, &smithytraits.HTTPQuery{Name: "ExecutionRoleArn"})
-
-	GetTileOutput_BinaryFile = GetTileOutput.AddMember("BinaryFile", _BinaryFile, &smithytraits.HTTPPayload{})
-
-	GetVectorEnrichmentJobInput_Arn = GetVectorEnrichmentJobInput.AddMember("Arn", _VectorEnrichmentJobArn, &smithytraits.HTTPLabel{})
-
-	GetVectorEnrichmentJobOutput_Arn = GetVectorEnrichmentJobOutput.AddMember("Arn", smithyprelude.String)
-
-	GetVectorEnrichmentJobOutput_Type = GetVectorEnrichmentJobOutput.AddMember("Type", _VectorEnrichmentJobType)
-
-	GetVectorEnrichmentJobOutput_Name = GetVectorEnrichmentJobOutput.AddMember("Name", smithyprelude.String)
-
-	GetVectorEnrichmentJobOutput_CreationTime = GetVectorEnrichmentJobOutput.AddMember("CreationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetVectorEnrichmentJobOutput_DurationInSeconds = GetVectorEnrichmentJobOutput.AddMember("DurationInSeconds", smithyprelude.Integer)
-
-	GetVectorEnrichmentJobOutput_Status = GetVectorEnrichmentJobOutput.AddMember("Status", _VectorEnrichmentJobStatus)
-
-	GetVectorEnrichmentJobOutput_KmsKeyId = GetVectorEnrichmentJobOutput.AddMember("KmsKeyId", _KmsKey)
-
-	GetVectorEnrichmentJobOutput_InputConfig = GetVectorEnrichmentJobOutput.AddMember("InputConfig", VectorEnrichmentJobInputConfig)
-
-	GetVectorEnrichmentJobOutput_JobConfig = GetVectorEnrichmentJobOutput.AddMember("JobConfig", VectorEnrichmentJobConfig)
-
-	GetVectorEnrichmentJobOutput_ExecutionRoleArn = GetVectorEnrichmentJobOutput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	GetVectorEnrichmentJobOutput_ErrorDetails = GetVectorEnrichmentJobOutput.AddMember("ErrorDetails", VectorEnrichmentJobErrorDetails)
-
-	GetVectorEnrichmentJobOutput_ExportStatus = GetVectorEnrichmentJobOutput.AddMember("ExportStatus", _VectorEnrichmentJobExportStatus)
-
-	GetVectorEnrichmentJobOutput_ExportErrorDetails = GetVectorEnrichmentJobOutput.AddMember("ExportErrorDetails", VectorEnrichmentJobExportErrorDetails)
-
-	GetVectorEnrichmentJobOutput_Tags = GetVectorEnrichmentJobOutput.AddMember("Tags", _Tags)
-
-	ListEarthObservationJobInput_StatusEquals = ListEarthObservationJobInput.AddMember("StatusEquals", _EarthObservationJobStatus)
-
-	ListEarthObservationJobInput_SortOrder = ListEarthObservationJobInput.AddMember("SortOrder", _SortOrder)
-
-	ListEarthObservationJobInput_SortBy = ListEarthObservationJobInput.AddMember("SortBy", smithyprelude.String)
-
-	ListEarthObservationJobInput_NextToken = ListEarthObservationJobInput.AddMember("NextToken", _NextToken)
-
-	ListEarthObservationJobInput_MaxResults = ListEarthObservationJobInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListEarthObservationJobOutput_EarthObservationJobSummaries = ListEarthObservationJobOutput.AddMember("EarthObservationJobSummaries", _EarthObservationJobList)
-
-	ListEarthObservationJobOutput_NextToken = ListEarthObservationJobOutput.AddMember("NextToken", _NextToken)
-
-	ListRasterDataCollectionsInput_NextToken = ListRasterDataCollectionsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListRasterDataCollectionsInput_MaxResults = ListRasterDataCollectionsInput.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListRasterDataCollectionsOutput_RasterDataCollectionSummaries = ListRasterDataCollectionsOutput.AddMember("RasterDataCollectionSummaries", _DataCollectionsList)
-
-	ListRasterDataCollectionsOutput_NextToken = ListRasterDataCollectionsOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	ListVectorEnrichmentJobInput_StatusEquals = ListVectorEnrichmentJobInput.AddMember("StatusEquals", smithyprelude.String)
-
-	ListVectorEnrichmentJobInput_SortOrder = ListVectorEnrichmentJobInput.AddMember("SortOrder", _SortOrder)
-
-	ListVectorEnrichmentJobInput_SortBy = ListVectorEnrichmentJobInput.AddMember("SortBy", smithyprelude.String)
-
-	ListVectorEnrichmentJobInput_NextToken = ListVectorEnrichmentJobInput.AddMember("NextToken", _NextToken)
-
-	ListVectorEnrichmentJobInput_MaxResults = ListVectorEnrichmentJobInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries = ListVectorEnrichmentJobOutput.AddMember("VectorEnrichmentJobSummaries", _VectorEnrichmentJobList)
-
-	ListVectorEnrichmentJobOutput_NextToken = ListVectorEnrichmentJobOutput.AddMember("NextToken", _NextToken)
-
-	SearchRasterDataCollectionInput_Arn = SearchRasterDataCollectionInput.AddMember("Arn", _DataCollectionArn)
-
-	SearchRasterDataCollectionInput_RasterDataCollectionQuery = SearchRasterDataCollectionInput.AddMember("RasterDataCollectionQuery", RasterDataCollectionQueryWithBandFilterInput)
-
-	SearchRasterDataCollectionInput_NextToken = SearchRasterDataCollectionInput.AddMember("NextToken", _NextToken)
-
-	SearchRasterDataCollectionOutput_ApproximateResultCount = SearchRasterDataCollectionOutput.AddMember("ApproximateResultCount", smithyprelude.Integer)
-
-	SearchRasterDataCollectionOutput_NextToken = SearchRasterDataCollectionOutput.AddMember("NextToken", _NextToken)
-
-	SearchRasterDataCollectionOutput_Items = SearchRasterDataCollectionOutput.AddMember("Items", _ItemSourceList)
-
-	StartEarthObservationJobInput_Name = StartEarthObservationJobInput.AddMember("Name", smithyprelude.String)
-
-	StartEarthObservationJobInput_ClientToken = StartEarthObservationJobInput.AddMember("ClientToken", smithyprelude.String)
-
-	StartEarthObservationJobInput_KmsKeyId = StartEarthObservationJobInput.AddMember("KmsKeyId", _KmsKey)
-
-	StartEarthObservationJobInput_InputConfig = StartEarthObservationJobInput.AddMember("InputConfig", InputConfigInput)
-
-	StartEarthObservationJobInput_JobConfig = StartEarthObservationJobInput.AddMember("JobConfig", JobConfigInput)
-
-	StartEarthObservationJobInput_ExecutionRoleArn = StartEarthObservationJobInput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	StartEarthObservationJobInput_Tags = StartEarthObservationJobInput.AddMember("Tags", _Tags)
-
-	StartEarthObservationJobOutput_Name = StartEarthObservationJobOutput.AddMember("Name", smithyprelude.String)
-
-	StartEarthObservationJobOutput_Arn = StartEarthObservationJobOutput.AddMember("Arn", smithyprelude.String)
-
-	StartEarthObservationJobOutput_CreationTime = StartEarthObservationJobOutput.AddMember("CreationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	StartEarthObservationJobOutput_DurationInSeconds = StartEarthObservationJobOutput.AddMember("DurationInSeconds", smithyprelude.Integer)
-
-	StartEarthObservationJobOutput_Status = StartEarthObservationJobOutput.AddMember("Status", _EarthObservationJobStatus)
-
-	StartEarthObservationJobOutput_KmsKeyId = StartEarthObservationJobOutput.AddMember("KmsKeyId", _KmsKey)
-
-	StartEarthObservationJobOutput_InputConfig = StartEarthObservationJobOutput.AddMember("InputConfig", InputConfigOutput)
-
-	StartEarthObservationJobOutput_JobConfig = StartEarthObservationJobOutput.AddMember("JobConfig", JobConfigInput)
-
-	StartEarthObservationJobOutput_ExecutionRoleArn = StartEarthObservationJobOutput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	StartEarthObservationJobOutput_Tags = StartEarthObservationJobOutput.AddMember("Tags", _Tags)
-
-	StartVectorEnrichmentJobInput_Name = StartVectorEnrichmentJobInput.AddMember("Name", smithyprelude.String)
-
-	StartVectorEnrichmentJobInput_ClientToken = StartVectorEnrichmentJobInput.AddMember("ClientToken", smithyprelude.String)
-
-	StartVectorEnrichmentJobInput_KmsKeyId = StartVectorEnrichmentJobInput.AddMember("KmsKeyId", _KmsKey)
-
-	StartVectorEnrichmentJobInput_InputConfig = StartVectorEnrichmentJobInput.AddMember("InputConfig", VectorEnrichmentJobInputConfig)
-
-	StartVectorEnrichmentJobInput_JobConfig = StartVectorEnrichmentJobInput.AddMember("JobConfig", VectorEnrichmentJobConfig)
-
-	StartVectorEnrichmentJobInput_ExecutionRoleArn = StartVectorEnrichmentJobInput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	StartVectorEnrichmentJobInput_Tags = StartVectorEnrichmentJobInput.AddMember("Tags", _Tags)
-
-	StartVectorEnrichmentJobOutput_Name = StartVectorEnrichmentJobOutput.AddMember("Name", smithyprelude.String)
-
-	StartVectorEnrichmentJobOutput_Arn = StartVectorEnrichmentJobOutput.AddMember("Arn", _VectorEnrichmentJobArn)
-
-	StartVectorEnrichmentJobOutput_Type = StartVectorEnrichmentJobOutput.AddMember("Type", _VectorEnrichmentJobType)
-
-	StartVectorEnrichmentJobOutput_CreationTime = StartVectorEnrichmentJobOutput.AddMember("CreationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	StartVectorEnrichmentJobOutput_DurationInSeconds = StartVectorEnrichmentJobOutput.AddMember("DurationInSeconds", smithyprelude.Integer)
-
-	StartVectorEnrichmentJobOutput_Status = StartVectorEnrichmentJobOutput.AddMember("Status", _VectorEnrichmentJobStatus)
-
-	StartVectorEnrichmentJobOutput_KmsKeyId = StartVectorEnrichmentJobOutput.AddMember("KmsKeyId", _KmsKey)
-
-	StartVectorEnrichmentJobOutput_InputConfig = StartVectorEnrichmentJobOutput.AddMember("InputConfig", VectorEnrichmentJobInputConfig)
-
-	StartVectorEnrichmentJobOutput_JobConfig = StartVectorEnrichmentJobOutput.AddMember("JobConfig", VectorEnrichmentJobConfig)
-
-	StartVectorEnrichmentJobOutput_ExecutionRoleArn = StartVectorEnrichmentJobOutput.AddMember("ExecutionRoleArn", _ExecutionRoleArn)
-
-	StartVectorEnrichmentJobOutput_Tags = StartVectorEnrichmentJobOutput.AddMember("Tags", _Tags)
-
-	StopEarthObservationJobInput_Arn = StopEarthObservationJobInput.AddMember("Arn", _EarthObservationJobArn)
-
-	StopVectorEnrichmentJobInput_Arn = StopVectorEnrichmentJobInput.AddMember("Arn", _VectorEnrichmentJobArn)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
+const blob = "" +
+	"RasterDataCollectionQueryWithBandFilterInputVectorEnrichmentJobDataSourceConfigInputExportVectorEnri" +
+	"chmentJobOutputConfigVectorEnrichmentJobExportErrorDetailsListEarthObservationJobOutputConfigListVec" +
+	"torEnrichmentJobOutputConfigVectorEnrichmentJobExportErrorTypeLandCoverSegmentationConfigInputSearch" +
+	"RasterDataCollectionOutputDeleteEarthObservationJobOutputDeleteVectorEnrichmentJobOutputEarthObserva" +
+	"tionJobErrorDetailsEarthObservationJobExportStatusExportEarthObservationJobOutputListRasterDataColle" +
+	"ctionsOutputOutputResolutionResamplingInputRasterDataCollectionQueryOutputSearchRasterDataCollection" +
+	"InputVectorEnrichmentJobDocumentTypeVectorEnrichmentJobErrorDetailsVectorEnrichmentJobExportStatusDe" +
+	"leteEarthObservationJobInputDeleteVectorEnrichmentJobInputEarthObservationJobOutputBandsExportEarthO" +
+	"bservationJobInputExportVectorEnrichmentJobInputListRasterDataCollectionsInputPreviousEarthObservati" +
+	"onJobArnRasterDataCollectionQueryInputStartEarthObservationJobOutputStartVectorEnrichmentJobOutputVe" +
+	"ctorEnrichmentJobInputConfigGetRasterDataCollectionOutputRasterDataCollectionSummariesServiceQuotaEx" +
+	"ceededExceptionStartEarthObservationJobInputStartVectorEnrichmentJobInputStopEarthObservationJobOutp" +
+	"utStopVectorEnrichmentJobOutputTemporalStatisticsConfigInputEarthObservationJobErrorTypeEarthObserva" +
+	"tionJobSummariesGetEarthObservationJobOutputGetRasterDataCollectionInputGetVectorEnrichmentJobOutput" +
+	"ListEarthObservationJobInputListVectorEnrichmentJobInputRasterDataCollectionMetadataStopEarthObserva" +
+	"tionJobInputStopVectorEnrichmentJobInputVectorEnrichmentJobErrorTypeVectorEnrichmentJobSummariesGetE" +
+	"arthObservationJobInputGetVectorEnrichmentJobInputListTagsForResourceResponseTemporalStatisticsListI" +
+	"nputLandsatCloudCoverLandInputListTagsForResourceRequestOutputResolutionStackInputZonalStatisticsCon" +
+	"figInputAlgorithmNameCloudRemovalEarthObservationJobStatusMultiPolygonGeometryInputResourceNotFoundE" +
+	"xceptionVectorEnrichmentJobConfigVectorEnrichmentJobS3DataVectorEnrichmentJobStatusExportErrorDetail" +
+	"sOutputListEarthObservationJobsListVectorEnrichmentJobsRasterDataCollectionNameZonalStatisticsListIn" +
+	"putAlgorithmNameResamplingCloudMaskingConfigInputCloudRemovalConfigInputEarthObservationJobListInter" +
+	"nalServerExceptionRasterDataCollectionArnVectorEnrichmentJobListVectorEnrichmentJobTypeAlgorithmName" +
+	"GeoMosaicApproximateResultCountAreaOfInterestGeometryReverseGeocodingConfigTimestampAttributeNameVec" +
+	"torEnrichmentJobArnAccessDeniedExceptionResamplingConfigInputTimeRangeFilterOutputUntagResourceRespo" +
+	"nseViewSunElevationInputGeoMosaicConfigInputPredefinedResolutionTimeRangeFilterInputUntagResourceReq" +
+	"uestBandMathConfigInputDataCollectionsListImageSourceBandListOperationsListInputPropertyFiltersListS" +
+	"ageMakerGeospatialTagResourceResponseThrottlingExceptionValidationExceptionViewSunAzimuthInputCompar" +
+	"isonOperatorCustomIndicesInputDataCollectionTypeDescriptionPageUrlExportSourceImagesInterpolationVal" +
+	"ueTagResourceRequestZoneS3PathKmsKeyIdConflictExceptionDurationInSecondsEoCloudCoverInputExportS3Dat" +
+	"aInputInputConfigOutputMapMatchingConfigOutputConfigInputPredefinedIndicesViewOffNadirInputExecution" +
+	"RoleArnImageSourceBandsInputConfigInputStackConfigInputSupportedFiltersIdAttributeNameLinearRingsLis" +
+	"tLogicalOperatorStringListInputItemSourceListJobConfigInputOutputDataTypeXAttributeNameYAttributeNam" +
+	"eExportResultsGetTileOutputOperationTypePlatformInputTargetOptionsCreationTimeErrorMessageGetTileInp" +
+	"utOutputFormatStatusEqualsClientTokenCoordinatesImageAssetsResourceArnTargetBandsUserDefinedAssetVal" +
+	"ueBinaryFileFilterListLowerBoundMaxResultsOutputTypePropertiesResourceIdTagKeyListUpperBoundAssetsMa" +
+	"pImageMaskNextTokenSortOrderStartTimeBandNameDateTimeEquationPositionBooleanEndTimeGroupByIntegerMax" +
+	"imumMinimumTagKeysDoubleSortBymemberFloatItemsS3UrivalueHrefUnitkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.sagemakergeospatial", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 326, Target: 0, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 357, Target: 1, Traits: 1, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 450, Target: 2, Traits: 2, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 84, Target: 3, Traits: 3, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1316, Target: 4, Traits: 4, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1028, Target: 5, Traits: 5, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3314, Target: 6, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1372, Target: 7, Traits: 7, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2007, Target: 8, Traits: 8, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 481, Target: 9, Traits: 9, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1650, Target: 10, Traits: 10, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2031, Target: 11, Traits: 11, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 294, Target: 12, Traits: 12, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 938, Target: 13, Traits: 13, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 968, Target: 14, Traits: 14, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1173, Target: 15, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1202, Target: 16, Traits: 16, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2718, Target: 17, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2482, Target: 18, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2699, Target: 19, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2419, Target: 20, Traits: 20, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1808, Target: 22, Traits: 19, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2287, Target: 23, Traits: 19, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2103, Target: 24, Traits: 19, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2331, Target: 25, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2331, Target: 27, Traits: 19, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2331, Target: 27, Traits: 19, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1863, Target: 181, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1858, Target: 158, Traits: 19, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 905, Target: 30, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3592, Target: 31, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3764, Target: 502, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3751, Target: 34, Traits: 19, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3492, Target: 34, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3756, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2604, Target: 36, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3057, Target: 249, Traits: 19, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2812, Target: 49, Traits: 19, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3502, Target: 39, Traits: 21, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 2126, Target: 40, Traits: 19, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2149, Target: 41, Traits: 19, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1808, Target: 22, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2884, Target: 502, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3470, Target: 249, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2794, Target: 45, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2938, Target: 46, Traits: 22, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3562, Target: 502, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2812, Target: 49, Traits: 19, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2661, Target: 165, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2224, Target: 51, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2623, Target: 52, Traits: 19, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 207, Traits: 19, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2830, Target: 54, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 886, Target: 55, Traits: 19, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 388, Target: 56, Traits: 19, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 258, Target: 59, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1260, Target: 59, Traits: 19, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 419, Target: 60, Traits: 19, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2172, Target: 61, Traits: 19, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 136, Traits: 19, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 758, Target: 63, Traits: 19, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 167, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1833, Target: 65, Traits: 19, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2972, Target: 66, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3582, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 140, Target: 70, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3301, Target: 73, Traits: 19, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2866, Target: 73, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1983, Target: 73, Traits: 19, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 258, Target: 76, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 247, Target: 76, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2989, Target: 77, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3746, Target: 241, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 84, Target: 80, Traits: 19, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 301, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 33, Target: 82, Traits: 19, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 258, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3704, Target: 503, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3697, Target: 503, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3512, Target: 87, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 82, Traits: 19, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1870, Target: 89, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 258, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3437, Target: 132, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2524, Target: 92, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1808, Target: 23, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3470, Target: 249, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3683, Target: 95, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2642, Target: 96, Traits: 19, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 502, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3123, Target: 98, Traits: 19, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 878, Target: 55, Traits: 19, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 215, Traits: 19, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3006, Target: 101, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 878, Target: 55, Traits: 19, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 220, Traits: 19, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2195, Target: 104, Traits: 23, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3562, Target: 502, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3231, Target: 107, Traits: 19, StrLen: 10, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 502, Traits: 19, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 89, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3453, Target: 31, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3645, Target: 504, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3552, Target: 186, Traits: 19, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3231, Target: 113, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 107, Traits: 19, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3245, Target: 115, Traits: 19, StrLen: 14, Count: 9, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2604, Target: 36, Traits: 19, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2440, Target: 231, Traits: 19, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1231, Target: 258, Traits: 19, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2149, Target: 41, Traits: 19, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1782, Target: 316, Traits: 19, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2524, Target: 92, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3139, Target: 246, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2126, Target: 40, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 262, Target: 126, Traits: 19, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 262, Target: 126, Traits: 19, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1704, Target: 127, Traits: 19, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3582, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3186, Target: 130, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 183, Traits: 24, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3186, Target: 132, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 130, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3186, Target: 134, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 132, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 158, Target: 136, Traits: 19, StrLen: 35, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 502, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3366, Target: 504, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2955, Target: 505, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 444, Target: 65, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3327, Target: 502, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 193, Target: 144, Traits: 19, StrLen: 35, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 280, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 258, Target: 305, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3366, Target: 504, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2955, Target: 505, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 444, Target: 304, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3201, Target: 152, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3023, Target: 153, Traits: 19, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3171, Target: 502, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3287, Target: 502, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3273, Target: 502, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2375, Target: 502, Traits: 19, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1858, Target: 158, Traits: 19, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3437, Target: 134, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3610, Target: 160, Traits: 26, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2661, Target: 161, Traits: 19, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3653, Target: 502, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3542, Target: 177, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2661, Target: 165, Traits: 19, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 161, Traits: 19, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 777, Target: 167, Traits: 19, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3637, Target: 502, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3259, Target: 177, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3040, Target: 170, Traits: 19, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 77, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 512, Target: 172, Traits: 19, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3481, Target: 274, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1756, Target: 174, Traits: 19, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2544, Target: 185, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3481, Target: 274, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3542, Target: 177, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3340, Target: 178, Traits: 19, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2897, Target: 502, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2794, Target: 45, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1863, Target: 181, Traits: 19, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3437, Target: 132, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3661, Target: 183, Traits: 26, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 506, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2544, Target: 185, Traits: 19, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3552, Target: 186, Traits: 19, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2972, Target: 503, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3074, Target: 503, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2775, Target: 503, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2503, Target: 503, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3340, Target: 502, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 503, Traits: 19, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2680, Target: 193, Traits: 19, StrLen: 8, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2972, Target: 66, Traits: 19, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3074, Target: 306, Traits: 19, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2775, Target: 309, Traits: 19, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2503, Target: 312, Traits: 19, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3340, Target: 178, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1704, Target: 127, Traits: 19, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2680, Target: 200, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 193, Traits: 19, StrLen: 8, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2680, Target: 202, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3552, Target: 205, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3201, Target: 152, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2680, Target: 205, Traits: 19, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 200, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1456, Target: 207, Traits: 19, StrLen: 28, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 905, Target: 51, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 258, Target: 54, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2848, Target: 502, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2848, Target: 502, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3155, Target: 87, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 908, Target: 215, Traits: 19, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2218, Target: 51, Traits: 19, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2461, Target: 267, Traits: 24, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2331, Target: 25, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2680, Target: 202, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 543, Target: 220, Traits: 19, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2218, Target: 51, Traits: 19, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2055, Target: 502, Traits: 19, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2461, Target: 270, Traits: 24, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2331, Target: 25, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2680, Target: 202, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 226, Traits: 19, StrLen: 44, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2461, Target: 267, Traits: 24, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2331, Target: 25, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2680, Target: 202, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 29, Target: 249, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2440, Target: 231, Traits: 19, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 512, Target: 172, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1808, Target: 24, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3470, Target: 249, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1883, Target: 235, Traits: 27, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3562, Target: 502, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2353, Target: 238, Traits: 19, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3287, Target: 502, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3273, Target: 502, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3746, Target: 241, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1086, Target: 242, Traits: 28, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3562, Target: 502, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3619, Target: 245, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3139, Target: 246, Traits: 19, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 512, Target: 174, Traits: 19, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3470, Target: 249, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3216, Target: 249, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 502, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 251, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 502, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3764, Target: 502, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3751, Target: 502, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3353, Target: 256, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1231, Target: 257, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1231, Target: 258, Traits: 19, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3683, Target: 95, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1239, Target: 262, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3470, Target: 249, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1677, Target: 262, Traits: 19, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 257, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2737, Target: 264, Traits: 29, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3562, Target: 502, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2564, Target: 267, Traits: 26, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3628, Target: 504, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3676, Target: 504, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2461, Target: 270, Traits: 26, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3628, Target: 504, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3676, Target: 504, Traits: 25, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3760, Target: 273, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3481, Target: 274, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2897, Target: 503, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3760, Target: 273, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2756, Target: 277, Traits: 30, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3562, Target: 502, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2397, Target: 280, Traits: 19, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1908, Target: 281, Traits: 19, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2353, Target: 238, Traits: 19, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3023, Target: 153, Traits: 19, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 44, Target: 284, Traits: 19, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1952, Target: 301, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 605, Target: 286, Traits: 19, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 636, Target: 287, Traits: 19, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 253, Target: 290, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3378, Target: 502, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1540, Target: 290, Traits: 19, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 121, Target: 291, Traits: 19, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 258, Target: 294, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3383, Target: 502, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 228, Target: 294, Traits: 19, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 667, Target: 295, Traits: 19, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 998, Target: 296, Traits: 19, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 624, Target: 286, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 63, Target: 284, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2241, Target: 299, Traits: 19, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 144, Traits: 19, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1933, Target: 301, Traits: 19, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3746, Target: 241, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1958, Target: 304, Traits: 19, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2264, Target: 305, Traits: 19, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3074, Target: 306, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3582, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2775, Target: 309, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3582, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2503, Target: 312, Traits: 19, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3582, Target: 503, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 1782, Target: 315, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1782, Target: 316, Traits: 19, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2920, Target: 241, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1239, Target: 321, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3470, Target: 249, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2920, Target: 125, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2079, Target: 321, Traits: 19, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3730, Target: 315, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 698, Target: 323, Traits: 19, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 55, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 326, Target: 325, Traits: 19, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 728, Target: 326, Traits: 19, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 280, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 357, Target: 328, Traits: 19, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 788, Target: 329, Traits: 19, StrLen: 30, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 55, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3426, Target: 502, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 109, Target: 170, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2866, Target: 507, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 450, Target: 335, Traits: 19, StrLen: 31, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 55, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3366, Target: 504, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 438, Target: 60, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 109, Target: 170, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2866, Target: 507, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 818, Target: 342, Traits: 19, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 280, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3426, Target: 502, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 109, Target: 80, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 84, Target: 347, Traits: 19, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 280, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3366, Target: 504, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 438, Target: 295, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 109, Target: 80, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1596, Target: 353, Traits: 19, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 55, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1316, Target: 355, Traits: 19, StrLen: 28, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 502, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3366, Target: 504, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2955, Target: 505, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 444, Target: 65, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1017, Target: 101, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1924, Target: 115, Traits: 19, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 777, Target: 63, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 146, Target: 56, Traits: 19, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 438, Target: 60, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 140, Target: 70, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1344, Target: 370, Traits: 19, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 51, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1028, Target: 372, Traits: 19, StrLen: 29, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 905, Target: 51, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 258, Target: 54, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2848, Target: 502, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2848, Target: 502, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3155, Target: 87, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3107, Target: 96, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3390, Target: 381, Traits: 19, StrLen: 12, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 85, Target: 505, Traits: 31, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 24, Target: 505, Traits: 31, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2783, Target: 505, Traits: 31, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3448, Target: 249, Traits: 32, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3353, Target: 256, Traits: 33, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 905, Target: 55, Traits: 34, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3601, Target: 507, Traits: 35, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3402, Target: 502, Traits: 36, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2461, Target: 502, Traits: 37, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2680, Target: 502, Traits: 38, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3259, Target: 177, Traits: 39, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 40, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3314, Target: 394, Traits: 19, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3502, Target: 39, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1623, Target: 396, Traits: 19, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 280, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1372, Target: 398, Traits: 19, StrLen: 28, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 502, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 258, Target: 305, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3366, Target: 504, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2955, Target: 505, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 444, Target: 304, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1017, Target: 296, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1924, Target: 281, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 146, Target: 287, Traits: 19, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 438, Target: 295, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 140, Target: 291, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1400, Target: 413, Traits: 19, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 65, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3619, Target: 245, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3724, Target: 502, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3610, Target: 160, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3532, Target: 505, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 158, Target: 419, Traits: 19, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1288, Target: 61, Traits: 19, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3610, Target: 160, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 848, Target: 422, Traits: 19, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3610, Target: 160, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3532, Target: 505, Traits: 43, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 481, Target: 425, Traits: 19, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1057, Target: 52, Traits: 19, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3610, Target: 160, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1730, Target: 428, Traits: 19, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3459, Target: 30, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1650, Target: 430, Traits: 19, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1428, Target: 432, Traits: 19, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 502, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3619, Target: 245, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3724, Target: 502, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3610, Target: 160, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3532, Target: 505, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 193, Target: 438, Traits: 19, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1568, Target: 299, Traits: 19, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3610, Target: 160, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 574, Target: 441, Traits: 19, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 51, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 226, Traits: 19, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3610, Target: 160, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 294, Target: 445, Traits: 19, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2309, Target: 505, Traits: 19, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3610, Target: 160, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3741, Target: 113, Traits: 19, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1115, Target: 449, Traits: 19, StrLen: 29, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3426, Target: 502, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1017, Target: 98, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1924, Target: 115, Traits: 19, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 938, Target: 457, Traits: 19, StrLen: 30, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 905, Target: 502, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3366, Target: 504, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2955, Target: 505, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 444, Target: 65, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1017, Target: 101, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1924, Target: 115, Traits: 19, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1144, Target: 468, Traits: 19, StrLen: 29, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3426, Target: 502, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1017, Target: 296, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1924, Target: 281, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 968, Target: 476, Traits: 19, StrLen: 30, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 502, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 905, Target: 280, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 258, Target: 305, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3366, Target: 504, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2955, Target: 505, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 444, Target: 304, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2930, Target: 125, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1017, Target: 296, Traits: 19, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1924, Target: 281, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3091, Target: 69, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1484, Target: 488, Traits: 19, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 55, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1173, Target: 490, Traits: 19, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1512, Target: 491, Traits: 19, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 905, Target: 280, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1202, Target: 493, Traits: 19, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2902, Target: 494, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3459, Target: 30, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 253, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2718, Target: 497, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 498, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3459, Target: 30, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3711, Target: 251, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2482, Target: 501, Traits: 19, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3216, Target: 502, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 3736, Target: 503, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 2},
+		{StrOff: 2375, Target: 504, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 3690, Target: 505, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 3718, Target: 506, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 2},
+		{StrOff: 3669, Target: 507, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/earth-observation-jobs/{Arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/vector-enrichment-jobs/{Arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/export-earth-observation-job",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/export-vector-enrichment-jobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/earth-observation-jobs/{Arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/raster-data-collection/{Arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tile/{z}/{x}/{y}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/vector-enrichment-jobs/{Arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/list-earth-observation-jobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/raster-data-collections",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/list-vector-enrichment-jobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/search-raster-data-collection",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/earth-observation-jobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/vector-enrichment-jobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/earth-observation-jobs/stop",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/vector-enrichment-jobs/stop",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}, &smithytraits.MediaType{Type: "application/x-binary"}}, DirectMask: 0x60000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ImageAssets"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Target"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Arn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ImageMask"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "OutputFormat"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "TimeRangeFilter"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "PropertyFilters"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "OutputDataType"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ExecutionRoleArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}, &smithytraits.MediaType{Type: "application/x-binary"}}, DirectMask: 0x800},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [508]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+}
+
+var DeleteEarthObservationJob = &handles[0]
+
+var DeleteVectorEnrichmentJob = &handles[1]
+
+var ExportEarthObservationJob = &handles[2]
+
+var ExportVectorEnrichmentJob = &handles[3]
+
+var GetEarthObservationJob = &handles[4]
+
+var GetRasterDataCollection = &handles[5]
+
+var GetTile = &handles[6]
+
+var GetVectorEnrichmentJob = &handles[7]
+
+var ListEarthObservationJobs = &handles[8]
+
+var ListRasterDataCollections = &handles[9]
+
+var ListTagsForResource = &handles[10]
+
+var ListVectorEnrichmentJobs = &handles[11]
+
+var SearchRasterDataCollection = &handles[12]
+
+var StartEarthObservationJob = &handles[13]
+
+var StartVectorEnrichmentJob = &handles[14]
+
+var StopEarthObservationJob = &handles[15]
+
+var StopVectorEnrichmentJob = &handles[16]
+
+var TagResource = &handles[17]
+
+var UntagResource = &handles[18]
+
+var _SageMakerGeospatial = &handles[19]
+
+var AccessDeniedException = &handles[20]
+var AccessDeniedException_Message = &handles[21]
+
+var _AlgorithmNameCloudRemoval = &handles[22]
+
+var _AlgorithmNameGeoMosaic = &handles[23]
+
+var _AlgorithmNameResampling = &handles[24]
+
+var AreaOfInterest = &handles[25]
+var AreaOfInterest_AreaOfInterestGeometry = &handles[26]
+
+var AreaOfInterestGeometry = &handles[27]
+var AreaOfInterestGeometry_PolygonGeometry = &handles[28]
+var AreaOfInterestGeometry_MultiPolygonGeometry = &handles[29]
+
+var _Arn = &handles[30]
+
+var _AssetsMap = &handles[31]
+var _AssetsMap_key = &handles[32]
+var _AssetsMap_value = &handles[33]
+
+var AssetValue = &handles[34]
+var AssetValue_Href = &handles[35]
+
+var BandMathConfigInput = &handles[36]
+var BandMathConfigInput_PredefinedIndices = &handles[37]
+var BandMathConfigInput_CustomIndices = &handles[38]
+
+var _BinaryFile = &handles[39]
+
+var CloudMaskingConfigInput = &handles[40]
+
+var CloudRemovalConfigInput = &handles[41]
+var CloudRemovalConfigInput_AlgorithmName = &handles[42]
+var CloudRemovalConfigInput_InterpolationValue = &handles[43]
+var CloudRemovalConfigInput_TargetBands = &handles[44]
+
+var _ComparisonOperator = &handles[45]
+
+var ConflictException = &handles[46]
+var ConflictException_Message = &handles[47]
+var ConflictException_ResourceId = &handles[48]
+
+var CustomIndicesInput = &handles[49]
+var CustomIndicesInput_Operations = &handles[50]
+
+var _DataCollectionArn = &handles[51]
+
+var _DataCollectionsList = &handles[52]
+var _DataCollectionsList_member = &handles[53]
+
+var _DataCollectionType = &handles[54]
+
+var _EarthObservationJobArn = &handles[55]
+
+var EarthObservationJobErrorDetails = &handles[56]
+var EarthObservationJobErrorDetails_Type = &handles[57]
+var EarthObservationJobErrorDetails_Message = &handles[58]
+
+var _EarthObservationJobErrorType = &handles[59]
+
+var _EarthObservationJobExportStatus = &handles[60]
+
+var _EarthObservationJobList = &handles[61]
+var _EarthObservationJobList_member = &handles[62]
+
+var _EarthObservationJobOutputBands = &handles[63]
+var _EarthObservationJobOutputBands_member = &handles[64]
+
+var _EarthObservationJobStatus = &handles[65]
+
+var EoCloudCoverInput = &handles[66]
+var EoCloudCoverInput_LowerBound = &handles[67]
+var EoCloudCoverInput_UpperBound = &handles[68]
+
+var _ExecutionRoleArn = &handles[69]
+
+var ExportErrorDetails = &handles[70]
+var ExportErrorDetails_ExportResults = &handles[71]
+var ExportErrorDetails_ExportSourceImages = &handles[72]
+
+var ExportErrorDetailsOutput = &handles[73]
+var ExportErrorDetailsOutput_Type = &handles[74]
+var ExportErrorDetailsOutput_Message = &handles[75]
+
+var _ExportErrorType = &handles[76]
+
+var ExportS3DataInput = &handles[77]
+var ExportS3DataInput_S3Uri = &handles[78]
+var ExportS3DataInput_KmsKeyId = &handles[79]
+
+var ExportVectorEnrichmentJobOutputConfig = &handles[80]
+var ExportVectorEnrichmentJobOutputConfig_S3Data = &handles[81]
+
+var Filter = &handles[82]
+var Filter_Name = &handles[83]
+var Filter_Type = &handles[84]
+var Filter_Minimum = &handles[85]
+var Filter_Maximum = &handles[86]
+
+var _FilterList = &handles[87]
+var _FilterList_member = &handles[88]
+
+var Geometry = &handles[89]
+var Geometry_Type = &handles[90]
+var Geometry_Coordinates = &handles[91]
+
+var GeoMosaicConfigInput = &handles[92]
+var GeoMosaicConfigInput_AlgorithmName = &handles[93]
+var GeoMosaicConfigInput_TargetBands = &handles[94]
+
+var _GroupBy = &handles[95]
+
+var _ImageSourceBandList = &handles[96]
+var _ImageSourceBandList_member = &handles[97]
+
+var InputConfigInput = &handles[98]
+var InputConfigInput_PreviousEarthObservationJobArn = &handles[99]
+var InputConfigInput_RasterDataCollectionQuery = &handles[100]
+
+var InputConfigOutput = &handles[101]
+var InputConfigOutput_PreviousEarthObservationJobArn = &handles[102]
+var InputConfigOutput_RasterDataCollectionQuery = &handles[103]
+
+var InternalServerException = &handles[104]
+var InternalServerException_Message = &handles[105]
+var InternalServerException_ResourceId = &handles[106]
+
+var ItemSource = &handles[107]
+var ItemSource_Id = &handles[108]
+var ItemSource_Geometry = &handles[109]
+var ItemSource_Assets = &handles[110]
+var ItemSource_DateTime = &handles[111]
+var ItemSource_Properties = &handles[112]
+
+var _ItemSourceList = &handles[113]
+var _ItemSourceList_member = &handles[114]
+
+var JobConfigInput = &handles[115]
+var JobConfigInput_BandMathConfig = &handles[116]
+var JobConfigInput_ResamplingConfig = &handles[117]
+var JobConfigInput_TemporalStatisticsConfig = &handles[118]
+var JobConfigInput_CloudRemovalConfig = &handles[119]
+var JobConfigInput_ZonalStatisticsConfig = &handles[120]
+var JobConfigInput_GeoMosaicConfig = &handles[121]
+var JobConfigInput_StackConfig = &handles[122]
+var JobConfigInput_CloudMaskingConfig = &handles[123]
+var JobConfigInput_LandCoverSegmentationConfig = &handles[124]
+
+var _KmsKey = &handles[125]
+
+var LandCoverSegmentationConfigInput = &handles[126]
+
+var LandsatCloudCoverLandInput = &handles[127]
+var LandsatCloudCoverLandInput_LowerBound = &handles[128]
+var LandsatCloudCoverLandInput_UpperBound = &handles[129]
+
+var _LinearRing = &handles[130]
+var _LinearRing_member = &handles[131]
+
+var _LinearRings = &handles[132]
+var _LinearRings_member = &handles[133]
+
+var _LinearRingsList = &handles[134]
+var _LinearRingsList_member = &handles[135]
+
+var ListEarthObservationJobOutputConfig = &handles[136]
+var ListEarthObservationJobOutputConfig_Arn = &handles[137]
+var ListEarthObservationJobOutputConfig_Name = &handles[138]
+var ListEarthObservationJobOutputConfig_CreationTime = &handles[139]
+var ListEarthObservationJobOutputConfig_DurationInSeconds = &handles[140]
+var ListEarthObservationJobOutputConfig_Status = &handles[141]
+var ListEarthObservationJobOutputConfig_OperationType = &handles[142]
+var ListEarthObservationJobOutputConfig_Tags = &handles[143]
+
+var ListVectorEnrichmentJobOutputConfig = &handles[144]
+var ListVectorEnrichmentJobOutputConfig_Arn = &handles[145]
+var ListVectorEnrichmentJobOutputConfig_Name = &handles[146]
+var ListVectorEnrichmentJobOutputConfig_Type = &handles[147]
+var ListVectorEnrichmentJobOutputConfig_CreationTime = &handles[148]
+var ListVectorEnrichmentJobOutputConfig_DurationInSeconds = &handles[149]
+var ListVectorEnrichmentJobOutputConfig_Status = &handles[150]
+var ListVectorEnrichmentJobOutputConfig_Tags = &handles[151]
+
+var _LogicalOperator = &handles[152]
+
+var MapMatchingConfig = &handles[153]
+var MapMatchingConfig_IdAttributeName = &handles[154]
+var MapMatchingConfig_YAttributeName = &handles[155]
+var MapMatchingConfig_XAttributeName = &handles[156]
+var MapMatchingConfig_TimestampAttributeName = &handles[157]
+
+var MultiPolygonGeometryInput = &handles[158]
+var MultiPolygonGeometryInput_Coordinates = &handles[159]
+
+var _NextToken = &handles[160]
+
+var Operation = &handles[161]
+var Operation_Name = &handles[162]
+var Operation_Equation = &handles[163]
+var Operation_OutputType = &handles[164]
+
+var _OperationsListInput = &handles[165]
+var _OperationsListInput_member = &handles[166]
+
+var OutputBand = &handles[167]
+var OutputBand_BandName = &handles[168]
+var OutputBand_OutputDataType = &handles[169]
+
+var OutputConfigInput = &handles[170]
+var OutputConfigInput_S3Data = &handles[171]
+
+var OutputResolutionResamplingInput = &handles[172]
+var OutputResolutionResamplingInput_UserDefined = &handles[173]
+
+var OutputResolutionStackInput = &handles[174]
+var OutputResolutionStackInput_Predefined = &handles[175]
+var OutputResolutionStackInput_UserDefined = &handles[176]
+
+var _OutputType = &handles[177]
+
+var PlatformInput = &handles[178]
+var PlatformInput_Value = &handles[179]
+var PlatformInput_ComparisonOperator = &handles[180]
+
+var PolygonGeometryInput = &handles[181]
+var PolygonGeometryInput_Coordinates = &handles[182]
+
+var _Position = &handles[183]
+var _Position_member = &handles[184]
+
+var _PredefinedResolution = &handles[185]
+
+var Properties = &handles[186]
+var Properties_EoCloudCover = &handles[187]
+var Properties_ViewOffNadir = &handles[188]
+var Properties_ViewSunAzimuth = &handles[189]
+var Properties_ViewSunElevation = &handles[190]
+var Properties_Platform = &handles[191]
+var Properties_LandsatCloudCoverLand = &handles[192]
+
+var Property = &handles[193]
+var Property_EoCloudCover = &handles[194]
+var Property_ViewOffNadir = &handles[195]
+var Property_ViewSunAzimuth = &handles[196]
+var Property_ViewSunElevation = &handles[197]
+var Property_Platform = &handles[198]
+var Property_LandsatCloudCoverLand = &handles[199]
+
+var PropertyFilter = &handles[200]
+var PropertyFilter_Property = &handles[201]
+
+var PropertyFilters = &handles[202]
+var PropertyFilters_Properties = &handles[203]
+var PropertyFilters_LogicalOperator = &handles[204]
+
+var _PropertyFiltersList = &handles[205]
+var _PropertyFiltersList_member = &handles[206]
+
+var RasterDataCollectionMetadata = &handles[207]
+var RasterDataCollectionMetadata_Name = &handles[208]
+var RasterDataCollectionMetadata_Arn = &handles[209]
+var RasterDataCollectionMetadata_Type = &handles[210]
+var RasterDataCollectionMetadata_Description = &handles[211]
+var RasterDataCollectionMetadata_DescriptionPageUrl = &handles[212]
+var RasterDataCollectionMetadata_SupportedFilters = &handles[213]
+var RasterDataCollectionMetadata_Tags = &handles[214]
+
+var RasterDataCollectionQueryInput = &handles[215]
+var RasterDataCollectionQueryInput_RasterDataCollectionArn = &handles[216]
+var RasterDataCollectionQueryInput_TimeRangeFilter = &handles[217]
+var RasterDataCollectionQueryInput_AreaOfInterest = &handles[218]
+var RasterDataCollectionQueryInput_PropertyFilters = &handles[219]
+
+var RasterDataCollectionQueryOutput = &handles[220]
+var RasterDataCollectionQueryOutput_RasterDataCollectionArn = &handles[221]
+var RasterDataCollectionQueryOutput_RasterDataCollectionName = &handles[222]
+var RasterDataCollectionQueryOutput_TimeRangeFilter = &handles[223]
+var RasterDataCollectionQueryOutput_AreaOfInterest = &handles[224]
+var RasterDataCollectionQueryOutput_PropertyFilters = &handles[225]
+
+var RasterDataCollectionQueryWithBandFilterInput = &handles[226]
+var RasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter = &handles[227]
+var RasterDataCollectionQueryWithBandFilterInput_AreaOfInterest = &handles[228]
+var RasterDataCollectionQueryWithBandFilterInput_PropertyFilters = &handles[229]
+var RasterDataCollectionQueryWithBandFilterInput_BandFilter = &handles[230]
+
+var ResamplingConfigInput = &handles[231]
+var ResamplingConfigInput_OutputResolution = &handles[232]
+var ResamplingConfigInput_AlgorithmName = &handles[233]
+var ResamplingConfigInput_TargetBands = &handles[234]
+
+var ResourceNotFoundException = &handles[235]
+var ResourceNotFoundException_Message = &handles[236]
+var ResourceNotFoundException_ResourceId = &handles[237]
+
+var ReverseGeocodingConfig = &handles[238]
+var ReverseGeocodingConfig_YAttributeName = &handles[239]
+var ReverseGeocodingConfig_XAttributeName = &handles[240]
+
+var _S3Uri = &handles[241]
+
+var ServiceQuotaExceededException = &handles[242]
+var ServiceQuotaExceededException_Message = &handles[243]
+var ServiceQuotaExceededException_ResourceId = &handles[244]
+
+var _SortOrder = &handles[245]
+
+var StackConfigInput = &handles[246]
+var StackConfigInput_OutputResolution = &handles[247]
+var StackConfigInput_TargetBands = &handles[248]
+
+var _StringListInput = &handles[249]
+var _StringListInput_member = &handles[250]
+
+var _TagKeyList = &handles[251]
+var _TagKeyList_member = &handles[252]
+
+var _Tags = &handles[253]
+var _Tags_key = &handles[254]
+var _Tags_value = &handles[255]
+
+var _TargetOptions = &handles[256]
+
+var _TemporalStatistics = &handles[257]
+
+var TemporalStatisticsConfigInput = &handles[258]
+var TemporalStatisticsConfigInput_GroupBy = &handles[259]
+var TemporalStatisticsConfigInput_Statistics = &handles[260]
+var TemporalStatisticsConfigInput_TargetBands = &handles[261]
+
+var _TemporalStatisticsListInput = &handles[262]
+var _TemporalStatisticsListInput_member = &handles[263]
+
+var ThrottlingException = &handles[264]
+var ThrottlingException_Message = &handles[265]
+var ThrottlingException_ResourceId = &handles[266]
+
+var TimeRangeFilterInput = &handles[267]
+var TimeRangeFilterInput_StartTime = &handles[268]
+var TimeRangeFilterInput_EndTime = &handles[269]
+
+var TimeRangeFilterOutput = &handles[270]
+var TimeRangeFilterOutput_StartTime = &handles[271]
+var TimeRangeFilterOutput_EndTime = &handles[272]
+
+var _Unit = &handles[273]
+
+var UserDefined = &handles[274]
+var UserDefined_Value = &handles[275]
+var UserDefined_Unit = &handles[276]
+
+var ValidationException = &handles[277]
+var ValidationException_Message = &handles[278]
+var ValidationException_ResourceId = &handles[279]
+
+var _VectorEnrichmentJobArn = &handles[280]
+
+var VectorEnrichmentJobConfig = &handles[281]
+var VectorEnrichmentJobConfig_ReverseGeocodingConfig = &handles[282]
+var VectorEnrichmentJobConfig_MapMatchingConfig = &handles[283]
+
+var VectorEnrichmentJobDataSourceConfigInput = &handles[284]
+var VectorEnrichmentJobDataSourceConfigInput_S3Data = &handles[285]
+
+var _VectorEnrichmentJobDocumentType = &handles[286]
+
+var VectorEnrichmentJobErrorDetails = &handles[287]
+var VectorEnrichmentJobErrorDetails_ErrorType = &handles[288]
+var VectorEnrichmentJobErrorDetails_ErrorMessage = &handles[289]
+
+var _VectorEnrichmentJobErrorType = &handles[290]
+
+var VectorEnrichmentJobExportErrorDetails = &handles[291]
+var VectorEnrichmentJobExportErrorDetails_Type = &handles[292]
+var VectorEnrichmentJobExportErrorDetails_Message = &handles[293]
+
+var _VectorEnrichmentJobExportErrorType = &handles[294]
+
+var _VectorEnrichmentJobExportStatus = &handles[295]
+
+var VectorEnrichmentJobInputConfig = &handles[296]
+var VectorEnrichmentJobInputConfig_DocumentType = &handles[297]
+var VectorEnrichmentJobInputConfig_DataSourceConfig = &handles[298]
+
+var _VectorEnrichmentJobList = &handles[299]
+var _VectorEnrichmentJobList_member = &handles[300]
+
+var VectorEnrichmentJobS3Data = &handles[301]
+var VectorEnrichmentJobS3Data_S3Uri = &handles[302]
+var VectorEnrichmentJobS3Data_KmsKeyId = &handles[303]
+
+var _VectorEnrichmentJobStatus = &handles[304]
+
+var _VectorEnrichmentJobType = &handles[305]
+
+var ViewOffNadirInput = &handles[306]
+var ViewOffNadirInput_LowerBound = &handles[307]
+var ViewOffNadirInput_UpperBound = &handles[308]
+
+var ViewSunAzimuthInput = &handles[309]
+var ViewSunAzimuthInput_LowerBound = &handles[310]
+var ViewSunAzimuthInput_UpperBound = &handles[311]
+
+var ViewSunElevationInput = &handles[312]
+var ViewSunElevationInput_LowerBound = &handles[313]
+var ViewSunElevationInput_UpperBound = &handles[314]
+
+var _ZonalStatistics = &handles[315]
+
+var ZonalStatisticsConfigInput = &handles[316]
+var ZonalStatisticsConfigInput_ZoneS3Path = &handles[317]
+var ZonalStatisticsConfigInput_Statistics = &handles[318]
+var ZonalStatisticsConfigInput_TargetBands = &handles[319]
+var ZonalStatisticsConfigInput_ZoneS3PathKmsKeyId = &handles[320]
+
+var _ZonalStatisticsListInput = &handles[321]
+var _ZonalStatisticsListInput_member = &handles[322]
+
+var DeleteEarthObservationJobInput = &handles[323]
+var DeleteEarthObservationJobInput_Arn = &handles[324]
+
+var DeleteEarthObservationJobOutput = &handles[325]
+
+var DeleteVectorEnrichmentJobInput = &handles[326]
+var DeleteVectorEnrichmentJobInput_Arn = &handles[327]
+
+var DeleteVectorEnrichmentJobOutput = &handles[328]
+
+var ExportEarthObservationJobInput = &handles[329]
+var ExportEarthObservationJobInput_Arn = &handles[330]
+var ExportEarthObservationJobInput_ClientToken = &handles[331]
+var ExportEarthObservationJobInput_ExecutionRoleArn = &handles[332]
+var ExportEarthObservationJobInput_OutputConfig = &handles[333]
+var ExportEarthObservationJobInput_ExportSourceImages = &handles[334]
+
+var ExportEarthObservationJobOutput = &handles[335]
+var ExportEarthObservationJobOutput_Arn = &handles[336]
+var ExportEarthObservationJobOutput_CreationTime = &handles[337]
+var ExportEarthObservationJobOutput_ExportStatus = &handles[338]
+var ExportEarthObservationJobOutput_ExecutionRoleArn = &handles[339]
+var ExportEarthObservationJobOutput_OutputConfig = &handles[340]
+var ExportEarthObservationJobOutput_ExportSourceImages = &handles[341]
+
+var ExportVectorEnrichmentJobInput = &handles[342]
+var ExportVectorEnrichmentJobInput_Arn = &handles[343]
+var ExportVectorEnrichmentJobInput_ClientToken = &handles[344]
+var ExportVectorEnrichmentJobInput_ExecutionRoleArn = &handles[345]
+var ExportVectorEnrichmentJobInput_OutputConfig = &handles[346]
+
+var ExportVectorEnrichmentJobOutput = &handles[347]
+var ExportVectorEnrichmentJobOutput_Arn = &handles[348]
+var ExportVectorEnrichmentJobOutput_CreationTime = &handles[349]
+var ExportVectorEnrichmentJobOutput_ExecutionRoleArn = &handles[350]
+var ExportVectorEnrichmentJobOutput_ExportStatus = &handles[351]
+var ExportVectorEnrichmentJobOutput_OutputConfig = &handles[352]
+
+var GetEarthObservationJobInput = &handles[353]
+var GetEarthObservationJobInput_Arn = &handles[354]
+
+var GetEarthObservationJobOutput = &handles[355]
+var GetEarthObservationJobOutput_Arn = &handles[356]
+var GetEarthObservationJobOutput_Name = &handles[357]
+var GetEarthObservationJobOutput_CreationTime = &handles[358]
+var GetEarthObservationJobOutput_DurationInSeconds = &handles[359]
+var GetEarthObservationJobOutput_Status = &handles[360]
+var GetEarthObservationJobOutput_KmsKeyId = &handles[361]
+var GetEarthObservationJobOutput_InputConfig = &handles[362]
+var GetEarthObservationJobOutput_JobConfig = &handles[363]
+var GetEarthObservationJobOutput_OutputBands = &handles[364]
+var GetEarthObservationJobOutput_ExecutionRoleArn = &handles[365]
+var GetEarthObservationJobOutput_ErrorDetails = &handles[366]
+var GetEarthObservationJobOutput_ExportStatus = &handles[367]
+var GetEarthObservationJobOutput_ExportErrorDetails = &handles[368]
+var GetEarthObservationJobOutput_Tags = &handles[369]
+
+var GetRasterDataCollectionInput = &handles[370]
+var GetRasterDataCollectionInput_Arn = &handles[371]
+
+var GetRasterDataCollectionOutput = &handles[372]
+var GetRasterDataCollectionOutput_Name = &handles[373]
+var GetRasterDataCollectionOutput_Arn = &handles[374]
+var GetRasterDataCollectionOutput_Type = &handles[375]
+var GetRasterDataCollectionOutput_Description = &handles[376]
+var GetRasterDataCollectionOutput_DescriptionPageUrl = &handles[377]
+var GetRasterDataCollectionOutput_SupportedFilters = &handles[378]
+var GetRasterDataCollectionOutput_ImageSourceBands = &handles[379]
+var GetRasterDataCollectionOutput_Tags = &handles[380]
+
+var GetTileInput = &handles[381]
+var GetTileInput_x = &handles[382]
+var GetTileInput_y = &handles[383]
+var GetTileInput_z = &handles[384]
+var GetTileInput_ImageAssets = &handles[385]
+var GetTileInput_Target = &handles[386]
+var GetTileInput_Arn = &handles[387]
+var GetTileInput_ImageMask = &handles[388]
+var GetTileInput_OutputFormat = &handles[389]
+var GetTileInput_TimeRangeFilter = &handles[390]
+var GetTileInput_PropertyFilters = &handles[391]
+var GetTileInput_OutputDataType = &handles[392]
+var GetTileInput_ExecutionRoleArn = &handles[393]
+
+var GetTileOutput = &handles[394]
+var GetTileOutput_BinaryFile = &handles[395]
+
+var GetVectorEnrichmentJobInput = &handles[396]
+var GetVectorEnrichmentJobInput_Arn = &handles[397]
+
+var GetVectorEnrichmentJobOutput = &handles[398]
+var GetVectorEnrichmentJobOutput_Arn = &handles[399]
+var GetVectorEnrichmentJobOutput_Type = &handles[400]
+var GetVectorEnrichmentJobOutput_Name = &handles[401]
+var GetVectorEnrichmentJobOutput_CreationTime = &handles[402]
+var GetVectorEnrichmentJobOutput_DurationInSeconds = &handles[403]
+var GetVectorEnrichmentJobOutput_Status = &handles[404]
+var GetVectorEnrichmentJobOutput_KmsKeyId = &handles[405]
+var GetVectorEnrichmentJobOutput_InputConfig = &handles[406]
+var GetVectorEnrichmentJobOutput_JobConfig = &handles[407]
+var GetVectorEnrichmentJobOutput_ExecutionRoleArn = &handles[408]
+var GetVectorEnrichmentJobOutput_ErrorDetails = &handles[409]
+var GetVectorEnrichmentJobOutput_ExportStatus = &handles[410]
+var GetVectorEnrichmentJobOutput_ExportErrorDetails = &handles[411]
+var GetVectorEnrichmentJobOutput_Tags = &handles[412]
+
+var ListEarthObservationJobInput = &handles[413]
+var ListEarthObservationJobInput_StatusEquals = &handles[414]
+var ListEarthObservationJobInput_SortOrder = &handles[415]
+var ListEarthObservationJobInput_SortBy = &handles[416]
+var ListEarthObservationJobInput_NextToken = &handles[417]
+var ListEarthObservationJobInput_MaxResults = &handles[418]
+
+var ListEarthObservationJobOutput = &handles[419]
+var ListEarthObservationJobOutput_EarthObservationJobSummaries = &handles[420]
+var ListEarthObservationJobOutput_NextToken = &handles[421]
+
+var ListRasterDataCollectionsInput = &handles[422]
+var ListRasterDataCollectionsInput_NextToken = &handles[423]
+var ListRasterDataCollectionsInput_MaxResults = &handles[424]
+
+var ListRasterDataCollectionsOutput = &handles[425]
+var ListRasterDataCollectionsOutput_RasterDataCollectionSummaries = &handles[426]
+var ListRasterDataCollectionsOutput_NextToken = &handles[427]
+
+var ListTagsForResourceRequest = &handles[428]
+var ListTagsForResourceRequest_ResourceArn = &handles[429]
+
+var ListTagsForResourceResponse = &handles[430]
+var ListTagsForResourceResponse_Tags = &handles[431]
+
+var ListVectorEnrichmentJobInput = &handles[432]
+var ListVectorEnrichmentJobInput_StatusEquals = &handles[433]
+var ListVectorEnrichmentJobInput_SortOrder = &handles[434]
+var ListVectorEnrichmentJobInput_SortBy = &handles[435]
+var ListVectorEnrichmentJobInput_NextToken = &handles[436]
+var ListVectorEnrichmentJobInput_MaxResults = &handles[437]
+
+var ListVectorEnrichmentJobOutput = &handles[438]
+var ListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries = &handles[439]
+var ListVectorEnrichmentJobOutput_NextToken = &handles[440]
+
+var SearchRasterDataCollectionInput = &handles[441]
+var SearchRasterDataCollectionInput_Arn = &handles[442]
+var SearchRasterDataCollectionInput_RasterDataCollectionQuery = &handles[443]
+var SearchRasterDataCollectionInput_NextToken = &handles[444]
+
+var SearchRasterDataCollectionOutput = &handles[445]
+var SearchRasterDataCollectionOutput_ApproximateResultCount = &handles[446]
+var SearchRasterDataCollectionOutput_NextToken = &handles[447]
+var SearchRasterDataCollectionOutput_Items = &handles[448]
+
+var StartEarthObservationJobInput = &handles[449]
+var StartEarthObservationJobInput_Name = &handles[450]
+var StartEarthObservationJobInput_ClientToken = &handles[451]
+var StartEarthObservationJobInput_KmsKeyId = &handles[452]
+var StartEarthObservationJobInput_InputConfig = &handles[453]
+var StartEarthObservationJobInput_JobConfig = &handles[454]
+var StartEarthObservationJobInput_ExecutionRoleArn = &handles[455]
+var StartEarthObservationJobInput_Tags = &handles[456]
+
+var StartEarthObservationJobOutput = &handles[457]
+var StartEarthObservationJobOutput_Name = &handles[458]
+var StartEarthObservationJobOutput_Arn = &handles[459]
+var StartEarthObservationJobOutput_CreationTime = &handles[460]
+var StartEarthObservationJobOutput_DurationInSeconds = &handles[461]
+var StartEarthObservationJobOutput_Status = &handles[462]
+var StartEarthObservationJobOutput_KmsKeyId = &handles[463]
+var StartEarthObservationJobOutput_InputConfig = &handles[464]
+var StartEarthObservationJobOutput_JobConfig = &handles[465]
+var StartEarthObservationJobOutput_ExecutionRoleArn = &handles[466]
+var StartEarthObservationJobOutput_Tags = &handles[467]
+
+var StartVectorEnrichmentJobInput = &handles[468]
+var StartVectorEnrichmentJobInput_Name = &handles[469]
+var StartVectorEnrichmentJobInput_ClientToken = &handles[470]
+var StartVectorEnrichmentJobInput_KmsKeyId = &handles[471]
+var StartVectorEnrichmentJobInput_InputConfig = &handles[472]
+var StartVectorEnrichmentJobInput_JobConfig = &handles[473]
+var StartVectorEnrichmentJobInput_ExecutionRoleArn = &handles[474]
+var StartVectorEnrichmentJobInput_Tags = &handles[475]
+
+var StartVectorEnrichmentJobOutput = &handles[476]
+var StartVectorEnrichmentJobOutput_Name = &handles[477]
+var StartVectorEnrichmentJobOutput_Arn = &handles[478]
+var StartVectorEnrichmentJobOutput_Type = &handles[479]
+var StartVectorEnrichmentJobOutput_CreationTime = &handles[480]
+var StartVectorEnrichmentJobOutput_DurationInSeconds = &handles[481]
+var StartVectorEnrichmentJobOutput_Status = &handles[482]
+var StartVectorEnrichmentJobOutput_KmsKeyId = &handles[483]
+var StartVectorEnrichmentJobOutput_InputConfig = &handles[484]
+var StartVectorEnrichmentJobOutput_JobConfig = &handles[485]
+var StartVectorEnrichmentJobOutput_ExecutionRoleArn = &handles[486]
+var StartVectorEnrichmentJobOutput_Tags = &handles[487]
+
+var StopEarthObservationJobInput = &handles[488]
+var StopEarthObservationJobInput_Arn = &handles[489]
+
+var StopEarthObservationJobOutput = &handles[490]
+
+var StopVectorEnrichmentJobInput = &handles[491]
+var StopVectorEnrichmentJobInput_Arn = &handles[492]
+
+var StopVectorEnrichmentJobOutput = &handles[493]
+
+var TagResourceRequest = &handles[494]
+var TagResourceRequest_ResourceArn = &handles[495]
+var TagResourceRequest_Tags = &handles[496]
+
+var TagResourceResponse = &handles[497]
+
+var UntagResourceRequest = &handles[498]
+var UntagResourceRequest_ResourceArn = &handles[499]
+var UntagResourceRequest_TagKeys = &handles[500]
+
+var UntagResourceResponse = &handles[501]
+
+var SageMakerGeospatial = &smithy.ServiceSchema{Schema: &handles[19], Version: "2020-05-27"}

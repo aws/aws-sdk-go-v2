@@ -4,854 +4,735 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetClip = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetClip",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/getClip",
-	Code: 200})
-
-var GetDASHStreamingSessionURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetDASHStreamingSessionURL",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/getDASHStreamingSessionURL",
-	Code: 200})
-
-var GetHLSStreamingSessionURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetHLSStreamingSessionURL",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/getHLSStreamingSessionURL",
-	Code: 200})
-
-var GetImages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetImages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/getImages",
-	Code: 200})
-
-var GetMediaForFragmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetMediaForFragmentList",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/getMediaForFragmentList",
-	Code: 200})
-
-var ListFragments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ListFragments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/listFragments",
-	Code: 200})
-
-var _AWSAcuityReader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "AWSAcuityReader",
-}, smithy.ShapeTypeService, 0)
-
-var AWSAcuityReader = smithy.NewServiceSchema(_AWSAcuityReader, "2017-09-30")
-
-var ClientLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ClientLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ClientLimitExceededException_Message *smithy.Schema
-
-var ClipFragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ClipFragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var ClipFragmentSelector_FragmentSelectorType *smithy.Schema
-
-var ClipFragmentSelector_TimestampRange *smithy.Schema
-
-var ClipFragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ClipFragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var ClipFragmentSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var ClipFragmentSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var ClipTimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ClipTimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var ClipTimestampRange_StartTimestamp *smithy.Schema
-
-var ClipTimestampRange_EndTimestamp *smithy.Schema
-
-var ContainerFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ContainerFormat",
-}, smithy.ShapeTypeEnum, 2)
-var ContainerFormat_FRAGMENTED_MP4 *smithy.Schema
-
-var ContainerFormat_MPEG_TS *smithy.Schema
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var DASHDisplayFragmentNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHDisplayFragmentNumber",
-}, smithy.ShapeTypeEnum, 2)
-var DASHDisplayFragmentNumber_ALWAYS *smithy.Schema
-
-var DASHDisplayFragmentNumber_NEVER *smithy.Schema
-
-var DASHDisplayFragmentTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHDisplayFragmentTimestamp",
-}, smithy.ShapeTypeEnum, 2)
-var DASHDisplayFragmentTimestamp_ALWAYS *smithy.Schema
-
-var DASHDisplayFragmentTimestamp_NEVER *smithy.Schema
-
-var DASHFragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHFragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var DASHFragmentSelector_FragmentSelectorType *smithy.Schema
-
-var DASHFragmentSelector_TimestampRange *smithy.Schema
-
-var DASHFragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHFragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var DASHFragmentSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var DASHFragmentSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var _DASHMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHMaxResults",
-}, smithy.ShapeTypeLong, 0)
-
-var DASHPlaybackMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHPlaybackMode",
-}, smithy.ShapeTypeEnum, 3)
-var DASHPlaybackMode_LIVE *smithy.Schema
-
-var DASHPlaybackMode_LIVE_REPLAY *smithy.Schema
-
-var DASHPlaybackMode_ON_DEMAND *smithy.Schema
-
-var _DASHStreamingSessionURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHStreamingSessionURL",
-}, smithy.ShapeTypeString, 0)
-
-var DASHTimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHTimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var DASHTimestampRange_StartTimestamp *smithy.Schema
-
-var DASHTimestampRange_EndTimestamp *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Expires = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Expires",
-}, smithy.ShapeTypeInteger, 0)
-
-var Format = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Format",
-}, smithy.ShapeTypeEnum, 2)
-var Format_JPEG *smithy.Schema
-
-var Format_PNG *smithy.Schema
-
-var _FormatConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FormatConfig",
-}, smithy.ShapeTypeMap, 2)
-var _FormatConfig_key *smithy.Schema
-
-var _FormatConfig_value *smithy.Schema
-
-var FormatConfigKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FormatConfigKey",
-}, smithy.ShapeTypeEnum, 1)
-var FormatConfigKey_JPEGQuality *smithy.Schema
-
-var _FormatConfigValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FormatConfigValue",
-}, smithy.ShapeTypeString, 0)
-
-var Fragment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Fragment",
-}, smithy.ShapeTypeStructure, 5)
-var Fragment_FragmentNumber *smithy.Schema
-
-var Fragment_FragmentSizeInBytes *smithy.Schema
-
-var Fragment_ProducerTimestamp *smithy.Schema
-
-var Fragment_ServerTimestamp *smithy.Schema
-
-var Fragment_FragmentLengthInMilliseconds *smithy.Schema
-
-var _FragmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentList",
-}, smithy.ShapeTypeList, 1)
-var _FragmentList_member *smithy.Schema
-
-var _FragmentNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentNumberList",
-}, smithy.ShapeTypeList, 1)
-var _FragmentNumberList_member *smithy.Schema
-
-var _FragmentNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var FragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var FragmentSelector_FragmentSelectorType *smithy.Schema
-
-var FragmentSelector_TimestampRange *smithy.Schema
-
-var FragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var FragmentSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var FragmentSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var _GetImagesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetImagesMaxResults",
-}, smithy.ShapeTypeLong, 0)
-
-var _HeightPixels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HeightPixels",
-}, smithy.ShapeTypeInteger, 0)
-
-var HLSDiscontinuityMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSDiscontinuityMode",
-}, smithy.ShapeTypeEnum, 3)
-var HLSDiscontinuityMode_ALWAYS *smithy.Schema
-
-var HLSDiscontinuityMode_NEVER *smithy.Schema
-
-var HLSDiscontinuityMode_ON_DISCONTINUITY *smithy.Schema
-
-var HLSDisplayFragmentTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSDisplayFragmentTimestamp",
-}, smithy.ShapeTypeEnum, 2)
-var HLSDisplayFragmentTimestamp_ALWAYS *smithy.Schema
-
-var HLSDisplayFragmentTimestamp_NEVER *smithy.Schema
-
-var HLSFragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSFragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var HLSFragmentSelector_FragmentSelectorType *smithy.Schema
-
-var HLSFragmentSelector_TimestampRange *smithy.Schema
-
-var HLSFragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSFragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var HLSFragmentSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var HLSFragmentSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var _HLSMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSMaxResults",
-}, smithy.ShapeTypeLong, 0)
-
-var HLSPlaybackMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSPlaybackMode",
-}, smithy.ShapeTypeEnum, 3)
-var HLSPlaybackMode_LIVE *smithy.Schema
-
-var HLSPlaybackMode_LIVE_REPLAY *smithy.Schema
-
-var HLSPlaybackMode_ON_DEMAND *smithy.Schema
-
-var _HLSStreamingSessionURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSStreamingSessionURL",
-}, smithy.ShapeTypeString, 0)
-
-var HLSTimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSTimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var HLSTimestampRange_StartTimestamp *smithy.Schema
-
-var HLSTimestampRange_EndTimestamp *smithy.Schema
-
-var Image = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Image",
-}, smithy.ShapeTypeStructure, 3)
-var Image_TimeStamp *smithy.Schema
-
-var Image_Error *smithy.Schema
-
-var Image_ImageContent *smithy.Schema
-
-var _ImageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ImageContent",
-}, smithy.ShapeTypeString, 0)
-
-var ImageError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ImageError",
-}, smithy.ShapeTypeEnum, 2)
-var ImageError_NO_MEDIA *smithy.Schema
-
-var ImageError_MEDIA_ERROR *smithy.Schema
-
-var _Images = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Images",
-}, smithy.ShapeTypeList, 1)
-var _Images_member *smithy.Schema
-
-var ImageSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ImageSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var ImageSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var ImageSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidArgumentException_Message *smithy.Schema
-
-var InvalidCodecPrivateDataException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "InvalidCodecPrivateDataException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidCodecPrivateDataException_Message *smithy.Schema
-
-var InvalidMediaFrameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "InvalidMediaFrameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidMediaFrameException_Message *smithy.Schema
-
-var _ListFragmentsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ListFragmentsMaxResults",
-}, smithy.ShapeTypeLong, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var MissingCodecPrivateDataException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "MissingCodecPrivateDataException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MissingCodecPrivateDataException_Message *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoDataRetentionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "NoDataRetentionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NoDataRetentionException_Message *smithy.Schema
-
-var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var NotAuthorizedException_Message *smithy.Schema
-
-var _Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Payload",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _SamplingInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "SamplingInterval",
-}, smithy.ShapeTypeInteger, 0)
-
-var _StreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "StreamName",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "TimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var TimestampRange_StartTimestamp *smithy.Schema
-
-var TimestampRange_EndTimestamp *smithy.Schema
-
-var UnsupportedStreamMediaTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "UnsupportedStreamMediaTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedStreamMediaTypeException_Message *smithy.Schema
-
-var _WidthPixels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "WidthPixels",
-}, smithy.ShapeTypeInteger, 0)
-
-var GetClipInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetClipInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetClipInput_StreamName *smithy.Schema
-
-var GetClipInput_StreamARN *smithy.Schema
-
-var GetClipInput_ClipFragmentSelector *smithy.Schema
-
-var GetClipOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetClipOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetClipOutput_ContentType *smithy.Schema
-
-var GetClipOutput_Payload *smithy.Schema
-
-var GetDASHStreamingSessionURLInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetDASHStreamingSessionURLInput",
-}, smithy.ShapeTypeStructure, 8)
-var GetDASHStreamingSessionURLInput_StreamName *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_StreamARN *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_PlaybackMode *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_DisplayFragmentTimestamp *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_DisplayFragmentNumber *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_DASHFragmentSelector *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_Expires *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_MaxManifestFragmentResults *smithy.Schema
-
-var GetDASHStreamingSessionURLOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetDASHStreamingSessionURLOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDASHStreamingSessionURLOutput_DASHStreamingSessionURL *smithy.Schema
-
-var GetHLSStreamingSessionURLInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetHLSStreamingSessionURLInput",
-}, smithy.ShapeTypeStructure, 9)
-var GetHLSStreamingSessionURLInput_StreamName *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_StreamARN *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_PlaybackMode *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_HLSFragmentSelector *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_ContainerFormat *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_DiscontinuityMode *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_DisplayFragmentTimestamp *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_Expires *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults *smithy.Schema
-
-var GetHLSStreamingSessionURLOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetHLSStreamingSessionURLOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL *smithy.Schema
-
-var GetImagesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetImagesInput",
-}, smithy.ShapeTypeStructure, 12)
-var GetImagesInput_StreamName *smithy.Schema
-
-var GetImagesInput_StreamARN *smithy.Schema
-
-var GetImagesInput_ImageSelectorType *smithy.Schema
-
-var GetImagesInput_StartTimestamp *smithy.Schema
-
-var GetImagesInput_EndTimestamp *smithy.Schema
-
-var GetImagesInput_SamplingInterval *smithy.Schema
-
-var GetImagesInput_Format *smithy.Schema
-
-var GetImagesInput_FormatConfig *smithy.Schema
-
-var GetImagesInput_WidthPixels *smithy.Schema
-
-var GetImagesInput_HeightPixels *smithy.Schema
-
-var GetImagesInput_MaxResults *smithy.Schema
-
-var GetImagesInput_NextToken *smithy.Schema
-
-var GetImagesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetImagesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetImagesOutput_Images *smithy.Schema
-
-var GetImagesOutput_NextToken *smithy.Schema
-
-var GetMediaForFragmentListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetMediaForFragmentListInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMediaForFragmentListInput_StreamName *smithy.Schema
-
-var GetMediaForFragmentListInput_StreamARN *smithy.Schema
-
-var GetMediaForFragmentListInput_Fragments *smithy.Schema
-
-var GetMediaForFragmentListOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetMediaForFragmentListOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMediaForFragmentListOutput_ContentType *smithy.Schema
-
-var GetMediaForFragmentListOutput_Payload *smithy.Schema
-
-var ListFragmentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ListFragmentsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListFragmentsInput_StreamName *smithy.Schema
-
-var ListFragmentsInput_StreamARN *smithy.Schema
-
-var ListFragmentsInput_MaxResults *smithy.Schema
-
-var ListFragmentsInput_NextToken *smithy.Schema
-
-var ListFragmentsInput_FragmentSelector *smithy.Schema
-
-var ListFragmentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ListFragmentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFragmentsOutput_Fragments *smithy.Schema
-
-var ListFragmentsOutput_NextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ClientLimitExceededException_Message = ClientLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ClipFragmentSelectorType_PRODUCER_TIMESTAMP = ClipFragmentSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	ClipFragmentSelectorType_SERVER_TIMESTAMP = ClipFragmentSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	ClipTimestampRange_StartTimestamp = ClipTimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	ClipTimestampRange_EndTimestamp = ClipTimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	ClipFragmentSelector_FragmentSelectorType = ClipFragmentSelector.AddMember("FragmentSelectorType", ClipFragmentSelectorType)
-
-	ClipFragmentSelector_TimestampRange = ClipFragmentSelector.AddMember("TimestampRange", ClipTimestampRange)
-
-	ContainerFormat_FRAGMENTED_MP4 = ContainerFormat.AddMember("FRAGMENTED_MP4", smithyprelude.Unit)
-
-	ContainerFormat_MPEG_TS = ContainerFormat.AddMember("MPEG_TS", smithyprelude.Unit)
-
-	DASHDisplayFragmentNumber_ALWAYS = DASHDisplayFragmentNumber.AddMember("ALWAYS", smithyprelude.Unit)
-
-	DASHDisplayFragmentNumber_NEVER = DASHDisplayFragmentNumber.AddMember("NEVER", smithyprelude.Unit)
-
-	DASHDisplayFragmentTimestamp_ALWAYS = DASHDisplayFragmentTimestamp.AddMember("ALWAYS", smithyprelude.Unit)
-
-	DASHDisplayFragmentTimestamp_NEVER = DASHDisplayFragmentTimestamp.AddMember("NEVER", smithyprelude.Unit)
-
-	DASHFragmentSelectorType_PRODUCER_TIMESTAMP = DASHFragmentSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	DASHFragmentSelectorType_SERVER_TIMESTAMP = DASHFragmentSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	DASHTimestampRange_StartTimestamp = DASHTimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	DASHTimestampRange_EndTimestamp = DASHTimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	DASHFragmentSelector_FragmentSelectorType = DASHFragmentSelector.AddMember("FragmentSelectorType", DASHFragmentSelectorType)
-
-	DASHFragmentSelector_TimestampRange = DASHFragmentSelector.AddMember("TimestampRange", DASHTimestampRange)
-
-	DASHPlaybackMode_LIVE = DASHPlaybackMode.AddMember("LIVE", smithyprelude.Unit)
-
-	DASHPlaybackMode_LIVE_REPLAY = DASHPlaybackMode.AddMember("LIVE_REPLAY", smithyprelude.Unit)
-
-	DASHPlaybackMode_ON_DEMAND = DASHPlaybackMode.AddMember("ON_DEMAND", smithyprelude.Unit)
-
-	Format_JPEG = Format.AddMember("JPEG", smithyprelude.Unit)
-
-	Format_PNG = Format.AddMember("PNG", smithyprelude.Unit)
-
-	FormatConfigKey_JPEGQuality = FormatConfigKey.AddMember("JPEGQuality", smithyprelude.Unit)
-
-	_FormatConfig_key = _FormatConfig.AddMember("key", FormatConfigKey)
-
-	_FormatConfig_value = _FormatConfig.AddMember("value", _FormatConfigValue)
-
-	Fragment_FragmentNumber = Fragment.AddMember("FragmentNumber", _FragmentNumberString)
-
-	Fragment_FragmentSizeInBytes = Fragment.AddMember("FragmentSizeInBytes", _Long)
-
-	Fragment_ProducerTimestamp = Fragment.AddMember("ProducerTimestamp", _Timestamp)
-
-	Fragment_ServerTimestamp = Fragment.AddMember("ServerTimestamp", _Timestamp)
-
-	Fragment_FragmentLengthInMilliseconds = Fragment.AddMember("FragmentLengthInMilliseconds", _Long)
-
-	_FragmentList_member = _FragmentList.AddMember("member", Fragment)
-
-	_FragmentNumberList_member = _FragmentNumberList.AddMember("member", _FragmentNumberString)
-
-	FragmentSelectorType_PRODUCER_TIMESTAMP = FragmentSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	FragmentSelectorType_SERVER_TIMESTAMP = FragmentSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	TimestampRange_StartTimestamp = TimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	TimestampRange_EndTimestamp = TimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	FragmentSelector_FragmentSelectorType = FragmentSelector.AddMember("FragmentSelectorType", FragmentSelectorType)
-
-	FragmentSelector_TimestampRange = FragmentSelector.AddMember("TimestampRange", TimestampRange)
-
-	HLSDiscontinuityMode_ALWAYS = HLSDiscontinuityMode.AddMember("ALWAYS", smithyprelude.Unit)
-
-	HLSDiscontinuityMode_NEVER = HLSDiscontinuityMode.AddMember("NEVER", smithyprelude.Unit)
-
-	HLSDiscontinuityMode_ON_DISCONTINUITY = HLSDiscontinuityMode.AddMember("ON_DISCONTINUITY", smithyprelude.Unit)
-
-	HLSDisplayFragmentTimestamp_ALWAYS = HLSDisplayFragmentTimestamp.AddMember("ALWAYS", smithyprelude.Unit)
-
-	HLSDisplayFragmentTimestamp_NEVER = HLSDisplayFragmentTimestamp.AddMember("NEVER", smithyprelude.Unit)
-
-	HLSFragmentSelectorType_PRODUCER_TIMESTAMP = HLSFragmentSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	HLSFragmentSelectorType_SERVER_TIMESTAMP = HLSFragmentSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	HLSTimestampRange_StartTimestamp = HLSTimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	HLSTimestampRange_EndTimestamp = HLSTimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	HLSFragmentSelector_FragmentSelectorType = HLSFragmentSelector.AddMember("FragmentSelectorType", HLSFragmentSelectorType)
-
-	HLSFragmentSelector_TimestampRange = HLSFragmentSelector.AddMember("TimestampRange", HLSTimestampRange)
-
-	HLSPlaybackMode_LIVE = HLSPlaybackMode.AddMember("LIVE", smithyprelude.Unit)
-
-	HLSPlaybackMode_LIVE_REPLAY = HLSPlaybackMode.AddMember("LIVE_REPLAY", smithyprelude.Unit)
-
-	HLSPlaybackMode_ON_DEMAND = HLSPlaybackMode.AddMember("ON_DEMAND", smithyprelude.Unit)
-
-	ImageError_NO_MEDIA = ImageError.AddMember("NO_MEDIA", smithyprelude.Unit)
-
-	ImageError_MEDIA_ERROR = ImageError.AddMember("MEDIA_ERROR", smithyprelude.Unit)
-
-	Image_TimeStamp = Image.AddMember("TimeStamp", _Timestamp)
-
-	Image_Error = Image.AddMember("Error", ImageError)
-
-	Image_ImageContent = Image.AddMember("ImageContent", _ImageContent)
-
-	_Images_member = _Images.AddMember("member", Image)
-
-	ImageSelectorType_PRODUCER_TIMESTAMP = ImageSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	ImageSelectorType_SERVER_TIMESTAMP = ImageSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	InvalidArgumentException_Message = InvalidArgumentException.AddMember("Message", _ErrorMessage)
-
-	InvalidCodecPrivateDataException_Message = InvalidCodecPrivateDataException.AddMember("Message", _ErrorMessage)
-
-	InvalidMediaFrameException_Message = InvalidMediaFrameException.AddMember("Message", _ErrorMessage)
-
-	MissingCodecPrivateDataException_Message = MissingCodecPrivateDataException.AddMember("Message", _ErrorMessage)
-
-	NoDataRetentionException_Message = NoDataRetentionException.AddMember("Message", _ErrorMessage)
-
-	NotAuthorizedException_Message = NotAuthorizedException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	UnsupportedStreamMediaTypeException_Message = UnsupportedStreamMediaTypeException.AddMember("Message", _ErrorMessage)
-
-	GetClipInput_StreamName = GetClipInput.AddMember("StreamName", _StreamName)
-
-	GetClipInput_StreamARN = GetClipInput.AddMember("StreamARN", _ResourceARN)
-
-	GetClipInput_ClipFragmentSelector = GetClipInput.AddMember("ClipFragmentSelector", ClipFragmentSelector)
-
-	GetClipOutput_ContentType = GetClipOutput.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetClipOutput_Payload = GetClipOutput.AddMember("Payload", _Payload, &smithytraits.HTTPPayload{})
-
-	GetDASHStreamingSessionURLInput_StreamName = GetDASHStreamingSessionURLInput.AddMember("StreamName", _StreamName)
-
-	GetDASHStreamingSessionURLInput_StreamARN = GetDASHStreamingSessionURLInput.AddMember("StreamARN", _ResourceARN)
-
-	GetDASHStreamingSessionURLInput_PlaybackMode = GetDASHStreamingSessionURLInput.AddMember("PlaybackMode", DASHPlaybackMode)
-
-	GetDASHStreamingSessionURLInput_DisplayFragmentTimestamp = GetDASHStreamingSessionURLInput.AddMember("DisplayFragmentTimestamp", DASHDisplayFragmentTimestamp)
-
-	GetDASHStreamingSessionURLInput_DisplayFragmentNumber = GetDASHStreamingSessionURLInput.AddMember("DisplayFragmentNumber", DASHDisplayFragmentNumber)
-
-	GetDASHStreamingSessionURLInput_DASHFragmentSelector = GetDASHStreamingSessionURLInput.AddMember("DASHFragmentSelector", DASHFragmentSelector)
-
-	GetDASHStreamingSessionURLInput_Expires = GetDASHStreamingSessionURLInput.AddMember("Expires", _Expires)
-
-	GetDASHStreamingSessionURLInput_MaxManifestFragmentResults = GetDASHStreamingSessionURLInput.AddMember("MaxManifestFragmentResults", _DASHMaxResults)
-
-	GetDASHStreamingSessionURLOutput_DASHStreamingSessionURL = GetDASHStreamingSessionURLOutput.AddMember("DASHStreamingSessionURL", _DASHStreamingSessionURL)
-
-	GetHLSStreamingSessionURLInput_StreamName = GetHLSStreamingSessionURLInput.AddMember("StreamName", _StreamName)
-
-	GetHLSStreamingSessionURLInput_StreamARN = GetHLSStreamingSessionURLInput.AddMember("StreamARN", _ResourceARN)
-
-	GetHLSStreamingSessionURLInput_PlaybackMode = GetHLSStreamingSessionURLInput.AddMember("PlaybackMode", HLSPlaybackMode)
-
-	GetHLSStreamingSessionURLInput_HLSFragmentSelector = GetHLSStreamingSessionURLInput.AddMember("HLSFragmentSelector", HLSFragmentSelector)
-
-	GetHLSStreamingSessionURLInput_ContainerFormat = GetHLSStreamingSessionURLInput.AddMember("ContainerFormat", ContainerFormat)
-
-	GetHLSStreamingSessionURLInput_DiscontinuityMode = GetHLSStreamingSessionURLInput.AddMember("DiscontinuityMode", HLSDiscontinuityMode)
-
-	GetHLSStreamingSessionURLInput_DisplayFragmentTimestamp = GetHLSStreamingSessionURLInput.AddMember("DisplayFragmentTimestamp", HLSDisplayFragmentTimestamp)
-
-	GetHLSStreamingSessionURLInput_Expires = GetHLSStreamingSessionURLInput.AddMember("Expires", _Expires)
-
-	GetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults = GetHLSStreamingSessionURLInput.AddMember("MaxMediaPlaylistFragmentResults", _HLSMaxResults)
-
-	GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL = GetHLSStreamingSessionURLOutput.AddMember("HLSStreamingSessionURL", _HLSStreamingSessionURL)
-
-	GetImagesInput_StreamName = GetImagesInput.AddMember("StreamName", _StreamName)
-
-	GetImagesInput_StreamARN = GetImagesInput.AddMember("StreamARN", _ResourceARN)
-
-	GetImagesInput_ImageSelectorType = GetImagesInput.AddMember("ImageSelectorType", ImageSelectorType)
-
-	GetImagesInput_StartTimestamp = GetImagesInput.AddMember("StartTimestamp", _Timestamp)
-
-	GetImagesInput_EndTimestamp = GetImagesInput.AddMember("EndTimestamp", _Timestamp)
-
-	GetImagesInput_SamplingInterval = GetImagesInput.AddMember("SamplingInterval", _SamplingInterval)
-
-	GetImagesInput_Format = GetImagesInput.AddMember("Format", Format)
-
-	GetImagesInput_FormatConfig = GetImagesInput.AddMember("FormatConfig", _FormatConfig)
-
-	GetImagesInput_WidthPixels = GetImagesInput.AddMember("WidthPixels", _WidthPixels)
-
-	GetImagesInput_HeightPixels = GetImagesInput.AddMember("HeightPixels", _HeightPixels)
-
-	GetImagesInput_MaxResults = GetImagesInput.AddMember("MaxResults", _GetImagesMaxResults)
-
-	GetImagesInput_NextToken = GetImagesInput.AddMember("NextToken", _NextToken)
-
-	GetImagesOutput_Images = GetImagesOutput.AddMember("Images", _Images)
-
-	GetImagesOutput_NextToken = GetImagesOutput.AddMember("NextToken", _NextToken)
-
-	GetMediaForFragmentListInput_StreamName = GetMediaForFragmentListInput.AddMember("StreamName", _StreamName)
-
-	GetMediaForFragmentListInput_StreamARN = GetMediaForFragmentListInput.AddMember("StreamARN", _ResourceARN)
-
-	GetMediaForFragmentListInput_Fragments = GetMediaForFragmentListInput.AddMember("Fragments", _FragmentNumberList)
-
-	GetMediaForFragmentListOutput_ContentType = GetMediaForFragmentListOutput.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetMediaForFragmentListOutput_Payload = GetMediaForFragmentListOutput.AddMember("Payload", _Payload, &smithytraits.HTTPPayload{})
-
-	ListFragmentsInput_StreamName = ListFragmentsInput.AddMember("StreamName", _StreamName)
-
-	ListFragmentsInput_StreamARN = ListFragmentsInput.AddMember("StreamARN", _ResourceARN)
-
-	ListFragmentsInput_MaxResults = ListFragmentsInput.AddMember("MaxResults", _ListFragmentsMaxResults)
-
-	ListFragmentsInput_NextToken = ListFragmentsInput.AddMember("NextToken", _NextToken)
-
-	ListFragmentsInput_FragmentSelector = ListFragmentsInput.AddMember("FragmentSelector", FragmentSelector)
-
-	ListFragmentsOutput_Fragments = ListFragmentsOutput.AddMember("Fragments", _FragmentList)
-
-	ListFragmentsOutput_NextToken = ListFragmentsOutput.AddMember("NextToken", _NextToken)
-
+const blob = "" +
+	"UnsupportedStreamMediaTypeExceptionGetDASHStreamingSessionURLOutputInvalidCodecPrivateDataExceptionM" +
+	"issingCodecPrivateDataExceptionGetDASHStreamingSessionURLInputGetHLSStreamingSessionURLOutputMaxMedi" +
+	"aPlaylistFragmentResultsGetHLSStreamingSessionURLInputGetMediaForFragmentListOutputClientLimitExceed" +
+	"edExceptionDASHDisplayFragmentTimestampFragmentLengthInMillisecondsGetMediaForFragmentListInputHLSDi" +
+	"splayFragmentTimestampInvalidMediaFrameExceptionMaxManifestFragmentResultsDASHDisplayFragmentNumberR" +
+	"esourceNotFoundExceptionClipFragmentSelectorTypeDASHFragmentSelectorTypeInvalidArgumentExceptionNoDa" +
+	"taRetentionExceptionHLSFragmentSelectorTypeListFragmentsMaxResultsNotAuthorizedExceptionFragmentNumb" +
+	"erStringHLSDiscontinuityModeFragmentSizeInBytesGetImagesMaxResultsListFragmentsOutputClipTimestampRa" +
+	"ngeDASHTimestampRangeFragmentNumberListListFragmentsInputPRODUCER_TIMESTAMPFormatConfigValueHLSTimes" +
+	"tampRangeImageSelectorTypeProducerTimestampDASHPlaybackModeON_DISCONTINUITYSERVER_TIMESTAMPSamplingI" +
+	"ntervalAWSAcuityReaderContainerFormatFormatConfigKeyGetImagesOutputHLSPlaybackModeServerTimestampDAS" +
+	"HMaxResultsFRAGMENTED_MP4GetImagesInputStartTimestampGetClipOutputHLSMaxResultsEndTimestampErrorMess" +
+	"ageGetClipInputHeightPixelsImageContentContentTypeJPEGQualityLIVE_REPLAYMEDIA_ERRORResourceARNWidthP" +
+	"ixelsImageErrorStreamNameNextTokenON_DEMANDStreamARNTimeStampNO_MEDIAExpiresMPEG_TSPayloadALWAYSmemb" +
+	"erNEVERvalueLongUnitPNGkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.kinesisvideoarchivedmedia", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1153, Target: 0, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 35, Target: 1, Traits: 1, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 162, Target: 2, Traits: 2, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 747, Target: 3, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 254, Target: 4, Traits: 4, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 643, Target: 5, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1007, Target: 6, Traits: 6, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 283, Target: 7, Traits: 7, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 524, Target: 9, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 528, Target: 12, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 789, Target: 15, Traits: 6, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 524, Target: 12, Traits: 6, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 857, Target: 198, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 975, Target: 198, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 785, Target: 15, Traits: 6, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1139, Target: 129, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1179, Target: 129, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1022, Target: 18, Traits: 6, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1111, Target: 198, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1376, Target: 198, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1239, Target: 21, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 474, Target: 22, Traits: 6, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1390, Target: 198, Traits: 6, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1402, Target: 198, Traits: 6, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 311, Target: 25, Traits: 6, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1390, Target: 198, Traits: 6, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1402, Target: 198, Traits: 6, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 548, Target: 28, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 528, Target: 31, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 789, Target: 40, Traits: 6, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 548, Target: 31, Traits: 6, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 857, Target: 198, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 975, Target: 198, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1097, Target: 34, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 943, Target: 35, Traits: 6, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1261, Target: 198, Traits: 6, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1261, Target: 198, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1334, Target: 198, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 38, Target: 39, Traits: 6, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 803, Target: 40, Traits: 6, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1139, Target: 129, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1179, Target: 129, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1191, Target: 43, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1369, Target: 44, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 875, Target: 45, Traits: 6, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1250, Target: 198, Traits: 6, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1420, Target: 198, Traits: 6, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 875, Target: 48, Traits: 6, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1423, Target: 51, Traits: 6, StrLen: 3, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1407, Target: 53, Traits: 6, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1037, Target: 51, Traits: 6, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1250, Target: 198, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 875, Target: 53, Traits: 6, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 209, Target: 54, Traits: 6, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 485, Target: 64, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 728, Target: 115, Traits: 6, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 926, Target: 129, Traits: 6, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1082, Target: 129, Traits: 6, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 339, Target: 115, Traits: 6, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 265, Target: 60, Traits: 6, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1396, Target: 54, Traits: 6, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 821, Target: 62, Traits: 6, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1396, Target: 64, Traits: 6, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 688, Target: 64, Traits: 6, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 528, Target: 65, Traits: 6, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 528, Target: 68, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 789, Target: 130, Traits: 6, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 528, Target: 68, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 857, Target: 198, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 975, Target: 198, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 747, Target: 71, Traits: 6, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 1215, Target: 72, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 708, Target: 73, Traits: 6, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1390, Target: 198, Traits: 6, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1402, Target: 198, Traits: 6, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 959, Target: 198, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 395, Target: 77, Traits: 6, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1390, Target: 198, Traits: 6, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1402, Target: 198, Traits: 6, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 620, Target: 80, Traits: 6, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 528, Target: 83, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 789, Target: 92, Traits: 6, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 620, Target: 83, Traits: 6, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 857, Target: 198, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 975, Target: 198, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1166, Target: 86, Traits: 6, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 1067, Target: 87, Traits: 6, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1261, Target: 198, Traits: 6, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1261, Target: 198, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1334, Target: 198, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 165, Target: 91, Traits: 6, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 892, Target: 92, Traits: 6, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1139, Target: 129, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1179, Target: 129, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 750, Target: 95, Traits: 6, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1352, Target: 129, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1191, Target: 100, Traits: 6, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1227, Target: 99, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1227, Target: 99, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1305, Target: 100, Traits: 6, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1361, Target: 198, Traits: 6, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1272, Target: 198, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 750, Target: 103, Traits: 6, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1396, Target: 95, Traits: 6, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 909, Target: 105, Traits: 6, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 857, Target: 198, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 975, Target: 198, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 572, Target: 108, Traits: 7, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 67, Target: 110, Traits: 7, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 422, Target: 112, Traits: 7, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 643, Target: 114, Traits: 6, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 1412, Target: 115, Traits: 6, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 99, Target: 116, Traits: 7, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1325, Target: 118, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 596, Target: 119, Traits: 7, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 666, Target: 121, Traits: 8, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 123, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 1283, Target: 124, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 499, Target: 125, Traits: 10, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 991, Target: 127, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1315, Target: 128, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 330, Target: 129, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 789, Target: 130, Traits: 6, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1139, Target: 129, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1179, Target: 129, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 0, Target: 133, Traits: 7, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 43, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1294, Target: 135, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1203, Target: 136, Traits: 6, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 128, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1343, Target: 124, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 524, Target: 9, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1153, Target: 140, Traits: 6, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1239, Target: 21, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 123, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 131, Target: 143, Traits: 6, StrLen: 31, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 128, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1343, Target: 124, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 947, Target: 35, Traits: 6, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 315, Target: 25, Traits: 6, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 478, Target: 22, Traits: 6, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 548, Target: 28, Traits: 6, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1369, Target: 44, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 448, Target: 34, Traits: 6, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 35, Target: 152, Traits: 6, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 38, Target: 39, Traits: 6, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 154, Traits: 6, StrLen: 30, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 128, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1343, Target: 124, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 947, Target: 87, Traits: 6, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 620, Target: 80, Traits: 6, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1022, Target: 18, Traits: 6, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 711, Target: 73, Traits: 6, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 315, Target: 77, Traits: 6, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1369, Target: 44, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 193, Target: 86, Traits: 6, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 162, Target: 164, Traits: 6, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 165, Target: 91, Traits: 6, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1125, Target: 166, Traits: 6, StrLen: 14, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 128, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1343, Target: 124, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 909, Target: 105, Traits: 6, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1139, Target: 129, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1179, Target: 129, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 991, Target: 127, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 875, Target: 45, Traits: 6, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 875, Target: 48, Traits: 6, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1294, Target: 135, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1215, Target: 72, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 656, Target: 71, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1325, Target: 118, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1052, Target: 179, Traits: 6, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 750, Target: 103, Traits: 6, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1325, Target: 118, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 367, Target: 182, Traits: 6, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 128, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1343, Target: 124, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 647, Target: 62, Traits: 6, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 254, Target: 186, Traits: 6, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1239, Target: 21, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 123, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 839, Target: 189, Traits: 6, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 128, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1343, Target: 124, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 656, Target: 114, Traits: 6, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1325, Target: 118, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 528, Target: 65, Traits: 6, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 766, Target: 195, Traits: 6, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 647, Target: 60, Traits: 6, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1325, Target: 118, Traits: 6, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1416, Target: 198, Traits: 6, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/getClip",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/getDASHStreamingSessionURL",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/getHLSStreamingSessionURL",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/getImages",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/getMediaForFragmentList",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/listFragments",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800},
+	},
 }
+
+var handles = [199]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+}
+
+var GetClip = &handles[0]
+
+var GetDASHStreamingSessionURL = &handles[1]
+
+var GetHLSStreamingSessionURL = &handles[2]
+
+var GetImages = &handles[3]
+
+var GetMediaForFragmentList = &handles[4]
+
+var ListFragments = &handles[5]
+
+var _AWSAcuityReader = &handles[6]
+
+var ClientLimitExceededException = &handles[7]
+var ClientLimitExceededException_Message = &handles[8]
+
+var ClipFragmentSelector = &handles[9]
+var ClipFragmentSelector_FragmentSelectorType = &handles[10]
+var ClipFragmentSelector_TimestampRange = &handles[11]
+
+var ClipFragmentSelectorType = &handles[12]
+var ClipFragmentSelectorType_PRODUCER_TIMESTAMP = &handles[13]
+var ClipFragmentSelectorType_SERVER_TIMESTAMP = &handles[14]
+
+var ClipTimestampRange = &handles[15]
+var ClipTimestampRange_StartTimestamp = &handles[16]
+var ClipTimestampRange_EndTimestamp = &handles[17]
+
+var ContainerFormat = &handles[18]
+var ContainerFormat_FRAGMENTED_MP4 = &handles[19]
+var ContainerFormat_MPEG_TS = &handles[20]
+
+var _ContentType = &handles[21]
+
+var DASHDisplayFragmentNumber = &handles[22]
+var DASHDisplayFragmentNumber_ALWAYS = &handles[23]
+var DASHDisplayFragmentNumber_NEVER = &handles[24]
+
+var DASHDisplayFragmentTimestamp = &handles[25]
+var DASHDisplayFragmentTimestamp_ALWAYS = &handles[26]
+var DASHDisplayFragmentTimestamp_NEVER = &handles[27]
+
+var DASHFragmentSelector = &handles[28]
+var DASHFragmentSelector_FragmentSelectorType = &handles[29]
+var DASHFragmentSelector_TimestampRange = &handles[30]
+
+var DASHFragmentSelectorType = &handles[31]
+var DASHFragmentSelectorType_PRODUCER_TIMESTAMP = &handles[32]
+var DASHFragmentSelectorType_SERVER_TIMESTAMP = &handles[33]
+
+var _DASHMaxResults = &handles[34]
+
+var DASHPlaybackMode = &handles[35]
+var DASHPlaybackMode_LIVE = &handles[36]
+var DASHPlaybackMode_LIVE_REPLAY = &handles[37]
+var DASHPlaybackMode_ON_DEMAND = &handles[38]
+
+var _DASHStreamingSessionURL = &handles[39]
+
+var DASHTimestampRange = &handles[40]
+var DASHTimestampRange_StartTimestamp = &handles[41]
+var DASHTimestampRange_EndTimestamp = &handles[42]
+
+var _ErrorMessage = &handles[43]
+
+var _Expires = &handles[44]
+
+var Format = &handles[45]
+var Format_JPEG = &handles[46]
+var Format_PNG = &handles[47]
+
+var _FormatConfig = &handles[48]
+var _FormatConfig_key = &handles[49]
+var _FormatConfig_value = &handles[50]
+
+var FormatConfigKey = &handles[51]
+var FormatConfigKey_JPEGQuality = &handles[52]
+
+var _FormatConfigValue = &handles[53]
+
+var Fragment = &handles[54]
+var Fragment_FragmentNumber = &handles[55]
+var Fragment_FragmentSizeInBytes = &handles[56]
+var Fragment_ProducerTimestamp = &handles[57]
+var Fragment_ServerTimestamp = &handles[58]
+var Fragment_FragmentLengthInMilliseconds = &handles[59]
+
+var _FragmentList = &handles[60]
+var _FragmentList_member = &handles[61]
+
+var _FragmentNumberList = &handles[62]
+var _FragmentNumberList_member = &handles[63]
+
+var _FragmentNumberString = &handles[64]
+
+var FragmentSelector = &handles[65]
+var FragmentSelector_FragmentSelectorType = &handles[66]
+var FragmentSelector_TimestampRange = &handles[67]
+
+var FragmentSelectorType = &handles[68]
+var FragmentSelectorType_PRODUCER_TIMESTAMP = &handles[69]
+var FragmentSelectorType_SERVER_TIMESTAMP = &handles[70]
+
+var _GetImagesMaxResults = &handles[71]
+
+var _HeightPixels = &handles[72]
+
+var HLSDiscontinuityMode = &handles[73]
+var HLSDiscontinuityMode_ALWAYS = &handles[74]
+var HLSDiscontinuityMode_NEVER = &handles[75]
+var HLSDiscontinuityMode_ON_DISCONTINUITY = &handles[76]
+
+var HLSDisplayFragmentTimestamp = &handles[77]
+var HLSDisplayFragmentTimestamp_ALWAYS = &handles[78]
+var HLSDisplayFragmentTimestamp_NEVER = &handles[79]
+
+var HLSFragmentSelector = &handles[80]
+var HLSFragmentSelector_FragmentSelectorType = &handles[81]
+var HLSFragmentSelector_TimestampRange = &handles[82]
+
+var HLSFragmentSelectorType = &handles[83]
+var HLSFragmentSelectorType_PRODUCER_TIMESTAMP = &handles[84]
+var HLSFragmentSelectorType_SERVER_TIMESTAMP = &handles[85]
+
+var _HLSMaxResults = &handles[86]
+
+var HLSPlaybackMode = &handles[87]
+var HLSPlaybackMode_LIVE = &handles[88]
+var HLSPlaybackMode_LIVE_REPLAY = &handles[89]
+var HLSPlaybackMode_ON_DEMAND = &handles[90]
+
+var _HLSStreamingSessionURL = &handles[91]
+
+var HLSTimestampRange = &handles[92]
+var HLSTimestampRange_StartTimestamp = &handles[93]
+var HLSTimestampRange_EndTimestamp = &handles[94]
+
+var Image = &handles[95]
+var Image_TimeStamp = &handles[96]
+var Image_Error = &handles[97]
+var Image_ImageContent = &handles[98]
+
+var _ImageContent = &handles[99]
+
+var ImageError = &handles[100]
+var ImageError_NO_MEDIA = &handles[101]
+var ImageError_MEDIA_ERROR = &handles[102]
+
+var _Images = &handles[103]
+var _Images_member = &handles[104]
+
+var ImageSelectorType = &handles[105]
+var ImageSelectorType_PRODUCER_TIMESTAMP = &handles[106]
+var ImageSelectorType_SERVER_TIMESTAMP = &handles[107]
+
+var InvalidArgumentException = &handles[108]
+var InvalidArgumentException_Message = &handles[109]
+
+var InvalidCodecPrivateDataException = &handles[110]
+var InvalidCodecPrivateDataException_Message = &handles[111]
+
+var InvalidMediaFrameException = &handles[112]
+var InvalidMediaFrameException_Message = &handles[113]
+
+var _ListFragmentsMaxResults = &handles[114]
+
+var _Long = &handles[115]
+
+var MissingCodecPrivateDataException = &handles[116]
+var MissingCodecPrivateDataException_Message = &handles[117]
+
+var _NextToken = &handles[118]
+
+var NoDataRetentionException = &handles[119]
+var NoDataRetentionException_Message = &handles[120]
+
+var NotAuthorizedException = &handles[121]
+var NotAuthorizedException_Message = &handles[122]
+
+var _Payload = &handles[123]
+
+var _ResourceARN = &handles[124]
+
+var ResourceNotFoundException = &handles[125]
+var ResourceNotFoundException_Message = &handles[126]
+
+var _SamplingInterval = &handles[127]
+
+var _StreamName = &handles[128]
+
+var _Timestamp = &handles[129]
+
+var TimestampRange = &handles[130]
+var TimestampRange_StartTimestamp = &handles[131]
+var TimestampRange_EndTimestamp = &handles[132]
+
+var UnsupportedStreamMediaTypeException = &handles[133]
+var UnsupportedStreamMediaTypeException_Message = &handles[134]
+
+var _WidthPixels = &handles[135]
+
+var GetClipInput = &handles[136]
+var GetClipInput_StreamName = &handles[137]
+var GetClipInput_StreamARN = &handles[138]
+var GetClipInput_ClipFragmentSelector = &handles[139]
+
+var GetClipOutput = &handles[140]
+var GetClipOutput_ContentType = &handles[141]
+var GetClipOutput_Payload = &handles[142]
+
+var GetDASHStreamingSessionURLInput = &handles[143]
+var GetDASHStreamingSessionURLInput_StreamName = &handles[144]
+var GetDASHStreamingSessionURLInput_StreamARN = &handles[145]
+var GetDASHStreamingSessionURLInput_PlaybackMode = &handles[146]
+var GetDASHStreamingSessionURLInput_DisplayFragmentTimestamp = &handles[147]
+var GetDASHStreamingSessionURLInput_DisplayFragmentNumber = &handles[148]
+var GetDASHStreamingSessionURLInput_DASHFragmentSelector = &handles[149]
+var GetDASHStreamingSessionURLInput_Expires = &handles[150]
+var GetDASHStreamingSessionURLInput_MaxManifestFragmentResults = &handles[151]
+
+var GetDASHStreamingSessionURLOutput = &handles[152]
+var GetDASHStreamingSessionURLOutput_DASHStreamingSessionURL = &handles[153]
+
+var GetHLSStreamingSessionURLInput = &handles[154]
+var GetHLSStreamingSessionURLInput_StreamName = &handles[155]
+var GetHLSStreamingSessionURLInput_StreamARN = &handles[156]
+var GetHLSStreamingSessionURLInput_PlaybackMode = &handles[157]
+var GetHLSStreamingSessionURLInput_HLSFragmentSelector = &handles[158]
+var GetHLSStreamingSessionURLInput_ContainerFormat = &handles[159]
+var GetHLSStreamingSessionURLInput_DiscontinuityMode = &handles[160]
+var GetHLSStreamingSessionURLInput_DisplayFragmentTimestamp = &handles[161]
+var GetHLSStreamingSessionURLInput_Expires = &handles[162]
+var GetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults = &handles[163]
+
+var GetHLSStreamingSessionURLOutput = &handles[164]
+var GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL = &handles[165]
+
+var GetImagesInput = &handles[166]
+var GetImagesInput_StreamName = &handles[167]
+var GetImagesInput_StreamARN = &handles[168]
+var GetImagesInput_ImageSelectorType = &handles[169]
+var GetImagesInput_StartTimestamp = &handles[170]
+var GetImagesInput_EndTimestamp = &handles[171]
+var GetImagesInput_SamplingInterval = &handles[172]
+var GetImagesInput_Format = &handles[173]
+var GetImagesInput_FormatConfig = &handles[174]
+var GetImagesInput_WidthPixels = &handles[175]
+var GetImagesInput_HeightPixels = &handles[176]
+var GetImagesInput_MaxResults = &handles[177]
+var GetImagesInput_NextToken = &handles[178]
+
+var GetImagesOutput = &handles[179]
+var GetImagesOutput_Images = &handles[180]
+var GetImagesOutput_NextToken = &handles[181]
+
+var GetMediaForFragmentListInput = &handles[182]
+var GetMediaForFragmentListInput_StreamName = &handles[183]
+var GetMediaForFragmentListInput_StreamARN = &handles[184]
+var GetMediaForFragmentListInput_Fragments = &handles[185]
+
+var GetMediaForFragmentListOutput = &handles[186]
+var GetMediaForFragmentListOutput_ContentType = &handles[187]
+var GetMediaForFragmentListOutput_Payload = &handles[188]
+
+var ListFragmentsInput = &handles[189]
+var ListFragmentsInput_StreamName = &handles[190]
+var ListFragmentsInput_StreamARN = &handles[191]
+var ListFragmentsInput_MaxResults = &handles[192]
+var ListFragmentsInput_NextToken = &handles[193]
+var ListFragmentsInput_FragmentSelector = &handles[194]
+
+var ListFragmentsOutput = &handles[195]
+var ListFragmentsOutput_Fragments = &handles[196]
+var ListFragmentsOutput_NextToken = &handles[197]
+
+var AWSAcuityReader = &smithy.ServiceSchema{Schema: &handles[6], Version: "2017-09-30"}

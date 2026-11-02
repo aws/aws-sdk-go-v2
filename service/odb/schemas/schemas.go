@@ -4,9849 +4,7992 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptMarketplaceRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AcceptMarketplaceRegistration",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateIamRoleToResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AssociateIamRoleToResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateVirtualMachinesToExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AssociateVirtualMachinesToExadbVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabaseBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAutonomousDatabaseWallet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabaseWallet",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudAutonomousVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudExadataInfrastructure",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCloudVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateExadbVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateExascaleDbStorageVault",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateOdbNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateOdbNetwork",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateOdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateOdbPeeringConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteAutonomousDatabaseBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudAutonomousVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudExadataInfrastructure",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCloudVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteExadbVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteExascaleDbStorageVault",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteOdbNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteOdbNetwork",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteOdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteOdbPeeringConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateIamRoleFromResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DisassociateIamRoleFromResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateVirtualMachinesFromExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DisassociateVirtualMachinesFromExadbVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var FailoverAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "FailoverAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabaseBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAutonomousDatabaseWalletDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabaseWalletDetails",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudAutonomousVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudExadataInfrastructure",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCloudExadataInfrastructureUnallocatedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudExadataInfrastructureUnallocatedResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCloudVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDbNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetDbNode",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDbServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetDbServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetExadbVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetExascaleDbStorageVault",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetOciOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOciOnboardingStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetOdbNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOdbNetwork",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetOdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOdbPeeringConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var InitializeService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "InitializeService",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutonomousDatabaseBackups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseBackups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutonomousDatabaseCharacterSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseCharacterSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutonomousDatabaseClones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseClones",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutonomousDatabasePeers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabasePeers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutonomousDatabases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabases",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutonomousDatabaseVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutonomousVirtualMachines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousVirtualMachines",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCloudAutonomousVmClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudAutonomousVmClusters",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCloudExadataInfrastructures = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudExadataInfrastructures",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCloudVmClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudVmClusters",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDbNodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbNodes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDbServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbServers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDbSystemShapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbSystemShapes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExadbVmClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListExadbVmClusters",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExascaleDbStorageVaults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListExascaleDbStorageVaults",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFlexComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListFlexComponents",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGiMinorVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListGiMinorVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGiVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListGiVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListOdbNetworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListOdbNetworks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListOdbPeeringConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListOdbPeeringConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSystemVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListSystemVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var RebootAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RebootAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var RebootDbNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RebootDbNode",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RestoreAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var ShrinkAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ShrinkAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StartAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDbNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StartDbNode",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StopAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopDbNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StopDbNode",
-}, smithy.ShapeTypeOperation, 0)
-
-var SwitchoverAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SwitchoverAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateAutonomousDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateAutonomousDatabaseBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateCloudExadataInfrastructure",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExadbVmCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateExascaleCloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExascaleCloudExadataInfrastructure",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExascaleDbStorageVault",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateOdbNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateOdbNetwork",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateOdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateOdbPeeringConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var _Odb = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "Odb",
-}, smithy.ShapeTypeService, 0)
-
-var Odb = smithy.NewServiceSchema(_Odb, "2024-08-20")
-
-var Access = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "Access",
-}, smithy.ShapeTypeEnum, 2)
-var Access_ENABLED *smithy.Schema
-
-var Access_DISABLED *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AdminPasswordSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AdminPasswordSource",
-}, smithy.ShapeTypeEnum, 2)
-var AdminPasswordSource_CUSTOMER_MANAGED_AWS_SECRET *smithy.Schema
-
-var AdminPasswordSource_API_REQUEST_PARAMETER *smithy.Schema
-
-var AdminPasswordSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AdminPasswordSourceConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var AdminPasswordSourceConfiguration_customerManagedAwsSecret *smithy.Schema
-
-var AdminPasswordSourceConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AdminPasswordSourceConfigurationInput",
-}, smithy.ShapeTypeUnion, 1)
-var AdminPasswordSourceConfigurationInput_customerManagedAwsSecret *smithy.Schema
-
-var AdminPasswordSourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AdminPasswordSourceSummary",
-}, smithy.ShapeTypeStructure, 2)
-var AdminPasswordSourceSummary_adminPasswordSource *smithy.Schema
-
-var AdminPasswordSourceSummary_adminPasswordSourceConfiguration *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var AutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabase",
-}, smithy.ShapeTypeStructure, 104)
-var AutonomousDatabase_autonomousDatabaseId *smithy.Schema
-
-var AutonomousDatabase_autonomousDatabaseArn *smithy.Schema
-
-var AutonomousDatabase_ociResourceAnchorName *smithy.Schema
-
-var AutonomousDatabase_percentProgress *smithy.Schema
-
-var AutonomousDatabase_ocid *smithy.Schema
-
-var AutonomousDatabase_ociUrl *smithy.Schema
-
-var AutonomousDatabase_displayName *smithy.Schema
-
-var AutonomousDatabase_dbName *smithy.Schema
-
-var AutonomousDatabase_sourceId *smithy.Schema
-
-var AutonomousDatabase_status *smithy.Schema
-
-var AutonomousDatabase_statusReason *smithy.Schema
-
-var AutonomousDatabase_databaseType *smithy.Schema
-
-var AutonomousDatabase_dbVersion *smithy.Schema
-
-var AutonomousDatabase_dbWorkload *smithy.Schema
-
-var AutonomousDatabase_characterSet *smithy.Schema
-
-var AutonomousDatabase_ncharacterSet *smithy.Schema
-
-var AutonomousDatabase_databaseEdition *smithy.Schema
-
-var AutonomousDatabase_licenseModel *smithy.Schema
-
-var AutonomousDatabase_openMode *smithy.Schema
-
-var AutonomousDatabase_permissionLevel *smithy.Schema
-
-var AutonomousDatabase_isMtlsConnectionRequired *smithy.Schema
-
-var AutonomousDatabase_autonomousMaintenanceScheduleType *smithy.Schema
-
-var AutonomousDatabase_netServicesArchitecture *smithy.Schema
-
-var AutonomousDatabase_availableUpgradeVersions *smithy.Schema
-
-var AutonomousDatabase_byolComputeCountLimit *smithy.Schema
-
-var AutonomousDatabase_connectionStringDetails *smithy.Schema
-
-var AutonomousDatabase_serviceConsoleUrl *smithy.Schema
-
-var AutonomousDatabase_sqlWebDeveloperUrl *smithy.Schema
-
-var AutonomousDatabase_customerContacts *smithy.Schema
-
-var AutonomousDatabase_apexDetails *smithy.Schema
-
-var AutonomousDatabase_standbyDb *smithy.Schema
-
-var AutonomousDatabase_localStandbyDb *smithy.Schema
-
-var AutonomousDatabase_dataSafeStatus *smithy.Schema
-
-var AutonomousDatabase_databaseManagementStatus *smithy.Schema
-
-var AutonomousDatabase_operationsInsightsStatus *smithy.Schema
-
-var AutonomousDatabase_availabilityZone *smithy.Schema
-
-var AutonomousDatabase_availabilityZoneId *smithy.Schema
-
-var AutonomousDatabase_maintenanceTargetComponent *smithy.Schema
-
-var AutonomousDatabase_connectionUrls *smithy.Schema
-
-var AutonomousDatabase_dbToolsDetails *smithy.Schema
-
-var AutonomousDatabase_scheduledOperations *smithy.Schema
-
-var AutonomousDatabase_resourcePoolLeaderId *smithy.Schema
-
-var AutonomousDatabase_computeCount *smithy.Schema
-
-var AutonomousDatabase_computeModel *smithy.Schema
-
-var AutonomousDatabase_cpuCoreCount *smithy.Schema
-
-var AutonomousDatabase_memoryPerOracleComputeUnitInGBs *smithy.Schema
-
-var AutonomousDatabase_provisionableCpus *smithy.Schema
-
-var AutonomousDatabase_isAutoScalingEnabled *smithy.Schema
-
-var AutonomousDatabase_dataStorageSizeInTBs *smithy.Schema
-
-var AutonomousDatabase_dataStorageSizeInGBs *smithy.Schema
-
-var AutonomousDatabase_usedDataStorageSizeInTBs *smithy.Schema
-
-var AutonomousDatabase_usedDataStorageSizeInGBs *smithy.Schema
-
-var AutonomousDatabase_actualUsedDataStorageSizeInTBs *smithy.Schema
-
-var AutonomousDatabase_allocatedStorageSizeInTBs *smithy.Schema
-
-var AutonomousDatabase_inMemoryAreaInGBs *smithy.Schema
-
-var AutonomousDatabase_isAutoScalingForStorageEnabled *smithy.Schema
-
-var AutonomousDatabase_odbNetworkId *smithy.Schema
-
-var AutonomousDatabase_odbNetworkArn *smithy.Schema
-
-var AutonomousDatabase_privateEndpoint *smithy.Schema
-
-var AutonomousDatabase_privateEndpointIp *smithy.Schema
-
-var AutonomousDatabase_privateEndpointLabel *smithy.Schema
-
-var AutonomousDatabase_allowlistedIps *smithy.Schema
-
-var AutonomousDatabase_standbyAllowlistedIps *smithy.Schema
-
-var AutonomousDatabase_standbyAllowlistedIpsSource *smithy.Schema
-
-var AutonomousDatabase_isLocalDataGuardEnabled *smithy.Schema
-
-var AutonomousDatabase_isRemoteDataGuardEnabled *smithy.Schema
-
-var AutonomousDatabase_localDisasterRecoveryType *smithy.Schema
-
-var AutonomousDatabase_role *smithy.Schema
-
-var AutonomousDatabase_peerDbIds *smithy.Schema
-
-var AutonomousDatabase_failedDataRecoveryInSeconds *smithy.Schema
-
-var AutonomousDatabase_localAdgAutoFailoverMaxDataLossLimit *smithy.Schema
-
-var AutonomousDatabase_remoteDisasterRecoveryConfiguration *smithy.Schema
-
-var AutonomousDatabase_isRefreshableClone *smithy.Schema
-
-var AutonomousDatabase_refreshableMode *smithy.Schema
-
-var AutonomousDatabase_refreshableStatus *smithy.Schema
-
-var AutonomousDatabase_autoRefreshFrequencyInSeconds *smithy.Schema
-
-var AutonomousDatabase_autoRefreshPointLagInSeconds *smithy.Schema
-
-var AutonomousDatabase_isReconnectCloneEnabled *smithy.Schema
-
-var AutonomousDatabase_cloneTableSpaceList *smithy.Schema
-
-var AutonomousDatabase_backupRetentionPeriodInDays *smithy.Schema
-
-var AutonomousDatabase_longTermBackupSchedule *smithy.Schema
-
-var AutonomousDatabase_isBackupRetentionLocked *smithy.Schema
-
-var AutonomousDatabase_totalBackupStorageSizeInGBs *smithy.Schema
-
-var AutonomousDatabase_resourcePoolSummary *smithy.Schema
-
-var AutonomousDatabase_encryptionSummary *smithy.Schema
-
-var AutonomousDatabase_createdAt *smithy.Schema
-
-var AutonomousDatabase_timeOfLastBackup *smithy.Schema
-
-var AutonomousDatabase_timeMaintenanceBegin *smithy.Schema
-
-var AutonomousDatabase_timeMaintenanceEnd *smithy.Schema
-
-var AutonomousDatabase_timeLocalDataGuardEnabled *smithy.Schema
-
-var AutonomousDatabase_timeDataGuardRoleChanged *smithy.Schema
-
-var AutonomousDatabase_timeOfLastSwitchover *smithy.Schema
-
-var AutonomousDatabase_timeOfLastFailover *smithy.Schema
-
-var AutonomousDatabase_timeOfLastRefresh *smithy.Schema
-
-var AutonomousDatabase_timeOfLastRefreshPoint *smithy.Schema
-
-var AutonomousDatabase_timeOfNextRefresh *smithy.Schema
-
-var AutonomousDatabase_timeOfAutoRefreshStart *smithy.Schema
-
-var AutonomousDatabase_timeDeletionOfFreeAutonomousDatabase *smithy.Schema
-
-var AutonomousDatabase_timeReclamationOfFreeAutonomousDatabase *smithy.Schema
-
-var AutonomousDatabase_timeDisasterRecoveryRoleChanged *smithy.Schema
-
-var AutonomousDatabase_timeUntilReconnectCloneEnabled *smithy.Schema
-
-var AutonomousDatabase_nextLongTermBackupTimeStamp *smithy.Schema
-
-var AutonomousDatabase_timeUndeleted *smithy.Schema
-
-var AutonomousDatabase_adminPasswordSourceSummary *smithy.Schema
-
-var AutonomousDatabaseApex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseApex",
-}, smithy.ShapeTypeStructure, 2)
-var AutonomousDatabaseApex_apexVersion *smithy.Schema
-
-var AutonomousDatabaseApex_ordsVersion *smithy.Schema
-
-var AutonomousDatabaseBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseBackup",
-}, smithy.ShapeTypeStructure, 15)
-var AutonomousDatabaseBackup_autonomousDatabaseBackupId *smithy.Schema
-
-var AutonomousDatabaseBackup_autonomousDatabaseBackupArn *smithy.Schema
-
-var AutonomousDatabaseBackup_autonomousDatabaseId *smithy.Schema
-
-var AutonomousDatabaseBackup_ocid *smithy.Schema
-
-var AutonomousDatabaseBackup_displayName *smithy.Schema
-
-var AutonomousDatabaseBackup_dbVersion *smithy.Schema
-
-var AutonomousDatabaseBackup_status *smithy.Schema
-
-var AutonomousDatabaseBackup_statusReason *smithy.Schema
-
-var AutonomousDatabaseBackup_isAutomatic *smithy.Schema
-
-var AutonomousDatabaseBackup_retentionPeriodInDays *smithy.Schema
-
-var AutonomousDatabaseBackup_sizeInTBs *smithy.Schema
-
-var AutonomousDatabaseBackup_timeAvailableTill *smithy.Schema
-
-var AutonomousDatabaseBackup_timeStarted *smithy.Schema
-
-var AutonomousDatabaseBackup_timeEnded *smithy.Schema
-
-var AutonomousDatabaseBackup_type *smithy.Schema
-
-var _AutonomousDatabaseBackupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseBackupList",
-}, smithy.ShapeTypeList, 1)
-var _AutonomousDatabaseBackupList_member *smithy.Schema
-
-var AutonomousDatabaseBackupStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseBackupStatus",
-}, smithy.ShapeTypeEnum, 5)
-var AutonomousDatabaseBackupStatus_ACTIVE *smithy.Schema
-
-var AutonomousDatabaseBackupStatus_CREATING *smithy.Schema
-
-var AutonomousDatabaseBackupStatus_UPDATING *smithy.Schema
-
-var AutonomousDatabaseBackupStatus_DELETING *smithy.Schema
-
-var AutonomousDatabaseBackupStatus_FAILED *smithy.Schema
-
-var AutonomousDatabaseBackupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseBackupSummary",
-}, smithy.ShapeTypeStructure, 15)
-var AutonomousDatabaseBackupSummary_autonomousDatabaseBackupId *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_autonomousDatabaseBackupArn *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_autonomousDatabaseId *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_ocid *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_displayName *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_dbVersion *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_status *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_statusReason *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_isAutomatic *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_retentionPeriodInDays *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_sizeInTBs *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_timeAvailableTill *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_timeStarted *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_timeEnded *smithy.Schema
-
-var AutonomousDatabaseBackupSummary_type *smithy.Schema
-
-var AutonomousDatabaseBackupType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseBackupType",
-}, smithy.ShapeTypeEnum, 6)
-var AutonomousDatabaseBackupType_INCREMENTAL *smithy.Schema
-
-var AutonomousDatabaseBackupType_FULL *smithy.Schema
-
-var AutonomousDatabaseBackupType_LONGTERM *smithy.Schema
-
-var AutonomousDatabaseBackupType_VIRTUAL_FULL *smithy.Schema
-
-var AutonomousDatabaseBackupType_CUMULATIVE_INCREMENTAL *smithy.Schema
-
-var AutonomousDatabaseBackupType_ROLL_FORWARD_IMAGE_COPY *smithy.Schema
-
-var _AutonomousDatabaseCharacterSetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseCharacterSetList",
-}, smithy.ShapeTypeList, 1)
-var _AutonomousDatabaseCharacterSetList_member *smithy.Schema
-
-var AutonomousDatabaseCharacterSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseCharacterSetSummary",
-}, smithy.ShapeTypeStructure, 1)
-var AutonomousDatabaseCharacterSetSummary_characterSet *smithy.Schema
-
-var AutonomousDatabaseConnectionStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseConnectionStrings",
-}, smithy.ShapeTypeStructure, 6)
-var AutonomousDatabaseConnectionStrings_allConnectionStrings *smithy.Schema
-
-var AutonomousDatabaseConnectionStrings_dedicated *smithy.Schema
-
-var AutonomousDatabaseConnectionStrings_high *smithy.Schema
-
-var AutonomousDatabaseConnectionStrings_medium *smithy.Schema
-
-var AutonomousDatabaseConnectionStrings_low *smithy.Schema
-
-var AutonomousDatabaseConnectionStrings_profiles *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseConnectionUrls",
-}, smithy.ShapeTypeStructure, 9)
-var AutonomousDatabaseConnectionUrls_apexUrl *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls_databaseTransformsUrl *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls_graphStudioUrl *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls_machineLearningNotebookUrl *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls_machineLearningUserManagementUrl *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls_mongoDbUrl *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls_ordsUrl *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls_spatialStudioUrl *smithy.Schema
-
-var AutonomousDatabaseConnectionUrls_sqlDevWebUrl *smithy.Schema
-
-var _AutonomousDatabaseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseList",
-}, smithy.ShapeTypeList, 1)
-var _AutonomousDatabaseList_member *smithy.Schema
-
-var _AutonomousDatabasePeerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabasePeerList",
-}, smithy.ShapeTypeList, 1)
-var _AutonomousDatabasePeerList_member *smithy.Schema
-
-var AutonomousDatabasePeerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabasePeerSummary",
-}, smithy.ShapeTypeStructure, 4)
-var AutonomousDatabasePeerSummary_autonomousDatabaseId *smithy.Schema
-
-var AutonomousDatabasePeerSummary_autonomousDatabaseArn *smithy.Schema
-
-var AutonomousDatabasePeerSummary_ocid *smithy.Schema
-
-var AutonomousDatabasePeerSummary_region *smithy.Schema
-
-var AutonomousDatabaseResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseResourceStatus",
-}, smithy.ShapeTypeEnum, 22)
-var AutonomousDatabaseResourceStatus_AVAILABLE *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_FAILED *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_PROVISIONING *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_TERMINATED *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_TERMINATING *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_UPDATING *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_MAINTENANCE_IN_PROGRESS *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_STOPPING *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_STOPPED *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_STARTING *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_UNAVAILABLE *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_RESTORE_IN_PROGRESS *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_RESTORE_FAILED *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_BACKUP_IN_PROGRESS *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_SCALE_IN_PROGRESS *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_AVAILABLE_NEEDS_ATTENTION *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_RESTARTING *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_RECREATING *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_ROLE_CHANGE_IN_PROGRESS *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_UPGRADING *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_INACCESSIBLE *smithy.Schema
-
-var AutonomousDatabaseResourceStatus_STANDBY *smithy.Schema
-
-var AutonomousDatabaseSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseSummary",
-}, smithy.ShapeTypeStructure, 104)
-var AutonomousDatabaseSummary_autonomousDatabaseId *smithy.Schema
-
-var AutonomousDatabaseSummary_autonomousDatabaseArn *smithy.Schema
-
-var AutonomousDatabaseSummary_ociResourceAnchorName *smithy.Schema
-
-var AutonomousDatabaseSummary_percentProgress *smithy.Schema
-
-var AutonomousDatabaseSummary_ocid *smithy.Schema
-
-var AutonomousDatabaseSummary_ociUrl *smithy.Schema
-
-var AutonomousDatabaseSummary_displayName *smithy.Schema
-
-var AutonomousDatabaseSummary_dbName *smithy.Schema
-
-var AutonomousDatabaseSummary_sourceId *smithy.Schema
-
-var AutonomousDatabaseSummary_status *smithy.Schema
-
-var AutonomousDatabaseSummary_statusReason *smithy.Schema
-
-var AutonomousDatabaseSummary_databaseType *smithy.Schema
-
-var AutonomousDatabaseSummary_dbVersion *smithy.Schema
-
-var AutonomousDatabaseSummary_dbWorkload *smithy.Schema
-
-var AutonomousDatabaseSummary_characterSet *smithy.Schema
-
-var AutonomousDatabaseSummary_ncharacterSet *smithy.Schema
-
-var AutonomousDatabaseSummary_databaseEdition *smithy.Schema
-
-var AutonomousDatabaseSummary_licenseModel *smithy.Schema
-
-var AutonomousDatabaseSummary_openMode *smithy.Schema
-
-var AutonomousDatabaseSummary_permissionLevel *smithy.Schema
-
-var AutonomousDatabaseSummary_isMtlsConnectionRequired *smithy.Schema
-
-var AutonomousDatabaseSummary_autonomousMaintenanceScheduleType *smithy.Schema
-
-var AutonomousDatabaseSummary_netServicesArchitecture *smithy.Schema
-
-var AutonomousDatabaseSummary_availableUpgradeVersions *smithy.Schema
-
-var AutonomousDatabaseSummary_byolComputeCountLimit *smithy.Schema
-
-var AutonomousDatabaseSummary_connectionStringDetails *smithy.Schema
-
-var AutonomousDatabaseSummary_serviceConsoleUrl *smithy.Schema
-
-var AutonomousDatabaseSummary_sqlWebDeveloperUrl *smithy.Schema
-
-var AutonomousDatabaseSummary_customerContacts *smithy.Schema
-
-var AutonomousDatabaseSummary_apexDetails *smithy.Schema
-
-var AutonomousDatabaseSummary_standbyDb *smithy.Schema
-
-var AutonomousDatabaseSummary_localStandbyDb *smithy.Schema
-
-var AutonomousDatabaseSummary_dataSafeStatus *smithy.Schema
-
-var AutonomousDatabaseSummary_databaseManagementStatus *smithy.Schema
-
-var AutonomousDatabaseSummary_operationsInsightsStatus *smithy.Schema
-
-var AutonomousDatabaseSummary_availabilityZone *smithy.Schema
-
-var AutonomousDatabaseSummary_availabilityZoneId *smithy.Schema
-
-var AutonomousDatabaseSummary_maintenanceTargetComponent *smithy.Schema
-
-var AutonomousDatabaseSummary_connectionUrls *smithy.Schema
-
-var AutonomousDatabaseSummary_dbToolsDetails *smithy.Schema
-
-var AutonomousDatabaseSummary_scheduledOperations *smithy.Schema
-
-var AutonomousDatabaseSummary_resourcePoolLeaderId *smithy.Schema
-
-var AutonomousDatabaseSummary_computeCount *smithy.Schema
-
-var AutonomousDatabaseSummary_computeModel *smithy.Schema
-
-var AutonomousDatabaseSummary_cpuCoreCount *smithy.Schema
-
-var AutonomousDatabaseSummary_memoryPerOracleComputeUnitInGBs *smithy.Schema
-
-var AutonomousDatabaseSummary_provisionableCpus *smithy.Schema
-
-var AutonomousDatabaseSummary_isAutoScalingEnabled *smithy.Schema
-
-var AutonomousDatabaseSummary_dataStorageSizeInTBs *smithy.Schema
-
-var AutonomousDatabaseSummary_dataStorageSizeInGBs *smithy.Schema
-
-var AutonomousDatabaseSummary_usedDataStorageSizeInTBs *smithy.Schema
-
-var AutonomousDatabaseSummary_usedDataStorageSizeInGBs *smithy.Schema
-
-var AutonomousDatabaseSummary_actualUsedDataStorageSizeInTBs *smithy.Schema
-
-var AutonomousDatabaseSummary_allocatedStorageSizeInTBs *smithy.Schema
-
-var AutonomousDatabaseSummary_inMemoryAreaInGBs *smithy.Schema
-
-var AutonomousDatabaseSummary_isAutoScalingForStorageEnabled *smithy.Schema
-
-var AutonomousDatabaseSummary_odbNetworkId *smithy.Schema
-
-var AutonomousDatabaseSummary_odbNetworkArn *smithy.Schema
-
-var AutonomousDatabaseSummary_privateEndpoint *smithy.Schema
-
-var AutonomousDatabaseSummary_privateEndpointIp *smithy.Schema
-
-var AutonomousDatabaseSummary_privateEndpointLabel *smithy.Schema
-
-var AutonomousDatabaseSummary_allowlistedIps *smithy.Schema
-
-var AutonomousDatabaseSummary_standbyAllowlistedIps *smithy.Schema
-
-var AutonomousDatabaseSummary_standbyAllowlistedIpsSource *smithy.Schema
-
-var AutonomousDatabaseSummary_isLocalDataGuardEnabled *smithy.Schema
-
-var AutonomousDatabaseSummary_isRemoteDataGuardEnabled *smithy.Schema
-
-var AutonomousDatabaseSummary_localDisasterRecoveryType *smithy.Schema
-
-var AutonomousDatabaseSummary_role *smithy.Schema
-
-var AutonomousDatabaseSummary_peerDbIds *smithy.Schema
-
-var AutonomousDatabaseSummary_failedDataRecoveryInSeconds *smithy.Schema
-
-var AutonomousDatabaseSummary_localAdgAutoFailoverMaxDataLossLimit *smithy.Schema
-
-var AutonomousDatabaseSummary_remoteDisasterRecoveryConfiguration *smithy.Schema
-
-var AutonomousDatabaseSummary_isRefreshableClone *smithy.Schema
-
-var AutonomousDatabaseSummary_refreshableMode *smithy.Schema
-
-var AutonomousDatabaseSummary_refreshableStatus *smithy.Schema
-
-var AutonomousDatabaseSummary_autoRefreshFrequencyInSeconds *smithy.Schema
-
-var AutonomousDatabaseSummary_autoRefreshPointLagInSeconds *smithy.Schema
-
-var AutonomousDatabaseSummary_isReconnectCloneEnabled *smithy.Schema
-
-var AutonomousDatabaseSummary_cloneTableSpaceList *smithy.Schema
-
-var AutonomousDatabaseSummary_backupRetentionPeriodInDays *smithy.Schema
-
-var AutonomousDatabaseSummary_longTermBackupSchedule *smithy.Schema
-
-var AutonomousDatabaseSummary_isBackupRetentionLocked *smithy.Schema
-
-var AutonomousDatabaseSummary_totalBackupStorageSizeInGBs *smithy.Schema
-
-var AutonomousDatabaseSummary_resourcePoolSummary *smithy.Schema
-
-var AutonomousDatabaseSummary_encryptionSummary *smithy.Schema
-
-var AutonomousDatabaseSummary_createdAt *smithy.Schema
-
-var AutonomousDatabaseSummary_timeOfLastBackup *smithy.Schema
-
-var AutonomousDatabaseSummary_timeMaintenanceBegin *smithy.Schema
-
-var AutonomousDatabaseSummary_timeMaintenanceEnd *smithy.Schema
-
-var AutonomousDatabaseSummary_timeLocalDataGuardEnabled *smithy.Schema
-
-var AutonomousDatabaseSummary_timeDataGuardRoleChanged *smithy.Schema
-
-var AutonomousDatabaseSummary_timeOfLastSwitchover *smithy.Schema
-
-var AutonomousDatabaseSummary_timeOfLastFailover *smithy.Schema
-
-var AutonomousDatabaseSummary_timeOfLastRefresh *smithy.Schema
-
-var AutonomousDatabaseSummary_timeOfLastRefreshPoint *smithy.Schema
-
-var AutonomousDatabaseSummary_timeOfNextRefresh *smithy.Schema
-
-var AutonomousDatabaseSummary_timeOfAutoRefreshStart *smithy.Schema
-
-var AutonomousDatabaseSummary_timeDeletionOfFreeAutonomousDatabase *smithy.Schema
-
-var AutonomousDatabaseSummary_timeReclamationOfFreeAutonomousDatabase *smithy.Schema
-
-var AutonomousDatabaseSummary_timeDisasterRecoveryRoleChanged *smithy.Schema
-
-var AutonomousDatabaseSummary_timeUntilReconnectCloneEnabled *smithy.Schema
-
-var AutonomousDatabaseSummary_nextLongTermBackupTimeStamp *smithy.Schema
-
-var AutonomousDatabaseSummary_timeUndeleted *smithy.Schema
-
-var AutonomousDatabaseSummary_adminPasswordSourceSummary *smithy.Schema
-
-var _AutonomousDatabaseVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseVersionList",
-}, smithy.ShapeTypeList, 1)
-var _AutonomousDatabaseVersionList_member *smithy.Schema
-
-var AutonomousDatabaseVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseVersionSummary",
-}, smithy.ShapeTypeStructure, 3)
-var AutonomousDatabaseVersionSummary_dbWorkload *smithy.Schema
-
-var AutonomousDatabaseVersionSummary_details *smithy.Schema
-
-var AutonomousDatabaseVersionSummary_version *smithy.Schema
-
-var AutonomousDatabaseWalletDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseWalletDetails",
-}, smithy.ShapeTypeStructure, 3)
-var AutonomousDatabaseWalletDetails_status *smithy.Schema
-
-var AutonomousDatabaseWalletDetails_timeRotated *smithy.Schema
-
-var AutonomousDatabaseWalletDetails_passwordSourceSummary *smithy.Schema
-
-var _AutonomousDatabaseWalletFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseWalletFile",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.MediaType{Type: "application/zip"},
-	&smithytraits.Sensitive{})
-
-var AutonomousDatabaseWalletStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousDatabaseWalletStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AutonomousDatabaseWalletStatus_ACTIVE *smithy.Schema
-
-var AutonomousDatabaseWalletStatus_UPDATING *smithy.Schema
-
-var AutonomousMaintenanceScheduleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousMaintenanceScheduleType",
-}, smithy.ShapeTypeEnum, 2)
-var AutonomousMaintenanceScheduleType_EARLY *smithy.Schema
-
-var AutonomousMaintenanceScheduleType_REGULAR *smithy.Schema
-
-var _AutonomousVirtualMachineList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousVirtualMachineList",
-}, smithy.ShapeTypeList, 1)
-var _AutonomousVirtualMachineList_member *smithy.Schema
-
-var AutonomousVirtualMachineSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AutonomousVirtualMachineSummary",
-}, smithy.ShapeTypeStructure, 13)
-var AutonomousVirtualMachineSummary_autonomousVirtualMachineId *smithy.Schema
-
-var AutonomousVirtualMachineSummary_status *smithy.Schema
-
-var AutonomousVirtualMachineSummary_statusReason *smithy.Schema
-
-var AutonomousVirtualMachineSummary_vmName *smithy.Schema
-
-var AutonomousVirtualMachineSummary_dbServerId *smithy.Schema
-
-var AutonomousVirtualMachineSummary_dbServerDisplayName *smithy.Schema
-
-var AutonomousVirtualMachineSummary_cpuCoreCount *smithy.Schema
-
-var AutonomousVirtualMachineSummary_memorySizeInGBs *smithy.Schema
-
-var AutonomousVirtualMachineSummary_dbNodeStorageSizeInGBs *smithy.Schema
-
-var AutonomousVirtualMachineSummary_clientIpAddress *smithy.Schema
-
-var AutonomousVirtualMachineSummary_cloudAutonomousVmClusterId *smithy.Schema
-
-var AutonomousVirtualMachineSummary_ocid *smithy.Schema
-
-var AutonomousVirtualMachineSummary_ociResourceAnchorName *smithy.Schema
-
-var AwsEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AwsEncryptionKeyConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var AwsEncryptionKeyConfiguration_iamRoleArn *smithy.Schema
-
-var AwsEncryptionKeyConfiguration_externalIdType *smithy.Schema
-
-var AwsEncryptionKeyConfiguration_kmsKeyId *smithy.Schema
-
-var AwsEncryptionKeyConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AwsEncryptionKeyConfigurationInput",
-}, smithy.ShapeTypeStructure, 3)
-var AwsEncryptionKeyConfigurationInput_iamRoleArn *smithy.Schema
-
-var AwsEncryptionKeyConfigurationInput_externalIdType *smithy.Schema
-
-var AwsEncryptionKeyConfigurationInput_kmsKeyId *smithy.Schema
-
-var characterSetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "characterSetType",
-}, smithy.ShapeTypeEnum, 2)
-var characterSetType_DATABASE *smithy.Schema
-
-var characterSetType_NATIONAL *smithy.Schema
-
-var CloneToRefreshableConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloneToRefreshableConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var CloneToRefreshableConfiguration_sourceAutonomousDatabaseId *smithy.Schema
-
-var CloneToRefreshableConfiguration_refreshableMode *smithy.Schema
-
-var CloneToRefreshableConfiguration_autoRefreshFrequencyInSeconds *smithy.Schema
-
-var CloneToRefreshableConfiguration_autoRefreshPointLagInSeconds *smithy.Schema
-
-var CloneToRefreshableConfiguration_timeOfAutoRefreshStart *smithy.Schema
-
-var CloneToRefreshableConfiguration_openMode *smithy.Schema
-
-var CloneToRefreshableConfiguration_cloneType *smithy.Schema
-
-var CloneType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloneType",
-}, smithy.ShapeTypeEnum, 3)
-var CloneType_FULL *smithy.Schema
-
-var CloneType_METADATA *smithy.Schema
-
-var CloneType_PARTIAL *smithy.Schema
-
-var CloudAutonomousVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudAutonomousVmCluster",
-}, smithy.ShapeTypeStructure, 52)
-var CloudAutonomousVmCluster_cloudAutonomousVmClusterId *smithy.Schema
-
-var CloudAutonomousVmCluster_cloudAutonomousVmClusterArn *smithy.Schema
-
-var CloudAutonomousVmCluster_odbNetworkId *smithy.Schema
-
-var CloudAutonomousVmCluster_odbNetworkArn *smithy.Schema
-
-var CloudAutonomousVmCluster_ociResourceAnchorName *smithy.Schema
-
-var CloudAutonomousVmCluster_percentProgress *smithy.Schema
-
-var CloudAutonomousVmCluster_displayName *smithy.Schema
-
-var CloudAutonomousVmCluster_status *smithy.Schema
-
-var CloudAutonomousVmCluster_statusReason *smithy.Schema
-
-var CloudAutonomousVmCluster_cloudExadataInfrastructureId *smithy.Schema
-
-var CloudAutonomousVmCluster_cloudExadataInfrastructureArn *smithy.Schema
-
-var CloudAutonomousVmCluster_autonomousDataStoragePercentage *smithy.Schema
-
-var CloudAutonomousVmCluster_autonomousDataStorageSizeInTBs *smithy.Schema
-
-var CloudAutonomousVmCluster_availableAutonomousDataStorageSizeInTBs *smithy.Schema
-
-var CloudAutonomousVmCluster_availableContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmCluster_availableCpus *smithy.Schema
-
-var CloudAutonomousVmCluster_computeModel *smithy.Schema
-
-var CloudAutonomousVmCluster_cpuCoreCount *smithy.Schema
-
-var CloudAutonomousVmCluster_cpuCoreCountPerNode *smithy.Schema
-
-var CloudAutonomousVmCluster_cpuPercentage *smithy.Schema
-
-var CloudAutonomousVmCluster_dataStorageSizeInGBs *smithy.Schema
-
-var CloudAutonomousVmCluster_dataStorageSizeInTBs *smithy.Schema
-
-var CloudAutonomousVmCluster_dbNodeStorageSizeInGBs *smithy.Schema
-
-var CloudAutonomousVmCluster_dbServers *smithy.Schema
-
-var CloudAutonomousVmCluster_description *smithy.Schema
-
-var CloudAutonomousVmCluster_domain *smithy.Schema
-
-var CloudAutonomousVmCluster_exadataStorageInTBsLowestScaledValue *smithy.Schema
-
-var CloudAutonomousVmCluster_hostname *smithy.Schema
-
-var CloudAutonomousVmCluster_ocid *smithy.Schema
-
-var CloudAutonomousVmCluster_ociUrl *smithy.Schema
-
-var CloudAutonomousVmCluster_isMtlsEnabledVmCluster *smithy.Schema
-
-var CloudAutonomousVmCluster_licenseModel *smithy.Schema
-
-var CloudAutonomousVmCluster_maintenanceWindow *smithy.Schema
-
-var CloudAutonomousVmCluster_maxAcdsLowestScaledValue *smithy.Schema
-
-var CloudAutonomousVmCluster_memoryPerOracleComputeUnitInGBs *smithy.Schema
-
-var CloudAutonomousVmCluster_memorySizeInGBs *smithy.Schema
-
-var CloudAutonomousVmCluster_nodeCount *smithy.Schema
-
-var CloudAutonomousVmCluster_nonProvisionableAutonomousContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmCluster_provisionableAutonomousContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmCluster_provisionedAutonomousContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmCluster_provisionedCpus *smithy.Schema
-
-var CloudAutonomousVmCluster_reclaimableCpus *smithy.Schema
-
-var CloudAutonomousVmCluster_reservedCpus *smithy.Schema
-
-var CloudAutonomousVmCluster_scanListenerPortNonTls *smithy.Schema
-
-var CloudAutonomousVmCluster_scanListenerPortTls *smithy.Schema
-
-var CloudAutonomousVmCluster_shape *smithy.Schema
-
-var CloudAutonomousVmCluster_createdAt *smithy.Schema
-
-var CloudAutonomousVmCluster_timeDatabaseSslCertificateExpires *smithy.Schema
-
-var CloudAutonomousVmCluster_timeOrdsCertificateExpires *smithy.Schema
-
-var CloudAutonomousVmCluster_timeZone *smithy.Schema
-
-var CloudAutonomousVmCluster_totalContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmCluster_iamRoles *smithy.Schema
-
-var _CloudAutonomousVmClusterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudAutonomousVmClusterList",
-}, smithy.ShapeTypeList, 1)
-var _CloudAutonomousVmClusterList_member *smithy.Schema
-
-var CloudAutonomousVmClusterResourceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudAutonomousVmClusterResourceDetails",
-}, smithy.ShapeTypeStructure, 2)
-var CloudAutonomousVmClusterResourceDetails_cloudAutonomousVmClusterId *smithy.Schema
-
-var CloudAutonomousVmClusterResourceDetails_unallocatedAdbStorageInTBs *smithy.Schema
-
-var _CloudAutonomousVmClusterResourceDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudAutonomousVmClusterResourceDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _CloudAutonomousVmClusterResourceDetailsList_member *smithy.Schema
-
-var CloudAutonomousVmClusterSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudAutonomousVmClusterSummary",
-}, smithy.ShapeTypeStructure, 52)
-var CloudAutonomousVmClusterSummary_cloudAutonomousVmClusterId *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_cloudAutonomousVmClusterArn *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_odbNetworkId *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_odbNetworkArn *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_ociResourceAnchorName *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_percentProgress *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_displayName *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_status *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_statusReason *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_cloudExadataInfrastructureId *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_cloudExadataInfrastructureArn *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_autonomousDataStoragePercentage *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_autonomousDataStorageSizeInTBs *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_availableAutonomousDataStorageSizeInTBs *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_availableContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_availableCpus *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_computeModel *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_cpuCoreCount *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_cpuCoreCountPerNode *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_cpuPercentage *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_dataStorageSizeInGBs *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_dataStorageSizeInTBs *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_dbNodeStorageSizeInGBs *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_dbServers *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_description *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_domain *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_exadataStorageInTBsLowestScaledValue *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_hostname *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_ocid *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_ociUrl *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_isMtlsEnabledVmCluster *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_licenseModel *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_maintenanceWindow *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_maxAcdsLowestScaledValue *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_memoryPerOracleComputeUnitInGBs *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_memorySizeInGBs *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_nodeCount *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_nonProvisionableAutonomousContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_provisionableAutonomousContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_provisionedAutonomousContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_provisionedCpus *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_reclaimableCpus *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_reservedCpus *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_scanListenerPortNonTls *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_scanListenerPortTls *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_shape *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_createdAt *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_timeDatabaseSslCertificateExpires *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_timeOrdsCertificateExpires *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_timeZone *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_totalContainerDatabases *smithy.Schema
-
-var CloudAutonomousVmClusterSummary_iamRoles *smithy.Schema
-
-var CloudExadataInfrastructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudExadataInfrastructure",
-}, smithy.ShapeTypeStructure, 39)
-var CloudExadataInfrastructure_cloudExadataInfrastructureId *smithy.Schema
-
-var CloudExadataInfrastructure_displayName *smithy.Schema
-
-var CloudExadataInfrastructure_status *smithy.Schema
-
-var CloudExadataInfrastructure_statusReason *smithy.Schema
-
-var CloudExadataInfrastructure_cloudExadataInfrastructureArn *smithy.Schema
-
-var CloudExadataInfrastructure_activatedStorageCount *smithy.Schema
-
-var CloudExadataInfrastructure_additionalStorageCount *smithy.Schema
-
-var CloudExadataInfrastructure_availableStorageSizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructure_availabilityZone *smithy.Schema
-
-var CloudExadataInfrastructure_availabilityZoneId *smithy.Schema
-
-var CloudExadataInfrastructure_computeCount *smithy.Schema
-
-var CloudExadataInfrastructure_cpuCount *smithy.Schema
-
-var CloudExadataInfrastructure_customerContactsToSendToOCI *smithy.Schema
-
-var CloudExadataInfrastructure_dataStorageSizeInTBs *smithy.Schema
-
-var CloudExadataInfrastructure_dbNodeStorageSizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructure_dbServerVersion *smithy.Schema
-
-var CloudExadataInfrastructure_lastMaintenanceRunId *smithy.Schema
-
-var CloudExadataInfrastructure_maintenanceWindow *smithy.Schema
-
-var CloudExadataInfrastructure_maxCpuCount *smithy.Schema
-
-var CloudExadataInfrastructure_maxDataStorageInTBs *smithy.Schema
-
-var CloudExadataInfrastructure_maxDbNodeStorageSizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructure_maxMemoryInGBs *smithy.Schema
-
-var CloudExadataInfrastructure_memorySizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructure_monthlyDbServerVersion *smithy.Schema
-
-var CloudExadataInfrastructure_monthlyStorageServerVersion *smithy.Schema
-
-var CloudExadataInfrastructure_nextMaintenanceRunId *smithy.Schema
-
-var CloudExadataInfrastructure_ociResourceAnchorName *smithy.Schema
-
-var CloudExadataInfrastructure_ociUrl *smithy.Schema
-
-var CloudExadataInfrastructure_ocid *smithy.Schema
-
-var CloudExadataInfrastructure_shape *smithy.Schema
-
-var CloudExadataInfrastructure_storageCount *smithy.Schema
-
-var CloudExadataInfrastructure_storageServerVersion *smithy.Schema
-
-var CloudExadataInfrastructure_createdAt *smithy.Schema
-
-var CloudExadataInfrastructure_totalStorageSizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructure_percentProgress *smithy.Schema
-
-var CloudExadataInfrastructure_databaseServerType *smithy.Schema
-
-var CloudExadataInfrastructure_storageServerType *smithy.Schema
-
-var CloudExadataInfrastructure_computeModel *smithy.Schema
-
-var CloudExadataInfrastructure_exascaleConfiguration *smithy.Schema
-
-var _CloudExadataInfrastructureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudExadataInfrastructureList",
-}, smithy.ShapeTypeList, 1)
-var _CloudExadataInfrastructureList_member *smithy.Schema
-
-var CloudExadataInfrastructureSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudExadataInfrastructureSummary",
-}, smithy.ShapeTypeStructure, 39)
-var CloudExadataInfrastructureSummary_cloudExadataInfrastructureId *smithy.Schema
-
-var CloudExadataInfrastructureSummary_displayName *smithy.Schema
-
-var CloudExadataInfrastructureSummary_status *smithy.Schema
-
-var CloudExadataInfrastructureSummary_statusReason *smithy.Schema
-
-var CloudExadataInfrastructureSummary_cloudExadataInfrastructureArn *smithy.Schema
-
-var CloudExadataInfrastructureSummary_activatedStorageCount *smithy.Schema
-
-var CloudExadataInfrastructureSummary_additionalStorageCount *smithy.Schema
-
-var CloudExadataInfrastructureSummary_availableStorageSizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructureSummary_availabilityZone *smithy.Schema
-
-var CloudExadataInfrastructureSummary_availabilityZoneId *smithy.Schema
-
-var CloudExadataInfrastructureSummary_computeCount *smithy.Schema
-
-var CloudExadataInfrastructureSummary_cpuCount *smithy.Schema
-
-var CloudExadataInfrastructureSummary_customerContactsToSendToOCI *smithy.Schema
-
-var CloudExadataInfrastructureSummary_dataStorageSizeInTBs *smithy.Schema
-
-var CloudExadataInfrastructureSummary_dbNodeStorageSizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructureSummary_dbServerVersion *smithy.Schema
-
-var CloudExadataInfrastructureSummary_lastMaintenanceRunId *smithy.Schema
-
-var CloudExadataInfrastructureSummary_maintenanceWindow *smithy.Schema
-
-var CloudExadataInfrastructureSummary_maxCpuCount *smithy.Schema
-
-var CloudExadataInfrastructureSummary_maxDataStorageInTBs *smithy.Schema
-
-var CloudExadataInfrastructureSummary_maxDbNodeStorageSizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructureSummary_maxMemoryInGBs *smithy.Schema
-
-var CloudExadataInfrastructureSummary_memorySizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructureSummary_monthlyDbServerVersion *smithy.Schema
-
-var CloudExadataInfrastructureSummary_monthlyStorageServerVersion *smithy.Schema
-
-var CloudExadataInfrastructureSummary_nextMaintenanceRunId *smithy.Schema
-
-var CloudExadataInfrastructureSummary_ociResourceAnchorName *smithy.Schema
-
-var CloudExadataInfrastructureSummary_ociUrl *smithy.Schema
-
-var CloudExadataInfrastructureSummary_ocid *smithy.Schema
-
-var CloudExadataInfrastructureSummary_shape *smithy.Schema
-
-var CloudExadataInfrastructureSummary_storageCount *smithy.Schema
-
-var CloudExadataInfrastructureSummary_storageServerVersion *smithy.Schema
-
-var CloudExadataInfrastructureSummary_createdAt *smithy.Schema
-
-var CloudExadataInfrastructureSummary_totalStorageSizeInGBs *smithy.Schema
-
-var CloudExadataInfrastructureSummary_percentProgress *smithy.Schema
-
-var CloudExadataInfrastructureSummary_databaseServerType *smithy.Schema
-
-var CloudExadataInfrastructureSummary_storageServerType *smithy.Schema
-
-var CloudExadataInfrastructureSummary_computeModel *smithy.Schema
-
-var CloudExadataInfrastructureSummary_exascaleConfiguration *smithy.Schema
-
-var CloudExadataInfrastructureUnallocatedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudExadataInfrastructureUnallocatedResources",
-}, smithy.ShapeTypeStructure, 7)
-var CloudExadataInfrastructureUnallocatedResources_cloudAutonomousVmClusters *smithy.Schema
-
-var CloudExadataInfrastructureUnallocatedResources_cloudExadataInfrastructureDisplayName *smithy.Schema
-
-var CloudExadataInfrastructureUnallocatedResources_exadataStorageInTBs *smithy.Schema
-
-var CloudExadataInfrastructureUnallocatedResources_cloudExadataInfrastructureId *smithy.Schema
-
-var CloudExadataInfrastructureUnallocatedResources_localStorageInGBs *smithy.Schema
-
-var CloudExadataInfrastructureUnallocatedResources_memoryInGBs *smithy.Schema
-
-var CloudExadataInfrastructureUnallocatedResources_ocpus *smithy.Schema
-
-var CloudVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudVmCluster",
-}, smithy.ShapeTypeStructure, 49)
-var CloudVmCluster_cloudVmClusterId *smithy.Schema
-
-var CloudVmCluster_displayName *smithy.Schema
-
-var CloudVmCluster_status *smithy.Schema
-
-var CloudVmCluster_statusReason *smithy.Schema
-
-var CloudVmCluster_cloudVmClusterArn *smithy.Schema
-
-var CloudVmCluster_cloudExadataInfrastructureId *smithy.Schema
-
-var CloudVmCluster_cloudExadataInfrastructureArn *smithy.Schema
-
-var CloudVmCluster_exascaleDbStorageVaultId *smithy.Schema
-
-var CloudVmCluster_exascaleDbStorageVaultArn *smithy.Schema
-
-var CloudVmCluster_storageManagementType *smithy.Schema
-
-var CloudVmCluster_vmFileSystemStorageType *smithy.Schema
-
-var CloudVmCluster_vmBackupStorageType *smithy.Schema
-
-var CloudVmCluster_fileSystemConfigurationDetails *smithy.Schema
-
-var CloudVmCluster_clusterName *smithy.Schema
-
-var CloudVmCluster_cpuCoreCount *smithy.Schema
-
-var CloudVmCluster_dataCollectionOptions *smithy.Schema
-
-var CloudVmCluster_dataStorageSizeInTBs *smithy.Schema
-
-var CloudVmCluster_dbNodeStorageSizeInGBs *smithy.Schema
-
-var CloudVmCluster_dbServers *smithy.Schema
-
-var CloudVmCluster_diskRedundancy *smithy.Schema
-
-var CloudVmCluster_giVersion *smithy.Schema
-
-var CloudVmCluster_hostname *smithy.Schema
-
-var CloudVmCluster_iormConfigCache *smithy.Schema
-
-var CloudVmCluster_isLocalBackupEnabled *smithy.Schema
-
-var CloudVmCluster_isSparseDiskgroupEnabled *smithy.Schema
-
-var CloudVmCluster_lastUpdateHistoryEntryId *smithy.Schema
-
-var CloudVmCluster_licenseModel *smithy.Schema
-
-var CloudVmCluster_listenerPort *smithy.Schema
-
-var CloudVmCluster_memorySizeInGBs *smithy.Schema
-
-var CloudVmCluster_nodeCount *smithy.Schema
-
-var CloudVmCluster_ocid *smithy.Schema
-
-var CloudVmCluster_ociResourceAnchorName *smithy.Schema
-
-var CloudVmCluster_ociUrl *smithy.Schema
-
-var CloudVmCluster_domain *smithy.Schema
-
-var CloudVmCluster_scanDnsName *smithy.Schema
-
-var CloudVmCluster_scanDnsRecordId *smithy.Schema
-
-var CloudVmCluster_scanIpIds *smithy.Schema
-
-var CloudVmCluster_shape *smithy.Schema
-
-var CloudVmCluster_sshPublicKeys *smithy.Schema
-
-var CloudVmCluster_storageSizeInGBs *smithy.Schema
-
-var CloudVmCluster_systemVersion *smithy.Schema
-
-var CloudVmCluster_createdAt *smithy.Schema
-
-var CloudVmCluster_timeZone *smithy.Schema
-
-var CloudVmCluster_vipIds *smithy.Schema
-
-var CloudVmCluster_odbNetworkId *smithy.Schema
-
-var CloudVmCluster_odbNetworkArn *smithy.Schema
-
-var CloudVmCluster_percentProgress *smithy.Schema
-
-var CloudVmCluster_computeModel *smithy.Schema
-
-var CloudVmCluster_iamRoles *smithy.Schema
-
-var _CloudVmClusterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudVmClusterList",
-}, smithy.ShapeTypeList, 1)
-var _CloudVmClusterList_member *smithy.Schema
-
-var CloudVmClusterSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CloudVmClusterSummary",
-}, smithy.ShapeTypeStructure, 49)
-var CloudVmClusterSummary_cloudVmClusterId *smithy.Schema
-
-var CloudVmClusterSummary_displayName *smithy.Schema
-
-var CloudVmClusterSummary_status *smithy.Schema
-
-var CloudVmClusterSummary_statusReason *smithy.Schema
-
-var CloudVmClusterSummary_cloudVmClusterArn *smithy.Schema
-
-var CloudVmClusterSummary_cloudExadataInfrastructureId *smithy.Schema
-
-var CloudVmClusterSummary_cloudExadataInfrastructureArn *smithy.Schema
-
-var CloudVmClusterSummary_exascaleDbStorageVaultId *smithy.Schema
-
-var CloudVmClusterSummary_exascaleDbStorageVaultArn *smithy.Schema
-
-var CloudVmClusterSummary_storageManagementType *smithy.Schema
-
-var CloudVmClusterSummary_vmFileSystemStorageType *smithy.Schema
-
-var CloudVmClusterSummary_vmBackupStorageType *smithy.Schema
-
-var CloudVmClusterSummary_fileSystemConfigurationDetails *smithy.Schema
-
-var CloudVmClusterSummary_clusterName *smithy.Schema
-
-var CloudVmClusterSummary_cpuCoreCount *smithy.Schema
-
-var CloudVmClusterSummary_dataCollectionOptions *smithy.Schema
-
-var CloudVmClusterSummary_dataStorageSizeInTBs *smithy.Schema
-
-var CloudVmClusterSummary_dbNodeStorageSizeInGBs *smithy.Schema
-
-var CloudVmClusterSummary_dbServers *smithy.Schema
-
-var CloudVmClusterSummary_diskRedundancy *smithy.Schema
-
-var CloudVmClusterSummary_giVersion *smithy.Schema
-
-var CloudVmClusterSummary_hostname *smithy.Schema
-
-var CloudVmClusterSummary_iormConfigCache *smithy.Schema
-
-var CloudVmClusterSummary_isLocalBackupEnabled *smithy.Schema
-
-var CloudVmClusterSummary_isSparseDiskgroupEnabled *smithy.Schema
-
-var CloudVmClusterSummary_lastUpdateHistoryEntryId *smithy.Schema
-
-var CloudVmClusterSummary_licenseModel *smithy.Schema
-
-var CloudVmClusterSummary_listenerPort *smithy.Schema
-
-var CloudVmClusterSummary_memorySizeInGBs *smithy.Schema
-
-var CloudVmClusterSummary_nodeCount *smithy.Schema
-
-var CloudVmClusterSummary_ocid *smithy.Schema
-
-var CloudVmClusterSummary_ociResourceAnchorName *smithy.Schema
-
-var CloudVmClusterSummary_ociUrl *smithy.Schema
-
-var CloudVmClusterSummary_domain *smithy.Schema
-
-var CloudVmClusterSummary_scanDnsName *smithy.Schema
-
-var CloudVmClusterSummary_scanDnsRecordId *smithy.Schema
-
-var CloudVmClusterSummary_scanIpIds *smithy.Schema
-
-var CloudVmClusterSummary_shape *smithy.Schema
-
-var CloudVmClusterSummary_sshPublicKeys *smithy.Schema
-
-var CloudVmClusterSummary_storageSizeInGBs *smithy.Schema
-
-var CloudVmClusterSummary_systemVersion *smithy.Schema
-
-var CloudVmClusterSummary_createdAt *smithy.Schema
-
-var CloudVmClusterSummary_timeZone *smithy.Schema
-
-var CloudVmClusterSummary_vipIds *smithy.Schema
-
-var CloudVmClusterSummary_odbNetworkId *smithy.Schema
-
-var CloudVmClusterSummary_odbNetworkArn *smithy.Schema
-
-var CloudVmClusterSummary_percentProgress *smithy.Schema
-
-var CloudVmClusterSummary_computeModel *smithy.Schema
-
-var CloudVmClusterSummary_iamRoles *smithy.Schema
-
-var _ClusterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ClusterName",
-}, smithy.ShapeTypeString, 0)
-
-var ComputeModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ComputeModel",
-}, smithy.ShapeTypeEnum, 2)
-var ComputeModel_ECPU *smithy.Schema
-
-var ComputeModel_OCPU *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CrossRegionDataGuardConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CrossRegionDataGuardConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CrossRegionDataGuardConfiguration_sourceAutonomousDatabaseArn *smithy.Schema
-
-var CrossRegionDisasterRecoveryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CrossRegionDisasterRecoveryConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var CrossRegionDisasterRecoveryConfiguration_sourceAutonomousDatabaseArn *smithy.Schema
-
-var CrossRegionDisasterRecoveryConfiguration_remoteDisasterRecoveryType *smithy.Schema
-
-var CrossRegionDisasterRecoveryConfiguration_isReplicateAutomaticBackups *smithy.Schema
-
-var CrossRegionS3RestoreSourcesAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CrossRegionS3RestoreSourcesAccess",
-}, smithy.ShapeTypeStructure, 3)
-var CrossRegionS3RestoreSourcesAccess_region *smithy.Schema
-
-var CrossRegionS3RestoreSourcesAccess_ipv4Addresses *smithy.Schema
-
-var CrossRegionS3RestoreSourcesAccess_status *smithy.Schema
-
-var _CrossRegionS3RestoreSourcesAccessList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CrossRegionS3RestoreSourcesAccessList",
-}, smithy.ShapeTypeList, 1)
-var _CrossRegionS3RestoreSourcesAccessList_member *smithy.Schema
-
-var CustomerContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CustomerContact",
-}, smithy.ShapeTypeStructure, 1)
-var CustomerContact_email *smithy.Schema
-
-var _CustomerContacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CustomerContacts",
-}, smithy.ShapeTypeList, 1)
-var _CustomerContacts_member *smithy.Schema
-
-var CustomerManagedAwsSecretConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CustomerManagedAwsSecretConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var CustomerManagedAwsSecretConfiguration_iamRoleArn *smithy.Schema
-
-var CustomerManagedAwsSecretConfiguration_secretId *smithy.Schema
-
-var CustomerManagedAwsSecretConfiguration_externalIdType *smithy.Schema
-
-var CustomerManagedAwsSecretConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CustomerManagedAwsSecretConfigurationInput",
-}, smithy.ShapeTypeStructure, 3)
-var CustomerManagedAwsSecretConfigurationInput_secretId *smithy.Schema
-
-var CustomerManagedAwsSecretConfigurationInput_iamRoleArn *smithy.Schema
-
-var CustomerManagedAwsSecretConfigurationInput_externalIdType *smithy.Schema
-
-var DatabaseCloneConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseCloneConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DatabaseCloneConfiguration_sourceAutonomousDatabaseId *smithy.Schema
-
-var DatabaseCloneConfiguration_cloneType *smithy.Schema
-
-var _DatabaseConnectionStringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseConnectionStringMap",
-}, smithy.ShapeTypeMap, 2)
-var _DatabaseConnectionStringMap_key *smithy.Schema
-
-var _DatabaseConnectionStringMap_value *smithy.Schema
-
-var DatabaseConnectionStringProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseConnectionStringProfile",
-}, smithy.ShapeTypeStructure, 9)
-var DatabaseConnectionStringProfile_consumerGroup *smithy.Schema
-
-var DatabaseConnectionStringProfile_displayName *smithy.Schema
-
-var DatabaseConnectionStringProfile_hostFormat *smithy.Schema
-
-var DatabaseConnectionStringProfile_isRegional *smithy.Schema
-
-var DatabaseConnectionStringProfile_protocol *smithy.Schema
-
-var DatabaseConnectionStringProfile_sessionMode *smithy.Schema
-
-var DatabaseConnectionStringProfile_syntaxFormat *smithy.Schema
-
-var DatabaseConnectionStringProfile_tlsAuthentication *smithy.Schema
-
-var DatabaseConnectionStringProfile_value *smithy.Schema
-
-var _DatabaseConnectionStringProfileList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseConnectionStringProfileList",
-}, smithy.ShapeTypeList, 1)
-var _DatabaseConnectionStringProfileList_member *smithy.Schema
-
-var DatabaseEdition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseEdition",
-}, smithy.ShapeTypeEnum, 2)
-var DatabaseEdition_STANDARD_EDITION *smithy.Schema
-
-var DatabaseEdition_ENTERPRISE_EDITION *smithy.Schema
-
-var DatabaseManagementStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseManagementStatus",
-}, smithy.ShapeTypeEnum, 6)
-var DatabaseManagementStatus_ENABLING *smithy.Schema
-
-var DatabaseManagementStatus_ENABLED *smithy.Schema
-
-var DatabaseManagementStatus_DISABLING *smithy.Schema
-
-var DatabaseManagementStatus_NOT_ENABLED *smithy.Schema
-
-var DatabaseManagementStatus_FAILED_ENABLING *smithy.Schema
-
-var DatabaseManagementStatus_FAILED_DISABLING *smithy.Schema
-
-var DatabaseStandbySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseStandbySummary",
-}, smithy.ShapeTypeStructure, 9)
-var DatabaseStandbySummary_availabilityDomain *smithy.Schema
-
-var DatabaseStandbySummary_lagTimeInSeconds *smithy.Schema
-
-var DatabaseStandbySummary_status *smithy.Schema
-
-var DatabaseStandbySummary_statusReason *smithy.Schema
-
-var DatabaseStandbySummary_maintenanceTargetComponent *smithy.Schema
-
-var DatabaseStandbySummary_timeDataGuardRoleChanged *smithy.Schema
-
-var DatabaseStandbySummary_timeDisasterRecoveryRoleChanged *smithy.Schema
-
-var DatabaseStandbySummary_timeMaintenanceBegin *smithy.Schema
-
-var DatabaseStandbySummary_timeMaintenanceEnd *smithy.Schema
-
-var DatabaseTool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseTool",
-}, smithy.ShapeTypeStructure, 4)
-var DatabaseTool_isEnabled *smithy.Schema
-
-var DatabaseTool_name *smithy.Schema
-
-var DatabaseTool_computeCount *smithy.Schema
-
-var DatabaseTool_maxIdleTimeInMinutes *smithy.Schema
-
-var _DatabaseToolList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseToolList",
-}, smithy.ShapeTypeList, 1)
-var _DatabaseToolList_member *smithy.Schema
-
-var DatabaseType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DatabaseType",
-}, smithy.ShapeTypeEnum, 2)
-var DatabaseType_REGULAR *smithy.Schema
-
-var DatabaseType_CLONE *smithy.Schema
-
-var DataCollectionOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DataCollectionOptions",
-}, smithy.ShapeTypeStructure, 3)
-var DataCollectionOptions_isDiagnosticsEventsEnabled *smithy.Schema
-
-var DataCollectionOptions_isHealthMonitoringEnabled *smithy.Schema
-
-var DataCollectionOptions_isIncidentLogsEnabled *smithy.Schema
-
-var DataGuardRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DataGuardRole",
-}, smithy.ShapeTypeEnum, 5)
-var DataGuardRole_PRIMARY *smithy.Schema
-
-var DataGuardRole_STANDBY *smithy.Schema
-
-var DataGuardRole_DISABLED_STANDBY *smithy.Schema
-
-var DataGuardRole_BACKUP_COPY *smithy.Schema
-
-var DataGuardRole_SNAPSHOT_STANDBY *smithy.Schema
-
-var DataSafeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DataSafeStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DataSafeStatus_REGISTERING *smithy.Schema
-
-var DataSafeStatus_REGISTERED *smithy.Schema
-
-var DataSafeStatus_DEREGISTERING *smithy.Schema
-
-var DataSafeStatus_NOT_REGISTERED *smithy.Schema
-
-var DataSafeStatus_FAILED *smithy.Schema
-
-var DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeStructure, 1)
-var DayOfWeek_name *smithy.Schema
-
-var DayOfWeekName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DayOfWeekName",
-}, smithy.ShapeTypeEnum, 7)
-var DayOfWeekName_MONDAY *smithy.Schema
-
-var DayOfWeekName_TUESDAY *smithy.Schema
-
-var DayOfWeekName_WEDNESDAY *smithy.Schema
-
-var DayOfWeekName_THURSDAY *smithy.Schema
-
-var DayOfWeekName_FRIDAY *smithy.Schema
-
-var DayOfWeekName_SATURDAY *smithy.Schema
-
-var DayOfWeekName_SUNDAY *smithy.Schema
-
-var _DaysOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DaysOfWeek",
-}, smithy.ShapeTypeList, 1)
-var _DaysOfWeek_member *smithy.Schema
-
-var DbIormConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbIormConfig",
-}, smithy.ShapeTypeStructure, 3)
-var DbIormConfig_dbName *smithy.Schema
-
-var DbIormConfig_flashCacheLimit *smithy.Schema
-
-var DbIormConfig_share *smithy.Schema
-
-var _DbIormConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbIormConfigList",
-}, smithy.ShapeTypeList, 1)
-var _DbIormConfigList_member *smithy.Schema
-
-var DbNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbNode",
-}, smithy.ShapeTypeStructure, 28)
-var DbNode_dbNodeId *smithy.Schema
-
-var DbNode_dbNodeArn *smithy.Schema
-
-var DbNode_status *smithy.Schema
-
-var DbNode_statusReason *smithy.Schema
-
-var DbNode_additionalDetails *smithy.Schema
-
-var DbNode_backupIpId *smithy.Schema
-
-var DbNode_backupVnic2Id *smithy.Schema
-
-var DbNode_backupVnicId *smithy.Schema
-
-var DbNode_cpuCoreCount *smithy.Schema
-
-var DbNode_dbNodeStorageSizeInGBs *smithy.Schema
-
-var DbNode_dbServerId *smithy.Schema
-
-var DbNode_dbSystemId *smithy.Schema
-
-var DbNode_faultDomain *smithy.Schema
-
-var DbNode_hostIpId *smithy.Schema
-
-var DbNode_hostname *smithy.Schema
-
-var DbNode_ocid *smithy.Schema
-
-var DbNode_ociResourceAnchorName *smithy.Schema
-
-var DbNode_maintenanceType *smithy.Schema
-
-var DbNode_memorySizeInGBs *smithy.Schema
-
-var DbNode_softwareStorageSizeInGB *smithy.Schema
-
-var DbNode_createdAt *smithy.Schema
-
-var DbNode_timeMaintenanceWindowEnd *smithy.Schema
-
-var DbNode_timeMaintenanceWindowStart *smithy.Schema
-
-var DbNode_totalCpuCoreCount *smithy.Schema
-
-var DbNode_vnic2Id *smithy.Schema
-
-var DbNode_vnicId *smithy.Schema
-
-var DbNode_privateIpAddress *smithy.Schema
-
-var DbNode_floatingIpAddress *smithy.Schema
-
-var _DbNodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbNodeList",
-}, smithy.ShapeTypeList, 1)
-var _DbNodeList_member *smithy.Schema
-
-var DbNodeMaintenanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbNodeMaintenanceType",
-}, smithy.ShapeTypeEnum, 1)
-var DbNodeMaintenanceType_VMDB_REBOOT_MIGRATION *smithy.Schema
-
-var DbNodeResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbNodeResourceStatus",
-}, smithy.ShapeTypeEnum, 9)
-var DbNodeResourceStatus_AVAILABLE *smithy.Schema
-
-var DbNodeResourceStatus_FAILED *smithy.Schema
-
-var DbNodeResourceStatus_PROVISIONING *smithy.Schema
-
-var DbNodeResourceStatus_TERMINATED *smithy.Schema
-
-var DbNodeResourceStatus_TERMINATING *smithy.Schema
-
-var DbNodeResourceStatus_UPDATING *smithy.Schema
-
-var DbNodeResourceStatus_STOPPING *smithy.Schema
-
-var DbNodeResourceStatus_STOPPED *smithy.Schema
-
-var DbNodeResourceStatus_STARTING *smithy.Schema
-
-var DbNodeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbNodeSummary",
-}, smithy.ShapeTypeStructure, 26)
-var DbNodeSummary_dbNodeId *smithy.Schema
-
-var DbNodeSummary_dbNodeArn *smithy.Schema
-
-var DbNodeSummary_status *smithy.Schema
-
-var DbNodeSummary_statusReason *smithy.Schema
-
-var DbNodeSummary_additionalDetails *smithy.Schema
-
-var DbNodeSummary_backupIpId *smithy.Schema
-
-var DbNodeSummary_backupVnic2Id *smithy.Schema
-
-var DbNodeSummary_backupVnicId *smithy.Schema
-
-var DbNodeSummary_cpuCoreCount *smithy.Schema
-
-var DbNodeSummary_dbNodeStorageSizeInGBs *smithy.Schema
-
-var DbNodeSummary_dbServerId *smithy.Schema
-
-var DbNodeSummary_dbSystemId *smithy.Schema
-
-var DbNodeSummary_faultDomain *smithy.Schema
-
-var DbNodeSummary_hostIpId *smithy.Schema
-
-var DbNodeSummary_hostname *smithy.Schema
-
-var DbNodeSummary_ocid *smithy.Schema
-
-var DbNodeSummary_ociResourceAnchorName *smithy.Schema
-
-var DbNodeSummary_maintenanceType *smithy.Schema
-
-var DbNodeSummary_memorySizeInGBs *smithy.Schema
-
-var DbNodeSummary_softwareStorageSizeInGB *smithy.Schema
-
-var DbNodeSummary_createdAt *smithy.Schema
-
-var DbNodeSummary_timeMaintenanceWindowEnd *smithy.Schema
-
-var DbNodeSummary_timeMaintenanceWindowStart *smithy.Schema
-
-var DbNodeSummary_totalCpuCoreCount *smithy.Schema
-
-var DbNodeSummary_vnic2Id *smithy.Schema
-
-var DbNodeSummary_vnicId *smithy.Schema
-
-var DbServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbServer",
-}, smithy.ShapeTypeStructure, 20)
-var DbServer_dbServerId *smithy.Schema
-
-var DbServer_status *smithy.Schema
-
-var DbServer_statusReason *smithy.Schema
-
-var DbServer_cpuCoreCount *smithy.Schema
-
-var DbServer_dbNodeStorageSizeInGBs *smithy.Schema
-
-var DbServer_dbServerPatchingDetails *smithy.Schema
-
-var DbServer_displayName *smithy.Schema
-
-var DbServer_exadataInfrastructureId *smithy.Schema
-
-var DbServer_ocid *smithy.Schema
-
-var DbServer_ociResourceAnchorName *smithy.Schema
-
-var DbServer_maxCpuCount *smithy.Schema
-
-var DbServer_maxDbNodeStorageInGBs *smithy.Schema
-
-var DbServer_maxMemoryInGBs *smithy.Schema
-
-var DbServer_memorySizeInGBs *smithy.Schema
-
-var DbServer_shape *smithy.Schema
-
-var DbServer_createdAt *smithy.Schema
-
-var DbServer_vmClusterIds *smithy.Schema
-
-var DbServer_computeModel *smithy.Schema
-
-var DbServer_autonomousVmClusterIds *smithy.Schema
-
-var DbServer_autonomousVirtualMachineIds *smithy.Schema
-
-var _DbServerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbServerList",
-}, smithy.ShapeTypeList, 1)
-var _DbServerList_member *smithy.Schema
-
-var DbServerPatchingDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbServerPatchingDetails",
-}, smithy.ShapeTypeStructure, 4)
-var DbServerPatchingDetails_estimatedPatchDuration *smithy.Schema
-
-var DbServerPatchingDetails_patchingStatus *smithy.Schema
-
-var DbServerPatchingDetails_timePatchingEnded *smithy.Schema
-
-var DbServerPatchingDetails_timePatchingStarted *smithy.Schema
-
-var DbServerPatchingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbServerPatchingStatus",
-}, smithy.ShapeTypeEnum, 4)
-var DbServerPatchingStatus_COMPLETE *smithy.Schema
-
-var DbServerPatchingStatus_FAILED *smithy.Schema
-
-var DbServerPatchingStatus_MAINTENANCE_IN_PROGRESS *smithy.Schema
-
-var DbServerPatchingStatus_SCHEDULED *smithy.Schema
-
-var DbServerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbServerSummary",
-}, smithy.ShapeTypeStructure, 20)
-var DbServerSummary_dbServerId *smithy.Schema
-
-var DbServerSummary_status *smithy.Schema
-
-var DbServerSummary_statusReason *smithy.Schema
-
-var DbServerSummary_cpuCoreCount *smithy.Schema
-
-var DbServerSummary_dbNodeStorageSizeInGBs *smithy.Schema
-
-var DbServerSummary_dbServerPatchingDetails *smithy.Schema
-
-var DbServerSummary_displayName *smithy.Schema
-
-var DbServerSummary_exadataInfrastructureId *smithy.Schema
-
-var DbServerSummary_ocid *smithy.Schema
-
-var DbServerSummary_ociResourceAnchorName *smithy.Schema
-
-var DbServerSummary_maxCpuCount *smithy.Schema
-
-var DbServerSummary_maxDbNodeStorageInGBs *smithy.Schema
-
-var DbServerSummary_maxMemoryInGBs *smithy.Schema
-
-var DbServerSummary_memorySizeInGBs *smithy.Schema
-
-var DbServerSummary_shape *smithy.Schema
-
-var DbServerSummary_createdAt *smithy.Schema
-
-var DbServerSummary_vmClusterIds *smithy.Schema
-
-var DbServerSummary_computeModel *smithy.Schema
-
-var DbServerSummary_autonomousVmClusterIds *smithy.Schema
-
-var DbServerSummary_autonomousVirtualMachineIds *smithy.Schema
-
-var _DbSystemShapeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbSystemShapeList",
-}, smithy.ShapeTypeList, 1)
-var _DbSystemShapeList_member *smithy.Schema
-
-var DbSystemShapeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbSystemShapeSummary",
-}, smithy.ShapeTypeStructure, 25)
-var DbSystemShapeSummary_availableCoreCount *smithy.Schema
-
-var DbSystemShapeSummary_availableCoreCountPerNode *smithy.Schema
-
-var DbSystemShapeSummary_availableDataStorageInTBs *smithy.Schema
-
-var DbSystemShapeSummary_availableDataStoragePerServerInTBs *smithy.Schema
-
-var DbSystemShapeSummary_availableDbNodePerNodeInGBs *smithy.Schema
-
-var DbSystemShapeSummary_availableDbNodeStorageInGBs *smithy.Schema
-
-var DbSystemShapeSummary_availableMemoryInGBs *smithy.Schema
-
-var DbSystemShapeSummary_availableMemoryPerNodeInGBs *smithy.Schema
-
-var DbSystemShapeSummary_coreCountIncrement *smithy.Schema
-
-var DbSystemShapeSummary_maxStorageCount *smithy.Schema
-
-var DbSystemShapeSummary_maximumNodeCount *smithy.Schema
-
-var DbSystemShapeSummary_minCoreCountPerNode *smithy.Schema
-
-var DbSystemShapeSummary_minDataStorageInTBs *smithy.Schema
-
-var DbSystemShapeSummary_minDbNodeStoragePerNodeInGBs *smithy.Schema
-
-var DbSystemShapeSummary_minMemoryPerNodeInGBs *smithy.Schema
-
-var DbSystemShapeSummary_minStorageCount *smithy.Schema
-
-var DbSystemShapeSummary_minimumCoreCount *smithy.Schema
-
-var DbSystemShapeSummary_minimumNodeCount *smithy.Schema
-
-var DbSystemShapeSummary_runtimeMinimumCoreCount *smithy.Schema
-
-var DbSystemShapeSummary_shapeFamily *smithy.Schema
-
-var DbSystemShapeSummary_shapeType *smithy.Schema
-
-var DbSystemShapeSummary_shapeAttributes *smithy.Schema
-
-var DbSystemShapeSummary_name *smithy.Schema
-
-var DbSystemShapeSummary_computeModel *smithy.Schema
-
-var DbSystemShapeSummary_areServerTypesSupported *smithy.Schema
-
-var DbWorkload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DbWorkload",
-}, smithy.ShapeTypeEnum, 4)
-var DbWorkload_OLTP *smithy.Schema
-
-var DbWorkload_AJD *smithy.Schema
-
-var DbWorkload_APEX *smithy.Schema
-
-var DbWorkload_LH *smithy.Schema
-
-var DisasterRecoveryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DisasterRecoveryConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var DisasterRecoveryConfiguration_disasterRecoveryType *smithy.Schema
-
-var DisasterRecoveryConfiguration_isReplicateAutomaticBackups *smithy.Schema
-
-var DisasterRecoveryConfiguration_isSnapshotStandby *smithy.Schema
-
-var DisasterRecoveryConfiguration_timeSnapshotStandbyEnabledTill *smithy.Schema
-
-var DisasterRecoveryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DisasterRecoveryType",
-}, smithy.ShapeTypeEnum, 2)
-var DisasterRecoveryType_ADG *smithy.Schema
-
-var DisasterRecoveryType_BACKUP_BASED *smithy.Schema
-
-var DiskRedundancy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DiskRedundancy",
-}, smithy.ShapeTypeEnum, 2)
-var DiskRedundancy_HIGH *smithy.Schema
-
-var DiskRedundancy_NORMAL *smithy.Schema
-
-var EncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "EncryptionKeyConfiguration",
-}, smithy.ShapeTypeUnion, 3)
-var EncryptionKeyConfiguration_awsEncryptionKey *smithy.Schema
-
-var EncryptionKeyConfiguration_ociEncryptionKey *smithy.Schema
-
-var EncryptionKeyConfiguration_okvEncryptionKey *smithy.Schema
-
-var EncryptionKeyConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "EncryptionKeyConfigurationInput",
-}, smithy.ShapeTypeUnion, 1)
-var EncryptionKeyConfigurationInput_awsEncryptionKey *smithy.Schema
-
-var EncryptionKeyProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "EncryptionKeyProvider",
-}, smithy.ShapeTypeEnum, 4)
-var EncryptionKeyProvider_ORACLE_MANAGED *smithy.Schema
-
-var EncryptionKeyProvider_AWS_KMS *smithy.Schema
-
-var EncryptionKeyProvider_OKV *smithy.Schema
-
-var EncryptionKeyProvider_OCI *smithy.Schema
-
-var EncryptionKeyProviderInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "EncryptionKeyProviderInput",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionKeyProviderInput_ORACLE_MANAGED *smithy.Schema
-
-var EncryptionKeyProviderInput_AWS_KMS *smithy.Schema
-
-var EncryptionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "EncryptionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionSummary_encryptionKeyProvider *smithy.Schema
-
-var EncryptionSummary_encryptionKeyConfiguration *smithy.Schema
-
-var ExadataIormConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExadataIormConfig",
-}, smithy.ShapeTypeStructure, 4)
-var ExadataIormConfig_dbPlans *smithy.Schema
-
-var ExadataIormConfig_lifecycleDetails *smithy.Schema
-
-var ExadataIormConfig_lifecycleState *smithy.Schema
-
-var ExadataIormConfig_objective *smithy.Schema
-
-var ExadbVmCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExadbVmCluster",
-}, smithy.ShapeTypeStructure, 44)
-var ExadbVmCluster_exadbVmClusterId *smithy.Schema
-
-var ExadbVmCluster_clusterName *smithy.Schema
-
-var ExadbVmCluster_createdAt *smithy.Schema
-
-var ExadbVmCluster_dataCollectionOptions *smithy.Schema
-
-var ExadbVmCluster_displayName *smithy.Schema
-
-var ExadbVmCluster_domain *smithy.Schema
-
-var ExadbVmCluster_enabledEcpuCount *smithy.Schema
-
-var ExadbVmCluster_exadbVmClusterArn *smithy.Schema
-
-var ExadbVmCluster_exascaleDbStorageVaultArn *smithy.Schema
-
-var ExadbVmCluster_exascaleDbStorageVaultId *smithy.Schema
-
-var ExadbVmCluster_giVersion *smithy.Schema
-
-var ExadbVmCluster_gridImageId *smithy.Schema
-
-var ExadbVmCluster_gridImageType *smithy.Schema
-
-var ExadbVmCluster_hostname *smithy.Schema
-
-var ExadbVmCluster_iamRoles *smithy.Schema
-
-var ExadbVmCluster_iormConfigCache *smithy.Schema
-
-var ExadbVmCluster_lastUpdateHistoryEntryId *smithy.Schema
-
-var ExadbVmCluster_licenseModel *smithy.Schema
-
-var ExadbVmCluster_listenerPort *smithy.Schema
-
-var ExadbVmCluster_memorySizeInGBs *smithy.Schema
-
-var ExadbVmCluster_nodeCount *smithy.Schema
-
-var ExadbVmCluster_ocid *smithy.Schema
-
-var ExadbVmCluster_ociResourceAnchorName *smithy.Schema
-
-var ExadbVmCluster_ociUrl *smithy.Schema
-
-var ExadbVmCluster_odbNetworkArn *smithy.Schema
-
-var ExadbVmCluster_odbNetworkId *smithy.Schema
-
-var ExadbVmCluster_percentProgress *smithy.Schema
-
-var ExadbVmCluster_scanDnsName *smithy.Schema
-
-var ExadbVmCluster_scanDnsRecordId *smithy.Schema
-
-var ExadbVmCluster_scanIpIds *smithy.Schema
-
-var ExadbVmCluster_scanListenerPortTcp *smithy.Schema
-
-var ExadbVmCluster_scanListenerPortTcpSsl *smithy.Schema
-
-var ExadbVmCluster_shape *smithy.Schema
-
-var ExadbVmCluster_shapeAttribute *smithy.Schema
-
-var ExadbVmCluster_snapshotFileSystemStorage *smithy.Schema
-
-var ExadbVmCluster_sshPublicKeys *smithy.Schema
-
-var ExadbVmCluster_status *smithy.Schema
-
-var ExadbVmCluster_statusReason *smithy.Schema
-
-var ExadbVmCluster_systemVersion *smithy.Schema
-
-var ExadbVmCluster_timeZone *smithy.Schema
-
-var ExadbVmCluster_totalEcpuCount *smithy.Schema
-
-var ExadbVmCluster_totalFileSystemStorage *smithy.Schema
-
-var ExadbVmCluster_vipIds *smithy.Schema
-
-var ExadbVmCluster_vmFileSystemStorage *smithy.Schema
-
-var _ExadbVmClusterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExadbVmClusterList",
-}, smithy.ShapeTypeList, 1)
-var _ExadbVmClusterList_member *smithy.Schema
-
-var ExadbVmClusterStorageDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExadbVmClusterStorageDetails",
-}, smithy.ShapeTypeStructure, 1)
-var ExadbVmClusterStorageDetails_totalSizeInGBs *smithy.Schema
-
-var ExadbVmClusterSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExadbVmClusterSummary",
-}, smithy.ShapeTypeStructure, 44)
-var ExadbVmClusterSummary_exadbVmClusterId *smithy.Schema
-
-var ExadbVmClusterSummary_clusterName *smithy.Schema
-
-var ExadbVmClusterSummary_createdAt *smithy.Schema
-
-var ExadbVmClusterSummary_dataCollectionOptions *smithy.Schema
-
-var ExadbVmClusterSummary_displayName *smithy.Schema
-
-var ExadbVmClusterSummary_domain *smithy.Schema
-
-var ExadbVmClusterSummary_enabledEcpuCount *smithy.Schema
-
-var ExadbVmClusterSummary_exadbVmClusterArn *smithy.Schema
-
-var ExadbVmClusterSummary_exascaleDbStorageVaultArn *smithy.Schema
-
-var ExadbVmClusterSummary_exascaleDbStorageVaultId *smithy.Schema
-
-var ExadbVmClusterSummary_giVersion *smithy.Schema
-
-var ExadbVmClusterSummary_gridImageId *smithy.Schema
-
-var ExadbVmClusterSummary_gridImageType *smithy.Schema
-
-var ExadbVmClusterSummary_hostname *smithy.Schema
-
-var ExadbVmClusterSummary_iamRoles *smithy.Schema
-
-var ExadbVmClusterSummary_iormConfigCache *smithy.Schema
-
-var ExadbVmClusterSummary_lastUpdateHistoryEntryId *smithy.Schema
-
-var ExadbVmClusterSummary_licenseModel *smithy.Schema
-
-var ExadbVmClusterSummary_listenerPort *smithy.Schema
-
-var ExadbVmClusterSummary_memorySizeInGBs *smithy.Schema
-
-var ExadbVmClusterSummary_nodeCount *smithy.Schema
-
-var ExadbVmClusterSummary_ocid *smithy.Schema
-
-var ExadbVmClusterSummary_ociResourceAnchorName *smithy.Schema
-
-var ExadbVmClusterSummary_ociUrl *smithy.Schema
-
-var ExadbVmClusterSummary_odbNetworkArn *smithy.Schema
-
-var ExadbVmClusterSummary_odbNetworkId *smithy.Schema
-
-var ExadbVmClusterSummary_percentProgress *smithy.Schema
-
-var ExadbVmClusterSummary_scanDnsName *smithy.Schema
-
-var ExadbVmClusterSummary_scanDnsRecordId *smithy.Schema
-
-var ExadbVmClusterSummary_scanIpIds *smithy.Schema
-
-var ExadbVmClusterSummary_scanListenerPortTcp *smithy.Schema
-
-var ExadbVmClusterSummary_scanListenerPortTcpSsl *smithy.Schema
-
-var ExadbVmClusterSummary_shape *smithy.Schema
-
-var ExadbVmClusterSummary_shapeAttribute *smithy.Schema
-
-var ExadbVmClusterSummary_snapshotFileSystemStorage *smithy.Schema
-
-var ExadbVmClusterSummary_sshPublicKeys *smithy.Schema
-
-var ExadbVmClusterSummary_status *smithy.Schema
-
-var ExadbVmClusterSummary_statusReason *smithy.Schema
-
-var ExadbVmClusterSummary_systemVersion *smithy.Schema
-
-var ExadbVmClusterSummary_timeZone *smithy.Schema
-
-var ExadbVmClusterSummary_totalEcpuCount *smithy.Schema
-
-var ExadbVmClusterSummary_totalFileSystemStorage *smithy.Schema
-
-var ExadbVmClusterSummary_vipIds *smithy.Schema
-
-var ExadbVmClusterSummary_vmFileSystemStorage *smithy.Schema
-
-var ExascaleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExascaleConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ExascaleConfiguration_totalStorageSizeInGBs *smithy.Schema
-
-var ExascaleConfiguration_availableStorageSizeInGBs *smithy.Schema
-
-var ExascaleConfiguration_totalVmStorageSizeInGBs *smithy.Schema
-
-var ExascaleConfiguration_availableVmStorageSizeInGBs *smithy.Schema
-
-var ExascaleDbStorageDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExascaleDbStorageDetails",
-}, smithy.ShapeTypeStructure, 2)
-var ExascaleDbStorageDetails_availableSizeInGBs *smithy.Schema
-
-var ExascaleDbStorageDetails_totalSizeInGBs *smithy.Schema
-
-var ExascaleDbStorageVault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExascaleDbStorageVault",
-}, smithy.ShapeTypeStructure, 25)
-var ExascaleDbStorageVault_exascaleDbStorageVaultId *smithy.Schema
-
-var ExascaleDbStorageVault_additionalFlashCacheInPercent *smithy.Schema
-
-var ExascaleDbStorageVault_attachedShapeAttributes *smithy.Schema
-
-var ExascaleDbStorageVault_autoscaleLimitInGBs *smithy.Schema
-
-var ExascaleDbStorageVault_availabilityZone *smithy.Schema
-
-var ExascaleDbStorageVault_availabilityZoneId *smithy.Schema
-
-var ExascaleDbStorageVault_cloudExadataInfrastructureArn *smithy.Schema
-
-var ExascaleDbStorageVault_cloudExadataInfrastructureId *smithy.Schema
-
-var ExascaleDbStorageVault_createdAt *smithy.Schema
-
-var ExascaleDbStorageVault_description *smithy.Schema
-
-var ExascaleDbStorageVault_displayName *smithy.Schema
-
-var ExascaleDbStorageVault_vmClusterArns *smithy.Schema
-
-var ExascaleDbStorageVault_vmClusterCount *smithy.Schema
-
-var ExascaleDbStorageVault_vmClusterIds *smithy.Schema
-
-var ExascaleDbStorageVault_exascaleDbStorageVaultArn *smithy.Schema
-
-var ExascaleDbStorageVault_highCapacityDatabaseStorage *smithy.Schema
-
-var ExascaleDbStorageVault_isAutoscaleEnabled *smithy.Schema
-
-var ExascaleDbStorageVault_ocid *smithy.Schema
-
-var ExascaleDbStorageVault_ociResourceAnchorName *smithy.Schema
-
-var ExascaleDbStorageVault_ociUrl *smithy.Schema
-
-var ExascaleDbStorageVault_percentProgress *smithy.Schema
-
-var ExascaleDbStorageVault_status *smithy.Schema
-
-var ExascaleDbStorageVault_statusReason *smithy.Schema
-
-var ExascaleDbStorageVault_timeZone *smithy.Schema
-
-var ExascaleDbStorageVault_vaultType *smithy.Schema
-
-var _ExascaleDbStorageVaultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExascaleDbStorageVaultList",
-}, smithy.ShapeTypeList, 1)
-var _ExascaleDbStorageVaultList_member *smithy.Schema
-
-var ExascaleDbStorageVaultSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExascaleDbStorageVaultSummary",
-}, smithy.ShapeTypeStructure, 25)
-var ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_attachedShapeAttributes *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_autoscaleLimitInGBs *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_availabilityZone *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_availabilityZoneId *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_cloudExadataInfrastructureArn *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_cloudExadataInfrastructureId *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_createdAt *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_description *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_displayName *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_vmClusterArns *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_vmClusterCount *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_vmClusterIds *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_exascaleDbStorageVaultArn *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_highCapacityDatabaseStorage *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_isAutoscaleEnabled *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_ocid *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_ociResourceAnchorName *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_ociUrl *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_percentProgress *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_status *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_statusReason *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_timeZone *smithy.Schema
-
-var ExascaleDbStorageVaultSummary_vaultType *smithy.Schema
-
-var ExascaleDbStorageVaultType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExascaleDbStorageVaultType",
-}, smithy.ShapeTypeEnum, 2)
-var ExascaleDbStorageVaultType_EXASCALE_INFRASTRUCTURE *smithy.Schema
-
-var ExascaleDbStorageVaultType_DEDICATED_INFRASTRUCTURE *smithy.Schema
-
-var ExternalIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ExternalIdType",
-}, smithy.ShapeTypeEnum, 3)
-var ExternalIdType_DATABASE_OCID *smithy.Schema
-
-var ExternalIdType_COMPARTMENT_OCID *smithy.Schema
-
-var ExternalIdType_TENANT_OCID *smithy.Schema
-
-var FileSystemConfigurationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "FileSystemConfigurationDetails",
-}, smithy.ShapeTypeStructure, 2)
-var FileSystemConfigurationDetails_mountPoint *smithy.Schema
-
-var FileSystemConfigurationDetails_fileSystemSizeInGBs *smithy.Schema
-
-var _FileSystemConfigurationDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "FileSystemConfigurationDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemConfigurationDetailsList_member *smithy.Schema
-
-var _FlexComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "FlexComponentList",
-}, smithy.ShapeTypeList, 1)
-var _FlexComponentList_member *smithy.Schema
-
-var FlexComponentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "FlexComponentSummary",
-}, smithy.ShapeTypeStructure, 11)
-var FlexComponentSummary_availableCoreCount *smithy.Schema
-
-var FlexComponentSummary_availableDbStorageInGBs *smithy.Schema
-
-var FlexComponentSummary_availableLocalStorageInGBs *smithy.Schema
-
-var FlexComponentSummary_availableMemoryInGBs *smithy.Schema
-
-var FlexComponentSummary_computeModel *smithy.Schema
-
-var FlexComponentSummary_descriptionSummary *smithy.Schema
-
-var FlexComponentSummary_hardwareType *smithy.Schema
-
-var FlexComponentSummary_minimumCoreCount *smithy.Schema
-
-var FlexComponentSummary_name *smithy.Schema
-
-var FlexComponentSummary_runtimeMinimumCoreCount *smithy.Schema
-
-var FlexComponentSummary_shape *smithy.Schema
-
-var _GeneralInputString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GeneralInputString",
-}, smithy.ShapeTypeString, 0)
-
-var _GiMinorVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GiMinorVersionList",
-}, smithy.ShapeTypeList, 1)
-var _GiMinorVersionList_member *smithy.Schema
-
-var GiMinorVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GiMinorVersionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var GiMinorVersionSummary_version *smithy.Schema
-
-var GiMinorVersionSummary_gridImageId *smithy.Schema
-
-var _GiVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GiVersionList",
-}, smithy.ShapeTypeList, 1)
-var _GiVersionList_member *smithy.Schema
-
-var GiVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GiVersionSummary",
-}, smithy.ShapeTypeStructure, 1)
-var GiVersionSummary_version *smithy.Schema
-
-var GridImageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GridImageType",
-}, smithy.ShapeTypeEnum, 2)
-var GridImageType_RELEASE_UPDATE *smithy.Schema
-
-var GridImageType_CUSTOM_IMAGE *smithy.Schema
-
-var HardwareType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "HardwareType",
-}, smithy.ShapeTypeEnum, 2)
-var HardwareType_COMPUTE *smithy.Schema
-
-var HardwareType_CELL *smithy.Schema
-
-var _Hostname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "Hostname",
-}, smithy.ShapeTypeString, 0)
-
-var _HoursOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "HoursOfDay",
-}, smithy.ShapeTypeList, 1)
-var _HoursOfDay_member *smithy.Schema
-
-var IamRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "IamRole",
-}, smithy.ShapeTypeStructure, 4)
-var IamRole_iamRoleArn *smithy.Schema
-
-var IamRole_status *smithy.Schema
-
-var IamRole_statusReason *smithy.Schema
-
-var IamRole_awsIntegration *smithy.Schema
-
-var _IamRoleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "IamRoleList",
-}, smithy.ShapeTypeList, 1)
-var _IamRoleList_member *smithy.Schema
-
-var IamRoleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "IamRoleStatus",
-}, smithy.ShapeTypeEnum, 7)
-var IamRoleStatus_ASSOCIATING *smithy.Schema
-
-var IamRoleStatus_DISASSOCIATING *smithy.Schema
-
-var IamRoleStatus_FAILED *smithy.Schema
-
-var IamRoleStatus_CONNECTED *smithy.Schema
-
-var IamRoleStatus_DISCONNECTED *smithy.Schema
-
-var IamRoleStatus_PARTIALLY_CONNECTED *smithy.Schema
-
-var IamRoleStatus_UNKNOWN *smithy.Schema
-
-var _IntegerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "IntegerList",
-}, smithy.ShapeTypeList, 1)
-var _IntegerList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var IormLifecycleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "IormLifecycleState",
-}, smithy.ShapeTypeEnum, 5)
-var IormLifecycleState_BOOTSTRAPPING *smithy.Schema
-
-var IormLifecycleState_DISABLED *smithy.Schema
-
-var IormLifecycleState_ENABLED *smithy.Schema
-
-var IormLifecycleState_FAILED *smithy.Schema
-
-var IormLifecycleState_UPDATING *smithy.Schema
-
-var KmsAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "KmsAccess",
-}, smithy.ShapeTypeStructure, 4)
-var KmsAccess_status *smithy.Schema
-
-var KmsAccess_ipv4Addresses *smithy.Schema
-
-var KmsAccess_domainName *smithy.Schema
-
-var KmsAccess_kmsPolicyDocument *smithy.Schema
-
-var _KmsKeyIdOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "KmsKeyIdOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var LicenseModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "LicenseModel",
-}, smithy.ShapeTypeEnum, 2)
-var LicenseModel_BRING_YOUR_OWN_LICENSE *smithy.Schema
-
-var LicenseModel_LICENSE_INCLUDED *smithy.Schema
-
-var LongTermBackupSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "LongTermBackupSchedule",
-}, smithy.ShapeTypeStructure, 4)
-var LongTermBackupSchedule_isDisabled *smithy.Schema
-
-var LongTermBackupSchedule_repeatCadence *smithy.Schema
-
-var LongTermBackupSchedule_retentionPeriodInDays *smithy.Schema
-
-var LongTermBackupSchedule_timeOfBackup *smithy.Schema
-
-var MaintenanceWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "MaintenanceWindow",
-}, smithy.ShapeTypeStructure, 10)
-var MaintenanceWindow_customActionTimeoutInMins *smithy.Schema
-
-var MaintenanceWindow_daysOfWeek *smithy.Schema
-
-var MaintenanceWindow_hoursOfDay *smithy.Schema
-
-var MaintenanceWindow_isCustomActionTimeoutEnabled *smithy.Schema
-
-var MaintenanceWindow_leadTimeInWeeks *smithy.Schema
-
-var MaintenanceWindow_months *smithy.Schema
-
-var MaintenanceWindow_patchingMode *smithy.Schema
-
-var MaintenanceWindow_preference *smithy.Schema
-
-var MaintenanceWindow_skipRu *smithy.Schema
-
-var MaintenanceWindow_weeksOfMonth *smithy.Schema
-
-var ManagedResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ManagedResourceStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ManagedResourceStatus_ENABLED *smithy.Schema
-
-var ManagedResourceStatus_ENABLING *smithy.Schema
-
-var ManagedResourceStatus_DISABLED *smithy.Schema
-
-var ManagedResourceStatus_DISABLING *smithy.Schema
-
-var ManagedS3BackupAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ManagedS3BackupAccess",
-}, smithy.ShapeTypeStructure, 2)
-var ManagedS3BackupAccess_status *smithy.Schema
-
-var ManagedS3BackupAccess_ipv4Addresses *smithy.Schema
-
-var ManagedServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ManagedServices",
-}, smithy.ShapeTypeStructure, 10)
-var ManagedServices_serviceNetworkArn *smithy.Schema
-
-var ManagedServices_resourceGatewayArn *smithy.Schema
-
-var ManagedServices_managedServicesIpv4Cidrs *smithy.Schema
-
-var ManagedServices_serviceNetworkEndpoint *smithy.Schema
-
-var ManagedServices_managedS3BackupAccess *smithy.Schema
-
-var ManagedServices_zeroEtlAccess *smithy.Schema
-
-var ManagedServices_s3Access *smithy.Schema
-
-var ManagedServices_stsAccess *smithy.Schema
-
-var ManagedServices_kmsAccess *smithy.Schema
-
-var ManagedServices_crossRegionS3RestoreSourcesAccess *smithy.Schema
-
-var Month = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "Month",
-}, smithy.ShapeTypeStructure, 1)
-var Month_name *smithy.Schema
-
-var MonthName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "MonthName",
-}, smithy.ShapeTypeEnum, 12)
-var MonthName_JANUARY *smithy.Schema
-
-var MonthName_FEBRUARY *smithy.Schema
-
-var MonthName_MARCH *smithy.Schema
-
-var MonthName_APRIL *smithy.Schema
-
-var MonthName_MAY *smithy.Schema
-
-var MonthName_JUNE *smithy.Schema
-
-var MonthName_JULY *smithy.Schema
-
-var MonthName_AUGUST *smithy.Schema
-
-var MonthName_SEPTEMBER *smithy.Schema
-
-var MonthName_OCTOBER *smithy.Schema
-
-var MonthName_NOVEMBER *smithy.Schema
-
-var MonthName_DECEMBER *smithy.Schema
-
-var _Months = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "Months",
-}, smithy.ShapeTypeList, 1)
-var _Months_member *smithy.Schema
-
-var NetServicesArchitecture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "NetServicesArchitecture",
-}, smithy.ShapeTypeEnum, 2)
-var NetServicesArchitecture_DEDICATED *smithy.Schema
-
-var NetServicesArchitecture_SHARED *smithy.Schema
-
-var Objective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "Objective",
-}, smithy.ShapeTypeEnum, 5)
-var Objective_AUTO *smithy.Schema
-
-var Objective_BALANCED *smithy.Schema
-
-var Objective_BASIC *smithy.Schema
-
-var Objective_HIGH_THROUGHPUT *smithy.Schema
-
-var Objective_LOW_LATENCY *smithy.Schema
-
-var OciAwsIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciAwsIntegration",
-}, smithy.ShapeTypeEnum, 2)
-var OciAwsIntegration_KmsTde *smithy.Schema
-
-var OciAwsIntegration_SecretsManager *smithy.Schema
-
-var OciDnsForwardingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciDnsForwardingConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OciDnsForwardingConfig_domainName *smithy.Schema
-
-var OciDnsForwardingConfig_ociDnsListenerIp *smithy.Schema
-
-var _OciDnsForwardingConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciDnsForwardingConfigList",
-}, smithy.ShapeTypeList, 1)
-var _OciDnsForwardingConfigList_member *smithy.Schema
-
-var OciEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciEncryptionKeyConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OciEncryptionKeyConfiguration_kmsKeyId *smithy.Schema
-
-var OciEncryptionKeyConfiguration_vaultId *smithy.Schema
-
-var OciIamRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciIamRole",
-}, smithy.ShapeTypeStructure, 4)
-var OciIamRole_iamRoleArn *smithy.Schema
-
-var OciIamRole_awsIntegration *smithy.Schema
-
-var OciIamRole_status *smithy.Schema
-
-var OciIamRole_statusReason *smithy.Schema
-
-var _OciIamRoleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciIamRoleList",
-}, smithy.ShapeTypeList, 1)
-var _OciIamRoleList_member *smithy.Schema
-
-var OciIamRoleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciIamRoleStatus",
-}, smithy.ShapeTypeEnum, 5)
-var OciIamRoleStatus_PROVISIONING *smithy.Schema
-
-var OciIamRoleStatus_AVAILABLE *smithy.Schema
-
-var OciIamRoleStatus_PROVISION_FAILED *smithy.Schema
-
-var OciIamRoleStatus_TERMINATING *smithy.Schema
-
-var OciIamRoleStatus_TERMINATE_FAILED *smithy.Schema
-
-var OciIdentityDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciIdentityDomain",
-}, smithy.ShapeTypeStructure, 6)
-var OciIdentityDomain_ociIdentityDomainId *smithy.Schema
-
-var OciIdentityDomain_ociIdentityDomainResourceUrl *smithy.Schema
-
-var OciIdentityDomain_ociIdentityDomainUrl *smithy.Schema
-
-var OciIdentityDomain_status *smithy.Schema
-
-var OciIdentityDomain_statusReason *smithy.Schema
-
-var OciIdentityDomain_accountSetupCloudFormationUrl *smithy.Schema
-
-var OciOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OciOnboardingStatus",
-}, smithy.ShapeTypeEnum, 12)
-var OciOnboardingStatus_NOT_STARTED *smithy.Schema
-
-var OciOnboardingStatus_PENDING_LINK_GENERATION *smithy.Schema
-
-var OciOnboardingStatus_PENDING_CUSTOMER_ACTION *smithy.Schema
-
-var OciOnboardingStatus_PENDING_INITIALIZATION *smithy.Schema
-
-var OciOnboardingStatus_ACTIVATING *smithy.Schema
-
-var OciOnboardingStatus_ACTIVE_IN_HOME_REGION *smithy.Schema
-
-var OciOnboardingStatus_ACTIVE *smithy.Schema
-
-var OciOnboardingStatus_ACTIVE_LIMITED *smithy.Schema
-
-var OciOnboardingStatus_FAILED *smithy.Schema
-
-var OciOnboardingStatus_PUBLIC_OFFER_UNSUPPORTED *smithy.Schema
-
-var OciOnboardingStatus_SUSPENDED *smithy.Schema
-
-var OciOnboardingStatus_CANCELED *smithy.Schema
-
-var OdbNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OdbNetwork",
-}, smithy.ShapeTypeStructure, 22)
-var OdbNetwork_odbNetworkId *smithy.Schema
-
-var OdbNetwork_displayName *smithy.Schema
-
-var OdbNetwork_status *smithy.Schema
-
-var OdbNetwork_statusReason *smithy.Schema
-
-var OdbNetwork_odbNetworkArn *smithy.Schema
-
-var OdbNetwork_availabilityZone *smithy.Schema
-
-var OdbNetwork_availabilityZoneId *smithy.Schema
-
-var OdbNetwork_clientSubnetCidr *smithy.Schema
-
-var OdbNetwork_backupSubnetCidr *smithy.Schema
-
-var OdbNetwork_customDomainName *smithy.Schema
-
-var OdbNetwork_defaultDnsPrefix *smithy.Schema
-
-var OdbNetwork_peeredCidrs *smithy.Schema
-
-var OdbNetwork_ociNetworkAnchorId *smithy.Schema
-
-var OdbNetwork_ociNetworkAnchorUrl *smithy.Schema
-
-var OdbNetwork_ociResourceAnchorName *smithy.Schema
-
-var OdbNetwork_ociVcnId *smithy.Schema
-
-var OdbNetwork_ociVcnUrl *smithy.Schema
-
-var OdbNetwork_ociDnsForwardingConfigs *smithy.Schema
-
-var OdbNetwork_createdAt *smithy.Schema
-
-var OdbNetwork_percentProgress *smithy.Schema
-
-var OdbNetwork_managedServices *smithy.Schema
-
-var OdbNetwork_ec2PlacementGroupIds *smithy.Schema
-
-var _OdbNetworkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OdbNetworkList",
-}, smithy.ShapeTypeList, 1)
-var _OdbNetworkList_member *smithy.Schema
-
-var OdbNetworkSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OdbNetworkSummary",
-}, smithy.ShapeTypeStructure, 22)
-var OdbNetworkSummary_odbNetworkId *smithy.Schema
-
-var OdbNetworkSummary_displayName *smithy.Schema
-
-var OdbNetworkSummary_status *smithy.Schema
-
-var OdbNetworkSummary_statusReason *smithy.Schema
-
-var OdbNetworkSummary_odbNetworkArn *smithy.Schema
-
-var OdbNetworkSummary_availabilityZone *smithy.Schema
-
-var OdbNetworkSummary_availabilityZoneId *smithy.Schema
-
-var OdbNetworkSummary_clientSubnetCidr *smithy.Schema
-
-var OdbNetworkSummary_backupSubnetCidr *smithy.Schema
-
-var OdbNetworkSummary_customDomainName *smithy.Schema
-
-var OdbNetworkSummary_defaultDnsPrefix *smithy.Schema
-
-var OdbNetworkSummary_peeredCidrs *smithy.Schema
-
-var OdbNetworkSummary_ociNetworkAnchorId *smithy.Schema
-
-var OdbNetworkSummary_ociNetworkAnchorUrl *smithy.Schema
-
-var OdbNetworkSummary_ociResourceAnchorName *smithy.Schema
-
-var OdbNetworkSummary_ociVcnId *smithy.Schema
-
-var OdbNetworkSummary_ociVcnUrl *smithy.Schema
-
-var OdbNetworkSummary_ociDnsForwardingConfigs *smithy.Schema
-
-var OdbNetworkSummary_createdAt *smithy.Schema
-
-var OdbNetworkSummary_percentProgress *smithy.Schema
-
-var OdbNetworkSummary_managedServices *smithy.Schema
-
-var OdbNetworkSummary_ec2PlacementGroupIds *smithy.Schema
-
-var OdbPeeringConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OdbPeeringConnection",
-}, smithy.ShapeTypeStructure, 11)
-var OdbPeeringConnection_odbPeeringConnectionId *smithy.Schema
-
-var OdbPeeringConnection_displayName *smithy.Schema
-
-var OdbPeeringConnection_status *smithy.Schema
-
-var OdbPeeringConnection_statusReason *smithy.Schema
-
-var OdbPeeringConnection_odbPeeringConnectionArn *smithy.Schema
-
-var OdbPeeringConnection_odbNetworkArn *smithy.Schema
-
-var OdbPeeringConnection_peerNetworkArn *smithy.Schema
-
-var OdbPeeringConnection_odbPeeringConnectionType *smithy.Schema
-
-var OdbPeeringConnection_peerNetworkCidrs *smithy.Schema
-
-var OdbPeeringConnection_createdAt *smithy.Schema
-
-var OdbPeeringConnection_percentProgress *smithy.Schema
-
-var _OdbPeeringConnectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OdbPeeringConnectionList",
-}, smithy.ShapeTypeList, 1)
-var _OdbPeeringConnectionList_member *smithy.Schema
-
-var OdbPeeringConnectionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OdbPeeringConnectionSummary",
-}, smithy.ShapeTypeStructure, 11)
-var OdbPeeringConnectionSummary_odbPeeringConnectionId *smithy.Schema
-
-var OdbPeeringConnectionSummary_displayName *smithy.Schema
-
-var OdbPeeringConnectionSummary_status *smithy.Schema
-
-var OdbPeeringConnectionSummary_statusReason *smithy.Schema
-
-var OdbPeeringConnectionSummary_odbPeeringConnectionArn *smithy.Schema
-
-var OdbPeeringConnectionSummary_odbNetworkArn *smithy.Schema
-
-var OdbPeeringConnectionSummary_peerNetworkArn *smithy.Schema
-
-var OdbPeeringConnectionSummary_odbPeeringConnectionType *smithy.Schema
-
-var OdbPeeringConnectionSummary_peerNetworkCidrs *smithy.Schema
-
-var OdbPeeringConnectionSummary_createdAt *smithy.Schema
-
-var OdbPeeringConnectionSummary_percentProgress *smithy.Schema
-
-var OkvEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OkvEncryptionKeyConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var OkvEncryptionKeyConfiguration_certificateDirectoryName *smithy.Schema
-
-var OkvEncryptionKeyConfiguration_certificateId *smithy.Schema
-
-var OkvEncryptionKeyConfiguration_directoryName *smithy.Schema
-
-var OkvEncryptionKeyConfiguration_okvKmsKey *smithy.Schema
-
-var OkvEncryptionKeyConfiguration_okvUri *smithy.Schema
-
-var OpenMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OpenMode",
-}, smithy.ShapeTypeEnum, 2)
-var OpenMode_READ_ONLY *smithy.Schema
-
-var OpenMode_READ_WRITE *smithy.Schema
-
-var OperationsInsightsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "OperationsInsightsStatus",
-}, smithy.ShapeTypeEnum, 6)
-var OperationsInsightsStatus_ENABLING *smithy.Schema
-
-var OperationsInsightsStatus_ENABLED *smithy.Schema
-
-var OperationsInsightsStatus_DISABLING *smithy.Schema
-
-var OperationsInsightsStatus_NOT_ENABLED *smithy.Schema
-
-var OperationsInsightsStatus_FAILED_ENABLING *smithy.Schema
-
-var OperationsInsightsStatus_FAILED_DISABLING *smithy.Schema
-
-var PatchingModeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PatchingModeType",
-}, smithy.ShapeTypeEnum, 2)
-var PatchingModeType_ROLLING *smithy.Schema
-
-var PatchingModeType_NONROLLING *smithy.Schema
-
-var _PeeredCidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PeeredCidr",
-}, smithy.ShapeTypeString, 0)
-
-var _PeeredCidrList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PeeredCidrList",
-}, smithy.ShapeTypeList, 1)
-var _PeeredCidrList_member *smithy.Schema
-
-var _PeerNetworkRouteTableId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PeerNetworkRouteTableId",
-}, smithy.ShapeTypeString, 0)
-
-var _PeerNetworkRouteTableIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PeerNetworkRouteTableIdList",
-}, smithy.ShapeTypeList, 1)
-var _PeerNetworkRouteTableIdList_member *smithy.Schema
-
-var PermissionLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PermissionLevel",
-}, smithy.ShapeTypeEnum, 2)
-var PermissionLevel_RESTRICTED *smithy.Schema
-
-var PermissionLevel_UNRESTRICTED *smithy.Schema
-
-var PointInTimeRestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PointInTimeRestoreConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var PointInTimeRestoreConfiguration_sourceAutonomousDatabaseId *smithy.Schema
-
-var PointInTimeRestoreConfiguration_cloneType *smithy.Schema
-
-var PointInTimeRestoreConfiguration_timestamp *smithy.Schema
-
-var PointInTimeRestoreConfiguration_useLatestAvailableBackupTimestamp *smithy.Schema
-
-var PointInTimeRestoreConfiguration_cloneTableSpaceList *smithy.Schema
-
-var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var PreferenceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "PreferenceType",
-}, smithy.ShapeTypeEnum, 2)
-var PreferenceType_NO_PREFERENCE *smithy.Schema
-
-var PreferenceType_CUSTOM_PREFERENCE *smithy.Schema
-
-var RefreshableMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RefreshableMode",
-}, smithy.ShapeTypeEnum, 2)
-var RefreshableMode_AUTOMATIC *smithy.Schema
-
-var RefreshableMode_MANUAL *smithy.Schema
-
-var RefreshableStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RefreshableStatus",
-}, smithy.ShapeTypeEnum, 2)
-var RefreshableStatus_REFRESHING *smithy.Schema
-
-var RefreshableStatus_NOT_REFRESHING *smithy.Schema
-
-var RepeatCadence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RepeatCadence",
-}, smithy.ShapeTypeEnum, 4)
-var RepeatCadence_ONE_TIME *smithy.Schema
-
-var RepeatCadence_WEEKLY *smithy.Schema
-
-var RepeatCadence_MONTHLY *smithy.Schema
-
-var RepeatCadence_YEARLY *smithy.Schema
-
-var _RequestTagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RequestTagMap",
-}, smithy.ShapeTypeMap, 2)
-var _RequestTagMap_key *smithy.Schema
-
-var _RequestTagMap_value *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourceArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArnList_member *smithy.Schema
-
-var _ResourceDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourceDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourceIdList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceIdList_member *smithy.Schema
-
-var _ResourceIdOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourceIdOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResourcePoolSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourcePoolSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ResourcePoolSummary_isDisabled *smithy.Schema
-
-var ResourcePoolSummary_poolSize *smithy.Schema
-
-var ResourcePoolSummary_poolStorageSizeInTBs *smithy.Schema
-
-var ResourcePoolSummary_availableStorageCapacityInTBs *smithy.Schema
-
-var ResourcePoolSummary_totalComputeCapacity *smithy.Schema
-
-var ResourcePoolSummary_availableComputeCapacity *smithy.Schema
-
-var ResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResourceStatus",
-}, smithy.ShapeTypeEnum, 7)
-var ResourceStatus_AVAILABLE *smithy.Schema
-
-var ResourceStatus_FAILED *smithy.Schema
-
-var ResourceStatus_PROVISIONING *smithy.Schema
-
-var ResourceStatus_TERMINATED *smithy.Schema
-
-var ResourceStatus_TERMINATING *smithy.Schema
-
-var ResourceStatus_UPDATING *smithy.Schema
-
-var ResourceStatus_MAINTENANCE_IN_PROGRESS *smithy.Schema
-
-var _ResponseTagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ResponseTagMap",
-}, smithy.ShapeTypeMap, 2)
-var _ResponseTagMap_key *smithy.Schema
-
-var _ResponseTagMap_value *smithy.Schema
-
-var RestoreFromBackupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RestoreFromBackupConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var RestoreFromBackupConfiguration_autonomousDatabaseBackupId *smithy.Schema
-
-var RestoreFromBackupConfiguration_cloneType *smithy.Schema
-
-var RestoreFromBackupConfiguration_cloneTableSpaceList *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3Access = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "S3Access",
-}, smithy.ShapeTypeStructure, 4)
-var S3Access_status *smithy.Schema
-
-var S3Access_ipv4Addresses *smithy.Schema
-
-var S3Access_domainName *smithy.Schema
-
-var S3Access_s3PolicyDocument *smithy.Schema
-
-var ScheduledOperationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ScheduledOperationDetails",
-}, smithy.ShapeTypeStructure, 3)
-var ScheduledOperationDetails_dayOfWeek *smithy.Schema
-
-var ScheduledOperationDetails_scheduledStartTime *smithy.Schema
-
-var ScheduledOperationDetails_scheduledStopTime *smithy.Schema
-
-var _ScheduledOperationDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ScheduledOperationDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _ScheduledOperationDetailsList_member *smithy.Schema
-
-var _SecretIdOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SecretIdOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SensitiveStringList",
-}, smithy.ShapeTypeList, 1)
-var _SensitiveStringList_member *smithy.Schema
-
-var ServiceNetworkEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ServiceNetworkEndpoint",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceNetworkEndpoint_vpcEndpointId *smithy.Schema
-
-var ServiceNetworkEndpoint_vpcEndpointType *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var ShapeAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ShapeAttribute",
-}, smithy.ShapeTypeEnum, 2)
-var ShapeAttribute_SMART_STORAGE *smithy.Schema
-
-var ShapeAttribute_BLOCK_STORAGE *smithy.Schema
-
-var _ShapeAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ShapeAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _ShapeAttributeList_member *smithy.Schema
-
-var ShapeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ShapeType",
-}, smithy.ShapeTypeEnum, 4)
-var ShapeType_AMD *smithy.Schema
-
-var ShapeType_INTEL *smithy.Schema
-
-var ShapeType_INTEL_FLEX_X9 *smithy.Schema
-
-var ShapeType_AMPERE_FLEX_A1 *smithy.Schema
-
-var SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SourceConfiguration",
-}, smithy.ShapeTypeUnion, 6)
-var SourceConfiguration_databaseClone *smithy.Schema
-
-var SourceConfiguration_restoreFromBackup *smithy.Schema
-
-var SourceConfiguration_pointInTimeRestore *smithy.Schema
-
-var SourceConfiguration_crossRegionDataGuard *smithy.Schema
-
-var SourceConfiguration_crossRegionDisasterRecovery *smithy.Schema
-
-var SourceConfiguration_cloneToRefreshable *smithy.Schema
-
-var SourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SourceType",
-}, smithy.ShapeTypeEnum, 7)
-var SourceType_NONE *smithy.Schema
-
-var SourceType_DATABASE *smithy.Schema
-
-var SourceType_BACKUP_FROM_ID *smithy.Schema
-
-var SourceType_BACKUP_FROM_TIMESTAMP *smithy.Schema
-
-var SourceType_CROSS_REGION_DATAGUARD *smithy.Schema
-
-var SourceType_CROSS_REGION_DISASTER_RECOVERY *smithy.Schema
-
-var SourceType_CLONE_TO_REFRESHABLE *smithy.Schema
-
-var StandbyAllowlistedIpsSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StandbyAllowlistedIpsSource",
-}, smithy.ShapeTypeEnum, 3)
-var StandbyAllowlistedIpsSource_PRIMARY *smithy.Schema
-
-var StandbyAllowlistedIpsSource_SEPARATE *smithy.Schema
-
-var StandbyAllowlistedIpsSource_NOT_APPLICABLE *smithy.Schema
-
-var StorageManagementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StorageManagementType",
-}, smithy.ShapeTypeEnum, 2)
-var StorageManagementType_ASM *smithy.Schema
-
-var StorageManagementType_EXASCALE *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var StsAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StsAccess",
-}, smithy.ShapeTypeStructure, 4)
-var StsAccess_status *smithy.Schema
-
-var StsAccess_ipv4Addresses *smithy.Schema
-
-var StsAccess_domainName *smithy.Schema
-
-var StsAccess_stsPolicyDocument *smithy.Schema
-
-var SubscriptionError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SubscriptionError",
-}, smithy.ShapeTypeStructure, 1)
-var SubscriptionError_errorMessage *smithy.Schema
-
-var _SubscriptionErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SubscriptionErrors",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionErrors_member *smithy.Schema
-
-var SupportedAwsIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SupportedAwsIntegration",
-}, smithy.ShapeTypeEnum, 1)
-var SupportedAwsIntegration_KmsTde *smithy.Schema
-
-var _SystemVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SystemVersionList",
-}, smithy.ShapeTypeList, 1)
-var _SystemVersionList_member *smithy.Schema
-
-var SystemVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SystemVersionSummary",
-}, smithy.ShapeTypeStructure, 3)
-var SystemVersionSummary_giVersion *smithy.Schema
-
-var SystemVersionSummary_shape *smithy.Schema
-
-var SystemVersionSummary_systemVersions *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TransportableTablespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "TransportableTablespace",
-}, smithy.ShapeTypeStructure, 1)
-var TransportableTablespace_ttsBundleUrl *smithy.Schema
-
-var UpdateAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateAction",
-}, smithy.ShapeTypeEnum, 4)
-var UpdateAction_ROLLING_APPLY *smithy.Schema
-
-var UpdateAction_NON_ROLLING_APPLY *smithy.Schema
-
-var UpdateAction_PRECHECK *smithy.Schema
-
-var UpdateAction_ROLLBACK *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var VmStorageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "VmStorageType",
-}, smithy.ShapeTypeEnum, 2)
-var VmStorageType_LOCAL *smithy.Schema
-
-var VmStorageType_EXASCALE *smithy.Schema
-
-var VpcEndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "VpcEndpointType",
-}, smithy.ShapeTypeEnum, 1)
-var VpcEndpointType_SERVICENETWORK *smithy.Schema
-
-var WalletPasswordSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "WalletPasswordSource",
-}, smithy.ShapeTypeEnum, 2)
-var WalletPasswordSource_CUSTOMER_MANAGED_AWS_SECRET *smithy.Schema
-
-var WalletPasswordSource_API_REQUEST_PARAMETER *smithy.Schema
-
-var WalletPasswordSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "WalletPasswordSourceConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var WalletPasswordSourceConfiguration_customerManagedAwsSecret *smithy.Schema
-
-var WalletPasswordSourceConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "WalletPasswordSourceConfigurationInput",
-}, smithy.ShapeTypeUnion, 1)
-var WalletPasswordSourceConfigurationInput_customerManagedAwsSecret *smithy.Schema
-
-var WalletPasswordSourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "WalletPasswordSourceSummary",
-}, smithy.ShapeTypeStructure, 2)
-var WalletPasswordSourceSummary_passwordSource *smithy.Schema
-
-var WalletPasswordSourceSummary_passwordSourceConfiguration *smithy.Schema
-
-var WalletType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "WalletType",
-}, smithy.ShapeTypeEnum, 2)
-var WalletType_REGIONAL *smithy.Schema
-
-var WalletType_INSTANCE *smithy.Schema
-
-var _WeeksOfMonth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "WeeksOfMonth",
-}, smithy.ShapeTypeList, 1)
-var _WeeksOfMonth_member *smithy.Schema
-
-var ZeroEtlAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ZeroEtlAccess",
-}, smithy.ShapeTypeStructure, 2)
-var ZeroEtlAccess_status *smithy.Schema
-
-var ZeroEtlAccess_cidr *smithy.Schema
-
-var AcceptMarketplaceRegistrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AcceptMarketplaceRegistrationInput",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptMarketplaceRegistrationInput_marketplaceRegistrationToken *smithy.Schema
-
-var AcceptMarketplaceRegistrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AcceptMarketplaceRegistrationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateIamRoleToResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AssociateIamRoleToResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateIamRoleToResourceInput_iamRoleArn *smithy.Schema
-
-var AssociateIamRoleToResourceInput_awsIntegration *smithy.Schema
-
-var AssociateIamRoleToResourceInput_resourceArn *smithy.Schema
-
-var AssociateIamRoleToResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AssociateIamRoleToResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateVirtualMachinesToExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AssociateVirtualMachinesToExadbVmClusterInput",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateVirtualMachinesToExadbVmClusterInput_exadbVmClusterId *smithy.Schema
-
-var AssociateVirtualMachinesToExadbVmClusterInput_desiredNodeCount *smithy.Schema
-
-var AssociateVirtualMachinesToExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "AssociateVirtualMachinesToExadbVmClusterOutput",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateVirtualMachinesToExadbVmClusterOutput_displayName *smithy.Schema
-
-var AssociateVirtualMachinesToExadbVmClusterOutput_status *smithy.Schema
-
-var AssociateVirtualMachinesToExadbVmClusterOutput_statusReason *smithy.Schema
-
-var AssociateVirtualMachinesToExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
-
-var CreateAutonomousDatabaseBackupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabaseBackupInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAutonomousDatabaseBackupInput_autonomousDatabaseId *smithy.Schema
-
-var CreateAutonomousDatabaseBackupInput_displayName *smithy.Schema
-
-var CreateAutonomousDatabaseBackupInput_retentionPeriodInDays *smithy.Schema
-
-var CreateAutonomousDatabaseBackupInput_clientToken *smithy.Schema
-
-var CreateAutonomousDatabaseBackupInput_tags *smithy.Schema
-
-var CreateAutonomousDatabaseBackupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabaseBackupOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateAutonomousDatabaseBackupOutput_displayName *smithy.Schema
-
-var CreateAutonomousDatabaseBackupOutput_status *smithy.Schema
-
-var CreateAutonomousDatabaseBackupOutput_statusReason *smithy.Schema
-
-var CreateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId *smithy.Schema
-
-var CreateAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 41)
-var CreateAutonomousDatabaseInput_odbNetworkId *smithy.Schema
-
-var CreateAutonomousDatabaseInput_displayName *smithy.Schema
-
-var CreateAutonomousDatabaseInput_dbName *smithy.Schema
-
-var CreateAutonomousDatabaseInput_adminPassword *smithy.Schema
-
-var CreateAutonomousDatabaseInput_computeCount *smithy.Schema
-
-var CreateAutonomousDatabaseInput_dataStorageSizeInTBs *smithy.Schema
-
-var CreateAutonomousDatabaseInput_dataStorageSizeInGBs *smithy.Schema
-
-var CreateAutonomousDatabaseInput_dbWorkload *smithy.Schema
-
-var CreateAutonomousDatabaseInput_isAutoScalingEnabled *smithy.Schema
-
-var CreateAutonomousDatabaseInput_isAutoScalingForStorageEnabled *smithy.Schema
-
-var CreateAutonomousDatabaseInput_licenseModel *smithy.Schema
-
-var CreateAutonomousDatabaseInput_characterSet *smithy.Schema
-
-var CreateAutonomousDatabaseInput_ncharacterSet *smithy.Schema
-
-var CreateAutonomousDatabaseInput_dbVersion *smithy.Schema
-
-var CreateAutonomousDatabaseInput_databaseEdition *smithy.Schema
-
-var CreateAutonomousDatabaseInput_standbyAllowlistedIpsSource *smithy.Schema
-
-var CreateAutonomousDatabaseInput_autonomousMaintenanceScheduleType *smithy.Schema
-
-var CreateAutonomousDatabaseInput_backupRetentionPeriodInDays *smithy.Schema
-
-var CreateAutonomousDatabaseInput_byolComputeCountLimit *smithy.Schema
-
-var CreateAutonomousDatabaseInput_cpuCoreCount *smithy.Schema
-
-var CreateAutonomousDatabaseInput_customerContactsToSendToOCI *smithy.Schema
-
-var CreateAutonomousDatabaseInput_privateEndpointIp *smithy.Schema
-
-var CreateAutonomousDatabaseInput_privateEndpointLabel *smithy.Schema
-
-var CreateAutonomousDatabaseInput_resourcePoolLeaderId *smithy.Schema
-
-var CreateAutonomousDatabaseInput_resourcePoolSummary *smithy.Schema
-
-var CreateAutonomousDatabaseInput_scheduledOperations *smithy.Schema
-
-var CreateAutonomousDatabaseInput_standbyAllowlistedIps *smithy.Schema
-
-var CreateAutonomousDatabaseInput_allowlistedIps *smithy.Schema
-
-var CreateAutonomousDatabaseInput_transportableTablespace *smithy.Schema
-
-var CreateAutonomousDatabaseInput_isBackupRetentionLocked *smithy.Schema
-
-var CreateAutonomousDatabaseInput_isLocalDataGuardEnabled *smithy.Schema
-
-var CreateAutonomousDatabaseInput_isMtlsConnectionRequired *smithy.Schema
-
-var CreateAutonomousDatabaseInput_dbToolsDetails *smithy.Schema
-
-var CreateAutonomousDatabaseInput_source *smithy.Schema
-
-var CreateAutonomousDatabaseInput_sourceConfiguration *smithy.Schema
-
-var CreateAutonomousDatabaseInput_encryptionKeyProvider *smithy.Schema
-
-var CreateAutonomousDatabaseInput_encryptionKeyConfiguration *smithy.Schema
-
-var CreateAutonomousDatabaseInput_adminPasswordSource *smithy.Schema
-
-var CreateAutonomousDatabaseInput_adminPasswordSourceConfiguration *smithy.Schema
-
-var CreateAutonomousDatabaseInput_clientToken *smithy.Schema
-
-var CreateAutonomousDatabaseInput_tags *smithy.Schema
-
-var CreateAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var CreateAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var CreateAutonomousDatabaseOutput_status *smithy.Schema
-
-var CreateAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var CreateAutonomousDatabaseWalletInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabaseWalletInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateAutonomousDatabaseWalletInput_autonomousDatabaseId *smithy.Schema
-
-var CreateAutonomousDatabaseWalletInput_walletType *smithy.Schema
-
-var CreateAutonomousDatabaseWalletInput_password *smithy.Schema
-
-var CreateAutonomousDatabaseWalletInput_passwordSource *smithy.Schema
-
-var CreateAutonomousDatabaseWalletInput_passwordSourceConfiguration *smithy.Schema
-
-var CreateAutonomousDatabaseWalletInput_clientToken *smithy.Schema
-
-var CreateAutonomousDatabaseWalletOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateAutonomousDatabaseWalletOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAutonomousDatabaseWalletOutput_autonomousDatabaseWalletFile *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudAutonomousVmClusterInput",
-}, smithy.ShapeTypeStructure, 17)
-var CreateCloudAutonomousVmClusterInput_cloudExadataInfrastructureId *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_odbNetworkId *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_displayName *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_clientToken *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_autonomousDataStorageSizeInTBs *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_cpuCoreCountPerNode *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_dbServers *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_description *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_isMtlsEnabledVmCluster *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_licenseModel *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_maintenanceWindow *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_memoryPerOracleComputeUnitInGBs *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_scanListenerPortNonTls *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_scanListenerPortTls *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_tags *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_timeZone *smithy.Schema
-
-var CreateCloudAutonomousVmClusterInput_totalContainerDatabases *smithy.Schema
-
-var CreateCloudAutonomousVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudAutonomousVmClusterOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCloudAutonomousVmClusterOutput_displayName *smithy.Schema
-
-var CreateCloudAutonomousVmClusterOutput_status *smithy.Schema
-
-var CreateCloudAutonomousVmClusterOutput_statusReason *smithy.Schema
-
-var CreateCloudAutonomousVmClusterOutput_cloudAutonomousVmClusterId *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudExadataInfrastructureInput",
-}, smithy.ShapeTypeStructure, 12)
-var CreateCloudExadataInfrastructureInput_displayName *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_shape *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_availabilityZone *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_availabilityZoneId *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_tags *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_computeCount *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_customerContactsToSendToOCI *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_maintenanceWindow *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_storageCount *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_clientToken *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_databaseServerType *smithy.Schema
-
-var CreateCloudExadataInfrastructureInput_storageServerType *smithy.Schema
-
-var CreateCloudExadataInfrastructureOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudExadataInfrastructureOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCloudExadataInfrastructureOutput_displayName *smithy.Schema
-
-var CreateCloudExadataInfrastructureOutput_status *smithy.Schema
-
-var CreateCloudExadataInfrastructureOutput_statusReason *smithy.Schema
-
-var CreateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId *smithy.Schema
-
-var CreateCloudVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudVmClusterInput",
-}, smithy.ShapeTypeStructure, 25)
-var CreateCloudVmClusterInput_cloudExadataInfrastructureId *smithy.Schema
-
-var CreateCloudVmClusterInput_exascaleDbStorageVaultId *smithy.Schema
-
-var CreateCloudVmClusterInput_vmFileSystemStorageType *smithy.Schema
-
-var CreateCloudVmClusterInput_vmBackupStorageType *smithy.Schema
-
-var CreateCloudVmClusterInput_fileSystemConfigurationDetails *smithy.Schema
-
-var CreateCloudVmClusterInput_cpuCoreCount *smithy.Schema
-
-var CreateCloudVmClusterInput_displayName *smithy.Schema
-
-var CreateCloudVmClusterInput_giVersion *smithy.Schema
-
-var CreateCloudVmClusterInput_hostname *smithy.Schema
-
-var CreateCloudVmClusterInput_sshPublicKeys *smithy.Schema
-
-var CreateCloudVmClusterInput_odbNetworkId *smithy.Schema
-
-var CreateCloudVmClusterInput_clusterName *smithy.Schema
-
-var CreateCloudVmClusterInput_dataCollectionOptions *smithy.Schema
-
-var CreateCloudVmClusterInput_dataStorageSizeInTBs *smithy.Schema
-
-var CreateCloudVmClusterInput_dbNodeStorageSizeInGBs *smithy.Schema
-
-var CreateCloudVmClusterInput_dbServers *smithy.Schema
-
-var CreateCloudVmClusterInput_tags *smithy.Schema
-
-var CreateCloudVmClusterInput_isLocalBackupEnabled *smithy.Schema
-
-var CreateCloudVmClusterInput_isSparseDiskgroupEnabled *smithy.Schema
-
-var CreateCloudVmClusterInput_licenseModel *smithy.Schema
-
-var CreateCloudVmClusterInput_memorySizeInGBs *smithy.Schema
-
-var CreateCloudVmClusterInput_systemVersion *smithy.Schema
-
-var CreateCloudVmClusterInput_timeZone *smithy.Schema
-
-var CreateCloudVmClusterInput_clientToken *smithy.Schema
-
-var CreateCloudVmClusterInput_scanListenerPortTcp *smithy.Schema
-
-var CreateCloudVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateCloudVmClusterOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCloudVmClusterOutput_displayName *smithy.Schema
-
-var CreateCloudVmClusterOutput_status *smithy.Schema
-
-var CreateCloudVmClusterOutput_statusReason *smithy.Schema
-
-var CreateCloudVmClusterOutput_cloudVmClusterId *smithy.Schema
-
-var CreateExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateExadbVmClusterInput",
-}, smithy.ShapeTypeStructure, 21)
-var CreateExadbVmClusterInput_displayName *smithy.Schema
-
-var CreateExadbVmClusterInput_enabledEcpuCount *smithy.Schema
-
-var CreateExadbVmClusterInput_exascaleDbStorageVaultId *smithy.Schema
-
-var CreateExadbVmClusterInput_gridImageId *smithy.Schema
-
-var CreateExadbVmClusterInput_hostname *smithy.Schema
-
-var CreateExadbVmClusterInput_nodeCount *smithy.Schema
-
-var CreateExadbVmClusterInput_odbNetworkId *smithy.Schema
-
-var CreateExadbVmClusterInput_shape *smithy.Schema
-
-var CreateExadbVmClusterInput_sshPublicKeys *smithy.Schema
-
-var CreateExadbVmClusterInput_totalEcpuCount *smithy.Schema
-
-var CreateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs *smithy.Schema
-
-var CreateExadbVmClusterInput_clusterName *smithy.Schema
-
-var CreateExadbVmClusterInput_dataCollectionOptions *smithy.Schema
-
-var CreateExadbVmClusterInput_licenseModel *smithy.Schema
-
-var CreateExadbVmClusterInput_scanListenerPortTcp *smithy.Schema
-
-var CreateExadbVmClusterInput_scanListenerPortTcpSsl *smithy.Schema
-
-var CreateExadbVmClusterInput_shapeAttribute *smithy.Schema
-
-var CreateExadbVmClusterInput_systemVersion *smithy.Schema
-
-var CreateExadbVmClusterInput_tags *smithy.Schema
-
-var CreateExadbVmClusterInput_timeZone *smithy.Schema
-
-var CreateExadbVmClusterInput_clientToken *smithy.Schema
-
-var CreateExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateExadbVmClusterOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateExadbVmClusterOutput_displayName *smithy.Schema
-
-var CreateExadbVmClusterOutput_status *smithy.Schema
-
-var CreateExadbVmClusterOutput_statusReason *smithy.Schema
-
-var CreateExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateExascaleDbStorageVaultInput",
-}, smithy.ShapeTypeStructure, 12)
-var CreateExascaleDbStorageVaultInput_displayName *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_additionalFlashCacheInPercent *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_autoscaleLimitInGBs *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_cloudExadataInfrastructureId *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_availabilityZoneId *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_availabilityZone *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_description *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_isAutoscaleEnabled *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_tags *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_timeZone *smithy.Schema
-
-var CreateExascaleDbStorageVaultInput_clientToken *smithy.Schema
-
-var CreateExascaleDbStorageVaultOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateExascaleDbStorageVaultOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateExascaleDbStorageVaultOutput_displayName *smithy.Schema
-
-var CreateExascaleDbStorageVaultOutput_status *smithy.Schema
-
-var CreateExascaleDbStorageVaultOutput_statusReason *smithy.Schema
-
-var CreateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId *smithy.Schema
-
-var CreateOdbNetworkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateOdbNetworkInput",
-}, smithy.ShapeTypeStructure, 17)
-var CreateOdbNetworkInput_displayName *smithy.Schema
-
-var CreateOdbNetworkInput_availabilityZone *smithy.Schema
-
-var CreateOdbNetworkInput_availabilityZoneId *smithy.Schema
-
-var CreateOdbNetworkInput_clientSubnetCidr *smithy.Schema
-
-var CreateOdbNetworkInput_backupSubnetCidr *smithy.Schema
-
-var CreateOdbNetworkInput_customDomainName *smithy.Schema
-
-var CreateOdbNetworkInput_defaultDnsPrefix *smithy.Schema
-
-var CreateOdbNetworkInput_clientToken *smithy.Schema
-
-var CreateOdbNetworkInput_s3Access *smithy.Schema
-
-var CreateOdbNetworkInput_zeroEtlAccess *smithy.Schema
-
-var CreateOdbNetworkInput_stsAccess *smithy.Schema
-
-var CreateOdbNetworkInput_kmsAccess *smithy.Schema
-
-var CreateOdbNetworkInput_s3PolicyDocument *smithy.Schema
-
-var CreateOdbNetworkInput_stsPolicyDocument *smithy.Schema
-
-var CreateOdbNetworkInput_kmsPolicyDocument *smithy.Schema
-
-var CreateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable *smithy.Schema
-
-var CreateOdbNetworkInput_tags *smithy.Schema
-
-var CreateOdbNetworkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateOdbNetworkOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateOdbNetworkOutput_displayName *smithy.Schema
-
-var CreateOdbNetworkOutput_status *smithy.Schema
-
-var CreateOdbNetworkOutput_statusReason *smithy.Schema
-
-var CreateOdbNetworkOutput_odbNetworkId *smithy.Schema
-
-var CreateOdbPeeringConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateOdbPeeringConnectionInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateOdbPeeringConnectionInput_odbNetworkId *smithy.Schema
-
-var CreateOdbPeeringConnectionInput_peerNetworkId *smithy.Schema
-
-var CreateOdbPeeringConnectionInput_displayName *smithy.Schema
-
-var CreateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded *smithy.Schema
-
-var CreateOdbPeeringConnectionInput_peerNetworkRouteTableIds *smithy.Schema
-
-var CreateOdbPeeringConnectionInput_clientToken *smithy.Schema
-
-var CreateOdbPeeringConnectionInput_tags *smithy.Schema
-
-var CreateOdbPeeringConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "CreateOdbPeeringConnectionOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateOdbPeeringConnectionOutput_displayName *smithy.Schema
-
-var CreateOdbPeeringConnectionOutput_status *smithy.Schema
-
-var CreateOdbPeeringConnectionOutput_statusReason *smithy.Schema
-
-var CreateOdbPeeringConnectionOutput_odbPeeringConnectionId *smithy.Schema
-
-var DeleteAutonomousDatabaseBackupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteAutonomousDatabaseBackupInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAutonomousDatabaseBackupInput_autonomousDatabaseBackupId *smithy.Schema
-
-var DeleteAutonomousDatabaseBackupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteAutonomousDatabaseBackupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var DeleteAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCloudAutonomousVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudAutonomousVmClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId *smithy.Schema
-
-var DeleteCloudAutonomousVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudAutonomousVmClusterOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCloudExadataInfrastructureInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudExadataInfrastructureInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCloudExadataInfrastructureInput_cloudExadataInfrastructureId *smithy.Schema
-
-var DeleteCloudExadataInfrastructureOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudExadataInfrastructureOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCloudVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudVmClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCloudVmClusterInput_cloudVmClusterId *smithy.Schema
-
-var DeleteCloudVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteCloudVmClusterOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteExadbVmClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExadbVmClusterInput_exadbVmClusterId *smithy.Schema
-
-var DeleteExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteExadbVmClusterOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteExascaleDbStorageVaultInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteExascaleDbStorageVaultInput_exascaleDbStorageVaultId *smithy.Schema
-
-var DeleteExascaleDbStorageVaultOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteExascaleDbStorageVaultOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteOdbNetworkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteOdbNetworkInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteOdbNetworkInput_odbNetworkId *smithy.Schema
-
-var DeleteOdbNetworkInput_deleteAssociatedResources *smithy.Schema
-
-var DeleteOdbNetworkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteOdbNetworkOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteOdbPeeringConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteOdbPeeringConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteOdbPeeringConnectionInput_odbPeeringConnectionId *smithy.Schema
-
-var DeleteOdbPeeringConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DeleteOdbPeeringConnectionOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateIamRoleFromResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DisassociateIamRoleFromResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateIamRoleFromResourceInput_iamRoleArn *smithy.Schema
-
-var DisassociateIamRoleFromResourceInput_awsIntegration *smithy.Schema
-
-var DisassociateIamRoleFromResourceInput_resourceArn *smithy.Schema
-
-var DisassociateIamRoleFromResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DisassociateIamRoleFromResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateVirtualMachinesFromExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DisassociateVirtualMachinesFromExadbVmClusterInput",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateVirtualMachinesFromExadbVmClusterInput_exadbVmClusterId *smithy.Schema
-
-var DisassociateVirtualMachinesFromExadbVmClusterInput_dbNodeIds *smithy.Schema
-
-var DisassociateVirtualMachinesFromExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "DisassociateVirtualMachinesFromExadbVmClusterOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DisassociateVirtualMachinesFromExadbVmClusterOutput_displayName *smithy.Schema
-
-var DisassociateVirtualMachinesFromExadbVmClusterOutput_status *smithy.Schema
-
-var DisassociateVirtualMachinesFromExadbVmClusterOutput_statusReason *smithy.Schema
-
-var DisassociateVirtualMachinesFromExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
-
-var FailoverAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "FailoverAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 2)
-var FailoverAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var FailoverAutonomousDatabaseInput_peerDbArn *smithy.Schema
-
-var FailoverAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "FailoverAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var FailoverAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var FailoverAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var FailoverAutonomousDatabaseOutput_status *smithy.Schema
-
-var FailoverAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var GetAutonomousDatabaseBackupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabaseBackupInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutonomousDatabaseBackupInput_autonomousDatabaseBackupId *smithy.Schema
-
-var GetAutonomousDatabaseBackupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabaseBackupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutonomousDatabaseBackupOutput_autonomousDatabaseBackup *smithy.Schema
-
-var GetAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var GetAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutonomousDatabaseOutput_autonomousDatabase *smithy.Schema
-
-var GetAutonomousDatabaseWalletDetailsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabaseWalletDetailsInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutonomousDatabaseWalletDetailsInput_autonomousDatabaseId *smithy.Schema
-
-var GetAutonomousDatabaseWalletDetailsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetAutonomousDatabaseWalletDetailsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutonomousDatabaseWalletDetailsOutput_autonomousDatabaseWalletDetails *smithy.Schema
-
-var GetCloudAutonomousVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudAutonomousVmClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId *smithy.Schema
-
-var GetCloudAutonomousVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudAutonomousVmClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCloudAutonomousVmClusterOutput_cloudAutonomousVmCluster *smithy.Schema
-
-var GetCloudExadataInfrastructureInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudExadataInfrastructureInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCloudExadataInfrastructureInput_cloudExadataInfrastructureId *smithy.Schema
-
-var GetCloudExadataInfrastructureOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudExadataInfrastructureOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCloudExadataInfrastructureOutput_cloudExadataInfrastructure *smithy.Schema
-
-var GetCloudExadataInfrastructureUnallocatedResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudExadataInfrastructureUnallocatedResourcesInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetCloudExadataInfrastructureUnallocatedResourcesInput_cloudExadataInfrastructureId *smithy.Schema
-
-var GetCloudExadataInfrastructureUnallocatedResourcesInput_dbServers *smithy.Schema
-
-var GetCloudExadataInfrastructureUnallocatedResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudExadataInfrastructureUnallocatedResourcesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCloudExadataInfrastructureUnallocatedResourcesOutput_cloudExadataInfrastructureUnallocatedResources *smithy.Schema
-
-var GetCloudVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudVmClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCloudVmClusterInput_cloudVmClusterId *smithy.Schema
-
-var GetCloudVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetCloudVmClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCloudVmClusterOutput_cloudVmCluster *smithy.Schema
-
-var GetDbNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetDbNodeInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetDbNodeInput_cloudVmClusterId *smithy.Schema
-
-var GetDbNodeInput_exadbVmClusterId *smithy.Schema
-
-var GetDbNodeInput_dbNodeId *smithy.Schema
-
-var GetDbNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetDbNodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDbNodeOutput_dbNode *smithy.Schema
-
-var GetDbServerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetDbServerInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetDbServerInput_cloudExadataInfrastructureId *smithy.Schema
-
-var GetDbServerInput_dbServerId *smithy.Schema
-
-var GetDbServerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetDbServerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDbServerOutput_dbServer *smithy.Schema
-
-var GetExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetExadbVmClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetExadbVmClusterInput_exadbVmClusterId *smithy.Schema
-
-var GetExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetExadbVmClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetExadbVmClusterOutput_exadbVmCluster *smithy.Schema
-
-var GetExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetExascaleDbStorageVaultInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetExascaleDbStorageVaultInput_exascaleDbStorageVaultId *smithy.Schema
-
-var GetExascaleDbStorageVaultOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetExascaleDbStorageVaultOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetExascaleDbStorageVaultOutput_exascaleDbStorageVault *smithy.Schema
-
-var GetOciOnboardingStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOciOnboardingStatusInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetOciOnboardingStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOciOnboardingStatusOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetOciOnboardingStatusOutput_status *smithy.Schema
-
-var GetOciOnboardingStatusOutput_existingTenancyActivationLink *smithy.Schema
-
-var GetOciOnboardingStatusOutput_newTenancyActivationLink *smithy.Schema
-
-var GetOciOnboardingStatusOutput_ociIdentityDomain *smithy.Schema
-
-var GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles *smithy.Schema
-
-var GetOciOnboardingStatusOutput_linkedOciTenancyId *smithy.Schema
-
-var GetOciOnboardingStatusOutput_linkedOciCompartmentId *smithy.Schema
-
-var GetOciOnboardingStatusOutput_subscriptionErrors *smithy.Schema
-
-var GetOdbNetworkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOdbNetworkInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetOdbNetworkInput_odbNetworkId *smithy.Schema
-
-var GetOdbNetworkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOdbNetworkOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetOdbNetworkOutput_odbNetwork *smithy.Schema
-
-var GetOdbPeeringConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOdbPeeringConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetOdbPeeringConnectionInput_odbPeeringConnectionId *smithy.Schema
-
-var GetOdbPeeringConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "GetOdbPeeringConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetOdbPeeringConnectionOutput_odbPeeringConnection *smithy.Schema
-
-var InitializeServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "InitializeServiceInput",
-}, smithy.ShapeTypeStructure, 2)
-var InitializeServiceInput_ociIdentityDomain *smithy.Schema
-
-var InitializeServiceInput_autonomousDatabaseOciAwsSecretsManagerIntegration *smithy.Schema
-
-var InitializeServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "InitializeServiceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListAutonomousDatabaseBackupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseBackupsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListAutonomousDatabaseBackupsInput_maxResults *smithy.Schema
-
-var ListAutonomousDatabaseBackupsInput_nextToken *smithy.Schema
-
-var ListAutonomousDatabaseBackupsInput_autonomousDatabaseId *smithy.Schema
-
-var ListAutonomousDatabaseBackupsInput_status *smithy.Schema
-
-var ListAutonomousDatabaseBackupsInput_type *smithy.Schema
-
-var ListAutonomousDatabaseBackupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseBackupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutonomousDatabaseBackupsOutput_nextToken *smithy.Schema
-
-var ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups *smithy.Schema
-
-var ListAutonomousDatabaseCharacterSetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseCharacterSetsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAutonomousDatabaseCharacterSetsInput_maxResults *smithy.Schema
-
-var ListAutonomousDatabaseCharacterSetsInput_nextToken *smithy.Schema
-
-var ListAutonomousDatabaseCharacterSetsInput_characterSetType *smithy.Schema
-
-var ListAutonomousDatabaseCharacterSetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseCharacterSetsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutonomousDatabaseCharacterSetsOutput_nextToken *smithy.Schema
-
-var ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets *smithy.Schema
-
-var ListAutonomousDatabaseClonesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseClonesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAutonomousDatabaseClonesInput_maxResults *smithy.Schema
-
-var ListAutonomousDatabaseClonesInput_nextToken *smithy.Schema
-
-var ListAutonomousDatabaseClonesInput_autonomousDatabaseId *smithy.Schema
-
-var ListAutonomousDatabaseClonesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseClonesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutonomousDatabaseClonesOutput_nextToken *smithy.Schema
-
-var ListAutonomousDatabaseClonesOutput_autonomousDatabaseClones *smithy.Schema
-
-var ListAutonomousDatabasePeersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabasePeersInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAutonomousDatabasePeersInput_maxResults *smithy.Schema
-
-var ListAutonomousDatabasePeersInput_nextToken *smithy.Schema
-
-var ListAutonomousDatabasePeersInput_autonomousDatabaseId *smithy.Schema
-
-var ListAutonomousDatabasePeersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabasePeersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutonomousDatabasePeersOutput_nextToken *smithy.Schema
-
-var ListAutonomousDatabasePeersOutput_autonomousDatabasePeers *smithy.Schema
-
-var ListAutonomousDatabasesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabasesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutonomousDatabasesInput_maxResults *smithy.Schema
-
-var ListAutonomousDatabasesInput_nextToken *smithy.Schema
-
-var ListAutonomousDatabasesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabasesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutonomousDatabasesOutput_nextToken *smithy.Schema
-
-var ListAutonomousDatabasesOutput_autonomousDatabases *smithy.Schema
-
-var ListAutonomousDatabaseVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseVersionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAutonomousDatabaseVersionsInput_maxResults *smithy.Schema
-
-var ListAutonomousDatabaseVersionsInput_nextToken *smithy.Schema
-
-var ListAutonomousDatabaseVersionsInput_dbWorkload *smithy.Schema
-
-var ListAutonomousDatabaseVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousDatabaseVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutonomousDatabaseVersionsOutput_nextToken *smithy.Schema
-
-var ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions *smithy.Schema
-
-var ListAutonomousVirtualMachinesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousVirtualMachinesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAutonomousVirtualMachinesInput_maxResults *smithy.Schema
-
-var ListAutonomousVirtualMachinesInput_nextToken *smithy.Schema
-
-var ListAutonomousVirtualMachinesInput_cloudAutonomousVmClusterId *smithy.Schema
-
-var ListAutonomousVirtualMachinesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListAutonomousVirtualMachinesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutonomousVirtualMachinesOutput_nextToken *smithy.Schema
-
-var ListAutonomousVirtualMachinesOutput_autonomousVirtualMachines *smithy.Schema
-
-var ListCloudAutonomousVmClustersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudAutonomousVmClustersInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListCloudAutonomousVmClustersInput_maxResults *smithy.Schema
-
-var ListCloudAutonomousVmClustersInput_nextToken *smithy.Schema
-
-var ListCloudAutonomousVmClustersInput_cloudExadataInfrastructureId *smithy.Schema
-
-var ListCloudAutonomousVmClustersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudAutonomousVmClustersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCloudAutonomousVmClustersOutput_nextToken *smithy.Schema
-
-var ListCloudAutonomousVmClustersOutput_cloudAutonomousVmClusters *smithy.Schema
-
-var ListCloudExadataInfrastructuresInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudExadataInfrastructuresInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCloudExadataInfrastructuresInput_maxResults *smithy.Schema
-
-var ListCloudExadataInfrastructuresInput_nextToken *smithy.Schema
-
-var ListCloudExadataInfrastructuresOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudExadataInfrastructuresOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCloudExadataInfrastructuresOutput_nextToken *smithy.Schema
-
-var ListCloudExadataInfrastructuresOutput_cloudExadataInfrastructures *smithy.Schema
-
-var ListCloudVmClustersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudVmClustersInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListCloudVmClustersInput_maxResults *smithy.Schema
-
-var ListCloudVmClustersInput_nextToken *smithy.Schema
-
-var ListCloudVmClustersInput_cloudExadataInfrastructureId *smithy.Schema
-
-var ListCloudVmClustersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListCloudVmClustersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCloudVmClustersOutput_nextToken *smithy.Schema
-
-var ListCloudVmClustersOutput_cloudVmClusters *smithy.Schema
-
-var ListDbNodesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbNodesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListDbNodesInput_maxResults *smithy.Schema
-
-var ListDbNodesInput_nextToken *smithy.Schema
-
-var ListDbNodesInput_cloudVmClusterId *smithy.Schema
-
-var ListDbNodesInput_exadbVmClusterId *smithy.Schema
-
-var ListDbNodesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbNodesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDbNodesOutput_nextToken *smithy.Schema
-
-var ListDbNodesOutput_dbNodes *smithy.Schema
-
-var ListDbServersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbServersInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListDbServersInput_cloudExadataInfrastructureId *smithy.Schema
-
-var ListDbServersInput_maxResults *smithy.Schema
-
-var ListDbServersInput_nextToken *smithy.Schema
-
-var ListDbServersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbServersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDbServersOutput_nextToken *smithy.Schema
-
-var ListDbServersOutput_dbServers *smithy.Schema
-
-var ListDbSystemShapesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbSystemShapesInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListDbSystemShapesInput_maxResults *smithy.Schema
-
-var ListDbSystemShapesInput_nextToken *smithy.Schema
-
-var ListDbSystemShapesInput_availabilityZone *smithy.Schema
-
-var ListDbSystemShapesInput_availabilityZoneId *smithy.Schema
-
-var ListDbSystemShapesInput_shapeFamily *smithy.Schema
-
-var ListDbSystemShapesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListDbSystemShapesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDbSystemShapesOutput_nextToken *smithy.Schema
-
-var ListDbSystemShapesOutput_dbSystemShapes *smithy.Schema
-
-var ListExadbVmClustersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListExadbVmClustersInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListExadbVmClustersInput_exascaleDbStorageVaultId *smithy.Schema
-
-var ListExadbVmClustersInput_maxResults *smithy.Schema
-
-var ListExadbVmClustersInput_nextToken *smithy.Schema
-
-var ListExadbVmClustersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListExadbVmClustersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListExadbVmClustersOutput_nextToken *smithy.Schema
-
-var ListExadbVmClustersOutput_exadbVmClusters *smithy.Schema
-
-var ListExascaleDbStorageVaultsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListExascaleDbStorageVaultsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListExascaleDbStorageVaultsInput_maxResults *smithy.Schema
-
-var ListExascaleDbStorageVaultsInput_nextToken *smithy.Schema
-
-var ListExascaleDbStorageVaultsInput_cloudExadataInfrastructureId *smithy.Schema
-
-var ListExascaleDbStorageVaultsInput_vaultType *smithy.Schema
-
-var ListExascaleDbStorageVaultsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListExascaleDbStorageVaultsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListExascaleDbStorageVaultsOutput_nextToken *smithy.Schema
-
-var ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults *smithy.Schema
-
-var ListFlexComponentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListFlexComponentsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFlexComponentsInput_maxResults *smithy.Schema
-
-var ListFlexComponentsInput_nextToken *smithy.Schema
-
-var ListFlexComponentsInput_shape *smithy.Schema
-
-var ListFlexComponentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListFlexComponentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFlexComponentsOutput_nextToken *smithy.Schema
-
-var ListFlexComponentsOutput_flexComponents *smithy.Schema
-
-var ListGiMinorVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListGiMinorVersionsInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListGiMinorVersionsInput_giVersion *smithy.Schema
-
-var ListGiMinorVersionsInput_maxResults *smithy.Schema
-
-var ListGiMinorVersionsInput_nextToken *smithy.Schema
-
-var ListGiMinorVersionsInput_shapeFamily *smithy.Schema
-
-var ListGiMinorVersionsInput_availabilityZone *smithy.Schema
-
-var ListGiMinorVersionsInput_availabilityZoneId *smithy.Schema
-
-var ListGiMinorVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListGiMinorVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGiMinorVersionsOutput_nextToken *smithy.Schema
-
-var ListGiMinorVersionsOutput_giMinorVersions *smithy.Schema
-
-var ListGiVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListGiVersionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListGiVersionsInput_maxResults *smithy.Schema
-
-var ListGiVersionsInput_nextToken *smithy.Schema
-
-var ListGiVersionsInput_shape *smithy.Schema
-
-var ListGiVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListGiVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGiVersionsOutput_nextToken *smithy.Schema
-
-var ListGiVersionsOutput_giVersions *smithy.Schema
-
-var ListOdbNetworksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListOdbNetworksInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListOdbNetworksInput_maxResults *smithy.Schema
-
-var ListOdbNetworksInput_nextToken *smithy.Schema
-
-var ListOdbNetworksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListOdbNetworksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListOdbNetworksOutput_nextToken *smithy.Schema
-
-var ListOdbNetworksOutput_odbNetworks *smithy.Schema
-
-var ListOdbPeeringConnectionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListOdbPeeringConnectionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListOdbPeeringConnectionsInput_maxResults *smithy.Schema
-
-var ListOdbPeeringConnectionsInput_nextToken *smithy.Schema
-
-var ListOdbPeeringConnectionsInput_odbNetworkId *smithy.Schema
-
-var ListOdbPeeringConnectionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListOdbPeeringConnectionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListOdbPeeringConnectionsOutput_nextToken *smithy.Schema
-
-var ListOdbPeeringConnectionsOutput_odbPeeringConnections *smithy.Schema
-
-var ListSystemVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListSystemVersionsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListSystemVersionsInput_maxResults *smithy.Schema
-
-var ListSystemVersionsInput_nextToken *smithy.Schema
-
-var ListSystemVersionsInput_giVersion *smithy.Schema
-
-var ListSystemVersionsInput_shape *smithy.Schema
-
-var ListSystemVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListSystemVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSystemVersionsOutput_nextToken *smithy.Schema
-
-var ListSystemVersionsOutput_systemVersions *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RebootAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RebootAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 2)
-var RebootAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var RebootAutonomousDatabaseInput_isOnlineReboot *smithy.Schema
-
-var RebootAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RebootAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var RebootAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var RebootAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var RebootAutonomousDatabaseOutput_status *smithy.Schema
-
-var RebootAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var RebootDbNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RebootDbNodeInput",
-}, smithy.ShapeTypeStructure, 3)
-var RebootDbNodeInput_cloudVmClusterId *smithy.Schema
-
-var RebootDbNodeInput_exadbVmClusterId *smithy.Schema
-
-var RebootDbNodeInput_dbNodeId *smithy.Schema
-
-var RebootDbNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RebootDbNodeOutput",
-}, smithy.ShapeTypeStructure, 3)
-var RebootDbNodeOutput_dbNodeId *smithy.Schema
-
-var RebootDbNodeOutput_status *smithy.Schema
-
-var RebootDbNodeOutput_statusReason *smithy.Schema
-
-var RestoreAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RestoreAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 2)
-var RestoreAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var RestoreAutonomousDatabaseInput_timestamp *smithy.Schema
-
-var RestoreAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "RestoreAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var RestoreAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var RestoreAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var RestoreAutonomousDatabaseOutput_status *smithy.Schema
-
-var RestoreAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var ShrinkAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ShrinkAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 1)
-var ShrinkAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var ShrinkAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "ShrinkAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ShrinkAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var ShrinkAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var ShrinkAutonomousDatabaseOutput_status *smithy.Schema
-
-var ShrinkAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var StartAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StartAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var StartAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StartAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var StartAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var StartAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var StartAutonomousDatabaseOutput_status *smithy.Schema
-
-var StartAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var StartDbNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StartDbNodeInput",
-}, smithy.ShapeTypeStructure, 3)
-var StartDbNodeInput_cloudVmClusterId *smithy.Schema
-
-var StartDbNodeInput_exadbVmClusterId *smithy.Schema
-
-var StartDbNodeInput_dbNodeId *smithy.Schema
-
-var StartDbNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StartDbNodeOutput",
-}, smithy.ShapeTypeStructure, 3)
-var StartDbNodeOutput_dbNodeId *smithy.Schema
-
-var StartDbNodeOutput_status *smithy.Schema
-
-var StartDbNodeOutput_statusReason *smithy.Schema
-
-var StopAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StopAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var StopAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StopAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var StopAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var StopAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var StopAutonomousDatabaseOutput_status *smithy.Schema
-
-var StopAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var StopDbNodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StopDbNodeInput",
-}, smithy.ShapeTypeStructure, 3)
-var StopDbNodeInput_cloudVmClusterId *smithy.Schema
-
-var StopDbNodeInput_exadbVmClusterId *smithy.Schema
-
-var StopDbNodeInput_dbNodeId *smithy.Schema
-
-var StopDbNodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "StopDbNodeOutput",
-}, smithy.ShapeTypeStructure, 3)
-var StopDbNodeOutput_dbNodeId *smithy.Schema
-
-var StopDbNodeOutput_status *smithy.Schema
-
-var StopDbNodeOutput_statusReason *smithy.Schema
-
-var SwitchoverAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SwitchoverAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 2)
-var SwitchoverAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var SwitchoverAutonomousDatabaseInput_peerDbArn *smithy.Schema
-
-var SwitchoverAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "SwitchoverAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var SwitchoverAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var SwitchoverAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var SwitchoverAutonomousDatabaseOutput_status *smithy.Schema
-
-var SwitchoverAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAutonomousDatabaseBackupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateAutonomousDatabaseBackupInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAutonomousDatabaseBackupInput_autonomousDatabaseBackupId *smithy.Schema
-
-var UpdateAutonomousDatabaseBackupInput_retentionPeriodInDays *smithy.Schema
-
-var UpdateAutonomousDatabaseBackupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateAutonomousDatabaseBackupOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAutonomousDatabaseBackupOutput_displayName *smithy.Schema
-
-var UpdateAutonomousDatabaseBackupOutput_status *smithy.Schema
-
-var UpdateAutonomousDatabaseBackupOutput_statusReason *smithy.Schema
-
-var UpdateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId *smithy.Schema
-
-var UpdateAutonomousDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateAutonomousDatabaseInput",
-}, smithy.ShapeTypeStructure, 45)
-var UpdateAutonomousDatabaseInput_autonomousDatabaseId *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_adminPassword *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_computeCount *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_cpuCoreCount *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_dataStorageSizeInTBs *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_dataStorageSizeInGBs *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_displayName *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_dbName *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_dbVersion *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_dbWorkload *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_dbToolsDetails *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_databaseEdition *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_licenseModel *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_isAutoScalingEnabled *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_isAutoScalingForStorageEnabled *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_isBackupRetentionLocked *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_isLocalDataGuardEnabled *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_isMtlsConnectionRequired *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_isRefreshableClone *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_isDisconnectPeer *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_backupRetentionPeriodInDays *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_byolComputeCountLimit *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_localAdgAutoFailoverMaxDataLossLimit *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_autonomousMaintenanceScheduleType *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_customerContactsToSendToOCI *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_scheduledOperations *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_longTermBackupSchedule *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_openMode *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_permissionLevel *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_refreshableMode *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_privateEndpointIp *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_privateEndpointLabel *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_peerDbId *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_resourcePoolLeaderId *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_resourcePoolSummary *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_standbyAllowlistedIpsSource *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_standbyAllowlistedIps *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_allowlistedIps *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_autoRefreshFrequencyInSeconds *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_autoRefreshPointLagInSeconds *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_timeOfAutoRefreshStart *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_encryptionKeyProvider *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_encryptionKeyConfiguration *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_adminPasswordSource *smithy.Schema
-
-var UpdateAutonomousDatabaseInput_adminPasswordSourceConfiguration *smithy.Schema
-
-var UpdateAutonomousDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateAutonomousDatabaseOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAutonomousDatabaseOutput_autonomousDatabaseId *smithy.Schema
-
-var UpdateAutonomousDatabaseOutput_displayName *smithy.Schema
-
-var UpdateAutonomousDatabaseOutput_status *smithy.Schema
-
-var UpdateAutonomousDatabaseOutput_statusReason *smithy.Schema
-
-var UpdateCloudExadataInfrastructureInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateCloudExadataInfrastructureInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCloudExadataInfrastructureInput_cloudExadataInfrastructureId *smithy.Schema
-
-var UpdateCloudExadataInfrastructureInput_maintenanceWindow *smithy.Schema
-
-var UpdateCloudExadataInfrastructureOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateCloudExadataInfrastructureOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCloudExadataInfrastructureOutput_displayName *smithy.Schema
-
-var UpdateCloudExadataInfrastructureOutput_status *smithy.Schema
-
-var UpdateCloudExadataInfrastructureOutput_statusReason *smithy.Schema
-
-var UpdateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId *smithy.Schema
-
-var UpdateExadbVmClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExadbVmClusterInput",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateExadbVmClusterInput_exadbVmClusterId *smithy.Schema
-
-var UpdateExadbVmClusterInput_dataCollectionOptions *smithy.Schema
-
-var UpdateExadbVmClusterInput_displayName *smithy.Schema
-
-var UpdateExadbVmClusterInput_enabledEcpuCount *smithy.Schema
-
-var UpdateExadbVmClusterInput_gridImageId *smithy.Schema
-
-var UpdateExadbVmClusterInput_licenseModel *smithy.Schema
-
-var UpdateExadbVmClusterInput_sshPublicKeys *smithy.Schema
-
-var UpdateExadbVmClusterInput_systemVersion *smithy.Schema
-
-var UpdateExadbVmClusterInput_totalEcpuCount *smithy.Schema
-
-var UpdateExadbVmClusterInput_updateAction *smithy.Schema
-
-var UpdateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs *smithy.Schema
-
-var UpdateExadbVmClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExadbVmClusterOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateExadbVmClusterOutput_displayName *smithy.Schema
-
-var UpdateExadbVmClusterOutput_status *smithy.Schema
-
-var UpdateExadbVmClusterOutput_statusReason *smithy.Schema
-
-var UpdateExadbVmClusterOutput_exadbVmClusterId *smithy.Schema
-
-var UpdateExascaleCloudExadataInfrastructureInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExascaleCloudExadataInfrastructureInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateExascaleCloudExadataInfrastructureInput_cloudExadataInfrastructureId *smithy.Schema
-
-var UpdateExascaleCloudExadataInfrastructureInput_totalStorageSizeInGBs *smithy.Schema
-
-var UpdateExascaleCloudExadataInfrastructureInput_totalVmStorageSizeInGBs *smithy.Schema
-
-var UpdateExascaleCloudExadataInfrastructureOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExascaleCloudExadataInfrastructureOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateExascaleCloudExadataInfrastructureOutput_displayName *smithy.Schema
-
-var UpdateExascaleCloudExadataInfrastructureOutput_status *smithy.Schema
-
-var UpdateExascaleCloudExadataInfrastructureOutput_statusReason *smithy.Schema
-
-var UpdateExascaleCloudExadataInfrastructureOutput_cloudExadataInfrastructureId *smithy.Schema
-
-var UpdateExascaleDbStorageVaultInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExascaleDbStorageVaultInput",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateExascaleDbStorageVaultInput_exascaleDbStorageVaultId *smithy.Schema
-
-var UpdateExascaleDbStorageVaultInput_additionalFlashCacheInPercent *smithy.Schema
-
-var UpdateExascaleDbStorageVaultInput_autoscaleLimitInGBs *smithy.Schema
-
-var UpdateExascaleDbStorageVaultInput_description *smithy.Schema
-
-var UpdateExascaleDbStorageVaultInput_displayName *smithy.Schema
-
-var UpdateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs *smithy.Schema
-
-var UpdateExascaleDbStorageVaultInput_isAutoscaleEnabled *smithy.Schema
-
-var UpdateExascaleDbStorageVaultOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateExascaleDbStorageVaultOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateExascaleDbStorageVaultOutput_displayName *smithy.Schema
-
-var UpdateExascaleDbStorageVaultOutput_status *smithy.Schema
-
-var UpdateExascaleDbStorageVaultOutput_statusReason *smithy.Schema
-
-var UpdateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId *smithy.Schema
-
-var UpdateOdbNetworkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateOdbNetworkInput",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateOdbNetworkInput_odbNetworkId *smithy.Schema
-
-var UpdateOdbNetworkInput_displayName *smithy.Schema
-
-var UpdateOdbNetworkInput_peeredCidrsToBeAdded *smithy.Schema
-
-var UpdateOdbNetworkInput_peeredCidrsToBeRemoved *smithy.Schema
-
-var UpdateOdbNetworkInput_s3Access *smithy.Schema
-
-var UpdateOdbNetworkInput_zeroEtlAccess *smithy.Schema
-
-var UpdateOdbNetworkInput_stsAccess *smithy.Schema
-
-var UpdateOdbNetworkInput_kmsAccess *smithy.Schema
-
-var UpdateOdbNetworkInput_s3PolicyDocument *smithy.Schema
-
-var UpdateOdbNetworkInput_stsPolicyDocument *smithy.Schema
-
-var UpdateOdbNetworkInput_kmsPolicyDocument *smithy.Schema
-
-var UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable *smithy.Schema
-
-var UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToDisable *smithy.Schema
-
-var UpdateOdbNetworkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateOdbNetworkOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateOdbNetworkOutput_displayName *smithy.Schema
-
-var UpdateOdbNetworkOutput_status *smithy.Schema
-
-var UpdateOdbNetworkOutput_statusReason *smithy.Schema
-
-var UpdateOdbNetworkOutput_odbNetworkId *smithy.Schema
-
-var UpdateOdbPeeringConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateOdbPeeringConnectionInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateOdbPeeringConnectionInput_odbPeeringConnectionId *smithy.Schema
-
-var UpdateOdbPeeringConnectionInput_displayName *smithy.Schema
-
-var UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded *smithy.Schema
-
-var UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeRemoved *smithy.Schema
-
-var UpdateOdbPeeringConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.odb",
-	Name:      "UpdateOdbPeeringConnectionOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateOdbPeeringConnectionOutput_displayName *smithy.Schema
-
-var UpdateOdbPeeringConnectionOutput_status *smithy.Schema
-
-var UpdateOdbPeeringConnectionOutput_statusReason *smithy.Schema
-
-var UpdateOdbPeeringConnectionOutput_odbPeeringConnectionId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Access_ENABLED = Access.AddMember("ENABLED", smithyprelude.Unit)
-
-	Access_DISABLED = Access.AddMember("DISABLED", smithyprelude.Unit)
-
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AdminPasswordSource_CUSTOMER_MANAGED_AWS_SECRET = AdminPasswordSource.AddMember("CUSTOMER_MANAGED_AWS_SECRET", smithyprelude.Unit)
-
-	AdminPasswordSource_API_REQUEST_PARAMETER = AdminPasswordSource.AddMember("API_REQUEST_PARAMETER", smithyprelude.Unit)
-
-	ExternalIdType_DATABASE_OCID = ExternalIdType.AddMember("DATABASE_OCID", smithyprelude.Unit)
-
-	ExternalIdType_COMPARTMENT_OCID = ExternalIdType.AddMember("COMPARTMENT_OCID", smithyprelude.Unit)
-
-	ExternalIdType_TENANT_OCID = ExternalIdType.AddMember("TENANT_OCID", smithyprelude.Unit)
-
-	CustomerManagedAwsSecretConfiguration_iamRoleArn = CustomerManagedAwsSecretConfiguration.AddMember("iamRoleArn", _RoleArn)
-
-	CustomerManagedAwsSecretConfiguration_secretId = CustomerManagedAwsSecretConfiguration.AddMember("secretId", _SecretIdOrArn)
-
-	CustomerManagedAwsSecretConfiguration_externalIdType = CustomerManagedAwsSecretConfiguration.AddMember("externalIdType", ExternalIdType)
-
-	AdminPasswordSourceConfiguration_customerManagedAwsSecret = AdminPasswordSourceConfiguration.AddMember("customerManagedAwsSecret", CustomerManagedAwsSecretConfiguration)
-
-	CustomerManagedAwsSecretConfigurationInput_secretId = CustomerManagedAwsSecretConfigurationInput.AddMember("secretId", _SecretIdOrArn)
-
-	CustomerManagedAwsSecretConfigurationInput_iamRoleArn = CustomerManagedAwsSecretConfigurationInput.AddMember("iamRoleArn", _RoleArn)
-
-	CustomerManagedAwsSecretConfigurationInput_externalIdType = CustomerManagedAwsSecretConfigurationInput.AddMember("externalIdType", ExternalIdType)
-
-	AdminPasswordSourceConfigurationInput_customerManagedAwsSecret = AdminPasswordSourceConfigurationInput.AddMember("customerManagedAwsSecret", CustomerManagedAwsSecretConfigurationInput)
-
-	AdminPasswordSourceSummary_adminPasswordSource = AdminPasswordSourceSummary.AddMember("adminPasswordSource", AdminPasswordSource)
-
-	AdminPasswordSourceSummary_adminPasswordSourceConfiguration = AdminPasswordSourceSummary.AddMember("adminPasswordSourceConfiguration", AdminPasswordSourceConfiguration)
-
-	AutonomousDatabaseResourceStatus_AVAILABLE = AutonomousDatabaseResourceStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_FAILED = AutonomousDatabaseResourceStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_PROVISIONING = AutonomousDatabaseResourceStatus.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_TERMINATED = AutonomousDatabaseResourceStatus.AddMember("TERMINATED", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_TERMINATING = AutonomousDatabaseResourceStatus.AddMember("TERMINATING", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_UPDATING = AutonomousDatabaseResourceStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_MAINTENANCE_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("MAINTENANCE_IN_PROGRESS", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_STOPPING = AutonomousDatabaseResourceStatus.AddMember("STOPPING", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_STOPPED = AutonomousDatabaseResourceStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_STARTING = AutonomousDatabaseResourceStatus.AddMember("STARTING", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_UNAVAILABLE = AutonomousDatabaseResourceStatus.AddMember("UNAVAILABLE", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_RESTORE_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("RESTORE_IN_PROGRESS", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_RESTORE_FAILED = AutonomousDatabaseResourceStatus.AddMember("RESTORE_FAILED", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_BACKUP_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("BACKUP_IN_PROGRESS", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_SCALE_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("SCALE_IN_PROGRESS", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_AVAILABLE_NEEDS_ATTENTION = AutonomousDatabaseResourceStatus.AddMember("AVAILABLE_NEEDS_ATTENTION", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_RESTARTING = AutonomousDatabaseResourceStatus.AddMember("RESTARTING", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_RECREATING = AutonomousDatabaseResourceStatus.AddMember("RECREATING", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_ROLE_CHANGE_IN_PROGRESS = AutonomousDatabaseResourceStatus.AddMember("ROLE_CHANGE_IN_PROGRESS", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_UPGRADING = AutonomousDatabaseResourceStatus.AddMember("UPGRADING", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_INACCESSIBLE = AutonomousDatabaseResourceStatus.AddMember("INACCESSIBLE", smithyprelude.Unit)
-
-	AutonomousDatabaseResourceStatus_STANDBY = AutonomousDatabaseResourceStatus.AddMember("STANDBY", smithyprelude.Unit)
-
-	DatabaseType_REGULAR = DatabaseType.AddMember("REGULAR", smithyprelude.Unit)
-
-	DatabaseType_CLONE = DatabaseType.AddMember("CLONE", smithyprelude.Unit)
-
-	DbWorkload_OLTP = DbWorkload.AddMember("OLTP", smithyprelude.Unit)
-
-	DbWorkload_AJD = DbWorkload.AddMember("AJD", smithyprelude.Unit)
-
-	DbWorkload_APEX = DbWorkload.AddMember("APEX", smithyprelude.Unit)
-
-	DbWorkload_LH = DbWorkload.AddMember("LH", smithyprelude.Unit)
-
-	DatabaseEdition_STANDARD_EDITION = DatabaseEdition.AddMember("STANDARD_EDITION", smithyprelude.Unit)
-
-	DatabaseEdition_ENTERPRISE_EDITION = DatabaseEdition.AddMember("ENTERPRISE_EDITION", smithyprelude.Unit)
-
-	LicenseModel_BRING_YOUR_OWN_LICENSE = LicenseModel.AddMember("BRING_YOUR_OWN_LICENSE", smithyprelude.Unit)
-
-	LicenseModel_LICENSE_INCLUDED = LicenseModel.AddMember("LICENSE_INCLUDED", smithyprelude.Unit)
-
-	OpenMode_READ_ONLY = OpenMode.AddMember("READ_ONLY", smithyprelude.Unit)
-
-	OpenMode_READ_WRITE = OpenMode.AddMember("READ_WRITE", smithyprelude.Unit)
-
-	PermissionLevel_RESTRICTED = PermissionLevel.AddMember("RESTRICTED", smithyprelude.Unit)
-
-	PermissionLevel_UNRESTRICTED = PermissionLevel.AddMember("UNRESTRICTED", smithyprelude.Unit)
-
-	AutonomousMaintenanceScheduleType_EARLY = AutonomousMaintenanceScheduleType.AddMember("EARLY", smithyprelude.Unit)
-
-	AutonomousMaintenanceScheduleType_REGULAR = AutonomousMaintenanceScheduleType.AddMember("REGULAR", smithyprelude.Unit)
-
-	NetServicesArchitecture_DEDICATED = NetServicesArchitecture.AddMember("DEDICATED", smithyprelude.Unit)
-
-	NetServicesArchitecture_SHARED = NetServicesArchitecture.AddMember("SHARED", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	_DatabaseConnectionStringMap_key = _DatabaseConnectionStringMap.AddMember("key", smithyprelude.String)
-
-	_DatabaseConnectionStringMap_value = _DatabaseConnectionStringMap.AddMember("value", smithyprelude.String)
-
-	DatabaseConnectionStringProfile_consumerGroup = DatabaseConnectionStringProfile.AddMember("consumerGroup", smithyprelude.String)
-
-	DatabaseConnectionStringProfile_displayName = DatabaseConnectionStringProfile.AddMember("displayName", smithyprelude.String)
-
-	DatabaseConnectionStringProfile_hostFormat = DatabaseConnectionStringProfile.AddMember("hostFormat", smithyprelude.String)
-
-	DatabaseConnectionStringProfile_isRegional = DatabaseConnectionStringProfile.AddMember("isRegional", smithyprelude.Boolean)
-
-	DatabaseConnectionStringProfile_protocol = DatabaseConnectionStringProfile.AddMember("protocol", smithyprelude.String)
-
-	DatabaseConnectionStringProfile_sessionMode = DatabaseConnectionStringProfile.AddMember("sessionMode", smithyprelude.String)
-
-	DatabaseConnectionStringProfile_syntaxFormat = DatabaseConnectionStringProfile.AddMember("syntaxFormat", smithyprelude.String)
-
-	DatabaseConnectionStringProfile_tlsAuthentication = DatabaseConnectionStringProfile.AddMember("tlsAuthentication", smithyprelude.String)
-
-	DatabaseConnectionStringProfile_value = DatabaseConnectionStringProfile.AddMember("value", smithyprelude.String)
-
-	_DatabaseConnectionStringProfileList_member = _DatabaseConnectionStringProfileList.AddMember("member", DatabaseConnectionStringProfile)
-
-	AutonomousDatabaseConnectionStrings_allConnectionStrings = AutonomousDatabaseConnectionStrings.AddMember("allConnectionStrings", _DatabaseConnectionStringMap)
-
-	AutonomousDatabaseConnectionStrings_dedicated = AutonomousDatabaseConnectionStrings.AddMember("dedicated", smithyprelude.String)
-
-	AutonomousDatabaseConnectionStrings_high = AutonomousDatabaseConnectionStrings.AddMember("high", smithyprelude.String)
-
-	AutonomousDatabaseConnectionStrings_medium = AutonomousDatabaseConnectionStrings.AddMember("medium", smithyprelude.String)
-
-	AutonomousDatabaseConnectionStrings_low = AutonomousDatabaseConnectionStrings.AddMember("low", smithyprelude.String)
-
-	AutonomousDatabaseConnectionStrings_profiles = AutonomousDatabaseConnectionStrings.AddMember("profiles", _DatabaseConnectionStringProfileList)
-
-	CustomerContact_email = CustomerContact.AddMember("email", _SensitiveString)
-
-	_CustomerContacts_member = _CustomerContacts.AddMember("member", CustomerContact)
-
-	AutonomousDatabaseApex_apexVersion = AutonomousDatabaseApex.AddMember("apexVersion", smithyprelude.String)
-
-	AutonomousDatabaseApex_ordsVersion = AutonomousDatabaseApex.AddMember("ordsVersion", smithyprelude.String)
-
-	DatabaseStandbySummary_availabilityDomain = DatabaseStandbySummary.AddMember("availabilityDomain", smithyprelude.String)
-
-	DatabaseStandbySummary_lagTimeInSeconds = DatabaseStandbySummary.AddMember("lagTimeInSeconds", smithyprelude.Integer)
-
-	DatabaseStandbySummary_status = DatabaseStandbySummary.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	DatabaseStandbySummary_statusReason = DatabaseStandbySummary.AddMember("statusReason", smithyprelude.String)
-
-	DatabaseStandbySummary_maintenanceTargetComponent = DatabaseStandbySummary.AddMember("maintenanceTargetComponent", smithyprelude.String)
-
-	DatabaseStandbySummary_timeDataGuardRoleChanged = DatabaseStandbySummary.AddMember("timeDataGuardRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DatabaseStandbySummary_timeDisasterRecoveryRoleChanged = DatabaseStandbySummary.AddMember("timeDisasterRecoveryRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DatabaseStandbySummary_timeMaintenanceBegin = DatabaseStandbySummary.AddMember("timeMaintenanceBegin", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DatabaseStandbySummary_timeMaintenanceEnd = DatabaseStandbySummary.AddMember("timeMaintenanceEnd", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DataSafeStatus_REGISTERING = DataSafeStatus.AddMember("REGISTERING", smithyprelude.Unit)
-
-	DataSafeStatus_REGISTERED = DataSafeStatus.AddMember("REGISTERED", smithyprelude.Unit)
-
-	DataSafeStatus_DEREGISTERING = DataSafeStatus.AddMember("DEREGISTERING", smithyprelude.Unit)
-
-	DataSafeStatus_NOT_REGISTERED = DataSafeStatus.AddMember("NOT_REGISTERED", smithyprelude.Unit)
-
-	DataSafeStatus_FAILED = DataSafeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DatabaseManagementStatus_ENABLING = DatabaseManagementStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	DatabaseManagementStatus_ENABLED = DatabaseManagementStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	DatabaseManagementStatus_DISABLING = DatabaseManagementStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	DatabaseManagementStatus_NOT_ENABLED = DatabaseManagementStatus.AddMember("NOT_ENABLED", smithyprelude.Unit)
-
-	DatabaseManagementStatus_FAILED_ENABLING = DatabaseManagementStatus.AddMember("FAILED_ENABLING", smithyprelude.Unit)
-
-	DatabaseManagementStatus_FAILED_DISABLING = DatabaseManagementStatus.AddMember("FAILED_DISABLING", smithyprelude.Unit)
-
-	OperationsInsightsStatus_ENABLING = OperationsInsightsStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	OperationsInsightsStatus_ENABLED = OperationsInsightsStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	OperationsInsightsStatus_DISABLING = OperationsInsightsStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	OperationsInsightsStatus_NOT_ENABLED = OperationsInsightsStatus.AddMember("NOT_ENABLED", smithyprelude.Unit)
-
-	OperationsInsightsStatus_FAILED_ENABLING = OperationsInsightsStatus.AddMember("FAILED_ENABLING", smithyprelude.Unit)
-
-	OperationsInsightsStatus_FAILED_DISABLING = OperationsInsightsStatus.AddMember("FAILED_DISABLING", smithyprelude.Unit)
-
-	AutonomousDatabaseConnectionUrls_apexUrl = AutonomousDatabaseConnectionUrls.AddMember("apexUrl", smithyprelude.String)
-
-	AutonomousDatabaseConnectionUrls_databaseTransformsUrl = AutonomousDatabaseConnectionUrls.AddMember("databaseTransformsUrl", smithyprelude.String)
-
-	AutonomousDatabaseConnectionUrls_graphStudioUrl = AutonomousDatabaseConnectionUrls.AddMember("graphStudioUrl", smithyprelude.String)
-
-	AutonomousDatabaseConnectionUrls_machineLearningNotebookUrl = AutonomousDatabaseConnectionUrls.AddMember("machineLearningNotebookUrl", smithyprelude.String)
-
-	AutonomousDatabaseConnectionUrls_machineLearningUserManagementUrl = AutonomousDatabaseConnectionUrls.AddMember("machineLearningUserManagementUrl", smithyprelude.String)
-
-	AutonomousDatabaseConnectionUrls_mongoDbUrl = AutonomousDatabaseConnectionUrls.AddMember("mongoDbUrl", smithyprelude.String)
-
-	AutonomousDatabaseConnectionUrls_ordsUrl = AutonomousDatabaseConnectionUrls.AddMember("ordsUrl", smithyprelude.String)
-
-	AutonomousDatabaseConnectionUrls_spatialStudioUrl = AutonomousDatabaseConnectionUrls.AddMember("spatialStudioUrl", smithyprelude.String)
-
-	AutonomousDatabaseConnectionUrls_sqlDevWebUrl = AutonomousDatabaseConnectionUrls.AddMember("sqlDevWebUrl", smithyprelude.String)
-
-	DatabaseTool_isEnabled = DatabaseTool.AddMember("isEnabled", smithyprelude.Boolean)
-
-	DatabaseTool_name = DatabaseTool.AddMember("name", smithyprelude.String)
-
-	DatabaseTool_computeCount = DatabaseTool.AddMember("computeCount", smithyprelude.Double)
-
-	DatabaseTool_maxIdleTimeInMinutes = DatabaseTool.AddMember("maxIdleTimeInMinutes", smithyprelude.Integer)
-
-	_DatabaseToolList_member = _DatabaseToolList.AddMember("member", DatabaseTool)
-
-	DayOfWeekName_MONDAY = DayOfWeekName.AddMember("MONDAY", smithyprelude.Unit)
-
-	DayOfWeekName_TUESDAY = DayOfWeekName.AddMember("TUESDAY", smithyprelude.Unit)
-
-	DayOfWeekName_WEDNESDAY = DayOfWeekName.AddMember("WEDNESDAY", smithyprelude.Unit)
-
-	DayOfWeekName_THURSDAY = DayOfWeekName.AddMember("THURSDAY", smithyprelude.Unit)
-
-	DayOfWeekName_FRIDAY = DayOfWeekName.AddMember("FRIDAY", smithyprelude.Unit)
-
-	DayOfWeekName_SATURDAY = DayOfWeekName.AddMember("SATURDAY", smithyprelude.Unit)
-
-	DayOfWeekName_SUNDAY = DayOfWeekName.AddMember("SUNDAY", smithyprelude.Unit)
-
-	DayOfWeek_name = DayOfWeek.AddMember("name", DayOfWeekName)
-
-	ScheduledOperationDetails_dayOfWeek = ScheduledOperationDetails.AddMember("dayOfWeek", DayOfWeek)
-
-	ScheduledOperationDetails_scheduledStartTime = ScheduledOperationDetails.AddMember("scheduledStartTime", smithyprelude.String)
-
-	ScheduledOperationDetails_scheduledStopTime = ScheduledOperationDetails.AddMember("scheduledStopTime", smithyprelude.String)
-
-	_ScheduledOperationDetailsList_member = _ScheduledOperationDetailsList.AddMember("member", ScheduledOperationDetails)
-
-	ComputeModel_ECPU = ComputeModel.AddMember("ECPU", smithyprelude.Unit)
-
-	ComputeModel_OCPU = ComputeModel.AddMember("OCPU", smithyprelude.Unit)
-
-	_IntegerList_member = _IntegerList.AddMember("member", smithyprelude.Integer)
-
-	StandbyAllowlistedIpsSource_PRIMARY = StandbyAllowlistedIpsSource.AddMember("PRIMARY", smithyprelude.Unit)
-
-	StandbyAllowlistedIpsSource_SEPARATE = StandbyAllowlistedIpsSource.AddMember("SEPARATE", smithyprelude.Unit)
-
-	StandbyAllowlistedIpsSource_NOT_APPLICABLE = StandbyAllowlistedIpsSource.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
-
-	DisasterRecoveryType_ADG = DisasterRecoveryType.AddMember("ADG", smithyprelude.Unit)
-
-	DisasterRecoveryType_BACKUP_BASED = DisasterRecoveryType.AddMember("BACKUP_BASED", smithyprelude.Unit)
-
-	DataGuardRole_PRIMARY = DataGuardRole.AddMember("PRIMARY", smithyprelude.Unit)
-
-	DataGuardRole_STANDBY = DataGuardRole.AddMember("STANDBY", smithyprelude.Unit)
-
-	DataGuardRole_DISABLED_STANDBY = DataGuardRole.AddMember("DISABLED_STANDBY", smithyprelude.Unit)
-
-	DataGuardRole_BACKUP_COPY = DataGuardRole.AddMember("BACKUP_COPY", smithyprelude.Unit)
-
-	DataGuardRole_SNAPSHOT_STANDBY = DataGuardRole.AddMember("SNAPSHOT_STANDBY", smithyprelude.Unit)
-
-	DisasterRecoveryConfiguration_disasterRecoveryType = DisasterRecoveryConfiguration.AddMember("disasterRecoveryType", DisasterRecoveryType)
-
-	DisasterRecoveryConfiguration_isReplicateAutomaticBackups = DisasterRecoveryConfiguration.AddMember("isReplicateAutomaticBackups", smithyprelude.Boolean)
-
-	DisasterRecoveryConfiguration_isSnapshotStandby = DisasterRecoveryConfiguration.AddMember("isSnapshotStandby", smithyprelude.Boolean)
-
-	DisasterRecoveryConfiguration_timeSnapshotStandbyEnabledTill = DisasterRecoveryConfiguration.AddMember("timeSnapshotStandbyEnabledTill", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	RefreshableMode_AUTOMATIC = RefreshableMode.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	RefreshableMode_MANUAL = RefreshableMode.AddMember("MANUAL", smithyprelude.Unit)
-
-	RefreshableStatus_REFRESHING = RefreshableStatus.AddMember("REFRESHING", smithyprelude.Unit)
-
-	RefreshableStatus_NOT_REFRESHING = RefreshableStatus.AddMember("NOT_REFRESHING", smithyprelude.Unit)
-
-	RepeatCadence_ONE_TIME = RepeatCadence.AddMember("ONE_TIME", smithyprelude.Unit)
-
-	RepeatCadence_WEEKLY = RepeatCadence.AddMember("WEEKLY", smithyprelude.Unit)
-
-	RepeatCadence_MONTHLY = RepeatCadence.AddMember("MONTHLY", smithyprelude.Unit)
-
-	RepeatCadence_YEARLY = RepeatCadence.AddMember("YEARLY", smithyprelude.Unit)
-
-	LongTermBackupSchedule_isDisabled = LongTermBackupSchedule.AddMember("isDisabled", smithyprelude.Boolean)
-
-	LongTermBackupSchedule_repeatCadence = LongTermBackupSchedule.AddMember("repeatCadence", RepeatCadence)
-
-	LongTermBackupSchedule_retentionPeriodInDays = LongTermBackupSchedule.AddMember("retentionPeriodInDays", smithyprelude.Integer)
-
-	LongTermBackupSchedule_timeOfBackup = LongTermBackupSchedule.AddMember("timeOfBackup", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ResourcePoolSummary_isDisabled = ResourcePoolSummary.AddMember("isDisabled", smithyprelude.Boolean)
-
-	ResourcePoolSummary_poolSize = ResourcePoolSummary.AddMember("poolSize", smithyprelude.Integer)
-
-	ResourcePoolSummary_poolStorageSizeInTBs = ResourcePoolSummary.AddMember("poolStorageSizeInTBs", smithyprelude.Integer)
-
-	ResourcePoolSummary_availableStorageCapacityInTBs = ResourcePoolSummary.AddMember("availableStorageCapacityInTBs", smithyprelude.Double)
-
-	ResourcePoolSummary_totalComputeCapacity = ResourcePoolSummary.AddMember("totalComputeCapacity", smithyprelude.Integer)
-
-	ResourcePoolSummary_availableComputeCapacity = ResourcePoolSummary.AddMember("availableComputeCapacity", smithyprelude.Integer)
-
-	EncryptionKeyProvider_ORACLE_MANAGED = EncryptionKeyProvider.AddMember("ORACLE_MANAGED", smithyprelude.Unit)
-
-	EncryptionKeyProvider_AWS_KMS = EncryptionKeyProvider.AddMember("AWS_KMS", smithyprelude.Unit)
-
-	EncryptionKeyProvider_OKV = EncryptionKeyProvider.AddMember("OKV", smithyprelude.Unit)
-
-	EncryptionKeyProvider_OCI = EncryptionKeyProvider.AddMember("OCI", smithyprelude.Unit)
-
-	AwsEncryptionKeyConfiguration_iamRoleArn = AwsEncryptionKeyConfiguration.AddMember("iamRoleArn", _RoleArn)
-
-	AwsEncryptionKeyConfiguration_externalIdType = AwsEncryptionKeyConfiguration.AddMember("externalIdType", ExternalIdType)
-
-	AwsEncryptionKeyConfiguration_kmsKeyId = AwsEncryptionKeyConfiguration.AddMember("kmsKeyId", _KmsKeyIdOrArn)
-
-	OciEncryptionKeyConfiguration_kmsKeyId = OciEncryptionKeyConfiguration.AddMember("kmsKeyId", smithyprelude.String)
-
-	OciEncryptionKeyConfiguration_vaultId = OciEncryptionKeyConfiguration.AddMember("vaultId", smithyprelude.String)
-
-	OkvEncryptionKeyConfiguration_certificateDirectoryName = OkvEncryptionKeyConfiguration.AddMember("certificateDirectoryName", smithyprelude.String)
-
-	OkvEncryptionKeyConfiguration_certificateId = OkvEncryptionKeyConfiguration.AddMember("certificateId", smithyprelude.String)
-
-	OkvEncryptionKeyConfiguration_directoryName = OkvEncryptionKeyConfiguration.AddMember("directoryName", smithyprelude.String)
-
-	OkvEncryptionKeyConfiguration_okvKmsKey = OkvEncryptionKeyConfiguration.AddMember("okvKmsKey", smithyprelude.String)
-
-	OkvEncryptionKeyConfiguration_okvUri = OkvEncryptionKeyConfiguration.AddMember("okvUri", smithyprelude.String)
-
-	EncryptionKeyConfiguration_awsEncryptionKey = EncryptionKeyConfiguration.AddMember("awsEncryptionKey", AwsEncryptionKeyConfiguration)
-
-	EncryptionKeyConfiguration_ociEncryptionKey = EncryptionKeyConfiguration.AddMember("ociEncryptionKey", OciEncryptionKeyConfiguration)
-
-	EncryptionKeyConfiguration_okvEncryptionKey = EncryptionKeyConfiguration.AddMember("okvEncryptionKey", OkvEncryptionKeyConfiguration)
-
-	EncryptionSummary_encryptionKeyProvider = EncryptionSummary.AddMember("encryptionKeyProvider", EncryptionKeyProvider)
-
-	EncryptionSummary_encryptionKeyConfiguration = EncryptionSummary.AddMember("encryptionKeyConfiguration", EncryptionKeyConfiguration)
-
-	AutonomousDatabase_autonomousDatabaseId = AutonomousDatabase.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	AutonomousDatabase_autonomousDatabaseArn = AutonomousDatabase.AddMember("autonomousDatabaseArn", _ResourceArn)
-
-	AutonomousDatabase_ociResourceAnchorName = AutonomousDatabase.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	AutonomousDatabase_percentProgress = AutonomousDatabase.AddMember("percentProgress", smithyprelude.Float)
-
-	AutonomousDatabase_ocid = AutonomousDatabase.AddMember("ocid", smithyprelude.String)
-
-	AutonomousDatabase_ociUrl = AutonomousDatabase.AddMember("ociUrl", smithyprelude.String)
-
-	AutonomousDatabase_displayName = AutonomousDatabase.AddMember("displayName", smithyprelude.String)
-
-	AutonomousDatabase_dbName = AutonomousDatabase.AddMember("dbName", smithyprelude.String)
-
-	AutonomousDatabase_sourceId = AutonomousDatabase.AddMember("sourceId", smithyprelude.String)
-
-	AutonomousDatabase_status = AutonomousDatabase.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	AutonomousDatabase_statusReason = AutonomousDatabase.AddMember("statusReason", smithyprelude.String)
-
-	AutonomousDatabase_databaseType = AutonomousDatabase.AddMember("databaseType", DatabaseType)
-
-	AutonomousDatabase_dbVersion = AutonomousDatabase.AddMember("dbVersion", smithyprelude.String)
-
-	AutonomousDatabase_dbWorkload = AutonomousDatabase.AddMember("dbWorkload", DbWorkload)
-
-	AutonomousDatabase_characterSet = AutonomousDatabase.AddMember("characterSet", smithyprelude.String)
-
-	AutonomousDatabase_ncharacterSet = AutonomousDatabase.AddMember("ncharacterSet", smithyprelude.String)
-
-	AutonomousDatabase_databaseEdition = AutonomousDatabase.AddMember("databaseEdition", DatabaseEdition)
-
-	AutonomousDatabase_licenseModel = AutonomousDatabase.AddMember("licenseModel", LicenseModel)
-
-	AutonomousDatabase_openMode = AutonomousDatabase.AddMember("openMode", OpenMode)
-
-	AutonomousDatabase_permissionLevel = AutonomousDatabase.AddMember("permissionLevel", PermissionLevel)
-
-	AutonomousDatabase_isMtlsConnectionRequired = AutonomousDatabase.AddMember("isMtlsConnectionRequired", smithyprelude.Boolean)
-
-	AutonomousDatabase_autonomousMaintenanceScheduleType = AutonomousDatabase.AddMember("autonomousMaintenanceScheduleType", AutonomousMaintenanceScheduleType)
-
-	AutonomousDatabase_netServicesArchitecture = AutonomousDatabase.AddMember("netServicesArchitecture", NetServicesArchitecture)
-
-	AutonomousDatabase_availableUpgradeVersions = AutonomousDatabase.AddMember("availableUpgradeVersions", _StringList)
-
-	AutonomousDatabase_byolComputeCountLimit = AutonomousDatabase.AddMember("byolComputeCountLimit", smithyprelude.Integer)
-
-	AutonomousDatabase_connectionStringDetails = AutonomousDatabase.AddMember("connectionStringDetails", AutonomousDatabaseConnectionStrings)
-
-	AutonomousDatabase_serviceConsoleUrl = AutonomousDatabase.AddMember("serviceConsoleUrl", smithyprelude.String)
-
-	AutonomousDatabase_sqlWebDeveloperUrl = AutonomousDatabase.AddMember("sqlWebDeveloperUrl", smithyprelude.String)
-
-	AutonomousDatabase_customerContacts = AutonomousDatabase.AddMember("customerContacts", _CustomerContacts)
-
-	AutonomousDatabase_apexDetails = AutonomousDatabase.AddMember("apexDetails", AutonomousDatabaseApex)
-
-	AutonomousDatabase_standbyDb = AutonomousDatabase.AddMember("standbyDb", DatabaseStandbySummary)
-
-	AutonomousDatabase_localStandbyDb = AutonomousDatabase.AddMember("localStandbyDb", DatabaseStandbySummary)
-
-	AutonomousDatabase_dataSafeStatus = AutonomousDatabase.AddMember("dataSafeStatus", DataSafeStatus)
-
-	AutonomousDatabase_databaseManagementStatus = AutonomousDatabase.AddMember("databaseManagementStatus", DatabaseManagementStatus)
-
-	AutonomousDatabase_operationsInsightsStatus = AutonomousDatabase.AddMember("operationsInsightsStatus", OperationsInsightsStatus)
-
-	AutonomousDatabase_availabilityZone = AutonomousDatabase.AddMember("availabilityZone", smithyprelude.String)
-
-	AutonomousDatabase_availabilityZoneId = AutonomousDatabase.AddMember("availabilityZoneId", smithyprelude.String)
-
-	AutonomousDatabase_maintenanceTargetComponent = AutonomousDatabase.AddMember("maintenanceTargetComponent", smithyprelude.String)
-
-	AutonomousDatabase_connectionUrls = AutonomousDatabase.AddMember("connectionUrls", AutonomousDatabaseConnectionUrls)
-
-	AutonomousDatabase_dbToolsDetails = AutonomousDatabase.AddMember("dbToolsDetails", _DatabaseToolList)
-
-	AutonomousDatabase_scheduledOperations = AutonomousDatabase.AddMember("scheduledOperations", _ScheduledOperationDetailsList)
-
-	AutonomousDatabase_resourcePoolLeaderId = AutonomousDatabase.AddMember("resourcePoolLeaderId", smithyprelude.String)
-
-	AutonomousDatabase_computeCount = AutonomousDatabase.AddMember("computeCount", smithyprelude.Float)
-
-	AutonomousDatabase_computeModel = AutonomousDatabase.AddMember("computeModel", ComputeModel)
-
-	AutonomousDatabase_cpuCoreCount = AutonomousDatabase.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	AutonomousDatabase_memoryPerOracleComputeUnitInGBs = AutonomousDatabase.AddMember("memoryPerOracleComputeUnitInGBs", smithyprelude.Integer)
-
-	AutonomousDatabase_provisionableCpus = AutonomousDatabase.AddMember("provisionableCpus", _IntegerList)
-
-	AutonomousDatabase_isAutoScalingEnabled = AutonomousDatabase.AddMember("isAutoScalingEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabase_dataStorageSizeInTBs = AutonomousDatabase.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabase_dataStorageSizeInGBs = AutonomousDatabase.AddMember("dataStorageSizeInGBs", smithyprelude.Integer)
-
-	AutonomousDatabase_usedDataStorageSizeInTBs = AutonomousDatabase.AddMember("usedDataStorageSizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabase_usedDataStorageSizeInGBs = AutonomousDatabase.AddMember("usedDataStorageSizeInGBs", smithyprelude.Integer)
-
-	AutonomousDatabase_actualUsedDataStorageSizeInTBs = AutonomousDatabase.AddMember("actualUsedDataStorageSizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabase_allocatedStorageSizeInTBs = AutonomousDatabase.AddMember("allocatedStorageSizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabase_inMemoryAreaInGBs = AutonomousDatabase.AddMember("inMemoryAreaInGBs", smithyprelude.Integer)
-
-	AutonomousDatabase_isAutoScalingForStorageEnabled = AutonomousDatabase.AddMember("isAutoScalingForStorageEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabase_odbNetworkId = AutonomousDatabase.AddMember("odbNetworkId", _ResourceId)
-
-	AutonomousDatabase_odbNetworkArn = AutonomousDatabase.AddMember("odbNetworkArn", _ResourceArn)
-
-	AutonomousDatabase_privateEndpoint = AutonomousDatabase.AddMember("privateEndpoint", smithyprelude.String)
-
-	AutonomousDatabase_privateEndpointIp = AutonomousDatabase.AddMember("privateEndpointIp", smithyprelude.String)
-
-	AutonomousDatabase_privateEndpointLabel = AutonomousDatabase.AddMember("privateEndpointLabel", smithyprelude.String)
-
-	AutonomousDatabase_allowlistedIps = AutonomousDatabase.AddMember("allowlistedIps", _StringList)
-
-	AutonomousDatabase_standbyAllowlistedIps = AutonomousDatabase.AddMember("standbyAllowlistedIps", _StringList)
-
-	AutonomousDatabase_standbyAllowlistedIpsSource = AutonomousDatabase.AddMember("standbyAllowlistedIpsSource", StandbyAllowlistedIpsSource)
-
-	AutonomousDatabase_isLocalDataGuardEnabled = AutonomousDatabase.AddMember("isLocalDataGuardEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabase_isRemoteDataGuardEnabled = AutonomousDatabase.AddMember("isRemoteDataGuardEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabase_localDisasterRecoveryType = AutonomousDatabase.AddMember("localDisasterRecoveryType", DisasterRecoveryType)
-
-	AutonomousDatabase_role = AutonomousDatabase.AddMember("role", DataGuardRole)
-
-	AutonomousDatabase_peerDbIds = AutonomousDatabase.AddMember("peerDbIds", _StringList)
-
-	AutonomousDatabase_failedDataRecoveryInSeconds = AutonomousDatabase.AddMember("failedDataRecoveryInSeconds", smithyprelude.Integer)
-
-	AutonomousDatabase_localAdgAutoFailoverMaxDataLossLimit = AutonomousDatabase.AddMember("localAdgAutoFailoverMaxDataLossLimit", smithyprelude.Integer)
-
-	AutonomousDatabase_remoteDisasterRecoveryConfiguration = AutonomousDatabase.AddMember("remoteDisasterRecoveryConfiguration", DisasterRecoveryConfiguration)
-
-	AutonomousDatabase_isRefreshableClone = AutonomousDatabase.AddMember("isRefreshableClone", smithyprelude.Boolean)
-
-	AutonomousDatabase_refreshableMode = AutonomousDatabase.AddMember("refreshableMode", RefreshableMode)
-
-	AutonomousDatabase_refreshableStatus = AutonomousDatabase.AddMember("refreshableStatus", RefreshableStatus)
-
-	AutonomousDatabase_autoRefreshFrequencyInSeconds = AutonomousDatabase.AddMember("autoRefreshFrequencyInSeconds", smithyprelude.Integer)
-
-	AutonomousDatabase_autoRefreshPointLagInSeconds = AutonomousDatabase.AddMember("autoRefreshPointLagInSeconds", smithyprelude.Integer)
-
-	AutonomousDatabase_isReconnectCloneEnabled = AutonomousDatabase.AddMember("isReconnectCloneEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabase_cloneTableSpaceList = AutonomousDatabase.AddMember("cloneTableSpaceList", _IntegerList)
-
-	AutonomousDatabase_backupRetentionPeriodInDays = AutonomousDatabase.AddMember("backupRetentionPeriodInDays", smithyprelude.Integer)
-
-	AutonomousDatabase_longTermBackupSchedule = AutonomousDatabase.AddMember("longTermBackupSchedule", LongTermBackupSchedule)
-
-	AutonomousDatabase_isBackupRetentionLocked = AutonomousDatabase.AddMember("isBackupRetentionLocked", smithyprelude.Boolean)
-
-	AutonomousDatabase_totalBackupStorageSizeInGBs = AutonomousDatabase.AddMember("totalBackupStorageSizeInGBs", smithyprelude.Double)
-
-	AutonomousDatabase_resourcePoolSummary = AutonomousDatabase.AddMember("resourcePoolSummary", ResourcePoolSummary)
-
-	AutonomousDatabase_encryptionSummary = AutonomousDatabase.AddMember("encryptionSummary", EncryptionSummary)
-
-	AutonomousDatabase_createdAt = AutonomousDatabase.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeOfLastBackup = AutonomousDatabase.AddMember("timeOfLastBackup", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeMaintenanceBegin = AutonomousDatabase.AddMember("timeMaintenanceBegin", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeMaintenanceEnd = AutonomousDatabase.AddMember("timeMaintenanceEnd", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeLocalDataGuardEnabled = AutonomousDatabase.AddMember("timeLocalDataGuardEnabled", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeDataGuardRoleChanged = AutonomousDatabase.AddMember("timeDataGuardRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeOfLastSwitchover = AutonomousDatabase.AddMember("timeOfLastSwitchover", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeOfLastFailover = AutonomousDatabase.AddMember("timeOfLastFailover", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeOfLastRefresh = AutonomousDatabase.AddMember("timeOfLastRefresh", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeOfLastRefreshPoint = AutonomousDatabase.AddMember("timeOfLastRefreshPoint", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeOfNextRefresh = AutonomousDatabase.AddMember("timeOfNextRefresh", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeOfAutoRefreshStart = AutonomousDatabase.AddMember("timeOfAutoRefreshStart", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeDeletionOfFreeAutonomousDatabase = AutonomousDatabase.AddMember("timeDeletionOfFreeAutonomousDatabase", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeReclamationOfFreeAutonomousDatabase = AutonomousDatabase.AddMember("timeReclamationOfFreeAutonomousDatabase", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeDisasterRecoveryRoleChanged = AutonomousDatabase.AddMember("timeDisasterRecoveryRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeUntilReconnectCloneEnabled = AutonomousDatabase.AddMember("timeUntilReconnectCloneEnabled", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_nextLongTermBackupTimeStamp = AutonomousDatabase.AddMember("nextLongTermBackupTimeStamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_timeUndeleted = AutonomousDatabase.AddMember("timeUndeleted", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabase_adminPasswordSourceSummary = AutonomousDatabase.AddMember("adminPasswordSourceSummary", AdminPasswordSourceSummary)
-
-	AutonomousDatabaseBackupStatus_ACTIVE = AutonomousDatabaseBackupStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupStatus_CREATING = AutonomousDatabaseBackupStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupStatus_UPDATING = AutonomousDatabaseBackupStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupStatus_DELETING = AutonomousDatabaseBackupStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupStatus_FAILED = AutonomousDatabaseBackupStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupType_INCREMENTAL = AutonomousDatabaseBackupType.AddMember("INCREMENTAL", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupType_FULL = AutonomousDatabaseBackupType.AddMember("FULL", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupType_LONGTERM = AutonomousDatabaseBackupType.AddMember("LONGTERM", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupType_VIRTUAL_FULL = AutonomousDatabaseBackupType.AddMember("VIRTUAL_FULL", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupType_CUMULATIVE_INCREMENTAL = AutonomousDatabaseBackupType.AddMember("CUMULATIVE_INCREMENTAL", smithyprelude.Unit)
-
-	AutonomousDatabaseBackupType_ROLL_FORWARD_IMAGE_COPY = AutonomousDatabaseBackupType.AddMember("ROLL_FORWARD_IMAGE_COPY", smithyprelude.Unit)
-
-	AutonomousDatabaseBackup_autonomousDatabaseBackupId = AutonomousDatabaseBackup.AddMember("autonomousDatabaseBackupId", _ResourceId)
-
-	AutonomousDatabaseBackup_autonomousDatabaseBackupArn = AutonomousDatabaseBackup.AddMember("autonomousDatabaseBackupArn", _ResourceArn)
-
-	AutonomousDatabaseBackup_autonomousDatabaseId = AutonomousDatabaseBackup.AddMember("autonomousDatabaseId", _ResourceId)
-
-	AutonomousDatabaseBackup_ocid = AutonomousDatabaseBackup.AddMember("ocid", smithyprelude.String)
-
-	AutonomousDatabaseBackup_displayName = AutonomousDatabaseBackup.AddMember("displayName", smithyprelude.String)
-
-	AutonomousDatabaseBackup_dbVersion = AutonomousDatabaseBackup.AddMember("dbVersion", smithyprelude.String)
-
-	AutonomousDatabaseBackup_status = AutonomousDatabaseBackup.AddMember("status", AutonomousDatabaseBackupStatus)
-
-	AutonomousDatabaseBackup_statusReason = AutonomousDatabaseBackup.AddMember("statusReason", smithyprelude.String)
-
-	AutonomousDatabaseBackup_isAutomatic = AutonomousDatabaseBackup.AddMember("isAutomatic", smithyprelude.Boolean)
-
-	AutonomousDatabaseBackup_retentionPeriodInDays = AutonomousDatabaseBackup.AddMember("retentionPeriodInDays", smithyprelude.Integer)
-
-	AutonomousDatabaseBackup_sizeInTBs = AutonomousDatabaseBackup.AddMember("sizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabaseBackup_timeAvailableTill = AutonomousDatabaseBackup.AddMember("timeAvailableTill", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseBackup_timeStarted = AutonomousDatabaseBackup.AddMember("timeStarted", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseBackup_timeEnded = AutonomousDatabaseBackup.AddMember("timeEnded", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseBackup_type = AutonomousDatabaseBackup.AddMember("type", AutonomousDatabaseBackupType)
-
-	AutonomousDatabaseBackupSummary_autonomousDatabaseBackupId = AutonomousDatabaseBackupSummary.AddMember("autonomousDatabaseBackupId", _ResourceId)
-
-	AutonomousDatabaseBackupSummary_autonomousDatabaseBackupArn = AutonomousDatabaseBackupSummary.AddMember("autonomousDatabaseBackupArn", _ResourceArn)
-
-	AutonomousDatabaseBackupSummary_autonomousDatabaseId = AutonomousDatabaseBackupSummary.AddMember("autonomousDatabaseId", _ResourceId)
-
-	AutonomousDatabaseBackupSummary_ocid = AutonomousDatabaseBackupSummary.AddMember("ocid", smithyprelude.String)
-
-	AutonomousDatabaseBackupSummary_displayName = AutonomousDatabaseBackupSummary.AddMember("displayName", smithyprelude.String)
-
-	AutonomousDatabaseBackupSummary_dbVersion = AutonomousDatabaseBackupSummary.AddMember("dbVersion", smithyprelude.String)
-
-	AutonomousDatabaseBackupSummary_status = AutonomousDatabaseBackupSummary.AddMember("status", AutonomousDatabaseBackupStatus)
-
-	AutonomousDatabaseBackupSummary_statusReason = AutonomousDatabaseBackupSummary.AddMember("statusReason", smithyprelude.String)
-
-	AutonomousDatabaseBackupSummary_isAutomatic = AutonomousDatabaseBackupSummary.AddMember("isAutomatic", smithyprelude.Boolean)
-
-	AutonomousDatabaseBackupSummary_retentionPeriodInDays = AutonomousDatabaseBackupSummary.AddMember("retentionPeriodInDays", smithyprelude.Integer)
-
-	AutonomousDatabaseBackupSummary_sizeInTBs = AutonomousDatabaseBackupSummary.AddMember("sizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabaseBackupSummary_timeAvailableTill = AutonomousDatabaseBackupSummary.AddMember("timeAvailableTill", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseBackupSummary_timeStarted = AutonomousDatabaseBackupSummary.AddMember("timeStarted", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseBackupSummary_timeEnded = AutonomousDatabaseBackupSummary.AddMember("timeEnded", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseBackupSummary_type = AutonomousDatabaseBackupSummary.AddMember("type", AutonomousDatabaseBackupType)
-
-	_AutonomousDatabaseBackupList_member = _AutonomousDatabaseBackupList.AddMember("member", AutonomousDatabaseBackupSummary)
-
-	AutonomousDatabaseCharacterSetSummary_characterSet = AutonomousDatabaseCharacterSetSummary.AddMember("characterSet", smithyprelude.String)
-
-	_AutonomousDatabaseCharacterSetList_member = _AutonomousDatabaseCharacterSetList.AddMember("member", AutonomousDatabaseCharacterSetSummary)
-
-	AutonomousDatabaseSummary_autonomousDatabaseId = AutonomousDatabaseSummary.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	AutonomousDatabaseSummary_autonomousDatabaseArn = AutonomousDatabaseSummary.AddMember("autonomousDatabaseArn", _ResourceArn)
-
-	AutonomousDatabaseSummary_ociResourceAnchorName = AutonomousDatabaseSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	AutonomousDatabaseSummary_percentProgress = AutonomousDatabaseSummary.AddMember("percentProgress", smithyprelude.Float)
-
-	AutonomousDatabaseSummary_ocid = AutonomousDatabaseSummary.AddMember("ocid", smithyprelude.String)
-
-	AutonomousDatabaseSummary_ociUrl = AutonomousDatabaseSummary.AddMember("ociUrl", smithyprelude.String)
-
-	AutonomousDatabaseSummary_displayName = AutonomousDatabaseSummary.AddMember("displayName", smithyprelude.String)
-
-	AutonomousDatabaseSummary_dbName = AutonomousDatabaseSummary.AddMember("dbName", smithyprelude.String)
-
-	AutonomousDatabaseSummary_sourceId = AutonomousDatabaseSummary.AddMember("sourceId", smithyprelude.String)
-
-	AutonomousDatabaseSummary_status = AutonomousDatabaseSummary.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	AutonomousDatabaseSummary_statusReason = AutonomousDatabaseSummary.AddMember("statusReason", smithyprelude.String)
-
-	AutonomousDatabaseSummary_databaseType = AutonomousDatabaseSummary.AddMember("databaseType", DatabaseType)
-
-	AutonomousDatabaseSummary_dbVersion = AutonomousDatabaseSummary.AddMember("dbVersion", smithyprelude.String)
-
-	AutonomousDatabaseSummary_dbWorkload = AutonomousDatabaseSummary.AddMember("dbWorkload", DbWorkload)
-
-	AutonomousDatabaseSummary_characterSet = AutonomousDatabaseSummary.AddMember("characterSet", smithyprelude.String)
-
-	AutonomousDatabaseSummary_ncharacterSet = AutonomousDatabaseSummary.AddMember("ncharacterSet", smithyprelude.String)
-
-	AutonomousDatabaseSummary_databaseEdition = AutonomousDatabaseSummary.AddMember("databaseEdition", DatabaseEdition)
-
-	AutonomousDatabaseSummary_licenseModel = AutonomousDatabaseSummary.AddMember("licenseModel", LicenseModel)
-
-	AutonomousDatabaseSummary_openMode = AutonomousDatabaseSummary.AddMember("openMode", OpenMode)
-
-	AutonomousDatabaseSummary_permissionLevel = AutonomousDatabaseSummary.AddMember("permissionLevel", PermissionLevel)
-
-	AutonomousDatabaseSummary_isMtlsConnectionRequired = AutonomousDatabaseSummary.AddMember("isMtlsConnectionRequired", smithyprelude.Boolean)
-
-	AutonomousDatabaseSummary_autonomousMaintenanceScheduleType = AutonomousDatabaseSummary.AddMember("autonomousMaintenanceScheduleType", AutonomousMaintenanceScheduleType)
-
-	AutonomousDatabaseSummary_netServicesArchitecture = AutonomousDatabaseSummary.AddMember("netServicesArchitecture", NetServicesArchitecture)
-
-	AutonomousDatabaseSummary_availableUpgradeVersions = AutonomousDatabaseSummary.AddMember("availableUpgradeVersions", _StringList)
-
-	AutonomousDatabaseSummary_byolComputeCountLimit = AutonomousDatabaseSummary.AddMember("byolComputeCountLimit", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_connectionStringDetails = AutonomousDatabaseSummary.AddMember("connectionStringDetails", AutonomousDatabaseConnectionStrings)
-
-	AutonomousDatabaseSummary_serviceConsoleUrl = AutonomousDatabaseSummary.AddMember("serviceConsoleUrl", smithyprelude.String)
-
-	AutonomousDatabaseSummary_sqlWebDeveloperUrl = AutonomousDatabaseSummary.AddMember("sqlWebDeveloperUrl", smithyprelude.String)
-
-	AutonomousDatabaseSummary_customerContacts = AutonomousDatabaseSummary.AddMember("customerContacts", _CustomerContacts)
-
-	AutonomousDatabaseSummary_apexDetails = AutonomousDatabaseSummary.AddMember("apexDetails", AutonomousDatabaseApex)
-
-	AutonomousDatabaseSummary_standbyDb = AutonomousDatabaseSummary.AddMember("standbyDb", DatabaseStandbySummary)
-
-	AutonomousDatabaseSummary_localStandbyDb = AutonomousDatabaseSummary.AddMember("localStandbyDb", DatabaseStandbySummary)
-
-	AutonomousDatabaseSummary_dataSafeStatus = AutonomousDatabaseSummary.AddMember("dataSafeStatus", DataSafeStatus)
-
-	AutonomousDatabaseSummary_databaseManagementStatus = AutonomousDatabaseSummary.AddMember("databaseManagementStatus", DatabaseManagementStatus)
-
-	AutonomousDatabaseSummary_operationsInsightsStatus = AutonomousDatabaseSummary.AddMember("operationsInsightsStatus", OperationsInsightsStatus)
-
-	AutonomousDatabaseSummary_availabilityZone = AutonomousDatabaseSummary.AddMember("availabilityZone", smithyprelude.String)
-
-	AutonomousDatabaseSummary_availabilityZoneId = AutonomousDatabaseSummary.AddMember("availabilityZoneId", smithyprelude.String)
-
-	AutonomousDatabaseSummary_maintenanceTargetComponent = AutonomousDatabaseSummary.AddMember("maintenanceTargetComponent", smithyprelude.String)
-
-	AutonomousDatabaseSummary_connectionUrls = AutonomousDatabaseSummary.AddMember("connectionUrls", AutonomousDatabaseConnectionUrls)
-
-	AutonomousDatabaseSummary_dbToolsDetails = AutonomousDatabaseSummary.AddMember("dbToolsDetails", _DatabaseToolList)
-
-	AutonomousDatabaseSummary_scheduledOperations = AutonomousDatabaseSummary.AddMember("scheduledOperations", _ScheduledOperationDetailsList)
-
-	AutonomousDatabaseSummary_resourcePoolLeaderId = AutonomousDatabaseSummary.AddMember("resourcePoolLeaderId", smithyprelude.String)
-
-	AutonomousDatabaseSummary_computeCount = AutonomousDatabaseSummary.AddMember("computeCount", smithyprelude.Float)
-
-	AutonomousDatabaseSummary_computeModel = AutonomousDatabaseSummary.AddMember("computeModel", ComputeModel)
-
-	AutonomousDatabaseSummary_cpuCoreCount = AutonomousDatabaseSummary.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_memoryPerOracleComputeUnitInGBs = AutonomousDatabaseSummary.AddMember("memoryPerOracleComputeUnitInGBs", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_provisionableCpus = AutonomousDatabaseSummary.AddMember("provisionableCpus", _IntegerList)
-
-	AutonomousDatabaseSummary_isAutoScalingEnabled = AutonomousDatabaseSummary.AddMember("isAutoScalingEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabaseSummary_dataStorageSizeInTBs = AutonomousDatabaseSummary.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabaseSummary_dataStorageSizeInGBs = AutonomousDatabaseSummary.AddMember("dataStorageSizeInGBs", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_usedDataStorageSizeInTBs = AutonomousDatabaseSummary.AddMember("usedDataStorageSizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabaseSummary_usedDataStorageSizeInGBs = AutonomousDatabaseSummary.AddMember("usedDataStorageSizeInGBs", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_actualUsedDataStorageSizeInTBs = AutonomousDatabaseSummary.AddMember("actualUsedDataStorageSizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabaseSummary_allocatedStorageSizeInTBs = AutonomousDatabaseSummary.AddMember("allocatedStorageSizeInTBs", smithyprelude.Double)
-
-	AutonomousDatabaseSummary_inMemoryAreaInGBs = AutonomousDatabaseSummary.AddMember("inMemoryAreaInGBs", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_isAutoScalingForStorageEnabled = AutonomousDatabaseSummary.AddMember("isAutoScalingForStorageEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabaseSummary_odbNetworkId = AutonomousDatabaseSummary.AddMember("odbNetworkId", _ResourceId)
-
-	AutonomousDatabaseSummary_odbNetworkArn = AutonomousDatabaseSummary.AddMember("odbNetworkArn", _ResourceArn)
-
-	AutonomousDatabaseSummary_privateEndpoint = AutonomousDatabaseSummary.AddMember("privateEndpoint", smithyprelude.String)
-
-	AutonomousDatabaseSummary_privateEndpointIp = AutonomousDatabaseSummary.AddMember("privateEndpointIp", smithyprelude.String)
-
-	AutonomousDatabaseSummary_privateEndpointLabel = AutonomousDatabaseSummary.AddMember("privateEndpointLabel", smithyprelude.String)
-
-	AutonomousDatabaseSummary_allowlistedIps = AutonomousDatabaseSummary.AddMember("allowlistedIps", _StringList)
-
-	AutonomousDatabaseSummary_standbyAllowlistedIps = AutonomousDatabaseSummary.AddMember("standbyAllowlistedIps", _StringList)
-
-	AutonomousDatabaseSummary_standbyAllowlistedIpsSource = AutonomousDatabaseSummary.AddMember("standbyAllowlistedIpsSource", StandbyAllowlistedIpsSource)
-
-	AutonomousDatabaseSummary_isLocalDataGuardEnabled = AutonomousDatabaseSummary.AddMember("isLocalDataGuardEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabaseSummary_isRemoteDataGuardEnabled = AutonomousDatabaseSummary.AddMember("isRemoteDataGuardEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabaseSummary_localDisasterRecoveryType = AutonomousDatabaseSummary.AddMember("localDisasterRecoveryType", DisasterRecoveryType)
-
-	AutonomousDatabaseSummary_role = AutonomousDatabaseSummary.AddMember("role", DataGuardRole)
-
-	AutonomousDatabaseSummary_peerDbIds = AutonomousDatabaseSummary.AddMember("peerDbIds", _StringList)
-
-	AutonomousDatabaseSummary_failedDataRecoveryInSeconds = AutonomousDatabaseSummary.AddMember("failedDataRecoveryInSeconds", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_localAdgAutoFailoverMaxDataLossLimit = AutonomousDatabaseSummary.AddMember("localAdgAutoFailoverMaxDataLossLimit", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_remoteDisasterRecoveryConfiguration = AutonomousDatabaseSummary.AddMember("remoteDisasterRecoveryConfiguration", DisasterRecoveryConfiguration)
-
-	AutonomousDatabaseSummary_isRefreshableClone = AutonomousDatabaseSummary.AddMember("isRefreshableClone", smithyprelude.Boolean)
-
-	AutonomousDatabaseSummary_refreshableMode = AutonomousDatabaseSummary.AddMember("refreshableMode", RefreshableMode)
-
-	AutonomousDatabaseSummary_refreshableStatus = AutonomousDatabaseSummary.AddMember("refreshableStatus", RefreshableStatus)
-
-	AutonomousDatabaseSummary_autoRefreshFrequencyInSeconds = AutonomousDatabaseSummary.AddMember("autoRefreshFrequencyInSeconds", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_autoRefreshPointLagInSeconds = AutonomousDatabaseSummary.AddMember("autoRefreshPointLagInSeconds", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_isReconnectCloneEnabled = AutonomousDatabaseSummary.AddMember("isReconnectCloneEnabled", smithyprelude.Boolean)
-
-	AutonomousDatabaseSummary_cloneTableSpaceList = AutonomousDatabaseSummary.AddMember("cloneTableSpaceList", _IntegerList)
-
-	AutonomousDatabaseSummary_backupRetentionPeriodInDays = AutonomousDatabaseSummary.AddMember("backupRetentionPeriodInDays", smithyprelude.Integer)
-
-	AutonomousDatabaseSummary_longTermBackupSchedule = AutonomousDatabaseSummary.AddMember("longTermBackupSchedule", LongTermBackupSchedule)
-
-	AutonomousDatabaseSummary_isBackupRetentionLocked = AutonomousDatabaseSummary.AddMember("isBackupRetentionLocked", smithyprelude.Boolean)
-
-	AutonomousDatabaseSummary_totalBackupStorageSizeInGBs = AutonomousDatabaseSummary.AddMember("totalBackupStorageSizeInGBs", smithyprelude.Double)
-
-	AutonomousDatabaseSummary_resourcePoolSummary = AutonomousDatabaseSummary.AddMember("resourcePoolSummary", ResourcePoolSummary)
-
-	AutonomousDatabaseSummary_encryptionSummary = AutonomousDatabaseSummary.AddMember("encryptionSummary", EncryptionSummary)
-
-	AutonomousDatabaseSummary_createdAt = AutonomousDatabaseSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeOfLastBackup = AutonomousDatabaseSummary.AddMember("timeOfLastBackup", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeMaintenanceBegin = AutonomousDatabaseSummary.AddMember("timeMaintenanceBegin", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeMaintenanceEnd = AutonomousDatabaseSummary.AddMember("timeMaintenanceEnd", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeLocalDataGuardEnabled = AutonomousDatabaseSummary.AddMember("timeLocalDataGuardEnabled", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeDataGuardRoleChanged = AutonomousDatabaseSummary.AddMember("timeDataGuardRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeOfLastSwitchover = AutonomousDatabaseSummary.AddMember("timeOfLastSwitchover", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeOfLastFailover = AutonomousDatabaseSummary.AddMember("timeOfLastFailover", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeOfLastRefresh = AutonomousDatabaseSummary.AddMember("timeOfLastRefresh", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeOfLastRefreshPoint = AutonomousDatabaseSummary.AddMember("timeOfLastRefreshPoint", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeOfNextRefresh = AutonomousDatabaseSummary.AddMember("timeOfNextRefresh", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeOfAutoRefreshStart = AutonomousDatabaseSummary.AddMember("timeOfAutoRefreshStart", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeDeletionOfFreeAutonomousDatabase = AutonomousDatabaseSummary.AddMember("timeDeletionOfFreeAutonomousDatabase", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeReclamationOfFreeAutonomousDatabase = AutonomousDatabaseSummary.AddMember("timeReclamationOfFreeAutonomousDatabase", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeDisasterRecoveryRoleChanged = AutonomousDatabaseSummary.AddMember("timeDisasterRecoveryRoleChanged", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeUntilReconnectCloneEnabled = AutonomousDatabaseSummary.AddMember("timeUntilReconnectCloneEnabled", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_nextLongTermBackupTimeStamp = AutonomousDatabaseSummary.AddMember("nextLongTermBackupTimeStamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_timeUndeleted = AutonomousDatabaseSummary.AddMember("timeUndeleted", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseSummary_adminPasswordSourceSummary = AutonomousDatabaseSummary.AddMember("adminPasswordSourceSummary", AdminPasswordSourceSummary)
-
-	_AutonomousDatabaseList_member = _AutonomousDatabaseList.AddMember("member", AutonomousDatabaseSummary)
-
-	AutonomousDatabasePeerSummary_autonomousDatabaseId = AutonomousDatabasePeerSummary.AddMember("autonomousDatabaseId", _ResourceId)
-
-	AutonomousDatabasePeerSummary_autonomousDatabaseArn = AutonomousDatabasePeerSummary.AddMember("autonomousDatabaseArn", _ResourceArn)
-
-	AutonomousDatabasePeerSummary_ocid = AutonomousDatabasePeerSummary.AddMember("ocid", smithyprelude.String)
-
-	AutonomousDatabasePeerSummary_region = AutonomousDatabasePeerSummary.AddMember("region", smithyprelude.String)
-
-	_AutonomousDatabasePeerList_member = _AutonomousDatabasePeerList.AddMember("member", AutonomousDatabasePeerSummary)
-
-	AutonomousDatabaseVersionSummary_dbWorkload = AutonomousDatabaseVersionSummary.AddMember("dbWorkload", DbWorkload)
-
-	AutonomousDatabaseVersionSummary_details = AutonomousDatabaseVersionSummary.AddMember("details", smithyprelude.String)
-
-	AutonomousDatabaseVersionSummary_version = AutonomousDatabaseVersionSummary.AddMember("version", smithyprelude.String)
-
-	_AutonomousDatabaseVersionList_member = _AutonomousDatabaseVersionList.AddMember("member", AutonomousDatabaseVersionSummary)
-
-	AutonomousDatabaseWalletStatus_ACTIVE = AutonomousDatabaseWalletStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AutonomousDatabaseWalletStatus_UPDATING = AutonomousDatabaseWalletStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	WalletPasswordSource_CUSTOMER_MANAGED_AWS_SECRET = WalletPasswordSource.AddMember("CUSTOMER_MANAGED_AWS_SECRET", smithyprelude.Unit)
-
-	WalletPasswordSource_API_REQUEST_PARAMETER = WalletPasswordSource.AddMember("API_REQUEST_PARAMETER", smithyprelude.Unit)
-
-	WalletPasswordSourceConfiguration_customerManagedAwsSecret = WalletPasswordSourceConfiguration.AddMember("customerManagedAwsSecret", CustomerManagedAwsSecretConfiguration)
-
-	WalletPasswordSourceSummary_passwordSource = WalletPasswordSourceSummary.AddMember("passwordSource", WalletPasswordSource)
-
-	WalletPasswordSourceSummary_passwordSourceConfiguration = WalletPasswordSourceSummary.AddMember("passwordSourceConfiguration", WalletPasswordSourceConfiguration)
-
-	AutonomousDatabaseWalletDetails_status = AutonomousDatabaseWalletDetails.AddMember("status", AutonomousDatabaseWalletStatus)
-
-	AutonomousDatabaseWalletDetails_timeRotated = AutonomousDatabaseWalletDetails.AddMember("timeRotated", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AutonomousDatabaseWalletDetails_passwordSourceSummary = AutonomousDatabaseWalletDetails.AddMember("passwordSourceSummary", WalletPasswordSourceSummary)
-
-	ResourceStatus_AVAILABLE = ResourceStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ResourceStatus_FAILED = ResourceStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ResourceStatus_PROVISIONING = ResourceStatus.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	ResourceStatus_TERMINATED = ResourceStatus.AddMember("TERMINATED", smithyprelude.Unit)
-
-	ResourceStatus_TERMINATING = ResourceStatus.AddMember("TERMINATING", smithyprelude.Unit)
-
-	ResourceStatus_UPDATING = ResourceStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	ResourceStatus_MAINTENANCE_IN_PROGRESS = ResourceStatus.AddMember("MAINTENANCE_IN_PROGRESS", smithyprelude.Unit)
-
-	AutonomousVirtualMachineSummary_autonomousVirtualMachineId = AutonomousVirtualMachineSummary.AddMember("autonomousVirtualMachineId", _ResourceId)
-
-	AutonomousVirtualMachineSummary_status = AutonomousVirtualMachineSummary.AddMember("status", ResourceStatus)
-
-	AutonomousVirtualMachineSummary_statusReason = AutonomousVirtualMachineSummary.AddMember("statusReason", smithyprelude.String)
-
-	AutonomousVirtualMachineSummary_vmName = AutonomousVirtualMachineSummary.AddMember("vmName", smithyprelude.String)
-
-	AutonomousVirtualMachineSummary_dbServerId = AutonomousVirtualMachineSummary.AddMember("dbServerId", _ResourceId)
-
-	AutonomousVirtualMachineSummary_dbServerDisplayName = AutonomousVirtualMachineSummary.AddMember("dbServerDisplayName", smithyprelude.String)
-
-	AutonomousVirtualMachineSummary_cpuCoreCount = AutonomousVirtualMachineSummary.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	AutonomousVirtualMachineSummary_memorySizeInGBs = AutonomousVirtualMachineSummary.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	AutonomousVirtualMachineSummary_dbNodeStorageSizeInGBs = AutonomousVirtualMachineSummary.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	AutonomousVirtualMachineSummary_clientIpAddress = AutonomousVirtualMachineSummary.AddMember("clientIpAddress", smithyprelude.String)
-
-	AutonomousVirtualMachineSummary_cloudAutonomousVmClusterId = AutonomousVirtualMachineSummary.AddMember("cloudAutonomousVmClusterId", smithyprelude.String)
-
-	AutonomousVirtualMachineSummary_ocid = AutonomousVirtualMachineSummary.AddMember("ocid", smithyprelude.String)
-
-	AutonomousVirtualMachineSummary_ociResourceAnchorName = AutonomousVirtualMachineSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	_AutonomousVirtualMachineList_member = _AutonomousVirtualMachineList.AddMember("member", AutonomousVirtualMachineSummary)
-
-	AwsEncryptionKeyConfigurationInput_iamRoleArn = AwsEncryptionKeyConfigurationInput.AddMember("iamRoleArn", _RoleArn)
-
-	AwsEncryptionKeyConfigurationInput_externalIdType = AwsEncryptionKeyConfigurationInput.AddMember("externalIdType", ExternalIdType)
-
-	AwsEncryptionKeyConfigurationInput_kmsKeyId = AwsEncryptionKeyConfigurationInput.AddMember("kmsKeyId", _KmsKeyIdOrArn)
-
-	characterSetType_DATABASE = characterSetType.AddMember("DATABASE", smithyprelude.Unit)
-
-	characterSetType_NATIONAL = characterSetType.AddMember("NATIONAL", smithyprelude.Unit)
-
-	CloneType_FULL = CloneType.AddMember("FULL", smithyprelude.Unit)
-
-	CloneType_METADATA = CloneType.AddMember("METADATA", smithyprelude.Unit)
-
-	CloneType_PARTIAL = CloneType.AddMember("PARTIAL", smithyprelude.Unit)
-
-	CloneToRefreshableConfiguration_sourceAutonomousDatabaseId = CloneToRefreshableConfiguration.AddMember("sourceAutonomousDatabaseId", _ResourceIdOrArn)
-
-	CloneToRefreshableConfiguration_refreshableMode = CloneToRefreshableConfiguration.AddMember("refreshableMode", RefreshableMode)
-
-	CloneToRefreshableConfiguration_autoRefreshFrequencyInSeconds = CloneToRefreshableConfiguration.AddMember("autoRefreshFrequencyInSeconds", smithyprelude.Integer)
-
-	CloneToRefreshableConfiguration_autoRefreshPointLagInSeconds = CloneToRefreshableConfiguration.AddMember("autoRefreshPointLagInSeconds", smithyprelude.Integer)
-
-	CloneToRefreshableConfiguration_timeOfAutoRefreshStart = CloneToRefreshableConfiguration.AddMember("timeOfAutoRefreshStart", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloneToRefreshableConfiguration_openMode = CloneToRefreshableConfiguration.AddMember("openMode", OpenMode)
-
-	CloneToRefreshableConfiguration_cloneType = CloneToRefreshableConfiguration.AddMember("cloneType", CloneType)
-
-	_DaysOfWeek_member = _DaysOfWeek.AddMember("member", DayOfWeek)
-
-	_HoursOfDay_member = _HoursOfDay.AddMember("member", smithyprelude.Integer)
-
-	MonthName_JANUARY = MonthName.AddMember("JANUARY", smithyprelude.Unit)
-
-	MonthName_FEBRUARY = MonthName.AddMember("FEBRUARY", smithyprelude.Unit)
-
-	MonthName_MARCH = MonthName.AddMember("MARCH", smithyprelude.Unit)
-
-	MonthName_APRIL = MonthName.AddMember("APRIL", smithyprelude.Unit)
-
-	MonthName_MAY = MonthName.AddMember("MAY", smithyprelude.Unit)
-
-	MonthName_JUNE = MonthName.AddMember("JUNE", smithyprelude.Unit)
-
-	MonthName_JULY = MonthName.AddMember("JULY", smithyprelude.Unit)
-
-	MonthName_AUGUST = MonthName.AddMember("AUGUST", smithyprelude.Unit)
-
-	MonthName_SEPTEMBER = MonthName.AddMember("SEPTEMBER", smithyprelude.Unit)
-
-	MonthName_OCTOBER = MonthName.AddMember("OCTOBER", smithyprelude.Unit)
-
-	MonthName_NOVEMBER = MonthName.AddMember("NOVEMBER", smithyprelude.Unit)
-
-	MonthName_DECEMBER = MonthName.AddMember("DECEMBER", smithyprelude.Unit)
-
-	Month_name = Month.AddMember("name", MonthName)
-
-	_Months_member = _Months.AddMember("member", Month)
-
-	PatchingModeType_ROLLING = PatchingModeType.AddMember("ROLLING", smithyprelude.Unit)
-
-	PatchingModeType_NONROLLING = PatchingModeType.AddMember("NONROLLING", smithyprelude.Unit)
-
-	PreferenceType_NO_PREFERENCE = PreferenceType.AddMember("NO_PREFERENCE", smithyprelude.Unit)
-
-	PreferenceType_CUSTOM_PREFERENCE = PreferenceType.AddMember("CUSTOM_PREFERENCE", smithyprelude.Unit)
-
-	_WeeksOfMonth_member = _WeeksOfMonth.AddMember("member", smithyprelude.Integer)
-
-	MaintenanceWindow_customActionTimeoutInMins = MaintenanceWindow.AddMember("customActionTimeoutInMins", smithyprelude.Integer)
-
-	MaintenanceWindow_daysOfWeek = MaintenanceWindow.AddMember("daysOfWeek", _DaysOfWeek)
-
-	MaintenanceWindow_hoursOfDay = MaintenanceWindow.AddMember("hoursOfDay", _HoursOfDay)
-
-	MaintenanceWindow_isCustomActionTimeoutEnabled = MaintenanceWindow.AddMember("isCustomActionTimeoutEnabled", smithyprelude.Boolean)
-
-	MaintenanceWindow_leadTimeInWeeks = MaintenanceWindow.AddMember("leadTimeInWeeks", smithyprelude.Integer)
-
-	MaintenanceWindow_months = MaintenanceWindow.AddMember("months", _Months)
-
-	MaintenanceWindow_patchingMode = MaintenanceWindow.AddMember("patchingMode", PatchingModeType)
-
-	MaintenanceWindow_preference = MaintenanceWindow.AddMember("preference", PreferenceType)
-
-	MaintenanceWindow_skipRu = MaintenanceWindow.AddMember("skipRu", smithyprelude.Boolean)
-
-	MaintenanceWindow_weeksOfMonth = MaintenanceWindow.AddMember("weeksOfMonth", _WeeksOfMonth)
-
-	IamRoleStatus_ASSOCIATING = IamRoleStatus.AddMember("ASSOCIATING", smithyprelude.Unit)
-
-	IamRoleStatus_DISASSOCIATING = IamRoleStatus.AddMember("DISASSOCIATING", smithyprelude.Unit)
-
-	IamRoleStatus_FAILED = IamRoleStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	IamRoleStatus_CONNECTED = IamRoleStatus.AddMember("CONNECTED", smithyprelude.Unit)
-
-	IamRoleStatus_DISCONNECTED = IamRoleStatus.AddMember("DISCONNECTED", smithyprelude.Unit)
-
-	IamRoleStatus_PARTIALLY_CONNECTED = IamRoleStatus.AddMember("PARTIALLY_CONNECTED", smithyprelude.Unit)
-
-	IamRoleStatus_UNKNOWN = IamRoleStatus.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	SupportedAwsIntegration_KmsTde = SupportedAwsIntegration.AddMember("KmsTde", smithyprelude.Unit)
-
-	IamRole_iamRoleArn = IamRole.AddMember("iamRoleArn", _RoleArn)
-
-	IamRole_status = IamRole.AddMember("status", IamRoleStatus)
-
-	IamRole_statusReason = IamRole.AddMember("statusReason", smithyprelude.String)
-
-	IamRole_awsIntegration = IamRole.AddMember("awsIntegration", SupportedAwsIntegration)
-
-	_IamRoleList_member = _IamRoleList.AddMember("member", IamRole)
-
-	CloudAutonomousVmCluster_cloudAutonomousVmClusterId = CloudAutonomousVmCluster.AddMember("cloudAutonomousVmClusterId", _ResourceId)
-
-	CloudAutonomousVmCluster_cloudAutonomousVmClusterArn = CloudAutonomousVmCluster.AddMember("cloudAutonomousVmClusterArn", smithyprelude.String)
-
-	CloudAutonomousVmCluster_odbNetworkId = CloudAutonomousVmCluster.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CloudAutonomousVmCluster_odbNetworkArn = CloudAutonomousVmCluster.AddMember("odbNetworkArn", _ResourceArn)
-
-	CloudAutonomousVmCluster_ociResourceAnchorName = CloudAutonomousVmCluster.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	CloudAutonomousVmCluster_percentProgress = CloudAutonomousVmCluster.AddMember("percentProgress", smithyprelude.Float)
-
-	CloudAutonomousVmCluster_displayName = CloudAutonomousVmCluster.AddMember("displayName", _ResourceDisplayName)
-
-	CloudAutonomousVmCluster_status = CloudAutonomousVmCluster.AddMember("status", ResourceStatus)
-
-	CloudAutonomousVmCluster_statusReason = CloudAutonomousVmCluster.AddMember("statusReason", smithyprelude.String)
-
-	CloudAutonomousVmCluster_cloudExadataInfrastructureId = CloudAutonomousVmCluster.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	CloudAutonomousVmCluster_cloudExadataInfrastructureArn = CloudAutonomousVmCluster.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
-
-	CloudAutonomousVmCluster_autonomousDataStoragePercentage = CloudAutonomousVmCluster.AddMember("autonomousDataStoragePercentage", smithyprelude.Float)
-
-	CloudAutonomousVmCluster_autonomousDataStorageSizeInTBs = CloudAutonomousVmCluster.AddMember("autonomousDataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudAutonomousVmCluster_availableAutonomousDataStorageSizeInTBs = CloudAutonomousVmCluster.AddMember("availableAutonomousDataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudAutonomousVmCluster_availableContainerDatabases = CloudAutonomousVmCluster.AddMember("availableContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_availableCpus = CloudAutonomousVmCluster.AddMember("availableCpus", smithyprelude.Float)
-
-	CloudAutonomousVmCluster_computeModel = CloudAutonomousVmCluster.AddMember("computeModel", ComputeModel)
-
-	CloudAutonomousVmCluster_cpuCoreCount = CloudAutonomousVmCluster.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_cpuCoreCountPerNode = CloudAutonomousVmCluster.AddMember("cpuCoreCountPerNode", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_cpuPercentage = CloudAutonomousVmCluster.AddMember("cpuPercentage", smithyprelude.Float)
-
-	CloudAutonomousVmCluster_dataStorageSizeInGBs = CloudAutonomousVmCluster.AddMember("dataStorageSizeInGBs", smithyprelude.Double)
-
-	CloudAutonomousVmCluster_dataStorageSizeInTBs = CloudAutonomousVmCluster.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudAutonomousVmCluster_dbNodeStorageSizeInGBs = CloudAutonomousVmCluster.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_dbServers = CloudAutonomousVmCluster.AddMember("dbServers", _StringList)
-
-	CloudAutonomousVmCluster_description = CloudAutonomousVmCluster.AddMember("description", smithyprelude.String)
-
-	CloudAutonomousVmCluster_domain = CloudAutonomousVmCluster.AddMember("domain", smithyprelude.String)
-
-	CloudAutonomousVmCluster_exadataStorageInTBsLowestScaledValue = CloudAutonomousVmCluster.AddMember("exadataStorageInTBsLowestScaledValue", smithyprelude.Double)
-
-	CloudAutonomousVmCluster_hostname = CloudAutonomousVmCluster.AddMember("hostname", smithyprelude.String)
-
-	CloudAutonomousVmCluster_ocid = CloudAutonomousVmCluster.AddMember("ocid", smithyprelude.String)
-
-	CloudAutonomousVmCluster_ociUrl = CloudAutonomousVmCluster.AddMember("ociUrl", smithyprelude.String)
-
-	CloudAutonomousVmCluster_isMtlsEnabledVmCluster = CloudAutonomousVmCluster.AddMember("isMtlsEnabledVmCluster", smithyprelude.Boolean)
-
-	CloudAutonomousVmCluster_licenseModel = CloudAutonomousVmCluster.AddMember("licenseModel", LicenseModel)
-
-	CloudAutonomousVmCluster_maintenanceWindow = CloudAutonomousVmCluster.AddMember("maintenanceWindow", MaintenanceWindow)
-
-	CloudAutonomousVmCluster_maxAcdsLowestScaledValue = CloudAutonomousVmCluster.AddMember("maxAcdsLowestScaledValue", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_memoryPerOracleComputeUnitInGBs = CloudAutonomousVmCluster.AddMember("memoryPerOracleComputeUnitInGBs", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_memorySizeInGBs = CloudAutonomousVmCluster.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_nodeCount = CloudAutonomousVmCluster.AddMember("nodeCount", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_nonProvisionableAutonomousContainerDatabases = CloudAutonomousVmCluster.AddMember("nonProvisionableAutonomousContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_provisionableAutonomousContainerDatabases = CloudAutonomousVmCluster.AddMember("provisionableAutonomousContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_provisionedAutonomousContainerDatabases = CloudAutonomousVmCluster.AddMember("provisionedAutonomousContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_provisionedCpus = CloudAutonomousVmCluster.AddMember("provisionedCpus", smithyprelude.Float)
-
-	CloudAutonomousVmCluster_reclaimableCpus = CloudAutonomousVmCluster.AddMember("reclaimableCpus", smithyprelude.Float)
-
-	CloudAutonomousVmCluster_reservedCpus = CloudAutonomousVmCluster.AddMember("reservedCpus", smithyprelude.Float)
-
-	CloudAutonomousVmCluster_scanListenerPortNonTls = CloudAutonomousVmCluster.AddMember("scanListenerPortNonTls", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_scanListenerPortTls = CloudAutonomousVmCluster.AddMember("scanListenerPortTls", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_shape = CloudAutonomousVmCluster.AddMember("shape", smithyprelude.String)
-
-	CloudAutonomousVmCluster_createdAt = CloudAutonomousVmCluster.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudAutonomousVmCluster_timeDatabaseSslCertificateExpires = CloudAutonomousVmCluster.AddMember("timeDatabaseSslCertificateExpires", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudAutonomousVmCluster_timeOrdsCertificateExpires = CloudAutonomousVmCluster.AddMember("timeOrdsCertificateExpires", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudAutonomousVmCluster_timeZone = CloudAutonomousVmCluster.AddMember("timeZone", smithyprelude.String)
-
-	CloudAutonomousVmCluster_totalContainerDatabases = CloudAutonomousVmCluster.AddMember("totalContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmCluster_iamRoles = CloudAutonomousVmCluster.AddMember("iamRoles", _IamRoleList)
-
-	CloudAutonomousVmClusterSummary_cloudAutonomousVmClusterId = CloudAutonomousVmClusterSummary.AddMember("cloudAutonomousVmClusterId", _ResourceId)
-
-	CloudAutonomousVmClusterSummary_cloudAutonomousVmClusterArn = CloudAutonomousVmClusterSummary.AddMember("cloudAutonomousVmClusterArn", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_odbNetworkId = CloudAutonomousVmClusterSummary.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CloudAutonomousVmClusterSummary_odbNetworkArn = CloudAutonomousVmClusterSummary.AddMember("odbNetworkArn", _ResourceArn)
-
-	CloudAutonomousVmClusterSummary_ociResourceAnchorName = CloudAutonomousVmClusterSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_percentProgress = CloudAutonomousVmClusterSummary.AddMember("percentProgress", smithyprelude.Float)
-
-	CloudAutonomousVmClusterSummary_displayName = CloudAutonomousVmClusterSummary.AddMember("displayName", _ResourceDisplayName)
-
-	CloudAutonomousVmClusterSummary_status = CloudAutonomousVmClusterSummary.AddMember("status", ResourceStatus)
-
-	CloudAutonomousVmClusterSummary_statusReason = CloudAutonomousVmClusterSummary.AddMember("statusReason", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_cloudExadataInfrastructureId = CloudAutonomousVmClusterSummary.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	CloudAutonomousVmClusterSummary_cloudExadataInfrastructureArn = CloudAutonomousVmClusterSummary.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
-
-	CloudAutonomousVmClusterSummary_autonomousDataStoragePercentage = CloudAutonomousVmClusterSummary.AddMember("autonomousDataStoragePercentage", smithyprelude.Float)
-
-	CloudAutonomousVmClusterSummary_autonomousDataStorageSizeInTBs = CloudAutonomousVmClusterSummary.AddMember("autonomousDataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudAutonomousVmClusterSummary_availableAutonomousDataStorageSizeInTBs = CloudAutonomousVmClusterSummary.AddMember("availableAutonomousDataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudAutonomousVmClusterSummary_availableContainerDatabases = CloudAutonomousVmClusterSummary.AddMember("availableContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_availableCpus = CloudAutonomousVmClusterSummary.AddMember("availableCpus", smithyprelude.Float)
-
-	CloudAutonomousVmClusterSummary_computeModel = CloudAutonomousVmClusterSummary.AddMember("computeModel", ComputeModel)
-
-	CloudAutonomousVmClusterSummary_cpuCoreCount = CloudAutonomousVmClusterSummary.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_cpuCoreCountPerNode = CloudAutonomousVmClusterSummary.AddMember("cpuCoreCountPerNode", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_cpuPercentage = CloudAutonomousVmClusterSummary.AddMember("cpuPercentage", smithyprelude.Float)
-
-	CloudAutonomousVmClusterSummary_dataStorageSizeInGBs = CloudAutonomousVmClusterSummary.AddMember("dataStorageSizeInGBs", smithyprelude.Double)
-
-	CloudAutonomousVmClusterSummary_dataStorageSizeInTBs = CloudAutonomousVmClusterSummary.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudAutonomousVmClusterSummary_dbNodeStorageSizeInGBs = CloudAutonomousVmClusterSummary.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_dbServers = CloudAutonomousVmClusterSummary.AddMember("dbServers", _StringList)
-
-	CloudAutonomousVmClusterSummary_description = CloudAutonomousVmClusterSummary.AddMember("description", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_domain = CloudAutonomousVmClusterSummary.AddMember("domain", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_exadataStorageInTBsLowestScaledValue = CloudAutonomousVmClusterSummary.AddMember("exadataStorageInTBsLowestScaledValue", smithyprelude.Double)
-
-	CloudAutonomousVmClusterSummary_hostname = CloudAutonomousVmClusterSummary.AddMember("hostname", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_ocid = CloudAutonomousVmClusterSummary.AddMember("ocid", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_ociUrl = CloudAutonomousVmClusterSummary.AddMember("ociUrl", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_isMtlsEnabledVmCluster = CloudAutonomousVmClusterSummary.AddMember("isMtlsEnabledVmCluster", smithyprelude.Boolean)
-
-	CloudAutonomousVmClusterSummary_licenseModel = CloudAutonomousVmClusterSummary.AddMember("licenseModel", LicenseModel)
-
-	CloudAutonomousVmClusterSummary_maintenanceWindow = CloudAutonomousVmClusterSummary.AddMember("maintenanceWindow", MaintenanceWindow)
-
-	CloudAutonomousVmClusterSummary_maxAcdsLowestScaledValue = CloudAutonomousVmClusterSummary.AddMember("maxAcdsLowestScaledValue", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_memoryPerOracleComputeUnitInGBs = CloudAutonomousVmClusterSummary.AddMember("memoryPerOracleComputeUnitInGBs", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_memorySizeInGBs = CloudAutonomousVmClusterSummary.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_nodeCount = CloudAutonomousVmClusterSummary.AddMember("nodeCount", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_nonProvisionableAutonomousContainerDatabases = CloudAutonomousVmClusterSummary.AddMember("nonProvisionableAutonomousContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_provisionableAutonomousContainerDatabases = CloudAutonomousVmClusterSummary.AddMember("provisionableAutonomousContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_provisionedAutonomousContainerDatabases = CloudAutonomousVmClusterSummary.AddMember("provisionedAutonomousContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_provisionedCpus = CloudAutonomousVmClusterSummary.AddMember("provisionedCpus", smithyprelude.Float)
-
-	CloudAutonomousVmClusterSummary_reclaimableCpus = CloudAutonomousVmClusterSummary.AddMember("reclaimableCpus", smithyprelude.Float)
-
-	CloudAutonomousVmClusterSummary_reservedCpus = CloudAutonomousVmClusterSummary.AddMember("reservedCpus", smithyprelude.Float)
-
-	CloudAutonomousVmClusterSummary_scanListenerPortNonTls = CloudAutonomousVmClusterSummary.AddMember("scanListenerPortNonTls", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_scanListenerPortTls = CloudAutonomousVmClusterSummary.AddMember("scanListenerPortTls", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_shape = CloudAutonomousVmClusterSummary.AddMember("shape", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_createdAt = CloudAutonomousVmClusterSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudAutonomousVmClusterSummary_timeDatabaseSslCertificateExpires = CloudAutonomousVmClusterSummary.AddMember("timeDatabaseSslCertificateExpires", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudAutonomousVmClusterSummary_timeOrdsCertificateExpires = CloudAutonomousVmClusterSummary.AddMember("timeOrdsCertificateExpires", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudAutonomousVmClusterSummary_timeZone = CloudAutonomousVmClusterSummary.AddMember("timeZone", smithyprelude.String)
-
-	CloudAutonomousVmClusterSummary_totalContainerDatabases = CloudAutonomousVmClusterSummary.AddMember("totalContainerDatabases", smithyprelude.Integer)
-
-	CloudAutonomousVmClusterSummary_iamRoles = CloudAutonomousVmClusterSummary.AddMember("iamRoles", _IamRoleList)
-
-	_CloudAutonomousVmClusterList_member = _CloudAutonomousVmClusterList.AddMember("member", CloudAutonomousVmClusterSummary)
-
-	CloudAutonomousVmClusterResourceDetails_cloudAutonomousVmClusterId = CloudAutonomousVmClusterResourceDetails.AddMember("cloudAutonomousVmClusterId", _ResourceId)
-
-	CloudAutonomousVmClusterResourceDetails_unallocatedAdbStorageInTBs = CloudAutonomousVmClusterResourceDetails.AddMember("unallocatedAdbStorageInTBs", smithyprelude.Double)
-
-	_CloudAutonomousVmClusterResourceDetailsList_member = _CloudAutonomousVmClusterResourceDetailsList.AddMember("member", CloudAutonomousVmClusterResourceDetails)
-
-	ExascaleConfiguration_totalStorageSizeInGBs = ExascaleConfiguration.AddMember("totalStorageSizeInGBs", smithyprelude.Integer)
-
-	ExascaleConfiguration_availableStorageSizeInGBs = ExascaleConfiguration.AddMember("availableStorageSizeInGBs", smithyprelude.Integer)
-
-	ExascaleConfiguration_totalVmStorageSizeInGBs = ExascaleConfiguration.AddMember("totalVmStorageSizeInGBs", smithyprelude.Integer)
-
-	ExascaleConfiguration_availableVmStorageSizeInGBs = ExascaleConfiguration.AddMember("availableVmStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_cloudExadataInfrastructureId = CloudExadataInfrastructure.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	CloudExadataInfrastructure_displayName = CloudExadataInfrastructure.AddMember("displayName", smithyprelude.String)
-
-	CloudExadataInfrastructure_status = CloudExadataInfrastructure.AddMember("status", ResourceStatus)
-
-	CloudExadataInfrastructure_statusReason = CloudExadataInfrastructure.AddMember("statusReason", smithyprelude.String)
-
-	CloudExadataInfrastructure_cloudExadataInfrastructureArn = CloudExadataInfrastructure.AddMember("cloudExadataInfrastructureArn", smithyprelude.String)
-
-	CloudExadataInfrastructure_activatedStorageCount = CloudExadataInfrastructure.AddMember("activatedStorageCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_additionalStorageCount = CloudExadataInfrastructure.AddMember("additionalStorageCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_availableStorageSizeInGBs = CloudExadataInfrastructure.AddMember("availableStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_availabilityZone = CloudExadataInfrastructure.AddMember("availabilityZone", smithyprelude.String)
-
-	CloudExadataInfrastructure_availabilityZoneId = CloudExadataInfrastructure.AddMember("availabilityZoneId", smithyprelude.String)
-
-	CloudExadataInfrastructure_computeCount = CloudExadataInfrastructure.AddMember("computeCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_cpuCount = CloudExadataInfrastructure.AddMember("cpuCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_customerContactsToSendToOCI = CloudExadataInfrastructure.AddMember("customerContactsToSendToOCI", _CustomerContacts)
-
-	CloudExadataInfrastructure_dataStorageSizeInTBs = CloudExadataInfrastructure.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudExadataInfrastructure_dbNodeStorageSizeInGBs = CloudExadataInfrastructure.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_dbServerVersion = CloudExadataInfrastructure.AddMember("dbServerVersion", smithyprelude.String)
-
-	CloudExadataInfrastructure_lastMaintenanceRunId = CloudExadataInfrastructure.AddMember("lastMaintenanceRunId", smithyprelude.String)
-
-	CloudExadataInfrastructure_maintenanceWindow = CloudExadataInfrastructure.AddMember("maintenanceWindow", MaintenanceWindow)
-
-	CloudExadataInfrastructure_maxCpuCount = CloudExadataInfrastructure.AddMember("maxCpuCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_maxDataStorageInTBs = CloudExadataInfrastructure.AddMember("maxDataStorageInTBs", smithyprelude.Double)
-
-	CloudExadataInfrastructure_maxDbNodeStorageSizeInGBs = CloudExadataInfrastructure.AddMember("maxDbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_maxMemoryInGBs = CloudExadataInfrastructure.AddMember("maxMemoryInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_memorySizeInGBs = CloudExadataInfrastructure.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_monthlyDbServerVersion = CloudExadataInfrastructure.AddMember("monthlyDbServerVersion", smithyprelude.String)
-
-	CloudExadataInfrastructure_monthlyStorageServerVersion = CloudExadataInfrastructure.AddMember("monthlyStorageServerVersion", smithyprelude.String)
-
-	CloudExadataInfrastructure_nextMaintenanceRunId = CloudExadataInfrastructure.AddMember("nextMaintenanceRunId", smithyprelude.String)
-
-	CloudExadataInfrastructure_ociResourceAnchorName = CloudExadataInfrastructure.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	CloudExadataInfrastructure_ociUrl = CloudExadataInfrastructure.AddMember("ociUrl", smithyprelude.String)
-
-	CloudExadataInfrastructure_ocid = CloudExadataInfrastructure.AddMember("ocid", smithyprelude.String)
-
-	CloudExadataInfrastructure_shape = CloudExadataInfrastructure.AddMember("shape", smithyprelude.String)
-
-	CloudExadataInfrastructure_storageCount = CloudExadataInfrastructure.AddMember("storageCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_storageServerVersion = CloudExadataInfrastructure.AddMember("storageServerVersion", smithyprelude.String)
-
-	CloudExadataInfrastructure_createdAt = CloudExadataInfrastructure.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudExadataInfrastructure_totalStorageSizeInGBs = CloudExadataInfrastructure.AddMember("totalStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructure_percentProgress = CloudExadataInfrastructure.AddMember("percentProgress", smithyprelude.Float)
-
-	CloudExadataInfrastructure_databaseServerType = CloudExadataInfrastructure.AddMember("databaseServerType", smithyprelude.String)
-
-	CloudExadataInfrastructure_storageServerType = CloudExadataInfrastructure.AddMember("storageServerType", smithyprelude.String)
-
-	CloudExadataInfrastructure_computeModel = CloudExadataInfrastructure.AddMember("computeModel", ComputeModel)
-
-	CloudExadataInfrastructure_exascaleConfiguration = CloudExadataInfrastructure.AddMember("exascaleConfiguration", ExascaleConfiguration)
-
-	CloudExadataInfrastructureSummary_cloudExadataInfrastructureId = CloudExadataInfrastructureSummary.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	CloudExadataInfrastructureSummary_displayName = CloudExadataInfrastructureSummary.AddMember("displayName", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_status = CloudExadataInfrastructureSummary.AddMember("status", ResourceStatus)
-
-	CloudExadataInfrastructureSummary_statusReason = CloudExadataInfrastructureSummary.AddMember("statusReason", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_cloudExadataInfrastructureArn = CloudExadataInfrastructureSummary.AddMember("cloudExadataInfrastructureArn", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_activatedStorageCount = CloudExadataInfrastructureSummary.AddMember("activatedStorageCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_additionalStorageCount = CloudExadataInfrastructureSummary.AddMember("additionalStorageCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_availableStorageSizeInGBs = CloudExadataInfrastructureSummary.AddMember("availableStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_availabilityZone = CloudExadataInfrastructureSummary.AddMember("availabilityZone", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_availabilityZoneId = CloudExadataInfrastructureSummary.AddMember("availabilityZoneId", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_computeCount = CloudExadataInfrastructureSummary.AddMember("computeCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_cpuCount = CloudExadataInfrastructureSummary.AddMember("cpuCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_customerContactsToSendToOCI = CloudExadataInfrastructureSummary.AddMember("customerContactsToSendToOCI", _CustomerContacts)
-
-	CloudExadataInfrastructureSummary_dataStorageSizeInTBs = CloudExadataInfrastructureSummary.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudExadataInfrastructureSummary_dbNodeStorageSizeInGBs = CloudExadataInfrastructureSummary.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_dbServerVersion = CloudExadataInfrastructureSummary.AddMember("dbServerVersion", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_lastMaintenanceRunId = CloudExadataInfrastructureSummary.AddMember("lastMaintenanceRunId", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_maintenanceWindow = CloudExadataInfrastructureSummary.AddMember("maintenanceWindow", MaintenanceWindow)
-
-	CloudExadataInfrastructureSummary_maxCpuCount = CloudExadataInfrastructureSummary.AddMember("maxCpuCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_maxDataStorageInTBs = CloudExadataInfrastructureSummary.AddMember("maxDataStorageInTBs", smithyprelude.Double)
-
-	CloudExadataInfrastructureSummary_maxDbNodeStorageSizeInGBs = CloudExadataInfrastructureSummary.AddMember("maxDbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_maxMemoryInGBs = CloudExadataInfrastructureSummary.AddMember("maxMemoryInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_memorySizeInGBs = CloudExadataInfrastructureSummary.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_monthlyDbServerVersion = CloudExadataInfrastructureSummary.AddMember("monthlyDbServerVersion", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_monthlyStorageServerVersion = CloudExadataInfrastructureSummary.AddMember("monthlyStorageServerVersion", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_nextMaintenanceRunId = CloudExadataInfrastructureSummary.AddMember("nextMaintenanceRunId", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_ociResourceAnchorName = CloudExadataInfrastructureSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_ociUrl = CloudExadataInfrastructureSummary.AddMember("ociUrl", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_ocid = CloudExadataInfrastructureSummary.AddMember("ocid", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_shape = CloudExadataInfrastructureSummary.AddMember("shape", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_storageCount = CloudExadataInfrastructureSummary.AddMember("storageCount", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_storageServerVersion = CloudExadataInfrastructureSummary.AddMember("storageServerVersion", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_createdAt = CloudExadataInfrastructureSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudExadataInfrastructureSummary_totalStorageSizeInGBs = CloudExadataInfrastructureSummary.AddMember("totalStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructureSummary_percentProgress = CloudExadataInfrastructureSummary.AddMember("percentProgress", smithyprelude.Float)
-
-	CloudExadataInfrastructureSummary_databaseServerType = CloudExadataInfrastructureSummary.AddMember("databaseServerType", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_storageServerType = CloudExadataInfrastructureSummary.AddMember("storageServerType", smithyprelude.String)
-
-	CloudExadataInfrastructureSummary_computeModel = CloudExadataInfrastructureSummary.AddMember("computeModel", ComputeModel)
-
-	CloudExadataInfrastructureSummary_exascaleConfiguration = CloudExadataInfrastructureSummary.AddMember("exascaleConfiguration", ExascaleConfiguration)
-
-	_CloudExadataInfrastructureList_member = _CloudExadataInfrastructureList.AddMember("member", CloudExadataInfrastructureSummary)
-
-	CloudExadataInfrastructureUnallocatedResources_cloudAutonomousVmClusters = CloudExadataInfrastructureUnallocatedResources.AddMember("cloudAutonomousVmClusters", _CloudAutonomousVmClusterResourceDetailsList)
-
-	CloudExadataInfrastructureUnallocatedResources_cloudExadataInfrastructureDisplayName = CloudExadataInfrastructureUnallocatedResources.AddMember("cloudExadataInfrastructureDisplayName", smithyprelude.String)
-
-	CloudExadataInfrastructureUnallocatedResources_exadataStorageInTBs = CloudExadataInfrastructureUnallocatedResources.AddMember("exadataStorageInTBs", smithyprelude.Double)
-
-	CloudExadataInfrastructureUnallocatedResources_cloudExadataInfrastructureId = CloudExadataInfrastructureUnallocatedResources.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	CloudExadataInfrastructureUnallocatedResources_localStorageInGBs = CloudExadataInfrastructureUnallocatedResources.AddMember("localStorageInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructureUnallocatedResources_memoryInGBs = CloudExadataInfrastructureUnallocatedResources.AddMember("memoryInGBs", smithyprelude.Integer)
-
-	CloudExadataInfrastructureUnallocatedResources_ocpus = CloudExadataInfrastructureUnallocatedResources.AddMember("ocpus", smithyprelude.Integer)
-
-	StorageManagementType_ASM = StorageManagementType.AddMember("ASM", smithyprelude.Unit)
-
-	StorageManagementType_EXASCALE = StorageManagementType.AddMember("EXASCALE", smithyprelude.Unit)
-
-	VmStorageType_LOCAL = VmStorageType.AddMember("LOCAL", smithyprelude.Unit)
-
-	VmStorageType_EXASCALE = VmStorageType.AddMember("EXASCALE", smithyprelude.Unit)
-
-	FileSystemConfigurationDetails_mountPoint = FileSystemConfigurationDetails.AddMember("mountPoint", smithyprelude.String)
-
-	FileSystemConfigurationDetails_fileSystemSizeInGBs = FileSystemConfigurationDetails.AddMember("fileSystemSizeInGBs", smithyprelude.Integer)
-
-	_FileSystemConfigurationDetailsList_member = _FileSystemConfigurationDetailsList.AddMember("member", FileSystemConfigurationDetails)
-
-	DataCollectionOptions_isDiagnosticsEventsEnabled = DataCollectionOptions.AddMember("isDiagnosticsEventsEnabled", smithyprelude.Boolean)
-
-	DataCollectionOptions_isHealthMonitoringEnabled = DataCollectionOptions.AddMember("isHealthMonitoringEnabled", smithyprelude.Boolean)
-
-	DataCollectionOptions_isIncidentLogsEnabled = DataCollectionOptions.AddMember("isIncidentLogsEnabled", smithyprelude.Boolean)
-
-	DiskRedundancy_HIGH = DiskRedundancy.AddMember("HIGH", smithyprelude.Unit)
-
-	DiskRedundancy_NORMAL = DiskRedundancy.AddMember("NORMAL", smithyprelude.Unit)
-
-	DbIormConfig_dbName = DbIormConfig.AddMember("dbName", smithyprelude.String)
-
-	DbIormConfig_flashCacheLimit = DbIormConfig.AddMember("flashCacheLimit", smithyprelude.String)
-
-	DbIormConfig_share = DbIormConfig.AddMember("share", smithyprelude.Integer)
-
-	_DbIormConfigList_member = _DbIormConfigList.AddMember("member", DbIormConfig)
-
-	IormLifecycleState_BOOTSTRAPPING = IormLifecycleState.AddMember("BOOTSTRAPPING", smithyprelude.Unit)
-
-	IormLifecycleState_DISABLED = IormLifecycleState.AddMember("DISABLED", smithyprelude.Unit)
-
-	IormLifecycleState_ENABLED = IormLifecycleState.AddMember("ENABLED", smithyprelude.Unit)
-
-	IormLifecycleState_FAILED = IormLifecycleState.AddMember("FAILED", smithyprelude.Unit)
-
-	IormLifecycleState_UPDATING = IormLifecycleState.AddMember("UPDATING", smithyprelude.Unit)
-
-	Objective_AUTO = Objective.AddMember("AUTO", smithyprelude.Unit)
-
-	Objective_BALANCED = Objective.AddMember("BALANCED", smithyprelude.Unit)
-
-	Objective_BASIC = Objective.AddMember("BASIC", smithyprelude.Unit)
-
-	Objective_HIGH_THROUGHPUT = Objective.AddMember("HIGH_THROUGHPUT", smithyprelude.Unit)
-
-	Objective_LOW_LATENCY = Objective.AddMember("LOW_LATENCY", smithyprelude.Unit)
-
-	ExadataIormConfig_dbPlans = ExadataIormConfig.AddMember("dbPlans", _DbIormConfigList)
-
-	ExadataIormConfig_lifecycleDetails = ExadataIormConfig.AddMember("lifecycleDetails", smithyprelude.String)
-
-	ExadataIormConfig_lifecycleState = ExadataIormConfig.AddMember("lifecycleState", IormLifecycleState)
-
-	ExadataIormConfig_objective = ExadataIormConfig.AddMember("objective", Objective)
-
-	_SensitiveStringList_member = _SensitiveStringList.AddMember("member", _SensitiveString)
-
-	CloudVmCluster_cloudVmClusterId = CloudVmCluster.AddMember("cloudVmClusterId", _ResourceId)
-
-	CloudVmCluster_displayName = CloudVmCluster.AddMember("displayName", smithyprelude.String)
-
-	CloudVmCluster_status = CloudVmCluster.AddMember("status", ResourceStatus)
-
-	CloudVmCluster_statusReason = CloudVmCluster.AddMember("statusReason", smithyprelude.String)
-
-	CloudVmCluster_cloudVmClusterArn = CloudVmCluster.AddMember("cloudVmClusterArn", smithyprelude.String)
-
-	CloudVmCluster_cloudExadataInfrastructureId = CloudVmCluster.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
-
-	CloudVmCluster_cloudExadataInfrastructureArn = CloudVmCluster.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
-
-	CloudVmCluster_exascaleDbStorageVaultId = CloudVmCluster.AddMember("exascaleDbStorageVaultId", _ResourceId)
-
-	CloudVmCluster_exascaleDbStorageVaultArn = CloudVmCluster.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
-
-	CloudVmCluster_storageManagementType = CloudVmCluster.AddMember("storageManagementType", StorageManagementType)
-
-	CloudVmCluster_vmFileSystemStorageType = CloudVmCluster.AddMember("vmFileSystemStorageType", VmStorageType)
-
-	CloudVmCluster_vmBackupStorageType = CloudVmCluster.AddMember("vmBackupStorageType", VmStorageType)
-
-	CloudVmCluster_fileSystemConfigurationDetails = CloudVmCluster.AddMember("fileSystemConfigurationDetails", _FileSystemConfigurationDetailsList)
-
-	CloudVmCluster_clusterName = CloudVmCluster.AddMember("clusterName", smithyprelude.String)
-
-	CloudVmCluster_cpuCoreCount = CloudVmCluster.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	CloudVmCluster_dataCollectionOptions = CloudVmCluster.AddMember("dataCollectionOptions", DataCollectionOptions)
-
-	CloudVmCluster_dataStorageSizeInTBs = CloudVmCluster.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudVmCluster_dbNodeStorageSizeInGBs = CloudVmCluster.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudVmCluster_dbServers = CloudVmCluster.AddMember("dbServers", _StringList)
-
-	CloudVmCluster_diskRedundancy = CloudVmCluster.AddMember("diskRedundancy", DiskRedundancy)
-
-	CloudVmCluster_giVersion = CloudVmCluster.AddMember("giVersion", smithyprelude.String)
-
-	CloudVmCluster_hostname = CloudVmCluster.AddMember("hostname", smithyprelude.String)
-
-	CloudVmCluster_iormConfigCache = CloudVmCluster.AddMember("iormConfigCache", ExadataIormConfig)
-
-	CloudVmCluster_isLocalBackupEnabled = CloudVmCluster.AddMember("isLocalBackupEnabled", smithyprelude.Boolean)
-
-	CloudVmCluster_isSparseDiskgroupEnabled = CloudVmCluster.AddMember("isSparseDiskgroupEnabled", smithyprelude.Boolean)
-
-	CloudVmCluster_lastUpdateHistoryEntryId = CloudVmCluster.AddMember("lastUpdateHistoryEntryId", smithyprelude.String)
-
-	CloudVmCluster_licenseModel = CloudVmCluster.AddMember("licenseModel", LicenseModel)
-
-	CloudVmCluster_listenerPort = CloudVmCluster.AddMember("listenerPort", smithyprelude.Integer)
-
-	CloudVmCluster_memorySizeInGBs = CloudVmCluster.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	CloudVmCluster_nodeCount = CloudVmCluster.AddMember("nodeCount", smithyprelude.Integer)
-
-	CloudVmCluster_ocid = CloudVmCluster.AddMember("ocid", smithyprelude.String)
-
-	CloudVmCluster_ociResourceAnchorName = CloudVmCluster.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	CloudVmCluster_ociUrl = CloudVmCluster.AddMember("ociUrl", smithyprelude.String)
-
-	CloudVmCluster_domain = CloudVmCluster.AddMember("domain", smithyprelude.String)
-
-	CloudVmCluster_scanDnsName = CloudVmCluster.AddMember("scanDnsName", smithyprelude.String)
-
-	CloudVmCluster_scanDnsRecordId = CloudVmCluster.AddMember("scanDnsRecordId", smithyprelude.String)
-
-	CloudVmCluster_scanIpIds = CloudVmCluster.AddMember("scanIpIds", _StringList)
-
-	CloudVmCluster_shape = CloudVmCluster.AddMember("shape", smithyprelude.String)
-
-	CloudVmCluster_sshPublicKeys = CloudVmCluster.AddMember("sshPublicKeys", _SensitiveStringList)
-
-	CloudVmCluster_storageSizeInGBs = CloudVmCluster.AddMember("storageSizeInGBs", smithyprelude.Integer)
-
-	CloudVmCluster_systemVersion = CloudVmCluster.AddMember("systemVersion", smithyprelude.String)
-
-	CloudVmCluster_createdAt = CloudVmCluster.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudVmCluster_timeZone = CloudVmCluster.AddMember("timeZone", smithyprelude.String)
-
-	CloudVmCluster_vipIds = CloudVmCluster.AddMember("vipIds", _StringList)
-
-	CloudVmCluster_odbNetworkId = CloudVmCluster.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CloudVmCluster_odbNetworkArn = CloudVmCluster.AddMember("odbNetworkArn", _ResourceArn)
-
-	CloudVmCluster_percentProgress = CloudVmCluster.AddMember("percentProgress", smithyprelude.Float)
-
-	CloudVmCluster_computeModel = CloudVmCluster.AddMember("computeModel", ComputeModel)
-
-	CloudVmCluster_iamRoles = CloudVmCluster.AddMember("iamRoles", _IamRoleList)
-
-	CloudVmClusterSummary_cloudVmClusterId = CloudVmClusterSummary.AddMember("cloudVmClusterId", _ResourceId)
-
-	CloudVmClusterSummary_displayName = CloudVmClusterSummary.AddMember("displayName", smithyprelude.String)
-
-	CloudVmClusterSummary_status = CloudVmClusterSummary.AddMember("status", ResourceStatus)
-
-	CloudVmClusterSummary_statusReason = CloudVmClusterSummary.AddMember("statusReason", smithyprelude.String)
-
-	CloudVmClusterSummary_cloudVmClusterArn = CloudVmClusterSummary.AddMember("cloudVmClusterArn", smithyprelude.String)
-
-	CloudVmClusterSummary_cloudExadataInfrastructureId = CloudVmClusterSummary.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
-
-	CloudVmClusterSummary_cloudExadataInfrastructureArn = CloudVmClusterSummary.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
-
-	CloudVmClusterSummary_exascaleDbStorageVaultId = CloudVmClusterSummary.AddMember("exascaleDbStorageVaultId", _ResourceId)
-
-	CloudVmClusterSummary_exascaleDbStorageVaultArn = CloudVmClusterSummary.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
-
-	CloudVmClusterSummary_storageManagementType = CloudVmClusterSummary.AddMember("storageManagementType", StorageManagementType)
-
-	CloudVmClusterSummary_vmFileSystemStorageType = CloudVmClusterSummary.AddMember("vmFileSystemStorageType", VmStorageType)
-
-	CloudVmClusterSummary_vmBackupStorageType = CloudVmClusterSummary.AddMember("vmBackupStorageType", VmStorageType)
-
-	CloudVmClusterSummary_fileSystemConfigurationDetails = CloudVmClusterSummary.AddMember("fileSystemConfigurationDetails", _FileSystemConfigurationDetailsList)
-
-	CloudVmClusterSummary_clusterName = CloudVmClusterSummary.AddMember("clusterName", smithyprelude.String)
-
-	CloudVmClusterSummary_cpuCoreCount = CloudVmClusterSummary.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	CloudVmClusterSummary_dataCollectionOptions = CloudVmClusterSummary.AddMember("dataCollectionOptions", DataCollectionOptions)
-
-	CloudVmClusterSummary_dataStorageSizeInTBs = CloudVmClusterSummary.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	CloudVmClusterSummary_dbNodeStorageSizeInGBs = CloudVmClusterSummary.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CloudVmClusterSummary_dbServers = CloudVmClusterSummary.AddMember("dbServers", _StringList)
-
-	CloudVmClusterSummary_diskRedundancy = CloudVmClusterSummary.AddMember("diskRedundancy", DiskRedundancy)
-
-	CloudVmClusterSummary_giVersion = CloudVmClusterSummary.AddMember("giVersion", smithyprelude.String)
-
-	CloudVmClusterSummary_hostname = CloudVmClusterSummary.AddMember("hostname", smithyprelude.String)
-
-	CloudVmClusterSummary_iormConfigCache = CloudVmClusterSummary.AddMember("iormConfigCache", ExadataIormConfig)
-
-	CloudVmClusterSummary_isLocalBackupEnabled = CloudVmClusterSummary.AddMember("isLocalBackupEnabled", smithyprelude.Boolean)
-
-	CloudVmClusterSummary_isSparseDiskgroupEnabled = CloudVmClusterSummary.AddMember("isSparseDiskgroupEnabled", smithyprelude.Boolean)
-
-	CloudVmClusterSummary_lastUpdateHistoryEntryId = CloudVmClusterSummary.AddMember("lastUpdateHistoryEntryId", smithyprelude.String)
-
-	CloudVmClusterSummary_licenseModel = CloudVmClusterSummary.AddMember("licenseModel", LicenseModel)
-
-	CloudVmClusterSummary_listenerPort = CloudVmClusterSummary.AddMember("listenerPort", smithyprelude.Integer)
-
-	CloudVmClusterSummary_memorySizeInGBs = CloudVmClusterSummary.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	CloudVmClusterSummary_nodeCount = CloudVmClusterSummary.AddMember("nodeCount", smithyprelude.Integer)
-
-	CloudVmClusterSummary_ocid = CloudVmClusterSummary.AddMember("ocid", smithyprelude.String)
-
-	CloudVmClusterSummary_ociResourceAnchorName = CloudVmClusterSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	CloudVmClusterSummary_ociUrl = CloudVmClusterSummary.AddMember("ociUrl", smithyprelude.String)
-
-	CloudVmClusterSummary_domain = CloudVmClusterSummary.AddMember("domain", smithyprelude.String)
-
-	CloudVmClusterSummary_scanDnsName = CloudVmClusterSummary.AddMember("scanDnsName", smithyprelude.String)
-
-	CloudVmClusterSummary_scanDnsRecordId = CloudVmClusterSummary.AddMember("scanDnsRecordId", smithyprelude.String)
-
-	CloudVmClusterSummary_scanIpIds = CloudVmClusterSummary.AddMember("scanIpIds", _StringList)
-
-	CloudVmClusterSummary_shape = CloudVmClusterSummary.AddMember("shape", smithyprelude.String)
-
-	CloudVmClusterSummary_sshPublicKeys = CloudVmClusterSummary.AddMember("sshPublicKeys", _SensitiveStringList)
-
-	CloudVmClusterSummary_storageSizeInGBs = CloudVmClusterSummary.AddMember("storageSizeInGBs", smithyprelude.Integer)
-
-	CloudVmClusterSummary_systemVersion = CloudVmClusterSummary.AddMember("systemVersion", smithyprelude.String)
-
-	CloudVmClusterSummary_createdAt = CloudVmClusterSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CloudVmClusterSummary_timeZone = CloudVmClusterSummary.AddMember("timeZone", smithyprelude.String)
-
-	CloudVmClusterSummary_vipIds = CloudVmClusterSummary.AddMember("vipIds", _StringList)
-
-	CloudVmClusterSummary_odbNetworkId = CloudVmClusterSummary.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CloudVmClusterSummary_odbNetworkArn = CloudVmClusterSummary.AddMember("odbNetworkArn", _ResourceArn)
-
-	CloudVmClusterSummary_percentProgress = CloudVmClusterSummary.AddMember("percentProgress", smithyprelude.Float)
-
-	CloudVmClusterSummary_computeModel = CloudVmClusterSummary.AddMember("computeModel", ComputeModel)
-
-	CloudVmClusterSummary_iamRoles = CloudVmClusterSummary.AddMember("iamRoles", _IamRoleList)
-
-	_CloudVmClusterList_member = _CloudVmClusterList.AddMember("member", CloudVmClusterSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	CrossRegionDataGuardConfiguration_sourceAutonomousDatabaseArn = CrossRegionDataGuardConfiguration.AddMember("sourceAutonomousDatabaseArn", _Arn)
-
-	CrossRegionDisasterRecoveryConfiguration_sourceAutonomousDatabaseArn = CrossRegionDisasterRecoveryConfiguration.AddMember("sourceAutonomousDatabaseArn", _Arn)
-
-	CrossRegionDisasterRecoveryConfiguration_remoteDisasterRecoveryType = CrossRegionDisasterRecoveryConfiguration.AddMember("remoteDisasterRecoveryType", DisasterRecoveryType)
-
-	CrossRegionDisasterRecoveryConfiguration_isReplicateAutomaticBackups = CrossRegionDisasterRecoveryConfiguration.AddMember("isReplicateAutomaticBackups", smithyprelude.Boolean)
-
-	ManagedResourceStatus_ENABLED = ManagedResourceStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	ManagedResourceStatus_ENABLING = ManagedResourceStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	ManagedResourceStatus_DISABLED = ManagedResourceStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ManagedResourceStatus_DISABLING = ManagedResourceStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	CrossRegionS3RestoreSourcesAccess_region = CrossRegionS3RestoreSourcesAccess.AddMember("region", smithyprelude.String)
-
-	CrossRegionS3RestoreSourcesAccess_ipv4Addresses = CrossRegionS3RestoreSourcesAccess.AddMember("ipv4Addresses", _StringList)
-
-	CrossRegionS3RestoreSourcesAccess_status = CrossRegionS3RestoreSourcesAccess.AddMember("status", ManagedResourceStatus)
-
-	_CrossRegionS3RestoreSourcesAccessList_member = _CrossRegionS3RestoreSourcesAccessList.AddMember("member", CrossRegionS3RestoreSourcesAccess)
-
-	DatabaseCloneConfiguration_sourceAutonomousDatabaseId = DatabaseCloneConfiguration.AddMember("sourceAutonomousDatabaseId", _ResourceIdOrArn)
-
-	DatabaseCloneConfiguration_cloneType = DatabaseCloneConfiguration.AddMember("cloneType", CloneType)
-
-	DbNodeResourceStatus_AVAILABLE = DbNodeResourceStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	DbNodeResourceStatus_FAILED = DbNodeResourceStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DbNodeResourceStatus_PROVISIONING = DbNodeResourceStatus.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	DbNodeResourceStatus_TERMINATED = DbNodeResourceStatus.AddMember("TERMINATED", smithyprelude.Unit)
-
-	DbNodeResourceStatus_TERMINATING = DbNodeResourceStatus.AddMember("TERMINATING", smithyprelude.Unit)
-
-	DbNodeResourceStatus_UPDATING = DbNodeResourceStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	DbNodeResourceStatus_STOPPING = DbNodeResourceStatus.AddMember("STOPPING", smithyprelude.Unit)
-
-	DbNodeResourceStatus_STOPPED = DbNodeResourceStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	DbNodeResourceStatus_STARTING = DbNodeResourceStatus.AddMember("STARTING", smithyprelude.Unit)
-
-	DbNodeMaintenanceType_VMDB_REBOOT_MIGRATION = DbNodeMaintenanceType.AddMember("VMDB_REBOOT_MIGRATION", smithyprelude.Unit)
-
-	DbNode_dbNodeId = DbNode.AddMember("dbNodeId", _ResourceId)
-
-	DbNode_dbNodeArn = DbNode.AddMember("dbNodeArn", _ResourceArn)
-
-	DbNode_status = DbNode.AddMember("status", DbNodeResourceStatus)
-
-	DbNode_statusReason = DbNode.AddMember("statusReason", smithyprelude.String)
-
-	DbNode_additionalDetails = DbNode.AddMember("additionalDetails", smithyprelude.String)
-
-	DbNode_backupIpId = DbNode.AddMember("backupIpId", smithyprelude.String)
-
-	DbNode_backupVnic2Id = DbNode.AddMember("backupVnic2Id", smithyprelude.String)
-
-	DbNode_backupVnicId = DbNode.AddMember("backupVnicId", smithyprelude.String)
-
-	DbNode_cpuCoreCount = DbNode.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	DbNode_dbNodeStorageSizeInGBs = DbNode.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	DbNode_dbServerId = DbNode.AddMember("dbServerId", _ResourceId)
-
-	DbNode_dbSystemId = DbNode.AddMember("dbSystemId", smithyprelude.String)
-
-	DbNode_faultDomain = DbNode.AddMember("faultDomain", smithyprelude.String)
-
-	DbNode_hostIpId = DbNode.AddMember("hostIpId", smithyprelude.String)
-
-	DbNode_hostname = DbNode.AddMember("hostname", smithyprelude.String)
-
-	DbNode_ocid = DbNode.AddMember("ocid", smithyprelude.String)
-
-	DbNode_ociResourceAnchorName = DbNode.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	DbNode_maintenanceType = DbNode.AddMember("maintenanceType", DbNodeMaintenanceType)
-
-	DbNode_memorySizeInGBs = DbNode.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	DbNode_softwareStorageSizeInGB = DbNode.AddMember("softwareStorageSizeInGB", smithyprelude.Integer)
-
-	DbNode_createdAt = DbNode.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DbNode_timeMaintenanceWindowEnd = DbNode.AddMember("timeMaintenanceWindowEnd", smithyprelude.String)
-
-	DbNode_timeMaintenanceWindowStart = DbNode.AddMember("timeMaintenanceWindowStart", smithyprelude.String)
-
-	DbNode_totalCpuCoreCount = DbNode.AddMember("totalCpuCoreCount", smithyprelude.Integer)
-
-	DbNode_vnic2Id = DbNode.AddMember("vnic2Id", smithyprelude.String)
-
-	DbNode_vnicId = DbNode.AddMember("vnicId", smithyprelude.String)
-
-	DbNode_privateIpAddress = DbNode.AddMember("privateIpAddress", smithyprelude.String)
-
-	DbNode_floatingIpAddress = DbNode.AddMember("floatingIpAddress", smithyprelude.String)
-
-	DbNodeSummary_dbNodeId = DbNodeSummary.AddMember("dbNodeId", _ResourceId)
-
-	DbNodeSummary_dbNodeArn = DbNodeSummary.AddMember("dbNodeArn", _ResourceArn)
-
-	DbNodeSummary_status = DbNodeSummary.AddMember("status", DbNodeResourceStatus)
-
-	DbNodeSummary_statusReason = DbNodeSummary.AddMember("statusReason", smithyprelude.String)
-
-	DbNodeSummary_additionalDetails = DbNodeSummary.AddMember("additionalDetails", smithyprelude.String)
-
-	DbNodeSummary_backupIpId = DbNodeSummary.AddMember("backupIpId", smithyprelude.String)
-
-	DbNodeSummary_backupVnic2Id = DbNodeSummary.AddMember("backupVnic2Id", smithyprelude.String)
-
-	DbNodeSummary_backupVnicId = DbNodeSummary.AddMember("backupVnicId", smithyprelude.String)
-
-	DbNodeSummary_cpuCoreCount = DbNodeSummary.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	DbNodeSummary_dbNodeStorageSizeInGBs = DbNodeSummary.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	DbNodeSummary_dbServerId = DbNodeSummary.AddMember("dbServerId", _ResourceId)
-
-	DbNodeSummary_dbSystemId = DbNodeSummary.AddMember("dbSystemId", smithyprelude.String)
-
-	DbNodeSummary_faultDomain = DbNodeSummary.AddMember("faultDomain", smithyprelude.String)
-
-	DbNodeSummary_hostIpId = DbNodeSummary.AddMember("hostIpId", smithyprelude.String)
-
-	DbNodeSummary_hostname = DbNodeSummary.AddMember("hostname", smithyprelude.String)
-
-	DbNodeSummary_ocid = DbNodeSummary.AddMember("ocid", smithyprelude.String)
-
-	DbNodeSummary_ociResourceAnchorName = DbNodeSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	DbNodeSummary_maintenanceType = DbNodeSummary.AddMember("maintenanceType", DbNodeMaintenanceType)
-
-	DbNodeSummary_memorySizeInGBs = DbNodeSummary.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	DbNodeSummary_softwareStorageSizeInGB = DbNodeSummary.AddMember("softwareStorageSizeInGB", smithyprelude.Integer)
-
-	DbNodeSummary_createdAt = DbNodeSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DbNodeSummary_timeMaintenanceWindowEnd = DbNodeSummary.AddMember("timeMaintenanceWindowEnd", smithyprelude.String)
-
-	DbNodeSummary_timeMaintenanceWindowStart = DbNodeSummary.AddMember("timeMaintenanceWindowStart", smithyprelude.String)
-
-	DbNodeSummary_totalCpuCoreCount = DbNodeSummary.AddMember("totalCpuCoreCount", smithyprelude.Integer)
-
-	DbNodeSummary_vnic2Id = DbNodeSummary.AddMember("vnic2Id", smithyprelude.String)
-
-	DbNodeSummary_vnicId = DbNodeSummary.AddMember("vnicId", smithyprelude.String)
-
-	_DbNodeList_member = _DbNodeList.AddMember("member", DbNodeSummary)
-
-	DbServerPatchingStatus_COMPLETE = DbServerPatchingStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	DbServerPatchingStatus_FAILED = DbServerPatchingStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DbServerPatchingStatus_MAINTENANCE_IN_PROGRESS = DbServerPatchingStatus.AddMember("MAINTENANCE_IN_PROGRESS", smithyprelude.Unit)
-
-	DbServerPatchingStatus_SCHEDULED = DbServerPatchingStatus.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	DbServerPatchingDetails_estimatedPatchDuration = DbServerPatchingDetails.AddMember("estimatedPatchDuration", smithyprelude.Integer)
-
-	DbServerPatchingDetails_patchingStatus = DbServerPatchingDetails.AddMember("patchingStatus", DbServerPatchingStatus)
-
-	DbServerPatchingDetails_timePatchingEnded = DbServerPatchingDetails.AddMember("timePatchingEnded", smithyprelude.String)
-
-	DbServerPatchingDetails_timePatchingStarted = DbServerPatchingDetails.AddMember("timePatchingStarted", smithyprelude.String)
-
-	DbServer_dbServerId = DbServer.AddMember("dbServerId", _ResourceId)
-
-	DbServer_status = DbServer.AddMember("status", ResourceStatus)
-
-	DbServer_statusReason = DbServer.AddMember("statusReason", smithyprelude.String)
-
-	DbServer_cpuCoreCount = DbServer.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	DbServer_dbNodeStorageSizeInGBs = DbServer.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	DbServer_dbServerPatchingDetails = DbServer.AddMember("dbServerPatchingDetails", DbServerPatchingDetails)
-
-	DbServer_displayName = DbServer.AddMember("displayName", smithyprelude.String)
-
-	DbServer_exadataInfrastructureId = DbServer.AddMember("exadataInfrastructureId", smithyprelude.String)
-
-	DbServer_ocid = DbServer.AddMember("ocid", smithyprelude.String)
-
-	DbServer_ociResourceAnchorName = DbServer.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	DbServer_maxCpuCount = DbServer.AddMember("maxCpuCount", smithyprelude.Integer)
-
-	DbServer_maxDbNodeStorageInGBs = DbServer.AddMember("maxDbNodeStorageInGBs", smithyprelude.Integer)
-
-	DbServer_maxMemoryInGBs = DbServer.AddMember("maxMemoryInGBs", smithyprelude.Integer)
-
-	DbServer_memorySizeInGBs = DbServer.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	DbServer_shape = DbServer.AddMember("shape", smithyprelude.String)
-
-	DbServer_createdAt = DbServer.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DbServer_vmClusterIds = DbServer.AddMember("vmClusterIds", _StringList)
-
-	DbServer_computeModel = DbServer.AddMember("computeModel", ComputeModel)
-
-	DbServer_autonomousVmClusterIds = DbServer.AddMember("autonomousVmClusterIds", _StringList)
-
-	DbServer_autonomousVirtualMachineIds = DbServer.AddMember("autonomousVirtualMachineIds", _StringList)
-
-	DbServerSummary_dbServerId = DbServerSummary.AddMember("dbServerId", _ResourceId)
-
-	DbServerSummary_status = DbServerSummary.AddMember("status", ResourceStatus)
-
-	DbServerSummary_statusReason = DbServerSummary.AddMember("statusReason", smithyprelude.String)
-
-	DbServerSummary_cpuCoreCount = DbServerSummary.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	DbServerSummary_dbNodeStorageSizeInGBs = DbServerSummary.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	DbServerSummary_dbServerPatchingDetails = DbServerSummary.AddMember("dbServerPatchingDetails", DbServerPatchingDetails)
-
-	DbServerSummary_displayName = DbServerSummary.AddMember("displayName", smithyprelude.String)
-
-	DbServerSummary_exadataInfrastructureId = DbServerSummary.AddMember("exadataInfrastructureId", smithyprelude.String)
-
-	DbServerSummary_ocid = DbServerSummary.AddMember("ocid", smithyprelude.String)
-
-	DbServerSummary_ociResourceAnchorName = DbServerSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	DbServerSummary_maxCpuCount = DbServerSummary.AddMember("maxCpuCount", smithyprelude.Integer)
-
-	DbServerSummary_maxDbNodeStorageInGBs = DbServerSummary.AddMember("maxDbNodeStorageInGBs", smithyprelude.Integer)
-
-	DbServerSummary_maxMemoryInGBs = DbServerSummary.AddMember("maxMemoryInGBs", smithyprelude.Integer)
-
-	DbServerSummary_memorySizeInGBs = DbServerSummary.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	DbServerSummary_shape = DbServerSummary.AddMember("shape", smithyprelude.String)
-
-	DbServerSummary_createdAt = DbServerSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DbServerSummary_vmClusterIds = DbServerSummary.AddMember("vmClusterIds", _StringList)
-
-	DbServerSummary_computeModel = DbServerSummary.AddMember("computeModel", ComputeModel)
-
-	DbServerSummary_autonomousVmClusterIds = DbServerSummary.AddMember("autonomousVmClusterIds", _StringList)
-
-	DbServerSummary_autonomousVirtualMachineIds = DbServerSummary.AddMember("autonomousVirtualMachineIds", _StringList)
-
-	_DbServerList_member = _DbServerList.AddMember("member", DbServerSummary)
-
-	ShapeType_AMD = ShapeType.AddMember("AMD", smithyprelude.Unit)
-
-	ShapeType_INTEL = ShapeType.AddMember("INTEL", smithyprelude.Unit)
-
-	ShapeType_INTEL_FLEX_X9 = ShapeType.AddMember("INTEL_FLEX_X9", smithyprelude.Unit)
-
-	ShapeType_AMPERE_FLEX_A1 = ShapeType.AddMember("AMPERE_FLEX_A1", smithyprelude.Unit)
-
-	ShapeAttribute_SMART_STORAGE = ShapeAttribute.AddMember("SMART_STORAGE", smithyprelude.Unit)
-
-	ShapeAttribute_BLOCK_STORAGE = ShapeAttribute.AddMember("BLOCK_STORAGE", smithyprelude.Unit)
-
-	_ShapeAttributeList_member = _ShapeAttributeList.AddMember("member", ShapeAttribute)
-
-	DbSystemShapeSummary_availableCoreCount = DbSystemShapeSummary.AddMember("availableCoreCount", smithyprelude.Integer)
-
-	DbSystemShapeSummary_availableCoreCountPerNode = DbSystemShapeSummary.AddMember("availableCoreCountPerNode", smithyprelude.Integer)
-
-	DbSystemShapeSummary_availableDataStorageInTBs = DbSystemShapeSummary.AddMember("availableDataStorageInTBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_availableDataStoragePerServerInTBs = DbSystemShapeSummary.AddMember("availableDataStoragePerServerInTBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_availableDbNodePerNodeInGBs = DbSystemShapeSummary.AddMember("availableDbNodePerNodeInGBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_availableDbNodeStorageInGBs = DbSystemShapeSummary.AddMember("availableDbNodeStorageInGBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_availableMemoryInGBs = DbSystemShapeSummary.AddMember("availableMemoryInGBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_availableMemoryPerNodeInGBs = DbSystemShapeSummary.AddMember("availableMemoryPerNodeInGBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_coreCountIncrement = DbSystemShapeSummary.AddMember("coreCountIncrement", smithyprelude.Integer)
-
-	DbSystemShapeSummary_maxStorageCount = DbSystemShapeSummary.AddMember("maxStorageCount", smithyprelude.Integer)
-
-	DbSystemShapeSummary_maximumNodeCount = DbSystemShapeSummary.AddMember("maximumNodeCount", smithyprelude.Integer)
-
-	DbSystemShapeSummary_minCoreCountPerNode = DbSystemShapeSummary.AddMember("minCoreCountPerNode", smithyprelude.Integer)
-
-	DbSystemShapeSummary_minDataStorageInTBs = DbSystemShapeSummary.AddMember("minDataStorageInTBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_minDbNodeStoragePerNodeInGBs = DbSystemShapeSummary.AddMember("minDbNodeStoragePerNodeInGBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_minMemoryPerNodeInGBs = DbSystemShapeSummary.AddMember("minMemoryPerNodeInGBs", smithyprelude.Integer)
-
-	DbSystemShapeSummary_minStorageCount = DbSystemShapeSummary.AddMember("minStorageCount", smithyprelude.Integer)
-
-	DbSystemShapeSummary_minimumCoreCount = DbSystemShapeSummary.AddMember("minimumCoreCount", smithyprelude.Integer)
-
-	DbSystemShapeSummary_minimumNodeCount = DbSystemShapeSummary.AddMember("minimumNodeCount", smithyprelude.Integer)
-
-	DbSystemShapeSummary_runtimeMinimumCoreCount = DbSystemShapeSummary.AddMember("runtimeMinimumCoreCount", smithyprelude.Integer)
-
-	DbSystemShapeSummary_shapeFamily = DbSystemShapeSummary.AddMember("shapeFamily", smithyprelude.String)
-
-	DbSystemShapeSummary_shapeType = DbSystemShapeSummary.AddMember("shapeType", ShapeType)
-
-	DbSystemShapeSummary_shapeAttributes = DbSystemShapeSummary.AddMember("shapeAttributes", _ShapeAttributeList)
-
-	DbSystemShapeSummary_name = DbSystemShapeSummary.AddMember("name", smithyprelude.String)
-
-	DbSystemShapeSummary_computeModel = DbSystemShapeSummary.AddMember("computeModel", ComputeModel)
-
-	DbSystemShapeSummary_areServerTypesSupported = DbSystemShapeSummary.AddMember("areServerTypesSupported", smithyprelude.Boolean)
-
-	_DbSystemShapeList_member = _DbSystemShapeList.AddMember("member", DbSystemShapeSummary)
-
-	EncryptionKeyConfigurationInput_awsEncryptionKey = EncryptionKeyConfigurationInput.AddMember("awsEncryptionKey", AwsEncryptionKeyConfigurationInput)
-
-	EncryptionKeyProviderInput_ORACLE_MANAGED = EncryptionKeyProviderInput.AddMember("ORACLE_MANAGED", smithyprelude.Unit)
-
-	EncryptionKeyProviderInput_AWS_KMS = EncryptionKeyProviderInput.AddMember("AWS_KMS", smithyprelude.Unit)
-
-	GridImageType_RELEASE_UPDATE = GridImageType.AddMember("RELEASE_UPDATE", smithyprelude.Unit)
-
-	GridImageType_CUSTOM_IMAGE = GridImageType.AddMember("CUSTOM_IMAGE", smithyprelude.Unit)
-
-	ExadbVmClusterStorageDetails_totalSizeInGBs = ExadbVmClusterStorageDetails.AddMember("totalSizeInGBs", smithyprelude.Integer)
-
-	ExadbVmCluster_exadbVmClusterId = ExadbVmCluster.AddMember("exadbVmClusterId", _ResourceIdOrArn)
-
-	ExadbVmCluster_clusterName = ExadbVmCluster.AddMember("clusterName", _ClusterName)
-
-	ExadbVmCluster_createdAt = ExadbVmCluster.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExadbVmCluster_dataCollectionOptions = ExadbVmCluster.AddMember("dataCollectionOptions", DataCollectionOptions)
-
-	ExadbVmCluster_displayName = ExadbVmCluster.AddMember("displayName", _ResourceDisplayName)
-
-	ExadbVmCluster_domain = ExadbVmCluster.AddMember("domain", smithyprelude.String)
-
-	ExadbVmCluster_enabledEcpuCount = ExadbVmCluster.AddMember("enabledEcpuCount", smithyprelude.Integer)
-
-	ExadbVmCluster_exadbVmClusterArn = ExadbVmCluster.AddMember("exadbVmClusterArn", _ResourceArn)
-
-	ExadbVmCluster_exascaleDbStorageVaultArn = ExadbVmCluster.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
-
-	ExadbVmCluster_exascaleDbStorageVaultId = ExadbVmCluster.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	ExadbVmCluster_giVersion = ExadbVmCluster.AddMember("giVersion", smithyprelude.String)
-
-	ExadbVmCluster_gridImageId = ExadbVmCluster.AddMember("gridImageId", smithyprelude.String)
-
-	ExadbVmCluster_gridImageType = ExadbVmCluster.AddMember("gridImageType", GridImageType)
-
-	ExadbVmCluster_hostname = ExadbVmCluster.AddMember("hostname", _Hostname)
-
-	ExadbVmCluster_iamRoles = ExadbVmCluster.AddMember("iamRoles", _IamRoleList)
-
-	ExadbVmCluster_iormConfigCache = ExadbVmCluster.AddMember("iormConfigCache", ExadataIormConfig)
-
-	ExadbVmCluster_lastUpdateHistoryEntryId = ExadbVmCluster.AddMember("lastUpdateHistoryEntryId", smithyprelude.String)
-
-	ExadbVmCluster_licenseModel = ExadbVmCluster.AddMember("licenseModel", LicenseModel)
-
-	ExadbVmCluster_listenerPort = ExadbVmCluster.AddMember("listenerPort", smithyprelude.Integer)
-
-	ExadbVmCluster_memorySizeInGBs = ExadbVmCluster.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	ExadbVmCluster_nodeCount = ExadbVmCluster.AddMember("nodeCount", smithyprelude.Integer)
-
-	ExadbVmCluster_ocid = ExadbVmCluster.AddMember("ocid", smithyprelude.String)
-
-	ExadbVmCluster_ociResourceAnchorName = ExadbVmCluster.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	ExadbVmCluster_ociUrl = ExadbVmCluster.AddMember("ociUrl", smithyprelude.String)
-
-	ExadbVmCluster_odbNetworkArn = ExadbVmCluster.AddMember("odbNetworkArn", _ResourceArn)
-
-	ExadbVmCluster_odbNetworkId = ExadbVmCluster.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	ExadbVmCluster_percentProgress = ExadbVmCluster.AddMember("percentProgress", smithyprelude.Float)
-
-	ExadbVmCluster_scanDnsName = ExadbVmCluster.AddMember("scanDnsName", smithyprelude.String)
-
-	ExadbVmCluster_scanDnsRecordId = ExadbVmCluster.AddMember("scanDnsRecordId", smithyprelude.String)
-
-	ExadbVmCluster_scanIpIds = ExadbVmCluster.AddMember("scanIpIds", _StringList)
-
-	ExadbVmCluster_scanListenerPortTcp = ExadbVmCluster.AddMember("scanListenerPortTcp", smithyprelude.Integer)
-
-	ExadbVmCluster_scanListenerPortTcpSsl = ExadbVmCluster.AddMember("scanListenerPortTcpSsl", smithyprelude.Integer)
-
-	ExadbVmCluster_shape = ExadbVmCluster.AddMember("shape", smithyprelude.String)
-
-	ExadbVmCluster_shapeAttribute = ExadbVmCluster.AddMember("shapeAttribute", ShapeAttribute)
-
-	ExadbVmCluster_snapshotFileSystemStorage = ExadbVmCluster.AddMember("snapshotFileSystemStorage", ExadbVmClusterStorageDetails)
-
-	ExadbVmCluster_sshPublicKeys = ExadbVmCluster.AddMember("sshPublicKeys", _StringList)
-
-	ExadbVmCluster_status = ExadbVmCluster.AddMember("status", ResourceStatus)
-
-	ExadbVmCluster_statusReason = ExadbVmCluster.AddMember("statusReason", smithyprelude.String)
-
-	ExadbVmCluster_systemVersion = ExadbVmCluster.AddMember("systemVersion", smithyprelude.String)
-
-	ExadbVmCluster_timeZone = ExadbVmCluster.AddMember("timeZone", smithyprelude.String)
-
-	ExadbVmCluster_totalEcpuCount = ExadbVmCluster.AddMember("totalEcpuCount", smithyprelude.Integer)
-
-	ExadbVmCluster_totalFileSystemStorage = ExadbVmCluster.AddMember("totalFileSystemStorage", ExadbVmClusterStorageDetails)
-
-	ExadbVmCluster_vipIds = ExadbVmCluster.AddMember("vipIds", _StringList)
-
-	ExadbVmCluster_vmFileSystemStorage = ExadbVmCluster.AddMember("vmFileSystemStorage", ExadbVmClusterStorageDetails)
-
-	ExadbVmClusterSummary_exadbVmClusterId = ExadbVmClusterSummary.AddMember("exadbVmClusterId", _ResourceIdOrArn)
-
-	ExadbVmClusterSummary_clusterName = ExadbVmClusterSummary.AddMember("clusterName", _ClusterName)
-
-	ExadbVmClusterSummary_createdAt = ExadbVmClusterSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExadbVmClusterSummary_dataCollectionOptions = ExadbVmClusterSummary.AddMember("dataCollectionOptions", DataCollectionOptions)
-
-	ExadbVmClusterSummary_displayName = ExadbVmClusterSummary.AddMember("displayName", _ResourceDisplayName)
-
-	ExadbVmClusterSummary_domain = ExadbVmClusterSummary.AddMember("domain", smithyprelude.String)
-
-	ExadbVmClusterSummary_enabledEcpuCount = ExadbVmClusterSummary.AddMember("enabledEcpuCount", smithyprelude.Integer)
-
-	ExadbVmClusterSummary_exadbVmClusterArn = ExadbVmClusterSummary.AddMember("exadbVmClusterArn", _ResourceArn)
-
-	ExadbVmClusterSummary_exascaleDbStorageVaultArn = ExadbVmClusterSummary.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
-
-	ExadbVmClusterSummary_exascaleDbStorageVaultId = ExadbVmClusterSummary.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	ExadbVmClusterSummary_giVersion = ExadbVmClusterSummary.AddMember("giVersion", smithyprelude.String)
-
-	ExadbVmClusterSummary_gridImageId = ExadbVmClusterSummary.AddMember("gridImageId", smithyprelude.String)
-
-	ExadbVmClusterSummary_gridImageType = ExadbVmClusterSummary.AddMember("gridImageType", GridImageType)
-
-	ExadbVmClusterSummary_hostname = ExadbVmClusterSummary.AddMember("hostname", _Hostname)
-
-	ExadbVmClusterSummary_iamRoles = ExadbVmClusterSummary.AddMember("iamRoles", _IamRoleList)
-
-	ExadbVmClusterSummary_iormConfigCache = ExadbVmClusterSummary.AddMember("iormConfigCache", ExadataIormConfig)
-
-	ExadbVmClusterSummary_lastUpdateHistoryEntryId = ExadbVmClusterSummary.AddMember("lastUpdateHistoryEntryId", smithyprelude.String)
-
-	ExadbVmClusterSummary_licenseModel = ExadbVmClusterSummary.AddMember("licenseModel", LicenseModel)
-
-	ExadbVmClusterSummary_listenerPort = ExadbVmClusterSummary.AddMember("listenerPort", smithyprelude.Integer)
-
-	ExadbVmClusterSummary_memorySizeInGBs = ExadbVmClusterSummary.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	ExadbVmClusterSummary_nodeCount = ExadbVmClusterSummary.AddMember("nodeCount", smithyprelude.Integer)
-
-	ExadbVmClusterSummary_ocid = ExadbVmClusterSummary.AddMember("ocid", smithyprelude.String)
-
-	ExadbVmClusterSummary_ociResourceAnchorName = ExadbVmClusterSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	ExadbVmClusterSummary_ociUrl = ExadbVmClusterSummary.AddMember("ociUrl", smithyprelude.String)
-
-	ExadbVmClusterSummary_odbNetworkArn = ExadbVmClusterSummary.AddMember("odbNetworkArn", _ResourceArn)
-
-	ExadbVmClusterSummary_odbNetworkId = ExadbVmClusterSummary.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	ExadbVmClusterSummary_percentProgress = ExadbVmClusterSummary.AddMember("percentProgress", smithyprelude.Float)
-
-	ExadbVmClusterSummary_scanDnsName = ExadbVmClusterSummary.AddMember("scanDnsName", smithyprelude.String)
-
-	ExadbVmClusterSummary_scanDnsRecordId = ExadbVmClusterSummary.AddMember("scanDnsRecordId", smithyprelude.String)
-
-	ExadbVmClusterSummary_scanIpIds = ExadbVmClusterSummary.AddMember("scanIpIds", _StringList)
-
-	ExadbVmClusterSummary_scanListenerPortTcp = ExadbVmClusterSummary.AddMember("scanListenerPortTcp", smithyprelude.Integer)
-
-	ExadbVmClusterSummary_scanListenerPortTcpSsl = ExadbVmClusterSummary.AddMember("scanListenerPortTcpSsl", smithyprelude.Integer)
-
-	ExadbVmClusterSummary_shape = ExadbVmClusterSummary.AddMember("shape", smithyprelude.String)
-
-	ExadbVmClusterSummary_shapeAttribute = ExadbVmClusterSummary.AddMember("shapeAttribute", ShapeAttribute)
-
-	ExadbVmClusterSummary_snapshotFileSystemStorage = ExadbVmClusterSummary.AddMember("snapshotFileSystemStorage", ExadbVmClusterStorageDetails)
-
-	ExadbVmClusterSummary_sshPublicKeys = ExadbVmClusterSummary.AddMember("sshPublicKeys", _StringList)
-
-	ExadbVmClusterSummary_status = ExadbVmClusterSummary.AddMember("status", ResourceStatus)
-
-	ExadbVmClusterSummary_statusReason = ExadbVmClusterSummary.AddMember("statusReason", smithyprelude.String)
-
-	ExadbVmClusterSummary_systemVersion = ExadbVmClusterSummary.AddMember("systemVersion", smithyprelude.String)
-
-	ExadbVmClusterSummary_timeZone = ExadbVmClusterSummary.AddMember("timeZone", smithyprelude.String)
-
-	ExadbVmClusterSummary_totalEcpuCount = ExadbVmClusterSummary.AddMember("totalEcpuCount", smithyprelude.Integer)
-
-	ExadbVmClusterSummary_totalFileSystemStorage = ExadbVmClusterSummary.AddMember("totalFileSystemStorage", ExadbVmClusterStorageDetails)
-
-	ExadbVmClusterSummary_vipIds = ExadbVmClusterSummary.AddMember("vipIds", _StringList)
-
-	ExadbVmClusterSummary_vmFileSystemStorage = ExadbVmClusterSummary.AddMember("vmFileSystemStorage", ExadbVmClusterStorageDetails)
-
-	_ExadbVmClusterList_member = _ExadbVmClusterList.AddMember("member", ExadbVmClusterSummary)
-
-	ExascaleDbStorageDetails_availableSizeInGBs = ExascaleDbStorageDetails.AddMember("availableSizeInGBs", smithyprelude.Integer)
-
-	ExascaleDbStorageDetails_totalSizeInGBs = ExascaleDbStorageDetails.AddMember("totalSizeInGBs", smithyprelude.Integer)
-
-	_ResourceArnList_member = _ResourceArnList.AddMember("member", _ResourceArn)
-
-	_ResourceIdList_member = _ResourceIdList.AddMember("member", _ResourceId)
-
-	ExascaleDbStorageVaultType_EXASCALE_INFRASTRUCTURE = ExascaleDbStorageVaultType.AddMember("EXASCALE_INFRASTRUCTURE", smithyprelude.Unit)
-
-	ExascaleDbStorageVaultType_DEDICATED_INFRASTRUCTURE = ExascaleDbStorageVaultType.AddMember("DEDICATED_INFRASTRUCTURE", smithyprelude.Unit)
-
-	ExascaleDbStorageVault_exascaleDbStorageVaultId = ExascaleDbStorageVault.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	ExascaleDbStorageVault_additionalFlashCacheInPercent = ExascaleDbStorageVault.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
-
-	ExascaleDbStorageVault_attachedShapeAttributes = ExascaleDbStorageVault.AddMember("attachedShapeAttributes", _ShapeAttributeList)
-
-	ExascaleDbStorageVault_autoscaleLimitInGBs = ExascaleDbStorageVault.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
-
-	ExascaleDbStorageVault_availabilityZone = ExascaleDbStorageVault.AddMember("availabilityZone", smithyprelude.String)
-
-	ExascaleDbStorageVault_availabilityZoneId = ExascaleDbStorageVault.AddMember("availabilityZoneId", smithyprelude.String)
-
-	ExascaleDbStorageVault_cloudExadataInfrastructureArn = ExascaleDbStorageVault.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
-
-	ExascaleDbStorageVault_cloudExadataInfrastructureId = ExascaleDbStorageVault.AddMember("cloudExadataInfrastructureId", _ResourceId)
-
-	ExascaleDbStorageVault_createdAt = ExascaleDbStorageVault.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExascaleDbStorageVault_description = ExascaleDbStorageVault.AddMember("description", smithyprelude.String)
-
-	ExascaleDbStorageVault_displayName = ExascaleDbStorageVault.AddMember("displayName", smithyprelude.String)
-
-	ExascaleDbStorageVault_vmClusterArns = ExascaleDbStorageVault.AddMember("vmClusterArns", _ResourceArnList)
-
-	ExascaleDbStorageVault_vmClusterCount = ExascaleDbStorageVault.AddMember("vmClusterCount", smithyprelude.Integer)
-
-	ExascaleDbStorageVault_vmClusterIds = ExascaleDbStorageVault.AddMember("vmClusterIds", _ResourceIdList)
-
-	ExascaleDbStorageVault_exascaleDbStorageVaultArn = ExascaleDbStorageVault.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
-
-	ExascaleDbStorageVault_highCapacityDatabaseStorage = ExascaleDbStorageVault.AddMember("highCapacityDatabaseStorage", ExascaleDbStorageDetails)
-
-	ExascaleDbStorageVault_isAutoscaleEnabled = ExascaleDbStorageVault.AddMember("isAutoscaleEnabled", smithyprelude.Boolean)
-
-	ExascaleDbStorageVault_ocid = ExascaleDbStorageVault.AddMember("ocid", smithyprelude.String)
-
-	ExascaleDbStorageVault_ociResourceAnchorName = ExascaleDbStorageVault.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	ExascaleDbStorageVault_ociUrl = ExascaleDbStorageVault.AddMember("ociUrl", smithyprelude.String)
-
-	ExascaleDbStorageVault_percentProgress = ExascaleDbStorageVault.AddMember("percentProgress", smithyprelude.Float)
-
-	ExascaleDbStorageVault_status = ExascaleDbStorageVault.AddMember("status", ResourceStatus)
-
-	ExascaleDbStorageVault_statusReason = ExascaleDbStorageVault.AddMember("statusReason", smithyprelude.String)
-
-	ExascaleDbStorageVault_timeZone = ExascaleDbStorageVault.AddMember("timeZone", smithyprelude.String)
-
-	ExascaleDbStorageVault_vaultType = ExascaleDbStorageVault.AddMember("vaultType", ExascaleDbStorageVaultType)
-
-	ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId = ExascaleDbStorageVaultSummary.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent = ExascaleDbStorageVaultSummary.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
-
-	ExascaleDbStorageVaultSummary_attachedShapeAttributes = ExascaleDbStorageVaultSummary.AddMember("attachedShapeAttributes", _ShapeAttributeList)
-
-	ExascaleDbStorageVaultSummary_autoscaleLimitInGBs = ExascaleDbStorageVaultSummary.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
-
-	ExascaleDbStorageVaultSummary_availabilityZone = ExascaleDbStorageVaultSummary.AddMember("availabilityZone", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_availabilityZoneId = ExascaleDbStorageVaultSummary.AddMember("availabilityZoneId", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_cloudExadataInfrastructureArn = ExascaleDbStorageVaultSummary.AddMember("cloudExadataInfrastructureArn", _ResourceArn)
-
-	ExascaleDbStorageVaultSummary_cloudExadataInfrastructureId = ExascaleDbStorageVaultSummary.AddMember("cloudExadataInfrastructureId", _ResourceId)
-
-	ExascaleDbStorageVaultSummary_createdAt = ExascaleDbStorageVaultSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ExascaleDbStorageVaultSummary_description = ExascaleDbStorageVaultSummary.AddMember("description", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_displayName = ExascaleDbStorageVaultSummary.AddMember("displayName", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_vmClusterArns = ExascaleDbStorageVaultSummary.AddMember("vmClusterArns", _ResourceArnList)
-
-	ExascaleDbStorageVaultSummary_vmClusterCount = ExascaleDbStorageVaultSummary.AddMember("vmClusterCount", smithyprelude.Integer)
-
-	ExascaleDbStorageVaultSummary_vmClusterIds = ExascaleDbStorageVaultSummary.AddMember("vmClusterIds", _ResourceIdList)
-
-	ExascaleDbStorageVaultSummary_exascaleDbStorageVaultArn = ExascaleDbStorageVaultSummary.AddMember("exascaleDbStorageVaultArn", _ResourceArn)
-
-	ExascaleDbStorageVaultSummary_highCapacityDatabaseStorage = ExascaleDbStorageVaultSummary.AddMember("highCapacityDatabaseStorage", ExascaleDbStorageDetails)
-
-	ExascaleDbStorageVaultSummary_isAutoscaleEnabled = ExascaleDbStorageVaultSummary.AddMember("isAutoscaleEnabled", smithyprelude.Boolean)
-
-	ExascaleDbStorageVaultSummary_ocid = ExascaleDbStorageVaultSummary.AddMember("ocid", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_ociResourceAnchorName = ExascaleDbStorageVaultSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_ociUrl = ExascaleDbStorageVaultSummary.AddMember("ociUrl", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_percentProgress = ExascaleDbStorageVaultSummary.AddMember("percentProgress", smithyprelude.Float)
-
-	ExascaleDbStorageVaultSummary_status = ExascaleDbStorageVaultSummary.AddMember("status", ResourceStatus)
-
-	ExascaleDbStorageVaultSummary_statusReason = ExascaleDbStorageVaultSummary.AddMember("statusReason", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_timeZone = ExascaleDbStorageVaultSummary.AddMember("timeZone", smithyprelude.String)
-
-	ExascaleDbStorageVaultSummary_vaultType = ExascaleDbStorageVaultSummary.AddMember("vaultType", ExascaleDbStorageVaultType)
-
-	_ExascaleDbStorageVaultList_member = _ExascaleDbStorageVaultList.AddMember("member", ExascaleDbStorageVaultSummary)
-
-	HardwareType_COMPUTE = HardwareType.AddMember("COMPUTE", smithyprelude.Unit)
-
-	HardwareType_CELL = HardwareType.AddMember("CELL", smithyprelude.Unit)
-
-	FlexComponentSummary_availableCoreCount = FlexComponentSummary.AddMember("availableCoreCount", smithyprelude.Integer)
-
-	FlexComponentSummary_availableDbStorageInGBs = FlexComponentSummary.AddMember("availableDbStorageInGBs", smithyprelude.Integer)
-
-	FlexComponentSummary_availableLocalStorageInGBs = FlexComponentSummary.AddMember("availableLocalStorageInGBs", smithyprelude.Integer)
-
-	FlexComponentSummary_availableMemoryInGBs = FlexComponentSummary.AddMember("availableMemoryInGBs", smithyprelude.Integer)
-
-	FlexComponentSummary_computeModel = FlexComponentSummary.AddMember("computeModel", ComputeModel)
-
-	FlexComponentSummary_descriptionSummary = FlexComponentSummary.AddMember("descriptionSummary", smithyprelude.String)
-
-	FlexComponentSummary_hardwareType = FlexComponentSummary.AddMember("hardwareType", HardwareType)
-
-	FlexComponentSummary_minimumCoreCount = FlexComponentSummary.AddMember("minimumCoreCount", smithyprelude.Integer)
-
-	FlexComponentSummary_name = FlexComponentSummary.AddMember("name", smithyprelude.String)
-
-	FlexComponentSummary_runtimeMinimumCoreCount = FlexComponentSummary.AddMember("runtimeMinimumCoreCount", smithyprelude.Integer)
-
-	FlexComponentSummary_shape = FlexComponentSummary.AddMember("shape", smithyprelude.String)
-
-	_FlexComponentList_member = _FlexComponentList.AddMember("member", FlexComponentSummary)
-
-	GiMinorVersionSummary_version = GiMinorVersionSummary.AddMember("version", smithyprelude.String)
-
-	GiMinorVersionSummary_gridImageId = GiMinorVersionSummary.AddMember("gridImageId", smithyprelude.String)
-
-	_GiMinorVersionList_member = _GiMinorVersionList.AddMember("member", GiMinorVersionSummary)
-
-	GiVersionSummary_version = GiVersionSummary.AddMember("version", smithyprelude.String)
-
-	_GiVersionList_member = _GiVersionList.AddMember("member", GiVersionSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	KmsAccess_status = KmsAccess.AddMember("status", ManagedResourceStatus)
-
-	KmsAccess_ipv4Addresses = KmsAccess.AddMember("ipv4Addresses", _StringList)
-
-	KmsAccess_domainName = KmsAccess.AddMember("domainName", smithyprelude.String)
-
-	KmsAccess_kmsPolicyDocument = KmsAccess.AddMember("kmsPolicyDocument", smithyprelude.String)
-
-	ManagedS3BackupAccess_status = ManagedS3BackupAccess.AddMember("status", ManagedResourceStatus)
-
-	ManagedS3BackupAccess_ipv4Addresses = ManagedS3BackupAccess.AddMember("ipv4Addresses", _StringList)
-
-	VpcEndpointType_SERVICENETWORK = VpcEndpointType.AddMember("SERVICENETWORK", smithyprelude.Unit)
-
-	ServiceNetworkEndpoint_vpcEndpointId = ServiceNetworkEndpoint.AddMember("vpcEndpointId", smithyprelude.String)
-
-	ServiceNetworkEndpoint_vpcEndpointType = ServiceNetworkEndpoint.AddMember("vpcEndpointType", VpcEndpointType)
-
-	ZeroEtlAccess_status = ZeroEtlAccess.AddMember("status", ManagedResourceStatus)
-
-	ZeroEtlAccess_cidr = ZeroEtlAccess.AddMember("cidr", smithyprelude.String)
-
-	S3Access_status = S3Access.AddMember("status", ManagedResourceStatus)
-
-	S3Access_ipv4Addresses = S3Access.AddMember("ipv4Addresses", _StringList)
-
-	S3Access_domainName = S3Access.AddMember("domainName", smithyprelude.String)
-
-	S3Access_s3PolicyDocument = S3Access.AddMember("s3PolicyDocument", smithyprelude.String)
-
-	StsAccess_status = StsAccess.AddMember("status", ManagedResourceStatus)
-
-	StsAccess_ipv4Addresses = StsAccess.AddMember("ipv4Addresses", _StringList)
-
-	StsAccess_domainName = StsAccess.AddMember("domainName", smithyprelude.String)
-
-	StsAccess_stsPolicyDocument = StsAccess.AddMember("stsPolicyDocument", smithyprelude.String)
-
-	ManagedServices_serviceNetworkArn = ManagedServices.AddMember("serviceNetworkArn", _ResourceArn)
-
-	ManagedServices_resourceGatewayArn = ManagedServices.AddMember("resourceGatewayArn", _ResourceArn)
-
-	ManagedServices_managedServicesIpv4Cidrs = ManagedServices.AddMember("managedServicesIpv4Cidrs", _StringList)
-
-	ManagedServices_serviceNetworkEndpoint = ManagedServices.AddMember("serviceNetworkEndpoint", ServiceNetworkEndpoint)
-
-	ManagedServices_managedS3BackupAccess = ManagedServices.AddMember("managedS3BackupAccess", ManagedS3BackupAccess)
-
-	ManagedServices_zeroEtlAccess = ManagedServices.AddMember("zeroEtlAccess", ZeroEtlAccess)
-
-	ManagedServices_s3Access = ManagedServices.AddMember("s3Access", S3Access)
-
-	ManagedServices_stsAccess = ManagedServices.AddMember("stsAccess", StsAccess)
-
-	ManagedServices_kmsAccess = ManagedServices.AddMember("kmsAccess", KmsAccess)
-
-	ManagedServices_crossRegionS3RestoreSourcesAccess = ManagedServices.AddMember("crossRegionS3RestoreSourcesAccess", _CrossRegionS3RestoreSourcesAccessList)
-
-	OciAwsIntegration_KmsTde = OciAwsIntegration.AddMember("KmsTde", smithyprelude.Unit)
-
-	OciAwsIntegration_SecretsManager = OciAwsIntegration.AddMember("SecretsManager", smithyprelude.Unit)
-
-	OciDnsForwardingConfig_domainName = OciDnsForwardingConfig.AddMember("domainName", smithyprelude.String)
-
-	OciDnsForwardingConfig_ociDnsListenerIp = OciDnsForwardingConfig.AddMember("ociDnsListenerIp", smithyprelude.String)
-
-	_OciDnsForwardingConfigList_member = _OciDnsForwardingConfigList.AddMember("member", OciDnsForwardingConfig)
-
-	OciIamRoleStatus_PROVISIONING = OciIamRoleStatus.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	OciIamRoleStatus_AVAILABLE = OciIamRoleStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	OciIamRoleStatus_PROVISION_FAILED = OciIamRoleStatus.AddMember("PROVISION_FAILED", smithyprelude.Unit)
-
-	OciIamRoleStatus_TERMINATING = OciIamRoleStatus.AddMember("TERMINATING", smithyprelude.Unit)
-
-	OciIamRoleStatus_TERMINATE_FAILED = OciIamRoleStatus.AddMember("TERMINATE_FAILED", smithyprelude.Unit)
-
-	OciIamRole_iamRoleArn = OciIamRole.AddMember("iamRoleArn", _RoleArn)
-
-	OciIamRole_awsIntegration = OciIamRole.AddMember("awsIntegration", OciAwsIntegration)
-
-	OciIamRole_status = OciIamRole.AddMember("status", OciIamRoleStatus)
-
-	OciIamRole_statusReason = OciIamRole.AddMember("statusReason", smithyprelude.String)
-
-	_OciIamRoleList_member = _OciIamRoleList.AddMember("member", OciIamRole)
-
-	OciIdentityDomain_ociIdentityDomainId = OciIdentityDomain.AddMember("ociIdentityDomainId", smithyprelude.String)
-
-	OciIdentityDomain_ociIdentityDomainResourceUrl = OciIdentityDomain.AddMember("ociIdentityDomainResourceUrl", smithyprelude.String)
-
-	OciIdentityDomain_ociIdentityDomainUrl = OciIdentityDomain.AddMember("ociIdentityDomainUrl", smithyprelude.String)
-
-	OciIdentityDomain_status = OciIdentityDomain.AddMember("status", ResourceStatus)
-
-	OciIdentityDomain_statusReason = OciIdentityDomain.AddMember("statusReason", smithyprelude.String)
-
-	OciIdentityDomain_accountSetupCloudFormationUrl = OciIdentityDomain.AddMember("accountSetupCloudFormationUrl", smithyprelude.String)
-
-	OciOnboardingStatus_NOT_STARTED = OciOnboardingStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	OciOnboardingStatus_PENDING_LINK_GENERATION = OciOnboardingStatus.AddMember("PENDING_LINK_GENERATION", smithyprelude.Unit)
-
-	OciOnboardingStatus_PENDING_CUSTOMER_ACTION = OciOnboardingStatus.AddMember("PENDING_CUSTOMER_ACTION", smithyprelude.Unit)
-
-	OciOnboardingStatus_PENDING_INITIALIZATION = OciOnboardingStatus.AddMember("PENDING_INITIALIZATION", smithyprelude.Unit)
-
-	OciOnboardingStatus_ACTIVATING = OciOnboardingStatus.AddMember("ACTIVATING", smithyprelude.Unit)
-
-	OciOnboardingStatus_ACTIVE_IN_HOME_REGION = OciOnboardingStatus.AddMember("ACTIVE_IN_HOME_REGION", smithyprelude.Unit)
-
-	OciOnboardingStatus_ACTIVE = OciOnboardingStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	OciOnboardingStatus_ACTIVE_LIMITED = OciOnboardingStatus.AddMember("ACTIVE_LIMITED", smithyprelude.Unit)
-
-	OciOnboardingStatus_FAILED = OciOnboardingStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	OciOnboardingStatus_PUBLIC_OFFER_UNSUPPORTED = OciOnboardingStatus.AddMember("PUBLIC_OFFER_UNSUPPORTED", smithyprelude.Unit)
-
-	OciOnboardingStatus_SUSPENDED = OciOnboardingStatus.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	OciOnboardingStatus_CANCELED = OciOnboardingStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	OdbNetwork_odbNetworkId = OdbNetwork.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	OdbNetwork_displayName = OdbNetwork.AddMember("displayName", smithyprelude.String)
-
-	OdbNetwork_status = OdbNetwork.AddMember("status", ResourceStatus)
-
-	OdbNetwork_statusReason = OdbNetwork.AddMember("statusReason", smithyprelude.String)
-
-	OdbNetwork_odbNetworkArn = OdbNetwork.AddMember("odbNetworkArn", smithyprelude.String)
-
-	OdbNetwork_availabilityZone = OdbNetwork.AddMember("availabilityZone", smithyprelude.String)
-
-	OdbNetwork_availabilityZoneId = OdbNetwork.AddMember("availabilityZoneId", smithyprelude.String)
-
-	OdbNetwork_clientSubnetCidr = OdbNetwork.AddMember("clientSubnetCidr", smithyprelude.String)
-
-	OdbNetwork_backupSubnetCidr = OdbNetwork.AddMember("backupSubnetCidr", smithyprelude.String)
-
-	OdbNetwork_customDomainName = OdbNetwork.AddMember("customDomainName", smithyprelude.String)
-
-	OdbNetwork_defaultDnsPrefix = OdbNetwork.AddMember("defaultDnsPrefix", smithyprelude.String)
-
-	OdbNetwork_peeredCidrs = OdbNetwork.AddMember("peeredCidrs", _StringList)
-
-	OdbNetwork_ociNetworkAnchorId = OdbNetwork.AddMember("ociNetworkAnchorId", smithyprelude.String)
-
-	OdbNetwork_ociNetworkAnchorUrl = OdbNetwork.AddMember("ociNetworkAnchorUrl", smithyprelude.String)
-
-	OdbNetwork_ociResourceAnchorName = OdbNetwork.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	OdbNetwork_ociVcnId = OdbNetwork.AddMember("ociVcnId", smithyprelude.String)
-
-	OdbNetwork_ociVcnUrl = OdbNetwork.AddMember("ociVcnUrl", smithyprelude.String)
-
-	OdbNetwork_ociDnsForwardingConfigs = OdbNetwork.AddMember("ociDnsForwardingConfigs", _OciDnsForwardingConfigList)
-
-	OdbNetwork_createdAt = OdbNetwork.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	OdbNetwork_percentProgress = OdbNetwork.AddMember("percentProgress", smithyprelude.Float)
-
-	OdbNetwork_managedServices = OdbNetwork.AddMember("managedServices", ManagedServices)
-
-	OdbNetwork_ec2PlacementGroupIds = OdbNetwork.AddMember("ec2PlacementGroupIds", _ResourceIdList)
-
-	OdbNetworkSummary_odbNetworkId = OdbNetworkSummary.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	OdbNetworkSummary_displayName = OdbNetworkSummary.AddMember("displayName", smithyprelude.String)
-
-	OdbNetworkSummary_status = OdbNetworkSummary.AddMember("status", ResourceStatus)
-
-	OdbNetworkSummary_statusReason = OdbNetworkSummary.AddMember("statusReason", smithyprelude.String)
-
-	OdbNetworkSummary_odbNetworkArn = OdbNetworkSummary.AddMember("odbNetworkArn", smithyprelude.String)
-
-	OdbNetworkSummary_availabilityZone = OdbNetworkSummary.AddMember("availabilityZone", smithyprelude.String)
-
-	OdbNetworkSummary_availabilityZoneId = OdbNetworkSummary.AddMember("availabilityZoneId", smithyprelude.String)
-
-	OdbNetworkSummary_clientSubnetCidr = OdbNetworkSummary.AddMember("clientSubnetCidr", smithyprelude.String)
-
-	OdbNetworkSummary_backupSubnetCidr = OdbNetworkSummary.AddMember("backupSubnetCidr", smithyprelude.String)
-
-	OdbNetworkSummary_customDomainName = OdbNetworkSummary.AddMember("customDomainName", smithyprelude.String)
-
-	OdbNetworkSummary_defaultDnsPrefix = OdbNetworkSummary.AddMember("defaultDnsPrefix", smithyprelude.String)
-
-	OdbNetworkSummary_peeredCidrs = OdbNetworkSummary.AddMember("peeredCidrs", _StringList)
-
-	OdbNetworkSummary_ociNetworkAnchorId = OdbNetworkSummary.AddMember("ociNetworkAnchorId", smithyprelude.String)
-
-	OdbNetworkSummary_ociNetworkAnchorUrl = OdbNetworkSummary.AddMember("ociNetworkAnchorUrl", smithyprelude.String)
-
-	OdbNetworkSummary_ociResourceAnchorName = OdbNetworkSummary.AddMember("ociResourceAnchorName", smithyprelude.String)
-
-	OdbNetworkSummary_ociVcnId = OdbNetworkSummary.AddMember("ociVcnId", smithyprelude.String)
-
-	OdbNetworkSummary_ociVcnUrl = OdbNetworkSummary.AddMember("ociVcnUrl", smithyprelude.String)
-
-	OdbNetworkSummary_ociDnsForwardingConfigs = OdbNetworkSummary.AddMember("ociDnsForwardingConfigs", _OciDnsForwardingConfigList)
-
-	OdbNetworkSummary_createdAt = OdbNetworkSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	OdbNetworkSummary_percentProgress = OdbNetworkSummary.AddMember("percentProgress", smithyprelude.Float)
-
-	OdbNetworkSummary_managedServices = OdbNetworkSummary.AddMember("managedServices", ManagedServices)
-
-	OdbNetworkSummary_ec2PlacementGroupIds = OdbNetworkSummary.AddMember("ec2PlacementGroupIds", _ResourceIdList)
-
-	_OdbNetworkList_member = _OdbNetworkList.AddMember("member", OdbNetworkSummary)
-
-	_PeeredCidrList_member = _PeeredCidrList.AddMember("member", _PeeredCidr)
-
-	OdbPeeringConnection_odbPeeringConnectionId = OdbPeeringConnection.AddMember("odbPeeringConnectionId", _ResourceIdOrArn)
-
-	OdbPeeringConnection_displayName = OdbPeeringConnection.AddMember("displayName", smithyprelude.String)
-
-	OdbPeeringConnection_status = OdbPeeringConnection.AddMember("status", ResourceStatus)
-
-	OdbPeeringConnection_statusReason = OdbPeeringConnection.AddMember("statusReason", smithyprelude.String)
-
-	OdbPeeringConnection_odbPeeringConnectionArn = OdbPeeringConnection.AddMember("odbPeeringConnectionArn", smithyprelude.String)
-
-	OdbPeeringConnection_odbNetworkArn = OdbPeeringConnection.AddMember("odbNetworkArn", smithyprelude.String)
-
-	OdbPeeringConnection_peerNetworkArn = OdbPeeringConnection.AddMember("peerNetworkArn", smithyprelude.String)
-
-	OdbPeeringConnection_odbPeeringConnectionType = OdbPeeringConnection.AddMember("odbPeeringConnectionType", smithyprelude.String)
-
-	OdbPeeringConnection_peerNetworkCidrs = OdbPeeringConnection.AddMember("peerNetworkCidrs", _PeeredCidrList)
-
-	OdbPeeringConnection_createdAt = OdbPeeringConnection.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	OdbPeeringConnection_percentProgress = OdbPeeringConnection.AddMember("percentProgress", smithyprelude.Float)
-
-	OdbPeeringConnectionSummary_odbPeeringConnectionId = OdbPeeringConnectionSummary.AddMember("odbPeeringConnectionId", _ResourceIdOrArn)
-
-	OdbPeeringConnectionSummary_displayName = OdbPeeringConnectionSummary.AddMember("displayName", smithyprelude.String)
-
-	OdbPeeringConnectionSummary_status = OdbPeeringConnectionSummary.AddMember("status", ResourceStatus)
-
-	OdbPeeringConnectionSummary_statusReason = OdbPeeringConnectionSummary.AddMember("statusReason", smithyprelude.String)
-
-	OdbPeeringConnectionSummary_odbPeeringConnectionArn = OdbPeeringConnectionSummary.AddMember("odbPeeringConnectionArn", smithyprelude.String)
-
-	OdbPeeringConnectionSummary_odbNetworkArn = OdbPeeringConnectionSummary.AddMember("odbNetworkArn", smithyprelude.String)
-
-	OdbPeeringConnectionSummary_peerNetworkArn = OdbPeeringConnectionSummary.AddMember("peerNetworkArn", smithyprelude.String)
-
-	OdbPeeringConnectionSummary_odbPeeringConnectionType = OdbPeeringConnectionSummary.AddMember("odbPeeringConnectionType", smithyprelude.String)
-
-	OdbPeeringConnectionSummary_peerNetworkCidrs = OdbPeeringConnectionSummary.AddMember("peerNetworkCidrs", _PeeredCidrList)
-
-	OdbPeeringConnectionSummary_createdAt = OdbPeeringConnectionSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	OdbPeeringConnectionSummary_percentProgress = OdbPeeringConnectionSummary.AddMember("percentProgress", smithyprelude.Float)
-
-	_OdbPeeringConnectionList_member = _OdbPeeringConnectionList.AddMember("member", OdbPeeringConnectionSummary)
-
-	_PeerNetworkRouteTableIdList_member = _PeerNetworkRouteTableIdList.AddMember("member", _PeerNetworkRouteTableId)
-
-	PointInTimeRestoreConfiguration_sourceAutonomousDatabaseId = PointInTimeRestoreConfiguration.AddMember("sourceAutonomousDatabaseId", _ResourceIdOrArn)
-
-	PointInTimeRestoreConfiguration_cloneType = PointInTimeRestoreConfiguration.AddMember("cloneType", CloneType)
-
-	PointInTimeRestoreConfiguration_timestamp = PointInTimeRestoreConfiguration.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	PointInTimeRestoreConfiguration_useLatestAvailableBackupTimestamp = PointInTimeRestoreConfiguration.AddMember("useLatestAvailableBackupTimestamp", smithyprelude.Boolean)
-
-	PointInTimeRestoreConfiguration_cloneTableSpaceList = PointInTimeRestoreConfiguration.AddMember("cloneTableSpaceList", _IntegerList)
-
-	_RequestTagMap_key = _RequestTagMap.AddMember("key", _TagKey)
-
-	_RequestTagMap_value = _RequestTagMap.AddMember("value", _TagValue)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	_ResponseTagMap_key = _ResponseTagMap.AddMember("key", _TagKey)
-
-	_ResponseTagMap_value = _ResponseTagMap.AddMember("value", _TagValue)
-
-	RestoreFromBackupConfiguration_autonomousDatabaseBackupId = RestoreFromBackupConfiguration.AddMember("autonomousDatabaseBackupId", _ResourceIdOrArn)
-
-	RestoreFromBackupConfiguration_cloneType = RestoreFromBackupConfiguration.AddMember("cloneType", CloneType)
-
-	RestoreFromBackupConfiguration_cloneTableSpaceList = RestoreFromBackupConfiguration.AddMember("cloneTableSpaceList", _IntegerList)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	SourceConfiguration_databaseClone = SourceConfiguration.AddMember("databaseClone", DatabaseCloneConfiguration)
-
-	SourceConfiguration_restoreFromBackup = SourceConfiguration.AddMember("restoreFromBackup", RestoreFromBackupConfiguration)
-
-	SourceConfiguration_pointInTimeRestore = SourceConfiguration.AddMember("pointInTimeRestore", PointInTimeRestoreConfiguration)
-
-	SourceConfiguration_crossRegionDataGuard = SourceConfiguration.AddMember("crossRegionDataGuard", CrossRegionDataGuardConfiguration)
-
-	SourceConfiguration_crossRegionDisasterRecovery = SourceConfiguration.AddMember("crossRegionDisasterRecovery", CrossRegionDisasterRecoveryConfiguration)
-
-	SourceConfiguration_cloneToRefreshable = SourceConfiguration.AddMember("cloneToRefreshable", CloneToRefreshableConfiguration)
-
-	SourceType_NONE = SourceType.AddMember("NONE", smithyprelude.Unit)
-
-	SourceType_DATABASE = SourceType.AddMember("DATABASE", smithyprelude.Unit)
-
-	SourceType_BACKUP_FROM_ID = SourceType.AddMember("BACKUP_FROM_ID", smithyprelude.Unit)
-
-	SourceType_BACKUP_FROM_TIMESTAMP = SourceType.AddMember("BACKUP_FROM_TIMESTAMP", smithyprelude.Unit)
-
-	SourceType_CROSS_REGION_DATAGUARD = SourceType.AddMember("CROSS_REGION_DATAGUARD", smithyprelude.Unit)
-
-	SourceType_CROSS_REGION_DISASTER_RECOVERY = SourceType.AddMember("CROSS_REGION_DISASTER_RECOVERY", smithyprelude.Unit)
-
-	SourceType_CLONE_TO_REFRESHABLE = SourceType.AddMember("CLONE_TO_REFRESHABLE", smithyprelude.Unit)
-
-	SubscriptionError_errorMessage = SubscriptionError.AddMember("errorMessage", smithyprelude.String)
-
-	_SubscriptionErrors_member = _SubscriptionErrors.AddMember("member", SubscriptionError)
-
-	SystemVersionSummary_giVersion = SystemVersionSummary.AddMember("giVersion", smithyprelude.String)
-
-	SystemVersionSummary_shape = SystemVersionSummary.AddMember("shape", smithyprelude.String)
-
-	SystemVersionSummary_systemVersions = SystemVersionSummary.AddMember("systemVersions", _StringList)
-
-	_SystemVersionList_member = _SystemVersionList.AddMember("member", SystemVersionSummary)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	TransportableTablespace_ttsBundleUrl = TransportableTablespace.AddMember("ttsBundleUrl", smithyprelude.String)
-
-	UpdateAction_ROLLING_APPLY = UpdateAction.AddMember("ROLLING_APPLY", smithyprelude.Unit)
-
-	UpdateAction_NON_ROLLING_APPLY = UpdateAction.AddMember("NON_ROLLING_APPLY", smithyprelude.Unit)
-
-	UpdateAction_PRECHECK = UpdateAction.AddMember("PRECHECK", smithyprelude.Unit)
-
-	UpdateAction_ROLLBACK = UpdateAction.AddMember("ROLLBACK", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	WalletPasswordSourceConfigurationInput_customerManagedAwsSecret = WalletPasswordSourceConfigurationInput.AddMember("customerManagedAwsSecret", CustomerManagedAwsSecretConfigurationInput)
-
-	WalletType_REGIONAL = WalletType.AddMember("REGIONAL", smithyprelude.Unit)
-
-	WalletType_INSTANCE = WalletType.AddMember("INSTANCE", smithyprelude.Unit)
-
-	AcceptMarketplaceRegistrationInput_marketplaceRegistrationToken = AcceptMarketplaceRegistrationInput.AddMember("marketplaceRegistrationToken", smithyprelude.String)
-
-	AssociateIamRoleToResourceInput_iamRoleArn = AssociateIamRoleToResourceInput.AddMember("iamRoleArn", _RoleArn)
-
-	AssociateIamRoleToResourceInput_awsIntegration = AssociateIamRoleToResourceInput.AddMember("awsIntegration", SupportedAwsIntegration)
-
-	AssociateIamRoleToResourceInput_resourceArn = AssociateIamRoleToResourceInput.AddMember("resourceArn", _Arn)
-
-	AssociateVirtualMachinesToExadbVmClusterInput_exadbVmClusterId = AssociateVirtualMachinesToExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
-
-	AssociateVirtualMachinesToExadbVmClusterInput_desiredNodeCount = AssociateVirtualMachinesToExadbVmClusterInput.AddMember("desiredNodeCount", smithyprelude.Integer)
-
-	AssociateVirtualMachinesToExadbVmClusterOutput_displayName = AssociateVirtualMachinesToExadbVmClusterOutput.AddMember("displayName", smithyprelude.String)
-
-	AssociateVirtualMachinesToExadbVmClusterOutput_status = AssociateVirtualMachinesToExadbVmClusterOutput.AddMember("status", ResourceStatus)
-
-	AssociateVirtualMachinesToExadbVmClusterOutput_statusReason = AssociateVirtualMachinesToExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
-
-	AssociateVirtualMachinesToExadbVmClusterOutput_exadbVmClusterId = AssociateVirtualMachinesToExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
-
-	CreateAutonomousDatabaseBackupInput_autonomousDatabaseId = CreateAutonomousDatabaseBackupInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	CreateAutonomousDatabaseBackupInput_displayName = CreateAutonomousDatabaseBackupInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateAutonomousDatabaseBackupInput_retentionPeriodInDays = CreateAutonomousDatabaseBackupInput.AddMember("retentionPeriodInDays", smithyprelude.Integer)
-
-	CreateAutonomousDatabaseBackupInput_clientToken = CreateAutonomousDatabaseBackupInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateAutonomousDatabaseBackupInput_tags = CreateAutonomousDatabaseBackupInput.AddMember("tags", _RequestTagMap)
-
-	CreateAutonomousDatabaseBackupOutput_displayName = CreateAutonomousDatabaseBackupOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateAutonomousDatabaseBackupOutput_status = CreateAutonomousDatabaseBackupOutput.AddMember("status", ResourceStatus)
-
-	CreateAutonomousDatabaseBackupOutput_statusReason = CreateAutonomousDatabaseBackupOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId = CreateAutonomousDatabaseBackupOutput.AddMember("autonomousDatabaseBackupId", smithyprelude.String)
-
-	CreateAutonomousDatabaseInput_odbNetworkId = CreateAutonomousDatabaseInput.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CreateAutonomousDatabaseInput_displayName = CreateAutonomousDatabaseInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateAutonomousDatabaseInput_dbName = CreateAutonomousDatabaseInput.AddMember("dbName", smithyprelude.String)
-
-	CreateAutonomousDatabaseInput_adminPassword = CreateAutonomousDatabaseInput.AddMember("adminPassword", _SensitiveString)
-
-	CreateAutonomousDatabaseInput_computeCount = CreateAutonomousDatabaseInput.AddMember("computeCount", smithyprelude.Double)
-
-	CreateAutonomousDatabaseInput_dataStorageSizeInTBs = CreateAutonomousDatabaseInput.AddMember("dataStorageSizeInTBs", smithyprelude.Integer)
-
-	CreateAutonomousDatabaseInput_dataStorageSizeInGBs = CreateAutonomousDatabaseInput.AddMember("dataStorageSizeInGBs", smithyprelude.Integer)
-
-	CreateAutonomousDatabaseInput_dbWorkload = CreateAutonomousDatabaseInput.AddMember("dbWorkload", DbWorkload)
-
-	CreateAutonomousDatabaseInput_isAutoScalingEnabled = CreateAutonomousDatabaseInput.AddMember("isAutoScalingEnabled", smithyprelude.Boolean)
-
-	CreateAutonomousDatabaseInput_isAutoScalingForStorageEnabled = CreateAutonomousDatabaseInput.AddMember("isAutoScalingForStorageEnabled", smithyprelude.Boolean)
-
-	CreateAutonomousDatabaseInput_licenseModel = CreateAutonomousDatabaseInput.AddMember("licenseModel", LicenseModel)
-
-	CreateAutonomousDatabaseInput_characterSet = CreateAutonomousDatabaseInput.AddMember("characterSet", smithyprelude.String)
-
-	CreateAutonomousDatabaseInput_ncharacterSet = CreateAutonomousDatabaseInput.AddMember("ncharacterSet", smithyprelude.String)
-
-	CreateAutonomousDatabaseInput_dbVersion = CreateAutonomousDatabaseInput.AddMember("dbVersion", smithyprelude.String)
-
-	CreateAutonomousDatabaseInput_databaseEdition = CreateAutonomousDatabaseInput.AddMember("databaseEdition", DatabaseEdition)
-
-	CreateAutonomousDatabaseInput_standbyAllowlistedIpsSource = CreateAutonomousDatabaseInput.AddMember("standbyAllowlistedIpsSource", StandbyAllowlistedIpsSource)
-
-	CreateAutonomousDatabaseInput_autonomousMaintenanceScheduleType = CreateAutonomousDatabaseInput.AddMember("autonomousMaintenanceScheduleType", AutonomousMaintenanceScheduleType)
-
-	CreateAutonomousDatabaseInput_backupRetentionPeriodInDays = CreateAutonomousDatabaseInput.AddMember("backupRetentionPeriodInDays", smithyprelude.Integer)
-
-	CreateAutonomousDatabaseInput_byolComputeCountLimit = CreateAutonomousDatabaseInput.AddMember("byolComputeCountLimit", smithyprelude.Double)
-
-	CreateAutonomousDatabaseInput_cpuCoreCount = CreateAutonomousDatabaseInput.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	CreateAutonomousDatabaseInput_customerContactsToSendToOCI = CreateAutonomousDatabaseInput.AddMember("customerContactsToSendToOCI", _CustomerContacts)
-
-	CreateAutonomousDatabaseInput_privateEndpointIp = CreateAutonomousDatabaseInput.AddMember("privateEndpointIp", smithyprelude.String)
-
-	CreateAutonomousDatabaseInput_privateEndpointLabel = CreateAutonomousDatabaseInput.AddMember("privateEndpointLabel", smithyprelude.String)
-
-	CreateAutonomousDatabaseInput_resourcePoolLeaderId = CreateAutonomousDatabaseInput.AddMember("resourcePoolLeaderId", _ResourceIdOrArn)
-
-	CreateAutonomousDatabaseInput_resourcePoolSummary = CreateAutonomousDatabaseInput.AddMember("resourcePoolSummary", ResourcePoolSummary)
-
-	CreateAutonomousDatabaseInput_scheduledOperations = CreateAutonomousDatabaseInput.AddMember("scheduledOperations", _ScheduledOperationDetailsList)
-
-	CreateAutonomousDatabaseInput_standbyAllowlistedIps = CreateAutonomousDatabaseInput.AddMember("standbyAllowlistedIps", _StringList)
-
-	CreateAutonomousDatabaseInput_allowlistedIps = CreateAutonomousDatabaseInput.AddMember("allowlistedIps", _StringList)
-
-	CreateAutonomousDatabaseInput_transportableTablespace = CreateAutonomousDatabaseInput.AddMember("transportableTablespace", TransportableTablespace)
-
-	CreateAutonomousDatabaseInput_isBackupRetentionLocked = CreateAutonomousDatabaseInput.AddMember("isBackupRetentionLocked", smithyprelude.Boolean)
-
-	CreateAutonomousDatabaseInput_isLocalDataGuardEnabled = CreateAutonomousDatabaseInput.AddMember("isLocalDataGuardEnabled", smithyprelude.Boolean)
-
-	CreateAutonomousDatabaseInput_isMtlsConnectionRequired = CreateAutonomousDatabaseInput.AddMember("isMtlsConnectionRequired", smithyprelude.Boolean)
-
-	CreateAutonomousDatabaseInput_dbToolsDetails = CreateAutonomousDatabaseInput.AddMember("dbToolsDetails", _DatabaseToolList)
-
-	CreateAutonomousDatabaseInput_source = CreateAutonomousDatabaseInput.AddMember("source", SourceType)
-
-	CreateAutonomousDatabaseInput_sourceConfiguration = CreateAutonomousDatabaseInput.AddMember("sourceConfiguration", SourceConfiguration)
-
-	CreateAutonomousDatabaseInput_encryptionKeyProvider = CreateAutonomousDatabaseInput.AddMember("encryptionKeyProvider", EncryptionKeyProviderInput)
-
-	CreateAutonomousDatabaseInput_encryptionKeyConfiguration = CreateAutonomousDatabaseInput.AddMember("encryptionKeyConfiguration", EncryptionKeyConfigurationInput)
-
-	CreateAutonomousDatabaseInput_adminPasswordSource = CreateAutonomousDatabaseInput.AddMember("adminPasswordSource", AdminPasswordSource)
-
-	CreateAutonomousDatabaseInput_adminPasswordSourceConfiguration = CreateAutonomousDatabaseInput.AddMember("adminPasswordSourceConfiguration", AdminPasswordSourceConfigurationInput)
-
-	CreateAutonomousDatabaseInput_clientToken = CreateAutonomousDatabaseInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateAutonomousDatabaseInput_tags = CreateAutonomousDatabaseInput.AddMember("tags", _RequestTagMap)
-
-	CreateAutonomousDatabaseOutput_autonomousDatabaseId = CreateAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	CreateAutonomousDatabaseOutput_displayName = CreateAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateAutonomousDatabaseOutput_status = CreateAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	CreateAutonomousDatabaseOutput_statusReason = CreateAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateAutonomousDatabaseWalletInput_autonomousDatabaseId = CreateAutonomousDatabaseWalletInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	CreateAutonomousDatabaseWalletInput_walletType = CreateAutonomousDatabaseWalletInput.AddMember("walletType", WalletType)
-
-	CreateAutonomousDatabaseWalletInput_password = CreateAutonomousDatabaseWalletInput.AddMember("password", _SensitiveString)
-
-	CreateAutonomousDatabaseWalletInput_passwordSource = CreateAutonomousDatabaseWalletInput.AddMember("passwordSource", WalletPasswordSource)
-
-	CreateAutonomousDatabaseWalletInput_passwordSourceConfiguration = CreateAutonomousDatabaseWalletInput.AddMember("passwordSourceConfiguration", WalletPasswordSourceConfigurationInput)
-
-	CreateAutonomousDatabaseWalletInput_clientToken = CreateAutonomousDatabaseWalletInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateAutonomousDatabaseWalletOutput_autonomousDatabaseWalletFile = CreateAutonomousDatabaseWalletOutput.AddMember("autonomousDatabaseWalletFile", _AutonomousDatabaseWalletFile)
-
-	CreateCloudAutonomousVmClusterInput_cloudExadataInfrastructureId = CreateCloudAutonomousVmClusterInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	CreateCloudAutonomousVmClusterInput_odbNetworkId = CreateCloudAutonomousVmClusterInput.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CreateCloudAutonomousVmClusterInput_displayName = CreateCloudAutonomousVmClusterInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateCloudAutonomousVmClusterInput_clientToken = CreateCloudAutonomousVmClusterInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateCloudAutonomousVmClusterInput_autonomousDataStorageSizeInTBs = CreateCloudAutonomousVmClusterInput.AddMember("autonomousDataStorageSizeInTBs", smithyprelude.Double)
-
-	CreateCloudAutonomousVmClusterInput_cpuCoreCountPerNode = CreateCloudAutonomousVmClusterInput.AddMember("cpuCoreCountPerNode", smithyprelude.Integer)
-
-	CreateCloudAutonomousVmClusterInput_dbServers = CreateCloudAutonomousVmClusterInput.AddMember("dbServers", _StringList)
-
-	CreateCloudAutonomousVmClusterInput_description = CreateCloudAutonomousVmClusterInput.AddMember("description", smithyprelude.String)
-
-	CreateCloudAutonomousVmClusterInput_isMtlsEnabledVmCluster = CreateCloudAutonomousVmClusterInput.AddMember("isMtlsEnabledVmCluster", smithyprelude.Boolean)
-
-	CreateCloudAutonomousVmClusterInput_licenseModel = CreateCloudAutonomousVmClusterInput.AddMember("licenseModel", LicenseModel)
-
-	CreateCloudAutonomousVmClusterInput_maintenanceWindow = CreateCloudAutonomousVmClusterInput.AddMember("maintenanceWindow", MaintenanceWindow)
-
-	CreateCloudAutonomousVmClusterInput_memoryPerOracleComputeUnitInGBs = CreateCloudAutonomousVmClusterInput.AddMember("memoryPerOracleComputeUnitInGBs", smithyprelude.Integer)
-
-	CreateCloudAutonomousVmClusterInput_scanListenerPortNonTls = CreateCloudAutonomousVmClusterInput.AddMember("scanListenerPortNonTls", smithyprelude.Integer)
-
-	CreateCloudAutonomousVmClusterInput_scanListenerPortTls = CreateCloudAutonomousVmClusterInput.AddMember("scanListenerPortTls", smithyprelude.Integer)
-
-	CreateCloudAutonomousVmClusterInput_tags = CreateCloudAutonomousVmClusterInput.AddMember("tags", _RequestTagMap)
-
-	CreateCloudAutonomousVmClusterInput_timeZone = CreateCloudAutonomousVmClusterInput.AddMember("timeZone", smithyprelude.String)
-
-	CreateCloudAutonomousVmClusterInput_totalContainerDatabases = CreateCloudAutonomousVmClusterInput.AddMember("totalContainerDatabases", smithyprelude.Integer)
-
-	CreateCloudAutonomousVmClusterOutput_displayName = CreateCloudAutonomousVmClusterOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateCloudAutonomousVmClusterOutput_status = CreateCloudAutonomousVmClusterOutput.AddMember("status", ResourceStatus)
-
-	CreateCloudAutonomousVmClusterOutput_statusReason = CreateCloudAutonomousVmClusterOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateCloudAutonomousVmClusterOutput_cloudAutonomousVmClusterId = CreateCloudAutonomousVmClusterOutput.AddMember("cloudAutonomousVmClusterId", smithyprelude.String)
-
-	CreateCloudExadataInfrastructureInput_displayName = CreateCloudExadataInfrastructureInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateCloudExadataInfrastructureInput_shape = CreateCloudExadataInfrastructureInput.AddMember("shape", _GeneralInputString)
-
-	CreateCloudExadataInfrastructureInput_availabilityZone = CreateCloudExadataInfrastructureInput.AddMember("availabilityZone", smithyprelude.String)
-
-	CreateCloudExadataInfrastructureInput_availabilityZoneId = CreateCloudExadataInfrastructureInput.AddMember("availabilityZoneId", smithyprelude.String)
-
-	CreateCloudExadataInfrastructureInput_tags = CreateCloudExadataInfrastructureInput.AddMember("tags", _RequestTagMap)
-
-	CreateCloudExadataInfrastructureInput_computeCount = CreateCloudExadataInfrastructureInput.AddMember("computeCount", smithyprelude.Integer)
-
-	CreateCloudExadataInfrastructureInput_customerContactsToSendToOCI = CreateCloudExadataInfrastructureInput.AddMember("customerContactsToSendToOCI", _CustomerContacts)
-
-	CreateCloudExadataInfrastructureInput_maintenanceWindow = CreateCloudExadataInfrastructureInput.AddMember("maintenanceWindow", MaintenanceWindow)
-
-	CreateCloudExadataInfrastructureInput_storageCount = CreateCloudExadataInfrastructureInput.AddMember("storageCount", smithyprelude.Integer)
-
-	CreateCloudExadataInfrastructureInput_clientToken = CreateCloudExadataInfrastructureInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateCloudExadataInfrastructureInput_databaseServerType = CreateCloudExadataInfrastructureInput.AddMember("databaseServerType", _GeneralInputString)
-
-	CreateCloudExadataInfrastructureInput_storageServerType = CreateCloudExadataInfrastructureInput.AddMember("storageServerType", _GeneralInputString)
-
-	CreateCloudExadataInfrastructureOutput_displayName = CreateCloudExadataInfrastructureOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateCloudExadataInfrastructureOutput_status = CreateCloudExadataInfrastructureOutput.AddMember("status", ResourceStatus)
-
-	CreateCloudExadataInfrastructureOutput_statusReason = CreateCloudExadataInfrastructureOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = CreateCloudExadataInfrastructureOutput.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
-
-	CreateCloudVmClusterInput_cloudExadataInfrastructureId = CreateCloudVmClusterInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	CreateCloudVmClusterInput_exascaleDbStorageVaultId = CreateCloudVmClusterInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	CreateCloudVmClusterInput_vmFileSystemStorageType = CreateCloudVmClusterInput.AddMember("vmFileSystemStorageType", VmStorageType)
-
-	CreateCloudVmClusterInput_vmBackupStorageType = CreateCloudVmClusterInput.AddMember("vmBackupStorageType", VmStorageType)
-
-	CreateCloudVmClusterInput_fileSystemConfigurationDetails = CreateCloudVmClusterInput.AddMember("fileSystemConfigurationDetails", _FileSystemConfigurationDetailsList)
-
-	CreateCloudVmClusterInput_cpuCoreCount = CreateCloudVmClusterInput.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	CreateCloudVmClusterInput_displayName = CreateCloudVmClusterInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateCloudVmClusterInput_giVersion = CreateCloudVmClusterInput.AddMember("giVersion", smithyprelude.String)
-
-	CreateCloudVmClusterInput_hostname = CreateCloudVmClusterInput.AddMember("hostname", _Hostname)
-
-	CreateCloudVmClusterInput_sshPublicKeys = CreateCloudVmClusterInput.AddMember("sshPublicKeys", _StringList)
-
-	CreateCloudVmClusterInput_odbNetworkId = CreateCloudVmClusterInput.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CreateCloudVmClusterInput_clusterName = CreateCloudVmClusterInput.AddMember("clusterName", _ClusterName)
-
-	CreateCloudVmClusterInput_dataCollectionOptions = CreateCloudVmClusterInput.AddMember("dataCollectionOptions", DataCollectionOptions)
-
-	CreateCloudVmClusterInput_dataStorageSizeInTBs = CreateCloudVmClusterInput.AddMember("dataStorageSizeInTBs", smithyprelude.Double)
-
-	CreateCloudVmClusterInput_dbNodeStorageSizeInGBs = CreateCloudVmClusterInput.AddMember("dbNodeStorageSizeInGBs", smithyprelude.Integer)
-
-	CreateCloudVmClusterInput_dbServers = CreateCloudVmClusterInput.AddMember("dbServers", _StringList)
-
-	CreateCloudVmClusterInput_tags = CreateCloudVmClusterInput.AddMember("tags", _RequestTagMap)
-
-	CreateCloudVmClusterInput_isLocalBackupEnabled = CreateCloudVmClusterInput.AddMember("isLocalBackupEnabled", smithyprelude.Boolean)
-
-	CreateCloudVmClusterInput_isSparseDiskgroupEnabled = CreateCloudVmClusterInput.AddMember("isSparseDiskgroupEnabled", smithyprelude.Boolean)
-
-	CreateCloudVmClusterInput_licenseModel = CreateCloudVmClusterInput.AddMember("licenseModel", LicenseModel)
-
-	CreateCloudVmClusterInput_memorySizeInGBs = CreateCloudVmClusterInput.AddMember("memorySizeInGBs", smithyprelude.Integer)
-
-	CreateCloudVmClusterInput_systemVersion = CreateCloudVmClusterInput.AddMember("systemVersion", smithyprelude.String)
-
-	CreateCloudVmClusterInput_timeZone = CreateCloudVmClusterInput.AddMember("timeZone", smithyprelude.String)
-
-	CreateCloudVmClusterInput_clientToken = CreateCloudVmClusterInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateCloudVmClusterInput_scanListenerPortTcp = CreateCloudVmClusterInput.AddMember("scanListenerPortTcp", smithyprelude.Integer)
-
-	CreateCloudVmClusterOutput_displayName = CreateCloudVmClusterOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateCloudVmClusterOutput_status = CreateCloudVmClusterOutput.AddMember("status", ResourceStatus)
-
-	CreateCloudVmClusterOutput_statusReason = CreateCloudVmClusterOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateCloudVmClusterOutput_cloudVmClusterId = CreateCloudVmClusterOutput.AddMember("cloudVmClusterId", smithyprelude.String)
-
-	CreateExadbVmClusterInput_displayName = CreateExadbVmClusterInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateExadbVmClusterInput_enabledEcpuCount = CreateExadbVmClusterInput.AddMember("enabledEcpuCount", smithyprelude.Integer)
-
-	CreateExadbVmClusterInput_exascaleDbStorageVaultId = CreateExadbVmClusterInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	CreateExadbVmClusterInput_gridImageId = CreateExadbVmClusterInput.AddMember("gridImageId", smithyprelude.String)
-
-	CreateExadbVmClusterInput_hostname = CreateExadbVmClusterInput.AddMember("hostname", _Hostname)
-
-	CreateExadbVmClusterInput_nodeCount = CreateExadbVmClusterInput.AddMember("nodeCount", smithyprelude.Integer)
-
-	CreateExadbVmClusterInput_odbNetworkId = CreateExadbVmClusterInput.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CreateExadbVmClusterInput_shape = CreateExadbVmClusterInput.AddMember("shape", smithyprelude.String)
-
-	CreateExadbVmClusterInput_sshPublicKeys = CreateExadbVmClusterInput.AddMember("sshPublicKeys", _StringList)
-
-	CreateExadbVmClusterInput_totalEcpuCount = CreateExadbVmClusterInput.AddMember("totalEcpuCount", smithyprelude.Integer)
-
-	CreateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs = CreateExadbVmClusterInput.AddMember("vmFileSystemStorageTotalSizeInGBs", smithyprelude.Integer)
-
-	CreateExadbVmClusterInput_clusterName = CreateExadbVmClusterInput.AddMember("clusterName", _ClusterName)
-
-	CreateExadbVmClusterInput_dataCollectionOptions = CreateExadbVmClusterInput.AddMember("dataCollectionOptions", DataCollectionOptions)
-
-	CreateExadbVmClusterInput_licenseModel = CreateExadbVmClusterInput.AddMember("licenseModel", LicenseModel)
-
-	CreateExadbVmClusterInput_scanListenerPortTcp = CreateExadbVmClusterInput.AddMember("scanListenerPortTcp", smithyprelude.Integer)
-
-	CreateExadbVmClusterInput_scanListenerPortTcpSsl = CreateExadbVmClusterInput.AddMember("scanListenerPortTcpSsl", smithyprelude.Integer)
-
-	CreateExadbVmClusterInput_shapeAttribute = CreateExadbVmClusterInput.AddMember("shapeAttribute", ShapeAttribute)
-
-	CreateExadbVmClusterInput_systemVersion = CreateExadbVmClusterInput.AddMember("systemVersion", smithyprelude.String)
-
-	CreateExadbVmClusterInput_tags = CreateExadbVmClusterInput.AddMember("tags", _RequestTagMap)
-
-	CreateExadbVmClusterInput_timeZone = CreateExadbVmClusterInput.AddMember("timeZone", smithyprelude.String)
-
-	CreateExadbVmClusterInput_clientToken = CreateExadbVmClusterInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateExadbVmClusterOutput_displayName = CreateExadbVmClusterOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateExadbVmClusterOutput_status = CreateExadbVmClusterOutput.AddMember("status", ResourceStatus)
-
-	CreateExadbVmClusterOutput_statusReason = CreateExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateExadbVmClusterOutput_exadbVmClusterId = CreateExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
-
-	CreateExascaleDbStorageVaultInput_displayName = CreateExascaleDbStorageVaultInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs = CreateExascaleDbStorageVaultInput.AddMember("highCapacityDatabaseStorageTotalSizeInGBs", smithyprelude.Integer)
-
-	CreateExascaleDbStorageVaultInput_additionalFlashCacheInPercent = CreateExascaleDbStorageVaultInput.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
-
-	CreateExascaleDbStorageVaultInput_autoscaleLimitInGBs = CreateExascaleDbStorageVaultInput.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
-
-	CreateExascaleDbStorageVaultInput_cloudExadataInfrastructureId = CreateExascaleDbStorageVaultInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	CreateExascaleDbStorageVaultInput_availabilityZoneId = CreateExascaleDbStorageVaultInput.AddMember("availabilityZoneId", smithyprelude.String)
-
-	CreateExascaleDbStorageVaultInput_availabilityZone = CreateExascaleDbStorageVaultInput.AddMember("availabilityZone", smithyprelude.String)
-
-	CreateExascaleDbStorageVaultInput_description = CreateExascaleDbStorageVaultInput.AddMember("description", smithyprelude.String)
-
-	CreateExascaleDbStorageVaultInput_isAutoscaleEnabled = CreateExascaleDbStorageVaultInput.AddMember("isAutoscaleEnabled", smithyprelude.Boolean)
-
-	CreateExascaleDbStorageVaultInput_tags = CreateExascaleDbStorageVaultInput.AddMember("tags", _RequestTagMap)
-
-	CreateExascaleDbStorageVaultInput_timeZone = CreateExascaleDbStorageVaultInput.AddMember("timeZone", smithyprelude.String)
-
-	CreateExascaleDbStorageVaultInput_clientToken = CreateExascaleDbStorageVaultInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateExascaleDbStorageVaultOutput_displayName = CreateExascaleDbStorageVaultOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateExascaleDbStorageVaultOutput_status = CreateExascaleDbStorageVaultOutput.AddMember("status", ResourceStatus)
-
-	CreateExascaleDbStorageVaultOutput_statusReason = CreateExascaleDbStorageVaultOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId = CreateExascaleDbStorageVaultOutput.AddMember("exascaleDbStorageVaultId", smithyprelude.String)
-
-	CreateOdbNetworkInput_displayName = CreateOdbNetworkInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateOdbNetworkInput_availabilityZone = CreateOdbNetworkInput.AddMember("availabilityZone", smithyprelude.String)
-
-	CreateOdbNetworkInput_availabilityZoneId = CreateOdbNetworkInput.AddMember("availabilityZoneId", smithyprelude.String)
-
-	CreateOdbNetworkInput_clientSubnetCidr = CreateOdbNetworkInput.AddMember("clientSubnetCidr", smithyprelude.String)
-
-	CreateOdbNetworkInput_backupSubnetCidr = CreateOdbNetworkInput.AddMember("backupSubnetCidr", smithyprelude.String)
-
-	CreateOdbNetworkInput_customDomainName = CreateOdbNetworkInput.AddMember("customDomainName", smithyprelude.String)
-
-	CreateOdbNetworkInput_defaultDnsPrefix = CreateOdbNetworkInput.AddMember("defaultDnsPrefix", smithyprelude.String)
-
-	CreateOdbNetworkInput_clientToken = CreateOdbNetworkInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateOdbNetworkInput_s3Access = CreateOdbNetworkInput.AddMember("s3Access", Access)
-
-	CreateOdbNetworkInput_zeroEtlAccess = CreateOdbNetworkInput.AddMember("zeroEtlAccess", Access)
-
-	CreateOdbNetworkInput_stsAccess = CreateOdbNetworkInput.AddMember("stsAccess", Access)
-
-	CreateOdbNetworkInput_kmsAccess = CreateOdbNetworkInput.AddMember("kmsAccess", Access)
-
-	CreateOdbNetworkInput_s3PolicyDocument = CreateOdbNetworkInput.AddMember("s3PolicyDocument", _PolicyDocument)
-
-	CreateOdbNetworkInput_stsPolicyDocument = CreateOdbNetworkInput.AddMember("stsPolicyDocument", _PolicyDocument)
-
-	CreateOdbNetworkInput_kmsPolicyDocument = CreateOdbNetworkInput.AddMember("kmsPolicyDocument", _PolicyDocument)
-
-	CreateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable = CreateOdbNetworkInput.AddMember("crossRegionS3RestoreSourcesToEnable", _StringList)
-
-	CreateOdbNetworkInput_tags = CreateOdbNetworkInput.AddMember("tags", _RequestTagMap)
-
-	CreateOdbNetworkOutput_displayName = CreateOdbNetworkOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateOdbNetworkOutput_status = CreateOdbNetworkOutput.AddMember("status", ResourceStatus)
-
-	CreateOdbNetworkOutput_statusReason = CreateOdbNetworkOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateOdbNetworkOutput_odbNetworkId = CreateOdbNetworkOutput.AddMember("odbNetworkId", smithyprelude.String)
-
-	CreateOdbPeeringConnectionInput_odbNetworkId = CreateOdbPeeringConnectionInput.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	CreateOdbPeeringConnectionInput_peerNetworkId = CreateOdbPeeringConnectionInput.AddMember("peerNetworkId", _ResourceIdOrArn)
-
-	CreateOdbPeeringConnectionInput_displayName = CreateOdbPeeringConnectionInput.AddMember("displayName", _ResourceDisplayName)
-
-	CreateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded = CreateOdbPeeringConnectionInput.AddMember("peerNetworkCidrsToBeAdded", _PeeredCidrList)
-
-	CreateOdbPeeringConnectionInput_peerNetworkRouteTableIds = CreateOdbPeeringConnectionInput.AddMember("peerNetworkRouteTableIds", _PeerNetworkRouteTableIdList)
-
-	CreateOdbPeeringConnectionInput_clientToken = CreateOdbPeeringConnectionInput.AddMember("clientToken", _GeneralInputString)
-
-	CreateOdbPeeringConnectionInput_tags = CreateOdbPeeringConnectionInput.AddMember("tags", _RequestTagMap)
-
-	CreateOdbPeeringConnectionOutput_displayName = CreateOdbPeeringConnectionOutput.AddMember("displayName", smithyprelude.String)
-
-	CreateOdbPeeringConnectionOutput_status = CreateOdbPeeringConnectionOutput.AddMember("status", ResourceStatus)
-
-	CreateOdbPeeringConnectionOutput_statusReason = CreateOdbPeeringConnectionOutput.AddMember("statusReason", smithyprelude.String)
-
-	CreateOdbPeeringConnectionOutput_odbPeeringConnectionId = CreateOdbPeeringConnectionOutput.AddMember("odbPeeringConnectionId", smithyprelude.String)
-
-	DeleteAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = DeleteAutonomousDatabaseBackupInput.AddMember("autonomousDatabaseBackupId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteAutonomousDatabaseInput_autonomousDatabaseId = DeleteAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	DeleteCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId = DeleteCloudAutonomousVmClusterInput.AddMember("cloudAutonomousVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteCloudExadataInfrastructureInput_cloudExadataInfrastructureId = DeleteCloudExadataInfrastructureInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	DeleteCloudVmClusterInput_cloudVmClusterId = DeleteCloudVmClusterInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteExadbVmClusterInput_exadbVmClusterId = DeleteExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
-
-	DeleteExascaleDbStorageVaultInput_exascaleDbStorageVaultId = DeleteExascaleDbStorageVaultInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	DeleteOdbNetworkInput_odbNetworkId = DeleteOdbNetworkInput.AddMember("odbNetworkId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	DeleteOdbNetworkInput_deleteAssociatedResources = DeleteOdbNetworkInput.AddMember("deleteAssociatedResources", smithyprelude.Boolean)
-
-	DeleteOdbPeeringConnectionInput_odbPeeringConnectionId = DeleteOdbPeeringConnectionInput.AddMember("odbPeeringConnectionId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	DisassociateIamRoleFromResourceInput_iamRoleArn = DisassociateIamRoleFromResourceInput.AddMember("iamRoleArn", _RoleArn)
-
-	DisassociateIamRoleFromResourceInput_awsIntegration = DisassociateIamRoleFromResourceInput.AddMember("awsIntegration", SupportedAwsIntegration)
-
-	DisassociateIamRoleFromResourceInput_resourceArn = DisassociateIamRoleFromResourceInput.AddMember("resourceArn", _Arn)
-
-	DisassociateVirtualMachinesFromExadbVmClusterInput_exadbVmClusterId = DisassociateVirtualMachinesFromExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
-
-	DisassociateVirtualMachinesFromExadbVmClusterInput_dbNodeIds = DisassociateVirtualMachinesFromExadbVmClusterInput.AddMember("dbNodeIds", _ResourceIdList)
-
-	DisassociateVirtualMachinesFromExadbVmClusterOutput_displayName = DisassociateVirtualMachinesFromExadbVmClusterOutput.AddMember("displayName", smithyprelude.String)
-
-	DisassociateVirtualMachinesFromExadbVmClusterOutput_status = DisassociateVirtualMachinesFromExadbVmClusterOutput.AddMember("status", ResourceStatus)
-
-	DisassociateVirtualMachinesFromExadbVmClusterOutput_statusReason = DisassociateVirtualMachinesFromExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
-
-	DisassociateVirtualMachinesFromExadbVmClusterOutput_exadbVmClusterId = DisassociateVirtualMachinesFromExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
-
-	FailoverAutonomousDatabaseInput_autonomousDatabaseId = FailoverAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	FailoverAutonomousDatabaseInput_peerDbArn = FailoverAutonomousDatabaseInput.AddMember("peerDbArn", _ResourceArn)
-
-	FailoverAutonomousDatabaseOutput_autonomousDatabaseId = FailoverAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	FailoverAutonomousDatabaseOutput_displayName = FailoverAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	FailoverAutonomousDatabaseOutput_status = FailoverAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	FailoverAutonomousDatabaseOutput_statusReason = FailoverAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	GetAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = GetAutonomousDatabaseBackupInput.AddMember("autonomousDatabaseBackupId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetAutonomousDatabaseBackupOutput_autonomousDatabaseBackup = GetAutonomousDatabaseBackupOutput.AddMember("autonomousDatabaseBackup", AutonomousDatabaseBackup)
-
-	GetAutonomousDatabaseInput_autonomousDatabaseId = GetAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetAutonomousDatabaseOutput_autonomousDatabase = GetAutonomousDatabaseOutput.AddMember("autonomousDatabase", AutonomousDatabase)
-
-	GetAutonomousDatabaseWalletDetailsInput_autonomousDatabaseId = GetAutonomousDatabaseWalletDetailsInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	GetAutonomousDatabaseWalletDetailsOutput_autonomousDatabaseWalletDetails = GetAutonomousDatabaseWalletDetailsOutput.AddMember("autonomousDatabaseWalletDetails", AutonomousDatabaseWalletDetails)
-
-	GetCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId = GetCloudAutonomousVmClusterInput.AddMember("cloudAutonomousVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetCloudAutonomousVmClusterOutput_cloudAutonomousVmCluster = GetCloudAutonomousVmClusterOutput.AddMember("cloudAutonomousVmCluster", CloudAutonomousVmCluster)
-
-	GetCloudExadataInfrastructureInput_cloudExadataInfrastructureId = GetCloudExadataInfrastructureInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetCloudExadataInfrastructureOutput_cloudExadataInfrastructure = GetCloudExadataInfrastructureOutput.AddMember("cloudExadataInfrastructure", CloudExadataInfrastructure)
-
-	GetCloudExadataInfrastructureUnallocatedResourcesInput_cloudExadataInfrastructureId = GetCloudExadataInfrastructureUnallocatedResourcesInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetCloudExadataInfrastructureUnallocatedResourcesInput_dbServers = GetCloudExadataInfrastructureUnallocatedResourcesInput.AddMember("dbServers", _StringList)
-
-	GetCloudExadataInfrastructureUnallocatedResourcesOutput_cloudExadataInfrastructureUnallocatedResources = GetCloudExadataInfrastructureUnallocatedResourcesOutput.AddMember("cloudExadataInfrastructureUnallocatedResources", CloudExadataInfrastructureUnallocatedResources)
-
-	GetCloudVmClusterInput_cloudVmClusterId = GetCloudVmClusterInput.AddMember("cloudVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetCloudVmClusterOutput_cloudVmCluster = GetCloudVmClusterOutput.AddMember("cloudVmCluster", CloudVmCluster)
-
-	GetDbNodeInput_cloudVmClusterId = GetDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
-
-	GetDbNodeInput_exadbVmClusterId = GetDbNodeInput.AddMember("exadbVmClusterId", _ResourceId)
-
-	GetDbNodeInput_dbNodeId = GetDbNodeInput.AddMember("dbNodeId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetDbNodeOutput_dbNode = GetDbNodeOutput.AddMember("dbNode", DbNode)
-
-	GetDbServerInput_cloudExadataInfrastructureId = GetDbServerInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetDbServerInput_dbServerId = GetDbServerInput.AddMember("dbServerId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetDbServerOutput_dbServer = GetDbServerOutput.AddMember("dbServer", DbServer)
-
-	GetExadbVmClusterInput_exadbVmClusterId = GetExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
-
-	GetExadbVmClusterOutput_exadbVmCluster = GetExadbVmClusterOutput.AddMember("exadbVmCluster", ExadbVmCluster)
-
-	GetExascaleDbStorageVaultInput_exascaleDbStorageVaultId = GetExascaleDbStorageVaultInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	GetExascaleDbStorageVaultOutput_exascaleDbStorageVault = GetExascaleDbStorageVaultOutput.AddMember("exascaleDbStorageVault", ExascaleDbStorageVault)
-
-	GetOciOnboardingStatusOutput_status = GetOciOnboardingStatusOutput.AddMember("status", OciOnboardingStatus)
-
-	GetOciOnboardingStatusOutput_existingTenancyActivationLink = GetOciOnboardingStatusOutput.AddMember("existingTenancyActivationLink", smithyprelude.String)
-
-	GetOciOnboardingStatusOutput_newTenancyActivationLink = GetOciOnboardingStatusOutput.AddMember("newTenancyActivationLink", smithyprelude.String)
-
-	GetOciOnboardingStatusOutput_ociIdentityDomain = GetOciOnboardingStatusOutput.AddMember("ociIdentityDomain", OciIdentityDomain)
-
-	GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles = GetOciOnboardingStatusOutput.AddMember("autonomousDatabaseOciIntegrationIamRoles", _OciIamRoleList)
-
-	GetOciOnboardingStatusOutput_linkedOciTenancyId = GetOciOnboardingStatusOutput.AddMember("linkedOciTenancyId", smithyprelude.String)
-
-	GetOciOnboardingStatusOutput_linkedOciCompartmentId = GetOciOnboardingStatusOutput.AddMember("linkedOciCompartmentId", smithyprelude.String)
-
-	GetOciOnboardingStatusOutput_subscriptionErrors = GetOciOnboardingStatusOutput.AddMember("subscriptionErrors", _SubscriptionErrors)
-
-	GetOdbNetworkInput_odbNetworkId = GetOdbNetworkInput.AddMember("odbNetworkId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetOdbNetworkOutput_odbNetwork = GetOdbNetworkOutput.AddMember("odbNetwork", OdbNetwork)
-
-	GetOdbPeeringConnectionInput_odbPeeringConnectionId = GetOdbPeeringConnectionInput.AddMember("odbPeeringConnectionId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	GetOdbPeeringConnectionOutput_odbPeeringConnection = GetOdbPeeringConnectionOutput.AddMember("odbPeeringConnection", OdbPeeringConnection)
-
-	InitializeServiceInput_ociIdentityDomain = InitializeServiceInput.AddMember("ociIdentityDomain", smithyprelude.Boolean)
-
-	InitializeServiceInput_autonomousDatabaseOciAwsSecretsManagerIntegration = InitializeServiceInput.AddMember("autonomousDatabaseOciAwsSecretsManagerIntegration", Access)
-
-	ListAutonomousDatabaseBackupsInput_maxResults = ListAutonomousDatabaseBackupsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAutonomousDatabaseBackupsInput_nextToken = ListAutonomousDatabaseBackupsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAutonomousDatabaseBackupsInput_autonomousDatabaseId = ListAutonomousDatabaseBackupsInput.AddMember("autonomousDatabaseId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	ListAutonomousDatabaseBackupsInput_status = ListAutonomousDatabaseBackupsInput.AddMember("status", AutonomousDatabaseBackupStatus)
-
-	ListAutonomousDatabaseBackupsInput_type = ListAutonomousDatabaseBackupsInput.AddMember("type", AutonomousDatabaseBackupType)
-
-	ListAutonomousDatabaseBackupsOutput_nextToken = ListAutonomousDatabaseBackupsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups = ListAutonomousDatabaseBackupsOutput.AddMember("autonomousDatabaseBackups", _AutonomousDatabaseBackupList)
-
-	ListAutonomousDatabaseCharacterSetsInput_maxResults = ListAutonomousDatabaseCharacterSetsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAutonomousDatabaseCharacterSetsInput_nextToken = ListAutonomousDatabaseCharacterSetsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAutonomousDatabaseCharacterSetsInput_characterSetType = ListAutonomousDatabaseCharacterSetsInput.AddMember("characterSetType", characterSetType)
-
-	ListAutonomousDatabaseCharacterSetsOutput_nextToken = ListAutonomousDatabaseCharacterSetsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets = ListAutonomousDatabaseCharacterSetsOutput.AddMember("autonomousDatabaseCharacterSets", _AutonomousDatabaseCharacterSetList)
-
-	ListAutonomousDatabaseClonesInput_maxResults = ListAutonomousDatabaseClonesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAutonomousDatabaseClonesInput_nextToken = ListAutonomousDatabaseClonesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAutonomousDatabaseClonesInput_autonomousDatabaseId = ListAutonomousDatabaseClonesInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	ListAutonomousDatabaseClonesOutput_nextToken = ListAutonomousDatabaseClonesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAutonomousDatabaseClonesOutput_autonomousDatabaseClones = ListAutonomousDatabaseClonesOutput.AddMember("autonomousDatabaseClones", _AutonomousDatabaseList)
-
-	ListAutonomousDatabasePeersInput_maxResults = ListAutonomousDatabasePeersInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAutonomousDatabasePeersInput_nextToken = ListAutonomousDatabasePeersInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAutonomousDatabasePeersInput_autonomousDatabaseId = ListAutonomousDatabasePeersInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	ListAutonomousDatabasePeersOutput_nextToken = ListAutonomousDatabasePeersOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAutonomousDatabasePeersOutput_autonomousDatabasePeers = ListAutonomousDatabasePeersOutput.AddMember("autonomousDatabasePeers", _AutonomousDatabasePeerList)
-
-	ListAutonomousDatabasesInput_maxResults = ListAutonomousDatabasesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAutonomousDatabasesInput_nextToken = ListAutonomousDatabasesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAutonomousDatabasesOutput_nextToken = ListAutonomousDatabasesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAutonomousDatabasesOutput_autonomousDatabases = ListAutonomousDatabasesOutput.AddMember("autonomousDatabases", _AutonomousDatabaseList)
-
-	ListAutonomousDatabaseVersionsInput_maxResults = ListAutonomousDatabaseVersionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAutonomousDatabaseVersionsInput_nextToken = ListAutonomousDatabaseVersionsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAutonomousDatabaseVersionsInput_dbWorkload = ListAutonomousDatabaseVersionsInput.AddMember("dbWorkload", DbWorkload)
-
-	ListAutonomousDatabaseVersionsOutput_nextToken = ListAutonomousDatabaseVersionsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions = ListAutonomousDatabaseVersionsOutput.AddMember("autonomousDatabaseVersions", _AutonomousDatabaseVersionList)
-
-	ListAutonomousVirtualMachinesInput_maxResults = ListAutonomousVirtualMachinesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAutonomousVirtualMachinesInput_nextToken = ListAutonomousVirtualMachinesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAutonomousVirtualMachinesInput_cloudAutonomousVmClusterId = ListAutonomousVirtualMachinesInput.AddMember("cloudAutonomousVmClusterId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	ListAutonomousVirtualMachinesOutput_nextToken = ListAutonomousVirtualMachinesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAutonomousVirtualMachinesOutput_autonomousVirtualMachines = ListAutonomousVirtualMachinesOutput.AddMember("autonomousVirtualMachines", _AutonomousVirtualMachineList)
-
-	ListCloudAutonomousVmClustersInput_maxResults = ListCloudAutonomousVmClustersInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCloudAutonomousVmClustersInput_nextToken = ListCloudAutonomousVmClustersInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCloudAutonomousVmClustersInput_cloudExadataInfrastructureId = ListCloudAutonomousVmClustersInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	ListCloudAutonomousVmClustersOutput_nextToken = ListCloudAutonomousVmClustersOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListCloudAutonomousVmClustersOutput_cloudAutonomousVmClusters = ListCloudAutonomousVmClustersOutput.AddMember("cloudAutonomousVmClusters", _CloudAutonomousVmClusterList)
-
-	ListCloudExadataInfrastructuresInput_maxResults = ListCloudExadataInfrastructuresInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCloudExadataInfrastructuresInput_nextToken = ListCloudExadataInfrastructuresInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCloudExadataInfrastructuresOutput_nextToken = ListCloudExadataInfrastructuresOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListCloudExadataInfrastructuresOutput_cloudExadataInfrastructures = ListCloudExadataInfrastructuresOutput.AddMember("cloudExadataInfrastructures", _CloudExadataInfrastructureList)
-
-	ListCloudVmClustersInput_maxResults = ListCloudVmClustersInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCloudVmClustersInput_nextToken = ListCloudVmClustersInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCloudVmClustersInput_cloudExadataInfrastructureId = ListCloudVmClustersInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	ListCloudVmClustersOutput_nextToken = ListCloudVmClustersOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListCloudVmClustersOutput_cloudVmClusters = ListCloudVmClustersOutput.AddMember("cloudVmClusters", _CloudVmClusterList)
-
-	ListDbNodesInput_maxResults = ListDbNodesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDbNodesInput_nextToken = ListDbNodesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDbNodesInput_cloudVmClusterId = ListDbNodesInput.AddMember("cloudVmClusterId", _ResourceId)
-
-	ListDbNodesInput_exadbVmClusterId = ListDbNodesInput.AddMember("exadbVmClusterId", _ResourceId)
-
-	ListDbNodesOutput_nextToken = ListDbNodesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListDbNodesOutput_dbNodes = ListDbNodesOutput.AddMember("dbNodes", _DbNodeList)
-
-	ListDbServersInput_cloudExadataInfrastructureId = ListDbServersInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	ListDbServersInput_maxResults = ListDbServersInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDbServersInput_nextToken = ListDbServersInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDbServersOutput_nextToken = ListDbServersOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListDbServersOutput_dbServers = ListDbServersOutput.AddMember("dbServers", _DbServerList)
-
-	ListDbSystemShapesInput_maxResults = ListDbSystemShapesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDbSystemShapesInput_nextToken = ListDbSystemShapesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDbSystemShapesInput_availabilityZone = ListDbSystemShapesInput.AddMember("availabilityZone", smithyprelude.String)
-
-	ListDbSystemShapesInput_availabilityZoneId = ListDbSystemShapesInput.AddMember("availabilityZoneId", smithyprelude.String)
-
-	ListDbSystemShapesInput_shapeFamily = ListDbSystemShapesInput.AddMember("shapeFamily", smithyprelude.String)
-
-	ListDbSystemShapesOutput_nextToken = ListDbSystemShapesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListDbSystemShapesOutput_dbSystemShapes = ListDbSystemShapesOutput.AddMember("dbSystemShapes", _DbSystemShapeList)
-
-	ListExadbVmClustersInput_exascaleDbStorageVaultId = ListExadbVmClustersInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn, &smithytraits.HTTPQuery{Name: "exascaleDbStorageVaultId"})
-
-	ListExadbVmClustersInput_maxResults = ListExadbVmClustersInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListExadbVmClustersInput_nextToken = ListExadbVmClustersInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListExadbVmClustersOutput_nextToken = ListExadbVmClustersOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListExadbVmClustersOutput_exadbVmClusters = ListExadbVmClustersOutput.AddMember("exadbVmClusters", _ExadbVmClusterList)
-
-	ListExascaleDbStorageVaultsInput_maxResults = ListExascaleDbStorageVaultsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListExascaleDbStorageVaultsInput_nextToken = ListExascaleDbStorageVaultsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListExascaleDbStorageVaultsInput_cloudExadataInfrastructureId = ListExascaleDbStorageVaultsInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn)
-
-	ListExascaleDbStorageVaultsInput_vaultType = ListExascaleDbStorageVaultsInput.AddMember("vaultType", ExascaleDbStorageVaultType)
-
-	ListExascaleDbStorageVaultsOutput_nextToken = ListExascaleDbStorageVaultsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults = ListExascaleDbStorageVaultsOutput.AddMember("exascaleDbStorageVaults", _ExascaleDbStorageVaultList)
-
-	ListFlexComponentsInput_maxResults = ListFlexComponentsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListFlexComponentsInput_nextToken = ListFlexComponentsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListFlexComponentsInput_shape = ListFlexComponentsInput.AddMember("shape", smithyprelude.String)
-
-	ListFlexComponentsOutput_nextToken = ListFlexComponentsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListFlexComponentsOutput_flexComponents = ListFlexComponentsOutput.AddMember("flexComponents", _FlexComponentList)
-
-	ListGiMinorVersionsInput_giVersion = ListGiMinorVersionsInput.AddMember("giVersion", smithyprelude.String)
-
-	ListGiMinorVersionsInput_maxResults = ListGiMinorVersionsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListGiMinorVersionsInput_nextToken = ListGiMinorVersionsInput.AddMember("nextToken", smithyprelude.String)
-
-	ListGiMinorVersionsInput_shapeFamily = ListGiMinorVersionsInput.AddMember("shapeFamily", smithyprelude.String)
-
-	ListGiMinorVersionsInput_availabilityZone = ListGiMinorVersionsInput.AddMember("availabilityZone", smithyprelude.String)
-
-	ListGiMinorVersionsInput_availabilityZoneId = ListGiMinorVersionsInput.AddMember("availabilityZoneId", smithyprelude.String)
-
-	ListGiMinorVersionsOutput_nextToken = ListGiMinorVersionsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListGiMinorVersionsOutput_giMinorVersions = ListGiMinorVersionsOutput.AddMember("giMinorVersions", _GiMinorVersionList)
-
-	ListGiVersionsInput_maxResults = ListGiVersionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListGiVersionsInput_nextToken = ListGiVersionsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListGiVersionsInput_shape = ListGiVersionsInput.AddMember("shape", smithyprelude.String)
-
-	ListGiVersionsOutput_nextToken = ListGiVersionsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListGiVersionsOutput_giVersions = ListGiVersionsOutput.AddMember("giVersions", _GiVersionList)
-
-	ListOdbNetworksInput_maxResults = ListOdbNetworksInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListOdbNetworksInput_nextToken = ListOdbNetworksInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListOdbNetworksOutput_nextToken = ListOdbNetworksOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListOdbNetworksOutput_odbNetworks = ListOdbNetworksOutput.AddMember("odbNetworks", _OdbNetworkList)
-
-	ListOdbPeeringConnectionsInput_maxResults = ListOdbPeeringConnectionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListOdbPeeringConnectionsInput_nextToken = ListOdbPeeringConnectionsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListOdbPeeringConnectionsInput_odbNetworkId = ListOdbPeeringConnectionsInput.AddMember("odbNetworkId", _ResourceIdOrArn)
-
-	ListOdbPeeringConnectionsOutput_nextToken = ListOdbPeeringConnectionsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListOdbPeeringConnectionsOutput_odbPeeringConnections = ListOdbPeeringConnectionsOutput.AddMember("odbPeeringConnections", _OdbPeeringConnectionList)
-
-	ListSystemVersionsInput_maxResults = ListSystemVersionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSystemVersionsInput_nextToken = ListSystemVersionsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSystemVersionsInput_giVersion = ListSystemVersionsInput.AddMember("giVersion", smithyprelude.String)
-
-	ListSystemVersionsInput_shape = ListSystemVersionsInput.AddMember("shape", smithyprelude.String)
-
-	ListSystemVersionsOutput_nextToken = ListSystemVersionsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListSystemVersionsOutput_systemVersions = ListSystemVersionsOutput.AddMember("systemVersions", _SystemVersionList)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _ResponseTagMap)
-
-	RebootAutonomousDatabaseInput_autonomousDatabaseId = RebootAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	RebootAutonomousDatabaseInput_isOnlineReboot = RebootAutonomousDatabaseInput.AddMember("isOnlineReboot", smithyprelude.Boolean)
-
-	RebootAutonomousDatabaseOutput_autonomousDatabaseId = RebootAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	RebootAutonomousDatabaseOutput_displayName = RebootAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	RebootAutonomousDatabaseOutput_status = RebootAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	RebootAutonomousDatabaseOutput_statusReason = RebootAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	RebootDbNodeInput_cloudVmClusterId = RebootDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
-
-	RebootDbNodeInput_exadbVmClusterId = RebootDbNodeInput.AddMember("exadbVmClusterId", _ResourceId)
-
-	RebootDbNodeInput_dbNodeId = RebootDbNodeInput.AddMember("dbNodeId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	RebootDbNodeOutput_dbNodeId = RebootDbNodeOutput.AddMember("dbNodeId", smithyprelude.String)
-
-	RebootDbNodeOutput_status = RebootDbNodeOutput.AddMember("status", DbNodeResourceStatus)
-
-	RebootDbNodeOutput_statusReason = RebootDbNodeOutput.AddMember("statusReason", smithyprelude.String)
-
-	RestoreAutonomousDatabaseInput_autonomousDatabaseId = RestoreAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	RestoreAutonomousDatabaseInput_timestamp = RestoreAutonomousDatabaseInput.AddMember("timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	RestoreAutonomousDatabaseOutput_autonomousDatabaseId = RestoreAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	RestoreAutonomousDatabaseOutput_displayName = RestoreAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	RestoreAutonomousDatabaseOutput_status = RestoreAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	RestoreAutonomousDatabaseOutput_statusReason = RestoreAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	ShrinkAutonomousDatabaseInput_autonomousDatabaseId = ShrinkAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	ShrinkAutonomousDatabaseOutput_autonomousDatabaseId = ShrinkAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	ShrinkAutonomousDatabaseOutput_displayName = ShrinkAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	ShrinkAutonomousDatabaseOutput_status = ShrinkAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	ShrinkAutonomousDatabaseOutput_statusReason = ShrinkAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	StartAutonomousDatabaseInput_autonomousDatabaseId = StartAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	StartAutonomousDatabaseOutput_autonomousDatabaseId = StartAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	StartAutonomousDatabaseOutput_displayName = StartAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	StartAutonomousDatabaseOutput_status = StartAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	StartAutonomousDatabaseOutput_statusReason = StartAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	StartDbNodeInput_cloudVmClusterId = StartDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
-
-	StartDbNodeInput_exadbVmClusterId = StartDbNodeInput.AddMember("exadbVmClusterId", _ResourceId)
-
-	StartDbNodeInput_dbNodeId = StartDbNodeInput.AddMember("dbNodeId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	StartDbNodeOutput_dbNodeId = StartDbNodeOutput.AddMember("dbNodeId", smithyprelude.String)
-
-	StartDbNodeOutput_status = StartDbNodeOutput.AddMember("status", DbNodeResourceStatus)
-
-	StartDbNodeOutput_statusReason = StartDbNodeOutput.AddMember("statusReason", smithyprelude.String)
-
-	StopAutonomousDatabaseInput_autonomousDatabaseId = StopAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	StopAutonomousDatabaseOutput_autonomousDatabaseId = StopAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	StopAutonomousDatabaseOutput_displayName = StopAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	StopAutonomousDatabaseOutput_status = StopAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	StopAutonomousDatabaseOutput_statusReason = StopAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	StopDbNodeInput_cloudVmClusterId = StopDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
-
-	StopDbNodeInput_exadbVmClusterId = StopDbNodeInput.AddMember("exadbVmClusterId", _ResourceId)
-
-	StopDbNodeInput_dbNodeId = StopDbNodeInput.AddMember("dbNodeId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	StopDbNodeOutput_dbNodeId = StopDbNodeOutput.AddMember("dbNodeId", smithyprelude.String)
-
-	StopDbNodeOutput_status = StopDbNodeOutput.AddMember("status", DbNodeResourceStatus)
-
-	StopDbNodeOutput_statusReason = StopDbNodeOutput.AddMember("statusReason", smithyprelude.String)
-
-	SwitchoverAutonomousDatabaseInput_autonomousDatabaseId = SwitchoverAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	SwitchoverAutonomousDatabaseInput_peerDbArn = SwitchoverAutonomousDatabaseInput.AddMember("peerDbArn", _ResourceArn)
-
-	SwitchoverAutonomousDatabaseOutput_autonomousDatabaseId = SwitchoverAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	SwitchoverAutonomousDatabaseOutput_displayName = SwitchoverAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	SwitchoverAutonomousDatabaseOutput_status = SwitchoverAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	SwitchoverAutonomousDatabaseOutput_statusReason = SwitchoverAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _RequestTagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys)
-
-	UpdateAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = UpdateAutonomousDatabaseBackupInput.AddMember("autonomousDatabaseBackupId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UpdateAutonomousDatabaseBackupInput_retentionPeriodInDays = UpdateAutonomousDatabaseBackupInput.AddMember("retentionPeriodInDays", smithyprelude.Integer)
-
-	UpdateAutonomousDatabaseBackupOutput_displayName = UpdateAutonomousDatabaseBackupOutput.AddMember("displayName", smithyprelude.String)
-
-	UpdateAutonomousDatabaseBackupOutput_status = UpdateAutonomousDatabaseBackupOutput.AddMember("status", ResourceStatus)
-
-	UpdateAutonomousDatabaseBackupOutput_statusReason = UpdateAutonomousDatabaseBackupOutput.AddMember("statusReason", smithyprelude.String)
-
-	UpdateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId = UpdateAutonomousDatabaseBackupOutput.AddMember("autonomousDatabaseBackupId", smithyprelude.String)
-
-	UpdateAutonomousDatabaseInput_autonomousDatabaseId = UpdateAutonomousDatabaseInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
-
-	UpdateAutonomousDatabaseInput_adminPassword = UpdateAutonomousDatabaseInput.AddMember("adminPassword", _SensitiveString)
-
-	UpdateAutonomousDatabaseInput_computeCount = UpdateAutonomousDatabaseInput.AddMember("computeCount", smithyprelude.Double)
-
-	UpdateAutonomousDatabaseInput_cpuCoreCount = UpdateAutonomousDatabaseInput.AddMember("cpuCoreCount", smithyprelude.Integer)
-
-	UpdateAutonomousDatabaseInput_dataStorageSizeInTBs = UpdateAutonomousDatabaseInput.AddMember("dataStorageSizeInTBs", smithyprelude.Integer)
-
-	UpdateAutonomousDatabaseInput_dataStorageSizeInGBs = UpdateAutonomousDatabaseInput.AddMember("dataStorageSizeInGBs", smithyprelude.Integer)
-
-	UpdateAutonomousDatabaseInput_displayName = UpdateAutonomousDatabaseInput.AddMember("displayName", _ResourceDisplayName)
-
-	UpdateAutonomousDatabaseInput_dbName = UpdateAutonomousDatabaseInput.AddMember("dbName", smithyprelude.String)
-
-	UpdateAutonomousDatabaseInput_dbVersion = UpdateAutonomousDatabaseInput.AddMember("dbVersion", smithyprelude.String)
-
-	UpdateAutonomousDatabaseInput_dbWorkload = UpdateAutonomousDatabaseInput.AddMember("dbWorkload", DbWorkload)
-
-	UpdateAutonomousDatabaseInput_dbToolsDetails = UpdateAutonomousDatabaseInput.AddMember("dbToolsDetails", _DatabaseToolList)
-
-	UpdateAutonomousDatabaseInput_databaseEdition = UpdateAutonomousDatabaseInput.AddMember("databaseEdition", DatabaseEdition)
-
-	UpdateAutonomousDatabaseInput_licenseModel = UpdateAutonomousDatabaseInput.AddMember("licenseModel", LicenseModel)
-
-	UpdateAutonomousDatabaseInput_isAutoScalingEnabled = UpdateAutonomousDatabaseInput.AddMember("isAutoScalingEnabled", smithyprelude.Boolean)
-
-	UpdateAutonomousDatabaseInput_isAutoScalingForStorageEnabled = UpdateAutonomousDatabaseInput.AddMember("isAutoScalingForStorageEnabled", smithyprelude.Boolean)
-
-	UpdateAutonomousDatabaseInput_isBackupRetentionLocked = UpdateAutonomousDatabaseInput.AddMember("isBackupRetentionLocked", smithyprelude.Boolean)
-
-	UpdateAutonomousDatabaseInput_isLocalDataGuardEnabled = UpdateAutonomousDatabaseInput.AddMember("isLocalDataGuardEnabled", smithyprelude.Boolean)
-
-	UpdateAutonomousDatabaseInput_isMtlsConnectionRequired = UpdateAutonomousDatabaseInput.AddMember("isMtlsConnectionRequired", smithyprelude.Boolean)
-
-	UpdateAutonomousDatabaseInput_isRefreshableClone = UpdateAutonomousDatabaseInput.AddMember("isRefreshableClone", smithyprelude.Boolean)
-
-	UpdateAutonomousDatabaseInput_isDisconnectPeer = UpdateAutonomousDatabaseInput.AddMember("isDisconnectPeer", smithyprelude.Boolean)
-
-	UpdateAutonomousDatabaseInput_backupRetentionPeriodInDays = UpdateAutonomousDatabaseInput.AddMember("backupRetentionPeriodInDays", smithyprelude.Integer)
-
-	UpdateAutonomousDatabaseInput_byolComputeCountLimit = UpdateAutonomousDatabaseInput.AddMember("byolComputeCountLimit", smithyprelude.Double)
-
-	UpdateAutonomousDatabaseInput_localAdgAutoFailoverMaxDataLossLimit = UpdateAutonomousDatabaseInput.AddMember("localAdgAutoFailoverMaxDataLossLimit", smithyprelude.Integer)
-
-	UpdateAutonomousDatabaseInput_autonomousMaintenanceScheduleType = UpdateAutonomousDatabaseInput.AddMember("autonomousMaintenanceScheduleType", AutonomousMaintenanceScheduleType)
-
-	UpdateAutonomousDatabaseInput_customerContactsToSendToOCI = UpdateAutonomousDatabaseInput.AddMember("customerContactsToSendToOCI", _CustomerContacts)
-
-	UpdateAutonomousDatabaseInput_scheduledOperations = UpdateAutonomousDatabaseInput.AddMember("scheduledOperations", _ScheduledOperationDetailsList)
-
-	UpdateAutonomousDatabaseInput_longTermBackupSchedule = UpdateAutonomousDatabaseInput.AddMember("longTermBackupSchedule", LongTermBackupSchedule)
-
-	UpdateAutonomousDatabaseInput_openMode = UpdateAutonomousDatabaseInput.AddMember("openMode", OpenMode)
-
-	UpdateAutonomousDatabaseInput_permissionLevel = UpdateAutonomousDatabaseInput.AddMember("permissionLevel", PermissionLevel)
-
-	UpdateAutonomousDatabaseInput_refreshableMode = UpdateAutonomousDatabaseInput.AddMember("refreshableMode", RefreshableMode)
-
-	UpdateAutonomousDatabaseInput_privateEndpointIp = UpdateAutonomousDatabaseInput.AddMember("privateEndpointIp", smithyprelude.String)
-
-	UpdateAutonomousDatabaseInput_privateEndpointLabel = UpdateAutonomousDatabaseInput.AddMember("privateEndpointLabel", smithyprelude.String)
-
-	UpdateAutonomousDatabaseInput_peerDbId = UpdateAutonomousDatabaseInput.AddMember("peerDbId", _ResourceIdOrArn)
-
-	UpdateAutonomousDatabaseInput_resourcePoolLeaderId = UpdateAutonomousDatabaseInput.AddMember("resourcePoolLeaderId", _ResourceIdOrArn)
-
-	UpdateAutonomousDatabaseInput_resourcePoolSummary = UpdateAutonomousDatabaseInput.AddMember("resourcePoolSummary", ResourcePoolSummary)
-
-	UpdateAutonomousDatabaseInput_standbyAllowlistedIpsSource = UpdateAutonomousDatabaseInput.AddMember("standbyAllowlistedIpsSource", StandbyAllowlistedIpsSource)
-
-	UpdateAutonomousDatabaseInput_standbyAllowlistedIps = UpdateAutonomousDatabaseInput.AddMember("standbyAllowlistedIps", _StringList)
-
-	UpdateAutonomousDatabaseInput_allowlistedIps = UpdateAutonomousDatabaseInput.AddMember("allowlistedIps", _StringList)
-
-	UpdateAutonomousDatabaseInput_autoRefreshFrequencyInSeconds = UpdateAutonomousDatabaseInput.AddMember("autoRefreshFrequencyInSeconds", smithyprelude.Integer)
-
-	UpdateAutonomousDatabaseInput_autoRefreshPointLagInSeconds = UpdateAutonomousDatabaseInput.AddMember("autoRefreshPointLagInSeconds", smithyprelude.Integer)
-
-	UpdateAutonomousDatabaseInput_timeOfAutoRefreshStart = UpdateAutonomousDatabaseInput.AddMember("timeOfAutoRefreshStart", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	UpdateAutonomousDatabaseInput_encryptionKeyProvider = UpdateAutonomousDatabaseInput.AddMember("encryptionKeyProvider", EncryptionKeyProviderInput)
-
-	UpdateAutonomousDatabaseInput_encryptionKeyConfiguration = UpdateAutonomousDatabaseInput.AddMember("encryptionKeyConfiguration", EncryptionKeyConfigurationInput)
-
-	UpdateAutonomousDatabaseInput_adminPasswordSource = UpdateAutonomousDatabaseInput.AddMember("adminPasswordSource", AdminPasswordSource)
-
-	UpdateAutonomousDatabaseInput_adminPasswordSourceConfiguration = UpdateAutonomousDatabaseInput.AddMember("adminPasswordSourceConfiguration", AdminPasswordSourceConfigurationInput)
-
-	UpdateAutonomousDatabaseOutput_autonomousDatabaseId = UpdateAutonomousDatabaseOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
-
-	UpdateAutonomousDatabaseOutput_displayName = UpdateAutonomousDatabaseOutput.AddMember("displayName", smithyprelude.String)
-
-	UpdateAutonomousDatabaseOutput_status = UpdateAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
-
-	UpdateAutonomousDatabaseOutput_statusReason = UpdateAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
-
-	UpdateCloudExadataInfrastructureInput_cloudExadataInfrastructureId = UpdateCloudExadataInfrastructureInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateCloudExadataInfrastructureInput_maintenanceWindow = UpdateCloudExadataInfrastructureInput.AddMember("maintenanceWindow", MaintenanceWindow)
-
-	UpdateCloudExadataInfrastructureOutput_displayName = UpdateCloudExadataInfrastructureOutput.AddMember("displayName", smithyprelude.String)
-
-	UpdateCloudExadataInfrastructureOutput_status = UpdateCloudExadataInfrastructureOutput.AddMember("status", ResourceStatus)
-
-	UpdateCloudExadataInfrastructureOutput_statusReason = UpdateCloudExadataInfrastructureOutput.AddMember("statusReason", smithyprelude.String)
-
-	UpdateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = UpdateCloudExadataInfrastructureOutput.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
-
-	UpdateExadbVmClusterInput_exadbVmClusterId = UpdateExadbVmClusterInput.AddMember("exadbVmClusterId", _ResourceIdOrArn)
-
-	UpdateExadbVmClusterInput_dataCollectionOptions = UpdateExadbVmClusterInput.AddMember("dataCollectionOptions", DataCollectionOptions)
-
-	UpdateExadbVmClusterInput_displayName = UpdateExadbVmClusterInput.AddMember("displayName", _ResourceDisplayName)
-
-	UpdateExadbVmClusterInput_enabledEcpuCount = UpdateExadbVmClusterInput.AddMember("enabledEcpuCount", smithyprelude.Integer)
-
-	UpdateExadbVmClusterInput_gridImageId = UpdateExadbVmClusterInput.AddMember("gridImageId", smithyprelude.String)
-
-	UpdateExadbVmClusterInput_licenseModel = UpdateExadbVmClusterInput.AddMember("licenseModel", LicenseModel)
-
-	UpdateExadbVmClusterInput_sshPublicKeys = UpdateExadbVmClusterInput.AddMember("sshPublicKeys", _StringList)
-
-	UpdateExadbVmClusterInput_systemVersion = UpdateExadbVmClusterInput.AddMember("systemVersion", smithyprelude.String)
-
-	UpdateExadbVmClusterInput_totalEcpuCount = UpdateExadbVmClusterInput.AddMember("totalEcpuCount", smithyprelude.Integer)
-
-	UpdateExadbVmClusterInput_updateAction = UpdateExadbVmClusterInput.AddMember("updateAction", UpdateAction)
-
-	UpdateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs = UpdateExadbVmClusterInput.AddMember("vmFileSystemStorageTotalSizeInGBs", smithyprelude.Integer)
-
-	UpdateExadbVmClusterOutput_displayName = UpdateExadbVmClusterOutput.AddMember("displayName", smithyprelude.String)
-
-	UpdateExadbVmClusterOutput_status = UpdateExadbVmClusterOutput.AddMember("status", ResourceStatus)
-
-	UpdateExadbVmClusterOutput_statusReason = UpdateExadbVmClusterOutput.AddMember("statusReason", smithyprelude.String)
-
-	UpdateExadbVmClusterOutput_exadbVmClusterId = UpdateExadbVmClusterOutput.AddMember("exadbVmClusterId", smithyprelude.String)
-
-	UpdateExascaleCloudExadataInfrastructureInput_cloudExadataInfrastructureId = UpdateExascaleCloudExadataInfrastructureInput.AddMember("cloudExadataInfrastructureId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateExascaleCloudExadataInfrastructureInput_totalStorageSizeInGBs = UpdateExascaleCloudExadataInfrastructureInput.AddMember("totalStorageSizeInGBs", smithyprelude.Integer)
-
-	UpdateExascaleCloudExadataInfrastructureInput_totalVmStorageSizeInGBs = UpdateExascaleCloudExadataInfrastructureInput.AddMember("totalVmStorageSizeInGBs", smithyprelude.Integer)
-
-	UpdateExascaleCloudExadataInfrastructureOutput_displayName = UpdateExascaleCloudExadataInfrastructureOutput.AddMember("displayName", smithyprelude.String)
-
-	UpdateExascaleCloudExadataInfrastructureOutput_status = UpdateExascaleCloudExadataInfrastructureOutput.AddMember("status", ResourceStatus)
-
-	UpdateExascaleCloudExadataInfrastructureOutput_statusReason = UpdateExascaleCloudExadataInfrastructureOutput.AddMember("statusReason", smithyprelude.String)
-
-	UpdateExascaleCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = UpdateExascaleCloudExadataInfrastructureOutput.AddMember("cloudExadataInfrastructureId", smithyprelude.String)
-
-	UpdateExascaleDbStorageVaultInput_exascaleDbStorageVaultId = UpdateExascaleDbStorageVaultInput.AddMember("exascaleDbStorageVaultId", _ResourceIdOrArn)
-
-	UpdateExascaleDbStorageVaultInput_additionalFlashCacheInPercent = UpdateExascaleDbStorageVaultInput.AddMember("additionalFlashCacheInPercent", smithyprelude.Integer)
-
-	UpdateExascaleDbStorageVaultInput_autoscaleLimitInGBs = UpdateExascaleDbStorageVaultInput.AddMember("autoscaleLimitInGBs", smithyprelude.Integer)
-
-	UpdateExascaleDbStorageVaultInput_description = UpdateExascaleDbStorageVaultInput.AddMember("description", smithyprelude.String)
-
-	UpdateExascaleDbStorageVaultInput_displayName = UpdateExascaleDbStorageVaultInput.AddMember("displayName", _ResourceDisplayName)
-
-	UpdateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs = UpdateExascaleDbStorageVaultInput.AddMember("highCapacityDatabaseStorageTotalSizeInGBs", smithyprelude.Integer)
-
-	UpdateExascaleDbStorageVaultInput_isAutoscaleEnabled = UpdateExascaleDbStorageVaultInput.AddMember("isAutoscaleEnabled", smithyprelude.Boolean)
-
-	UpdateExascaleDbStorageVaultOutput_displayName = UpdateExascaleDbStorageVaultOutput.AddMember("displayName", smithyprelude.String)
-
-	UpdateExascaleDbStorageVaultOutput_status = UpdateExascaleDbStorageVaultOutput.AddMember("status", ResourceStatus)
-
-	UpdateExascaleDbStorageVaultOutput_statusReason = UpdateExascaleDbStorageVaultOutput.AddMember("statusReason", smithyprelude.String)
-
-	UpdateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId = UpdateExascaleDbStorageVaultOutput.AddMember("exascaleDbStorageVaultId", smithyprelude.String)
-
-	UpdateOdbNetworkInput_odbNetworkId = UpdateOdbNetworkInput.AddMember("odbNetworkId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateOdbNetworkInput_displayName = UpdateOdbNetworkInput.AddMember("displayName", _ResourceDisplayName)
-
-	UpdateOdbNetworkInput_peeredCidrsToBeAdded = UpdateOdbNetworkInput.AddMember("peeredCidrsToBeAdded", _StringList)
-
-	UpdateOdbNetworkInput_peeredCidrsToBeRemoved = UpdateOdbNetworkInput.AddMember("peeredCidrsToBeRemoved", _StringList)
-
-	UpdateOdbNetworkInput_s3Access = UpdateOdbNetworkInput.AddMember("s3Access", Access)
-
-	UpdateOdbNetworkInput_zeroEtlAccess = UpdateOdbNetworkInput.AddMember("zeroEtlAccess", Access)
-
-	UpdateOdbNetworkInput_stsAccess = UpdateOdbNetworkInput.AddMember("stsAccess", Access)
-
-	UpdateOdbNetworkInput_kmsAccess = UpdateOdbNetworkInput.AddMember("kmsAccess", Access)
-
-	UpdateOdbNetworkInput_s3PolicyDocument = UpdateOdbNetworkInput.AddMember("s3PolicyDocument", _PolicyDocument)
-
-	UpdateOdbNetworkInput_stsPolicyDocument = UpdateOdbNetworkInput.AddMember("stsPolicyDocument", _PolicyDocument)
-
-	UpdateOdbNetworkInput_kmsPolicyDocument = UpdateOdbNetworkInput.AddMember("kmsPolicyDocument", _PolicyDocument)
-
-	UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable = UpdateOdbNetworkInput.AddMember("crossRegionS3RestoreSourcesToEnable", _StringList)
-
-	UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToDisable = UpdateOdbNetworkInput.AddMember("crossRegionS3RestoreSourcesToDisable", _StringList)
-
-	UpdateOdbNetworkOutput_displayName = UpdateOdbNetworkOutput.AddMember("displayName", smithyprelude.String)
-
-	UpdateOdbNetworkOutput_status = UpdateOdbNetworkOutput.AddMember("status", ResourceStatus)
-
-	UpdateOdbNetworkOutput_statusReason = UpdateOdbNetworkOutput.AddMember("statusReason", smithyprelude.String)
-
-	UpdateOdbNetworkOutput_odbNetworkId = UpdateOdbNetworkOutput.AddMember("odbNetworkId", smithyprelude.String)
-
-	UpdateOdbPeeringConnectionInput_odbPeeringConnectionId = UpdateOdbPeeringConnectionInput.AddMember("odbPeeringConnectionId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
-
-	UpdateOdbPeeringConnectionInput_displayName = UpdateOdbPeeringConnectionInput.AddMember("displayName", _ResourceDisplayName)
-
-	UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded = UpdateOdbPeeringConnectionInput.AddMember("peerNetworkCidrsToBeAdded", _PeeredCidrList)
-
-	UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeRemoved = UpdateOdbPeeringConnectionInput.AddMember("peerNetworkCidrsToBeRemoved", _PeeredCidrList)
-
-	UpdateOdbPeeringConnectionOutput_displayName = UpdateOdbPeeringConnectionOutput.AddMember("displayName", smithyprelude.String)
-
-	UpdateOdbPeeringConnectionOutput_status = UpdateOdbPeeringConnectionOutput.AddMember("status", ResourceStatus)
-
-	UpdateOdbPeeringConnectionOutput_statusReason = UpdateOdbPeeringConnectionOutput.AddMember("statusReason", smithyprelude.String)
-
-	UpdateOdbPeeringConnectionOutput_odbPeeringConnectionId = UpdateOdbPeeringConnectionOutput.AddMember("odbPeeringConnectionId", smithyprelude.String)
-
+const blob = "" +
+	"GetCloudExadataInfrastructureUnallocatedResourcesOutputGetCloudExadataInfrastructureUnallocatedResou" +
+	"rcesInputDisassociateVirtualMachinesFromExadbVmClusterOutputDisassociateVirtualMachinesFromExadbVmCl" +
+	"usterInputautonomousDatabaseOciAwsSecretsManagerIntegrationAssociateVirtualMachinesToExadbVmClusterO" +
+	"utputUpdateExascaleCloudExadataInfrastructureOutputcloudExadataInfrastructureUnallocatedResourcesAss" +
+	"ociateVirtualMachinesToExadbVmClusterInputUpdateExascaleCloudExadataInfrastructureInputnonProvisiona" +
+	"bleAutonomousContainerDatabasesCloudAutonomousVmClusterResourceDetailsListCustomerManagedAwsSecretCo" +
+	"nfigurationInputListAutonomousDatabaseCharacterSetsOutputhighCapacityDatabaseStorageTotalSizeInGBspr" +
+	"ovisionableAutonomousContainerDatabasesCrossRegionDisasterRecoveryConfigurationGetAutonomousDatabase" +
+	"WalletDetailsOutputListAutonomousDatabaseCharacterSetsInputautonomousDatabaseOciIntegrationIamRolesG" +
+	"etAutonomousDatabaseWalletDetailsInputavailableAutonomousDataStorageSizeInTBsprovisionedAutonomousCo" +
+	"ntainerDatabasestimeReclamationOfFreeAutonomousDatabaseCreateCloudExadataInfrastructureOutputDeleteC" +
+	"loudExadataInfrastructureOutputUpdateCloudExadataInfrastructureOutputWalletPasswordSourceConfigurati" +
+	"onInputAdminPasswordSourceConfigurationInputAutonomousDatabaseCharacterSetSummaryCreateCloudExadataI" +
+	"nfrastructureInputCrossRegionS3RestoreSourcesAccessListDeleteCloudExadataInfrastructureInputDisassoc" +
+	"iateIamRoleFromResourceOutputListCloudExadataInfrastructuresOutputUpdateCloudExadataInfrastructureIn" +
+	"putcloudExadataInfrastructureDisplayNameCreateAutonomousDatabaseBackupOutputCreateAutonomousDatabase" +
+	"WalletOutputCreateCloudAutonomousVmClusterOutputDeleteAutonomousDatabaseBackupOutputDeleteCloudAuton" +
+	"omousVmClusterOutputDisassociateIamRoleFromResourceInputListAutonomousDatabaseVersionsOutputListClou" +
+	"dExadataInfrastructuresInputUpdateAutonomousDatabaseBackupOutputcrossRegionS3RestoreSourcesToDisable" +
+	"exadataStorageInTBsLowestScaledValuelocalAdgAutoFailoverMaxDataLossLimittimeDeletionOfFreeAutonomous" +
+	"DatabaseAcceptMarketplaceRegistrationOutputAutonomousDatabaseConnectionStringsCreateAutonomousDataba" +
+	"seBackupInputCreateAutonomousDatabaseWalletInputCreateCloudAutonomousVmClusterInputDatabaseConnectio" +
+	"nStringProfileListDeleteAutonomousDatabaseBackupInputDeleteCloudAutonomousVmClusterInputGetCloudExad" +
+	"ataInfrastructureOutputListAutonomousDatabaseBackupsOutputListAutonomousDatabaseVersionsInputListAut" +
+	"onomousVirtualMachinesOutputListCloudAutonomousVmClustersOutputUpdateAutonomousDatabaseBackupInputcr" +
+	"ossRegionS3RestoreSourcesToEnableremoteDisasterRecoveryConfigurationAcceptMarketplaceRegistrationInp" +
+	"utAutonomousDatabaseCharacterSetListAwsEncryptionKeyConfigurationInputCreateExascaleDbStorageVaultOu" +
+	"tputDeleteExascaleDbStorageVaultOutputFileSystemConfigurationDetailsListGetCloudExadataInfrastructur" +
+	"eInputListAutonomousDatabaseBackupsInputListAutonomousDatabaseClonesOutputListAutonomousVirtualMachi" +
+	"nesInputListCloudAutonomousVmClustersInputSwitchoverAutonomousDatabaseOutputUpdateExascaleDbStorageV" +
+	"aultOutputavailableDataStoragePerServerInTBsAutonomousMaintenanceScheduleTypeCloudExadataInfrastruct" +
+	"ureSummaryCreateExascaleDbStorageVaultInputCrossRegionDataGuardConfigurationDeleteExascaleDbStorageV" +
+	"aultInputGetAutonomousDatabaseBackupOutputGetCloudAutonomousVmClusterOutputListAutonomousDatabaseClo" +
+	"nesInputListAutonomousDatabasePeersOutputListExascaleDbStorageVaultsOutputSwitchoverAutonomousDataba" +
+	"seInputUpdateExascaleDbStorageVaultInputautonomousMaintenanceScheduleTypecrossRegionS3RestoreSources" +
+	"AccesstimeDatabaseSslCertificateExpiresuseLatestAvailableBackupTimestampvmFileSystemStorageTotalSize" +
+	"InGBsAssociateIamRoleToResourceOutputAutonomousDatabaseConnectionUrlsAutonomousDatabaseResourceStatu" +
+	"sAutonomousDatabaseVersionSummaryCreateOdbPeeringConnectionOutputDeleteOdbPeeringConnectionOutputFai" +
+	"loverAutonomousDatabaseOutputGetAutonomousDatabaseBackupInputGetCloudAutonomousVmClusterInputListAut" +
+	"onomousDatabasePeersInputListExascaleDbStorageVaultsInputUpdateOdbPeeringConnectionOutputadminPasswo" +
+	"rdSourceConfigurationmachineLearningUserManagementUrlAssociateIamRoleToResourceInputAutonomousDataba" +
+	"seBackupSummaryAutonomousVirtualMachineSummaryCloneToRefreshableConfigurationCloudAutonomousVmCluste" +
+	"rSummaryCreateOdbPeeringConnectionInputDeleteOdbPeeringConnectionInputFailoverAutonomousDatabaseInpu" +
+	"tGetExascaleDbStorageVaultOutputListOdbPeeringConnectionsOutputPointInTimeRestoreConfigurationRestor" +
+	"eAutonomousDatabaseOutputUpdateOdbPeeringConnectionInputautonomousDataStoragePercentageautonomousDat" +
+	"abaseCharacterSetsautonomousDatabaseWalletDetailsmemoryPerOracleComputeUnitInGBstimeDisasterRecovery" +
+	"RoleChangedAutonomousDatabaseBackupStatusAutonomousDatabaseWalletStatusCROSS_REGION_DISASTER_RECOVER" +
+	"YCloudExadataInfrastructureListCreateAutonomousDatabaseOutputDeleteAutonomousDatabaseOutputGetExasca" +
+	"leDbStorageVaultInputListOdbPeeringConnectionsInputRebootAutonomousDatabaseOutputRestoreAutonomousDa" +
+	"tabaseInputRestoreFromBackupConfigurationShrinkAutonomousDatabaseOutputUpdateAutonomousDatabaseOutpu" +
+	"tactualUsedDataStorageSizeInTBsautonomousDataStorageSizeInTBsfileSystemConfigurationDetailsisAutoSca" +
+	"lingForStorageEnabledtimeSnapshotStandbyEnabledTilltimeUntilReconnectCloneEnabledAutonomousDatabaseP" +
+	"eerSummaryAutonomousDatabaseVersionListCreateAutonomousDatabaseInputDeleteAutonomousDatabaseInputExa" +
+	"scaleDbStorageVaultSummaryGetOdbPeeringConnectionOutputListAutonomousDatabasesOutputOciEncryptionKey" +
+	"ConfigurationOkvEncryptionKeyConfigurationRebootAutonomousDatabaseInputScheduledOperationDetailsList" +
+	"ServiceQuotaExceededExceptionShrinkAutonomousDatabaseInputStartAutonomousDatabaseOutputUpdateAutonom" +
+	"ousDatabaseInputaccountSetupCloudFormationUrladditionalFlashCacheInPercentautoRefreshFrequencyInSeco" +
+	"ndsavailableStorageCapacityInTBscloudExadataInfrastructureArnexistingTenancyActivationLinkAutonomous" +
+	"DatabaseBackupListAutonomousDatabaseBackupTypeAutonomousDatabaseWalletFileAutonomousVirtualMachineLi" +
+	"stCloudAutonomousVmClusterListExadbVmClusterStorageDetailsGetOciOnboardingStatusOutputGetOdbPeeringC" +
+	"onnectionInputListAutonomousDatabasesInputStartAutonomousDatabaseInputStopAutonomousDatabaseOutputVa" +
+	"lidationExceptionFieldListautoRefreshPointLagInSecondsautonomousDatabaseWalletFilecloudExadataInfras" +
+	"tructureIdisCustomActionTimeoutEnabledmarketplaceRegistrationTokenminDbNodeStoragePerNodeInGBsociIde" +
+	"ntityDomainResourceUrlCUSTOMER_MANAGED_AWS_SECRETDatabaseConnectionStringMapGetAutonomousDatabaseOut" +
+	"putGetOciOnboardingStatusInputListTagsForResourceResponseOdbPeeringConnectionSummaryPeerNetworkRoute" +
+	"TableIdListStandbyAllowlistedIpsSourceStopAutonomousDatabaseInputWalletPasswordSourceSummaryautonomo" +
+	"usDatabaseBackupArnautonomousVirtualMachineIdsavailableContainerDatabasesavailableDbNodePerNodeInGBs" +
+	"availableDbNodeStorageInGBsavailableMemoryPerNodeInGBsavailableVmStorageSizeInGBsbackupRetentionPeri" +
+	"odInDayscloudAutonomousVmClusterArncloudExadataInfrastructurescrossRegionDisasterRecoverycustomerCon" +
+	"tactsToSendToOCIfailedDataRecoveryInSecondsisReplicateAutomaticBackupsmonthlyStorageServerVersionnex" +
+	"tLongTermBackupTimeStamppasswordSourceConfigurationpeerNetworkCidrsToBeRemovedsourceAutonomousDataba" +
+	"seArnstandbyAllowlistedIpsSourcetotalBackupStorageSizeInGBsAdminPasswordSourceSummaryAutonomousDatab" +
+	"asePeerListCreateCloudVmClusterOutputCreateExadbVmClusterOutputDatabaseCloneConfigurationDeleteCloud" +
+	"VmClusterOutputDeleteExadbVmClusterOutputEncryptionKeyProviderInputExascaleDbStorageVaultListExascal" +
+	"eDbStorageVaultTypeGetAutonomousDatabaseInputListTagsForResourceRequestOciDnsForwardingConfigListUpd" +
+	"ateExadbVmClusterOutputadminPasswordSourceSummaryautonomousDatabaseBackupIdautonomousDatabaseVersion" +
+	"savailableLocalStorageInGBscloudAutonomousVmClusterIdencryptionKeyConfigurationisDiagnosticsEventsEn" +
+	"abledmachineLearningNotebookUrlmaintenanceTargetComponentremoteDisasterRecoveryTypesourceAutonomousD" +
+	"atabaseIdtimeMaintenanceWindowStarttimeOrdsCertificateExpiresunallocatedAdbStorageInTBsAVAILABLE_NEE" +
+	"DS_ATTENTIONAutonomousDatabaseSummaryCreateCloudVmClusterInputCreateExadbVmClusterInputDeleteCloudVm" +
+	"ClusterInputDeleteExadbVmClusterInputListCloudVmClustersOutputListExadbVmClustersOutputListGiMinorVe" +
+	"rsionsOutputResourceNotFoundExceptionUpdateExadbVmClusterInputValidationExceptionReasonallocatedStor" +
+	"ageSizeInTBsautonomousDatabaseBackupsautonomousVirtualMachinesavailableCoreCountPerNodeavailableData" +
+	"StorageInTBsavailableStorageSizeInGBscloudAutonomousVmClusterscustomActionTimeoutInMinsdeleteAssocia" +
+	"tedResourcesexascaleDbStorageVaultArnisHealthMonitoringEnabledlocalDisasterRecoveryTypemaxDbNodeStor" +
+	"ageSizeInGBspeerNetworkCidrsToBeAddedsnapshotFileSystemStoragetimeLocalDataGuardEnabledDEDICATED_INF" +
+	"RASTRUCTUREDatabaseManagementStatusExascaleDbStorageDetailsListCloudVmClustersInputListDbSystemShape" +
+	"sOutputListExadbVmClustersInputListFlexComponentsOutputListGiMinorVersionsInputListSystemVersionsOut" +
+	"putOdbPeeringConnectionListOperationsInsightsStatusPUBLIC_OFFER_UNSUPPORTEDautonomousDatabaseClonesa" +
+	"vailableComputeCapacityavailableUpgradeVersionscertificateDirectoryNamecustomerManagedAwsSecretdatab" +
+	"aseManagementStatusexascaleDbStorageVaultIdisMtlsConnectionRequiredisRemoteDataGuardEnabledisSparseD" +
+	"iskgroupEnabledlastUpdateHistoryEntryIdmanagedServicesIpv4CidrsmaxAcdsLowestScaledValuenewTenancyAct" +
+	"ivationLinkodbPeeringConnectionTypeoperationsInsightsStatuspeerNetworkRouteTableIdstimeDataGuardRole" +
+	"ChangedtimeMaintenanceWindowEndusedDataStorageSizeInGBsusedDataStorageSizeInTBsDbServerPatchingDetai" +
+	"lsEXASCALE_INFRASTRUCTUREFIELD_VALIDATION_FAILEDGetCloudVmClusterOutputGetExadbVmClusterOutputInitia" +
+	"lizeServiceOutputInternalServerExceptionListDbSystemShapesInputListFlexComponentsInputListSystemVers" +
+	"ionsInputMAINTENANCE_IN_PROGRESSNetServicesArchitecturePENDING_CUSTOMER_ACTIONPENDING_LINK_GENERATIO" +
+	"NROLE_CHANGE_IN_PROGRESSROLL_FORWARD_IMAGE_COPYSupportedAwsIntegrationTransportableTablespaceareServ" +
+	"erTypesSupportedattachedShapeAttributesautonomousDatabasePeersavailableDbStorageInGBsconnectionStrin" +
+	"gDetailsdbServerPatchingDetailsexadataInfrastructureIdexascaleDbStorageVaultsisBackupRetentionLocked" +
+	"isLocalDataGuardEnabledisReconnectCloneEnablednetServicesArchitectureociDnsForwardingConfigsodbPeeri" +
+	"ngConnectionArnruntimeMinimumCoreCountsoftwareStorageSizeInGBtotalContainerDatabasestotalVmStorageSi" +
+	"zeInGBstransportableTablespacevmFileSystemStorageTypeAutonomousDatabaseApexAutonomousDatabaseListBRI" +
+	"NG_YOUR_OWN_LICENSECROSS_REGION_DATAGUARDCUMULATIVE_INCREMENTALCreateOdbNetworkOutputDatabaseStandby" +
+	"SummaryDbServerPatchingStatusDeleteOdbNetworkOutputGetCloudVmClusterInputGetExadbVmClusterInputIniti" +
+	"alizeServiceInputLongTermBackupSchedulePENDING_INITIALIZATIONServiceNetworkEndpointUpdateOdbNetworkO" +
+	"utputadditionalStorageCountautonomousVmClusterIdsdbNodeStorageSizeInGBsestimatedPatchDurationisMtlsE" +
+	"nabledVmClusterlinkedOciCompartmentIdlongTermBackupSchedulemonthlyDbServerVersionodbPeeringConnectio" +
+	"nIdpeeredCidrsToBeRemovedscanListenerPortNonTlsscanListenerPortTcpSslserviceNetworkEndpointtimeOfAut" +
+	"oRefreshStarttimeOfLastRefreshPointtotalFileSystemStorageACTIVE_IN_HOME_REGIONAPI_REQUEST_PARAMETERA" +
+	"ccessDeniedExceptionBACKUP_FROM_TIMESTAMPCloudVmClusterSummaryCreateOdbNetworkInputDataCollectionOpt" +
+	"ionsDbNodeMaintenanceTypeDeleteOdbNetworkInputExadbVmClusterSummaryExascaleConfigurationGiMinorVersi" +
+	"onSummaryListOdbNetworksOutputManagedResourceStatusManagedS3BackupAccessStorageManagementTypeUntagRe" +
+	"sourceResponseUpdateOdbNetworkInputVMDB_REBOOT_MIGRATIONactivatedStorageCountautonomousDatabaseArnby" +
+	"olComputeCountLimitdataCollectionOptionsdatabaseTransformsUrlencryptionKeyProviderexascaleConfigurat" +
+	"ionisIncidentLogsEnabledmanagedS3BackupAccessmaxDbNodeStorageInGBsminMemoryPerNodeInGBsociResourceAn" +
+	"chorNameodbPeeringConnectionspasswordSourceSummaryretentionPeriodInDaysstorageManagementTypetotalSto" +
+	"rageSizeInGBsCLONE_TO_REFRESHABLEDbNodeResourceStatusDbSystemShapeSummaryFlexComponentSummaryListGiV" +
+	"ersionsOutputListOdbNetworksInputSystemVersionSummaryUntagResourceRequestallConnectionStringsautonom" +
+	"ousDatabaseIdavailableMemoryInGBscrossRegionDataGuarddataStorageSizeInGBsdataStorageSizeInTBsdisaste" +
+	"rRecoveryTypeec2PlacementGroupIdsisAutoScalingEnabledisLocalBackupEnabledlastMaintenanceRunIdmaxIdle" +
+	"TimeInMinutesnextMaintenanceRunIdociIdentityDomainUrlpeeredCidrsToBeAddedpoolStorageSizeInTBsprivate" +
+	"EndpointLabelresourcePoolLeaderIdstorageServerVersiontimeMaintenanceBegintimeOfLastSwitchovertotalCo" +
+	"mputeCapacityGetOdbNetworkOutputListDbServersOutputListGiVersionsInputPARTIALLY_CONNECTEDRESTORE_IN_" +
+	"PROGRESSResourceDisplayNameResourcePoolSummarySensitiveStringListTagResourceResponseThrottlingExcept" +
+	"ionautonomousDatabasesautoscaleLimitInGBscloneTableSpaceListcpuCoreCountPerNodedbServerDisplayNamefi" +
+	"leSystemSizeInGBsmaxDataStorageInTBsminCoreCountPerNodeminDataStorageInTBsociIdentityDomainIdociNetw" +
+	"orkAnchorUrlresourcePoolSummaryscanListenerPortTlsscheduledOperationssourceConfigurationtimePatching" +
+	"StartedvmBackupStorageTypeBACKUP_IN_PROGRESSCloudVmClusterListENTERPRISE_EDITIONExadbVmClusterListGe" +
+	"neralInputStringGetOdbNetworkInputGiMinorVersionListIormLifecycleStateListDbServersInputRebootDbNode" +
+	"OutputShapeAttributeListSubscriptionErrorsTagResourceRequestavailabilityDomainavailabilityZoneIdavai" +
+	"lableSizeInGBscloneToRefreshablecoreCountIncrementdatabaseServerTypedescriptionSummaryisAutoscaleEna" +
+	"bledisRefreshableClonelinkedOciTenancyIdociNetworkAnchorIdpointInTimeRestoreresourceGatewayArnschedu" +
+	"ledStartTimesqlWebDeveloperUrlsubscriptionErrorstimeMaintenanceEndtimeOfLastFailoverCUSTOM_PREFERENC" +
+	"EConflictExceptionDbSystemShapeListEncryptionSummaryExadataIormConfigFlexComponentListGetDbServerOut" +
+	"putListDbNodesOutputNON_ROLLING_APPLYOciAwsIntegrationOciIdentityDomainOdbNetworkSummaryRebootDbNode" +
+	"InputRefreshableStatusSCALE_IN_PROGRESSStartDbNodeOutputSystemVersionListUNKNOWN_OPERATIONadditional" +
+	"DetailscloudVmClusterArnencryptionSummaryexadbVmClusterArnfloatingIpAddressinMemoryAreaInGBsisSnapsh" +
+	"otStandbykmsPolicyDocumentlocalStorageInGBsmaintenanceWindowprivateEndpointIpprovisionableCpusrefres" +
+	"hableStatusrestoreFromBackupretryAfterSecondsscheduledStopTimeserviceConsoleUrlserviceNetworkArnstor" +
+	"ageServerTypestsPolicyDocumenttimeAvailableTilltimeOfNextRefreshtimePatchingEndedtlsAuthenticationto" +
+	"talCpuCoreCountCOMPARTMENT_OCIDCustomerContactsDISABLED_STANDBYDatabaseToolListDbIormConfigListFAILE" +
+	"D_DISABLINGGetDbServerInputGiVersionSummaryLICENSE_INCLUDEDListDbNodesInputOciIamRoleStatusPROVISION" +
+	"_FAILEDPatchingModeTypeSNAPSHOT_STANDBYSTANDARD_EDITIONStartDbNodeInputStopDbNodeOutputTERMINATE_FAI" +
+	"LEDawsEncryptionKeybackupSubnetCidrcharacterSetTypeclientSubnetCidrcloudVmClusterIdcustomDomainNamed" +
+	"efaultDnsPrefixdesiredNodeCountenabledEcpuCountexadbVmClusterIdisDisconnectPeerlagTimeInSecondslifec" +
+	"ycleDetailsmaximumNodeCountminimumCoreCountminimumNodeCountociDnsListenerIpociEncryptionKeyokvEncryp" +
+	"tionKeyprivateIpAddresss3PolicyDocumentspatialStudioUrlstorageSizeInGBstimeOfLastBackupDatabaseEditi" +
+	"onDbServerSummaryFAILED_ENABLINGGetDbNodeOutputHIGH_THROUGHPUTManagedServicesPermissionLevelRefresha" +
+	"bleModeResourceArnListResourceIdOrArnStopDbNodeInputVpcEndpointTypeclientIpAddresscloudVmClustersdat" +
+	"abaseEditiondbServerVersionexadbVmClustersflashCacheLimitgiMinorVersionsiormConfigCacheleadTimeInWee" +
+	"ksmaintenanceTypemaxStorageCountmemorySizeInGBsminStorageCountpercentProgresspermissionLevelprovisio" +
+	"nedCpusreclaimableCpusrefreshableModescanDnsRecordIdshapeAttributesvpcEndpointTypeACTIVE_LIMITEDAMPE" +
+	"RE_FLEX_A1BACKUP_FROM_IDDISASSOCIATINGDataSafeStatusDiskRedundancyExternalIdTypeGetDbNodeInputNOT_AP" +
+	"PLICABLENOT_REFRESHINGNOT_REGISTEREDORACLE_MANAGEDOciIamRoleListOdbNetworkListPeeredCidrListPreferen" +
+	"ceTypeRELEASE_UPDATERESTORE_FAILEDResourceIdListResponseTagMapSERVICENETWORKallowlistedIpsawsIntegra" +
+	"tionconnectionUrlsdataSafeStatusdbSystemShapesdbToolsDetailsdiskRedundancyexternalIdTypeflexComponen" +
+	"tsgraphStudioUrlisOnlineRebootlifecycleStatelocalStandbyDbmaxMemoryInGBspatchingStatuspeerNetworkArn" +
+	"systemVersionstotalEcpuCounttotalSizeInGBsvmClusterCountBLOCK_STORAGEBOOTSTRAPPINGDATABASE_OCIDDEREG" +
+	"ISTERINGDayOfWeekNameDbNodeSummaryGiVersionListGridImageTypeINTEL_FLEX_X9KmsKeyIdOrArnNO_PREFERENCER" +
+	"epeatCadenceRequestTagMapSMART_STORAGESecretIdOrArnVmStorageTypeZeroEtlAccessavailableCpusbackupVnic" +
+	"2IdcertificateIdconsumerGroupcpuPercentagedatabaseClonedirectoryNamegridImageTypeipv4Addressesnchara" +
+	"cterSetodbNetworkArnpeerNetworkIdrepeatCadencesshPublicKeystimeUndeletedvmClusterArnsvpcEndpointIdze" +
+	"roEtlAccessBACKUP_BASEDCANNOT_PARSECUSTOM_IMAGEComputeModelDISCONNECTEDDatabaseTypeDbServerListHardw" +
+	"areTypeINACCESSIBLELicenseModelPROVISIONINGUNRESTRICTEDUpdateActionVIRTUAL_FULLWeeksOfMonthbackupVni" +
+	"cIdcomputeCountcomputeModeldatabaseTypeerrorMessagehardwareTypelicenseModellistenerPortodbNetworkIdp" +
+	"atchingModereservedCpusresourceTypesqlDevWebUrlstatusReasonstorageCountsyntaxFormattimeOfBackupttsBu" +
+	"ndleUrlupdateActionvmClusterIdsweeksOfMonthBACKUP_COPYClusterNameIntegerListLOW_LATENCYNOT_ENABLEDNO" +
+	"T_STARTEDTENANT_OCIDTERMINATINGUNAVAILABLEapexDetailsapexVersionclientTokenclusterNamedisplayNamefau" +
+	"ltDomaingridImageIdisAutomaticmaxCpuCountmemoryInGBsodbNetworksordsVersionresourceArnscanDnsNamesess" +
+	"ionModeshapeFamilytimeRotatedtimeStartedACTIVATINGDaysOfWeekDbNodeListDbWorkloadHoursOfDayNONROLLING" +
+	"READ_WRITERECREATINGRESTARTINGSourceTypeTERMINATEDWalletTypebackupIpIddaysOfWeekdbServerIddbSystemId" +
+	"dbWorkloaddomainNamegiVersionshostFormathoursOfDayiamRoleArnisDisabledisRegionalmaxResultsmongoDbUrl" +
+	"mountPointpreferenceresourceIdwalletTypeAUTOMATICCloneTypeKmsAccessMonthNameObjectiveREAD_ONLYSCHEDU" +
+	"LEDSEPTEMBERSUSPENDEDShapeTypeStsAccessUPGRADINGWEDNESDAYcloneTypecreatedAtdayOfWeekdbNodeArndbNodeI" +
+	"dsdbServersdbVersiondedicatedfieldListisEnabledkmsAccessnextTokennodeCountobjectiveociVcnUrlokvKmsKe" +
+	"ypeerDbArnpeerDbIdsquotaCodescanIpIdsshapeTypesizeInTBsstandbyDbstsAccesstimeEndedtimestampvaultType" +
+	"BALANCEDCANCELEDCOMPLETEDECEMBERDELETINGFEBRUARYHostnameINSTANCELONGTERMMETADATANATIONALNOVEMBERONE_" +
+	"TIMEOpenModePRECHECKREGIONALROLLBACKS3AccessSATURDAYSEPARATESTOPPINGTHURSDAYTagValueUPDATINGhostIpId" +
+	"hostnameiamRoleskmsKeyIdociVcnIdopenModepoolSizeprofilesprotocols3AccesssecretIdtimeZoneAWS_KMSBoole" +
+	"anCOMPUTEJANUARYMONTHLYOCTOBERPRIMARYREGULARSTOPPEDTUESDAYTagKeysapexUrldbNodesdbPlansdetailsmessage" +
+	"ordsUrltagKeysvaultIdversionvnic2IdAUGUSTDoubleFRIDAYKmsTdeMANUALMONDAYMonthsNORMALSHAREDSUNDAYWEEKL" +
+	"YYEARLYdbNamemediummembermonthsociUrlokvUrireasonregionskipRuvipIdsvmNamevnicIdAPRILBASICFloatLOCALM" +
+	"ARCHOTHERemailocpussharevalueAPEXCELLECPUJULYJUNENONEOCPUOLTPcidrocidroletagstypeADGAJDAMDASMMAYOKVk" +
+	"eyLH"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.odb", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 2008, Target: 0, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3605, Target: 1, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 259, Target: 2, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1540, Target: 3, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1540, Target: 4, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1576, Target: 5, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1612, Target: 6, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1055, Target: 7, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7211, Target: 8, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7237, Target: 9, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2670, Target: 10, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10363, Target: 11, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3733, Target: 12, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1648, Target: 13, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1648, Target: 14, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1684, Target: 15, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1093, Target: 16, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7289, Target: 17, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7315, Target: 18, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2704, Target: 19, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10429, Target: 20, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3765, Target: 21, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1392, Target: 22, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 109, Target: 23, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3797, Target: 24, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 779, Target: 25, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3209, Target: 26, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 779, Target: 27, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3242, Target: 28, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 29, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 30, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 9448, Target: 31, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 14832, Target: 32, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 13486, Target: 33, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 9471, Target: 34, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4301, Target: 35, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5958, Target: 36, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 12313, Target: 37, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5326, Target: 38, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 9494, Target: 39, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2323, Target: 40, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 616, Target: 41, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2840, Target: 42, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3308, Target: 43, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5355, Target: 44, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1756, Target: 45, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2393, Target: 46, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2428, Target: 47, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1429, Target: 48, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8037, Target: 49, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 13503, Target: 50, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 12332, Target: 51, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8683, Target: 52, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8062, Target: 53, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3341, Target: 54, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8731, Target: 55, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8087, Target: 56, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 11793, Target: 57, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 11209, Target: 58, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4332, Target: 59, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8779, Target: 60, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6430, Target: 61, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4851, Target: 62, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 12988, Target: 63, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4394, Target: 64, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4941, Target: 65, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5558, Target: 66, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 13639, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6070, Target: 68, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 14371, Target: 69, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2942, Target: 70, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 12465, Target: 71, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 11293, Target: 72, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1828, Target: 73, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1828, Target: 74, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1131, Target: 75, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7497, Target: 76, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 305, Target: 77, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2976, Target: 78, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10583, Target: 79, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3957, Target: 80, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3739, Target: 81, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1345, Target: 82, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 16791, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14147, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10999, Target: 85, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18093, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1207, Target: 87, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6322, Target: 2428, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10978, Target: 2428, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1207, Target: 90, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 8971, Target: 796, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1207, Target: 92, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 8971, Target: 800, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7159, Target: 94, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3989, Target: 87, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3989, Target: 90, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 5758, Target: 97, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 620, Target: 98, Traits: 0, StrLen: 18, Count: 104, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11377, Target: 1543, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18207, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14924, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16527, Target: 849, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17511, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17200, Target: 1038, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14435, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16194, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14997, Target: 822, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17932, Target: 1497, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15177, Target: 1516, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9043, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3440, Target: 425, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10046, Target: 1364, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8923, Target: 1633, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11398, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9885, Target: 257, Traits: 0, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13962, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13312, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6889, Target: 794, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16842, Target: 203, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17655, Target: 832, Traits: 0, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15744, Target: 832, Traits: 0, StrLen: 14, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15618, Target: 862, Traits: 0, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8995, Target: 825, Traits: 0, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9235, Target: 1500, Traits: 0, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7731, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15604, Target: 264, Traits: 0, StrLen: 14, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15646, Target: 847, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12750, Target: 1587, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12213, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16503, Target: 2430, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4549, Target: 2432, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13877, Target: 1292, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12033, Target: 2431, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 11953, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9355, Target: 2433, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9331, Target: 2432, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5001, Target: 2433, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 8187, Target: 2433, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13775, Target: 2432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5091, Target: 2431, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16587, Target: 1547, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 1543, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12193, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13860, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12193, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15576, Target: 1633, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7105, Target: 1633, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7105, Target: 1626, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10000, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9067, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8462, Target: 1048, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18369, Target: 856, Traits: 0, StrLen: 4, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17610, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6916, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1936, Target: 2432, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2533, Target: 1043, Traits: 0, StrLen: 35, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13204, Target: 2431, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 15222, Target: 1529, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13894, Target: 1532, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5674, Target: 2432, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6126, Target: 2432, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10023, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12541, Target: 1292, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6781, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10737, Target: 1312, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9977, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7132, Target: 2433, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12712, Target: 1555, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13724, Target: 1068, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14771, Target: 2434, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 12253, Target: 2434, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 13348, Target: 2434, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8562, Target: 2434, Traits: 2, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9283, Target: 2434, Traits: 2, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 12273, Target: 2434, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 13366, Target: 2434, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 10913, Target: 2434, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 10913, Target: 2434, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14047, Target: 2434, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 10891, Target: 2434, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1972, Target: 2434, Traits: 2, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1016, Target: 2434, Traits: 2, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4580, Target: 2434, Traits: 2, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5151, Target: 2434, Traits: 2, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6997, Target: 2434, Traits: 2, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 16259, Target: 2434, Traits: 2, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7523, Target: 94, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10253, Target: 203, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16853, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16963, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1546, Target: 206, Traits: 0, StrLen: 24, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7549, Target: 1547, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6592, Target: 1543, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11893, Target: 1547, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17511, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 224, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16919, Target: 2431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11650, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17646, Target: 2433, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 14030, Target: 2434, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17029, Target: 2434, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17673, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 18377, Target: 246, Traits: 0, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5790, Target: 222, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 230, Traits: 0, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4611, Target: 224, Traits: 0, StrLen: 30, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10957, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17112, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17884, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17732, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4084, Target: 230, Traits: 0, StrLen: 31, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7549, Target: 1547, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6592, Target: 1543, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11893, Target: 1547, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17511, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 224, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16919, Target: 2431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11650, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17646, Target: 2433, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 14030, Target: 2434, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17029, Target: 2434, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17673, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 18377, Target: 246, Traits: 0, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5818, Target: 246, Traits: 0, StrLen: 28, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10352, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16475, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17764, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16467, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10341, Target: 2428, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9724, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2602, Target: 253, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 255, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1244, Target: 255, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14435, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2043, Target: 257, Traits: 0, StrLen: 35, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11873, Target: 807, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 17520, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 657, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18213, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6520, Target: 2429, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17948, Target: 820, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3637, Target: 264, Traits: 0, StrLen: 32, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18065, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11440, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15702, Target: 2429, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7705, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4021, Target: 2429, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17290, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18100, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14739, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16635, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10275, Target: 274, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 306, Traits: 0, StrLen: 6, Count: 104, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7185, Target: 276, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 278, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5181, Target: 278, Traits: 0, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1547, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11377, Target: 1543, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18249, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 283, Traits: 0, StrLen: 32, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7887, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16431, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17140, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16820, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17884, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9609, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17860, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18044, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17122, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16831, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12389, Target: 2428, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15520, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12826, Target: 2428, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13622, Target: 2428, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7887, Target: 2428, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17120, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17110, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9701, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17439, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16407, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14156, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7912, Target: 306, Traits: 0, StrLen: 25, Count: 104, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11377, Target: 1543, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18207, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14924, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16527, Target: 849, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17511, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17200, Target: 1038, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14435, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16194, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14997, Target: 822, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17932, Target: 1497, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15177, Target: 1516, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9043, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3440, Target: 425, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10046, Target: 1364, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8923, Target: 1633, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11398, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9885, Target: 257, Traits: 0, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13962, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13312, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6889, Target: 794, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16842, Target: 203, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17655, Target: 832, Traits: 0, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15744, Target: 832, Traits: 0, StrLen: 14, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15618, Target: 862, Traits: 0, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8995, Target: 825, Traits: 0, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9235, Target: 1500, Traits: 0, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7731, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15604, Target: 264, Traits: 0, StrLen: 14, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15646, Target: 847, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12750, Target: 1587, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12213, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16503, Target: 2430, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4549, Target: 2432, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13877, Target: 1292, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12033, Target: 2431, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 11953, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9355, Target: 2433, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9331, Target: 2432, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5001, Target: 2433, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 8187, Target: 2433, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13775, Target: 2432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5091, Target: 2431, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16587, Target: 1547, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 1543, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12193, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13860, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12193, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15576, Target: 1633, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7105, Target: 1633, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7105, Target: 1626, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10000, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9067, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8462, Target: 1048, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18369, Target: 856, Traits: 0, StrLen: 4, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17610, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6916, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1936, Target: 2432, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2533, Target: 1043, Traits: 0, StrLen: 35, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13204, Target: 2431, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 15222, Target: 1529, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13894, Target: 1532, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5674, Target: 2432, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6126, Target: 2432, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10023, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12541, Target: 1292, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6781, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10737, Target: 1312, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9977, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7132, Target: 2433, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12712, Target: 1555, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13724, Target: 1068, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14771, Target: 2434, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 12253, Target: 2434, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 13348, Target: 2434, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8562, Target: 2434, Traits: 2, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9283, Target: 2434, Traits: 2, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 12273, Target: 2434, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 13366, Target: 2434, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 10913, Target: 2434, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 10913, Target: 2434, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14047, Target: 2434, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 10891, Target: 2434, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1972, Target: 2434, Traits: 2, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1016, Target: 2434, Traits: 2, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4580, Target: 2434, Traits: 2, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5151, Target: 2434, Traits: 2, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6997, Target: 2434, Traits: 2, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 16259, Target: 2434, Traits: 2, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7523, Target: 94, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5210, Target: 411, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 413, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3701, Target: 413, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17200, Target: 1038, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18086, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18121, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 782, Target: 417, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16647, Target: 422, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17018, Target: 2434, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 11629, Target: 1692, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5846, Target: 421, Traits: 3, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 4641, Target: 422, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10957, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17884, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3044, Target: 425, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18202, Target: 2428, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18037, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5874, Target: 428, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 430, Traits: 0, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4115, Target: 430, Traits: 0, StrLen: 31, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6619, Target: 1547, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18267, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17180, Target: 1547, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12579, Target: 2429, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 14967, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7627, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 444, Traits: 0, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17250, Target: 1577, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15674, Target: 1235, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17916, Target: 1308, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 448, Traits: 0, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17250, Target: 1577, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15674, Target: 1235, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17916, Target: 1308, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14435, Target: 452, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15882, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17780, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4146, Target: 455, Traits: 0, StrLen: 31, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7783, Target: 1550, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15222, Target: 1529, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5674, Target: 2432, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6126, Target: 2432, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10891, Target: 2434, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17932, Target: 1497, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17457, Target: 463, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17349, Target: 463, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 16475, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17772, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12370, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 531, Target: 467, Traits: 0, StrLen: 24, Count: 52, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7627, Target: 1547, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6808, Target: 2429, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 1543, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5732, Target: 1543, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4456, Target: 2430, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 5031, Target: 2433, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 938, Target: 2433, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 6646, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16077, Target: 2430, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16129, Target: 2430, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 11953, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17502, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13168, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 2433, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17900, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10693, Target: 2431, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13843, Target: 1317, Traits: 0, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9163, Target: 2432, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4549, Target: 2432, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17565, Target: 2432, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 487, Target: 2432, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 698, Target: 2432, Traits: 0, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 977, Target: 2432, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15192, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 15207, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16611, Target: 2430, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 10825, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12731, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3506, Target: 2434, Traits: 2, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7835, Target: 2434, Traits: 2, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10161, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17908, Target: 1282, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5902, Target: 520, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 527, Traits: 0, StrLen: 6, Count: 52, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 531, Target: 522, Traits: 0, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7627, Target: 1547, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7861, Target: 2433, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 531, Target: 525, Traits: 0, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 522, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4177, Target: 527, Traits: 0, StrLen: 31, Count: 52, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7627, Target: 1547, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6808, Target: 2429, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 1543, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5732, Target: 1543, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4456, Target: 2430, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 5031, Target: 2433, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 938, Target: 2433, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 6646, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16077, Target: 2430, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16129, Target: 2430, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 11953, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17502, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13168, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 2433, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17900, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10693, Target: 2431, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13843, Target: 1317, Traits: 0, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9163, Target: 2432, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4549, Target: 2432, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17565, Target: 2432, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 487, Target: 2432, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 698, Target: 2432, Traits: 0, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 977, Target: 2432, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15192, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 15207, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16611, Target: 2430, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 10825, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12731, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3506, Target: 2434, Traits: 2, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7835, Target: 2434, Traits: 2, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10161, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17908, Target: 1282, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3, Target: 580, Traits: 0, StrLen: 26, Count: 39, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5732, Target: 2429, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11356, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10605, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8312, Target: 2432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16503, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 14539, Target: 2432, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6889, Target: 794, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15012, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12073, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13843, Target: 1317, Traits: 0, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16930, Target: 2432, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12617, Target: 2433, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 8487, Target: 2432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15758, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10759, Target: 2429, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6970, Target: 2429, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12113, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16659, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12233, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 11692, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 13150, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13996, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11482, Target: 1170, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4701, Target: 620, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 622, Traits: 0, StrLen: 6, Count: 39, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3077, Target: 622, Traits: 0, StrLen: 33, Count: 39, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5732, Target: 2429, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11356, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10605, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8312, Target: 2432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16503, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 14539, Target: 2432, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6889, Target: 794, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15012, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12073, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13843, Target: 1317, Traits: 0, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16930, Target: 2432, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12617, Target: 2433, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 8487, Target: 2432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15758, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10759, Target: 2429, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6970, Target: 2429, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12113, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16659, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12233, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 11692, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 13150, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13996, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11482, Target: 1170, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3, Target: 662, Traits: 0, StrLen: 46, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8337, Target: 525, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1503, Target: 2429, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 2433, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13826, Target: 2432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16941, Target: 2432, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18314, Target: 2432, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7217, Target: 670, Traits: 0, StrLen: 14, Count: 49, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14467, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13707, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 2429, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5732, Target: 1543, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9019, Target: 1547, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8412, Target: 1543, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11671, Target: 1630, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10230, Target: 1680, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12807, Target: 1680, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5061, Target: 1242, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16875, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11419, Target: 852, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17502, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15660, Target: 1051, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17220, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17900, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15072, Target: 1071, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12053, Target: 2431, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9091, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9115, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16575, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17565, Target: 2432, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16985, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15237, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17628, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16246, Target: 1591, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14755, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15800, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18261, Target: 1633, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 1543, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17908, Target: 1282, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12844, Target: 720, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 722, Traits: 0, StrLen: 6, Count: 49, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11041, Target: 722, Traits: 0, StrLen: 21, Count: 49, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14467, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13707, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 2429, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5732, Target: 1543, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9019, Target: 1547, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8412, Target: 1543, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11671, Target: 1630, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10230, Target: 1680, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12807, Target: 1680, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5061, Target: 1242, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16875, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11419, Target: 852, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17502, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15660, Target: 1051, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17220, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17900, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15072, Target: 1071, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12053, Target: 2431, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9091, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9115, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16575, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17565, Target: 2432, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16985, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15237, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17628, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16246, Target: 1591, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14755, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15800, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18261, Target: 1633, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 1543, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17908, Target: 1282, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16754, Target: 772, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 16347, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18337, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18353, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13401, Target: 776, Traits: 4, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18093, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17320, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16623, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3143, Target: 780, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7078, Target: 97, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 739, Target: 782, Traits: 0, StrLen: 40, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7078, Target: 97, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7757, Target: 1048, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6943, Target: 2431, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1318, Target: 786, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18249, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16181, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16647, Target: 1328, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1318, Target: 790, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 786, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14131, Target: 792, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18309, Target: 1590, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14131, Target: 794, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 792, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 574, Target: 796, Traits: 0, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17250, Target: 1577, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17972, Target: 1589, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15674, Target: 1235, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 574, Target: 800, Traits: 0, StrLen: 42, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17972, Target: 1589, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17250, Target: 1577, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15674, Target: 1235, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7263, Target: 804, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7783, Target: 1550, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17457, Target: 463, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6349, Target: 807, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 18399, Target: 2429, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18324, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2183, Target: 810, Traits: 0, StrLen: 31, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16116, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17230, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17270, Target: 2431, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 17956, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16996, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16671, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14081, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18324, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2183, Target: 820, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 810, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14787, Target: 822, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 14339, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12862, Target: 2428, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8611, Target: 825, Traits: 0, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 14824, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16791, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14202, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16787, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14817, Target: 2428, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14195, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10385, Target: 832, Traits: 0, StrLen: 22, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13060, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14579, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7731, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9283, Target: 2434, Traits: 2, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4580, Target: 2434, Traits: 2, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 12253, Target: 2434, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 13348, Target: 2434, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14163, Target: 842, Traits: 0, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17538, Target: 2431, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 17752, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16503, Target: 2433, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12093, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 14163, Target: 847, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 842, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16371, Target: 849, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18037, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11713, Target: 2428, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11083, Target: 852, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7679, Target: 2431, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8437, Target: 2431, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11503, Target: 2431, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9287, Target: 856, Traits: 0, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18030, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14156, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14147, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16743, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14323, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15338, Target: 862, Traits: 0, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15897, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15426, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15895, Target: 2428, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15422, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15908, Target: 868, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17752, Target: 870, Traits: 0, StrLen: 4, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15908, Target: 870, Traits: 0, StrLen: 13, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18165, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18051, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17448, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17868, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18147, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17844, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18189, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17050, Target: 878, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 868, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14179, Target: 880, Traits: 0, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18207, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15042, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18319, Target: 2432, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 14179, Target: 884, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 880, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6269, Target: 886, Traits: 0, StrLen: 6, Count: 28, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17493, Target: 1547, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17484, Target: 1543, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 919, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13690, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17160, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16090, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16491, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17180, Target: 1547, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17190, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16897, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17892, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17900, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15102, Target: 917, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10138, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9307, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7809, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14098, Target: 2432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18128, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18273, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14707, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13758, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17060, Target: 915, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 929, Traits: 0, StrLen: 6, Count: 26, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11104, Target: 917, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11335, Target: 2428, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11733, Target: 919, Traits: 0, StrLen: 20, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7887, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16431, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17140, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16820, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17884, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17860, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18044, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17122, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15921, Target: 929, Traits: 0, StrLen: 13, Count: 26, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17493, Target: 1547, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17484, Target: 1543, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 919, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13690, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17160, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16090, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16491, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17180, Target: 1547, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17190, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16897, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17892, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17900, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15102, Target: 917, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10138, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9307, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7809, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14098, Target: 2432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18128, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18273, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9379, Target: 956, Traits: 0, StrLen: 8, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17180, Target: 1547, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9908, Target: 979, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9931, Target: 2429, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16930, Target: 2432, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11545, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15758, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 16719, Target: 1633, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10627, Target: 1633, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6619, Target: 1633, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16383, Target: 977, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 989, Traits: 0, StrLen: 6, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9379, Target: 979, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10671, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15772, Target: 984, Traits: 0, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14064, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12788, Target: 2429, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10407, Target: 984, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 17716, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9609, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17394, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14802, Target: 989, Traits: 0, StrLen: 15, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17180, Target: 1547, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9908, Target: 979, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9931, Target: 2429, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16930, Target: 2432, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11545, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15758, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 16719, Target: 1633, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10627, Target: 1633, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6619, Target: 1633, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13418, Target: 1010, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1012, Traits: 0, StrLen: 6, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11753, Target: 1012, Traits: 0, StrLen: 20, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8262, Target: 2432, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8262, Target: 2432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8287, Target: 2432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3010, Target: 2432, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6673, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6700, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11913, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6727, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13132, Target: 2432, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15117, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 14611, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12636, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12655, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6266, Target: 2432, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11566, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15147, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 14627, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 14643, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10115, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17007, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17637, Target: 1606, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15252, Target: 1604, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17752, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9793, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 17070, Target: 1038, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18357, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18384, Target: 2428, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18329, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18402, Target: 2428, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 750, Target: 1043, Traits: 0, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11993, Target: 1048, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6943, Target: 2431, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13792, Target: 2431, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5121, Target: 2434, Traits: 2, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7763, Target: 1048, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18381, Target: 2428, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16311, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15352, Target: 1051, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 14847, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18177, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2639, Target: 1054, Traits: 0, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 14403, Target: 444, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14675, Target: 1381, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14691, Target: 1491, Traits: 0, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2639, Target: 1058, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 14403, Target: 448, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7341, Target: 1060, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15436, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17988, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18396, Target: 2428, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6913, Target: 2428, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7341, Target: 1065, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15436, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17988, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13435, Target: 1068, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11461, Target: 1060, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7653, Target: 1054, Traits: 0, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 13452, Target: 1071, Traits: 0, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18079, Target: 884, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14595, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15730, Target: 1297, Traits: 0, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17574, Target: 1367, Traits: 0, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 140, Target: 1076, Traits: 0, StrLen: 14, Count: 44, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14547, Target: 1550, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16875, Target: 772, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 11419, Target: 852, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14531, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13741, Target: 1543, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8412, Target: 1543, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17220, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16908, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16168, Target: 1268, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17900, Target: 1274, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17908, Target: 1282, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15072, Target: 1071, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9115, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16575, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17565, Target: 2432, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 1543, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16985, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15237, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17628, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10847, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10847, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 1601, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8537, Target: 1123, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16246, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15800, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15814, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10935, Target: 1123, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18261, Target: 1633, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3572, Target: 1123, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12880, Target: 1121, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1125, Traits: 0, StrLen: 6, Count: 44, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5930, Target: 1123, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 15828, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11146, Target: 1125, Traits: 0, StrLen: 21, Count: 44, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14547, Target: 1550, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16875, Target: 772, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 11419, Target: 852, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14531, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13741, Target: 1543, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8412, Target: 1543, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17220, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16908, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16168, Target: 1268, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17900, Target: 1274, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17908, Target: 1282, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15072, Target: 1071, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9115, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16575, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17565, Target: 2432, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 1543, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16985, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15237, Target: 2429, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17628, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10847, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10847, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 1601, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8537, Target: 1123, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16246, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15800, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15814, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10935, Target: 1123, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18261, Target: 1633, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3572, Target: 1123, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11167, Target: 1170, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11692, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8312, Target: 2432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10184, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6754, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8635, Target: 1175, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13096, Target: 2432, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15828, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2676, Target: 1178, Traits: 0, StrLen: 22, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5645, Target: 2432, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9816, Target: 1604, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12522, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5732, Target: 1543, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 1547, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 13168, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16272, Target: 1544, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15842, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16719, Target: 1548, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8412, Target: 1543, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 657, Target: 1175, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13186, Target: 2431, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17691, Target: 1232, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7367, Target: 1204, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1206, Traits: 0, StrLen: 6, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5297, Target: 1206, Traits: 0, StrLen: 29, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5645, Target: 2432, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9816, Target: 1604, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12522, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5732, Target: 1543, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 1547, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 13168, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16272, Target: 1544, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15842, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16719, Target: 1548, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8412, Target: 1543, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 657, Target: 1175, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13186, Target: 2431, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 18365, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18231, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17691, Target: 1232, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7393, Target: 1232, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9402, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8587, Target: 2428, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15366, Target: 1235, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15882, Target: 2428, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14115, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16809, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2738, Target: 1239, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17300, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12598, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2738, Target: 1242, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1239, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13469, Target: 1244, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1246, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11773, Target: 1246, Traits: 0, StrLen: 20, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8262, Target: 2432, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9862, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7601, Target: 2432, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11913, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16515, Target: 773, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13168, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16551, Target: 1271, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14627, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17752, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10115, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12898, Target: 1258, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 12934, Target: 1259, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1261, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11188, Target: 1261, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18121, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16908, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15934, Target: 1264, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1266, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14227, Target: 1266, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18121, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15947, Target: 1268, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15506, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16335, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16395, Target: 1271, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18002, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18333, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17748, Target: 1274, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 17080, Target: 1275, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 2432, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 891, Target: 1277, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17250, Target: 1577, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1284, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15590, Target: 1644, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15453, Target: 1282, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1277, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14278, Target: 1284, Traits: 0, StrLen: 13, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15327, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15324, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12380, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16359, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12370, Target: 2428, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13673, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16765, Target: 1292, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 2432, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9517, Target: 1294, Traits: 6, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18093, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13928, Target: 2432, Traits: 7, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12952, Target: 1297, Traits: 0, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15869, Target: 2428, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14147, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16791, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17884, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17358, Target: 1303, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16647, Target: 1328, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16181, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13809, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15973, Target: 1308, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 16419, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10297, Target: 2428, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14243, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10517, Target: 1312, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17260, Target: 2431, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16233, Target: 1535, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11650, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16683, Target: 2434, Traits: 2, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7813, Target: 1317, Traits: 0, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8362, Target: 2432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17170, Target: 878, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17240, Target: 1275, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6210, Target: 2431, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 15087, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18225, Target: 1362, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16599, Target: 1507, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17310, Target: 1526, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18255, Target: 2431, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16731, Target: 1698, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11230, Target: 1328, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 16791, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14824, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14147, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14202, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11251, Target: 1333, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16647, Target: 1328, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16181, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14862, Target: 1336, Traits: 0, StrLen: 15, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13979, Target: 1543, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13276, Target: 1543, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9139, Target: 1633, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10869, Target: 1593, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11524, Target: 1333, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16298, Target: 1700, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17964, Target: 1578, Traits: 0, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17664, Target: 1635, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17547, Target: 1303, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3473, Target: 790, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16486, Target: 1347, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17752, Target: 1349, Traits: 0, StrLen: 4, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17367, Target: 1349, Traits: 0, StrLen: 9, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18009, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17740, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18299, Target: 2428, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18279, Target: 2428, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18393, Target: 2428, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18345, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18341, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18135, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17403, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18023, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17788, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17724, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18171, Target: 1362, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1347, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9632, Target: 1364, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8587, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18183, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17376, Target: 1367, Traits: 0, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 17340, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17700, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18284, Target: 2428, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14847, Target: 2428, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16776, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13537, Target: 1373, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18153, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 234, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7471, Target: 1376, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14659, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7471, Target: 1379, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1376, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5384, Target: 1381, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17916, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18114, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14275, Target: 1384, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17250, Target: 1577, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15590, Target: 1373, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 1391, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15450, Target: 1389, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1384, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14275, Target: 1391, Traits: 0, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 16431, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7887, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14291, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16820, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14387, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13554, Target: 1397, Traits: 0, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12674, Target: 2429, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6294, Target: 2429, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12133, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5616, Target: 2429, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5961, Target: 1404, Traits: 0, StrLen: 19, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 16798, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9678, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9655, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10539, Target: 2428, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17040, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10957, Target: 2428, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10957, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15282, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8851, Target: 2428, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17412, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17708, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10369, Target: 1417, Traits: 0, StrLen: 10, Count: 22, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14451, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14419, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14483, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14499, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10803, Target: 1633, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13240, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12693, Target: 2429, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17924, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17583, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10069, Target: 1379, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 9139, Target: 1336, Traits: 0, StrLen: 15, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12013, Target: 1548, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15464, Target: 1440, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1442, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13571, Target: 1442, Traits: 0, StrLen: 17, Count: 22, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14451, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14419, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14483, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14499, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10803, Target: 1633, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13240, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12693, Target: 2429, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11587, Target: 2429, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17924, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17583, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10069, Target: 1379, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 9139, Target: 1336, Traits: 0, StrLen: 15, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12013, Target: 1548, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3739, Target: 1465, Traits: 0, StrLen: 20, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10781, Target: 1550, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10092, Target: 2429, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15786, Target: 2429, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9211, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7051, Target: 1511, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 8803, Target: 1477, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1479, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6457, Target: 1479, Traits: 0, StrLen: 27, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10781, Target: 1550, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10092, Target: 2429, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16207, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15786, Target: 2429, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9211, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7051, Target: 1511, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17466, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 15162, Target: 2430, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 5413, Target: 1491, Traits: 0, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8947, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16103, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16155, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17592, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18237, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17804, Target: 1497, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 17385, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17100, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8827, Target: 1500, Traits: 0, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 14824, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16791, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14202, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16787, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14817, Target: 2428, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14195, Target: 2428, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14307, Target: 1507, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13524, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17090, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15478, Target: 1510, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 15478, Target: 1511, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1510, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6484, Target: 1513, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6484, Target: 1514, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1513, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14877, Target: 1516, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 16445, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16443, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4363, Target: 1519, Traits: 0, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7783, Target: 1550, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17457, Target: 463, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17682, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3539, Target: 2431, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12541, Target: 1292, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13812, Target: 1525, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 15492, Target: 1526, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15986, Target: 2428, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13384, Target: 2428, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14892, Target: 1529, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 17340, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18159, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13605, Target: 1532, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15412, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15408, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15999, Target: 1535, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 17796, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18195, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18016, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18201, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16012, Target: 1540, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 18399, Target: 1652, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18324, Target: 1655, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14907, Target: 1543, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 14907, Target: 1544, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1543, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12408, Target: 1546, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 14922, Target: 1547, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 15534, Target: 1548, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1547, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14922, Target: 1550, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8112, Target: 1551, Traits: 8, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18093, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17320, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16623, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12427, Target: 1555, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17260, Target: 2431, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 17940, Target: 2432, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12173, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5703, Target: 2433, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12293, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8899, Target: 2432, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3687, Target: 1562, Traits: 0, StrLen: 14, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7887, Target: 2428, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9442, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16431, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17140, Target: 2428, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16820, Target: 2428, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17884, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9609, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15548, Target: 1570, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 18399, Target: 1652, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18324, Target: 1655, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4911, Target: 1573, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7549, Target: 1550, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17457, Target: 463, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12541, Target: 1292, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17253, Target: 1577, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 17836, Target: 1578, Traits: 0, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16647, Target: 1328, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16181, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14723, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5471, Target: 1583, Traits: 0, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17475, Target: 868, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13294, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13945, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5471, Target: 1587, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1583, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16038, Target: 1589, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 12446, Target: 1590, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 12446, Target: 1591, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1590, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10561, Target: 1593, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16285, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15267, Target: 1683, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5500, Target: 1596, Traits: 10, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18093, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17320, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16623, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17619, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9824, Target: 1601, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 16025, Target: 2428, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15856, Target: 2428, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13006, Target: 1604, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1601, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17421, Target: 1606, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18387, Target: 2428, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15960, Target: 2428, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15960, Target: 2428, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15296, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1183, Target: 1611, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 16142, Target: 804, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13911, Target: 1573, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13258, Target: 1519, Traits: 0, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11933, Target: 780, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6862, Target: 782, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13114, Target: 455, Traits: 0, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17130, Target: 1618, Traits: 0, StrLen: 10, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18349, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15882, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15310, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11020, Target: 2428, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10319, Target: 2428, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4671, Target: 2428, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11713, Target: 2428, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6511, Target: 1626, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18030, Target: 2428, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17852, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15394, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11272, Target: 1630, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18390, Target: 2428, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9402, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12455, Target: 1633, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17430, Target: 1635, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16647, Target: 1328, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16181, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17210, Target: 2429, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14013, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13024, Target: 1640, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16539, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13024, Target: 1642, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1640, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9747, Target: 1644, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18153, Target: 2428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13656, Target: 1646, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1648, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11833, Target: 1648, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17220, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15800, Target: 1633, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18058, Target: 1652, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 18058, Target: 1653, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1652, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17876, Target: 1655, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 12484, Target: 1656, Traits: 11, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18093, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13928, Target: 2432, Traits: 7, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9770, Target: 1659, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16695, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16455, Target: 1661, Traits: 0, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13524, Target: 2428, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13520, Target: 2428, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17812, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17828, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6098, Target: 1666, Traits: 12, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18093, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18243, Target: 1675, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17529, Target: 1673, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6098, Target: 1670, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17752, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18093, Target: 2429, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6098, Target: 1673, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 1670, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8162, Target: 1675, Traits: 0, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13673, Target: 2428, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16323, Target: 2428, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9425, Target: 2428, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18304, Target: 2428, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16051, Target: 1680, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18294, Target: 2428, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9402, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14952, Target: 1683, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15562, Target: 2428, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1169, Target: 1685, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6322, Target: 2428, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10978, Target: 2428, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1169, Target: 1688, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 8971, Target: 796, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1169, Target: 1690, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 8971, Target: 800, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6565, Target: 1692, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7024, Target: 1685, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7024, Target: 1688, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 17150, Target: 1695, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 17820, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17756, Target: 2428, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16479, Target: 1698, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 18219, Target: 2432, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16064, Target: 1700, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16647, Target: 1328, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18361, Target: 2429, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2568, Target: 1703, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6238, Target: 2429, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2008, Target: 1705, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4053, Target: 1706, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17250, Target: 1577, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15590, Target: 1644, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16974, Target: 97, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 1710, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 397, Target: 1711, Traits: 0, StrLen: 45, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14547, Target: 1550, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14515, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 259, Target: 1714, Traits: 0, StrLen: 46, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2078, Target: 1719, Traits: 0, StrLen: 35, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11650, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1540, Target: 1725, Traits: 0, StrLen: 36, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7549, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5239, Target: 1730, Traits: 0, StrLen: 29, Count: 41, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18207, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3989, Target: 1590, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16503, Target: 2433, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 11973, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11953, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17200, Target: 1038, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12033, Target: 2431, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5091, Target: 2431, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14435, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16194, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17511, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14997, Target: 822, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7105, Target: 1626, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3440, Target: 425, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6781, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11398, Target: 2433, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6889, Target: 794, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13860, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12193, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12213, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12712, Target: 1555, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12750, Target: 1587, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7105, Target: 1633, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15576, Target: 1633, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10207, Target: 1659, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9977, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10000, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9043, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 15646, Target: 847, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 42, Target: 1618, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12769, Target: 1611, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 11461, Target: 1065, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7653, Target: 1058, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3989, Target: 87, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3989, Target: 92, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4731, Target: 1772, Traits: 0, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2113, Target: 1777, Traits: 0, StrLen: 35, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17330, Target: 1695, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7024, Target: 1590, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7024, Target: 1685, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7024, Target: 1690, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1576, Target: 1784, Traits: 0, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6154, Target: 421, Traits: 13, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 2148, Target: 1786, Traits: 0, StrLen: 35, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5031, Target: 2433, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17502, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13168, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10693, Target: 2431, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13843, Target: 1317, Traits: 0, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4549, Target: 2432, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10825, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12731, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10161, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1612, Target: 1804, Traits: 0, StrLen: 36, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7627, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1281, Target: 1809, Traits: 0, StrLen: 37, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 1258, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 16503, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6889, Target: 794, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13843, Target: 1317, Traits: 0, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16659, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13150, Target: 1258, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13996, Target: 1258, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1055, Target: 1822, Traits: 0, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 2429, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7937, Target: 1827, Traits: 0, StrLen: 25, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10230, Target: 1680, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12807, Target: 1680, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5061, Target: 1242, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17220, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17900, Target: 1274, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16246, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16875, Target: 772, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11419, Target: 852, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11973, Target: 2433, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10649, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17502, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 12053, Target: 2431, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9091, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15132, Target: 2432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15800, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10847, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7211, Target: 1853, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14467, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7962, Target: 1858, Traits: 0, StrLen: 25, Count: 21, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14531, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16908, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17900, Target: 1274, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17565, Target: 2432, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16246, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15814, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3572, Target: 2432, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16875, Target: 772, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11419, Target: 852, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10847, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10847, Target: 2432, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15252, Target: 1601, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15800, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7237, Target: 1880, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3110, Target: 1885, Traits: 0, StrLen: 33, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 657, Target: 2432, Traits: 0, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5645, Target: 2432, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12522, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13168, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13186, Target: 2431, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 17980, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2670, Target: 1898, Traits: 0, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9019, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11062, Target: 1903, Traits: 0, StrLen: 21, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14451, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14419, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14483, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14499, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17964, Target: 82, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16298, Target: 82, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17664, Target: 82, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17547, Target: 82, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14723, Target: 1525, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14013, Target: 1525, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13809, Target: 1525, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2498, Target: 1633, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 10363, Target: 1921, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16587, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4208, Target: 1926, Traits: 0, StrLen: 31, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16220, Target: 1550, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8512, Target: 1511, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9259, Target: 1514, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16864, Target: 1258, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3733, Target: 1934, Traits: 0, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10781, Target: 2429, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2218, Target: 1939, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7549, Target: 1547, Traits: 14, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1648, Target: 1941, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5268, Target: 1942, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 14, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4761, Target: 1944, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2253, Target: 1945, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7627, Target: 1547, Traits: 14, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1684, Target: 1947, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1355, Target: 1948, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 14, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1093, Target: 1950, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7987, Target: 1951, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14467, Target: 1547, Traits: 14, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7289, Target: 1953, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8012, Target: 1954, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14547, Target: 1550, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7315, Target: 1956, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3176, Target: 1957, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2704, Target: 1959, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11125, Target: 1960, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16587, Target: 1550, Traits: 14, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8387, Target: 2431, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10429, Target: 1963, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4239, Target: 1964, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10781, Target: 1550, Traits: 14, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3765, Target: 1966, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1720, Target: 1967, Traits: 0, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17250, Target: 1577, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15590, Target: 1644, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16974, Target: 97, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1392, Target: 1971, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 160, Target: 1972, Traits: 0, StrLen: 50, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14547, Target: 1550, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17493, Target: 1548, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 109, Target: 1975, Traits: 0, StrLen: 51, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4270, Target: 1980, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17601, Target: 1543, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3797, Target: 1983, Traits: 0, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3829, Target: 1988, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7549, Target: 1547, Traits: 14, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3209, Target: 1990, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6592, Target: 206, Traits: 0, StrLen: 24, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7419, Target: 1992, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 14, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6376, Target: 1994, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 210, Target: 98, Traits: 0, StrLen: 18, Count: 104, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 899, Target: 1996, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 779, Target: 1998, Traits: 0, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4518, Target: 417, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3861, Target: 2000, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7627, Target: 1547, Traits: 14, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3242, Target: 2002, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6808, Target: 467, Traits: 0, StrLen: 24, Count: 52, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2772, Target: 2004, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 14, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2288, Target: 2006, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 351, Target: 580, Traits: 0, StrLen: 26, Count: 39, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 55, Target: 2008, Traits: 0, StrLen: 54, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 14, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17502, Target: 1633, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 2011, Traits: 0, StrLen: 55, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 351, Target: 662, Traits: 0, StrLen: 46, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10451, Target: 2013, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14467, Target: 1547, Traits: 14, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9448, Target: 2015, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13707, Target: 670, Traits: 0, StrLen: 14, Count: 49, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15380, Target: 2017, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14467, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17493, Target: 1547, Traits: 14, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14832, Target: 2021, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10649, Target: 886, Traits: 0, StrLen: 6, Count: 28, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14211, Target: 2023, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 14, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17180, Target: 1547, Traits: 14, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13486, Target: 2026, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9908, Target: 956, Traits: 0, StrLen: 8, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10473, Target: 2028, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14547, Target: 1550, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9471, Target: 2030, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13741, Target: 1076, Traits: 0, StrLen: 14, Count: 44, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4791, Target: 2032, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4301, Target: 2034, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8412, Target: 1178, Traits: 0, StrLen: 22, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6403, Target: 2036, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5958, Target: 2037, Traits: 0, StrLen: 28, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16647, Target: 1404, Traits: 0, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5761, Target: 2429, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9187, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6294, Target: 1397, Traits: 0, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 859, Target: 1389, Traits: 0, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13222, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10715, Target: 2429, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13330, Target: 1642, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12916, Target: 2046, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16587, Target: 1550, Traits: 14, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12313, Target: 2048, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16207, Target: 1417, Traits: 0, StrLen: 10, Count: 22, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5986, Target: 2050, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10781, Target: 1550, Traits: 14, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5326, Target: 2052, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9211, Target: 1465, Traits: 0, StrLen: 20, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10495, Target: 2054, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6294, Target: 2431, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 210, Target: 82, Traits: 0, StrLen: 49, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9494, Target: 2057, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2806, Target: 2058, Traits: 0, StrLen: 34, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11893, Target: 1547, Traits: 14, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 224, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18377, Target: 246, Traits: 0, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2323, Target: 2064, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8212, Target: 222, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 819, Target: 2067, Traits: 0, StrLen: 40, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14435, Target: 452, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 616, Target: 2071, Traits: 0, StrLen: 41, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4487, Target: 253, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3275, Target: 2074, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11893, Target: 1550, Traits: 14, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2840, Target: 2078, Traits: 0, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8875, Target: 274, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3893, Target: 2081, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11893, Target: 1550, Traits: 14, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3308, Target: 2085, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9839, Target: 276, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6014, Target: 2088, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5355, Target: 2091, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12503, Target: 274, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2358, Target: 2094, Traits: 0, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17200, Target: 1038, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1756, Target: 2098, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7575, Target: 411, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2874, Target: 2101, Traits: 0, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7627, Target: 1547, Traits: 14, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2393, Target: 2105, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8237, Target: 428, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2908, Target: 2108, Traits: 0, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2428, Target: 2112, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8337, Target: 520, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1792, Target: 2115, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1429, Target: 2118, Traits: 0, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6835, Target: 620, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8659, Target: 2121, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8037, Target: 2125, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14982, Target: 720, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14259, Target: 2128, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14467, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13503, Target: 2133, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18072, Target: 915, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12970, Target: 2136, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 14, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12332, Target: 2140, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17502, Target: 977, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9540, Target: 2143, Traits: 0, StrLen: 23, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17007, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8683, Target: 2149, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15632, Target: 1010, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8707, Target: 2152, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9019, Target: 1550, Traits: 17, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8062, Target: 2156, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15027, Target: 1121, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3925, Target: 2159, Traits: 0, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 1550, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17691, Target: 1232, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3341, Target: 2164, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9954, Target: 1204, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9563, Target: 2167, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8731, Target: 2171, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15688, Target: 1244, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8755, Target: 2174, Traits: 0, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17220, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17280, Target: 2432, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17007, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13078, Target: 2429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8087, Target: 2181, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15057, Target: 1259, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12351, Target: 2184, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11793, Target: 2188, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17220, Target: 1264, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11813, Target: 2191, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11209, Target: 2194, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16952, Target: 1440, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4821, Target: 2197, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16587, Target: 1550, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4332, Target: 2201, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11608, Target: 1477, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9586, Target: 2204, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17280, Target: 2432, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17556, Target: 2429, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17220, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15252, Target: 2429, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8779, Target: 2209, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17556, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15800, Target: 1646, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7445, Target: 2212, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16974, Target: 1543, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6430, Target: 2214, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18373, Target: 1570, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 5442, Target: 2216, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15716, Target: 2431, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4851, Target: 2219, Traits: 0, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13588, Target: 2224, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14467, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17493, Target: 1547, Traits: 14, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12988, Target: 2228, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17493, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 919, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4881, Target: 2232, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17682, Target: 2434, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4394, Target: 2235, Traits: 0, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5529, Target: 2240, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4941, Target: 2242, Traits: 0, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6042, Target: 2247, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5558, Target: 2249, Traits: 0, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14355, Target: 2254, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14467, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17493, Target: 1547, Traits: 14, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13639, Target: 2258, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17493, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 919, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6538, Target: 2262, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6070, Target: 2264, Traits: 0, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14937, Target: 2269, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14467, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 1547, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17493, Target: 1547, Traits: 14, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14371, Target: 2273, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17493, Target: 2429, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 919, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3374, Target: 2277, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17601, Target: 1543, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2942, Target: 2280, Traits: 0, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13042, Target: 2285, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16974, Target: 1543, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18373, Target: 1540, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 12465, Target: 2288, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11853, Target: 2289, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16974, Target: 1543, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18107, Target: 1653, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11293, Target: 2292, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2463, Target: 2293, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7549, Target: 1547, Traits: 14, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11650, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1828, Target: 2296, Traits: 0, StrLen: 36, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7549, Target: 2429, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5587, Target: 2301, Traits: 0, StrLen: 29, Count: 45, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3989, Target: 1590, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16503, Target: 2433, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12560, Target: 2432, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11973, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11953, Target: 2432, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18207, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17511, Target: 2429, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17200, Target: 1038, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15646, Target: 847, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14997, Target: 822, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12033, Target: 2431, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5091, Target: 2431, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9977, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10000, Target: 2431, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9043, Target: 2431, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13204, Target: 2431, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 14563, Target: 2431, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6781, Target: 2432, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11398, Target: 2433, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1936, Target: 2432, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3440, Target: 425, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6889, Target: 794, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12750, Target: 1587, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10737, Target: 1312, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17932, Target: 1497, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15177, Target: 1516, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15222, Target: 1529, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13860, Target: 2429, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12193, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17610, Target: 1550, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12213, Target: 1550, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12712, Target: 1555, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7105, Target: 1626, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7105, Target: 1633, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15576, Target: 1633, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5674, Target: 2432, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6126, Target: 2432, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10891, Target: 2434, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 11461, Target: 1065, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7653, Target: 1058, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3989, Target: 87, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3989, Target: 92, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4971, Target: 2347, Traits: 0, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11893, Target: 2429, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 283, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1466, Target: 2352, Traits: 0, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 14, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13843, Target: 1317, Traits: 0, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1131, Target: 2355, Traits: 0, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 2429, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8137, Target: 2360, Traits: 0, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14547, Target: 1550, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11419, Target: 852, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14531, Target: 2432, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16908, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16563, Target: 1309, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16246, Target: 1633, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15800, Target: 2429, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15814, Target: 2432, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16707, Target: 1661, Traits: 0, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3572, Target: 2432, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7497, Target: 2372, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14547, Target: 2429, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 442, Target: 2377, Traits: 0, StrLen: 45, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6182, Target: 1550, Traits: 14, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11692, Target: 2432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10184, Target: 2432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 305, Target: 2381, Traits: 0, StrLen: 46, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6182, Target: 2429, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3407, Target: 2386, Traits: 0, StrLen: 33, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9019, Target: 1550, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5645, Target: 2432, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12522, Target: 2432, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13168, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 657, Target: 2432, Traits: 0, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13186, Target: 2431, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2976, Target: 2394, Traits: 0, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9019, Target: 2429, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11314, Target: 2399, Traits: 0, StrLen: 21, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16587, Target: 1550, Traits: 14, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12153, Target: 1633, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10803, Target: 1633, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17964, Target: 82, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16298, Target: 82, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17664, Target: 82, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17547, Target: 82, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14723, Target: 1525, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14013, Target: 1525, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13809, Target: 1525, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2498, Target: 1633, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1864, Target: 1633, Traits: 0, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10583, Target: 2413, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16587, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4425, Target: 2418, Traits: 0, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10781, Target: 1550, Traits: 14, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16886, Target: 1546, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8512, Target: 1511, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7051, Target: 1511, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3957, Target: 2423, Traits: 0, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16886, Target: 2429, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16647, Target: 1562, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16647, Target: 2429, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10781, Target: 2429, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4571, Target: 2428, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 2071, Target: 2429, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 18289, Target: 2430, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 2},
+		{StrOff: 17995, Target: 2431, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 16765, Target: 2432, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 18141, Target: 2433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 2},
+		{StrOff: 3563, Target: 2434, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/zip"}}, DirectMask: 0x40100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/zip"}}},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "exascaleDbStorageVaultId"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [2435]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+	smithy.NewStaticSchema(&set, 884),
+	smithy.NewStaticSchema(&set, 885),
+	smithy.NewStaticSchema(&set, 886),
+	smithy.NewStaticSchema(&set, 887),
+	smithy.NewStaticSchema(&set, 888),
+	smithy.NewStaticSchema(&set, 889),
+	smithy.NewStaticSchema(&set, 890),
+	smithy.NewStaticSchema(&set, 891),
+	smithy.NewStaticSchema(&set, 892),
+	smithy.NewStaticSchema(&set, 893),
+	smithy.NewStaticSchema(&set, 894),
+	smithy.NewStaticSchema(&set, 895),
+	smithy.NewStaticSchema(&set, 896),
+	smithy.NewStaticSchema(&set, 897),
+	smithy.NewStaticSchema(&set, 898),
+	smithy.NewStaticSchema(&set, 899),
+	smithy.NewStaticSchema(&set, 900),
+	smithy.NewStaticSchema(&set, 901),
+	smithy.NewStaticSchema(&set, 902),
+	smithy.NewStaticSchema(&set, 903),
+	smithy.NewStaticSchema(&set, 904),
+	smithy.NewStaticSchema(&set, 905),
+	smithy.NewStaticSchema(&set, 906),
+	smithy.NewStaticSchema(&set, 907),
+	smithy.NewStaticSchema(&set, 908),
+	smithy.NewStaticSchema(&set, 909),
+	smithy.NewStaticSchema(&set, 910),
+	smithy.NewStaticSchema(&set, 911),
+	smithy.NewStaticSchema(&set, 912),
+	smithy.NewStaticSchema(&set, 913),
+	smithy.NewStaticSchema(&set, 914),
+	smithy.NewStaticSchema(&set, 915),
+	smithy.NewStaticSchema(&set, 916),
+	smithy.NewStaticSchema(&set, 917),
+	smithy.NewStaticSchema(&set, 918),
+	smithy.NewStaticSchema(&set, 919),
+	smithy.NewStaticSchema(&set, 920),
+	smithy.NewStaticSchema(&set, 921),
+	smithy.NewStaticSchema(&set, 922),
+	smithy.NewStaticSchema(&set, 923),
+	smithy.NewStaticSchema(&set, 924),
+	smithy.NewStaticSchema(&set, 925),
+	smithy.NewStaticSchema(&set, 926),
+	smithy.NewStaticSchema(&set, 927),
+	smithy.NewStaticSchema(&set, 928),
+	smithy.NewStaticSchema(&set, 929),
+	smithy.NewStaticSchema(&set, 930),
+	smithy.NewStaticSchema(&set, 931),
+	smithy.NewStaticSchema(&set, 932),
+	smithy.NewStaticSchema(&set, 933),
+	smithy.NewStaticSchema(&set, 934),
+	smithy.NewStaticSchema(&set, 935),
+	smithy.NewStaticSchema(&set, 936),
+	smithy.NewStaticSchema(&set, 937),
+	smithy.NewStaticSchema(&set, 938),
+	smithy.NewStaticSchema(&set, 939),
+	smithy.NewStaticSchema(&set, 940),
+	smithy.NewStaticSchema(&set, 941),
+	smithy.NewStaticSchema(&set, 942),
+	smithy.NewStaticSchema(&set, 943),
+	smithy.NewStaticSchema(&set, 944),
+	smithy.NewStaticSchema(&set, 945),
+	smithy.NewStaticSchema(&set, 946),
+	smithy.NewStaticSchema(&set, 947),
+	smithy.NewStaticSchema(&set, 948),
+	smithy.NewStaticSchema(&set, 949),
+	smithy.NewStaticSchema(&set, 950),
+	smithy.NewStaticSchema(&set, 951),
+	smithy.NewStaticSchema(&set, 952),
+	smithy.NewStaticSchema(&set, 953),
+	smithy.NewStaticSchema(&set, 954),
+	smithy.NewStaticSchema(&set, 955),
+	smithy.NewStaticSchema(&set, 956),
+	smithy.NewStaticSchema(&set, 957),
+	smithy.NewStaticSchema(&set, 958),
+	smithy.NewStaticSchema(&set, 959),
+	smithy.NewStaticSchema(&set, 960),
+	smithy.NewStaticSchema(&set, 961),
+	smithy.NewStaticSchema(&set, 962),
+	smithy.NewStaticSchema(&set, 963),
+	smithy.NewStaticSchema(&set, 964),
+	smithy.NewStaticSchema(&set, 965),
+	smithy.NewStaticSchema(&set, 966),
+	smithy.NewStaticSchema(&set, 967),
+	smithy.NewStaticSchema(&set, 968),
+	smithy.NewStaticSchema(&set, 969),
+	smithy.NewStaticSchema(&set, 970),
+	smithy.NewStaticSchema(&set, 971),
+	smithy.NewStaticSchema(&set, 972),
+	smithy.NewStaticSchema(&set, 973),
+	smithy.NewStaticSchema(&set, 974),
+	smithy.NewStaticSchema(&set, 975),
+	smithy.NewStaticSchema(&set, 976),
+	smithy.NewStaticSchema(&set, 977),
+	smithy.NewStaticSchema(&set, 978),
+	smithy.NewStaticSchema(&set, 979),
+	smithy.NewStaticSchema(&set, 980),
+	smithy.NewStaticSchema(&set, 981),
+	smithy.NewStaticSchema(&set, 982),
+	smithy.NewStaticSchema(&set, 983),
+	smithy.NewStaticSchema(&set, 984),
+	smithy.NewStaticSchema(&set, 985),
+	smithy.NewStaticSchema(&set, 986),
+	smithy.NewStaticSchema(&set, 987),
+	smithy.NewStaticSchema(&set, 988),
+	smithy.NewStaticSchema(&set, 989),
+	smithy.NewStaticSchema(&set, 990),
+	smithy.NewStaticSchema(&set, 991),
+	smithy.NewStaticSchema(&set, 992),
+	smithy.NewStaticSchema(&set, 993),
+	smithy.NewStaticSchema(&set, 994),
+	smithy.NewStaticSchema(&set, 995),
+	smithy.NewStaticSchema(&set, 996),
+	smithy.NewStaticSchema(&set, 997),
+	smithy.NewStaticSchema(&set, 998),
+	smithy.NewStaticSchema(&set, 999),
+	smithy.NewStaticSchema(&set, 1000),
+	smithy.NewStaticSchema(&set, 1001),
+	smithy.NewStaticSchema(&set, 1002),
+	smithy.NewStaticSchema(&set, 1003),
+	smithy.NewStaticSchema(&set, 1004),
+	smithy.NewStaticSchema(&set, 1005),
+	smithy.NewStaticSchema(&set, 1006),
+	smithy.NewStaticSchema(&set, 1007),
+	smithy.NewStaticSchema(&set, 1008),
+	smithy.NewStaticSchema(&set, 1009),
+	smithy.NewStaticSchema(&set, 1010),
+	smithy.NewStaticSchema(&set, 1011),
+	smithy.NewStaticSchema(&set, 1012),
+	smithy.NewStaticSchema(&set, 1013),
+	smithy.NewStaticSchema(&set, 1014),
+	smithy.NewStaticSchema(&set, 1015),
+	smithy.NewStaticSchema(&set, 1016),
+	smithy.NewStaticSchema(&set, 1017),
+	smithy.NewStaticSchema(&set, 1018),
+	smithy.NewStaticSchema(&set, 1019),
+	smithy.NewStaticSchema(&set, 1020),
+	smithy.NewStaticSchema(&set, 1021),
+	smithy.NewStaticSchema(&set, 1022),
+	smithy.NewStaticSchema(&set, 1023),
+	smithy.NewStaticSchema(&set, 1024),
+	smithy.NewStaticSchema(&set, 1025),
+	smithy.NewStaticSchema(&set, 1026),
+	smithy.NewStaticSchema(&set, 1027),
+	smithy.NewStaticSchema(&set, 1028),
+	smithy.NewStaticSchema(&set, 1029),
+	smithy.NewStaticSchema(&set, 1030),
+	smithy.NewStaticSchema(&set, 1031),
+	smithy.NewStaticSchema(&set, 1032),
+	smithy.NewStaticSchema(&set, 1033),
+	smithy.NewStaticSchema(&set, 1034),
+	smithy.NewStaticSchema(&set, 1035),
+	smithy.NewStaticSchema(&set, 1036),
+	smithy.NewStaticSchema(&set, 1037),
+	smithy.NewStaticSchema(&set, 1038),
+	smithy.NewStaticSchema(&set, 1039),
+	smithy.NewStaticSchema(&set, 1040),
+	smithy.NewStaticSchema(&set, 1041),
+	smithy.NewStaticSchema(&set, 1042),
+	smithy.NewStaticSchema(&set, 1043),
+	smithy.NewStaticSchema(&set, 1044),
+	smithy.NewStaticSchema(&set, 1045),
+	smithy.NewStaticSchema(&set, 1046),
+	smithy.NewStaticSchema(&set, 1047),
+	smithy.NewStaticSchema(&set, 1048),
+	smithy.NewStaticSchema(&set, 1049),
+	smithy.NewStaticSchema(&set, 1050),
+	smithy.NewStaticSchema(&set, 1051),
+	smithy.NewStaticSchema(&set, 1052),
+	smithy.NewStaticSchema(&set, 1053),
+	smithy.NewStaticSchema(&set, 1054),
+	smithy.NewStaticSchema(&set, 1055),
+	smithy.NewStaticSchema(&set, 1056),
+	smithy.NewStaticSchema(&set, 1057),
+	smithy.NewStaticSchema(&set, 1058),
+	smithy.NewStaticSchema(&set, 1059),
+	smithy.NewStaticSchema(&set, 1060),
+	smithy.NewStaticSchema(&set, 1061),
+	smithy.NewStaticSchema(&set, 1062),
+	smithy.NewStaticSchema(&set, 1063),
+	smithy.NewStaticSchema(&set, 1064),
+	smithy.NewStaticSchema(&set, 1065),
+	smithy.NewStaticSchema(&set, 1066),
+	smithy.NewStaticSchema(&set, 1067),
+	smithy.NewStaticSchema(&set, 1068),
+	smithy.NewStaticSchema(&set, 1069),
+	smithy.NewStaticSchema(&set, 1070),
+	smithy.NewStaticSchema(&set, 1071),
+	smithy.NewStaticSchema(&set, 1072),
+	smithy.NewStaticSchema(&set, 1073),
+	smithy.NewStaticSchema(&set, 1074),
+	smithy.NewStaticSchema(&set, 1075),
+	smithy.NewStaticSchema(&set, 1076),
+	smithy.NewStaticSchema(&set, 1077),
+	smithy.NewStaticSchema(&set, 1078),
+	smithy.NewStaticSchema(&set, 1079),
+	smithy.NewStaticSchema(&set, 1080),
+	smithy.NewStaticSchema(&set, 1081),
+	smithy.NewStaticSchema(&set, 1082),
+	smithy.NewStaticSchema(&set, 1083),
+	smithy.NewStaticSchema(&set, 1084),
+	smithy.NewStaticSchema(&set, 1085),
+	smithy.NewStaticSchema(&set, 1086),
+	smithy.NewStaticSchema(&set, 1087),
+	smithy.NewStaticSchema(&set, 1088),
+	smithy.NewStaticSchema(&set, 1089),
+	smithy.NewStaticSchema(&set, 1090),
+	smithy.NewStaticSchema(&set, 1091),
+	smithy.NewStaticSchema(&set, 1092),
+	smithy.NewStaticSchema(&set, 1093),
+	smithy.NewStaticSchema(&set, 1094),
+	smithy.NewStaticSchema(&set, 1095),
+	smithy.NewStaticSchema(&set, 1096),
+	smithy.NewStaticSchema(&set, 1097),
+	smithy.NewStaticSchema(&set, 1098),
+	smithy.NewStaticSchema(&set, 1099),
+	smithy.NewStaticSchema(&set, 1100),
+	smithy.NewStaticSchema(&set, 1101),
+	smithy.NewStaticSchema(&set, 1102),
+	smithy.NewStaticSchema(&set, 1103),
+	smithy.NewStaticSchema(&set, 1104),
+	smithy.NewStaticSchema(&set, 1105),
+	smithy.NewStaticSchema(&set, 1106),
+	smithy.NewStaticSchema(&set, 1107),
+	smithy.NewStaticSchema(&set, 1108),
+	smithy.NewStaticSchema(&set, 1109),
+	smithy.NewStaticSchema(&set, 1110),
+	smithy.NewStaticSchema(&set, 1111),
+	smithy.NewStaticSchema(&set, 1112),
+	smithy.NewStaticSchema(&set, 1113),
+	smithy.NewStaticSchema(&set, 1114),
+	smithy.NewStaticSchema(&set, 1115),
+	smithy.NewStaticSchema(&set, 1116),
+	smithy.NewStaticSchema(&set, 1117),
+	smithy.NewStaticSchema(&set, 1118),
+	smithy.NewStaticSchema(&set, 1119),
+	smithy.NewStaticSchema(&set, 1120),
+	smithy.NewStaticSchema(&set, 1121),
+	smithy.NewStaticSchema(&set, 1122),
+	smithy.NewStaticSchema(&set, 1123),
+	smithy.NewStaticSchema(&set, 1124),
+	smithy.NewStaticSchema(&set, 1125),
+	smithy.NewStaticSchema(&set, 1126),
+	smithy.NewStaticSchema(&set, 1127),
+	smithy.NewStaticSchema(&set, 1128),
+	smithy.NewStaticSchema(&set, 1129),
+	smithy.NewStaticSchema(&set, 1130),
+	smithy.NewStaticSchema(&set, 1131),
+	smithy.NewStaticSchema(&set, 1132),
+	smithy.NewStaticSchema(&set, 1133),
+	smithy.NewStaticSchema(&set, 1134),
+	smithy.NewStaticSchema(&set, 1135),
+	smithy.NewStaticSchema(&set, 1136),
+	smithy.NewStaticSchema(&set, 1137),
+	smithy.NewStaticSchema(&set, 1138),
+	smithy.NewStaticSchema(&set, 1139),
+	smithy.NewStaticSchema(&set, 1140),
+	smithy.NewStaticSchema(&set, 1141),
+	smithy.NewStaticSchema(&set, 1142),
+	smithy.NewStaticSchema(&set, 1143),
+	smithy.NewStaticSchema(&set, 1144),
+	smithy.NewStaticSchema(&set, 1145),
+	smithy.NewStaticSchema(&set, 1146),
+	smithy.NewStaticSchema(&set, 1147),
+	smithy.NewStaticSchema(&set, 1148),
+	smithy.NewStaticSchema(&set, 1149),
+	smithy.NewStaticSchema(&set, 1150),
+	smithy.NewStaticSchema(&set, 1151),
+	smithy.NewStaticSchema(&set, 1152),
+	smithy.NewStaticSchema(&set, 1153),
+	smithy.NewStaticSchema(&set, 1154),
+	smithy.NewStaticSchema(&set, 1155),
+	smithy.NewStaticSchema(&set, 1156),
+	smithy.NewStaticSchema(&set, 1157),
+	smithy.NewStaticSchema(&set, 1158),
+	smithy.NewStaticSchema(&set, 1159),
+	smithy.NewStaticSchema(&set, 1160),
+	smithy.NewStaticSchema(&set, 1161),
+	smithy.NewStaticSchema(&set, 1162),
+	smithy.NewStaticSchema(&set, 1163),
+	smithy.NewStaticSchema(&set, 1164),
+	smithy.NewStaticSchema(&set, 1165),
+	smithy.NewStaticSchema(&set, 1166),
+	smithy.NewStaticSchema(&set, 1167),
+	smithy.NewStaticSchema(&set, 1168),
+	smithy.NewStaticSchema(&set, 1169),
+	smithy.NewStaticSchema(&set, 1170),
+	smithy.NewStaticSchema(&set, 1171),
+	smithy.NewStaticSchema(&set, 1172),
+	smithy.NewStaticSchema(&set, 1173),
+	smithy.NewStaticSchema(&set, 1174),
+	smithy.NewStaticSchema(&set, 1175),
+	smithy.NewStaticSchema(&set, 1176),
+	smithy.NewStaticSchema(&set, 1177),
+	smithy.NewStaticSchema(&set, 1178),
+	smithy.NewStaticSchema(&set, 1179),
+	smithy.NewStaticSchema(&set, 1180),
+	smithy.NewStaticSchema(&set, 1181),
+	smithy.NewStaticSchema(&set, 1182),
+	smithy.NewStaticSchema(&set, 1183),
+	smithy.NewStaticSchema(&set, 1184),
+	smithy.NewStaticSchema(&set, 1185),
+	smithy.NewStaticSchema(&set, 1186),
+	smithy.NewStaticSchema(&set, 1187),
+	smithy.NewStaticSchema(&set, 1188),
+	smithy.NewStaticSchema(&set, 1189),
+	smithy.NewStaticSchema(&set, 1190),
+	smithy.NewStaticSchema(&set, 1191),
+	smithy.NewStaticSchema(&set, 1192),
+	smithy.NewStaticSchema(&set, 1193),
+	smithy.NewStaticSchema(&set, 1194),
+	smithy.NewStaticSchema(&set, 1195),
+	smithy.NewStaticSchema(&set, 1196),
+	smithy.NewStaticSchema(&set, 1197),
+	smithy.NewStaticSchema(&set, 1198),
+	smithy.NewStaticSchema(&set, 1199),
+	smithy.NewStaticSchema(&set, 1200),
+	smithy.NewStaticSchema(&set, 1201),
+	smithy.NewStaticSchema(&set, 1202),
+	smithy.NewStaticSchema(&set, 1203),
+	smithy.NewStaticSchema(&set, 1204),
+	smithy.NewStaticSchema(&set, 1205),
+	smithy.NewStaticSchema(&set, 1206),
+	smithy.NewStaticSchema(&set, 1207),
+	smithy.NewStaticSchema(&set, 1208),
+	smithy.NewStaticSchema(&set, 1209),
+	smithy.NewStaticSchema(&set, 1210),
+	smithy.NewStaticSchema(&set, 1211),
+	smithy.NewStaticSchema(&set, 1212),
+	smithy.NewStaticSchema(&set, 1213),
+	smithy.NewStaticSchema(&set, 1214),
+	smithy.NewStaticSchema(&set, 1215),
+	smithy.NewStaticSchema(&set, 1216),
+	smithy.NewStaticSchema(&set, 1217),
+	smithy.NewStaticSchema(&set, 1218),
+	smithy.NewStaticSchema(&set, 1219),
+	smithy.NewStaticSchema(&set, 1220),
+	smithy.NewStaticSchema(&set, 1221),
+	smithy.NewStaticSchema(&set, 1222),
+	smithy.NewStaticSchema(&set, 1223),
+	smithy.NewStaticSchema(&set, 1224),
+	smithy.NewStaticSchema(&set, 1225),
+	smithy.NewStaticSchema(&set, 1226),
+	smithy.NewStaticSchema(&set, 1227),
+	smithy.NewStaticSchema(&set, 1228),
+	smithy.NewStaticSchema(&set, 1229),
+	smithy.NewStaticSchema(&set, 1230),
+	smithy.NewStaticSchema(&set, 1231),
+	smithy.NewStaticSchema(&set, 1232),
+	smithy.NewStaticSchema(&set, 1233),
+	smithy.NewStaticSchema(&set, 1234),
+	smithy.NewStaticSchema(&set, 1235),
+	smithy.NewStaticSchema(&set, 1236),
+	smithy.NewStaticSchema(&set, 1237),
+	smithy.NewStaticSchema(&set, 1238),
+	smithy.NewStaticSchema(&set, 1239),
+	smithy.NewStaticSchema(&set, 1240),
+	smithy.NewStaticSchema(&set, 1241),
+	smithy.NewStaticSchema(&set, 1242),
+	smithy.NewStaticSchema(&set, 1243),
+	smithy.NewStaticSchema(&set, 1244),
+	smithy.NewStaticSchema(&set, 1245),
+	smithy.NewStaticSchema(&set, 1246),
+	smithy.NewStaticSchema(&set, 1247),
+	smithy.NewStaticSchema(&set, 1248),
+	smithy.NewStaticSchema(&set, 1249),
+	smithy.NewStaticSchema(&set, 1250),
+	smithy.NewStaticSchema(&set, 1251),
+	smithy.NewStaticSchema(&set, 1252),
+	smithy.NewStaticSchema(&set, 1253),
+	smithy.NewStaticSchema(&set, 1254),
+	smithy.NewStaticSchema(&set, 1255),
+	smithy.NewStaticSchema(&set, 1256),
+	smithy.NewStaticSchema(&set, 1257),
+	smithy.NewStaticSchema(&set, 1258),
+	smithy.NewStaticSchema(&set, 1259),
+	smithy.NewStaticSchema(&set, 1260),
+	smithy.NewStaticSchema(&set, 1261),
+	smithy.NewStaticSchema(&set, 1262),
+	smithy.NewStaticSchema(&set, 1263),
+	smithy.NewStaticSchema(&set, 1264),
+	smithy.NewStaticSchema(&set, 1265),
+	smithy.NewStaticSchema(&set, 1266),
+	smithy.NewStaticSchema(&set, 1267),
+	smithy.NewStaticSchema(&set, 1268),
+	smithy.NewStaticSchema(&set, 1269),
+	smithy.NewStaticSchema(&set, 1270),
+	smithy.NewStaticSchema(&set, 1271),
+	smithy.NewStaticSchema(&set, 1272),
+	smithy.NewStaticSchema(&set, 1273),
+	smithy.NewStaticSchema(&set, 1274),
+	smithy.NewStaticSchema(&set, 1275),
+	smithy.NewStaticSchema(&set, 1276),
+	smithy.NewStaticSchema(&set, 1277),
+	smithy.NewStaticSchema(&set, 1278),
+	smithy.NewStaticSchema(&set, 1279),
+	smithy.NewStaticSchema(&set, 1280),
+	smithy.NewStaticSchema(&set, 1281),
+	smithy.NewStaticSchema(&set, 1282),
+	smithy.NewStaticSchema(&set, 1283),
+	smithy.NewStaticSchema(&set, 1284),
+	smithy.NewStaticSchema(&set, 1285),
+	smithy.NewStaticSchema(&set, 1286),
+	smithy.NewStaticSchema(&set, 1287),
+	smithy.NewStaticSchema(&set, 1288),
+	smithy.NewStaticSchema(&set, 1289),
+	smithy.NewStaticSchema(&set, 1290),
+	smithy.NewStaticSchema(&set, 1291),
+	smithy.NewStaticSchema(&set, 1292),
+	smithy.NewStaticSchema(&set, 1293),
+	smithy.NewStaticSchema(&set, 1294),
+	smithy.NewStaticSchema(&set, 1295),
+	smithy.NewStaticSchema(&set, 1296),
+	smithy.NewStaticSchema(&set, 1297),
+	smithy.NewStaticSchema(&set, 1298),
+	smithy.NewStaticSchema(&set, 1299),
+	smithy.NewStaticSchema(&set, 1300),
+	smithy.NewStaticSchema(&set, 1301),
+	smithy.NewStaticSchema(&set, 1302),
+	smithy.NewStaticSchema(&set, 1303),
+	smithy.NewStaticSchema(&set, 1304),
+	smithy.NewStaticSchema(&set, 1305),
+	smithy.NewStaticSchema(&set, 1306),
+	smithy.NewStaticSchema(&set, 1307),
+	smithy.NewStaticSchema(&set, 1308),
+	smithy.NewStaticSchema(&set, 1309),
+	smithy.NewStaticSchema(&set, 1310),
+	smithy.NewStaticSchema(&set, 1311),
+	smithy.NewStaticSchema(&set, 1312),
+	smithy.NewStaticSchema(&set, 1313),
+	smithy.NewStaticSchema(&set, 1314),
+	smithy.NewStaticSchema(&set, 1315),
+	smithy.NewStaticSchema(&set, 1316),
+	smithy.NewStaticSchema(&set, 1317),
+	smithy.NewStaticSchema(&set, 1318),
+	smithy.NewStaticSchema(&set, 1319),
+	smithy.NewStaticSchema(&set, 1320),
+	smithy.NewStaticSchema(&set, 1321),
+	smithy.NewStaticSchema(&set, 1322),
+	smithy.NewStaticSchema(&set, 1323),
+	smithy.NewStaticSchema(&set, 1324),
+	smithy.NewStaticSchema(&set, 1325),
+	smithy.NewStaticSchema(&set, 1326),
+	smithy.NewStaticSchema(&set, 1327),
+	smithy.NewStaticSchema(&set, 1328),
+	smithy.NewStaticSchema(&set, 1329),
+	smithy.NewStaticSchema(&set, 1330),
+	smithy.NewStaticSchema(&set, 1331),
+	smithy.NewStaticSchema(&set, 1332),
+	smithy.NewStaticSchema(&set, 1333),
+	smithy.NewStaticSchema(&set, 1334),
+	smithy.NewStaticSchema(&set, 1335),
+	smithy.NewStaticSchema(&set, 1336),
+	smithy.NewStaticSchema(&set, 1337),
+	smithy.NewStaticSchema(&set, 1338),
+	smithy.NewStaticSchema(&set, 1339),
+	smithy.NewStaticSchema(&set, 1340),
+	smithy.NewStaticSchema(&set, 1341),
+	smithy.NewStaticSchema(&set, 1342),
+	smithy.NewStaticSchema(&set, 1343),
+	smithy.NewStaticSchema(&set, 1344),
+	smithy.NewStaticSchema(&set, 1345),
+	smithy.NewStaticSchema(&set, 1346),
+	smithy.NewStaticSchema(&set, 1347),
+	smithy.NewStaticSchema(&set, 1348),
+	smithy.NewStaticSchema(&set, 1349),
+	smithy.NewStaticSchema(&set, 1350),
+	smithy.NewStaticSchema(&set, 1351),
+	smithy.NewStaticSchema(&set, 1352),
+	smithy.NewStaticSchema(&set, 1353),
+	smithy.NewStaticSchema(&set, 1354),
+	smithy.NewStaticSchema(&set, 1355),
+	smithy.NewStaticSchema(&set, 1356),
+	smithy.NewStaticSchema(&set, 1357),
+	smithy.NewStaticSchema(&set, 1358),
+	smithy.NewStaticSchema(&set, 1359),
+	smithy.NewStaticSchema(&set, 1360),
+	smithy.NewStaticSchema(&set, 1361),
+	smithy.NewStaticSchema(&set, 1362),
+	smithy.NewStaticSchema(&set, 1363),
+	smithy.NewStaticSchema(&set, 1364),
+	smithy.NewStaticSchema(&set, 1365),
+	smithy.NewStaticSchema(&set, 1366),
+	smithy.NewStaticSchema(&set, 1367),
+	smithy.NewStaticSchema(&set, 1368),
+	smithy.NewStaticSchema(&set, 1369),
+	smithy.NewStaticSchema(&set, 1370),
+	smithy.NewStaticSchema(&set, 1371),
+	smithy.NewStaticSchema(&set, 1372),
+	smithy.NewStaticSchema(&set, 1373),
+	smithy.NewStaticSchema(&set, 1374),
+	smithy.NewStaticSchema(&set, 1375),
+	smithy.NewStaticSchema(&set, 1376),
+	smithy.NewStaticSchema(&set, 1377),
+	smithy.NewStaticSchema(&set, 1378),
+	smithy.NewStaticSchema(&set, 1379),
+	smithy.NewStaticSchema(&set, 1380),
+	smithy.NewStaticSchema(&set, 1381),
+	smithy.NewStaticSchema(&set, 1382),
+	smithy.NewStaticSchema(&set, 1383),
+	smithy.NewStaticSchema(&set, 1384),
+	smithy.NewStaticSchema(&set, 1385),
+	smithy.NewStaticSchema(&set, 1386),
+	smithy.NewStaticSchema(&set, 1387),
+	smithy.NewStaticSchema(&set, 1388),
+	smithy.NewStaticSchema(&set, 1389),
+	smithy.NewStaticSchema(&set, 1390),
+	smithy.NewStaticSchema(&set, 1391),
+	smithy.NewStaticSchema(&set, 1392),
+	smithy.NewStaticSchema(&set, 1393),
+	smithy.NewStaticSchema(&set, 1394),
+	smithy.NewStaticSchema(&set, 1395),
+	smithy.NewStaticSchema(&set, 1396),
+	smithy.NewStaticSchema(&set, 1397),
+	smithy.NewStaticSchema(&set, 1398),
+	smithy.NewStaticSchema(&set, 1399),
+	smithy.NewStaticSchema(&set, 1400),
+	smithy.NewStaticSchema(&set, 1401),
+	smithy.NewStaticSchema(&set, 1402),
+	smithy.NewStaticSchema(&set, 1403),
+	smithy.NewStaticSchema(&set, 1404),
+	smithy.NewStaticSchema(&set, 1405),
+	smithy.NewStaticSchema(&set, 1406),
+	smithy.NewStaticSchema(&set, 1407),
+	smithy.NewStaticSchema(&set, 1408),
+	smithy.NewStaticSchema(&set, 1409),
+	smithy.NewStaticSchema(&set, 1410),
+	smithy.NewStaticSchema(&set, 1411),
+	smithy.NewStaticSchema(&set, 1412),
+	smithy.NewStaticSchema(&set, 1413),
+	smithy.NewStaticSchema(&set, 1414),
+	smithy.NewStaticSchema(&set, 1415),
+	smithy.NewStaticSchema(&set, 1416),
+	smithy.NewStaticSchema(&set, 1417),
+	smithy.NewStaticSchema(&set, 1418),
+	smithy.NewStaticSchema(&set, 1419),
+	smithy.NewStaticSchema(&set, 1420),
+	smithy.NewStaticSchema(&set, 1421),
+	smithy.NewStaticSchema(&set, 1422),
+	smithy.NewStaticSchema(&set, 1423),
+	smithy.NewStaticSchema(&set, 1424),
+	smithy.NewStaticSchema(&set, 1425),
+	smithy.NewStaticSchema(&set, 1426),
+	smithy.NewStaticSchema(&set, 1427),
+	smithy.NewStaticSchema(&set, 1428),
+	smithy.NewStaticSchema(&set, 1429),
+	smithy.NewStaticSchema(&set, 1430),
+	smithy.NewStaticSchema(&set, 1431),
+	smithy.NewStaticSchema(&set, 1432),
+	smithy.NewStaticSchema(&set, 1433),
+	smithy.NewStaticSchema(&set, 1434),
+	smithy.NewStaticSchema(&set, 1435),
+	smithy.NewStaticSchema(&set, 1436),
+	smithy.NewStaticSchema(&set, 1437),
+	smithy.NewStaticSchema(&set, 1438),
+	smithy.NewStaticSchema(&set, 1439),
+	smithy.NewStaticSchema(&set, 1440),
+	smithy.NewStaticSchema(&set, 1441),
+	smithy.NewStaticSchema(&set, 1442),
+	smithy.NewStaticSchema(&set, 1443),
+	smithy.NewStaticSchema(&set, 1444),
+	smithy.NewStaticSchema(&set, 1445),
+	smithy.NewStaticSchema(&set, 1446),
+	smithy.NewStaticSchema(&set, 1447),
+	smithy.NewStaticSchema(&set, 1448),
+	smithy.NewStaticSchema(&set, 1449),
+	smithy.NewStaticSchema(&set, 1450),
+	smithy.NewStaticSchema(&set, 1451),
+	smithy.NewStaticSchema(&set, 1452),
+	smithy.NewStaticSchema(&set, 1453),
+	smithy.NewStaticSchema(&set, 1454),
+	smithy.NewStaticSchema(&set, 1455),
+	smithy.NewStaticSchema(&set, 1456),
+	smithy.NewStaticSchema(&set, 1457),
+	smithy.NewStaticSchema(&set, 1458),
+	smithy.NewStaticSchema(&set, 1459),
+	smithy.NewStaticSchema(&set, 1460),
+	smithy.NewStaticSchema(&set, 1461),
+	smithy.NewStaticSchema(&set, 1462),
+	smithy.NewStaticSchema(&set, 1463),
+	smithy.NewStaticSchema(&set, 1464),
+	smithy.NewStaticSchema(&set, 1465),
+	smithy.NewStaticSchema(&set, 1466),
+	smithy.NewStaticSchema(&set, 1467),
+	smithy.NewStaticSchema(&set, 1468),
+	smithy.NewStaticSchema(&set, 1469),
+	smithy.NewStaticSchema(&set, 1470),
+	smithy.NewStaticSchema(&set, 1471),
+	smithy.NewStaticSchema(&set, 1472),
+	smithy.NewStaticSchema(&set, 1473),
+	smithy.NewStaticSchema(&set, 1474),
+	smithy.NewStaticSchema(&set, 1475),
+	smithy.NewStaticSchema(&set, 1476),
+	smithy.NewStaticSchema(&set, 1477),
+	smithy.NewStaticSchema(&set, 1478),
+	smithy.NewStaticSchema(&set, 1479),
+	smithy.NewStaticSchema(&set, 1480),
+	smithy.NewStaticSchema(&set, 1481),
+	smithy.NewStaticSchema(&set, 1482),
+	smithy.NewStaticSchema(&set, 1483),
+	smithy.NewStaticSchema(&set, 1484),
+	smithy.NewStaticSchema(&set, 1485),
+	smithy.NewStaticSchema(&set, 1486),
+	smithy.NewStaticSchema(&set, 1487),
+	smithy.NewStaticSchema(&set, 1488),
+	smithy.NewStaticSchema(&set, 1489),
+	smithy.NewStaticSchema(&set, 1490),
+	smithy.NewStaticSchema(&set, 1491),
+	smithy.NewStaticSchema(&set, 1492),
+	smithy.NewStaticSchema(&set, 1493),
+	smithy.NewStaticSchema(&set, 1494),
+	smithy.NewStaticSchema(&set, 1495),
+	smithy.NewStaticSchema(&set, 1496),
+	smithy.NewStaticSchema(&set, 1497),
+	smithy.NewStaticSchema(&set, 1498),
+	smithy.NewStaticSchema(&set, 1499),
+	smithy.NewStaticSchema(&set, 1500),
+	smithy.NewStaticSchema(&set, 1501),
+	smithy.NewStaticSchema(&set, 1502),
+	smithy.NewStaticSchema(&set, 1503),
+	smithy.NewStaticSchema(&set, 1504),
+	smithy.NewStaticSchema(&set, 1505),
+	smithy.NewStaticSchema(&set, 1506),
+	smithy.NewStaticSchema(&set, 1507),
+	smithy.NewStaticSchema(&set, 1508),
+	smithy.NewStaticSchema(&set, 1509),
+	smithy.NewStaticSchema(&set, 1510),
+	smithy.NewStaticSchema(&set, 1511),
+	smithy.NewStaticSchema(&set, 1512),
+	smithy.NewStaticSchema(&set, 1513),
+	smithy.NewStaticSchema(&set, 1514),
+	smithy.NewStaticSchema(&set, 1515),
+	smithy.NewStaticSchema(&set, 1516),
+	smithy.NewStaticSchema(&set, 1517),
+	smithy.NewStaticSchema(&set, 1518),
+	smithy.NewStaticSchema(&set, 1519),
+	smithy.NewStaticSchema(&set, 1520),
+	smithy.NewStaticSchema(&set, 1521),
+	smithy.NewStaticSchema(&set, 1522),
+	smithy.NewStaticSchema(&set, 1523),
+	smithy.NewStaticSchema(&set, 1524),
+	smithy.NewStaticSchema(&set, 1525),
+	smithy.NewStaticSchema(&set, 1526),
+	smithy.NewStaticSchema(&set, 1527),
+	smithy.NewStaticSchema(&set, 1528),
+	smithy.NewStaticSchema(&set, 1529),
+	smithy.NewStaticSchema(&set, 1530),
+	smithy.NewStaticSchema(&set, 1531),
+	smithy.NewStaticSchema(&set, 1532),
+	smithy.NewStaticSchema(&set, 1533),
+	smithy.NewStaticSchema(&set, 1534),
+	smithy.NewStaticSchema(&set, 1535),
+	smithy.NewStaticSchema(&set, 1536),
+	smithy.NewStaticSchema(&set, 1537),
+	smithy.NewStaticSchema(&set, 1538),
+	smithy.NewStaticSchema(&set, 1539),
+	smithy.NewStaticSchema(&set, 1540),
+	smithy.NewStaticSchema(&set, 1541),
+	smithy.NewStaticSchema(&set, 1542),
+	smithy.NewStaticSchema(&set, 1543),
+	smithy.NewStaticSchema(&set, 1544),
+	smithy.NewStaticSchema(&set, 1545),
+	smithy.NewStaticSchema(&set, 1546),
+	smithy.NewStaticSchema(&set, 1547),
+	smithy.NewStaticSchema(&set, 1548),
+	smithy.NewStaticSchema(&set, 1549),
+	smithy.NewStaticSchema(&set, 1550),
+	smithy.NewStaticSchema(&set, 1551),
+	smithy.NewStaticSchema(&set, 1552),
+	smithy.NewStaticSchema(&set, 1553),
+	smithy.NewStaticSchema(&set, 1554),
+	smithy.NewStaticSchema(&set, 1555),
+	smithy.NewStaticSchema(&set, 1556),
+	smithy.NewStaticSchema(&set, 1557),
+	smithy.NewStaticSchema(&set, 1558),
+	smithy.NewStaticSchema(&set, 1559),
+	smithy.NewStaticSchema(&set, 1560),
+	smithy.NewStaticSchema(&set, 1561),
+	smithy.NewStaticSchema(&set, 1562),
+	smithy.NewStaticSchema(&set, 1563),
+	smithy.NewStaticSchema(&set, 1564),
+	smithy.NewStaticSchema(&set, 1565),
+	smithy.NewStaticSchema(&set, 1566),
+	smithy.NewStaticSchema(&set, 1567),
+	smithy.NewStaticSchema(&set, 1568),
+	smithy.NewStaticSchema(&set, 1569),
+	smithy.NewStaticSchema(&set, 1570),
+	smithy.NewStaticSchema(&set, 1571),
+	smithy.NewStaticSchema(&set, 1572),
+	smithy.NewStaticSchema(&set, 1573),
+	smithy.NewStaticSchema(&set, 1574),
+	smithy.NewStaticSchema(&set, 1575),
+	smithy.NewStaticSchema(&set, 1576),
+	smithy.NewStaticSchema(&set, 1577),
+	smithy.NewStaticSchema(&set, 1578),
+	smithy.NewStaticSchema(&set, 1579),
+	smithy.NewStaticSchema(&set, 1580),
+	smithy.NewStaticSchema(&set, 1581),
+	smithy.NewStaticSchema(&set, 1582),
+	smithy.NewStaticSchema(&set, 1583),
+	smithy.NewStaticSchema(&set, 1584),
+	smithy.NewStaticSchema(&set, 1585),
+	smithy.NewStaticSchema(&set, 1586),
+	smithy.NewStaticSchema(&set, 1587),
+	smithy.NewStaticSchema(&set, 1588),
+	smithy.NewStaticSchema(&set, 1589),
+	smithy.NewStaticSchema(&set, 1590),
+	smithy.NewStaticSchema(&set, 1591),
+	smithy.NewStaticSchema(&set, 1592),
+	smithy.NewStaticSchema(&set, 1593),
+	smithy.NewStaticSchema(&set, 1594),
+	smithy.NewStaticSchema(&set, 1595),
+	smithy.NewStaticSchema(&set, 1596),
+	smithy.NewStaticSchema(&set, 1597),
+	smithy.NewStaticSchema(&set, 1598),
+	smithy.NewStaticSchema(&set, 1599),
+	smithy.NewStaticSchema(&set, 1600),
+	smithy.NewStaticSchema(&set, 1601),
+	smithy.NewStaticSchema(&set, 1602),
+	smithy.NewStaticSchema(&set, 1603),
+	smithy.NewStaticSchema(&set, 1604),
+	smithy.NewStaticSchema(&set, 1605),
+	smithy.NewStaticSchema(&set, 1606),
+	smithy.NewStaticSchema(&set, 1607),
+	smithy.NewStaticSchema(&set, 1608),
+	smithy.NewStaticSchema(&set, 1609),
+	smithy.NewStaticSchema(&set, 1610),
+	smithy.NewStaticSchema(&set, 1611),
+	smithy.NewStaticSchema(&set, 1612),
+	smithy.NewStaticSchema(&set, 1613),
+	smithy.NewStaticSchema(&set, 1614),
+	smithy.NewStaticSchema(&set, 1615),
+	smithy.NewStaticSchema(&set, 1616),
+	smithy.NewStaticSchema(&set, 1617),
+	smithy.NewStaticSchema(&set, 1618),
+	smithy.NewStaticSchema(&set, 1619),
+	smithy.NewStaticSchema(&set, 1620),
+	smithy.NewStaticSchema(&set, 1621),
+	smithy.NewStaticSchema(&set, 1622),
+	smithy.NewStaticSchema(&set, 1623),
+	smithy.NewStaticSchema(&set, 1624),
+	smithy.NewStaticSchema(&set, 1625),
+	smithy.NewStaticSchema(&set, 1626),
+	smithy.NewStaticSchema(&set, 1627),
+	smithy.NewStaticSchema(&set, 1628),
+	smithy.NewStaticSchema(&set, 1629),
+	smithy.NewStaticSchema(&set, 1630),
+	smithy.NewStaticSchema(&set, 1631),
+	smithy.NewStaticSchema(&set, 1632),
+	smithy.NewStaticSchema(&set, 1633),
+	smithy.NewStaticSchema(&set, 1634),
+	smithy.NewStaticSchema(&set, 1635),
+	smithy.NewStaticSchema(&set, 1636),
+	smithy.NewStaticSchema(&set, 1637),
+	smithy.NewStaticSchema(&set, 1638),
+	smithy.NewStaticSchema(&set, 1639),
+	smithy.NewStaticSchema(&set, 1640),
+	smithy.NewStaticSchema(&set, 1641),
+	smithy.NewStaticSchema(&set, 1642),
+	smithy.NewStaticSchema(&set, 1643),
+	smithy.NewStaticSchema(&set, 1644),
+	smithy.NewStaticSchema(&set, 1645),
+	smithy.NewStaticSchema(&set, 1646),
+	smithy.NewStaticSchema(&set, 1647),
+	smithy.NewStaticSchema(&set, 1648),
+	smithy.NewStaticSchema(&set, 1649),
+	smithy.NewStaticSchema(&set, 1650),
+	smithy.NewStaticSchema(&set, 1651),
+	smithy.NewStaticSchema(&set, 1652),
+	smithy.NewStaticSchema(&set, 1653),
+	smithy.NewStaticSchema(&set, 1654),
+	smithy.NewStaticSchema(&set, 1655),
+	smithy.NewStaticSchema(&set, 1656),
+	smithy.NewStaticSchema(&set, 1657),
+	smithy.NewStaticSchema(&set, 1658),
+	smithy.NewStaticSchema(&set, 1659),
+	smithy.NewStaticSchema(&set, 1660),
+	smithy.NewStaticSchema(&set, 1661),
+	smithy.NewStaticSchema(&set, 1662),
+	smithy.NewStaticSchema(&set, 1663),
+	smithy.NewStaticSchema(&set, 1664),
+	smithy.NewStaticSchema(&set, 1665),
+	smithy.NewStaticSchema(&set, 1666),
+	smithy.NewStaticSchema(&set, 1667),
+	smithy.NewStaticSchema(&set, 1668),
+	smithy.NewStaticSchema(&set, 1669),
+	smithy.NewStaticSchema(&set, 1670),
+	smithy.NewStaticSchema(&set, 1671),
+	smithy.NewStaticSchema(&set, 1672),
+	smithy.NewStaticSchema(&set, 1673),
+	smithy.NewStaticSchema(&set, 1674),
+	smithy.NewStaticSchema(&set, 1675),
+	smithy.NewStaticSchema(&set, 1676),
+	smithy.NewStaticSchema(&set, 1677),
+	smithy.NewStaticSchema(&set, 1678),
+	smithy.NewStaticSchema(&set, 1679),
+	smithy.NewStaticSchema(&set, 1680),
+	smithy.NewStaticSchema(&set, 1681),
+	smithy.NewStaticSchema(&set, 1682),
+	smithy.NewStaticSchema(&set, 1683),
+	smithy.NewStaticSchema(&set, 1684),
+	smithy.NewStaticSchema(&set, 1685),
+	smithy.NewStaticSchema(&set, 1686),
+	smithy.NewStaticSchema(&set, 1687),
+	smithy.NewStaticSchema(&set, 1688),
+	smithy.NewStaticSchema(&set, 1689),
+	smithy.NewStaticSchema(&set, 1690),
+	smithy.NewStaticSchema(&set, 1691),
+	smithy.NewStaticSchema(&set, 1692),
+	smithy.NewStaticSchema(&set, 1693),
+	smithy.NewStaticSchema(&set, 1694),
+	smithy.NewStaticSchema(&set, 1695),
+	smithy.NewStaticSchema(&set, 1696),
+	smithy.NewStaticSchema(&set, 1697),
+	smithy.NewStaticSchema(&set, 1698),
+	smithy.NewStaticSchema(&set, 1699),
+	smithy.NewStaticSchema(&set, 1700),
+	smithy.NewStaticSchema(&set, 1701),
+	smithy.NewStaticSchema(&set, 1702),
+	smithy.NewStaticSchema(&set, 1703),
+	smithy.NewStaticSchema(&set, 1704),
+	smithy.NewStaticSchema(&set, 1705),
+	smithy.NewStaticSchema(&set, 1706),
+	smithy.NewStaticSchema(&set, 1707),
+	smithy.NewStaticSchema(&set, 1708),
+	smithy.NewStaticSchema(&set, 1709),
+	smithy.NewStaticSchema(&set, 1710),
+	smithy.NewStaticSchema(&set, 1711),
+	smithy.NewStaticSchema(&set, 1712),
+	smithy.NewStaticSchema(&set, 1713),
+	smithy.NewStaticSchema(&set, 1714),
+	smithy.NewStaticSchema(&set, 1715),
+	smithy.NewStaticSchema(&set, 1716),
+	smithy.NewStaticSchema(&set, 1717),
+	smithy.NewStaticSchema(&set, 1718),
+	smithy.NewStaticSchema(&set, 1719),
+	smithy.NewStaticSchema(&set, 1720),
+	smithy.NewStaticSchema(&set, 1721),
+	smithy.NewStaticSchema(&set, 1722),
+	smithy.NewStaticSchema(&set, 1723),
+	smithy.NewStaticSchema(&set, 1724),
+	smithy.NewStaticSchema(&set, 1725),
+	smithy.NewStaticSchema(&set, 1726),
+	smithy.NewStaticSchema(&set, 1727),
+	smithy.NewStaticSchema(&set, 1728),
+	smithy.NewStaticSchema(&set, 1729),
+	smithy.NewStaticSchema(&set, 1730),
+	smithy.NewStaticSchema(&set, 1731),
+	smithy.NewStaticSchema(&set, 1732),
+	smithy.NewStaticSchema(&set, 1733),
+	smithy.NewStaticSchema(&set, 1734),
+	smithy.NewStaticSchema(&set, 1735),
+	smithy.NewStaticSchema(&set, 1736),
+	smithy.NewStaticSchema(&set, 1737),
+	smithy.NewStaticSchema(&set, 1738),
+	smithy.NewStaticSchema(&set, 1739),
+	smithy.NewStaticSchema(&set, 1740),
+	smithy.NewStaticSchema(&set, 1741),
+	smithy.NewStaticSchema(&set, 1742),
+	smithy.NewStaticSchema(&set, 1743),
+	smithy.NewStaticSchema(&set, 1744),
+	smithy.NewStaticSchema(&set, 1745),
+	smithy.NewStaticSchema(&set, 1746),
+	smithy.NewStaticSchema(&set, 1747),
+	smithy.NewStaticSchema(&set, 1748),
+	smithy.NewStaticSchema(&set, 1749),
+	smithy.NewStaticSchema(&set, 1750),
+	smithy.NewStaticSchema(&set, 1751),
+	smithy.NewStaticSchema(&set, 1752),
+	smithy.NewStaticSchema(&set, 1753),
+	smithy.NewStaticSchema(&set, 1754),
+	smithy.NewStaticSchema(&set, 1755),
+	smithy.NewStaticSchema(&set, 1756),
+	smithy.NewStaticSchema(&set, 1757),
+	smithy.NewStaticSchema(&set, 1758),
+	smithy.NewStaticSchema(&set, 1759),
+	smithy.NewStaticSchema(&set, 1760),
+	smithy.NewStaticSchema(&set, 1761),
+	smithy.NewStaticSchema(&set, 1762),
+	smithy.NewStaticSchema(&set, 1763),
+	smithy.NewStaticSchema(&set, 1764),
+	smithy.NewStaticSchema(&set, 1765),
+	smithy.NewStaticSchema(&set, 1766),
+	smithy.NewStaticSchema(&set, 1767),
+	smithy.NewStaticSchema(&set, 1768),
+	smithy.NewStaticSchema(&set, 1769),
+	smithy.NewStaticSchema(&set, 1770),
+	smithy.NewStaticSchema(&set, 1771),
+	smithy.NewStaticSchema(&set, 1772),
+	smithy.NewStaticSchema(&set, 1773),
+	smithy.NewStaticSchema(&set, 1774),
+	smithy.NewStaticSchema(&set, 1775),
+	smithy.NewStaticSchema(&set, 1776),
+	smithy.NewStaticSchema(&set, 1777),
+	smithy.NewStaticSchema(&set, 1778),
+	smithy.NewStaticSchema(&set, 1779),
+	smithy.NewStaticSchema(&set, 1780),
+	smithy.NewStaticSchema(&set, 1781),
+	smithy.NewStaticSchema(&set, 1782),
+	smithy.NewStaticSchema(&set, 1783),
+	smithy.NewStaticSchema(&set, 1784),
+	smithy.NewStaticSchema(&set, 1785),
+	smithy.NewStaticSchema(&set, 1786),
+	smithy.NewStaticSchema(&set, 1787),
+	smithy.NewStaticSchema(&set, 1788),
+	smithy.NewStaticSchema(&set, 1789),
+	smithy.NewStaticSchema(&set, 1790),
+	smithy.NewStaticSchema(&set, 1791),
+	smithy.NewStaticSchema(&set, 1792),
+	smithy.NewStaticSchema(&set, 1793),
+	smithy.NewStaticSchema(&set, 1794),
+	smithy.NewStaticSchema(&set, 1795),
+	smithy.NewStaticSchema(&set, 1796),
+	smithy.NewStaticSchema(&set, 1797),
+	smithy.NewStaticSchema(&set, 1798),
+	smithy.NewStaticSchema(&set, 1799),
+	smithy.NewStaticSchema(&set, 1800),
+	smithy.NewStaticSchema(&set, 1801),
+	smithy.NewStaticSchema(&set, 1802),
+	smithy.NewStaticSchema(&set, 1803),
+	smithy.NewStaticSchema(&set, 1804),
+	smithy.NewStaticSchema(&set, 1805),
+	smithy.NewStaticSchema(&set, 1806),
+	smithy.NewStaticSchema(&set, 1807),
+	smithy.NewStaticSchema(&set, 1808),
+	smithy.NewStaticSchema(&set, 1809),
+	smithy.NewStaticSchema(&set, 1810),
+	smithy.NewStaticSchema(&set, 1811),
+	smithy.NewStaticSchema(&set, 1812),
+	smithy.NewStaticSchema(&set, 1813),
+	smithy.NewStaticSchema(&set, 1814),
+	smithy.NewStaticSchema(&set, 1815),
+	smithy.NewStaticSchema(&set, 1816),
+	smithy.NewStaticSchema(&set, 1817),
+	smithy.NewStaticSchema(&set, 1818),
+	smithy.NewStaticSchema(&set, 1819),
+	smithy.NewStaticSchema(&set, 1820),
+	smithy.NewStaticSchema(&set, 1821),
+	smithy.NewStaticSchema(&set, 1822),
+	smithy.NewStaticSchema(&set, 1823),
+	smithy.NewStaticSchema(&set, 1824),
+	smithy.NewStaticSchema(&set, 1825),
+	smithy.NewStaticSchema(&set, 1826),
+	smithy.NewStaticSchema(&set, 1827),
+	smithy.NewStaticSchema(&set, 1828),
+	smithy.NewStaticSchema(&set, 1829),
+	smithy.NewStaticSchema(&set, 1830),
+	smithy.NewStaticSchema(&set, 1831),
+	smithy.NewStaticSchema(&set, 1832),
+	smithy.NewStaticSchema(&set, 1833),
+	smithy.NewStaticSchema(&set, 1834),
+	smithy.NewStaticSchema(&set, 1835),
+	smithy.NewStaticSchema(&set, 1836),
+	smithy.NewStaticSchema(&set, 1837),
+	smithy.NewStaticSchema(&set, 1838),
+	smithy.NewStaticSchema(&set, 1839),
+	smithy.NewStaticSchema(&set, 1840),
+	smithy.NewStaticSchema(&set, 1841),
+	smithy.NewStaticSchema(&set, 1842),
+	smithy.NewStaticSchema(&set, 1843),
+	smithy.NewStaticSchema(&set, 1844),
+	smithy.NewStaticSchema(&set, 1845),
+	smithy.NewStaticSchema(&set, 1846),
+	smithy.NewStaticSchema(&set, 1847),
+	smithy.NewStaticSchema(&set, 1848),
+	smithy.NewStaticSchema(&set, 1849),
+	smithy.NewStaticSchema(&set, 1850),
+	smithy.NewStaticSchema(&set, 1851),
+	smithy.NewStaticSchema(&set, 1852),
+	smithy.NewStaticSchema(&set, 1853),
+	smithy.NewStaticSchema(&set, 1854),
+	smithy.NewStaticSchema(&set, 1855),
+	smithy.NewStaticSchema(&set, 1856),
+	smithy.NewStaticSchema(&set, 1857),
+	smithy.NewStaticSchema(&set, 1858),
+	smithy.NewStaticSchema(&set, 1859),
+	smithy.NewStaticSchema(&set, 1860),
+	smithy.NewStaticSchema(&set, 1861),
+	smithy.NewStaticSchema(&set, 1862),
+	smithy.NewStaticSchema(&set, 1863),
+	smithy.NewStaticSchema(&set, 1864),
+	smithy.NewStaticSchema(&set, 1865),
+	smithy.NewStaticSchema(&set, 1866),
+	smithy.NewStaticSchema(&set, 1867),
+	smithy.NewStaticSchema(&set, 1868),
+	smithy.NewStaticSchema(&set, 1869),
+	smithy.NewStaticSchema(&set, 1870),
+	smithy.NewStaticSchema(&set, 1871),
+	smithy.NewStaticSchema(&set, 1872),
+	smithy.NewStaticSchema(&set, 1873),
+	smithy.NewStaticSchema(&set, 1874),
+	smithy.NewStaticSchema(&set, 1875),
+	smithy.NewStaticSchema(&set, 1876),
+	smithy.NewStaticSchema(&set, 1877),
+	smithy.NewStaticSchema(&set, 1878),
+	smithy.NewStaticSchema(&set, 1879),
+	smithy.NewStaticSchema(&set, 1880),
+	smithy.NewStaticSchema(&set, 1881),
+	smithy.NewStaticSchema(&set, 1882),
+	smithy.NewStaticSchema(&set, 1883),
+	smithy.NewStaticSchema(&set, 1884),
+	smithy.NewStaticSchema(&set, 1885),
+	smithy.NewStaticSchema(&set, 1886),
+	smithy.NewStaticSchema(&set, 1887),
+	smithy.NewStaticSchema(&set, 1888),
+	smithy.NewStaticSchema(&set, 1889),
+	smithy.NewStaticSchema(&set, 1890),
+	smithy.NewStaticSchema(&set, 1891),
+	smithy.NewStaticSchema(&set, 1892),
+	smithy.NewStaticSchema(&set, 1893),
+	smithy.NewStaticSchema(&set, 1894),
+	smithy.NewStaticSchema(&set, 1895),
+	smithy.NewStaticSchema(&set, 1896),
+	smithy.NewStaticSchema(&set, 1897),
+	smithy.NewStaticSchema(&set, 1898),
+	smithy.NewStaticSchema(&set, 1899),
+	smithy.NewStaticSchema(&set, 1900),
+	smithy.NewStaticSchema(&set, 1901),
+	smithy.NewStaticSchema(&set, 1902),
+	smithy.NewStaticSchema(&set, 1903),
+	smithy.NewStaticSchema(&set, 1904),
+	smithy.NewStaticSchema(&set, 1905),
+	smithy.NewStaticSchema(&set, 1906),
+	smithy.NewStaticSchema(&set, 1907),
+	smithy.NewStaticSchema(&set, 1908),
+	smithy.NewStaticSchema(&set, 1909),
+	smithy.NewStaticSchema(&set, 1910),
+	smithy.NewStaticSchema(&set, 1911),
+	smithy.NewStaticSchema(&set, 1912),
+	smithy.NewStaticSchema(&set, 1913),
+	smithy.NewStaticSchema(&set, 1914),
+	smithy.NewStaticSchema(&set, 1915),
+	smithy.NewStaticSchema(&set, 1916),
+	smithy.NewStaticSchema(&set, 1917),
+	smithy.NewStaticSchema(&set, 1918),
+	smithy.NewStaticSchema(&set, 1919),
+	smithy.NewStaticSchema(&set, 1920),
+	smithy.NewStaticSchema(&set, 1921),
+	smithy.NewStaticSchema(&set, 1922),
+	smithy.NewStaticSchema(&set, 1923),
+	smithy.NewStaticSchema(&set, 1924),
+	smithy.NewStaticSchema(&set, 1925),
+	smithy.NewStaticSchema(&set, 1926),
+	smithy.NewStaticSchema(&set, 1927),
+	smithy.NewStaticSchema(&set, 1928),
+	smithy.NewStaticSchema(&set, 1929),
+	smithy.NewStaticSchema(&set, 1930),
+	smithy.NewStaticSchema(&set, 1931),
+	smithy.NewStaticSchema(&set, 1932),
+	smithy.NewStaticSchema(&set, 1933),
+	smithy.NewStaticSchema(&set, 1934),
+	smithy.NewStaticSchema(&set, 1935),
+	smithy.NewStaticSchema(&set, 1936),
+	smithy.NewStaticSchema(&set, 1937),
+	smithy.NewStaticSchema(&set, 1938),
+	smithy.NewStaticSchema(&set, 1939),
+	smithy.NewStaticSchema(&set, 1940),
+	smithy.NewStaticSchema(&set, 1941),
+	smithy.NewStaticSchema(&set, 1942),
+	smithy.NewStaticSchema(&set, 1943),
+	smithy.NewStaticSchema(&set, 1944),
+	smithy.NewStaticSchema(&set, 1945),
+	smithy.NewStaticSchema(&set, 1946),
+	smithy.NewStaticSchema(&set, 1947),
+	smithy.NewStaticSchema(&set, 1948),
+	smithy.NewStaticSchema(&set, 1949),
+	smithy.NewStaticSchema(&set, 1950),
+	smithy.NewStaticSchema(&set, 1951),
+	smithy.NewStaticSchema(&set, 1952),
+	smithy.NewStaticSchema(&set, 1953),
+	smithy.NewStaticSchema(&set, 1954),
+	smithy.NewStaticSchema(&set, 1955),
+	smithy.NewStaticSchema(&set, 1956),
+	smithy.NewStaticSchema(&set, 1957),
+	smithy.NewStaticSchema(&set, 1958),
+	smithy.NewStaticSchema(&set, 1959),
+	smithy.NewStaticSchema(&set, 1960),
+	smithy.NewStaticSchema(&set, 1961),
+	smithy.NewStaticSchema(&set, 1962),
+	smithy.NewStaticSchema(&set, 1963),
+	smithy.NewStaticSchema(&set, 1964),
+	smithy.NewStaticSchema(&set, 1965),
+	smithy.NewStaticSchema(&set, 1966),
+	smithy.NewStaticSchema(&set, 1967),
+	smithy.NewStaticSchema(&set, 1968),
+	smithy.NewStaticSchema(&set, 1969),
+	smithy.NewStaticSchema(&set, 1970),
+	smithy.NewStaticSchema(&set, 1971),
+	smithy.NewStaticSchema(&set, 1972),
+	smithy.NewStaticSchema(&set, 1973),
+	smithy.NewStaticSchema(&set, 1974),
+	smithy.NewStaticSchema(&set, 1975),
+	smithy.NewStaticSchema(&set, 1976),
+	smithy.NewStaticSchema(&set, 1977),
+	smithy.NewStaticSchema(&set, 1978),
+	smithy.NewStaticSchema(&set, 1979),
+	smithy.NewStaticSchema(&set, 1980),
+	smithy.NewStaticSchema(&set, 1981),
+	smithy.NewStaticSchema(&set, 1982),
+	smithy.NewStaticSchema(&set, 1983),
+	smithy.NewStaticSchema(&set, 1984),
+	smithy.NewStaticSchema(&set, 1985),
+	smithy.NewStaticSchema(&set, 1986),
+	smithy.NewStaticSchema(&set, 1987),
+	smithy.NewStaticSchema(&set, 1988),
+	smithy.NewStaticSchema(&set, 1989),
+	smithy.NewStaticSchema(&set, 1990),
+	smithy.NewStaticSchema(&set, 1991),
+	smithy.NewStaticSchema(&set, 1992),
+	smithy.NewStaticSchema(&set, 1993),
+	smithy.NewStaticSchema(&set, 1994),
+	smithy.NewStaticSchema(&set, 1995),
+	smithy.NewStaticSchema(&set, 1996),
+	smithy.NewStaticSchema(&set, 1997),
+	smithy.NewStaticSchema(&set, 1998),
+	smithy.NewStaticSchema(&set, 1999),
+	smithy.NewStaticSchema(&set, 2000),
+	smithy.NewStaticSchema(&set, 2001),
+	smithy.NewStaticSchema(&set, 2002),
+	smithy.NewStaticSchema(&set, 2003),
+	smithy.NewStaticSchema(&set, 2004),
+	smithy.NewStaticSchema(&set, 2005),
+	smithy.NewStaticSchema(&set, 2006),
+	smithy.NewStaticSchema(&set, 2007),
+	smithy.NewStaticSchema(&set, 2008),
+	smithy.NewStaticSchema(&set, 2009),
+	smithy.NewStaticSchema(&set, 2010),
+	smithy.NewStaticSchema(&set, 2011),
+	smithy.NewStaticSchema(&set, 2012),
+	smithy.NewStaticSchema(&set, 2013),
+	smithy.NewStaticSchema(&set, 2014),
+	smithy.NewStaticSchema(&set, 2015),
+	smithy.NewStaticSchema(&set, 2016),
+	smithy.NewStaticSchema(&set, 2017),
+	smithy.NewStaticSchema(&set, 2018),
+	smithy.NewStaticSchema(&set, 2019),
+	smithy.NewStaticSchema(&set, 2020),
+	smithy.NewStaticSchema(&set, 2021),
+	smithy.NewStaticSchema(&set, 2022),
+	smithy.NewStaticSchema(&set, 2023),
+	smithy.NewStaticSchema(&set, 2024),
+	smithy.NewStaticSchema(&set, 2025),
+	smithy.NewStaticSchema(&set, 2026),
+	smithy.NewStaticSchema(&set, 2027),
+	smithy.NewStaticSchema(&set, 2028),
+	smithy.NewStaticSchema(&set, 2029),
+	smithy.NewStaticSchema(&set, 2030),
+	smithy.NewStaticSchema(&set, 2031),
+	smithy.NewStaticSchema(&set, 2032),
+	smithy.NewStaticSchema(&set, 2033),
+	smithy.NewStaticSchema(&set, 2034),
+	smithy.NewStaticSchema(&set, 2035),
+	smithy.NewStaticSchema(&set, 2036),
+	smithy.NewStaticSchema(&set, 2037),
+	smithy.NewStaticSchema(&set, 2038),
+	smithy.NewStaticSchema(&set, 2039),
+	smithy.NewStaticSchema(&set, 2040),
+	smithy.NewStaticSchema(&set, 2041),
+	smithy.NewStaticSchema(&set, 2042),
+	smithy.NewStaticSchema(&set, 2043),
+	smithy.NewStaticSchema(&set, 2044),
+	smithy.NewStaticSchema(&set, 2045),
+	smithy.NewStaticSchema(&set, 2046),
+	smithy.NewStaticSchema(&set, 2047),
+	smithy.NewStaticSchema(&set, 2048),
+	smithy.NewStaticSchema(&set, 2049),
+	smithy.NewStaticSchema(&set, 2050),
+	smithy.NewStaticSchema(&set, 2051),
+	smithy.NewStaticSchema(&set, 2052),
+	smithy.NewStaticSchema(&set, 2053),
+	smithy.NewStaticSchema(&set, 2054),
+	smithy.NewStaticSchema(&set, 2055),
+	smithy.NewStaticSchema(&set, 2056),
+	smithy.NewStaticSchema(&set, 2057),
+	smithy.NewStaticSchema(&set, 2058),
+	smithy.NewStaticSchema(&set, 2059),
+	smithy.NewStaticSchema(&set, 2060),
+	smithy.NewStaticSchema(&set, 2061),
+	smithy.NewStaticSchema(&set, 2062),
+	smithy.NewStaticSchema(&set, 2063),
+	smithy.NewStaticSchema(&set, 2064),
+	smithy.NewStaticSchema(&set, 2065),
+	smithy.NewStaticSchema(&set, 2066),
+	smithy.NewStaticSchema(&set, 2067),
+	smithy.NewStaticSchema(&set, 2068),
+	smithy.NewStaticSchema(&set, 2069),
+	smithy.NewStaticSchema(&set, 2070),
+	smithy.NewStaticSchema(&set, 2071),
+	smithy.NewStaticSchema(&set, 2072),
+	smithy.NewStaticSchema(&set, 2073),
+	smithy.NewStaticSchema(&set, 2074),
+	smithy.NewStaticSchema(&set, 2075),
+	smithy.NewStaticSchema(&set, 2076),
+	smithy.NewStaticSchema(&set, 2077),
+	smithy.NewStaticSchema(&set, 2078),
+	smithy.NewStaticSchema(&set, 2079),
+	smithy.NewStaticSchema(&set, 2080),
+	smithy.NewStaticSchema(&set, 2081),
+	smithy.NewStaticSchema(&set, 2082),
+	smithy.NewStaticSchema(&set, 2083),
+	smithy.NewStaticSchema(&set, 2084),
+	smithy.NewStaticSchema(&set, 2085),
+	smithy.NewStaticSchema(&set, 2086),
+	smithy.NewStaticSchema(&set, 2087),
+	smithy.NewStaticSchema(&set, 2088),
+	smithy.NewStaticSchema(&set, 2089),
+	smithy.NewStaticSchema(&set, 2090),
+	smithy.NewStaticSchema(&set, 2091),
+	smithy.NewStaticSchema(&set, 2092),
+	smithy.NewStaticSchema(&set, 2093),
+	smithy.NewStaticSchema(&set, 2094),
+	smithy.NewStaticSchema(&set, 2095),
+	smithy.NewStaticSchema(&set, 2096),
+	smithy.NewStaticSchema(&set, 2097),
+	smithy.NewStaticSchema(&set, 2098),
+	smithy.NewStaticSchema(&set, 2099),
+	smithy.NewStaticSchema(&set, 2100),
+	smithy.NewStaticSchema(&set, 2101),
+	smithy.NewStaticSchema(&set, 2102),
+	smithy.NewStaticSchema(&set, 2103),
+	smithy.NewStaticSchema(&set, 2104),
+	smithy.NewStaticSchema(&set, 2105),
+	smithy.NewStaticSchema(&set, 2106),
+	smithy.NewStaticSchema(&set, 2107),
+	smithy.NewStaticSchema(&set, 2108),
+	smithy.NewStaticSchema(&set, 2109),
+	smithy.NewStaticSchema(&set, 2110),
+	smithy.NewStaticSchema(&set, 2111),
+	smithy.NewStaticSchema(&set, 2112),
+	smithy.NewStaticSchema(&set, 2113),
+	smithy.NewStaticSchema(&set, 2114),
+	smithy.NewStaticSchema(&set, 2115),
+	smithy.NewStaticSchema(&set, 2116),
+	smithy.NewStaticSchema(&set, 2117),
+	smithy.NewStaticSchema(&set, 2118),
+	smithy.NewStaticSchema(&set, 2119),
+	smithy.NewStaticSchema(&set, 2120),
+	smithy.NewStaticSchema(&set, 2121),
+	smithy.NewStaticSchema(&set, 2122),
+	smithy.NewStaticSchema(&set, 2123),
+	smithy.NewStaticSchema(&set, 2124),
+	smithy.NewStaticSchema(&set, 2125),
+	smithy.NewStaticSchema(&set, 2126),
+	smithy.NewStaticSchema(&set, 2127),
+	smithy.NewStaticSchema(&set, 2128),
+	smithy.NewStaticSchema(&set, 2129),
+	smithy.NewStaticSchema(&set, 2130),
+	smithy.NewStaticSchema(&set, 2131),
+	smithy.NewStaticSchema(&set, 2132),
+	smithy.NewStaticSchema(&set, 2133),
+	smithy.NewStaticSchema(&set, 2134),
+	smithy.NewStaticSchema(&set, 2135),
+	smithy.NewStaticSchema(&set, 2136),
+	smithy.NewStaticSchema(&set, 2137),
+	smithy.NewStaticSchema(&set, 2138),
+	smithy.NewStaticSchema(&set, 2139),
+	smithy.NewStaticSchema(&set, 2140),
+	smithy.NewStaticSchema(&set, 2141),
+	smithy.NewStaticSchema(&set, 2142),
+	smithy.NewStaticSchema(&set, 2143),
+	smithy.NewStaticSchema(&set, 2144),
+	smithy.NewStaticSchema(&set, 2145),
+	smithy.NewStaticSchema(&set, 2146),
+	smithy.NewStaticSchema(&set, 2147),
+	smithy.NewStaticSchema(&set, 2148),
+	smithy.NewStaticSchema(&set, 2149),
+	smithy.NewStaticSchema(&set, 2150),
+	smithy.NewStaticSchema(&set, 2151),
+	smithy.NewStaticSchema(&set, 2152),
+	smithy.NewStaticSchema(&set, 2153),
+	smithy.NewStaticSchema(&set, 2154),
+	smithy.NewStaticSchema(&set, 2155),
+	smithy.NewStaticSchema(&set, 2156),
+	smithy.NewStaticSchema(&set, 2157),
+	smithy.NewStaticSchema(&set, 2158),
+	smithy.NewStaticSchema(&set, 2159),
+	smithy.NewStaticSchema(&set, 2160),
+	smithy.NewStaticSchema(&set, 2161),
+	smithy.NewStaticSchema(&set, 2162),
+	smithy.NewStaticSchema(&set, 2163),
+	smithy.NewStaticSchema(&set, 2164),
+	smithy.NewStaticSchema(&set, 2165),
+	smithy.NewStaticSchema(&set, 2166),
+	smithy.NewStaticSchema(&set, 2167),
+	smithy.NewStaticSchema(&set, 2168),
+	smithy.NewStaticSchema(&set, 2169),
+	smithy.NewStaticSchema(&set, 2170),
+	smithy.NewStaticSchema(&set, 2171),
+	smithy.NewStaticSchema(&set, 2172),
+	smithy.NewStaticSchema(&set, 2173),
+	smithy.NewStaticSchema(&set, 2174),
+	smithy.NewStaticSchema(&set, 2175),
+	smithy.NewStaticSchema(&set, 2176),
+	smithy.NewStaticSchema(&set, 2177),
+	smithy.NewStaticSchema(&set, 2178),
+	smithy.NewStaticSchema(&set, 2179),
+	smithy.NewStaticSchema(&set, 2180),
+	smithy.NewStaticSchema(&set, 2181),
+	smithy.NewStaticSchema(&set, 2182),
+	smithy.NewStaticSchema(&set, 2183),
+	smithy.NewStaticSchema(&set, 2184),
+	smithy.NewStaticSchema(&set, 2185),
+	smithy.NewStaticSchema(&set, 2186),
+	smithy.NewStaticSchema(&set, 2187),
+	smithy.NewStaticSchema(&set, 2188),
+	smithy.NewStaticSchema(&set, 2189),
+	smithy.NewStaticSchema(&set, 2190),
+	smithy.NewStaticSchema(&set, 2191),
+	smithy.NewStaticSchema(&set, 2192),
+	smithy.NewStaticSchema(&set, 2193),
+	smithy.NewStaticSchema(&set, 2194),
+	smithy.NewStaticSchema(&set, 2195),
+	smithy.NewStaticSchema(&set, 2196),
+	smithy.NewStaticSchema(&set, 2197),
+	smithy.NewStaticSchema(&set, 2198),
+	smithy.NewStaticSchema(&set, 2199),
+	smithy.NewStaticSchema(&set, 2200),
+	smithy.NewStaticSchema(&set, 2201),
+	smithy.NewStaticSchema(&set, 2202),
+	smithy.NewStaticSchema(&set, 2203),
+	smithy.NewStaticSchema(&set, 2204),
+	smithy.NewStaticSchema(&set, 2205),
+	smithy.NewStaticSchema(&set, 2206),
+	smithy.NewStaticSchema(&set, 2207),
+	smithy.NewStaticSchema(&set, 2208),
+	smithy.NewStaticSchema(&set, 2209),
+	smithy.NewStaticSchema(&set, 2210),
+	smithy.NewStaticSchema(&set, 2211),
+	smithy.NewStaticSchema(&set, 2212),
+	smithy.NewStaticSchema(&set, 2213),
+	smithy.NewStaticSchema(&set, 2214),
+	smithy.NewStaticSchema(&set, 2215),
+	smithy.NewStaticSchema(&set, 2216),
+	smithy.NewStaticSchema(&set, 2217),
+	smithy.NewStaticSchema(&set, 2218),
+	smithy.NewStaticSchema(&set, 2219),
+	smithy.NewStaticSchema(&set, 2220),
+	smithy.NewStaticSchema(&set, 2221),
+	smithy.NewStaticSchema(&set, 2222),
+	smithy.NewStaticSchema(&set, 2223),
+	smithy.NewStaticSchema(&set, 2224),
+	smithy.NewStaticSchema(&set, 2225),
+	smithy.NewStaticSchema(&set, 2226),
+	smithy.NewStaticSchema(&set, 2227),
+	smithy.NewStaticSchema(&set, 2228),
+	smithy.NewStaticSchema(&set, 2229),
+	smithy.NewStaticSchema(&set, 2230),
+	smithy.NewStaticSchema(&set, 2231),
+	smithy.NewStaticSchema(&set, 2232),
+	smithy.NewStaticSchema(&set, 2233),
+	smithy.NewStaticSchema(&set, 2234),
+	smithy.NewStaticSchema(&set, 2235),
+	smithy.NewStaticSchema(&set, 2236),
+	smithy.NewStaticSchema(&set, 2237),
+	smithy.NewStaticSchema(&set, 2238),
+	smithy.NewStaticSchema(&set, 2239),
+	smithy.NewStaticSchema(&set, 2240),
+	smithy.NewStaticSchema(&set, 2241),
+	smithy.NewStaticSchema(&set, 2242),
+	smithy.NewStaticSchema(&set, 2243),
+	smithy.NewStaticSchema(&set, 2244),
+	smithy.NewStaticSchema(&set, 2245),
+	smithy.NewStaticSchema(&set, 2246),
+	smithy.NewStaticSchema(&set, 2247),
+	smithy.NewStaticSchema(&set, 2248),
+	smithy.NewStaticSchema(&set, 2249),
+	smithy.NewStaticSchema(&set, 2250),
+	smithy.NewStaticSchema(&set, 2251),
+	smithy.NewStaticSchema(&set, 2252),
+	smithy.NewStaticSchema(&set, 2253),
+	smithy.NewStaticSchema(&set, 2254),
+	smithy.NewStaticSchema(&set, 2255),
+	smithy.NewStaticSchema(&set, 2256),
+	smithy.NewStaticSchema(&set, 2257),
+	smithy.NewStaticSchema(&set, 2258),
+	smithy.NewStaticSchema(&set, 2259),
+	smithy.NewStaticSchema(&set, 2260),
+	smithy.NewStaticSchema(&set, 2261),
+	smithy.NewStaticSchema(&set, 2262),
+	smithy.NewStaticSchema(&set, 2263),
+	smithy.NewStaticSchema(&set, 2264),
+	smithy.NewStaticSchema(&set, 2265),
+	smithy.NewStaticSchema(&set, 2266),
+	smithy.NewStaticSchema(&set, 2267),
+	smithy.NewStaticSchema(&set, 2268),
+	smithy.NewStaticSchema(&set, 2269),
+	smithy.NewStaticSchema(&set, 2270),
+	smithy.NewStaticSchema(&set, 2271),
+	smithy.NewStaticSchema(&set, 2272),
+	smithy.NewStaticSchema(&set, 2273),
+	smithy.NewStaticSchema(&set, 2274),
+	smithy.NewStaticSchema(&set, 2275),
+	smithy.NewStaticSchema(&set, 2276),
+	smithy.NewStaticSchema(&set, 2277),
+	smithy.NewStaticSchema(&set, 2278),
+	smithy.NewStaticSchema(&set, 2279),
+	smithy.NewStaticSchema(&set, 2280),
+	smithy.NewStaticSchema(&set, 2281),
+	smithy.NewStaticSchema(&set, 2282),
+	smithy.NewStaticSchema(&set, 2283),
+	smithy.NewStaticSchema(&set, 2284),
+	smithy.NewStaticSchema(&set, 2285),
+	smithy.NewStaticSchema(&set, 2286),
+	smithy.NewStaticSchema(&set, 2287),
+	smithy.NewStaticSchema(&set, 2288),
+	smithy.NewStaticSchema(&set, 2289),
+	smithy.NewStaticSchema(&set, 2290),
+	smithy.NewStaticSchema(&set, 2291),
+	smithy.NewStaticSchema(&set, 2292),
+	smithy.NewStaticSchema(&set, 2293),
+	smithy.NewStaticSchema(&set, 2294),
+	smithy.NewStaticSchema(&set, 2295),
+	smithy.NewStaticSchema(&set, 2296),
+	smithy.NewStaticSchema(&set, 2297),
+	smithy.NewStaticSchema(&set, 2298),
+	smithy.NewStaticSchema(&set, 2299),
+	smithy.NewStaticSchema(&set, 2300),
+	smithy.NewStaticSchema(&set, 2301),
+	smithy.NewStaticSchema(&set, 2302),
+	smithy.NewStaticSchema(&set, 2303),
+	smithy.NewStaticSchema(&set, 2304),
+	smithy.NewStaticSchema(&set, 2305),
+	smithy.NewStaticSchema(&set, 2306),
+	smithy.NewStaticSchema(&set, 2307),
+	smithy.NewStaticSchema(&set, 2308),
+	smithy.NewStaticSchema(&set, 2309),
+	smithy.NewStaticSchema(&set, 2310),
+	smithy.NewStaticSchema(&set, 2311),
+	smithy.NewStaticSchema(&set, 2312),
+	smithy.NewStaticSchema(&set, 2313),
+	smithy.NewStaticSchema(&set, 2314),
+	smithy.NewStaticSchema(&set, 2315),
+	smithy.NewStaticSchema(&set, 2316),
+	smithy.NewStaticSchema(&set, 2317),
+	smithy.NewStaticSchema(&set, 2318),
+	smithy.NewStaticSchema(&set, 2319),
+	smithy.NewStaticSchema(&set, 2320),
+	smithy.NewStaticSchema(&set, 2321),
+	smithy.NewStaticSchema(&set, 2322),
+	smithy.NewStaticSchema(&set, 2323),
+	smithy.NewStaticSchema(&set, 2324),
+	smithy.NewStaticSchema(&set, 2325),
+	smithy.NewStaticSchema(&set, 2326),
+	smithy.NewStaticSchema(&set, 2327),
+	smithy.NewStaticSchema(&set, 2328),
+	smithy.NewStaticSchema(&set, 2329),
+	smithy.NewStaticSchema(&set, 2330),
+	smithy.NewStaticSchema(&set, 2331),
+	smithy.NewStaticSchema(&set, 2332),
+	smithy.NewStaticSchema(&set, 2333),
+	smithy.NewStaticSchema(&set, 2334),
+	smithy.NewStaticSchema(&set, 2335),
+	smithy.NewStaticSchema(&set, 2336),
+	smithy.NewStaticSchema(&set, 2337),
+	smithy.NewStaticSchema(&set, 2338),
+	smithy.NewStaticSchema(&set, 2339),
+	smithy.NewStaticSchema(&set, 2340),
+	smithy.NewStaticSchema(&set, 2341),
+	smithy.NewStaticSchema(&set, 2342),
+	smithy.NewStaticSchema(&set, 2343),
+	smithy.NewStaticSchema(&set, 2344),
+	smithy.NewStaticSchema(&set, 2345),
+	smithy.NewStaticSchema(&set, 2346),
+	smithy.NewStaticSchema(&set, 2347),
+	smithy.NewStaticSchema(&set, 2348),
+	smithy.NewStaticSchema(&set, 2349),
+	smithy.NewStaticSchema(&set, 2350),
+	smithy.NewStaticSchema(&set, 2351),
+	smithy.NewStaticSchema(&set, 2352),
+	smithy.NewStaticSchema(&set, 2353),
+	smithy.NewStaticSchema(&set, 2354),
+	smithy.NewStaticSchema(&set, 2355),
+	smithy.NewStaticSchema(&set, 2356),
+	smithy.NewStaticSchema(&set, 2357),
+	smithy.NewStaticSchema(&set, 2358),
+	smithy.NewStaticSchema(&set, 2359),
+	smithy.NewStaticSchema(&set, 2360),
+	smithy.NewStaticSchema(&set, 2361),
+	smithy.NewStaticSchema(&set, 2362),
+	smithy.NewStaticSchema(&set, 2363),
+	smithy.NewStaticSchema(&set, 2364),
+	smithy.NewStaticSchema(&set, 2365),
+	smithy.NewStaticSchema(&set, 2366),
+	smithy.NewStaticSchema(&set, 2367),
+	smithy.NewStaticSchema(&set, 2368),
+	smithy.NewStaticSchema(&set, 2369),
+	smithy.NewStaticSchema(&set, 2370),
+	smithy.NewStaticSchema(&set, 2371),
+	smithy.NewStaticSchema(&set, 2372),
+	smithy.NewStaticSchema(&set, 2373),
+	smithy.NewStaticSchema(&set, 2374),
+	smithy.NewStaticSchema(&set, 2375),
+	smithy.NewStaticSchema(&set, 2376),
+	smithy.NewStaticSchema(&set, 2377),
+	smithy.NewStaticSchema(&set, 2378),
+	smithy.NewStaticSchema(&set, 2379),
+	smithy.NewStaticSchema(&set, 2380),
+	smithy.NewStaticSchema(&set, 2381),
+	smithy.NewStaticSchema(&set, 2382),
+	smithy.NewStaticSchema(&set, 2383),
+	smithy.NewStaticSchema(&set, 2384),
+	smithy.NewStaticSchema(&set, 2385),
+	smithy.NewStaticSchema(&set, 2386),
+	smithy.NewStaticSchema(&set, 2387),
+	smithy.NewStaticSchema(&set, 2388),
+	smithy.NewStaticSchema(&set, 2389),
+	smithy.NewStaticSchema(&set, 2390),
+	smithy.NewStaticSchema(&set, 2391),
+	smithy.NewStaticSchema(&set, 2392),
+	smithy.NewStaticSchema(&set, 2393),
+	smithy.NewStaticSchema(&set, 2394),
+	smithy.NewStaticSchema(&set, 2395),
+	smithy.NewStaticSchema(&set, 2396),
+	smithy.NewStaticSchema(&set, 2397),
+	smithy.NewStaticSchema(&set, 2398),
+	smithy.NewStaticSchema(&set, 2399),
+	smithy.NewStaticSchema(&set, 2400),
+	smithy.NewStaticSchema(&set, 2401),
+	smithy.NewStaticSchema(&set, 2402),
+	smithy.NewStaticSchema(&set, 2403),
+	smithy.NewStaticSchema(&set, 2404),
+	smithy.NewStaticSchema(&set, 2405),
+	smithy.NewStaticSchema(&set, 2406),
+	smithy.NewStaticSchema(&set, 2407),
+	smithy.NewStaticSchema(&set, 2408),
+	smithy.NewStaticSchema(&set, 2409),
+	smithy.NewStaticSchema(&set, 2410),
+	smithy.NewStaticSchema(&set, 2411),
+	smithy.NewStaticSchema(&set, 2412),
+	smithy.NewStaticSchema(&set, 2413),
+	smithy.NewStaticSchema(&set, 2414),
+	smithy.NewStaticSchema(&set, 2415),
+	smithy.NewStaticSchema(&set, 2416),
+	smithy.NewStaticSchema(&set, 2417),
+	smithy.NewStaticSchema(&set, 2418),
+	smithy.NewStaticSchema(&set, 2419),
+	smithy.NewStaticSchema(&set, 2420),
+	smithy.NewStaticSchema(&set, 2421),
+	smithy.NewStaticSchema(&set, 2422),
+	smithy.NewStaticSchema(&set, 2423),
+	smithy.NewStaticSchema(&set, 2424),
+	smithy.NewStaticSchema(&set, 2425),
+	smithy.NewStaticSchema(&set, 2426),
+	smithy.NewStaticSchema(&set, 2427),
+	smithy.NewStaticSchema(&set, 2428),
+	smithy.NewStaticSchema(&set, 2429),
+	smithy.NewStaticSchema(&set, 2430),
+	smithy.NewStaticSchema(&set, 2431),
+	smithy.NewStaticSchema(&set, 2432),
+	smithy.NewStaticSchema(&set, 2433),
+	smithy.NewStaticSchema(&set, 2434),
+}
+
+var AcceptMarketplaceRegistration = &handles[0]
+
+var AssociateIamRoleToResource = &handles[1]
+
+var AssociateVirtualMachinesToExadbVmCluster = &handles[2]
+
+var CreateAutonomousDatabase = &handles[3]
+
+var CreateAutonomousDatabaseBackup = &handles[4]
+
+var CreateAutonomousDatabaseWallet = &handles[5]
+
+var CreateCloudAutonomousVmCluster = &handles[6]
+
+var CreateCloudExadataInfrastructure = &handles[7]
+
+var CreateCloudVmCluster = &handles[8]
+
+var CreateExadbVmCluster = &handles[9]
+
+var CreateExascaleDbStorageVault = &handles[10]
+
+var CreateOdbNetwork = &handles[11]
+
+var CreateOdbPeeringConnection = &handles[12]
+
+var DeleteAutonomousDatabase = &handles[13]
+
+var DeleteAutonomousDatabaseBackup = &handles[14]
+
+var DeleteCloudAutonomousVmCluster = &handles[15]
+
+var DeleteCloudExadataInfrastructure = &handles[16]
+
+var DeleteCloudVmCluster = &handles[17]
+
+var DeleteExadbVmCluster = &handles[18]
+
+var DeleteExascaleDbStorageVault = &handles[19]
+
+var DeleteOdbNetwork = &handles[20]
+
+var DeleteOdbPeeringConnection = &handles[21]
+
+var DisassociateIamRoleFromResource = &handles[22]
+
+var DisassociateVirtualMachinesFromExadbVmCluster = &handles[23]
+
+var FailoverAutonomousDatabase = &handles[24]
+
+var GetAutonomousDatabase = &handles[25]
+
+var GetAutonomousDatabaseBackup = &handles[26]
+
+var GetAutonomousDatabaseWalletDetails = &handles[27]
+
+var GetCloudAutonomousVmCluster = &handles[28]
+
+var GetCloudExadataInfrastructure = &handles[29]
+
+var GetCloudExadataInfrastructureUnallocatedResources = &handles[30]
+
+var GetCloudVmCluster = &handles[31]
+
+var GetDbNode = &handles[32]
+
+var GetDbServer = &handles[33]
+
+var GetExadbVmCluster = &handles[34]
+
+var GetExascaleDbStorageVault = &handles[35]
+
+var GetOciOnboardingStatus = &handles[36]
+
+var GetOdbNetwork = &handles[37]
+
+var GetOdbPeeringConnection = &handles[38]
+
+var InitializeService = &handles[39]
+
+var ListAutonomousDatabaseBackups = &handles[40]
+
+var ListAutonomousDatabaseCharacterSets = &handles[41]
+
+var ListAutonomousDatabaseClones = &handles[42]
+
+var ListAutonomousDatabasePeers = &handles[43]
+
+var ListAutonomousDatabases = &handles[44]
+
+var ListAutonomousDatabaseVersions = &handles[45]
+
+var ListAutonomousVirtualMachines = &handles[46]
+
+var ListCloudAutonomousVmClusters = &handles[47]
+
+var ListCloudExadataInfrastructures = &handles[48]
+
+var ListCloudVmClusters = &handles[49]
+
+var ListDbNodes = &handles[50]
+
+var ListDbServers = &handles[51]
+
+var ListDbSystemShapes = &handles[52]
+
+var ListExadbVmClusters = &handles[53]
+
+var ListExascaleDbStorageVaults = &handles[54]
+
+var ListFlexComponents = &handles[55]
+
+var ListGiMinorVersions = &handles[56]
+
+var ListGiVersions = &handles[57]
+
+var ListOdbNetworks = &handles[58]
+
+var ListOdbPeeringConnections = &handles[59]
+
+var ListSystemVersions = &handles[60]
+
+var ListTagsForResource = &handles[61]
+
+var RebootAutonomousDatabase = &handles[62]
+
+var RebootDbNode = &handles[63]
+
+var RestoreAutonomousDatabase = &handles[64]
+
+var ShrinkAutonomousDatabase = &handles[65]
+
+var StartAutonomousDatabase = &handles[66]
+
+var StartDbNode = &handles[67]
+
+var StopAutonomousDatabase = &handles[68]
+
+var StopDbNode = &handles[69]
+
+var SwitchoverAutonomousDatabase = &handles[70]
+
+var TagResource = &handles[71]
+
+var UntagResource = &handles[72]
+
+var UpdateAutonomousDatabase = &handles[73]
+
+var UpdateAutonomousDatabaseBackup = &handles[74]
+
+var UpdateCloudExadataInfrastructure = &handles[75]
+
+var UpdateExadbVmCluster = &handles[76]
+
+var UpdateExascaleCloudExadataInfrastructure = &handles[77]
+
+var UpdateExascaleDbStorageVault = &handles[78]
+
+var UpdateOdbNetwork = &handles[79]
+
+var UpdateOdbPeeringConnection = &handles[80]
+
+var _Odb = &handles[81]
+
+var Access = &handles[82]
+var Access_ENABLED = &handles[83]
+var Access_DISABLED = &handles[84]
+
+var AccessDeniedException = &handles[85]
+var AccessDeniedException_message = &handles[86]
+
+var AdminPasswordSource = &handles[87]
+var AdminPasswordSource_CUSTOMER_MANAGED_AWS_SECRET = &handles[88]
+var AdminPasswordSource_API_REQUEST_PARAMETER = &handles[89]
+
+var AdminPasswordSourceConfiguration = &handles[90]
+var AdminPasswordSourceConfiguration_customerManagedAwsSecret = &handles[91]
+
+var AdminPasswordSourceConfigurationInput = &handles[92]
+var AdminPasswordSourceConfigurationInput_customerManagedAwsSecret = &handles[93]
+
+var AdminPasswordSourceSummary = &handles[94]
+var AdminPasswordSourceSummary_adminPasswordSource = &handles[95]
+var AdminPasswordSourceSummary_adminPasswordSourceConfiguration = &handles[96]
+
+var _Arn = &handles[97]
+
+var AutonomousDatabase = &handles[98]
+var AutonomousDatabase_autonomousDatabaseId = &handles[99]
+var AutonomousDatabase_autonomousDatabaseArn = &handles[100]
+var AutonomousDatabase_ociResourceAnchorName = &handles[101]
+var AutonomousDatabase_percentProgress = &handles[102]
+var AutonomousDatabase_ocid = &handles[103]
+var AutonomousDatabase_ociUrl = &handles[104]
+var AutonomousDatabase_displayName = &handles[105]
+var AutonomousDatabase_dbName = &handles[106]
+var AutonomousDatabase_sourceId = &handles[107]
+var AutonomousDatabase_status = &handles[108]
+var AutonomousDatabase_statusReason = &handles[109]
+var AutonomousDatabase_databaseType = &handles[110]
+var AutonomousDatabase_dbVersion = &handles[111]
+var AutonomousDatabase_dbWorkload = &handles[112]
+var AutonomousDatabase_characterSet = &handles[113]
+var AutonomousDatabase_ncharacterSet = &handles[114]
+var AutonomousDatabase_databaseEdition = &handles[115]
+var AutonomousDatabase_licenseModel = &handles[116]
+var AutonomousDatabase_openMode = &handles[117]
+var AutonomousDatabase_permissionLevel = &handles[118]
+var AutonomousDatabase_isMtlsConnectionRequired = &handles[119]
+var AutonomousDatabase_autonomousMaintenanceScheduleType = &handles[120]
+var AutonomousDatabase_netServicesArchitecture = &handles[121]
+var AutonomousDatabase_availableUpgradeVersions = &handles[122]
+var AutonomousDatabase_byolComputeCountLimit = &handles[123]
+var AutonomousDatabase_connectionStringDetails = &handles[124]
+var AutonomousDatabase_serviceConsoleUrl = &handles[125]
+var AutonomousDatabase_sqlWebDeveloperUrl = &handles[126]
+var AutonomousDatabase_customerContacts = &handles[127]
+var AutonomousDatabase_apexDetails = &handles[128]
+var AutonomousDatabase_standbyDb = &handles[129]
+var AutonomousDatabase_localStandbyDb = &handles[130]
+var AutonomousDatabase_dataSafeStatus = &handles[131]
+var AutonomousDatabase_databaseManagementStatus = &handles[132]
+var AutonomousDatabase_operationsInsightsStatus = &handles[133]
+var AutonomousDatabase_availabilityZone = &handles[134]
+var AutonomousDatabase_availabilityZoneId = &handles[135]
+var AutonomousDatabase_maintenanceTargetComponent = &handles[136]
+var AutonomousDatabase_connectionUrls = &handles[137]
+var AutonomousDatabase_dbToolsDetails = &handles[138]
+var AutonomousDatabase_scheduledOperations = &handles[139]
+var AutonomousDatabase_resourcePoolLeaderId = &handles[140]
+var AutonomousDatabase_computeCount = &handles[141]
+var AutonomousDatabase_computeModel = &handles[142]
+var AutonomousDatabase_cpuCoreCount = &handles[143]
+var AutonomousDatabase_memoryPerOracleComputeUnitInGBs = &handles[144]
+var AutonomousDatabase_provisionableCpus = &handles[145]
+var AutonomousDatabase_isAutoScalingEnabled = &handles[146]
+var AutonomousDatabase_dataStorageSizeInTBs = &handles[147]
+var AutonomousDatabase_dataStorageSizeInGBs = &handles[148]
+var AutonomousDatabase_usedDataStorageSizeInTBs = &handles[149]
+var AutonomousDatabase_usedDataStorageSizeInGBs = &handles[150]
+var AutonomousDatabase_actualUsedDataStorageSizeInTBs = &handles[151]
+var AutonomousDatabase_allocatedStorageSizeInTBs = &handles[152]
+var AutonomousDatabase_inMemoryAreaInGBs = &handles[153]
+var AutonomousDatabase_isAutoScalingForStorageEnabled = &handles[154]
+var AutonomousDatabase_odbNetworkId = &handles[155]
+var AutonomousDatabase_odbNetworkArn = &handles[156]
+var AutonomousDatabase_privateEndpoint = &handles[157]
+var AutonomousDatabase_privateEndpointIp = &handles[158]
+var AutonomousDatabase_privateEndpointLabel = &handles[159]
+var AutonomousDatabase_allowlistedIps = &handles[160]
+var AutonomousDatabase_standbyAllowlistedIps = &handles[161]
+var AutonomousDatabase_standbyAllowlistedIpsSource = &handles[162]
+var AutonomousDatabase_isLocalDataGuardEnabled = &handles[163]
+var AutonomousDatabase_isRemoteDataGuardEnabled = &handles[164]
+var AutonomousDatabase_localDisasterRecoveryType = &handles[165]
+var AutonomousDatabase_role = &handles[166]
+var AutonomousDatabase_peerDbIds = &handles[167]
+var AutonomousDatabase_failedDataRecoveryInSeconds = &handles[168]
+var AutonomousDatabase_localAdgAutoFailoverMaxDataLossLimit = &handles[169]
+var AutonomousDatabase_remoteDisasterRecoveryConfiguration = &handles[170]
+var AutonomousDatabase_isRefreshableClone = &handles[171]
+var AutonomousDatabase_refreshableMode = &handles[172]
+var AutonomousDatabase_refreshableStatus = &handles[173]
+var AutonomousDatabase_autoRefreshFrequencyInSeconds = &handles[174]
+var AutonomousDatabase_autoRefreshPointLagInSeconds = &handles[175]
+var AutonomousDatabase_isReconnectCloneEnabled = &handles[176]
+var AutonomousDatabase_cloneTableSpaceList = &handles[177]
+var AutonomousDatabase_backupRetentionPeriodInDays = &handles[178]
+var AutonomousDatabase_longTermBackupSchedule = &handles[179]
+var AutonomousDatabase_isBackupRetentionLocked = &handles[180]
+var AutonomousDatabase_totalBackupStorageSizeInGBs = &handles[181]
+var AutonomousDatabase_resourcePoolSummary = &handles[182]
+var AutonomousDatabase_encryptionSummary = &handles[183]
+var AutonomousDatabase_createdAt = &handles[184]
+var AutonomousDatabase_timeOfLastBackup = &handles[185]
+var AutonomousDatabase_timeMaintenanceBegin = &handles[186]
+var AutonomousDatabase_timeMaintenanceEnd = &handles[187]
+var AutonomousDatabase_timeLocalDataGuardEnabled = &handles[188]
+var AutonomousDatabase_timeDataGuardRoleChanged = &handles[189]
+var AutonomousDatabase_timeOfLastSwitchover = &handles[190]
+var AutonomousDatabase_timeOfLastFailover = &handles[191]
+var AutonomousDatabase_timeOfLastRefresh = &handles[192]
+var AutonomousDatabase_timeOfLastRefreshPoint = &handles[193]
+var AutonomousDatabase_timeOfNextRefresh = &handles[194]
+var AutonomousDatabase_timeOfAutoRefreshStart = &handles[195]
+var AutonomousDatabase_timeDeletionOfFreeAutonomousDatabase = &handles[196]
+var AutonomousDatabase_timeReclamationOfFreeAutonomousDatabase = &handles[197]
+var AutonomousDatabase_timeDisasterRecoveryRoleChanged = &handles[198]
+var AutonomousDatabase_timeUntilReconnectCloneEnabled = &handles[199]
+var AutonomousDatabase_nextLongTermBackupTimeStamp = &handles[200]
+var AutonomousDatabase_timeUndeleted = &handles[201]
+var AutonomousDatabase_adminPasswordSourceSummary = &handles[202]
+
+var AutonomousDatabaseApex = &handles[203]
+var AutonomousDatabaseApex_apexVersion = &handles[204]
+var AutonomousDatabaseApex_ordsVersion = &handles[205]
+
+var AutonomousDatabaseBackup = &handles[206]
+var AutonomousDatabaseBackup_autonomousDatabaseBackupId = &handles[207]
+var AutonomousDatabaseBackup_autonomousDatabaseBackupArn = &handles[208]
+var AutonomousDatabaseBackup_autonomousDatabaseId = &handles[209]
+var AutonomousDatabaseBackup_ocid = &handles[210]
+var AutonomousDatabaseBackup_displayName = &handles[211]
+var AutonomousDatabaseBackup_dbVersion = &handles[212]
+var AutonomousDatabaseBackup_status = &handles[213]
+var AutonomousDatabaseBackup_statusReason = &handles[214]
+var AutonomousDatabaseBackup_isAutomatic = &handles[215]
+var AutonomousDatabaseBackup_retentionPeriodInDays = &handles[216]
+var AutonomousDatabaseBackup_sizeInTBs = &handles[217]
+var AutonomousDatabaseBackup_timeAvailableTill = &handles[218]
+var AutonomousDatabaseBackup_timeStarted = &handles[219]
+var AutonomousDatabaseBackup_timeEnded = &handles[220]
+var AutonomousDatabaseBackup_type = &handles[221]
+
+var _AutonomousDatabaseBackupList = &handles[222]
+var _AutonomousDatabaseBackupList_member = &handles[223]
+
+var AutonomousDatabaseBackupStatus = &handles[224]
+var AutonomousDatabaseBackupStatus_ACTIVE = &handles[225]
+var AutonomousDatabaseBackupStatus_CREATING = &handles[226]
+var AutonomousDatabaseBackupStatus_UPDATING = &handles[227]
+var AutonomousDatabaseBackupStatus_DELETING = &handles[228]
+var AutonomousDatabaseBackupStatus_FAILED = &handles[229]
+
+var AutonomousDatabaseBackupSummary = &handles[230]
+var AutonomousDatabaseBackupSummary_autonomousDatabaseBackupId = &handles[231]
+var AutonomousDatabaseBackupSummary_autonomousDatabaseBackupArn = &handles[232]
+var AutonomousDatabaseBackupSummary_autonomousDatabaseId = &handles[233]
+var AutonomousDatabaseBackupSummary_ocid = &handles[234]
+var AutonomousDatabaseBackupSummary_displayName = &handles[235]
+var AutonomousDatabaseBackupSummary_dbVersion = &handles[236]
+var AutonomousDatabaseBackupSummary_status = &handles[237]
+var AutonomousDatabaseBackupSummary_statusReason = &handles[238]
+var AutonomousDatabaseBackupSummary_isAutomatic = &handles[239]
+var AutonomousDatabaseBackupSummary_retentionPeriodInDays = &handles[240]
+var AutonomousDatabaseBackupSummary_sizeInTBs = &handles[241]
+var AutonomousDatabaseBackupSummary_timeAvailableTill = &handles[242]
+var AutonomousDatabaseBackupSummary_timeStarted = &handles[243]
+var AutonomousDatabaseBackupSummary_timeEnded = &handles[244]
+var AutonomousDatabaseBackupSummary_type = &handles[245]
+
+var AutonomousDatabaseBackupType = &handles[246]
+var AutonomousDatabaseBackupType_INCREMENTAL = &handles[247]
+var AutonomousDatabaseBackupType_FULL = &handles[248]
+var AutonomousDatabaseBackupType_LONGTERM = &handles[249]
+var AutonomousDatabaseBackupType_VIRTUAL_FULL = &handles[250]
+var AutonomousDatabaseBackupType_CUMULATIVE_INCREMENTAL = &handles[251]
+var AutonomousDatabaseBackupType_ROLL_FORWARD_IMAGE_COPY = &handles[252]
+
+var _AutonomousDatabaseCharacterSetList = &handles[253]
+var _AutonomousDatabaseCharacterSetList_member = &handles[254]
+
+var AutonomousDatabaseCharacterSetSummary = &handles[255]
+var AutonomousDatabaseCharacterSetSummary_characterSet = &handles[256]
+
+var AutonomousDatabaseConnectionStrings = &handles[257]
+var AutonomousDatabaseConnectionStrings_allConnectionStrings = &handles[258]
+var AutonomousDatabaseConnectionStrings_dedicated = &handles[259]
+var AutonomousDatabaseConnectionStrings_high = &handles[260]
+var AutonomousDatabaseConnectionStrings_medium = &handles[261]
+var AutonomousDatabaseConnectionStrings_low = &handles[262]
+var AutonomousDatabaseConnectionStrings_profiles = &handles[263]
+
+var AutonomousDatabaseConnectionUrls = &handles[264]
+var AutonomousDatabaseConnectionUrls_apexUrl = &handles[265]
+var AutonomousDatabaseConnectionUrls_databaseTransformsUrl = &handles[266]
+var AutonomousDatabaseConnectionUrls_graphStudioUrl = &handles[267]
+var AutonomousDatabaseConnectionUrls_machineLearningNotebookUrl = &handles[268]
+var AutonomousDatabaseConnectionUrls_machineLearningUserManagementUrl = &handles[269]
+var AutonomousDatabaseConnectionUrls_mongoDbUrl = &handles[270]
+var AutonomousDatabaseConnectionUrls_ordsUrl = &handles[271]
+var AutonomousDatabaseConnectionUrls_spatialStudioUrl = &handles[272]
+var AutonomousDatabaseConnectionUrls_sqlDevWebUrl = &handles[273]
+
+var _AutonomousDatabaseList = &handles[274]
+var _AutonomousDatabaseList_member = &handles[275]
+
+var _AutonomousDatabasePeerList = &handles[276]
+var _AutonomousDatabasePeerList_member = &handles[277]
+
+var AutonomousDatabasePeerSummary = &handles[278]
+var AutonomousDatabasePeerSummary_autonomousDatabaseId = &handles[279]
+var AutonomousDatabasePeerSummary_autonomousDatabaseArn = &handles[280]
+var AutonomousDatabasePeerSummary_ocid = &handles[281]
+var AutonomousDatabasePeerSummary_region = &handles[282]
+
+var AutonomousDatabaseResourceStatus = &handles[283]
+var AutonomousDatabaseResourceStatus_AVAILABLE = &handles[284]
+var AutonomousDatabaseResourceStatus_FAILED = &handles[285]
+var AutonomousDatabaseResourceStatus_PROVISIONING = &handles[286]
+var AutonomousDatabaseResourceStatus_TERMINATED = &handles[287]
+var AutonomousDatabaseResourceStatus_TERMINATING = &handles[288]
+var AutonomousDatabaseResourceStatus_UPDATING = &handles[289]
+var AutonomousDatabaseResourceStatus_MAINTENANCE_IN_PROGRESS = &handles[290]
+var AutonomousDatabaseResourceStatus_STOPPING = &handles[291]
+var AutonomousDatabaseResourceStatus_STOPPED = &handles[292]
+var AutonomousDatabaseResourceStatus_STARTING = &handles[293]
+var AutonomousDatabaseResourceStatus_UNAVAILABLE = &handles[294]
+var AutonomousDatabaseResourceStatus_RESTORE_IN_PROGRESS = &handles[295]
+var AutonomousDatabaseResourceStatus_RESTORE_FAILED = &handles[296]
+var AutonomousDatabaseResourceStatus_BACKUP_IN_PROGRESS = &handles[297]
+var AutonomousDatabaseResourceStatus_SCALE_IN_PROGRESS = &handles[298]
+var AutonomousDatabaseResourceStatus_AVAILABLE_NEEDS_ATTENTION = &handles[299]
+var AutonomousDatabaseResourceStatus_RESTARTING = &handles[300]
+var AutonomousDatabaseResourceStatus_RECREATING = &handles[301]
+var AutonomousDatabaseResourceStatus_ROLE_CHANGE_IN_PROGRESS = &handles[302]
+var AutonomousDatabaseResourceStatus_UPGRADING = &handles[303]
+var AutonomousDatabaseResourceStatus_INACCESSIBLE = &handles[304]
+var AutonomousDatabaseResourceStatus_STANDBY = &handles[305]
+
+var AutonomousDatabaseSummary = &handles[306]
+var AutonomousDatabaseSummary_autonomousDatabaseId = &handles[307]
+var AutonomousDatabaseSummary_autonomousDatabaseArn = &handles[308]
+var AutonomousDatabaseSummary_ociResourceAnchorName = &handles[309]
+var AutonomousDatabaseSummary_percentProgress = &handles[310]
+var AutonomousDatabaseSummary_ocid = &handles[311]
+var AutonomousDatabaseSummary_ociUrl = &handles[312]
+var AutonomousDatabaseSummary_displayName = &handles[313]
+var AutonomousDatabaseSummary_dbName = &handles[314]
+var AutonomousDatabaseSummary_sourceId = &handles[315]
+var AutonomousDatabaseSummary_status = &handles[316]
+var AutonomousDatabaseSummary_statusReason = &handles[317]
+var AutonomousDatabaseSummary_databaseType = &handles[318]
+var AutonomousDatabaseSummary_dbVersion = &handles[319]
+var AutonomousDatabaseSummary_dbWorkload = &handles[320]
+var AutonomousDatabaseSummary_characterSet = &handles[321]
+var AutonomousDatabaseSummary_ncharacterSet = &handles[322]
+var AutonomousDatabaseSummary_databaseEdition = &handles[323]
+var AutonomousDatabaseSummary_licenseModel = &handles[324]
+var AutonomousDatabaseSummary_openMode = &handles[325]
+var AutonomousDatabaseSummary_permissionLevel = &handles[326]
+var AutonomousDatabaseSummary_isMtlsConnectionRequired = &handles[327]
+var AutonomousDatabaseSummary_autonomousMaintenanceScheduleType = &handles[328]
+var AutonomousDatabaseSummary_netServicesArchitecture = &handles[329]
+var AutonomousDatabaseSummary_availableUpgradeVersions = &handles[330]
+var AutonomousDatabaseSummary_byolComputeCountLimit = &handles[331]
+var AutonomousDatabaseSummary_connectionStringDetails = &handles[332]
+var AutonomousDatabaseSummary_serviceConsoleUrl = &handles[333]
+var AutonomousDatabaseSummary_sqlWebDeveloperUrl = &handles[334]
+var AutonomousDatabaseSummary_customerContacts = &handles[335]
+var AutonomousDatabaseSummary_apexDetails = &handles[336]
+var AutonomousDatabaseSummary_standbyDb = &handles[337]
+var AutonomousDatabaseSummary_localStandbyDb = &handles[338]
+var AutonomousDatabaseSummary_dataSafeStatus = &handles[339]
+var AutonomousDatabaseSummary_databaseManagementStatus = &handles[340]
+var AutonomousDatabaseSummary_operationsInsightsStatus = &handles[341]
+var AutonomousDatabaseSummary_availabilityZone = &handles[342]
+var AutonomousDatabaseSummary_availabilityZoneId = &handles[343]
+var AutonomousDatabaseSummary_maintenanceTargetComponent = &handles[344]
+var AutonomousDatabaseSummary_connectionUrls = &handles[345]
+var AutonomousDatabaseSummary_dbToolsDetails = &handles[346]
+var AutonomousDatabaseSummary_scheduledOperations = &handles[347]
+var AutonomousDatabaseSummary_resourcePoolLeaderId = &handles[348]
+var AutonomousDatabaseSummary_computeCount = &handles[349]
+var AutonomousDatabaseSummary_computeModel = &handles[350]
+var AutonomousDatabaseSummary_cpuCoreCount = &handles[351]
+var AutonomousDatabaseSummary_memoryPerOracleComputeUnitInGBs = &handles[352]
+var AutonomousDatabaseSummary_provisionableCpus = &handles[353]
+var AutonomousDatabaseSummary_isAutoScalingEnabled = &handles[354]
+var AutonomousDatabaseSummary_dataStorageSizeInTBs = &handles[355]
+var AutonomousDatabaseSummary_dataStorageSizeInGBs = &handles[356]
+var AutonomousDatabaseSummary_usedDataStorageSizeInTBs = &handles[357]
+var AutonomousDatabaseSummary_usedDataStorageSizeInGBs = &handles[358]
+var AutonomousDatabaseSummary_actualUsedDataStorageSizeInTBs = &handles[359]
+var AutonomousDatabaseSummary_allocatedStorageSizeInTBs = &handles[360]
+var AutonomousDatabaseSummary_inMemoryAreaInGBs = &handles[361]
+var AutonomousDatabaseSummary_isAutoScalingForStorageEnabled = &handles[362]
+var AutonomousDatabaseSummary_odbNetworkId = &handles[363]
+var AutonomousDatabaseSummary_odbNetworkArn = &handles[364]
+var AutonomousDatabaseSummary_privateEndpoint = &handles[365]
+var AutonomousDatabaseSummary_privateEndpointIp = &handles[366]
+var AutonomousDatabaseSummary_privateEndpointLabel = &handles[367]
+var AutonomousDatabaseSummary_allowlistedIps = &handles[368]
+var AutonomousDatabaseSummary_standbyAllowlistedIps = &handles[369]
+var AutonomousDatabaseSummary_standbyAllowlistedIpsSource = &handles[370]
+var AutonomousDatabaseSummary_isLocalDataGuardEnabled = &handles[371]
+var AutonomousDatabaseSummary_isRemoteDataGuardEnabled = &handles[372]
+var AutonomousDatabaseSummary_localDisasterRecoveryType = &handles[373]
+var AutonomousDatabaseSummary_role = &handles[374]
+var AutonomousDatabaseSummary_peerDbIds = &handles[375]
+var AutonomousDatabaseSummary_failedDataRecoveryInSeconds = &handles[376]
+var AutonomousDatabaseSummary_localAdgAutoFailoverMaxDataLossLimit = &handles[377]
+var AutonomousDatabaseSummary_remoteDisasterRecoveryConfiguration = &handles[378]
+var AutonomousDatabaseSummary_isRefreshableClone = &handles[379]
+var AutonomousDatabaseSummary_refreshableMode = &handles[380]
+var AutonomousDatabaseSummary_refreshableStatus = &handles[381]
+var AutonomousDatabaseSummary_autoRefreshFrequencyInSeconds = &handles[382]
+var AutonomousDatabaseSummary_autoRefreshPointLagInSeconds = &handles[383]
+var AutonomousDatabaseSummary_isReconnectCloneEnabled = &handles[384]
+var AutonomousDatabaseSummary_cloneTableSpaceList = &handles[385]
+var AutonomousDatabaseSummary_backupRetentionPeriodInDays = &handles[386]
+var AutonomousDatabaseSummary_longTermBackupSchedule = &handles[387]
+var AutonomousDatabaseSummary_isBackupRetentionLocked = &handles[388]
+var AutonomousDatabaseSummary_totalBackupStorageSizeInGBs = &handles[389]
+var AutonomousDatabaseSummary_resourcePoolSummary = &handles[390]
+var AutonomousDatabaseSummary_encryptionSummary = &handles[391]
+var AutonomousDatabaseSummary_createdAt = &handles[392]
+var AutonomousDatabaseSummary_timeOfLastBackup = &handles[393]
+var AutonomousDatabaseSummary_timeMaintenanceBegin = &handles[394]
+var AutonomousDatabaseSummary_timeMaintenanceEnd = &handles[395]
+var AutonomousDatabaseSummary_timeLocalDataGuardEnabled = &handles[396]
+var AutonomousDatabaseSummary_timeDataGuardRoleChanged = &handles[397]
+var AutonomousDatabaseSummary_timeOfLastSwitchover = &handles[398]
+var AutonomousDatabaseSummary_timeOfLastFailover = &handles[399]
+var AutonomousDatabaseSummary_timeOfLastRefresh = &handles[400]
+var AutonomousDatabaseSummary_timeOfLastRefreshPoint = &handles[401]
+var AutonomousDatabaseSummary_timeOfNextRefresh = &handles[402]
+var AutonomousDatabaseSummary_timeOfAutoRefreshStart = &handles[403]
+var AutonomousDatabaseSummary_timeDeletionOfFreeAutonomousDatabase = &handles[404]
+var AutonomousDatabaseSummary_timeReclamationOfFreeAutonomousDatabase = &handles[405]
+var AutonomousDatabaseSummary_timeDisasterRecoveryRoleChanged = &handles[406]
+var AutonomousDatabaseSummary_timeUntilReconnectCloneEnabled = &handles[407]
+var AutonomousDatabaseSummary_nextLongTermBackupTimeStamp = &handles[408]
+var AutonomousDatabaseSummary_timeUndeleted = &handles[409]
+var AutonomousDatabaseSummary_adminPasswordSourceSummary = &handles[410]
+
+var _AutonomousDatabaseVersionList = &handles[411]
+var _AutonomousDatabaseVersionList_member = &handles[412]
+
+var AutonomousDatabaseVersionSummary = &handles[413]
+var AutonomousDatabaseVersionSummary_dbWorkload = &handles[414]
+var AutonomousDatabaseVersionSummary_details = &handles[415]
+var AutonomousDatabaseVersionSummary_version = &handles[416]
+
+var AutonomousDatabaseWalletDetails = &handles[417]
+var AutonomousDatabaseWalletDetails_status = &handles[418]
+var AutonomousDatabaseWalletDetails_timeRotated = &handles[419]
+var AutonomousDatabaseWalletDetails_passwordSourceSummary = &handles[420]
+
+var _AutonomousDatabaseWalletFile = &handles[421]
+
+var AutonomousDatabaseWalletStatus = &handles[422]
+var AutonomousDatabaseWalletStatus_ACTIVE = &handles[423]
+var AutonomousDatabaseWalletStatus_UPDATING = &handles[424]
+
+var AutonomousMaintenanceScheduleType = &handles[425]
+var AutonomousMaintenanceScheduleType_EARLY = &handles[426]
+var AutonomousMaintenanceScheduleType_REGULAR = &handles[427]
+
+var _AutonomousVirtualMachineList = &handles[428]
+var _AutonomousVirtualMachineList_member = &handles[429]
+
+var AutonomousVirtualMachineSummary = &handles[430]
+var AutonomousVirtualMachineSummary_autonomousVirtualMachineId = &handles[431]
+var AutonomousVirtualMachineSummary_status = &handles[432]
+var AutonomousVirtualMachineSummary_statusReason = &handles[433]
+var AutonomousVirtualMachineSummary_vmName = &handles[434]
+var AutonomousVirtualMachineSummary_dbServerId = &handles[435]
+var AutonomousVirtualMachineSummary_dbServerDisplayName = &handles[436]
+var AutonomousVirtualMachineSummary_cpuCoreCount = &handles[437]
+var AutonomousVirtualMachineSummary_memorySizeInGBs = &handles[438]
+var AutonomousVirtualMachineSummary_dbNodeStorageSizeInGBs = &handles[439]
+var AutonomousVirtualMachineSummary_clientIpAddress = &handles[440]
+var AutonomousVirtualMachineSummary_cloudAutonomousVmClusterId = &handles[441]
+var AutonomousVirtualMachineSummary_ocid = &handles[442]
+var AutonomousVirtualMachineSummary_ociResourceAnchorName = &handles[443]
+
+var AwsEncryptionKeyConfiguration = &handles[444]
+var AwsEncryptionKeyConfiguration_iamRoleArn = &handles[445]
+var AwsEncryptionKeyConfiguration_externalIdType = &handles[446]
+var AwsEncryptionKeyConfiguration_kmsKeyId = &handles[447]
+
+var AwsEncryptionKeyConfigurationInput = &handles[448]
+var AwsEncryptionKeyConfigurationInput_iamRoleArn = &handles[449]
+var AwsEncryptionKeyConfigurationInput_externalIdType = &handles[450]
+var AwsEncryptionKeyConfigurationInput_kmsKeyId = &handles[451]
+
+var characterSetType = &handles[452]
+var characterSetType_DATABASE = &handles[453]
+var characterSetType_NATIONAL = &handles[454]
+
+var CloneToRefreshableConfiguration = &handles[455]
+var CloneToRefreshableConfiguration_sourceAutonomousDatabaseId = &handles[456]
+var CloneToRefreshableConfiguration_refreshableMode = &handles[457]
+var CloneToRefreshableConfiguration_autoRefreshFrequencyInSeconds = &handles[458]
+var CloneToRefreshableConfiguration_autoRefreshPointLagInSeconds = &handles[459]
+var CloneToRefreshableConfiguration_timeOfAutoRefreshStart = &handles[460]
+var CloneToRefreshableConfiguration_openMode = &handles[461]
+var CloneToRefreshableConfiguration_cloneType = &handles[462]
+
+var CloneType = &handles[463]
+var CloneType_FULL = &handles[464]
+var CloneType_METADATA = &handles[465]
+var CloneType_PARTIAL = &handles[466]
+
+var CloudAutonomousVmCluster = &handles[467]
+var CloudAutonomousVmCluster_cloudAutonomousVmClusterId = &handles[468]
+var CloudAutonomousVmCluster_cloudAutonomousVmClusterArn = &handles[469]
+var CloudAutonomousVmCluster_odbNetworkId = &handles[470]
+var CloudAutonomousVmCluster_odbNetworkArn = &handles[471]
+var CloudAutonomousVmCluster_ociResourceAnchorName = &handles[472]
+var CloudAutonomousVmCluster_percentProgress = &handles[473]
+var CloudAutonomousVmCluster_displayName = &handles[474]
+var CloudAutonomousVmCluster_status = &handles[475]
+var CloudAutonomousVmCluster_statusReason = &handles[476]
+var CloudAutonomousVmCluster_cloudExadataInfrastructureId = &handles[477]
+var CloudAutonomousVmCluster_cloudExadataInfrastructureArn = &handles[478]
+var CloudAutonomousVmCluster_autonomousDataStoragePercentage = &handles[479]
+var CloudAutonomousVmCluster_autonomousDataStorageSizeInTBs = &handles[480]
+var CloudAutonomousVmCluster_availableAutonomousDataStorageSizeInTBs = &handles[481]
+var CloudAutonomousVmCluster_availableContainerDatabases = &handles[482]
+var CloudAutonomousVmCluster_availableCpus = &handles[483]
+var CloudAutonomousVmCluster_computeModel = &handles[484]
+var CloudAutonomousVmCluster_cpuCoreCount = &handles[485]
+var CloudAutonomousVmCluster_cpuCoreCountPerNode = &handles[486]
+var CloudAutonomousVmCluster_cpuPercentage = &handles[487]
+var CloudAutonomousVmCluster_dataStorageSizeInGBs = &handles[488]
+var CloudAutonomousVmCluster_dataStorageSizeInTBs = &handles[489]
+var CloudAutonomousVmCluster_dbNodeStorageSizeInGBs = &handles[490]
+var CloudAutonomousVmCluster_dbServers = &handles[491]
+var CloudAutonomousVmCluster_description = &handles[492]
+var CloudAutonomousVmCluster_domain = &handles[493]
+var CloudAutonomousVmCluster_exadataStorageInTBsLowestScaledValue = &handles[494]
+var CloudAutonomousVmCluster_hostname = &handles[495]
+var CloudAutonomousVmCluster_ocid = &handles[496]
+var CloudAutonomousVmCluster_ociUrl = &handles[497]
+var CloudAutonomousVmCluster_isMtlsEnabledVmCluster = &handles[498]
+var CloudAutonomousVmCluster_licenseModel = &handles[499]
+var CloudAutonomousVmCluster_maintenanceWindow = &handles[500]
+var CloudAutonomousVmCluster_maxAcdsLowestScaledValue = &handles[501]
+var CloudAutonomousVmCluster_memoryPerOracleComputeUnitInGBs = &handles[502]
+var CloudAutonomousVmCluster_memorySizeInGBs = &handles[503]
+var CloudAutonomousVmCluster_nodeCount = &handles[504]
+var CloudAutonomousVmCluster_nonProvisionableAutonomousContainerDatabases = &handles[505]
+var CloudAutonomousVmCluster_provisionableAutonomousContainerDatabases = &handles[506]
+var CloudAutonomousVmCluster_provisionedAutonomousContainerDatabases = &handles[507]
+var CloudAutonomousVmCluster_provisionedCpus = &handles[508]
+var CloudAutonomousVmCluster_reclaimableCpus = &handles[509]
+var CloudAutonomousVmCluster_reservedCpus = &handles[510]
+var CloudAutonomousVmCluster_scanListenerPortNonTls = &handles[511]
+var CloudAutonomousVmCluster_scanListenerPortTls = &handles[512]
+var CloudAutonomousVmCluster_shape = &handles[513]
+var CloudAutonomousVmCluster_createdAt = &handles[514]
+var CloudAutonomousVmCluster_timeDatabaseSslCertificateExpires = &handles[515]
+var CloudAutonomousVmCluster_timeOrdsCertificateExpires = &handles[516]
+var CloudAutonomousVmCluster_timeZone = &handles[517]
+var CloudAutonomousVmCluster_totalContainerDatabases = &handles[518]
+var CloudAutonomousVmCluster_iamRoles = &handles[519]
+
+var _CloudAutonomousVmClusterList = &handles[520]
+var _CloudAutonomousVmClusterList_member = &handles[521]
+
+var CloudAutonomousVmClusterResourceDetails = &handles[522]
+var CloudAutonomousVmClusterResourceDetails_cloudAutonomousVmClusterId = &handles[523]
+var CloudAutonomousVmClusterResourceDetails_unallocatedAdbStorageInTBs = &handles[524]
+
+var _CloudAutonomousVmClusterResourceDetailsList = &handles[525]
+var _CloudAutonomousVmClusterResourceDetailsList_member = &handles[526]
+
+var CloudAutonomousVmClusterSummary = &handles[527]
+var CloudAutonomousVmClusterSummary_cloudAutonomousVmClusterId = &handles[528]
+var CloudAutonomousVmClusterSummary_cloudAutonomousVmClusterArn = &handles[529]
+var CloudAutonomousVmClusterSummary_odbNetworkId = &handles[530]
+var CloudAutonomousVmClusterSummary_odbNetworkArn = &handles[531]
+var CloudAutonomousVmClusterSummary_ociResourceAnchorName = &handles[532]
+var CloudAutonomousVmClusterSummary_percentProgress = &handles[533]
+var CloudAutonomousVmClusterSummary_displayName = &handles[534]
+var CloudAutonomousVmClusterSummary_status = &handles[535]
+var CloudAutonomousVmClusterSummary_statusReason = &handles[536]
+var CloudAutonomousVmClusterSummary_cloudExadataInfrastructureId = &handles[537]
+var CloudAutonomousVmClusterSummary_cloudExadataInfrastructureArn = &handles[538]
+var CloudAutonomousVmClusterSummary_autonomousDataStoragePercentage = &handles[539]
+var CloudAutonomousVmClusterSummary_autonomousDataStorageSizeInTBs = &handles[540]
+var CloudAutonomousVmClusterSummary_availableAutonomousDataStorageSizeInTBs = &handles[541]
+var CloudAutonomousVmClusterSummary_availableContainerDatabases = &handles[542]
+var CloudAutonomousVmClusterSummary_availableCpus = &handles[543]
+var CloudAutonomousVmClusterSummary_computeModel = &handles[544]
+var CloudAutonomousVmClusterSummary_cpuCoreCount = &handles[545]
+var CloudAutonomousVmClusterSummary_cpuCoreCountPerNode = &handles[546]
+var CloudAutonomousVmClusterSummary_cpuPercentage = &handles[547]
+var CloudAutonomousVmClusterSummary_dataStorageSizeInGBs = &handles[548]
+var CloudAutonomousVmClusterSummary_dataStorageSizeInTBs = &handles[549]
+var CloudAutonomousVmClusterSummary_dbNodeStorageSizeInGBs = &handles[550]
+var CloudAutonomousVmClusterSummary_dbServers = &handles[551]
+var CloudAutonomousVmClusterSummary_description = &handles[552]
+var CloudAutonomousVmClusterSummary_domain = &handles[553]
+var CloudAutonomousVmClusterSummary_exadataStorageInTBsLowestScaledValue = &handles[554]
+var CloudAutonomousVmClusterSummary_hostname = &handles[555]
+var CloudAutonomousVmClusterSummary_ocid = &handles[556]
+var CloudAutonomousVmClusterSummary_ociUrl = &handles[557]
+var CloudAutonomousVmClusterSummary_isMtlsEnabledVmCluster = &handles[558]
+var CloudAutonomousVmClusterSummary_licenseModel = &handles[559]
+var CloudAutonomousVmClusterSummary_maintenanceWindow = &handles[560]
+var CloudAutonomousVmClusterSummary_maxAcdsLowestScaledValue = &handles[561]
+var CloudAutonomousVmClusterSummary_memoryPerOracleComputeUnitInGBs = &handles[562]
+var CloudAutonomousVmClusterSummary_memorySizeInGBs = &handles[563]
+var CloudAutonomousVmClusterSummary_nodeCount = &handles[564]
+var CloudAutonomousVmClusterSummary_nonProvisionableAutonomousContainerDatabases = &handles[565]
+var CloudAutonomousVmClusterSummary_provisionableAutonomousContainerDatabases = &handles[566]
+var CloudAutonomousVmClusterSummary_provisionedAutonomousContainerDatabases = &handles[567]
+var CloudAutonomousVmClusterSummary_provisionedCpus = &handles[568]
+var CloudAutonomousVmClusterSummary_reclaimableCpus = &handles[569]
+var CloudAutonomousVmClusterSummary_reservedCpus = &handles[570]
+var CloudAutonomousVmClusterSummary_scanListenerPortNonTls = &handles[571]
+var CloudAutonomousVmClusterSummary_scanListenerPortTls = &handles[572]
+var CloudAutonomousVmClusterSummary_shape = &handles[573]
+var CloudAutonomousVmClusterSummary_createdAt = &handles[574]
+var CloudAutonomousVmClusterSummary_timeDatabaseSslCertificateExpires = &handles[575]
+var CloudAutonomousVmClusterSummary_timeOrdsCertificateExpires = &handles[576]
+var CloudAutonomousVmClusterSummary_timeZone = &handles[577]
+var CloudAutonomousVmClusterSummary_totalContainerDatabases = &handles[578]
+var CloudAutonomousVmClusterSummary_iamRoles = &handles[579]
+
+var CloudExadataInfrastructure = &handles[580]
+var CloudExadataInfrastructure_cloudExadataInfrastructureId = &handles[581]
+var CloudExadataInfrastructure_displayName = &handles[582]
+var CloudExadataInfrastructure_status = &handles[583]
+var CloudExadataInfrastructure_statusReason = &handles[584]
+var CloudExadataInfrastructure_cloudExadataInfrastructureArn = &handles[585]
+var CloudExadataInfrastructure_activatedStorageCount = &handles[586]
+var CloudExadataInfrastructure_additionalStorageCount = &handles[587]
+var CloudExadataInfrastructure_availableStorageSizeInGBs = &handles[588]
+var CloudExadataInfrastructure_availabilityZone = &handles[589]
+var CloudExadataInfrastructure_availabilityZoneId = &handles[590]
+var CloudExadataInfrastructure_computeCount = &handles[591]
+var CloudExadataInfrastructure_cpuCount = &handles[592]
+var CloudExadataInfrastructure_customerContactsToSendToOCI = &handles[593]
+var CloudExadataInfrastructure_dataStorageSizeInTBs = &handles[594]
+var CloudExadataInfrastructure_dbNodeStorageSizeInGBs = &handles[595]
+var CloudExadataInfrastructure_dbServerVersion = &handles[596]
+var CloudExadataInfrastructure_lastMaintenanceRunId = &handles[597]
+var CloudExadataInfrastructure_maintenanceWindow = &handles[598]
+var CloudExadataInfrastructure_maxCpuCount = &handles[599]
+var CloudExadataInfrastructure_maxDataStorageInTBs = &handles[600]
+var CloudExadataInfrastructure_maxDbNodeStorageSizeInGBs = &handles[601]
+var CloudExadataInfrastructure_maxMemoryInGBs = &handles[602]
+var CloudExadataInfrastructure_memorySizeInGBs = &handles[603]
+var CloudExadataInfrastructure_monthlyDbServerVersion = &handles[604]
+var CloudExadataInfrastructure_monthlyStorageServerVersion = &handles[605]
+var CloudExadataInfrastructure_nextMaintenanceRunId = &handles[606]
+var CloudExadataInfrastructure_ociResourceAnchorName = &handles[607]
+var CloudExadataInfrastructure_ociUrl = &handles[608]
+var CloudExadataInfrastructure_ocid = &handles[609]
+var CloudExadataInfrastructure_shape = &handles[610]
+var CloudExadataInfrastructure_storageCount = &handles[611]
+var CloudExadataInfrastructure_storageServerVersion = &handles[612]
+var CloudExadataInfrastructure_createdAt = &handles[613]
+var CloudExadataInfrastructure_totalStorageSizeInGBs = &handles[614]
+var CloudExadataInfrastructure_percentProgress = &handles[615]
+var CloudExadataInfrastructure_databaseServerType = &handles[616]
+var CloudExadataInfrastructure_storageServerType = &handles[617]
+var CloudExadataInfrastructure_computeModel = &handles[618]
+var CloudExadataInfrastructure_exascaleConfiguration = &handles[619]
+
+var _CloudExadataInfrastructureList = &handles[620]
+var _CloudExadataInfrastructureList_member = &handles[621]
+
+var CloudExadataInfrastructureSummary = &handles[622]
+var CloudExadataInfrastructureSummary_cloudExadataInfrastructureId = &handles[623]
+var CloudExadataInfrastructureSummary_displayName = &handles[624]
+var CloudExadataInfrastructureSummary_status = &handles[625]
+var CloudExadataInfrastructureSummary_statusReason = &handles[626]
+var CloudExadataInfrastructureSummary_cloudExadataInfrastructureArn = &handles[627]
+var CloudExadataInfrastructureSummary_activatedStorageCount = &handles[628]
+var CloudExadataInfrastructureSummary_additionalStorageCount = &handles[629]
+var CloudExadataInfrastructureSummary_availableStorageSizeInGBs = &handles[630]
+var CloudExadataInfrastructureSummary_availabilityZone = &handles[631]
+var CloudExadataInfrastructureSummary_availabilityZoneId = &handles[632]
+var CloudExadataInfrastructureSummary_computeCount = &handles[633]
+var CloudExadataInfrastructureSummary_cpuCount = &handles[634]
+var CloudExadataInfrastructureSummary_customerContactsToSendToOCI = &handles[635]
+var CloudExadataInfrastructureSummary_dataStorageSizeInTBs = &handles[636]
+var CloudExadataInfrastructureSummary_dbNodeStorageSizeInGBs = &handles[637]
+var CloudExadataInfrastructureSummary_dbServerVersion = &handles[638]
+var CloudExadataInfrastructureSummary_lastMaintenanceRunId = &handles[639]
+var CloudExadataInfrastructureSummary_maintenanceWindow = &handles[640]
+var CloudExadataInfrastructureSummary_maxCpuCount = &handles[641]
+var CloudExadataInfrastructureSummary_maxDataStorageInTBs = &handles[642]
+var CloudExadataInfrastructureSummary_maxDbNodeStorageSizeInGBs = &handles[643]
+var CloudExadataInfrastructureSummary_maxMemoryInGBs = &handles[644]
+var CloudExadataInfrastructureSummary_memorySizeInGBs = &handles[645]
+var CloudExadataInfrastructureSummary_monthlyDbServerVersion = &handles[646]
+var CloudExadataInfrastructureSummary_monthlyStorageServerVersion = &handles[647]
+var CloudExadataInfrastructureSummary_nextMaintenanceRunId = &handles[648]
+var CloudExadataInfrastructureSummary_ociResourceAnchorName = &handles[649]
+var CloudExadataInfrastructureSummary_ociUrl = &handles[650]
+var CloudExadataInfrastructureSummary_ocid = &handles[651]
+var CloudExadataInfrastructureSummary_shape = &handles[652]
+var CloudExadataInfrastructureSummary_storageCount = &handles[653]
+var CloudExadataInfrastructureSummary_storageServerVersion = &handles[654]
+var CloudExadataInfrastructureSummary_createdAt = &handles[655]
+var CloudExadataInfrastructureSummary_totalStorageSizeInGBs = &handles[656]
+var CloudExadataInfrastructureSummary_percentProgress = &handles[657]
+var CloudExadataInfrastructureSummary_databaseServerType = &handles[658]
+var CloudExadataInfrastructureSummary_storageServerType = &handles[659]
+var CloudExadataInfrastructureSummary_computeModel = &handles[660]
+var CloudExadataInfrastructureSummary_exascaleConfiguration = &handles[661]
+
+var CloudExadataInfrastructureUnallocatedResources = &handles[662]
+var CloudExadataInfrastructureUnallocatedResources_cloudAutonomousVmClusters = &handles[663]
+var CloudExadataInfrastructureUnallocatedResources_cloudExadataInfrastructureDisplayName = &handles[664]
+var CloudExadataInfrastructureUnallocatedResources_exadataStorageInTBs = &handles[665]
+var CloudExadataInfrastructureUnallocatedResources_cloudExadataInfrastructureId = &handles[666]
+var CloudExadataInfrastructureUnallocatedResources_localStorageInGBs = &handles[667]
+var CloudExadataInfrastructureUnallocatedResources_memoryInGBs = &handles[668]
+var CloudExadataInfrastructureUnallocatedResources_ocpus = &handles[669]
+
+var CloudVmCluster = &handles[670]
+var CloudVmCluster_cloudVmClusterId = &handles[671]
+var CloudVmCluster_displayName = &handles[672]
+var CloudVmCluster_status = &handles[673]
+var CloudVmCluster_statusReason = &handles[674]
+var CloudVmCluster_cloudVmClusterArn = &handles[675]
+var CloudVmCluster_cloudExadataInfrastructureId = &handles[676]
+var CloudVmCluster_cloudExadataInfrastructureArn = &handles[677]
+var CloudVmCluster_exascaleDbStorageVaultId = &handles[678]
+var CloudVmCluster_exascaleDbStorageVaultArn = &handles[679]
+var CloudVmCluster_storageManagementType = &handles[680]
+var CloudVmCluster_vmFileSystemStorageType = &handles[681]
+var CloudVmCluster_vmBackupStorageType = &handles[682]
+var CloudVmCluster_fileSystemConfigurationDetails = &handles[683]
+var CloudVmCluster_clusterName = &handles[684]
+var CloudVmCluster_cpuCoreCount = &handles[685]
+var CloudVmCluster_dataCollectionOptions = &handles[686]
+var CloudVmCluster_dataStorageSizeInTBs = &handles[687]
+var CloudVmCluster_dbNodeStorageSizeInGBs = &handles[688]
+var CloudVmCluster_dbServers = &handles[689]
+var CloudVmCluster_diskRedundancy = &handles[690]
+var CloudVmCluster_giVersion = &handles[691]
+var CloudVmCluster_hostname = &handles[692]
+var CloudVmCluster_iormConfigCache = &handles[693]
+var CloudVmCluster_isLocalBackupEnabled = &handles[694]
+var CloudVmCluster_isSparseDiskgroupEnabled = &handles[695]
+var CloudVmCluster_lastUpdateHistoryEntryId = &handles[696]
+var CloudVmCluster_licenseModel = &handles[697]
+var CloudVmCluster_listenerPort = &handles[698]
+var CloudVmCluster_memorySizeInGBs = &handles[699]
+var CloudVmCluster_nodeCount = &handles[700]
+var CloudVmCluster_ocid = &handles[701]
+var CloudVmCluster_ociResourceAnchorName = &handles[702]
+var CloudVmCluster_ociUrl = &handles[703]
+var CloudVmCluster_domain = &handles[704]
+var CloudVmCluster_scanDnsName = &handles[705]
+var CloudVmCluster_scanDnsRecordId = &handles[706]
+var CloudVmCluster_scanIpIds = &handles[707]
+var CloudVmCluster_shape = &handles[708]
+var CloudVmCluster_sshPublicKeys = &handles[709]
+var CloudVmCluster_storageSizeInGBs = &handles[710]
+var CloudVmCluster_systemVersion = &handles[711]
+var CloudVmCluster_createdAt = &handles[712]
+var CloudVmCluster_timeZone = &handles[713]
+var CloudVmCluster_vipIds = &handles[714]
+var CloudVmCluster_odbNetworkId = &handles[715]
+var CloudVmCluster_odbNetworkArn = &handles[716]
+var CloudVmCluster_percentProgress = &handles[717]
+var CloudVmCluster_computeModel = &handles[718]
+var CloudVmCluster_iamRoles = &handles[719]
+
+var _CloudVmClusterList = &handles[720]
+var _CloudVmClusterList_member = &handles[721]
+
+var CloudVmClusterSummary = &handles[722]
+var CloudVmClusterSummary_cloudVmClusterId = &handles[723]
+var CloudVmClusterSummary_displayName = &handles[724]
+var CloudVmClusterSummary_status = &handles[725]
+var CloudVmClusterSummary_statusReason = &handles[726]
+var CloudVmClusterSummary_cloudVmClusterArn = &handles[727]
+var CloudVmClusterSummary_cloudExadataInfrastructureId = &handles[728]
+var CloudVmClusterSummary_cloudExadataInfrastructureArn = &handles[729]
+var CloudVmClusterSummary_exascaleDbStorageVaultId = &handles[730]
+var CloudVmClusterSummary_exascaleDbStorageVaultArn = &handles[731]
+var CloudVmClusterSummary_storageManagementType = &handles[732]
+var CloudVmClusterSummary_vmFileSystemStorageType = &handles[733]
+var CloudVmClusterSummary_vmBackupStorageType = &handles[734]
+var CloudVmClusterSummary_fileSystemConfigurationDetails = &handles[735]
+var CloudVmClusterSummary_clusterName = &handles[736]
+var CloudVmClusterSummary_cpuCoreCount = &handles[737]
+var CloudVmClusterSummary_dataCollectionOptions = &handles[738]
+var CloudVmClusterSummary_dataStorageSizeInTBs = &handles[739]
+var CloudVmClusterSummary_dbNodeStorageSizeInGBs = &handles[740]
+var CloudVmClusterSummary_dbServers = &handles[741]
+var CloudVmClusterSummary_diskRedundancy = &handles[742]
+var CloudVmClusterSummary_giVersion = &handles[743]
+var CloudVmClusterSummary_hostname = &handles[744]
+var CloudVmClusterSummary_iormConfigCache = &handles[745]
+var CloudVmClusterSummary_isLocalBackupEnabled = &handles[746]
+var CloudVmClusterSummary_isSparseDiskgroupEnabled = &handles[747]
+var CloudVmClusterSummary_lastUpdateHistoryEntryId = &handles[748]
+var CloudVmClusterSummary_licenseModel = &handles[749]
+var CloudVmClusterSummary_listenerPort = &handles[750]
+var CloudVmClusterSummary_memorySizeInGBs = &handles[751]
+var CloudVmClusterSummary_nodeCount = &handles[752]
+var CloudVmClusterSummary_ocid = &handles[753]
+var CloudVmClusterSummary_ociResourceAnchorName = &handles[754]
+var CloudVmClusterSummary_ociUrl = &handles[755]
+var CloudVmClusterSummary_domain = &handles[756]
+var CloudVmClusterSummary_scanDnsName = &handles[757]
+var CloudVmClusterSummary_scanDnsRecordId = &handles[758]
+var CloudVmClusterSummary_scanIpIds = &handles[759]
+var CloudVmClusterSummary_shape = &handles[760]
+var CloudVmClusterSummary_sshPublicKeys = &handles[761]
+var CloudVmClusterSummary_storageSizeInGBs = &handles[762]
+var CloudVmClusterSummary_systemVersion = &handles[763]
+var CloudVmClusterSummary_createdAt = &handles[764]
+var CloudVmClusterSummary_timeZone = &handles[765]
+var CloudVmClusterSummary_vipIds = &handles[766]
+var CloudVmClusterSummary_odbNetworkId = &handles[767]
+var CloudVmClusterSummary_odbNetworkArn = &handles[768]
+var CloudVmClusterSummary_percentProgress = &handles[769]
+var CloudVmClusterSummary_computeModel = &handles[770]
+var CloudVmClusterSummary_iamRoles = &handles[771]
+
+var _ClusterName = &handles[772]
+
+var ComputeModel = &handles[773]
+var ComputeModel_ECPU = &handles[774]
+var ComputeModel_OCPU = &handles[775]
+
+var ConflictException = &handles[776]
+var ConflictException_message = &handles[777]
+var ConflictException_resourceId = &handles[778]
+var ConflictException_resourceType = &handles[779]
+
+var CrossRegionDataGuardConfiguration = &handles[780]
+var CrossRegionDataGuardConfiguration_sourceAutonomousDatabaseArn = &handles[781]
+
+var CrossRegionDisasterRecoveryConfiguration = &handles[782]
+var CrossRegionDisasterRecoveryConfiguration_sourceAutonomousDatabaseArn = &handles[783]
+var CrossRegionDisasterRecoveryConfiguration_remoteDisasterRecoveryType = &handles[784]
+var CrossRegionDisasterRecoveryConfiguration_isReplicateAutomaticBackups = &handles[785]
+
+var CrossRegionS3RestoreSourcesAccess = &handles[786]
+var CrossRegionS3RestoreSourcesAccess_region = &handles[787]
+var CrossRegionS3RestoreSourcesAccess_ipv4Addresses = &handles[788]
+var CrossRegionS3RestoreSourcesAccess_status = &handles[789]
+
+var _CrossRegionS3RestoreSourcesAccessList = &handles[790]
+var _CrossRegionS3RestoreSourcesAccessList_member = &handles[791]
+
+var CustomerContact = &handles[792]
+var CustomerContact_email = &handles[793]
+
+var _CustomerContacts = &handles[794]
+var _CustomerContacts_member = &handles[795]
+
+var CustomerManagedAwsSecretConfiguration = &handles[796]
+var CustomerManagedAwsSecretConfiguration_iamRoleArn = &handles[797]
+var CustomerManagedAwsSecretConfiguration_secretId = &handles[798]
+var CustomerManagedAwsSecretConfiguration_externalIdType = &handles[799]
+
+var CustomerManagedAwsSecretConfigurationInput = &handles[800]
+var CustomerManagedAwsSecretConfigurationInput_secretId = &handles[801]
+var CustomerManagedAwsSecretConfigurationInput_iamRoleArn = &handles[802]
+var CustomerManagedAwsSecretConfigurationInput_externalIdType = &handles[803]
+
+var DatabaseCloneConfiguration = &handles[804]
+var DatabaseCloneConfiguration_sourceAutonomousDatabaseId = &handles[805]
+var DatabaseCloneConfiguration_cloneType = &handles[806]
+
+var _DatabaseConnectionStringMap = &handles[807]
+var _DatabaseConnectionStringMap_key = &handles[808]
+var _DatabaseConnectionStringMap_value = &handles[809]
+
+var DatabaseConnectionStringProfile = &handles[810]
+var DatabaseConnectionStringProfile_consumerGroup = &handles[811]
+var DatabaseConnectionStringProfile_displayName = &handles[812]
+var DatabaseConnectionStringProfile_hostFormat = &handles[813]
+var DatabaseConnectionStringProfile_isRegional = &handles[814]
+var DatabaseConnectionStringProfile_protocol = &handles[815]
+var DatabaseConnectionStringProfile_sessionMode = &handles[816]
+var DatabaseConnectionStringProfile_syntaxFormat = &handles[817]
+var DatabaseConnectionStringProfile_tlsAuthentication = &handles[818]
+var DatabaseConnectionStringProfile_value = &handles[819]
+
+var _DatabaseConnectionStringProfileList = &handles[820]
+var _DatabaseConnectionStringProfileList_member = &handles[821]
+
+var DatabaseEdition = &handles[822]
+var DatabaseEdition_STANDARD_EDITION = &handles[823]
+var DatabaseEdition_ENTERPRISE_EDITION = &handles[824]
+
+var DatabaseManagementStatus = &handles[825]
+var DatabaseManagementStatus_ENABLING = &handles[826]
+var DatabaseManagementStatus_ENABLED = &handles[827]
+var DatabaseManagementStatus_DISABLING = &handles[828]
+var DatabaseManagementStatus_NOT_ENABLED = &handles[829]
+var DatabaseManagementStatus_FAILED_ENABLING = &handles[830]
+var DatabaseManagementStatus_FAILED_DISABLING = &handles[831]
+
+var DatabaseStandbySummary = &handles[832]
+var DatabaseStandbySummary_availabilityDomain = &handles[833]
+var DatabaseStandbySummary_lagTimeInSeconds = &handles[834]
+var DatabaseStandbySummary_status = &handles[835]
+var DatabaseStandbySummary_statusReason = &handles[836]
+var DatabaseStandbySummary_maintenanceTargetComponent = &handles[837]
+var DatabaseStandbySummary_timeDataGuardRoleChanged = &handles[838]
+var DatabaseStandbySummary_timeDisasterRecoveryRoleChanged = &handles[839]
+var DatabaseStandbySummary_timeMaintenanceBegin = &handles[840]
+var DatabaseStandbySummary_timeMaintenanceEnd = &handles[841]
+
+var DatabaseTool = &handles[842]
+var DatabaseTool_isEnabled = &handles[843]
+var DatabaseTool_name = &handles[844]
+var DatabaseTool_computeCount = &handles[845]
+var DatabaseTool_maxIdleTimeInMinutes = &handles[846]
+
+var _DatabaseToolList = &handles[847]
+var _DatabaseToolList_member = &handles[848]
+
+var DatabaseType = &handles[849]
+var DatabaseType_REGULAR = &handles[850]
+var DatabaseType_CLONE = &handles[851]
+
+var DataCollectionOptions = &handles[852]
+var DataCollectionOptions_isDiagnosticsEventsEnabled = &handles[853]
+var DataCollectionOptions_isHealthMonitoringEnabled = &handles[854]
+var DataCollectionOptions_isIncidentLogsEnabled = &handles[855]
+
+var DataGuardRole = &handles[856]
+var DataGuardRole_PRIMARY = &handles[857]
+var DataGuardRole_STANDBY = &handles[858]
+var DataGuardRole_DISABLED_STANDBY = &handles[859]
+var DataGuardRole_BACKUP_COPY = &handles[860]
+var DataGuardRole_SNAPSHOT_STANDBY = &handles[861]
+
+var DataSafeStatus = &handles[862]
+var DataSafeStatus_REGISTERING = &handles[863]
+var DataSafeStatus_REGISTERED = &handles[864]
+var DataSafeStatus_DEREGISTERING = &handles[865]
+var DataSafeStatus_NOT_REGISTERED = &handles[866]
+var DataSafeStatus_FAILED = &handles[867]
+
+var DayOfWeek = &handles[868]
+var DayOfWeek_name = &handles[869]
+
+var DayOfWeekName = &handles[870]
+var DayOfWeekName_MONDAY = &handles[871]
+var DayOfWeekName_TUESDAY = &handles[872]
+var DayOfWeekName_WEDNESDAY = &handles[873]
+var DayOfWeekName_THURSDAY = &handles[874]
+var DayOfWeekName_FRIDAY = &handles[875]
+var DayOfWeekName_SATURDAY = &handles[876]
+var DayOfWeekName_SUNDAY = &handles[877]
+
+var _DaysOfWeek = &handles[878]
+var _DaysOfWeek_member = &handles[879]
+
+var DbIormConfig = &handles[880]
+var DbIormConfig_dbName = &handles[881]
+var DbIormConfig_flashCacheLimit = &handles[882]
+var DbIormConfig_share = &handles[883]
+
+var _DbIormConfigList = &handles[884]
+var _DbIormConfigList_member = &handles[885]
+
+var DbNode = &handles[886]
+var DbNode_dbNodeId = &handles[887]
+var DbNode_dbNodeArn = &handles[888]
+var DbNode_status = &handles[889]
+var DbNode_statusReason = &handles[890]
+var DbNode_additionalDetails = &handles[891]
+var DbNode_backupIpId = &handles[892]
+var DbNode_backupVnic2Id = &handles[893]
+var DbNode_backupVnicId = &handles[894]
+var DbNode_cpuCoreCount = &handles[895]
+var DbNode_dbNodeStorageSizeInGBs = &handles[896]
+var DbNode_dbServerId = &handles[897]
+var DbNode_dbSystemId = &handles[898]
+var DbNode_faultDomain = &handles[899]
+var DbNode_hostIpId = &handles[900]
+var DbNode_hostname = &handles[901]
+var DbNode_ocid = &handles[902]
+var DbNode_ociResourceAnchorName = &handles[903]
+var DbNode_maintenanceType = &handles[904]
+var DbNode_memorySizeInGBs = &handles[905]
+var DbNode_softwareStorageSizeInGB = &handles[906]
+var DbNode_createdAt = &handles[907]
+var DbNode_timeMaintenanceWindowEnd = &handles[908]
+var DbNode_timeMaintenanceWindowStart = &handles[909]
+var DbNode_totalCpuCoreCount = &handles[910]
+var DbNode_vnic2Id = &handles[911]
+var DbNode_vnicId = &handles[912]
+var DbNode_privateIpAddress = &handles[913]
+var DbNode_floatingIpAddress = &handles[914]
+
+var _DbNodeList = &handles[915]
+var _DbNodeList_member = &handles[916]
+
+var DbNodeMaintenanceType = &handles[917]
+var DbNodeMaintenanceType_VMDB_REBOOT_MIGRATION = &handles[918]
+
+var DbNodeResourceStatus = &handles[919]
+var DbNodeResourceStatus_AVAILABLE = &handles[920]
+var DbNodeResourceStatus_FAILED = &handles[921]
+var DbNodeResourceStatus_PROVISIONING = &handles[922]
+var DbNodeResourceStatus_TERMINATED = &handles[923]
+var DbNodeResourceStatus_TERMINATING = &handles[924]
+var DbNodeResourceStatus_UPDATING = &handles[925]
+var DbNodeResourceStatus_STOPPING = &handles[926]
+var DbNodeResourceStatus_STOPPED = &handles[927]
+var DbNodeResourceStatus_STARTING = &handles[928]
+
+var DbNodeSummary = &handles[929]
+var DbNodeSummary_dbNodeId = &handles[930]
+var DbNodeSummary_dbNodeArn = &handles[931]
+var DbNodeSummary_status = &handles[932]
+var DbNodeSummary_statusReason = &handles[933]
+var DbNodeSummary_additionalDetails = &handles[934]
+var DbNodeSummary_backupIpId = &handles[935]
+var DbNodeSummary_backupVnic2Id = &handles[936]
+var DbNodeSummary_backupVnicId = &handles[937]
+var DbNodeSummary_cpuCoreCount = &handles[938]
+var DbNodeSummary_dbNodeStorageSizeInGBs = &handles[939]
+var DbNodeSummary_dbServerId = &handles[940]
+var DbNodeSummary_dbSystemId = &handles[941]
+var DbNodeSummary_faultDomain = &handles[942]
+var DbNodeSummary_hostIpId = &handles[943]
+var DbNodeSummary_hostname = &handles[944]
+var DbNodeSummary_ocid = &handles[945]
+var DbNodeSummary_ociResourceAnchorName = &handles[946]
+var DbNodeSummary_maintenanceType = &handles[947]
+var DbNodeSummary_memorySizeInGBs = &handles[948]
+var DbNodeSummary_softwareStorageSizeInGB = &handles[949]
+var DbNodeSummary_createdAt = &handles[950]
+var DbNodeSummary_timeMaintenanceWindowEnd = &handles[951]
+var DbNodeSummary_timeMaintenanceWindowStart = &handles[952]
+var DbNodeSummary_totalCpuCoreCount = &handles[953]
+var DbNodeSummary_vnic2Id = &handles[954]
+var DbNodeSummary_vnicId = &handles[955]
+
+var DbServer = &handles[956]
+var DbServer_dbServerId = &handles[957]
+var DbServer_status = &handles[958]
+var DbServer_statusReason = &handles[959]
+var DbServer_cpuCoreCount = &handles[960]
+var DbServer_dbNodeStorageSizeInGBs = &handles[961]
+var DbServer_dbServerPatchingDetails = &handles[962]
+var DbServer_displayName = &handles[963]
+var DbServer_exadataInfrastructureId = &handles[964]
+var DbServer_ocid = &handles[965]
+var DbServer_ociResourceAnchorName = &handles[966]
+var DbServer_maxCpuCount = &handles[967]
+var DbServer_maxDbNodeStorageInGBs = &handles[968]
+var DbServer_maxMemoryInGBs = &handles[969]
+var DbServer_memorySizeInGBs = &handles[970]
+var DbServer_shape = &handles[971]
+var DbServer_createdAt = &handles[972]
+var DbServer_vmClusterIds = &handles[973]
+var DbServer_computeModel = &handles[974]
+var DbServer_autonomousVmClusterIds = &handles[975]
+var DbServer_autonomousVirtualMachineIds = &handles[976]
+
+var _DbServerList = &handles[977]
+var _DbServerList_member = &handles[978]
+
+var DbServerPatchingDetails = &handles[979]
+var DbServerPatchingDetails_estimatedPatchDuration = &handles[980]
+var DbServerPatchingDetails_patchingStatus = &handles[981]
+var DbServerPatchingDetails_timePatchingEnded = &handles[982]
+var DbServerPatchingDetails_timePatchingStarted = &handles[983]
+
+var DbServerPatchingStatus = &handles[984]
+var DbServerPatchingStatus_COMPLETE = &handles[985]
+var DbServerPatchingStatus_FAILED = &handles[986]
+var DbServerPatchingStatus_MAINTENANCE_IN_PROGRESS = &handles[987]
+var DbServerPatchingStatus_SCHEDULED = &handles[988]
+
+var DbServerSummary = &handles[989]
+var DbServerSummary_dbServerId = &handles[990]
+var DbServerSummary_status = &handles[991]
+var DbServerSummary_statusReason = &handles[992]
+var DbServerSummary_cpuCoreCount = &handles[993]
+var DbServerSummary_dbNodeStorageSizeInGBs = &handles[994]
+var DbServerSummary_dbServerPatchingDetails = &handles[995]
+var DbServerSummary_displayName = &handles[996]
+var DbServerSummary_exadataInfrastructureId = &handles[997]
+var DbServerSummary_ocid = &handles[998]
+var DbServerSummary_ociResourceAnchorName = &handles[999]
+var DbServerSummary_maxCpuCount = &handles[1000]
+var DbServerSummary_maxDbNodeStorageInGBs = &handles[1001]
+var DbServerSummary_maxMemoryInGBs = &handles[1002]
+var DbServerSummary_memorySizeInGBs = &handles[1003]
+var DbServerSummary_shape = &handles[1004]
+var DbServerSummary_createdAt = &handles[1005]
+var DbServerSummary_vmClusterIds = &handles[1006]
+var DbServerSummary_computeModel = &handles[1007]
+var DbServerSummary_autonomousVmClusterIds = &handles[1008]
+var DbServerSummary_autonomousVirtualMachineIds = &handles[1009]
+
+var _DbSystemShapeList = &handles[1010]
+var _DbSystemShapeList_member = &handles[1011]
+
+var DbSystemShapeSummary = &handles[1012]
+var DbSystemShapeSummary_availableCoreCount = &handles[1013]
+var DbSystemShapeSummary_availableCoreCountPerNode = &handles[1014]
+var DbSystemShapeSummary_availableDataStorageInTBs = &handles[1015]
+var DbSystemShapeSummary_availableDataStoragePerServerInTBs = &handles[1016]
+var DbSystemShapeSummary_availableDbNodePerNodeInGBs = &handles[1017]
+var DbSystemShapeSummary_availableDbNodeStorageInGBs = &handles[1018]
+var DbSystemShapeSummary_availableMemoryInGBs = &handles[1019]
+var DbSystemShapeSummary_availableMemoryPerNodeInGBs = &handles[1020]
+var DbSystemShapeSummary_coreCountIncrement = &handles[1021]
+var DbSystemShapeSummary_maxStorageCount = &handles[1022]
+var DbSystemShapeSummary_maximumNodeCount = &handles[1023]
+var DbSystemShapeSummary_minCoreCountPerNode = &handles[1024]
+var DbSystemShapeSummary_minDataStorageInTBs = &handles[1025]
+var DbSystemShapeSummary_minDbNodeStoragePerNodeInGBs = &handles[1026]
+var DbSystemShapeSummary_minMemoryPerNodeInGBs = &handles[1027]
+var DbSystemShapeSummary_minStorageCount = &handles[1028]
+var DbSystemShapeSummary_minimumCoreCount = &handles[1029]
+var DbSystemShapeSummary_minimumNodeCount = &handles[1030]
+var DbSystemShapeSummary_runtimeMinimumCoreCount = &handles[1031]
+var DbSystemShapeSummary_shapeFamily = &handles[1032]
+var DbSystemShapeSummary_shapeType = &handles[1033]
+var DbSystemShapeSummary_shapeAttributes = &handles[1034]
+var DbSystemShapeSummary_name = &handles[1035]
+var DbSystemShapeSummary_computeModel = &handles[1036]
+var DbSystemShapeSummary_areServerTypesSupported = &handles[1037]
+
+var DbWorkload = &handles[1038]
+var DbWorkload_OLTP = &handles[1039]
+var DbWorkload_AJD = &handles[1040]
+var DbWorkload_APEX = &handles[1041]
+var DbWorkload_LH = &handles[1042]
+
+var DisasterRecoveryConfiguration = &handles[1043]
+var DisasterRecoveryConfiguration_disasterRecoveryType = &handles[1044]
+var DisasterRecoveryConfiguration_isReplicateAutomaticBackups = &handles[1045]
+var DisasterRecoveryConfiguration_isSnapshotStandby = &handles[1046]
+var DisasterRecoveryConfiguration_timeSnapshotStandbyEnabledTill = &handles[1047]
+
+var DisasterRecoveryType = &handles[1048]
+var DisasterRecoveryType_ADG = &handles[1049]
+var DisasterRecoveryType_BACKUP_BASED = &handles[1050]
+
+var DiskRedundancy = &handles[1051]
+var DiskRedundancy_HIGH = &handles[1052]
+var DiskRedundancy_NORMAL = &handles[1053]
+
+var EncryptionKeyConfiguration = &handles[1054]
+var EncryptionKeyConfiguration_awsEncryptionKey = &handles[1055]
+var EncryptionKeyConfiguration_ociEncryptionKey = &handles[1056]
+var EncryptionKeyConfiguration_okvEncryptionKey = &handles[1057]
+
+var EncryptionKeyConfigurationInput = &handles[1058]
+var EncryptionKeyConfigurationInput_awsEncryptionKey = &handles[1059]
+
+var EncryptionKeyProvider = &handles[1060]
+var EncryptionKeyProvider_ORACLE_MANAGED = &handles[1061]
+var EncryptionKeyProvider_AWS_KMS = &handles[1062]
+var EncryptionKeyProvider_OKV = &handles[1063]
+var EncryptionKeyProvider_OCI = &handles[1064]
+
+var EncryptionKeyProviderInput = &handles[1065]
+var EncryptionKeyProviderInput_ORACLE_MANAGED = &handles[1066]
+var EncryptionKeyProviderInput_AWS_KMS = &handles[1067]
+
+var EncryptionSummary = &handles[1068]
+var EncryptionSummary_encryptionKeyProvider = &handles[1069]
+var EncryptionSummary_encryptionKeyConfiguration = &handles[1070]
+
+var ExadataIormConfig = &handles[1071]
+var ExadataIormConfig_dbPlans = &handles[1072]
+var ExadataIormConfig_lifecycleDetails = &handles[1073]
+var ExadataIormConfig_lifecycleState = &handles[1074]
+var ExadataIormConfig_objective = &handles[1075]
+
+var ExadbVmCluster = &handles[1076]
+var ExadbVmCluster_exadbVmClusterId = &handles[1077]
+var ExadbVmCluster_clusterName = &handles[1078]
+var ExadbVmCluster_createdAt = &handles[1079]
+var ExadbVmCluster_dataCollectionOptions = &handles[1080]
+var ExadbVmCluster_displayName = &handles[1081]
+var ExadbVmCluster_domain = &handles[1082]
+var ExadbVmCluster_enabledEcpuCount = &handles[1083]
+var ExadbVmCluster_exadbVmClusterArn = &handles[1084]
+var ExadbVmCluster_exascaleDbStorageVaultArn = &handles[1085]
+var ExadbVmCluster_exascaleDbStorageVaultId = &handles[1086]
+var ExadbVmCluster_giVersion = &handles[1087]
+var ExadbVmCluster_gridImageId = &handles[1088]
+var ExadbVmCluster_gridImageType = &handles[1089]
+var ExadbVmCluster_hostname = &handles[1090]
+var ExadbVmCluster_iamRoles = &handles[1091]
+var ExadbVmCluster_iormConfigCache = &handles[1092]
+var ExadbVmCluster_lastUpdateHistoryEntryId = &handles[1093]
+var ExadbVmCluster_licenseModel = &handles[1094]
+var ExadbVmCluster_listenerPort = &handles[1095]
+var ExadbVmCluster_memorySizeInGBs = &handles[1096]
+var ExadbVmCluster_nodeCount = &handles[1097]
+var ExadbVmCluster_ocid = &handles[1098]
+var ExadbVmCluster_ociResourceAnchorName = &handles[1099]
+var ExadbVmCluster_ociUrl = &handles[1100]
+var ExadbVmCluster_odbNetworkArn = &handles[1101]
+var ExadbVmCluster_odbNetworkId = &handles[1102]
+var ExadbVmCluster_percentProgress = &handles[1103]
+var ExadbVmCluster_scanDnsName = &handles[1104]
+var ExadbVmCluster_scanDnsRecordId = &handles[1105]
+var ExadbVmCluster_scanIpIds = &handles[1106]
+var ExadbVmCluster_scanListenerPortTcp = &handles[1107]
+var ExadbVmCluster_scanListenerPortTcpSsl = &handles[1108]
+var ExadbVmCluster_shape = &handles[1109]
+var ExadbVmCluster_shapeAttribute = &handles[1110]
+var ExadbVmCluster_snapshotFileSystemStorage = &handles[1111]
+var ExadbVmCluster_sshPublicKeys = &handles[1112]
+var ExadbVmCluster_status = &handles[1113]
+var ExadbVmCluster_statusReason = &handles[1114]
+var ExadbVmCluster_systemVersion = &handles[1115]
+var ExadbVmCluster_timeZone = &handles[1116]
+var ExadbVmCluster_totalEcpuCount = &handles[1117]
+var ExadbVmCluster_totalFileSystemStorage = &handles[1118]
+var ExadbVmCluster_vipIds = &handles[1119]
+var ExadbVmCluster_vmFileSystemStorage = &handles[1120]
+
+var _ExadbVmClusterList = &handles[1121]
+var _ExadbVmClusterList_member = &handles[1122]
+
+var ExadbVmClusterStorageDetails = &handles[1123]
+var ExadbVmClusterStorageDetails_totalSizeInGBs = &handles[1124]
+
+var ExadbVmClusterSummary = &handles[1125]
+var ExadbVmClusterSummary_exadbVmClusterId = &handles[1126]
+var ExadbVmClusterSummary_clusterName = &handles[1127]
+var ExadbVmClusterSummary_createdAt = &handles[1128]
+var ExadbVmClusterSummary_dataCollectionOptions = &handles[1129]
+var ExadbVmClusterSummary_displayName = &handles[1130]
+var ExadbVmClusterSummary_domain = &handles[1131]
+var ExadbVmClusterSummary_enabledEcpuCount = &handles[1132]
+var ExadbVmClusterSummary_exadbVmClusterArn = &handles[1133]
+var ExadbVmClusterSummary_exascaleDbStorageVaultArn = &handles[1134]
+var ExadbVmClusterSummary_exascaleDbStorageVaultId = &handles[1135]
+var ExadbVmClusterSummary_giVersion = &handles[1136]
+var ExadbVmClusterSummary_gridImageId = &handles[1137]
+var ExadbVmClusterSummary_gridImageType = &handles[1138]
+var ExadbVmClusterSummary_hostname = &handles[1139]
+var ExadbVmClusterSummary_iamRoles = &handles[1140]
+var ExadbVmClusterSummary_iormConfigCache = &handles[1141]
+var ExadbVmClusterSummary_lastUpdateHistoryEntryId = &handles[1142]
+var ExadbVmClusterSummary_licenseModel = &handles[1143]
+var ExadbVmClusterSummary_listenerPort = &handles[1144]
+var ExadbVmClusterSummary_memorySizeInGBs = &handles[1145]
+var ExadbVmClusterSummary_nodeCount = &handles[1146]
+var ExadbVmClusterSummary_ocid = &handles[1147]
+var ExadbVmClusterSummary_ociResourceAnchorName = &handles[1148]
+var ExadbVmClusterSummary_ociUrl = &handles[1149]
+var ExadbVmClusterSummary_odbNetworkArn = &handles[1150]
+var ExadbVmClusterSummary_odbNetworkId = &handles[1151]
+var ExadbVmClusterSummary_percentProgress = &handles[1152]
+var ExadbVmClusterSummary_scanDnsName = &handles[1153]
+var ExadbVmClusterSummary_scanDnsRecordId = &handles[1154]
+var ExadbVmClusterSummary_scanIpIds = &handles[1155]
+var ExadbVmClusterSummary_scanListenerPortTcp = &handles[1156]
+var ExadbVmClusterSummary_scanListenerPortTcpSsl = &handles[1157]
+var ExadbVmClusterSummary_shape = &handles[1158]
+var ExadbVmClusterSummary_shapeAttribute = &handles[1159]
+var ExadbVmClusterSummary_snapshotFileSystemStorage = &handles[1160]
+var ExadbVmClusterSummary_sshPublicKeys = &handles[1161]
+var ExadbVmClusterSummary_status = &handles[1162]
+var ExadbVmClusterSummary_statusReason = &handles[1163]
+var ExadbVmClusterSummary_systemVersion = &handles[1164]
+var ExadbVmClusterSummary_timeZone = &handles[1165]
+var ExadbVmClusterSummary_totalEcpuCount = &handles[1166]
+var ExadbVmClusterSummary_totalFileSystemStorage = &handles[1167]
+var ExadbVmClusterSummary_vipIds = &handles[1168]
+var ExadbVmClusterSummary_vmFileSystemStorage = &handles[1169]
+
+var ExascaleConfiguration = &handles[1170]
+var ExascaleConfiguration_totalStorageSizeInGBs = &handles[1171]
+var ExascaleConfiguration_availableStorageSizeInGBs = &handles[1172]
+var ExascaleConfiguration_totalVmStorageSizeInGBs = &handles[1173]
+var ExascaleConfiguration_availableVmStorageSizeInGBs = &handles[1174]
+
+var ExascaleDbStorageDetails = &handles[1175]
+var ExascaleDbStorageDetails_availableSizeInGBs = &handles[1176]
+var ExascaleDbStorageDetails_totalSizeInGBs = &handles[1177]
+
+var ExascaleDbStorageVault = &handles[1178]
+var ExascaleDbStorageVault_exascaleDbStorageVaultId = &handles[1179]
+var ExascaleDbStorageVault_additionalFlashCacheInPercent = &handles[1180]
+var ExascaleDbStorageVault_attachedShapeAttributes = &handles[1181]
+var ExascaleDbStorageVault_autoscaleLimitInGBs = &handles[1182]
+var ExascaleDbStorageVault_availabilityZone = &handles[1183]
+var ExascaleDbStorageVault_availabilityZoneId = &handles[1184]
+var ExascaleDbStorageVault_cloudExadataInfrastructureArn = &handles[1185]
+var ExascaleDbStorageVault_cloudExadataInfrastructureId = &handles[1186]
+var ExascaleDbStorageVault_createdAt = &handles[1187]
+var ExascaleDbStorageVault_description = &handles[1188]
+var ExascaleDbStorageVault_displayName = &handles[1189]
+var ExascaleDbStorageVault_vmClusterArns = &handles[1190]
+var ExascaleDbStorageVault_vmClusterCount = &handles[1191]
+var ExascaleDbStorageVault_vmClusterIds = &handles[1192]
+var ExascaleDbStorageVault_exascaleDbStorageVaultArn = &handles[1193]
+var ExascaleDbStorageVault_highCapacityDatabaseStorage = &handles[1194]
+var ExascaleDbStorageVault_isAutoscaleEnabled = &handles[1195]
+var ExascaleDbStorageVault_ocid = &handles[1196]
+var ExascaleDbStorageVault_ociResourceAnchorName = &handles[1197]
+var ExascaleDbStorageVault_ociUrl = &handles[1198]
+var ExascaleDbStorageVault_percentProgress = &handles[1199]
+var ExascaleDbStorageVault_status = &handles[1200]
+var ExascaleDbStorageVault_statusReason = &handles[1201]
+var ExascaleDbStorageVault_timeZone = &handles[1202]
+var ExascaleDbStorageVault_vaultType = &handles[1203]
+
+var _ExascaleDbStorageVaultList = &handles[1204]
+var _ExascaleDbStorageVaultList_member = &handles[1205]
+
+var ExascaleDbStorageVaultSummary = &handles[1206]
+var ExascaleDbStorageVaultSummary_exascaleDbStorageVaultId = &handles[1207]
+var ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent = &handles[1208]
+var ExascaleDbStorageVaultSummary_attachedShapeAttributes = &handles[1209]
+var ExascaleDbStorageVaultSummary_autoscaleLimitInGBs = &handles[1210]
+var ExascaleDbStorageVaultSummary_availabilityZone = &handles[1211]
+var ExascaleDbStorageVaultSummary_availabilityZoneId = &handles[1212]
+var ExascaleDbStorageVaultSummary_cloudExadataInfrastructureArn = &handles[1213]
+var ExascaleDbStorageVaultSummary_cloudExadataInfrastructureId = &handles[1214]
+var ExascaleDbStorageVaultSummary_createdAt = &handles[1215]
+var ExascaleDbStorageVaultSummary_description = &handles[1216]
+var ExascaleDbStorageVaultSummary_displayName = &handles[1217]
+var ExascaleDbStorageVaultSummary_vmClusterArns = &handles[1218]
+var ExascaleDbStorageVaultSummary_vmClusterCount = &handles[1219]
+var ExascaleDbStorageVaultSummary_vmClusterIds = &handles[1220]
+var ExascaleDbStorageVaultSummary_exascaleDbStorageVaultArn = &handles[1221]
+var ExascaleDbStorageVaultSummary_highCapacityDatabaseStorage = &handles[1222]
+var ExascaleDbStorageVaultSummary_isAutoscaleEnabled = &handles[1223]
+var ExascaleDbStorageVaultSummary_ocid = &handles[1224]
+var ExascaleDbStorageVaultSummary_ociResourceAnchorName = &handles[1225]
+var ExascaleDbStorageVaultSummary_ociUrl = &handles[1226]
+var ExascaleDbStorageVaultSummary_percentProgress = &handles[1227]
+var ExascaleDbStorageVaultSummary_status = &handles[1228]
+var ExascaleDbStorageVaultSummary_statusReason = &handles[1229]
+var ExascaleDbStorageVaultSummary_timeZone = &handles[1230]
+var ExascaleDbStorageVaultSummary_vaultType = &handles[1231]
+
+var ExascaleDbStorageVaultType = &handles[1232]
+var ExascaleDbStorageVaultType_EXASCALE_INFRASTRUCTURE = &handles[1233]
+var ExascaleDbStorageVaultType_DEDICATED_INFRASTRUCTURE = &handles[1234]
+
+var ExternalIdType = &handles[1235]
+var ExternalIdType_DATABASE_OCID = &handles[1236]
+var ExternalIdType_COMPARTMENT_OCID = &handles[1237]
+var ExternalIdType_TENANT_OCID = &handles[1238]
+
+var FileSystemConfigurationDetails = &handles[1239]
+var FileSystemConfigurationDetails_mountPoint = &handles[1240]
+var FileSystemConfigurationDetails_fileSystemSizeInGBs = &handles[1241]
+
+var _FileSystemConfigurationDetailsList = &handles[1242]
+var _FileSystemConfigurationDetailsList_member = &handles[1243]
+
+var _FlexComponentList = &handles[1244]
+var _FlexComponentList_member = &handles[1245]
+
+var FlexComponentSummary = &handles[1246]
+var FlexComponentSummary_availableCoreCount = &handles[1247]
+var FlexComponentSummary_availableDbStorageInGBs = &handles[1248]
+var FlexComponentSummary_availableLocalStorageInGBs = &handles[1249]
+var FlexComponentSummary_availableMemoryInGBs = &handles[1250]
+var FlexComponentSummary_computeModel = &handles[1251]
+var FlexComponentSummary_descriptionSummary = &handles[1252]
+var FlexComponentSummary_hardwareType = &handles[1253]
+var FlexComponentSummary_minimumCoreCount = &handles[1254]
+var FlexComponentSummary_name = &handles[1255]
+var FlexComponentSummary_runtimeMinimumCoreCount = &handles[1256]
+var FlexComponentSummary_shape = &handles[1257]
+
+var _GeneralInputString = &handles[1258]
+
+var _GiMinorVersionList = &handles[1259]
+var _GiMinorVersionList_member = &handles[1260]
+
+var GiMinorVersionSummary = &handles[1261]
+var GiMinorVersionSummary_version = &handles[1262]
+var GiMinorVersionSummary_gridImageId = &handles[1263]
+
+var _GiVersionList = &handles[1264]
+var _GiVersionList_member = &handles[1265]
+
+var GiVersionSummary = &handles[1266]
+var GiVersionSummary_version = &handles[1267]
+
+var GridImageType = &handles[1268]
+var GridImageType_RELEASE_UPDATE = &handles[1269]
+var GridImageType_CUSTOM_IMAGE = &handles[1270]
+
+var HardwareType = &handles[1271]
+var HardwareType_COMPUTE = &handles[1272]
+var HardwareType_CELL = &handles[1273]
+
+var _Hostname = &handles[1274]
+
+var _HoursOfDay = &handles[1275]
+var _HoursOfDay_member = &handles[1276]
+
+var IamRole = &handles[1277]
+var IamRole_iamRoleArn = &handles[1278]
+var IamRole_status = &handles[1279]
+var IamRole_statusReason = &handles[1280]
+var IamRole_awsIntegration = &handles[1281]
+
+var _IamRoleList = &handles[1282]
+var _IamRoleList_member = &handles[1283]
+
+var IamRoleStatus = &handles[1284]
+var IamRoleStatus_ASSOCIATING = &handles[1285]
+var IamRoleStatus_DISASSOCIATING = &handles[1286]
+var IamRoleStatus_FAILED = &handles[1287]
+var IamRoleStatus_CONNECTED = &handles[1288]
+var IamRoleStatus_DISCONNECTED = &handles[1289]
+var IamRoleStatus_PARTIALLY_CONNECTED = &handles[1290]
+var IamRoleStatus_UNKNOWN = &handles[1291]
+
+var _IntegerList = &handles[1292]
+var _IntegerList_member = &handles[1293]
+
+var InternalServerException = &handles[1294]
+var InternalServerException_message = &handles[1295]
+var InternalServerException_retryAfterSeconds = &handles[1296]
+
+var IormLifecycleState = &handles[1297]
+var IormLifecycleState_BOOTSTRAPPING = &handles[1298]
+var IormLifecycleState_DISABLED = &handles[1299]
+var IormLifecycleState_ENABLED = &handles[1300]
+var IormLifecycleState_FAILED = &handles[1301]
+var IormLifecycleState_UPDATING = &handles[1302]
+
+var KmsAccess = &handles[1303]
+var KmsAccess_status = &handles[1304]
+var KmsAccess_ipv4Addresses = &handles[1305]
+var KmsAccess_domainName = &handles[1306]
+var KmsAccess_kmsPolicyDocument = &handles[1307]
+
+var _KmsKeyIdOrArn = &handles[1308]
+
+var LicenseModel = &handles[1309]
+var LicenseModel_BRING_YOUR_OWN_LICENSE = &handles[1310]
+var LicenseModel_LICENSE_INCLUDED = &handles[1311]
+
+var LongTermBackupSchedule = &handles[1312]
+var LongTermBackupSchedule_isDisabled = &handles[1313]
+var LongTermBackupSchedule_repeatCadence = &handles[1314]
+var LongTermBackupSchedule_retentionPeriodInDays = &handles[1315]
+var LongTermBackupSchedule_timeOfBackup = &handles[1316]
+
+var MaintenanceWindow = &handles[1317]
+var MaintenanceWindow_customActionTimeoutInMins = &handles[1318]
+var MaintenanceWindow_daysOfWeek = &handles[1319]
+var MaintenanceWindow_hoursOfDay = &handles[1320]
+var MaintenanceWindow_isCustomActionTimeoutEnabled = &handles[1321]
+var MaintenanceWindow_leadTimeInWeeks = &handles[1322]
+var MaintenanceWindow_months = &handles[1323]
+var MaintenanceWindow_patchingMode = &handles[1324]
+var MaintenanceWindow_preference = &handles[1325]
+var MaintenanceWindow_skipRu = &handles[1326]
+var MaintenanceWindow_weeksOfMonth = &handles[1327]
+
+var ManagedResourceStatus = &handles[1328]
+var ManagedResourceStatus_ENABLED = &handles[1329]
+var ManagedResourceStatus_ENABLING = &handles[1330]
+var ManagedResourceStatus_DISABLED = &handles[1331]
+var ManagedResourceStatus_DISABLING = &handles[1332]
+
+var ManagedS3BackupAccess = &handles[1333]
+var ManagedS3BackupAccess_status = &handles[1334]
+var ManagedS3BackupAccess_ipv4Addresses = &handles[1335]
+
+var ManagedServices = &handles[1336]
+var ManagedServices_serviceNetworkArn = &handles[1337]
+var ManagedServices_resourceGatewayArn = &handles[1338]
+var ManagedServices_managedServicesIpv4Cidrs = &handles[1339]
+var ManagedServices_serviceNetworkEndpoint = &handles[1340]
+var ManagedServices_managedS3BackupAccess = &handles[1341]
+var ManagedServices_zeroEtlAccess = &handles[1342]
+var ManagedServices_s3Access = &handles[1343]
+var ManagedServices_stsAccess = &handles[1344]
+var ManagedServices_kmsAccess = &handles[1345]
+var ManagedServices_crossRegionS3RestoreSourcesAccess = &handles[1346]
+
+var Month = &handles[1347]
+var Month_name = &handles[1348]
+
+var MonthName = &handles[1349]
+var MonthName_JANUARY = &handles[1350]
+var MonthName_FEBRUARY = &handles[1351]
+var MonthName_MARCH = &handles[1352]
+var MonthName_APRIL = &handles[1353]
+var MonthName_MAY = &handles[1354]
+var MonthName_JUNE = &handles[1355]
+var MonthName_JULY = &handles[1356]
+var MonthName_AUGUST = &handles[1357]
+var MonthName_SEPTEMBER = &handles[1358]
+var MonthName_OCTOBER = &handles[1359]
+var MonthName_NOVEMBER = &handles[1360]
+var MonthName_DECEMBER = &handles[1361]
+
+var _Months = &handles[1362]
+var _Months_member = &handles[1363]
+
+var NetServicesArchitecture = &handles[1364]
+var NetServicesArchitecture_DEDICATED = &handles[1365]
+var NetServicesArchitecture_SHARED = &handles[1366]
+
+var Objective = &handles[1367]
+var Objective_AUTO = &handles[1368]
+var Objective_BALANCED = &handles[1369]
+var Objective_BASIC = &handles[1370]
+var Objective_HIGH_THROUGHPUT = &handles[1371]
+var Objective_LOW_LATENCY = &handles[1372]
+
+var OciAwsIntegration = &handles[1373]
+var OciAwsIntegration_KmsTde = &handles[1374]
+var OciAwsIntegration_SecretsManager = &handles[1375]
+
+var OciDnsForwardingConfig = &handles[1376]
+var OciDnsForwardingConfig_domainName = &handles[1377]
+var OciDnsForwardingConfig_ociDnsListenerIp = &handles[1378]
+
+var _OciDnsForwardingConfigList = &handles[1379]
+var _OciDnsForwardingConfigList_member = &handles[1380]
+
+var OciEncryptionKeyConfiguration = &handles[1381]
+var OciEncryptionKeyConfiguration_kmsKeyId = &handles[1382]
+var OciEncryptionKeyConfiguration_vaultId = &handles[1383]
+
+var OciIamRole = &handles[1384]
+var OciIamRole_iamRoleArn = &handles[1385]
+var OciIamRole_awsIntegration = &handles[1386]
+var OciIamRole_status = &handles[1387]
+var OciIamRole_statusReason = &handles[1388]
+
+var _OciIamRoleList = &handles[1389]
+var _OciIamRoleList_member = &handles[1390]
+
+var OciIamRoleStatus = &handles[1391]
+var OciIamRoleStatus_PROVISIONING = &handles[1392]
+var OciIamRoleStatus_AVAILABLE = &handles[1393]
+var OciIamRoleStatus_PROVISION_FAILED = &handles[1394]
+var OciIamRoleStatus_TERMINATING = &handles[1395]
+var OciIamRoleStatus_TERMINATE_FAILED = &handles[1396]
+
+var OciIdentityDomain = &handles[1397]
+var OciIdentityDomain_ociIdentityDomainId = &handles[1398]
+var OciIdentityDomain_ociIdentityDomainResourceUrl = &handles[1399]
+var OciIdentityDomain_ociIdentityDomainUrl = &handles[1400]
+var OciIdentityDomain_status = &handles[1401]
+var OciIdentityDomain_statusReason = &handles[1402]
+var OciIdentityDomain_accountSetupCloudFormationUrl = &handles[1403]
+
+var OciOnboardingStatus = &handles[1404]
+var OciOnboardingStatus_NOT_STARTED = &handles[1405]
+var OciOnboardingStatus_PENDING_LINK_GENERATION = &handles[1406]
+var OciOnboardingStatus_PENDING_CUSTOMER_ACTION = &handles[1407]
+var OciOnboardingStatus_PENDING_INITIALIZATION = &handles[1408]
+var OciOnboardingStatus_ACTIVATING = &handles[1409]
+var OciOnboardingStatus_ACTIVE_IN_HOME_REGION = &handles[1410]
+var OciOnboardingStatus_ACTIVE = &handles[1411]
+var OciOnboardingStatus_ACTIVE_LIMITED = &handles[1412]
+var OciOnboardingStatus_FAILED = &handles[1413]
+var OciOnboardingStatus_PUBLIC_OFFER_UNSUPPORTED = &handles[1414]
+var OciOnboardingStatus_SUSPENDED = &handles[1415]
+var OciOnboardingStatus_CANCELED = &handles[1416]
+
+var OdbNetwork = &handles[1417]
+var OdbNetwork_odbNetworkId = &handles[1418]
+var OdbNetwork_displayName = &handles[1419]
+var OdbNetwork_status = &handles[1420]
+var OdbNetwork_statusReason = &handles[1421]
+var OdbNetwork_odbNetworkArn = &handles[1422]
+var OdbNetwork_availabilityZone = &handles[1423]
+var OdbNetwork_availabilityZoneId = &handles[1424]
+var OdbNetwork_clientSubnetCidr = &handles[1425]
+var OdbNetwork_backupSubnetCidr = &handles[1426]
+var OdbNetwork_customDomainName = &handles[1427]
+var OdbNetwork_defaultDnsPrefix = &handles[1428]
+var OdbNetwork_peeredCidrs = &handles[1429]
+var OdbNetwork_ociNetworkAnchorId = &handles[1430]
+var OdbNetwork_ociNetworkAnchorUrl = &handles[1431]
+var OdbNetwork_ociResourceAnchorName = &handles[1432]
+var OdbNetwork_ociVcnId = &handles[1433]
+var OdbNetwork_ociVcnUrl = &handles[1434]
+var OdbNetwork_ociDnsForwardingConfigs = &handles[1435]
+var OdbNetwork_createdAt = &handles[1436]
+var OdbNetwork_percentProgress = &handles[1437]
+var OdbNetwork_managedServices = &handles[1438]
+var OdbNetwork_ec2PlacementGroupIds = &handles[1439]
+
+var _OdbNetworkList = &handles[1440]
+var _OdbNetworkList_member = &handles[1441]
+
+var OdbNetworkSummary = &handles[1442]
+var OdbNetworkSummary_odbNetworkId = &handles[1443]
+var OdbNetworkSummary_displayName = &handles[1444]
+var OdbNetworkSummary_status = &handles[1445]
+var OdbNetworkSummary_statusReason = &handles[1446]
+var OdbNetworkSummary_odbNetworkArn = &handles[1447]
+var OdbNetworkSummary_availabilityZone = &handles[1448]
+var OdbNetworkSummary_availabilityZoneId = &handles[1449]
+var OdbNetworkSummary_clientSubnetCidr = &handles[1450]
+var OdbNetworkSummary_backupSubnetCidr = &handles[1451]
+var OdbNetworkSummary_customDomainName = &handles[1452]
+var OdbNetworkSummary_defaultDnsPrefix = &handles[1453]
+var OdbNetworkSummary_peeredCidrs = &handles[1454]
+var OdbNetworkSummary_ociNetworkAnchorId = &handles[1455]
+var OdbNetworkSummary_ociNetworkAnchorUrl = &handles[1456]
+var OdbNetworkSummary_ociResourceAnchorName = &handles[1457]
+var OdbNetworkSummary_ociVcnId = &handles[1458]
+var OdbNetworkSummary_ociVcnUrl = &handles[1459]
+var OdbNetworkSummary_ociDnsForwardingConfigs = &handles[1460]
+var OdbNetworkSummary_createdAt = &handles[1461]
+var OdbNetworkSummary_percentProgress = &handles[1462]
+var OdbNetworkSummary_managedServices = &handles[1463]
+var OdbNetworkSummary_ec2PlacementGroupIds = &handles[1464]
+
+var OdbPeeringConnection = &handles[1465]
+var OdbPeeringConnection_odbPeeringConnectionId = &handles[1466]
+var OdbPeeringConnection_displayName = &handles[1467]
+var OdbPeeringConnection_status = &handles[1468]
+var OdbPeeringConnection_statusReason = &handles[1469]
+var OdbPeeringConnection_odbPeeringConnectionArn = &handles[1470]
+var OdbPeeringConnection_odbNetworkArn = &handles[1471]
+var OdbPeeringConnection_peerNetworkArn = &handles[1472]
+var OdbPeeringConnection_odbPeeringConnectionType = &handles[1473]
+var OdbPeeringConnection_peerNetworkCidrs = &handles[1474]
+var OdbPeeringConnection_createdAt = &handles[1475]
+var OdbPeeringConnection_percentProgress = &handles[1476]
+
+var _OdbPeeringConnectionList = &handles[1477]
+var _OdbPeeringConnectionList_member = &handles[1478]
+
+var OdbPeeringConnectionSummary = &handles[1479]
+var OdbPeeringConnectionSummary_odbPeeringConnectionId = &handles[1480]
+var OdbPeeringConnectionSummary_displayName = &handles[1481]
+var OdbPeeringConnectionSummary_status = &handles[1482]
+var OdbPeeringConnectionSummary_statusReason = &handles[1483]
+var OdbPeeringConnectionSummary_odbPeeringConnectionArn = &handles[1484]
+var OdbPeeringConnectionSummary_odbNetworkArn = &handles[1485]
+var OdbPeeringConnectionSummary_peerNetworkArn = &handles[1486]
+var OdbPeeringConnectionSummary_odbPeeringConnectionType = &handles[1487]
+var OdbPeeringConnectionSummary_peerNetworkCidrs = &handles[1488]
+var OdbPeeringConnectionSummary_createdAt = &handles[1489]
+var OdbPeeringConnectionSummary_percentProgress = &handles[1490]
+
+var OkvEncryptionKeyConfiguration = &handles[1491]
+var OkvEncryptionKeyConfiguration_certificateDirectoryName = &handles[1492]
+var OkvEncryptionKeyConfiguration_certificateId = &handles[1493]
+var OkvEncryptionKeyConfiguration_directoryName = &handles[1494]
+var OkvEncryptionKeyConfiguration_okvKmsKey = &handles[1495]
+var OkvEncryptionKeyConfiguration_okvUri = &handles[1496]
+
+var OpenMode = &handles[1497]
+var OpenMode_READ_ONLY = &handles[1498]
+var OpenMode_READ_WRITE = &handles[1499]
+
+var OperationsInsightsStatus = &handles[1500]
+var OperationsInsightsStatus_ENABLING = &handles[1501]
+var OperationsInsightsStatus_ENABLED = &handles[1502]
+var OperationsInsightsStatus_DISABLING = &handles[1503]
+var OperationsInsightsStatus_NOT_ENABLED = &handles[1504]
+var OperationsInsightsStatus_FAILED_ENABLING = &handles[1505]
+var OperationsInsightsStatus_FAILED_DISABLING = &handles[1506]
+
+var PatchingModeType = &handles[1507]
+var PatchingModeType_ROLLING = &handles[1508]
+var PatchingModeType_NONROLLING = &handles[1509]
+
+var _PeeredCidr = &handles[1510]
+
+var _PeeredCidrList = &handles[1511]
+var _PeeredCidrList_member = &handles[1512]
+
+var _PeerNetworkRouteTableId = &handles[1513]
+
+var _PeerNetworkRouteTableIdList = &handles[1514]
+var _PeerNetworkRouteTableIdList_member = &handles[1515]
+
+var PermissionLevel = &handles[1516]
+var PermissionLevel_RESTRICTED = &handles[1517]
+var PermissionLevel_UNRESTRICTED = &handles[1518]
+
+var PointInTimeRestoreConfiguration = &handles[1519]
+var PointInTimeRestoreConfiguration_sourceAutonomousDatabaseId = &handles[1520]
+var PointInTimeRestoreConfiguration_cloneType = &handles[1521]
+var PointInTimeRestoreConfiguration_timestamp = &handles[1522]
+var PointInTimeRestoreConfiguration_useLatestAvailableBackupTimestamp = &handles[1523]
+var PointInTimeRestoreConfiguration_cloneTableSpaceList = &handles[1524]
+
+var _PolicyDocument = &handles[1525]
+
+var PreferenceType = &handles[1526]
+var PreferenceType_NO_PREFERENCE = &handles[1527]
+var PreferenceType_CUSTOM_PREFERENCE = &handles[1528]
+
+var RefreshableMode = &handles[1529]
+var RefreshableMode_AUTOMATIC = &handles[1530]
+var RefreshableMode_MANUAL = &handles[1531]
+
+var RefreshableStatus = &handles[1532]
+var RefreshableStatus_REFRESHING = &handles[1533]
+var RefreshableStatus_NOT_REFRESHING = &handles[1534]
+
+var RepeatCadence = &handles[1535]
+var RepeatCadence_ONE_TIME = &handles[1536]
+var RepeatCadence_WEEKLY = &handles[1537]
+var RepeatCadence_MONTHLY = &handles[1538]
+var RepeatCadence_YEARLY = &handles[1539]
+
+var _RequestTagMap = &handles[1540]
+var _RequestTagMap_key = &handles[1541]
+var _RequestTagMap_value = &handles[1542]
+
+var _ResourceArn = &handles[1543]
+
+var _ResourceArnList = &handles[1544]
+var _ResourceArnList_member = &handles[1545]
+
+var _ResourceDisplayName = &handles[1546]
+
+var _ResourceId = &handles[1547]
+
+var _ResourceIdList = &handles[1548]
+var _ResourceIdList_member = &handles[1549]
+
+var _ResourceIdOrArn = &handles[1550]
+
+var ResourceNotFoundException = &handles[1551]
+var ResourceNotFoundException_message = &handles[1552]
+var ResourceNotFoundException_resourceId = &handles[1553]
+var ResourceNotFoundException_resourceType = &handles[1554]
+
+var ResourcePoolSummary = &handles[1555]
+var ResourcePoolSummary_isDisabled = &handles[1556]
+var ResourcePoolSummary_poolSize = &handles[1557]
+var ResourcePoolSummary_poolStorageSizeInTBs = &handles[1558]
+var ResourcePoolSummary_availableStorageCapacityInTBs = &handles[1559]
+var ResourcePoolSummary_totalComputeCapacity = &handles[1560]
+var ResourcePoolSummary_availableComputeCapacity = &handles[1561]
+
+var ResourceStatus = &handles[1562]
+var ResourceStatus_AVAILABLE = &handles[1563]
+var ResourceStatus_FAILED = &handles[1564]
+var ResourceStatus_PROVISIONING = &handles[1565]
+var ResourceStatus_TERMINATED = &handles[1566]
+var ResourceStatus_TERMINATING = &handles[1567]
+var ResourceStatus_UPDATING = &handles[1568]
+var ResourceStatus_MAINTENANCE_IN_PROGRESS = &handles[1569]
+
+var _ResponseTagMap = &handles[1570]
+var _ResponseTagMap_key = &handles[1571]
+var _ResponseTagMap_value = &handles[1572]
+
+var RestoreFromBackupConfiguration = &handles[1573]
+var RestoreFromBackupConfiguration_autonomousDatabaseBackupId = &handles[1574]
+var RestoreFromBackupConfiguration_cloneType = &handles[1575]
+var RestoreFromBackupConfiguration_cloneTableSpaceList = &handles[1576]
+
+var _RoleArn = &handles[1577]
+
+var S3Access = &handles[1578]
+var S3Access_status = &handles[1579]
+var S3Access_ipv4Addresses = &handles[1580]
+var S3Access_domainName = &handles[1581]
+var S3Access_s3PolicyDocument = &handles[1582]
+
+var ScheduledOperationDetails = &handles[1583]
+var ScheduledOperationDetails_dayOfWeek = &handles[1584]
+var ScheduledOperationDetails_scheduledStartTime = &handles[1585]
+var ScheduledOperationDetails_scheduledStopTime = &handles[1586]
+
+var _ScheduledOperationDetailsList = &handles[1587]
+var _ScheduledOperationDetailsList_member = &handles[1588]
+
+var _SecretIdOrArn = &handles[1589]
+
+var _SensitiveString = &handles[1590]
+
+var _SensitiveStringList = &handles[1591]
+var _SensitiveStringList_member = &handles[1592]
+
+var ServiceNetworkEndpoint = &handles[1593]
+var ServiceNetworkEndpoint_vpcEndpointId = &handles[1594]
+var ServiceNetworkEndpoint_vpcEndpointType = &handles[1595]
+
+var ServiceQuotaExceededException = &handles[1596]
+var ServiceQuotaExceededException_message = &handles[1597]
+var ServiceQuotaExceededException_resourceId = &handles[1598]
+var ServiceQuotaExceededException_resourceType = &handles[1599]
+var ServiceQuotaExceededException_quotaCode = &handles[1600]
+
+var ShapeAttribute = &handles[1601]
+var ShapeAttribute_SMART_STORAGE = &handles[1602]
+var ShapeAttribute_BLOCK_STORAGE = &handles[1603]
+
+var _ShapeAttributeList = &handles[1604]
+var _ShapeAttributeList_member = &handles[1605]
+
+var ShapeType = &handles[1606]
+var ShapeType_AMD = &handles[1607]
+var ShapeType_INTEL = &handles[1608]
+var ShapeType_INTEL_FLEX_X9 = &handles[1609]
+var ShapeType_AMPERE_FLEX_A1 = &handles[1610]
+
+var SourceConfiguration = &handles[1611]
+var SourceConfiguration_databaseClone = &handles[1612]
+var SourceConfiguration_restoreFromBackup = &handles[1613]
+var SourceConfiguration_pointInTimeRestore = &handles[1614]
+var SourceConfiguration_crossRegionDataGuard = &handles[1615]
+var SourceConfiguration_crossRegionDisasterRecovery = &handles[1616]
+var SourceConfiguration_cloneToRefreshable = &handles[1617]
+
+var SourceType = &handles[1618]
+var SourceType_NONE = &handles[1619]
+var SourceType_DATABASE = &handles[1620]
+var SourceType_BACKUP_FROM_ID = &handles[1621]
+var SourceType_BACKUP_FROM_TIMESTAMP = &handles[1622]
+var SourceType_CROSS_REGION_DATAGUARD = &handles[1623]
+var SourceType_CROSS_REGION_DISASTER_RECOVERY = &handles[1624]
+var SourceType_CLONE_TO_REFRESHABLE = &handles[1625]
+
+var StandbyAllowlistedIpsSource = &handles[1626]
+var StandbyAllowlistedIpsSource_PRIMARY = &handles[1627]
+var StandbyAllowlistedIpsSource_SEPARATE = &handles[1628]
+var StandbyAllowlistedIpsSource_NOT_APPLICABLE = &handles[1629]
+
+var StorageManagementType = &handles[1630]
+var StorageManagementType_ASM = &handles[1631]
+var StorageManagementType_EXASCALE = &handles[1632]
+
+var _StringList = &handles[1633]
+var _StringList_member = &handles[1634]
+
+var StsAccess = &handles[1635]
+var StsAccess_status = &handles[1636]
+var StsAccess_ipv4Addresses = &handles[1637]
+var StsAccess_domainName = &handles[1638]
+var StsAccess_stsPolicyDocument = &handles[1639]
+
+var SubscriptionError = &handles[1640]
+var SubscriptionError_errorMessage = &handles[1641]
+
+var _SubscriptionErrors = &handles[1642]
+var _SubscriptionErrors_member = &handles[1643]
+
+var SupportedAwsIntegration = &handles[1644]
+var SupportedAwsIntegration_KmsTde = &handles[1645]
+
+var _SystemVersionList = &handles[1646]
+var _SystemVersionList_member = &handles[1647]
+
+var SystemVersionSummary = &handles[1648]
+var SystemVersionSummary_giVersion = &handles[1649]
+var SystemVersionSummary_shape = &handles[1650]
+var SystemVersionSummary_systemVersions = &handles[1651]
+
+var _TagKey = &handles[1652]
+
+var _TagKeys = &handles[1653]
+var _TagKeys_member = &handles[1654]
+
+var _TagValue = &handles[1655]
+
+var ThrottlingException = &handles[1656]
+var ThrottlingException_message = &handles[1657]
+var ThrottlingException_retryAfterSeconds = &handles[1658]
+
+var TransportableTablespace = &handles[1659]
+var TransportableTablespace_ttsBundleUrl = &handles[1660]
+
+var UpdateAction = &handles[1661]
+var UpdateAction_ROLLING_APPLY = &handles[1662]
+var UpdateAction_NON_ROLLING_APPLY = &handles[1663]
+var UpdateAction_PRECHECK = &handles[1664]
+var UpdateAction_ROLLBACK = &handles[1665]
+
+var ValidationException = &handles[1666]
+var ValidationException_message = &handles[1667]
+var ValidationException_reason = &handles[1668]
+var ValidationException_fieldList = &handles[1669]
+
+var ValidationExceptionField = &handles[1670]
+var ValidationExceptionField_name = &handles[1671]
+var ValidationExceptionField_message = &handles[1672]
+
+var _ValidationExceptionFieldList = &handles[1673]
+var _ValidationExceptionFieldList_member = &handles[1674]
+
+var ValidationExceptionReason = &handles[1675]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[1676]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[1677]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[1678]
+var ValidationExceptionReason_OTHER = &handles[1679]
+
+var VmStorageType = &handles[1680]
+var VmStorageType_LOCAL = &handles[1681]
+var VmStorageType_EXASCALE = &handles[1682]
+
+var VpcEndpointType = &handles[1683]
+var VpcEndpointType_SERVICENETWORK = &handles[1684]
+
+var WalletPasswordSource = &handles[1685]
+var WalletPasswordSource_CUSTOMER_MANAGED_AWS_SECRET = &handles[1686]
+var WalletPasswordSource_API_REQUEST_PARAMETER = &handles[1687]
+
+var WalletPasswordSourceConfiguration = &handles[1688]
+var WalletPasswordSourceConfiguration_customerManagedAwsSecret = &handles[1689]
+
+var WalletPasswordSourceConfigurationInput = &handles[1690]
+var WalletPasswordSourceConfigurationInput_customerManagedAwsSecret = &handles[1691]
+
+var WalletPasswordSourceSummary = &handles[1692]
+var WalletPasswordSourceSummary_passwordSource = &handles[1693]
+var WalletPasswordSourceSummary_passwordSourceConfiguration = &handles[1694]
+
+var WalletType = &handles[1695]
+var WalletType_REGIONAL = &handles[1696]
+var WalletType_INSTANCE = &handles[1697]
+
+var _WeeksOfMonth = &handles[1698]
+var _WeeksOfMonth_member = &handles[1699]
+
+var ZeroEtlAccess = &handles[1700]
+var ZeroEtlAccess_status = &handles[1701]
+var ZeroEtlAccess_cidr = &handles[1702]
+
+var AcceptMarketplaceRegistrationInput = &handles[1703]
+var AcceptMarketplaceRegistrationInput_marketplaceRegistrationToken = &handles[1704]
+
+var AcceptMarketplaceRegistrationOutput = &handles[1705]
+
+var AssociateIamRoleToResourceInput = &handles[1706]
+var AssociateIamRoleToResourceInput_iamRoleArn = &handles[1707]
+var AssociateIamRoleToResourceInput_awsIntegration = &handles[1708]
+var AssociateIamRoleToResourceInput_resourceArn = &handles[1709]
+
+var AssociateIamRoleToResourceOutput = &handles[1710]
+
+var AssociateVirtualMachinesToExadbVmClusterInput = &handles[1711]
+var AssociateVirtualMachinesToExadbVmClusterInput_exadbVmClusterId = &handles[1712]
+var AssociateVirtualMachinesToExadbVmClusterInput_desiredNodeCount = &handles[1713]
+
+var AssociateVirtualMachinesToExadbVmClusterOutput = &handles[1714]
+var AssociateVirtualMachinesToExadbVmClusterOutput_displayName = &handles[1715]
+var AssociateVirtualMachinesToExadbVmClusterOutput_status = &handles[1716]
+var AssociateVirtualMachinesToExadbVmClusterOutput_statusReason = &handles[1717]
+var AssociateVirtualMachinesToExadbVmClusterOutput_exadbVmClusterId = &handles[1718]
+
+var CreateAutonomousDatabaseBackupInput = &handles[1719]
+var CreateAutonomousDatabaseBackupInput_autonomousDatabaseId = &handles[1720]
+var CreateAutonomousDatabaseBackupInput_displayName = &handles[1721]
+var CreateAutonomousDatabaseBackupInput_retentionPeriodInDays = &handles[1722]
+var CreateAutonomousDatabaseBackupInput_clientToken = &handles[1723]
+var CreateAutonomousDatabaseBackupInput_tags = &handles[1724]
+
+var CreateAutonomousDatabaseBackupOutput = &handles[1725]
+var CreateAutonomousDatabaseBackupOutput_displayName = &handles[1726]
+var CreateAutonomousDatabaseBackupOutput_status = &handles[1727]
+var CreateAutonomousDatabaseBackupOutput_statusReason = &handles[1728]
+var CreateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId = &handles[1729]
+
+var CreateAutonomousDatabaseInput = &handles[1730]
+var CreateAutonomousDatabaseInput_odbNetworkId = &handles[1731]
+var CreateAutonomousDatabaseInput_displayName = &handles[1732]
+var CreateAutonomousDatabaseInput_dbName = &handles[1733]
+var CreateAutonomousDatabaseInput_adminPassword = &handles[1734]
+var CreateAutonomousDatabaseInput_computeCount = &handles[1735]
+var CreateAutonomousDatabaseInput_dataStorageSizeInTBs = &handles[1736]
+var CreateAutonomousDatabaseInput_dataStorageSizeInGBs = &handles[1737]
+var CreateAutonomousDatabaseInput_dbWorkload = &handles[1738]
+var CreateAutonomousDatabaseInput_isAutoScalingEnabled = &handles[1739]
+var CreateAutonomousDatabaseInput_isAutoScalingForStorageEnabled = &handles[1740]
+var CreateAutonomousDatabaseInput_licenseModel = &handles[1741]
+var CreateAutonomousDatabaseInput_characterSet = &handles[1742]
+var CreateAutonomousDatabaseInput_ncharacterSet = &handles[1743]
+var CreateAutonomousDatabaseInput_dbVersion = &handles[1744]
+var CreateAutonomousDatabaseInput_databaseEdition = &handles[1745]
+var CreateAutonomousDatabaseInput_standbyAllowlistedIpsSource = &handles[1746]
+var CreateAutonomousDatabaseInput_autonomousMaintenanceScheduleType = &handles[1747]
+var CreateAutonomousDatabaseInput_backupRetentionPeriodInDays = &handles[1748]
+var CreateAutonomousDatabaseInput_byolComputeCountLimit = &handles[1749]
+var CreateAutonomousDatabaseInput_cpuCoreCount = &handles[1750]
+var CreateAutonomousDatabaseInput_customerContactsToSendToOCI = &handles[1751]
+var CreateAutonomousDatabaseInput_privateEndpointIp = &handles[1752]
+var CreateAutonomousDatabaseInput_privateEndpointLabel = &handles[1753]
+var CreateAutonomousDatabaseInput_resourcePoolLeaderId = &handles[1754]
+var CreateAutonomousDatabaseInput_resourcePoolSummary = &handles[1755]
+var CreateAutonomousDatabaseInput_scheduledOperations = &handles[1756]
+var CreateAutonomousDatabaseInput_standbyAllowlistedIps = &handles[1757]
+var CreateAutonomousDatabaseInput_allowlistedIps = &handles[1758]
+var CreateAutonomousDatabaseInput_transportableTablespace = &handles[1759]
+var CreateAutonomousDatabaseInput_isBackupRetentionLocked = &handles[1760]
+var CreateAutonomousDatabaseInput_isLocalDataGuardEnabled = &handles[1761]
+var CreateAutonomousDatabaseInput_isMtlsConnectionRequired = &handles[1762]
+var CreateAutonomousDatabaseInput_dbToolsDetails = &handles[1763]
+var CreateAutonomousDatabaseInput_source = &handles[1764]
+var CreateAutonomousDatabaseInput_sourceConfiguration = &handles[1765]
+var CreateAutonomousDatabaseInput_encryptionKeyProvider = &handles[1766]
+var CreateAutonomousDatabaseInput_encryptionKeyConfiguration = &handles[1767]
+var CreateAutonomousDatabaseInput_adminPasswordSource = &handles[1768]
+var CreateAutonomousDatabaseInput_adminPasswordSourceConfiguration = &handles[1769]
+var CreateAutonomousDatabaseInput_clientToken = &handles[1770]
+var CreateAutonomousDatabaseInput_tags = &handles[1771]
+
+var CreateAutonomousDatabaseOutput = &handles[1772]
+var CreateAutonomousDatabaseOutput_autonomousDatabaseId = &handles[1773]
+var CreateAutonomousDatabaseOutput_displayName = &handles[1774]
+var CreateAutonomousDatabaseOutput_status = &handles[1775]
+var CreateAutonomousDatabaseOutput_statusReason = &handles[1776]
+
+var CreateAutonomousDatabaseWalletInput = &handles[1777]
+var CreateAutonomousDatabaseWalletInput_autonomousDatabaseId = &handles[1778]
+var CreateAutonomousDatabaseWalletInput_walletType = &handles[1779]
+var CreateAutonomousDatabaseWalletInput_password = &handles[1780]
+var CreateAutonomousDatabaseWalletInput_passwordSource = &handles[1781]
+var CreateAutonomousDatabaseWalletInput_passwordSourceConfiguration = &handles[1782]
+var CreateAutonomousDatabaseWalletInput_clientToken = &handles[1783]
+
+var CreateAutonomousDatabaseWalletOutput = &handles[1784]
+var CreateAutonomousDatabaseWalletOutput_autonomousDatabaseWalletFile = &handles[1785]
+
+var CreateCloudAutonomousVmClusterInput = &handles[1786]
+var CreateCloudAutonomousVmClusterInput_cloudExadataInfrastructureId = &handles[1787]
+var CreateCloudAutonomousVmClusterInput_odbNetworkId = &handles[1788]
+var CreateCloudAutonomousVmClusterInput_displayName = &handles[1789]
+var CreateCloudAutonomousVmClusterInput_clientToken = &handles[1790]
+var CreateCloudAutonomousVmClusterInput_autonomousDataStorageSizeInTBs = &handles[1791]
+var CreateCloudAutonomousVmClusterInput_cpuCoreCountPerNode = &handles[1792]
+var CreateCloudAutonomousVmClusterInput_dbServers = &handles[1793]
+var CreateCloudAutonomousVmClusterInput_description = &handles[1794]
+var CreateCloudAutonomousVmClusterInput_isMtlsEnabledVmCluster = &handles[1795]
+var CreateCloudAutonomousVmClusterInput_licenseModel = &handles[1796]
+var CreateCloudAutonomousVmClusterInput_maintenanceWindow = &handles[1797]
+var CreateCloudAutonomousVmClusterInput_memoryPerOracleComputeUnitInGBs = &handles[1798]
+var CreateCloudAutonomousVmClusterInput_scanListenerPortNonTls = &handles[1799]
+var CreateCloudAutonomousVmClusterInput_scanListenerPortTls = &handles[1800]
+var CreateCloudAutonomousVmClusterInput_tags = &handles[1801]
+var CreateCloudAutonomousVmClusterInput_timeZone = &handles[1802]
+var CreateCloudAutonomousVmClusterInput_totalContainerDatabases = &handles[1803]
+
+var CreateCloudAutonomousVmClusterOutput = &handles[1804]
+var CreateCloudAutonomousVmClusterOutput_displayName = &handles[1805]
+var CreateCloudAutonomousVmClusterOutput_status = &handles[1806]
+var CreateCloudAutonomousVmClusterOutput_statusReason = &handles[1807]
+var CreateCloudAutonomousVmClusterOutput_cloudAutonomousVmClusterId = &handles[1808]
+
+var CreateCloudExadataInfrastructureInput = &handles[1809]
+var CreateCloudExadataInfrastructureInput_displayName = &handles[1810]
+var CreateCloudExadataInfrastructureInput_shape = &handles[1811]
+var CreateCloudExadataInfrastructureInput_availabilityZone = &handles[1812]
+var CreateCloudExadataInfrastructureInput_availabilityZoneId = &handles[1813]
+var CreateCloudExadataInfrastructureInput_tags = &handles[1814]
+var CreateCloudExadataInfrastructureInput_computeCount = &handles[1815]
+var CreateCloudExadataInfrastructureInput_customerContactsToSendToOCI = &handles[1816]
+var CreateCloudExadataInfrastructureInput_maintenanceWindow = &handles[1817]
+var CreateCloudExadataInfrastructureInput_storageCount = &handles[1818]
+var CreateCloudExadataInfrastructureInput_clientToken = &handles[1819]
+var CreateCloudExadataInfrastructureInput_databaseServerType = &handles[1820]
+var CreateCloudExadataInfrastructureInput_storageServerType = &handles[1821]
+
+var CreateCloudExadataInfrastructureOutput = &handles[1822]
+var CreateCloudExadataInfrastructureOutput_displayName = &handles[1823]
+var CreateCloudExadataInfrastructureOutput_status = &handles[1824]
+var CreateCloudExadataInfrastructureOutput_statusReason = &handles[1825]
+var CreateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = &handles[1826]
+
+var CreateCloudVmClusterInput = &handles[1827]
+var CreateCloudVmClusterInput_cloudExadataInfrastructureId = &handles[1828]
+var CreateCloudVmClusterInput_exascaleDbStorageVaultId = &handles[1829]
+var CreateCloudVmClusterInput_vmFileSystemStorageType = &handles[1830]
+var CreateCloudVmClusterInput_vmBackupStorageType = &handles[1831]
+var CreateCloudVmClusterInput_fileSystemConfigurationDetails = &handles[1832]
+var CreateCloudVmClusterInput_cpuCoreCount = &handles[1833]
+var CreateCloudVmClusterInput_displayName = &handles[1834]
+var CreateCloudVmClusterInput_giVersion = &handles[1835]
+var CreateCloudVmClusterInput_hostname = &handles[1836]
+var CreateCloudVmClusterInput_sshPublicKeys = &handles[1837]
+var CreateCloudVmClusterInput_odbNetworkId = &handles[1838]
+var CreateCloudVmClusterInput_clusterName = &handles[1839]
+var CreateCloudVmClusterInput_dataCollectionOptions = &handles[1840]
+var CreateCloudVmClusterInput_dataStorageSizeInTBs = &handles[1841]
+var CreateCloudVmClusterInput_dbNodeStorageSizeInGBs = &handles[1842]
+var CreateCloudVmClusterInput_dbServers = &handles[1843]
+var CreateCloudVmClusterInput_tags = &handles[1844]
+var CreateCloudVmClusterInput_isLocalBackupEnabled = &handles[1845]
+var CreateCloudVmClusterInput_isSparseDiskgroupEnabled = &handles[1846]
+var CreateCloudVmClusterInput_licenseModel = &handles[1847]
+var CreateCloudVmClusterInput_memorySizeInGBs = &handles[1848]
+var CreateCloudVmClusterInput_systemVersion = &handles[1849]
+var CreateCloudVmClusterInput_timeZone = &handles[1850]
+var CreateCloudVmClusterInput_clientToken = &handles[1851]
+var CreateCloudVmClusterInput_scanListenerPortTcp = &handles[1852]
+
+var CreateCloudVmClusterOutput = &handles[1853]
+var CreateCloudVmClusterOutput_displayName = &handles[1854]
+var CreateCloudVmClusterOutput_status = &handles[1855]
+var CreateCloudVmClusterOutput_statusReason = &handles[1856]
+var CreateCloudVmClusterOutput_cloudVmClusterId = &handles[1857]
+
+var CreateExadbVmClusterInput = &handles[1858]
+var CreateExadbVmClusterInput_displayName = &handles[1859]
+var CreateExadbVmClusterInput_enabledEcpuCount = &handles[1860]
+var CreateExadbVmClusterInput_exascaleDbStorageVaultId = &handles[1861]
+var CreateExadbVmClusterInput_gridImageId = &handles[1862]
+var CreateExadbVmClusterInput_hostname = &handles[1863]
+var CreateExadbVmClusterInput_nodeCount = &handles[1864]
+var CreateExadbVmClusterInput_odbNetworkId = &handles[1865]
+var CreateExadbVmClusterInput_shape = &handles[1866]
+var CreateExadbVmClusterInput_sshPublicKeys = &handles[1867]
+var CreateExadbVmClusterInput_totalEcpuCount = &handles[1868]
+var CreateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs = &handles[1869]
+var CreateExadbVmClusterInput_clusterName = &handles[1870]
+var CreateExadbVmClusterInput_dataCollectionOptions = &handles[1871]
+var CreateExadbVmClusterInput_licenseModel = &handles[1872]
+var CreateExadbVmClusterInput_scanListenerPortTcp = &handles[1873]
+var CreateExadbVmClusterInput_scanListenerPortTcpSsl = &handles[1874]
+var CreateExadbVmClusterInput_shapeAttribute = &handles[1875]
+var CreateExadbVmClusterInput_systemVersion = &handles[1876]
+var CreateExadbVmClusterInput_tags = &handles[1877]
+var CreateExadbVmClusterInput_timeZone = &handles[1878]
+var CreateExadbVmClusterInput_clientToken = &handles[1879]
+
+var CreateExadbVmClusterOutput = &handles[1880]
+var CreateExadbVmClusterOutput_displayName = &handles[1881]
+var CreateExadbVmClusterOutput_status = &handles[1882]
+var CreateExadbVmClusterOutput_statusReason = &handles[1883]
+var CreateExadbVmClusterOutput_exadbVmClusterId = &handles[1884]
+
+var CreateExascaleDbStorageVaultInput = &handles[1885]
+var CreateExascaleDbStorageVaultInput_displayName = &handles[1886]
+var CreateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs = &handles[1887]
+var CreateExascaleDbStorageVaultInput_additionalFlashCacheInPercent = &handles[1888]
+var CreateExascaleDbStorageVaultInput_autoscaleLimitInGBs = &handles[1889]
+var CreateExascaleDbStorageVaultInput_cloudExadataInfrastructureId = &handles[1890]
+var CreateExascaleDbStorageVaultInput_availabilityZoneId = &handles[1891]
+var CreateExascaleDbStorageVaultInput_availabilityZone = &handles[1892]
+var CreateExascaleDbStorageVaultInput_description = &handles[1893]
+var CreateExascaleDbStorageVaultInput_isAutoscaleEnabled = &handles[1894]
+var CreateExascaleDbStorageVaultInput_tags = &handles[1895]
+var CreateExascaleDbStorageVaultInput_timeZone = &handles[1896]
+var CreateExascaleDbStorageVaultInput_clientToken = &handles[1897]
+
+var CreateExascaleDbStorageVaultOutput = &handles[1898]
+var CreateExascaleDbStorageVaultOutput_displayName = &handles[1899]
+var CreateExascaleDbStorageVaultOutput_status = &handles[1900]
+var CreateExascaleDbStorageVaultOutput_statusReason = &handles[1901]
+var CreateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId = &handles[1902]
+
+var CreateOdbNetworkInput = &handles[1903]
+var CreateOdbNetworkInput_displayName = &handles[1904]
+var CreateOdbNetworkInput_availabilityZone = &handles[1905]
+var CreateOdbNetworkInput_availabilityZoneId = &handles[1906]
+var CreateOdbNetworkInput_clientSubnetCidr = &handles[1907]
+var CreateOdbNetworkInput_backupSubnetCidr = &handles[1908]
+var CreateOdbNetworkInput_customDomainName = &handles[1909]
+var CreateOdbNetworkInput_defaultDnsPrefix = &handles[1910]
+var CreateOdbNetworkInput_clientToken = &handles[1911]
+var CreateOdbNetworkInput_s3Access = &handles[1912]
+var CreateOdbNetworkInput_zeroEtlAccess = &handles[1913]
+var CreateOdbNetworkInput_stsAccess = &handles[1914]
+var CreateOdbNetworkInput_kmsAccess = &handles[1915]
+var CreateOdbNetworkInput_s3PolicyDocument = &handles[1916]
+var CreateOdbNetworkInput_stsPolicyDocument = &handles[1917]
+var CreateOdbNetworkInput_kmsPolicyDocument = &handles[1918]
+var CreateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable = &handles[1919]
+var CreateOdbNetworkInput_tags = &handles[1920]
+
+var CreateOdbNetworkOutput = &handles[1921]
+var CreateOdbNetworkOutput_displayName = &handles[1922]
+var CreateOdbNetworkOutput_status = &handles[1923]
+var CreateOdbNetworkOutput_statusReason = &handles[1924]
+var CreateOdbNetworkOutput_odbNetworkId = &handles[1925]
+
+var CreateOdbPeeringConnectionInput = &handles[1926]
+var CreateOdbPeeringConnectionInput_odbNetworkId = &handles[1927]
+var CreateOdbPeeringConnectionInput_peerNetworkId = &handles[1928]
+var CreateOdbPeeringConnectionInput_displayName = &handles[1929]
+var CreateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded = &handles[1930]
+var CreateOdbPeeringConnectionInput_peerNetworkRouteTableIds = &handles[1931]
+var CreateOdbPeeringConnectionInput_clientToken = &handles[1932]
+var CreateOdbPeeringConnectionInput_tags = &handles[1933]
+
+var CreateOdbPeeringConnectionOutput = &handles[1934]
+var CreateOdbPeeringConnectionOutput_displayName = &handles[1935]
+var CreateOdbPeeringConnectionOutput_status = &handles[1936]
+var CreateOdbPeeringConnectionOutput_statusReason = &handles[1937]
+var CreateOdbPeeringConnectionOutput_odbPeeringConnectionId = &handles[1938]
+
+var DeleteAutonomousDatabaseBackupInput = &handles[1939]
+var DeleteAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = &handles[1940]
+
+var DeleteAutonomousDatabaseBackupOutput = &handles[1941]
+
+var DeleteAutonomousDatabaseInput = &handles[1942]
+var DeleteAutonomousDatabaseInput_autonomousDatabaseId = &handles[1943]
+
+var DeleteAutonomousDatabaseOutput = &handles[1944]
+
+var DeleteCloudAutonomousVmClusterInput = &handles[1945]
+var DeleteCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId = &handles[1946]
+
+var DeleteCloudAutonomousVmClusterOutput = &handles[1947]
+
+var DeleteCloudExadataInfrastructureInput = &handles[1948]
+var DeleteCloudExadataInfrastructureInput_cloudExadataInfrastructureId = &handles[1949]
+
+var DeleteCloudExadataInfrastructureOutput = &handles[1950]
+
+var DeleteCloudVmClusterInput = &handles[1951]
+var DeleteCloudVmClusterInput_cloudVmClusterId = &handles[1952]
+
+var DeleteCloudVmClusterOutput = &handles[1953]
+
+var DeleteExadbVmClusterInput = &handles[1954]
+var DeleteExadbVmClusterInput_exadbVmClusterId = &handles[1955]
+
+var DeleteExadbVmClusterOutput = &handles[1956]
+
+var DeleteExascaleDbStorageVaultInput = &handles[1957]
+var DeleteExascaleDbStorageVaultInput_exascaleDbStorageVaultId = &handles[1958]
+
+var DeleteExascaleDbStorageVaultOutput = &handles[1959]
+
+var DeleteOdbNetworkInput = &handles[1960]
+var DeleteOdbNetworkInput_odbNetworkId = &handles[1961]
+var DeleteOdbNetworkInput_deleteAssociatedResources = &handles[1962]
+
+var DeleteOdbNetworkOutput = &handles[1963]
+
+var DeleteOdbPeeringConnectionInput = &handles[1964]
+var DeleteOdbPeeringConnectionInput_odbPeeringConnectionId = &handles[1965]
+
+var DeleteOdbPeeringConnectionOutput = &handles[1966]
+
+var DisassociateIamRoleFromResourceInput = &handles[1967]
+var DisassociateIamRoleFromResourceInput_iamRoleArn = &handles[1968]
+var DisassociateIamRoleFromResourceInput_awsIntegration = &handles[1969]
+var DisassociateIamRoleFromResourceInput_resourceArn = &handles[1970]
+
+var DisassociateIamRoleFromResourceOutput = &handles[1971]
+
+var DisassociateVirtualMachinesFromExadbVmClusterInput = &handles[1972]
+var DisassociateVirtualMachinesFromExadbVmClusterInput_exadbVmClusterId = &handles[1973]
+var DisassociateVirtualMachinesFromExadbVmClusterInput_dbNodeIds = &handles[1974]
+
+var DisassociateVirtualMachinesFromExadbVmClusterOutput = &handles[1975]
+var DisassociateVirtualMachinesFromExadbVmClusterOutput_displayName = &handles[1976]
+var DisassociateVirtualMachinesFromExadbVmClusterOutput_status = &handles[1977]
+var DisassociateVirtualMachinesFromExadbVmClusterOutput_statusReason = &handles[1978]
+var DisassociateVirtualMachinesFromExadbVmClusterOutput_exadbVmClusterId = &handles[1979]
+
+var FailoverAutonomousDatabaseInput = &handles[1980]
+var FailoverAutonomousDatabaseInput_autonomousDatabaseId = &handles[1981]
+var FailoverAutonomousDatabaseInput_peerDbArn = &handles[1982]
+
+var FailoverAutonomousDatabaseOutput = &handles[1983]
+var FailoverAutonomousDatabaseOutput_autonomousDatabaseId = &handles[1984]
+var FailoverAutonomousDatabaseOutput_displayName = &handles[1985]
+var FailoverAutonomousDatabaseOutput_status = &handles[1986]
+var FailoverAutonomousDatabaseOutput_statusReason = &handles[1987]
+
+var GetAutonomousDatabaseBackupInput = &handles[1988]
+var GetAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = &handles[1989]
+
+var GetAutonomousDatabaseBackupOutput = &handles[1990]
+var GetAutonomousDatabaseBackupOutput_autonomousDatabaseBackup = &handles[1991]
+
+var GetAutonomousDatabaseInput = &handles[1992]
+var GetAutonomousDatabaseInput_autonomousDatabaseId = &handles[1993]
+
+var GetAutonomousDatabaseOutput = &handles[1994]
+var GetAutonomousDatabaseOutput_autonomousDatabase = &handles[1995]
+
+var GetAutonomousDatabaseWalletDetailsInput = &handles[1996]
+var GetAutonomousDatabaseWalletDetailsInput_autonomousDatabaseId = &handles[1997]
+
+var GetAutonomousDatabaseWalletDetailsOutput = &handles[1998]
+var GetAutonomousDatabaseWalletDetailsOutput_autonomousDatabaseWalletDetails = &handles[1999]
+
+var GetCloudAutonomousVmClusterInput = &handles[2000]
+var GetCloudAutonomousVmClusterInput_cloudAutonomousVmClusterId = &handles[2001]
+
+var GetCloudAutonomousVmClusterOutput = &handles[2002]
+var GetCloudAutonomousVmClusterOutput_cloudAutonomousVmCluster = &handles[2003]
+
+var GetCloudExadataInfrastructureInput = &handles[2004]
+var GetCloudExadataInfrastructureInput_cloudExadataInfrastructureId = &handles[2005]
+
+var GetCloudExadataInfrastructureOutput = &handles[2006]
+var GetCloudExadataInfrastructureOutput_cloudExadataInfrastructure = &handles[2007]
+
+var GetCloudExadataInfrastructureUnallocatedResourcesInput = &handles[2008]
+var GetCloudExadataInfrastructureUnallocatedResourcesInput_cloudExadataInfrastructureId = &handles[2009]
+var GetCloudExadataInfrastructureUnallocatedResourcesInput_dbServers = &handles[2010]
+
+var GetCloudExadataInfrastructureUnallocatedResourcesOutput = &handles[2011]
+var GetCloudExadataInfrastructureUnallocatedResourcesOutput_cloudExadataInfrastructureUnallocatedResources = &handles[2012]
+
+var GetCloudVmClusterInput = &handles[2013]
+var GetCloudVmClusterInput_cloudVmClusterId = &handles[2014]
+
+var GetCloudVmClusterOutput = &handles[2015]
+var GetCloudVmClusterOutput_cloudVmCluster = &handles[2016]
+
+var GetDbNodeInput = &handles[2017]
+var GetDbNodeInput_cloudVmClusterId = &handles[2018]
+var GetDbNodeInput_exadbVmClusterId = &handles[2019]
+var GetDbNodeInput_dbNodeId = &handles[2020]
+
+var GetDbNodeOutput = &handles[2021]
+var GetDbNodeOutput_dbNode = &handles[2022]
+
+var GetDbServerInput = &handles[2023]
+var GetDbServerInput_cloudExadataInfrastructureId = &handles[2024]
+var GetDbServerInput_dbServerId = &handles[2025]
+
+var GetDbServerOutput = &handles[2026]
+var GetDbServerOutput_dbServer = &handles[2027]
+
+var GetExadbVmClusterInput = &handles[2028]
+var GetExadbVmClusterInput_exadbVmClusterId = &handles[2029]
+
+var GetExadbVmClusterOutput = &handles[2030]
+var GetExadbVmClusterOutput_exadbVmCluster = &handles[2031]
+
+var GetExascaleDbStorageVaultInput = &handles[2032]
+var GetExascaleDbStorageVaultInput_exascaleDbStorageVaultId = &handles[2033]
+
+var GetExascaleDbStorageVaultOutput = &handles[2034]
+var GetExascaleDbStorageVaultOutput_exascaleDbStorageVault = &handles[2035]
+
+var GetOciOnboardingStatusInput = &handles[2036]
+
+var GetOciOnboardingStatusOutput = &handles[2037]
+var GetOciOnboardingStatusOutput_status = &handles[2038]
+var GetOciOnboardingStatusOutput_existingTenancyActivationLink = &handles[2039]
+var GetOciOnboardingStatusOutput_newTenancyActivationLink = &handles[2040]
+var GetOciOnboardingStatusOutput_ociIdentityDomain = &handles[2041]
+var GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles = &handles[2042]
+var GetOciOnboardingStatusOutput_linkedOciTenancyId = &handles[2043]
+var GetOciOnboardingStatusOutput_linkedOciCompartmentId = &handles[2044]
+var GetOciOnboardingStatusOutput_subscriptionErrors = &handles[2045]
+
+var GetOdbNetworkInput = &handles[2046]
+var GetOdbNetworkInput_odbNetworkId = &handles[2047]
+
+var GetOdbNetworkOutput = &handles[2048]
+var GetOdbNetworkOutput_odbNetwork = &handles[2049]
+
+var GetOdbPeeringConnectionInput = &handles[2050]
+var GetOdbPeeringConnectionInput_odbPeeringConnectionId = &handles[2051]
+
+var GetOdbPeeringConnectionOutput = &handles[2052]
+var GetOdbPeeringConnectionOutput_odbPeeringConnection = &handles[2053]
+
+var InitializeServiceInput = &handles[2054]
+var InitializeServiceInput_ociIdentityDomain = &handles[2055]
+var InitializeServiceInput_autonomousDatabaseOciAwsSecretsManagerIntegration = &handles[2056]
+
+var InitializeServiceOutput = &handles[2057]
+
+var ListAutonomousDatabaseBackupsInput = &handles[2058]
+var ListAutonomousDatabaseBackupsInput_maxResults = &handles[2059]
+var ListAutonomousDatabaseBackupsInput_nextToken = &handles[2060]
+var ListAutonomousDatabaseBackupsInput_autonomousDatabaseId = &handles[2061]
+var ListAutonomousDatabaseBackupsInput_status = &handles[2062]
+var ListAutonomousDatabaseBackupsInput_type = &handles[2063]
+
+var ListAutonomousDatabaseBackupsOutput = &handles[2064]
+var ListAutonomousDatabaseBackupsOutput_nextToken = &handles[2065]
+var ListAutonomousDatabaseBackupsOutput_autonomousDatabaseBackups = &handles[2066]
+
+var ListAutonomousDatabaseCharacterSetsInput = &handles[2067]
+var ListAutonomousDatabaseCharacterSetsInput_maxResults = &handles[2068]
+var ListAutonomousDatabaseCharacterSetsInput_nextToken = &handles[2069]
+var ListAutonomousDatabaseCharacterSetsInput_characterSetType = &handles[2070]
+
+var ListAutonomousDatabaseCharacterSetsOutput = &handles[2071]
+var ListAutonomousDatabaseCharacterSetsOutput_nextToken = &handles[2072]
+var ListAutonomousDatabaseCharacterSetsOutput_autonomousDatabaseCharacterSets = &handles[2073]
+
+var ListAutonomousDatabaseClonesInput = &handles[2074]
+var ListAutonomousDatabaseClonesInput_maxResults = &handles[2075]
+var ListAutonomousDatabaseClonesInput_nextToken = &handles[2076]
+var ListAutonomousDatabaseClonesInput_autonomousDatabaseId = &handles[2077]
+
+var ListAutonomousDatabaseClonesOutput = &handles[2078]
+var ListAutonomousDatabaseClonesOutput_nextToken = &handles[2079]
+var ListAutonomousDatabaseClonesOutput_autonomousDatabaseClones = &handles[2080]
+
+var ListAutonomousDatabasePeersInput = &handles[2081]
+var ListAutonomousDatabasePeersInput_maxResults = &handles[2082]
+var ListAutonomousDatabasePeersInput_nextToken = &handles[2083]
+var ListAutonomousDatabasePeersInput_autonomousDatabaseId = &handles[2084]
+
+var ListAutonomousDatabasePeersOutput = &handles[2085]
+var ListAutonomousDatabasePeersOutput_nextToken = &handles[2086]
+var ListAutonomousDatabasePeersOutput_autonomousDatabasePeers = &handles[2087]
+
+var ListAutonomousDatabasesInput = &handles[2088]
+var ListAutonomousDatabasesInput_maxResults = &handles[2089]
+var ListAutonomousDatabasesInput_nextToken = &handles[2090]
+
+var ListAutonomousDatabasesOutput = &handles[2091]
+var ListAutonomousDatabasesOutput_nextToken = &handles[2092]
+var ListAutonomousDatabasesOutput_autonomousDatabases = &handles[2093]
+
+var ListAutonomousDatabaseVersionsInput = &handles[2094]
+var ListAutonomousDatabaseVersionsInput_maxResults = &handles[2095]
+var ListAutonomousDatabaseVersionsInput_nextToken = &handles[2096]
+var ListAutonomousDatabaseVersionsInput_dbWorkload = &handles[2097]
+
+var ListAutonomousDatabaseVersionsOutput = &handles[2098]
+var ListAutonomousDatabaseVersionsOutput_nextToken = &handles[2099]
+var ListAutonomousDatabaseVersionsOutput_autonomousDatabaseVersions = &handles[2100]
+
+var ListAutonomousVirtualMachinesInput = &handles[2101]
+var ListAutonomousVirtualMachinesInput_maxResults = &handles[2102]
+var ListAutonomousVirtualMachinesInput_nextToken = &handles[2103]
+var ListAutonomousVirtualMachinesInput_cloudAutonomousVmClusterId = &handles[2104]
+
+var ListAutonomousVirtualMachinesOutput = &handles[2105]
+var ListAutonomousVirtualMachinesOutput_nextToken = &handles[2106]
+var ListAutonomousVirtualMachinesOutput_autonomousVirtualMachines = &handles[2107]
+
+var ListCloudAutonomousVmClustersInput = &handles[2108]
+var ListCloudAutonomousVmClustersInput_maxResults = &handles[2109]
+var ListCloudAutonomousVmClustersInput_nextToken = &handles[2110]
+var ListCloudAutonomousVmClustersInput_cloudExadataInfrastructureId = &handles[2111]
+
+var ListCloudAutonomousVmClustersOutput = &handles[2112]
+var ListCloudAutonomousVmClustersOutput_nextToken = &handles[2113]
+var ListCloudAutonomousVmClustersOutput_cloudAutonomousVmClusters = &handles[2114]
+
+var ListCloudExadataInfrastructuresInput = &handles[2115]
+var ListCloudExadataInfrastructuresInput_maxResults = &handles[2116]
+var ListCloudExadataInfrastructuresInput_nextToken = &handles[2117]
+
+var ListCloudExadataInfrastructuresOutput = &handles[2118]
+var ListCloudExadataInfrastructuresOutput_nextToken = &handles[2119]
+var ListCloudExadataInfrastructuresOutput_cloudExadataInfrastructures = &handles[2120]
+
+var ListCloudVmClustersInput = &handles[2121]
+var ListCloudVmClustersInput_maxResults = &handles[2122]
+var ListCloudVmClustersInput_nextToken = &handles[2123]
+var ListCloudVmClustersInput_cloudExadataInfrastructureId = &handles[2124]
+
+var ListCloudVmClustersOutput = &handles[2125]
+var ListCloudVmClustersOutput_nextToken = &handles[2126]
+var ListCloudVmClustersOutput_cloudVmClusters = &handles[2127]
+
+var ListDbNodesInput = &handles[2128]
+var ListDbNodesInput_maxResults = &handles[2129]
+var ListDbNodesInput_nextToken = &handles[2130]
+var ListDbNodesInput_cloudVmClusterId = &handles[2131]
+var ListDbNodesInput_exadbVmClusterId = &handles[2132]
+
+var ListDbNodesOutput = &handles[2133]
+var ListDbNodesOutput_nextToken = &handles[2134]
+var ListDbNodesOutput_dbNodes = &handles[2135]
+
+var ListDbServersInput = &handles[2136]
+var ListDbServersInput_cloudExadataInfrastructureId = &handles[2137]
+var ListDbServersInput_maxResults = &handles[2138]
+var ListDbServersInput_nextToken = &handles[2139]
+
+var ListDbServersOutput = &handles[2140]
+var ListDbServersOutput_nextToken = &handles[2141]
+var ListDbServersOutput_dbServers = &handles[2142]
+
+var ListDbSystemShapesInput = &handles[2143]
+var ListDbSystemShapesInput_maxResults = &handles[2144]
+var ListDbSystemShapesInput_nextToken = &handles[2145]
+var ListDbSystemShapesInput_availabilityZone = &handles[2146]
+var ListDbSystemShapesInput_availabilityZoneId = &handles[2147]
+var ListDbSystemShapesInput_shapeFamily = &handles[2148]
+
+var ListDbSystemShapesOutput = &handles[2149]
+var ListDbSystemShapesOutput_nextToken = &handles[2150]
+var ListDbSystemShapesOutput_dbSystemShapes = &handles[2151]
+
+var ListExadbVmClustersInput = &handles[2152]
+var ListExadbVmClustersInput_exascaleDbStorageVaultId = &handles[2153]
+var ListExadbVmClustersInput_maxResults = &handles[2154]
+var ListExadbVmClustersInput_nextToken = &handles[2155]
+
+var ListExadbVmClustersOutput = &handles[2156]
+var ListExadbVmClustersOutput_nextToken = &handles[2157]
+var ListExadbVmClustersOutput_exadbVmClusters = &handles[2158]
+
+var ListExascaleDbStorageVaultsInput = &handles[2159]
+var ListExascaleDbStorageVaultsInput_maxResults = &handles[2160]
+var ListExascaleDbStorageVaultsInput_nextToken = &handles[2161]
+var ListExascaleDbStorageVaultsInput_cloudExadataInfrastructureId = &handles[2162]
+var ListExascaleDbStorageVaultsInput_vaultType = &handles[2163]
+
+var ListExascaleDbStorageVaultsOutput = &handles[2164]
+var ListExascaleDbStorageVaultsOutput_nextToken = &handles[2165]
+var ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults = &handles[2166]
+
+var ListFlexComponentsInput = &handles[2167]
+var ListFlexComponentsInput_maxResults = &handles[2168]
+var ListFlexComponentsInput_nextToken = &handles[2169]
+var ListFlexComponentsInput_shape = &handles[2170]
+
+var ListFlexComponentsOutput = &handles[2171]
+var ListFlexComponentsOutput_nextToken = &handles[2172]
+var ListFlexComponentsOutput_flexComponents = &handles[2173]
+
+var ListGiMinorVersionsInput = &handles[2174]
+var ListGiMinorVersionsInput_giVersion = &handles[2175]
+var ListGiMinorVersionsInput_maxResults = &handles[2176]
+var ListGiMinorVersionsInput_nextToken = &handles[2177]
+var ListGiMinorVersionsInput_shapeFamily = &handles[2178]
+var ListGiMinorVersionsInput_availabilityZone = &handles[2179]
+var ListGiMinorVersionsInput_availabilityZoneId = &handles[2180]
+
+var ListGiMinorVersionsOutput = &handles[2181]
+var ListGiMinorVersionsOutput_nextToken = &handles[2182]
+var ListGiMinorVersionsOutput_giMinorVersions = &handles[2183]
+
+var ListGiVersionsInput = &handles[2184]
+var ListGiVersionsInput_maxResults = &handles[2185]
+var ListGiVersionsInput_nextToken = &handles[2186]
+var ListGiVersionsInput_shape = &handles[2187]
+
+var ListGiVersionsOutput = &handles[2188]
+var ListGiVersionsOutput_nextToken = &handles[2189]
+var ListGiVersionsOutput_giVersions = &handles[2190]
+
+var ListOdbNetworksInput = &handles[2191]
+var ListOdbNetworksInput_maxResults = &handles[2192]
+var ListOdbNetworksInput_nextToken = &handles[2193]
+
+var ListOdbNetworksOutput = &handles[2194]
+var ListOdbNetworksOutput_nextToken = &handles[2195]
+var ListOdbNetworksOutput_odbNetworks = &handles[2196]
+
+var ListOdbPeeringConnectionsInput = &handles[2197]
+var ListOdbPeeringConnectionsInput_maxResults = &handles[2198]
+var ListOdbPeeringConnectionsInput_nextToken = &handles[2199]
+var ListOdbPeeringConnectionsInput_odbNetworkId = &handles[2200]
+
+var ListOdbPeeringConnectionsOutput = &handles[2201]
+var ListOdbPeeringConnectionsOutput_nextToken = &handles[2202]
+var ListOdbPeeringConnectionsOutput_odbPeeringConnections = &handles[2203]
+
+var ListSystemVersionsInput = &handles[2204]
+var ListSystemVersionsInput_maxResults = &handles[2205]
+var ListSystemVersionsInput_nextToken = &handles[2206]
+var ListSystemVersionsInput_giVersion = &handles[2207]
+var ListSystemVersionsInput_shape = &handles[2208]
+
+var ListSystemVersionsOutput = &handles[2209]
+var ListSystemVersionsOutput_nextToken = &handles[2210]
+var ListSystemVersionsOutput_systemVersions = &handles[2211]
+
+var ListTagsForResourceRequest = &handles[2212]
+var ListTagsForResourceRequest_resourceArn = &handles[2213]
+
+var ListTagsForResourceResponse = &handles[2214]
+var ListTagsForResourceResponse_tags = &handles[2215]
+
+var RebootAutonomousDatabaseInput = &handles[2216]
+var RebootAutonomousDatabaseInput_autonomousDatabaseId = &handles[2217]
+var RebootAutonomousDatabaseInput_isOnlineReboot = &handles[2218]
+
+var RebootAutonomousDatabaseOutput = &handles[2219]
+var RebootAutonomousDatabaseOutput_autonomousDatabaseId = &handles[2220]
+var RebootAutonomousDatabaseOutput_displayName = &handles[2221]
+var RebootAutonomousDatabaseOutput_status = &handles[2222]
+var RebootAutonomousDatabaseOutput_statusReason = &handles[2223]
+
+var RebootDbNodeInput = &handles[2224]
+var RebootDbNodeInput_cloudVmClusterId = &handles[2225]
+var RebootDbNodeInput_exadbVmClusterId = &handles[2226]
+var RebootDbNodeInput_dbNodeId = &handles[2227]
+
+var RebootDbNodeOutput = &handles[2228]
+var RebootDbNodeOutput_dbNodeId = &handles[2229]
+var RebootDbNodeOutput_status = &handles[2230]
+var RebootDbNodeOutput_statusReason = &handles[2231]
+
+var RestoreAutonomousDatabaseInput = &handles[2232]
+var RestoreAutonomousDatabaseInput_autonomousDatabaseId = &handles[2233]
+var RestoreAutonomousDatabaseInput_timestamp = &handles[2234]
+
+var RestoreAutonomousDatabaseOutput = &handles[2235]
+var RestoreAutonomousDatabaseOutput_autonomousDatabaseId = &handles[2236]
+var RestoreAutonomousDatabaseOutput_displayName = &handles[2237]
+var RestoreAutonomousDatabaseOutput_status = &handles[2238]
+var RestoreAutonomousDatabaseOutput_statusReason = &handles[2239]
+
+var ShrinkAutonomousDatabaseInput = &handles[2240]
+var ShrinkAutonomousDatabaseInput_autonomousDatabaseId = &handles[2241]
+
+var ShrinkAutonomousDatabaseOutput = &handles[2242]
+var ShrinkAutonomousDatabaseOutput_autonomousDatabaseId = &handles[2243]
+var ShrinkAutonomousDatabaseOutput_displayName = &handles[2244]
+var ShrinkAutonomousDatabaseOutput_status = &handles[2245]
+var ShrinkAutonomousDatabaseOutput_statusReason = &handles[2246]
+
+var StartAutonomousDatabaseInput = &handles[2247]
+var StartAutonomousDatabaseInput_autonomousDatabaseId = &handles[2248]
+
+var StartAutonomousDatabaseOutput = &handles[2249]
+var StartAutonomousDatabaseOutput_autonomousDatabaseId = &handles[2250]
+var StartAutonomousDatabaseOutput_displayName = &handles[2251]
+var StartAutonomousDatabaseOutput_status = &handles[2252]
+var StartAutonomousDatabaseOutput_statusReason = &handles[2253]
+
+var StartDbNodeInput = &handles[2254]
+var StartDbNodeInput_cloudVmClusterId = &handles[2255]
+var StartDbNodeInput_exadbVmClusterId = &handles[2256]
+var StartDbNodeInput_dbNodeId = &handles[2257]
+
+var StartDbNodeOutput = &handles[2258]
+var StartDbNodeOutput_dbNodeId = &handles[2259]
+var StartDbNodeOutput_status = &handles[2260]
+var StartDbNodeOutput_statusReason = &handles[2261]
+
+var StopAutonomousDatabaseInput = &handles[2262]
+var StopAutonomousDatabaseInput_autonomousDatabaseId = &handles[2263]
+
+var StopAutonomousDatabaseOutput = &handles[2264]
+var StopAutonomousDatabaseOutput_autonomousDatabaseId = &handles[2265]
+var StopAutonomousDatabaseOutput_displayName = &handles[2266]
+var StopAutonomousDatabaseOutput_status = &handles[2267]
+var StopAutonomousDatabaseOutput_statusReason = &handles[2268]
+
+var StopDbNodeInput = &handles[2269]
+var StopDbNodeInput_cloudVmClusterId = &handles[2270]
+var StopDbNodeInput_exadbVmClusterId = &handles[2271]
+var StopDbNodeInput_dbNodeId = &handles[2272]
+
+var StopDbNodeOutput = &handles[2273]
+var StopDbNodeOutput_dbNodeId = &handles[2274]
+var StopDbNodeOutput_status = &handles[2275]
+var StopDbNodeOutput_statusReason = &handles[2276]
+
+var SwitchoverAutonomousDatabaseInput = &handles[2277]
+var SwitchoverAutonomousDatabaseInput_autonomousDatabaseId = &handles[2278]
+var SwitchoverAutonomousDatabaseInput_peerDbArn = &handles[2279]
+
+var SwitchoverAutonomousDatabaseOutput = &handles[2280]
+var SwitchoverAutonomousDatabaseOutput_autonomousDatabaseId = &handles[2281]
+var SwitchoverAutonomousDatabaseOutput_displayName = &handles[2282]
+var SwitchoverAutonomousDatabaseOutput_status = &handles[2283]
+var SwitchoverAutonomousDatabaseOutput_statusReason = &handles[2284]
+
+var TagResourceRequest = &handles[2285]
+var TagResourceRequest_resourceArn = &handles[2286]
+var TagResourceRequest_tags = &handles[2287]
+
+var TagResourceResponse = &handles[2288]
+
+var UntagResourceRequest = &handles[2289]
+var UntagResourceRequest_resourceArn = &handles[2290]
+var UntagResourceRequest_tagKeys = &handles[2291]
+
+var UntagResourceResponse = &handles[2292]
+
+var UpdateAutonomousDatabaseBackupInput = &handles[2293]
+var UpdateAutonomousDatabaseBackupInput_autonomousDatabaseBackupId = &handles[2294]
+var UpdateAutonomousDatabaseBackupInput_retentionPeriodInDays = &handles[2295]
+
+var UpdateAutonomousDatabaseBackupOutput = &handles[2296]
+var UpdateAutonomousDatabaseBackupOutput_displayName = &handles[2297]
+var UpdateAutonomousDatabaseBackupOutput_status = &handles[2298]
+var UpdateAutonomousDatabaseBackupOutput_statusReason = &handles[2299]
+var UpdateAutonomousDatabaseBackupOutput_autonomousDatabaseBackupId = &handles[2300]
+
+var UpdateAutonomousDatabaseInput = &handles[2301]
+var UpdateAutonomousDatabaseInput_autonomousDatabaseId = &handles[2302]
+var UpdateAutonomousDatabaseInput_adminPassword = &handles[2303]
+var UpdateAutonomousDatabaseInput_computeCount = &handles[2304]
+var UpdateAutonomousDatabaseInput_cpuCoreCount = &handles[2305]
+var UpdateAutonomousDatabaseInput_dataStorageSizeInTBs = &handles[2306]
+var UpdateAutonomousDatabaseInput_dataStorageSizeInGBs = &handles[2307]
+var UpdateAutonomousDatabaseInput_displayName = &handles[2308]
+var UpdateAutonomousDatabaseInput_dbName = &handles[2309]
+var UpdateAutonomousDatabaseInput_dbVersion = &handles[2310]
+var UpdateAutonomousDatabaseInput_dbWorkload = &handles[2311]
+var UpdateAutonomousDatabaseInput_dbToolsDetails = &handles[2312]
+var UpdateAutonomousDatabaseInput_databaseEdition = &handles[2313]
+var UpdateAutonomousDatabaseInput_licenseModel = &handles[2314]
+var UpdateAutonomousDatabaseInput_isAutoScalingEnabled = &handles[2315]
+var UpdateAutonomousDatabaseInput_isAutoScalingForStorageEnabled = &handles[2316]
+var UpdateAutonomousDatabaseInput_isBackupRetentionLocked = &handles[2317]
+var UpdateAutonomousDatabaseInput_isLocalDataGuardEnabled = &handles[2318]
+var UpdateAutonomousDatabaseInput_isMtlsConnectionRequired = &handles[2319]
+var UpdateAutonomousDatabaseInput_isRefreshableClone = &handles[2320]
+var UpdateAutonomousDatabaseInput_isDisconnectPeer = &handles[2321]
+var UpdateAutonomousDatabaseInput_backupRetentionPeriodInDays = &handles[2322]
+var UpdateAutonomousDatabaseInput_byolComputeCountLimit = &handles[2323]
+var UpdateAutonomousDatabaseInput_localAdgAutoFailoverMaxDataLossLimit = &handles[2324]
+var UpdateAutonomousDatabaseInput_autonomousMaintenanceScheduleType = &handles[2325]
+var UpdateAutonomousDatabaseInput_customerContactsToSendToOCI = &handles[2326]
+var UpdateAutonomousDatabaseInput_scheduledOperations = &handles[2327]
+var UpdateAutonomousDatabaseInput_longTermBackupSchedule = &handles[2328]
+var UpdateAutonomousDatabaseInput_openMode = &handles[2329]
+var UpdateAutonomousDatabaseInput_permissionLevel = &handles[2330]
+var UpdateAutonomousDatabaseInput_refreshableMode = &handles[2331]
+var UpdateAutonomousDatabaseInput_privateEndpointIp = &handles[2332]
+var UpdateAutonomousDatabaseInput_privateEndpointLabel = &handles[2333]
+var UpdateAutonomousDatabaseInput_peerDbId = &handles[2334]
+var UpdateAutonomousDatabaseInput_resourcePoolLeaderId = &handles[2335]
+var UpdateAutonomousDatabaseInput_resourcePoolSummary = &handles[2336]
+var UpdateAutonomousDatabaseInput_standbyAllowlistedIpsSource = &handles[2337]
+var UpdateAutonomousDatabaseInput_standbyAllowlistedIps = &handles[2338]
+var UpdateAutonomousDatabaseInput_allowlistedIps = &handles[2339]
+var UpdateAutonomousDatabaseInput_autoRefreshFrequencyInSeconds = &handles[2340]
+var UpdateAutonomousDatabaseInput_autoRefreshPointLagInSeconds = &handles[2341]
+var UpdateAutonomousDatabaseInput_timeOfAutoRefreshStart = &handles[2342]
+var UpdateAutonomousDatabaseInput_encryptionKeyProvider = &handles[2343]
+var UpdateAutonomousDatabaseInput_encryptionKeyConfiguration = &handles[2344]
+var UpdateAutonomousDatabaseInput_adminPasswordSource = &handles[2345]
+var UpdateAutonomousDatabaseInput_adminPasswordSourceConfiguration = &handles[2346]
+
+var UpdateAutonomousDatabaseOutput = &handles[2347]
+var UpdateAutonomousDatabaseOutput_autonomousDatabaseId = &handles[2348]
+var UpdateAutonomousDatabaseOutput_displayName = &handles[2349]
+var UpdateAutonomousDatabaseOutput_status = &handles[2350]
+var UpdateAutonomousDatabaseOutput_statusReason = &handles[2351]
+
+var UpdateCloudExadataInfrastructureInput = &handles[2352]
+var UpdateCloudExadataInfrastructureInput_cloudExadataInfrastructureId = &handles[2353]
+var UpdateCloudExadataInfrastructureInput_maintenanceWindow = &handles[2354]
+
+var UpdateCloudExadataInfrastructureOutput = &handles[2355]
+var UpdateCloudExadataInfrastructureOutput_displayName = &handles[2356]
+var UpdateCloudExadataInfrastructureOutput_status = &handles[2357]
+var UpdateCloudExadataInfrastructureOutput_statusReason = &handles[2358]
+var UpdateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = &handles[2359]
+
+var UpdateExadbVmClusterInput = &handles[2360]
+var UpdateExadbVmClusterInput_exadbVmClusterId = &handles[2361]
+var UpdateExadbVmClusterInput_dataCollectionOptions = &handles[2362]
+var UpdateExadbVmClusterInput_displayName = &handles[2363]
+var UpdateExadbVmClusterInput_enabledEcpuCount = &handles[2364]
+var UpdateExadbVmClusterInput_gridImageId = &handles[2365]
+var UpdateExadbVmClusterInput_licenseModel = &handles[2366]
+var UpdateExadbVmClusterInput_sshPublicKeys = &handles[2367]
+var UpdateExadbVmClusterInput_systemVersion = &handles[2368]
+var UpdateExadbVmClusterInput_totalEcpuCount = &handles[2369]
+var UpdateExadbVmClusterInput_updateAction = &handles[2370]
+var UpdateExadbVmClusterInput_vmFileSystemStorageTotalSizeInGBs = &handles[2371]
+
+var UpdateExadbVmClusterOutput = &handles[2372]
+var UpdateExadbVmClusterOutput_displayName = &handles[2373]
+var UpdateExadbVmClusterOutput_status = &handles[2374]
+var UpdateExadbVmClusterOutput_statusReason = &handles[2375]
+var UpdateExadbVmClusterOutput_exadbVmClusterId = &handles[2376]
+
+var UpdateExascaleCloudExadataInfrastructureInput = &handles[2377]
+var UpdateExascaleCloudExadataInfrastructureInput_cloudExadataInfrastructureId = &handles[2378]
+var UpdateExascaleCloudExadataInfrastructureInput_totalStorageSizeInGBs = &handles[2379]
+var UpdateExascaleCloudExadataInfrastructureInput_totalVmStorageSizeInGBs = &handles[2380]
+
+var UpdateExascaleCloudExadataInfrastructureOutput = &handles[2381]
+var UpdateExascaleCloudExadataInfrastructureOutput_displayName = &handles[2382]
+var UpdateExascaleCloudExadataInfrastructureOutput_status = &handles[2383]
+var UpdateExascaleCloudExadataInfrastructureOutput_statusReason = &handles[2384]
+var UpdateExascaleCloudExadataInfrastructureOutput_cloudExadataInfrastructureId = &handles[2385]
+
+var UpdateExascaleDbStorageVaultInput = &handles[2386]
+var UpdateExascaleDbStorageVaultInput_exascaleDbStorageVaultId = &handles[2387]
+var UpdateExascaleDbStorageVaultInput_additionalFlashCacheInPercent = &handles[2388]
+var UpdateExascaleDbStorageVaultInput_autoscaleLimitInGBs = &handles[2389]
+var UpdateExascaleDbStorageVaultInput_description = &handles[2390]
+var UpdateExascaleDbStorageVaultInput_displayName = &handles[2391]
+var UpdateExascaleDbStorageVaultInput_highCapacityDatabaseStorageTotalSizeInGBs = &handles[2392]
+var UpdateExascaleDbStorageVaultInput_isAutoscaleEnabled = &handles[2393]
+
+var UpdateExascaleDbStorageVaultOutput = &handles[2394]
+var UpdateExascaleDbStorageVaultOutput_displayName = &handles[2395]
+var UpdateExascaleDbStorageVaultOutput_status = &handles[2396]
+var UpdateExascaleDbStorageVaultOutput_statusReason = &handles[2397]
+var UpdateExascaleDbStorageVaultOutput_exascaleDbStorageVaultId = &handles[2398]
+
+var UpdateOdbNetworkInput = &handles[2399]
+var UpdateOdbNetworkInput_odbNetworkId = &handles[2400]
+var UpdateOdbNetworkInput_displayName = &handles[2401]
+var UpdateOdbNetworkInput_peeredCidrsToBeAdded = &handles[2402]
+var UpdateOdbNetworkInput_peeredCidrsToBeRemoved = &handles[2403]
+var UpdateOdbNetworkInput_s3Access = &handles[2404]
+var UpdateOdbNetworkInput_zeroEtlAccess = &handles[2405]
+var UpdateOdbNetworkInput_stsAccess = &handles[2406]
+var UpdateOdbNetworkInput_kmsAccess = &handles[2407]
+var UpdateOdbNetworkInput_s3PolicyDocument = &handles[2408]
+var UpdateOdbNetworkInput_stsPolicyDocument = &handles[2409]
+var UpdateOdbNetworkInput_kmsPolicyDocument = &handles[2410]
+var UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToEnable = &handles[2411]
+var UpdateOdbNetworkInput_crossRegionS3RestoreSourcesToDisable = &handles[2412]
+
+var UpdateOdbNetworkOutput = &handles[2413]
+var UpdateOdbNetworkOutput_displayName = &handles[2414]
+var UpdateOdbNetworkOutput_status = &handles[2415]
+var UpdateOdbNetworkOutput_statusReason = &handles[2416]
+var UpdateOdbNetworkOutput_odbNetworkId = &handles[2417]
+
+var UpdateOdbPeeringConnectionInput = &handles[2418]
+var UpdateOdbPeeringConnectionInput_odbPeeringConnectionId = &handles[2419]
+var UpdateOdbPeeringConnectionInput_displayName = &handles[2420]
+var UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeAdded = &handles[2421]
+var UpdateOdbPeeringConnectionInput_peerNetworkCidrsToBeRemoved = &handles[2422]
+
+var UpdateOdbPeeringConnectionOutput = &handles[2423]
+var UpdateOdbPeeringConnectionOutput_displayName = &handles[2424]
+var UpdateOdbPeeringConnectionOutput_status = &handles[2425]
+var UpdateOdbPeeringConnectionOutput_statusReason = &handles[2426]
+var UpdateOdbPeeringConnectionOutput_odbPeeringConnectionId = &handles[2427]
+
+var Odb = &smithy.ServiceSchema{Schema: &handles[81], Version: "2024-08-20"}

@@ -4,1139 +4,990 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BulkPublish = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "BulkPublish",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/identitypools/{IdentityPoolId}/bulkpublish",
-	Code: 200})
-
-var DeleteDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DeleteDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
-	Code: 200})
-
-var DescribeDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
-	Code: 200})
-
-var DescribeIdentityPoolUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeIdentityPoolUsage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/identitypools/{IdentityPoolId}",
-	Code: 200})
-
-var DescribeIdentityUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeIdentityUsage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}",
-	Code: 200})
-
-var GetBulkPublishDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetBulkPublishDetails",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/identitypools/{IdentityPoolId}/getBulkPublishDetails",
-	Code: 200})
-
-var GetCognitoEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetCognitoEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/identitypools/{IdentityPoolId}/events",
-	Code: 200})
-
-var GetIdentityPoolConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetIdentityPoolConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/identitypools/{IdentityPoolId}/configuration",
-	Code: 200})
-
-var ListDatasets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListDatasets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets",
-	Code: 200})
-
-var ListIdentityPoolUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListIdentityPoolUsage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/identitypools",
-	Code: 200})
-
-var ListRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListRecords",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/records",
-	Code: 200})
-
-var RegisterDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "RegisterDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/identitypools/{IdentityPoolId}/identity/{IdentityId}/device",
-	Code: 200})
-
-var SetCognitoEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SetCognitoEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/identitypools/{IdentityPoolId}/events",
-	Code: 200})
-
-var SetIdentityPoolConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SetIdentityPoolConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/identitypools/{IdentityPoolId}/configuration",
-	Code: 200})
-
-var SubscribeToDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SubscribeToDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}",
-	Code: 200})
-
-var UnsubscribeFromDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "UnsubscribeFromDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}",
-	Code: 200})
-
-var UpdateRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "UpdateRecords",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
-	Code: 200})
-
-var _AWSCognitoSyncService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "AWSCognitoSyncService",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://cognito-sync.amazonaws.com/doc/2014-06-30/"})
-
-var AWSCognitoSyncService = smithy.NewServiceSchema(_AWSCognitoSyncService, "2014-06-30")
-
-var AlreadyStreamedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "AlreadyStreamedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AlreadyStreamed",
-		StatusCode: 400})
-var AlreadyStreamedException_message *smithy.Schema
-
-var _ApplicationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ApplicationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ApplicationArnList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationArnList_member *smithy.Schema
-
-var _AssumeRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "AssumeRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BulkPublishStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "BulkPublishStatus",
-}, smithy.ShapeTypeEnum, 4)
-var BulkPublishStatus_NOT_STARTED *smithy.Schema
-
-var BulkPublishStatus_IN_PROGRESS *smithy.Schema
-
-var BulkPublishStatus_FAILED *smithy.Schema
-
-var BulkPublishStatus_SUCCEEDED *smithy.Schema
-
-var _ClientContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ClientContext",
-}, smithy.ShapeTypeString, 0)
-
-var _CognitoEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "CognitoEventType",
-}, smithy.ShapeTypeString, 0)
-
-var CognitoStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "CognitoStreams",
-}, smithy.ShapeTypeStructure, 3)
-var CognitoStreams_StreamName *smithy.Schema
-
-var CognitoStreams_RoleArn *smithy.Schema
-
-var CognitoStreams_StreamingStatus *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModification",
-		StatusCode: 400})
-var ConcurrentModificationException_message *smithy.Schema
-
-var Dataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Dataset",
-}, smithy.ShapeTypeStructure, 7)
-var Dataset_IdentityId *smithy.Schema
-
-var Dataset_DatasetName *smithy.Schema
-
-var Dataset_CreationDate *smithy.Schema
-
-var Dataset_LastModifiedDate *smithy.Schema
-
-var Dataset_LastModifiedBy *smithy.Schema
-
-var Dataset_DataStorage *smithy.Schema
-
-var Dataset_NumRecords *smithy.Schema
-
-var _DatasetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DatasetList",
-}, smithy.ShapeTypeList, 1)
-var _DatasetList_member *smithy.Schema
-
-var _DatasetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DatasetName",
-}, smithy.ShapeTypeString, 0)
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DeviceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DeviceId",
-}, smithy.ShapeTypeString, 0)
-
-var DuplicateRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DuplicateRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DuplicateRequest",
-		StatusCode: 400})
-var DuplicateRequestException_message *smithy.Schema
-
-var _Events = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Events",
-}, smithy.ShapeTypeMap, 2)
-var _Events_key *smithy.Schema
-
-var _Events_value *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "IdentityId",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityPoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "IdentityPoolId",
-}, smithy.ShapeTypeString, 0)
-
-var IdentityPoolUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "IdentityPoolUsage",
-}, smithy.ShapeTypeStructure, 4)
-var IdentityPoolUsage_IdentityPoolId *smithy.Schema
-
-var IdentityPoolUsage_SyncSessionsCount *smithy.Schema
-
-var IdentityPoolUsage_DataStorage *smithy.Schema
-
-var IdentityPoolUsage_LastModifiedDate *smithy.Schema
-
-var _IdentityPoolUsageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "IdentityPoolUsageList",
-}, smithy.ShapeTypeList, 1)
-var _IdentityPoolUsageList_member *smithy.Schema
-
-var IdentityUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "IdentityUsage",
-}, smithy.ShapeTypeStructure, 5)
-var IdentityUsage_IdentityId *smithy.Schema
-
-var IdentityUsage_IdentityPoolId *smithy.Schema
-
-var IdentityUsage_LastModifiedDate *smithy.Schema
-
-var IdentityUsage_DatasetCount *smithy.Schema
-
-var IdentityUsage_DataStorage *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "IntegerString",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalError",
-		StatusCode: 500})
-var InternalErrorException_message *smithy.Schema
-
-var InvalidConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "InvalidConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidConfiguration",
-		StatusCode: 400})
-var InvalidConfigurationException_message *smithy.Schema
-
-var InvalidLambdaFunctionOutputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "InvalidLambdaFunctionOutputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidLambdaFunctionOutput",
-		StatusCode: 400})
-var InvalidLambdaFunctionOutputException_message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
-		StatusCode: 400})
-var InvalidParameterException_message *smithy.Schema
-
-var _LambdaFunctionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "LambdaFunctionArn",
-}, smithy.ShapeTypeString, 0)
-
-var LambdaThrottledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "LambdaThrottledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "LambdaThrottled",
-		StatusCode: 429})
-var LambdaThrottledException_message *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "LimitExceeded",
-		StatusCode: 400})
-var LimitExceededException_message *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MergedDatasetNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "MergedDatasetNameList",
-}, smithy.ShapeTypeList, 1)
-var _MergedDatasetNameList_member *smithy.Schema
-
-var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "NotAuthorizedError",
-		StatusCode: 403})
-var NotAuthorizedException_message *smithy.Schema
-
-var Operation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Operation",
-}, smithy.ShapeTypeEnum, 2)
-var Operation_replace *smithy.Schema
-
-var Operation_remove *smithy.Schema
-
-var Platform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Platform",
-}, smithy.ShapeTypeEnum, 4)
-var Platform_APNS *smithy.Schema
-
-var Platform_APNS_SANDBOX *smithy.Schema
-
-var Platform_GCM *smithy.Schema
-
-var Platform_ADM *smithy.Schema
-
-var PushSync = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "PushSync",
-}, smithy.ShapeTypeStructure, 2)
-var PushSync_ApplicationArns *smithy.Schema
-
-var PushSync_RoleArn *smithy.Schema
-
-var _PushToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "PushToken",
-}, smithy.ShapeTypeString, 0)
-
-var Record = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "Record",
-}, smithy.ShapeTypeStructure, 6)
-var Record_Key *smithy.Schema
-
-var Record_Value *smithy.Schema
-
-var Record_SyncCount *smithy.Schema
-
-var Record_LastModifiedDate *smithy.Schema
-
-var Record_LastModifiedBy *smithy.Schema
-
-var Record_DeviceLastModifiedDate *smithy.Schema
-
-var _RecordKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "RecordKey",
-}, smithy.ShapeTypeString, 0)
-
-var _RecordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "RecordList",
-}, smithy.ShapeTypeList, 1)
-var _RecordList_member *smithy.Schema
-
-var RecordPatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "RecordPatch",
-}, smithy.ShapeTypeStructure, 5)
-var RecordPatch_Op *smithy.Schema
-
-var RecordPatch_Key *smithy.Schema
-
-var RecordPatch_Value *smithy.Schema
-
-var RecordPatch_SyncCount *smithy.Schema
-
-var RecordPatch_DeviceLastModifiedDate *smithy.Schema
-
-var _RecordPatchList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "RecordPatchList",
-}, smithy.ShapeTypeList, 1)
-var _RecordPatchList_member *smithy.Schema
-
-var _RecordValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "RecordValue",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceConflict",
-		StatusCode: 409})
-var ResourceConflictException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
-		StatusCode: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var StreamingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "StreamingStatus",
-}, smithy.ShapeTypeEnum, 2)
-var StreamingStatus_ENABLED *smithy.Schema
-
-var StreamingStatus_DISABLED *smithy.Schema
-
-var _StreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "StreamName",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _SyncSessionToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SyncSessionToken",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "TooManyRequests",
-		StatusCode: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var BulkPublishRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "BulkPublishRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BulkPublishRequest_IdentityPoolId *smithy.Schema
-
-var BulkPublishResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "BulkPublishResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BulkPublishResponse_IdentityPoolId *smithy.Schema
-
-var DeleteDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DeleteDatasetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDatasetRequest_IdentityPoolId *smithy.Schema
-
-var DeleteDatasetRequest_IdentityId *smithy.Schema
-
-var DeleteDatasetRequest_DatasetName *smithy.Schema
-
-var DeleteDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DeleteDatasetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatasetResponse_Dataset *smithy.Schema
-
-var DescribeDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeDatasetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeDatasetRequest_IdentityPoolId *smithy.Schema
-
-var DescribeDatasetRequest_IdentityId *smithy.Schema
-
-var DescribeDatasetRequest_DatasetName *smithy.Schema
-
-var DescribeDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeDatasetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDatasetResponse_Dataset *smithy.Schema
-
-var DescribeIdentityPoolUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeIdentityPoolUsageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeIdentityPoolUsageRequest_IdentityPoolId *smithy.Schema
-
-var DescribeIdentityPoolUsageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeIdentityPoolUsageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeIdentityPoolUsageResponse_IdentityPoolUsage *smithy.Schema
-
-var DescribeIdentityUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeIdentityUsageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeIdentityUsageRequest_IdentityPoolId *smithy.Schema
-
-var DescribeIdentityUsageRequest_IdentityId *smithy.Schema
-
-var DescribeIdentityUsageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "DescribeIdentityUsageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeIdentityUsageResponse_IdentityUsage *smithy.Schema
-
-var GetBulkPublishDetailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetBulkPublishDetailsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetBulkPublishDetailsRequest_IdentityPoolId *smithy.Schema
-
-var GetBulkPublishDetailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetBulkPublishDetailsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetBulkPublishDetailsResponse_IdentityPoolId *smithy.Schema
-
-var GetBulkPublishDetailsResponse_BulkPublishStartTime *smithy.Schema
-
-var GetBulkPublishDetailsResponse_BulkPublishCompleteTime *smithy.Schema
-
-var GetBulkPublishDetailsResponse_BulkPublishStatus *smithy.Schema
-
-var GetBulkPublishDetailsResponse_FailureMessage *smithy.Schema
-
-var GetCognitoEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetCognitoEventsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCognitoEventsRequest_IdentityPoolId *smithy.Schema
-
-var GetCognitoEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetCognitoEventsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCognitoEventsResponse_Events *smithy.Schema
-
-var GetIdentityPoolConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetIdentityPoolConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetIdentityPoolConfigurationRequest_IdentityPoolId *smithy.Schema
-
-var GetIdentityPoolConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "GetIdentityPoolConfigurationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetIdentityPoolConfigurationResponse_IdentityPoolId *smithy.Schema
-
-var GetIdentityPoolConfigurationResponse_PushSync *smithy.Schema
-
-var GetIdentityPoolConfigurationResponse_CognitoStreams *smithy.Schema
-
-var ListDatasetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListDatasetsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDatasetsRequest_IdentityPoolId *smithy.Schema
-
-var ListDatasetsRequest_IdentityId *smithy.Schema
-
-var ListDatasetsRequest_NextToken *smithy.Schema
-
-var ListDatasetsRequest_MaxResults *smithy.Schema
-
-var ListDatasetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListDatasetsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListDatasetsResponse_Datasets *smithy.Schema
-
-var ListDatasetsResponse_Count *smithy.Schema
-
-var ListDatasetsResponse_NextToken *smithy.Schema
-
-var ListIdentityPoolUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListIdentityPoolUsageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListIdentityPoolUsageRequest_NextToken *smithy.Schema
-
-var ListIdentityPoolUsageRequest_MaxResults *smithy.Schema
-
-var ListIdentityPoolUsageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListIdentityPoolUsageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListIdentityPoolUsageResponse_IdentityPoolUsages *smithy.Schema
-
-var ListIdentityPoolUsageResponse_MaxResults *smithy.Schema
-
-var ListIdentityPoolUsageResponse_Count *smithy.Schema
-
-var ListIdentityPoolUsageResponse_NextToken *smithy.Schema
-
-var ListRecordsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListRecordsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListRecordsRequest_IdentityPoolId *smithy.Schema
-
-var ListRecordsRequest_IdentityId *smithy.Schema
-
-var ListRecordsRequest_DatasetName *smithy.Schema
-
-var ListRecordsRequest_LastSyncCount *smithy.Schema
-
-var ListRecordsRequest_NextToken *smithy.Schema
-
-var ListRecordsRequest_MaxResults *smithy.Schema
-
-var ListRecordsRequest_SyncSessionToken *smithy.Schema
-
-var ListRecordsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "ListRecordsResponse",
-}, smithy.ShapeTypeStructure, 9)
-var ListRecordsResponse_Records *smithy.Schema
-
-var ListRecordsResponse_NextToken *smithy.Schema
-
-var ListRecordsResponse_Count *smithy.Schema
-
-var ListRecordsResponse_DatasetSyncCount *smithy.Schema
-
-var ListRecordsResponse_LastModifiedBy *smithy.Schema
-
-var ListRecordsResponse_MergedDatasetNames *smithy.Schema
-
-var ListRecordsResponse_DatasetExists *smithy.Schema
-
-var ListRecordsResponse_DatasetDeletedAfterRequestedSyncCount *smithy.Schema
-
-var ListRecordsResponse_SyncSessionToken *smithy.Schema
-
-var RegisterDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "RegisterDeviceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var RegisterDeviceRequest_IdentityPoolId *smithy.Schema
-
-var RegisterDeviceRequest_IdentityId *smithy.Schema
-
-var RegisterDeviceRequest_Platform *smithy.Schema
-
-var RegisterDeviceRequest_Token *smithy.Schema
-
-var RegisterDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "RegisterDeviceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterDeviceResponse_DeviceId *smithy.Schema
-
-var SetCognitoEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SetCognitoEventsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var SetCognitoEventsRequest_IdentityPoolId *smithy.Schema
-
-var SetCognitoEventsRequest_Events *smithy.Schema
-
-var SetIdentityPoolConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SetIdentityPoolConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SetIdentityPoolConfigurationRequest_IdentityPoolId *smithy.Schema
-
-var SetIdentityPoolConfigurationRequest_PushSync *smithy.Schema
-
-var SetIdentityPoolConfigurationRequest_CognitoStreams *smithy.Schema
-
-var SetIdentityPoolConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SetIdentityPoolConfigurationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var SetIdentityPoolConfigurationResponse_IdentityPoolId *smithy.Schema
-
-var SetIdentityPoolConfigurationResponse_PushSync *smithy.Schema
-
-var SetIdentityPoolConfigurationResponse_CognitoStreams *smithy.Schema
-
-var SubscribeToDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SubscribeToDatasetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SubscribeToDatasetRequest_IdentityPoolId *smithy.Schema
-
-var SubscribeToDatasetRequest_IdentityId *smithy.Schema
-
-var SubscribeToDatasetRequest_DatasetName *smithy.Schema
-
-var SubscribeToDatasetRequest_DeviceId *smithy.Schema
-
-var SubscribeToDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "SubscribeToDatasetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UnsubscribeFromDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "UnsubscribeFromDatasetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UnsubscribeFromDatasetRequest_IdentityPoolId *smithy.Schema
-
-var UnsubscribeFromDatasetRequest_IdentityId *smithy.Schema
-
-var UnsubscribeFromDatasetRequest_DatasetName *smithy.Schema
-
-var UnsubscribeFromDatasetRequest_DeviceId *smithy.Schema
-
-var UnsubscribeFromDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "UnsubscribeFromDatasetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRecordsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "UpdateRecordsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateRecordsRequest_IdentityPoolId *smithy.Schema
-
-var UpdateRecordsRequest_IdentityId *smithy.Schema
-
-var UpdateRecordsRequest_DatasetName *smithy.Schema
-
-var UpdateRecordsRequest_DeviceId *smithy.Schema
-
-var UpdateRecordsRequest_RecordPatches *smithy.Schema
-
-var UpdateRecordsRequest_SyncSessionToken *smithy.Schema
-
-var UpdateRecordsRequest_ClientContext *smithy.Schema
-
-var UpdateRecordsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cognitosync",
-	Name:      "UpdateRecordsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRecordsResponse_Records *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AlreadyStreamedException_message = AlreadyStreamedException.AddMember("message", _ExceptionMessage)
-
-	_ApplicationArnList_member = _ApplicationArnList.AddMember("member", _ApplicationArn)
-
-	BulkPublishStatus_NOT_STARTED = BulkPublishStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	BulkPublishStatus_IN_PROGRESS = BulkPublishStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	BulkPublishStatus_FAILED = BulkPublishStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	BulkPublishStatus_SUCCEEDED = BulkPublishStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	StreamingStatus_ENABLED = StreamingStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	StreamingStatus_DISABLED = StreamingStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	CognitoStreams_StreamName = CognitoStreams.AddMember("StreamName", _StreamName)
-
-	CognitoStreams_RoleArn = CognitoStreams.AddMember("RoleArn", _AssumeRoleArn)
-
-	CognitoStreams_StreamingStatus = CognitoStreams.AddMember("StreamingStatus", StreamingStatus)
-
-	ConcurrentModificationException_message = ConcurrentModificationException.AddMember("message", _String)
-
-	Dataset_IdentityId = Dataset.AddMember("IdentityId", _IdentityId)
-
-	Dataset_DatasetName = Dataset.AddMember("DatasetName", _DatasetName)
-
-	Dataset_CreationDate = Dataset.AddMember("CreationDate", _Date)
-
-	Dataset_LastModifiedDate = Dataset.AddMember("LastModifiedDate", _Date)
-
-	Dataset_LastModifiedBy = Dataset.AddMember("LastModifiedBy", _String)
-
-	Dataset_DataStorage = Dataset.AddMember("DataStorage", _Long)
-
-	Dataset_NumRecords = Dataset.AddMember("NumRecords", _Long)
-
-	_DatasetList_member = _DatasetList.AddMember("member", Dataset)
-
-	DuplicateRequestException_message = DuplicateRequestException.AddMember("message", _ExceptionMessage)
-
-	_Events_key = _Events.AddMember("key", _CognitoEventType)
-
-	_Events_value = _Events.AddMember("value", _LambdaFunctionArn)
-
-	IdentityPoolUsage_IdentityPoolId = IdentityPoolUsage.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	IdentityPoolUsage_SyncSessionsCount = IdentityPoolUsage.AddMember("SyncSessionsCount", _Long)
-
-	IdentityPoolUsage_DataStorage = IdentityPoolUsage.AddMember("DataStorage", _Long)
-
-	IdentityPoolUsage_LastModifiedDate = IdentityPoolUsage.AddMember("LastModifiedDate", _Date)
-
-	_IdentityPoolUsageList_member = _IdentityPoolUsageList.AddMember("member", IdentityPoolUsage)
-
-	IdentityUsage_IdentityId = IdentityUsage.AddMember("IdentityId", _IdentityId)
-
-	IdentityUsage_IdentityPoolId = IdentityUsage.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	IdentityUsage_LastModifiedDate = IdentityUsage.AddMember("LastModifiedDate", _Date)
-
-	IdentityUsage_DatasetCount = IdentityUsage.AddMember("DatasetCount", _Integer)
-
-	IdentityUsage_DataStorage = IdentityUsage.AddMember("DataStorage", _Long)
-
-	InternalErrorException_message = InternalErrorException.AddMember("message", _ExceptionMessage)
-
-	InvalidConfigurationException_message = InvalidConfigurationException.AddMember("message", _ExceptionMessage)
-
-	InvalidLambdaFunctionOutputException_message = InvalidLambdaFunctionOutputException.AddMember("message", _ExceptionMessage)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", _ExceptionMessage)
-
-	LambdaThrottledException_message = LambdaThrottledException.AddMember("message", _ExceptionMessage)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ExceptionMessage)
-
-	_MergedDatasetNameList_member = _MergedDatasetNameList.AddMember("member", _String)
-
-	NotAuthorizedException_message = NotAuthorizedException.AddMember("message", _ExceptionMessage)
-
-	Operation_replace = Operation.AddMember("replace", smithyprelude.Unit)
-
-	Operation_remove = Operation.AddMember("remove", smithyprelude.Unit)
-
-	Platform_APNS = Platform.AddMember("APNS", smithyprelude.Unit)
-
-	Platform_APNS_SANDBOX = Platform.AddMember("APNS_SANDBOX", smithyprelude.Unit)
-
-	Platform_GCM = Platform.AddMember("GCM", smithyprelude.Unit)
-
-	Platform_ADM = Platform.AddMember("ADM", smithyprelude.Unit)
-
-	PushSync_ApplicationArns = PushSync.AddMember("ApplicationArns", _ApplicationArnList)
-
-	PushSync_RoleArn = PushSync.AddMember("RoleArn", _AssumeRoleArn)
-
-	Record_Key = Record.AddMember("Key", _RecordKey)
-
-	Record_Value = Record.AddMember("Value", _RecordValue)
-
-	Record_SyncCount = Record.AddMember("SyncCount", _Long)
-
-	Record_LastModifiedDate = Record.AddMember("LastModifiedDate", _Date)
-
-	Record_LastModifiedBy = Record.AddMember("LastModifiedBy", _String)
-
-	Record_DeviceLastModifiedDate = Record.AddMember("DeviceLastModifiedDate", _Date)
-
-	_RecordList_member = _RecordList.AddMember("member", Record)
-
-	RecordPatch_Op = RecordPatch.AddMember("Op", Operation)
-
-	RecordPatch_Key = RecordPatch.AddMember("Key", _RecordKey)
-
-	RecordPatch_Value = RecordPatch.AddMember("Value", _RecordValue)
-
-	RecordPatch_SyncCount = RecordPatch.AddMember("SyncCount", _Long)
-
-	RecordPatch_DeviceLastModifiedDate = RecordPatch.AddMember("DeviceLastModifiedDate", _Date)
-
-	_RecordPatchList_member = _RecordPatchList.AddMember("member", RecordPatch)
-
-	ResourceConflictException_message = ResourceConflictException.AddMember("message", _ExceptionMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ExceptionMessage)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _ExceptionMessage)
-
-	BulkPublishRequest_IdentityPoolId = BulkPublishRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	BulkPublishResponse_IdentityPoolId = BulkPublishResponse.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	DeleteDatasetRequest_IdentityPoolId = DeleteDatasetRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	DeleteDatasetRequest_IdentityId = DeleteDatasetRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	DeleteDatasetRequest_DatasetName = DeleteDatasetRequest.AddMember("DatasetName", _DatasetName, &smithytraits.HTTPLabel{})
-
-	DeleteDatasetResponse_Dataset = DeleteDatasetResponse.AddMember("Dataset", Dataset)
-
-	DescribeDatasetRequest_IdentityPoolId = DescribeDatasetRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	DescribeDatasetRequest_IdentityId = DescribeDatasetRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	DescribeDatasetRequest_DatasetName = DescribeDatasetRequest.AddMember("DatasetName", _DatasetName, &smithytraits.HTTPLabel{})
-
-	DescribeDatasetResponse_Dataset = DescribeDatasetResponse.AddMember("Dataset", Dataset)
-
-	DescribeIdentityPoolUsageRequest_IdentityPoolId = DescribeIdentityPoolUsageRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	DescribeIdentityPoolUsageResponse_IdentityPoolUsage = DescribeIdentityPoolUsageResponse.AddMember("IdentityPoolUsage", IdentityPoolUsage)
-
-	DescribeIdentityUsageRequest_IdentityPoolId = DescribeIdentityUsageRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	DescribeIdentityUsageRequest_IdentityId = DescribeIdentityUsageRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	DescribeIdentityUsageResponse_IdentityUsage = DescribeIdentityUsageResponse.AddMember("IdentityUsage", IdentityUsage)
-
-	GetBulkPublishDetailsRequest_IdentityPoolId = GetBulkPublishDetailsRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	GetBulkPublishDetailsResponse_IdentityPoolId = GetBulkPublishDetailsResponse.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	GetBulkPublishDetailsResponse_BulkPublishStartTime = GetBulkPublishDetailsResponse.AddMember("BulkPublishStartTime", _Date)
-
-	GetBulkPublishDetailsResponse_BulkPublishCompleteTime = GetBulkPublishDetailsResponse.AddMember("BulkPublishCompleteTime", _Date)
-
-	GetBulkPublishDetailsResponse_BulkPublishStatus = GetBulkPublishDetailsResponse.AddMember("BulkPublishStatus", BulkPublishStatus)
-
-	GetBulkPublishDetailsResponse_FailureMessage = GetBulkPublishDetailsResponse.AddMember("FailureMessage", _String)
-
-	GetCognitoEventsRequest_IdentityPoolId = GetCognitoEventsRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	GetCognitoEventsResponse_Events = GetCognitoEventsResponse.AddMember("Events", _Events)
-
-	GetIdentityPoolConfigurationRequest_IdentityPoolId = GetIdentityPoolConfigurationRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	GetIdentityPoolConfigurationResponse_IdentityPoolId = GetIdentityPoolConfigurationResponse.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	GetIdentityPoolConfigurationResponse_PushSync = GetIdentityPoolConfigurationResponse.AddMember("PushSync", PushSync)
-
-	GetIdentityPoolConfigurationResponse_CognitoStreams = GetIdentityPoolConfigurationResponse.AddMember("CognitoStreams", CognitoStreams)
-
-	ListDatasetsRequest_IdentityPoolId = ListDatasetsRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	ListDatasetsRequest_IdentityId = ListDatasetsRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	ListDatasetsRequest_NextToken = ListDatasetsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDatasetsRequest_MaxResults = ListDatasetsRequest.AddMember("MaxResults", _IntegerString, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDatasetsResponse_Datasets = ListDatasetsResponse.AddMember("Datasets", _DatasetList)
-
-	ListDatasetsResponse_Count = ListDatasetsResponse.AddMember("Count", _Integer)
-
-	ListDatasetsResponse_NextToken = ListDatasetsResponse.AddMember("NextToken", _String)
-
-	ListIdentityPoolUsageRequest_NextToken = ListIdentityPoolUsageRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListIdentityPoolUsageRequest_MaxResults = ListIdentityPoolUsageRequest.AddMember("MaxResults", _IntegerString, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListIdentityPoolUsageResponse_IdentityPoolUsages = ListIdentityPoolUsageResponse.AddMember("IdentityPoolUsages", _IdentityPoolUsageList)
-
-	ListIdentityPoolUsageResponse_MaxResults = ListIdentityPoolUsageResponse.AddMember("MaxResults", _Integer)
-
-	ListIdentityPoolUsageResponse_Count = ListIdentityPoolUsageResponse.AddMember("Count", _Integer)
-
-	ListIdentityPoolUsageResponse_NextToken = ListIdentityPoolUsageResponse.AddMember("NextToken", _String)
-
-	ListRecordsRequest_IdentityPoolId = ListRecordsRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	ListRecordsRequest_IdentityId = ListRecordsRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	ListRecordsRequest_DatasetName = ListRecordsRequest.AddMember("DatasetName", _DatasetName, &smithytraits.HTTPLabel{})
-
-	ListRecordsRequest_LastSyncCount = ListRecordsRequest.AddMember("LastSyncCount", _Long, &smithytraits.HTTPQuery{Name: "lastSyncCount"})
-
-	ListRecordsRequest_NextToken = ListRecordsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRecordsRequest_MaxResults = ListRecordsRequest.AddMember("MaxResults", _IntegerString, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRecordsRequest_SyncSessionToken = ListRecordsRequest.AddMember("SyncSessionToken", _SyncSessionToken, &smithytraits.HTTPQuery{Name: "syncSessionToken"})
-
-	ListRecordsResponse_Records = ListRecordsResponse.AddMember("Records", _RecordList)
-
-	ListRecordsResponse_NextToken = ListRecordsResponse.AddMember("NextToken", _String)
-
-	ListRecordsResponse_Count = ListRecordsResponse.AddMember("Count", _Integer)
-
-	ListRecordsResponse_DatasetSyncCount = ListRecordsResponse.AddMember("DatasetSyncCount", _Long)
-
-	ListRecordsResponse_LastModifiedBy = ListRecordsResponse.AddMember("LastModifiedBy", _String)
-
-	ListRecordsResponse_MergedDatasetNames = ListRecordsResponse.AddMember("MergedDatasetNames", _MergedDatasetNameList)
-
-	ListRecordsResponse_DatasetExists = ListRecordsResponse.AddMember("DatasetExists", _Boolean)
-
-	ListRecordsResponse_DatasetDeletedAfterRequestedSyncCount = ListRecordsResponse.AddMember("DatasetDeletedAfterRequestedSyncCount", _Boolean)
-
-	ListRecordsResponse_SyncSessionToken = ListRecordsResponse.AddMember("SyncSessionToken", _String)
-
-	RegisterDeviceRequest_IdentityPoolId = RegisterDeviceRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	RegisterDeviceRequest_IdentityId = RegisterDeviceRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	RegisterDeviceRequest_Platform = RegisterDeviceRequest.AddMember("Platform", Platform)
-
-	RegisterDeviceRequest_Token = RegisterDeviceRequest.AddMember("Token", _PushToken)
-
-	RegisterDeviceResponse_DeviceId = RegisterDeviceResponse.AddMember("DeviceId", _DeviceId)
-
-	SetCognitoEventsRequest_IdentityPoolId = SetCognitoEventsRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	SetCognitoEventsRequest_Events = SetCognitoEventsRequest.AddMember("Events", _Events)
-
-	SetIdentityPoolConfigurationRequest_IdentityPoolId = SetIdentityPoolConfigurationRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	SetIdentityPoolConfigurationRequest_PushSync = SetIdentityPoolConfigurationRequest.AddMember("PushSync", PushSync)
-
-	SetIdentityPoolConfigurationRequest_CognitoStreams = SetIdentityPoolConfigurationRequest.AddMember("CognitoStreams", CognitoStreams)
-
-	SetIdentityPoolConfigurationResponse_IdentityPoolId = SetIdentityPoolConfigurationResponse.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	SetIdentityPoolConfigurationResponse_PushSync = SetIdentityPoolConfigurationResponse.AddMember("PushSync", PushSync)
-
-	SetIdentityPoolConfigurationResponse_CognitoStreams = SetIdentityPoolConfigurationResponse.AddMember("CognitoStreams", CognitoStreams)
-
-	SubscribeToDatasetRequest_IdentityPoolId = SubscribeToDatasetRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	SubscribeToDatasetRequest_IdentityId = SubscribeToDatasetRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	SubscribeToDatasetRequest_DatasetName = SubscribeToDatasetRequest.AddMember("DatasetName", _DatasetName, &smithytraits.HTTPLabel{})
-
-	SubscribeToDatasetRequest_DeviceId = SubscribeToDatasetRequest.AddMember("DeviceId", _DeviceId, &smithytraits.HTTPLabel{})
-
-	UnsubscribeFromDatasetRequest_IdentityPoolId = UnsubscribeFromDatasetRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	UnsubscribeFromDatasetRequest_IdentityId = UnsubscribeFromDatasetRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	UnsubscribeFromDatasetRequest_DatasetName = UnsubscribeFromDatasetRequest.AddMember("DatasetName", _DatasetName, &smithytraits.HTTPLabel{})
-
-	UnsubscribeFromDatasetRequest_DeviceId = UnsubscribeFromDatasetRequest.AddMember("DeviceId", _DeviceId, &smithytraits.HTTPLabel{})
-
-	UpdateRecordsRequest_IdentityPoolId = UpdateRecordsRequest.AddMember("IdentityPoolId", _IdentityPoolId, &smithytraits.HTTPLabel{})
-
-	UpdateRecordsRequest_IdentityId = UpdateRecordsRequest.AddMember("IdentityId", _IdentityId, &smithytraits.HTTPLabel{})
-
-	UpdateRecordsRequest_DatasetName = UpdateRecordsRequest.AddMember("DatasetName", _DatasetName, &smithytraits.HTTPLabel{})
-
-	UpdateRecordsRequest_DeviceId = UpdateRecordsRequest.AddMember("DeviceId", _DeviceId)
-
-	UpdateRecordsRequest_RecordPatches = UpdateRecordsRequest.AddMember("RecordPatches", _RecordPatchList)
-
-	UpdateRecordsRequest_SyncSessionToken = UpdateRecordsRequest.AddMember("SyncSessionToken", _SyncSessionToken)
-
-	UpdateRecordsRequest_ClientContext = UpdateRecordsRequest.AddMember("ClientContext", _ClientContext, &smithytraits.HTTPHeader{Name: "x-amz-Client-Context"})
-
-	UpdateRecordsResponse_Records = UpdateRecordsResponse.AddMember("Records", _RecordList)
-
+const blob = "" +
+	"DatasetDeletedAfterRequestedSyncCountGetIdentityPoolConfigurationResponseInvalidLambdaFunctionOutput" +
+	"ExceptionSetIdentityPoolConfigurationResponseGetIdentityPoolConfigurationRequestSetIdentityPoolConfi" +
+	"gurationRequestDescribeIdentityPoolUsageResponseDescribeIdentityPoolUsageRequestConcurrentModificati" +
+	"onExceptionUnsubscribeFromDatasetResponseDescribeIdentityUsageResponseGetBulkPublishDetailsResponseI" +
+	"nvalidConfigurationExceptionListIdentityPoolUsageResponseUnsubscribeFromDatasetRequestDescribeIdenti" +
+	"tyUsageRequestGetBulkPublishDetailsRequestListIdentityPoolUsageRequestSubscribeToDatasetResponseDupl" +
+	"icateRequestExceptionInvalidParameterExceptionResourceConflictExceptionResourceNotFoundExceptionSubs" +
+	"cribeToDatasetRequestAlreadyStreamedExceptionGetCognitoEventsResponseLambdaThrottledExceptionTooMany" +
+	"RequestsExceptionBulkPublishCompleteTimeDescribeDatasetResponseGetCognitoEventsRequestSetCognitoEven" +
+	"tsRequestDescribeDatasetRequestDeviceLastModifiedDateInternalErrorExceptionLimitExceededExceptionNot" +
+	"AuthorizedExceptionRegisterDeviceResponseAWSCognitoSyncServiceDeleteDatasetResponseIdentityPoolUsage" +
+	"ListMergedDatasetNameListRegisterDeviceRequestUpdateRecordsResponseBulkPublishStartTimeDeleteDataset" +
+	"RequestListDatasetsResponseUpdateRecordsRequestBulkPublishResponseListDatasetsRequestListRecordsResp" +
+	"onseApplicationArnListBulkPublishRequestIdentityPoolUsagesListRecordsRequestMergedDatasetNamesBulkPu" +
+	"blishStatusLambdaFunctionArnSyncSessionsCountCognitoEventTypeDatasetSyncCountExceptionMessageSyncSes" +
+	"sionTokenApplicationArnsRecordPatchListStreamingStatusCognitoStreamsFailureMessageIdentityPoolIdLast" +
+	"ModifiedByAssumeRoleArnClientContextDatasetExistsIntegerStringLastSyncCountRecordPatchesAPNS_SANDBOX" +
+	"CreationDateDatasetCountDataStorageDatasetListIN_PROGRESSNOT_STARTEDRecordValueIdentityIdMaxResultsN" +
+	"umRecordsRecordListStreamNameNextTokenOperationPushTokenRecordKeySUCCEEDEDDISABLEDDeviceIdPlatformPu" +
+	"shSyncBooleanENABLEDmessagereplaceFAILEDmemberremovevalueLongUnitADMGCMkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.cognitosync", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 373, Target: 0, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1062, Target: 1, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 840, Target: 2, Traits: 2, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 215, Target: 3, Traits: 3, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 341, Target: 4, Traits: 4, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 370, Target: 5, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 745, Target: 6, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 37, Target: 7, Traits: 7, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1207, Target: 8, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 428, Target: 9, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1285, Target: 10, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1019, Target: 11, Traits: 11, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 886, Target: 12, Traits: 12, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 109, Target: 13, Traits: 13, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 570, Target: 14, Traits: 14, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 311, Target: 15, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1146, Target: 16, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1041, Target: 17, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 721, Target: 18, Traits: 18, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1304, Target: 20, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1304, Target: 21, Traits: 19, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1940, Target: 20, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1610, Target: 23, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1906, Target: 24, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1394, Target: 25, Traits: 19, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1757, Target: 253, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1746, Target: 253, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1934, Target: 253, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1865, Target: 253, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1623, Target: 30, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1445, Target: 31, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1554, Target: 32, Traits: 19, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1819, Target: 130, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1616, Target: 23, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1539, Target: 127, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 280, Target: 36, Traits: 20, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 131, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 38, Traits: 19, StrLen: 7, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1779, Target: 57, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1110, Target: 48, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1700, Target: 49, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 937, Target: 49, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1596, Target: 131, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1724, Target: 87, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1799, Target: 87, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1735, Target: 46, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1940, Target: 38, Traits: 19, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1110, Target: 48, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 949, Target: 49, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1882, Target: 50, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 596, Target: 51, Traits: 21, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 755, Target: 53, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1971, Target: 31, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1952, Target: 82, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1477, Target: 56, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1779, Target: 57, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 223, Target: 59, Traits: 19, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1428, Target: 87, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1724, Target: 87, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 937, Target: 49, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1083, Target: 64, Traits: 19, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1940, Target: 59, Traits: 19, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 349, Target: 66, Traits: 19, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1779, Target: 57, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1582, Target: 58, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 937, Target: 49, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1712, Target: 72, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1724, Target: 87, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1649, Target: 72, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1649, Target: 73, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 953, Target: 74, Traits: 22, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 399, Target: 76, Traits: 23, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 73, Target: 78, Traits: 24, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 621, Target: 80, Traits: 25, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1411, Target: 82, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 769, Target: 83, Traits: 26, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 975, Target: 85, Traits: 27, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1957, Target: 87, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 1104, Target: 88, Traits: 19, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1940, Target: 131, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 997, Target: 90, Traits: 28, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1838, Target: 92, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1927, Target: 253, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1946, Target: 253, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1890, Target: 95, Traits: 19, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1688, Target: 253, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1688, Target: 253, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1968, Target: 253, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1965, Target: 253, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1898, Target: 100, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1509, Target: 21, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1616, Target: 23, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1847, Target: 103, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1152, Target: 104, Traits: 19, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1862, Target: 111, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1774, Target: 122, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 28, Target: 87, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 937, Target: 49, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1596, Target: 131, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 931, Target: 49, Traits: 19, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1856, Target: 111, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1809, Target: 112, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1940, Target: 104, Traits: 19, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1524, Target: 114, Traits: 19, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1838, Target: 92, Traits: 19, StrLen: 2, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1862, Target: 111, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1774, Target: 122, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 28, Target: 87, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 931, Target: 49, Traits: 19, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1524, Target: 120, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1940, Target: 114, Traits: 19, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1768, Target: 122, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 646, Target: 123, Traits: 29, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 671, Target: 125, Traits: 30, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1539, Target: 127, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1913, Target: 253, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1874, Target: 253, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1819, Target: 130, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1656, Target: 131, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1493, Target: 132, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 793, Target: 133, Traits: 31, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 56, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1322, Target: 135, Traits: 19, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1247, Target: 137, Traits: 19, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1187, Target: 139, Traits: 19, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1110, Target: 48, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1062, Target: 143, Traits: 19, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 38, Traits: 19, StrLen: 7, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 909, Target: 145, Traits: 19, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1110, Target: 48, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 840, Target: 149, Traits: 19, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 38, Traits: 19, StrLen: 7, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 248, Target: 151, Traits: 19, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 215, Target: 153, Traits: 19, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 223, Target: 59, Traits: 19, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 486, Target: 155, Traits: 19, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 341, Target: 158, Traits: 19, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 349, Target: 66, Traits: 19, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 514, Target: 160, Traits: 19, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 370, Target: 162, Traits: 19, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1167, Target: 49, Traits: 19, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 817, Target: 49, Traits: 19, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1394, Target: 25, Traits: 19, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1568, Target: 131, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 863, Target: 168, Traits: 19, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 745, Target: 170, Traits: 19, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 53, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 145, Target: 172, Traits: 19, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 37, Target: 174, Traits: 19, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1898, Target: 100, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1554, Target: 32, Traits: 19, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1266, Target: 178, Traits: 19, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1829, Target: 131, Traits: 33, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1789, Target: 73, Traits: 34, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1207, Target: 183, Traits: 19, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1211, Target: 46, Traits: 19, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 32, Target: 72, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1829, Target: 131, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 542, Target: 187, Traits: 19, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1829, Target: 131, Traits: 33, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1789, Target: 73, Traits: 34, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 428, Target: 190, Traits: 19, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1340, Target: 64, Traits: 19, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1789, Target: 72, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 32, Target: 72, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1829, Target: 131, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1358, Target: 195, Traits: 19, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1110, Target: 48, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1662, Target: 87, Traits: 35, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1829, Target: 131, Traits: 33, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1789, Target: 73, Traits: 34, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1493, Target: 132, Traits: 36, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1285, Target: 203, Traits: 19, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1152, Target: 112, Traits: 19, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1829, Target: 131, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 32, Target: 72, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1461, Target: 87, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1596, Target: 131, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1376, Target: 88, Traits: 19, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1636, Target: 24, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 0, Target: 24, Traits: 19, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1493, Target: 131, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1125, Target: 213, Traits: 19, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1890, Target: 95, Traits: 19, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1504, Target: 103, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1019, Target: 218, Traits: 19, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1882, Target: 50, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 886, Target: 220, Traits: 19, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 755, Target: 53, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 180, Target: 223, Traits: 19, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1898, Target: 100, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1554, Target: 32, Traits: 19, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 109, Target: 227, Traits: 19, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1898, Target: 100, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1554, Target: 32, Traits: 19, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 696, Target: 231, Traits: 19, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1110, Target: 48, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1882, Target: 50, Traits: 32, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 570, Target: 236, Traits: 19, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 457, Target: 237, Traits: 19, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1110, Target: 48, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1882, Target: 50, Traits: 32, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 311, Target: 242, Traits: 19, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1227, Target: 243, Traits: 19, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1582, Target: 58, Traits: 32, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1779, Target: 57, Traits: 32, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1110, Target: 48, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1882, Target: 50, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1675, Target: 120, Traits: 19, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1493, Target: 132, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1623, Target: 30, Traits: 37, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1146, Target: 251, Traits: 19, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1152, Target: 112, Traits: 19, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1961, Target: 253, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/identitypools/{IdentityPoolId}/bulkpublish",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/identitypools/{IdentityPoolId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/identitypools/{IdentityPoolId}/getBulkPublishDetails",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/identitypools/{IdentityPoolId}/events",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/identitypools/{IdentityPoolId}/configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/identitypools",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/records",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/identitypools/{IdentityPoolId}/identity/{IdentityId}/device",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/identitypools/{IdentityPoolId}/events",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/identitypools/{IdentityPoolId}/configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://cognito-sync.amazonaws.com/doc/2014-06-30/"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AlreadyStreamed",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentModification",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DuplicateRequest",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalError",
+			StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidConfiguration",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidLambdaFunctionOutput",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LambdaThrottled",
+			StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LimitExceeded",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NotAuthorizedError",
+			StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceConflict",
+			StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
+			StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TooManyRequests",
+			StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "lastSyncCount"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "syncSessionToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-Client-Context"}}, DirectMask: 0x80},
+	},
 }
+
+var handles = [254]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+}
+
+var BulkPublish = &handles[0]
+
+var DeleteDataset = &handles[1]
+
+var DescribeDataset = &handles[2]
+
+var DescribeIdentityPoolUsage = &handles[3]
+
+var DescribeIdentityUsage = &handles[4]
+
+var GetBulkPublishDetails = &handles[5]
+
+var GetCognitoEvents = &handles[6]
+
+var GetIdentityPoolConfiguration = &handles[7]
+
+var ListDatasets = &handles[8]
+
+var ListIdentityPoolUsage = &handles[9]
+
+var ListRecords = &handles[10]
+
+var RegisterDevice = &handles[11]
+
+var SetCognitoEvents = &handles[12]
+
+var SetIdentityPoolConfiguration = &handles[13]
+
+var SubscribeToDataset = &handles[14]
+
+var UnsubscribeFromDataset = &handles[15]
+
+var UpdateRecords = &handles[16]
+
+var _AWSCognitoSyncService = &handles[17]
+
+var AlreadyStreamedException = &handles[18]
+var AlreadyStreamedException_message = &handles[19]
+
+var _ApplicationArn = &handles[20]
+
+var _ApplicationArnList = &handles[21]
+var _ApplicationArnList_member = &handles[22]
+
+var _AssumeRoleArn = &handles[23]
+
+var _Boolean = &handles[24]
+
+var BulkPublishStatus = &handles[25]
+var BulkPublishStatus_NOT_STARTED = &handles[26]
+var BulkPublishStatus_IN_PROGRESS = &handles[27]
+var BulkPublishStatus_FAILED = &handles[28]
+var BulkPublishStatus_SUCCEEDED = &handles[29]
+
+var _ClientContext = &handles[30]
+
+var _CognitoEventType = &handles[31]
+
+var CognitoStreams = &handles[32]
+var CognitoStreams_StreamName = &handles[33]
+var CognitoStreams_RoleArn = &handles[34]
+var CognitoStreams_StreamingStatus = &handles[35]
+
+var ConcurrentModificationException = &handles[36]
+var ConcurrentModificationException_message = &handles[37]
+
+var Dataset = &handles[38]
+var Dataset_IdentityId = &handles[39]
+var Dataset_DatasetName = &handles[40]
+var Dataset_CreationDate = &handles[41]
+var Dataset_LastModifiedDate = &handles[42]
+var Dataset_LastModifiedBy = &handles[43]
+var Dataset_DataStorage = &handles[44]
+var Dataset_NumRecords = &handles[45]
+
+var _DatasetList = &handles[46]
+var _DatasetList_member = &handles[47]
+
+var _DatasetName = &handles[48]
+
+var _Date = &handles[49]
+
+var _DeviceId = &handles[50]
+
+var DuplicateRequestException = &handles[51]
+var DuplicateRequestException_message = &handles[52]
+
+var _Events = &handles[53]
+var _Events_key = &handles[54]
+var _Events_value = &handles[55]
+
+var _ExceptionMessage = &handles[56]
+
+var _IdentityId = &handles[57]
+
+var _IdentityPoolId = &handles[58]
+
+var IdentityPoolUsage = &handles[59]
+var IdentityPoolUsage_IdentityPoolId = &handles[60]
+var IdentityPoolUsage_SyncSessionsCount = &handles[61]
+var IdentityPoolUsage_DataStorage = &handles[62]
+var IdentityPoolUsage_LastModifiedDate = &handles[63]
+
+var _IdentityPoolUsageList = &handles[64]
+var _IdentityPoolUsageList_member = &handles[65]
+
+var IdentityUsage = &handles[66]
+var IdentityUsage_IdentityId = &handles[67]
+var IdentityUsage_IdentityPoolId = &handles[68]
+var IdentityUsage_LastModifiedDate = &handles[69]
+var IdentityUsage_DatasetCount = &handles[70]
+var IdentityUsage_DataStorage = &handles[71]
+
+var _Integer = &handles[72]
+
+var _IntegerString = &handles[73]
+
+var InternalErrorException = &handles[74]
+var InternalErrorException_message = &handles[75]
+
+var InvalidConfigurationException = &handles[76]
+var InvalidConfigurationException_message = &handles[77]
+
+var InvalidLambdaFunctionOutputException = &handles[78]
+var InvalidLambdaFunctionOutputException_message = &handles[79]
+
+var InvalidParameterException = &handles[80]
+var InvalidParameterException_message = &handles[81]
+
+var _LambdaFunctionArn = &handles[82]
+
+var LambdaThrottledException = &handles[83]
+var LambdaThrottledException_message = &handles[84]
+
+var LimitExceededException = &handles[85]
+var LimitExceededException_message = &handles[86]
+
+var _Long = &handles[87]
+
+var _MergedDatasetNameList = &handles[88]
+var _MergedDatasetNameList_member = &handles[89]
+
+var NotAuthorizedException = &handles[90]
+var NotAuthorizedException_message = &handles[91]
+
+var Operation = &handles[92]
+var Operation_replace = &handles[93]
+var Operation_remove = &handles[94]
+
+var Platform = &handles[95]
+var Platform_APNS = &handles[96]
+var Platform_APNS_SANDBOX = &handles[97]
+var Platform_GCM = &handles[98]
+var Platform_ADM = &handles[99]
+
+var PushSync = &handles[100]
+var PushSync_ApplicationArns = &handles[101]
+var PushSync_RoleArn = &handles[102]
+
+var _PushToken = &handles[103]
+
+var Record = &handles[104]
+var Record_Key = &handles[105]
+var Record_Value = &handles[106]
+var Record_SyncCount = &handles[107]
+var Record_LastModifiedDate = &handles[108]
+var Record_LastModifiedBy = &handles[109]
+var Record_DeviceLastModifiedDate = &handles[110]
+
+var _RecordKey = &handles[111]
+
+var _RecordList = &handles[112]
+var _RecordList_member = &handles[113]
+
+var RecordPatch = &handles[114]
+var RecordPatch_Op = &handles[115]
+var RecordPatch_Key = &handles[116]
+var RecordPatch_Value = &handles[117]
+var RecordPatch_SyncCount = &handles[118]
+var RecordPatch_DeviceLastModifiedDate = &handles[119]
+
+var _RecordPatchList = &handles[120]
+var _RecordPatchList_member = &handles[121]
+
+var _RecordValue = &handles[122]
+
+var ResourceConflictException = &handles[123]
+var ResourceConflictException_message = &handles[124]
+
+var ResourceNotFoundException = &handles[125]
+var ResourceNotFoundException_message = &handles[126]
+
+var StreamingStatus = &handles[127]
+var StreamingStatus_ENABLED = &handles[128]
+var StreamingStatus_DISABLED = &handles[129]
+
+var _StreamName = &handles[130]
+
+var _String = &handles[131]
+
+var _SyncSessionToken = &handles[132]
+
+var TooManyRequestsException = &handles[133]
+var TooManyRequestsException_message = &handles[134]
+
+var BulkPublishRequest = &handles[135]
+var BulkPublishRequest_IdentityPoolId = &handles[136]
+
+var BulkPublishResponse = &handles[137]
+var BulkPublishResponse_IdentityPoolId = &handles[138]
+
+var DeleteDatasetRequest = &handles[139]
+var DeleteDatasetRequest_IdentityPoolId = &handles[140]
+var DeleteDatasetRequest_IdentityId = &handles[141]
+var DeleteDatasetRequest_DatasetName = &handles[142]
+
+var DeleteDatasetResponse = &handles[143]
+var DeleteDatasetResponse_Dataset = &handles[144]
+
+var DescribeDatasetRequest = &handles[145]
+var DescribeDatasetRequest_IdentityPoolId = &handles[146]
+var DescribeDatasetRequest_IdentityId = &handles[147]
+var DescribeDatasetRequest_DatasetName = &handles[148]
+
+var DescribeDatasetResponse = &handles[149]
+var DescribeDatasetResponse_Dataset = &handles[150]
+
+var DescribeIdentityPoolUsageRequest = &handles[151]
+var DescribeIdentityPoolUsageRequest_IdentityPoolId = &handles[152]
+
+var DescribeIdentityPoolUsageResponse = &handles[153]
+var DescribeIdentityPoolUsageResponse_IdentityPoolUsage = &handles[154]
+
+var DescribeIdentityUsageRequest = &handles[155]
+var DescribeIdentityUsageRequest_IdentityPoolId = &handles[156]
+var DescribeIdentityUsageRequest_IdentityId = &handles[157]
+
+var DescribeIdentityUsageResponse = &handles[158]
+var DescribeIdentityUsageResponse_IdentityUsage = &handles[159]
+
+var GetBulkPublishDetailsRequest = &handles[160]
+var GetBulkPublishDetailsRequest_IdentityPoolId = &handles[161]
+
+var GetBulkPublishDetailsResponse = &handles[162]
+var GetBulkPublishDetailsResponse_IdentityPoolId = &handles[163]
+var GetBulkPublishDetailsResponse_BulkPublishStartTime = &handles[164]
+var GetBulkPublishDetailsResponse_BulkPublishCompleteTime = &handles[165]
+var GetBulkPublishDetailsResponse_BulkPublishStatus = &handles[166]
+var GetBulkPublishDetailsResponse_FailureMessage = &handles[167]
+
+var GetCognitoEventsRequest = &handles[168]
+var GetCognitoEventsRequest_IdentityPoolId = &handles[169]
+
+var GetCognitoEventsResponse = &handles[170]
+var GetCognitoEventsResponse_Events = &handles[171]
+
+var GetIdentityPoolConfigurationRequest = &handles[172]
+var GetIdentityPoolConfigurationRequest_IdentityPoolId = &handles[173]
+
+var GetIdentityPoolConfigurationResponse = &handles[174]
+var GetIdentityPoolConfigurationResponse_IdentityPoolId = &handles[175]
+var GetIdentityPoolConfigurationResponse_PushSync = &handles[176]
+var GetIdentityPoolConfigurationResponse_CognitoStreams = &handles[177]
+
+var ListDatasetsRequest = &handles[178]
+var ListDatasetsRequest_IdentityPoolId = &handles[179]
+var ListDatasetsRequest_IdentityId = &handles[180]
+var ListDatasetsRequest_NextToken = &handles[181]
+var ListDatasetsRequest_MaxResults = &handles[182]
+
+var ListDatasetsResponse = &handles[183]
+var ListDatasetsResponse_Datasets = &handles[184]
+var ListDatasetsResponse_Count = &handles[185]
+var ListDatasetsResponse_NextToken = &handles[186]
+
+var ListIdentityPoolUsageRequest = &handles[187]
+var ListIdentityPoolUsageRequest_NextToken = &handles[188]
+var ListIdentityPoolUsageRequest_MaxResults = &handles[189]
+
+var ListIdentityPoolUsageResponse = &handles[190]
+var ListIdentityPoolUsageResponse_IdentityPoolUsages = &handles[191]
+var ListIdentityPoolUsageResponse_MaxResults = &handles[192]
+var ListIdentityPoolUsageResponse_Count = &handles[193]
+var ListIdentityPoolUsageResponse_NextToken = &handles[194]
+
+var ListRecordsRequest = &handles[195]
+var ListRecordsRequest_IdentityPoolId = &handles[196]
+var ListRecordsRequest_IdentityId = &handles[197]
+var ListRecordsRequest_DatasetName = &handles[198]
+var ListRecordsRequest_LastSyncCount = &handles[199]
+var ListRecordsRequest_NextToken = &handles[200]
+var ListRecordsRequest_MaxResults = &handles[201]
+var ListRecordsRequest_SyncSessionToken = &handles[202]
+
+var ListRecordsResponse = &handles[203]
+var ListRecordsResponse_Records = &handles[204]
+var ListRecordsResponse_NextToken = &handles[205]
+var ListRecordsResponse_Count = &handles[206]
+var ListRecordsResponse_DatasetSyncCount = &handles[207]
+var ListRecordsResponse_LastModifiedBy = &handles[208]
+var ListRecordsResponse_MergedDatasetNames = &handles[209]
+var ListRecordsResponse_DatasetExists = &handles[210]
+var ListRecordsResponse_DatasetDeletedAfterRequestedSyncCount = &handles[211]
+var ListRecordsResponse_SyncSessionToken = &handles[212]
+
+var RegisterDeviceRequest = &handles[213]
+var RegisterDeviceRequest_IdentityPoolId = &handles[214]
+var RegisterDeviceRequest_IdentityId = &handles[215]
+var RegisterDeviceRequest_Platform = &handles[216]
+var RegisterDeviceRequest_Token = &handles[217]
+
+var RegisterDeviceResponse = &handles[218]
+var RegisterDeviceResponse_DeviceId = &handles[219]
+
+var SetCognitoEventsRequest = &handles[220]
+var SetCognitoEventsRequest_IdentityPoolId = &handles[221]
+var SetCognitoEventsRequest_Events = &handles[222]
+
+var SetIdentityPoolConfigurationRequest = &handles[223]
+var SetIdentityPoolConfigurationRequest_IdentityPoolId = &handles[224]
+var SetIdentityPoolConfigurationRequest_PushSync = &handles[225]
+var SetIdentityPoolConfigurationRequest_CognitoStreams = &handles[226]
+
+var SetIdentityPoolConfigurationResponse = &handles[227]
+var SetIdentityPoolConfigurationResponse_IdentityPoolId = &handles[228]
+var SetIdentityPoolConfigurationResponse_PushSync = &handles[229]
+var SetIdentityPoolConfigurationResponse_CognitoStreams = &handles[230]
+
+var SubscribeToDatasetRequest = &handles[231]
+var SubscribeToDatasetRequest_IdentityPoolId = &handles[232]
+var SubscribeToDatasetRequest_IdentityId = &handles[233]
+var SubscribeToDatasetRequest_DatasetName = &handles[234]
+var SubscribeToDatasetRequest_DeviceId = &handles[235]
+
+var SubscribeToDatasetResponse = &handles[236]
+
+var UnsubscribeFromDatasetRequest = &handles[237]
+var UnsubscribeFromDatasetRequest_IdentityPoolId = &handles[238]
+var UnsubscribeFromDatasetRequest_IdentityId = &handles[239]
+var UnsubscribeFromDatasetRequest_DatasetName = &handles[240]
+var UnsubscribeFromDatasetRequest_DeviceId = &handles[241]
+
+var UnsubscribeFromDatasetResponse = &handles[242]
+
+var UpdateRecordsRequest = &handles[243]
+var UpdateRecordsRequest_IdentityPoolId = &handles[244]
+var UpdateRecordsRequest_IdentityId = &handles[245]
+var UpdateRecordsRequest_DatasetName = &handles[246]
+var UpdateRecordsRequest_DeviceId = &handles[247]
+var UpdateRecordsRequest_RecordPatches = &handles[248]
+var UpdateRecordsRequest_SyncSessionToken = &handles[249]
+var UpdateRecordsRequest_ClientContext = &handles[250]
+
+var UpdateRecordsResponse = &handles[251]
+var UpdateRecordsResponse_Records = &handles[252]
+
+var AWSCognitoSyncService = &smithy.ServiceSchema{Schema: &handles[17], Version: "2014-06-30"}

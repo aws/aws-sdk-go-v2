@@ -4,1201 +4,1014 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CopyBackupToRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CopyBackupToRegion",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CreateCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateHsm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CreateHsm",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteHsm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteHsm",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeBackups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DescribeBackups",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DescribeClusters",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var InitializeCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "InitializeCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ListTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyBackupAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ModifyBackupAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ModifyCluster",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "RestoreBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _BaldrApiService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BaldrApiService",
-}, smithy.ShapeTypeService, 0)
-
-var BaldrApiService = smithy.NewServiceSchema(_BaldrApiService, "2017-04-28")
-
-var Backup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Backup",
-}, smithy.ShapeTypeStructure, 14)
-var Backup_BackupId *smithy.Schema
-
-var Backup_BackupArn *smithy.Schema
-
-var Backup_BackupState *smithy.Schema
-
-var Backup_ClusterId *smithy.Schema
-
-var Backup_CreateTimestamp *smithy.Schema
-
-var Backup_CopyTimestamp *smithy.Schema
-
-var Backup_NeverExpires *smithy.Schema
-
-var Backup_SourceRegion *smithy.Schema
-
-var Backup_SourceBackup *smithy.Schema
-
-var Backup_SourceCluster *smithy.Schema
-
-var Backup_DeleteTimestamp *smithy.Schema
-
-var Backup_TagList *smithy.Schema
-
-var Backup_HsmType *smithy.Schema
-
-var Backup_Mode *smithy.Schema
-
-var _BackupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BackupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _BackupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BackupId",
-}, smithy.ShapeTypeString, 0)
-
-var BackupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BackupPolicy",
-}, smithy.ShapeTypeEnum, 1)
-var BackupPolicy_DEFAULT *smithy.Schema
-
-var BackupRetentionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BackupRetentionPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var BackupRetentionPolicy_Type *smithy.Schema
-
-var BackupRetentionPolicy_Value *smithy.Schema
-
-var BackupRetentionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BackupRetentionType",
-}, smithy.ShapeTypeEnum, 1)
-var BackupRetentionType_DAYS *smithy.Schema
-
-var _BackupRetentionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BackupRetentionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Backups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Backups",
-}, smithy.ShapeTypeList, 1)
-var _Backups_member *smithy.Schema
-
-var _BackupsMaxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BackupsMaxSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var BackupState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "BackupState",
-}, smithy.ShapeTypeEnum, 4)
-var BackupState_CREATE_IN_PROGRESS *smithy.Schema
-
-var BackupState_READY *smithy.Schema
-
-var BackupState_DELETED *smithy.Schema
-
-var BackupState_PENDING_DELETION *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Cert = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Cert",
-}, smithy.ShapeTypeString, 0)
-
-var Certificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Certificates",
-}, smithy.ShapeTypeStructure, 5)
-var Certificates_ClusterCsr *smithy.Schema
-
-var Certificates_HsmCertificate *smithy.Schema
-
-var Certificates_AwsHardwareCertificate *smithy.Schema
-
-var Certificates_ManufacturerHardwareCertificate *smithy.Schema
-
-var Certificates_ClusterCertificate *smithy.Schema
-
-var CloudHsmAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CloudHsmAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var CloudHsmAccessDeniedException_Message *smithy.Schema
-
-var _CloudHsmArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CloudHsmArn",
-}, smithy.ShapeTypeString, 0)
-
-var CloudHsmInternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CloudHsmInternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var CloudHsmInternalFailureException_Message *smithy.Schema
-
-var CloudHsmInvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CloudHsmInvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var CloudHsmInvalidRequestException_Message *smithy.Schema
-
-var CloudHsmResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CloudHsmResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var CloudHsmResourceLimitExceededException_Message *smithy.Schema
-
-var CloudHsmResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CloudHsmResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var CloudHsmResourceNotFoundException_Message *smithy.Schema
-
-var CloudHsmServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CloudHsmServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var CloudHsmServiceException_Message *smithy.Schema
-
-var CloudHsmTagException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CloudHsmTagException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var CloudHsmTagException_Message *smithy.Schema
-
-var Cluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Cluster",
-}, smithy.ShapeTypeStructure, 18)
-var Cluster_BackupPolicy *smithy.Schema
-
-var Cluster_BackupRetentionPolicy *smithy.Schema
-
-var Cluster_ClusterId *smithy.Schema
-
-var Cluster_CreateTimestamp *smithy.Schema
-
-var Cluster_Hsms *smithy.Schema
-
-var Cluster_HsmType *smithy.Schema
-
-var Cluster_HsmTypeRollbackExpiration *smithy.Schema
-
-var Cluster_PreCoPassword *smithy.Schema
-
-var Cluster_SecurityGroup *smithy.Schema
-
-var Cluster_SourceBackupId *smithy.Schema
-
-var Cluster_State *smithy.Schema
-
-var Cluster_StateMessage *smithy.Schema
-
-var Cluster_SubnetMapping *smithy.Schema
-
-var Cluster_VpcId *smithy.Schema
-
-var Cluster_NetworkType *smithy.Schema
-
-var Cluster_Certificates *smithy.Schema
-
-var Cluster_TagList *smithy.Schema
-
-var Cluster_Mode *smithy.Schema
-
-var _ClusterId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ClusterId",
-}, smithy.ShapeTypeString, 0)
-
-var ClusterMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ClusterMode",
-}, smithy.ShapeTypeEnum, 2)
-var ClusterMode_FIPS *smithy.Schema
-
-var ClusterMode_NON_FIPS *smithy.Schema
-
-var _Clusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Clusters",
-}, smithy.ShapeTypeList, 1)
-var _Clusters_member *smithy.Schema
-
-var _ClustersMaxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ClustersMaxSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var ClusterState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ClusterState",
-}, smithy.ShapeTypeEnum, 11)
-var ClusterState_CREATE_IN_PROGRESS *smithy.Schema
-
-var ClusterState_UNINITIALIZED *smithy.Schema
-
-var ClusterState_INITIALIZE_IN_PROGRESS *smithy.Schema
-
-var ClusterState_INITIALIZED *smithy.Schema
-
-var ClusterState_ACTIVE *smithy.Schema
-
-var ClusterState_UPDATE_IN_PROGRESS *smithy.Schema
-
-var ClusterState_MODIFY_IN_PROGRESS *smithy.Schema
-
-var ClusterState_ROLLBACK_IN_PROGRESS *smithy.Schema
-
-var ClusterState_DELETE_IN_PROGRESS *smithy.Schema
-
-var ClusterState_DELETED *smithy.Schema
-
-var ClusterState_DEGRADED *smithy.Schema
-
-var DestinationBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DestinationBackup",
-}, smithy.ShapeTypeStructure, 4)
-var DestinationBackup_CreateTimestamp *smithy.Schema
-
-var DestinationBackup_SourceRegion *smithy.Schema
-
-var DestinationBackup_SourceBackup *smithy.Schema
-
-var DestinationBackup_SourceCluster *smithy.Schema
-
-var _EniId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "EniId",
-}, smithy.ShapeTypeString, 0)
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExternalAz = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ExternalAz",
-}, smithy.ShapeTypeString, 0)
-
-var _ExternalSubnetMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ExternalSubnetMapping",
-}, smithy.ShapeTypeMap, 2)
-var _ExternalSubnetMapping_key *smithy.Schema
-
-var _ExternalSubnetMapping_value *smithy.Schema
-
-var _Field = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Field",
-}, smithy.ShapeTypeString, 0)
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Filters",
-}, smithy.ShapeTypeMap, 2)
-var _Filters_key *smithy.Schema
-
-var _Filters_value *smithy.Schema
-
-var Hsm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Hsm",
-}, smithy.ShapeTypeStructure, 10)
-var Hsm_AvailabilityZone *smithy.Schema
-
-var Hsm_ClusterId *smithy.Schema
-
-var Hsm_SubnetId *smithy.Schema
-
-var Hsm_EniId *smithy.Schema
-
-var Hsm_EniIp *smithy.Schema
-
-var Hsm_EniIpV6 *smithy.Schema
-
-var Hsm_HsmId *smithy.Schema
-
-var Hsm_HsmType *smithy.Schema
-
-var Hsm_State *smithy.Schema
-
-var Hsm_StateMessage *smithy.Schema
-
-var _HsmId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "HsmId",
-}, smithy.ShapeTypeString, 0)
-
-var _Hsms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Hsms",
-}, smithy.ShapeTypeList, 1)
-var _Hsms_member *smithy.Schema
-
-var HsmState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "HsmState",
-}, smithy.ShapeTypeEnum, 5)
-var HsmState_CREATE_IN_PROGRESS *smithy.Schema
-
-var HsmState_ACTIVE *smithy.Schema
-
-var HsmState_DEGRADED *smithy.Schema
-
-var HsmState_DELETE_IN_PROGRESS *smithy.Schema
-
-var HsmState_DELETED *smithy.Schema
-
-var _HsmType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "HsmType",
-}, smithy.ShapeTypeString, 0)
-
-var _IpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "IpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _IpV6Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "IpV6Address",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "MaxSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "NetworkType",
-}, smithy.ShapeTypeEnum, 2)
-var NetworkType_IPV4 *smithy.Schema
-
-var NetworkType_DUALSTACK *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PreCoPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "PreCoPassword",
-}, smithy.ShapeTypeString, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "SecurityGroup",
-}, smithy.ShapeTypeString, 0)
-
-var _StateMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "StateMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _Strings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Strings",
-}, smithy.ShapeTypeList, 1)
-var _Strings_member *smithy.Schema
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var CopyBackupToRegionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CopyBackupToRegionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CopyBackupToRegionRequest_DestinationRegion *smithy.Schema
-
-var CopyBackupToRegionRequest_BackupId *smithy.Schema
-
-var CopyBackupToRegionRequest_TagList *smithy.Schema
-
-var CopyBackupToRegionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CopyBackupToRegionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CopyBackupToRegionResponse_DestinationBackup *smithy.Schema
-
-var CreateClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CreateClusterRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateClusterRequest_BackupRetentionPolicy *smithy.Schema
-
-var CreateClusterRequest_HsmType *smithy.Schema
-
-var CreateClusterRequest_SourceBackupId *smithy.Schema
-
-var CreateClusterRequest_SubnetIds *smithy.Schema
-
-var CreateClusterRequest_NetworkType *smithy.Schema
-
-var CreateClusterRequest_TagList *smithy.Schema
-
-var CreateClusterRequest_Mode *smithy.Schema
-
-var CreateClusterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CreateClusterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateClusterResponse_Cluster *smithy.Schema
-
-var CreateHsmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CreateHsmRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateHsmRequest_ClusterId *smithy.Schema
-
-var CreateHsmRequest_AvailabilityZone *smithy.Schema
-
-var CreateHsmRequest_IpAddress *smithy.Schema
-
-var CreateHsmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "CreateHsmResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateHsmResponse_Hsm *smithy.Schema
-
-var DeleteBackupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteBackupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBackupRequest_BackupId *smithy.Schema
-
-var DeleteBackupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteBackupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBackupResponse_Backup *smithy.Schema
-
-var DeleteClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteClusterRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteClusterRequest_ClusterId *smithy.Schema
-
-var DeleteClusterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteClusterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteClusterResponse_Cluster *smithy.Schema
-
-var DeleteHsmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteHsmRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteHsmRequest_ClusterId *smithy.Schema
-
-var DeleteHsmRequest_HsmId *smithy.Schema
-
-var DeleteHsmRequest_EniId *smithy.Schema
-
-var DeleteHsmRequest_EniIp *smithy.Schema
-
-var DeleteHsmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteHsmResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHsmResponse_HsmId *smithy.Schema
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourcePolicyResponse_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyResponse_Policy *smithy.Schema
-
-var DescribeBackupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DescribeBackupsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeBackupsRequest_NextToken *smithy.Schema
-
-var DescribeBackupsRequest_MaxResults *smithy.Schema
-
-var DescribeBackupsRequest_Filters *smithy.Schema
-
-var DescribeBackupsRequest_Shared *smithy.Schema
-
-var DescribeBackupsRequest_SortAscending *smithy.Schema
-
-var DescribeBackupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DescribeBackupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeBackupsResponse_Backups *smithy.Schema
-
-var DescribeBackupsResponse_NextToken *smithy.Schema
-
-var DescribeClustersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DescribeClustersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeClustersRequest_Filters *smithy.Schema
-
-var DescribeClustersRequest_NextToken *smithy.Schema
-
-var DescribeClustersRequest_MaxResults *smithy.Schema
-
-var DescribeClustersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "DescribeClustersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeClustersResponse_Clusters *smithy.Schema
-
-var DescribeClustersResponse_NextToken *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyResponse_Policy *smithy.Schema
-
-var InitializeClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "InitializeClusterRequest",
-}, smithy.ShapeTypeStructure, 3)
-var InitializeClusterRequest_ClusterId *smithy.Schema
-
-var InitializeClusterRequest_SignedCert *smithy.Schema
-
-var InitializeClusterRequest_TrustAnchor *smithy.Schema
-
-var InitializeClusterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "InitializeClusterResponse",
-}, smithy.ShapeTypeStructure, 2)
-var InitializeClusterResponse_State *smithy.Schema
-
-var InitializeClusterResponse_StateMessage *smithy.Schema
-
-var ListTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ListTagsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsRequest_ResourceId *smithy.Schema
-
-var ListTagsRequest_NextToken *smithy.Schema
-
-var ListTagsRequest_MaxResults *smithy.Schema
-
-var ListTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ListTagsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsResponse_TagList *smithy.Schema
-
-var ListTagsResponse_NextToken *smithy.Schema
-
-var ModifyBackupAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ModifyBackupAttributesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyBackupAttributesRequest_BackupId *smithy.Schema
-
-var ModifyBackupAttributesRequest_NeverExpires *smithy.Schema
-
-var ModifyBackupAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ModifyBackupAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyBackupAttributesResponse_Backup *smithy.Schema
-
-var ModifyClusterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ModifyClusterRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ModifyClusterRequest_HsmType *smithy.Schema
-
-var ModifyClusterRequest_BackupRetentionPolicy *smithy.Schema
-
-var ModifyClusterRequest_ClusterId *smithy.Schema
-
-var ModifyClusterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "ModifyClusterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyClusterResponse_Cluster *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var PutResourcePolicyRequest_Policy *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyResponse_ResourceArn *smithy.Schema
-
-var PutResourcePolicyResponse_Policy *smithy.Schema
-
-var RestoreBackupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "RestoreBackupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreBackupRequest_BackupId *smithy.Schema
-
-var RestoreBackupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "RestoreBackupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreBackupResponse_Backup *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceId *smithy.Schema
-
-var TagResourceRequest_TagList *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceId *smithy.Schema
-
-var UntagResourceRequest_TagKeyList *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsmv2",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	BackupState_CREATE_IN_PROGRESS = BackupState.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	BackupState_READY = BackupState.AddMember("READY", smithyprelude.Unit)
-
-	BackupState_DELETED = BackupState.AddMember("DELETED", smithyprelude.Unit)
-
-	BackupState_PENDING_DELETION = BackupState.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ClusterMode_FIPS = ClusterMode.AddMember("FIPS", smithyprelude.Unit)
-
-	ClusterMode_NON_FIPS = ClusterMode.AddMember("NON_FIPS", smithyprelude.Unit)
-
-	Backup_BackupId = Backup.AddMember("BackupId", _BackupId)
-
-	Backup_BackupArn = Backup.AddMember("BackupArn", _BackupArn)
-
-	Backup_BackupState = Backup.AddMember("BackupState", BackupState)
-
-	Backup_ClusterId = Backup.AddMember("ClusterId", _ClusterId)
-
-	Backup_CreateTimestamp = Backup.AddMember("CreateTimestamp", _Timestamp)
-
-	Backup_CopyTimestamp = Backup.AddMember("CopyTimestamp", _Timestamp)
-
-	Backup_NeverExpires = Backup.AddMember("NeverExpires", _Boolean)
-
-	Backup_SourceRegion = Backup.AddMember("SourceRegion", _Region)
-
-	Backup_SourceBackup = Backup.AddMember("SourceBackup", _BackupId)
-
-	Backup_SourceCluster = Backup.AddMember("SourceCluster", _ClusterId)
-
-	Backup_DeleteTimestamp = Backup.AddMember("DeleteTimestamp", _Timestamp)
-
-	Backup_TagList = Backup.AddMember("TagList", _TagList)
-
-	Backup_HsmType = Backup.AddMember("HsmType", _HsmType)
-
-	Backup_Mode = Backup.AddMember("Mode", ClusterMode)
-
-	BackupPolicy_DEFAULT = BackupPolicy.AddMember("DEFAULT", smithyprelude.Unit)
-
-	BackupRetentionType_DAYS = BackupRetentionType.AddMember("DAYS", smithyprelude.Unit)
-
-	BackupRetentionPolicy_Type = BackupRetentionPolicy.AddMember("Type", BackupRetentionType)
-
-	BackupRetentionPolicy_Value = BackupRetentionPolicy.AddMember("Value", _BackupRetentionValue)
-
-	_Backups_member = _Backups.AddMember("member", Backup)
-
-	Certificates_ClusterCsr = Certificates.AddMember("ClusterCsr", _Cert)
-
-	Certificates_HsmCertificate = Certificates.AddMember("HsmCertificate", _Cert)
-
-	Certificates_AwsHardwareCertificate = Certificates.AddMember("AwsHardwareCertificate", _Cert)
-
-	Certificates_ManufacturerHardwareCertificate = Certificates.AddMember("ManufacturerHardwareCertificate", _Cert)
-
-	Certificates_ClusterCertificate = Certificates.AddMember("ClusterCertificate", _Cert)
-
-	CloudHsmAccessDeniedException_Message = CloudHsmAccessDeniedException.AddMember("Message", _errorMessage)
-
-	CloudHsmInternalFailureException_Message = CloudHsmInternalFailureException.AddMember("Message", _errorMessage)
-
-	CloudHsmInvalidRequestException_Message = CloudHsmInvalidRequestException.AddMember("Message", _errorMessage)
-
-	CloudHsmResourceLimitExceededException_Message = CloudHsmResourceLimitExceededException.AddMember("Message", _errorMessage)
-
-	CloudHsmResourceNotFoundException_Message = CloudHsmResourceNotFoundException.AddMember("Message", _errorMessage)
-
-	CloudHsmServiceException_Message = CloudHsmServiceException.AddMember("Message", _errorMessage)
-
-	CloudHsmTagException_Message = CloudHsmTagException.AddMember("Message", _errorMessage)
-
-	HsmState_CREATE_IN_PROGRESS = HsmState.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	HsmState_ACTIVE = HsmState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	HsmState_DEGRADED = HsmState.AddMember("DEGRADED", smithyprelude.Unit)
-
-	HsmState_DELETE_IN_PROGRESS = HsmState.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	HsmState_DELETED = HsmState.AddMember("DELETED", smithyprelude.Unit)
-
-	Hsm_AvailabilityZone = Hsm.AddMember("AvailabilityZone", _ExternalAz)
-
-	Hsm_ClusterId = Hsm.AddMember("ClusterId", _ClusterId)
-
-	Hsm_SubnetId = Hsm.AddMember("SubnetId", _SubnetId)
-
-	Hsm_EniId = Hsm.AddMember("EniId", _EniId)
-
-	Hsm_EniIp = Hsm.AddMember("EniIp", _IpAddress)
-
-	Hsm_EniIpV6 = Hsm.AddMember("EniIpV6", _IpV6Address)
-
-	Hsm_HsmId = Hsm.AddMember("HsmId", _HsmId)
-
-	Hsm_HsmType = Hsm.AddMember("HsmType", _HsmType)
-
-	Hsm_State = Hsm.AddMember("State", HsmState)
-
-	Hsm_StateMessage = Hsm.AddMember("StateMessage", _String)
-
-	_Hsms_member = _Hsms.AddMember("member", Hsm)
-
-	ClusterState_CREATE_IN_PROGRESS = ClusterState.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	ClusterState_UNINITIALIZED = ClusterState.AddMember("UNINITIALIZED", smithyprelude.Unit)
-
-	ClusterState_INITIALIZE_IN_PROGRESS = ClusterState.AddMember("INITIALIZE_IN_PROGRESS", smithyprelude.Unit)
-
-	ClusterState_INITIALIZED = ClusterState.AddMember("INITIALIZED", smithyprelude.Unit)
-
-	ClusterState_ACTIVE = ClusterState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ClusterState_UPDATE_IN_PROGRESS = ClusterState.AddMember("UPDATE_IN_PROGRESS", smithyprelude.Unit)
-
-	ClusterState_MODIFY_IN_PROGRESS = ClusterState.AddMember("MODIFY_IN_PROGRESS", smithyprelude.Unit)
-
-	ClusterState_ROLLBACK_IN_PROGRESS = ClusterState.AddMember("ROLLBACK_IN_PROGRESS", smithyprelude.Unit)
-
-	ClusterState_DELETE_IN_PROGRESS = ClusterState.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	ClusterState_DELETED = ClusterState.AddMember("DELETED", smithyprelude.Unit)
-
-	ClusterState_DEGRADED = ClusterState.AddMember("DEGRADED", smithyprelude.Unit)
-
-	_ExternalSubnetMapping_key = _ExternalSubnetMapping.AddMember("key", _ExternalAz)
-
-	_ExternalSubnetMapping_value = _ExternalSubnetMapping.AddMember("value", _SubnetId)
-
-	NetworkType_IPV4 = NetworkType.AddMember("IPV4", smithyprelude.Unit)
-
-	NetworkType_DUALSTACK = NetworkType.AddMember("DUALSTACK", smithyprelude.Unit)
-
-	Cluster_BackupPolicy = Cluster.AddMember("BackupPolicy", BackupPolicy)
-
-	Cluster_BackupRetentionPolicy = Cluster.AddMember("BackupRetentionPolicy", BackupRetentionPolicy)
-
-	Cluster_ClusterId = Cluster.AddMember("ClusterId", _ClusterId)
-
-	Cluster_CreateTimestamp = Cluster.AddMember("CreateTimestamp", _Timestamp)
-
-	Cluster_Hsms = Cluster.AddMember("Hsms", _Hsms)
-
-	Cluster_HsmType = Cluster.AddMember("HsmType", _HsmType)
-
-	Cluster_HsmTypeRollbackExpiration = Cluster.AddMember("HsmTypeRollbackExpiration", _Timestamp)
-
-	Cluster_PreCoPassword = Cluster.AddMember("PreCoPassword", _PreCoPassword)
-
-	Cluster_SecurityGroup = Cluster.AddMember("SecurityGroup", _SecurityGroup)
-
-	Cluster_SourceBackupId = Cluster.AddMember("SourceBackupId", _BackupId)
-
-	Cluster_State = Cluster.AddMember("State", ClusterState)
-
-	Cluster_StateMessage = Cluster.AddMember("StateMessage", _StateMessage)
-
-	Cluster_SubnetMapping = Cluster.AddMember("SubnetMapping", _ExternalSubnetMapping)
-
-	Cluster_VpcId = Cluster.AddMember("VpcId", _VpcId)
-
-	Cluster_NetworkType = Cluster.AddMember("NetworkType", NetworkType)
-
-	Cluster_Certificates = Cluster.AddMember("Certificates", Certificates)
-
-	Cluster_TagList = Cluster.AddMember("TagList", _TagList)
-
-	Cluster_Mode = Cluster.AddMember("Mode", ClusterMode)
-
-	_Clusters_member = _Clusters.AddMember("member", Cluster)
-
-	DestinationBackup_CreateTimestamp = DestinationBackup.AddMember("CreateTimestamp", _Timestamp)
-
-	DestinationBackup_SourceRegion = DestinationBackup.AddMember("SourceRegion", _Region)
-
-	DestinationBackup_SourceBackup = DestinationBackup.AddMember("SourceBackup", _BackupId)
-
-	DestinationBackup_SourceCluster = DestinationBackup.AddMember("SourceCluster", _ClusterId)
-
-	_Strings_member = _Strings.AddMember("member", _String)
-
-	_Filters_key = _Filters.AddMember("key", _Field)
-
-	_Filters_value = _Filters.AddMember("value", _Strings)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	CopyBackupToRegionRequest_DestinationRegion = CopyBackupToRegionRequest.AddMember("DestinationRegion", _Region)
-
-	CopyBackupToRegionRequest_BackupId = CopyBackupToRegionRequest.AddMember("BackupId", _BackupId)
-
-	CopyBackupToRegionRequest_TagList = CopyBackupToRegionRequest.AddMember("TagList", _TagList)
-
-	CopyBackupToRegionResponse_DestinationBackup = CopyBackupToRegionResponse.AddMember("DestinationBackup", DestinationBackup)
-
-	CreateClusterRequest_BackupRetentionPolicy = CreateClusterRequest.AddMember("BackupRetentionPolicy", BackupRetentionPolicy)
-
-	CreateClusterRequest_HsmType = CreateClusterRequest.AddMember("HsmType", _HsmType)
-
-	CreateClusterRequest_SourceBackupId = CreateClusterRequest.AddMember("SourceBackupId", _BackupArn)
-
-	CreateClusterRequest_SubnetIds = CreateClusterRequest.AddMember("SubnetIds", _SubnetIds)
-
-	CreateClusterRequest_NetworkType = CreateClusterRequest.AddMember("NetworkType", NetworkType)
-
-	CreateClusterRequest_TagList = CreateClusterRequest.AddMember("TagList", _TagList)
-
-	CreateClusterRequest_Mode = CreateClusterRequest.AddMember("Mode", ClusterMode)
-
-	CreateClusterResponse_Cluster = CreateClusterResponse.AddMember("Cluster", Cluster)
-
-	CreateHsmRequest_ClusterId = CreateHsmRequest.AddMember("ClusterId", _ClusterId)
-
-	CreateHsmRequest_AvailabilityZone = CreateHsmRequest.AddMember("AvailabilityZone", _ExternalAz)
-
-	CreateHsmRequest_IpAddress = CreateHsmRequest.AddMember("IpAddress", _IpAddress)
-
-	CreateHsmResponse_Hsm = CreateHsmResponse.AddMember("Hsm", Hsm)
-
-	DeleteBackupRequest_BackupId = DeleteBackupRequest.AddMember("BackupId", _BackupId)
-
-	DeleteBackupResponse_Backup = DeleteBackupResponse.AddMember("Backup", Backup)
-
-	DeleteClusterRequest_ClusterId = DeleteClusterRequest.AddMember("ClusterId", _ClusterId)
-
-	DeleteClusterResponse_Cluster = DeleteClusterResponse.AddMember("Cluster", Cluster)
-
-	DeleteHsmRequest_ClusterId = DeleteHsmRequest.AddMember("ClusterId", _ClusterId)
-
-	DeleteHsmRequest_HsmId = DeleteHsmRequest.AddMember("HsmId", _HsmId)
-
-	DeleteHsmRequest_EniId = DeleteHsmRequest.AddMember("EniId", _EniId)
-
-	DeleteHsmRequest_EniIp = DeleteHsmRequest.AddMember("EniIp", _IpAddress)
-
-	DeleteHsmResponse_HsmId = DeleteHsmResponse.AddMember("HsmId", _HsmId)
-
-	DeleteResourcePolicyRequest_ResourceArn = DeleteResourcePolicyRequest.AddMember("ResourceArn", _CloudHsmArn)
-
-	DeleteResourcePolicyResponse_ResourceArn = DeleteResourcePolicyResponse.AddMember("ResourceArn", _CloudHsmArn)
-
-	DeleteResourcePolicyResponse_Policy = DeleteResourcePolicyResponse.AddMember("Policy", _ResourcePolicy)
-
-	DescribeBackupsRequest_NextToken = DescribeBackupsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeBackupsRequest_MaxResults = DescribeBackupsRequest.AddMember("MaxResults", _BackupsMaxSize)
-
-	DescribeBackupsRequest_Filters = DescribeBackupsRequest.AddMember("Filters", _Filters)
-
-	DescribeBackupsRequest_Shared = DescribeBackupsRequest.AddMember("Shared", _Boolean)
-
-	DescribeBackupsRequest_SortAscending = DescribeBackupsRequest.AddMember("SortAscending", _Boolean)
-
-	DescribeBackupsResponse_Backups = DescribeBackupsResponse.AddMember("Backups", _Backups)
-
-	DescribeBackupsResponse_NextToken = DescribeBackupsResponse.AddMember("NextToken", _NextToken)
-
-	DescribeClustersRequest_Filters = DescribeClustersRequest.AddMember("Filters", _Filters)
-
-	DescribeClustersRequest_NextToken = DescribeClustersRequest.AddMember("NextToken", _NextToken)
-
-	DescribeClustersRequest_MaxResults = DescribeClustersRequest.AddMember("MaxResults", _ClustersMaxSize)
-
-	DescribeClustersResponse_Clusters = DescribeClustersResponse.AddMember("Clusters", _Clusters)
-
-	DescribeClustersResponse_NextToken = DescribeClustersResponse.AddMember("NextToken", _NextToken)
-
-	GetResourcePolicyRequest_ResourceArn = GetResourcePolicyRequest.AddMember("ResourceArn", _CloudHsmArn)
-
-	GetResourcePolicyResponse_Policy = GetResourcePolicyResponse.AddMember("Policy", _ResourcePolicy)
-
-	InitializeClusterRequest_ClusterId = InitializeClusterRequest.AddMember("ClusterId", _ClusterId)
-
-	InitializeClusterRequest_SignedCert = InitializeClusterRequest.AddMember("SignedCert", _Cert)
-
-	InitializeClusterRequest_TrustAnchor = InitializeClusterRequest.AddMember("TrustAnchor", _Cert)
-
-	InitializeClusterResponse_State = InitializeClusterResponse.AddMember("State", ClusterState)
-
-	InitializeClusterResponse_StateMessage = InitializeClusterResponse.AddMember("StateMessage", _StateMessage)
-
-	ListTagsRequest_ResourceId = ListTagsRequest.AddMember("ResourceId", _ResourceId)
-
-	ListTagsRequest_NextToken = ListTagsRequest.AddMember("NextToken", _NextToken)
-
-	ListTagsRequest_MaxResults = ListTagsRequest.AddMember("MaxResults", _MaxSize)
-
-	ListTagsResponse_TagList = ListTagsResponse.AddMember("TagList", _TagList)
-
-	ListTagsResponse_NextToken = ListTagsResponse.AddMember("NextToken", _NextToken)
-
-	ModifyBackupAttributesRequest_BackupId = ModifyBackupAttributesRequest.AddMember("BackupId", _BackupId)
-
-	ModifyBackupAttributesRequest_NeverExpires = ModifyBackupAttributesRequest.AddMember("NeverExpires", _Boolean)
-
-	ModifyBackupAttributesResponse_Backup = ModifyBackupAttributesResponse.AddMember("Backup", Backup)
-
-	ModifyClusterRequest_HsmType = ModifyClusterRequest.AddMember("HsmType", _HsmType)
-
-	ModifyClusterRequest_BackupRetentionPolicy = ModifyClusterRequest.AddMember("BackupRetentionPolicy", BackupRetentionPolicy)
-
-	ModifyClusterRequest_ClusterId = ModifyClusterRequest.AddMember("ClusterId", _ClusterId)
-
-	ModifyClusterResponse_Cluster = ModifyClusterResponse.AddMember("Cluster", Cluster)
-
-	PutResourcePolicyRequest_ResourceArn = PutResourcePolicyRequest.AddMember("ResourceArn", _CloudHsmArn)
-
-	PutResourcePolicyRequest_Policy = PutResourcePolicyRequest.AddMember("Policy", _ResourcePolicy)
-
-	PutResourcePolicyResponse_ResourceArn = PutResourcePolicyResponse.AddMember("ResourceArn", _CloudHsmArn)
-
-	PutResourcePolicyResponse_Policy = PutResourcePolicyResponse.AddMember("Policy", _ResourcePolicy)
-
-	RestoreBackupRequest_BackupId = RestoreBackupRequest.AddMember("BackupId", _BackupId)
-
-	RestoreBackupResponse_Backup = RestoreBackupResponse.AddMember("Backup", Backup)
-
-	TagResourceRequest_ResourceId = TagResourceRequest.AddMember("ResourceId", _ResourceId)
-
-	TagResourceRequest_TagList = TagResourceRequest.AddMember("TagList", _TagList)
-
-	UntagResourceRequest_ResourceId = UntagResourceRequest.AddMember("ResourceId", _ResourceId)
-
-	UntagResourceRequest_TagKeyList = UntagResourceRequest.AddMember("TagKeyList", _TagKeyList)
-
+const blob = "" +
+	"CloudHsmResourceLimitExceededExceptionCloudHsmResourceNotFoundExceptionCloudHsmInternalFailureExcept" +
+	"ionCloudHsmInvalidRequestExceptionManufacturerHardwareCertificateModifyBackupAttributesResponseCloud" +
+	"HsmAccessDeniedExceptionModifyBackupAttributesRequestDeleteResourcePolicyResponseDeleteResourcePolic" +
+	"yRequestCopyBackupToRegionResponseCopyBackupToRegionRequestGetResourcePolicyResponseHsmTypeRollbackE" +
+	"xpirationInitializeClusterResponsePutResourcePolicyResponseCloudHsmServiceExceptionDescribeClustersR" +
+	"esponseGetResourcePolicyRequestInitializeClusterRequestPutResourcePolicyRequestDescribeBackupsRespon" +
+	"seDescribeClustersRequestAwsHardwareCertificateDescribeBackupsRequestINITIALIZE_IN_PROGRESSBackupRet" +
+	"entionPolicyCreateClusterResponseDeleteClusterResponseExternalSubnetMappingModifyClusterResponseRest" +
+	"oreBackupResponseUntagResourceResponseBackupRetentionValueCloudHsmTagExceptionCreateClusterRequestDe" +
+	"leteBackupResponseDeleteClusterRequestModifyClusterRequestROLLBACK_IN_PROGRESSRestoreBackupRequestUn" +
+	"tagResourceRequestBackupRetentionTypeDeleteBackupRequestTagResourceResponseCREATE_IN_PROGRESSCluster" +
+	"CertificateDELETE_IN_PROGRESSMODIFY_IN_PROGRESSTagResourceRequestUPDATE_IN_PROGRESSCreateHsmResponse" +
+	"DeleteHsmResponseDestinationBackupDestinationRegionAvailabilityZoneCreateHsmRequestDeleteHsmRequestL" +
+	"istTagsResponsePENDING_DELETIONBaldrApiServiceClustersMaxSizeCreateTimestampDeleteTimestampListTagsR" +
+	"equestBackupsMaxSizeHsmCertificateSourceBackupIdCopyTimestampPreCoPasswordSecurityGroupSortAscending" +
+	"SourceClusterUNINITIALIZEDBackupPolicyCertificatesClusterStateNeverExpiresSourceRegionStateMessageer" +
+	"rorMessageBackupStateCloudHsmArnClusterModeIpV6AddressNetworkTypeResourceArnTrustAnchorClusterCsrExt" +
+	"ernalAzMaxResultsResourceIdSignedCertTagKeyListBackupArnClusterIdDUALSTACKIpAddressNextTokenSubnetId" +
+	"sDEGRADEDHsmStateNON_FIPSTagValueBooleanDEFAULTDELETEDEniIpV6FiltersStringsTagListACTIVESharedmember" +
+	"EniIdFieldHsmIdREADYVpcIdvalueDAYSHsmsIPV4Unitkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.cloudhsmv2", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 308, Target: 0, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 712, Target: 1, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1183, Target: 2, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 898, Target: 3, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 733, Target: 4, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1200, Target: 5, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 253, Target: 6, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 579, Target: 7, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 483, Target: 8, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 359, Target: 9, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 409, Target: 10, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1299, Target: 11, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 165, Target: 12, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 775, Target: 13, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 434, Target: 14, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 796, Target: 15, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1056, Target: 16, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 817, Target: 17, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1331, Target: 18, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 171, Target: 19, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1440, Target: 35, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1747, Target: 34, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1610, Target: 47, Traits: 0, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 177, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1448, Target: 177, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1562, Target: 52, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1574, Target: 157, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1434, Target: 35, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1500, Target: 94, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1376, Target: 177, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1875, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 384, Target: 148, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1639, Target: 95, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1747, Target: 34, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1440, Target: 35, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1526, Target: 36, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1840, Target: 284, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 691, Target: 38, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 387, Target: 41, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 853, Target: 43, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1018, Target: 41, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1930, Target: 284, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 838, Target: 43, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 587, Target: 44, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1894, Target: 19, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1406, Target: 46, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1610, Target: 47, Traits: 0, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1075, Target: 284, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1915, Target: 284, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1847, Target: 284, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1315, Target: 284, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1833, Target: 52, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 154, Target: 53, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1538, Target: 54, Traits: 0, StrLen: 12, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1687, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1420, Target: 53, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 625, Target: 53, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 134, Target: 53, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1093, Target: 53, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 195, Target: 60, Traits: 1, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1591, Target: 119, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1621, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 71, Target: 63, Traits: 2, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1591, Target: 119, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 103, Target: 65, Traits: 1, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1591, Target: 119, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 67, Traits: 1, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1591, Target: 119, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 38, Target: 69, Traits: 1, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1591, Target: 119, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 459, Target: 71, Traits: 1, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1591, Target: 119, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 858, Target: 73, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1591, Target: 119, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 419, Target: 75, Traits: 0, StrLen: 7, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1526, Target: 36, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 691, Target: 38, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 177, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1934, Target: 140, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 384, Target: 148, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 384, Target: 177, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1461, Target: 156, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1474, Target: 160, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1434, Target: 35, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1557, Target: 101, Traits: 0, StrLen: 5, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1586, Target: 161, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 762, Target: 121, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1920, Target: 178, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 152, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1538, Target: 54, Traits: 0, StrLen: 12, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1875, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1639, Target: 95, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1632, Target: 95, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1821, Target: 284, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1817, Target: 284, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 491, Target: 98, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1894, Target: 75, Traits: 0, StrLen: 6, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1346, Target: 100, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1550, Target: 101, Traits: 0, StrLen: 12, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1075, Target: 284, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1513, Target: 284, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 669, Target: 284, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1515, Target: 284, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1882, Target: 284, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1165, Target: 284, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1129, Target: 284, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 958, Target: 284, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1111, Target: 284, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1847, Target: 284, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1801, Target: 284, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1217, Target: 113, Traits: 0, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1361, Target: 177, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1574, Target: 157, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1434, Target: 35, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1500, Target: 94, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 118, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1598, Target: 119, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1697, Target: 120, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 754, Target: 121, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1946, Target: 120, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1925, Target: 165, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1905, Target: 124, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1861, Target: 125, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1946, Target: 124, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1925, Target: 163, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5, Target: 128, Traits: 0, StrLen: 3, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1251, Target: 120, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1792, Target: 165, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 118, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1854, Target: 149, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1854, Target: 150, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1910, Target: 139, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 384, Target: 148, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1557, Target: 142, Traits: 0, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1586, Target: 162, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1910, Target: 139, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1934, Target: 140, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1894, Target: 128, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1809, Target: 142, Traits: 0, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1075, Target: 284, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1882, Target: 284, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1801, Target: 284, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1111, Target: 284, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1847, Target: 284, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 384, Target: 148, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1774, Target: 149, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1643, Target: 150, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1354, Target: 151, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1654, Target: 152, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1938, Target: 284, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1765, Target: 284, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1783, Target: 155, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1461, Target: 156, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 320, Target: 157, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1717, Target: 158, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 259, Target: 159, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1474, Target: 160, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1586, Target: 161, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1868, Target: 162, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1868, Target: 163, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1894, Target: 162, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1792, Target: 165, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1792, Target: 166, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1894, Target: 165, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 866, Target: 168, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1740, Target: 171, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 853, Target: 176, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1737, Target: 171, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1737, Target: 172, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1894, Target: 171, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1875, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1894, Target: 168, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1825, Target: 176, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1367, Target: 177, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1920, Target: 178, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 334, Target: 179, Traits: 0, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1234, Target: 157, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1440, Target: 35, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1875, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 308, Target: 183, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1217, Target: 113, Traits: 0, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 878, Target: 185, Traits: 0, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 691, Target: 38, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 384, Target: 148, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1434, Target: 34, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1792, Target: 166, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1654, Target: 152, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1875, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1639, Target: 95, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 712, Target: 193, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 419, Target: 75, Traits: 0, StrLen: 7, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1267, Target: 195, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1251, Target: 120, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1774, Target: 149, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1183, Target: 199, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5, Target: 128, Traits: 0, StrLen: 3, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1037, Target: 201, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1440, Target: 35, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 898, Target: 203, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 171, Target: 19, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 918, Target: 205, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 733, Target: 207, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 419, Target: 75, Traits: 0, StrLen: 7, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1283, Target: 209, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1910, Target: 139, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 118, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1854, Target: 149, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1200, Target: 214, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1910, Target: 139, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 281, Target: 216, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1665, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 253, Target: 218, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1665, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 267, Target: 159, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 647, Target: 221, Traits: 0, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1783, Target: 155, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1707, Target: 46, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1861, Target: 125, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1888, Target: 52, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1487, Target: 52, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 579, Target: 227, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 587, Target: 44, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1783, Target: 155, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 602, Target: 230, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1861, Target: 125, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1783, Target: 155, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1707, Target: 100, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 483, Target: 234, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 491, Target: 98, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1783, Target: 155, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 507, Target: 237, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1665, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 359, Target: 239, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 267, Target: 159, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 531, Target: 241, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1727, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1676, Target: 53, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 409, Target: 245, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1557, Target: 101, Traits: 0, StrLen: 5, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1586, Target: 161, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1391, Target: 248, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1717, Target: 158, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1783, Target: 155, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1707, Target: 151, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1299, Target: 252, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1875, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1783, Target: 155, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 255, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1440, Target: 35, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1562, Target: 52, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 165, Target: 258, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 171, Target: 19, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 938, Target: 260, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 384, Target: 148, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 691, Target: 38, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1756, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 775, Target: 264, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 419, Target: 75, Traits: 0, StrLen: 7, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 555, Target: 266, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1665, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 267, Target: 159, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 434, Target: 269, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1665, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 267, Target: 159, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 978, Target: 272, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1440, Target: 35, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 796, Target: 274, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 171, Target: 19, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1147, Target: 276, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1717, Target: 158, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1875, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1056, Target: 279, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 998, Target: 280, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1717, Target: 158, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1737, Target: 172, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 817, Target: 283, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1942, Target: 284, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}},
+	},
 }
+
+var handles = [285]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+}
+
+var CopyBackupToRegion = &handles[0]
+
+var CreateCluster = &handles[1]
+
+var CreateHsm = &handles[2]
+
+var DeleteBackup = &handles[3]
+
+var DeleteCluster = &handles[4]
+
+var DeleteHsm = &handles[5]
+
+var DeleteResourcePolicy = &handles[6]
+
+var DescribeBackups = &handles[7]
+
+var DescribeClusters = &handles[8]
+
+var GetResourcePolicy = &handles[9]
+
+var InitializeCluster = &handles[10]
+
+var ListTags = &handles[11]
+
+var ModifyBackupAttributes = &handles[12]
+
+var ModifyCluster = &handles[13]
+
+var PutResourcePolicy = &handles[14]
+
+var RestoreBackup = &handles[15]
+
+var TagResource = &handles[16]
+
+var UntagResource = &handles[17]
+
+var _BaldrApiService = &handles[18]
+
+var Backup = &handles[19]
+var Backup_BackupId = &handles[20]
+var Backup_BackupArn = &handles[21]
+var Backup_BackupState = &handles[22]
+var Backup_ClusterId = &handles[23]
+var Backup_CreateTimestamp = &handles[24]
+var Backup_CopyTimestamp = &handles[25]
+var Backup_NeverExpires = &handles[26]
+var Backup_SourceRegion = &handles[27]
+var Backup_SourceBackup = &handles[28]
+var Backup_SourceCluster = &handles[29]
+var Backup_DeleteTimestamp = &handles[30]
+var Backup_TagList = &handles[31]
+var Backup_HsmType = &handles[32]
+var Backup_Mode = &handles[33]
+
+var _BackupArn = &handles[34]
+
+var _BackupId = &handles[35]
+
+var BackupPolicy = &handles[36]
+var BackupPolicy_DEFAULT = &handles[37]
+
+var BackupRetentionPolicy = &handles[38]
+var BackupRetentionPolicy_Type = &handles[39]
+var BackupRetentionPolicy_Value = &handles[40]
+
+var BackupRetentionType = &handles[41]
+var BackupRetentionType_DAYS = &handles[42]
+
+var _BackupRetentionValue = &handles[43]
+
+var _Backups = &handles[44]
+var _Backups_member = &handles[45]
+
+var _BackupsMaxSize = &handles[46]
+
+var BackupState = &handles[47]
+var BackupState_CREATE_IN_PROGRESS = &handles[48]
+var BackupState_READY = &handles[49]
+var BackupState_DELETED = &handles[50]
+var BackupState_PENDING_DELETION = &handles[51]
+
+var _Boolean = &handles[52]
+
+var _Cert = &handles[53]
+
+var Certificates = &handles[54]
+var Certificates_ClusterCsr = &handles[55]
+var Certificates_HsmCertificate = &handles[56]
+var Certificates_AwsHardwareCertificate = &handles[57]
+var Certificates_ManufacturerHardwareCertificate = &handles[58]
+var Certificates_ClusterCertificate = &handles[59]
+
+var CloudHsmAccessDeniedException = &handles[60]
+var CloudHsmAccessDeniedException_Message = &handles[61]
+
+var _CloudHsmArn = &handles[62]
+
+var CloudHsmInternalFailureException = &handles[63]
+var CloudHsmInternalFailureException_Message = &handles[64]
+
+var CloudHsmInvalidRequestException = &handles[65]
+var CloudHsmInvalidRequestException_Message = &handles[66]
+
+var CloudHsmResourceLimitExceededException = &handles[67]
+var CloudHsmResourceLimitExceededException_Message = &handles[68]
+
+var CloudHsmResourceNotFoundException = &handles[69]
+var CloudHsmResourceNotFoundException_Message = &handles[70]
+
+var CloudHsmServiceException = &handles[71]
+var CloudHsmServiceException_Message = &handles[72]
+
+var CloudHsmTagException = &handles[73]
+var CloudHsmTagException_Message = &handles[74]
+
+var Cluster = &handles[75]
+var Cluster_BackupPolicy = &handles[76]
+var Cluster_BackupRetentionPolicy = &handles[77]
+var Cluster_ClusterId = &handles[78]
+var Cluster_CreateTimestamp = &handles[79]
+var Cluster_Hsms = &handles[80]
+var Cluster_HsmType = &handles[81]
+var Cluster_HsmTypeRollbackExpiration = &handles[82]
+var Cluster_PreCoPassword = &handles[83]
+var Cluster_SecurityGroup = &handles[84]
+var Cluster_SourceBackupId = &handles[85]
+var Cluster_State = &handles[86]
+var Cluster_StateMessage = &handles[87]
+var Cluster_SubnetMapping = &handles[88]
+var Cluster_VpcId = &handles[89]
+var Cluster_NetworkType = &handles[90]
+var Cluster_Certificates = &handles[91]
+var Cluster_TagList = &handles[92]
+var Cluster_Mode = &handles[93]
+
+var _ClusterId = &handles[94]
+
+var ClusterMode = &handles[95]
+var ClusterMode_FIPS = &handles[96]
+var ClusterMode_NON_FIPS = &handles[97]
+
+var _Clusters = &handles[98]
+var _Clusters_member = &handles[99]
+
+var _ClustersMaxSize = &handles[100]
+
+var ClusterState = &handles[101]
+var ClusterState_CREATE_IN_PROGRESS = &handles[102]
+var ClusterState_UNINITIALIZED = &handles[103]
+var ClusterState_INITIALIZE_IN_PROGRESS = &handles[104]
+var ClusterState_INITIALIZED = &handles[105]
+var ClusterState_ACTIVE = &handles[106]
+var ClusterState_UPDATE_IN_PROGRESS = &handles[107]
+var ClusterState_MODIFY_IN_PROGRESS = &handles[108]
+var ClusterState_ROLLBACK_IN_PROGRESS = &handles[109]
+var ClusterState_DELETE_IN_PROGRESS = &handles[110]
+var ClusterState_DELETED = &handles[111]
+var ClusterState_DEGRADED = &handles[112]
+
+var DestinationBackup = &handles[113]
+var DestinationBackup_CreateTimestamp = &handles[114]
+var DestinationBackup_SourceRegion = &handles[115]
+var DestinationBackup_SourceBackup = &handles[116]
+var DestinationBackup_SourceCluster = &handles[117]
+
+var _EniId = &handles[118]
+
+var _errorMessage = &handles[119]
+
+var _ExternalAz = &handles[120]
+
+var _ExternalSubnetMapping = &handles[121]
+var _ExternalSubnetMapping_key = &handles[122]
+var _ExternalSubnetMapping_value = &handles[123]
+
+var _Field = &handles[124]
+
+var _Filters = &handles[125]
+var _Filters_key = &handles[126]
+var _Filters_value = &handles[127]
+
+var Hsm = &handles[128]
+var Hsm_AvailabilityZone = &handles[129]
+var Hsm_ClusterId = &handles[130]
+var Hsm_SubnetId = &handles[131]
+var Hsm_EniId = &handles[132]
+var Hsm_EniIp = &handles[133]
+var Hsm_EniIpV6 = &handles[134]
+var Hsm_HsmId = &handles[135]
+var Hsm_HsmType = &handles[136]
+var Hsm_State = &handles[137]
+var Hsm_StateMessage = &handles[138]
+
+var _HsmId = &handles[139]
+
+var _Hsms = &handles[140]
+var _Hsms_member = &handles[141]
+
+var HsmState = &handles[142]
+var HsmState_CREATE_IN_PROGRESS = &handles[143]
+var HsmState_ACTIVE = &handles[144]
+var HsmState_DEGRADED = &handles[145]
+var HsmState_DELETE_IN_PROGRESS = &handles[146]
+var HsmState_DELETED = &handles[147]
+
+var _HsmType = &handles[148]
+
+var _IpAddress = &handles[149]
+
+var _IpV6Address = &handles[150]
+
+var _MaxSize = &handles[151]
+
+var NetworkType = &handles[152]
+var NetworkType_IPV4 = &handles[153]
+var NetworkType_DUALSTACK = &handles[154]
+
+var _NextToken = &handles[155]
+
+var _PreCoPassword = &handles[156]
+
+var _Region = &handles[157]
+
+var _ResourceId = &handles[158]
+
+var _ResourcePolicy = &handles[159]
+
+var _SecurityGroup = &handles[160]
+
+var _StateMessage = &handles[161]
+
+var _String = &handles[162]
+
+var _Strings = &handles[163]
+var _Strings_member = &handles[164]
+
+var _SubnetId = &handles[165]
+
+var _SubnetIds = &handles[166]
+var _SubnetIds_member = &handles[167]
+
+var Tag = &handles[168]
+var Tag_Key = &handles[169]
+var Tag_Value = &handles[170]
+
+var _TagKey = &handles[171]
+
+var _TagKeyList = &handles[172]
+var _TagKeyList_member = &handles[173]
+
+var _TagList = &handles[174]
+var _TagList_member = &handles[175]
+
+var _TagValue = &handles[176]
+
+var _Timestamp = &handles[177]
+
+var _VpcId = &handles[178]
+
+var CopyBackupToRegionRequest = &handles[179]
+var CopyBackupToRegionRequest_DestinationRegion = &handles[180]
+var CopyBackupToRegionRequest_BackupId = &handles[181]
+var CopyBackupToRegionRequest_TagList = &handles[182]
+
+var CopyBackupToRegionResponse = &handles[183]
+var CopyBackupToRegionResponse_DestinationBackup = &handles[184]
+
+var CreateClusterRequest = &handles[185]
+var CreateClusterRequest_BackupRetentionPolicy = &handles[186]
+var CreateClusterRequest_HsmType = &handles[187]
+var CreateClusterRequest_SourceBackupId = &handles[188]
+var CreateClusterRequest_SubnetIds = &handles[189]
+var CreateClusterRequest_NetworkType = &handles[190]
+var CreateClusterRequest_TagList = &handles[191]
+var CreateClusterRequest_Mode = &handles[192]
+
+var CreateClusterResponse = &handles[193]
+var CreateClusterResponse_Cluster = &handles[194]
+
+var CreateHsmRequest = &handles[195]
+var CreateHsmRequest_ClusterId = &handles[196]
+var CreateHsmRequest_AvailabilityZone = &handles[197]
+var CreateHsmRequest_IpAddress = &handles[198]
+
+var CreateHsmResponse = &handles[199]
+var CreateHsmResponse_Hsm = &handles[200]
+
+var DeleteBackupRequest = &handles[201]
+var DeleteBackupRequest_BackupId = &handles[202]
+
+var DeleteBackupResponse = &handles[203]
+var DeleteBackupResponse_Backup = &handles[204]
+
+var DeleteClusterRequest = &handles[205]
+var DeleteClusterRequest_ClusterId = &handles[206]
+
+var DeleteClusterResponse = &handles[207]
+var DeleteClusterResponse_Cluster = &handles[208]
+
+var DeleteHsmRequest = &handles[209]
+var DeleteHsmRequest_ClusterId = &handles[210]
+var DeleteHsmRequest_HsmId = &handles[211]
+var DeleteHsmRequest_EniId = &handles[212]
+var DeleteHsmRequest_EniIp = &handles[213]
+
+var DeleteHsmResponse = &handles[214]
+var DeleteHsmResponse_HsmId = &handles[215]
+
+var DeleteResourcePolicyRequest = &handles[216]
+var DeleteResourcePolicyRequest_ResourceArn = &handles[217]
+
+var DeleteResourcePolicyResponse = &handles[218]
+var DeleteResourcePolicyResponse_ResourceArn = &handles[219]
+var DeleteResourcePolicyResponse_Policy = &handles[220]
+
+var DescribeBackupsRequest = &handles[221]
+var DescribeBackupsRequest_NextToken = &handles[222]
+var DescribeBackupsRequest_MaxResults = &handles[223]
+var DescribeBackupsRequest_Filters = &handles[224]
+var DescribeBackupsRequest_Shared = &handles[225]
+var DescribeBackupsRequest_SortAscending = &handles[226]
+
+var DescribeBackupsResponse = &handles[227]
+var DescribeBackupsResponse_Backups = &handles[228]
+var DescribeBackupsResponse_NextToken = &handles[229]
+
+var DescribeClustersRequest = &handles[230]
+var DescribeClustersRequest_Filters = &handles[231]
+var DescribeClustersRequest_NextToken = &handles[232]
+var DescribeClustersRequest_MaxResults = &handles[233]
+
+var DescribeClustersResponse = &handles[234]
+var DescribeClustersResponse_Clusters = &handles[235]
+var DescribeClustersResponse_NextToken = &handles[236]
+
+var GetResourcePolicyRequest = &handles[237]
+var GetResourcePolicyRequest_ResourceArn = &handles[238]
+
+var GetResourcePolicyResponse = &handles[239]
+var GetResourcePolicyResponse_Policy = &handles[240]
+
+var InitializeClusterRequest = &handles[241]
+var InitializeClusterRequest_ClusterId = &handles[242]
+var InitializeClusterRequest_SignedCert = &handles[243]
+var InitializeClusterRequest_TrustAnchor = &handles[244]
+
+var InitializeClusterResponse = &handles[245]
+var InitializeClusterResponse_State = &handles[246]
+var InitializeClusterResponse_StateMessage = &handles[247]
+
+var ListTagsRequest = &handles[248]
+var ListTagsRequest_ResourceId = &handles[249]
+var ListTagsRequest_NextToken = &handles[250]
+var ListTagsRequest_MaxResults = &handles[251]
+
+var ListTagsResponse = &handles[252]
+var ListTagsResponse_TagList = &handles[253]
+var ListTagsResponse_NextToken = &handles[254]
+
+var ModifyBackupAttributesRequest = &handles[255]
+var ModifyBackupAttributesRequest_BackupId = &handles[256]
+var ModifyBackupAttributesRequest_NeverExpires = &handles[257]
+
+var ModifyBackupAttributesResponse = &handles[258]
+var ModifyBackupAttributesResponse_Backup = &handles[259]
+
+var ModifyClusterRequest = &handles[260]
+var ModifyClusterRequest_HsmType = &handles[261]
+var ModifyClusterRequest_BackupRetentionPolicy = &handles[262]
+var ModifyClusterRequest_ClusterId = &handles[263]
+
+var ModifyClusterResponse = &handles[264]
+var ModifyClusterResponse_Cluster = &handles[265]
+
+var PutResourcePolicyRequest = &handles[266]
+var PutResourcePolicyRequest_ResourceArn = &handles[267]
+var PutResourcePolicyRequest_Policy = &handles[268]
+
+var PutResourcePolicyResponse = &handles[269]
+var PutResourcePolicyResponse_ResourceArn = &handles[270]
+var PutResourcePolicyResponse_Policy = &handles[271]
+
+var RestoreBackupRequest = &handles[272]
+var RestoreBackupRequest_BackupId = &handles[273]
+
+var RestoreBackupResponse = &handles[274]
+var RestoreBackupResponse_Backup = &handles[275]
+
+var TagResourceRequest = &handles[276]
+var TagResourceRequest_ResourceId = &handles[277]
+var TagResourceRequest_TagList = &handles[278]
+
+var TagResourceResponse = &handles[279]
+
+var UntagResourceRequest = &handles[280]
+var UntagResourceRequest_ResourceId = &handles[281]
+var UntagResourceRequest_TagKeyList = &handles[282]
+
+var UntagResourceResponse = &handles[283]
+
+var BaldrApiService = &smithy.ServiceSchema{Schema: &handles[18], Version: "2017-04-28"}

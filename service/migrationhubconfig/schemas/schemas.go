@@ -4,270 +4,246 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateHomeRegionControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "CreateHomeRegionControl",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteHomeRegionControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DeleteHomeRegionControl",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeHomeRegionControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DescribeHomeRegionControls",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetHomeRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "GetHomeRegion",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSMigrationHubMultiAccountService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "AWSMigrationHubMultiAccountService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMigrationHubMultiAccountService = smithy.NewServiceSchema(_AWSMigrationHubMultiAccountService, "2019-06-30")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var AccessDeniedException_Message *smithy.Schema
-
-var _ControlId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "ControlId",
-}, smithy.ShapeTypeString, 0)
-
-var _DescribeHomeRegionControlsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DescribeHomeRegionControlsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DryRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DryRun",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DryRunOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DryRunOperation",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DryRunOperation_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _HomeRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "HomeRegion",
-}, smithy.ShapeTypeString, 0)
-
-var HomeRegionControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "HomeRegionControl",
-}, smithy.ShapeTypeStructure, 4)
-var HomeRegionControl_ControlId *smithy.Schema
-
-var HomeRegionControl_HomeRegion *smithy.Schema
-
-var HomeRegionControl_Target *smithy.Schema
-
-var HomeRegionControl_RequestedTime *smithy.Schema
-
-var _HomeRegionControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "HomeRegionControls",
-}, smithy.ShapeTypeList, 1)
-var _HomeRegionControls_member *smithy.Schema
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerError_Message *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidInputException_Message *smithy.Schema
-
-var _RequestedTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "RequestedTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "Target",
-}, smithy.ShapeTypeStructure, 2)
-var Target_Type *smithy.Schema
-
-var Target_Id *smithy.Schema
-
-var _TargetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "TargetId",
-}, smithy.ShapeTypeString, 0)
-
-var TargetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "TargetType",
-}, smithy.ShapeTypeEnum, 1)
-var TargetType_ACCOUNT *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_RetryAfterSeconds *smithy.Schema
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var CreateHomeRegionControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "CreateHomeRegionControlRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateHomeRegionControlRequest_HomeRegion *smithy.Schema
-
-var CreateHomeRegionControlRequest_Target *smithy.Schema
-
-var CreateHomeRegionControlRequest_DryRun *smithy.Schema
-
-var CreateHomeRegionControlResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "CreateHomeRegionControlResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateHomeRegionControlResult_HomeRegionControl *smithy.Schema
-
-var DeleteHomeRegionControlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DeleteHomeRegionControlRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHomeRegionControlRequest_ControlId *smithy.Schema
-
-var DeleteHomeRegionControlResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DeleteHomeRegionControlResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeHomeRegionControlsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DescribeHomeRegionControlsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeHomeRegionControlsRequest_ControlId *smithy.Schema
-
-var DescribeHomeRegionControlsRequest_HomeRegion *smithy.Schema
-
-var DescribeHomeRegionControlsRequest_Target *smithy.Schema
-
-var DescribeHomeRegionControlsRequest_MaxResults *smithy.Schema
-
-var DescribeHomeRegionControlsRequest_NextToken *smithy.Schema
-
-var DescribeHomeRegionControlsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "DescribeHomeRegionControlsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeHomeRegionControlsResult_HomeRegionControls *smithy.Schema
-
-var DescribeHomeRegionControlsResult_NextToken *smithy.Schema
-
-var GetHomeRegionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "GetHomeRegionRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetHomeRegionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubconfig",
-	Name:      "GetHomeRegionResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetHomeRegionResult_HomeRegion *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	DryRunOperation_Message = DryRunOperation.AddMember("Message", _ErrorMessage)
-
-	TargetType_ACCOUNT = TargetType.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	Target_Type = Target.AddMember("Type", TargetType)
-
-	Target_Id = Target.AddMember("Id", _TargetId)
-
-	HomeRegionControl_ControlId = HomeRegionControl.AddMember("ControlId", _ControlId)
-
-	HomeRegionControl_HomeRegion = HomeRegionControl.AddMember("HomeRegion", _HomeRegion)
-
-	HomeRegionControl_Target = HomeRegionControl.AddMember("Target", Target)
-
-	HomeRegionControl_RequestedTime = HomeRegionControl.AddMember("RequestedTime", _RequestedTime)
-
-	_HomeRegionControls_member = _HomeRegionControls.AddMember("member", HomeRegionControl)
-
-	InternalServerError_Message = InternalServerError.AddMember("Message", _ErrorMessage)
-
-	InvalidInputException_Message = InvalidInputException.AddMember("Message", _ErrorMessage)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _ErrorMessage)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	ThrottlingException_RetryAfterSeconds = ThrottlingException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	CreateHomeRegionControlRequest_HomeRegion = CreateHomeRegionControlRequest.AddMember("HomeRegion", _HomeRegion)
-
-	CreateHomeRegionControlRequest_Target = CreateHomeRegionControlRequest.AddMember("Target", Target)
-
-	CreateHomeRegionControlRequest_DryRun = CreateHomeRegionControlRequest.AddMember("DryRun", _DryRun)
-
-	CreateHomeRegionControlResult_HomeRegionControl = CreateHomeRegionControlResult.AddMember("HomeRegionControl", HomeRegionControl)
-
-	DeleteHomeRegionControlRequest_ControlId = DeleteHomeRegionControlRequest.AddMember("ControlId", _ControlId)
-
-	DescribeHomeRegionControlsRequest_ControlId = DescribeHomeRegionControlsRequest.AddMember("ControlId", _ControlId)
-
-	DescribeHomeRegionControlsRequest_HomeRegion = DescribeHomeRegionControlsRequest.AddMember("HomeRegion", _HomeRegion)
-
-	DescribeHomeRegionControlsRequest_Target = DescribeHomeRegionControlsRequest.AddMember("Target", Target)
-
-	DescribeHomeRegionControlsRequest_MaxResults = DescribeHomeRegionControlsRequest.AddMember("MaxResults", _DescribeHomeRegionControlsMaxResults)
-
-	DescribeHomeRegionControlsRequest_NextToken = DescribeHomeRegionControlsRequest.AddMember("NextToken", _Token)
-
-	DescribeHomeRegionControlsResult_HomeRegionControls = DescribeHomeRegionControlsResult.AddMember("HomeRegionControls", _HomeRegionControls)
-
-	DescribeHomeRegionControlsResult_NextToken = DescribeHomeRegionControlsResult.AddMember("NextToken", _Token)
-
-	GetHomeRegionResult_HomeRegion = GetHomeRegionResult.AddMember("HomeRegion", _HomeRegion)
-
+const blob = "" +
+	"DescribeHomeRegionControlsMaxResultsAWSMigrationHubMultiAccountServiceDescribeHomeRegionControlsRequ" +
+	"estDescribeHomeRegionControlsResultCreateHomeRegionControlRequestDeleteHomeRegionControlRequestCreat" +
+	"eHomeRegionControlResultDeleteHomeRegionControlResultServiceUnavailableExceptionAccessDeniedExceptio" +
+	"nInvalidInputExceptionGetHomeRegionRequestGetHomeRegionResultInternalServerErrorThrottlingExceptionR" +
+	"etryAfterSecondsDryRunOperationRequestedTimeErrorMessageTargetTypeControlIdNextTokenTargetIdACCOUNTm" +
+	"emberUnit"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.migrationhubconfig", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 135, Target: 0, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 165, Target: 1, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 2, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 322, Target: 3, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 36, Target: 4, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 280, Target: 5, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 449, Target: 12, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 466, Target: 7, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 8, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 416, Target: 9, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 416, Target: 10, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 449, Target: 12, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 444, Target: 12, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8, Target: 13, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8, Target: 14, Traits: 0, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 466, Target: 7, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8, Target: 13, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 456, Target: 29, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 431, Target: 25, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8, Target: 19, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 499, Target: 14, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 361, Target: 21, Traits: 2, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 449, Target: 12, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 301, Target: 23, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 449, Target: 12, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 431, Target: 25, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 399, Target: 26, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 253, Target: 27, Traits: 2, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 449, Target: 12, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 456, Target: 29, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 33, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 473, Target: 32, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 484, Target: 32, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 456, Target: 33, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 492, Target: 60, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 380, Target: 35, Traits: 3, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 449, Target: 12, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 399, Target: 26, Traits: 4, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 479, Target: 38, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 135, Target: 39, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8, Target: 13, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 456, Target: 29, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 416, Target: 9, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 195, Target: 43, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8, Target: 14, Traits: 0, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 165, Target: 45, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 466, Target: 7, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 47, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 70, Target: 48, Traits: 0, StrLen: 33, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 466, Target: 7, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8, Target: 13, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 456, Target: 29, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 26, Target: 8, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 475, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 103, Target: 54, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8, Target: 19, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 475, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 322, Target: 57, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 342, Target: 58, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8, Target: 13, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 505, Target: 60, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+	},
 }
+
+var handles = [61]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+}
+
+var CreateHomeRegionControl = &handles[0]
+
+var DeleteHomeRegionControl = &handles[1]
+
+var DescribeHomeRegionControls = &handles[2]
+
+var GetHomeRegion = &handles[3]
+
+var _AWSMigrationHubMultiAccountService = &handles[4]
+
+var AccessDeniedException = &handles[5]
+var AccessDeniedException_Message = &handles[6]
+
+var _ControlId = &handles[7]
+
+var _DescribeHomeRegionControlsMaxResults = &handles[8]
+
+var _DryRun = &handles[9]
+
+var DryRunOperation = &handles[10]
+var DryRunOperation_Message = &handles[11]
+
+var _ErrorMessage = &handles[12]
+
+var _HomeRegion = &handles[13]
+
+var HomeRegionControl = &handles[14]
+var HomeRegionControl_ControlId = &handles[15]
+var HomeRegionControl_HomeRegion = &handles[16]
+var HomeRegionControl_Target = &handles[17]
+var HomeRegionControl_RequestedTime = &handles[18]
+
+var _HomeRegionControls = &handles[19]
+var _HomeRegionControls_member = &handles[20]
+
+var InternalServerError = &handles[21]
+var InternalServerError_Message = &handles[22]
+
+var InvalidInputException = &handles[23]
+var InvalidInputException_Message = &handles[24]
+
+var _RequestedTime = &handles[25]
+
+var _RetryAfterSeconds = &handles[26]
+
+var ServiceUnavailableException = &handles[27]
+var ServiceUnavailableException_Message = &handles[28]
+
+var Target = &handles[29]
+var Target_Type = &handles[30]
+var Target_Id = &handles[31]
+
+var _TargetId = &handles[32]
+
+var TargetType = &handles[33]
+var TargetType_ACCOUNT = &handles[34]
+
+var ThrottlingException = &handles[35]
+var ThrottlingException_Message = &handles[36]
+var ThrottlingException_RetryAfterSeconds = &handles[37]
+
+var _Token = &handles[38]
+
+var CreateHomeRegionControlRequest = &handles[39]
+var CreateHomeRegionControlRequest_HomeRegion = &handles[40]
+var CreateHomeRegionControlRequest_Target = &handles[41]
+var CreateHomeRegionControlRequest_DryRun = &handles[42]
+
+var CreateHomeRegionControlResult = &handles[43]
+var CreateHomeRegionControlResult_HomeRegionControl = &handles[44]
+
+var DeleteHomeRegionControlRequest = &handles[45]
+var DeleteHomeRegionControlRequest_ControlId = &handles[46]
+
+var DeleteHomeRegionControlResult = &handles[47]
+
+var DescribeHomeRegionControlsRequest = &handles[48]
+var DescribeHomeRegionControlsRequest_ControlId = &handles[49]
+var DescribeHomeRegionControlsRequest_HomeRegion = &handles[50]
+var DescribeHomeRegionControlsRequest_Target = &handles[51]
+var DescribeHomeRegionControlsRequest_MaxResults = &handles[52]
+var DescribeHomeRegionControlsRequest_NextToken = &handles[53]
+
+var DescribeHomeRegionControlsResult = &handles[54]
+var DescribeHomeRegionControlsResult_HomeRegionControls = &handles[55]
+var DescribeHomeRegionControlsResult_NextToken = &handles[56]
+
+var GetHomeRegionRequest = &handles[57]
+
+var GetHomeRegionResult = &handles[58]
+var GetHomeRegionResult_HomeRegion = &handles[59]
+
+var AWSMigrationHubMultiAccountService = &smithy.ServiceSchema{Schema: &handles[4], Version: "2019-06-30"}

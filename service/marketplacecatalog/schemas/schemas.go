@@ -4,4408 +4,3743 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchDescribeEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeEntities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/BatchDescribeEntities",
-	Code: 200})
-
-var CancelChangeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "CancelChangeSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/CancelChangeSet",
-	Code: 200})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/DeleteResourcePolicy",
-	Code: 200})
-
-var DescribeAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DescribeAssessment",
-	Code: 200})
-
-var DescribeChangeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeChangeSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/DescribeChangeSet",
-	Code: 200})
-
-var DescribeEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeEntity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/DescribeEntity",
-	Code: 200})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/GetResourcePolicy",
-	Code: 200})
-
-var ListAssessments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListAssessments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListAssessments",
-	Code: 200})
-
-var ListChangeSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListChangeSets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListChangeSets",
-	Code: 200})
-
-var ListEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListEntities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListEntities",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/PutResourcePolicy",
-	Code: 200})
-
-var StartChangeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "StartChangeSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/StartChangeSet",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/TagResource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UntagResource",
-	Code: 200})
-
-var _AWSMPSeymour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AWSMPSeymour",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMPSeymour = smithy.NewServiceSchema(_AWSMPSeymour, "2018-09-17")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AmiProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AmiProductEntityIdFilter_ValueList *smithy.Schema
-
-var _AmiProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _AmiProductEntityIdFilterValueList_member *smithy.Schema
-
-var _AmiProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var AmiProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var AmiProductFilters_EntityId *smithy.Schema
-
-var AmiProductFilters_LastModifiedDate *smithy.Schema
-
-var AmiProductFilters_ProductTitle *smithy.Schema
-
-var AmiProductFilters_Visibility *smithy.Schema
-
-var AmiProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AmiProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var AmiProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var AmiProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var AmiProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var AmiProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var AmiProductSort_SortBy *smithy.Schema
-
-var AmiProductSort_SortOrder *smithy.Schema
-
-var AmiProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductSortBy",
-}, smithy.ShapeTypeEnum, 4)
-var AmiProductSortBy_EntityId *smithy.Schema
-
-var AmiProductSortBy_LastModifiedDate *smithy.Schema
-
-var AmiProductSortBy_ProductTitle *smithy.Schema
-
-var AmiProductSortBy_Visibility *smithy.Schema
-
-var AmiProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var AmiProductSummary_ProductTitle *smithy.Schema
-
-var AmiProductSummary_Visibility *smithy.Schema
-
-var AmiProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var AmiProductTitleFilter_ValueList *smithy.Schema
-
-var AmiProductTitleFilter_WildCardValue *smithy.Schema
-
-var _AmiProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _AmiProductTitleFilterValueList_member *smithy.Schema
-
-var _AmiProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var AmiProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AmiProductVisibilityFilter_ValueList *smithy.Schema
-
-var _AmiProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _AmiProductVisibilityFilterValueList_member *smithy.Schema
-
-var AmiProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductVisibilityString",
-}, smithy.ShapeTypeEnum, 4)
-var AmiProductVisibilityString_Limited *smithy.Schema
-
-var AmiProductVisibilityString_Public *smithy.Schema
-
-var AmiProductVisibilityString_Restricted *smithy.Schema
-
-var AmiProductVisibilityString_Draft *smithy.Schema
-
-var AMISecurityFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AMISecurityFilters",
-}, smithy.ShapeTypeStructure, 1)
-var AMISecurityFilters_DeliveryOptionId *smithy.Schema
-
-var AMISecuritySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AMISecuritySummary",
-}, smithy.ShapeTypeStructure, 1)
-var AMISecuritySummary_DeliveryOptionId *smithy.Schema
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var AssessmentResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentResult",
-}, smithy.ShapeTypeEnum, 2)
-var AssessmentResult_PASS *smithy.Schema
-
-var AssessmentResult_FAIL *smithy.Schema
-
-var AssessmentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentSummary",
-}, smithy.ShapeTypeStructure, 8)
-var AssessmentSummary_AssessmentArn *smithy.Schema
-
-var AssessmentSummary_AssessmentId *smithy.Schema
-
-var AssessmentSummary_FrameworkId *smithy.Schema
-
-var AssessmentSummary_AssessmentTargetSummary *smithy.Schema
-
-var AssessmentSummary_FrameworkSummary *smithy.Schema
-
-var AssessmentSummary_AssessmentResult *smithy.Schema
-
-var AssessmentSummary_CreatedAt *smithy.Schema
-
-var AssessmentSummary_ExpiresAt *smithy.Schema
-
-var _AssessmentSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentSummaryList_member *smithy.Schema
-
-var AssessmentTargetFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentTargetFilter",
-}, smithy.ShapeTypeStructure, 2)
-var AssessmentTargetFilter_EntityId *smithy.Schema
-
-var AssessmentTargetFilter_ChangeSetId *smithy.Schema
-
-var AssessmentTargetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentTargetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var AssessmentTargetSummary_EntityId *smithy.Schema
-
-var AssessmentTargetSummary_ChangeSetId *smithy.Schema
-
-var _BatchDescribeErrorCodeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeErrorCodeString",
-}, smithy.ShapeTypeString, 0)
-
-var BatchDescribeErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeErrorDetail",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDescribeErrorDetail_ErrorCode *smithy.Schema
-
-var BatchDescribeErrorDetail_ErrorMessage *smithy.Schema
-
-var _BatchDescribeErrorMessageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeErrorMessageContent",
-}, smithy.ShapeTypeString, 0)
-
-var _Catalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Catalog",
-}, smithy.ShapeTypeString, 0)
-
-var Change = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Change",
-}, smithy.ShapeTypeStructure, 6)
-var Change_ChangeType *smithy.Schema
-
-var Change_Entity *smithy.Schema
-
-var Change_EntityTags *smithy.Schema
-
-var Change_Details *smithy.Schema
-
-var Change_DetailsDocument *smithy.Schema
-
-var Change_ChangeName *smithy.Schema
-
-var _ChangeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeName",
-}, smithy.ShapeTypeString, 0)
-
-var _ChangeSetDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSetDescription",
-}, smithy.ShapeTypeList, 1)
-var _ChangeSetDescription_member *smithy.Schema
-
-var _ChangeSetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSetName",
-}, smithy.ShapeTypeString, 0)
-
-var _ChangeSetSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSetSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChangeSetSummaryList_member *smithy.Schema
-
-var ChangeSetSummaryListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSetSummaryListItem",
-}, smithy.ShapeTypeStructure, 8)
-var ChangeSetSummaryListItem_ChangeSetId *smithy.Schema
-
-var ChangeSetSummaryListItem_ChangeSetArn *smithy.Schema
-
-var ChangeSetSummaryListItem_ChangeSetName *smithy.Schema
-
-var ChangeSetSummaryListItem_StartTime *smithy.Schema
-
-var ChangeSetSummaryListItem_EndTime *smithy.Schema
-
-var ChangeSetSummaryListItem_Status *smithy.Schema
-
-var ChangeSetSummaryListItem_EntityIdList *smithy.Schema
-
-var ChangeSetSummaryListItem_FailureCode *smithy.Schema
-
-var ChangeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ChangeStatus_PREPARING *smithy.Schema
-
-var ChangeStatus_APPLYING *smithy.Schema
-
-var ChangeStatus_SUCCEEDED *smithy.Schema
-
-var ChangeStatus_CANCELLED *smithy.Schema
-
-var ChangeStatus_FAILED *smithy.Schema
-
-var ChangeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ChangeSummary_ChangeType *smithy.Schema
-
-var ChangeSummary_Entity *smithy.Schema
-
-var ChangeSummary_Details *smithy.Schema
-
-var ChangeSummary_DetailsDocument *smithy.Schema
-
-var ChangeSummary_ErrorDetailList *smithy.Schema
-
-var ChangeSummary_ChangeName *smithy.Schema
-
-var _ChangeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeType",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var ContainerProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerProductEntityIdFilter_ValueList *smithy.Schema
-
-var _ContainerProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ContainerProductEntityIdFilterValueList_member *smithy.Schema
-
-var _ContainerProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ContainerProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var ContainerProductFilters_EntityId *smithy.Schema
-
-var ContainerProductFilters_LastModifiedDate *smithy.Schema
-
-var ContainerProductFilters_ProductTitle *smithy.Schema
-
-var ContainerProductFilters_Visibility *smithy.Schema
-
-var ContainerProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var ContainerProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var ContainerProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var ContainerProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerProductSort_SortBy *smithy.Schema
-
-var ContainerProductSort_SortOrder *smithy.Schema
-
-var ContainerProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductSortBy",
-}, smithy.ShapeTypeEnum, 5)
-var ContainerProductSortBy_EntityId *smithy.Schema
-
-var ContainerProductSortBy_LastModifiedDate *smithy.Schema
-
-var ContainerProductSortBy_ProductTitle *smithy.Schema
-
-var ContainerProductSortBy_Visibility *smithy.Schema
-
-var ContainerProductSortBy_CompatibleAWSServices *smithy.Schema
-
-var ContainerProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerProductSummary_ProductTitle *smithy.Schema
-
-var ContainerProductSummary_Visibility *smithy.Schema
-
-var ContainerProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerProductTitleFilter_ValueList *smithy.Schema
-
-var ContainerProductTitleFilter_WildCardValue *smithy.Schema
-
-var _ContainerProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ContainerProductTitleFilterValueList_member *smithy.Schema
-
-var _ContainerProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var ContainerProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerProductVisibilityFilter_ValueList *smithy.Schema
-
-var _ContainerProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ContainerProductVisibilityFilterValueList_member *smithy.Schema
-
-var ContainerProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductVisibilityString",
-}, smithy.ShapeTypeEnum, 4)
-var ContainerProductVisibilityString_Limited *smithy.Schema
-
-var ContainerProductVisibilityString_Public *smithy.Schema
-
-var ContainerProductVisibilityString_Restricted *smithy.Schema
-
-var ContainerProductVisibilityString_Draft *smithy.Schema
-
-var ContainerSecurityFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerSecurityFilters",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerSecurityFilters_DeliveryOptionId *smithy.Schema
-
-var ContainerSecuritySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerSecuritySummary",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerSecuritySummary_DeliveryOptionId *smithy.Schema
-
-var ControlAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlAssessment",
-}, smithy.ShapeTypeStructure, 3)
-var ControlAssessment_ControlId *smithy.Schema
-
-var ControlAssessment_ControlAssessmentResult *smithy.Schema
-
-var ControlAssessment_Errors *smithy.Schema
-
-var _ControlAssessmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlAssessmentList",
-}, smithy.ShapeTypeList, 1)
-var _ControlAssessmentList_member *smithy.Schema
-
-var ControlAssessmentResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlAssessmentResult",
-}, smithy.ShapeTypeEnum, 4)
-var ControlAssessmentResult_PASS *smithy.Schema
-
-var ControlAssessmentResult_FAIL *smithy.Schema
-
-var ControlAssessmentResult_NOT_EXECUTED *smithy.Schema
-
-var ControlAssessmentResult_EXEMPTION_PASS *smithy.Schema
-
-var ControlError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlError",
-}, smithy.ShapeTypeStructure, 3)
-var ControlError_Code *smithy.Schema
-
-var ControlError_Message *smithy.Schema
-
-var ControlError_Scope *smithy.Schema
-
-var _ControlErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlErrorList",
-}, smithy.ShapeTypeList, 1)
-var _ControlErrorList_member *smithy.Schema
-
-var DataProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var DataProductEntityIdFilter_ValueList *smithy.Schema
-
-var _DataProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _DataProductEntityIdFilterValueList_member *smithy.Schema
-
-var _DataProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var DataProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var DataProductFilters_EntityId *smithy.Schema
-
-var DataProductFilters_ProductTitle *smithy.Schema
-
-var DataProductFilters_Visibility *smithy.Schema
-
-var DataProductFilters_LastModifiedDate *smithy.Schema
-
-var DataProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var DataProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var DataProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var DataProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var DataProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var DataProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var DataProductSort_SortBy *smithy.Schema
-
-var DataProductSort_SortOrder *smithy.Schema
-
-var DataProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductSortBy",
-}, smithy.ShapeTypeEnum, 4)
-var DataProductSortBy_EntityId *smithy.Schema
-
-var DataProductSortBy_ProductTitle *smithy.Schema
-
-var DataProductSortBy_Visibility *smithy.Schema
-
-var DataProductSortBy_LastModifiedDate *smithy.Schema
-
-var DataProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var DataProductSummary_ProductTitle *smithy.Schema
-
-var DataProductSummary_Visibility *smithy.Schema
-
-var DataProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DataProductTitleFilter_ValueList *smithy.Schema
-
-var DataProductTitleFilter_WildCardValue *smithy.Schema
-
-var _DataProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _DataProductTitleFilterValueList_member *smithy.Schema
-
-var _DataProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var DataProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var DataProductVisibilityFilter_ValueList *smithy.Schema
-
-var _DataProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _DataProductVisibilityFilterValueList_member *smithy.Schema
-
-var DataProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductVisibilityString",
-}, smithy.ShapeTypeEnum, 5)
-var DataProductVisibilityString_Limited *smithy.Schema
-
-var DataProductVisibilityString_Public *smithy.Schema
-
-var DataProductVisibilityString_Restricted *smithy.Schema
-
-var DataProductVisibilityString_Unavailable *smithy.Schema
-
-var DataProductVisibilityString_Draft *smithy.Schema
-
-var _DateTimeISO8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DateTimeISO8601",
-}, smithy.ShapeTypeString, 0)
-
-var _DescribeAssessmentMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeAssessmentMaxResultInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var Entity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Entity",
-}, smithy.ShapeTypeStructure, 2)
-var Entity_Type *smithy.Schema
-
-var Entity_Identifier *smithy.Schema
-
-var EntityDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityDetail",
-}, smithy.ShapeTypeStructure, 5)
-var EntityDetail_EntityType *smithy.Schema
-
-var EntityDetail_EntityArn *smithy.Schema
-
-var EntityDetail_EntityIdentifier *smithy.Schema
-
-var EntityDetail_LastModifiedDate *smithy.Schema
-
-var EntityDetail_DetailsDocument *smithy.Schema
-
-var _EntityDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityDetails",
-}, smithy.ShapeTypeMap, 2)
-var _EntityDetails_key *smithy.Schema
-
-var _EntityDetails_value *smithy.Schema
-
-var _EntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityId",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityNameString",
-}, smithy.ShapeTypeString, 0)
-
-var EntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EntityRequest_Catalog *smithy.Schema
-
-var EntityRequest_EntityId *smithy.Schema
-
-var _EntityRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityRequestList",
-}, smithy.ShapeTypeList, 1)
-var _EntityRequestList_member *smithy.Schema
-
-var EntitySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntitySummary",
-}, smithy.ShapeTypeStructure, 16)
-var EntitySummary_Name *smithy.Schema
-
-var EntitySummary_EntityType *smithy.Schema
-
-var EntitySummary_EntityId *smithy.Schema
-
-var EntitySummary_EntityArn *smithy.Schema
-
-var EntitySummary_LastModifiedDate *smithy.Schema
-
-var EntitySummary_Visibility *smithy.Schema
-
-var EntitySummary_AmiProductSummary *smithy.Schema
-
-var EntitySummary_ContainerProductSummary *smithy.Schema
-
-var EntitySummary_DataProductSummary *smithy.Schema
-
-var EntitySummary_SaaSProductSummary *smithy.Schema
-
-var EntitySummary_OfferSummary *smithy.Schema
-
-var EntitySummary_ResaleAuthorizationSummary *smithy.Schema
-
-var EntitySummary_MachineLearningProductSummary *smithy.Schema
-
-var EntitySummary_OfferSetSummary *smithy.Schema
-
-var EntitySummary_ExpressPrivateOfferConfigurationSummary *smithy.Schema
-
-var EntitySummary_SubsidiaryAuthorizationSummary *smithy.Schema
-
-var _EntitySummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntitySummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EntitySummaryList_member *smithy.Schema
-
-var _EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityType",
-}, smithy.ShapeTypeString, 0)
-
-var EntityTypeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityTypeFilters",
-}, smithy.ShapeTypeUnion, 10)
-var EntityTypeFilters_DataProductFilters *smithy.Schema
-
-var EntityTypeFilters_SaaSProductFilters *smithy.Schema
-
-var EntityTypeFilters_AmiProductFilters *smithy.Schema
-
-var EntityTypeFilters_OfferFilters *smithy.Schema
-
-var EntityTypeFilters_ContainerProductFilters *smithy.Schema
-
-var EntityTypeFilters_ResaleAuthorizationFilters *smithy.Schema
-
-var EntityTypeFilters_MachineLearningProductFilters *smithy.Schema
-
-var EntityTypeFilters_OfferSetFilters *smithy.Schema
-
-var EntityTypeFilters_ExpressPrivateOfferConfigurationFilters *smithy.Schema
-
-var EntityTypeFilters_SubsidiaryAuthorizationFilters *smithy.Schema
-
-var EntityTypeSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityTypeSort",
-}, smithy.ShapeTypeUnion, 10)
-var EntityTypeSort_DataProductSort *smithy.Schema
-
-var EntityTypeSort_SaaSProductSort *smithy.Schema
-
-var EntityTypeSort_AmiProductSort *smithy.Schema
-
-var EntityTypeSort_OfferSort *smithy.Schema
-
-var EntityTypeSort_ContainerProductSort *smithy.Schema
-
-var EntityTypeSort_ResaleAuthorizationSort *smithy.Schema
-
-var EntityTypeSort_MachineLearningProductSort *smithy.Schema
-
-var EntityTypeSort_OfferSetSort *smithy.Schema
-
-var EntityTypeSort_ExpressPrivateOfferConfigurationSort *smithy.Schema
-
-var EntityTypeSort_SubsidiaryAuthorizationSort *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorCodeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorCodeString",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorDetail",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorDetail_ErrorCode *smithy.Schema
-
-var ErrorDetail_ErrorMessage *smithy.Schema
-
-var _ErrorDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorDetailList",
-}, smithy.ShapeTypeList, 1)
-var _ErrorDetailList_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Errors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Errors",
-}, smithy.ShapeTypeMap, 2)
-var _Errors_key *smithy.Schema
-
-var _Errors_value *smithy.Schema
-
-var ErrorScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorScope",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorScope_Name *smithy.Schema
-
-var ErrorScope_Value *smithy.Schema
-
-var _ErrorScopeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorScopeList",
-}, smithy.ShapeTypeList, 1)
-var _ErrorScopeList_member *smithy.Schema
-
-var _ExceptionMessageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExceptionMessageContent",
-}, smithy.ShapeTypeString, 0)
-
-var ExpressPrivateOfferConfigurationEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ExpressPrivateOfferConfigurationEntityIdFilter_ValueList *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ExpressPrivateOfferConfigurationEntityIdFilterValueList_member *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ExpressPrivateOfferConfigurationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationFilters",
-}, smithy.ShapeTypeStructure, 3)
-var ExpressPrivateOfferConfigurationFilters_EntityId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationFilters_ProductId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationFilters_State *smithy.Schema
-
-var ExpressPrivateOfferConfigurationProductIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationProductIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ExpressPrivateOfferConfigurationProductIdFilter_ValueList *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationProductIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationProductIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ExpressPrivateOfferConfigurationProductIdFilterValueList_member *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationProductIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationProductIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ExpressPrivateOfferConfigurationSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationSort",
-}, smithy.ShapeTypeStructure, 2)
-var ExpressPrivateOfferConfigurationSort_SortBy *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSort_SortOrder *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationSortBy",
-}, smithy.ShapeTypeEnum, 4)
-var ExpressPrivateOfferConfigurationSortBy_EntityId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSortBy_LastModifiedDate *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSortBy_ProductId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSortBy_State *smithy.Schema
-
-var ExpressPrivateOfferConfigurationStateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationStateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ExpressPrivateOfferConfigurationStateFilter_ValueList *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationStateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationStateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ExpressPrivateOfferConfigurationStateFilterValueList_member *smithy.Schema
-
-var ExpressPrivateOfferConfigurationStateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationStateString",
-}, smithy.ShapeTypeEnum, 2)
-var ExpressPrivateOfferConfigurationStateString_ACTIVE *smithy.Schema
-
-var ExpressPrivateOfferConfigurationStateString_INACTIVE *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ExpressPrivateOfferConfigurationSummary_ProductId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSummary_State *smithy.Schema
-
-var FailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FailureCode",
-}, smithy.ShapeTypeEnum, 2)
-var FailureCode_ClientError *smithy.Schema
-
-var FailureCode_ServerFault *smithy.Schema
-
-var _FieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FieldName",
-}, smithy.ShapeTypeString, 0)
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_Name *smithy.Schema
-
-var Filter_ValueList *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var _FilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValueContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FilterValueContent",
-}, smithy.ShapeTypeString, 0)
-
-var FrameworkFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FrameworkFilters",
-}, smithy.ShapeTypeUnion, 2)
-var FrameworkFilters_AMISecurityFilters *smithy.Schema
-
-var FrameworkFilters_ContainerSecurityFilters *smithy.Schema
-
-var _FrameworkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FrameworkId",
-}, smithy.ShapeTypeString, 0)
-
-var FrameworkSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FrameworkSummary",
-}, smithy.ShapeTypeUnion, 2)
-var FrameworkSummary_AMISecuritySummary *smithy.Schema
-
-var FrameworkSummary_ContainerSecuritySummary *smithy.Schema
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var Intent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Intent",
-}, smithy.ShapeTypeEnum, 2)
-var Intent_VALIDATE *smithy.Schema
-
-var Intent_APPLY *smithy.Schema
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceException_Message *smithy.Schema
-
-var _Json = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Json",
-}, smithy.ShapeTypeString, 0)
-
-var _JsonDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "JsonDocumentType",
-}, smithy.ShapeTypeDocument, 0)
-
-var _ListAssessmentsMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListAssessmentsMaxResultInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListChangeSetsMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListChangeSetsMaxResultInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListEntitiesMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListEntitiesMaxResultInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var MachineLearningProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var MachineLearningProductEntityIdFilter_ValueList *smithy.Schema
-
-var _MachineLearningProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _MachineLearningProductEntityIdFilterValueList_member *smithy.Schema
-
-var _MachineLearningProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var MachineLearningProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var MachineLearningProductFilters_EntityId *smithy.Schema
-
-var MachineLearningProductFilters_LastModifiedDate *smithy.Schema
-
-var MachineLearningProductFilters_ProductTitle *smithy.Schema
-
-var MachineLearningProductFilters_Visibility *smithy.Schema
-
-var MachineLearningProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var MachineLearningProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var MachineLearningProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var MachineLearningProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var MachineLearningProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var MachineLearningProductSort_SortBy *smithy.Schema
-
-var MachineLearningProductSort_SortOrder *smithy.Schema
-
-var MachineLearningProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductSortBy",
-}, smithy.ShapeTypeEnum, 4)
-var MachineLearningProductSortBy_EntityId *smithy.Schema
-
-var MachineLearningProductSortBy_LastModifiedDate *smithy.Schema
-
-var MachineLearningProductSortBy_ProductTitle *smithy.Schema
-
-var MachineLearningProductSortBy_Visibility *smithy.Schema
-
-var MachineLearningProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var MachineLearningProductSummary_ProductTitle *smithy.Schema
-
-var MachineLearningProductSummary_Visibility *smithy.Schema
-
-var MachineLearningProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var MachineLearningProductTitleFilter_ValueList *smithy.Schema
-
-var MachineLearningProductTitleFilter_WildCardValue *smithy.Schema
-
-var _MachineLearningProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _MachineLearningProductTitleFilterValueList_member *smithy.Schema
-
-var _MachineLearningProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var MachineLearningProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var MachineLearningProductVisibilityFilter_ValueList *smithy.Schema
-
-var _MachineLearningProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _MachineLearningProductVisibilityFilterValueList_member *smithy.Schema
-
-var MachineLearningProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductVisibilityString",
-}, smithy.ShapeTypeEnum, 4)
-var MachineLearningProductVisibilityString_Limited *smithy.Schema
-
-var MachineLearningProductVisibilityString_Public *smithy.Schema
-
-var MachineLearningProductVisibilityString_Restricted *smithy.Schema
-
-var MachineLearningProductVisibilityString_Draft *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OfferAvailabilityEndDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferAvailabilityEndDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferAvailabilityEndDateFilter_DateRange *smithy.Schema
-
-var OfferAvailabilityEndDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferAvailabilityEndDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferAvailabilityEndDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferAvailabilityEndDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferBuyerAccountsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferBuyerAccountsFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferBuyerAccountsFilter_WildCardValue *smithy.Schema
-
-var _OfferBuyerAccountsFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferBuyerAccountsFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _OfferBuyerAccountsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferBuyerAccountsList",
-}, smithy.ShapeTypeList, 1)
-var _OfferBuyerAccountsList_member *smithy.Schema
-
-var _OfferBuyerAccountsString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferBuyerAccountsString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferCreatedBySourceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferCreatedBySourceFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferCreatedBySourceFilter_ValueList *smithy.Schema
-
-var _OfferCreatedBySourceFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferCreatedBySourceFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferCreatedBySourceFilterValueList_member *smithy.Schema
-
-var OfferCreatedBySourceString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferCreatedBySourceString",
-}, smithy.ShapeTypeEnum, 2)
-var OfferCreatedBySourceString_Seller *smithy.Schema
-
-var OfferCreatedBySourceString_AwsMarketplace *smithy.Schema
-
-var OfferEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferEntityIdFilter_ValueList *smithy.Schema
-
-var _OfferEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferEntityIdFilterValueList_member *smithy.Schema
-
-var _OfferEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferFilters",
-}, smithy.ShapeTypeStructure, 14)
-var OfferFilters_EntityId *smithy.Schema
-
-var OfferFilters_Name *smithy.Schema
-
-var OfferFilters_ProductId *smithy.Schema
-
-var OfferFilters_ResaleAuthorizationId *smithy.Schema
-
-var OfferFilters_ReleaseDate *smithy.Schema
-
-var OfferFilters_AvailabilityEndDate *smithy.Schema
-
-var OfferFilters_BuyerAccounts *smithy.Schema
-
-var OfferFilters_State *smithy.Schema
-
-var OfferFilters_Targeting *smithy.Schema
-
-var OfferFilters_LastModifiedDate *smithy.Schema
-
-var OfferFilters_OfferSetId *smithy.Schema
-
-var OfferFilters_TargetAgreementId *smithy.Schema
-
-var OfferFilters_TargetAgreementIntent *smithy.Schema
-
-var OfferFilters_CreatedBySource *smithy.Schema
-
-var OfferLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferLastModifiedDateFilter_DateRange *smithy.Schema
-
-var OfferLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var OfferNameFilter_ValueList *smithy.Schema
-
-var OfferNameFilter_WildCardValue *smithy.Schema
-
-var _OfferNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferNameFilterValueList_member *smithy.Schema
-
-var _OfferNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferNameString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferProductIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferProductIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferProductIdFilter_ValueList *smithy.Schema
-
-var _OfferProductIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferProductIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferProductIdFilterValueList_member *smithy.Schema
-
-var _OfferProductIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferProductIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferReleaseDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferReleaseDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferReleaseDateFilter_DateRange *smithy.Schema
-
-var OfferReleaseDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferReleaseDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferReleaseDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferReleaseDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferResaleAuthorizationIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferResaleAuthorizationIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferResaleAuthorizationIdFilter_ValueList *smithy.Schema
-
-var _OfferResaleAuthorizationIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferResaleAuthorizationIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferResaleAuthorizationIdFilterValueList_member *smithy.Schema
-
-var _OfferResaleAuthorizationIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferResaleAuthorizationIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetAssociatedOfferIdsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetAssociatedOfferIdsFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetAssociatedOfferIdsFilter_ValueList *smithy.Schema
-
-var _OfferSetAssociatedOfferIdsFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetAssociatedOfferIdsFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetAssociatedOfferIdsFilterValueList_member *smithy.Schema
-
-var _OfferSetAssociatedOfferIdsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetAssociatedOfferIdsList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetAssociatedOfferIdsList_member *smithy.Schema
-
-var _OfferSetAssociatedOfferIdsString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetAssociatedOfferIdsString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetEntityIdFilter_ValueList *smithy.Schema
-
-var _OfferSetEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetEntityIdFilterValueList_member *smithy.Schema
-
-var _OfferSetEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetFilters",
-}, smithy.ShapeTypeStructure, 7)
-var OfferSetFilters_EntityId *smithy.Schema
-
-var OfferSetFilters_Name *smithy.Schema
-
-var OfferSetFilters_State *smithy.Schema
-
-var OfferSetFilters_ReleaseDate *smithy.Schema
-
-var OfferSetFilters_AssociatedOfferIds *smithy.Schema
-
-var OfferSetFilters_SolutionId *smithy.Schema
-
-var OfferSetFilters_LastModifiedDate *smithy.Schema
-
-var OfferSetIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetIdFilter_ValueList *smithy.Schema
-
-var _OfferSetIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetIdFilterValueList_member *smithy.Schema
-
-var _OfferSetIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetLastModifiedDateFilter_DateRange *smithy.Schema
-
-var OfferSetLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSetLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferSetLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferSetNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetNameFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetNameFilter_ValueList *smithy.Schema
-
-var _OfferSetNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetNameFilterValueList_member *smithy.Schema
-
-var _OfferSetNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetNameString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetReleaseDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetReleaseDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetReleaseDateFilter_DateRange *smithy.Schema
-
-var OfferSetReleaseDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetReleaseDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSetReleaseDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferSetReleaseDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferSetSolutionIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSolutionIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetSolutionIdFilter_ValueList *smithy.Schema
-
-var _OfferSetSolutionIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSolutionIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetSolutionIdFilterValueList_member *smithy.Schema
-
-var _OfferSetSolutionIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSolutionIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSort",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSetSort_SortBy *smithy.Schema
-
-var OfferSetSort_SortOrder *smithy.Schema
-
-var OfferSetSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSortBy",
-}, smithy.ShapeTypeEnum, 6)
-var OfferSetSortBy_Name *smithy.Schema
-
-var OfferSetSortBy_State *smithy.Schema
-
-var OfferSetSortBy_ReleaseDate *smithy.Schema
-
-var OfferSetSortBy_SolutionId *smithy.Schema
-
-var OfferSetSortBy_EntityId *smithy.Schema
-
-var OfferSetSortBy_LastModifiedDate *smithy.Schema
-
-var OfferSetStateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetStateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetStateFilter_ValueList *smithy.Schema
-
-var _OfferSetStateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetStateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetStateFilterValueList_member *smithy.Schema
-
-var OfferSetStateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetStateString",
-}, smithy.ShapeTypeEnum, 2)
-var OfferSetStateString_Draft *smithy.Schema
-
-var OfferSetStateString_Released *smithy.Schema
-
-var OfferSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSummary",
-}, smithy.ShapeTypeStructure, 5)
-var OfferSetSummary_Name *smithy.Schema
-
-var OfferSetSummary_State *smithy.Schema
-
-var OfferSetSummary_ReleaseDate *smithy.Schema
-
-var OfferSetSummary_AssociatedOfferIds *smithy.Schema
-
-var OfferSetSummary_SolutionId *smithy.Schema
-
-var OfferSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSort",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSort_SortBy *smithy.Schema
-
-var OfferSort_SortOrder *smithy.Schema
-
-var OfferSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSortBy",
-}, smithy.ShapeTypeEnum, 14)
-var OfferSortBy_EntityId *smithy.Schema
-
-var OfferSortBy_Name *smithy.Schema
-
-var OfferSortBy_ProductId *smithy.Schema
-
-var OfferSortBy_ResaleAuthorizationId *smithy.Schema
-
-var OfferSortBy_ReleaseDate *smithy.Schema
-
-var OfferSortBy_AvailabilityEndDate *smithy.Schema
-
-var OfferSortBy_BuyerAccounts *smithy.Schema
-
-var OfferSortBy_State *smithy.Schema
-
-var OfferSortBy_Targeting *smithy.Schema
-
-var OfferSortBy_LastModifiedDate *smithy.Schema
-
-var OfferSortBy_OfferSetId *smithy.Schema
-
-var OfferSortBy_TargetAgreementId *smithy.Schema
-
-var OfferSortBy_TargetAgreementIntent *smithy.Schema
-
-var OfferSortBy_CreatedBySource *smithy.Schema
-
-var OfferStateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferStateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferStateFilter_ValueList *smithy.Schema
-
-var _OfferStateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferStateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferStateFilterValueList_member *smithy.Schema
-
-var OfferStateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferStateString",
-}, smithy.ShapeTypeEnum, 2)
-var OfferStateString_Draft *smithy.Schema
-
-var OfferStateString_Released *smithy.Schema
-
-var OfferSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSummary",
-}, smithy.ShapeTypeStructure, 12)
-var OfferSummary_Name *smithy.Schema
-
-var OfferSummary_ProductId *smithy.Schema
-
-var OfferSummary_ResaleAuthorizationId *smithy.Schema
-
-var OfferSummary_ReleaseDate *smithy.Schema
-
-var OfferSummary_AvailabilityEndDate *smithy.Schema
-
-var OfferSummary_BuyerAccounts *smithy.Schema
-
-var OfferSummary_State *smithy.Schema
-
-var OfferSummary_Targeting *smithy.Schema
-
-var OfferSummary_OfferSetId *smithy.Schema
-
-var OfferSummary_TargetAgreementId *smithy.Schema
-
-var OfferSummary_TargetAgreementIntent *smithy.Schema
-
-var OfferSummary_CreatedBySource *smithy.Schema
-
-var OfferTargetAgreementIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferTargetAgreementIdFilter_ValueList *smithy.Schema
-
-var _OfferTargetAgreementIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTargetAgreementIdFilterValueList_member *smithy.Schema
-
-var _OfferTargetAgreementIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferTargetAgreementIntentFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIntentFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferTargetAgreementIntentFilter_ValueList *smithy.Schema
-
-var _OfferTargetAgreementIntentFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIntentFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTargetAgreementIntentFilterValueList_member *smithy.Schema
-
-var OfferTargetAgreementIntentString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIntentString",
-}, smithy.ShapeTypeEnum, 1)
-var OfferTargetAgreementIntentString_Renew *smithy.Schema
-
-var OfferTargetingFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetingFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferTargetingFilter_ValueList *smithy.Schema
-
-var _OfferTargetingFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetingFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTargetingFilterValueList_member *smithy.Schema
-
-var _OfferTargetingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetingList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTargetingList_member *smithy.Schema
-
-var OfferTargetingString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetingString",
-}, smithy.ShapeTypeEnum, 4)
-var OfferTargetingString_BuyerAccounts *smithy.Schema
-
-var OfferTargetingString_ParticipatingPrograms *smithy.Schema
-
-var OfferTargetingString_CountryCodes *smithy.Schema
-
-var OfferTargetingString_None *smithy.Schema
-
-var OwnershipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OwnershipType",
-}, smithy.ShapeTypeEnum, 2)
-var OwnershipType_SELF *smithy.Schema
-
-var OwnershipType_SHARED *smithy.Schema
-
-var _RequestedChangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "RequestedChangeList",
-}, smithy.ShapeTypeList, 1)
-var _RequestedChangeList_member *smithy.Schema
-
-var ResaleAuthorizationAvailabilityEndDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationAvailabilityEndDateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationAvailabilityEndDateFilter_DateRange *smithy.Schema
-
-var ResaleAuthorizationAvailabilityEndDateFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationAvailabilityEndDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationAvailabilityEndDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue *smithy.Schema
-
-var ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue *smithy.Schema
-
-var _ResaleAuthorizationAvailabilityEndDateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationAvailabilityEndDateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationAvailabilityEndDateFilterValueList_member *smithy.Schema
-
-var ResaleAuthorizationCreatedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationCreatedDateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationCreatedDateFilter_DateRange *smithy.Schema
-
-var ResaleAuthorizationCreatedDateFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationCreatedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationCreatedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationCreatedDateFilterDateRange_AfterValue *smithy.Schema
-
-var ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var _ResaleAuthorizationCreatedDateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationCreatedDateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationCreatedDateFilterValueList_member *smithy.Schema
-
-var ResaleAuthorizationEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationEntityIdFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationEntityIdFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationFilters",
-}, smithy.ShapeTypeStructure, 16)
-var ResaleAuthorizationFilters_EntityId *smithy.Schema
-
-var ResaleAuthorizationFilters_Name *smithy.Schema
-
-var ResaleAuthorizationFilters_ProductId *smithy.Schema
-
-var ResaleAuthorizationFilters_CreatedDate *smithy.Schema
-
-var ResaleAuthorizationFilters_AvailabilityEndDate *smithy.Schema
-
-var ResaleAuthorizationFilters_ManufacturerAccountId *smithy.Schema
-
-var ResaleAuthorizationFilters_ProductName *smithy.Schema
-
-var ResaleAuthorizationFilters_ManufacturerLegalName *smithy.Schema
-
-var ResaleAuthorizationFilters_ResellerAccountID *smithy.Schema
-
-var ResaleAuthorizationFilters_ResellerLegalName *smithy.Schema
-
-var ResaleAuthorizationFilters_Status *smithy.Schema
-
-var ResaleAuthorizationFilters_OfferExtendedStatus *smithy.Schema
-
-var ResaleAuthorizationFilters_LastModifiedDate *smithy.Schema
-
-var ResaleAuthorizationFilters_ResellerRole *smithy.Schema
-
-var ResaleAuthorizationFilters_SourceAuthorization *smithy.Schema
-
-var ResaleAuthorizationFilters_IssuerAccountId *smithy.Schema
-
-var ResaleAuthorizationIssuerAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationIssuerAccountIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationIssuerAccountIdFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationIssuerAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationIssuerAccountIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationIssuerAccountIdFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationIssuerAccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationIssuerAccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationLastModifiedDateFilter_DateRange *smithy.Schema
-
-var ResaleAuthorizationLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var ResaleAuthorizationManufacturerAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerAccountIdFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationManufacturerAccountIdFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationManufacturerAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerAccountIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationManufacturerAccountIdFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationManufacturerAccountIdFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerAccountIdFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationManufacturerAccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerAccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationManufacturerLegalNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerLegalNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationManufacturerLegalNameFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationManufacturerLegalNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerLegalNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationManufacturerLegalNameFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationManufacturerLegalNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerLegalNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationManufacturerLegalNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerLegalNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationNameFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationNameFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationNameFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationOfferExtendedStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationOfferExtendedStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationOfferExtendedStatusFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationOfferExtendedStatusFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationOfferExtendedStatusFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationOfferExtendedStatusFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationOfferExtendedStatusString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationOfferExtendedStatusString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationProductIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductIdFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationProductIdFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationProductIdFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationProductIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationProductIdFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationProductIdFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductIdFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationProductIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationProductNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationProductNameFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationProductNameFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationProductNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationProductNameFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationProductNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationProductNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationResellerAccountIDFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerAccountIDFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationResellerAccountIDFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationResellerAccountIDFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationResellerAccountIDFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerAccountIDFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationResellerAccountIDFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationResellerAccountIDFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerAccountIDFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationResellerAccountIDString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerAccountIDString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationResellerLegalNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerLegalNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationResellerLegalNameFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationResellerLegalNameFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationResellerLegalNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerLegalNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationResellerLegalNameFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationResellerLegalNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerLegalNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationResellerLegalNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerLegalNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationResellerRoleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerRoleFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationResellerRoleFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationResellerRoleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerRoleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationResellerRoleFilterValueList_member *smithy.Schema
-
-var ResaleAuthorizationResellerRoleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerRoleString",
-}, smithy.ShapeTypeEnum, 2)
-var ResaleAuthorizationResellerRoleString_ChannelPartner *smithy.Schema
-
-var ResaleAuthorizationResellerRoleString_Distributor *smithy.Schema
-
-var ResaleAuthorizationSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSort",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationSort_SortBy *smithy.Schema
-
-var ResaleAuthorizationSort_SortOrder *smithy.Schema
-
-var ResaleAuthorizationSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSortBy",
-}, smithy.ShapeTypeEnum, 16)
-var ResaleAuthorizationSortBy_EntityId *smithy.Schema
-
-var ResaleAuthorizationSortBy_Name *smithy.Schema
-
-var ResaleAuthorizationSortBy_ProductId *smithy.Schema
-
-var ResaleAuthorizationSortBy_ProductName *smithy.Schema
-
-var ResaleAuthorizationSortBy_ManufacturerAccountId *smithy.Schema
-
-var ResaleAuthorizationSortBy_ManufacturerLegalName *smithy.Schema
-
-var ResaleAuthorizationSortBy_ResellerAccountID *smithy.Schema
-
-var ResaleAuthorizationSortBy_ResellerLegalName *smithy.Schema
-
-var ResaleAuthorizationSortBy_Status *smithy.Schema
-
-var ResaleAuthorizationSortBy_OfferExtendedStatus *smithy.Schema
-
-var ResaleAuthorizationSortBy_CreatedDate *smithy.Schema
-
-var ResaleAuthorizationSortBy_AvailabilityEndDate *smithy.Schema
-
-var ResaleAuthorizationSortBy_LastModifiedDate *smithy.Schema
-
-var ResaleAuthorizationSortBy_ResellerRole *smithy.Schema
-
-var ResaleAuthorizationSortBy_SourceAuthorization *smithy.Schema
-
-var ResaleAuthorizationSortBy_IssuerAccountId *smithy.Schema
-
-var ResaleAuthorizationSourceAuthorizationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSourceAuthorizationFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationSourceAuthorizationFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationSourceAuthorizationFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSourceAuthorizationFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationSourceAuthorizationFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationSourceAuthorizationString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSourceAuthorizationString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationStatusFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationStatusFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationStatusFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationStatusFilterValueList_member *smithy.Schema
-
-var ResaleAuthorizationStatusString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationStatusString",
-}, smithy.ShapeTypeEnum, 3)
-var ResaleAuthorizationStatusString_Draft *smithy.Schema
-
-var ResaleAuthorizationStatusString_Active *smithy.Schema
-
-var ResaleAuthorizationStatusString_Restricted *smithy.Schema
-
-var ResaleAuthorizationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSummary",
-}, smithy.ShapeTypeStructure, 14)
-var ResaleAuthorizationSummary_Name *smithy.Schema
-
-var ResaleAuthorizationSummary_ProductId *smithy.Schema
-
-var ResaleAuthorizationSummary_ProductName *smithy.Schema
-
-var ResaleAuthorizationSummary_ManufacturerAccountId *smithy.Schema
-
-var ResaleAuthorizationSummary_ManufacturerLegalName *smithy.Schema
-
-var ResaleAuthorizationSummary_ResellerAccountID *smithy.Schema
-
-var ResaleAuthorizationSummary_ResellerLegalName *smithy.Schema
-
-var ResaleAuthorizationSummary_Status *smithy.Schema
-
-var ResaleAuthorizationSummary_OfferExtendedStatus *smithy.Schema
-
-var ResaleAuthorizationSummary_CreatedDate *smithy.Schema
-
-var ResaleAuthorizationSummary_AvailabilityEndDate *smithy.Schema
-
-var ResaleAuthorizationSummary_ResellerRole *smithy.Schema
-
-var ResaleAuthorizationSummary_SourceAuthorization *smithy.Schema
-
-var ResaleAuthorizationSummary_IssuerAccountId *smithy.Schema
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceIdList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceIdList_member *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 423})
-var ResourceInUseException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 415})
-var ResourceNotSupportedException_Message *smithy.Schema
-
-var _ResourcePolicyJson = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourcePolicyJson",
-}, smithy.ShapeTypeString, 0)
-
-var SaaSProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SaaSProductEntityIdFilter_ValueList *smithy.Schema
-
-var _SaaSProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SaaSProductEntityIdFilterValueList_member *smithy.Schema
-
-var _SaaSProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var SaaSProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var SaaSProductFilters_EntityId *smithy.Schema
-
-var SaaSProductFilters_ProductTitle *smithy.Schema
-
-var SaaSProductFilters_Visibility *smithy.Schema
-
-var SaaSProductFilters_LastModifiedDate *smithy.Schema
-
-var SaaSProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SaaSProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var SaaSProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var SaaSProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var SaaSProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var SaaSProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var SaaSProductSort_SortBy *smithy.Schema
-
-var SaaSProductSort_SortOrder *smithy.Schema
-
-var SaaSProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductSortBy",
-}, smithy.ShapeTypeEnum, 5)
-var SaaSProductSortBy_EntityId *smithy.Schema
-
-var SaaSProductSortBy_ProductTitle *smithy.Schema
-
-var SaaSProductSortBy_Visibility *smithy.Schema
-
-var SaaSProductSortBy_LastModifiedDate *smithy.Schema
-
-var SaaSProductSortBy_DeliveryOptionTypes *smithy.Schema
-
-var SaaSProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SaaSProductSummary_ProductTitle *smithy.Schema
-
-var SaaSProductSummary_Visibility *smithy.Schema
-
-var SaaSProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SaaSProductTitleFilter_ValueList *smithy.Schema
-
-var SaaSProductTitleFilter_WildCardValue *smithy.Schema
-
-var _SaaSProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SaaSProductTitleFilterValueList_member *smithy.Schema
-
-var _SaaSProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var SaaSProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SaaSProductVisibilityFilter_ValueList *smithy.Schema
-
-var _SaaSProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SaaSProductVisibilityFilterValueList_member *smithy.Schema
-
-var SaaSProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductVisibilityString",
-}, smithy.ShapeTypeEnum, 4)
-var SaaSProductVisibilityString_Limited *smithy.Schema
-
-var SaaSProductVisibilityString_Public *smithy.Schema
-
-var SaaSProductVisibilityString_Restricted *smithy.Schema
-
-var SaaSProductVisibilityString_Draft *smithy.Schema
-
-var _ScopeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ScopeName",
-}, smithy.ShapeTypeString, 0)
-
-var _ScopeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ScopeValue",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var Sort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Sort",
-}, smithy.ShapeTypeStructure, 2)
-var Sort_SortBy *smithy.Schema
-
-var Sort_SortOrder *smithy.Schema
-
-var _SortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SortBy",
-}, smithy.ShapeTypeString, 0)
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var SubsidiaryAuthorizationCreatedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationCreatedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationCreatedDateFilter_DateRange *smithy.Schema
-
-var SubsidiaryAuthorizationCreatedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationCreatedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue *smithy.Schema
-
-var SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var SubsidiaryAuthorizationEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationEntityIdFilter_ValueList *smithy.Schema
-
-var _SubsidiaryAuthorizationEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationEntityIdFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationFilters",
-}, smithy.ShapeTypeStructure, 8)
-var SubsidiaryAuthorizationFilters_EntityId *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_Status *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_ResourceId *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_ResourceName *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_Name *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_SubsidiaryAccountId *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_CreatedDate *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_LastModifiedDate *smithy.Schema
-
-var SubsidiaryAuthorizationLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationLastModifiedDateFilter_DateRange *smithy.Schema
-
-var SubsidiaryAuthorizationLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var SubsidiaryAuthorizationNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationNameFilter_ValueList *smithy.Schema
-
-var SubsidiaryAuthorizationNameFilter_WildCardValue *smithy.Schema
-
-var _SubsidiaryAuthorizationNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationNameFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationNameString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationResourceIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationResourceIdFilter_ValueList *smithy.Schema
-
-var _SubsidiaryAuthorizationResourceIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationResourceIdFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationResourceIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceIdString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationResourceNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationResourceNameFilter_ValueList *smithy.Schema
-
-var SubsidiaryAuthorizationResourceNameFilter_WildCardValue *smithy.Schema
-
-var _SubsidiaryAuthorizationResourceNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationResourceNameFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationResourceNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationResourceNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceNameString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSort",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationSort_SortBy *smithy.Schema
-
-var SubsidiaryAuthorizationSort_SortOrder *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSortBy",
-}, smithy.ShapeTypeEnum, 6)
-var SubsidiaryAuthorizationSortBy_EntityId *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_Status *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_ResourceId *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_SubsidiaryAccountId *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_CreatedDate *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_LastModifiedDate *smithy.Schema
-
-var SubsidiaryAuthorizationStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationStatusFilter_ValueList *smithy.Schema
-
-var _SubsidiaryAuthorizationStatusFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationStatusFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationStatusFilterValueList_member *smithy.Schema
-
-var SubsidiaryAuthorizationStatusString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationStatusString",
-}, smithy.ShapeTypeEnum, 3)
-var SubsidiaryAuthorizationStatusString_Draft *smithy.Schema
-
-var SubsidiaryAuthorizationStatusString_Active *smithy.Schema
-
-var SubsidiaryAuthorizationStatusString_Restricted *smithy.Schema
-
-var SubsidiaryAuthorizationSubsidiaryAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList *smithy.Schema
-
-var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationSubsidiaryAccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummary",
-}, smithy.ShapeTypeStructure, 6)
-var SubsidiaryAuthorizationSummary_Name *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_Status *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_ResourceId *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_ResourceName *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_SubsidiaryAccountId *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_CreatedDate *smithy.Schema
-
-var _SubsidiaryAuthorizationSummaryNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummaryNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationSummaryResourceIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummaryResourceIdString",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationSummaryResourceNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummaryResourceNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationSummaryStatusString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummaryStatusString",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationSummarySubsidiaryAccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummarySubsidiaryAccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 422})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_ValidationExceptionFieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 6)
-var ValidationExceptionField_Reason *smithy.Schema
-
-var ValidationExceptionField_EntityType *smithy.Schema
-
-var ValidationExceptionField_EntityId *smithy.Schema
-
-var ValidationExceptionField_ChangeType *smithy.Schema
-
-var ValidationExceptionField_Field *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var _ValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValueList",
-}, smithy.ShapeTypeList, 1)
-var _ValueList_member *smithy.Schema
-
-var _VersionedFrameworkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "VersionedFrameworkId",
-}, smithy.ShapeTypeString, 0)
-
-var _VisibilityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "VisibilityValue",
-}, smithy.ShapeTypeString, 0)
-
-var BatchDescribeEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeEntitiesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDescribeEntitiesRequest_EntityRequestList *smithy.Schema
-
-var BatchDescribeEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeEntitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDescribeEntitiesResponse_EntityDetails *smithy.Schema
-
-var BatchDescribeEntitiesResponse_Errors *smithy.Schema
-
-var CancelChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "CancelChangeSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelChangeSetRequest_Catalog *smithy.Schema
-
-var CancelChangeSetRequest_ChangeSetId *smithy.Schema
-
-var CancelChangeSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "CancelChangeSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CancelChangeSetResponse_ChangeSetId *smithy.Schema
-
-var CancelChangeSetResponse_ChangeSetArn *smithy.Schema
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeAssessmentRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeAssessmentRequest_Catalog *smithy.Schema
-
-var DescribeAssessmentRequest_AssessmentIdentifier *smithy.Schema
-
-var DescribeAssessmentRequest_MaxResults *smithy.Schema
-
-var DescribeAssessmentRequest_NextToken *smithy.Schema
-
-var DescribeAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeAssessmentResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeAssessmentResponse_AssessmentArn *smithy.Schema
-
-var DescribeAssessmentResponse_AssessmentId *smithy.Schema
-
-var DescribeAssessmentResponse_FrameworkId *smithy.Schema
-
-var DescribeAssessmentResponse_AssessmentTargetSummary *smithy.Schema
-
-var DescribeAssessmentResponse_FrameworkSummary *smithy.Schema
-
-var DescribeAssessmentResponse_AssessmentResult *smithy.Schema
-
-var DescribeAssessmentResponse_CreatedAt *smithy.Schema
-
-var DescribeAssessmentResponse_ExpiresAt *smithy.Schema
-
-var DescribeAssessmentResponse_ControlAssessments *smithy.Schema
-
-var DescribeAssessmentResponse_NextToken *smithy.Schema
-
-var DescribeChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeChangeSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeChangeSetRequest_Catalog *smithy.Schema
-
-var DescribeChangeSetRequest_ChangeSetId *smithy.Schema
-
-var DescribeChangeSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeChangeSetResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeChangeSetResponse_ChangeSetId *smithy.Schema
-
-var DescribeChangeSetResponse_ChangeSetArn *smithy.Schema
-
-var DescribeChangeSetResponse_ChangeSetName *smithy.Schema
-
-var DescribeChangeSetResponse_Intent *smithy.Schema
-
-var DescribeChangeSetResponse_StartTime *smithy.Schema
-
-var DescribeChangeSetResponse_EndTime *smithy.Schema
-
-var DescribeChangeSetResponse_Status *smithy.Schema
-
-var DescribeChangeSetResponse_FailureCode *smithy.Schema
-
-var DescribeChangeSetResponse_FailureDescription *smithy.Schema
-
-var DescribeChangeSetResponse_ChangeSet *smithy.Schema
-
-var DescribeEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeEntityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEntityRequest_Catalog *smithy.Schema
-
-var DescribeEntityRequest_EntityId *smithy.Schema
-
-var DescribeEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeEntityResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeEntityResponse_EntityType *smithy.Schema
-
-var DescribeEntityResponse_EntityIdentifier *smithy.Schema
-
-var DescribeEntityResponse_EntityArn *smithy.Schema
-
-var DescribeEntityResponse_LastModifiedDate *smithy.Schema
-
-var DescribeEntityResponse_Details *smithy.Schema
-
-var DescribeEntityResponse_DetailsDocument *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyResponse_Policy *smithy.Schema
-
-var ListAssessmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListAssessmentsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListAssessmentsRequest_Catalog *smithy.Schema
-
-var ListAssessmentsRequest_FrameworkId *smithy.Schema
-
-var ListAssessmentsRequest_AssessmentTargetFilter *smithy.Schema
-
-var ListAssessmentsRequest_FrameworkFilters *smithy.Schema
-
-var ListAssessmentsRequest_MaxResults *smithy.Schema
-
-var ListAssessmentsRequest_NextToken *smithy.Schema
-
-var ListAssessmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListAssessmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssessmentsResponse_AssessmentSummaryList *smithy.Schema
-
-var ListAssessmentsResponse_NextToken *smithy.Schema
-
-var ListChangeSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListChangeSetsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListChangeSetsRequest_Catalog *smithy.Schema
-
-var ListChangeSetsRequest_FilterList *smithy.Schema
-
-var ListChangeSetsRequest_Sort *smithy.Schema
-
-var ListChangeSetsRequest_MaxResults *smithy.Schema
-
-var ListChangeSetsRequest_NextToken *smithy.Schema
-
-var ListChangeSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListChangeSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChangeSetsResponse_ChangeSetSummaryList *smithy.Schema
-
-var ListChangeSetsResponse_NextToken *smithy.Schema
-
-var ListEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListEntitiesRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListEntitiesRequest_Catalog *smithy.Schema
-
-var ListEntitiesRequest_EntityType *smithy.Schema
-
-var ListEntitiesRequest_FilterList *smithy.Schema
-
-var ListEntitiesRequest_Sort *smithy.Schema
-
-var ListEntitiesRequest_NextToken *smithy.Schema
-
-var ListEntitiesRequest_MaxResults *smithy.Schema
-
-var ListEntitiesRequest_OwnershipType *smithy.Schema
-
-var ListEntitiesRequest_EntityTypeFilters *smithy.Schema
-
-var ListEntitiesRequest_EntityTypeSort *smithy.Schema
-
-var ListEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListEntitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEntitiesResponse_EntitySummaryList *smithy.Schema
-
-var ListEntitiesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var PutResourcePolicyRequest_Policy *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "StartChangeSetRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartChangeSetRequest_Catalog *smithy.Schema
-
-var StartChangeSetRequest_ChangeSet *smithy.Schema
-
-var StartChangeSetRequest_ChangeSetName *smithy.Schema
-
-var StartChangeSetRequest_ClientRequestToken *smithy.Schema
-
-var StartChangeSetRequest_ChangeSetTags *smithy.Schema
-
-var StartChangeSetRequest_Intent *smithy.Schema
-
-var StartChangeSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "StartChangeSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartChangeSetResponse_ChangeSetId *smithy.Schema
-
-var StartChangeSetResponse_ChangeSetArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessageContent)
-
-	_AmiProductEntityIdFilterValueList_member = _AmiProductEntityIdFilterValueList.AddMember("member", _AmiProductEntityIdString)
-
-	AmiProductEntityIdFilter_ValueList = AmiProductEntityIdFilter.AddMember("ValueList", _AmiProductEntityIdFilterValueList)
-
-	AmiProductLastModifiedDateFilterDateRange_AfterValue = AmiProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	AmiProductLastModifiedDateFilterDateRange_BeforeValue = AmiProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	AmiProductLastModifiedDateFilter_DateRange = AmiProductLastModifiedDateFilter.AddMember("DateRange", AmiProductLastModifiedDateFilterDateRange)
-
-	_AmiProductTitleFilterValueList_member = _AmiProductTitleFilterValueList.AddMember("member", _AmiProductTitleString)
-
-	AmiProductTitleFilter_ValueList = AmiProductTitleFilter.AddMember("ValueList", _AmiProductTitleFilterValueList)
-
-	AmiProductTitleFilter_WildCardValue = AmiProductTitleFilter.AddMember("WildCardValue", _AmiProductTitleString)
-
-	AmiProductVisibilityString_Limited = AmiProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	AmiProductVisibilityString_Public = AmiProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	AmiProductVisibilityString_Restricted = AmiProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	AmiProductVisibilityString_Draft = AmiProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	_AmiProductVisibilityFilterValueList_member = _AmiProductVisibilityFilterValueList.AddMember("member", AmiProductVisibilityString)
-
-	AmiProductVisibilityFilter_ValueList = AmiProductVisibilityFilter.AddMember("ValueList", _AmiProductVisibilityFilterValueList)
-
-	AmiProductFilters_EntityId = AmiProductFilters.AddMember("EntityId", AmiProductEntityIdFilter)
-
-	AmiProductFilters_LastModifiedDate = AmiProductFilters.AddMember("LastModifiedDate", AmiProductLastModifiedDateFilter)
-
-	AmiProductFilters_ProductTitle = AmiProductFilters.AddMember("ProductTitle", AmiProductTitleFilter)
-
-	AmiProductFilters_Visibility = AmiProductFilters.AddMember("Visibility", AmiProductVisibilityFilter)
-
-	AmiProductSortBy_EntityId = AmiProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	AmiProductSortBy_LastModifiedDate = AmiProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	AmiProductSortBy_ProductTitle = AmiProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	AmiProductSortBy_Visibility = AmiProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	AmiProductSort_SortBy = AmiProductSort.AddMember("SortBy", AmiProductSortBy)
-
-	AmiProductSort_SortOrder = AmiProductSort.AddMember("SortOrder", SortOrder)
-
-	AmiProductSummary_ProductTitle = AmiProductSummary.AddMember("ProductTitle", _AmiProductTitleString)
-
-	AmiProductSummary_Visibility = AmiProductSummary.AddMember("Visibility", AmiProductVisibilityString)
-
-	AMISecurityFilters_DeliveryOptionId = AMISecurityFilters.AddMember("DeliveryOptionId", _ResourceId)
-
-	AMISecuritySummary_DeliveryOptionId = AMISecuritySummary.AddMember("DeliveryOptionId", _ResourceId)
-
-	AssessmentResult_PASS = AssessmentResult.AddMember("PASS", smithyprelude.Unit)
-
-	AssessmentResult_FAIL = AssessmentResult.AddMember("FAIL", smithyprelude.Unit)
-
-	AssessmentTargetSummary_EntityId = AssessmentTargetSummary.AddMember("EntityId", _ResourceId)
-
-	AssessmentTargetSummary_ChangeSetId = AssessmentTargetSummary.AddMember("ChangeSetId", _ResourceId)
-
-	ContainerSecuritySummary_DeliveryOptionId = ContainerSecuritySummary.AddMember("DeliveryOptionId", _ResourceId)
-
-	FrameworkSummary_AMISecuritySummary = FrameworkSummary.AddMember("AMISecuritySummary", AMISecuritySummary)
-
-	FrameworkSummary_ContainerSecuritySummary = FrameworkSummary.AddMember("ContainerSecuritySummary", ContainerSecuritySummary)
-
-	AssessmentSummary_AssessmentArn = AssessmentSummary.AddMember("AssessmentArn", _ARN)
-
-	AssessmentSummary_AssessmentId = AssessmentSummary.AddMember("AssessmentId", _ResourceId)
-
-	AssessmentSummary_FrameworkId = AssessmentSummary.AddMember("FrameworkId", _VersionedFrameworkId)
-
-	AssessmentSummary_AssessmentTargetSummary = AssessmentSummary.AddMember("AssessmentTargetSummary", AssessmentTargetSummary)
-
-	AssessmentSummary_FrameworkSummary = AssessmentSummary.AddMember("FrameworkSummary", FrameworkSummary)
-
-	AssessmentSummary_AssessmentResult = AssessmentSummary.AddMember("AssessmentResult", AssessmentResult)
-
-	AssessmentSummary_CreatedAt = AssessmentSummary.AddMember("CreatedAt", _DateTimeISO8601)
-
-	AssessmentSummary_ExpiresAt = AssessmentSummary.AddMember("ExpiresAt", _DateTimeISO8601)
-
-	_AssessmentSummaryList_member = _AssessmentSummaryList.AddMember("member", AssessmentSummary)
-
-	AssessmentTargetFilter_EntityId = AssessmentTargetFilter.AddMember("EntityId", _ResourceId)
-
-	AssessmentTargetFilter_ChangeSetId = AssessmentTargetFilter.AddMember("ChangeSetId", _ResourceId)
-
-	BatchDescribeErrorDetail_ErrorCode = BatchDescribeErrorDetail.AddMember("ErrorCode", _BatchDescribeErrorCodeString)
-
-	BatchDescribeErrorDetail_ErrorMessage = BatchDescribeErrorDetail.AddMember("ErrorMessage", _BatchDescribeErrorMessageContent)
-
-	Entity_Type = Entity.AddMember("Type", _EntityType)
-
-	Entity_Identifier = Entity.AddMember("Identifier", _Identifier)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	Change_ChangeType = Change.AddMember("ChangeType", _ChangeType)
-
-	Change_Entity = Change.AddMember("Entity", Entity)
-
-	Change_EntityTags = Change.AddMember("EntityTags", _TagList)
-
-	Change_Details = Change.AddMember("Details", _Json)
-
-	Change_DetailsDocument = Change.AddMember("DetailsDocument", _JsonDocumentType)
-
-	Change_ChangeName = Change.AddMember("ChangeName", _ChangeName)
-
-	ErrorDetail_ErrorCode = ErrorDetail.AddMember("ErrorCode", _ErrorCodeString)
-
-	ErrorDetail_ErrorMessage = ErrorDetail.AddMember("ErrorMessage", _ExceptionMessageContent)
-
-	_ErrorDetailList_member = _ErrorDetailList.AddMember("member", ErrorDetail)
-
-	ChangeSummary_ChangeType = ChangeSummary.AddMember("ChangeType", _ChangeType)
-
-	ChangeSummary_Entity = ChangeSummary.AddMember("Entity", Entity)
-
-	ChangeSummary_Details = ChangeSummary.AddMember("Details", _Json)
-
-	ChangeSummary_DetailsDocument = ChangeSummary.AddMember("DetailsDocument", _JsonDocumentType)
-
-	ChangeSummary_ErrorDetailList = ChangeSummary.AddMember("ErrorDetailList", _ErrorDetailList)
-
-	ChangeSummary_ChangeName = ChangeSummary.AddMember("ChangeName", _ChangeName)
-
-	_ChangeSetDescription_member = _ChangeSetDescription.AddMember("member", ChangeSummary)
-
-	ChangeStatus_PREPARING = ChangeStatus.AddMember("PREPARING", smithyprelude.Unit)
-
-	ChangeStatus_APPLYING = ChangeStatus.AddMember("APPLYING", smithyprelude.Unit)
-
-	ChangeStatus_SUCCEEDED = ChangeStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ChangeStatus_CANCELLED = ChangeStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	ChangeStatus_FAILED = ChangeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	_ResourceIdList_member = _ResourceIdList.AddMember("member", _ResourceId)
-
-	FailureCode_ClientError = FailureCode.AddMember("ClientError", smithyprelude.Unit)
-
-	FailureCode_ServerFault = FailureCode.AddMember("ServerFault", smithyprelude.Unit)
-
-	ChangeSetSummaryListItem_ChangeSetId = ChangeSetSummaryListItem.AddMember("ChangeSetId", _ResourceId)
-
-	ChangeSetSummaryListItem_ChangeSetArn = ChangeSetSummaryListItem.AddMember("ChangeSetArn", _ARN)
-
-	ChangeSetSummaryListItem_ChangeSetName = ChangeSetSummaryListItem.AddMember("ChangeSetName", _ChangeSetName)
-
-	ChangeSetSummaryListItem_StartTime = ChangeSetSummaryListItem.AddMember("StartTime", _DateTimeISO8601)
-
-	ChangeSetSummaryListItem_EndTime = ChangeSetSummaryListItem.AddMember("EndTime", _DateTimeISO8601)
-
-	ChangeSetSummaryListItem_Status = ChangeSetSummaryListItem.AddMember("Status", ChangeStatus)
-
-	ChangeSetSummaryListItem_EntityIdList = ChangeSetSummaryListItem.AddMember("EntityIdList", _ResourceIdList)
-
-	ChangeSetSummaryListItem_FailureCode = ChangeSetSummaryListItem.AddMember("FailureCode", FailureCode)
-
-	_ChangeSetSummaryList_member = _ChangeSetSummaryList.AddMember("member", ChangeSetSummaryListItem)
-
-	_ContainerProductEntityIdFilterValueList_member = _ContainerProductEntityIdFilterValueList.AddMember("member", _ContainerProductEntityIdString)
-
-	ContainerProductEntityIdFilter_ValueList = ContainerProductEntityIdFilter.AddMember("ValueList", _ContainerProductEntityIdFilterValueList)
-
-	ContainerProductLastModifiedDateFilterDateRange_AfterValue = ContainerProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	ContainerProductLastModifiedDateFilterDateRange_BeforeValue = ContainerProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	ContainerProductLastModifiedDateFilter_DateRange = ContainerProductLastModifiedDateFilter.AddMember("DateRange", ContainerProductLastModifiedDateFilterDateRange)
-
-	_ContainerProductTitleFilterValueList_member = _ContainerProductTitleFilterValueList.AddMember("member", _ContainerProductTitleString)
-
-	ContainerProductTitleFilter_ValueList = ContainerProductTitleFilter.AddMember("ValueList", _ContainerProductTitleFilterValueList)
-
-	ContainerProductTitleFilter_WildCardValue = ContainerProductTitleFilter.AddMember("WildCardValue", _ContainerProductTitleString)
-
-	ContainerProductVisibilityString_Limited = ContainerProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	ContainerProductVisibilityString_Public = ContainerProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	ContainerProductVisibilityString_Restricted = ContainerProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	ContainerProductVisibilityString_Draft = ContainerProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	_ContainerProductVisibilityFilterValueList_member = _ContainerProductVisibilityFilterValueList.AddMember("member", ContainerProductVisibilityString)
-
-	ContainerProductVisibilityFilter_ValueList = ContainerProductVisibilityFilter.AddMember("ValueList", _ContainerProductVisibilityFilterValueList)
-
-	ContainerProductFilters_EntityId = ContainerProductFilters.AddMember("EntityId", ContainerProductEntityIdFilter)
-
-	ContainerProductFilters_LastModifiedDate = ContainerProductFilters.AddMember("LastModifiedDate", ContainerProductLastModifiedDateFilter)
-
-	ContainerProductFilters_ProductTitle = ContainerProductFilters.AddMember("ProductTitle", ContainerProductTitleFilter)
-
-	ContainerProductFilters_Visibility = ContainerProductFilters.AddMember("Visibility", ContainerProductVisibilityFilter)
-
-	ContainerProductSortBy_EntityId = ContainerProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	ContainerProductSortBy_LastModifiedDate = ContainerProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	ContainerProductSortBy_ProductTitle = ContainerProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	ContainerProductSortBy_Visibility = ContainerProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	ContainerProductSortBy_CompatibleAWSServices = ContainerProductSortBy.AddMember("CompatibleAWSServices", smithyprelude.Unit)
-
-	ContainerProductSort_SortBy = ContainerProductSort.AddMember("SortBy", ContainerProductSortBy)
-
-	ContainerProductSort_SortOrder = ContainerProductSort.AddMember("SortOrder", SortOrder)
-
-	ContainerProductSummary_ProductTitle = ContainerProductSummary.AddMember("ProductTitle", _ContainerProductTitleString)
-
-	ContainerProductSummary_Visibility = ContainerProductSummary.AddMember("Visibility", ContainerProductVisibilityString)
-
-	ContainerSecurityFilters_DeliveryOptionId = ContainerSecurityFilters.AddMember("DeliveryOptionId", _ResourceId)
-
-	ControlAssessmentResult_PASS = ControlAssessmentResult.AddMember("PASS", smithyprelude.Unit)
-
-	ControlAssessmentResult_FAIL = ControlAssessmentResult.AddMember("FAIL", smithyprelude.Unit)
-
-	ControlAssessmentResult_NOT_EXECUTED = ControlAssessmentResult.AddMember("NOT_EXECUTED", smithyprelude.Unit)
-
-	ControlAssessmentResult_EXEMPTION_PASS = ControlAssessmentResult.AddMember("EXEMPTION_PASS", smithyprelude.Unit)
-
-	ErrorScope_Name = ErrorScope.AddMember("Name", _ScopeName)
-
-	ErrorScope_Value = ErrorScope.AddMember("Value", _ScopeValue)
-
-	_ErrorScopeList_member = _ErrorScopeList.AddMember("member", ErrorScope)
-
-	ControlError_Code = ControlError.AddMember("Code", _ErrorCode)
-
-	ControlError_Message = ControlError.AddMember("Message", _ErrorMessage)
-
-	ControlError_Scope = ControlError.AddMember("Scope", _ErrorScopeList)
-
-	_ControlErrorList_member = _ControlErrorList.AddMember("member", ControlError)
-
-	ControlAssessment_ControlId = ControlAssessment.AddMember("ControlId", _ResourceId)
-
-	ControlAssessment_ControlAssessmentResult = ControlAssessment.AddMember("ControlAssessmentResult", ControlAssessmentResult)
-
-	ControlAssessment_Errors = ControlAssessment.AddMember("Errors", _ControlErrorList)
-
-	_ControlAssessmentList_member = _ControlAssessmentList.AddMember("member", ControlAssessment)
-
-	_DataProductEntityIdFilterValueList_member = _DataProductEntityIdFilterValueList.AddMember("member", _DataProductEntityIdString)
-
-	DataProductEntityIdFilter_ValueList = DataProductEntityIdFilter.AddMember("ValueList", _DataProductEntityIdFilterValueList)
-
-	_DataProductTitleFilterValueList_member = _DataProductTitleFilterValueList.AddMember("member", _DataProductTitleString)
-
-	DataProductTitleFilter_ValueList = DataProductTitleFilter.AddMember("ValueList", _DataProductTitleFilterValueList)
-
-	DataProductTitleFilter_WildCardValue = DataProductTitleFilter.AddMember("WildCardValue", _DataProductTitleString)
-
-	DataProductVisibilityString_Limited = DataProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	DataProductVisibilityString_Public = DataProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	DataProductVisibilityString_Restricted = DataProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	DataProductVisibilityString_Unavailable = DataProductVisibilityString.AddMember("Unavailable", smithyprelude.Unit)
-
-	DataProductVisibilityString_Draft = DataProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	_DataProductVisibilityFilterValueList_member = _DataProductVisibilityFilterValueList.AddMember("member", DataProductVisibilityString)
-
-	DataProductVisibilityFilter_ValueList = DataProductVisibilityFilter.AddMember("ValueList", _DataProductVisibilityFilterValueList)
-
-	DataProductLastModifiedDateFilterDateRange_AfterValue = DataProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	DataProductLastModifiedDateFilterDateRange_BeforeValue = DataProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	DataProductLastModifiedDateFilter_DateRange = DataProductLastModifiedDateFilter.AddMember("DateRange", DataProductLastModifiedDateFilterDateRange)
-
-	DataProductFilters_EntityId = DataProductFilters.AddMember("EntityId", DataProductEntityIdFilter)
-
-	DataProductFilters_ProductTitle = DataProductFilters.AddMember("ProductTitle", DataProductTitleFilter)
-
-	DataProductFilters_Visibility = DataProductFilters.AddMember("Visibility", DataProductVisibilityFilter)
-
-	DataProductFilters_LastModifiedDate = DataProductFilters.AddMember("LastModifiedDate", DataProductLastModifiedDateFilter)
-
-	DataProductSortBy_EntityId = DataProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	DataProductSortBy_ProductTitle = DataProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	DataProductSortBy_Visibility = DataProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	DataProductSortBy_LastModifiedDate = DataProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	DataProductSort_SortBy = DataProductSort.AddMember("SortBy", DataProductSortBy)
-
-	DataProductSort_SortOrder = DataProductSort.AddMember("SortOrder", SortOrder)
-
-	DataProductSummary_ProductTitle = DataProductSummary.AddMember("ProductTitle", _DataProductTitleString)
-
-	DataProductSummary_Visibility = DataProductSummary.AddMember("Visibility", DataProductVisibilityString)
-
-	EntityDetail_EntityType = EntityDetail.AddMember("EntityType", _EntityType)
-
-	EntityDetail_EntityArn = EntityDetail.AddMember("EntityArn", _ARN)
-
-	EntityDetail_EntityIdentifier = EntityDetail.AddMember("EntityIdentifier", _Identifier)
-
-	EntityDetail_LastModifiedDate = EntityDetail.AddMember("LastModifiedDate", _DateTimeISO8601)
-
-	EntityDetail_DetailsDocument = EntityDetail.AddMember("DetailsDocument", _JsonDocumentType)
-
-	_EntityDetails_key = _EntityDetails.AddMember("key", _EntityId)
-
-	_EntityDetails_value = _EntityDetails.AddMember("value", EntityDetail)
-
-	EntityRequest_Catalog = EntityRequest.AddMember("Catalog", _Catalog)
-
-	EntityRequest_EntityId = EntityRequest.AddMember("EntityId", _EntityId)
-
-	_EntityRequestList_member = _EntityRequestList.AddMember("member", EntityRequest)
-
-	SaaSProductVisibilityString_Limited = SaaSProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	SaaSProductVisibilityString_Public = SaaSProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	SaaSProductVisibilityString_Restricted = SaaSProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	SaaSProductVisibilityString_Draft = SaaSProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	SaaSProductSummary_ProductTitle = SaaSProductSummary.AddMember("ProductTitle", _SaaSProductTitleString)
-
-	SaaSProductSummary_Visibility = SaaSProductSummary.AddMember("Visibility", SaaSProductVisibilityString)
-
-	_OfferBuyerAccountsList_member = _OfferBuyerAccountsList.AddMember("member", _OfferBuyerAccountsString)
-
-	OfferStateString_Draft = OfferStateString.AddMember("Draft", smithyprelude.Unit)
-
-	OfferStateString_Released = OfferStateString.AddMember("Released", smithyprelude.Unit)
-
-	OfferTargetingString_BuyerAccounts = OfferTargetingString.AddMember("BuyerAccounts", smithyprelude.Unit)
-
-	OfferTargetingString_ParticipatingPrograms = OfferTargetingString.AddMember("ParticipatingPrograms", smithyprelude.Unit)
-
-	OfferTargetingString_CountryCodes = OfferTargetingString.AddMember("CountryCodes", smithyprelude.Unit)
-
-	OfferTargetingString_None = OfferTargetingString.AddMember("None", smithyprelude.Unit)
-
-	_OfferTargetingList_member = _OfferTargetingList.AddMember("member", OfferTargetingString)
-
-	OfferTargetAgreementIntentString_Renew = OfferTargetAgreementIntentString.AddMember("Renew", smithyprelude.Unit)
-
-	OfferCreatedBySourceString_Seller = OfferCreatedBySourceString.AddMember("Seller", smithyprelude.Unit)
-
-	OfferCreatedBySourceString_AwsMarketplace = OfferCreatedBySourceString.AddMember("AwsMarketplace", smithyprelude.Unit)
-
-	OfferSummary_Name = OfferSummary.AddMember("Name", _OfferNameString)
-
-	OfferSummary_ProductId = OfferSummary.AddMember("ProductId", _OfferProductIdString)
-
-	OfferSummary_ResaleAuthorizationId = OfferSummary.AddMember("ResaleAuthorizationId", _OfferResaleAuthorizationIdString)
-
-	OfferSummary_ReleaseDate = OfferSummary.AddMember("ReleaseDate", _DateTimeISO8601)
-
-	OfferSummary_AvailabilityEndDate = OfferSummary.AddMember("AvailabilityEndDate", _DateTimeISO8601)
-
-	OfferSummary_BuyerAccounts = OfferSummary.AddMember("BuyerAccounts", _OfferBuyerAccountsList)
-
-	OfferSummary_State = OfferSummary.AddMember("State", OfferStateString)
-
-	OfferSummary_Targeting = OfferSummary.AddMember("Targeting", _OfferTargetingList)
-
-	OfferSummary_OfferSetId = OfferSummary.AddMember("OfferSetId", _OfferSetIdString)
-
-	OfferSummary_TargetAgreementId = OfferSummary.AddMember("TargetAgreementId", _OfferTargetAgreementIdString)
-
-	OfferSummary_TargetAgreementIntent = OfferSummary.AddMember("TargetAgreementIntent", OfferTargetAgreementIntentString)
-
-	OfferSummary_CreatedBySource = OfferSummary.AddMember("CreatedBySource", OfferCreatedBySourceString)
-
-	ResaleAuthorizationStatusString_Draft = ResaleAuthorizationStatusString.AddMember("Draft", smithyprelude.Unit)
-
-	ResaleAuthorizationStatusString_Active = ResaleAuthorizationStatusString.AddMember("Active", smithyprelude.Unit)
-
-	ResaleAuthorizationStatusString_Restricted = ResaleAuthorizationStatusString.AddMember("Restricted", smithyprelude.Unit)
-
-	ResaleAuthorizationResellerRoleString_ChannelPartner = ResaleAuthorizationResellerRoleString.AddMember("ChannelPartner", smithyprelude.Unit)
-
-	ResaleAuthorizationResellerRoleString_Distributor = ResaleAuthorizationResellerRoleString.AddMember("Distributor", smithyprelude.Unit)
-
-	ResaleAuthorizationSummary_Name = ResaleAuthorizationSummary.AddMember("Name", _ResaleAuthorizationNameString)
-
-	ResaleAuthorizationSummary_ProductId = ResaleAuthorizationSummary.AddMember("ProductId", _ResaleAuthorizationProductIdString)
-
-	ResaleAuthorizationSummary_ProductName = ResaleAuthorizationSummary.AddMember("ProductName", _ResaleAuthorizationProductNameString)
-
-	ResaleAuthorizationSummary_ManufacturerAccountId = ResaleAuthorizationSummary.AddMember("ManufacturerAccountId", _ResaleAuthorizationManufacturerAccountIdString)
-
-	ResaleAuthorizationSummary_ManufacturerLegalName = ResaleAuthorizationSummary.AddMember("ManufacturerLegalName", _ResaleAuthorizationManufacturerLegalNameString)
-
-	ResaleAuthorizationSummary_ResellerAccountID = ResaleAuthorizationSummary.AddMember("ResellerAccountID", _ResaleAuthorizationResellerAccountIDString)
-
-	ResaleAuthorizationSummary_ResellerLegalName = ResaleAuthorizationSummary.AddMember("ResellerLegalName", _ResaleAuthorizationResellerLegalNameString)
-
-	ResaleAuthorizationSummary_Status = ResaleAuthorizationSummary.AddMember("Status", ResaleAuthorizationStatusString)
-
-	ResaleAuthorizationSummary_OfferExtendedStatus = ResaleAuthorizationSummary.AddMember("OfferExtendedStatus", _ResaleAuthorizationOfferExtendedStatusString)
-
-	ResaleAuthorizationSummary_CreatedDate = ResaleAuthorizationSummary.AddMember("CreatedDate", _DateTimeISO8601)
-
-	ResaleAuthorizationSummary_AvailabilityEndDate = ResaleAuthorizationSummary.AddMember("AvailabilityEndDate", _DateTimeISO8601)
-
-	ResaleAuthorizationSummary_ResellerRole = ResaleAuthorizationSummary.AddMember("ResellerRole", ResaleAuthorizationResellerRoleString)
-
-	ResaleAuthorizationSummary_SourceAuthorization = ResaleAuthorizationSummary.AddMember("SourceAuthorization", _ResaleAuthorizationSourceAuthorizationString)
-
-	ResaleAuthorizationSummary_IssuerAccountId = ResaleAuthorizationSummary.AddMember("IssuerAccountId", _ResaleAuthorizationIssuerAccountIdString)
-
-	MachineLearningProductVisibilityString_Limited = MachineLearningProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	MachineLearningProductVisibilityString_Public = MachineLearningProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	MachineLearningProductVisibilityString_Restricted = MachineLearningProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	MachineLearningProductVisibilityString_Draft = MachineLearningProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	MachineLearningProductSummary_ProductTitle = MachineLearningProductSummary.AddMember("ProductTitle", _MachineLearningProductTitleString)
-
-	MachineLearningProductSummary_Visibility = MachineLearningProductSummary.AddMember("Visibility", MachineLearningProductVisibilityString)
-
-	OfferSetStateString_Draft = OfferSetStateString.AddMember("Draft", smithyprelude.Unit)
-
-	OfferSetStateString_Released = OfferSetStateString.AddMember("Released", smithyprelude.Unit)
-
-	_OfferSetAssociatedOfferIdsList_member = _OfferSetAssociatedOfferIdsList.AddMember("member", _OfferSetAssociatedOfferIdsString)
-
-	OfferSetSummary_Name = OfferSetSummary.AddMember("Name", _OfferSetNameString)
-
-	OfferSetSummary_State = OfferSetSummary.AddMember("State", OfferSetStateString)
-
-	OfferSetSummary_ReleaseDate = OfferSetSummary.AddMember("ReleaseDate", _DateTimeISO8601)
-
-	OfferSetSummary_AssociatedOfferIds = OfferSetSummary.AddMember("AssociatedOfferIds", _OfferSetAssociatedOfferIdsList)
-
-	OfferSetSummary_SolutionId = OfferSetSummary.AddMember("SolutionId", _OfferSetSolutionIdString)
-
-	ExpressPrivateOfferConfigurationStateString_ACTIVE = ExpressPrivateOfferConfigurationStateString.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationStateString_INACTIVE = ExpressPrivateOfferConfigurationStateString.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSummary_ProductId = ExpressPrivateOfferConfigurationSummary.AddMember("ProductId", _ExpressPrivateOfferConfigurationProductIdString)
-
-	ExpressPrivateOfferConfigurationSummary_State = ExpressPrivateOfferConfigurationSummary.AddMember("State", ExpressPrivateOfferConfigurationStateString)
-
-	SubsidiaryAuthorizationSummary_Name = SubsidiaryAuthorizationSummary.AddMember("Name", _SubsidiaryAuthorizationSummaryNameString)
-
-	SubsidiaryAuthorizationSummary_Status = SubsidiaryAuthorizationSummary.AddMember("Status", _SubsidiaryAuthorizationSummaryStatusString)
-
-	SubsidiaryAuthorizationSummary_ResourceId = SubsidiaryAuthorizationSummary.AddMember("ResourceId", _SubsidiaryAuthorizationSummaryResourceIdString)
-
-	SubsidiaryAuthorizationSummary_ResourceName = SubsidiaryAuthorizationSummary.AddMember("ResourceName", _SubsidiaryAuthorizationSummaryResourceNameString)
-
-	SubsidiaryAuthorizationSummary_SubsidiaryAccountId = SubsidiaryAuthorizationSummary.AddMember("SubsidiaryAccountId", _SubsidiaryAuthorizationSummarySubsidiaryAccountIdString)
-
-	SubsidiaryAuthorizationSummary_CreatedDate = SubsidiaryAuthorizationSummary.AddMember("CreatedDate", _DateTimeISO8601)
-
-	EntitySummary_Name = EntitySummary.AddMember("Name", _EntityNameString)
-
-	EntitySummary_EntityType = EntitySummary.AddMember("EntityType", _EntityType)
-
-	EntitySummary_EntityId = EntitySummary.AddMember("EntityId", _ResourceId)
-
-	EntitySummary_EntityArn = EntitySummary.AddMember("EntityArn", _ARN)
-
-	EntitySummary_LastModifiedDate = EntitySummary.AddMember("LastModifiedDate", _DateTimeISO8601)
-
-	EntitySummary_Visibility = EntitySummary.AddMember("Visibility", _VisibilityValue)
-
-	EntitySummary_AmiProductSummary = EntitySummary.AddMember("AmiProductSummary", AmiProductSummary)
-
-	EntitySummary_ContainerProductSummary = EntitySummary.AddMember("ContainerProductSummary", ContainerProductSummary)
-
-	EntitySummary_DataProductSummary = EntitySummary.AddMember("DataProductSummary", DataProductSummary)
-
-	EntitySummary_SaaSProductSummary = EntitySummary.AddMember("SaaSProductSummary", SaaSProductSummary)
-
-	EntitySummary_OfferSummary = EntitySummary.AddMember("OfferSummary", OfferSummary)
-
-	EntitySummary_ResaleAuthorizationSummary = EntitySummary.AddMember("ResaleAuthorizationSummary", ResaleAuthorizationSummary)
-
-	EntitySummary_MachineLearningProductSummary = EntitySummary.AddMember("MachineLearningProductSummary", MachineLearningProductSummary)
-
-	EntitySummary_OfferSetSummary = EntitySummary.AddMember("OfferSetSummary", OfferSetSummary)
-
-	EntitySummary_ExpressPrivateOfferConfigurationSummary = EntitySummary.AddMember("ExpressPrivateOfferConfigurationSummary", ExpressPrivateOfferConfigurationSummary)
-
-	EntitySummary_SubsidiaryAuthorizationSummary = EntitySummary.AddMember("SubsidiaryAuthorizationSummary", SubsidiaryAuthorizationSummary)
-
-	_EntitySummaryList_member = _EntitySummaryList.AddMember("member", EntitySummary)
-
-	_SaaSProductEntityIdFilterValueList_member = _SaaSProductEntityIdFilterValueList.AddMember("member", _SaaSProductEntityIdString)
-
-	SaaSProductEntityIdFilter_ValueList = SaaSProductEntityIdFilter.AddMember("ValueList", _SaaSProductEntityIdFilterValueList)
-
-	_SaaSProductTitleFilterValueList_member = _SaaSProductTitleFilterValueList.AddMember("member", _SaaSProductTitleString)
-
-	SaaSProductTitleFilter_ValueList = SaaSProductTitleFilter.AddMember("ValueList", _SaaSProductTitleFilterValueList)
-
-	SaaSProductTitleFilter_WildCardValue = SaaSProductTitleFilter.AddMember("WildCardValue", _SaaSProductTitleString)
-
-	_SaaSProductVisibilityFilterValueList_member = _SaaSProductVisibilityFilterValueList.AddMember("member", SaaSProductVisibilityString)
-
-	SaaSProductVisibilityFilter_ValueList = SaaSProductVisibilityFilter.AddMember("ValueList", _SaaSProductVisibilityFilterValueList)
-
-	SaaSProductLastModifiedDateFilterDateRange_AfterValue = SaaSProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	SaaSProductLastModifiedDateFilterDateRange_BeforeValue = SaaSProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	SaaSProductLastModifiedDateFilter_DateRange = SaaSProductLastModifiedDateFilter.AddMember("DateRange", SaaSProductLastModifiedDateFilterDateRange)
-
-	SaaSProductFilters_EntityId = SaaSProductFilters.AddMember("EntityId", SaaSProductEntityIdFilter)
-
-	SaaSProductFilters_ProductTitle = SaaSProductFilters.AddMember("ProductTitle", SaaSProductTitleFilter)
-
-	SaaSProductFilters_Visibility = SaaSProductFilters.AddMember("Visibility", SaaSProductVisibilityFilter)
-
-	SaaSProductFilters_LastModifiedDate = SaaSProductFilters.AddMember("LastModifiedDate", SaaSProductLastModifiedDateFilter)
-
-	_OfferEntityIdFilterValueList_member = _OfferEntityIdFilterValueList.AddMember("member", _OfferEntityIdString)
-
-	OfferEntityIdFilter_ValueList = OfferEntityIdFilter.AddMember("ValueList", _OfferEntityIdFilterValueList)
-
-	_OfferNameFilterValueList_member = _OfferNameFilterValueList.AddMember("member", _OfferNameString)
-
-	OfferNameFilter_ValueList = OfferNameFilter.AddMember("ValueList", _OfferNameFilterValueList)
-
-	OfferNameFilter_WildCardValue = OfferNameFilter.AddMember("WildCardValue", _OfferNameString)
-
-	_OfferProductIdFilterValueList_member = _OfferProductIdFilterValueList.AddMember("member", _OfferProductIdString)
-
-	OfferProductIdFilter_ValueList = OfferProductIdFilter.AddMember("ValueList", _OfferProductIdFilterValueList)
-
-	_OfferResaleAuthorizationIdFilterValueList_member = _OfferResaleAuthorizationIdFilterValueList.AddMember("member", _OfferResaleAuthorizationIdString)
-
-	OfferResaleAuthorizationIdFilter_ValueList = OfferResaleAuthorizationIdFilter.AddMember("ValueList", _OfferResaleAuthorizationIdFilterValueList)
-
-	OfferReleaseDateFilterDateRange_AfterValue = OfferReleaseDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferReleaseDateFilterDateRange_BeforeValue = OfferReleaseDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferReleaseDateFilter_DateRange = OfferReleaseDateFilter.AddMember("DateRange", OfferReleaseDateFilterDateRange)
-
-	OfferAvailabilityEndDateFilterDateRange_AfterValue = OfferAvailabilityEndDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferAvailabilityEndDateFilterDateRange_BeforeValue = OfferAvailabilityEndDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferAvailabilityEndDateFilter_DateRange = OfferAvailabilityEndDateFilter.AddMember("DateRange", OfferAvailabilityEndDateFilterDateRange)
-
-	OfferBuyerAccountsFilter_WildCardValue = OfferBuyerAccountsFilter.AddMember("WildCardValue", _OfferBuyerAccountsFilterWildcard)
-
-	_OfferStateFilterValueList_member = _OfferStateFilterValueList.AddMember("member", OfferStateString)
-
-	OfferStateFilter_ValueList = OfferStateFilter.AddMember("ValueList", _OfferStateFilterValueList)
-
-	_OfferTargetingFilterValueList_member = _OfferTargetingFilterValueList.AddMember("member", OfferTargetingString)
-
-	OfferTargetingFilter_ValueList = OfferTargetingFilter.AddMember("ValueList", _OfferTargetingFilterValueList)
-
-	OfferLastModifiedDateFilterDateRange_AfterValue = OfferLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferLastModifiedDateFilterDateRange_BeforeValue = OfferLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferLastModifiedDateFilter_DateRange = OfferLastModifiedDateFilter.AddMember("DateRange", OfferLastModifiedDateFilterDateRange)
-
-	_OfferSetIdFilterValueList_member = _OfferSetIdFilterValueList.AddMember("member", _OfferSetIdString)
-
-	OfferSetIdFilter_ValueList = OfferSetIdFilter.AddMember("ValueList", _OfferSetIdFilterValueList)
-
-	_OfferTargetAgreementIdFilterValueList_member = _OfferTargetAgreementIdFilterValueList.AddMember("member", _OfferTargetAgreementIdString)
-
-	OfferTargetAgreementIdFilter_ValueList = OfferTargetAgreementIdFilter.AddMember("ValueList", _OfferTargetAgreementIdFilterValueList)
-
-	_OfferTargetAgreementIntentFilterValueList_member = _OfferTargetAgreementIntentFilterValueList.AddMember("member", OfferTargetAgreementIntentString)
-
-	OfferTargetAgreementIntentFilter_ValueList = OfferTargetAgreementIntentFilter.AddMember("ValueList", _OfferTargetAgreementIntentFilterValueList)
-
-	_OfferCreatedBySourceFilterValueList_member = _OfferCreatedBySourceFilterValueList.AddMember("member", OfferCreatedBySourceString)
-
-	OfferCreatedBySourceFilter_ValueList = OfferCreatedBySourceFilter.AddMember("ValueList", _OfferCreatedBySourceFilterValueList)
-
-	OfferFilters_EntityId = OfferFilters.AddMember("EntityId", OfferEntityIdFilter)
-
-	OfferFilters_Name = OfferFilters.AddMember("Name", OfferNameFilter)
-
-	OfferFilters_ProductId = OfferFilters.AddMember("ProductId", OfferProductIdFilter)
-
-	OfferFilters_ResaleAuthorizationId = OfferFilters.AddMember("ResaleAuthorizationId", OfferResaleAuthorizationIdFilter)
-
-	OfferFilters_ReleaseDate = OfferFilters.AddMember("ReleaseDate", OfferReleaseDateFilter)
-
-	OfferFilters_AvailabilityEndDate = OfferFilters.AddMember("AvailabilityEndDate", OfferAvailabilityEndDateFilter)
-
-	OfferFilters_BuyerAccounts = OfferFilters.AddMember("BuyerAccounts", OfferBuyerAccountsFilter)
-
-	OfferFilters_State = OfferFilters.AddMember("State", OfferStateFilter)
-
-	OfferFilters_Targeting = OfferFilters.AddMember("Targeting", OfferTargetingFilter)
-
-	OfferFilters_LastModifiedDate = OfferFilters.AddMember("LastModifiedDate", OfferLastModifiedDateFilter)
-
-	OfferFilters_OfferSetId = OfferFilters.AddMember("OfferSetId", OfferSetIdFilter)
-
-	OfferFilters_TargetAgreementId = OfferFilters.AddMember("TargetAgreementId", OfferTargetAgreementIdFilter)
-
-	OfferFilters_TargetAgreementIntent = OfferFilters.AddMember("TargetAgreementIntent", OfferTargetAgreementIntentFilter)
-
-	OfferFilters_CreatedBySource = OfferFilters.AddMember("CreatedBySource", OfferCreatedBySourceFilter)
-
-	_ResaleAuthorizationEntityIdFilterValueList_member = _ResaleAuthorizationEntityIdFilterValueList.AddMember("member", _ResaleAuthorizationEntityIdString)
-
-	ResaleAuthorizationEntityIdFilter_ValueList = ResaleAuthorizationEntityIdFilter.AddMember("ValueList", _ResaleAuthorizationEntityIdFilterValueList)
-
-	_ResaleAuthorizationNameFilterValueList_member = _ResaleAuthorizationNameFilterValueList.AddMember("member", _ResaleAuthorizationNameString)
-
-	ResaleAuthorizationNameFilter_ValueList = ResaleAuthorizationNameFilter.AddMember("ValueList", _ResaleAuthorizationNameFilterValueList)
-
-	ResaleAuthorizationNameFilter_WildCardValue = ResaleAuthorizationNameFilter.AddMember("WildCardValue", _ResaleAuthorizationNameFilterWildcard)
-
-	_ResaleAuthorizationProductIdFilterValueList_member = _ResaleAuthorizationProductIdFilterValueList.AddMember("member", _ResaleAuthorizationProductIdString)
-
-	ResaleAuthorizationProductIdFilter_ValueList = ResaleAuthorizationProductIdFilter.AddMember("ValueList", _ResaleAuthorizationProductIdFilterValueList)
-
-	ResaleAuthorizationProductIdFilter_WildCardValue = ResaleAuthorizationProductIdFilter.AddMember("WildCardValue", _ResaleAuthorizationProductIdFilterWildcard)
-
-	ResaleAuthorizationCreatedDateFilterDateRange_AfterValue = ResaleAuthorizationCreatedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue = ResaleAuthorizationCreatedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	_ResaleAuthorizationCreatedDateFilterValueList_member = _ResaleAuthorizationCreatedDateFilterValueList.AddMember("member", _DateTimeISO8601)
-
-	ResaleAuthorizationCreatedDateFilter_DateRange = ResaleAuthorizationCreatedDateFilter.AddMember("DateRange", ResaleAuthorizationCreatedDateFilterDateRange)
-
-	ResaleAuthorizationCreatedDateFilter_ValueList = ResaleAuthorizationCreatedDateFilter.AddMember("ValueList", _ResaleAuthorizationCreatedDateFilterValueList)
-
-	ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue = ResaleAuthorizationAvailabilityEndDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue = ResaleAuthorizationAvailabilityEndDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	_ResaleAuthorizationAvailabilityEndDateFilterValueList_member = _ResaleAuthorizationAvailabilityEndDateFilterValueList.AddMember("member", _DateTimeISO8601)
-
-	ResaleAuthorizationAvailabilityEndDateFilter_DateRange = ResaleAuthorizationAvailabilityEndDateFilter.AddMember("DateRange", ResaleAuthorizationAvailabilityEndDateFilterDateRange)
-
-	ResaleAuthorizationAvailabilityEndDateFilter_ValueList = ResaleAuthorizationAvailabilityEndDateFilter.AddMember("ValueList", _ResaleAuthorizationAvailabilityEndDateFilterValueList)
-
-	_ResaleAuthorizationManufacturerAccountIdFilterValueList_member = _ResaleAuthorizationManufacturerAccountIdFilterValueList.AddMember("member", _ResaleAuthorizationManufacturerAccountIdString)
-
-	ResaleAuthorizationManufacturerAccountIdFilter_ValueList = ResaleAuthorizationManufacturerAccountIdFilter.AddMember("ValueList", _ResaleAuthorizationManufacturerAccountIdFilterValueList)
-
-	ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue = ResaleAuthorizationManufacturerAccountIdFilter.AddMember("WildCardValue", _ResaleAuthorizationManufacturerAccountIdFilterWildcard)
-
-	_ResaleAuthorizationProductNameFilterValueList_member = _ResaleAuthorizationProductNameFilterValueList.AddMember("member", _ResaleAuthorizationProductNameString)
-
-	ResaleAuthorizationProductNameFilter_ValueList = ResaleAuthorizationProductNameFilter.AddMember("ValueList", _ResaleAuthorizationProductNameFilterValueList)
-
-	ResaleAuthorizationProductNameFilter_WildCardValue = ResaleAuthorizationProductNameFilter.AddMember("WildCardValue", _ResaleAuthorizationProductNameFilterWildcard)
-
-	_ResaleAuthorizationManufacturerLegalNameFilterValueList_member = _ResaleAuthorizationManufacturerLegalNameFilterValueList.AddMember("member", _ResaleAuthorizationManufacturerLegalNameString)
-
-	ResaleAuthorizationManufacturerLegalNameFilter_ValueList = ResaleAuthorizationManufacturerLegalNameFilter.AddMember("ValueList", _ResaleAuthorizationManufacturerLegalNameFilterValueList)
-
-	ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue = ResaleAuthorizationManufacturerLegalNameFilter.AddMember("WildCardValue", _ResaleAuthorizationManufacturerLegalNameFilterWildcard)
-
-	_ResaleAuthorizationResellerAccountIDFilterValueList_member = _ResaleAuthorizationResellerAccountIDFilterValueList.AddMember("member", _ResaleAuthorizationResellerAccountIDString)
-
-	ResaleAuthorizationResellerAccountIDFilter_ValueList = ResaleAuthorizationResellerAccountIDFilter.AddMember("ValueList", _ResaleAuthorizationResellerAccountIDFilterValueList)
-
-	ResaleAuthorizationResellerAccountIDFilter_WildCardValue = ResaleAuthorizationResellerAccountIDFilter.AddMember("WildCardValue", _ResaleAuthorizationResellerAccountIDFilterWildcard)
-
-	_ResaleAuthorizationResellerLegalNameFilterValueList_member = _ResaleAuthorizationResellerLegalNameFilterValueList.AddMember("member", _ResaleAuthorizationResellerLegalNameString)
-
-	ResaleAuthorizationResellerLegalNameFilter_ValueList = ResaleAuthorizationResellerLegalNameFilter.AddMember("ValueList", _ResaleAuthorizationResellerLegalNameFilterValueList)
-
-	ResaleAuthorizationResellerLegalNameFilter_WildCardValue = ResaleAuthorizationResellerLegalNameFilter.AddMember("WildCardValue", _ResaleAuthorizationResellerLegalNameFilterWildcard)
-
-	_ResaleAuthorizationStatusFilterValueList_member = _ResaleAuthorizationStatusFilterValueList.AddMember("member", ResaleAuthorizationStatusString)
-
-	ResaleAuthorizationStatusFilter_ValueList = ResaleAuthorizationStatusFilter.AddMember("ValueList", _ResaleAuthorizationStatusFilterValueList)
-
-	_ResaleAuthorizationOfferExtendedStatusFilterValueList_member = _ResaleAuthorizationOfferExtendedStatusFilterValueList.AddMember("member", _ResaleAuthorizationOfferExtendedStatusString)
-
-	ResaleAuthorizationOfferExtendedStatusFilter_ValueList = ResaleAuthorizationOfferExtendedStatusFilter.AddMember("ValueList", _ResaleAuthorizationOfferExtendedStatusFilterValueList)
-
-	ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue = ResaleAuthorizationLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue = ResaleAuthorizationLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	ResaleAuthorizationLastModifiedDateFilter_DateRange = ResaleAuthorizationLastModifiedDateFilter.AddMember("DateRange", ResaleAuthorizationLastModifiedDateFilterDateRange)
-
-	_ResaleAuthorizationResellerRoleFilterValueList_member = _ResaleAuthorizationResellerRoleFilterValueList.AddMember("member", ResaleAuthorizationResellerRoleString)
-
-	ResaleAuthorizationResellerRoleFilter_ValueList = ResaleAuthorizationResellerRoleFilter.AddMember("ValueList", _ResaleAuthorizationResellerRoleFilterValueList)
-
-	_ResaleAuthorizationSourceAuthorizationFilterValueList_member = _ResaleAuthorizationSourceAuthorizationFilterValueList.AddMember("member", _ResaleAuthorizationSourceAuthorizationString)
-
-	ResaleAuthorizationSourceAuthorizationFilter_ValueList = ResaleAuthorizationSourceAuthorizationFilter.AddMember("ValueList", _ResaleAuthorizationSourceAuthorizationFilterValueList)
-
-	_ResaleAuthorizationIssuerAccountIdFilterValueList_member = _ResaleAuthorizationIssuerAccountIdFilterValueList.AddMember("member", _ResaleAuthorizationIssuerAccountIdString)
-
-	ResaleAuthorizationIssuerAccountIdFilter_ValueList = ResaleAuthorizationIssuerAccountIdFilter.AddMember("ValueList", _ResaleAuthorizationIssuerAccountIdFilterValueList)
-
-	ResaleAuthorizationFilters_EntityId = ResaleAuthorizationFilters.AddMember("EntityId", ResaleAuthorizationEntityIdFilter)
-
-	ResaleAuthorizationFilters_Name = ResaleAuthorizationFilters.AddMember("Name", ResaleAuthorizationNameFilter)
-
-	ResaleAuthorizationFilters_ProductId = ResaleAuthorizationFilters.AddMember("ProductId", ResaleAuthorizationProductIdFilter)
-
-	ResaleAuthorizationFilters_CreatedDate = ResaleAuthorizationFilters.AddMember("CreatedDate", ResaleAuthorizationCreatedDateFilter)
-
-	ResaleAuthorizationFilters_AvailabilityEndDate = ResaleAuthorizationFilters.AddMember("AvailabilityEndDate", ResaleAuthorizationAvailabilityEndDateFilter)
-
-	ResaleAuthorizationFilters_ManufacturerAccountId = ResaleAuthorizationFilters.AddMember("ManufacturerAccountId", ResaleAuthorizationManufacturerAccountIdFilter)
-
-	ResaleAuthorizationFilters_ProductName = ResaleAuthorizationFilters.AddMember("ProductName", ResaleAuthorizationProductNameFilter)
-
-	ResaleAuthorizationFilters_ManufacturerLegalName = ResaleAuthorizationFilters.AddMember("ManufacturerLegalName", ResaleAuthorizationManufacturerLegalNameFilter)
-
-	ResaleAuthorizationFilters_ResellerAccountID = ResaleAuthorizationFilters.AddMember("ResellerAccountID", ResaleAuthorizationResellerAccountIDFilter)
-
-	ResaleAuthorizationFilters_ResellerLegalName = ResaleAuthorizationFilters.AddMember("ResellerLegalName", ResaleAuthorizationResellerLegalNameFilter)
-
-	ResaleAuthorizationFilters_Status = ResaleAuthorizationFilters.AddMember("Status", ResaleAuthorizationStatusFilter)
-
-	ResaleAuthorizationFilters_OfferExtendedStatus = ResaleAuthorizationFilters.AddMember("OfferExtendedStatus", ResaleAuthorizationOfferExtendedStatusFilter)
-
-	ResaleAuthorizationFilters_LastModifiedDate = ResaleAuthorizationFilters.AddMember("LastModifiedDate", ResaleAuthorizationLastModifiedDateFilter)
-
-	ResaleAuthorizationFilters_ResellerRole = ResaleAuthorizationFilters.AddMember("ResellerRole", ResaleAuthorizationResellerRoleFilter)
-
-	ResaleAuthorizationFilters_SourceAuthorization = ResaleAuthorizationFilters.AddMember("SourceAuthorization", ResaleAuthorizationSourceAuthorizationFilter)
-
-	ResaleAuthorizationFilters_IssuerAccountId = ResaleAuthorizationFilters.AddMember("IssuerAccountId", ResaleAuthorizationIssuerAccountIdFilter)
-
-	_MachineLearningProductEntityIdFilterValueList_member = _MachineLearningProductEntityIdFilterValueList.AddMember("member", _MachineLearningProductEntityIdString)
-
-	MachineLearningProductEntityIdFilter_ValueList = MachineLearningProductEntityIdFilter.AddMember("ValueList", _MachineLearningProductEntityIdFilterValueList)
-
-	MachineLearningProductLastModifiedDateFilterDateRange_AfterValue = MachineLearningProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue = MachineLearningProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	MachineLearningProductLastModifiedDateFilter_DateRange = MachineLearningProductLastModifiedDateFilter.AddMember("DateRange", MachineLearningProductLastModifiedDateFilterDateRange)
-
-	_MachineLearningProductTitleFilterValueList_member = _MachineLearningProductTitleFilterValueList.AddMember("member", _MachineLearningProductTitleString)
-
-	MachineLearningProductTitleFilter_ValueList = MachineLearningProductTitleFilter.AddMember("ValueList", _MachineLearningProductTitleFilterValueList)
-
-	MachineLearningProductTitleFilter_WildCardValue = MachineLearningProductTitleFilter.AddMember("WildCardValue", _MachineLearningProductTitleString)
-
-	_MachineLearningProductVisibilityFilterValueList_member = _MachineLearningProductVisibilityFilterValueList.AddMember("member", MachineLearningProductVisibilityString)
-
-	MachineLearningProductVisibilityFilter_ValueList = MachineLearningProductVisibilityFilter.AddMember("ValueList", _MachineLearningProductVisibilityFilterValueList)
-
-	MachineLearningProductFilters_EntityId = MachineLearningProductFilters.AddMember("EntityId", MachineLearningProductEntityIdFilter)
-
-	MachineLearningProductFilters_LastModifiedDate = MachineLearningProductFilters.AddMember("LastModifiedDate", MachineLearningProductLastModifiedDateFilter)
-
-	MachineLearningProductFilters_ProductTitle = MachineLearningProductFilters.AddMember("ProductTitle", MachineLearningProductTitleFilter)
-
-	MachineLearningProductFilters_Visibility = MachineLearningProductFilters.AddMember("Visibility", MachineLearningProductVisibilityFilter)
-
-	_OfferSetEntityIdFilterValueList_member = _OfferSetEntityIdFilterValueList.AddMember("member", _OfferSetEntityIdString)
-
-	OfferSetEntityIdFilter_ValueList = OfferSetEntityIdFilter.AddMember("ValueList", _OfferSetEntityIdFilterValueList)
-
-	_OfferSetNameFilterValueList_member = _OfferSetNameFilterValueList.AddMember("member", _OfferSetNameString)
-
-	OfferSetNameFilter_ValueList = OfferSetNameFilter.AddMember("ValueList", _OfferSetNameFilterValueList)
-
-	_OfferSetStateFilterValueList_member = _OfferSetStateFilterValueList.AddMember("member", OfferSetStateString)
-
-	OfferSetStateFilter_ValueList = OfferSetStateFilter.AddMember("ValueList", _OfferSetStateFilterValueList)
-
-	OfferSetReleaseDateFilterDateRange_AfterValue = OfferSetReleaseDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferSetReleaseDateFilterDateRange_BeforeValue = OfferSetReleaseDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferSetReleaseDateFilter_DateRange = OfferSetReleaseDateFilter.AddMember("DateRange", OfferSetReleaseDateFilterDateRange)
-
-	_OfferSetAssociatedOfferIdsFilterValueList_member = _OfferSetAssociatedOfferIdsFilterValueList.AddMember("member", _OfferSetAssociatedOfferIdsString)
-
-	OfferSetAssociatedOfferIdsFilter_ValueList = OfferSetAssociatedOfferIdsFilter.AddMember("ValueList", _OfferSetAssociatedOfferIdsFilterValueList)
-
-	_OfferSetSolutionIdFilterValueList_member = _OfferSetSolutionIdFilterValueList.AddMember("member", _OfferSetSolutionIdString)
-
-	OfferSetSolutionIdFilter_ValueList = OfferSetSolutionIdFilter.AddMember("ValueList", _OfferSetSolutionIdFilterValueList)
-
-	OfferSetLastModifiedDateFilterDateRange_AfterValue = OfferSetLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferSetLastModifiedDateFilterDateRange_BeforeValue = OfferSetLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferSetLastModifiedDateFilter_DateRange = OfferSetLastModifiedDateFilter.AddMember("DateRange", OfferSetLastModifiedDateFilterDateRange)
-
-	OfferSetFilters_EntityId = OfferSetFilters.AddMember("EntityId", OfferSetEntityIdFilter)
-
-	OfferSetFilters_Name = OfferSetFilters.AddMember("Name", OfferSetNameFilter)
-
-	OfferSetFilters_State = OfferSetFilters.AddMember("State", OfferSetStateFilter)
-
-	OfferSetFilters_ReleaseDate = OfferSetFilters.AddMember("ReleaseDate", OfferSetReleaseDateFilter)
-
-	OfferSetFilters_AssociatedOfferIds = OfferSetFilters.AddMember("AssociatedOfferIds", OfferSetAssociatedOfferIdsFilter)
-
-	OfferSetFilters_SolutionId = OfferSetFilters.AddMember("SolutionId", OfferSetSolutionIdFilter)
-
-	OfferSetFilters_LastModifiedDate = OfferSetFilters.AddMember("LastModifiedDate", OfferSetLastModifiedDateFilter)
-
-	_ExpressPrivateOfferConfigurationEntityIdFilterValueList_member = _ExpressPrivateOfferConfigurationEntityIdFilterValueList.AddMember("member", _ExpressPrivateOfferConfigurationEntityIdString)
-
-	ExpressPrivateOfferConfigurationEntityIdFilter_ValueList = ExpressPrivateOfferConfigurationEntityIdFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationEntityIdFilterValueList)
-
-	_ExpressPrivateOfferConfigurationProductIdFilterValueList_member = _ExpressPrivateOfferConfigurationProductIdFilterValueList.AddMember("member", _ExpressPrivateOfferConfigurationProductIdString)
-
-	ExpressPrivateOfferConfigurationProductIdFilter_ValueList = ExpressPrivateOfferConfigurationProductIdFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationProductIdFilterValueList)
-
-	_ExpressPrivateOfferConfigurationStateFilterValueList_member = _ExpressPrivateOfferConfigurationStateFilterValueList.AddMember("member", ExpressPrivateOfferConfigurationStateString)
-
-	ExpressPrivateOfferConfigurationStateFilter_ValueList = ExpressPrivateOfferConfigurationStateFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationStateFilterValueList)
-
-	ExpressPrivateOfferConfigurationFilters_EntityId = ExpressPrivateOfferConfigurationFilters.AddMember("EntityId", ExpressPrivateOfferConfigurationEntityIdFilter)
-
-	ExpressPrivateOfferConfigurationFilters_ProductId = ExpressPrivateOfferConfigurationFilters.AddMember("ProductId", ExpressPrivateOfferConfigurationProductIdFilter)
-
-	ExpressPrivateOfferConfigurationFilters_State = ExpressPrivateOfferConfigurationFilters.AddMember("State", ExpressPrivateOfferConfigurationStateFilter)
-
-	_SubsidiaryAuthorizationEntityIdFilterValueList_member = _SubsidiaryAuthorizationEntityIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationEntityIdString)
-
-	SubsidiaryAuthorizationEntityIdFilter_ValueList = SubsidiaryAuthorizationEntityIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationEntityIdFilterValueList)
-
-	SubsidiaryAuthorizationStatusString_Draft = SubsidiaryAuthorizationStatusString.AddMember("Draft", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationStatusString_Active = SubsidiaryAuthorizationStatusString.AddMember("Active", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationStatusString_Restricted = SubsidiaryAuthorizationStatusString.AddMember("Restricted", smithyprelude.Unit)
-
-	_SubsidiaryAuthorizationStatusFilterValueList_member = _SubsidiaryAuthorizationStatusFilterValueList.AddMember("member", SubsidiaryAuthorizationStatusString)
-
-	SubsidiaryAuthorizationStatusFilter_ValueList = SubsidiaryAuthorizationStatusFilter.AddMember("ValueList", _SubsidiaryAuthorizationStatusFilterValueList)
-
-	_SubsidiaryAuthorizationResourceIdFilterValueList_member = _SubsidiaryAuthorizationResourceIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationResourceIdString)
-
-	SubsidiaryAuthorizationResourceIdFilter_ValueList = SubsidiaryAuthorizationResourceIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationResourceIdFilterValueList)
-
-	_SubsidiaryAuthorizationResourceNameFilterValueList_member = _SubsidiaryAuthorizationResourceNameFilterValueList.AddMember("member", _SubsidiaryAuthorizationResourceNameString)
-
-	SubsidiaryAuthorizationResourceNameFilter_ValueList = SubsidiaryAuthorizationResourceNameFilter.AddMember("ValueList", _SubsidiaryAuthorizationResourceNameFilterValueList)
-
-	SubsidiaryAuthorizationResourceNameFilter_WildCardValue = SubsidiaryAuthorizationResourceNameFilter.AddMember("WildCardValue", _SubsidiaryAuthorizationResourceNameFilterWildcard)
-
-	_SubsidiaryAuthorizationNameFilterValueList_member = _SubsidiaryAuthorizationNameFilterValueList.AddMember("member", _SubsidiaryAuthorizationNameString)
-
-	SubsidiaryAuthorizationNameFilter_ValueList = SubsidiaryAuthorizationNameFilter.AddMember("ValueList", _SubsidiaryAuthorizationNameFilterValueList)
-
-	SubsidiaryAuthorizationNameFilter_WildCardValue = SubsidiaryAuthorizationNameFilter.AddMember("WildCardValue", _SubsidiaryAuthorizationNameFilterWildcard)
-
-	_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member = _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationSubsidiaryAccountIdString)
-
-	SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList = SubsidiaryAuthorizationSubsidiaryAccountIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList)
-
-	SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue = SubsidiaryAuthorizationCreatedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue = SubsidiaryAuthorizationCreatedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	SubsidiaryAuthorizationCreatedDateFilter_DateRange = SubsidiaryAuthorizationCreatedDateFilter.AddMember("DateRange", SubsidiaryAuthorizationCreatedDateFilterDateRange)
-
-	SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue = SubsidiaryAuthorizationLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue = SubsidiaryAuthorizationLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	SubsidiaryAuthorizationLastModifiedDateFilter_DateRange = SubsidiaryAuthorizationLastModifiedDateFilter.AddMember("DateRange", SubsidiaryAuthorizationLastModifiedDateFilterDateRange)
-
-	SubsidiaryAuthorizationFilters_EntityId = SubsidiaryAuthorizationFilters.AddMember("EntityId", SubsidiaryAuthorizationEntityIdFilter)
-
-	SubsidiaryAuthorizationFilters_Status = SubsidiaryAuthorizationFilters.AddMember("Status", SubsidiaryAuthorizationStatusFilter)
-
-	SubsidiaryAuthorizationFilters_ResourceId = SubsidiaryAuthorizationFilters.AddMember("ResourceId", SubsidiaryAuthorizationResourceIdFilter)
-
-	SubsidiaryAuthorizationFilters_ResourceName = SubsidiaryAuthorizationFilters.AddMember("ResourceName", SubsidiaryAuthorizationResourceNameFilter)
-
-	SubsidiaryAuthorizationFilters_Name = SubsidiaryAuthorizationFilters.AddMember("Name", SubsidiaryAuthorizationNameFilter)
-
-	SubsidiaryAuthorizationFilters_SubsidiaryAccountId = SubsidiaryAuthorizationFilters.AddMember("SubsidiaryAccountId", SubsidiaryAuthorizationSubsidiaryAccountIdFilter)
-
-	SubsidiaryAuthorizationFilters_CreatedDate = SubsidiaryAuthorizationFilters.AddMember("CreatedDate", SubsidiaryAuthorizationCreatedDateFilter)
-
-	SubsidiaryAuthorizationFilters_LastModifiedDate = SubsidiaryAuthorizationFilters.AddMember("LastModifiedDate", SubsidiaryAuthorizationLastModifiedDateFilter)
-
-	EntityTypeFilters_DataProductFilters = EntityTypeFilters.AddMember("DataProductFilters", DataProductFilters)
-
-	EntityTypeFilters_SaaSProductFilters = EntityTypeFilters.AddMember("SaaSProductFilters", SaaSProductFilters)
-
-	EntityTypeFilters_AmiProductFilters = EntityTypeFilters.AddMember("AmiProductFilters", AmiProductFilters)
-
-	EntityTypeFilters_OfferFilters = EntityTypeFilters.AddMember("OfferFilters", OfferFilters)
-
-	EntityTypeFilters_ContainerProductFilters = EntityTypeFilters.AddMember("ContainerProductFilters", ContainerProductFilters)
-
-	EntityTypeFilters_ResaleAuthorizationFilters = EntityTypeFilters.AddMember("ResaleAuthorizationFilters", ResaleAuthorizationFilters)
-
-	EntityTypeFilters_MachineLearningProductFilters = EntityTypeFilters.AddMember("MachineLearningProductFilters", MachineLearningProductFilters)
-
-	EntityTypeFilters_OfferSetFilters = EntityTypeFilters.AddMember("OfferSetFilters", OfferSetFilters)
-
-	EntityTypeFilters_ExpressPrivateOfferConfigurationFilters = EntityTypeFilters.AddMember("ExpressPrivateOfferConfigurationFilters", ExpressPrivateOfferConfigurationFilters)
-
-	EntityTypeFilters_SubsidiaryAuthorizationFilters = EntityTypeFilters.AddMember("SubsidiaryAuthorizationFilters", SubsidiaryAuthorizationFilters)
-
-	SaaSProductSortBy_EntityId = SaaSProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	SaaSProductSortBy_ProductTitle = SaaSProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	SaaSProductSortBy_Visibility = SaaSProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	SaaSProductSortBy_LastModifiedDate = SaaSProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	SaaSProductSortBy_DeliveryOptionTypes = SaaSProductSortBy.AddMember("DeliveryOptionTypes", smithyprelude.Unit)
-
-	SaaSProductSort_SortBy = SaaSProductSort.AddMember("SortBy", SaaSProductSortBy)
-
-	SaaSProductSort_SortOrder = SaaSProductSort.AddMember("SortOrder", SortOrder)
-
-	OfferSortBy_EntityId = OfferSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	OfferSortBy_Name = OfferSortBy.AddMember("Name", smithyprelude.Unit)
-
-	OfferSortBy_ProductId = OfferSortBy.AddMember("ProductId", smithyprelude.Unit)
-
-	OfferSortBy_ResaleAuthorizationId = OfferSortBy.AddMember("ResaleAuthorizationId", smithyprelude.Unit)
-
-	OfferSortBy_ReleaseDate = OfferSortBy.AddMember("ReleaseDate", smithyprelude.Unit)
-
-	OfferSortBy_AvailabilityEndDate = OfferSortBy.AddMember("AvailabilityEndDate", smithyprelude.Unit)
-
-	OfferSortBy_BuyerAccounts = OfferSortBy.AddMember("BuyerAccounts", smithyprelude.Unit)
-
-	OfferSortBy_State = OfferSortBy.AddMember("State", smithyprelude.Unit)
-
-	OfferSortBy_Targeting = OfferSortBy.AddMember("Targeting", smithyprelude.Unit)
-
-	OfferSortBy_LastModifiedDate = OfferSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	OfferSortBy_OfferSetId = OfferSortBy.AddMember("OfferSetId", smithyprelude.Unit)
-
-	OfferSortBy_TargetAgreementId = OfferSortBy.AddMember("TargetAgreementId", smithyprelude.Unit)
-
-	OfferSortBy_TargetAgreementIntent = OfferSortBy.AddMember("TargetAgreementIntent", smithyprelude.Unit)
-
-	OfferSortBy_CreatedBySource = OfferSortBy.AddMember("CreatedBySource", smithyprelude.Unit)
-
-	OfferSort_SortBy = OfferSort.AddMember("SortBy", OfferSortBy)
-
-	OfferSort_SortOrder = OfferSort.AddMember("SortOrder", SortOrder)
-
-	ResaleAuthorizationSortBy_EntityId = ResaleAuthorizationSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_Name = ResaleAuthorizationSortBy.AddMember("Name", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ProductId = ResaleAuthorizationSortBy.AddMember("ProductId", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ProductName = ResaleAuthorizationSortBy.AddMember("ProductName", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ManufacturerAccountId = ResaleAuthorizationSortBy.AddMember("ManufacturerAccountId", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ManufacturerLegalName = ResaleAuthorizationSortBy.AddMember("ManufacturerLegalName", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ResellerAccountID = ResaleAuthorizationSortBy.AddMember("ResellerAccountID", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ResellerLegalName = ResaleAuthorizationSortBy.AddMember("ResellerLegalName", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_Status = ResaleAuthorizationSortBy.AddMember("Status", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_OfferExtendedStatus = ResaleAuthorizationSortBy.AddMember("OfferExtendedStatus", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_CreatedDate = ResaleAuthorizationSortBy.AddMember("CreatedDate", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_AvailabilityEndDate = ResaleAuthorizationSortBy.AddMember("AvailabilityEndDate", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_LastModifiedDate = ResaleAuthorizationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ResellerRole = ResaleAuthorizationSortBy.AddMember("ResellerRole", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_SourceAuthorization = ResaleAuthorizationSortBy.AddMember("SourceAuthorization", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_IssuerAccountId = ResaleAuthorizationSortBy.AddMember("IssuerAccountId", smithyprelude.Unit)
-
-	ResaleAuthorizationSort_SortBy = ResaleAuthorizationSort.AddMember("SortBy", ResaleAuthorizationSortBy)
-
-	ResaleAuthorizationSort_SortOrder = ResaleAuthorizationSort.AddMember("SortOrder", SortOrder)
-
-	MachineLearningProductSortBy_EntityId = MachineLearningProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	MachineLearningProductSortBy_LastModifiedDate = MachineLearningProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	MachineLearningProductSortBy_ProductTitle = MachineLearningProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	MachineLearningProductSortBy_Visibility = MachineLearningProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	MachineLearningProductSort_SortBy = MachineLearningProductSort.AddMember("SortBy", MachineLearningProductSortBy)
-
-	MachineLearningProductSort_SortOrder = MachineLearningProductSort.AddMember("SortOrder", SortOrder)
-
-	OfferSetSortBy_Name = OfferSetSortBy.AddMember("Name", smithyprelude.Unit)
-
-	OfferSetSortBy_State = OfferSetSortBy.AddMember("State", smithyprelude.Unit)
-
-	OfferSetSortBy_ReleaseDate = OfferSetSortBy.AddMember("ReleaseDate", smithyprelude.Unit)
-
-	OfferSetSortBy_SolutionId = OfferSetSortBy.AddMember("SolutionId", smithyprelude.Unit)
-
-	OfferSetSortBy_EntityId = OfferSetSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	OfferSetSortBy_LastModifiedDate = OfferSetSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	OfferSetSort_SortBy = OfferSetSort.AddMember("SortBy", OfferSetSortBy)
-
-	OfferSetSort_SortOrder = OfferSetSort.AddMember("SortOrder", SortOrder)
-
-	ExpressPrivateOfferConfigurationSortBy_EntityId = ExpressPrivateOfferConfigurationSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSortBy_LastModifiedDate = ExpressPrivateOfferConfigurationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSortBy_ProductId = ExpressPrivateOfferConfigurationSortBy.AddMember("ProductId", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSortBy_State = ExpressPrivateOfferConfigurationSortBy.AddMember("State", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSort_SortBy = ExpressPrivateOfferConfigurationSort.AddMember("SortBy", ExpressPrivateOfferConfigurationSortBy)
-
-	ExpressPrivateOfferConfigurationSort_SortOrder = ExpressPrivateOfferConfigurationSort.AddMember("SortOrder", SortOrder)
-
-	SubsidiaryAuthorizationSortBy_EntityId = SubsidiaryAuthorizationSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_Status = SubsidiaryAuthorizationSortBy.AddMember("Status", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_ResourceId = SubsidiaryAuthorizationSortBy.AddMember("ResourceId", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_SubsidiaryAccountId = SubsidiaryAuthorizationSortBy.AddMember("SubsidiaryAccountId", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_CreatedDate = SubsidiaryAuthorizationSortBy.AddMember("CreatedDate", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_LastModifiedDate = SubsidiaryAuthorizationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSort_SortBy = SubsidiaryAuthorizationSort.AddMember("SortBy", SubsidiaryAuthorizationSortBy)
-
-	SubsidiaryAuthorizationSort_SortOrder = SubsidiaryAuthorizationSort.AddMember("SortOrder", SortOrder)
-
-	EntityTypeSort_DataProductSort = EntityTypeSort.AddMember("DataProductSort", DataProductSort)
-
-	EntityTypeSort_SaaSProductSort = EntityTypeSort.AddMember("SaaSProductSort", SaaSProductSort)
-
-	EntityTypeSort_AmiProductSort = EntityTypeSort.AddMember("AmiProductSort", AmiProductSort)
-
-	EntityTypeSort_OfferSort = EntityTypeSort.AddMember("OfferSort", OfferSort)
-
-	EntityTypeSort_ContainerProductSort = EntityTypeSort.AddMember("ContainerProductSort", ContainerProductSort)
-
-	EntityTypeSort_ResaleAuthorizationSort = EntityTypeSort.AddMember("ResaleAuthorizationSort", ResaleAuthorizationSort)
-
-	EntityTypeSort_MachineLearningProductSort = EntityTypeSort.AddMember("MachineLearningProductSort", MachineLearningProductSort)
-
-	EntityTypeSort_OfferSetSort = EntityTypeSort.AddMember("OfferSetSort", OfferSetSort)
-
-	EntityTypeSort_ExpressPrivateOfferConfigurationSort = EntityTypeSort.AddMember("ExpressPrivateOfferConfigurationSort", ExpressPrivateOfferConfigurationSort)
-
-	EntityTypeSort_SubsidiaryAuthorizationSort = EntityTypeSort.AddMember("SubsidiaryAuthorizationSort", SubsidiaryAuthorizationSort)
-
-	_Errors_key = _Errors.AddMember("key", _EntityId)
-
-	_Errors_value = _Errors.AddMember("value", BatchDescribeErrorDetail)
-
-	_ValueList_member = _ValueList.AddMember("member", _FilterValueContent)
-
-	Filter_Name = Filter.AddMember("Name", _FilterName)
-
-	Filter_ValueList = Filter.AddMember("ValueList", _ValueList)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	FrameworkFilters_AMISecurityFilters = FrameworkFilters.AddMember("AMISecurityFilters", AMISecurityFilters)
-
-	FrameworkFilters_ContainerSecurityFilters = FrameworkFilters.AddMember("ContainerSecurityFilters", ContainerSecurityFilters)
-
-	Intent_VALIDATE = Intent.AddMember("VALIDATE", smithyprelude.Unit)
-
-	Intent_APPLY = Intent.AddMember("APPLY", smithyprelude.Unit)
-
-	InternalServiceException_Message = InternalServiceException.AddMember("Message", _ExceptionMessageContent)
-
-	OwnershipType_SELF = OwnershipType.AddMember("SELF", smithyprelude.Unit)
-
-	OwnershipType_SHARED = OwnershipType.AddMember("SHARED", smithyprelude.Unit)
-
-	_RequestedChangeList_member = _RequestedChangeList.AddMember("member", Change)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", _ExceptionMessageContent)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ExceptionMessageContent)
-
-	ResourceNotSupportedException_Message = ResourceNotSupportedException.AddMember("Message", _ExceptionMessageContent)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ExceptionMessageContent)
-
-	Sort_SortBy = Sort.AddMember("SortBy", _SortBy)
-
-	Sort_SortOrder = Sort.AddMember("SortOrder", SortOrder)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ExceptionMessageContent)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_Reason = ValidationExceptionField.AddMember("Reason", ValidationExceptionReason)
-
-	ValidationExceptionField_EntityType = ValidationExceptionField.AddMember("EntityType", _EntityType)
-
-	ValidationExceptionField_EntityId = ValidationExceptionField.AddMember("EntityId", _EntityId)
-
-	ValidationExceptionField_ChangeType = ValidationExceptionField.AddMember("ChangeType", _ChangeType)
-
-	ValidationExceptionField_Field = ValidationExceptionField.AddMember("Field", _FieldName)
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", _ExceptionMessageContent)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ExceptionMessageContent)
-
-	ValidationException_ValidationExceptionFieldList = ValidationException.AddMember("ValidationExceptionFieldList", _ValidationExceptionFieldList)
-
-	BatchDescribeEntitiesRequest_EntityRequestList = BatchDescribeEntitiesRequest.AddMember("EntityRequestList", _EntityRequestList)
-
-	BatchDescribeEntitiesResponse_EntityDetails = BatchDescribeEntitiesResponse.AddMember("EntityDetails", _EntityDetails)
-
-	BatchDescribeEntitiesResponse_Errors = BatchDescribeEntitiesResponse.AddMember("Errors", _Errors)
-
-	CancelChangeSetRequest_Catalog = CancelChangeSetRequest.AddMember("Catalog", _Catalog, &smithytraits.HTTPQuery{Name: "catalog"})
-
-	CancelChangeSetRequest_ChangeSetId = CancelChangeSetRequest.AddMember("ChangeSetId", _ResourceId, &smithytraits.HTTPQuery{Name: "changeSetId"})
-
-	CancelChangeSetResponse_ChangeSetId = CancelChangeSetResponse.AddMember("ChangeSetId", _ResourceId)
-
-	CancelChangeSetResponse_ChangeSetArn = CancelChangeSetResponse.AddMember("ChangeSetArn", _ARN)
-
-	DeleteResourcePolicyRequest_ResourceArn = DeleteResourcePolicyRequest.AddMember("ResourceArn", _ResourceARN, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	DescribeAssessmentRequest_Catalog = DescribeAssessmentRequest.AddMember("Catalog", _Catalog)
-
-	DescribeAssessmentRequest_AssessmentIdentifier = DescribeAssessmentRequest.AddMember("AssessmentIdentifier", _AssessmentIdentifier)
-
-	DescribeAssessmentRequest_MaxResults = DescribeAssessmentRequest.AddMember("MaxResults", _DescribeAssessmentMaxResultInteger)
-
-	DescribeAssessmentRequest_NextToken = DescribeAssessmentRequest.AddMember("NextToken", _NextToken)
-
-	DescribeAssessmentResponse_AssessmentArn = DescribeAssessmentResponse.AddMember("AssessmentArn", _ARN)
-
-	DescribeAssessmentResponse_AssessmentId = DescribeAssessmentResponse.AddMember("AssessmentId", _ResourceId)
-
-	DescribeAssessmentResponse_FrameworkId = DescribeAssessmentResponse.AddMember("FrameworkId", _VersionedFrameworkId)
-
-	DescribeAssessmentResponse_AssessmentTargetSummary = DescribeAssessmentResponse.AddMember("AssessmentTargetSummary", AssessmentTargetSummary)
-
-	DescribeAssessmentResponse_FrameworkSummary = DescribeAssessmentResponse.AddMember("FrameworkSummary", FrameworkSummary)
-
-	DescribeAssessmentResponse_AssessmentResult = DescribeAssessmentResponse.AddMember("AssessmentResult", AssessmentResult)
-
-	DescribeAssessmentResponse_CreatedAt = DescribeAssessmentResponse.AddMember("CreatedAt", _DateTimeISO8601)
-
-	DescribeAssessmentResponse_ExpiresAt = DescribeAssessmentResponse.AddMember("ExpiresAt", _DateTimeISO8601)
-
-	DescribeAssessmentResponse_ControlAssessments = DescribeAssessmentResponse.AddMember("ControlAssessments", _ControlAssessmentList)
-
-	DescribeAssessmentResponse_NextToken = DescribeAssessmentResponse.AddMember("NextToken", _NextToken)
-
-	DescribeChangeSetRequest_Catalog = DescribeChangeSetRequest.AddMember("Catalog", _Catalog, &smithytraits.HTTPQuery{Name: "catalog"})
-
-	DescribeChangeSetRequest_ChangeSetId = DescribeChangeSetRequest.AddMember("ChangeSetId", _ResourceId, &smithytraits.HTTPQuery{Name: "changeSetId"})
-
-	DescribeChangeSetResponse_ChangeSetId = DescribeChangeSetResponse.AddMember("ChangeSetId", _ResourceId)
-
-	DescribeChangeSetResponse_ChangeSetArn = DescribeChangeSetResponse.AddMember("ChangeSetArn", _ARN)
-
-	DescribeChangeSetResponse_ChangeSetName = DescribeChangeSetResponse.AddMember("ChangeSetName", _ChangeSetName)
-
-	DescribeChangeSetResponse_Intent = DescribeChangeSetResponse.AddMember("Intent", Intent)
-
-	DescribeChangeSetResponse_StartTime = DescribeChangeSetResponse.AddMember("StartTime", _DateTimeISO8601)
-
-	DescribeChangeSetResponse_EndTime = DescribeChangeSetResponse.AddMember("EndTime", _DateTimeISO8601)
-
-	DescribeChangeSetResponse_Status = DescribeChangeSetResponse.AddMember("Status", ChangeStatus)
-
-	DescribeChangeSetResponse_FailureCode = DescribeChangeSetResponse.AddMember("FailureCode", FailureCode)
-
-	DescribeChangeSetResponse_FailureDescription = DescribeChangeSetResponse.AddMember("FailureDescription", _ExceptionMessageContent)
-
-	DescribeChangeSetResponse_ChangeSet = DescribeChangeSetResponse.AddMember("ChangeSet", _ChangeSetDescription)
-
-	DescribeEntityRequest_Catalog = DescribeEntityRequest.AddMember("Catalog", _Catalog, &smithytraits.HTTPQuery{Name: "catalog"})
-
-	DescribeEntityRequest_EntityId = DescribeEntityRequest.AddMember("EntityId", _ResourceId, &smithytraits.HTTPQuery{Name: "entityId"})
-
-	DescribeEntityResponse_EntityType = DescribeEntityResponse.AddMember("EntityType", _EntityType)
-
-	DescribeEntityResponse_EntityIdentifier = DescribeEntityResponse.AddMember("EntityIdentifier", _Identifier)
-
-	DescribeEntityResponse_EntityArn = DescribeEntityResponse.AddMember("EntityArn", _ARN)
-
-	DescribeEntityResponse_LastModifiedDate = DescribeEntityResponse.AddMember("LastModifiedDate", _DateTimeISO8601)
-
-	DescribeEntityResponse_Details = DescribeEntityResponse.AddMember("Details", _Json)
-
-	DescribeEntityResponse_DetailsDocument = DescribeEntityResponse.AddMember("DetailsDocument", _JsonDocumentType)
-
-	GetResourcePolicyRequest_ResourceArn = GetResourcePolicyRequest.AddMember("ResourceArn", _ResourceARN, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	GetResourcePolicyResponse_Policy = GetResourcePolicyResponse.AddMember("Policy", _ResourcePolicyJson)
-
-	ListAssessmentsRequest_Catalog = ListAssessmentsRequest.AddMember("Catalog", _Catalog)
-
-	ListAssessmentsRequest_FrameworkId = ListAssessmentsRequest.AddMember("FrameworkId", _FrameworkId)
-
-	ListAssessmentsRequest_AssessmentTargetFilter = ListAssessmentsRequest.AddMember("AssessmentTargetFilter", AssessmentTargetFilter)
-
-	ListAssessmentsRequest_FrameworkFilters = ListAssessmentsRequest.AddMember("FrameworkFilters", FrameworkFilters)
-
-	ListAssessmentsRequest_MaxResults = ListAssessmentsRequest.AddMember("MaxResults", _ListAssessmentsMaxResultInteger)
-
-	ListAssessmentsRequest_NextToken = ListAssessmentsRequest.AddMember("NextToken", _NextToken)
-
-	ListAssessmentsResponse_AssessmentSummaryList = ListAssessmentsResponse.AddMember("AssessmentSummaryList", _AssessmentSummaryList)
-
-	ListAssessmentsResponse_NextToken = ListAssessmentsResponse.AddMember("NextToken", _NextToken)
-
-	ListChangeSetsRequest_Catalog = ListChangeSetsRequest.AddMember("Catalog", _Catalog)
-
-	ListChangeSetsRequest_FilterList = ListChangeSetsRequest.AddMember("FilterList", _FilterList)
-
-	ListChangeSetsRequest_Sort = ListChangeSetsRequest.AddMember("Sort", Sort)
-
-	ListChangeSetsRequest_MaxResults = ListChangeSetsRequest.AddMember("MaxResults", _ListChangeSetsMaxResultInteger)
-
-	ListChangeSetsRequest_NextToken = ListChangeSetsRequest.AddMember("NextToken", _NextToken)
-
-	ListChangeSetsResponse_ChangeSetSummaryList = ListChangeSetsResponse.AddMember("ChangeSetSummaryList", _ChangeSetSummaryList)
-
-	ListChangeSetsResponse_NextToken = ListChangeSetsResponse.AddMember("NextToken", _NextToken)
-
-	ListEntitiesRequest_Catalog = ListEntitiesRequest.AddMember("Catalog", _Catalog)
-
-	ListEntitiesRequest_EntityType = ListEntitiesRequest.AddMember("EntityType", _EntityType)
-
-	ListEntitiesRequest_FilterList = ListEntitiesRequest.AddMember("FilterList", _FilterList)
-
-	ListEntitiesRequest_Sort = ListEntitiesRequest.AddMember("Sort", Sort)
-
-	ListEntitiesRequest_NextToken = ListEntitiesRequest.AddMember("NextToken", _NextToken)
-
-	ListEntitiesRequest_MaxResults = ListEntitiesRequest.AddMember("MaxResults", _ListEntitiesMaxResultInteger)
-
-	ListEntitiesRequest_OwnershipType = ListEntitiesRequest.AddMember("OwnershipType", OwnershipType)
-
-	ListEntitiesRequest_EntityTypeFilters = ListEntitiesRequest.AddMember("EntityTypeFilters", EntityTypeFilters)
-
-	ListEntitiesRequest_EntityTypeSort = ListEntitiesRequest.AddMember("EntityTypeSort", EntityTypeSort)
-
-	ListEntitiesResponse_EntitySummaryList = ListEntitiesResponse.AddMember("EntitySummaryList", _EntitySummaryList)
-
-	ListEntitiesResponse_NextToken = ListEntitiesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ResourceARN)
-
-	ListTagsForResourceResponse_ResourceArn = ListTagsForResourceResponse.AddMember("ResourceArn", _ResourceARN)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PutResourcePolicyRequest_ResourceArn = PutResourcePolicyRequest.AddMember("ResourceArn", _ResourceARN)
-
-	PutResourcePolicyRequest_Policy = PutResourcePolicyRequest.AddMember("Policy", _ResourcePolicyJson)
-
-	StartChangeSetRequest_Catalog = StartChangeSetRequest.AddMember("Catalog", _Catalog)
-
-	StartChangeSetRequest_ChangeSet = StartChangeSetRequest.AddMember("ChangeSet", _RequestedChangeList)
-
-	StartChangeSetRequest_ChangeSetName = StartChangeSetRequest.AddMember("ChangeSetName", _ChangeSetName)
-
-	StartChangeSetRequest_ClientRequestToken = StartChangeSetRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartChangeSetRequest_ChangeSetTags = StartChangeSetRequest.AddMember("ChangeSetTags", _TagList)
-
-	StartChangeSetRequest_Intent = StartChangeSetRequest.AddMember("Intent", Intent)
-
-	StartChangeSetResponse_ChangeSetId = StartChangeSetResponse.AddMember("ChangeSetId", _ResourceId)
-
-	StartChangeSetResponse_ChangeSetArn = StartChangeSetResponse.AddMember("ChangeSetArn", _ARN)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceARN)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceARN)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
+const blob = "" +
+	"SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueListExpressPrivateOfferConfigurationProductIdFi" +
+	"lterValueListExpressPrivateOfferConfigurationEntityIdFilterValueListResaleAuthorizationManufacturerA" +
+	"ccountIdFilterValueListResaleAuthorizationManufacturerLegalNameFilterValueListSubsidiaryAuthorizatio" +
+	"nSummarySubsidiaryAccountIdStringResaleAuthorizationManufacturerAccountIdFilterWildcardResaleAuthori" +
+	"zationManufacturerLegalNameFilterWildcardSubsidiaryAuthorizationLastModifiedDateFilterDateRangeMachi" +
+	"neLearningProductLastModifiedDateFilterDateRangeResaleAuthorizationAvailabilityEndDateFilterDateRang" +
+	"eResaleAuthorizationAvailabilityEndDateFilterValueListResaleAuthorizationOfferExtendedStatusFilterVa" +
+	"lueListResaleAuthorizationSourceAuthorizationFilterValueListExpressPrivateOfferConfigurationStateFil" +
+	"terValueListResaleAuthorizationResellerAccountIDFilterValueListResaleAuthorizationResellerLegalNameF" +
+	"ilterValueListResaleAuthorizationLastModifiedDateFilterDateRangeResaleAuthorizationResellerAccountID" +
+	"FilterWildcardResaleAuthorizationResellerLegalNameFilterWildcardSubsidiaryAuthorizationResourceNameF" +
+	"ilterValueListResaleAuthorizationIssuerAccountIdFilterValueListSubsidiaryAuthorizationCreatedDateFil" +
+	"terDateRangeSubsidiaryAuthorizationResourceNameFilterWildcardSubsidiaryAuthorizationResourceIdFilter" +
+	"ValueListSubsidiaryAuthorizationSubsidiaryAccountIdStringSubsidiaryAuthorizationSummaryResourceNameS" +
+	"tringContainerProductLastModifiedDateFilterDateRangeExpressPrivateOfferConfigurationProductIdStringM" +
+	"achineLearningProductVisibilityFilterValueListExpressPrivateOfferConfigurationEntityIdStringResaleAu" +
+	"thorizationManufacturerAccountIdStringResaleAuthorizationManufacturerLegalNameStringResaleAuthorizat" +
+	"ionResellerRoleFilterValueListSubsidiaryAuthorizationEntityIdFilterValueListSubsidiaryAuthorizationS" +
+	"ummaryResourceIdStringMachineLearningProductEntityIdFilterValueListResaleAuthorizationCreatedDateFil" +
+	"terDateRangeResaleAuthorizationCreatedDateFilterValueListResaleAuthorizationProductNameFilterValueLi" +
+	"stResaleAuthorizationOfferExtendedStatusStringResaleAuthorizationProductNameFilterWildcardResaleAuth" +
+	"orizationSourceAuthorizationStringSubsidiaryAuthorizationStatusFilterValueListExpressPrivateOfferCon" +
+	"figurationStateStringResaleAuthorizationProductIdFilterValueListDataProductLastModifiedDateFilterDat" +
+	"eRangeMachineLearningProductTitleFilterValueListResaleAuthorizationEntityIdFilterValueListResaleAuth" +
+	"orizationProductIdFilterWildcardResaleAuthorizationResellerAccountIDStringResaleAuthorizationReselle" +
+	"rLegalNameStringSaaSProductLastModifiedDateFilterDateRangeSubsidiaryAuthorizationNameFilterValueList" +
+	"SubsidiaryAuthorizationSummaryStatusStringAmiProductLastModifiedDateFilterDateRangeContainerProductV" +
+	"isibilityFilterValueListOfferResaleAuthorizationIdFilterValueListOfferSetAssociatedOfferIdsFilterVal" +
+	"ueListOfferTargetAgreementIntentFilterValueListSubsidiaryAuthorizationNameFilterWildcardSubsidiaryAu" +
+	"thorizationResourceNameStringResaleAuthorizationIssuerAccountIdStringResaleAuthorizationStatusFilter" +
+	"ValueListSubsidiaryAuthorizationSummaryNameStringContainerProductEntityIdFilterValueListExpressPriva" +
+	"teOfferConfigurationFiltersExpressPrivateOfferConfigurationSummaryOfferAvailabilityEndDateFilterDate" +
+	"RangeOfferSetLastModifiedDateFilterDateRangeSubsidiaryAuthorizationResourceIdStringExpressPrivateOff" +
+	"erConfigurationSortByMachineLearningProductVisibilityStringResaleAuthorizationNameFilterValueListOff" +
+	"erTargetAgreementIdFilterValueListResaleAuthorizationNameFilterWildcardResaleAuthorizationResellerRo" +
+	"leStringSubsidiaryAuthorizationEntityIdStringContainerProductTitleFilterValueListDataProductVisibili" +
+	"tyFilterValueListMachineLearningProductEntityIdStringOfferLastModifiedDateFilterDateRangeResaleAutho" +
+	"rizationProductNameStringSaaSProductVisibilityFilterValueListAmiProductVisibilityFilterValueListOffe" +
+	"rCreatedBySourceFilterValueListSubsidiaryAuthorizationStatusStringDataProductEntityIdFilterValueList" +
+	"DescribeAssessmentMaxResultIntegerOfferSetReleaseDateFilterDateRangeResaleAuthorizationProductIdStri" +
+	"ngSaaSProductEntityIdFilterValueListAmiProductEntityIdFilterValueListMachineLearningProductTitleStri" +
+	"ngOfferSetSolutionIdFilterValueListResaleAuthorizationEntityIdStringSubsidiaryAuthorizationNameStrin" +
+	"gBatchDescribeErrorMessageContentContainerProductVisibilityStringOfferBuyerAccountsFilterWildcardOff" +
+	"erResaleAuthorizationIdStringOfferSetAssociatedOfferIdsStringOfferTargetAgreementIntentStringDataPro" +
+	"ductTitleFilterValueListListAssessmentsMaxResultIntegerOfferReleaseDateFilterDateRangeOfferSetEntity" +
+	"IdFilterValueListResaleAuthorizationStatusStringSaaSProductTitleFilterValueListAmiProductTitleFilter" +
+	"ValueListContainerProductEntityIdStringListChangeSetsMaxResultIntegerOfferSetAssociatedOfferIdsListS" +
+	"ubsidiaryAuthorizationFiltersBatchDescribeEntitiesResponseMachineLearningProductFiltersMachineLearni" +
+	"ngProductSummaryOfferProductIdFilterValueListOfferTargetingFilterValueListResaleAuthorizationNameStr" +
+	"ingResourceNotSupportedExceptionServiceQuotaExceededExceptionSubsidiaryAuthorizationSortByBatchDescr" +
+	"ibeEntitiesRequestBatchDescribeErrorCodeStringDeleteResourcePolicyResponseListEntitiesMaxResultInteg" +
+	"erMachineLearningProductSortByOfferEntityIdFilterValueListOfferSetStateFilterValueListOfferTargetAgr" +
+	"eementIdStringValidationExceptionFieldListContainerProductTitleStringDataProductVisibilityStringDele" +
+	"teResourcePolicyRequestListTagsForResourceResponseOfferSetNameFilterValueListSaaSProductVisibilitySt" +
+	"ringAmiProductVisibilityStringDescribeAssessmentResponseListTagsForResourceRequestOfferCreatedBySour" +
+	"ceStringResaleAuthorizationFiltersResaleAuthorizationSummaryDataProductEntityIdStringDescribeAssessm" +
+	"entRequestDescribeChangeSetResponseGetResourcePolicyResponseOfferSetIdFilterValueListOfferStateFilte" +
+	"rValueListPutResourcePolicyResponseResaleAuthorizationSortByResourceNotFoundExceptionSaaSProductEnti" +
+	"tyIdStringValidationExceptionReasonAmiProductEntityIdStringBatchDescribeErrorDetailChangeSetSummaryL" +
+	"istItemContainerSecurityFiltersContainerSecuritySummaryDescribeChangeSetRequestGetResourcePolicyRequ" +
+	"estInternalServiceExceptionOfferBuyerAccountsStringOfferNameFilterValueListOfferSetSolutionIdStringP" +
+	"utResourcePolicyRequestAssessmentTargetSummaryCancelChangeSetResponseContainerProductFiltersContaine" +
+	"rProductSummaryControlAssessmentResultExceptionMessageContentFIELD_VALIDATION_FAILEDListAssessmentsR" +
+	"esponseAssessmentTargetFilterCancelChangeSetRequestContainerProductSortByDataProductTitleStringDescr" +
+	"ibeEntityResponseListAssessmentsRequestListChangeSetsResponseOfferBuyerAccountsListOfferSetEntityIdS" +
+	"tringResourceInUseExceptionSaaSProductTitleStringStartChangeSetResponseAccessDeniedExceptionAmiProdu" +
+	"ctTitleStringAssessmentSummaryListCompatibleAWSServicesControlAssessmentListDescribeEntityRequestLis" +
+	"tChangeSetsRequestParticipatingProgramsStartChangeSetRequestUntagResourceResponseAssessmentIdentifie" +
+	"rChangeSetDescriptionListEntitiesResponseOfferProductIdStringOfferTargetingStringUntagResourceReques" +
+	"tVersionedFrameworkIdDeliveryOptionTypesListEntitiesRequestOfferEntityIdStringOfferSetStateStringReq" +
+	"uestedChangeListTagResourceResponseThrottlingExceptionAMISecurityFiltersAMISecuritySummaryClientRequ" +
+	"estTokenControlAssessmentsDataProductFiltersDataProductSummaryFailureDescriptionFilterValueContentOf" +
+	"ferSetNameStringOfferTargetingListResourcePolicyJsonSaaSProductFiltersSaaSProductSummaryTagResourceR" +
+	"equestAmiProductFiltersAmiProductSummaryDataProductSortByEntitySummaryListEntityTypeFiltersSaaSProdu" +
+	"ctSortByUNKNOWN_OPERATIONAmiProductSortByControlErrorListDeliveryOptionIdEntityIdentifierEntityNameS" +
+	"tringFrameworkFiltersFrameworkSummaryJsonDocumentTypeOfferSetIdStringOfferStateStringDateTimeISO8601" +
+	"DetailsDocumentErrorDetailListOfferNameStringOfferSetFiltersOfferSetSummaryVisibilityValueAwsMarketp" +
+	"laceChannelPartnerEXEMPTION_PASSEntityTypeSortErrorScopeListOfferSetSortByResourceIdListAssessmentAr" +
+	"nChangeSetNameChangeSetTagsChangeSummaryEntityDetailsOwnershipTypeWildCardValueAWSMPSeymourCANNOT_PA" +
+	"RSEChangeSetArnChangeStatusCountryCodesEntityIdListNOT_EXECUTEDOfferFiltersOfferSummaryBeforeValueCh" +
+	"angeSetIdClientErrorDistributorFailureCodeOfferSortByResourceARNResourceArnServerFaultUnavailableAft" +
+	"erValueChangeNameChangeTypeDESCENDINGEntityTagsFilterListFilterNameMaxResultsRestrictedScopeValueTag" +
+	"KeyListASCENDINGCANCELLEDControlIdCreatedAtEntityArnExpiresAtFieldNameNextTokenPREPARINGSUCCEEDEDSco" +
+	"peNameSortOrderStartTimeAPPLYINGINACTIVEReleasedTagValueVALIDATECatalogEndTimeLimitedTagKeysTagListA" +
+	"ctiveErrorsPublicSHAREDSellermemberDraftOTHERRenewvalueNoneSELFUnitkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.marketplacecatalog", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 4729, Target: 0, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6146, Target: 1, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5046, Target: 2, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3900, Target: 3, Traits: 3, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5610, Target: 4, Traits: 4, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6395, Target: 5, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5635, Target: 6, Traits: 6, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4424, Target: 7, Traits: 7, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4639, Target: 8, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5074, Target: 9, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5323, Target: 10, Traits: 10, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5710, Target: 11, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6549, Target: 12, Traits: 12, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7016, Target: 13, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6760, Target: 14, Traits: 14, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7879, Target: 15, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 6571, Target: 16, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4036, Target: 18, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 20, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4036, Target: 20, Traits: 15, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 22, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5835, Target: 22, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7306, Target: 23, Traits: 15, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 18, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 28, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 44, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 50, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2642, Target: 28, Traits: 15, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 30, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2642, Target: 30, Traits: 15, StrLen: 41, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7425, Target: 33, Traits: 15, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 36, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7425, Target: 36, Traits: 15, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7323, Target: 41, Traits: 15, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2321, Target: 49, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 54, Traits: 15, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4579, Target: 44, Traits: 15, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 47, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 49, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4579, Target: 47, Traits: 15, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 49, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6592, Target: 49, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3761, Target: 50, Traits: 15, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 52, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3761, Target: 52, Traits: 15, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 54, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5404, Target: 54, Traits: 15, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8378, Target: 1061, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8411, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8177, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7054, Target: 59, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7457, Target: 771, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7072, Target: 61, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7457, Target: 771, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8061, Target: 63, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6781, Target: 64, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6222, Target: 65, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7728, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6278, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6613, Target: 68, Traits: 15, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7788, Target: 63, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6781, Target: 771, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6910, Target: 942, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6123, Target: 82, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7521, Target: 360, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 6222, Target: 65, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8234, Target: 233, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8252, Target: 233, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6613, Target: 77, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 68, Traits: 15, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6307, Target: 79, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 771, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7998, Target: 771, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6123, Target: 82, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 771, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7998, Target: 771, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5018, Target: 85, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5859, Target: 86, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5031, Target: 85, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4214, Target: 89, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4201, Target: 89, Traits: 15, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4643, Target: 91, Traits: 15, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8117, Target: 126, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 145, Target: 235, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8137, Target: 918, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7600, Target: 369, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7600, Target: 370, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 8107, Target: 98, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8107, Target: 98, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6801, Target: 99, Traits: 15, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 119, Traits: 15, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7801, Target: 101, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5883, Target: 102, Traits: 15, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 104, Traits: 15, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5883, Target: 104, Traits: 15, StrLen: 24, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7998, Target: 771, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7903, Target: 63, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7801, Target: 101, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8315, Target: 233, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8371, Target: 233, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 686, Target: 113, Traits: 15, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7939, Target: 772, Traits: 15, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8031, Target: 345, Traits: 15, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7915, Target: 113, Traits: 15, StrLen: 12, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8279, Target: 1061, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8324, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8288, Target: 1061, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8216, Target: 1061, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6278, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7827, Target: 119, Traits: 15, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8117, Target: 126, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 145, Target: 235, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7600, Target: 369, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7600, Target: 370, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 7615, Target: 301, Traits: 15, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8107, Target: 98, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8117, Target: 126, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7090, Target: 127, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3049, Target: 128, Traits: 15, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 130, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3049, Target: 130, Traits: 15, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 132, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4609, Target: 132, Traits: 15, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6169, Target: 133, Traits: 15, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 128, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 138, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 155, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 161, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1405, Target: 138, Traits: 15, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 140, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1405, Target: 140, Traits: 15, StrLen: 47, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6351, Target: 143, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 146, Traits: 15, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6351, Target: 146, Traits: 15, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6634, Target: 1061, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6192, Target: 152, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2321, Target: 160, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 165, Traits: 15, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3545, Target: 155, Traits: 15, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 158, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 160, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3545, Target: 158, Traits: 15, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 160, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5242, Target: 160, Traits: 15, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2683, Target: 161, Traits: 15, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 163, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2683, Target: 163, Traits: 15, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 165, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4233, Target: 165, Traits: 15, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8378, Target: 1061, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8411, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8177, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5907, Target: 170, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7457, Target: 771, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5931, Target: 172, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7457, Target: 771, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6215, Target: 174, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8225, Target: 771, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6215, Target: 180, Traits: 15, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8405, Target: 189, Traits: 15, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6655, Target: 178, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 174, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6215, Target: 180, Traits: 15, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7728, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6278, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7951, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7718, Target: 1061, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7441, Target: 185, Traits: 15, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5036, Target: 296, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4219, Target: 303, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7751, Target: 310, Traits: 15, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7441, Target: 189, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 185, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3866, Target: 191, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 193, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3866, Target: 193, Traits: 15, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 195, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5560, Target: 195, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7126, Target: 196, Traits: 15, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 191, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 217, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 223, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 201, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2264, Target: 201, Traits: 15, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 203, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2264, Target: 203, Traits: 15, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7340, Target: 206, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 209, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7340, Target: 209, Traits: 15, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7144, Target: 214, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2321, Target: 222, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 227, Traits: 15, StrLen: 10, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4393, Target: 217, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 220, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 222, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4393, Target: 220, Traits: 15, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 222, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6373, Target: 222, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3581, Target: 223, Traits: 15, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 225, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3581, Target: 225, Traits: 15, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 227, Traits: 15, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5269, Target: 227, Traits: 15, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8378, Target: 1061, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8411, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8177, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8086, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7585, Target: 233, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3900, Target: 234, Traits: 15, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 145, Target: 235, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6935, Target: 273, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6791, Target: 363, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7840, Target: 238, Traits: 15, StrLen: 12, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7374, Target: 273, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8243, Target: 63, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7473, Target: 363, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 464, Target: 233, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7600, Target: 370, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 7840, Target: 244, Traits: 15, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 8467, Target: 247, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8450, Target: 238, Traits: 15, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 145, Target: 247, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7489, Target: 248, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6684, Target: 249, Traits: 15, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 145, Target: 247, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6684, Target: 252, Traits: 15, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 249, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7357, Target: 254, Traits: 15, StrLen: 13, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 259, Target: 248, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7374, Target: 273, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 145, Target: 771, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8243, Target: 63, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 464, Target: 233, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 943, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7323, Target: 41, Traits: 15, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6192, Target: 152, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7144, Target: 214, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7270, Target: 805, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7975, Target: 573, Traits: 15, StrLen: 12, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5534, Target: 755, Traits: 15, StrLen: 26, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4787, Target: 397, Traits: 15, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7660, Target: 542, Traits: 15, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3127, Target: 342, Traits: 15, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 278, Target: 900, Traits: 15, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7357, Target: 271, Traits: 15, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 254, Traits: 15, StrLen: 6, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7374, Target: 273, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7374, Target: 274, Traits: 15, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 7126, Target: 196, Traits: 15, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7252, Target: 786, Traits: 15, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7306, Target: 23, Traits: 15, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7963, Target: 439, Traits: 15, StrLen: 12, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6169, Target: 133, Traits: 15, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5508, Target: 634, Traits: 15, StrLen: 26, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4758, Target: 379, Traits: 15, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7645, Target: 492, Traits: 15, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3088, Target: 318, Traits: 15, StrLen: 39, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4699, Target: 844, Traits: 15, StrLen: 30, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7732, Target: 285, Traits: 15, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 7340, Target: 206, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7391, Target: 796, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7425, Target: 33, Traits: 15, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8042, Target: 548, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6351, Target: 143, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5735, Target: 722, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5102, Target: 389, Traits: 15, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7760, Target: 525, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3283, Target: 327, Traits: 15, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4961, Target: 877, Traits: 15, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5031, Target: 296, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5031, Target: 297, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5872, Target: 298, Traits: 15, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5031, Target: 297, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4214, Target: 312, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7615, Target: 301, Traits: 15, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 298, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4214, Target: 303, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8405, Target: 304, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 8467, Target: 247, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8450, Target: 86, Traits: 15, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7746, Target: 307, Traits: 15, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 259, Target: 823, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 48, Target: 824, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7746, Target: 310, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 307, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6238, Target: 312, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 113, Target: 313, Traits: 15, StrLen: 46, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 315, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 113, Target: 315, Traits: 15, StrLen: 55, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 317, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1546, Target: 317, Traits: 15, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3088, Target: 318, Traits: 15, StrLen: 39, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 313, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 89, Target: 322, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 792, Target: 335, Traits: 15, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 57, Target: 322, Traits: 15, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 324, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 57, Target: 324, Traits: 15, StrLen: 56, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 326, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1452, Target: 326, Traits: 15, StrLen: 47, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3283, Target: 327, Traits: 15, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 330, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3283, Target: 330, Traits: 15, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 89, Target: 1061, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 792, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 760, Target: 335, Traits: 15, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 337, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 760, Target: 337, Traits: 15, StrLen: 52, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 339, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2178, Target: 339, Traits: 15, StrLen: 43, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8334, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8332, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3127, Target: 342, Traits: 15, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 89, Target: 326, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 792, Target: 339, Traits: 15, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8031, Target: 345, Traits: 15, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8009, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8075, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8261, Target: 348, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 42, Target: 349, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 259, Target: 354, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 48, Target: 940, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8147, Target: 352, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 349, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8157, Target: 354, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7180, Target: 355, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7505, Target: 356, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 7054, Target: 59, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5907, Target: 170, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6910, Target: 359, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7521, Target: 360, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 7072, Target: 61, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5931, Target: 172, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6791, Target: 363, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2826, Target: 364, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8356, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8324, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6003, Target: 367, Traits: 17, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7248, Target: 369, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7537, Target: 370, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 0},
+		{StrOff: 4424, Target: 371, Traits: 15, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4639, Target: 372, Traits: 15, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 5074, Target: 373, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1822, Target: 374, Traits: 15, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 376, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1822, Target: 376, Traits: 15, StrLen: 45, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 378, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3617, Target: 378, Traits: 15, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4758, Target: 379, Traits: 15, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 374, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 384, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 400, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 406, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 495, Target: 384, Traits: 15, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 386, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 495, Target: 386, Traits: 15, StrLen: 53, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5102, Target: 389, Traits: 15, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 392, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5102, Target: 392, Traits: 15, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4787, Target: 397, Traits: 15, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2321, Target: 405, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 410, Traits: 15, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2306, Target: 400, Traits: 15, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 403, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 405, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2306, Target: 403, Traits: 15, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 405, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4069, Target: 405, Traits: 15, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1499, Target: 406, Traits: 15, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 408, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1499, Target: 408, Traits: 15, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 410, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3321, Target: 410, Traits: 15, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8378, Target: 1061, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8411, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8177, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3166, Target: 416, Traits: 15, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 418, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3166, Target: 418, Traits: 15, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4265, Target: 421, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7866, Target: 423, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4265, Target: 423, Traits: 15, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6461, Target: 424, Traits: 15, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 426, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6027, Target: 426, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3796, Target: 427, Traits: 15, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 429, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3796, Target: 429, Traits: 15, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 431, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5482, Target: 431, Traits: 15, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8423, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7690, Target: 1061, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5130, Target: 434, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 436, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5130, Target: 436, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 438, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6959, Target: 438, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7963, Target: 439, Traits: 15, StrLen: 12, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 434, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 259, Target: 459, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 89, Target: 465, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2729, Target: 475, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3942, Target: 470, Traits: 15, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 567, Target: 416, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4270, Target: 421, Traits: 15, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 792, Target: 566, Traits: 15, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4850, Target: 597, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 454, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5660, Target: 500, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3402, Target: 586, Traits: 15, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2811, Target: 591, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3801, Target: 427, Traits: 15, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3653, Target: 454, Traits: 15, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 456, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3653, Target: 456, Traits: 15, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6051, Target: 459, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 462, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 464, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6051, Target: 462, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 464, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7630, Target: 464, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4816, Target: 465, Traits: 15, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 467, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4816, Target: 467, Traits: 15, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 469, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6841, Target: 469, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4455, Target: 470, Traits: 15, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 472, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4455, Target: 472, Traits: 15, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2724, Target: 475, Traits: 15, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 477, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2724, Target: 477, Traits: 15, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 479, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4297, Target: 479, Traits: 15, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2765, Target: 480, Traits: 15, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 482, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2765, Target: 482, Traits: 15, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 486, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4669, Target: 484, Traits: 15, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 486, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4329, Target: 486, Traits: 15, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4486, Target: 487, Traits: 15, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 489, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4486, Target: 489, Traits: 15, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 491, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6483, Target: 491, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7645, Target: 492, Traits: 15, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 487, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 259, Target: 510, Traits: 15, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 792, Target: 535, Traits: 15, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3942, Target: 515, Traits: 15, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2773, Target: 480, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4110, Target: 520, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 505, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5660, Target: 500, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 502, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5660, Target: 502, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 504, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7553, Target: 504, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3205, Target: 505, Traits: 15, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 507, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3205, Target: 507, Traits: 15, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5350, Target: 510, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 512, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5350, Target: 512, Traits: 15, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 514, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7198, Target: 514, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3934, Target: 515, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 517, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3934, Target: 517, Traits: 15, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4102, Target: 520, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 522, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4102, Target: 522, Traits: 15, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 524, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6075, Target: 524, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7760, Target: 525, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 528, Traits: 15, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7760, Target: 528, Traits: 15, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 259, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 792, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3942, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4110, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5158, Target: 535, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 537, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5158, Target: 537, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 539, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6978, Target: 539, Traits: 15, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8340, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7660, Target: 542, Traits: 15, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 259, Target: 514, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 792, Target: 539, Traits: 15, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3942, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2773, Target: 484, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4110, Target: 524, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8042, Target: 548, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 551, Traits: 15, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8042, Target: 551, Traits: 15, StrLen: 11, Count: 14, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 259, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 89, Target: 1061, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2729, Target: 1061, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3942, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 567, Target: 1061, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4270, Target: 1061, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 792, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4850, Target: 1061, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5660, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3402, Target: 1061, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2811, Target: 1061, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3801, Target: 1061, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5685, Target: 566, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 568, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5685, Target: 568, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 570, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7569, Target: 570, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8340, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7975, Target: 573, Traits: 15, StrLen: 12, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 259, Target: 464, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 89, Target: 469, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2729, Target: 479, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3942, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 567, Target: 233, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4270, Target: 424, Traits: 15, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 792, Target: 570, Traits: 15, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4850, Target: 601, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5660, Target: 504, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3402, Target: 590, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2811, Target: 595, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3801, Target: 431, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3397, Target: 586, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 588, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3397, Target: 588, Traits: 15, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 590, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5186, Target: 590, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2806, Target: 591, Traits: 15, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 593, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2806, Target: 593, Traits: 15, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 595, Traits: 15, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4361, Target: 595, Traits: 15, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8445, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4845, Target: 597, Traits: 15, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 599, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4845, Target: 599, Traits: 15, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 603, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7216, Target: 601, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 603, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6861, Target: 603, Traits: 15, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4270, Target: 1061, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6718, Target: 1061, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7927, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8455, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7853, Target: 608, Traits: 15, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8459, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8417, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6997, Target: 611, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 91, Traits: 15, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 548, Target: 613, Traits: 15, StrLen: 44, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 616, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 48, Target: 619, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 548, Target: 616, Traits: 15, StrLen: 53, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 601, Target: 619, Traits: 15, StrLen: 53, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1867, Target: 621, Traits: 15, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 624, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 48, Target: 627, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1867, Target: 624, Traits: 15, StrLen: 45, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1912, Target: 627, Traits: 15, StrLen: 45, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2348, Target: 629, Traits: 15, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 631, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2348, Target: 631, Traits: 15, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 633, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4135, Target: 633, Traits: 15, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5508, Target: 634, Traits: 15, StrLen: 26, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 629, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 259, Target: 675, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 89, Target: 687, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1186, Target: 621, Traits: 15, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 567, Target: 613, Traits: 15, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 187, Target: 661, Traits: 15, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1976, Target: 694, Traits: 15, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 242, Target: 668, Traits: 15, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 831, Target: 701, Traits: 15, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 882, Target: 708, Traits: 15, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 686, Target: 747, Traits: 15, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 673, Target: 682, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 656, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1703, Target: 715, Traits: 15, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 726, Target: 742, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1133, Target: 651, Traits: 15, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1114, Target: 651, Traits: 15, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 653, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1114, Target: 653, Traits: 15, StrLen: 49, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 655, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2929, Target: 655, Traits: 15, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 914, Target: 656, Traits: 15, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 658, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 914, Target: 658, Traits: 15, StrLen: 50, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 168, Target: 661, Traits: 15, StrLen: 46, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 664, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 666, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 168, Target: 664, Traits: 15, StrLen: 55, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 667, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 333, Target: 666, Traits: 15, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1592, Target: 667, Traits: 15, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 223, Target: 668, Traits: 15, StrLen: 46, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 671, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 673, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 223, Target: 671, Traits: 15, StrLen: 55, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 674, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 387, Target: 673, Traits: 15, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1638, Target: 674, Traits: 15, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3359, Target: 675, Traits: 15, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 678, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 680, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3359, Target: 678, Traits: 15, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 681, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3434, Target: 680, Traits: 15, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4874, Target: 681, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 654, Target: 682, Traits: 15, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 684, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 654, Target: 684, Traits: 15, StrLen: 53, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 686, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2002, Target: 686, Traits: 15, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2221, Target: 687, Traits: 15, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 690, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 692, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2221, Target: 690, Traits: 15, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 693, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2390, Target: 692, Traits: 15, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3968, Target: 693, Traits: 15, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1957, Target: 694, Traits: 15, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 697, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 699, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1957, Target: 697, Traits: 15, StrLen: 45, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 700, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2046, Target: 699, Traits: 15, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3689, Target: 700, Traits: 15, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 812, Target: 701, Traits: 15, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 704, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 706, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 812, Target: 704, Traits: 15, StrLen: 51, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 707, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 964, Target: 706, Traits: 15, StrLen: 50, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2432, Target: 707, Traits: 15, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 863, Target: 708, Traits: 15, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 711, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 713, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 863, Target: 711, Traits: 15, StrLen: 51, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 714, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1014, Target: 713, Traits: 15, StrLen: 50, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2474, Target: 714, Traits: 15, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1684, Target: 715, Traits: 15, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 717, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1684, Target: 717, Traits: 15, StrLen: 46, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 719, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3471, Target: 719, Traits: 15, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7704, Target: 1061, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8020, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5735, Target: 722, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 725, Traits: 15, StrLen: 6, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5735, Target: 725, Traits: 15, StrLen: 25, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 259, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 89, Target: 1061, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1976, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 187, Target: 1061, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 242, Target: 1061, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 831, Target: 1061, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 882, Target: 1061, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 686, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 673, Target: 1061, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1186, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 567, Target: 1061, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1703, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 726, Target: 1061, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1133, Target: 1061, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 707, Target: 742, Traits: 15, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 744, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 707, Target: 744, Traits: 15, StrLen: 53, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 746, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2090, Target: 746, Traits: 15, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2969, Target: 747, Traits: 15, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 749, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2969, Target: 749, Traits: 15, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 751, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4517, Target: 751, Traits: 15, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8399, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8177, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5534, Target: 755, Traits: 15, StrLen: 26, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 259, Target: 681, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 89, Target: 693, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1976, Target: 700, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 187, Target: 667, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 242, Target: 674, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 831, Target: 707, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 882, Target: 714, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 686, Target: 751, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 673, Target: 686, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1186, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 567, Target: 233, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1703, Target: 719, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 726, Target: 746, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1133, Target: 655, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8053, Target: 770, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1284, Target: 771, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7774, Target: 772, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 771, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6505, Target: 774, Traits: 18, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5760, Target: 776, Traits: 19, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4903, Target: 778, Traits: 20, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7234, Target: 780, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4002, Target: 781, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 783, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4002, Target: 783, Traits: 15, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 785, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5785, Target: 785, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7252, Target: 786, Traits: 15, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 781, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 808, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 814, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 791, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2516, Target: 791, Traits: 15, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 793, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2516, Target: 793, Traits: 15, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7391, Target: 796, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 799, Traits: 15, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7391, Target: 799, Traits: 15, StrLen: 17, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1521, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6921, Target: 1061, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7270, Target: 805, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2321, Target: 813, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 818, Traits: 15, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4548, Target: 808, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 811, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 813, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4548, Target: 811, Traits: 15, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 813, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6527, Target: 813, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3725, Target: 814, Traits: 15, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 816, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3725, Target: 816, Traits: 15, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 818, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5377, Target: 818, Traits: 15, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8378, Target: 1061, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8411, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8177, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8297, Target: 823, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8187, Target: 824, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4932, Target: 825, Traits: 21, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3315, Target: 827, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 830, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3315, Target: 830, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8207, Target: 1061, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8127, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1163, Target: 834, Traits: 15, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 836, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1163, Target: 836, Traits: 15, StrLen: 49, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1730, Target: 839, Traits: 15, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 841, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1730, Target: 841, Traits: 15, StrLen: 46, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 843, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3508, Target: 843, Traits: 15, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4699, Target: 844, Traits: 15, StrLen: 30, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 145, Target: 839, Traits: 15, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 686, Target: 887, Traits: 15, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1284, Target: 865, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1087, Target: 870, Traits: 15, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 259, Target: 858, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 23, Target: 895, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1186, Target: 834, Traits: 15, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 853, Traits: 15, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 441, Target: 853, Traits: 15, StrLen: 45, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 486, Target: 855, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 441, Target: 855, Traits: 15, StrLen: 54, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8097, Target: 233, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7987, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2558, Target: 858, Traits: 15, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 861, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 863, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2558, Target: 861, Traits: 15, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 864, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2847, Target: 863, Traits: 15, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4168, Target: 864, Traits: 15, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1261, Target: 865, Traits: 15, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 867, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1261, Target: 867, Traits: 15, StrLen: 48, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 869, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3244, Target: 869, Traits: 15, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1064, Target: 870, Traits: 15, StrLen: 41, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 873, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7866, Target: 875, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1064, Target: 873, Traits: 15, StrLen: 50, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 876, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1212, Target: 875, Traits: 15, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2888, Target: 876, Traits: 15, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4961, Target: 877, Traits: 15, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 880, Traits: 15, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8306, Target: 831, Traits: 15, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4961, Target: 880, Traits: 15, StrLen: 29, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 145, Target: 1061, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 686, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1284, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 23, Target: 1061, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1186, Target: 1061, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 464, Target: 1061, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2134, Target: 887, Traits: 15, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 889, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2134, Target: 889, Traits: 15, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 891, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3831, Target: 891, Traits: 15, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8435, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8399, Target: 1061, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8177, Target: 1061, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 895, Traits: 15, StrLen: 48, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 48, Target: 897, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 897, Traits: 15, StrLen: 57, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 899, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1309, Target: 899, Traits: 15, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 278, Target: 900, Traits: 15, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 259, Target: 907, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 686, Target: 910, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1284, Target: 908, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1087, Target: 909, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 23, Target: 911, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1186, Target: 233, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3009, Target: 907, Traits: 15, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1776, Target: 908, Traits: 15, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1357, Target: 909, Traits: 15, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2600, Target: 910, Traits: 15, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 278, Target: 911, Traits: 15, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5327, Target: 912, Traits: 15, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8200, Target: 915, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 48, Target: 920, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8197, Target: 915, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8197, Target: 916, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 915, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8392, Target: 918, Traits: 15, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 912, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8348, Target: 920, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7035, Target: 921, Traits: 22, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5214, Target: 923, Traits: 23, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5214, Target: 933, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5214, Target: 926, Traits: 15, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5829, Target: 935, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7374, Target: 273, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 145, Target: 247, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8117, Target: 126, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5233, Target: 348, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4219, Target: 312, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5214, Target: 933, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 926, Traits: 15, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5810, Target: 935, Traits: 15, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7408, Target: 1061, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7891, Target: 1061, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6261, Target: 1061, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8440, Target: 1061, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 48, Target: 940, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 8429, Target: 355, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6901, Target: 942, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7675, Target: 943, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4990, Target: 944, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6684, Target: 252, Traits: 15, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4729, Target: 946, Traits: 15, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7840, Target: 244, Traits: 15, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 8405, Target: 304, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 6329, Target: 949, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7998, Target: 771, Traits: 25, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6146, Target: 952, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7998, Target: 771, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7903, Target: 63, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5296, Target: 955, Traits: 15, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8064, Target: 770, Traits: 26, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5046, Target: 957, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5585, Target: 958, Traits: 15, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6781, Target: 64, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8167, Target: 234, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5430, Target: 963, Traits: 15, StrLen: 26, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7788, Target: 63, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6781, Target: 771, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6910, Target: 942, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6123, Target: 82, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7521, Target: 360, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 6222, Target: 65, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8234, Target: 233, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8252, Target: 233, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7108, Target: 178, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5955, Target: 974, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7998, Target: 771, Traits: 25, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5610, Target: 977, Traits: 15, StrLen: 25, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7998, Target: 771, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7903, Target: 63, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7801, Target: 101, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2826, Target: 364, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8315, Target: 233, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8371, Target: 233, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 686, Target: 113, Traits: 15, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8031, Target: 345, Traits: 15, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7162, Target: 312, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4643, Target: 99, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6676, Target: 988, Traits: 15, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 24, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 145, Target: 771, Traits: 27, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6395, Target: 991, Traits: 15, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7374, Target: 273, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7473, Target: 363, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8243, Target: 63, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 464, Target: 233, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7600, Target: 369, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7600, Target: 370, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 5979, Target: 998, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8064, Target: 770, Traits: 26, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5635, Target: 1000, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5060, Target: 780, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6417, Target: 1002, Traits: 15, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6910, Target: 359, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6307, Target: 79, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7505, Target: 356, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 8167, Target: 371, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6284, Target: 1009, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6613, Target: 77, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6697, Target: 1012, Traits: 15, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8147, Target: 352, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3315, Target: 827, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8167, Target: 372, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6439, Target: 1018, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5883, Target: 102, Traits: 15, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6940, Target: 1021, Traits: 15, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7374, Target: 273, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8147, Target: 352, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3315, Target: 827, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8167, Target: 373, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7853, Target: 608, Traits: 15, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7374, Target: 274, Traits: 15, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 7732, Target: 285, Traits: 15, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 6821, Target: 1031, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7357, Target: 271, Traits: 15, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8270, Target: 415, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5456, Target: 1034, Traits: 15, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8064, Target: 770, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5323, Target: 1036, Traits: 15, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8064, Target: 770, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5327, Target: 918, Traits: 15, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6099, Target: 1039, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8064, Target: 770, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5060, Target: 780, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5710, Target: 1042, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6739, Target: 1043, Traits: 15, StrLen: 21, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8364, Target: 90, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4643, Target: 611, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7801, Target: 101, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7090, Target: 127, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7814, Target: 918, Traits: 15, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2826, Target: 364, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6549, Target: 1050, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7998, Target: 771, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7903, Target: 63, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7288, Target: 1053, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8064, Target: 770, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5327, Target: 918, Traits: 15, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7016, Target: 1056, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6881, Target: 1057, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8064, Target: 770, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8385, Target: 916, Traits: 15, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6760, Target: 1060, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8463, Target: 1061, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/BatchDescribeEntities",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/CancelChangeSet",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/DeleteResourcePolicy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DescribeAssessment",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/DescribeChangeSet",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/DescribeEntity",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/GetResourcePolicy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListAssessments",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListChangeSets",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListEntities",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListTagsForResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/PutResourcePolicy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/StartChangeSet",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/TagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UntagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 423}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 415}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 422}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "catalog"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "changeSetId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "entityId"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [1062]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+	smithy.NewStaticSchema(&set, 884),
+	smithy.NewStaticSchema(&set, 885),
+	smithy.NewStaticSchema(&set, 886),
+	smithy.NewStaticSchema(&set, 887),
+	smithy.NewStaticSchema(&set, 888),
+	smithy.NewStaticSchema(&set, 889),
+	smithy.NewStaticSchema(&set, 890),
+	smithy.NewStaticSchema(&set, 891),
+	smithy.NewStaticSchema(&set, 892),
+	smithy.NewStaticSchema(&set, 893),
+	smithy.NewStaticSchema(&set, 894),
+	smithy.NewStaticSchema(&set, 895),
+	smithy.NewStaticSchema(&set, 896),
+	smithy.NewStaticSchema(&set, 897),
+	smithy.NewStaticSchema(&set, 898),
+	smithy.NewStaticSchema(&set, 899),
+	smithy.NewStaticSchema(&set, 900),
+	smithy.NewStaticSchema(&set, 901),
+	smithy.NewStaticSchema(&set, 902),
+	smithy.NewStaticSchema(&set, 903),
+	smithy.NewStaticSchema(&set, 904),
+	smithy.NewStaticSchema(&set, 905),
+	smithy.NewStaticSchema(&set, 906),
+	smithy.NewStaticSchema(&set, 907),
+	smithy.NewStaticSchema(&set, 908),
+	smithy.NewStaticSchema(&set, 909),
+	smithy.NewStaticSchema(&set, 910),
+	smithy.NewStaticSchema(&set, 911),
+	smithy.NewStaticSchema(&set, 912),
+	smithy.NewStaticSchema(&set, 913),
+	smithy.NewStaticSchema(&set, 914),
+	smithy.NewStaticSchema(&set, 915),
+	smithy.NewStaticSchema(&set, 916),
+	smithy.NewStaticSchema(&set, 917),
+	smithy.NewStaticSchema(&set, 918),
+	smithy.NewStaticSchema(&set, 919),
+	smithy.NewStaticSchema(&set, 920),
+	smithy.NewStaticSchema(&set, 921),
+	smithy.NewStaticSchema(&set, 922),
+	smithy.NewStaticSchema(&set, 923),
+	smithy.NewStaticSchema(&set, 924),
+	smithy.NewStaticSchema(&set, 925),
+	smithy.NewStaticSchema(&set, 926),
+	smithy.NewStaticSchema(&set, 927),
+	smithy.NewStaticSchema(&set, 928),
+	smithy.NewStaticSchema(&set, 929),
+	smithy.NewStaticSchema(&set, 930),
+	smithy.NewStaticSchema(&set, 931),
+	smithy.NewStaticSchema(&set, 932),
+	smithy.NewStaticSchema(&set, 933),
+	smithy.NewStaticSchema(&set, 934),
+	smithy.NewStaticSchema(&set, 935),
+	smithy.NewStaticSchema(&set, 936),
+	smithy.NewStaticSchema(&set, 937),
+	smithy.NewStaticSchema(&set, 938),
+	smithy.NewStaticSchema(&set, 939),
+	smithy.NewStaticSchema(&set, 940),
+	smithy.NewStaticSchema(&set, 941),
+	smithy.NewStaticSchema(&set, 942),
+	smithy.NewStaticSchema(&set, 943),
+	smithy.NewStaticSchema(&set, 944),
+	smithy.NewStaticSchema(&set, 945),
+	smithy.NewStaticSchema(&set, 946),
+	smithy.NewStaticSchema(&set, 947),
+	smithy.NewStaticSchema(&set, 948),
+	smithy.NewStaticSchema(&set, 949),
+	smithy.NewStaticSchema(&set, 950),
+	smithy.NewStaticSchema(&set, 951),
+	smithy.NewStaticSchema(&set, 952),
+	smithy.NewStaticSchema(&set, 953),
+	smithy.NewStaticSchema(&set, 954),
+	smithy.NewStaticSchema(&set, 955),
+	smithy.NewStaticSchema(&set, 956),
+	smithy.NewStaticSchema(&set, 957),
+	smithy.NewStaticSchema(&set, 958),
+	smithy.NewStaticSchema(&set, 959),
+	smithy.NewStaticSchema(&set, 960),
+	smithy.NewStaticSchema(&set, 961),
+	smithy.NewStaticSchema(&set, 962),
+	smithy.NewStaticSchema(&set, 963),
+	smithy.NewStaticSchema(&set, 964),
+	smithy.NewStaticSchema(&set, 965),
+	smithy.NewStaticSchema(&set, 966),
+	smithy.NewStaticSchema(&set, 967),
+	smithy.NewStaticSchema(&set, 968),
+	smithy.NewStaticSchema(&set, 969),
+	smithy.NewStaticSchema(&set, 970),
+	smithy.NewStaticSchema(&set, 971),
+	smithy.NewStaticSchema(&set, 972),
+	smithy.NewStaticSchema(&set, 973),
+	smithy.NewStaticSchema(&set, 974),
+	smithy.NewStaticSchema(&set, 975),
+	smithy.NewStaticSchema(&set, 976),
+	smithy.NewStaticSchema(&set, 977),
+	smithy.NewStaticSchema(&set, 978),
+	smithy.NewStaticSchema(&set, 979),
+	smithy.NewStaticSchema(&set, 980),
+	smithy.NewStaticSchema(&set, 981),
+	smithy.NewStaticSchema(&set, 982),
+	smithy.NewStaticSchema(&set, 983),
+	smithy.NewStaticSchema(&set, 984),
+	smithy.NewStaticSchema(&set, 985),
+	smithy.NewStaticSchema(&set, 986),
+	smithy.NewStaticSchema(&set, 987),
+	smithy.NewStaticSchema(&set, 988),
+	smithy.NewStaticSchema(&set, 989),
+	smithy.NewStaticSchema(&set, 990),
+	smithy.NewStaticSchema(&set, 991),
+	smithy.NewStaticSchema(&set, 992),
+	smithy.NewStaticSchema(&set, 993),
+	smithy.NewStaticSchema(&set, 994),
+	smithy.NewStaticSchema(&set, 995),
+	smithy.NewStaticSchema(&set, 996),
+	smithy.NewStaticSchema(&set, 997),
+	smithy.NewStaticSchema(&set, 998),
+	smithy.NewStaticSchema(&set, 999),
+	smithy.NewStaticSchema(&set, 1000),
+	smithy.NewStaticSchema(&set, 1001),
+	smithy.NewStaticSchema(&set, 1002),
+	smithy.NewStaticSchema(&set, 1003),
+	smithy.NewStaticSchema(&set, 1004),
+	smithy.NewStaticSchema(&set, 1005),
+	smithy.NewStaticSchema(&set, 1006),
+	smithy.NewStaticSchema(&set, 1007),
+	smithy.NewStaticSchema(&set, 1008),
+	smithy.NewStaticSchema(&set, 1009),
+	smithy.NewStaticSchema(&set, 1010),
+	smithy.NewStaticSchema(&set, 1011),
+	smithy.NewStaticSchema(&set, 1012),
+	smithy.NewStaticSchema(&set, 1013),
+	smithy.NewStaticSchema(&set, 1014),
+	smithy.NewStaticSchema(&set, 1015),
+	smithy.NewStaticSchema(&set, 1016),
+	smithy.NewStaticSchema(&set, 1017),
+	smithy.NewStaticSchema(&set, 1018),
+	smithy.NewStaticSchema(&set, 1019),
+	smithy.NewStaticSchema(&set, 1020),
+	smithy.NewStaticSchema(&set, 1021),
+	smithy.NewStaticSchema(&set, 1022),
+	smithy.NewStaticSchema(&set, 1023),
+	smithy.NewStaticSchema(&set, 1024),
+	smithy.NewStaticSchema(&set, 1025),
+	smithy.NewStaticSchema(&set, 1026),
+	smithy.NewStaticSchema(&set, 1027),
+	smithy.NewStaticSchema(&set, 1028),
+	smithy.NewStaticSchema(&set, 1029),
+	smithy.NewStaticSchema(&set, 1030),
+	smithy.NewStaticSchema(&set, 1031),
+	smithy.NewStaticSchema(&set, 1032),
+	smithy.NewStaticSchema(&set, 1033),
+	smithy.NewStaticSchema(&set, 1034),
+	smithy.NewStaticSchema(&set, 1035),
+	smithy.NewStaticSchema(&set, 1036),
+	smithy.NewStaticSchema(&set, 1037),
+	smithy.NewStaticSchema(&set, 1038),
+	smithy.NewStaticSchema(&set, 1039),
+	smithy.NewStaticSchema(&set, 1040),
+	smithy.NewStaticSchema(&set, 1041),
+	smithy.NewStaticSchema(&set, 1042),
+	smithy.NewStaticSchema(&set, 1043),
+	smithy.NewStaticSchema(&set, 1044),
+	smithy.NewStaticSchema(&set, 1045),
+	smithy.NewStaticSchema(&set, 1046),
+	smithy.NewStaticSchema(&set, 1047),
+	smithy.NewStaticSchema(&set, 1048),
+	smithy.NewStaticSchema(&set, 1049),
+	smithy.NewStaticSchema(&set, 1050),
+	smithy.NewStaticSchema(&set, 1051),
+	smithy.NewStaticSchema(&set, 1052),
+	smithy.NewStaticSchema(&set, 1053),
+	smithy.NewStaticSchema(&set, 1054),
+	smithy.NewStaticSchema(&set, 1055),
+	smithy.NewStaticSchema(&set, 1056),
+	smithy.NewStaticSchema(&set, 1057),
+	smithy.NewStaticSchema(&set, 1058),
+	smithy.NewStaticSchema(&set, 1059),
+	smithy.NewStaticSchema(&set, 1060),
+	smithy.NewStaticSchema(&set, 1061),
+}
+
+var BatchDescribeEntities = &handles[0]
+
+var CancelChangeSet = &handles[1]
+
+var DeleteResourcePolicy = &handles[2]
+
+var DescribeAssessment = &handles[3]
+
+var DescribeChangeSet = &handles[4]
+
+var DescribeEntity = &handles[5]
+
+var GetResourcePolicy = &handles[6]
+
+var ListAssessments = &handles[7]
+
+var ListChangeSets = &handles[8]
+
+var ListEntities = &handles[9]
+
+var ListTagsForResource = &handles[10]
+
+var PutResourcePolicy = &handles[11]
+
+var StartChangeSet = &handles[12]
+
+var TagResource = &handles[13]
+
+var UntagResource = &handles[14]
+
+var _AWSMPSeymour = &handles[15]
+
+var AccessDeniedException = &handles[16]
+var AccessDeniedException_Message = &handles[17]
+
+var AmiProductEntityIdFilter = &handles[18]
+var AmiProductEntityIdFilter_ValueList = &handles[19]
+
+var _AmiProductEntityIdFilterValueList = &handles[20]
+var _AmiProductEntityIdFilterValueList_member = &handles[21]
+
+var _AmiProductEntityIdString = &handles[22]
+
+var AmiProductFilters = &handles[23]
+var AmiProductFilters_EntityId = &handles[24]
+var AmiProductFilters_LastModifiedDate = &handles[25]
+var AmiProductFilters_ProductTitle = &handles[26]
+var AmiProductFilters_Visibility = &handles[27]
+
+var AmiProductLastModifiedDateFilter = &handles[28]
+var AmiProductLastModifiedDateFilter_DateRange = &handles[29]
+
+var AmiProductLastModifiedDateFilterDateRange = &handles[30]
+var AmiProductLastModifiedDateFilterDateRange_AfterValue = &handles[31]
+var AmiProductLastModifiedDateFilterDateRange_BeforeValue = &handles[32]
+
+var AmiProductSort = &handles[33]
+var AmiProductSort_SortBy = &handles[34]
+var AmiProductSort_SortOrder = &handles[35]
+
+var AmiProductSortBy = &handles[36]
+var AmiProductSortBy_EntityId = &handles[37]
+var AmiProductSortBy_LastModifiedDate = &handles[38]
+var AmiProductSortBy_ProductTitle = &handles[39]
+var AmiProductSortBy_Visibility = &handles[40]
+
+var AmiProductSummary = &handles[41]
+var AmiProductSummary_ProductTitle = &handles[42]
+var AmiProductSummary_Visibility = &handles[43]
+
+var AmiProductTitleFilter = &handles[44]
+var AmiProductTitleFilter_ValueList = &handles[45]
+var AmiProductTitleFilter_WildCardValue = &handles[46]
+
+var _AmiProductTitleFilterValueList = &handles[47]
+var _AmiProductTitleFilterValueList_member = &handles[48]
+
+var _AmiProductTitleString = &handles[49]
+
+var AmiProductVisibilityFilter = &handles[50]
+var AmiProductVisibilityFilter_ValueList = &handles[51]
+
+var _AmiProductVisibilityFilterValueList = &handles[52]
+var _AmiProductVisibilityFilterValueList_member = &handles[53]
+
+var AmiProductVisibilityString = &handles[54]
+var AmiProductVisibilityString_Limited = &handles[55]
+var AmiProductVisibilityString_Public = &handles[56]
+var AmiProductVisibilityString_Restricted = &handles[57]
+var AmiProductVisibilityString_Draft = &handles[58]
+
+var AMISecurityFilters = &handles[59]
+var AMISecurityFilters_DeliveryOptionId = &handles[60]
+
+var AMISecuritySummary = &handles[61]
+var AMISecuritySummary_DeliveryOptionId = &handles[62]
+
+var _ARN = &handles[63]
+
+var _AssessmentIdentifier = &handles[64]
+
+var AssessmentResult = &handles[65]
+var AssessmentResult_PASS = &handles[66]
+var AssessmentResult_FAIL = &handles[67]
+
+var AssessmentSummary = &handles[68]
+var AssessmentSummary_AssessmentArn = &handles[69]
+var AssessmentSummary_AssessmentId = &handles[70]
+var AssessmentSummary_FrameworkId = &handles[71]
+var AssessmentSummary_AssessmentTargetSummary = &handles[72]
+var AssessmentSummary_FrameworkSummary = &handles[73]
+var AssessmentSummary_AssessmentResult = &handles[74]
+var AssessmentSummary_CreatedAt = &handles[75]
+var AssessmentSummary_ExpiresAt = &handles[76]
+
+var _AssessmentSummaryList = &handles[77]
+var _AssessmentSummaryList_member = &handles[78]
+
+var AssessmentTargetFilter = &handles[79]
+var AssessmentTargetFilter_EntityId = &handles[80]
+var AssessmentTargetFilter_ChangeSetId = &handles[81]
+
+var AssessmentTargetSummary = &handles[82]
+var AssessmentTargetSummary_EntityId = &handles[83]
+var AssessmentTargetSummary_ChangeSetId = &handles[84]
+
+var _BatchDescribeErrorCodeString = &handles[85]
+
+var BatchDescribeErrorDetail = &handles[86]
+var BatchDescribeErrorDetail_ErrorCode = &handles[87]
+var BatchDescribeErrorDetail_ErrorMessage = &handles[88]
+
+var _BatchDescribeErrorMessageContent = &handles[89]
+
+var _Catalog = &handles[90]
+
+var Change = &handles[91]
+var Change_ChangeType = &handles[92]
+var Change_Entity = &handles[93]
+var Change_EntityTags = &handles[94]
+var Change_Details = &handles[95]
+var Change_DetailsDocument = &handles[96]
+var Change_ChangeName = &handles[97]
+
+var _ChangeName = &handles[98]
+
+var _ChangeSetDescription = &handles[99]
+var _ChangeSetDescription_member = &handles[100]
+
+var _ChangeSetName = &handles[101]
+
+var _ChangeSetSummaryList = &handles[102]
+var _ChangeSetSummaryList_member = &handles[103]
+
+var ChangeSetSummaryListItem = &handles[104]
+var ChangeSetSummaryListItem_ChangeSetId = &handles[105]
+var ChangeSetSummaryListItem_ChangeSetArn = &handles[106]
+var ChangeSetSummaryListItem_ChangeSetName = &handles[107]
+var ChangeSetSummaryListItem_StartTime = &handles[108]
+var ChangeSetSummaryListItem_EndTime = &handles[109]
+var ChangeSetSummaryListItem_Status = &handles[110]
+var ChangeSetSummaryListItem_EntityIdList = &handles[111]
+var ChangeSetSummaryListItem_FailureCode = &handles[112]
+
+var ChangeStatus = &handles[113]
+var ChangeStatus_PREPARING = &handles[114]
+var ChangeStatus_APPLYING = &handles[115]
+var ChangeStatus_SUCCEEDED = &handles[116]
+var ChangeStatus_CANCELLED = &handles[117]
+var ChangeStatus_FAILED = &handles[118]
+
+var ChangeSummary = &handles[119]
+var ChangeSummary_ChangeType = &handles[120]
+var ChangeSummary_Entity = &handles[121]
+var ChangeSummary_Details = &handles[122]
+var ChangeSummary_DetailsDocument = &handles[123]
+var ChangeSummary_ErrorDetailList = &handles[124]
+var ChangeSummary_ChangeName = &handles[125]
+
+var _ChangeType = &handles[126]
+
+var _ClientRequestToken = &handles[127]
+
+var ContainerProductEntityIdFilter = &handles[128]
+var ContainerProductEntityIdFilter_ValueList = &handles[129]
+
+var _ContainerProductEntityIdFilterValueList = &handles[130]
+var _ContainerProductEntityIdFilterValueList_member = &handles[131]
+
+var _ContainerProductEntityIdString = &handles[132]
+
+var ContainerProductFilters = &handles[133]
+var ContainerProductFilters_EntityId = &handles[134]
+var ContainerProductFilters_LastModifiedDate = &handles[135]
+var ContainerProductFilters_ProductTitle = &handles[136]
+var ContainerProductFilters_Visibility = &handles[137]
+
+var ContainerProductLastModifiedDateFilter = &handles[138]
+var ContainerProductLastModifiedDateFilter_DateRange = &handles[139]
+
+var ContainerProductLastModifiedDateFilterDateRange = &handles[140]
+var ContainerProductLastModifiedDateFilterDateRange_AfterValue = &handles[141]
+var ContainerProductLastModifiedDateFilterDateRange_BeforeValue = &handles[142]
+
+var ContainerProductSort = &handles[143]
+var ContainerProductSort_SortBy = &handles[144]
+var ContainerProductSort_SortOrder = &handles[145]
+
+var ContainerProductSortBy = &handles[146]
+var ContainerProductSortBy_EntityId = &handles[147]
+var ContainerProductSortBy_LastModifiedDate = &handles[148]
+var ContainerProductSortBy_ProductTitle = &handles[149]
+var ContainerProductSortBy_Visibility = &handles[150]
+var ContainerProductSortBy_CompatibleAWSServices = &handles[151]
+
+var ContainerProductSummary = &handles[152]
+var ContainerProductSummary_ProductTitle = &handles[153]
+var ContainerProductSummary_Visibility = &handles[154]
+
+var ContainerProductTitleFilter = &handles[155]
+var ContainerProductTitleFilter_ValueList = &handles[156]
+var ContainerProductTitleFilter_WildCardValue = &handles[157]
+
+var _ContainerProductTitleFilterValueList = &handles[158]
+var _ContainerProductTitleFilterValueList_member = &handles[159]
+
+var _ContainerProductTitleString = &handles[160]
+
+var ContainerProductVisibilityFilter = &handles[161]
+var ContainerProductVisibilityFilter_ValueList = &handles[162]
+
+var _ContainerProductVisibilityFilterValueList = &handles[163]
+var _ContainerProductVisibilityFilterValueList_member = &handles[164]
+
+var ContainerProductVisibilityString = &handles[165]
+var ContainerProductVisibilityString_Limited = &handles[166]
+var ContainerProductVisibilityString_Public = &handles[167]
+var ContainerProductVisibilityString_Restricted = &handles[168]
+var ContainerProductVisibilityString_Draft = &handles[169]
+
+var ContainerSecurityFilters = &handles[170]
+var ContainerSecurityFilters_DeliveryOptionId = &handles[171]
+
+var ContainerSecuritySummary = &handles[172]
+var ContainerSecuritySummary_DeliveryOptionId = &handles[173]
+
+var ControlAssessment = &handles[174]
+var ControlAssessment_ControlId = &handles[175]
+var ControlAssessment_ControlAssessmentResult = &handles[176]
+var ControlAssessment_Errors = &handles[177]
+
+var _ControlAssessmentList = &handles[178]
+var _ControlAssessmentList_member = &handles[179]
+
+var ControlAssessmentResult = &handles[180]
+var ControlAssessmentResult_PASS = &handles[181]
+var ControlAssessmentResult_FAIL = &handles[182]
+var ControlAssessmentResult_NOT_EXECUTED = &handles[183]
+var ControlAssessmentResult_EXEMPTION_PASS = &handles[184]
+
+var ControlError = &handles[185]
+var ControlError_Code = &handles[186]
+var ControlError_Message = &handles[187]
+var ControlError_Scope = &handles[188]
+
+var _ControlErrorList = &handles[189]
+var _ControlErrorList_member = &handles[190]
+
+var DataProductEntityIdFilter = &handles[191]
+var DataProductEntityIdFilter_ValueList = &handles[192]
+
+var _DataProductEntityIdFilterValueList = &handles[193]
+var _DataProductEntityIdFilterValueList_member = &handles[194]
+
+var _DataProductEntityIdString = &handles[195]
+
+var DataProductFilters = &handles[196]
+var DataProductFilters_EntityId = &handles[197]
+var DataProductFilters_ProductTitle = &handles[198]
+var DataProductFilters_Visibility = &handles[199]
+var DataProductFilters_LastModifiedDate = &handles[200]
+
+var DataProductLastModifiedDateFilter = &handles[201]
+var DataProductLastModifiedDateFilter_DateRange = &handles[202]
+
+var DataProductLastModifiedDateFilterDateRange = &handles[203]
+var DataProductLastModifiedDateFilterDateRange_AfterValue = &handles[204]
+var DataProductLastModifiedDateFilterDateRange_BeforeValue = &handles[205]
+
+var DataProductSort = &handles[206]
+var DataProductSort_SortBy = &handles[207]
+var DataProductSort_SortOrder = &handles[208]
+
+var DataProductSortBy = &handles[209]
+var DataProductSortBy_EntityId = &handles[210]
+var DataProductSortBy_ProductTitle = &handles[211]
+var DataProductSortBy_Visibility = &handles[212]
+var DataProductSortBy_LastModifiedDate = &handles[213]
+
+var DataProductSummary = &handles[214]
+var DataProductSummary_ProductTitle = &handles[215]
+var DataProductSummary_Visibility = &handles[216]
+
+var DataProductTitleFilter = &handles[217]
+var DataProductTitleFilter_ValueList = &handles[218]
+var DataProductTitleFilter_WildCardValue = &handles[219]
+
+var _DataProductTitleFilterValueList = &handles[220]
+var _DataProductTitleFilterValueList_member = &handles[221]
+
+var _DataProductTitleString = &handles[222]
+
+var DataProductVisibilityFilter = &handles[223]
+var DataProductVisibilityFilter_ValueList = &handles[224]
+
+var _DataProductVisibilityFilterValueList = &handles[225]
+var _DataProductVisibilityFilterValueList_member = &handles[226]
+
+var DataProductVisibilityString = &handles[227]
+var DataProductVisibilityString_Limited = &handles[228]
+var DataProductVisibilityString_Public = &handles[229]
+var DataProductVisibilityString_Restricted = &handles[230]
+var DataProductVisibilityString_Unavailable = &handles[231]
+var DataProductVisibilityString_Draft = &handles[232]
+
+var _DateTimeISO8601 = &handles[233]
+
+var _DescribeAssessmentMaxResultInteger = &handles[234]
+
+var Entity = &handles[235]
+var Entity_Type = &handles[236]
+var Entity_Identifier = &handles[237]
+
+var EntityDetail = &handles[238]
+var EntityDetail_EntityType = &handles[239]
+var EntityDetail_EntityArn = &handles[240]
+var EntityDetail_EntityIdentifier = &handles[241]
+var EntityDetail_LastModifiedDate = &handles[242]
+var EntityDetail_DetailsDocument = &handles[243]
+
+var _EntityDetails = &handles[244]
+var _EntityDetails_key = &handles[245]
+var _EntityDetails_value = &handles[246]
+
+var _EntityId = &handles[247]
+
+var _EntityNameString = &handles[248]
+
+var EntityRequest = &handles[249]
+var EntityRequest_Catalog = &handles[250]
+var EntityRequest_EntityId = &handles[251]
+
+var _EntityRequestList = &handles[252]
+var _EntityRequestList_member = &handles[253]
+
+var EntitySummary = &handles[254]
+var EntitySummary_Name = &handles[255]
+var EntitySummary_EntityType = &handles[256]
+var EntitySummary_EntityId = &handles[257]
+var EntitySummary_EntityArn = &handles[258]
+var EntitySummary_LastModifiedDate = &handles[259]
+var EntitySummary_Visibility = &handles[260]
+var EntitySummary_AmiProductSummary = &handles[261]
+var EntitySummary_ContainerProductSummary = &handles[262]
+var EntitySummary_DataProductSummary = &handles[263]
+var EntitySummary_SaaSProductSummary = &handles[264]
+var EntitySummary_OfferSummary = &handles[265]
+var EntitySummary_ResaleAuthorizationSummary = &handles[266]
+var EntitySummary_MachineLearningProductSummary = &handles[267]
+var EntitySummary_OfferSetSummary = &handles[268]
+var EntitySummary_ExpressPrivateOfferConfigurationSummary = &handles[269]
+var EntitySummary_SubsidiaryAuthorizationSummary = &handles[270]
+
+var _EntitySummaryList = &handles[271]
+var _EntitySummaryList_member = &handles[272]
+
+var _EntityType = &handles[273]
+
+var EntityTypeFilters = &handles[274]
+var EntityTypeFilters_DataProductFilters = &handles[275]
+var EntityTypeFilters_SaaSProductFilters = &handles[276]
+var EntityTypeFilters_AmiProductFilters = &handles[277]
+var EntityTypeFilters_OfferFilters = &handles[278]
+var EntityTypeFilters_ContainerProductFilters = &handles[279]
+var EntityTypeFilters_ResaleAuthorizationFilters = &handles[280]
+var EntityTypeFilters_MachineLearningProductFilters = &handles[281]
+var EntityTypeFilters_OfferSetFilters = &handles[282]
+var EntityTypeFilters_ExpressPrivateOfferConfigurationFilters = &handles[283]
+var EntityTypeFilters_SubsidiaryAuthorizationFilters = &handles[284]
+
+var EntityTypeSort = &handles[285]
+var EntityTypeSort_DataProductSort = &handles[286]
+var EntityTypeSort_SaaSProductSort = &handles[287]
+var EntityTypeSort_AmiProductSort = &handles[288]
+var EntityTypeSort_OfferSort = &handles[289]
+var EntityTypeSort_ContainerProductSort = &handles[290]
+var EntityTypeSort_ResaleAuthorizationSort = &handles[291]
+var EntityTypeSort_MachineLearningProductSort = &handles[292]
+var EntityTypeSort_OfferSetSort = &handles[293]
+var EntityTypeSort_ExpressPrivateOfferConfigurationSort = &handles[294]
+var EntityTypeSort_SubsidiaryAuthorizationSort = &handles[295]
+
+var _ErrorCode = &handles[296]
+
+var _ErrorCodeString = &handles[297]
+
+var ErrorDetail = &handles[298]
+var ErrorDetail_ErrorCode = &handles[299]
+var ErrorDetail_ErrorMessage = &handles[300]
+
+var _ErrorDetailList = &handles[301]
+var _ErrorDetailList_member = &handles[302]
+
+var _ErrorMessage = &handles[303]
+
+var _Errors = &handles[304]
+var _Errors_key = &handles[305]
+var _Errors_value = &handles[306]
+
+var ErrorScope = &handles[307]
+var ErrorScope_Name = &handles[308]
+var ErrorScope_Value = &handles[309]
+
+var _ErrorScopeList = &handles[310]
+var _ErrorScopeList_member = &handles[311]
+
+var _ExceptionMessageContent = &handles[312]
+
+var ExpressPrivateOfferConfigurationEntityIdFilter = &handles[313]
+var ExpressPrivateOfferConfigurationEntityIdFilter_ValueList = &handles[314]
+
+var _ExpressPrivateOfferConfigurationEntityIdFilterValueList = &handles[315]
+var _ExpressPrivateOfferConfigurationEntityIdFilterValueList_member = &handles[316]
+
+var _ExpressPrivateOfferConfigurationEntityIdString = &handles[317]
+
+var ExpressPrivateOfferConfigurationFilters = &handles[318]
+var ExpressPrivateOfferConfigurationFilters_EntityId = &handles[319]
+var ExpressPrivateOfferConfigurationFilters_ProductId = &handles[320]
+var ExpressPrivateOfferConfigurationFilters_State = &handles[321]
+
+var ExpressPrivateOfferConfigurationProductIdFilter = &handles[322]
+var ExpressPrivateOfferConfigurationProductIdFilter_ValueList = &handles[323]
+
+var _ExpressPrivateOfferConfigurationProductIdFilterValueList = &handles[324]
+var _ExpressPrivateOfferConfigurationProductIdFilterValueList_member = &handles[325]
+
+var _ExpressPrivateOfferConfigurationProductIdString = &handles[326]
+
+var ExpressPrivateOfferConfigurationSort = &handles[327]
+var ExpressPrivateOfferConfigurationSort_SortBy = &handles[328]
+var ExpressPrivateOfferConfigurationSort_SortOrder = &handles[329]
+
+var ExpressPrivateOfferConfigurationSortBy = &handles[330]
+var ExpressPrivateOfferConfigurationSortBy_EntityId = &handles[331]
+var ExpressPrivateOfferConfigurationSortBy_LastModifiedDate = &handles[332]
+var ExpressPrivateOfferConfigurationSortBy_ProductId = &handles[333]
+var ExpressPrivateOfferConfigurationSortBy_State = &handles[334]
+
+var ExpressPrivateOfferConfigurationStateFilter = &handles[335]
+var ExpressPrivateOfferConfigurationStateFilter_ValueList = &handles[336]
+
+var _ExpressPrivateOfferConfigurationStateFilterValueList = &handles[337]
+var _ExpressPrivateOfferConfigurationStateFilterValueList_member = &handles[338]
+
+var ExpressPrivateOfferConfigurationStateString = &handles[339]
+var ExpressPrivateOfferConfigurationStateString_ACTIVE = &handles[340]
+var ExpressPrivateOfferConfigurationStateString_INACTIVE = &handles[341]
+
+var ExpressPrivateOfferConfigurationSummary = &handles[342]
+var ExpressPrivateOfferConfigurationSummary_ProductId = &handles[343]
+var ExpressPrivateOfferConfigurationSummary_State = &handles[344]
+
+var FailureCode = &handles[345]
+var FailureCode_ClientError = &handles[346]
+var FailureCode_ServerFault = &handles[347]
+
+var _FieldName = &handles[348]
+
+var Filter = &handles[349]
+var Filter_Name = &handles[350]
+var Filter_ValueList = &handles[351]
+
+var _FilterList = &handles[352]
+var _FilterList_member = &handles[353]
+
+var _FilterName = &handles[354]
+
+var _FilterValueContent = &handles[355]
+
+var FrameworkFilters = &handles[356]
+var FrameworkFilters_AMISecurityFilters = &handles[357]
+var FrameworkFilters_ContainerSecurityFilters = &handles[358]
+
+var _FrameworkId = &handles[359]
+
+var FrameworkSummary = &handles[360]
+var FrameworkSummary_AMISecuritySummary = &handles[361]
+var FrameworkSummary_ContainerSecuritySummary = &handles[362]
+
+var _Identifier = &handles[363]
+
+var Intent = &handles[364]
+var Intent_VALIDATE = &handles[365]
+var Intent_APPLY = &handles[366]
+
+var InternalServiceException = &handles[367]
+var InternalServiceException_Message = &handles[368]
+
+var _Json = &handles[369]
+
+var _JsonDocumentType = &handles[370]
+
+var _ListAssessmentsMaxResultInteger = &handles[371]
+
+var _ListChangeSetsMaxResultInteger = &handles[372]
+
+var _ListEntitiesMaxResultInteger = &handles[373]
+
+var MachineLearningProductEntityIdFilter = &handles[374]
+var MachineLearningProductEntityIdFilter_ValueList = &handles[375]
+
+var _MachineLearningProductEntityIdFilterValueList = &handles[376]
+var _MachineLearningProductEntityIdFilterValueList_member = &handles[377]
+
+var _MachineLearningProductEntityIdString = &handles[378]
+
+var MachineLearningProductFilters = &handles[379]
+var MachineLearningProductFilters_EntityId = &handles[380]
+var MachineLearningProductFilters_LastModifiedDate = &handles[381]
+var MachineLearningProductFilters_ProductTitle = &handles[382]
+var MachineLearningProductFilters_Visibility = &handles[383]
+
+var MachineLearningProductLastModifiedDateFilter = &handles[384]
+var MachineLearningProductLastModifiedDateFilter_DateRange = &handles[385]
+
+var MachineLearningProductLastModifiedDateFilterDateRange = &handles[386]
+var MachineLearningProductLastModifiedDateFilterDateRange_AfterValue = &handles[387]
+var MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue = &handles[388]
+
+var MachineLearningProductSort = &handles[389]
+var MachineLearningProductSort_SortBy = &handles[390]
+var MachineLearningProductSort_SortOrder = &handles[391]
+
+var MachineLearningProductSortBy = &handles[392]
+var MachineLearningProductSortBy_EntityId = &handles[393]
+var MachineLearningProductSortBy_LastModifiedDate = &handles[394]
+var MachineLearningProductSortBy_ProductTitle = &handles[395]
+var MachineLearningProductSortBy_Visibility = &handles[396]
+
+var MachineLearningProductSummary = &handles[397]
+var MachineLearningProductSummary_ProductTitle = &handles[398]
+var MachineLearningProductSummary_Visibility = &handles[399]
+
+var MachineLearningProductTitleFilter = &handles[400]
+var MachineLearningProductTitleFilter_ValueList = &handles[401]
+var MachineLearningProductTitleFilter_WildCardValue = &handles[402]
+
+var _MachineLearningProductTitleFilterValueList = &handles[403]
+var _MachineLearningProductTitleFilterValueList_member = &handles[404]
+
+var _MachineLearningProductTitleString = &handles[405]
+
+var MachineLearningProductVisibilityFilter = &handles[406]
+var MachineLearningProductVisibilityFilter_ValueList = &handles[407]
+
+var _MachineLearningProductVisibilityFilterValueList = &handles[408]
+var _MachineLearningProductVisibilityFilterValueList_member = &handles[409]
+
+var MachineLearningProductVisibilityString = &handles[410]
+var MachineLearningProductVisibilityString_Limited = &handles[411]
+var MachineLearningProductVisibilityString_Public = &handles[412]
+var MachineLearningProductVisibilityString_Restricted = &handles[413]
+var MachineLearningProductVisibilityString_Draft = &handles[414]
+
+var _NextToken = &handles[415]
+
+var OfferAvailabilityEndDateFilter = &handles[416]
+var OfferAvailabilityEndDateFilter_DateRange = &handles[417]
+
+var OfferAvailabilityEndDateFilterDateRange = &handles[418]
+var OfferAvailabilityEndDateFilterDateRange_AfterValue = &handles[419]
+var OfferAvailabilityEndDateFilterDateRange_BeforeValue = &handles[420]
+
+var OfferBuyerAccountsFilter = &handles[421]
+var OfferBuyerAccountsFilter_WildCardValue = &handles[422]
+
+var _OfferBuyerAccountsFilterWildcard = &handles[423]
+
+var _OfferBuyerAccountsList = &handles[424]
+var _OfferBuyerAccountsList_member = &handles[425]
+
+var _OfferBuyerAccountsString = &handles[426]
+
+var OfferCreatedBySourceFilter = &handles[427]
+var OfferCreatedBySourceFilter_ValueList = &handles[428]
+
+var _OfferCreatedBySourceFilterValueList = &handles[429]
+var _OfferCreatedBySourceFilterValueList_member = &handles[430]
+
+var OfferCreatedBySourceString = &handles[431]
+var OfferCreatedBySourceString_Seller = &handles[432]
+var OfferCreatedBySourceString_AwsMarketplace = &handles[433]
+
+var OfferEntityIdFilter = &handles[434]
+var OfferEntityIdFilter_ValueList = &handles[435]
+
+var _OfferEntityIdFilterValueList = &handles[436]
+var _OfferEntityIdFilterValueList_member = &handles[437]
+
+var _OfferEntityIdString = &handles[438]
+
+var OfferFilters = &handles[439]
+var OfferFilters_EntityId = &handles[440]
+var OfferFilters_Name = &handles[441]
+var OfferFilters_ProductId = &handles[442]
+var OfferFilters_ResaleAuthorizationId = &handles[443]
+var OfferFilters_ReleaseDate = &handles[444]
+var OfferFilters_AvailabilityEndDate = &handles[445]
+var OfferFilters_BuyerAccounts = &handles[446]
+var OfferFilters_State = &handles[447]
+var OfferFilters_Targeting = &handles[448]
+var OfferFilters_LastModifiedDate = &handles[449]
+var OfferFilters_OfferSetId = &handles[450]
+var OfferFilters_TargetAgreementId = &handles[451]
+var OfferFilters_TargetAgreementIntent = &handles[452]
+var OfferFilters_CreatedBySource = &handles[453]
+
+var OfferLastModifiedDateFilter = &handles[454]
+var OfferLastModifiedDateFilter_DateRange = &handles[455]
+
+var OfferLastModifiedDateFilterDateRange = &handles[456]
+var OfferLastModifiedDateFilterDateRange_AfterValue = &handles[457]
+var OfferLastModifiedDateFilterDateRange_BeforeValue = &handles[458]
+
+var OfferNameFilter = &handles[459]
+var OfferNameFilter_ValueList = &handles[460]
+var OfferNameFilter_WildCardValue = &handles[461]
+
+var _OfferNameFilterValueList = &handles[462]
+var _OfferNameFilterValueList_member = &handles[463]
+
+var _OfferNameString = &handles[464]
+
+var OfferProductIdFilter = &handles[465]
+var OfferProductIdFilter_ValueList = &handles[466]
+
+var _OfferProductIdFilterValueList = &handles[467]
+var _OfferProductIdFilterValueList_member = &handles[468]
+
+var _OfferProductIdString = &handles[469]
+
+var OfferReleaseDateFilter = &handles[470]
+var OfferReleaseDateFilter_DateRange = &handles[471]
+
+var OfferReleaseDateFilterDateRange = &handles[472]
+var OfferReleaseDateFilterDateRange_AfterValue = &handles[473]
+var OfferReleaseDateFilterDateRange_BeforeValue = &handles[474]
+
+var OfferResaleAuthorizationIdFilter = &handles[475]
+var OfferResaleAuthorizationIdFilter_ValueList = &handles[476]
+
+var _OfferResaleAuthorizationIdFilterValueList = &handles[477]
+var _OfferResaleAuthorizationIdFilterValueList_member = &handles[478]
+
+var _OfferResaleAuthorizationIdString = &handles[479]
+
+var OfferSetAssociatedOfferIdsFilter = &handles[480]
+var OfferSetAssociatedOfferIdsFilter_ValueList = &handles[481]
+
+var _OfferSetAssociatedOfferIdsFilterValueList = &handles[482]
+var _OfferSetAssociatedOfferIdsFilterValueList_member = &handles[483]
+
+var _OfferSetAssociatedOfferIdsList = &handles[484]
+var _OfferSetAssociatedOfferIdsList_member = &handles[485]
+
+var _OfferSetAssociatedOfferIdsString = &handles[486]
+
+var OfferSetEntityIdFilter = &handles[487]
+var OfferSetEntityIdFilter_ValueList = &handles[488]
+
+var _OfferSetEntityIdFilterValueList = &handles[489]
+var _OfferSetEntityIdFilterValueList_member = &handles[490]
+
+var _OfferSetEntityIdString = &handles[491]
+
+var OfferSetFilters = &handles[492]
+var OfferSetFilters_EntityId = &handles[493]
+var OfferSetFilters_Name = &handles[494]
+var OfferSetFilters_State = &handles[495]
+var OfferSetFilters_ReleaseDate = &handles[496]
+var OfferSetFilters_AssociatedOfferIds = &handles[497]
+var OfferSetFilters_SolutionId = &handles[498]
+var OfferSetFilters_LastModifiedDate = &handles[499]
+
+var OfferSetIdFilter = &handles[500]
+var OfferSetIdFilter_ValueList = &handles[501]
+
+var _OfferSetIdFilterValueList = &handles[502]
+var _OfferSetIdFilterValueList_member = &handles[503]
+
+var _OfferSetIdString = &handles[504]
+
+var OfferSetLastModifiedDateFilter = &handles[505]
+var OfferSetLastModifiedDateFilter_DateRange = &handles[506]
+
+var OfferSetLastModifiedDateFilterDateRange = &handles[507]
+var OfferSetLastModifiedDateFilterDateRange_AfterValue = &handles[508]
+var OfferSetLastModifiedDateFilterDateRange_BeforeValue = &handles[509]
+
+var OfferSetNameFilter = &handles[510]
+var OfferSetNameFilter_ValueList = &handles[511]
+
+var _OfferSetNameFilterValueList = &handles[512]
+var _OfferSetNameFilterValueList_member = &handles[513]
+
+var _OfferSetNameString = &handles[514]
+
+var OfferSetReleaseDateFilter = &handles[515]
+var OfferSetReleaseDateFilter_DateRange = &handles[516]
+
+var OfferSetReleaseDateFilterDateRange = &handles[517]
+var OfferSetReleaseDateFilterDateRange_AfterValue = &handles[518]
+var OfferSetReleaseDateFilterDateRange_BeforeValue = &handles[519]
+
+var OfferSetSolutionIdFilter = &handles[520]
+var OfferSetSolutionIdFilter_ValueList = &handles[521]
+
+var _OfferSetSolutionIdFilterValueList = &handles[522]
+var _OfferSetSolutionIdFilterValueList_member = &handles[523]
+
+var _OfferSetSolutionIdString = &handles[524]
+
+var OfferSetSort = &handles[525]
+var OfferSetSort_SortBy = &handles[526]
+var OfferSetSort_SortOrder = &handles[527]
+
+var OfferSetSortBy = &handles[528]
+var OfferSetSortBy_Name = &handles[529]
+var OfferSetSortBy_State = &handles[530]
+var OfferSetSortBy_ReleaseDate = &handles[531]
+var OfferSetSortBy_SolutionId = &handles[532]
+var OfferSetSortBy_EntityId = &handles[533]
+var OfferSetSortBy_LastModifiedDate = &handles[534]
+
+var OfferSetStateFilter = &handles[535]
+var OfferSetStateFilter_ValueList = &handles[536]
+
+var _OfferSetStateFilterValueList = &handles[537]
+var _OfferSetStateFilterValueList_member = &handles[538]
+
+var OfferSetStateString = &handles[539]
+var OfferSetStateString_Draft = &handles[540]
+var OfferSetStateString_Released = &handles[541]
+
+var OfferSetSummary = &handles[542]
+var OfferSetSummary_Name = &handles[543]
+var OfferSetSummary_State = &handles[544]
+var OfferSetSummary_ReleaseDate = &handles[545]
+var OfferSetSummary_AssociatedOfferIds = &handles[546]
+var OfferSetSummary_SolutionId = &handles[547]
+
+var OfferSort = &handles[548]
+var OfferSort_SortBy = &handles[549]
+var OfferSort_SortOrder = &handles[550]
+
+var OfferSortBy = &handles[551]
+var OfferSortBy_EntityId = &handles[552]
+var OfferSortBy_Name = &handles[553]
+var OfferSortBy_ProductId = &handles[554]
+var OfferSortBy_ResaleAuthorizationId = &handles[555]
+var OfferSortBy_ReleaseDate = &handles[556]
+var OfferSortBy_AvailabilityEndDate = &handles[557]
+var OfferSortBy_BuyerAccounts = &handles[558]
+var OfferSortBy_State = &handles[559]
+var OfferSortBy_Targeting = &handles[560]
+var OfferSortBy_LastModifiedDate = &handles[561]
+var OfferSortBy_OfferSetId = &handles[562]
+var OfferSortBy_TargetAgreementId = &handles[563]
+var OfferSortBy_TargetAgreementIntent = &handles[564]
+var OfferSortBy_CreatedBySource = &handles[565]
+
+var OfferStateFilter = &handles[566]
+var OfferStateFilter_ValueList = &handles[567]
+
+var _OfferStateFilterValueList = &handles[568]
+var _OfferStateFilterValueList_member = &handles[569]
+
+var OfferStateString = &handles[570]
+var OfferStateString_Draft = &handles[571]
+var OfferStateString_Released = &handles[572]
+
+var OfferSummary = &handles[573]
+var OfferSummary_Name = &handles[574]
+var OfferSummary_ProductId = &handles[575]
+var OfferSummary_ResaleAuthorizationId = &handles[576]
+var OfferSummary_ReleaseDate = &handles[577]
+var OfferSummary_AvailabilityEndDate = &handles[578]
+var OfferSummary_BuyerAccounts = &handles[579]
+var OfferSummary_State = &handles[580]
+var OfferSummary_Targeting = &handles[581]
+var OfferSummary_OfferSetId = &handles[582]
+var OfferSummary_TargetAgreementId = &handles[583]
+var OfferSummary_TargetAgreementIntent = &handles[584]
+var OfferSummary_CreatedBySource = &handles[585]
+
+var OfferTargetAgreementIdFilter = &handles[586]
+var OfferTargetAgreementIdFilter_ValueList = &handles[587]
+
+var _OfferTargetAgreementIdFilterValueList = &handles[588]
+var _OfferTargetAgreementIdFilterValueList_member = &handles[589]
+
+var _OfferTargetAgreementIdString = &handles[590]
+
+var OfferTargetAgreementIntentFilter = &handles[591]
+var OfferTargetAgreementIntentFilter_ValueList = &handles[592]
+
+var _OfferTargetAgreementIntentFilterValueList = &handles[593]
+var _OfferTargetAgreementIntentFilterValueList_member = &handles[594]
+
+var OfferTargetAgreementIntentString = &handles[595]
+var OfferTargetAgreementIntentString_Renew = &handles[596]
+
+var OfferTargetingFilter = &handles[597]
+var OfferTargetingFilter_ValueList = &handles[598]
+
+var _OfferTargetingFilterValueList = &handles[599]
+var _OfferTargetingFilterValueList_member = &handles[600]
+
+var _OfferTargetingList = &handles[601]
+var _OfferTargetingList_member = &handles[602]
+
+var OfferTargetingString = &handles[603]
+var OfferTargetingString_BuyerAccounts = &handles[604]
+var OfferTargetingString_ParticipatingPrograms = &handles[605]
+var OfferTargetingString_CountryCodes = &handles[606]
+var OfferTargetingString_None = &handles[607]
+
+var OwnershipType = &handles[608]
+var OwnershipType_SELF = &handles[609]
+var OwnershipType_SHARED = &handles[610]
+
+var _RequestedChangeList = &handles[611]
+var _RequestedChangeList_member = &handles[612]
+
+var ResaleAuthorizationAvailabilityEndDateFilter = &handles[613]
+var ResaleAuthorizationAvailabilityEndDateFilter_DateRange = &handles[614]
+var ResaleAuthorizationAvailabilityEndDateFilter_ValueList = &handles[615]
+
+var ResaleAuthorizationAvailabilityEndDateFilterDateRange = &handles[616]
+var ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue = &handles[617]
+var ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue = &handles[618]
+
+var _ResaleAuthorizationAvailabilityEndDateFilterValueList = &handles[619]
+var _ResaleAuthorizationAvailabilityEndDateFilterValueList_member = &handles[620]
+
+var ResaleAuthorizationCreatedDateFilter = &handles[621]
+var ResaleAuthorizationCreatedDateFilter_DateRange = &handles[622]
+var ResaleAuthorizationCreatedDateFilter_ValueList = &handles[623]
+
+var ResaleAuthorizationCreatedDateFilterDateRange = &handles[624]
+var ResaleAuthorizationCreatedDateFilterDateRange_AfterValue = &handles[625]
+var ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue = &handles[626]
+
+var _ResaleAuthorizationCreatedDateFilterValueList = &handles[627]
+var _ResaleAuthorizationCreatedDateFilterValueList_member = &handles[628]
+
+var ResaleAuthorizationEntityIdFilter = &handles[629]
+var ResaleAuthorizationEntityIdFilter_ValueList = &handles[630]
+
+var _ResaleAuthorizationEntityIdFilterValueList = &handles[631]
+var _ResaleAuthorizationEntityIdFilterValueList_member = &handles[632]
+
+var _ResaleAuthorizationEntityIdString = &handles[633]
+
+var ResaleAuthorizationFilters = &handles[634]
+var ResaleAuthorizationFilters_EntityId = &handles[635]
+var ResaleAuthorizationFilters_Name = &handles[636]
+var ResaleAuthorizationFilters_ProductId = &handles[637]
+var ResaleAuthorizationFilters_CreatedDate = &handles[638]
+var ResaleAuthorizationFilters_AvailabilityEndDate = &handles[639]
+var ResaleAuthorizationFilters_ManufacturerAccountId = &handles[640]
+var ResaleAuthorizationFilters_ProductName = &handles[641]
+var ResaleAuthorizationFilters_ManufacturerLegalName = &handles[642]
+var ResaleAuthorizationFilters_ResellerAccountID = &handles[643]
+var ResaleAuthorizationFilters_ResellerLegalName = &handles[644]
+var ResaleAuthorizationFilters_Status = &handles[645]
+var ResaleAuthorizationFilters_OfferExtendedStatus = &handles[646]
+var ResaleAuthorizationFilters_LastModifiedDate = &handles[647]
+var ResaleAuthorizationFilters_ResellerRole = &handles[648]
+var ResaleAuthorizationFilters_SourceAuthorization = &handles[649]
+var ResaleAuthorizationFilters_IssuerAccountId = &handles[650]
+
+var ResaleAuthorizationIssuerAccountIdFilter = &handles[651]
+var ResaleAuthorizationIssuerAccountIdFilter_ValueList = &handles[652]
+
+var _ResaleAuthorizationIssuerAccountIdFilterValueList = &handles[653]
+var _ResaleAuthorizationIssuerAccountIdFilterValueList_member = &handles[654]
+
+var _ResaleAuthorizationIssuerAccountIdString = &handles[655]
+
+var ResaleAuthorizationLastModifiedDateFilter = &handles[656]
+var ResaleAuthorizationLastModifiedDateFilter_DateRange = &handles[657]
+
+var ResaleAuthorizationLastModifiedDateFilterDateRange = &handles[658]
+var ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue = &handles[659]
+var ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue = &handles[660]
+
+var ResaleAuthorizationManufacturerAccountIdFilter = &handles[661]
+var ResaleAuthorizationManufacturerAccountIdFilter_ValueList = &handles[662]
+var ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue = &handles[663]
+
+var _ResaleAuthorizationManufacturerAccountIdFilterValueList = &handles[664]
+var _ResaleAuthorizationManufacturerAccountIdFilterValueList_member = &handles[665]
+
+var _ResaleAuthorizationManufacturerAccountIdFilterWildcard = &handles[666]
+
+var _ResaleAuthorizationManufacturerAccountIdString = &handles[667]
+
+var ResaleAuthorizationManufacturerLegalNameFilter = &handles[668]
+var ResaleAuthorizationManufacturerLegalNameFilter_ValueList = &handles[669]
+var ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue = &handles[670]
+
+var _ResaleAuthorizationManufacturerLegalNameFilterValueList = &handles[671]
+var _ResaleAuthorizationManufacturerLegalNameFilterValueList_member = &handles[672]
+
+var _ResaleAuthorizationManufacturerLegalNameFilterWildcard = &handles[673]
+
+var _ResaleAuthorizationManufacturerLegalNameString = &handles[674]
+
+var ResaleAuthorizationNameFilter = &handles[675]
+var ResaleAuthorizationNameFilter_ValueList = &handles[676]
+var ResaleAuthorizationNameFilter_WildCardValue = &handles[677]
+
+var _ResaleAuthorizationNameFilterValueList = &handles[678]
+var _ResaleAuthorizationNameFilterValueList_member = &handles[679]
+
+var _ResaleAuthorizationNameFilterWildcard = &handles[680]
+
+var _ResaleAuthorizationNameString = &handles[681]
+
+var ResaleAuthorizationOfferExtendedStatusFilter = &handles[682]
+var ResaleAuthorizationOfferExtendedStatusFilter_ValueList = &handles[683]
+
+var _ResaleAuthorizationOfferExtendedStatusFilterValueList = &handles[684]
+var _ResaleAuthorizationOfferExtendedStatusFilterValueList_member = &handles[685]
+
+var _ResaleAuthorizationOfferExtendedStatusString = &handles[686]
+
+var ResaleAuthorizationProductIdFilter = &handles[687]
+var ResaleAuthorizationProductIdFilter_ValueList = &handles[688]
+var ResaleAuthorizationProductIdFilter_WildCardValue = &handles[689]
+
+var _ResaleAuthorizationProductIdFilterValueList = &handles[690]
+var _ResaleAuthorizationProductIdFilterValueList_member = &handles[691]
+
+var _ResaleAuthorizationProductIdFilterWildcard = &handles[692]
+
+var _ResaleAuthorizationProductIdString = &handles[693]
+
+var ResaleAuthorizationProductNameFilter = &handles[694]
+var ResaleAuthorizationProductNameFilter_ValueList = &handles[695]
+var ResaleAuthorizationProductNameFilter_WildCardValue = &handles[696]
+
+var _ResaleAuthorizationProductNameFilterValueList = &handles[697]
+var _ResaleAuthorizationProductNameFilterValueList_member = &handles[698]
+
+var _ResaleAuthorizationProductNameFilterWildcard = &handles[699]
+
+var _ResaleAuthorizationProductNameString = &handles[700]
+
+var ResaleAuthorizationResellerAccountIDFilter = &handles[701]
+var ResaleAuthorizationResellerAccountIDFilter_ValueList = &handles[702]
+var ResaleAuthorizationResellerAccountIDFilter_WildCardValue = &handles[703]
+
+var _ResaleAuthorizationResellerAccountIDFilterValueList = &handles[704]
+var _ResaleAuthorizationResellerAccountIDFilterValueList_member = &handles[705]
+
+var _ResaleAuthorizationResellerAccountIDFilterWildcard = &handles[706]
+
+var _ResaleAuthorizationResellerAccountIDString = &handles[707]
+
+var ResaleAuthorizationResellerLegalNameFilter = &handles[708]
+var ResaleAuthorizationResellerLegalNameFilter_ValueList = &handles[709]
+var ResaleAuthorizationResellerLegalNameFilter_WildCardValue = &handles[710]
+
+var _ResaleAuthorizationResellerLegalNameFilterValueList = &handles[711]
+var _ResaleAuthorizationResellerLegalNameFilterValueList_member = &handles[712]
+
+var _ResaleAuthorizationResellerLegalNameFilterWildcard = &handles[713]
+
+var _ResaleAuthorizationResellerLegalNameString = &handles[714]
+
+var ResaleAuthorizationResellerRoleFilter = &handles[715]
+var ResaleAuthorizationResellerRoleFilter_ValueList = &handles[716]
+
+var _ResaleAuthorizationResellerRoleFilterValueList = &handles[717]
+var _ResaleAuthorizationResellerRoleFilterValueList_member = &handles[718]
+
+var ResaleAuthorizationResellerRoleString = &handles[719]
+var ResaleAuthorizationResellerRoleString_ChannelPartner = &handles[720]
+var ResaleAuthorizationResellerRoleString_Distributor = &handles[721]
+
+var ResaleAuthorizationSort = &handles[722]
+var ResaleAuthorizationSort_SortBy = &handles[723]
+var ResaleAuthorizationSort_SortOrder = &handles[724]
+
+var ResaleAuthorizationSortBy = &handles[725]
+var ResaleAuthorizationSortBy_EntityId = &handles[726]
+var ResaleAuthorizationSortBy_Name = &handles[727]
+var ResaleAuthorizationSortBy_ProductId = &handles[728]
+var ResaleAuthorizationSortBy_ProductName = &handles[729]
+var ResaleAuthorizationSortBy_ManufacturerAccountId = &handles[730]
+var ResaleAuthorizationSortBy_ManufacturerLegalName = &handles[731]
+var ResaleAuthorizationSortBy_ResellerAccountID = &handles[732]
+var ResaleAuthorizationSortBy_ResellerLegalName = &handles[733]
+var ResaleAuthorizationSortBy_Status = &handles[734]
+var ResaleAuthorizationSortBy_OfferExtendedStatus = &handles[735]
+var ResaleAuthorizationSortBy_CreatedDate = &handles[736]
+var ResaleAuthorizationSortBy_AvailabilityEndDate = &handles[737]
+var ResaleAuthorizationSortBy_LastModifiedDate = &handles[738]
+var ResaleAuthorizationSortBy_ResellerRole = &handles[739]
+var ResaleAuthorizationSortBy_SourceAuthorization = &handles[740]
+var ResaleAuthorizationSortBy_IssuerAccountId = &handles[741]
+
+var ResaleAuthorizationSourceAuthorizationFilter = &handles[742]
+var ResaleAuthorizationSourceAuthorizationFilter_ValueList = &handles[743]
+
+var _ResaleAuthorizationSourceAuthorizationFilterValueList = &handles[744]
+var _ResaleAuthorizationSourceAuthorizationFilterValueList_member = &handles[745]
+
+var _ResaleAuthorizationSourceAuthorizationString = &handles[746]
+
+var ResaleAuthorizationStatusFilter = &handles[747]
+var ResaleAuthorizationStatusFilter_ValueList = &handles[748]
+
+var _ResaleAuthorizationStatusFilterValueList = &handles[749]
+var _ResaleAuthorizationStatusFilterValueList_member = &handles[750]
+
+var ResaleAuthorizationStatusString = &handles[751]
+var ResaleAuthorizationStatusString_Draft = &handles[752]
+var ResaleAuthorizationStatusString_Active = &handles[753]
+var ResaleAuthorizationStatusString_Restricted = &handles[754]
+
+var ResaleAuthorizationSummary = &handles[755]
+var ResaleAuthorizationSummary_Name = &handles[756]
+var ResaleAuthorizationSummary_ProductId = &handles[757]
+var ResaleAuthorizationSummary_ProductName = &handles[758]
+var ResaleAuthorizationSummary_ManufacturerAccountId = &handles[759]
+var ResaleAuthorizationSummary_ManufacturerLegalName = &handles[760]
+var ResaleAuthorizationSummary_ResellerAccountID = &handles[761]
+var ResaleAuthorizationSummary_ResellerLegalName = &handles[762]
+var ResaleAuthorizationSummary_Status = &handles[763]
+var ResaleAuthorizationSummary_OfferExtendedStatus = &handles[764]
+var ResaleAuthorizationSummary_CreatedDate = &handles[765]
+var ResaleAuthorizationSummary_AvailabilityEndDate = &handles[766]
+var ResaleAuthorizationSummary_ResellerRole = &handles[767]
+var ResaleAuthorizationSummary_SourceAuthorization = &handles[768]
+var ResaleAuthorizationSummary_IssuerAccountId = &handles[769]
+
+var _ResourceARN = &handles[770]
+
+var _ResourceId = &handles[771]
+
+var _ResourceIdList = &handles[772]
+var _ResourceIdList_member = &handles[773]
+
+var ResourceInUseException = &handles[774]
+var ResourceInUseException_Message = &handles[775]
+
+var ResourceNotFoundException = &handles[776]
+var ResourceNotFoundException_Message = &handles[777]
+
+var ResourceNotSupportedException = &handles[778]
+var ResourceNotSupportedException_Message = &handles[779]
+
+var _ResourcePolicyJson = &handles[780]
+
+var SaaSProductEntityIdFilter = &handles[781]
+var SaaSProductEntityIdFilter_ValueList = &handles[782]
+
+var _SaaSProductEntityIdFilterValueList = &handles[783]
+var _SaaSProductEntityIdFilterValueList_member = &handles[784]
+
+var _SaaSProductEntityIdString = &handles[785]
+
+var SaaSProductFilters = &handles[786]
+var SaaSProductFilters_EntityId = &handles[787]
+var SaaSProductFilters_ProductTitle = &handles[788]
+var SaaSProductFilters_Visibility = &handles[789]
+var SaaSProductFilters_LastModifiedDate = &handles[790]
+
+var SaaSProductLastModifiedDateFilter = &handles[791]
+var SaaSProductLastModifiedDateFilter_DateRange = &handles[792]
+
+var SaaSProductLastModifiedDateFilterDateRange = &handles[793]
+var SaaSProductLastModifiedDateFilterDateRange_AfterValue = &handles[794]
+var SaaSProductLastModifiedDateFilterDateRange_BeforeValue = &handles[795]
+
+var SaaSProductSort = &handles[796]
+var SaaSProductSort_SortBy = &handles[797]
+var SaaSProductSort_SortOrder = &handles[798]
+
+var SaaSProductSortBy = &handles[799]
+var SaaSProductSortBy_EntityId = &handles[800]
+var SaaSProductSortBy_ProductTitle = &handles[801]
+var SaaSProductSortBy_Visibility = &handles[802]
+var SaaSProductSortBy_LastModifiedDate = &handles[803]
+var SaaSProductSortBy_DeliveryOptionTypes = &handles[804]
+
+var SaaSProductSummary = &handles[805]
+var SaaSProductSummary_ProductTitle = &handles[806]
+var SaaSProductSummary_Visibility = &handles[807]
+
+var SaaSProductTitleFilter = &handles[808]
+var SaaSProductTitleFilter_ValueList = &handles[809]
+var SaaSProductTitleFilter_WildCardValue = &handles[810]
+
+var _SaaSProductTitleFilterValueList = &handles[811]
+var _SaaSProductTitleFilterValueList_member = &handles[812]
+
+var _SaaSProductTitleString = &handles[813]
+
+var SaaSProductVisibilityFilter = &handles[814]
+var SaaSProductVisibilityFilter_ValueList = &handles[815]
+
+var _SaaSProductVisibilityFilterValueList = &handles[816]
+var _SaaSProductVisibilityFilterValueList_member = &handles[817]
+
+var SaaSProductVisibilityString = &handles[818]
+var SaaSProductVisibilityString_Limited = &handles[819]
+var SaaSProductVisibilityString_Public = &handles[820]
+var SaaSProductVisibilityString_Restricted = &handles[821]
+var SaaSProductVisibilityString_Draft = &handles[822]
+
+var _ScopeName = &handles[823]
+
+var _ScopeValue = &handles[824]
+
+var ServiceQuotaExceededException = &handles[825]
+var ServiceQuotaExceededException_Message = &handles[826]
+
+var Sort = &handles[827]
+var Sort_SortBy = &handles[828]
+var Sort_SortOrder = &handles[829]
+
+var _SortBy = &handles[830]
+
+var SortOrder = &handles[831]
+var SortOrder_ASCENDING = &handles[832]
+var SortOrder_DESCENDING = &handles[833]
+
+var SubsidiaryAuthorizationCreatedDateFilter = &handles[834]
+var SubsidiaryAuthorizationCreatedDateFilter_DateRange = &handles[835]
+
+var SubsidiaryAuthorizationCreatedDateFilterDateRange = &handles[836]
+var SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue = &handles[837]
+var SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue = &handles[838]
+
+var SubsidiaryAuthorizationEntityIdFilter = &handles[839]
+var SubsidiaryAuthorizationEntityIdFilter_ValueList = &handles[840]
+
+var _SubsidiaryAuthorizationEntityIdFilterValueList = &handles[841]
+var _SubsidiaryAuthorizationEntityIdFilterValueList_member = &handles[842]
+
+var _SubsidiaryAuthorizationEntityIdString = &handles[843]
+
+var SubsidiaryAuthorizationFilters = &handles[844]
+var SubsidiaryAuthorizationFilters_EntityId = &handles[845]
+var SubsidiaryAuthorizationFilters_Status = &handles[846]
+var SubsidiaryAuthorizationFilters_ResourceId = &handles[847]
+var SubsidiaryAuthorizationFilters_ResourceName = &handles[848]
+var SubsidiaryAuthorizationFilters_Name = &handles[849]
+var SubsidiaryAuthorizationFilters_SubsidiaryAccountId = &handles[850]
+var SubsidiaryAuthorizationFilters_CreatedDate = &handles[851]
+var SubsidiaryAuthorizationFilters_LastModifiedDate = &handles[852]
+
+var SubsidiaryAuthorizationLastModifiedDateFilter = &handles[853]
+var SubsidiaryAuthorizationLastModifiedDateFilter_DateRange = &handles[854]
+
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange = &handles[855]
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue = &handles[856]
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue = &handles[857]
+
+var SubsidiaryAuthorizationNameFilter = &handles[858]
+var SubsidiaryAuthorizationNameFilter_ValueList = &handles[859]
+var SubsidiaryAuthorizationNameFilter_WildCardValue = &handles[860]
+
+var _SubsidiaryAuthorizationNameFilterValueList = &handles[861]
+var _SubsidiaryAuthorizationNameFilterValueList_member = &handles[862]
+
+var _SubsidiaryAuthorizationNameFilterWildcard = &handles[863]
+
+var _SubsidiaryAuthorizationNameString = &handles[864]
+
+var SubsidiaryAuthorizationResourceIdFilter = &handles[865]
+var SubsidiaryAuthorizationResourceIdFilter_ValueList = &handles[866]
+
+var _SubsidiaryAuthorizationResourceIdFilterValueList = &handles[867]
+var _SubsidiaryAuthorizationResourceIdFilterValueList_member = &handles[868]
+
+var _SubsidiaryAuthorizationResourceIdString = &handles[869]
+
+var SubsidiaryAuthorizationResourceNameFilter = &handles[870]
+var SubsidiaryAuthorizationResourceNameFilter_ValueList = &handles[871]
+var SubsidiaryAuthorizationResourceNameFilter_WildCardValue = &handles[872]
+
+var _SubsidiaryAuthorizationResourceNameFilterValueList = &handles[873]
+var _SubsidiaryAuthorizationResourceNameFilterValueList_member = &handles[874]
+
+var _SubsidiaryAuthorizationResourceNameFilterWildcard = &handles[875]
+
+var _SubsidiaryAuthorizationResourceNameString = &handles[876]
+
+var SubsidiaryAuthorizationSort = &handles[877]
+var SubsidiaryAuthorizationSort_SortBy = &handles[878]
+var SubsidiaryAuthorizationSort_SortOrder = &handles[879]
+
+var SubsidiaryAuthorizationSortBy = &handles[880]
+var SubsidiaryAuthorizationSortBy_EntityId = &handles[881]
+var SubsidiaryAuthorizationSortBy_Status = &handles[882]
+var SubsidiaryAuthorizationSortBy_ResourceId = &handles[883]
+var SubsidiaryAuthorizationSortBy_SubsidiaryAccountId = &handles[884]
+var SubsidiaryAuthorizationSortBy_CreatedDate = &handles[885]
+var SubsidiaryAuthorizationSortBy_LastModifiedDate = &handles[886]
+
+var SubsidiaryAuthorizationStatusFilter = &handles[887]
+var SubsidiaryAuthorizationStatusFilter_ValueList = &handles[888]
+
+var _SubsidiaryAuthorizationStatusFilterValueList = &handles[889]
+var _SubsidiaryAuthorizationStatusFilterValueList_member = &handles[890]
+
+var SubsidiaryAuthorizationStatusString = &handles[891]
+var SubsidiaryAuthorizationStatusString_Draft = &handles[892]
+var SubsidiaryAuthorizationStatusString_Active = &handles[893]
+var SubsidiaryAuthorizationStatusString_Restricted = &handles[894]
+
+var SubsidiaryAuthorizationSubsidiaryAccountIdFilter = &handles[895]
+var SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList = &handles[896]
+
+var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = &handles[897]
+var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member = &handles[898]
+
+var _SubsidiaryAuthorizationSubsidiaryAccountIdString = &handles[899]
+
+var SubsidiaryAuthorizationSummary = &handles[900]
+var SubsidiaryAuthorizationSummary_Name = &handles[901]
+var SubsidiaryAuthorizationSummary_Status = &handles[902]
+var SubsidiaryAuthorizationSummary_ResourceId = &handles[903]
+var SubsidiaryAuthorizationSummary_ResourceName = &handles[904]
+var SubsidiaryAuthorizationSummary_SubsidiaryAccountId = &handles[905]
+var SubsidiaryAuthorizationSummary_CreatedDate = &handles[906]
+
+var _SubsidiaryAuthorizationSummaryNameString = &handles[907]
+
+var _SubsidiaryAuthorizationSummaryResourceIdString = &handles[908]
+
+var _SubsidiaryAuthorizationSummaryResourceNameString = &handles[909]
+
+var _SubsidiaryAuthorizationSummaryStatusString = &handles[910]
+
+var _SubsidiaryAuthorizationSummarySubsidiaryAccountIdString = &handles[911]
+
+var Tag = &handles[912]
+var Tag_Key = &handles[913]
+var Tag_Value = &handles[914]
+
+var _TagKey = &handles[915]
+
+var _TagKeyList = &handles[916]
+var _TagKeyList_member = &handles[917]
+
+var _TagList = &handles[918]
+var _TagList_member = &handles[919]
+
+var _TagValue = &handles[920]
+
+var ThrottlingException = &handles[921]
+var ThrottlingException_Message = &handles[922]
+
+var ValidationException = &handles[923]
+var ValidationException_Message = &handles[924]
+var ValidationException_ValidationExceptionFieldList = &handles[925]
+
+var ValidationExceptionField = &handles[926]
+var ValidationExceptionField_Reason = &handles[927]
+var ValidationExceptionField_EntityType = &handles[928]
+var ValidationExceptionField_EntityId = &handles[929]
+var ValidationExceptionField_ChangeType = &handles[930]
+var ValidationExceptionField_Field = &handles[931]
+var ValidationExceptionField_Message = &handles[932]
+
+var _ValidationExceptionFieldList = &handles[933]
+var _ValidationExceptionFieldList_member = &handles[934]
+
+var ValidationExceptionReason = &handles[935]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[936]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[937]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[938]
+var ValidationExceptionReason_OTHER = &handles[939]
+
+var _ValueList = &handles[940]
+var _ValueList_member = &handles[941]
+
+var _VersionedFrameworkId = &handles[942]
+
+var _VisibilityValue = &handles[943]
+
+var BatchDescribeEntitiesRequest = &handles[944]
+var BatchDescribeEntitiesRequest_EntityRequestList = &handles[945]
+
+var BatchDescribeEntitiesResponse = &handles[946]
+var BatchDescribeEntitiesResponse_EntityDetails = &handles[947]
+var BatchDescribeEntitiesResponse_Errors = &handles[948]
+
+var CancelChangeSetRequest = &handles[949]
+var CancelChangeSetRequest_Catalog = &handles[950]
+var CancelChangeSetRequest_ChangeSetId = &handles[951]
+
+var CancelChangeSetResponse = &handles[952]
+var CancelChangeSetResponse_ChangeSetId = &handles[953]
+var CancelChangeSetResponse_ChangeSetArn = &handles[954]
+
+var DeleteResourcePolicyRequest = &handles[955]
+var DeleteResourcePolicyRequest_ResourceArn = &handles[956]
+
+var DeleteResourcePolicyResponse = &handles[957]
+
+var DescribeAssessmentRequest = &handles[958]
+var DescribeAssessmentRequest_Catalog = &handles[959]
+var DescribeAssessmentRequest_AssessmentIdentifier = &handles[960]
+var DescribeAssessmentRequest_MaxResults = &handles[961]
+var DescribeAssessmentRequest_NextToken = &handles[962]
+
+var DescribeAssessmentResponse = &handles[963]
+var DescribeAssessmentResponse_AssessmentArn = &handles[964]
+var DescribeAssessmentResponse_AssessmentId = &handles[965]
+var DescribeAssessmentResponse_FrameworkId = &handles[966]
+var DescribeAssessmentResponse_AssessmentTargetSummary = &handles[967]
+var DescribeAssessmentResponse_FrameworkSummary = &handles[968]
+var DescribeAssessmentResponse_AssessmentResult = &handles[969]
+var DescribeAssessmentResponse_CreatedAt = &handles[970]
+var DescribeAssessmentResponse_ExpiresAt = &handles[971]
+var DescribeAssessmentResponse_ControlAssessments = &handles[972]
+var DescribeAssessmentResponse_NextToken = &handles[973]
+
+var DescribeChangeSetRequest = &handles[974]
+var DescribeChangeSetRequest_Catalog = &handles[975]
+var DescribeChangeSetRequest_ChangeSetId = &handles[976]
+
+var DescribeChangeSetResponse = &handles[977]
+var DescribeChangeSetResponse_ChangeSetId = &handles[978]
+var DescribeChangeSetResponse_ChangeSetArn = &handles[979]
+var DescribeChangeSetResponse_ChangeSetName = &handles[980]
+var DescribeChangeSetResponse_Intent = &handles[981]
+var DescribeChangeSetResponse_StartTime = &handles[982]
+var DescribeChangeSetResponse_EndTime = &handles[983]
+var DescribeChangeSetResponse_Status = &handles[984]
+var DescribeChangeSetResponse_FailureCode = &handles[985]
+var DescribeChangeSetResponse_FailureDescription = &handles[986]
+var DescribeChangeSetResponse_ChangeSet = &handles[987]
+
+var DescribeEntityRequest = &handles[988]
+var DescribeEntityRequest_Catalog = &handles[989]
+var DescribeEntityRequest_EntityId = &handles[990]
+
+var DescribeEntityResponse = &handles[991]
+var DescribeEntityResponse_EntityType = &handles[992]
+var DescribeEntityResponse_EntityIdentifier = &handles[993]
+var DescribeEntityResponse_EntityArn = &handles[994]
+var DescribeEntityResponse_LastModifiedDate = &handles[995]
+var DescribeEntityResponse_Details = &handles[996]
+var DescribeEntityResponse_DetailsDocument = &handles[997]
+
+var GetResourcePolicyRequest = &handles[998]
+var GetResourcePolicyRequest_ResourceArn = &handles[999]
+
+var GetResourcePolicyResponse = &handles[1000]
+var GetResourcePolicyResponse_Policy = &handles[1001]
+
+var ListAssessmentsRequest = &handles[1002]
+var ListAssessmentsRequest_Catalog = &handles[1003]
+var ListAssessmentsRequest_FrameworkId = &handles[1004]
+var ListAssessmentsRequest_AssessmentTargetFilter = &handles[1005]
+var ListAssessmentsRequest_FrameworkFilters = &handles[1006]
+var ListAssessmentsRequest_MaxResults = &handles[1007]
+var ListAssessmentsRequest_NextToken = &handles[1008]
+
+var ListAssessmentsResponse = &handles[1009]
+var ListAssessmentsResponse_AssessmentSummaryList = &handles[1010]
+var ListAssessmentsResponse_NextToken = &handles[1011]
+
+var ListChangeSetsRequest = &handles[1012]
+var ListChangeSetsRequest_Catalog = &handles[1013]
+var ListChangeSetsRequest_FilterList = &handles[1014]
+var ListChangeSetsRequest_Sort = &handles[1015]
+var ListChangeSetsRequest_MaxResults = &handles[1016]
+var ListChangeSetsRequest_NextToken = &handles[1017]
+
+var ListChangeSetsResponse = &handles[1018]
+var ListChangeSetsResponse_ChangeSetSummaryList = &handles[1019]
+var ListChangeSetsResponse_NextToken = &handles[1020]
+
+var ListEntitiesRequest = &handles[1021]
+var ListEntitiesRequest_Catalog = &handles[1022]
+var ListEntitiesRequest_EntityType = &handles[1023]
+var ListEntitiesRequest_FilterList = &handles[1024]
+var ListEntitiesRequest_Sort = &handles[1025]
+var ListEntitiesRequest_NextToken = &handles[1026]
+var ListEntitiesRequest_MaxResults = &handles[1027]
+var ListEntitiesRequest_OwnershipType = &handles[1028]
+var ListEntitiesRequest_EntityTypeFilters = &handles[1029]
+var ListEntitiesRequest_EntityTypeSort = &handles[1030]
+
+var ListEntitiesResponse = &handles[1031]
+var ListEntitiesResponse_EntitySummaryList = &handles[1032]
+var ListEntitiesResponse_NextToken = &handles[1033]
+
+var ListTagsForResourceRequest = &handles[1034]
+var ListTagsForResourceRequest_ResourceArn = &handles[1035]
+
+var ListTagsForResourceResponse = &handles[1036]
+var ListTagsForResourceResponse_ResourceArn = &handles[1037]
+var ListTagsForResourceResponse_Tags = &handles[1038]
+
+var PutResourcePolicyRequest = &handles[1039]
+var PutResourcePolicyRequest_ResourceArn = &handles[1040]
+var PutResourcePolicyRequest_Policy = &handles[1041]
+
+var PutResourcePolicyResponse = &handles[1042]
+
+var StartChangeSetRequest = &handles[1043]
+var StartChangeSetRequest_Catalog = &handles[1044]
+var StartChangeSetRequest_ChangeSet = &handles[1045]
+var StartChangeSetRequest_ChangeSetName = &handles[1046]
+var StartChangeSetRequest_ClientRequestToken = &handles[1047]
+var StartChangeSetRequest_ChangeSetTags = &handles[1048]
+var StartChangeSetRequest_Intent = &handles[1049]
+
+var StartChangeSetResponse = &handles[1050]
+var StartChangeSetResponse_ChangeSetId = &handles[1051]
+var StartChangeSetResponse_ChangeSetArn = &handles[1052]
+
+var TagResourceRequest = &handles[1053]
+var TagResourceRequest_ResourceArn = &handles[1054]
+var TagResourceRequest_Tags = &handles[1055]
+
+var TagResourceResponse = &handles[1056]
+
+var UntagResourceRequest = &handles[1057]
+var UntagResourceRequest_ResourceArn = &handles[1058]
+var UntagResourceRequest_TagKeys = &handles[1059]
+
+var UntagResourceResponse = &handles[1060]
+
+var AWSMPSeymour = &smithy.ServiceSchema{Schema: &handles[15], Version: "2018-09-17"}

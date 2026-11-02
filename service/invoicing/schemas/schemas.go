@@ -4,2352 +4,1974 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetInvoiceProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BatchGetInvoiceProfile",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateInvoiceUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CreateInvoiceUnit",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateProcurementPortalPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CreateProcurementPortalPreference",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteInvoiceUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DeleteInvoiceUnit",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteProcurementPortalPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DeleteProcurementPortalPreference",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetInvoicePDF = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetInvoicePDF",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetInvoiceUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetInvoiceUnit",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetProcurementPortalPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetProcurementPortalPreference",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListInvoiceSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListInvoiceSummaries",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListInvoiceUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListInvoiceUnits",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProcurementPortalPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortalPreferences",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProcurementPortals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortals",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProcurementPortalSuppliers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortalSuppliers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutProcurementPortalPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "PutProcurementPortalPreference",
-}, smithy.ShapeTypeOperation, 0)
-
-var SendProcurementPortalValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SendProcurementPortalValidation",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateInvoiceUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UpdateInvoiceUnit",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProcurementPortalPreferenceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UpdateProcurementPortalPreferenceStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var VerifyProcurementPortalValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "VerifyProcurementPortalValidation",
-}, smithy.ShapeTypeOperation, 0)
-
-var _Invoicing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "Invoicing",
-}, smithy.ShapeTypeService, 0)
-
-var Invoicing = smithy.NewServiceSchema(_Invoicing, "2024-12-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "InvoicingAccessDenied",
-		StatusCode: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessDeniedException_resourceName *smithy.Schema
-
-var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "AccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdList_member *smithy.Schema
-
-var _AccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "AccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var AmountBreakdown = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "AmountBreakdown",
-}, smithy.ShapeTypeStructure, 4)
-var AmountBreakdown_SubTotalAmount *smithy.Schema
-
-var AmountBreakdown_Discounts *smithy.Schema
-
-var AmountBreakdown_Taxes *smithy.Schema
-
-var AmountBreakdown_Fees *smithy.Schema
-
-var _AsOfTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "AsOfTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _BasicString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BasicString",
-}, smithy.ShapeTypeString, 0)
-
-var _BasicStringWithoutSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BasicStringWithoutSpace",
-}, smithy.ShapeTypeString, 0)
-
-var BillingEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BillingEntity",
-}, smithy.ShapeTypeEnum, 2)
-var BillingEntity_AWS *smithy.Schema
-
-var BillingEntity_AWS_MARKETPLACE *smithy.Schema
-
-var BillingPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BillingPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var BillingPeriod_Month *smithy.Schema
-
-var BillingPeriod_Year *smithy.Schema
-
-var _BillSourceAccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BillSourceAccountList",
-}, smithy.ShapeTypeList, 1)
-var _BillSourceAccountList_member *smithy.Schema
-
-var BillType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BillType",
-}, smithy.ShapeTypeEnum, 3)
-var BillType_ANNIVERSARY *smithy.Schema
-
-var BillType_PURCHASE *smithy.Schema
-
-var BillType_REFUND *smithy.Schema
-
-var BuyerDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BuyerDomain",
-}, smithy.ShapeTypeEnum, 1)
-var BuyerDomain_NetworkID *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "InvoicingConflict",
-		StatusCode: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var ConnectionTestingMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ConnectionTestingMethod",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectionTestingMethod_PROD_ENV_DOLLAR_TEST *smithy.Schema
-
-var ConnectionTestingMethod_TEST_ENV_REPLAY_TEST *smithy.Schema
-
-var Contact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var Contact_Name *smithy.Schema
-
-var Contact_Email *smithy.Schema
-
-var _Contacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "Contacts",
-}, smithy.ShapeTypeList, 1)
-var _Contacts_member *smithy.Schema
-
-var _CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CountryCode",
-}, smithy.ShapeTypeString, 0)
-
-var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CurrencyCode",
-}, smithy.ShapeTypeString, 0)
-
-var CurrencyExchangeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CurrencyExchangeDetails",
-}, smithy.ShapeTypeStructure, 3)
-var CurrencyExchangeDetails_SourceCurrencyCode *smithy.Schema
-
-var CurrencyExchangeDetails_TargetCurrencyCode *smithy.Schema
-
-var CurrencyExchangeDetails_Rate *smithy.Schema
-
-var DateInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DateInterval",
-}, smithy.ShapeTypeStructure, 2)
-var DateInterval_StartDate *smithy.Schema
-
-var DateInterval_EndDate *smithy.Schema
-
-var _DescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var DiscountsBreakdown = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DiscountsBreakdown",
-}, smithy.ShapeTypeStructure, 2)
-var DiscountsBreakdown_Breakdown *smithy.Schema
-
-var DiscountsBreakdown_TotalAmount *smithy.Schema
-
-var DiscountsBreakdownAmount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DiscountsBreakdownAmount",
-}, smithy.ShapeTypeStructure, 3)
-var DiscountsBreakdownAmount_Description *smithy.Schema
-
-var DiscountsBreakdownAmount_Amount *smithy.Schema
-
-var DiscountsBreakdownAmount_Rate *smithy.Schema
-
-var _DiscountsBreakdownAmountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DiscountsBreakdownAmountList",
-}, smithy.ShapeTypeList, 1)
-var _DiscountsBreakdownAmountList_member *smithy.Schema
-
-var EinvoiceDeliveryAttachmentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "EinvoiceDeliveryAttachmentType",
-}, smithy.ShapeTypeEnum, 2)
-var EinvoiceDeliveryAttachmentType_INVOICE_PDF *smithy.Schema
-
-var EinvoiceDeliveryAttachmentType_RFP_PDF *smithy.Schema
-
-var _EinvoiceDeliveryAttachmentTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "EinvoiceDeliveryAttachmentTypes",
-}, smithy.ShapeTypeList, 1)
-var _EinvoiceDeliveryAttachmentTypes_member *smithy.Schema
-
-var EinvoiceDeliveryDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "EinvoiceDeliveryDocumentType",
-}, smithy.ShapeTypeEnum, 5)
-var EinvoiceDeliveryDocumentType_AWS_CLOUD_INVOICE *smithy.Schema
-
-var EinvoiceDeliveryDocumentType_AWS_CLOUD_CREDIT_MEMO *smithy.Schema
-
-var EinvoiceDeliveryDocumentType_AWS_MARKETPLACE_INVOICE *smithy.Schema
-
-var EinvoiceDeliveryDocumentType_AWS_MARKETPLACE_CREDIT_MEMO *smithy.Schema
-
-var EinvoiceDeliveryDocumentType_AWS_REQUEST_FOR_PAYMENT *smithy.Schema
-
-var _EinvoiceDeliveryDocumentTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "EinvoiceDeliveryDocumentTypes",
-}, smithy.ShapeTypeList, 1)
-var _EinvoiceDeliveryDocumentTypes_member *smithy.Schema
-
-var EinvoiceDeliveryPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "EinvoiceDeliveryPreference",
-}, smithy.ShapeTypeStructure, 6)
-var EinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes *smithy.Schema
-
-var EinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes *smithy.Schema
-
-var EinvoiceDeliveryPreference_Protocol *smithy.Schema
-
-var EinvoiceDeliveryPreference_PurchaseOrderDataSources *smithy.Schema
-
-var EinvoiceDeliveryPreference_ConnectionTestingMethod *smithy.Schema
-
-var EinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate *smithy.Schema
-
-var EinvoiceDeliveryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "EinvoiceDeliveryStatus",
-}, smithy.ShapeTypeEnum, 2)
-var EinvoiceDeliveryStatus_DELIVERED *smithy.Schema
-
-var EinvoiceDeliveryStatus_NOT_DELIVERED *smithy.Schema
-
-var _EmailString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "EmailString",
-}, smithy.ShapeTypeString, 0)
-
-var Entity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "Entity",
-}, smithy.ShapeTypeStructure, 2)
-var Entity_InvoicingEntity *smithy.Schema
-
-var Entity_BillingEntity *smithy.Schema
-
-var FeatureConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "FeatureConfigurations",
-}, smithy.ShapeTypeStructure, 1)
-var FeatureConfigurations_InvoiceConfiguration *smithy.Schema
-
-var FeesBreakdown = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "FeesBreakdown",
-}, smithy.ShapeTypeStructure, 2)
-var FeesBreakdown_Breakdown *smithy.Schema
-
-var FeesBreakdown_TotalAmount *smithy.Schema
-
-var FeesBreakdownAmount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "FeesBreakdownAmount",
-}, smithy.ShapeTypeStructure, 3)
-var FeesBreakdownAmount_Description *smithy.Schema
-
-var FeesBreakdownAmount_Amount *smithy.Schema
-
-var FeesBreakdownAmount_Rate *smithy.Schema
-
-var _FeesBreakdownAmountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "FeesBreakdownAmountList",
-}, smithy.ShapeTypeList, 1)
-var _FeesBreakdownAmountList_member *smithy.Schema
-
-var Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "Filters",
-}, smithy.ShapeTypeStructure, 4)
-var Filters_Names *smithy.Schema
-
-var Filters_InvoiceReceivers *smithy.Schema
-
-var Filters_Accounts *smithy.Schema
-
-var Filters_BillSourceAccounts *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InvoicingInternalServer",
-		StatusCode: 500})
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var InternalServerException_message *smithy.Schema
-
-var InvoiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var InvoiceConfiguration_DocumentTypes *smithy.Schema
-
-var InvoiceConfiguration_AttachmentTypes *smithy.Schema
-
-var InvoiceCurrencyAmount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceCurrencyAmount",
-}, smithy.ShapeTypeStructure, 5)
-var InvoiceCurrencyAmount_TotalAmount *smithy.Schema
-
-var InvoiceCurrencyAmount_TotalAmountBeforeTax *smithy.Schema
-
-var InvoiceCurrencyAmount_CurrencyCode *smithy.Schema
-
-var InvoiceCurrencyAmount_AmountBreakdown *smithy.Schema
-
-var InvoiceCurrencyAmount_CurrencyExchangeDetails *smithy.Schema
-
-var InvoiceFrequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceFrequency",
-}, smithy.ShapeTypeEnum, 2)
-var InvoiceFrequency_ONE_TIME *smithy.Schema
-
-var InvoiceFrequency_RECURRING *smithy.Schema
-
-var InvoicePDF = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoicePDF",
-}, smithy.ShapeTypeStructure, 4)
-var InvoicePDF_InvoiceId *smithy.Schema
-
-var InvoicePDF_DocumentUrl *smithy.Schema
-
-var InvoicePDF_DocumentUrlExpirationDate *smithy.Schema
-
-var InvoicePDF_SupplementalDocuments *smithy.Schema
-
-var InvoiceProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceProfile",
-}, smithy.ShapeTypeStructure, 6)
-var InvoiceProfile_AccountId *smithy.Schema
-
-var InvoiceProfile_ReceiverName *smithy.Schema
-
-var InvoiceProfile_ReceiverAddress *smithy.Schema
-
-var InvoiceProfile_ReceiverEmail *smithy.Schema
-
-var InvoiceProfile_Issuer *smithy.Schema
-
-var InvoiceProfile_TaxRegistrationNumber *smithy.Schema
-
-var _InvoiceSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceSummaries",
-}, smithy.ShapeTypeList, 1)
-var _InvoiceSummaries_member *smithy.Schema
-
-var InvoiceSummariesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceSummariesFilter",
-}, smithy.ShapeTypeStructure, 4)
-var InvoiceSummariesFilter_TimeInterval *smithy.Schema
-
-var InvoiceSummariesFilter_BillingPeriod *smithy.Schema
-
-var InvoiceSummariesFilter_InvoicingEntity *smithy.Schema
-
-var InvoiceSummariesFilter_ReceiverRole *smithy.Schema
-
-var _InvoiceSummariesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceSummariesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var InvoiceSummariesSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceSummariesSelector",
-}, smithy.ShapeTypeStructure, 2)
-var InvoiceSummariesSelector_ResourceType *smithy.Schema
-
-var InvoiceSummariesSelector_Value *smithy.Schema
-
-var InvoiceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceSummary",
-}, smithy.ShapeTypeStructure, 20)
-var InvoiceSummary_AccountId *smithy.Schema
-
-var InvoiceSummary_InvoiceId *smithy.Schema
-
-var InvoiceSummary_IssuedDate *smithy.Schema
-
-var InvoiceSummary_DueDate *smithy.Schema
-
-var InvoiceSummary_BillSourceAccounts *smithy.Schema
-
-var InvoiceSummary_BillSourceAccountsTotalCount *smithy.Schema
-
-var InvoiceSummary_ReceiverRole *smithy.Schema
-
-var InvoiceSummary_Entity *smithy.Schema
-
-var InvoiceSummary_BillingPeriod *smithy.Schema
-
-var InvoiceSummary_InvoiceFrequency *smithy.Schema
-
-var InvoiceSummary_BillType *smithy.Schema
-
-var InvoiceSummary_InvoiceType *smithy.Schema
-
-var InvoiceSummary_CommercialInvoiceId *smithy.Schema
-
-var InvoiceSummary_OriginalInvoiceId *smithy.Schema
-
-var InvoiceSummary_PurchaseOrderNumber *smithy.Schema
-
-var InvoiceSummary_EinvoiceDeliveryStatus *smithy.Schema
-
-var InvoiceSummary_TaxAuthorityStatus *smithy.Schema
-
-var InvoiceSummary_BaseCurrencyAmount *smithy.Schema
-
-var InvoiceSummary_TaxCurrencyAmount *smithy.Schema
-
-var InvoiceSummary_PaymentCurrencyAmount *smithy.Schema
-
-var InvoiceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceType",
-}, smithy.ShapeTypeEnum, 3)
-var InvoiceType_INVOICE *smithy.Schema
-
-var InvoiceType_CREDIT_MEMO *smithy.Schema
-
-var InvoiceType_PAYMENT_RECEIPT *smithy.Schema
-
-var InvoiceUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceUnit",
-}, smithy.ShapeTypeStructure, 7)
-var InvoiceUnit_InvoiceUnitArn *smithy.Schema
-
-var InvoiceUnit_InvoiceReceiver *smithy.Schema
-
-var InvoiceUnit_Name *smithy.Schema
-
-var InvoiceUnit_Description *smithy.Schema
-
-var InvoiceUnit_TaxInheritanceDisabled *smithy.Schema
-
-var InvoiceUnit_Rule *smithy.Schema
-
-var InvoiceUnit_LastModified *smithy.Schema
-
-var _InvoiceUnitArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceUnitArns",
-}, smithy.ShapeTypeList, 1)
-var _InvoiceUnitArns_member *smithy.Schema
-
-var _InvoiceUnitArnString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceUnitArnString",
-}, smithy.ShapeTypeString, 0)
-
-var _InvoiceUnitName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceUnitName",
-}, smithy.ShapeTypeString, 0)
-
-var _InvoiceUnitNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceUnitNames",
-}, smithy.ShapeTypeList, 1)
-var _InvoiceUnitNames_member *smithy.Schema
-
-var InvoiceUnitRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceUnitRule",
-}, smithy.ShapeTypeStructure, 2)
-var InvoiceUnitRule_LinkedAccounts *smithy.Schema
-
-var InvoiceUnitRule_BillSourceAccounts *smithy.Schema
-
-var _InvoiceUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "InvoiceUnits",
-}, smithy.ShapeTypeList, 1)
-var _InvoiceUnits_member *smithy.Schema
-
-var _LastModifiedTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "LastModifiedTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var ListInvoiceSummariesResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListInvoiceSummariesResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ListInvoiceSummariesResourceType_ACCOUNT_ID *smithy.Schema
-
-var ListInvoiceSummariesResourceType_INVOICE_ID *smithy.Schema
-
-var MarketplacePunchOutPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "MarketplacePunchOutPreference",
-}, smithy.ShapeTypeStructure, 1)
-var MarketplacePunchOutPreference_ApprovalRequestRedirectUrl *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "MaxResultsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Month = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "Month",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "NextTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var ProcurementPortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortal",
-}, smithy.ShapeTypeStructure, 4)
-var ProcurementPortal_PortalIdentifier *smithy.Schema
-
-var ProcurementPortal_PortalName *smithy.Schema
-
-var ProcurementPortal_PortalDisplayName *smithy.Schema
-
-var ProcurementPortal_DefaultFeatureConfigurations *smithy.Schema
-
-var ProcurementPortalEnv = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalEnv",
-}, smithy.ShapeTypeEnum, 2)
-var ProcurementPortalEnv_PROD *smithy.Schema
-
-var ProcurementPortalEnv_TEST *smithy.Schema
-
-var _ProcurementPortalIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ProcurementPortalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalName",
-}, smithy.ShapeTypeEnum, 2)
-var ProcurementPortalName_SAP_BUSINESS_NETWORK *smithy.Schema
-
-var ProcurementPortalName_COUPA *smithy.Schema
-
-var ProcurementPortalPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalPreference",
-}, smithy.ShapeTypeStructure, 25)
-var ProcurementPortalPreference_AwsAccountId *smithy.Schema
-
-var ProcurementPortalPreference_ProcurementPortalPreferenceArn *smithy.Schema
-
-var ProcurementPortalPreference_ProcurementPortalName *smithy.Schema
-
-var ProcurementPortalPreference_BuyerDomain *smithy.Schema
-
-var ProcurementPortalPreference_BuyerIdentifier *smithy.Schema
-
-var ProcurementPortalPreference_SupplierDomain *smithy.Schema
-
-var ProcurementPortalPreference_SupplierIdentifier *smithy.Schema
-
-var ProcurementPortalPreference_Selector *smithy.Schema
-
-var ProcurementPortalPreference_ProcurementPortalSharedSecret *smithy.Schema
-
-var ProcurementPortalPreference_ProcurementPortalInstanceEndpoint *smithy.Schema
-
-var ProcurementPortalPreference_PurchaseOrderRetrievalEndpoint *smithy.Schema
-
-var ProcurementPortalPreference_TestEnvPreference *smithy.Schema
-
-var ProcurementPortalPreference_EinvoiceDeliveryEnabled *smithy.Schema
-
-var ProcurementPortalPreference_EinvoiceDeliveryPreference *smithy.Schema
-
-var ProcurementPortalPreference_PurchaseOrderRetrievalEnabled *smithy.Schema
-
-var ProcurementPortalPreference_MarketplacePunchOutEnabled *smithy.Schema
-
-var ProcurementPortalPreference_MarketplacePunchOutPreference *smithy.Schema
-
-var ProcurementPortalPreference_Contacts *smithy.Schema
-
-var ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus *smithy.Schema
-
-var ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason *smithy.Schema
-
-var ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus *smithy.Schema
-
-var ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason *smithy.Schema
-
-var ProcurementPortalPreference_Version *smithy.Schema
-
-var ProcurementPortalPreference_CreateDate *smithy.Schema
-
-var ProcurementPortalPreference_LastUpdateDate *smithy.Schema
-
-var _ProcurementPortalPreferenceArnString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalPreferenceArnString",
-}, smithy.ShapeTypeString, 0)
-
-var ProcurementPortalPreferenceSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalPreferenceSelector",
-}, smithy.ShapeTypeStructure, 2)
-var ProcurementPortalPreferenceSelector_InvoiceUnitArns *smithy.Schema
-
-var ProcurementPortalPreferenceSelector_SellerOfRecords *smithy.Schema
-
-var ProcurementPortalPreferenceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalPreferenceStatus",
-}, smithy.ShapeTypeEnum, 7)
-var ProcurementPortalPreferenceStatus_PENDING_VERIFICATION *smithy.Schema
-
-var ProcurementPortalPreferenceStatus_VALIDATED *smithy.Schema
-
-var ProcurementPortalPreferenceStatus_TEST_INITIALIZED *smithy.Schema
-
-var ProcurementPortalPreferenceStatus_TEST_INITIALIZATION_FAILED *smithy.Schema
-
-var ProcurementPortalPreferenceStatus_TEST_FAILED *smithy.Schema
-
-var ProcurementPortalPreferenceStatus_ACTIVE *smithy.Schema
-
-var ProcurementPortalPreferenceStatus_SUSPENDED *smithy.Schema
-
-var _ProcurementPortalPreferenceSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalPreferenceSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ProcurementPortalPreferenceSummaries_member *smithy.Schema
-
-var ProcurementPortalPreferenceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalPreferenceSummary",
-}, smithy.ShapeTypeStructure, 18)
-var ProcurementPortalPreferenceSummary_AwsAccountId *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_ProcurementPortalName *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_BuyerDomain *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_BuyerIdentifier *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_SupplierDomain *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_SupplierIdentifier *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_Selector *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_Version *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_CreateDate *smithy.Schema
-
-var ProcurementPortalPreferenceSummary_LastUpdateDate *smithy.Schema
-
-var _ProcurementPortals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortals",
-}, smithy.ShapeTypeList, 1)
-var _ProcurementPortals_member *smithy.Schema
-
-var ProcurementPortalSupplier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalSupplier",
-}, smithy.ShapeTypeStructure, 4)
-var ProcurementPortalSupplier_SupplierIdentifier *smithy.Schema
-
-var ProcurementPortalSupplier_SellerOfRecord *smithy.Schema
-
-var ProcurementPortalSupplier_CountryCode *smithy.Schema
-
-var ProcurementPortalSupplier_Environment *smithy.Schema
-
-var _ProcurementPortalSuppliers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProcurementPortalSuppliers",
-}, smithy.ShapeTypeList, 1)
-var _ProcurementPortalSuppliers_member *smithy.Schema
-
-var _ProfileList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ProfileList",
-}, smithy.ShapeTypeList, 1)
-var _ProfileList_member *smithy.Schema
-
-var Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "Protocol",
-}, smithy.ShapeTypeEnum, 1)
-var Protocol_CXML *smithy.Schema
-
-var PurchaseOrderDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "PurchaseOrderDataSource",
-}, smithy.ShapeTypeStructure, 2)
-var PurchaseOrderDataSource_EinvoiceDeliveryDocumentType *smithy.Schema
-
-var PurchaseOrderDataSource_PurchaseOrderDataSourceType *smithy.Schema
-
-var _PurchaseOrderDataSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "PurchaseOrderDataSources",
-}, smithy.ShapeTypeList, 1)
-var _PurchaseOrderDataSources_member *smithy.Schema
-
-var PurchaseOrderDataSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "PurchaseOrderDataSourceType",
-}, smithy.ShapeTypeEnum, 2)
-var PurchaseOrderDataSourceType_ASSOCIATED_PURCHASE_ORDER_REQUIRED *smithy.Schema
-
-var PurchaseOrderDataSourceType_PURCHASE_ORDER_NOT_REQUIRED *smithy.Schema
-
-var ReceiverAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ReceiverAddress",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Sensitive{})
-var ReceiverAddress_AddressLine1 *smithy.Schema
-
-var ReceiverAddress_AddressLine2 *smithy.Schema
-
-var ReceiverAddress_AddressLine3 *smithy.Schema
-
-var ReceiverAddress_DistrictOrCounty *smithy.Schema
-
-var ReceiverAddress_City *smithy.Schema
-
-var ReceiverAddress_StateOrRegion *smithy.Schema
-
-var ReceiverAddress_CountryCode *smithy.Schema
-
-var ReceiverAddress_CompanyName *smithy.Schema
-
-var ReceiverAddress_PostalCode *smithy.Schema
-
-var ReceiverRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ReceiverRole",
-}, smithy.ShapeTypeEnum, 3)
-var ReceiverRole_SELLER *smithy.Schema
-
-var ReceiverRole_RESELLER *smithy.Schema
-
-var ReceiverRole_BUYER *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "InvoicingResourceNotFound",
-		StatusCode: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceName *smithy.Schema
-
-var ResourceTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ResourceTag",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTag_Key *smithy.Schema
-
-var ResourceTag_Value *smithy.Schema
-
-var _ResourceTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ResourceTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceTagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ResourceTagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagKeyList_member *smithy.Schema
-
-var _ResourceTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ResourceTagList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagList_member *smithy.Schema
-
-var _ResourceTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ResourceTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleAccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "RuleAccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _RuleAccountIdList_member *smithy.Schema
-
-var _SellerOfRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SellerOfRecords",
-}, smithy.ShapeTypeList, 1)
-var _SellerOfRecords_member *smithy.Schema
-
-var _SensitiveBasicStringWithoutSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SensitiveBasicStringWithoutSpace",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402},
-	&smithytraits.AWSQueryError{ErrorCode: "InvoicingServiceQuotaExceeded",
-		StatusCode: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _StringWithoutNewLine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "StringWithoutNewLine",
-}, smithy.ShapeTypeString, 0)
-
-var SupplementalDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SupplementalDocument",
-}, smithy.ShapeTypeStructure, 4)
-var SupplementalDocument_DocumentType *smithy.Schema
-
-var SupplementalDocument_DocumentId *smithy.Schema
-
-var SupplementalDocument_DocumentUrl *smithy.Schema
-
-var SupplementalDocument_DocumentUrlExpirationDate *smithy.Schema
-
-var _SupplementalDocuments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SupplementalDocuments",
-}, smithy.ShapeTypeList, 1)
-var _SupplementalDocuments_member *smithy.Schema
-
-var SupplementalDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SupplementalDocumentType",
-}, smithy.ShapeTypeEnum, 4)
-var SupplementalDocumentType_GOVERNMENT_INVOICE *smithy.Schema
-
-var SupplementalDocumentType_TAX_E_INVOICE *smithy.Schema
-
-var SupplementalDocumentType_PAYMENT_RECEIPT *smithy.Schema
-
-var SupplementalDocumentType_SUPPLEMENT *smithy.Schema
-
-var SupplierDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SupplierDomain",
-}, smithy.ShapeTypeEnum, 1)
-var SupplierDomain_NetworkID *smithy.Schema
-
-var _SupplierIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SupplierIdString",
-}, smithy.ShapeTypeString, 0)
-
-var _TagrisArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TagrisArn",
-}, smithy.ShapeTypeString, 0)
-
-var TaxAuthorityStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TaxAuthorityStatus",
-}, smithy.ShapeTypeEnum, 2)
-var TaxAuthorityStatus_ISSUED *smithy.Schema
-
-var TaxAuthorityStatus_CANCELLED *smithy.Schema
-
-var TaxesBreakdown = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TaxesBreakdown",
-}, smithy.ShapeTypeStructure, 2)
-var TaxesBreakdown_Breakdown *smithy.Schema
-
-var TaxesBreakdown_TotalAmount *smithy.Schema
-
-var TaxesBreakdownAmount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TaxesBreakdownAmount",
-}, smithy.ShapeTypeStructure, 3)
-var TaxesBreakdownAmount_Description *smithy.Schema
-
-var TaxesBreakdownAmount_Amount *smithy.Schema
-
-var TaxesBreakdownAmount_Rate *smithy.Schema
-
-var _TaxesBreakdownAmountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TaxesBreakdownAmountList",
-}, smithy.ShapeTypeList, 1)
-var _TaxesBreakdownAmountList_member *smithy.Schema
-
-var _TaxInheritanceDisabledFlag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TaxInheritanceDisabledFlag",
-}, smithy.ShapeTypeBoolean, 0)
-
-var TestEnvPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TestEnvPreference",
-}, smithy.ShapeTypeStructure, 7)
-var TestEnvPreference_BuyerDomain *smithy.Schema
-
-var TestEnvPreference_BuyerIdentifier *smithy.Schema
-
-var TestEnvPreference_SupplierDomain *smithy.Schema
-
-var TestEnvPreference_SupplierIdentifier *smithy.Schema
-
-var TestEnvPreference_ProcurementPortalSharedSecret *smithy.Schema
-
-var TestEnvPreference_ProcurementPortalInstanceEndpoint *smithy.Schema
-
-var TestEnvPreference_PurchaseOrderRetrievalEndpoint *smithy.Schema
-
-var TestEnvPreferenceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TestEnvPreferenceInput",
-}, smithy.ShapeTypeStructure, 6)
-var TestEnvPreferenceInput_BuyerDomain *smithy.Schema
-
-var TestEnvPreferenceInput_BuyerIdentifier *smithy.Schema
-
-var TestEnvPreferenceInput_SupplierDomain *smithy.Schema
-
-var TestEnvPreferenceInput_SupplierIdentifier *smithy.Schema
-
-var TestEnvPreferenceInput_ProcurementPortalSharedSecret *smithy.Schema
-
-var TestEnvPreferenceInput_ProcurementPortalInstanceEndpoint *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "InvoicingThrottling",
-		StatusCode: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvoicingValidation",
-		StatusCode: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_resourceName *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 14)
-var ValidationExceptionReason_NON_MEMBERS_PRESENT *smithy.Schema
-
-var ValidationExceptionReason_MAX_ACCOUNTS_EXCEEDED *smithy.Schema
-
-var ValidationExceptionReason_MAX_INVOICE_UNITS_EXCEEDED *smithy.Schema
-
-var ValidationExceptionReason_DUPLICATE_INVOICE_UNIT *smithy.Schema
-
-var ValidationExceptionReason_MUTUAL_EXCLUSION_ERROR *smithy.Schema
-
-var ValidationExceptionReason_ACCOUNT_MEMBERSHIP_ERROR *smithy.Schema
-
-var ValidationExceptionReason_TAX_SETTINGS_ERROR *smithy.Schema
-
-var ValidationExceptionReason_EXPIRED_NEXT_TOKEN *smithy.Schema
-
-var ValidationExceptionReason_INVALID_NEXT_TOKEN *smithy.Schema
-
-var ValidationExceptionReason_INVALID_INPUT *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var _Year = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "Year",
-}, smithy.ShapeTypeInteger, 0)
-
-var BatchGetInvoiceProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BatchGetInvoiceProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetInvoiceProfileRequest_AccountIds *smithy.Schema
-
-var BatchGetInvoiceProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "BatchGetInvoiceProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetInvoiceProfileResponse_Profiles *smithy.Schema
-
-var CreateInvoiceUnitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CreateInvoiceUnitRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateInvoiceUnitRequest_Name *smithy.Schema
-
-var CreateInvoiceUnitRequest_InvoiceReceiver *smithy.Schema
-
-var CreateInvoiceUnitRequest_Description *smithy.Schema
-
-var CreateInvoiceUnitRequest_TaxInheritanceDisabled *smithy.Schema
-
-var CreateInvoiceUnitRequest_Rule *smithy.Schema
-
-var CreateInvoiceUnitRequest_ResourceTags *smithy.Schema
-
-var CreateInvoiceUnitRequest_ClientToken *smithy.Schema
-
-var CreateInvoiceUnitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CreateInvoiceUnitResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateInvoiceUnitResponse_InvoiceUnitArn *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CreateProcurementPortalPreferenceRequest",
-}, smithy.ShapeTypeStructure, 17)
-var CreateProcurementPortalPreferenceRequest_ProcurementPortalName *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_BuyerDomain *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_BuyerIdentifier *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_SupplierDomain *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_SupplierIdentifier *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_Selector *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_TestEnvPreference *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_Contacts *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_ResourceTags *smithy.Schema
-
-var CreateProcurementPortalPreferenceRequest_ClientToken *smithy.Schema
-
-var CreateProcurementPortalPreferenceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "CreateProcurementPortalPreferenceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn *smithy.Schema
-
-var DeleteInvoiceUnitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DeleteInvoiceUnitRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteInvoiceUnitRequest_InvoiceUnitArn *smithy.Schema
-
-var DeleteInvoiceUnitRequest_ClientToken *smithy.Schema
-
-var DeleteInvoiceUnitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DeleteInvoiceUnitResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInvoiceUnitResponse_InvoiceUnitArn *smithy.Schema
-
-var DeleteProcurementPortalPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DeleteProcurementPortalPreferenceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn *smithy.Schema
-
-var DeleteProcurementPortalPreferenceRequest_ClientToken *smithy.Schema
-
-var DeleteProcurementPortalPreferenceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "DeleteProcurementPortalPreferenceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn *smithy.Schema
-
-var GetInvoicePDFRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetInvoicePDFRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetInvoicePDFRequest_InvoiceId *smithy.Schema
-
-var GetInvoicePDFResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetInvoicePDFResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetInvoicePDFResponse_InvoicePDF *smithy.Schema
-
-var GetInvoiceUnitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetInvoiceUnitRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetInvoiceUnitRequest_InvoiceUnitArn *smithy.Schema
-
-var GetInvoiceUnitRequest_AsOf *smithy.Schema
-
-var GetInvoiceUnitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetInvoiceUnitResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetInvoiceUnitResponse_InvoiceUnitArn *smithy.Schema
-
-var GetInvoiceUnitResponse_InvoiceReceiver *smithy.Schema
-
-var GetInvoiceUnitResponse_Name *smithy.Schema
-
-var GetInvoiceUnitResponse_Description *smithy.Schema
-
-var GetInvoiceUnitResponse_TaxInheritanceDisabled *smithy.Schema
-
-var GetInvoiceUnitResponse_Rule *smithy.Schema
-
-var GetInvoiceUnitResponse_LastModified *smithy.Schema
-
-var GetProcurementPortalPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetProcurementPortalPreferenceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn *smithy.Schema
-
-var GetProcurementPortalPreferenceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "GetProcurementPortalPreferenceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetProcurementPortalPreferenceResponse_ProcurementPortalPreference *smithy.Schema
-
-var ListInvoiceSummariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListInvoiceSummariesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListInvoiceSummariesRequest_Selector *smithy.Schema
-
-var ListInvoiceSummariesRequest_Filter *smithy.Schema
-
-var ListInvoiceSummariesRequest_NextToken *smithy.Schema
-
-var ListInvoiceSummariesRequest_MaxResults *smithy.Schema
-
-var ListInvoiceSummariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListInvoiceSummariesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvoiceSummariesResponse_InvoiceSummaries *smithy.Schema
-
-var ListInvoiceSummariesResponse_NextToken *smithy.Schema
-
-var ListInvoiceUnitsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListInvoiceUnitsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListInvoiceUnitsRequest_Filters *smithy.Schema
-
-var ListInvoiceUnitsRequest_NextToken *smithy.Schema
-
-var ListInvoiceUnitsRequest_MaxResults *smithy.Schema
-
-var ListInvoiceUnitsRequest_AsOf *smithy.Schema
-
-var ListInvoiceUnitsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListInvoiceUnitsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvoiceUnitsResponse_InvoiceUnits *smithy.Schema
-
-var ListInvoiceUnitsResponse_NextToken *smithy.Schema
-
-var ListProcurementPortalPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortalPreferencesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProcurementPortalPreferencesRequest_NextToken *smithy.Schema
-
-var ListProcurementPortalPreferencesRequest_MaxResults *smithy.Schema
-
-var ListProcurementPortalPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortalPreferencesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProcurementPortalPreferencesResponse_ProcurementPortalPreferences *smithy.Schema
-
-var ListProcurementPortalPreferencesResponse_NextToken *smithy.Schema
-
-var ListProcurementPortalsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortalsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProcurementPortalsRequest_NextToken *smithy.Schema
-
-var ListProcurementPortalsRequest_MaxResults *smithy.Schema
-
-var ListProcurementPortalsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortalsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProcurementPortalsResponse_ProcurementPortals *smithy.Schema
-
-var ListProcurementPortalsResponse_NextToken *smithy.Schema
-
-var ListProcurementPortalSuppliersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortalSuppliersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListProcurementPortalSuppliersRequest_PortalIdentifier *smithy.Schema
-
-var ListProcurementPortalSuppliersRequest_NextToken *smithy.Schema
-
-var ListProcurementPortalSuppliersRequest_MaxResults *smithy.Schema
-
-var ListProcurementPortalSuppliersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListProcurementPortalSuppliersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers *smithy.Schema
-
-var ListProcurementPortalSuppliersResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_ResourceTags *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "PutProcurementPortalPreferenceRequest",
-}, smithy.ShapeTypeStructure, 12)
-var PutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_Selector *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_TestEnvPreference *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_Contacts *smithy.Schema
-
-var PutProcurementPortalPreferenceRequest_ClientToken *smithy.Schema
-
-var PutProcurementPortalPreferenceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "PutProcurementPortalPreferenceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn *smithy.Schema
-
-var SendProcurementPortalValidationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SendProcurementPortalValidationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var SendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn *smithy.Schema
-
-var SendProcurementPortalValidationRequest_ClientToken *smithy.Schema
-
-var SendProcurementPortalValidationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "SendProcurementPortalValidationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var SendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_ResourceTags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_ResourceTagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateInvoiceUnitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UpdateInvoiceUnitRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateInvoiceUnitRequest_InvoiceUnitArn *smithy.Schema
-
-var UpdateInvoiceUnitRequest_Description *smithy.Schema
-
-var UpdateInvoiceUnitRequest_TaxInheritanceDisabled *smithy.Schema
-
-var UpdateInvoiceUnitRequest_Rule *smithy.Schema
-
-var UpdateInvoiceUnitRequest_ClientToken *smithy.Schema
-
-var UpdateInvoiceUnitResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UpdateInvoiceUnitResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateInvoiceUnitResponse_InvoiceUnitArn *smithy.Schema
-
-var UpdateProcurementPortalPreferenceStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UpdateProcurementPortalPreferenceStatusRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn *smithy.Schema
-
-var UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus *smithy.Schema
-
-var UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason *smithy.Schema
-
-var UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus *smithy.Schema
-
-var UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason *smithy.Schema
-
-var UpdateProcurementPortalPreferenceStatusRequest_ClientToken *smithy.Schema
-
-var UpdateProcurementPortalPreferenceStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "UpdateProcurementPortalPreferenceStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn *smithy.Schema
-
-var VerifyProcurementPortalValidationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "VerifyProcurementPortalValidationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var VerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn *smithy.Schema
-
-var VerifyProcurementPortalValidationRequest_Code *smithy.Schema
-
-var VerifyProcurementPortalValidationRequest_ClientToken *smithy.Schema
-
-var VerifyProcurementPortalValidationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.invoicing",
-	Name:      "VerifyProcurementPortalValidationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var VerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _BasicString)
-
-	AccessDeniedException_resourceName = AccessDeniedException.AddMember("resourceName", _InvoiceUnitArnString)
-
-	_AccountIdList_member = _AccountIdList.AddMember("member", _AccountIdString)
-
-	DiscountsBreakdownAmount_Description = DiscountsBreakdownAmount.AddMember("Description", _BasicString)
-
-	DiscountsBreakdownAmount_Amount = DiscountsBreakdownAmount.AddMember("Amount", _BasicString)
-
-	DiscountsBreakdownAmount_Rate = DiscountsBreakdownAmount.AddMember("Rate", _BasicString)
-
-	_DiscountsBreakdownAmountList_member = _DiscountsBreakdownAmountList.AddMember("member", DiscountsBreakdownAmount)
-
-	DiscountsBreakdown_Breakdown = DiscountsBreakdown.AddMember("Breakdown", _DiscountsBreakdownAmountList)
-
-	DiscountsBreakdown_TotalAmount = DiscountsBreakdown.AddMember("TotalAmount", _BasicString)
-
-	TaxesBreakdownAmount_Description = TaxesBreakdownAmount.AddMember("Description", _BasicString)
-
-	TaxesBreakdownAmount_Amount = TaxesBreakdownAmount.AddMember("Amount", _BasicString)
-
-	TaxesBreakdownAmount_Rate = TaxesBreakdownAmount.AddMember("Rate", _BasicString)
-
-	_TaxesBreakdownAmountList_member = _TaxesBreakdownAmountList.AddMember("member", TaxesBreakdownAmount)
-
-	TaxesBreakdown_Breakdown = TaxesBreakdown.AddMember("Breakdown", _TaxesBreakdownAmountList)
-
-	TaxesBreakdown_TotalAmount = TaxesBreakdown.AddMember("TotalAmount", _BasicString)
-
-	FeesBreakdownAmount_Description = FeesBreakdownAmount.AddMember("Description", _BasicString)
-
-	FeesBreakdownAmount_Amount = FeesBreakdownAmount.AddMember("Amount", _BasicString)
-
-	FeesBreakdownAmount_Rate = FeesBreakdownAmount.AddMember("Rate", _BasicString)
-
-	_FeesBreakdownAmountList_member = _FeesBreakdownAmountList.AddMember("member", FeesBreakdownAmount)
-
-	FeesBreakdown_Breakdown = FeesBreakdown.AddMember("Breakdown", _FeesBreakdownAmountList)
-
-	FeesBreakdown_TotalAmount = FeesBreakdown.AddMember("TotalAmount", _BasicString)
-
-	AmountBreakdown_SubTotalAmount = AmountBreakdown.AddMember("SubTotalAmount", _BasicString)
-
-	AmountBreakdown_Discounts = AmountBreakdown.AddMember("Discounts", DiscountsBreakdown)
-
-	AmountBreakdown_Taxes = AmountBreakdown.AddMember("Taxes", TaxesBreakdown)
-
-	AmountBreakdown_Fees = AmountBreakdown.AddMember("Fees", FeesBreakdown)
-
-	BillingEntity_AWS = BillingEntity.AddMember("AWS", smithyprelude.Unit)
-
-	BillingEntity_AWS_MARKETPLACE = BillingEntity.AddMember("AWS_MARKETPLACE", smithyprelude.Unit)
-
-	BillingPeriod_Month = BillingPeriod.AddMember("Month", _Month)
-
-	BillingPeriod_Year = BillingPeriod.AddMember("Year", _Year)
-
-	_BillSourceAccountList_member = _BillSourceAccountList.AddMember("member", _AccountIdString)
-
-	BillType_ANNIVERSARY = BillType.AddMember("ANNIVERSARY", smithyprelude.Unit)
-
-	BillType_PURCHASE = BillType.AddMember("PURCHASE", smithyprelude.Unit)
-
-	BillType_REFUND = BillType.AddMember("REFUND", smithyprelude.Unit)
-
-	BuyerDomain_NetworkID = BuyerDomain.AddMember("NetworkID", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _BasicString)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _BasicString)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _BasicString)
-
-	ConnectionTestingMethod_PROD_ENV_DOLLAR_TEST = ConnectionTestingMethod.AddMember("PROD_ENV_DOLLAR_TEST", smithyprelude.Unit)
-
-	ConnectionTestingMethod_TEST_ENV_REPLAY_TEST = ConnectionTestingMethod.AddMember("TEST_ENV_REPLAY_TEST", smithyprelude.Unit)
-
-	Contact_Name = Contact.AddMember("Name", _BasicString)
-
-	Contact_Email = Contact.AddMember("Email", _EmailString)
-
-	_Contacts_member = _Contacts.AddMember("member", Contact)
-
-	CurrencyExchangeDetails_SourceCurrencyCode = CurrencyExchangeDetails.AddMember("SourceCurrencyCode", _BasicString)
-
-	CurrencyExchangeDetails_TargetCurrencyCode = CurrencyExchangeDetails.AddMember("TargetCurrencyCode", _BasicString)
-
-	CurrencyExchangeDetails_Rate = CurrencyExchangeDetails.AddMember("Rate", _BasicString)
-
-	DateInterval_StartDate = DateInterval.AddMember("StartDate", smithyprelude.Timestamp)
-
-	DateInterval_EndDate = DateInterval.AddMember("EndDate", smithyprelude.Timestamp)
-
-	EinvoiceDeliveryAttachmentType_INVOICE_PDF = EinvoiceDeliveryAttachmentType.AddMember("INVOICE_PDF", smithyprelude.Unit)
-
-	EinvoiceDeliveryAttachmentType_RFP_PDF = EinvoiceDeliveryAttachmentType.AddMember("RFP_PDF", smithyprelude.Unit)
-
-	_EinvoiceDeliveryAttachmentTypes_member = _EinvoiceDeliveryAttachmentTypes.AddMember("member", EinvoiceDeliveryAttachmentType)
-
-	EinvoiceDeliveryDocumentType_AWS_CLOUD_INVOICE = EinvoiceDeliveryDocumentType.AddMember("AWS_CLOUD_INVOICE", smithyprelude.Unit)
-
-	EinvoiceDeliveryDocumentType_AWS_CLOUD_CREDIT_MEMO = EinvoiceDeliveryDocumentType.AddMember("AWS_CLOUD_CREDIT_MEMO", smithyprelude.Unit)
-
-	EinvoiceDeliveryDocumentType_AWS_MARKETPLACE_INVOICE = EinvoiceDeliveryDocumentType.AddMember("AWS_MARKETPLACE_INVOICE", smithyprelude.Unit)
-
-	EinvoiceDeliveryDocumentType_AWS_MARKETPLACE_CREDIT_MEMO = EinvoiceDeliveryDocumentType.AddMember("AWS_MARKETPLACE_CREDIT_MEMO", smithyprelude.Unit)
-
-	EinvoiceDeliveryDocumentType_AWS_REQUEST_FOR_PAYMENT = EinvoiceDeliveryDocumentType.AddMember("AWS_REQUEST_FOR_PAYMENT", smithyprelude.Unit)
-
-	_EinvoiceDeliveryDocumentTypes_member = _EinvoiceDeliveryDocumentTypes.AddMember("member", EinvoiceDeliveryDocumentType)
-
-	Protocol_CXML = Protocol.AddMember("CXML", smithyprelude.Unit)
-
-	PurchaseOrderDataSourceType_ASSOCIATED_PURCHASE_ORDER_REQUIRED = PurchaseOrderDataSourceType.AddMember("ASSOCIATED_PURCHASE_ORDER_REQUIRED", smithyprelude.Unit)
-
-	PurchaseOrderDataSourceType_PURCHASE_ORDER_NOT_REQUIRED = PurchaseOrderDataSourceType.AddMember("PURCHASE_ORDER_NOT_REQUIRED", smithyprelude.Unit)
-
-	PurchaseOrderDataSource_EinvoiceDeliveryDocumentType = PurchaseOrderDataSource.AddMember("EinvoiceDeliveryDocumentType", EinvoiceDeliveryDocumentType)
-
-	PurchaseOrderDataSource_PurchaseOrderDataSourceType = PurchaseOrderDataSource.AddMember("PurchaseOrderDataSourceType", PurchaseOrderDataSourceType)
-
-	_PurchaseOrderDataSources_member = _PurchaseOrderDataSources.AddMember("member", PurchaseOrderDataSource)
-
-	EinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes = EinvoiceDeliveryPreference.AddMember("EinvoiceDeliveryDocumentTypes", _EinvoiceDeliveryDocumentTypes)
-
-	EinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes = EinvoiceDeliveryPreference.AddMember("EinvoiceDeliveryAttachmentTypes", _EinvoiceDeliveryAttachmentTypes)
-
-	EinvoiceDeliveryPreference_Protocol = EinvoiceDeliveryPreference.AddMember("Protocol", Protocol)
-
-	EinvoiceDeliveryPreference_PurchaseOrderDataSources = EinvoiceDeliveryPreference.AddMember("PurchaseOrderDataSources", _PurchaseOrderDataSources)
-
-	EinvoiceDeliveryPreference_ConnectionTestingMethod = EinvoiceDeliveryPreference.AddMember("ConnectionTestingMethod", ConnectionTestingMethod)
-
-	EinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate = EinvoiceDeliveryPreference.AddMember("EinvoiceDeliveryActivationDate", smithyprelude.Timestamp)
-
-	EinvoiceDeliveryStatus_DELIVERED = EinvoiceDeliveryStatus.AddMember("DELIVERED", smithyprelude.Unit)
-
-	EinvoiceDeliveryStatus_NOT_DELIVERED = EinvoiceDeliveryStatus.AddMember("NOT_DELIVERED", smithyprelude.Unit)
-
-	Entity_InvoicingEntity = Entity.AddMember("InvoicingEntity", _BasicString)
-
-	Entity_BillingEntity = Entity.AddMember("BillingEntity", BillingEntity)
-
-	InvoiceConfiguration_DocumentTypes = InvoiceConfiguration.AddMember("DocumentTypes", _EinvoiceDeliveryDocumentTypes)
-
-	InvoiceConfiguration_AttachmentTypes = InvoiceConfiguration.AddMember("AttachmentTypes", _EinvoiceDeliveryAttachmentTypes)
-
-	FeatureConfigurations_InvoiceConfiguration = FeatureConfigurations.AddMember("InvoiceConfiguration", InvoiceConfiguration)
-
-	_InvoiceUnitNames_member = _InvoiceUnitNames.AddMember("member", _InvoiceUnitName)
-
-	Filters_Names = Filters.AddMember("Names", _InvoiceUnitNames)
-
-	Filters_InvoiceReceivers = Filters.AddMember("InvoiceReceivers", _AccountIdList)
-
-	Filters_Accounts = Filters.AddMember("Accounts", _AccountIdList)
-
-	Filters_BillSourceAccounts = Filters.AddMember("BillSourceAccounts", _AccountIdList)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	InternalServerException_message = InternalServerException.AddMember("message", _BasicString)
-
-	InvoiceCurrencyAmount_TotalAmount = InvoiceCurrencyAmount.AddMember("TotalAmount", _BasicString)
-
-	InvoiceCurrencyAmount_TotalAmountBeforeTax = InvoiceCurrencyAmount.AddMember("TotalAmountBeforeTax", _BasicString)
-
-	InvoiceCurrencyAmount_CurrencyCode = InvoiceCurrencyAmount.AddMember("CurrencyCode", _CurrencyCode)
-
-	InvoiceCurrencyAmount_AmountBreakdown = InvoiceCurrencyAmount.AddMember("AmountBreakdown", AmountBreakdown)
-
-	InvoiceCurrencyAmount_CurrencyExchangeDetails = InvoiceCurrencyAmount.AddMember("CurrencyExchangeDetails", CurrencyExchangeDetails)
-
-	InvoiceFrequency_ONE_TIME = InvoiceFrequency.AddMember("ONE_TIME", smithyprelude.Unit)
-
-	InvoiceFrequency_RECURRING = InvoiceFrequency.AddMember("RECURRING", smithyprelude.Unit)
-
-	SupplementalDocumentType_GOVERNMENT_INVOICE = SupplementalDocumentType.AddMember("GOVERNMENT_INVOICE", smithyprelude.Unit)
-
-	SupplementalDocumentType_TAX_E_INVOICE = SupplementalDocumentType.AddMember("TAX_E_INVOICE", smithyprelude.Unit)
-
-	SupplementalDocumentType_PAYMENT_RECEIPT = SupplementalDocumentType.AddMember("PAYMENT_RECEIPT", smithyprelude.Unit)
-
-	SupplementalDocumentType_SUPPLEMENT = SupplementalDocumentType.AddMember("SUPPLEMENT", smithyprelude.Unit)
-
-	SupplementalDocument_DocumentType = SupplementalDocument.AddMember("DocumentType", SupplementalDocumentType)
-
-	SupplementalDocument_DocumentId = SupplementalDocument.AddMember("DocumentId", _StringWithoutNewLine)
-
-	SupplementalDocument_DocumentUrl = SupplementalDocument.AddMember("DocumentUrl", _StringWithoutNewLine)
-
-	SupplementalDocument_DocumentUrlExpirationDate = SupplementalDocument.AddMember("DocumentUrlExpirationDate", smithyprelude.Timestamp)
-
-	_SupplementalDocuments_member = _SupplementalDocuments.AddMember("member", SupplementalDocument)
-
-	InvoicePDF_InvoiceId = InvoicePDF.AddMember("InvoiceId", _StringWithoutNewLine)
-
-	InvoicePDF_DocumentUrl = InvoicePDF.AddMember("DocumentUrl", _StringWithoutNewLine)
-
-	InvoicePDF_DocumentUrlExpirationDate = InvoicePDF.AddMember("DocumentUrlExpirationDate", smithyprelude.Timestamp)
-
-	InvoicePDF_SupplementalDocuments = InvoicePDF.AddMember("SupplementalDocuments", _SupplementalDocuments)
-
-	ReceiverAddress_AddressLine1 = ReceiverAddress.AddMember("AddressLine1", _BasicString)
-
-	ReceiverAddress_AddressLine2 = ReceiverAddress.AddMember("AddressLine2", _BasicString)
-
-	ReceiverAddress_AddressLine3 = ReceiverAddress.AddMember("AddressLine3", _BasicString)
-
-	ReceiverAddress_DistrictOrCounty = ReceiverAddress.AddMember("DistrictOrCounty", _BasicString)
-
-	ReceiverAddress_City = ReceiverAddress.AddMember("City", _BasicString)
-
-	ReceiverAddress_StateOrRegion = ReceiverAddress.AddMember("StateOrRegion", _BasicString)
-
-	ReceiverAddress_CountryCode = ReceiverAddress.AddMember("CountryCode", _BasicString)
-
-	ReceiverAddress_CompanyName = ReceiverAddress.AddMember("CompanyName", _BasicString)
-
-	ReceiverAddress_PostalCode = ReceiverAddress.AddMember("PostalCode", _BasicString)
-
-	InvoiceProfile_AccountId = InvoiceProfile.AddMember("AccountId", _AccountIdString)
-
-	InvoiceProfile_ReceiverName = InvoiceProfile.AddMember("ReceiverName", _BasicStringWithoutSpace)
-
-	InvoiceProfile_ReceiverAddress = InvoiceProfile.AddMember("ReceiverAddress", ReceiverAddress)
-
-	InvoiceProfile_ReceiverEmail = InvoiceProfile.AddMember("ReceiverEmail", _SensitiveBasicStringWithoutSpace)
-
-	InvoiceProfile_Issuer = InvoiceProfile.AddMember("Issuer", _BasicStringWithoutSpace)
-
-	InvoiceProfile_TaxRegistrationNumber = InvoiceProfile.AddMember("TaxRegistrationNumber", _SensitiveBasicStringWithoutSpace)
-
-	ReceiverRole_SELLER = ReceiverRole.AddMember("SELLER", smithyprelude.Unit)
-
-	ReceiverRole_RESELLER = ReceiverRole.AddMember("RESELLER", smithyprelude.Unit)
-
-	ReceiverRole_BUYER = ReceiverRole.AddMember("BUYER", smithyprelude.Unit)
-
-	InvoiceType_INVOICE = InvoiceType.AddMember("INVOICE", smithyprelude.Unit)
-
-	InvoiceType_CREDIT_MEMO = InvoiceType.AddMember("CREDIT_MEMO", smithyprelude.Unit)
-
-	InvoiceType_PAYMENT_RECEIPT = InvoiceType.AddMember("PAYMENT_RECEIPT", smithyprelude.Unit)
-
-	TaxAuthorityStatus_ISSUED = TaxAuthorityStatus.AddMember("ISSUED", smithyprelude.Unit)
-
-	TaxAuthorityStatus_CANCELLED = TaxAuthorityStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	InvoiceSummary_AccountId = InvoiceSummary.AddMember("AccountId", _AccountIdString)
-
-	InvoiceSummary_InvoiceId = InvoiceSummary.AddMember("InvoiceId", _BasicString)
-
-	InvoiceSummary_IssuedDate = InvoiceSummary.AddMember("IssuedDate", smithyprelude.Timestamp)
-
-	InvoiceSummary_DueDate = InvoiceSummary.AddMember("DueDate", smithyprelude.Timestamp)
-
-	InvoiceSummary_BillSourceAccounts = InvoiceSummary.AddMember("BillSourceAccounts", _BillSourceAccountList)
-
-	InvoiceSummary_BillSourceAccountsTotalCount = InvoiceSummary.AddMember("BillSourceAccountsTotalCount", smithyprelude.Integer)
-
-	InvoiceSummary_ReceiverRole = InvoiceSummary.AddMember("ReceiverRole", ReceiverRole)
-
-	InvoiceSummary_Entity = InvoiceSummary.AddMember("Entity", Entity)
-
-	InvoiceSummary_BillingPeriod = InvoiceSummary.AddMember("BillingPeriod", BillingPeriod)
-
-	InvoiceSummary_InvoiceFrequency = InvoiceSummary.AddMember("InvoiceFrequency", InvoiceFrequency)
-
-	InvoiceSummary_BillType = InvoiceSummary.AddMember("BillType", BillType)
-
-	InvoiceSummary_InvoiceType = InvoiceSummary.AddMember("InvoiceType", InvoiceType)
-
-	InvoiceSummary_CommercialInvoiceId = InvoiceSummary.AddMember("CommercialInvoiceId", _BasicString)
-
-	InvoiceSummary_OriginalInvoiceId = InvoiceSummary.AddMember("OriginalInvoiceId", _BasicString)
-
-	InvoiceSummary_PurchaseOrderNumber = InvoiceSummary.AddMember("PurchaseOrderNumber", _BasicString)
-
-	InvoiceSummary_EinvoiceDeliveryStatus = InvoiceSummary.AddMember("EinvoiceDeliveryStatus", EinvoiceDeliveryStatus)
-
-	InvoiceSummary_TaxAuthorityStatus = InvoiceSummary.AddMember("TaxAuthorityStatus", TaxAuthorityStatus)
-
-	InvoiceSummary_BaseCurrencyAmount = InvoiceSummary.AddMember("BaseCurrencyAmount", InvoiceCurrencyAmount)
-
-	InvoiceSummary_TaxCurrencyAmount = InvoiceSummary.AddMember("TaxCurrencyAmount", InvoiceCurrencyAmount)
-
-	InvoiceSummary_PaymentCurrencyAmount = InvoiceSummary.AddMember("PaymentCurrencyAmount", InvoiceCurrencyAmount)
-
-	_InvoiceSummaries_member = _InvoiceSummaries.AddMember("member", InvoiceSummary)
-
-	InvoiceSummariesFilter_TimeInterval = InvoiceSummariesFilter.AddMember("TimeInterval", DateInterval)
-
-	InvoiceSummariesFilter_BillingPeriod = InvoiceSummariesFilter.AddMember("BillingPeriod", BillingPeriod)
-
-	InvoiceSummariesFilter_InvoicingEntity = InvoiceSummariesFilter.AddMember("InvoicingEntity", _BasicString)
-
-	InvoiceSummariesFilter_ReceiverRole = InvoiceSummariesFilter.AddMember("ReceiverRole", ReceiverRole)
-
-	ListInvoiceSummariesResourceType_ACCOUNT_ID = ListInvoiceSummariesResourceType.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ListInvoiceSummariesResourceType_INVOICE_ID = ListInvoiceSummariesResourceType.AddMember("INVOICE_ID", smithyprelude.Unit)
-
-	InvoiceSummariesSelector_ResourceType = InvoiceSummariesSelector.AddMember("ResourceType", ListInvoiceSummariesResourceType)
-
-	InvoiceSummariesSelector_Value = InvoiceSummariesSelector.AddMember("Value", _StringWithoutNewLine)
-
-	_RuleAccountIdList_member = _RuleAccountIdList.AddMember("member", _AccountIdString)
-
-	InvoiceUnitRule_LinkedAccounts = InvoiceUnitRule.AddMember("LinkedAccounts", _RuleAccountIdList)
-
-	InvoiceUnitRule_BillSourceAccounts = InvoiceUnitRule.AddMember("BillSourceAccounts", _RuleAccountIdList)
-
-	InvoiceUnit_InvoiceUnitArn = InvoiceUnit.AddMember("InvoiceUnitArn", _InvoiceUnitArnString)
-
-	InvoiceUnit_InvoiceReceiver = InvoiceUnit.AddMember("InvoiceReceiver", _AccountIdString)
-
-	InvoiceUnit_Name = InvoiceUnit.AddMember("Name", _InvoiceUnitName)
-
-	InvoiceUnit_Description = InvoiceUnit.AddMember("Description", _DescriptionString)
-
-	InvoiceUnit_TaxInheritanceDisabled = InvoiceUnit.AddMember("TaxInheritanceDisabled", _TaxInheritanceDisabledFlag)
-
-	InvoiceUnit_Rule = InvoiceUnit.AddMember("Rule", InvoiceUnitRule)
-
-	InvoiceUnit_LastModified = InvoiceUnit.AddMember("LastModified", _LastModifiedTimestamp)
-
-	_InvoiceUnitArns_member = _InvoiceUnitArns.AddMember("member", _InvoiceUnitArnString)
-
-	_InvoiceUnits_member = _InvoiceUnits.AddMember("member", InvoiceUnit)
-
-	MarketplacePunchOutPreference_ApprovalRequestRedirectUrl = MarketplacePunchOutPreference.AddMember("ApprovalRequestRedirectUrl", _BasicStringWithoutSpace)
-
-	ProcurementPortalName_SAP_BUSINESS_NETWORK = ProcurementPortalName.AddMember("SAP_BUSINESS_NETWORK", smithyprelude.Unit)
-
-	ProcurementPortalName_COUPA = ProcurementPortalName.AddMember("COUPA", smithyprelude.Unit)
-
-	ProcurementPortal_PortalIdentifier = ProcurementPortal.AddMember("PortalIdentifier", _ProcurementPortalIdString)
-
-	ProcurementPortal_PortalName = ProcurementPortal.AddMember("PortalName", ProcurementPortalName)
-
-	ProcurementPortal_PortalDisplayName = ProcurementPortal.AddMember("PortalDisplayName", _BasicString)
-
-	ProcurementPortal_DefaultFeatureConfigurations = ProcurementPortal.AddMember("DefaultFeatureConfigurations", FeatureConfigurations)
-
-	ProcurementPortalEnv_PROD = ProcurementPortalEnv.AddMember("PROD", smithyprelude.Unit)
-
-	ProcurementPortalEnv_TEST = ProcurementPortalEnv.AddMember("TEST", smithyprelude.Unit)
-
-	SupplierDomain_NetworkID = SupplierDomain.AddMember("NetworkID", smithyprelude.Unit)
-
-	_SellerOfRecords_member = _SellerOfRecords.AddMember("member", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreferenceSelector_InvoiceUnitArns = ProcurementPortalPreferenceSelector.AddMember("InvoiceUnitArns", _InvoiceUnitArns)
-
-	ProcurementPortalPreferenceSelector_SellerOfRecords = ProcurementPortalPreferenceSelector.AddMember("SellerOfRecords", _SellerOfRecords)
-
-	TestEnvPreference_BuyerDomain = TestEnvPreference.AddMember("BuyerDomain", BuyerDomain)
-
-	TestEnvPreference_BuyerIdentifier = TestEnvPreference.AddMember("BuyerIdentifier", _BasicStringWithoutSpace)
-
-	TestEnvPreference_SupplierDomain = TestEnvPreference.AddMember("SupplierDomain", SupplierDomain)
-
-	TestEnvPreference_SupplierIdentifier = TestEnvPreference.AddMember("SupplierIdentifier", _BasicStringWithoutSpace)
-
-	TestEnvPreference_ProcurementPortalSharedSecret = TestEnvPreference.AddMember("ProcurementPortalSharedSecret", _BasicStringWithoutSpace)
-
-	TestEnvPreference_ProcurementPortalInstanceEndpoint = TestEnvPreference.AddMember("ProcurementPortalInstanceEndpoint", _BasicStringWithoutSpace)
-
-	TestEnvPreference_PurchaseOrderRetrievalEndpoint = TestEnvPreference.AddMember("PurchaseOrderRetrievalEndpoint", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreferenceStatus_PENDING_VERIFICATION = ProcurementPortalPreferenceStatus.AddMember("PENDING_VERIFICATION", smithyprelude.Unit)
-
-	ProcurementPortalPreferenceStatus_VALIDATED = ProcurementPortalPreferenceStatus.AddMember("VALIDATED", smithyprelude.Unit)
-
-	ProcurementPortalPreferenceStatus_TEST_INITIALIZED = ProcurementPortalPreferenceStatus.AddMember("TEST_INITIALIZED", smithyprelude.Unit)
-
-	ProcurementPortalPreferenceStatus_TEST_INITIALIZATION_FAILED = ProcurementPortalPreferenceStatus.AddMember("TEST_INITIALIZATION_FAILED", smithyprelude.Unit)
-
-	ProcurementPortalPreferenceStatus_TEST_FAILED = ProcurementPortalPreferenceStatus.AddMember("TEST_FAILED", smithyprelude.Unit)
-
-	ProcurementPortalPreferenceStatus_ACTIVE = ProcurementPortalPreferenceStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ProcurementPortalPreferenceStatus_SUSPENDED = ProcurementPortalPreferenceStatus.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	ProcurementPortalPreference_AwsAccountId = ProcurementPortalPreference.AddMember("AwsAccountId", _AccountIdString)
-
-	ProcurementPortalPreference_ProcurementPortalPreferenceArn = ProcurementPortalPreference.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	ProcurementPortalPreference_ProcurementPortalName = ProcurementPortalPreference.AddMember("ProcurementPortalName", ProcurementPortalName)
-
-	ProcurementPortalPreference_BuyerDomain = ProcurementPortalPreference.AddMember("BuyerDomain", BuyerDomain)
-
-	ProcurementPortalPreference_BuyerIdentifier = ProcurementPortalPreference.AddMember("BuyerIdentifier", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreference_SupplierDomain = ProcurementPortalPreference.AddMember("SupplierDomain", SupplierDomain)
-
-	ProcurementPortalPreference_SupplierIdentifier = ProcurementPortalPreference.AddMember("SupplierIdentifier", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreference_Selector = ProcurementPortalPreference.AddMember("Selector", ProcurementPortalPreferenceSelector)
-
-	ProcurementPortalPreference_ProcurementPortalSharedSecret = ProcurementPortalPreference.AddMember("ProcurementPortalSharedSecret", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreference_ProcurementPortalInstanceEndpoint = ProcurementPortalPreference.AddMember("ProcurementPortalInstanceEndpoint", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreference_PurchaseOrderRetrievalEndpoint = ProcurementPortalPreference.AddMember("PurchaseOrderRetrievalEndpoint", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreference_TestEnvPreference = ProcurementPortalPreference.AddMember("TestEnvPreference", TestEnvPreference)
-
-	ProcurementPortalPreference_EinvoiceDeliveryEnabled = ProcurementPortalPreference.AddMember("EinvoiceDeliveryEnabled", smithyprelude.Boolean)
-
-	ProcurementPortalPreference_EinvoiceDeliveryPreference = ProcurementPortalPreference.AddMember("EinvoiceDeliveryPreference", EinvoiceDeliveryPreference)
-
-	ProcurementPortalPreference_PurchaseOrderRetrievalEnabled = ProcurementPortalPreference.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
-
-	ProcurementPortalPreference_MarketplacePunchOutEnabled = ProcurementPortalPreference.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
-
-	ProcurementPortalPreference_MarketplacePunchOutPreference = ProcurementPortalPreference.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
-
-	ProcurementPortalPreference_Contacts = ProcurementPortalPreference.AddMember("Contacts", _Contacts)
-
-	ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus = ProcurementPortalPreference.AddMember("EinvoiceDeliveryPreferenceStatus", ProcurementPortalPreferenceStatus)
-
-	ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason = ProcurementPortalPreference.AddMember("EinvoiceDeliveryPreferenceStatusReason", _BasicString)
-
-	ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus = ProcurementPortalPreference.AddMember("PurchaseOrderRetrievalPreferenceStatus", ProcurementPortalPreferenceStatus)
-
-	ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason = ProcurementPortalPreference.AddMember("PurchaseOrderRetrievalPreferenceStatusReason", _BasicString)
-
-	ProcurementPortalPreference_Version = ProcurementPortalPreference.AddMember("Version", smithyprelude.Long)
-
-	ProcurementPortalPreference_CreateDate = ProcurementPortalPreference.AddMember("CreateDate", smithyprelude.Timestamp)
-
-	ProcurementPortalPreference_LastUpdateDate = ProcurementPortalPreference.AddMember("LastUpdateDate", smithyprelude.Timestamp)
-
-	ProcurementPortalPreferenceSummary_AwsAccountId = ProcurementPortalPreferenceSummary.AddMember("AwsAccountId", _AccountIdString)
-
-	ProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn = ProcurementPortalPreferenceSummary.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	ProcurementPortalPreferenceSummary_ProcurementPortalName = ProcurementPortalPreferenceSummary.AddMember("ProcurementPortalName", ProcurementPortalName)
-
-	ProcurementPortalPreferenceSummary_BuyerDomain = ProcurementPortalPreferenceSummary.AddMember("BuyerDomain", BuyerDomain)
-
-	ProcurementPortalPreferenceSummary_BuyerIdentifier = ProcurementPortalPreferenceSummary.AddMember("BuyerIdentifier", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreferenceSummary_SupplierDomain = ProcurementPortalPreferenceSummary.AddMember("SupplierDomain", SupplierDomain)
-
-	ProcurementPortalPreferenceSummary_SupplierIdentifier = ProcurementPortalPreferenceSummary.AddMember("SupplierIdentifier", _BasicStringWithoutSpace)
-
-	ProcurementPortalPreferenceSummary_Selector = ProcurementPortalPreferenceSummary.AddMember("Selector", ProcurementPortalPreferenceSelector)
-
-	ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled = ProcurementPortalPreferenceSummary.AddMember("EinvoiceDeliveryEnabled", smithyprelude.Boolean)
-
-	ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled = ProcurementPortalPreferenceSummary.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
-
-	ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled = ProcurementPortalPreferenceSummary.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
-
-	ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus = ProcurementPortalPreferenceSummary.AddMember("EinvoiceDeliveryPreferenceStatus", ProcurementPortalPreferenceStatus)
-
-	ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason = ProcurementPortalPreferenceSummary.AddMember("EinvoiceDeliveryPreferenceStatusReason", _BasicString)
-
-	ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus = ProcurementPortalPreferenceSummary.AddMember("PurchaseOrderRetrievalPreferenceStatus", ProcurementPortalPreferenceStatus)
-
-	ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason = ProcurementPortalPreferenceSummary.AddMember("PurchaseOrderRetrievalPreferenceStatusReason", _BasicString)
-
-	ProcurementPortalPreferenceSummary_Version = ProcurementPortalPreferenceSummary.AddMember("Version", smithyprelude.Long)
-
-	ProcurementPortalPreferenceSummary_CreateDate = ProcurementPortalPreferenceSummary.AddMember("CreateDate", smithyprelude.Timestamp)
-
-	ProcurementPortalPreferenceSummary_LastUpdateDate = ProcurementPortalPreferenceSummary.AddMember("LastUpdateDate", smithyprelude.Timestamp)
-
-	_ProcurementPortalPreferenceSummaries_member = _ProcurementPortalPreferenceSummaries.AddMember("member", ProcurementPortalPreferenceSummary)
-
-	_ProcurementPortals_member = _ProcurementPortals.AddMember("member", ProcurementPortal)
-
-	ProcurementPortalSupplier_SupplierIdentifier = ProcurementPortalSupplier.AddMember("SupplierIdentifier", _SupplierIdString)
-
-	ProcurementPortalSupplier_SellerOfRecord = ProcurementPortalSupplier.AddMember("SellerOfRecord", _BasicStringWithoutSpace)
-
-	ProcurementPortalSupplier_CountryCode = ProcurementPortalSupplier.AddMember("CountryCode", _CountryCode)
-
-	ProcurementPortalSupplier_Environment = ProcurementPortalSupplier.AddMember("Environment", ProcurementPortalEnv)
-
-	_ProcurementPortalSuppliers_member = _ProcurementPortalSuppliers.AddMember("member", ProcurementPortalSupplier)
-
-	_ProfileList_member = _ProfileList.AddMember("member", InvoiceProfile)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _BasicString)
-
-	ResourceNotFoundException_resourceName = ResourceNotFoundException.AddMember("resourceName", _InvoiceUnitArnString)
-
-	ResourceTag_Key = ResourceTag.AddMember("Key", _ResourceTagKey)
-
-	ResourceTag_Value = ResourceTag.AddMember("Value", _ResourceTagValue)
-
-	_ResourceTagKeyList_member = _ResourceTagKeyList.AddMember("member", _ResourceTagKey)
-
-	_ResourceTagList_member = _ResourceTagList.AddMember("member", ResourceTag)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _BasicString)
-
-	TestEnvPreferenceInput_BuyerDomain = TestEnvPreferenceInput.AddMember("BuyerDomain", BuyerDomain)
-
-	TestEnvPreferenceInput_BuyerIdentifier = TestEnvPreferenceInput.AddMember("BuyerIdentifier", _BasicStringWithoutSpace)
-
-	TestEnvPreferenceInput_SupplierDomain = TestEnvPreferenceInput.AddMember("SupplierDomain", SupplierDomain)
-
-	TestEnvPreferenceInput_SupplierIdentifier = TestEnvPreferenceInput.AddMember("SupplierIdentifier", _BasicStringWithoutSpace)
-
-	TestEnvPreferenceInput_ProcurementPortalSharedSecret = TestEnvPreferenceInput.AddMember("ProcurementPortalSharedSecret", _BasicStringWithoutSpace)
-
-	TestEnvPreferenceInput_ProcurementPortalInstanceEndpoint = TestEnvPreferenceInput.AddMember("ProcurementPortalInstanceEndpoint", _BasicStringWithoutSpace)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _BasicString)
-
-	ValidationExceptionReason_NON_MEMBERS_PRESENT = ValidationExceptionReason.AddMember("NON_MEMBERS_PRESENT", smithyprelude.Unit)
-
-	ValidationExceptionReason_MAX_ACCOUNTS_EXCEEDED = ValidationExceptionReason.AddMember("MAX_ACCOUNTS_EXCEEDED", smithyprelude.Unit)
-
-	ValidationExceptionReason_MAX_INVOICE_UNITS_EXCEEDED = ValidationExceptionReason.AddMember("MAX_INVOICE_UNITS_EXCEEDED", smithyprelude.Unit)
-
-	ValidationExceptionReason_DUPLICATE_INVOICE_UNIT = ValidationExceptionReason.AddMember("DUPLICATE_INVOICE_UNIT", smithyprelude.Unit)
-
-	ValidationExceptionReason_MUTUAL_EXCLUSION_ERROR = ValidationExceptionReason.AddMember("MUTUAL_EXCLUSION_ERROR", smithyprelude.Unit)
-
-	ValidationExceptionReason_ACCOUNT_MEMBERSHIP_ERROR = ValidationExceptionReason.AddMember("ACCOUNT_MEMBERSHIP_ERROR", smithyprelude.Unit)
-
-	ValidationExceptionReason_TAX_SETTINGS_ERROR = ValidationExceptionReason.AddMember("TAX_SETTINGS_ERROR", smithyprelude.Unit)
-
-	ValidationExceptionReason_EXPIRED_NEXT_TOKEN = ValidationExceptionReason.AddMember("EXPIRED_NEXT_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_NEXT_TOKEN = ValidationExceptionReason.AddMember("INVALID_NEXT_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_INPUT = ValidationExceptionReason.AddMember("INVALID_INPUT", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _BasicString)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _BasicString)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _BasicString)
-
-	ValidationException_resourceName = ValidationException.AddMember("resourceName", _InvoiceUnitArnString)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	BatchGetInvoiceProfileRequest_AccountIds = BatchGetInvoiceProfileRequest.AddMember("AccountIds", _AccountIdList)
-
-	BatchGetInvoiceProfileResponse_Profiles = BatchGetInvoiceProfileResponse.AddMember("Profiles", _ProfileList)
-
-	CreateInvoiceUnitRequest_Name = CreateInvoiceUnitRequest.AddMember("Name", _InvoiceUnitName)
-
-	CreateInvoiceUnitRequest_InvoiceReceiver = CreateInvoiceUnitRequest.AddMember("InvoiceReceiver", _AccountIdString)
-
-	CreateInvoiceUnitRequest_Description = CreateInvoiceUnitRequest.AddMember("Description", _DescriptionString)
-
-	CreateInvoiceUnitRequest_TaxInheritanceDisabled = CreateInvoiceUnitRequest.AddMember("TaxInheritanceDisabled", _TaxInheritanceDisabledFlag)
-
-	CreateInvoiceUnitRequest_Rule = CreateInvoiceUnitRequest.AddMember("Rule", InvoiceUnitRule)
-
-	CreateInvoiceUnitRequest_ResourceTags = CreateInvoiceUnitRequest.AddMember("ResourceTags", _ResourceTagList)
-
-	CreateInvoiceUnitRequest_ClientToken = CreateInvoiceUnitRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	CreateInvoiceUnitResponse_InvoiceUnitArn = CreateInvoiceUnitResponse.AddMember("InvoiceUnitArn", _InvoiceUnitArnString)
-
-	CreateProcurementPortalPreferenceRequest_ProcurementPortalName = CreateProcurementPortalPreferenceRequest.AddMember("ProcurementPortalName", ProcurementPortalName)
-
-	CreateProcurementPortalPreferenceRequest_BuyerDomain = CreateProcurementPortalPreferenceRequest.AddMember("BuyerDomain", BuyerDomain)
-
-	CreateProcurementPortalPreferenceRequest_BuyerIdentifier = CreateProcurementPortalPreferenceRequest.AddMember("BuyerIdentifier", _BasicStringWithoutSpace)
-
-	CreateProcurementPortalPreferenceRequest_SupplierDomain = CreateProcurementPortalPreferenceRequest.AddMember("SupplierDomain", SupplierDomain)
-
-	CreateProcurementPortalPreferenceRequest_SupplierIdentifier = CreateProcurementPortalPreferenceRequest.AddMember("SupplierIdentifier", _BasicStringWithoutSpace)
-
-	CreateProcurementPortalPreferenceRequest_Selector = CreateProcurementPortalPreferenceRequest.AddMember("Selector", ProcurementPortalPreferenceSelector)
-
-	CreateProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret = CreateProcurementPortalPreferenceRequest.AddMember("ProcurementPortalSharedSecret", _SensitiveBasicStringWithoutSpace)
-
-	CreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint = CreateProcurementPortalPreferenceRequest.AddMember("ProcurementPortalInstanceEndpoint", _BasicStringWithoutSpace)
-
-	CreateProcurementPortalPreferenceRequest_TestEnvPreference = CreateProcurementPortalPreferenceRequest.AddMember("TestEnvPreference", TestEnvPreferenceInput)
-
-	CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled = CreateProcurementPortalPreferenceRequest.AddMember("EinvoiceDeliveryEnabled", smithyprelude.Boolean)
-
-	CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = CreateProcurementPortalPreferenceRequest.AddMember("EinvoiceDeliveryPreference", EinvoiceDeliveryPreference)
-
-	CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = CreateProcurementPortalPreferenceRequest.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
-
-	CreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = CreateProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
-
-	CreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = CreateProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
-
-	CreateProcurementPortalPreferenceRequest_Contacts = CreateProcurementPortalPreferenceRequest.AddMember("Contacts", _Contacts)
-
-	CreateProcurementPortalPreferenceRequest_ResourceTags = CreateProcurementPortalPreferenceRequest.AddMember("ResourceTags", _ResourceTagList)
-
-	CreateProcurementPortalPreferenceRequest_ClientToken = CreateProcurementPortalPreferenceRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	CreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = CreateProcurementPortalPreferenceResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	DeleteInvoiceUnitRequest_InvoiceUnitArn = DeleteInvoiceUnitRequest.AddMember("InvoiceUnitArn", _InvoiceUnitArnString)
-
-	DeleteInvoiceUnitRequest_ClientToken = DeleteInvoiceUnitRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	DeleteInvoiceUnitResponse_InvoiceUnitArn = DeleteInvoiceUnitResponse.AddMember("InvoiceUnitArn", _InvoiceUnitArnString)
-
-	DeleteProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = DeleteProcurementPortalPreferenceRequest.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	DeleteProcurementPortalPreferenceRequest_ClientToken = DeleteProcurementPortalPreferenceRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	DeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = DeleteProcurementPortalPreferenceResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	GetInvoicePDFRequest_InvoiceId = GetInvoicePDFRequest.AddMember("InvoiceId", _StringWithoutNewLine)
-
-	GetInvoicePDFResponse_InvoicePDF = GetInvoicePDFResponse.AddMember("InvoicePDF", InvoicePDF)
-
-	GetInvoiceUnitRequest_InvoiceUnitArn = GetInvoiceUnitRequest.AddMember("InvoiceUnitArn", _InvoiceUnitArnString)
-
-	GetInvoiceUnitRequest_AsOf = GetInvoiceUnitRequest.AddMember("AsOf", _AsOfTimestamp)
-
-	GetInvoiceUnitResponse_InvoiceUnitArn = GetInvoiceUnitResponse.AddMember("InvoiceUnitArn", _InvoiceUnitArnString)
-
-	GetInvoiceUnitResponse_InvoiceReceiver = GetInvoiceUnitResponse.AddMember("InvoiceReceiver", _AccountIdString)
-
-	GetInvoiceUnitResponse_Name = GetInvoiceUnitResponse.AddMember("Name", _InvoiceUnitName)
-
-	GetInvoiceUnitResponse_Description = GetInvoiceUnitResponse.AddMember("Description", _DescriptionString)
-
-	GetInvoiceUnitResponse_TaxInheritanceDisabled = GetInvoiceUnitResponse.AddMember("TaxInheritanceDisabled", _TaxInheritanceDisabledFlag)
-
-	GetInvoiceUnitResponse_Rule = GetInvoiceUnitResponse.AddMember("Rule", InvoiceUnitRule)
-
-	GetInvoiceUnitResponse_LastModified = GetInvoiceUnitResponse.AddMember("LastModified", _LastModifiedTimestamp)
-
-	GetProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = GetProcurementPortalPreferenceRequest.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	GetProcurementPortalPreferenceResponse_ProcurementPortalPreference = GetProcurementPortalPreferenceResponse.AddMember("ProcurementPortalPreference", ProcurementPortalPreference)
-
-	ListInvoiceSummariesRequest_Selector = ListInvoiceSummariesRequest.AddMember("Selector", InvoiceSummariesSelector)
-
-	ListInvoiceSummariesRequest_Filter = ListInvoiceSummariesRequest.AddMember("Filter", InvoiceSummariesFilter)
-
-	ListInvoiceSummariesRequest_NextToken = ListInvoiceSummariesRequest.AddMember("NextToken", _NextTokenString)
-
-	ListInvoiceSummariesRequest_MaxResults = ListInvoiceSummariesRequest.AddMember("MaxResults", _InvoiceSummariesMaxResults)
-
-	ListInvoiceSummariesResponse_InvoiceSummaries = ListInvoiceSummariesResponse.AddMember("InvoiceSummaries", _InvoiceSummaries)
-
-	ListInvoiceSummariesResponse_NextToken = ListInvoiceSummariesResponse.AddMember("NextToken", _NextTokenString)
-
-	ListInvoiceUnitsRequest_Filters = ListInvoiceUnitsRequest.AddMember("Filters", Filters)
-
-	ListInvoiceUnitsRequest_NextToken = ListInvoiceUnitsRequest.AddMember("NextToken", _NextTokenString)
-
-	ListInvoiceUnitsRequest_MaxResults = ListInvoiceUnitsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListInvoiceUnitsRequest_AsOf = ListInvoiceUnitsRequest.AddMember("AsOf", _AsOfTimestamp)
-
-	ListInvoiceUnitsResponse_InvoiceUnits = ListInvoiceUnitsResponse.AddMember("InvoiceUnits", _InvoiceUnits)
-
-	ListInvoiceUnitsResponse_NextToken = ListInvoiceUnitsResponse.AddMember("NextToken", _NextTokenString)
-
-	ListProcurementPortalPreferencesRequest_NextToken = ListProcurementPortalPreferencesRequest.AddMember("NextToken", _BasicStringWithoutSpace)
-
-	ListProcurementPortalPreferencesRequest_MaxResults = ListProcurementPortalPreferencesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListProcurementPortalPreferencesResponse_ProcurementPortalPreferences = ListProcurementPortalPreferencesResponse.AddMember("ProcurementPortalPreferences", _ProcurementPortalPreferenceSummaries)
-
-	ListProcurementPortalPreferencesResponse_NextToken = ListProcurementPortalPreferencesResponse.AddMember("NextToken", _BasicStringWithoutSpace)
-
-	ListProcurementPortalsRequest_NextToken = ListProcurementPortalsRequest.AddMember("NextToken", _BasicStringWithoutSpace)
-
-	ListProcurementPortalsRequest_MaxResults = ListProcurementPortalsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListProcurementPortalsResponse_ProcurementPortals = ListProcurementPortalsResponse.AddMember("ProcurementPortals", _ProcurementPortals)
-
-	ListProcurementPortalsResponse_NextToken = ListProcurementPortalsResponse.AddMember("NextToken", _BasicStringWithoutSpace)
-
-	ListProcurementPortalSuppliersRequest_PortalIdentifier = ListProcurementPortalSuppliersRequest.AddMember("PortalIdentifier", _ProcurementPortalIdString)
-
-	ListProcurementPortalSuppliersRequest_NextToken = ListProcurementPortalSuppliersRequest.AddMember("NextToken", _BasicStringWithoutSpace)
-
-	ListProcurementPortalSuppliersRequest_MaxResults = ListProcurementPortalSuppliersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers = ListProcurementPortalSuppliersResponse.AddMember("ProcurementPortalSuppliers", _ProcurementPortalSuppliers)
-
-	ListProcurementPortalSuppliersResponse_NextToken = ListProcurementPortalSuppliersResponse.AddMember("NextToken", _BasicStringWithoutSpace)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _TagrisArn)
-
-	ListTagsForResourceResponse_ResourceTags = ListTagsForResourceResponse.AddMember("ResourceTags", _ResourceTagList)
-
-	PutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = PutProcurementPortalPreferenceRequest.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	PutProcurementPortalPreferenceRequest_Selector = PutProcurementPortalPreferenceRequest.AddMember("Selector", ProcurementPortalPreferenceSelector)
-
-	PutProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret = PutProcurementPortalPreferenceRequest.AddMember("ProcurementPortalSharedSecret", _SensitiveBasicStringWithoutSpace)
-
-	PutProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint = PutProcurementPortalPreferenceRequest.AddMember("ProcurementPortalInstanceEndpoint", _BasicStringWithoutSpace)
-
-	PutProcurementPortalPreferenceRequest_TestEnvPreference = PutProcurementPortalPreferenceRequest.AddMember("TestEnvPreference", TestEnvPreferenceInput)
-
-	PutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled = PutProcurementPortalPreferenceRequest.AddMember("EinvoiceDeliveryEnabled", smithyprelude.Boolean)
-
-	PutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = PutProcurementPortalPreferenceRequest.AddMember("EinvoiceDeliveryPreference", EinvoiceDeliveryPreference)
-
-	PutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = PutProcurementPortalPreferenceRequest.AddMember("PurchaseOrderRetrievalEnabled", smithyprelude.Boolean)
-
-	PutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = PutProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutEnabled", smithyprelude.Boolean)
-
-	PutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = PutProcurementPortalPreferenceRequest.AddMember("MarketplacePunchOutPreference", MarketplacePunchOutPreference)
-
-	PutProcurementPortalPreferenceRequest_Contacts = PutProcurementPortalPreferenceRequest.AddMember("Contacts", _Contacts)
-
-	PutProcurementPortalPreferenceRequest_ClientToken = PutProcurementPortalPreferenceRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	PutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = PutProcurementPortalPreferenceResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	SendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = SendProcurementPortalValidationRequest.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	SendProcurementPortalValidationRequest_ClientToken = SendProcurementPortalValidationRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	SendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = SendProcurementPortalValidationResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TagrisArn)
-
-	TagResourceRequest_ResourceTags = TagResourceRequest.AddMember("ResourceTags", _ResourceTagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TagrisArn)
-
-	UntagResourceRequest_ResourceTagKeys = UntagResourceRequest.AddMember("ResourceTagKeys", _ResourceTagKeyList)
-
-	UpdateInvoiceUnitRequest_InvoiceUnitArn = UpdateInvoiceUnitRequest.AddMember("InvoiceUnitArn", _InvoiceUnitArnString)
-
-	UpdateInvoiceUnitRequest_Description = UpdateInvoiceUnitRequest.AddMember("Description", _DescriptionString)
-
-	UpdateInvoiceUnitRequest_TaxInheritanceDisabled = UpdateInvoiceUnitRequest.AddMember("TaxInheritanceDisabled", _TaxInheritanceDisabledFlag)
-
-	UpdateInvoiceUnitRequest_Rule = UpdateInvoiceUnitRequest.AddMember("Rule", InvoiceUnitRule)
-
-	UpdateInvoiceUnitRequest_ClientToken = UpdateInvoiceUnitRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	UpdateInvoiceUnitResponse_InvoiceUnitArn = UpdateInvoiceUnitResponse.AddMember("InvoiceUnitArn", _InvoiceUnitArnString)
-
-	UpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn = UpdateProcurementPortalPreferenceStatusRequest.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus = UpdateProcurementPortalPreferenceStatusRequest.AddMember("EinvoiceDeliveryPreferenceStatus", ProcurementPortalPreferenceStatus)
-
-	UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason = UpdateProcurementPortalPreferenceStatusRequest.AddMember("EinvoiceDeliveryPreferenceStatusReason", _BasicString)
-
-	UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus = UpdateProcurementPortalPreferenceStatusRequest.AddMember("PurchaseOrderRetrievalPreferenceStatus", ProcurementPortalPreferenceStatus)
-
-	UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason = UpdateProcurementPortalPreferenceStatusRequest.AddMember("PurchaseOrderRetrievalPreferenceStatusReason", _BasicString)
-
-	UpdateProcurementPortalPreferenceStatusRequest_ClientToken = UpdateProcurementPortalPreferenceStatusRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn = UpdateProcurementPortalPreferenceStatusResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	VerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = VerifyProcurementPortalValidationRequest.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
-	VerifyProcurementPortalValidationRequest_Code = VerifyProcurementPortalValidationRequest.AddMember("Code", _BasicStringWithoutSpace)
-
-	VerifyProcurementPortalValidationRequest_ClientToken = VerifyProcurementPortalValidationRequest.AddMember("ClientToken", _BasicStringWithoutSpace)
-
-	VerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = VerifyProcurementPortalValidationResponse.AddMember("ProcurementPortalPreferenceArn", _ProcurementPortalPreferenceArnString)
-
+const blob = "" +
+	"UpdateProcurementPortalPreferenceStatusResponseUpdateProcurementPortalPreferenceStatusRequestPurchas" +
+	"eOrderRetrievalPreferenceStatusReasonCreateProcurementPortalPreferenceResponseDeleteProcurementPorta" +
+	"lPreferenceResponseVerifyProcurementPortalValidationResponseCreateProcurementPortalPreferenceRequest" +
+	"DeleteProcurementPortalPreferenceRequestListProcurementPortalPreferencesResponseVerifyProcurementPor" +
+	"talValidationRequestListProcurementPortalPreferencesRequestSendProcurementPortalValidationResponseEi" +
+	"nvoiceDeliveryPreferenceStatusReasonGetProcurementPortalPreferenceResponseListProcurementPortalSuppl" +
+	"iersResponsePutProcurementPortalPreferenceResponseSendProcurementPortalValidationRequestGetProcureme" +
+	"ntPortalPreferenceRequestListProcurementPortalSuppliersRequestPutProcurementPortalPreferenceRequestP" +
+	"rocurementPortalPreferenceArnStringProcurementPortalPreferenceSummariesProcurementPortalPreferenceSe" +
+	"lectorASSOCIATED_PURCHASE_ORDER_REQUIREDProcurementPortalPreferenceSummaryProcurementPortalInstanceE" +
+	"ndpointListInvoiceSummariesResourceTypeSensitiveBasicStringWithoutSpaceEinvoiceDeliveryAttachmentTyp" +
+	"esBatchGetInvoiceProfileResponseEinvoiceDeliveryActivationDateListProcurementPortalsResponsePurchase" +
+	"OrderRetrievalEndpointBatchGetInvoiceProfileRequestEinvoiceDeliveryDocumentTypesListProcurementPorta" +
+	"lsRequestMarketplacePunchOutPreferenceProcurementPortalSharedSecretPurchaseOrderRetrievalEnabledServ" +
+	"iceQuotaExceededExceptionBillSourceAccountsTotalCountDefaultFeatureConfigurationsDiscountsBreakdownA" +
+	"mountListListInvoiceSummariesResponseValidationExceptionFieldListAWS_MARKETPLACE_CREDIT_MEMOListInvo" +
+	"iceSummariesRequestListTagsForResourceResponsePURCHASE_ORDER_NOT_REQUIREDPurchaseOrderDataSourceType" +
+	"ApprovalRequestRedirectUrlInvoiceSummariesMaxResultsListTagsForResourceRequestMAX_INVOICE_UNITS_EXCE" +
+	"EDEDMarketplacePunchOutEnabledTEST_INITIALIZATION_FAILEDTaxInheritanceDisabledFlagCreateInvoiceUnitR" +
+	"esponseDeleteInvoiceUnitResponseDocumentUrlExpirationDateProcurementPortalIdStringResourceNotFoundEx" +
+	"ceptionUpdateInvoiceUnitResponseValidationExceptionReasonACCOUNT_MEMBERSHIP_ERRORCreateInvoiceUnitRe" +
+	"questDeleteInvoiceUnitRequestInvoiceSummariesSelectorListInvoiceUnitsResponsePurchaseOrderDataSource" +
+	"sSupplementalDocumentTypeTaxesBreakdownAmountListUpdateInvoiceUnitRequestAWS_MARKETPLACE_INVOICEAWS_" +
+	"REQUEST_FOR_PAYMENTConnectionTestingMethodCurrencyExchangeDetailsEinvoiceDeliveryEnabledFIELD_VALIDA" +
+	"TION_FAILEDFeesBreakdownAmountListInternalServerExceptionListInvoiceUnitsRequestDUPLICATE_INVOICE_UN" +
+	"ITEinvoiceDeliveryStatusGetInvoiceUnitResponseInvoiceSummariesFilterMUTUAL_EXCLUSION_ERRORTestEnvPre" +
+	"ferenceInputAWS_CLOUD_CREDIT_MEMOAccessDeniedExceptionBillSourceAccountListGetInvoicePDFResponseGetI" +
+	"nvoiceUnitRequestInvoiceCurrencyAmountLastModifiedTimestampMAX_ACCOUNTS_EXCEEDEDPaymentCurrencyAmoun" +
+	"tProcurementPortalNameSupplementalDocumentsTaxRegistrationNumberUntagResourceResponseGetInvoicePDFRe" +
+	"questInvoiceConfigurationInvoiceUnitArnStringPENDING_VERIFICATIONPROD_ENV_DOLLAR_TESTProcurementPort" +
+	"alEnvSAP_BUSINESS_NETWORKStringWithoutNewLineTEST_ENV_REPLAY_TESTTotalAmountBeforeTaxUntagResourceRe" +
+	"questCommercialInvoiceIdNON_MEMBERS_PRESENTPurchaseOrderNumberTagResourceResponseThrottlingException" +
+	"BaseCurrencyAmountEXPIRED_NEXT_TOKENGOVERNMENT_INVOICEINVALID_NEXT_TOKENResourceTagKeyListSourceCurr" +
+	"encyCodeSupplierIdentifierTAX_SETTINGS_ERRORTagResourceRequestTargetCurrencyCodeTaxAuthorityStatusAW" +
+	"S_CLOUD_INVOICEConflictExceptionDescriptionStringMaxResultsIntegerOriginalInvoiceIdPortalDisplayName" +
+	"RuleAccountIdListTaxCurrencyAmountUNKNOWN_OPERATIONretryAfterSecondsDistrictOrCountyInvoiceFrequency" +
+	"InvoiceReceiversInvoiceUnitNamesPortalIdentifierResourceTagValueSupplierIdStringTEST_INITIALIZEDAcco" +
+	"untIdStringAmountBreakdownBuyerIdentifierInvoiceUnitArnsInvoiceUnitRuleInvoicingEntityNextTokenStrin" +
+	"gPAYMENT_RECEIPTReceiverAddressResourceTagKeysResourceTagListSellerOfRecordsInvoiceSummaryLastUpdate" +
+	"DateLinkedAccountsSubTotalAmountSupplierDomainAsOfTimestampBillingEntityBillingPeriodINVALID_INPUTNO" +
+	"T_DELIVEREDReceiverEmailStateOrRegionTAX_E_INVOICEAddressLine1AddressLine2AddressLine3AwsAccountIdCA" +
+	"NNOT_PARSEDateIntervalReceiverNameReceiverRoleResourceTagsTimeIntervalresourceNameresourceTypeANNIVE" +
+	"RSARYBuyerDomainClientTokenCompanyNameCountryCodeEmailStringEnvironmentINVOICE_PDFInvoiceTypeProfile" +
+	"ListResourceArnTEST_FAILEDACCOUNT_IDAccountIdsCreateDateDocumentIdINVOICE_IDIssuedDatePostalCodeSUPP" +
+	"LEMENTresourceIdCANCELLEDNetworkIDRECURRINGSUSPENDEDStartDateTagrisArnVALIDATEDfieldListBillTypeCont" +
+	"actsONE_TIMEProfilesProtocolRESELLERBooleanDueDateEndDateFiltersRFP_PDFVersionmessageACTIVEISSUEDIss" +
+	"uerREFUNDmemberreasonBUYERCOUPAMonthOTHERCXMLCityLongRateYearname"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.invoicing", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1102, Target: 0, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1882, Target: 1, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 137, Target: 2, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1907, Target: 3, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 178, Target: 4, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2675, Target: 5, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2524, Target: 6, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 536, Target: 7, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1007, Target: 8, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2153, Target: 9, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 340, Target: 10, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1162, Target: 11, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 574, Target: 12, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1619, Target: 13, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 612, Target: 14, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 459, Target: 15, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3162, Target: 16, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2864, Target: 17, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2007, Target: 18, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 19, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 219, Target: 20, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3771, Target: 21, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2633, Target: 22, Traits: 1, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4578, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4170, Target: 197, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3504, Target: 25, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 27, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3696, Target: 27, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3711, Target: 28, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3918, Target: 34, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1481, Target: 72, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2225, Target: 361, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2411, Target: 110, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3946, Target: 33, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1048, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1048, Target: 35, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3959, Target: 36, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1565, Target: 567, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1565, Target: 567, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3972, Target: 39, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4631, Target: 214, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4657, Target: 413, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2654, Target: 42, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 27, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4488, Target: 44, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4194, Target: 567, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 917, Target: 567, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4603, Target: 567, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4205, Target: 48, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4425, Target: 567, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3415, Target: 50, Traits: 2, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4578, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4406, Target: 34, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4182, Target: 34, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2319, Target: 54, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2965, Target: 567, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3045, Target: 567, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4496, Target: 57, Traits: 3, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2818, Target: 34, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4019, Target: 104, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4496, Target: 60, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 57, Traits: 4, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4238, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3296, Target: 63, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2342, Target: 64, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3290, Target: 34, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3362, Target: 34, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4653, Target: 34, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4110, Target: 68, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4452, Target: 568, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4550, Target: 568, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3432, Target: 71, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1481, Target: 72, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1490, Target: 79, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3065, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1481, Target: 75, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3432, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1499, Target: 34, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4653, Target: 34, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1481, Target: 79, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 75, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1071, Target: 81, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4271, Target: 567, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4564, Target: 567, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1071, Target: 84, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 81, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1251, Target: 86, Traits: 0, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3398, Target: 567, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2612, Target: 567, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2273, Target: 567, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1565, Target: 567, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2296, Target: 567, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1251, Target: 92, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 86, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 498, Target: 94, Traits: 0, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1251, Target: 92, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1071, Target: 84, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4520, Target: 298, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2177, Target: 303, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2319, Target: 54, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1132, Target: 568, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2502, Target: 101, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4002, Target: 567, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3998, Target: 567, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4249, Target: 104, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3780, Target: 105, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3771, Target: 34, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3959, Target: 36, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1460, Target: 108, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2905, Target: 127, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2411, Target: 110, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1490, Target: 117, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3065, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2411, Target: 113, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3432, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1499, Target: 34, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4653, Target: 34, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2411, Target: 117, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 113, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4557, Target: 119, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3627, Target: 199, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3600, Target: 25, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1435, Target: 25, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1425, Target: 25, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2434, Target: 124, Traits: 5, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3551, Target: 569, Traits: 6, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4578, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2905, Target: 127, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1267, Target: 92, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1087, Target: 84, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2717, Target: 130, Traits: 0, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3065, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3065, Target: 34, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3296, Target: 63, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3711, Target: 28, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2342, Target: 64, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3584, Target: 136, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4504, Target: 567, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4434, Target: 567, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2678, Target: 139, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3115, Target: 341, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1932, Target: 341, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1932, Target: 568, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2822, Target: 347, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1110, Target: 144, Traits: 0, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3504, Target: 27, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4122, Target: 35, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3816, Target: 308, Traits: 4, StrLen: 15, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4011, Target: 338, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4597, Target: 35, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2843, Target: 338, Traits: 4, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1011, Target: 151, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 162, Traits: 0, StrLen: 6, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2546, Target: 153, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4158, Target: 68, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3972, Target: 39, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3771, Target: 34, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4134, Target: 318, Traits: 0, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1726, Target: 158, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2129, Target: 159, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1027, Target: 207, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3659, Target: 341, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3876, Target: 162, Traits: 0, StrLen: 14, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3504, Target: 27, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3115, Target: 34, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4376, Target: 568, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4543, Target: 568, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1425, Target: 42, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1425, Target: 569, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4134, Target: 318, Traits: 0, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3780, Target: 105, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3972, Target: 39, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3584, Target: 136, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4488, Target: 44, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4282, Target: 183, Traits: 0, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3105, Target: 34, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3466, Target: 34, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3143, Target: 34, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2502, Target: 101, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3380, Target: 358, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3200, Target: 130, Traits: 0, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3517, Target: 130, Traits: 0, StrLen: 17, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2780, Target: 130, Traits: 0, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4282, Target: 183, Traits: 0, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1782, Target: 567, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1581, Target: 567, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3801, Target: 567, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1888, Target: 187, Traits: 0, StrLen: 11, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3600, Target: 27, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2818, Target: 198, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3432, Target: 71, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1856, Target: 370, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3500, Target: 201, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2738, Target: 206, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3741, Target: 195, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 197, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3616, Target: 198, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3616, Target: 199, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 198, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3756, Target: 201, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3904, Target: 334, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1425, Target: 334, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2157, Target: 204, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 187, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2738, Target: 206, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1007, Target: 207, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4326, Target: 567, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4366, Target: 567, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1309, Target: 210, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1700, Target: 35, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1742, Target: 212, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3449, Target: 213, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4631, Target: 214, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3786, Target: 215, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6, Target: 216, Traits: 0, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3632, Target: 224, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2812, Target: 225, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3483, Target: 34, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1453, Target: 108, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2985, Target: 221, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2965, Target: 567, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1830, Target: 567, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1957, Target: 224, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2801, Target: 225, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3005, Target: 567, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4626, Target: 567, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6, Target: 228, Traits: 0, StrLen: 27, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4086, Target: 27, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2801, Target: 225, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4205, Target: 48, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3726, Target: 35, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3932, Target: 354, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3308, Target: 35, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 898, Target: 255, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1338, Target: 35, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 974, Target: 35, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1192, Target: 35, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2590, Target: 371, Traits: 0, StrLen: 17, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2365, Target: 570, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 498, Target: 94, Traits: 0, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1367, Target: 570, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1804, Target: 570, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1309, Target: 210, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4496, Target: 60, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 498, Target: 258, Traits: 0, StrLen: 32, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 498, Target: 34, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 93, Target: 258, Traits: 0, StrLen: 38, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 93, Target: 34, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4571, Target: 571, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4346, Target: 568, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3890, Target: 568, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 871, Target: 255, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3741, Target: 195, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3861, Target: 336, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6, Target: 258, Traits: 0, StrLen: 33, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2945, Target: 567, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4470, Target: 567, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3680, Target: 567, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1830, Target: 567, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4315, Target: 567, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4585, Target: 567, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4443, Target: 567, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 835, Target: 266, Traits: 0, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 268, Traits: 0, StrLen: 6, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 940, Target: 268, Traits: 0, StrLen: 34, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4086, Target: 27, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2801, Target: 225, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4205, Target: 48, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3726, Target: 35, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3932, Target: 354, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3308, Target: 35, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 898, Target: 255, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2365, Target: 570, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1367, Target: 570, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1804, Target: 570, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 498, Target: 258, Traits: 0, StrLen: 32, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 498, Target: 34, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 93, Target: 258, Traits: 0, StrLen: 38, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 93, Target: 34, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4571, Target: 571, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4346, Target: 568, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3890, Target: 568, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1166, Target: 287, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 216, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 578, Target: 289, Traits: 0, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3308, Target: 356, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3861, Target: 35, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4238, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4260, Target: 221, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 578, Target: 294, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 289, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4293, Target: 296, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 144, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4520, Target: 298, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4641, Target: 567, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1673, Target: 300, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1251, Target: 86, Traits: 0, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1673, Target: 305, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2177, Target: 303, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 300, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1673, Target: 305, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 906, Target: 567, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1646, Target: 567, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3816, Target: 308, Traits: 3, StrLen: 15, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 34, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4062, Target: 34, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4074, Target: 34, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3568, Target: 34, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4645, Target: 34, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4024, Target: 34, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4238, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4227, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4386, Target: 34, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4134, Target: 318, Traits: 0, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4530, Target: 567, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4528, Target: 567, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4621, Target: 567, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1982, Target: 322, Traits: 7, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4578, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4170, Target: 197, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3272, Target: 325, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3283, Target: 328, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3659, Target: 333, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3272, Target: 328, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3272, Target: 329, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 328, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3846, Target: 331, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 325, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3648, Target: 333, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3500, Target: 334, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 27, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3861, Target: 336, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 35, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1039, Target: 338, Traits: 3, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1396, Target: 339, Traits: 8, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4578, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3025, Target: 341, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2201, Target: 342, Traits: 0, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1267, Target: 349, Traits: 0, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4356, Target: 341, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1932, Target: 341, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1932, Target: 568, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2822, Target: 347, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 342, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2201, Target: 349, Traits: 0, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3236, Target: 567, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4037, Target: 567, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3801, Target: 567, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4396, Target: 567, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3932, Target: 354, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4425, Target: 567, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3664, Target: 356, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4461, Target: 357, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3380, Target: 358, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4591, Target: 567, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4416, Target: 567, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2225, Target: 361, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1490, Target: 368, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3065, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2225, Target: 364, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3432, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1499, Target: 34, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4653, Target: 34, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2225, Target: 368, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 364, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1856, Target: 370, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 2590, Target: 371, Traits: 0, StrLen: 17, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4205, Target: 48, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3726, Target: 35, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3932, Target: 354, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3308, Target: 35, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1338, Target: 35, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 974, Target: 35, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1192, Target: 35, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2590, Target: 379, Traits: 0, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4205, Target: 48, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3726, Target: 35, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3932, Target: 354, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3308, Target: 35, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1338, Target: 35, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 974, Target: 35, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3181, Target: 386, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4578, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1537, Target: 388, Traits: 10, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4578, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4170, Target: 197, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4615, Target: 398, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4479, Target: 396, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1537, Target: 393, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4661, Target: 34, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4578, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1537, Target: 396, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4609, Target: 393, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2032, Target: 398, Traits: 0, StrLen: 25, Count: 14, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3124, Target: 567, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2759, Target: 567, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1778, Target: 567, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2480, Target: 567, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2568, Target: 567, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2057, Target: 567, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3326, Target: 567, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3218, Target: 567, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3254, Target: 567, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3985, Target: 567, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2388, Target: 567, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4098, Target: 567, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3534, Target: 567, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4636, Target: 567, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4657, Target: 413, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1222, Target: 414, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4336, Target: 25, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1102, Target: 416, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4512, Target: 296, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2081, Target: 418, Traits: 0, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2818, Target: 198, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3600, Target: 27, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3432, Target: 71, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1856, Target: 370, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3500, Target: 201, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4146, Target: 331, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1882, Target: 426, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 260, Target: 428, Traits: 0, StrLen: 40, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2801, Target: 225, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4205, Target: 48, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3726, Target: 35, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3932, Target: 354, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3308, Target: 35, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 898, Target: 255, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1338, Target: 338, Traits: 4, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 974, Target: 35, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2590, Target: 379, Traits: 0, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2365, Target: 570, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 498, Target: 94, Traits: 0, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1367, Target: 570, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1804, Target: 570, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1309, Target: 210, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4496, Target: 60, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4146, Target: 331, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 137, Target: 446, Traits: 0, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2105, Target: 448, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1907, Target: 451, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 300, Target: 453, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 178, Target: 456, Traits: 0, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2885, Target: 458, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3115, Target: 341, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2675, Target: 460, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2678, Target: 139, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2696, Target: 462, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3946, Target: 33, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2524, Target: 465, Traits: 0, StrLen: 22, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3600, Target: 27, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2818, Target: 198, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3432, Target: 71, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1856, Target: 370, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3500, Target: 201, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2738, Target: 206, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 688, Target: 473, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 536, Target: 475, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6, Target: 228, Traits: 0, StrLen: 27, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1592, Target: 477, Traits: 0, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 898, Target: 159, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2562, Target: 153, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3786, Target: 215, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1742, Target: 158, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1509, Target: 482, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1011, Target: 151, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3786, Target: 215, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2457, Target: 485, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4557, Target: 119, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3786, Target: 215, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1742, Target: 213, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3946, Target: 33, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2153, Target: 490, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2157, Target: 204, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3786, Target: 215, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 420, Target: 493, Traits: 0, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3786, Target: 35, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1742, Target: 212, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 340, Target: 496, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 344, Target: 266, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3786, Target: 35, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1280, Target: 499, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3786, Target: 35, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1742, Target: 212, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1162, Target: 502, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1166, Target: 287, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3786, Target: 35, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 725, Target: 505, Traits: 0, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3632, Target: 224, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3786, Target: 35, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1742, Target: 212, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 574, Target: 509, Traits: 0, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 578, Target: 294, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3786, Target: 35, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1752, Target: 512, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4304, Target: 357, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1619, Target: 514, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4146, Target: 331, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 762, Target: 516, Traits: 0, StrLen: 37, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 898, Target: 255, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1338, Target: 338, Traits: 4, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 974, Target: 35, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2590, Target: 379, Traits: 0, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2365, Target: 570, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 498, Target: 94, Traits: 0, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1367, Target: 570, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1804, Target: 570, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1309, Target: 210, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4496, Target: 60, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 529, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 650, Target: 531, Traits: 0, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 459, Target: 534, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3344, Target: 536, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4304, Target: 357, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4146, Target: 331, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3162, Target: 539, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3085, Target: 540, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4304, Target: 357, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3831, Target: 329, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2864, Target: 543, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2249, Target: 544, Traits: 0, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3432, Target: 71, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1856, Target: 370, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3500, Target: 201, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2007, Target: 550, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2925, Target: 197, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 47, Target: 552, Traits: 0, StrLen: 46, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 498, Target: 258, Traits: 0, StrLen: 32, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 498, Target: 34, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 93, Target: 258, Traits: 0, StrLen: 38, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 93, Target: 34, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 559, Traits: 0, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 380, Target: 561, Traits: 0, StrLen: 40, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3304, Target: 35, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4216, Target: 35, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 219, Target: 565, Traits: 0, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 799, Target: 254, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1895, Target: 567, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 2750, Target: 568, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 3459, Target: 569, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 4536, Target: 570, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 4649, Target: 571, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvoicingAccessDenied",
+			StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvoicingConflict",
+			StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvoicingInternalServer",
+			StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvoicingResourceNotFound",
+			StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvoicingServiceQuotaExceeded",
+			StatusCode: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvoicingThrottling",
+			StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvoicingValidation",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+	},
 }
+
+var handles = [572]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+}
+
+var BatchGetInvoiceProfile = &handles[0]
+
+var CreateInvoiceUnit = &handles[1]
+
+var CreateProcurementPortalPreference = &handles[2]
+
+var DeleteInvoiceUnit = &handles[3]
+
+var DeleteProcurementPortalPreference = &handles[4]
+
+var GetInvoicePDF = &handles[5]
+
+var GetInvoiceUnit = &handles[6]
+
+var GetProcurementPortalPreference = &handles[7]
+
+var ListInvoiceSummaries = &handles[8]
+
+var ListInvoiceUnits = &handles[9]
+
+var ListProcurementPortalPreferences = &handles[10]
+
+var ListProcurementPortals = &handles[11]
+
+var ListProcurementPortalSuppliers = &handles[12]
+
+var ListTagsForResource = &handles[13]
+
+var PutProcurementPortalPreference = &handles[14]
+
+var SendProcurementPortalValidation = &handles[15]
+
+var TagResource = &handles[16]
+
+var UntagResource = &handles[17]
+
+var UpdateInvoiceUnit = &handles[18]
+
+var UpdateProcurementPortalPreferenceStatus = &handles[19]
+
+var VerifyProcurementPortalValidation = &handles[20]
+
+var _Invoicing = &handles[21]
+
+var AccessDeniedException = &handles[22]
+var AccessDeniedException_message = &handles[23]
+var AccessDeniedException_resourceName = &handles[24]
+
+var _AccountIdList = &handles[25]
+var _AccountIdList_member = &handles[26]
+
+var _AccountIdString = &handles[27]
+
+var AmountBreakdown = &handles[28]
+var AmountBreakdown_SubTotalAmount = &handles[29]
+var AmountBreakdown_Discounts = &handles[30]
+var AmountBreakdown_Taxes = &handles[31]
+var AmountBreakdown_Fees = &handles[32]
+
+var _AsOfTimestamp = &handles[33]
+
+var _BasicString = &handles[34]
+
+var _BasicStringWithoutSpace = &handles[35]
+
+var BillingEntity = &handles[36]
+var BillingEntity_AWS = &handles[37]
+var BillingEntity_AWS_MARKETPLACE = &handles[38]
+
+var BillingPeriod = &handles[39]
+var BillingPeriod_Month = &handles[40]
+var BillingPeriod_Year = &handles[41]
+
+var _BillSourceAccountList = &handles[42]
+var _BillSourceAccountList_member = &handles[43]
+
+var BillType = &handles[44]
+var BillType_ANNIVERSARY = &handles[45]
+var BillType_PURCHASE = &handles[46]
+var BillType_REFUND = &handles[47]
+
+var BuyerDomain = &handles[48]
+var BuyerDomain_NetworkID = &handles[49]
+
+var ConflictException = &handles[50]
+var ConflictException_message = &handles[51]
+var ConflictException_resourceId = &handles[52]
+var ConflictException_resourceType = &handles[53]
+
+var ConnectionTestingMethod = &handles[54]
+var ConnectionTestingMethod_PROD_ENV_DOLLAR_TEST = &handles[55]
+var ConnectionTestingMethod_TEST_ENV_REPLAY_TEST = &handles[56]
+
+var Contact = &handles[57]
+var Contact_Name = &handles[58]
+var Contact_Email = &handles[59]
+
+var _Contacts = &handles[60]
+var _Contacts_member = &handles[61]
+
+var _CountryCode = &handles[62]
+
+var _CurrencyCode = &handles[63]
+
+var CurrencyExchangeDetails = &handles[64]
+var CurrencyExchangeDetails_SourceCurrencyCode = &handles[65]
+var CurrencyExchangeDetails_TargetCurrencyCode = &handles[66]
+var CurrencyExchangeDetails_Rate = &handles[67]
+
+var DateInterval = &handles[68]
+var DateInterval_StartDate = &handles[69]
+var DateInterval_EndDate = &handles[70]
+
+var _DescriptionString = &handles[71]
+
+var DiscountsBreakdown = &handles[72]
+var DiscountsBreakdown_Breakdown = &handles[73]
+var DiscountsBreakdown_TotalAmount = &handles[74]
+
+var DiscountsBreakdownAmount = &handles[75]
+var DiscountsBreakdownAmount_Description = &handles[76]
+var DiscountsBreakdownAmount_Amount = &handles[77]
+var DiscountsBreakdownAmount_Rate = &handles[78]
+
+var _DiscountsBreakdownAmountList = &handles[79]
+var _DiscountsBreakdownAmountList_member = &handles[80]
+
+var EinvoiceDeliveryAttachmentType = &handles[81]
+var EinvoiceDeliveryAttachmentType_INVOICE_PDF = &handles[82]
+var EinvoiceDeliveryAttachmentType_RFP_PDF = &handles[83]
+
+var _EinvoiceDeliveryAttachmentTypes = &handles[84]
+var _EinvoiceDeliveryAttachmentTypes_member = &handles[85]
+
+var EinvoiceDeliveryDocumentType = &handles[86]
+var EinvoiceDeliveryDocumentType_AWS_CLOUD_INVOICE = &handles[87]
+var EinvoiceDeliveryDocumentType_AWS_CLOUD_CREDIT_MEMO = &handles[88]
+var EinvoiceDeliveryDocumentType_AWS_MARKETPLACE_INVOICE = &handles[89]
+var EinvoiceDeliveryDocumentType_AWS_MARKETPLACE_CREDIT_MEMO = &handles[90]
+var EinvoiceDeliveryDocumentType_AWS_REQUEST_FOR_PAYMENT = &handles[91]
+
+var _EinvoiceDeliveryDocumentTypes = &handles[92]
+var _EinvoiceDeliveryDocumentTypes_member = &handles[93]
+
+var EinvoiceDeliveryPreference = &handles[94]
+var EinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes = &handles[95]
+var EinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes = &handles[96]
+var EinvoiceDeliveryPreference_Protocol = &handles[97]
+var EinvoiceDeliveryPreference_PurchaseOrderDataSources = &handles[98]
+var EinvoiceDeliveryPreference_ConnectionTestingMethod = &handles[99]
+var EinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate = &handles[100]
+
+var EinvoiceDeliveryStatus = &handles[101]
+var EinvoiceDeliveryStatus_DELIVERED = &handles[102]
+var EinvoiceDeliveryStatus_NOT_DELIVERED = &handles[103]
+
+var _EmailString = &handles[104]
+
+var Entity = &handles[105]
+var Entity_InvoicingEntity = &handles[106]
+var Entity_BillingEntity = &handles[107]
+
+var FeatureConfigurations = &handles[108]
+var FeatureConfigurations_InvoiceConfiguration = &handles[109]
+
+var FeesBreakdown = &handles[110]
+var FeesBreakdown_Breakdown = &handles[111]
+var FeesBreakdown_TotalAmount = &handles[112]
+
+var FeesBreakdownAmount = &handles[113]
+var FeesBreakdownAmount_Description = &handles[114]
+var FeesBreakdownAmount_Amount = &handles[115]
+var FeesBreakdownAmount_Rate = &handles[116]
+
+var _FeesBreakdownAmountList = &handles[117]
+var _FeesBreakdownAmountList_member = &handles[118]
+
+var Filters = &handles[119]
+var Filters_Names = &handles[120]
+var Filters_InvoiceReceivers = &handles[121]
+var Filters_Accounts = &handles[122]
+var Filters_BillSourceAccounts = &handles[123]
+
+var InternalServerException = &handles[124]
+var InternalServerException_retryAfterSeconds = &handles[125]
+var InternalServerException_message = &handles[126]
+
+var InvoiceConfiguration = &handles[127]
+var InvoiceConfiguration_DocumentTypes = &handles[128]
+var InvoiceConfiguration_AttachmentTypes = &handles[129]
+
+var InvoiceCurrencyAmount = &handles[130]
+var InvoiceCurrencyAmount_TotalAmount = &handles[131]
+var InvoiceCurrencyAmount_TotalAmountBeforeTax = &handles[132]
+var InvoiceCurrencyAmount_CurrencyCode = &handles[133]
+var InvoiceCurrencyAmount_AmountBreakdown = &handles[134]
+var InvoiceCurrencyAmount_CurrencyExchangeDetails = &handles[135]
+
+var InvoiceFrequency = &handles[136]
+var InvoiceFrequency_ONE_TIME = &handles[137]
+var InvoiceFrequency_RECURRING = &handles[138]
+
+var InvoicePDF = &handles[139]
+var InvoicePDF_InvoiceId = &handles[140]
+var InvoicePDF_DocumentUrl = &handles[141]
+var InvoicePDF_DocumentUrlExpirationDate = &handles[142]
+var InvoicePDF_SupplementalDocuments = &handles[143]
+
+var InvoiceProfile = &handles[144]
+var InvoiceProfile_AccountId = &handles[145]
+var InvoiceProfile_ReceiverName = &handles[146]
+var InvoiceProfile_ReceiverAddress = &handles[147]
+var InvoiceProfile_ReceiverEmail = &handles[148]
+var InvoiceProfile_Issuer = &handles[149]
+var InvoiceProfile_TaxRegistrationNumber = &handles[150]
+
+var _InvoiceSummaries = &handles[151]
+var _InvoiceSummaries_member = &handles[152]
+
+var InvoiceSummariesFilter = &handles[153]
+var InvoiceSummariesFilter_TimeInterval = &handles[154]
+var InvoiceSummariesFilter_BillingPeriod = &handles[155]
+var InvoiceSummariesFilter_InvoicingEntity = &handles[156]
+var InvoiceSummariesFilter_ReceiverRole = &handles[157]
+
+var _InvoiceSummariesMaxResults = &handles[158]
+
+var InvoiceSummariesSelector = &handles[159]
+var InvoiceSummariesSelector_ResourceType = &handles[160]
+var InvoiceSummariesSelector_Value = &handles[161]
+
+var InvoiceSummary = &handles[162]
+var InvoiceSummary_AccountId = &handles[163]
+var InvoiceSummary_InvoiceId = &handles[164]
+var InvoiceSummary_IssuedDate = &handles[165]
+var InvoiceSummary_DueDate = &handles[166]
+var InvoiceSummary_BillSourceAccounts = &handles[167]
+var InvoiceSummary_BillSourceAccountsTotalCount = &handles[168]
+var InvoiceSummary_ReceiverRole = &handles[169]
+var InvoiceSummary_Entity = &handles[170]
+var InvoiceSummary_BillingPeriod = &handles[171]
+var InvoiceSummary_InvoiceFrequency = &handles[172]
+var InvoiceSummary_BillType = &handles[173]
+var InvoiceSummary_InvoiceType = &handles[174]
+var InvoiceSummary_CommercialInvoiceId = &handles[175]
+var InvoiceSummary_OriginalInvoiceId = &handles[176]
+var InvoiceSummary_PurchaseOrderNumber = &handles[177]
+var InvoiceSummary_EinvoiceDeliveryStatus = &handles[178]
+var InvoiceSummary_TaxAuthorityStatus = &handles[179]
+var InvoiceSummary_BaseCurrencyAmount = &handles[180]
+var InvoiceSummary_TaxCurrencyAmount = &handles[181]
+var InvoiceSummary_PaymentCurrencyAmount = &handles[182]
+
+var InvoiceType = &handles[183]
+var InvoiceType_INVOICE = &handles[184]
+var InvoiceType_CREDIT_MEMO = &handles[185]
+var InvoiceType_PAYMENT_RECEIPT = &handles[186]
+
+var InvoiceUnit = &handles[187]
+var InvoiceUnit_InvoiceUnitArn = &handles[188]
+var InvoiceUnit_InvoiceReceiver = &handles[189]
+var InvoiceUnit_Name = &handles[190]
+var InvoiceUnit_Description = &handles[191]
+var InvoiceUnit_TaxInheritanceDisabled = &handles[192]
+var InvoiceUnit_Rule = &handles[193]
+var InvoiceUnit_LastModified = &handles[194]
+
+var _InvoiceUnitArns = &handles[195]
+var _InvoiceUnitArns_member = &handles[196]
+
+var _InvoiceUnitArnString = &handles[197]
+
+var _InvoiceUnitName = &handles[198]
+
+var _InvoiceUnitNames = &handles[199]
+var _InvoiceUnitNames_member = &handles[200]
+
+var InvoiceUnitRule = &handles[201]
+var InvoiceUnitRule_LinkedAccounts = &handles[202]
+var InvoiceUnitRule_BillSourceAccounts = &handles[203]
+
+var _InvoiceUnits = &handles[204]
+var _InvoiceUnits_member = &handles[205]
+
+var _LastModifiedTimestamp = &handles[206]
+
+var ListInvoiceSummariesResourceType = &handles[207]
+var ListInvoiceSummariesResourceType_ACCOUNT_ID = &handles[208]
+var ListInvoiceSummariesResourceType_INVOICE_ID = &handles[209]
+
+var MarketplacePunchOutPreference = &handles[210]
+var MarketplacePunchOutPreference_ApprovalRequestRedirectUrl = &handles[211]
+
+var _MaxResults = &handles[212]
+
+var _MaxResultsInteger = &handles[213]
+
+var _Month = &handles[214]
+
+var _NextTokenString = &handles[215]
+
+var ProcurementPortal = &handles[216]
+var ProcurementPortal_PortalIdentifier = &handles[217]
+var ProcurementPortal_PortalName = &handles[218]
+var ProcurementPortal_PortalDisplayName = &handles[219]
+var ProcurementPortal_DefaultFeatureConfigurations = &handles[220]
+
+var ProcurementPortalEnv = &handles[221]
+var ProcurementPortalEnv_PROD = &handles[222]
+var ProcurementPortalEnv_TEST = &handles[223]
+
+var _ProcurementPortalIdString = &handles[224]
+
+var ProcurementPortalName = &handles[225]
+var ProcurementPortalName_SAP_BUSINESS_NETWORK = &handles[226]
+var ProcurementPortalName_COUPA = &handles[227]
+
+var ProcurementPortalPreference = &handles[228]
+var ProcurementPortalPreference_AwsAccountId = &handles[229]
+var ProcurementPortalPreference_ProcurementPortalPreferenceArn = &handles[230]
+var ProcurementPortalPreference_ProcurementPortalName = &handles[231]
+var ProcurementPortalPreference_BuyerDomain = &handles[232]
+var ProcurementPortalPreference_BuyerIdentifier = &handles[233]
+var ProcurementPortalPreference_SupplierDomain = &handles[234]
+var ProcurementPortalPreference_SupplierIdentifier = &handles[235]
+var ProcurementPortalPreference_Selector = &handles[236]
+var ProcurementPortalPreference_ProcurementPortalSharedSecret = &handles[237]
+var ProcurementPortalPreference_ProcurementPortalInstanceEndpoint = &handles[238]
+var ProcurementPortalPreference_PurchaseOrderRetrievalEndpoint = &handles[239]
+var ProcurementPortalPreference_TestEnvPreference = &handles[240]
+var ProcurementPortalPreference_EinvoiceDeliveryEnabled = &handles[241]
+var ProcurementPortalPreference_EinvoiceDeliveryPreference = &handles[242]
+var ProcurementPortalPreference_PurchaseOrderRetrievalEnabled = &handles[243]
+var ProcurementPortalPreference_MarketplacePunchOutEnabled = &handles[244]
+var ProcurementPortalPreference_MarketplacePunchOutPreference = &handles[245]
+var ProcurementPortalPreference_Contacts = &handles[246]
+var ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatus = &handles[247]
+var ProcurementPortalPreference_EinvoiceDeliveryPreferenceStatusReason = &handles[248]
+var ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatus = &handles[249]
+var ProcurementPortalPreference_PurchaseOrderRetrievalPreferenceStatusReason = &handles[250]
+var ProcurementPortalPreference_Version = &handles[251]
+var ProcurementPortalPreference_CreateDate = &handles[252]
+var ProcurementPortalPreference_LastUpdateDate = &handles[253]
+
+var _ProcurementPortalPreferenceArnString = &handles[254]
+
+var ProcurementPortalPreferenceSelector = &handles[255]
+var ProcurementPortalPreferenceSelector_InvoiceUnitArns = &handles[256]
+var ProcurementPortalPreferenceSelector_SellerOfRecords = &handles[257]
+
+var ProcurementPortalPreferenceStatus = &handles[258]
+var ProcurementPortalPreferenceStatus_PENDING_VERIFICATION = &handles[259]
+var ProcurementPortalPreferenceStatus_VALIDATED = &handles[260]
+var ProcurementPortalPreferenceStatus_TEST_INITIALIZED = &handles[261]
+var ProcurementPortalPreferenceStatus_TEST_INITIALIZATION_FAILED = &handles[262]
+var ProcurementPortalPreferenceStatus_TEST_FAILED = &handles[263]
+var ProcurementPortalPreferenceStatus_ACTIVE = &handles[264]
+var ProcurementPortalPreferenceStatus_SUSPENDED = &handles[265]
+
+var _ProcurementPortalPreferenceSummaries = &handles[266]
+var _ProcurementPortalPreferenceSummaries_member = &handles[267]
+
+var ProcurementPortalPreferenceSummary = &handles[268]
+var ProcurementPortalPreferenceSummary_AwsAccountId = &handles[269]
+var ProcurementPortalPreferenceSummary_ProcurementPortalPreferenceArn = &handles[270]
+var ProcurementPortalPreferenceSummary_ProcurementPortalName = &handles[271]
+var ProcurementPortalPreferenceSummary_BuyerDomain = &handles[272]
+var ProcurementPortalPreferenceSummary_BuyerIdentifier = &handles[273]
+var ProcurementPortalPreferenceSummary_SupplierDomain = &handles[274]
+var ProcurementPortalPreferenceSummary_SupplierIdentifier = &handles[275]
+var ProcurementPortalPreferenceSummary_Selector = &handles[276]
+var ProcurementPortalPreferenceSummary_EinvoiceDeliveryEnabled = &handles[277]
+var ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalEnabled = &handles[278]
+var ProcurementPortalPreferenceSummary_MarketplacePunchOutEnabled = &handles[279]
+var ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatus = &handles[280]
+var ProcurementPortalPreferenceSummary_EinvoiceDeliveryPreferenceStatusReason = &handles[281]
+var ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatus = &handles[282]
+var ProcurementPortalPreferenceSummary_PurchaseOrderRetrievalPreferenceStatusReason = &handles[283]
+var ProcurementPortalPreferenceSummary_Version = &handles[284]
+var ProcurementPortalPreferenceSummary_CreateDate = &handles[285]
+var ProcurementPortalPreferenceSummary_LastUpdateDate = &handles[286]
+
+var _ProcurementPortals = &handles[287]
+var _ProcurementPortals_member = &handles[288]
+
+var ProcurementPortalSupplier = &handles[289]
+var ProcurementPortalSupplier_SupplierIdentifier = &handles[290]
+var ProcurementPortalSupplier_SellerOfRecord = &handles[291]
+var ProcurementPortalSupplier_CountryCode = &handles[292]
+var ProcurementPortalSupplier_Environment = &handles[293]
+
+var _ProcurementPortalSuppliers = &handles[294]
+var _ProcurementPortalSuppliers_member = &handles[295]
+
+var _ProfileList = &handles[296]
+var _ProfileList_member = &handles[297]
+
+var Protocol = &handles[298]
+var Protocol_CXML = &handles[299]
+
+var PurchaseOrderDataSource = &handles[300]
+var PurchaseOrderDataSource_EinvoiceDeliveryDocumentType = &handles[301]
+var PurchaseOrderDataSource_PurchaseOrderDataSourceType = &handles[302]
+
+var _PurchaseOrderDataSources = &handles[303]
+var _PurchaseOrderDataSources_member = &handles[304]
+
+var PurchaseOrderDataSourceType = &handles[305]
+var PurchaseOrderDataSourceType_ASSOCIATED_PURCHASE_ORDER_REQUIRED = &handles[306]
+var PurchaseOrderDataSourceType_PURCHASE_ORDER_NOT_REQUIRED = &handles[307]
+
+var ReceiverAddress = &handles[308]
+var ReceiverAddress_AddressLine1 = &handles[309]
+var ReceiverAddress_AddressLine2 = &handles[310]
+var ReceiverAddress_AddressLine3 = &handles[311]
+var ReceiverAddress_DistrictOrCounty = &handles[312]
+var ReceiverAddress_City = &handles[313]
+var ReceiverAddress_StateOrRegion = &handles[314]
+var ReceiverAddress_CountryCode = &handles[315]
+var ReceiverAddress_CompanyName = &handles[316]
+var ReceiverAddress_PostalCode = &handles[317]
+
+var ReceiverRole = &handles[318]
+var ReceiverRole_SELLER = &handles[319]
+var ReceiverRole_RESELLER = &handles[320]
+var ReceiverRole_BUYER = &handles[321]
+
+var ResourceNotFoundException = &handles[322]
+var ResourceNotFoundException_message = &handles[323]
+var ResourceNotFoundException_resourceName = &handles[324]
+
+var ResourceTag = &handles[325]
+var ResourceTag_Key = &handles[326]
+var ResourceTag_Value = &handles[327]
+
+var _ResourceTagKey = &handles[328]
+
+var _ResourceTagKeyList = &handles[329]
+var _ResourceTagKeyList_member = &handles[330]
+
+var _ResourceTagList = &handles[331]
+var _ResourceTagList_member = &handles[332]
+
+var _ResourceTagValue = &handles[333]
+
+var _RuleAccountIdList = &handles[334]
+var _RuleAccountIdList_member = &handles[335]
+
+var _SellerOfRecords = &handles[336]
+var _SellerOfRecords_member = &handles[337]
+
+var _SensitiveBasicStringWithoutSpace = &handles[338]
+
+var ServiceQuotaExceededException = &handles[339]
+var ServiceQuotaExceededException_message = &handles[340]
+
+var _StringWithoutNewLine = &handles[341]
+
+var SupplementalDocument = &handles[342]
+var SupplementalDocument_DocumentType = &handles[343]
+var SupplementalDocument_DocumentId = &handles[344]
+var SupplementalDocument_DocumentUrl = &handles[345]
+var SupplementalDocument_DocumentUrlExpirationDate = &handles[346]
+
+var _SupplementalDocuments = &handles[347]
+var _SupplementalDocuments_member = &handles[348]
+
+var SupplementalDocumentType = &handles[349]
+var SupplementalDocumentType_GOVERNMENT_INVOICE = &handles[350]
+var SupplementalDocumentType_TAX_E_INVOICE = &handles[351]
+var SupplementalDocumentType_PAYMENT_RECEIPT = &handles[352]
+var SupplementalDocumentType_SUPPLEMENT = &handles[353]
+
+var SupplierDomain = &handles[354]
+var SupplierDomain_NetworkID = &handles[355]
+
+var _SupplierIdString = &handles[356]
+
+var _TagrisArn = &handles[357]
+
+var TaxAuthorityStatus = &handles[358]
+var TaxAuthorityStatus_ISSUED = &handles[359]
+var TaxAuthorityStatus_CANCELLED = &handles[360]
+
+var TaxesBreakdown = &handles[361]
+var TaxesBreakdown_Breakdown = &handles[362]
+var TaxesBreakdown_TotalAmount = &handles[363]
+
+var TaxesBreakdownAmount = &handles[364]
+var TaxesBreakdownAmount_Description = &handles[365]
+var TaxesBreakdownAmount_Amount = &handles[366]
+var TaxesBreakdownAmount_Rate = &handles[367]
+
+var _TaxesBreakdownAmountList = &handles[368]
+var _TaxesBreakdownAmountList_member = &handles[369]
+
+var _TaxInheritanceDisabledFlag = &handles[370]
+
+var TestEnvPreference = &handles[371]
+var TestEnvPreference_BuyerDomain = &handles[372]
+var TestEnvPreference_BuyerIdentifier = &handles[373]
+var TestEnvPreference_SupplierDomain = &handles[374]
+var TestEnvPreference_SupplierIdentifier = &handles[375]
+var TestEnvPreference_ProcurementPortalSharedSecret = &handles[376]
+var TestEnvPreference_ProcurementPortalInstanceEndpoint = &handles[377]
+var TestEnvPreference_PurchaseOrderRetrievalEndpoint = &handles[378]
+
+var TestEnvPreferenceInput = &handles[379]
+var TestEnvPreferenceInput_BuyerDomain = &handles[380]
+var TestEnvPreferenceInput_BuyerIdentifier = &handles[381]
+var TestEnvPreferenceInput_SupplierDomain = &handles[382]
+var TestEnvPreferenceInput_SupplierIdentifier = &handles[383]
+var TestEnvPreferenceInput_ProcurementPortalSharedSecret = &handles[384]
+var TestEnvPreferenceInput_ProcurementPortalInstanceEndpoint = &handles[385]
+
+var ThrottlingException = &handles[386]
+var ThrottlingException_message = &handles[387]
+
+var ValidationException = &handles[388]
+var ValidationException_message = &handles[389]
+var ValidationException_resourceName = &handles[390]
+var ValidationException_reason = &handles[391]
+var ValidationException_fieldList = &handles[392]
+
+var ValidationExceptionField = &handles[393]
+var ValidationExceptionField_name = &handles[394]
+var ValidationExceptionField_message = &handles[395]
+
+var _ValidationExceptionFieldList = &handles[396]
+var _ValidationExceptionFieldList_member = &handles[397]
+
+var ValidationExceptionReason = &handles[398]
+var ValidationExceptionReason_NON_MEMBERS_PRESENT = &handles[399]
+var ValidationExceptionReason_MAX_ACCOUNTS_EXCEEDED = &handles[400]
+var ValidationExceptionReason_MAX_INVOICE_UNITS_EXCEEDED = &handles[401]
+var ValidationExceptionReason_DUPLICATE_INVOICE_UNIT = &handles[402]
+var ValidationExceptionReason_MUTUAL_EXCLUSION_ERROR = &handles[403]
+var ValidationExceptionReason_ACCOUNT_MEMBERSHIP_ERROR = &handles[404]
+var ValidationExceptionReason_TAX_SETTINGS_ERROR = &handles[405]
+var ValidationExceptionReason_EXPIRED_NEXT_TOKEN = &handles[406]
+var ValidationExceptionReason_INVALID_NEXT_TOKEN = &handles[407]
+var ValidationExceptionReason_INVALID_INPUT = &handles[408]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[409]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[410]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[411]
+var ValidationExceptionReason_OTHER = &handles[412]
+
+var _Year = &handles[413]
+
+var BatchGetInvoiceProfileRequest = &handles[414]
+var BatchGetInvoiceProfileRequest_AccountIds = &handles[415]
+
+var BatchGetInvoiceProfileResponse = &handles[416]
+var BatchGetInvoiceProfileResponse_Profiles = &handles[417]
+
+var CreateInvoiceUnitRequest = &handles[418]
+var CreateInvoiceUnitRequest_Name = &handles[419]
+var CreateInvoiceUnitRequest_InvoiceReceiver = &handles[420]
+var CreateInvoiceUnitRequest_Description = &handles[421]
+var CreateInvoiceUnitRequest_TaxInheritanceDisabled = &handles[422]
+var CreateInvoiceUnitRequest_Rule = &handles[423]
+var CreateInvoiceUnitRequest_ResourceTags = &handles[424]
+var CreateInvoiceUnitRequest_ClientToken = &handles[425]
+
+var CreateInvoiceUnitResponse = &handles[426]
+var CreateInvoiceUnitResponse_InvoiceUnitArn = &handles[427]
+
+var CreateProcurementPortalPreferenceRequest = &handles[428]
+var CreateProcurementPortalPreferenceRequest_ProcurementPortalName = &handles[429]
+var CreateProcurementPortalPreferenceRequest_BuyerDomain = &handles[430]
+var CreateProcurementPortalPreferenceRequest_BuyerIdentifier = &handles[431]
+var CreateProcurementPortalPreferenceRequest_SupplierDomain = &handles[432]
+var CreateProcurementPortalPreferenceRequest_SupplierIdentifier = &handles[433]
+var CreateProcurementPortalPreferenceRequest_Selector = &handles[434]
+var CreateProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret = &handles[435]
+var CreateProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint = &handles[436]
+var CreateProcurementPortalPreferenceRequest_TestEnvPreference = &handles[437]
+var CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled = &handles[438]
+var CreateProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = &handles[439]
+var CreateProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = &handles[440]
+var CreateProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = &handles[441]
+var CreateProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = &handles[442]
+var CreateProcurementPortalPreferenceRequest_Contacts = &handles[443]
+var CreateProcurementPortalPreferenceRequest_ResourceTags = &handles[444]
+var CreateProcurementPortalPreferenceRequest_ClientToken = &handles[445]
+
+var CreateProcurementPortalPreferenceResponse = &handles[446]
+var CreateProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = &handles[447]
+
+var DeleteInvoiceUnitRequest = &handles[448]
+var DeleteInvoiceUnitRequest_InvoiceUnitArn = &handles[449]
+var DeleteInvoiceUnitRequest_ClientToken = &handles[450]
+
+var DeleteInvoiceUnitResponse = &handles[451]
+var DeleteInvoiceUnitResponse_InvoiceUnitArn = &handles[452]
+
+var DeleteProcurementPortalPreferenceRequest = &handles[453]
+var DeleteProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = &handles[454]
+var DeleteProcurementPortalPreferenceRequest_ClientToken = &handles[455]
+
+var DeleteProcurementPortalPreferenceResponse = &handles[456]
+var DeleteProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = &handles[457]
+
+var GetInvoicePDFRequest = &handles[458]
+var GetInvoicePDFRequest_InvoiceId = &handles[459]
+
+var GetInvoicePDFResponse = &handles[460]
+var GetInvoicePDFResponse_InvoicePDF = &handles[461]
+
+var GetInvoiceUnitRequest = &handles[462]
+var GetInvoiceUnitRequest_InvoiceUnitArn = &handles[463]
+var GetInvoiceUnitRequest_AsOf = &handles[464]
+
+var GetInvoiceUnitResponse = &handles[465]
+var GetInvoiceUnitResponse_InvoiceUnitArn = &handles[466]
+var GetInvoiceUnitResponse_InvoiceReceiver = &handles[467]
+var GetInvoiceUnitResponse_Name = &handles[468]
+var GetInvoiceUnitResponse_Description = &handles[469]
+var GetInvoiceUnitResponse_TaxInheritanceDisabled = &handles[470]
+var GetInvoiceUnitResponse_Rule = &handles[471]
+var GetInvoiceUnitResponse_LastModified = &handles[472]
+
+var GetProcurementPortalPreferenceRequest = &handles[473]
+var GetProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = &handles[474]
+
+var GetProcurementPortalPreferenceResponse = &handles[475]
+var GetProcurementPortalPreferenceResponse_ProcurementPortalPreference = &handles[476]
+
+var ListInvoiceSummariesRequest = &handles[477]
+var ListInvoiceSummariesRequest_Selector = &handles[478]
+var ListInvoiceSummariesRequest_Filter = &handles[479]
+var ListInvoiceSummariesRequest_NextToken = &handles[480]
+var ListInvoiceSummariesRequest_MaxResults = &handles[481]
+
+var ListInvoiceSummariesResponse = &handles[482]
+var ListInvoiceSummariesResponse_InvoiceSummaries = &handles[483]
+var ListInvoiceSummariesResponse_NextToken = &handles[484]
+
+var ListInvoiceUnitsRequest = &handles[485]
+var ListInvoiceUnitsRequest_Filters = &handles[486]
+var ListInvoiceUnitsRequest_NextToken = &handles[487]
+var ListInvoiceUnitsRequest_MaxResults = &handles[488]
+var ListInvoiceUnitsRequest_AsOf = &handles[489]
+
+var ListInvoiceUnitsResponse = &handles[490]
+var ListInvoiceUnitsResponse_InvoiceUnits = &handles[491]
+var ListInvoiceUnitsResponse_NextToken = &handles[492]
+
+var ListProcurementPortalPreferencesRequest = &handles[493]
+var ListProcurementPortalPreferencesRequest_NextToken = &handles[494]
+var ListProcurementPortalPreferencesRequest_MaxResults = &handles[495]
+
+var ListProcurementPortalPreferencesResponse = &handles[496]
+var ListProcurementPortalPreferencesResponse_ProcurementPortalPreferences = &handles[497]
+var ListProcurementPortalPreferencesResponse_NextToken = &handles[498]
+
+var ListProcurementPortalsRequest = &handles[499]
+var ListProcurementPortalsRequest_NextToken = &handles[500]
+var ListProcurementPortalsRequest_MaxResults = &handles[501]
+
+var ListProcurementPortalsResponse = &handles[502]
+var ListProcurementPortalsResponse_ProcurementPortals = &handles[503]
+var ListProcurementPortalsResponse_NextToken = &handles[504]
+
+var ListProcurementPortalSuppliersRequest = &handles[505]
+var ListProcurementPortalSuppliersRequest_PortalIdentifier = &handles[506]
+var ListProcurementPortalSuppliersRequest_NextToken = &handles[507]
+var ListProcurementPortalSuppliersRequest_MaxResults = &handles[508]
+
+var ListProcurementPortalSuppliersResponse = &handles[509]
+var ListProcurementPortalSuppliersResponse_ProcurementPortalSuppliers = &handles[510]
+var ListProcurementPortalSuppliersResponse_NextToken = &handles[511]
+
+var ListTagsForResourceRequest = &handles[512]
+var ListTagsForResourceRequest_ResourceArn = &handles[513]
+
+var ListTagsForResourceResponse = &handles[514]
+var ListTagsForResourceResponse_ResourceTags = &handles[515]
+
+var PutProcurementPortalPreferenceRequest = &handles[516]
+var PutProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn = &handles[517]
+var PutProcurementPortalPreferenceRequest_Selector = &handles[518]
+var PutProcurementPortalPreferenceRequest_ProcurementPortalSharedSecret = &handles[519]
+var PutProcurementPortalPreferenceRequest_ProcurementPortalInstanceEndpoint = &handles[520]
+var PutProcurementPortalPreferenceRequest_TestEnvPreference = &handles[521]
+var PutProcurementPortalPreferenceRequest_EinvoiceDeliveryEnabled = &handles[522]
+var PutProcurementPortalPreferenceRequest_EinvoiceDeliveryPreference = &handles[523]
+var PutProcurementPortalPreferenceRequest_PurchaseOrderRetrievalEnabled = &handles[524]
+var PutProcurementPortalPreferenceRequest_MarketplacePunchOutEnabled = &handles[525]
+var PutProcurementPortalPreferenceRequest_MarketplacePunchOutPreference = &handles[526]
+var PutProcurementPortalPreferenceRequest_Contacts = &handles[527]
+var PutProcurementPortalPreferenceRequest_ClientToken = &handles[528]
+
+var PutProcurementPortalPreferenceResponse = &handles[529]
+var PutProcurementPortalPreferenceResponse_ProcurementPortalPreferenceArn = &handles[530]
+
+var SendProcurementPortalValidationRequest = &handles[531]
+var SendProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = &handles[532]
+var SendProcurementPortalValidationRequest_ClientToken = &handles[533]
+
+var SendProcurementPortalValidationResponse = &handles[534]
+var SendProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = &handles[535]
+
+var TagResourceRequest = &handles[536]
+var TagResourceRequest_ResourceArn = &handles[537]
+var TagResourceRequest_ResourceTags = &handles[538]
+
+var TagResourceResponse = &handles[539]
+
+var UntagResourceRequest = &handles[540]
+var UntagResourceRequest_ResourceArn = &handles[541]
+var UntagResourceRequest_ResourceTagKeys = &handles[542]
+
+var UntagResourceResponse = &handles[543]
+
+var UpdateInvoiceUnitRequest = &handles[544]
+var UpdateInvoiceUnitRequest_InvoiceUnitArn = &handles[545]
+var UpdateInvoiceUnitRequest_Description = &handles[546]
+var UpdateInvoiceUnitRequest_TaxInheritanceDisabled = &handles[547]
+var UpdateInvoiceUnitRequest_Rule = &handles[548]
+var UpdateInvoiceUnitRequest_ClientToken = &handles[549]
+
+var UpdateInvoiceUnitResponse = &handles[550]
+var UpdateInvoiceUnitResponse_InvoiceUnitArn = &handles[551]
+
+var UpdateProcurementPortalPreferenceStatusRequest = &handles[552]
+var UpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn = &handles[553]
+var UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus = &handles[554]
+var UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason = &handles[555]
+var UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus = &handles[556]
+var UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason = &handles[557]
+var UpdateProcurementPortalPreferenceStatusRequest_ClientToken = &handles[558]
+
+var UpdateProcurementPortalPreferenceStatusResponse = &handles[559]
+var UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn = &handles[560]
+
+var VerifyProcurementPortalValidationRequest = &handles[561]
+var VerifyProcurementPortalValidationRequest_ProcurementPortalPreferenceArn = &handles[562]
+var VerifyProcurementPortalValidationRequest_Code = &handles[563]
+var VerifyProcurementPortalValidationRequest_ClientToken = &handles[564]
+
+var VerifyProcurementPortalValidationResponse = &handles[565]
+var VerifyProcurementPortalValidationResponse_ProcurementPortalPreferenceArn = &handles[566]
+
+var Invoicing = &smithy.ServiceSchema{Schema: &handles[21], Version: "2024-12-01"}

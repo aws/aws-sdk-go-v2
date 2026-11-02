@@ -4,617 +4,530 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DeleteReportDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeReportDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DescribeReportDefinitions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ModifyReportDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "PutReportDefinition",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSOrigamiServiceGatewayService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "AWSOrigamiServiceGatewayService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSOrigamiServiceGatewayService = smithy.NewServiceSchema(_AWSOrigamiServiceGatewayService, "2017-01-06")
-
-var AdditionalArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "AdditionalArtifact",
-}, smithy.ShapeTypeEnum, 3)
-var AdditionalArtifact_REDSHIFT *smithy.Schema
-
-var AdditionalArtifact_QUICKSIGHT *smithy.Schema
-
-var AdditionalArtifact_ATHENA *smithy.Schema
-
-var _AdditionalArtifactList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "AdditionalArtifactList",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalArtifactList_member *smithy.Schema
-
-var AWSRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "AWSRegion",
-}, smithy.ShapeTypeEnum, 28)
-var AWSRegion_CAPE_TOWN *smithy.Schema
-
-var AWSRegion_HONG_KONG *smithy.Schema
-
-var AWSRegion_MUMBAI *smithy.Schema
-
-var AWSRegion_HYDERABAD *smithy.Schema
-
-var AWSRegion_SINGAPORE *smithy.Schema
-
-var AWSRegion_SYDNEY *smithy.Schema
-
-var AWSRegion_JAKARTA *smithy.Schema
-
-var AWSRegion_TOKYO *smithy.Schema
-
-var AWSRegion_SEOUL *smithy.Schema
-
-var AWSRegion_OSAKA *smithy.Schema
-
-var AWSRegion_CANADA_CENTRAL *smithy.Schema
-
-var AWSRegion_FRANKFURT *smithy.Schema
-
-var AWSRegion_ZURICH *smithy.Schema
-
-var AWSRegion_IRELAND *smithy.Schema
-
-var AWSRegion_LONDON *smithy.Schema
-
-var AWSRegion_PARIS *smithy.Schema
-
-var AWSRegion_STOCKHOLM *smithy.Schema
-
-var AWSRegion_MILANO *smithy.Schema
-
-var AWSRegion_SPAIN *smithy.Schema
-
-var AWSRegion_UAE *smithy.Schema
-
-var AWSRegion_BAHRAIN *smithy.Schema
-
-var AWSRegion_SAO_PAULO *smithy.Schema
-
-var AWSRegion_US_STANDARD *smithy.Schema
-
-var AWSRegion_OHIO *smithy.Schema
-
-var AWSRegion_NORTHERN_CALIFORNIA *smithy.Schema
-
-var AWSRegion_OREGON *smithy.Schema
-
-var AWSRegion_BEIJING *smithy.Schema
-
-var AWSRegion_NINGXIA *smithy.Schema
-
-var _BillingViewArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "BillingViewArn",
-}, smithy.ShapeTypeString, 0)
-
-var CompressionFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "CompressionFormat",
-}, smithy.ShapeTypeEnum, 3)
-var CompressionFormat_ZIP *smithy.Schema
-
-var CompressionFormat_GZIP *smithy.Schema
-
-var CompressionFormat_Parquet *smithy.Schema
-
-var _DeleteResponseMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DeleteResponseMessage",
-}, smithy.ShapeTypeString, 0)
-
-var DuplicateReportNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DuplicateReportNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DuplicateReportNameException_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalErrorException_Message *smithy.Schema
-
-var _LastDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "LastDelivery",
-}, smithy.ShapeTypeString, 0)
-
-var LastStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "LastStatus",
-}, smithy.ShapeTypeEnum, 3)
-var LastStatus_SUCCESS *smithy.Schema
-
-var LastStatus_ERROR_PERMISSIONS *smithy.Schema
-
-var LastStatus_ERROR_NO_BUCKET *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RefreshClosedReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "RefreshClosedReports",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ReportDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportDefinition",
-}, smithy.ShapeTypeStructure, 13)
-var ReportDefinition_ReportName *smithy.Schema
-
-var ReportDefinition_TimeUnit *smithy.Schema
-
-var ReportDefinition_Format *smithy.Schema
-
-var ReportDefinition_Compression *smithy.Schema
-
-var ReportDefinition_AdditionalSchemaElements *smithy.Schema
-
-var ReportDefinition_S3Bucket *smithy.Schema
-
-var ReportDefinition_S3Prefix *smithy.Schema
-
-var ReportDefinition_S3Region *smithy.Schema
-
-var ReportDefinition_AdditionalArtifacts *smithy.Schema
-
-var ReportDefinition_RefreshClosedReports *smithy.Schema
-
-var ReportDefinition_ReportVersioning *smithy.Schema
-
-var ReportDefinition_BillingViewArn *smithy.Schema
-
-var ReportDefinition_ReportStatus *smithy.Schema
-
-var _ReportDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _ReportDefinitionList_member *smithy.Schema
-
-var ReportFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportFormat",
-}, smithy.ShapeTypeEnum, 2)
-var ReportFormat_CSV *smithy.Schema
-
-var ReportFormat_Parquet *smithy.Schema
-
-var ReportLimitReachedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportLimitReachedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ReportLimitReachedException_Message *smithy.Schema
-
-var _ReportName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportName",
-}, smithy.ShapeTypeString, 0)
-
-var ReportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportStatus",
-}, smithy.ShapeTypeStructure, 2)
-var ReportStatus_lastDelivery *smithy.Schema
-
-var ReportStatus_lastStatus *smithy.Schema
-
-var ReportVersioning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ReportVersioning",
-}, smithy.ShapeTypeEnum, 2)
-var ReportVersioning_CREATE_NEW_REPORT *smithy.Schema
-
-var ReportVersioning_OVERWRITE_REPORT *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "S3Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var SchemaElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "SchemaElement",
-}, smithy.ShapeTypeEnum, 3)
-var SchemaElement_RESOURCES *smithy.Schema
-
-var SchemaElement_SPLIT_COST_ALLOCATION_DATA *smithy.Schema
-
-var SchemaElement_MANUAL_DISCOUNT_COMPATIBILITY *smithy.Schema
-
-var _SchemaElementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "SchemaElementList",
-}, smithy.ShapeTypeList, 1)
-var _SchemaElementList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TimeUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TimeUnit",
-}, smithy.ShapeTypeEnum, 3)
-var TimeUnit_HOURLY *smithy.Schema
-
-var TimeUnit_DAILY *smithy.Schema
-
-var TimeUnit_MONTHLY *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ValidationException_Message *smithy.Schema
-
-var DeleteReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DeleteReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReportDefinitionRequest_ReportName *smithy.Schema
-
-var DeleteReportDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DeleteReportDefinitionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteReportDefinitionResponse_ResponseMessage *smithy.Schema
-
-var DescribeReportDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DescribeReportDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeReportDefinitionsRequest_MaxResults *smithy.Schema
-
-var DescribeReportDefinitionsRequest_NextToken *smithy.Schema
-
-var DescribeReportDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "DescribeReportDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeReportDefinitionsResponse_ReportDefinitions *smithy.Schema
-
-var DescribeReportDefinitionsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ReportName *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ModifyReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ModifyReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyReportDefinitionRequest_ReportName *smithy.Schema
-
-var ModifyReportDefinitionRequest_ReportDefinition *smithy.Schema
-
-var ModifyReportDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "ModifyReportDefinitionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutReportDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "PutReportDefinitionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutReportDefinitionRequest_ReportDefinition *smithy.Schema
-
-var PutReportDefinitionRequest_Tags *smithy.Schema
-
-var PutReportDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "PutReportDefinitionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ReportName *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ReportName *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costandusagereportservice",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AdditionalArtifact_REDSHIFT = AdditionalArtifact.AddMember("REDSHIFT", smithyprelude.Unit)
-
-	AdditionalArtifact_QUICKSIGHT = AdditionalArtifact.AddMember("QUICKSIGHT", smithyprelude.Unit)
-
-	AdditionalArtifact_ATHENA = AdditionalArtifact.AddMember("ATHENA", smithyprelude.Unit)
-
-	_AdditionalArtifactList_member = _AdditionalArtifactList.AddMember("member", AdditionalArtifact)
-
-	AWSRegion_CAPE_TOWN = AWSRegion.AddMember("CAPE_TOWN", smithyprelude.Unit)
-
-	AWSRegion_HONG_KONG = AWSRegion.AddMember("HONG_KONG", smithyprelude.Unit)
-
-	AWSRegion_MUMBAI = AWSRegion.AddMember("MUMBAI", smithyprelude.Unit)
-
-	AWSRegion_HYDERABAD = AWSRegion.AddMember("HYDERABAD", smithyprelude.Unit)
-
-	AWSRegion_SINGAPORE = AWSRegion.AddMember("SINGAPORE", smithyprelude.Unit)
-
-	AWSRegion_SYDNEY = AWSRegion.AddMember("SYDNEY", smithyprelude.Unit)
-
-	AWSRegion_JAKARTA = AWSRegion.AddMember("JAKARTA", smithyprelude.Unit)
-
-	AWSRegion_TOKYO = AWSRegion.AddMember("TOKYO", smithyprelude.Unit)
-
-	AWSRegion_SEOUL = AWSRegion.AddMember("SEOUL", smithyprelude.Unit)
-
-	AWSRegion_OSAKA = AWSRegion.AddMember("OSAKA", smithyprelude.Unit)
-
-	AWSRegion_CANADA_CENTRAL = AWSRegion.AddMember("CANADA_CENTRAL", smithyprelude.Unit)
-
-	AWSRegion_FRANKFURT = AWSRegion.AddMember("FRANKFURT", smithyprelude.Unit)
-
-	AWSRegion_ZURICH = AWSRegion.AddMember("ZURICH", smithyprelude.Unit)
-
-	AWSRegion_IRELAND = AWSRegion.AddMember("IRELAND", smithyprelude.Unit)
-
-	AWSRegion_LONDON = AWSRegion.AddMember("LONDON", smithyprelude.Unit)
-
-	AWSRegion_PARIS = AWSRegion.AddMember("PARIS", smithyprelude.Unit)
-
-	AWSRegion_STOCKHOLM = AWSRegion.AddMember("STOCKHOLM", smithyprelude.Unit)
-
-	AWSRegion_MILANO = AWSRegion.AddMember("MILANO", smithyprelude.Unit)
-
-	AWSRegion_SPAIN = AWSRegion.AddMember("SPAIN", smithyprelude.Unit)
-
-	AWSRegion_UAE = AWSRegion.AddMember("UAE", smithyprelude.Unit)
-
-	AWSRegion_BAHRAIN = AWSRegion.AddMember("BAHRAIN", smithyprelude.Unit)
-
-	AWSRegion_SAO_PAULO = AWSRegion.AddMember("SAO_PAULO", smithyprelude.Unit)
-
-	AWSRegion_US_STANDARD = AWSRegion.AddMember("US_STANDARD", smithyprelude.Unit)
-
-	AWSRegion_OHIO = AWSRegion.AddMember("OHIO", smithyprelude.Unit)
-
-	AWSRegion_NORTHERN_CALIFORNIA = AWSRegion.AddMember("NORTHERN_CALIFORNIA", smithyprelude.Unit)
-
-	AWSRegion_OREGON = AWSRegion.AddMember("OREGON", smithyprelude.Unit)
-
-	AWSRegion_BEIJING = AWSRegion.AddMember("BEIJING", smithyprelude.Unit)
-
-	AWSRegion_NINGXIA = AWSRegion.AddMember("NINGXIA", smithyprelude.Unit)
-
-	CompressionFormat_ZIP = CompressionFormat.AddMember("ZIP", smithyprelude.Unit)
-
-	CompressionFormat_GZIP = CompressionFormat.AddMember("GZIP", smithyprelude.Unit)
-
-	CompressionFormat_Parquet = CompressionFormat.AddMember("Parquet", smithyprelude.Unit)
-
-	DuplicateReportNameException_Message = DuplicateReportNameException.AddMember("Message", _ErrorMessage)
-
-	InternalErrorException_Message = InternalErrorException.AddMember("Message", _ErrorMessage)
-
-	LastStatus_SUCCESS = LastStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	LastStatus_ERROR_PERMISSIONS = LastStatus.AddMember("ERROR_PERMISSIONS", smithyprelude.Unit)
-
-	LastStatus_ERROR_NO_BUCKET = LastStatus.AddMember("ERROR_NO_BUCKET", smithyprelude.Unit)
-
-	TimeUnit_HOURLY = TimeUnit.AddMember("HOURLY", smithyprelude.Unit)
-
-	TimeUnit_DAILY = TimeUnit.AddMember("DAILY", smithyprelude.Unit)
-
-	TimeUnit_MONTHLY = TimeUnit.AddMember("MONTHLY", smithyprelude.Unit)
-
-	ReportFormat_CSV = ReportFormat.AddMember("CSV", smithyprelude.Unit)
-
-	ReportFormat_Parquet = ReportFormat.AddMember("Parquet", smithyprelude.Unit)
-
-	SchemaElement_RESOURCES = SchemaElement.AddMember("RESOURCES", smithyprelude.Unit)
-
-	SchemaElement_SPLIT_COST_ALLOCATION_DATA = SchemaElement.AddMember("SPLIT_COST_ALLOCATION_DATA", smithyprelude.Unit)
-
-	SchemaElement_MANUAL_DISCOUNT_COMPATIBILITY = SchemaElement.AddMember("MANUAL_DISCOUNT_COMPATIBILITY", smithyprelude.Unit)
-
-	_SchemaElementList_member = _SchemaElementList.AddMember("member", SchemaElement)
-
-	ReportVersioning_CREATE_NEW_REPORT = ReportVersioning.AddMember("CREATE_NEW_REPORT", smithyprelude.Unit)
-
-	ReportVersioning_OVERWRITE_REPORT = ReportVersioning.AddMember("OVERWRITE_REPORT", smithyprelude.Unit)
-
-	ReportStatus_lastDelivery = ReportStatus.AddMember("lastDelivery", _LastDelivery)
-
-	ReportStatus_lastStatus = ReportStatus.AddMember("lastStatus", LastStatus)
-
-	ReportDefinition_ReportName = ReportDefinition.AddMember("ReportName", _ReportName)
-
-	ReportDefinition_TimeUnit = ReportDefinition.AddMember("TimeUnit", TimeUnit)
-
-	ReportDefinition_Format = ReportDefinition.AddMember("Format", ReportFormat)
-
-	ReportDefinition_Compression = ReportDefinition.AddMember("Compression", CompressionFormat)
-
-	ReportDefinition_AdditionalSchemaElements = ReportDefinition.AddMember("AdditionalSchemaElements", _SchemaElementList)
-
-	ReportDefinition_S3Bucket = ReportDefinition.AddMember("S3Bucket", _S3Bucket)
-
-	ReportDefinition_S3Prefix = ReportDefinition.AddMember("S3Prefix", _S3Prefix)
-
-	ReportDefinition_S3Region = ReportDefinition.AddMember("S3Region", AWSRegion)
-
-	ReportDefinition_AdditionalArtifacts = ReportDefinition.AddMember("AdditionalArtifacts", _AdditionalArtifactList)
-
-	ReportDefinition_RefreshClosedReports = ReportDefinition.AddMember("RefreshClosedReports", _RefreshClosedReports)
-
-	ReportDefinition_ReportVersioning = ReportDefinition.AddMember("ReportVersioning", ReportVersioning)
-
-	ReportDefinition_BillingViewArn = ReportDefinition.AddMember("BillingViewArn", _BillingViewArn)
-
-	ReportDefinition_ReportStatus = ReportDefinition.AddMember("ReportStatus", ReportStatus)
-
-	_ReportDefinitionList_member = _ReportDefinitionList.AddMember("member", ReportDefinition)
-
-	ReportLimitReachedException_Message = ReportLimitReachedException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	DeleteReportDefinitionRequest_ReportName = DeleteReportDefinitionRequest.AddMember("ReportName", _ReportName)
-
-	DeleteReportDefinitionResponse_ResponseMessage = DeleteReportDefinitionResponse.AddMember("ResponseMessage", _DeleteResponseMessage)
-
-	DescribeReportDefinitionsRequest_MaxResults = DescribeReportDefinitionsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeReportDefinitionsRequest_NextToken = DescribeReportDefinitionsRequest.AddMember("NextToken", _GenericString)
-
-	DescribeReportDefinitionsResponse_ReportDefinitions = DescribeReportDefinitionsResponse.AddMember("ReportDefinitions", _ReportDefinitionList)
-
-	DescribeReportDefinitionsResponse_NextToken = DescribeReportDefinitionsResponse.AddMember("NextToken", _GenericString)
-
-	ListTagsForResourceRequest_ReportName = ListTagsForResourceRequest.AddMember("ReportName", _ReportName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ModifyReportDefinitionRequest_ReportName = ModifyReportDefinitionRequest.AddMember("ReportName", _ReportName)
-
-	ModifyReportDefinitionRequest_ReportDefinition = ModifyReportDefinitionRequest.AddMember("ReportDefinition", ReportDefinition)
-
-	PutReportDefinitionRequest_ReportDefinition = PutReportDefinitionRequest.AddMember("ReportDefinition", ReportDefinition)
-
-	PutReportDefinitionRequest_Tags = PutReportDefinitionRequest.AddMember("Tags", _TagList)
-
-	TagResourceRequest_ReportName = TagResourceRequest.AddMember("ReportName", _ReportName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ReportName = UntagResourceRequest.AddMember("ReportName", _ReportName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
+const blob = "" +
+	"DescribeReportDefinitionsResponseDescribeReportDefinitionsRequestAWSOrigamiServiceGatewayServiceDele" +
+	"teReportDefinitionResponseModifyReportDefinitionResponseDeleteReportDefinitionRequestMANUAL_DISCOUNT" +
+	"_COMPATIBILITYModifyReportDefinitionRequestDuplicateReportNameExceptionListTagsForResourceResponsePu" +
+	"tReportDefinitionResponseReportLimitReachedExceptionListTagsForResourceRequestPutReportDefinitionReq" +
+	"uestSPLIT_COST_ALLOCATION_DATAResourceNotFoundExceptionAdditionalSchemaElementsAdditionalArtifactLis" +
+	"tInternalErrorExceptionDeleteResponseMessageUntagResourceResponseRefreshClosedReportsReportDefinitio" +
+	"nListUntagResourceRequestAdditionalArtifactsNORTHERN_CALIFORNIATagResourceResponseValidationExceptio" +
+	"nTagResourceRequestCREATE_NEW_REPORTCompressionFormatERROR_PERMISSIONSSchemaElementListOVERWRITE_REP" +
+	"ORTReportVersioningERROR_NO_BUCKETBillingViewArnCANADA_CENTRALGenericStringErrorMessageLastDeliveryR" +
+	"eportFormatReportStatuslastDeliveryUS_STANDARDLastStatusMaxResultsQUICKSIGHTTagKeyListlastStatusAWSR" +
+	"egionCAPE_TOWNFRANKFURTHONG_KONGHYDERABADNextTokenRESOURCESSAO_PAULOSINGAPORESTOCKHOLMREDSHIFTS3Buck" +
+	"etS3PrefixS3RegionTagValueTimeUnitBAHRAINBEIJINGIRELANDJAKARTAMONTHLYNINGXIAParquetSUCCESSTagKeysTag" +
+	"ListATHENAHOURLYLONDONMILANOMUMBAIOREGONSYDNEYZURICHmemberDAILYOSAKAPARISSEOULSPAINTOKYOGZIPOHIOCSVU" +
+	"AE"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.costandusagereportservice", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 96, Target: 0, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 271, Target: 2, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 126, Target: 3, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 298, Target: 4, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 663, Target: 5, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 544, Target: 6, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 65, Target: 7, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 479, Target: 8, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1086, Target: 145, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 966, Target: 145, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1204, Target: 145, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 479, Target: 12, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1252, Target: 8, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 996, Target: 14, Traits: 0, StrLen: 9, Count: 28, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1005, Target: 145, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1023, Target: 145, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1228, Target: 145, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1032, Target: 145, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1068, Target: 145, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1240, Target: 145, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1155, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1283, Target: 145, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1273, Target: 145, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1263, Target: 145, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 848, Target: 145, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1014, Target: 145, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1246, Target: 145, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1148, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1216, Target: 145, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1268, Target: 145, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1077, Target: 145, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1222, Target: 145, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1278, Target: 145, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1299, Target: 145, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1134, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1059, Target: 145, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 935, Target: 145, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1292, Target: 145, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 644, Target: 145, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1234, Target: 145, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1141, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1169, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 834, Target: 43, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 736, Target: 44, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1289, Target: 145, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1288, Target: 145, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1176, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 523, Target: 48, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 243, Target: 49, Traits: 1, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 537, Target: 51, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 875, Target: 51, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 862, Target: 52, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 501, Target: 53, Traits: 2, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 537, Target: 51, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 887, Target: 55, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 946, Target: 56, Traits: 0, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1183, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 753, Target: 145, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 819, Target: 145, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 956, Target: 60, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 565, Target: 61, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 8, Target: 62, Traits: 0, StrLen: 16, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 252, Target: 83, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1126, Target: 109, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 747, Target: 78, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 736, Target: 44, Traits: 0, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 455, Target: 98, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1094, Target: 92, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1102, Target: 93, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1110, Target: 14, Traits: 0, StrLen: 8, Count: 28, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 625, Target: 12, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 565, Target: 61, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 803, Target: 87, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 834, Target: 43, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 911, Target: 84, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 585, Target: 76, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1252, Target: 62, Traits: 0, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 899, Target: 78, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1296, Target: 145, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1176, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 325, Target: 81, Traits: 1, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 537, Target: 51, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 252, Target: 83, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 911, Target: 84, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 923, Target: 55, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 986, Target: 56, Traits: 0, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 803, Target: 87, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 719, Target: 145, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 787, Target: 145, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 430, Target: 90, Traits: 1, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 537, Target: 51, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1094, Target: 92, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1102, Target: 93, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 465, Target: 94, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1050, Target: 145, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 404, Target: 145, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 185, Target: 145, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 770, Target: 98, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1252, Target: 94, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 275, Target: 100, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 979, Target: 103, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1121, Target: 108, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 976, Target: 103, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 976, Target: 104, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1252, Target: 103, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1197, Target: 106, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1252, Target: 100, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1118, Target: 108, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1126, Target: 109, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1210, Target: 145, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1258, Target: 145, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1162, Target: 145, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 682, Target: 113, Traits: 1, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 537, Target: 51, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 156, Target: 115, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 252, Target: 83, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 96, Target: 117, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 529, Target: 48, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 119, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 956, Target: 60, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1041, Target: 52, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 122, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8, Target: 76, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1041, Target: 52, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 352, Target: 125, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 252, Target: 83, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 271, Target: 127, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 275, Target: 106, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 214, Target: 129, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 252, Target: 83, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8, Target: 62, Traits: 0, StrLen: 16, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 126, Target: 132, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 378, Target: 133, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8, Target: 62, Traits: 0, StrLen: 16, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 275, Target: 106, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 298, Target: 136, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 701, Target: 137, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 252, Target: 83, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 275, Target: 106, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 663, Target: 140, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 605, Target: 141, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 252, Target: 83, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1190, Target: 104, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 544, Target: 144, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1130, Target: 145, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}},
+	},
 }
+
+var handles = [146]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+}
+
+var DeleteReportDefinition = &handles[0]
+
+var DescribeReportDefinitions = &handles[1]
+
+var ListTagsForResource = &handles[2]
+
+var ModifyReportDefinition = &handles[3]
+
+var PutReportDefinition = &handles[4]
+
+var TagResource = &handles[5]
+
+var UntagResource = &handles[6]
+
+var _AWSOrigamiServiceGatewayService = &handles[7]
+
+var AdditionalArtifact = &handles[8]
+var AdditionalArtifact_REDSHIFT = &handles[9]
+var AdditionalArtifact_QUICKSIGHT = &handles[10]
+var AdditionalArtifact_ATHENA = &handles[11]
+
+var _AdditionalArtifactList = &handles[12]
+var _AdditionalArtifactList_member = &handles[13]
+
+var AWSRegion = &handles[14]
+var AWSRegion_CAPE_TOWN = &handles[15]
+var AWSRegion_HONG_KONG = &handles[16]
+var AWSRegion_MUMBAI = &handles[17]
+var AWSRegion_HYDERABAD = &handles[18]
+var AWSRegion_SINGAPORE = &handles[19]
+var AWSRegion_SYDNEY = &handles[20]
+var AWSRegion_JAKARTA = &handles[21]
+var AWSRegion_TOKYO = &handles[22]
+var AWSRegion_SEOUL = &handles[23]
+var AWSRegion_OSAKA = &handles[24]
+var AWSRegion_CANADA_CENTRAL = &handles[25]
+var AWSRegion_FRANKFURT = &handles[26]
+var AWSRegion_ZURICH = &handles[27]
+var AWSRegion_IRELAND = &handles[28]
+var AWSRegion_LONDON = &handles[29]
+var AWSRegion_PARIS = &handles[30]
+var AWSRegion_STOCKHOLM = &handles[31]
+var AWSRegion_MILANO = &handles[32]
+var AWSRegion_SPAIN = &handles[33]
+var AWSRegion_UAE = &handles[34]
+var AWSRegion_BAHRAIN = &handles[35]
+var AWSRegion_SAO_PAULO = &handles[36]
+var AWSRegion_US_STANDARD = &handles[37]
+var AWSRegion_OHIO = &handles[38]
+var AWSRegion_NORTHERN_CALIFORNIA = &handles[39]
+var AWSRegion_OREGON = &handles[40]
+var AWSRegion_BEIJING = &handles[41]
+var AWSRegion_NINGXIA = &handles[42]
+
+var _BillingViewArn = &handles[43]
+
+var CompressionFormat = &handles[44]
+var CompressionFormat_ZIP = &handles[45]
+var CompressionFormat_GZIP = &handles[46]
+var CompressionFormat_Parquet = &handles[47]
+
+var _DeleteResponseMessage = &handles[48]
+
+var DuplicateReportNameException = &handles[49]
+var DuplicateReportNameException_Message = &handles[50]
+
+var _ErrorMessage = &handles[51]
+
+var _GenericString = &handles[52]
+
+var InternalErrorException = &handles[53]
+var InternalErrorException_Message = &handles[54]
+
+var _LastDelivery = &handles[55]
+
+var LastStatus = &handles[56]
+var LastStatus_SUCCESS = &handles[57]
+var LastStatus_ERROR_PERMISSIONS = &handles[58]
+var LastStatus_ERROR_NO_BUCKET = &handles[59]
+
+var _MaxResults = &handles[60]
+
+var _RefreshClosedReports = &handles[61]
+
+var ReportDefinition = &handles[62]
+var ReportDefinition_ReportName = &handles[63]
+var ReportDefinition_TimeUnit = &handles[64]
+var ReportDefinition_Format = &handles[65]
+var ReportDefinition_Compression = &handles[66]
+var ReportDefinition_AdditionalSchemaElements = &handles[67]
+var ReportDefinition_S3Bucket = &handles[68]
+var ReportDefinition_S3Prefix = &handles[69]
+var ReportDefinition_S3Region = &handles[70]
+var ReportDefinition_AdditionalArtifacts = &handles[71]
+var ReportDefinition_RefreshClosedReports = &handles[72]
+var ReportDefinition_ReportVersioning = &handles[73]
+var ReportDefinition_BillingViewArn = &handles[74]
+var ReportDefinition_ReportStatus = &handles[75]
+
+var _ReportDefinitionList = &handles[76]
+var _ReportDefinitionList_member = &handles[77]
+
+var ReportFormat = &handles[78]
+var ReportFormat_CSV = &handles[79]
+var ReportFormat_Parquet = &handles[80]
+
+var ReportLimitReachedException = &handles[81]
+var ReportLimitReachedException_Message = &handles[82]
+
+var _ReportName = &handles[83]
+
+var ReportStatus = &handles[84]
+var ReportStatus_lastDelivery = &handles[85]
+var ReportStatus_lastStatus = &handles[86]
+
+var ReportVersioning = &handles[87]
+var ReportVersioning_CREATE_NEW_REPORT = &handles[88]
+var ReportVersioning_OVERWRITE_REPORT = &handles[89]
+
+var ResourceNotFoundException = &handles[90]
+var ResourceNotFoundException_Message = &handles[91]
+
+var _S3Bucket = &handles[92]
+
+var _S3Prefix = &handles[93]
+
+var SchemaElement = &handles[94]
+var SchemaElement_RESOURCES = &handles[95]
+var SchemaElement_SPLIT_COST_ALLOCATION_DATA = &handles[96]
+var SchemaElement_MANUAL_DISCOUNT_COMPATIBILITY = &handles[97]
+
+var _SchemaElementList = &handles[98]
+var _SchemaElementList_member = &handles[99]
+
+var Tag = &handles[100]
+var Tag_Key = &handles[101]
+var Tag_Value = &handles[102]
+
+var _TagKey = &handles[103]
+
+var _TagKeyList = &handles[104]
+var _TagKeyList_member = &handles[105]
+
+var _TagList = &handles[106]
+var _TagList_member = &handles[107]
+
+var _TagValue = &handles[108]
+
+var TimeUnit = &handles[109]
+var TimeUnit_HOURLY = &handles[110]
+var TimeUnit_DAILY = &handles[111]
+var TimeUnit_MONTHLY = &handles[112]
+
+var ValidationException = &handles[113]
+var ValidationException_Message = &handles[114]
+
+var DeleteReportDefinitionRequest = &handles[115]
+var DeleteReportDefinitionRequest_ReportName = &handles[116]
+
+var DeleteReportDefinitionResponse = &handles[117]
+var DeleteReportDefinitionResponse_ResponseMessage = &handles[118]
+
+var DescribeReportDefinitionsRequest = &handles[119]
+var DescribeReportDefinitionsRequest_MaxResults = &handles[120]
+var DescribeReportDefinitionsRequest_NextToken = &handles[121]
+
+var DescribeReportDefinitionsResponse = &handles[122]
+var DescribeReportDefinitionsResponse_ReportDefinitions = &handles[123]
+var DescribeReportDefinitionsResponse_NextToken = &handles[124]
+
+var ListTagsForResourceRequest = &handles[125]
+var ListTagsForResourceRequest_ReportName = &handles[126]
+
+var ListTagsForResourceResponse = &handles[127]
+var ListTagsForResourceResponse_Tags = &handles[128]
+
+var ModifyReportDefinitionRequest = &handles[129]
+var ModifyReportDefinitionRequest_ReportName = &handles[130]
+var ModifyReportDefinitionRequest_ReportDefinition = &handles[131]
+
+var ModifyReportDefinitionResponse = &handles[132]
+
+var PutReportDefinitionRequest = &handles[133]
+var PutReportDefinitionRequest_ReportDefinition = &handles[134]
+var PutReportDefinitionRequest_Tags = &handles[135]
+
+var PutReportDefinitionResponse = &handles[136]
+
+var TagResourceRequest = &handles[137]
+var TagResourceRequest_ReportName = &handles[138]
+var TagResourceRequest_Tags = &handles[139]
+
+var TagResourceResponse = &handles[140]
+
+var UntagResourceRequest = &handles[141]
+var UntagResourceRequest_ReportName = &handles[142]
+var UntagResourceRequest_TagKeys = &handles[143]
+
+var UntagResourceResponse = &handles[144]
+
+var AWSOrigamiServiceGatewayService = &smithy.ServiceSchema{Schema: &handles[7], Version: "2017-01-06"}

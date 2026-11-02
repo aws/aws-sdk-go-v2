@@ -4,2369 +4,1956 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DescribeEntitiesDetectionV2Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeEntitiesDetectionV2Job",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeICD10CMInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeICD10CMInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePHIDetectionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribePHIDetectionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeRxNormInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeRxNormInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSNOMEDCTInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeSNOMEDCTInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetectEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntities",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetectEntitiesV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesV2",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetectPHI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectPHI",
-}, smithy.ShapeTypeOperation, 0)
-
-var InferICD10CM = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferICD10CM",
-}, smithy.ShapeTypeOperation, 0)
-
-var InferRxNorm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferRxNorm",
-}, smithy.ShapeTypeOperation, 0)
-
-var InferSNOMEDCT = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferSNOMEDCT",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEntitiesDetectionV2Jobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListEntitiesDetectionV2Jobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListICD10CMInferenceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListICD10CMInferenceJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPHIDetectionJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListPHIDetectionJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRxNormInferenceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListRxNormInferenceJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSNOMEDCTInferenceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListSNOMEDCTInferenceJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartEntitiesDetectionV2Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartEntitiesDetectionV2Job",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartICD10CMInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartICD10CMInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartPHIDetectionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartPHIDetectionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartRxNormInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartRxNormInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSNOMEDCTInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartSNOMEDCTInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopEntitiesDetectionV2Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopEntitiesDetectionV2Job",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopICD10CMInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopICD10CMInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopPHIDetectionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopPHIDetectionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopRxNormInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopRxNormInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopSNOMEDCTInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopSNOMEDCTInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var _ComprehendMedical_20181030 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ComprehendMedical_20181030",
-}, smithy.ShapeTypeService, 0)
-
-var ComprehendMedical_20181030 = smithy.NewServiceSchema(_ComprehendMedical_20181030, "2018-10-30")
-
-var _AnyLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "AnyLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var Attribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Attribute",
-}, smithy.ShapeTypeStructure, 10)
-var Attribute_Type *smithy.Schema
-
-var Attribute_Score *smithy.Schema
-
-var Attribute_RelationshipScore *smithy.Schema
-
-var Attribute_RelationshipType *smithy.Schema
-
-var Attribute_Id *smithy.Schema
-
-var Attribute_BeginOffset *smithy.Schema
-
-var Attribute_EndOffset *smithy.Schema
-
-var Attribute_Text *smithy.Schema
-
-var Attribute_Category *smithy.Schema
-
-var Attribute_Traits *smithy.Schema
-
-var _AttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "AttributeList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeList_member *smithy.Schema
-
-var AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeEnum, 9)
-var AttributeName_SIGN *smithy.Schema
-
-var AttributeName_SYMPTOM *smithy.Schema
-
-var AttributeName_DIAGNOSIS *smithy.Schema
-
-var AttributeName_NEGATION *smithy.Schema
-
-var AttributeName_PERTAINS_TO_FAMILY *smithy.Schema
-
-var AttributeName_HYPOTHETICAL *smithy.Schema
-
-var AttributeName_LOW_CONFIDENCE *smithy.Schema
-
-var AttributeName_PAST_HISTORY *smithy.Schema
-
-var AttributeName_FUTURE *smithy.Schema
-
-var _BoundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "BoundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var Characters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Characters",
-}, smithy.ShapeTypeStructure, 1)
-var Characters_OriginalTextCharacters *smithy.Schema
-
-var _ClientRequestTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ClientRequestTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var ComprehendMedicalAsyncJobFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ComprehendMedicalAsyncJobFilter",
-}, smithy.ShapeTypeStructure, 4)
-var ComprehendMedicalAsyncJobFilter_JobName *smithy.Schema
-
-var ComprehendMedicalAsyncJobFilter_JobStatus *smithy.Schema
-
-var ComprehendMedicalAsyncJobFilter_SubmitTimeBefore *smithy.Schema
-
-var ComprehendMedicalAsyncJobFilter_SubmitTimeAfter *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ComprehendMedicalAsyncJobProperties",
-}, smithy.ShapeTypeStructure, 14)
-var ComprehendMedicalAsyncJobProperties_JobId *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_JobName *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_JobStatus *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_Message *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_SubmitTime *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_EndTime *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_ExpirationTime *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_InputDataConfig *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_OutputDataConfig *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_LanguageCode *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_DataAccessRoleArn *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_ManifestFilePath *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_KMSKey *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_ModelVersion *smithy.Schema
-
-var _ComprehendMedicalAsyncJobPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ComprehendMedicalAsyncJobPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _ComprehendMedicalAsyncJobPropertiesList_member *smithy.Schema
-
-var Entity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Entity",
-}, smithy.ShapeTypeStructure, 9)
-var Entity_Id *smithy.Schema
-
-var Entity_BeginOffset *smithy.Schema
-
-var Entity_EndOffset *smithy.Schema
-
-var Entity_Score *smithy.Schema
-
-var Entity_Text *smithy.Schema
-
-var Entity_Category *smithy.Schema
-
-var Entity_Type *smithy.Schema
-
-var Entity_Traits *smithy.Schema
-
-var Entity_Attributes *smithy.Schema
-
-var _EntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "EntityList",
-}, smithy.ShapeTypeList, 1)
-var _EntityList_member *smithy.Schema
-
-var EntitySubType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "EntitySubType",
-}, smithy.ShapeTypeEnum, 45)
-var EntitySubType_NAME *smithy.Schema
-
-var EntitySubType_DX_NAME *smithy.Schema
-
-var EntitySubType_DOSAGE *smithy.Schema
-
-var EntitySubType_ROUTE_OR_MODE *smithy.Schema
-
-var EntitySubType_FORM *smithy.Schema
-
-var EntitySubType_FREQUENCY *smithy.Schema
-
-var EntitySubType_DURATION *smithy.Schema
-
-var EntitySubType_GENERIC_NAME *smithy.Schema
-
-var EntitySubType_BRAND_NAME *smithy.Schema
-
-var EntitySubType_STRENGTH *smithy.Schema
-
-var EntitySubType_RATE *smithy.Schema
-
-var EntitySubType_ACUITY *smithy.Schema
-
-var EntitySubType_TEST_NAME *smithy.Schema
-
-var EntitySubType_TEST_VALUE *smithy.Schema
-
-var EntitySubType_TEST_UNITS *smithy.Schema
-
-var EntitySubType_TEST_UNIT *smithy.Schema
-
-var EntitySubType_PROCEDURE_NAME *smithy.Schema
-
-var EntitySubType_TREATMENT_NAME *smithy.Schema
-
-var EntitySubType_DATE *smithy.Schema
-
-var EntitySubType_AGE *smithy.Schema
-
-var EntitySubType_CONTACT_POINT *smithy.Schema
-
-var EntitySubType_PHONE_OR_FAX *smithy.Schema
-
-var EntitySubType_EMAIL *smithy.Schema
-
-var EntitySubType_IDENTIFIER *smithy.Schema
-
-var EntitySubType_ID *smithy.Schema
-
-var EntitySubType_URL *smithy.Schema
-
-var EntitySubType_ADDRESS *smithy.Schema
-
-var EntitySubType_PROFESSION *smithy.Schema
-
-var EntitySubType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var EntitySubType_DIRECTION *smithy.Schema
-
-var EntitySubType_QUALITY *smithy.Schema
-
-var EntitySubType_QUANTITY *smithy.Schema
-
-var EntitySubType_TIME_EXPRESSION *smithy.Schema
-
-var EntitySubType_TIME_TO_MEDICATION_NAME *smithy.Schema
-
-var EntitySubType_TIME_TO_DX_NAME *smithy.Schema
-
-var EntitySubType_TIME_TO_TEST_NAME *smithy.Schema
-
-var EntitySubType_TIME_TO_PROCEDURE_NAME *smithy.Schema
-
-var EntitySubType_TIME_TO_TREATMENT_NAME *smithy.Schema
-
-var EntitySubType_AMOUNT *smithy.Schema
-
-var EntitySubType_GENDER *smithy.Schema
-
-var EntitySubType_RACE_ETHNICITY *smithy.Schema
-
-var EntitySubType_ALLERGIES *smithy.Schema
-
-var EntitySubType_TOBACCO_USE *smithy.Schema
-
-var EntitySubType_ALCOHOL_CONSUMPTION *smithy.Schema
-
-var EntitySubType_REC_DRUG_USE *smithy.Schema
-
-var EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "EntityType",
-}, smithy.ShapeTypeEnum, 7)
-var EntityType_MEDICATION *smithy.Schema
-
-var EntityType_MEDICAL_CONDITION *smithy.Schema
-
-var EntityType_PROTECTED_HEALTH_INFORMATION *smithy.Schema
-
-var EntityType_TEST_TREATMENT_PROCEDURE *smithy.Schema
-
-var EntityType_ANATOMY *smithy.Schema
-
-var EntityType_TIME_EXPRESSION *smithy.Schema
-
-var EntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL *smithy.Schema
-
-var _Float = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Float",
-}, smithy.ShapeTypeFloat, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ICD10CMAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMAttribute",
-}, smithy.ShapeTypeStructure, 10)
-var ICD10CMAttribute_Type *smithy.Schema
-
-var ICD10CMAttribute_Score *smithy.Schema
-
-var ICD10CMAttribute_RelationshipScore *smithy.Schema
-
-var ICD10CMAttribute_Id *smithy.Schema
-
-var ICD10CMAttribute_BeginOffset *smithy.Schema
-
-var ICD10CMAttribute_EndOffset *smithy.Schema
-
-var ICD10CMAttribute_Text *smithy.Schema
-
-var ICD10CMAttribute_Traits *smithy.Schema
-
-var ICD10CMAttribute_Category *smithy.Schema
-
-var ICD10CMAttribute_RelationshipType *smithy.Schema
-
-var _ICD10CMAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _ICD10CMAttributeList_member *smithy.Schema
-
-var ICD10CMAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMAttributeType",
-}, smithy.ShapeTypeEnum, 7)
-var ICD10CMAttributeType_ACUITY *smithy.Schema
-
-var ICD10CMAttributeType_DIRECTION *smithy.Schema
-
-var ICD10CMAttributeType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var ICD10CMAttributeType_QUALITY *smithy.Schema
-
-var ICD10CMAttributeType_QUANTITY *smithy.Schema
-
-var ICD10CMAttributeType_TIME_TO_DX_NAME *smithy.Schema
-
-var ICD10CMAttributeType_TIME_EXPRESSION *smithy.Schema
-
-var ICD10CMConcept = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMConcept",
-}, smithy.ShapeTypeStructure, 3)
-var ICD10CMConcept_Description *smithy.Schema
-
-var ICD10CMConcept_Code *smithy.Schema
-
-var ICD10CMConcept_Score *smithy.Schema
-
-var _ICD10CMConceptList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMConceptList",
-}, smithy.ShapeTypeList, 1)
-var _ICD10CMConceptList_member *smithy.Schema
-
-var ICD10CMEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMEntity",
-}, smithy.ShapeTypeStructure, 10)
-var ICD10CMEntity_Id *smithy.Schema
-
-var ICD10CMEntity_Text *smithy.Schema
-
-var ICD10CMEntity_Category *smithy.Schema
-
-var ICD10CMEntity_Type *smithy.Schema
-
-var ICD10CMEntity_Score *smithy.Schema
-
-var ICD10CMEntity_BeginOffset *smithy.Schema
-
-var ICD10CMEntity_EndOffset *smithy.Schema
-
-var ICD10CMEntity_Attributes *smithy.Schema
-
-var ICD10CMEntity_Traits *smithy.Schema
-
-var ICD10CMEntity_ICD10CMConcepts *smithy.Schema
-
-var ICD10CMEntityCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMEntityCategory",
-}, smithy.ShapeTypeEnum, 1)
-var ICD10CMEntityCategory_MEDICAL_CONDITION *smithy.Schema
-
-var _ICD10CMEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMEntityList",
-}, smithy.ShapeTypeList, 1)
-var _ICD10CMEntityList_member *smithy.Schema
-
-var ICD10CMEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMEntityType",
-}, smithy.ShapeTypeEnum, 2)
-var ICD10CMEntityType_DX_NAME *smithy.Schema
-
-var ICD10CMEntityType_TIME_EXPRESSION *smithy.Schema
-
-var ICD10CMRelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMRelationshipType",
-}, smithy.ShapeTypeEnum, 3)
-var ICD10CMRelationshipType_OVERLAP *smithy.Schema
-
-var ICD10CMRelationshipType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var ICD10CMRelationshipType_QUALITY *smithy.Schema
-
-var ICD10CMTrait = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMTrait",
-}, smithy.ShapeTypeStructure, 2)
-var ICD10CMTrait_Name *smithy.Schema
-
-var ICD10CMTrait_Score *smithy.Schema
-
-var _ICD10CMTraitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMTraitList",
-}, smithy.ShapeTypeList, 1)
-var _ICD10CMTraitList_member *smithy.Schema
-
-var ICD10CMTraitName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMTraitName",
-}, smithy.ShapeTypeEnum, 7)
-var ICD10CMTraitName_NEGATION *smithy.Schema
-
-var ICD10CMTraitName_DIAGNOSIS *smithy.Schema
-
-var ICD10CMTraitName_SIGN *smithy.Schema
-
-var ICD10CMTraitName_SYMPTOM *smithy.Schema
-
-var ICD10CMTraitName_PERTAINS_TO_FAMILY *smithy.Schema
-
-var ICD10CMTraitName_HYPOTHETICAL *smithy.Schema
-
-var ICD10CMTraitName_LOW_CONFIDENCE *smithy.Schema
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var InputDataConfig_S3Bucket *smithy.Schema
-
-var InputDataConfig_S3Key *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidEncodingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InvalidEncodingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidEncodingException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0)
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 7)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_COMPLETED *smithy.Schema
-
-var JobStatus_PARTIAL_SUCCESS *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_STOP_REQUESTED *smithy.Schema
-
-var JobStatus_STOPPED *smithy.Schema
-
-var _KMSKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "KMSKey",
-}, smithy.ShapeTypeString, 0)
-
-var LanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "LanguageCode",
-}, smithy.ShapeTypeEnum, 1)
-var LanguageCode_EN *smithy.Schema
-
-var _ManifestFilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ManifestFilePath",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "MaxResultsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ModelVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _OntologyLinkingBoundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "OntologyLinkingBoundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "OutputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OutputDataConfig_S3Bucket *smithy.Schema
-
-var OutputDataConfig_S3Key *smithy.Schema
-
-var RelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RelationshipType",
-}, smithy.ShapeTypeEnum, 22)
-var RelationshipType_EVERY *smithy.Schema
-
-var RelationshipType_WITH_DOSAGE *smithy.Schema
-
-var RelationshipType_ADMINISTERED_VIA *smithy.Schema
-
-var RelationshipType_FOR *smithy.Schema
-
-var RelationshipType_NEGATIVE *smithy.Schema
-
-var RelationshipType_OVERLAP *smithy.Schema
-
-var RelationshipType_DOSAGE *smithy.Schema
-
-var RelationshipType_ROUTE_OR_MODE *smithy.Schema
-
-var RelationshipType_FORM *smithy.Schema
-
-var RelationshipType_FREQUENCY *smithy.Schema
-
-var RelationshipType_DURATION *smithy.Schema
-
-var RelationshipType_STRENGTH *smithy.Schema
-
-var RelationshipType_RATE *smithy.Schema
-
-var RelationshipType_ACUITY *smithy.Schema
-
-var RelationshipType_TEST_VALUE *smithy.Schema
-
-var RelationshipType_TEST_UNITS *smithy.Schema
-
-var RelationshipType_TEST_UNIT *smithy.Schema
-
-var RelationshipType_DIRECTION *smithy.Schema
-
-var RelationshipType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var RelationshipType_AMOUNT *smithy.Schema
-
-var RelationshipType_USAGE *smithy.Schema
-
-var RelationshipType_QUALITY *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var RxNormAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormAttribute",
-}, smithy.ShapeTypeStructure, 8)
-var RxNormAttribute_Type *smithy.Schema
-
-var RxNormAttribute_Score *smithy.Schema
-
-var RxNormAttribute_RelationshipScore *smithy.Schema
-
-var RxNormAttribute_Id *smithy.Schema
-
-var RxNormAttribute_BeginOffset *smithy.Schema
-
-var RxNormAttribute_EndOffset *smithy.Schema
-
-var RxNormAttribute_Text *smithy.Schema
-
-var RxNormAttribute_Traits *smithy.Schema
-
-var _RxNormAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RxNormAttributeList_member *smithy.Schema
-
-var RxNormAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormAttributeType",
-}, smithy.ShapeTypeEnum, 7)
-var RxNormAttributeType_DOSAGE *smithy.Schema
-
-var RxNormAttributeType_DURATION *smithy.Schema
-
-var RxNormAttributeType_FORM *smithy.Schema
-
-var RxNormAttributeType_FREQUENCY *smithy.Schema
-
-var RxNormAttributeType_RATE *smithy.Schema
-
-var RxNormAttributeType_ROUTE_OR_MODE *smithy.Schema
-
-var RxNormAttributeType_STRENGTH *smithy.Schema
-
-var RxNormConcept = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormConcept",
-}, smithy.ShapeTypeStructure, 3)
-var RxNormConcept_Description *smithy.Schema
-
-var RxNormConcept_Code *smithy.Schema
-
-var RxNormConcept_Score *smithy.Schema
-
-var _RxNormConceptList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormConceptList",
-}, smithy.ShapeTypeList, 1)
-var _RxNormConceptList_member *smithy.Schema
-
-var RxNormEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormEntity",
-}, smithy.ShapeTypeStructure, 10)
-var RxNormEntity_Id *smithy.Schema
-
-var RxNormEntity_Text *smithy.Schema
-
-var RxNormEntity_Category *smithy.Schema
-
-var RxNormEntity_Type *smithy.Schema
-
-var RxNormEntity_Score *smithy.Schema
-
-var RxNormEntity_BeginOffset *smithy.Schema
-
-var RxNormEntity_EndOffset *smithy.Schema
-
-var RxNormEntity_Attributes *smithy.Schema
-
-var RxNormEntity_Traits *smithy.Schema
-
-var RxNormEntity_RxNormConcepts *smithy.Schema
-
-var RxNormEntityCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormEntityCategory",
-}, smithy.ShapeTypeEnum, 1)
-var RxNormEntityCategory_MEDICATION *smithy.Schema
-
-var _RxNormEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormEntityList",
-}, smithy.ShapeTypeList, 1)
-var _RxNormEntityList_member *smithy.Schema
-
-var RxNormEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormEntityType",
-}, smithy.ShapeTypeEnum, 2)
-var RxNormEntityType_BRAND_NAME *smithy.Schema
-
-var RxNormEntityType_GENERIC_NAME *smithy.Schema
-
-var RxNormTrait = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormTrait",
-}, smithy.ShapeTypeStructure, 2)
-var RxNormTrait_Name *smithy.Schema
-
-var RxNormTrait_Score *smithy.Schema
-
-var _RxNormTraitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormTraitList",
-}, smithy.ShapeTypeList, 1)
-var _RxNormTraitList_member *smithy.Schema
-
-var RxNormTraitName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormTraitName",
-}, smithy.ShapeTypeEnum, 2)
-var RxNormTraitName_NEGATION *smithy.Schema
-
-var RxNormTraitName_PAST_HISTORY *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var SNOMEDCTAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTAttribute",
-}, smithy.ShapeTypeStructure, 11)
-var SNOMEDCTAttribute_Category *smithy.Schema
-
-var SNOMEDCTAttribute_Type *smithy.Schema
-
-var SNOMEDCTAttribute_Score *smithy.Schema
-
-var SNOMEDCTAttribute_RelationshipScore *smithy.Schema
-
-var SNOMEDCTAttribute_RelationshipType *smithy.Schema
-
-var SNOMEDCTAttribute_Id *smithy.Schema
-
-var SNOMEDCTAttribute_BeginOffset *smithy.Schema
-
-var SNOMEDCTAttribute_EndOffset *smithy.Schema
-
-var SNOMEDCTAttribute_Text *smithy.Schema
-
-var SNOMEDCTAttribute_Traits *smithy.Schema
-
-var SNOMEDCTAttribute_SNOMEDCTConcepts *smithy.Schema
-
-var _SNOMEDCTAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _SNOMEDCTAttributeList_member *smithy.Schema
-
-var SNOMEDCTAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTAttributeType",
-}, smithy.ShapeTypeEnum, 6)
-var SNOMEDCTAttributeType_ACUITY *smithy.Schema
-
-var SNOMEDCTAttributeType_QUALITY *smithy.Schema
-
-var SNOMEDCTAttributeType_DIRECTION *smithy.Schema
-
-var SNOMEDCTAttributeType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var SNOMEDCTAttributeType_TEST_VALUE *smithy.Schema
-
-var SNOMEDCTAttributeType_TEST_UNIT *smithy.Schema
-
-var SNOMEDCTConcept = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTConcept",
-}, smithy.ShapeTypeStructure, 3)
-var SNOMEDCTConcept_Description *smithy.Schema
-
-var SNOMEDCTConcept_Code *smithy.Schema
-
-var SNOMEDCTConcept_Score *smithy.Schema
-
-var _SNOMEDCTConceptList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTConceptList",
-}, smithy.ShapeTypeList, 1)
-var _SNOMEDCTConceptList_member *smithy.Schema
-
-var SNOMEDCTDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTDetails",
-}, smithy.ShapeTypeStructure, 3)
-var SNOMEDCTDetails_Edition *smithy.Schema
-
-var SNOMEDCTDetails_Language *smithy.Schema
-
-var SNOMEDCTDetails_VersionDate *smithy.Schema
-
-var SNOMEDCTEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTEntity",
-}, smithy.ShapeTypeStructure, 10)
-var SNOMEDCTEntity_Id *smithy.Schema
-
-var SNOMEDCTEntity_Text *smithy.Schema
-
-var SNOMEDCTEntity_Category *smithy.Schema
-
-var SNOMEDCTEntity_Type *smithy.Schema
-
-var SNOMEDCTEntity_Score *smithy.Schema
-
-var SNOMEDCTEntity_BeginOffset *smithy.Schema
-
-var SNOMEDCTEntity_EndOffset *smithy.Schema
-
-var SNOMEDCTEntity_Attributes *smithy.Schema
-
-var SNOMEDCTEntity_Traits *smithy.Schema
-
-var SNOMEDCTEntity_SNOMEDCTConcepts *smithy.Schema
-
-var SNOMEDCTEntityCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTEntityCategory",
-}, smithy.ShapeTypeEnum, 3)
-var SNOMEDCTEntityCategory_MEDICAL_CONDITION *smithy.Schema
-
-var SNOMEDCTEntityCategory_ANATOMY *smithy.Schema
-
-var SNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE *smithy.Schema
-
-var _SNOMEDCTEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTEntityList",
-}, smithy.ShapeTypeList, 1)
-var _SNOMEDCTEntityList_member *smithy.Schema
-
-var SNOMEDCTEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTEntityType",
-}, smithy.ShapeTypeEnum, 4)
-var SNOMEDCTEntityType_DX_NAME *smithy.Schema
-
-var SNOMEDCTEntityType_TEST_NAME *smithy.Schema
-
-var SNOMEDCTEntityType_PROCEDURE_NAME *smithy.Schema
-
-var SNOMEDCTEntityType_TREATMENT_NAME *smithy.Schema
-
-var SNOMEDCTRelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTRelationshipType",
-}, smithy.ShapeTypeEnum, 7)
-var SNOMEDCTRelationshipType_ACUITY *smithy.Schema
-
-var SNOMEDCTRelationshipType_QUALITY *smithy.Schema
-
-var SNOMEDCTRelationshipType_TEST_VALUE *smithy.Schema
-
-var SNOMEDCTRelationshipType_TEST_UNITS *smithy.Schema
-
-var SNOMEDCTRelationshipType_DIRECTION *smithy.Schema
-
-var SNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var SNOMEDCTRelationshipType_TEST_UNIT *smithy.Schema
-
-var SNOMEDCTTrait = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTTrait",
-}, smithy.ShapeTypeStructure, 2)
-var SNOMEDCTTrait_Name *smithy.Schema
-
-var SNOMEDCTTrait_Score *smithy.Schema
-
-var _SNOMEDCTTraitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTTraitList",
-}, smithy.ShapeTypeList, 1)
-var _SNOMEDCTTraitList_member *smithy.Schema
-
-var SNOMEDCTTraitName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTTraitName",
-}, smithy.ShapeTypeEnum, 9)
-var SNOMEDCTTraitName_NEGATION *smithy.Schema
-
-var SNOMEDCTTraitName_DIAGNOSIS *smithy.Schema
-
-var SNOMEDCTTraitName_SIGN *smithy.Schema
-
-var SNOMEDCTTraitName_SYMPTOM *smithy.Schema
-
-var SNOMEDCTTraitName_PERTAINS_TO_FAMILY *smithy.Schema
-
-var SNOMEDCTTraitName_HYPOTHETICAL *smithy.Schema
-
-var SNOMEDCTTraitName_LOW_CONFIDENCE *smithy.Schema
-
-var SNOMEDCTTraitName_PAST_HISTORY *smithy.Schema
-
-var SNOMEDCTTraitName_FUTURE *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var TextSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "TextSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TextSizeLimitExceededException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var Trait = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Trait",
-}, smithy.ShapeTypeStructure, 2)
-var Trait_Name *smithy.Schema
-
-var Trait_Score *smithy.Schema
-
-var _TraitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "TraitList",
-}, smithy.ShapeTypeList, 1)
-var _TraitList_member *smithy.Schema
-
-var UnmappedAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "UnmappedAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var UnmappedAttribute_Type *smithy.Schema
-
-var UnmappedAttribute_Attribute *smithy.Schema
-
-var _UnmappedAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "UnmappedAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _UnmappedAttributeList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var DescribeEntitiesDetectionV2JobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeEntitiesDetectionV2JobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEntitiesDetectionV2JobRequest_JobId *smithy.Schema
-
-var DescribeEntitiesDetectionV2JobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeEntitiesDetectionV2JobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DescribeICD10CMInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeICD10CMInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeICD10CMInferenceJobRequest_JobId *smithy.Schema
-
-var DescribeICD10CMInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeICD10CMInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DescribePHIDetectionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribePHIDetectionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePHIDetectionJobRequest_JobId *smithy.Schema
-
-var DescribePHIDetectionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribePHIDetectionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DescribeRxNormInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeRxNormInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRxNormInferenceJobRequest_JobId *smithy.Schema
-
-var DescribeRxNormInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeRxNormInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DescribeSNOMEDCTInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeSNOMEDCTInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSNOMEDCTInferenceJobRequest_JobId *smithy.Schema
-
-var DescribeSNOMEDCTInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeSNOMEDCTInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DetectEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DetectEntitiesRequest_Text *smithy.Schema
-
-var DetectEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DetectEntitiesResponse_Entities *smithy.Schema
-
-var DetectEntitiesResponse_UnmappedAttributes *smithy.Schema
-
-var DetectEntitiesResponse_PaginationToken *smithy.Schema
-
-var DetectEntitiesResponse_ModelVersion *smithy.Schema
-
-var DetectEntitiesV2Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesV2Request",
-}, smithy.ShapeTypeStructure, 1)
-var DetectEntitiesV2Request_Text *smithy.Schema
-
-var DetectEntitiesV2Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesV2Response",
-}, smithy.ShapeTypeStructure, 4)
-var DetectEntitiesV2Response_Entities *smithy.Schema
-
-var DetectEntitiesV2Response_UnmappedAttributes *smithy.Schema
-
-var DetectEntitiesV2Response_PaginationToken *smithy.Schema
-
-var DetectEntitiesV2Response_ModelVersion *smithy.Schema
-
-var DetectPHIRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectPHIRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DetectPHIRequest_Text *smithy.Schema
-
-var DetectPHIResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectPHIResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DetectPHIResponse_Entities *smithy.Schema
-
-var DetectPHIResponse_PaginationToken *smithy.Schema
-
-var DetectPHIResponse_ModelVersion *smithy.Schema
-
-var InferICD10CMRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferICD10CMRequest",
-}, smithy.ShapeTypeStructure, 1)
-var InferICD10CMRequest_Text *smithy.Schema
-
-var InferICD10CMResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferICD10CMResponse",
-}, smithy.ShapeTypeStructure, 3)
-var InferICD10CMResponse_Entities *smithy.Schema
-
-var InferICD10CMResponse_PaginationToken *smithy.Schema
-
-var InferICD10CMResponse_ModelVersion *smithy.Schema
-
-var InferRxNormRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferRxNormRequest",
-}, smithy.ShapeTypeStructure, 1)
-var InferRxNormRequest_Text *smithy.Schema
-
-var InferRxNormResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferRxNormResponse",
-}, smithy.ShapeTypeStructure, 3)
-var InferRxNormResponse_Entities *smithy.Schema
-
-var InferRxNormResponse_PaginationToken *smithy.Schema
-
-var InferRxNormResponse_ModelVersion *smithy.Schema
-
-var InferSNOMEDCTRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferSNOMEDCTRequest",
-}, smithy.ShapeTypeStructure, 1)
-var InferSNOMEDCTRequest_Text *smithy.Schema
-
-var InferSNOMEDCTResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferSNOMEDCTResponse",
-}, smithy.ShapeTypeStructure, 5)
-var InferSNOMEDCTResponse_Entities *smithy.Schema
-
-var InferSNOMEDCTResponse_PaginationToken *smithy.Schema
-
-var InferSNOMEDCTResponse_ModelVersion *smithy.Schema
-
-var InferSNOMEDCTResponse_SNOMEDCTDetails *smithy.Schema
-
-var InferSNOMEDCTResponse_Characters *smithy.Schema
-
-var ListEntitiesDetectionV2JobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListEntitiesDetectionV2JobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEntitiesDetectionV2JobsRequest_Filter *smithy.Schema
-
-var ListEntitiesDetectionV2JobsRequest_NextToken *smithy.Schema
-
-var ListEntitiesDetectionV2JobsRequest_MaxResults *smithy.Schema
-
-var ListEntitiesDetectionV2JobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListEntitiesDetectionV2JobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListEntitiesDetectionV2JobsResponse_NextToken *smithy.Schema
-
-var ListICD10CMInferenceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListICD10CMInferenceJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListICD10CMInferenceJobsRequest_Filter *smithy.Schema
-
-var ListICD10CMInferenceJobsRequest_NextToken *smithy.Schema
-
-var ListICD10CMInferenceJobsRequest_MaxResults *smithy.Schema
-
-var ListICD10CMInferenceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListICD10CMInferenceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListICD10CMInferenceJobsResponse_NextToken *smithy.Schema
-
-var ListPHIDetectionJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListPHIDetectionJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPHIDetectionJobsRequest_Filter *smithy.Schema
-
-var ListPHIDetectionJobsRequest_NextToken *smithy.Schema
-
-var ListPHIDetectionJobsRequest_MaxResults *smithy.Schema
-
-var ListPHIDetectionJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListPHIDetectionJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListPHIDetectionJobsResponse_NextToken *smithy.Schema
-
-var ListRxNormInferenceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListRxNormInferenceJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRxNormInferenceJobsRequest_Filter *smithy.Schema
-
-var ListRxNormInferenceJobsRequest_NextToken *smithy.Schema
-
-var ListRxNormInferenceJobsRequest_MaxResults *smithy.Schema
-
-var ListRxNormInferenceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListRxNormInferenceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListRxNormInferenceJobsResponse_NextToken *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListSNOMEDCTInferenceJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSNOMEDCTInferenceJobsRequest_Filter *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsRequest_NextToken *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsRequest_MaxResults *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListSNOMEDCTInferenceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsResponse_NextToken *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartEntitiesDetectionV2JobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartEntitiesDetectionV2JobRequest_InputDataConfig *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_OutputDataConfig *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_JobName *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_ClientRequestToken *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_KMSKey *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_LanguageCode *smithy.Schema
-
-var StartEntitiesDetectionV2JobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartEntitiesDetectionV2JobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartEntitiesDetectionV2JobResponse_JobId *smithy.Schema
-
-var StartICD10CMInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartICD10CMInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartICD10CMInferenceJobRequest_InputDataConfig *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_OutputDataConfig *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_JobName *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_ClientRequestToken *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_KMSKey *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_LanguageCode *smithy.Schema
-
-var StartICD10CMInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartICD10CMInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartICD10CMInferenceJobResponse_JobId *smithy.Schema
-
-var StartPHIDetectionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartPHIDetectionJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartPHIDetectionJobRequest_InputDataConfig *smithy.Schema
-
-var StartPHIDetectionJobRequest_OutputDataConfig *smithy.Schema
-
-var StartPHIDetectionJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartPHIDetectionJobRequest_JobName *smithy.Schema
-
-var StartPHIDetectionJobRequest_ClientRequestToken *smithy.Schema
-
-var StartPHIDetectionJobRequest_KMSKey *smithy.Schema
-
-var StartPHIDetectionJobRequest_LanguageCode *smithy.Schema
-
-var StartPHIDetectionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartPHIDetectionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartPHIDetectionJobResponse_JobId *smithy.Schema
-
-var StartRxNormInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartRxNormInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartRxNormInferenceJobRequest_InputDataConfig *smithy.Schema
-
-var StartRxNormInferenceJobRequest_OutputDataConfig *smithy.Schema
-
-var StartRxNormInferenceJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartRxNormInferenceJobRequest_JobName *smithy.Schema
-
-var StartRxNormInferenceJobRequest_ClientRequestToken *smithy.Schema
-
-var StartRxNormInferenceJobRequest_KMSKey *smithy.Schema
-
-var StartRxNormInferenceJobRequest_LanguageCode *smithy.Schema
-
-var StartRxNormInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartRxNormInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartRxNormInferenceJobResponse_JobId *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartSNOMEDCTInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartSNOMEDCTInferenceJobRequest_InputDataConfig *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_OutputDataConfig *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_JobName *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_ClientRequestToken *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_KMSKey *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_LanguageCode *smithy.Schema
-
-var StartSNOMEDCTInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartSNOMEDCTInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSNOMEDCTInferenceJobResponse_JobId *smithy.Schema
-
-var StopEntitiesDetectionV2JobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopEntitiesDetectionV2JobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopEntitiesDetectionV2JobRequest_JobId *smithy.Schema
-
-var StopEntitiesDetectionV2JobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopEntitiesDetectionV2JobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopEntitiesDetectionV2JobResponse_JobId *smithy.Schema
-
-var StopICD10CMInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopICD10CMInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopICD10CMInferenceJobRequest_JobId *smithy.Schema
-
-var StopICD10CMInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopICD10CMInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopICD10CMInferenceJobResponse_JobId *smithy.Schema
-
-var StopPHIDetectionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopPHIDetectionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopPHIDetectionJobRequest_JobId *smithy.Schema
-
-var StopPHIDetectionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopPHIDetectionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopPHIDetectionJobResponse_JobId *smithy.Schema
-
-var StopRxNormInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopRxNormInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopRxNormInferenceJobRequest_JobId *smithy.Schema
-
-var StopRxNormInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopRxNormInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopRxNormInferenceJobResponse_JobId *smithy.Schema
-
-var StopSNOMEDCTInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopSNOMEDCTInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopSNOMEDCTInferenceJobRequest_JobId *smithy.Schema
-
-var StopSNOMEDCTInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopSNOMEDCTInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopSNOMEDCTInferenceJobResponse_JobId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	EntitySubType_NAME = EntitySubType.AddMember("NAME", smithyprelude.Unit)
-
-	EntitySubType_DX_NAME = EntitySubType.AddMember("DX_NAME", smithyprelude.Unit)
-
-	EntitySubType_DOSAGE = EntitySubType.AddMember("DOSAGE", smithyprelude.Unit)
-
-	EntitySubType_ROUTE_OR_MODE = EntitySubType.AddMember("ROUTE_OR_MODE", smithyprelude.Unit)
-
-	EntitySubType_FORM = EntitySubType.AddMember("FORM", smithyprelude.Unit)
-
-	EntitySubType_FREQUENCY = EntitySubType.AddMember("FREQUENCY", smithyprelude.Unit)
-
-	EntitySubType_DURATION = EntitySubType.AddMember("DURATION", smithyprelude.Unit)
-
-	EntitySubType_GENERIC_NAME = EntitySubType.AddMember("GENERIC_NAME", smithyprelude.Unit)
-
-	EntitySubType_BRAND_NAME = EntitySubType.AddMember("BRAND_NAME", smithyprelude.Unit)
-
-	EntitySubType_STRENGTH = EntitySubType.AddMember("STRENGTH", smithyprelude.Unit)
-
-	EntitySubType_RATE = EntitySubType.AddMember("RATE", smithyprelude.Unit)
-
-	EntitySubType_ACUITY = EntitySubType.AddMember("ACUITY", smithyprelude.Unit)
-
-	EntitySubType_TEST_NAME = EntitySubType.AddMember("TEST_NAME", smithyprelude.Unit)
-
-	EntitySubType_TEST_VALUE = EntitySubType.AddMember("TEST_VALUE", smithyprelude.Unit)
-
-	EntitySubType_TEST_UNITS = EntitySubType.AddMember("TEST_UNITS", smithyprelude.Unit)
-
-	EntitySubType_TEST_UNIT = EntitySubType.AddMember("TEST_UNIT", smithyprelude.Unit)
-
-	EntitySubType_PROCEDURE_NAME = EntitySubType.AddMember("PROCEDURE_NAME", smithyprelude.Unit)
-
-	EntitySubType_TREATMENT_NAME = EntitySubType.AddMember("TREATMENT_NAME", smithyprelude.Unit)
-
-	EntitySubType_DATE = EntitySubType.AddMember("DATE", smithyprelude.Unit)
-
-	EntitySubType_AGE = EntitySubType.AddMember("AGE", smithyprelude.Unit)
-
-	EntitySubType_CONTACT_POINT = EntitySubType.AddMember("CONTACT_POINT", smithyprelude.Unit)
-
-	EntitySubType_PHONE_OR_FAX = EntitySubType.AddMember("PHONE_OR_FAX", smithyprelude.Unit)
-
-	EntitySubType_EMAIL = EntitySubType.AddMember("EMAIL", smithyprelude.Unit)
-
-	EntitySubType_IDENTIFIER = EntitySubType.AddMember("IDENTIFIER", smithyprelude.Unit)
-
-	EntitySubType_ID = EntitySubType.AddMember("ID", smithyprelude.Unit)
-
-	EntitySubType_URL = EntitySubType.AddMember("URL", smithyprelude.Unit)
-
-	EntitySubType_ADDRESS = EntitySubType.AddMember("ADDRESS", smithyprelude.Unit)
-
-	EntitySubType_PROFESSION = EntitySubType.AddMember("PROFESSION", smithyprelude.Unit)
-
-	EntitySubType_SYSTEM_ORGAN_SITE = EntitySubType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	EntitySubType_DIRECTION = EntitySubType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	EntitySubType_QUALITY = EntitySubType.AddMember("QUALITY", smithyprelude.Unit)
-
-	EntitySubType_QUANTITY = EntitySubType.AddMember("QUANTITY", smithyprelude.Unit)
-
-	EntitySubType_TIME_EXPRESSION = EntitySubType.AddMember("TIME_EXPRESSION", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_MEDICATION_NAME = EntitySubType.AddMember("TIME_TO_MEDICATION_NAME", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_DX_NAME = EntitySubType.AddMember("TIME_TO_DX_NAME", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_TEST_NAME = EntitySubType.AddMember("TIME_TO_TEST_NAME", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_PROCEDURE_NAME = EntitySubType.AddMember("TIME_TO_PROCEDURE_NAME", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_TREATMENT_NAME = EntitySubType.AddMember("TIME_TO_TREATMENT_NAME", smithyprelude.Unit)
-
-	EntitySubType_AMOUNT = EntitySubType.AddMember("AMOUNT", smithyprelude.Unit)
-
-	EntitySubType_GENDER = EntitySubType.AddMember("GENDER", smithyprelude.Unit)
-
-	EntitySubType_RACE_ETHNICITY = EntitySubType.AddMember("RACE_ETHNICITY", smithyprelude.Unit)
-
-	EntitySubType_ALLERGIES = EntitySubType.AddMember("ALLERGIES", smithyprelude.Unit)
-
-	EntitySubType_TOBACCO_USE = EntitySubType.AddMember("TOBACCO_USE", smithyprelude.Unit)
-
-	EntitySubType_ALCOHOL_CONSUMPTION = EntitySubType.AddMember("ALCOHOL_CONSUMPTION", smithyprelude.Unit)
-
-	EntitySubType_REC_DRUG_USE = EntitySubType.AddMember("REC_DRUG_USE", smithyprelude.Unit)
-
-	RelationshipType_EVERY = RelationshipType.AddMember("EVERY", smithyprelude.Unit)
-
-	RelationshipType_WITH_DOSAGE = RelationshipType.AddMember("WITH_DOSAGE", smithyprelude.Unit)
-
-	RelationshipType_ADMINISTERED_VIA = RelationshipType.AddMember("ADMINISTERED_VIA", smithyprelude.Unit)
-
-	RelationshipType_FOR = RelationshipType.AddMember("FOR", smithyprelude.Unit)
-
-	RelationshipType_NEGATIVE = RelationshipType.AddMember("NEGATIVE", smithyprelude.Unit)
-
-	RelationshipType_OVERLAP = RelationshipType.AddMember("OVERLAP", smithyprelude.Unit)
-
-	RelationshipType_DOSAGE = RelationshipType.AddMember("DOSAGE", smithyprelude.Unit)
-
-	RelationshipType_ROUTE_OR_MODE = RelationshipType.AddMember("ROUTE_OR_MODE", smithyprelude.Unit)
-
-	RelationshipType_FORM = RelationshipType.AddMember("FORM", smithyprelude.Unit)
-
-	RelationshipType_FREQUENCY = RelationshipType.AddMember("FREQUENCY", smithyprelude.Unit)
-
-	RelationshipType_DURATION = RelationshipType.AddMember("DURATION", smithyprelude.Unit)
-
-	RelationshipType_STRENGTH = RelationshipType.AddMember("STRENGTH", smithyprelude.Unit)
-
-	RelationshipType_RATE = RelationshipType.AddMember("RATE", smithyprelude.Unit)
-
-	RelationshipType_ACUITY = RelationshipType.AddMember("ACUITY", smithyprelude.Unit)
-
-	RelationshipType_TEST_VALUE = RelationshipType.AddMember("TEST_VALUE", smithyprelude.Unit)
-
-	RelationshipType_TEST_UNITS = RelationshipType.AddMember("TEST_UNITS", smithyprelude.Unit)
-
-	RelationshipType_TEST_UNIT = RelationshipType.AddMember("TEST_UNIT", smithyprelude.Unit)
-
-	RelationshipType_DIRECTION = RelationshipType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	RelationshipType_SYSTEM_ORGAN_SITE = RelationshipType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	RelationshipType_AMOUNT = RelationshipType.AddMember("AMOUNT", smithyprelude.Unit)
-
-	RelationshipType_USAGE = RelationshipType.AddMember("USAGE", smithyprelude.Unit)
-
-	RelationshipType_QUALITY = RelationshipType.AddMember("QUALITY", smithyprelude.Unit)
-
-	EntityType_MEDICATION = EntityType.AddMember("MEDICATION", smithyprelude.Unit)
-
-	EntityType_MEDICAL_CONDITION = EntityType.AddMember("MEDICAL_CONDITION", smithyprelude.Unit)
-
-	EntityType_PROTECTED_HEALTH_INFORMATION = EntityType.AddMember("PROTECTED_HEALTH_INFORMATION", smithyprelude.Unit)
-
-	EntityType_TEST_TREATMENT_PROCEDURE = EntityType.AddMember("TEST_TREATMENT_PROCEDURE", smithyprelude.Unit)
-
-	EntityType_ANATOMY = EntityType.AddMember("ANATOMY", smithyprelude.Unit)
-
-	EntityType_TIME_EXPRESSION = EntityType.AddMember("TIME_EXPRESSION", smithyprelude.Unit)
-
-	EntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL = EntityType.AddMember("BEHAVIORAL_ENVIRONMENTAL_SOCIAL", smithyprelude.Unit)
-
-	AttributeName_SIGN = AttributeName.AddMember("SIGN", smithyprelude.Unit)
-
-	AttributeName_SYMPTOM = AttributeName.AddMember("SYMPTOM", smithyprelude.Unit)
-
-	AttributeName_DIAGNOSIS = AttributeName.AddMember("DIAGNOSIS", smithyprelude.Unit)
-
-	AttributeName_NEGATION = AttributeName.AddMember("NEGATION", smithyprelude.Unit)
-
-	AttributeName_PERTAINS_TO_FAMILY = AttributeName.AddMember("PERTAINS_TO_FAMILY", smithyprelude.Unit)
-
-	AttributeName_HYPOTHETICAL = AttributeName.AddMember("HYPOTHETICAL", smithyprelude.Unit)
-
-	AttributeName_LOW_CONFIDENCE = AttributeName.AddMember("LOW_CONFIDENCE", smithyprelude.Unit)
-
-	AttributeName_PAST_HISTORY = AttributeName.AddMember("PAST_HISTORY", smithyprelude.Unit)
-
-	AttributeName_FUTURE = AttributeName.AddMember("FUTURE", smithyprelude.Unit)
-
-	Trait_Name = Trait.AddMember("Name", AttributeName)
-
-	Trait_Score = Trait.AddMember("Score", _Float)
-
-	_TraitList_member = _TraitList.AddMember("member", Trait)
-
-	Attribute_Type = Attribute.AddMember("Type", EntitySubType)
-
-	Attribute_Score = Attribute.AddMember("Score", _Float)
-
-	Attribute_RelationshipScore = Attribute.AddMember("RelationshipScore", _Float)
-
-	Attribute_RelationshipType = Attribute.AddMember("RelationshipType", RelationshipType)
-
-	Attribute_Id = Attribute.AddMember("Id", _Integer)
-
-	Attribute_BeginOffset = Attribute.AddMember("BeginOffset", _Integer)
-
-	Attribute_EndOffset = Attribute.AddMember("EndOffset", _Integer)
-
-	Attribute_Text = Attribute.AddMember("Text", _String)
-
-	Attribute_Category = Attribute.AddMember("Category", EntityType)
-
-	Attribute_Traits = Attribute.AddMember("Traits", _TraitList)
-
-	_AttributeList_member = _AttributeList.AddMember("member", Attribute)
-
-	Characters_OriginalTextCharacters = Characters.AddMember("OriginalTextCharacters", _Integer)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_COMPLETED = JobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	JobStatus_PARTIAL_SUCCESS = JobStatus.AddMember("PARTIAL_SUCCESS", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_STOP_REQUESTED = JobStatus.AddMember("STOP_REQUESTED", smithyprelude.Unit)
-
-	JobStatus_STOPPED = JobStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	ComprehendMedicalAsyncJobFilter_JobName = ComprehendMedicalAsyncJobFilter.AddMember("JobName", _JobName)
-
-	ComprehendMedicalAsyncJobFilter_JobStatus = ComprehendMedicalAsyncJobFilter.AddMember("JobStatus", JobStatus)
-
-	ComprehendMedicalAsyncJobFilter_SubmitTimeBefore = ComprehendMedicalAsyncJobFilter.AddMember("SubmitTimeBefore", _Timestamp)
-
-	ComprehendMedicalAsyncJobFilter_SubmitTimeAfter = ComprehendMedicalAsyncJobFilter.AddMember("SubmitTimeAfter", _Timestamp)
-
-	InputDataConfig_S3Bucket = InputDataConfig.AddMember("S3Bucket", _S3Bucket)
-
-	InputDataConfig_S3Key = InputDataConfig.AddMember("S3Key", _S3Key)
-
-	OutputDataConfig_S3Bucket = OutputDataConfig.AddMember("S3Bucket", _S3Bucket)
-
-	OutputDataConfig_S3Key = OutputDataConfig.AddMember("S3Key", _S3Key)
-
-	LanguageCode_EN = LanguageCode.AddMember("EN", smithyprelude.Unit)
-
-	ComprehendMedicalAsyncJobProperties_JobId = ComprehendMedicalAsyncJobProperties.AddMember("JobId", _JobId)
-
-	ComprehendMedicalAsyncJobProperties_JobName = ComprehendMedicalAsyncJobProperties.AddMember("JobName", _JobName)
-
-	ComprehendMedicalAsyncJobProperties_JobStatus = ComprehendMedicalAsyncJobProperties.AddMember("JobStatus", JobStatus)
-
-	ComprehendMedicalAsyncJobProperties_Message = ComprehendMedicalAsyncJobProperties.AddMember("Message", _AnyLengthString)
-
-	ComprehendMedicalAsyncJobProperties_SubmitTime = ComprehendMedicalAsyncJobProperties.AddMember("SubmitTime", _Timestamp)
-
-	ComprehendMedicalAsyncJobProperties_EndTime = ComprehendMedicalAsyncJobProperties.AddMember("EndTime", _Timestamp)
-
-	ComprehendMedicalAsyncJobProperties_ExpirationTime = ComprehendMedicalAsyncJobProperties.AddMember("ExpirationTime", _Timestamp)
-
-	ComprehendMedicalAsyncJobProperties_InputDataConfig = ComprehendMedicalAsyncJobProperties.AddMember("InputDataConfig", InputDataConfig)
-
-	ComprehendMedicalAsyncJobProperties_OutputDataConfig = ComprehendMedicalAsyncJobProperties.AddMember("OutputDataConfig", OutputDataConfig)
-
-	ComprehendMedicalAsyncJobProperties_LanguageCode = ComprehendMedicalAsyncJobProperties.AddMember("LanguageCode", LanguageCode)
-
-	ComprehendMedicalAsyncJobProperties_DataAccessRoleArn = ComprehendMedicalAsyncJobProperties.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	ComprehendMedicalAsyncJobProperties_ManifestFilePath = ComprehendMedicalAsyncJobProperties.AddMember("ManifestFilePath", _ManifestFilePath)
-
-	ComprehendMedicalAsyncJobProperties_KMSKey = ComprehendMedicalAsyncJobProperties.AddMember("KMSKey", _KMSKey)
-
-	ComprehendMedicalAsyncJobProperties_ModelVersion = ComprehendMedicalAsyncJobProperties.AddMember("ModelVersion", _ModelVersion)
-
-	_ComprehendMedicalAsyncJobPropertiesList_member = _ComprehendMedicalAsyncJobPropertiesList.AddMember("member", ComprehendMedicalAsyncJobProperties)
-
-	Entity_Id = Entity.AddMember("Id", _Integer)
-
-	Entity_BeginOffset = Entity.AddMember("BeginOffset", _Integer)
-
-	Entity_EndOffset = Entity.AddMember("EndOffset", _Integer)
-
-	Entity_Score = Entity.AddMember("Score", _Float)
-
-	Entity_Text = Entity.AddMember("Text", _String)
-
-	Entity_Category = Entity.AddMember("Category", EntityType)
-
-	Entity_Type = Entity.AddMember("Type", EntitySubType)
-
-	Entity_Traits = Entity.AddMember("Traits", _TraitList)
-
-	Entity_Attributes = Entity.AddMember("Attributes", _AttributeList)
-
-	_EntityList_member = _EntityList.AddMember("member", Entity)
-
-	ICD10CMAttributeType_ACUITY = ICD10CMAttributeType.AddMember("ACUITY", smithyprelude.Unit)
-
-	ICD10CMAttributeType_DIRECTION = ICD10CMAttributeType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	ICD10CMAttributeType_SYSTEM_ORGAN_SITE = ICD10CMAttributeType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	ICD10CMAttributeType_QUALITY = ICD10CMAttributeType.AddMember("QUALITY", smithyprelude.Unit)
-
-	ICD10CMAttributeType_QUANTITY = ICD10CMAttributeType.AddMember("QUANTITY", smithyprelude.Unit)
-
-	ICD10CMAttributeType_TIME_TO_DX_NAME = ICD10CMAttributeType.AddMember("TIME_TO_DX_NAME", smithyprelude.Unit)
-
-	ICD10CMAttributeType_TIME_EXPRESSION = ICD10CMAttributeType.AddMember("TIME_EXPRESSION", smithyprelude.Unit)
-
-	ICD10CMTraitName_NEGATION = ICD10CMTraitName.AddMember("NEGATION", smithyprelude.Unit)
-
-	ICD10CMTraitName_DIAGNOSIS = ICD10CMTraitName.AddMember("DIAGNOSIS", smithyprelude.Unit)
-
-	ICD10CMTraitName_SIGN = ICD10CMTraitName.AddMember("SIGN", smithyprelude.Unit)
-
-	ICD10CMTraitName_SYMPTOM = ICD10CMTraitName.AddMember("SYMPTOM", smithyprelude.Unit)
-
-	ICD10CMTraitName_PERTAINS_TO_FAMILY = ICD10CMTraitName.AddMember("PERTAINS_TO_FAMILY", smithyprelude.Unit)
-
-	ICD10CMTraitName_HYPOTHETICAL = ICD10CMTraitName.AddMember("HYPOTHETICAL", smithyprelude.Unit)
-
-	ICD10CMTraitName_LOW_CONFIDENCE = ICD10CMTraitName.AddMember("LOW_CONFIDENCE", smithyprelude.Unit)
-
-	ICD10CMTrait_Name = ICD10CMTrait.AddMember("Name", ICD10CMTraitName)
-
-	ICD10CMTrait_Score = ICD10CMTrait.AddMember("Score", _Float)
-
-	_ICD10CMTraitList_member = _ICD10CMTraitList.AddMember("member", ICD10CMTrait)
-
-	ICD10CMEntityType_DX_NAME = ICD10CMEntityType.AddMember("DX_NAME", smithyprelude.Unit)
-
-	ICD10CMEntityType_TIME_EXPRESSION = ICD10CMEntityType.AddMember("TIME_EXPRESSION", smithyprelude.Unit)
-
-	ICD10CMRelationshipType_OVERLAP = ICD10CMRelationshipType.AddMember("OVERLAP", smithyprelude.Unit)
-
-	ICD10CMRelationshipType_SYSTEM_ORGAN_SITE = ICD10CMRelationshipType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	ICD10CMRelationshipType_QUALITY = ICD10CMRelationshipType.AddMember("QUALITY", smithyprelude.Unit)
-
-	ICD10CMAttribute_Type = ICD10CMAttribute.AddMember("Type", ICD10CMAttributeType)
-
-	ICD10CMAttribute_Score = ICD10CMAttribute.AddMember("Score", _Float)
-
-	ICD10CMAttribute_RelationshipScore = ICD10CMAttribute.AddMember("RelationshipScore", _Float)
-
-	ICD10CMAttribute_Id = ICD10CMAttribute.AddMember("Id", _Integer)
-
-	ICD10CMAttribute_BeginOffset = ICD10CMAttribute.AddMember("BeginOffset", _Integer)
-
-	ICD10CMAttribute_EndOffset = ICD10CMAttribute.AddMember("EndOffset", _Integer)
-
-	ICD10CMAttribute_Text = ICD10CMAttribute.AddMember("Text", _String)
-
-	ICD10CMAttribute_Traits = ICD10CMAttribute.AddMember("Traits", _ICD10CMTraitList)
-
-	ICD10CMAttribute_Category = ICD10CMAttribute.AddMember("Category", ICD10CMEntityType)
-
-	ICD10CMAttribute_RelationshipType = ICD10CMAttribute.AddMember("RelationshipType", ICD10CMRelationshipType)
-
-	_ICD10CMAttributeList_member = _ICD10CMAttributeList.AddMember("member", ICD10CMAttribute)
-
-	ICD10CMConcept_Description = ICD10CMConcept.AddMember("Description", _String)
-
-	ICD10CMConcept_Code = ICD10CMConcept.AddMember("Code", _String)
-
-	ICD10CMConcept_Score = ICD10CMConcept.AddMember("Score", _Float)
-
-	_ICD10CMConceptList_member = _ICD10CMConceptList.AddMember("member", ICD10CMConcept)
-
-	ICD10CMEntityCategory_MEDICAL_CONDITION = ICD10CMEntityCategory.AddMember("MEDICAL_CONDITION", smithyprelude.Unit)
-
-	ICD10CMEntity_Id = ICD10CMEntity.AddMember("Id", _Integer)
-
-	ICD10CMEntity_Text = ICD10CMEntity.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	ICD10CMEntity_Category = ICD10CMEntity.AddMember("Category", ICD10CMEntityCategory)
-
-	ICD10CMEntity_Type = ICD10CMEntity.AddMember("Type", ICD10CMEntityType)
-
-	ICD10CMEntity_Score = ICD10CMEntity.AddMember("Score", _Float)
-
-	ICD10CMEntity_BeginOffset = ICD10CMEntity.AddMember("BeginOffset", _Integer)
-
-	ICD10CMEntity_EndOffset = ICD10CMEntity.AddMember("EndOffset", _Integer)
-
-	ICD10CMEntity_Attributes = ICD10CMEntity.AddMember("Attributes", _ICD10CMAttributeList)
-
-	ICD10CMEntity_Traits = ICD10CMEntity.AddMember("Traits", _ICD10CMTraitList)
-
-	ICD10CMEntity_ICD10CMConcepts = ICD10CMEntity.AddMember("ICD10CMConcepts", _ICD10CMConceptList)
-
-	_ICD10CMEntityList_member = _ICD10CMEntityList.AddMember("member", ICD10CMEntity)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	InvalidEncodingException_Message = InvalidEncodingException.AddMember("Message", _String)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	RxNormAttributeType_DOSAGE = RxNormAttributeType.AddMember("DOSAGE", smithyprelude.Unit)
-
-	RxNormAttributeType_DURATION = RxNormAttributeType.AddMember("DURATION", smithyprelude.Unit)
-
-	RxNormAttributeType_FORM = RxNormAttributeType.AddMember("FORM", smithyprelude.Unit)
-
-	RxNormAttributeType_FREQUENCY = RxNormAttributeType.AddMember("FREQUENCY", smithyprelude.Unit)
-
-	RxNormAttributeType_RATE = RxNormAttributeType.AddMember("RATE", smithyprelude.Unit)
-
-	RxNormAttributeType_ROUTE_OR_MODE = RxNormAttributeType.AddMember("ROUTE_OR_MODE", smithyprelude.Unit)
-
-	RxNormAttributeType_STRENGTH = RxNormAttributeType.AddMember("STRENGTH", smithyprelude.Unit)
-
-	RxNormTraitName_NEGATION = RxNormTraitName.AddMember("NEGATION", smithyprelude.Unit)
-
-	RxNormTraitName_PAST_HISTORY = RxNormTraitName.AddMember("PAST_HISTORY", smithyprelude.Unit)
-
-	RxNormTrait_Name = RxNormTrait.AddMember("Name", RxNormTraitName)
-
-	RxNormTrait_Score = RxNormTrait.AddMember("Score", _Float)
-
-	_RxNormTraitList_member = _RxNormTraitList.AddMember("member", RxNormTrait)
-
-	RxNormAttribute_Type = RxNormAttribute.AddMember("Type", RxNormAttributeType)
-
-	RxNormAttribute_Score = RxNormAttribute.AddMember("Score", _Float)
-
-	RxNormAttribute_RelationshipScore = RxNormAttribute.AddMember("RelationshipScore", _Float)
-
-	RxNormAttribute_Id = RxNormAttribute.AddMember("Id", _Integer)
-
-	RxNormAttribute_BeginOffset = RxNormAttribute.AddMember("BeginOffset", _Integer)
-
-	RxNormAttribute_EndOffset = RxNormAttribute.AddMember("EndOffset", _Integer)
-
-	RxNormAttribute_Text = RxNormAttribute.AddMember("Text", _String)
-
-	RxNormAttribute_Traits = RxNormAttribute.AddMember("Traits", _RxNormTraitList)
-
-	_RxNormAttributeList_member = _RxNormAttributeList.AddMember("member", RxNormAttribute)
-
-	RxNormConcept_Description = RxNormConcept.AddMember("Description", _String)
-
-	RxNormConcept_Code = RxNormConcept.AddMember("Code", _String)
-
-	RxNormConcept_Score = RxNormConcept.AddMember("Score", _Float)
-
-	_RxNormConceptList_member = _RxNormConceptList.AddMember("member", RxNormConcept)
-
-	RxNormEntityCategory_MEDICATION = RxNormEntityCategory.AddMember("MEDICATION", smithyprelude.Unit)
-
-	RxNormEntityType_BRAND_NAME = RxNormEntityType.AddMember("BRAND_NAME", smithyprelude.Unit)
-
-	RxNormEntityType_GENERIC_NAME = RxNormEntityType.AddMember("GENERIC_NAME", smithyprelude.Unit)
-
-	RxNormEntity_Id = RxNormEntity.AddMember("Id", _Integer)
-
-	RxNormEntity_Text = RxNormEntity.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	RxNormEntity_Category = RxNormEntity.AddMember("Category", RxNormEntityCategory)
-
-	RxNormEntity_Type = RxNormEntity.AddMember("Type", RxNormEntityType)
-
-	RxNormEntity_Score = RxNormEntity.AddMember("Score", _Float)
-
-	RxNormEntity_BeginOffset = RxNormEntity.AddMember("BeginOffset", _Integer)
-
-	RxNormEntity_EndOffset = RxNormEntity.AddMember("EndOffset", _Integer)
-
-	RxNormEntity_Attributes = RxNormEntity.AddMember("Attributes", _RxNormAttributeList)
-
-	RxNormEntity_Traits = RxNormEntity.AddMember("Traits", _RxNormTraitList)
-
-	RxNormEntity_RxNormConcepts = RxNormEntity.AddMember("RxNormConcepts", _RxNormConceptList)
-
-	_RxNormEntityList_member = _RxNormEntityList.AddMember("member", RxNormEntity)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _String)
-
-	SNOMEDCTEntityCategory_MEDICAL_CONDITION = SNOMEDCTEntityCategory.AddMember("MEDICAL_CONDITION", smithyprelude.Unit)
-
-	SNOMEDCTEntityCategory_ANATOMY = SNOMEDCTEntityCategory.AddMember("ANATOMY", smithyprelude.Unit)
-
-	SNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE = SNOMEDCTEntityCategory.AddMember("TEST_TREATMENT_PROCEDURE", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_ACUITY = SNOMEDCTAttributeType.AddMember("ACUITY", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_QUALITY = SNOMEDCTAttributeType.AddMember("QUALITY", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_DIRECTION = SNOMEDCTAttributeType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_SYSTEM_ORGAN_SITE = SNOMEDCTAttributeType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_TEST_VALUE = SNOMEDCTAttributeType.AddMember("TEST_VALUE", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_TEST_UNIT = SNOMEDCTAttributeType.AddMember("TEST_UNIT", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_ACUITY = SNOMEDCTRelationshipType.AddMember("ACUITY", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_QUALITY = SNOMEDCTRelationshipType.AddMember("QUALITY", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_TEST_VALUE = SNOMEDCTRelationshipType.AddMember("TEST_VALUE", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_TEST_UNITS = SNOMEDCTRelationshipType.AddMember("TEST_UNITS", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_DIRECTION = SNOMEDCTRelationshipType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE = SNOMEDCTRelationshipType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_TEST_UNIT = SNOMEDCTRelationshipType.AddMember("TEST_UNIT", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_NEGATION = SNOMEDCTTraitName.AddMember("NEGATION", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_DIAGNOSIS = SNOMEDCTTraitName.AddMember("DIAGNOSIS", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_SIGN = SNOMEDCTTraitName.AddMember("SIGN", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_SYMPTOM = SNOMEDCTTraitName.AddMember("SYMPTOM", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_PERTAINS_TO_FAMILY = SNOMEDCTTraitName.AddMember("PERTAINS_TO_FAMILY", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_HYPOTHETICAL = SNOMEDCTTraitName.AddMember("HYPOTHETICAL", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_LOW_CONFIDENCE = SNOMEDCTTraitName.AddMember("LOW_CONFIDENCE", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_PAST_HISTORY = SNOMEDCTTraitName.AddMember("PAST_HISTORY", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_FUTURE = SNOMEDCTTraitName.AddMember("FUTURE", smithyprelude.Unit)
-
-	SNOMEDCTTrait_Name = SNOMEDCTTrait.AddMember("Name", SNOMEDCTTraitName)
-
-	SNOMEDCTTrait_Score = SNOMEDCTTrait.AddMember("Score", _Float)
-
-	_SNOMEDCTTraitList_member = _SNOMEDCTTraitList.AddMember("member", SNOMEDCTTrait)
-
-	SNOMEDCTConcept_Description = SNOMEDCTConcept.AddMember("Description", _String)
-
-	SNOMEDCTConcept_Code = SNOMEDCTConcept.AddMember("Code", _String)
-
-	SNOMEDCTConcept_Score = SNOMEDCTConcept.AddMember("Score", _Float)
-
-	_SNOMEDCTConceptList_member = _SNOMEDCTConceptList.AddMember("member", SNOMEDCTConcept)
-
-	SNOMEDCTAttribute_Category = SNOMEDCTAttribute.AddMember("Category", SNOMEDCTEntityCategory)
-
-	SNOMEDCTAttribute_Type = SNOMEDCTAttribute.AddMember("Type", SNOMEDCTAttributeType)
-
-	SNOMEDCTAttribute_Score = SNOMEDCTAttribute.AddMember("Score", _Float)
-
-	SNOMEDCTAttribute_RelationshipScore = SNOMEDCTAttribute.AddMember("RelationshipScore", _Float)
-
-	SNOMEDCTAttribute_RelationshipType = SNOMEDCTAttribute.AddMember("RelationshipType", SNOMEDCTRelationshipType)
-
-	SNOMEDCTAttribute_Id = SNOMEDCTAttribute.AddMember("Id", _Integer)
-
-	SNOMEDCTAttribute_BeginOffset = SNOMEDCTAttribute.AddMember("BeginOffset", _Integer)
-
-	SNOMEDCTAttribute_EndOffset = SNOMEDCTAttribute.AddMember("EndOffset", _Integer)
-
-	SNOMEDCTAttribute_Text = SNOMEDCTAttribute.AddMember("Text", _String)
-
-	SNOMEDCTAttribute_Traits = SNOMEDCTAttribute.AddMember("Traits", _SNOMEDCTTraitList)
-
-	SNOMEDCTAttribute_SNOMEDCTConcepts = SNOMEDCTAttribute.AddMember("SNOMEDCTConcepts", _SNOMEDCTConceptList)
-
-	_SNOMEDCTAttributeList_member = _SNOMEDCTAttributeList.AddMember("member", SNOMEDCTAttribute)
-
-	SNOMEDCTDetails_Edition = SNOMEDCTDetails.AddMember("Edition", _String)
-
-	SNOMEDCTDetails_Language = SNOMEDCTDetails.AddMember("Language", _String)
-
-	SNOMEDCTDetails_VersionDate = SNOMEDCTDetails.AddMember("VersionDate", _String)
-
-	SNOMEDCTEntityType_DX_NAME = SNOMEDCTEntityType.AddMember("DX_NAME", smithyprelude.Unit)
-
-	SNOMEDCTEntityType_TEST_NAME = SNOMEDCTEntityType.AddMember("TEST_NAME", smithyprelude.Unit)
-
-	SNOMEDCTEntityType_PROCEDURE_NAME = SNOMEDCTEntityType.AddMember("PROCEDURE_NAME", smithyprelude.Unit)
-
-	SNOMEDCTEntityType_TREATMENT_NAME = SNOMEDCTEntityType.AddMember("TREATMENT_NAME", smithyprelude.Unit)
-
-	SNOMEDCTEntity_Id = SNOMEDCTEntity.AddMember("Id", _Integer)
-
-	SNOMEDCTEntity_Text = SNOMEDCTEntity.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	SNOMEDCTEntity_Category = SNOMEDCTEntity.AddMember("Category", SNOMEDCTEntityCategory)
-
-	SNOMEDCTEntity_Type = SNOMEDCTEntity.AddMember("Type", SNOMEDCTEntityType)
-
-	SNOMEDCTEntity_Score = SNOMEDCTEntity.AddMember("Score", _Float)
-
-	SNOMEDCTEntity_BeginOffset = SNOMEDCTEntity.AddMember("BeginOffset", _Integer)
-
-	SNOMEDCTEntity_EndOffset = SNOMEDCTEntity.AddMember("EndOffset", _Integer)
-
-	SNOMEDCTEntity_Attributes = SNOMEDCTEntity.AddMember("Attributes", _SNOMEDCTAttributeList)
-
-	SNOMEDCTEntity_Traits = SNOMEDCTEntity.AddMember("Traits", _SNOMEDCTTraitList)
-
-	SNOMEDCTEntity_SNOMEDCTConcepts = SNOMEDCTEntity.AddMember("SNOMEDCTConcepts", _SNOMEDCTConceptList)
-
-	_SNOMEDCTEntityList_member = _SNOMEDCTEntityList.AddMember("member", SNOMEDCTEntity)
-
-	TextSizeLimitExceededException_Message = TextSizeLimitExceededException.AddMember("Message", _String)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _String)
-
-	UnmappedAttribute_Type = UnmappedAttribute.AddMember("Type", EntityType)
-
-	UnmappedAttribute_Attribute = UnmappedAttribute.AddMember("Attribute", Attribute)
-
-	_UnmappedAttributeList_member = _UnmappedAttributeList.AddMember("member", UnmappedAttribute)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _String)
-
-	DescribeEntitiesDetectionV2JobRequest_JobId = DescribeEntitiesDetectionV2JobRequest.AddMember("JobId", _JobId)
-
-	DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties = DescribeEntitiesDetectionV2JobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DescribeICD10CMInferenceJobRequest_JobId = DescribeICD10CMInferenceJobRequest.AddMember("JobId", _JobId)
-
-	DescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties = DescribeICD10CMInferenceJobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DescribePHIDetectionJobRequest_JobId = DescribePHIDetectionJobRequest.AddMember("JobId", _JobId)
-
-	DescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties = DescribePHIDetectionJobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DescribeRxNormInferenceJobRequest_JobId = DescribeRxNormInferenceJobRequest.AddMember("JobId", _JobId)
-
-	DescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties = DescribeRxNormInferenceJobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DescribeSNOMEDCTInferenceJobRequest_JobId = DescribeSNOMEDCTInferenceJobRequest.AddMember("JobId", _JobId)
-
-	DescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties = DescribeSNOMEDCTInferenceJobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DetectEntitiesRequest_Text = DetectEntitiesRequest.AddMember("Text", _BoundedLengthString)
-
-	DetectEntitiesResponse_Entities = DetectEntitiesResponse.AddMember("Entities", _EntityList)
-
-	DetectEntitiesResponse_UnmappedAttributes = DetectEntitiesResponse.AddMember("UnmappedAttributes", _UnmappedAttributeList)
-
-	DetectEntitiesResponse_PaginationToken = DetectEntitiesResponse.AddMember("PaginationToken", _String)
-
-	DetectEntitiesResponse_ModelVersion = DetectEntitiesResponse.AddMember("ModelVersion", _String)
-
-	DetectEntitiesV2Request_Text = DetectEntitiesV2Request.AddMember("Text", _BoundedLengthString)
-
-	DetectEntitiesV2Response_Entities = DetectEntitiesV2Response.AddMember("Entities", _EntityList)
-
-	DetectEntitiesV2Response_UnmappedAttributes = DetectEntitiesV2Response.AddMember("UnmappedAttributes", _UnmappedAttributeList)
-
-	DetectEntitiesV2Response_PaginationToken = DetectEntitiesV2Response.AddMember("PaginationToken", _String)
-
-	DetectEntitiesV2Response_ModelVersion = DetectEntitiesV2Response.AddMember("ModelVersion", _String)
-
-	DetectPHIRequest_Text = DetectPHIRequest.AddMember("Text", _BoundedLengthString)
-
-	DetectPHIResponse_Entities = DetectPHIResponse.AddMember("Entities", _EntityList)
-
-	DetectPHIResponse_PaginationToken = DetectPHIResponse.AddMember("PaginationToken", _String)
-
-	DetectPHIResponse_ModelVersion = DetectPHIResponse.AddMember("ModelVersion", _String)
-
-	InferICD10CMRequest_Text = InferICD10CMRequest.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	InferICD10CMResponse_Entities = InferICD10CMResponse.AddMember("Entities", _ICD10CMEntityList)
-
-	InferICD10CMResponse_PaginationToken = InferICD10CMResponse.AddMember("PaginationToken", _String)
-
-	InferICD10CMResponse_ModelVersion = InferICD10CMResponse.AddMember("ModelVersion", _String)
-
-	InferRxNormRequest_Text = InferRxNormRequest.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	InferRxNormResponse_Entities = InferRxNormResponse.AddMember("Entities", _RxNormEntityList)
-
-	InferRxNormResponse_PaginationToken = InferRxNormResponse.AddMember("PaginationToken", _String)
-
-	InferRxNormResponse_ModelVersion = InferRxNormResponse.AddMember("ModelVersion", _String)
-
-	InferSNOMEDCTRequest_Text = InferSNOMEDCTRequest.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	InferSNOMEDCTResponse_Entities = InferSNOMEDCTResponse.AddMember("Entities", _SNOMEDCTEntityList)
-
-	InferSNOMEDCTResponse_PaginationToken = InferSNOMEDCTResponse.AddMember("PaginationToken", _String)
-
-	InferSNOMEDCTResponse_ModelVersion = InferSNOMEDCTResponse.AddMember("ModelVersion", _String)
-
-	InferSNOMEDCTResponse_SNOMEDCTDetails = InferSNOMEDCTResponse.AddMember("SNOMEDCTDetails", SNOMEDCTDetails)
-
-	InferSNOMEDCTResponse_Characters = InferSNOMEDCTResponse.AddMember("Characters", Characters)
-
-	ListEntitiesDetectionV2JobsRequest_Filter = ListEntitiesDetectionV2JobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListEntitiesDetectionV2JobsRequest_NextToken = ListEntitiesDetectionV2JobsRequest.AddMember("NextToken", _String)
-
-	ListEntitiesDetectionV2JobsRequest_MaxResults = ListEntitiesDetectionV2JobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListEntitiesDetectionV2JobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListEntitiesDetectionV2JobsResponse_NextToken = ListEntitiesDetectionV2JobsResponse.AddMember("NextToken", _String)
-
-	ListICD10CMInferenceJobsRequest_Filter = ListICD10CMInferenceJobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListICD10CMInferenceJobsRequest_NextToken = ListICD10CMInferenceJobsRequest.AddMember("NextToken", _String)
-
-	ListICD10CMInferenceJobsRequest_MaxResults = ListICD10CMInferenceJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListICD10CMInferenceJobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListICD10CMInferenceJobsResponse_NextToken = ListICD10CMInferenceJobsResponse.AddMember("NextToken", _String)
-
-	ListPHIDetectionJobsRequest_Filter = ListPHIDetectionJobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListPHIDetectionJobsRequest_NextToken = ListPHIDetectionJobsRequest.AddMember("NextToken", _String)
-
-	ListPHIDetectionJobsRequest_MaxResults = ListPHIDetectionJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListPHIDetectionJobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListPHIDetectionJobsResponse_NextToken = ListPHIDetectionJobsResponse.AddMember("NextToken", _String)
-
-	ListRxNormInferenceJobsRequest_Filter = ListRxNormInferenceJobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListRxNormInferenceJobsRequest_NextToken = ListRxNormInferenceJobsRequest.AddMember("NextToken", _String)
-
-	ListRxNormInferenceJobsRequest_MaxResults = ListRxNormInferenceJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListRxNormInferenceJobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListRxNormInferenceJobsResponse_NextToken = ListRxNormInferenceJobsResponse.AddMember("NextToken", _String)
-
-	ListSNOMEDCTInferenceJobsRequest_Filter = ListSNOMEDCTInferenceJobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListSNOMEDCTInferenceJobsRequest_NextToken = ListSNOMEDCTInferenceJobsRequest.AddMember("NextToken", _String)
-
-	ListSNOMEDCTInferenceJobsRequest_MaxResults = ListSNOMEDCTInferenceJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListSNOMEDCTInferenceJobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListSNOMEDCTInferenceJobsResponse_NextToken = ListSNOMEDCTInferenceJobsResponse.AddMember("NextToken", _String)
-
-	StartEntitiesDetectionV2JobRequest_InputDataConfig = StartEntitiesDetectionV2JobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartEntitiesDetectionV2JobRequest_OutputDataConfig = StartEntitiesDetectionV2JobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartEntitiesDetectionV2JobRequest_DataAccessRoleArn = StartEntitiesDetectionV2JobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartEntitiesDetectionV2JobRequest_JobName = StartEntitiesDetectionV2JobRequest.AddMember("JobName", _JobName)
-
-	StartEntitiesDetectionV2JobRequest_ClientRequestToken = StartEntitiesDetectionV2JobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartEntitiesDetectionV2JobRequest_KMSKey = StartEntitiesDetectionV2JobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartEntitiesDetectionV2JobRequest_LanguageCode = StartEntitiesDetectionV2JobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartEntitiesDetectionV2JobResponse_JobId = StartEntitiesDetectionV2JobResponse.AddMember("JobId", _JobId)
-
-	StartICD10CMInferenceJobRequest_InputDataConfig = StartICD10CMInferenceJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartICD10CMInferenceJobRequest_OutputDataConfig = StartICD10CMInferenceJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartICD10CMInferenceJobRequest_DataAccessRoleArn = StartICD10CMInferenceJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartICD10CMInferenceJobRequest_JobName = StartICD10CMInferenceJobRequest.AddMember("JobName", _JobName)
-
-	StartICD10CMInferenceJobRequest_ClientRequestToken = StartICD10CMInferenceJobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartICD10CMInferenceJobRequest_KMSKey = StartICD10CMInferenceJobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartICD10CMInferenceJobRequest_LanguageCode = StartICD10CMInferenceJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartICD10CMInferenceJobResponse_JobId = StartICD10CMInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StartPHIDetectionJobRequest_InputDataConfig = StartPHIDetectionJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartPHIDetectionJobRequest_OutputDataConfig = StartPHIDetectionJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartPHIDetectionJobRequest_DataAccessRoleArn = StartPHIDetectionJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartPHIDetectionJobRequest_JobName = StartPHIDetectionJobRequest.AddMember("JobName", _JobName)
-
-	StartPHIDetectionJobRequest_ClientRequestToken = StartPHIDetectionJobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartPHIDetectionJobRequest_KMSKey = StartPHIDetectionJobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartPHIDetectionJobRequest_LanguageCode = StartPHIDetectionJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartPHIDetectionJobResponse_JobId = StartPHIDetectionJobResponse.AddMember("JobId", _JobId)
-
-	StartRxNormInferenceJobRequest_InputDataConfig = StartRxNormInferenceJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartRxNormInferenceJobRequest_OutputDataConfig = StartRxNormInferenceJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartRxNormInferenceJobRequest_DataAccessRoleArn = StartRxNormInferenceJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartRxNormInferenceJobRequest_JobName = StartRxNormInferenceJobRequest.AddMember("JobName", _JobName)
-
-	StartRxNormInferenceJobRequest_ClientRequestToken = StartRxNormInferenceJobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartRxNormInferenceJobRequest_KMSKey = StartRxNormInferenceJobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartRxNormInferenceJobRequest_LanguageCode = StartRxNormInferenceJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartRxNormInferenceJobResponse_JobId = StartRxNormInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StartSNOMEDCTInferenceJobRequest_InputDataConfig = StartSNOMEDCTInferenceJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartSNOMEDCTInferenceJobRequest_OutputDataConfig = StartSNOMEDCTInferenceJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartSNOMEDCTInferenceJobRequest_DataAccessRoleArn = StartSNOMEDCTInferenceJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartSNOMEDCTInferenceJobRequest_JobName = StartSNOMEDCTInferenceJobRequest.AddMember("JobName", _JobName)
-
-	StartSNOMEDCTInferenceJobRequest_ClientRequestToken = StartSNOMEDCTInferenceJobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartSNOMEDCTInferenceJobRequest_KMSKey = StartSNOMEDCTInferenceJobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartSNOMEDCTInferenceJobRequest_LanguageCode = StartSNOMEDCTInferenceJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartSNOMEDCTInferenceJobResponse_JobId = StartSNOMEDCTInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StopEntitiesDetectionV2JobRequest_JobId = StopEntitiesDetectionV2JobRequest.AddMember("JobId", _JobId)
-
-	StopEntitiesDetectionV2JobResponse_JobId = StopEntitiesDetectionV2JobResponse.AddMember("JobId", _JobId)
-
-	StopICD10CMInferenceJobRequest_JobId = StopICD10CMInferenceJobRequest.AddMember("JobId", _JobId)
-
-	StopICD10CMInferenceJobResponse_JobId = StopICD10CMInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StopPHIDetectionJobRequest_JobId = StopPHIDetectionJobRequest.AddMember("JobId", _JobId)
-
-	StopPHIDetectionJobResponse_JobId = StopPHIDetectionJobResponse.AddMember("JobId", _JobId)
-
-	StopRxNormInferenceJobRequest_JobId = StopRxNormInferenceJobRequest.AddMember("JobId", _JobId)
-
-	StopRxNormInferenceJobResponse_JobId = StopRxNormInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StopSNOMEDCTInferenceJobRequest_JobId = StopSNOMEDCTInferenceJobRequest.AddMember("JobId", _JobId)
-
-	StopSNOMEDCTInferenceJobResponse_JobId = StopSNOMEDCTInferenceJobResponse.AddMember("JobId", _JobId)
-
+const blob = "" +
+	"ComprehendMedicalAsyncJobPropertiesListDescribeEntitiesDetectionV2JobResponseDescribeEntitiesDetecti" +
+	"onV2JobRequestDescribeSNOMEDCTInferenceJobResponseDescribeICD10CMInferenceJobResponseDescribeSNOMEDC" +
+	"TInferenceJobRequestListEntitiesDetectionV2JobsResponseStartEntitiesDetectionV2JobResponseDescribeIC" +
+	"D10CMInferenceJobRequestDescribeRxNormInferenceJobResponseListEntitiesDetectionV2JobsRequestOntology" +
+	"LinkingBoundedLengthStringStartEntitiesDetectionV2JobRequestStopEntitiesDetectionV2JobResponseDescri" +
+	"beRxNormInferenceJobRequestListSNOMEDCTInferenceJobsResponseStartSNOMEDCTInferenceJobResponseStopEnt" +
+	"itiesDetectionV2JobRequestListICD10CMInferenceJobsResponseListSNOMEDCTInferenceJobsRequestStartICD10" +
+	"CMInferenceJobResponseStartSNOMEDCTInferenceJobRequestStopSNOMEDCTInferenceJobResponseBEHAVIORAL_ENV" +
+	"IRONMENTAL_SOCIALComprehendMedicalAsyncJobFilterDescribePHIDetectionJobResponseListICD10CMInferenceJ" +
+	"obsRequestListRxNormInferenceJobsResponseStartICD10CMInferenceJobRequestStartRxNormInferenceJobRespo" +
+	"nseStopICD10CMInferenceJobResponseStopSNOMEDCTInferenceJobRequestDescribePHIDetectionJobRequestListR" +
+	"xNormInferenceJobsRequestStartRxNormInferenceJobRequestStopICD10CMInferenceJobRequestStopRxNormInfer" +
+	"enceJobResponseTextSizeLimitExceededExceptionStopRxNormInferenceJobRequestListPHIDetectionJobsRespon" +
+	"sePROTECTED_HEALTH_INFORMATIONStartPHIDetectionJobResponseListPHIDetectionJobsRequestServiceUnavaila" +
+	"bleExceptionStartPHIDetectionJobRequestStopPHIDetectionJobResponseComprehendMedical_20181030StopPHID" +
+	"etectionJobRequestResourceNotFoundExceptionClientRequestTokenStringDetectEntitiesV2ResponseInvalidEn" +
+	"codingExceptionSNOMEDCTRelationshipTypeTEST_TREATMENT_PROCEDURETooManyRequestsExceptionDetectEntitie" +
+	"sV2RequestICD10CMRelationshipTypeInternalServerExceptionInvalidRequestExceptionTIME_TO_MEDICATION_NA" +
+	"MEDetectEntitiesResponseOriginalTextCharactersSNOMEDCTEntityCategoryTIME_TO_PROCEDURE_NAMETIME_TO_TR" +
+	"EATMENT_NAMEDetectEntitiesRequestICD10CMEntityCategoryInferSNOMEDCTResponseSNOMEDCTAttributeListSNOM" +
+	"EDCTAttributeTypeUnmappedAttributeListICD10CMAttributeListICD10CMAttributeTypeInferICD10CMResponseIn" +
+	"ferSNOMEDCTRequestRxNormEntityCategoryALCOHOL_CONSUMPTIONInferICD10CMRequestInferRxNormResponseRxNor" +
+	"mAttributeListRxNormAttributeTypeSNOMEDCTConceptListValidationExceptionICD10CMConceptListInferRxNorm" +
+	"RequestPERTAINS_TO_FAMILYSNOMEDCTEntityListSNOMEDCTEntityTypeUnmappedAttributesDataAccessRoleArnDete" +
+	"ctPHIResponseICD10CMEntityListICD10CMEntityTypeMEDICAL_CONDITIONMaxResultsIntegerRelationshipScoreRx" +
+	"NormConceptListSNOMEDCTTraitListSNOMEDCTTraitNameSYSTEM_ORGAN_SITETIME_TO_TEST_NAMEADMINISTERED_VIAD" +
+	"etectPHIRequestICD10CMTraitListICD10CMTraitNameManifestFilePathOutputDataConfigRxNormEntityListRxNor" +
+	"mEntityTypeSNOMEDCTConceptsSubmitTimeBeforeAnyLengthStringICD10CMConceptsInputDataConfigPARTIAL_SUCC" +
+	"ESSPaginationTokenRxNormTraitListRxNormTraitNameSNOMEDCTDetailsSubmitTimeAfterTIME_EXPRESSIONTIME_TO" +
+	"_DX_NAMEExpirationTimeLOW_CONFIDENCERACE_ETHNICITYRxNormConceptsSTOP_REQUESTEDAttributeNameCONTACT_P" +
+	"OINTEntitySubTypeROUTE_OR_MODEGENERIC_NAMEHYPOTHETICALLanguageCodeModelVersionPAST_HISTORYPHONE_OR_F" +
+	"AXREC_DRUG_USEBeginOffsetDescriptionIN_PROGRESSTOBACCO_USEVersionDateWITH_DOSAGEBRAND_NAMEIDENTIFIER" +
+	"IamRoleArnPROFESSIONTEST_UNITSTEST_VALUEALLERGIESCOMPLETEDDIAGNOSISDIRECTIONEndOffsetFREQUENCYJobSta" +
+	"tusNextTokenSUBMITTEDTimestampDURATIONNEGATIONNEGATIVEQUANTITYS3BucketSTRENGTHADDRESSANATOMYEditionE" +
+	"ndTimeJobNameMessageOVERLAPQUALITYSTOPPEDSYMPTOMACUITYAMOUNTFAILEDFUTUREGENDERKMSKeyTraitsmemberEMAI" +
+	"LEVERYFloatJobIdS3KeyUSAGEDATERATESIGNUnitURL"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.comprehendmedical", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 39, Target: 0, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 150, Target: 1, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 848, Target: 2, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 324, Target: 3, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 114, Target: 4, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1567, Target: 5, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1567, Target: 6, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2396, Target: 7, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2078, Target: 8, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2176, Target: 9, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1954, Target: 10, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 220, Target: 11, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 626, Target: 12, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1274, Target: 13, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 910, Target: 14, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 527, Target: 15, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 255, Target: 16, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 690, Target: 17, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1330, Target: 18, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 972, Target: 19, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 560, Target: 20, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 460, Target: 21, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1003, Target: 22, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1439, Target: 23, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1185, Target: 24, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 754, Target: 25, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1466, Target: 26, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2743, Target: 27, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1983, Target: 28, Traits: 0, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1635, Target: 89, Traits: 0, StrLen: 4, Count: 45, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2481, Target: 143, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 1623, Target: 237, Traits: 0, StrLen: 16, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3514, Target: 210, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3114, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3276, Target: 210, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1215, Target: 393, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1860, Target: 135, Traits: 0, StrLen: 8, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3484, Target: 402, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1983, Target: 39, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 28, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2978, Target: 41, Traits: 0, StrLen: 13, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3534, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3441, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3258, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3338, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2307, Target: 576, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3042, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2922, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3078, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3466, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 407, Target: 51, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1836, Target: 52, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1824, Target: 210, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1543, Target: 54, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 817, Target: 55, Traits: 0, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3406, Target: 218, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3294, Target: 219, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2727, Target: 396, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2863, Target: 396, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 0, Target: 60, Traits: 0, StrLen: 35, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 218, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3294, Target: 219, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3413, Target: 27, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2727, Target: 396, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3399, Target: 396, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2908, Target: 396, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2773, Target: 207, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 234, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3054, Target: 228, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2379, Target: 144, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2647, Target: 230, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3478, Target: 227, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3066, Target: 232, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 75, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 60, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1854, Target: 77, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3514, Target: 210, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3114, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3276, Target: 210, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 1215, Target: 393, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1860, Target: 135, Traits: 0, StrLen: 8, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1635, Target: 89, Traits: 0, StrLen: 4, Count: 45, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3484, Target: 402, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2369, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2333, Target: 87, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 77, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3004, Target: 89, Traits: 0, StrLen: 13, Count: 45, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1798, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2901, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3174, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3017, Target: 576, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1321, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3285, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3330, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3030, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3180, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3370, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3530, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3448, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2574, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3230, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3220, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3220, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1876, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1898, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3526, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3177, Target: 576, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2991, Target: 576, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3090, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3496, Target: 576, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3190, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 858, Target: 576, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3542, Target: 576, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3378, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3210, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2549, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3267, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3427, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3354, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2878, Target: 576, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1779, Target: 576, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2893, Target: 576, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2566, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1868, Target: 576, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1890, Target: 576, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3454, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3472, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2936, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3240, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3147, Target: 576, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2138, Target: 576, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3102, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2351, Target: 135, Traits: 0, StrLen: 10, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1787, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2447, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1302, Target: 576, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1639, Target: 576, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3385, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2878, Target: 576, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 786, Target: 576, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3506, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 0},
+		{StrOff: 3200, Target: 144, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2038, Target: 145, Traits: 0, StrLen: 16, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1635, Target: 158, Traits: 0, StrLen: 4, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2481, Target: 143, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3514, Target: 210, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3114, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3276, Target: 210, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1215, Target: 393, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3484, Target: 197, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1860, Target: 187, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1623, Target: 190, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2038, Target: 156, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 145, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2058, Target: 158, Traits: 0, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3448, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3267, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2549, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3427, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3354, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2893, Target: 576, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2878, Target: 576, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2271, Target: 166, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3125, Target: 393, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3062, Target: 393, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2271, Target: 170, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 166, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1933, Target: 172, Traits: 0, StrLen: 13, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3514, Target: 210, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1215, Target: 233, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1860, Target: 183, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1635, Target: 187, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3114, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3276, Target: 210, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2369, Target: 156, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3484, Target: 197, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2758, Target: 170, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1933, Target: 183, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2447, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2413, Target: 185, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 172, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2430, Target: 187, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2901, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2878, Target: 576, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1710, Target: 190, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3420, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2549, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3427, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2615, Target: 194, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2545, Target: 199, Traits: 0, StrLen: 4, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2615, Target: 197, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 194, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2631, Target: 199, Traits: 0, StrLen: 16, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3338, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3258, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3534, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3441, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2307, Target: 576, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3042, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2922, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2773, Target: 207, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3362, Target: 313, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3516, Target: 314, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2474, Target: 210, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1733, Target: 211, Traits: 1, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3413, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1591, Target: 213, Traits: 2, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3413, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1756, Target: 215, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3413, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3406, Target: 218, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3294, Target: 219, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3312, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3136, Target: 576, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3249, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2788, Target: 576, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3460, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2964, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3434, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3478, Target: 227, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3054, Target: 228, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 797, Target: 576, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2647, Target: 230, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2464, Target: 231, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3066, Target: 232, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 392, Target: 233, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2663, Target: 234, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3362, Target: 313, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3516, Target: 314, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1623, Target: 237, Traits: 0, StrLen: 16, Count: 22, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3501, Target: 576, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3169, Target: 576, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2583, Target: 576, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1321, Target: 576, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3346, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3420, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3174, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3017, Target: 576, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1321, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3285, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3330, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3370, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3530, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3448, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3230, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3220, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3220, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3267, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2549, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3454, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3521, Target: 576, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3427, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1518, Target: 260, Traits: 3, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3413, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2195, Target: 262, Traits: 0, StrLen: 15, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1635, Target: 273, Traits: 0, StrLen: 4, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2481, Target: 143, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3514, Target: 210, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3114, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3276, Target: 210, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1215, Target: 393, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3484, Target: 308, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2195, Target: 271, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 262, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2214, Target: 273, Traits: 0, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3174, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3330, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1321, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3285, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3530, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3017, Target: 576, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3370, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2498, Target: 281, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3125, Target: 393, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3062, Target: 393, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2498, Target: 285, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 281, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2118, Target: 287, Traits: 0, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3514, Target: 210, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1215, Target: 233, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1860, Target: 298, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1635, Target: 302, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3114, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3276, Target: 210, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2369, Target: 271, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3484, Target: 308, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2950, Target: 285, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2118, Target: 298, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1787, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2679, Target: 300, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 287, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2695, Target: 302, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3180, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3030, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2818, Target: 305, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2545, Target: 310, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2818, Target: 308, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 305, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2833, Target: 310, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3338, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3078, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3362, Target: 313, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3516, Target: 314, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1385, Target: 315, Traits: 4, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3413, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1975, Target: 317, Traits: 0, StrLen: 17, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1860, Target: 359, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1635, Target: 331, Traits: 0, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2481, Target: 143, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 1623, Target: 370, Traits: 0, StrLen: 16, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3514, Target: 210, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3114, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3276, Target: 210, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1215, Target: 393, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3484, Target: 381, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2711, Target: 342, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1975, Target: 329, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 317, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1996, Target: 331, Traits: 0, StrLen: 21, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3448, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3427, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3267, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2549, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3230, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3220, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2233, Target: 338, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3125, Target: 393, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3062, Target: 393, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2233, Target: 342, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 338, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2848, Target: 344, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3392, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3054, Target: 393, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3158, Target: 393, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1846, Target: 348, Traits: 0, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3514, Target: 210, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1215, Target: 233, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1860, Target: 359, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1635, Target: 365, Traits: 0, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 3114, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3276, Target: 210, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2369, Target: 329, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3484, Target: 381, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2711, Target: 342, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1846, Target: 359, Traits: 0, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2447, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3385, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1639, Target: 576, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2325, Target: 363, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 348, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2343, Target: 365, Traits: 0, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2901, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2574, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1876, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1898, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1615, Target: 370, Traits: 0, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3448, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3427, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3230, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3220, Target: 576, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3267, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2549, Target: 576, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3220, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2515, Target: 378, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2545, Target: 383, Traits: 0, StrLen: 4, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2515, Target: 381, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 378, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2532, Target: 383, Traits: 0, StrLen: 17, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3338, Target: 576, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3258, Target: 576, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3534, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3441, Target: 576, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2307, Target: 576, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3042, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2922, Target: 576, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3078, Target: 576, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3466, Target: 576, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 420, Target: 393, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1215, Target: 394, Traits: 2, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3413, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3321, Target: 396, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1663, Target: 397, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3413, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2523, Target: 399, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2545, Target: 41, Traits: 0, StrLen: 4, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2493, Target: 143, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 2523, Target: 402, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 399, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2017, Target: 404, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1635, Target: 135, Traits: 0, StrLen: 4, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1983, Target: 28, Traits: 0, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2017, Target: 407, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3490, Target: 404, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2252, Target: 409, Traits: 2, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3413, Target: 393, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 77, Target: 411, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 39, Target: 413, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 60, Traits: 0, StrLen: 35, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 290, Target: 415, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 150, Target: 417, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 60, Traits: 0, StrLen: 35, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1065, Target: 419, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 848, Target: 421, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 60, Traits: 0, StrLen: 35, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 494, Target: 423, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 324, Target: 425, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 60, Traits: 0, StrLen: 35, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 185, Target: 427, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 114, Target: 429, Traits: 0, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 60, Traits: 0, StrLen: 35, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1912, Target: 431, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1215, Target: 51, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1802, Target: 433, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 47, Target: 87, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2361, Target: 407, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2803, Target: 393, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3066, Target: 393, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1687, Target: 438, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1215, Target: 51, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1567, Target: 440, Traits: 0, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 47, Target: 87, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2361, Target: 407, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2803, Target: 393, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3066, Target: 393, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2599, Target: 445, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1215, Target: 51, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2396, Target: 447, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 47, Target: 87, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2803, Target: 393, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3066, Target: 393, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2157, Target: 451, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1215, Target: 233, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2078, Target: 453, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 47, Target: 185, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2803, Target: 393, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3066, Target: 393, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2289, Target: 457, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1215, Target: 233, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2176, Target: 459, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 47, Target: 300, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2803, Target: 393, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3066, Target: 393, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2098, Target: 463, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1215, Target: 233, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1954, Target: 465, Traits: 0, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 47, Target: 363, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2803, Target: 393, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3066, Target: 393, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2848, Target: 344, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1836, Target: 52, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 358, Target: 471, Traits: 0, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 842, Target: 55, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2464, Target: 231, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 220, Target: 475, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 75, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 879, Target: 478, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 842, Target: 55, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2464, Target: 231, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 626, Target: 482, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 75, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1358, Target: 485, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 842, Target: 55, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2464, Target: 231, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1274, Target: 489, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 75, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1095, Target: 492, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 842, Target: 55, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2464, Target: 231, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 910, Target: 496, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 75, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 658, Target: 499, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 842, Target: 55, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2464, Target: 231, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 527, Target: 503, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 75, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3303, Target: 393, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 426, Target: 506, Traits: 0, StrLen: 34, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 207, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 234, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2379, Target: 144, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 218, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1543, Target: 54, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3478, Target: 227, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3054, Target: 228, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 255, Target: 514, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 516, Traits: 0, StrLen: 31, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 207, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 234, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2379, Target: 144, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 218, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1543, Target: 54, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3478, Target: 227, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3054, Target: 228, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 690, Target: 524, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1412, Target: 526, Traits: 0, StrLen: 27, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 207, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 234, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2379, Target: 144, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 218, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1543, Target: 54, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3478, Target: 227, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3054, Target: 228, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1330, Target: 534, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1125, Target: 536, Traits: 0, StrLen: 30, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 207, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 234, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2379, Target: 144, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 218, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1543, Target: 54, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3478, Target: 227, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3054, Target: 228, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 972, Target: 544, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 722, Target: 546, Traits: 0, StrLen: 32, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2773, Target: 207, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 234, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2379, Target: 144, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 218, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1543, Target: 54, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3478, Target: 227, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3054, Target: 228, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 560, Target: 554, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 593, Target: 556, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 460, Target: 558, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1155, Target: 560, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1003, Target: 562, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1492, Target: 564, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1439, Target: 566, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1245, Target: 568, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1185, Target: 570, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1034, Target: 572, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 754, Target: 574, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3511, Target: 217, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3538, Target: 576, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [577]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+}
+
+var DescribeEntitiesDetectionV2Job = &handles[0]
+
+var DescribeICD10CMInferenceJob = &handles[1]
+
+var DescribePHIDetectionJob = &handles[2]
+
+var DescribeRxNormInferenceJob = &handles[3]
+
+var DescribeSNOMEDCTInferenceJob = &handles[4]
+
+var DetectEntities = &handles[5]
+
+var DetectEntitiesV2 = &handles[6]
+
+var DetectPHI = &handles[7]
+
+var InferICD10CM = &handles[8]
+
+var InferRxNorm = &handles[9]
+
+var InferSNOMEDCT = &handles[10]
+
+var ListEntitiesDetectionV2Jobs = &handles[11]
+
+var ListICD10CMInferenceJobs = &handles[12]
+
+var ListPHIDetectionJobs = &handles[13]
+
+var ListRxNormInferenceJobs = &handles[14]
+
+var ListSNOMEDCTInferenceJobs = &handles[15]
+
+var StartEntitiesDetectionV2Job = &handles[16]
+
+var StartICD10CMInferenceJob = &handles[17]
+
+var StartPHIDetectionJob = &handles[18]
+
+var StartRxNormInferenceJob = &handles[19]
+
+var StartSNOMEDCTInferenceJob = &handles[20]
+
+var StopEntitiesDetectionV2Job = &handles[21]
+
+var StopICD10CMInferenceJob = &handles[22]
+
+var StopPHIDetectionJob = &handles[23]
+
+var StopRxNormInferenceJob = &handles[24]
+
+var StopSNOMEDCTInferenceJob = &handles[25]
+
+var _ComprehendMedical_20181030 = &handles[26]
+
+var _AnyLengthString = &handles[27]
+
+var Attribute = &handles[28]
+var Attribute_Type = &handles[29]
+var Attribute_Score = &handles[30]
+var Attribute_RelationshipScore = &handles[31]
+var Attribute_RelationshipType = &handles[32]
+var Attribute_Id = &handles[33]
+var Attribute_BeginOffset = &handles[34]
+var Attribute_EndOffset = &handles[35]
+var Attribute_Text = &handles[36]
+var Attribute_Category = &handles[37]
+var Attribute_Traits = &handles[38]
+
+var _AttributeList = &handles[39]
+var _AttributeList_member = &handles[40]
+
+var AttributeName = &handles[41]
+var AttributeName_SIGN = &handles[42]
+var AttributeName_SYMPTOM = &handles[43]
+var AttributeName_DIAGNOSIS = &handles[44]
+var AttributeName_NEGATION = &handles[45]
+var AttributeName_PERTAINS_TO_FAMILY = &handles[46]
+var AttributeName_HYPOTHETICAL = &handles[47]
+var AttributeName_LOW_CONFIDENCE = &handles[48]
+var AttributeName_PAST_HISTORY = &handles[49]
+var AttributeName_FUTURE = &handles[50]
+
+var _BoundedLengthString = &handles[51]
+
+var Characters = &handles[52]
+var Characters_OriginalTextCharacters = &handles[53]
+
+var _ClientRequestTokenString = &handles[54]
+
+var ComprehendMedicalAsyncJobFilter = &handles[55]
+var ComprehendMedicalAsyncJobFilter_JobName = &handles[56]
+var ComprehendMedicalAsyncJobFilter_JobStatus = &handles[57]
+var ComprehendMedicalAsyncJobFilter_SubmitTimeBefore = &handles[58]
+var ComprehendMedicalAsyncJobFilter_SubmitTimeAfter = &handles[59]
+
+var ComprehendMedicalAsyncJobProperties = &handles[60]
+var ComprehendMedicalAsyncJobProperties_JobId = &handles[61]
+var ComprehendMedicalAsyncJobProperties_JobName = &handles[62]
+var ComprehendMedicalAsyncJobProperties_JobStatus = &handles[63]
+var ComprehendMedicalAsyncJobProperties_Message = &handles[64]
+var ComprehendMedicalAsyncJobProperties_SubmitTime = &handles[65]
+var ComprehendMedicalAsyncJobProperties_EndTime = &handles[66]
+var ComprehendMedicalAsyncJobProperties_ExpirationTime = &handles[67]
+var ComprehendMedicalAsyncJobProperties_InputDataConfig = &handles[68]
+var ComprehendMedicalAsyncJobProperties_OutputDataConfig = &handles[69]
+var ComprehendMedicalAsyncJobProperties_LanguageCode = &handles[70]
+var ComprehendMedicalAsyncJobProperties_DataAccessRoleArn = &handles[71]
+var ComprehendMedicalAsyncJobProperties_ManifestFilePath = &handles[72]
+var ComprehendMedicalAsyncJobProperties_KMSKey = &handles[73]
+var ComprehendMedicalAsyncJobProperties_ModelVersion = &handles[74]
+
+var _ComprehendMedicalAsyncJobPropertiesList = &handles[75]
+var _ComprehendMedicalAsyncJobPropertiesList_member = &handles[76]
+
+var Entity = &handles[77]
+var Entity_Id = &handles[78]
+var Entity_BeginOffset = &handles[79]
+var Entity_EndOffset = &handles[80]
+var Entity_Score = &handles[81]
+var Entity_Text = &handles[82]
+var Entity_Category = &handles[83]
+var Entity_Type = &handles[84]
+var Entity_Traits = &handles[85]
+var Entity_Attributes = &handles[86]
+
+var _EntityList = &handles[87]
+var _EntityList_member = &handles[88]
+
+var EntitySubType = &handles[89]
+var EntitySubType_NAME = &handles[90]
+var EntitySubType_DX_NAME = &handles[91]
+var EntitySubType_DOSAGE = &handles[92]
+var EntitySubType_ROUTE_OR_MODE = &handles[93]
+var EntitySubType_FORM = &handles[94]
+var EntitySubType_FREQUENCY = &handles[95]
+var EntitySubType_DURATION = &handles[96]
+var EntitySubType_GENERIC_NAME = &handles[97]
+var EntitySubType_BRAND_NAME = &handles[98]
+var EntitySubType_STRENGTH = &handles[99]
+var EntitySubType_RATE = &handles[100]
+var EntitySubType_ACUITY = &handles[101]
+var EntitySubType_TEST_NAME = &handles[102]
+var EntitySubType_TEST_VALUE = &handles[103]
+var EntitySubType_TEST_UNITS = &handles[104]
+var EntitySubType_TEST_UNIT = &handles[105]
+var EntitySubType_PROCEDURE_NAME = &handles[106]
+var EntitySubType_TREATMENT_NAME = &handles[107]
+var EntitySubType_DATE = &handles[108]
+var EntitySubType_AGE = &handles[109]
+var EntitySubType_CONTACT_POINT = &handles[110]
+var EntitySubType_PHONE_OR_FAX = &handles[111]
+var EntitySubType_EMAIL = &handles[112]
+var EntitySubType_IDENTIFIER = &handles[113]
+var EntitySubType_ID = &handles[114]
+var EntitySubType_URL = &handles[115]
+var EntitySubType_ADDRESS = &handles[116]
+var EntitySubType_PROFESSION = &handles[117]
+var EntitySubType_SYSTEM_ORGAN_SITE = &handles[118]
+var EntitySubType_DIRECTION = &handles[119]
+var EntitySubType_QUALITY = &handles[120]
+var EntitySubType_QUANTITY = &handles[121]
+var EntitySubType_TIME_EXPRESSION = &handles[122]
+var EntitySubType_TIME_TO_MEDICATION_NAME = &handles[123]
+var EntitySubType_TIME_TO_DX_NAME = &handles[124]
+var EntitySubType_TIME_TO_TEST_NAME = &handles[125]
+var EntitySubType_TIME_TO_PROCEDURE_NAME = &handles[126]
+var EntitySubType_TIME_TO_TREATMENT_NAME = &handles[127]
+var EntitySubType_AMOUNT = &handles[128]
+var EntitySubType_GENDER = &handles[129]
+var EntitySubType_RACE_ETHNICITY = &handles[130]
+var EntitySubType_ALLERGIES = &handles[131]
+var EntitySubType_TOBACCO_USE = &handles[132]
+var EntitySubType_ALCOHOL_CONSUMPTION = &handles[133]
+var EntitySubType_REC_DRUG_USE = &handles[134]
+
+var EntityType = &handles[135]
+var EntityType_MEDICATION = &handles[136]
+var EntityType_MEDICAL_CONDITION = &handles[137]
+var EntityType_PROTECTED_HEALTH_INFORMATION = &handles[138]
+var EntityType_TEST_TREATMENT_PROCEDURE = &handles[139]
+var EntityType_ANATOMY = &handles[140]
+var EntityType_TIME_EXPRESSION = &handles[141]
+var EntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL = &handles[142]
+
+var _Float = &handles[143]
+
+var _IamRoleArn = &handles[144]
+
+var ICD10CMAttribute = &handles[145]
+var ICD10CMAttribute_Type = &handles[146]
+var ICD10CMAttribute_Score = &handles[147]
+var ICD10CMAttribute_RelationshipScore = &handles[148]
+var ICD10CMAttribute_Id = &handles[149]
+var ICD10CMAttribute_BeginOffset = &handles[150]
+var ICD10CMAttribute_EndOffset = &handles[151]
+var ICD10CMAttribute_Text = &handles[152]
+var ICD10CMAttribute_Traits = &handles[153]
+var ICD10CMAttribute_Category = &handles[154]
+var ICD10CMAttribute_RelationshipType = &handles[155]
+
+var _ICD10CMAttributeList = &handles[156]
+var _ICD10CMAttributeList_member = &handles[157]
+
+var ICD10CMAttributeType = &handles[158]
+var ICD10CMAttributeType_ACUITY = &handles[159]
+var ICD10CMAttributeType_DIRECTION = &handles[160]
+var ICD10CMAttributeType_SYSTEM_ORGAN_SITE = &handles[161]
+var ICD10CMAttributeType_QUALITY = &handles[162]
+var ICD10CMAttributeType_QUANTITY = &handles[163]
+var ICD10CMAttributeType_TIME_TO_DX_NAME = &handles[164]
+var ICD10CMAttributeType_TIME_EXPRESSION = &handles[165]
+
+var ICD10CMConcept = &handles[166]
+var ICD10CMConcept_Description = &handles[167]
+var ICD10CMConcept_Code = &handles[168]
+var ICD10CMConcept_Score = &handles[169]
+
+var _ICD10CMConceptList = &handles[170]
+var _ICD10CMConceptList_member = &handles[171]
+
+var ICD10CMEntity = &handles[172]
+var ICD10CMEntity_Id = &handles[173]
+var ICD10CMEntity_Text = &handles[174]
+var ICD10CMEntity_Category = &handles[175]
+var ICD10CMEntity_Type = &handles[176]
+var ICD10CMEntity_Score = &handles[177]
+var ICD10CMEntity_BeginOffset = &handles[178]
+var ICD10CMEntity_EndOffset = &handles[179]
+var ICD10CMEntity_Attributes = &handles[180]
+var ICD10CMEntity_Traits = &handles[181]
+var ICD10CMEntity_ICD10CMConcepts = &handles[182]
+
+var ICD10CMEntityCategory = &handles[183]
+var ICD10CMEntityCategory_MEDICAL_CONDITION = &handles[184]
+
+var _ICD10CMEntityList = &handles[185]
+var _ICD10CMEntityList_member = &handles[186]
+
+var ICD10CMEntityType = &handles[187]
+var ICD10CMEntityType_DX_NAME = &handles[188]
+var ICD10CMEntityType_TIME_EXPRESSION = &handles[189]
+
+var ICD10CMRelationshipType = &handles[190]
+var ICD10CMRelationshipType_OVERLAP = &handles[191]
+var ICD10CMRelationshipType_SYSTEM_ORGAN_SITE = &handles[192]
+var ICD10CMRelationshipType_QUALITY = &handles[193]
+
+var ICD10CMTrait = &handles[194]
+var ICD10CMTrait_Name = &handles[195]
+var ICD10CMTrait_Score = &handles[196]
+
+var _ICD10CMTraitList = &handles[197]
+var _ICD10CMTraitList_member = &handles[198]
+
+var ICD10CMTraitName = &handles[199]
+var ICD10CMTraitName_NEGATION = &handles[200]
+var ICD10CMTraitName_DIAGNOSIS = &handles[201]
+var ICD10CMTraitName_SIGN = &handles[202]
+var ICD10CMTraitName_SYMPTOM = &handles[203]
+var ICD10CMTraitName_PERTAINS_TO_FAMILY = &handles[204]
+var ICD10CMTraitName_HYPOTHETICAL = &handles[205]
+var ICD10CMTraitName_LOW_CONFIDENCE = &handles[206]
+
+var InputDataConfig = &handles[207]
+var InputDataConfig_S3Bucket = &handles[208]
+var InputDataConfig_S3Key = &handles[209]
+
+var _Integer = &handles[210]
+
+var InternalServerException = &handles[211]
+var InternalServerException_Message = &handles[212]
+
+var InvalidEncodingException = &handles[213]
+var InvalidEncodingException_Message = &handles[214]
+
+var InvalidRequestException = &handles[215]
+var InvalidRequestException_Message = &handles[216]
+
+var _JobId = &handles[217]
+
+var _JobName = &handles[218]
+
+var JobStatus = &handles[219]
+var JobStatus_SUBMITTED = &handles[220]
+var JobStatus_IN_PROGRESS = &handles[221]
+var JobStatus_COMPLETED = &handles[222]
+var JobStatus_PARTIAL_SUCCESS = &handles[223]
+var JobStatus_FAILED = &handles[224]
+var JobStatus_STOP_REQUESTED = &handles[225]
+var JobStatus_STOPPED = &handles[226]
+
+var _KMSKey = &handles[227]
+
+var LanguageCode = &handles[228]
+var LanguageCode_EN = &handles[229]
+
+var _ManifestFilePath = &handles[230]
+
+var _MaxResultsInteger = &handles[231]
+
+var _ModelVersion = &handles[232]
+
+var _OntologyLinkingBoundedLengthString = &handles[233]
+
+var OutputDataConfig = &handles[234]
+var OutputDataConfig_S3Bucket = &handles[235]
+var OutputDataConfig_S3Key = &handles[236]
+
+var RelationshipType = &handles[237]
+var RelationshipType_EVERY = &handles[238]
+var RelationshipType_WITH_DOSAGE = &handles[239]
+var RelationshipType_ADMINISTERED_VIA = &handles[240]
+var RelationshipType_FOR = &handles[241]
+var RelationshipType_NEGATIVE = &handles[242]
+var RelationshipType_OVERLAP = &handles[243]
+var RelationshipType_DOSAGE = &handles[244]
+var RelationshipType_ROUTE_OR_MODE = &handles[245]
+var RelationshipType_FORM = &handles[246]
+var RelationshipType_FREQUENCY = &handles[247]
+var RelationshipType_DURATION = &handles[248]
+var RelationshipType_STRENGTH = &handles[249]
+var RelationshipType_RATE = &handles[250]
+var RelationshipType_ACUITY = &handles[251]
+var RelationshipType_TEST_VALUE = &handles[252]
+var RelationshipType_TEST_UNITS = &handles[253]
+var RelationshipType_TEST_UNIT = &handles[254]
+var RelationshipType_DIRECTION = &handles[255]
+var RelationshipType_SYSTEM_ORGAN_SITE = &handles[256]
+var RelationshipType_AMOUNT = &handles[257]
+var RelationshipType_USAGE = &handles[258]
+var RelationshipType_QUALITY = &handles[259]
+
+var ResourceNotFoundException = &handles[260]
+var ResourceNotFoundException_Message = &handles[261]
+
+var RxNormAttribute = &handles[262]
+var RxNormAttribute_Type = &handles[263]
+var RxNormAttribute_Score = &handles[264]
+var RxNormAttribute_RelationshipScore = &handles[265]
+var RxNormAttribute_Id = &handles[266]
+var RxNormAttribute_BeginOffset = &handles[267]
+var RxNormAttribute_EndOffset = &handles[268]
+var RxNormAttribute_Text = &handles[269]
+var RxNormAttribute_Traits = &handles[270]
+
+var _RxNormAttributeList = &handles[271]
+var _RxNormAttributeList_member = &handles[272]
+
+var RxNormAttributeType = &handles[273]
+var RxNormAttributeType_DOSAGE = &handles[274]
+var RxNormAttributeType_DURATION = &handles[275]
+var RxNormAttributeType_FORM = &handles[276]
+var RxNormAttributeType_FREQUENCY = &handles[277]
+var RxNormAttributeType_RATE = &handles[278]
+var RxNormAttributeType_ROUTE_OR_MODE = &handles[279]
+var RxNormAttributeType_STRENGTH = &handles[280]
+
+var RxNormConcept = &handles[281]
+var RxNormConcept_Description = &handles[282]
+var RxNormConcept_Code = &handles[283]
+var RxNormConcept_Score = &handles[284]
+
+var _RxNormConceptList = &handles[285]
+var _RxNormConceptList_member = &handles[286]
+
+var RxNormEntity = &handles[287]
+var RxNormEntity_Id = &handles[288]
+var RxNormEntity_Text = &handles[289]
+var RxNormEntity_Category = &handles[290]
+var RxNormEntity_Type = &handles[291]
+var RxNormEntity_Score = &handles[292]
+var RxNormEntity_BeginOffset = &handles[293]
+var RxNormEntity_EndOffset = &handles[294]
+var RxNormEntity_Attributes = &handles[295]
+var RxNormEntity_Traits = &handles[296]
+var RxNormEntity_RxNormConcepts = &handles[297]
+
+var RxNormEntityCategory = &handles[298]
+var RxNormEntityCategory_MEDICATION = &handles[299]
+
+var _RxNormEntityList = &handles[300]
+var _RxNormEntityList_member = &handles[301]
+
+var RxNormEntityType = &handles[302]
+var RxNormEntityType_BRAND_NAME = &handles[303]
+var RxNormEntityType_GENERIC_NAME = &handles[304]
+
+var RxNormTrait = &handles[305]
+var RxNormTrait_Name = &handles[306]
+var RxNormTrait_Score = &handles[307]
+
+var _RxNormTraitList = &handles[308]
+var _RxNormTraitList_member = &handles[309]
+
+var RxNormTraitName = &handles[310]
+var RxNormTraitName_NEGATION = &handles[311]
+var RxNormTraitName_PAST_HISTORY = &handles[312]
+
+var _S3Bucket = &handles[313]
+
+var _S3Key = &handles[314]
+
+var ServiceUnavailableException = &handles[315]
+var ServiceUnavailableException_Message = &handles[316]
+
+var SNOMEDCTAttribute = &handles[317]
+var SNOMEDCTAttribute_Category = &handles[318]
+var SNOMEDCTAttribute_Type = &handles[319]
+var SNOMEDCTAttribute_Score = &handles[320]
+var SNOMEDCTAttribute_RelationshipScore = &handles[321]
+var SNOMEDCTAttribute_RelationshipType = &handles[322]
+var SNOMEDCTAttribute_Id = &handles[323]
+var SNOMEDCTAttribute_BeginOffset = &handles[324]
+var SNOMEDCTAttribute_EndOffset = &handles[325]
+var SNOMEDCTAttribute_Text = &handles[326]
+var SNOMEDCTAttribute_Traits = &handles[327]
+var SNOMEDCTAttribute_SNOMEDCTConcepts = &handles[328]
+
+var _SNOMEDCTAttributeList = &handles[329]
+var _SNOMEDCTAttributeList_member = &handles[330]
+
+var SNOMEDCTAttributeType = &handles[331]
+var SNOMEDCTAttributeType_ACUITY = &handles[332]
+var SNOMEDCTAttributeType_QUALITY = &handles[333]
+var SNOMEDCTAttributeType_DIRECTION = &handles[334]
+var SNOMEDCTAttributeType_SYSTEM_ORGAN_SITE = &handles[335]
+var SNOMEDCTAttributeType_TEST_VALUE = &handles[336]
+var SNOMEDCTAttributeType_TEST_UNIT = &handles[337]
+
+var SNOMEDCTConcept = &handles[338]
+var SNOMEDCTConcept_Description = &handles[339]
+var SNOMEDCTConcept_Code = &handles[340]
+var SNOMEDCTConcept_Score = &handles[341]
+
+var _SNOMEDCTConceptList = &handles[342]
+var _SNOMEDCTConceptList_member = &handles[343]
+
+var SNOMEDCTDetails = &handles[344]
+var SNOMEDCTDetails_Edition = &handles[345]
+var SNOMEDCTDetails_Language = &handles[346]
+var SNOMEDCTDetails_VersionDate = &handles[347]
+
+var SNOMEDCTEntity = &handles[348]
+var SNOMEDCTEntity_Id = &handles[349]
+var SNOMEDCTEntity_Text = &handles[350]
+var SNOMEDCTEntity_Category = &handles[351]
+var SNOMEDCTEntity_Type = &handles[352]
+var SNOMEDCTEntity_Score = &handles[353]
+var SNOMEDCTEntity_BeginOffset = &handles[354]
+var SNOMEDCTEntity_EndOffset = &handles[355]
+var SNOMEDCTEntity_Attributes = &handles[356]
+var SNOMEDCTEntity_Traits = &handles[357]
+var SNOMEDCTEntity_SNOMEDCTConcepts = &handles[358]
+
+var SNOMEDCTEntityCategory = &handles[359]
+var SNOMEDCTEntityCategory_MEDICAL_CONDITION = &handles[360]
+var SNOMEDCTEntityCategory_ANATOMY = &handles[361]
+var SNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE = &handles[362]
+
+var _SNOMEDCTEntityList = &handles[363]
+var _SNOMEDCTEntityList_member = &handles[364]
+
+var SNOMEDCTEntityType = &handles[365]
+var SNOMEDCTEntityType_DX_NAME = &handles[366]
+var SNOMEDCTEntityType_TEST_NAME = &handles[367]
+var SNOMEDCTEntityType_PROCEDURE_NAME = &handles[368]
+var SNOMEDCTEntityType_TREATMENT_NAME = &handles[369]
+
+var SNOMEDCTRelationshipType = &handles[370]
+var SNOMEDCTRelationshipType_ACUITY = &handles[371]
+var SNOMEDCTRelationshipType_QUALITY = &handles[372]
+var SNOMEDCTRelationshipType_TEST_VALUE = &handles[373]
+var SNOMEDCTRelationshipType_TEST_UNITS = &handles[374]
+var SNOMEDCTRelationshipType_DIRECTION = &handles[375]
+var SNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE = &handles[376]
+var SNOMEDCTRelationshipType_TEST_UNIT = &handles[377]
+
+var SNOMEDCTTrait = &handles[378]
+var SNOMEDCTTrait_Name = &handles[379]
+var SNOMEDCTTrait_Score = &handles[380]
+
+var _SNOMEDCTTraitList = &handles[381]
+var _SNOMEDCTTraitList_member = &handles[382]
+
+var SNOMEDCTTraitName = &handles[383]
+var SNOMEDCTTraitName_NEGATION = &handles[384]
+var SNOMEDCTTraitName_DIAGNOSIS = &handles[385]
+var SNOMEDCTTraitName_SIGN = &handles[386]
+var SNOMEDCTTraitName_SYMPTOM = &handles[387]
+var SNOMEDCTTraitName_PERTAINS_TO_FAMILY = &handles[388]
+var SNOMEDCTTraitName_HYPOTHETICAL = &handles[389]
+var SNOMEDCTTraitName_LOW_CONFIDENCE = &handles[390]
+var SNOMEDCTTraitName_PAST_HISTORY = &handles[391]
+var SNOMEDCTTraitName_FUTURE = &handles[392]
+
+var _String = &handles[393]
+
+var TextSizeLimitExceededException = &handles[394]
+var TextSizeLimitExceededException_Message = &handles[395]
+
+var _Timestamp = &handles[396]
+
+var TooManyRequestsException = &handles[397]
+var TooManyRequestsException_Message = &handles[398]
+
+var Trait = &handles[399]
+var Trait_Name = &handles[400]
+var Trait_Score = &handles[401]
+
+var _TraitList = &handles[402]
+var _TraitList_member = &handles[403]
+
+var UnmappedAttribute = &handles[404]
+var UnmappedAttribute_Type = &handles[405]
+var UnmappedAttribute_Attribute = &handles[406]
+
+var _UnmappedAttributeList = &handles[407]
+var _UnmappedAttributeList_member = &handles[408]
+
+var ValidationException = &handles[409]
+var ValidationException_Message = &handles[410]
+
+var DescribeEntitiesDetectionV2JobRequest = &handles[411]
+var DescribeEntitiesDetectionV2JobRequest_JobId = &handles[412]
+
+var DescribeEntitiesDetectionV2JobResponse = &handles[413]
+var DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties = &handles[414]
+
+var DescribeICD10CMInferenceJobRequest = &handles[415]
+var DescribeICD10CMInferenceJobRequest_JobId = &handles[416]
+
+var DescribeICD10CMInferenceJobResponse = &handles[417]
+var DescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties = &handles[418]
+
+var DescribePHIDetectionJobRequest = &handles[419]
+var DescribePHIDetectionJobRequest_JobId = &handles[420]
+
+var DescribePHIDetectionJobResponse = &handles[421]
+var DescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties = &handles[422]
+
+var DescribeRxNormInferenceJobRequest = &handles[423]
+var DescribeRxNormInferenceJobRequest_JobId = &handles[424]
+
+var DescribeRxNormInferenceJobResponse = &handles[425]
+var DescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties = &handles[426]
+
+var DescribeSNOMEDCTInferenceJobRequest = &handles[427]
+var DescribeSNOMEDCTInferenceJobRequest_JobId = &handles[428]
+
+var DescribeSNOMEDCTInferenceJobResponse = &handles[429]
+var DescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties = &handles[430]
+
+var DetectEntitiesRequest = &handles[431]
+var DetectEntitiesRequest_Text = &handles[432]
+
+var DetectEntitiesResponse = &handles[433]
+var DetectEntitiesResponse_Entities = &handles[434]
+var DetectEntitiesResponse_UnmappedAttributes = &handles[435]
+var DetectEntitiesResponse_PaginationToken = &handles[436]
+var DetectEntitiesResponse_ModelVersion = &handles[437]
+
+var DetectEntitiesV2Request = &handles[438]
+var DetectEntitiesV2Request_Text = &handles[439]
+
+var DetectEntitiesV2Response = &handles[440]
+var DetectEntitiesV2Response_Entities = &handles[441]
+var DetectEntitiesV2Response_UnmappedAttributes = &handles[442]
+var DetectEntitiesV2Response_PaginationToken = &handles[443]
+var DetectEntitiesV2Response_ModelVersion = &handles[444]
+
+var DetectPHIRequest = &handles[445]
+var DetectPHIRequest_Text = &handles[446]
+
+var DetectPHIResponse = &handles[447]
+var DetectPHIResponse_Entities = &handles[448]
+var DetectPHIResponse_PaginationToken = &handles[449]
+var DetectPHIResponse_ModelVersion = &handles[450]
+
+var InferICD10CMRequest = &handles[451]
+var InferICD10CMRequest_Text = &handles[452]
+
+var InferICD10CMResponse = &handles[453]
+var InferICD10CMResponse_Entities = &handles[454]
+var InferICD10CMResponse_PaginationToken = &handles[455]
+var InferICD10CMResponse_ModelVersion = &handles[456]
+
+var InferRxNormRequest = &handles[457]
+var InferRxNormRequest_Text = &handles[458]
+
+var InferRxNormResponse = &handles[459]
+var InferRxNormResponse_Entities = &handles[460]
+var InferRxNormResponse_PaginationToken = &handles[461]
+var InferRxNormResponse_ModelVersion = &handles[462]
+
+var InferSNOMEDCTRequest = &handles[463]
+var InferSNOMEDCTRequest_Text = &handles[464]
+
+var InferSNOMEDCTResponse = &handles[465]
+var InferSNOMEDCTResponse_Entities = &handles[466]
+var InferSNOMEDCTResponse_PaginationToken = &handles[467]
+var InferSNOMEDCTResponse_ModelVersion = &handles[468]
+var InferSNOMEDCTResponse_SNOMEDCTDetails = &handles[469]
+var InferSNOMEDCTResponse_Characters = &handles[470]
+
+var ListEntitiesDetectionV2JobsRequest = &handles[471]
+var ListEntitiesDetectionV2JobsRequest_Filter = &handles[472]
+var ListEntitiesDetectionV2JobsRequest_NextToken = &handles[473]
+var ListEntitiesDetectionV2JobsRequest_MaxResults = &handles[474]
+
+var ListEntitiesDetectionV2JobsResponse = &handles[475]
+var ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList = &handles[476]
+var ListEntitiesDetectionV2JobsResponse_NextToken = &handles[477]
+
+var ListICD10CMInferenceJobsRequest = &handles[478]
+var ListICD10CMInferenceJobsRequest_Filter = &handles[479]
+var ListICD10CMInferenceJobsRequest_NextToken = &handles[480]
+var ListICD10CMInferenceJobsRequest_MaxResults = &handles[481]
+
+var ListICD10CMInferenceJobsResponse = &handles[482]
+var ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = &handles[483]
+var ListICD10CMInferenceJobsResponse_NextToken = &handles[484]
+
+var ListPHIDetectionJobsRequest = &handles[485]
+var ListPHIDetectionJobsRequest_Filter = &handles[486]
+var ListPHIDetectionJobsRequest_NextToken = &handles[487]
+var ListPHIDetectionJobsRequest_MaxResults = &handles[488]
+
+var ListPHIDetectionJobsResponse = &handles[489]
+var ListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList = &handles[490]
+var ListPHIDetectionJobsResponse_NextToken = &handles[491]
+
+var ListRxNormInferenceJobsRequest = &handles[492]
+var ListRxNormInferenceJobsRequest_Filter = &handles[493]
+var ListRxNormInferenceJobsRequest_NextToken = &handles[494]
+var ListRxNormInferenceJobsRequest_MaxResults = &handles[495]
+
+var ListRxNormInferenceJobsResponse = &handles[496]
+var ListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = &handles[497]
+var ListRxNormInferenceJobsResponse_NextToken = &handles[498]
+
+var ListSNOMEDCTInferenceJobsRequest = &handles[499]
+var ListSNOMEDCTInferenceJobsRequest_Filter = &handles[500]
+var ListSNOMEDCTInferenceJobsRequest_NextToken = &handles[501]
+var ListSNOMEDCTInferenceJobsRequest_MaxResults = &handles[502]
+
+var ListSNOMEDCTInferenceJobsResponse = &handles[503]
+var ListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = &handles[504]
+var ListSNOMEDCTInferenceJobsResponse_NextToken = &handles[505]
+
+var StartEntitiesDetectionV2JobRequest = &handles[506]
+var StartEntitiesDetectionV2JobRequest_InputDataConfig = &handles[507]
+var StartEntitiesDetectionV2JobRequest_OutputDataConfig = &handles[508]
+var StartEntitiesDetectionV2JobRequest_DataAccessRoleArn = &handles[509]
+var StartEntitiesDetectionV2JobRequest_JobName = &handles[510]
+var StartEntitiesDetectionV2JobRequest_ClientRequestToken = &handles[511]
+var StartEntitiesDetectionV2JobRequest_KMSKey = &handles[512]
+var StartEntitiesDetectionV2JobRequest_LanguageCode = &handles[513]
+
+var StartEntitiesDetectionV2JobResponse = &handles[514]
+var StartEntitiesDetectionV2JobResponse_JobId = &handles[515]
+
+var StartICD10CMInferenceJobRequest = &handles[516]
+var StartICD10CMInferenceJobRequest_InputDataConfig = &handles[517]
+var StartICD10CMInferenceJobRequest_OutputDataConfig = &handles[518]
+var StartICD10CMInferenceJobRequest_DataAccessRoleArn = &handles[519]
+var StartICD10CMInferenceJobRequest_JobName = &handles[520]
+var StartICD10CMInferenceJobRequest_ClientRequestToken = &handles[521]
+var StartICD10CMInferenceJobRequest_KMSKey = &handles[522]
+var StartICD10CMInferenceJobRequest_LanguageCode = &handles[523]
+
+var StartICD10CMInferenceJobResponse = &handles[524]
+var StartICD10CMInferenceJobResponse_JobId = &handles[525]
+
+var StartPHIDetectionJobRequest = &handles[526]
+var StartPHIDetectionJobRequest_InputDataConfig = &handles[527]
+var StartPHIDetectionJobRequest_OutputDataConfig = &handles[528]
+var StartPHIDetectionJobRequest_DataAccessRoleArn = &handles[529]
+var StartPHIDetectionJobRequest_JobName = &handles[530]
+var StartPHIDetectionJobRequest_ClientRequestToken = &handles[531]
+var StartPHIDetectionJobRequest_KMSKey = &handles[532]
+var StartPHIDetectionJobRequest_LanguageCode = &handles[533]
+
+var StartPHIDetectionJobResponse = &handles[534]
+var StartPHIDetectionJobResponse_JobId = &handles[535]
+
+var StartRxNormInferenceJobRequest = &handles[536]
+var StartRxNormInferenceJobRequest_InputDataConfig = &handles[537]
+var StartRxNormInferenceJobRequest_OutputDataConfig = &handles[538]
+var StartRxNormInferenceJobRequest_DataAccessRoleArn = &handles[539]
+var StartRxNormInferenceJobRequest_JobName = &handles[540]
+var StartRxNormInferenceJobRequest_ClientRequestToken = &handles[541]
+var StartRxNormInferenceJobRequest_KMSKey = &handles[542]
+var StartRxNormInferenceJobRequest_LanguageCode = &handles[543]
+
+var StartRxNormInferenceJobResponse = &handles[544]
+var StartRxNormInferenceJobResponse_JobId = &handles[545]
+
+var StartSNOMEDCTInferenceJobRequest = &handles[546]
+var StartSNOMEDCTInferenceJobRequest_InputDataConfig = &handles[547]
+var StartSNOMEDCTInferenceJobRequest_OutputDataConfig = &handles[548]
+var StartSNOMEDCTInferenceJobRequest_DataAccessRoleArn = &handles[549]
+var StartSNOMEDCTInferenceJobRequest_JobName = &handles[550]
+var StartSNOMEDCTInferenceJobRequest_ClientRequestToken = &handles[551]
+var StartSNOMEDCTInferenceJobRequest_KMSKey = &handles[552]
+var StartSNOMEDCTInferenceJobRequest_LanguageCode = &handles[553]
+
+var StartSNOMEDCTInferenceJobResponse = &handles[554]
+var StartSNOMEDCTInferenceJobResponse_JobId = &handles[555]
+
+var StopEntitiesDetectionV2JobRequest = &handles[556]
+var StopEntitiesDetectionV2JobRequest_JobId = &handles[557]
+
+var StopEntitiesDetectionV2JobResponse = &handles[558]
+var StopEntitiesDetectionV2JobResponse_JobId = &handles[559]
+
+var StopICD10CMInferenceJobRequest = &handles[560]
+var StopICD10CMInferenceJobRequest_JobId = &handles[561]
+
+var StopICD10CMInferenceJobResponse = &handles[562]
+var StopICD10CMInferenceJobResponse_JobId = &handles[563]
+
+var StopPHIDetectionJobRequest = &handles[564]
+var StopPHIDetectionJobRequest_JobId = &handles[565]
+
+var StopPHIDetectionJobResponse = &handles[566]
+var StopPHIDetectionJobResponse_JobId = &handles[567]
+
+var StopRxNormInferenceJobRequest = &handles[568]
+var StopRxNormInferenceJobRequest_JobId = &handles[569]
+
+var StopRxNormInferenceJobResponse = &handles[570]
+var StopRxNormInferenceJobResponse_JobId = &handles[571]
+
+var StopSNOMEDCTInferenceJobRequest = &handles[572]
+var StopSNOMEDCTInferenceJobRequest_JobId = &handles[573]
+
+var StopSNOMEDCTInferenceJobResponse = &handles[574]
+var StopSNOMEDCTInferenceJobResponse_JobId = &handles[575]
+
+var ComprehendMedical_20181030 = &smithy.ServiceSchema{Schema: &handles[26], Version: "2018-10-30"}

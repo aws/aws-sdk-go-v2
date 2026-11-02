@@ -7,294 +7,274 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetRoleCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "GetRoleCredentials",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/federation/credentials",
-	Code: 200})
-
-var ListAccountRoles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ListAccountRoles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/assignment/roles",
-	Code: 200})
-
-var ListAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ListAccounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/assignment/accounts",
-	Code: 200})
-
-var Logout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "Logout",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/logout",
-	Code: 200})
-
-var _SWBPortalService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "SWBPortalService",
-}, smithy.ShapeTypeService, 0)
-
-var SWBPortalService = smithy.NewServiceSchema(_SWBPortalService, "2019-06-10")
-
-var _AccessKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "AccessKeyType",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessTokenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "AccessTokenType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AccountIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "AccountIdType",
-}, smithy.ShapeTypeString, 0)
-
-var AccountInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "AccountInfo",
-}, smithy.ShapeTypeStructure, 3)
-var AccountInfo_accountId *smithy.Schema
-
-var AccountInfo_accountName *smithy.Schema
-
-var AccountInfo_emailAddress *smithy.Schema
-
-var _AccountListType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "AccountListType",
-}, smithy.ShapeTypeList, 1)
-var _AccountListType_member *smithy.Schema
-
-var _AccountNameType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "AccountNameType",
-}, smithy.ShapeTypeString, 0)
-
-var _EmailAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "EmailAddressType",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ErrorDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ExpirationTimestampType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ExpirationTimestampType",
-}, smithy.ShapeTypeLong, 0)
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_message *smithy.Schema
-
-var _MaxResultType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "MaxResultType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextTokenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "NextTokenType",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var RoleCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "RoleCredentials",
-}, smithy.ShapeTypeStructure, 4)
-var RoleCredentials_accessKeyId *smithy.Schema
-
-var RoleCredentials_secretAccessKey *smithy.Schema
-
-var RoleCredentials_sessionToken *smithy.Schema
-
-var RoleCredentials_expiration *smithy.Schema
-
-var RoleInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "RoleInfo",
-}, smithy.ShapeTypeStructure, 2)
-var RoleInfo_roleName *smithy.Schema
-
-var RoleInfo_accountId *smithy.Schema
-
-var _RoleListType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "RoleListType",
-}, smithy.ShapeTypeList, 1)
-var _RoleListType_member *smithy.Schema
-
-var _RoleNameType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "RoleNameType",
-}, smithy.ShapeTypeString, 0)
-
-var _SecretAccessKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "SecretAccessKeyType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SessionTokenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "SessionTokenType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
-
-var GetRoleCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "GetRoleCredentialsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetRoleCredentialsRequest_roleName *smithy.Schema
-
-var GetRoleCredentialsRequest_accountId *smithy.Schema
-
-var GetRoleCredentialsRequest_accessToken *smithy.Schema
-
-var GetRoleCredentialsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "GetRoleCredentialsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRoleCredentialsResponse_roleCredentials *smithy.Schema
-
-var ListAccountRolesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ListAccountRolesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAccountRolesRequest_nextToken *smithy.Schema
-
-var ListAccountRolesRequest_maxResults *smithy.Schema
-
-var ListAccountRolesRequest_accessToken *smithy.Schema
-
-var ListAccountRolesRequest_accountId *smithy.Schema
-
-var ListAccountRolesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ListAccountRolesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccountRolesResponse_nextToken *smithy.Schema
-
-var ListAccountRolesResponse_roleList *smithy.Schema
-
-var ListAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ListAccountsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAccountsRequest_nextToken *smithy.Schema
-
-var ListAccountsRequest_maxResults *smithy.Schema
-
-var ListAccountsRequest_accessToken *smithy.Schema
-
-var ListAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "ListAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccountsResponse_nextToken *smithy.Schema
-
-var ListAccountsResponse_accountList *smithy.Schema
-
-var LogoutRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sso",
-	Name:      "LogoutRequest",
-}, smithy.ShapeTypeStructure, 1)
-var LogoutRequest_accessToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccountInfo_accountId = AccountInfo.AddMember("accountId", _AccountIdType)
-
-	AccountInfo_accountName = AccountInfo.AddMember("accountName", _AccountNameType)
-
-	AccountInfo_emailAddress = AccountInfo.AddMember("emailAddress", _EmailAddressType)
-
-	_AccountListType_member = _AccountListType.AddMember("member", AccountInfo)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _ErrorDescription)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorDescription)
-
-	RoleCredentials_accessKeyId = RoleCredentials.AddMember("accessKeyId", _AccessKeyType)
-
-	RoleCredentials_secretAccessKey = RoleCredentials.AddMember("secretAccessKey", _SecretAccessKeyType)
-
-	RoleCredentials_sessionToken = RoleCredentials.AddMember("sessionToken", _SessionTokenType)
-
-	RoleCredentials_expiration = RoleCredentials.AddMember("expiration", _ExpirationTimestampType)
-
-	RoleInfo_roleName = RoleInfo.AddMember("roleName", _RoleNameType)
-
-	RoleInfo_accountId = RoleInfo.AddMember("accountId", _AccountIdType)
-
-	_RoleListType_member = _RoleListType.AddMember("member", RoleInfo)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _ErrorDescription)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", _ErrorDescription)
-
-	GetRoleCredentialsRequest_roleName = GetRoleCredentialsRequest.AddMember("roleName", _RoleNameType, &smithytraits.HTTPQuery{Name: "role_name"})
-
-	GetRoleCredentialsRequest_accountId = GetRoleCredentialsRequest.AddMember("accountId", _AccountIdType, &smithytraits.HTTPQuery{Name: "account_id"})
-
-	GetRoleCredentialsRequest_accessToken = GetRoleCredentialsRequest.AddMember("accessToken", _AccessTokenType, &smithytraits.HTTPHeader{Name: "x-amz-sso_bearer_token"})
-
-	GetRoleCredentialsResponse_roleCredentials = GetRoleCredentialsResponse.AddMember("roleCredentials", RoleCredentials)
-
-	ListAccountRolesRequest_nextToken = ListAccountRolesRequest.AddMember("nextToken", _NextTokenType, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListAccountRolesRequest_maxResults = ListAccountRolesRequest.AddMember("maxResults", _MaxResultType, &smithytraits.HTTPQuery{Name: "max_result"})
-
-	ListAccountRolesRequest_accessToken = ListAccountRolesRequest.AddMember("accessToken", _AccessTokenType, &smithytraits.HTTPHeader{Name: "x-amz-sso_bearer_token"})
-
-	ListAccountRolesRequest_accountId = ListAccountRolesRequest.AddMember("accountId", _AccountIdType, &smithytraits.HTTPQuery{Name: "account_id"})
-
-	ListAccountRolesResponse_nextToken = ListAccountRolesResponse.AddMember("nextToken", _NextTokenType)
-
-	ListAccountRolesResponse_roleList = ListAccountRolesResponse.AddMember("roleList", _RoleListType)
-
-	ListAccountsRequest_nextToken = ListAccountsRequest.AddMember("nextToken", _NextTokenType, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListAccountsRequest_maxResults = ListAccountsRequest.AddMember("maxResults", _MaxResultType, &smithytraits.HTTPQuery{Name: "max_result"})
-
-	ListAccountsRequest_accessToken = ListAccountsRequest.AddMember("accessToken", _AccessTokenType, &smithytraits.HTTPHeader{Name: "x-amz-sso_bearer_token"})
-
-	ListAccountsResponse_nextToken = ListAccountsResponse.AddMember("nextToken", _NextTokenType)
-
-	ListAccountsResponse_accountList = ListAccountsResponse.AddMember("accountList", _AccountListType)
-
-	LogoutRequest_accessToken = LogoutRequest.AddMember("accessToken", _AccessTokenType, &smithytraits.HTTPHeader{Name: "x-amz-sso_bearer_token"})
-
+const blob = "" +
+	"GetRoleCredentialsResponseGetRoleCredentialsRequestResourceNotFoundExceptionListAccountRolesResponse" +
+	"TooManyRequestsExceptionExpirationTimestampTypeInvalidRequestExceptionListAccountRolesRequestUnautho" +
+	"rizedExceptionListAccountsResponseListAccountsRequestSecretAccessKeyTypeEmailAddressTypeErrorDescrip" +
+	"tionSWBPortalServiceSessionTokenTypeAccessTokenTypeAccountListTypeAccountNameTyperoleCredentialssecr" +
+	"etAccessKeyAccountIdTypeLogoutRequestMaxResultTypeNextTokenTypeRoleListTypeRoleNameTypeemailAddresss" +
+	"essionTokenAccountInfoaccessKeyIdaccessTokenaccountListaccountNameexpirationmaxResultsaccountIdnextT" +
+	"okenRoleInforoleListroleNamemessagemember"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.sso"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 76, Target: 1, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 214, Target: 2, Traits: 2, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 424, Target: 3, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 304, Target: 4, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 259, Target: 5, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 336, Target: 6, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 411, Target: 7, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 511, Target: 8, Traits: 4, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 586, Target: 7, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 555, Target: 14, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 487, Target: 15, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 351, Target: 12, Traits: 4, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 635, Target: 8, Traits: 4, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 366, Target: 14, Traits: 4, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 272, Target: 15, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 288, Target: 16, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 124, Target: 17, Traits: 4, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 147, Target: 18, Traits: 6, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 628, Target: 16, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 437, Target: 20, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 450, Target: 21, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 51, Target: 22, Traits: 7, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 628, Target: 16, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3, Target: 24, Traits: 4, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 522, Target: 5, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 396, Target: 35, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 499, Target: 36, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 566, Target: 17, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 604, Target: 29, Traits: 4, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 620, Target: 34, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 586, Target: 7, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 463, Target: 32, Traits: 4, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 635, Target: 29, Traits: 4, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 475, Target: 34, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 253, Target: 35, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 320, Target: 36, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 100, Target: 37, Traits: 9, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 628, Target: 16, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 193, Target: 39, Traits: 10, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 628, Target: 16, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 26, Target: 41, Traits: 4, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 620, Target: 34, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 586, Target: 7, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 533, Target: 6, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 45, Traits: 4, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 381, Target: 24, Traits: 4, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 170, Target: 47, Traits: 4, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 595, Target: 21, Traits: 14, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 576, Target: 20, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 533, Target: 6, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 586, Target: 7, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 76, Target: 52, Traits: 4, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 595, Target: 21, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 32, Traits: 4, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 234, Target: 55, Traits: 4, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 595, Target: 21, Traits: 14, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 576, Target: 20, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 533, Target: 6, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 214, Target: 59, Traits: 4, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 595, Target: 21, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 544, Target: 12, Traits: 4, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 424, Target: 62, Traits: 4, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 533, Target: 6, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/federation/credentials",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/assignment/roles",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/assignment/accounts",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/logout",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "role_name"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "account_id"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-sso_bearer_token"}, &smithytraits.Sensitive{}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "next_token"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "max_result"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [64]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+}
+
+var GetRoleCredentials = &handles[0]
+
+var ListAccountRoles = &handles[1]
+
+var ListAccounts = &handles[2]
+
+var Logout = &handles[3]
+
+var _SWBPortalService = &handles[4]
+
+var _AccessKeyType = &handles[5]
+
+var _AccessTokenType = &handles[6]
+
+var _AccountIdType = &handles[7]
+
+var AccountInfo = &handles[8]
+var AccountInfo_accountId = &handles[9]
+var AccountInfo_accountName = &handles[10]
+var AccountInfo_emailAddress = &handles[11]
+
+var _AccountListType = &handles[12]
+var _AccountListType_member = &handles[13]
+
+var _AccountNameType = &handles[14]
+
+var _EmailAddressType = &handles[15]
+
+var _ErrorDescription = &handles[16]
+
+var _ExpirationTimestampType = &handles[17]
+
+var InvalidRequestException = &handles[18]
+var InvalidRequestException_message = &handles[19]
+
+var _MaxResultType = &handles[20]
+
+var _NextTokenType = &handles[21]
+
+var ResourceNotFoundException = &handles[22]
+var ResourceNotFoundException_message = &handles[23]
+
+var RoleCredentials = &handles[24]
+var RoleCredentials_accessKeyId = &handles[25]
+var RoleCredentials_secretAccessKey = &handles[26]
+var RoleCredentials_sessionToken = &handles[27]
+var RoleCredentials_expiration = &handles[28]
+
+var RoleInfo = &handles[29]
+var RoleInfo_roleName = &handles[30]
+var RoleInfo_accountId = &handles[31]
+
+var _RoleListType = &handles[32]
+var _RoleListType_member = &handles[33]
+
+var _RoleNameType = &handles[34]
+
+var _SecretAccessKeyType = &handles[35]
+
+var _SessionTokenType = &handles[36]
+
+var TooManyRequestsException = &handles[37]
+var TooManyRequestsException_message = &handles[38]
+
+var UnauthorizedException = &handles[39]
+var UnauthorizedException_message = &handles[40]
+
+var GetRoleCredentialsRequest = &handles[41]
+var GetRoleCredentialsRequest_roleName = &handles[42]
+var GetRoleCredentialsRequest_accountId = &handles[43]
+var GetRoleCredentialsRequest_accessToken = &handles[44]
+
+var GetRoleCredentialsResponse = &handles[45]
+var GetRoleCredentialsResponse_roleCredentials = &handles[46]
+
+var ListAccountRolesRequest = &handles[47]
+var ListAccountRolesRequest_nextToken = &handles[48]
+var ListAccountRolesRequest_maxResults = &handles[49]
+var ListAccountRolesRequest_accessToken = &handles[50]
+var ListAccountRolesRequest_accountId = &handles[51]
+
+var ListAccountRolesResponse = &handles[52]
+var ListAccountRolesResponse_nextToken = &handles[53]
+var ListAccountRolesResponse_roleList = &handles[54]
+
+var ListAccountsRequest = &handles[55]
+var ListAccountsRequest_nextToken = &handles[56]
+var ListAccountsRequest_maxResults = &handles[57]
+var ListAccountsRequest_accessToken = &handles[58]
+
+var ListAccountsResponse = &handles[59]
+var ListAccountsResponse_nextToken = &handles[60]
+var ListAccountsResponse_accountList = &handles[61]
+
+var LogoutRequest = &handles[62]
+var LogoutRequest_accessToken = &handles[63]
+
+var SWBPortalService = &smithy.ServiceSchema{Schema: &handles[4], Version: "2019-06-10"}

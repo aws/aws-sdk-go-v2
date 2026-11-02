@@ -7,504 +7,450 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateSlackChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "CreateSlackChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/create-slack-channel-configuration",
-	Code: 200})
-
-var DeleteAccountAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteAccountAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/delete-account-alias",
-	Code: 200})
-
-var DeleteSlackChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteSlackChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/delete-slack-channel-configuration",
-	Code: 200})
-
-var DeleteSlackWorkspaceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteSlackWorkspaceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/delete-slack-workspace-configuration",
-	Code: 200})
-
-var GetAccountAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "GetAccountAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/get-account-alias",
-	Code: 200})
-
-var ListSlackChannelConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ListSlackChannelConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/list-slack-channel-configurations",
-	Code: 200})
-
-var ListSlackWorkspaceConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ListSlackWorkspaceConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/list-slack-workspace-configurations",
-	Code: 200})
-
-var PutAccountAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "PutAccountAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/put-account-alias",
-	Code: 200})
-
-var RegisterSlackWorkspaceForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "RegisterSlackWorkspaceForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/register-slack-workspace-for-organization",
-	Code: 200})
-
-var UpdateSlackChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "UpdateSlackChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/control/update-slack-channel-configuration",
-	Code: 200})
-
-var _SupportApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "SupportApp",
-}, smithy.ShapeTypeService, 0)
-
-var SupportApp = smithy.NewServiceSchema(_SupportApp, "2021-08-20")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "AccountType",
-}, smithy.ShapeTypeString, 0)
-
-var _awsAccountAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "awsAccountAlias",
-}, smithy.ShapeTypeString, 0)
-
-var _booleanValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "booleanValue",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _channelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "channelId",
-}, smithy.ShapeTypeString, 0)
-
-var _channelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "channelName",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _NotificationSeverityLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "NotificationSeverityLevel",
-}, smithy.ShapeTypeString, 0)
-
-var _paginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "paginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _roleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "roleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var SlackChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "SlackChannelConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var SlackChannelConfiguration_teamId *smithy.Schema
-
-var SlackChannelConfiguration_channelId *smithy.Schema
-
-var SlackChannelConfiguration_channelName *smithy.Schema
-
-var SlackChannelConfiguration_notifyOnCreateOrReopenCase *smithy.Schema
-
-var SlackChannelConfiguration_notifyOnAddCorrespondenceToCase *smithy.Schema
-
-var SlackChannelConfiguration_notifyOnResolveCase *smithy.Schema
-
-var SlackChannelConfiguration_notifyOnCaseSeverity *smithy.Schema
-
-var SlackChannelConfiguration_channelRoleArn *smithy.Schema
-
-var _slackChannelConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "slackChannelConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _slackChannelConfigurationList_member *smithy.Schema
-
-var SlackWorkspaceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "SlackWorkspaceConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var SlackWorkspaceConfiguration_teamId *smithy.Schema
-
-var SlackWorkspaceConfiguration_teamName *smithy.Schema
-
-var SlackWorkspaceConfiguration_allowOrganizationMemberAccount *smithy.Schema
-
-var _SlackWorkspaceConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "SlackWorkspaceConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _SlackWorkspaceConfigurationList_member *smithy.Schema
-
-var _teamId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "teamId",
-}, smithy.ShapeTypeString, 0)
-
-var _teamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "teamName",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "CreateSlackChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSlackChannelConfigurationRequest_teamId *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_channelId *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_channelName *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_notifyOnResolveCase *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_notifyOnCaseSeverity *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_channelRoleArn *smithy.Schema
-
-var CreateSlackChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "CreateSlackChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAccountAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteAccountAliasRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAccountAliasResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteAccountAliasResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSlackChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteSlackChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSlackChannelConfigurationRequest_teamId *smithy.Schema
-
-var DeleteSlackChannelConfigurationRequest_channelId *smithy.Schema
-
-var DeleteSlackChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteSlackChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSlackWorkspaceConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteSlackWorkspaceConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSlackWorkspaceConfigurationRequest_teamId *smithy.Schema
-
-var DeleteSlackWorkspaceConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "DeleteSlackWorkspaceConfigurationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "GetAccountAliasRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountAliasResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "GetAccountAliasResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountAliasResult_accountAlias *smithy.Schema
-
-var ListSlackChannelConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ListSlackChannelConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListSlackChannelConfigurationsRequest_nextToken *smithy.Schema
-
-var ListSlackChannelConfigurationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ListSlackChannelConfigurationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListSlackChannelConfigurationsResult_nextToken *smithy.Schema
-
-var ListSlackChannelConfigurationsResult_slackChannelConfigurations *smithy.Schema
-
-var ListSlackWorkspaceConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ListSlackWorkspaceConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListSlackWorkspaceConfigurationsRequest_nextToken *smithy.Schema
-
-var ListSlackWorkspaceConfigurationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "ListSlackWorkspaceConfigurationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListSlackWorkspaceConfigurationsResult_nextToken *smithy.Schema
-
-var ListSlackWorkspaceConfigurationsResult_slackWorkspaceConfigurations *smithy.Schema
-
-var PutAccountAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "PutAccountAliasRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutAccountAliasRequest_accountAlias *smithy.Schema
-
-var PutAccountAliasResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "PutAccountAliasResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var RegisterSlackWorkspaceForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "RegisterSlackWorkspaceForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterSlackWorkspaceForOrganizationRequest_teamId *smithy.Schema
-
-var RegisterSlackWorkspaceForOrganizationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "RegisterSlackWorkspaceForOrganizationResult",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterSlackWorkspaceForOrganizationResult_teamId *smithy.Schema
-
-var RegisterSlackWorkspaceForOrganizationResult_teamName *smithy.Schema
-
-var RegisterSlackWorkspaceForOrganizationResult_accountType *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "UpdateSlackChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateSlackChannelConfigurationRequest_teamId *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_channelId *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_channelName *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_notifyOnResolveCase *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_notifyOnCaseSeverity *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_channelRoleArn *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportapp",
-	Name:      "UpdateSlackChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateSlackChannelConfigurationResult_teamId *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult_channelId *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult_channelName *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult_notifyOnCreateOrReopenCase *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult_notifyOnAddCorrespondenceToCase *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult_notifyOnResolveCase *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult_notifyOnCaseSeverity *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult_channelRoleArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _errorMessage)
-
-	ConflictException_message = ConflictException.AddMember("message", _errorMessage)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _errorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _errorMessage)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _errorMessage)
-
-	SlackChannelConfiguration_teamId = SlackChannelConfiguration.AddMember("teamId", _teamId)
-
-	SlackChannelConfiguration_channelId = SlackChannelConfiguration.AddMember("channelId", _channelId)
-
-	SlackChannelConfiguration_channelName = SlackChannelConfiguration.AddMember("channelName", _channelName)
-
-	SlackChannelConfiguration_notifyOnCreateOrReopenCase = SlackChannelConfiguration.AddMember("notifyOnCreateOrReopenCase", _booleanValue)
-
-	SlackChannelConfiguration_notifyOnAddCorrespondenceToCase = SlackChannelConfiguration.AddMember("notifyOnAddCorrespondenceToCase", _booleanValue)
-
-	SlackChannelConfiguration_notifyOnResolveCase = SlackChannelConfiguration.AddMember("notifyOnResolveCase", _booleanValue)
-
-	SlackChannelConfiguration_notifyOnCaseSeverity = SlackChannelConfiguration.AddMember("notifyOnCaseSeverity", _NotificationSeverityLevel)
-
-	SlackChannelConfiguration_channelRoleArn = SlackChannelConfiguration.AddMember("channelRoleArn", _roleArn)
-
-	_slackChannelConfigurationList_member = _slackChannelConfigurationList.AddMember("member", SlackChannelConfiguration)
-
-	SlackWorkspaceConfiguration_teamId = SlackWorkspaceConfiguration.AddMember("teamId", _teamId)
-
-	SlackWorkspaceConfiguration_teamName = SlackWorkspaceConfiguration.AddMember("teamName", _teamName)
-
-	SlackWorkspaceConfiguration_allowOrganizationMemberAccount = SlackWorkspaceConfiguration.AddMember("allowOrganizationMemberAccount", _booleanValue)
-
-	_SlackWorkspaceConfigurationList_member = _SlackWorkspaceConfigurationList.AddMember("member", SlackWorkspaceConfiguration)
-
-	ValidationException_message = ValidationException.AddMember("message", _errorMessage)
-
-	CreateSlackChannelConfigurationRequest_teamId = CreateSlackChannelConfigurationRequest.AddMember("teamId", _teamId)
-
-	CreateSlackChannelConfigurationRequest_channelId = CreateSlackChannelConfigurationRequest.AddMember("channelId", _channelId)
-
-	CreateSlackChannelConfigurationRequest_channelName = CreateSlackChannelConfigurationRequest.AddMember("channelName", _channelName)
-
-	CreateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase = CreateSlackChannelConfigurationRequest.AddMember("notifyOnCreateOrReopenCase", _booleanValue)
-
-	CreateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase = CreateSlackChannelConfigurationRequest.AddMember("notifyOnAddCorrespondenceToCase", _booleanValue)
-
-	CreateSlackChannelConfigurationRequest_notifyOnResolveCase = CreateSlackChannelConfigurationRequest.AddMember("notifyOnResolveCase", _booleanValue)
-
-	CreateSlackChannelConfigurationRequest_notifyOnCaseSeverity = CreateSlackChannelConfigurationRequest.AddMember("notifyOnCaseSeverity", _NotificationSeverityLevel)
-
-	CreateSlackChannelConfigurationRequest_channelRoleArn = CreateSlackChannelConfigurationRequest.AddMember("channelRoleArn", _roleArn)
-
-	DeleteSlackChannelConfigurationRequest_teamId = DeleteSlackChannelConfigurationRequest.AddMember("teamId", _teamId)
-
-	DeleteSlackChannelConfigurationRequest_channelId = DeleteSlackChannelConfigurationRequest.AddMember("channelId", _channelId)
-
-	DeleteSlackWorkspaceConfigurationRequest_teamId = DeleteSlackWorkspaceConfigurationRequest.AddMember("teamId", _teamId)
-
-	GetAccountAliasResult_accountAlias = GetAccountAliasResult.AddMember("accountAlias", _awsAccountAlias)
-
-	ListSlackChannelConfigurationsRequest_nextToken = ListSlackChannelConfigurationsRequest.AddMember("nextToken", _paginationToken)
-
-	ListSlackChannelConfigurationsResult_nextToken = ListSlackChannelConfigurationsResult.AddMember("nextToken", _paginationToken)
-
-	ListSlackChannelConfigurationsResult_slackChannelConfigurations = ListSlackChannelConfigurationsResult.AddMember("slackChannelConfigurations", _slackChannelConfigurationList)
-
-	ListSlackWorkspaceConfigurationsRequest_nextToken = ListSlackWorkspaceConfigurationsRequest.AddMember("nextToken", _paginationToken)
-
-	ListSlackWorkspaceConfigurationsResult_nextToken = ListSlackWorkspaceConfigurationsResult.AddMember("nextToken", _paginationToken)
-
-	ListSlackWorkspaceConfigurationsResult_slackWorkspaceConfigurations = ListSlackWorkspaceConfigurationsResult.AddMember("slackWorkspaceConfigurations", _SlackWorkspaceConfigurationList)
-
-	PutAccountAliasRequest_accountAlias = PutAccountAliasRequest.AddMember("accountAlias", _awsAccountAlias)
-
-	RegisterSlackWorkspaceForOrganizationRequest_teamId = RegisterSlackWorkspaceForOrganizationRequest.AddMember("teamId", _teamId)
-
-	RegisterSlackWorkspaceForOrganizationResult_teamId = RegisterSlackWorkspaceForOrganizationResult.AddMember("teamId", _teamId)
-
-	RegisterSlackWorkspaceForOrganizationResult_teamName = RegisterSlackWorkspaceForOrganizationResult.AddMember("teamName", _teamName)
-
-	RegisterSlackWorkspaceForOrganizationResult_accountType = RegisterSlackWorkspaceForOrganizationResult.AddMember("accountType", _AccountType)
-
-	UpdateSlackChannelConfigurationRequest_teamId = UpdateSlackChannelConfigurationRequest.AddMember("teamId", _teamId)
-
-	UpdateSlackChannelConfigurationRequest_channelId = UpdateSlackChannelConfigurationRequest.AddMember("channelId", _channelId)
-
-	UpdateSlackChannelConfigurationRequest_channelName = UpdateSlackChannelConfigurationRequest.AddMember("channelName", _channelName)
-
-	UpdateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase = UpdateSlackChannelConfigurationRequest.AddMember("notifyOnCreateOrReopenCase", _booleanValue)
-
-	UpdateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase = UpdateSlackChannelConfigurationRequest.AddMember("notifyOnAddCorrespondenceToCase", _booleanValue)
-
-	UpdateSlackChannelConfigurationRequest_notifyOnResolveCase = UpdateSlackChannelConfigurationRequest.AddMember("notifyOnResolveCase", _booleanValue)
-
-	UpdateSlackChannelConfigurationRequest_notifyOnCaseSeverity = UpdateSlackChannelConfigurationRequest.AddMember("notifyOnCaseSeverity", _NotificationSeverityLevel)
-
-	UpdateSlackChannelConfigurationRequest_channelRoleArn = UpdateSlackChannelConfigurationRequest.AddMember("channelRoleArn", _roleArn)
-
-	UpdateSlackChannelConfigurationResult_teamId = UpdateSlackChannelConfigurationResult.AddMember("teamId", _teamId)
-
-	UpdateSlackChannelConfigurationResult_channelId = UpdateSlackChannelConfigurationResult.AddMember("channelId", _channelId)
-
-	UpdateSlackChannelConfigurationResult_channelName = UpdateSlackChannelConfigurationResult.AddMember("channelName", _channelName)
-
-	UpdateSlackChannelConfigurationResult_notifyOnCreateOrReopenCase = UpdateSlackChannelConfigurationResult.AddMember("notifyOnCreateOrReopenCase", _booleanValue)
-
-	UpdateSlackChannelConfigurationResult_notifyOnAddCorrespondenceToCase = UpdateSlackChannelConfigurationResult.AddMember("notifyOnAddCorrespondenceToCase", _booleanValue)
-
-	UpdateSlackChannelConfigurationResult_notifyOnResolveCase = UpdateSlackChannelConfigurationResult.AddMember("notifyOnResolveCase", _booleanValue)
-
-	UpdateSlackChannelConfigurationResult_notifyOnCaseSeverity = UpdateSlackChannelConfigurationResult.AddMember("notifyOnCaseSeverity", _NotificationSeverityLevel)
-
-	UpdateSlackChannelConfigurationResult_channelRoleArn = UpdateSlackChannelConfigurationResult.AddMember("channelRoleArn", _roleArn)
-
+const blob = "" +
+	"RegisterSlackWorkspaceForOrganizationRequestRegisterSlackWorkspaceForOrganizationResultDeleteSlackWo" +
+	"rkspaceConfigurationRequestDeleteSlackWorkspaceConfigurationResultListSlackWorkspaceConfigurationsRe" +
+	"questCreateSlackChannelConfigurationRequestDeleteSlackChannelConfigurationRequestListSlackWorkspaceC" +
+	"onfigurationsResultUpdateSlackChannelConfigurationRequestCreateSlackChannelConfigurationResultDelete" +
+	"SlackChannelConfigurationResultListSlackChannelConfigurationsRequestUpdateSlackChannelConfigurationR" +
+	"esultListSlackChannelConfigurationsResultSlackWorkspaceConfigurationListnotifyOnAddCorrespondenceToC" +
+	"aseallowOrganizationMemberAccountServiceQuotaExceededExceptionslackChannelConfigurationListslackWork" +
+	"spaceConfigurationsnotifyOnCreateOrReopenCaseslackChannelConfigurationsDeleteAccountAliasRequestNoti" +
+	"ficationSeverityLevelResourceNotFoundExceptionDeleteAccountAliasResultInternalServerExceptionGetAcco" +
+	"untAliasRequestPutAccountAliasRequestAccessDeniedExceptionGetAccountAliasResultPutAccountAliasResult" +
+	"notifyOnCaseSeverityValidationExceptionnotifyOnResolveCaseConflictExceptionawsAccountAliaspagination" +
+	"TokenchannelRoleArnaccountAliasbooleanValueerrorMessageAccountTypeaccountTypechannelNameSupportAppch" +
+	"annelIdnextTokenteamNamemessageroleArnmemberteamId"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.supportapp"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 205, Target: 0, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 771, Target: 1, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 243, Target: 2, Traits: 2, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 87, Target: 3, Traits: 3, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 893, Target: 4, Traits: 4, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 431, Target: 5, Traits: 5, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 166, Target: 6, Traits: 6, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 915, Target: 7, Traits: 7, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 8, Traits: 8, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 319, Target: 9, Traits: 9, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1188, Target: 10, Traits: 10, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 937, Target: 11, Traits: 11, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1224, Target: 20, Traits: 10, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1155, Target: 13, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1075, Target: 14, Traits: 10, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1131, Target: 15, Traits: 10, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1198, Target: 16, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1177, Target: 17, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1058, Target: 18, Traits: 12, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1224, Target: 20, Traits: 10, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1143, Target: 20, Traits: 10, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 870, Target: 21, Traits: 13, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1224, Target: 20, Traits: 10, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 796, Target: 23, Traits: 10, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1090, Target: 24, Traits: 10, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 821, Target: 25, Traits: 14, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1224, Target: 20, Traits: 10, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1231, Target: 27, Traits: 10, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 633, Target: 28, Traits: 15, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1224, Target: 20, Traits: 10, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 211, Target: 30, Traits: 10, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1198, Target: 16, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1177, Target: 17, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 719, Target: 15, Traits: 10, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 572, Target: 15, Traits: 10, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1039, Target: 15, Traits: 10, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1000, Target: 23, Traits: 10, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1105, Target: 27, Traits: 10, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 662, Target: 39, Traits: 10, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1238, Target: 30, Traits: 10, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 93, Target: 41, Traits: 10, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1216, Target: 48, Traits: 10, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 603, Target: 15, Traits: 10, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 541, Target: 45, Traits: 10, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1238, Target: 41, Traits: 10, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1216, Target: 48, Traits: 10, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1020, Target: 49, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1224, Target: 20, Traits: 10, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 205, Target: 51, Traits: 10, StrLen: 38, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1198, Target: 16, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1177, Target: 17, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 719, Target: 15, Traits: 10, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 572, Target: 15, Traits: 10, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1039, Target: 15, Traits: 10, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1000, Target: 23, Traits: 10, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1105, Target: 27, Traits: 10, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 357, Target: 60, Traits: 10, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 771, Target: 61, Traits: 10, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 846, Target: 62, Traits: 10, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 243, Target: 63, Traits: 10, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1198, Target: 16, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 394, Target: 66, Traits: 10, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 87, Target: 67, Traits: 10, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 127, Target: 69, Traits: 10, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 893, Target: 70, Traits: 10, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 958, Target: 71, Traits: 10, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1119, Target: 14, Traits: 10, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 431, Target: 73, Traits: 10, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1207, Target: 24, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 505, Target: 75, Traits: 10, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1207, Target: 24, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 745, Target: 39, Traits: 10, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 166, Target: 78, Traits: 10, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1207, Target: 24, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 281, Target: 80, Traits: 10, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1207, Target: 24, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 691, Target: 45, Traits: 10, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 915, Target: 83, Traits: 10, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1119, Target: 14, Traits: 10, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 979, Target: 85, Traits: 10, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 86, Traits: 10, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 44, Target: 88, Traits: 10, StrLen: 43, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1216, Target: 48, Traits: 10, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1166, Target: 13, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 319, Target: 92, Traits: 10, StrLen: 38, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1198, Target: 16, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1177, Target: 17, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 719, Target: 15, Traits: 10, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 572, Target: 15, Traits: 10, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1039, Target: 15, Traits: 10, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1000, Target: 23, Traits: 10, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1105, Target: 27, Traits: 10, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 468, Target: 101, Traits: 10, StrLen: 37, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1244, Target: 47, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1198, Target: 16, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1177, Target: 17, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 719, Target: 15, Traits: 10, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 572, Target: 15, Traits: 10, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1039, Target: 15, Traits: 10, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1000, Target: 23, Traits: 10, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1105, Target: 27, Traits: 10, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/create-slack-channel-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/delete-account-alias",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/delete-slack-channel-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/delete-slack-workspace-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/get-account-alias",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/list-slack-channel-configurations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/list-slack-workspace-configurations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/put-account-alias",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/register-slack-workspace-for-organization",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/control/update-slack-channel-configuration",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [110]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+}
+
+var CreateSlackChannelConfiguration = &handles[0]
+
+var DeleteAccountAlias = &handles[1]
+
+var DeleteSlackChannelConfiguration = &handles[2]
+
+var DeleteSlackWorkspaceConfiguration = &handles[3]
+
+var GetAccountAlias = &handles[4]
+
+var ListSlackChannelConfigurations = &handles[5]
+
+var ListSlackWorkspaceConfigurations = &handles[6]
+
+var PutAccountAlias = &handles[7]
+
+var RegisterSlackWorkspaceForOrganization = &handles[8]
+
+var UpdateSlackChannelConfiguration = &handles[9]
+
+var _SupportApp = &handles[10]
+
+var AccessDeniedException = &handles[11]
+var AccessDeniedException_message = &handles[12]
+
+var _AccountType = &handles[13]
+
+var _awsAccountAlias = &handles[14]
+
+var _booleanValue = &handles[15]
+
+var _channelId = &handles[16]
+
+var _channelName = &handles[17]
+
+var ConflictException = &handles[18]
+var ConflictException_message = &handles[19]
+
+var _errorMessage = &handles[20]
+
+var InternalServerException = &handles[21]
+var InternalServerException_message = &handles[22]
+
+var _NotificationSeverityLevel = &handles[23]
+
+var _paginationToken = &handles[24]
+
+var ResourceNotFoundException = &handles[25]
+var ResourceNotFoundException_message = &handles[26]
+
+var _roleArn = &handles[27]
+
+var ServiceQuotaExceededException = &handles[28]
+var ServiceQuotaExceededException_message = &handles[29]
+
+var SlackChannelConfiguration = &handles[30]
+var SlackChannelConfiguration_teamId = &handles[31]
+var SlackChannelConfiguration_channelId = &handles[32]
+var SlackChannelConfiguration_channelName = &handles[33]
+var SlackChannelConfiguration_notifyOnCreateOrReopenCase = &handles[34]
+var SlackChannelConfiguration_notifyOnAddCorrespondenceToCase = &handles[35]
+var SlackChannelConfiguration_notifyOnResolveCase = &handles[36]
+var SlackChannelConfiguration_notifyOnCaseSeverity = &handles[37]
+var SlackChannelConfiguration_channelRoleArn = &handles[38]
+
+var _slackChannelConfigurationList = &handles[39]
+var _slackChannelConfigurationList_member = &handles[40]
+
+var SlackWorkspaceConfiguration = &handles[41]
+var SlackWorkspaceConfiguration_teamId = &handles[42]
+var SlackWorkspaceConfiguration_teamName = &handles[43]
+var SlackWorkspaceConfiguration_allowOrganizationMemberAccount = &handles[44]
+
+var _SlackWorkspaceConfigurationList = &handles[45]
+var _SlackWorkspaceConfigurationList_member = &handles[46]
+
+var _teamId = &handles[47]
+
+var _teamName = &handles[48]
+
+var ValidationException = &handles[49]
+var ValidationException_message = &handles[50]
+
+var CreateSlackChannelConfigurationRequest = &handles[51]
+var CreateSlackChannelConfigurationRequest_teamId = &handles[52]
+var CreateSlackChannelConfigurationRequest_channelId = &handles[53]
+var CreateSlackChannelConfigurationRequest_channelName = &handles[54]
+var CreateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase = &handles[55]
+var CreateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase = &handles[56]
+var CreateSlackChannelConfigurationRequest_notifyOnResolveCase = &handles[57]
+var CreateSlackChannelConfigurationRequest_notifyOnCaseSeverity = &handles[58]
+var CreateSlackChannelConfigurationRequest_channelRoleArn = &handles[59]
+
+var CreateSlackChannelConfigurationResult = &handles[60]
+
+var DeleteAccountAliasRequest = &handles[61]
+
+var DeleteAccountAliasResult = &handles[62]
+
+var DeleteSlackChannelConfigurationRequest = &handles[63]
+var DeleteSlackChannelConfigurationRequest_teamId = &handles[64]
+var DeleteSlackChannelConfigurationRequest_channelId = &handles[65]
+
+var DeleteSlackChannelConfigurationResult = &handles[66]
+
+var DeleteSlackWorkspaceConfigurationRequest = &handles[67]
+var DeleteSlackWorkspaceConfigurationRequest_teamId = &handles[68]
+
+var DeleteSlackWorkspaceConfigurationResult = &handles[69]
+
+var GetAccountAliasRequest = &handles[70]
+
+var GetAccountAliasResult = &handles[71]
+var GetAccountAliasResult_accountAlias = &handles[72]
+
+var ListSlackChannelConfigurationsRequest = &handles[73]
+var ListSlackChannelConfigurationsRequest_nextToken = &handles[74]
+
+var ListSlackChannelConfigurationsResult = &handles[75]
+var ListSlackChannelConfigurationsResult_nextToken = &handles[76]
+var ListSlackChannelConfigurationsResult_slackChannelConfigurations = &handles[77]
+
+var ListSlackWorkspaceConfigurationsRequest = &handles[78]
+var ListSlackWorkspaceConfigurationsRequest_nextToken = &handles[79]
+
+var ListSlackWorkspaceConfigurationsResult = &handles[80]
+var ListSlackWorkspaceConfigurationsResult_nextToken = &handles[81]
+var ListSlackWorkspaceConfigurationsResult_slackWorkspaceConfigurations = &handles[82]
+
+var PutAccountAliasRequest = &handles[83]
+var PutAccountAliasRequest_accountAlias = &handles[84]
+
+var PutAccountAliasResult = &handles[85]
+
+var RegisterSlackWorkspaceForOrganizationRequest = &handles[86]
+var RegisterSlackWorkspaceForOrganizationRequest_teamId = &handles[87]
+
+var RegisterSlackWorkspaceForOrganizationResult = &handles[88]
+var RegisterSlackWorkspaceForOrganizationResult_teamId = &handles[89]
+var RegisterSlackWorkspaceForOrganizationResult_teamName = &handles[90]
+var RegisterSlackWorkspaceForOrganizationResult_accountType = &handles[91]
+
+var UpdateSlackChannelConfigurationRequest = &handles[92]
+var UpdateSlackChannelConfigurationRequest_teamId = &handles[93]
+var UpdateSlackChannelConfigurationRequest_channelId = &handles[94]
+var UpdateSlackChannelConfigurationRequest_channelName = &handles[95]
+var UpdateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase = &handles[96]
+var UpdateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase = &handles[97]
+var UpdateSlackChannelConfigurationRequest_notifyOnResolveCase = &handles[98]
+var UpdateSlackChannelConfigurationRequest_notifyOnCaseSeverity = &handles[99]
+var UpdateSlackChannelConfigurationRequest_channelRoleArn = &handles[100]
+
+var UpdateSlackChannelConfigurationResult = &handles[101]
+var UpdateSlackChannelConfigurationResult_teamId = &handles[102]
+var UpdateSlackChannelConfigurationResult_channelId = &handles[103]
+var UpdateSlackChannelConfigurationResult_channelName = &handles[104]
+var UpdateSlackChannelConfigurationResult_notifyOnCreateOrReopenCase = &handles[105]
+var UpdateSlackChannelConfigurationResult_notifyOnAddCorrespondenceToCase = &handles[106]
+var UpdateSlackChannelConfigurationResult_notifyOnResolveCase = &handles[107]
+var UpdateSlackChannelConfigurationResult_notifyOnCaseSeverity = &handles[108]
+var UpdateSlackChannelConfigurationResult_channelRoleArn = &handles[109]
+
+var SupportApp = &smithy.ServiceSchema{Schema: &handles[10], Version: "2021-08-20"}

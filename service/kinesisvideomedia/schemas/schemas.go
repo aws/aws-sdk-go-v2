@@ -4,195 +4,181 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "GetMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/getMedia",
-	Code: 200})
+const blob = "" +
+	"ConnectionLimitExceededExceptionClientLimitExceededExceptionResourceNotFoundExceptionInvalidArgument" +
+	"ExceptionInvalidEndpointExceptionNotAuthorizedExceptionAWSAcuityInletServiceFragmentNumberStringAfte" +
+	"rFragmentNumberCONTINUATION_TOKENPRODUCER_TIMESTAMPContinuationTokenStartSelectorTypeSERVER_TIMESTAM" +
+	"PFRAGMENT_NUMBERGetMediaOutputStartTimestampGetMediaInputErrorMessageContentTypeResourceARNStreamNam" +
+	"eStreamARNEARLIESTPayloadUnitNOW"
 
-var _AWSAcuityInletService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "AWSAcuityInletService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSAcuityInletService = smithy.NewServiceSchema(_AWSAcuityInletService, "2017-09-30")
-
-var ClientLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "ClientLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ClientLimitExceededException_Message *smithy.Schema
-
-var ConnectionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "ConnectionLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConnectionLimitExceededException_Message *smithy.Schema
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _ContinuationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "ContinuationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FragmentNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "FragmentNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidArgumentException_Message *smithy.Schema
-
-var InvalidEndpointException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "InvalidEndpointException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidEndpointException_Message *smithy.Schema
-
-var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var NotAuthorizedException_Message *smithy.Schema
-
-var _Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "Payload",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var StartSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "StartSelector",
-}, smithy.ShapeTypeStructure, 4)
-var StartSelector_StartSelectorType *smithy.Schema
-
-var StartSelector_AfterFragmentNumber *smithy.Schema
-
-var StartSelector_StartTimestamp *smithy.Schema
-
-var StartSelector_ContinuationToken *smithy.Schema
-
-var StartSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "StartSelectorType",
-}, smithy.ShapeTypeEnum, 6)
-var StartSelectorType_FRAGMENT_NUMBER *smithy.Schema
-
-var StartSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var StartSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var StartSelectorType_NOW *smithy.Schema
-
-var StartSelectorType_EARLIEST *smithy.Schema
-
-var StartSelectorType_CONTINUATION_TOKEN *smithy.Schema
-
-var _StreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "StreamName",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var GetMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "GetMediaInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMediaInput_StreamName *smithy.Schema
-
-var GetMediaInput_StreamARN *smithy.Schema
-
-var GetMediaInput_StartSelector *smithy.Schema
-
-var GetMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideomedia",
-	Name:      "GetMediaOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMediaOutput_ContentType *smithy.Schema
-
-var GetMediaOutput_Payload *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ClientLimitExceededException_Message = ClientLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ConnectionLimitExceededException_Message = ConnectionLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	InvalidArgumentException_Message = InvalidArgumentException.AddMember("Message", _ErrorMessage)
-
-	InvalidEndpointException_Message = InvalidEndpointException.AddMember("Message", _ErrorMessage)
-
-	NotAuthorizedException_Message = NotAuthorizedException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	StartSelectorType_FRAGMENT_NUMBER = StartSelectorType.AddMember("FRAGMENT_NUMBER", smithyprelude.Unit)
-
-	StartSelectorType_SERVER_TIMESTAMP = StartSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	StartSelectorType_PRODUCER_TIMESTAMP = StartSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	StartSelectorType_NOW = StartSelectorType.AddMember("NOW", smithyprelude.Unit)
-
-	StartSelectorType_EARLIEST = StartSelectorType.AddMember("EARLIEST", smithyprelude.Unit)
-
-	StartSelectorType_CONTINUATION_TOKEN = StartSelectorType.AddMember("CONTINUATION_TOKEN", smithyprelude.Unit)
-
-	StartSelector_StartSelectorType = StartSelector.AddMember("StartSelectorType", StartSelectorType)
-
-	StartSelector_AfterFragmentNumber = StartSelector.AddMember("AfterFragmentNumber", _FragmentNumberString)
-
-	StartSelector_StartTimestamp = StartSelector.AddMember("StartTimestamp", _Timestamp)
-
-	StartSelector_ContinuationToken = StartSelector.AddMember("ContinuationToken", _ContinuationToken)
-
-	GetMediaInput_StreamName = GetMediaInput.AddMember("StreamName", _StreamName)
-
-	GetMediaInput_StreamARN = GetMediaInput.AddMember("StreamARN", _ResourceARN)
-
-	GetMediaInput_StartSelector = GetMediaInput.AddMember("StartSelector", StartSelector)
-
-	GetMediaOutput_ContentType = GetMediaOutput.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetMediaOutput_Payload = GetMediaOutput.AddMember("Payload", _Payload, &smithytraits.HTTPPayload{})
-
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.kinesisvideomedia", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 316, Target: 0, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 155, Target: 1, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 32, Target: 2, Traits: 2, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 362, Target: 8, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 4, Traits: 2, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 362, Target: 8, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 369, Target: 6, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 251, Target: 7, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 357, Target: 8, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 176, Target: 9, Traits: 1, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 85, Target: 10, Traits: 2, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 362, Target: 8, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 109, Target: 12, Traits: 2, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 362, Target: 8, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 133, Target: 14, Traits: 3, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 362, Target: 8, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 418, Target: 16, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 380, Target: 17, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 60, Target: 18, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 362, Target: 8, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 268, Target: 20, Traits: 1, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 268, Target: 25, Traits: 1, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 196, Target: 9, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 330, Target: 33, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 251, Target: 7, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 268, Target: 25, Traits: 1, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 301, Target: 41, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 285, Target: 41, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 233, Target: 41, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 429, Target: 41, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 410, Target: 41, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 215, Target: 41, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 391, Target: 32, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 335, Target: 33, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 344, Target: 34, Traits: 1, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 391, Target: 32, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 401, Target: 17, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 268, Target: 20, Traits: 1, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 316, Target: 38, Traits: 1, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 369, Target: 6, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 418, Target: 16, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 425, Target: 41, Traits: 1, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/getMedia",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800},
+	},
 }
+
+var handles = [42]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+}
+
+var GetMedia = &handles[0]
+
+var _AWSAcuityInletService = &handles[1]
+
+var ClientLimitExceededException = &handles[2]
+var ClientLimitExceededException_Message = &handles[3]
+
+var ConnectionLimitExceededException = &handles[4]
+var ConnectionLimitExceededException_Message = &handles[5]
+
+var _ContentType = &handles[6]
+
+var _ContinuationToken = &handles[7]
+
+var _ErrorMessage = &handles[8]
+
+var _FragmentNumberString = &handles[9]
+
+var InvalidArgumentException = &handles[10]
+var InvalidArgumentException_Message = &handles[11]
+
+var InvalidEndpointException = &handles[12]
+var InvalidEndpointException_Message = &handles[13]
+
+var NotAuthorizedException = &handles[14]
+var NotAuthorizedException_Message = &handles[15]
+
+var _Payload = &handles[16]
+
+var _ResourceARN = &handles[17]
+
+var ResourceNotFoundException = &handles[18]
+var ResourceNotFoundException_Message = &handles[19]
+
+var StartSelector = &handles[20]
+var StartSelector_StartSelectorType = &handles[21]
+var StartSelector_AfterFragmentNumber = &handles[22]
+var StartSelector_StartTimestamp = &handles[23]
+var StartSelector_ContinuationToken = &handles[24]
+
+var StartSelectorType = &handles[25]
+var StartSelectorType_FRAGMENT_NUMBER = &handles[26]
+var StartSelectorType_SERVER_TIMESTAMP = &handles[27]
+var StartSelectorType_PRODUCER_TIMESTAMP = &handles[28]
+var StartSelectorType_NOW = &handles[29]
+var StartSelectorType_EARLIEST = &handles[30]
+var StartSelectorType_CONTINUATION_TOKEN = &handles[31]
+
+var _StreamName = &handles[32]
+
+var _Timestamp = &handles[33]
+
+var GetMediaInput = &handles[34]
+var GetMediaInput_StreamName = &handles[35]
+var GetMediaInput_StreamARN = &handles[36]
+var GetMediaInput_StartSelector = &handles[37]
+
+var GetMediaOutput = &handles[38]
+var GetMediaOutput_ContentType = &handles[39]
+var GetMediaOutput_Payload = &handles[40]
+
+var AWSAcuityInletService = &smithy.ServiceSchema{Schema: &handles[1], Version: "2017-09-30"}

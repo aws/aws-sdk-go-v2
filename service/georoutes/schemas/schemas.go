@@ -4,8719 +4,7183 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CalculateIsolines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateIsolines",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v2/isolines",
-	Code: 200})
-
-var CalculateRouteMatrix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateRouteMatrix",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v2/route-matrix",
-	Code: 200})
-
-var CalculateRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateRoutes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v2/routes",
-	Code: 200})
-
-var OptimizeWaypoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "OptimizeWaypoints",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v2/optimize-waypoints",
-	Code: 200})
-
-var SnapToRoads = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SnapToRoads",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v2/snap-to-roads",
-	Code: 200})
-
-var _RoutesService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutesService",
-}, smithy.ShapeTypeService, 0)
-
-var RoutesService = smithy.NewServiceSchema(_RoutesService, "2020-11-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _ApiKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "ApiKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _BeforeWaypointsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "BeforeWaypointsList",
-}, smithy.ShapeTypeList, 1)
-var _BeforeWaypointsList_member *smithy.Schema
-
-var _BoundingBox = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "BoundingBox",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _BoundingBox_member *smithy.Schema
-
-var Circle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "Circle",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var Circle_Center *smithy.Schema
-
-var Circle_Radius *smithy.Schema
-
-var _ClusterIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "ClusterIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var Corridor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "Corridor",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var Corridor_LineString *smithy.Schema
-
-var Corridor_Radius *smithy.Schema
-
-var _CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CountryCode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CountryCode3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CountryCode3",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CountryCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CountryCodeList",
-}, smithy.ShapeTypeList, 1)
-var _CountryCodeList_member *smithy.Schema
-
-var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CurrencyCode",
-}, smithy.ShapeTypeString, 0)
-
-var DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeEnum, 7, &smithytraits.Sensitive{})
-var DayOfWeek_MONDAY *smithy.Schema
-
-var DayOfWeek_TUESDAY *smithy.Schema
-
-var DayOfWeek_WEDNESDAY *smithy.Schema
-
-var DayOfWeek_THURSDAY *smithy.Schema
-
-var DayOfWeek_FRIDAY *smithy.Schema
-
-var DayOfWeek_SATURDAY *smithy.Schema
-
-var DayOfWeek_SUNDAY *smithy.Schema
-
-var _DimensionCentimeters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "DimensionCentimeters",
-}, smithy.ShapeTypeLong, 0, &smithytraits.Sensitive{})
-
-var _DistanceMeters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "DistanceMeters",
-}, smithy.ShapeTypeLong, 0, &smithytraits.Sensitive{})
-
-var _DistanceThresholdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "DistanceThresholdList",
-}, smithy.ShapeTypeList, 1)
-var _DistanceThresholdList_member *smithy.Schema
-
-var _DurationSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "DurationSeconds",
-}, smithy.ShapeTypeLong, 0, &smithytraits.Sensitive{})
-
-var _EnergyKilowattHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "EnergyKilowattHours",
-}, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
-
-var GeometryFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "GeometryFormat",
-}, smithy.ShapeTypeEnum, 2)
-var GeometryFormat_FLEXIBLE_POLYLINE *smithy.Schema
-
-var GeometryFormat_SIMPLE *smithy.Schema
-
-var _Heading = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "Heading",
-}, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
-
-var _HexColor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "HexColor",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _IndexList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IndexList",
-}, smithy.ShapeTypeList, 1)
-var _IndexList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var Isoline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "Isoline",
-}, smithy.ShapeTypeStructure, 4)
-var Isoline_Connections *smithy.Schema
-
-var Isoline_DistanceThreshold *smithy.Schema
-
-var Isoline_Geometries *smithy.Schema
-
-var Isoline_TimeThreshold *smithy.Schema
-
-var IsolineAllowOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineAllowOptions",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineAllowOptions_Hot *smithy.Schema
-
-var IsolineAllowOptions_Hov *smithy.Schema
-
-var IsolineAvoidanceArea = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineAvoidanceArea",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineAvoidanceArea_Except *smithy.Schema
-
-var IsolineAvoidanceArea_Geometry *smithy.Schema
-
-var IsolineAvoidanceAreaGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineAvoidanceAreaGeometry",
-}, smithy.ShapeTypeStructure, 5)
-var IsolineAvoidanceAreaGeometry_BoundingBox *smithy.Schema
-
-var IsolineAvoidanceAreaGeometry_Corridor *smithy.Schema
-
-var IsolineAvoidanceAreaGeometry_Polygon *smithy.Schema
-
-var IsolineAvoidanceAreaGeometry_PolylineCorridor *smithy.Schema
-
-var IsolineAvoidanceAreaGeometry_PolylinePolygon *smithy.Schema
-
-var _IsolineAvoidanceAreaGeometryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineAvoidanceAreaGeometryList",
-}, smithy.ShapeTypeList, 1)
-var _IsolineAvoidanceAreaGeometryList_member *smithy.Schema
-
-var _IsolineAvoidanceAreaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineAvoidanceAreaList",
-}, smithy.ShapeTypeList, 1)
-var _IsolineAvoidanceAreaList_member *smithy.Schema
-
-var IsolineAvoidanceOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineAvoidanceOptions",
-}, smithy.ShapeTypeStructure, 12)
-var IsolineAvoidanceOptions_Areas *smithy.Schema
-
-var IsolineAvoidanceOptions_CarShuttleTrains *smithy.Schema
-
-var IsolineAvoidanceOptions_ControlledAccessHighways *smithy.Schema
-
-var IsolineAvoidanceOptions_DirtRoads *smithy.Schema
-
-var IsolineAvoidanceOptions_Ferries *smithy.Schema
-
-var IsolineAvoidanceOptions_SeasonalClosure *smithy.Schema
-
-var IsolineAvoidanceOptions_TollRoads *smithy.Schema
-
-var IsolineAvoidanceOptions_TollTransponders *smithy.Schema
-
-var IsolineAvoidanceOptions_TruckRoadTypes *smithy.Schema
-
-var IsolineAvoidanceOptions_Tunnels *smithy.Schema
-
-var IsolineAvoidanceOptions_UTurns *smithy.Schema
-
-var IsolineAvoidanceOptions_ZoneCategories *smithy.Schema
-
-var IsolineAvoidanceZoneCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineAvoidanceZoneCategory",
-}, smithy.ShapeTypeStructure, 1)
-var IsolineAvoidanceZoneCategory_Category *smithy.Schema
-
-var _IsolineAvoidanceZoneCategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineAvoidanceZoneCategoryList",
-}, smithy.ShapeTypeList, 1)
-var _IsolineAvoidanceZoneCategoryList_member *smithy.Schema
-
-var IsolineCarOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineCarOptions",
-}, smithy.ShapeTypeStructure, 4)
-var IsolineCarOptions_EngineType *smithy.Schema
-
-var IsolineCarOptions_LicensePlate *smithy.Schema
-
-var IsolineCarOptions_MaxSpeed *smithy.Schema
-
-var IsolineCarOptions_Occupancy *smithy.Schema
-
-var IsolineConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineConnection",
-}, smithy.ShapeTypeStructure, 3)
-var IsolineConnection_FromPolygonIndex *smithy.Schema
-
-var IsolineConnection_Geometry *smithy.Schema
-
-var IsolineConnection_ToPolygonIndex *smithy.Schema
-
-var IsolineConnectionGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineConnectionGeometry",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineConnectionGeometry_LineString *smithy.Schema
-
-var IsolineConnectionGeometry_Polyline *smithy.Schema
-
-var _IsolineConnectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineConnectionList",
-}, smithy.ShapeTypeList, 1)
-var _IsolineConnectionList_member *smithy.Schema
-
-var IsolineDestinationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineDestinationOptions",
-}, smithy.ShapeTypeStructure, 4)
-var IsolineDestinationOptions_AvoidActionsForDistance *smithy.Schema
-
-var IsolineDestinationOptions_Heading *smithy.Schema
-
-var IsolineDestinationOptions_Matching *smithy.Schema
-
-var IsolineDestinationOptions_SideOfStreet *smithy.Schema
-
-var IsolineEngineType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineEngineType",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var IsolineEngineType_ELECTRIC *smithy.Schema
-
-var IsolineEngineType_INTERNAL_COMBUSTION *smithy.Schema
-
-var IsolineEngineType_PLUGIN_HYBRID *smithy.Schema
-
-var IsolineGranularityOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineGranularityOptions",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineGranularityOptions_MaxPoints *smithy.Schema
-
-var IsolineGranularityOptions_MaxResolution *smithy.Schema
-
-var IsolineHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineHazardousCargoType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var IsolineHazardousCargoType_COMBUSTIBLE *smithy.Schema
-
-var IsolineHazardousCargoType_CORROSIVE *smithy.Schema
-
-var IsolineHazardousCargoType_EXPLOSIVE *smithy.Schema
-
-var IsolineHazardousCargoType_FLAMMABLE *smithy.Schema
-
-var IsolineHazardousCargoType_GAS *smithy.Schema
-
-var IsolineHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
-
-var IsolineHazardousCargoType_ORGANIC *smithy.Schema
-
-var IsolineHazardousCargoType_OTHER *smithy.Schema
-
-var IsolineHazardousCargoType_POISON *smithy.Schema
-
-var IsolineHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
-
-var IsolineHazardousCargoType_RADIOACTIVE *smithy.Schema
-
-var _IsolineHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineHazardousCargoTypeList",
-}, smithy.ShapeTypeList, 1)
-var _IsolineHazardousCargoTypeList_member *smithy.Schema
-
-var _IsolineList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineList",
-}, smithy.ShapeTypeList, 1)
-var _IsolineList_member *smithy.Schema
-
-var IsolineMatchingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineMatchingOptions",
-}, smithy.ShapeTypeStructure, 4)
-var IsolineMatchingOptions_NameHint *smithy.Schema
-
-var IsolineMatchingOptions_OnRoadThreshold *smithy.Schema
-
-var IsolineMatchingOptions_Radius *smithy.Schema
-
-var IsolineMatchingOptions_Strategy *smithy.Schema
-
-var IsolineOptimizationObjective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineOptimizationObjective",
-}, smithy.ShapeTypeEnum, 3)
-var IsolineOptimizationObjective_ACCURATE_CALCULATION *smithy.Schema
-
-var IsolineOptimizationObjective_BALANCED_CALCULATION *smithy.Schema
-
-var IsolineOptimizationObjective_FAST_CALCULATION *smithy.Schema
-
-var IsolineOriginOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineOriginOptions",
-}, smithy.ShapeTypeStructure, 4)
-var IsolineOriginOptions_AvoidActionsForDistance *smithy.Schema
-
-var IsolineOriginOptions_Heading *smithy.Schema
-
-var IsolineOriginOptions_Matching *smithy.Schema
-
-var IsolineOriginOptions_SideOfStreet *smithy.Schema
-
-var IsolineScooterOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineScooterOptions",
-}, smithy.ShapeTypeStructure, 4)
-var IsolineScooterOptions_EngineType *smithy.Schema
-
-var IsolineScooterOptions_LicensePlate *smithy.Schema
-
-var IsolineScooterOptions_MaxSpeed *smithy.Schema
-
-var IsolineScooterOptions_Occupancy *smithy.Schema
-
-var IsolineShapeGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineShapeGeometry",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineShapeGeometry_Polygon *smithy.Schema
-
-var IsolineShapeGeometry_PolylinePolygon *smithy.Schema
-
-var _IsolineShapeGeometryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineShapeGeometryList",
-}, smithy.ShapeTypeList, 1)
-var _IsolineShapeGeometryList_member *smithy.Schema
-
-var IsolineSideOfStreetOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineSideOfStreetOptions",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineSideOfStreetOptions_Position *smithy.Schema
-
-var IsolineSideOfStreetOptions_UseWith *smithy.Schema
-
-var IsolineThresholds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineThresholds",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineThresholds_Distance *smithy.Schema
-
-var IsolineThresholds_Time *smithy.Schema
-
-var IsolineTrafficOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineTrafficOptions",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineTrafficOptions_FlowEventThresholdOverride *smithy.Schema
-
-var IsolineTrafficOptions_Usage *smithy.Schema
-
-var IsolineTrailerOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineTrailerOptions",
-}, smithy.ShapeTypeStructure, 2)
-var IsolineTrailerOptions_AxleCount *smithy.Schema
-
-var IsolineTrailerOptions_TrailerCount *smithy.Schema
-
-var IsolineTravelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineTravelMode",
-}, smithy.ShapeTypeEnum, 4)
-var IsolineTravelMode_CAR *smithy.Schema
-
-var IsolineTravelMode_PEDESTRIAN *smithy.Schema
-
-var IsolineTravelMode_SCOOTER *smithy.Schema
-
-var IsolineTravelMode_TRUCK *smithy.Schema
-
-var IsolineTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineTravelModeOptions",
-}, smithy.ShapeTypeStructure, 3)
-var IsolineTravelModeOptions_Car *smithy.Schema
-
-var IsolineTravelModeOptions_Scooter *smithy.Schema
-
-var IsolineTravelModeOptions_Truck *smithy.Schema
-
-var IsolineTruckOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineTruckOptions",
-}, smithy.ShapeTypeStructure, 19)
-var IsolineTruckOptions_AxleCount *smithy.Schema
-
-var IsolineTruckOptions_EngineType *smithy.Schema
-
-var IsolineTruckOptions_GrossWeight *smithy.Schema
-
-var IsolineTruckOptions_HazardousCargos *smithy.Schema
-
-var IsolineTruckOptions_Height *smithy.Schema
-
-var IsolineTruckOptions_HeightAboveFirstAxle *smithy.Schema
-
-var IsolineTruckOptions_KpraLength *smithy.Schema
-
-var IsolineTruckOptions_Length *smithy.Schema
-
-var IsolineTruckOptions_LicensePlate *smithy.Schema
-
-var IsolineTruckOptions_MaxSpeed *smithy.Schema
-
-var IsolineTruckOptions_Occupancy *smithy.Schema
-
-var IsolineTruckOptions_PayloadCapacity *smithy.Schema
-
-var IsolineTruckOptions_TireCount *smithy.Schema
-
-var IsolineTruckOptions_Trailer *smithy.Schema
-
-var IsolineTruckOptions_TruckType *smithy.Schema
-
-var IsolineTruckOptions_TunnelRestrictionCode *smithy.Schema
-
-var IsolineTruckOptions_WeightPerAxle *smithy.Schema
-
-var IsolineTruckOptions_WeightPerAxleGroup *smithy.Schema
-
-var IsolineTruckOptions_Width *smithy.Schema
-
-var IsolineTruckType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineTruckType",
-}, smithy.ShapeTypeEnum, 3)
-var IsolineTruckType_LIGHT_TRUCK *smithy.Schema
-
-var IsolineTruckType_STRAIGHT_TRUCK *smithy.Schema
-
-var IsolineTruckType_TRACTOR *smithy.Schema
-
-var IsolineVehicleLicensePlate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineVehicleLicensePlate",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var IsolineVehicleLicensePlate_LastCharacter *smithy.Schema
-
-var IsolineZoneCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "IsolineZoneCategory",
-}, smithy.ShapeTypeEnum, 3)
-var IsolineZoneCategory_CONGESTION_PRICING *smithy.Schema
-
-var IsolineZoneCategory_ENVIRONMENTAL *smithy.Schema
-
-var IsolineZoneCategory_VIGNETTE *smithy.Schema
-
-var _LanguageTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "LanguageTag",
-}, smithy.ShapeTypeString, 0)
-
-var _LanguageTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "LanguageTagList",
-}, smithy.ShapeTypeList, 1)
-var _LanguageTagList_member *smithy.Schema
-
-var _LinearRing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "LinearRing",
-}, smithy.ShapeTypeList, 1)
-var _LinearRing_member *smithy.Schema
-
-var _LinearRings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "LinearRings",
-}, smithy.ShapeTypeList, 1)
-var _LinearRings_member *smithy.Schema
-
-var _LineString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "LineString",
-}, smithy.ShapeTypeList, 1)
-var _LineString_member *smithy.Schema
-
-var LocalizedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "LocalizedString",
-}, smithy.ShapeTypeStructure, 2)
-var LocalizedString_Language *smithy.Schema
-
-var LocalizedString_Value *smithy.Schema
-
-var _LocalizedStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "LocalizedStringList",
-}, smithy.ShapeTypeList, 1)
-var _LocalizedStringList_member *smithy.Schema
-
-var MatchingStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "MatchingStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var MatchingStrategy_MATCH_ANY *smithy.Schema
-
-var MatchingStrategy_MATCH_MOST_SIGNIFICANT_ROAD *smithy.Schema
-
-var MeasurementSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "MeasurementSystem",
-}, smithy.ShapeTypeEnum, 2)
-var MeasurementSystem_METRIC *smithy.Schema
-
-var MeasurementSystem_IMPERIAL *smithy.Schema
-
-var _Polyline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "Polyline",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PolylineCorridor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "PolylineCorridor",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var PolylineCorridor_Polyline *smithy.Schema
-
-var PolylineCorridor_Radius *smithy.Schema
-
-var _PolylineRing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "PolylineRing",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PolylineRingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "PolylineRingList",
-}, smithy.ShapeTypeList, 1)
-var _PolylineRingList_member *smithy.Schema
-
-var _Position = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "Position",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _Position_member *smithy.Schema
-
-var _Position23 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "Position23",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _Position23_member *smithy.Schema
-
-var _PowerKilowatts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "PowerKilowatts",
-}, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
-
-var RoadSnapHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapHazardousCargoType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var RoadSnapHazardousCargoType_COMBUSTIBLE *smithy.Schema
-
-var RoadSnapHazardousCargoType_CORROSIVE *smithy.Schema
-
-var RoadSnapHazardousCargoType_EXPLOSIVE *smithy.Schema
-
-var RoadSnapHazardousCargoType_FLAMMABLE *smithy.Schema
-
-var RoadSnapHazardousCargoType_GAS *smithy.Schema
-
-var RoadSnapHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
-
-var RoadSnapHazardousCargoType_ORGANIC *smithy.Schema
-
-var RoadSnapHazardousCargoType_OTHER *smithy.Schema
-
-var RoadSnapHazardousCargoType_POISON *smithy.Schema
-
-var RoadSnapHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
-
-var RoadSnapHazardousCargoType_RADIOACTIVE *smithy.Schema
-
-var _RoadSnapHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapHazardousCargoTypeList",
-}, smithy.ShapeTypeList, 1)
-var _RoadSnapHazardousCargoTypeList_member *smithy.Schema
-
-var RoadSnapNotice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapNotice",
-}, smithy.ShapeTypeStructure, 3)
-var RoadSnapNotice_Code *smithy.Schema
-
-var RoadSnapNotice_Title *smithy.Schema
-
-var RoadSnapNotice_TracePointIndexes *smithy.Schema
-
-var RoadSnapNoticeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapNoticeCode",
-}, smithy.ShapeTypeEnum, 7, &smithytraits.Sensitive{})
-var RoadSnapNoticeCode_TRACE_POINTS_HEADING_IGNORED *smithy.Schema
-
-var RoadSnapNoticeCode_TRACE_POINTS_IGNORED *smithy.Schema
-
-var RoadSnapNoticeCode_TRACE_POINTS_MOVED_BY_LARGE_DISTANCE *smithy.Schema
-
-var RoadSnapNoticeCode_TRACE_POINTS_NOT_MATCHED *smithy.Schema
-
-var RoadSnapNoticeCode_TRACE_POINTS_OUT_OF_SEQUENCE *smithy.Schema
-
-var RoadSnapNoticeCode_TRACE_POINTS_SPEED_ESTIMATED *smithy.Schema
-
-var RoadSnapNoticeCode_TRACE_POINTS_SPEED_IGNORED *smithy.Schema
-
-var _RoadSnapNoticeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapNoticeList",
-}, smithy.ShapeTypeList, 1)
-var _RoadSnapNoticeList_member *smithy.Schema
-
-var RoadSnapSnappedGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapSnappedGeometry",
-}, smithy.ShapeTypeStructure, 2)
-var RoadSnapSnappedGeometry_LineString *smithy.Schema
-
-var RoadSnapSnappedGeometry_Polyline *smithy.Schema
-
-var RoadSnapSnappedTracePoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapSnappedTracePoint",
-}, smithy.ShapeTypeStructure, 3)
-var RoadSnapSnappedTracePoint_Confidence *smithy.Schema
-
-var RoadSnapSnappedTracePoint_OriginalPosition *smithy.Schema
-
-var RoadSnapSnappedTracePoint_SnappedPosition *smithy.Schema
-
-var _RoadSnapSnappedTracePointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapSnappedTracePointList",
-}, smithy.ShapeTypeList, 1)
-var _RoadSnapSnappedTracePointList_member *smithy.Schema
-
-var RoadSnapTracePoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapTracePoint",
-}, smithy.ShapeTypeStructure, 4)
-var RoadSnapTracePoint_Heading *smithy.Schema
-
-var RoadSnapTracePoint_Position *smithy.Schema
-
-var RoadSnapTracePoint_Speed *smithy.Schema
-
-var RoadSnapTracePoint_Timestamp *smithy.Schema
-
-var _RoadSnapTracePointIndexList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapTracePointIndexList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _RoadSnapTracePointIndexList_member *smithy.Schema
-
-var _RoadSnapTracePointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapTracePointList",
-}, smithy.ShapeTypeList, 1)
-var _RoadSnapTracePointList_member *smithy.Schema
-
-var RoadSnapTrailerOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapTrailerOptions",
-}, smithy.ShapeTypeStructure, 1)
-var RoadSnapTrailerOptions_TrailerCount *smithy.Schema
-
-var RoadSnapTravelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapTravelMode",
-}, smithy.ShapeTypeEnum, 4)
-var RoadSnapTravelMode_CAR *smithy.Schema
-
-var RoadSnapTravelMode_PEDESTRIAN *smithy.Schema
-
-var RoadSnapTravelMode_SCOOTER *smithy.Schema
-
-var RoadSnapTravelMode_TRUCK *smithy.Schema
-
-var RoadSnapTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapTravelModeOptions",
-}, smithy.ShapeTypeStructure, 1)
-var RoadSnapTravelModeOptions_Truck *smithy.Schema
-
-var RoadSnapTruckOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoadSnapTruckOptions",
-}, smithy.ShapeTypeStructure, 7)
-var RoadSnapTruckOptions_GrossWeight *smithy.Schema
-
-var RoadSnapTruckOptions_HazardousCargos *smithy.Schema
-
-var RoadSnapTruckOptions_Height *smithy.Schema
-
-var RoadSnapTruckOptions_Length *smithy.Schema
-
-var RoadSnapTruckOptions_Trailer *smithy.Schema
-
-var RoadSnapTruckOptions_TunnelRestrictionCode *smithy.Schema
-
-var RoadSnapTruckOptions_Width *smithy.Schema
-
-var _RoundaboutAngle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoundaboutAngle",
-}, smithy.ShapeTypeDouble, 0)
-
-var Route = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "Route",
-}, smithy.ShapeTypeStructure, 3)
-var Route_Legs *smithy.Schema
-
-var Route_MajorRoadLabels *smithy.Schema
-
-var Route_Summary *smithy.Schema
-
-var RouteAccessibilityAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAccessibilityAttribute",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteAccessibilityAttribute_WHEELCHAIR *smithy.Schema
-
-var _RouteAccessibilityAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAccessibilityAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteAccessibilityAttributeList_member *smithy.Schema
-
-var RouteAccessibilityAvailability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAccessibilityAvailability",
-}, smithy.ShapeTypeEnum, 4)
-var RouteAccessibilityAvailability_AVAILABLE *smithy.Schema
-
-var RouteAccessibilityAvailability_LIMITED *smithy.Schema
-
-var RouteAccessibilityAvailability_UNAVAILABLE *smithy.Schema
-
-var RouteAccessibilityAvailability_UNKNOWN *smithy.Schema
-
-var RouteAccessibilityAvailabilityDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAccessibilityAvailabilityDetails",
-}, smithy.ShapeTypeStructure, 1)
-var RouteAccessibilityAvailabilityDetails_Wheelchair *smithy.Schema
-
-var RouteAccessPointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAccessPointDetails",
-}, smithy.ShapeTypeStructure, 1)
-var RouteAccessPointDetails_Accessibility *smithy.Schema
-
-var RouteAllowOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAllowOptions",
-}, smithy.ShapeTypeStructure, 2)
-var RouteAllowOptions_Hot *smithy.Schema
-
-var RouteAllowOptions_Hov *smithy.Schema
-
-var RouteAttribution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAttribution",
-}, smithy.ShapeTypeStructure, 2)
-var RouteAttribution_AttributionType *smithy.Schema
-
-var RouteAttribution_WebLink *smithy.Schema
-
-var _RouteAttributionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAttributionList",
-}, smithy.ShapeTypeList, 1)
-var _RouteAttributionList_member *smithy.Schema
-
-var RouteAttributionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAttributionType",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var RouteAttributionType_DISCLAIMER *smithy.Schema
-
-var RouteAttributionType_TARIFF *smithy.Schema
-
-var RouteAvoidanceArea = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAvoidanceArea",
-}, smithy.ShapeTypeStructure, 2)
-var RouteAvoidanceArea_Except *smithy.Schema
-
-var RouteAvoidanceArea_Geometry *smithy.Schema
-
-var RouteAvoidanceAreaGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAvoidanceAreaGeometry",
-}, smithy.ShapeTypeStructure, 5)
-var RouteAvoidanceAreaGeometry_Corridor *smithy.Schema
-
-var RouteAvoidanceAreaGeometry_BoundingBox *smithy.Schema
-
-var RouteAvoidanceAreaGeometry_Polygon *smithy.Schema
-
-var RouteAvoidanceAreaGeometry_PolylineCorridor *smithy.Schema
-
-var RouteAvoidanceAreaGeometry_PolylinePolygon *smithy.Schema
-
-var _RouteAvoidanceAreaGeometryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAvoidanceAreaGeometryList",
-}, smithy.ShapeTypeList, 1)
-var _RouteAvoidanceAreaGeometryList_member *smithy.Schema
-
-var _RouteAvoidanceAreaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAvoidanceAreaList",
-}, smithy.ShapeTypeList, 1)
-var _RouteAvoidanceAreaList_member *smithy.Schema
-
-var RouteAvoidanceOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAvoidanceOptions",
-}, smithy.ShapeTypeStructure, 12)
-var RouteAvoidanceOptions_Areas *smithy.Schema
-
-var RouteAvoidanceOptions_CarShuttleTrains *smithy.Schema
-
-var RouteAvoidanceOptions_ControlledAccessHighways *smithy.Schema
-
-var RouteAvoidanceOptions_DirtRoads *smithy.Schema
-
-var RouteAvoidanceOptions_Ferries *smithy.Schema
-
-var RouteAvoidanceOptions_SeasonalClosure *smithy.Schema
-
-var RouteAvoidanceOptions_TollRoads *smithy.Schema
-
-var RouteAvoidanceOptions_TollTransponders *smithy.Schema
-
-var RouteAvoidanceOptions_TruckRoadTypes *smithy.Schema
-
-var RouteAvoidanceOptions_Tunnels *smithy.Schema
-
-var RouteAvoidanceOptions_UTurns *smithy.Schema
-
-var RouteAvoidanceOptions_ZoneCategories *smithy.Schema
-
-var RouteAvoidanceZoneCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAvoidanceZoneCategory",
-}, smithy.ShapeTypeStructure, 1)
-var RouteAvoidanceZoneCategory_Category *smithy.Schema
-
-var _RouteAvoidanceZoneCategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteAvoidanceZoneCategoryList",
-}, smithy.ShapeTypeList, 1)
-var _RouteAvoidanceZoneCategoryList_member *smithy.Schema
-
-var RouteCarOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteCarOptions",
-}, smithy.ShapeTypeStructure, 4)
-var RouteCarOptions_EngineType *smithy.Schema
-
-var RouteCarOptions_LicensePlate *smithy.Schema
-
-var RouteCarOptions_MaxSpeed *smithy.Schema
-
-var RouteCarOptions_Occupancy *smithy.Schema
-
-var RouteChargeStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteChargeStepDetails",
-}, smithy.ShapeTypeStructure, 3)
-var RouteChargeStepDetails_ArrivalCharge *smithy.Schema
-
-var RouteChargeStepDetails_ConsumablePower *smithy.Schema
-
-var RouteChargeStepDetails_DesiredCharge *smithy.Schema
-
-var RouteContinueHighwayStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteContinueHighwayStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteContinueHighwayStepDetails_Intersection *smithy.Schema
-
-var RouteContinueHighwayStepDetails_SteeringDirection *smithy.Schema
-
-var RouteContinueHighwayStepDetails_TurnAngle *smithy.Schema
-
-var RouteContinueHighwayStepDetails_TurnIntensity *smithy.Schema
-
-var RouteContinueStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteContinueStepDetails",
-}, smithy.ShapeTypeStructure, 1)
-var RouteContinueStepDetails_Intersection *smithy.Schema
-
-var RouteDestinationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteDestinationOptions",
-}, smithy.ShapeTypeStructure, 6)
-var RouteDestinationOptions_AvoidActionsForDistance *smithy.Schema
-
-var RouteDestinationOptions_AvoidUTurns *smithy.Schema
-
-var RouteDestinationOptions_Heading *smithy.Schema
-
-var RouteDestinationOptions_Matching *smithy.Schema
-
-var RouteDestinationOptions_SideOfStreet *smithy.Schema
-
-var RouteDestinationOptions_StopDuration *smithy.Schema
-
-var RouteDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteDirection",
-}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
-var RouteDirection_EAST *smithy.Schema
-
-var RouteDirection_NORTH *smithy.Schema
-
-var RouteDirection_SOUTH *smithy.Schema
-
-var RouteDirection_WEST *smithy.Schema
-
-var RouteDriverOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteDriverOptions",
-}, smithy.ShapeTypeStructure, 1)
-var RouteDriverOptions_Schedule *smithy.Schema
-
-var RouteDriverScheduleInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteDriverScheduleInterval",
-}, smithy.ShapeTypeStructure, 2)
-var RouteDriverScheduleInterval_DriveDuration *smithy.Schema
-
-var RouteDriverScheduleInterval_RestDuration *smithy.Schema
-
-var _RouteDriverScheduleIntervalList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteDriverScheduleIntervalList",
-}, smithy.ShapeTypeList, 1)
-var _RouteDriverScheduleIntervalList_member *smithy.Schema
-
-var RouteEmissionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteEmissionType",
-}, smithy.ShapeTypeStructure, 2)
-var RouteEmissionType_Co2EmissionClass *smithy.Schema
-
-var RouteEmissionType_Type *smithy.Schema
-
-var RouteEngineType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteEngineType",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteEngineType_ELECTRIC *smithy.Schema
-
-var RouteEngineType_INTERNAL_COMBUSTION *smithy.Schema
-
-var RouteEngineType_PLUGIN_HYBRID *smithy.Schema
-
-var RouteEnterHighwayStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteEnterHighwayStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteEnterHighwayStepDetails_Intersection *smithy.Schema
-
-var RouteEnterHighwayStepDetails_SteeringDirection *smithy.Schema
-
-var RouteEnterHighwayStepDetails_TurnAngle *smithy.Schema
-
-var RouteEnterHighwayStepDetails_TurnIntensity *smithy.Schema
-
-var RouteExclusionOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteExclusionOptions",
-}, smithy.ShapeTypeStructure, 1)
-var RouteExclusionOptions_Countries *smithy.Schema
-
-var RouteExitStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteExitStepDetails",
-}, smithy.ShapeTypeStructure, 5)
-var RouteExitStepDetails_Intersection *smithy.Schema
-
-var RouteExitStepDetails_RelativeExit *smithy.Schema
-
-var RouteExitStepDetails_SteeringDirection *smithy.Schema
-
-var RouteExitStepDetails_TurnAngle *smithy.Schema
-
-var RouteExitStepDetails_TurnIntensity *smithy.Schema
-
-var RouteFerryAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryAfterTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RouteFerryAfterTravelStep_Duration *smithy.Schema
-
-var RouteFerryAfterTravelStep_Instruction *smithy.Schema
-
-var RouteFerryAfterTravelStep_Type *smithy.Schema
-
-var _RouteFerryAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryAfterTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteFerryAfterTravelStepList_member *smithy.Schema
-
-var RouteFerryAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryAfterTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteFerryAfterTravelStepType_DEBOARD *smithy.Schema
-
-var RouteFerryArrival = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryArrival",
-}, smithy.ShapeTypeStructure, 2)
-var RouteFerryArrival_Place *smithy.Schema
-
-var RouteFerryArrival_Time *smithy.Schema
-
-var RouteFerryBeforeTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryBeforeTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RouteFerryBeforeTravelStep_Duration *smithy.Schema
-
-var RouteFerryBeforeTravelStep_Instruction *smithy.Schema
-
-var RouteFerryBeforeTravelStep_Type *smithy.Schema
-
-var _RouteFerryBeforeTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryBeforeTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteFerryBeforeTravelStepList_member *smithy.Schema
-
-var RouteFerryBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryBeforeTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteFerryBeforeTravelStepType_BOARD *smithy.Schema
-
-var RouteFerryDeparture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryDeparture",
-}, smithy.ShapeTypeStructure, 2)
-var RouteFerryDeparture_Place *smithy.Schema
-
-var RouteFerryDeparture_Time *smithy.Schema
-
-var RouteFerryLegDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryLegDetails",
-}, smithy.ShapeTypeStructure, 10)
-var RouteFerryLegDetails_AfterTravelSteps *smithy.Schema
-
-var RouteFerryLegDetails_Arrival *smithy.Schema
-
-var RouteFerryLegDetails_BeforeTravelSteps *smithy.Schema
-
-var RouteFerryLegDetails_Departure *smithy.Schema
-
-var RouteFerryLegDetails_Notices *smithy.Schema
-
-var RouteFerryLegDetails_PassThroughWaypoints *smithy.Schema
-
-var RouteFerryLegDetails_RouteName *smithy.Schema
-
-var RouteFerryLegDetails_Spans *smithy.Schema
-
-var RouteFerryLegDetails_Summary *smithy.Schema
-
-var RouteFerryLegDetails_TravelSteps *smithy.Schema
-
-var RouteFerryNotice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryNotice",
-}, smithy.ShapeTypeStructure, 2)
-var RouteFerryNotice_Code *smithy.Schema
-
-var RouteFerryNotice_Impact *smithy.Schema
-
-var RouteFerryNoticeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryNoticeCode",
-}, smithy.ShapeTypeEnum, 9)
-var RouteFerryNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
-
-var RouteFerryNoticeCode_NO_SCHEDULE *smithy.Schema
-
-var RouteFerryNoticeCode_OTHER *smithy.Schema
-
-var RouteFerryNoticeCode_VIOLATED_AVOID_FERRY *smithy.Schema
-
-var RouteFerryNoticeCode_VIOLATED_AVOID_RAIL_FERRY *smithy.Schema
-
-var RouteFerryNoticeCode_SEASONAL_CLOSURE *smithy.Schema
-
-var RouteFerryNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE *smithy.Schema
-
-var RouteFerryNoticeCode_VIOLATED_AVOID_AREAS *smithy.Schema
-
-var RouteFerryNoticeCode_VIOLATED_VEHICLE_RESTRICTION *smithy.Schema
-
-var _RouteFerryNoticeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryNoticeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteFerryNoticeList_member *smithy.Schema
-
-var RouteFerryOverviewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryOverviewSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteFerryOverviewSummary_Distance *smithy.Schema
-
-var RouteFerryOverviewSummary_Duration *smithy.Schema
-
-var RouteFerryPlace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryPlace",
-}, smithy.ShapeTypeStructure, 4)
-var RouteFerryPlace_Name *smithy.Schema
-
-var RouteFerryPlace_OriginalPosition *smithy.Schema
-
-var RouteFerryPlace_Position *smithy.Schema
-
-var RouteFerryPlace_WaypointIndex *smithy.Schema
-
-var RouteFerrySpan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerrySpan",
-}, smithy.ShapeTypeStructure, 6)
-var RouteFerrySpan_Country *smithy.Schema
-
-var RouteFerrySpan_Distance *smithy.Schema
-
-var RouteFerrySpan_Duration *smithy.Schema
-
-var RouteFerrySpan_GeometryOffset *smithy.Schema
-
-var RouteFerrySpan_Names *smithy.Schema
-
-var RouteFerrySpan_Region *smithy.Schema
-
-var _RouteFerrySpanList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerrySpanList",
-}, smithy.ShapeTypeList, 1)
-var _RouteFerrySpanList_member *smithy.Schema
-
-var RouteFerrySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerrySummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteFerrySummary_Overview *smithy.Schema
-
-var RouteFerrySummary_TravelOnly *smithy.Schema
-
-var RouteFerryTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryTravelOnlySummary",
-}, smithy.ShapeTypeStructure, 1)
-var RouteFerryTravelOnlySummary_Duration *smithy.Schema
-
-var RouteFerryTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryTravelStep",
-}, smithy.ShapeTypeStructure, 5)
-var RouteFerryTravelStep_Distance *smithy.Schema
-
-var RouteFerryTravelStep_Duration *smithy.Schema
-
-var RouteFerryTravelStep_GeometryOffset *smithy.Schema
-
-var RouteFerryTravelStep_Instruction *smithy.Schema
-
-var RouteFerryTravelStep_Type *smithy.Schema
-
-var _RouteFerryTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteFerryTravelStepList_member *smithy.Schema
-
-var RouteFerryTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteFerryTravelStepType",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteFerryTravelStepType_DEPART *smithy.Schema
-
-var RouteFerryTravelStepType_CONTINUE *smithy.Schema
-
-var RouteFerryTravelStepType_ARRIVE *smithy.Schema
-
-var RouteHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteHazardousCargoType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var RouteHazardousCargoType_COMBUSTIBLE *smithy.Schema
-
-var RouteHazardousCargoType_CORROSIVE *smithy.Schema
-
-var RouteHazardousCargoType_EXPLOSIVE *smithy.Schema
-
-var RouteHazardousCargoType_FLAMMABLE *smithy.Schema
-
-var RouteHazardousCargoType_GAS *smithy.Schema
-
-var RouteHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
-
-var RouteHazardousCargoType_ORGANIC *smithy.Schema
-
-var RouteHazardousCargoType_OTHER *smithy.Schema
-
-var RouteHazardousCargoType_POISON *smithy.Schema
-
-var RouteHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
-
-var RouteHazardousCargoType_RADIOACTIVE *smithy.Schema
-
-var _RouteHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteHazardousCargoTypeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteHazardousCargoTypeList_member *smithy.Schema
-
-var RouteIntermodalEnabledLegs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteIntermodalEnabledLegs",
-}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
-var RouteIntermodalEnabledLegs_FIRST_LEG *smithy.Schema
-
-var RouteIntermodalEnabledLegs_LAST_LEG *smithy.Schema
-
-var RouteIntermodalEnabledLegs_ENTIRE_ROUTE *smithy.Schema
-
-var RouteIntermodalEnabledLegs_NONE *smithy.Schema
-
-var _RouteIntermodalEnabledLegsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteIntermodalEnabledLegsList",
-}, smithy.ShapeTypeList, 1)
-var _RouteIntermodalEnabledLegsList_member *smithy.Schema
-
-var RouteIntermodalOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteIntermodalOptions",
-}, smithy.ShapeTypeStructure, 7)
-var RouteIntermodalOptions_AccessibilityAttributes *smithy.Schema
-
-var RouteIntermodalOptions_MaxTransfers *smithy.Schema
-
-var RouteIntermodalOptions_Pedestrian *smithy.Schema
-
-var RouteIntermodalOptions_Rental *smithy.Schema
-
-var RouteIntermodalOptions_Taxi *smithy.Schema
-
-var RouteIntermodalOptions_Transit *smithy.Schema
-
-var RouteIntermodalOptions_Vehicle *smithy.Schema
-
-var RouteIntermodalPedestrianOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteIntermodalPedestrianOptions",
-}, smithy.ShapeTypeStructure, 2)
-var RouteIntermodalPedestrianOptions_MaxDistance *smithy.Schema
-
-var RouteIntermodalPedestrianOptions_Speed *smithy.Schema
-
-var RouteIntermodalRentalOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteIntermodalRentalOptions",
-}, smithy.ShapeTypeStructure, 3)
-var RouteIntermodalRentalOptions_AllowedModes *smithy.Schema
-
-var RouteIntermodalRentalOptions_EnabledFor *smithy.Schema
-
-var RouteIntermodalRentalOptions_ExcludedModes *smithy.Schema
-
-var RouteIntermodalTaxiOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteIntermodalTaxiOptions",
-}, smithy.ShapeTypeStructure, 3)
-var RouteIntermodalTaxiOptions_AllowedModes *smithy.Schema
-
-var RouteIntermodalTaxiOptions_EnabledFor *smithy.Schema
-
-var RouteIntermodalTaxiOptions_ExcludedModes *smithy.Schema
-
-var RouteIntermodalTransitOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteIntermodalTransitOptions",
-}, smithy.ShapeTypeStructure, 3)
-var RouteIntermodalTransitOptions_AllowedModes *smithy.Schema
-
-var RouteIntermodalTransitOptions_EnabledFor *smithy.Schema
-
-var RouteIntermodalTransitOptions_ExcludedModes *smithy.Schema
-
-var RouteIntermodalVehicleOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteIntermodalVehicleOptions",
-}, smithy.ShapeTypeStructure, 3)
-var RouteIntermodalVehicleOptions_AllowedModes *smithy.Schema
-
-var RouteIntermodalVehicleOptions_EnabledFor *smithy.Schema
-
-var RouteIntermodalVehicleOptions_ExcludedModes *smithy.Schema
-
-var RouteKeepStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteKeepStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteKeepStepDetails_Intersection *smithy.Schema
-
-var RouteKeepStepDetails_SteeringDirection *smithy.Schema
-
-var RouteKeepStepDetails_TurnAngle *smithy.Schema
-
-var RouteKeepStepDetails_TurnIntensity *smithy.Schema
-
-var RouteLeg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteLeg",
-}, smithy.ShapeTypeStructure, 10)
-var RouteLeg_FerryLegDetails *smithy.Schema
-
-var RouteLeg_Geometry *smithy.Schema
-
-var RouteLeg_Language *smithy.Schema
-
-var RouteLeg_PedestrianLegDetails *smithy.Schema
-
-var RouteLeg_TravelMode *smithy.Schema
-
-var RouteLeg_Type *smithy.Schema
-
-var RouteLeg_VehicleLegDetails *smithy.Schema
-
-var RouteLeg_RentalLegDetails *smithy.Schema
-
-var RouteLeg_TaxiLegDetails *smithy.Schema
-
-var RouteLeg_TransitLegDetails *smithy.Schema
-
-var RouteLegAdditionalFeature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteLegAdditionalFeature",
-}, smithy.ShapeTypeEnum, 12, &smithytraits.Sensitive{})
-var RouteLegAdditionalFeature_ELEVATION *smithy.Schema
-
-var RouteLegAdditionalFeature_INCIDENTS *smithy.Schema
-
-var RouteLegAdditionalFeature_PASS_THROUGH_WAYPOINTS *smithy.Schema
-
-var RouteLegAdditionalFeature_SUMMARY *smithy.Schema
-
-var RouteLegAdditionalFeature_TOLLS *smithy.Schema
-
-var RouteLegAdditionalFeature_TRAVEL_STEP_INSTRUCTIONS *smithy.Schema
-
-var RouteLegAdditionalFeature_TRUCK_ROAD_TYPES *smithy.Schema
-
-var RouteLegAdditionalFeature_TYPICAL_DURATION *smithy.Schema
-
-var RouteLegAdditionalFeature_ZONES *smithy.Schema
-
-var RouteLegAdditionalFeature_BOOKINGS *smithy.Schema
-
-var RouteLegAdditionalFeature_INTERMEDIATE_STOPS *smithy.Schema
-
-var RouteLegAdditionalFeature_NEXT_DEPARTURES *smithy.Schema
-
-var _RouteLegAdditionalFeatureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteLegAdditionalFeatureList",
-}, smithy.ShapeTypeList, 1)
-var _RouteLegAdditionalFeatureList_member *smithy.Schema
-
-var RouteLegGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteLegGeometry",
-}, smithy.ShapeTypeStructure, 2)
-var RouteLegGeometry_LineString *smithy.Schema
-
-var RouteLegGeometry_Polyline *smithy.Schema
-
-var _RouteLegList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteLegList",
-}, smithy.ShapeTypeList, 1)
-var _RouteLegList_member *smithy.Schema
-
-var RouteLegTravelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteLegTravelMode",
-}, smithy.ShapeTypeEnum, 20, &smithytraits.Sensitive{})
-var RouteLegTravelMode_CAR *smithy.Schema
-
-var RouteLegTravelMode_FERRY *smithy.Schema
-
-var RouteLegTravelMode_PEDESTRIAN *smithy.Schema
-
-var RouteLegTravelMode_SCOOTER *smithy.Schema
-
-var RouteLegTravelMode_TRUCK *smithy.Schema
-
-var RouteLegTravelMode_CAR_SHUTTLE_TRAIN *smithy.Schema
-
-var RouteLegTravelMode_AERIAL_TRAMWAY *smithy.Schema
-
-var RouteLegTravelMode_AIRPLANE *smithy.Schema
-
-var RouteLegTravelMode_BUS *smithy.Schema
-
-var RouteLegTravelMode_BUS_RAPID_TRANSIT *smithy.Schema
-
-var RouteLegTravelMode_CITY_TRAIN *smithy.Schema
-
-var RouteLegTravelMode_FUNICULAR_RAILWAY *smithy.Schema
-
-var RouteLegTravelMode_HIGH_SPEED_TRAIN *smithy.Schema
-
-var RouteLegTravelMode_INTERCITY_TRAIN *smithy.Schema
-
-var RouteLegTravelMode_INTERREGIONAL_TRAIN *smithy.Schema
-
-var RouteLegTravelMode_LIGHT_RAIL *smithy.Schema
-
-var RouteLegTravelMode_MONORAIL *smithy.Schema
-
-var RouteLegTravelMode_PRIVATE_BUS *smithy.Schema
-
-var RouteLegTravelMode_REGIONAL_TRAIN *smithy.Schema
-
-var RouteLegTravelMode_SUBWAY *smithy.Schema
-
-var RouteLegType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteLegType",
-}, smithy.ShapeTypeEnum, 6, &smithytraits.Sensitive{})
-var RouteLegType_FERRY *smithy.Schema
-
-var RouteLegType_PEDESTRIAN *smithy.Schema
-
-var RouteLegType_VEHICLE *smithy.Schema
-
-var RouteLegType_RENTAL *smithy.Schema
-
-var RouteLegType_TAXI *smithy.Schema
-
-var RouteLegType_TRANSIT *smithy.Schema
-
-var _RouteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteList",
-}, smithy.ShapeTypeList, 1)
-var _RouteList_member *smithy.Schema
-
-var RouteMajorRoadLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMajorRoadLabel",
-}, smithy.ShapeTypeStructure, 2)
-var RouteMajorRoadLabel_RoadName *smithy.Schema
-
-var RouteMajorRoadLabel_RouteNumber *smithy.Schema
-
-var _RouteMajorRoadLabelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMajorRoadLabelList",
-}, smithy.ShapeTypeList, 1)
-var _RouteMajorRoadLabelList_member *smithy.Schema
-
-var RouteMatchingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatchingOptions",
-}, smithy.ShapeTypeStructure, 4)
-var RouteMatchingOptions_NameHint *smithy.Schema
-
-var RouteMatchingOptions_OnRoadThreshold *smithy.Schema
-
-var RouteMatchingOptions_Radius *smithy.Schema
-
-var RouteMatchingOptions_Strategy *smithy.Schema
-
-var _RouteMatrix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrix",
-}, smithy.ShapeTypeList, 1)
-var _RouteMatrix_member *smithy.Schema
-
-var RouteMatrixAllowOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixAllowOptions",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var RouteMatrixAllowOptions_Hot *smithy.Schema
-
-var RouteMatrixAllowOptions_Hov *smithy.Schema
-
-var RouteMatrixAutoCircle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixAutoCircle",
-}, smithy.ShapeTypeStructure, 2)
-var RouteMatrixAutoCircle_Margin *smithy.Schema
-
-var RouteMatrixAutoCircle_MaxRadius *smithy.Schema
-
-var RouteMatrixAvoidanceArea = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixAvoidanceArea",
-}, smithy.ShapeTypeStructure, 1)
-var RouteMatrixAvoidanceArea_Geometry *smithy.Schema
-
-var RouteMatrixAvoidanceAreaGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixAvoidanceAreaGeometry",
-}, smithy.ShapeTypeStructure, 3)
-var RouteMatrixAvoidanceAreaGeometry_BoundingBox *smithy.Schema
-
-var RouteMatrixAvoidanceAreaGeometry_Polygon *smithy.Schema
-
-var RouteMatrixAvoidanceAreaGeometry_PolylinePolygon *smithy.Schema
-
-var _RouteMatrixAvoidanceAreaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixAvoidanceAreaList",
-}, smithy.ShapeTypeList, 1)
-var _RouteMatrixAvoidanceAreaList_member *smithy.Schema
-
-var RouteMatrixAvoidanceOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixAvoidanceOptions",
-}, smithy.ShapeTypeStructure, 11)
-var RouteMatrixAvoidanceOptions_Areas *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_CarShuttleTrains *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_ControlledAccessHighways *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_DirtRoads *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_Ferries *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_TollRoads *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_TollTransponders *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_TruckRoadTypes *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_Tunnels *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_UTurns *smithy.Schema
-
-var RouteMatrixAvoidanceOptions_ZoneCategories *smithy.Schema
-
-var RouteMatrixAvoidanceZoneCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixAvoidanceZoneCategory",
-}, smithy.ShapeTypeStructure, 1)
-var RouteMatrixAvoidanceZoneCategory_Category *smithy.Schema
-
-var _RouteMatrixAvoidanceZoneCategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixAvoidanceZoneCategoryList",
-}, smithy.ShapeTypeList, 1)
-var _RouteMatrixAvoidanceZoneCategoryList_member *smithy.Schema
-
-var RouteMatrixBoundary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixBoundary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteMatrixBoundary_Geometry *smithy.Schema
-
-var RouteMatrixBoundary_Unbounded *smithy.Schema
-
-var RouteMatrixBoundaryGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixBoundaryGeometry",
-}, smithy.ShapeTypeStructure, 4)
-var RouteMatrixBoundaryGeometry_AutoCircle *smithy.Schema
-
-var RouteMatrixBoundaryGeometry_Circle *smithy.Schema
-
-var RouteMatrixBoundaryGeometry_BoundingBox *smithy.Schema
-
-var RouteMatrixBoundaryGeometry_Polygon *smithy.Schema
-
-var RouteMatrixCarOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixCarOptions",
-}, smithy.ShapeTypeStructure, 3)
-var RouteMatrixCarOptions_LicensePlate *smithy.Schema
-
-var RouteMatrixCarOptions_MaxSpeed *smithy.Schema
-
-var RouteMatrixCarOptions_Occupancy *smithy.Schema
-
-var RouteMatrixDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixDestination",
-}, smithy.ShapeTypeStructure, 2)
-var RouteMatrixDestination_Options *smithy.Schema
-
-var RouteMatrixDestination_Position *smithy.Schema
-
-var _RouteMatrixDestinationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixDestinationList",
-}, smithy.ShapeTypeList, 1)
-var _RouteMatrixDestinationList_member *smithy.Schema
-
-var RouteMatrixDestinationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixDestinationOptions",
-}, smithy.ShapeTypeStructure, 4)
-var RouteMatrixDestinationOptions_AvoidActionsForDistance *smithy.Schema
-
-var RouteMatrixDestinationOptions_Heading *smithy.Schema
-
-var RouteMatrixDestinationOptions_Matching *smithy.Schema
-
-var RouteMatrixDestinationOptions_SideOfStreet *smithy.Schema
-
-var RouteMatrixEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixEntry",
-}, smithy.ShapeTypeStructure, 3)
-var RouteMatrixEntry_Distance *smithy.Schema
-
-var RouteMatrixEntry_Duration *smithy.Schema
-
-var RouteMatrixEntry_Error *smithy.Schema
-
-var RouteMatrixErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixErrorCode",
-}, smithy.ShapeTypeEnum, 9)
-var RouteMatrixErrorCode_NO_MATCH *smithy.Schema
-
-var RouteMatrixErrorCode_NO_MATCH_DESTINATION *smithy.Schema
-
-var RouteMatrixErrorCode_NO_MATCH_ORIGIN *smithy.Schema
-
-var RouteMatrixErrorCode_NO_ROUTE *smithy.Schema
-
-var RouteMatrixErrorCode_OUT_OF_BOUNDS *smithy.Schema
-
-var RouteMatrixErrorCode_OUT_OF_BOUNDS_DESTINATION *smithy.Schema
-
-var RouteMatrixErrorCode_OUT_OF_BOUNDS_ORIGIN *smithy.Schema
-
-var RouteMatrixErrorCode_OTHER *smithy.Schema
-
-var RouteMatrixErrorCode_VIOLATION *smithy.Schema
-
-var RouteMatrixExclusionOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixExclusionOptions",
-}, smithy.ShapeTypeStructure, 1)
-var RouteMatrixExclusionOptions_Countries *smithy.Schema
-
-var RouteMatrixHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixHazardousCargoType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var RouteMatrixHazardousCargoType_COMBUSTIBLE *smithy.Schema
-
-var RouteMatrixHazardousCargoType_CORROSIVE *smithy.Schema
-
-var RouteMatrixHazardousCargoType_EXPLOSIVE *smithy.Schema
-
-var RouteMatrixHazardousCargoType_FLAMMABLE *smithy.Schema
-
-var RouteMatrixHazardousCargoType_GAS *smithy.Schema
-
-var RouteMatrixHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
-
-var RouteMatrixHazardousCargoType_ORGANIC *smithy.Schema
-
-var RouteMatrixHazardousCargoType_OTHER *smithy.Schema
-
-var RouteMatrixHazardousCargoType_POISON *smithy.Schema
-
-var RouteMatrixHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
-
-var RouteMatrixHazardousCargoType_RADIOACTIVE *smithy.Schema
-
-var _RouteMatrixHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixHazardousCargoTypeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteMatrixHazardousCargoTypeList_member *smithy.Schema
-
-var RouteMatrixMatchingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixMatchingOptions",
-}, smithy.ShapeTypeStructure, 4)
-var RouteMatrixMatchingOptions_NameHint *smithy.Schema
-
-var RouteMatrixMatchingOptions_OnRoadThreshold *smithy.Schema
-
-var RouteMatrixMatchingOptions_Radius *smithy.Schema
-
-var RouteMatrixMatchingOptions_Strategy *smithy.Schema
-
-var RouteMatrixOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixOrigin",
-}, smithy.ShapeTypeStructure, 2)
-var RouteMatrixOrigin_Options *smithy.Schema
-
-var RouteMatrixOrigin_Position *smithy.Schema
-
-var _RouteMatrixOriginList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixOriginList",
-}, smithy.ShapeTypeList, 1)
-var _RouteMatrixOriginList_member *smithy.Schema
-
-var RouteMatrixOriginOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixOriginOptions",
-}, smithy.ShapeTypeStructure, 4)
-var RouteMatrixOriginOptions_AvoidActionsForDistance *smithy.Schema
-
-var RouteMatrixOriginOptions_Heading *smithy.Schema
-
-var RouteMatrixOriginOptions_Matching *smithy.Schema
-
-var RouteMatrixOriginOptions_SideOfStreet *smithy.Schema
-
-var _RouteMatrixRow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixRow",
-}, smithy.ShapeTypeList, 1)
-var _RouteMatrixRow_member *smithy.Schema
-
-var RouteMatrixScooterOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixScooterOptions",
-}, smithy.ShapeTypeStructure, 3)
-var RouteMatrixScooterOptions_LicensePlate *smithy.Schema
-
-var RouteMatrixScooterOptions_MaxSpeed *smithy.Schema
-
-var RouteMatrixScooterOptions_Occupancy *smithy.Schema
-
-var RouteMatrixSideOfStreetOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixSideOfStreetOptions",
-}, smithy.ShapeTypeStructure, 2)
-var RouteMatrixSideOfStreetOptions_Position *smithy.Schema
-
-var RouteMatrixSideOfStreetOptions_UseWith *smithy.Schema
-
-var RouteMatrixTrafficOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixTrafficOptions",
-}, smithy.ShapeTypeStructure, 2)
-var RouteMatrixTrafficOptions_FlowEventThresholdOverride *smithy.Schema
-
-var RouteMatrixTrafficOptions_Usage *smithy.Schema
-
-var RouteMatrixTrailerOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixTrailerOptions",
-}, smithy.ShapeTypeStructure, 1)
-var RouteMatrixTrailerOptions_TrailerCount *smithy.Schema
-
-var RouteMatrixTravelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixTravelMode",
-}, smithy.ShapeTypeEnum, 4)
-var RouteMatrixTravelMode_CAR *smithy.Schema
-
-var RouteMatrixTravelMode_PEDESTRIAN *smithy.Schema
-
-var RouteMatrixTravelMode_SCOOTER *smithy.Schema
-
-var RouteMatrixTravelMode_TRUCK *smithy.Schema
-
-var RouteMatrixTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixTravelModeOptions",
-}, smithy.ShapeTypeStructure, 3)
-var RouteMatrixTravelModeOptions_Car *smithy.Schema
-
-var RouteMatrixTravelModeOptions_Scooter *smithy.Schema
-
-var RouteMatrixTravelModeOptions_Truck *smithy.Schema
-
-var RouteMatrixTruckOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixTruckOptions",
-}, smithy.ShapeTypeStructure, 16)
-var RouteMatrixTruckOptions_AxleCount *smithy.Schema
-
-var RouteMatrixTruckOptions_GrossWeight *smithy.Schema
-
-var RouteMatrixTruckOptions_HazardousCargos *smithy.Schema
-
-var RouteMatrixTruckOptions_Height *smithy.Schema
-
-var RouteMatrixTruckOptions_KpraLength *smithy.Schema
-
-var RouteMatrixTruckOptions_Length *smithy.Schema
-
-var RouteMatrixTruckOptions_LicensePlate *smithy.Schema
-
-var RouteMatrixTruckOptions_MaxSpeed *smithy.Schema
-
-var RouteMatrixTruckOptions_Occupancy *smithy.Schema
-
-var RouteMatrixTruckOptions_PayloadCapacity *smithy.Schema
-
-var RouteMatrixTruckOptions_Trailer *smithy.Schema
-
-var RouteMatrixTruckOptions_TruckType *smithy.Schema
-
-var RouteMatrixTruckOptions_TunnelRestrictionCode *smithy.Schema
-
-var RouteMatrixTruckOptions_WeightPerAxle *smithy.Schema
-
-var RouteMatrixTruckOptions_WeightPerAxleGroup *smithy.Schema
-
-var RouteMatrixTruckOptions_Width *smithy.Schema
-
-var RouteMatrixTruckType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixTruckType",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteMatrixTruckType_LIGHT_TRUCK *smithy.Schema
-
-var RouteMatrixTruckType_STRAIGHT_TRUCK *smithy.Schema
-
-var RouteMatrixTruckType_TRACTOR *smithy.Schema
-
-var RouteMatrixVehicleLicensePlate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixVehicleLicensePlate",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var RouteMatrixVehicleLicensePlate_LastCharacter *smithy.Schema
-
-var RouteMatrixZoneCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteMatrixZoneCategory",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteMatrixZoneCategory_CONGESTION_PRICING *smithy.Schema
-
-var RouteMatrixZoneCategory_ENVIRONMENTAL *smithy.Schema
-
-var RouteMatrixZoneCategory_VIGNETTE *smithy.Schema
-
-var RouteNoticeDetailRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteNoticeDetailRange",
-}, smithy.ShapeTypeStructure, 2)
-var RouteNoticeDetailRange_Min *smithy.Schema
-
-var RouteNoticeDetailRange_Max *smithy.Schema
-
-var RouteNoticeImpact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteNoticeImpact",
-}, smithy.ShapeTypeEnum, 2)
-var RouteNoticeImpact_HIGH *smithy.Schema
-
-var RouteNoticeImpact_LOW *smithy.Schema
-
-var RouteNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteNumber",
-}, smithy.ShapeTypeStructure, 3)
-var RouteNumber_Direction *smithy.Schema
-
-var RouteNumber_Language *smithy.Schema
-
-var RouteNumber_Value *smithy.Schema
-
-var _RouteNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteNumberList",
-}, smithy.ShapeTypeList, 1)
-var _RouteNumberList_member *smithy.Schema
-
-var RouteOriginOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteOriginOptions",
-}, smithy.ShapeTypeStructure, 5)
-var RouteOriginOptions_AvoidActionsForDistance *smithy.Schema
-
-var RouteOriginOptions_AvoidUTurns *smithy.Schema
-
-var RouteOriginOptions_Heading *smithy.Schema
-
-var RouteOriginOptions_Matching *smithy.Schema
-
-var RouteOriginOptions_SideOfStreet *smithy.Schema
-
-var RoutePassThroughPlace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePassThroughPlace",
-}, smithy.ShapeTypeStructure, 3)
-var RoutePassThroughPlace_OriginalPosition *smithy.Schema
-
-var RoutePassThroughPlace_Position *smithy.Schema
-
-var RoutePassThroughPlace_WaypointIndex *smithy.Schema
-
-var RoutePassThroughWaypoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePassThroughWaypoint",
-}, smithy.ShapeTypeStructure, 2)
-var RoutePassThroughWaypoint_GeometryOffset *smithy.Schema
-
-var RoutePassThroughWaypoint_Place *smithy.Schema
-
-var _RoutePassThroughWaypointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePassThroughWaypointList",
-}, smithy.ShapeTypeList, 1)
-var _RoutePassThroughWaypointList_member *smithy.Schema
-
-var RoutePedestrianAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianAfterTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RoutePedestrianAfterTravelStep_Duration *smithy.Schema
-
-var RoutePedestrianAfterTravelStep_Instruction *smithy.Schema
-
-var RoutePedestrianAfterTravelStep_Type *smithy.Schema
-
-var _RoutePedestrianAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianAfterTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RoutePedestrianAfterTravelStepList_member *smithy.Schema
-
-var RoutePedestrianAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianAfterTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RoutePedestrianAfterTravelStepType_WAIT *smithy.Schema
-
-var RoutePedestrianArrival = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianArrival",
-}, smithy.ShapeTypeStructure, 2)
-var RoutePedestrianArrival_Place *smithy.Schema
-
-var RoutePedestrianArrival_Time *smithy.Schema
-
-var RoutePedestrianDeparture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianDeparture",
-}, smithy.ShapeTypeStructure, 2)
-var RoutePedestrianDeparture_Place *smithy.Schema
-
-var RoutePedestrianDeparture_Time *smithy.Schema
-
-var RoutePedestrianLegDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianLegDetails",
-}, smithy.ShapeTypeStructure, 8)
-var RoutePedestrianLegDetails_AfterTravelSteps *smithy.Schema
-
-var RoutePedestrianLegDetails_Arrival *smithy.Schema
-
-var RoutePedestrianLegDetails_Departure *smithy.Schema
-
-var RoutePedestrianLegDetails_Notices *smithy.Schema
-
-var RoutePedestrianLegDetails_PassThroughWaypoints *smithy.Schema
-
-var RoutePedestrianLegDetails_Spans *smithy.Schema
-
-var RoutePedestrianLegDetails_Summary *smithy.Schema
-
-var RoutePedestrianLegDetails_TravelSteps *smithy.Schema
-
-var RoutePedestrianNotice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianNotice",
-}, smithy.ShapeTypeStructure, 2)
-var RoutePedestrianNotice_Code *smithy.Schema
-
-var RoutePedestrianNotice_Impact *smithy.Schema
-
-var RoutePedestrianNoticeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianNoticeCode",
-}, smithy.ShapeTypeEnum, 6)
-var RoutePedestrianNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
-
-var RoutePedestrianNoticeCode_OTHER *smithy.Schema
-
-var RoutePedestrianNoticeCode_VIOLATED_AVOID_DIRT_ROAD *smithy.Schema
-
-var RoutePedestrianNoticeCode_VIOLATED_AVOID_TUNNEL *smithy.Schema
-
-var RoutePedestrianNoticeCode_VIOLATED_PEDESTRIAN_OPTION *smithy.Schema
-
-var RoutePedestrianNoticeCode_VIOLATED_AVOID_AREAS *smithy.Schema
-
-var _RoutePedestrianNoticeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianNoticeList",
-}, smithy.ShapeTypeList, 1)
-var _RoutePedestrianNoticeList_member *smithy.Schema
-
-var RoutePedestrianOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianOptions",
-}, smithy.ShapeTypeStructure, 1)
-var RoutePedestrianOptions_Speed *smithy.Schema
-
-var RoutePedestrianOverviewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianOverviewSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RoutePedestrianOverviewSummary_Distance *smithy.Schema
-
-var RoutePedestrianOverviewSummary_Duration *smithy.Schema
-
-var RoutePedestrianPlace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianPlace",
-}, smithy.ShapeTypeStructure, 8)
-var RoutePedestrianPlace_AccessPointDetails *smithy.Schema
-
-var RoutePedestrianPlace_Name *smithy.Schema
-
-var RoutePedestrianPlace_OriginalPosition *smithy.Schema
-
-var RoutePedestrianPlace_Position *smithy.Schema
-
-var RoutePedestrianPlace_SideOfStreet *smithy.Schema
-
-var RoutePedestrianPlace_StationDetails *smithy.Schema
-
-var RoutePedestrianPlace_Type *smithy.Schema
-
-var RoutePedestrianPlace_WaypointIndex *smithy.Schema
-
-var RoutePedestrianPlaceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianPlaceType",
-}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
-var RoutePedestrianPlaceType_ACCESS_POINT *smithy.Schema
-
-var RoutePedestrianPlaceType_DOCKING_STATION *smithy.Schema
-
-var RoutePedestrianPlaceType_PARKING_LOT *smithy.Schema
-
-var RoutePedestrianPlaceType_STATION *smithy.Schema
-
-var RoutePedestrianSpan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianSpan",
-}, smithy.ShapeTypeStructure, 15)
-var RoutePedestrianSpan_BestCaseDuration *smithy.Schema
-
-var RoutePedestrianSpan_Country *smithy.Schema
-
-var RoutePedestrianSpan_Distance *smithy.Schema
-
-var RoutePedestrianSpan_Duration *smithy.Schema
-
-var RoutePedestrianSpan_DynamicSpeed *smithy.Schema
-
-var RoutePedestrianSpan_FunctionalClassification *smithy.Schema
-
-var RoutePedestrianSpan_GeometryOffset *smithy.Schema
-
-var RoutePedestrianSpan_Incidents *smithy.Schema
-
-var RoutePedestrianSpan_Names *smithy.Schema
-
-var RoutePedestrianSpan_PedestrianAccess *smithy.Schema
-
-var RoutePedestrianSpan_Region *smithy.Schema
-
-var RoutePedestrianSpan_RoadAttributes *smithy.Schema
-
-var RoutePedestrianSpan_RouteNumbers *smithy.Schema
-
-var RoutePedestrianSpan_SpeedLimit *smithy.Schema
-
-var RoutePedestrianSpan_TypicalDuration *smithy.Schema
-
-var _RoutePedestrianSpanList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianSpanList",
-}, smithy.ShapeTypeList, 1)
-var _RoutePedestrianSpanList_member *smithy.Schema
-
-var RoutePedestrianSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RoutePedestrianSummary_Overview *smithy.Schema
-
-var RoutePedestrianSummary_TravelOnly *smithy.Schema
-
-var RoutePedestrianTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianTravelOnlySummary",
-}, smithy.ShapeTypeStructure, 1)
-var RoutePedestrianTravelOnlySummary_Duration *smithy.Schema
-
-var RoutePedestrianTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianTravelStep",
-}, smithy.ShapeTypeStructure, 15)
-var RoutePedestrianTravelStep_ContinueStepDetails *smithy.Schema
-
-var RoutePedestrianTravelStep_CurrentRoad *smithy.Schema
-
-var RoutePedestrianTravelStep_Distance *smithy.Schema
-
-var RoutePedestrianTravelStep_Duration *smithy.Schema
-
-var RoutePedestrianTravelStep_ExitNumber *smithy.Schema
-
-var RoutePedestrianTravelStep_GeometryOffset *smithy.Schema
-
-var RoutePedestrianTravelStep_Instruction *smithy.Schema
-
-var RoutePedestrianTravelStep_KeepStepDetails *smithy.Schema
-
-var RoutePedestrianTravelStep_NextRoad *smithy.Schema
-
-var RoutePedestrianTravelStep_RoundaboutEnterStepDetails *smithy.Schema
-
-var RoutePedestrianTravelStep_RoundaboutExitStepDetails *smithy.Schema
-
-var RoutePedestrianTravelStep_RoundaboutPassStepDetails *smithy.Schema
-
-var RoutePedestrianTravelStep_Signpost *smithy.Schema
-
-var RoutePedestrianTravelStep_TurnStepDetails *smithy.Schema
-
-var RoutePedestrianTravelStep_Type *smithy.Schema
-
-var _RoutePedestrianTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RoutePedestrianTravelStepList_member *smithy.Schema
-
-var RoutePedestrianTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutePedestrianTravelStepType",
-}, smithy.ShapeTypeEnum, 8, &smithytraits.Sensitive{})
-var RoutePedestrianTravelStepType_ARRIVE *smithy.Schema
-
-var RoutePedestrianTravelStepType_CONTINUE *smithy.Schema
-
-var RoutePedestrianTravelStepType_DEPART *smithy.Schema
-
-var RoutePedestrianTravelStepType_KEEP *smithy.Schema
-
-var RoutePedestrianTravelStepType_ROUNDABOUT_ENTER *smithy.Schema
-
-var RoutePedestrianTravelStepType_ROUNDABOUT_EXIT *smithy.Schema
-
-var RoutePedestrianTravelStepType_ROUNDABOUT_PASS *smithy.Schema
-
-var RoutePedestrianTravelStepType_TURN *smithy.Schema
-
-var RouteRampStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRampStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteRampStepDetails_Intersection *smithy.Schema
-
-var RouteRampStepDetails_SteeringDirection *smithy.Schema
-
-var RouteRampStepDetails_TurnAngle *smithy.Schema
-
-var RouteRampStepDetails_TurnIntensity *smithy.Schema
-
-var RouteRentalAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalAfterTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RouteRentalAfterTravelStep_Duration *smithy.Schema
-
-var RouteRentalAfterTravelStep_Instruction *smithy.Schema
-
-var RouteRentalAfterTravelStep_Type *smithy.Schema
-
-var _RouteRentalAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalAfterTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteRentalAfterTravelStepList_member *smithy.Schema
-
-var RouteRentalAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalAfterTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteRentalAfterTravelStepType_PARK *smithy.Schema
-
-var RouteRentalAgency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalAgency",
-}, smithy.ShapeTypeStructure, 2)
-var RouteRentalAgency_Name *smithy.Schema
-
-var RouteRentalAgency_Url *smithy.Schema
-
-var RouteRentalArrival = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalArrival",
-}, smithy.ShapeTypeStructure, 2)
-var RouteRentalArrival_Place *smithy.Schema
-
-var RouteRentalArrival_Time *smithy.Schema
-
-var RouteRentalBeforeTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalBeforeTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RouteRentalBeforeTravelStep_Duration *smithy.Schema
-
-var RouteRentalBeforeTravelStep_Instruction *smithy.Schema
-
-var RouteRentalBeforeTravelStep_Type *smithy.Schema
-
-var _RouteRentalBeforeTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalBeforeTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteRentalBeforeTravelStepList_member *smithy.Schema
-
-var RouteRentalBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalBeforeTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteRentalBeforeTravelStepType_SETUP *smithy.Schema
-
-var RouteRentalDeparture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalDeparture",
-}, smithy.ShapeTypeStructure, 2)
-var RouteRentalDeparture_Place *smithy.Schema
-
-var RouteRentalDeparture_Time *smithy.Schema
-
-var RouteRentalLegDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalLegDetails",
-}, smithy.ShapeTypeStructure, 10)
-var RouteRentalLegDetails_AfterTravelSteps *smithy.Schema
-
-var RouteRentalLegDetails_Agency *smithy.Schema
-
-var RouteRentalLegDetails_Arrival *smithy.Schema
-
-var RouteRentalLegDetails_Attributions *smithy.Schema
-
-var RouteRentalLegDetails_BeforeTravelSteps *smithy.Schema
-
-var RouteRentalLegDetails_BookingWebLinks *smithy.Schema
-
-var RouteRentalLegDetails_Departure *smithy.Schema
-
-var RouteRentalLegDetails_Summary *smithy.Schema
-
-var RouteRentalLegDetails_Transport *smithy.Schema
-
-var RouteRentalLegDetails_TravelSteps *smithy.Schema
-
-var RouteRentalMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalMode",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var RouteRentalMode_ALL *smithy.Schema
-
-var RouteRentalMode_CAR *smithy.Schema
-
-var _RouteRentalModeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalModeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteRentalModeList_member *smithy.Schema
-
-var RouteRentalOverviewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalOverviewSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteRentalOverviewSummary_Duration *smithy.Schema
-
-var RouteRentalOverviewSummary_Distance *smithy.Schema
-
-var RouteRentalPlace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalPlace",
-}, smithy.ShapeTypeStructure, 7)
-var RouteRentalPlace_AccessPointDetails *smithy.Schema
-
-var RouteRentalPlace_Name *smithy.Schema
-
-var RouteRentalPlace_OriginalPosition *smithy.Schema
-
-var RouteRentalPlace_Position *smithy.Schema
-
-var RouteRentalPlace_StationDetails *smithy.Schema
-
-var RouteRentalPlace_Type *smithy.Schema
-
-var RouteRentalPlace_WaypointIndex *smithy.Schema
-
-var RouteRentalPlaceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalPlaceType",
-}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
-var RouteRentalPlaceType_ACCESS_POINT *smithy.Schema
-
-var RouteRentalPlaceType_DOCKING_STATION *smithy.Schema
-
-var RouteRentalPlaceType_PARKING_LOT *smithy.Schema
-
-var RouteRentalPlaceType_STATION *smithy.Schema
-
-var RouteRentalSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteRentalSummary_Overview *smithy.Schema
-
-var RouteRentalSummary_TravelOnly *smithy.Schema
-
-var RouteRentalTransportModeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalTransportModeDetails",
-}, smithy.ShapeTypeStructure, 9)
-var RouteRentalTransportModeDetails_AvailableSeats *smithy.Schema
-
-var RouteRentalTransportModeDetails_Category *smithy.Schema
-
-var RouteRentalTransportModeDetails_Color *smithy.Schema
-
-var RouteRentalTransportModeDetails_Engine *smithy.Schema
-
-var RouteRentalTransportModeDetails_LicensePlate *smithy.Schema
-
-var RouteRentalTransportModeDetails_Mode *smithy.Schema
-
-var RouteRentalTransportModeDetails_Model *smithy.Schema
-
-var RouteRentalTransportModeDetails_Name *smithy.Schema
-
-var RouteRentalTransportModeDetails_TextColor *smithy.Schema
-
-var RouteRentalTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalTravelOnlySummary",
-}, smithy.ShapeTypeStructure, 1)
-var RouteRentalTravelOnlySummary_Duration *smithy.Schema
-
-var RouteRentalTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalTravelStep",
-}, smithy.ShapeTypeStructure, 14)
-var RouteRentalTravelStep_ContinueStepDetails *smithy.Schema
-
-var RouteRentalTravelStep_Distance *smithy.Schema
-
-var RouteRentalTravelStep_Duration *smithy.Schema
-
-var RouteRentalTravelStep_ExitStepDetails *smithy.Schema
-
-var RouteRentalTravelStep_GeometryOffset *smithy.Schema
-
-var RouteRentalTravelStep_Instruction *smithy.Schema
-
-var RouteRentalTravelStep_KeepStepDetails *smithy.Schema
-
-var RouteRentalTravelStep_RampStepDetails *smithy.Schema
-
-var RouteRentalTravelStep_RoundaboutEnterStepDetails *smithy.Schema
-
-var RouteRentalTravelStep_RoundaboutExitStepDetails *smithy.Schema
-
-var RouteRentalTravelStep_RoundaboutPassStepDetails *smithy.Schema
-
-var RouteRentalTravelStep_TurnStepDetails *smithy.Schema
-
-var RouteRentalTravelStep_Type *smithy.Schema
-
-var RouteRentalTravelStep_UTurnStepDetails *smithy.Schema
-
-var _RouteRentalTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteRentalTravelStepList_member *smithy.Schema
-
-var RouteRentalTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRentalTravelStepType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var RouteRentalTravelStepType_ARRIVE *smithy.Schema
-
-var RouteRentalTravelStepType_CONTINUE *smithy.Schema
-
-var RouteRentalTravelStepType_DEPART *smithy.Schema
-
-var RouteRentalTravelStepType_EXIT *smithy.Schema
-
-var RouteRentalTravelStepType_KEEP *smithy.Schema
-
-var RouteRentalTravelStepType_RAMP *smithy.Schema
-
-var RouteRentalTravelStepType_ROUNDABOUT_ENTER *smithy.Schema
-
-var RouteRentalTravelStepType_ROUNDABOUT_EXIT *smithy.Schema
-
-var RouteRentalTravelStepType_ROUNDABOUT_PASS *smithy.Schema
-
-var RouteRentalTravelStepType_TURN *smithy.Schema
-
-var RouteRentalTravelStepType_U_TURN *smithy.Schema
-
-var RouteResponseNotice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteResponseNotice",
-}, smithy.ShapeTypeStructure, 2)
-var RouteResponseNotice_Code *smithy.Schema
-
-var RouteResponseNotice_Impact *smithy.Schema
-
-var RouteResponseNoticeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteResponseNoticeCode",
-}, smithy.ShapeTypeEnum, 6)
-var RouteResponseNoticeCode_MAIN_LANGUAGE_NOT_FOUND *smithy.Schema
-
-var RouteResponseNoticeCode_OTHER *smithy.Schema
-
-var RouteResponseNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS *smithy.Schema
-
-var RouteResponseNoticeCode_TRANSIT_DATA_UNAVAILABLE *smithy.Schema
-
-var RouteResponseNoticeCode_TRANSIT_ROUTE_UNAVAILABLE *smithy.Schema
-
-var RouteResponseNoticeCode_NO_TRANSIT_STATIONS_FOUND *smithy.Schema
-
-var _RouteResponseNoticeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteResponseNoticeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteResponseNoticeList_member *smithy.Schema
-
-var RouteRoad = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRoad",
-}, smithy.ShapeTypeStructure, 4)
-var RouteRoad_RoadName *smithy.Schema
-
-var RouteRoad_RouteNumber *smithy.Schema
-
-var RouteRoad_Towards *smithy.Schema
-
-var RouteRoad_Type *smithy.Schema
-
-var RouteRoadType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRoadType",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteRoadType_HIGHWAY *smithy.Schema
-
-var RouteRoadType_RURAL *smithy.Schema
-
-var RouteRoadType_URBAN *smithy.Schema
-
-var RouteRoundaboutEnterStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRoundaboutEnterStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteRoundaboutEnterStepDetails_Intersection *smithy.Schema
-
-var RouteRoundaboutEnterStepDetails_SteeringDirection *smithy.Schema
-
-var RouteRoundaboutEnterStepDetails_TurnAngle *smithy.Schema
-
-var RouteRoundaboutEnterStepDetails_TurnIntensity *smithy.Schema
-
-var RouteRoundaboutExitStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRoundaboutExitStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteRoundaboutExitStepDetails_Intersection *smithy.Schema
-
-var RouteRoundaboutExitStepDetails_RelativeExit *smithy.Schema
-
-var RouteRoundaboutExitStepDetails_RoundaboutAngle *smithy.Schema
-
-var RouteRoundaboutExitStepDetails_SteeringDirection *smithy.Schema
-
-var RouteRoundaboutPassStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteRoundaboutPassStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteRoundaboutPassStepDetails_Intersection *smithy.Schema
-
-var RouteRoundaboutPassStepDetails_SteeringDirection *smithy.Schema
-
-var RouteRoundaboutPassStepDetails_TurnAngle *smithy.Schema
-
-var RouteRoundaboutPassStepDetails_TurnIntensity *smithy.Schema
-
-var RouteScooterOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteScooterOptions",
-}, smithy.ShapeTypeStructure, 4)
-var RouteScooterOptions_EngineType *smithy.Schema
-
-var RouteScooterOptions_LicensePlate *smithy.Schema
-
-var RouteScooterOptions_MaxSpeed *smithy.Schema
-
-var RouteScooterOptions_Occupancy *smithy.Schema
-
-var RouteSideOfStreet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSideOfStreet",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var RouteSideOfStreet_LEFT *smithy.Schema
-
-var RouteSideOfStreet_RIGHT *smithy.Schema
-
-var RouteSideOfStreetOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSideOfStreetOptions",
-}, smithy.ShapeTypeStructure, 2)
-var RouteSideOfStreetOptions_Position *smithy.Schema
-
-var RouteSideOfStreetOptions_UseWith *smithy.Schema
-
-var RouteSignpost = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSignpost",
-}, smithy.ShapeTypeStructure, 1)
-var RouteSignpost_Labels *smithy.Schema
-
-var RouteSignpostLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSignpostLabel",
-}, smithy.ShapeTypeStructure, 2)
-var RouteSignpostLabel_RouteNumber *smithy.Schema
-
-var RouteSignpostLabel_Text *smithy.Schema
-
-var _RouteSignpostLabelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSignpostLabelList",
-}, smithy.ShapeTypeList, 1)
-var _RouteSignpostLabelList_member *smithy.Schema
-
-var RouteSpanAdditionalFeature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanAdditionalFeature",
-}, smithy.ShapeTypeEnum, 24)
-var RouteSpanAdditionalFeature_BEST_CASE_DURATION *smithy.Schema
-
-var RouteSpanAdditionalFeature_CAR_ACCESS *smithy.Schema
-
-var RouteSpanAdditionalFeature_COUNTRY *smithy.Schema
-
-var RouteSpanAdditionalFeature_DISTANCE *smithy.Schema
-
-var RouteSpanAdditionalFeature_DURATION *smithy.Schema
-
-var RouteSpanAdditionalFeature_DYNAMIC_SPEED *smithy.Schema
-
-var RouteSpanAdditionalFeature_FUNCTIONAL_CLASSIFICATION *smithy.Schema
-
-var RouteSpanAdditionalFeature_GATES *smithy.Schema
-
-var RouteSpanAdditionalFeature_INCIDENTS *smithy.Schema
-
-var RouteSpanAdditionalFeature_NAMES *smithy.Schema
-
-var RouteSpanAdditionalFeature_NOTICES *smithy.Schema
-
-var RouteSpanAdditionalFeature_PEDESTRIAN_ACCESS *smithy.Schema
-
-var RouteSpanAdditionalFeature_RAILWAY_CROSSINGS *smithy.Schema
-
-var RouteSpanAdditionalFeature_REGION *smithy.Schema
-
-var RouteSpanAdditionalFeature_ROAD_ATTRIBUTES *smithy.Schema
-
-var RouteSpanAdditionalFeature_ROUTE_NUMBERS *smithy.Schema
-
-var RouteSpanAdditionalFeature_SCOOTER_ACCESS *smithy.Schema
-
-var RouteSpanAdditionalFeature_SPEED_LIMIT *smithy.Schema
-
-var RouteSpanAdditionalFeature_TOLL_SYSTEMS *smithy.Schema
-
-var RouteSpanAdditionalFeature_TRUCK_ACCESS *smithy.Schema
-
-var RouteSpanAdditionalFeature_TRUCK_ROAD_TYPES *smithy.Schema
-
-var RouteSpanAdditionalFeature_TYPICAL_DURATION *smithy.Schema
-
-var RouteSpanAdditionalFeature_ZONES *smithy.Schema
-
-var RouteSpanAdditionalFeature_CONSUMPTION *smithy.Schema
-
-var _RouteSpanAdditionalFeatureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanAdditionalFeatureList",
-}, smithy.ShapeTypeList, 1)
-var _RouteSpanAdditionalFeatureList_member *smithy.Schema
-
-var RouteSpanCarAccessAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanCarAccessAttribute",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteSpanCarAccessAttribute_ALLOWED *smithy.Schema
-
-var RouteSpanCarAccessAttribute_NO_THROUGH_TRAFFIC *smithy.Schema
-
-var RouteSpanCarAccessAttribute_TOLL_ROAD *smithy.Schema
-
-var _RouteSpanCarAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanCarAccessAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteSpanCarAccessAttributeList_member *smithy.Schema
-
-var RouteSpanDynamicSpeedDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanDynamicSpeedDetails",
-}, smithy.ShapeTypeStructure, 3)
-var RouteSpanDynamicSpeedDetails_BestCaseSpeed *smithy.Schema
-
-var RouteSpanDynamicSpeedDetails_TurnDuration *smithy.Schema
-
-var RouteSpanDynamicSpeedDetails_TypicalSpeed *smithy.Schema
-
-var RouteSpanGateAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanGateAttribute",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteSpanGateAttribute_EMERGENCY *smithy.Schema
-
-var RouteSpanGateAttribute_KEY_ACCESS *smithy.Schema
-
-var RouteSpanGateAttribute_PERMISSION_REQUIRED *smithy.Schema
-
-var RouteSpanPedestrianAccessAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanPedestrianAccessAttribute",
-}, smithy.ShapeTypeEnum, 6, &smithytraits.Sensitive{})
-var RouteSpanPedestrianAccessAttribute_ALLOWED *smithy.Schema
-
-var RouteSpanPedestrianAccessAttribute_INDOORS *smithy.Schema
-
-var RouteSpanPedestrianAccessAttribute_NO_THROUGH_TRAFFIC *smithy.Schema
-
-var RouteSpanPedestrianAccessAttribute_PARK *smithy.Schema
-
-var RouteSpanPedestrianAccessAttribute_STAIRS *smithy.Schema
-
-var RouteSpanPedestrianAccessAttribute_TOLL_ROAD *smithy.Schema
-
-var _RouteSpanPedestrianAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanPedestrianAccessAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteSpanPedestrianAccessAttributeList_member *smithy.Schema
-
-var RouteSpanRailwayCrossingAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanRailwayCrossingAttribute",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var RouteSpanRailwayCrossingAttribute_PROTECTED *smithy.Schema
-
-var RouteSpanRailwayCrossingAttribute_UNPROTECTED *smithy.Schema
-
-var RouteSpanRoadAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanRoadAttribute",
-}, smithy.ShapeTypeEnum, 12, &smithytraits.Sensitive{})
-var RouteSpanRoadAttribute_BRIDGE *smithy.Schema
-
-var RouteSpanRoadAttribute_BUILT_UP_AREA *smithy.Schema
-
-var RouteSpanRoadAttribute_CONTROLLED_ACCESS_HIGHWAY *smithy.Schema
-
-var RouteSpanRoadAttribute_DIRT_ROAD *smithy.Schema
-
-var RouteSpanRoadAttribute_DIVIDED_ROAD *smithy.Schema
-
-var RouteSpanRoadAttribute_MOTORWAY *smithy.Schema
-
-var RouteSpanRoadAttribute_PRIVATE_ROAD *smithy.Schema
-
-var RouteSpanRoadAttribute_RAMP *smithy.Schema
-
-var RouteSpanRoadAttribute_RIGHT_HAND_TRAFFIC *smithy.Schema
-
-var RouteSpanRoadAttribute_ROUNDABOUT *smithy.Schema
-
-var RouteSpanRoadAttribute_TUNNEL *smithy.Schema
-
-var RouteSpanRoadAttribute_UNDER_CONSTRUCTION *smithy.Schema
-
-var _RouteSpanRoadAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanRoadAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteSpanRoadAttributeList_member *smithy.Schema
-
-var RouteSpanScooterAccessAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanScooterAccessAttribute",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteSpanScooterAccessAttribute_ALLOWED *smithy.Schema
-
-var RouteSpanScooterAccessAttribute_NO_THROUGH_TRAFFIC *smithy.Schema
-
-var RouteSpanScooterAccessAttribute_TOLL_ROAD *smithy.Schema
-
-var _RouteSpanScooterAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanScooterAccessAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteSpanScooterAccessAttributeList_member *smithy.Schema
-
-var RouteSpanSpeedLimitDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanSpeedLimitDetails",
-}, smithy.ShapeTypeStructure, 2)
-var RouteSpanSpeedLimitDetails_MaxSpeed *smithy.Schema
-
-var RouteSpanSpeedLimitDetails_Unlimited *smithy.Schema
-
-var RouteSpanTruckAccessAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanTruckAccessAttribute",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteSpanTruckAccessAttribute_ALLOWED *smithy.Schema
-
-var RouteSpanTruckAccessAttribute_NO_THROUGH_TRAFFIC *smithy.Schema
-
-var RouteSpanTruckAccessAttribute_TOLL_ROAD *smithy.Schema
-
-var _RouteSpanTruckAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSpanTruckAccessAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteSpanTruckAccessAttributeList_member *smithy.Schema
-
-var RouteStationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteStationDetails",
-}, smithy.ShapeTypeStructure, 3)
-var RouteStationDetails_Accessibility *smithy.Schema
-
-var RouteStationDetails_PlatformName *smithy.Schema
-
-var RouteStationDetails_ShortName *smithy.Schema
-
-var RouteSteeringDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSteeringDirection",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteSteeringDirection_LEFT *smithy.Schema
-
-var RouteSteeringDirection_RIGHT *smithy.Schema
-
-var RouteSteeringDirection_STRAIGHT *smithy.Schema
-
-var RouteSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteSummary",
-}, smithy.ShapeTypeStructure, 3)
-var RouteSummary_Distance *smithy.Schema
-
-var RouteSummary_Duration *smithy.Schema
-
-var RouteSummary_Tolls *smithy.Schema
-
-var RouteTaxiAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiAfterTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RouteTaxiAfterTravelStep_Duration *smithy.Schema
-
-var RouteTaxiAfterTravelStep_Instruction *smithy.Schema
-
-var RouteTaxiAfterTravelStep_Type *smithy.Schema
-
-var _RouteTaxiAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiAfterTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTaxiAfterTravelStepList_member *smithy.Schema
-
-var RouteTaxiAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiAfterTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteTaxiAfterTravelStepType_PARK *smithy.Schema
-
-var RouteTaxiAgency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiAgency",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTaxiAgency_Name *smithy.Schema
-
-var RouteTaxiAgency_Url *smithy.Schema
-
-var RouteTaxiArrival = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiArrival",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTaxiArrival_Place *smithy.Schema
-
-var RouteTaxiArrival_Time *smithy.Schema
-
-var RouteTaxiBeforeTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiBeforeTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RouteTaxiBeforeTravelStep_Duration *smithy.Schema
-
-var RouteTaxiBeforeTravelStep_Instruction *smithy.Schema
-
-var RouteTaxiBeforeTravelStep_Type *smithy.Schema
-
-var _RouteTaxiBeforeTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiBeforeTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTaxiBeforeTravelStepList_member *smithy.Schema
-
-var RouteTaxiBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiBeforeTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteTaxiBeforeTravelStepType_WAIT *smithy.Schema
-
-var RouteTaxiDeparture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiDeparture",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTaxiDeparture_Place *smithy.Schema
-
-var RouteTaxiDeparture_Time *smithy.Schema
-
-var RouteTaxiLegDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiLegDetails",
-}, smithy.ShapeTypeStructure, 11)
-var RouteTaxiLegDetails_AfterTravelSteps *smithy.Schema
-
-var RouteTaxiLegDetails_Agency *smithy.Schema
-
-var RouteTaxiLegDetails_Arrival *smithy.Schema
-
-var RouteTaxiLegDetails_Attributions *smithy.Schema
-
-var RouteTaxiLegDetails_BeforeTravelSteps *smithy.Schema
-
-var RouteTaxiLegDetails_BookingWebLinks *smithy.Schema
-
-var RouteTaxiLegDetails_Departure *smithy.Schema
-
-var RouteTaxiLegDetails_Notices *smithy.Schema
-
-var RouteTaxiLegDetails_Summary *smithy.Schema
-
-var RouteTaxiLegDetails_Transport *smithy.Schema
-
-var RouteTaxiLegDetails_TravelSteps *smithy.Schema
-
-var RouteTaxiMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiMode",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var RouteTaxiMode_ALL *smithy.Schema
-
-var RouteTaxiMode_CAR *smithy.Schema
-
-var _RouteTaxiModeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiModeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTaxiModeList_member *smithy.Schema
-
-var RouteTaxiNotice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiNotice",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTaxiNotice_Code *smithy.Schema
-
-var RouteTaxiNotice_Impact *smithy.Schema
-
-var RouteTaxiNoticeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiNoticeCode",
-}, smithy.ShapeTypeEnum, 2)
-var RouteTaxiNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
-
-var RouteTaxiNoticeCode_OTHER *smithy.Schema
-
-var _RouteTaxiNoticeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiNoticeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTaxiNoticeList_member *smithy.Schema
-
-var RouteTaxiOverviewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiOverviewSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTaxiOverviewSummary_Duration *smithy.Schema
-
-var RouteTaxiOverviewSummary_Distance *smithy.Schema
-
-var RouteTaxiPlace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiPlace",
-}, smithy.ShapeTypeStructure, 7)
-var RouteTaxiPlace_AccessPointDetails *smithy.Schema
-
-var RouteTaxiPlace_Name *smithy.Schema
-
-var RouteTaxiPlace_OriginalPosition *smithy.Schema
-
-var RouteTaxiPlace_Position *smithy.Schema
-
-var RouteTaxiPlace_StationDetails *smithy.Schema
-
-var RouteTaxiPlace_Type *smithy.Schema
-
-var RouteTaxiPlace_WaypointIndex *smithy.Schema
-
-var RouteTaxiPlaceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiPlaceType",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var RouteTaxiPlaceType_ACCESS_POINT *smithy.Schema
-
-var RouteTaxiPlaceType_STATION *smithy.Schema
-
-var RouteTaxiSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTaxiSummary_Overview *smithy.Schema
-
-var RouteTaxiSummary_TravelOnly *smithy.Schema
-
-var RouteTaxiTransportModeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiTransportModeDetails",
-}, smithy.ShapeTypeStructure, 9)
-var RouteTaxiTransportModeDetails_AvailableSeats *smithy.Schema
-
-var RouteTaxiTransportModeDetails_Category *smithy.Schema
-
-var RouteTaxiTransportModeDetails_Color *smithy.Schema
-
-var RouteTaxiTransportModeDetails_Engine *smithy.Schema
-
-var RouteTaxiTransportModeDetails_LicensePlate *smithy.Schema
-
-var RouteTaxiTransportModeDetails_Mode *smithy.Schema
-
-var RouteTaxiTransportModeDetails_Model *smithy.Schema
-
-var RouteTaxiTransportModeDetails_Name *smithy.Schema
-
-var RouteTaxiTransportModeDetails_TextColor *smithy.Schema
-
-var RouteTaxiTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiTravelOnlySummary",
-}, smithy.ShapeTypeStructure, 1)
-var RouteTaxiTravelOnlySummary_Duration *smithy.Schema
-
-var RouteTaxiTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiTravelStep",
-}, smithy.ShapeTypeStructure, 14)
-var RouteTaxiTravelStep_ContinueStepDetails *smithy.Schema
-
-var RouteTaxiTravelStep_Distance *smithy.Schema
-
-var RouteTaxiTravelStep_Duration *smithy.Schema
-
-var RouteTaxiTravelStep_ExitStepDetails *smithy.Schema
-
-var RouteTaxiTravelStep_GeometryOffset *smithy.Schema
-
-var RouteTaxiTravelStep_Instruction *smithy.Schema
-
-var RouteTaxiTravelStep_KeepStepDetails *smithy.Schema
-
-var RouteTaxiTravelStep_RampStepDetails *smithy.Schema
-
-var RouteTaxiTravelStep_RoundaboutEnterStepDetails *smithy.Schema
-
-var RouteTaxiTravelStep_RoundaboutExitStepDetails *smithy.Schema
-
-var RouteTaxiTravelStep_RoundaboutPassStepDetails *smithy.Schema
-
-var RouteTaxiTravelStep_TurnStepDetails *smithy.Schema
-
-var RouteTaxiTravelStep_Type *smithy.Schema
-
-var RouteTaxiTravelStep_UTurnStepDetails *smithy.Schema
-
-var _RouteTaxiTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTaxiTravelStepList_member *smithy.Schema
-
-var RouteTaxiTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTaxiTravelStepType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var RouteTaxiTravelStepType_ARRIVE *smithy.Schema
-
-var RouteTaxiTravelStepType_CONTINUE *smithy.Schema
-
-var RouteTaxiTravelStepType_DEPART *smithy.Schema
-
-var RouteTaxiTravelStepType_EXIT *smithy.Schema
-
-var RouteTaxiTravelStepType_KEEP *smithy.Schema
-
-var RouteTaxiTravelStepType_RAMP *smithy.Schema
-
-var RouteTaxiTravelStepType_ROUNDABOUT_ENTER *smithy.Schema
-
-var RouteTaxiTravelStepType_ROUNDABOUT_EXIT *smithy.Schema
-
-var RouteTaxiTravelStepType_ROUNDABOUT_PASS *smithy.Schema
-
-var RouteTaxiTravelStepType_TURN *smithy.Schema
-
-var RouteTaxiTravelStepType_U_TURN *smithy.Schema
-
-var RouteToll = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteToll",
-}, smithy.ShapeTypeStructure, 4)
-var RouteToll_Country *smithy.Schema
-
-var RouteToll_PaymentSites *smithy.Schema
-
-var RouteToll_Rates *smithy.Schema
-
-var RouteToll_Systems *smithy.Schema
-
-var _RouteTollList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTollList_member *smithy.Schema
-
-var RouteTollOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollOptions",
-}, smithy.ShapeTypeStructure, 5)
-var RouteTollOptions_AllTransponders *smithy.Schema
-
-var RouteTollOptions_AllVignettes *smithy.Schema
-
-var RouteTollOptions_Currency *smithy.Schema
-
-var RouteTollOptions_EmissionType *smithy.Schema
-
-var RouteTollOptions_VehicleCategory *smithy.Schema
-
-var RouteTollPass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPass",
-}, smithy.ShapeTypeStructure, 5)
-var RouteTollPass_IncludesReturnTrip *smithy.Schema
-
-var RouteTollPass_SeniorPass *smithy.Schema
-
-var RouteTollPass_TransferCount *smithy.Schema
-
-var RouteTollPass_TripCount *smithy.Schema
-
-var RouteTollPass_ValidityPeriod *smithy.Schema
-
-var RouteTollPassValidityPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPassValidityPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTollPassValidityPeriod_Period *smithy.Schema
-
-var RouteTollPassValidityPeriod_PeriodCount *smithy.Schema
-
-var RouteTollPassValidityPeriodType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPassValidityPeriodType",
-}, smithy.ShapeTypeEnum, 5, &smithytraits.Sensitive{})
-var RouteTollPassValidityPeriodType_ANNUAL *smithy.Schema
-
-var RouteTollPassValidityPeriodType_DAYS *smithy.Schema
-
-var RouteTollPassValidityPeriodType_EXTENDED_ANNUAL *smithy.Schema
-
-var RouteTollPassValidityPeriodType_MINUTES *smithy.Schema
-
-var RouteTollPassValidityPeriodType_MONTHS *smithy.Schema
-
-var RouteTollPaymentMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPaymentMethod",
-}, smithy.ShapeTypeEnum, 8, &smithytraits.Sensitive{})
-var RouteTollPaymentMethod_BANK_CARD *smithy.Schema
-
-var RouteTollPaymentMethod_CASH *smithy.Schema
-
-var RouteTollPaymentMethod_CASH_EXACT *smithy.Schema
-
-var RouteTollPaymentMethod_CREDIT_CARD *smithy.Schema
-
-var RouteTollPaymentMethod_PASS_SUBSCRIPTION *smithy.Schema
-
-var RouteTollPaymentMethod_TRAVEL_CARD *smithy.Schema
-
-var RouteTollPaymentMethod_TRANSPONDER *smithy.Schema
-
-var RouteTollPaymentMethod_VIDEO_TOLL *smithy.Schema
-
-var _RouteTollPaymentMethodList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPaymentMethodList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTollPaymentMethodList_member *smithy.Schema
-
-var RouteTollPaymentSite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPaymentSite",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTollPaymentSite_Name *smithy.Schema
-
-var RouteTollPaymentSite_Position *smithy.Schema
-
-var _RouteTollPaymentSiteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPaymentSiteList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTollPaymentSiteList_member *smithy.Schema
-
-var RouteTollPrice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPrice",
-}, smithy.ShapeTypeStructure, 6)
-var RouteTollPrice_Currency *smithy.Schema
-
-var RouteTollPrice_Estimate *smithy.Schema
-
-var RouteTollPrice_PerDuration *smithy.Schema
-
-var RouteTollPrice_Range *smithy.Schema
-
-var RouteTollPrice_RangeValue *smithy.Schema
-
-var RouteTollPrice_Value *smithy.Schema
-
-var RouteTollPriceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPriceSummary",
-}, smithy.ShapeTypeStructure, 5)
-var RouteTollPriceSummary_Currency *smithy.Schema
-
-var RouteTollPriceSummary_Estimate *smithy.Schema
-
-var RouteTollPriceSummary_Range *smithy.Schema
-
-var RouteTollPriceSummary_RangeValue *smithy.Schema
-
-var RouteTollPriceSummary_Value *smithy.Schema
-
-var RouteTollPriceValueRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollPriceValueRange",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTollPriceValueRange_Min *smithy.Schema
-
-var RouteTollPriceValueRange_Max *smithy.Schema
-
-var RouteTollRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollRate",
-}, smithy.ShapeTypeStructure, 8)
-var RouteTollRate_ApplicableTimes *smithy.Schema
-
-var RouteTollRate_ConvertedPrice *smithy.Schema
-
-var RouteTollRate_Id *smithy.Schema
-
-var RouteTollRate_LocalPrice *smithy.Schema
-
-var RouteTollRate_Name *smithy.Schema
-
-var RouteTollRate_Pass *smithy.Schema
-
-var RouteTollRate_PaymentMethods *smithy.Schema
-
-var RouteTollRate_Transponders *smithy.Schema
-
-var _RouteTollRateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollRateList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTollRateList_member *smithy.Schema
-
-var RouteTollSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollSummary",
-}, smithy.ShapeTypeStructure, 1)
-var RouteTollSummary_Total *smithy.Schema
-
-var RouteTollSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollSystem",
-}, smithy.ShapeTypeStructure, 1)
-var RouteTollSystem_Name *smithy.Schema
-
-var _RouteTollSystemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollSystemList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTollSystemList_member *smithy.Schema
-
-var RouteTollVehicleCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTollVehicleCategory",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteTollVehicleCategory_MINIBUS *smithy.Schema
-
-var RouteTrafficOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTrafficOptions",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTrafficOptions_FlowEventThresholdOverride *smithy.Schema
-
-var RouteTrafficOptions_Usage *smithy.Schema
-
-var RouteTrailerOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTrailerOptions",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTrailerOptions_AxleCount *smithy.Schema
-
-var RouteTrailerOptions_TrailerCount *smithy.Schema
-
-var RouteTransitAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitAfterTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RouteTransitAfterTravelStep_Duration *smithy.Schema
-
-var RouteTransitAfterTravelStep_Instruction *smithy.Schema
-
-var RouteTransitAfterTravelStep_Type *smithy.Schema
-
-var _RouteTransitAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitAfterTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitAfterTravelStepList_member *smithy.Schema
-
-var RouteTransitAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitAfterTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteTransitAfterTravelStepType_DEBOARD *smithy.Schema
-
-var RouteTransitAgency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitAgency",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTransitAgency_Name *smithy.Schema
-
-var RouteTransitAgency_Url *smithy.Schema
-
-var RouteTransitArrival = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitArrival",
-}, smithy.ShapeTypeStructure, 4)
-var RouteTransitArrival_Delay *smithy.Schema
-
-var RouteTransitArrival_Place *smithy.Schema
-
-var RouteTransitArrival_Status *smithy.Schema
-
-var RouteTransitArrival_Time *smithy.Schema
-
-var RouteTransitBeforeTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitBeforeTravelStep",
-}, smithy.ShapeTypeStructure, 3)
-var RouteTransitBeforeTravelStep_Duration *smithy.Schema
-
-var RouteTransitBeforeTravelStep_Instruction *smithy.Schema
-
-var RouteTransitBeforeTravelStep_Type *smithy.Schema
-
-var _RouteTransitBeforeTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitBeforeTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitBeforeTravelStepList_member *smithy.Schema
-
-var RouteTransitBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitBeforeTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteTransitBeforeTravelStepType_BOARD *smithy.Schema
-
-var RouteTransitDeparture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitDeparture",
-}, smithy.ShapeTypeStructure, 4)
-var RouteTransitDeparture_Delay *smithy.Schema
-
-var RouteTransitDeparture_Place *smithy.Schema
-
-var RouteTransitDeparture_Status *smithy.Schema
-
-var RouteTransitDeparture_Time *smithy.Schema
-
-var RouteTransitIncident = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitIncident",
-}, smithy.ShapeTypeStructure, 6)
-var RouteTransitIncident_Description *smithy.Schema
-
-var RouteTransitIncident_Effect *smithy.Schema
-
-var RouteTransitIncident_EndTime *smithy.Schema
-
-var RouteTransitIncident_StartTime *smithy.Schema
-
-var RouteTransitIncident_Type *smithy.Schema
-
-var RouteTransitIncident_Url *smithy.Schema
-
-var RouteTransitIncidentEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitIncidentEffect",
-}, smithy.ShapeTypeEnum, 8, &smithytraits.Sensitive{})
-var RouteTransitIncidentEffect_DELAYED *smithy.Schema
-
-var RouteTransitIncidentEffect_DETOURED *smithy.Schema
-
-var RouteTransitIncidentEffect_OTHER *smithy.Schema
-
-var RouteTransitIncidentEffect_SERVICE_ADDED *smithy.Schema
-
-var RouteTransitIncidentEffect_SERVICE_CANCELLED *smithy.Schema
-
-var RouteTransitIncidentEffect_SERVICE_MODIFIED *smithy.Schema
-
-var RouteTransitIncidentEffect_SERVICE_REDUCED *smithy.Schema
-
-var RouteTransitIncidentEffect_STOP_MOVED *smithy.Schema
-
-var _RouteTransitIncidentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitIncidentList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitIncidentList_member *smithy.Schema
-
-var RouteTransitIncidentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitIncidentType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var RouteTransitIncidentType_ACCIDENT *smithy.Schema
-
-var RouteTransitIncidentType_CONSTRUCTION *smithy.Schema
-
-var RouteTransitIncidentType_DEMONSTRATION *smithy.Schema
-
-var RouteTransitIncidentType_HOLIDAY *smithy.Schema
-
-var RouteTransitIncidentType_MAINTENANCE *smithy.Schema
-
-var RouteTransitIncidentType_MEDICAL_EMERGENCY *smithy.Schema
-
-var RouteTransitIncidentType_OTHER *smithy.Schema
-
-var RouteTransitIncidentType_POLICE_ACTIVITY *smithy.Schema
-
-var RouteTransitIncidentType_STRIKE *smithy.Schema
-
-var RouteTransitIncidentType_TECHNICAL_PROBLEM *smithy.Schema
-
-var RouteTransitIncidentType_WEATHER *smithy.Schema
-
-var RouteTransitIntermediateStop = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitIntermediateStop",
-}, smithy.ShapeTypeStructure, 5)
-var RouteTransitIntermediateStop_Attributes *smithy.Schema
-
-var RouteTransitIntermediateStop_Departure *smithy.Schema
-
-var RouteTransitIntermediateStop_Duration *smithy.Schema
-
-var RouteTransitIntermediateStop_GeometryOffset *smithy.Schema
-
-var RouteTransitIntermediateStop_Transport *smithy.Schema
-
-var RouteTransitIntermediateStopAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitIntermediateStopAttribute",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var RouteTransitIntermediateStopAttribute_NO_ENTRY *smithy.Schema
-
-var RouteTransitIntermediateStopAttribute_NO_EXIT *smithy.Schema
-
-var _RouteTransitIntermediateStopAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitIntermediateStopAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitIntermediateStopAttributeList_member *smithy.Schema
-
-var _RouteTransitIntermediateStopList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitIntermediateStopList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitIntermediateStopList_member *smithy.Schema
-
-var RouteTransitLegDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitLegDetails",
-}, smithy.ShapeTypeStructure, 16)
-var RouteTransitLegDetails_AfterTravelSteps *smithy.Schema
-
-var RouteTransitLegDetails_Agency *smithy.Schema
-
-var RouteTransitLegDetails_Arrival *smithy.Schema
-
-var RouteTransitLegDetails_Attributions *smithy.Schema
-
-var RouteTransitLegDetails_BeforeTravelSteps *smithy.Schema
-
-var RouteTransitLegDetails_BookingWebLinks *smithy.Schema
-
-var RouteTransitLegDetails_Departure *smithy.Schema
-
-var RouteTransitLegDetails_Incidents *smithy.Schema
-
-var RouteTransitLegDetails_IntermediateStops *smithy.Schema
-
-var RouteTransitLegDetails_NextDepartures *smithy.Schema
-
-var RouteTransitLegDetails_Notices *smithy.Schema
-
-var RouteTransitLegDetails_PassThroughWaypoints *smithy.Schema
-
-var RouteTransitLegDetails_Spans *smithy.Schema
-
-var RouteTransitLegDetails_Summary *smithy.Schema
-
-var RouteTransitLegDetails_Transport *smithy.Schema
-
-var RouteTransitLegDetails_TravelSteps *smithy.Schema
-
-var RouteTransitMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitMode",
-}, smithy.ShapeTypeEnum, 16, &smithytraits.Sensitive{})
-var RouteTransitMode_AERIAL_TRAMWAY *smithy.Schema
-
-var RouteTransitMode_AIRPLANE *smithy.Schema
-
-var RouteTransitMode_ALL *smithy.Schema
-
-var RouteTransitMode_BUS *smithy.Schema
-
-var RouteTransitMode_BUS_RAPID_TRANSIT *smithy.Schema
-
-var RouteTransitMode_CITY_TRAIN *smithy.Schema
-
-var RouteTransitMode_FERRY *smithy.Schema
-
-var RouteTransitMode_FUNICULAR_RAILWAY *smithy.Schema
-
-var RouteTransitMode_HIGH_SPEED_TRAIN *smithy.Schema
-
-var RouteTransitMode_INTERCITY_TRAIN *smithy.Schema
-
-var RouteTransitMode_INTERREGIONAL_TRAIN *smithy.Schema
-
-var RouteTransitMode_LIGHT_RAIL *smithy.Schema
-
-var RouteTransitMode_MONORAIL *smithy.Schema
-
-var RouteTransitMode_PRIVATE_BUS *smithy.Schema
-
-var RouteTransitMode_REGIONAL_TRAIN *smithy.Schema
-
-var RouteTransitMode_SUBWAY *smithy.Schema
-
-var _RouteTransitModeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitModeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitModeList_member *smithy.Schema
-
-var RouteTransitNextDeparture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitNextDeparture",
-}, smithy.ShapeTypeStructure, 5)
-var RouteTransitNextDeparture_Delay *smithy.Schema
-
-var RouteTransitNextDeparture_PlatformName *smithy.Schema
-
-var RouteTransitNextDeparture_Status *smithy.Schema
-
-var RouteTransitNextDeparture_Time *smithy.Schema
-
-var RouteTransitNextDeparture_Transport *smithy.Schema
-
-var _RouteTransitNextDepartureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitNextDepartureList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitNextDepartureList_member *smithy.Schema
-
-var RouteTransitNotice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitNotice",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTransitNotice_Code *smithy.Schema
-
-var RouteTransitNotice_Impact *smithy.Schema
-
-var RouteTransitNoticeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitNoticeCode",
-}, smithy.ShapeTypeEnum, 12)
-var RouteTransitNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
-
-var RouteTransitNoticeCode_INTERMEDIATE_STOPS_UNAVAILABLE *smithy.Schema
-
-var RouteTransitNoticeCode_NO_SCHEDULE *smithy.Schema
-
-var RouteTransitNoticeCode_OTHER *smithy.Schema
-
-var RouteTransitNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE *smithy.Schema
-
-var RouteTransitNoticeCode_SCHEDULED_TIMES *smithy.Schema
-
-var RouteTransitNoticeCode_SEASONAL_CLOSURE *smithy.Schema
-
-var RouteTransitNoticeCode_VIOLATED_AVOID_FERRY *smithy.Schema
-
-var RouteTransitNoticeCode_VIOLATED_AVOID_RAIL_FERRY *smithy.Schema
-
-var RouteTransitNoticeCode_VIOLATED_EXCLUDED_TRANSIT_MODE *smithy.Schema
-
-var RouteTransitNoticeCode_VIOLATED_VEHICLE_RESTRICTION *smithy.Schema
-
-var RouteTransitNoticeCode_VIOLATED_AVOID_AREAS *smithy.Schema
-
-var _RouteTransitNoticeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitNoticeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitNoticeList_member *smithy.Schema
-
-var RouteTransitOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitOptions",
-}, smithy.ShapeTypeStructure, 5)
-var RouteTransitOptions_AccessibilityAttributes *smithy.Schema
-
-var RouteTransitOptions_AllowedModes *smithy.Schema
-
-var RouteTransitOptions_ExcludedModes *smithy.Schema
-
-var RouteTransitOptions_MaxTransfers *smithy.Schema
-
-var RouteTransitOptions_Pedestrian *smithy.Schema
-
-var RouteTransitOverviewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitOverviewSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTransitOverviewSummary_Distance *smithy.Schema
-
-var RouteTransitOverviewSummary_Duration *smithy.Schema
-
-var RouteTransitPedestrianOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitPedestrianOptions",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTransitPedestrianOptions_MaxDistance *smithy.Schema
-
-var RouteTransitPedestrianOptions_Speed *smithy.Schema
-
-var RouteTransitPlace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitPlace",
-}, smithy.ShapeTypeStructure, 6)
-var RouteTransitPlace_Name *smithy.Schema
-
-var RouteTransitPlace_OriginalPosition *smithy.Schema
-
-var RouteTransitPlace_Position *smithy.Schema
-
-var RouteTransitPlace_StationDetails *smithy.Schema
-
-var RouteTransitPlace_Type *smithy.Schema
-
-var RouteTransitPlace_WaypointIndex *smithy.Schema
-
-var RouteTransitPlaceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitPlaceType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteTransitPlaceType_STATION *smithy.Schema
-
-var RouteTransitSpan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitSpan",
-}, smithy.ShapeTypeStructure, 6)
-var RouteTransitSpan_Country *smithy.Schema
-
-var RouteTransitSpan_Distance *smithy.Schema
-
-var RouteTransitSpan_Duration *smithy.Schema
-
-var RouteTransitSpan_GeometryOffset *smithy.Schema
-
-var RouteTransitSpan_Names *smithy.Schema
-
-var RouteTransitSpan_Region *smithy.Schema
-
-var _RouteTransitSpanList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitSpanList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitSpanList_member *smithy.Schema
-
-var RouteTransitSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteTransitSummary_Overview *smithy.Schema
-
-var RouteTransitSummary_TravelOnly *smithy.Schema
-
-var RouteTransitTransportModeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitTransportModeDetails",
-}, smithy.ShapeTypeStructure, 8)
-var RouteTransitTransportModeDetails_Accessibility *smithy.Schema
-
-var RouteTransitTransportModeDetails_Color *smithy.Schema
-
-var RouteTransitTransportModeDetails_Headsign *smithy.Schema
-
-var RouteTransitTransportModeDetails_LongRouteName *smithy.Schema
-
-var RouteTransitTransportModeDetails_Mode *smithy.Schema
-
-var RouteTransitTransportModeDetails_RouteName *smithy.Schema
-
-var RouteTransitTransportModeDetails_ShortRouteName *smithy.Schema
-
-var RouteTransitTransportModeDetails_TextColor *smithy.Schema
-
-var RouteTransitTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitTravelOnlySummary",
-}, smithy.ShapeTypeStructure, 1)
-var RouteTransitTravelOnlySummary_Duration *smithy.Schema
-
-var RouteTransitTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitTravelStep",
-}, smithy.ShapeTypeStructure, 5)
-var RouteTransitTravelStep_Distance *smithy.Schema
-
-var RouteTransitTravelStep_Duration *smithy.Schema
-
-var RouteTransitTravelStep_GeometryOffset *smithy.Schema
-
-var RouteTransitTravelStep_Instruction *smithy.Schema
-
-var RouteTransitTravelStep_Type *smithy.Schema
-
-var _RouteTransitTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransitTravelStepList_member *smithy.Schema
-
-var RouteTransitTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteTransitTravelStepType_DEPART *smithy.Schema
-
-var RouteTransitTripStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransitTripStatus",
-}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
-var RouteTransitTripStatus_ADDED *smithy.Schema
-
-var RouteTransitTripStatus_CANCELLED *smithy.Schema
-
-var RouteTransitTripStatus_REPLACED *smithy.Schema
-
-var RouteTransitTripStatus_SCHEDULED *smithy.Schema
-
-var RouteTransponder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransponder",
-}, smithy.ShapeTypeStructure, 1)
-var RouteTransponder_SystemName *smithy.Schema
-
-var _RouteTransponderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTransponderList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTransponderList_member *smithy.Schema
-
-var RouteTravelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTravelMode",
-}, smithy.ShapeTypeEnum, 6)
-var RouteTravelMode_CAR *smithy.Schema
-
-var RouteTravelMode_PEDESTRIAN *smithy.Schema
-
-var RouteTravelMode_SCOOTER *smithy.Schema
-
-var RouteTravelMode_TRUCK *smithy.Schema
-
-var RouteTravelMode_INTERMODAL *smithy.Schema
-
-var RouteTravelMode_TRANSIT *smithy.Schema
-
-var RouteTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTravelModeOptions",
-}, smithy.ShapeTypeStructure, 6)
-var RouteTravelModeOptions_Car *smithy.Schema
-
-var RouteTravelModeOptions_Pedestrian *smithy.Schema
-
-var RouteTravelModeOptions_Scooter *smithy.Schema
-
-var RouteTravelModeOptions_Truck *smithy.Schema
-
-var RouteTravelModeOptions_Intermodal *smithy.Schema
-
-var RouteTravelModeOptions_Transit *smithy.Schema
-
-var RouteTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTravelStepType",
-}, smithy.ShapeTypeEnum, 2)
-var RouteTravelStepType_DEFAULT *smithy.Schema
-
-var RouteTravelStepType_TURN_BY_TURN *smithy.Schema
-
-var RouteTruckOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTruckOptions",
-}, smithy.ShapeTypeStructure, 19)
-var RouteTruckOptions_AxleCount *smithy.Schema
-
-var RouteTruckOptions_EngineType *smithy.Schema
-
-var RouteTruckOptions_GrossWeight *smithy.Schema
-
-var RouteTruckOptions_HazardousCargos *smithy.Schema
-
-var RouteTruckOptions_Height *smithy.Schema
-
-var RouteTruckOptions_HeightAboveFirstAxle *smithy.Schema
-
-var RouteTruckOptions_KpraLength *smithy.Schema
-
-var RouteTruckOptions_Length *smithy.Schema
-
-var RouteTruckOptions_LicensePlate *smithy.Schema
-
-var RouteTruckOptions_MaxSpeed *smithy.Schema
-
-var RouteTruckOptions_Occupancy *smithy.Schema
-
-var RouteTruckOptions_PayloadCapacity *smithy.Schema
-
-var RouteTruckOptions_TireCount *smithy.Schema
-
-var RouteTruckOptions_Trailer *smithy.Schema
-
-var RouteTruckOptions_TruckType *smithy.Schema
-
-var RouteTruckOptions_TunnelRestrictionCode *smithy.Schema
-
-var RouteTruckOptions_WeightPerAxle *smithy.Schema
-
-var RouteTruckOptions_WeightPerAxleGroup *smithy.Schema
-
-var RouteTruckOptions_Width *smithy.Schema
-
-var RouteTruckType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTruckType",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteTruckType_LIGHT_TRUCK *smithy.Schema
-
-var RouteTruckType_STRAIGHT_TRUCK *smithy.Schema
-
-var RouteTruckType_TRACTOR *smithy.Schema
-
-var RouteTurnIntensity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTurnIntensity",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteTurnIntensity_SHARP *smithy.Schema
-
-var RouteTurnIntensity_SLIGHT *smithy.Schema
-
-var RouteTurnIntensity_TYPICAL *smithy.Schema
-
-var RouteTurnStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteTurnStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteTurnStepDetails_Intersection *smithy.Schema
-
-var RouteTurnStepDetails_SteeringDirection *smithy.Schema
-
-var RouteTurnStepDetails_TurnAngle *smithy.Schema
-
-var RouteTurnStepDetails_TurnIntensity *smithy.Schema
-
-var RouteUTurnStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteUTurnStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var RouteUTurnStepDetails_Intersection *smithy.Schema
-
-var RouteUTurnStepDetails_SteeringDirection *smithy.Schema
-
-var RouteUTurnStepDetails_TurnAngle *smithy.Schema
-
-var RouteUTurnStepDetails_TurnIntensity *smithy.Schema
-
-var RouteVehicleAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleAfterTravelStep",
-}, smithy.ShapeTypeStructure, 4)
-var RouteVehicleAfterTravelStep_ChargeStepDetails *smithy.Schema
-
-var RouteVehicleAfterTravelStep_Duration *smithy.Schema
-
-var RouteVehicleAfterTravelStep_Instruction *smithy.Schema
-
-var RouteVehicleAfterTravelStep_Type *smithy.Schema
-
-var _RouteVehicleAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleAfterTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteVehicleAfterTravelStepList_member *smithy.Schema
-
-var RouteVehicleAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleAfterTravelStepType",
-}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
-var RouteVehicleAfterTravelStepType_PARK *smithy.Schema
-
-var RouteVehicleArrival = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleArrival",
-}, smithy.ShapeTypeStructure, 2)
-var RouteVehicleArrival_Place *smithy.Schema
-
-var RouteVehicleArrival_Time *smithy.Schema
-
-var RouteVehicleDeparture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleDeparture",
-}, smithy.ShapeTypeStructure, 2)
-var RouteVehicleDeparture_Place *smithy.Schema
-
-var RouteVehicleDeparture_Time *smithy.Schema
-
-var RouteVehicleIncident = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleIncident",
-}, smithy.ShapeTypeStructure, 5)
-var RouteVehicleIncident_Description *smithy.Schema
-
-var RouteVehicleIncident_EndTime *smithy.Schema
-
-var RouteVehicleIncident_Severity *smithy.Schema
-
-var RouteVehicleIncident_StartTime *smithy.Schema
-
-var RouteVehicleIncident_Type *smithy.Schema
-
-var _RouteVehicleIncidentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleIncidentList",
-}, smithy.ShapeTypeList, 1)
-var _RouteVehicleIncidentList_member *smithy.Schema
-
-var RouteVehicleIncidentSeverity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleIncidentSeverity",
-}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
-var RouteVehicleIncidentSeverity_CRITICAL *smithy.Schema
-
-var RouteVehicleIncidentSeverity_HIGH *smithy.Schema
-
-var RouteVehicleIncidentSeverity_MEDIUM *smithy.Schema
-
-var RouteVehicleIncidentSeverity_LOW *smithy.Schema
-
-var RouteVehicleIncidentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleIncidentType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var RouteVehicleIncidentType_ACCIDENT *smithy.Schema
-
-var RouteVehicleIncidentType_CONGESTION *smithy.Schema
-
-var RouteVehicleIncidentType_CONSTRUCTION *smithy.Schema
-
-var RouteVehicleIncidentType_DISABLED_VEHICLE *smithy.Schema
-
-var RouteVehicleIncidentType_LANE_RESTRICTION *smithy.Schema
-
-var RouteVehicleIncidentType_MASS_TRANSIT *smithy.Schema
-
-var RouteVehicleIncidentType_OTHER *smithy.Schema
-
-var RouteVehicleIncidentType_PLANNED_EVENT *smithy.Schema
-
-var RouteVehicleIncidentType_ROAD_CLOSURE *smithy.Schema
-
-var RouteVehicleIncidentType_ROAD_HAZARD *smithy.Schema
-
-var RouteVehicleIncidentType_WEATHER *smithy.Schema
-
-var RouteVehicleLegDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleLegDetails",
-}, smithy.ShapeTypeStructure, 13)
-var RouteVehicleLegDetails_AfterTravelSteps *smithy.Schema
-
-var RouteVehicleLegDetails_Arrival *smithy.Schema
-
-var RouteVehicleLegDetails_Departure *smithy.Schema
-
-var RouteVehicleLegDetails_Incidents *smithy.Schema
-
-var RouteVehicleLegDetails_Notices *smithy.Schema
-
-var RouteVehicleLegDetails_PassThroughWaypoints *smithy.Schema
-
-var RouteVehicleLegDetails_Spans *smithy.Schema
-
-var RouteVehicleLegDetails_Summary *smithy.Schema
-
-var RouteVehicleLegDetails_Tolls *smithy.Schema
-
-var RouteVehicleLegDetails_TollSystems *smithy.Schema
-
-var RouteVehicleLegDetails_TravelSteps *smithy.Schema
-
-var RouteVehicleLegDetails_TruckRoadTypes *smithy.Schema
-
-var RouteVehicleLegDetails_Zones *smithy.Schema
-
-var RouteVehicleLicensePlate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleLicensePlate",
-}, smithy.ShapeTypeStructure, 1)
-var RouteVehicleLicensePlate_LastCharacter *smithy.Schema
-
-var RouteVehicleMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleMode",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var RouteVehicleMode_ALL *smithy.Schema
-
-var RouteVehicleMode_CAR *smithy.Schema
-
-var _RouteVehicleModeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleModeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteVehicleModeList_member *smithy.Schema
-
-var RouteVehicleNotice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleNotice",
-}, smithy.ShapeTypeStructure, 3)
-var RouteVehicleNotice_Code *smithy.Schema
-
-var RouteVehicleNotice_Details *smithy.Schema
-
-var RouteVehicleNotice_Impact *smithy.Schema
-
-var RouteVehicleNoticeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleNoticeCode",
-}, smithy.ShapeTypeEnum, 28)
-var RouteVehicleNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
-
-var RouteVehicleNoticeCode_OTHER *smithy.Schema
-
-var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE *smithy.Schema
-
-var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_CARPOOL_USAGE *smithy.Schema
-
-var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE *smithy.Schema
-
-var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE *smithy.Schema
-
-var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE *smithy.Schema
-
-var RouteVehicleNoticeCode_SEASONAL_CLOSURE *smithy.Schema
-
-var RouteVehicleNoticeCode_TOLLS_DATA_TEMPORARILY_UNAVAILABLE *smithy.Schema
-
-var RouteVehicleNoticeCode_TOLLS_DATA_UNAVAILABLE *smithy.Schema
-
-var RouteVehicleNoticeCode_TOLL_TRANSPONDER *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_DIFFICULT_TURNS *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_DIRT_ROAD *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_SEASONAL_CLOSURE *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_ROAD *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_TRANSPONDER *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_TRUCK_ROAD_TYPE *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_TUNNEL *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_AVOID_U_TURNS *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_BLOCKED_ROAD *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_CARPOOL *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_EMERGENCY_GATE *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_START_DIRECTION *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_TURN_RESTRICTION *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_VEHICLE_RESTRICTION *smithy.Schema
-
-var RouteVehicleNoticeCode_VIOLATED_ZONE_RESTRICTION *smithy.Schema
-
-var RouteVehicleNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS *smithy.Schema
-
-var RouteVehicleNoticeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleNoticeDetail",
-}, smithy.ShapeTypeStructure, 2)
-var RouteVehicleNoticeDetail_Title *smithy.Schema
-
-var RouteVehicleNoticeDetail_ViolatedConstraints *smithy.Schema
-
-var _RouteVehicleNoticeDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleNoticeDetailList",
-}, smithy.ShapeTypeList, 1)
-var _RouteVehicleNoticeDetailList_member *smithy.Schema
-
-var _RouteVehicleNoticeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleNoticeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteVehicleNoticeList_member *smithy.Schema
-
-var RouteVehicleOverviewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleOverviewSummary",
-}, smithy.ShapeTypeStructure, 4)
-var RouteVehicleOverviewSummary_BestCaseDuration *smithy.Schema
-
-var RouteVehicleOverviewSummary_Distance *smithy.Schema
-
-var RouteVehicleOverviewSummary_Duration *smithy.Schema
-
-var RouteVehicleOverviewSummary_TypicalDuration *smithy.Schema
-
-var RouteVehiclePlace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehiclePlace",
-}, smithy.ShapeTypeStructure, 8)
-var RouteVehiclePlace_Name *smithy.Schema
-
-var RouteVehiclePlace_OriginalPosition *smithy.Schema
-
-var RouteVehiclePlace_Position *smithy.Schema
-
-var RouteVehiclePlace_SideOfStreet *smithy.Schema
-
-var RouteVehiclePlace_WaypointIndex *smithy.Schema
-
-var RouteVehiclePlace_AccessPointDetails *smithy.Schema
-
-var RouteVehiclePlace_StationDetails *smithy.Schema
-
-var RouteVehiclePlace_Type *smithy.Schema
-
-var RouteVehiclePlaceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehiclePlaceType",
-}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
-var RouteVehiclePlaceType_ACCESS_POINT *smithy.Schema
-
-var RouteVehiclePlaceType_DOCKING_STATION *smithy.Schema
-
-var RouteVehiclePlaceType_PARKING_LOT *smithy.Schema
-
-var RouteVehiclePlaceType_STATION *smithy.Schema
-
-var RouteVehicleSpan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleSpan",
-}, smithy.ShapeTypeStructure, 23)
-var RouteVehicleSpan_BestCaseDuration *smithy.Schema
-
-var RouteVehicleSpan_CarAccess *smithy.Schema
-
-var RouteVehicleSpan_Country *smithy.Schema
-
-var RouteVehicleSpan_Distance *smithy.Schema
-
-var RouteVehicleSpan_Duration *smithy.Schema
-
-var RouteVehicleSpan_DynamicSpeed *smithy.Schema
-
-var RouteVehicleSpan_FunctionalClassification *smithy.Schema
-
-var RouteVehicleSpan_Gate *smithy.Schema
-
-var RouteVehicleSpan_GeometryOffset *smithy.Schema
-
-var RouteVehicleSpan_Incidents *smithy.Schema
-
-var RouteVehicleSpan_Names *smithy.Schema
-
-var RouteVehicleSpan_Notices *smithy.Schema
-
-var RouteVehicleSpan_RailwayCrossing *smithy.Schema
-
-var RouteVehicleSpan_Region *smithy.Schema
-
-var RouteVehicleSpan_RoadAttributes *smithy.Schema
-
-var RouteVehicleSpan_RouteNumbers *smithy.Schema
-
-var RouteVehicleSpan_ScooterAccess *smithy.Schema
-
-var RouteVehicleSpan_SpeedLimit *smithy.Schema
-
-var RouteVehicleSpan_TollSystems *smithy.Schema
-
-var RouteVehicleSpan_TruckAccess *smithy.Schema
-
-var RouteVehicleSpan_TruckRoadTypes *smithy.Schema
-
-var RouteVehicleSpan_TypicalDuration *smithy.Schema
-
-var RouteVehicleSpan_Zones *smithy.Schema
-
-var _RouteVehicleSpanList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleSpanList",
-}, smithy.ShapeTypeList, 1)
-var _RouteVehicleSpanList_member *smithy.Schema
-
-var RouteVehicleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RouteVehicleSummary_Overview *smithy.Schema
-
-var RouteVehicleSummary_TravelOnly *smithy.Schema
-
-var RouteVehicleTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleTravelOnlySummary",
-}, smithy.ShapeTypeStructure, 3)
-var RouteVehicleTravelOnlySummary_BestCaseDuration *smithy.Schema
-
-var RouteVehicleTravelOnlySummary_Duration *smithy.Schema
-
-var RouteVehicleTravelOnlySummary_TypicalDuration *smithy.Schema
-
-var RouteVehicleTravelStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleTravelStep",
-}, smithy.ShapeTypeStructure, 20)
-var RouteVehicleTravelStep_ContinueHighwayStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_ContinueStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_CurrentRoad *smithy.Schema
-
-var RouteVehicleTravelStep_Distance *smithy.Schema
-
-var RouteVehicleTravelStep_Duration *smithy.Schema
-
-var RouteVehicleTravelStep_EnterHighwayStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_ExitNumber *smithy.Schema
-
-var RouteVehicleTravelStep_ExitStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_GeometryOffset *smithy.Schema
-
-var RouteVehicleTravelStep_Instruction *smithy.Schema
-
-var RouteVehicleTravelStep_KeepStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_NextRoad *smithy.Schema
-
-var RouteVehicleTravelStep_RampStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_RoundaboutEnterStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_RoundaboutExitStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_RoundaboutPassStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_Signpost *smithy.Schema
-
-var RouteVehicleTravelStep_TurnStepDetails *smithy.Schema
-
-var RouteVehicleTravelStep_Type *smithy.Schema
-
-var RouteVehicleTravelStep_UTurnStepDetails *smithy.Schema
-
-var _RouteVehicleTravelStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleTravelStepList",
-}, smithy.ShapeTypeList, 1)
-var _RouteVehicleTravelStepList_member *smithy.Schema
-
-var RouteVehicleTravelStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteVehicleTravelStepType",
-}, smithy.ShapeTypeEnum, 13, &smithytraits.Sensitive{})
-var RouteVehicleTravelStepType_ARRIVE *smithy.Schema
-
-var RouteVehicleTravelStepType_CONTINUE *smithy.Schema
-
-var RouteVehicleTravelStepType_CONTINUE_HIGHWAY *smithy.Schema
-
-var RouteVehicleTravelStepType_DEPART *smithy.Schema
-
-var RouteVehicleTravelStepType_ENTER_HIGHWAY *smithy.Schema
-
-var RouteVehicleTravelStepType_EXIT *smithy.Schema
-
-var RouteVehicleTravelStepType_KEEP *smithy.Schema
-
-var RouteVehicleTravelStepType_RAMP *smithy.Schema
-
-var RouteVehicleTravelStepType_ROUNDABOUT_ENTER *smithy.Schema
-
-var RouteVehicleTravelStepType_ROUNDABOUT_EXIT *smithy.Schema
-
-var RouteVehicleTravelStepType_ROUNDABOUT_PASS *smithy.Schema
-
-var RouteVehicleTravelStepType_TURN *smithy.Schema
-
-var RouteVehicleTravelStepType_U_TURN *smithy.Schema
-
-var RouteViolatedConstraints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteViolatedConstraints",
-}, smithy.ShapeTypeStructure, 19)
-var RouteViolatedConstraints_AllHazardsRestricted *smithy.Schema
-
-var RouteViolatedConstraints_AxleCount *smithy.Schema
-
-var RouteViolatedConstraints_HazardousCargos *smithy.Schema
-
-var RouteViolatedConstraints_MaxHeight *smithy.Schema
-
-var RouteViolatedConstraints_MaxKpraLength *smithy.Schema
-
-var RouteViolatedConstraints_MaxLength *smithy.Schema
-
-var RouteViolatedConstraints_MaxPayloadCapacity *smithy.Schema
-
-var RouteViolatedConstraints_MaxWeight *smithy.Schema
-
-var RouteViolatedConstraints_MaxWeightPerAxle *smithy.Schema
-
-var RouteViolatedConstraints_MaxWeightPerAxleGroup *smithy.Schema
-
-var RouteViolatedConstraints_MaxWidth *smithy.Schema
-
-var RouteViolatedConstraints_Occupancy *smithy.Schema
-
-var RouteViolatedConstraints_RestrictedTimes *smithy.Schema
-
-var RouteViolatedConstraints_TimeDependent *smithy.Schema
-
-var RouteViolatedConstraints_TrailerCount *smithy.Schema
-
-var RouteViolatedConstraints_TravelMode *smithy.Schema
-
-var RouteViolatedConstraints_TruckRoadType *smithy.Schema
-
-var RouteViolatedConstraints_TruckType *smithy.Schema
-
-var RouteViolatedConstraints_TunnelRestrictionCode *smithy.Schema
-
-var RouteWaypoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteWaypoint",
-}, smithy.ShapeTypeStructure, 8)
-var RouteWaypoint_AvoidActionsForDistance *smithy.Schema
-
-var RouteWaypoint_AvoidUTurns *smithy.Schema
-
-var RouteWaypoint_Heading *smithy.Schema
-
-var RouteWaypoint_Matching *smithy.Schema
-
-var RouteWaypoint_PassThrough *smithy.Schema
-
-var RouteWaypoint_Position *smithy.Schema
-
-var RouteWaypoint_SideOfStreet *smithy.Schema
-
-var RouteWaypoint_StopDuration *smithy.Schema
-
-var _RouteWaypointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteWaypointList",
-}, smithy.ShapeTypeList, 1)
-var _RouteWaypointList_member *smithy.Schema
-
-var RouteWebLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteWebLink",
-}, smithy.ShapeTypeStructure, 4)
-var RouteWebLink_AnchorText *smithy.Schema
-
-var RouteWebLink_Description *smithy.Schema
-
-var RouteWebLink_DeviceType *smithy.Schema
-
-var RouteWebLink_Url *smithy.Schema
-
-var RouteWebLinkDeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteWebLinkDeviceType",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteWebLinkDeviceType_ANDROID *smithy.Schema
-
-var RouteWebLinkDeviceType_IOS *smithy.Schema
-
-var RouteWebLinkDeviceType_WEB *smithy.Schema
-
-var _RouteWebLinkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteWebLinkList",
-}, smithy.ShapeTypeList, 1)
-var _RouteWebLinkList_member *smithy.Schema
-
-var RouteWeightConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteWeightConstraint",
-}, smithy.ShapeTypeStructure, 2)
-var RouteWeightConstraint_Type *smithy.Schema
-
-var RouteWeightConstraint_Value *smithy.Schema
-
-var RouteWeightConstraintType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteWeightConstraintType",
-}, smithy.ShapeTypeEnum, 3)
-var RouteWeightConstraintType_CURRENT *smithy.Schema
-
-var RouteWeightConstraintType_GROSS *smithy.Schema
-
-var RouteWeightConstraintType_UNKNOWN *smithy.Schema
-
-var RouteZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteZone",
-}, smithy.ShapeTypeStructure, 2)
-var RouteZone_Category *smithy.Schema
-
-var RouteZone_Name *smithy.Schema
-
-var RouteZoneCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteZoneCategory",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var RouteZoneCategory_CONGESTION_PRICING *smithy.Schema
-
-var RouteZoneCategory_ENVIRONMENTAL *smithy.Schema
-
-var RouteZoneCategory_VIGNETTE *smithy.Schema
-
-var _RouteZoneList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RouteZoneList",
-}, smithy.ShapeTypeList, 1)
-var _RouteZoneList_member *smithy.Schema
-
-var RoutingObjective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "RoutingObjective",
-}, smithy.ShapeTypeEnum, 2)
-var RoutingObjective_FASTEST_ROUTE *smithy.Schema
-
-var RoutingObjective_SHORTEST_ROUTE *smithy.Schema
-
-var _SensitiveBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SensitiveBoolean",
-}, smithy.ShapeTypeBoolean, 0, &smithytraits.Sensitive{})
-
-var _SensitiveDouble = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SensitiveDouble",
-}, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
-
-var _SensitiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SensitiveInteger",
-}, smithy.ShapeTypeInteger, 0, &smithytraits.Sensitive{})
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SideOfStreetMatchingStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SideOfStreetMatchingStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var SideOfStreetMatchingStrategy_ANY_STREET *smithy.Schema
-
-var SideOfStreetMatchingStrategy_DIVIDED_STREET_ONLY *smithy.Schema
-
-var _SpeedKilometersPerHour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SpeedKilometersPerHour",
-}, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _TimeOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "TimeOfDay",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TimestampWithTimezoneOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "TimestampWithTimezoneOffset",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TimeThresholdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "TimeThresholdList",
-}, smithy.ShapeTypeList, 1)
-var _TimeThresholdList_member *smithy.Schema
-
-var TrafficUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "TrafficUsage",
-}, smithy.ShapeTypeEnum, 2)
-var TrafficUsage_IGNORE_TRAFFIC_DATA *smithy.Schema
-
-var TrafficUsage_USE_TRAFFIC_DATA *smithy.Schema
-
-var _TruckRoadType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "TruckRoadType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TruckRoadTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "TruckRoadTypeList",
-}, smithy.ShapeTypeList, 1)
-var _TruckRoadTypeList_member *smithy.Schema
-
-var _TunnelRestrictionCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "TunnelRestrictionCode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TurnAngle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "TurnAngle",
-}, smithy.ShapeTypeDouble, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_FieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 6)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_MISSING *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ValidationExceptionReason_UNKNOWN_FIELD *smithy.Schema
-
-var _WaypointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointId",
-}, smithy.ShapeTypeString, 0)
-
-var _WaypointIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var WaypointOptimizationAccessHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationAccessHours",
-}, smithy.ShapeTypeStructure, 2)
-var WaypointOptimizationAccessHours_From *smithy.Schema
-
-var WaypointOptimizationAccessHours_To *smithy.Schema
-
-var WaypointOptimizationAccessHoursEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationAccessHoursEntry",
-}, smithy.ShapeTypeStructure, 2)
-var WaypointOptimizationAccessHoursEntry_DayOfWeek *smithy.Schema
-
-var WaypointOptimizationAccessHoursEntry_TimeOfDay *smithy.Schema
-
-var WaypointOptimizationAvoidanceArea = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationAvoidanceArea",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationAvoidanceArea_Geometry *smithy.Schema
-
-var WaypointOptimizationAvoidanceAreaGeometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationAvoidanceAreaGeometry",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationAvoidanceAreaGeometry_BoundingBox *smithy.Schema
-
-var _WaypointOptimizationAvoidanceAreaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationAvoidanceAreaList",
-}, smithy.ShapeTypeList, 1)
-var _WaypointOptimizationAvoidanceAreaList_member *smithy.Schema
-
-var WaypointOptimizationAvoidanceOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationAvoidanceOptions",
-}, smithy.ShapeTypeStructure, 8)
-var WaypointOptimizationAvoidanceOptions_Areas *smithy.Schema
-
-var WaypointOptimizationAvoidanceOptions_CarShuttleTrains *smithy.Schema
-
-var WaypointOptimizationAvoidanceOptions_ControlledAccessHighways *smithy.Schema
-
-var WaypointOptimizationAvoidanceOptions_DirtRoads *smithy.Schema
-
-var WaypointOptimizationAvoidanceOptions_Ferries *smithy.Schema
-
-var WaypointOptimizationAvoidanceOptions_TollRoads *smithy.Schema
-
-var WaypointOptimizationAvoidanceOptions_Tunnels *smithy.Schema
-
-var WaypointOptimizationAvoidanceOptions_UTurns *smithy.Schema
-
-var WaypointOptimizationClusteringAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationClusteringAlgorithm",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var WaypointOptimizationClusteringAlgorithm_DRIVING_DISTANCE *smithy.Schema
-
-var WaypointOptimizationClusteringAlgorithm_TOPOLOGY_SEGMENT *smithy.Schema
-
-var WaypointOptimizationClusteringOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationClusteringOptions",
-}, smithy.ShapeTypeStructure, 2)
-var WaypointOptimizationClusteringOptions_Algorithm *smithy.Schema
-
-var WaypointOptimizationClusteringOptions_DrivingDistanceOptions *smithy.Schema
-
-var WaypointOptimizationConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationConnection",
-}, smithy.ShapeTypeStructure, 6)
-var WaypointOptimizationConnection_Distance *smithy.Schema
-
-var WaypointOptimizationConnection_From *smithy.Schema
-
-var WaypointOptimizationConnection_RestDuration *smithy.Schema
-
-var WaypointOptimizationConnection_To *smithy.Schema
-
-var WaypointOptimizationConnection_TravelDuration *smithy.Schema
-
-var WaypointOptimizationConnection_WaitDuration *smithy.Schema
-
-var _WaypointOptimizationConnectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationConnectionList",
-}, smithy.ShapeTypeList, 1)
-var _WaypointOptimizationConnectionList_member *smithy.Schema
-
-var WaypointOptimizationConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationConstraint",
-}, smithy.ShapeTypeEnum, 6, &smithytraits.Sensitive{})
-var WaypointOptimizationConstraint_ACCESS_HOURS *smithy.Schema
-
-var WaypointOptimizationConstraint_APPOINTMENT_TIME *smithy.Schema
-
-var WaypointOptimizationConstraint_BEFORE *smithy.Schema
-
-var WaypointOptimizationConstraint_HEADING *smithy.Schema
-
-var WaypointOptimizationConstraint_SERVICE_DURATION *smithy.Schema
-
-var WaypointOptimizationConstraint_SIDE_OF_STREET *smithy.Schema
-
-var WaypointOptimizationDestinationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationDestinationOptions",
-}, smithy.ShapeTypeStructure, 6)
-var WaypointOptimizationDestinationOptions_AccessHours *smithy.Schema
-
-var WaypointOptimizationDestinationOptions_AppointmentTime *smithy.Schema
-
-var WaypointOptimizationDestinationOptions_Heading *smithy.Schema
-
-var WaypointOptimizationDestinationOptions_Id *smithy.Schema
-
-var WaypointOptimizationDestinationOptions_ServiceDuration *smithy.Schema
-
-var WaypointOptimizationDestinationOptions_SideOfStreet *smithy.Schema
-
-var WaypointOptimizationDriverOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationDriverOptions",
-}, smithy.ShapeTypeStructure, 3)
-var WaypointOptimizationDriverOptions_RestCycles *smithy.Schema
-
-var WaypointOptimizationDriverOptions_RestProfile *smithy.Schema
-
-var WaypointOptimizationDriverOptions_TreatServiceTimeAs *smithy.Schema
-
-var _WaypointOptimizationDrivingDistance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationDrivingDistance",
-}, smithy.ShapeTypeLong, 0)
-
-var WaypointOptimizationDrivingDistanceOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationDrivingDistanceOptions",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationDrivingDistanceOptions_DrivingDistance *smithy.Schema
-
-var WaypointOptimizationExclusionOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationExclusionOptions",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationExclusionOptions_Countries *smithy.Schema
-
-var WaypointOptimizationFailedConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationFailedConstraint",
-}, smithy.ShapeTypeStructure, 2)
-var WaypointOptimizationFailedConstraint_Constraint *smithy.Schema
-
-var WaypointOptimizationFailedConstraint_Reason *smithy.Schema
-
-var _WaypointOptimizationFailedConstraintList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationFailedConstraintList",
-}, smithy.ShapeTypeList, 1)
-var _WaypointOptimizationFailedConstraintList_member *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationHazardousCargoType",
-}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
-var WaypointOptimizationHazardousCargoType_COMBUSTIBLE *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_CORROSIVE *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_EXPLOSIVE *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_FLAMMABLE *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_GAS *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_ORGANIC *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_OTHER *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_POISON *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
-
-var WaypointOptimizationHazardousCargoType_RADIOACTIVE *smithy.Schema
-
-var _WaypointOptimizationHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationHazardousCargoTypeList",
-}, smithy.ShapeTypeList, 1)
-var _WaypointOptimizationHazardousCargoTypeList_member *smithy.Schema
-
-var WaypointOptimizationImpedingWaypoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationImpedingWaypoint",
-}, smithy.ShapeTypeStructure, 3)
-var WaypointOptimizationImpedingWaypoint_FailedConstraints *smithy.Schema
-
-var WaypointOptimizationImpedingWaypoint_Id *smithy.Schema
-
-var WaypointOptimizationImpedingWaypoint_Position *smithy.Schema
-
-var _WaypointOptimizationImpedingWaypointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationImpedingWaypointList",
-}, smithy.ShapeTypeList, 1)
-var _WaypointOptimizationImpedingWaypointList_member *smithy.Schema
-
-var WaypointOptimizationOptimizedWaypoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationOptimizedWaypoint",
-}, smithy.ShapeTypeStructure, 5)
-var WaypointOptimizationOptimizedWaypoint_ArrivalTime *smithy.Schema
-
-var WaypointOptimizationOptimizedWaypoint_ClusterIndex *smithy.Schema
-
-var WaypointOptimizationOptimizedWaypoint_DepartureTime *smithy.Schema
-
-var WaypointOptimizationOptimizedWaypoint_Id *smithy.Schema
-
-var WaypointOptimizationOptimizedWaypoint_Position *smithy.Schema
-
-var _WaypointOptimizationOptimizedWaypointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationOptimizedWaypointList",
-}, smithy.ShapeTypeList, 1)
-var _WaypointOptimizationOptimizedWaypointList_member *smithy.Schema
-
-var WaypointOptimizationOriginOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationOriginOptions",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationOriginOptions_Id *smithy.Schema
-
-var WaypointOptimizationPedestrianOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationPedestrianOptions",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationPedestrianOptions_Speed *smithy.Schema
-
-var WaypointOptimizationRestCycleDurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationRestCycleDurations",
-}, smithy.ShapeTypeStructure, 2)
-var WaypointOptimizationRestCycleDurations_RestDuration *smithy.Schema
-
-var WaypointOptimizationRestCycleDurations_WorkDuration *smithy.Schema
-
-var WaypointOptimizationRestCycles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationRestCycles",
-}, smithy.ShapeTypeStructure, 2)
-var WaypointOptimizationRestCycles_LongCycle *smithy.Schema
-
-var WaypointOptimizationRestCycles_ShortCycle *smithy.Schema
-
-var WaypointOptimizationRestProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationRestProfile",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationRestProfile_Profile *smithy.Schema
-
-var WaypointOptimizationSequencingObjective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationSequencingObjective",
-}, smithy.ShapeTypeEnum, 2)
-var WaypointOptimizationSequencingObjective_FASTEST_ROUTE *smithy.Schema
-
-var WaypointOptimizationSequencingObjective_SHORTEST_ROUTE *smithy.Schema
-
-var WaypointOptimizationServiceTimeTreatment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationServiceTimeTreatment",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var WaypointOptimizationServiceTimeTreatment_REST *smithy.Schema
-
-var WaypointOptimizationServiceTimeTreatment_WORK *smithy.Schema
-
-var WaypointOptimizationSideOfStreetOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationSideOfStreetOptions",
-}, smithy.ShapeTypeStructure, 2)
-var WaypointOptimizationSideOfStreetOptions_Position *smithy.Schema
-
-var WaypointOptimizationSideOfStreetOptions_UseWith *smithy.Schema
-
-var WaypointOptimizationTimeBreakdown = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationTimeBreakdown",
-}, smithy.ShapeTypeStructure, 4)
-var WaypointOptimizationTimeBreakdown_RestDuration *smithy.Schema
-
-var WaypointOptimizationTimeBreakdown_ServiceDuration *smithy.Schema
-
-var WaypointOptimizationTimeBreakdown_TravelDuration *smithy.Schema
-
-var WaypointOptimizationTimeBreakdown_WaitDuration *smithy.Schema
-
-var WaypointOptimizationTrafficOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationTrafficOptions",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationTrafficOptions_Usage *smithy.Schema
-
-var WaypointOptimizationTrailerOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationTrailerOptions",
-}, smithy.ShapeTypeStructure, 1)
-var WaypointOptimizationTrailerOptions_TrailerCount *smithy.Schema
-
-var WaypointOptimizationTravelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationTravelMode",
-}, smithy.ShapeTypeEnum, 4)
-var WaypointOptimizationTravelMode_CAR *smithy.Schema
-
-var WaypointOptimizationTravelMode_PEDESTRIAN *smithy.Schema
-
-var WaypointOptimizationTravelMode_SCOOTER *smithy.Schema
-
-var WaypointOptimizationTravelMode_TRUCK *smithy.Schema
-
-var WaypointOptimizationTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationTravelModeOptions",
-}, smithy.ShapeTypeStructure, 2)
-var WaypointOptimizationTravelModeOptions_Pedestrian *smithy.Schema
-
-var WaypointOptimizationTravelModeOptions_Truck *smithy.Schema
-
-var WaypointOptimizationTruckOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationTruckOptions",
-}, smithy.ShapeTypeStructure, 9)
-var WaypointOptimizationTruckOptions_GrossWeight *smithy.Schema
-
-var WaypointOptimizationTruckOptions_HazardousCargos *smithy.Schema
-
-var WaypointOptimizationTruckOptions_Height *smithy.Schema
-
-var WaypointOptimizationTruckOptions_Length *smithy.Schema
-
-var WaypointOptimizationTruckOptions_Trailer *smithy.Schema
-
-var WaypointOptimizationTruckOptions_TruckType *smithy.Schema
-
-var WaypointOptimizationTruckOptions_TunnelRestrictionCode *smithy.Schema
-
-var WaypointOptimizationTruckOptions_WeightPerAxle *smithy.Schema
-
-var WaypointOptimizationTruckOptions_Width *smithy.Schema
-
-var WaypointOptimizationTruckType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationTruckType",
-}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
-var WaypointOptimizationTruckType_STRAIGHT_TRUCK *smithy.Schema
-
-var WaypointOptimizationTruckType_TRACTOR *smithy.Schema
-
-var WaypointOptimizationWaypoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationWaypoint",
-}, smithy.ShapeTypeStructure, 8)
-var WaypointOptimizationWaypoint_AccessHours *smithy.Schema
-
-var WaypointOptimizationWaypoint_AppointmentTime *smithy.Schema
-
-var WaypointOptimizationWaypoint_Before *smithy.Schema
-
-var WaypointOptimizationWaypoint_Heading *smithy.Schema
-
-var WaypointOptimizationWaypoint_Id *smithy.Schema
-
-var WaypointOptimizationWaypoint_Position *smithy.Schema
-
-var WaypointOptimizationWaypoint_ServiceDuration *smithy.Schema
-
-var WaypointOptimizationWaypoint_SideOfStreet *smithy.Schema
-
-var _WaypointOptimizationWaypointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WaypointOptimizationWaypointList",
-}, smithy.ShapeTypeList, 1)
-var _WaypointOptimizationWaypointList_member *smithy.Schema
-
-var _WeightKilograms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WeightKilograms",
-}, smithy.ShapeTypeLong, 0, &smithytraits.Sensitive{})
-
-var WeightPerAxleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "WeightPerAxleGroup",
-}, smithy.ShapeTypeStructure, 5)
-var WeightPerAxleGroup_Single *smithy.Schema
-
-var WeightPerAxleGroup_Tandem *smithy.Schema
-
-var WeightPerAxleGroup_Triple *smithy.Schema
-
-var WeightPerAxleGroup_Quad *smithy.Schema
-
-var WeightPerAxleGroup_Quint *smithy.Schema
-
-var CalculateIsolinesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateIsolinesRequest",
-}, smithy.ShapeTypeStructure, 18)
-var CalculateIsolinesRequest_Allow *smithy.Schema
-
-var CalculateIsolinesRequest_ArrivalTime *smithy.Schema
-
-var CalculateIsolinesRequest_Avoid *smithy.Schema
-
-var CalculateIsolinesRequest_DepartNow *smithy.Schema
-
-var CalculateIsolinesRequest_DepartureTime *smithy.Schema
-
-var CalculateIsolinesRequest_Destination *smithy.Schema
-
-var CalculateIsolinesRequest_DestinationOptions *smithy.Schema
-
-var CalculateIsolinesRequest_IsolineGeometryFormat *smithy.Schema
-
-var CalculateIsolinesRequest_IsolineGranularity *smithy.Schema
-
-var CalculateIsolinesRequest_Key *smithy.Schema
-
-var CalculateIsolinesRequest_OptimizeIsolineFor *smithy.Schema
-
-var CalculateIsolinesRequest_OptimizeRoutingFor *smithy.Schema
-
-var CalculateIsolinesRequest_Origin *smithy.Schema
-
-var CalculateIsolinesRequest_OriginOptions *smithy.Schema
-
-var CalculateIsolinesRequest_Thresholds *smithy.Schema
-
-var CalculateIsolinesRequest_Traffic *smithy.Schema
-
-var CalculateIsolinesRequest_TravelMode *smithy.Schema
-
-var CalculateIsolinesRequest_TravelModeOptions *smithy.Schema
-
-var CalculateIsolinesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateIsolinesResponse",
-}, smithy.ShapeTypeStructure, 7)
-var CalculateIsolinesResponse_ArrivalTime *smithy.Schema
-
-var CalculateIsolinesResponse_DepartureTime *smithy.Schema
-
-var CalculateIsolinesResponse_IsolineGeometryFormat *smithy.Schema
-
-var CalculateIsolinesResponse_Isolines *smithy.Schema
-
-var CalculateIsolinesResponse_PricingBucket *smithy.Schema
-
-var CalculateIsolinesResponse_SnappedDestination *smithy.Schema
-
-var CalculateIsolinesResponse_SnappedOrigin *smithy.Schema
-
-var CalculateRouteMatrixRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateRouteMatrixRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CalculateRouteMatrixRequest_Allow *smithy.Schema
-
-var CalculateRouteMatrixRequest_Avoid *smithy.Schema
-
-var CalculateRouteMatrixRequest_DepartNow *smithy.Schema
-
-var CalculateRouteMatrixRequest_DepartureTime *smithy.Schema
-
-var CalculateRouteMatrixRequest_Destinations *smithy.Schema
-
-var CalculateRouteMatrixRequest_Exclude *smithy.Schema
-
-var CalculateRouteMatrixRequest_Key *smithy.Schema
-
-var CalculateRouteMatrixRequest_OptimizeRoutingFor *smithy.Schema
-
-var CalculateRouteMatrixRequest_Origins *smithy.Schema
-
-var CalculateRouteMatrixRequest_RoutingBoundary *smithy.Schema
-
-var CalculateRouteMatrixRequest_Traffic *smithy.Schema
-
-var CalculateRouteMatrixRequest_TravelMode *smithy.Schema
-
-var CalculateRouteMatrixRequest_TravelModeOptions *smithy.Schema
-
-var CalculateRouteMatrixResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateRouteMatrixResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CalculateRouteMatrixResponse_ErrorCount *smithy.Schema
-
-var CalculateRouteMatrixResponse_PricingBucket *smithy.Schema
-
-var CalculateRouteMatrixResponse_RouteMatrix *smithy.Schema
-
-var CalculateRouteMatrixResponse_RoutingBoundary *smithy.Schema
-
-var CalculateRoutesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateRoutesRequest",
-}, smithy.ShapeTypeStructure, 25)
-var CalculateRoutesRequest_Allow *smithy.Schema
-
-var CalculateRoutesRequest_ArrivalTime *smithy.Schema
-
-var CalculateRoutesRequest_Avoid *smithy.Schema
-
-var CalculateRoutesRequest_DepartNow *smithy.Schema
-
-var CalculateRoutesRequest_DepartureTime *smithy.Schema
-
-var CalculateRoutesRequest_Destination *smithy.Schema
-
-var CalculateRoutesRequest_DestinationOptions *smithy.Schema
-
-var CalculateRoutesRequest_Driver *smithy.Schema
-
-var CalculateRoutesRequest_Exclude *smithy.Schema
-
-var CalculateRoutesRequest_InstructionsMeasurementSystem *smithy.Schema
-
-var CalculateRoutesRequest_Key *smithy.Schema
-
-var CalculateRoutesRequest_Languages *smithy.Schema
-
-var CalculateRoutesRequest_LegAdditionalFeatures *smithy.Schema
-
-var CalculateRoutesRequest_LegGeometryFormat *smithy.Schema
-
-var CalculateRoutesRequest_MaxAlternatives *smithy.Schema
-
-var CalculateRoutesRequest_OptimizeRoutingFor *smithy.Schema
-
-var CalculateRoutesRequest_Origin *smithy.Schema
-
-var CalculateRoutesRequest_OriginOptions *smithy.Schema
-
-var CalculateRoutesRequest_SpanAdditionalFeatures *smithy.Schema
-
-var CalculateRoutesRequest_Tolls *smithy.Schema
-
-var CalculateRoutesRequest_Traffic *smithy.Schema
-
-var CalculateRoutesRequest_TravelMode *smithy.Schema
-
-var CalculateRoutesRequest_TravelModeOptions *smithy.Schema
-
-var CalculateRoutesRequest_TravelStepType *smithy.Schema
-
-var CalculateRoutesRequest_Waypoints *smithy.Schema
-
-var CalculateRoutesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "CalculateRoutesResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CalculateRoutesResponse_LegGeometryFormat *smithy.Schema
-
-var CalculateRoutesResponse_Notices *smithy.Schema
-
-var CalculateRoutesResponse_PricingBucket *smithy.Schema
-
-var CalculateRoutesResponse_Routes *smithy.Schema
-
-var OptimizeWaypointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "OptimizeWaypointsRequest",
-}, smithy.ShapeTypeStructure, 15)
-var OptimizeWaypointsRequest_Avoid *smithy.Schema
-
-var OptimizeWaypointsRequest_Clustering *smithy.Schema
-
-var OptimizeWaypointsRequest_DepartureTime *smithy.Schema
-
-var OptimizeWaypointsRequest_Destination *smithy.Schema
-
-var OptimizeWaypointsRequest_DestinationOptions *smithy.Schema
-
-var OptimizeWaypointsRequest_Driver *smithy.Schema
-
-var OptimizeWaypointsRequest_Exclude *smithy.Schema
-
-var OptimizeWaypointsRequest_Key *smithy.Schema
-
-var OptimizeWaypointsRequest_OptimizeSequencingFor *smithy.Schema
-
-var OptimizeWaypointsRequest_Origin *smithy.Schema
-
-var OptimizeWaypointsRequest_OriginOptions *smithy.Schema
-
-var OptimizeWaypointsRequest_Traffic *smithy.Schema
-
-var OptimizeWaypointsRequest_TravelMode *smithy.Schema
-
-var OptimizeWaypointsRequest_TravelModeOptions *smithy.Schema
-
-var OptimizeWaypointsRequest_Waypoints *smithy.Schema
-
-var OptimizeWaypointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "OptimizeWaypointsResponse",
-}, smithy.ShapeTypeStructure, 7)
-var OptimizeWaypointsResponse_Connections *smithy.Schema
-
-var OptimizeWaypointsResponse_Distance *smithy.Schema
-
-var OptimizeWaypointsResponse_Duration *smithy.Schema
-
-var OptimizeWaypointsResponse_ImpedingWaypoints *smithy.Schema
-
-var OptimizeWaypointsResponse_OptimizedWaypoints *smithy.Schema
-
-var OptimizeWaypointsResponse_PricingBucket *smithy.Schema
-
-var OptimizeWaypointsResponse_TimeBreakdown *smithy.Schema
-
-var SnapToRoadsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SnapToRoadsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var SnapToRoadsRequest_Key *smithy.Schema
-
-var SnapToRoadsRequest_SnappedGeometryFormat *smithy.Schema
-
-var SnapToRoadsRequest_SnapRadius *smithy.Schema
-
-var SnapToRoadsRequest_TracePoints *smithy.Schema
-
-var SnapToRoadsRequest_TravelMode *smithy.Schema
-
-var SnapToRoadsRequest_TravelModeOptions *smithy.Schema
-
-var SnapToRoadsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.georoutes",
-	Name:      "SnapToRoadsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var SnapToRoadsResponse_Notices *smithy.Schema
-
-var SnapToRoadsResponse_PricingBucket *smithy.Schema
-
-var SnapToRoadsResponse_SnappedGeometry *smithy.Schema
-
-var SnapToRoadsResponse_SnappedGeometryFormat *smithy.Schema
-
-var SnapToRoadsResponse_SnappedTracePoints *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	_BeforeWaypointsList_member = _BeforeWaypointsList.AddMember("member", _WaypointIndex)
-
-	_BoundingBox_member = _BoundingBox.AddMember("member", smithyprelude.Double)
-
-	_Position_member = _Position.AddMember("member", smithyprelude.Double)
-
-	Circle_Center = Circle.AddMember("Center", _Position)
-
-	Circle_Radius = Circle.AddMember("Radius", _SensitiveDouble)
-
-	_LineString_member = _LineString.AddMember("member", _Position)
-
-	Corridor_LineString = Corridor.AddMember("LineString", _LineString)
-
-	Corridor_Radius = Corridor.AddMember("Radius", smithyprelude.Integer)
-
-	_CountryCodeList_member = _CountryCodeList.AddMember("member", _CountryCode)
-
-	DayOfWeek_MONDAY = DayOfWeek.AddMember("MONDAY", smithyprelude.Unit)
-
-	DayOfWeek_TUESDAY = DayOfWeek.AddMember("TUESDAY", smithyprelude.Unit)
-
-	DayOfWeek_WEDNESDAY = DayOfWeek.AddMember("WEDNESDAY", smithyprelude.Unit)
-
-	DayOfWeek_THURSDAY = DayOfWeek.AddMember("THURSDAY", smithyprelude.Unit)
-
-	DayOfWeek_FRIDAY = DayOfWeek.AddMember("FRIDAY", smithyprelude.Unit)
-
-	DayOfWeek_SATURDAY = DayOfWeek.AddMember("SATURDAY", smithyprelude.Unit)
-
-	DayOfWeek_SUNDAY = DayOfWeek.AddMember("SUNDAY", smithyprelude.Unit)
-
-	_DistanceThresholdList_member = _DistanceThresholdList.AddMember("member", _DistanceMeters)
-
-	GeometryFormat_FLEXIBLE_POLYLINE = GeometryFormat.AddMember("FLEXIBLE_POLYLINE", smithyprelude.Unit)
-
-	GeometryFormat_SIMPLE = GeometryFormat.AddMember("SIMPLE", smithyprelude.Unit)
-
-	_IndexList_member = _IndexList.AddMember("member", smithyprelude.Integer)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	IsolineConnectionGeometry_LineString = IsolineConnectionGeometry.AddMember("LineString", _LineString)
-
-	IsolineConnectionGeometry_Polyline = IsolineConnectionGeometry.AddMember("Polyline", _Polyline)
-
-	IsolineConnection_FromPolygonIndex = IsolineConnection.AddMember("FromPolygonIndex", smithyprelude.Integer)
-
-	IsolineConnection_Geometry = IsolineConnection.AddMember("Geometry", IsolineConnectionGeometry)
-
-	IsolineConnection_ToPolygonIndex = IsolineConnection.AddMember("ToPolygonIndex", smithyprelude.Integer)
-
-	_IsolineConnectionList_member = _IsolineConnectionList.AddMember("member", IsolineConnection)
-
-	_LinearRing_member = _LinearRing.AddMember("member", _Position)
-
-	_LinearRings_member = _LinearRings.AddMember("member", _LinearRing)
-
-	_PolylineRingList_member = _PolylineRingList.AddMember("member", _PolylineRing)
-
-	IsolineShapeGeometry_Polygon = IsolineShapeGeometry.AddMember("Polygon", _LinearRings)
-
-	IsolineShapeGeometry_PolylinePolygon = IsolineShapeGeometry.AddMember("PolylinePolygon", _PolylineRingList)
-
-	_IsolineShapeGeometryList_member = _IsolineShapeGeometryList.AddMember("member", IsolineShapeGeometry)
-
-	Isoline_Connections = Isoline.AddMember("Connections", _IsolineConnectionList)
-
-	Isoline_DistanceThreshold = Isoline.AddMember("DistanceThreshold", _DistanceMeters)
-
-	Isoline_Geometries = Isoline.AddMember("Geometries", _IsolineShapeGeometryList)
-
-	Isoline_TimeThreshold = Isoline.AddMember("TimeThreshold", _DurationSeconds)
-
-	IsolineAllowOptions_Hot = IsolineAllowOptions.AddMember("Hot", _SensitiveBoolean)
-
-	IsolineAllowOptions_Hov = IsolineAllowOptions.AddMember("Hov", _SensitiveBoolean)
-
-	PolylineCorridor_Polyline = PolylineCorridor.AddMember("Polyline", _Polyline)
-
-	PolylineCorridor_Radius = PolylineCorridor.AddMember("Radius", smithyprelude.Integer)
-
-	IsolineAvoidanceAreaGeometry_BoundingBox = IsolineAvoidanceAreaGeometry.AddMember("BoundingBox", _BoundingBox)
-
-	IsolineAvoidanceAreaGeometry_Corridor = IsolineAvoidanceAreaGeometry.AddMember("Corridor", Corridor)
-
-	IsolineAvoidanceAreaGeometry_Polygon = IsolineAvoidanceAreaGeometry.AddMember("Polygon", _LinearRings)
-
-	IsolineAvoidanceAreaGeometry_PolylineCorridor = IsolineAvoidanceAreaGeometry.AddMember("PolylineCorridor", PolylineCorridor)
-
-	IsolineAvoidanceAreaGeometry_PolylinePolygon = IsolineAvoidanceAreaGeometry.AddMember("PolylinePolygon", _PolylineRingList)
-
-	_IsolineAvoidanceAreaGeometryList_member = _IsolineAvoidanceAreaGeometryList.AddMember("member", IsolineAvoidanceAreaGeometry)
-
-	IsolineAvoidanceArea_Except = IsolineAvoidanceArea.AddMember("Except", _IsolineAvoidanceAreaGeometryList)
-
-	IsolineAvoidanceArea_Geometry = IsolineAvoidanceArea.AddMember("Geometry", IsolineAvoidanceAreaGeometry)
-
-	_IsolineAvoidanceAreaList_member = _IsolineAvoidanceAreaList.AddMember("member", IsolineAvoidanceArea)
-
-	_TruckRoadTypeList_member = _TruckRoadTypeList.AddMember("member", _TruckRoadType)
-
-	IsolineZoneCategory_CONGESTION_PRICING = IsolineZoneCategory.AddMember("CONGESTION_PRICING", smithyprelude.Unit)
-
-	IsolineZoneCategory_ENVIRONMENTAL = IsolineZoneCategory.AddMember("ENVIRONMENTAL", smithyprelude.Unit)
-
-	IsolineZoneCategory_VIGNETTE = IsolineZoneCategory.AddMember("VIGNETTE", smithyprelude.Unit)
-
-	IsolineAvoidanceZoneCategory_Category = IsolineAvoidanceZoneCategory.AddMember("Category", IsolineZoneCategory)
-
-	_IsolineAvoidanceZoneCategoryList_member = _IsolineAvoidanceZoneCategoryList.AddMember("member", IsolineAvoidanceZoneCategory)
-
-	IsolineAvoidanceOptions_Areas = IsolineAvoidanceOptions.AddMember("Areas", _IsolineAvoidanceAreaList)
-
-	IsolineAvoidanceOptions_CarShuttleTrains = IsolineAvoidanceOptions.AddMember("CarShuttleTrains", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_ControlledAccessHighways = IsolineAvoidanceOptions.AddMember("ControlledAccessHighways", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_DirtRoads = IsolineAvoidanceOptions.AddMember("DirtRoads", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_Ferries = IsolineAvoidanceOptions.AddMember("Ferries", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_SeasonalClosure = IsolineAvoidanceOptions.AddMember("SeasonalClosure", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_TollRoads = IsolineAvoidanceOptions.AddMember("TollRoads", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_TollTransponders = IsolineAvoidanceOptions.AddMember("TollTransponders", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_TruckRoadTypes = IsolineAvoidanceOptions.AddMember("TruckRoadTypes", _TruckRoadTypeList)
-
-	IsolineAvoidanceOptions_Tunnels = IsolineAvoidanceOptions.AddMember("Tunnels", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_UTurns = IsolineAvoidanceOptions.AddMember("UTurns", _SensitiveBoolean)
-
-	IsolineAvoidanceOptions_ZoneCategories = IsolineAvoidanceOptions.AddMember("ZoneCategories", _IsolineAvoidanceZoneCategoryList)
-
-	IsolineEngineType_ELECTRIC = IsolineEngineType.AddMember("ELECTRIC", smithyprelude.Unit)
-
-	IsolineEngineType_INTERNAL_COMBUSTION = IsolineEngineType.AddMember("INTERNAL_COMBUSTION", smithyprelude.Unit)
-
-	IsolineEngineType_PLUGIN_HYBRID = IsolineEngineType.AddMember("PLUGIN_HYBRID", smithyprelude.Unit)
-
-	IsolineVehicleLicensePlate_LastCharacter = IsolineVehicleLicensePlate.AddMember("LastCharacter", smithyprelude.String)
-
-	IsolineCarOptions_EngineType = IsolineCarOptions.AddMember("EngineType", IsolineEngineType)
-
-	IsolineCarOptions_LicensePlate = IsolineCarOptions.AddMember("LicensePlate", IsolineVehicleLicensePlate)
-
-	IsolineCarOptions_MaxSpeed = IsolineCarOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	IsolineCarOptions_Occupancy = IsolineCarOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	MatchingStrategy_MATCH_ANY = MatchingStrategy.AddMember("MATCH_ANY", smithyprelude.Unit)
-
-	MatchingStrategy_MATCH_MOST_SIGNIFICANT_ROAD = MatchingStrategy.AddMember("MATCH_MOST_SIGNIFICANT_ROAD", smithyprelude.Unit)
-
-	IsolineMatchingOptions_NameHint = IsolineMatchingOptions.AddMember("NameHint", _SensitiveString)
-
-	IsolineMatchingOptions_OnRoadThreshold = IsolineMatchingOptions.AddMember("OnRoadThreshold", _DistanceMeters)
-
-	IsolineMatchingOptions_Radius = IsolineMatchingOptions.AddMember("Radius", _DistanceMeters)
-
-	IsolineMatchingOptions_Strategy = IsolineMatchingOptions.AddMember("Strategy", MatchingStrategy)
-
-	SideOfStreetMatchingStrategy_ANY_STREET = SideOfStreetMatchingStrategy.AddMember("ANY_STREET", smithyprelude.Unit)
-
-	SideOfStreetMatchingStrategy_DIVIDED_STREET_ONLY = SideOfStreetMatchingStrategy.AddMember("DIVIDED_STREET_ONLY", smithyprelude.Unit)
-
-	IsolineSideOfStreetOptions_Position = IsolineSideOfStreetOptions.AddMember("Position", _Position)
-
-	IsolineSideOfStreetOptions_UseWith = IsolineSideOfStreetOptions.AddMember("UseWith", SideOfStreetMatchingStrategy)
-
-	IsolineDestinationOptions_AvoidActionsForDistance = IsolineDestinationOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
-
-	IsolineDestinationOptions_Heading = IsolineDestinationOptions.AddMember("Heading", _Heading)
-
-	IsolineDestinationOptions_Matching = IsolineDestinationOptions.AddMember("Matching", IsolineMatchingOptions)
-
-	IsolineDestinationOptions_SideOfStreet = IsolineDestinationOptions.AddMember("SideOfStreet", IsolineSideOfStreetOptions)
-
-	IsolineGranularityOptions_MaxPoints = IsolineGranularityOptions.AddMember("MaxPoints", smithyprelude.Integer)
-
-	IsolineGranularityOptions_MaxResolution = IsolineGranularityOptions.AddMember("MaxResolution", _DistanceMeters)
-
-	IsolineHazardousCargoType_COMBUSTIBLE = IsolineHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_CORROSIVE = IsolineHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_EXPLOSIVE = IsolineHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_FLAMMABLE = IsolineHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_GAS = IsolineHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_HARMFUL_TO_WATER = IsolineHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_ORGANIC = IsolineHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_OTHER = IsolineHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_POISON = IsolineHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_POISONOUS_INHALATION = IsolineHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
-
-	IsolineHazardousCargoType_RADIOACTIVE = IsolineHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
-
-	_IsolineHazardousCargoTypeList_member = _IsolineHazardousCargoTypeList.AddMember("member", IsolineHazardousCargoType)
-
-	_IsolineList_member = _IsolineList.AddMember("member", Isoline)
-
-	IsolineOptimizationObjective_ACCURATE_CALCULATION = IsolineOptimizationObjective.AddMember("ACCURATE_CALCULATION", smithyprelude.Unit)
-
-	IsolineOptimizationObjective_BALANCED_CALCULATION = IsolineOptimizationObjective.AddMember("BALANCED_CALCULATION", smithyprelude.Unit)
-
-	IsolineOptimizationObjective_FAST_CALCULATION = IsolineOptimizationObjective.AddMember("FAST_CALCULATION", smithyprelude.Unit)
-
-	IsolineOriginOptions_AvoidActionsForDistance = IsolineOriginOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
-
-	IsolineOriginOptions_Heading = IsolineOriginOptions.AddMember("Heading", _Heading)
-
-	IsolineOriginOptions_Matching = IsolineOriginOptions.AddMember("Matching", IsolineMatchingOptions)
-
-	IsolineOriginOptions_SideOfStreet = IsolineOriginOptions.AddMember("SideOfStreet", IsolineSideOfStreetOptions)
-
-	IsolineScooterOptions_EngineType = IsolineScooterOptions.AddMember("EngineType", IsolineEngineType)
-
-	IsolineScooterOptions_LicensePlate = IsolineScooterOptions.AddMember("LicensePlate", IsolineVehicleLicensePlate)
-
-	IsolineScooterOptions_MaxSpeed = IsolineScooterOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	IsolineScooterOptions_Occupancy = IsolineScooterOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	_TimeThresholdList_member = _TimeThresholdList.AddMember("member", _DurationSeconds)
-
-	IsolineThresholds_Distance = IsolineThresholds.AddMember("Distance", _DistanceThresholdList)
-
-	IsolineThresholds_Time = IsolineThresholds.AddMember("Time", _TimeThresholdList)
-
-	TrafficUsage_IGNORE_TRAFFIC_DATA = TrafficUsage.AddMember("IGNORE_TRAFFIC_DATA", smithyprelude.Unit)
-
-	TrafficUsage_USE_TRAFFIC_DATA = TrafficUsage.AddMember("USE_TRAFFIC_DATA", smithyprelude.Unit)
-
-	IsolineTrafficOptions_FlowEventThresholdOverride = IsolineTrafficOptions.AddMember("FlowEventThresholdOverride", _DurationSeconds)
-
-	IsolineTrafficOptions_Usage = IsolineTrafficOptions.AddMember("Usage", TrafficUsage)
-
-	IsolineTrailerOptions_AxleCount = IsolineTrailerOptions.AddMember("AxleCount", _SensitiveInteger)
-
-	IsolineTrailerOptions_TrailerCount = IsolineTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
-
-	IsolineTravelMode_CAR = IsolineTravelMode.AddMember("CAR", smithyprelude.Unit)
-
-	IsolineTravelMode_PEDESTRIAN = IsolineTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
-
-	IsolineTravelMode_SCOOTER = IsolineTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
-
-	IsolineTravelMode_TRUCK = IsolineTravelMode.AddMember("TRUCK", smithyprelude.Unit)
-
-	IsolineTruckType_LIGHT_TRUCK = IsolineTruckType.AddMember("LIGHT_TRUCK", smithyprelude.Unit)
-
-	IsolineTruckType_STRAIGHT_TRUCK = IsolineTruckType.AddMember("STRAIGHT_TRUCK", smithyprelude.Unit)
-
-	IsolineTruckType_TRACTOR = IsolineTruckType.AddMember("TRACTOR", smithyprelude.Unit)
-
-	WeightPerAxleGroup_Single = WeightPerAxleGroup.AddMember("Single", _WeightKilograms)
-
-	WeightPerAxleGroup_Tandem = WeightPerAxleGroup.AddMember("Tandem", _WeightKilograms)
-
-	WeightPerAxleGroup_Triple = WeightPerAxleGroup.AddMember("Triple", _WeightKilograms)
-
-	WeightPerAxleGroup_Quad = WeightPerAxleGroup.AddMember("Quad", _WeightKilograms)
-
-	WeightPerAxleGroup_Quint = WeightPerAxleGroup.AddMember("Quint", _WeightKilograms)
-
-	IsolineTruckOptions_AxleCount = IsolineTruckOptions.AddMember("AxleCount", _SensitiveInteger)
-
-	IsolineTruckOptions_EngineType = IsolineTruckOptions.AddMember("EngineType", IsolineEngineType)
-
-	IsolineTruckOptions_GrossWeight = IsolineTruckOptions.AddMember("GrossWeight", _WeightKilograms)
-
-	IsolineTruckOptions_HazardousCargos = IsolineTruckOptions.AddMember("HazardousCargos", _IsolineHazardousCargoTypeList)
-
-	IsolineTruckOptions_Height = IsolineTruckOptions.AddMember("Height", _DimensionCentimeters)
-
-	IsolineTruckOptions_HeightAboveFirstAxle = IsolineTruckOptions.AddMember("HeightAboveFirstAxle", _DimensionCentimeters)
-
-	IsolineTruckOptions_KpraLength = IsolineTruckOptions.AddMember("KpraLength", _DimensionCentimeters)
-
-	IsolineTruckOptions_Length = IsolineTruckOptions.AddMember("Length", _DimensionCentimeters)
-
-	IsolineTruckOptions_LicensePlate = IsolineTruckOptions.AddMember("LicensePlate", IsolineVehicleLicensePlate)
-
-	IsolineTruckOptions_MaxSpeed = IsolineTruckOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	IsolineTruckOptions_Occupancy = IsolineTruckOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	IsolineTruckOptions_PayloadCapacity = IsolineTruckOptions.AddMember("PayloadCapacity", _WeightKilograms)
-
-	IsolineTruckOptions_TireCount = IsolineTruckOptions.AddMember("TireCount", _SensitiveInteger)
-
-	IsolineTruckOptions_Trailer = IsolineTruckOptions.AddMember("Trailer", IsolineTrailerOptions)
-
-	IsolineTruckOptions_TruckType = IsolineTruckOptions.AddMember("TruckType", IsolineTruckType)
-
-	IsolineTruckOptions_TunnelRestrictionCode = IsolineTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
-
-	IsolineTruckOptions_WeightPerAxle = IsolineTruckOptions.AddMember("WeightPerAxle", _WeightKilograms)
-
-	IsolineTruckOptions_WeightPerAxleGroup = IsolineTruckOptions.AddMember("WeightPerAxleGroup", WeightPerAxleGroup)
-
-	IsolineTruckOptions_Width = IsolineTruckOptions.AddMember("Width", _DimensionCentimeters)
-
-	IsolineTravelModeOptions_Car = IsolineTravelModeOptions.AddMember("Car", IsolineCarOptions)
-
-	IsolineTravelModeOptions_Scooter = IsolineTravelModeOptions.AddMember("Scooter", IsolineScooterOptions)
-
-	IsolineTravelModeOptions_Truck = IsolineTravelModeOptions.AddMember("Truck", IsolineTruckOptions)
-
-	_LanguageTagList_member = _LanguageTagList.AddMember("member", _LanguageTag)
-
-	LocalizedString_Language = LocalizedString.AddMember("Language", _LanguageTag)
-
-	LocalizedString_Value = LocalizedString.AddMember("Value", _SensitiveString)
-
-	_LocalizedStringList_member = _LocalizedStringList.AddMember("member", LocalizedString)
-
-	MeasurementSystem_METRIC = MeasurementSystem.AddMember("METRIC", smithyprelude.Unit)
-
-	MeasurementSystem_IMPERIAL = MeasurementSystem.AddMember("IMPERIAL", smithyprelude.Unit)
-
-	_Position23_member = _Position23.AddMember("member", smithyprelude.Double)
-
-	RoadSnapHazardousCargoType_COMBUSTIBLE = RoadSnapHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_CORROSIVE = RoadSnapHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_EXPLOSIVE = RoadSnapHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_FLAMMABLE = RoadSnapHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_GAS = RoadSnapHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_HARMFUL_TO_WATER = RoadSnapHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_ORGANIC = RoadSnapHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_OTHER = RoadSnapHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_POISON = RoadSnapHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_POISONOUS_INHALATION = RoadSnapHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
-
-	RoadSnapHazardousCargoType_RADIOACTIVE = RoadSnapHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
-
-	_RoadSnapHazardousCargoTypeList_member = _RoadSnapHazardousCargoTypeList.AddMember("member", RoadSnapHazardousCargoType)
-
-	RoadSnapNoticeCode_TRACE_POINTS_HEADING_IGNORED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_HEADING_IGNORED", smithyprelude.Unit)
-
-	RoadSnapNoticeCode_TRACE_POINTS_IGNORED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_IGNORED", smithyprelude.Unit)
-
-	RoadSnapNoticeCode_TRACE_POINTS_MOVED_BY_LARGE_DISTANCE = RoadSnapNoticeCode.AddMember("TRACE_POINTS_MOVED_BY_LARGE_DISTANCE", smithyprelude.Unit)
-
-	RoadSnapNoticeCode_TRACE_POINTS_NOT_MATCHED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_NOT_MATCHED", smithyprelude.Unit)
-
-	RoadSnapNoticeCode_TRACE_POINTS_OUT_OF_SEQUENCE = RoadSnapNoticeCode.AddMember("TRACE_POINTS_OUT_OF_SEQUENCE", smithyprelude.Unit)
-
-	RoadSnapNoticeCode_TRACE_POINTS_SPEED_ESTIMATED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_SPEED_ESTIMATED", smithyprelude.Unit)
-
-	RoadSnapNoticeCode_TRACE_POINTS_SPEED_IGNORED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_SPEED_IGNORED", smithyprelude.Unit)
-
-	_RoadSnapTracePointIndexList_member = _RoadSnapTracePointIndexList.AddMember("member", smithyprelude.Integer)
-
-	RoadSnapNotice_Code = RoadSnapNotice.AddMember("Code", RoadSnapNoticeCode)
-
-	RoadSnapNotice_Title = RoadSnapNotice.AddMember("Title", _SensitiveString)
-
-	RoadSnapNotice_TracePointIndexes = RoadSnapNotice.AddMember("TracePointIndexes", _RoadSnapTracePointIndexList)
-
-	_RoadSnapNoticeList_member = _RoadSnapNoticeList.AddMember("member", RoadSnapNotice)
-
-	RoadSnapSnappedGeometry_LineString = RoadSnapSnappedGeometry.AddMember("LineString", _LineString)
-
-	RoadSnapSnappedGeometry_Polyline = RoadSnapSnappedGeometry.AddMember("Polyline", _Polyline)
-
-	RoadSnapSnappedTracePoint_Confidence = RoadSnapSnappedTracePoint.AddMember("Confidence", _SensitiveDouble)
-
-	RoadSnapSnappedTracePoint_OriginalPosition = RoadSnapSnappedTracePoint.AddMember("OriginalPosition", _Position)
-
-	RoadSnapSnappedTracePoint_SnappedPosition = RoadSnapSnappedTracePoint.AddMember("SnappedPosition", _Position)
-
-	_RoadSnapSnappedTracePointList_member = _RoadSnapSnappedTracePointList.AddMember("member", RoadSnapSnappedTracePoint)
-
-	RoadSnapTracePoint_Heading = RoadSnapTracePoint.AddMember("Heading", _Heading)
-
-	RoadSnapTracePoint_Position = RoadSnapTracePoint.AddMember("Position", _Position)
-
-	RoadSnapTracePoint_Speed = RoadSnapTracePoint.AddMember("Speed", _SpeedKilometersPerHour)
-
-	RoadSnapTracePoint_Timestamp = RoadSnapTracePoint.AddMember("Timestamp", _TimestampWithTimezoneOffset)
-
-	_RoadSnapTracePointList_member = _RoadSnapTracePointList.AddMember("member", RoadSnapTracePoint)
-
-	RoadSnapTrailerOptions_TrailerCount = RoadSnapTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
-
-	RoadSnapTravelMode_CAR = RoadSnapTravelMode.AddMember("CAR", smithyprelude.Unit)
-
-	RoadSnapTravelMode_PEDESTRIAN = RoadSnapTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
-
-	RoadSnapTravelMode_SCOOTER = RoadSnapTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
-
-	RoadSnapTravelMode_TRUCK = RoadSnapTravelMode.AddMember("TRUCK", smithyprelude.Unit)
-
-	RoadSnapTruckOptions_GrossWeight = RoadSnapTruckOptions.AddMember("GrossWeight", _WeightKilograms)
-
-	RoadSnapTruckOptions_HazardousCargos = RoadSnapTruckOptions.AddMember("HazardousCargos", _RoadSnapHazardousCargoTypeList)
-
-	RoadSnapTruckOptions_Height = RoadSnapTruckOptions.AddMember("Height", _DimensionCentimeters)
-
-	RoadSnapTruckOptions_Length = RoadSnapTruckOptions.AddMember("Length", _DimensionCentimeters)
-
-	RoadSnapTruckOptions_Trailer = RoadSnapTruckOptions.AddMember("Trailer", RoadSnapTrailerOptions)
-
-	RoadSnapTruckOptions_TunnelRestrictionCode = RoadSnapTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
-
-	RoadSnapTruckOptions_Width = RoadSnapTruckOptions.AddMember("Width", _DimensionCentimeters)
-
-	RoadSnapTravelModeOptions_Truck = RoadSnapTravelModeOptions.AddMember("Truck", RoadSnapTruckOptions)
-
-	RouteFerryAfterTravelStepType_DEBOARD = RouteFerryAfterTravelStepType.AddMember("DEBOARD", smithyprelude.Unit)
-
-	RouteFerryAfterTravelStep_Duration = RouteFerryAfterTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteFerryAfterTravelStep_Instruction = RouteFerryAfterTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteFerryAfterTravelStep_Type = RouteFerryAfterTravelStep.AddMember("Type", RouteFerryAfterTravelStepType)
-
-	_RouteFerryAfterTravelStepList_member = _RouteFerryAfterTravelStepList.AddMember("member", RouteFerryAfterTravelStep)
-
-	RouteFerryPlace_Name = RouteFerryPlace.AddMember("Name", _SensitiveString)
-
-	RouteFerryPlace_OriginalPosition = RouteFerryPlace.AddMember("OriginalPosition", _Position23)
-
-	RouteFerryPlace_Position = RouteFerryPlace.AddMember("Position", _Position23)
-
-	RouteFerryPlace_WaypointIndex = RouteFerryPlace.AddMember("WaypointIndex", _SensitiveInteger)
-
-	RouteFerryArrival_Place = RouteFerryArrival.AddMember("Place", RouteFerryPlace)
-
-	RouteFerryArrival_Time = RouteFerryArrival.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteFerryBeforeTravelStepType_BOARD = RouteFerryBeforeTravelStepType.AddMember("BOARD", smithyprelude.Unit)
-
-	RouteFerryBeforeTravelStep_Duration = RouteFerryBeforeTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteFerryBeforeTravelStep_Instruction = RouteFerryBeforeTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteFerryBeforeTravelStep_Type = RouteFerryBeforeTravelStep.AddMember("Type", RouteFerryBeforeTravelStepType)
-
-	_RouteFerryBeforeTravelStepList_member = _RouteFerryBeforeTravelStepList.AddMember("member", RouteFerryBeforeTravelStep)
-
-	RouteFerryDeparture_Place = RouteFerryDeparture.AddMember("Place", RouteFerryPlace)
-
-	RouteFerryDeparture_Time = RouteFerryDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteFerryNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RouteFerryNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteFerryNoticeCode_NO_SCHEDULE = RouteFerryNoticeCode.AddMember("NO_SCHEDULE", smithyprelude.Unit)
-
-	RouteFerryNoticeCode_OTHER = RouteFerryNoticeCode.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteFerryNoticeCode_VIOLATED_AVOID_FERRY = RouteFerryNoticeCode.AddMember("VIOLATED_AVOID_FERRY", smithyprelude.Unit)
-
-	RouteFerryNoticeCode_VIOLATED_AVOID_RAIL_FERRY = RouteFerryNoticeCode.AddMember("VIOLATED_AVOID_RAIL_FERRY", smithyprelude.Unit)
-
-	RouteFerryNoticeCode_SEASONAL_CLOSURE = RouteFerryNoticeCode.AddMember("SEASONAL_CLOSURE", smithyprelude.Unit)
-
-	RouteFerryNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = RouteFerryNoticeCode.AddMember("POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE", smithyprelude.Unit)
-
-	RouteFerryNoticeCode_VIOLATED_AVOID_AREAS = RouteFerryNoticeCode.AddMember("VIOLATED_AVOID_AREAS", smithyprelude.Unit)
-
-	RouteFerryNoticeCode_VIOLATED_VEHICLE_RESTRICTION = RouteFerryNoticeCode.AddMember("VIOLATED_VEHICLE_RESTRICTION", smithyprelude.Unit)
-
-	RouteNoticeImpact_HIGH = RouteNoticeImpact.AddMember("HIGH", smithyprelude.Unit)
-
-	RouteNoticeImpact_LOW = RouteNoticeImpact.AddMember("LOW", smithyprelude.Unit)
-
-	RouteFerryNotice_Code = RouteFerryNotice.AddMember("Code", RouteFerryNoticeCode)
-
-	RouteFerryNotice_Impact = RouteFerryNotice.AddMember("Impact", RouteNoticeImpact)
-
-	_RouteFerryNoticeList_member = _RouteFerryNoticeList.AddMember("member", RouteFerryNotice)
-
-	RoutePassThroughPlace_OriginalPosition = RoutePassThroughPlace.AddMember("OriginalPosition", _Position23)
-
-	RoutePassThroughPlace_Position = RoutePassThroughPlace.AddMember("Position", _Position23)
-
-	RoutePassThroughPlace_WaypointIndex = RoutePassThroughPlace.AddMember("WaypointIndex", _SensitiveInteger)
-
-	RoutePassThroughWaypoint_GeometryOffset = RoutePassThroughWaypoint.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RoutePassThroughWaypoint_Place = RoutePassThroughWaypoint.AddMember("Place", RoutePassThroughPlace)
-
-	_RoutePassThroughWaypointList_member = _RoutePassThroughWaypointList.AddMember("member", RoutePassThroughWaypoint)
-
-	RouteFerrySpan_Country = RouteFerrySpan.AddMember("Country", _CountryCode3)
-
-	RouteFerrySpan_Distance = RouteFerrySpan.AddMember("Distance", _DistanceMeters)
-
-	RouteFerrySpan_Duration = RouteFerrySpan.AddMember("Duration", _DurationSeconds)
-
-	RouteFerrySpan_GeometryOffset = RouteFerrySpan.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteFerrySpan_Names = RouteFerrySpan.AddMember("Names", _LocalizedStringList)
-
-	RouteFerrySpan_Region = RouteFerrySpan.AddMember("Region", _SensitiveString)
-
-	_RouteFerrySpanList_member = _RouteFerrySpanList.AddMember("member", RouteFerrySpan)
-
-	RouteFerryOverviewSummary_Distance = RouteFerryOverviewSummary.AddMember("Distance", _DistanceMeters)
-
-	RouteFerryOverviewSummary_Duration = RouteFerryOverviewSummary.AddMember("Duration", _DurationSeconds)
-
-	RouteFerryTravelOnlySummary_Duration = RouteFerryTravelOnlySummary.AddMember("Duration", _DurationSeconds)
-
-	RouteFerrySummary_Overview = RouteFerrySummary.AddMember("Overview", RouteFerryOverviewSummary)
-
-	RouteFerrySummary_TravelOnly = RouteFerrySummary.AddMember("TravelOnly", RouteFerryTravelOnlySummary)
-
-	RouteFerryTravelStepType_DEPART = RouteFerryTravelStepType.AddMember("DEPART", smithyprelude.Unit)
-
-	RouteFerryTravelStepType_CONTINUE = RouteFerryTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
-
-	RouteFerryTravelStepType_ARRIVE = RouteFerryTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
-
-	RouteFerryTravelStep_Distance = RouteFerryTravelStep.AddMember("Distance", _DistanceMeters)
-
-	RouteFerryTravelStep_Duration = RouteFerryTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteFerryTravelStep_GeometryOffset = RouteFerryTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteFerryTravelStep_Instruction = RouteFerryTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteFerryTravelStep_Type = RouteFerryTravelStep.AddMember("Type", RouteFerryTravelStepType)
-
-	_RouteFerryTravelStepList_member = _RouteFerryTravelStepList.AddMember("member", RouteFerryTravelStep)
-
-	RouteFerryLegDetails_AfterTravelSteps = RouteFerryLegDetails.AddMember("AfterTravelSteps", _RouteFerryAfterTravelStepList)
-
-	RouteFerryLegDetails_Arrival = RouteFerryLegDetails.AddMember("Arrival", RouteFerryArrival)
-
-	RouteFerryLegDetails_BeforeTravelSteps = RouteFerryLegDetails.AddMember("BeforeTravelSteps", _RouteFerryBeforeTravelStepList)
-
-	RouteFerryLegDetails_Departure = RouteFerryLegDetails.AddMember("Departure", RouteFerryDeparture)
-
-	RouteFerryLegDetails_Notices = RouteFerryLegDetails.AddMember("Notices", _RouteFerryNoticeList)
-
-	RouteFerryLegDetails_PassThroughWaypoints = RouteFerryLegDetails.AddMember("PassThroughWaypoints", _RoutePassThroughWaypointList)
-
-	RouteFerryLegDetails_RouteName = RouteFerryLegDetails.AddMember("RouteName", _SensitiveString)
-
-	RouteFerryLegDetails_Spans = RouteFerryLegDetails.AddMember("Spans", _RouteFerrySpanList)
-
-	RouteFerryLegDetails_Summary = RouteFerryLegDetails.AddMember("Summary", RouteFerrySummary)
-
-	RouteFerryLegDetails_TravelSteps = RouteFerryLegDetails.AddMember("TravelSteps", _RouteFerryTravelStepList)
-
-	RouteLegGeometry_LineString = RouteLegGeometry.AddMember("LineString", _LineString)
-
-	RouteLegGeometry_Polyline = RouteLegGeometry.AddMember("Polyline", _Polyline)
-
-	RoutePedestrianAfterTravelStepType_WAIT = RoutePedestrianAfterTravelStepType.AddMember("WAIT", smithyprelude.Unit)
-
-	RoutePedestrianAfterTravelStep_Duration = RoutePedestrianAfterTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RoutePedestrianAfterTravelStep_Instruction = RoutePedestrianAfterTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RoutePedestrianAfterTravelStep_Type = RoutePedestrianAfterTravelStep.AddMember("Type", RoutePedestrianAfterTravelStepType)
-
-	_RoutePedestrianAfterTravelStepList_member = _RoutePedestrianAfterTravelStepList.AddMember("member", RoutePedestrianAfterTravelStep)
-
-	RouteAccessibilityAvailability_AVAILABLE = RouteAccessibilityAvailability.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	RouteAccessibilityAvailability_LIMITED = RouteAccessibilityAvailability.AddMember("LIMITED", smithyprelude.Unit)
-
-	RouteAccessibilityAvailability_UNAVAILABLE = RouteAccessibilityAvailability.AddMember("UNAVAILABLE", smithyprelude.Unit)
-
-	RouteAccessibilityAvailability_UNKNOWN = RouteAccessibilityAvailability.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	RouteAccessibilityAvailabilityDetails_Wheelchair = RouteAccessibilityAvailabilityDetails.AddMember("Wheelchair", RouteAccessibilityAvailability)
-
-	RouteAccessPointDetails_Accessibility = RouteAccessPointDetails.AddMember("Accessibility", RouteAccessibilityAvailabilityDetails)
-
-	RouteSideOfStreet_LEFT = RouteSideOfStreet.AddMember("LEFT", smithyprelude.Unit)
-
-	RouteSideOfStreet_RIGHT = RouteSideOfStreet.AddMember("RIGHT", smithyprelude.Unit)
-
-	RouteStationDetails_Accessibility = RouteStationDetails.AddMember("Accessibility", RouteAccessibilityAvailabilityDetails)
-
-	RouteStationDetails_PlatformName = RouteStationDetails.AddMember("PlatformName", _SensitiveString)
-
-	RouteStationDetails_ShortName = RouteStationDetails.AddMember("ShortName", _SensitiveString)
-
-	RoutePedestrianPlaceType_ACCESS_POINT = RoutePedestrianPlaceType.AddMember("ACCESS_POINT", smithyprelude.Unit)
-
-	RoutePedestrianPlaceType_DOCKING_STATION = RoutePedestrianPlaceType.AddMember("DOCKING_STATION", smithyprelude.Unit)
-
-	RoutePedestrianPlaceType_PARKING_LOT = RoutePedestrianPlaceType.AddMember("PARKING_LOT", smithyprelude.Unit)
-
-	RoutePedestrianPlaceType_STATION = RoutePedestrianPlaceType.AddMember("STATION", smithyprelude.Unit)
-
-	RoutePedestrianPlace_AccessPointDetails = RoutePedestrianPlace.AddMember("AccessPointDetails", RouteAccessPointDetails)
-
-	RoutePedestrianPlace_Name = RoutePedestrianPlace.AddMember("Name", _SensitiveString)
-
-	RoutePedestrianPlace_OriginalPosition = RoutePedestrianPlace.AddMember("OriginalPosition", _Position23)
-
-	RoutePedestrianPlace_Position = RoutePedestrianPlace.AddMember("Position", _Position23)
-
-	RoutePedestrianPlace_SideOfStreet = RoutePedestrianPlace.AddMember("SideOfStreet", RouteSideOfStreet)
-
-	RoutePedestrianPlace_StationDetails = RoutePedestrianPlace.AddMember("StationDetails", RouteStationDetails)
-
-	RoutePedestrianPlace_Type = RoutePedestrianPlace.AddMember("Type", RoutePedestrianPlaceType)
-
-	RoutePedestrianPlace_WaypointIndex = RoutePedestrianPlace.AddMember("WaypointIndex", _SensitiveInteger)
-
-	RoutePedestrianArrival_Place = RoutePedestrianArrival.AddMember("Place", RoutePedestrianPlace)
-
-	RoutePedestrianArrival_Time = RoutePedestrianArrival.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RoutePedestrianDeparture_Place = RoutePedestrianDeparture.AddMember("Place", RoutePedestrianPlace)
-
-	RoutePedestrianDeparture_Time = RoutePedestrianDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RoutePedestrianNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RoutePedestrianNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
-
-	RoutePedestrianNoticeCode_OTHER = RoutePedestrianNoticeCode.AddMember("OTHER", smithyprelude.Unit)
-
-	RoutePedestrianNoticeCode_VIOLATED_AVOID_DIRT_ROAD = RoutePedestrianNoticeCode.AddMember("VIOLATED_AVOID_DIRT_ROAD", smithyprelude.Unit)
-
-	RoutePedestrianNoticeCode_VIOLATED_AVOID_TUNNEL = RoutePedestrianNoticeCode.AddMember("VIOLATED_AVOID_TUNNEL", smithyprelude.Unit)
-
-	RoutePedestrianNoticeCode_VIOLATED_PEDESTRIAN_OPTION = RoutePedestrianNoticeCode.AddMember("VIOLATED_PEDESTRIAN_OPTION", smithyprelude.Unit)
-
-	RoutePedestrianNoticeCode_VIOLATED_AVOID_AREAS = RoutePedestrianNoticeCode.AddMember("VIOLATED_AVOID_AREAS", smithyprelude.Unit)
-
-	RoutePedestrianNotice_Code = RoutePedestrianNotice.AddMember("Code", RoutePedestrianNoticeCode)
-
-	RoutePedestrianNotice_Impact = RoutePedestrianNotice.AddMember("Impact", RouteNoticeImpact)
-
-	_RoutePedestrianNoticeList_member = _RoutePedestrianNoticeList.AddMember("member", RoutePedestrianNotice)
-
-	RouteSpanDynamicSpeedDetails_BestCaseSpeed = RouteSpanDynamicSpeedDetails.AddMember("BestCaseSpeed", _SpeedKilometersPerHour)
-
-	RouteSpanDynamicSpeedDetails_TurnDuration = RouteSpanDynamicSpeedDetails.AddMember("TurnDuration", _DurationSeconds)
-
-	RouteSpanDynamicSpeedDetails_TypicalSpeed = RouteSpanDynamicSpeedDetails.AddMember("TypicalSpeed", _SpeedKilometersPerHour)
-
-	RouteSpanPedestrianAccessAttribute_ALLOWED = RouteSpanPedestrianAccessAttribute.AddMember("ALLOWED", smithyprelude.Unit)
-
-	RouteSpanPedestrianAccessAttribute_INDOORS = RouteSpanPedestrianAccessAttribute.AddMember("INDOORS", smithyprelude.Unit)
-
-	RouteSpanPedestrianAccessAttribute_NO_THROUGH_TRAFFIC = RouteSpanPedestrianAccessAttribute.AddMember("NO_THROUGH_TRAFFIC", smithyprelude.Unit)
-
-	RouteSpanPedestrianAccessAttribute_PARK = RouteSpanPedestrianAccessAttribute.AddMember("PARK", smithyprelude.Unit)
-
-	RouteSpanPedestrianAccessAttribute_STAIRS = RouteSpanPedestrianAccessAttribute.AddMember("STAIRS", smithyprelude.Unit)
-
-	RouteSpanPedestrianAccessAttribute_TOLL_ROAD = RouteSpanPedestrianAccessAttribute.AddMember("TOLL_ROAD", smithyprelude.Unit)
-
-	_RouteSpanPedestrianAccessAttributeList_member = _RouteSpanPedestrianAccessAttributeList.AddMember("member", RouteSpanPedestrianAccessAttribute)
-
-	RouteSpanRoadAttribute_BRIDGE = RouteSpanRoadAttribute.AddMember("BRIDGE", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_BUILT_UP_AREA = RouteSpanRoadAttribute.AddMember("BUILT_UP_AREA", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_CONTROLLED_ACCESS_HIGHWAY = RouteSpanRoadAttribute.AddMember("CONTROLLED_ACCESS_HIGHWAY", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_DIRT_ROAD = RouteSpanRoadAttribute.AddMember("DIRT_ROAD", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_DIVIDED_ROAD = RouteSpanRoadAttribute.AddMember("DIVIDED_ROAD", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_MOTORWAY = RouteSpanRoadAttribute.AddMember("MOTORWAY", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_PRIVATE_ROAD = RouteSpanRoadAttribute.AddMember("PRIVATE_ROAD", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_RAMP = RouteSpanRoadAttribute.AddMember("RAMP", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_RIGHT_HAND_TRAFFIC = RouteSpanRoadAttribute.AddMember("RIGHT_HAND_TRAFFIC", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_ROUNDABOUT = RouteSpanRoadAttribute.AddMember("ROUNDABOUT", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_TUNNEL = RouteSpanRoadAttribute.AddMember("TUNNEL", smithyprelude.Unit)
-
-	RouteSpanRoadAttribute_UNDER_CONSTRUCTION = RouteSpanRoadAttribute.AddMember("UNDER_CONSTRUCTION", smithyprelude.Unit)
-
-	_RouteSpanRoadAttributeList_member = _RouteSpanRoadAttributeList.AddMember("member", RouteSpanRoadAttribute)
-
-	RouteDirection_EAST = RouteDirection.AddMember("EAST", smithyprelude.Unit)
-
-	RouteDirection_NORTH = RouteDirection.AddMember("NORTH", smithyprelude.Unit)
-
-	RouteDirection_SOUTH = RouteDirection.AddMember("SOUTH", smithyprelude.Unit)
-
-	RouteDirection_WEST = RouteDirection.AddMember("WEST", smithyprelude.Unit)
-
-	RouteNumber_Direction = RouteNumber.AddMember("Direction", RouteDirection)
-
-	RouteNumber_Language = RouteNumber.AddMember("Language", _LanguageTag)
-
-	RouteNumber_Value = RouteNumber.AddMember("Value", _SensitiveString)
-
-	_RouteNumberList_member = _RouteNumberList.AddMember("member", RouteNumber)
-
-	RouteSpanSpeedLimitDetails_MaxSpeed = RouteSpanSpeedLimitDetails.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	RouteSpanSpeedLimitDetails_Unlimited = RouteSpanSpeedLimitDetails.AddMember("Unlimited", _SensitiveBoolean)
-
-	RoutePedestrianSpan_BestCaseDuration = RoutePedestrianSpan.AddMember("BestCaseDuration", _DurationSeconds)
-
-	RoutePedestrianSpan_Country = RoutePedestrianSpan.AddMember("Country", _CountryCode3)
-
-	RoutePedestrianSpan_Distance = RoutePedestrianSpan.AddMember("Distance", _DistanceMeters)
-
-	RoutePedestrianSpan_Duration = RoutePedestrianSpan.AddMember("Duration", _DurationSeconds)
-
-	RoutePedestrianSpan_DynamicSpeed = RoutePedestrianSpan.AddMember("DynamicSpeed", RouteSpanDynamicSpeedDetails)
-
-	RoutePedestrianSpan_FunctionalClassification = RoutePedestrianSpan.AddMember("FunctionalClassification", _SensitiveInteger)
-
-	RoutePedestrianSpan_GeometryOffset = RoutePedestrianSpan.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RoutePedestrianSpan_Incidents = RoutePedestrianSpan.AddMember("Incidents", _IndexList)
-
-	RoutePedestrianSpan_Names = RoutePedestrianSpan.AddMember("Names", _LocalizedStringList)
-
-	RoutePedestrianSpan_PedestrianAccess = RoutePedestrianSpan.AddMember("PedestrianAccess", _RouteSpanPedestrianAccessAttributeList)
-
-	RoutePedestrianSpan_Region = RoutePedestrianSpan.AddMember("Region", _SensitiveString)
-
-	RoutePedestrianSpan_RoadAttributes = RoutePedestrianSpan.AddMember("RoadAttributes", _RouteSpanRoadAttributeList)
-
-	RoutePedestrianSpan_RouteNumbers = RoutePedestrianSpan.AddMember("RouteNumbers", _RouteNumberList)
-
-	RoutePedestrianSpan_SpeedLimit = RoutePedestrianSpan.AddMember("SpeedLimit", RouteSpanSpeedLimitDetails)
-
-	RoutePedestrianSpan_TypicalDuration = RoutePedestrianSpan.AddMember("TypicalDuration", _DurationSeconds)
-
-	_RoutePedestrianSpanList_member = _RoutePedestrianSpanList.AddMember("member", RoutePedestrianSpan)
-
-	RoutePedestrianOverviewSummary_Distance = RoutePedestrianOverviewSummary.AddMember("Distance", _DistanceMeters)
-
-	RoutePedestrianOverviewSummary_Duration = RoutePedestrianOverviewSummary.AddMember("Duration", _DurationSeconds)
-
-	RoutePedestrianTravelOnlySummary_Duration = RoutePedestrianTravelOnlySummary.AddMember("Duration", _DurationSeconds)
-
-	RoutePedestrianSummary_Overview = RoutePedestrianSummary.AddMember("Overview", RoutePedestrianOverviewSummary)
-
-	RoutePedestrianSummary_TravelOnly = RoutePedestrianSummary.AddMember("TravelOnly", RoutePedestrianTravelOnlySummary)
-
-	RouteContinueStepDetails_Intersection = RouteContinueStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteRoadType_HIGHWAY = RouteRoadType.AddMember("HIGHWAY", smithyprelude.Unit)
-
-	RouteRoadType_RURAL = RouteRoadType.AddMember("RURAL", smithyprelude.Unit)
-
-	RouteRoadType_URBAN = RouteRoadType.AddMember("URBAN", smithyprelude.Unit)
-
-	RouteRoad_RoadName = RouteRoad.AddMember("RoadName", _LocalizedStringList)
-
-	RouteRoad_RouteNumber = RouteRoad.AddMember("RouteNumber", _RouteNumberList)
-
-	RouteRoad_Towards = RouteRoad.AddMember("Towards", _LocalizedStringList)
-
-	RouteRoad_Type = RouteRoad.AddMember("Type", RouteRoadType)
-
-	RouteSteeringDirection_LEFT = RouteSteeringDirection.AddMember("LEFT", smithyprelude.Unit)
-
-	RouteSteeringDirection_RIGHT = RouteSteeringDirection.AddMember("RIGHT", smithyprelude.Unit)
-
-	RouteSteeringDirection_STRAIGHT = RouteSteeringDirection.AddMember("STRAIGHT", smithyprelude.Unit)
-
-	RouteTurnIntensity_SHARP = RouteTurnIntensity.AddMember("SHARP", smithyprelude.Unit)
-
-	RouteTurnIntensity_SLIGHT = RouteTurnIntensity.AddMember("SLIGHT", smithyprelude.Unit)
-
-	RouteTurnIntensity_TYPICAL = RouteTurnIntensity.AddMember("TYPICAL", smithyprelude.Unit)
-
-	RouteKeepStepDetails_Intersection = RouteKeepStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteKeepStepDetails_SteeringDirection = RouteKeepStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteKeepStepDetails_TurnAngle = RouteKeepStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteKeepStepDetails_TurnIntensity = RouteKeepStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RouteRoundaboutEnterStepDetails_Intersection = RouteRoundaboutEnterStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteRoundaboutEnterStepDetails_SteeringDirection = RouteRoundaboutEnterStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteRoundaboutEnterStepDetails_TurnAngle = RouteRoundaboutEnterStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteRoundaboutEnterStepDetails_TurnIntensity = RouteRoundaboutEnterStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RouteRoundaboutExitStepDetails_Intersection = RouteRoundaboutExitStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteRoundaboutExitStepDetails_RelativeExit = RouteRoundaboutExitStepDetails.AddMember("RelativeExit", _SensitiveInteger)
-
-	RouteRoundaboutExitStepDetails_RoundaboutAngle = RouteRoundaboutExitStepDetails.AddMember("RoundaboutAngle", _RoundaboutAngle)
-
-	RouteRoundaboutExitStepDetails_SteeringDirection = RouteRoundaboutExitStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteRoundaboutPassStepDetails_Intersection = RouteRoundaboutPassStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteRoundaboutPassStepDetails_SteeringDirection = RouteRoundaboutPassStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteRoundaboutPassStepDetails_TurnAngle = RouteRoundaboutPassStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteRoundaboutPassStepDetails_TurnIntensity = RouteRoundaboutPassStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RouteSignpostLabel_RouteNumber = RouteSignpostLabel.AddMember("RouteNumber", RouteNumber)
-
-	RouteSignpostLabel_Text = RouteSignpostLabel.AddMember("Text", LocalizedString)
-
-	_RouteSignpostLabelList_member = _RouteSignpostLabelList.AddMember("member", RouteSignpostLabel)
-
-	RouteSignpost_Labels = RouteSignpost.AddMember("Labels", _RouteSignpostLabelList)
-
-	RouteTurnStepDetails_Intersection = RouteTurnStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteTurnStepDetails_SteeringDirection = RouteTurnStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteTurnStepDetails_TurnAngle = RouteTurnStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteTurnStepDetails_TurnIntensity = RouteTurnStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RoutePedestrianTravelStepType_ARRIVE = RoutePedestrianTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
-
-	RoutePedestrianTravelStepType_CONTINUE = RoutePedestrianTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
-
-	RoutePedestrianTravelStepType_DEPART = RoutePedestrianTravelStepType.AddMember("DEPART", smithyprelude.Unit)
-
-	RoutePedestrianTravelStepType_KEEP = RoutePedestrianTravelStepType.AddMember("KEEP", smithyprelude.Unit)
-
-	RoutePedestrianTravelStepType_ROUNDABOUT_ENTER = RoutePedestrianTravelStepType.AddMember("ROUNDABOUT_ENTER", smithyprelude.Unit)
-
-	RoutePedestrianTravelStepType_ROUNDABOUT_EXIT = RoutePedestrianTravelStepType.AddMember("ROUNDABOUT_EXIT", smithyprelude.Unit)
-
-	RoutePedestrianTravelStepType_ROUNDABOUT_PASS = RoutePedestrianTravelStepType.AddMember("ROUNDABOUT_PASS", smithyprelude.Unit)
-
-	RoutePedestrianTravelStepType_TURN = RoutePedestrianTravelStepType.AddMember("TURN", smithyprelude.Unit)
-
-	RoutePedestrianTravelStep_ContinueStepDetails = RoutePedestrianTravelStep.AddMember("ContinueStepDetails", RouteContinueStepDetails)
-
-	RoutePedestrianTravelStep_CurrentRoad = RoutePedestrianTravelStep.AddMember("CurrentRoad", RouteRoad)
-
-	RoutePedestrianTravelStep_Distance = RoutePedestrianTravelStep.AddMember("Distance", _DistanceMeters)
-
-	RoutePedestrianTravelStep_Duration = RoutePedestrianTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RoutePedestrianTravelStep_ExitNumber = RoutePedestrianTravelStep.AddMember("ExitNumber", _LocalizedStringList)
-
-	RoutePedestrianTravelStep_GeometryOffset = RoutePedestrianTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RoutePedestrianTravelStep_Instruction = RoutePedestrianTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RoutePedestrianTravelStep_KeepStepDetails = RoutePedestrianTravelStep.AddMember("KeepStepDetails", RouteKeepStepDetails)
-
-	RoutePedestrianTravelStep_NextRoad = RoutePedestrianTravelStep.AddMember("NextRoad", RouteRoad)
-
-	RoutePedestrianTravelStep_RoundaboutEnterStepDetails = RoutePedestrianTravelStep.AddMember("RoundaboutEnterStepDetails", RouteRoundaboutEnterStepDetails)
-
-	RoutePedestrianTravelStep_RoundaboutExitStepDetails = RoutePedestrianTravelStep.AddMember("RoundaboutExitStepDetails", RouteRoundaboutExitStepDetails)
-
-	RoutePedestrianTravelStep_RoundaboutPassStepDetails = RoutePedestrianTravelStep.AddMember("RoundaboutPassStepDetails", RouteRoundaboutPassStepDetails)
-
-	RoutePedestrianTravelStep_Signpost = RoutePedestrianTravelStep.AddMember("Signpost", RouteSignpost)
-
-	RoutePedestrianTravelStep_TurnStepDetails = RoutePedestrianTravelStep.AddMember("TurnStepDetails", RouteTurnStepDetails)
-
-	RoutePedestrianTravelStep_Type = RoutePedestrianTravelStep.AddMember("Type", RoutePedestrianTravelStepType)
-
-	_RoutePedestrianTravelStepList_member = _RoutePedestrianTravelStepList.AddMember("member", RoutePedestrianTravelStep)
-
-	RoutePedestrianLegDetails_AfterTravelSteps = RoutePedestrianLegDetails.AddMember("AfterTravelSteps", _RoutePedestrianAfterTravelStepList)
-
-	RoutePedestrianLegDetails_Arrival = RoutePedestrianLegDetails.AddMember("Arrival", RoutePedestrianArrival)
-
-	RoutePedestrianLegDetails_Departure = RoutePedestrianLegDetails.AddMember("Departure", RoutePedestrianDeparture)
-
-	RoutePedestrianLegDetails_Notices = RoutePedestrianLegDetails.AddMember("Notices", _RoutePedestrianNoticeList)
-
-	RoutePedestrianLegDetails_PassThroughWaypoints = RoutePedestrianLegDetails.AddMember("PassThroughWaypoints", _RoutePassThroughWaypointList)
-
-	RoutePedestrianLegDetails_Spans = RoutePedestrianLegDetails.AddMember("Spans", _RoutePedestrianSpanList)
-
-	RoutePedestrianLegDetails_Summary = RoutePedestrianLegDetails.AddMember("Summary", RoutePedestrianSummary)
-
-	RoutePedestrianLegDetails_TravelSteps = RoutePedestrianLegDetails.AddMember("TravelSteps", _RoutePedestrianTravelStepList)
-
-	RouteLegTravelMode_CAR = RouteLegTravelMode.AddMember("CAR", smithyprelude.Unit)
-
-	RouteLegTravelMode_FERRY = RouteLegTravelMode.AddMember("FERRY", smithyprelude.Unit)
-
-	RouteLegTravelMode_PEDESTRIAN = RouteLegTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
-
-	RouteLegTravelMode_SCOOTER = RouteLegTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
-
-	RouteLegTravelMode_TRUCK = RouteLegTravelMode.AddMember("TRUCK", smithyprelude.Unit)
-
-	RouteLegTravelMode_CAR_SHUTTLE_TRAIN = RouteLegTravelMode.AddMember("CAR_SHUTTLE_TRAIN", smithyprelude.Unit)
-
-	RouteLegTravelMode_AERIAL_TRAMWAY = RouteLegTravelMode.AddMember("AERIAL_TRAMWAY", smithyprelude.Unit)
-
-	RouteLegTravelMode_AIRPLANE = RouteLegTravelMode.AddMember("AIRPLANE", smithyprelude.Unit)
-
-	RouteLegTravelMode_BUS = RouteLegTravelMode.AddMember("BUS", smithyprelude.Unit)
-
-	RouteLegTravelMode_BUS_RAPID_TRANSIT = RouteLegTravelMode.AddMember("BUS_RAPID_TRANSIT", smithyprelude.Unit)
-
-	RouteLegTravelMode_CITY_TRAIN = RouteLegTravelMode.AddMember("CITY_TRAIN", smithyprelude.Unit)
-
-	RouteLegTravelMode_FUNICULAR_RAILWAY = RouteLegTravelMode.AddMember("FUNICULAR_RAILWAY", smithyprelude.Unit)
-
-	RouteLegTravelMode_HIGH_SPEED_TRAIN = RouteLegTravelMode.AddMember("HIGH_SPEED_TRAIN", smithyprelude.Unit)
-
-	RouteLegTravelMode_INTERCITY_TRAIN = RouteLegTravelMode.AddMember("INTERCITY_TRAIN", smithyprelude.Unit)
-
-	RouteLegTravelMode_INTERREGIONAL_TRAIN = RouteLegTravelMode.AddMember("INTERREGIONAL_TRAIN", smithyprelude.Unit)
-
-	RouteLegTravelMode_LIGHT_RAIL = RouteLegTravelMode.AddMember("LIGHT_RAIL", smithyprelude.Unit)
-
-	RouteLegTravelMode_MONORAIL = RouteLegTravelMode.AddMember("MONORAIL", smithyprelude.Unit)
-
-	RouteLegTravelMode_PRIVATE_BUS = RouteLegTravelMode.AddMember("PRIVATE_BUS", smithyprelude.Unit)
-
-	RouteLegTravelMode_REGIONAL_TRAIN = RouteLegTravelMode.AddMember("REGIONAL_TRAIN", smithyprelude.Unit)
-
-	RouteLegTravelMode_SUBWAY = RouteLegTravelMode.AddMember("SUBWAY", smithyprelude.Unit)
-
-	RouteLegType_FERRY = RouteLegType.AddMember("FERRY", smithyprelude.Unit)
-
-	RouteLegType_PEDESTRIAN = RouteLegType.AddMember("PEDESTRIAN", smithyprelude.Unit)
-
-	RouteLegType_VEHICLE = RouteLegType.AddMember("VEHICLE", smithyprelude.Unit)
-
-	RouteLegType_RENTAL = RouteLegType.AddMember("RENTAL", smithyprelude.Unit)
-
-	RouteLegType_TAXI = RouteLegType.AddMember("TAXI", smithyprelude.Unit)
-
-	RouteLegType_TRANSIT = RouteLegType.AddMember("TRANSIT", smithyprelude.Unit)
-
-	RouteChargeStepDetails_ArrivalCharge = RouteChargeStepDetails.AddMember("ArrivalCharge", _EnergyKilowattHours)
-
-	RouteChargeStepDetails_ConsumablePower = RouteChargeStepDetails.AddMember("ConsumablePower", _PowerKilowatts)
-
-	RouteChargeStepDetails_DesiredCharge = RouteChargeStepDetails.AddMember("DesiredCharge", _EnergyKilowattHours)
-
-	RouteVehicleAfterTravelStepType_PARK = RouteVehicleAfterTravelStepType.AddMember("PARK", smithyprelude.Unit)
-
-	RouteVehicleAfterTravelStep_ChargeStepDetails = RouteVehicleAfterTravelStep.AddMember("ChargeStepDetails", RouteChargeStepDetails)
-
-	RouteVehicleAfterTravelStep_Duration = RouteVehicleAfterTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteVehicleAfterTravelStep_Instruction = RouteVehicleAfterTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteVehicleAfterTravelStep_Type = RouteVehicleAfterTravelStep.AddMember("Type", RouteVehicleAfterTravelStepType)
-
-	_RouteVehicleAfterTravelStepList_member = _RouteVehicleAfterTravelStepList.AddMember("member", RouteVehicleAfterTravelStep)
-
-	RouteVehiclePlaceType_ACCESS_POINT = RouteVehiclePlaceType.AddMember("ACCESS_POINT", smithyprelude.Unit)
-
-	RouteVehiclePlaceType_DOCKING_STATION = RouteVehiclePlaceType.AddMember("DOCKING_STATION", smithyprelude.Unit)
-
-	RouteVehiclePlaceType_PARKING_LOT = RouteVehiclePlaceType.AddMember("PARKING_LOT", smithyprelude.Unit)
-
-	RouteVehiclePlaceType_STATION = RouteVehiclePlaceType.AddMember("STATION", smithyprelude.Unit)
-
-	RouteVehiclePlace_Name = RouteVehiclePlace.AddMember("Name", _SensitiveString)
-
-	RouteVehiclePlace_OriginalPosition = RouteVehiclePlace.AddMember("OriginalPosition", _Position23)
-
-	RouteVehiclePlace_Position = RouteVehiclePlace.AddMember("Position", _Position23)
-
-	RouteVehiclePlace_SideOfStreet = RouteVehiclePlace.AddMember("SideOfStreet", RouteSideOfStreet)
-
-	RouteVehiclePlace_WaypointIndex = RouteVehiclePlace.AddMember("WaypointIndex", _SensitiveInteger)
-
-	RouteVehiclePlace_AccessPointDetails = RouteVehiclePlace.AddMember("AccessPointDetails", RouteAccessPointDetails)
-
-	RouteVehiclePlace_StationDetails = RouteVehiclePlace.AddMember("StationDetails", RouteStationDetails)
-
-	RouteVehiclePlace_Type = RouteVehiclePlace.AddMember("Type", RouteVehiclePlaceType)
-
-	RouteVehicleArrival_Place = RouteVehicleArrival.AddMember("Place", RouteVehiclePlace)
-
-	RouteVehicleArrival_Time = RouteVehicleArrival.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteVehicleDeparture_Place = RouteVehicleDeparture.AddMember("Place", RouteVehiclePlace)
-
-	RouteVehicleDeparture_Time = RouteVehicleDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteVehicleIncidentSeverity_CRITICAL = RouteVehicleIncidentSeverity.AddMember("CRITICAL", smithyprelude.Unit)
-
-	RouteVehicleIncidentSeverity_HIGH = RouteVehicleIncidentSeverity.AddMember("HIGH", smithyprelude.Unit)
-
-	RouteVehicleIncidentSeverity_MEDIUM = RouteVehicleIncidentSeverity.AddMember("MEDIUM", smithyprelude.Unit)
-
-	RouteVehicleIncidentSeverity_LOW = RouteVehicleIncidentSeverity.AddMember("LOW", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_ACCIDENT = RouteVehicleIncidentType.AddMember("ACCIDENT", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_CONGESTION = RouteVehicleIncidentType.AddMember("CONGESTION", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_CONSTRUCTION = RouteVehicleIncidentType.AddMember("CONSTRUCTION", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_DISABLED_VEHICLE = RouteVehicleIncidentType.AddMember("DISABLED_VEHICLE", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_LANE_RESTRICTION = RouteVehicleIncidentType.AddMember("LANE_RESTRICTION", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_MASS_TRANSIT = RouteVehicleIncidentType.AddMember("MASS_TRANSIT", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_OTHER = RouteVehicleIncidentType.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_PLANNED_EVENT = RouteVehicleIncidentType.AddMember("PLANNED_EVENT", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_ROAD_CLOSURE = RouteVehicleIncidentType.AddMember("ROAD_CLOSURE", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_ROAD_HAZARD = RouteVehicleIncidentType.AddMember("ROAD_HAZARD", smithyprelude.Unit)
-
-	RouteVehicleIncidentType_WEATHER = RouteVehicleIncidentType.AddMember("WEATHER", smithyprelude.Unit)
-
-	RouteVehicleIncident_Description = RouteVehicleIncident.AddMember("Description", _SensitiveString)
-
-	RouteVehicleIncident_EndTime = RouteVehicleIncident.AddMember("EndTime", _TimestampWithTimezoneOffset)
-
-	RouteVehicleIncident_Severity = RouteVehicleIncident.AddMember("Severity", RouteVehicleIncidentSeverity)
-
-	RouteVehicleIncident_StartTime = RouteVehicleIncident.AddMember("StartTime", _TimestampWithTimezoneOffset)
-
-	RouteVehicleIncident_Type = RouteVehicleIncident.AddMember("Type", RouteVehicleIncidentType)
-
-	_RouteVehicleIncidentList_member = _RouteVehicleIncidentList.AddMember("member", RouteVehicleIncident)
-
-	RouteVehicleNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RouteVehicleNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_OTHER = RouteVehicleNoticeCode.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_CARPOOL_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_CARPOOL_USAGE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_SEASONAL_CLOSURE = RouteVehicleNoticeCode.AddMember("SEASONAL_CLOSURE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_TOLLS_DATA_TEMPORARILY_UNAVAILABLE = RouteVehicleNoticeCode.AddMember("TOLLS_DATA_TEMPORARILY_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_TOLLS_DATA_UNAVAILABLE = RouteVehicleNoticeCode.AddMember("TOLLS_DATA_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_TOLL_TRANSPONDER = RouteVehicleNoticeCode.AddMember("TOLL_TRANSPONDER", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_DIFFICULT_TURNS = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_DIFFICULT_TURNS", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_DIRT_ROAD = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_DIRT_ROAD", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_SEASONAL_CLOSURE = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_SEASONAL_CLOSURE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_ROAD = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_TOLL_ROAD", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_TRANSPONDER = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_TOLL_TRANSPONDER", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_TRUCK_ROAD_TYPE = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_TRUCK_ROAD_TYPE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_TUNNEL = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_TUNNEL", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_AVOID_U_TURNS = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_U_TURNS", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_BLOCKED_ROAD = RouteVehicleNoticeCode.AddMember("VIOLATED_BLOCKED_ROAD", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_CARPOOL = RouteVehicleNoticeCode.AddMember("VIOLATED_CARPOOL", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_EMERGENCY_GATE = RouteVehicleNoticeCode.AddMember("VIOLATED_EMERGENCY_GATE", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_START_DIRECTION = RouteVehicleNoticeCode.AddMember("VIOLATED_START_DIRECTION", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_TURN_RESTRICTION = RouteVehicleNoticeCode.AddMember("VIOLATED_TURN_RESTRICTION", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_VEHICLE_RESTRICTION = RouteVehicleNoticeCode.AddMember("VIOLATED_VEHICLE_RESTRICTION", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_VIOLATED_ZONE_RESTRICTION = RouteVehicleNoticeCode.AddMember("VIOLATED_ZONE_RESTRICTION", smithyprelude.Unit)
-
-	RouteVehicleNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS = RouteVehicleNoticeCode.AddMember("TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS", smithyprelude.Unit)
-
-	RouteNoticeDetailRange_Min = RouteNoticeDetailRange.AddMember("Min", smithyprelude.Integer)
-
-	RouteNoticeDetailRange_Max = RouteNoticeDetailRange.AddMember("Max", smithyprelude.Integer)
-
-	RouteHazardousCargoType_COMBUSTIBLE = RouteHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
-
-	RouteHazardousCargoType_CORROSIVE = RouteHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
-
-	RouteHazardousCargoType_EXPLOSIVE = RouteHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
-
-	RouteHazardousCargoType_FLAMMABLE = RouteHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
-
-	RouteHazardousCargoType_GAS = RouteHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
-
-	RouteHazardousCargoType_HARMFUL_TO_WATER = RouteHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
-
-	RouteHazardousCargoType_ORGANIC = RouteHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
-
-	RouteHazardousCargoType_OTHER = RouteHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteHazardousCargoType_POISON = RouteHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
-
-	RouteHazardousCargoType_POISONOUS_INHALATION = RouteHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
-
-	RouteHazardousCargoType_RADIOACTIVE = RouteHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
-
-	_RouteHazardousCargoTypeList_member = _RouteHazardousCargoTypeList.AddMember("member", RouteHazardousCargoType)
-
-	RouteWeightConstraintType_CURRENT = RouteWeightConstraintType.AddMember("CURRENT", smithyprelude.Unit)
-
-	RouteWeightConstraintType_GROSS = RouteWeightConstraintType.AddMember("GROSS", smithyprelude.Unit)
-
-	RouteWeightConstraintType_UNKNOWN = RouteWeightConstraintType.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	RouteWeightConstraint_Type = RouteWeightConstraint.AddMember("Type", RouteWeightConstraintType)
-
-	RouteWeightConstraint_Value = RouteWeightConstraint.AddMember("Value", _WeightKilograms)
-
-	RouteTruckType_LIGHT_TRUCK = RouteTruckType.AddMember("LIGHT_TRUCK", smithyprelude.Unit)
-
-	RouteTruckType_STRAIGHT_TRUCK = RouteTruckType.AddMember("STRAIGHT_TRUCK", smithyprelude.Unit)
-
-	RouteTruckType_TRACTOR = RouteTruckType.AddMember("TRACTOR", smithyprelude.Unit)
-
-	RouteViolatedConstraints_AllHazardsRestricted = RouteViolatedConstraints.AddMember("AllHazardsRestricted", _SensitiveBoolean)
-
-	RouteViolatedConstraints_AxleCount = RouteViolatedConstraints.AddMember("AxleCount", RouteNoticeDetailRange)
-
-	RouteViolatedConstraints_HazardousCargos = RouteViolatedConstraints.AddMember("HazardousCargos", _RouteHazardousCargoTypeList)
-
-	RouteViolatedConstraints_MaxHeight = RouteViolatedConstraints.AddMember("MaxHeight", _DimensionCentimeters)
-
-	RouteViolatedConstraints_MaxKpraLength = RouteViolatedConstraints.AddMember("MaxKpraLength", _DimensionCentimeters)
-
-	RouteViolatedConstraints_MaxLength = RouteViolatedConstraints.AddMember("MaxLength", _DimensionCentimeters)
-
-	RouteViolatedConstraints_MaxPayloadCapacity = RouteViolatedConstraints.AddMember("MaxPayloadCapacity", _WeightKilograms)
-
-	RouteViolatedConstraints_MaxWeight = RouteViolatedConstraints.AddMember("MaxWeight", RouteWeightConstraint)
-
-	RouteViolatedConstraints_MaxWeightPerAxle = RouteViolatedConstraints.AddMember("MaxWeightPerAxle", _WeightKilograms)
-
-	RouteViolatedConstraints_MaxWeightPerAxleGroup = RouteViolatedConstraints.AddMember("MaxWeightPerAxleGroup", WeightPerAxleGroup)
-
-	RouteViolatedConstraints_MaxWidth = RouteViolatedConstraints.AddMember("MaxWidth", _DimensionCentimeters)
-
-	RouteViolatedConstraints_Occupancy = RouteViolatedConstraints.AddMember("Occupancy", RouteNoticeDetailRange)
-
-	RouteViolatedConstraints_RestrictedTimes = RouteViolatedConstraints.AddMember("RestrictedTimes", smithyprelude.String)
-
-	RouteViolatedConstraints_TimeDependent = RouteViolatedConstraints.AddMember("TimeDependent", _SensitiveBoolean)
-
-	RouteViolatedConstraints_TrailerCount = RouteViolatedConstraints.AddMember("TrailerCount", RouteNoticeDetailRange)
-
-	RouteViolatedConstraints_TravelMode = RouteViolatedConstraints.AddMember("TravelMode", _SensitiveBoolean)
-
-	RouteViolatedConstraints_TruckRoadType = RouteViolatedConstraints.AddMember("TruckRoadType", smithyprelude.String)
-
-	RouteViolatedConstraints_TruckType = RouteViolatedConstraints.AddMember("TruckType", RouteTruckType)
-
-	RouteViolatedConstraints_TunnelRestrictionCode = RouteViolatedConstraints.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
-
-	RouteVehicleNoticeDetail_Title = RouteVehicleNoticeDetail.AddMember("Title", _SensitiveString)
-
-	RouteVehicleNoticeDetail_ViolatedConstraints = RouteVehicleNoticeDetail.AddMember("ViolatedConstraints", RouteViolatedConstraints)
-
-	_RouteVehicleNoticeDetailList_member = _RouteVehicleNoticeDetailList.AddMember("member", RouteVehicleNoticeDetail)
-
-	RouteVehicleNotice_Code = RouteVehicleNotice.AddMember("Code", RouteVehicleNoticeCode)
-
-	RouteVehicleNotice_Details = RouteVehicleNotice.AddMember("Details", _RouteVehicleNoticeDetailList)
-
-	RouteVehicleNotice_Impact = RouteVehicleNotice.AddMember("Impact", RouteNoticeImpact)
-
-	_RouteVehicleNoticeList_member = _RouteVehicleNoticeList.AddMember("member", RouteVehicleNotice)
-
-	RouteSpanCarAccessAttribute_ALLOWED = RouteSpanCarAccessAttribute.AddMember("ALLOWED", smithyprelude.Unit)
-
-	RouteSpanCarAccessAttribute_NO_THROUGH_TRAFFIC = RouteSpanCarAccessAttribute.AddMember("NO_THROUGH_TRAFFIC", smithyprelude.Unit)
-
-	RouteSpanCarAccessAttribute_TOLL_ROAD = RouteSpanCarAccessAttribute.AddMember("TOLL_ROAD", smithyprelude.Unit)
-
-	_RouteSpanCarAccessAttributeList_member = _RouteSpanCarAccessAttributeList.AddMember("member", RouteSpanCarAccessAttribute)
-
-	RouteSpanGateAttribute_EMERGENCY = RouteSpanGateAttribute.AddMember("EMERGENCY", smithyprelude.Unit)
-
-	RouteSpanGateAttribute_KEY_ACCESS = RouteSpanGateAttribute.AddMember("KEY_ACCESS", smithyprelude.Unit)
-
-	RouteSpanGateAttribute_PERMISSION_REQUIRED = RouteSpanGateAttribute.AddMember("PERMISSION_REQUIRED", smithyprelude.Unit)
-
-	RouteSpanRailwayCrossingAttribute_PROTECTED = RouteSpanRailwayCrossingAttribute.AddMember("PROTECTED", smithyprelude.Unit)
-
-	RouteSpanRailwayCrossingAttribute_UNPROTECTED = RouteSpanRailwayCrossingAttribute.AddMember("UNPROTECTED", smithyprelude.Unit)
-
-	RouteSpanScooterAccessAttribute_ALLOWED = RouteSpanScooterAccessAttribute.AddMember("ALLOWED", smithyprelude.Unit)
-
-	RouteSpanScooterAccessAttribute_NO_THROUGH_TRAFFIC = RouteSpanScooterAccessAttribute.AddMember("NO_THROUGH_TRAFFIC", smithyprelude.Unit)
-
-	RouteSpanScooterAccessAttribute_TOLL_ROAD = RouteSpanScooterAccessAttribute.AddMember("TOLL_ROAD", smithyprelude.Unit)
-
-	_RouteSpanScooterAccessAttributeList_member = _RouteSpanScooterAccessAttributeList.AddMember("member", RouteSpanScooterAccessAttribute)
-
-	RouteSpanTruckAccessAttribute_ALLOWED = RouteSpanTruckAccessAttribute.AddMember("ALLOWED", smithyprelude.Unit)
-
-	RouteSpanTruckAccessAttribute_NO_THROUGH_TRAFFIC = RouteSpanTruckAccessAttribute.AddMember("NO_THROUGH_TRAFFIC", smithyprelude.Unit)
-
-	RouteSpanTruckAccessAttribute_TOLL_ROAD = RouteSpanTruckAccessAttribute.AddMember("TOLL_ROAD", smithyprelude.Unit)
-
-	_RouteSpanTruckAccessAttributeList_member = _RouteSpanTruckAccessAttributeList.AddMember("member", RouteSpanTruckAccessAttribute)
-
-	RouteVehicleSpan_BestCaseDuration = RouteVehicleSpan.AddMember("BestCaseDuration", _DurationSeconds)
-
-	RouteVehicleSpan_CarAccess = RouteVehicleSpan.AddMember("CarAccess", _RouteSpanCarAccessAttributeList)
-
-	RouteVehicleSpan_Country = RouteVehicleSpan.AddMember("Country", _CountryCode3)
-
-	RouteVehicleSpan_Distance = RouteVehicleSpan.AddMember("Distance", _DistanceMeters)
-
-	RouteVehicleSpan_Duration = RouteVehicleSpan.AddMember("Duration", _DurationSeconds)
-
-	RouteVehicleSpan_DynamicSpeed = RouteVehicleSpan.AddMember("DynamicSpeed", RouteSpanDynamicSpeedDetails)
-
-	RouteVehicleSpan_FunctionalClassification = RouteVehicleSpan.AddMember("FunctionalClassification", _SensitiveInteger)
-
-	RouteVehicleSpan_Gate = RouteVehicleSpan.AddMember("Gate", RouteSpanGateAttribute)
-
-	RouteVehicleSpan_GeometryOffset = RouteVehicleSpan.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteVehicleSpan_Incidents = RouteVehicleSpan.AddMember("Incidents", _IndexList)
-
-	RouteVehicleSpan_Names = RouteVehicleSpan.AddMember("Names", _LocalizedStringList)
-
-	RouteVehicleSpan_Notices = RouteVehicleSpan.AddMember("Notices", _IndexList)
-
-	RouteVehicleSpan_RailwayCrossing = RouteVehicleSpan.AddMember("RailwayCrossing", RouteSpanRailwayCrossingAttribute)
-
-	RouteVehicleSpan_Region = RouteVehicleSpan.AddMember("Region", _SensitiveString)
-
-	RouteVehicleSpan_RoadAttributes = RouteVehicleSpan.AddMember("RoadAttributes", _RouteSpanRoadAttributeList)
-
-	RouteVehicleSpan_RouteNumbers = RouteVehicleSpan.AddMember("RouteNumbers", _RouteNumberList)
-
-	RouteVehicleSpan_ScooterAccess = RouteVehicleSpan.AddMember("ScooterAccess", _RouteSpanScooterAccessAttributeList)
-
-	RouteVehicleSpan_SpeedLimit = RouteVehicleSpan.AddMember("SpeedLimit", RouteSpanSpeedLimitDetails)
-
-	RouteVehicleSpan_TollSystems = RouteVehicleSpan.AddMember("TollSystems", _IndexList)
-
-	RouteVehicleSpan_TruckAccess = RouteVehicleSpan.AddMember("TruckAccess", _RouteSpanTruckAccessAttributeList)
-
-	RouteVehicleSpan_TruckRoadTypes = RouteVehicleSpan.AddMember("TruckRoadTypes", _IndexList)
-
-	RouteVehicleSpan_TypicalDuration = RouteVehicleSpan.AddMember("TypicalDuration", _DurationSeconds)
-
-	RouteVehicleSpan_Zones = RouteVehicleSpan.AddMember("Zones", _IndexList)
-
-	_RouteVehicleSpanList_member = _RouteVehicleSpanList.AddMember("member", RouteVehicleSpan)
-
-	RouteVehicleOverviewSummary_BestCaseDuration = RouteVehicleOverviewSummary.AddMember("BestCaseDuration", _DurationSeconds)
-
-	RouteVehicleOverviewSummary_Distance = RouteVehicleOverviewSummary.AddMember("Distance", _DistanceMeters)
-
-	RouteVehicleOverviewSummary_Duration = RouteVehicleOverviewSummary.AddMember("Duration", _DurationSeconds)
-
-	RouteVehicleOverviewSummary_TypicalDuration = RouteVehicleOverviewSummary.AddMember("TypicalDuration", _DurationSeconds)
-
-	RouteVehicleTravelOnlySummary_BestCaseDuration = RouteVehicleTravelOnlySummary.AddMember("BestCaseDuration", _DurationSeconds)
-
-	RouteVehicleTravelOnlySummary_Duration = RouteVehicleTravelOnlySummary.AddMember("Duration", _DurationSeconds)
-
-	RouteVehicleTravelOnlySummary_TypicalDuration = RouteVehicleTravelOnlySummary.AddMember("TypicalDuration", _DurationSeconds)
-
-	RouteVehicleSummary_Overview = RouteVehicleSummary.AddMember("Overview", RouteVehicleOverviewSummary)
-
-	RouteVehicleSummary_TravelOnly = RouteVehicleSummary.AddMember("TravelOnly", RouteVehicleTravelOnlySummary)
-
-	RouteTollPaymentSite_Name = RouteTollPaymentSite.AddMember("Name", smithyprelude.String)
-
-	RouteTollPaymentSite_Position = RouteTollPaymentSite.AddMember("Position", _Position23)
-
-	_RouteTollPaymentSiteList_member = _RouteTollPaymentSiteList.AddMember("member", RouteTollPaymentSite)
-
-	RouteTollPriceValueRange_Min = RouteTollPriceValueRange.AddMember("Min", _SensitiveDouble)
-
-	RouteTollPriceValueRange_Max = RouteTollPriceValueRange.AddMember("Max", _SensitiveDouble)
-
-	RouteTollPrice_Currency = RouteTollPrice.AddMember("Currency", _CurrencyCode)
-
-	RouteTollPrice_Estimate = RouteTollPrice.AddMember("Estimate", _SensitiveBoolean)
-
-	RouteTollPrice_PerDuration = RouteTollPrice.AddMember("PerDuration", _DurationSeconds)
-
-	RouteTollPrice_Range = RouteTollPrice.AddMember("Range", _SensitiveBoolean)
-
-	RouteTollPrice_RangeValue = RouteTollPrice.AddMember("RangeValue", RouteTollPriceValueRange)
-
-	RouteTollPrice_Value = RouteTollPrice.AddMember("Value", _SensitiveDouble)
-
-	RouteTollPassValidityPeriodType_ANNUAL = RouteTollPassValidityPeriodType.AddMember("ANNUAL", smithyprelude.Unit)
-
-	RouteTollPassValidityPeriodType_DAYS = RouteTollPassValidityPeriodType.AddMember("DAYS", smithyprelude.Unit)
-
-	RouteTollPassValidityPeriodType_EXTENDED_ANNUAL = RouteTollPassValidityPeriodType.AddMember("EXTENDED_ANNUAL", smithyprelude.Unit)
-
-	RouteTollPassValidityPeriodType_MINUTES = RouteTollPassValidityPeriodType.AddMember("MINUTES", smithyprelude.Unit)
-
-	RouteTollPassValidityPeriodType_MONTHS = RouteTollPassValidityPeriodType.AddMember("MONTHS", smithyprelude.Unit)
-
-	RouteTollPassValidityPeriod_Period = RouteTollPassValidityPeriod.AddMember("Period", RouteTollPassValidityPeriodType)
-
-	RouteTollPassValidityPeriod_PeriodCount = RouteTollPassValidityPeriod.AddMember("PeriodCount", _SensitiveInteger)
-
-	RouteTollPass_IncludesReturnTrip = RouteTollPass.AddMember("IncludesReturnTrip", _SensitiveBoolean)
-
-	RouteTollPass_SeniorPass = RouteTollPass.AddMember("SeniorPass", _SensitiveBoolean)
-
-	RouteTollPass_TransferCount = RouteTollPass.AddMember("TransferCount", _SensitiveInteger)
-
-	RouteTollPass_TripCount = RouteTollPass.AddMember("TripCount", _SensitiveInteger)
-
-	RouteTollPass_ValidityPeriod = RouteTollPass.AddMember("ValidityPeriod", RouteTollPassValidityPeriod)
-
-	RouteTollPaymentMethod_BANK_CARD = RouteTollPaymentMethod.AddMember("BANK_CARD", smithyprelude.Unit)
-
-	RouteTollPaymentMethod_CASH = RouteTollPaymentMethod.AddMember("CASH", smithyprelude.Unit)
-
-	RouteTollPaymentMethod_CASH_EXACT = RouteTollPaymentMethod.AddMember("CASH_EXACT", smithyprelude.Unit)
-
-	RouteTollPaymentMethod_CREDIT_CARD = RouteTollPaymentMethod.AddMember("CREDIT_CARD", smithyprelude.Unit)
-
-	RouteTollPaymentMethod_PASS_SUBSCRIPTION = RouteTollPaymentMethod.AddMember("PASS_SUBSCRIPTION", smithyprelude.Unit)
-
-	RouteTollPaymentMethod_TRAVEL_CARD = RouteTollPaymentMethod.AddMember("TRAVEL_CARD", smithyprelude.Unit)
-
-	RouteTollPaymentMethod_TRANSPONDER = RouteTollPaymentMethod.AddMember("TRANSPONDER", smithyprelude.Unit)
-
-	RouteTollPaymentMethod_VIDEO_TOLL = RouteTollPaymentMethod.AddMember("VIDEO_TOLL", smithyprelude.Unit)
-
-	_RouteTollPaymentMethodList_member = _RouteTollPaymentMethodList.AddMember("member", RouteTollPaymentMethod)
-
-	RouteTransponder_SystemName = RouteTransponder.AddMember("SystemName", _SensitiveString)
-
-	_RouteTransponderList_member = _RouteTransponderList.AddMember("member", RouteTransponder)
-
-	RouteTollRate_ApplicableTimes = RouteTollRate.AddMember("ApplicableTimes", _SensitiveString)
-
-	RouteTollRate_ConvertedPrice = RouteTollRate.AddMember("ConvertedPrice", RouteTollPrice)
-
-	RouteTollRate_Id = RouteTollRate.AddMember("Id", _SensitiveString)
-
-	RouteTollRate_LocalPrice = RouteTollRate.AddMember("LocalPrice", RouteTollPrice)
-
-	RouteTollRate_Name = RouteTollRate.AddMember("Name", _SensitiveString)
-
-	RouteTollRate_Pass = RouteTollRate.AddMember("Pass", RouteTollPass)
-
-	RouteTollRate_PaymentMethods = RouteTollRate.AddMember("PaymentMethods", _RouteTollPaymentMethodList)
-
-	RouteTollRate_Transponders = RouteTollRate.AddMember("Transponders", _RouteTransponderList)
-
-	_RouteTollRateList_member = _RouteTollRateList.AddMember("member", RouteTollRate)
-
-	RouteToll_Country = RouteToll.AddMember("Country", _CountryCode3)
-
-	RouteToll_PaymentSites = RouteToll.AddMember("PaymentSites", _RouteTollPaymentSiteList)
-
-	RouteToll_Rates = RouteToll.AddMember("Rates", _RouteTollRateList)
-
-	RouteToll_Systems = RouteToll.AddMember("Systems", _IndexList)
-
-	_RouteTollList_member = _RouteTollList.AddMember("member", RouteToll)
-
-	RouteTollSystem_Name = RouteTollSystem.AddMember("Name", _SensitiveString)
-
-	_RouteTollSystemList_member = _RouteTollSystemList.AddMember("member", RouteTollSystem)
-
-	RouteContinueHighwayStepDetails_Intersection = RouteContinueHighwayStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteContinueHighwayStepDetails_SteeringDirection = RouteContinueHighwayStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteContinueHighwayStepDetails_TurnAngle = RouteContinueHighwayStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteContinueHighwayStepDetails_TurnIntensity = RouteContinueHighwayStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RouteEnterHighwayStepDetails_Intersection = RouteEnterHighwayStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteEnterHighwayStepDetails_SteeringDirection = RouteEnterHighwayStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteEnterHighwayStepDetails_TurnAngle = RouteEnterHighwayStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteEnterHighwayStepDetails_TurnIntensity = RouteEnterHighwayStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RouteExitStepDetails_Intersection = RouteExitStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteExitStepDetails_RelativeExit = RouteExitStepDetails.AddMember("RelativeExit", _SensitiveInteger)
-
-	RouteExitStepDetails_SteeringDirection = RouteExitStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteExitStepDetails_TurnAngle = RouteExitStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteExitStepDetails_TurnIntensity = RouteExitStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RouteRampStepDetails_Intersection = RouteRampStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteRampStepDetails_SteeringDirection = RouteRampStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteRampStepDetails_TurnAngle = RouteRampStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteRampStepDetails_TurnIntensity = RouteRampStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RouteVehicleTravelStepType_ARRIVE = RouteVehicleTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_CONTINUE = RouteVehicleTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_CONTINUE_HIGHWAY = RouteVehicleTravelStepType.AddMember("CONTINUE_HIGHWAY", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_DEPART = RouteVehicleTravelStepType.AddMember("DEPART", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_ENTER_HIGHWAY = RouteVehicleTravelStepType.AddMember("ENTER_HIGHWAY", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_EXIT = RouteVehicleTravelStepType.AddMember("EXIT", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_KEEP = RouteVehicleTravelStepType.AddMember("KEEP", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_RAMP = RouteVehicleTravelStepType.AddMember("RAMP", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_ROUNDABOUT_ENTER = RouteVehicleTravelStepType.AddMember("ROUNDABOUT_ENTER", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_ROUNDABOUT_EXIT = RouteVehicleTravelStepType.AddMember("ROUNDABOUT_EXIT", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_ROUNDABOUT_PASS = RouteVehicleTravelStepType.AddMember("ROUNDABOUT_PASS", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_TURN = RouteVehicleTravelStepType.AddMember("TURN", smithyprelude.Unit)
-
-	RouteVehicleTravelStepType_U_TURN = RouteVehicleTravelStepType.AddMember("U_TURN", smithyprelude.Unit)
-
-	RouteUTurnStepDetails_Intersection = RouteUTurnStepDetails.AddMember("Intersection", _LocalizedStringList)
-
-	RouteUTurnStepDetails_SteeringDirection = RouteUTurnStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
-
-	RouteUTurnStepDetails_TurnAngle = RouteUTurnStepDetails.AddMember("TurnAngle", _TurnAngle)
-
-	RouteUTurnStepDetails_TurnIntensity = RouteUTurnStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
-
-	RouteVehicleTravelStep_ContinueHighwayStepDetails = RouteVehicleTravelStep.AddMember("ContinueHighwayStepDetails", RouteContinueHighwayStepDetails)
-
-	RouteVehicleTravelStep_ContinueStepDetails = RouteVehicleTravelStep.AddMember("ContinueStepDetails", RouteContinueStepDetails)
-
-	RouteVehicleTravelStep_CurrentRoad = RouteVehicleTravelStep.AddMember("CurrentRoad", RouteRoad)
-
-	RouteVehicleTravelStep_Distance = RouteVehicleTravelStep.AddMember("Distance", _DistanceMeters)
-
-	RouteVehicleTravelStep_Duration = RouteVehicleTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteVehicleTravelStep_EnterHighwayStepDetails = RouteVehicleTravelStep.AddMember("EnterHighwayStepDetails", RouteEnterHighwayStepDetails)
-
-	RouteVehicleTravelStep_ExitNumber = RouteVehicleTravelStep.AddMember("ExitNumber", _LocalizedStringList)
-
-	RouteVehicleTravelStep_ExitStepDetails = RouteVehicleTravelStep.AddMember("ExitStepDetails", RouteExitStepDetails)
-
-	RouteVehicleTravelStep_GeometryOffset = RouteVehicleTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteVehicleTravelStep_Instruction = RouteVehicleTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteVehicleTravelStep_KeepStepDetails = RouteVehicleTravelStep.AddMember("KeepStepDetails", RouteKeepStepDetails)
-
-	RouteVehicleTravelStep_NextRoad = RouteVehicleTravelStep.AddMember("NextRoad", RouteRoad)
-
-	RouteVehicleTravelStep_RampStepDetails = RouteVehicleTravelStep.AddMember("RampStepDetails", RouteRampStepDetails)
-
-	RouteVehicleTravelStep_RoundaboutEnterStepDetails = RouteVehicleTravelStep.AddMember("RoundaboutEnterStepDetails", RouteRoundaboutEnterStepDetails)
-
-	RouteVehicleTravelStep_RoundaboutExitStepDetails = RouteVehicleTravelStep.AddMember("RoundaboutExitStepDetails", RouteRoundaboutExitStepDetails)
-
-	RouteVehicleTravelStep_RoundaboutPassStepDetails = RouteVehicleTravelStep.AddMember("RoundaboutPassStepDetails", RouteRoundaboutPassStepDetails)
-
-	RouteVehicleTravelStep_Signpost = RouteVehicleTravelStep.AddMember("Signpost", RouteSignpost)
-
-	RouteVehicleTravelStep_TurnStepDetails = RouteVehicleTravelStep.AddMember("TurnStepDetails", RouteTurnStepDetails)
-
-	RouteVehicleTravelStep_Type = RouteVehicleTravelStep.AddMember("Type", RouteVehicleTravelStepType)
-
-	RouteVehicleTravelStep_UTurnStepDetails = RouteVehicleTravelStep.AddMember("UTurnStepDetails", RouteUTurnStepDetails)
-
-	_RouteVehicleTravelStepList_member = _RouteVehicleTravelStepList.AddMember("member", RouteVehicleTravelStep)
-
-	RouteZoneCategory_CONGESTION_PRICING = RouteZoneCategory.AddMember("CONGESTION_PRICING", smithyprelude.Unit)
-
-	RouteZoneCategory_ENVIRONMENTAL = RouteZoneCategory.AddMember("ENVIRONMENTAL", smithyprelude.Unit)
-
-	RouteZoneCategory_VIGNETTE = RouteZoneCategory.AddMember("VIGNETTE", smithyprelude.Unit)
-
-	RouteZone_Category = RouteZone.AddMember("Category", RouteZoneCategory)
-
-	RouteZone_Name = RouteZone.AddMember("Name", _SensitiveString)
-
-	_RouteZoneList_member = _RouteZoneList.AddMember("member", RouteZone)
-
-	RouteVehicleLegDetails_AfterTravelSteps = RouteVehicleLegDetails.AddMember("AfterTravelSteps", _RouteVehicleAfterTravelStepList)
-
-	RouteVehicleLegDetails_Arrival = RouteVehicleLegDetails.AddMember("Arrival", RouteVehicleArrival)
-
-	RouteVehicleLegDetails_Departure = RouteVehicleLegDetails.AddMember("Departure", RouteVehicleDeparture)
-
-	RouteVehicleLegDetails_Incidents = RouteVehicleLegDetails.AddMember("Incidents", _RouteVehicleIncidentList)
-
-	RouteVehicleLegDetails_Notices = RouteVehicleLegDetails.AddMember("Notices", _RouteVehicleNoticeList)
-
-	RouteVehicleLegDetails_PassThroughWaypoints = RouteVehicleLegDetails.AddMember("PassThroughWaypoints", _RoutePassThroughWaypointList)
-
-	RouteVehicleLegDetails_Spans = RouteVehicleLegDetails.AddMember("Spans", _RouteVehicleSpanList)
-
-	RouteVehicleLegDetails_Summary = RouteVehicleLegDetails.AddMember("Summary", RouteVehicleSummary)
-
-	RouteVehicleLegDetails_Tolls = RouteVehicleLegDetails.AddMember("Tolls", _RouteTollList)
-
-	RouteVehicleLegDetails_TollSystems = RouteVehicleLegDetails.AddMember("TollSystems", _RouteTollSystemList)
-
-	RouteVehicleLegDetails_TravelSteps = RouteVehicleLegDetails.AddMember("TravelSteps", _RouteVehicleTravelStepList)
-
-	RouteVehicleLegDetails_TruckRoadTypes = RouteVehicleLegDetails.AddMember("TruckRoadTypes", _TruckRoadTypeList)
-
-	RouteVehicleLegDetails_Zones = RouteVehicleLegDetails.AddMember("Zones", _RouteZoneList)
-
-	RouteRentalAfterTravelStepType_PARK = RouteRentalAfterTravelStepType.AddMember("PARK", smithyprelude.Unit)
-
-	RouteRentalAfterTravelStep_Duration = RouteRentalAfterTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteRentalAfterTravelStep_Instruction = RouteRentalAfterTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteRentalAfterTravelStep_Type = RouteRentalAfterTravelStep.AddMember("Type", RouteRentalAfterTravelStepType)
-
-	_RouteRentalAfterTravelStepList_member = _RouteRentalAfterTravelStepList.AddMember("member", RouteRentalAfterTravelStep)
-
-	RouteRentalAgency_Name = RouteRentalAgency.AddMember("Name", _SensitiveString)
-
-	RouteRentalAgency_Url = RouteRentalAgency.AddMember("Url", _SensitiveString)
-
-	RouteRentalPlaceType_ACCESS_POINT = RouteRentalPlaceType.AddMember("ACCESS_POINT", smithyprelude.Unit)
-
-	RouteRentalPlaceType_DOCKING_STATION = RouteRentalPlaceType.AddMember("DOCKING_STATION", smithyprelude.Unit)
-
-	RouteRentalPlaceType_PARKING_LOT = RouteRentalPlaceType.AddMember("PARKING_LOT", smithyprelude.Unit)
-
-	RouteRentalPlaceType_STATION = RouteRentalPlaceType.AddMember("STATION", smithyprelude.Unit)
-
-	RouteRentalPlace_AccessPointDetails = RouteRentalPlace.AddMember("AccessPointDetails", RouteAccessPointDetails)
-
-	RouteRentalPlace_Name = RouteRentalPlace.AddMember("Name", _SensitiveString)
-
-	RouteRentalPlace_OriginalPosition = RouteRentalPlace.AddMember("OriginalPosition", _Position23)
-
-	RouteRentalPlace_Position = RouteRentalPlace.AddMember("Position", _Position23)
-
-	RouteRentalPlace_StationDetails = RouteRentalPlace.AddMember("StationDetails", RouteStationDetails)
-
-	RouteRentalPlace_Type = RouteRentalPlace.AddMember("Type", RouteRentalPlaceType)
-
-	RouteRentalPlace_WaypointIndex = RouteRentalPlace.AddMember("WaypointIndex", _SensitiveInteger)
-
-	RouteRentalArrival_Place = RouteRentalArrival.AddMember("Place", RouteRentalPlace)
-
-	RouteRentalArrival_Time = RouteRentalArrival.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteAttributionType_DISCLAIMER = RouteAttributionType.AddMember("DISCLAIMER", smithyprelude.Unit)
-
-	RouteAttributionType_TARIFF = RouteAttributionType.AddMember("TARIFF", smithyprelude.Unit)
-
-	RouteWebLinkDeviceType_ANDROID = RouteWebLinkDeviceType.AddMember("ANDROID", smithyprelude.Unit)
-
-	RouteWebLinkDeviceType_IOS = RouteWebLinkDeviceType.AddMember("IOS", smithyprelude.Unit)
-
-	RouteWebLinkDeviceType_WEB = RouteWebLinkDeviceType.AddMember("WEB", smithyprelude.Unit)
-
-	RouteWebLink_AnchorText = RouteWebLink.AddMember("AnchorText", _SensitiveString)
-
-	RouteWebLink_Description = RouteWebLink.AddMember("Description", _SensitiveString)
-
-	RouteWebLink_DeviceType = RouteWebLink.AddMember("DeviceType", RouteWebLinkDeviceType)
-
-	RouteWebLink_Url = RouteWebLink.AddMember("Url", _SensitiveString)
-
-	RouteAttribution_AttributionType = RouteAttribution.AddMember("AttributionType", RouteAttributionType)
-
-	RouteAttribution_WebLink = RouteAttribution.AddMember("WebLink", RouteWebLink)
-
-	_RouteAttributionList_member = _RouteAttributionList.AddMember("member", RouteAttribution)
-
-	RouteRentalBeforeTravelStepType_SETUP = RouteRentalBeforeTravelStepType.AddMember("SETUP", smithyprelude.Unit)
-
-	RouteRentalBeforeTravelStep_Duration = RouteRentalBeforeTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteRentalBeforeTravelStep_Instruction = RouteRentalBeforeTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteRentalBeforeTravelStep_Type = RouteRentalBeforeTravelStep.AddMember("Type", RouteRentalBeforeTravelStepType)
-
-	_RouteRentalBeforeTravelStepList_member = _RouteRentalBeforeTravelStepList.AddMember("member", RouteRentalBeforeTravelStep)
-
-	_RouteWebLinkList_member = _RouteWebLinkList.AddMember("member", RouteWebLink)
-
-	RouteRentalDeparture_Place = RouteRentalDeparture.AddMember("Place", RouteRentalPlace)
-
-	RouteRentalDeparture_Time = RouteRentalDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteRentalOverviewSummary_Duration = RouteRentalOverviewSummary.AddMember("Duration", _DurationSeconds)
-
-	RouteRentalOverviewSummary_Distance = RouteRentalOverviewSummary.AddMember("Distance", _DistanceMeters)
-
-	RouteRentalTravelOnlySummary_Duration = RouteRentalTravelOnlySummary.AddMember("Duration", _DurationSeconds)
-
-	RouteRentalSummary_Overview = RouteRentalSummary.AddMember("Overview", RouteRentalOverviewSummary)
-
-	RouteRentalSummary_TravelOnly = RouteRentalSummary.AddMember("TravelOnly", RouteRentalTravelOnlySummary)
-
-	RouteEngineType_ELECTRIC = RouteEngineType.AddMember("ELECTRIC", smithyprelude.Unit)
-
-	RouteEngineType_INTERNAL_COMBUSTION = RouteEngineType.AddMember("INTERNAL_COMBUSTION", smithyprelude.Unit)
-
-	RouteEngineType_PLUGIN_HYBRID = RouteEngineType.AddMember("PLUGIN_HYBRID", smithyprelude.Unit)
-
-	RouteRentalMode_ALL = RouteRentalMode.AddMember("ALL", smithyprelude.Unit)
-
-	RouteRentalMode_CAR = RouteRentalMode.AddMember("CAR", smithyprelude.Unit)
-
-	RouteRentalTransportModeDetails_AvailableSeats = RouteRentalTransportModeDetails.AddMember("AvailableSeats", _SensitiveInteger)
-
-	RouteRentalTransportModeDetails_Category = RouteRentalTransportModeDetails.AddMember("Category", _SensitiveString)
-
-	RouteRentalTransportModeDetails_Color = RouteRentalTransportModeDetails.AddMember("Color", _SensitiveString)
-
-	RouteRentalTransportModeDetails_Engine = RouteRentalTransportModeDetails.AddMember("Engine", RouteEngineType)
-
-	RouteRentalTransportModeDetails_LicensePlate = RouteRentalTransportModeDetails.AddMember("LicensePlate", _SensitiveString)
-
-	RouteRentalTransportModeDetails_Mode = RouteRentalTransportModeDetails.AddMember("Mode", RouteRentalMode)
-
-	RouteRentalTransportModeDetails_Model = RouteRentalTransportModeDetails.AddMember("Model", _SensitiveString)
-
-	RouteRentalTransportModeDetails_Name = RouteRentalTransportModeDetails.AddMember("Name", _SensitiveString)
-
-	RouteRentalTransportModeDetails_TextColor = RouteRentalTransportModeDetails.AddMember("TextColor", _SensitiveString)
-
-	RouteRentalTravelStepType_ARRIVE = RouteRentalTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_CONTINUE = RouteRentalTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_DEPART = RouteRentalTravelStepType.AddMember("DEPART", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_EXIT = RouteRentalTravelStepType.AddMember("EXIT", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_KEEP = RouteRentalTravelStepType.AddMember("KEEP", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_RAMP = RouteRentalTravelStepType.AddMember("RAMP", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_ROUNDABOUT_ENTER = RouteRentalTravelStepType.AddMember("ROUNDABOUT_ENTER", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_ROUNDABOUT_EXIT = RouteRentalTravelStepType.AddMember("ROUNDABOUT_EXIT", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_ROUNDABOUT_PASS = RouteRentalTravelStepType.AddMember("ROUNDABOUT_PASS", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_TURN = RouteRentalTravelStepType.AddMember("TURN", smithyprelude.Unit)
-
-	RouteRentalTravelStepType_U_TURN = RouteRentalTravelStepType.AddMember("U_TURN", smithyprelude.Unit)
-
-	RouteRentalTravelStep_ContinueStepDetails = RouteRentalTravelStep.AddMember("ContinueStepDetails", RouteContinueStepDetails)
-
-	RouteRentalTravelStep_Distance = RouteRentalTravelStep.AddMember("Distance", _DistanceMeters)
-
-	RouteRentalTravelStep_Duration = RouteRentalTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteRentalTravelStep_ExitStepDetails = RouteRentalTravelStep.AddMember("ExitStepDetails", RouteExitStepDetails)
-
-	RouteRentalTravelStep_GeometryOffset = RouteRentalTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteRentalTravelStep_Instruction = RouteRentalTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteRentalTravelStep_KeepStepDetails = RouteRentalTravelStep.AddMember("KeepStepDetails", RouteKeepStepDetails)
-
-	RouteRentalTravelStep_RampStepDetails = RouteRentalTravelStep.AddMember("RampStepDetails", RouteRampStepDetails)
-
-	RouteRentalTravelStep_RoundaboutEnterStepDetails = RouteRentalTravelStep.AddMember("RoundaboutEnterStepDetails", RouteRoundaboutEnterStepDetails)
-
-	RouteRentalTravelStep_RoundaboutExitStepDetails = RouteRentalTravelStep.AddMember("RoundaboutExitStepDetails", RouteRoundaboutExitStepDetails)
-
-	RouteRentalTravelStep_RoundaboutPassStepDetails = RouteRentalTravelStep.AddMember("RoundaboutPassStepDetails", RouteRoundaboutPassStepDetails)
-
-	RouteRentalTravelStep_TurnStepDetails = RouteRentalTravelStep.AddMember("TurnStepDetails", RouteTurnStepDetails)
-
-	RouteRentalTravelStep_Type = RouteRentalTravelStep.AddMember("Type", RouteRentalTravelStepType)
-
-	RouteRentalTravelStep_UTurnStepDetails = RouteRentalTravelStep.AddMember("UTurnStepDetails", RouteUTurnStepDetails)
-
-	_RouteRentalTravelStepList_member = _RouteRentalTravelStepList.AddMember("member", RouteRentalTravelStep)
-
-	RouteRentalLegDetails_AfterTravelSteps = RouteRentalLegDetails.AddMember("AfterTravelSteps", _RouteRentalAfterTravelStepList)
-
-	RouteRentalLegDetails_Agency = RouteRentalLegDetails.AddMember("Agency", RouteRentalAgency)
-
-	RouteRentalLegDetails_Arrival = RouteRentalLegDetails.AddMember("Arrival", RouteRentalArrival)
-
-	RouteRentalLegDetails_Attributions = RouteRentalLegDetails.AddMember("Attributions", _RouteAttributionList)
-
-	RouteRentalLegDetails_BeforeTravelSteps = RouteRentalLegDetails.AddMember("BeforeTravelSteps", _RouteRentalBeforeTravelStepList)
-
-	RouteRentalLegDetails_BookingWebLinks = RouteRentalLegDetails.AddMember("BookingWebLinks", _RouteWebLinkList)
-
-	RouteRentalLegDetails_Departure = RouteRentalLegDetails.AddMember("Departure", RouteRentalDeparture)
-
-	RouteRentalLegDetails_Summary = RouteRentalLegDetails.AddMember("Summary", RouteRentalSummary)
-
-	RouteRentalLegDetails_Transport = RouteRentalLegDetails.AddMember("Transport", RouteRentalTransportModeDetails)
-
-	RouteRentalLegDetails_TravelSteps = RouteRentalLegDetails.AddMember("TravelSteps", _RouteRentalTravelStepList)
-
-	RouteTaxiAfterTravelStepType_PARK = RouteTaxiAfterTravelStepType.AddMember("PARK", smithyprelude.Unit)
-
-	RouteTaxiAfterTravelStep_Duration = RouteTaxiAfterTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteTaxiAfterTravelStep_Instruction = RouteTaxiAfterTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteTaxiAfterTravelStep_Type = RouteTaxiAfterTravelStep.AddMember("Type", RouteTaxiAfterTravelStepType)
-
-	_RouteTaxiAfterTravelStepList_member = _RouteTaxiAfterTravelStepList.AddMember("member", RouteTaxiAfterTravelStep)
-
-	RouteTaxiAgency_Name = RouteTaxiAgency.AddMember("Name", _SensitiveString)
-
-	RouteTaxiAgency_Url = RouteTaxiAgency.AddMember("Url", _SensitiveString)
-
-	RouteTaxiPlaceType_ACCESS_POINT = RouteTaxiPlaceType.AddMember("ACCESS_POINT", smithyprelude.Unit)
-
-	RouteTaxiPlaceType_STATION = RouteTaxiPlaceType.AddMember("STATION", smithyprelude.Unit)
-
-	RouteTaxiPlace_AccessPointDetails = RouteTaxiPlace.AddMember("AccessPointDetails", RouteAccessPointDetails)
-
-	RouteTaxiPlace_Name = RouteTaxiPlace.AddMember("Name", _SensitiveString)
-
-	RouteTaxiPlace_OriginalPosition = RouteTaxiPlace.AddMember("OriginalPosition", _Position23)
-
-	RouteTaxiPlace_Position = RouteTaxiPlace.AddMember("Position", _Position23)
-
-	RouteTaxiPlace_StationDetails = RouteTaxiPlace.AddMember("StationDetails", RouteStationDetails)
-
-	RouteTaxiPlace_Type = RouteTaxiPlace.AddMember("Type", RouteTaxiPlaceType)
-
-	RouteTaxiPlace_WaypointIndex = RouteTaxiPlace.AddMember("WaypointIndex", _SensitiveInteger)
-
-	RouteTaxiArrival_Place = RouteTaxiArrival.AddMember("Place", RouteTaxiPlace)
-
-	RouteTaxiArrival_Time = RouteTaxiArrival.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteTaxiBeforeTravelStepType_WAIT = RouteTaxiBeforeTravelStepType.AddMember("WAIT", smithyprelude.Unit)
-
-	RouteTaxiBeforeTravelStep_Duration = RouteTaxiBeforeTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteTaxiBeforeTravelStep_Instruction = RouteTaxiBeforeTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteTaxiBeforeTravelStep_Type = RouteTaxiBeforeTravelStep.AddMember("Type", RouteTaxiBeforeTravelStepType)
-
-	_RouteTaxiBeforeTravelStepList_member = _RouteTaxiBeforeTravelStepList.AddMember("member", RouteTaxiBeforeTravelStep)
-
-	RouteTaxiDeparture_Place = RouteTaxiDeparture.AddMember("Place", RouteTaxiPlace)
-
-	RouteTaxiDeparture_Time = RouteTaxiDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteTaxiNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RouteTaxiNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteTaxiNoticeCode_OTHER = RouteTaxiNoticeCode.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteTaxiNotice_Code = RouteTaxiNotice.AddMember("Code", RouteTaxiNoticeCode)
-
-	RouteTaxiNotice_Impact = RouteTaxiNotice.AddMember("Impact", RouteNoticeImpact)
-
-	_RouteTaxiNoticeList_member = _RouteTaxiNoticeList.AddMember("member", RouteTaxiNotice)
-
-	RouteTaxiOverviewSummary_Duration = RouteTaxiOverviewSummary.AddMember("Duration", _DurationSeconds)
-
-	RouteTaxiOverviewSummary_Distance = RouteTaxiOverviewSummary.AddMember("Distance", _DistanceMeters)
-
-	RouteTaxiTravelOnlySummary_Duration = RouteTaxiTravelOnlySummary.AddMember("Duration", _DurationSeconds)
-
-	RouteTaxiSummary_Overview = RouteTaxiSummary.AddMember("Overview", RouteTaxiOverviewSummary)
-
-	RouteTaxiSummary_TravelOnly = RouteTaxiSummary.AddMember("TravelOnly", RouteTaxiTravelOnlySummary)
-
-	RouteTaxiMode_ALL = RouteTaxiMode.AddMember("ALL", smithyprelude.Unit)
-
-	RouteTaxiMode_CAR = RouteTaxiMode.AddMember("CAR", smithyprelude.Unit)
-
-	RouteTaxiTransportModeDetails_AvailableSeats = RouteTaxiTransportModeDetails.AddMember("AvailableSeats", _SensitiveInteger)
-
-	RouteTaxiTransportModeDetails_Category = RouteTaxiTransportModeDetails.AddMember("Category", _SensitiveString)
-
-	RouteTaxiTransportModeDetails_Color = RouteTaxiTransportModeDetails.AddMember("Color", _SensitiveString)
-
-	RouteTaxiTransportModeDetails_Engine = RouteTaxiTransportModeDetails.AddMember("Engine", RouteEngineType)
-
-	RouteTaxiTransportModeDetails_LicensePlate = RouteTaxiTransportModeDetails.AddMember("LicensePlate", _SensitiveString)
-
-	RouteTaxiTransportModeDetails_Mode = RouteTaxiTransportModeDetails.AddMember("Mode", RouteTaxiMode)
-
-	RouteTaxiTransportModeDetails_Model = RouteTaxiTransportModeDetails.AddMember("Model", _SensitiveString)
-
-	RouteTaxiTransportModeDetails_Name = RouteTaxiTransportModeDetails.AddMember("Name", _SensitiveString)
-
-	RouteTaxiTransportModeDetails_TextColor = RouteTaxiTransportModeDetails.AddMember("TextColor", _SensitiveString)
-
-	RouteTaxiTravelStepType_ARRIVE = RouteTaxiTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_CONTINUE = RouteTaxiTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_DEPART = RouteTaxiTravelStepType.AddMember("DEPART", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_EXIT = RouteTaxiTravelStepType.AddMember("EXIT", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_KEEP = RouteTaxiTravelStepType.AddMember("KEEP", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_RAMP = RouteTaxiTravelStepType.AddMember("RAMP", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_ROUNDABOUT_ENTER = RouteTaxiTravelStepType.AddMember("ROUNDABOUT_ENTER", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_ROUNDABOUT_EXIT = RouteTaxiTravelStepType.AddMember("ROUNDABOUT_EXIT", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_ROUNDABOUT_PASS = RouteTaxiTravelStepType.AddMember("ROUNDABOUT_PASS", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_TURN = RouteTaxiTravelStepType.AddMember("TURN", smithyprelude.Unit)
-
-	RouteTaxiTravelStepType_U_TURN = RouteTaxiTravelStepType.AddMember("U_TURN", smithyprelude.Unit)
-
-	RouteTaxiTravelStep_ContinueStepDetails = RouteTaxiTravelStep.AddMember("ContinueStepDetails", RouteContinueStepDetails)
-
-	RouteTaxiTravelStep_Distance = RouteTaxiTravelStep.AddMember("Distance", _DistanceMeters)
-
-	RouteTaxiTravelStep_Duration = RouteTaxiTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteTaxiTravelStep_ExitStepDetails = RouteTaxiTravelStep.AddMember("ExitStepDetails", RouteExitStepDetails)
-
-	RouteTaxiTravelStep_GeometryOffset = RouteTaxiTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteTaxiTravelStep_Instruction = RouteTaxiTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteTaxiTravelStep_KeepStepDetails = RouteTaxiTravelStep.AddMember("KeepStepDetails", RouteKeepStepDetails)
-
-	RouteTaxiTravelStep_RampStepDetails = RouteTaxiTravelStep.AddMember("RampStepDetails", RouteRampStepDetails)
-
-	RouteTaxiTravelStep_RoundaboutEnterStepDetails = RouteTaxiTravelStep.AddMember("RoundaboutEnterStepDetails", RouteRoundaboutEnterStepDetails)
-
-	RouteTaxiTravelStep_RoundaboutExitStepDetails = RouteTaxiTravelStep.AddMember("RoundaboutExitStepDetails", RouteRoundaboutExitStepDetails)
-
-	RouteTaxiTravelStep_RoundaboutPassStepDetails = RouteTaxiTravelStep.AddMember("RoundaboutPassStepDetails", RouteRoundaboutPassStepDetails)
-
-	RouteTaxiTravelStep_TurnStepDetails = RouteTaxiTravelStep.AddMember("TurnStepDetails", RouteTurnStepDetails)
-
-	RouteTaxiTravelStep_Type = RouteTaxiTravelStep.AddMember("Type", RouteTaxiTravelStepType)
-
-	RouteTaxiTravelStep_UTurnStepDetails = RouteTaxiTravelStep.AddMember("UTurnStepDetails", RouteUTurnStepDetails)
-
-	_RouteTaxiTravelStepList_member = _RouteTaxiTravelStepList.AddMember("member", RouteTaxiTravelStep)
-
-	RouteTaxiLegDetails_AfterTravelSteps = RouteTaxiLegDetails.AddMember("AfterTravelSteps", _RouteTaxiAfterTravelStepList)
-
-	RouteTaxiLegDetails_Agency = RouteTaxiLegDetails.AddMember("Agency", RouteTaxiAgency)
-
-	RouteTaxiLegDetails_Arrival = RouteTaxiLegDetails.AddMember("Arrival", RouteTaxiArrival)
-
-	RouteTaxiLegDetails_Attributions = RouteTaxiLegDetails.AddMember("Attributions", _RouteAttributionList)
-
-	RouteTaxiLegDetails_BeforeTravelSteps = RouteTaxiLegDetails.AddMember("BeforeTravelSteps", _RouteTaxiBeforeTravelStepList)
-
-	RouteTaxiLegDetails_BookingWebLinks = RouteTaxiLegDetails.AddMember("BookingWebLinks", _RouteWebLinkList)
-
-	RouteTaxiLegDetails_Departure = RouteTaxiLegDetails.AddMember("Departure", RouteTaxiDeparture)
-
-	RouteTaxiLegDetails_Notices = RouteTaxiLegDetails.AddMember("Notices", _RouteTaxiNoticeList)
-
-	RouteTaxiLegDetails_Summary = RouteTaxiLegDetails.AddMember("Summary", RouteTaxiSummary)
-
-	RouteTaxiLegDetails_Transport = RouteTaxiLegDetails.AddMember("Transport", RouteTaxiTransportModeDetails)
-
-	RouteTaxiLegDetails_TravelSteps = RouteTaxiLegDetails.AddMember("TravelSteps", _RouteTaxiTravelStepList)
-
-	RouteTransitAfterTravelStepType_DEBOARD = RouteTransitAfterTravelStepType.AddMember("DEBOARD", smithyprelude.Unit)
-
-	RouteTransitAfterTravelStep_Duration = RouteTransitAfterTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteTransitAfterTravelStep_Instruction = RouteTransitAfterTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteTransitAfterTravelStep_Type = RouteTransitAfterTravelStep.AddMember("Type", RouteTransitAfterTravelStepType)
-
-	_RouteTransitAfterTravelStepList_member = _RouteTransitAfterTravelStepList.AddMember("member", RouteTransitAfterTravelStep)
-
-	RouteTransitAgency_Name = RouteTransitAgency.AddMember("Name", _SensitiveString)
-
-	RouteTransitAgency_Url = RouteTransitAgency.AddMember("Url", _SensitiveString)
-
-	RouteTransitPlaceType_STATION = RouteTransitPlaceType.AddMember("STATION", smithyprelude.Unit)
-
-	RouteTransitPlace_Name = RouteTransitPlace.AddMember("Name", _SensitiveString)
-
-	RouteTransitPlace_OriginalPosition = RouteTransitPlace.AddMember("OriginalPosition", _Position23)
-
-	RouteTransitPlace_Position = RouteTransitPlace.AddMember("Position", _Position23)
-
-	RouteTransitPlace_StationDetails = RouteTransitPlace.AddMember("StationDetails", RouteStationDetails)
-
-	RouteTransitPlace_Type = RouteTransitPlace.AddMember("Type", RouteTransitPlaceType)
-
-	RouteTransitPlace_WaypointIndex = RouteTransitPlace.AddMember("WaypointIndex", _SensitiveInteger)
-
-	RouteTransitTripStatus_ADDED = RouteTransitTripStatus.AddMember("ADDED", smithyprelude.Unit)
-
-	RouteTransitTripStatus_CANCELLED = RouteTransitTripStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	RouteTransitTripStatus_REPLACED = RouteTransitTripStatus.AddMember("REPLACED", smithyprelude.Unit)
-
-	RouteTransitTripStatus_SCHEDULED = RouteTransitTripStatus.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	RouteTransitArrival_Delay = RouteTransitArrival.AddMember("Delay", _DurationSeconds)
-
-	RouteTransitArrival_Place = RouteTransitArrival.AddMember("Place", RouteTransitPlace)
-
-	RouteTransitArrival_Status = RouteTransitArrival.AddMember("Status", RouteTransitTripStatus)
-
-	RouteTransitArrival_Time = RouteTransitArrival.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteTransitBeforeTravelStepType_BOARD = RouteTransitBeforeTravelStepType.AddMember("BOARD", smithyprelude.Unit)
-
-	RouteTransitBeforeTravelStep_Duration = RouteTransitBeforeTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteTransitBeforeTravelStep_Instruction = RouteTransitBeforeTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteTransitBeforeTravelStep_Type = RouteTransitBeforeTravelStep.AddMember("Type", RouteTransitBeforeTravelStepType)
-
-	_RouteTransitBeforeTravelStepList_member = _RouteTransitBeforeTravelStepList.AddMember("member", RouteTransitBeforeTravelStep)
-
-	RouteTransitDeparture_Delay = RouteTransitDeparture.AddMember("Delay", _DurationSeconds)
-
-	RouteTransitDeparture_Place = RouteTransitDeparture.AddMember("Place", RouteTransitPlace)
-
-	RouteTransitDeparture_Status = RouteTransitDeparture.AddMember("Status", RouteTransitTripStatus)
-
-	RouteTransitDeparture_Time = RouteTransitDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteTransitIncidentEffect_DELAYED = RouteTransitIncidentEffect.AddMember("DELAYED", smithyprelude.Unit)
-
-	RouteTransitIncidentEffect_DETOURED = RouteTransitIncidentEffect.AddMember("DETOURED", smithyprelude.Unit)
-
-	RouteTransitIncidentEffect_OTHER = RouteTransitIncidentEffect.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteTransitIncidentEffect_SERVICE_ADDED = RouteTransitIncidentEffect.AddMember("SERVICE_ADDED", smithyprelude.Unit)
-
-	RouteTransitIncidentEffect_SERVICE_CANCELLED = RouteTransitIncidentEffect.AddMember("SERVICE_CANCELLED", smithyprelude.Unit)
-
-	RouteTransitIncidentEffect_SERVICE_MODIFIED = RouteTransitIncidentEffect.AddMember("SERVICE_MODIFIED", smithyprelude.Unit)
-
-	RouteTransitIncidentEffect_SERVICE_REDUCED = RouteTransitIncidentEffect.AddMember("SERVICE_REDUCED", smithyprelude.Unit)
-
-	RouteTransitIncidentEffect_STOP_MOVED = RouteTransitIncidentEffect.AddMember("STOP_MOVED", smithyprelude.Unit)
-
-	RouteTransitIncidentType_ACCIDENT = RouteTransitIncidentType.AddMember("ACCIDENT", smithyprelude.Unit)
-
-	RouteTransitIncidentType_CONSTRUCTION = RouteTransitIncidentType.AddMember("CONSTRUCTION", smithyprelude.Unit)
-
-	RouteTransitIncidentType_DEMONSTRATION = RouteTransitIncidentType.AddMember("DEMONSTRATION", smithyprelude.Unit)
-
-	RouteTransitIncidentType_HOLIDAY = RouteTransitIncidentType.AddMember("HOLIDAY", smithyprelude.Unit)
-
-	RouteTransitIncidentType_MAINTENANCE = RouteTransitIncidentType.AddMember("MAINTENANCE", smithyprelude.Unit)
-
-	RouteTransitIncidentType_MEDICAL_EMERGENCY = RouteTransitIncidentType.AddMember("MEDICAL_EMERGENCY", smithyprelude.Unit)
-
-	RouteTransitIncidentType_OTHER = RouteTransitIncidentType.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteTransitIncidentType_POLICE_ACTIVITY = RouteTransitIncidentType.AddMember("POLICE_ACTIVITY", smithyprelude.Unit)
-
-	RouteTransitIncidentType_STRIKE = RouteTransitIncidentType.AddMember("STRIKE", smithyprelude.Unit)
-
-	RouteTransitIncidentType_TECHNICAL_PROBLEM = RouteTransitIncidentType.AddMember("TECHNICAL_PROBLEM", smithyprelude.Unit)
-
-	RouteTransitIncidentType_WEATHER = RouteTransitIncidentType.AddMember("WEATHER", smithyprelude.Unit)
-
-	RouteTransitIncident_Description = RouteTransitIncident.AddMember("Description", _SensitiveString)
-
-	RouteTransitIncident_Effect = RouteTransitIncident.AddMember("Effect", RouteTransitIncidentEffect)
-
-	RouteTransitIncident_EndTime = RouteTransitIncident.AddMember("EndTime", _TimestampWithTimezoneOffset)
-
-	RouteTransitIncident_StartTime = RouteTransitIncident.AddMember("StartTime", _TimestampWithTimezoneOffset)
-
-	RouteTransitIncident_Type = RouteTransitIncident.AddMember("Type", RouteTransitIncidentType)
-
-	RouteTransitIncident_Url = RouteTransitIncident.AddMember("Url", _SensitiveString)
-
-	_RouteTransitIncidentList_member = _RouteTransitIncidentList.AddMember("member", RouteTransitIncident)
-
-	RouteTransitIntermediateStopAttribute_NO_ENTRY = RouteTransitIntermediateStopAttribute.AddMember("NO_ENTRY", smithyprelude.Unit)
-
-	RouteTransitIntermediateStopAttribute_NO_EXIT = RouteTransitIntermediateStopAttribute.AddMember("NO_EXIT", smithyprelude.Unit)
-
-	_RouteTransitIntermediateStopAttributeList_member = _RouteTransitIntermediateStopAttributeList.AddMember("member", RouteTransitIntermediateStopAttribute)
-
-	RouteTransitMode_AERIAL_TRAMWAY = RouteTransitMode.AddMember("AERIAL_TRAMWAY", smithyprelude.Unit)
-
-	RouteTransitMode_AIRPLANE = RouteTransitMode.AddMember("AIRPLANE", smithyprelude.Unit)
-
-	RouteTransitMode_ALL = RouteTransitMode.AddMember("ALL", smithyprelude.Unit)
-
-	RouteTransitMode_BUS = RouteTransitMode.AddMember("BUS", smithyprelude.Unit)
-
-	RouteTransitMode_BUS_RAPID_TRANSIT = RouteTransitMode.AddMember("BUS_RAPID_TRANSIT", smithyprelude.Unit)
-
-	RouteTransitMode_CITY_TRAIN = RouteTransitMode.AddMember("CITY_TRAIN", smithyprelude.Unit)
-
-	RouteTransitMode_FERRY = RouteTransitMode.AddMember("FERRY", smithyprelude.Unit)
-
-	RouteTransitMode_FUNICULAR_RAILWAY = RouteTransitMode.AddMember("FUNICULAR_RAILWAY", smithyprelude.Unit)
-
-	RouteTransitMode_HIGH_SPEED_TRAIN = RouteTransitMode.AddMember("HIGH_SPEED_TRAIN", smithyprelude.Unit)
-
-	RouteTransitMode_INTERCITY_TRAIN = RouteTransitMode.AddMember("INTERCITY_TRAIN", smithyprelude.Unit)
-
-	RouteTransitMode_INTERREGIONAL_TRAIN = RouteTransitMode.AddMember("INTERREGIONAL_TRAIN", smithyprelude.Unit)
-
-	RouteTransitMode_LIGHT_RAIL = RouteTransitMode.AddMember("LIGHT_RAIL", smithyprelude.Unit)
-
-	RouteTransitMode_MONORAIL = RouteTransitMode.AddMember("MONORAIL", smithyprelude.Unit)
-
-	RouteTransitMode_PRIVATE_BUS = RouteTransitMode.AddMember("PRIVATE_BUS", smithyprelude.Unit)
-
-	RouteTransitMode_REGIONAL_TRAIN = RouteTransitMode.AddMember("REGIONAL_TRAIN", smithyprelude.Unit)
-
-	RouteTransitMode_SUBWAY = RouteTransitMode.AddMember("SUBWAY", smithyprelude.Unit)
-
-	RouteTransitTransportModeDetails_Accessibility = RouteTransitTransportModeDetails.AddMember("Accessibility", RouteAccessibilityAvailabilityDetails)
-
-	RouteTransitTransportModeDetails_Color = RouteTransitTransportModeDetails.AddMember("Color", _HexColor)
-
-	RouteTransitTransportModeDetails_Headsign = RouteTransitTransportModeDetails.AddMember("Headsign", _SensitiveString)
-
-	RouteTransitTransportModeDetails_LongRouteName = RouteTransitTransportModeDetails.AddMember("LongRouteName", _SensitiveString)
-
-	RouteTransitTransportModeDetails_Mode = RouteTransitTransportModeDetails.AddMember("Mode", RouteTransitMode)
-
-	RouteTransitTransportModeDetails_RouteName = RouteTransitTransportModeDetails.AddMember("RouteName", _SensitiveString)
-
-	RouteTransitTransportModeDetails_ShortRouteName = RouteTransitTransportModeDetails.AddMember("ShortRouteName", _SensitiveString)
-
-	RouteTransitTransportModeDetails_TextColor = RouteTransitTransportModeDetails.AddMember("TextColor", _HexColor)
-
-	RouteTransitIntermediateStop_Attributes = RouteTransitIntermediateStop.AddMember("Attributes", _RouteTransitIntermediateStopAttributeList)
-
-	RouteTransitIntermediateStop_Departure = RouteTransitIntermediateStop.AddMember("Departure", RouteTransitDeparture)
-
-	RouteTransitIntermediateStop_Duration = RouteTransitIntermediateStop.AddMember("Duration", _DurationSeconds)
-
-	RouteTransitIntermediateStop_GeometryOffset = RouteTransitIntermediateStop.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteTransitIntermediateStop_Transport = RouteTransitIntermediateStop.AddMember("Transport", RouteTransitTransportModeDetails)
-
-	_RouteTransitIntermediateStopList_member = _RouteTransitIntermediateStopList.AddMember("member", RouteTransitIntermediateStop)
-
-	RouteTransitNextDeparture_Delay = RouteTransitNextDeparture.AddMember("Delay", _DurationSeconds)
-
-	RouteTransitNextDeparture_PlatformName = RouteTransitNextDeparture.AddMember("PlatformName", _SensitiveString)
-
-	RouteTransitNextDeparture_Status = RouteTransitNextDeparture.AddMember("Status", RouteTransitTripStatus)
-
-	RouteTransitNextDeparture_Time = RouteTransitNextDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
-
-	RouteTransitNextDeparture_Transport = RouteTransitNextDeparture.AddMember("Transport", RouteTransitTransportModeDetails)
-
-	_RouteTransitNextDepartureList_member = _RouteTransitNextDepartureList.AddMember("member", RouteTransitNextDeparture)
-
-	RouteTransitNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RouteTransitNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_INTERMEDIATE_STOPS_UNAVAILABLE = RouteTransitNoticeCode.AddMember("INTERMEDIATE_STOPS_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_NO_SCHEDULE = RouteTransitNoticeCode.AddMember("NO_SCHEDULE", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_OTHER = RouteTransitNoticeCode.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = RouteTransitNoticeCode.AddMember("POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_SCHEDULED_TIMES = RouteTransitNoticeCode.AddMember("SCHEDULED_TIMES", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_SEASONAL_CLOSURE = RouteTransitNoticeCode.AddMember("SEASONAL_CLOSURE", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_VIOLATED_AVOID_FERRY = RouteTransitNoticeCode.AddMember("VIOLATED_AVOID_FERRY", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_VIOLATED_AVOID_RAIL_FERRY = RouteTransitNoticeCode.AddMember("VIOLATED_AVOID_RAIL_FERRY", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_VIOLATED_EXCLUDED_TRANSIT_MODE = RouteTransitNoticeCode.AddMember("VIOLATED_EXCLUDED_TRANSIT_MODE", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_VIOLATED_VEHICLE_RESTRICTION = RouteTransitNoticeCode.AddMember("VIOLATED_VEHICLE_RESTRICTION", smithyprelude.Unit)
-
-	RouteTransitNoticeCode_VIOLATED_AVOID_AREAS = RouteTransitNoticeCode.AddMember("VIOLATED_AVOID_AREAS", smithyprelude.Unit)
-
-	RouteTransitNotice_Code = RouteTransitNotice.AddMember("Code", RouteTransitNoticeCode)
-
-	RouteTransitNotice_Impact = RouteTransitNotice.AddMember("Impact", RouteNoticeImpact)
-
-	_RouteTransitNoticeList_member = _RouteTransitNoticeList.AddMember("member", RouteTransitNotice)
-
-	RouteTransitSpan_Country = RouteTransitSpan.AddMember("Country", _CountryCode3)
-
-	RouteTransitSpan_Distance = RouteTransitSpan.AddMember("Distance", _DistanceMeters)
-
-	RouteTransitSpan_Duration = RouteTransitSpan.AddMember("Duration", _DurationSeconds)
-
-	RouteTransitSpan_GeometryOffset = RouteTransitSpan.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteTransitSpan_Names = RouteTransitSpan.AddMember("Names", _LocalizedStringList)
-
-	RouteTransitSpan_Region = RouteTransitSpan.AddMember("Region", _SensitiveString)
-
-	_RouteTransitSpanList_member = _RouteTransitSpanList.AddMember("member", RouteTransitSpan)
-
-	RouteTransitOverviewSummary_Distance = RouteTransitOverviewSummary.AddMember("Distance", _DistanceMeters)
-
-	RouteTransitOverviewSummary_Duration = RouteTransitOverviewSummary.AddMember("Duration", _DurationSeconds)
-
-	RouteTransitTravelOnlySummary_Duration = RouteTransitTravelOnlySummary.AddMember("Duration", _DurationSeconds)
-
-	RouteTransitSummary_Overview = RouteTransitSummary.AddMember("Overview", RouteTransitOverviewSummary)
-
-	RouteTransitSummary_TravelOnly = RouteTransitSummary.AddMember("TravelOnly", RouteTransitTravelOnlySummary)
-
-	RouteTransitTravelStepType_DEPART = RouteTransitTravelStepType.AddMember("DEPART", smithyprelude.Unit)
-
-	RouteTransitTravelStep_Distance = RouteTransitTravelStep.AddMember("Distance", _DistanceMeters)
-
-	RouteTransitTravelStep_Duration = RouteTransitTravelStep.AddMember("Duration", _DurationSeconds)
-
-	RouteTransitTravelStep_GeometryOffset = RouteTransitTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
-
-	RouteTransitTravelStep_Instruction = RouteTransitTravelStep.AddMember("Instruction", _SensitiveString)
-
-	RouteTransitTravelStep_Type = RouteTransitTravelStep.AddMember("Type", RouteTransitTravelStepType)
-
-	_RouteTransitTravelStepList_member = _RouteTransitTravelStepList.AddMember("member", RouteTransitTravelStep)
-
-	RouteTransitLegDetails_AfterTravelSteps = RouteTransitLegDetails.AddMember("AfterTravelSteps", _RouteTransitAfterTravelStepList)
-
-	RouteTransitLegDetails_Agency = RouteTransitLegDetails.AddMember("Agency", RouteTransitAgency)
-
-	RouteTransitLegDetails_Arrival = RouteTransitLegDetails.AddMember("Arrival", RouteTransitArrival)
-
-	RouteTransitLegDetails_Attributions = RouteTransitLegDetails.AddMember("Attributions", _RouteAttributionList)
-
-	RouteTransitLegDetails_BeforeTravelSteps = RouteTransitLegDetails.AddMember("BeforeTravelSteps", _RouteTransitBeforeTravelStepList)
-
-	RouteTransitLegDetails_BookingWebLinks = RouteTransitLegDetails.AddMember("BookingWebLinks", _RouteWebLinkList)
-
-	RouteTransitLegDetails_Departure = RouteTransitLegDetails.AddMember("Departure", RouteTransitDeparture)
-
-	RouteTransitLegDetails_Incidents = RouteTransitLegDetails.AddMember("Incidents", _RouteTransitIncidentList)
-
-	RouteTransitLegDetails_IntermediateStops = RouteTransitLegDetails.AddMember("IntermediateStops", _RouteTransitIntermediateStopList)
-
-	RouteTransitLegDetails_NextDepartures = RouteTransitLegDetails.AddMember("NextDepartures", _RouteTransitNextDepartureList)
-
-	RouteTransitLegDetails_Notices = RouteTransitLegDetails.AddMember("Notices", _RouteTransitNoticeList)
-
-	RouteTransitLegDetails_PassThroughWaypoints = RouteTransitLegDetails.AddMember("PassThroughWaypoints", _RoutePassThroughWaypointList)
-
-	RouteTransitLegDetails_Spans = RouteTransitLegDetails.AddMember("Spans", _RouteTransitSpanList)
-
-	RouteTransitLegDetails_Summary = RouteTransitLegDetails.AddMember("Summary", RouteTransitSummary)
-
-	RouteTransitLegDetails_Transport = RouteTransitLegDetails.AddMember("Transport", RouteTransitTransportModeDetails)
-
-	RouteTransitLegDetails_TravelSteps = RouteTransitLegDetails.AddMember("TravelSteps", _RouteTransitTravelStepList)
-
-	RouteLeg_FerryLegDetails = RouteLeg.AddMember("FerryLegDetails", RouteFerryLegDetails)
-
-	RouteLeg_Geometry = RouteLeg.AddMember("Geometry", RouteLegGeometry)
-
-	RouteLeg_Language = RouteLeg.AddMember("Language", _LanguageTag)
-
-	RouteLeg_PedestrianLegDetails = RouteLeg.AddMember("PedestrianLegDetails", RoutePedestrianLegDetails)
-
-	RouteLeg_TravelMode = RouteLeg.AddMember("TravelMode", RouteLegTravelMode)
-
-	RouteLeg_Type = RouteLeg.AddMember("Type", RouteLegType)
-
-	RouteLeg_VehicleLegDetails = RouteLeg.AddMember("VehicleLegDetails", RouteVehicleLegDetails)
-
-	RouteLeg_RentalLegDetails = RouteLeg.AddMember("RentalLegDetails", RouteRentalLegDetails)
-
-	RouteLeg_TaxiLegDetails = RouteLeg.AddMember("TaxiLegDetails", RouteTaxiLegDetails)
-
-	RouteLeg_TransitLegDetails = RouteLeg.AddMember("TransitLegDetails", RouteTransitLegDetails)
-
-	_RouteLegList_member = _RouteLegList.AddMember("member", RouteLeg)
-
-	RouteMajorRoadLabel_RoadName = RouteMajorRoadLabel.AddMember("RoadName", LocalizedString)
-
-	RouteMajorRoadLabel_RouteNumber = RouteMajorRoadLabel.AddMember("RouteNumber", RouteNumber)
-
-	_RouteMajorRoadLabelList_member = _RouteMajorRoadLabelList.AddMember("member", RouteMajorRoadLabel)
-
-	RouteTollPriceSummary_Currency = RouteTollPriceSummary.AddMember("Currency", _CurrencyCode)
-
-	RouteTollPriceSummary_Estimate = RouteTollPriceSummary.AddMember("Estimate", _SensitiveBoolean)
-
-	RouteTollPriceSummary_Range = RouteTollPriceSummary.AddMember("Range", _SensitiveBoolean)
-
-	RouteTollPriceSummary_RangeValue = RouteTollPriceSummary.AddMember("RangeValue", RouteTollPriceValueRange)
-
-	RouteTollPriceSummary_Value = RouteTollPriceSummary.AddMember("Value", _SensitiveDouble)
-
-	RouteTollSummary_Total = RouteTollSummary.AddMember("Total", RouteTollPriceSummary)
-
-	RouteSummary_Distance = RouteSummary.AddMember("Distance", _DistanceMeters)
-
-	RouteSummary_Duration = RouteSummary.AddMember("Duration", _DurationSeconds)
-
-	RouteSummary_Tolls = RouteSummary.AddMember("Tolls", RouteTollSummary)
-
-	Route_Legs = Route.AddMember("Legs", _RouteLegList)
-
-	Route_MajorRoadLabels = Route.AddMember("MajorRoadLabels", _RouteMajorRoadLabelList)
-
-	Route_Summary = Route.AddMember("Summary", RouteSummary)
-
-	RouteAccessibilityAttribute_WHEELCHAIR = RouteAccessibilityAttribute.AddMember("WHEELCHAIR", smithyprelude.Unit)
-
-	_RouteAccessibilityAttributeList_member = _RouteAccessibilityAttributeList.AddMember("member", RouteAccessibilityAttribute)
-
-	RouteAllowOptions_Hot = RouteAllowOptions.AddMember("Hot", _SensitiveBoolean)
-
-	RouteAllowOptions_Hov = RouteAllowOptions.AddMember("Hov", _SensitiveBoolean)
-
-	RouteAvoidanceAreaGeometry_Corridor = RouteAvoidanceAreaGeometry.AddMember("Corridor", Corridor)
-
-	RouteAvoidanceAreaGeometry_BoundingBox = RouteAvoidanceAreaGeometry.AddMember("BoundingBox", _BoundingBox)
-
-	RouteAvoidanceAreaGeometry_Polygon = RouteAvoidanceAreaGeometry.AddMember("Polygon", _LinearRings)
-
-	RouteAvoidanceAreaGeometry_PolylineCorridor = RouteAvoidanceAreaGeometry.AddMember("PolylineCorridor", PolylineCorridor)
-
-	RouteAvoidanceAreaGeometry_PolylinePolygon = RouteAvoidanceAreaGeometry.AddMember("PolylinePolygon", _PolylineRingList)
-
-	_RouteAvoidanceAreaGeometryList_member = _RouteAvoidanceAreaGeometryList.AddMember("member", RouteAvoidanceAreaGeometry)
-
-	RouteAvoidanceArea_Except = RouteAvoidanceArea.AddMember("Except", _RouteAvoidanceAreaGeometryList)
-
-	RouteAvoidanceArea_Geometry = RouteAvoidanceArea.AddMember("Geometry", RouteAvoidanceAreaGeometry)
-
-	_RouteAvoidanceAreaList_member = _RouteAvoidanceAreaList.AddMember("member", RouteAvoidanceArea)
-
-	RouteAvoidanceZoneCategory_Category = RouteAvoidanceZoneCategory.AddMember("Category", RouteZoneCategory)
-
-	_RouteAvoidanceZoneCategoryList_member = _RouteAvoidanceZoneCategoryList.AddMember("member", RouteAvoidanceZoneCategory)
-
-	RouteAvoidanceOptions_Areas = RouteAvoidanceOptions.AddMember("Areas", _RouteAvoidanceAreaList)
-
-	RouteAvoidanceOptions_CarShuttleTrains = RouteAvoidanceOptions.AddMember("CarShuttleTrains", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_ControlledAccessHighways = RouteAvoidanceOptions.AddMember("ControlledAccessHighways", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_DirtRoads = RouteAvoidanceOptions.AddMember("DirtRoads", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_Ferries = RouteAvoidanceOptions.AddMember("Ferries", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_SeasonalClosure = RouteAvoidanceOptions.AddMember("SeasonalClosure", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_TollRoads = RouteAvoidanceOptions.AddMember("TollRoads", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_TollTransponders = RouteAvoidanceOptions.AddMember("TollTransponders", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_TruckRoadTypes = RouteAvoidanceOptions.AddMember("TruckRoadTypes", _TruckRoadTypeList)
-
-	RouteAvoidanceOptions_Tunnels = RouteAvoidanceOptions.AddMember("Tunnels", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_UTurns = RouteAvoidanceOptions.AddMember("UTurns", _SensitiveBoolean)
-
-	RouteAvoidanceOptions_ZoneCategories = RouteAvoidanceOptions.AddMember("ZoneCategories", _RouteAvoidanceZoneCategoryList)
-
-	RouteVehicleLicensePlate_LastCharacter = RouteVehicleLicensePlate.AddMember("LastCharacter", _SensitiveString)
-
-	RouteCarOptions_EngineType = RouteCarOptions.AddMember("EngineType", RouteEngineType)
-
-	RouteCarOptions_LicensePlate = RouteCarOptions.AddMember("LicensePlate", RouteVehicleLicensePlate)
-
-	RouteCarOptions_MaxSpeed = RouteCarOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	RouteCarOptions_Occupancy = RouteCarOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	RouteMatchingOptions_NameHint = RouteMatchingOptions.AddMember("NameHint", _SensitiveString)
-
-	RouteMatchingOptions_OnRoadThreshold = RouteMatchingOptions.AddMember("OnRoadThreshold", _DistanceMeters)
-
-	RouteMatchingOptions_Radius = RouteMatchingOptions.AddMember("Radius", _DistanceMeters)
-
-	RouteMatchingOptions_Strategy = RouteMatchingOptions.AddMember("Strategy", MatchingStrategy)
-
-	RouteSideOfStreetOptions_Position = RouteSideOfStreetOptions.AddMember("Position", _Position)
-
-	RouteSideOfStreetOptions_UseWith = RouteSideOfStreetOptions.AddMember("UseWith", SideOfStreetMatchingStrategy)
-
-	RouteDestinationOptions_AvoidActionsForDistance = RouteDestinationOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
-
-	RouteDestinationOptions_AvoidUTurns = RouteDestinationOptions.AddMember("AvoidUTurns", _SensitiveBoolean)
-
-	RouteDestinationOptions_Heading = RouteDestinationOptions.AddMember("Heading", _Heading)
-
-	RouteDestinationOptions_Matching = RouteDestinationOptions.AddMember("Matching", RouteMatchingOptions)
-
-	RouteDestinationOptions_SideOfStreet = RouteDestinationOptions.AddMember("SideOfStreet", RouteSideOfStreetOptions)
-
-	RouteDestinationOptions_StopDuration = RouteDestinationOptions.AddMember("StopDuration", _DurationSeconds)
-
-	RouteDriverScheduleInterval_DriveDuration = RouteDriverScheduleInterval.AddMember("DriveDuration", _DurationSeconds)
-
-	RouteDriverScheduleInterval_RestDuration = RouteDriverScheduleInterval.AddMember("RestDuration", _DurationSeconds)
-
-	_RouteDriverScheduleIntervalList_member = _RouteDriverScheduleIntervalList.AddMember("member", RouteDriverScheduleInterval)
-
-	RouteDriverOptions_Schedule = RouteDriverOptions.AddMember("Schedule", _RouteDriverScheduleIntervalList)
-
-	RouteEmissionType_Co2EmissionClass = RouteEmissionType.AddMember("Co2EmissionClass", _SensitiveString)
-
-	RouteEmissionType_Type = RouteEmissionType.AddMember("Type", _SensitiveString)
-
-	RouteExclusionOptions_Countries = RouteExclusionOptions.AddMember("Countries", _CountryCodeList)
-
-	RouteIntermodalEnabledLegs_FIRST_LEG = RouteIntermodalEnabledLegs.AddMember("FIRST_LEG", smithyprelude.Unit)
-
-	RouteIntermodalEnabledLegs_LAST_LEG = RouteIntermodalEnabledLegs.AddMember("LAST_LEG", smithyprelude.Unit)
-
-	RouteIntermodalEnabledLegs_ENTIRE_ROUTE = RouteIntermodalEnabledLegs.AddMember("ENTIRE_ROUTE", smithyprelude.Unit)
-
-	RouteIntermodalEnabledLegs_NONE = RouteIntermodalEnabledLegs.AddMember("NONE", smithyprelude.Unit)
-
-	_RouteIntermodalEnabledLegsList_member = _RouteIntermodalEnabledLegsList.AddMember("member", RouteIntermodalEnabledLegs)
-
-	RouteIntermodalPedestrianOptions_MaxDistance = RouteIntermodalPedestrianOptions.AddMember("MaxDistance", _DistanceMeters)
-
-	RouteIntermodalPedestrianOptions_Speed = RouteIntermodalPedestrianOptions.AddMember("Speed", _SpeedKilometersPerHour)
-
-	_RouteRentalModeList_member = _RouteRentalModeList.AddMember("member", RouteRentalMode)
-
-	RouteIntermodalRentalOptions_AllowedModes = RouteIntermodalRentalOptions.AddMember("AllowedModes", _RouteRentalModeList)
-
-	RouteIntermodalRentalOptions_EnabledFor = RouteIntermodalRentalOptions.AddMember("EnabledFor", _RouteIntermodalEnabledLegsList)
-
-	RouteIntermodalRentalOptions_ExcludedModes = RouteIntermodalRentalOptions.AddMember("ExcludedModes", _RouteRentalModeList)
-
-	_RouteTaxiModeList_member = _RouteTaxiModeList.AddMember("member", RouteTaxiMode)
-
-	RouteIntermodalTaxiOptions_AllowedModes = RouteIntermodalTaxiOptions.AddMember("AllowedModes", _RouteTaxiModeList)
-
-	RouteIntermodalTaxiOptions_EnabledFor = RouteIntermodalTaxiOptions.AddMember("EnabledFor", _RouteIntermodalEnabledLegsList)
-
-	RouteIntermodalTaxiOptions_ExcludedModes = RouteIntermodalTaxiOptions.AddMember("ExcludedModes", _RouteTaxiModeList)
-
-	_RouteTransitModeList_member = _RouteTransitModeList.AddMember("member", RouteTransitMode)
-
-	RouteIntermodalTransitOptions_AllowedModes = RouteIntermodalTransitOptions.AddMember("AllowedModes", _RouteTransitModeList)
-
-	RouteIntermodalTransitOptions_EnabledFor = RouteIntermodalTransitOptions.AddMember("EnabledFor", _RouteIntermodalEnabledLegsList)
-
-	RouteIntermodalTransitOptions_ExcludedModes = RouteIntermodalTransitOptions.AddMember("ExcludedModes", _RouteTransitModeList)
-
-	RouteVehicleMode_ALL = RouteVehicleMode.AddMember("ALL", smithyprelude.Unit)
-
-	RouteVehicleMode_CAR = RouteVehicleMode.AddMember("CAR", smithyprelude.Unit)
-
-	_RouteVehicleModeList_member = _RouteVehicleModeList.AddMember("member", RouteVehicleMode)
-
-	RouteIntermodalVehicleOptions_AllowedModes = RouteIntermodalVehicleOptions.AddMember("AllowedModes", _RouteVehicleModeList)
-
-	RouteIntermodalVehicleOptions_EnabledFor = RouteIntermodalVehicleOptions.AddMember("EnabledFor", _RouteIntermodalEnabledLegsList)
-
-	RouteIntermodalVehicleOptions_ExcludedModes = RouteIntermodalVehicleOptions.AddMember("ExcludedModes", _RouteVehicleModeList)
-
-	RouteIntermodalOptions_AccessibilityAttributes = RouteIntermodalOptions.AddMember("AccessibilityAttributes", _RouteAccessibilityAttributeList)
-
-	RouteIntermodalOptions_MaxTransfers = RouteIntermodalOptions.AddMember("MaxTransfers", smithyprelude.Integer)
-
-	RouteIntermodalOptions_Pedestrian = RouteIntermodalOptions.AddMember("Pedestrian", RouteIntermodalPedestrianOptions)
-
-	RouteIntermodalOptions_Rental = RouteIntermodalOptions.AddMember("Rental", RouteIntermodalRentalOptions)
-
-	RouteIntermodalOptions_Taxi = RouteIntermodalOptions.AddMember("Taxi", RouteIntermodalTaxiOptions)
-
-	RouteIntermodalOptions_Transit = RouteIntermodalOptions.AddMember("Transit", RouteIntermodalTransitOptions)
-
-	RouteIntermodalOptions_Vehicle = RouteIntermodalOptions.AddMember("Vehicle", RouteIntermodalVehicleOptions)
-
-	RouteLegAdditionalFeature_ELEVATION = RouteLegAdditionalFeature.AddMember("ELEVATION", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_INCIDENTS = RouteLegAdditionalFeature.AddMember("INCIDENTS", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_PASS_THROUGH_WAYPOINTS = RouteLegAdditionalFeature.AddMember("PASS_THROUGH_WAYPOINTS", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_SUMMARY = RouteLegAdditionalFeature.AddMember("SUMMARY", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_TOLLS = RouteLegAdditionalFeature.AddMember("TOLLS", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_TRAVEL_STEP_INSTRUCTIONS = RouteLegAdditionalFeature.AddMember("TRAVEL_STEP_INSTRUCTIONS", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_TRUCK_ROAD_TYPES = RouteLegAdditionalFeature.AddMember("TRUCK_ROAD_TYPES", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_TYPICAL_DURATION = RouteLegAdditionalFeature.AddMember("TYPICAL_DURATION", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_ZONES = RouteLegAdditionalFeature.AddMember("ZONES", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_BOOKINGS = RouteLegAdditionalFeature.AddMember("BOOKINGS", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_INTERMEDIATE_STOPS = RouteLegAdditionalFeature.AddMember("INTERMEDIATE_STOPS", smithyprelude.Unit)
-
-	RouteLegAdditionalFeature_NEXT_DEPARTURES = RouteLegAdditionalFeature.AddMember("NEXT_DEPARTURES", smithyprelude.Unit)
-
-	_RouteLegAdditionalFeatureList_member = _RouteLegAdditionalFeatureList.AddMember("member", RouteLegAdditionalFeature)
-
-	_RouteList_member = _RouteList.AddMember("member", Route)
-
-	RouteMatrixErrorCode_NO_MATCH = RouteMatrixErrorCode.AddMember("NO_MATCH", smithyprelude.Unit)
-
-	RouteMatrixErrorCode_NO_MATCH_DESTINATION = RouteMatrixErrorCode.AddMember("NO_MATCH_DESTINATION", smithyprelude.Unit)
-
-	RouteMatrixErrorCode_NO_MATCH_ORIGIN = RouteMatrixErrorCode.AddMember("NO_MATCH_ORIGIN", smithyprelude.Unit)
-
-	RouteMatrixErrorCode_NO_ROUTE = RouteMatrixErrorCode.AddMember("NO_ROUTE", smithyprelude.Unit)
-
-	RouteMatrixErrorCode_OUT_OF_BOUNDS = RouteMatrixErrorCode.AddMember("OUT_OF_BOUNDS", smithyprelude.Unit)
-
-	RouteMatrixErrorCode_OUT_OF_BOUNDS_DESTINATION = RouteMatrixErrorCode.AddMember("OUT_OF_BOUNDS_DESTINATION", smithyprelude.Unit)
-
-	RouteMatrixErrorCode_OUT_OF_BOUNDS_ORIGIN = RouteMatrixErrorCode.AddMember("OUT_OF_BOUNDS_ORIGIN", smithyprelude.Unit)
-
-	RouteMatrixErrorCode_OTHER = RouteMatrixErrorCode.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteMatrixErrorCode_VIOLATION = RouteMatrixErrorCode.AddMember("VIOLATION", smithyprelude.Unit)
-
-	RouteMatrixEntry_Distance = RouteMatrixEntry.AddMember("Distance", _DistanceMeters)
-
-	RouteMatrixEntry_Duration = RouteMatrixEntry.AddMember("Duration", _DurationSeconds)
-
-	RouteMatrixEntry_Error = RouteMatrixEntry.AddMember("Error", RouteMatrixErrorCode)
-
-	_RouteMatrixRow_member = _RouteMatrixRow.AddMember("member", RouteMatrixEntry)
-
-	_RouteMatrix_member = _RouteMatrix.AddMember("member", _RouteMatrixRow)
-
-	RouteMatrixAllowOptions_Hot = RouteMatrixAllowOptions.AddMember("Hot", _SensitiveBoolean)
-
-	RouteMatrixAllowOptions_Hov = RouteMatrixAllowOptions.AddMember("Hov", _SensitiveBoolean)
-
-	RouteMatrixAutoCircle_Margin = RouteMatrixAutoCircle.AddMember("Margin", _DistanceMeters)
-
-	RouteMatrixAutoCircle_MaxRadius = RouteMatrixAutoCircle.AddMember("MaxRadius", _DistanceMeters)
-
-	RouteMatrixAvoidanceAreaGeometry_BoundingBox = RouteMatrixAvoidanceAreaGeometry.AddMember("BoundingBox", _BoundingBox)
-
-	RouteMatrixAvoidanceAreaGeometry_Polygon = RouteMatrixAvoidanceAreaGeometry.AddMember("Polygon", _LinearRings)
-
-	RouteMatrixAvoidanceAreaGeometry_PolylinePolygon = RouteMatrixAvoidanceAreaGeometry.AddMember("PolylinePolygon", _PolylineRingList)
-
-	RouteMatrixAvoidanceArea_Geometry = RouteMatrixAvoidanceArea.AddMember("Geometry", RouteMatrixAvoidanceAreaGeometry)
-
-	_RouteMatrixAvoidanceAreaList_member = _RouteMatrixAvoidanceAreaList.AddMember("member", RouteMatrixAvoidanceArea)
-
-	RouteMatrixZoneCategory_CONGESTION_PRICING = RouteMatrixZoneCategory.AddMember("CONGESTION_PRICING", smithyprelude.Unit)
-
-	RouteMatrixZoneCategory_ENVIRONMENTAL = RouteMatrixZoneCategory.AddMember("ENVIRONMENTAL", smithyprelude.Unit)
-
-	RouteMatrixZoneCategory_VIGNETTE = RouteMatrixZoneCategory.AddMember("VIGNETTE", smithyprelude.Unit)
-
-	RouteMatrixAvoidanceZoneCategory_Category = RouteMatrixAvoidanceZoneCategory.AddMember("Category", RouteMatrixZoneCategory)
-
-	_RouteMatrixAvoidanceZoneCategoryList_member = _RouteMatrixAvoidanceZoneCategoryList.AddMember("member", RouteMatrixAvoidanceZoneCategory)
-
-	RouteMatrixAvoidanceOptions_Areas = RouteMatrixAvoidanceOptions.AddMember("Areas", _RouteMatrixAvoidanceAreaList)
-
-	RouteMatrixAvoidanceOptions_CarShuttleTrains = RouteMatrixAvoidanceOptions.AddMember("CarShuttleTrains", _SensitiveBoolean)
-
-	RouteMatrixAvoidanceOptions_ControlledAccessHighways = RouteMatrixAvoidanceOptions.AddMember("ControlledAccessHighways", _SensitiveBoolean)
-
-	RouteMatrixAvoidanceOptions_DirtRoads = RouteMatrixAvoidanceOptions.AddMember("DirtRoads", _SensitiveBoolean)
-
-	RouteMatrixAvoidanceOptions_Ferries = RouteMatrixAvoidanceOptions.AddMember("Ferries", _SensitiveBoolean)
-
-	RouteMatrixAvoidanceOptions_TollRoads = RouteMatrixAvoidanceOptions.AddMember("TollRoads", _SensitiveBoolean)
-
-	RouteMatrixAvoidanceOptions_TollTransponders = RouteMatrixAvoidanceOptions.AddMember("TollTransponders", _SensitiveBoolean)
-
-	RouteMatrixAvoidanceOptions_TruckRoadTypes = RouteMatrixAvoidanceOptions.AddMember("TruckRoadTypes", _TruckRoadTypeList)
-
-	RouteMatrixAvoidanceOptions_Tunnels = RouteMatrixAvoidanceOptions.AddMember("Tunnels", _SensitiveBoolean)
-
-	RouteMatrixAvoidanceOptions_UTurns = RouteMatrixAvoidanceOptions.AddMember("UTurns", _SensitiveBoolean)
-
-	RouteMatrixAvoidanceOptions_ZoneCategories = RouteMatrixAvoidanceOptions.AddMember("ZoneCategories", _RouteMatrixAvoidanceZoneCategoryList)
-
-	RouteMatrixBoundaryGeometry_AutoCircle = RouteMatrixBoundaryGeometry.AddMember("AutoCircle", RouteMatrixAutoCircle)
-
-	RouteMatrixBoundaryGeometry_Circle = RouteMatrixBoundaryGeometry.AddMember("Circle", Circle)
-
-	RouteMatrixBoundaryGeometry_BoundingBox = RouteMatrixBoundaryGeometry.AddMember("BoundingBox", _BoundingBox)
-
-	RouteMatrixBoundaryGeometry_Polygon = RouteMatrixBoundaryGeometry.AddMember("Polygon", _LinearRings)
-
-	RouteMatrixBoundary_Geometry = RouteMatrixBoundary.AddMember("Geometry", RouteMatrixBoundaryGeometry)
-
-	RouteMatrixBoundary_Unbounded = RouteMatrixBoundary.AddMember("Unbounded", _SensitiveBoolean)
-
-	RouteMatrixVehicleLicensePlate_LastCharacter = RouteMatrixVehicleLicensePlate.AddMember("LastCharacter", smithyprelude.String)
-
-	RouteMatrixCarOptions_LicensePlate = RouteMatrixCarOptions.AddMember("LicensePlate", RouteMatrixVehicleLicensePlate)
-
-	RouteMatrixCarOptions_MaxSpeed = RouteMatrixCarOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	RouteMatrixCarOptions_Occupancy = RouteMatrixCarOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	RouteMatrixMatchingOptions_NameHint = RouteMatrixMatchingOptions.AddMember("NameHint", _SensitiveString)
-
-	RouteMatrixMatchingOptions_OnRoadThreshold = RouteMatrixMatchingOptions.AddMember("OnRoadThreshold", _DistanceMeters)
-
-	RouteMatrixMatchingOptions_Radius = RouteMatrixMatchingOptions.AddMember("Radius", _DistanceMeters)
-
-	RouteMatrixMatchingOptions_Strategy = RouteMatrixMatchingOptions.AddMember("Strategy", MatchingStrategy)
-
-	RouteMatrixSideOfStreetOptions_Position = RouteMatrixSideOfStreetOptions.AddMember("Position", _Position)
-
-	RouteMatrixSideOfStreetOptions_UseWith = RouteMatrixSideOfStreetOptions.AddMember("UseWith", SideOfStreetMatchingStrategy)
-
-	RouteMatrixDestinationOptions_AvoidActionsForDistance = RouteMatrixDestinationOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
-
-	RouteMatrixDestinationOptions_Heading = RouteMatrixDestinationOptions.AddMember("Heading", _Heading)
-
-	RouteMatrixDestinationOptions_Matching = RouteMatrixDestinationOptions.AddMember("Matching", RouteMatrixMatchingOptions)
-
-	RouteMatrixDestinationOptions_SideOfStreet = RouteMatrixDestinationOptions.AddMember("SideOfStreet", RouteMatrixSideOfStreetOptions)
-
-	RouteMatrixDestination_Options = RouteMatrixDestination.AddMember("Options", RouteMatrixDestinationOptions)
-
-	RouteMatrixDestination_Position = RouteMatrixDestination.AddMember("Position", _Position)
-
-	_RouteMatrixDestinationList_member = _RouteMatrixDestinationList.AddMember("member", RouteMatrixDestination)
-
-	RouteMatrixExclusionOptions_Countries = RouteMatrixExclusionOptions.AddMember("Countries", _CountryCodeList)
-
-	RouteMatrixHazardousCargoType_COMBUSTIBLE = RouteMatrixHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_CORROSIVE = RouteMatrixHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_EXPLOSIVE = RouteMatrixHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_FLAMMABLE = RouteMatrixHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_GAS = RouteMatrixHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_HARMFUL_TO_WATER = RouteMatrixHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_ORGANIC = RouteMatrixHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_OTHER = RouteMatrixHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_POISON = RouteMatrixHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_POISONOUS_INHALATION = RouteMatrixHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
-
-	RouteMatrixHazardousCargoType_RADIOACTIVE = RouteMatrixHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
-
-	_RouteMatrixHazardousCargoTypeList_member = _RouteMatrixHazardousCargoTypeList.AddMember("member", RouteMatrixHazardousCargoType)
-
-	RouteMatrixOriginOptions_AvoidActionsForDistance = RouteMatrixOriginOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
-
-	RouteMatrixOriginOptions_Heading = RouteMatrixOriginOptions.AddMember("Heading", _Heading)
-
-	RouteMatrixOriginOptions_Matching = RouteMatrixOriginOptions.AddMember("Matching", RouteMatrixMatchingOptions)
-
-	RouteMatrixOriginOptions_SideOfStreet = RouteMatrixOriginOptions.AddMember("SideOfStreet", RouteMatrixSideOfStreetOptions)
-
-	RouteMatrixOrigin_Options = RouteMatrixOrigin.AddMember("Options", RouteMatrixOriginOptions)
-
-	RouteMatrixOrigin_Position = RouteMatrixOrigin.AddMember("Position", _Position)
-
-	_RouteMatrixOriginList_member = _RouteMatrixOriginList.AddMember("member", RouteMatrixOrigin)
-
-	RouteMatrixScooterOptions_LicensePlate = RouteMatrixScooterOptions.AddMember("LicensePlate", RouteMatrixVehicleLicensePlate)
-
-	RouteMatrixScooterOptions_MaxSpeed = RouteMatrixScooterOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	RouteMatrixScooterOptions_Occupancy = RouteMatrixScooterOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	RouteMatrixTrafficOptions_FlowEventThresholdOverride = RouteMatrixTrafficOptions.AddMember("FlowEventThresholdOverride", _DurationSeconds)
-
-	RouteMatrixTrafficOptions_Usage = RouteMatrixTrafficOptions.AddMember("Usage", TrafficUsage)
-
-	RouteMatrixTrailerOptions_TrailerCount = RouteMatrixTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
-
-	RouteMatrixTravelMode_CAR = RouteMatrixTravelMode.AddMember("CAR", smithyprelude.Unit)
-
-	RouteMatrixTravelMode_PEDESTRIAN = RouteMatrixTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
-
-	RouteMatrixTravelMode_SCOOTER = RouteMatrixTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
-
-	RouteMatrixTravelMode_TRUCK = RouteMatrixTravelMode.AddMember("TRUCK", smithyprelude.Unit)
-
-	RouteMatrixTruckType_LIGHT_TRUCK = RouteMatrixTruckType.AddMember("LIGHT_TRUCK", smithyprelude.Unit)
-
-	RouteMatrixTruckType_STRAIGHT_TRUCK = RouteMatrixTruckType.AddMember("STRAIGHT_TRUCK", smithyprelude.Unit)
-
-	RouteMatrixTruckType_TRACTOR = RouteMatrixTruckType.AddMember("TRACTOR", smithyprelude.Unit)
-
-	RouteMatrixTruckOptions_AxleCount = RouteMatrixTruckOptions.AddMember("AxleCount", _SensitiveInteger)
-
-	RouteMatrixTruckOptions_GrossWeight = RouteMatrixTruckOptions.AddMember("GrossWeight", _WeightKilograms)
-
-	RouteMatrixTruckOptions_HazardousCargos = RouteMatrixTruckOptions.AddMember("HazardousCargos", _RouteMatrixHazardousCargoTypeList)
-
-	RouteMatrixTruckOptions_Height = RouteMatrixTruckOptions.AddMember("Height", _DimensionCentimeters)
-
-	RouteMatrixTruckOptions_KpraLength = RouteMatrixTruckOptions.AddMember("KpraLength", _DimensionCentimeters)
-
-	RouteMatrixTruckOptions_Length = RouteMatrixTruckOptions.AddMember("Length", _DimensionCentimeters)
-
-	RouteMatrixTruckOptions_LicensePlate = RouteMatrixTruckOptions.AddMember("LicensePlate", RouteMatrixVehicleLicensePlate)
-
-	RouteMatrixTruckOptions_MaxSpeed = RouteMatrixTruckOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	RouteMatrixTruckOptions_Occupancy = RouteMatrixTruckOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	RouteMatrixTruckOptions_PayloadCapacity = RouteMatrixTruckOptions.AddMember("PayloadCapacity", _WeightKilograms)
-
-	RouteMatrixTruckOptions_Trailer = RouteMatrixTruckOptions.AddMember("Trailer", RouteMatrixTrailerOptions)
-
-	RouteMatrixTruckOptions_TruckType = RouteMatrixTruckOptions.AddMember("TruckType", RouteMatrixTruckType)
-
-	RouteMatrixTruckOptions_TunnelRestrictionCode = RouteMatrixTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
-
-	RouteMatrixTruckOptions_WeightPerAxle = RouteMatrixTruckOptions.AddMember("WeightPerAxle", _WeightKilograms)
-
-	RouteMatrixTruckOptions_WeightPerAxleGroup = RouteMatrixTruckOptions.AddMember("WeightPerAxleGroup", WeightPerAxleGroup)
-
-	RouteMatrixTruckOptions_Width = RouteMatrixTruckOptions.AddMember("Width", _DimensionCentimeters)
-
-	RouteMatrixTravelModeOptions_Car = RouteMatrixTravelModeOptions.AddMember("Car", RouteMatrixCarOptions)
-
-	RouteMatrixTravelModeOptions_Scooter = RouteMatrixTravelModeOptions.AddMember("Scooter", RouteMatrixScooterOptions)
-
-	RouteMatrixTravelModeOptions_Truck = RouteMatrixTravelModeOptions.AddMember("Truck", RouteMatrixTruckOptions)
-
-	RouteOriginOptions_AvoidActionsForDistance = RouteOriginOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
-
-	RouteOriginOptions_AvoidUTurns = RouteOriginOptions.AddMember("AvoidUTurns", _SensitiveBoolean)
-
-	RouteOriginOptions_Heading = RouteOriginOptions.AddMember("Heading", _Heading)
-
-	RouteOriginOptions_Matching = RouteOriginOptions.AddMember("Matching", RouteMatchingOptions)
-
-	RouteOriginOptions_SideOfStreet = RouteOriginOptions.AddMember("SideOfStreet", RouteSideOfStreetOptions)
-
-	RoutePedestrianOptions_Speed = RoutePedestrianOptions.AddMember("Speed", _SpeedKilometersPerHour)
-
-	RouteResponseNoticeCode_MAIN_LANGUAGE_NOT_FOUND = RouteResponseNoticeCode.AddMember("MAIN_LANGUAGE_NOT_FOUND", smithyprelude.Unit)
-
-	RouteResponseNoticeCode_OTHER = RouteResponseNoticeCode.AddMember("OTHER", smithyprelude.Unit)
-
-	RouteResponseNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS = RouteResponseNoticeCode.AddMember("TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS", smithyprelude.Unit)
-
-	RouteResponseNoticeCode_TRANSIT_DATA_UNAVAILABLE = RouteResponseNoticeCode.AddMember("TRANSIT_DATA_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteResponseNoticeCode_TRANSIT_ROUTE_UNAVAILABLE = RouteResponseNoticeCode.AddMember("TRANSIT_ROUTE_UNAVAILABLE", smithyprelude.Unit)
-
-	RouteResponseNoticeCode_NO_TRANSIT_STATIONS_FOUND = RouteResponseNoticeCode.AddMember("NO_TRANSIT_STATIONS_FOUND", smithyprelude.Unit)
-
-	RouteResponseNotice_Code = RouteResponseNotice.AddMember("Code", RouteResponseNoticeCode)
-
-	RouteResponseNotice_Impact = RouteResponseNotice.AddMember("Impact", RouteNoticeImpact)
-
-	_RouteResponseNoticeList_member = _RouteResponseNoticeList.AddMember("member", RouteResponseNotice)
-
-	RouteScooterOptions_EngineType = RouteScooterOptions.AddMember("EngineType", RouteEngineType)
-
-	RouteScooterOptions_LicensePlate = RouteScooterOptions.AddMember("LicensePlate", RouteVehicleLicensePlate)
-
-	RouteScooterOptions_MaxSpeed = RouteScooterOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	RouteScooterOptions_Occupancy = RouteScooterOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	RouteSpanAdditionalFeature_BEST_CASE_DURATION = RouteSpanAdditionalFeature.AddMember("BEST_CASE_DURATION", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_CAR_ACCESS = RouteSpanAdditionalFeature.AddMember("CAR_ACCESS", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_COUNTRY = RouteSpanAdditionalFeature.AddMember("COUNTRY", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_DISTANCE = RouteSpanAdditionalFeature.AddMember("DISTANCE", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_DURATION = RouteSpanAdditionalFeature.AddMember("DURATION", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_DYNAMIC_SPEED = RouteSpanAdditionalFeature.AddMember("DYNAMIC_SPEED", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_FUNCTIONAL_CLASSIFICATION = RouteSpanAdditionalFeature.AddMember("FUNCTIONAL_CLASSIFICATION", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_GATES = RouteSpanAdditionalFeature.AddMember("GATES", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_INCIDENTS = RouteSpanAdditionalFeature.AddMember("INCIDENTS", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_NAMES = RouteSpanAdditionalFeature.AddMember("NAMES", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_NOTICES = RouteSpanAdditionalFeature.AddMember("NOTICES", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_PEDESTRIAN_ACCESS = RouteSpanAdditionalFeature.AddMember("PEDESTRIAN_ACCESS", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_RAILWAY_CROSSINGS = RouteSpanAdditionalFeature.AddMember("RAILWAY_CROSSINGS", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_REGION = RouteSpanAdditionalFeature.AddMember("REGION", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_ROAD_ATTRIBUTES = RouteSpanAdditionalFeature.AddMember("ROAD_ATTRIBUTES", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_ROUTE_NUMBERS = RouteSpanAdditionalFeature.AddMember("ROUTE_NUMBERS", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_SCOOTER_ACCESS = RouteSpanAdditionalFeature.AddMember("SCOOTER_ACCESS", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_SPEED_LIMIT = RouteSpanAdditionalFeature.AddMember("SPEED_LIMIT", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_TOLL_SYSTEMS = RouteSpanAdditionalFeature.AddMember("TOLL_SYSTEMS", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_TRUCK_ACCESS = RouteSpanAdditionalFeature.AddMember("TRUCK_ACCESS", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_TRUCK_ROAD_TYPES = RouteSpanAdditionalFeature.AddMember("TRUCK_ROAD_TYPES", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_TYPICAL_DURATION = RouteSpanAdditionalFeature.AddMember("TYPICAL_DURATION", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_ZONES = RouteSpanAdditionalFeature.AddMember("ZONES", smithyprelude.Unit)
-
-	RouteSpanAdditionalFeature_CONSUMPTION = RouteSpanAdditionalFeature.AddMember("CONSUMPTION", smithyprelude.Unit)
-
-	_RouteSpanAdditionalFeatureList_member = _RouteSpanAdditionalFeatureList.AddMember("member", RouteSpanAdditionalFeature)
-
-	RouteTollVehicleCategory_MINIBUS = RouteTollVehicleCategory.AddMember("MINIBUS", smithyprelude.Unit)
-
-	RouteTollOptions_AllTransponders = RouteTollOptions.AddMember("AllTransponders", _SensitiveBoolean)
-
-	RouteTollOptions_AllVignettes = RouteTollOptions.AddMember("AllVignettes", _SensitiveBoolean)
-
-	RouteTollOptions_Currency = RouteTollOptions.AddMember("Currency", _CurrencyCode)
-
-	RouteTollOptions_EmissionType = RouteTollOptions.AddMember("EmissionType", RouteEmissionType)
-
-	RouteTollOptions_VehicleCategory = RouteTollOptions.AddMember("VehicleCategory", RouteTollVehicleCategory)
-
-	RouteTrafficOptions_FlowEventThresholdOverride = RouteTrafficOptions.AddMember("FlowEventThresholdOverride", _DurationSeconds)
-
-	RouteTrafficOptions_Usage = RouteTrafficOptions.AddMember("Usage", TrafficUsage)
-
-	RouteTrailerOptions_AxleCount = RouteTrailerOptions.AddMember("AxleCount", _SensitiveInteger)
-
-	RouteTrailerOptions_TrailerCount = RouteTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
-
-	RouteTransitPedestrianOptions_MaxDistance = RouteTransitPedestrianOptions.AddMember("MaxDistance", _DistanceMeters)
-
-	RouteTransitPedestrianOptions_Speed = RouteTransitPedestrianOptions.AddMember("Speed", _SpeedKilometersPerHour)
-
-	RouteTransitOptions_AccessibilityAttributes = RouteTransitOptions.AddMember("AccessibilityAttributes", _RouteAccessibilityAttributeList)
-
-	RouteTransitOptions_AllowedModes = RouteTransitOptions.AddMember("AllowedModes", _RouteTransitModeList)
-
-	RouteTransitOptions_ExcludedModes = RouteTransitOptions.AddMember("ExcludedModes", _RouteTransitModeList)
-
-	RouteTransitOptions_MaxTransfers = RouteTransitOptions.AddMember("MaxTransfers", smithyprelude.Integer)
-
-	RouteTransitOptions_Pedestrian = RouteTransitOptions.AddMember("Pedestrian", RouteTransitPedestrianOptions)
-
-	RouteTravelMode_CAR = RouteTravelMode.AddMember("CAR", smithyprelude.Unit)
-
-	RouteTravelMode_PEDESTRIAN = RouteTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
-
-	RouteTravelMode_SCOOTER = RouteTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
-
-	RouteTravelMode_TRUCK = RouteTravelMode.AddMember("TRUCK", smithyprelude.Unit)
-
-	RouteTravelMode_INTERMODAL = RouteTravelMode.AddMember("INTERMODAL", smithyprelude.Unit)
-
-	RouteTravelMode_TRANSIT = RouteTravelMode.AddMember("TRANSIT", smithyprelude.Unit)
-
-	RouteTruckOptions_AxleCount = RouteTruckOptions.AddMember("AxleCount", _SensitiveInteger)
-
-	RouteTruckOptions_EngineType = RouteTruckOptions.AddMember("EngineType", RouteEngineType)
-
-	RouteTruckOptions_GrossWeight = RouteTruckOptions.AddMember("GrossWeight", _WeightKilograms)
-
-	RouteTruckOptions_HazardousCargos = RouteTruckOptions.AddMember("HazardousCargos", _RouteHazardousCargoTypeList)
-
-	RouteTruckOptions_Height = RouteTruckOptions.AddMember("Height", _DimensionCentimeters)
-
-	RouteTruckOptions_HeightAboveFirstAxle = RouteTruckOptions.AddMember("HeightAboveFirstAxle", _DimensionCentimeters)
-
-	RouteTruckOptions_KpraLength = RouteTruckOptions.AddMember("KpraLength", _DimensionCentimeters)
-
-	RouteTruckOptions_Length = RouteTruckOptions.AddMember("Length", _DimensionCentimeters)
-
-	RouteTruckOptions_LicensePlate = RouteTruckOptions.AddMember("LicensePlate", RouteVehicleLicensePlate)
-
-	RouteTruckOptions_MaxSpeed = RouteTruckOptions.AddMember("MaxSpeed", _SpeedKilometersPerHour)
-
-	RouteTruckOptions_Occupancy = RouteTruckOptions.AddMember("Occupancy", _SensitiveInteger)
-
-	RouteTruckOptions_PayloadCapacity = RouteTruckOptions.AddMember("PayloadCapacity", _WeightKilograms)
-
-	RouteTruckOptions_TireCount = RouteTruckOptions.AddMember("TireCount", _SensitiveInteger)
-
-	RouteTruckOptions_Trailer = RouteTruckOptions.AddMember("Trailer", RouteTrailerOptions)
-
-	RouteTruckOptions_TruckType = RouteTruckOptions.AddMember("TruckType", RouteTruckType)
-
-	RouteTruckOptions_TunnelRestrictionCode = RouteTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
-
-	RouteTruckOptions_WeightPerAxle = RouteTruckOptions.AddMember("WeightPerAxle", _WeightKilograms)
-
-	RouteTruckOptions_WeightPerAxleGroup = RouteTruckOptions.AddMember("WeightPerAxleGroup", WeightPerAxleGroup)
-
-	RouteTruckOptions_Width = RouteTruckOptions.AddMember("Width", _DimensionCentimeters)
-
-	RouteTravelModeOptions_Car = RouteTravelModeOptions.AddMember("Car", RouteCarOptions)
-
-	RouteTravelModeOptions_Pedestrian = RouteTravelModeOptions.AddMember("Pedestrian", RoutePedestrianOptions)
-
-	RouteTravelModeOptions_Scooter = RouteTravelModeOptions.AddMember("Scooter", RouteScooterOptions)
-
-	RouteTravelModeOptions_Truck = RouteTravelModeOptions.AddMember("Truck", RouteTruckOptions)
-
-	RouteTravelModeOptions_Intermodal = RouteTravelModeOptions.AddMember("Intermodal", RouteIntermodalOptions)
-
-	RouteTravelModeOptions_Transit = RouteTravelModeOptions.AddMember("Transit", RouteTransitOptions)
-
-	RouteTravelStepType_DEFAULT = RouteTravelStepType.AddMember("DEFAULT", smithyprelude.Unit)
-
-	RouteTravelStepType_TURN_BY_TURN = RouteTravelStepType.AddMember("TURN_BY_TURN", smithyprelude.Unit)
-
-	RouteWaypoint_AvoidActionsForDistance = RouteWaypoint.AddMember("AvoidActionsForDistance", _DistanceMeters)
-
-	RouteWaypoint_AvoidUTurns = RouteWaypoint.AddMember("AvoidUTurns", _SensitiveBoolean)
-
-	RouteWaypoint_Heading = RouteWaypoint.AddMember("Heading", _Heading)
-
-	RouteWaypoint_Matching = RouteWaypoint.AddMember("Matching", RouteMatchingOptions)
-
-	RouteWaypoint_PassThrough = RouteWaypoint.AddMember("PassThrough", _SensitiveBoolean)
-
-	RouteWaypoint_Position = RouteWaypoint.AddMember("Position", _Position)
-
-	RouteWaypoint_SideOfStreet = RouteWaypoint.AddMember("SideOfStreet", RouteSideOfStreetOptions)
-
-	RouteWaypoint_StopDuration = RouteWaypoint.AddMember("StopDuration", _DurationSeconds)
-
-	_RouteWaypointList_member = _RouteWaypointList.AddMember("member", RouteWaypoint)
-
-	RoutingObjective_FASTEST_ROUTE = RoutingObjective.AddMember("FASTEST_ROUTE", smithyprelude.Unit)
-
-	RoutingObjective_SHORTEST_ROUTE = RoutingObjective.AddMember("SHORTEST_ROUTE", smithyprelude.Unit)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_MISSING = ValidationExceptionReason.AddMember("MISSING", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNKNOWN_FIELD = ValidationExceptionReason.AddMember("UNKNOWN_FIELD", smithyprelude.Unit)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason, &smithytraits.JSONName{Name: "reason"})
-
-	ValidationException_FieldList = ValidationException.AddMember("FieldList", _ValidationExceptionFieldList, &smithytraits.JSONName{Name: "fieldList"})
-
-	WaypointOptimizationAccessHoursEntry_DayOfWeek = WaypointOptimizationAccessHoursEntry.AddMember("DayOfWeek", DayOfWeek)
-
-	WaypointOptimizationAccessHoursEntry_TimeOfDay = WaypointOptimizationAccessHoursEntry.AddMember("TimeOfDay", _TimeOfDay)
-
-	WaypointOptimizationAccessHours_From = WaypointOptimizationAccessHours.AddMember("From", WaypointOptimizationAccessHoursEntry)
-
-	WaypointOptimizationAccessHours_To = WaypointOptimizationAccessHours.AddMember("To", WaypointOptimizationAccessHoursEntry)
-
-	WaypointOptimizationAvoidanceAreaGeometry_BoundingBox = WaypointOptimizationAvoidanceAreaGeometry.AddMember("BoundingBox", _BoundingBox)
-
-	WaypointOptimizationAvoidanceArea_Geometry = WaypointOptimizationAvoidanceArea.AddMember("Geometry", WaypointOptimizationAvoidanceAreaGeometry)
-
-	_WaypointOptimizationAvoidanceAreaList_member = _WaypointOptimizationAvoidanceAreaList.AddMember("member", WaypointOptimizationAvoidanceArea)
-
-	WaypointOptimizationAvoidanceOptions_Areas = WaypointOptimizationAvoidanceOptions.AddMember("Areas", _WaypointOptimizationAvoidanceAreaList)
-
-	WaypointOptimizationAvoidanceOptions_CarShuttleTrains = WaypointOptimizationAvoidanceOptions.AddMember("CarShuttleTrains", _SensitiveBoolean)
-
-	WaypointOptimizationAvoidanceOptions_ControlledAccessHighways = WaypointOptimizationAvoidanceOptions.AddMember("ControlledAccessHighways", _SensitiveBoolean)
-
-	WaypointOptimizationAvoidanceOptions_DirtRoads = WaypointOptimizationAvoidanceOptions.AddMember("DirtRoads", _SensitiveBoolean)
-
-	WaypointOptimizationAvoidanceOptions_Ferries = WaypointOptimizationAvoidanceOptions.AddMember("Ferries", _SensitiveBoolean)
-
-	WaypointOptimizationAvoidanceOptions_TollRoads = WaypointOptimizationAvoidanceOptions.AddMember("TollRoads", _SensitiveBoolean)
-
-	WaypointOptimizationAvoidanceOptions_Tunnels = WaypointOptimizationAvoidanceOptions.AddMember("Tunnels", _SensitiveBoolean)
-
-	WaypointOptimizationAvoidanceOptions_UTurns = WaypointOptimizationAvoidanceOptions.AddMember("UTurns", _SensitiveBoolean)
-
-	WaypointOptimizationClusteringAlgorithm_DRIVING_DISTANCE = WaypointOptimizationClusteringAlgorithm.AddMember("DRIVING_DISTANCE", smithyprelude.Unit)
-
-	WaypointOptimizationClusteringAlgorithm_TOPOLOGY_SEGMENT = WaypointOptimizationClusteringAlgorithm.AddMember("TOPOLOGY_SEGMENT", smithyprelude.Unit)
-
-	WaypointOptimizationDrivingDistanceOptions_DrivingDistance = WaypointOptimizationDrivingDistanceOptions.AddMember("DrivingDistance", _WaypointOptimizationDrivingDistance)
-
-	WaypointOptimizationClusteringOptions_Algorithm = WaypointOptimizationClusteringOptions.AddMember("Algorithm", WaypointOptimizationClusteringAlgorithm)
-
-	WaypointOptimizationClusteringOptions_DrivingDistanceOptions = WaypointOptimizationClusteringOptions.AddMember("DrivingDistanceOptions", WaypointOptimizationDrivingDistanceOptions)
-
-	WaypointOptimizationConnection_Distance = WaypointOptimizationConnection.AddMember("Distance", _DistanceMeters)
-
-	WaypointOptimizationConnection_From = WaypointOptimizationConnection.AddMember("From", _WaypointId)
-
-	WaypointOptimizationConnection_RestDuration = WaypointOptimizationConnection.AddMember("RestDuration", _DurationSeconds)
-
-	WaypointOptimizationConnection_To = WaypointOptimizationConnection.AddMember("To", _WaypointId)
-
-	WaypointOptimizationConnection_TravelDuration = WaypointOptimizationConnection.AddMember("TravelDuration", _DurationSeconds)
-
-	WaypointOptimizationConnection_WaitDuration = WaypointOptimizationConnection.AddMember("WaitDuration", _DurationSeconds)
-
-	_WaypointOptimizationConnectionList_member = _WaypointOptimizationConnectionList.AddMember("member", WaypointOptimizationConnection)
-
-	WaypointOptimizationConstraint_ACCESS_HOURS = WaypointOptimizationConstraint.AddMember("ACCESS_HOURS", smithyprelude.Unit)
-
-	WaypointOptimizationConstraint_APPOINTMENT_TIME = WaypointOptimizationConstraint.AddMember("APPOINTMENT_TIME", smithyprelude.Unit)
-
-	WaypointOptimizationConstraint_BEFORE = WaypointOptimizationConstraint.AddMember("BEFORE", smithyprelude.Unit)
-
-	WaypointOptimizationConstraint_HEADING = WaypointOptimizationConstraint.AddMember("HEADING", smithyprelude.Unit)
-
-	WaypointOptimizationConstraint_SERVICE_DURATION = WaypointOptimizationConstraint.AddMember("SERVICE_DURATION", smithyprelude.Unit)
-
-	WaypointOptimizationConstraint_SIDE_OF_STREET = WaypointOptimizationConstraint.AddMember("SIDE_OF_STREET", smithyprelude.Unit)
-
-	WaypointOptimizationSideOfStreetOptions_Position = WaypointOptimizationSideOfStreetOptions.AddMember("Position", _Position)
-
-	WaypointOptimizationSideOfStreetOptions_UseWith = WaypointOptimizationSideOfStreetOptions.AddMember("UseWith", SideOfStreetMatchingStrategy)
-
-	WaypointOptimizationDestinationOptions_AccessHours = WaypointOptimizationDestinationOptions.AddMember("AccessHours", WaypointOptimizationAccessHours)
-
-	WaypointOptimizationDestinationOptions_AppointmentTime = WaypointOptimizationDestinationOptions.AddMember("AppointmentTime", _TimestampWithTimezoneOffset)
-
-	WaypointOptimizationDestinationOptions_Heading = WaypointOptimizationDestinationOptions.AddMember("Heading", _Heading)
-
-	WaypointOptimizationDestinationOptions_Id = WaypointOptimizationDestinationOptions.AddMember("Id", _WaypointId)
-
-	WaypointOptimizationDestinationOptions_ServiceDuration = WaypointOptimizationDestinationOptions.AddMember("ServiceDuration", _DurationSeconds)
-
-	WaypointOptimizationDestinationOptions_SideOfStreet = WaypointOptimizationDestinationOptions.AddMember("SideOfStreet", WaypointOptimizationSideOfStreetOptions)
-
-	WaypointOptimizationRestCycleDurations_RestDuration = WaypointOptimizationRestCycleDurations.AddMember("RestDuration", _DurationSeconds)
-
-	WaypointOptimizationRestCycleDurations_WorkDuration = WaypointOptimizationRestCycleDurations.AddMember("WorkDuration", _DurationSeconds)
-
-	WaypointOptimizationRestCycles_LongCycle = WaypointOptimizationRestCycles.AddMember("LongCycle", WaypointOptimizationRestCycleDurations)
-
-	WaypointOptimizationRestCycles_ShortCycle = WaypointOptimizationRestCycles.AddMember("ShortCycle", WaypointOptimizationRestCycleDurations)
-
-	WaypointOptimizationRestProfile_Profile = WaypointOptimizationRestProfile.AddMember("Profile", _SensitiveString)
-
-	WaypointOptimizationServiceTimeTreatment_REST = WaypointOptimizationServiceTimeTreatment.AddMember("REST", smithyprelude.Unit)
-
-	WaypointOptimizationServiceTimeTreatment_WORK = WaypointOptimizationServiceTimeTreatment.AddMember("WORK", smithyprelude.Unit)
-
-	WaypointOptimizationDriverOptions_RestCycles = WaypointOptimizationDriverOptions.AddMember("RestCycles", WaypointOptimizationRestCycles)
-
-	WaypointOptimizationDriverOptions_RestProfile = WaypointOptimizationDriverOptions.AddMember("RestProfile", WaypointOptimizationRestProfile)
-
-	WaypointOptimizationDriverOptions_TreatServiceTimeAs = WaypointOptimizationDriverOptions.AddMember("TreatServiceTimeAs", WaypointOptimizationServiceTimeTreatment)
-
-	WaypointOptimizationExclusionOptions_Countries = WaypointOptimizationExclusionOptions.AddMember("Countries", _CountryCodeList)
-
-	WaypointOptimizationFailedConstraint_Constraint = WaypointOptimizationFailedConstraint.AddMember("Constraint", WaypointOptimizationConstraint)
-
-	WaypointOptimizationFailedConstraint_Reason = WaypointOptimizationFailedConstraint.AddMember("Reason", _SensitiveString)
-
-	_WaypointOptimizationFailedConstraintList_member = _WaypointOptimizationFailedConstraintList.AddMember("member", WaypointOptimizationFailedConstraint)
-
-	WaypointOptimizationHazardousCargoType_COMBUSTIBLE = WaypointOptimizationHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_CORROSIVE = WaypointOptimizationHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_EXPLOSIVE = WaypointOptimizationHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_FLAMMABLE = WaypointOptimizationHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_GAS = WaypointOptimizationHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_HARMFUL_TO_WATER = WaypointOptimizationHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_ORGANIC = WaypointOptimizationHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_OTHER = WaypointOptimizationHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_POISON = WaypointOptimizationHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_POISONOUS_INHALATION = WaypointOptimizationHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
-
-	WaypointOptimizationHazardousCargoType_RADIOACTIVE = WaypointOptimizationHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
-
-	_WaypointOptimizationHazardousCargoTypeList_member = _WaypointOptimizationHazardousCargoTypeList.AddMember("member", WaypointOptimizationHazardousCargoType)
-
-	WaypointOptimizationImpedingWaypoint_FailedConstraints = WaypointOptimizationImpedingWaypoint.AddMember("FailedConstraints", _WaypointOptimizationFailedConstraintList)
-
-	WaypointOptimizationImpedingWaypoint_Id = WaypointOptimizationImpedingWaypoint.AddMember("Id", _WaypointId)
-
-	WaypointOptimizationImpedingWaypoint_Position = WaypointOptimizationImpedingWaypoint.AddMember("Position", _Position)
-
-	_WaypointOptimizationImpedingWaypointList_member = _WaypointOptimizationImpedingWaypointList.AddMember("member", WaypointOptimizationImpedingWaypoint)
-
-	WaypointOptimizationOptimizedWaypoint_ArrivalTime = WaypointOptimizationOptimizedWaypoint.AddMember("ArrivalTime", _TimestampWithTimezoneOffset)
-
-	WaypointOptimizationOptimizedWaypoint_ClusterIndex = WaypointOptimizationOptimizedWaypoint.AddMember("ClusterIndex", _ClusterIndex)
-
-	WaypointOptimizationOptimizedWaypoint_DepartureTime = WaypointOptimizationOptimizedWaypoint.AddMember("DepartureTime", _TimestampWithTimezoneOffset)
-
-	WaypointOptimizationOptimizedWaypoint_Id = WaypointOptimizationOptimizedWaypoint.AddMember("Id", _WaypointId)
-
-	WaypointOptimizationOptimizedWaypoint_Position = WaypointOptimizationOptimizedWaypoint.AddMember("Position", _Position)
-
-	_WaypointOptimizationOptimizedWaypointList_member = _WaypointOptimizationOptimizedWaypointList.AddMember("member", WaypointOptimizationOptimizedWaypoint)
-
-	WaypointOptimizationOriginOptions_Id = WaypointOptimizationOriginOptions.AddMember("Id", _WaypointId)
-
-	WaypointOptimizationPedestrianOptions_Speed = WaypointOptimizationPedestrianOptions.AddMember("Speed", _SpeedKilometersPerHour)
-
-	WaypointOptimizationSequencingObjective_FASTEST_ROUTE = WaypointOptimizationSequencingObjective.AddMember("FASTEST_ROUTE", smithyprelude.Unit)
-
-	WaypointOptimizationSequencingObjective_SHORTEST_ROUTE = WaypointOptimizationSequencingObjective.AddMember("SHORTEST_ROUTE", smithyprelude.Unit)
-
-	WaypointOptimizationTimeBreakdown_RestDuration = WaypointOptimizationTimeBreakdown.AddMember("RestDuration", _DurationSeconds)
-
-	WaypointOptimizationTimeBreakdown_ServiceDuration = WaypointOptimizationTimeBreakdown.AddMember("ServiceDuration", _DurationSeconds)
-
-	WaypointOptimizationTimeBreakdown_TravelDuration = WaypointOptimizationTimeBreakdown.AddMember("TravelDuration", _DurationSeconds)
-
-	WaypointOptimizationTimeBreakdown_WaitDuration = WaypointOptimizationTimeBreakdown.AddMember("WaitDuration", _DurationSeconds)
-
-	WaypointOptimizationTrafficOptions_Usage = WaypointOptimizationTrafficOptions.AddMember("Usage", TrafficUsage)
-
-	WaypointOptimizationTrailerOptions_TrailerCount = WaypointOptimizationTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
-
-	WaypointOptimizationTravelMode_CAR = WaypointOptimizationTravelMode.AddMember("CAR", smithyprelude.Unit)
-
-	WaypointOptimizationTravelMode_PEDESTRIAN = WaypointOptimizationTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
-
-	WaypointOptimizationTravelMode_SCOOTER = WaypointOptimizationTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
-
-	WaypointOptimizationTravelMode_TRUCK = WaypointOptimizationTravelMode.AddMember("TRUCK", smithyprelude.Unit)
-
-	WaypointOptimizationTruckType_STRAIGHT_TRUCK = WaypointOptimizationTruckType.AddMember("STRAIGHT_TRUCK", smithyprelude.Unit)
-
-	WaypointOptimizationTruckType_TRACTOR = WaypointOptimizationTruckType.AddMember("TRACTOR", smithyprelude.Unit)
-
-	WaypointOptimizationTruckOptions_GrossWeight = WaypointOptimizationTruckOptions.AddMember("GrossWeight", _WeightKilograms)
-
-	WaypointOptimizationTruckOptions_HazardousCargos = WaypointOptimizationTruckOptions.AddMember("HazardousCargos", _WaypointOptimizationHazardousCargoTypeList)
-
-	WaypointOptimizationTruckOptions_Height = WaypointOptimizationTruckOptions.AddMember("Height", _DimensionCentimeters)
-
-	WaypointOptimizationTruckOptions_Length = WaypointOptimizationTruckOptions.AddMember("Length", _DimensionCentimeters)
-
-	WaypointOptimizationTruckOptions_Trailer = WaypointOptimizationTruckOptions.AddMember("Trailer", WaypointOptimizationTrailerOptions)
-
-	WaypointOptimizationTruckOptions_TruckType = WaypointOptimizationTruckOptions.AddMember("TruckType", WaypointOptimizationTruckType)
-
-	WaypointOptimizationTruckOptions_TunnelRestrictionCode = WaypointOptimizationTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
-
-	WaypointOptimizationTruckOptions_WeightPerAxle = WaypointOptimizationTruckOptions.AddMember("WeightPerAxle", _WeightKilograms)
-
-	WaypointOptimizationTruckOptions_Width = WaypointOptimizationTruckOptions.AddMember("Width", _DimensionCentimeters)
-
-	WaypointOptimizationTravelModeOptions_Pedestrian = WaypointOptimizationTravelModeOptions.AddMember("Pedestrian", WaypointOptimizationPedestrianOptions)
-
-	WaypointOptimizationTravelModeOptions_Truck = WaypointOptimizationTravelModeOptions.AddMember("Truck", WaypointOptimizationTruckOptions)
-
-	WaypointOptimizationWaypoint_AccessHours = WaypointOptimizationWaypoint.AddMember("AccessHours", WaypointOptimizationAccessHours)
-
-	WaypointOptimizationWaypoint_AppointmentTime = WaypointOptimizationWaypoint.AddMember("AppointmentTime", _TimestampWithTimezoneOffset)
-
-	WaypointOptimizationWaypoint_Before = WaypointOptimizationWaypoint.AddMember("Before", _BeforeWaypointsList)
-
-	WaypointOptimizationWaypoint_Heading = WaypointOptimizationWaypoint.AddMember("Heading", _Heading)
-
-	WaypointOptimizationWaypoint_Id = WaypointOptimizationWaypoint.AddMember("Id", _WaypointId)
-
-	WaypointOptimizationWaypoint_Position = WaypointOptimizationWaypoint.AddMember("Position", _Position)
-
-	WaypointOptimizationWaypoint_ServiceDuration = WaypointOptimizationWaypoint.AddMember("ServiceDuration", _DurationSeconds)
-
-	WaypointOptimizationWaypoint_SideOfStreet = WaypointOptimizationWaypoint.AddMember("SideOfStreet", WaypointOptimizationSideOfStreetOptions)
-
-	_WaypointOptimizationWaypointList_member = _WaypointOptimizationWaypointList.AddMember("member", WaypointOptimizationWaypoint)
-
-	CalculateIsolinesRequest_Allow = CalculateIsolinesRequest.AddMember("Allow", IsolineAllowOptions)
-
-	CalculateIsolinesRequest_ArrivalTime = CalculateIsolinesRequest.AddMember("ArrivalTime", _TimestampWithTimezoneOffset)
-
-	CalculateIsolinesRequest_Avoid = CalculateIsolinesRequest.AddMember("Avoid", IsolineAvoidanceOptions)
-
-	CalculateIsolinesRequest_DepartNow = CalculateIsolinesRequest.AddMember("DepartNow", _SensitiveBoolean)
-
-	CalculateIsolinesRequest_DepartureTime = CalculateIsolinesRequest.AddMember("DepartureTime", _TimestampWithTimezoneOffset)
-
-	CalculateIsolinesRequest_Destination = CalculateIsolinesRequest.AddMember("Destination", _Position)
-
-	CalculateIsolinesRequest_DestinationOptions = CalculateIsolinesRequest.AddMember("DestinationOptions", IsolineDestinationOptions)
-
-	CalculateIsolinesRequest_IsolineGeometryFormat = CalculateIsolinesRequest.AddMember("IsolineGeometryFormat", GeometryFormat)
-
-	CalculateIsolinesRequest_IsolineGranularity = CalculateIsolinesRequest.AddMember("IsolineGranularity", IsolineGranularityOptions)
-
-	CalculateIsolinesRequest_Key = CalculateIsolinesRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	CalculateIsolinesRequest_OptimizeIsolineFor = CalculateIsolinesRequest.AddMember("OptimizeIsolineFor", IsolineOptimizationObjective)
-
-	CalculateIsolinesRequest_OptimizeRoutingFor = CalculateIsolinesRequest.AddMember("OptimizeRoutingFor", RoutingObjective)
-
-	CalculateIsolinesRequest_Origin = CalculateIsolinesRequest.AddMember("Origin", _Position)
-
-	CalculateIsolinesRequest_OriginOptions = CalculateIsolinesRequest.AddMember("OriginOptions", IsolineOriginOptions)
-
-	CalculateIsolinesRequest_Thresholds = CalculateIsolinesRequest.AddMember("Thresholds", IsolineThresholds)
-
-	CalculateIsolinesRequest_Traffic = CalculateIsolinesRequest.AddMember("Traffic", IsolineTrafficOptions)
-
-	CalculateIsolinesRequest_TravelMode = CalculateIsolinesRequest.AddMember("TravelMode", IsolineTravelMode)
-
-	CalculateIsolinesRequest_TravelModeOptions = CalculateIsolinesRequest.AddMember("TravelModeOptions", IsolineTravelModeOptions)
-
-	CalculateIsolinesResponse_ArrivalTime = CalculateIsolinesResponse.AddMember("ArrivalTime", _TimestampWithTimezoneOffset)
-
-	CalculateIsolinesResponse_DepartureTime = CalculateIsolinesResponse.AddMember("DepartureTime", _TimestampWithTimezoneOffset)
-
-	CalculateIsolinesResponse_IsolineGeometryFormat = CalculateIsolinesResponse.AddMember("IsolineGeometryFormat", GeometryFormat)
-
-	CalculateIsolinesResponse_Isolines = CalculateIsolinesResponse.AddMember("Isolines", _IsolineList)
-
-	CalculateIsolinesResponse_PricingBucket = CalculateIsolinesResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
-	CalculateIsolinesResponse_SnappedDestination = CalculateIsolinesResponse.AddMember("SnappedDestination", _Position)
-
-	CalculateIsolinesResponse_SnappedOrigin = CalculateIsolinesResponse.AddMember("SnappedOrigin", _Position)
-
-	CalculateRouteMatrixRequest_Allow = CalculateRouteMatrixRequest.AddMember("Allow", RouteMatrixAllowOptions)
-
-	CalculateRouteMatrixRequest_Avoid = CalculateRouteMatrixRequest.AddMember("Avoid", RouteMatrixAvoidanceOptions)
-
-	CalculateRouteMatrixRequest_DepartNow = CalculateRouteMatrixRequest.AddMember("DepartNow", _SensitiveBoolean)
-
-	CalculateRouteMatrixRequest_DepartureTime = CalculateRouteMatrixRequest.AddMember("DepartureTime", _TimestampWithTimezoneOffset)
-
-	CalculateRouteMatrixRequest_Destinations = CalculateRouteMatrixRequest.AddMember("Destinations", _RouteMatrixDestinationList)
-
-	CalculateRouteMatrixRequest_Exclude = CalculateRouteMatrixRequest.AddMember("Exclude", RouteMatrixExclusionOptions)
-
-	CalculateRouteMatrixRequest_Key = CalculateRouteMatrixRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	CalculateRouteMatrixRequest_OptimizeRoutingFor = CalculateRouteMatrixRequest.AddMember("OptimizeRoutingFor", RoutingObjective)
-
-	CalculateRouteMatrixRequest_Origins = CalculateRouteMatrixRequest.AddMember("Origins", _RouteMatrixOriginList)
-
-	CalculateRouteMatrixRequest_RoutingBoundary = CalculateRouteMatrixRequest.AddMember("RoutingBoundary", RouteMatrixBoundary)
-
-	CalculateRouteMatrixRequest_Traffic = CalculateRouteMatrixRequest.AddMember("Traffic", RouteMatrixTrafficOptions)
-
-	CalculateRouteMatrixRequest_TravelMode = CalculateRouteMatrixRequest.AddMember("TravelMode", RouteMatrixTravelMode)
-
-	CalculateRouteMatrixRequest_TravelModeOptions = CalculateRouteMatrixRequest.AddMember("TravelModeOptions", RouteMatrixTravelModeOptions)
-
-	CalculateRouteMatrixResponse_ErrorCount = CalculateRouteMatrixResponse.AddMember("ErrorCount", smithyprelude.Integer)
-
-	CalculateRouteMatrixResponse_PricingBucket = CalculateRouteMatrixResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
-	CalculateRouteMatrixResponse_RouteMatrix = CalculateRouteMatrixResponse.AddMember("RouteMatrix", _RouteMatrix)
-
-	CalculateRouteMatrixResponse_RoutingBoundary = CalculateRouteMatrixResponse.AddMember("RoutingBoundary", RouteMatrixBoundary)
-
-	CalculateRoutesRequest_Allow = CalculateRoutesRequest.AddMember("Allow", RouteAllowOptions)
-
-	CalculateRoutesRequest_ArrivalTime = CalculateRoutesRequest.AddMember("ArrivalTime", _TimestampWithTimezoneOffset)
-
-	CalculateRoutesRequest_Avoid = CalculateRoutesRequest.AddMember("Avoid", RouteAvoidanceOptions)
-
-	CalculateRoutesRequest_DepartNow = CalculateRoutesRequest.AddMember("DepartNow", _SensitiveBoolean)
-
-	CalculateRoutesRequest_DepartureTime = CalculateRoutesRequest.AddMember("DepartureTime", _TimestampWithTimezoneOffset)
-
-	CalculateRoutesRequest_Destination = CalculateRoutesRequest.AddMember("Destination", _Position)
-
-	CalculateRoutesRequest_DestinationOptions = CalculateRoutesRequest.AddMember("DestinationOptions", RouteDestinationOptions)
-
-	CalculateRoutesRequest_Driver = CalculateRoutesRequest.AddMember("Driver", RouteDriverOptions)
-
-	CalculateRoutesRequest_Exclude = CalculateRoutesRequest.AddMember("Exclude", RouteExclusionOptions)
-
-	CalculateRoutesRequest_InstructionsMeasurementSystem = CalculateRoutesRequest.AddMember("InstructionsMeasurementSystem", MeasurementSystem)
-
-	CalculateRoutesRequest_Key = CalculateRoutesRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	CalculateRoutesRequest_Languages = CalculateRoutesRequest.AddMember("Languages", _LanguageTagList)
-
-	CalculateRoutesRequest_LegAdditionalFeatures = CalculateRoutesRequest.AddMember("LegAdditionalFeatures", _RouteLegAdditionalFeatureList)
-
-	CalculateRoutesRequest_LegGeometryFormat = CalculateRoutesRequest.AddMember("LegGeometryFormat", GeometryFormat)
-
-	CalculateRoutesRequest_MaxAlternatives = CalculateRoutesRequest.AddMember("MaxAlternatives", smithyprelude.Integer)
-
-	CalculateRoutesRequest_OptimizeRoutingFor = CalculateRoutesRequest.AddMember("OptimizeRoutingFor", RoutingObjective)
-
-	CalculateRoutesRequest_Origin = CalculateRoutesRequest.AddMember("Origin", _Position)
-
-	CalculateRoutesRequest_OriginOptions = CalculateRoutesRequest.AddMember("OriginOptions", RouteOriginOptions)
-
-	CalculateRoutesRequest_SpanAdditionalFeatures = CalculateRoutesRequest.AddMember("SpanAdditionalFeatures", _RouteSpanAdditionalFeatureList)
-
-	CalculateRoutesRequest_Tolls = CalculateRoutesRequest.AddMember("Tolls", RouteTollOptions)
-
-	CalculateRoutesRequest_Traffic = CalculateRoutesRequest.AddMember("Traffic", RouteTrafficOptions)
-
-	CalculateRoutesRequest_TravelMode = CalculateRoutesRequest.AddMember("TravelMode", RouteTravelMode)
-
-	CalculateRoutesRequest_TravelModeOptions = CalculateRoutesRequest.AddMember("TravelModeOptions", RouteTravelModeOptions)
-
-	CalculateRoutesRequest_TravelStepType = CalculateRoutesRequest.AddMember("TravelStepType", RouteTravelStepType)
-
-	CalculateRoutesRequest_Waypoints = CalculateRoutesRequest.AddMember("Waypoints", _RouteWaypointList)
-
-	CalculateRoutesResponse_LegGeometryFormat = CalculateRoutesResponse.AddMember("LegGeometryFormat", GeometryFormat)
-
-	CalculateRoutesResponse_Notices = CalculateRoutesResponse.AddMember("Notices", _RouteResponseNoticeList)
-
-	CalculateRoutesResponse_PricingBucket = CalculateRoutesResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
-	CalculateRoutesResponse_Routes = CalculateRoutesResponse.AddMember("Routes", _RouteList)
-
-	OptimizeWaypointsRequest_Avoid = OptimizeWaypointsRequest.AddMember("Avoid", WaypointOptimizationAvoidanceOptions)
-
-	OptimizeWaypointsRequest_Clustering = OptimizeWaypointsRequest.AddMember("Clustering", WaypointOptimizationClusteringOptions)
-
-	OptimizeWaypointsRequest_DepartureTime = OptimizeWaypointsRequest.AddMember("DepartureTime", _TimestampWithTimezoneOffset)
-
-	OptimizeWaypointsRequest_Destination = OptimizeWaypointsRequest.AddMember("Destination", _Position)
-
-	OptimizeWaypointsRequest_DestinationOptions = OptimizeWaypointsRequest.AddMember("DestinationOptions", WaypointOptimizationDestinationOptions)
-
-	OptimizeWaypointsRequest_Driver = OptimizeWaypointsRequest.AddMember("Driver", WaypointOptimizationDriverOptions)
-
-	OptimizeWaypointsRequest_Exclude = OptimizeWaypointsRequest.AddMember("Exclude", WaypointOptimizationExclusionOptions)
-
-	OptimizeWaypointsRequest_Key = OptimizeWaypointsRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	OptimizeWaypointsRequest_OptimizeSequencingFor = OptimizeWaypointsRequest.AddMember("OptimizeSequencingFor", WaypointOptimizationSequencingObjective)
-
-	OptimizeWaypointsRequest_Origin = OptimizeWaypointsRequest.AddMember("Origin", _Position)
-
-	OptimizeWaypointsRequest_OriginOptions = OptimizeWaypointsRequest.AddMember("OriginOptions", WaypointOptimizationOriginOptions)
-
-	OptimizeWaypointsRequest_Traffic = OptimizeWaypointsRequest.AddMember("Traffic", WaypointOptimizationTrafficOptions)
-
-	OptimizeWaypointsRequest_TravelMode = OptimizeWaypointsRequest.AddMember("TravelMode", WaypointOptimizationTravelMode)
-
-	OptimizeWaypointsRequest_TravelModeOptions = OptimizeWaypointsRequest.AddMember("TravelModeOptions", WaypointOptimizationTravelModeOptions)
-
-	OptimizeWaypointsRequest_Waypoints = OptimizeWaypointsRequest.AddMember("Waypoints", _WaypointOptimizationWaypointList)
-
-	OptimizeWaypointsResponse_Connections = OptimizeWaypointsResponse.AddMember("Connections", _WaypointOptimizationConnectionList)
-
-	OptimizeWaypointsResponse_Distance = OptimizeWaypointsResponse.AddMember("Distance", _DistanceMeters)
-
-	OptimizeWaypointsResponse_Duration = OptimizeWaypointsResponse.AddMember("Duration", _DurationSeconds)
-
-	OptimizeWaypointsResponse_ImpedingWaypoints = OptimizeWaypointsResponse.AddMember("ImpedingWaypoints", _WaypointOptimizationImpedingWaypointList)
-
-	OptimizeWaypointsResponse_OptimizedWaypoints = OptimizeWaypointsResponse.AddMember("OptimizedWaypoints", _WaypointOptimizationOptimizedWaypointList)
-
-	OptimizeWaypointsResponse_PricingBucket = OptimizeWaypointsResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
-	OptimizeWaypointsResponse_TimeBreakdown = OptimizeWaypointsResponse.AddMember("TimeBreakdown", WaypointOptimizationTimeBreakdown)
-
-	SnapToRoadsRequest_Key = SnapToRoadsRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	SnapToRoadsRequest_SnappedGeometryFormat = SnapToRoadsRequest.AddMember("SnappedGeometryFormat", GeometryFormat)
-
-	SnapToRoadsRequest_SnapRadius = SnapToRoadsRequest.AddMember("SnapRadius", _DistanceMeters)
-
-	SnapToRoadsRequest_TracePoints = SnapToRoadsRequest.AddMember("TracePoints", _RoadSnapTracePointList)
-
-	SnapToRoadsRequest_TravelMode = SnapToRoadsRequest.AddMember("TravelMode", RoadSnapTravelMode)
-
-	SnapToRoadsRequest_TravelModeOptions = SnapToRoadsRequest.AddMember("TravelModeOptions", RoadSnapTravelModeOptions)
-
-	SnapToRoadsResponse_Notices = SnapToRoadsResponse.AddMember("Notices", _RoadSnapNoticeList)
-
-	SnapToRoadsResponse_PricingBucket = SnapToRoadsResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
-	SnapToRoadsResponse_SnappedGeometry = SnapToRoadsResponse.AddMember("SnappedGeometry", RoadSnapSnappedGeometry)
-
-	SnapToRoadsResponse_SnappedGeometryFormat = SnapToRoadsResponse.AddMember("SnappedGeometryFormat", GeometryFormat)
-
-	SnapToRoadsResponse_SnappedTracePoints = SnapToRoadsResponse.AddMember("SnappedTracePoints", _RoadSnapSnappedTracePointList)
-
+const blob = "" +
+	"POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGEWaypointOptimizationDrivingDistanceOptionsWaypointOptimi" +
+	"zationHazardousCargoTypeListPOTENTIAL_VIOLATED_TURN_RESTRICTION_USAGEPOTENTIAL_VIOLATED_ZONE_RESTRIC" +
+	"TION_USAGERouteTransitIntermediateStopAttributeListWaypointOptimizationAvoidanceAreaGeometryWaypoint" +
+	"OptimizationOptimizedWaypointListPOTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGEVIOLATED_AVOID_CONTROLLED_A" +
+	"CCESS_HIGHWAYWaypointOptimizationFailedConstraintListWaypointOptimizationImpedingWaypointListWaypoin" +
+	"tOptimizationServiceTimeTreatmentWaypointOptimizationClusteringAlgorithmWaypointOptimizationSequenci" +
+	"ngObjectiveWaypointOptimizationSideOfStreetOptionsRouteSpanPedestrianAccessAttributeListWaypointOpti" +
+	"mizationDestinationOptionsWaypointOptimizationRestCycleDurationsRouteAccessibilityAvailabilityDetail" +
+	"sTRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURSWaypointOptimizationAvoidanceAreaListWaypointOptimizationClust" +
+	"eringOptionsWaypointOptimizationPedestrianOptionsWaypointOptimizationTravelModeOptionsRouteMatrixAvo" +
+	"idanceZoneCategoryListTRACE_POINTS_MOVED_BY_LARGE_DISTANCEWaypointOptimizationAccessHoursEntryWaypoi" +
+	"ntOptimizationAvoidanceOptionsWaypointOptimizationExclusionOptionsRouteSpanScooterAccessAttributeLis" +
+	"tRoutePedestrianAfterTravelStepListRoutePedestrianAfterTravelStepTypeTOLLS_DATA_TEMPORARILY_UNAVAILA" +
+	"BLEWaypointOptimizationConnectionListWaypointOptimizationTrafficOptionsWaypointOptimizationTrailerOp" +
+	"tionsRouteMatrixHazardousCargoTypeListRouteSpanRailwayCrossingAttributeRouteSpanTruckAccessAttribute" +
+	"ListWaypointOptimizationDriverOptionsWaypointOptimizationOriginOptionsWaypointOptimizationTimeBreakd" +
+	"ownIsolineAvoidanceAreaGeometryListIsolineAvoidanceZoneCategoryListPOTENTIAL_VIOLATED_CARPOOL_USAGER" +
+	"outeIntermodalPedestrianOptionsRouteMatrixAvoidanceAreaGeometryRoutePedestrianTravelOnlySummaryRoute" +
+	"TransitBeforeTravelStepListRouteTransitBeforeTravelStepTypeRouteTransitIntermediateStopListRouteTran" +
+	"sitTransportModeDetailsWaypointOptimizationTruckOptionsWaypointOptimizationWaypointListRouteAccessib" +
+	"ilityAttributeListRouteContinueHighwayStepDetailsRouteDriverScheduleIntervalListRouteRentalBeforeTra" +
+	"velStepListRouteRentalBeforeTravelStepTypeRouteRentalTransportModeDetailsRouteRoundaboutEnterStepDet" +
+	"ailsRouteSpanCarAccessAttributeListRouteTollPassValidityPeriodTypeRouteTransitAfterTravelStepListRou" +
+	"teTransitAfterTravelStepTypeRouteVehicleAfterTravelStepListRouteVehicleAfterTravelStepTypeVIOLATED_A" +
+	"VOID_SEASONAL_CLOSUREVIOLATED_AVOID_TOLL_TRANSPONDERWaypointOptimizationRestProfileINTERMEDIATE_STOP" +
+	"S_UNAVAILABLERoadSnapHazardousCargoTypeListRouteAvoidanceAreaGeometryListRouteAvoidanceZoneCategoryL" +
+	"istRouteFerryBeforeTravelStepListRouteFerryBeforeTravelStepTypeRouteIntermodalEnabledLegsListRouteMa" +
+	"trixSideOfStreetOptionsRouteMatrixVehicleLicensePlateRoutePedestrianOverviewSummaryRouteRentalAfterT" +
+	"ravelStepListRouteRentalAfterTravelStepTypeRouteRoundaboutExitStepDetailsRouteRoundaboutPassStepDeta" +
+	"ilsRouteSpanAdditionalFeatureListVIOLATED_AVOID_DIFFICULT_TURNSVIOLATED_AVOID_TRUCK_ROAD_TYPEVIOLATE" +
+	"D_EXCLUDED_TRANSIT_MODEWaypointOptimizationConstraintWaypointOptimizationRestCyclesACCURATE_POLYLINE" +
+	"_UNAVAILABLEInstructionsMeasurementSystemIsolineHazardousCargoTypeListRoadSnapSnappedTracePointListR" +
+	"outeFerryAfterTravelStepListRouteFerryAfterTravelStepTypeRouteIntermodalTransitOptionsRouteIntermoda" +
+	"lVehicleOptionsRouteLegAdditionalFeatureListRouteMatrixDestinationOptionsRoutePedestrianTravelStepLi" +
+	"stRoutePedestrianTravelStepTypeRouteTaxiBeforeTravelStepListRouteTaxiBeforeTravelStepTypeRouteTaxiTr" +
+	"ansportModeDetailsRouteTransitNextDepartureListRouteTransitPedestrianOptionsRouteTransitTravelOnlySu" +
+	"mmaryRouteVehicleTravelOnlySummaryWaypointOptimizationTruckTypeCalculateRouteMatrixResponseIsolineOp" +
+	"timizationObjectiveRouteEnterHighwayStepDetailsRouteIntermodalRentalOptionsRouteMatrixAvoidanceAreaL" +
+	"istRouteMatrixTravelModeOptionsRoutePassThroughWaypointListRouteRentalTravelOnlySummaryRouteSpanDyna" +
+	"micSpeedDetailsRouteTaxiAfterTravelStepListRouteTaxiAfterTravelStepTypeRouteVehicleIncidentSeverityR" +
+	"outeVehicleNoticeDetailListSideOfStreetMatchingStrategyTRACE_POINTS_HEADING_IGNOREDTRACE_POINTS_OUT_" +
+	"OF_SEQUENCETRACE_POINTS_SPEED_ESTIMATEDValidationExceptionFieldListCalculateRouteMatrixRequestMATCH_" +
+	"MOST_SIGNIFICANT_ROADRoadSnapTracePointIndexListRouteFerryTravelOnlySummaryRouteHazardousCargoTypeLi" +
+	"stRouteMatrixAvoidanceOptionsRouteMatrixBoundaryGeometryRouteMatrixExclusionOptionsRouteTransitOverv" +
+	"iewSummaryRouteVehicleOverviewSummaryTimestampWithTimezoneOffsetFlowEventThresholdOverrideIsolineSid" +
+	"eOfStreetOptionsIsolineVehicleLicensePlateRouteIntermodalTaxiOptionsRouteMatrixDestinationListRouteM" +
+	"atrixMatchingOptionsRouteRentalOverviewSummaryRouteSpanRoadAttributeListRouteSpanSpeedLimitDetailsRo" +
+	"uteTaxiTravelOnlySummaryRouteTollPaymentMethodListRouteTransitIncidentEffectRouteTransitTravelStepLi" +
+	"stRouteTransitTravelStepTypeRouteVehicleTravelStepListRouteVehicleTravelStepTypeTRACE_POINTS_SPEED_I" +
+	"GNOREDVIOLATED_PEDESTRIAN_OPTIONCalculateIsolinesResponseFUNCTIONAL_CLASSIFICATIONIsolineConnectionG" +
+	"eometryIsolineDestinationOptionsIsolineGranularityOptionsNO_TRANSIT_STATIONS_FOUNDOUT_OF_BOUNDS_DEST" +
+	"INATIONOptimizeWaypointsResponseRoadSnapTravelModeOptionsRouteFerryOverviewSummaryRouteMatrixScooter" +
+	"OptionsRouteMatrixTrafficOptionsRouteMatrixTrailerOptionsRoutePedestrianLegDetailsRoutePedestrianNot" +
+	"iceCodeRoutePedestrianNoticeListRouteRentalTravelStepListRouteRentalTravelStepTypeRouteWeightConstra" +
+	"intTypeTRANSIT_ROUTE_UNAVAILABLEVIOLATED_AVOID_RAIL_FERRYValidationExceptionReasonCalculateIsolinesR" +
+	"equestControlledAccessHighwaysFunctionalClassificationIsolineAvoidanceAreaListIsolineShapeGeometryLi" +
+	"stIsolineTravelModeOptionsOptimizeWaypointsRequestRouteContinueStepDetailsRouteFerryTravelStepListRo" +
+	"uteFerryTravelStepTypeRouteMatrixOriginOptionsRoutePedestrianDepartureRoutePedestrianPlaceTypeRouteS" +
+	"ideOfStreetOptionsRouteTaxiOverviewSummaryRouteTollPaymentSiteListRouteTollPriceValueRangeRouteTollV" +
+	"ehicleCategoryRouteTransitIncidentListRouteTransitIncidentTypeRouteVehicleIncidentListRouteVehicleIn" +
+	"cidentTypeRouteVehicleLicensePlateRouteViolatedConstraintsTRACE_POINTS_NOT_MATCHEDTRANSIT_DATA_UNAVA" +
+	"ILABLETRAVEL_STEP_INSTRUCTIONSVIOLATED_AVOID_DIRT_ROADVIOLATED_START_DIRECTIONAccessibilityAttribute" +
+	"sAvoidActionsForDistanceCalculateRoutesResponseFIELD_VALIDATION_FAILEDInternalServerExceptionIsoline" +
+	"AvoidanceOptionsMAIN_LANGUAGE_NOT_FOUNDRoadSnapSnappedGeometryRouteAccessPointDetailsRouteDestinatio" +
+	"nOptionsRouteMajorRoadLabelListRouteMatrixAllowOptionsRouteMatrixTruckOptionsRouteMatrixZoneCategory" +
+	"RoutePedestrianSpanListRouteResponseNoticeCodeRouteResponseNoticeListRouteTaxiTravelStepListRouteTax" +
+	"iTravelStepTypeVIOLATED_EMERGENCY_GATECalculateRoutesRequestIsolineMatchingOptionsPASS_THROUGH_WAYPO" +
+	"INTSRoadSnapTracePointListRoadSnapTrailerOptionsRouteAvoidanceAreaListRouteChargeStepDetailsRouteInt" +
+	"ermodalOptionsRouteNoticeDetailRangeRoutePedestrianArrivalRoutePedestrianOptionsRoutePedestrianSumma" +
+	"ryRouteSignpostLabelListRouteSpanGateAttributeRouteSteeringDirectionRouteTransitLegDetailsRouteTrans" +
+	"itNoticeCodeRouteTransitNoticeListRouteTransitTripStatusRouteTravelModeOptionsRouteVehicleLegDetails" +
+	"RouteVehicleNoticeCodeRouteVehicleNoticeListRouteWebLinkDeviceTypeSpanAdditionalFeaturesSpeedKilomet" +
+	"ersPerHourTOLLS_DATA_UNAVAILABLEVIOLATED_AVOID_U_TURNSAccessDeniedExceptionDistanceThresholdListIsol" +
+	"ineConnectionListIsolineGeometryFormatIsolineScooterOptionsIsolineTrafficOptionsIsolineTrailerOption" +
+	"sLegAdditionalFeaturesMaxWeightPerAxleGroupOptimizeSequencingForRouteAvoidanceOptionsRouteExclusionO" +
+	"ptionsRouteMatrixAutoCircleRouteMatrixCarOptionsRouteMatrixOriginListRoutePassThroughPlaceRouteRenta" +
+	"lLegDetailsRouteTollPriceSummaryRouteTransitDepartureRouteTransitPlaceTypeRouteUTurnStepDetailsRoute" +
+	"VehicleDepartureRouteVehiclePlaceTypeSnappedGeometryFormatTunnelRestrictionCodeVIOLATED_AVOID_TUNNEL" +
+	"VIOLATED_BLOCKED_ROADACCURATE_CALCULATIONAllHazardsRestrictedBALANCED_CALCULATIONDimensionCentimeter" +
+	"sHeightAboveFirstAxleIsolineOriginOptionsNO_MATCH_DESTINATIONOUT_OF_BOUNDS_ORIGINPOISONOUS_INHALATIO" +
+	"NPassThroughWaypointsRoadSnapTruckOptionsRouteAttributionListRouteAttributionTypeRouteExitStepDetail" +
+	"sRouteFerryLegDetailsRouteFerryNoticeCodeRouteFerryNoticeListRouteKeepStepDetailsRouteMatchingOption" +
+	"sRouteMatrixErrorCodeRouteMatrixTruckTypeRouteRampStepDetailsRouteRentalDepartureRouteRentalPlaceTyp" +
+	"eRouteTransitModeListRouteTransitSpanListRouteTransponderListRouteTurnStepDetailsRouteVehicleModeLis" +
+	"tRouteVehicleSpanListTRACE_POINTS_IGNOREDVIOLATED_AVOID_AREASVIOLATED_AVOID_FERRYBeforeWaypointsList" +
+	"DIVIDED_STREET_ONLYEnergyKilowattHoursIGNORE_TRAFFIC_DATAINTERNAL_COMBUSTIONINTERREGIONAL_TRAINIsoli" +
+	"neAllowOptionsIsolineTruckOptionsIsolineZoneCategoryLocalizedStringListPERMISSION_REQUIREDRouteFerry" +
+	"DepartureRouteRentalModeListRouteScooterOptionsRouteStationDetailsRouteTaxiLegDetailsRouteTaxiNotice" +
+	"CodeRouteTaxiNoticeListRouteTollSystemListRouteTrafficOptionsRouteTrailerOptionsRouteTransitArrivalR" +
+	"outeTransitOptionsRouteTransitSummaryRouteTravelStepTypeRouteVehicleArrivalRouteVehicleSummarySnapTo" +
+	"RoadsResponseThrottlingExceptionBEST_CASE_DURATIONCONGESTION_PRICINGIncludesReturnTripMaxPayloadCapa" +
+	"cityNO_THROUGH_TRAFFICOptimizeIsolineForOptimizeRoutingForOptimizedWaypointsRIGHT_HAND_TRAFFICRoadSn" +
+	"apNoticeCodeRoadSnapNoticeListRouteDriverOptionsRouteFerrySpanListRouteLegTravelModeRouteOriginOptio" +
+	"nsRouteRentalArrivalRouteRentalSummaryRouteTaxiDepartureRouteTaxiPlaceTypeRouteTransitAgencyRouteTur" +
+	"nIntensitySnapToRoadsRequestSnappedDestinationSnappedTracePointsTreatServiceTimeAsUNDER_CONSTRUCTION" +
+	"BUS_RAPID_TRANSITBeforeTravelStepsCAR_SHUTTLE_TRAINFLEXIBLE_POLYLINEFUNICULAR_RAILWAYFailedConstrain" +
+	"tsImpedingWaypointsIntermediateStopsIsolineCarOptionsIsolineEngineTypeIsolineThresholdsLegGeometryFo" +
+	"rmatMEDICAL_EMERGENCYPASS_SUBSCRIPTIONPEDESTRIAN_ACCESSRAILWAY_CROSSINGSRouteAllowOptionsRouteEmissi" +
+	"onTypeRouteFerryArrivalRouteFerrySummaryRouteNoticeImpactRouteRentalAgencyRouteTaxiModeListRouteToll" +
+	"RateListRouteTruckOptionsRouteWaypointListRouteZoneCategorySERVICE_CANCELLEDTECHNICAL_PROBLEMTimeThr" +
+	"esholdListTracePointIndexesTruckRoadTypeListUNKNOWN_OPERATIONAPPOINTMENT_TIMEAfterTravelStepsBestCas" +
+	"eDurationCONTINUE_HIGHWAYCarShuttleTrainsCo2EmissionClassDISABLED_VEHICLEDRIVING_DISTANCEFAST_CALCUL" +
+	"ATIONFromPolygonIndexHARMFUL_TO_WATERHIGH_SPEED_TRAINIsolineTruckTypeLANE_RESTRICTIONOriginalPositio" +
+	"nPolylineCorridorPolylineRingListROUNDABOUT_ENTERRouteLegGeometryRouteMatrixEntryRouteTaxiArrivalRou" +
+	"teTaxiSummaryRouteTollOptionsRouteTollSummaryRouteWebLinkListRoutingObjectiveSERVICE_DURATIONSERVICE" +
+	"_MODIFIEDSensitiveBooleanSensitiveIntegerTOPOLOGY_SEGMENTTRUCK_ROAD_TYPESTYPICAL_DURATIONTollTranspo" +
+	"ndersUSE_TRAFFIC_DATAAllTranspondersApplicableTimesAppointmentTimeBookingWebLinksConsumablePowerCoun" +
+	"tryCodeListDOCKING_STATIONDurationSecondsEXTENDED_ANNUALHazardousCargosINTERCITY_TRAINLanguageTagLis" +
+	"tMajorRoadLabelsMaxAlternativesNEXT_DEPARTURESNO_MATCH_ORIGINOnRoadThresholdPOLICE_ACTIVITYPolylineP" +
+	"olygonROAD_ATTRIBUTESROUNDABOUT_EXITROUNDABOUT_PASSRestrictedTimesRoundaboutAngleRouteCarOptionsRout" +
+	"eEngineTypeRouteFerryPlaceRouteNumberListRouteTaxiAgencyRoutingBoundarySCHEDULED_TIMESSERVICE_REDUCE" +
+	"DSeasonalClosureSensitiveDoubleSensitiveStringServiceDurationSnappedPositionTypicalDurationWeightKil" +
+	"ogramsAERIAL_TRAMWAYAvailableSeatsConvertedPriceDistanceMetersGeometryOffsetNextDeparturesPaymentMet" +
+	"hodsPowerKilowattsRoadAttributesRouteDirectionRouteMatrixRowRouteTruckTypeSCOOTER_ACCESSSHORTEST_ROU" +
+	"TESIDE_OF_STREETSTRAIGHT_TRUCKShortRouteNameToPolygonIndexTravelDurationTruckRoadTypesZoneCategories" +
+	"ArrivalChargeBUILT_UP_AREABestCaseSpeedDEMONSTRATIONDYNAMIC_SPEEDDepartureTimeDesiredChargeDriveDura" +
+	"tionENTER_HIGHWAYENVIRONMENTALExcludedModesFASTEST_ROUTELastCharacterLongRouteNameMaxKpraLengthMaxRe" +
+	"solutionPLANNED_EVENTPLUGIN_HYBRIDPricingBucketROUTE_NUMBERSRouteRoadTypeRouteTollListRouteZoneListR" +
+	"outesServiceSERVICE_ADDEDSnappedOriginTimeDependentTransferCountUNKNOWN_FIELDWaypointIndexACCESS_HOU" +
+	"RSACCESS_POINTAllVignettesAllowedModesAttributionsCANNOT_PARSEClusterIndexCountryCode3CurrencyCodeDI" +
+	"VIDED_ROADDestinationsENTIRE_ROUTEIntersectionMASS_TRANSITMaxTransfersPRIVATE_ROADPaymentSitesPlatfo" +
+	"rmNameROAD_CLOSURERelativeExitRestDurationRouteLegListRouteLegTypeRouteNumbersRouteSummaryStopDurati" +
+	"onTOLL_SYSTEMSTRUCK_ACCESSTURN_BY_TURNTrafficUsageTrailerCountTurnDurationTypicalSpeedWaitDurationWo" +
+	"rkDurationArrivalTimeAvoidUTurnsBoundingBoxCOMBUSTIBLECONSUMPTIONCREDIT_CARDConnectionsCurrentRoadDe" +
+	"scriptionGrossWeightIsolineListLIGHT_TRUCKLinearRingsMAINTENANCEMaxDistanceNO_SCHEDULEPARKING_LOTPRI" +
+	"VATE_BUSPerDurationPeriodCountRADIOACTIVEROAD_HAZARDSPEED_LIMITTRAVEL_CARDTollSystemsUNPROTECTEDANY_" +
+	"STREETAnchorTextCAR_ACCESSCASH_EXACTConfidenceDISCLAIMEREnabledForErrorCountExitNumberGeometriesINTE" +
+	"RMODALKEY_ACCESSLIGHT_RAILLineStringLocalPricePosition23RangeValueSTOP_MOVEDSeniorPassShortCycleSnap" +
+	"RadiusSystemNameVIDEO_TOLLWHEELCHAIRWaypointIdWheelchairAxleCountBANK_CARDCORROSIVECountriesDayOfWee" +
+	"kDepartNowDirtRoadsELEVATIONEXPLOSIVEFIRST_LEGFLAMMABLEINCIDENTSIncidentsLanguagesLongCycleMATCH_ANY" +
+	"MaxHeightMaxLengthMaxPointsMaxRadiusOccupancyRouteListShortNameStartTimeTextColorTimeOfDayTireCountT" +
+	"ollRoadsTripCountTurnAngleUnboundedUnlimitedVIOLATIONWEDNESDAYACCIDENTAIRPLANEBOOKINGSCRITICALDETOUR" +
+	"EDELECTRICEstimateHeadsignHexColorIMPERIALLAST_LEGMONORAILMOTORWAYMaxSpeedMaxWidthNO_ENTRYNO_ROUTENa" +
+	"meHintNextRoadREPLACEDRoadNameSATURDAYTHURSDAYVIGNETTEALLOWEDANDROIDCOUNTRYCURRENTDEBOARDDEFAULTDELA" +
+	"YEDEndTimeFerriesHOLIDAYHeadingINDOORSLIMITEDMINIBUSMINUTESMISSINGMessageNOTICESNO_EXITNoticesORGANI" +
+	"COriginsSUMMARYTRACTORTUESDAYTowardsTunnelsUseWithWEATHERARRIVEApiKeyBEFOREBRIDGECenterFRIDAYMEDIUMM" +
+	"ETRICMONDAYMONTHSMarginRENTALRegionSIMPLESTAIRSSTRIKESUBWAYSUNDAYSingleTARIFFTandemTriplememberAreas" +
+	"DelayGATESGROSSModelNAMESNORTHNamesOTHERQuintRURALRatesSETUPSHARPSOUTHSpansTitleTollsTotalURBANZONES" +
+	"ZonesEASTKEEPLEFTNONEQuadRAMPTAXIUnitWAITWESTGASHotHovIOSMinUrlWEB"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.georoutes", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 4932, Target: 0, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3663, Target: 1, Traits: 1, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6224, Target: 2, Traits: 2, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5107, Target: 3, Traits: 3, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8994, Target: 4, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 11799, Target: 5, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 7254, Target: 6, Traits: 6, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13466, Target: 2164, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13563, Target: 8, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8481, Target: 9, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1888, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12332, Target: 11, Traits: 8, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 2165, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 7521, Target: 13, Traits: 8, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13581, Target: 230, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12800, Target: 1850, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 11962, Target: 16, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 10309, Target: 17, Traits: 8, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12726, Target: 210, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12800, Target: 2166, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10696, Target: 20, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 11974, Target: 21, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10696, Target: 22, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 20, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11986, Target: 24, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 12892, Target: 25, Traits: 8, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13605, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13522, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13153, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13338, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13587, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13330, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13659, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7881, Target: 33, Traits: 8, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 11248, Target: 34, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 7275, Target: 35, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 34, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10726, Target: 37, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 8519, Target: 38, Traits: 8, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 7324, Target: 39, Traits: 5, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9551, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13635, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 13226, Target: 43, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4239, Target: 44, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 2166, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6270, Target: 46, Traits: 10, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13466, Target: 2164, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1603, Target: 48, Traits: 5, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12376, Target: 98, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7275, Target: 34, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12686, Target: 150, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9993, Target: 37, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 8595, Target: 53, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13848, Target: 1849, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13851, Target: 1849, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1603, Target: 56, Traits: 5, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4149, Target: 65, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 284, Target: 59, Traits: 5, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1603, Target: 59, Traits: 5, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12332, Target: 11, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10309, Target: 17, Traits: 9, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10209, Target: 208, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10301, Target: 224, Traits: 9, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10891, Target: 228, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1603, Target: 65, Traits: 5, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 59, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5554, Target: 67, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 56, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6293, Target: 69, Traits: 5, StrLen: 23, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13695, Target: 67, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10125, Target: 1849, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5506, Target: 1849, Traits: 9, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12910, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13410, Target: 1849, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11101, Target: 1849, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13099, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10589, Target: 1849, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11472, Target: 1867, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13536, Target: 1849, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12326, Target: 1849, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11486, Target: 84, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1635, Target: 82, Traits: 5, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1010, Target: 199, Traits: 5, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1635, Target: 84, Traits: 5, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 82, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9636, Target: 86, Traits: 5, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9660, Target: 105, Traits: 9, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2741, Target: 197, Traits: 9, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4982, Target: 91, Traits: 5, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10205, Target: 2166, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 284, Target: 95, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11444, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4982, Target: 95, Traits: 5, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12726, Target: 210, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10301, Target: 223, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7296, Target: 98, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 91, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5007, Target: 100, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6201, Target: 34, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4039, Target: 128, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 631, Target: 152, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9653, Target: 105, Traits: 8, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13202, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8557, Target: 2167, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11721, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5032, Target: 109, Traits: 5, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13018, Target: 2166, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11695, Target: 34, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3141, Target: 112, Traits: 8, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12343, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12874, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12928, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12946, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13845, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10221, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13494, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12530, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3141, Target: 124, Traits: 5, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 112, Traits: 9, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12420, Target: 126, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 48, Traits: 5, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6660, Target: 128, Traits: 5, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13298, Target: 1852, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10861, Target: 34, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12800, Target: 34, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4047, Target: 217, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3691, Target: 133, Traits: 5, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7821, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7861, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10189, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7921, Target: 137, Traits: 5, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6201, Target: 34, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4039, Target: 128, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 631, Target: 152, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7338, Target: 142, Traits: 5, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9660, Target: 105, Traits: 9, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2741, Target: 197, Traits: 9, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5578, Target: 147, Traits: 5, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10209, Target: 208, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10891, Target: 228, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5578, Target: 150, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 147, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4490, Target: 152, Traits: 5, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13543, Target: 1853, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9670, Target: 155, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 35, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 520, Target: 1861, Traits: 5, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7359, Target: 158, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4464, Target: 37, Traits: 9, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12245, Target: 1863, Traits: 5, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7380, Target: 161, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12856, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12250, Target: 1851, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5602, Target: 164, Traits: 5, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4915, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11374, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2978, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5602, Target: 169, Traits: 5, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 115, Target: 86, Traits: 5, StrLen: 3, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1175, Target: 142, Traits: 5, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1480, Target: 173, Traits: 5, StrLen: 5, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8614, Target: 173, Traits: 5, StrLen: 19, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12856, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9660, Target: 105, Traits: 9, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12409, Target: 2043, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10756, Target: 124, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7901, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7901, Target: 33, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11685, Target: 33, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11689, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2741, Target: 197, Traits: 9, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9089, Target: 2043, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13090, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1391, Target: 161, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3654, Target: 193, Traits: 5, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7758, Target: 1869, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7425, Target: 2043, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7425, Target: 2044, Traits: 5, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13277, Target: 33, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10253, Target: 193, Traits: 5, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12431, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11416, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13515, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4516, Target: 197, Traits: 8, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11656, Target: 2164, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8633, Target: 199, Traits: 5, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9050, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11617, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13346, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10786, Target: 203, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10786, Target: 204, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 203, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12442, Target: 206, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 230, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12442, Target: 208, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 206, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12726, Target: 210, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 230, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8652, Target: 212, Traits: 5, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10786, Target: 203, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5880, Target: 1852, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8652, Target: 215, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 212, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4039, Target: 217, Traits: 5, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12991, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4194, Target: 2167, Traits: 5, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3124, Target: 220, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13599, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13234, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10301, Target: 223, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10301, Target: 224, Traits: 8, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10301, Target: 223, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12800, Target: 2166, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10317, Target: 227, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10317, Target: 228, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 227, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10293, Target: 230, Traits: 8, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 2165, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12746, Target: 232, Traits: 8, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 2165, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 11304, Target: 234, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 2513, Target: 235, Traits: 8, StrLen: 26, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12343, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12874, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12928, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12946, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13845, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10221, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13494, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12530, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2513, Target: 247, Traits: 5, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 235, Traits: 9, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9194, Target: 249, Traits: 5, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5303, Target: 253, Traits: 9, StrLen: 4, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13775, Target: 1852, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10010, Target: 277, Traits: 9, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9194, Target: 253, Traits: 8, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4055, Target: 2167, Traits: 5, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8421, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1022, Target: 2167, Traits: 5, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6058, Target: 2167, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4083, Target: 2167, Traits: 5, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4111, Target: 2167, Traits: 5, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4880, Target: 2167, Traits: 5, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9212, Target: 261, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 249, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6339, Target: 263, Traits: 5, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12726, Target: 210, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10301, Target: 223, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3170, Target: 266, Traits: 5, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12636, Target: 1850, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10285, Target: 230, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11161, Target: 230, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3170, Target: 270, Traits: 5, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 266, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4221, Target: 272, Traits: 5, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3903, Target: 1856, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4437, Target: 1860, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4221, Target: 277, Traits: 8, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 2166, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6704, Target: 279, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 272, Traits: 5, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6726, Target: 281, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12250, Target: 1851, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5132, Target: 283, Traits: 5, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4915, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11374, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2978, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5132, Target: 288, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1480, Target: 290, Traits: 5, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8021, Target: 290, Traits: 5, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12409, Target: 2043, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10756, Target: 247, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7901, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11689, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1391, Target: 281, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7758, Target: 1869, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13277, Target: 33, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10966, Target: 298, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 210, Target: 299, Traits: 5, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2685, Target: 576, Traits: 5, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10801, Target: 611, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1788, Target: 1149, Traits: 5, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1987, Target: 303, Traits: 8, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12826, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1987, Target: 305, Traits: 5, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 303, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 764, Target: 307, Traits: 5, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1294, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13438, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1292, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10044, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 764, Target: 312, Traits: 5, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12846, Target: 307, Traits: 5, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6362, Target: 314, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 769, Target: 312, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9772, Target: 316, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13848, Target: 1849, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13851, Target: 1849, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8041, Target: 319, Traits: 5, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8066, Target: 324, Traits: 9, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7149, Target: 1819, Traits: 5, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8041, Target: 322, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 319, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8061, Target: 324, Traits: 8, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12646, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13671, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2543, Target: 327, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4149, Target: 336, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 284, Target: 330, Traits: 5, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2543, Target: 330, Traits: 5, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10309, Target: 17, Traits: 9, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12332, Target: 11, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10209, Target: 208, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10301, Target: 224, Traits: 9, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10891, Target: 228, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2543, Target: 336, Traits: 5, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 330, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6748, Target: 338, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 327, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7464, Target: 340, Traits: 5, StrLen: 21, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13695, Target: 338, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10125, Target: 1849, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5506, Target: 1849, Traits: 9, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12910, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13410, Target: 1849, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11101, Target: 1849, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13099, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10589, Target: 1849, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11472, Target: 1867, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13536, Target: 1849, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12326, Target: 1849, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11486, Target: 355, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2573, Target: 353, Traits: 5, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1010, Target: 1840, Traits: 9, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2573, Target: 355, Traits: 5, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 353, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10981, Target: 357, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9660, Target: 395, Traits: 9, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2741, Target: 1652, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6770, Target: 362, Traits: 5, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11500, Target: 38, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10681, Target: 234, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 11578, Target: 38, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2018, Target: 366, Traits: 5, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5650, Target: 371, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6385, Target: 373, Traits: 5, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6201, Target: 34, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12321, Target: 1849, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4039, Target: 613, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 631, Target: 1048, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12190, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11332, Target: 380, Traits: 8, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13805, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13725, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13765, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13841, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9230, Target: 385, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2060, Target: 390, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2049, Target: 387, Traits: 5, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11591, Target: 37, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12130, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2049, Target: 390, Traits: 5, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 387, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9789, Target: 392, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10141, Target: 1852, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10996, Target: 395, Traits: 8, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13202, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8557, Target: 2167, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11721, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3719, Target: 399, Traits: 5, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7485, Target: 404, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12883, Target: 22, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8081, Target: 406, Traits: 5, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12118, Target: 1851, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3199, Target: 412, Traits: 5, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 418, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3199, Target: 416, Traits: 5, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 412, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3228, Target: 418, Traits: 8, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13382, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9806, Target: 420, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 463, Traits: 5, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2603, Target: 423, Traits: 5, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 429, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2603, Target: 427, Traits: 5, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 423, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2633, Target: 429, Traits: 8, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13384, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8690, Target: 431, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 463, Traits: 5, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8101, Target: 434, Traits: 5, StrLen: 20, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10077, Target: 416, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6851, Target: 420, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9517, Target: 427, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3534, Target: 431, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13487, Target: 458, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8001, Target: 792, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11435, Target: 1852, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13770, Target: 475, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1788, Target: 477, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9523, Target: 488, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8121, Target: 445, Traits: 5, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5303, Target: 448, Traits: 5, StrLen: 4, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9851, Target: 770, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8121, Target: 448, Traits: 5, StrLen: 20, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3083, Target: 2167, Traits: 5, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12475, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8461, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5432, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2405, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 2167, Traits: 5, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8441, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10, Target: 2167, Traits: 5, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8141, Target: 458, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 445, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5157, Target: 460, Traits: 5, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11011, Target: 463, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10285, Target: 232, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10293, Target: 232, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11877, Target: 1851, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9248, Target: 468, Traits: 5, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10696, Target: 21, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13730, Target: 215, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13629, Target: 1852, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9248, Target: 475, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 468, Traits: 5, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9823, Target: 477, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 460, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1778, Target: 480, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4248, Target: 480, Traits: 5, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5674, Target: 482, Traits: 5, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 490, Traits: 9, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5674, Target: 488, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 482, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5698, Target: 490, Traits: 8, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10836, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10109, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13557, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4275, Target: 494, Traits: 8, StrLen: 23, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12343, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12874, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12928, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12946, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13845, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10221, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13494, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12530, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4275, Target: 506, Traits: 5, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 494, Traits: 9, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2663, Target: 508, Traits: 8, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12937, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13242, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12022, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13817, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 513, Traits: 5, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 508, Traits: 9, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6792, Target: 515, Traits: 5, StrLen: 22, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6178, Target: 305, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12058, Target: 2166, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 659, Target: 523, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2085, Target: 526, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3436, Target: 530, Traits: 5, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 215, Target: 534, Traits: 5, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2333, Target: 538, Traits: 5, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1699, Target: 523, Traits: 5, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12464, Target: 34, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3903, Target: 1856, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3747, Target: 526, Traits: 5, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11926, Target: 942, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12656, Target: 513, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11630, Target: 942, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4542, Target: 530, Traits: 5, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11926, Target: 1193, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12656, Target: 513, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11630, Target: 1193, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3257, Target: 534, Traits: 5, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11926, Target: 1452, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12656, Target: 513, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11630, Target: 1452, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3286, Target: 538, Traits: 5, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11926, Target: 1657, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12656, Target: 513, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11630, Target: 1657, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8161, Target: 542, Traits: 5, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3315, Target: 547, Traits: 5, StrLen: 8, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8106, Target: 434, Traits: 5, StrLen: 15, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 284, Target: 573, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10786, Target: 203, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5262, Target: 808, Traits: 5, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 969, Target: 578, Traits: 9, StrLen: 10, Count: 20, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 120, Target: 599, Traits: 9, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7083, Target: 1638, Traits: 5, StrLen: 17, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7595, Target: 928, Traits: 5, StrLen: 16, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8771, Target: 1178, Traits: 5, StrLen: 14, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6973, Target: 1418, Traits: 5, StrLen: 17, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3315, Target: 558, Traits: 8, StrLen: 25, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12919, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12955, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6682, Target: 2167, Traits: 5, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13508, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1269, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6106, Target: 2167, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10557, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10573, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13795, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13178, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2483, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10831, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3315, Target: 571, Traits: 5, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 558, Traits: 9, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10349, Target: 573, Traits: 5, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12726, Target: 210, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10301, Target: 223, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12142, Target: 576, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 547, Traits: 5, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9266, Target: 578, Traits: 8, StrLen: 18, Count: 20, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5452, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4915, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11374, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2978, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9534, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11206, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13170, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8569, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9500, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10776, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9568, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10237, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10771, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8576, Target: 2167, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12716, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13250, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12497, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8581, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13653, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12154, Target: 599, Traits: 8, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5452, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4915, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13623, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13829, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3011, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13045, Target: 606, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 299, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6408, Target: 608, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13322, Target: 212, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11026, Target: 773, Traits: 5, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6408, Target: 611, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 608, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8181, Target: 613, Traits: 5, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13298, Target: 1852, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10861, Target: 34, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12800, Target: 34, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4047, Target: 217, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 986, Target: 618, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 717, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6431, Target: 620, Traits: 8, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13848, Target: 1849, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13851, Target: 1849, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7506, Target: 623, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13617, Target: 34, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13027, Target: 34, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1731, Target: 626, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 284, Target: 628, Traits: 5, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1731, Target: 628, Traits: 5, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12332, Target: 11, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10209, Target: 208, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10891, Target: 228, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3775, Target: 632, Traits: 5, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 626, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4302, Target: 634, Traits: 5, StrLen: 27, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13695, Target: 632, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10125, Target: 1849, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5506, Target: 1849, Traits: 9, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12910, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13410, Target: 1849, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13099, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10589, Target: 1849, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11472, Target: 1867, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13536, Target: 1849, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12326, Target: 1849, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11486, Target: 648, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 986, Target: 646, Traits: 5, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1010, Target: 763, Traits: 9, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 986, Target: 648, Traits: 5, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 646, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4329, Target: 650, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 284, Target: 653, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13126, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4329, Target: 653, Traits: 5, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7517, Target: 623, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7521, Target: 13, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12332, Target: 11, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10209, Target: 208, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7527, Target: 658, Traits: 5, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2741, Target: 761, Traits: 9, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3344, Target: 662, Traits: 5, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 79, Target: 667, Traits: 5, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4568, Target: 665, Traits: 5, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 662, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3344, Target: 667, Traits: 5, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6201, Target: 34, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4039, Target: 702, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 631, Target: 723, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10365, Target: 672, Traits: 5, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 8212, Target: 676, Traits: 5, StrLen: 5, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8201, Target: 676, Traits: 5, StrLen: 20, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7941, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7941, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10846, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13290, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5082, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5082, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7961, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13144, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4356, Target: 686, Traits: 5, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12883, Target: 22, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1405, Target: 688, Traits: 8, StrLen: 29, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12343, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12874, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12928, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12946, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13845, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10221, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13494, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12530, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1405, Target: 700, Traits: 5, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 688, Traits: 9, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4594, Target: 702, Traits: 5, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13298, Target: 1852, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10861, Target: 34, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12800, Target: 34, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4047, Target: 217, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5722, Target: 707, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 79, Target: 712, Traits: 5, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7548, Target: 710, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 707, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5722, Target: 712, Traits: 5, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6201, Target: 34, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4039, Target: 702, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 631, Target: 723, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11346, Target: 717, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 672, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5182, Target: 719, Traits: 5, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2741, Target: 761, Traits: 9, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2693, Target: 723, Traits: 5, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13543, Target: 1853, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5207, Target: 726, Traits: 5, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4464, Target: 37, Traits: 9, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12245, Target: 1863, Traits: 5, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5232, Target: 729, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12250, Target: 1851, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3803, Target: 731, Traits: 5, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4915, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11374, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2978, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3803, Target: 736, Traits: 5, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 115, Target: 658, Traits: 5, StrLen: 3, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1175, Target: 719, Traits: 5, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1480, Target: 740, Traits: 5, StrLen: 5, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6454, Target: 740, Traits: 5, StrLen: 23, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12856, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12409, Target: 2043, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10756, Target: 700, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7901, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11685, Target: 33, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11689, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2741, Target: 761, Traits: 9, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9089, Target: 2043, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1391, Target: 729, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3654, Target: 757, Traits: 9, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7758, Target: 1869, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7425, Target: 2043, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7425, Target: 2044, Traits: 5, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13277, Target: 33, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 8221, Target: 757, Traits: 8, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12431, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11416, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13515, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2723, Target: 761, Traits: 8, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11656, Target: 2164, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6477, Target: 763, Traits: 8, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9050, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11617, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13346, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6814, Target: 767, Traits: 5, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13857, Target: 2166, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7422, Target: 2166, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9840, Target: 770, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 406, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13356, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11026, Target: 773, Traits: 5, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6959, Target: 380, Traits: 9, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10786, Target: 203, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5880, Target: 1852, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11026, Target: 777, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 773, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9284, Target: 779, Traits: 5, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6201, Target: 34, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12321, Target: 1849, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4039, Target: 613, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 631, Target: 1048, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7569, Target: 785, Traits: 5, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10285, Target: 232, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10293, Target: 232, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11877, Target: 1851, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3831, Target: 789, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5785, Target: 785, Traits: 5, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3831, Target: 792, Traits: 5, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 789, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1201, Target: 794, Traits: 5, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 800, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1201, Target: 798, Traits: 5, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 794, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1235, Target: 800, Traits: 8, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13837, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6836, Target: 802, Traits: 5, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 834, Traits: 5, StrLen: 5, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5746, Target: 805, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 834, Traits: 5, StrLen: 5, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5257, Target: 808, Traits: 5, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10077, Target: 798, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6851, Target: 802, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3534, Target: 805, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13487, Target: 827, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8001, Target: 792, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13770, Target: 864, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1788, Target: 866, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9523, Target: 887, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5282, Target: 817, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5303, Target: 820, Traits: 5, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9851, Target: 770, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5282, Target: 820, Traits: 5, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3083, Target: 2167, Traits: 5, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6130, Target: 2167, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7779, Target: 2167, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4906, Target: 2167, Traits: 5, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8441, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5307, Target: 827, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 817, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6858, Target: 829, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3903, Target: 1856, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2753, Target: 831, Traits: 5, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5770, Target: 834, Traits: 5, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6367, Target: 314, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10285, Target: 232, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10293, Target: 232, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 631, Target: 1045, Traits: 9, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8752, Target: 1141, Traits: 5, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 843, Traits: 9, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11877, Target: 1851, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5770, Target: 843, Traits: 8, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11902, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10711, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12486, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5068, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6500, Target: 848, Traits: 5, StrLen: 19, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10093, Target: 37, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10696, Target: 21, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3896, Target: 1091, Traits: 5, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5530, Target: 1851, Traits: 9, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12964, Target: 44, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13730, Target: 215, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 659, Target: 1106, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13629, Target: 1852, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11318, Target: 1124, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12166, Target: 777, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4681, Target: 1132, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11176, Target: 37, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 6500, Target: 864, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 848, Traits: 5, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6880, Target: 866, Traits: 5, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 831, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1778, Target: 869, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1763, Target: 869, Traits: 5, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3373, Target: 871, Traits: 5, StrLen: 25, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5655, Target: 371, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12387, Target: 1016, Traits: 5, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12676, Target: 215, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8166, Target: 542, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13306, Target: 1016, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2178, Target: 1025, Traits: 5, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2848, Target: 1030, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2878, Target: 1035, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6907, Target: 1051, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7680, Target: 1588, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 889, Traits: 9, StrLen: 4, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3373, Target: 887, Traits: 5, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 871, Traits: 5, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3402, Target: 889, Traits: 8, StrLen: 29, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13557, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10109, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10836, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13809, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10333, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10921, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10936, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 147, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8241, Target: 898, Traits: 5, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2783, Target: 903, Traits: 5, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 909, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2783, Target: 907, Traits: 5, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 903, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2813, Target: 909, Traits: 8, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12486, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9857, Target: 911, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13860, Target: 1852, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9302, Target: 914, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 947, Traits: 5, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2080, Target: 917, Traits: 5, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 923, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2080, Target: 921, Traits: 5, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 917, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2111, Target: 923, Traits: 8, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13755, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8261, Target: 925, Traits: 5, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 947, Traits: 5, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7590, Target: 928, Traits: 5, StrLen: 21, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10077, Target: 907, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9386, Target: 911, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6851, Target: 914, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11938, Target: 322, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9517, Target: 921, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10666, Target: 1828, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3534, Target: 925, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1788, Target: 960, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1903, Target: 963, Traits: 5, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9523, Target: 990, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8709, Target: 939, Traits: 8, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13240, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8709, Target: 942, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 939, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4620, Target: 944, Traits: 5, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 8281, Target: 947, Traits: 5, StrLen: 16, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6367, Target: 314, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10285, Target: 232, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10293, Target: 232, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8752, Target: 1141, Traits: 5, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 955, Traits: 9, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11877, Target: 1851, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8281, Target: 955, Traits: 8, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11902, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10711, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12486, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5068, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9320, Target: 960, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 944, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1778, Target: 973, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2142, Target: 963, Traits: 5, StrLen: 31, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11220, Target: 1851, Traits: 9, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1010, Target: 1852, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13076, Target: 1852, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9660, Target: 395, Traits: 9, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2741, Target: 1852, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 975, Target: 939, Traits: 9, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13715, Target: 1852, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13072, Target: 1852, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3859, Target: 973, Traits: 5, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5332, Target: 975, Traits: 5, StrLen: 21, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5655, Target: 371, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2858, Target: 406, Traits: 5, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8166, Target: 542, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8246, Target: 898, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2178, Target: 1025, Traits: 5, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2848, Target: 1030, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2878, Target: 1035, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7680, Target: 1588, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 992, Traits: 9, StrLen: 4, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7679, Target: 1593, Traits: 5, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5332, Target: 990, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 975, Traits: 5, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5357, Target: 992, Traits: 8, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13557, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10109, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10836, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10932, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13809, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13825, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10333, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10921, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10936, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 147, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7247, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6523, Target: 1004, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5303, Target: 1007, Traits: 5, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9851, Target: 770, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6523, Target: 1007, Traits: 5, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6316, Target: 2167, Traits: 5, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 801, Target: 2167, Traits: 5, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6082, Target: 2167, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5407, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5057, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6546, Target: 1014, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1004, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11760, Target: 1016, Traits: 5, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13322, Target: 215, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11026, Target: 777, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13529, Target: 215, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 120, Target: 1021, Traits: 9, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11760, Target: 1021, Traits: 8, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 406, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13745, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13790, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2173, Target: 1025, Traits: 5, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2843, Target: 1030, Traits: 5, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12118, Target: 1851, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10966, Target: 298, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2873, Target: 1035, Traits: 5, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8728, Target: 1040, Traits: 5, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9660, Target: 395, Traits: 9, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2741, Target: 1652, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5794, Target: 1045, Traits: 8, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13813, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9176, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5794, Target: 1048, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13543, Target: 1853, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6902, Target: 1051, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10810, Target: 1056, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6902, Target: 1053, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11026, Target: 773, Traits: 5, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12612, Target: 212, Traits: 5, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6902, Target: 1056, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1053, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2903, Target: 1058, Traits: 5, StrLen: 26, Count: 24, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9032, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12616, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13368, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1050, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9042, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11552, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4957, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13705, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12955, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13720, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13473, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9738, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9755, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8581, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10906, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11747, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11374, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12552, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12202, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12214, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10557, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10573, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13795, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12354, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2903, Target: 1083, Traits: 5, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1058, Traits: 5, StrLen: 6, Count: 24, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2204, Target: 1085, Traits: 8, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13354, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9104, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 358, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2204, Target: 1089, Traits: 5, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1085, Traits: 9, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3887, Target: 1091, Traits: 5, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11526, Target: 1856, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12262, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12274, Target: 1856, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 6924, Target: 1095, Traits: 8, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6624, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12706, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8671, Target: 2167, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 650, Target: 1099, Traits: 8, StrLen: 34, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13354, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13431, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9104, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12486, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13641, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 358, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 650, Target: 1106, Traits: 5, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1099, Traits: 9, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1438, Target: 1108, Traits: 8, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12587, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12585, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4646, Target: 1111, Traits: 8, StrLen: 22, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13575, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11513, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 388, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6145, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11998, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13258, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12070, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13825, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9176, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10333, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7794, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9482, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4646, Target: 1124, Traits: 5, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1111, Traits: 9, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1166, Target: 1126, Traits: 8, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13354, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9104, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 358, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1166, Target: 1130, Traits: 5, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1126, Traits: 9, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4672, Target: 1132, Traits: 5, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13135, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1471, Target: 1135, Traits: 8, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13354, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9104, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 358, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1471, Target: 1139, Traits: 5, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1135, Traits: 9, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8747, Target: 1141, Traits: 5, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 769, Target: 312, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12094, Target: 1852, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13054, Target: 1852, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6946, Target: 1145, Traits: 8, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13813, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9176, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11416, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12178, Target: 1149, Traits: 5, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13780, Target: 1332, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3915, Target: 1153, Traits: 5, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1159, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3915, Target: 1157, Traits: 5, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1153, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3943, Target: 1159, Traits: 8, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12486, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11041, Target: 1161, Traits: 5, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13860, Target: 1852, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10381, Target: 1164, Traits: 5, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 1206, Traits: 5, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3431, Target: 1167, Traits: 5, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1173, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3431, Target: 1171, Traits: 5, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1167, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3460, Target: 1173, Traits: 8, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13837, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9338, Target: 1175, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 1206, Traits: 5, StrLen: 5, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8766, Target: 1178, Traits: 5, StrLen: 19, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10077, Target: 1157, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9386, Target: 1161, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6851, Target: 1164, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11938, Target: 322, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9517, Target: 1171, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10666, Target: 1828, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3534, Target: 1175, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13487, Target: 1201, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1788, Target: 1217, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1903, Target: 1220, Traits: 5, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9523, Target: 1247, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9874, Target: 1190, Traits: 8, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13240, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9874, Target: 1193, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1190, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8785, Target: 1195, Traits: 5, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5303, Target: 1198, Traits: 5, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9851, Target: 770, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8785, Target: 1198, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3083, Target: 2167, Traits: 5, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8804, Target: 1201, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1195, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5818, Target: 1203, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9356, Target: 1206, Traits: 5, StrLen: 14, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6367, Target: 314, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10285, Target: 232, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10293, Target: 232, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8752, Target: 1141, Traits: 5, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 1214, Traits: 9, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11877, Target: 1851, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9356, Target: 1214, Traits: 8, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11902, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5068, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10397, Target: 1217, Traits: 5, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 1203, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1778, Target: 1230, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3489, Target: 1220, Traits: 5, StrLen: 29, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11220, Target: 1851, Traits: 9, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1010, Target: 1852, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13076, Target: 1852, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9660, Target: 395, Traits: 9, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2741, Target: 1852, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 975, Target: 1190, Traits: 9, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13715, Target: 1852, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13072, Target: 1852, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4698, Target: 1230, Traits: 5, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 6569, Target: 1232, Traits: 5, StrLen: 19, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5655, Target: 371, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2858, Target: 406, Traits: 5, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8166, Target: 542, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8246, Target: 898, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2178, Target: 1025, Traits: 5, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2848, Target: 1030, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2878, Target: 1035, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7680, Target: 1588, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 1249, Traits: 9, StrLen: 4, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7679, Target: 1593, Traits: 5, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6569, Target: 1247, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1232, Traits: 5, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6592, Target: 1249, Traits: 8, StrLen: 23, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13557, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10109, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10836, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10932, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13809, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13825, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10333, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10921, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10936, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 147, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7247, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2235, Target: 1261, Traits: 5, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10696, Target: 21, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12082, Target: 1303, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13750, Target: 1330, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12578, Target: 44, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11773, Target: 1266, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1261, Traits: 5, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10413, Target: 1268, Traits: 5, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10621, Target: 1849, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11914, Target: 1849, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11986, Target: 24, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9794, Target: 392, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5899, Target: 1338, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2235, Target: 1274, Traits: 5, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9068, Target: 1849, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12776, Target: 1849, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11851, Target: 1851, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13108, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2248, Target: 1280, Traits: 5, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2235, Target: 1280, Traits: 5, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2256, Target: 1283, Traits: 9, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12519, Target: 1851, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2235, Target: 1283, Traits: 8, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10750, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13662, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10741, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13452, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13611, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4724, Target: 1289, Traits: 8, StrLen: 22, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12865, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12626, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12626, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12365, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9721, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12563, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2441, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12816, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4724, Target: 1298, Traits: 5, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1289, Traits: 9, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5842, Target: 1300, Traits: 5, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 2164, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10293, Target: 232, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5842, Target: 1303, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1300, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5866, Target: 1305, Traits: 5, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11986, Target: 24, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13210, Target: 1849, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12508, Target: 37, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5885, Target: 1849, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12756, Target: 1318, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5880, Target: 1850, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 7611, Target: 1312, Traits: 5, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11986, Target: 24, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13210, Target: 1849, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5885, Target: 1849, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12756, Target: 1318, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5880, Target: 1850, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 5866, Target: 1318, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13857, Target: 1850, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 7422, Target: 1850, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9891, Target: 1321, Traits: 5, StrLen: 13, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10636, Target: 1852, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11234, Target: 1305, Traits: 5, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12844, Target: 1852, Traits: 9, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12736, Target: 1305, Traits: 5, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2244, Target: 1274, Traits: 5, StrLen: 4, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11290, Target: 1298, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10593, Target: 1541, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9891, Target: 1330, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1321, Traits: 5, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10429, Target: 1332, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13785, Target: 1312, Traits: 5, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8823, Target: 1334, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8823, Target: 1336, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1334, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5890, Target: 1338, Traits: 8, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13445, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8842, Target: 1340, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4464, Target: 37, Traits: 9, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12245, Target: 1863, Traits: 5, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8861, Target: 1343, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12856, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12250, Target: 1851, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2266, Target: 1346, Traits: 5, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1352, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2266, Target: 1350, Traits: 5, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1346, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2297, Target: 1352, Traits: 8, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13382, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9374, Target: 1354, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13860, Target: 1852, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8880, Target: 1357, Traits: 5, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13700, Target: 37, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5785, Target: 1492, Traits: 5, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7050, Target: 1534, Traits: 9, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1795, Target: 1362, Traits: 5, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1368, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1795, Target: 1366, Traits: 5, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1362, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1827, Target: 1368, Traits: 8, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13384, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7632, Target: 1370, Traits: 5, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13700, Target: 37, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5785, Target: 1492, Traits: 5, StrLen: 5, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7050, Target: 1534, Traits: 9, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4750, Target: 1375, Traits: 5, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12398, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4770, Target: 1382, Traits: 9, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13403, Target: 1860, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13063, Target: 1860, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1393, Traits: 9, StrLen: 4, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13860, Target: 1852, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4750, Target: 1382, Traits: 8, StrLen: 26, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13396, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13194, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11812, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9959, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10493, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11086, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12766, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5914, Target: 1391, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1375, Traits: 5, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5938, Target: 1393, Traits: 8, StrLen: 24, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13162, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9488, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11539, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13417, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12453, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9704, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10876, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13647, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9976, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13550, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 210, Target: 1405, Traits: 5, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6191, Target: 1414, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3534, Target: 1370, Traits: 5, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1903, Target: 1513, Traits: 5, StrLen: 9, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 210, Target: 1411, Traits: 8, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13282, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13480, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 210, Target: 1414, Traits: 5, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1411, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1859, Target: 1416, Traits: 5, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1405, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6968, Target: 1418, Traits: 5, StrLen: 22, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10077, Target: 1350, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9386, Target: 1354, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6851, Target: 1357, Traits: 5, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11938, Target: 322, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9517, Target: 1366, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10666, Target: 1828, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3534, Target: 1370, Traits: 5, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12964, Target: 1391, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9619, Target: 1416, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11276, Target: 1460, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13487, Target: 1478, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8001, Target: 792, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13770, Target: 1508, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1788, Target: 1510, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1903, Target: 1513, Traits: 5, StrLen: 9, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9523, Target: 1530, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8301, Target: 1435, Traits: 8, StrLen: 16, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11206, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13170, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13240, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8569, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9500, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10776, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5452, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9568, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10237, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10771, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8576, Target: 2167, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12716, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13250, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12497, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8581, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13653, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8301, Target: 1452, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1435, Traits: 9, StrLen: 6, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3518, Target: 1454, Traits: 5, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13700, Target: 37, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12094, Target: 1852, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7050, Target: 1534, Traits: 9, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1903, Target: 1513, Traits: 5, StrLen: 9, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3518, Target: 1460, Traits: 5, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1454, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6990, Target: 1462, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5303, Target: 1465, Traits: 5, StrLen: 4, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9851, Target: 770, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6990, Target: 1465, Traits: 5, StrLen: 22, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3083, Target: 2167, Traits: 5, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2483, Target: 2167, Traits: 5, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12475, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 2167, Traits: 5, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11071, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2405, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8461, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5432, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2993, Target: 2167, Traits: 5, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10, Target: 2167, Traits: 5, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8441, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7012, Target: 1478, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1462, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8899, Target: 1480, Traits: 5, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6178, Target: 305, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11926, Target: 1452, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11630, Target: 1452, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12058, Target: 2166, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 659, Target: 1489, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4383, Target: 1486, Traits: 5, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3547, Target: 1489, Traits: 5, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12464, Target: 34, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3903, Target: 1856, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 7653, Target: 1492, Traits: 5, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10285, Target: 232, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10293, Target: 232, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8752, Target: 1141, Traits: 5, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 1499, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11877, Target: 1851, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7653, Target: 1499, Traits: 8, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5068, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8321, Target: 1501, Traits: 5, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10696, Target: 21, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13730, Target: 215, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13629, Target: 1852, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8321, Target: 1508, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1501, Traits: 5, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8918, Target: 1510, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 1486, Traits: 5, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1778, Target: 1522, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1891, Target: 1513, Traits: 5, StrLen: 32, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 769, Target: 312, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13076, Target: 43, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13218, Target: 1852, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11669, Target: 1852, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 975, Target: 1435, Traits: 9, StrLen: 4, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11435, Target: 1852, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11430, Target: 1852, Traits: 9, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13072, Target: 43, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3576, Target: 1522, Traits: 5, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4776, Target: 1524, Traits: 5, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1532, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4776, Target: 1530, Traits: 5, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1524, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4802, Target: 1532, Traits: 8, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10836, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7034, Target: 1534, Traits: 8, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11820, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9967, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13314, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11071, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8341, Target: 1539, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12806, Target: 1852, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8341, Target: 1541, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1539, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7056, Target: 1543, Traits: 5, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4915, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11374, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2978, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12696, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3011, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7056, Target: 1550, Traits: 5, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 115, Target: 357, Traits: 5, StrLen: 3, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 659, Target: 829, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1175, Target: 1040, Traits: 5, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1480, Target: 1560, Traits: 5, StrLen: 5, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1704, Target: 515, Traits: 5, StrLen: 10, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 215, Target: 1480, Traits: 5, StrLen: 7, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8937, Target: 1557, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13389, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12226, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9908, Target: 1560, Traits: 5, StrLen: 17, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12856, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9660, Target: 395, Traits: 9, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12409, Target: 2043, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10756, Target: 506, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7901, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7901, Target: 33, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11685, Target: 33, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11689, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2741, Target: 1652, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13266, Target: 1856, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13036, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9089, Target: 2043, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13090, Target: 1851, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1391, Target: 1343, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3654, Target: 1580, Traits: 9, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7758, Target: 1869, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7425, Target: 2043, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7425, Target: 2044, Traits: 5, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13277, Target: 33, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11360, Target: 1580, Traits: 8, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12431, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11416, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13515, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9392, Target: 1584, Traits: 8, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13760, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12715, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10573, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8361, Target: 1588, Traits: 5, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7674, Target: 1593, Traits: 5, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12034, Target: 215, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6951, Target: 1145, Traits: 9, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9397, Target: 1584, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2328, Target: 1598, Traits: 5, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6775, Target: 362, Traits: 5, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1605, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2328, Target: 1603, Traits: 5, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1598, Traits: 5, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2359, Target: 1605, Traits: 8, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12486, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8956, Target: 1607, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 1704, Traits: 5, StrLen: 5, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7695, Target: 1610, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5785, Target: 1704, Traits: 5, StrLen: 5, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 1860, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3971, Target: 1613, Traits: 5, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12398, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13403, Target: 1860, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3991, Target: 1621, Traits: 9, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13063, Target: 1860, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 120, Target: 1626, Traits: 9, StrLen: 4, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5962, Target: 1619, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1613, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3971, Target: 1621, Traits: 8, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13186, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 406, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13593, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13356, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5986, Target: 1626, Traits: 8, StrLen: 24, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13162, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9050, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9488, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10157, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10269, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12046, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11708, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12106, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12541, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13550, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7078, Target: 1638, Traits: 5, StrLen: 22, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10077, Target: 1603, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6851, Target: 1607, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3534, Target: 1610, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12964, Target: 1619, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13487, Target: 1697, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8001, Target: 792, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13770, Target: 1742, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1788, Target: 1744, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13780, Target: 1266, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12574, Target: 1336, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9523, Target: 1772, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11472, Target: 1867, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13800, Target: 1844, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6010, Target: 1652, Traits: 5, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11656, Target: 1852, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8381, Target: 1654, Traits: 8, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13240, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8381, Target: 1657, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1654, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3999, Target: 1659, Traits: 5, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5303, Target: 1663, Traits: 5, StrLen: 4, Count: 28, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 794, Target: 1695, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9851, Target: 770, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7100, Target: 1663, Traits: 5, StrLen: 22, Count: 28, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3083, Target: 2167, Traits: 5, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 333, Target: 2167, Traits: 5, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1667, Target: 2167, Traits: 5, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 128, Target: 2167, Traits: 5, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 2167, Traits: 5, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 169, Target: 2167, Traits: 5, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2405, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1269, Target: 2167, Traits: 5, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7210, Target: 2167, Traits: 5, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2436, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 373, Target: 2167, Traits: 5, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2933, Target: 2167, Traits: 5, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6130, Target: 2167, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2390, Target: 2167, Traits: 5, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 343, Target: 2167, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2421, Target: 2167, Traits: 5, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2963, Target: 2167, Traits: 5, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7779, Target: 2167, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7232, Target: 2167, Traits: 5, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7800, Target: 2167, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1677, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6615, Target: 2167, Traits: 5, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6154, Target: 2167, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 138, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10, Target: 2167, Traits: 5, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 179, Target: 2167, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 801, Target: 2167, Traits: 5, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3999, Target: 1692, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13775, Target: 1852, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6039, Target: 1788, Traits: 5, StrLen: 19, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3999, Target: 1695, Traits: 5, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1692, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7122, Target: 1697, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1659, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4410, Target: 1699, Traits: 5, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10093, Target: 37, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11176, Target: 37, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7716, Target: 1704, Traits: 5, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10285, Target: 232, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10293, Target: 232, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 631, Target: 1045, Traits: 9, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11877, Target: 1851, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6367, Target: 314, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8752, Target: 1141, Traits: 5, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 1713, Traits: 9, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7716, Target: 1713, Traits: 8, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11902, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10711, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12486, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5068, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8401, Target: 1718, Traits: 5, StrLen: 16, Count: 23, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10093, Target: 37, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2213, Target: 1089, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10696, Target: 21, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3896, Target: 1091, Traits: 5, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5530, Target: 1851, Traits: 9, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6933, Target: 1095, Traits: 9, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12964, Target: 44, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13730, Target: 215, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13487, Target: 44, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1447, Target: 1108, Traits: 9, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13629, Target: 1852, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11318, Target: 1124, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12166, Target: 777, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1175, Target: 1130, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4681, Target: 1132, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12574, Target: 44, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1480, Target: 1139, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11472, Target: 44, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11176, Target: 37, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13800, Target: 44, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8401, Target: 1742, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1718, Traits: 5, StrLen: 6, Count: 23, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8975, Target: 1744, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 1699, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1778, Target: 1747, Traits: 5, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3605, Target: 1747, Traits: 5, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10093, Target: 37, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11176, Target: 37, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4828, Target: 1751, Traits: 5, StrLen: 22, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2023, Target: 366, Traits: 5, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5655, Target: 371, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12387, Target: 1016, Traits: 5, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3724, Target: 399, Traits: 5, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12676, Target: 215, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2858, Target: 406, Traits: 5, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11262, Target: 2166, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3112, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8166, Target: 542, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13306, Target: 1016, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8246, Target: 898, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2178, Target: 1025, Traits: 5, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2848, Target: 1030, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2878, Target: 1035, Traits: 5, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6907, Target: 1051, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7680, Target: 1588, Traits: 5, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 1774, Traits: 9, StrLen: 4, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7679, Target: 1593, Traits: 5, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4828, Target: 1772, Traits: 5, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1751, Traits: 5, StrLen: 6, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4854, Target: 1774, Traits: 8, StrLen: 26, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13557, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10109, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10109, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10836, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11604, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10932, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13809, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13825, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10333, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10921, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10936, Target: 2167, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 147, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7247, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6034, Target: 1788, Traits: 5, StrLen: 24, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7841, Target: 1849, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12856, Target: 767, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10756, Target: 506, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13000, Target: 33, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11682, Target: 33, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13009, Target: 33, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9086, Target: 2043, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7422, Target: 1830, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7422, Target: 2043, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7422, Target: 2044, Traits: 5, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13274, Target: 33, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13036, Target: 767, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10951, Target: 2164, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11838, Target: 1849, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12250, Target: 767, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 969, Target: 1849, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10027, Target: 2164, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3654, Target: 1580, Traits: 9, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7758, Target: 1869, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9925, Target: 1808, Traits: 5, StrLen: 13, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6201, Target: 34, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12321, Target: 1849, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4039, Target: 613, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3836, Target: 1849, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 631, Target: 1048, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12190, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9925, Target: 1817, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1808, Traits: 5, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7144, Target: 1819, Traits: 5, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12606, Target: 1852, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12398, Target: 1852, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7156, Target: 1824, Traits: 9, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13860, Target: 1852, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7144, Target: 1824, Traits: 8, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13361, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13854, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13863, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10445, Target: 1828, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1819, Traits: 5, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5382, Target: 1830, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 120, Target: 1833, Traits: 5, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5880, Target: 2043, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5382, Target: 1833, Traits: 5, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13375, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13710, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10044, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9942, Target: 1837, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1010, Target: 1840, Traits: 9, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11440, Target: 1852, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9942, Target: 1840, Traits: 8, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9050, Target: 2167, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11617, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13346, Target: 2167, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11786, Target: 1844, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1837, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10461, Target: 1846, Traits: 5, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11643, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11388, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10509, Target: 1849, Traits: 8, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 11116, Target: 1850, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 10525, Target: 1851, Traits: 8, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 11131, Target: 1852, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4027, Target: 1853, Traits: 5, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12596, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8500, Target: 2167, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7188, Target: 1856, Traits: 8, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 9013, Target: 1857, Traits: 11, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13466, Target: 2164, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13081, Target: 1859, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4437, Target: 1860, Traits: 8, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9993, Target: 1861, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 37, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12238, Target: 1863, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8538, Target: 2167, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10605, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10027, Target: 1866, Traits: 8, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10027, Target: 1867, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1866, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7758, Target: 1869, Traits: 8, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 13117, Target: 1870, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 4139, Target: 1871, Traits: 12, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13466, Target: 2164, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5476, Target: 1880, Traits: 13, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4158, Target: 1878, Traits: 14, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4139, Target: 1875, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11440, Target: 2164, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13466, Target: 2164, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4139, Target: 1878, Traits: 5, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1875, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5457, Target: 1880, Traits: 5, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10044, Target: 2167, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13459, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11950, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6247, Target: 2167, Traits: 5, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11864, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12836, Target: 1887, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 11877, Target: 1888, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1058, Target: 1889, Traits: 5, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10205, Target: 1892, Traits: 5, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2240, Target: 1892, Traits: 5, StrLen: 2, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1058, Target: 1892, Traits: 5, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12892, Target: 25, Traits: 9, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13081, Target: 1859, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 251, Target: 1895, Traits: 5, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 284, Target: 1897, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 251, Target: 1897, Traits: 5, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12332, Target: 11, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 838, Target: 1899, Traits: 5, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1895, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1094, Target: 1901, Traits: 5, StrLen: 36, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13695, Target: 1899, Traits: 5, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10125, Target: 1849, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5506, Target: 1849, Traits: 9, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12910, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13410, Target: 1849, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13099, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13536, Target: 1849, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12326, Target: 1849, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 533, Target: 1910, Traits: 8, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 10173, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10541, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 875, Target: 1913, Traits: 5, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 563, Target: 1910, Traits: 9, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 64, Target: 1944, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1303, Target: 1916, Traits: 5, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10205, Target: 1887, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12130, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2240, Target: 1887, Traits: 5, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11458, Target: 37, Traits: 9, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12286, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1303, Target: 1923, Traits: 5, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1916, Traits: 5, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3023, Target: 1925, Traits: 8, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11890, Target: 2167, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10061, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13569, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4068, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10477, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11402, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 688, Target: 1932, Traits: 5, StrLen: 38, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1078, Target: 1889, Traits: 5, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10651, Target: 1860, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12844, Target: 1887, Traits: 5, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11146, Target: 37, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 631, Target: 1999, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1504, Target: 1939, Traits: 5, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3073, Target: 1988, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2472, Target: 1991, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9464, Target: 1996, Traits: 9, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 44, Target: 1943, Traits: 5, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 44, Target: 1944, Traits: 5, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 64, Target: 1943, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1130, Target: 1946, Traits: 5, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12883, Target: 22, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 413, Target: 1948, Traits: 5, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 439, Target: 1925, Traits: 9, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5476, Target: 1852, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 413, Target: 1951, Traits: 5, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1948, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 86, Target: 1953, Traits: 8, StrLen: 38, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 12343, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12874, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12928, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12946, Target: 2167, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13845, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10221, Target: 2167, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13494, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13735, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7981, Target: 2167, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12530, Target: 2167, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 86, Target: 1965, Traits: 5, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1953, Traits: 9, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 453, Target: 1967, Traits: 5, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9585, Target: 1951, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12844, Target: 1887, Traits: 5, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 453, Target: 1971, Traits: 5, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1967, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 292, Target: 1973, Traits: 5, StrLen: 37, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12310, Target: 1860, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11962, Target: 16, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11565, Target: 1860, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12844, Target: 1887, Traits: 5, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 292, Target: 1979, Traits: 5, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 1973, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1537, Target: 1981, Traits: 5, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12844, Target: 1887, Traits: 5, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 912, Target: 1983, Traits: 5, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3903, Target: 1856, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 726, Target: 1985, Traits: 5, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12130, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12298, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3053, Target: 1988, Traits: 5, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12982, Target: 1985, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12786, Target: 1985, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2452, Target: 1991, Traits: 5, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2476, Target: 1852, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 572, Target: 1993, Traits: 5, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11643, Target: 2167, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11388, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 493, Target: 1996, Traits: 8, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 27, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 828, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 611, Target: 1999, Traits: 5, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13543, Target: 1853, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1570, Target: 2002, Traits: 5, StrLen: 33, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12130, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11146, Target: 37, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11458, Target: 37, Traits: 9, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 12286, Target: 37, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1337, Target: 2007, Traits: 5, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12245, Target: 1863, Traits: 5, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1371, Target: 2009, Traits: 5, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12250, Target: 1851, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 949, Target: 2011, Traits: 5, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1686, Target: 2167, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4915, Target: 2167, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11374, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2978, Target: 2167, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 949, Target: 2016, Traits: 5, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 659, Target: 1983, Traits: 5, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1480, Target: 2019, Traits: 5, StrLen: 5, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1923, Target: 2019, Traits: 5, StrLen: 32, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12409, Target: 2043, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 10756, Target: 1965, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7901, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 11689, Target: 33, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1391, Target: 2009, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3654, Target: 2029, Traits: 9, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7758, Target: 1869, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7425, Target: 2043, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13277, Target: 33, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3634, Target: 2029, Traits: 8, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11416, Target: 2167, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13515, Target: 2167, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1955, Target: 2032, Traits: 5, StrLen: 28, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1078, Target: 1889, Traits: 5, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10651, Target: 1860, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1807, Target: 9, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13424, Target: 42, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12844, Target: 1887, Traits: 5, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10293, Target: 230, Traits: 9, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11146, Target: 37, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 631, Target: 1999, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1955, Target: 2041, Traits: 5, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 13689, Target: 2032, Traits: 5, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11191, Target: 2043, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 7425, Target: 2044, Traits: 5, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13665, Target: 2043, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13677, Target: 2043, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13683, Target: 2043, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13821, Target: 2043, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 13740, Target: 2043, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5482, Target: 2050, Traits: 5, StrLen: 24, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6442, Target: 53, Traits: 5, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12310, Target: 1860, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 271, Target: 69, Traits: 5, StrLen: 5, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12901, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11565, Target: 1860, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 708, Target: 230, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 708, Target: 100, Traits: 5, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7317, Target: 39, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5032, Target: 109, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13566, Target: 8, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9122, Target: 133, Traits: 5, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9140, Target: 1846, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1557, Target: 230, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1557, Target: 137, Traits: 5, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9677, Target: 155, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1357, Target: 158, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 969, Target: 164, Traits: 5, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 969, Target: 169, Traits: 5, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4932, Target: 2069, Traits: 5, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12310, Target: 1860, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11565, Target: 1860, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7317, Target: 39, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4941, Target: 126, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11734, Target: 2164, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9428, Target: 230, Traits: 9, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11825, Target: 230, Traits: 9, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4167, Target: 2077, Traits: 5, StrLen: 27, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6442, Target: 620, Traits: 9, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 271, Target: 634, Traits: 5, StrLen: 5, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12901, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11565, Target: 1860, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12010, Target: 665, Traits: 5, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11630, Target: 686, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13566, Target: 8, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9140, Target: 1846, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13501, Target: 710, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11056, Target: 650, Traits: 5, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1357, Target: 726, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 969, Target: 731, Traits: 5, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 969, Target: 736, Traits: 5, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3663, Target: 2091, Traits: 5, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12666, Target: 2166, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11734, Target: 2164, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 986, Target: 618, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11056, Target: 650, Traits: 5, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6638, Target: 2096, Traits: 5, StrLen: 22, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6442, Target: 316, Traits: 5, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12310, Target: 1860, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 271, Target: 340, Traits: 5, StrLen: 5, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12901, Target: 1849, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 11565, Target: 1860, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 708, Target: 230, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 708, Target: 373, Traits: 5, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1524, Target: 385, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11630, Target: 404, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3112, Target: 220, Traits: 5, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13566, Target: 8, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12973, Target: 204, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7401, Target: 571, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9687, Target: 39, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10816, Target: 2166, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9140, Target: 1846, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1557, Target: 230, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1557, Target: 779, Traits: 5, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7166, Target: 1083, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13780, Target: 1268, Traits: 5, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1357, Target: 1340, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 969, Target: 1543, Traits: 5, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 969, Target: 1550, Traits: 5, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1255, Target: 1557, Traits: 5, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5115, Target: 1817, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6224, Target: 2122, Traits: 5, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9687, Target: 39, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13487, Target: 1014, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11734, Target: 2164, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6233, Target: 606, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5626, Target: 2127, Traits: 5, StrLen: 24, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 271, Target: 1901, Traits: 5, StrLen: 5, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 553, Target: 1913, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11565, Target: 1860, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 708, Target: 230, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 708, Target: 1932, Traits: 5, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1524, Target: 1939, Traits: 5, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11630, Target: 1946, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13566, Target: 8, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7443, Target: 1993, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1557, Target: 230, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1557, Target: 1981, Traits: 5, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1357, Target: 2007, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 969, Target: 2011, Traits: 5, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 969, Target: 2016, Traits: 5, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5115, Target: 2041, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5107, Target: 2143, Traits: 5, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12376, Target: 1923, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 71, Target: 34, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 755, Target: 37, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9602, Target: 1971, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9158, Target: 1979, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11734, Target: 2164, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1590, Target: 2002, Traits: 5, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9410, Target: 2151, Traits: 5, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13566, Target: 8, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7737, Target: 39, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12796, Target: 34, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9453, Target: 279, Traits: 5, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 969, Target: 283, Traits: 5, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 969, Target: 288, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8994, Target: 2158, Traits: 5, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13487, Target: 261, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11734, Target: 2164, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6347, Target: 263, Traits: 5, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7737, Target: 39, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9446, Target: 270, Traits: 5, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8661, Target: 2164, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 11125, Target: 2165, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 2},
+		{StrOff: 10534, Target: 2166, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 13833, Target: 2167, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v2/isolines",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v2/route-matrix",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v2/routes",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v2/optimize-waypoints",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v2/snap-to-roads",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "reason"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "fieldList"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "name"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "key"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"}}, DirectMask: 0x80},
+	},
 }
+
+var handles = [2168]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+	smithy.NewStaticSchema(&set, 884),
+	smithy.NewStaticSchema(&set, 885),
+	smithy.NewStaticSchema(&set, 886),
+	smithy.NewStaticSchema(&set, 887),
+	smithy.NewStaticSchema(&set, 888),
+	smithy.NewStaticSchema(&set, 889),
+	smithy.NewStaticSchema(&set, 890),
+	smithy.NewStaticSchema(&set, 891),
+	smithy.NewStaticSchema(&set, 892),
+	smithy.NewStaticSchema(&set, 893),
+	smithy.NewStaticSchema(&set, 894),
+	smithy.NewStaticSchema(&set, 895),
+	smithy.NewStaticSchema(&set, 896),
+	smithy.NewStaticSchema(&set, 897),
+	smithy.NewStaticSchema(&set, 898),
+	smithy.NewStaticSchema(&set, 899),
+	smithy.NewStaticSchema(&set, 900),
+	smithy.NewStaticSchema(&set, 901),
+	smithy.NewStaticSchema(&set, 902),
+	smithy.NewStaticSchema(&set, 903),
+	smithy.NewStaticSchema(&set, 904),
+	smithy.NewStaticSchema(&set, 905),
+	smithy.NewStaticSchema(&set, 906),
+	smithy.NewStaticSchema(&set, 907),
+	smithy.NewStaticSchema(&set, 908),
+	smithy.NewStaticSchema(&set, 909),
+	smithy.NewStaticSchema(&set, 910),
+	smithy.NewStaticSchema(&set, 911),
+	smithy.NewStaticSchema(&set, 912),
+	smithy.NewStaticSchema(&set, 913),
+	smithy.NewStaticSchema(&set, 914),
+	smithy.NewStaticSchema(&set, 915),
+	smithy.NewStaticSchema(&set, 916),
+	smithy.NewStaticSchema(&set, 917),
+	smithy.NewStaticSchema(&set, 918),
+	smithy.NewStaticSchema(&set, 919),
+	smithy.NewStaticSchema(&set, 920),
+	smithy.NewStaticSchema(&set, 921),
+	smithy.NewStaticSchema(&set, 922),
+	smithy.NewStaticSchema(&set, 923),
+	smithy.NewStaticSchema(&set, 924),
+	smithy.NewStaticSchema(&set, 925),
+	smithy.NewStaticSchema(&set, 926),
+	smithy.NewStaticSchema(&set, 927),
+	smithy.NewStaticSchema(&set, 928),
+	smithy.NewStaticSchema(&set, 929),
+	smithy.NewStaticSchema(&set, 930),
+	smithy.NewStaticSchema(&set, 931),
+	smithy.NewStaticSchema(&set, 932),
+	smithy.NewStaticSchema(&set, 933),
+	smithy.NewStaticSchema(&set, 934),
+	smithy.NewStaticSchema(&set, 935),
+	smithy.NewStaticSchema(&set, 936),
+	smithy.NewStaticSchema(&set, 937),
+	smithy.NewStaticSchema(&set, 938),
+	smithy.NewStaticSchema(&set, 939),
+	smithy.NewStaticSchema(&set, 940),
+	smithy.NewStaticSchema(&set, 941),
+	smithy.NewStaticSchema(&set, 942),
+	smithy.NewStaticSchema(&set, 943),
+	smithy.NewStaticSchema(&set, 944),
+	smithy.NewStaticSchema(&set, 945),
+	smithy.NewStaticSchema(&set, 946),
+	smithy.NewStaticSchema(&set, 947),
+	smithy.NewStaticSchema(&set, 948),
+	smithy.NewStaticSchema(&set, 949),
+	smithy.NewStaticSchema(&set, 950),
+	smithy.NewStaticSchema(&set, 951),
+	smithy.NewStaticSchema(&set, 952),
+	smithy.NewStaticSchema(&set, 953),
+	smithy.NewStaticSchema(&set, 954),
+	smithy.NewStaticSchema(&set, 955),
+	smithy.NewStaticSchema(&set, 956),
+	smithy.NewStaticSchema(&set, 957),
+	smithy.NewStaticSchema(&set, 958),
+	smithy.NewStaticSchema(&set, 959),
+	smithy.NewStaticSchema(&set, 960),
+	smithy.NewStaticSchema(&set, 961),
+	smithy.NewStaticSchema(&set, 962),
+	smithy.NewStaticSchema(&set, 963),
+	smithy.NewStaticSchema(&set, 964),
+	smithy.NewStaticSchema(&set, 965),
+	smithy.NewStaticSchema(&set, 966),
+	smithy.NewStaticSchema(&set, 967),
+	smithy.NewStaticSchema(&set, 968),
+	smithy.NewStaticSchema(&set, 969),
+	smithy.NewStaticSchema(&set, 970),
+	smithy.NewStaticSchema(&set, 971),
+	smithy.NewStaticSchema(&set, 972),
+	smithy.NewStaticSchema(&set, 973),
+	smithy.NewStaticSchema(&set, 974),
+	smithy.NewStaticSchema(&set, 975),
+	smithy.NewStaticSchema(&set, 976),
+	smithy.NewStaticSchema(&set, 977),
+	smithy.NewStaticSchema(&set, 978),
+	smithy.NewStaticSchema(&set, 979),
+	smithy.NewStaticSchema(&set, 980),
+	smithy.NewStaticSchema(&set, 981),
+	smithy.NewStaticSchema(&set, 982),
+	smithy.NewStaticSchema(&set, 983),
+	smithy.NewStaticSchema(&set, 984),
+	smithy.NewStaticSchema(&set, 985),
+	smithy.NewStaticSchema(&set, 986),
+	smithy.NewStaticSchema(&set, 987),
+	smithy.NewStaticSchema(&set, 988),
+	smithy.NewStaticSchema(&set, 989),
+	smithy.NewStaticSchema(&set, 990),
+	smithy.NewStaticSchema(&set, 991),
+	smithy.NewStaticSchema(&set, 992),
+	smithy.NewStaticSchema(&set, 993),
+	smithy.NewStaticSchema(&set, 994),
+	smithy.NewStaticSchema(&set, 995),
+	smithy.NewStaticSchema(&set, 996),
+	smithy.NewStaticSchema(&set, 997),
+	smithy.NewStaticSchema(&set, 998),
+	smithy.NewStaticSchema(&set, 999),
+	smithy.NewStaticSchema(&set, 1000),
+	smithy.NewStaticSchema(&set, 1001),
+	smithy.NewStaticSchema(&set, 1002),
+	smithy.NewStaticSchema(&set, 1003),
+	smithy.NewStaticSchema(&set, 1004),
+	smithy.NewStaticSchema(&set, 1005),
+	smithy.NewStaticSchema(&set, 1006),
+	smithy.NewStaticSchema(&set, 1007),
+	smithy.NewStaticSchema(&set, 1008),
+	smithy.NewStaticSchema(&set, 1009),
+	smithy.NewStaticSchema(&set, 1010),
+	smithy.NewStaticSchema(&set, 1011),
+	smithy.NewStaticSchema(&set, 1012),
+	smithy.NewStaticSchema(&set, 1013),
+	smithy.NewStaticSchema(&set, 1014),
+	smithy.NewStaticSchema(&set, 1015),
+	smithy.NewStaticSchema(&set, 1016),
+	smithy.NewStaticSchema(&set, 1017),
+	smithy.NewStaticSchema(&set, 1018),
+	smithy.NewStaticSchema(&set, 1019),
+	smithy.NewStaticSchema(&set, 1020),
+	smithy.NewStaticSchema(&set, 1021),
+	smithy.NewStaticSchema(&set, 1022),
+	smithy.NewStaticSchema(&set, 1023),
+	smithy.NewStaticSchema(&set, 1024),
+	smithy.NewStaticSchema(&set, 1025),
+	smithy.NewStaticSchema(&set, 1026),
+	smithy.NewStaticSchema(&set, 1027),
+	smithy.NewStaticSchema(&set, 1028),
+	smithy.NewStaticSchema(&set, 1029),
+	smithy.NewStaticSchema(&set, 1030),
+	smithy.NewStaticSchema(&set, 1031),
+	smithy.NewStaticSchema(&set, 1032),
+	smithy.NewStaticSchema(&set, 1033),
+	smithy.NewStaticSchema(&set, 1034),
+	smithy.NewStaticSchema(&set, 1035),
+	smithy.NewStaticSchema(&set, 1036),
+	smithy.NewStaticSchema(&set, 1037),
+	smithy.NewStaticSchema(&set, 1038),
+	smithy.NewStaticSchema(&set, 1039),
+	smithy.NewStaticSchema(&set, 1040),
+	smithy.NewStaticSchema(&set, 1041),
+	smithy.NewStaticSchema(&set, 1042),
+	smithy.NewStaticSchema(&set, 1043),
+	smithy.NewStaticSchema(&set, 1044),
+	smithy.NewStaticSchema(&set, 1045),
+	smithy.NewStaticSchema(&set, 1046),
+	smithy.NewStaticSchema(&set, 1047),
+	smithy.NewStaticSchema(&set, 1048),
+	smithy.NewStaticSchema(&set, 1049),
+	smithy.NewStaticSchema(&set, 1050),
+	smithy.NewStaticSchema(&set, 1051),
+	smithy.NewStaticSchema(&set, 1052),
+	smithy.NewStaticSchema(&set, 1053),
+	smithy.NewStaticSchema(&set, 1054),
+	smithy.NewStaticSchema(&set, 1055),
+	smithy.NewStaticSchema(&set, 1056),
+	smithy.NewStaticSchema(&set, 1057),
+	smithy.NewStaticSchema(&set, 1058),
+	smithy.NewStaticSchema(&set, 1059),
+	smithy.NewStaticSchema(&set, 1060),
+	smithy.NewStaticSchema(&set, 1061),
+	smithy.NewStaticSchema(&set, 1062),
+	smithy.NewStaticSchema(&set, 1063),
+	smithy.NewStaticSchema(&set, 1064),
+	smithy.NewStaticSchema(&set, 1065),
+	smithy.NewStaticSchema(&set, 1066),
+	smithy.NewStaticSchema(&set, 1067),
+	smithy.NewStaticSchema(&set, 1068),
+	smithy.NewStaticSchema(&set, 1069),
+	smithy.NewStaticSchema(&set, 1070),
+	smithy.NewStaticSchema(&set, 1071),
+	smithy.NewStaticSchema(&set, 1072),
+	smithy.NewStaticSchema(&set, 1073),
+	smithy.NewStaticSchema(&set, 1074),
+	smithy.NewStaticSchema(&set, 1075),
+	smithy.NewStaticSchema(&set, 1076),
+	smithy.NewStaticSchema(&set, 1077),
+	smithy.NewStaticSchema(&set, 1078),
+	smithy.NewStaticSchema(&set, 1079),
+	smithy.NewStaticSchema(&set, 1080),
+	smithy.NewStaticSchema(&set, 1081),
+	smithy.NewStaticSchema(&set, 1082),
+	smithy.NewStaticSchema(&set, 1083),
+	smithy.NewStaticSchema(&set, 1084),
+	smithy.NewStaticSchema(&set, 1085),
+	smithy.NewStaticSchema(&set, 1086),
+	smithy.NewStaticSchema(&set, 1087),
+	smithy.NewStaticSchema(&set, 1088),
+	smithy.NewStaticSchema(&set, 1089),
+	smithy.NewStaticSchema(&set, 1090),
+	smithy.NewStaticSchema(&set, 1091),
+	smithy.NewStaticSchema(&set, 1092),
+	smithy.NewStaticSchema(&set, 1093),
+	smithy.NewStaticSchema(&set, 1094),
+	smithy.NewStaticSchema(&set, 1095),
+	smithy.NewStaticSchema(&set, 1096),
+	smithy.NewStaticSchema(&set, 1097),
+	smithy.NewStaticSchema(&set, 1098),
+	smithy.NewStaticSchema(&set, 1099),
+	smithy.NewStaticSchema(&set, 1100),
+	smithy.NewStaticSchema(&set, 1101),
+	smithy.NewStaticSchema(&set, 1102),
+	smithy.NewStaticSchema(&set, 1103),
+	smithy.NewStaticSchema(&set, 1104),
+	smithy.NewStaticSchema(&set, 1105),
+	smithy.NewStaticSchema(&set, 1106),
+	smithy.NewStaticSchema(&set, 1107),
+	smithy.NewStaticSchema(&set, 1108),
+	smithy.NewStaticSchema(&set, 1109),
+	smithy.NewStaticSchema(&set, 1110),
+	smithy.NewStaticSchema(&set, 1111),
+	smithy.NewStaticSchema(&set, 1112),
+	smithy.NewStaticSchema(&set, 1113),
+	smithy.NewStaticSchema(&set, 1114),
+	smithy.NewStaticSchema(&set, 1115),
+	smithy.NewStaticSchema(&set, 1116),
+	smithy.NewStaticSchema(&set, 1117),
+	smithy.NewStaticSchema(&set, 1118),
+	smithy.NewStaticSchema(&set, 1119),
+	smithy.NewStaticSchema(&set, 1120),
+	smithy.NewStaticSchema(&set, 1121),
+	smithy.NewStaticSchema(&set, 1122),
+	smithy.NewStaticSchema(&set, 1123),
+	smithy.NewStaticSchema(&set, 1124),
+	smithy.NewStaticSchema(&set, 1125),
+	smithy.NewStaticSchema(&set, 1126),
+	smithy.NewStaticSchema(&set, 1127),
+	smithy.NewStaticSchema(&set, 1128),
+	smithy.NewStaticSchema(&set, 1129),
+	smithy.NewStaticSchema(&set, 1130),
+	smithy.NewStaticSchema(&set, 1131),
+	smithy.NewStaticSchema(&set, 1132),
+	smithy.NewStaticSchema(&set, 1133),
+	smithy.NewStaticSchema(&set, 1134),
+	smithy.NewStaticSchema(&set, 1135),
+	smithy.NewStaticSchema(&set, 1136),
+	smithy.NewStaticSchema(&set, 1137),
+	smithy.NewStaticSchema(&set, 1138),
+	smithy.NewStaticSchema(&set, 1139),
+	smithy.NewStaticSchema(&set, 1140),
+	smithy.NewStaticSchema(&set, 1141),
+	smithy.NewStaticSchema(&set, 1142),
+	smithy.NewStaticSchema(&set, 1143),
+	smithy.NewStaticSchema(&set, 1144),
+	smithy.NewStaticSchema(&set, 1145),
+	smithy.NewStaticSchema(&set, 1146),
+	smithy.NewStaticSchema(&set, 1147),
+	smithy.NewStaticSchema(&set, 1148),
+	smithy.NewStaticSchema(&set, 1149),
+	smithy.NewStaticSchema(&set, 1150),
+	smithy.NewStaticSchema(&set, 1151),
+	smithy.NewStaticSchema(&set, 1152),
+	smithy.NewStaticSchema(&set, 1153),
+	smithy.NewStaticSchema(&set, 1154),
+	smithy.NewStaticSchema(&set, 1155),
+	smithy.NewStaticSchema(&set, 1156),
+	smithy.NewStaticSchema(&set, 1157),
+	smithy.NewStaticSchema(&set, 1158),
+	smithy.NewStaticSchema(&set, 1159),
+	smithy.NewStaticSchema(&set, 1160),
+	smithy.NewStaticSchema(&set, 1161),
+	smithy.NewStaticSchema(&set, 1162),
+	smithy.NewStaticSchema(&set, 1163),
+	smithy.NewStaticSchema(&set, 1164),
+	smithy.NewStaticSchema(&set, 1165),
+	smithy.NewStaticSchema(&set, 1166),
+	smithy.NewStaticSchema(&set, 1167),
+	smithy.NewStaticSchema(&set, 1168),
+	smithy.NewStaticSchema(&set, 1169),
+	smithy.NewStaticSchema(&set, 1170),
+	smithy.NewStaticSchema(&set, 1171),
+	smithy.NewStaticSchema(&set, 1172),
+	smithy.NewStaticSchema(&set, 1173),
+	smithy.NewStaticSchema(&set, 1174),
+	smithy.NewStaticSchema(&set, 1175),
+	smithy.NewStaticSchema(&set, 1176),
+	smithy.NewStaticSchema(&set, 1177),
+	smithy.NewStaticSchema(&set, 1178),
+	smithy.NewStaticSchema(&set, 1179),
+	smithy.NewStaticSchema(&set, 1180),
+	smithy.NewStaticSchema(&set, 1181),
+	smithy.NewStaticSchema(&set, 1182),
+	smithy.NewStaticSchema(&set, 1183),
+	smithy.NewStaticSchema(&set, 1184),
+	smithy.NewStaticSchema(&set, 1185),
+	smithy.NewStaticSchema(&set, 1186),
+	smithy.NewStaticSchema(&set, 1187),
+	smithy.NewStaticSchema(&set, 1188),
+	smithy.NewStaticSchema(&set, 1189),
+	smithy.NewStaticSchema(&set, 1190),
+	smithy.NewStaticSchema(&set, 1191),
+	smithy.NewStaticSchema(&set, 1192),
+	smithy.NewStaticSchema(&set, 1193),
+	smithy.NewStaticSchema(&set, 1194),
+	smithy.NewStaticSchema(&set, 1195),
+	smithy.NewStaticSchema(&set, 1196),
+	smithy.NewStaticSchema(&set, 1197),
+	smithy.NewStaticSchema(&set, 1198),
+	smithy.NewStaticSchema(&set, 1199),
+	smithy.NewStaticSchema(&set, 1200),
+	smithy.NewStaticSchema(&set, 1201),
+	smithy.NewStaticSchema(&set, 1202),
+	smithy.NewStaticSchema(&set, 1203),
+	smithy.NewStaticSchema(&set, 1204),
+	smithy.NewStaticSchema(&set, 1205),
+	smithy.NewStaticSchema(&set, 1206),
+	smithy.NewStaticSchema(&set, 1207),
+	smithy.NewStaticSchema(&set, 1208),
+	smithy.NewStaticSchema(&set, 1209),
+	smithy.NewStaticSchema(&set, 1210),
+	smithy.NewStaticSchema(&set, 1211),
+	smithy.NewStaticSchema(&set, 1212),
+	smithy.NewStaticSchema(&set, 1213),
+	smithy.NewStaticSchema(&set, 1214),
+	smithy.NewStaticSchema(&set, 1215),
+	smithy.NewStaticSchema(&set, 1216),
+	smithy.NewStaticSchema(&set, 1217),
+	smithy.NewStaticSchema(&set, 1218),
+	smithy.NewStaticSchema(&set, 1219),
+	smithy.NewStaticSchema(&set, 1220),
+	smithy.NewStaticSchema(&set, 1221),
+	smithy.NewStaticSchema(&set, 1222),
+	smithy.NewStaticSchema(&set, 1223),
+	smithy.NewStaticSchema(&set, 1224),
+	smithy.NewStaticSchema(&set, 1225),
+	smithy.NewStaticSchema(&set, 1226),
+	smithy.NewStaticSchema(&set, 1227),
+	smithy.NewStaticSchema(&set, 1228),
+	smithy.NewStaticSchema(&set, 1229),
+	smithy.NewStaticSchema(&set, 1230),
+	smithy.NewStaticSchema(&set, 1231),
+	smithy.NewStaticSchema(&set, 1232),
+	smithy.NewStaticSchema(&set, 1233),
+	smithy.NewStaticSchema(&set, 1234),
+	smithy.NewStaticSchema(&set, 1235),
+	smithy.NewStaticSchema(&set, 1236),
+	smithy.NewStaticSchema(&set, 1237),
+	smithy.NewStaticSchema(&set, 1238),
+	smithy.NewStaticSchema(&set, 1239),
+	smithy.NewStaticSchema(&set, 1240),
+	smithy.NewStaticSchema(&set, 1241),
+	smithy.NewStaticSchema(&set, 1242),
+	smithy.NewStaticSchema(&set, 1243),
+	smithy.NewStaticSchema(&set, 1244),
+	smithy.NewStaticSchema(&set, 1245),
+	smithy.NewStaticSchema(&set, 1246),
+	smithy.NewStaticSchema(&set, 1247),
+	smithy.NewStaticSchema(&set, 1248),
+	smithy.NewStaticSchema(&set, 1249),
+	smithy.NewStaticSchema(&set, 1250),
+	smithy.NewStaticSchema(&set, 1251),
+	smithy.NewStaticSchema(&set, 1252),
+	smithy.NewStaticSchema(&set, 1253),
+	smithy.NewStaticSchema(&set, 1254),
+	smithy.NewStaticSchema(&set, 1255),
+	smithy.NewStaticSchema(&set, 1256),
+	smithy.NewStaticSchema(&set, 1257),
+	smithy.NewStaticSchema(&set, 1258),
+	smithy.NewStaticSchema(&set, 1259),
+	smithy.NewStaticSchema(&set, 1260),
+	smithy.NewStaticSchema(&set, 1261),
+	smithy.NewStaticSchema(&set, 1262),
+	smithy.NewStaticSchema(&set, 1263),
+	smithy.NewStaticSchema(&set, 1264),
+	smithy.NewStaticSchema(&set, 1265),
+	smithy.NewStaticSchema(&set, 1266),
+	smithy.NewStaticSchema(&set, 1267),
+	smithy.NewStaticSchema(&set, 1268),
+	smithy.NewStaticSchema(&set, 1269),
+	smithy.NewStaticSchema(&set, 1270),
+	smithy.NewStaticSchema(&set, 1271),
+	smithy.NewStaticSchema(&set, 1272),
+	smithy.NewStaticSchema(&set, 1273),
+	smithy.NewStaticSchema(&set, 1274),
+	smithy.NewStaticSchema(&set, 1275),
+	smithy.NewStaticSchema(&set, 1276),
+	smithy.NewStaticSchema(&set, 1277),
+	smithy.NewStaticSchema(&set, 1278),
+	smithy.NewStaticSchema(&set, 1279),
+	smithy.NewStaticSchema(&set, 1280),
+	smithy.NewStaticSchema(&set, 1281),
+	smithy.NewStaticSchema(&set, 1282),
+	smithy.NewStaticSchema(&set, 1283),
+	smithy.NewStaticSchema(&set, 1284),
+	smithy.NewStaticSchema(&set, 1285),
+	smithy.NewStaticSchema(&set, 1286),
+	smithy.NewStaticSchema(&set, 1287),
+	smithy.NewStaticSchema(&set, 1288),
+	smithy.NewStaticSchema(&set, 1289),
+	smithy.NewStaticSchema(&set, 1290),
+	smithy.NewStaticSchema(&set, 1291),
+	smithy.NewStaticSchema(&set, 1292),
+	smithy.NewStaticSchema(&set, 1293),
+	smithy.NewStaticSchema(&set, 1294),
+	smithy.NewStaticSchema(&set, 1295),
+	smithy.NewStaticSchema(&set, 1296),
+	smithy.NewStaticSchema(&set, 1297),
+	smithy.NewStaticSchema(&set, 1298),
+	smithy.NewStaticSchema(&set, 1299),
+	smithy.NewStaticSchema(&set, 1300),
+	smithy.NewStaticSchema(&set, 1301),
+	smithy.NewStaticSchema(&set, 1302),
+	smithy.NewStaticSchema(&set, 1303),
+	smithy.NewStaticSchema(&set, 1304),
+	smithy.NewStaticSchema(&set, 1305),
+	smithy.NewStaticSchema(&set, 1306),
+	smithy.NewStaticSchema(&set, 1307),
+	smithy.NewStaticSchema(&set, 1308),
+	smithy.NewStaticSchema(&set, 1309),
+	smithy.NewStaticSchema(&set, 1310),
+	smithy.NewStaticSchema(&set, 1311),
+	smithy.NewStaticSchema(&set, 1312),
+	smithy.NewStaticSchema(&set, 1313),
+	smithy.NewStaticSchema(&set, 1314),
+	smithy.NewStaticSchema(&set, 1315),
+	smithy.NewStaticSchema(&set, 1316),
+	smithy.NewStaticSchema(&set, 1317),
+	smithy.NewStaticSchema(&set, 1318),
+	smithy.NewStaticSchema(&set, 1319),
+	smithy.NewStaticSchema(&set, 1320),
+	smithy.NewStaticSchema(&set, 1321),
+	smithy.NewStaticSchema(&set, 1322),
+	smithy.NewStaticSchema(&set, 1323),
+	smithy.NewStaticSchema(&set, 1324),
+	smithy.NewStaticSchema(&set, 1325),
+	smithy.NewStaticSchema(&set, 1326),
+	smithy.NewStaticSchema(&set, 1327),
+	smithy.NewStaticSchema(&set, 1328),
+	smithy.NewStaticSchema(&set, 1329),
+	smithy.NewStaticSchema(&set, 1330),
+	smithy.NewStaticSchema(&set, 1331),
+	smithy.NewStaticSchema(&set, 1332),
+	smithy.NewStaticSchema(&set, 1333),
+	smithy.NewStaticSchema(&set, 1334),
+	smithy.NewStaticSchema(&set, 1335),
+	smithy.NewStaticSchema(&set, 1336),
+	smithy.NewStaticSchema(&set, 1337),
+	smithy.NewStaticSchema(&set, 1338),
+	smithy.NewStaticSchema(&set, 1339),
+	smithy.NewStaticSchema(&set, 1340),
+	smithy.NewStaticSchema(&set, 1341),
+	smithy.NewStaticSchema(&set, 1342),
+	smithy.NewStaticSchema(&set, 1343),
+	smithy.NewStaticSchema(&set, 1344),
+	smithy.NewStaticSchema(&set, 1345),
+	smithy.NewStaticSchema(&set, 1346),
+	smithy.NewStaticSchema(&set, 1347),
+	smithy.NewStaticSchema(&set, 1348),
+	smithy.NewStaticSchema(&set, 1349),
+	smithy.NewStaticSchema(&set, 1350),
+	smithy.NewStaticSchema(&set, 1351),
+	smithy.NewStaticSchema(&set, 1352),
+	smithy.NewStaticSchema(&set, 1353),
+	smithy.NewStaticSchema(&set, 1354),
+	smithy.NewStaticSchema(&set, 1355),
+	smithy.NewStaticSchema(&set, 1356),
+	smithy.NewStaticSchema(&set, 1357),
+	smithy.NewStaticSchema(&set, 1358),
+	smithy.NewStaticSchema(&set, 1359),
+	smithy.NewStaticSchema(&set, 1360),
+	smithy.NewStaticSchema(&set, 1361),
+	smithy.NewStaticSchema(&set, 1362),
+	smithy.NewStaticSchema(&set, 1363),
+	smithy.NewStaticSchema(&set, 1364),
+	smithy.NewStaticSchema(&set, 1365),
+	smithy.NewStaticSchema(&set, 1366),
+	smithy.NewStaticSchema(&set, 1367),
+	smithy.NewStaticSchema(&set, 1368),
+	smithy.NewStaticSchema(&set, 1369),
+	smithy.NewStaticSchema(&set, 1370),
+	smithy.NewStaticSchema(&set, 1371),
+	smithy.NewStaticSchema(&set, 1372),
+	smithy.NewStaticSchema(&set, 1373),
+	smithy.NewStaticSchema(&set, 1374),
+	smithy.NewStaticSchema(&set, 1375),
+	smithy.NewStaticSchema(&set, 1376),
+	smithy.NewStaticSchema(&set, 1377),
+	smithy.NewStaticSchema(&set, 1378),
+	smithy.NewStaticSchema(&set, 1379),
+	smithy.NewStaticSchema(&set, 1380),
+	smithy.NewStaticSchema(&set, 1381),
+	smithy.NewStaticSchema(&set, 1382),
+	smithy.NewStaticSchema(&set, 1383),
+	smithy.NewStaticSchema(&set, 1384),
+	smithy.NewStaticSchema(&set, 1385),
+	smithy.NewStaticSchema(&set, 1386),
+	smithy.NewStaticSchema(&set, 1387),
+	smithy.NewStaticSchema(&set, 1388),
+	smithy.NewStaticSchema(&set, 1389),
+	smithy.NewStaticSchema(&set, 1390),
+	smithy.NewStaticSchema(&set, 1391),
+	smithy.NewStaticSchema(&set, 1392),
+	smithy.NewStaticSchema(&set, 1393),
+	smithy.NewStaticSchema(&set, 1394),
+	smithy.NewStaticSchema(&set, 1395),
+	smithy.NewStaticSchema(&set, 1396),
+	smithy.NewStaticSchema(&set, 1397),
+	smithy.NewStaticSchema(&set, 1398),
+	smithy.NewStaticSchema(&set, 1399),
+	smithy.NewStaticSchema(&set, 1400),
+	smithy.NewStaticSchema(&set, 1401),
+	smithy.NewStaticSchema(&set, 1402),
+	smithy.NewStaticSchema(&set, 1403),
+	smithy.NewStaticSchema(&set, 1404),
+	smithy.NewStaticSchema(&set, 1405),
+	smithy.NewStaticSchema(&set, 1406),
+	smithy.NewStaticSchema(&set, 1407),
+	smithy.NewStaticSchema(&set, 1408),
+	smithy.NewStaticSchema(&set, 1409),
+	smithy.NewStaticSchema(&set, 1410),
+	smithy.NewStaticSchema(&set, 1411),
+	smithy.NewStaticSchema(&set, 1412),
+	smithy.NewStaticSchema(&set, 1413),
+	smithy.NewStaticSchema(&set, 1414),
+	smithy.NewStaticSchema(&set, 1415),
+	smithy.NewStaticSchema(&set, 1416),
+	smithy.NewStaticSchema(&set, 1417),
+	smithy.NewStaticSchema(&set, 1418),
+	smithy.NewStaticSchema(&set, 1419),
+	smithy.NewStaticSchema(&set, 1420),
+	smithy.NewStaticSchema(&set, 1421),
+	smithy.NewStaticSchema(&set, 1422),
+	smithy.NewStaticSchema(&set, 1423),
+	smithy.NewStaticSchema(&set, 1424),
+	smithy.NewStaticSchema(&set, 1425),
+	smithy.NewStaticSchema(&set, 1426),
+	smithy.NewStaticSchema(&set, 1427),
+	smithy.NewStaticSchema(&set, 1428),
+	smithy.NewStaticSchema(&set, 1429),
+	smithy.NewStaticSchema(&set, 1430),
+	smithy.NewStaticSchema(&set, 1431),
+	smithy.NewStaticSchema(&set, 1432),
+	smithy.NewStaticSchema(&set, 1433),
+	smithy.NewStaticSchema(&set, 1434),
+	smithy.NewStaticSchema(&set, 1435),
+	smithy.NewStaticSchema(&set, 1436),
+	smithy.NewStaticSchema(&set, 1437),
+	smithy.NewStaticSchema(&set, 1438),
+	smithy.NewStaticSchema(&set, 1439),
+	smithy.NewStaticSchema(&set, 1440),
+	smithy.NewStaticSchema(&set, 1441),
+	smithy.NewStaticSchema(&set, 1442),
+	smithy.NewStaticSchema(&set, 1443),
+	smithy.NewStaticSchema(&set, 1444),
+	smithy.NewStaticSchema(&set, 1445),
+	smithy.NewStaticSchema(&set, 1446),
+	smithy.NewStaticSchema(&set, 1447),
+	smithy.NewStaticSchema(&set, 1448),
+	smithy.NewStaticSchema(&set, 1449),
+	smithy.NewStaticSchema(&set, 1450),
+	smithy.NewStaticSchema(&set, 1451),
+	smithy.NewStaticSchema(&set, 1452),
+	smithy.NewStaticSchema(&set, 1453),
+	smithy.NewStaticSchema(&set, 1454),
+	smithy.NewStaticSchema(&set, 1455),
+	smithy.NewStaticSchema(&set, 1456),
+	smithy.NewStaticSchema(&set, 1457),
+	smithy.NewStaticSchema(&set, 1458),
+	smithy.NewStaticSchema(&set, 1459),
+	smithy.NewStaticSchema(&set, 1460),
+	smithy.NewStaticSchema(&set, 1461),
+	smithy.NewStaticSchema(&set, 1462),
+	smithy.NewStaticSchema(&set, 1463),
+	smithy.NewStaticSchema(&set, 1464),
+	smithy.NewStaticSchema(&set, 1465),
+	smithy.NewStaticSchema(&set, 1466),
+	smithy.NewStaticSchema(&set, 1467),
+	smithy.NewStaticSchema(&set, 1468),
+	smithy.NewStaticSchema(&set, 1469),
+	smithy.NewStaticSchema(&set, 1470),
+	smithy.NewStaticSchema(&set, 1471),
+	smithy.NewStaticSchema(&set, 1472),
+	smithy.NewStaticSchema(&set, 1473),
+	smithy.NewStaticSchema(&set, 1474),
+	smithy.NewStaticSchema(&set, 1475),
+	smithy.NewStaticSchema(&set, 1476),
+	smithy.NewStaticSchema(&set, 1477),
+	smithy.NewStaticSchema(&set, 1478),
+	smithy.NewStaticSchema(&set, 1479),
+	smithy.NewStaticSchema(&set, 1480),
+	smithy.NewStaticSchema(&set, 1481),
+	smithy.NewStaticSchema(&set, 1482),
+	smithy.NewStaticSchema(&set, 1483),
+	smithy.NewStaticSchema(&set, 1484),
+	smithy.NewStaticSchema(&set, 1485),
+	smithy.NewStaticSchema(&set, 1486),
+	smithy.NewStaticSchema(&set, 1487),
+	smithy.NewStaticSchema(&set, 1488),
+	smithy.NewStaticSchema(&set, 1489),
+	smithy.NewStaticSchema(&set, 1490),
+	smithy.NewStaticSchema(&set, 1491),
+	smithy.NewStaticSchema(&set, 1492),
+	smithy.NewStaticSchema(&set, 1493),
+	smithy.NewStaticSchema(&set, 1494),
+	smithy.NewStaticSchema(&set, 1495),
+	smithy.NewStaticSchema(&set, 1496),
+	smithy.NewStaticSchema(&set, 1497),
+	smithy.NewStaticSchema(&set, 1498),
+	smithy.NewStaticSchema(&set, 1499),
+	smithy.NewStaticSchema(&set, 1500),
+	smithy.NewStaticSchema(&set, 1501),
+	smithy.NewStaticSchema(&set, 1502),
+	smithy.NewStaticSchema(&set, 1503),
+	smithy.NewStaticSchema(&set, 1504),
+	smithy.NewStaticSchema(&set, 1505),
+	smithy.NewStaticSchema(&set, 1506),
+	smithy.NewStaticSchema(&set, 1507),
+	smithy.NewStaticSchema(&set, 1508),
+	smithy.NewStaticSchema(&set, 1509),
+	smithy.NewStaticSchema(&set, 1510),
+	smithy.NewStaticSchema(&set, 1511),
+	smithy.NewStaticSchema(&set, 1512),
+	smithy.NewStaticSchema(&set, 1513),
+	smithy.NewStaticSchema(&set, 1514),
+	smithy.NewStaticSchema(&set, 1515),
+	smithy.NewStaticSchema(&set, 1516),
+	smithy.NewStaticSchema(&set, 1517),
+	smithy.NewStaticSchema(&set, 1518),
+	smithy.NewStaticSchema(&set, 1519),
+	smithy.NewStaticSchema(&set, 1520),
+	smithy.NewStaticSchema(&set, 1521),
+	smithy.NewStaticSchema(&set, 1522),
+	smithy.NewStaticSchema(&set, 1523),
+	smithy.NewStaticSchema(&set, 1524),
+	smithy.NewStaticSchema(&set, 1525),
+	smithy.NewStaticSchema(&set, 1526),
+	smithy.NewStaticSchema(&set, 1527),
+	smithy.NewStaticSchema(&set, 1528),
+	smithy.NewStaticSchema(&set, 1529),
+	smithy.NewStaticSchema(&set, 1530),
+	smithy.NewStaticSchema(&set, 1531),
+	smithy.NewStaticSchema(&set, 1532),
+	smithy.NewStaticSchema(&set, 1533),
+	smithy.NewStaticSchema(&set, 1534),
+	smithy.NewStaticSchema(&set, 1535),
+	smithy.NewStaticSchema(&set, 1536),
+	smithy.NewStaticSchema(&set, 1537),
+	smithy.NewStaticSchema(&set, 1538),
+	smithy.NewStaticSchema(&set, 1539),
+	smithy.NewStaticSchema(&set, 1540),
+	smithy.NewStaticSchema(&set, 1541),
+	smithy.NewStaticSchema(&set, 1542),
+	smithy.NewStaticSchema(&set, 1543),
+	smithy.NewStaticSchema(&set, 1544),
+	smithy.NewStaticSchema(&set, 1545),
+	smithy.NewStaticSchema(&set, 1546),
+	smithy.NewStaticSchema(&set, 1547),
+	smithy.NewStaticSchema(&set, 1548),
+	smithy.NewStaticSchema(&set, 1549),
+	smithy.NewStaticSchema(&set, 1550),
+	smithy.NewStaticSchema(&set, 1551),
+	smithy.NewStaticSchema(&set, 1552),
+	smithy.NewStaticSchema(&set, 1553),
+	smithy.NewStaticSchema(&set, 1554),
+	smithy.NewStaticSchema(&set, 1555),
+	smithy.NewStaticSchema(&set, 1556),
+	smithy.NewStaticSchema(&set, 1557),
+	smithy.NewStaticSchema(&set, 1558),
+	smithy.NewStaticSchema(&set, 1559),
+	smithy.NewStaticSchema(&set, 1560),
+	smithy.NewStaticSchema(&set, 1561),
+	smithy.NewStaticSchema(&set, 1562),
+	smithy.NewStaticSchema(&set, 1563),
+	smithy.NewStaticSchema(&set, 1564),
+	smithy.NewStaticSchema(&set, 1565),
+	smithy.NewStaticSchema(&set, 1566),
+	smithy.NewStaticSchema(&set, 1567),
+	smithy.NewStaticSchema(&set, 1568),
+	smithy.NewStaticSchema(&set, 1569),
+	smithy.NewStaticSchema(&set, 1570),
+	smithy.NewStaticSchema(&set, 1571),
+	smithy.NewStaticSchema(&set, 1572),
+	smithy.NewStaticSchema(&set, 1573),
+	smithy.NewStaticSchema(&set, 1574),
+	smithy.NewStaticSchema(&set, 1575),
+	smithy.NewStaticSchema(&set, 1576),
+	smithy.NewStaticSchema(&set, 1577),
+	smithy.NewStaticSchema(&set, 1578),
+	smithy.NewStaticSchema(&set, 1579),
+	smithy.NewStaticSchema(&set, 1580),
+	smithy.NewStaticSchema(&set, 1581),
+	smithy.NewStaticSchema(&set, 1582),
+	smithy.NewStaticSchema(&set, 1583),
+	smithy.NewStaticSchema(&set, 1584),
+	smithy.NewStaticSchema(&set, 1585),
+	smithy.NewStaticSchema(&set, 1586),
+	smithy.NewStaticSchema(&set, 1587),
+	smithy.NewStaticSchema(&set, 1588),
+	smithy.NewStaticSchema(&set, 1589),
+	smithy.NewStaticSchema(&set, 1590),
+	smithy.NewStaticSchema(&set, 1591),
+	smithy.NewStaticSchema(&set, 1592),
+	smithy.NewStaticSchema(&set, 1593),
+	smithy.NewStaticSchema(&set, 1594),
+	smithy.NewStaticSchema(&set, 1595),
+	smithy.NewStaticSchema(&set, 1596),
+	smithy.NewStaticSchema(&set, 1597),
+	smithy.NewStaticSchema(&set, 1598),
+	smithy.NewStaticSchema(&set, 1599),
+	smithy.NewStaticSchema(&set, 1600),
+	smithy.NewStaticSchema(&set, 1601),
+	smithy.NewStaticSchema(&set, 1602),
+	smithy.NewStaticSchema(&set, 1603),
+	smithy.NewStaticSchema(&set, 1604),
+	smithy.NewStaticSchema(&set, 1605),
+	smithy.NewStaticSchema(&set, 1606),
+	smithy.NewStaticSchema(&set, 1607),
+	smithy.NewStaticSchema(&set, 1608),
+	smithy.NewStaticSchema(&set, 1609),
+	smithy.NewStaticSchema(&set, 1610),
+	smithy.NewStaticSchema(&set, 1611),
+	smithy.NewStaticSchema(&set, 1612),
+	smithy.NewStaticSchema(&set, 1613),
+	smithy.NewStaticSchema(&set, 1614),
+	smithy.NewStaticSchema(&set, 1615),
+	smithy.NewStaticSchema(&set, 1616),
+	smithy.NewStaticSchema(&set, 1617),
+	smithy.NewStaticSchema(&set, 1618),
+	smithy.NewStaticSchema(&set, 1619),
+	smithy.NewStaticSchema(&set, 1620),
+	smithy.NewStaticSchema(&set, 1621),
+	smithy.NewStaticSchema(&set, 1622),
+	smithy.NewStaticSchema(&set, 1623),
+	smithy.NewStaticSchema(&set, 1624),
+	smithy.NewStaticSchema(&set, 1625),
+	smithy.NewStaticSchema(&set, 1626),
+	smithy.NewStaticSchema(&set, 1627),
+	smithy.NewStaticSchema(&set, 1628),
+	smithy.NewStaticSchema(&set, 1629),
+	smithy.NewStaticSchema(&set, 1630),
+	smithy.NewStaticSchema(&set, 1631),
+	smithy.NewStaticSchema(&set, 1632),
+	smithy.NewStaticSchema(&set, 1633),
+	smithy.NewStaticSchema(&set, 1634),
+	smithy.NewStaticSchema(&set, 1635),
+	smithy.NewStaticSchema(&set, 1636),
+	smithy.NewStaticSchema(&set, 1637),
+	smithy.NewStaticSchema(&set, 1638),
+	smithy.NewStaticSchema(&set, 1639),
+	smithy.NewStaticSchema(&set, 1640),
+	smithy.NewStaticSchema(&set, 1641),
+	smithy.NewStaticSchema(&set, 1642),
+	smithy.NewStaticSchema(&set, 1643),
+	smithy.NewStaticSchema(&set, 1644),
+	smithy.NewStaticSchema(&set, 1645),
+	smithy.NewStaticSchema(&set, 1646),
+	smithy.NewStaticSchema(&set, 1647),
+	smithy.NewStaticSchema(&set, 1648),
+	smithy.NewStaticSchema(&set, 1649),
+	smithy.NewStaticSchema(&set, 1650),
+	smithy.NewStaticSchema(&set, 1651),
+	smithy.NewStaticSchema(&set, 1652),
+	smithy.NewStaticSchema(&set, 1653),
+	smithy.NewStaticSchema(&set, 1654),
+	smithy.NewStaticSchema(&set, 1655),
+	smithy.NewStaticSchema(&set, 1656),
+	smithy.NewStaticSchema(&set, 1657),
+	smithy.NewStaticSchema(&set, 1658),
+	smithy.NewStaticSchema(&set, 1659),
+	smithy.NewStaticSchema(&set, 1660),
+	smithy.NewStaticSchema(&set, 1661),
+	smithy.NewStaticSchema(&set, 1662),
+	smithy.NewStaticSchema(&set, 1663),
+	smithy.NewStaticSchema(&set, 1664),
+	smithy.NewStaticSchema(&set, 1665),
+	smithy.NewStaticSchema(&set, 1666),
+	smithy.NewStaticSchema(&set, 1667),
+	smithy.NewStaticSchema(&set, 1668),
+	smithy.NewStaticSchema(&set, 1669),
+	smithy.NewStaticSchema(&set, 1670),
+	smithy.NewStaticSchema(&set, 1671),
+	smithy.NewStaticSchema(&set, 1672),
+	smithy.NewStaticSchema(&set, 1673),
+	smithy.NewStaticSchema(&set, 1674),
+	smithy.NewStaticSchema(&set, 1675),
+	smithy.NewStaticSchema(&set, 1676),
+	smithy.NewStaticSchema(&set, 1677),
+	smithy.NewStaticSchema(&set, 1678),
+	smithy.NewStaticSchema(&set, 1679),
+	smithy.NewStaticSchema(&set, 1680),
+	smithy.NewStaticSchema(&set, 1681),
+	smithy.NewStaticSchema(&set, 1682),
+	smithy.NewStaticSchema(&set, 1683),
+	smithy.NewStaticSchema(&set, 1684),
+	smithy.NewStaticSchema(&set, 1685),
+	smithy.NewStaticSchema(&set, 1686),
+	smithy.NewStaticSchema(&set, 1687),
+	smithy.NewStaticSchema(&set, 1688),
+	smithy.NewStaticSchema(&set, 1689),
+	smithy.NewStaticSchema(&set, 1690),
+	smithy.NewStaticSchema(&set, 1691),
+	smithy.NewStaticSchema(&set, 1692),
+	smithy.NewStaticSchema(&set, 1693),
+	smithy.NewStaticSchema(&set, 1694),
+	smithy.NewStaticSchema(&set, 1695),
+	smithy.NewStaticSchema(&set, 1696),
+	smithy.NewStaticSchema(&set, 1697),
+	smithy.NewStaticSchema(&set, 1698),
+	smithy.NewStaticSchema(&set, 1699),
+	smithy.NewStaticSchema(&set, 1700),
+	smithy.NewStaticSchema(&set, 1701),
+	smithy.NewStaticSchema(&set, 1702),
+	smithy.NewStaticSchema(&set, 1703),
+	smithy.NewStaticSchema(&set, 1704),
+	smithy.NewStaticSchema(&set, 1705),
+	smithy.NewStaticSchema(&set, 1706),
+	smithy.NewStaticSchema(&set, 1707),
+	smithy.NewStaticSchema(&set, 1708),
+	smithy.NewStaticSchema(&set, 1709),
+	smithy.NewStaticSchema(&set, 1710),
+	smithy.NewStaticSchema(&set, 1711),
+	smithy.NewStaticSchema(&set, 1712),
+	smithy.NewStaticSchema(&set, 1713),
+	smithy.NewStaticSchema(&set, 1714),
+	smithy.NewStaticSchema(&set, 1715),
+	smithy.NewStaticSchema(&set, 1716),
+	smithy.NewStaticSchema(&set, 1717),
+	smithy.NewStaticSchema(&set, 1718),
+	smithy.NewStaticSchema(&set, 1719),
+	smithy.NewStaticSchema(&set, 1720),
+	smithy.NewStaticSchema(&set, 1721),
+	smithy.NewStaticSchema(&set, 1722),
+	smithy.NewStaticSchema(&set, 1723),
+	smithy.NewStaticSchema(&set, 1724),
+	smithy.NewStaticSchema(&set, 1725),
+	smithy.NewStaticSchema(&set, 1726),
+	smithy.NewStaticSchema(&set, 1727),
+	smithy.NewStaticSchema(&set, 1728),
+	smithy.NewStaticSchema(&set, 1729),
+	smithy.NewStaticSchema(&set, 1730),
+	smithy.NewStaticSchema(&set, 1731),
+	smithy.NewStaticSchema(&set, 1732),
+	smithy.NewStaticSchema(&set, 1733),
+	smithy.NewStaticSchema(&set, 1734),
+	smithy.NewStaticSchema(&set, 1735),
+	smithy.NewStaticSchema(&set, 1736),
+	smithy.NewStaticSchema(&set, 1737),
+	smithy.NewStaticSchema(&set, 1738),
+	smithy.NewStaticSchema(&set, 1739),
+	smithy.NewStaticSchema(&set, 1740),
+	smithy.NewStaticSchema(&set, 1741),
+	smithy.NewStaticSchema(&set, 1742),
+	smithy.NewStaticSchema(&set, 1743),
+	smithy.NewStaticSchema(&set, 1744),
+	smithy.NewStaticSchema(&set, 1745),
+	smithy.NewStaticSchema(&set, 1746),
+	smithy.NewStaticSchema(&set, 1747),
+	smithy.NewStaticSchema(&set, 1748),
+	smithy.NewStaticSchema(&set, 1749),
+	smithy.NewStaticSchema(&set, 1750),
+	smithy.NewStaticSchema(&set, 1751),
+	smithy.NewStaticSchema(&set, 1752),
+	smithy.NewStaticSchema(&set, 1753),
+	smithy.NewStaticSchema(&set, 1754),
+	smithy.NewStaticSchema(&set, 1755),
+	smithy.NewStaticSchema(&set, 1756),
+	smithy.NewStaticSchema(&set, 1757),
+	smithy.NewStaticSchema(&set, 1758),
+	smithy.NewStaticSchema(&set, 1759),
+	smithy.NewStaticSchema(&set, 1760),
+	smithy.NewStaticSchema(&set, 1761),
+	smithy.NewStaticSchema(&set, 1762),
+	smithy.NewStaticSchema(&set, 1763),
+	smithy.NewStaticSchema(&set, 1764),
+	smithy.NewStaticSchema(&set, 1765),
+	smithy.NewStaticSchema(&set, 1766),
+	smithy.NewStaticSchema(&set, 1767),
+	smithy.NewStaticSchema(&set, 1768),
+	smithy.NewStaticSchema(&set, 1769),
+	smithy.NewStaticSchema(&set, 1770),
+	smithy.NewStaticSchema(&set, 1771),
+	smithy.NewStaticSchema(&set, 1772),
+	smithy.NewStaticSchema(&set, 1773),
+	smithy.NewStaticSchema(&set, 1774),
+	smithy.NewStaticSchema(&set, 1775),
+	smithy.NewStaticSchema(&set, 1776),
+	smithy.NewStaticSchema(&set, 1777),
+	smithy.NewStaticSchema(&set, 1778),
+	smithy.NewStaticSchema(&set, 1779),
+	smithy.NewStaticSchema(&set, 1780),
+	smithy.NewStaticSchema(&set, 1781),
+	smithy.NewStaticSchema(&set, 1782),
+	smithy.NewStaticSchema(&set, 1783),
+	smithy.NewStaticSchema(&set, 1784),
+	smithy.NewStaticSchema(&set, 1785),
+	smithy.NewStaticSchema(&set, 1786),
+	smithy.NewStaticSchema(&set, 1787),
+	smithy.NewStaticSchema(&set, 1788),
+	smithy.NewStaticSchema(&set, 1789),
+	smithy.NewStaticSchema(&set, 1790),
+	smithy.NewStaticSchema(&set, 1791),
+	smithy.NewStaticSchema(&set, 1792),
+	smithy.NewStaticSchema(&set, 1793),
+	smithy.NewStaticSchema(&set, 1794),
+	smithy.NewStaticSchema(&set, 1795),
+	smithy.NewStaticSchema(&set, 1796),
+	smithy.NewStaticSchema(&set, 1797),
+	smithy.NewStaticSchema(&set, 1798),
+	smithy.NewStaticSchema(&set, 1799),
+	smithy.NewStaticSchema(&set, 1800),
+	smithy.NewStaticSchema(&set, 1801),
+	smithy.NewStaticSchema(&set, 1802),
+	smithy.NewStaticSchema(&set, 1803),
+	smithy.NewStaticSchema(&set, 1804),
+	smithy.NewStaticSchema(&set, 1805),
+	smithy.NewStaticSchema(&set, 1806),
+	smithy.NewStaticSchema(&set, 1807),
+	smithy.NewStaticSchema(&set, 1808),
+	smithy.NewStaticSchema(&set, 1809),
+	smithy.NewStaticSchema(&set, 1810),
+	smithy.NewStaticSchema(&set, 1811),
+	smithy.NewStaticSchema(&set, 1812),
+	smithy.NewStaticSchema(&set, 1813),
+	smithy.NewStaticSchema(&set, 1814),
+	smithy.NewStaticSchema(&set, 1815),
+	smithy.NewStaticSchema(&set, 1816),
+	smithy.NewStaticSchema(&set, 1817),
+	smithy.NewStaticSchema(&set, 1818),
+	smithy.NewStaticSchema(&set, 1819),
+	smithy.NewStaticSchema(&set, 1820),
+	smithy.NewStaticSchema(&set, 1821),
+	smithy.NewStaticSchema(&set, 1822),
+	smithy.NewStaticSchema(&set, 1823),
+	smithy.NewStaticSchema(&set, 1824),
+	smithy.NewStaticSchema(&set, 1825),
+	smithy.NewStaticSchema(&set, 1826),
+	smithy.NewStaticSchema(&set, 1827),
+	smithy.NewStaticSchema(&set, 1828),
+	smithy.NewStaticSchema(&set, 1829),
+	smithy.NewStaticSchema(&set, 1830),
+	smithy.NewStaticSchema(&set, 1831),
+	smithy.NewStaticSchema(&set, 1832),
+	smithy.NewStaticSchema(&set, 1833),
+	smithy.NewStaticSchema(&set, 1834),
+	smithy.NewStaticSchema(&set, 1835),
+	smithy.NewStaticSchema(&set, 1836),
+	smithy.NewStaticSchema(&set, 1837),
+	smithy.NewStaticSchema(&set, 1838),
+	smithy.NewStaticSchema(&set, 1839),
+	smithy.NewStaticSchema(&set, 1840),
+	smithy.NewStaticSchema(&set, 1841),
+	smithy.NewStaticSchema(&set, 1842),
+	smithy.NewStaticSchema(&set, 1843),
+	smithy.NewStaticSchema(&set, 1844),
+	smithy.NewStaticSchema(&set, 1845),
+	smithy.NewStaticSchema(&set, 1846),
+	smithy.NewStaticSchema(&set, 1847),
+	smithy.NewStaticSchema(&set, 1848),
+	smithy.NewStaticSchema(&set, 1849),
+	smithy.NewStaticSchema(&set, 1850),
+	smithy.NewStaticSchema(&set, 1851),
+	smithy.NewStaticSchema(&set, 1852),
+	smithy.NewStaticSchema(&set, 1853),
+	smithy.NewStaticSchema(&set, 1854),
+	smithy.NewStaticSchema(&set, 1855),
+	smithy.NewStaticSchema(&set, 1856),
+	smithy.NewStaticSchema(&set, 1857),
+	smithy.NewStaticSchema(&set, 1858),
+	smithy.NewStaticSchema(&set, 1859),
+	smithy.NewStaticSchema(&set, 1860),
+	smithy.NewStaticSchema(&set, 1861),
+	smithy.NewStaticSchema(&set, 1862),
+	smithy.NewStaticSchema(&set, 1863),
+	smithy.NewStaticSchema(&set, 1864),
+	smithy.NewStaticSchema(&set, 1865),
+	smithy.NewStaticSchema(&set, 1866),
+	smithy.NewStaticSchema(&set, 1867),
+	smithy.NewStaticSchema(&set, 1868),
+	smithy.NewStaticSchema(&set, 1869),
+	smithy.NewStaticSchema(&set, 1870),
+	smithy.NewStaticSchema(&set, 1871),
+	smithy.NewStaticSchema(&set, 1872),
+	smithy.NewStaticSchema(&set, 1873),
+	smithy.NewStaticSchema(&set, 1874),
+	smithy.NewStaticSchema(&set, 1875),
+	smithy.NewStaticSchema(&set, 1876),
+	smithy.NewStaticSchema(&set, 1877),
+	smithy.NewStaticSchema(&set, 1878),
+	smithy.NewStaticSchema(&set, 1879),
+	smithy.NewStaticSchema(&set, 1880),
+	smithy.NewStaticSchema(&set, 1881),
+	smithy.NewStaticSchema(&set, 1882),
+	smithy.NewStaticSchema(&set, 1883),
+	smithy.NewStaticSchema(&set, 1884),
+	smithy.NewStaticSchema(&set, 1885),
+	smithy.NewStaticSchema(&set, 1886),
+	smithy.NewStaticSchema(&set, 1887),
+	smithy.NewStaticSchema(&set, 1888),
+	smithy.NewStaticSchema(&set, 1889),
+	smithy.NewStaticSchema(&set, 1890),
+	smithy.NewStaticSchema(&set, 1891),
+	smithy.NewStaticSchema(&set, 1892),
+	smithy.NewStaticSchema(&set, 1893),
+	smithy.NewStaticSchema(&set, 1894),
+	smithy.NewStaticSchema(&set, 1895),
+	smithy.NewStaticSchema(&set, 1896),
+	smithy.NewStaticSchema(&set, 1897),
+	smithy.NewStaticSchema(&set, 1898),
+	smithy.NewStaticSchema(&set, 1899),
+	smithy.NewStaticSchema(&set, 1900),
+	smithy.NewStaticSchema(&set, 1901),
+	smithy.NewStaticSchema(&set, 1902),
+	smithy.NewStaticSchema(&set, 1903),
+	smithy.NewStaticSchema(&set, 1904),
+	smithy.NewStaticSchema(&set, 1905),
+	smithy.NewStaticSchema(&set, 1906),
+	smithy.NewStaticSchema(&set, 1907),
+	smithy.NewStaticSchema(&set, 1908),
+	smithy.NewStaticSchema(&set, 1909),
+	smithy.NewStaticSchema(&set, 1910),
+	smithy.NewStaticSchema(&set, 1911),
+	smithy.NewStaticSchema(&set, 1912),
+	smithy.NewStaticSchema(&set, 1913),
+	smithy.NewStaticSchema(&set, 1914),
+	smithy.NewStaticSchema(&set, 1915),
+	smithy.NewStaticSchema(&set, 1916),
+	smithy.NewStaticSchema(&set, 1917),
+	smithy.NewStaticSchema(&set, 1918),
+	smithy.NewStaticSchema(&set, 1919),
+	smithy.NewStaticSchema(&set, 1920),
+	smithy.NewStaticSchema(&set, 1921),
+	smithy.NewStaticSchema(&set, 1922),
+	smithy.NewStaticSchema(&set, 1923),
+	smithy.NewStaticSchema(&set, 1924),
+	smithy.NewStaticSchema(&set, 1925),
+	smithy.NewStaticSchema(&set, 1926),
+	smithy.NewStaticSchema(&set, 1927),
+	smithy.NewStaticSchema(&set, 1928),
+	smithy.NewStaticSchema(&set, 1929),
+	smithy.NewStaticSchema(&set, 1930),
+	smithy.NewStaticSchema(&set, 1931),
+	smithy.NewStaticSchema(&set, 1932),
+	smithy.NewStaticSchema(&set, 1933),
+	smithy.NewStaticSchema(&set, 1934),
+	smithy.NewStaticSchema(&set, 1935),
+	smithy.NewStaticSchema(&set, 1936),
+	smithy.NewStaticSchema(&set, 1937),
+	smithy.NewStaticSchema(&set, 1938),
+	smithy.NewStaticSchema(&set, 1939),
+	smithy.NewStaticSchema(&set, 1940),
+	smithy.NewStaticSchema(&set, 1941),
+	smithy.NewStaticSchema(&set, 1942),
+	smithy.NewStaticSchema(&set, 1943),
+	smithy.NewStaticSchema(&set, 1944),
+	smithy.NewStaticSchema(&set, 1945),
+	smithy.NewStaticSchema(&set, 1946),
+	smithy.NewStaticSchema(&set, 1947),
+	smithy.NewStaticSchema(&set, 1948),
+	smithy.NewStaticSchema(&set, 1949),
+	smithy.NewStaticSchema(&set, 1950),
+	smithy.NewStaticSchema(&set, 1951),
+	smithy.NewStaticSchema(&set, 1952),
+	smithy.NewStaticSchema(&set, 1953),
+	smithy.NewStaticSchema(&set, 1954),
+	smithy.NewStaticSchema(&set, 1955),
+	smithy.NewStaticSchema(&set, 1956),
+	smithy.NewStaticSchema(&set, 1957),
+	smithy.NewStaticSchema(&set, 1958),
+	smithy.NewStaticSchema(&set, 1959),
+	smithy.NewStaticSchema(&set, 1960),
+	smithy.NewStaticSchema(&set, 1961),
+	smithy.NewStaticSchema(&set, 1962),
+	smithy.NewStaticSchema(&set, 1963),
+	smithy.NewStaticSchema(&set, 1964),
+	smithy.NewStaticSchema(&set, 1965),
+	smithy.NewStaticSchema(&set, 1966),
+	smithy.NewStaticSchema(&set, 1967),
+	smithy.NewStaticSchema(&set, 1968),
+	smithy.NewStaticSchema(&set, 1969),
+	smithy.NewStaticSchema(&set, 1970),
+	smithy.NewStaticSchema(&set, 1971),
+	smithy.NewStaticSchema(&set, 1972),
+	smithy.NewStaticSchema(&set, 1973),
+	smithy.NewStaticSchema(&set, 1974),
+	smithy.NewStaticSchema(&set, 1975),
+	smithy.NewStaticSchema(&set, 1976),
+	smithy.NewStaticSchema(&set, 1977),
+	smithy.NewStaticSchema(&set, 1978),
+	smithy.NewStaticSchema(&set, 1979),
+	smithy.NewStaticSchema(&set, 1980),
+	smithy.NewStaticSchema(&set, 1981),
+	smithy.NewStaticSchema(&set, 1982),
+	smithy.NewStaticSchema(&set, 1983),
+	smithy.NewStaticSchema(&set, 1984),
+	smithy.NewStaticSchema(&set, 1985),
+	smithy.NewStaticSchema(&set, 1986),
+	smithy.NewStaticSchema(&set, 1987),
+	smithy.NewStaticSchema(&set, 1988),
+	smithy.NewStaticSchema(&set, 1989),
+	smithy.NewStaticSchema(&set, 1990),
+	smithy.NewStaticSchema(&set, 1991),
+	smithy.NewStaticSchema(&set, 1992),
+	smithy.NewStaticSchema(&set, 1993),
+	smithy.NewStaticSchema(&set, 1994),
+	smithy.NewStaticSchema(&set, 1995),
+	smithy.NewStaticSchema(&set, 1996),
+	smithy.NewStaticSchema(&set, 1997),
+	smithy.NewStaticSchema(&set, 1998),
+	smithy.NewStaticSchema(&set, 1999),
+	smithy.NewStaticSchema(&set, 2000),
+	smithy.NewStaticSchema(&set, 2001),
+	smithy.NewStaticSchema(&set, 2002),
+	smithy.NewStaticSchema(&set, 2003),
+	smithy.NewStaticSchema(&set, 2004),
+	smithy.NewStaticSchema(&set, 2005),
+	smithy.NewStaticSchema(&set, 2006),
+	smithy.NewStaticSchema(&set, 2007),
+	smithy.NewStaticSchema(&set, 2008),
+	smithy.NewStaticSchema(&set, 2009),
+	smithy.NewStaticSchema(&set, 2010),
+	smithy.NewStaticSchema(&set, 2011),
+	smithy.NewStaticSchema(&set, 2012),
+	smithy.NewStaticSchema(&set, 2013),
+	smithy.NewStaticSchema(&set, 2014),
+	smithy.NewStaticSchema(&set, 2015),
+	smithy.NewStaticSchema(&set, 2016),
+	smithy.NewStaticSchema(&set, 2017),
+	smithy.NewStaticSchema(&set, 2018),
+	smithy.NewStaticSchema(&set, 2019),
+	smithy.NewStaticSchema(&set, 2020),
+	smithy.NewStaticSchema(&set, 2021),
+	smithy.NewStaticSchema(&set, 2022),
+	smithy.NewStaticSchema(&set, 2023),
+	smithy.NewStaticSchema(&set, 2024),
+	smithy.NewStaticSchema(&set, 2025),
+	smithy.NewStaticSchema(&set, 2026),
+	smithy.NewStaticSchema(&set, 2027),
+	smithy.NewStaticSchema(&set, 2028),
+	smithy.NewStaticSchema(&set, 2029),
+	smithy.NewStaticSchema(&set, 2030),
+	smithy.NewStaticSchema(&set, 2031),
+	smithy.NewStaticSchema(&set, 2032),
+	smithy.NewStaticSchema(&set, 2033),
+	smithy.NewStaticSchema(&set, 2034),
+	smithy.NewStaticSchema(&set, 2035),
+	smithy.NewStaticSchema(&set, 2036),
+	smithy.NewStaticSchema(&set, 2037),
+	smithy.NewStaticSchema(&set, 2038),
+	smithy.NewStaticSchema(&set, 2039),
+	smithy.NewStaticSchema(&set, 2040),
+	smithy.NewStaticSchema(&set, 2041),
+	smithy.NewStaticSchema(&set, 2042),
+	smithy.NewStaticSchema(&set, 2043),
+	smithy.NewStaticSchema(&set, 2044),
+	smithy.NewStaticSchema(&set, 2045),
+	smithy.NewStaticSchema(&set, 2046),
+	smithy.NewStaticSchema(&set, 2047),
+	smithy.NewStaticSchema(&set, 2048),
+	smithy.NewStaticSchema(&set, 2049),
+	smithy.NewStaticSchema(&set, 2050),
+	smithy.NewStaticSchema(&set, 2051),
+	smithy.NewStaticSchema(&set, 2052),
+	smithy.NewStaticSchema(&set, 2053),
+	smithy.NewStaticSchema(&set, 2054),
+	smithy.NewStaticSchema(&set, 2055),
+	smithy.NewStaticSchema(&set, 2056),
+	smithy.NewStaticSchema(&set, 2057),
+	smithy.NewStaticSchema(&set, 2058),
+	smithy.NewStaticSchema(&set, 2059),
+	smithy.NewStaticSchema(&set, 2060),
+	smithy.NewStaticSchema(&set, 2061),
+	smithy.NewStaticSchema(&set, 2062),
+	smithy.NewStaticSchema(&set, 2063),
+	smithy.NewStaticSchema(&set, 2064),
+	smithy.NewStaticSchema(&set, 2065),
+	smithy.NewStaticSchema(&set, 2066),
+	smithy.NewStaticSchema(&set, 2067),
+	smithy.NewStaticSchema(&set, 2068),
+	smithy.NewStaticSchema(&set, 2069),
+	smithy.NewStaticSchema(&set, 2070),
+	smithy.NewStaticSchema(&set, 2071),
+	smithy.NewStaticSchema(&set, 2072),
+	smithy.NewStaticSchema(&set, 2073),
+	smithy.NewStaticSchema(&set, 2074),
+	smithy.NewStaticSchema(&set, 2075),
+	smithy.NewStaticSchema(&set, 2076),
+	smithy.NewStaticSchema(&set, 2077),
+	smithy.NewStaticSchema(&set, 2078),
+	smithy.NewStaticSchema(&set, 2079),
+	smithy.NewStaticSchema(&set, 2080),
+	smithy.NewStaticSchema(&set, 2081),
+	smithy.NewStaticSchema(&set, 2082),
+	smithy.NewStaticSchema(&set, 2083),
+	smithy.NewStaticSchema(&set, 2084),
+	smithy.NewStaticSchema(&set, 2085),
+	smithy.NewStaticSchema(&set, 2086),
+	smithy.NewStaticSchema(&set, 2087),
+	smithy.NewStaticSchema(&set, 2088),
+	smithy.NewStaticSchema(&set, 2089),
+	smithy.NewStaticSchema(&set, 2090),
+	smithy.NewStaticSchema(&set, 2091),
+	smithy.NewStaticSchema(&set, 2092),
+	smithy.NewStaticSchema(&set, 2093),
+	smithy.NewStaticSchema(&set, 2094),
+	smithy.NewStaticSchema(&set, 2095),
+	smithy.NewStaticSchema(&set, 2096),
+	smithy.NewStaticSchema(&set, 2097),
+	smithy.NewStaticSchema(&set, 2098),
+	smithy.NewStaticSchema(&set, 2099),
+	smithy.NewStaticSchema(&set, 2100),
+	smithy.NewStaticSchema(&set, 2101),
+	smithy.NewStaticSchema(&set, 2102),
+	smithy.NewStaticSchema(&set, 2103),
+	smithy.NewStaticSchema(&set, 2104),
+	smithy.NewStaticSchema(&set, 2105),
+	smithy.NewStaticSchema(&set, 2106),
+	smithy.NewStaticSchema(&set, 2107),
+	smithy.NewStaticSchema(&set, 2108),
+	smithy.NewStaticSchema(&set, 2109),
+	smithy.NewStaticSchema(&set, 2110),
+	smithy.NewStaticSchema(&set, 2111),
+	smithy.NewStaticSchema(&set, 2112),
+	smithy.NewStaticSchema(&set, 2113),
+	smithy.NewStaticSchema(&set, 2114),
+	smithy.NewStaticSchema(&set, 2115),
+	smithy.NewStaticSchema(&set, 2116),
+	smithy.NewStaticSchema(&set, 2117),
+	smithy.NewStaticSchema(&set, 2118),
+	smithy.NewStaticSchema(&set, 2119),
+	smithy.NewStaticSchema(&set, 2120),
+	smithy.NewStaticSchema(&set, 2121),
+	smithy.NewStaticSchema(&set, 2122),
+	smithy.NewStaticSchema(&set, 2123),
+	smithy.NewStaticSchema(&set, 2124),
+	smithy.NewStaticSchema(&set, 2125),
+	smithy.NewStaticSchema(&set, 2126),
+	smithy.NewStaticSchema(&set, 2127),
+	smithy.NewStaticSchema(&set, 2128),
+	smithy.NewStaticSchema(&set, 2129),
+	smithy.NewStaticSchema(&set, 2130),
+	smithy.NewStaticSchema(&set, 2131),
+	smithy.NewStaticSchema(&set, 2132),
+	smithy.NewStaticSchema(&set, 2133),
+	smithy.NewStaticSchema(&set, 2134),
+	smithy.NewStaticSchema(&set, 2135),
+	smithy.NewStaticSchema(&set, 2136),
+	smithy.NewStaticSchema(&set, 2137),
+	smithy.NewStaticSchema(&set, 2138),
+	smithy.NewStaticSchema(&set, 2139),
+	smithy.NewStaticSchema(&set, 2140),
+	smithy.NewStaticSchema(&set, 2141),
+	smithy.NewStaticSchema(&set, 2142),
+	smithy.NewStaticSchema(&set, 2143),
+	smithy.NewStaticSchema(&set, 2144),
+	smithy.NewStaticSchema(&set, 2145),
+	smithy.NewStaticSchema(&set, 2146),
+	smithy.NewStaticSchema(&set, 2147),
+	smithy.NewStaticSchema(&set, 2148),
+	smithy.NewStaticSchema(&set, 2149),
+	smithy.NewStaticSchema(&set, 2150),
+	smithy.NewStaticSchema(&set, 2151),
+	smithy.NewStaticSchema(&set, 2152),
+	smithy.NewStaticSchema(&set, 2153),
+	smithy.NewStaticSchema(&set, 2154),
+	smithy.NewStaticSchema(&set, 2155),
+	smithy.NewStaticSchema(&set, 2156),
+	smithy.NewStaticSchema(&set, 2157),
+	smithy.NewStaticSchema(&set, 2158),
+	smithy.NewStaticSchema(&set, 2159),
+	smithy.NewStaticSchema(&set, 2160),
+	smithy.NewStaticSchema(&set, 2161),
+	smithy.NewStaticSchema(&set, 2162),
+	smithy.NewStaticSchema(&set, 2163),
+	smithy.NewStaticSchema(&set, 2164),
+	smithy.NewStaticSchema(&set, 2165),
+	smithy.NewStaticSchema(&set, 2166),
+	smithy.NewStaticSchema(&set, 2167),
+}
+
+var CalculateIsolines = &handles[0]
+
+var CalculateRouteMatrix = &handles[1]
+
+var CalculateRoutes = &handles[2]
+
+var OptimizeWaypoints = &handles[3]
+
+var SnapToRoads = &handles[4]
+
+var _RoutesService = &handles[5]
+
+var AccessDeniedException = &handles[6]
+var AccessDeniedException_Message = &handles[7]
+
+var _ApiKey = &handles[8]
+
+var _BeforeWaypointsList = &handles[9]
+var _BeforeWaypointsList_member = &handles[10]
+
+var _BoundingBox = &handles[11]
+var _BoundingBox_member = &handles[12]
+
+var Circle = &handles[13]
+var Circle_Center = &handles[14]
+var Circle_Radius = &handles[15]
+
+var _ClusterIndex = &handles[16]
+
+var Corridor = &handles[17]
+var Corridor_LineString = &handles[18]
+var Corridor_Radius = &handles[19]
+
+var _CountryCode = &handles[20]
+
+var _CountryCode3 = &handles[21]
+
+var _CountryCodeList = &handles[22]
+var _CountryCodeList_member = &handles[23]
+
+var _CurrencyCode = &handles[24]
+
+var DayOfWeek = &handles[25]
+var DayOfWeek_MONDAY = &handles[26]
+var DayOfWeek_TUESDAY = &handles[27]
+var DayOfWeek_WEDNESDAY = &handles[28]
+var DayOfWeek_THURSDAY = &handles[29]
+var DayOfWeek_FRIDAY = &handles[30]
+var DayOfWeek_SATURDAY = &handles[31]
+var DayOfWeek_SUNDAY = &handles[32]
+
+var _DimensionCentimeters = &handles[33]
+
+var _DistanceMeters = &handles[34]
+
+var _DistanceThresholdList = &handles[35]
+var _DistanceThresholdList_member = &handles[36]
+
+var _DurationSeconds = &handles[37]
+
+var _EnergyKilowattHours = &handles[38]
+
+var GeometryFormat = &handles[39]
+var GeometryFormat_FLEXIBLE_POLYLINE = &handles[40]
+var GeometryFormat_SIMPLE = &handles[41]
+
+var _Heading = &handles[42]
+
+var _HexColor = &handles[43]
+
+var _IndexList = &handles[44]
+var _IndexList_member = &handles[45]
+
+var InternalServerException = &handles[46]
+var InternalServerException_Message = &handles[47]
+
+var Isoline = &handles[48]
+var Isoline_Connections = &handles[49]
+var Isoline_DistanceThreshold = &handles[50]
+var Isoline_Geometries = &handles[51]
+var Isoline_TimeThreshold = &handles[52]
+
+var IsolineAllowOptions = &handles[53]
+var IsolineAllowOptions_Hot = &handles[54]
+var IsolineAllowOptions_Hov = &handles[55]
+
+var IsolineAvoidanceArea = &handles[56]
+var IsolineAvoidanceArea_Except = &handles[57]
+var IsolineAvoidanceArea_Geometry = &handles[58]
+
+var IsolineAvoidanceAreaGeometry = &handles[59]
+var IsolineAvoidanceAreaGeometry_BoundingBox = &handles[60]
+var IsolineAvoidanceAreaGeometry_Corridor = &handles[61]
+var IsolineAvoidanceAreaGeometry_Polygon = &handles[62]
+var IsolineAvoidanceAreaGeometry_PolylineCorridor = &handles[63]
+var IsolineAvoidanceAreaGeometry_PolylinePolygon = &handles[64]
+
+var _IsolineAvoidanceAreaGeometryList = &handles[65]
+var _IsolineAvoidanceAreaGeometryList_member = &handles[66]
+
+var _IsolineAvoidanceAreaList = &handles[67]
+var _IsolineAvoidanceAreaList_member = &handles[68]
+
+var IsolineAvoidanceOptions = &handles[69]
+var IsolineAvoidanceOptions_Areas = &handles[70]
+var IsolineAvoidanceOptions_CarShuttleTrains = &handles[71]
+var IsolineAvoidanceOptions_ControlledAccessHighways = &handles[72]
+var IsolineAvoidanceOptions_DirtRoads = &handles[73]
+var IsolineAvoidanceOptions_Ferries = &handles[74]
+var IsolineAvoidanceOptions_SeasonalClosure = &handles[75]
+var IsolineAvoidanceOptions_TollRoads = &handles[76]
+var IsolineAvoidanceOptions_TollTransponders = &handles[77]
+var IsolineAvoidanceOptions_TruckRoadTypes = &handles[78]
+var IsolineAvoidanceOptions_Tunnels = &handles[79]
+var IsolineAvoidanceOptions_UTurns = &handles[80]
+var IsolineAvoidanceOptions_ZoneCategories = &handles[81]
+
+var IsolineAvoidanceZoneCategory = &handles[82]
+var IsolineAvoidanceZoneCategory_Category = &handles[83]
+
+var _IsolineAvoidanceZoneCategoryList = &handles[84]
+var _IsolineAvoidanceZoneCategoryList_member = &handles[85]
+
+var IsolineCarOptions = &handles[86]
+var IsolineCarOptions_EngineType = &handles[87]
+var IsolineCarOptions_LicensePlate = &handles[88]
+var IsolineCarOptions_MaxSpeed = &handles[89]
+var IsolineCarOptions_Occupancy = &handles[90]
+
+var IsolineConnection = &handles[91]
+var IsolineConnection_FromPolygonIndex = &handles[92]
+var IsolineConnection_Geometry = &handles[93]
+var IsolineConnection_ToPolygonIndex = &handles[94]
+
+var IsolineConnectionGeometry = &handles[95]
+var IsolineConnectionGeometry_LineString = &handles[96]
+var IsolineConnectionGeometry_Polyline = &handles[97]
+
+var _IsolineConnectionList = &handles[98]
+var _IsolineConnectionList_member = &handles[99]
+
+var IsolineDestinationOptions = &handles[100]
+var IsolineDestinationOptions_AvoidActionsForDistance = &handles[101]
+var IsolineDestinationOptions_Heading = &handles[102]
+var IsolineDestinationOptions_Matching = &handles[103]
+var IsolineDestinationOptions_SideOfStreet = &handles[104]
+
+var IsolineEngineType = &handles[105]
+var IsolineEngineType_ELECTRIC = &handles[106]
+var IsolineEngineType_INTERNAL_COMBUSTION = &handles[107]
+var IsolineEngineType_PLUGIN_HYBRID = &handles[108]
+
+var IsolineGranularityOptions = &handles[109]
+var IsolineGranularityOptions_MaxPoints = &handles[110]
+var IsolineGranularityOptions_MaxResolution = &handles[111]
+
+var IsolineHazardousCargoType = &handles[112]
+var IsolineHazardousCargoType_COMBUSTIBLE = &handles[113]
+var IsolineHazardousCargoType_CORROSIVE = &handles[114]
+var IsolineHazardousCargoType_EXPLOSIVE = &handles[115]
+var IsolineHazardousCargoType_FLAMMABLE = &handles[116]
+var IsolineHazardousCargoType_GAS = &handles[117]
+var IsolineHazardousCargoType_HARMFUL_TO_WATER = &handles[118]
+var IsolineHazardousCargoType_ORGANIC = &handles[119]
+var IsolineHazardousCargoType_OTHER = &handles[120]
+var IsolineHazardousCargoType_POISON = &handles[121]
+var IsolineHazardousCargoType_POISONOUS_INHALATION = &handles[122]
+var IsolineHazardousCargoType_RADIOACTIVE = &handles[123]
+
+var _IsolineHazardousCargoTypeList = &handles[124]
+var _IsolineHazardousCargoTypeList_member = &handles[125]
+
+var _IsolineList = &handles[126]
+var _IsolineList_member = &handles[127]
+
+var IsolineMatchingOptions = &handles[128]
+var IsolineMatchingOptions_NameHint = &handles[129]
+var IsolineMatchingOptions_OnRoadThreshold = &handles[130]
+var IsolineMatchingOptions_Radius = &handles[131]
+var IsolineMatchingOptions_Strategy = &handles[132]
+
+var IsolineOptimizationObjective = &handles[133]
+var IsolineOptimizationObjective_ACCURATE_CALCULATION = &handles[134]
+var IsolineOptimizationObjective_BALANCED_CALCULATION = &handles[135]
+var IsolineOptimizationObjective_FAST_CALCULATION = &handles[136]
+
+var IsolineOriginOptions = &handles[137]
+var IsolineOriginOptions_AvoidActionsForDistance = &handles[138]
+var IsolineOriginOptions_Heading = &handles[139]
+var IsolineOriginOptions_Matching = &handles[140]
+var IsolineOriginOptions_SideOfStreet = &handles[141]
+
+var IsolineScooterOptions = &handles[142]
+var IsolineScooterOptions_EngineType = &handles[143]
+var IsolineScooterOptions_LicensePlate = &handles[144]
+var IsolineScooterOptions_MaxSpeed = &handles[145]
+var IsolineScooterOptions_Occupancy = &handles[146]
+
+var IsolineShapeGeometry = &handles[147]
+var IsolineShapeGeometry_Polygon = &handles[148]
+var IsolineShapeGeometry_PolylinePolygon = &handles[149]
+
+var _IsolineShapeGeometryList = &handles[150]
+var _IsolineShapeGeometryList_member = &handles[151]
+
+var IsolineSideOfStreetOptions = &handles[152]
+var IsolineSideOfStreetOptions_Position = &handles[153]
+var IsolineSideOfStreetOptions_UseWith = &handles[154]
+
+var IsolineThresholds = &handles[155]
+var IsolineThresholds_Distance = &handles[156]
+var IsolineThresholds_Time = &handles[157]
+
+var IsolineTrafficOptions = &handles[158]
+var IsolineTrafficOptions_FlowEventThresholdOverride = &handles[159]
+var IsolineTrafficOptions_Usage = &handles[160]
+
+var IsolineTrailerOptions = &handles[161]
+var IsolineTrailerOptions_AxleCount = &handles[162]
+var IsolineTrailerOptions_TrailerCount = &handles[163]
+
+var IsolineTravelMode = &handles[164]
+var IsolineTravelMode_CAR = &handles[165]
+var IsolineTravelMode_PEDESTRIAN = &handles[166]
+var IsolineTravelMode_SCOOTER = &handles[167]
+var IsolineTravelMode_TRUCK = &handles[168]
+
+var IsolineTravelModeOptions = &handles[169]
+var IsolineTravelModeOptions_Car = &handles[170]
+var IsolineTravelModeOptions_Scooter = &handles[171]
+var IsolineTravelModeOptions_Truck = &handles[172]
+
+var IsolineTruckOptions = &handles[173]
+var IsolineTruckOptions_AxleCount = &handles[174]
+var IsolineTruckOptions_EngineType = &handles[175]
+var IsolineTruckOptions_GrossWeight = &handles[176]
+var IsolineTruckOptions_HazardousCargos = &handles[177]
+var IsolineTruckOptions_Height = &handles[178]
+var IsolineTruckOptions_HeightAboveFirstAxle = &handles[179]
+var IsolineTruckOptions_KpraLength = &handles[180]
+var IsolineTruckOptions_Length = &handles[181]
+var IsolineTruckOptions_LicensePlate = &handles[182]
+var IsolineTruckOptions_MaxSpeed = &handles[183]
+var IsolineTruckOptions_Occupancy = &handles[184]
+var IsolineTruckOptions_PayloadCapacity = &handles[185]
+var IsolineTruckOptions_TireCount = &handles[186]
+var IsolineTruckOptions_Trailer = &handles[187]
+var IsolineTruckOptions_TruckType = &handles[188]
+var IsolineTruckOptions_TunnelRestrictionCode = &handles[189]
+var IsolineTruckOptions_WeightPerAxle = &handles[190]
+var IsolineTruckOptions_WeightPerAxleGroup = &handles[191]
+var IsolineTruckOptions_Width = &handles[192]
+
+var IsolineTruckType = &handles[193]
+var IsolineTruckType_LIGHT_TRUCK = &handles[194]
+var IsolineTruckType_STRAIGHT_TRUCK = &handles[195]
+var IsolineTruckType_TRACTOR = &handles[196]
+
+var IsolineVehicleLicensePlate = &handles[197]
+var IsolineVehicleLicensePlate_LastCharacter = &handles[198]
+
+var IsolineZoneCategory = &handles[199]
+var IsolineZoneCategory_CONGESTION_PRICING = &handles[200]
+var IsolineZoneCategory_ENVIRONMENTAL = &handles[201]
+var IsolineZoneCategory_VIGNETTE = &handles[202]
+
+var _LanguageTag = &handles[203]
+
+var _LanguageTagList = &handles[204]
+var _LanguageTagList_member = &handles[205]
+
+var _LinearRing = &handles[206]
+var _LinearRing_member = &handles[207]
+
+var _LinearRings = &handles[208]
+var _LinearRings_member = &handles[209]
+
+var _LineString = &handles[210]
+var _LineString_member = &handles[211]
+
+var LocalizedString = &handles[212]
+var LocalizedString_Language = &handles[213]
+var LocalizedString_Value = &handles[214]
+
+var _LocalizedStringList = &handles[215]
+var _LocalizedStringList_member = &handles[216]
+
+var MatchingStrategy = &handles[217]
+var MatchingStrategy_MATCH_ANY = &handles[218]
+var MatchingStrategy_MATCH_MOST_SIGNIFICANT_ROAD = &handles[219]
+
+var MeasurementSystem = &handles[220]
+var MeasurementSystem_METRIC = &handles[221]
+var MeasurementSystem_IMPERIAL = &handles[222]
+
+var _Polyline = &handles[223]
+
+var PolylineCorridor = &handles[224]
+var PolylineCorridor_Polyline = &handles[225]
+var PolylineCorridor_Radius = &handles[226]
+
+var _PolylineRing = &handles[227]
+
+var _PolylineRingList = &handles[228]
+var _PolylineRingList_member = &handles[229]
+
+var _Position = &handles[230]
+var _Position_member = &handles[231]
+
+var _Position23 = &handles[232]
+var _Position23_member = &handles[233]
+
+var _PowerKilowatts = &handles[234]
+
+var RoadSnapHazardousCargoType = &handles[235]
+var RoadSnapHazardousCargoType_COMBUSTIBLE = &handles[236]
+var RoadSnapHazardousCargoType_CORROSIVE = &handles[237]
+var RoadSnapHazardousCargoType_EXPLOSIVE = &handles[238]
+var RoadSnapHazardousCargoType_FLAMMABLE = &handles[239]
+var RoadSnapHazardousCargoType_GAS = &handles[240]
+var RoadSnapHazardousCargoType_HARMFUL_TO_WATER = &handles[241]
+var RoadSnapHazardousCargoType_ORGANIC = &handles[242]
+var RoadSnapHazardousCargoType_OTHER = &handles[243]
+var RoadSnapHazardousCargoType_POISON = &handles[244]
+var RoadSnapHazardousCargoType_POISONOUS_INHALATION = &handles[245]
+var RoadSnapHazardousCargoType_RADIOACTIVE = &handles[246]
+
+var _RoadSnapHazardousCargoTypeList = &handles[247]
+var _RoadSnapHazardousCargoTypeList_member = &handles[248]
+
+var RoadSnapNotice = &handles[249]
+var RoadSnapNotice_Code = &handles[250]
+var RoadSnapNotice_Title = &handles[251]
+var RoadSnapNotice_TracePointIndexes = &handles[252]
+
+var RoadSnapNoticeCode = &handles[253]
+var RoadSnapNoticeCode_TRACE_POINTS_HEADING_IGNORED = &handles[254]
+var RoadSnapNoticeCode_TRACE_POINTS_IGNORED = &handles[255]
+var RoadSnapNoticeCode_TRACE_POINTS_MOVED_BY_LARGE_DISTANCE = &handles[256]
+var RoadSnapNoticeCode_TRACE_POINTS_NOT_MATCHED = &handles[257]
+var RoadSnapNoticeCode_TRACE_POINTS_OUT_OF_SEQUENCE = &handles[258]
+var RoadSnapNoticeCode_TRACE_POINTS_SPEED_ESTIMATED = &handles[259]
+var RoadSnapNoticeCode_TRACE_POINTS_SPEED_IGNORED = &handles[260]
+
+var _RoadSnapNoticeList = &handles[261]
+var _RoadSnapNoticeList_member = &handles[262]
+
+var RoadSnapSnappedGeometry = &handles[263]
+var RoadSnapSnappedGeometry_LineString = &handles[264]
+var RoadSnapSnappedGeometry_Polyline = &handles[265]
+
+var RoadSnapSnappedTracePoint = &handles[266]
+var RoadSnapSnappedTracePoint_Confidence = &handles[267]
+var RoadSnapSnappedTracePoint_OriginalPosition = &handles[268]
+var RoadSnapSnappedTracePoint_SnappedPosition = &handles[269]
+
+var _RoadSnapSnappedTracePointList = &handles[270]
+var _RoadSnapSnappedTracePointList_member = &handles[271]
+
+var RoadSnapTracePoint = &handles[272]
+var RoadSnapTracePoint_Heading = &handles[273]
+var RoadSnapTracePoint_Position = &handles[274]
+var RoadSnapTracePoint_Speed = &handles[275]
+var RoadSnapTracePoint_Timestamp = &handles[276]
+
+var _RoadSnapTracePointIndexList = &handles[277]
+var _RoadSnapTracePointIndexList_member = &handles[278]
+
+var _RoadSnapTracePointList = &handles[279]
+var _RoadSnapTracePointList_member = &handles[280]
+
+var RoadSnapTrailerOptions = &handles[281]
+var RoadSnapTrailerOptions_TrailerCount = &handles[282]
+
+var RoadSnapTravelMode = &handles[283]
+var RoadSnapTravelMode_CAR = &handles[284]
+var RoadSnapTravelMode_PEDESTRIAN = &handles[285]
+var RoadSnapTravelMode_SCOOTER = &handles[286]
+var RoadSnapTravelMode_TRUCK = &handles[287]
+
+var RoadSnapTravelModeOptions = &handles[288]
+var RoadSnapTravelModeOptions_Truck = &handles[289]
+
+var RoadSnapTruckOptions = &handles[290]
+var RoadSnapTruckOptions_GrossWeight = &handles[291]
+var RoadSnapTruckOptions_HazardousCargos = &handles[292]
+var RoadSnapTruckOptions_Height = &handles[293]
+var RoadSnapTruckOptions_Length = &handles[294]
+var RoadSnapTruckOptions_Trailer = &handles[295]
+var RoadSnapTruckOptions_TunnelRestrictionCode = &handles[296]
+var RoadSnapTruckOptions_Width = &handles[297]
+
+var _RoundaboutAngle = &handles[298]
+
+var Route = &handles[299]
+var Route_Legs = &handles[300]
+var Route_MajorRoadLabels = &handles[301]
+var Route_Summary = &handles[302]
+
+var RouteAccessibilityAttribute = &handles[303]
+var RouteAccessibilityAttribute_WHEELCHAIR = &handles[304]
+
+var _RouteAccessibilityAttributeList = &handles[305]
+var _RouteAccessibilityAttributeList_member = &handles[306]
+
+var RouteAccessibilityAvailability = &handles[307]
+var RouteAccessibilityAvailability_AVAILABLE = &handles[308]
+var RouteAccessibilityAvailability_LIMITED = &handles[309]
+var RouteAccessibilityAvailability_UNAVAILABLE = &handles[310]
+var RouteAccessibilityAvailability_UNKNOWN = &handles[311]
+
+var RouteAccessibilityAvailabilityDetails = &handles[312]
+var RouteAccessibilityAvailabilityDetails_Wheelchair = &handles[313]
+
+var RouteAccessPointDetails = &handles[314]
+var RouteAccessPointDetails_Accessibility = &handles[315]
+
+var RouteAllowOptions = &handles[316]
+var RouteAllowOptions_Hot = &handles[317]
+var RouteAllowOptions_Hov = &handles[318]
+
+var RouteAttribution = &handles[319]
+var RouteAttribution_AttributionType = &handles[320]
+var RouteAttribution_WebLink = &handles[321]
+
+var _RouteAttributionList = &handles[322]
+var _RouteAttributionList_member = &handles[323]
+
+var RouteAttributionType = &handles[324]
+var RouteAttributionType_DISCLAIMER = &handles[325]
+var RouteAttributionType_TARIFF = &handles[326]
+
+var RouteAvoidanceArea = &handles[327]
+var RouteAvoidanceArea_Except = &handles[328]
+var RouteAvoidanceArea_Geometry = &handles[329]
+
+var RouteAvoidanceAreaGeometry = &handles[330]
+var RouteAvoidanceAreaGeometry_Corridor = &handles[331]
+var RouteAvoidanceAreaGeometry_BoundingBox = &handles[332]
+var RouteAvoidanceAreaGeometry_Polygon = &handles[333]
+var RouteAvoidanceAreaGeometry_PolylineCorridor = &handles[334]
+var RouteAvoidanceAreaGeometry_PolylinePolygon = &handles[335]
+
+var _RouteAvoidanceAreaGeometryList = &handles[336]
+var _RouteAvoidanceAreaGeometryList_member = &handles[337]
+
+var _RouteAvoidanceAreaList = &handles[338]
+var _RouteAvoidanceAreaList_member = &handles[339]
+
+var RouteAvoidanceOptions = &handles[340]
+var RouteAvoidanceOptions_Areas = &handles[341]
+var RouteAvoidanceOptions_CarShuttleTrains = &handles[342]
+var RouteAvoidanceOptions_ControlledAccessHighways = &handles[343]
+var RouteAvoidanceOptions_DirtRoads = &handles[344]
+var RouteAvoidanceOptions_Ferries = &handles[345]
+var RouteAvoidanceOptions_SeasonalClosure = &handles[346]
+var RouteAvoidanceOptions_TollRoads = &handles[347]
+var RouteAvoidanceOptions_TollTransponders = &handles[348]
+var RouteAvoidanceOptions_TruckRoadTypes = &handles[349]
+var RouteAvoidanceOptions_Tunnels = &handles[350]
+var RouteAvoidanceOptions_UTurns = &handles[351]
+var RouteAvoidanceOptions_ZoneCategories = &handles[352]
+
+var RouteAvoidanceZoneCategory = &handles[353]
+var RouteAvoidanceZoneCategory_Category = &handles[354]
+
+var _RouteAvoidanceZoneCategoryList = &handles[355]
+var _RouteAvoidanceZoneCategoryList_member = &handles[356]
+
+var RouteCarOptions = &handles[357]
+var RouteCarOptions_EngineType = &handles[358]
+var RouteCarOptions_LicensePlate = &handles[359]
+var RouteCarOptions_MaxSpeed = &handles[360]
+var RouteCarOptions_Occupancy = &handles[361]
+
+var RouteChargeStepDetails = &handles[362]
+var RouteChargeStepDetails_ArrivalCharge = &handles[363]
+var RouteChargeStepDetails_ConsumablePower = &handles[364]
+var RouteChargeStepDetails_DesiredCharge = &handles[365]
+
+var RouteContinueHighwayStepDetails = &handles[366]
+var RouteContinueHighwayStepDetails_Intersection = &handles[367]
+var RouteContinueHighwayStepDetails_SteeringDirection = &handles[368]
+var RouteContinueHighwayStepDetails_TurnAngle = &handles[369]
+var RouteContinueHighwayStepDetails_TurnIntensity = &handles[370]
+
+var RouteContinueStepDetails = &handles[371]
+var RouteContinueStepDetails_Intersection = &handles[372]
+
+var RouteDestinationOptions = &handles[373]
+var RouteDestinationOptions_AvoidActionsForDistance = &handles[374]
+var RouteDestinationOptions_AvoidUTurns = &handles[375]
+var RouteDestinationOptions_Heading = &handles[376]
+var RouteDestinationOptions_Matching = &handles[377]
+var RouteDestinationOptions_SideOfStreet = &handles[378]
+var RouteDestinationOptions_StopDuration = &handles[379]
+
+var RouteDirection = &handles[380]
+var RouteDirection_EAST = &handles[381]
+var RouteDirection_NORTH = &handles[382]
+var RouteDirection_SOUTH = &handles[383]
+var RouteDirection_WEST = &handles[384]
+
+var RouteDriverOptions = &handles[385]
+var RouteDriverOptions_Schedule = &handles[386]
+
+var RouteDriverScheduleInterval = &handles[387]
+var RouteDriverScheduleInterval_DriveDuration = &handles[388]
+var RouteDriverScheduleInterval_RestDuration = &handles[389]
+
+var _RouteDriverScheduleIntervalList = &handles[390]
+var _RouteDriverScheduleIntervalList_member = &handles[391]
+
+var RouteEmissionType = &handles[392]
+var RouteEmissionType_Co2EmissionClass = &handles[393]
+var RouteEmissionType_Type = &handles[394]
+
+var RouteEngineType = &handles[395]
+var RouteEngineType_ELECTRIC = &handles[396]
+var RouteEngineType_INTERNAL_COMBUSTION = &handles[397]
+var RouteEngineType_PLUGIN_HYBRID = &handles[398]
+
+var RouteEnterHighwayStepDetails = &handles[399]
+var RouteEnterHighwayStepDetails_Intersection = &handles[400]
+var RouteEnterHighwayStepDetails_SteeringDirection = &handles[401]
+var RouteEnterHighwayStepDetails_TurnAngle = &handles[402]
+var RouteEnterHighwayStepDetails_TurnIntensity = &handles[403]
+
+var RouteExclusionOptions = &handles[404]
+var RouteExclusionOptions_Countries = &handles[405]
+
+var RouteExitStepDetails = &handles[406]
+var RouteExitStepDetails_Intersection = &handles[407]
+var RouteExitStepDetails_RelativeExit = &handles[408]
+var RouteExitStepDetails_SteeringDirection = &handles[409]
+var RouteExitStepDetails_TurnAngle = &handles[410]
+var RouteExitStepDetails_TurnIntensity = &handles[411]
+
+var RouteFerryAfterTravelStep = &handles[412]
+var RouteFerryAfterTravelStep_Duration = &handles[413]
+var RouteFerryAfterTravelStep_Instruction = &handles[414]
+var RouteFerryAfterTravelStep_Type = &handles[415]
+
+var _RouteFerryAfterTravelStepList = &handles[416]
+var _RouteFerryAfterTravelStepList_member = &handles[417]
+
+var RouteFerryAfterTravelStepType = &handles[418]
+var RouteFerryAfterTravelStepType_DEBOARD = &handles[419]
+
+var RouteFerryArrival = &handles[420]
+var RouteFerryArrival_Place = &handles[421]
+var RouteFerryArrival_Time = &handles[422]
+
+var RouteFerryBeforeTravelStep = &handles[423]
+var RouteFerryBeforeTravelStep_Duration = &handles[424]
+var RouteFerryBeforeTravelStep_Instruction = &handles[425]
+var RouteFerryBeforeTravelStep_Type = &handles[426]
+
+var _RouteFerryBeforeTravelStepList = &handles[427]
+var _RouteFerryBeforeTravelStepList_member = &handles[428]
+
+var RouteFerryBeforeTravelStepType = &handles[429]
+var RouteFerryBeforeTravelStepType_BOARD = &handles[430]
+
+var RouteFerryDeparture = &handles[431]
+var RouteFerryDeparture_Place = &handles[432]
+var RouteFerryDeparture_Time = &handles[433]
+
+var RouteFerryLegDetails = &handles[434]
+var RouteFerryLegDetails_AfterTravelSteps = &handles[435]
+var RouteFerryLegDetails_Arrival = &handles[436]
+var RouteFerryLegDetails_BeforeTravelSteps = &handles[437]
+var RouteFerryLegDetails_Departure = &handles[438]
+var RouteFerryLegDetails_Notices = &handles[439]
+var RouteFerryLegDetails_PassThroughWaypoints = &handles[440]
+var RouteFerryLegDetails_RouteName = &handles[441]
+var RouteFerryLegDetails_Spans = &handles[442]
+var RouteFerryLegDetails_Summary = &handles[443]
+var RouteFerryLegDetails_TravelSteps = &handles[444]
+
+var RouteFerryNotice = &handles[445]
+var RouteFerryNotice_Code = &handles[446]
+var RouteFerryNotice_Impact = &handles[447]
+
+var RouteFerryNoticeCode = &handles[448]
+var RouteFerryNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = &handles[449]
+var RouteFerryNoticeCode_NO_SCHEDULE = &handles[450]
+var RouteFerryNoticeCode_OTHER = &handles[451]
+var RouteFerryNoticeCode_VIOLATED_AVOID_FERRY = &handles[452]
+var RouteFerryNoticeCode_VIOLATED_AVOID_RAIL_FERRY = &handles[453]
+var RouteFerryNoticeCode_SEASONAL_CLOSURE = &handles[454]
+var RouteFerryNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = &handles[455]
+var RouteFerryNoticeCode_VIOLATED_AVOID_AREAS = &handles[456]
+var RouteFerryNoticeCode_VIOLATED_VEHICLE_RESTRICTION = &handles[457]
+
+var _RouteFerryNoticeList = &handles[458]
+var _RouteFerryNoticeList_member = &handles[459]
+
+var RouteFerryOverviewSummary = &handles[460]
+var RouteFerryOverviewSummary_Distance = &handles[461]
+var RouteFerryOverviewSummary_Duration = &handles[462]
+
+var RouteFerryPlace = &handles[463]
+var RouteFerryPlace_Name = &handles[464]
+var RouteFerryPlace_OriginalPosition = &handles[465]
+var RouteFerryPlace_Position = &handles[466]
+var RouteFerryPlace_WaypointIndex = &handles[467]
+
+var RouteFerrySpan = &handles[468]
+var RouteFerrySpan_Country = &handles[469]
+var RouteFerrySpan_Distance = &handles[470]
+var RouteFerrySpan_Duration = &handles[471]
+var RouteFerrySpan_GeometryOffset = &handles[472]
+var RouteFerrySpan_Names = &handles[473]
+var RouteFerrySpan_Region = &handles[474]
+
+var _RouteFerrySpanList = &handles[475]
+var _RouteFerrySpanList_member = &handles[476]
+
+var RouteFerrySummary = &handles[477]
+var RouteFerrySummary_Overview = &handles[478]
+var RouteFerrySummary_TravelOnly = &handles[479]
+
+var RouteFerryTravelOnlySummary = &handles[480]
+var RouteFerryTravelOnlySummary_Duration = &handles[481]
+
+var RouteFerryTravelStep = &handles[482]
+var RouteFerryTravelStep_Distance = &handles[483]
+var RouteFerryTravelStep_Duration = &handles[484]
+var RouteFerryTravelStep_GeometryOffset = &handles[485]
+var RouteFerryTravelStep_Instruction = &handles[486]
+var RouteFerryTravelStep_Type = &handles[487]
+
+var _RouteFerryTravelStepList = &handles[488]
+var _RouteFerryTravelStepList_member = &handles[489]
+
+var RouteFerryTravelStepType = &handles[490]
+var RouteFerryTravelStepType_DEPART = &handles[491]
+var RouteFerryTravelStepType_CONTINUE = &handles[492]
+var RouteFerryTravelStepType_ARRIVE = &handles[493]
+
+var RouteHazardousCargoType = &handles[494]
+var RouteHazardousCargoType_COMBUSTIBLE = &handles[495]
+var RouteHazardousCargoType_CORROSIVE = &handles[496]
+var RouteHazardousCargoType_EXPLOSIVE = &handles[497]
+var RouteHazardousCargoType_FLAMMABLE = &handles[498]
+var RouteHazardousCargoType_GAS = &handles[499]
+var RouteHazardousCargoType_HARMFUL_TO_WATER = &handles[500]
+var RouteHazardousCargoType_ORGANIC = &handles[501]
+var RouteHazardousCargoType_OTHER = &handles[502]
+var RouteHazardousCargoType_POISON = &handles[503]
+var RouteHazardousCargoType_POISONOUS_INHALATION = &handles[504]
+var RouteHazardousCargoType_RADIOACTIVE = &handles[505]
+
+var _RouteHazardousCargoTypeList = &handles[506]
+var _RouteHazardousCargoTypeList_member = &handles[507]
+
+var RouteIntermodalEnabledLegs = &handles[508]
+var RouteIntermodalEnabledLegs_FIRST_LEG = &handles[509]
+var RouteIntermodalEnabledLegs_LAST_LEG = &handles[510]
+var RouteIntermodalEnabledLegs_ENTIRE_ROUTE = &handles[511]
+var RouteIntermodalEnabledLegs_NONE = &handles[512]
+
+var _RouteIntermodalEnabledLegsList = &handles[513]
+var _RouteIntermodalEnabledLegsList_member = &handles[514]
+
+var RouteIntermodalOptions = &handles[515]
+var RouteIntermodalOptions_AccessibilityAttributes = &handles[516]
+var RouteIntermodalOptions_MaxTransfers = &handles[517]
+var RouteIntermodalOptions_Pedestrian = &handles[518]
+var RouteIntermodalOptions_Rental = &handles[519]
+var RouteIntermodalOptions_Taxi = &handles[520]
+var RouteIntermodalOptions_Transit = &handles[521]
+var RouteIntermodalOptions_Vehicle = &handles[522]
+
+var RouteIntermodalPedestrianOptions = &handles[523]
+var RouteIntermodalPedestrianOptions_MaxDistance = &handles[524]
+var RouteIntermodalPedestrianOptions_Speed = &handles[525]
+
+var RouteIntermodalRentalOptions = &handles[526]
+var RouteIntermodalRentalOptions_AllowedModes = &handles[527]
+var RouteIntermodalRentalOptions_EnabledFor = &handles[528]
+var RouteIntermodalRentalOptions_ExcludedModes = &handles[529]
+
+var RouteIntermodalTaxiOptions = &handles[530]
+var RouteIntermodalTaxiOptions_AllowedModes = &handles[531]
+var RouteIntermodalTaxiOptions_EnabledFor = &handles[532]
+var RouteIntermodalTaxiOptions_ExcludedModes = &handles[533]
+
+var RouteIntermodalTransitOptions = &handles[534]
+var RouteIntermodalTransitOptions_AllowedModes = &handles[535]
+var RouteIntermodalTransitOptions_EnabledFor = &handles[536]
+var RouteIntermodalTransitOptions_ExcludedModes = &handles[537]
+
+var RouteIntermodalVehicleOptions = &handles[538]
+var RouteIntermodalVehicleOptions_AllowedModes = &handles[539]
+var RouteIntermodalVehicleOptions_EnabledFor = &handles[540]
+var RouteIntermodalVehicleOptions_ExcludedModes = &handles[541]
+
+var RouteKeepStepDetails = &handles[542]
+var RouteKeepStepDetails_Intersection = &handles[543]
+var RouteKeepStepDetails_SteeringDirection = &handles[544]
+var RouteKeepStepDetails_TurnAngle = &handles[545]
+var RouteKeepStepDetails_TurnIntensity = &handles[546]
+
+var RouteLeg = &handles[547]
+var RouteLeg_FerryLegDetails = &handles[548]
+var RouteLeg_Geometry = &handles[549]
+var RouteLeg_Language = &handles[550]
+var RouteLeg_PedestrianLegDetails = &handles[551]
+var RouteLeg_TravelMode = &handles[552]
+var RouteLeg_Type = &handles[553]
+var RouteLeg_VehicleLegDetails = &handles[554]
+var RouteLeg_RentalLegDetails = &handles[555]
+var RouteLeg_TaxiLegDetails = &handles[556]
+var RouteLeg_TransitLegDetails = &handles[557]
+
+var RouteLegAdditionalFeature = &handles[558]
+var RouteLegAdditionalFeature_ELEVATION = &handles[559]
+var RouteLegAdditionalFeature_INCIDENTS = &handles[560]
+var RouteLegAdditionalFeature_PASS_THROUGH_WAYPOINTS = &handles[561]
+var RouteLegAdditionalFeature_SUMMARY = &handles[562]
+var RouteLegAdditionalFeature_TOLLS = &handles[563]
+var RouteLegAdditionalFeature_TRAVEL_STEP_INSTRUCTIONS = &handles[564]
+var RouteLegAdditionalFeature_TRUCK_ROAD_TYPES = &handles[565]
+var RouteLegAdditionalFeature_TYPICAL_DURATION = &handles[566]
+var RouteLegAdditionalFeature_ZONES = &handles[567]
+var RouteLegAdditionalFeature_BOOKINGS = &handles[568]
+var RouteLegAdditionalFeature_INTERMEDIATE_STOPS = &handles[569]
+var RouteLegAdditionalFeature_NEXT_DEPARTURES = &handles[570]
+
+var _RouteLegAdditionalFeatureList = &handles[571]
+var _RouteLegAdditionalFeatureList_member = &handles[572]
+
+var RouteLegGeometry = &handles[573]
+var RouteLegGeometry_LineString = &handles[574]
+var RouteLegGeometry_Polyline = &handles[575]
+
+var _RouteLegList = &handles[576]
+var _RouteLegList_member = &handles[577]
+
+var RouteLegTravelMode = &handles[578]
+var RouteLegTravelMode_CAR = &handles[579]
+var RouteLegTravelMode_FERRY = &handles[580]
+var RouteLegTravelMode_PEDESTRIAN = &handles[581]
+var RouteLegTravelMode_SCOOTER = &handles[582]
+var RouteLegTravelMode_TRUCK = &handles[583]
+var RouteLegTravelMode_CAR_SHUTTLE_TRAIN = &handles[584]
+var RouteLegTravelMode_AERIAL_TRAMWAY = &handles[585]
+var RouteLegTravelMode_AIRPLANE = &handles[586]
+var RouteLegTravelMode_BUS = &handles[587]
+var RouteLegTravelMode_BUS_RAPID_TRANSIT = &handles[588]
+var RouteLegTravelMode_CITY_TRAIN = &handles[589]
+var RouteLegTravelMode_FUNICULAR_RAILWAY = &handles[590]
+var RouteLegTravelMode_HIGH_SPEED_TRAIN = &handles[591]
+var RouteLegTravelMode_INTERCITY_TRAIN = &handles[592]
+var RouteLegTravelMode_INTERREGIONAL_TRAIN = &handles[593]
+var RouteLegTravelMode_LIGHT_RAIL = &handles[594]
+var RouteLegTravelMode_MONORAIL = &handles[595]
+var RouteLegTravelMode_PRIVATE_BUS = &handles[596]
+var RouteLegTravelMode_REGIONAL_TRAIN = &handles[597]
+var RouteLegTravelMode_SUBWAY = &handles[598]
+
+var RouteLegType = &handles[599]
+var RouteLegType_FERRY = &handles[600]
+var RouteLegType_PEDESTRIAN = &handles[601]
+var RouteLegType_VEHICLE = &handles[602]
+var RouteLegType_RENTAL = &handles[603]
+var RouteLegType_TAXI = &handles[604]
+var RouteLegType_TRANSIT = &handles[605]
+
+var _RouteList = &handles[606]
+var _RouteList_member = &handles[607]
+
+var RouteMajorRoadLabel = &handles[608]
+var RouteMajorRoadLabel_RoadName = &handles[609]
+var RouteMajorRoadLabel_RouteNumber = &handles[610]
+
+var _RouteMajorRoadLabelList = &handles[611]
+var _RouteMajorRoadLabelList_member = &handles[612]
+
+var RouteMatchingOptions = &handles[613]
+var RouteMatchingOptions_NameHint = &handles[614]
+var RouteMatchingOptions_OnRoadThreshold = &handles[615]
+var RouteMatchingOptions_Radius = &handles[616]
+var RouteMatchingOptions_Strategy = &handles[617]
+
+var _RouteMatrix = &handles[618]
+var _RouteMatrix_member = &handles[619]
+
+var RouteMatrixAllowOptions = &handles[620]
+var RouteMatrixAllowOptions_Hot = &handles[621]
+var RouteMatrixAllowOptions_Hov = &handles[622]
+
+var RouteMatrixAutoCircle = &handles[623]
+var RouteMatrixAutoCircle_Margin = &handles[624]
+var RouteMatrixAutoCircle_MaxRadius = &handles[625]
+
+var RouteMatrixAvoidanceArea = &handles[626]
+var RouteMatrixAvoidanceArea_Geometry = &handles[627]
+
+var RouteMatrixAvoidanceAreaGeometry = &handles[628]
+var RouteMatrixAvoidanceAreaGeometry_BoundingBox = &handles[629]
+var RouteMatrixAvoidanceAreaGeometry_Polygon = &handles[630]
+var RouteMatrixAvoidanceAreaGeometry_PolylinePolygon = &handles[631]
+
+var _RouteMatrixAvoidanceAreaList = &handles[632]
+var _RouteMatrixAvoidanceAreaList_member = &handles[633]
+
+var RouteMatrixAvoidanceOptions = &handles[634]
+var RouteMatrixAvoidanceOptions_Areas = &handles[635]
+var RouteMatrixAvoidanceOptions_CarShuttleTrains = &handles[636]
+var RouteMatrixAvoidanceOptions_ControlledAccessHighways = &handles[637]
+var RouteMatrixAvoidanceOptions_DirtRoads = &handles[638]
+var RouteMatrixAvoidanceOptions_Ferries = &handles[639]
+var RouteMatrixAvoidanceOptions_TollRoads = &handles[640]
+var RouteMatrixAvoidanceOptions_TollTransponders = &handles[641]
+var RouteMatrixAvoidanceOptions_TruckRoadTypes = &handles[642]
+var RouteMatrixAvoidanceOptions_Tunnels = &handles[643]
+var RouteMatrixAvoidanceOptions_UTurns = &handles[644]
+var RouteMatrixAvoidanceOptions_ZoneCategories = &handles[645]
+
+var RouteMatrixAvoidanceZoneCategory = &handles[646]
+var RouteMatrixAvoidanceZoneCategory_Category = &handles[647]
+
+var _RouteMatrixAvoidanceZoneCategoryList = &handles[648]
+var _RouteMatrixAvoidanceZoneCategoryList_member = &handles[649]
+
+var RouteMatrixBoundary = &handles[650]
+var RouteMatrixBoundary_Geometry = &handles[651]
+var RouteMatrixBoundary_Unbounded = &handles[652]
+
+var RouteMatrixBoundaryGeometry = &handles[653]
+var RouteMatrixBoundaryGeometry_AutoCircle = &handles[654]
+var RouteMatrixBoundaryGeometry_Circle = &handles[655]
+var RouteMatrixBoundaryGeometry_BoundingBox = &handles[656]
+var RouteMatrixBoundaryGeometry_Polygon = &handles[657]
+
+var RouteMatrixCarOptions = &handles[658]
+var RouteMatrixCarOptions_LicensePlate = &handles[659]
+var RouteMatrixCarOptions_MaxSpeed = &handles[660]
+var RouteMatrixCarOptions_Occupancy = &handles[661]
+
+var RouteMatrixDestination = &handles[662]
+var RouteMatrixDestination_Options = &handles[663]
+var RouteMatrixDestination_Position = &handles[664]
+
+var _RouteMatrixDestinationList = &handles[665]
+var _RouteMatrixDestinationList_member = &handles[666]
+
+var RouteMatrixDestinationOptions = &handles[667]
+var RouteMatrixDestinationOptions_AvoidActionsForDistance = &handles[668]
+var RouteMatrixDestinationOptions_Heading = &handles[669]
+var RouteMatrixDestinationOptions_Matching = &handles[670]
+var RouteMatrixDestinationOptions_SideOfStreet = &handles[671]
+
+var RouteMatrixEntry = &handles[672]
+var RouteMatrixEntry_Distance = &handles[673]
+var RouteMatrixEntry_Duration = &handles[674]
+var RouteMatrixEntry_Error = &handles[675]
+
+var RouteMatrixErrorCode = &handles[676]
+var RouteMatrixErrorCode_NO_MATCH = &handles[677]
+var RouteMatrixErrorCode_NO_MATCH_DESTINATION = &handles[678]
+var RouteMatrixErrorCode_NO_MATCH_ORIGIN = &handles[679]
+var RouteMatrixErrorCode_NO_ROUTE = &handles[680]
+var RouteMatrixErrorCode_OUT_OF_BOUNDS = &handles[681]
+var RouteMatrixErrorCode_OUT_OF_BOUNDS_DESTINATION = &handles[682]
+var RouteMatrixErrorCode_OUT_OF_BOUNDS_ORIGIN = &handles[683]
+var RouteMatrixErrorCode_OTHER = &handles[684]
+var RouteMatrixErrorCode_VIOLATION = &handles[685]
+
+var RouteMatrixExclusionOptions = &handles[686]
+var RouteMatrixExclusionOptions_Countries = &handles[687]
+
+var RouteMatrixHazardousCargoType = &handles[688]
+var RouteMatrixHazardousCargoType_COMBUSTIBLE = &handles[689]
+var RouteMatrixHazardousCargoType_CORROSIVE = &handles[690]
+var RouteMatrixHazardousCargoType_EXPLOSIVE = &handles[691]
+var RouteMatrixHazardousCargoType_FLAMMABLE = &handles[692]
+var RouteMatrixHazardousCargoType_GAS = &handles[693]
+var RouteMatrixHazardousCargoType_HARMFUL_TO_WATER = &handles[694]
+var RouteMatrixHazardousCargoType_ORGANIC = &handles[695]
+var RouteMatrixHazardousCargoType_OTHER = &handles[696]
+var RouteMatrixHazardousCargoType_POISON = &handles[697]
+var RouteMatrixHazardousCargoType_POISONOUS_INHALATION = &handles[698]
+var RouteMatrixHazardousCargoType_RADIOACTIVE = &handles[699]
+
+var _RouteMatrixHazardousCargoTypeList = &handles[700]
+var _RouteMatrixHazardousCargoTypeList_member = &handles[701]
+
+var RouteMatrixMatchingOptions = &handles[702]
+var RouteMatrixMatchingOptions_NameHint = &handles[703]
+var RouteMatrixMatchingOptions_OnRoadThreshold = &handles[704]
+var RouteMatrixMatchingOptions_Radius = &handles[705]
+var RouteMatrixMatchingOptions_Strategy = &handles[706]
+
+var RouteMatrixOrigin = &handles[707]
+var RouteMatrixOrigin_Options = &handles[708]
+var RouteMatrixOrigin_Position = &handles[709]
+
+var _RouteMatrixOriginList = &handles[710]
+var _RouteMatrixOriginList_member = &handles[711]
+
+var RouteMatrixOriginOptions = &handles[712]
+var RouteMatrixOriginOptions_AvoidActionsForDistance = &handles[713]
+var RouteMatrixOriginOptions_Heading = &handles[714]
+var RouteMatrixOriginOptions_Matching = &handles[715]
+var RouteMatrixOriginOptions_SideOfStreet = &handles[716]
+
+var _RouteMatrixRow = &handles[717]
+var _RouteMatrixRow_member = &handles[718]
+
+var RouteMatrixScooterOptions = &handles[719]
+var RouteMatrixScooterOptions_LicensePlate = &handles[720]
+var RouteMatrixScooterOptions_MaxSpeed = &handles[721]
+var RouteMatrixScooterOptions_Occupancy = &handles[722]
+
+var RouteMatrixSideOfStreetOptions = &handles[723]
+var RouteMatrixSideOfStreetOptions_Position = &handles[724]
+var RouteMatrixSideOfStreetOptions_UseWith = &handles[725]
+
+var RouteMatrixTrafficOptions = &handles[726]
+var RouteMatrixTrafficOptions_FlowEventThresholdOverride = &handles[727]
+var RouteMatrixTrafficOptions_Usage = &handles[728]
+
+var RouteMatrixTrailerOptions = &handles[729]
+var RouteMatrixTrailerOptions_TrailerCount = &handles[730]
+
+var RouteMatrixTravelMode = &handles[731]
+var RouteMatrixTravelMode_CAR = &handles[732]
+var RouteMatrixTravelMode_PEDESTRIAN = &handles[733]
+var RouteMatrixTravelMode_SCOOTER = &handles[734]
+var RouteMatrixTravelMode_TRUCK = &handles[735]
+
+var RouteMatrixTravelModeOptions = &handles[736]
+var RouteMatrixTravelModeOptions_Car = &handles[737]
+var RouteMatrixTravelModeOptions_Scooter = &handles[738]
+var RouteMatrixTravelModeOptions_Truck = &handles[739]
+
+var RouteMatrixTruckOptions = &handles[740]
+var RouteMatrixTruckOptions_AxleCount = &handles[741]
+var RouteMatrixTruckOptions_GrossWeight = &handles[742]
+var RouteMatrixTruckOptions_HazardousCargos = &handles[743]
+var RouteMatrixTruckOptions_Height = &handles[744]
+var RouteMatrixTruckOptions_KpraLength = &handles[745]
+var RouteMatrixTruckOptions_Length = &handles[746]
+var RouteMatrixTruckOptions_LicensePlate = &handles[747]
+var RouteMatrixTruckOptions_MaxSpeed = &handles[748]
+var RouteMatrixTruckOptions_Occupancy = &handles[749]
+var RouteMatrixTruckOptions_PayloadCapacity = &handles[750]
+var RouteMatrixTruckOptions_Trailer = &handles[751]
+var RouteMatrixTruckOptions_TruckType = &handles[752]
+var RouteMatrixTruckOptions_TunnelRestrictionCode = &handles[753]
+var RouteMatrixTruckOptions_WeightPerAxle = &handles[754]
+var RouteMatrixTruckOptions_WeightPerAxleGroup = &handles[755]
+var RouteMatrixTruckOptions_Width = &handles[756]
+
+var RouteMatrixTruckType = &handles[757]
+var RouteMatrixTruckType_LIGHT_TRUCK = &handles[758]
+var RouteMatrixTruckType_STRAIGHT_TRUCK = &handles[759]
+var RouteMatrixTruckType_TRACTOR = &handles[760]
+
+var RouteMatrixVehicleLicensePlate = &handles[761]
+var RouteMatrixVehicleLicensePlate_LastCharacter = &handles[762]
+
+var RouteMatrixZoneCategory = &handles[763]
+var RouteMatrixZoneCategory_CONGESTION_PRICING = &handles[764]
+var RouteMatrixZoneCategory_ENVIRONMENTAL = &handles[765]
+var RouteMatrixZoneCategory_VIGNETTE = &handles[766]
+
+var RouteNoticeDetailRange = &handles[767]
+var RouteNoticeDetailRange_Min = &handles[768]
+var RouteNoticeDetailRange_Max = &handles[769]
+
+var RouteNoticeImpact = &handles[770]
+var RouteNoticeImpact_HIGH = &handles[771]
+var RouteNoticeImpact_LOW = &handles[772]
+
+var RouteNumber = &handles[773]
+var RouteNumber_Direction = &handles[774]
+var RouteNumber_Language = &handles[775]
+var RouteNumber_Value = &handles[776]
+
+var _RouteNumberList = &handles[777]
+var _RouteNumberList_member = &handles[778]
+
+var RouteOriginOptions = &handles[779]
+var RouteOriginOptions_AvoidActionsForDistance = &handles[780]
+var RouteOriginOptions_AvoidUTurns = &handles[781]
+var RouteOriginOptions_Heading = &handles[782]
+var RouteOriginOptions_Matching = &handles[783]
+var RouteOriginOptions_SideOfStreet = &handles[784]
+
+var RoutePassThroughPlace = &handles[785]
+var RoutePassThroughPlace_OriginalPosition = &handles[786]
+var RoutePassThroughPlace_Position = &handles[787]
+var RoutePassThroughPlace_WaypointIndex = &handles[788]
+
+var RoutePassThroughWaypoint = &handles[789]
+var RoutePassThroughWaypoint_GeometryOffset = &handles[790]
+var RoutePassThroughWaypoint_Place = &handles[791]
+
+var _RoutePassThroughWaypointList = &handles[792]
+var _RoutePassThroughWaypointList_member = &handles[793]
+
+var RoutePedestrianAfterTravelStep = &handles[794]
+var RoutePedestrianAfterTravelStep_Duration = &handles[795]
+var RoutePedestrianAfterTravelStep_Instruction = &handles[796]
+var RoutePedestrianAfterTravelStep_Type = &handles[797]
+
+var _RoutePedestrianAfterTravelStepList = &handles[798]
+var _RoutePedestrianAfterTravelStepList_member = &handles[799]
+
+var RoutePedestrianAfterTravelStepType = &handles[800]
+var RoutePedestrianAfterTravelStepType_WAIT = &handles[801]
+
+var RoutePedestrianArrival = &handles[802]
+var RoutePedestrianArrival_Place = &handles[803]
+var RoutePedestrianArrival_Time = &handles[804]
+
+var RoutePedestrianDeparture = &handles[805]
+var RoutePedestrianDeparture_Place = &handles[806]
+var RoutePedestrianDeparture_Time = &handles[807]
+
+var RoutePedestrianLegDetails = &handles[808]
+var RoutePedestrianLegDetails_AfterTravelSteps = &handles[809]
+var RoutePedestrianLegDetails_Arrival = &handles[810]
+var RoutePedestrianLegDetails_Departure = &handles[811]
+var RoutePedestrianLegDetails_Notices = &handles[812]
+var RoutePedestrianLegDetails_PassThroughWaypoints = &handles[813]
+var RoutePedestrianLegDetails_Spans = &handles[814]
+var RoutePedestrianLegDetails_Summary = &handles[815]
+var RoutePedestrianLegDetails_TravelSteps = &handles[816]
+
+var RoutePedestrianNotice = &handles[817]
+var RoutePedestrianNotice_Code = &handles[818]
+var RoutePedestrianNotice_Impact = &handles[819]
+
+var RoutePedestrianNoticeCode = &handles[820]
+var RoutePedestrianNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = &handles[821]
+var RoutePedestrianNoticeCode_OTHER = &handles[822]
+var RoutePedestrianNoticeCode_VIOLATED_AVOID_DIRT_ROAD = &handles[823]
+var RoutePedestrianNoticeCode_VIOLATED_AVOID_TUNNEL = &handles[824]
+var RoutePedestrianNoticeCode_VIOLATED_PEDESTRIAN_OPTION = &handles[825]
+var RoutePedestrianNoticeCode_VIOLATED_AVOID_AREAS = &handles[826]
+
+var _RoutePedestrianNoticeList = &handles[827]
+var _RoutePedestrianNoticeList_member = &handles[828]
+
+var RoutePedestrianOptions = &handles[829]
+var RoutePedestrianOptions_Speed = &handles[830]
+
+var RoutePedestrianOverviewSummary = &handles[831]
+var RoutePedestrianOverviewSummary_Distance = &handles[832]
+var RoutePedestrianOverviewSummary_Duration = &handles[833]
+
+var RoutePedestrianPlace = &handles[834]
+var RoutePedestrianPlace_AccessPointDetails = &handles[835]
+var RoutePedestrianPlace_Name = &handles[836]
+var RoutePedestrianPlace_OriginalPosition = &handles[837]
+var RoutePedestrianPlace_Position = &handles[838]
+var RoutePedestrianPlace_SideOfStreet = &handles[839]
+var RoutePedestrianPlace_StationDetails = &handles[840]
+var RoutePedestrianPlace_Type = &handles[841]
+var RoutePedestrianPlace_WaypointIndex = &handles[842]
+
+var RoutePedestrianPlaceType = &handles[843]
+var RoutePedestrianPlaceType_ACCESS_POINT = &handles[844]
+var RoutePedestrianPlaceType_DOCKING_STATION = &handles[845]
+var RoutePedestrianPlaceType_PARKING_LOT = &handles[846]
+var RoutePedestrianPlaceType_STATION = &handles[847]
+
+var RoutePedestrianSpan = &handles[848]
+var RoutePedestrianSpan_BestCaseDuration = &handles[849]
+var RoutePedestrianSpan_Country = &handles[850]
+var RoutePedestrianSpan_Distance = &handles[851]
+var RoutePedestrianSpan_Duration = &handles[852]
+var RoutePedestrianSpan_DynamicSpeed = &handles[853]
+var RoutePedestrianSpan_FunctionalClassification = &handles[854]
+var RoutePedestrianSpan_GeometryOffset = &handles[855]
+var RoutePedestrianSpan_Incidents = &handles[856]
+var RoutePedestrianSpan_Names = &handles[857]
+var RoutePedestrianSpan_PedestrianAccess = &handles[858]
+var RoutePedestrianSpan_Region = &handles[859]
+var RoutePedestrianSpan_RoadAttributes = &handles[860]
+var RoutePedestrianSpan_RouteNumbers = &handles[861]
+var RoutePedestrianSpan_SpeedLimit = &handles[862]
+var RoutePedestrianSpan_TypicalDuration = &handles[863]
+
+var _RoutePedestrianSpanList = &handles[864]
+var _RoutePedestrianSpanList_member = &handles[865]
+
+var RoutePedestrianSummary = &handles[866]
+var RoutePedestrianSummary_Overview = &handles[867]
+var RoutePedestrianSummary_TravelOnly = &handles[868]
+
+var RoutePedestrianTravelOnlySummary = &handles[869]
+var RoutePedestrianTravelOnlySummary_Duration = &handles[870]
+
+var RoutePedestrianTravelStep = &handles[871]
+var RoutePedestrianTravelStep_ContinueStepDetails = &handles[872]
+var RoutePedestrianTravelStep_CurrentRoad = &handles[873]
+var RoutePedestrianTravelStep_Distance = &handles[874]
+var RoutePedestrianTravelStep_Duration = &handles[875]
+var RoutePedestrianTravelStep_ExitNumber = &handles[876]
+var RoutePedestrianTravelStep_GeometryOffset = &handles[877]
+var RoutePedestrianTravelStep_Instruction = &handles[878]
+var RoutePedestrianTravelStep_KeepStepDetails = &handles[879]
+var RoutePedestrianTravelStep_NextRoad = &handles[880]
+var RoutePedestrianTravelStep_RoundaboutEnterStepDetails = &handles[881]
+var RoutePedestrianTravelStep_RoundaboutExitStepDetails = &handles[882]
+var RoutePedestrianTravelStep_RoundaboutPassStepDetails = &handles[883]
+var RoutePedestrianTravelStep_Signpost = &handles[884]
+var RoutePedestrianTravelStep_TurnStepDetails = &handles[885]
+var RoutePedestrianTravelStep_Type = &handles[886]
+
+var _RoutePedestrianTravelStepList = &handles[887]
+var _RoutePedestrianTravelStepList_member = &handles[888]
+
+var RoutePedestrianTravelStepType = &handles[889]
+var RoutePedestrianTravelStepType_ARRIVE = &handles[890]
+var RoutePedestrianTravelStepType_CONTINUE = &handles[891]
+var RoutePedestrianTravelStepType_DEPART = &handles[892]
+var RoutePedestrianTravelStepType_KEEP = &handles[893]
+var RoutePedestrianTravelStepType_ROUNDABOUT_ENTER = &handles[894]
+var RoutePedestrianTravelStepType_ROUNDABOUT_EXIT = &handles[895]
+var RoutePedestrianTravelStepType_ROUNDABOUT_PASS = &handles[896]
+var RoutePedestrianTravelStepType_TURN = &handles[897]
+
+var RouteRampStepDetails = &handles[898]
+var RouteRampStepDetails_Intersection = &handles[899]
+var RouteRampStepDetails_SteeringDirection = &handles[900]
+var RouteRampStepDetails_TurnAngle = &handles[901]
+var RouteRampStepDetails_TurnIntensity = &handles[902]
+
+var RouteRentalAfterTravelStep = &handles[903]
+var RouteRentalAfterTravelStep_Duration = &handles[904]
+var RouteRentalAfterTravelStep_Instruction = &handles[905]
+var RouteRentalAfterTravelStep_Type = &handles[906]
+
+var _RouteRentalAfterTravelStepList = &handles[907]
+var _RouteRentalAfterTravelStepList_member = &handles[908]
+
+var RouteRentalAfterTravelStepType = &handles[909]
+var RouteRentalAfterTravelStepType_PARK = &handles[910]
+
+var RouteRentalAgency = &handles[911]
+var RouteRentalAgency_Name = &handles[912]
+var RouteRentalAgency_Url = &handles[913]
+
+var RouteRentalArrival = &handles[914]
+var RouteRentalArrival_Place = &handles[915]
+var RouteRentalArrival_Time = &handles[916]
+
+var RouteRentalBeforeTravelStep = &handles[917]
+var RouteRentalBeforeTravelStep_Duration = &handles[918]
+var RouteRentalBeforeTravelStep_Instruction = &handles[919]
+var RouteRentalBeforeTravelStep_Type = &handles[920]
+
+var _RouteRentalBeforeTravelStepList = &handles[921]
+var _RouteRentalBeforeTravelStepList_member = &handles[922]
+
+var RouteRentalBeforeTravelStepType = &handles[923]
+var RouteRentalBeforeTravelStepType_SETUP = &handles[924]
+
+var RouteRentalDeparture = &handles[925]
+var RouteRentalDeparture_Place = &handles[926]
+var RouteRentalDeparture_Time = &handles[927]
+
+var RouteRentalLegDetails = &handles[928]
+var RouteRentalLegDetails_AfterTravelSteps = &handles[929]
+var RouteRentalLegDetails_Agency = &handles[930]
+var RouteRentalLegDetails_Arrival = &handles[931]
+var RouteRentalLegDetails_Attributions = &handles[932]
+var RouteRentalLegDetails_BeforeTravelSteps = &handles[933]
+var RouteRentalLegDetails_BookingWebLinks = &handles[934]
+var RouteRentalLegDetails_Departure = &handles[935]
+var RouteRentalLegDetails_Summary = &handles[936]
+var RouteRentalLegDetails_Transport = &handles[937]
+var RouteRentalLegDetails_TravelSteps = &handles[938]
+
+var RouteRentalMode = &handles[939]
+var RouteRentalMode_ALL = &handles[940]
+var RouteRentalMode_CAR = &handles[941]
+
+var _RouteRentalModeList = &handles[942]
+var _RouteRentalModeList_member = &handles[943]
+
+var RouteRentalOverviewSummary = &handles[944]
+var RouteRentalOverviewSummary_Duration = &handles[945]
+var RouteRentalOverviewSummary_Distance = &handles[946]
+
+var RouteRentalPlace = &handles[947]
+var RouteRentalPlace_AccessPointDetails = &handles[948]
+var RouteRentalPlace_Name = &handles[949]
+var RouteRentalPlace_OriginalPosition = &handles[950]
+var RouteRentalPlace_Position = &handles[951]
+var RouteRentalPlace_StationDetails = &handles[952]
+var RouteRentalPlace_Type = &handles[953]
+var RouteRentalPlace_WaypointIndex = &handles[954]
+
+var RouteRentalPlaceType = &handles[955]
+var RouteRentalPlaceType_ACCESS_POINT = &handles[956]
+var RouteRentalPlaceType_DOCKING_STATION = &handles[957]
+var RouteRentalPlaceType_PARKING_LOT = &handles[958]
+var RouteRentalPlaceType_STATION = &handles[959]
+
+var RouteRentalSummary = &handles[960]
+var RouteRentalSummary_Overview = &handles[961]
+var RouteRentalSummary_TravelOnly = &handles[962]
+
+var RouteRentalTransportModeDetails = &handles[963]
+var RouteRentalTransportModeDetails_AvailableSeats = &handles[964]
+var RouteRentalTransportModeDetails_Category = &handles[965]
+var RouteRentalTransportModeDetails_Color = &handles[966]
+var RouteRentalTransportModeDetails_Engine = &handles[967]
+var RouteRentalTransportModeDetails_LicensePlate = &handles[968]
+var RouteRentalTransportModeDetails_Mode = &handles[969]
+var RouteRentalTransportModeDetails_Model = &handles[970]
+var RouteRentalTransportModeDetails_Name = &handles[971]
+var RouteRentalTransportModeDetails_TextColor = &handles[972]
+
+var RouteRentalTravelOnlySummary = &handles[973]
+var RouteRentalTravelOnlySummary_Duration = &handles[974]
+
+var RouteRentalTravelStep = &handles[975]
+var RouteRentalTravelStep_ContinueStepDetails = &handles[976]
+var RouteRentalTravelStep_Distance = &handles[977]
+var RouteRentalTravelStep_Duration = &handles[978]
+var RouteRentalTravelStep_ExitStepDetails = &handles[979]
+var RouteRentalTravelStep_GeometryOffset = &handles[980]
+var RouteRentalTravelStep_Instruction = &handles[981]
+var RouteRentalTravelStep_KeepStepDetails = &handles[982]
+var RouteRentalTravelStep_RampStepDetails = &handles[983]
+var RouteRentalTravelStep_RoundaboutEnterStepDetails = &handles[984]
+var RouteRentalTravelStep_RoundaboutExitStepDetails = &handles[985]
+var RouteRentalTravelStep_RoundaboutPassStepDetails = &handles[986]
+var RouteRentalTravelStep_TurnStepDetails = &handles[987]
+var RouteRentalTravelStep_Type = &handles[988]
+var RouteRentalTravelStep_UTurnStepDetails = &handles[989]
+
+var _RouteRentalTravelStepList = &handles[990]
+var _RouteRentalTravelStepList_member = &handles[991]
+
+var RouteRentalTravelStepType = &handles[992]
+var RouteRentalTravelStepType_ARRIVE = &handles[993]
+var RouteRentalTravelStepType_CONTINUE = &handles[994]
+var RouteRentalTravelStepType_DEPART = &handles[995]
+var RouteRentalTravelStepType_EXIT = &handles[996]
+var RouteRentalTravelStepType_KEEP = &handles[997]
+var RouteRentalTravelStepType_RAMP = &handles[998]
+var RouteRentalTravelStepType_ROUNDABOUT_ENTER = &handles[999]
+var RouteRentalTravelStepType_ROUNDABOUT_EXIT = &handles[1000]
+var RouteRentalTravelStepType_ROUNDABOUT_PASS = &handles[1001]
+var RouteRentalTravelStepType_TURN = &handles[1002]
+var RouteRentalTravelStepType_U_TURN = &handles[1003]
+
+var RouteResponseNotice = &handles[1004]
+var RouteResponseNotice_Code = &handles[1005]
+var RouteResponseNotice_Impact = &handles[1006]
+
+var RouteResponseNoticeCode = &handles[1007]
+var RouteResponseNoticeCode_MAIN_LANGUAGE_NOT_FOUND = &handles[1008]
+var RouteResponseNoticeCode_OTHER = &handles[1009]
+var RouteResponseNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS = &handles[1010]
+var RouteResponseNoticeCode_TRANSIT_DATA_UNAVAILABLE = &handles[1011]
+var RouteResponseNoticeCode_TRANSIT_ROUTE_UNAVAILABLE = &handles[1012]
+var RouteResponseNoticeCode_NO_TRANSIT_STATIONS_FOUND = &handles[1013]
+
+var _RouteResponseNoticeList = &handles[1014]
+var _RouteResponseNoticeList_member = &handles[1015]
+
+var RouteRoad = &handles[1016]
+var RouteRoad_RoadName = &handles[1017]
+var RouteRoad_RouteNumber = &handles[1018]
+var RouteRoad_Towards = &handles[1019]
+var RouteRoad_Type = &handles[1020]
+
+var RouteRoadType = &handles[1021]
+var RouteRoadType_HIGHWAY = &handles[1022]
+var RouteRoadType_RURAL = &handles[1023]
+var RouteRoadType_URBAN = &handles[1024]
+
+var RouteRoundaboutEnterStepDetails = &handles[1025]
+var RouteRoundaboutEnterStepDetails_Intersection = &handles[1026]
+var RouteRoundaboutEnterStepDetails_SteeringDirection = &handles[1027]
+var RouteRoundaboutEnterStepDetails_TurnAngle = &handles[1028]
+var RouteRoundaboutEnterStepDetails_TurnIntensity = &handles[1029]
+
+var RouteRoundaboutExitStepDetails = &handles[1030]
+var RouteRoundaboutExitStepDetails_Intersection = &handles[1031]
+var RouteRoundaboutExitStepDetails_RelativeExit = &handles[1032]
+var RouteRoundaboutExitStepDetails_RoundaboutAngle = &handles[1033]
+var RouteRoundaboutExitStepDetails_SteeringDirection = &handles[1034]
+
+var RouteRoundaboutPassStepDetails = &handles[1035]
+var RouteRoundaboutPassStepDetails_Intersection = &handles[1036]
+var RouteRoundaboutPassStepDetails_SteeringDirection = &handles[1037]
+var RouteRoundaboutPassStepDetails_TurnAngle = &handles[1038]
+var RouteRoundaboutPassStepDetails_TurnIntensity = &handles[1039]
+
+var RouteScooterOptions = &handles[1040]
+var RouteScooterOptions_EngineType = &handles[1041]
+var RouteScooterOptions_LicensePlate = &handles[1042]
+var RouteScooterOptions_MaxSpeed = &handles[1043]
+var RouteScooterOptions_Occupancy = &handles[1044]
+
+var RouteSideOfStreet = &handles[1045]
+var RouteSideOfStreet_LEFT = &handles[1046]
+var RouteSideOfStreet_RIGHT = &handles[1047]
+
+var RouteSideOfStreetOptions = &handles[1048]
+var RouteSideOfStreetOptions_Position = &handles[1049]
+var RouteSideOfStreetOptions_UseWith = &handles[1050]
+
+var RouteSignpost = &handles[1051]
+var RouteSignpost_Labels = &handles[1052]
+
+var RouteSignpostLabel = &handles[1053]
+var RouteSignpostLabel_RouteNumber = &handles[1054]
+var RouteSignpostLabel_Text = &handles[1055]
+
+var _RouteSignpostLabelList = &handles[1056]
+var _RouteSignpostLabelList_member = &handles[1057]
+
+var RouteSpanAdditionalFeature = &handles[1058]
+var RouteSpanAdditionalFeature_BEST_CASE_DURATION = &handles[1059]
+var RouteSpanAdditionalFeature_CAR_ACCESS = &handles[1060]
+var RouteSpanAdditionalFeature_COUNTRY = &handles[1061]
+var RouteSpanAdditionalFeature_DISTANCE = &handles[1062]
+var RouteSpanAdditionalFeature_DURATION = &handles[1063]
+var RouteSpanAdditionalFeature_DYNAMIC_SPEED = &handles[1064]
+var RouteSpanAdditionalFeature_FUNCTIONAL_CLASSIFICATION = &handles[1065]
+var RouteSpanAdditionalFeature_GATES = &handles[1066]
+var RouteSpanAdditionalFeature_INCIDENTS = &handles[1067]
+var RouteSpanAdditionalFeature_NAMES = &handles[1068]
+var RouteSpanAdditionalFeature_NOTICES = &handles[1069]
+var RouteSpanAdditionalFeature_PEDESTRIAN_ACCESS = &handles[1070]
+var RouteSpanAdditionalFeature_RAILWAY_CROSSINGS = &handles[1071]
+var RouteSpanAdditionalFeature_REGION = &handles[1072]
+var RouteSpanAdditionalFeature_ROAD_ATTRIBUTES = &handles[1073]
+var RouteSpanAdditionalFeature_ROUTE_NUMBERS = &handles[1074]
+var RouteSpanAdditionalFeature_SCOOTER_ACCESS = &handles[1075]
+var RouteSpanAdditionalFeature_SPEED_LIMIT = &handles[1076]
+var RouteSpanAdditionalFeature_TOLL_SYSTEMS = &handles[1077]
+var RouteSpanAdditionalFeature_TRUCK_ACCESS = &handles[1078]
+var RouteSpanAdditionalFeature_TRUCK_ROAD_TYPES = &handles[1079]
+var RouteSpanAdditionalFeature_TYPICAL_DURATION = &handles[1080]
+var RouteSpanAdditionalFeature_ZONES = &handles[1081]
+var RouteSpanAdditionalFeature_CONSUMPTION = &handles[1082]
+
+var _RouteSpanAdditionalFeatureList = &handles[1083]
+var _RouteSpanAdditionalFeatureList_member = &handles[1084]
+
+var RouteSpanCarAccessAttribute = &handles[1085]
+var RouteSpanCarAccessAttribute_ALLOWED = &handles[1086]
+var RouteSpanCarAccessAttribute_NO_THROUGH_TRAFFIC = &handles[1087]
+var RouteSpanCarAccessAttribute_TOLL_ROAD = &handles[1088]
+
+var _RouteSpanCarAccessAttributeList = &handles[1089]
+var _RouteSpanCarAccessAttributeList_member = &handles[1090]
+
+var RouteSpanDynamicSpeedDetails = &handles[1091]
+var RouteSpanDynamicSpeedDetails_BestCaseSpeed = &handles[1092]
+var RouteSpanDynamicSpeedDetails_TurnDuration = &handles[1093]
+var RouteSpanDynamicSpeedDetails_TypicalSpeed = &handles[1094]
+
+var RouteSpanGateAttribute = &handles[1095]
+var RouteSpanGateAttribute_EMERGENCY = &handles[1096]
+var RouteSpanGateAttribute_KEY_ACCESS = &handles[1097]
+var RouteSpanGateAttribute_PERMISSION_REQUIRED = &handles[1098]
+
+var RouteSpanPedestrianAccessAttribute = &handles[1099]
+var RouteSpanPedestrianAccessAttribute_ALLOWED = &handles[1100]
+var RouteSpanPedestrianAccessAttribute_INDOORS = &handles[1101]
+var RouteSpanPedestrianAccessAttribute_NO_THROUGH_TRAFFIC = &handles[1102]
+var RouteSpanPedestrianAccessAttribute_PARK = &handles[1103]
+var RouteSpanPedestrianAccessAttribute_STAIRS = &handles[1104]
+var RouteSpanPedestrianAccessAttribute_TOLL_ROAD = &handles[1105]
+
+var _RouteSpanPedestrianAccessAttributeList = &handles[1106]
+var _RouteSpanPedestrianAccessAttributeList_member = &handles[1107]
+
+var RouteSpanRailwayCrossingAttribute = &handles[1108]
+var RouteSpanRailwayCrossingAttribute_PROTECTED = &handles[1109]
+var RouteSpanRailwayCrossingAttribute_UNPROTECTED = &handles[1110]
+
+var RouteSpanRoadAttribute = &handles[1111]
+var RouteSpanRoadAttribute_BRIDGE = &handles[1112]
+var RouteSpanRoadAttribute_BUILT_UP_AREA = &handles[1113]
+var RouteSpanRoadAttribute_CONTROLLED_ACCESS_HIGHWAY = &handles[1114]
+var RouteSpanRoadAttribute_DIRT_ROAD = &handles[1115]
+var RouteSpanRoadAttribute_DIVIDED_ROAD = &handles[1116]
+var RouteSpanRoadAttribute_MOTORWAY = &handles[1117]
+var RouteSpanRoadAttribute_PRIVATE_ROAD = &handles[1118]
+var RouteSpanRoadAttribute_RAMP = &handles[1119]
+var RouteSpanRoadAttribute_RIGHT_HAND_TRAFFIC = &handles[1120]
+var RouteSpanRoadAttribute_ROUNDABOUT = &handles[1121]
+var RouteSpanRoadAttribute_TUNNEL = &handles[1122]
+var RouteSpanRoadAttribute_UNDER_CONSTRUCTION = &handles[1123]
+
+var _RouteSpanRoadAttributeList = &handles[1124]
+var _RouteSpanRoadAttributeList_member = &handles[1125]
+
+var RouteSpanScooterAccessAttribute = &handles[1126]
+var RouteSpanScooterAccessAttribute_ALLOWED = &handles[1127]
+var RouteSpanScooterAccessAttribute_NO_THROUGH_TRAFFIC = &handles[1128]
+var RouteSpanScooterAccessAttribute_TOLL_ROAD = &handles[1129]
+
+var _RouteSpanScooterAccessAttributeList = &handles[1130]
+var _RouteSpanScooterAccessAttributeList_member = &handles[1131]
+
+var RouteSpanSpeedLimitDetails = &handles[1132]
+var RouteSpanSpeedLimitDetails_MaxSpeed = &handles[1133]
+var RouteSpanSpeedLimitDetails_Unlimited = &handles[1134]
+
+var RouteSpanTruckAccessAttribute = &handles[1135]
+var RouteSpanTruckAccessAttribute_ALLOWED = &handles[1136]
+var RouteSpanTruckAccessAttribute_NO_THROUGH_TRAFFIC = &handles[1137]
+var RouteSpanTruckAccessAttribute_TOLL_ROAD = &handles[1138]
+
+var _RouteSpanTruckAccessAttributeList = &handles[1139]
+var _RouteSpanTruckAccessAttributeList_member = &handles[1140]
+
+var RouteStationDetails = &handles[1141]
+var RouteStationDetails_Accessibility = &handles[1142]
+var RouteStationDetails_PlatformName = &handles[1143]
+var RouteStationDetails_ShortName = &handles[1144]
+
+var RouteSteeringDirection = &handles[1145]
+var RouteSteeringDirection_LEFT = &handles[1146]
+var RouteSteeringDirection_RIGHT = &handles[1147]
+var RouteSteeringDirection_STRAIGHT = &handles[1148]
+
+var RouteSummary = &handles[1149]
+var RouteSummary_Distance = &handles[1150]
+var RouteSummary_Duration = &handles[1151]
+var RouteSummary_Tolls = &handles[1152]
+
+var RouteTaxiAfterTravelStep = &handles[1153]
+var RouteTaxiAfterTravelStep_Duration = &handles[1154]
+var RouteTaxiAfterTravelStep_Instruction = &handles[1155]
+var RouteTaxiAfterTravelStep_Type = &handles[1156]
+
+var _RouteTaxiAfterTravelStepList = &handles[1157]
+var _RouteTaxiAfterTravelStepList_member = &handles[1158]
+
+var RouteTaxiAfterTravelStepType = &handles[1159]
+var RouteTaxiAfterTravelStepType_PARK = &handles[1160]
+
+var RouteTaxiAgency = &handles[1161]
+var RouteTaxiAgency_Name = &handles[1162]
+var RouteTaxiAgency_Url = &handles[1163]
+
+var RouteTaxiArrival = &handles[1164]
+var RouteTaxiArrival_Place = &handles[1165]
+var RouteTaxiArrival_Time = &handles[1166]
+
+var RouteTaxiBeforeTravelStep = &handles[1167]
+var RouteTaxiBeforeTravelStep_Duration = &handles[1168]
+var RouteTaxiBeforeTravelStep_Instruction = &handles[1169]
+var RouteTaxiBeforeTravelStep_Type = &handles[1170]
+
+var _RouteTaxiBeforeTravelStepList = &handles[1171]
+var _RouteTaxiBeforeTravelStepList_member = &handles[1172]
+
+var RouteTaxiBeforeTravelStepType = &handles[1173]
+var RouteTaxiBeforeTravelStepType_WAIT = &handles[1174]
+
+var RouteTaxiDeparture = &handles[1175]
+var RouteTaxiDeparture_Place = &handles[1176]
+var RouteTaxiDeparture_Time = &handles[1177]
+
+var RouteTaxiLegDetails = &handles[1178]
+var RouteTaxiLegDetails_AfterTravelSteps = &handles[1179]
+var RouteTaxiLegDetails_Agency = &handles[1180]
+var RouteTaxiLegDetails_Arrival = &handles[1181]
+var RouteTaxiLegDetails_Attributions = &handles[1182]
+var RouteTaxiLegDetails_BeforeTravelSteps = &handles[1183]
+var RouteTaxiLegDetails_BookingWebLinks = &handles[1184]
+var RouteTaxiLegDetails_Departure = &handles[1185]
+var RouteTaxiLegDetails_Notices = &handles[1186]
+var RouteTaxiLegDetails_Summary = &handles[1187]
+var RouteTaxiLegDetails_Transport = &handles[1188]
+var RouteTaxiLegDetails_TravelSteps = &handles[1189]
+
+var RouteTaxiMode = &handles[1190]
+var RouteTaxiMode_ALL = &handles[1191]
+var RouteTaxiMode_CAR = &handles[1192]
+
+var _RouteTaxiModeList = &handles[1193]
+var _RouteTaxiModeList_member = &handles[1194]
+
+var RouteTaxiNotice = &handles[1195]
+var RouteTaxiNotice_Code = &handles[1196]
+var RouteTaxiNotice_Impact = &handles[1197]
+
+var RouteTaxiNoticeCode = &handles[1198]
+var RouteTaxiNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = &handles[1199]
+var RouteTaxiNoticeCode_OTHER = &handles[1200]
+
+var _RouteTaxiNoticeList = &handles[1201]
+var _RouteTaxiNoticeList_member = &handles[1202]
+
+var RouteTaxiOverviewSummary = &handles[1203]
+var RouteTaxiOverviewSummary_Duration = &handles[1204]
+var RouteTaxiOverviewSummary_Distance = &handles[1205]
+
+var RouteTaxiPlace = &handles[1206]
+var RouteTaxiPlace_AccessPointDetails = &handles[1207]
+var RouteTaxiPlace_Name = &handles[1208]
+var RouteTaxiPlace_OriginalPosition = &handles[1209]
+var RouteTaxiPlace_Position = &handles[1210]
+var RouteTaxiPlace_StationDetails = &handles[1211]
+var RouteTaxiPlace_Type = &handles[1212]
+var RouteTaxiPlace_WaypointIndex = &handles[1213]
+
+var RouteTaxiPlaceType = &handles[1214]
+var RouteTaxiPlaceType_ACCESS_POINT = &handles[1215]
+var RouteTaxiPlaceType_STATION = &handles[1216]
+
+var RouteTaxiSummary = &handles[1217]
+var RouteTaxiSummary_Overview = &handles[1218]
+var RouteTaxiSummary_TravelOnly = &handles[1219]
+
+var RouteTaxiTransportModeDetails = &handles[1220]
+var RouteTaxiTransportModeDetails_AvailableSeats = &handles[1221]
+var RouteTaxiTransportModeDetails_Category = &handles[1222]
+var RouteTaxiTransportModeDetails_Color = &handles[1223]
+var RouteTaxiTransportModeDetails_Engine = &handles[1224]
+var RouteTaxiTransportModeDetails_LicensePlate = &handles[1225]
+var RouteTaxiTransportModeDetails_Mode = &handles[1226]
+var RouteTaxiTransportModeDetails_Model = &handles[1227]
+var RouteTaxiTransportModeDetails_Name = &handles[1228]
+var RouteTaxiTransportModeDetails_TextColor = &handles[1229]
+
+var RouteTaxiTravelOnlySummary = &handles[1230]
+var RouteTaxiTravelOnlySummary_Duration = &handles[1231]
+
+var RouteTaxiTravelStep = &handles[1232]
+var RouteTaxiTravelStep_ContinueStepDetails = &handles[1233]
+var RouteTaxiTravelStep_Distance = &handles[1234]
+var RouteTaxiTravelStep_Duration = &handles[1235]
+var RouteTaxiTravelStep_ExitStepDetails = &handles[1236]
+var RouteTaxiTravelStep_GeometryOffset = &handles[1237]
+var RouteTaxiTravelStep_Instruction = &handles[1238]
+var RouteTaxiTravelStep_KeepStepDetails = &handles[1239]
+var RouteTaxiTravelStep_RampStepDetails = &handles[1240]
+var RouteTaxiTravelStep_RoundaboutEnterStepDetails = &handles[1241]
+var RouteTaxiTravelStep_RoundaboutExitStepDetails = &handles[1242]
+var RouteTaxiTravelStep_RoundaboutPassStepDetails = &handles[1243]
+var RouteTaxiTravelStep_TurnStepDetails = &handles[1244]
+var RouteTaxiTravelStep_Type = &handles[1245]
+var RouteTaxiTravelStep_UTurnStepDetails = &handles[1246]
+
+var _RouteTaxiTravelStepList = &handles[1247]
+var _RouteTaxiTravelStepList_member = &handles[1248]
+
+var RouteTaxiTravelStepType = &handles[1249]
+var RouteTaxiTravelStepType_ARRIVE = &handles[1250]
+var RouteTaxiTravelStepType_CONTINUE = &handles[1251]
+var RouteTaxiTravelStepType_DEPART = &handles[1252]
+var RouteTaxiTravelStepType_EXIT = &handles[1253]
+var RouteTaxiTravelStepType_KEEP = &handles[1254]
+var RouteTaxiTravelStepType_RAMP = &handles[1255]
+var RouteTaxiTravelStepType_ROUNDABOUT_ENTER = &handles[1256]
+var RouteTaxiTravelStepType_ROUNDABOUT_EXIT = &handles[1257]
+var RouteTaxiTravelStepType_ROUNDABOUT_PASS = &handles[1258]
+var RouteTaxiTravelStepType_TURN = &handles[1259]
+var RouteTaxiTravelStepType_U_TURN = &handles[1260]
+
+var RouteToll = &handles[1261]
+var RouteToll_Country = &handles[1262]
+var RouteToll_PaymentSites = &handles[1263]
+var RouteToll_Rates = &handles[1264]
+var RouteToll_Systems = &handles[1265]
+
+var _RouteTollList = &handles[1266]
+var _RouteTollList_member = &handles[1267]
+
+var RouteTollOptions = &handles[1268]
+var RouteTollOptions_AllTransponders = &handles[1269]
+var RouteTollOptions_AllVignettes = &handles[1270]
+var RouteTollOptions_Currency = &handles[1271]
+var RouteTollOptions_EmissionType = &handles[1272]
+var RouteTollOptions_VehicleCategory = &handles[1273]
+
+var RouteTollPass = &handles[1274]
+var RouteTollPass_IncludesReturnTrip = &handles[1275]
+var RouteTollPass_SeniorPass = &handles[1276]
+var RouteTollPass_TransferCount = &handles[1277]
+var RouteTollPass_TripCount = &handles[1278]
+var RouteTollPass_ValidityPeriod = &handles[1279]
+
+var RouteTollPassValidityPeriod = &handles[1280]
+var RouteTollPassValidityPeriod_Period = &handles[1281]
+var RouteTollPassValidityPeriod_PeriodCount = &handles[1282]
+
+var RouteTollPassValidityPeriodType = &handles[1283]
+var RouteTollPassValidityPeriodType_ANNUAL = &handles[1284]
+var RouteTollPassValidityPeriodType_DAYS = &handles[1285]
+var RouteTollPassValidityPeriodType_EXTENDED_ANNUAL = &handles[1286]
+var RouteTollPassValidityPeriodType_MINUTES = &handles[1287]
+var RouteTollPassValidityPeriodType_MONTHS = &handles[1288]
+
+var RouteTollPaymentMethod = &handles[1289]
+var RouteTollPaymentMethod_BANK_CARD = &handles[1290]
+var RouteTollPaymentMethod_CASH = &handles[1291]
+var RouteTollPaymentMethod_CASH_EXACT = &handles[1292]
+var RouteTollPaymentMethod_CREDIT_CARD = &handles[1293]
+var RouteTollPaymentMethod_PASS_SUBSCRIPTION = &handles[1294]
+var RouteTollPaymentMethod_TRAVEL_CARD = &handles[1295]
+var RouteTollPaymentMethod_TRANSPONDER = &handles[1296]
+var RouteTollPaymentMethod_VIDEO_TOLL = &handles[1297]
+
+var _RouteTollPaymentMethodList = &handles[1298]
+var _RouteTollPaymentMethodList_member = &handles[1299]
+
+var RouteTollPaymentSite = &handles[1300]
+var RouteTollPaymentSite_Name = &handles[1301]
+var RouteTollPaymentSite_Position = &handles[1302]
+
+var _RouteTollPaymentSiteList = &handles[1303]
+var _RouteTollPaymentSiteList_member = &handles[1304]
+
+var RouteTollPrice = &handles[1305]
+var RouteTollPrice_Currency = &handles[1306]
+var RouteTollPrice_Estimate = &handles[1307]
+var RouteTollPrice_PerDuration = &handles[1308]
+var RouteTollPrice_Range = &handles[1309]
+var RouteTollPrice_RangeValue = &handles[1310]
+var RouteTollPrice_Value = &handles[1311]
+
+var RouteTollPriceSummary = &handles[1312]
+var RouteTollPriceSummary_Currency = &handles[1313]
+var RouteTollPriceSummary_Estimate = &handles[1314]
+var RouteTollPriceSummary_Range = &handles[1315]
+var RouteTollPriceSummary_RangeValue = &handles[1316]
+var RouteTollPriceSummary_Value = &handles[1317]
+
+var RouteTollPriceValueRange = &handles[1318]
+var RouteTollPriceValueRange_Min = &handles[1319]
+var RouteTollPriceValueRange_Max = &handles[1320]
+
+var RouteTollRate = &handles[1321]
+var RouteTollRate_ApplicableTimes = &handles[1322]
+var RouteTollRate_ConvertedPrice = &handles[1323]
+var RouteTollRate_Id = &handles[1324]
+var RouteTollRate_LocalPrice = &handles[1325]
+var RouteTollRate_Name = &handles[1326]
+var RouteTollRate_Pass = &handles[1327]
+var RouteTollRate_PaymentMethods = &handles[1328]
+var RouteTollRate_Transponders = &handles[1329]
+
+var _RouteTollRateList = &handles[1330]
+var _RouteTollRateList_member = &handles[1331]
+
+var RouteTollSummary = &handles[1332]
+var RouteTollSummary_Total = &handles[1333]
+
+var RouteTollSystem = &handles[1334]
+var RouteTollSystem_Name = &handles[1335]
+
+var _RouteTollSystemList = &handles[1336]
+var _RouteTollSystemList_member = &handles[1337]
+
+var RouteTollVehicleCategory = &handles[1338]
+var RouteTollVehicleCategory_MINIBUS = &handles[1339]
+
+var RouteTrafficOptions = &handles[1340]
+var RouteTrafficOptions_FlowEventThresholdOverride = &handles[1341]
+var RouteTrafficOptions_Usage = &handles[1342]
+
+var RouteTrailerOptions = &handles[1343]
+var RouteTrailerOptions_AxleCount = &handles[1344]
+var RouteTrailerOptions_TrailerCount = &handles[1345]
+
+var RouteTransitAfterTravelStep = &handles[1346]
+var RouteTransitAfterTravelStep_Duration = &handles[1347]
+var RouteTransitAfterTravelStep_Instruction = &handles[1348]
+var RouteTransitAfterTravelStep_Type = &handles[1349]
+
+var _RouteTransitAfterTravelStepList = &handles[1350]
+var _RouteTransitAfterTravelStepList_member = &handles[1351]
+
+var RouteTransitAfterTravelStepType = &handles[1352]
+var RouteTransitAfterTravelStepType_DEBOARD = &handles[1353]
+
+var RouteTransitAgency = &handles[1354]
+var RouteTransitAgency_Name = &handles[1355]
+var RouteTransitAgency_Url = &handles[1356]
+
+var RouteTransitArrival = &handles[1357]
+var RouteTransitArrival_Delay = &handles[1358]
+var RouteTransitArrival_Place = &handles[1359]
+var RouteTransitArrival_Status = &handles[1360]
+var RouteTransitArrival_Time = &handles[1361]
+
+var RouteTransitBeforeTravelStep = &handles[1362]
+var RouteTransitBeforeTravelStep_Duration = &handles[1363]
+var RouteTransitBeforeTravelStep_Instruction = &handles[1364]
+var RouteTransitBeforeTravelStep_Type = &handles[1365]
+
+var _RouteTransitBeforeTravelStepList = &handles[1366]
+var _RouteTransitBeforeTravelStepList_member = &handles[1367]
+
+var RouteTransitBeforeTravelStepType = &handles[1368]
+var RouteTransitBeforeTravelStepType_BOARD = &handles[1369]
+
+var RouteTransitDeparture = &handles[1370]
+var RouteTransitDeparture_Delay = &handles[1371]
+var RouteTransitDeparture_Place = &handles[1372]
+var RouteTransitDeparture_Status = &handles[1373]
+var RouteTransitDeparture_Time = &handles[1374]
+
+var RouteTransitIncident = &handles[1375]
+var RouteTransitIncident_Description = &handles[1376]
+var RouteTransitIncident_Effect = &handles[1377]
+var RouteTransitIncident_EndTime = &handles[1378]
+var RouteTransitIncident_StartTime = &handles[1379]
+var RouteTransitIncident_Type = &handles[1380]
+var RouteTransitIncident_Url = &handles[1381]
+
+var RouteTransitIncidentEffect = &handles[1382]
+var RouteTransitIncidentEffect_DELAYED = &handles[1383]
+var RouteTransitIncidentEffect_DETOURED = &handles[1384]
+var RouteTransitIncidentEffect_OTHER = &handles[1385]
+var RouteTransitIncidentEffect_SERVICE_ADDED = &handles[1386]
+var RouteTransitIncidentEffect_SERVICE_CANCELLED = &handles[1387]
+var RouteTransitIncidentEffect_SERVICE_MODIFIED = &handles[1388]
+var RouteTransitIncidentEffect_SERVICE_REDUCED = &handles[1389]
+var RouteTransitIncidentEffect_STOP_MOVED = &handles[1390]
+
+var _RouteTransitIncidentList = &handles[1391]
+var _RouteTransitIncidentList_member = &handles[1392]
+
+var RouteTransitIncidentType = &handles[1393]
+var RouteTransitIncidentType_ACCIDENT = &handles[1394]
+var RouteTransitIncidentType_CONSTRUCTION = &handles[1395]
+var RouteTransitIncidentType_DEMONSTRATION = &handles[1396]
+var RouteTransitIncidentType_HOLIDAY = &handles[1397]
+var RouteTransitIncidentType_MAINTENANCE = &handles[1398]
+var RouteTransitIncidentType_MEDICAL_EMERGENCY = &handles[1399]
+var RouteTransitIncidentType_OTHER = &handles[1400]
+var RouteTransitIncidentType_POLICE_ACTIVITY = &handles[1401]
+var RouteTransitIncidentType_STRIKE = &handles[1402]
+var RouteTransitIncidentType_TECHNICAL_PROBLEM = &handles[1403]
+var RouteTransitIncidentType_WEATHER = &handles[1404]
+
+var RouteTransitIntermediateStop = &handles[1405]
+var RouteTransitIntermediateStop_Attributes = &handles[1406]
+var RouteTransitIntermediateStop_Departure = &handles[1407]
+var RouteTransitIntermediateStop_Duration = &handles[1408]
+var RouteTransitIntermediateStop_GeometryOffset = &handles[1409]
+var RouteTransitIntermediateStop_Transport = &handles[1410]
+
+var RouteTransitIntermediateStopAttribute = &handles[1411]
+var RouteTransitIntermediateStopAttribute_NO_ENTRY = &handles[1412]
+var RouteTransitIntermediateStopAttribute_NO_EXIT = &handles[1413]
+
+var _RouteTransitIntermediateStopAttributeList = &handles[1414]
+var _RouteTransitIntermediateStopAttributeList_member = &handles[1415]
+
+var _RouteTransitIntermediateStopList = &handles[1416]
+var _RouteTransitIntermediateStopList_member = &handles[1417]
+
+var RouteTransitLegDetails = &handles[1418]
+var RouteTransitLegDetails_AfterTravelSteps = &handles[1419]
+var RouteTransitLegDetails_Agency = &handles[1420]
+var RouteTransitLegDetails_Arrival = &handles[1421]
+var RouteTransitLegDetails_Attributions = &handles[1422]
+var RouteTransitLegDetails_BeforeTravelSteps = &handles[1423]
+var RouteTransitLegDetails_BookingWebLinks = &handles[1424]
+var RouteTransitLegDetails_Departure = &handles[1425]
+var RouteTransitLegDetails_Incidents = &handles[1426]
+var RouteTransitLegDetails_IntermediateStops = &handles[1427]
+var RouteTransitLegDetails_NextDepartures = &handles[1428]
+var RouteTransitLegDetails_Notices = &handles[1429]
+var RouteTransitLegDetails_PassThroughWaypoints = &handles[1430]
+var RouteTransitLegDetails_Spans = &handles[1431]
+var RouteTransitLegDetails_Summary = &handles[1432]
+var RouteTransitLegDetails_Transport = &handles[1433]
+var RouteTransitLegDetails_TravelSteps = &handles[1434]
+
+var RouteTransitMode = &handles[1435]
+var RouteTransitMode_AERIAL_TRAMWAY = &handles[1436]
+var RouteTransitMode_AIRPLANE = &handles[1437]
+var RouteTransitMode_ALL = &handles[1438]
+var RouteTransitMode_BUS = &handles[1439]
+var RouteTransitMode_BUS_RAPID_TRANSIT = &handles[1440]
+var RouteTransitMode_CITY_TRAIN = &handles[1441]
+var RouteTransitMode_FERRY = &handles[1442]
+var RouteTransitMode_FUNICULAR_RAILWAY = &handles[1443]
+var RouteTransitMode_HIGH_SPEED_TRAIN = &handles[1444]
+var RouteTransitMode_INTERCITY_TRAIN = &handles[1445]
+var RouteTransitMode_INTERREGIONAL_TRAIN = &handles[1446]
+var RouteTransitMode_LIGHT_RAIL = &handles[1447]
+var RouteTransitMode_MONORAIL = &handles[1448]
+var RouteTransitMode_PRIVATE_BUS = &handles[1449]
+var RouteTransitMode_REGIONAL_TRAIN = &handles[1450]
+var RouteTransitMode_SUBWAY = &handles[1451]
+
+var _RouteTransitModeList = &handles[1452]
+var _RouteTransitModeList_member = &handles[1453]
+
+var RouteTransitNextDeparture = &handles[1454]
+var RouteTransitNextDeparture_Delay = &handles[1455]
+var RouteTransitNextDeparture_PlatformName = &handles[1456]
+var RouteTransitNextDeparture_Status = &handles[1457]
+var RouteTransitNextDeparture_Time = &handles[1458]
+var RouteTransitNextDeparture_Transport = &handles[1459]
+
+var _RouteTransitNextDepartureList = &handles[1460]
+var _RouteTransitNextDepartureList_member = &handles[1461]
+
+var RouteTransitNotice = &handles[1462]
+var RouteTransitNotice_Code = &handles[1463]
+var RouteTransitNotice_Impact = &handles[1464]
+
+var RouteTransitNoticeCode = &handles[1465]
+var RouteTransitNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = &handles[1466]
+var RouteTransitNoticeCode_INTERMEDIATE_STOPS_UNAVAILABLE = &handles[1467]
+var RouteTransitNoticeCode_NO_SCHEDULE = &handles[1468]
+var RouteTransitNoticeCode_OTHER = &handles[1469]
+var RouteTransitNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = &handles[1470]
+var RouteTransitNoticeCode_SCHEDULED_TIMES = &handles[1471]
+var RouteTransitNoticeCode_SEASONAL_CLOSURE = &handles[1472]
+var RouteTransitNoticeCode_VIOLATED_AVOID_FERRY = &handles[1473]
+var RouteTransitNoticeCode_VIOLATED_AVOID_RAIL_FERRY = &handles[1474]
+var RouteTransitNoticeCode_VIOLATED_EXCLUDED_TRANSIT_MODE = &handles[1475]
+var RouteTransitNoticeCode_VIOLATED_VEHICLE_RESTRICTION = &handles[1476]
+var RouteTransitNoticeCode_VIOLATED_AVOID_AREAS = &handles[1477]
+
+var _RouteTransitNoticeList = &handles[1478]
+var _RouteTransitNoticeList_member = &handles[1479]
+
+var RouteTransitOptions = &handles[1480]
+var RouteTransitOptions_AccessibilityAttributes = &handles[1481]
+var RouteTransitOptions_AllowedModes = &handles[1482]
+var RouteTransitOptions_ExcludedModes = &handles[1483]
+var RouteTransitOptions_MaxTransfers = &handles[1484]
+var RouteTransitOptions_Pedestrian = &handles[1485]
+
+var RouteTransitOverviewSummary = &handles[1486]
+var RouteTransitOverviewSummary_Distance = &handles[1487]
+var RouteTransitOverviewSummary_Duration = &handles[1488]
+
+var RouteTransitPedestrianOptions = &handles[1489]
+var RouteTransitPedestrianOptions_MaxDistance = &handles[1490]
+var RouteTransitPedestrianOptions_Speed = &handles[1491]
+
+var RouteTransitPlace = &handles[1492]
+var RouteTransitPlace_Name = &handles[1493]
+var RouteTransitPlace_OriginalPosition = &handles[1494]
+var RouteTransitPlace_Position = &handles[1495]
+var RouteTransitPlace_StationDetails = &handles[1496]
+var RouteTransitPlace_Type = &handles[1497]
+var RouteTransitPlace_WaypointIndex = &handles[1498]
+
+var RouteTransitPlaceType = &handles[1499]
+var RouteTransitPlaceType_STATION = &handles[1500]
+
+var RouteTransitSpan = &handles[1501]
+var RouteTransitSpan_Country = &handles[1502]
+var RouteTransitSpan_Distance = &handles[1503]
+var RouteTransitSpan_Duration = &handles[1504]
+var RouteTransitSpan_GeometryOffset = &handles[1505]
+var RouteTransitSpan_Names = &handles[1506]
+var RouteTransitSpan_Region = &handles[1507]
+
+var _RouteTransitSpanList = &handles[1508]
+var _RouteTransitSpanList_member = &handles[1509]
+
+var RouteTransitSummary = &handles[1510]
+var RouteTransitSummary_Overview = &handles[1511]
+var RouteTransitSummary_TravelOnly = &handles[1512]
+
+var RouteTransitTransportModeDetails = &handles[1513]
+var RouteTransitTransportModeDetails_Accessibility = &handles[1514]
+var RouteTransitTransportModeDetails_Color = &handles[1515]
+var RouteTransitTransportModeDetails_Headsign = &handles[1516]
+var RouteTransitTransportModeDetails_LongRouteName = &handles[1517]
+var RouteTransitTransportModeDetails_Mode = &handles[1518]
+var RouteTransitTransportModeDetails_RouteName = &handles[1519]
+var RouteTransitTransportModeDetails_ShortRouteName = &handles[1520]
+var RouteTransitTransportModeDetails_TextColor = &handles[1521]
+
+var RouteTransitTravelOnlySummary = &handles[1522]
+var RouteTransitTravelOnlySummary_Duration = &handles[1523]
+
+var RouteTransitTravelStep = &handles[1524]
+var RouteTransitTravelStep_Distance = &handles[1525]
+var RouteTransitTravelStep_Duration = &handles[1526]
+var RouteTransitTravelStep_GeometryOffset = &handles[1527]
+var RouteTransitTravelStep_Instruction = &handles[1528]
+var RouteTransitTravelStep_Type = &handles[1529]
+
+var _RouteTransitTravelStepList = &handles[1530]
+var _RouteTransitTravelStepList_member = &handles[1531]
+
+var RouteTransitTravelStepType = &handles[1532]
+var RouteTransitTravelStepType_DEPART = &handles[1533]
+
+var RouteTransitTripStatus = &handles[1534]
+var RouteTransitTripStatus_ADDED = &handles[1535]
+var RouteTransitTripStatus_CANCELLED = &handles[1536]
+var RouteTransitTripStatus_REPLACED = &handles[1537]
+var RouteTransitTripStatus_SCHEDULED = &handles[1538]
+
+var RouteTransponder = &handles[1539]
+var RouteTransponder_SystemName = &handles[1540]
+
+var _RouteTransponderList = &handles[1541]
+var _RouteTransponderList_member = &handles[1542]
+
+var RouteTravelMode = &handles[1543]
+var RouteTravelMode_CAR = &handles[1544]
+var RouteTravelMode_PEDESTRIAN = &handles[1545]
+var RouteTravelMode_SCOOTER = &handles[1546]
+var RouteTravelMode_TRUCK = &handles[1547]
+var RouteTravelMode_INTERMODAL = &handles[1548]
+var RouteTravelMode_TRANSIT = &handles[1549]
+
+var RouteTravelModeOptions = &handles[1550]
+var RouteTravelModeOptions_Car = &handles[1551]
+var RouteTravelModeOptions_Pedestrian = &handles[1552]
+var RouteTravelModeOptions_Scooter = &handles[1553]
+var RouteTravelModeOptions_Truck = &handles[1554]
+var RouteTravelModeOptions_Intermodal = &handles[1555]
+var RouteTravelModeOptions_Transit = &handles[1556]
+
+var RouteTravelStepType = &handles[1557]
+var RouteTravelStepType_DEFAULT = &handles[1558]
+var RouteTravelStepType_TURN_BY_TURN = &handles[1559]
+
+var RouteTruckOptions = &handles[1560]
+var RouteTruckOptions_AxleCount = &handles[1561]
+var RouteTruckOptions_EngineType = &handles[1562]
+var RouteTruckOptions_GrossWeight = &handles[1563]
+var RouteTruckOptions_HazardousCargos = &handles[1564]
+var RouteTruckOptions_Height = &handles[1565]
+var RouteTruckOptions_HeightAboveFirstAxle = &handles[1566]
+var RouteTruckOptions_KpraLength = &handles[1567]
+var RouteTruckOptions_Length = &handles[1568]
+var RouteTruckOptions_LicensePlate = &handles[1569]
+var RouteTruckOptions_MaxSpeed = &handles[1570]
+var RouteTruckOptions_Occupancy = &handles[1571]
+var RouteTruckOptions_PayloadCapacity = &handles[1572]
+var RouteTruckOptions_TireCount = &handles[1573]
+var RouteTruckOptions_Trailer = &handles[1574]
+var RouteTruckOptions_TruckType = &handles[1575]
+var RouteTruckOptions_TunnelRestrictionCode = &handles[1576]
+var RouteTruckOptions_WeightPerAxle = &handles[1577]
+var RouteTruckOptions_WeightPerAxleGroup = &handles[1578]
+var RouteTruckOptions_Width = &handles[1579]
+
+var RouteTruckType = &handles[1580]
+var RouteTruckType_LIGHT_TRUCK = &handles[1581]
+var RouteTruckType_STRAIGHT_TRUCK = &handles[1582]
+var RouteTruckType_TRACTOR = &handles[1583]
+
+var RouteTurnIntensity = &handles[1584]
+var RouteTurnIntensity_SHARP = &handles[1585]
+var RouteTurnIntensity_SLIGHT = &handles[1586]
+var RouteTurnIntensity_TYPICAL = &handles[1587]
+
+var RouteTurnStepDetails = &handles[1588]
+var RouteTurnStepDetails_Intersection = &handles[1589]
+var RouteTurnStepDetails_SteeringDirection = &handles[1590]
+var RouteTurnStepDetails_TurnAngle = &handles[1591]
+var RouteTurnStepDetails_TurnIntensity = &handles[1592]
+
+var RouteUTurnStepDetails = &handles[1593]
+var RouteUTurnStepDetails_Intersection = &handles[1594]
+var RouteUTurnStepDetails_SteeringDirection = &handles[1595]
+var RouteUTurnStepDetails_TurnAngle = &handles[1596]
+var RouteUTurnStepDetails_TurnIntensity = &handles[1597]
+
+var RouteVehicleAfterTravelStep = &handles[1598]
+var RouteVehicleAfterTravelStep_ChargeStepDetails = &handles[1599]
+var RouteVehicleAfterTravelStep_Duration = &handles[1600]
+var RouteVehicleAfterTravelStep_Instruction = &handles[1601]
+var RouteVehicleAfterTravelStep_Type = &handles[1602]
+
+var _RouteVehicleAfterTravelStepList = &handles[1603]
+var _RouteVehicleAfterTravelStepList_member = &handles[1604]
+
+var RouteVehicleAfterTravelStepType = &handles[1605]
+var RouteVehicleAfterTravelStepType_PARK = &handles[1606]
+
+var RouteVehicleArrival = &handles[1607]
+var RouteVehicleArrival_Place = &handles[1608]
+var RouteVehicleArrival_Time = &handles[1609]
+
+var RouteVehicleDeparture = &handles[1610]
+var RouteVehicleDeparture_Place = &handles[1611]
+var RouteVehicleDeparture_Time = &handles[1612]
+
+var RouteVehicleIncident = &handles[1613]
+var RouteVehicleIncident_Description = &handles[1614]
+var RouteVehicleIncident_EndTime = &handles[1615]
+var RouteVehicleIncident_Severity = &handles[1616]
+var RouteVehicleIncident_StartTime = &handles[1617]
+var RouteVehicleIncident_Type = &handles[1618]
+
+var _RouteVehicleIncidentList = &handles[1619]
+var _RouteVehicleIncidentList_member = &handles[1620]
+
+var RouteVehicleIncidentSeverity = &handles[1621]
+var RouteVehicleIncidentSeverity_CRITICAL = &handles[1622]
+var RouteVehicleIncidentSeverity_HIGH = &handles[1623]
+var RouteVehicleIncidentSeverity_MEDIUM = &handles[1624]
+var RouteVehicleIncidentSeverity_LOW = &handles[1625]
+
+var RouteVehicleIncidentType = &handles[1626]
+var RouteVehicleIncidentType_ACCIDENT = &handles[1627]
+var RouteVehicleIncidentType_CONGESTION = &handles[1628]
+var RouteVehicleIncidentType_CONSTRUCTION = &handles[1629]
+var RouteVehicleIncidentType_DISABLED_VEHICLE = &handles[1630]
+var RouteVehicleIncidentType_LANE_RESTRICTION = &handles[1631]
+var RouteVehicleIncidentType_MASS_TRANSIT = &handles[1632]
+var RouteVehicleIncidentType_OTHER = &handles[1633]
+var RouteVehicleIncidentType_PLANNED_EVENT = &handles[1634]
+var RouteVehicleIncidentType_ROAD_CLOSURE = &handles[1635]
+var RouteVehicleIncidentType_ROAD_HAZARD = &handles[1636]
+var RouteVehicleIncidentType_WEATHER = &handles[1637]
+
+var RouteVehicleLegDetails = &handles[1638]
+var RouteVehicleLegDetails_AfterTravelSteps = &handles[1639]
+var RouteVehicleLegDetails_Arrival = &handles[1640]
+var RouteVehicleLegDetails_Departure = &handles[1641]
+var RouteVehicleLegDetails_Incidents = &handles[1642]
+var RouteVehicleLegDetails_Notices = &handles[1643]
+var RouteVehicleLegDetails_PassThroughWaypoints = &handles[1644]
+var RouteVehicleLegDetails_Spans = &handles[1645]
+var RouteVehicleLegDetails_Summary = &handles[1646]
+var RouteVehicleLegDetails_Tolls = &handles[1647]
+var RouteVehicleLegDetails_TollSystems = &handles[1648]
+var RouteVehicleLegDetails_TravelSteps = &handles[1649]
+var RouteVehicleLegDetails_TruckRoadTypes = &handles[1650]
+var RouteVehicleLegDetails_Zones = &handles[1651]
+
+var RouteVehicleLicensePlate = &handles[1652]
+var RouteVehicleLicensePlate_LastCharacter = &handles[1653]
+
+var RouteVehicleMode = &handles[1654]
+var RouteVehicleMode_ALL = &handles[1655]
+var RouteVehicleMode_CAR = &handles[1656]
+
+var _RouteVehicleModeList = &handles[1657]
+var _RouteVehicleModeList_member = &handles[1658]
+
+var RouteVehicleNotice = &handles[1659]
+var RouteVehicleNotice_Code = &handles[1660]
+var RouteVehicleNotice_Details = &handles[1661]
+var RouteVehicleNotice_Impact = &handles[1662]
+
+var RouteVehicleNoticeCode = &handles[1663]
+var RouteVehicleNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = &handles[1664]
+var RouteVehicleNoticeCode_OTHER = &handles[1665]
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE = &handles[1666]
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_CARPOOL_USAGE = &handles[1667]
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE = &handles[1668]
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = &handles[1669]
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE = &handles[1670]
+var RouteVehicleNoticeCode_SEASONAL_CLOSURE = &handles[1671]
+var RouteVehicleNoticeCode_TOLLS_DATA_TEMPORARILY_UNAVAILABLE = &handles[1672]
+var RouteVehicleNoticeCode_TOLLS_DATA_UNAVAILABLE = &handles[1673]
+var RouteVehicleNoticeCode_TOLL_TRANSPONDER = &handles[1674]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY = &handles[1675]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_DIFFICULT_TURNS = &handles[1676]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_DIRT_ROAD = &handles[1677]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_SEASONAL_CLOSURE = &handles[1678]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_ROAD = &handles[1679]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_TRANSPONDER = &handles[1680]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_TRUCK_ROAD_TYPE = &handles[1681]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_TUNNEL = &handles[1682]
+var RouteVehicleNoticeCode_VIOLATED_AVOID_U_TURNS = &handles[1683]
+var RouteVehicleNoticeCode_VIOLATED_BLOCKED_ROAD = &handles[1684]
+var RouteVehicleNoticeCode_VIOLATED_CARPOOL = &handles[1685]
+var RouteVehicleNoticeCode_VIOLATED_EMERGENCY_GATE = &handles[1686]
+var RouteVehicleNoticeCode_VIOLATED_START_DIRECTION = &handles[1687]
+var RouteVehicleNoticeCode_VIOLATED_TURN_RESTRICTION = &handles[1688]
+var RouteVehicleNoticeCode_VIOLATED_VEHICLE_RESTRICTION = &handles[1689]
+var RouteVehicleNoticeCode_VIOLATED_ZONE_RESTRICTION = &handles[1690]
+var RouteVehicleNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS = &handles[1691]
+
+var RouteVehicleNoticeDetail = &handles[1692]
+var RouteVehicleNoticeDetail_Title = &handles[1693]
+var RouteVehicleNoticeDetail_ViolatedConstraints = &handles[1694]
+
+var _RouteVehicleNoticeDetailList = &handles[1695]
+var _RouteVehicleNoticeDetailList_member = &handles[1696]
+
+var _RouteVehicleNoticeList = &handles[1697]
+var _RouteVehicleNoticeList_member = &handles[1698]
+
+var RouteVehicleOverviewSummary = &handles[1699]
+var RouteVehicleOverviewSummary_BestCaseDuration = &handles[1700]
+var RouteVehicleOverviewSummary_Distance = &handles[1701]
+var RouteVehicleOverviewSummary_Duration = &handles[1702]
+var RouteVehicleOverviewSummary_TypicalDuration = &handles[1703]
+
+var RouteVehiclePlace = &handles[1704]
+var RouteVehiclePlace_Name = &handles[1705]
+var RouteVehiclePlace_OriginalPosition = &handles[1706]
+var RouteVehiclePlace_Position = &handles[1707]
+var RouteVehiclePlace_SideOfStreet = &handles[1708]
+var RouteVehiclePlace_WaypointIndex = &handles[1709]
+var RouteVehiclePlace_AccessPointDetails = &handles[1710]
+var RouteVehiclePlace_StationDetails = &handles[1711]
+var RouteVehiclePlace_Type = &handles[1712]
+
+var RouteVehiclePlaceType = &handles[1713]
+var RouteVehiclePlaceType_ACCESS_POINT = &handles[1714]
+var RouteVehiclePlaceType_DOCKING_STATION = &handles[1715]
+var RouteVehiclePlaceType_PARKING_LOT = &handles[1716]
+var RouteVehiclePlaceType_STATION = &handles[1717]
+
+var RouteVehicleSpan = &handles[1718]
+var RouteVehicleSpan_BestCaseDuration = &handles[1719]
+var RouteVehicleSpan_CarAccess = &handles[1720]
+var RouteVehicleSpan_Country = &handles[1721]
+var RouteVehicleSpan_Distance = &handles[1722]
+var RouteVehicleSpan_Duration = &handles[1723]
+var RouteVehicleSpan_DynamicSpeed = &handles[1724]
+var RouteVehicleSpan_FunctionalClassification = &handles[1725]
+var RouteVehicleSpan_Gate = &handles[1726]
+var RouteVehicleSpan_GeometryOffset = &handles[1727]
+var RouteVehicleSpan_Incidents = &handles[1728]
+var RouteVehicleSpan_Names = &handles[1729]
+var RouteVehicleSpan_Notices = &handles[1730]
+var RouteVehicleSpan_RailwayCrossing = &handles[1731]
+var RouteVehicleSpan_Region = &handles[1732]
+var RouteVehicleSpan_RoadAttributes = &handles[1733]
+var RouteVehicleSpan_RouteNumbers = &handles[1734]
+var RouteVehicleSpan_ScooterAccess = &handles[1735]
+var RouteVehicleSpan_SpeedLimit = &handles[1736]
+var RouteVehicleSpan_TollSystems = &handles[1737]
+var RouteVehicleSpan_TruckAccess = &handles[1738]
+var RouteVehicleSpan_TruckRoadTypes = &handles[1739]
+var RouteVehicleSpan_TypicalDuration = &handles[1740]
+var RouteVehicleSpan_Zones = &handles[1741]
+
+var _RouteVehicleSpanList = &handles[1742]
+var _RouteVehicleSpanList_member = &handles[1743]
+
+var RouteVehicleSummary = &handles[1744]
+var RouteVehicleSummary_Overview = &handles[1745]
+var RouteVehicleSummary_TravelOnly = &handles[1746]
+
+var RouteVehicleTravelOnlySummary = &handles[1747]
+var RouteVehicleTravelOnlySummary_BestCaseDuration = &handles[1748]
+var RouteVehicleTravelOnlySummary_Duration = &handles[1749]
+var RouteVehicleTravelOnlySummary_TypicalDuration = &handles[1750]
+
+var RouteVehicleTravelStep = &handles[1751]
+var RouteVehicleTravelStep_ContinueHighwayStepDetails = &handles[1752]
+var RouteVehicleTravelStep_ContinueStepDetails = &handles[1753]
+var RouteVehicleTravelStep_CurrentRoad = &handles[1754]
+var RouteVehicleTravelStep_Distance = &handles[1755]
+var RouteVehicleTravelStep_Duration = &handles[1756]
+var RouteVehicleTravelStep_EnterHighwayStepDetails = &handles[1757]
+var RouteVehicleTravelStep_ExitNumber = &handles[1758]
+var RouteVehicleTravelStep_ExitStepDetails = &handles[1759]
+var RouteVehicleTravelStep_GeometryOffset = &handles[1760]
+var RouteVehicleTravelStep_Instruction = &handles[1761]
+var RouteVehicleTravelStep_KeepStepDetails = &handles[1762]
+var RouteVehicleTravelStep_NextRoad = &handles[1763]
+var RouteVehicleTravelStep_RampStepDetails = &handles[1764]
+var RouteVehicleTravelStep_RoundaboutEnterStepDetails = &handles[1765]
+var RouteVehicleTravelStep_RoundaboutExitStepDetails = &handles[1766]
+var RouteVehicleTravelStep_RoundaboutPassStepDetails = &handles[1767]
+var RouteVehicleTravelStep_Signpost = &handles[1768]
+var RouteVehicleTravelStep_TurnStepDetails = &handles[1769]
+var RouteVehicleTravelStep_Type = &handles[1770]
+var RouteVehicleTravelStep_UTurnStepDetails = &handles[1771]
+
+var _RouteVehicleTravelStepList = &handles[1772]
+var _RouteVehicleTravelStepList_member = &handles[1773]
+
+var RouteVehicleTravelStepType = &handles[1774]
+var RouteVehicleTravelStepType_ARRIVE = &handles[1775]
+var RouteVehicleTravelStepType_CONTINUE = &handles[1776]
+var RouteVehicleTravelStepType_CONTINUE_HIGHWAY = &handles[1777]
+var RouteVehicleTravelStepType_DEPART = &handles[1778]
+var RouteVehicleTravelStepType_ENTER_HIGHWAY = &handles[1779]
+var RouteVehicleTravelStepType_EXIT = &handles[1780]
+var RouteVehicleTravelStepType_KEEP = &handles[1781]
+var RouteVehicleTravelStepType_RAMP = &handles[1782]
+var RouteVehicleTravelStepType_ROUNDABOUT_ENTER = &handles[1783]
+var RouteVehicleTravelStepType_ROUNDABOUT_EXIT = &handles[1784]
+var RouteVehicleTravelStepType_ROUNDABOUT_PASS = &handles[1785]
+var RouteVehicleTravelStepType_TURN = &handles[1786]
+var RouteVehicleTravelStepType_U_TURN = &handles[1787]
+
+var RouteViolatedConstraints = &handles[1788]
+var RouteViolatedConstraints_AllHazardsRestricted = &handles[1789]
+var RouteViolatedConstraints_AxleCount = &handles[1790]
+var RouteViolatedConstraints_HazardousCargos = &handles[1791]
+var RouteViolatedConstraints_MaxHeight = &handles[1792]
+var RouteViolatedConstraints_MaxKpraLength = &handles[1793]
+var RouteViolatedConstraints_MaxLength = &handles[1794]
+var RouteViolatedConstraints_MaxPayloadCapacity = &handles[1795]
+var RouteViolatedConstraints_MaxWeight = &handles[1796]
+var RouteViolatedConstraints_MaxWeightPerAxle = &handles[1797]
+var RouteViolatedConstraints_MaxWeightPerAxleGroup = &handles[1798]
+var RouteViolatedConstraints_MaxWidth = &handles[1799]
+var RouteViolatedConstraints_Occupancy = &handles[1800]
+var RouteViolatedConstraints_RestrictedTimes = &handles[1801]
+var RouteViolatedConstraints_TimeDependent = &handles[1802]
+var RouteViolatedConstraints_TrailerCount = &handles[1803]
+var RouteViolatedConstraints_TravelMode = &handles[1804]
+var RouteViolatedConstraints_TruckRoadType = &handles[1805]
+var RouteViolatedConstraints_TruckType = &handles[1806]
+var RouteViolatedConstraints_TunnelRestrictionCode = &handles[1807]
+
+var RouteWaypoint = &handles[1808]
+var RouteWaypoint_AvoidActionsForDistance = &handles[1809]
+var RouteWaypoint_AvoidUTurns = &handles[1810]
+var RouteWaypoint_Heading = &handles[1811]
+var RouteWaypoint_Matching = &handles[1812]
+var RouteWaypoint_PassThrough = &handles[1813]
+var RouteWaypoint_Position = &handles[1814]
+var RouteWaypoint_SideOfStreet = &handles[1815]
+var RouteWaypoint_StopDuration = &handles[1816]
+
+var _RouteWaypointList = &handles[1817]
+var _RouteWaypointList_member = &handles[1818]
+
+var RouteWebLink = &handles[1819]
+var RouteWebLink_AnchorText = &handles[1820]
+var RouteWebLink_Description = &handles[1821]
+var RouteWebLink_DeviceType = &handles[1822]
+var RouteWebLink_Url = &handles[1823]
+
+var RouteWebLinkDeviceType = &handles[1824]
+var RouteWebLinkDeviceType_ANDROID = &handles[1825]
+var RouteWebLinkDeviceType_IOS = &handles[1826]
+var RouteWebLinkDeviceType_WEB = &handles[1827]
+
+var _RouteWebLinkList = &handles[1828]
+var _RouteWebLinkList_member = &handles[1829]
+
+var RouteWeightConstraint = &handles[1830]
+var RouteWeightConstraint_Type = &handles[1831]
+var RouteWeightConstraint_Value = &handles[1832]
+
+var RouteWeightConstraintType = &handles[1833]
+var RouteWeightConstraintType_CURRENT = &handles[1834]
+var RouteWeightConstraintType_GROSS = &handles[1835]
+var RouteWeightConstraintType_UNKNOWN = &handles[1836]
+
+var RouteZone = &handles[1837]
+var RouteZone_Category = &handles[1838]
+var RouteZone_Name = &handles[1839]
+
+var RouteZoneCategory = &handles[1840]
+var RouteZoneCategory_CONGESTION_PRICING = &handles[1841]
+var RouteZoneCategory_ENVIRONMENTAL = &handles[1842]
+var RouteZoneCategory_VIGNETTE = &handles[1843]
+
+var _RouteZoneList = &handles[1844]
+var _RouteZoneList_member = &handles[1845]
+
+var RoutingObjective = &handles[1846]
+var RoutingObjective_FASTEST_ROUTE = &handles[1847]
+var RoutingObjective_SHORTEST_ROUTE = &handles[1848]
+
+var _SensitiveBoolean = &handles[1849]
+
+var _SensitiveDouble = &handles[1850]
+
+var _SensitiveInteger = &handles[1851]
+
+var _SensitiveString = &handles[1852]
+
+var SideOfStreetMatchingStrategy = &handles[1853]
+var SideOfStreetMatchingStrategy_ANY_STREET = &handles[1854]
+var SideOfStreetMatchingStrategy_DIVIDED_STREET_ONLY = &handles[1855]
+
+var _SpeedKilometersPerHour = &handles[1856]
+
+var ThrottlingException = &handles[1857]
+var ThrottlingException_Message = &handles[1858]
+
+var _TimeOfDay = &handles[1859]
+
+var _TimestampWithTimezoneOffset = &handles[1860]
+
+var _TimeThresholdList = &handles[1861]
+var _TimeThresholdList_member = &handles[1862]
+
+var TrafficUsage = &handles[1863]
+var TrafficUsage_IGNORE_TRAFFIC_DATA = &handles[1864]
+var TrafficUsage_USE_TRAFFIC_DATA = &handles[1865]
+
+var _TruckRoadType = &handles[1866]
+
+var _TruckRoadTypeList = &handles[1867]
+var _TruckRoadTypeList_member = &handles[1868]
+
+var _TunnelRestrictionCode = &handles[1869]
+
+var _TurnAngle = &handles[1870]
+
+var ValidationException = &handles[1871]
+var ValidationException_Message = &handles[1872]
+var ValidationException_Reason = &handles[1873]
+var ValidationException_FieldList = &handles[1874]
+
+var ValidationExceptionField = &handles[1875]
+var ValidationExceptionField_Name = &handles[1876]
+var ValidationExceptionField_Message = &handles[1877]
+
+var _ValidationExceptionFieldList = &handles[1878]
+var _ValidationExceptionFieldList_member = &handles[1879]
+
+var ValidationExceptionReason = &handles[1880]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[1881]
+var ValidationExceptionReason_MISSING = &handles[1882]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[1883]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[1884]
+var ValidationExceptionReason_OTHER = &handles[1885]
+var ValidationExceptionReason_UNKNOWN_FIELD = &handles[1886]
+
+var _WaypointId = &handles[1887]
+
+var _WaypointIndex = &handles[1888]
+
+var WaypointOptimizationAccessHours = &handles[1889]
+var WaypointOptimizationAccessHours_From = &handles[1890]
+var WaypointOptimizationAccessHours_To = &handles[1891]
+
+var WaypointOptimizationAccessHoursEntry = &handles[1892]
+var WaypointOptimizationAccessHoursEntry_DayOfWeek = &handles[1893]
+var WaypointOptimizationAccessHoursEntry_TimeOfDay = &handles[1894]
+
+var WaypointOptimizationAvoidanceArea = &handles[1895]
+var WaypointOptimizationAvoidanceArea_Geometry = &handles[1896]
+
+var WaypointOptimizationAvoidanceAreaGeometry = &handles[1897]
+var WaypointOptimizationAvoidanceAreaGeometry_BoundingBox = &handles[1898]
+
+var _WaypointOptimizationAvoidanceAreaList = &handles[1899]
+var _WaypointOptimizationAvoidanceAreaList_member = &handles[1900]
+
+var WaypointOptimizationAvoidanceOptions = &handles[1901]
+var WaypointOptimizationAvoidanceOptions_Areas = &handles[1902]
+var WaypointOptimizationAvoidanceOptions_CarShuttleTrains = &handles[1903]
+var WaypointOptimizationAvoidanceOptions_ControlledAccessHighways = &handles[1904]
+var WaypointOptimizationAvoidanceOptions_DirtRoads = &handles[1905]
+var WaypointOptimizationAvoidanceOptions_Ferries = &handles[1906]
+var WaypointOptimizationAvoidanceOptions_TollRoads = &handles[1907]
+var WaypointOptimizationAvoidanceOptions_Tunnels = &handles[1908]
+var WaypointOptimizationAvoidanceOptions_UTurns = &handles[1909]
+
+var WaypointOptimizationClusteringAlgorithm = &handles[1910]
+var WaypointOptimizationClusteringAlgorithm_DRIVING_DISTANCE = &handles[1911]
+var WaypointOptimizationClusteringAlgorithm_TOPOLOGY_SEGMENT = &handles[1912]
+
+var WaypointOptimizationClusteringOptions = &handles[1913]
+var WaypointOptimizationClusteringOptions_Algorithm = &handles[1914]
+var WaypointOptimizationClusteringOptions_DrivingDistanceOptions = &handles[1915]
+
+var WaypointOptimizationConnection = &handles[1916]
+var WaypointOptimizationConnection_Distance = &handles[1917]
+var WaypointOptimizationConnection_From = &handles[1918]
+var WaypointOptimizationConnection_RestDuration = &handles[1919]
+var WaypointOptimizationConnection_To = &handles[1920]
+var WaypointOptimizationConnection_TravelDuration = &handles[1921]
+var WaypointOptimizationConnection_WaitDuration = &handles[1922]
+
+var _WaypointOptimizationConnectionList = &handles[1923]
+var _WaypointOptimizationConnectionList_member = &handles[1924]
+
+var WaypointOptimizationConstraint = &handles[1925]
+var WaypointOptimizationConstraint_ACCESS_HOURS = &handles[1926]
+var WaypointOptimizationConstraint_APPOINTMENT_TIME = &handles[1927]
+var WaypointOptimizationConstraint_BEFORE = &handles[1928]
+var WaypointOptimizationConstraint_HEADING = &handles[1929]
+var WaypointOptimizationConstraint_SERVICE_DURATION = &handles[1930]
+var WaypointOptimizationConstraint_SIDE_OF_STREET = &handles[1931]
+
+var WaypointOptimizationDestinationOptions = &handles[1932]
+var WaypointOptimizationDestinationOptions_AccessHours = &handles[1933]
+var WaypointOptimizationDestinationOptions_AppointmentTime = &handles[1934]
+var WaypointOptimizationDestinationOptions_Heading = &handles[1935]
+var WaypointOptimizationDestinationOptions_Id = &handles[1936]
+var WaypointOptimizationDestinationOptions_ServiceDuration = &handles[1937]
+var WaypointOptimizationDestinationOptions_SideOfStreet = &handles[1938]
+
+var WaypointOptimizationDriverOptions = &handles[1939]
+var WaypointOptimizationDriverOptions_RestCycles = &handles[1940]
+var WaypointOptimizationDriverOptions_RestProfile = &handles[1941]
+var WaypointOptimizationDriverOptions_TreatServiceTimeAs = &handles[1942]
+
+var _WaypointOptimizationDrivingDistance = &handles[1943]
+
+var WaypointOptimizationDrivingDistanceOptions = &handles[1944]
+var WaypointOptimizationDrivingDistanceOptions_DrivingDistance = &handles[1945]
+
+var WaypointOptimizationExclusionOptions = &handles[1946]
+var WaypointOptimizationExclusionOptions_Countries = &handles[1947]
+
+var WaypointOptimizationFailedConstraint = &handles[1948]
+var WaypointOptimizationFailedConstraint_Constraint = &handles[1949]
+var WaypointOptimizationFailedConstraint_Reason = &handles[1950]
+
+var _WaypointOptimizationFailedConstraintList = &handles[1951]
+var _WaypointOptimizationFailedConstraintList_member = &handles[1952]
+
+var WaypointOptimizationHazardousCargoType = &handles[1953]
+var WaypointOptimizationHazardousCargoType_COMBUSTIBLE = &handles[1954]
+var WaypointOptimizationHazardousCargoType_CORROSIVE = &handles[1955]
+var WaypointOptimizationHazardousCargoType_EXPLOSIVE = &handles[1956]
+var WaypointOptimizationHazardousCargoType_FLAMMABLE = &handles[1957]
+var WaypointOptimizationHazardousCargoType_GAS = &handles[1958]
+var WaypointOptimizationHazardousCargoType_HARMFUL_TO_WATER = &handles[1959]
+var WaypointOptimizationHazardousCargoType_ORGANIC = &handles[1960]
+var WaypointOptimizationHazardousCargoType_OTHER = &handles[1961]
+var WaypointOptimizationHazardousCargoType_POISON = &handles[1962]
+var WaypointOptimizationHazardousCargoType_POISONOUS_INHALATION = &handles[1963]
+var WaypointOptimizationHazardousCargoType_RADIOACTIVE = &handles[1964]
+
+var _WaypointOptimizationHazardousCargoTypeList = &handles[1965]
+var _WaypointOptimizationHazardousCargoTypeList_member = &handles[1966]
+
+var WaypointOptimizationImpedingWaypoint = &handles[1967]
+var WaypointOptimizationImpedingWaypoint_FailedConstraints = &handles[1968]
+var WaypointOptimizationImpedingWaypoint_Id = &handles[1969]
+var WaypointOptimizationImpedingWaypoint_Position = &handles[1970]
+
+var _WaypointOptimizationImpedingWaypointList = &handles[1971]
+var _WaypointOptimizationImpedingWaypointList_member = &handles[1972]
+
+var WaypointOptimizationOptimizedWaypoint = &handles[1973]
+var WaypointOptimizationOptimizedWaypoint_ArrivalTime = &handles[1974]
+var WaypointOptimizationOptimizedWaypoint_ClusterIndex = &handles[1975]
+var WaypointOptimizationOptimizedWaypoint_DepartureTime = &handles[1976]
+var WaypointOptimizationOptimizedWaypoint_Id = &handles[1977]
+var WaypointOptimizationOptimizedWaypoint_Position = &handles[1978]
+
+var _WaypointOptimizationOptimizedWaypointList = &handles[1979]
+var _WaypointOptimizationOptimizedWaypointList_member = &handles[1980]
+
+var WaypointOptimizationOriginOptions = &handles[1981]
+var WaypointOptimizationOriginOptions_Id = &handles[1982]
+
+var WaypointOptimizationPedestrianOptions = &handles[1983]
+var WaypointOptimizationPedestrianOptions_Speed = &handles[1984]
+
+var WaypointOptimizationRestCycleDurations = &handles[1985]
+var WaypointOptimizationRestCycleDurations_RestDuration = &handles[1986]
+var WaypointOptimizationRestCycleDurations_WorkDuration = &handles[1987]
+
+var WaypointOptimizationRestCycles = &handles[1988]
+var WaypointOptimizationRestCycles_LongCycle = &handles[1989]
+var WaypointOptimizationRestCycles_ShortCycle = &handles[1990]
+
+var WaypointOptimizationRestProfile = &handles[1991]
+var WaypointOptimizationRestProfile_Profile = &handles[1992]
+
+var WaypointOptimizationSequencingObjective = &handles[1993]
+var WaypointOptimizationSequencingObjective_FASTEST_ROUTE = &handles[1994]
+var WaypointOptimizationSequencingObjective_SHORTEST_ROUTE = &handles[1995]
+
+var WaypointOptimizationServiceTimeTreatment = &handles[1996]
+var WaypointOptimizationServiceTimeTreatment_REST = &handles[1997]
+var WaypointOptimizationServiceTimeTreatment_WORK = &handles[1998]
+
+var WaypointOptimizationSideOfStreetOptions = &handles[1999]
+var WaypointOptimizationSideOfStreetOptions_Position = &handles[2000]
+var WaypointOptimizationSideOfStreetOptions_UseWith = &handles[2001]
+
+var WaypointOptimizationTimeBreakdown = &handles[2002]
+var WaypointOptimizationTimeBreakdown_RestDuration = &handles[2003]
+var WaypointOptimizationTimeBreakdown_ServiceDuration = &handles[2004]
+var WaypointOptimizationTimeBreakdown_TravelDuration = &handles[2005]
+var WaypointOptimizationTimeBreakdown_WaitDuration = &handles[2006]
+
+var WaypointOptimizationTrafficOptions = &handles[2007]
+var WaypointOptimizationTrafficOptions_Usage = &handles[2008]
+
+var WaypointOptimizationTrailerOptions = &handles[2009]
+var WaypointOptimizationTrailerOptions_TrailerCount = &handles[2010]
+
+var WaypointOptimizationTravelMode = &handles[2011]
+var WaypointOptimizationTravelMode_CAR = &handles[2012]
+var WaypointOptimizationTravelMode_PEDESTRIAN = &handles[2013]
+var WaypointOptimizationTravelMode_SCOOTER = &handles[2014]
+var WaypointOptimizationTravelMode_TRUCK = &handles[2015]
+
+var WaypointOptimizationTravelModeOptions = &handles[2016]
+var WaypointOptimizationTravelModeOptions_Pedestrian = &handles[2017]
+var WaypointOptimizationTravelModeOptions_Truck = &handles[2018]
+
+var WaypointOptimizationTruckOptions = &handles[2019]
+var WaypointOptimizationTruckOptions_GrossWeight = &handles[2020]
+var WaypointOptimizationTruckOptions_HazardousCargos = &handles[2021]
+var WaypointOptimizationTruckOptions_Height = &handles[2022]
+var WaypointOptimizationTruckOptions_Length = &handles[2023]
+var WaypointOptimizationTruckOptions_Trailer = &handles[2024]
+var WaypointOptimizationTruckOptions_TruckType = &handles[2025]
+var WaypointOptimizationTruckOptions_TunnelRestrictionCode = &handles[2026]
+var WaypointOptimizationTruckOptions_WeightPerAxle = &handles[2027]
+var WaypointOptimizationTruckOptions_Width = &handles[2028]
+
+var WaypointOptimizationTruckType = &handles[2029]
+var WaypointOptimizationTruckType_STRAIGHT_TRUCK = &handles[2030]
+var WaypointOptimizationTruckType_TRACTOR = &handles[2031]
+
+var WaypointOptimizationWaypoint = &handles[2032]
+var WaypointOptimizationWaypoint_AccessHours = &handles[2033]
+var WaypointOptimizationWaypoint_AppointmentTime = &handles[2034]
+var WaypointOptimizationWaypoint_Before = &handles[2035]
+var WaypointOptimizationWaypoint_Heading = &handles[2036]
+var WaypointOptimizationWaypoint_Id = &handles[2037]
+var WaypointOptimizationWaypoint_Position = &handles[2038]
+var WaypointOptimizationWaypoint_ServiceDuration = &handles[2039]
+var WaypointOptimizationWaypoint_SideOfStreet = &handles[2040]
+
+var _WaypointOptimizationWaypointList = &handles[2041]
+var _WaypointOptimizationWaypointList_member = &handles[2042]
+
+var _WeightKilograms = &handles[2043]
+
+var WeightPerAxleGroup = &handles[2044]
+var WeightPerAxleGroup_Single = &handles[2045]
+var WeightPerAxleGroup_Tandem = &handles[2046]
+var WeightPerAxleGroup_Triple = &handles[2047]
+var WeightPerAxleGroup_Quad = &handles[2048]
+var WeightPerAxleGroup_Quint = &handles[2049]
+
+var CalculateIsolinesRequest = &handles[2050]
+var CalculateIsolinesRequest_Allow = &handles[2051]
+var CalculateIsolinesRequest_ArrivalTime = &handles[2052]
+var CalculateIsolinesRequest_Avoid = &handles[2053]
+var CalculateIsolinesRequest_DepartNow = &handles[2054]
+var CalculateIsolinesRequest_DepartureTime = &handles[2055]
+var CalculateIsolinesRequest_Destination = &handles[2056]
+var CalculateIsolinesRequest_DestinationOptions = &handles[2057]
+var CalculateIsolinesRequest_IsolineGeometryFormat = &handles[2058]
+var CalculateIsolinesRequest_IsolineGranularity = &handles[2059]
+var CalculateIsolinesRequest_Key = &handles[2060]
+var CalculateIsolinesRequest_OptimizeIsolineFor = &handles[2061]
+var CalculateIsolinesRequest_OptimizeRoutingFor = &handles[2062]
+var CalculateIsolinesRequest_Origin = &handles[2063]
+var CalculateIsolinesRequest_OriginOptions = &handles[2064]
+var CalculateIsolinesRequest_Thresholds = &handles[2065]
+var CalculateIsolinesRequest_Traffic = &handles[2066]
+var CalculateIsolinesRequest_TravelMode = &handles[2067]
+var CalculateIsolinesRequest_TravelModeOptions = &handles[2068]
+
+var CalculateIsolinesResponse = &handles[2069]
+var CalculateIsolinesResponse_ArrivalTime = &handles[2070]
+var CalculateIsolinesResponse_DepartureTime = &handles[2071]
+var CalculateIsolinesResponse_IsolineGeometryFormat = &handles[2072]
+var CalculateIsolinesResponse_Isolines = &handles[2073]
+var CalculateIsolinesResponse_PricingBucket = &handles[2074]
+var CalculateIsolinesResponse_SnappedDestination = &handles[2075]
+var CalculateIsolinesResponse_SnappedOrigin = &handles[2076]
+
+var CalculateRouteMatrixRequest = &handles[2077]
+var CalculateRouteMatrixRequest_Allow = &handles[2078]
+var CalculateRouteMatrixRequest_Avoid = &handles[2079]
+var CalculateRouteMatrixRequest_DepartNow = &handles[2080]
+var CalculateRouteMatrixRequest_DepartureTime = &handles[2081]
+var CalculateRouteMatrixRequest_Destinations = &handles[2082]
+var CalculateRouteMatrixRequest_Exclude = &handles[2083]
+var CalculateRouteMatrixRequest_Key = &handles[2084]
+var CalculateRouteMatrixRequest_OptimizeRoutingFor = &handles[2085]
+var CalculateRouteMatrixRequest_Origins = &handles[2086]
+var CalculateRouteMatrixRequest_RoutingBoundary = &handles[2087]
+var CalculateRouteMatrixRequest_Traffic = &handles[2088]
+var CalculateRouteMatrixRequest_TravelMode = &handles[2089]
+var CalculateRouteMatrixRequest_TravelModeOptions = &handles[2090]
+
+var CalculateRouteMatrixResponse = &handles[2091]
+var CalculateRouteMatrixResponse_ErrorCount = &handles[2092]
+var CalculateRouteMatrixResponse_PricingBucket = &handles[2093]
+var CalculateRouteMatrixResponse_RouteMatrix = &handles[2094]
+var CalculateRouteMatrixResponse_RoutingBoundary = &handles[2095]
+
+var CalculateRoutesRequest = &handles[2096]
+var CalculateRoutesRequest_Allow = &handles[2097]
+var CalculateRoutesRequest_ArrivalTime = &handles[2098]
+var CalculateRoutesRequest_Avoid = &handles[2099]
+var CalculateRoutesRequest_DepartNow = &handles[2100]
+var CalculateRoutesRequest_DepartureTime = &handles[2101]
+var CalculateRoutesRequest_Destination = &handles[2102]
+var CalculateRoutesRequest_DestinationOptions = &handles[2103]
+var CalculateRoutesRequest_Driver = &handles[2104]
+var CalculateRoutesRequest_Exclude = &handles[2105]
+var CalculateRoutesRequest_InstructionsMeasurementSystem = &handles[2106]
+var CalculateRoutesRequest_Key = &handles[2107]
+var CalculateRoutesRequest_Languages = &handles[2108]
+var CalculateRoutesRequest_LegAdditionalFeatures = &handles[2109]
+var CalculateRoutesRequest_LegGeometryFormat = &handles[2110]
+var CalculateRoutesRequest_MaxAlternatives = &handles[2111]
+var CalculateRoutesRequest_OptimizeRoutingFor = &handles[2112]
+var CalculateRoutesRequest_Origin = &handles[2113]
+var CalculateRoutesRequest_OriginOptions = &handles[2114]
+var CalculateRoutesRequest_SpanAdditionalFeatures = &handles[2115]
+var CalculateRoutesRequest_Tolls = &handles[2116]
+var CalculateRoutesRequest_Traffic = &handles[2117]
+var CalculateRoutesRequest_TravelMode = &handles[2118]
+var CalculateRoutesRequest_TravelModeOptions = &handles[2119]
+var CalculateRoutesRequest_TravelStepType = &handles[2120]
+var CalculateRoutesRequest_Waypoints = &handles[2121]
+
+var CalculateRoutesResponse = &handles[2122]
+var CalculateRoutesResponse_LegGeometryFormat = &handles[2123]
+var CalculateRoutesResponse_Notices = &handles[2124]
+var CalculateRoutesResponse_PricingBucket = &handles[2125]
+var CalculateRoutesResponse_Routes = &handles[2126]
+
+var OptimizeWaypointsRequest = &handles[2127]
+var OptimizeWaypointsRequest_Avoid = &handles[2128]
+var OptimizeWaypointsRequest_Clustering = &handles[2129]
+var OptimizeWaypointsRequest_DepartureTime = &handles[2130]
+var OptimizeWaypointsRequest_Destination = &handles[2131]
+var OptimizeWaypointsRequest_DestinationOptions = &handles[2132]
+var OptimizeWaypointsRequest_Driver = &handles[2133]
+var OptimizeWaypointsRequest_Exclude = &handles[2134]
+var OptimizeWaypointsRequest_Key = &handles[2135]
+var OptimizeWaypointsRequest_OptimizeSequencingFor = &handles[2136]
+var OptimizeWaypointsRequest_Origin = &handles[2137]
+var OptimizeWaypointsRequest_OriginOptions = &handles[2138]
+var OptimizeWaypointsRequest_Traffic = &handles[2139]
+var OptimizeWaypointsRequest_TravelMode = &handles[2140]
+var OptimizeWaypointsRequest_TravelModeOptions = &handles[2141]
+var OptimizeWaypointsRequest_Waypoints = &handles[2142]
+
+var OptimizeWaypointsResponse = &handles[2143]
+var OptimizeWaypointsResponse_Connections = &handles[2144]
+var OptimizeWaypointsResponse_Distance = &handles[2145]
+var OptimizeWaypointsResponse_Duration = &handles[2146]
+var OptimizeWaypointsResponse_ImpedingWaypoints = &handles[2147]
+var OptimizeWaypointsResponse_OptimizedWaypoints = &handles[2148]
+var OptimizeWaypointsResponse_PricingBucket = &handles[2149]
+var OptimizeWaypointsResponse_TimeBreakdown = &handles[2150]
+
+var SnapToRoadsRequest = &handles[2151]
+var SnapToRoadsRequest_Key = &handles[2152]
+var SnapToRoadsRequest_SnappedGeometryFormat = &handles[2153]
+var SnapToRoadsRequest_SnapRadius = &handles[2154]
+var SnapToRoadsRequest_TracePoints = &handles[2155]
+var SnapToRoadsRequest_TravelMode = &handles[2156]
+var SnapToRoadsRequest_TravelModeOptions = &handles[2157]
+
+var SnapToRoadsResponse = &handles[2158]
+var SnapToRoadsResponse_Notices = &handles[2159]
+var SnapToRoadsResponse_PricingBucket = &handles[2160]
+var SnapToRoadsResponse_SnappedGeometry = &handles[2161]
+var SnapToRoadsResponse_SnappedGeometryFormat = &handles[2162]
+var SnapToRoadsResponse_SnappedTracePoints = &handles[2163]
+
+var RoutesService = &smithy.ServiceSchema{Schema: &handles[5], Version: "2020-11-19"}

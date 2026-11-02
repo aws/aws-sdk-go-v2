@@ -7,235 +7,209 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var QueryForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "QueryForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var QueryWhatIfForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "QueryWhatIfForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AmazonForecastRuntime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "AmazonForecastRuntime",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonForecastRuntime = smithy.NewServiceSchema(_AmazonForecastRuntime, "2018-06-26")
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var DataPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "DataPoint",
-}, smithy.ShapeTypeStructure, 2)
-var DataPoint_Timestamp *smithy.Schema
-
-var DataPoint_Value *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "DateTime",
-}, smithy.ShapeTypeString, 0)
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "Filters",
-}, smithy.ShapeTypeMap, 2)
-var _Filters_key *smithy.Schema
-
-var _Filters_value *smithy.Schema
-
-var Forecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "Forecast",
-}, smithy.ShapeTypeStructure, 1)
-var Forecast_Predictions *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var LimitExceededException_Message *smithy.Schema
-
-var _LongArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "LongArn",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Predictions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "Predictions",
-}, smithy.ShapeTypeMap, 2)
-var _Predictions_key *smithy.Schema
-
-var _Predictions_value *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceInUseException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _Statistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "Statistic",
-}, smithy.ShapeTypeString, 0)
-
-var _TimeSeries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "TimeSeries",
-}, smithy.ShapeTypeList, 1)
-var _TimeSeries_member *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeString, 0)
-
-var QueryForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "QueryForecastRequest",
-}, smithy.ShapeTypeStructure, 5)
-var QueryForecastRequest_ForecastArn *smithy.Schema
-
-var QueryForecastRequest_StartDate *smithy.Schema
-
-var QueryForecastRequest_EndDate *smithy.Schema
-
-var QueryForecastRequest_Filters *smithy.Schema
-
-var QueryForecastRequest_NextToken *smithy.Schema
-
-var QueryForecastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "QueryForecastResponse",
-}, smithy.ShapeTypeStructure, 1)
-var QueryForecastResponse_Forecast *smithy.Schema
-
-var QueryWhatIfForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "QueryWhatIfForecastRequest",
-}, smithy.ShapeTypeStructure, 5)
-var QueryWhatIfForecastRequest_WhatIfForecastArn *smithy.Schema
-
-var QueryWhatIfForecastRequest_StartDate *smithy.Schema
-
-var QueryWhatIfForecastRequest_EndDate *smithy.Schema
-
-var QueryWhatIfForecastRequest_Filters *smithy.Schema
-
-var QueryWhatIfForecastRequest_NextToken *smithy.Schema
-
-var QueryWhatIfForecastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.forecastquery",
-	Name:      "QueryWhatIfForecastResponse",
-}, smithy.ShapeTypeStructure, 1)
-var QueryWhatIfForecastResponse_Forecast *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	DataPoint_Timestamp = DataPoint.AddMember("Timestamp", _Timestamp)
-
-	DataPoint_Value = DataPoint.AddMember("Value", _Double)
-
-	_Filters_key = _Filters.AddMember("key", _AttributeName)
-
-	_Filters_value = _Filters.AddMember("value", _AttributeValue)
-
-	_TimeSeries_member = _TimeSeries.AddMember("member", DataPoint)
-
-	_Predictions_key = _Predictions.AddMember("key", _Statistic)
-
-	_Predictions_value = _Predictions.AddMember("value", _TimeSeries)
-
-	Forecast_Predictions = Forecast.AddMember("Predictions", _Predictions)
-
-	InvalidInputException_Message = InvalidInputException.AddMember("Message", _ErrorMessage)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _ErrorMessage)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	QueryForecastRequest_ForecastArn = QueryForecastRequest.AddMember("ForecastArn", _Arn)
-
-	QueryForecastRequest_StartDate = QueryForecastRequest.AddMember("StartDate", _DateTime)
-
-	QueryForecastRequest_EndDate = QueryForecastRequest.AddMember("EndDate", _DateTime)
-
-	QueryForecastRequest_Filters = QueryForecastRequest.AddMember("Filters", _Filters)
-
-	QueryForecastRequest_NextToken = QueryForecastRequest.AddMember("NextToken", _NextToken)
-
-	QueryForecastResponse_Forecast = QueryForecastResponse.AddMember("Forecast", Forecast)
-
-	QueryWhatIfForecastRequest_WhatIfForecastArn = QueryWhatIfForecastRequest.AddMember("WhatIfForecastArn", _LongArn)
-
-	QueryWhatIfForecastRequest_StartDate = QueryWhatIfForecastRequest.AddMember("StartDate", _DateTime)
-
-	QueryWhatIfForecastRequest_EndDate = QueryWhatIfForecastRequest.AddMember("EndDate", _DateTime)
-
-	QueryWhatIfForecastRequest_Filters = QueryWhatIfForecastRequest.AddMember("Filters", _Filters)
-
-	QueryWhatIfForecastRequest_NextToken = QueryWhatIfForecastRequest.AddMember("NextToken", _NextToken)
-
-	QueryWhatIfForecastResponse_Forecast = QueryWhatIfForecastResponse.AddMember("Forecast", Forecast)
-
+const blob = "" +
+	"QueryWhatIfForecastResponseQueryWhatIfForecastRequestInvalidNextTokenExceptionResourceNotFoundExcept" +
+	"ionLimitExceededExceptionResourceInUseExceptionAmazonForecastRuntimeInvalidInputExceptionQueryForeca" +
+	"stResponseQueryForecastRequestWhatIfForecastArnAttributeValueAttributeNameErrorMessagePredictionsTim" +
+	"eSeriesDataPointStartDateStatisticTimestampDateTimeEndDateFiltersLongArnDoublemembervaluekey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.forecastquery"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 189, Target: 0, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 147, Target: 2, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 244, Target: 3, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 261, Target: 4, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 247, Target: 5, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 307, Target: 6, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 334, Target: 35, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 256, Target: 10, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 343, Target: 9, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 372, Target: 10, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 274, Target: 11, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 358, Target: 12, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 389, Target: 4, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 384, Target: 5, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11, Target: 15, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 286, Target: 25, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 168, Target: 17, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 11, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 53, Target: 19, Traits: 1, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 11, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 103, Target: 21, Traits: 2, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 11, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 365, Target: 23, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 60, Target: 24, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 286, Target: 25, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 389, Target: 32, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 384, Target: 33, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 125, Target: 28, Traits: 2, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 11, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 78, Target: 30, Traits: 3, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 11, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 325, Target: 32, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 297, Target: 33, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 378, Target: 6, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 334, Target: 35, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 210, Target: 36, Traits: 0, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 236, Target: 3, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 316, Target: 9, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 351, Target: 9, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 358, Target: 12, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 60, Target: 24, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 189, Target: 42, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11, Target: 15, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 27, Target: 44, Traits: 0, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 230, Target: 23, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 316, Target: 9, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 351, Target: 9, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 358, Target: 12, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 60, Target: 24, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 50, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 11, Target: 15, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [52]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+}
+
+var QueryForecast = &handles[0]
+
+var QueryWhatIfForecast = &handles[1]
+
+var _AmazonForecastRuntime = &handles[2]
+
+var _Arn = &handles[3]
+
+var _AttributeName = &handles[4]
+
+var _AttributeValue = &handles[5]
+
+var DataPoint = &handles[6]
+var DataPoint_Timestamp = &handles[7]
+var DataPoint_Value = &handles[8]
+
+var _DateTime = &handles[9]
+
+var _Double = &handles[10]
+
+var _ErrorMessage = &handles[11]
+
+var _Filters = &handles[12]
+var _Filters_key = &handles[13]
+var _Filters_value = &handles[14]
+
+var Forecast = &handles[15]
+var Forecast_Predictions = &handles[16]
+
+var InvalidInputException = &handles[17]
+var InvalidInputException_Message = &handles[18]
+
+var InvalidNextTokenException = &handles[19]
+var InvalidNextTokenException_Message = &handles[20]
+
+var LimitExceededException = &handles[21]
+var LimitExceededException_Message = &handles[22]
+
+var _LongArn = &handles[23]
+
+var _NextToken = &handles[24]
+
+var _Predictions = &handles[25]
+var _Predictions_key = &handles[26]
+var _Predictions_value = &handles[27]
+
+var ResourceInUseException = &handles[28]
+var ResourceInUseException_Message = &handles[29]
+
+var ResourceNotFoundException = &handles[30]
+var ResourceNotFoundException_Message = &handles[31]
+
+var _Statistic = &handles[32]
+
+var _TimeSeries = &handles[33]
+var _TimeSeries_member = &handles[34]
+
+var _Timestamp = &handles[35]
+
+var QueryForecastRequest = &handles[36]
+var QueryForecastRequest_ForecastArn = &handles[37]
+var QueryForecastRequest_StartDate = &handles[38]
+var QueryForecastRequest_EndDate = &handles[39]
+var QueryForecastRequest_Filters = &handles[40]
+var QueryForecastRequest_NextToken = &handles[41]
+
+var QueryForecastResponse = &handles[42]
+var QueryForecastResponse_Forecast = &handles[43]
+
+var QueryWhatIfForecastRequest = &handles[44]
+var QueryWhatIfForecastRequest_WhatIfForecastArn = &handles[45]
+var QueryWhatIfForecastRequest_StartDate = &handles[46]
+var QueryWhatIfForecastRequest_EndDate = &handles[47]
+var QueryWhatIfForecastRequest_Filters = &handles[48]
+var QueryWhatIfForecastRequest_NextToken = &handles[49]
+
+var QueryWhatIfForecastResponse = &handles[50]
+var QueryWhatIfForecastResponse_Forecast = &handles[51]
+
+var AmazonForecastRuntime = &smithy.ServiceSchema{Schema: &handles[2], Version: "2018-06-26"}

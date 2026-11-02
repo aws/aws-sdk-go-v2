@@ -4,308 +4,288 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutDeploymentParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "PutDeploymentParameter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/catalogs/{catalog}/products/{productId}/deployment-parameters",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var _AWSMPDeploymentParametersService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "AWSMPDeploymentParametersService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMPDeploymentParametersService = smithy.NewServiceSchema(_AWSMPDeploymentParametersService, "2023-01-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Catalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "Catalog",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var DeploymentParameterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "DeploymentParameterInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentParameterInput_name *smithy.Schema
-
-var DeploymentParameterInput_secretString *smithy.Schema
-
-var _DeploymentParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "DeploymentParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentParameterResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "DeploymentParameterResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _SecretString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "SecretString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "TagsMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagsMap_key *smithy.Schema
-
-var _TagsMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_fieldName *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutDeploymentParameterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "PutDeploymentParameterRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PutDeploymentParameterRequest_catalog *smithy.Schema
-
-var PutDeploymentParameterRequest_productId *smithy.Schema
-
-var PutDeploymentParameterRequest_agreementId *smithy.Schema
-
-var PutDeploymentParameterRequest_deploymentParameter *smithy.Schema
-
-var PutDeploymentParameterRequest_tags *smithy.Schema
-
-var PutDeploymentParameterRequest_expirationDate *smithy.Schema
-
-var PutDeploymentParameterRequest_clientToken *smithy.Schema
-
-var PutDeploymentParameterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "PutDeploymentParameterResponse",
-}, smithy.ShapeTypeStructure, 4)
-var PutDeploymentParameterResponse_resourceArn *smithy.Schema
-
-var PutDeploymentParameterResponse_agreementId *smithy.Schema
-
-var PutDeploymentParameterResponse_deploymentParameterId *smithy.Schema
-
-var PutDeploymentParameterResponse_tags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacedeployment",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
-
-	DeploymentParameterInput_name = DeploymentParameterInput.AddMember("name", _DeploymentParameterName)
-
-	DeploymentParameterInput_secretString = DeploymentParameterInput.AddMember("secretString", _SecretString)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	_Tags_key = _Tags.AddMember("key", smithyprelude.String)
-
-	_Tags_value = _Tags.AddMember("value", smithyprelude.String)
-
-	_TagsMap_key = _TagsMap.AddMember("key", _TagKey)
-
-	_TagsMap_value = _TagsMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_fieldName = ValidationException.AddMember("fieldName", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	PutDeploymentParameterRequest_catalog = PutDeploymentParameterRequest.AddMember("catalog", _Catalog, &smithytraits.HTTPLabel{})
-
-	PutDeploymentParameterRequest_productId = PutDeploymentParameterRequest.AddMember("productId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	PutDeploymentParameterRequest_agreementId = PutDeploymentParameterRequest.AddMember("agreementId", _ResourceId)
-
-	PutDeploymentParameterRequest_deploymentParameter = PutDeploymentParameterRequest.AddMember("deploymentParameter", DeploymentParameterInput)
-
-	PutDeploymentParameterRequest_tags = PutDeploymentParameterRequest.AddMember("tags", _TagsMap)
-
-	PutDeploymentParameterRequest_expirationDate = PutDeploymentParameterRequest.AddMember("expirationDate", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	PutDeploymentParameterRequest_clientToken = PutDeploymentParameterRequest.AddMember("clientToken", _ClientToken)
-
-	PutDeploymentParameterResponse_resourceArn = PutDeploymentParameterResponse.AddMember("resourceArn", _ResourceArn)
-
-	PutDeploymentParameterResponse_agreementId = PutDeploymentParameterResponse.AddMember("agreementId", _ResourceId)
-
-	PutDeploymentParameterResponse_deploymentParameterId = PutDeploymentParameterResponse.AddMember("deploymentParameterId", _DeploymentParameterResourceIdentifier)
-
-	PutDeploymentParameterResponse_tags = PutDeploymentParameterResponse.AddMember("tags", _TagsMap)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _StringList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
+const blob = "" +
+	"DeploymentParameterResourceIdentifierAWSMPDeploymentParametersServicePutDeploymentParameterResponseP" +
+	"utDeploymentParameterRequestServiceQuotaExceededExceptionListTagsForResourceResponseListTagsForResou" +
+	"rceRequestResourceNotFoundExceptionDeploymentParameterInputDeploymentParameterNameInternalServerExce" +
+	"ptionAccessDeniedExceptionUntagResourceResponsedeploymentParameterIdUntagResourceRequestTagResourceR" +
+	"esponseThrottlingExceptionValidationExceptionTagResourceRequestConflictExceptionexpirationDateSecret" +
+	"StringsecretStringClientTokenResourceArnagreementIdclientTokenresourceArnStringListresourceIdTimesta" +
+	"mpfieldNameproductIdTagValueCatalogTagsMapcatalogmessagetagKeysTagKeymembervaluenametagskey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.marketplacedeployment", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 157, Target: 0, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 69, Target: 1, Traits: 1, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 388, Target: 2, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 326, Target: 3, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 37, Target: 4, Traits: 4, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 305, Target: 5, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 649, Target: 66, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 628, Target: 7, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 518, Target: 8, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 463, Target: 9, Traits: 6, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 649, Target: 66, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 583, Target: 20, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 235, Target: 12, Traits: 4, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 680, Target: 15, Traits: 4, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 506, Target: 23, Traits: 7, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 259, Target: 15, Traits: 4, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 16, Traits: 4, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 282, Target: 17, Traits: 8, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 649, Target: 66, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 529, Target: 19, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 19, Target: 20, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 210, Target: 21, Traits: 9, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 649, Target: 66, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 494, Target: 23, Traits: 10, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 128, Target: 24, Traits: 11, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 649, Target: 66, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 573, Target: 26, Traits: 4, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 669, Target: 66, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 663, Target: 28, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 161, Target: 29, Traits: 4, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 688, Target: 66, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 675, Target: 66, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 635, Target: 32, Traits: 4, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 688, Target: 28, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 675, Target: 35, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 620, Target: 35, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 407, Target: 36, Traits: 12, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 649, Target: 66, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 426, Target: 38, Traits: 13, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 649, Target: 66, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 602, Target: 66, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 184, Target: 41, Traits: 4, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 562, Target: 66, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 157, Target: 43, Traits: 4, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 684, Target: 29, Traits: 4, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 99, Target: 45, Traits: 4, StrLen: 29, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 642, Target: 7, Traits: 14, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 611, Target: 20, Traits: 14, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 540, Target: 20, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 347, Target: 12, Traits: 4, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 684, Target: 32, Traits: 4, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 480, Target: 67, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 551, Target: 8, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 69, Target: 53, Traits: 4, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 562, Target: 19, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 540, Target: 20, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 347, Target: 16, Traits: 4, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 684, Target: 32, Traits: 4, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 445, Target: 58, Traits: 4, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 562, Target: 66, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 684, Target: 29, Traits: 4, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 388, Target: 61, Traits: 4, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 368, Target: 62, Traits: 4, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 562, Target: 66, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 656, Target: 26, Traits: 16, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 326, Target: 65, Traits: 4, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 500, Target: 66, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 593, Target: 67, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/catalogs/{catalog}/products/{productId}/deployment-parameters",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [68]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+}
+
+var ListTagsForResource = &handles[0]
+
+var PutDeploymentParameter = &handles[1]
+
+var TagResource = &handles[2]
+
+var UntagResource = &handles[3]
+
+var _AWSMPDeploymentParametersService = &handles[4]
+
+var AccessDeniedException = &handles[5]
+var AccessDeniedException_message = &handles[6]
+
+var _Catalog = &handles[7]
+
+var _ClientToken = &handles[8]
+
+var ConflictException = &handles[9]
+var ConflictException_message = &handles[10]
+var ConflictException_resourceId = &handles[11]
+
+var DeploymentParameterInput = &handles[12]
+var DeploymentParameterInput_name = &handles[13]
+var DeploymentParameterInput_secretString = &handles[14]
+
+var _DeploymentParameterName = &handles[15]
+
+var _DeploymentParameterResourceIdentifier = &handles[16]
+
+var InternalServerException = &handles[17]
+var InternalServerException_message = &handles[18]
+
+var _ResourceArn = &handles[19]
+
+var _ResourceId = &handles[20]
+
+var ResourceNotFoundException = &handles[21]
+var ResourceNotFoundException_message = &handles[22]
+
+var _SecretString = &handles[23]
+
+var ServiceQuotaExceededException = &handles[24]
+var ServiceQuotaExceededException_message = &handles[25]
+
+var _StringList = &handles[26]
+var _StringList_member = &handles[27]
+
+var _TagKey = &handles[28]
+
+var _Tags = &handles[29]
+var _Tags_key = &handles[30]
+var _Tags_value = &handles[31]
+
+var _TagsMap = &handles[32]
+var _TagsMap_key = &handles[33]
+var _TagsMap_value = &handles[34]
+
+var _TagValue = &handles[35]
+
+var ThrottlingException = &handles[36]
+var ThrottlingException_message = &handles[37]
+
+var ValidationException = &handles[38]
+var ValidationException_message = &handles[39]
+var ValidationException_fieldName = &handles[40]
+
+var ListTagsForResourceRequest = &handles[41]
+var ListTagsForResourceRequest_resourceArn = &handles[42]
+
+var ListTagsForResourceResponse = &handles[43]
+var ListTagsForResourceResponse_tags = &handles[44]
+
+var PutDeploymentParameterRequest = &handles[45]
+var PutDeploymentParameterRequest_catalog = &handles[46]
+var PutDeploymentParameterRequest_productId = &handles[47]
+var PutDeploymentParameterRequest_agreementId = &handles[48]
+var PutDeploymentParameterRequest_deploymentParameter = &handles[49]
+var PutDeploymentParameterRequest_tags = &handles[50]
+var PutDeploymentParameterRequest_expirationDate = &handles[51]
+var PutDeploymentParameterRequest_clientToken = &handles[52]
+
+var PutDeploymentParameterResponse = &handles[53]
+var PutDeploymentParameterResponse_resourceArn = &handles[54]
+var PutDeploymentParameterResponse_agreementId = &handles[55]
+var PutDeploymentParameterResponse_deploymentParameterId = &handles[56]
+var PutDeploymentParameterResponse_tags = &handles[57]
+
+var TagResourceRequest = &handles[58]
+var TagResourceRequest_resourceArn = &handles[59]
+var TagResourceRequest_tags = &handles[60]
+
+var TagResourceResponse = &handles[61]
+
+var UntagResourceRequest = &handles[62]
+var UntagResourceRequest_resourceArn = &handles[63]
+var UntagResourceRequest_tagKeys = &handles[64]
+
+var UntagResourceResponse = &handles[65]
+
+var AWSMPDeploymentParametersService = &smithy.ServiceSchema{Schema: &handles[4], Version: "2023-01-25"}

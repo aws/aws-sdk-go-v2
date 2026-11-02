@@ -4,2404 +4,2063 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchDeleteTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/BatchDeleteTaxRegistration",
-	Code: 200})
-
-var BatchGetTaxExemptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchGetTaxExemptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/BatchGetTaxExemptions",
-	Code: 200})
-
-var BatchPutTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/BatchPutTaxRegistration",
-	Code: 200})
-
-var DeleteSupplementalTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteSupplementalTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DeleteSupplementalTaxRegistration",
-	Code: 200})
-
-var DeleteTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DeleteTaxRegistration",
-	Code: 200})
-
-var GetTaxExemptionTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxExemptionTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetTaxExemptionTypes",
-	Code: 200})
-
-var GetTaxInheritance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxInheritance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetTaxInheritance",
-	Code: 200})
-
-var GetTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetTaxRegistration",
-	Code: 200})
-
-var GetTaxRegistrationDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationDocument",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetTaxRegistrationDocument",
-	Code: 200})
-
-var ListSupplementalTaxRegistrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListSupplementalTaxRegistrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListSupplementalTaxRegistrations",
-	Code: 200})
-
-var ListTaxExemptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxExemptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListTaxExemptions",
-	Code: 200})
-
-var ListTaxRegistrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxRegistrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListTaxRegistrations",
-	Code: 200})
-
-var PutSupplementalTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutSupplementalTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/PutSupplementalTaxRegistration",
-	Code: 200})
-
-var PutTaxExemption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxExemption",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/PutTaxExemption",
-	Code: 200})
-
-var PutTaxInheritance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxInheritance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/PutTaxInheritance",
-	Code: 200})
-
-var PutTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/PutTaxRegistration",
-	Code: 200})
-
-var _TaxSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxSettings",
-}, smithy.ShapeTypeService, 0)
-
-var TaxSettings = smithy.NewServiceSchema(_TaxSettings, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var AccessDeniedException_message *smithy.Schema
-
-var AccountDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountDetails",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var AccountDetails_accountId *smithy.Schema
-
-var AccountDetails_taxRegistration *smithy.Schema
-
-var AccountDetails_taxInheritanceDetails *smithy.Schema
-
-var AccountDetails_accountMetaData *smithy.Schema
-
-var _AccountDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _AccountDetailsList_member *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountIds",
-}, smithy.ShapeTypeList, 1)
-var _AccountIds_member *smithy.Schema
-
-var AccountMetaData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountMetaData",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Sensitive{})
-var AccountMetaData_accountName *smithy.Schema
-
-var AccountMetaData_seller *smithy.Schema
-
-var AccountMetaData_address *smithy.Schema
-
-var AccountMetaData_addressType *smithy.Schema
-
-var AccountMetaData_addressRoleMap *smithy.Schema
-
-var _AccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AccountName",
-}, smithy.ShapeTypeString, 0)
-
-var AdditionalInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AdditionalInfoRequest",
-}, smithy.ShapeTypeStructure, 26)
-var AdditionalInfoRequest_malaysiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_israelAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_estoniaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_canadaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_spainAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_kenyaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_southKoreaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_turkeyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_georgiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_italyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_romaniaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_ukraineAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_polandAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_saudiArabiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_indonesiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_vietnamAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_egyptAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_greeceAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_uzbekistanAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_philippinesAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_belgiumAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_chileAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_franceAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_monacoAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_germanyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoRequest_mexicoAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AdditionalInfoResponse",
-}, smithy.ShapeTypeStructure, 28)
-var AdditionalInfoResponse_malaysiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_israelAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_estoniaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_canadaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_brazilAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_spainAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_kenyaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_southKoreaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_turkeyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_georgiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_italyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_romaniaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_ukraineAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_polandAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_saudiArabiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_indiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_indonesiaAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_vietnamAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_egyptAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_greeceAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_uzbekistanAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_philippinesAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_belgiumAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_chileAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_franceAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_monacoAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_germanyAdditionalInfo *smithy.Schema
-
-var AdditionalInfoResponse_mexicoAdditionalInfo *smithy.Schema
-
-var Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Address",
-}, smithy.ShapeTypeStructure, 8)
-var Address_addressLine1 *smithy.Schema
-
-var Address_addressLine2 *smithy.Schema
-
-var Address_addressLine3 *smithy.Schema
-
-var Address_districtOrCounty *smithy.Schema
-
-var Address_city *smithy.Schema
-
-var Address_stateOrRegion *smithy.Schema
-
-var Address_postalCode *smithy.Schema
-
-var Address_countryCode *smithy.Schema
-
-var _AddressLine1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressLine1",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressLine2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressLine2",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressLine3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressLine3",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressRoleMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressRoleMap",
-}, smithy.ShapeTypeMap, 2)
-var _AddressRoleMap_key *smithy.Schema
-
-var _AddressRoleMap_value *smithy.Schema
-
-var AddressRoleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AddressRoleType",
-}, smithy.ShapeTypeEnum, 3)
-var AddressRoleType_TAX_ADDRESS *smithy.Schema
-
-var AddressRoleType_BILLING_ADDRESS *smithy.Schema
-
-var AddressRoleType_CONTACT_ADDRESS *smithy.Schema
-
-var AttachmentUploadException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "AttachmentUploadException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AttachmentUploadException_message *smithy.Schema
-
-var _Authorities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Authorities",
-}, smithy.ShapeTypeList, 1)
-var _Authorities_member *smithy.Schema
-
-var Authority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Authority",
-}, smithy.ShapeTypeStructure, 2)
-var Authority_country *smithy.Schema
-
-var Authority_state *smithy.Schema
-
-var BatchDeleteTaxRegistrationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistrationError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteTaxRegistrationError_accountId *smithy.Schema
-
-var BatchDeleteTaxRegistrationError_message *smithy.Schema
-
-var BatchDeleteTaxRegistrationError_code *smithy.Schema
-
-var _BatchDeleteTaxRegistrationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistrationErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteTaxRegistrationErrors_member *smithy.Schema
-
-var BatchPutTaxRegistrationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistrationError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchPutTaxRegistrationError_accountId *smithy.Schema
-
-var BatchPutTaxRegistrationError_message *smithy.Schema
-
-var BatchPutTaxRegistrationError_code *smithy.Schema
-
-var _BatchPutTaxRegistrationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistrationErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchPutTaxRegistrationErrors_member *smithy.Schema
-
-var BelgiumAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BelgiumAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var BelgiumAdditionalInfo_peppolId *smithy.Schema
-
-var BelgiumAdditionalInfo_isMercuriusBoxEnabled *smithy.Schema
-
-var BrazilAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BrazilAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var BrazilAdditionalInfo_ccmCode *smithy.Schema
-
-var BrazilAdditionalInfo_legalNatureCode *smithy.Schema
-
-var _BusinessNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BusinessNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _BusinessRegistrationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BusinessRegistrationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _BusinessRepresentativeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BusinessRepresentativeName",
-}, smithy.ShapeTypeString, 0)
-
-var CanadaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CanadaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 4)
-var CanadaAdditionalInfo_provincialSalesTaxId *smithy.Schema
-
-var CanadaAdditionalInfo_canadaQuebecSalesTaxNumber *smithy.Schema
-
-var CanadaAdditionalInfo_canadaRetailSalesTaxNumber *smithy.Schema
-
-var CanadaAdditionalInfo_isResellerAccount *smithy.Schema
-
-var _CanadaProvincialSalesTaxIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CanadaProvincialSalesTaxIdString",
-}, smithy.ShapeTypeString, 0)
-
-var _CanadaQuebecSalesTaxNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CanadaQuebecSalesTaxNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var _CanadaRetailSalesTaxNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CanadaRetailSalesTaxNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var CaseCreationLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CaseCreationLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 413})
-var CaseCreationLimitExceededException_message *smithy.Schema
-
-var _CcmCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CcmCode",
-}, smithy.ShapeTypeString, 0)
-
-var _CertifiedEmailId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CertifiedEmailId",
-}, smithy.ShapeTypeString, 0)
-
-var ChileAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ChileAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ChileAdditionalInfo_documentType *smithy.Schema
-
-var ChileAdditionalInfo_businessActivity *smithy.Schema
-
-var ChileDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ChileDocumentType",
-}, smithy.ShapeTypeEnum, 2)
-var ChileDocumentType_INVOICE *smithy.Schema
-
-var ChileDocumentType_RECEIPT *smithy.Schema
-
-var _CigNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CigNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _City = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "City",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_errorCode *smithy.Schema
-
-var _ContractingAuthorityCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ContractingAuthorityCode",
-}, smithy.ShapeTypeString, 0)
-
-var _CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CountryCode",
-}, smithy.ShapeTypeString, 0)
-
-var _CupNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CupNumber",
-}, smithy.ShapeTypeString, 0)
-
-var CustomerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "CustomerType",
-}, smithy.ShapeTypeEnum, 2)
-var CustomerType_BUSINESS *smithy.Schema
-
-var CustomerType_INDIVIDUAL *smithy.Schema
-
-var _DateOfBirth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DateOfBirth",
-}, smithy.ShapeTypeString, 0)
-
-var _DateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DateString",
-}, smithy.ShapeTypeString, 0)
-
-var _DecisionNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DecisionNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationFilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DestinationFilePath",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationS3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DestinationS3Location",
-}, smithy.ShapeTypeStructure, 2)
-var DestinationS3Location_bucket *smithy.Schema
-
-var DestinationS3Location_prefix *smithy.Schema
-
-var _DisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _District = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "District",
-}, smithy.ShapeTypeString, 0)
-
-var _EconomicIdentificationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EconomicIdentificationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var EgyptAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EgyptAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var EgyptAdditionalInfo_uniqueIdentificationNumber *smithy.Schema
-
-var EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate *smithy.Schema
-
-var _ElectronicTransactionCodeNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ElectronicTransactionCodeNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _EnterpriseIdentificationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EnterpriseIdentificationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var EntityExemptionAccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EntityExemptionAccountStatus",
-}, smithy.ShapeTypeEnum, 4)
-var EntityExemptionAccountStatus_None *smithy.Schema
-
-var EntityExemptionAccountStatus_Valid *smithy.Schema
-
-var EntityExemptionAccountStatus_Expired *smithy.Schema
-
-var EntityExemptionAccountStatus_Pending *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EstoniaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "EstoniaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var EstoniaAdditionalInfo_registryCommercialCode *smithy.Schema
-
-var ExemptionCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ExemptionCertificate",
-}, smithy.ShapeTypeStructure, 2)
-var ExemptionCertificate_documentName *smithy.Schema
-
-var ExemptionCertificate_documentFile *smithy.Schema
-
-var _ExemptionDocumentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ExemptionDocumentName",
-}, smithy.ShapeTypeString, 0)
-
-var _ExemptionFileBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ExemptionFileBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _FieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "FieldName",
-}, smithy.ShapeTypeString, 0)
-
-var _FileBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "FileBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var FranceAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "FranceAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var FranceAdditionalInfo_sirenNumber *smithy.Schema
-
-var FranceAdditionalInfo_eInvoiceRoutingCode *smithy.Schema
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var GeorgiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GeorgiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var GeorgiaAdditionalInfo_personType *smithy.Schema
-
-var GermanyAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GermanyAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var GermanyAdditionalInfo_economicIdentificationNumber *smithy.Schema
-
-var GermanyAdditionalInfo_steuernummer *smithy.Schema
-
-var GreeceAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GreeceAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var GreeceAdditionalInfo_contractingAuthorityCode *smithy.Schema
-
-var HeritageStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "HeritageStatus",
-}, smithy.ShapeTypeEnum, 2)
-var HeritageStatus_OptIn *smithy.Schema
-
-var HeritageStatus_OptOut *smithy.Schema
-
-var IndiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IndiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var IndiaAdditionalInfo_pan *smithy.Schema
-
-var _IndividualRegistrationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IndividualRegistrationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var IndonesiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IndonesiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var IndonesiaAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var IndonesiaAdditionalInfo_ppnExceptionDesignationCode *smithy.Schema
-
-var IndonesiaAdditionalInfo_decisionNumber *smithy.Schema
-
-var IndonesiaTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IndonesiaTaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 4)
-var IndonesiaTaxRegistrationNumberType_NIK *smithy.Schema
-
-var IndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER *smithy.Schema
-
-var IndonesiaTaxRegistrationNumberType_NPWP *smithy.Schema
-
-var IndonesiaTaxRegistrationNumberType_NITKU *smithy.Schema
-
-var Industries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Industries",
-}, smithy.ShapeTypeEnum, 6)
-var Industries_CIRCULATING_ORG *smithy.Schema
-
-var Industries_PROFESSIONAL_ORG *smithy.Schema
-
-var Industries_BANKS *smithy.Schema
-
-var Industries_INSURANCE *smithy.Schema
-
-var Industries_PENSION_AND_BENEFIT_FUNDS *smithy.Schema
-
-var Industries_DEVELOPMENT_AGENCIES *smithy.Schema
-
-var _InheritanceObtainedReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "InheritanceObtainedReason",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_errorCode *smithy.Schema
-
-var IsraelAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IsraelAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var IsraelAdditionalInfo_dealerType *smithy.Schema
-
-var IsraelAdditionalInfo_customerType *smithy.Schema
-
-var IsraelCustomerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IsraelCustomerType",
-}, smithy.ShapeTypeEnum, 2)
-var IsraelCustomerType_BUSINESS *smithy.Schema
-
-var IsraelCustomerType_INDIVIDUAL *smithy.Schema
-
-var IsraelDealerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "IsraelDealerType",
-}, smithy.ShapeTypeEnum, 2)
-var IsraelDealerType_AUTHORIZED *smithy.Schema
-
-var IsraelDealerType_NON_AUTHORIZED *smithy.Schema
-
-var ItalyAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ItalyAdditionalInfo",
-}, smithy.ShapeTypeStructure, 5)
-var ItalyAdditionalInfo_sdiAccountId *smithy.Schema
-
-var ItalyAdditionalInfo_cigNumber *smithy.Schema
-
-var ItalyAdditionalInfo_cupNumber *smithy.Schema
-
-var ItalyAdditionalInfo_taxCode *smithy.Schema
-
-var ItalyAdditionalInfo_customerType *smithy.Schema
-
-var _ItemOfBusiness = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ItemOfBusiness",
-}, smithy.ShapeTypeString, 0)
-
-var Jurisdiction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Jurisdiction",
-}, smithy.ShapeTypeStructure, 2)
-var Jurisdiction_stateOrRegion *smithy.Schema
-
-var Jurisdiction_countryCode *smithy.Schema
-
-var KenyaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "KenyaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var KenyaAdditionalInfo_personType *smithy.Schema
-
-var _KepEmailId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "KepEmailId",
-}, smithy.ShapeTypeString, 0)
-
-var _LegalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "LegalName",
-}, smithy.ShapeTypeString, 0)
-
-var _LegalNatureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "LegalNatureCode",
-}, smithy.ShapeTypeString, 0)
-
-var _LineOfBusiness = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "LineOfBusiness",
-}, smithy.ShapeTypeString, 0)
-
-var MalaysiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MalaysiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var MalaysiaAdditionalInfo_serviceTaxCodes *smithy.Schema
-
-var MalaysiaAdditionalInfo_taxInformationNumber *smithy.Schema
-
-var MalaysiaAdditionalInfo_businessRegistrationNumber *smithy.Schema
-
-var MalaysiaServiceTaxCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MalaysiaServiceTaxCode",
-}, smithy.ShapeTypeEnum, 4)
-var MalaysiaServiceTaxCode_CONSULTANCY *smithy.Schema
-
-var MalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM *smithy.Schema
-
-var MalaysiaServiceTaxCode_IT_SERVICES *smithy.Schema
-
-var MalaysiaServiceTaxCode_TRAINING_OR_COACHING *smithy.Schema
-
-var _MalaysiaServiceTaxCodesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MalaysiaServiceTaxCodesList",
-}, smithy.ShapeTypeList, 1)
-var _MalaysiaServiceTaxCodesList_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MexicoAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MexicoAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var MexicoAdditionalInfo_taxRegime *smithy.Schema
-
-var MexicoAdditionalInfo_taxRegimeFullName *smithy.Schema
-
-var MexicoAdditionalInfo_cfdiUsageCode *smithy.Schema
-
-var _MexicoCfdiUsageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MexicoCfdiUsageCode",
-}, smithy.ShapeTypeString, 0)
-
-var _MexicoTaxRegimeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MexicoTaxRegimeCode",
-}, smithy.ShapeTypeString, 0)
-
-var _MexicoTaxRegimeFullName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MexicoTaxRegimeFullName",
-}, smithy.ShapeTypeString, 0)
-
-var MonacoAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "MonacoAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var MonacoAdditionalInfo_businessNumber *smithy.Schema
-
-var _PaginationTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PaginationTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var _Pan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Pan",
-}, smithy.ShapeTypeString, 0)
-
-var _PaymentVoucherNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PaymentVoucherNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _PeppolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PeppolId",
-}, smithy.ShapeTypeString, 0)
-
-var PersonType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PersonType",
-}, smithy.ShapeTypeEnum, 3)
-var PersonType_LEGAL_PERSON *smithy.Schema
-
-var PersonType_PHYSICAL_PERSON *smithy.Schema
-
-var PersonType_BUSINESS *smithy.Schema
-
-var PhilippinesAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PhilippinesAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var PhilippinesAdditionalInfo_isVatRegistered *smithy.Schema
-
-var PolandAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PolandAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var PolandAdditionalInfo_individualRegistrationNumber *smithy.Schema
-
-var PolandAdditionalInfo_isGroupVatEnabled *smithy.Schema
-
-var PolandAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var PolandTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PolandTaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 3)
-var PolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var PolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var PolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER *smithy.Schema
-
-var _PostalCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PostalCode",
-}, smithy.ShapeTypeString, 0)
-
-var _PpnExceptionDesignationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PpnExceptionDesignationCode",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistrationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "RegistrationId",
-}, smithy.ShapeTypeString, 0)
-
-var RegistrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "RegistrationType",
-}, smithy.ShapeTypeEnum, 2)
-var RegistrationType_INTRA_EU *smithy.Schema
-
-var RegistrationType_LOCAL *smithy.Schema
-
-var _RegistryCommercialCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "RegistryCommercialCode",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_errorCode *smithy.Schema
-
-var RomaniaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "RomaniaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var RomaniaAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "S3Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var SaudiArabiaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SaudiArabiaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var SaudiArabiaAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var SaudiArabiaTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SaudiArabiaTaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 3)
-var SaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var SaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER *smithy.Schema
-
-var SaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER *smithy.Schema
-
-var _SdiAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SdiAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecondaryTaxId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SecondaryTaxId",
-}, smithy.ShapeTypeString, 0)
-
-var Sector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Sector",
-}, smithy.ShapeTypeEnum, 3)
-var Sector_BUSINESS *smithy.Schema
-
-var Sector_INDIVIDUAL *smithy.Schema
-
-var Sector_PUBLIC_INSTITUTIONS *smithy.Schema
-
-var _Seller = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Seller",
-}, smithy.ShapeTypeString, 0)
-
-var _SirenNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SirenNumber",
-}, smithy.ShapeTypeString, 0)
-
-var SourceS3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SourceS3Location",
-}, smithy.ShapeTypeStructure, 2)
-var SourceS3Location_bucket *smithy.Schema
-
-var SourceS3Location_key *smithy.Schema
-
-var SouthKoreaAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SouthKoreaAdditionalInfo",
-}, smithy.ShapeTypeStructure, 3)
-var SouthKoreaAdditionalInfo_businessRepresentativeName *smithy.Schema
-
-var SouthKoreaAdditionalInfo_lineOfBusiness *smithy.Schema
-
-var SouthKoreaAdditionalInfo_itemOfBusiness *smithy.Schema
-
-var SpainAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SpainAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var SpainAdditionalInfo_registrationType *smithy.Schema
-
-var _State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "State",
-}, smithy.ShapeTypeString, 0)
-
-var _Steuernummer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Steuernummer",
-}, smithy.ShapeTypeString, 0)
-
-var SupplementalTaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SupplementalTaxRegistration",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.Sensitive{})
-var SupplementalTaxRegistration_registrationId *smithy.Schema
-
-var SupplementalTaxRegistration_registrationType *smithy.Schema
-
-var SupplementalTaxRegistration_legalName *smithy.Schema
-
-var SupplementalTaxRegistration_address *smithy.Schema
-
-var SupplementalTaxRegistration_authorityId *smithy.Schema
-
-var SupplementalTaxRegistration_status *smithy.Schema
-
-var SupplementalTaxRegistrationEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SupplementalTaxRegistrationEntry",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var SupplementalTaxRegistrationEntry_registrationId *smithy.Schema
-
-var SupplementalTaxRegistrationEntry_registrationType *smithy.Schema
-
-var SupplementalTaxRegistrationEntry_legalName *smithy.Schema
-
-var SupplementalTaxRegistrationEntry_address *smithy.Schema
-
-var _SupplementalTaxRegistrationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SupplementalTaxRegistrationList",
-}, smithy.ShapeTypeList, 1)
-var _SupplementalTaxRegistrationList_member *smithy.Schema
-
-var SupplementalTaxRegistrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "SupplementalTaxRegistrationType",
-}, smithy.ShapeTypeEnum, 1)
-var SupplementalTaxRegistrationType_VAT *smithy.Schema
-
-var _TaxCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxCode",
-}, smithy.ShapeTypeString, 0)
-
-var _TaxDocumentAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxDocumentAccessToken",
-}, smithy.ShapeTypeString, 0)
-
-var TaxDocumentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxDocumentMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var TaxDocumentMetadata_taxDocumentAccessToken *smithy.Schema
-
-var TaxDocumentMetadata_taxDocumentName *smithy.Schema
-
-var _TaxDocumentMetadatas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxDocumentMetadatas",
-}, smithy.ShapeTypeList, 1)
-var _TaxDocumentMetadatas_member *smithy.Schema
-
-var _TaxDocumentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxDocumentName",
-}, smithy.ShapeTypeString, 0)
-
-var TaxExemption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemption",
-}, smithy.ShapeTypeStructure, 6)
-var TaxExemption_authority *smithy.Schema
-
-var TaxExemption_taxExemptionType *smithy.Schema
-
-var TaxExemption_effectiveDate *smithy.Schema
-
-var TaxExemption_expirationDate *smithy.Schema
-
-var TaxExemption_systemEffectiveDate *smithy.Schema
-
-var TaxExemption_status *smithy.Schema
-
-var TaxExemptionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptionDetails",
-}, smithy.ShapeTypeStructure, 4)
-var TaxExemptionDetails_taxExemptions *smithy.Schema
-
-var TaxExemptionDetails_heritageObtainedDetails *smithy.Schema
-
-var TaxExemptionDetails_heritageObtainedParentEntity *smithy.Schema
-
-var TaxExemptionDetails_heritageObtainedReason *smithy.Schema
-
-var _TaxExemptionDetailsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptionDetailsMap",
-}, smithy.ShapeTypeMap, 2)
-var _TaxExemptionDetailsMap_key *smithy.Schema
-
-var _TaxExemptionDetailsMap_value *smithy.Schema
-
-var _TaxExemptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptions",
-}, smithy.ShapeTypeList, 1)
-var _TaxExemptions_member *smithy.Schema
-
-var TaxExemptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptionType",
-}, smithy.ShapeTypeStructure, 3)
-var TaxExemptionType_displayName *smithy.Schema
-
-var TaxExemptionType_description *smithy.Schema
-
-var TaxExemptionType_applicableJurisdictions *smithy.Schema
-
-var _TaxExemptionTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxExemptionTypes",
-}, smithy.ShapeTypeList, 1)
-var _TaxExemptionTypes_member *smithy.Schema
-
-var _TaxInformationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxInformationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var TaxInheritanceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxInheritanceDetails",
-}, smithy.ShapeTypeStructure, 2)
-var TaxInheritanceDetails_parentEntityId *smithy.Schema
-
-var TaxInheritanceDetails_inheritanceObtainedReason *smithy.Schema
-
-var _TaxOffice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxOffice",
-}, smithy.ShapeTypeString, 0)
-
-var TaxRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistration",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Sensitive{})
-var TaxRegistration_registrationId *smithy.Schema
-
-var TaxRegistration_registrationType *smithy.Schema
-
-var TaxRegistration_legalName *smithy.Schema
-
-var TaxRegistration_status *smithy.Schema
-
-var TaxRegistration_sector *smithy.Schema
-
-var TaxRegistration_taxDocumentMetadatas *smithy.Schema
-
-var TaxRegistration_certifiedEmailId *smithy.Schema
-
-var TaxRegistration_additionalTaxInformation *smithy.Schema
-
-var TaxRegistration_legalAddress *smithy.Schema
-
-var TaxRegistrationDocFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationDocFile",
-}, smithy.ShapeTypeStructure, 2)
-var TaxRegistrationDocFile_fileName *smithy.Schema
-
-var TaxRegistrationDocFile_fileContent *smithy.Schema
-
-var TaxRegistrationDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationDocument",
-}, smithy.ShapeTypeStructure, 2)
-var TaxRegistrationDocument_s3Location *smithy.Schema
-
-var TaxRegistrationDocument_file *smithy.Schema
-
-var _TaxRegistrationDocuments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationDocuments",
-}, smithy.ShapeTypeList, 1)
-var _TaxRegistrationDocuments_member *smithy.Schema
-
-var TaxRegistrationEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationEntry",
-}, smithy.ShapeTypeStructure, 8, &smithytraits.Sensitive{})
-var TaxRegistrationEntry_registrationId *smithy.Schema
-
-var TaxRegistrationEntry_registrationType *smithy.Schema
-
-var TaxRegistrationEntry_legalName *smithy.Schema
-
-var TaxRegistrationEntry_legalAddress *smithy.Schema
-
-var TaxRegistrationEntry_sector *smithy.Schema
-
-var TaxRegistrationEntry_additionalTaxInformation *smithy.Schema
-
-var TaxRegistrationEntry_verificationDetails *smithy.Schema
-
-var TaxRegistrationEntry_certifiedEmailId *smithy.Schema
-
-var TaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 2)
-var TaxRegistrationNumberType_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var TaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER *smithy.Schema
-
-var TaxRegistrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var TaxRegistrationStatus_VERIFIED *smithy.Schema
-
-var TaxRegistrationStatus_PENDING *smithy.Schema
-
-var TaxRegistrationStatus_DELETED *smithy.Schema
-
-var TaxRegistrationStatus_REJECTED *smithy.Schema
-
-var TaxRegistrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationType",
-}, smithy.ShapeTypeEnum, 9)
-var TaxRegistrationType_VAT *smithy.Schema
-
-var TaxRegistrationType_GST *smithy.Schema
-
-var TaxRegistrationType_CPF *smithy.Schema
-
-var TaxRegistrationType_CNPJ *smithy.Schema
-
-var TaxRegistrationType_SST *smithy.Schema
-
-var TaxRegistrationType_TIN *smithy.Schema
-
-var TaxRegistrationType_NRIC *smithy.Schema
-
-var TaxRegistrationType_PAN *smithy.Schema
-
-var TaxRegistrationType_NIP *smithy.Schema
-
-var TaxRegistrationWithJurisdiction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TaxRegistrationWithJurisdiction",
-}, smithy.ShapeTypeStructure, 9, &smithytraits.Sensitive{})
-var TaxRegistrationWithJurisdiction_registrationId *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_registrationType *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_legalName *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_status *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_sector *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_taxDocumentMetadatas *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_certifiedEmailId *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_additionalTaxInformation *smithy.Schema
-
-var TaxRegistrationWithJurisdiction_jurisdiction *smithy.Schema
-
-var TurkeyAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "TurkeyAdditionalInfo",
-}, smithy.ShapeTypeStructure, 4)
-var TurkeyAdditionalInfo_taxOffice *smithy.Schema
-
-var TurkeyAdditionalInfo_kepEmailId *smithy.Schema
-
-var TurkeyAdditionalInfo_secondaryTaxId *smithy.Schema
-
-var TurkeyAdditionalInfo_industries *smithy.Schema
-
-var UkraineAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UkraineAdditionalInfo",
-}, smithy.ShapeTypeStructure, 1)
-var UkraineAdditionalInfo_ukraineTrnType *smithy.Schema
-
-var UkraineTrnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UkraineTrnType",
-}, smithy.ShapeTypeEnum, 2)
-var UkraineTrnType_BUSINESS *smithy.Schema
-
-var UkraineTrnType_INDIVIDUAL *smithy.Schema
-
-var _UniqueIdentificationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UniqueIdentificationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var UzbekistanAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UzbekistanAdditionalInfo",
-}, smithy.ShapeTypeStructure, 2)
-var UzbekistanAdditionalInfo_taxRegistrationNumberType *smithy.Schema
-
-var UzbekistanAdditionalInfo_vatRegistrationNumber *smithy.Schema
-
-var UzbekistanTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "UzbekistanTaxRegistrationNumberType",
-}, smithy.ShapeTypeEnum, 2)
-var UzbekistanTaxRegistrationNumberType_BUSINESS *smithy.Schema
-
-var UzbekistanTaxRegistrationNumberType_INDIVIDUAL *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_errorCode *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ValidationExceptionErrorCode",
-}, smithy.ShapeTypeEnum, 7)
-var ValidationExceptionErrorCode_MALFORMED_TOKEN *smithy.Schema
-
-var ValidationExceptionErrorCode_EXPIRED_TOKEN *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_TOKEN *smithy.Schema
-
-var ValidationExceptionErrorCode_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionErrorCode_MISSING_INPUT *smithy.Schema
-
-var ValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN *smithy.Schema
-
-var ValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 1)
-var ValidationExceptionField_name *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _VatRegistrationNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "VatRegistrationNumber",
-}, smithy.ShapeTypeString, 0)
-
-var VerificationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "VerificationDetails",
-}, smithy.ShapeTypeStructure, 2)
-var VerificationDetails_dateOfBirth *smithy.Schema
-
-var VerificationDetails_taxRegistrationDocuments *smithy.Schema
-
-var VietnamAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "VietnamAdditionalInfo",
-}, smithy.ShapeTypeStructure, 4)
-var VietnamAdditionalInfo_enterpriseIdentificationNumber *smithy.Schema
-
-var VietnamAdditionalInfo_electronicTransactionCodeNumber *smithy.Schema
-
-var VietnamAdditionalInfo_paymentVoucherNumber *smithy.Schema
-
-var VietnamAdditionalInfo_paymentVoucherNumberDate *smithy.Schema
-
-var BatchDeleteTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteTaxRegistrationRequest_accountIds *smithy.Schema
-
-var BatchDeleteTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchDeleteTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteTaxRegistrationResponse_errors *smithy.Schema
-
-var BatchGetTaxExemptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchGetTaxExemptionsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetTaxExemptionsRequest_accountIds *smithy.Schema
-
-var BatchGetTaxExemptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchGetTaxExemptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetTaxExemptionsResponse_taxExemptionDetailsMap *smithy.Schema
-
-var BatchGetTaxExemptionsResponse_failedAccounts *smithy.Schema
-
-var BatchPutTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchPutTaxRegistrationRequest_accountIds *smithy.Schema
-
-var BatchPutTaxRegistrationRequest_taxRegistrationEntry *smithy.Schema
-
-var BatchPutTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "BatchPutTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchPutTaxRegistrationResponse_status *smithy.Schema
-
-var BatchPutTaxRegistrationResponse_errors *smithy.Schema
-
-var DeleteSupplementalTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteSupplementalTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSupplementalTaxRegistrationRequest_authorityId *smithy.Schema
-
-var DeleteSupplementalTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteSupplementalTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTaxRegistrationRequest_accountId *smithy.Schema
-
-var DeleteTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "DeleteTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetTaxExemptionTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxExemptionTypesRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetTaxExemptionTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxExemptionTypesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTaxExemptionTypesResponse_taxExemptionTypes *smithy.Schema
-
-var GetTaxInheritanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxInheritanceRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetTaxInheritanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxInheritanceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTaxInheritanceResponse_heritageStatus *smithy.Schema
-
-var GetTaxRegistrationDocumentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationDocumentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTaxRegistrationDocumentRequest_destinationS3Location *smithy.Schema
-
-var GetTaxRegistrationDocumentRequest_taxDocumentMetadata *smithy.Schema
-
-var GetTaxRegistrationDocumentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationDocumentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTaxRegistrationDocumentResponse_destinationFilePath *smithy.Schema
-
-var GetTaxRegistrationDocumentResponse_presignedS3Url *smithy.Schema
-
-var GetTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTaxRegistrationRequest_accountId *smithy.Schema
-
-var GetTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "GetTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTaxRegistrationResponse_taxRegistration *smithy.Schema
-
-var ListSupplementalTaxRegistrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListSupplementalTaxRegistrationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSupplementalTaxRegistrationsRequest_maxResults *smithy.Schema
-
-var ListSupplementalTaxRegistrationsRequest_nextToken *smithy.Schema
-
-var ListSupplementalTaxRegistrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListSupplementalTaxRegistrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSupplementalTaxRegistrationsResponse_taxRegistrations *smithy.Schema
-
-var ListSupplementalTaxRegistrationsResponse_nextToken *smithy.Schema
-
-var ListTaxExemptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxExemptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaxExemptionsRequest_maxResults *smithy.Schema
-
-var ListTaxExemptionsRequest_nextToken *smithy.Schema
-
-var ListTaxExemptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxExemptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaxExemptionsResponse_nextToken *smithy.Schema
-
-var ListTaxExemptionsResponse_taxExemptionDetailsMap *smithy.Schema
-
-var ListTaxRegistrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxRegistrationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaxRegistrationsRequest_maxResults *smithy.Schema
-
-var ListTaxRegistrationsRequest_nextToken *smithy.Schema
-
-var ListTaxRegistrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "ListTaxRegistrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTaxRegistrationsResponse_accountDetails *smithy.Schema
-
-var ListTaxRegistrationsResponse_nextToken *smithy.Schema
-
-var PutSupplementalTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutSupplementalTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutSupplementalTaxRegistrationRequest_taxRegistrationEntry *smithy.Schema
-
-var PutSupplementalTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutSupplementalTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutSupplementalTaxRegistrationResponse_authorityId *smithy.Schema
-
-var PutSupplementalTaxRegistrationResponse_status *smithy.Schema
-
-var PutTaxExemptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxExemptionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutTaxExemptionRequest_accountIds *smithy.Schema
-
-var PutTaxExemptionRequest_authority *smithy.Schema
-
-var PutTaxExemptionRequest_exemptionType *smithy.Schema
-
-var PutTaxExemptionRequest_exemptionCertificate *smithy.Schema
-
-var PutTaxExemptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxExemptionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutTaxExemptionResponse_caseId *smithy.Schema
-
-var PutTaxInheritanceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxInheritanceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutTaxInheritanceRequest_heritageStatus *smithy.Schema
-
-var PutTaxInheritanceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxInheritanceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxRegistrationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutTaxRegistrationRequest_accountId *smithy.Schema
-
-var PutTaxRegistrationRequest_taxRegistrationEntry *smithy.Schema
-
-var PutTaxRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.taxsettings",
-	Name:      "PutTaxRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutTaxRegistrationResponse_status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	TaxRegistrationType_VAT = TaxRegistrationType.AddMember("VAT", smithyprelude.Unit)
-
-	TaxRegistrationType_GST = TaxRegistrationType.AddMember("GST", smithyprelude.Unit)
-
-	TaxRegistrationType_CPF = TaxRegistrationType.AddMember("CPF", smithyprelude.Unit)
-
-	TaxRegistrationType_CNPJ = TaxRegistrationType.AddMember("CNPJ", smithyprelude.Unit)
-
-	TaxRegistrationType_SST = TaxRegistrationType.AddMember("SST", smithyprelude.Unit)
-
-	TaxRegistrationType_TIN = TaxRegistrationType.AddMember("TIN", smithyprelude.Unit)
-
-	TaxRegistrationType_NRIC = TaxRegistrationType.AddMember("NRIC", smithyprelude.Unit)
-
-	TaxRegistrationType_PAN = TaxRegistrationType.AddMember("PAN", smithyprelude.Unit)
-
-	TaxRegistrationType_NIP = TaxRegistrationType.AddMember("NIP", smithyprelude.Unit)
-
-	TaxRegistrationStatus_VERIFIED = TaxRegistrationStatus.AddMember("VERIFIED", smithyprelude.Unit)
-
-	TaxRegistrationStatus_PENDING = TaxRegistrationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	TaxRegistrationStatus_DELETED = TaxRegistrationStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	TaxRegistrationStatus_REJECTED = TaxRegistrationStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	Sector_BUSINESS = Sector.AddMember("BUSINESS", smithyprelude.Unit)
-
-	Sector_INDIVIDUAL = Sector.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	Sector_PUBLIC_INSTITUTIONS = Sector.AddMember("PUBLIC_INSTITUTIONS", smithyprelude.Unit)
-
-	TaxDocumentMetadata_taxDocumentAccessToken = TaxDocumentMetadata.AddMember("taxDocumentAccessToken", _TaxDocumentAccessToken)
-
-	TaxDocumentMetadata_taxDocumentName = TaxDocumentMetadata.AddMember("taxDocumentName", _TaxDocumentName)
-
-	_TaxDocumentMetadatas_member = _TaxDocumentMetadatas.AddMember("member", TaxDocumentMetadata)
-
-	MalaysiaServiceTaxCode_CONSULTANCY = MalaysiaServiceTaxCode.AddMember("CONSULTANCY", smithyprelude.Unit)
-
-	MalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM = MalaysiaServiceTaxCode.AddMember("DIGITAL_SVC_ELECTRONIC_MEDIUM", smithyprelude.Unit)
-
-	MalaysiaServiceTaxCode_IT_SERVICES = MalaysiaServiceTaxCode.AddMember("IT_SERVICES", smithyprelude.Unit)
-
-	MalaysiaServiceTaxCode_TRAINING_OR_COACHING = MalaysiaServiceTaxCode.AddMember("TRAINING_OR_COACHING", smithyprelude.Unit)
-
-	_MalaysiaServiceTaxCodesList_member = _MalaysiaServiceTaxCodesList.AddMember("member", MalaysiaServiceTaxCode)
-
-	MalaysiaAdditionalInfo_serviceTaxCodes = MalaysiaAdditionalInfo.AddMember("serviceTaxCodes", _MalaysiaServiceTaxCodesList)
-
-	MalaysiaAdditionalInfo_taxInformationNumber = MalaysiaAdditionalInfo.AddMember("taxInformationNumber", _TaxInformationNumber)
-
-	MalaysiaAdditionalInfo_businessRegistrationNumber = MalaysiaAdditionalInfo.AddMember("businessRegistrationNumber", _BusinessRegistrationNumber)
-
-	IsraelDealerType_AUTHORIZED = IsraelDealerType.AddMember("AUTHORIZED", smithyprelude.Unit)
-
-	IsraelDealerType_NON_AUTHORIZED = IsraelDealerType.AddMember("NON_AUTHORIZED", smithyprelude.Unit)
-
-	IsraelCustomerType_BUSINESS = IsraelCustomerType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	IsraelCustomerType_INDIVIDUAL = IsraelCustomerType.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	IsraelAdditionalInfo_dealerType = IsraelAdditionalInfo.AddMember("dealerType", IsraelDealerType)
-
-	IsraelAdditionalInfo_customerType = IsraelAdditionalInfo.AddMember("customerType", IsraelCustomerType)
-
-	EstoniaAdditionalInfo_registryCommercialCode = EstoniaAdditionalInfo.AddMember("registryCommercialCode", _RegistryCommercialCode)
-
-	CanadaAdditionalInfo_provincialSalesTaxId = CanadaAdditionalInfo.AddMember("provincialSalesTaxId", _CanadaProvincialSalesTaxIdString)
-
-	CanadaAdditionalInfo_canadaQuebecSalesTaxNumber = CanadaAdditionalInfo.AddMember("canadaQuebecSalesTaxNumber", _CanadaQuebecSalesTaxNumberString)
-
-	CanadaAdditionalInfo_canadaRetailSalesTaxNumber = CanadaAdditionalInfo.AddMember("canadaRetailSalesTaxNumber", _CanadaRetailSalesTaxNumberString)
-
-	CanadaAdditionalInfo_isResellerAccount = CanadaAdditionalInfo.AddMember("isResellerAccount", smithyprelude.Boolean)
-
-	BrazilAdditionalInfo_ccmCode = BrazilAdditionalInfo.AddMember("ccmCode", _CcmCode)
-
-	BrazilAdditionalInfo_legalNatureCode = BrazilAdditionalInfo.AddMember("legalNatureCode", _LegalNatureCode)
-
-	RegistrationType_INTRA_EU = RegistrationType.AddMember("INTRA_EU", smithyprelude.Unit)
-
-	RegistrationType_LOCAL = RegistrationType.AddMember("LOCAL", smithyprelude.Unit)
-
-	SpainAdditionalInfo_registrationType = SpainAdditionalInfo.AddMember("registrationType", RegistrationType)
-
-	PersonType_LEGAL_PERSON = PersonType.AddMember("LEGAL_PERSON", smithyprelude.Unit)
-
-	PersonType_PHYSICAL_PERSON = PersonType.AddMember("PHYSICAL_PERSON", smithyprelude.Unit)
-
-	PersonType_BUSINESS = PersonType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	KenyaAdditionalInfo_personType = KenyaAdditionalInfo.AddMember("personType", PersonType)
-
-	SouthKoreaAdditionalInfo_businessRepresentativeName = SouthKoreaAdditionalInfo.AddMember("businessRepresentativeName", _BusinessRepresentativeName)
-
-	SouthKoreaAdditionalInfo_lineOfBusiness = SouthKoreaAdditionalInfo.AddMember("lineOfBusiness", _LineOfBusiness)
-
-	SouthKoreaAdditionalInfo_itemOfBusiness = SouthKoreaAdditionalInfo.AddMember("itemOfBusiness", _ItemOfBusiness)
-
-	Industries_CIRCULATING_ORG = Industries.AddMember("CIRCULATING_ORG", smithyprelude.Unit)
-
-	Industries_PROFESSIONAL_ORG = Industries.AddMember("PROFESSIONAL_ORG", smithyprelude.Unit)
-
-	Industries_BANKS = Industries.AddMember("BANKS", smithyprelude.Unit)
-
-	Industries_INSURANCE = Industries.AddMember("INSURANCE", smithyprelude.Unit)
-
-	Industries_PENSION_AND_BENEFIT_FUNDS = Industries.AddMember("PENSION_AND_BENEFIT_FUNDS", smithyprelude.Unit)
-
-	Industries_DEVELOPMENT_AGENCIES = Industries.AddMember("DEVELOPMENT_AGENCIES", smithyprelude.Unit)
-
-	TurkeyAdditionalInfo_taxOffice = TurkeyAdditionalInfo.AddMember("taxOffice", _TaxOffice)
-
-	TurkeyAdditionalInfo_kepEmailId = TurkeyAdditionalInfo.AddMember("kepEmailId", _KepEmailId)
-
-	TurkeyAdditionalInfo_secondaryTaxId = TurkeyAdditionalInfo.AddMember("secondaryTaxId", _SecondaryTaxId)
-
-	TurkeyAdditionalInfo_industries = TurkeyAdditionalInfo.AddMember("industries", Industries)
-
-	GeorgiaAdditionalInfo_personType = GeorgiaAdditionalInfo.AddMember("personType", PersonType)
-
-	CustomerType_BUSINESS = CustomerType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	CustomerType_INDIVIDUAL = CustomerType.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	ItalyAdditionalInfo_sdiAccountId = ItalyAdditionalInfo.AddMember("sdiAccountId", _SdiAccountId)
-
-	ItalyAdditionalInfo_cigNumber = ItalyAdditionalInfo.AddMember("cigNumber", _CigNumber)
-
-	ItalyAdditionalInfo_cupNumber = ItalyAdditionalInfo.AddMember("cupNumber", _CupNumber)
-
-	ItalyAdditionalInfo_taxCode = ItalyAdditionalInfo.AddMember("taxCode", _TaxCode)
-
-	ItalyAdditionalInfo_customerType = ItalyAdditionalInfo.AddMember("customerType", CustomerType)
-
-	TaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = TaxRegistrationNumberType.AddMember("TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	TaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = TaxRegistrationNumberType.AddMember("LOCAL_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	RomaniaAdditionalInfo_taxRegistrationNumberType = RomaniaAdditionalInfo.AddMember("taxRegistrationNumberType", TaxRegistrationNumberType)
-
-	UkraineTrnType_BUSINESS = UkraineTrnType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	UkraineTrnType_INDIVIDUAL = UkraineTrnType.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	UkraineAdditionalInfo_ukraineTrnType = UkraineAdditionalInfo.AddMember("ukraineTrnType", UkraineTrnType)
-
-	PolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER = PolandTaxRegistrationNumberType.AddMember("EU_TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	PolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER = PolandTaxRegistrationNumberType.AddMember("LOCAL_TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	PolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = PolandTaxRegistrationNumberType.AddMember("LOCAL_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	PolandAdditionalInfo_individualRegistrationNumber = PolandAdditionalInfo.AddMember("individualRegistrationNumber", _IndividualRegistrationNumber)
-
-	PolandAdditionalInfo_isGroupVatEnabled = PolandAdditionalInfo.AddMember("isGroupVatEnabled", smithyprelude.Boolean)
-
-	PolandAdditionalInfo_taxRegistrationNumberType = PolandAdditionalInfo.AddMember("taxRegistrationNumberType", PolandTaxRegistrationNumberType)
-
-	SaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = SaudiArabiaTaxRegistrationNumberType.AddMember("TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	SaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER = SaudiArabiaTaxRegistrationNumberType.AddMember("TAX_IDENTIFICATION_NUMBER", smithyprelude.Unit)
-
-	SaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER = SaudiArabiaTaxRegistrationNumberType.AddMember("COMMERCIAL_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	SaudiArabiaAdditionalInfo_taxRegistrationNumberType = SaudiArabiaAdditionalInfo.AddMember("taxRegistrationNumberType", SaudiArabiaTaxRegistrationNumberType)
-
-	IndiaAdditionalInfo_pan = IndiaAdditionalInfo.AddMember("pan", _Pan)
-
-	IndonesiaTaxRegistrationNumberType_NIK = IndonesiaTaxRegistrationNumberType.AddMember("NIK", smithyprelude.Unit)
-
-	IndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER = IndonesiaTaxRegistrationNumberType.AddMember("PASSPORT_NUMBER", smithyprelude.Unit)
-
-	IndonesiaTaxRegistrationNumberType_NPWP = IndonesiaTaxRegistrationNumberType.AddMember("NPWP", smithyprelude.Unit)
-
-	IndonesiaTaxRegistrationNumberType_NITKU = IndonesiaTaxRegistrationNumberType.AddMember("NITKU", smithyprelude.Unit)
-
-	IndonesiaAdditionalInfo_taxRegistrationNumberType = IndonesiaAdditionalInfo.AddMember("taxRegistrationNumberType", IndonesiaTaxRegistrationNumberType)
-
-	IndonesiaAdditionalInfo_ppnExceptionDesignationCode = IndonesiaAdditionalInfo.AddMember("ppnExceptionDesignationCode", _PpnExceptionDesignationCode)
-
-	IndonesiaAdditionalInfo_decisionNumber = IndonesiaAdditionalInfo.AddMember("decisionNumber", _DecisionNumber)
-
-	VietnamAdditionalInfo_enterpriseIdentificationNumber = VietnamAdditionalInfo.AddMember("enterpriseIdentificationNumber", _EnterpriseIdentificationNumber)
-
-	VietnamAdditionalInfo_electronicTransactionCodeNumber = VietnamAdditionalInfo.AddMember("electronicTransactionCodeNumber", _ElectronicTransactionCodeNumber)
-
-	VietnamAdditionalInfo_paymentVoucherNumber = VietnamAdditionalInfo.AddMember("paymentVoucherNumber", _PaymentVoucherNumber)
-
-	VietnamAdditionalInfo_paymentVoucherNumberDate = VietnamAdditionalInfo.AddMember("paymentVoucherNumberDate", _DateString)
-
-	EgyptAdditionalInfo_uniqueIdentificationNumber = EgyptAdditionalInfo.AddMember("uniqueIdentificationNumber", _UniqueIdentificationNumber)
-
-	EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate = EgyptAdditionalInfo.AddMember("uniqueIdentificationNumberExpirationDate", _DateString)
-
-	GreeceAdditionalInfo_contractingAuthorityCode = GreeceAdditionalInfo.AddMember("contractingAuthorityCode", _ContractingAuthorityCode)
-
-	UzbekistanTaxRegistrationNumberType_BUSINESS = UzbekistanTaxRegistrationNumberType.AddMember("BUSINESS", smithyprelude.Unit)
-
-	UzbekistanTaxRegistrationNumberType_INDIVIDUAL = UzbekistanTaxRegistrationNumberType.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	UzbekistanAdditionalInfo_taxRegistrationNumberType = UzbekistanAdditionalInfo.AddMember("taxRegistrationNumberType", UzbekistanTaxRegistrationNumberType)
-
-	UzbekistanAdditionalInfo_vatRegistrationNumber = UzbekistanAdditionalInfo.AddMember("vatRegistrationNumber", _VatRegistrationNumber)
-
-	PhilippinesAdditionalInfo_isVatRegistered = PhilippinesAdditionalInfo.AddMember("isVatRegistered", smithyprelude.Boolean)
-
-	BelgiumAdditionalInfo_peppolId = BelgiumAdditionalInfo.AddMember("peppolId", _PeppolId)
-
-	BelgiumAdditionalInfo_isMercuriusBoxEnabled = BelgiumAdditionalInfo.AddMember("isMercuriusBoxEnabled", smithyprelude.Boolean)
-
-	ChileDocumentType_INVOICE = ChileDocumentType.AddMember("INVOICE", smithyprelude.Unit)
-
-	ChileDocumentType_RECEIPT = ChileDocumentType.AddMember("RECEIPT", smithyprelude.Unit)
-
-	ChileAdditionalInfo_documentType = ChileAdditionalInfo.AddMember("documentType", ChileDocumentType)
-
-	ChileAdditionalInfo_businessActivity = ChileAdditionalInfo.AddMember("businessActivity", _GenericString)
-
-	FranceAdditionalInfo_sirenNumber = FranceAdditionalInfo.AddMember("sirenNumber", _SirenNumber)
-
-	FranceAdditionalInfo_eInvoiceRoutingCode = FranceAdditionalInfo.AddMember("eInvoiceRoutingCode", smithyprelude.String)
-
-	MonacoAdditionalInfo_businessNumber = MonacoAdditionalInfo.AddMember("businessNumber", _BusinessNumber)
-
-	GermanyAdditionalInfo_economicIdentificationNumber = GermanyAdditionalInfo.AddMember("economicIdentificationNumber", _EconomicIdentificationNumber)
-
-	GermanyAdditionalInfo_steuernummer = GermanyAdditionalInfo.AddMember("steuernummer", _Steuernummer)
-
-	MexicoAdditionalInfo_taxRegime = MexicoAdditionalInfo.AddMember("taxRegime", _MexicoTaxRegimeCode)
-
-	MexicoAdditionalInfo_taxRegimeFullName = MexicoAdditionalInfo.AddMember("taxRegimeFullName", _MexicoTaxRegimeFullName)
-
-	MexicoAdditionalInfo_cfdiUsageCode = MexicoAdditionalInfo.AddMember("cfdiUsageCode", _MexicoCfdiUsageCode)
-
-	AdditionalInfoResponse_malaysiaAdditionalInfo = AdditionalInfoResponse.AddMember("malaysiaAdditionalInfo", MalaysiaAdditionalInfo)
-
-	AdditionalInfoResponse_israelAdditionalInfo = AdditionalInfoResponse.AddMember("israelAdditionalInfo", IsraelAdditionalInfo)
-
-	AdditionalInfoResponse_estoniaAdditionalInfo = AdditionalInfoResponse.AddMember("estoniaAdditionalInfo", EstoniaAdditionalInfo)
-
-	AdditionalInfoResponse_canadaAdditionalInfo = AdditionalInfoResponse.AddMember("canadaAdditionalInfo", CanadaAdditionalInfo)
-
-	AdditionalInfoResponse_brazilAdditionalInfo = AdditionalInfoResponse.AddMember("brazilAdditionalInfo", BrazilAdditionalInfo)
-
-	AdditionalInfoResponse_spainAdditionalInfo = AdditionalInfoResponse.AddMember("spainAdditionalInfo", SpainAdditionalInfo)
-
-	AdditionalInfoResponse_kenyaAdditionalInfo = AdditionalInfoResponse.AddMember("kenyaAdditionalInfo", KenyaAdditionalInfo)
-
-	AdditionalInfoResponse_southKoreaAdditionalInfo = AdditionalInfoResponse.AddMember("southKoreaAdditionalInfo", SouthKoreaAdditionalInfo)
-
-	AdditionalInfoResponse_turkeyAdditionalInfo = AdditionalInfoResponse.AddMember("turkeyAdditionalInfo", TurkeyAdditionalInfo)
-
-	AdditionalInfoResponse_georgiaAdditionalInfo = AdditionalInfoResponse.AddMember("georgiaAdditionalInfo", GeorgiaAdditionalInfo)
-
-	AdditionalInfoResponse_italyAdditionalInfo = AdditionalInfoResponse.AddMember("italyAdditionalInfo", ItalyAdditionalInfo)
-
-	AdditionalInfoResponse_romaniaAdditionalInfo = AdditionalInfoResponse.AddMember("romaniaAdditionalInfo", RomaniaAdditionalInfo)
-
-	AdditionalInfoResponse_ukraineAdditionalInfo = AdditionalInfoResponse.AddMember("ukraineAdditionalInfo", UkraineAdditionalInfo)
-
-	AdditionalInfoResponse_polandAdditionalInfo = AdditionalInfoResponse.AddMember("polandAdditionalInfo", PolandAdditionalInfo)
-
-	AdditionalInfoResponse_saudiArabiaAdditionalInfo = AdditionalInfoResponse.AddMember("saudiArabiaAdditionalInfo", SaudiArabiaAdditionalInfo)
-
-	AdditionalInfoResponse_indiaAdditionalInfo = AdditionalInfoResponse.AddMember("indiaAdditionalInfo", IndiaAdditionalInfo)
-
-	AdditionalInfoResponse_indonesiaAdditionalInfo = AdditionalInfoResponse.AddMember("indonesiaAdditionalInfo", IndonesiaAdditionalInfo)
-
-	AdditionalInfoResponse_vietnamAdditionalInfo = AdditionalInfoResponse.AddMember("vietnamAdditionalInfo", VietnamAdditionalInfo)
-
-	AdditionalInfoResponse_egyptAdditionalInfo = AdditionalInfoResponse.AddMember("egyptAdditionalInfo", EgyptAdditionalInfo)
-
-	AdditionalInfoResponse_greeceAdditionalInfo = AdditionalInfoResponse.AddMember("greeceAdditionalInfo", GreeceAdditionalInfo)
-
-	AdditionalInfoResponse_uzbekistanAdditionalInfo = AdditionalInfoResponse.AddMember("uzbekistanAdditionalInfo", UzbekistanAdditionalInfo)
-
-	AdditionalInfoResponse_philippinesAdditionalInfo = AdditionalInfoResponse.AddMember("philippinesAdditionalInfo", PhilippinesAdditionalInfo)
-
-	AdditionalInfoResponse_belgiumAdditionalInfo = AdditionalInfoResponse.AddMember("belgiumAdditionalInfo", BelgiumAdditionalInfo)
-
-	AdditionalInfoResponse_chileAdditionalInfo = AdditionalInfoResponse.AddMember("chileAdditionalInfo", ChileAdditionalInfo)
-
-	AdditionalInfoResponse_franceAdditionalInfo = AdditionalInfoResponse.AddMember("franceAdditionalInfo", FranceAdditionalInfo)
-
-	AdditionalInfoResponse_monacoAdditionalInfo = AdditionalInfoResponse.AddMember("monacoAdditionalInfo", MonacoAdditionalInfo)
-
-	AdditionalInfoResponse_germanyAdditionalInfo = AdditionalInfoResponse.AddMember("germanyAdditionalInfo", GermanyAdditionalInfo)
-
-	AdditionalInfoResponse_mexicoAdditionalInfo = AdditionalInfoResponse.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
-
-	Jurisdiction_stateOrRegion = Jurisdiction.AddMember("stateOrRegion", _State)
-
-	Jurisdiction_countryCode = Jurisdiction.AddMember("countryCode", _CountryCode)
-
-	TaxRegistrationWithJurisdiction_registrationId = TaxRegistrationWithJurisdiction.AddMember("registrationId", _RegistrationId)
-
-	TaxRegistrationWithJurisdiction_registrationType = TaxRegistrationWithJurisdiction.AddMember("registrationType", TaxRegistrationType)
-
-	TaxRegistrationWithJurisdiction_legalName = TaxRegistrationWithJurisdiction.AddMember("legalName", _LegalName)
-
-	TaxRegistrationWithJurisdiction_status = TaxRegistrationWithJurisdiction.AddMember("status", TaxRegistrationStatus)
-
-	TaxRegistrationWithJurisdiction_sector = TaxRegistrationWithJurisdiction.AddMember("sector", Sector)
-
-	TaxRegistrationWithJurisdiction_taxDocumentMetadatas = TaxRegistrationWithJurisdiction.AddMember("taxDocumentMetadatas", _TaxDocumentMetadatas)
-
-	TaxRegistrationWithJurisdiction_certifiedEmailId = TaxRegistrationWithJurisdiction.AddMember("certifiedEmailId", _CertifiedEmailId)
-
-	TaxRegistrationWithJurisdiction_additionalTaxInformation = TaxRegistrationWithJurisdiction.AddMember("additionalTaxInformation", AdditionalInfoResponse)
-
-	TaxRegistrationWithJurisdiction_jurisdiction = TaxRegistrationWithJurisdiction.AddMember("jurisdiction", Jurisdiction)
-
-	TaxInheritanceDetails_parentEntityId = TaxInheritanceDetails.AddMember("parentEntityId", _AccountId)
-
-	TaxInheritanceDetails_inheritanceObtainedReason = TaxInheritanceDetails.AddMember("inheritanceObtainedReason", _InheritanceObtainedReason)
-
-	Address_addressLine1 = Address.AddMember("addressLine1", _AddressLine1)
-
-	Address_addressLine2 = Address.AddMember("addressLine2", _AddressLine2)
-
-	Address_addressLine3 = Address.AddMember("addressLine3", _AddressLine3)
-
-	Address_districtOrCounty = Address.AddMember("districtOrCounty", _District)
-
-	Address_city = Address.AddMember("city", _City)
-
-	Address_stateOrRegion = Address.AddMember("stateOrRegion", _State)
-
-	Address_postalCode = Address.AddMember("postalCode", _PostalCode)
-
-	Address_countryCode = Address.AddMember("countryCode", _CountryCode)
-
-	AddressRoleType_TAX_ADDRESS = AddressRoleType.AddMember("TAX_ADDRESS", smithyprelude.Unit)
-
-	AddressRoleType_BILLING_ADDRESS = AddressRoleType.AddMember("BILLING_ADDRESS", smithyprelude.Unit)
-
-	AddressRoleType_CONTACT_ADDRESS = AddressRoleType.AddMember("CONTACT_ADDRESS", smithyprelude.Unit)
-
-	_AddressRoleMap_key = _AddressRoleMap.AddMember("key", AddressRoleType)
-
-	_AddressRoleMap_value = _AddressRoleMap.AddMember("value", Jurisdiction)
-
-	AccountMetaData_accountName = AccountMetaData.AddMember("accountName", _AccountName)
-
-	AccountMetaData_seller = AccountMetaData.AddMember("seller", _Seller)
-
-	AccountMetaData_address = AccountMetaData.AddMember("address", Address)
-
-	AccountMetaData_addressType = AccountMetaData.AddMember("addressType", AddressRoleType)
-
-	AccountMetaData_addressRoleMap = AccountMetaData.AddMember("addressRoleMap", _AddressRoleMap)
-
-	AccountDetails_accountId = AccountDetails.AddMember("accountId", _AccountId)
-
-	AccountDetails_taxRegistration = AccountDetails.AddMember("taxRegistration", TaxRegistrationWithJurisdiction)
-
-	AccountDetails_taxInheritanceDetails = AccountDetails.AddMember("taxInheritanceDetails", TaxInheritanceDetails)
-
-	AccountDetails_accountMetaData = AccountDetails.AddMember("accountMetaData", AccountMetaData)
-
-	_AccountDetailsList_member = _AccountDetailsList.AddMember("member", AccountDetails)
-
-	_AccountIds_member = _AccountIds.AddMember("member", _AccountId)
-
-	AdditionalInfoRequest_malaysiaAdditionalInfo = AdditionalInfoRequest.AddMember("malaysiaAdditionalInfo", MalaysiaAdditionalInfo)
-
-	AdditionalInfoRequest_israelAdditionalInfo = AdditionalInfoRequest.AddMember("israelAdditionalInfo", IsraelAdditionalInfo)
-
-	AdditionalInfoRequest_estoniaAdditionalInfo = AdditionalInfoRequest.AddMember("estoniaAdditionalInfo", EstoniaAdditionalInfo)
-
-	AdditionalInfoRequest_canadaAdditionalInfo = AdditionalInfoRequest.AddMember("canadaAdditionalInfo", CanadaAdditionalInfo)
-
-	AdditionalInfoRequest_spainAdditionalInfo = AdditionalInfoRequest.AddMember("spainAdditionalInfo", SpainAdditionalInfo)
-
-	AdditionalInfoRequest_kenyaAdditionalInfo = AdditionalInfoRequest.AddMember("kenyaAdditionalInfo", KenyaAdditionalInfo)
-
-	AdditionalInfoRequest_southKoreaAdditionalInfo = AdditionalInfoRequest.AddMember("southKoreaAdditionalInfo", SouthKoreaAdditionalInfo)
-
-	AdditionalInfoRequest_turkeyAdditionalInfo = AdditionalInfoRequest.AddMember("turkeyAdditionalInfo", TurkeyAdditionalInfo)
-
-	AdditionalInfoRequest_georgiaAdditionalInfo = AdditionalInfoRequest.AddMember("georgiaAdditionalInfo", GeorgiaAdditionalInfo)
-
-	AdditionalInfoRequest_italyAdditionalInfo = AdditionalInfoRequest.AddMember("italyAdditionalInfo", ItalyAdditionalInfo)
-
-	AdditionalInfoRequest_romaniaAdditionalInfo = AdditionalInfoRequest.AddMember("romaniaAdditionalInfo", RomaniaAdditionalInfo)
-
-	AdditionalInfoRequest_ukraineAdditionalInfo = AdditionalInfoRequest.AddMember("ukraineAdditionalInfo", UkraineAdditionalInfo)
-
-	AdditionalInfoRequest_polandAdditionalInfo = AdditionalInfoRequest.AddMember("polandAdditionalInfo", PolandAdditionalInfo)
-
-	AdditionalInfoRequest_saudiArabiaAdditionalInfo = AdditionalInfoRequest.AddMember("saudiArabiaAdditionalInfo", SaudiArabiaAdditionalInfo)
-
-	AdditionalInfoRequest_indonesiaAdditionalInfo = AdditionalInfoRequest.AddMember("indonesiaAdditionalInfo", IndonesiaAdditionalInfo)
-
-	AdditionalInfoRequest_vietnamAdditionalInfo = AdditionalInfoRequest.AddMember("vietnamAdditionalInfo", VietnamAdditionalInfo)
-
-	AdditionalInfoRequest_egyptAdditionalInfo = AdditionalInfoRequest.AddMember("egyptAdditionalInfo", EgyptAdditionalInfo)
-
-	AdditionalInfoRequest_greeceAdditionalInfo = AdditionalInfoRequest.AddMember("greeceAdditionalInfo", GreeceAdditionalInfo)
-
-	AdditionalInfoRequest_uzbekistanAdditionalInfo = AdditionalInfoRequest.AddMember("uzbekistanAdditionalInfo", UzbekistanAdditionalInfo)
-
-	AdditionalInfoRequest_philippinesAdditionalInfo = AdditionalInfoRequest.AddMember("philippinesAdditionalInfo", PhilippinesAdditionalInfo)
-
-	AdditionalInfoRequest_belgiumAdditionalInfo = AdditionalInfoRequest.AddMember("belgiumAdditionalInfo", BelgiumAdditionalInfo)
-
-	AdditionalInfoRequest_chileAdditionalInfo = AdditionalInfoRequest.AddMember("chileAdditionalInfo", ChileAdditionalInfo)
-
-	AdditionalInfoRequest_franceAdditionalInfo = AdditionalInfoRequest.AddMember("franceAdditionalInfo", FranceAdditionalInfo)
-
-	AdditionalInfoRequest_monacoAdditionalInfo = AdditionalInfoRequest.AddMember("monacoAdditionalInfo", MonacoAdditionalInfo)
-
-	AdditionalInfoRequest_germanyAdditionalInfo = AdditionalInfoRequest.AddMember("germanyAdditionalInfo", GermanyAdditionalInfo)
-
-	AdditionalInfoRequest_mexicoAdditionalInfo = AdditionalInfoRequest.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
-
-	AttachmentUploadException_message = AttachmentUploadException.AddMember("message", _ErrorMessage)
-
-	Authority_country = Authority.AddMember("country", _CountryCode)
-
-	Authority_state = Authority.AddMember("state", _State)
-
-	_Authorities_member = _Authorities.AddMember("member", Authority)
-
-	BatchDeleteTaxRegistrationError_accountId = BatchDeleteTaxRegistrationError.AddMember("accountId", _AccountId)
-
-	BatchDeleteTaxRegistrationError_message = BatchDeleteTaxRegistrationError.AddMember("message", _ErrorMessage)
-
-	BatchDeleteTaxRegistrationError_code = BatchDeleteTaxRegistrationError.AddMember("code", _ErrorCode)
-
-	_BatchDeleteTaxRegistrationErrors_member = _BatchDeleteTaxRegistrationErrors.AddMember("member", BatchDeleteTaxRegistrationError)
-
-	BatchPutTaxRegistrationError_accountId = BatchPutTaxRegistrationError.AddMember("accountId", _AccountId)
-
-	BatchPutTaxRegistrationError_message = BatchPutTaxRegistrationError.AddMember("message", _ErrorMessage)
-
-	BatchPutTaxRegistrationError_code = BatchPutTaxRegistrationError.AddMember("code", _ErrorCode)
-
-	_BatchPutTaxRegistrationErrors_member = _BatchPutTaxRegistrationErrors.AddMember("member", BatchPutTaxRegistrationError)
-
-	CaseCreationLimitExceededException_message = CaseCreationLimitExceededException.AddMember("message", _ErrorMessage)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConflictException_errorCode = ConflictException.AddMember("errorCode", _ErrorCode)
-
-	DestinationS3Location_bucket = DestinationS3Location.AddMember("bucket", _S3BucketName)
-
-	DestinationS3Location_prefix = DestinationS3Location.AddMember("prefix", _S3Prefix)
-
-	EntityExemptionAccountStatus_None = EntityExemptionAccountStatus.AddMember("None", smithyprelude.Unit)
-
-	EntityExemptionAccountStatus_Valid = EntityExemptionAccountStatus.AddMember("Valid", smithyprelude.Unit)
-
-	EntityExemptionAccountStatus_Expired = EntityExemptionAccountStatus.AddMember("Expired", smithyprelude.Unit)
-
-	EntityExemptionAccountStatus_Pending = EntityExemptionAccountStatus.AddMember("Pending", smithyprelude.Unit)
-
-	ExemptionCertificate_documentName = ExemptionCertificate.AddMember("documentName", _ExemptionDocumentName)
-
-	ExemptionCertificate_documentFile = ExemptionCertificate.AddMember("documentFile", _ExemptionFileBlob)
-
-	HeritageStatus_OptIn = HeritageStatus.AddMember("OptIn", smithyprelude.Unit)
-
-	HeritageStatus_OptOut = HeritageStatus.AddMember("OptOut", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	InternalServerException_errorCode = InternalServerException.AddMember("errorCode", _ErrorCode)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_errorCode = ResourceNotFoundException.AddMember("errorCode", _ErrorCode)
-
-	SourceS3Location_bucket = SourceS3Location.AddMember("bucket", _S3BucketName)
-
-	SourceS3Location_key = SourceS3Location.AddMember("key", _S3Key)
-
-	SupplementalTaxRegistrationType_VAT = SupplementalTaxRegistrationType.AddMember("VAT", smithyprelude.Unit)
-
-	SupplementalTaxRegistration_registrationId = SupplementalTaxRegistration.AddMember("registrationId", _RegistrationId)
-
-	SupplementalTaxRegistration_registrationType = SupplementalTaxRegistration.AddMember("registrationType", SupplementalTaxRegistrationType)
-
-	SupplementalTaxRegistration_legalName = SupplementalTaxRegistration.AddMember("legalName", _LegalName)
-
-	SupplementalTaxRegistration_address = SupplementalTaxRegistration.AddMember("address", Address)
-
-	SupplementalTaxRegistration_authorityId = SupplementalTaxRegistration.AddMember("authorityId", _GenericString)
-
-	SupplementalTaxRegistration_status = SupplementalTaxRegistration.AddMember("status", TaxRegistrationStatus)
-
-	SupplementalTaxRegistrationEntry_registrationId = SupplementalTaxRegistrationEntry.AddMember("registrationId", _RegistrationId)
-
-	SupplementalTaxRegistrationEntry_registrationType = SupplementalTaxRegistrationEntry.AddMember("registrationType", SupplementalTaxRegistrationType)
-
-	SupplementalTaxRegistrationEntry_legalName = SupplementalTaxRegistrationEntry.AddMember("legalName", _LegalName)
-
-	SupplementalTaxRegistrationEntry_address = SupplementalTaxRegistrationEntry.AddMember("address", Address)
-
-	_SupplementalTaxRegistrationList_member = _SupplementalTaxRegistrationList.AddMember("member", SupplementalTaxRegistration)
-
-	TaxExemptionType_displayName = TaxExemptionType.AddMember("displayName", _DisplayName)
-
-	TaxExemptionType_description = TaxExemptionType.AddMember("description", _GenericString)
-
-	TaxExemptionType_applicableJurisdictions = TaxExemptionType.AddMember("applicableJurisdictions", _Authorities)
-
-	TaxExemption_authority = TaxExemption.AddMember("authority", Authority)
-
-	TaxExemption_taxExemptionType = TaxExemption.AddMember("taxExemptionType", TaxExemptionType)
-
-	TaxExemption_effectiveDate = TaxExemption.AddMember("effectiveDate", smithyprelude.Timestamp)
-
-	TaxExemption_expirationDate = TaxExemption.AddMember("expirationDate", smithyprelude.Timestamp)
-
-	TaxExemption_systemEffectiveDate = TaxExemption.AddMember("systemEffectiveDate", smithyprelude.Timestamp)
-
-	TaxExemption_status = TaxExemption.AddMember("status", EntityExemptionAccountStatus)
-
-	_TaxExemptions_member = _TaxExemptions.AddMember("member", TaxExemption)
-
-	TaxExemptionDetails_taxExemptions = TaxExemptionDetails.AddMember("taxExemptions", _TaxExemptions)
-
-	TaxExemptionDetails_heritageObtainedDetails = TaxExemptionDetails.AddMember("heritageObtainedDetails", smithyprelude.Boolean)
-
-	TaxExemptionDetails_heritageObtainedParentEntity = TaxExemptionDetails.AddMember("heritageObtainedParentEntity", _GenericString)
-
-	TaxExemptionDetails_heritageObtainedReason = TaxExemptionDetails.AddMember("heritageObtainedReason", _GenericString)
-
-	_TaxExemptionDetailsMap_key = _TaxExemptionDetailsMap.AddMember("key", _AccountId)
-
-	_TaxExemptionDetailsMap_value = _TaxExemptionDetailsMap.AddMember("value", TaxExemptionDetails)
-
-	_TaxExemptionTypes_member = _TaxExemptionTypes.AddMember("member", TaxExemptionType)
-
-	TaxRegistration_registrationId = TaxRegistration.AddMember("registrationId", _RegistrationId)
-
-	TaxRegistration_registrationType = TaxRegistration.AddMember("registrationType", TaxRegistrationType)
-
-	TaxRegistration_legalName = TaxRegistration.AddMember("legalName", _LegalName)
-
-	TaxRegistration_status = TaxRegistration.AddMember("status", TaxRegistrationStatus)
-
-	TaxRegistration_sector = TaxRegistration.AddMember("sector", Sector)
-
-	TaxRegistration_taxDocumentMetadatas = TaxRegistration.AddMember("taxDocumentMetadatas", _TaxDocumentMetadatas)
-
-	TaxRegistration_certifiedEmailId = TaxRegistration.AddMember("certifiedEmailId", _CertifiedEmailId)
-
-	TaxRegistration_additionalTaxInformation = TaxRegistration.AddMember("additionalTaxInformation", AdditionalInfoResponse)
-
-	TaxRegistration_legalAddress = TaxRegistration.AddMember("legalAddress", Address)
-
-	TaxRegistrationDocFile_fileName = TaxRegistrationDocFile.AddMember("fileName", _TaxDocumentName)
-
-	TaxRegistrationDocFile_fileContent = TaxRegistrationDocFile.AddMember("fileContent", _FileBlob)
-
-	TaxRegistrationDocument_s3Location = TaxRegistrationDocument.AddMember("s3Location", SourceS3Location)
-
-	TaxRegistrationDocument_file = TaxRegistrationDocument.AddMember("file", TaxRegistrationDocFile)
-
-	_TaxRegistrationDocuments_member = _TaxRegistrationDocuments.AddMember("member", TaxRegistrationDocument)
-
-	VerificationDetails_dateOfBirth = VerificationDetails.AddMember("dateOfBirth", _DateOfBirth)
-
-	VerificationDetails_taxRegistrationDocuments = VerificationDetails.AddMember("taxRegistrationDocuments", _TaxRegistrationDocuments)
-
-	TaxRegistrationEntry_registrationId = TaxRegistrationEntry.AddMember("registrationId", _RegistrationId)
-
-	TaxRegistrationEntry_registrationType = TaxRegistrationEntry.AddMember("registrationType", TaxRegistrationType)
-
-	TaxRegistrationEntry_legalName = TaxRegistrationEntry.AddMember("legalName", _LegalName)
-
-	TaxRegistrationEntry_legalAddress = TaxRegistrationEntry.AddMember("legalAddress", Address)
-
-	TaxRegistrationEntry_sector = TaxRegistrationEntry.AddMember("sector", Sector)
-
-	TaxRegistrationEntry_additionalTaxInformation = TaxRegistrationEntry.AddMember("additionalTaxInformation", AdditionalInfoRequest)
-
-	TaxRegistrationEntry_verificationDetails = TaxRegistrationEntry.AddMember("verificationDetails", VerificationDetails)
-
-	TaxRegistrationEntry_certifiedEmailId = TaxRegistrationEntry.AddMember("certifiedEmailId", _CertifiedEmailId)
-
-	ValidationExceptionErrorCode_MALFORMED_TOKEN = ValidationExceptionErrorCode.AddMember("MALFORMED_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_EXPIRED_TOKEN = ValidationExceptionErrorCode.AddMember("EXPIRED_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_TOKEN = ValidationExceptionErrorCode.AddMember("INVALID_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_FIELD_VALIDATION_FAILED = ValidationExceptionErrorCode.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_MISSING_INPUT = ValidationExceptionErrorCode.AddMember("MISSING_INPUT", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN = ValidationExceptionErrorCode.AddMember("NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN = ValidationExceptionErrorCode.AddMember("GST_EXISTENCE_BLOCK_SET_PAN", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _FieldName)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_errorCode = ValidationException.AddMember("errorCode", ValidationExceptionErrorCode)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	BatchDeleteTaxRegistrationRequest_accountIds = BatchDeleteTaxRegistrationRequest.AddMember("accountIds", _AccountIds)
-
-	BatchDeleteTaxRegistrationResponse_errors = BatchDeleteTaxRegistrationResponse.AddMember("errors", _BatchDeleteTaxRegistrationErrors)
-
-	BatchGetTaxExemptionsRequest_accountIds = BatchGetTaxExemptionsRequest.AddMember("accountIds", _AccountIds)
-
-	BatchGetTaxExemptionsResponse_taxExemptionDetailsMap = BatchGetTaxExemptionsResponse.AddMember("taxExemptionDetailsMap", _TaxExemptionDetailsMap)
-
-	BatchGetTaxExemptionsResponse_failedAccounts = BatchGetTaxExemptionsResponse.AddMember("failedAccounts", _AccountIds)
-
-	BatchPutTaxRegistrationRequest_accountIds = BatchPutTaxRegistrationRequest.AddMember("accountIds", _AccountIds)
-
-	BatchPutTaxRegistrationRequest_taxRegistrationEntry = BatchPutTaxRegistrationRequest.AddMember("taxRegistrationEntry", TaxRegistrationEntry)
-
-	BatchPutTaxRegistrationResponse_status = BatchPutTaxRegistrationResponse.AddMember("status", TaxRegistrationStatus)
-
-	BatchPutTaxRegistrationResponse_errors = BatchPutTaxRegistrationResponse.AddMember("errors", _BatchPutTaxRegistrationErrors)
-
-	DeleteSupplementalTaxRegistrationRequest_authorityId = DeleteSupplementalTaxRegistrationRequest.AddMember("authorityId", _GenericString)
-
-	DeleteTaxRegistrationRequest_accountId = DeleteTaxRegistrationRequest.AddMember("accountId", _AccountId)
-
-	GetTaxExemptionTypesResponse_taxExemptionTypes = GetTaxExemptionTypesResponse.AddMember("taxExemptionTypes", _TaxExemptionTypes)
-
-	GetTaxInheritanceResponse_heritageStatus = GetTaxInheritanceResponse.AddMember("heritageStatus", HeritageStatus)
-
-	GetTaxRegistrationDocumentRequest_destinationS3Location = GetTaxRegistrationDocumentRequest.AddMember("destinationS3Location", DestinationS3Location)
-
-	GetTaxRegistrationDocumentRequest_taxDocumentMetadata = GetTaxRegistrationDocumentRequest.AddMember("taxDocumentMetadata", TaxDocumentMetadata)
-
-	GetTaxRegistrationDocumentResponse_destinationFilePath = GetTaxRegistrationDocumentResponse.AddMember("destinationFilePath", _DestinationFilePath)
-
-	GetTaxRegistrationDocumentResponse_presignedS3Url = GetTaxRegistrationDocumentResponse.AddMember("presignedS3Url", _Url)
-
-	GetTaxRegistrationRequest_accountId = GetTaxRegistrationRequest.AddMember("accountId", _AccountId)
-
-	GetTaxRegistrationResponse_taxRegistration = GetTaxRegistrationResponse.AddMember("taxRegistration", TaxRegistration)
-
-	ListSupplementalTaxRegistrationsRequest_maxResults = ListSupplementalTaxRegistrationsRequest.AddMember("maxResults", _MaxResults)
-
-	ListSupplementalTaxRegistrationsRequest_nextToken = ListSupplementalTaxRegistrationsRequest.AddMember("nextToken", _PaginationTokenString)
-
-	ListSupplementalTaxRegistrationsResponse_taxRegistrations = ListSupplementalTaxRegistrationsResponse.AddMember("taxRegistrations", _SupplementalTaxRegistrationList)
-
-	ListSupplementalTaxRegistrationsResponse_nextToken = ListSupplementalTaxRegistrationsResponse.AddMember("nextToken", _PaginationTokenString)
-
-	ListTaxExemptionsRequest_maxResults = ListTaxExemptionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListTaxExemptionsRequest_nextToken = ListTaxExemptionsRequest.AddMember("nextToken", _PaginationTokenString)
-
-	ListTaxExemptionsResponse_nextToken = ListTaxExemptionsResponse.AddMember("nextToken", _PaginationTokenString)
-
-	ListTaxExemptionsResponse_taxExemptionDetailsMap = ListTaxExemptionsResponse.AddMember("taxExemptionDetailsMap", _TaxExemptionDetailsMap)
-
-	ListTaxRegistrationsRequest_maxResults = ListTaxRegistrationsRequest.AddMember("maxResults", _MaxResults)
-
-	ListTaxRegistrationsRequest_nextToken = ListTaxRegistrationsRequest.AddMember("nextToken", _PaginationTokenString)
-
-	ListTaxRegistrationsResponse_accountDetails = ListTaxRegistrationsResponse.AddMember("accountDetails", _AccountDetailsList)
-
-	ListTaxRegistrationsResponse_nextToken = ListTaxRegistrationsResponse.AddMember("nextToken", _PaginationTokenString)
-
-	PutSupplementalTaxRegistrationRequest_taxRegistrationEntry = PutSupplementalTaxRegistrationRequest.AddMember("taxRegistrationEntry", SupplementalTaxRegistrationEntry)
-
-	PutSupplementalTaxRegistrationResponse_authorityId = PutSupplementalTaxRegistrationResponse.AddMember("authorityId", _GenericString)
-
-	PutSupplementalTaxRegistrationResponse_status = PutSupplementalTaxRegistrationResponse.AddMember("status", TaxRegistrationStatus)
-
-	PutTaxExemptionRequest_accountIds = PutTaxExemptionRequest.AddMember("accountIds", _AccountIds)
-
-	PutTaxExemptionRequest_authority = PutTaxExemptionRequest.AddMember("authority", Authority)
-
-	PutTaxExemptionRequest_exemptionType = PutTaxExemptionRequest.AddMember("exemptionType", _GenericString)
-
-	PutTaxExemptionRequest_exemptionCertificate = PutTaxExemptionRequest.AddMember("exemptionCertificate", ExemptionCertificate)
-
-	PutTaxExemptionResponse_caseId = PutTaxExemptionResponse.AddMember("caseId", _GenericString)
-
-	PutTaxInheritanceRequest_heritageStatus = PutTaxInheritanceRequest.AddMember("heritageStatus", HeritageStatus)
-
-	PutTaxRegistrationRequest_accountId = PutTaxRegistrationRequest.AddMember("accountId", _AccountId)
-
-	PutTaxRegistrationRequest_taxRegistrationEntry = PutTaxRegistrationRequest.AddMember("taxRegistrationEntry", TaxRegistrationEntry)
-
-	PutTaxRegistrationResponse_status = PutTaxRegistrationResponse.AddMember("status", TaxRegistrationStatus)
-
+const blob = "" +
+	"DeleteSupplementalTaxRegistrationResponseDeleteSupplementalTaxRegistrationRequestListSupplementalTax" +
+	"RegistrationsResponseuniqueIdentificationNumberExpirationDateListSupplementalTaxRegistrationsRequest" +
+	"PutSupplementalTaxRegistrationResponsePutSupplementalTaxRegistrationRequestSaudiArabiaTaxRegistratio" +
+	"nNumberTypeUzbekistanTaxRegistrationNumberTypeBatchDeleteTaxRegistrationResponseCaseCreationLimitExc" +
+	"eededExceptionGetTaxRegistrationDocumentResponseIndonesiaTaxRegistrationNumberTypeNON_INDIA_CUSTOMER" +
+	"_CAN_NOT_SET_PANBatchDeleteTaxRegistrationRequestGetTaxRegistrationDocumentRequestBatchDeleteTaxRegi" +
+	"strationErrorsCanadaProvincialSalesTaxIdStringCanadaQuebecSalesTaxNumberStringCanadaRetailSalesTaxNu" +
+	"mberStringSupplementalTaxRegistrationEntryBatchPutTaxRegistrationResponseElectronicTransactionCodeNu" +
+	"mberPolandTaxRegistrationNumberTypeSupplementalTaxRegistrationListSupplementalTaxRegistrationTypeTax" +
+	"RegistrationWithJurisdictionelectronicTransactionCodeNumberBatchPutTaxRegistrationRequestCOMMERCIAL_" +
+	"REGISTRATION_NUMBEREnterpriseIdentificationNumberenterpriseIdentificationNumberBatchGetTaxExemptions" +
+	"ResponseBatchPutTaxRegistrationErrorsDIGITAL_SVC_ELECTRONIC_MEDIUMLOCAL_TAX_REGISTRATION_NUMBERBatch" +
+	"GetTaxExemptionsRequestEconomicIdentificationNumberEntityExemptionAccountStatusGetTaxExemptionTypesR" +
+	"esponseIndividualRegistrationNumberListTaxRegistrationsResponseValidationExceptionErrorCodeValidatio" +
+	"nExceptionFieldListeconomicIdentificationNumberheritageObtainedParentEntityindividualRegistrationNum" +
+	"berGST_EXISTENCE_BLOCK_SET_PANGetTaxExemptionTypesRequestListTaxRegistrationsRequestMalaysiaServiceT" +
+	"axCodesListPpnExceptionDesignationCodeppnExceptionDesignationCodeBusinessRegistrationNumberBusinessR" +
+	"epresentativeNameEU_TAX_REGISTRATION_NUMBERGetTaxRegistrationResponseUniqueIdentificationNumberbusin" +
+	"essRegistrationNumberbusinessRepresentativeNamecanadaQuebecSalesTaxNumbercanadaRetailSalesTaxNumberA" +
+	"ttachmentUploadExceptionGetTaxInheritanceResponseGetTaxRegistrationRequestInheritanceObtainedReasonL" +
+	"OCAL_REGISTRATION_NUMBERListTaxExemptionsResponsePENSION_AND_BENEFIT_FUNDSPhilippinesAdditionalInfoP" +
+	"utTaxInheritanceResponseResourceNotFoundExceptionSaudiArabiaAdditionalInfoTAX_IDENTIFICATION_NUMBERi" +
+	"nheritanceObtainedReasonphilippinesAdditionalInfosaudiArabiaAdditionalInfotaxRegistrationNumberTypeC" +
+	"ontractingAuthorityCodeGetTaxInheritanceRequestListTaxExemptionsRequestPutTaxInheritanceRequestSouth" +
+	"KoreaAdditionalInfoTaxRegistrationDocumentsUzbekistanAdditionalInfoadditionalTaxInformationcontracti" +
+	"ngAuthorityCodepaymentVoucherNumberDatesouthKoreaAdditionalInfotaxRegistrationDocumentsuzbekistanAdd" +
+	"itionalInfoFIELD_VALIDATION_FAILEDIndonesiaAdditionalInfoInternalServerExceptionMexicoTaxRegimeFullN" +
+	"amePutTaxExemptionResponseapplicableJurisdictionsheritageObtainedDetailsindonesiaAdditionalInfoAddit" +
+	"ionalInfoResponseMalaysiaAdditionalInfoPutTaxExemptionRequestRegistryCommercialCodeTaxDocumentAccess" +
+	"TokenTaxExemptionDetailsMapTaxRegistrationDocFileheritageObtainedReasonmalaysiaAdditionalInforegistr" +
+	"yCommercialCodetaxDocumentAccessTokentaxExemptionDetailsMapAccessDeniedExceptionAdditionalInfoReques" +
+	"tBelgiumAdditionalInfoDestinationS3LocationEstoniaAdditionalInfoExemptionDocumentNameGeorgiaAddition" +
+	"alInfoGermanyAdditionalInfoPaginationTokenStringRomaniaAdditionalInfoTaxInheritanceDetailsTaxRegistr" +
+	"ationStatusUkraineAdditionalInfoVatRegistrationNumberVietnamAdditionalInfobelgiumAdditionalInfodesti" +
+	"nationS3LocationestoniaAdditionalInfogeorgiaAdditionalInfogermanyAdditionalInfoisMercuriusBoxEnabled" +
+	"romaniaAdditionalInfotaxInheritanceDetailsukraineAdditionalInfovatRegistrationNumbervietnamAdditiona" +
+	"lInfoBrazilAdditionalInfoCanadaAdditionalInfoDEVELOPMENT_AGENCIESExemptionCertificateFranceAdditiona" +
+	"lInfoGreeceAdditionalInfoIsraelAdditionalInfoMexicoAdditionalInfoMonacoAdditionalInfoPaymentVoucherN" +
+	"umberPolandAdditionalInfoTRAINING_OR_COACHINGTaxDocumentMetadatasTaxInformationNumberTurkeyAdditiona" +
+	"lInfobrazilAdditionalInfocanadaAdditionalInfoexemptionCertificatefranceAdditionalInfogreeceAdditiona" +
+	"lInfoisraelAdditionalInfomexicoAdditionalInfomonacoAdditionalInfopolandAdditionalInfoprovincialSales" +
+	"TaxIdtaxDocumentMetadatastaxInformationNumbertaxRegistrationEntryturkeyAdditionalInfoChileAdditional" +
+	"InfoDestinationFilePathEgyptAdditionalInfoIndiaAdditionalInfoItalyAdditionalInfoKenyaAdditionalInfoM" +
+	"exicoCfdiUsageCodeMexicoTaxRegimeCodePUBLIC_INSTITUTIONSSpainAdditionalInfoVerificationDetailschileA" +
+	"dditionalInfodestinationFilePatheInvoiceRoutingCodeegyptAdditionalInfoindiaAdditionalInfoitalyAdditi" +
+	"onalInfokenyaAdditionalInfospainAdditionalInfosystemEffectiveDateverificationDetailsAccountDetailsLi" +
+	"stIsraelCustomerTypeChileDocumentTypeConflictExceptionExemptionFileBlobisGroupVatEnabledisResellerAc" +
+	"counttaxExemptionTypestaxRegimeFullNameCertifiedEmailIdIsraelDealerTypePROFESSIONAL_ORGSourceS3Locat" +
+	"ionbusinessActivitycertifiedEmailIddistrictOrCountyregistrationTypetaxRegistrationsAccountMetaDataAd" +
+	"dressRoleTypeBILLING_ADDRESSCIRCULATING_ORGCONTACT_ADDRESSLegalNatureCodeMALFORMED_TOKENPASSPORT_NUM" +
+	"BERPHYSICAL_PERSONTaxDocumentNameaccountMetaDataisVatRegisteredlegalNatureCodeserviceTaxCodestaxDocu" +
+	"mentNameAddressRoleMapBusinessNumberDecisionNumberHeritageStatusItemOfBusinessLineOfBusinessNON_AUTH" +
+	"ORIZEDRegistrationIdSecondaryTaxIdUkraineTrnTypeaccountDetailsaddressRoleMapbusinessNumberdecisionNu" +
+	"mberexpirationDatefailedAccountsheritageStatusitemOfBusinesslineOfBusinessparentEntityIdpresignedS3U" +
+	"rlregistrationIdsecondaryTaxIdukraineTrnTypeEXPIRED_TOKENGenericStringINVALID_TOKENMISSING_INPUTcfdi" +
+	"UsageCodeeffectiveDateexemptionTypestateOrRegiontaxExemptionsAddressLine1AddressLine2AddressLine3Err" +
+	"orMessageLEGAL_PERSONS3BucketNameSdiAccountIdSteuernummeraddressLine1addressLine2addressLine3custome" +
+	"rTypedocumentFiledocumentNamedocumentTypejurisdictionlegalAddresssdiAccountIdsteuernummerAccountName" +
+	"AuthoritiesCONSULTANCYCountryCodeDateOfBirthDisplayNameIT_SERVICESSirenNumberTAX_ADDRESSTaxSettingsa" +
+	"ccountNameaddressTypeauthorityIdcountryCodedateOfBirthdescriptiondisplayNamefileContentsirenNumberDa" +
+	"teStringINDIVIDUALIndustriesKepEmailIdMaxResultsPersonTypePostalCodeaccountIdsdealerTypeindustrieske" +
+	"pEmailIdmaxResultspersonTypepostalCodes3LocationCigNumberCupNumberFieldNameINSURANCELegalNameTaxOffi" +
+	"ceTimestampcigNumbercupNumbererrorCodefieldListlegalNamenextTokentaxOfficeBUSINESSDistrictINTRA_EUPe" +
+	"ppolIdREJECTEDS3PrefixVERIFIEDfileNamepeppolIdBooleanCcmCodeDELETEDExpiredINVOICEPENDINGPendingRECEI" +
+	"PTccmCodemessagetaxCodeOptOutSectorSellerbucketcaseIderrorsmemberprefixsectorstatusBANKSNITKUOptInS3" +
+	"KeyStatevalueCNPJCityNPWPNRICNoneUnitcitycodenameCPFNIKNIPPanVATpan"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.taxsettings", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 346, Target: 0, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1079, Target: 1, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 742, Target: 2, Traits: 2, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 3, Traits: 3, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 351, Target: 4, Traits: 4, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1279, Target: 5, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1924, Target: 6, Traits: 6, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 414, Target: 7, Traits: 7, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 414, Target: 8, Traits: 8, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 81, Target: 9, Traits: 9, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2024, Target: 10, Traits: 10, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1335, Target: 11, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 200, Target: 12, Traits: 12, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2703, Target: 13, Traits: 13, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2099, Target: 14, Traits: 14, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 747, Target: 15, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5888, Target: 16, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 3059, Target: 17, Traits: 17, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4584, Target: 19, Traits: 19, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 26, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2274, Target: 437, Traits: 18, StrLen: 15, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3521, Target: 388, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5033, Target: 29, Traits: 18, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4584, Target: 24, Traits: 16, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 19, Traits: 18, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5636, Target: 26, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5768, Target: 27, Traits: 16, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 26, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4883, Target: 29, Traits: 19, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5899, Target: 35, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4692, Target: 327, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5262, Target: 92, Traits: 16, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5910, Target: 107, Traits: 16, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5262, Target: 104, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 5789, Target: 35, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3080, Target: 36, Traits: 16, StrLen: 21, Count: 26, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2971, Target: 261, Traits: 16, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4005, Target: 236, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3416, Target: 190, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3925, Target: 139, Traits: 16, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4527, Target: 336, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4508, Target: 255, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2539, Target: 332, Traits: 16, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4165, Target: 447, Traits: 16, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3437, Target: 203, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4489, Target: 245, Traits: 16, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3500, Target: 310, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3542, Target: 452, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4065, Target: 292, Traits: 16, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2249, Target: 315, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2772, Target: 216, Traits: 16, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3584, Target: 485, Traits: 16, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4451, Target: 178, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3985, Target: 208, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2587, Target: 459, Traits: 16, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2224, Target: 290, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3374, Target: 130, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4394, Target: 151, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3965, Target: 199, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4045, Target: 280, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3458, Target: 205, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4025, Target: 273, Traits: 16, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2795, Target: 63, Traits: 16, StrLen: 22, Count: 28, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2971, Target: 261, Traits: 16, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4005, Target: 236, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3416, Target: 190, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3925, Target: 139, Traits: 16, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3905, Target: 133, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4527, Target: 336, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4508, Target: 255, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2539, Target: 332, Traits: 16, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4165, Target: 447, Traits: 16, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3437, Target: 203, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4489, Target: 245, Traits: 16, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3500, Target: 310, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3542, Target: 452, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4065, Target: 292, Traits: 16, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2249, Target: 315, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4470, Target: 213, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2772, Target: 216, Traits: 16, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3584, Target: 485, Traits: 16, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4451, Target: 178, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3985, Target: 208, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2587, Target: 459, Traits: 16, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2224, Target: 290, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3374, Target: 130, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4394, Target: 151, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3965, Target: 199, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4045, Target: 280, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3458, Target: 205, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4025, Target: 273, Traits: 16, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4898, Target: 92, Traits: 16, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5657, Target: 101, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5669, Target: 102, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5681, Target: 103, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4835, Target: 176, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6537, Target: 158, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5535, Target: 338, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6128, Target: 300, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5932, Target: 163, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5561, Target: 101, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5573, Target: 102, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5585, Target: 103, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5108, Target: 104, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3888, Target: 107, Traits: 16, StrLen: 3, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6508, Target: 252, Traits: 16, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4898, Target: 107, Traits: 16, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5877, Target: 565, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4913, Target: 565, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4943, Target: 565, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1899, Target: 111, Traits: 20, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5800, Target: 113, Traits: 16, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 115, Traits: 16, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2310, Target: 115, Traits: 16, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5932, Target: 163, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5535, Target: 338, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 582, Target: 118, Traits: 16, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 26, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6541, Target: 188, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 582, Target: 122, Traits: 16, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 118, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1108, Target: 124, Traits: 16, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 26, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6541, Target: 188, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1108, Target: 128, Traits: 16, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 124, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3101, Target: 130, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6338, Target: 285, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3479, Target: 566, Traits: 16, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3605, Target: 133, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6402, Target: 149, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5063, Target: 259, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5122, Target: 136, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1665, Target: 137, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1691, Target: 138, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3625, Target: 139, Traits: 16, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4085, Target: 144, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1847, Target: 145, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1873, Target: 146, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4688, Target: 566, Traits: 16, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 614, Target: 144, Traits: 16, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 646, Target: 145, Traits: 16, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 678, Target: 146, Traits: 16, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 380, Target: 147, Traits: 21, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6353, Target: 149, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4739, Target: 150, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4185, Target: 151, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5729, Target: 154, Traits: 16, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4803, Target: 202, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4620, Target: 154, Traits: 16, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6374, Target: 565, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6395, Target: 565, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6148, Target: 157, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6517, Target: 158, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4637, Target: 159, Traits: 22, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6229, Target: 188, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2299, Target: 162, Traits: 16, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5822, Target: 163, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6157, Target: 164, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4608, Target: 165, Traits: 16, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6274, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6008, Target: 565, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5833, Target: 168, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5998, Target: 169, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5136, Target: 170, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4204, Target: 171, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3122, Target: 172, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6441, Target: 312, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6465, Target: 314, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5844, Target: 175, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6282, Target: 176, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1223, Target: 177, Traits: 16, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4223, Target: 178, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 121, Target: 457, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 169, Traits: 16, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 773, Target: 181, Traits: 16, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1019, Target: 182, Traits: 16, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1251, Target: 183, Traits: 16, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6529, Target: 565, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1363, Target: 565, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6367, Target: 565, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6388, Target: 565, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1382, Target: 188, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5597, Target: 189, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3143, Target: 190, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2993, Target: 306, Traits: 16, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3665, Target: 192, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5717, Target: 195, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5705, Target: 196, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 3164, Target: 195, Traits: 16, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4654, Target: 196, Traits: 16, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 6166, Target: 197, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4663, Target: 198, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 3685, Target: 199, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5987, Target: 328, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4432, Target: 567, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5457, Target: 202, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3185, Target: 203, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6118, Target: 286, Traits: 16, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3206, Target: 205, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1419, Target: 177, Traits: 16, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5777, Target: 339, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3705, Target: 208, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2491, Target: 162, Traits: 16, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5150, Target: 210, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6493, Target: 565, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6423, Target: 565, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4242, Target: 213, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6564, Target: 283, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1307, Target: 215, Traits: 16, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2634, Target: 216, Traits: 16, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2274, Target: 220, Traits: 16, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1638, Target: 301, Traits: 16, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5290, Target: 170, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 448, Target: 220, Traits: 16, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6552, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4988, Target: 565, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6521, Target: 565, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6488, Target: 565, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6018, Target: 225, Traits: 16, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4928, Target: 565, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4771, Target: 565, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6483, Target: 565, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6175, Target: 565, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2049, Target: 565, Traits: 16, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3645, Target: 565, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1974, Target: 232, Traits: 16, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2657, Target: 233, Traits: 23, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6229, Target: 188, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3725, Target: 236, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6078, Target: 242, Traits: 16, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5693, Target: 239, Traits: 16, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4602, Target: 239, Traits: 16, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6274, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6008, Target: 565, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4755, Target: 242, Traits: 16, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5196, Target: 565, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5192, Target: 565, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4261, Target: 245, Traits: 16, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5765, Target: 321, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6211, Target: 157, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6220, Target: 164, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6416, Target: 356, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5693, Target: 165, Traits: 16, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5164, Target: 251, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 916, Target: 252, Traits: 16, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5535, Target: 338, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5932, Target: 163, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4280, Target: 255, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6118, Target: 286, Traits: 16, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6028, Target: 257, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6184, Target: 258, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4958, Target: 259, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5178, Target: 260, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2817, Target: 261, Traits: 16, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5078, Target: 270, Traits: 16, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4125, Target: 387, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1795, Target: 137, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1584, Target: 265, Traits: 16, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5811, Target: 565, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1137, Target: 565, Traits: 16, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5855, Target: 565, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3825, Target: 565, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1584, Target: 270, Traits: 16, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 265, Traits: 16, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6038, Target: 272, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3745, Target: 273, Traits: 16, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 278, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4722, Target: 279, Traits: 16, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5496, Target: 277, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4299, Target: 277, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4318, Target: 278, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2680, Target: 279, Traits: 16, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3765, Target: 280, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5276, Target: 136, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3227, Target: 282, Traits: 16, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6558, Target: 283, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3785, Target: 284, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6298, Target: 285, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6048, Target: 286, Traits: 16, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5609, Target: 565, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5003, Target: 565, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6274, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2074, Target: 290, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5048, Target: 566, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3805, Target: 292, Traits: 16, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1475, Target: 215, Traits: 16, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4671, Target: 566, Traits: 16, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2274, Target: 296, Traits: 16, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 804, Target: 296, Traits: 16, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1717, Target: 565, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1166, Target: 565, Traits: 16, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1999, Target: 565, Traits: 16, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6058, Target: 300, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1611, Target: 301, Traits: 16, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5206, Target: 302, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 881, Target: 303, Traits: 16, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6290, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1166, Target: 565, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2861, Target: 306, Traits: 16, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2124, Target: 307, Traits: 24, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6229, Target: 188, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3248, Target: 310, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2274, Target: 419, Traits: 16, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5621, Target: 312, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6498, Target: 313, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6314, Target: 314, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2149, Target: 315, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2274, Target: 317, Traits: 16, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 275, Target: 317, Traits: 16, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1172, Target: 565, Traits: 16, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2174, Target: 565, Traits: 16, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 989, Target: 565, Traits: 16, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5633, Target: 321, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5220, Target: 322, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6429, Target: 323, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6274, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6008, Target: 565, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4337, Target: 565, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6435, Target: 327, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5866, Target: 328, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4787, Target: 329, Traits: 16, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6441, Target: 312, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3888, Target: 313, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2395, Target: 332, Traits: 16, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1821, Target: 138, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5360, Target: 260, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5346, Target: 251, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4356, Target: 336, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4851, Target: 303, Traits: 16, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6503, Target: 338, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5645, Target: 339, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6, Target: 340, Traits: 19, StrLen: 27, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5402, Target: 302, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4851, Target: 354, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6247, Target: 258, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5262, Target: 92, Traits: 16, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5921, Target: 202, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6477, Target: 422, Traits: 16, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 710, Target: 347, Traits: 19, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5402, Target: 302, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4851, Target: 354, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6247, Target: 258, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5262, Target: 92, Traits: 16, StrLen: 7, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 835, Target: 352, Traits: 16, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 340, Traits: 18, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 866, Target: 354, Traits: 16, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6561, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1599, Target: 356, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2883, Target: 357, Traits: 16, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3845, Target: 358, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3015, Target: 357, Traits: 16, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5093, Target: 363, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3845, Target: 361, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 358, Traits: 16, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5018, Target: 363, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1087, Target: 364, Traits: 16, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5921, Target: 115, Traits: 16, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4705, Target: 381, Traits: 16, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5509, Target: 568, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5304, Target: 568, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4546, Target: 568, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6477, Target: 183, Traits: 16, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2905, Target: 371, Traits: 16, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5548, Target: 379, Traits: 16, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2749, Target: 566, Traits: 16, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1447, Target: 202, Traits: 16, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2949, Target: 202, Traits: 16, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2905, Target: 376, Traits: 16, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3888, Target: 26, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6508, Target: 371, Traits: 16, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1087, Target: 379, Traits: 16, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 364, Traits: 16, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1282, Target: 381, Traits: 16, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5965, Target: 175, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5954, Target: 202, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2726, Target: 113, Traits: 16, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1282, Target: 385, Traits: 16, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 381, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3865, Target: 387, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3269, Target: 388, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5374, Target: 26, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2199, Target: 232, Traits: 16, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6193, Target: 391, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 18, Target: 392, Traits: 19, StrLen: 15, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5402, Target: 302, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4851, Target: 427, Traits: 16, StrLen: 16, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6247, Target: 258, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6477, Target: 422, Traits: 16, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6471, Target: 323, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4105, Target: 361, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4819, Target: 150, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2467, Target: 63, Traits: 16, StrLen: 24, Count: 28, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5753, Target: 92, Traits: 16, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2927, Target: 402, Traits: 16, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6330, Target: 363, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5976, Target: 198, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 417, Target: 405, Traits: 16, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6138, Target: 329, Traits: 16, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5976, Target: 402, Traits: 16, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2419, Target: 408, Traits: 16, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 405, Traits: 16, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 722, Target: 410, Traits: 19, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5402, Target: 302, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4851, Target: 427, Traits: 16, StrLen: 16, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6247, Target: 258, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5753, Target: 92, Traits: 16, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6471, Target: 323, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2467, Target: 36, Traits: 16, StrLen: 24, Count: 26, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4565, Target: 482, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4819, Target: 150, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 286, Target: 419, Traits: 16, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1172, Target: 565, Traits: 16, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1999, Target: 565, Traits: 16, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3290, Target: 422, Traits: 16, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6322, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6381, Target: 565, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6360, Target: 565, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6306, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 878, Target: 427, Traits: 16, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6561, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1503, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6549, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6513, Target: 565, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5886, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4935, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6525, Target: 565, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 513, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6555, Target: 565, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 897, Target: 437, Traits: 19, StrLen: 31, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5402, Target: 302, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4851, Target: 427, Traits: 16, StrLen: 16, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6247, Target: 258, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6477, Target: 422, Traits: 16, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6471, Target: 323, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4105, Target: 361, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4819, Target: 150, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2467, Target: 63, Traits: 16, StrLen: 24, Count: 28, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5741, Target: 252, Traits: 16, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3885, Target: 447, Traits: 16, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6265, Target: 391, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6098, Target: 257, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5416, Target: 322, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6088, Target: 225, Traits: 16, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3311, Target: 452, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5430, Target: 454, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5234, Target: 454, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6274, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6008, Target: 565, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1769, Target: 457, Traits: 16, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5399, Target: 458, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2443, Target: 459, Traits: 16, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2274, Target: 462, Traits: 16, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3563, Target: 481, Traits: 16, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 311, Target: 462, Traits: 16, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6274, Target: 565, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6008, Target: 565, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1363, Target: 465, Traits: 20, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6409, Target: 189, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6229, Target: 469, Traits: 16, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6238, Target: 479, Traits: 16, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1363, Target: 469, Traits: 16, StrLen: 28, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4973, Target: 565, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5444, Target: 565, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5470, Target: 565, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2611, Target: 565, Traits: 16, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5483, Target: 565, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 482, Target: 565, Traits: 16, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1503, Target: 565, Traits: 16, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1391, Target: 477, Traits: 16, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6545, Target: 197, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1391, Target: 479, Traits: 16, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6459, Target: 477, Traits: 16, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3332, Target: 481, Traits: 16, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4375, Target: 482, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5943, Target: 168, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2563, Target: 408, Traits: 16, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3353, Target: 485, Traits: 16, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1049, Target: 182, Traits: 16, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 928, Target: 181, Traits: 16, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2515, Target: 284, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2515, Target: 169, Traits: 16, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 516, Target: 490, Traits: 16, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 27, Traits: 16, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 346, Target: 492, Traits: 16, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6453, Target: 122, Traits: 16, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1195, Target: 494, Traits: 16, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 27, Traits: 16, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1079, Target: 496, Traits: 16, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3037, Target: 376, Traits: 16, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 5318, Target: 27, Traits: 16, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 959, Target: 499, Traits: 16, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 27, Traits: 16, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4145, Target: 410, Traits: 18, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 742, Target: 502, Traits: 16, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6477, Target: 422, Traits: 16, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6453, Target: 128, Traits: 16, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 41, Target: 505, Traits: 16, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5921, Target: 202, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 507, Traits: 16, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 521, Target: 508, Traits: 16, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 26, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 351, Target: 510, Traits: 16, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1530, Target: 511, Traits: 16, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1279, Target: 512, Traits: 16, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4705, Target: 385, Traits: 16, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2323, Target: 514, Traits: 16, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1924, Target: 515, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5332, Target: 210, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 549, Target: 517, Traits: 16, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3395, Target: 172, Traits: 16, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4105, Target: 358, Traits: 16, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 414, Target: 520, Traits: 16, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4413, Target: 171, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5388, Target: 458, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1949, Target: 523, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 26, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1743, Target: 525, Traits: 16, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2274, Target: 392, Traits: 18, StrLen: 15, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 161, Target: 527, Traits: 16, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6108, Target: 272, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6256, Target: 282, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 81, Target: 530, Traits: 16, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4867, Target: 352, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6256, Target: 282, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2347, Target: 533, Traits: 16, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6108, Target: 272, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6256, Target: 282, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2024, Target: 536, Traits: 16, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6256, Target: 282, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3037, Target: 376, Traits: 16, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1557, Target: 539, Traits: 16, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6108, Target: 272, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6256, Target: 282, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1335, Target: 542, Traits: 16, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5248, Target: 24, Traits: 16, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6256, Target: 282, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 238, Target: 545, Traits: 16, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4145, Target: 347, Traits: 18, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 200, Target: 547, Traits: 16, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5921, Target: 202, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6477, Target: 422, Traits: 16, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2839, Target: 550, Traits: 16, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 27, Traits: 16, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5921, Target: 115, Traits: 16, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5522, Target: 202, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3945, Target: 192, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2703, Target: 555, Traits: 16, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6447, Target: 202, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2371, Target: 557, Traits: 16, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5332, Target: 210, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2099, Target: 559, Traits: 16, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 964, Target: 560, Traits: 16, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6068, Target: 26, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4145, Target: 410, Traits: 18, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 747, Target: 563, Traits: 16, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6477, Target: 422, Traits: 16, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6533, Target: 565, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 6346, Target: 566, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 640, Target: 567, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 6202, Target: 568, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/BatchDeleteTaxRegistration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/BatchGetTaxExemptions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/BatchPutTaxRegistration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DeleteSupplementalTaxRegistration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DeleteTaxRegistration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetTaxExemptionTypes",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetTaxInheritance",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetTaxRegistration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetTaxRegistrationDocument",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListSupplementalTaxRegistrations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListTaxExemptions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListTaxRegistrations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/PutSupplementalTaxRegistration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/PutTaxExemption",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/PutTaxInheritance",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/PutTaxRegistration",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 413}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [569]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+}
+
+var BatchDeleteTaxRegistration = &handles[0]
+
+var BatchGetTaxExemptions = &handles[1]
+
+var BatchPutTaxRegistration = &handles[2]
+
+var DeleteSupplementalTaxRegistration = &handles[3]
+
+var DeleteTaxRegistration = &handles[4]
+
+var GetTaxExemptionTypes = &handles[5]
+
+var GetTaxInheritance = &handles[6]
+
+var GetTaxRegistration = &handles[7]
+
+var GetTaxRegistrationDocument = &handles[8]
+
+var ListSupplementalTaxRegistrations = &handles[9]
+
+var ListTaxExemptions = &handles[10]
+
+var ListTaxRegistrations = &handles[11]
+
+var PutSupplementalTaxRegistration = &handles[12]
+
+var PutTaxExemption = &handles[13]
+
+var PutTaxInheritance = &handles[14]
+
+var PutTaxRegistration = &handles[15]
+
+var _TaxSettings = &handles[16]
+
+var AccessDeniedException = &handles[17]
+var AccessDeniedException_message = &handles[18]
+
+var AccountDetails = &handles[19]
+var AccountDetails_accountId = &handles[20]
+var AccountDetails_taxRegistration = &handles[21]
+var AccountDetails_taxInheritanceDetails = &handles[22]
+var AccountDetails_accountMetaData = &handles[23]
+
+var _AccountDetailsList = &handles[24]
+var _AccountDetailsList_member = &handles[25]
+
+var _AccountId = &handles[26]
+
+var _AccountIds = &handles[27]
+var _AccountIds_member = &handles[28]
+
+var AccountMetaData = &handles[29]
+var AccountMetaData_accountName = &handles[30]
+var AccountMetaData_seller = &handles[31]
+var AccountMetaData_address = &handles[32]
+var AccountMetaData_addressType = &handles[33]
+var AccountMetaData_addressRoleMap = &handles[34]
+
+var _AccountName = &handles[35]
+
+var AdditionalInfoRequest = &handles[36]
+var AdditionalInfoRequest_malaysiaAdditionalInfo = &handles[37]
+var AdditionalInfoRequest_israelAdditionalInfo = &handles[38]
+var AdditionalInfoRequest_estoniaAdditionalInfo = &handles[39]
+var AdditionalInfoRequest_canadaAdditionalInfo = &handles[40]
+var AdditionalInfoRequest_spainAdditionalInfo = &handles[41]
+var AdditionalInfoRequest_kenyaAdditionalInfo = &handles[42]
+var AdditionalInfoRequest_southKoreaAdditionalInfo = &handles[43]
+var AdditionalInfoRequest_turkeyAdditionalInfo = &handles[44]
+var AdditionalInfoRequest_georgiaAdditionalInfo = &handles[45]
+var AdditionalInfoRequest_italyAdditionalInfo = &handles[46]
+var AdditionalInfoRequest_romaniaAdditionalInfo = &handles[47]
+var AdditionalInfoRequest_ukraineAdditionalInfo = &handles[48]
+var AdditionalInfoRequest_polandAdditionalInfo = &handles[49]
+var AdditionalInfoRequest_saudiArabiaAdditionalInfo = &handles[50]
+var AdditionalInfoRequest_indonesiaAdditionalInfo = &handles[51]
+var AdditionalInfoRequest_vietnamAdditionalInfo = &handles[52]
+var AdditionalInfoRequest_egyptAdditionalInfo = &handles[53]
+var AdditionalInfoRequest_greeceAdditionalInfo = &handles[54]
+var AdditionalInfoRequest_uzbekistanAdditionalInfo = &handles[55]
+var AdditionalInfoRequest_philippinesAdditionalInfo = &handles[56]
+var AdditionalInfoRequest_belgiumAdditionalInfo = &handles[57]
+var AdditionalInfoRequest_chileAdditionalInfo = &handles[58]
+var AdditionalInfoRequest_franceAdditionalInfo = &handles[59]
+var AdditionalInfoRequest_monacoAdditionalInfo = &handles[60]
+var AdditionalInfoRequest_germanyAdditionalInfo = &handles[61]
+var AdditionalInfoRequest_mexicoAdditionalInfo = &handles[62]
+
+var AdditionalInfoResponse = &handles[63]
+var AdditionalInfoResponse_malaysiaAdditionalInfo = &handles[64]
+var AdditionalInfoResponse_israelAdditionalInfo = &handles[65]
+var AdditionalInfoResponse_estoniaAdditionalInfo = &handles[66]
+var AdditionalInfoResponse_canadaAdditionalInfo = &handles[67]
+var AdditionalInfoResponse_brazilAdditionalInfo = &handles[68]
+var AdditionalInfoResponse_spainAdditionalInfo = &handles[69]
+var AdditionalInfoResponse_kenyaAdditionalInfo = &handles[70]
+var AdditionalInfoResponse_southKoreaAdditionalInfo = &handles[71]
+var AdditionalInfoResponse_turkeyAdditionalInfo = &handles[72]
+var AdditionalInfoResponse_georgiaAdditionalInfo = &handles[73]
+var AdditionalInfoResponse_italyAdditionalInfo = &handles[74]
+var AdditionalInfoResponse_romaniaAdditionalInfo = &handles[75]
+var AdditionalInfoResponse_ukraineAdditionalInfo = &handles[76]
+var AdditionalInfoResponse_polandAdditionalInfo = &handles[77]
+var AdditionalInfoResponse_saudiArabiaAdditionalInfo = &handles[78]
+var AdditionalInfoResponse_indiaAdditionalInfo = &handles[79]
+var AdditionalInfoResponse_indonesiaAdditionalInfo = &handles[80]
+var AdditionalInfoResponse_vietnamAdditionalInfo = &handles[81]
+var AdditionalInfoResponse_egyptAdditionalInfo = &handles[82]
+var AdditionalInfoResponse_greeceAdditionalInfo = &handles[83]
+var AdditionalInfoResponse_uzbekistanAdditionalInfo = &handles[84]
+var AdditionalInfoResponse_philippinesAdditionalInfo = &handles[85]
+var AdditionalInfoResponse_belgiumAdditionalInfo = &handles[86]
+var AdditionalInfoResponse_chileAdditionalInfo = &handles[87]
+var AdditionalInfoResponse_franceAdditionalInfo = &handles[88]
+var AdditionalInfoResponse_monacoAdditionalInfo = &handles[89]
+var AdditionalInfoResponse_germanyAdditionalInfo = &handles[90]
+var AdditionalInfoResponse_mexicoAdditionalInfo = &handles[91]
+
+var Address = &handles[92]
+var Address_addressLine1 = &handles[93]
+var Address_addressLine2 = &handles[94]
+var Address_addressLine3 = &handles[95]
+var Address_districtOrCounty = &handles[96]
+var Address_city = &handles[97]
+var Address_stateOrRegion = &handles[98]
+var Address_postalCode = &handles[99]
+var Address_countryCode = &handles[100]
+
+var _AddressLine1 = &handles[101]
+
+var _AddressLine2 = &handles[102]
+
+var _AddressLine3 = &handles[103]
+
+var _AddressRoleMap = &handles[104]
+var _AddressRoleMap_key = &handles[105]
+var _AddressRoleMap_value = &handles[106]
+
+var AddressRoleType = &handles[107]
+var AddressRoleType_TAX_ADDRESS = &handles[108]
+var AddressRoleType_BILLING_ADDRESS = &handles[109]
+var AddressRoleType_CONTACT_ADDRESS = &handles[110]
+
+var AttachmentUploadException = &handles[111]
+var AttachmentUploadException_message = &handles[112]
+
+var _Authorities = &handles[113]
+var _Authorities_member = &handles[114]
+
+var Authority = &handles[115]
+var Authority_country = &handles[116]
+var Authority_state = &handles[117]
+
+var BatchDeleteTaxRegistrationError = &handles[118]
+var BatchDeleteTaxRegistrationError_accountId = &handles[119]
+var BatchDeleteTaxRegistrationError_message = &handles[120]
+var BatchDeleteTaxRegistrationError_code = &handles[121]
+
+var _BatchDeleteTaxRegistrationErrors = &handles[122]
+var _BatchDeleteTaxRegistrationErrors_member = &handles[123]
+
+var BatchPutTaxRegistrationError = &handles[124]
+var BatchPutTaxRegistrationError_accountId = &handles[125]
+var BatchPutTaxRegistrationError_message = &handles[126]
+var BatchPutTaxRegistrationError_code = &handles[127]
+
+var _BatchPutTaxRegistrationErrors = &handles[128]
+var _BatchPutTaxRegistrationErrors_member = &handles[129]
+
+var BelgiumAdditionalInfo = &handles[130]
+var BelgiumAdditionalInfo_peppolId = &handles[131]
+var BelgiumAdditionalInfo_isMercuriusBoxEnabled = &handles[132]
+
+var BrazilAdditionalInfo = &handles[133]
+var BrazilAdditionalInfo_ccmCode = &handles[134]
+var BrazilAdditionalInfo_legalNatureCode = &handles[135]
+
+var _BusinessNumber = &handles[136]
+
+var _BusinessRegistrationNumber = &handles[137]
+
+var _BusinessRepresentativeName = &handles[138]
+
+var CanadaAdditionalInfo = &handles[139]
+var CanadaAdditionalInfo_provincialSalesTaxId = &handles[140]
+var CanadaAdditionalInfo_canadaQuebecSalesTaxNumber = &handles[141]
+var CanadaAdditionalInfo_canadaRetailSalesTaxNumber = &handles[142]
+var CanadaAdditionalInfo_isResellerAccount = &handles[143]
+
+var _CanadaProvincialSalesTaxIdString = &handles[144]
+
+var _CanadaQuebecSalesTaxNumberString = &handles[145]
+
+var _CanadaRetailSalesTaxNumberString = &handles[146]
+
+var CaseCreationLimitExceededException = &handles[147]
+var CaseCreationLimitExceededException_message = &handles[148]
+
+var _CcmCode = &handles[149]
+
+var _CertifiedEmailId = &handles[150]
+
+var ChileAdditionalInfo = &handles[151]
+var ChileAdditionalInfo_documentType = &handles[152]
+var ChileAdditionalInfo_businessActivity = &handles[153]
+
+var ChileDocumentType = &handles[154]
+var ChileDocumentType_INVOICE = &handles[155]
+var ChileDocumentType_RECEIPT = &handles[156]
+
+var _CigNumber = &handles[157]
+
+var _City = &handles[158]
+
+var ConflictException = &handles[159]
+var ConflictException_message = &handles[160]
+var ConflictException_errorCode = &handles[161]
+
+var _ContractingAuthorityCode = &handles[162]
+
+var _CountryCode = &handles[163]
+
+var _CupNumber = &handles[164]
+
+var CustomerType = &handles[165]
+var CustomerType_BUSINESS = &handles[166]
+var CustomerType_INDIVIDUAL = &handles[167]
+
+var _DateOfBirth = &handles[168]
+
+var _DateString = &handles[169]
+
+var _DecisionNumber = &handles[170]
+
+var _DestinationFilePath = &handles[171]
+
+var DestinationS3Location = &handles[172]
+var DestinationS3Location_bucket = &handles[173]
+var DestinationS3Location_prefix = &handles[174]
+
+var _DisplayName = &handles[175]
+
+var _District = &handles[176]
+
+var _EconomicIdentificationNumber = &handles[177]
+
+var EgyptAdditionalInfo = &handles[178]
+var EgyptAdditionalInfo_uniqueIdentificationNumber = &handles[179]
+var EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate = &handles[180]
+
+var _ElectronicTransactionCodeNumber = &handles[181]
+
+var _EnterpriseIdentificationNumber = &handles[182]
+
+var EntityExemptionAccountStatus = &handles[183]
+var EntityExemptionAccountStatus_None = &handles[184]
+var EntityExemptionAccountStatus_Valid = &handles[185]
+var EntityExemptionAccountStatus_Expired = &handles[186]
+var EntityExemptionAccountStatus_Pending = &handles[187]
+
+var _ErrorCode = &handles[188]
+
+var _ErrorMessage = &handles[189]
+
+var EstoniaAdditionalInfo = &handles[190]
+var EstoniaAdditionalInfo_registryCommercialCode = &handles[191]
+
+var ExemptionCertificate = &handles[192]
+var ExemptionCertificate_documentName = &handles[193]
+var ExemptionCertificate_documentFile = &handles[194]
+
+var _ExemptionDocumentName = &handles[195]
+
+var _ExemptionFileBlob = &handles[196]
+
+var _FieldName = &handles[197]
+
+var _FileBlob = &handles[198]
+
+var FranceAdditionalInfo = &handles[199]
+var FranceAdditionalInfo_sirenNumber = &handles[200]
+var FranceAdditionalInfo_eInvoiceRoutingCode = &handles[201]
+
+var _GenericString = &handles[202]
+
+var GeorgiaAdditionalInfo = &handles[203]
+var GeorgiaAdditionalInfo_personType = &handles[204]
+
+var GermanyAdditionalInfo = &handles[205]
+var GermanyAdditionalInfo_economicIdentificationNumber = &handles[206]
+var GermanyAdditionalInfo_steuernummer = &handles[207]
+
+var GreeceAdditionalInfo = &handles[208]
+var GreeceAdditionalInfo_contractingAuthorityCode = &handles[209]
+
+var HeritageStatus = &handles[210]
+var HeritageStatus_OptIn = &handles[211]
+var HeritageStatus_OptOut = &handles[212]
+
+var IndiaAdditionalInfo = &handles[213]
+var IndiaAdditionalInfo_pan = &handles[214]
+
+var _IndividualRegistrationNumber = &handles[215]
+
+var IndonesiaAdditionalInfo = &handles[216]
+var IndonesiaAdditionalInfo_taxRegistrationNumberType = &handles[217]
+var IndonesiaAdditionalInfo_ppnExceptionDesignationCode = &handles[218]
+var IndonesiaAdditionalInfo_decisionNumber = &handles[219]
+
+var IndonesiaTaxRegistrationNumberType = &handles[220]
+var IndonesiaTaxRegistrationNumberType_NIK = &handles[221]
+var IndonesiaTaxRegistrationNumberType_PASSPORT_NUMBER = &handles[222]
+var IndonesiaTaxRegistrationNumberType_NPWP = &handles[223]
+var IndonesiaTaxRegistrationNumberType_NITKU = &handles[224]
+
+var Industries = &handles[225]
+var Industries_CIRCULATING_ORG = &handles[226]
+var Industries_PROFESSIONAL_ORG = &handles[227]
+var Industries_BANKS = &handles[228]
+var Industries_INSURANCE = &handles[229]
+var Industries_PENSION_AND_BENEFIT_FUNDS = &handles[230]
+var Industries_DEVELOPMENT_AGENCIES = &handles[231]
+
+var _InheritanceObtainedReason = &handles[232]
+
+var InternalServerException = &handles[233]
+var InternalServerException_message = &handles[234]
+var InternalServerException_errorCode = &handles[235]
+
+var IsraelAdditionalInfo = &handles[236]
+var IsraelAdditionalInfo_dealerType = &handles[237]
+var IsraelAdditionalInfo_customerType = &handles[238]
+
+var IsraelCustomerType = &handles[239]
+var IsraelCustomerType_BUSINESS = &handles[240]
+var IsraelCustomerType_INDIVIDUAL = &handles[241]
+
+var IsraelDealerType = &handles[242]
+var IsraelDealerType_AUTHORIZED = &handles[243]
+var IsraelDealerType_NON_AUTHORIZED = &handles[244]
+
+var ItalyAdditionalInfo = &handles[245]
+var ItalyAdditionalInfo_sdiAccountId = &handles[246]
+var ItalyAdditionalInfo_cigNumber = &handles[247]
+var ItalyAdditionalInfo_cupNumber = &handles[248]
+var ItalyAdditionalInfo_taxCode = &handles[249]
+var ItalyAdditionalInfo_customerType = &handles[250]
+
+var _ItemOfBusiness = &handles[251]
+
+var Jurisdiction = &handles[252]
+var Jurisdiction_stateOrRegion = &handles[253]
+var Jurisdiction_countryCode = &handles[254]
+
+var KenyaAdditionalInfo = &handles[255]
+var KenyaAdditionalInfo_personType = &handles[256]
+
+var _KepEmailId = &handles[257]
+
+var _LegalName = &handles[258]
+
+var _LegalNatureCode = &handles[259]
+
+var _LineOfBusiness = &handles[260]
+
+var MalaysiaAdditionalInfo = &handles[261]
+var MalaysiaAdditionalInfo_serviceTaxCodes = &handles[262]
+var MalaysiaAdditionalInfo_taxInformationNumber = &handles[263]
+var MalaysiaAdditionalInfo_businessRegistrationNumber = &handles[264]
+
+var MalaysiaServiceTaxCode = &handles[265]
+var MalaysiaServiceTaxCode_CONSULTANCY = &handles[266]
+var MalaysiaServiceTaxCode_DIGITAL_SVC_ELECTRONIC_MEDIUM = &handles[267]
+var MalaysiaServiceTaxCode_IT_SERVICES = &handles[268]
+var MalaysiaServiceTaxCode_TRAINING_OR_COACHING = &handles[269]
+
+var _MalaysiaServiceTaxCodesList = &handles[270]
+var _MalaysiaServiceTaxCodesList_member = &handles[271]
+
+var _MaxResults = &handles[272]
+
+var MexicoAdditionalInfo = &handles[273]
+var MexicoAdditionalInfo_taxRegime = &handles[274]
+var MexicoAdditionalInfo_taxRegimeFullName = &handles[275]
+var MexicoAdditionalInfo_cfdiUsageCode = &handles[276]
+
+var _MexicoCfdiUsageCode = &handles[277]
+
+var _MexicoTaxRegimeCode = &handles[278]
+
+var _MexicoTaxRegimeFullName = &handles[279]
+
+var MonacoAdditionalInfo = &handles[280]
+var MonacoAdditionalInfo_businessNumber = &handles[281]
+
+var _PaginationTokenString = &handles[282]
+
+var _Pan = &handles[283]
+
+var _PaymentVoucherNumber = &handles[284]
+
+var _PeppolId = &handles[285]
+
+var PersonType = &handles[286]
+var PersonType_LEGAL_PERSON = &handles[287]
+var PersonType_PHYSICAL_PERSON = &handles[288]
+var PersonType_BUSINESS = &handles[289]
+
+var PhilippinesAdditionalInfo = &handles[290]
+var PhilippinesAdditionalInfo_isVatRegistered = &handles[291]
+
+var PolandAdditionalInfo = &handles[292]
+var PolandAdditionalInfo_individualRegistrationNumber = &handles[293]
+var PolandAdditionalInfo_isGroupVatEnabled = &handles[294]
+var PolandAdditionalInfo_taxRegistrationNumberType = &handles[295]
+
+var PolandTaxRegistrationNumberType = &handles[296]
+var PolandTaxRegistrationNumberType_EU_TAX_REGISTRATION_NUMBER = &handles[297]
+var PolandTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER = &handles[298]
+var PolandTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = &handles[299]
+
+var _PostalCode = &handles[300]
+
+var _PpnExceptionDesignationCode = &handles[301]
+
+var _RegistrationId = &handles[302]
+
+var RegistrationType = &handles[303]
+var RegistrationType_INTRA_EU = &handles[304]
+var RegistrationType_LOCAL = &handles[305]
+
+var _RegistryCommercialCode = &handles[306]
+
+var ResourceNotFoundException = &handles[307]
+var ResourceNotFoundException_message = &handles[308]
+var ResourceNotFoundException_errorCode = &handles[309]
+
+var RomaniaAdditionalInfo = &handles[310]
+var RomaniaAdditionalInfo_taxRegistrationNumberType = &handles[311]
+
+var _S3BucketName = &handles[312]
+
+var _S3Key = &handles[313]
+
+var _S3Prefix = &handles[314]
+
+var SaudiArabiaAdditionalInfo = &handles[315]
+var SaudiArabiaAdditionalInfo_taxRegistrationNumberType = &handles[316]
+
+var SaudiArabiaTaxRegistrationNumberType = &handles[317]
+var SaudiArabiaTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = &handles[318]
+var SaudiArabiaTaxRegistrationNumberType_TAX_IDENTIFICATION_NUMBER = &handles[319]
+var SaudiArabiaTaxRegistrationNumberType_COMMERCIAL_REGISTRATION_NUMBER = &handles[320]
+
+var _SdiAccountId = &handles[321]
+
+var _SecondaryTaxId = &handles[322]
+
+var Sector = &handles[323]
+var Sector_BUSINESS = &handles[324]
+var Sector_INDIVIDUAL = &handles[325]
+var Sector_PUBLIC_INSTITUTIONS = &handles[326]
+
+var _Seller = &handles[327]
+
+var _SirenNumber = &handles[328]
+
+var SourceS3Location = &handles[329]
+var SourceS3Location_bucket = &handles[330]
+var SourceS3Location_key = &handles[331]
+
+var SouthKoreaAdditionalInfo = &handles[332]
+var SouthKoreaAdditionalInfo_businessRepresentativeName = &handles[333]
+var SouthKoreaAdditionalInfo_lineOfBusiness = &handles[334]
+var SouthKoreaAdditionalInfo_itemOfBusiness = &handles[335]
+
+var SpainAdditionalInfo = &handles[336]
+var SpainAdditionalInfo_registrationType = &handles[337]
+
+var _State = &handles[338]
+
+var _Steuernummer = &handles[339]
+
+var SupplementalTaxRegistration = &handles[340]
+var SupplementalTaxRegistration_registrationId = &handles[341]
+var SupplementalTaxRegistration_registrationType = &handles[342]
+var SupplementalTaxRegistration_legalName = &handles[343]
+var SupplementalTaxRegistration_address = &handles[344]
+var SupplementalTaxRegistration_authorityId = &handles[345]
+var SupplementalTaxRegistration_status = &handles[346]
+
+var SupplementalTaxRegistrationEntry = &handles[347]
+var SupplementalTaxRegistrationEntry_registrationId = &handles[348]
+var SupplementalTaxRegistrationEntry_registrationType = &handles[349]
+var SupplementalTaxRegistrationEntry_legalName = &handles[350]
+var SupplementalTaxRegistrationEntry_address = &handles[351]
+
+var _SupplementalTaxRegistrationList = &handles[352]
+var _SupplementalTaxRegistrationList_member = &handles[353]
+
+var SupplementalTaxRegistrationType = &handles[354]
+var SupplementalTaxRegistrationType_VAT = &handles[355]
+
+var _TaxCode = &handles[356]
+
+var _TaxDocumentAccessToken = &handles[357]
+
+var TaxDocumentMetadata = &handles[358]
+var TaxDocumentMetadata_taxDocumentAccessToken = &handles[359]
+var TaxDocumentMetadata_taxDocumentName = &handles[360]
+
+var _TaxDocumentMetadatas = &handles[361]
+var _TaxDocumentMetadatas_member = &handles[362]
+
+var _TaxDocumentName = &handles[363]
+
+var TaxExemption = &handles[364]
+var TaxExemption_authority = &handles[365]
+var TaxExemption_taxExemptionType = &handles[366]
+var TaxExemption_effectiveDate = &handles[367]
+var TaxExemption_expirationDate = &handles[368]
+var TaxExemption_systemEffectiveDate = &handles[369]
+var TaxExemption_status = &handles[370]
+
+var TaxExemptionDetails = &handles[371]
+var TaxExemptionDetails_taxExemptions = &handles[372]
+var TaxExemptionDetails_heritageObtainedDetails = &handles[373]
+var TaxExemptionDetails_heritageObtainedParentEntity = &handles[374]
+var TaxExemptionDetails_heritageObtainedReason = &handles[375]
+
+var _TaxExemptionDetailsMap = &handles[376]
+var _TaxExemptionDetailsMap_key = &handles[377]
+var _TaxExemptionDetailsMap_value = &handles[378]
+
+var _TaxExemptions = &handles[379]
+var _TaxExemptions_member = &handles[380]
+
+var TaxExemptionType = &handles[381]
+var TaxExemptionType_displayName = &handles[382]
+var TaxExemptionType_description = &handles[383]
+var TaxExemptionType_applicableJurisdictions = &handles[384]
+
+var _TaxExemptionTypes = &handles[385]
+var _TaxExemptionTypes_member = &handles[386]
+
+var _TaxInformationNumber = &handles[387]
+
+var TaxInheritanceDetails = &handles[388]
+var TaxInheritanceDetails_parentEntityId = &handles[389]
+var TaxInheritanceDetails_inheritanceObtainedReason = &handles[390]
+
+var _TaxOffice = &handles[391]
+
+var TaxRegistration = &handles[392]
+var TaxRegistration_registrationId = &handles[393]
+var TaxRegistration_registrationType = &handles[394]
+var TaxRegistration_legalName = &handles[395]
+var TaxRegistration_status = &handles[396]
+var TaxRegistration_sector = &handles[397]
+var TaxRegistration_taxDocumentMetadatas = &handles[398]
+var TaxRegistration_certifiedEmailId = &handles[399]
+var TaxRegistration_additionalTaxInformation = &handles[400]
+var TaxRegistration_legalAddress = &handles[401]
+
+var TaxRegistrationDocFile = &handles[402]
+var TaxRegistrationDocFile_fileName = &handles[403]
+var TaxRegistrationDocFile_fileContent = &handles[404]
+
+var TaxRegistrationDocument = &handles[405]
+var TaxRegistrationDocument_s3Location = &handles[406]
+var TaxRegistrationDocument_file = &handles[407]
+
+var _TaxRegistrationDocuments = &handles[408]
+var _TaxRegistrationDocuments_member = &handles[409]
+
+var TaxRegistrationEntry = &handles[410]
+var TaxRegistrationEntry_registrationId = &handles[411]
+var TaxRegistrationEntry_registrationType = &handles[412]
+var TaxRegistrationEntry_legalName = &handles[413]
+var TaxRegistrationEntry_legalAddress = &handles[414]
+var TaxRegistrationEntry_sector = &handles[415]
+var TaxRegistrationEntry_additionalTaxInformation = &handles[416]
+var TaxRegistrationEntry_verificationDetails = &handles[417]
+var TaxRegistrationEntry_certifiedEmailId = &handles[418]
+
+var TaxRegistrationNumberType = &handles[419]
+var TaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = &handles[420]
+var TaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = &handles[421]
+
+var TaxRegistrationStatus = &handles[422]
+var TaxRegistrationStatus_VERIFIED = &handles[423]
+var TaxRegistrationStatus_PENDING = &handles[424]
+var TaxRegistrationStatus_DELETED = &handles[425]
+var TaxRegistrationStatus_REJECTED = &handles[426]
+
+var TaxRegistrationType = &handles[427]
+var TaxRegistrationType_VAT = &handles[428]
+var TaxRegistrationType_GST = &handles[429]
+var TaxRegistrationType_CPF = &handles[430]
+var TaxRegistrationType_CNPJ = &handles[431]
+var TaxRegistrationType_SST = &handles[432]
+var TaxRegistrationType_TIN = &handles[433]
+var TaxRegistrationType_NRIC = &handles[434]
+var TaxRegistrationType_PAN = &handles[435]
+var TaxRegistrationType_NIP = &handles[436]
+
+var TaxRegistrationWithJurisdiction = &handles[437]
+var TaxRegistrationWithJurisdiction_registrationId = &handles[438]
+var TaxRegistrationWithJurisdiction_registrationType = &handles[439]
+var TaxRegistrationWithJurisdiction_legalName = &handles[440]
+var TaxRegistrationWithJurisdiction_status = &handles[441]
+var TaxRegistrationWithJurisdiction_sector = &handles[442]
+var TaxRegistrationWithJurisdiction_taxDocumentMetadatas = &handles[443]
+var TaxRegistrationWithJurisdiction_certifiedEmailId = &handles[444]
+var TaxRegistrationWithJurisdiction_additionalTaxInformation = &handles[445]
+var TaxRegistrationWithJurisdiction_jurisdiction = &handles[446]
+
+var TurkeyAdditionalInfo = &handles[447]
+var TurkeyAdditionalInfo_taxOffice = &handles[448]
+var TurkeyAdditionalInfo_kepEmailId = &handles[449]
+var TurkeyAdditionalInfo_secondaryTaxId = &handles[450]
+var TurkeyAdditionalInfo_industries = &handles[451]
+
+var UkraineAdditionalInfo = &handles[452]
+var UkraineAdditionalInfo_ukraineTrnType = &handles[453]
+
+var UkraineTrnType = &handles[454]
+var UkraineTrnType_BUSINESS = &handles[455]
+var UkraineTrnType_INDIVIDUAL = &handles[456]
+
+var _UniqueIdentificationNumber = &handles[457]
+
+var _Url = &handles[458]
+
+var UzbekistanAdditionalInfo = &handles[459]
+var UzbekistanAdditionalInfo_taxRegistrationNumberType = &handles[460]
+var UzbekistanAdditionalInfo_vatRegistrationNumber = &handles[461]
+
+var UzbekistanTaxRegistrationNumberType = &handles[462]
+var UzbekistanTaxRegistrationNumberType_BUSINESS = &handles[463]
+var UzbekistanTaxRegistrationNumberType_INDIVIDUAL = &handles[464]
+
+var ValidationException = &handles[465]
+var ValidationException_message = &handles[466]
+var ValidationException_errorCode = &handles[467]
+var ValidationException_fieldList = &handles[468]
+
+var ValidationExceptionErrorCode = &handles[469]
+var ValidationExceptionErrorCode_MALFORMED_TOKEN = &handles[470]
+var ValidationExceptionErrorCode_EXPIRED_TOKEN = &handles[471]
+var ValidationExceptionErrorCode_INVALID_TOKEN = &handles[472]
+var ValidationExceptionErrorCode_FIELD_VALIDATION_FAILED = &handles[473]
+var ValidationExceptionErrorCode_MISSING_INPUT = &handles[474]
+var ValidationExceptionErrorCode_NON_INDIA_CUSTOMER_CAN_NOT_SET_PAN = &handles[475]
+var ValidationExceptionErrorCode_GST_EXISTENCE_BLOCK_SET_PAN = &handles[476]
+
+var ValidationExceptionField = &handles[477]
+var ValidationExceptionField_name = &handles[478]
+
+var _ValidationExceptionFieldList = &handles[479]
+var _ValidationExceptionFieldList_member = &handles[480]
+
+var _VatRegistrationNumber = &handles[481]
+
+var VerificationDetails = &handles[482]
+var VerificationDetails_dateOfBirth = &handles[483]
+var VerificationDetails_taxRegistrationDocuments = &handles[484]
+
+var VietnamAdditionalInfo = &handles[485]
+var VietnamAdditionalInfo_enterpriseIdentificationNumber = &handles[486]
+var VietnamAdditionalInfo_electronicTransactionCodeNumber = &handles[487]
+var VietnamAdditionalInfo_paymentVoucherNumber = &handles[488]
+var VietnamAdditionalInfo_paymentVoucherNumberDate = &handles[489]
+
+var BatchDeleteTaxRegistrationRequest = &handles[490]
+var BatchDeleteTaxRegistrationRequest_accountIds = &handles[491]
+
+var BatchDeleteTaxRegistrationResponse = &handles[492]
+var BatchDeleteTaxRegistrationResponse_errors = &handles[493]
+
+var BatchGetTaxExemptionsRequest = &handles[494]
+var BatchGetTaxExemptionsRequest_accountIds = &handles[495]
+
+var BatchGetTaxExemptionsResponse = &handles[496]
+var BatchGetTaxExemptionsResponse_taxExemptionDetailsMap = &handles[497]
+var BatchGetTaxExemptionsResponse_failedAccounts = &handles[498]
+
+var BatchPutTaxRegistrationRequest = &handles[499]
+var BatchPutTaxRegistrationRequest_accountIds = &handles[500]
+var BatchPutTaxRegistrationRequest_taxRegistrationEntry = &handles[501]
+
+var BatchPutTaxRegistrationResponse = &handles[502]
+var BatchPutTaxRegistrationResponse_status = &handles[503]
+var BatchPutTaxRegistrationResponse_errors = &handles[504]
+
+var DeleteSupplementalTaxRegistrationRequest = &handles[505]
+var DeleteSupplementalTaxRegistrationRequest_authorityId = &handles[506]
+
+var DeleteSupplementalTaxRegistrationResponse = &handles[507]
+
+var DeleteTaxRegistrationRequest = &handles[508]
+var DeleteTaxRegistrationRequest_accountId = &handles[509]
+
+var DeleteTaxRegistrationResponse = &handles[510]
+
+var GetTaxExemptionTypesRequest = &handles[511]
+
+var GetTaxExemptionTypesResponse = &handles[512]
+var GetTaxExemptionTypesResponse_taxExemptionTypes = &handles[513]
+
+var GetTaxInheritanceRequest = &handles[514]
+
+var GetTaxInheritanceResponse = &handles[515]
+var GetTaxInheritanceResponse_heritageStatus = &handles[516]
+
+var GetTaxRegistrationDocumentRequest = &handles[517]
+var GetTaxRegistrationDocumentRequest_destinationS3Location = &handles[518]
+var GetTaxRegistrationDocumentRequest_taxDocumentMetadata = &handles[519]
+
+var GetTaxRegistrationDocumentResponse = &handles[520]
+var GetTaxRegistrationDocumentResponse_destinationFilePath = &handles[521]
+var GetTaxRegistrationDocumentResponse_presignedS3Url = &handles[522]
+
+var GetTaxRegistrationRequest = &handles[523]
+var GetTaxRegistrationRequest_accountId = &handles[524]
+
+var GetTaxRegistrationResponse = &handles[525]
+var GetTaxRegistrationResponse_taxRegistration = &handles[526]
+
+var ListSupplementalTaxRegistrationsRequest = &handles[527]
+var ListSupplementalTaxRegistrationsRequest_maxResults = &handles[528]
+var ListSupplementalTaxRegistrationsRequest_nextToken = &handles[529]
+
+var ListSupplementalTaxRegistrationsResponse = &handles[530]
+var ListSupplementalTaxRegistrationsResponse_taxRegistrations = &handles[531]
+var ListSupplementalTaxRegistrationsResponse_nextToken = &handles[532]
+
+var ListTaxExemptionsRequest = &handles[533]
+var ListTaxExemptionsRequest_maxResults = &handles[534]
+var ListTaxExemptionsRequest_nextToken = &handles[535]
+
+var ListTaxExemptionsResponse = &handles[536]
+var ListTaxExemptionsResponse_nextToken = &handles[537]
+var ListTaxExemptionsResponse_taxExemptionDetailsMap = &handles[538]
+
+var ListTaxRegistrationsRequest = &handles[539]
+var ListTaxRegistrationsRequest_maxResults = &handles[540]
+var ListTaxRegistrationsRequest_nextToken = &handles[541]
+
+var ListTaxRegistrationsResponse = &handles[542]
+var ListTaxRegistrationsResponse_accountDetails = &handles[543]
+var ListTaxRegistrationsResponse_nextToken = &handles[544]
+
+var PutSupplementalTaxRegistrationRequest = &handles[545]
+var PutSupplementalTaxRegistrationRequest_taxRegistrationEntry = &handles[546]
+
+var PutSupplementalTaxRegistrationResponse = &handles[547]
+var PutSupplementalTaxRegistrationResponse_authorityId = &handles[548]
+var PutSupplementalTaxRegistrationResponse_status = &handles[549]
+
+var PutTaxExemptionRequest = &handles[550]
+var PutTaxExemptionRequest_accountIds = &handles[551]
+var PutTaxExemptionRequest_authority = &handles[552]
+var PutTaxExemptionRequest_exemptionType = &handles[553]
+var PutTaxExemptionRequest_exemptionCertificate = &handles[554]
+
+var PutTaxExemptionResponse = &handles[555]
+var PutTaxExemptionResponse_caseId = &handles[556]
+
+var PutTaxInheritanceRequest = &handles[557]
+var PutTaxInheritanceRequest_heritageStatus = &handles[558]
+
+var PutTaxInheritanceResponse = &handles[559]
+
+var PutTaxRegistrationRequest = &handles[560]
+var PutTaxRegistrationRequest_accountId = &handles[561]
+var PutTaxRegistrationRequest_taxRegistrationEntry = &handles[562]
+
+var PutTaxRegistrationResponse = &handles[563]
+var PutTaxRegistrationResponse_status = &handles[564]
+
+var TaxSettings = &smithy.ServiceSchema{Schema: &handles[16], Version: "2018-05-10"}

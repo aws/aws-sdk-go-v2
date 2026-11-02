@@ -4,640 +4,585 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateInvestigationGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CreateInvestigationGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/investigationGroups",
-	Code: 201})
-
-var DeleteInvestigationGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/investigationGroups/{identifier}",
-	Code: 200})
-
-var DeleteInvestigationGroupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroupPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/investigationGroups/{identifier}/policy",
-	Code: 200})
-
-var GetInvestigationGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/investigationGroups/{identifier}",
-	Code: 200})
-
-var GetInvestigationGroupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/investigationGroups/{identifier}/policy",
-	Code: 200})
-
-var ListInvestigationGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListInvestigationGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/investigationGroups",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutInvestigationGroupPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "PutInvestigationGroupPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/investigationGroups/{identifier}/policy",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateInvestigationGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UpdateInvestigationGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/investigationGroups/{identifier}",
-	Code: 200})
-
-var _AIOps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "AIOps",
-}, smithy.ShapeTypeService, 0)
-
-var AIOps = smithy.NewServiceSchema(_AIOps, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ChatbotNotificationChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ChatbotNotificationChannel",
-}, smithy.ShapeTypeMap, 2)
-var _ChatbotNotificationChannel_key *smithy.Schema
-
-var _ChatbotNotificationChannel_value *smithy.Schema
-
-var _ChatConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ChatConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ChatConfigurationArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ChatConfigurationArns",
-}, smithy.ShapeTypeList, 1)
-var _ChatConfigurationArns_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CrossAccountConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CrossAccountConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CrossAccountConfiguration_sourceRoleArn *smithy.Schema
-
-var _CrossAccountConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CrossAccountConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _CrossAccountConfigurations_member *smithy.Schema
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionConfiguration_type *smithy.Schema
-
-var EncryptionConfiguration_kmsKeyId *smithy.Schema
-
-var EncryptionConfigurationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "EncryptionConfigurationType",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionConfigurationType_AWS_OWNED_KEY *smithy.Schema
-
-var EncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var _IdentifierStringWithPatternAndLengthLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "IdentifierStringWithPatternAndLengthLimits",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _InvestigationGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InvestigationGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _InvestigationGroupIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InvestigationGroupIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _InvestigationGroupPolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InvestigationGroupPolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var _InvestigationGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "InvestigationGroups",
-}, smithy.ShapeTypeList, 1)
-var _InvestigationGroups_member *smithy.Schema
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var ListInvestigationGroupsModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListInvestigationGroupsModel",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvestigationGroupsModel_arn *smithy.Schema
-
-var ListInvestigationGroupsModel_name *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _Retention = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "Retention",
-}, smithy.ShapeTypeLong, 0)
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveStringWithLengthLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "SensitiveStringWithLengthLimits",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SNSTopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "SNSTopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithPatternAndLengthLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "StringWithPatternAndLengthLimits",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyBoundaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagKeyBoundaries",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyBoundaries_member *smithy.Schema
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CreateInvestigationGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CreateInvestigationGroupInput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateInvestigationGroupInput_name *smithy.Schema
-
-var CreateInvestigationGroupInput_roleArn *smithy.Schema
-
-var CreateInvestigationGroupInput_encryptionConfiguration *smithy.Schema
-
-var CreateInvestigationGroupInput_retentionInDays *smithy.Schema
-
-var CreateInvestigationGroupInput_tags *smithy.Schema
-
-var CreateInvestigationGroupInput_tagKeyBoundaries *smithy.Schema
-
-var CreateInvestigationGroupInput_chatbotNotificationChannel *smithy.Schema
-
-var CreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled *smithy.Schema
-
-var CreateInvestigationGroupInput_crossAccountConfigurations *smithy.Schema
-
-var CreateInvestigationGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "CreateInvestigationGroupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateInvestigationGroupOutput_arn *smithy.Schema
-
-var DeleteInvestigationGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInvestigationGroupRequest_identifier *smithy.Schema
-
-var DeleteInvestigationGroupPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroupPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInvestigationGroupPolicyRequest_identifier *smithy.Schema
-
-var DeleteInvestigationGroupPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "DeleteInvestigationGroupPolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetInvestigationGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetInvestigationGroupRequest_identifier *smithy.Schema
-
-var GetInvestigationGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetInvestigationGroupResponse_createdBy *smithy.Schema
-
-var GetInvestigationGroupResponse_createdAt *smithy.Schema
-
-var GetInvestigationGroupResponse_lastModifiedBy *smithy.Schema
-
-var GetInvestigationGroupResponse_lastModifiedAt *smithy.Schema
-
-var GetInvestigationGroupResponse_name *smithy.Schema
-
-var GetInvestigationGroupResponse_arn *smithy.Schema
-
-var GetInvestigationGroupResponse_roleArn *smithy.Schema
-
-var GetInvestigationGroupResponse_encryptionConfiguration *smithy.Schema
-
-var GetInvestigationGroupResponse_retentionInDays *smithy.Schema
-
-var GetInvestigationGroupResponse_chatbotNotificationChannel *smithy.Schema
-
-var GetInvestigationGroupResponse_tagKeyBoundaries *smithy.Schema
-
-var GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled *smithy.Schema
-
-var GetInvestigationGroupResponse_crossAccountConfigurations *smithy.Schema
-
-var GetInvestigationGroupPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetInvestigationGroupPolicyRequest_identifier *smithy.Schema
-
-var GetInvestigationGroupPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "GetInvestigationGroupPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetInvestigationGroupPolicyResponse_investigationGroupArn *smithy.Schema
-
-var GetInvestigationGroupPolicyResponse_policy *smithy.Schema
-
-var ListInvestigationGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListInvestigationGroupsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvestigationGroupsInput_nextToken *smithy.Schema
-
-var ListInvestigationGroupsInput_maxResults *smithy.Schema
-
-var ListInvestigationGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListInvestigationGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvestigationGroupsOutput_nextToken *smithy.Schema
-
-var ListInvestigationGroupsOutput_investigationGroups *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var PutInvestigationGroupPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "PutInvestigationGroupPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutInvestigationGroupPolicyRequest_identifier *smithy.Schema
-
-var PutInvestigationGroupPolicyRequest_policy *smithy.Schema
-
-var PutInvestigationGroupPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "PutInvestigationGroupPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutInvestigationGroupPolicyResponse_investigationGroupArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateInvestigationGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UpdateInvestigationGroupRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateInvestigationGroupRequest_identifier *smithy.Schema
-
-var UpdateInvestigationGroupRequest_roleArn *smithy.Schema
-
-var UpdateInvestigationGroupRequest_encryptionConfiguration *smithy.Schema
-
-var UpdateInvestigationGroupRequest_tagKeyBoundaries *smithy.Schema
-
-var UpdateInvestigationGroupRequest_chatbotNotificationChannel *smithy.Schema
-
-var UpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled *smithy.Schema
-
-var UpdateInvestigationGroupRequest_crossAccountConfigurations *smithy.Schema
-
-var UpdateInvestigationGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.aiops",
-	Name:      "UpdateInvestigationGroupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_ChatConfigurationArns_member = _ChatConfigurationArns.AddMember("member", _ChatConfigurationArn)
-
-	_ChatbotNotificationChannel_key = _ChatbotNotificationChannel.AddMember("key", _SNSTopicArn)
-
-	_ChatbotNotificationChannel_value = _ChatbotNotificationChannel.AddMember("value", _ChatConfigurationArns)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	CrossAccountConfiguration_sourceRoleArn = CrossAccountConfiguration.AddMember("sourceRoleArn", _RoleArn)
-
-	_CrossAccountConfigurations_member = _CrossAccountConfigurations.AddMember("member", CrossAccountConfiguration)
-
-	EncryptionConfigurationType_AWS_OWNED_KEY = EncryptionConfigurationType.AddMember("AWS_OWNED_KEY", smithyprelude.Unit)
-
-	EncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY = EncryptionConfigurationType.AddMember("CUSTOMER_MANAGED_KMS_KEY", smithyprelude.Unit)
-
-	EncryptionConfiguration_type = EncryptionConfiguration.AddMember("type", EncryptionConfigurationType)
-
-	EncryptionConfiguration_kmsKeyId = EncryptionConfiguration.AddMember("kmsKeyId", _KmsKeyId)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	ListInvestigationGroupsModel_arn = ListInvestigationGroupsModel.AddMember("arn", _InvestigationGroupArn)
-
-	ListInvestigationGroupsModel_name = ListInvestigationGroupsModel.AddMember("name", _StringWithPatternAndLengthLimits)
-
-	_InvestigationGroups_member = _InvestigationGroups.AddMember("member", ListInvestigationGroupsModel)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_TagKeyBoundaries_member = _TagKeyBoundaries.AddMember("member", _TagKey)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateInvestigationGroupInput_name = CreateInvestigationGroupInput.AddMember("name", _StringWithPatternAndLengthLimits)
-
-	CreateInvestigationGroupInput_roleArn = CreateInvestigationGroupInput.AddMember("roleArn", _RoleArn)
-
-	CreateInvestigationGroupInput_encryptionConfiguration = CreateInvestigationGroupInput.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	CreateInvestigationGroupInput_retentionInDays = CreateInvestigationGroupInput.AddMember("retentionInDays", _Retention)
-
-	CreateInvestigationGroupInput_tags = CreateInvestigationGroupInput.AddMember("tags", _Tags)
-
-	CreateInvestigationGroupInput_tagKeyBoundaries = CreateInvestigationGroupInput.AddMember("tagKeyBoundaries", _TagKeyBoundaries)
-
-	CreateInvestigationGroupInput_chatbotNotificationChannel = CreateInvestigationGroupInput.AddMember("chatbotNotificationChannel", _ChatbotNotificationChannel)
-
-	CreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled = CreateInvestigationGroupInput.AddMember("isCloudTrailEventHistoryEnabled", smithyprelude.Boolean)
-
-	CreateInvestigationGroupInput_crossAccountConfigurations = CreateInvestigationGroupInput.AddMember("crossAccountConfigurations", _CrossAccountConfigurations)
-
-	CreateInvestigationGroupOutput_arn = CreateInvestigationGroupOutput.AddMember("arn", _InvestigationGroupArn)
-
-	DeleteInvestigationGroupRequest_identifier = DeleteInvestigationGroupRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteInvestigationGroupPolicyRequest_identifier = DeleteInvestigationGroupPolicyRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	GetInvestigationGroupRequest_identifier = GetInvestigationGroupRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	GetInvestigationGroupResponse_createdBy = GetInvestigationGroupResponse.AddMember("createdBy", _IdentifierStringWithPatternAndLengthLimits)
-
-	GetInvestigationGroupResponse_createdAt = GetInvestigationGroupResponse.AddMember("createdAt", smithyprelude.Long)
-
-	GetInvestigationGroupResponse_lastModifiedBy = GetInvestigationGroupResponse.AddMember("lastModifiedBy", _IdentifierStringWithPatternAndLengthLimits)
-
-	GetInvestigationGroupResponse_lastModifiedAt = GetInvestigationGroupResponse.AddMember("lastModifiedAt", smithyprelude.Long)
-
-	GetInvestigationGroupResponse_name = GetInvestigationGroupResponse.AddMember("name", _StringWithPatternAndLengthLimits)
-
-	GetInvestigationGroupResponse_arn = GetInvestigationGroupResponse.AddMember("arn", _InvestigationGroupArn)
-
-	GetInvestigationGroupResponse_roleArn = GetInvestigationGroupResponse.AddMember("roleArn", _RoleArn)
-
-	GetInvestigationGroupResponse_encryptionConfiguration = GetInvestigationGroupResponse.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	GetInvestigationGroupResponse_retentionInDays = GetInvestigationGroupResponse.AddMember("retentionInDays", _Retention)
-
-	GetInvestigationGroupResponse_chatbotNotificationChannel = GetInvestigationGroupResponse.AddMember("chatbotNotificationChannel", _ChatbotNotificationChannel)
-
-	GetInvestigationGroupResponse_tagKeyBoundaries = GetInvestigationGroupResponse.AddMember("tagKeyBoundaries", _TagKeyBoundaries)
-
-	GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled = GetInvestigationGroupResponse.AddMember("isCloudTrailEventHistoryEnabled", smithyprelude.Boolean)
-
-	GetInvestigationGroupResponse_crossAccountConfigurations = GetInvestigationGroupResponse.AddMember("crossAccountConfigurations", _CrossAccountConfigurations)
-
-	GetInvestigationGroupPolicyRequest_identifier = GetInvestigationGroupPolicyRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	GetInvestigationGroupPolicyResponse_investigationGroupArn = GetInvestigationGroupPolicyResponse.AddMember("investigationGroupArn", _InvestigationGroupArn)
-
-	GetInvestigationGroupPolicyResponse_policy = GetInvestigationGroupPolicyResponse.AddMember("policy", _InvestigationGroupPolicyDocument)
-
-	ListInvestigationGroupsInput_nextToken = ListInvestigationGroupsInput.AddMember("nextToken", _SensitiveStringWithLengthLimits, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListInvestigationGroupsInput_maxResults = ListInvestigationGroupsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListInvestigationGroupsOutput_nextToken = ListInvestigationGroupsOutput.AddMember("nextToken", _SensitiveStringWithLengthLimits)
-
-	ListInvestigationGroupsOutput_investigationGroups = ListInvestigationGroupsOutput.AddMember("investigationGroups", _InvestigationGroups)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _Tags)
-
-	PutInvestigationGroupPolicyRequest_identifier = PutInvestigationGroupPolicyRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	PutInvestigationGroupPolicyRequest_policy = PutInvestigationGroupPolicyRequest.AddMember("policy", _InvestigationGroupPolicyDocument)
-
-	PutInvestigationGroupPolicyResponse_investigationGroupArn = PutInvestigationGroupPolicyResponse.AddMember("investigationGroupArn", _InvestigationGroupArn)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateInvestigationGroupRequest_identifier = UpdateInvestigationGroupRequest.AddMember("identifier", _InvestigationGroupIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateInvestigationGroupRequest_roleArn = UpdateInvestigationGroupRequest.AddMember("roleArn", _RoleArn)
-
-	UpdateInvestigationGroupRequest_encryptionConfiguration = UpdateInvestigationGroupRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	UpdateInvestigationGroupRequest_tagKeyBoundaries = UpdateInvestigationGroupRequest.AddMember("tagKeyBoundaries", _TagKeyBoundaries)
-
-	UpdateInvestigationGroupRequest_chatbotNotificationChannel = UpdateInvestigationGroupRequest.AddMember("chatbotNotificationChannel", _ChatbotNotificationChannel)
-
-	UpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled = UpdateInvestigationGroupRequest.AddMember("isCloudTrailEventHistoryEnabled", smithyprelude.Boolean)
-
-	UpdateInvestigationGroupRequest_crossAccountConfigurations = UpdateInvestigationGroupRequest.AddMember("crossAccountConfigurations", _CrossAccountConfigurations)
-
+const blob = "" +
+	"IdentifierStringWithPatternAndLengthLimitsDeleteInvestigationGroupPolicyRequestDeleteInvestigationGr" +
+	"oupPolicyOutputGetInvestigationGroupPolicyResponsePutInvestigationGroupPolicyResponseGetInvestigatio" +
+	"nGroupPolicyRequestPutInvestigationGroupPolicyRequestInvestigationGroupPolicyDocumentDeleteInvestiga" +
+	"tionGroupRequestSensitiveStringWithLengthLimitsUpdateInvestigationGroupRequestisCloudTrailEventHisto" +
+	"ryEnabledCreateInvestigationGroupOutputUpdateInvestigationGroupOutputCreateInvestigationGroupInputGe" +
+	"tInvestigationGroupResponseListInvestigationGroupsOutputServiceQuotaExceededExceptionGetInvestigatio" +
+	"nGroupRequestInvestigationGroupIdentifierListInvestigationGroupsInputListInvestigationGroupsModelEnc" +
+	"ryptionConfigurationTypeChatbotNotificationChannelCrossAccountConfigurationsListTagsForResourceReque" +
+	"stchatbotNotificationChannelcrossAccountConfigurationsListTagsForResourceOutputResourceNotFoundExcep" +
+	"tionCUSTOMER_MANAGED_KMS_KEYInternalServerExceptionencryptionConfigurationAccessDeniedExceptionChatC" +
+	"onfigurationArnsInvestigationGroupArnUntagResourceResponseinvestigationGroupArnUntagResourceRequestT" +
+	"agResourceResponseThrottlingExceptionValidationExceptioninvestigationGroupsForbiddenExceptionTagReso" +
+	"urceRequestConflictExceptionTagKeyBoundariestagKeyBoundariesretentionInDayslastModifiedAtlastModifie" +
+	"dByAWS_OWNED_KEYsourceRoleArnresourceTypeSNSTopicArnresourceArnserviceCodeidentifiermaxResultsresour" +
+	"ceIdRetentioncreatedAtcreatedBynextTokenquotaCodeKmsKeyIdTagValuekmsKeyIdBooleanIntegerTagKeysmessag" +
+	"eroleArntagKeysmemberpolicyAIOpsvalueLongUnitnametagstypearnkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.aiops", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 409, Target: 0, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 42, Target: 1, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 42, Target: 2, Traits: 2, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 115, Target: 3, Traits: 3, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 115, Target: 4, Traits: 4, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 527, Target: 5, Traits: 5, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 776, Target: 6, Traits: 6, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 150, Target: 7, Traits: 7, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1099, Target: 8, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1037, Target: 9, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 347, Target: 10, Traits: 10, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1527, Target: 11, Traits: 11, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 974, Target: 12, Traits: 12, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1494, Target: 142, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 724, Target: 14, Traits: 11, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1560, Target: 57, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1532, Target: 18, Traits: 11, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 995, Target: 17, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 995, Target: 18, Traits: 11, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1515, Target: 17, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1211, Target: 20, Traits: 13, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1494, Target: 142, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 750, Target: 22, Traits: 11, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 49, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 750, Target: 24, Traits: 11, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1515, Target: 22, Traits: 11, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 697, Target: 26, Traits: 11, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1553, Target: 29, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1465, Target: 42, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 697, Target: 29, Traits: 11, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1303, Target: 143, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 904, Target: 143, Traits: 11, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1175, Target: 32, Traits: 12, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1494, Target: 142, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 34, Traits: 11, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 928, Target: 35, Traits: 14, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1494, Target: 142, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1016, Target: 37, Traits: 11, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 613, Target: 38, Traits: 11, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 253, Target: 39, Traits: 11, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 531, Target: 40, Traits: 11, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1515, Target: 43, Traits: 11, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1449, Target: 42, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 669, Target: 43, Traits: 11, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1557, Target: 37, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1545, Target: 58, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 879, Target: 46, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1494, Target: 142, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1404, Target: 48, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 1322, Target: 49, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 316, Target: 50, Traits: 16, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 556, Target: 51, Traits: 17, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1494, Target: 142, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1394, Target: 142, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1329, Target: 142, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1363, Target: 142, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1440, Target: 142, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1341, Target: 57, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10, Target: 58, Traits: 11, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1228, Target: 59, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1228, Target: 60, Traits: 11, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1515, Target: 59, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1487, Target: 62, Traits: 11, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1515, Target: 59, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 780, Target: 64, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1560, Target: 59, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1532, Target: 67, Traits: 11, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1457, Target: 67, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1118, Target: 68, Traits: 18, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1494, Target: 142, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1137, Target: 70, Traits: 19, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1494, Target: 142, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 469, Target: 72, Traits: 11, StrLen: 29, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1545, Target: 58, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1501, Target: 49, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 951, Target: 26, Traits: 11, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1260, Target: 48, Traits: 11, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1549, Target: 64, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1244, Target: 60, Traits: 11, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 802, Target: 14, Traits: 11, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 378, Target: 144, Traits: 11, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 828, Target: 24, Traits: 11, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 409, Target: 82, Traits: 11, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1557, Target: 37, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 285, Target: 84, Traits: 11, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1374, Target: 38, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 42, Target: 86, Traits: 11, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1374, Target: 38, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 79, Target: 88, Traits: 11, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 585, Target: 89, Traits: 11, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1374, Target: 38, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 498, Target: 91, Traits: 11, StrLen: 29, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1422, Target: 34, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1413, Target: 145, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1289, Target: 34, Traits: 11, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1275, Target: 145, Traits: 11, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1545, Target: 58, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1557, Target: 37, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1501, Target: 49, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 951, Target: 26, Traits: 11, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1260, Target: 48, Traits: 11, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 802, Target: 14, Traits: 11, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1244, Target: 60, Traits: 11, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 378, Target: 144, Traits: 11, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 828, Target: 24, Traits: 11, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 185, Target: 105, Traits: 11, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1374, Target: 38, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 115, Target: 107, Traits: 11, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1058, Target: 37, Traits: 11, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 39, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 641, Target: 110, Traits: 11, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1431, Target: 50, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1384, Target: 146, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 527, Target: 113, Traits: 11, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1431, Target: 50, Traits: 23, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1156, Target: 40, Traits: 11, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 776, Target: 116, Traits: 11, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1352, Target: 142, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 854, Target: 118, Traits: 11, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1549, Target: 64, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 219, Target: 120, Traits: 11, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1374, Target: 38, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 39, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 150, Target: 123, Traits: 11, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1058, Target: 37, Traits: 11, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1193, Target: 125, Traits: 11, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1352, Target: 142, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1549, Target: 64, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1099, Target: 128, Traits: 11, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1079, Target: 129, Traits: 11, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1352, Target: 142, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1508, Target: 62, Traits: 24, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1037, Target: 132, Traits: 11, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 347, Target: 133, Traits: 11, StrLen: 31, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1374, Target: 38, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1501, Target: 49, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 951, Target: 26, Traits: 11, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1244, Target: 60, Traits: 11, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 802, Target: 14, Traits: 11, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 378, Target: 144, Traits: 11, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 828, Target: 24, Traits: 11, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 439, Target: 141, Traits: 11, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10, Target: 142, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1541, Target: 143, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 1473, Target: 144, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 1537, Target: 145, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
+		{StrOff: 1480, Target: 146, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/investigationGroups",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/investigationGroups/{identifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/investigationGroups/{identifier}/policy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/investigationGroups/{identifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/investigationGroups/{identifier}/policy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/investigationGroups",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/investigationGroups/{identifier}/policy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/investigationGroups/{identifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [147]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+}
+
+var CreateInvestigationGroup = &handles[0]
+
+var DeleteInvestigationGroup = &handles[1]
+
+var DeleteInvestigationGroupPolicy = &handles[2]
+
+var GetInvestigationGroup = &handles[3]
+
+var GetInvestigationGroupPolicy = &handles[4]
+
+var ListInvestigationGroups = &handles[5]
+
+var ListTagsForResource = &handles[6]
+
+var PutInvestigationGroupPolicy = &handles[7]
+
+var TagResource = &handles[8]
+
+var UntagResource = &handles[9]
+
+var UpdateInvestigationGroup = &handles[10]
+
+var _AIOps = &handles[11]
+
+var AccessDeniedException = &handles[12]
+var AccessDeniedException_message = &handles[13]
+
+var _ChatbotNotificationChannel = &handles[14]
+var _ChatbotNotificationChannel_key = &handles[15]
+var _ChatbotNotificationChannel_value = &handles[16]
+
+var _ChatConfigurationArn = &handles[17]
+
+var _ChatConfigurationArns = &handles[18]
+var _ChatConfigurationArns_member = &handles[19]
+
+var ConflictException = &handles[20]
+var ConflictException_message = &handles[21]
+
+var CrossAccountConfiguration = &handles[22]
+var CrossAccountConfiguration_sourceRoleArn = &handles[23]
+
+var _CrossAccountConfigurations = &handles[24]
+var _CrossAccountConfigurations_member = &handles[25]
+
+var EncryptionConfiguration = &handles[26]
+var EncryptionConfiguration_type = &handles[27]
+var EncryptionConfiguration_kmsKeyId = &handles[28]
+
+var EncryptionConfigurationType = &handles[29]
+var EncryptionConfigurationType_AWS_OWNED_KEY = &handles[30]
+var EncryptionConfigurationType_CUSTOMER_MANAGED_KMS_KEY = &handles[31]
+
+var ForbiddenException = &handles[32]
+var ForbiddenException_message = &handles[33]
+
+var _IdentifierStringWithPatternAndLengthLimits = &handles[34]
+
+var InternalServerException = &handles[35]
+var InternalServerException_message = &handles[36]
+
+var _InvestigationGroupArn = &handles[37]
+
+var _InvestigationGroupIdentifier = &handles[38]
+
+var _InvestigationGroupPolicyDocument = &handles[39]
+
+var _InvestigationGroups = &handles[40]
+var _InvestigationGroups_member = &handles[41]
+
+var _KmsKeyId = &handles[42]
+
+var ListInvestigationGroupsModel = &handles[43]
+var ListInvestigationGroupsModel_arn = &handles[44]
+var ListInvestigationGroupsModel_name = &handles[45]
+
+var ResourceNotFoundException = &handles[46]
+var ResourceNotFoundException_message = &handles[47]
+
+var _Retention = &handles[48]
+
+var _RoleArn = &handles[49]
+
+var _SensitiveStringWithLengthLimits = &handles[50]
+
+var ServiceQuotaExceededException = &handles[51]
+var ServiceQuotaExceededException_message = &handles[52]
+var ServiceQuotaExceededException_resourceId = &handles[53]
+var ServiceQuotaExceededException_resourceType = &handles[54]
+var ServiceQuotaExceededException_serviceCode = &handles[55]
+var ServiceQuotaExceededException_quotaCode = &handles[56]
+
+var _SNSTopicArn = &handles[57]
+
+var _StringWithPatternAndLengthLimits = &handles[58]
+
+var _TagKey = &handles[59]
+
+var _TagKeyBoundaries = &handles[60]
+var _TagKeyBoundaries_member = &handles[61]
+
+var _TagKeys = &handles[62]
+var _TagKeys_member = &handles[63]
+
+var _Tags = &handles[64]
+var _Tags_key = &handles[65]
+var _Tags_value = &handles[66]
+
+var _TagValue = &handles[67]
+
+var ThrottlingException = &handles[68]
+var ThrottlingException_message = &handles[69]
+
+var ValidationException = &handles[70]
+var ValidationException_message = &handles[71]
+
+var CreateInvestigationGroupInput = &handles[72]
+var CreateInvestigationGroupInput_name = &handles[73]
+var CreateInvestigationGroupInput_roleArn = &handles[74]
+var CreateInvestigationGroupInput_encryptionConfiguration = &handles[75]
+var CreateInvestigationGroupInput_retentionInDays = &handles[76]
+var CreateInvestigationGroupInput_tags = &handles[77]
+var CreateInvestigationGroupInput_tagKeyBoundaries = &handles[78]
+var CreateInvestigationGroupInput_chatbotNotificationChannel = &handles[79]
+var CreateInvestigationGroupInput_isCloudTrailEventHistoryEnabled = &handles[80]
+var CreateInvestigationGroupInput_crossAccountConfigurations = &handles[81]
+
+var CreateInvestigationGroupOutput = &handles[82]
+var CreateInvestigationGroupOutput_arn = &handles[83]
+
+var DeleteInvestigationGroupRequest = &handles[84]
+var DeleteInvestigationGroupRequest_identifier = &handles[85]
+
+var DeleteInvestigationGroupPolicyRequest = &handles[86]
+var DeleteInvestigationGroupPolicyRequest_identifier = &handles[87]
+
+var DeleteInvestigationGroupPolicyOutput = &handles[88]
+
+var GetInvestigationGroupRequest = &handles[89]
+var GetInvestigationGroupRequest_identifier = &handles[90]
+
+var GetInvestigationGroupResponse = &handles[91]
+var GetInvestigationGroupResponse_createdBy = &handles[92]
+var GetInvestigationGroupResponse_createdAt = &handles[93]
+var GetInvestigationGroupResponse_lastModifiedBy = &handles[94]
+var GetInvestigationGroupResponse_lastModifiedAt = &handles[95]
+var GetInvestigationGroupResponse_name = &handles[96]
+var GetInvestigationGroupResponse_arn = &handles[97]
+var GetInvestigationGroupResponse_roleArn = &handles[98]
+var GetInvestigationGroupResponse_encryptionConfiguration = &handles[99]
+var GetInvestigationGroupResponse_retentionInDays = &handles[100]
+var GetInvestigationGroupResponse_chatbotNotificationChannel = &handles[101]
+var GetInvestigationGroupResponse_tagKeyBoundaries = &handles[102]
+var GetInvestigationGroupResponse_isCloudTrailEventHistoryEnabled = &handles[103]
+var GetInvestigationGroupResponse_crossAccountConfigurations = &handles[104]
+
+var GetInvestigationGroupPolicyRequest = &handles[105]
+var GetInvestigationGroupPolicyRequest_identifier = &handles[106]
+
+var GetInvestigationGroupPolicyResponse = &handles[107]
+var GetInvestigationGroupPolicyResponse_investigationGroupArn = &handles[108]
+var GetInvestigationGroupPolicyResponse_policy = &handles[109]
+
+var ListInvestigationGroupsInput = &handles[110]
+var ListInvestigationGroupsInput_nextToken = &handles[111]
+var ListInvestigationGroupsInput_maxResults = &handles[112]
+
+var ListInvestigationGroupsOutput = &handles[113]
+var ListInvestigationGroupsOutput_nextToken = &handles[114]
+var ListInvestigationGroupsOutput_investigationGroups = &handles[115]
+
+var ListTagsForResourceRequest = &handles[116]
+var ListTagsForResourceRequest_resourceArn = &handles[117]
+
+var ListTagsForResourceOutput = &handles[118]
+var ListTagsForResourceOutput_tags = &handles[119]
+
+var PutInvestigationGroupPolicyRequest = &handles[120]
+var PutInvestigationGroupPolicyRequest_identifier = &handles[121]
+var PutInvestigationGroupPolicyRequest_policy = &handles[122]
+
+var PutInvestigationGroupPolicyResponse = &handles[123]
+var PutInvestigationGroupPolicyResponse_investigationGroupArn = &handles[124]
+
+var TagResourceRequest = &handles[125]
+var TagResourceRequest_resourceArn = &handles[126]
+var TagResourceRequest_tags = &handles[127]
+
+var TagResourceResponse = &handles[128]
+
+var UntagResourceRequest = &handles[129]
+var UntagResourceRequest_resourceArn = &handles[130]
+var UntagResourceRequest_tagKeys = &handles[131]
+
+var UntagResourceResponse = &handles[132]
+
+var UpdateInvestigationGroupRequest = &handles[133]
+var UpdateInvestigationGroupRequest_identifier = &handles[134]
+var UpdateInvestigationGroupRequest_roleArn = &handles[135]
+var UpdateInvestigationGroupRequest_encryptionConfiguration = &handles[136]
+var UpdateInvestigationGroupRequest_tagKeyBoundaries = &handles[137]
+var UpdateInvestigationGroupRequest_chatbotNotificationChannel = &handles[138]
+var UpdateInvestigationGroupRequest_isCloudTrailEventHistoryEnabled = &handles[139]
+var UpdateInvestigationGroupRequest_crossAccountConfigurations = &handles[140]
+
+var UpdateInvestigationGroupOutput = &handles[141]
+
+var AIOps = &smithy.ServiceSchema{Schema: &handles[11], Version: "2018-05-10"}

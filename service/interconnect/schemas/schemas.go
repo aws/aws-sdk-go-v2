@@ -4,907 +4,774 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptConnectionProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AcceptConnectionProposal",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "CreateConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConnectionProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "DescribeConnectionProposal",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "GetConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "GetEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAttachPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListAttachPoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListEnvironments",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "UpdateConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var _Interconnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "Interconnect",
-}, smithy.ShapeTypeService, 0)
-
-var Interconnect = smithy.NewServiceSchema(_Interconnect, "2022-07-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ActivationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ActivationKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var AttachPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AttachPoint",
-}, smithy.ShapeTypeUnion, 2)
-var AttachPoint_directConnectGateway *smithy.Schema
-
-var AttachPoint_arn *smithy.Schema
-
-var AttachPointDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AttachPointDescriptor",
-}, smithy.ShapeTypeStructure, 3)
-var AttachPointDescriptor_type *smithy.Schema
-
-var AttachPointDescriptor_identifier *smithy.Schema
-
-var AttachPointDescriptor_name *smithy.Schema
-
-var _AttachPointDescriptorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AttachPointDescriptorList",
-}, smithy.ShapeTypeList, 1)
-var _AttachPointDescriptorList_member *smithy.Schema
-
-var AttachPointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AttachPointType",
-}, smithy.ShapeTypeEnum, 1)
-var AttachPointType_DirectConnectGateway *smithy.Schema
-
-var _BandwidthList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "BandwidthList",
-}, smithy.ShapeTypeList, 1)
-var _BandwidthList_member *smithy.Schema
-
-var Bandwidths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "Bandwidths",
-}, smithy.ShapeTypeStructure, 2)
-var Bandwidths_available *smithy.Schema
-
-var Bandwidths_supported *smithy.Schema
-
-var _BillingTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "BillingTier",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CloudServiceProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "CloudServiceProvider",
-}, smithy.ShapeTypeString, 0)
-
-var Connection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "Connection",
-}, smithy.ShapeTypeStructure, 15)
-var Connection_id *smithy.Schema
-
-var Connection_arn *smithy.Schema
-
-var Connection_description *smithy.Schema
-
-var Connection_bandwidth *smithy.Schema
-
-var Connection_attachPoint *smithy.Schema
-
-var Connection_environmentId *smithy.Schema
-
-var Connection_provider *smithy.Schema
-
-var Connection_location *smithy.Schema
-
-var Connection_type *smithy.Schema
-
-var Connection_state *smithy.Schema
-
-var Connection_sharedId *smithy.Schema
-
-var Connection_billingTier *smithy.Schema
-
-var Connection_ownerAccount *smithy.Schema
-
-var Connection_activationKey *smithy.Schema
-
-var Connection_tags *smithy.Schema
-
-var _ConnectionBandwidth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ConnectionBandwidth",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ConnectionDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ConnectionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectionSharedId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ConnectionSharedId",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ConnectionState",
-}, smithy.ShapeTypeEnum, 8)
-var ConnectionState_AVAILABLE *smithy.Schema
-
-var ConnectionState_REQUESTED *smithy.Schema
-
-var ConnectionState_PENDING *smithy.Schema
-
-var ConnectionState_DOWN *smithy.Schema
-
-var ConnectionState_DELETING *smithy.Schema
-
-var ConnectionState_DELETED *smithy.Schema
-
-var ConnectionState_FAILED *smithy.Schema
-
-var ConnectionState_UPDATING *smithy.Schema
-
-var _ConnectionSummariesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ConnectionSummariesList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionSummariesList_member *smithy.Schema
-
-var ConnectionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ConnectionSummary",
-}, smithy.ShapeTypeStructure, 12)
-var ConnectionSummary_id *smithy.Schema
-
-var ConnectionSummary_arn *smithy.Schema
-
-var ConnectionSummary_description *smithy.Schema
-
-var ConnectionSummary_bandwidth *smithy.Schema
-
-var ConnectionSummary_attachPoint *smithy.Schema
-
-var ConnectionSummary_environmentId *smithy.Schema
-
-var ConnectionSummary_provider *smithy.Schema
-
-var ConnectionSummary_location *smithy.Schema
-
-var ConnectionSummary_type *smithy.Schema
-
-var ConnectionSummary_state *smithy.Schema
-
-var ConnectionSummary_sharedId *smithy.Schema
-
-var ConnectionSummary_billingTier *smithy.Schema
-
-var _DirectConnectGatewayAttachPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "DirectConnectGatewayAttachPoint",
-}, smithy.ShapeTypeString, 0)
-
-var Environment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "Environment",
-}, smithy.ShapeTypeStructure, 8)
-var Environment_provider *smithy.Schema
-
-var Environment_location *smithy.Schema
-
-var Environment_environmentId *smithy.Schema
-
-var Environment_state *smithy.Schema
-
-var Environment_bandwidths *smithy.Schema
-
-var Environment_type *smithy.Schema
-
-var Environment_activationPageUrl *smithy.Schema
-
-var Environment_remoteIdentifierType *smithy.Schema
-
-var _EnvironmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "EnvironmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "EnvironmentList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentList_member *smithy.Schema
-
-var EnvironmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "EnvironmentState",
-}, smithy.ShapeTypeEnum, 3)
-var EnvironmentState_AVAILABLE *smithy.Schema
-
-var EnvironmentState_LIMITED *smithy.Schema
-
-var EnvironmentState_UNAVAILABLE *smithy.Schema
-
-var InterconnectClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "InterconnectClientException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InterconnectClientException_message *smithy.Schema
-
-var InterconnectServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "InterconnectServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InterconnectServerException_message *smithy.Schema
-
-var InterconnectValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "InterconnectValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InterconnectValidationException_message *smithy.Schema
-
-var _LastMileProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "LastMileProvider",
-}, smithy.ShapeTypeString, 0)
-
-var _Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "Location",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OwnerAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "OwnerAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _ProductType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ProductType",
-}, smithy.ShapeTypeString, 0)
-
-var Provider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "Provider",
-}, smithy.ShapeTypeUnion, 2)
-var Provider_cloudServiceProvider *smithy.Schema
-
-var Provider_lastMileProvider *smithy.Schema
-
-var RemoteAccountIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "RemoteAccountIdentifier",
-}, smithy.ShapeTypeUnion, 1)
-var RemoteAccountIdentifier_identifier *smithy.Schema
-
-var RemoteAccountIdentifierType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "RemoteAccountIdentifierType",
-}, smithy.ShapeTypeEnum, 2)
-var RemoteAccountIdentifierType_ACCOUNT *smithy.Schema
-
-var RemoteAccountIdentifierType_EMAIL *smithy.Schema
-
-var _RemoteOwnerAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "RemoteOwnerAccount",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var AcceptConnectionProposalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AcceptConnectionProposalRequest",
-}, smithy.ShapeTypeStructure, 5)
-var AcceptConnectionProposalRequest_attachPoint *smithy.Schema
-
-var AcceptConnectionProposalRequest_activationKey *smithy.Schema
-
-var AcceptConnectionProposalRequest_description *smithy.Schema
-
-var AcceptConnectionProposalRequest_tags *smithy.Schema
-
-var AcceptConnectionProposalRequest_clientToken *smithy.Schema
-
-var AcceptConnectionProposalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "AcceptConnectionProposalResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptConnectionProposalResponse_connection *smithy.Schema
-
-var CreateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "CreateConnectionRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateConnectionRequest_description *smithy.Schema
-
-var CreateConnectionRequest_bandwidth *smithy.Schema
-
-var CreateConnectionRequest_attachPoint *smithy.Schema
-
-var CreateConnectionRequest_environmentId *smithy.Schema
-
-var CreateConnectionRequest_remoteAccount *smithy.Schema
-
-var CreateConnectionRequest_tags *smithy.Schema
-
-var CreateConnectionRequest_clientToken *smithy.Schema
-
-var CreateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "CreateConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectionResponse_connection *smithy.Schema
-
-var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "DeleteConnectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConnectionRequest_identifier *smithy.Schema
-
-var DeleteConnectionRequest_clientToken *smithy.Schema
-
-var DeleteConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "DeleteConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionResponse_connection *smithy.Schema
-
-var DescribeConnectionProposalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "DescribeConnectionProposalRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectionProposalRequest_activationKey *smithy.Schema
-
-var DescribeConnectionProposalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "DescribeConnectionProposalResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeConnectionProposalResponse_bandwidth *smithy.Schema
-
-var DescribeConnectionProposalResponse_environmentId *smithy.Schema
-
-var DescribeConnectionProposalResponse_provider *smithy.Schema
-
-var DescribeConnectionProposalResponse_location *smithy.Schema
-
-var GetConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "GetConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectionRequest_identifier *smithy.Schema
-
-var GetConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "GetConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectionResponse_connection *smithy.Schema
-
-var GetEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "GetEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentRequest_id *smithy.Schema
-
-var GetEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "GetEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentResponse_environment *smithy.Schema
-
-var ListAttachPointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListAttachPointsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAttachPointsRequest_environmentId *smithy.Schema
-
-var ListAttachPointsRequest_maxResults *smithy.Schema
-
-var ListAttachPointsRequest_nextToken *smithy.Schema
-
-var ListAttachPointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListAttachPointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttachPointsResponse_attachPoints *smithy.Schema
-
-var ListAttachPointsResponse_nextToken *smithy.Schema
-
-var ListConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListConnectionsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListConnectionsRequest_maxResults *smithy.Schema
-
-var ListConnectionsRequest_nextToken *smithy.Schema
-
-var ListConnectionsRequest_state *smithy.Schema
-
-var ListConnectionsRequest_environmentId *smithy.Schema
-
-var ListConnectionsRequest_provider *smithy.Schema
-
-var ListConnectionsRequest_attachPoint *smithy.Schema
-
-var ListConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectionsResponse_connections *smithy.Schema
-
-var ListConnectionsResponse_nextToken *smithy.Schema
-
-var ListEnvironmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListEnvironmentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListEnvironmentsRequest_maxResults *smithy.Schema
-
-var ListEnvironmentsRequest_nextToken *smithy.Schema
-
-var ListEnvironmentsRequest_provider *smithy.Schema
-
-var ListEnvironmentsRequest_location *smithy.Schema
-
-var ListEnvironmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListEnvironmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentsResponse_environments *smithy.Schema
-
-var ListEnvironmentsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_arn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_arn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_arn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "UpdateConnectionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConnectionRequest_identifier *smithy.Schema
-
-var UpdateConnectionRequest_description *smithy.Schema
-
-var UpdateConnectionRequest_bandwidth *smithy.Schema
-
-var UpdateConnectionRequest_clientToken *smithy.Schema
-
-var UpdateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.interconnect",
-	Name:      "UpdateConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateConnectionResponse_connection *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AttachPoint_directConnectGateway = AttachPoint.AddMember("directConnectGateway", _DirectConnectGatewayAttachPoint)
-
-	AttachPoint_arn = AttachPoint.AddMember("arn", _AmazonResourceName)
-
-	AttachPointType_DirectConnectGateway = AttachPointType.AddMember("DirectConnectGateway", smithyprelude.Unit)
-
-	AttachPointDescriptor_type = AttachPointDescriptor.AddMember("type", AttachPointType)
-
-	AttachPointDescriptor_identifier = AttachPointDescriptor.AddMember("identifier", smithyprelude.String)
-
-	AttachPointDescriptor_name = AttachPointDescriptor.AddMember("name", smithyprelude.String)
-
-	_AttachPointDescriptorList_member = _AttachPointDescriptorList.AddMember("member", AttachPointDescriptor)
-
-	_BandwidthList_member = _BandwidthList.AddMember("member", _ConnectionBandwidth)
-
-	Bandwidths_available = Bandwidths.AddMember("available", _BandwidthList)
-
-	Bandwidths_supported = Bandwidths.AddMember("supported", _BandwidthList)
-
-	Provider_cloudServiceProvider = Provider.AddMember("cloudServiceProvider", _CloudServiceProvider)
-
-	Provider_lastMileProvider = Provider.AddMember("lastMileProvider", _LastMileProvider)
-
-	ConnectionState_AVAILABLE = ConnectionState.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ConnectionState_REQUESTED = ConnectionState.AddMember("REQUESTED", smithyprelude.Unit)
-
-	ConnectionState_PENDING = ConnectionState.AddMember("PENDING", smithyprelude.Unit)
-
-	ConnectionState_DOWN = ConnectionState.AddMember("DOWN", smithyprelude.Unit)
-
-	ConnectionState_DELETING = ConnectionState.AddMember("DELETING", smithyprelude.Unit)
-
-	ConnectionState_DELETED = ConnectionState.AddMember("DELETED", smithyprelude.Unit)
-
-	ConnectionState_FAILED = ConnectionState.AddMember("FAILED", smithyprelude.Unit)
-
-	ConnectionState_UPDATING = ConnectionState.AddMember("UPDATING", smithyprelude.Unit)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	Connection_id = Connection.AddMember("id", _ConnectionId)
-
-	Connection_arn = Connection.AddMember("arn", _AmazonResourceName)
-
-	Connection_description = Connection.AddMember("description", _ConnectionDescription)
-
-	Connection_bandwidth = Connection.AddMember("bandwidth", _ConnectionBandwidth)
-
-	Connection_attachPoint = Connection.AddMember("attachPoint", AttachPoint)
-
-	Connection_environmentId = Connection.AddMember("environmentId", _EnvironmentId)
-
-	Connection_provider = Connection.AddMember("provider", Provider)
-
-	Connection_location = Connection.AddMember("location", _Location)
-
-	Connection_type = Connection.AddMember("type", _ProductType)
-
-	Connection_state = Connection.AddMember("state", ConnectionState)
-
-	Connection_sharedId = Connection.AddMember("sharedId", _ConnectionSharedId)
-
-	Connection_billingTier = Connection.AddMember("billingTier", _BillingTier)
-
-	Connection_ownerAccount = Connection.AddMember("ownerAccount", _OwnerAccountId)
-
-	Connection_activationKey = Connection.AddMember("activationKey", _ActivationKey)
-
-	Connection_tags = Connection.AddMember("tags", _TagMap)
-
-	ConnectionSummary_id = ConnectionSummary.AddMember("id", _ConnectionId)
-
-	ConnectionSummary_arn = ConnectionSummary.AddMember("arn", _AmazonResourceName)
-
-	ConnectionSummary_description = ConnectionSummary.AddMember("description", _ConnectionDescription)
-
-	ConnectionSummary_bandwidth = ConnectionSummary.AddMember("bandwidth", _ConnectionBandwidth)
-
-	ConnectionSummary_attachPoint = ConnectionSummary.AddMember("attachPoint", AttachPoint)
-
-	ConnectionSummary_environmentId = ConnectionSummary.AddMember("environmentId", _EnvironmentId)
-
-	ConnectionSummary_provider = ConnectionSummary.AddMember("provider", Provider)
-
-	ConnectionSummary_location = ConnectionSummary.AddMember("location", _Location)
-
-	ConnectionSummary_type = ConnectionSummary.AddMember("type", _ProductType)
-
-	ConnectionSummary_state = ConnectionSummary.AddMember("state", ConnectionState)
-
-	ConnectionSummary_sharedId = ConnectionSummary.AddMember("sharedId", _ConnectionSharedId)
-
-	ConnectionSummary_billingTier = ConnectionSummary.AddMember("billingTier", _BillingTier)
-
-	_ConnectionSummariesList_member = _ConnectionSummariesList.AddMember("member", ConnectionSummary)
-
-	EnvironmentState_AVAILABLE = EnvironmentState.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	EnvironmentState_LIMITED = EnvironmentState.AddMember("LIMITED", smithyprelude.Unit)
-
-	EnvironmentState_UNAVAILABLE = EnvironmentState.AddMember("UNAVAILABLE", smithyprelude.Unit)
-
-	RemoteAccountIdentifierType_ACCOUNT = RemoteAccountIdentifierType.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	RemoteAccountIdentifierType_EMAIL = RemoteAccountIdentifierType.AddMember("EMAIL", smithyprelude.Unit)
-
-	Environment_provider = Environment.AddMember("provider", Provider)
-
-	Environment_location = Environment.AddMember("location", _Location)
-
-	Environment_environmentId = Environment.AddMember("environmentId", _EnvironmentId)
-
-	Environment_state = Environment.AddMember("state", EnvironmentState)
-
-	Environment_bandwidths = Environment.AddMember("bandwidths", Bandwidths)
-
-	Environment_type = Environment.AddMember("type", _ProductType)
-
-	Environment_activationPageUrl = Environment.AddMember("activationPageUrl", smithyprelude.String)
-
-	Environment_remoteIdentifierType = Environment.AddMember("remoteIdentifierType", RemoteAccountIdentifierType)
-
-	_EnvironmentList_member = _EnvironmentList.AddMember("member", Environment)
-
-	InterconnectClientException_message = InterconnectClientException.AddMember("message", smithyprelude.String)
-
-	InterconnectServerException_message = InterconnectServerException.AddMember("message", smithyprelude.String)
-
-	InterconnectValidationException_message = InterconnectValidationException.AddMember("message", smithyprelude.String)
-
-	RemoteAccountIdentifier_identifier = RemoteAccountIdentifier.AddMember("identifier", _RemoteOwnerAccount)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	AcceptConnectionProposalRequest_attachPoint = AcceptConnectionProposalRequest.AddMember("attachPoint", AttachPoint)
-
-	AcceptConnectionProposalRequest_activationKey = AcceptConnectionProposalRequest.AddMember("activationKey", _ActivationKey)
-
-	AcceptConnectionProposalRequest_description = AcceptConnectionProposalRequest.AddMember("description", _ConnectionDescription)
-
-	AcceptConnectionProposalRequest_tags = AcceptConnectionProposalRequest.AddMember("tags", _TagMap)
-
-	AcceptConnectionProposalRequest_clientToken = AcceptConnectionProposalRequest.AddMember("clientToken", smithyprelude.String)
-
-	AcceptConnectionProposalResponse_connection = AcceptConnectionProposalResponse.AddMember("connection", Connection)
-
-	CreateConnectionRequest_description = CreateConnectionRequest.AddMember("description", _ConnectionDescription)
-
-	CreateConnectionRequest_bandwidth = CreateConnectionRequest.AddMember("bandwidth", _ConnectionBandwidth)
-
-	CreateConnectionRequest_attachPoint = CreateConnectionRequest.AddMember("attachPoint", AttachPoint)
-
-	CreateConnectionRequest_environmentId = CreateConnectionRequest.AddMember("environmentId", _EnvironmentId)
-
-	CreateConnectionRequest_remoteAccount = CreateConnectionRequest.AddMember("remoteAccount", RemoteAccountIdentifier)
-
-	CreateConnectionRequest_tags = CreateConnectionRequest.AddMember("tags", _TagMap)
-
-	CreateConnectionRequest_clientToken = CreateConnectionRequest.AddMember("clientToken", smithyprelude.String)
-
-	CreateConnectionResponse_connection = CreateConnectionResponse.AddMember("connection", Connection)
-
-	DeleteConnectionRequest_identifier = DeleteConnectionRequest.AddMember("identifier", _ConnectionId)
-
-	DeleteConnectionRequest_clientToken = DeleteConnectionRequest.AddMember("clientToken", smithyprelude.String)
-
-	DeleteConnectionResponse_connection = DeleteConnectionResponse.AddMember("connection", Connection)
-
-	DescribeConnectionProposalRequest_activationKey = DescribeConnectionProposalRequest.AddMember("activationKey", _ActivationKey)
-
-	DescribeConnectionProposalResponse_bandwidth = DescribeConnectionProposalResponse.AddMember("bandwidth", _ConnectionBandwidth)
-
-	DescribeConnectionProposalResponse_environmentId = DescribeConnectionProposalResponse.AddMember("environmentId", _EnvironmentId)
-
-	DescribeConnectionProposalResponse_provider = DescribeConnectionProposalResponse.AddMember("provider", Provider)
-
-	DescribeConnectionProposalResponse_location = DescribeConnectionProposalResponse.AddMember("location", _Location)
-
-	GetConnectionRequest_identifier = GetConnectionRequest.AddMember("identifier", _ConnectionId)
-
-	GetConnectionResponse_connection = GetConnectionResponse.AddMember("connection", Connection)
-
-	GetEnvironmentRequest_id = GetEnvironmentRequest.AddMember("id", _EnvironmentId)
-
-	GetEnvironmentResponse_environment = GetEnvironmentResponse.AddMember("environment", Environment)
-
-	ListAttachPointsRequest_environmentId = ListAttachPointsRequest.AddMember("environmentId", _EnvironmentId)
-
-	ListAttachPointsRequest_maxResults = ListAttachPointsRequest.AddMember("maxResults", _MaxResults)
-
-	ListAttachPointsRequest_nextToken = ListAttachPointsRequest.AddMember("nextToken", _NextToken)
-
-	ListAttachPointsResponse_attachPoints = ListAttachPointsResponse.AddMember("attachPoints", _AttachPointDescriptorList)
-
-	ListAttachPointsResponse_nextToken = ListAttachPointsResponse.AddMember("nextToken", _NextToken)
-
-	ListConnectionsRequest_maxResults = ListConnectionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListConnectionsRequest_nextToken = ListConnectionsRequest.AddMember("nextToken", _NextToken)
-
-	ListConnectionsRequest_state = ListConnectionsRequest.AddMember("state", ConnectionState)
-
-	ListConnectionsRequest_environmentId = ListConnectionsRequest.AddMember("environmentId", _EnvironmentId)
-
-	ListConnectionsRequest_provider = ListConnectionsRequest.AddMember("provider", Provider)
-
-	ListConnectionsRequest_attachPoint = ListConnectionsRequest.AddMember("attachPoint", AttachPoint)
-
-	ListConnectionsResponse_connections = ListConnectionsResponse.AddMember("connections", _ConnectionSummariesList)
-
-	ListConnectionsResponse_nextToken = ListConnectionsResponse.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentsRequest_maxResults = ListEnvironmentsRequest.AddMember("maxResults", _MaxResults)
-
-	ListEnvironmentsRequest_nextToken = ListEnvironmentsRequest.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentsRequest_provider = ListEnvironmentsRequest.AddMember("provider", Provider)
-
-	ListEnvironmentsRequest_location = ListEnvironmentsRequest.AddMember("location", _Location)
-
-	ListEnvironmentsResponse_environments = ListEnvironmentsResponse.AddMember("environments", _EnvironmentList)
-
-	ListEnvironmentsResponse_nextToken = ListEnvironmentsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_arn = ListTagsForResourceRequest.AddMember("arn", _AmazonResourceName)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	TagResourceRequest_arn = TagResourceRequest.AddMember("arn", _AmazonResourceName)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_arn = UntagResourceRequest.AddMember("arn", _AmazonResourceName)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-	UpdateConnectionRequest_identifier = UpdateConnectionRequest.AddMember("identifier", _ConnectionId)
-
-	UpdateConnectionRequest_description = UpdateConnectionRequest.AddMember("description", _ConnectionDescription)
-
-	UpdateConnectionRequest_bandwidth = UpdateConnectionRequest.AddMember("bandwidth", _ConnectionBandwidth)
-
-	UpdateConnectionRequest_clientToken = UpdateConnectionRequest.AddMember("clientToken", smithyprelude.String)
-
-	UpdateConnectionResponse_connection = UpdateConnectionResponse.AddMember("connection", Connection)
-
+const blob = "" +
+	"DescribeConnectionProposalResponseDescribeConnectionProposalRequestAcceptConnectionProposalResponseA" +
+	"cceptConnectionProposalRequestDirectConnectGatewayAttachPointInterconnectValidationExceptionServiceQ" +
+	"uotaExceededExceptionInterconnectClientExceptionInterconnectServerExceptionListTagsForResourceRespon" +
+	"seRemoteAccountIdentifierTypeListTagsForResourceRequestAttachPointDescriptorListResourceNotFoundExce" +
+	"ptionCreateConnectionResponseDeleteConnectionResponseListAttachPointsResponseListEnvironmentsRespons" +
+	"eUpdateConnectionResponseConnectionSummariesListCreateConnectionRequestDeleteConnectionRequestListAt" +
+	"tachPointsRequestListConnectionsResponseListEnvironmentsRequestUpdateConnectionRequestGetEnvironment" +
+	"ResponseListConnectionsRequestAccessDeniedExceptionConnectionDescriptionGetConnectionResponseGetEnvi" +
+	"ronmentRequestUntagResourceResponseCloudServiceProviderGetConnectionRequestUntagResourceRequestcloud" +
+	"ServiceProviderdirectConnectGatewayremoteIdentifierTypeConnectionBandwidthTagResourceResponseThrottl" +
+	"ingExceptionAmazonResourceNameConnectionSharedIdRemoteOwnerAccountTagResourceRequestConnectionSummar" +
+	"yactivationPageUrlEnvironmentStateLastMileProviderlastMileProviderAttachPointTypeConnectionStateEnvi" +
+	"ronmentListOwnerAccountIdActivationKeyBandwidthListEnvironmentIdactivationKeyenvironmentIdremoteAcco" +
+	"untConnectionIdattachPointsenvironmentsownerAccountBillingTierProductTypeUNAVAILABLEbillingTierclien" +
+	"tTokenconnectionsdescriptionBandwidthsMaxResultsTagKeyListbandwidthsidentifiermaxResultsNextTokenREQ" +
+	"UESTEDavailablenextTokensupportedDELETINGLocationTagValueUPDATINGlocationprovidersharedIdACCOUNTDELE" +
+	"TEDLIMITEDPENDINGmessagetagKeysFAILEDStringTagMapmemberEMAILstatevalueDOWNUnitnametagstypearnkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.interconnect", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 67, Target: 0, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 405, Target: 1, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 429, Target: 2, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 3, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 772, Target: 4, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 686, Target: 5, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 453, Target: 6, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 617, Target: 7, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 477, Target: 8, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 275, Target: 9, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 974, Target: 10, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 814, Target: 11, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 501, Target: 12, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 161, Target: 13, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 730, Target: 14, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1617, Target: 213, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1225, Target: 16, Traits: 2, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1012, Target: 17, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 150, Target: 18, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 915, Target: 80, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1690, Target: 17, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 355, Target: 21, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1686, Target: 27, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1468, Target: 213, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1678, Target: 213, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 355, Target: 25, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1649, Target: 21, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1166, Target: 27, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 130, Target: 214, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1238, Target: 29, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1649, Target: 52, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1428, Target: 31, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1506, Target: 29, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1524, Target: 29, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1351, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 835, Target: 35, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8, Target: 36, Traits: 0, StrLen: 10, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 176, Target: 54, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1690, Target: 17, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1417, Target: 53, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1458, Target: 52, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1315, Target: 18, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1277, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1573, Target: 109, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1565, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1686, Target: 108, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1660, Target: 56, Traits: 0, StrLen: 5, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1581, Target: 55, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1384, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1339, Target: 107, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1264, Target: 16, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 125, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 955, Target: 52, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 751, Target: 53, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1303, Target: 54, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1030, Target: 55, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1181, Target: 56, Traits: 0, StrLen: 15, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1375, Target: 214, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1497, Target: 214, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1610, Target: 214, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1670, Target: 214, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1533, Target: 214, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1596, Target: 214, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1631, Target: 214, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1557, Target: 214, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 525, Target: 65, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1649, Target: 67, Traits: 0, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1084, Target: 67, Traits: 0, StrLen: 17, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 176, Target: 54, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1690, Target: 17, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1417, Target: 53, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1458, Target: 52, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1315, Target: 18, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1277, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1573, Target: 109, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1565, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1686, Target: 108, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1660, Target: 56, Traits: 0, StrLen: 5, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1581, Target: 55, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1384, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 130, Target: 80, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 481, Target: 81, Traits: 0, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1573, Target: 109, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1565, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1277, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1660, Target: 93, Traits: 0, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1458, Target: 31, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1686, Target: 108, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1101, Target: 213, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 935, Target: 114, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1251, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1196, Target: 91, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1649, Target: 81, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1118, Target: 93, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1375, Target: 214, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1603, Target: 214, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1373, Target: 214, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 221, Target: 97, Traits: 4, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1617, Target: 213, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 248, Target: 99, Traits: 5, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1617, Target: 213, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 161, Target: 101, Traits: 4, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1617, Target: 213, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1134, Target: 103, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1541, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1438, Target: 105, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1488, Target: 106, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1211, Target: 107, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1362, Target: 108, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 847, Target: 109, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 895, Target: 35, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1150, Target: 103, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 302, Target: 112, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1468, Target: 117, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 302, Target: 114, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1589, Target: 214, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1655, Target: 214, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1048, Target: 117, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 380, Target: 118, Traits: 6, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1617, Target: 213, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 192, Target: 120, Traits: 7, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1617, Target: 213, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1448, Target: 122, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1448, Target: 123, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1649, Target: 122, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1643, Target: 125, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1693, Target: 122, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1665, Target: 128, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1549, Target: 128, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 993, Target: 129, Traits: 8, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1617, Target: 213, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 99, Target: 131, Traits: 0, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 18, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1264, Target: 16, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1417, Target: 53, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 125, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1395, Target: 213, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 67, Target: 137, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1406, Target: 36, Traits: 0, StrLen: 10, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 548, Target: 139, Traits: 0, StrLen: 23, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1417, Target: 53, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1458, Target: 52, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1315, Target: 18, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1277, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1290, Target: 112, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1682, Target: 125, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1395, Target: 213, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 405, Target: 147, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1406, Target: 36, Traits: 0, StrLen: 10, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 571, Target: 149, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1468, Target: 54, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1395, Target: 213, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 429, Target: 152, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1406, Target: 36, Traits: 0, StrLen: 10, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 34, Target: 154, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1264, Target: 16, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 156, Traits: 0, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1458, Target: 52, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1277, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1573, Target: 109, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1565, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 855, Target: 161, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1468, Target: 54, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 772, Target: 163, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1406, Target: 36, Traits: 0, StrLen: 10, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 793, Target: 165, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 176, Target: 90, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 686, Target: 167, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1277, Target: 81, Traits: 0, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 594, Target: 169, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1277, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1478, Target: 105, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1515, Target: 106, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 453, Target: 173, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 25, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1515, Target: 106, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 708, Target: 176, Traits: 0, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1478, Target: 105, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1515, Target: 106, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1660, Target: 56, Traits: 0, StrLen: 5, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1277, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1573, Target: 109, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1315, Target: 18, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 617, Target: 183, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1406, Target: 65, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1515, Target: 106, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 640, Target: 186, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1478, Target: 105, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1515, Target: 106, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1573, Target: 109, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1565, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 477, Target: 191, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1327, Target: 91, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1515, Target: 213, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 329, Target: 194, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1690, Target: 17, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 275, Target: 196, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1682, Target: 125, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1066, Target: 198, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1690, Target: 17, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 125, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 974, Target: 201, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 875, Target: 202, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1690, Target: 17, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1624, Target: 123, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 814, Target: 205, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 663, Target: 206, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1468, Target: 54, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1417, Target: 53, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1458, Target: 52, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1395, Target: 213, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 501, Target: 211, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1406, Target: 36, Traits: 0, StrLen: 10, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1637, Target: 213, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1674, Target: 214, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [215]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+}
+
+var AcceptConnectionProposal = &handles[0]
+
+var CreateConnection = &handles[1]
+
+var DeleteConnection = &handles[2]
+
+var DescribeConnectionProposal = &handles[3]
+
+var GetConnection = &handles[4]
+
+var GetEnvironment = &handles[5]
+
+var ListAttachPoints = &handles[6]
+
+var ListConnections = &handles[7]
+
+var ListEnvironments = &handles[8]
+
+var ListTagsForResource = &handles[9]
+
+var TagResource = &handles[10]
+
+var UntagResource = &handles[11]
+
+var UpdateConnection = &handles[12]
+
+var _Interconnect = &handles[13]
+
+var AccessDeniedException = &handles[14]
+var AccessDeniedException_message = &handles[15]
+
+var _ActivationKey = &handles[16]
+
+var _AmazonResourceName = &handles[17]
+
+var AttachPoint = &handles[18]
+var AttachPoint_directConnectGateway = &handles[19]
+var AttachPoint_arn = &handles[20]
+
+var AttachPointDescriptor = &handles[21]
+var AttachPointDescriptor_type = &handles[22]
+var AttachPointDescriptor_identifier = &handles[23]
+var AttachPointDescriptor_name = &handles[24]
+
+var _AttachPointDescriptorList = &handles[25]
+var _AttachPointDescriptorList_member = &handles[26]
+
+var AttachPointType = &handles[27]
+var AttachPointType_DirectConnectGateway = &handles[28]
+
+var _BandwidthList = &handles[29]
+var _BandwidthList_member = &handles[30]
+
+var Bandwidths = &handles[31]
+var Bandwidths_available = &handles[32]
+var Bandwidths_supported = &handles[33]
+
+var _BillingTier = &handles[34]
+
+var _CloudServiceProvider = &handles[35]
+
+var Connection = &handles[36]
+var Connection_id = &handles[37]
+var Connection_arn = &handles[38]
+var Connection_description = &handles[39]
+var Connection_bandwidth = &handles[40]
+var Connection_attachPoint = &handles[41]
+var Connection_environmentId = &handles[42]
+var Connection_provider = &handles[43]
+var Connection_location = &handles[44]
+var Connection_type = &handles[45]
+var Connection_state = &handles[46]
+var Connection_sharedId = &handles[47]
+var Connection_billingTier = &handles[48]
+var Connection_ownerAccount = &handles[49]
+var Connection_activationKey = &handles[50]
+var Connection_tags = &handles[51]
+
+var _ConnectionBandwidth = &handles[52]
+
+var _ConnectionDescription = &handles[53]
+
+var _ConnectionId = &handles[54]
+
+var _ConnectionSharedId = &handles[55]
+
+var ConnectionState = &handles[56]
+var ConnectionState_AVAILABLE = &handles[57]
+var ConnectionState_REQUESTED = &handles[58]
+var ConnectionState_PENDING = &handles[59]
+var ConnectionState_DOWN = &handles[60]
+var ConnectionState_DELETING = &handles[61]
+var ConnectionState_DELETED = &handles[62]
+var ConnectionState_FAILED = &handles[63]
+var ConnectionState_UPDATING = &handles[64]
+
+var _ConnectionSummariesList = &handles[65]
+var _ConnectionSummariesList_member = &handles[66]
+
+var ConnectionSummary = &handles[67]
+var ConnectionSummary_id = &handles[68]
+var ConnectionSummary_arn = &handles[69]
+var ConnectionSummary_description = &handles[70]
+var ConnectionSummary_bandwidth = &handles[71]
+var ConnectionSummary_attachPoint = &handles[72]
+var ConnectionSummary_environmentId = &handles[73]
+var ConnectionSummary_provider = &handles[74]
+var ConnectionSummary_location = &handles[75]
+var ConnectionSummary_type = &handles[76]
+var ConnectionSummary_state = &handles[77]
+var ConnectionSummary_sharedId = &handles[78]
+var ConnectionSummary_billingTier = &handles[79]
+
+var _DirectConnectGatewayAttachPoint = &handles[80]
+
+var Environment = &handles[81]
+var Environment_provider = &handles[82]
+var Environment_location = &handles[83]
+var Environment_environmentId = &handles[84]
+var Environment_state = &handles[85]
+var Environment_bandwidths = &handles[86]
+var Environment_type = &handles[87]
+var Environment_activationPageUrl = &handles[88]
+var Environment_remoteIdentifierType = &handles[89]
+
+var _EnvironmentId = &handles[90]
+
+var _EnvironmentList = &handles[91]
+var _EnvironmentList_member = &handles[92]
+
+var EnvironmentState = &handles[93]
+var EnvironmentState_AVAILABLE = &handles[94]
+var EnvironmentState_LIMITED = &handles[95]
+var EnvironmentState_UNAVAILABLE = &handles[96]
+
+var InterconnectClientException = &handles[97]
+var InterconnectClientException_message = &handles[98]
+
+var InterconnectServerException = &handles[99]
+var InterconnectServerException_message = &handles[100]
+
+var InterconnectValidationException = &handles[101]
+var InterconnectValidationException_message = &handles[102]
+
+var _LastMileProvider = &handles[103]
+
+var _Location = &handles[104]
+
+var _MaxResults = &handles[105]
+
+var _NextToken = &handles[106]
+
+var _OwnerAccountId = &handles[107]
+
+var _ProductType = &handles[108]
+
+var Provider = &handles[109]
+var Provider_cloudServiceProvider = &handles[110]
+var Provider_lastMileProvider = &handles[111]
+
+var RemoteAccountIdentifier = &handles[112]
+var RemoteAccountIdentifier_identifier = &handles[113]
+
+var RemoteAccountIdentifierType = &handles[114]
+var RemoteAccountIdentifierType_ACCOUNT = &handles[115]
+var RemoteAccountIdentifierType_EMAIL = &handles[116]
+
+var _RemoteOwnerAccount = &handles[117]
+
+var ResourceNotFoundException = &handles[118]
+var ResourceNotFoundException_message = &handles[119]
+
+var ServiceQuotaExceededException = &handles[120]
+var ServiceQuotaExceededException_message = &handles[121]
+
+var _TagKey = &handles[122]
+
+var _TagKeyList = &handles[123]
+var _TagKeyList_member = &handles[124]
+
+var _TagMap = &handles[125]
+var _TagMap_key = &handles[126]
+var _TagMap_value = &handles[127]
+
+var _TagValue = &handles[128]
+
+var ThrottlingException = &handles[129]
+var ThrottlingException_message = &handles[130]
+
+var AcceptConnectionProposalRequest = &handles[131]
+var AcceptConnectionProposalRequest_attachPoint = &handles[132]
+var AcceptConnectionProposalRequest_activationKey = &handles[133]
+var AcceptConnectionProposalRequest_description = &handles[134]
+var AcceptConnectionProposalRequest_tags = &handles[135]
+var AcceptConnectionProposalRequest_clientToken = &handles[136]
+
+var AcceptConnectionProposalResponse = &handles[137]
+var AcceptConnectionProposalResponse_connection = &handles[138]
+
+var CreateConnectionRequest = &handles[139]
+var CreateConnectionRequest_description = &handles[140]
+var CreateConnectionRequest_bandwidth = &handles[141]
+var CreateConnectionRequest_attachPoint = &handles[142]
+var CreateConnectionRequest_environmentId = &handles[143]
+var CreateConnectionRequest_remoteAccount = &handles[144]
+var CreateConnectionRequest_tags = &handles[145]
+var CreateConnectionRequest_clientToken = &handles[146]
+
+var CreateConnectionResponse = &handles[147]
+var CreateConnectionResponse_connection = &handles[148]
+
+var DeleteConnectionRequest = &handles[149]
+var DeleteConnectionRequest_identifier = &handles[150]
+var DeleteConnectionRequest_clientToken = &handles[151]
+
+var DeleteConnectionResponse = &handles[152]
+var DeleteConnectionResponse_connection = &handles[153]
+
+var DescribeConnectionProposalRequest = &handles[154]
+var DescribeConnectionProposalRequest_activationKey = &handles[155]
+
+var DescribeConnectionProposalResponse = &handles[156]
+var DescribeConnectionProposalResponse_bandwidth = &handles[157]
+var DescribeConnectionProposalResponse_environmentId = &handles[158]
+var DescribeConnectionProposalResponse_provider = &handles[159]
+var DescribeConnectionProposalResponse_location = &handles[160]
+
+var GetConnectionRequest = &handles[161]
+var GetConnectionRequest_identifier = &handles[162]
+
+var GetConnectionResponse = &handles[163]
+var GetConnectionResponse_connection = &handles[164]
+
+var GetEnvironmentRequest = &handles[165]
+var GetEnvironmentRequest_id = &handles[166]
+
+var GetEnvironmentResponse = &handles[167]
+var GetEnvironmentResponse_environment = &handles[168]
+
+var ListAttachPointsRequest = &handles[169]
+var ListAttachPointsRequest_environmentId = &handles[170]
+var ListAttachPointsRequest_maxResults = &handles[171]
+var ListAttachPointsRequest_nextToken = &handles[172]
+
+var ListAttachPointsResponse = &handles[173]
+var ListAttachPointsResponse_attachPoints = &handles[174]
+var ListAttachPointsResponse_nextToken = &handles[175]
+
+var ListConnectionsRequest = &handles[176]
+var ListConnectionsRequest_maxResults = &handles[177]
+var ListConnectionsRequest_nextToken = &handles[178]
+var ListConnectionsRequest_state = &handles[179]
+var ListConnectionsRequest_environmentId = &handles[180]
+var ListConnectionsRequest_provider = &handles[181]
+var ListConnectionsRequest_attachPoint = &handles[182]
+
+var ListConnectionsResponse = &handles[183]
+var ListConnectionsResponse_connections = &handles[184]
+var ListConnectionsResponse_nextToken = &handles[185]
+
+var ListEnvironmentsRequest = &handles[186]
+var ListEnvironmentsRequest_maxResults = &handles[187]
+var ListEnvironmentsRequest_nextToken = &handles[188]
+var ListEnvironmentsRequest_provider = &handles[189]
+var ListEnvironmentsRequest_location = &handles[190]
+
+var ListEnvironmentsResponse = &handles[191]
+var ListEnvironmentsResponse_environments = &handles[192]
+var ListEnvironmentsResponse_nextToken = &handles[193]
+
+var ListTagsForResourceRequest = &handles[194]
+var ListTagsForResourceRequest_arn = &handles[195]
+
+var ListTagsForResourceResponse = &handles[196]
+var ListTagsForResourceResponse_tags = &handles[197]
+
+var TagResourceRequest = &handles[198]
+var TagResourceRequest_arn = &handles[199]
+var TagResourceRequest_tags = &handles[200]
+
+var TagResourceResponse = &handles[201]
+
+var UntagResourceRequest = &handles[202]
+var UntagResourceRequest_arn = &handles[203]
+var UntagResourceRequest_tagKeys = &handles[204]
+
+var UntagResourceResponse = &handles[205]
+
+var UpdateConnectionRequest = &handles[206]
+var UpdateConnectionRequest_identifier = &handles[207]
+var UpdateConnectionRequest_description = &handles[208]
+var UpdateConnectionRequest_bandwidth = &handles[209]
+var UpdateConnectionRequest_clientToken = &handles[210]
+
+var UpdateConnectionResponse = &handles[211]
+var UpdateConnectionResponse_connection = &handles[212]
+
+var Interconnect = &smithy.ServiceSchema{Schema: &handles[13], Version: "2022-07-26"}

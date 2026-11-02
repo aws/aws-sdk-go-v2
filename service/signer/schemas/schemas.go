@@ -4,1691 +4,1458 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddProfilePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AddProfilePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/signing-profiles/{profileName}/permissions",
-	Code: 200})
-
-var CancelSigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "CancelSigningProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/signing-profiles/{profileName}",
-	Code: 200})
-
-var DescribeSigningJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "DescribeSigningJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/signing-jobs/{jobId}",
-	Code: 200})
-
-var GetRevocationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetRevocationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/revocations",
-	Code: 200})
-
-var GetSigningPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningPlatform",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/signing-platforms/{platformId}",
-	Code: 200})
-
-var GetSigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/signing-profiles/{profileName}",
-	Code: 200})
-
-var ListProfilePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListProfilePermissions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/signing-profiles/{profileName}/permissions",
-	Code: 200})
-
-var ListSigningJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/signing-jobs",
-	Code: 200})
-
-var ListSigningPlatforms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningPlatforms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/signing-platforms",
-	Code: 200})
-
-var ListSigningProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/signing-profiles",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutSigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PutSigningProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/signing-profiles/{profileName}",
-	Code: 200})
-
-var RemoveProfilePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RemoveProfilePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/signing-profiles/{profileName}/permissions/{statementId}",
-	Code: 200})
-
-var RevokeSignature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokeSignature",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/signing-jobs/{jobId}/revoke",
-	Code: 200})
-
-var RevokeSigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokeSigningProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/signing-profiles/{profileName}/revoke",
-	Code: 200})
-
-var SignPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignPayload",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/signing-jobs/with-payload",
-	Code: 200})
-
-var StartSigningJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "StartSigningJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/signing-jobs",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var _WallabyService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "WallabyService",
-}, smithy.ShapeTypeService, 0)
-
-var WallabyService = smithy.NewServiceSchema(_WallabyService, "2017-08-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessDeniedException_code *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var BadRequestException_code *smithy.Schema
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _bool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "bool",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var Category = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Category",
-}, smithy.ShapeTypeEnum, 1)
-var Category_AWSIoT *smithy.Schema
-
-var _CertificateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "CertificateArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateHashes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "CertificateHashes",
-}, smithy.ShapeTypeList, 1)
-var _CertificateHashes_member *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_code *smithy.Schema
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Destination",
-}, smithy.ShapeTypeStructure, 1)
-var Destination_s3 *smithy.Schema
-
-var _DisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "DisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "EncryptionAlgorithm",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionAlgorithm_RSA *smithy.Schema
-
-var EncryptionAlgorithm_ECDSA *smithy.Schema
-
-var EncryptionAlgorithmOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "EncryptionAlgorithmOptions",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionAlgorithmOptions_allowedValues *smithy.Schema
-
-var EncryptionAlgorithmOptions_defaultValue *smithy.Schema
-
-var _EncryptionAlgorithms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "EncryptionAlgorithms",
-}, smithy.ShapeTypeList, 1)
-var _EncryptionAlgorithms_member *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var HashAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "HashAlgorithm",
-}, smithy.ShapeTypeEnum, 2)
-var HashAlgorithm_SHA1 *smithy.Schema
-
-var HashAlgorithm_SHA256 *smithy.Schema
-
-var HashAlgorithmOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "HashAlgorithmOptions",
-}, smithy.ShapeTypeStructure, 2)
-var HashAlgorithmOptions_allowedValues *smithy.Schema
-
-var HashAlgorithmOptions_defaultValue *smithy.Schema
-
-var _HashAlgorithms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "HashAlgorithms",
-}, smithy.ShapeTypeList, 1)
-var _HashAlgorithms_member *smithy.Schema
-
-var ImageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ImageFormat",
-}, smithy.ShapeTypeEnum, 3)
-var ImageFormat_JSON *smithy.Schema
-
-var ImageFormat_JSONEmbedded *smithy.Schema
-
-var ImageFormat_JSONDetached *smithy.Schema
-
-var _ImageFormats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ImageFormats",
-}, smithy.ShapeTypeList, 1)
-var _ImageFormats_member *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceErrorException_message *smithy.Schema
-
-var InternalServiceErrorException_code *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Key",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSizeInMB = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "MaxSizeInMB",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Metadata",
-}, smithy.ShapeTypeMap, 2)
-var _Metadata_key *smithy.Schema
-
-var _Metadata_value *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var NotFoundException_code *smithy.Schema
-
-var _Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Payload",
-}, smithy.ShapeTypeBlob, 0)
-
-var Permission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Permission",
-}, smithy.ShapeTypeStructure, 4)
-var Permission_action *smithy.Schema
-
-var Permission_principal *smithy.Schema
-
-var Permission_statementId *smithy.Schema
-
-var Permission_profileVersion *smithy.Schema
-
-var _Permissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Permissions",
-}, smithy.ShapeTypeList, 1)
-var _Permissions_member *smithy.Schema
-
-var _PlatformId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PlatformId",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicySizeBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PolicySizeBytes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfileName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ProfileName",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfileVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ProfileVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _RequestedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RequestedBy",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_code *smithy.Schema
-
-var _RevocationReasonString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevocationReasonString",
-}, smithy.ShapeTypeString, 0)
-
-var _RevokedEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokedEntities",
-}, smithy.ShapeTypeList, 1)
-var _RevokedEntities_member *smithy.Schema
-
-var S3Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "S3Destination",
-}, smithy.ShapeTypeStructure, 2)
-var S3Destination_bucketName *smithy.Schema
-
-var S3Destination_prefix *smithy.Schema
-
-var S3SignedObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "S3SignedObject",
-}, smithy.ShapeTypeStructure, 2)
-var S3SignedObject_bucketName *smithy.Schema
-
-var S3SignedObject_key *smithy.Schema
-
-var S3Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "S3Source",
-}, smithy.ShapeTypeStructure, 3)
-var S3Source_bucketName *smithy.Schema
-
-var S3Source_key *smithy.Schema
-
-var S3Source_version *smithy.Schema
-
-var ServiceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ServiceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceLimitExceededException_message *smithy.Schema
-
-var ServiceLimitExceededException_code *smithy.Schema
-
-var SignatureValidityPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignatureValidityPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var SignatureValidityPeriod_value *smithy.Schema
-
-var SignatureValidityPeriod_type *smithy.Schema
-
-var SignedObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignedObject",
-}, smithy.ShapeTypeStructure, 1)
-var SignedObject_s3 *smithy.Schema
-
-var SigningConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SigningConfiguration_encryptionAlgorithmOptions *smithy.Schema
-
-var SigningConfiguration_hashAlgorithmOptions *smithy.Schema
-
-var SigningConfigurationOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningConfigurationOverrides",
-}, smithy.ShapeTypeStructure, 2)
-var SigningConfigurationOverrides_encryptionAlgorithm *smithy.Schema
-
-var SigningConfigurationOverrides_hashAlgorithm *smithy.Schema
-
-var SigningImageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningImageFormat",
-}, smithy.ShapeTypeStructure, 2)
-var SigningImageFormat_supportedFormats *smithy.Schema
-
-var SigningImageFormat_defaultFormat *smithy.Schema
-
-var SigningJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningJob",
-}, smithy.ShapeTypeStructure, 14)
-var SigningJob_jobId *smithy.Schema
-
-var SigningJob_source *smithy.Schema
-
-var SigningJob_signedObject *smithy.Schema
-
-var SigningJob_signingMaterial *smithy.Schema
-
-var SigningJob_createdAt *smithy.Schema
-
-var SigningJob_status *smithy.Schema
-
-var SigningJob_isRevoked *smithy.Schema
-
-var SigningJob_profileName *smithy.Schema
-
-var SigningJob_profileVersion *smithy.Schema
-
-var SigningJob_platformId *smithy.Schema
-
-var SigningJob_platformDisplayName *smithy.Schema
-
-var SigningJob_signatureExpiresAt *smithy.Schema
-
-var SigningJob_jobOwner *smithy.Schema
-
-var SigningJob_jobInvoker *smithy.Schema
-
-var SigningJobRevocationRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningJobRevocationRecord",
-}, smithy.ShapeTypeStructure, 3)
-var SigningJobRevocationRecord_reason *smithy.Schema
-
-var SigningJobRevocationRecord_revokedAt *smithy.Schema
-
-var SigningJobRevocationRecord_revokedBy *smithy.Schema
-
-var _SigningJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningJobs",
-}, smithy.ShapeTypeList, 1)
-var _SigningJobs_member *smithy.Schema
-
-var SigningMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningMaterial",
-}, smithy.ShapeTypeStructure, 1)
-var SigningMaterial_certificateArn *smithy.Schema
-
-var _SigningParameterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningParameterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _SigningParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningParameters",
-}, smithy.ShapeTypeMap, 2)
-var _SigningParameters_key *smithy.Schema
-
-var _SigningParameters_value *smithy.Schema
-
-var _SigningParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var SigningPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningPlatform",
-}, smithy.ShapeTypeStructure, 9)
-var SigningPlatform_platformId *smithy.Schema
-
-var SigningPlatform_displayName *smithy.Schema
-
-var SigningPlatform_partner *smithy.Schema
-
-var SigningPlatform_target *smithy.Schema
-
-var SigningPlatform_category *smithy.Schema
-
-var SigningPlatform_signingConfiguration *smithy.Schema
-
-var SigningPlatform_signingImageFormat *smithy.Schema
-
-var SigningPlatform_maxSizeInMB *smithy.Schema
-
-var SigningPlatform_revocationSupported *smithy.Schema
-
-var SigningPlatformOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningPlatformOverrides",
-}, smithy.ShapeTypeStructure, 2)
-var SigningPlatformOverrides_signingConfiguration *smithy.Schema
-
-var SigningPlatformOverrides_signingImageFormat *smithy.Schema
-
-var _SigningPlatforms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningPlatforms",
-}, smithy.ShapeTypeList, 1)
-var _SigningPlatforms_member *smithy.Schema
-
-var SigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningProfile",
-}, smithy.ShapeTypeStructure, 11)
-var SigningProfile_profileName *smithy.Schema
-
-var SigningProfile_profileVersion *smithy.Schema
-
-var SigningProfile_profileVersionArn *smithy.Schema
-
-var SigningProfile_signingMaterial *smithy.Schema
-
-var SigningProfile_signatureValidityPeriod *smithy.Schema
-
-var SigningProfile_platformId *smithy.Schema
-
-var SigningProfile_platformDisplayName *smithy.Schema
-
-var SigningProfile_signingParameters *smithy.Schema
-
-var SigningProfile_status *smithy.Schema
-
-var SigningProfile_arn *smithy.Schema
-
-var SigningProfile_tags *smithy.Schema
-
-var SigningProfileRevocationRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningProfileRevocationRecord",
-}, smithy.ShapeTypeStructure, 3)
-var SigningProfileRevocationRecord_revocationEffectiveFrom *smithy.Schema
-
-var SigningProfileRevocationRecord_revokedAt *smithy.Schema
-
-var SigningProfileRevocationRecord_revokedBy *smithy.Schema
-
-var _SigningProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningProfiles",
-}, smithy.ShapeTypeList, 1)
-var _SigningProfiles_member *smithy.Schema
-
-var SigningProfileStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningProfileStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SigningProfileStatus_Active *smithy.Schema
-
-var SigningProfileStatus_Canceled *smithy.Schema
-
-var SigningProfileStatus_Revoked *smithy.Schema
-
-var SigningStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SigningStatus_InProgress *smithy.Schema
-
-var SigningStatus_Failed *smithy.Schema
-
-var SigningStatus_Succeeded *smithy.Schema
-
-var Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Source",
-}, smithy.ShapeTypeStructure, 1)
-var Source_s3 *smithy.Schema
-
-var _Statuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Statuses",
-}, smithy.ShapeTypeList, 1)
-var _Statuses_member *smithy.Schema
-
-var _StatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "StatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_code *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var TooManyRequestsException_code *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_code *smithy.Schema
-
-var ValidityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ValidityType",
-}, smithy.ShapeTypeEnum, 3)
-var ValidityType_DAYS *smithy.Schema
-
-var ValidityType_MONTHS *smithy.Schema
-
-var ValidityType_YEARS *smithy.Schema
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var AddProfilePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AddProfilePermissionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var AddProfilePermissionRequest_profileName *smithy.Schema
-
-var AddProfilePermissionRequest_profileVersion *smithy.Schema
-
-var AddProfilePermissionRequest_action *smithy.Schema
-
-var AddProfilePermissionRequest_principal *smithy.Schema
-
-var AddProfilePermissionRequest_revisionId *smithy.Schema
-
-var AddProfilePermissionRequest_statementId *smithy.Schema
-
-var AddProfilePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AddProfilePermissionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AddProfilePermissionResponse_revisionId *smithy.Schema
-
-var CancelSigningProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "CancelSigningProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelSigningProfileRequest_profileName *smithy.Schema
-
-var DescribeSigningJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "DescribeSigningJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSigningJobRequest_jobId *smithy.Schema
-
-var DescribeSigningJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "DescribeSigningJobResponse",
-}, smithy.ShapeTypeStructure, 19)
-var DescribeSigningJobResponse_jobId *smithy.Schema
-
-var DescribeSigningJobResponse_source *smithy.Schema
-
-var DescribeSigningJobResponse_signingMaterial *smithy.Schema
-
-var DescribeSigningJobResponse_platformId *smithy.Schema
-
-var DescribeSigningJobResponse_platformDisplayName *smithy.Schema
-
-var DescribeSigningJobResponse_profileName *smithy.Schema
-
-var DescribeSigningJobResponse_profileVersion *smithy.Schema
-
-var DescribeSigningJobResponse_overrides *smithy.Schema
-
-var DescribeSigningJobResponse_signingParameters *smithy.Schema
-
-var DescribeSigningJobResponse_createdAt *smithy.Schema
-
-var DescribeSigningJobResponse_completedAt *smithy.Schema
-
-var DescribeSigningJobResponse_signatureExpiresAt *smithy.Schema
-
-var DescribeSigningJobResponse_requestedBy *smithy.Schema
-
-var DescribeSigningJobResponse_status *smithy.Schema
-
-var DescribeSigningJobResponse_statusReason *smithy.Schema
-
-var DescribeSigningJobResponse_revocationRecord *smithy.Schema
-
-var DescribeSigningJobResponse_signedObject *smithy.Schema
-
-var DescribeSigningJobResponse_jobOwner *smithy.Schema
-
-var DescribeSigningJobResponse_jobInvoker *smithy.Schema
-
-var GetRevocationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetRevocationStatusRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetRevocationStatusRequest_signatureTimestamp *smithy.Schema
-
-var GetRevocationStatusRequest_platformId *smithy.Schema
-
-var GetRevocationStatusRequest_profileVersionArn *smithy.Schema
-
-var GetRevocationStatusRequest_jobArn *smithy.Schema
-
-var GetRevocationStatusRequest_certificateHashes *smithy.Schema
-
-var GetRevocationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetRevocationStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRevocationStatusResponse_revokedEntities *smithy.Schema
-
-var GetSigningPlatformRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningPlatformRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSigningPlatformRequest_platformId *smithy.Schema
-
-var GetSigningPlatformResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningPlatformResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetSigningPlatformResponse_platformId *smithy.Schema
-
-var GetSigningPlatformResponse_displayName *smithy.Schema
-
-var GetSigningPlatformResponse_partner *smithy.Schema
-
-var GetSigningPlatformResponse_target *smithy.Schema
-
-var GetSigningPlatformResponse_category *smithy.Schema
-
-var GetSigningPlatformResponse_signingConfiguration *smithy.Schema
-
-var GetSigningPlatformResponse_signingImageFormat *smithy.Schema
-
-var GetSigningPlatformResponse_maxSizeInMB *smithy.Schema
-
-var GetSigningPlatformResponse_revocationSupported *smithy.Schema
-
-var GetSigningProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningProfileRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSigningProfileRequest_profileName *smithy.Schema
-
-var GetSigningProfileRequest_profileOwner *smithy.Schema
-
-var GetSigningProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningProfileResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetSigningProfileResponse_profileName *smithy.Schema
-
-var GetSigningProfileResponse_profileVersion *smithy.Schema
-
-var GetSigningProfileResponse_profileVersionArn *smithy.Schema
-
-var GetSigningProfileResponse_revocationRecord *smithy.Schema
-
-var GetSigningProfileResponse_signingMaterial *smithy.Schema
-
-var GetSigningProfileResponse_platformId *smithy.Schema
-
-var GetSigningProfileResponse_platformDisplayName *smithy.Schema
-
-var GetSigningProfileResponse_signatureValidityPeriod *smithy.Schema
-
-var GetSigningProfileResponse_overrides *smithy.Schema
-
-var GetSigningProfileResponse_signingParameters *smithy.Schema
-
-var GetSigningProfileResponse_status *smithy.Schema
-
-var GetSigningProfileResponse_statusReason *smithy.Schema
-
-var GetSigningProfileResponse_arn *smithy.Schema
-
-var GetSigningProfileResponse_tags *smithy.Schema
-
-var ListProfilePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListProfilePermissionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProfilePermissionsRequest_profileName *smithy.Schema
-
-var ListProfilePermissionsRequest_nextToken *smithy.Schema
-
-var ListProfilePermissionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListProfilePermissionsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListProfilePermissionsResponse_revisionId *smithy.Schema
-
-var ListProfilePermissionsResponse_policySizeBytes *smithy.Schema
-
-var ListProfilePermissionsResponse_permissions *smithy.Schema
-
-var ListProfilePermissionsResponse_nextToken *smithy.Schema
-
-var ListSigningJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningJobsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListSigningJobsRequest_status *smithy.Schema
-
-var ListSigningJobsRequest_platformId *smithy.Schema
-
-var ListSigningJobsRequest_requestedBy *smithy.Schema
-
-var ListSigningJobsRequest_maxResults *smithy.Schema
-
-var ListSigningJobsRequest_nextToken *smithy.Schema
-
-var ListSigningJobsRequest_isRevoked *smithy.Schema
-
-var ListSigningJobsRequest_signatureExpiresBefore *smithy.Schema
-
-var ListSigningJobsRequest_signatureExpiresAfter *smithy.Schema
-
-var ListSigningJobsRequest_jobInvoker *smithy.Schema
-
-var ListSigningJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSigningJobsResponse_jobs *smithy.Schema
-
-var ListSigningJobsResponse_nextToken *smithy.Schema
-
-var ListSigningPlatformsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningPlatformsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSigningPlatformsRequest_category *smithy.Schema
-
-var ListSigningPlatformsRequest_partner *smithy.Schema
-
-var ListSigningPlatformsRequest_target *smithy.Schema
-
-var ListSigningPlatformsRequest_maxResults *smithy.Schema
-
-var ListSigningPlatformsRequest_nextToken *smithy.Schema
-
-var ListSigningPlatformsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningPlatformsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSigningPlatformsResponse_platforms *smithy.Schema
-
-var ListSigningPlatformsResponse_nextToken *smithy.Schema
-
-var ListSigningProfilesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningProfilesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSigningProfilesRequest_includeCanceled *smithy.Schema
-
-var ListSigningProfilesRequest_maxResults *smithy.Schema
-
-var ListSigningProfilesRequest_nextToken *smithy.Schema
-
-var ListSigningProfilesRequest_platformId *smithy.Schema
-
-var ListSigningProfilesRequest_statuses *smithy.Schema
-
-var ListSigningProfilesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningProfilesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSigningProfilesResponse_profiles *smithy.Schema
-
-var ListSigningProfilesResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutSigningProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PutSigningProfileRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PutSigningProfileRequest_profileName *smithy.Schema
-
-var PutSigningProfileRequest_signingMaterial *smithy.Schema
-
-var PutSigningProfileRequest_signatureValidityPeriod *smithy.Schema
-
-var PutSigningProfileRequest_platformId *smithy.Schema
-
-var PutSigningProfileRequest_overrides *smithy.Schema
-
-var PutSigningProfileRequest_signingParameters *smithy.Schema
-
-var PutSigningProfileRequest_tags *smithy.Schema
-
-var PutSigningProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PutSigningProfileResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutSigningProfileResponse_arn *smithy.Schema
-
-var PutSigningProfileResponse_profileVersion *smithy.Schema
-
-var PutSigningProfileResponse_profileVersionArn *smithy.Schema
-
-var RemoveProfilePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RemoveProfilePermissionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RemoveProfilePermissionRequest_profileName *smithy.Schema
-
-var RemoveProfilePermissionRequest_revisionId *smithy.Schema
-
-var RemoveProfilePermissionRequest_statementId *smithy.Schema
-
-var RemoveProfilePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RemoveProfilePermissionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveProfilePermissionResponse_revisionId *smithy.Schema
-
-var RevokeSignatureRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokeSignatureRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RevokeSignatureRequest_jobId *smithy.Schema
-
-var RevokeSignatureRequest_jobOwner *smithy.Schema
-
-var RevokeSignatureRequest_reason *smithy.Schema
-
-var RevokeSigningProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokeSigningProfileRequest",
-}, smithy.ShapeTypeStructure, 4)
-var RevokeSigningProfileRequest_profileName *smithy.Schema
-
-var RevokeSigningProfileRequest_profileVersion *smithy.Schema
-
-var RevokeSigningProfileRequest_reason *smithy.Schema
-
-var RevokeSigningProfileRequest_effectiveTime *smithy.Schema
-
-var SignPayloadRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignPayloadRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SignPayloadRequest_profileName *smithy.Schema
-
-var SignPayloadRequest_profileOwner *smithy.Schema
-
-var SignPayloadRequest_payload *smithy.Schema
-
-var SignPayloadRequest_payloadFormat *smithy.Schema
-
-var SignPayloadResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignPayloadResponse",
-}, smithy.ShapeTypeStructure, 4)
-var SignPayloadResponse_jobId *smithy.Schema
-
-var SignPayloadResponse_jobOwner *smithy.Schema
-
-var SignPayloadResponse_metadata *smithy.Schema
-
-var SignPayloadResponse_signature *smithy.Schema
-
-var StartSigningJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "StartSigningJobRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartSigningJobRequest_source *smithy.Schema
-
-var StartSigningJobRequest_destination *smithy.Schema
-
-var StartSigningJobRequest_profileName *smithy.Schema
-
-var StartSigningJobRequest_clientRequestToken *smithy.Schema
-
-var StartSigningJobRequest_profileOwner *smithy.Schema
-
-var StartSigningJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "StartSigningJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartSigningJobResponse_jobId *smithy.Schema
-
-var StartSigningJobResponse_jobOwner *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	AccessDeniedException_code = AccessDeniedException.AddMember("code", _ErrorCode)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _ErrorMessage)
-
-	BadRequestException_code = BadRequestException.AddMember("code", _ErrorCode)
-
-	Category_AWSIoT = Category.AddMember("AWSIoT", smithyprelude.Unit)
-
-	_CertificateHashes_member = _CertificateHashes.AddMember("member", _String)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConflictException_code = ConflictException.AddMember("code", _ErrorCode)
-
-	S3Destination_bucketName = S3Destination.AddMember("bucketName", _BucketName)
-
-	S3Destination_prefix = S3Destination.AddMember("prefix", _Prefix)
-
-	Destination_s3 = Destination.AddMember("s3", S3Destination)
-
-	EncryptionAlgorithm_RSA = EncryptionAlgorithm.AddMember("RSA", smithyprelude.Unit)
-
-	EncryptionAlgorithm_ECDSA = EncryptionAlgorithm.AddMember("ECDSA", smithyprelude.Unit)
-
-	_EncryptionAlgorithms_member = _EncryptionAlgorithms.AddMember("member", EncryptionAlgorithm)
-
-	EncryptionAlgorithmOptions_allowedValues = EncryptionAlgorithmOptions.AddMember("allowedValues", _EncryptionAlgorithms)
-
-	EncryptionAlgorithmOptions_defaultValue = EncryptionAlgorithmOptions.AddMember("defaultValue", EncryptionAlgorithm)
-
-	HashAlgorithm_SHA1 = HashAlgorithm.AddMember("SHA1", smithyprelude.Unit)
-
-	HashAlgorithm_SHA256 = HashAlgorithm.AddMember("SHA256", smithyprelude.Unit)
-
-	_HashAlgorithms_member = _HashAlgorithms.AddMember("member", HashAlgorithm)
-
-	HashAlgorithmOptions_allowedValues = HashAlgorithmOptions.AddMember("allowedValues", _HashAlgorithms)
-
-	HashAlgorithmOptions_defaultValue = HashAlgorithmOptions.AddMember("defaultValue", HashAlgorithm)
-
-	ImageFormat_JSON = ImageFormat.AddMember("JSON", smithyprelude.Unit)
-
-	ImageFormat_JSONEmbedded = ImageFormat.AddMember("JSONEmbedded", smithyprelude.Unit)
-
-	ImageFormat_JSONDetached = ImageFormat.AddMember("JSONDetached", smithyprelude.Unit)
-
-	_ImageFormats_member = _ImageFormats.AddMember("member", ImageFormat)
-
-	InternalServiceErrorException_message = InternalServiceErrorException.AddMember("message", _ErrorMessage)
-
-	InternalServiceErrorException_code = InternalServiceErrorException.AddMember("code", _ErrorCode)
-
-	_Metadata_key = _Metadata.AddMember("key", _String)
-
-	_Metadata_value = _Metadata.AddMember("value", _String)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _ErrorMessage)
-
-	NotFoundException_code = NotFoundException.AddMember("code", _ErrorCode)
-
-	Permission_action = Permission.AddMember("action", _String)
-
-	Permission_principal = Permission.AddMember("principal", _String)
-
-	Permission_statementId = Permission.AddMember("statementId", _String)
-
-	Permission_profileVersion = Permission.AddMember("profileVersion", _ProfileVersion)
-
-	_Permissions_member = _Permissions.AddMember("member", Permission)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_code = ResourceNotFoundException.AddMember("code", _ErrorCode)
-
-	_RevokedEntities_member = _RevokedEntities.AddMember("member", _String)
-
-	S3SignedObject_bucketName = S3SignedObject.AddMember("bucketName", _BucketName)
-
-	S3SignedObject_key = S3SignedObject.AddMember("key", _Key)
-
-	S3Source_bucketName = S3Source.AddMember("bucketName", _BucketName)
-
-	S3Source_key = S3Source.AddMember("key", _Key)
-
-	S3Source_version = S3Source.AddMember("version", _Version)
-
-	ServiceLimitExceededException_message = ServiceLimitExceededException.AddMember("message", _ErrorMessage)
-
-	ServiceLimitExceededException_code = ServiceLimitExceededException.AddMember("code", _ErrorCode)
-
-	ValidityType_DAYS = ValidityType.AddMember("DAYS", smithyprelude.Unit)
-
-	ValidityType_MONTHS = ValidityType.AddMember("MONTHS", smithyprelude.Unit)
-
-	ValidityType_YEARS = ValidityType.AddMember("YEARS", smithyprelude.Unit)
-
-	SignatureValidityPeriod_value = SignatureValidityPeriod.AddMember("value", _Integer)
-
-	SignatureValidityPeriod_type = SignatureValidityPeriod.AddMember("type", ValidityType)
-
-	SignedObject_s3 = SignedObject.AddMember("s3", S3SignedObject)
-
-	SigningConfiguration_encryptionAlgorithmOptions = SigningConfiguration.AddMember("encryptionAlgorithmOptions", EncryptionAlgorithmOptions)
-
-	SigningConfiguration_hashAlgorithmOptions = SigningConfiguration.AddMember("hashAlgorithmOptions", HashAlgorithmOptions)
-
-	SigningConfigurationOverrides_encryptionAlgorithm = SigningConfigurationOverrides.AddMember("encryptionAlgorithm", EncryptionAlgorithm)
-
-	SigningConfigurationOverrides_hashAlgorithm = SigningConfigurationOverrides.AddMember("hashAlgorithm", HashAlgorithm)
-
-	SigningImageFormat_supportedFormats = SigningImageFormat.AddMember("supportedFormats", _ImageFormats)
-
-	SigningImageFormat_defaultFormat = SigningImageFormat.AddMember("defaultFormat", ImageFormat)
-
-	Source_s3 = Source.AddMember("s3", S3Source)
-
-	SigningMaterial_certificateArn = SigningMaterial.AddMember("certificateArn", _CertificateArn)
-
-	SigningStatus_InProgress = SigningStatus.AddMember("InProgress", smithyprelude.Unit)
-
-	SigningStatus_Failed = SigningStatus.AddMember("Failed", smithyprelude.Unit)
-
-	SigningStatus_Succeeded = SigningStatus.AddMember("Succeeded", smithyprelude.Unit)
-
-	SigningJob_jobId = SigningJob.AddMember("jobId", _JobId)
-
-	SigningJob_source = SigningJob.AddMember("source", Source)
-
-	SigningJob_signedObject = SigningJob.AddMember("signedObject", SignedObject)
-
-	SigningJob_signingMaterial = SigningJob.AddMember("signingMaterial", SigningMaterial)
-
-	SigningJob_createdAt = SigningJob.AddMember("createdAt", _Timestamp)
-
-	SigningJob_status = SigningJob.AddMember("status", SigningStatus)
-
-	SigningJob_isRevoked = SigningJob.AddMember("isRevoked", _bool)
-
-	SigningJob_profileName = SigningJob.AddMember("profileName", _ProfileName)
-
-	SigningJob_profileVersion = SigningJob.AddMember("profileVersion", _ProfileVersion)
-
-	SigningJob_platformId = SigningJob.AddMember("platformId", _PlatformId)
-
-	SigningJob_platformDisplayName = SigningJob.AddMember("platformDisplayName", _DisplayName)
-
-	SigningJob_signatureExpiresAt = SigningJob.AddMember("signatureExpiresAt", _Timestamp)
-
-	SigningJob_jobOwner = SigningJob.AddMember("jobOwner", _AccountId)
-
-	SigningJob_jobInvoker = SigningJob.AddMember("jobInvoker", _AccountId)
-
-	SigningJobRevocationRecord_reason = SigningJobRevocationRecord.AddMember("reason", _String)
-
-	SigningJobRevocationRecord_revokedAt = SigningJobRevocationRecord.AddMember("revokedAt", _Timestamp)
-
-	SigningJobRevocationRecord_revokedBy = SigningJobRevocationRecord.AddMember("revokedBy", _String)
-
-	_SigningJobs_member = _SigningJobs.AddMember("member", SigningJob)
-
-	_SigningParameters_key = _SigningParameters.AddMember("key", _SigningParameterKey)
-
-	_SigningParameters_value = _SigningParameters.AddMember("value", _SigningParameterValue)
-
-	SigningPlatform_platformId = SigningPlatform.AddMember("platformId", _String)
-
-	SigningPlatform_displayName = SigningPlatform.AddMember("displayName", _String)
-
-	SigningPlatform_partner = SigningPlatform.AddMember("partner", _String)
-
-	SigningPlatform_target = SigningPlatform.AddMember("target", _String)
-
-	SigningPlatform_category = SigningPlatform.AddMember("category", Category)
-
-	SigningPlatform_signingConfiguration = SigningPlatform.AddMember("signingConfiguration", SigningConfiguration)
-
-	SigningPlatform_signingImageFormat = SigningPlatform.AddMember("signingImageFormat", SigningImageFormat)
-
-	SigningPlatform_maxSizeInMB = SigningPlatform.AddMember("maxSizeInMB", _MaxSizeInMB)
-
-	SigningPlatform_revocationSupported = SigningPlatform.AddMember("revocationSupported", _bool)
-
-	SigningPlatformOverrides_signingConfiguration = SigningPlatformOverrides.AddMember("signingConfiguration", SigningConfigurationOverrides)
-
-	SigningPlatformOverrides_signingImageFormat = SigningPlatformOverrides.AddMember("signingImageFormat", ImageFormat)
-
-	_SigningPlatforms_member = _SigningPlatforms.AddMember("member", SigningPlatform)
-
-	SigningProfileStatus_Active = SigningProfileStatus.AddMember("Active", smithyprelude.Unit)
-
-	SigningProfileStatus_Canceled = SigningProfileStatus.AddMember("Canceled", smithyprelude.Unit)
-
-	SigningProfileStatus_Revoked = SigningProfileStatus.AddMember("Revoked", smithyprelude.Unit)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	SigningProfile_profileName = SigningProfile.AddMember("profileName", _ProfileName)
-
-	SigningProfile_profileVersion = SigningProfile.AddMember("profileVersion", _ProfileVersion)
-
-	SigningProfile_profileVersionArn = SigningProfile.AddMember("profileVersionArn", _Arn)
-
-	SigningProfile_signingMaterial = SigningProfile.AddMember("signingMaterial", SigningMaterial)
-
-	SigningProfile_signatureValidityPeriod = SigningProfile.AddMember("signatureValidityPeriod", SignatureValidityPeriod)
-
-	SigningProfile_platformId = SigningProfile.AddMember("platformId", _PlatformId)
-
-	SigningProfile_platformDisplayName = SigningProfile.AddMember("platformDisplayName", _DisplayName)
-
-	SigningProfile_signingParameters = SigningProfile.AddMember("signingParameters", _SigningParameters)
-
-	SigningProfile_status = SigningProfile.AddMember("status", SigningProfileStatus)
-
-	SigningProfile_arn = SigningProfile.AddMember("arn", _String)
-
-	SigningProfile_tags = SigningProfile.AddMember("tags", _TagMap)
-
-	SigningProfileRevocationRecord_revocationEffectiveFrom = SigningProfileRevocationRecord.AddMember("revocationEffectiveFrom", _Timestamp)
-
-	SigningProfileRevocationRecord_revokedAt = SigningProfileRevocationRecord.AddMember("revokedAt", _Timestamp)
-
-	SigningProfileRevocationRecord_revokedBy = SigningProfileRevocationRecord.AddMember("revokedBy", _String)
-
-	_SigningProfiles_member = _SigningProfiles.AddMember("member", SigningProfile)
-
-	_Statuses_member = _Statuses.AddMember("member", SigningProfileStatus)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	ThrottlingException_code = ThrottlingException.AddMember("code", _ErrorCode)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _ErrorMessage)
-
-	TooManyRequestsException_code = TooManyRequestsException.AddMember("code", _ErrorCode)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_code = ValidationException.AddMember("code", _ErrorCode)
-
-	AddProfilePermissionRequest_profileName = AddProfilePermissionRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	AddProfilePermissionRequest_profileVersion = AddProfilePermissionRequest.AddMember("profileVersion", _ProfileVersion)
-
-	AddProfilePermissionRequest_action = AddProfilePermissionRequest.AddMember("action", _String)
-
-	AddProfilePermissionRequest_principal = AddProfilePermissionRequest.AddMember("principal", _String)
-
-	AddProfilePermissionRequest_revisionId = AddProfilePermissionRequest.AddMember("revisionId", _String)
-
-	AddProfilePermissionRequest_statementId = AddProfilePermissionRequest.AddMember("statementId", _String)
-
-	AddProfilePermissionResponse_revisionId = AddProfilePermissionResponse.AddMember("revisionId", _String)
-
-	CancelSigningProfileRequest_profileName = CancelSigningProfileRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	DescribeSigningJobRequest_jobId = DescribeSigningJobRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	DescribeSigningJobResponse_jobId = DescribeSigningJobResponse.AddMember("jobId", _JobId)
-
-	DescribeSigningJobResponse_source = DescribeSigningJobResponse.AddMember("source", Source)
-
-	DescribeSigningJobResponse_signingMaterial = DescribeSigningJobResponse.AddMember("signingMaterial", SigningMaterial)
-
-	DescribeSigningJobResponse_platformId = DescribeSigningJobResponse.AddMember("platformId", _PlatformId)
-
-	DescribeSigningJobResponse_platformDisplayName = DescribeSigningJobResponse.AddMember("platformDisplayName", _DisplayName)
-
-	DescribeSigningJobResponse_profileName = DescribeSigningJobResponse.AddMember("profileName", _ProfileName)
-
-	DescribeSigningJobResponse_profileVersion = DescribeSigningJobResponse.AddMember("profileVersion", _ProfileVersion)
-
-	DescribeSigningJobResponse_overrides = DescribeSigningJobResponse.AddMember("overrides", SigningPlatformOverrides)
-
-	DescribeSigningJobResponse_signingParameters = DescribeSigningJobResponse.AddMember("signingParameters", _SigningParameters)
-
-	DescribeSigningJobResponse_createdAt = DescribeSigningJobResponse.AddMember("createdAt", _Timestamp)
-
-	DescribeSigningJobResponse_completedAt = DescribeSigningJobResponse.AddMember("completedAt", _Timestamp)
-
-	DescribeSigningJobResponse_signatureExpiresAt = DescribeSigningJobResponse.AddMember("signatureExpiresAt", _Timestamp)
-
-	DescribeSigningJobResponse_requestedBy = DescribeSigningJobResponse.AddMember("requestedBy", _RequestedBy)
-
-	DescribeSigningJobResponse_status = DescribeSigningJobResponse.AddMember("status", SigningStatus)
-
-	DescribeSigningJobResponse_statusReason = DescribeSigningJobResponse.AddMember("statusReason", _StatusReason)
-
-	DescribeSigningJobResponse_revocationRecord = DescribeSigningJobResponse.AddMember("revocationRecord", SigningJobRevocationRecord)
-
-	DescribeSigningJobResponse_signedObject = DescribeSigningJobResponse.AddMember("signedObject", SignedObject)
-
-	DescribeSigningJobResponse_jobOwner = DescribeSigningJobResponse.AddMember("jobOwner", _AccountId)
-
-	DescribeSigningJobResponse_jobInvoker = DescribeSigningJobResponse.AddMember("jobInvoker", _AccountId)
-
-	GetRevocationStatusRequest_signatureTimestamp = GetRevocationStatusRequest.AddMember("signatureTimestamp", _Timestamp, &smithytraits.HTTPQuery{Name: "signatureTimestamp"})
-
-	GetRevocationStatusRequest_platformId = GetRevocationStatusRequest.AddMember("platformId", _PlatformId, &smithytraits.HTTPQuery{Name: "platformId"})
-
-	GetRevocationStatusRequest_profileVersionArn = GetRevocationStatusRequest.AddMember("profileVersionArn", _Arn, &smithytraits.HTTPQuery{Name: "profileVersionArn"})
-
-	GetRevocationStatusRequest_jobArn = GetRevocationStatusRequest.AddMember("jobArn", _Arn, &smithytraits.HTTPQuery{Name: "jobArn"})
-
-	GetRevocationStatusRequest_certificateHashes = GetRevocationStatusRequest.AddMember("certificateHashes", _CertificateHashes, &smithytraits.HTTPQuery{Name: "certificateHashes"})
-
-	GetRevocationStatusResponse_revokedEntities = GetRevocationStatusResponse.AddMember("revokedEntities", _RevokedEntities)
-
-	GetSigningPlatformRequest_platformId = GetSigningPlatformRequest.AddMember("platformId", _PlatformId, &smithytraits.HTTPLabel{})
-
-	GetSigningPlatformResponse_platformId = GetSigningPlatformResponse.AddMember("platformId", _PlatformId)
-
-	GetSigningPlatformResponse_displayName = GetSigningPlatformResponse.AddMember("displayName", _DisplayName)
-
-	GetSigningPlatformResponse_partner = GetSigningPlatformResponse.AddMember("partner", _String)
-
-	GetSigningPlatformResponse_target = GetSigningPlatformResponse.AddMember("target", _String)
-
-	GetSigningPlatformResponse_category = GetSigningPlatformResponse.AddMember("category", Category)
-
-	GetSigningPlatformResponse_signingConfiguration = GetSigningPlatformResponse.AddMember("signingConfiguration", SigningConfiguration)
-
-	GetSigningPlatformResponse_signingImageFormat = GetSigningPlatformResponse.AddMember("signingImageFormat", SigningImageFormat)
-
-	GetSigningPlatformResponse_maxSizeInMB = GetSigningPlatformResponse.AddMember("maxSizeInMB", _MaxSizeInMB)
-
-	GetSigningPlatformResponse_revocationSupported = GetSigningPlatformResponse.AddMember("revocationSupported", _bool)
-
-	GetSigningProfileRequest_profileName = GetSigningProfileRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	GetSigningProfileRequest_profileOwner = GetSigningProfileRequest.AddMember("profileOwner", _AccountId, &smithytraits.HTTPQuery{Name: "profileOwner"})
-
-	GetSigningProfileResponse_profileName = GetSigningProfileResponse.AddMember("profileName", _ProfileName)
-
-	GetSigningProfileResponse_profileVersion = GetSigningProfileResponse.AddMember("profileVersion", _ProfileVersion)
-
-	GetSigningProfileResponse_profileVersionArn = GetSigningProfileResponse.AddMember("profileVersionArn", _Arn)
-
-	GetSigningProfileResponse_revocationRecord = GetSigningProfileResponse.AddMember("revocationRecord", SigningProfileRevocationRecord)
-
-	GetSigningProfileResponse_signingMaterial = GetSigningProfileResponse.AddMember("signingMaterial", SigningMaterial)
-
-	GetSigningProfileResponse_platformId = GetSigningProfileResponse.AddMember("platformId", _PlatformId)
-
-	GetSigningProfileResponse_platformDisplayName = GetSigningProfileResponse.AddMember("platformDisplayName", _DisplayName)
-
-	GetSigningProfileResponse_signatureValidityPeriod = GetSigningProfileResponse.AddMember("signatureValidityPeriod", SignatureValidityPeriod)
-
-	GetSigningProfileResponse_overrides = GetSigningProfileResponse.AddMember("overrides", SigningPlatformOverrides)
-
-	GetSigningProfileResponse_signingParameters = GetSigningProfileResponse.AddMember("signingParameters", _SigningParameters)
-
-	GetSigningProfileResponse_status = GetSigningProfileResponse.AddMember("status", SigningProfileStatus)
-
-	GetSigningProfileResponse_statusReason = GetSigningProfileResponse.AddMember("statusReason", _String)
-
-	GetSigningProfileResponse_arn = GetSigningProfileResponse.AddMember("arn", _String)
-
-	GetSigningProfileResponse_tags = GetSigningProfileResponse.AddMember("tags", _TagMap)
-
-	ListProfilePermissionsRequest_profileName = ListProfilePermissionsRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	ListProfilePermissionsRequest_nextToken = ListProfilePermissionsRequest.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListProfilePermissionsResponse_revisionId = ListProfilePermissionsResponse.AddMember("revisionId", _String)
-
-	ListProfilePermissionsResponse_policySizeBytes = ListProfilePermissionsResponse.AddMember("policySizeBytes", _PolicySizeBytes)
-
-	ListProfilePermissionsResponse_permissions = ListProfilePermissionsResponse.AddMember("permissions", _Permissions)
-
-	ListProfilePermissionsResponse_nextToken = ListProfilePermissionsResponse.AddMember("nextToken", _String)
-
-	ListSigningJobsRequest_status = ListSigningJobsRequest.AddMember("status", SigningStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListSigningJobsRequest_platformId = ListSigningJobsRequest.AddMember("platformId", _PlatformId, &smithytraits.HTTPQuery{Name: "platformId"})
-
-	ListSigningJobsRequest_requestedBy = ListSigningJobsRequest.AddMember("requestedBy", _RequestedBy, &smithytraits.HTTPQuery{Name: "requestedBy"})
-
-	ListSigningJobsRequest_maxResults = ListSigningJobsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSigningJobsRequest_nextToken = ListSigningJobsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSigningJobsRequest_isRevoked = ListSigningJobsRequest.AddMember("isRevoked", _bool, &smithytraits.HTTPQuery{Name: "isRevoked"})
-
-	ListSigningJobsRequest_signatureExpiresBefore = ListSigningJobsRequest.AddMember("signatureExpiresBefore", _Timestamp, &smithytraits.HTTPQuery{Name: "signatureExpiresBefore"})
-
-	ListSigningJobsRequest_signatureExpiresAfter = ListSigningJobsRequest.AddMember("signatureExpiresAfter", _Timestamp, &smithytraits.HTTPQuery{Name: "signatureExpiresAfter"})
-
-	ListSigningJobsRequest_jobInvoker = ListSigningJobsRequest.AddMember("jobInvoker", _AccountId, &smithytraits.HTTPQuery{Name: "jobInvoker"})
-
-	ListSigningJobsResponse_jobs = ListSigningJobsResponse.AddMember("jobs", _SigningJobs)
-
-	ListSigningJobsResponse_nextToken = ListSigningJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListSigningPlatformsRequest_category = ListSigningPlatformsRequest.AddMember("category", _String, &smithytraits.HTTPQuery{Name: "category"})
-
-	ListSigningPlatformsRequest_partner = ListSigningPlatformsRequest.AddMember("partner", _String, &smithytraits.HTTPQuery{Name: "partner"})
-
-	ListSigningPlatformsRequest_target = ListSigningPlatformsRequest.AddMember("target", _String, &smithytraits.HTTPQuery{Name: "target"})
-
-	ListSigningPlatformsRequest_maxResults = ListSigningPlatformsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSigningPlatformsRequest_nextToken = ListSigningPlatformsRequest.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSigningPlatformsResponse_platforms = ListSigningPlatformsResponse.AddMember("platforms", _SigningPlatforms)
-
-	ListSigningPlatformsResponse_nextToken = ListSigningPlatformsResponse.AddMember("nextToken", _String)
-
-	ListSigningProfilesRequest_includeCanceled = ListSigningProfilesRequest.AddMember("includeCanceled", _bool, &smithytraits.HTTPQuery{Name: "includeCanceled"})
-
-	ListSigningProfilesRequest_maxResults = ListSigningProfilesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSigningProfilesRequest_nextToken = ListSigningProfilesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSigningProfilesRequest_platformId = ListSigningProfilesRequest.AddMember("platformId", _PlatformId, &smithytraits.HTTPQuery{Name: "platformId"})
-
-	ListSigningProfilesRequest_statuses = ListSigningProfilesRequest.AddMember("statuses", _Statuses, &smithytraits.HTTPQuery{Name: "statuses"})
-
-	ListSigningProfilesResponse_profiles = ListSigningProfilesResponse.AddMember("profiles", _SigningProfiles)
-
-	ListSigningProfilesResponse_nextToken = ListSigningProfilesResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	PutSigningProfileRequest_profileName = PutSigningProfileRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	PutSigningProfileRequest_signingMaterial = PutSigningProfileRequest.AddMember("signingMaterial", SigningMaterial)
-
-	PutSigningProfileRequest_signatureValidityPeriod = PutSigningProfileRequest.AddMember("signatureValidityPeriod", SignatureValidityPeriod)
-
-	PutSigningProfileRequest_platformId = PutSigningProfileRequest.AddMember("platformId", _PlatformId)
-
-	PutSigningProfileRequest_overrides = PutSigningProfileRequest.AddMember("overrides", SigningPlatformOverrides)
-
-	PutSigningProfileRequest_signingParameters = PutSigningProfileRequest.AddMember("signingParameters", _SigningParameters)
-
-	PutSigningProfileRequest_tags = PutSigningProfileRequest.AddMember("tags", _TagMap)
-
-	PutSigningProfileResponse_arn = PutSigningProfileResponse.AddMember("arn", _String)
-
-	PutSigningProfileResponse_profileVersion = PutSigningProfileResponse.AddMember("profileVersion", _ProfileVersion)
-
-	PutSigningProfileResponse_profileVersionArn = PutSigningProfileResponse.AddMember("profileVersionArn", _Arn)
-
-	RemoveProfilePermissionRequest_profileName = RemoveProfilePermissionRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	RemoveProfilePermissionRequest_revisionId = RemoveProfilePermissionRequest.AddMember("revisionId", _String, &smithytraits.HTTPQuery{Name: "revisionId"})
-
-	RemoveProfilePermissionRequest_statementId = RemoveProfilePermissionRequest.AddMember("statementId", _String, &smithytraits.HTTPLabel{})
-
-	RemoveProfilePermissionResponse_revisionId = RemoveProfilePermissionResponse.AddMember("revisionId", _String)
-
-	RevokeSignatureRequest_jobId = RevokeSignatureRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	RevokeSignatureRequest_jobOwner = RevokeSignatureRequest.AddMember("jobOwner", _AccountId)
-
-	RevokeSignatureRequest_reason = RevokeSignatureRequest.AddMember("reason", _RevocationReasonString)
-
-	RevokeSigningProfileRequest_profileName = RevokeSigningProfileRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	RevokeSigningProfileRequest_profileVersion = RevokeSigningProfileRequest.AddMember("profileVersion", _ProfileVersion)
-
-	RevokeSigningProfileRequest_reason = RevokeSigningProfileRequest.AddMember("reason", _RevocationReasonString)
-
-	RevokeSigningProfileRequest_effectiveTime = RevokeSigningProfileRequest.AddMember("effectiveTime", _Timestamp)
-
-	SignPayloadRequest_profileName = SignPayloadRequest.AddMember("profileName", _ProfileName)
-
-	SignPayloadRequest_profileOwner = SignPayloadRequest.AddMember("profileOwner", _AccountId)
-
-	SignPayloadRequest_payload = SignPayloadRequest.AddMember("payload", _Payload)
-
-	SignPayloadRequest_payloadFormat = SignPayloadRequest.AddMember("payloadFormat", _String)
-
-	SignPayloadResponse_jobId = SignPayloadResponse.AddMember("jobId", _JobId)
-
-	SignPayloadResponse_jobOwner = SignPayloadResponse.AddMember("jobOwner", _AccountId)
-
-	SignPayloadResponse_metadata = SignPayloadResponse.AddMember("metadata", _Metadata)
-
-	SignPayloadResponse_signature = SignPayloadResponse.AddMember("signature", _Blob)
-
-	StartSigningJobRequest_source = StartSigningJobRequest.AddMember("source", Source)
-
-	StartSigningJobRequest_destination = StartSigningJobRequest.AddMember("destination", Destination)
-
-	StartSigningJobRequest_profileName = StartSigningJobRequest.AddMember("profileName", _ProfileName)
-
-	StartSigningJobRequest_clientRequestToken = StartSigningJobRequest.AddMember("clientRequestToken", _ClientRequestToken)
-
-	StartSigningJobRequest_profileOwner = StartSigningJobRequest.AddMember("profileOwner", _AccountId)
-
-	StartSigningJobResponse_jobId = StartSigningJobResponse.AddMember("jobId", _JobId)
-
-	StartSigningJobResponse_jobOwner = StartSigningJobResponse.AddMember("jobOwner", _AccountId)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
+const blob = "" +
+	"RemoveProfilePermissionResponseListProfilePermissionsResponseRemoveProfilePermissionRequestSigningPr" +
+	"ofileRevocationRecordInternalServiceErrorExceptionListProfilePermissionsRequestServiceLimitExceededE" +
+	"xceptionSigningConfigurationOverridesAddProfilePermissionResponseListSigningPlatformsResponseAddProf" +
+	"ilePermissionRequestCancelSigningProfileRequestGetRevocationStatusResponseListSigningPlatformsReques" +
+	"tListSigningProfilesResponseListTagsForResourceResponseRevokeSigningProfileRequestDescribeSigningJob" +
+	"ResponseEncryptionAlgorithmOptionsGetRevocationStatusRequestGetSigningPlatformResponseListSigningPro" +
+	"filesRequestListTagsForResourceRequestSigningJobRevocationRecordencryptionAlgorithmOptionsDescribeSi" +
+	"gningJobRequestGetSigningPlatformRequestGetSigningProfileResponsePutSigningProfileResponseResourceNo" +
+	"tFoundExceptionGetSigningProfileRequestPutSigningProfileRequestSigningPlatformOverridesTooManyReques" +
+	"tsExceptionListSigningJobsResponseSignatureValidityPeriodStartSigningJobResponserevocationEffectiveF" +
+	"romsignatureValidityPeriodListSigningJobsRequestRevocationReasonStringRevokeSignatureRequestStartSig" +
+	"ningJobRequestsignatureExpiresBeforeAccessDeniedExceptionSigningParameterValueUntagResourceResponses" +
+	"ignatureExpiresAfterEncryptionAlgorithmsHashAlgorithmOptionsSigningProfileStatusUntagResourceRequest" +
+	"hashAlgorithmOptionssigningConfigurationBadRequestExceptionSignPayloadResponseSigningParameterKeyTag" +
+	"ResourceResponseThrottlingExceptionValidationExceptionplatformDisplayNamerevocationSupportedClientRe" +
+	"questTokenSignPayloadRequestSigningImageFormatTagResourceRequestclientRequestTokensignatureExpiresAt" +
+	"signatureTimestampsigningImageFormatCertificateHashesConflictExceptionSigningParameterscertificateHa" +
+	"shesprofileVersionArnsigningParametersrevocationRecordsupportedFormatsPolicySizeBytesRevokedEntities" +
+	"SigningMaterialincludeCanceledpolicySizeBytesrevokedEntitiessigningMaterialCertificateArnHashAlgorit" +
+	"hmsProfileVersionS3SignedObjectWallabyServicecertificateArnS3DestinationSigningStatusallowedValuesde" +
+	"faultFormateffectiveTimepayloadFormatErrorMessageImageFormatsJSONDetachedJSONEmbeddedStatusReasonVal" +
+	"idityTypedefaultValueprofileOwnersignedObjectstatusReasonMaxSizeInMBProfileNameRequestedBycompletedA" +
+	"tdestinationdisplayNamemaxSizeInMBpermissionsprofileNamerequestedByresourceArnstatementIdBucketNameI" +
+	"nProgressMaxResultsPlatformIdTagKeyListbucketNamejobInvokermaxResultsplatformIdrevisionIdAccountIdEr" +
+	"rorCodeNextTokenSucceededcreatedAtisRevokednextTokenoverridesplatformsprincipalrevokedAtrevokedByCat" +
+	"egoryMetadataS3SourceStatusesTagValuecategoryjobOwnermetadataprofilesstatusesIntegermessagepartnerta" +
+	"gKeysversionAWSIoTActiveFailedMONTHSPrefixSHA256TagMapactionjobArnmemberprefixreasontargetECDSAJobId" +
+	"YEARSjobIdvalueBlobDAYSSHA1UnitboolcodejobstagstypeRSAarnkeys3"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.signer", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 237, Target: 0, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 320, Target: 1, Traits: 1, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 482, Target: 2, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 347, Target: 3, Traits: 3, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 560, Target: 4, Traits: 4, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 740, Target: 5, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 31, Target: 6, Traits: 6, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 911, Target: 7, Traits: 7, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 265, Target: 8, Traits: 8, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 401, Target: 9, Traits: 9, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 428, Target: 10, Traits: 10, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 765, Target: 11, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 12, Traits: 12, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1070, Target: 13, Traits: 13, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 455, Target: 14, Traits: 14, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1359, Target: 15, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 957, Target: 16, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1397, Target: 17, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1178, Target: 18, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1931, Target: 19, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1136, Target: 20, Traits: 20, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2389, Target: 23, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1718, Target: 24, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1340, Target: 25, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2715, Target: 28, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 2731, Target: 29, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 2289, Target: 30, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2497, Target: 31, Traits: 19, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2612, Target: 394, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1875, Target: 33, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1636, Target: 34, Traits: 19, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 203, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1492, Target: 36, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1653, Target: 37, Traits: 22, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1961, Target: 40, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2760, Target: 102, Traits: 19, StrLen: 2, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1462, Target: 42, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 508, Target: 43, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2751, Target: 394, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2690, Target: 394, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 508, Target: 46, Traits: 19, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1985, Target: 49, Traits: 19, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2109, Target: 43, Traits: 19, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1220, Target: 49, Traits: 19, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 43, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2398, Target: 51, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2037, Target: 52, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1240, Target: 53, Traits: 19, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2723, Target: 394, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2642, Target: 394, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1240, Target: 56, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1985, Target: 59, Traits: 19, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2109, Target: 53, Traits: 19, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1889, Target: 59, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 53, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1535, Target: 61, Traits: 19, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2061, Target: 394, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2073, Target: 394, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2061, Target: 394, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2049, Target: 65, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 61, Traits: 19, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2577, Target: 67, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 121, Target: 68, Traits: 23, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2695, Target: 71, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1394, Target: 72, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2309, Target: 73, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2157, Target: 74, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2505, Target: 75, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2757, Target: 203, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2710, Target: 203, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2407, Target: 78, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 798, Target: 79, Traits: 24, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1363, Target: 82, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 13, Target: 83, Traits: 19, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2654, Target: 203, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2470, Target: 203, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2278, Target: 203, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 42, Target: 88, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 83, Traits: 19, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2319, Target: 90, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1770, Target: 91, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2636, Target: 92, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2168, Target: 93, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1903, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2179, Target: 95, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 790, Target: 96, Traits: 24, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1048, Target: 99, Traits: 19, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1785, Target: 100, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 203, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1959, Target: 102, Traits: 19, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2339, Target: 30, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2672, Target: 92, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1917, Target: 105, Traits: 19, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2339, Target: 30, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2757, Target: 72, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2513, Target: 108, Traits: 19, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2339, Target: 30, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2757, Target: 72, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2605, Target: 225, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 179, Target: 112, Traits: 25, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 934, Target: 115, Traits: 19, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2710, Target: 67, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2747, Target: 221, Traits: 19, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1919, Target: 118, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2760, Target: 105, Traits: 19, StrLen: 2, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 208, Target: 120, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 664, Target: 46, Traits: 19, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1300, Target: 56, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 208, Target: 123, Traits: 19, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 664, Target: 43, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1300, Target: 53, Traits: 19, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1528, Target: 126, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1754, Target: 65, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1998, Target: 61, Traits: 19, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 490, Target: 129, Traits: 19, StrLen: 10, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2705, Target: 71, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 441, Target: 198, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2133, Target: 118, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1860, Target: 150, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2425, Target: 214, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2145, Target: 194, Traits: 19, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2434, Target: 29, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2245, Target: 93, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2369, Target: 90, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1454, Target: 42, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1582, Target: 214, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2545, Target: 23, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2349, Target: 23, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 638, Target: 144, Traits: 19, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2678, Target: 203, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2479, Target: 214, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2488, Target: 203, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 915, Target: 148, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 129, Traits: 19, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1800, Target: 150, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1945, Target: 33, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1378, Target: 152, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1670, Target: 153, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2757, Target: 152, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2710, Target: 156, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1157, Target: 156, Traits: 19, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 269, Target: 157, Traits: 19, StrLen: 15, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2369, Target: 203, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2212, Target: 203, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2591, Target: 203, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2684, Target: 203, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2537, Target: 31, Traits: 19, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1320, Target: 120, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1618, Target: 126, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2223, Target: 74, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1473, Target: 29, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 863, Target: 167, Traits: 19, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1320, Target: 123, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1618, Target: 61, Traits: 19, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 269, Target: 170, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 157, Traits: 19, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 91, Target: 172, Traits: 19, StrLen: 14, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 24, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1860, Target: 150, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1003, Target: 115, Traits: 19, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2369, Target: 90, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1454, Target: 42, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1721, Target: 153, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2145, Target: 190, Traits: 19, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2754, Target: 203, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2743, Target: 207, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 91, Target: 184, Traits: 19, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 980, Target: 214, Traits: 19, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2479, Target: 214, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2488, Target: 203, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 405, Target: 188, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 172, Traits: 19, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1260, Target: 190, Traits: 19, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2618, Target: 394, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1822, Target: 394, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1785, Target: 394, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1972, Target: 194, Traits: 19, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2299, Target: 394, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2624, Target: 394, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2416, Target: 394, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2515, Target: 198, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2760, Target: 108, Traits: 19, StrLen: 2, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2521, Target: 200, Traits: 19, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 190, Traits: 19, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2085, Target: 202, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1064, Target: 203, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2329, Target: 204, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2329, Target: 205, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2666, Target: 204, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2648, Target: 207, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2757, Target: 204, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2710, Target: 210, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2529, Target: 210, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1416, Target: 211, Traits: 26, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1609, Target: 214, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 887, Target: 215, Traits: 26, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1435, Target: 218, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 52, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2735, Target: 51, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2097, Target: 221, Traits: 19, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2719, Target: 394, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2630, Target: 394, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2700, Target: 394, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1711, Target: 225, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 293, Target: 226, Traits: 19, StrLen: 27, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2654, Target: 203, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2470, Target: 203, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2379, Target: 203, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2278, Target: 203, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 237, Target: 233, Traits: 19, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2379, Target: 203, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 320, Target: 235, Traits: 19, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 690, Target: 237, Traits: 19, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2705, Target: 71, Traits: 27, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 482, Target: 239, Traits: 19, StrLen: 26, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2705, Target: 71, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 441, Target: 198, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1860, Target: 150, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2369, Target: 90, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1454, Target: 42, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2245, Target: 93, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2452, Target: 167, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1721, Target: 153, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2425, Target: 214, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2190, Target: 214, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1582, Target: 214, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2256, Target: 95, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2145, Target: 194, Traits: 19, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2145, Target: 202, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1738, Target: 144, Traits: 19, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2133, Target: 118, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2545, Target: 23, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2349, Target: 23, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 534, Target: 259, Traits: 19, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1600, Target: 214, Traits: 28, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2369, Target: 90, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 24, Traits: 30, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2660, Target: 24, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1687, Target: 34, Traits: 32, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 347, Target: 265, Traits: 19, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1845, Target: 100, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 715, Target: 267, Traits: 19, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2369, Target: 90, Traits: 27, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 560, Target: 269, Traits: 19, StrLen: 26, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2369, Target: 90, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2212, Target: 42, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2591, Target: 203, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2684, Target: 203, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2537, Target: 31, Traits: 19, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1320, Target: 120, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1618, Target: 126, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2223, Target: 74, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1473, Target: 29, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 815, Target: 279, Traits: 19, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2121, Target: 23, Traits: 33, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 740, Target: 282, Traits: 19, StrLen: 25, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 24, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1738, Target: 184, Traits: 19, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1860, Target: 150, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2369, Target: 90, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1454, Target: 42, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1003, Target: 115, Traits: 19, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2452, Target: 167, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1721, Target: 153, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2145, Target: 190, Traits: 19, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2145, Target: 203, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2754, Target: 203, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2743, Target: 207, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 150, Target: 297, Traits: 19, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2443, Target: 203, Traits: 34, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 31, Target: 300, Traits: 19, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2379, Target: 203, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1830, Target: 91, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2234, Target: 88, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2443, Target: 203, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1026, Target: 305, Traits: 19, StrLen: 22, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2145, Target: 194, Traits: 35, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2369, Target: 90, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2256, Target: 95, Traits: 36, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2359, Target: 73, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2443, Target: 78, Traits: 34, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2434, Target: 29, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1114, Target: 214, Traits: 39, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1199, Target: 214, Traits: 40, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2349, Target: 23, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 911, Target: 315, Traits: 19, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2739, Target: 148, Traits: 19, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2443, Target: 78, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 374, Target: 318, Traits: 19, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2537, Target: 203, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2591, Target: 203, Traits: 43, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2684, Target: 203, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2359, Target: 73, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2443, Target: 203, Traits: 34, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 265, Target: 324, Traits: 19, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2461, Target: 170, Traits: 19, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2443, Target: 203, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 586, Target: 327, Traits: 19, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1815, Target: 29, Traits: 45, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2359, Target: 73, Traits: 37, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2443, Target: 78, Traits: 34, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2369, Target: 90, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2569, Target: 200, Traits: 46, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 401, Target: 333, Traits: 19, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2561, Target: 188, Traits: 19, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2443, Target: 78, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 336, Traits: 19, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2267, Target: 203, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 428, Target: 338, Traits: 19, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2743, Target: 207, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 839, Target: 340, Traits: 19, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1860, Target: 150, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1003, Target: 115, Traits: 19, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2369, Target: 90, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2452, Target: 167, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1721, Target: 153, Traits: 19, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2743, Target: 207, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 765, Target: 348, Traits: 19, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2754, Target: 203, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 24, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 61, Target: 352, Traits: 19, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2379, Target: 203, Traits: 47, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2278, Target: 203, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 356, Traits: 19, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2379, Target: 203, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1070, Target: 358, Traits: 19, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2705, Target: 71, Traits: 27, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2545, Target: 23, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2678, Target: 99, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 455, Target: 362, Traits: 19, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 94, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2678, Target: 99, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2011, Target: 214, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1510, Target: 367, Traits: 19, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2245, Target: 93, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2121, Target: 23, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2024, Target: 82, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 2024, Target: 203, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1359, Target: 372, Traits: 19, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2705, Target: 71, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2545, Target: 23, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2553, Target: 75, Traits: 19, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1003, Target: 28, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1092, Target: 377, Traits: 19, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 441, Target: 198, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2201, Target: 40, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2245, Target: 93, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1564, Target: 36, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2121, Target: 23, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 957, Target: 383, Traits: 19, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2705, Target: 71, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2545, Target: 23, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1546, Target: 386, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2267, Target: 203, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2743, Target: 207, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1397, Target: 389, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1280, Target: 390, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2267, Target: 203, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2598, Target: 205, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1178, Target: 393, Traits: 19, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2727, Target: 394, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/signing-profiles/{profileName}/permissions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/signing-profiles/{profileName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/signing-jobs/{jobId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/revocations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/signing-platforms/{platformId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/signing-profiles/{profileName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/signing-profiles/{profileName}/permissions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/signing-jobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/signing-platforms",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/signing-profiles",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/signing-profiles/{profileName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/signing-profiles/{profileName}/permissions/{statementId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/signing-jobs/{jobId}/revoke",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/signing-profiles/{profileName}/revoke",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/signing-jobs/with-payload",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/signing-jobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signatureTimestamp"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "platformId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "profileVersionArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "certificateHashes"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "profileOwner"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "requestedBy"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "isRevoked"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signatureExpiresBefore"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signatureExpiresAfter"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobInvoker"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "category"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "partner"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "target"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeCanceled"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "statuses"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "revisionId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [395]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+}
+
+var AddProfilePermission = &handles[0]
+
+var CancelSigningProfile = &handles[1]
+
+var DescribeSigningJob = &handles[2]
+
+var GetRevocationStatus = &handles[3]
+
+var GetSigningPlatform = &handles[4]
+
+var GetSigningProfile = &handles[5]
+
+var ListProfilePermissions = &handles[6]
+
+var ListSigningJobs = &handles[7]
+
+var ListSigningPlatforms = &handles[8]
+
+var ListSigningProfiles = &handles[9]
+
+var ListTagsForResource = &handles[10]
+
+var PutSigningProfile = &handles[11]
+
+var RemoveProfilePermission = &handles[12]
+
+var RevokeSignature = &handles[13]
+
+var RevokeSigningProfile = &handles[14]
+
+var SignPayload = &handles[15]
+
+var StartSigningJob = &handles[16]
+
+var TagResource = &handles[17]
+
+var UntagResource = &handles[18]
+
+var _WallabyService = &handles[19]
+
+var AccessDeniedException = &handles[20]
+var AccessDeniedException_message = &handles[21]
+var AccessDeniedException_code = &handles[22]
+
+var _AccountId = &handles[23]
+
+var _Arn = &handles[24]
+
+var BadRequestException = &handles[25]
+var BadRequestException_message = &handles[26]
+var BadRequestException_code = &handles[27]
+
+var _Blob = &handles[28]
+
+var _bool = &handles[29]
+
+var _BucketName = &handles[30]
+
+var Category = &handles[31]
+var Category_AWSIoT = &handles[32]
+
+var _CertificateArn = &handles[33]
+
+var _CertificateHashes = &handles[34]
+var _CertificateHashes_member = &handles[35]
+
+var _ClientRequestToken = &handles[36]
+
+var ConflictException = &handles[37]
+var ConflictException_message = &handles[38]
+var ConflictException_code = &handles[39]
+
+var Destination = &handles[40]
+var Destination_s3 = &handles[41]
+
+var _DisplayName = &handles[42]
+
+var EncryptionAlgorithm = &handles[43]
+var EncryptionAlgorithm_RSA = &handles[44]
+var EncryptionAlgorithm_ECDSA = &handles[45]
+
+var EncryptionAlgorithmOptions = &handles[46]
+var EncryptionAlgorithmOptions_allowedValues = &handles[47]
+var EncryptionAlgorithmOptions_defaultValue = &handles[48]
+
+var _EncryptionAlgorithms = &handles[49]
+var _EncryptionAlgorithms_member = &handles[50]
+
+var _ErrorCode = &handles[51]
+
+var _ErrorMessage = &handles[52]
+
+var HashAlgorithm = &handles[53]
+var HashAlgorithm_SHA1 = &handles[54]
+var HashAlgorithm_SHA256 = &handles[55]
+
+var HashAlgorithmOptions = &handles[56]
+var HashAlgorithmOptions_allowedValues = &handles[57]
+var HashAlgorithmOptions_defaultValue = &handles[58]
+
+var _HashAlgorithms = &handles[59]
+var _HashAlgorithms_member = &handles[60]
+
+var ImageFormat = &handles[61]
+var ImageFormat_JSON = &handles[62]
+var ImageFormat_JSONEmbedded = &handles[63]
+var ImageFormat_JSONDetached = &handles[64]
+
+var _ImageFormats = &handles[65]
+var _ImageFormats_member = &handles[66]
+
+var _Integer = &handles[67]
+
+var InternalServiceErrorException = &handles[68]
+var InternalServiceErrorException_message = &handles[69]
+var InternalServiceErrorException_code = &handles[70]
+
+var _JobId = &handles[71]
+
+var _Key = &handles[72]
+
+var _MaxResults = &handles[73]
+
+var _MaxSizeInMB = &handles[74]
+
+var _Metadata = &handles[75]
+var _Metadata_key = &handles[76]
+var _Metadata_value = &handles[77]
+
+var _NextToken = &handles[78]
+
+var NotFoundException = &handles[79]
+var NotFoundException_message = &handles[80]
+var NotFoundException_code = &handles[81]
+
+var _Payload = &handles[82]
+
+var Permission = &handles[83]
+var Permission_action = &handles[84]
+var Permission_principal = &handles[85]
+var Permission_statementId = &handles[86]
+var Permission_profileVersion = &handles[87]
+
+var _Permissions = &handles[88]
+var _Permissions_member = &handles[89]
+
+var _PlatformId = &handles[90]
+
+var _PolicySizeBytes = &handles[91]
+
+var _Prefix = &handles[92]
+
+var _ProfileName = &handles[93]
+
+var _ProfileVersion = &handles[94]
+
+var _RequestedBy = &handles[95]
+
+var ResourceNotFoundException = &handles[96]
+var ResourceNotFoundException_message = &handles[97]
+var ResourceNotFoundException_code = &handles[98]
+
+var _RevocationReasonString = &handles[99]
+
+var _RevokedEntities = &handles[100]
+var _RevokedEntities_member = &handles[101]
+
+var S3Destination = &handles[102]
+var S3Destination_bucketName = &handles[103]
+var S3Destination_prefix = &handles[104]
+
+var S3SignedObject = &handles[105]
+var S3SignedObject_bucketName = &handles[106]
+var S3SignedObject_key = &handles[107]
+
+var S3Source = &handles[108]
+var S3Source_bucketName = &handles[109]
+var S3Source_key = &handles[110]
+var S3Source_version = &handles[111]
+
+var ServiceLimitExceededException = &handles[112]
+var ServiceLimitExceededException_message = &handles[113]
+var ServiceLimitExceededException_code = &handles[114]
+
+var SignatureValidityPeriod = &handles[115]
+var SignatureValidityPeriod_value = &handles[116]
+var SignatureValidityPeriod_type = &handles[117]
+
+var SignedObject = &handles[118]
+var SignedObject_s3 = &handles[119]
+
+var SigningConfiguration = &handles[120]
+var SigningConfiguration_encryptionAlgorithmOptions = &handles[121]
+var SigningConfiguration_hashAlgorithmOptions = &handles[122]
+
+var SigningConfigurationOverrides = &handles[123]
+var SigningConfigurationOverrides_encryptionAlgorithm = &handles[124]
+var SigningConfigurationOverrides_hashAlgorithm = &handles[125]
+
+var SigningImageFormat = &handles[126]
+var SigningImageFormat_supportedFormats = &handles[127]
+var SigningImageFormat_defaultFormat = &handles[128]
+
+var SigningJob = &handles[129]
+var SigningJob_jobId = &handles[130]
+var SigningJob_source = &handles[131]
+var SigningJob_signedObject = &handles[132]
+var SigningJob_signingMaterial = &handles[133]
+var SigningJob_createdAt = &handles[134]
+var SigningJob_status = &handles[135]
+var SigningJob_isRevoked = &handles[136]
+var SigningJob_profileName = &handles[137]
+var SigningJob_profileVersion = &handles[138]
+var SigningJob_platformId = &handles[139]
+var SigningJob_platformDisplayName = &handles[140]
+var SigningJob_signatureExpiresAt = &handles[141]
+var SigningJob_jobOwner = &handles[142]
+var SigningJob_jobInvoker = &handles[143]
+
+var SigningJobRevocationRecord = &handles[144]
+var SigningJobRevocationRecord_reason = &handles[145]
+var SigningJobRevocationRecord_revokedAt = &handles[146]
+var SigningJobRevocationRecord_revokedBy = &handles[147]
+
+var _SigningJobs = &handles[148]
+var _SigningJobs_member = &handles[149]
+
+var SigningMaterial = &handles[150]
+var SigningMaterial_certificateArn = &handles[151]
+
+var _SigningParameterKey = &handles[152]
+
+var _SigningParameters = &handles[153]
+var _SigningParameters_key = &handles[154]
+var _SigningParameters_value = &handles[155]
+
+var _SigningParameterValue = &handles[156]
+
+var SigningPlatform = &handles[157]
+var SigningPlatform_platformId = &handles[158]
+var SigningPlatform_displayName = &handles[159]
+var SigningPlatform_partner = &handles[160]
+var SigningPlatform_target = &handles[161]
+var SigningPlatform_category = &handles[162]
+var SigningPlatform_signingConfiguration = &handles[163]
+var SigningPlatform_signingImageFormat = &handles[164]
+var SigningPlatform_maxSizeInMB = &handles[165]
+var SigningPlatform_revocationSupported = &handles[166]
+
+var SigningPlatformOverrides = &handles[167]
+var SigningPlatformOverrides_signingConfiguration = &handles[168]
+var SigningPlatformOverrides_signingImageFormat = &handles[169]
+
+var _SigningPlatforms = &handles[170]
+var _SigningPlatforms_member = &handles[171]
+
+var SigningProfile = &handles[172]
+var SigningProfile_profileName = &handles[173]
+var SigningProfile_profileVersion = &handles[174]
+var SigningProfile_profileVersionArn = &handles[175]
+var SigningProfile_signingMaterial = &handles[176]
+var SigningProfile_signatureValidityPeriod = &handles[177]
+var SigningProfile_platformId = &handles[178]
+var SigningProfile_platformDisplayName = &handles[179]
+var SigningProfile_signingParameters = &handles[180]
+var SigningProfile_status = &handles[181]
+var SigningProfile_arn = &handles[182]
+var SigningProfile_tags = &handles[183]
+
+var SigningProfileRevocationRecord = &handles[184]
+var SigningProfileRevocationRecord_revocationEffectiveFrom = &handles[185]
+var SigningProfileRevocationRecord_revokedAt = &handles[186]
+var SigningProfileRevocationRecord_revokedBy = &handles[187]
+
+var _SigningProfiles = &handles[188]
+var _SigningProfiles_member = &handles[189]
+
+var SigningProfileStatus = &handles[190]
+var SigningProfileStatus_Active = &handles[191]
+var SigningProfileStatus_Canceled = &handles[192]
+var SigningProfileStatus_Revoked = &handles[193]
+
+var SigningStatus = &handles[194]
+var SigningStatus_InProgress = &handles[195]
+var SigningStatus_Failed = &handles[196]
+var SigningStatus_Succeeded = &handles[197]
+
+var Source = &handles[198]
+var Source_s3 = &handles[199]
+
+var _Statuses = &handles[200]
+var _Statuses_member = &handles[201]
+
+var _StatusReason = &handles[202]
+
+var _String = &handles[203]
+
+var _TagKey = &handles[204]
+
+var _TagKeyList = &handles[205]
+var _TagKeyList_member = &handles[206]
+
+var _TagMap = &handles[207]
+var _TagMap_key = &handles[208]
+var _TagMap_value = &handles[209]
+
+var _TagValue = &handles[210]
+
+var ThrottlingException = &handles[211]
+var ThrottlingException_message = &handles[212]
+var ThrottlingException_code = &handles[213]
+
+var _Timestamp = &handles[214]
+
+var TooManyRequestsException = &handles[215]
+var TooManyRequestsException_message = &handles[216]
+var TooManyRequestsException_code = &handles[217]
+
+var ValidationException = &handles[218]
+var ValidationException_message = &handles[219]
+var ValidationException_code = &handles[220]
+
+var ValidityType = &handles[221]
+var ValidityType_DAYS = &handles[222]
+var ValidityType_MONTHS = &handles[223]
+var ValidityType_YEARS = &handles[224]
+
+var _Version = &handles[225]
+
+var AddProfilePermissionRequest = &handles[226]
+var AddProfilePermissionRequest_profileName = &handles[227]
+var AddProfilePermissionRequest_profileVersion = &handles[228]
+var AddProfilePermissionRequest_action = &handles[229]
+var AddProfilePermissionRequest_principal = &handles[230]
+var AddProfilePermissionRequest_revisionId = &handles[231]
+var AddProfilePermissionRequest_statementId = &handles[232]
+
+var AddProfilePermissionResponse = &handles[233]
+var AddProfilePermissionResponse_revisionId = &handles[234]
+
+var CancelSigningProfileRequest = &handles[235]
+var CancelSigningProfileRequest_profileName = &handles[236]
+
+var DescribeSigningJobRequest = &handles[237]
+var DescribeSigningJobRequest_jobId = &handles[238]
+
+var DescribeSigningJobResponse = &handles[239]
+var DescribeSigningJobResponse_jobId = &handles[240]
+var DescribeSigningJobResponse_source = &handles[241]
+var DescribeSigningJobResponse_signingMaterial = &handles[242]
+var DescribeSigningJobResponse_platformId = &handles[243]
+var DescribeSigningJobResponse_platformDisplayName = &handles[244]
+var DescribeSigningJobResponse_profileName = &handles[245]
+var DescribeSigningJobResponse_profileVersion = &handles[246]
+var DescribeSigningJobResponse_overrides = &handles[247]
+var DescribeSigningJobResponse_signingParameters = &handles[248]
+var DescribeSigningJobResponse_createdAt = &handles[249]
+var DescribeSigningJobResponse_completedAt = &handles[250]
+var DescribeSigningJobResponse_signatureExpiresAt = &handles[251]
+var DescribeSigningJobResponse_requestedBy = &handles[252]
+var DescribeSigningJobResponse_status = &handles[253]
+var DescribeSigningJobResponse_statusReason = &handles[254]
+var DescribeSigningJobResponse_revocationRecord = &handles[255]
+var DescribeSigningJobResponse_signedObject = &handles[256]
+var DescribeSigningJobResponse_jobOwner = &handles[257]
+var DescribeSigningJobResponse_jobInvoker = &handles[258]
+
+var GetRevocationStatusRequest = &handles[259]
+var GetRevocationStatusRequest_signatureTimestamp = &handles[260]
+var GetRevocationStatusRequest_platformId = &handles[261]
+var GetRevocationStatusRequest_profileVersionArn = &handles[262]
+var GetRevocationStatusRequest_jobArn = &handles[263]
+var GetRevocationStatusRequest_certificateHashes = &handles[264]
+
+var GetRevocationStatusResponse = &handles[265]
+var GetRevocationStatusResponse_revokedEntities = &handles[266]
+
+var GetSigningPlatformRequest = &handles[267]
+var GetSigningPlatformRequest_platformId = &handles[268]
+
+var GetSigningPlatformResponse = &handles[269]
+var GetSigningPlatformResponse_platformId = &handles[270]
+var GetSigningPlatformResponse_displayName = &handles[271]
+var GetSigningPlatformResponse_partner = &handles[272]
+var GetSigningPlatformResponse_target = &handles[273]
+var GetSigningPlatformResponse_category = &handles[274]
+var GetSigningPlatformResponse_signingConfiguration = &handles[275]
+var GetSigningPlatformResponse_signingImageFormat = &handles[276]
+var GetSigningPlatformResponse_maxSizeInMB = &handles[277]
+var GetSigningPlatformResponse_revocationSupported = &handles[278]
+
+var GetSigningProfileRequest = &handles[279]
+var GetSigningProfileRequest_profileName = &handles[280]
+var GetSigningProfileRequest_profileOwner = &handles[281]
+
+var GetSigningProfileResponse = &handles[282]
+var GetSigningProfileResponse_profileName = &handles[283]
+var GetSigningProfileResponse_profileVersion = &handles[284]
+var GetSigningProfileResponse_profileVersionArn = &handles[285]
+var GetSigningProfileResponse_revocationRecord = &handles[286]
+var GetSigningProfileResponse_signingMaterial = &handles[287]
+var GetSigningProfileResponse_platformId = &handles[288]
+var GetSigningProfileResponse_platformDisplayName = &handles[289]
+var GetSigningProfileResponse_signatureValidityPeriod = &handles[290]
+var GetSigningProfileResponse_overrides = &handles[291]
+var GetSigningProfileResponse_signingParameters = &handles[292]
+var GetSigningProfileResponse_status = &handles[293]
+var GetSigningProfileResponse_statusReason = &handles[294]
+var GetSigningProfileResponse_arn = &handles[295]
+var GetSigningProfileResponse_tags = &handles[296]
+
+var ListProfilePermissionsRequest = &handles[297]
+var ListProfilePermissionsRequest_profileName = &handles[298]
+var ListProfilePermissionsRequest_nextToken = &handles[299]
+
+var ListProfilePermissionsResponse = &handles[300]
+var ListProfilePermissionsResponse_revisionId = &handles[301]
+var ListProfilePermissionsResponse_policySizeBytes = &handles[302]
+var ListProfilePermissionsResponse_permissions = &handles[303]
+var ListProfilePermissionsResponse_nextToken = &handles[304]
+
+var ListSigningJobsRequest = &handles[305]
+var ListSigningJobsRequest_status = &handles[306]
+var ListSigningJobsRequest_platformId = &handles[307]
+var ListSigningJobsRequest_requestedBy = &handles[308]
+var ListSigningJobsRequest_maxResults = &handles[309]
+var ListSigningJobsRequest_nextToken = &handles[310]
+var ListSigningJobsRequest_isRevoked = &handles[311]
+var ListSigningJobsRequest_signatureExpiresBefore = &handles[312]
+var ListSigningJobsRequest_signatureExpiresAfter = &handles[313]
+var ListSigningJobsRequest_jobInvoker = &handles[314]
+
+var ListSigningJobsResponse = &handles[315]
+var ListSigningJobsResponse_jobs = &handles[316]
+var ListSigningJobsResponse_nextToken = &handles[317]
+
+var ListSigningPlatformsRequest = &handles[318]
+var ListSigningPlatformsRequest_category = &handles[319]
+var ListSigningPlatformsRequest_partner = &handles[320]
+var ListSigningPlatformsRequest_target = &handles[321]
+var ListSigningPlatformsRequest_maxResults = &handles[322]
+var ListSigningPlatformsRequest_nextToken = &handles[323]
+
+var ListSigningPlatformsResponse = &handles[324]
+var ListSigningPlatformsResponse_platforms = &handles[325]
+var ListSigningPlatformsResponse_nextToken = &handles[326]
+
+var ListSigningProfilesRequest = &handles[327]
+var ListSigningProfilesRequest_includeCanceled = &handles[328]
+var ListSigningProfilesRequest_maxResults = &handles[329]
+var ListSigningProfilesRequest_nextToken = &handles[330]
+var ListSigningProfilesRequest_platformId = &handles[331]
+var ListSigningProfilesRequest_statuses = &handles[332]
+
+var ListSigningProfilesResponse = &handles[333]
+var ListSigningProfilesResponse_profiles = &handles[334]
+var ListSigningProfilesResponse_nextToken = &handles[335]
+
+var ListTagsForResourceRequest = &handles[336]
+var ListTagsForResourceRequest_resourceArn = &handles[337]
+
+var ListTagsForResourceResponse = &handles[338]
+var ListTagsForResourceResponse_tags = &handles[339]
+
+var PutSigningProfileRequest = &handles[340]
+var PutSigningProfileRequest_profileName = &handles[341]
+var PutSigningProfileRequest_signingMaterial = &handles[342]
+var PutSigningProfileRequest_signatureValidityPeriod = &handles[343]
+var PutSigningProfileRequest_platformId = &handles[344]
+var PutSigningProfileRequest_overrides = &handles[345]
+var PutSigningProfileRequest_signingParameters = &handles[346]
+var PutSigningProfileRequest_tags = &handles[347]
+
+var PutSigningProfileResponse = &handles[348]
+var PutSigningProfileResponse_arn = &handles[349]
+var PutSigningProfileResponse_profileVersion = &handles[350]
+var PutSigningProfileResponse_profileVersionArn = &handles[351]
+
+var RemoveProfilePermissionRequest = &handles[352]
+var RemoveProfilePermissionRequest_profileName = &handles[353]
+var RemoveProfilePermissionRequest_revisionId = &handles[354]
+var RemoveProfilePermissionRequest_statementId = &handles[355]
+
+var RemoveProfilePermissionResponse = &handles[356]
+var RemoveProfilePermissionResponse_revisionId = &handles[357]
+
+var RevokeSignatureRequest = &handles[358]
+var RevokeSignatureRequest_jobId = &handles[359]
+var RevokeSignatureRequest_jobOwner = &handles[360]
+var RevokeSignatureRequest_reason = &handles[361]
+
+var RevokeSigningProfileRequest = &handles[362]
+var RevokeSigningProfileRequest_profileName = &handles[363]
+var RevokeSigningProfileRequest_profileVersion = &handles[364]
+var RevokeSigningProfileRequest_reason = &handles[365]
+var RevokeSigningProfileRequest_effectiveTime = &handles[366]
+
+var SignPayloadRequest = &handles[367]
+var SignPayloadRequest_profileName = &handles[368]
+var SignPayloadRequest_profileOwner = &handles[369]
+var SignPayloadRequest_payload = &handles[370]
+var SignPayloadRequest_payloadFormat = &handles[371]
+
+var SignPayloadResponse = &handles[372]
+var SignPayloadResponse_jobId = &handles[373]
+var SignPayloadResponse_jobOwner = &handles[374]
+var SignPayloadResponse_metadata = &handles[375]
+var SignPayloadResponse_signature = &handles[376]
+
+var StartSigningJobRequest = &handles[377]
+var StartSigningJobRequest_source = &handles[378]
+var StartSigningJobRequest_destination = &handles[379]
+var StartSigningJobRequest_profileName = &handles[380]
+var StartSigningJobRequest_clientRequestToken = &handles[381]
+var StartSigningJobRequest_profileOwner = &handles[382]
+
+var StartSigningJobResponse = &handles[383]
+var StartSigningJobResponse_jobId = &handles[384]
+var StartSigningJobResponse_jobOwner = &handles[385]
+
+var TagResourceRequest = &handles[386]
+var TagResourceRequest_resourceArn = &handles[387]
+var TagResourceRequest_tags = &handles[388]
+
+var TagResourceResponse = &handles[389]
+
+var UntagResourceRequest = &handles[390]
+var UntagResourceRequest_resourceArn = &handles[391]
+var UntagResourceRequest_tagKeys = &handles[392]
+
+var UntagResourceResponse = &handles[393]
+
+var WallabyService = &smithy.ServiceSchema{Schema: &handles[19], Version: "2017-08-25"}

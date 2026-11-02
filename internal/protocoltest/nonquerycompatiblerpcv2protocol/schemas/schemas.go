@@ -6,19 +6,28 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-var NonQueryCompatibleOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.rpcv2cbor",
-	Name:      "NonQueryCompatibleOperation",
-}, smithy.ShapeTypeOperation, 0)
+const blob = "" +
+	"NonQueryCompatibleRpcV2ProtocolNonQueryCompatibleOperation"
 
-var _NonQueryCompatibleRpcV2Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.rpcv2cbor",
-	Name:      "NonQueryCompatibleRpcV2Protocol",
-}, smithy.ShapeTypeService, 0)
-
-var NonQueryCompatibleRpcV2Protocol = smithy.NewServiceSchema(_NonQueryCompatibleRpcV2Protocol, "2025-06-20")
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"aws.protocoltests.rpcv2cbor"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 31, Target: 0, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+	},
 }
+
+var handles = [2]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+}
+
+var NonQueryCompatibleOperation = &handles[0]
+
+var _NonQueryCompatibleRpcV2Protocol = &handles[1]
+
+var NonQueryCompatibleRpcV2Protocol = &smithy.ServiceSchema{Schema: &handles[1], Version: "2025-06-20"}

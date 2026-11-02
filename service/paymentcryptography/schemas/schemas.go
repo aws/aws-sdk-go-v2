@@ -4,2036 +4,1720 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AddKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateMpaTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AssociateMpaTeam",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableDefaultKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisableDefaultKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateMpaTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisassociateMpaTeam",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableDefaultKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "EnableDefaultKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCertificateSigningRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetCertificateSigningRequest",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDefaultKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetDefaultKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMpaTeamAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetMpaTeamAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetParametersForExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetParametersForImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForImport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPublicKeyCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetPublicKeyCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListAliases",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListKeys",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RemoveKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RestoreKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartKeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StartKeyUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopKeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StopKeyUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UpdateAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var _PaymentCryptographyControlPlane = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PaymentCryptographyControlPlane",
-}, smithy.ShapeTypeService, 0)
-
-var PaymentCryptographyControlPlane = smithy.NewServiceSchema(_PaymentCryptographyControlPlane, "2021-09-14")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var Alias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Alias",
-}, smithy.ShapeTypeStructure, 2)
-var Alias_AliasName *smithy.Schema
-
-var Alias_KeyArn *smithy.Schema
-
-var _Aliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Aliases",
-}, smithy.ShapeTypeList, 1)
-var _Aliases_member *smithy.Schema
-
-var _AliasName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AliasName",
-}, smithy.ShapeTypeString, 0)
-
-var As2805KeyVariant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "As2805KeyVariant",
-}, smithy.ShapeTypeEnum, 4)
-var As2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00 *smithy.Schema
-
-var As2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28 *smithy.Schema
-
-var As2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24 *smithy.Schema
-
-var As2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22 *smithy.Schema
-
-var _AssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AssociationState",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateSigningRequestType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CertificateSigningRequestType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CertificateSubjectType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CertificateSubjectType",
-}, smithy.ShapeTypeStructure, 7)
-var CertificateSubjectType_CommonName *smithy.Schema
-
-var CertificateSubjectType_OrganizationUnit *smithy.Schema
-
-var CertificateSubjectType_Organization *smithy.Schema
-
-var CertificateSubjectType_City *smithy.Schema
-
-var CertificateSubjectType_Country *smithy.Schema
-
-var CertificateSubjectType_StateOrProvince *smithy.Schema
-
-var CertificateSubjectType_EmailAddress *smithy.Schema
-
-var _CertificateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CertificateType",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _DeriveKeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeriveKeyUsage",
-}, smithy.ShapeTypeString, 0)
-
-var DiffieHellmanDerivationData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DiffieHellmanDerivationData",
-}, smithy.ShapeTypeUnion, 1)
-var DiffieHellmanDerivationData_SharedInformation *smithy.Schema
-
-var _EvenHexLengthBetween16And32 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "EvenHexLengthBetween16And32",
-}, smithy.ShapeTypeString, 0)
-
-var ExportAs2805KeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportAs2805KeyCryptogram",
-}, smithy.ShapeTypeStructure, 2)
-var ExportAs2805KeyCryptogram_WrappingKeyIdentifier *smithy.Schema
-
-var ExportAs2805KeyCryptogram_As2805KeyVariant *smithy.Schema
-
-var ExportAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var ExportAttributes_ExportDukptInitialKey *smithy.Schema
-
-var ExportAttributes_KeyCheckValueAlgorithm *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportDiffieHellmanTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_DerivationData *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders *smithy.Schema
-
-var ExportDukptInitialKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportDukptInitialKey",
-}, smithy.ShapeTypeStructure, 1)
-var ExportDukptInitialKey_KeySerialNumber *smithy.Schema
-
-var ExportKeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKeyCryptogram",
-}, smithy.ShapeTypeStructure, 3)
-var ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ExportKeyCryptogram_WrappingKeyCertificate *smithy.Schema
-
-var ExportKeyCryptogram_WrappingSpec *smithy.Schema
-
-var ExportKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKeyMaterial",
-}, smithy.ShapeTypeUnion, 5)
-var ExportKeyMaterial_Tr31KeyBlock *smithy.Schema
-
-var ExportKeyMaterial_Tr34KeyBlock *smithy.Schema
-
-var ExportKeyMaterial_KeyCryptogram *smithy.Schema
-
-var ExportKeyMaterial_DiffieHellmanTr31KeyBlock *smithy.Schema
-
-var ExportKeyMaterial_As2805KeyCryptogram *smithy.Schema
-
-var _ExportTokenId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportTokenId",
-}, smithy.ShapeTypeString, 0)
-
-var ExportTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 2)
-var ExportTr31KeyBlock_WrappingKeyIdentifier *smithy.Schema
-
-var ExportTr31KeyBlock_KeyBlockHeaders *smithy.Schema
-
-var ExportTr34KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportTr34KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ExportTr34KeyBlock_WrappingKeyCertificate *smithy.Schema
-
-var ExportTr34KeyBlock_ExportToken *smithy.Schema
-
-var ExportTr34KeyBlock_SigningKeyIdentifier *smithy.Schema
-
-var ExportTr34KeyBlock_SigningKeyCertificate *smithy.Schema
-
-var ExportTr34KeyBlock_KeyBlockFormat *smithy.Schema
-
-var ExportTr34KeyBlock_RandomNonce *smithy.Schema
-
-var ExportTr34KeyBlock_KeyBlockHeaders *smithy.Schema
-
-var _HexLength20Or24 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "HexLength20Or24",
-}, smithy.ShapeTypeString, 0)
-
-var ImportAs2805KeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportAs2805KeyCryptogram",
-}, smithy.ShapeTypeStructure, 6)
-var ImportAs2805KeyCryptogram_As2805KeyVariant *smithy.Schema
-
-var ImportAs2805KeyCryptogram_KeyModesOfUse *smithy.Schema
-
-var ImportAs2805KeyCryptogram_KeyAlgorithm *smithy.Schema
-
-var ImportAs2805KeyCryptogram_Exportable *smithy.Schema
-
-var ImportAs2805KeyCryptogram_WrappingKeyIdentifier *smithy.Schema
-
-var ImportAs2805KeyCryptogram_WrappedKeyCryptogram *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportDiffieHellmanTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_DerivationData *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock *smithy.Schema
-
-var ImportKeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKeyCryptogram",
-}, smithy.ShapeTypeStructure, 5)
-var ImportKeyCryptogram_KeyAttributes *smithy.Schema
-
-var ImportKeyCryptogram_Exportable *smithy.Schema
-
-var ImportKeyCryptogram_WrappedKeyCryptogram *smithy.Schema
-
-var ImportKeyCryptogram_ImportToken *smithy.Schema
-
-var ImportKeyCryptogram_WrappingSpec *smithy.Schema
-
-var ImportKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKeyMaterial",
-}, smithy.ShapeTypeUnion, 7)
-var ImportKeyMaterial_RootCertificatePublicKey *smithy.Schema
-
-var ImportKeyMaterial_TrustedCertificatePublicKey *smithy.Schema
-
-var ImportKeyMaterial_Tr31KeyBlock *smithy.Schema
-
-var ImportKeyMaterial_Tr34KeyBlock *smithy.Schema
-
-var ImportKeyMaterial_KeyCryptogram *smithy.Schema
-
-var ImportKeyMaterial_DiffieHellmanTr31KeyBlock *smithy.Schema
-
-var ImportKeyMaterial_As2805KeyCryptogram *smithy.Schema
-
-var _ImportTokenId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportTokenId",
-}, smithy.ShapeTypeString, 0)
-
-var ImportTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 2)
-var ImportTr31KeyBlock_WrappingKeyIdentifier *smithy.Schema
-
-var ImportTr31KeyBlock_WrappedKeyBlock *smithy.Schema
-
-var ImportTr34KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportTr34KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ImportTr34KeyBlock_SigningKeyCertificate *smithy.Schema
-
-var ImportTr34KeyBlock_ImportToken *smithy.Schema
-
-var ImportTr34KeyBlock_WrappingKeyIdentifier *smithy.Schema
-
-var ImportTr34KeyBlock_WrappingKeyCertificate *smithy.Schema
-
-var ImportTr34KeyBlock_WrappedKeyBlock *smithy.Schema
-
-var ImportTr34KeyBlock_KeyBlockFormat *smithy.Schema
-
-var ImportTr34KeyBlock_RandomNonce *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Key",
-}, smithy.ShapeTypeStructure, 19)
-var Key_KeyArn *smithy.Schema
-
-var Key_KeyAttributes *smithy.Schema
-
-var Key_KeyCheckValue *smithy.Schema
-
-var Key_KeyCheckValueAlgorithm *smithy.Schema
-
-var Key_Enabled *smithy.Schema
-
-var Key_Exportable *smithy.Schema
-
-var Key_KeyState *smithy.Schema
-
-var Key_KeyOrigin *smithy.Schema
-
-var Key_CreateTimestamp *smithy.Schema
-
-var Key_UsageStartTimestamp *smithy.Schema
-
-var Key_UsageStopTimestamp *smithy.Schema
-
-var Key_DeletePendingTimestamp *smithy.Schema
-
-var Key_DeleteTimestamp *smithy.Schema
-
-var Key_DeriveKeyUsage *smithy.Schema
-
-var Key_MultiRegionKeyType *smithy.Schema
-
-var Key_PrimaryRegion *smithy.Schema
-
-var Key_ReplicationStatus *smithy.Schema
-
-var Key_UsingDefaultReplicationRegions *smithy.Schema
-
-var Key_MpaStatus *smithy.Schema
-
-var _KeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyAlgorithm",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyArnOrKeyAliasType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyArnOrKeyAliasType",
-}, smithy.ShapeTypeString, 0)
-
-var KeyAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var KeyAttributes_KeyUsage *smithy.Schema
-
-var KeyAttributes_KeyClass *smithy.Schema
-
-var KeyAttributes_KeyAlgorithm *smithy.Schema
-
-var KeyAttributes_KeyModesOfUse *smithy.Schema
-
-var KeyBlockHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyBlockHeaders",
-}, smithy.ShapeTypeStructure, 4)
-var KeyBlockHeaders_KeyModesOfUse *smithy.Schema
-
-var KeyBlockHeaders_KeyExportability *smithy.Schema
-
-var KeyBlockHeaders_KeyVersion *smithy.Schema
-
-var KeyBlockHeaders_OptionalBlocks *smithy.Schema
-
-var _KeyCheckValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyCheckValue",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyCheckValueAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyCheckValueAlgorithm",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyClass",
-}, smithy.ShapeTypeString, 0)
-
-var KeyDerivationFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyDerivationFunction",
-}, smithy.ShapeTypeEnum, 2)
-var KeyDerivationFunction_NIST_SP800 *smithy.Schema
-
-var KeyDerivationFunction_ANSI_X963 *smithy.Schema
-
-var KeyDerivationHashAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyDerivationHashAlgorithm",
-}, smithy.ShapeTypeEnum, 3)
-var KeyDerivationHashAlgorithm_SHA_256 *smithy.Schema
-
-var KeyDerivationHashAlgorithm_SHA_384 *smithy.Schema
-
-var KeyDerivationHashAlgorithm_SHA_512 *smithy.Schema
-
-var _KeyExportability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyExportability",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyMaterial",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _KeyMaterialType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyMaterialType",
-}, smithy.ShapeTypeString, 0)
-
-var KeyModesOfUse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyModesOfUse",
-}, smithy.ShapeTypeStructure, 9)
-var KeyModesOfUse_Encrypt *smithy.Schema
-
-var KeyModesOfUse_Decrypt *smithy.Schema
-
-var KeyModesOfUse_Wrap *smithy.Schema
-
-var KeyModesOfUse_Unwrap *smithy.Schema
-
-var KeyModesOfUse_Generate *smithy.Schema
-
-var KeyModesOfUse_Sign *smithy.Schema
-
-var KeyModesOfUse_Verify *smithy.Schema
-
-var KeyModesOfUse_DeriveKey *smithy.Schema
-
-var KeyModesOfUse_NoRestrictions *smithy.Schema
-
-var _KeyOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyOrigin",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyReplicationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyReplicationState",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyState",
-}, smithy.ShapeTypeString, 0)
-
-var KeySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeySummary",
-}, smithy.ShapeTypeStructure, 8)
-var KeySummary_KeyArn *smithy.Schema
-
-var KeySummary_KeyState *smithy.Schema
-
-var KeySummary_KeyAttributes *smithy.Schema
-
-var KeySummary_KeyCheckValue *smithy.Schema
-
-var KeySummary_Exportable *smithy.Schema
-
-var KeySummary_Enabled *smithy.Schema
-
-var KeySummary_MultiRegionKeyType *smithy.Schema
-
-var KeySummary_PrimaryRegion *smithy.Schema
-
-var _KeySummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeySummaryList",
-}, smithy.ShapeTypeList, 1)
-var _KeySummaryList_member *smithy.Schema
-
-var _KeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyUsage",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MpaOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaOperation",
-}, smithy.ShapeTypeString, 0)
-
-var _MpaRequesterComment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaRequesterComment",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MpaSessionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaSessionArn",
-}, smithy.ShapeTypeString, 0)
-
-var MpaStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaStatus",
-}, smithy.ShapeTypeStructure, 4)
-var MpaStatus_MpaSessionArn *smithy.Schema
-
-var MpaStatus_Status *smithy.Schema
-
-var MpaStatus_InitiationDate *smithy.Schema
-
-var MpaStatus_StatusMessage *smithy.Schema
-
-var _MpaStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _MpaTeamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaTeamArn",
-}, smithy.ShapeTypeString, 0)
-
-var MpaTeamAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaTeamAssociation",
-}, smithy.ShapeTypeStructure, 4)
-var MpaTeamAssociation_Action *smithy.Schema
-
-var MpaTeamAssociation_MpaTeamArn *smithy.Schema
-
-var MpaTeamAssociation_AssociationState *smithy.Schema
-
-var MpaTeamAssociation_MpaStatus *smithy.Schema
-
-var _MultiRegionKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MultiRegionKeyType",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OptionalBlockId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "OptionalBlockId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _OptionalBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "OptionalBlocks",
-}, smithy.ShapeTypeMap, 2)
-var _OptionalBlocks_key *smithy.Schema
-
-var _OptionalBlocks_value *smithy.Schema
-
-var _OptionalBlockValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "OptionalBlockValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PublicPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PublicPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var PublicPolicyException_Message *smithy.Schema
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _Regions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Regions",
-}, smithy.ShapeTypeList, 1)
-var _Regions_member *smithy.Schema
-
-var _ReplicationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ReplicationStatus",
-}, smithy.ShapeTypeMap, 2)
-var _ReplicationStatus_key *smithy.Schema
-
-var _ReplicationStatus_value *smithy.Schema
-
-var ReplicationStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ReplicationStatusType",
-}, smithy.ShapeTypeStructure, 2)
-var ReplicationStatusType_Status *smithy.Schema
-
-var ReplicationStatusType_StatusMessage *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeString, 0)
-
-var RootCertificatePublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RootCertificatePublicKey",
-}, smithy.ShapeTypeStructure, 2)
-var RootCertificatePublicKey_KeyAttributes *smithy.Schema
-
-var RootCertificatePublicKey_PublicKeyCertificate *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var _SessionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "SessionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _SharedInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "SharedInformation",
-}, smithy.ShapeTypeString, 0)
-
-var _SigningAlgorithmType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "SigningAlgorithmType",
-}, smithy.ShapeTypeString, 0)
-
-var SymmetricKeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "SymmetricKeyAlgorithm",
-}, smithy.ShapeTypeEnum, 9)
-var SymmetricKeyAlgorithm_TDES_2KEY *smithy.Schema
-
-var SymmetricKeyAlgorithm_TDES_3KEY *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_128 *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_192 *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_256 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA256 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA384 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA512 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA224 *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Tr31WrappedKeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tr31WrappedKeyBlock",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Tr34KeyBlockFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tr34KeyBlockFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _Tr34WrappedKeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tr34WrappedKeyBlock",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var TrustedCertificatePublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TrustedCertificatePublicKey",
-}, smithy.ShapeTypeStructure, 3)
-var TrustedCertificatePublicKey_KeyAttributes *smithy.Schema
-
-var TrustedCertificatePublicKey_PublicKeyCertificate *smithy.Schema
-
-var TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var WrappedKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "WrappedKey",
-}, smithy.ShapeTypeStructure, 5)
-var WrappedKey_WrappingKeyArn *smithy.Schema
-
-var WrappedKey_WrappedKeyMaterialFormat *smithy.Schema
-
-var WrappedKey_KeyMaterial *smithy.Schema
-
-var WrappedKey_KeyCheckValue *smithy.Schema
-
-var WrappedKey_KeyCheckValueAlgorithm *smithy.Schema
-
-var _WrappedKeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "WrappedKeyCryptogram",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _WrappedKeyMaterialFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "WrappedKeyMaterialFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _WrappingKeySpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "WrappingKeySpec",
-}, smithy.ShapeTypeString, 0)
-
-var AddKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AddKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddKeyReplicationRegionsInput_KeyIdentifier *smithy.Schema
-
-var AddKeyReplicationRegionsInput_ReplicationRegions *smithy.Schema
-
-var AddKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AddKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddKeyReplicationRegionsOutput_Key *smithy.Schema
-
-var AssociateMpaTeamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AssociateMpaTeamInput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateMpaTeamInput_Action *smithy.Schema
-
-var AssociateMpaTeamInput_MpaTeamArn *smithy.Schema
-
-var AssociateMpaTeamInput_RequesterComment *smithy.Schema
-
-var AssociateMpaTeamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AssociateMpaTeamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateMpaTeamOutput_MpaTeamAssociation *smithy.Schema
-
-var CreateAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateAliasInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAliasInput_AliasName *smithy.Schema
-
-var CreateAliasInput_KeyArn *smithy.Schema
-
-var CreateAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateAliasOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAliasOutput_Alias *smithy.Schema
-
-var CreateKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateKeyInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateKeyInput_KeyAttributes *smithy.Schema
-
-var CreateKeyInput_KeyCheckValueAlgorithm *smithy.Schema
-
-var CreateKeyInput_Exportable *smithy.Schema
-
-var CreateKeyInput_Enabled *smithy.Schema
-
-var CreateKeyInput_Tags *smithy.Schema
-
-var CreateKeyInput_DeriveKeyUsage *smithy.Schema
-
-var CreateKeyInput_ReplicationRegions *smithy.Schema
-
-var CreateKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateKeyOutput_Key *smithy.Schema
-
-var DeleteAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteAliasInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAliasInput_AliasName *smithy.Schema
-
-var DeleteAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteAliasOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteKeyInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteKeyInput_KeyIdentifier *smithy.Schema
-
-var DeleteKeyInput_DeleteKeyInDays *smithy.Schema
-
-var DeleteKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteKeyOutput_Key *smithy.Schema
-
-var DeleteResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyInput_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisableDefaultKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisableDefaultKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableDefaultKeyReplicationRegionsInput_ReplicationRegions *smithy.Schema
-
-var DisableDefaultKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisableDefaultKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions *smithy.Schema
-
-var DisassociateMpaTeamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisassociateMpaTeamInput",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateMpaTeamInput_Action *smithy.Schema
-
-var DisassociateMpaTeamInput_RequesterComment *smithy.Schema
-
-var DisassociateMpaTeamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisassociateMpaTeamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateMpaTeamOutput_MpaTeamAssociation *smithy.Schema
-
-var EnableDefaultKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "EnableDefaultKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 1)
-var EnableDefaultKeyReplicationRegionsInput_ReplicationRegions *smithy.Schema
-
-var EnableDefaultKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "EnableDefaultKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions *smithy.Schema
-
-var ExportKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKeyInput",
-}, smithy.ShapeTypeStructure, 3)
-var ExportKeyInput_KeyMaterial *smithy.Schema
-
-var ExportKeyInput_ExportKeyIdentifier *smithy.Schema
-
-var ExportKeyInput_ExportAttributes *smithy.Schema
-
-var ExportKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ExportKeyOutput_WrappedKey *smithy.Schema
-
-var GetAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetAliasInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAliasInput_AliasName *smithy.Schema
-
-var GetAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetAliasOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAliasOutput_Alias *smithy.Schema
-
-var GetCertificateSigningRequestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetCertificateSigningRequestInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetCertificateSigningRequestInput_KeyIdentifier *smithy.Schema
-
-var GetCertificateSigningRequestInput_SigningAlgorithm *smithy.Schema
-
-var GetCertificateSigningRequestInput_CertificateSubject *smithy.Schema
-
-var GetCertificateSigningRequestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetCertificateSigningRequestOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCertificateSigningRequestOutput_CertificateSigningRequest *smithy.Schema
-
-var GetDefaultKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetDefaultKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDefaultKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetDefaultKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions *smithy.Schema
-
-var GetKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetKeyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetKeyInput_KeyIdentifier *smithy.Schema
-
-var GetKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetKeyOutput_Key *smithy.Schema
-
-var GetMpaTeamAssociationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetMpaTeamAssociationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMpaTeamAssociationInput_Action *smithy.Schema
-
-var GetMpaTeamAssociationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetMpaTeamAssociationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMpaTeamAssociationOutput_MpaTeamAssociation *smithy.Schema
-
-var GetParametersForExportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForExportInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetParametersForExportInput_KeyMaterialType *smithy.Schema
-
-var GetParametersForExportInput_SigningKeyAlgorithm *smithy.Schema
-
-var GetParametersForExportInput_ReuseLastGeneratedToken *smithy.Schema
-
-var GetParametersForExportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForExportOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetParametersForExportOutput_SigningKeyCertificate *smithy.Schema
-
-var GetParametersForExportOutput_SigningKeyCertificateChain *smithy.Schema
-
-var GetParametersForExportOutput_SigningKeyAlgorithm *smithy.Schema
-
-var GetParametersForExportOutput_ExportToken *smithy.Schema
-
-var GetParametersForExportOutput_ParametersValidUntilTimestamp *smithy.Schema
-
-var GetParametersForImportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForImportInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetParametersForImportInput_KeyMaterialType *smithy.Schema
-
-var GetParametersForImportInput_WrappingKeyAlgorithm *smithy.Schema
-
-var GetParametersForImportInput_ReuseLastGeneratedToken *smithy.Schema
-
-var GetParametersForImportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForImportOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetParametersForImportOutput_WrappingKeyCertificate *smithy.Schema
-
-var GetParametersForImportOutput_WrappingKeyCertificateChain *smithy.Schema
-
-var GetParametersForImportOutput_WrappingKeyAlgorithm *smithy.Schema
-
-var GetParametersForImportOutput_ImportToken *smithy.Schema
-
-var GetParametersForImportOutput_ParametersValidUntilTimestamp *smithy.Schema
-
-var GetPublicKeyCertificateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetPublicKeyCertificateInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetPublicKeyCertificateInput_KeyIdentifier *smithy.Schema
-
-var GetPublicKeyCertificateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetPublicKeyCertificateOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetPublicKeyCertificateOutput_KeyCertificate *smithy.Schema
-
-var GetPublicKeyCertificateOutput_KeyCertificateChain *smithy.Schema
-
-var GetResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyInput_ResourceArn *smithy.Schema
-
-var GetResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyOutput_ResourceArn *smithy.Schema
-
-var GetResourcePolicyOutput_Policy *smithy.Schema
-
-var ImportKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKeyInput",
-}, smithy.ShapeTypeStructure, 6)
-var ImportKeyInput_KeyMaterial *smithy.Schema
-
-var ImportKeyInput_KeyCheckValueAlgorithm *smithy.Schema
-
-var ImportKeyInput_Enabled *smithy.Schema
-
-var ImportKeyInput_Tags *smithy.Schema
-
-var ImportKeyInput_ReplicationRegions *smithy.Schema
-
-var ImportKeyInput_RequesterComment *smithy.Schema
-
-var ImportKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ImportKeyOutput_Key *smithy.Schema
-
-var ListAliasesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListAliasesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAliasesInput_KeyArn *smithy.Schema
-
-var ListAliasesInput_NextToken *smithy.Schema
-
-var ListAliasesInput_MaxResults *smithy.Schema
-
-var ListAliasesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListAliasesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAliasesOutput_Aliases *smithy.Schema
-
-var ListAliasesOutput_NextToken *smithy.Schema
-
-var ListKeysInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListKeysInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListKeysInput_KeyState *smithy.Schema
-
-var ListKeysInput_NextToken *smithy.Schema
-
-var ListKeysInput_MaxResults *smithy.Schema
-
-var ListKeysOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListKeysOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListKeysOutput_Keys *smithy.Schema
-
-var ListKeysOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceInput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput_MaxResults *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListTagsForResourceOutput_NextToken *smithy.Schema
-
-var PutResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PutResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyInput_ResourceArn *smithy.Schema
-
-var PutResourcePolicyInput_Policy *smithy.Schema
-
-var PutResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PutResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyOutput_ResourceArn *smithy.Schema
-
-var PutResourcePolicyOutput_Policy *smithy.Schema
-
-var RemoveKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RemoveKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveKeyReplicationRegionsInput_KeyIdentifier *smithy.Schema
-
-var RemoveKeyReplicationRegionsInput_ReplicationRegions *smithy.Schema
-
-var RemoveKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RemoveKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveKeyReplicationRegionsOutput_Key *smithy.Schema
-
-var RestoreKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RestoreKeyInput",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreKeyInput_KeyIdentifier *smithy.Schema
-
-var RestoreKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RestoreKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreKeyOutput_Key *smithy.Schema
-
-var StartKeyUsageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StartKeyUsageInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartKeyUsageInput_KeyIdentifier *smithy.Schema
-
-var StartKeyUsageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StartKeyUsageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartKeyUsageOutput_Key *smithy.Schema
-
-var StopKeyUsageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StopKeyUsageInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopKeyUsageInput_KeyIdentifier *smithy.Schema
-
-var StopKeyUsageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StopKeyUsageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StopKeyUsageOutput_Key *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UpdateAliasInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAliasInput_AliasName *smithy.Schema
-
-var UpdateAliasInput_KeyArn *smithy.Schema
-
-var UpdateAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UpdateAliasOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAliasOutput_Alias *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	Alias_AliasName = Alias.AddMember("AliasName", _AliasName)
-
-	Alias_KeyArn = Alias.AddMember("KeyArn", _KeyArn)
-
-	_Aliases_member = _Aliases.AddMember("member", Alias)
-
-	As2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00 = As2805KeyVariant.AddMember("TERMINAL_MAJOR_KEY_VARIANT_00", smithyprelude.Unit)
-
-	As2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28 = As2805KeyVariant.AddMember("PIN_ENCRYPTION_KEY_VARIANT_28", smithyprelude.Unit)
-
-	As2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24 = As2805KeyVariant.AddMember("MESSAGE_AUTHENTICATION_KEY_VARIANT_24", smithyprelude.Unit)
-
-	As2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22 = As2805KeyVariant.AddMember("DATA_ENCRYPTION_KEY_VARIANT_22", smithyprelude.Unit)
-
-	CertificateSubjectType_CommonName = CertificateSubjectType.AddMember("CommonName", smithyprelude.String)
-
-	CertificateSubjectType_OrganizationUnit = CertificateSubjectType.AddMember("OrganizationUnit", smithyprelude.String)
-
-	CertificateSubjectType_Organization = CertificateSubjectType.AddMember("Organization", smithyprelude.String)
-
-	CertificateSubjectType_City = CertificateSubjectType.AddMember("City", smithyprelude.String)
-
-	CertificateSubjectType_Country = CertificateSubjectType.AddMember("Country", smithyprelude.String)
-
-	CertificateSubjectType_StateOrProvince = CertificateSubjectType.AddMember("StateOrProvince", smithyprelude.String)
-
-	CertificateSubjectType_EmailAddress = CertificateSubjectType.AddMember("EmailAddress", smithyprelude.String)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	DiffieHellmanDerivationData_SharedInformation = DiffieHellmanDerivationData.AddMember("SharedInformation", _SharedInformation)
-
-	ExportAs2805KeyCryptogram_WrappingKeyIdentifier = ExportAs2805KeyCryptogram.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportAs2805KeyCryptogram_As2805KeyVariant = ExportAs2805KeyCryptogram.AddMember("As2805KeyVariant", As2805KeyVariant)
-
-	ExportDukptInitialKey_KeySerialNumber = ExportDukptInitialKey.AddMember("KeySerialNumber", _HexLength20Or24)
-
-	ExportAttributes_ExportDukptInitialKey = ExportAttributes.AddMember("ExportDukptInitialKey", ExportDukptInitialKey)
-
-	ExportAttributes_KeyCheckValueAlgorithm = ExportAttributes.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	SymmetricKeyAlgorithm_TDES_2KEY = SymmetricKeyAlgorithm.AddMember("TDES_2KEY", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_TDES_3KEY = SymmetricKeyAlgorithm.AddMember("TDES_3KEY", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_128 = SymmetricKeyAlgorithm.AddMember("AES_128", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_192 = SymmetricKeyAlgorithm.AddMember("AES_192", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_256 = SymmetricKeyAlgorithm.AddMember("AES_256", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA256 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA256", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA384 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA384", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA512 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA512", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA224 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA224", smithyprelude.Unit)
-
-	KeyDerivationFunction_NIST_SP800 = KeyDerivationFunction.AddMember("NIST_SP800", smithyprelude.Unit)
-
-	KeyDerivationFunction_ANSI_X963 = KeyDerivationFunction.AddMember("ANSI_X963", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_256 = KeyDerivationHashAlgorithm.AddMember("SHA_256", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_384 = KeyDerivationHashAlgorithm.AddMember("SHA_384", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_512 = KeyDerivationHashAlgorithm.AddMember("SHA_512", smithyprelude.Unit)
-
-	KeyModesOfUse_Encrypt = KeyModesOfUse.AddMember("Encrypt", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Decrypt = KeyModesOfUse.AddMember("Decrypt", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Wrap = KeyModesOfUse.AddMember("Wrap", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Unwrap = KeyModesOfUse.AddMember("Unwrap", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Generate = KeyModesOfUse.AddMember("Generate", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Sign = KeyModesOfUse.AddMember("Sign", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Verify = KeyModesOfUse.AddMember("Verify", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_DeriveKey = KeyModesOfUse.AddMember("DeriveKey", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_NoRestrictions = KeyModesOfUse.AddMember("NoRestrictions", smithyprelude.PrimitiveBoolean)
-
-	_OptionalBlocks_key = _OptionalBlocks.AddMember("key", _OptionalBlockId)
-
-	_OptionalBlocks_value = _OptionalBlocks.AddMember("value", _OptionalBlockValue)
-
-	KeyBlockHeaders_KeyModesOfUse = KeyBlockHeaders.AddMember("KeyModesOfUse", KeyModesOfUse)
-
-	KeyBlockHeaders_KeyExportability = KeyBlockHeaders.AddMember("KeyExportability", _KeyExportability)
-
-	KeyBlockHeaders_KeyVersion = KeyBlockHeaders.AddMember("KeyVersion", _KeyVersion)
-
-	KeyBlockHeaders_OptionalBlocks = KeyBlockHeaders.AddMember("OptionalBlocks", _OptionalBlocks)
-
-	ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = ExportDiffieHellmanTr31KeyBlock.AddMember("PrivateKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = ExportDiffieHellmanTr31KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = ExportDiffieHellmanTr31KeyBlock.AddMember("PublicKeyCertificate", _CertificateType)
-
-	ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = ExportDiffieHellmanTr31KeyBlock.AddMember("DeriveKeyAlgorithm", SymmetricKeyAlgorithm)
-
-	ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = ExportDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationFunction", KeyDerivationFunction)
-
-	ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = ExportDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationHashAlgorithm", KeyDerivationHashAlgorithm)
-
-	ExportDiffieHellmanTr31KeyBlock_DerivationData = ExportDiffieHellmanTr31KeyBlock.AddMember("DerivationData", DiffieHellmanDerivationData)
-
-	ExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders = ExportDiffieHellmanTr31KeyBlock.AddMember("KeyBlockHeaders", KeyBlockHeaders)
-
-	ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier = ExportKeyCryptogram.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportKeyCryptogram_WrappingKeyCertificate = ExportKeyCryptogram.AddMember("WrappingKeyCertificate", _CertificateType)
-
-	ExportKeyCryptogram_WrappingSpec = ExportKeyCryptogram.AddMember("WrappingSpec", _WrappingKeySpec)
-
-	ExportTr31KeyBlock_WrappingKeyIdentifier = ExportTr31KeyBlock.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportTr31KeyBlock_KeyBlockHeaders = ExportTr31KeyBlock.AddMember("KeyBlockHeaders", KeyBlockHeaders)
-
-	ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = ExportTr34KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportTr34KeyBlock_WrappingKeyCertificate = ExportTr34KeyBlock.AddMember("WrappingKeyCertificate", _CertificateType)
-
-	ExportTr34KeyBlock_ExportToken = ExportTr34KeyBlock.AddMember("ExportToken", _ExportTokenId)
-
-	ExportTr34KeyBlock_SigningKeyIdentifier = ExportTr34KeyBlock.AddMember("SigningKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportTr34KeyBlock_SigningKeyCertificate = ExportTr34KeyBlock.AddMember("SigningKeyCertificate", _CertificateType)
-
-	ExportTr34KeyBlock_KeyBlockFormat = ExportTr34KeyBlock.AddMember("KeyBlockFormat", _Tr34KeyBlockFormat)
-
-	ExportTr34KeyBlock_RandomNonce = ExportTr34KeyBlock.AddMember("RandomNonce", _EvenHexLengthBetween16And32)
-
-	ExportTr34KeyBlock_KeyBlockHeaders = ExportTr34KeyBlock.AddMember("KeyBlockHeaders", KeyBlockHeaders)
-
-	ExportKeyMaterial_Tr31KeyBlock = ExportKeyMaterial.AddMember("Tr31KeyBlock", ExportTr31KeyBlock)
-
-	ExportKeyMaterial_Tr34KeyBlock = ExportKeyMaterial.AddMember("Tr34KeyBlock", ExportTr34KeyBlock)
-
-	ExportKeyMaterial_KeyCryptogram = ExportKeyMaterial.AddMember("KeyCryptogram", ExportKeyCryptogram)
-
-	ExportKeyMaterial_DiffieHellmanTr31KeyBlock = ExportKeyMaterial.AddMember("DiffieHellmanTr31KeyBlock", ExportDiffieHellmanTr31KeyBlock)
-
-	ExportKeyMaterial_As2805KeyCryptogram = ExportKeyMaterial.AddMember("As2805KeyCryptogram", ExportAs2805KeyCryptogram)
-
-	ImportAs2805KeyCryptogram_As2805KeyVariant = ImportAs2805KeyCryptogram.AddMember("As2805KeyVariant", As2805KeyVariant)
-
-	ImportAs2805KeyCryptogram_KeyModesOfUse = ImportAs2805KeyCryptogram.AddMember("KeyModesOfUse", KeyModesOfUse)
-
-	ImportAs2805KeyCryptogram_KeyAlgorithm = ImportAs2805KeyCryptogram.AddMember("KeyAlgorithm", _KeyAlgorithm)
-
-	ImportAs2805KeyCryptogram_Exportable = ImportAs2805KeyCryptogram.AddMember("Exportable", smithyprelude.Boolean)
-
-	ImportAs2805KeyCryptogram_WrappingKeyIdentifier = ImportAs2805KeyCryptogram.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportAs2805KeyCryptogram_WrappedKeyCryptogram = ImportAs2805KeyCryptogram.AddMember("WrappedKeyCryptogram", _WrappedKeyCryptogram)
-
-	ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = ImportDiffieHellmanTr31KeyBlock.AddMember("PrivateKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = ImportDiffieHellmanTr31KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = ImportDiffieHellmanTr31KeyBlock.AddMember("PublicKeyCertificate", _CertificateType)
-
-	ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = ImportDiffieHellmanTr31KeyBlock.AddMember("DeriveKeyAlgorithm", SymmetricKeyAlgorithm)
-
-	ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = ImportDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationFunction", KeyDerivationFunction)
-
-	ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = ImportDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationHashAlgorithm", KeyDerivationHashAlgorithm)
-
-	ImportDiffieHellmanTr31KeyBlock_DerivationData = ImportDiffieHellmanTr31KeyBlock.AddMember("DerivationData", DiffieHellmanDerivationData)
-
-	ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock = ImportDiffieHellmanTr31KeyBlock.AddMember("WrappedKeyBlock", _Tr31WrappedKeyBlock)
-
-	KeyAttributes_KeyUsage = KeyAttributes.AddMember("KeyUsage", _KeyUsage)
-
-	KeyAttributes_KeyClass = KeyAttributes.AddMember("KeyClass", _KeyClass)
-
-	KeyAttributes_KeyAlgorithm = KeyAttributes.AddMember("KeyAlgorithm", _KeyAlgorithm)
-
-	KeyAttributes_KeyModesOfUse = KeyAttributes.AddMember("KeyModesOfUse", KeyModesOfUse)
-
-	ImportKeyCryptogram_KeyAttributes = ImportKeyCryptogram.AddMember("KeyAttributes", KeyAttributes)
-
-	ImportKeyCryptogram_Exportable = ImportKeyCryptogram.AddMember("Exportable", smithyprelude.Boolean)
-
-	ImportKeyCryptogram_WrappedKeyCryptogram = ImportKeyCryptogram.AddMember("WrappedKeyCryptogram", _WrappedKeyCryptogram)
-
-	ImportKeyCryptogram_ImportToken = ImportKeyCryptogram.AddMember("ImportToken", _ImportTokenId)
-
-	ImportKeyCryptogram_WrappingSpec = ImportKeyCryptogram.AddMember("WrappingSpec", _WrappingKeySpec)
-
-	RootCertificatePublicKey_KeyAttributes = RootCertificatePublicKey.AddMember("KeyAttributes", KeyAttributes)
-
-	RootCertificatePublicKey_PublicKeyCertificate = RootCertificatePublicKey.AddMember("PublicKeyCertificate", _CertificateType)
-
-	TrustedCertificatePublicKey_KeyAttributes = TrustedCertificatePublicKey.AddMember("KeyAttributes", KeyAttributes)
-
-	TrustedCertificatePublicKey_PublicKeyCertificate = TrustedCertificatePublicKey.AddMember("PublicKeyCertificate", _CertificateType)
-
-	TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier = TrustedCertificatePublicKey.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportTr31KeyBlock_WrappingKeyIdentifier = ImportTr31KeyBlock.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportTr31KeyBlock_WrappedKeyBlock = ImportTr31KeyBlock.AddMember("WrappedKeyBlock", _Tr31WrappedKeyBlock)
-
-	ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = ImportTr34KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportTr34KeyBlock_SigningKeyCertificate = ImportTr34KeyBlock.AddMember("SigningKeyCertificate", _CertificateType)
-
-	ImportTr34KeyBlock_ImportToken = ImportTr34KeyBlock.AddMember("ImportToken", _ImportTokenId)
-
-	ImportTr34KeyBlock_WrappingKeyIdentifier = ImportTr34KeyBlock.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportTr34KeyBlock_WrappingKeyCertificate = ImportTr34KeyBlock.AddMember("WrappingKeyCertificate", _CertificateType)
-
-	ImportTr34KeyBlock_WrappedKeyBlock = ImportTr34KeyBlock.AddMember("WrappedKeyBlock", _Tr34WrappedKeyBlock)
-
-	ImportTr34KeyBlock_KeyBlockFormat = ImportTr34KeyBlock.AddMember("KeyBlockFormat", _Tr34KeyBlockFormat)
-
-	ImportTr34KeyBlock_RandomNonce = ImportTr34KeyBlock.AddMember("RandomNonce", _EvenHexLengthBetween16And32)
-
-	ImportKeyMaterial_RootCertificatePublicKey = ImportKeyMaterial.AddMember("RootCertificatePublicKey", RootCertificatePublicKey)
-
-	ImportKeyMaterial_TrustedCertificatePublicKey = ImportKeyMaterial.AddMember("TrustedCertificatePublicKey", TrustedCertificatePublicKey)
-
-	ImportKeyMaterial_Tr31KeyBlock = ImportKeyMaterial.AddMember("Tr31KeyBlock", ImportTr31KeyBlock)
-
-	ImportKeyMaterial_Tr34KeyBlock = ImportKeyMaterial.AddMember("Tr34KeyBlock", ImportTr34KeyBlock)
-
-	ImportKeyMaterial_KeyCryptogram = ImportKeyMaterial.AddMember("KeyCryptogram", ImportKeyCryptogram)
-
-	ImportKeyMaterial_DiffieHellmanTr31KeyBlock = ImportKeyMaterial.AddMember("DiffieHellmanTr31KeyBlock", ImportDiffieHellmanTr31KeyBlock)
-
-	ImportKeyMaterial_As2805KeyCryptogram = ImportKeyMaterial.AddMember("As2805KeyCryptogram", ImportAs2805KeyCryptogram)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	ReplicationStatusType_Status = ReplicationStatusType.AddMember("Status", _KeyReplicationState)
-
-	ReplicationStatusType_StatusMessage = ReplicationStatusType.AddMember("StatusMessage", smithyprelude.String)
-
-	_ReplicationStatus_key = _ReplicationStatus.AddMember("key", _Region)
-
-	_ReplicationStatus_value = _ReplicationStatus.AddMember("value", ReplicationStatusType)
-
-	MpaStatus_MpaSessionArn = MpaStatus.AddMember("MpaSessionArn", _MpaSessionArn)
-
-	MpaStatus_Status = MpaStatus.AddMember("Status", _SessionStatus)
-
-	MpaStatus_InitiationDate = MpaStatus.AddMember("InitiationDate", _Timestamp)
-
-	MpaStatus_StatusMessage = MpaStatus.AddMember("StatusMessage", _MpaStatusMessage)
-
-	Key_KeyArn = Key.AddMember("KeyArn", _KeyArn)
-
-	Key_KeyAttributes = Key.AddMember("KeyAttributes", KeyAttributes)
-
-	Key_KeyCheckValue = Key.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	Key_KeyCheckValueAlgorithm = Key.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	Key_Enabled = Key.AddMember("Enabled", smithyprelude.Boolean)
-
-	Key_Exportable = Key.AddMember("Exportable", smithyprelude.Boolean)
-
-	Key_KeyState = Key.AddMember("KeyState", _KeyState)
-
-	Key_KeyOrigin = Key.AddMember("KeyOrigin", _KeyOrigin)
-
-	Key_CreateTimestamp = Key.AddMember("CreateTimestamp", _Timestamp)
-
-	Key_UsageStartTimestamp = Key.AddMember("UsageStartTimestamp", _Timestamp)
-
-	Key_UsageStopTimestamp = Key.AddMember("UsageStopTimestamp", _Timestamp)
-
-	Key_DeletePendingTimestamp = Key.AddMember("DeletePendingTimestamp", _Timestamp)
-
-	Key_DeleteTimestamp = Key.AddMember("DeleteTimestamp", _Timestamp)
-
-	Key_DeriveKeyUsage = Key.AddMember("DeriveKeyUsage", _DeriveKeyUsage)
-
-	Key_MultiRegionKeyType = Key.AddMember("MultiRegionKeyType", _MultiRegionKeyType)
-
-	Key_PrimaryRegion = Key.AddMember("PrimaryRegion", _Region)
-
-	Key_ReplicationStatus = Key.AddMember("ReplicationStatus", _ReplicationStatus)
-
-	Key_UsingDefaultReplicationRegions = Key.AddMember("UsingDefaultReplicationRegions", smithyprelude.Boolean)
-
-	Key_MpaStatus = Key.AddMember("MpaStatus", MpaStatus)
-
-	KeySummary_KeyArn = KeySummary.AddMember("KeyArn", _KeyArn)
-
-	KeySummary_KeyState = KeySummary.AddMember("KeyState", _KeyState)
-
-	KeySummary_KeyAttributes = KeySummary.AddMember("KeyAttributes", KeyAttributes)
-
-	KeySummary_KeyCheckValue = KeySummary.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	KeySummary_Exportable = KeySummary.AddMember("Exportable", smithyprelude.Boolean)
-
-	KeySummary_Enabled = KeySummary.AddMember("Enabled", smithyprelude.Boolean)
-
-	KeySummary_MultiRegionKeyType = KeySummary.AddMember("MultiRegionKeyType", _MultiRegionKeyType)
-
-	KeySummary_PrimaryRegion = KeySummary.AddMember("PrimaryRegion", _Region)
-
-	_KeySummaryList_member = _KeySummaryList.AddMember("member", KeySummary)
-
-	MpaTeamAssociation_Action = MpaTeamAssociation.AddMember("Action", _MpaOperation)
-
-	MpaTeamAssociation_MpaTeamArn = MpaTeamAssociation.AddMember("MpaTeamArn", _MpaTeamArn)
-
-	MpaTeamAssociation_AssociationState = MpaTeamAssociation.AddMember("AssociationState", _AssociationState)
-
-	MpaTeamAssociation_MpaStatus = MpaTeamAssociation.AddMember("MpaStatus", MpaStatus)
-
-	PublicPolicyException_Message = PublicPolicyException.AddMember("Message", smithyprelude.String)
-
-	_Regions_member = _Regions.AddMember("member", _Region)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", smithyprelude.String)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	WrappedKey_WrappingKeyArn = WrappedKey.AddMember("WrappingKeyArn", _KeyArn)
-
-	WrappedKey_WrappedKeyMaterialFormat = WrappedKey.AddMember("WrappedKeyMaterialFormat", _WrappedKeyMaterialFormat)
-
-	WrappedKey_KeyMaterial = WrappedKey.AddMember("KeyMaterial", _KeyMaterial)
-
-	WrappedKey_KeyCheckValue = WrappedKey.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	WrappedKey_KeyCheckValueAlgorithm = WrappedKey.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	AddKeyReplicationRegionsInput_KeyIdentifier = AddKeyReplicationRegionsInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	AddKeyReplicationRegionsInput_ReplicationRegions = AddKeyReplicationRegionsInput.AddMember("ReplicationRegions", _Regions)
-
-	AddKeyReplicationRegionsOutput_Key = AddKeyReplicationRegionsOutput.AddMember("Key", Key)
-
-	AssociateMpaTeamInput_Action = AssociateMpaTeamInput.AddMember("Action", _MpaOperation)
-
-	AssociateMpaTeamInput_MpaTeamArn = AssociateMpaTeamInput.AddMember("MpaTeamArn", _MpaTeamArn)
-
-	AssociateMpaTeamInput_RequesterComment = AssociateMpaTeamInput.AddMember("RequesterComment", _MpaRequesterComment)
-
-	AssociateMpaTeamOutput_MpaTeamAssociation = AssociateMpaTeamOutput.AddMember("MpaTeamAssociation", MpaTeamAssociation)
-
-	CreateAliasInput_AliasName = CreateAliasInput.AddMember("AliasName", _AliasName)
-
-	CreateAliasInput_KeyArn = CreateAliasInput.AddMember("KeyArn", _KeyArn)
-
-	CreateAliasOutput_Alias = CreateAliasOutput.AddMember("Alias", Alias)
-
-	CreateKeyInput_KeyAttributes = CreateKeyInput.AddMember("KeyAttributes", KeyAttributes)
-
-	CreateKeyInput_KeyCheckValueAlgorithm = CreateKeyInput.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	CreateKeyInput_Exportable = CreateKeyInput.AddMember("Exportable", smithyprelude.Boolean)
-
-	CreateKeyInput_Enabled = CreateKeyInput.AddMember("Enabled", smithyprelude.Boolean)
-
-	CreateKeyInput_Tags = CreateKeyInput.AddMember("Tags", _Tags)
-
-	CreateKeyInput_DeriveKeyUsage = CreateKeyInput.AddMember("DeriveKeyUsage", _DeriveKeyUsage)
-
-	CreateKeyInput_ReplicationRegions = CreateKeyInput.AddMember("ReplicationRegions", _Regions)
-
-	CreateKeyOutput_Key = CreateKeyOutput.AddMember("Key", Key)
-
-	DeleteAliasInput_AliasName = DeleteAliasInput.AddMember("AliasName", _AliasName)
-
-	DeleteKeyInput_KeyIdentifier = DeleteKeyInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	DeleteKeyInput_DeleteKeyInDays = DeleteKeyInput.AddMember("DeleteKeyInDays", smithyprelude.Integer)
-
-	DeleteKeyOutput_Key = DeleteKeyOutput.AddMember("Key", Key)
-
-	DeleteResourcePolicyInput_ResourceArn = DeleteResourcePolicyInput.AddMember("ResourceArn", _ResourceArn)
-
-	DisableDefaultKeyReplicationRegionsInput_ReplicationRegions = DisableDefaultKeyReplicationRegionsInput.AddMember("ReplicationRegions", _Regions)
-
-	DisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = DisableDefaultKeyReplicationRegionsOutput.AddMember("EnabledReplicationRegions", _Regions)
-
-	DisassociateMpaTeamInput_Action = DisassociateMpaTeamInput.AddMember("Action", _MpaOperation)
-
-	DisassociateMpaTeamInput_RequesterComment = DisassociateMpaTeamInput.AddMember("RequesterComment", _MpaRequesterComment)
-
-	DisassociateMpaTeamOutput_MpaTeamAssociation = DisassociateMpaTeamOutput.AddMember("MpaTeamAssociation", MpaTeamAssociation)
-
-	EnableDefaultKeyReplicationRegionsInput_ReplicationRegions = EnableDefaultKeyReplicationRegionsInput.AddMember("ReplicationRegions", _Regions)
-
-	EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = EnableDefaultKeyReplicationRegionsOutput.AddMember("EnabledReplicationRegions", _Regions)
-
-	ExportKeyInput_KeyMaterial = ExportKeyInput.AddMember("KeyMaterial", ExportKeyMaterial)
-
-	ExportKeyInput_ExportKeyIdentifier = ExportKeyInput.AddMember("ExportKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportKeyInput_ExportAttributes = ExportKeyInput.AddMember("ExportAttributes", ExportAttributes)
-
-	ExportKeyOutput_WrappedKey = ExportKeyOutput.AddMember("WrappedKey", WrappedKey)
-
-	GetAliasInput_AliasName = GetAliasInput.AddMember("AliasName", _AliasName)
-
-	GetAliasOutput_Alias = GetAliasOutput.AddMember("Alias", Alias)
-
-	GetCertificateSigningRequestInput_KeyIdentifier = GetCertificateSigningRequestInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GetCertificateSigningRequestInput_SigningAlgorithm = GetCertificateSigningRequestInput.AddMember("SigningAlgorithm", _SigningAlgorithmType)
-
-	GetCertificateSigningRequestInput_CertificateSubject = GetCertificateSigningRequestInput.AddMember("CertificateSubject", CertificateSubjectType)
-
-	GetCertificateSigningRequestOutput_CertificateSigningRequest = GetCertificateSigningRequestOutput.AddMember("CertificateSigningRequest", _CertificateSigningRequestType)
-
-	GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = GetDefaultKeyReplicationRegionsOutput.AddMember("EnabledReplicationRegions", _Regions)
-
-	GetKeyInput_KeyIdentifier = GetKeyInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GetKeyOutput_Key = GetKeyOutput.AddMember("Key", Key)
-
-	GetMpaTeamAssociationInput_Action = GetMpaTeamAssociationInput.AddMember("Action", _MpaOperation)
-
-	GetMpaTeamAssociationOutput_MpaTeamAssociation = GetMpaTeamAssociationOutput.AddMember("MpaTeamAssociation", MpaTeamAssociation)
-
-	GetParametersForExportInput_KeyMaterialType = GetParametersForExportInput.AddMember("KeyMaterialType", _KeyMaterialType)
-
-	GetParametersForExportInput_SigningKeyAlgorithm = GetParametersForExportInput.AddMember("SigningKeyAlgorithm", _KeyAlgorithm)
-
-	GetParametersForExportInput_ReuseLastGeneratedToken = GetParametersForExportInput.AddMember("ReuseLastGeneratedToken", smithyprelude.Boolean)
-
-	GetParametersForExportOutput_SigningKeyCertificate = GetParametersForExportOutput.AddMember("SigningKeyCertificate", _CertificateType)
-
-	GetParametersForExportOutput_SigningKeyCertificateChain = GetParametersForExportOutput.AddMember("SigningKeyCertificateChain", _CertificateType)
-
-	GetParametersForExportOutput_SigningKeyAlgorithm = GetParametersForExportOutput.AddMember("SigningKeyAlgorithm", _KeyAlgorithm)
-
-	GetParametersForExportOutput_ExportToken = GetParametersForExportOutput.AddMember("ExportToken", _ExportTokenId)
-
-	GetParametersForExportOutput_ParametersValidUntilTimestamp = GetParametersForExportOutput.AddMember("ParametersValidUntilTimestamp", _Timestamp)
-
-	GetParametersForImportInput_KeyMaterialType = GetParametersForImportInput.AddMember("KeyMaterialType", _KeyMaterialType)
-
-	GetParametersForImportInput_WrappingKeyAlgorithm = GetParametersForImportInput.AddMember("WrappingKeyAlgorithm", _KeyAlgorithm)
-
-	GetParametersForImportInput_ReuseLastGeneratedToken = GetParametersForImportInput.AddMember("ReuseLastGeneratedToken", smithyprelude.Boolean)
-
-	GetParametersForImportOutput_WrappingKeyCertificate = GetParametersForImportOutput.AddMember("WrappingKeyCertificate", _CertificateType)
-
-	GetParametersForImportOutput_WrappingKeyCertificateChain = GetParametersForImportOutput.AddMember("WrappingKeyCertificateChain", _CertificateType)
-
-	GetParametersForImportOutput_WrappingKeyAlgorithm = GetParametersForImportOutput.AddMember("WrappingKeyAlgorithm", _KeyAlgorithm)
-
-	GetParametersForImportOutput_ImportToken = GetParametersForImportOutput.AddMember("ImportToken", _ImportTokenId)
-
-	GetParametersForImportOutput_ParametersValidUntilTimestamp = GetParametersForImportOutput.AddMember("ParametersValidUntilTimestamp", _Timestamp)
-
-	GetPublicKeyCertificateInput_KeyIdentifier = GetPublicKeyCertificateInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GetPublicKeyCertificateOutput_KeyCertificate = GetPublicKeyCertificateOutput.AddMember("KeyCertificate", _CertificateType)
-
-	GetPublicKeyCertificateOutput_KeyCertificateChain = GetPublicKeyCertificateOutput.AddMember("KeyCertificateChain", _CertificateType)
-
-	GetResourcePolicyInput_ResourceArn = GetResourcePolicyInput.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourcePolicyOutput_ResourceArn = GetResourcePolicyOutput.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourcePolicyOutput_Policy = GetResourcePolicyOutput.AddMember("Policy", _ResourcePolicy)
-
-	ImportKeyInput_KeyMaterial = ImportKeyInput.AddMember("KeyMaterial", ImportKeyMaterial)
-
-	ImportKeyInput_KeyCheckValueAlgorithm = ImportKeyInput.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	ImportKeyInput_Enabled = ImportKeyInput.AddMember("Enabled", smithyprelude.Boolean)
-
-	ImportKeyInput_Tags = ImportKeyInput.AddMember("Tags", _Tags)
-
-	ImportKeyInput_ReplicationRegions = ImportKeyInput.AddMember("ReplicationRegions", _Regions)
-
-	ImportKeyInput_RequesterComment = ImportKeyInput.AddMember("RequesterComment", _MpaRequesterComment)
-
-	ImportKeyOutput_Key = ImportKeyOutput.AddMember("Key", Key)
-
-	ListAliasesInput_KeyArn = ListAliasesInput.AddMember("KeyArn", _KeyArn)
-
-	ListAliasesInput_NextToken = ListAliasesInput.AddMember("NextToken", _NextToken)
-
-	ListAliasesInput_MaxResults = ListAliasesInput.AddMember("MaxResults", _MaxResults)
-
-	ListAliasesOutput_Aliases = ListAliasesOutput.AddMember("Aliases", _Aliases)
-
-	ListAliasesOutput_NextToken = ListAliasesOutput.AddMember("NextToken", _NextToken)
-
-	ListKeysInput_KeyState = ListKeysInput.AddMember("KeyState", _KeyState)
-
-	ListKeysInput_NextToken = ListKeysInput.AddMember("NextToken", _NextToken)
-
-	ListKeysInput_MaxResults = ListKeysInput.AddMember("MaxResults", _MaxResults)
-
-	ListKeysOutput_Keys = ListKeysOutput.AddMember("Keys", _KeySummaryList)
-
-	ListKeysOutput_NextToken = ListKeysOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceInput_NextToken = ListTagsForResourceInput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_MaxResults = ListTagsForResourceInput.AddMember("MaxResults", _MaxResults)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _Tags)
-
-	ListTagsForResourceOutput_NextToken = ListTagsForResourceOutput.AddMember("NextToken", _NextToken)
-
-	PutResourcePolicyInput_ResourceArn = PutResourcePolicyInput.AddMember("ResourceArn", _ResourceArn)
-
-	PutResourcePolicyInput_Policy = PutResourcePolicyInput.AddMember("Policy", _ResourcePolicy)
-
-	PutResourcePolicyOutput_ResourceArn = PutResourcePolicyOutput.AddMember("ResourceArn", _ResourceArn)
-
-	PutResourcePolicyOutput_Policy = PutResourcePolicyOutput.AddMember("Policy", _ResourcePolicy)
-
-	RemoveKeyReplicationRegionsInput_KeyIdentifier = RemoveKeyReplicationRegionsInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	RemoveKeyReplicationRegionsInput_ReplicationRegions = RemoveKeyReplicationRegionsInput.AddMember("ReplicationRegions", _Regions)
-
-	RemoveKeyReplicationRegionsOutput_Key = RemoveKeyReplicationRegionsOutput.AddMember("Key", Key)
-
-	RestoreKeyInput_KeyIdentifier = RestoreKeyInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	RestoreKeyOutput_Key = RestoreKeyOutput.AddMember("Key", Key)
-
-	StartKeyUsageInput_KeyIdentifier = StartKeyUsageInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	StartKeyUsageOutput_Key = StartKeyUsageOutput.AddMember("Key", Key)
-
-	StopKeyUsageInput_KeyIdentifier = StopKeyUsageInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	StopKeyUsageOutput_Key = StopKeyUsageOutput.AddMember("Key", Key)
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _ResourceArn)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _Tags)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _ResourceArn)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeys)
-
-	UpdateAliasInput_AliasName = UpdateAliasInput.AddMember("AliasName", _AliasName)
-
-	UpdateAliasInput_KeyArn = UpdateAliasInput.AddMember("KeyArn", _KeyArn)
-
-	UpdateAliasOutput_Alias = UpdateAliasOutput.AddMember("Alias", Alias)
-
+const blob = "" +
+	"DisableDefaultKeyReplicationRegionsOutputDisableDefaultKeyReplicationRegionsInputEnableDefaultKeyRep" +
+	"licationRegionsOutputCertificateAuthorityPublicKeyIdentifierEnableDefaultKeyReplicationRegionsInputG" +
+	"etDefaultKeyReplicationRegionsOutputMESSAGE_AUTHENTICATION_KEY_VARIANT_24GetDefaultKeyReplicationReg" +
+	"ionsInputGetCertificateSigningRequestOutputGetCertificateSigningRequestInputRemoveKeyReplicationRegi" +
+	"onsOutputRemoveKeyReplicationRegionsInputExportDiffieHellmanTr31KeyBlockImportDiffieHellmanTr31KeyBl" +
+	"ockPaymentCryptographyControlPlaneAddKeyReplicationRegionsOutputDATA_ENCRYPTION_KEY_VARIANT_22UsingD" +
+	"efaultReplicationRegionsAddKeyReplicationRegionsInputCertificateSigningRequestTypeGetPublicKeyCertif" +
+	"icateOutputPIN_ENCRYPTION_KEY_VARIANT_28ParametersValidUntilTimestampServiceQuotaExceededExceptionTE" +
+	"RMINAL_MAJOR_KEY_VARIANT_00GetParametersForExportOutputGetParametersForImportOutputGetPublicKeyCerti" +
+	"ficateInputDiffieHellmanDerivationDataEvenHexLengthBetween16And32GetMpaTeamAssociationOutputGetParam" +
+	"etersForExportInputGetParametersForImportInputServiceUnavailableExceptionTrustedCertificatePublicKey" +
+	"WrappingKeyCertificateChainDeleteResourcePolicyOutputGetMpaTeamAssociationInputKeyDerivationHashAlgo" +
+	"rithmSigningKeyCertificateChainDeleteResourcePolicyInputDisassociateMpaTeamOutputEnabledReplicationR" +
+	"egionsExportAs2805KeyCryptogramImportAs2805KeyCryptogramListTagsForResourceOutputResourceNotFoundExc" +
+	"eptionDisassociateMpaTeamInputListTagsForResourceInputRootCertificatePublicKeyWrappedKeyMaterialForm" +
+	"atGetResourcePolicyOutputInternalServerExceptionPutResourcePolicyOutputReuseLastGeneratedTokenAssoci" +
+	"ateMpaTeamOutputCertificateSubjectTypeDeletePendingTimestampGetResourcePolicyInputKeyCheckValueAlgor" +
+	"ithmPutResourcePolicyInputAccessDeniedExceptionAssociateMpaTeamInputExportDukptInitialKeyKeyDerivati" +
+	"onFunctionPublicPolicyExceptionReplicationStatusTypeSymmetricKeyAlgorithmWrappingKeyIdentifierKeyArn" +
+	"OrKeyAliasTypePrivateKeyIdentifierSigningAlgorithmTypeSigningKeyIdentifierWrappedKeyCryptogramWrappi" +
+	"ngKeyAlgorithmExportKeyCryptogramExportKeyIdentifierImportKeyCryptogramKeyReplicationStateMpaRequest" +
+	"erCommentSigningKeyAlgorithmStartKeyUsageOutputThrottlingExceptionTr31WrappedKeyBlockTr34WrappedKeyB" +
+	"lockUntagResourceOutputUsageStartTimestampValidationExceptionDeriveKeyAlgorithmExportTr31KeyBlockExp" +
+	"ortTr34KeyBlockImportTr31KeyBlockImportTr34KeyBlockMultiRegionKeyTypeOptionalBlockValueStartKeyUsage" +
+	"InputStopKeyUsageOutputTr34KeyBlockFormatUntagResourceInputUsageStopTimestampConflictExceptionCreate" +
+	"AliasOutputDeleteAliasOutputExportKeyMaterialImportKeyMaterialListAliasesOutputSharedInformationStop" +
+	"KeyUsageInputTagResourceOutputUpdateAliasOutputAs2805KeyVariantAssociationStateCreateAliasInputDelet" +
+	"eAliasInputExportAttributesKeyExportabilityListAliasesInputMpaStatusMessageOrganizationUnitPrimitive" +
+	"BooleanRestoreKeyOutputTagResourceInputUpdateAliasInputCertificateTypeCreateKeyOutputCreateTimestamp" +
+	"DeleteKeyInDaysDeleteKeyOutputDeleteTimestampExportKeyOutputHexLength20Or24ImportKeyOutputKeyBlockHe" +
+	"adersKeyMaterialTypeKeySerialNumberOptionalBlockIdRestoreKeyInputStateOrProvinceWrappingKeySpecCreat" +
+	"eKeyInputDeleteKeyInputDeriveKeyUsageExportKeyInputGetAliasOutputImportKeyInputInitiationDateKeySumm" +
+	"aryListListKeysOutputNoRestrictionsOptionalBlocksWrappingKeyArnExportTokenIdGetAliasInputImportToken" +
+	"IdKeyAttributesKeyModesOfUseListKeysInputMpaSessionArnPrimaryRegionSessionStatusEmailAddressGetKeyOu" +
+	"tputMpaOperationWrappingSpecGetKeyInputHMAC_SHA224HMAC_SHA256HMAC_SHA384HMAC_SHA512RandomNonceResour" +
+	"ceArnCommonNameExportableKeyVersionMaxResultsMpaTeamArnNIST_SP800ResourceIdANSI_X963AliasNameKeyOrig" +
+	"inNextTokenTDES_2KEYTDES_3KEYKeyClassKeyStateTagValueAES_128AES_192AES_256CountryDecryptEncryptInteg" +
+	"erSHA_256SHA_384SHA_512TagKeysActionStringUnwrapVerifymembervalueCitykey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.paymentcryptography", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 534, Target: 0, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1594, Target: 1, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2494, Target: 2, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2870, Target: 3, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2511, Target: 4, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2900, Target: 5, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1127, Target: 6, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 7, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1256, Target: 8, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 81, Target: 9, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2014, Target: 10, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3151, Target: 11, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 309, Target: 12, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 199, Target: 13, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3392, Target: 14, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 965, Target: 15, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 827, Target: 16, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 855, Target: 17, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 682, Target: 18, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1502, Target: 19, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2052, Target: 20, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2562, Target: 21, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3207, Target: 22, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1356, Target: 23, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1548, Target: 24, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 376, Target: 25, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2807, Target: 26, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2128, Target: 27, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2405, Target: 28, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2613, Target: 29, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2204, Target: 30, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2630, Target: 31, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 503, Target: 32, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1726, Target: 33, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1905, Target: 35, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3584, Target: 40, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1894, Target: 170, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2566, Target: 38, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3754, Target: 35, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3584, Target: 40, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2647, Target: 41, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 798, Target: 483, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 711, Target: 483, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 236, Target: 483, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 564, Target: 483, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2663, Target: 46, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 653, Target: 47, Traits: 2, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1616, Target: 48, Traits: 0, StrLen: 22, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3505, Target: 482, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2775, Target: 482, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2775, Target: 482, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3765, Target: 482, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3674, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3065, Target: 482, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3380, Target: 482, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2855, Target: 56, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2477, Target: 57, Traits: 3, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3123, Target: 59, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 911, Target: 60, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2579, Target: 267, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 938, Target: 62, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1306, Target: 63, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1873, Target: 171, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2647, Target: 41, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2711, Target: 66, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1768, Target: 78, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1682, Target: 183, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 441, Target: 69, Traits: 0, StrLen: 31, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1914, Target: 171, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 171, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 685, Target: 56, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2261, Target: 269, Traits: 0, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1789, Target: 185, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1179, Target: 188, Traits: 0, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 924, Target: 60, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2990, Target: 177, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1768, Target: 78, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3020, Target: 103, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2014, Target: 80, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 121, Target: 171, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 56, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3416, Target: 308, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2528, Target: 84, Traits: 0, StrLen: 17, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 460, Target: 91, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2303, Target: 94, Traits: 0, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1318, Target: 80, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 447, Target: 69, Traits: 0, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1312, Target: 63, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3263, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2279, Target: 91, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1873, Target: 171, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2990, Target: 177, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2297, Target: 94, Traits: 0, StrLen: 18, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 121, Target: 171, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 56, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3263, Target: 90, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1954, Target: 171, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1205, Target: 56, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2427, Target: 292, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3483, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2990, Target: 177, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2960, Target: 103, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1331, Target: 104, Traits: 0, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2647, Target: 41, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3315, Target: 195, Traits: 0, StrLen: 13, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1861, Target: 169, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3515, Target: 484, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1873, Target: 171, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1974, Target: 306, Traits: 4, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 472, Target: 111, Traits: 0, StrLen: 31, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1914, Target: 171, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 171, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 685, Target: 56, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2261, Target: 269, Traits: 0, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1789, Target: 185, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1179, Target: 188, Traits: 0, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 924, Target: 60, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2170, Target: 291, Traits: 4, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2052, Target: 120, Traits: 0, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3302, Target: 172, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3515, Target: 484, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1974, Target: 306, Traits: 4, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3289, Target: 134, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3416, Target: 308, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2545, Target: 126, Traits: 0, StrLen: 17, Count: 7, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1454, Target: 259, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1073, Target: 294, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 460, Target: 135, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2303, Target: 138, Traits: 0, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1318, Target: 120, Traits: 0, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 447, Target: 111, Traits: 0, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1312, Target: 104, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3289, Target: 134, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2315, Target: 135, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1873, Target: 171, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2170, Target: 291, Traits: 4, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2333, Target: 138, Traits: 0, StrLen: 18, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 121, Target: 171, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1205, Target: 56, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3289, Target: 134, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1873, Target: 171, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 56, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2170, Target: 293, Traits: 4, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2427, Target: 292, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3483, Target: 62, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1525, Target: 147, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1894, Target: 170, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3302, Target: 172, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1682, Target: 182, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 183, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1281, Target: 484, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3515, Target: 484, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3637, Target: 207, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 205, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2885, Target: 290, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2223, Target: 290, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2459, Target: 290, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1638, Target: 290, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2930, Target: 290, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3123, Target: 59, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2351, Target: 237, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3354, Target: 246, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1831, Target: 249, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 594, Target: 484, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2759, Target: 225, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1861, Target: 169, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1894, Target: 170, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1894, Target: 171, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3302, Target: 172, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2133, Target: 219, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3629, Target: 184, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1861, Target: 169, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3315, Target: 195, Traits: 0, StrLen: 13, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2990, Target: 177, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3315, Target: 195, Traits: 0, StrLen: 13, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2727, Target: 192, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3525, Target: 220, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3235, Target: 240, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1682, Target: 182, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1682, Target: 183, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3629, Target: 184, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1789, Target: 185, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3555, Target: 483, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3575, Target: 483, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1179, Target: 188, Traits: 0, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3702, Target: 483, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3709, Target: 483, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3716, Target: 483, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2727, Target: 192, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1485, Target: 193, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3005, Target: 194, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3315, Target: 195, Traits: 0, StrLen: 13, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3688, Target: 485, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3681, Target: 485, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1100, Target: 485, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3742, Target: 485, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1580, Target: 485, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 323, Target: 485, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3748, Target: 485, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2261, Target: 485, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3221, Target: 485, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3593, Target: 205, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2071, Target: 206, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3637, Target: 207, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3193, Target: 208, Traits: 0, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1894, Target: 170, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3637, Target: 207, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3302, Target: 172, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1682, Target: 182, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3515, Target: 484, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1281, Target: 484, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2351, Target: 237, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3354, Target: 246, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3193, Target: 217, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3754, Target: 208, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2133, Target: 219, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3525, Target: 220, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3535, Target: 221, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3404, Target: 222, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2090, Target: 223, Traits: 2, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3341, Target: 224, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2759, Target: 225, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3341, Target: 224, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1842, Target: 266, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3179, Target: 290, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2762, Target: 230, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2759, Target: 230, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3545, Target: 231, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 968, Target: 232, Traits: 0, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3730, Target: 222, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3545, Target: 231, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2663, Target: 46, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2759, Target: 225, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2351, Target: 237, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3602, Target: 238, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3035, Target: 239, Traits: 2, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3235, Target: 240, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3769, Target: 239, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3760, Target: 243, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2369, Target: 243, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1810, Target: 244, Traits: 6, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 28, Target: 246, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 28, Target: 247, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3754, Target: 246, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1831, Target: 249, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3769, Target: 246, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3760, Target: 252, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1831, Target: 252, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1842, Target: 206, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2762, Target: 482, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1381, Target: 256, Traits: 7, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3565, Target: 482, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1133, Target: 258, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1454, Target: 259, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3302, Target: 172, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 685, Target: 56, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 769, Target: 262, Traits: 8, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1046, Target: 264, Traits: 9, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3367, Target: 266, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2579, Target: 267, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1934, Target: 268, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1852, Target: 269, Traits: 0, StrLen: 21, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3611, Target: 483, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3620, Target: 483, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3653, Target: 483, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3660, Target: 483, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3667, Target: 483, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3450, Target: 483, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3461, Target: 483, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3472, Target: 483, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3439, Target: 483, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1360, Target: 279, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 282, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1690, Target: 287, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3723, Target: 282, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3723, Target: 283, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3754, Target: 282, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1360, Target: 285, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3754, Target: 279, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3645, Target: 287, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2147, Target: 288, Traits: 10, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 760, Target: 290, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 2166, Target: 291, Traits: 2, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2423, Target: 292, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2185, Target: 293, Traits: 2, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1073, Target: 294, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3302, Target: 172, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 685, Target: 56, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 171, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2242, Target: 298, Traits: 6, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2768, Target: 482, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1478, Target: 300, Traits: 0, StrLen: 10, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3249, Target: 170, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1478, Target: 307, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1485, Target: 193, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 182, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 183, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1974, Target: 306, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1478, Target: 307, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3080, Target: 308, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 624, Target: 309, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17, Target: 247, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 534, Target: 312, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1747, Target: 314, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3730, Target: 222, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3545, Target: 231, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2093, Target: 223, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1594, Target: 318, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 968, Target: 232, Traits: 0, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2679, Target: 320, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3584, Target: 40, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1894, Target: 170, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2494, Target: 323, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1905, Target: 35, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3095, Target: 325, Traits: 0, StrLen: 14, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3302, Target: 172, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1682, Target: 183, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3515, Target: 484, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1281, Target: 484, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1360, Target: 285, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3123, Target: 59, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17, Target: 247, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2870, Target: 333, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2695, Target: 335, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3584, Target: 40, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2511, Target: 337, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3109, Target: 338, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2900, Target: 486, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2915, Target: 341, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1231, Target: 343, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1127, Target: 345, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 41, Target: 346, Traits: 0, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17, Target: 247, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 348, Traits: 0, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1281, Target: 247, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1406, Target: 350, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3730, Target: 222, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2093, Target: 223, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1256, Target: 353, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 968, Target: 232, Traits: 0, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 160, Target: 355, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17, Target: 247, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 81, Target: 357, Traits: 0, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1281, Target: 247, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3137, Target: 359, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1485, Target: 84, Traits: 0, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2033, Target: 171, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2711, Target: 66, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2945, Target: 363, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1478, Target: 300, Traits: 0, StrLen: 10, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3276, Target: 365, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3584, Target: 40, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3151, Target: 367, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1905, Target: 35, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 343, Target: 369, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1934, Target: 268, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1616, Target: 48, Traits: 0, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 309, Target: 373, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 312, Target: 47, Traits: 4, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 273, Target: 375, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 199, Target: 376, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1281, Target: 247, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3428, Target: 378, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3392, Target: 380, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1153, Target: 382, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3730, Target: 222, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 965, Target: 384, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 968, Target: 232, Traits: 0, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 992, Target: 386, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3005, Target: 194, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2109, Target: 169, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 484, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 827, Target: 390, Traits: 0, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1205, Target: 56, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1205, Target: 56, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2109, Target: 169, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3263, Target: 90, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 740, Target: 290, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1019, Target: 396, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3005, Target: 194, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1994, Target: 169, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 484, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 855, Target: 400, Traits: 0, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1100, Target: 56, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 56, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1994, Target: 169, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3289, Target: 134, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 740, Target: 290, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 883, Target: 406, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 682, Target: 408, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 691, Target: 56, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1108, Target: 56, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1660, Target: 411, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1502, Target: 413, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1141, Target: 258, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3165, Target: 416, Traits: 0, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1485, Target: 126, Traits: 0, StrLen: 11, Count: 7, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1682, Target: 183, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1281, Target: 484, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1360, Target: 285, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17, Target: 247, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2093, Target: 223, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2975, Target: 423, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2743, Target: 425, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1894, Target: 170, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3602, Target: 238, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3535, Target: 221, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2562, Target: 429, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2566, Target: 38, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3602, Target: 238, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3328, Target: 432, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3637, Target: 207, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3602, Target: 238, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3535, Target: 221, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3207, Target: 436, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3211, Target: 217, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3602, Target: 238, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1430, Target: 439, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3602, Target: 238, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3535, Target: 221, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1356, Target: 443, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1360, Target: 285, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3602, Target: 238, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 446, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1141, Target: 258, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1548, Target: 449, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1141, Target: 258, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 409, Target: 452, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17, Target: 247, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 376, Target: 455, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3050, Target: 457, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2807, Target: 459, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2387, Target: 461, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2128, Target: 463, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2596, Target: 465, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 147, Target: 171, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2405, Target: 467, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 149, Traits: 0, StrLen: 3, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2823, Target: 469, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1360, Target: 285, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2613, Target: 472, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2441, Target: 473, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3494, Target: 255, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3723, Target: 283, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2204, Target: 476, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2839, Target: 477, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3584, Target: 40, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1894, Target: 170, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2630, Target: 480, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1905, Target: 35, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3736, Target: 482, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 2787, Target: 483, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 2800, Target: 484, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 2791, Target: 485, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 3695, Target: 486, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [487]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+}
+
+var AddKeyReplicationRegions = &handles[0]
+
+var AssociateMpaTeam = &handles[1]
+
+var CreateAlias = &handles[2]
+
+var CreateKey = &handles[3]
+
+var DeleteAlias = &handles[4]
+
+var DeleteKey = &handles[5]
+
+var DeleteResourcePolicy = &handles[6]
+
+var DisableDefaultKeyReplicationRegions = &handles[7]
+
+var DisassociateMpaTeam = &handles[8]
+
+var EnableDefaultKeyReplicationRegions = &handles[9]
+
+var ExportKey = &handles[10]
+
+var GetAlias = &handles[11]
+
+var GetCertificateSigningRequest = &handles[12]
+
+var GetDefaultKeyReplicationRegions = &handles[13]
+
+var GetKey = &handles[14]
+
+var GetMpaTeamAssociation = &handles[15]
+
+var GetParametersForExport = &handles[16]
+
+var GetParametersForImport = &handles[17]
+
+var GetPublicKeyCertificate = &handles[18]
+
+var GetResourcePolicy = &handles[19]
+
+var ImportKey = &handles[20]
+
+var ListAliases = &handles[21]
+
+var ListKeys = &handles[22]
+
+var ListTagsForResource = &handles[23]
+
+var PutResourcePolicy = &handles[24]
+
+var RemoveKeyReplicationRegions = &handles[25]
+
+var RestoreKey = &handles[26]
+
+var StartKeyUsage = &handles[27]
+
+var StopKeyUsage = &handles[28]
+
+var TagResource = &handles[29]
+
+var UntagResource = &handles[30]
+
+var UpdateAlias = &handles[31]
+
+var _PaymentCryptographyControlPlane = &handles[32]
+
+var AccessDeniedException = &handles[33]
+var AccessDeniedException_Message = &handles[34]
+
+var Alias = &handles[35]
+var Alias_AliasName = &handles[36]
+var Alias_KeyArn = &handles[37]
+
+var _Aliases = &handles[38]
+var _Aliases_member = &handles[39]
+
+var _AliasName = &handles[40]
+
+var As2805KeyVariant = &handles[41]
+var As2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00 = &handles[42]
+var As2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28 = &handles[43]
+var As2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24 = &handles[44]
+var As2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22 = &handles[45]
+
+var _AssociationState = &handles[46]
+
+var _CertificateSigningRequestType = &handles[47]
+
+var CertificateSubjectType = &handles[48]
+var CertificateSubjectType_CommonName = &handles[49]
+var CertificateSubjectType_OrganizationUnit = &handles[50]
+var CertificateSubjectType_Organization = &handles[51]
+var CertificateSubjectType_City = &handles[52]
+var CertificateSubjectType_Country = &handles[53]
+var CertificateSubjectType_StateOrProvince = &handles[54]
+var CertificateSubjectType_EmailAddress = &handles[55]
+
+var _CertificateType = &handles[56]
+
+var ConflictException = &handles[57]
+var ConflictException_Message = &handles[58]
+
+var _DeriveKeyUsage = &handles[59]
+
+var DiffieHellmanDerivationData = &handles[60]
+var DiffieHellmanDerivationData_SharedInformation = &handles[61]
+
+var _EvenHexLengthBetween16And32 = &handles[62]
+
+var ExportAs2805KeyCryptogram = &handles[63]
+var ExportAs2805KeyCryptogram_WrappingKeyIdentifier = &handles[64]
+var ExportAs2805KeyCryptogram_As2805KeyVariant = &handles[65]
+
+var ExportAttributes = &handles[66]
+var ExportAttributes_ExportDukptInitialKey = &handles[67]
+var ExportAttributes_KeyCheckValueAlgorithm = &handles[68]
+
+var ExportDiffieHellmanTr31KeyBlock = &handles[69]
+var ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = &handles[70]
+var ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = &handles[71]
+var ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = &handles[72]
+var ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = &handles[73]
+var ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = &handles[74]
+var ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = &handles[75]
+var ExportDiffieHellmanTr31KeyBlock_DerivationData = &handles[76]
+var ExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders = &handles[77]
+
+var ExportDukptInitialKey = &handles[78]
+var ExportDukptInitialKey_KeySerialNumber = &handles[79]
+
+var ExportKeyCryptogram = &handles[80]
+var ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier = &handles[81]
+var ExportKeyCryptogram_WrappingKeyCertificate = &handles[82]
+var ExportKeyCryptogram_WrappingSpec = &handles[83]
+
+var ExportKeyMaterial = &handles[84]
+var ExportKeyMaterial_Tr31KeyBlock = &handles[85]
+var ExportKeyMaterial_Tr34KeyBlock = &handles[86]
+var ExportKeyMaterial_KeyCryptogram = &handles[87]
+var ExportKeyMaterial_DiffieHellmanTr31KeyBlock = &handles[88]
+var ExportKeyMaterial_As2805KeyCryptogram = &handles[89]
+
+var _ExportTokenId = &handles[90]
+
+var ExportTr31KeyBlock = &handles[91]
+var ExportTr31KeyBlock_WrappingKeyIdentifier = &handles[92]
+var ExportTr31KeyBlock_KeyBlockHeaders = &handles[93]
+
+var ExportTr34KeyBlock = &handles[94]
+var ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = &handles[95]
+var ExportTr34KeyBlock_WrappingKeyCertificate = &handles[96]
+var ExportTr34KeyBlock_ExportToken = &handles[97]
+var ExportTr34KeyBlock_SigningKeyIdentifier = &handles[98]
+var ExportTr34KeyBlock_SigningKeyCertificate = &handles[99]
+var ExportTr34KeyBlock_KeyBlockFormat = &handles[100]
+var ExportTr34KeyBlock_RandomNonce = &handles[101]
+var ExportTr34KeyBlock_KeyBlockHeaders = &handles[102]
+
+var _HexLength20Or24 = &handles[103]
+
+var ImportAs2805KeyCryptogram = &handles[104]
+var ImportAs2805KeyCryptogram_As2805KeyVariant = &handles[105]
+var ImportAs2805KeyCryptogram_KeyModesOfUse = &handles[106]
+var ImportAs2805KeyCryptogram_KeyAlgorithm = &handles[107]
+var ImportAs2805KeyCryptogram_Exportable = &handles[108]
+var ImportAs2805KeyCryptogram_WrappingKeyIdentifier = &handles[109]
+var ImportAs2805KeyCryptogram_WrappedKeyCryptogram = &handles[110]
+
+var ImportDiffieHellmanTr31KeyBlock = &handles[111]
+var ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = &handles[112]
+var ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = &handles[113]
+var ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = &handles[114]
+var ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = &handles[115]
+var ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = &handles[116]
+var ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = &handles[117]
+var ImportDiffieHellmanTr31KeyBlock_DerivationData = &handles[118]
+var ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock = &handles[119]
+
+var ImportKeyCryptogram = &handles[120]
+var ImportKeyCryptogram_KeyAttributes = &handles[121]
+var ImportKeyCryptogram_Exportable = &handles[122]
+var ImportKeyCryptogram_WrappedKeyCryptogram = &handles[123]
+var ImportKeyCryptogram_ImportToken = &handles[124]
+var ImportKeyCryptogram_WrappingSpec = &handles[125]
+
+var ImportKeyMaterial = &handles[126]
+var ImportKeyMaterial_RootCertificatePublicKey = &handles[127]
+var ImportKeyMaterial_TrustedCertificatePublicKey = &handles[128]
+var ImportKeyMaterial_Tr31KeyBlock = &handles[129]
+var ImportKeyMaterial_Tr34KeyBlock = &handles[130]
+var ImportKeyMaterial_KeyCryptogram = &handles[131]
+var ImportKeyMaterial_DiffieHellmanTr31KeyBlock = &handles[132]
+var ImportKeyMaterial_As2805KeyCryptogram = &handles[133]
+
+var _ImportTokenId = &handles[134]
+
+var ImportTr31KeyBlock = &handles[135]
+var ImportTr31KeyBlock_WrappingKeyIdentifier = &handles[136]
+var ImportTr31KeyBlock_WrappedKeyBlock = &handles[137]
+
+var ImportTr34KeyBlock = &handles[138]
+var ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = &handles[139]
+var ImportTr34KeyBlock_SigningKeyCertificate = &handles[140]
+var ImportTr34KeyBlock_ImportToken = &handles[141]
+var ImportTr34KeyBlock_WrappingKeyIdentifier = &handles[142]
+var ImportTr34KeyBlock_WrappingKeyCertificate = &handles[143]
+var ImportTr34KeyBlock_WrappedKeyBlock = &handles[144]
+var ImportTr34KeyBlock_KeyBlockFormat = &handles[145]
+var ImportTr34KeyBlock_RandomNonce = &handles[146]
+
+var InternalServerException = &handles[147]
+var InternalServerException_Message = &handles[148]
+
+var Key = &handles[149]
+var Key_KeyArn = &handles[150]
+var Key_KeyAttributes = &handles[151]
+var Key_KeyCheckValue = &handles[152]
+var Key_KeyCheckValueAlgorithm = &handles[153]
+var Key_Enabled = &handles[154]
+var Key_Exportable = &handles[155]
+var Key_KeyState = &handles[156]
+var Key_KeyOrigin = &handles[157]
+var Key_CreateTimestamp = &handles[158]
+var Key_UsageStartTimestamp = &handles[159]
+var Key_UsageStopTimestamp = &handles[160]
+var Key_DeletePendingTimestamp = &handles[161]
+var Key_DeleteTimestamp = &handles[162]
+var Key_DeriveKeyUsage = &handles[163]
+var Key_MultiRegionKeyType = &handles[164]
+var Key_PrimaryRegion = &handles[165]
+var Key_ReplicationStatus = &handles[166]
+var Key_UsingDefaultReplicationRegions = &handles[167]
+var Key_MpaStatus = &handles[168]
+
+var _KeyAlgorithm = &handles[169]
+
+var _KeyArn = &handles[170]
+
+var _KeyArnOrKeyAliasType = &handles[171]
+
+var KeyAttributes = &handles[172]
+var KeyAttributes_KeyUsage = &handles[173]
+var KeyAttributes_KeyClass = &handles[174]
+var KeyAttributes_KeyAlgorithm = &handles[175]
+var KeyAttributes_KeyModesOfUse = &handles[176]
+
+var KeyBlockHeaders = &handles[177]
+var KeyBlockHeaders_KeyModesOfUse = &handles[178]
+var KeyBlockHeaders_KeyExportability = &handles[179]
+var KeyBlockHeaders_KeyVersion = &handles[180]
+var KeyBlockHeaders_OptionalBlocks = &handles[181]
+
+var _KeyCheckValue = &handles[182]
+
+var _KeyCheckValueAlgorithm = &handles[183]
+
+var _KeyClass = &handles[184]
+
+var KeyDerivationFunction = &handles[185]
+var KeyDerivationFunction_NIST_SP800 = &handles[186]
+var KeyDerivationFunction_ANSI_X963 = &handles[187]
+
+var KeyDerivationHashAlgorithm = &handles[188]
+var KeyDerivationHashAlgorithm_SHA_256 = &handles[189]
+var KeyDerivationHashAlgorithm_SHA_384 = &handles[190]
+var KeyDerivationHashAlgorithm_SHA_512 = &handles[191]
+
+var _KeyExportability = &handles[192]
+
+var _KeyMaterial = &handles[193]
+
+var _KeyMaterialType = &handles[194]
+
+var KeyModesOfUse = &handles[195]
+var KeyModesOfUse_Encrypt = &handles[196]
+var KeyModesOfUse_Decrypt = &handles[197]
+var KeyModesOfUse_Wrap = &handles[198]
+var KeyModesOfUse_Unwrap = &handles[199]
+var KeyModesOfUse_Generate = &handles[200]
+var KeyModesOfUse_Sign = &handles[201]
+var KeyModesOfUse_Verify = &handles[202]
+var KeyModesOfUse_DeriveKey = &handles[203]
+var KeyModesOfUse_NoRestrictions = &handles[204]
+
+var _KeyOrigin = &handles[205]
+
+var _KeyReplicationState = &handles[206]
+
+var _KeyState = &handles[207]
+
+var KeySummary = &handles[208]
+var KeySummary_KeyArn = &handles[209]
+var KeySummary_KeyState = &handles[210]
+var KeySummary_KeyAttributes = &handles[211]
+var KeySummary_KeyCheckValue = &handles[212]
+var KeySummary_Exportable = &handles[213]
+var KeySummary_Enabled = &handles[214]
+var KeySummary_MultiRegionKeyType = &handles[215]
+var KeySummary_PrimaryRegion = &handles[216]
+
+var _KeySummaryList = &handles[217]
+var _KeySummaryList_member = &handles[218]
+
+var _KeyUsage = &handles[219]
+
+var _KeyVersion = &handles[220]
+
+var _MaxResults = &handles[221]
+
+var _MpaOperation = &handles[222]
+
+var _MpaRequesterComment = &handles[223]
+
+var _MpaSessionArn = &handles[224]
+
+var MpaStatus = &handles[225]
+var MpaStatus_MpaSessionArn = &handles[226]
+var MpaStatus_Status = &handles[227]
+var MpaStatus_InitiationDate = &handles[228]
+var MpaStatus_StatusMessage = &handles[229]
+
+var _MpaStatusMessage = &handles[230]
+
+var _MpaTeamArn = &handles[231]
+
+var MpaTeamAssociation = &handles[232]
+var MpaTeamAssociation_Action = &handles[233]
+var MpaTeamAssociation_MpaTeamArn = &handles[234]
+var MpaTeamAssociation_AssociationState = &handles[235]
+var MpaTeamAssociation_MpaStatus = &handles[236]
+
+var _MultiRegionKeyType = &handles[237]
+
+var _NextToken = &handles[238]
+
+var _OptionalBlockId = &handles[239]
+
+var _OptionalBlocks = &handles[240]
+var _OptionalBlocks_key = &handles[241]
+var _OptionalBlocks_value = &handles[242]
+
+var _OptionalBlockValue = &handles[243]
+
+var PublicPolicyException = &handles[244]
+var PublicPolicyException_Message = &handles[245]
+
+var _Region = &handles[246]
+
+var _Regions = &handles[247]
+var _Regions_member = &handles[248]
+
+var _ReplicationStatus = &handles[249]
+var _ReplicationStatus_key = &handles[250]
+var _ReplicationStatus_value = &handles[251]
+
+var ReplicationStatusType = &handles[252]
+var ReplicationStatusType_Status = &handles[253]
+var ReplicationStatusType_StatusMessage = &handles[254]
+
+var _ResourceArn = &handles[255]
+
+var ResourceNotFoundException = &handles[256]
+var ResourceNotFoundException_ResourceId = &handles[257]
+
+var _ResourcePolicy = &handles[258]
+
+var RootCertificatePublicKey = &handles[259]
+var RootCertificatePublicKey_KeyAttributes = &handles[260]
+var RootCertificatePublicKey_PublicKeyCertificate = &handles[261]
+
+var ServiceQuotaExceededException = &handles[262]
+var ServiceQuotaExceededException_Message = &handles[263]
+
+var ServiceUnavailableException = &handles[264]
+var ServiceUnavailableException_Message = &handles[265]
+
+var _SessionStatus = &handles[266]
+
+var _SharedInformation = &handles[267]
+
+var _SigningAlgorithmType = &handles[268]
+
+var SymmetricKeyAlgorithm = &handles[269]
+var SymmetricKeyAlgorithm_TDES_2KEY = &handles[270]
+var SymmetricKeyAlgorithm_TDES_3KEY = &handles[271]
+var SymmetricKeyAlgorithm_AES_128 = &handles[272]
+var SymmetricKeyAlgorithm_AES_192 = &handles[273]
+var SymmetricKeyAlgorithm_AES_256 = &handles[274]
+var SymmetricKeyAlgorithm_HMAC_SHA256 = &handles[275]
+var SymmetricKeyAlgorithm_HMAC_SHA384 = &handles[276]
+var SymmetricKeyAlgorithm_HMAC_SHA512 = &handles[277]
+var SymmetricKeyAlgorithm_HMAC_SHA224 = &handles[278]
+
+var Tag = &handles[279]
+var Tag_Key = &handles[280]
+var Tag_Value = &handles[281]
+
+var _TagKey = &handles[282]
+
+var _TagKeys = &handles[283]
+var _TagKeys_member = &handles[284]
+
+var _Tags = &handles[285]
+var _Tags_member = &handles[286]
+
+var _TagValue = &handles[287]
+
+var ThrottlingException = &handles[288]
+var ThrottlingException_Message = &handles[289]
+
+var _Timestamp = &handles[290]
+
+var _Tr31WrappedKeyBlock = &handles[291]
+
+var _Tr34KeyBlockFormat = &handles[292]
+
+var _Tr34WrappedKeyBlock = &handles[293]
+
+var TrustedCertificatePublicKey = &handles[294]
+var TrustedCertificatePublicKey_KeyAttributes = &handles[295]
+var TrustedCertificatePublicKey_PublicKeyCertificate = &handles[296]
+var TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier = &handles[297]
+
+var ValidationException = &handles[298]
+var ValidationException_Message = &handles[299]
+
+var WrappedKey = &handles[300]
+var WrappedKey_WrappingKeyArn = &handles[301]
+var WrappedKey_WrappedKeyMaterialFormat = &handles[302]
+var WrappedKey_KeyMaterial = &handles[303]
+var WrappedKey_KeyCheckValue = &handles[304]
+var WrappedKey_KeyCheckValueAlgorithm = &handles[305]
+
+var _WrappedKeyCryptogram = &handles[306]
+
+var _WrappedKeyMaterialFormat = &handles[307]
+
+var _WrappingKeySpec = &handles[308]
+
+var AddKeyReplicationRegionsInput = &handles[309]
+var AddKeyReplicationRegionsInput_KeyIdentifier = &handles[310]
+var AddKeyReplicationRegionsInput_ReplicationRegions = &handles[311]
+
+var AddKeyReplicationRegionsOutput = &handles[312]
+var AddKeyReplicationRegionsOutput_Key = &handles[313]
+
+var AssociateMpaTeamInput = &handles[314]
+var AssociateMpaTeamInput_Action = &handles[315]
+var AssociateMpaTeamInput_MpaTeamArn = &handles[316]
+var AssociateMpaTeamInput_RequesterComment = &handles[317]
+
+var AssociateMpaTeamOutput = &handles[318]
+var AssociateMpaTeamOutput_MpaTeamAssociation = &handles[319]
+
+var CreateAliasInput = &handles[320]
+var CreateAliasInput_AliasName = &handles[321]
+var CreateAliasInput_KeyArn = &handles[322]
+
+var CreateAliasOutput = &handles[323]
+var CreateAliasOutput_Alias = &handles[324]
+
+var CreateKeyInput = &handles[325]
+var CreateKeyInput_KeyAttributes = &handles[326]
+var CreateKeyInput_KeyCheckValueAlgorithm = &handles[327]
+var CreateKeyInput_Exportable = &handles[328]
+var CreateKeyInput_Enabled = &handles[329]
+var CreateKeyInput_Tags = &handles[330]
+var CreateKeyInput_DeriveKeyUsage = &handles[331]
+var CreateKeyInput_ReplicationRegions = &handles[332]
+
+var CreateKeyOutput = &handles[333]
+var CreateKeyOutput_Key = &handles[334]
+
+var DeleteAliasInput = &handles[335]
+var DeleteAliasInput_AliasName = &handles[336]
+
+var DeleteAliasOutput = &handles[337]
+
+var DeleteKeyInput = &handles[338]
+var DeleteKeyInput_KeyIdentifier = &handles[339]
+var DeleteKeyInput_DeleteKeyInDays = &handles[340]
+
+var DeleteKeyOutput = &handles[341]
+var DeleteKeyOutput_Key = &handles[342]
+
+var DeleteResourcePolicyInput = &handles[343]
+var DeleteResourcePolicyInput_ResourceArn = &handles[344]
+
+var DeleteResourcePolicyOutput = &handles[345]
+
+var DisableDefaultKeyReplicationRegionsInput = &handles[346]
+var DisableDefaultKeyReplicationRegionsInput_ReplicationRegions = &handles[347]
+
+var DisableDefaultKeyReplicationRegionsOutput = &handles[348]
+var DisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = &handles[349]
+
+var DisassociateMpaTeamInput = &handles[350]
+var DisassociateMpaTeamInput_Action = &handles[351]
+var DisassociateMpaTeamInput_RequesterComment = &handles[352]
+
+var DisassociateMpaTeamOutput = &handles[353]
+var DisassociateMpaTeamOutput_MpaTeamAssociation = &handles[354]
+
+var EnableDefaultKeyReplicationRegionsInput = &handles[355]
+var EnableDefaultKeyReplicationRegionsInput_ReplicationRegions = &handles[356]
+
+var EnableDefaultKeyReplicationRegionsOutput = &handles[357]
+var EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = &handles[358]
+
+var ExportKeyInput = &handles[359]
+var ExportKeyInput_KeyMaterial = &handles[360]
+var ExportKeyInput_ExportKeyIdentifier = &handles[361]
+var ExportKeyInput_ExportAttributes = &handles[362]
+
+var ExportKeyOutput = &handles[363]
+var ExportKeyOutput_WrappedKey = &handles[364]
+
+var GetAliasInput = &handles[365]
+var GetAliasInput_AliasName = &handles[366]
+
+var GetAliasOutput = &handles[367]
+var GetAliasOutput_Alias = &handles[368]
+
+var GetCertificateSigningRequestInput = &handles[369]
+var GetCertificateSigningRequestInput_KeyIdentifier = &handles[370]
+var GetCertificateSigningRequestInput_SigningAlgorithm = &handles[371]
+var GetCertificateSigningRequestInput_CertificateSubject = &handles[372]
+
+var GetCertificateSigningRequestOutput = &handles[373]
+var GetCertificateSigningRequestOutput_CertificateSigningRequest = &handles[374]
+
+var GetDefaultKeyReplicationRegionsInput = &handles[375]
+
+var GetDefaultKeyReplicationRegionsOutput = &handles[376]
+var GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = &handles[377]
+
+var GetKeyInput = &handles[378]
+var GetKeyInput_KeyIdentifier = &handles[379]
+
+var GetKeyOutput = &handles[380]
+var GetKeyOutput_Key = &handles[381]
+
+var GetMpaTeamAssociationInput = &handles[382]
+var GetMpaTeamAssociationInput_Action = &handles[383]
+
+var GetMpaTeamAssociationOutput = &handles[384]
+var GetMpaTeamAssociationOutput_MpaTeamAssociation = &handles[385]
+
+var GetParametersForExportInput = &handles[386]
+var GetParametersForExportInput_KeyMaterialType = &handles[387]
+var GetParametersForExportInput_SigningKeyAlgorithm = &handles[388]
+var GetParametersForExportInput_ReuseLastGeneratedToken = &handles[389]
+
+var GetParametersForExportOutput = &handles[390]
+var GetParametersForExportOutput_SigningKeyCertificate = &handles[391]
+var GetParametersForExportOutput_SigningKeyCertificateChain = &handles[392]
+var GetParametersForExportOutput_SigningKeyAlgorithm = &handles[393]
+var GetParametersForExportOutput_ExportToken = &handles[394]
+var GetParametersForExportOutput_ParametersValidUntilTimestamp = &handles[395]
+
+var GetParametersForImportInput = &handles[396]
+var GetParametersForImportInput_KeyMaterialType = &handles[397]
+var GetParametersForImportInput_WrappingKeyAlgorithm = &handles[398]
+var GetParametersForImportInput_ReuseLastGeneratedToken = &handles[399]
+
+var GetParametersForImportOutput = &handles[400]
+var GetParametersForImportOutput_WrappingKeyCertificate = &handles[401]
+var GetParametersForImportOutput_WrappingKeyCertificateChain = &handles[402]
+var GetParametersForImportOutput_WrappingKeyAlgorithm = &handles[403]
+var GetParametersForImportOutput_ImportToken = &handles[404]
+var GetParametersForImportOutput_ParametersValidUntilTimestamp = &handles[405]
+
+var GetPublicKeyCertificateInput = &handles[406]
+var GetPublicKeyCertificateInput_KeyIdentifier = &handles[407]
+
+var GetPublicKeyCertificateOutput = &handles[408]
+var GetPublicKeyCertificateOutput_KeyCertificate = &handles[409]
+var GetPublicKeyCertificateOutput_KeyCertificateChain = &handles[410]
+
+var GetResourcePolicyInput = &handles[411]
+var GetResourcePolicyInput_ResourceArn = &handles[412]
+
+var GetResourcePolicyOutput = &handles[413]
+var GetResourcePolicyOutput_ResourceArn = &handles[414]
+var GetResourcePolicyOutput_Policy = &handles[415]
+
+var ImportKeyInput = &handles[416]
+var ImportKeyInput_KeyMaterial = &handles[417]
+var ImportKeyInput_KeyCheckValueAlgorithm = &handles[418]
+var ImportKeyInput_Enabled = &handles[419]
+var ImportKeyInput_Tags = &handles[420]
+var ImportKeyInput_ReplicationRegions = &handles[421]
+var ImportKeyInput_RequesterComment = &handles[422]
+
+var ImportKeyOutput = &handles[423]
+var ImportKeyOutput_Key = &handles[424]
+
+var ListAliasesInput = &handles[425]
+var ListAliasesInput_KeyArn = &handles[426]
+var ListAliasesInput_NextToken = &handles[427]
+var ListAliasesInput_MaxResults = &handles[428]
+
+var ListAliasesOutput = &handles[429]
+var ListAliasesOutput_Aliases = &handles[430]
+var ListAliasesOutput_NextToken = &handles[431]
+
+var ListKeysInput = &handles[432]
+var ListKeysInput_KeyState = &handles[433]
+var ListKeysInput_NextToken = &handles[434]
+var ListKeysInput_MaxResults = &handles[435]
+
+var ListKeysOutput = &handles[436]
+var ListKeysOutput_Keys = &handles[437]
+var ListKeysOutput_NextToken = &handles[438]
+
+var ListTagsForResourceInput = &handles[439]
+var ListTagsForResourceInput_ResourceArn = &handles[440]
+var ListTagsForResourceInput_NextToken = &handles[441]
+var ListTagsForResourceInput_MaxResults = &handles[442]
+
+var ListTagsForResourceOutput = &handles[443]
+var ListTagsForResourceOutput_Tags = &handles[444]
+var ListTagsForResourceOutput_NextToken = &handles[445]
+
+var PutResourcePolicyInput = &handles[446]
+var PutResourcePolicyInput_ResourceArn = &handles[447]
+var PutResourcePolicyInput_Policy = &handles[448]
+
+var PutResourcePolicyOutput = &handles[449]
+var PutResourcePolicyOutput_ResourceArn = &handles[450]
+var PutResourcePolicyOutput_Policy = &handles[451]
+
+var RemoveKeyReplicationRegionsInput = &handles[452]
+var RemoveKeyReplicationRegionsInput_KeyIdentifier = &handles[453]
+var RemoveKeyReplicationRegionsInput_ReplicationRegions = &handles[454]
+
+var RemoveKeyReplicationRegionsOutput = &handles[455]
+var RemoveKeyReplicationRegionsOutput_Key = &handles[456]
+
+var RestoreKeyInput = &handles[457]
+var RestoreKeyInput_KeyIdentifier = &handles[458]
+
+var RestoreKeyOutput = &handles[459]
+var RestoreKeyOutput_Key = &handles[460]
+
+var StartKeyUsageInput = &handles[461]
+var StartKeyUsageInput_KeyIdentifier = &handles[462]
+
+var StartKeyUsageOutput = &handles[463]
+var StartKeyUsageOutput_Key = &handles[464]
+
+var StopKeyUsageInput = &handles[465]
+var StopKeyUsageInput_KeyIdentifier = &handles[466]
+
+var StopKeyUsageOutput = &handles[467]
+var StopKeyUsageOutput_Key = &handles[468]
+
+var TagResourceInput = &handles[469]
+var TagResourceInput_ResourceArn = &handles[470]
+var TagResourceInput_Tags = &handles[471]
+
+var TagResourceOutput = &handles[472]
+
+var UntagResourceInput = &handles[473]
+var UntagResourceInput_ResourceArn = &handles[474]
+var UntagResourceInput_TagKeys = &handles[475]
+
+var UntagResourceOutput = &handles[476]
+
+var UpdateAliasInput = &handles[477]
+var UpdateAliasInput_AliasName = &handles[478]
+var UpdateAliasInput_KeyArn = &handles[479]
+
+var UpdateAliasOutput = &handles[480]
+var UpdateAliasOutput_Alias = &handles[481]
+
+var PaymentCryptographyControlPlane = &smithy.ServiceSchema{Schema: &handles[32], Version: "2021-09-14"}

@@ -7,36 +7,43 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json",
-	Name:      "GetItem",
-}, smithy.ShapeTypeOperation, 0)
+const blob = "" +
+	"Json10QueryCompatibleGetItemOutputGetItemInputItemNotFound"
 
-var _Json10QueryCompatible = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json",
-	Name:      "Json10QueryCompatible",
-}, smithy.ShapeTypeService, 0, &smithytraits.AWSQueryCompatible{})
-
-var Json10QueryCompatible = smithy.NewServiceSchema(_Json10QueryCompatible, "2099-01-01")
-
-var ItemNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json",
-	Name:      "ItemNotFound",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
-	&smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
-		StatusCode: 404})
-
-var GetItemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json",
-	Name:      "GetItemInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetItemOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json",
-	Name:      "GetItemOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"aws.protocoltests.json"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 21, Target: 0, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 46, Target: 2, Traits: 2, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 34, Target: 3, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21, Target: 4, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
+			StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x200},
+	},
 }
+
+var handles = [5]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+}
+
+var GetItem = &handles[0]
+
+var _Json10QueryCompatible = &handles[1]
+
+var ItemNotFound = &handles[2]
+
+var GetItemInput = &handles[3]
+
+var GetItemOutput = &handles[4]
+
+var Json10QueryCompatible = &smithy.ServiceSchema{Schema: &handles[1], Version: "2099-01-01"}

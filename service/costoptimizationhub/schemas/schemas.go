@@ -4,2355 +4,1976 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "GetPreferences",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "GetRecommendation",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEfficiencyMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListEfficiencyMetrics",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEnrollmentStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListEnrollmentStatuses",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRecommendationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListRecommendationSummaries",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "UpdateEnrollmentStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdatePreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "UpdatePreferences",
-}, smithy.ShapeTypeOperation, 0)
-
-var _CostOptimizationHubService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "CostOptimizationHubService",
-}, smithy.ShapeTypeService, 0)
-
-var CostOptimizationHubService = smithy.NewServiceSchema(_CostOptimizationHubService, "2022-07-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccountEnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "AccountEnrollmentStatus",
-}, smithy.ShapeTypeStructure, 4)
-var AccountEnrollmentStatus_accountId *smithy.Schema
-
-var AccountEnrollmentStatus_status *smithy.Schema
-
-var AccountEnrollmentStatus_lastUpdatedTimestamp *smithy.Schema
-
-var AccountEnrollmentStatus_createdTimestamp *smithy.Schema
-
-var _AccountEnrollmentStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "AccountEnrollmentStatuses",
-}, smithy.ShapeTypeList, 1)
-var _AccountEnrollmentStatuses_member *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "AccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdList_member *smithy.Schema
-
-var ActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ActionType",
-}, smithy.ShapeTypeEnum, 8)
-var ActionType_RIGHTSIZE *smithy.Schema
-
-var ActionType_STOP *smithy.Schema
-
-var ActionType_UPGRADE *smithy.Schema
-
-var ActionType_PURCHASE_SAVINGS_PLANS *smithy.Schema
-
-var ActionType_PURCHASE_RESERVED_INSTANCES *smithy.Schema
-
-var ActionType_MIGRATE_TO_GRAVITON *smithy.Schema
-
-var ActionType_DELETE *smithy.Schema
-
-var ActionType_SCALE_IN *smithy.Schema
-
-var _ActionTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ActionTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ActionTypeList_member *smithy.Schema
-
-var AllocationStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "AllocationStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var AllocationStrategy_PRIORITIZED *smithy.Schema
-
-var AllocationStrategy_LOWEST_PRICE *smithy.Schema
-
-var AuroraDbClusterStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "AuroraDbClusterStorage",
-}, smithy.ShapeTypeStructure, 2)
-var AuroraDbClusterStorage_configuration *smithy.Schema
-
-var AuroraDbClusterStorage_costCalculation *smithy.Schema
-
-var AuroraDbClusterStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "AuroraDbClusterStorageConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AuroraDbClusterStorageConfiguration_storageType *smithy.Schema
-
-var BlockStoragePerformanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "BlockStoragePerformanceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var BlockStoragePerformanceConfiguration_iops *smithy.Schema
-
-var BlockStoragePerformanceConfiguration_throughput *smithy.Schema
-
-var ComputeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ComputeConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ComputeConfiguration_vCpu *smithy.Schema
-
-var ComputeConfiguration_memorySizeInMB *smithy.Schema
-
-var ComputeConfiguration_architecture *smithy.Schema
-
-var ComputeConfiguration_platform *smithy.Schema
-
-var ComputeSavingsPlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ComputeSavingsPlans",
-}, smithy.ShapeTypeStructure, 2)
-var ComputeSavingsPlans_configuration *smithy.Schema
-
-var ComputeSavingsPlans_costCalculation *smithy.Schema
-
-var ComputeSavingsPlansConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ComputeSavingsPlansConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ComputeSavingsPlansConfiguration_accountScope *smithy.Schema
-
-var ComputeSavingsPlansConfiguration_term *smithy.Schema
-
-var ComputeSavingsPlansConfiguration_paymentOption *smithy.Schema
-
-var ComputeSavingsPlansConfiguration_hourlyCommitment *smithy.Schema
-
-var _Datetime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Datetime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DbInstanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "DbInstanceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DbInstanceConfiguration_dbInstanceClass *smithy.Schema
-
-var DocumentDbCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "DocumentDbCluster",
-}, smithy.ShapeTypeStructure, 1)
-var DocumentDbCluster_costCalculation *smithy.Schema
-
-var DynamoDbReservedCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "DynamoDbReservedCapacity",
-}, smithy.ShapeTypeStructure, 2)
-var DynamoDbReservedCapacity_configuration *smithy.Schema
-
-var DynamoDbReservedCapacity_costCalculation *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "DynamoDbReservedCapacityConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var DynamoDbReservedCapacityConfiguration_accountScope *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration_service *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration_term *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration_paymentOption *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration_reservedInstancesRegion *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration_upfrontCost *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration_monthlyRecurringCost *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration_numberOfCapacityUnitsToPurchase *smithy.Schema
-
-var DynamoDbReservedCapacityConfiguration_capacityUnits *smithy.Schema
-
-var DynamoDbTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "DynamoDbTable",
-}, smithy.ShapeTypeStructure, 1)
-var DynamoDbTable_costCalculation *smithy.Schema
-
-var EbsVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "EbsVolume",
-}, smithy.ShapeTypeStructure, 2)
-var EbsVolume_configuration *smithy.Schema
-
-var EbsVolume_costCalculation *smithy.Schema
-
-var EbsVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "EbsVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var EbsVolumeConfiguration_storage *smithy.Schema
-
-var EbsVolumeConfiguration_performance *smithy.Schema
-
-var EbsVolumeConfiguration_attachmentState *smithy.Schema
-
-var Ec2AutoScalingGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2AutoScalingGroup",
-}, smithy.ShapeTypeStructure, 2)
-var Ec2AutoScalingGroup_configuration *smithy.Schema
-
-var Ec2AutoScalingGroup_costCalculation *smithy.Schema
-
-var Ec2AutoScalingGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2AutoScalingGroupConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var Ec2AutoScalingGroupConfiguration_instance *smithy.Schema
-
-var Ec2AutoScalingGroupConfiguration_mixedInstances *smithy.Schema
-
-var Ec2AutoScalingGroupConfiguration_type *smithy.Schema
-
-var Ec2AutoScalingGroupConfiguration_allocationStrategy *smithy.Schema
-
-var Ec2AutoScalingGroupType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2AutoScalingGroupType",
-}, smithy.ShapeTypeEnum, 2)
-var Ec2AutoScalingGroupType_SINGLE_INSTANCE_TYPE *smithy.Schema
-
-var Ec2AutoScalingGroupType_MIXED_INSTANCE_TYPES *smithy.Schema
-
-var Ec2Instance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2Instance",
-}, smithy.ShapeTypeStructure, 2)
-var Ec2Instance_configuration *smithy.Schema
-
-var Ec2Instance_costCalculation *smithy.Schema
-
-var Ec2InstanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2InstanceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var Ec2InstanceConfiguration_instance *smithy.Schema
-
-var Ec2InstanceSavingsPlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2InstanceSavingsPlans",
-}, smithy.ShapeTypeStructure, 2)
-var Ec2InstanceSavingsPlans_configuration *smithy.Schema
-
-var Ec2InstanceSavingsPlans_costCalculation *smithy.Schema
-
-var Ec2InstanceSavingsPlansConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2InstanceSavingsPlansConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var Ec2InstanceSavingsPlansConfiguration_accountScope *smithy.Schema
-
-var Ec2InstanceSavingsPlansConfiguration_term *smithy.Schema
-
-var Ec2InstanceSavingsPlansConfiguration_paymentOption *smithy.Schema
-
-var Ec2InstanceSavingsPlansConfiguration_hourlyCommitment *smithy.Schema
-
-var Ec2InstanceSavingsPlansConfiguration_instanceFamily *smithy.Schema
-
-var Ec2InstanceSavingsPlansConfiguration_savingsPlansRegion *smithy.Schema
-
-var Ec2ReservedInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2ReservedInstances",
-}, smithy.ShapeTypeStructure, 2)
-var Ec2ReservedInstances_configuration *smithy.Schema
-
-var Ec2ReservedInstances_costCalculation *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Ec2ReservedInstancesConfiguration",
-}, smithy.ShapeTypeStructure, 16)
-var Ec2ReservedInstancesConfiguration_accountScope *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_service *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_term *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_paymentOption *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_reservedInstancesRegion *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_upfrontCost *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_monthlyRecurringCost *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_normalizedUnitsToPurchase *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_numberOfInstancesToPurchase *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_offeringClass *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_instanceFamily *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_instanceType *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_currentGeneration *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_platform *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_tenancy *smithy.Schema
-
-var Ec2ReservedInstancesConfiguration_sizeFlexEligible *smithy.Schema
-
-var EcsService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "EcsService",
-}, smithy.ShapeTypeStructure, 2)
-var EcsService_configuration *smithy.Schema
-
-var EcsService_costCalculation *smithy.Schema
-
-var EcsServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "EcsServiceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EcsServiceConfiguration_compute *smithy.Schema
-
-var EfficiencyMetricsByGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "EfficiencyMetricsByGroup",
-}, smithy.ShapeTypeStructure, 3)
-var EfficiencyMetricsByGroup_metricsByTime *smithy.Schema
-
-var EfficiencyMetricsByGroup_group *smithy.Schema
-
-var EfficiencyMetricsByGroup_message *smithy.Schema
-
-var _EfficiencyMetricsByGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "EfficiencyMetricsByGroupList",
-}, smithy.ShapeTypeList, 1)
-var _EfficiencyMetricsByGroupList_member *smithy.Schema
-
-var ElastiCacheCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ElastiCacheCluster",
-}, smithy.ShapeTypeStructure, 1)
-var ElastiCacheCluster_costCalculation *smithy.Schema
-
-var ElastiCacheReservedInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ElastiCacheReservedInstances",
-}, smithy.ShapeTypeStructure, 2)
-var ElastiCacheReservedInstances_configuration *smithy.Schema
-
-var ElastiCacheReservedInstances_costCalculation *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ElastiCacheReservedInstancesConfiguration",
-}, smithy.ShapeTypeStructure, 13)
-var ElastiCacheReservedInstancesConfiguration_accountScope *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_service *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_term *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_paymentOption *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_reservedInstancesRegion *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_upfrontCost *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_monthlyRecurringCost *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_normalizedUnitsToPurchase *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_numberOfInstancesToPurchase *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_instanceFamily *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_instanceType *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_currentGeneration *smithy.Schema
-
-var ElastiCacheReservedInstancesConfiguration_sizeFlexEligible *smithy.Schema
-
-var EnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "EnrollmentStatus",
-}, smithy.ShapeTypeEnum, 2)
-var EnrollmentStatus_ACTIVE *smithy.Schema
-
-var EnrollmentStatus_INACTIVE *smithy.Schema
-
-var EstimatedDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "EstimatedDiscounts",
-}, smithy.ShapeTypeStructure, 3)
-var EstimatedDiscounts_savingsPlansDiscount *smithy.Schema
-
-var EstimatedDiscounts_reservedInstancesDiscount *smithy.Schema
-
-var EstimatedDiscounts_otherDiscount *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 11)
-var Filter_restartNeeded *smithy.Schema
-
-var Filter_rollbackPossible *smithy.Schema
-
-var Filter_implementationEfforts *smithy.Schema
-
-var Filter_accountIds *smithy.Schema
-
-var Filter_regions *smithy.Schema
-
-var Filter_resourceTypes *smithy.Schema
-
-var Filter_actionTypes *smithy.Schema
-
-var Filter_tags *smithy.Schema
-
-var Filter_resourceIds *smithy.Schema
-
-var Filter_resourceArns *smithy.Schema
-
-var Filter_recommendationIds *smithy.Schema
-
-var GranularityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "GranularityType",
-}, smithy.ShapeTypeEnum, 2)
-var GranularityType_DAILY *smithy.Schema
-
-var GranularityType_MONTHLY *smithy.Schema
-
-var ImplementationEffort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ImplementationEffort",
-}, smithy.ShapeTypeEnum, 5)
-var ImplementationEffort_VERY_LOW *smithy.Schema
-
-var ImplementationEffort_LOW *smithy.Schema
-
-var ImplementationEffort_MEDIUM *smithy.Schema
-
-var ImplementationEffort_HIGH *smithy.Schema
-
-var ImplementationEffort_VERY_HIGH *smithy.Schema
-
-var _ImplementationEffortList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ImplementationEffortList",
-}, smithy.ShapeTypeList, 1)
-var _ImplementationEffortList_member *smithy.Schema
-
-var InstanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "InstanceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var InstanceConfiguration_type *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var LambdaFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "LambdaFunction",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaFunction_configuration *smithy.Schema
-
-var LambdaFunction_costCalculation *smithy.Schema
-
-var LambdaFunctionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "LambdaFunctionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaFunctionConfiguration_compute *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MemberAccountDiscountVisibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MemberAccountDiscountVisibility",
-}, smithy.ShapeTypeEnum, 2)
-var MemberAccountDiscountVisibility_ALL *smithy.Schema
-
-var MemberAccountDiscountVisibility_NONE *smithy.Schema
-
-var MemoryDbCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MemoryDbCluster",
-}, smithy.ShapeTypeStructure, 1)
-var MemoryDbCluster_costCalculation *smithy.Schema
-
-var MemoryDbReservedInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MemoryDbReservedInstances",
-}, smithy.ShapeTypeStructure, 2)
-var MemoryDbReservedInstances_configuration *smithy.Schema
-
-var MemoryDbReservedInstances_costCalculation *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MemoryDbReservedInstancesConfiguration",
-}, smithy.ShapeTypeStructure, 13)
-var MemoryDbReservedInstancesConfiguration_accountScope *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_service *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_term *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_paymentOption *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_reservedInstancesRegion *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_upfrontCost *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_monthlyRecurringCost *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_normalizedUnitsToPurchase *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_numberOfInstancesToPurchase *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_instanceType *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_instanceFamily *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_sizeFlexEligible *smithy.Schema
-
-var MemoryDbReservedInstancesConfiguration_currentGeneration *smithy.Schema
-
-var MetricsByTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MetricsByTime",
-}, smithy.ShapeTypeStructure, 4)
-var MetricsByTime_score *smithy.Schema
-
-var MetricsByTime_savings *smithy.Schema
-
-var MetricsByTime_spend *smithy.Schema
-
-var MetricsByTime_timestamp *smithy.Schema
-
-var _MetricsByTimeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MetricsByTimeList",
-}, smithy.ShapeTypeList, 1)
-var _MetricsByTimeList_member *smithy.Schema
-
-var MixedInstanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MixedInstanceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var MixedInstanceConfiguration_type *smithy.Schema
-
-var _MixedInstanceConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "MixedInstanceConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _MixedInstanceConfigurationList_member *smithy.Schema
-
-var NatGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "NatGateway",
-}, smithy.ShapeTypeStructure, 2)
-var NatGateway_configuration *smithy.Schema
-
-var NatGateway_costCalculation *smithy.Schema
-
-var NatGatewayConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "NatGatewayConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var NatGatewayConfiguration_activeConnectionCount *smithy.Schema
-
-var NatGatewayConfiguration_packetsInFromSource *smithy.Schema
-
-var NatGatewayConfiguration_packetsInFromDestination *smithy.Schema
-
-var OpenSearchReservedInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "OpenSearchReservedInstances",
-}, smithy.ShapeTypeStructure, 2)
-var OpenSearchReservedInstances_configuration *smithy.Schema
-
-var OpenSearchReservedInstances_costCalculation *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "OpenSearchReservedInstancesConfiguration",
-}, smithy.ShapeTypeStructure, 12)
-var OpenSearchReservedInstancesConfiguration_accountScope *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_service *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_term *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_paymentOption *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_reservedInstancesRegion *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_upfrontCost *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_monthlyRecurringCost *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_normalizedUnitsToPurchase *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_numberOfInstancesToPurchase *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_instanceType *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_currentGeneration *smithy.Schema
-
-var OpenSearchReservedInstancesConfiguration_sizeFlexEligible *smithy.Schema
-
-var Order = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Order",
-}, smithy.ShapeTypeEnum, 2)
-var Order_ASC *smithy.Schema
-
-var Order_DESC *smithy.Schema
-
-var OrderBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "OrderBy",
-}, smithy.ShapeTypeStructure, 2)
-var OrderBy_dimension *smithy.Schema
-
-var OrderBy_order *smithy.Schema
-
-var PaymentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "PaymentOption",
-}, smithy.ShapeTypeEnum, 3)
-var PaymentOption_ALL_UPFRONT *smithy.Schema
-
-var PaymentOption_PARTIAL_UPFRONT *smithy.Schema
-
-var PaymentOption_NO_UPFRONT *smithy.Schema
-
-var PreferredCommitment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "PreferredCommitment",
-}, smithy.ShapeTypeStructure, 2)
-var PreferredCommitment_term *smithy.Schema
-
-var PreferredCommitment_paymentOption *smithy.Schema
-
-var RdsDbInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RdsDbInstance",
-}, smithy.ShapeTypeStructure, 2)
-var RdsDbInstance_configuration *smithy.Schema
-
-var RdsDbInstance_costCalculation *smithy.Schema
-
-var RdsDbInstanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RdsDbInstanceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var RdsDbInstanceConfiguration_instance *smithy.Schema
-
-var RdsDbInstanceStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RdsDbInstanceStorage",
-}, smithy.ShapeTypeStructure, 2)
-var RdsDbInstanceStorage_configuration *smithy.Schema
-
-var RdsDbInstanceStorage_costCalculation *smithy.Schema
-
-var RdsDbInstanceStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RdsDbInstanceStorageConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var RdsDbInstanceStorageConfiguration_storageType *smithy.Schema
-
-var RdsDbInstanceStorageConfiguration_allocatedStorageInGb *smithy.Schema
-
-var RdsDbInstanceStorageConfiguration_iops *smithy.Schema
-
-var RdsDbInstanceStorageConfiguration_storageThroughput *smithy.Schema
-
-var RdsReservedInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RdsReservedInstances",
-}, smithy.ShapeTypeStructure, 2)
-var RdsReservedInstances_configuration *smithy.Schema
-
-var RdsReservedInstances_costCalculation *smithy.Schema
-
-var RdsReservedInstancesConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RdsReservedInstancesConfiguration",
-}, smithy.ShapeTypeStructure, 17)
-var RdsReservedInstancesConfiguration_accountScope *smithy.Schema
-
-var RdsReservedInstancesConfiguration_service *smithy.Schema
-
-var RdsReservedInstancesConfiguration_term *smithy.Schema
-
-var RdsReservedInstancesConfiguration_paymentOption *smithy.Schema
-
-var RdsReservedInstancesConfiguration_reservedInstancesRegion *smithy.Schema
-
-var RdsReservedInstancesConfiguration_upfrontCost *smithy.Schema
-
-var RdsReservedInstancesConfiguration_monthlyRecurringCost *smithy.Schema
-
-var RdsReservedInstancesConfiguration_normalizedUnitsToPurchase *smithy.Schema
-
-var RdsReservedInstancesConfiguration_numberOfInstancesToPurchase *smithy.Schema
-
-var RdsReservedInstancesConfiguration_instanceFamily *smithy.Schema
-
-var RdsReservedInstancesConfiguration_instanceType *smithy.Schema
-
-var RdsReservedInstancesConfiguration_sizeFlexEligible *smithy.Schema
-
-var RdsReservedInstancesConfiguration_currentGeneration *smithy.Schema
-
-var RdsReservedInstancesConfiguration_licenseModel *smithy.Schema
-
-var RdsReservedInstancesConfiguration_databaseEdition *smithy.Schema
-
-var RdsReservedInstancesConfiguration_databaseEngine *smithy.Schema
-
-var RdsReservedInstancesConfiguration_deploymentOption *smithy.Schema
-
-var Recommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Recommendation",
-}, smithy.ShapeTypeStructure, 21)
-var Recommendation_recommendationId *smithy.Schema
-
-var Recommendation_accountId *smithy.Schema
-
-var Recommendation_region *smithy.Schema
-
-var Recommendation_resourceId *smithy.Schema
-
-var Recommendation_resourceArn *smithy.Schema
-
-var Recommendation_currentResourceType *smithy.Schema
-
-var Recommendation_recommendedResourceType *smithy.Schema
-
-var Recommendation_estimatedMonthlySavings *smithy.Schema
-
-var Recommendation_estimatedSavingsPercentage *smithy.Schema
-
-var Recommendation_estimatedMonthlyCost *smithy.Schema
-
-var Recommendation_currencyCode *smithy.Schema
-
-var Recommendation_implementationEffort *smithy.Schema
-
-var Recommendation_restartNeeded *smithy.Schema
-
-var Recommendation_actionType *smithy.Schema
-
-var Recommendation_rollbackPossible *smithy.Schema
-
-var Recommendation_currentResourceSummary *smithy.Schema
-
-var Recommendation_recommendedResourceSummary *smithy.Schema
-
-var Recommendation_lastRefreshTimestamp *smithy.Schema
-
-var Recommendation_recommendationLookbackPeriodInDays *smithy.Schema
-
-var Recommendation_source *smithy.Schema
-
-var Recommendation_tags *smithy.Schema
-
-var _RecommendationIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RecommendationIdList",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationIdList_member *smithy.Schema
-
-var _RecommendationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RecommendationList",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationList_member *smithy.Schema
-
-var _RecommendationSummariesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RecommendationSummariesList",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationSummariesList_member *smithy.Schema
-
-var RecommendationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RecommendationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var RecommendationSummary_group *smithy.Schema
-
-var RecommendationSummary_estimatedMonthlySavings *smithy.Schema
-
-var RecommendationSummary_recommendationCount *smithy.Schema
-
-var RedshiftReservedInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RedshiftReservedInstances",
-}, smithy.ShapeTypeStructure, 2)
-var RedshiftReservedInstances_configuration *smithy.Schema
-
-var RedshiftReservedInstances_costCalculation *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RedshiftReservedInstancesConfiguration",
-}, smithy.ShapeTypeStructure, 13)
-var RedshiftReservedInstancesConfiguration_accountScope *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_service *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_term *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_paymentOption *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_reservedInstancesRegion *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_upfrontCost *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_monthlyRecurringCost *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_normalizedUnitsToPurchase *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_numberOfInstancesToPurchase *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_instanceFamily *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_instanceType *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_sizeFlexEligible *smithy.Schema
-
-var RedshiftReservedInstancesConfiguration_currentGeneration *smithy.Schema
-
-var _RegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "RegionList",
-}, smithy.ShapeTypeList, 1)
-var _RegionList_member *smithy.Schema
-
-var ReservedInstancesCostCalculation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ReservedInstancesCostCalculation",
-}, smithy.ShapeTypeStructure, 1)
-var ReservedInstancesCostCalculation_pricing *smithy.Schema
-
-var ReservedInstancesPricing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ReservedInstancesPricing",
-}, smithy.ShapeTypeStructure, 4)
-var ReservedInstancesPricing_estimatedOnDemandCost *smithy.Schema
-
-var ReservedInstancesPricing_monthlyReservationEligibleCost *smithy.Schema
-
-var ReservedInstancesPricing_savingsPercentage *smithy.Schema
-
-var ReservedInstancesPricing_estimatedMonthlyAmortizedReservationCost *smithy.Schema
-
-var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ResourceArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArnList_member *smithy.Schema
-
-var ResourceCostCalculation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ResourceCostCalculation",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceCostCalculation_usages *smithy.Schema
-
-var ResourceCostCalculation_pricing *smithy.Schema
-
-var ResourceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ResourceDetails",
-}, smithy.ShapeTypeUnion, 25)
-var ResourceDetails_lambdaFunction *smithy.Schema
-
-var ResourceDetails_ecsService *smithy.Schema
-
-var ResourceDetails_ec2Instance *smithy.Schema
-
-var ResourceDetails_ebsVolume *smithy.Schema
-
-var ResourceDetails_ec2AutoScalingGroup *smithy.Schema
-
-var ResourceDetails_ec2ReservedInstances *smithy.Schema
-
-var ResourceDetails_rdsReservedInstances *smithy.Schema
-
-var ResourceDetails_elastiCacheReservedInstances *smithy.Schema
-
-var ResourceDetails_openSearchReservedInstances *smithy.Schema
-
-var ResourceDetails_redshiftReservedInstances *smithy.Schema
-
-var ResourceDetails_ec2InstanceSavingsPlans *smithy.Schema
-
-var ResourceDetails_computeSavingsPlans *smithy.Schema
-
-var ResourceDetails_sageMakerSavingsPlans *smithy.Schema
-
-var ResourceDetails_rdsDbInstance *smithy.Schema
-
-var ResourceDetails_rdsDbInstanceStorage *smithy.Schema
-
-var ResourceDetails_auroraDbClusterStorage *smithy.Schema
-
-var ResourceDetails_dynamoDbReservedCapacity *smithy.Schema
-
-var ResourceDetails_memoryDbReservedInstances *smithy.Schema
-
-var ResourceDetails_natGateway *smithy.Schema
-
-var ResourceDetails_dynamoDbTable *smithy.Schema
-
-var ResourceDetails_elastiCacheCluster *smithy.Schema
-
-var ResourceDetails_memoryDbCluster *smithy.Schema
-
-var ResourceDetails_documentDbCluster *smithy.Schema
-
-var ResourceDetails_workSpaces *smithy.Schema
-
-var ResourceDetails_sageMakerEndpoint *smithy.Schema
-
-var _ResourceIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ResourceIdList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceIdList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourcePricing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ResourcePricing",
-}, smithy.ShapeTypeStructure, 4)
-var ResourcePricing_estimatedCostBeforeDiscounts *smithy.Schema
-
-var ResourcePricing_estimatedNetUnusedAmortizedCommitments *smithy.Schema
-
-var ResourcePricing_estimatedDiscounts *smithy.Schema
-
-var ResourcePricing_estimatedCostAfterDiscounts *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 25)
-var ResourceType_EC2_INSTANCE *smithy.Schema
-
-var ResourceType_LAMBDA_FUNCTION *smithy.Schema
-
-var ResourceType_EBS_VOLUME *smithy.Schema
-
-var ResourceType_ECS_SERVICE *smithy.Schema
-
-var ResourceType_EC2_AUTO_SCALING_GROUP *smithy.Schema
-
-var ResourceType_EC2_INSTANCE_SAVINGS_PLANS *smithy.Schema
-
-var ResourceType_COMPUTE_SAVINGS_PLANS *smithy.Schema
-
-var ResourceType_SAGE_MAKER_SAVINGS_PLANS *smithy.Schema
-
-var ResourceType_EC2_RESERVED_INSTANCES *smithy.Schema
-
-var ResourceType_RDS_RESERVED_INSTANCES *smithy.Schema
-
-var ResourceType_OPEN_SEARCH_RESERVED_INSTANCES *smithy.Schema
-
-var ResourceType_REDSHIFT_RESERVED_INSTANCES *smithy.Schema
-
-var ResourceType_ELASTI_CACHE_RESERVED_INSTANCES *smithy.Schema
-
-var ResourceType_RDS_DB_INSTANCE_STORAGE *smithy.Schema
-
-var ResourceType_RDS_DB_INSTANCE *smithy.Schema
-
-var ResourceType_AURORA_DB_CLUSTER_STORAGE *smithy.Schema
-
-var ResourceType_DYNAMO_DB_RESERVED_CAPACITY *smithy.Schema
-
-var ResourceType_MEMORY_DB_RESERVED_INSTANCES *smithy.Schema
-
-var ResourceType_NAT_GATEWAY *smithy.Schema
-
-var ResourceType_DYNAMO_DB_TABLE *smithy.Schema
-
-var ResourceType_ELASTI_CACHE_CLUSTER *smithy.Schema
-
-var ResourceType_MEMORY_DB_CLUSTER *smithy.Schema
-
-var ResourceType_DOCUMENT_DB_CLUSTER *smithy.Schema
-
-var ResourceType_WORK_SPACES *smithy.Schema
-
-var ResourceType_SAGE_MAKER_ENDPOINT *smithy.Schema
-
-var _ResourceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ResourceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTypeList_member *smithy.Schema
-
-var SageMakerEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SageMakerEndpoint",
-}, smithy.ShapeTypeStructure, 1)
-var SageMakerEndpoint_costCalculation *smithy.Schema
-
-var SageMakerSavingsPlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SageMakerSavingsPlans",
-}, smithy.ShapeTypeStructure, 2)
-var SageMakerSavingsPlans_configuration *smithy.Schema
-
-var SageMakerSavingsPlans_costCalculation *smithy.Schema
-
-var SageMakerSavingsPlansConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SageMakerSavingsPlansConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var SageMakerSavingsPlansConfiguration_accountScope *smithy.Schema
-
-var SageMakerSavingsPlansConfiguration_term *smithy.Schema
-
-var SageMakerSavingsPlansConfiguration_paymentOption *smithy.Schema
-
-var SageMakerSavingsPlansConfiguration_hourlyCommitment *smithy.Schema
-
-var SavingsEstimationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SavingsEstimationMode",
-}, smithy.ShapeTypeEnum, 2)
-var SavingsEstimationMode_BEFORE_DISCOUNTS *smithy.Schema
-
-var SavingsEstimationMode_AFTER_DISCOUNTS *smithy.Schema
-
-var SavingsPlansCostCalculation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SavingsPlansCostCalculation",
-}, smithy.ShapeTypeStructure, 1)
-var SavingsPlansCostCalculation_pricing *smithy.Schema
-
-var SavingsPlansPricing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SavingsPlansPricing",
-}, smithy.ShapeTypeStructure, 4)
-var SavingsPlansPricing_monthlySavingsPlansEligibleCost *smithy.Schema
-
-var SavingsPlansPricing_estimatedMonthlyCommitment *smithy.Schema
-
-var SavingsPlansPricing_savingsPercentage *smithy.Schema
-
-var SavingsPlansPricing_estimatedOnDemandCost *smithy.Schema
-
-var Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Source",
-}, smithy.ShapeTypeEnum, 2)
-var Source_COMPUTE_OPTIMIZER *smithy.Schema
-
-var Source_COST_EXPLORER *smithy.Schema
-
-var StorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "StorageConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var StorageConfiguration_type *smithy.Schema
-
-var StorageConfiguration_sizeInGb *smithy.Schema
-
-var SummaryMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SummaryMetrics",
-}, smithy.ShapeTypeEnum, 1)
-var SummaryMetrics_SAVINGS_PERCENTAGE *smithy.Schema
-
-var _SummaryMetricsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SummaryMetricsList",
-}, smithy.ShapeTypeList, 1)
-var _SummaryMetricsList_member *smithy.Schema
-
-var SummaryMetricsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "SummaryMetricsResult",
-}, smithy.ShapeTypeStructure, 1)
-var SummaryMetricsResult_savingsPercentage *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var Term = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Term",
-}, smithy.ShapeTypeEnum, 2)
-var Term_ONE_YEAR *smithy.Schema
-
-var Term_THREE_YEARS *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var TimePeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "TimePeriod",
-}, smithy.ShapeTypeStructure, 2)
-var TimePeriod_start *smithy.Schema
-
-var TimePeriod_end *smithy.Schema
-
-var Usage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "Usage",
-}, smithy.ShapeTypeStructure, 5)
-var Usage_usageType *smithy.Schema
-
-var Usage_usageAmount *smithy.Schema
-
-var Usage_operation *smithy.Schema
-
-var Usage_productCode *smithy.Schema
-
-var Usage_unit *smithy.Schema
-
-var _UsageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "UsageList",
-}, smithy.ShapeTypeList, 1)
-var _UsageList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fields *smithy.Schema
-
-var ValidationExceptionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ValidationExceptionDetail",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionDetail_fieldName *smithy.Schema
-
-var ValidationExceptionDetail_message *smithy.Schema
-
-var _ValidationExceptionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ValidationExceptionDetails",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionDetails_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var WorkSpaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "WorkSpaces",
-}, smithy.ShapeTypeStructure, 1)
-var WorkSpaces_costCalculation *smithy.Schema
-
-var GetPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "GetPreferencesRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "GetPreferencesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetPreferencesResponse_savingsEstimationMode *smithy.Schema
-
-var GetPreferencesResponse_memberAccountDiscountVisibility *smithy.Schema
-
-var GetPreferencesResponse_preferredCommitment *smithy.Schema
-
-var GetRecommendationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "GetRecommendationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecommendationRequest_recommendationId *smithy.Schema
-
-var GetRecommendationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "GetRecommendationResponse",
-}, smithy.ShapeTypeStructure, 23)
-var GetRecommendationResponse_recommendationId *smithy.Schema
-
-var GetRecommendationResponse_resourceId *smithy.Schema
-
-var GetRecommendationResponse_resourceArn *smithy.Schema
-
-var GetRecommendationResponse_accountId *smithy.Schema
-
-var GetRecommendationResponse_currencyCode *smithy.Schema
-
-var GetRecommendationResponse_recommendationLookbackPeriodInDays *smithy.Schema
-
-var GetRecommendationResponse_costCalculationLookbackPeriodInDays *smithy.Schema
-
-var GetRecommendationResponse_estimatedSavingsPercentage *smithy.Schema
-
-var GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod *smithy.Schema
-
-var GetRecommendationResponse_currentResourceType *smithy.Schema
-
-var GetRecommendationResponse_recommendedResourceType *smithy.Schema
-
-var GetRecommendationResponse_region *smithy.Schema
-
-var GetRecommendationResponse_source *smithy.Schema
-
-var GetRecommendationResponse_lastRefreshTimestamp *smithy.Schema
-
-var GetRecommendationResponse_estimatedMonthlySavings *smithy.Schema
-
-var GetRecommendationResponse_estimatedMonthlyCost *smithy.Schema
-
-var GetRecommendationResponse_implementationEffort *smithy.Schema
-
-var GetRecommendationResponse_restartNeeded *smithy.Schema
-
-var GetRecommendationResponse_actionType *smithy.Schema
-
-var GetRecommendationResponse_rollbackPossible *smithy.Schema
-
-var GetRecommendationResponse_currentResourceDetails *smithy.Schema
-
-var GetRecommendationResponse_recommendedResourceDetails *smithy.Schema
-
-var GetRecommendationResponse_tags *smithy.Schema
-
-var ListEfficiencyMetricsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListEfficiencyMetricsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListEfficiencyMetricsRequest_groupBy *smithy.Schema
-
-var ListEfficiencyMetricsRequest_granularity *smithy.Schema
-
-var ListEfficiencyMetricsRequest_timePeriod *smithy.Schema
-
-var ListEfficiencyMetricsRequest_maxResults *smithy.Schema
-
-var ListEfficiencyMetricsRequest_orderBy *smithy.Schema
-
-var ListEfficiencyMetricsRequest_nextToken *smithy.Schema
-
-var ListEfficiencyMetricsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListEfficiencyMetricsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEfficiencyMetricsResponse_efficiencyMetricsByGroup *smithy.Schema
-
-var ListEfficiencyMetricsResponse_nextToken *smithy.Schema
-
-var ListEnrollmentStatusesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListEnrollmentStatusesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListEnrollmentStatusesRequest_includeOrganizationInfo *smithy.Schema
-
-var ListEnrollmentStatusesRequest_accountId *smithy.Schema
-
-var ListEnrollmentStatusesRequest_nextToken *smithy.Schema
-
-var ListEnrollmentStatusesRequest_maxResults *smithy.Schema
-
-var ListEnrollmentStatusesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListEnrollmentStatusesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListEnrollmentStatusesResponse_items *smithy.Schema
-
-var ListEnrollmentStatusesResponse_includeMemberAccounts *smithy.Schema
-
-var ListEnrollmentStatusesResponse_nextToken *smithy.Schema
-
-var ListRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListRecommendationsRequest_filter *smithy.Schema
-
-var ListRecommendationsRequest_orderBy *smithy.Schema
-
-var ListRecommendationsRequest_includeAllRecommendations *smithy.Schema
-
-var ListRecommendationsRequest_maxResults *smithy.Schema
-
-var ListRecommendationsRequest_nextToken *smithy.Schema
-
-var ListRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecommendationsResponse_items *smithy.Schema
-
-var ListRecommendationsResponse_nextToken *smithy.Schema
-
-var ListRecommendationSummariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListRecommendationSummariesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListRecommendationSummariesRequest_filter *smithy.Schema
-
-var ListRecommendationSummariesRequest_groupBy *smithy.Schema
-
-var ListRecommendationSummariesRequest_maxResults *smithy.Schema
-
-var ListRecommendationSummariesRequest_metrics *smithy.Schema
-
-var ListRecommendationSummariesRequest_nextToken *smithy.Schema
-
-var ListRecommendationSummariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "ListRecommendationSummariesResponse",
-}, smithy.ShapeTypeStructure, 6)
-var ListRecommendationSummariesResponse_estimatedTotalDedupedSavings *smithy.Schema
-
-var ListRecommendationSummariesResponse_items *smithy.Schema
-
-var ListRecommendationSummariesResponse_groupBy *smithy.Schema
-
-var ListRecommendationSummariesResponse_currencyCode *smithy.Schema
-
-var ListRecommendationSummariesResponse_metrics *smithy.Schema
-
-var ListRecommendationSummariesResponse_nextToken *smithy.Schema
-
-var UpdateEnrollmentStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "UpdateEnrollmentStatusRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateEnrollmentStatusRequest_status *smithy.Schema
-
-var UpdateEnrollmentStatusRequest_includeMemberAccounts *smithy.Schema
-
-var UpdateEnrollmentStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "UpdateEnrollmentStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnrollmentStatusResponse_status *smithy.Schema
-
-var UpdatePreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "UpdatePreferencesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePreferencesRequest_savingsEstimationMode *smithy.Schema
-
-var UpdatePreferencesRequest_memberAccountDiscountVisibility *smithy.Schema
-
-var UpdatePreferencesRequest_preferredCommitment *smithy.Schema
-
-var UpdatePreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.costoptimizationhub",
-	Name:      "UpdatePreferencesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePreferencesResponse_savingsEstimationMode *smithy.Schema
-
-var UpdatePreferencesResponse_memberAccountDiscountVisibility *smithy.Schema
-
-var UpdatePreferencesResponse_preferredCommitment *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	EnrollmentStatus_ACTIVE = EnrollmentStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	EnrollmentStatus_INACTIVE = EnrollmentStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	AccountEnrollmentStatus_accountId = AccountEnrollmentStatus.AddMember("accountId", _AccountId)
-
-	AccountEnrollmentStatus_status = AccountEnrollmentStatus.AddMember("status", EnrollmentStatus)
-
-	AccountEnrollmentStatus_lastUpdatedTimestamp = AccountEnrollmentStatus.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	AccountEnrollmentStatus_createdTimestamp = AccountEnrollmentStatus.AddMember("createdTimestamp", smithyprelude.Timestamp)
-
-	_AccountEnrollmentStatuses_member = _AccountEnrollmentStatuses.AddMember("member", AccountEnrollmentStatus)
-
-	_AccountIdList_member = _AccountIdList.AddMember("member", _AccountId)
-
-	ActionType_RIGHTSIZE = ActionType.AddMember("RIGHTSIZE", smithyprelude.Unit)
-
-	ActionType_STOP = ActionType.AddMember("STOP", smithyprelude.Unit)
-
-	ActionType_UPGRADE = ActionType.AddMember("UPGRADE", smithyprelude.Unit)
-
-	ActionType_PURCHASE_SAVINGS_PLANS = ActionType.AddMember("PURCHASE_SAVINGS_PLANS", smithyprelude.Unit)
-
-	ActionType_PURCHASE_RESERVED_INSTANCES = ActionType.AddMember("PURCHASE_RESERVED_INSTANCES", smithyprelude.Unit)
-
-	ActionType_MIGRATE_TO_GRAVITON = ActionType.AddMember("MIGRATE_TO_GRAVITON", smithyprelude.Unit)
-
-	ActionType_DELETE = ActionType.AddMember("DELETE", smithyprelude.Unit)
-
-	ActionType_SCALE_IN = ActionType.AddMember("SCALE_IN", smithyprelude.Unit)
-
-	_ActionTypeList_member = _ActionTypeList.AddMember("member", ActionType)
-
-	AllocationStrategy_PRIORITIZED = AllocationStrategy.AddMember("PRIORITIZED", smithyprelude.Unit)
-
-	AllocationStrategy_LOWEST_PRICE = AllocationStrategy.AddMember("LOWEST_PRICE", smithyprelude.Unit)
-
-	AuroraDbClusterStorageConfiguration_storageType = AuroraDbClusterStorageConfiguration.AddMember("storageType", smithyprelude.String)
-
-	Usage_usageType = Usage.AddMember("usageType", smithyprelude.String)
-
-	Usage_usageAmount = Usage.AddMember("usageAmount", smithyprelude.Double)
-
-	Usage_operation = Usage.AddMember("operation", smithyprelude.String)
-
-	Usage_productCode = Usage.AddMember("productCode", smithyprelude.String)
-
-	Usage_unit = Usage.AddMember("unit", smithyprelude.String)
-
-	_UsageList_member = _UsageList.AddMember("member", Usage)
-
-	EstimatedDiscounts_savingsPlansDiscount = EstimatedDiscounts.AddMember("savingsPlansDiscount", smithyprelude.Double)
-
-	EstimatedDiscounts_reservedInstancesDiscount = EstimatedDiscounts.AddMember("reservedInstancesDiscount", smithyprelude.Double)
-
-	EstimatedDiscounts_otherDiscount = EstimatedDiscounts.AddMember("otherDiscount", smithyprelude.Double)
-
-	ResourcePricing_estimatedCostBeforeDiscounts = ResourcePricing.AddMember("estimatedCostBeforeDiscounts", smithyprelude.Double)
-
-	ResourcePricing_estimatedNetUnusedAmortizedCommitments = ResourcePricing.AddMember("estimatedNetUnusedAmortizedCommitments", smithyprelude.Double)
-
-	ResourcePricing_estimatedDiscounts = ResourcePricing.AddMember("estimatedDiscounts", EstimatedDiscounts)
-
-	ResourcePricing_estimatedCostAfterDiscounts = ResourcePricing.AddMember("estimatedCostAfterDiscounts", smithyprelude.Double)
-
-	ResourceCostCalculation_usages = ResourceCostCalculation.AddMember("usages", _UsageList)
-
-	ResourceCostCalculation_pricing = ResourceCostCalculation.AddMember("pricing", ResourcePricing)
-
-	AuroraDbClusterStorage_configuration = AuroraDbClusterStorage.AddMember("configuration", AuroraDbClusterStorageConfiguration)
-
-	AuroraDbClusterStorage_costCalculation = AuroraDbClusterStorage.AddMember("costCalculation", ResourceCostCalculation)
-
-	BlockStoragePerformanceConfiguration_iops = BlockStoragePerformanceConfiguration.AddMember("iops", smithyprelude.Double)
-
-	BlockStoragePerformanceConfiguration_throughput = BlockStoragePerformanceConfiguration.AddMember("throughput", smithyprelude.Double)
-
-	ComputeConfiguration_vCpu = ComputeConfiguration.AddMember("vCpu", smithyprelude.Double)
-
-	ComputeConfiguration_memorySizeInMB = ComputeConfiguration.AddMember("memorySizeInMB", smithyprelude.Integer)
-
-	ComputeConfiguration_architecture = ComputeConfiguration.AddMember("architecture", smithyprelude.String)
-
-	ComputeConfiguration_platform = ComputeConfiguration.AddMember("platform", smithyprelude.String)
-
-	ComputeSavingsPlansConfiguration_accountScope = ComputeSavingsPlansConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	ComputeSavingsPlansConfiguration_term = ComputeSavingsPlansConfiguration.AddMember("term", smithyprelude.String)
-
-	ComputeSavingsPlansConfiguration_paymentOption = ComputeSavingsPlansConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	ComputeSavingsPlansConfiguration_hourlyCommitment = ComputeSavingsPlansConfiguration.AddMember("hourlyCommitment", smithyprelude.String)
-
-	SavingsPlansPricing_monthlySavingsPlansEligibleCost = SavingsPlansPricing.AddMember("monthlySavingsPlansEligibleCost", smithyprelude.Double)
-
-	SavingsPlansPricing_estimatedMonthlyCommitment = SavingsPlansPricing.AddMember("estimatedMonthlyCommitment", smithyprelude.Double)
-
-	SavingsPlansPricing_savingsPercentage = SavingsPlansPricing.AddMember("savingsPercentage", smithyprelude.Double)
-
-	SavingsPlansPricing_estimatedOnDemandCost = SavingsPlansPricing.AddMember("estimatedOnDemandCost", smithyprelude.Double)
-
-	SavingsPlansCostCalculation_pricing = SavingsPlansCostCalculation.AddMember("pricing", SavingsPlansPricing)
-
-	ComputeSavingsPlans_configuration = ComputeSavingsPlans.AddMember("configuration", ComputeSavingsPlansConfiguration)
-
-	ComputeSavingsPlans_costCalculation = ComputeSavingsPlans.AddMember("costCalculation", SavingsPlansCostCalculation)
-
-	DbInstanceConfiguration_dbInstanceClass = DbInstanceConfiguration.AddMember("dbInstanceClass", smithyprelude.String)
-
-	DocumentDbCluster_costCalculation = DocumentDbCluster.AddMember("costCalculation", ResourceCostCalculation)
-
-	DynamoDbReservedCapacityConfiguration_accountScope = DynamoDbReservedCapacityConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	DynamoDbReservedCapacityConfiguration_service = DynamoDbReservedCapacityConfiguration.AddMember("service", smithyprelude.String)
-
-	DynamoDbReservedCapacityConfiguration_term = DynamoDbReservedCapacityConfiguration.AddMember("term", smithyprelude.String)
-
-	DynamoDbReservedCapacityConfiguration_paymentOption = DynamoDbReservedCapacityConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	DynamoDbReservedCapacityConfiguration_reservedInstancesRegion = DynamoDbReservedCapacityConfiguration.AddMember("reservedInstancesRegion", smithyprelude.String)
-
-	DynamoDbReservedCapacityConfiguration_upfrontCost = DynamoDbReservedCapacityConfiguration.AddMember("upfrontCost", smithyprelude.String)
-
-	DynamoDbReservedCapacityConfiguration_monthlyRecurringCost = DynamoDbReservedCapacityConfiguration.AddMember("monthlyRecurringCost", smithyprelude.String)
-
-	DynamoDbReservedCapacityConfiguration_numberOfCapacityUnitsToPurchase = DynamoDbReservedCapacityConfiguration.AddMember("numberOfCapacityUnitsToPurchase", smithyprelude.String)
-
-	DynamoDbReservedCapacityConfiguration_capacityUnits = DynamoDbReservedCapacityConfiguration.AddMember("capacityUnits", smithyprelude.String)
-
-	ReservedInstancesPricing_estimatedOnDemandCost = ReservedInstancesPricing.AddMember("estimatedOnDemandCost", smithyprelude.Double)
-
-	ReservedInstancesPricing_monthlyReservationEligibleCost = ReservedInstancesPricing.AddMember("monthlyReservationEligibleCost", smithyprelude.Double)
-
-	ReservedInstancesPricing_savingsPercentage = ReservedInstancesPricing.AddMember("savingsPercentage", smithyprelude.Double)
-
-	ReservedInstancesPricing_estimatedMonthlyAmortizedReservationCost = ReservedInstancesPricing.AddMember("estimatedMonthlyAmortizedReservationCost", smithyprelude.Double)
-
-	ReservedInstancesCostCalculation_pricing = ReservedInstancesCostCalculation.AddMember("pricing", ReservedInstancesPricing)
-
-	DynamoDbReservedCapacity_configuration = DynamoDbReservedCapacity.AddMember("configuration", DynamoDbReservedCapacityConfiguration)
-
-	DynamoDbReservedCapacity_costCalculation = DynamoDbReservedCapacity.AddMember("costCalculation", ReservedInstancesCostCalculation)
-
-	DynamoDbTable_costCalculation = DynamoDbTable.AddMember("costCalculation", ResourceCostCalculation)
-
-	StorageConfiguration_type = StorageConfiguration.AddMember("type", smithyprelude.String)
-
-	StorageConfiguration_sizeInGb = StorageConfiguration.AddMember("sizeInGb", smithyprelude.Double)
-
-	EbsVolumeConfiguration_storage = EbsVolumeConfiguration.AddMember("storage", StorageConfiguration)
-
-	EbsVolumeConfiguration_performance = EbsVolumeConfiguration.AddMember("performance", BlockStoragePerformanceConfiguration)
-
-	EbsVolumeConfiguration_attachmentState = EbsVolumeConfiguration.AddMember("attachmentState", smithyprelude.String)
-
-	EbsVolume_configuration = EbsVolume.AddMember("configuration", EbsVolumeConfiguration)
-
-	EbsVolume_costCalculation = EbsVolume.AddMember("costCalculation", ResourceCostCalculation)
-
-	InstanceConfiguration_type = InstanceConfiguration.AddMember("type", smithyprelude.String)
-
-	MixedInstanceConfiguration_type = MixedInstanceConfiguration.AddMember("type", smithyprelude.String)
-
-	_MixedInstanceConfigurationList_member = _MixedInstanceConfigurationList.AddMember("member", MixedInstanceConfiguration)
-
-	Ec2AutoScalingGroupType_SINGLE_INSTANCE_TYPE = Ec2AutoScalingGroupType.AddMember("SINGLE_INSTANCE_TYPE", smithyprelude.Unit)
-
-	Ec2AutoScalingGroupType_MIXED_INSTANCE_TYPES = Ec2AutoScalingGroupType.AddMember("MIXED_INSTANCE_TYPES", smithyprelude.Unit)
-
-	Ec2AutoScalingGroupConfiguration_instance = Ec2AutoScalingGroupConfiguration.AddMember("instance", InstanceConfiguration)
-
-	Ec2AutoScalingGroupConfiguration_mixedInstances = Ec2AutoScalingGroupConfiguration.AddMember("mixedInstances", _MixedInstanceConfigurationList)
-
-	Ec2AutoScalingGroupConfiguration_type = Ec2AutoScalingGroupConfiguration.AddMember("type", Ec2AutoScalingGroupType)
-
-	Ec2AutoScalingGroupConfiguration_allocationStrategy = Ec2AutoScalingGroupConfiguration.AddMember("allocationStrategy", AllocationStrategy)
-
-	Ec2AutoScalingGroup_configuration = Ec2AutoScalingGroup.AddMember("configuration", Ec2AutoScalingGroupConfiguration)
-
-	Ec2AutoScalingGroup_costCalculation = Ec2AutoScalingGroup.AddMember("costCalculation", ResourceCostCalculation)
-
-	Ec2InstanceConfiguration_instance = Ec2InstanceConfiguration.AddMember("instance", InstanceConfiguration)
-
-	Ec2Instance_configuration = Ec2Instance.AddMember("configuration", Ec2InstanceConfiguration)
-
-	Ec2Instance_costCalculation = Ec2Instance.AddMember("costCalculation", ResourceCostCalculation)
-
-	Ec2InstanceSavingsPlansConfiguration_accountScope = Ec2InstanceSavingsPlansConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	Ec2InstanceSavingsPlansConfiguration_term = Ec2InstanceSavingsPlansConfiguration.AddMember("term", smithyprelude.String)
-
-	Ec2InstanceSavingsPlansConfiguration_paymentOption = Ec2InstanceSavingsPlansConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	Ec2InstanceSavingsPlansConfiguration_hourlyCommitment = Ec2InstanceSavingsPlansConfiguration.AddMember("hourlyCommitment", smithyprelude.String)
-
-	Ec2InstanceSavingsPlansConfiguration_instanceFamily = Ec2InstanceSavingsPlansConfiguration.AddMember("instanceFamily", smithyprelude.String)
-
-	Ec2InstanceSavingsPlansConfiguration_savingsPlansRegion = Ec2InstanceSavingsPlansConfiguration.AddMember("savingsPlansRegion", smithyprelude.String)
-
-	Ec2InstanceSavingsPlans_configuration = Ec2InstanceSavingsPlans.AddMember("configuration", Ec2InstanceSavingsPlansConfiguration)
-
-	Ec2InstanceSavingsPlans_costCalculation = Ec2InstanceSavingsPlans.AddMember("costCalculation", SavingsPlansCostCalculation)
-
-	Ec2ReservedInstancesConfiguration_accountScope = Ec2ReservedInstancesConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_service = Ec2ReservedInstancesConfiguration.AddMember("service", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_term = Ec2ReservedInstancesConfiguration.AddMember("term", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_paymentOption = Ec2ReservedInstancesConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_reservedInstancesRegion = Ec2ReservedInstancesConfiguration.AddMember("reservedInstancesRegion", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_upfrontCost = Ec2ReservedInstancesConfiguration.AddMember("upfrontCost", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_monthlyRecurringCost = Ec2ReservedInstancesConfiguration.AddMember("monthlyRecurringCost", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_normalizedUnitsToPurchase = Ec2ReservedInstancesConfiguration.AddMember("normalizedUnitsToPurchase", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_numberOfInstancesToPurchase = Ec2ReservedInstancesConfiguration.AddMember("numberOfInstancesToPurchase", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_offeringClass = Ec2ReservedInstancesConfiguration.AddMember("offeringClass", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_instanceFamily = Ec2ReservedInstancesConfiguration.AddMember("instanceFamily", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_instanceType = Ec2ReservedInstancesConfiguration.AddMember("instanceType", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_currentGeneration = Ec2ReservedInstancesConfiguration.AddMember("currentGeneration", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_platform = Ec2ReservedInstancesConfiguration.AddMember("platform", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_tenancy = Ec2ReservedInstancesConfiguration.AddMember("tenancy", smithyprelude.String)
-
-	Ec2ReservedInstancesConfiguration_sizeFlexEligible = Ec2ReservedInstancesConfiguration.AddMember("sizeFlexEligible", smithyprelude.Boolean)
-
-	Ec2ReservedInstances_configuration = Ec2ReservedInstances.AddMember("configuration", Ec2ReservedInstancesConfiguration)
-
-	Ec2ReservedInstances_costCalculation = Ec2ReservedInstances.AddMember("costCalculation", ReservedInstancesCostCalculation)
-
-	EcsServiceConfiguration_compute = EcsServiceConfiguration.AddMember("compute", ComputeConfiguration)
-
-	EcsService_configuration = EcsService.AddMember("configuration", EcsServiceConfiguration)
-
-	EcsService_costCalculation = EcsService.AddMember("costCalculation", ResourceCostCalculation)
-
-	MetricsByTime_score = MetricsByTime.AddMember("score", smithyprelude.Double)
-
-	MetricsByTime_savings = MetricsByTime.AddMember("savings", smithyprelude.Double)
-
-	MetricsByTime_spend = MetricsByTime.AddMember("spend", smithyprelude.Double)
-
-	MetricsByTime_timestamp = MetricsByTime.AddMember("timestamp", smithyprelude.String)
-
-	_MetricsByTimeList_member = _MetricsByTimeList.AddMember("member", MetricsByTime)
-
-	EfficiencyMetricsByGroup_metricsByTime = EfficiencyMetricsByGroup.AddMember("metricsByTime", _MetricsByTimeList)
-
-	EfficiencyMetricsByGroup_group = EfficiencyMetricsByGroup.AddMember("group", smithyprelude.String)
-
-	EfficiencyMetricsByGroup_message = EfficiencyMetricsByGroup.AddMember("message", smithyprelude.String)
-
-	_EfficiencyMetricsByGroupList_member = _EfficiencyMetricsByGroupList.AddMember("member", EfficiencyMetricsByGroup)
-
-	ElastiCacheCluster_costCalculation = ElastiCacheCluster.AddMember("costCalculation", ResourceCostCalculation)
-
-	ElastiCacheReservedInstancesConfiguration_accountScope = ElastiCacheReservedInstancesConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_service = ElastiCacheReservedInstancesConfiguration.AddMember("service", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_term = ElastiCacheReservedInstancesConfiguration.AddMember("term", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_paymentOption = ElastiCacheReservedInstancesConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_reservedInstancesRegion = ElastiCacheReservedInstancesConfiguration.AddMember("reservedInstancesRegion", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_upfrontCost = ElastiCacheReservedInstancesConfiguration.AddMember("upfrontCost", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_monthlyRecurringCost = ElastiCacheReservedInstancesConfiguration.AddMember("monthlyRecurringCost", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_normalizedUnitsToPurchase = ElastiCacheReservedInstancesConfiguration.AddMember("normalizedUnitsToPurchase", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_numberOfInstancesToPurchase = ElastiCacheReservedInstancesConfiguration.AddMember("numberOfInstancesToPurchase", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_instanceFamily = ElastiCacheReservedInstancesConfiguration.AddMember("instanceFamily", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_instanceType = ElastiCacheReservedInstancesConfiguration.AddMember("instanceType", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_currentGeneration = ElastiCacheReservedInstancesConfiguration.AddMember("currentGeneration", smithyprelude.String)
-
-	ElastiCacheReservedInstancesConfiguration_sizeFlexEligible = ElastiCacheReservedInstancesConfiguration.AddMember("sizeFlexEligible", smithyprelude.Boolean)
-
-	ElastiCacheReservedInstances_configuration = ElastiCacheReservedInstances.AddMember("configuration", ElastiCacheReservedInstancesConfiguration)
-
-	ElastiCacheReservedInstances_costCalculation = ElastiCacheReservedInstances.AddMember("costCalculation", ReservedInstancesCostCalculation)
-
-	ImplementationEffort_VERY_LOW = ImplementationEffort.AddMember("VERY_LOW", smithyprelude.Unit)
-
-	ImplementationEffort_LOW = ImplementationEffort.AddMember("LOW", smithyprelude.Unit)
-
-	ImplementationEffort_MEDIUM = ImplementationEffort.AddMember("MEDIUM", smithyprelude.Unit)
-
-	ImplementationEffort_HIGH = ImplementationEffort.AddMember("HIGH", smithyprelude.Unit)
-
-	ImplementationEffort_VERY_HIGH = ImplementationEffort.AddMember("VERY_HIGH", smithyprelude.Unit)
-
-	_ImplementationEffortList_member = _ImplementationEffortList.AddMember("member", ImplementationEffort)
-
-	_RegionList_member = _RegionList.AddMember("member", smithyprelude.String)
-
-	ResourceType_EC2_INSTANCE = ResourceType.AddMember("EC2_INSTANCE", smithyprelude.Unit)
-
-	ResourceType_LAMBDA_FUNCTION = ResourceType.AddMember("LAMBDA_FUNCTION", smithyprelude.Unit)
-
-	ResourceType_EBS_VOLUME = ResourceType.AddMember("EBS_VOLUME", smithyprelude.Unit)
-
-	ResourceType_ECS_SERVICE = ResourceType.AddMember("ECS_SERVICE", smithyprelude.Unit)
-
-	ResourceType_EC2_AUTO_SCALING_GROUP = ResourceType.AddMember("EC2_AUTO_SCALING_GROUP", smithyprelude.Unit)
-
-	ResourceType_EC2_INSTANCE_SAVINGS_PLANS = ResourceType.AddMember("EC2_INSTANCE_SAVINGS_PLANS", smithyprelude.Unit)
-
-	ResourceType_COMPUTE_SAVINGS_PLANS = ResourceType.AddMember("COMPUTE_SAVINGS_PLANS", smithyprelude.Unit)
-
-	ResourceType_SAGE_MAKER_SAVINGS_PLANS = ResourceType.AddMember("SAGE_MAKER_SAVINGS_PLANS", smithyprelude.Unit)
-
-	ResourceType_EC2_RESERVED_INSTANCES = ResourceType.AddMember("EC2_RESERVED_INSTANCES", smithyprelude.Unit)
-
-	ResourceType_RDS_RESERVED_INSTANCES = ResourceType.AddMember("RDS_RESERVED_INSTANCES", smithyprelude.Unit)
-
-	ResourceType_OPEN_SEARCH_RESERVED_INSTANCES = ResourceType.AddMember("OPEN_SEARCH_RESERVED_INSTANCES", smithyprelude.Unit)
-
-	ResourceType_REDSHIFT_RESERVED_INSTANCES = ResourceType.AddMember("REDSHIFT_RESERVED_INSTANCES", smithyprelude.Unit)
-
-	ResourceType_ELASTI_CACHE_RESERVED_INSTANCES = ResourceType.AddMember("ELASTI_CACHE_RESERVED_INSTANCES", smithyprelude.Unit)
-
-	ResourceType_RDS_DB_INSTANCE_STORAGE = ResourceType.AddMember("RDS_DB_INSTANCE_STORAGE", smithyprelude.Unit)
-
-	ResourceType_RDS_DB_INSTANCE = ResourceType.AddMember("RDS_DB_INSTANCE", smithyprelude.Unit)
-
-	ResourceType_AURORA_DB_CLUSTER_STORAGE = ResourceType.AddMember("AURORA_DB_CLUSTER_STORAGE", smithyprelude.Unit)
-
-	ResourceType_DYNAMO_DB_RESERVED_CAPACITY = ResourceType.AddMember("DYNAMO_DB_RESERVED_CAPACITY", smithyprelude.Unit)
-
-	ResourceType_MEMORY_DB_RESERVED_INSTANCES = ResourceType.AddMember("MEMORY_DB_RESERVED_INSTANCES", smithyprelude.Unit)
-
-	ResourceType_NAT_GATEWAY = ResourceType.AddMember("NAT_GATEWAY", smithyprelude.Unit)
-
-	ResourceType_DYNAMO_DB_TABLE = ResourceType.AddMember("DYNAMO_DB_TABLE", smithyprelude.Unit)
-
-	ResourceType_ELASTI_CACHE_CLUSTER = ResourceType.AddMember("ELASTI_CACHE_CLUSTER", smithyprelude.Unit)
-
-	ResourceType_MEMORY_DB_CLUSTER = ResourceType.AddMember("MEMORY_DB_CLUSTER", smithyprelude.Unit)
-
-	ResourceType_DOCUMENT_DB_CLUSTER = ResourceType.AddMember("DOCUMENT_DB_CLUSTER", smithyprelude.Unit)
-
-	ResourceType_WORK_SPACES = ResourceType.AddMember("WORK_SPACES", smithyprelude.Unit)
-
-	ResourceType_SAGE_MAKER_ENDPOINT = ResourceType.AddMember("SAGE_MAKER_ENDPOINT", smithyprelude.Unit)
-
-	_ResourceTypeList_member = _ResourceTypeList.AddMember("member", ResourceType)
-
-	Tag_key = Tag.AddMember("key", smithyprelude.String)
-
-	Tag_value = Tag.AddMember("value", smithyprelude.String)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	_ResourceIdList_member = _ResourceIdList.AddMember("member", smithyprelude.String)
-
-	_ResourceArnList_member = _ResourceArnList.AddMember("member", smithyprelude.String)
-
-	_RecommendationIdList_member = _RecommendationIdList.AddMember("member", smithyprelude.String)
-
-	Filter_restartNeeded = Filter.AddMember("restartNeeded", smithyprelude.Boolean)
-
-	Filter_rollbackPossible = Filter.AddMember("rollbackPossible", smithyprelude.Boolean)
-
-	Filter_implementationEfforts = Filter.AddMember("implementationEfforts", _ImplementationEffortList)
-
-	Filter_accountIds = Filter.AddMember("accountIds", _AccountIdList)
-
-	Filter_regions = Filter.AddMember("regions", _RegionList)
-
-	Filter_resourceTypes = Filter.AddMember("resourceTypes", _ResourceTypeList)
-
-	Filter_actionTypes = Filter.AddMember("actionTypes", _ActionTypeList)
-
-	Filter_tags = Filter.AddMember("tags", _TagList)
-
-	Filter_resourceIds = Filter.AddMember("resourceIds", _ResourceIdList)
-
-	Filter_resourceArns = Filter.AddMember("resourceArns", _ResourceArnList)
-
-	Filter_recommendationIds = Filter.AddMember("recommendationIds", _RecommendationIdList)
-
-	GranularityType_DAILY = GranularityType.AddMember("DAILY", smithyprelude.Unit)
-
-	GranularityType_MONTHLY = GranularityType.AddMember("MONTHLY", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	LambdaFunctionConfiguration_compute = LambdaFunctionConfiguration.AddMember("compute", ComputeConfiguration)
-
-	LambdaFunction_configuration = LambdaFunction.AddMember("configuration", LambdaFunctionConfiguration)
-
-	LambdaFunction_costCalculation = LambdaFunction.AddMember("costCalculation", ResourceCostCalculation)
-
-	MemberAccountDiscountVisibility_ALL = MemberAccountDiscountVisibility.AddMember("ALL", smithyprelude.Unit)
-
-	MemberAccountDiscountVisibility_NONE = MemberAccountDiscountVisibility.AddMember("NONE", smithyprelude.Unit)
-
-	MemoryDbCluster_costCalculation = MemoryDbCluster.AddMember("costCalculation", ResourceCostCalculation)
-
-	MemoryDbReservedInstancesConfiguration_accountScope = MemoryDbReservedInstancesConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_service = MemoryDbReservedInstancesConfiguration.AddMember("service", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_term = MemoryDbReservedInstancesConfiguration.AddMember("term", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_paymentOption = MemoryDbReservedInstancesConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_reservedInstancesRegion = MemoryDbReservedInstancesConfiguration.AddMember("reservedInstancesRegion", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_upfrontCost = MemoryDbReservedInstancesConfiguration.AddMember("upfrontCost", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_monthlyRecurringCost = MemoryDbReservedInstancesConfiguration.AddMember("monthlyRecurringCost", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_normalizedUnitsToPurchase = MemoryDbReservedInstancesConfiguration.AddMember("normalizedUnitsToPurchase", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_numberOfInstancesToPurchase = MemoryDbReservedInstancesConfiguration.AddMember("numberOfInstancesToPurchase", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_instanceType = MemoryDbReservedInstancesConfiguration.AddMember("instanceType", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_instanceFamily = MemoryDbReservedInstancesConfiguration.AddMember("instanceFamily", smithyprelude.String)
-
-	MemoryDbReservedInstancesConfiguration_sizeFlexEligible = MemoryDbReservedInstancesConfiguration.AddMember("sizeFlexEligible", smithyprelude.Boolean)
-
-	MemoryDbReservedInstancesConfiguration_currentGeneration = MemoryDbReservedInstancesConfiguration.AddMember("currentGeneration", smithyprelude.String)
-
-	MemoryDbReservedInstances_configuration = MemoryDbReservedInstances.AddMember("configuration", MemoryDbReservedInstancesConfiguration)
-
-	MemoryDbReservedInstances_costCalculation = MemoryDbReservedInstances.AddMember("costCalculation", ReservedInstancesCostCalculation)
-
-	NatGatewayConfiguration_activeConnectionCount = NatGatewayConfiguration.AddMember("activeConnectionCount", smithyprelude.Long)
-
-	NatGatewayConfiguration_packetsInFromSource = NatGatewayConfiguration.AddMember("packetsInFromSource", smithyprelude.Long)
-
-	NatGatewayConfiguration_packetsInFromDestination = NatGatewayConfiguration.AddMember("packetsInFromDestination", smithyprelude.Long)
-
-	NatGateway_configuration = NatGateway.AddMember("configuration", NatGatewayConfiguration)
-
-	NatGateway_costCalculation = NatGateway.AddMember("costCalculation", ResourceCostCalculation)
-
-	OpenSearchReservedInstancesConfiguration_accountScope = OpenSearchReservedInstancesConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_service = OpenSearchReservedInstancesConfiguration.AddMember("service", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_term = OpenSearchReservedInstancesConfiguration.AddMember("term", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_paymentOption = OpenSearchReservedInstancesConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_reservedInstancesRegion = OpenSearchReservedInstancesConfiguration.AddMember("reservedInstancesRegion", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_upfrontCost = OpenSearchReservedInstancesConfiguration.AddMember("upfrontCost", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_monthlyRecurringCost = OpenSearchReservedInstancesConfiguration.AddMember("monthlyRecurringCost", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_normalizedUnitsToPurchase = OpenSearchReservedInstancesConfiguration.AddMember("normalizedUnitsToPurchase", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_numberOfInstancesToPurchase = OpenSearchReservedInstancesConfiguration.AddMember("numberOfInstancesToPurchase", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_instanceType = OpenSearchReservedInstancesConfiguration.AddMember("instanceType", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_currentGeneration = OpenSearchReservedInstancesConfiguration.AddMember("currentGeneration", smithyprelude.String)
-
-	OpenSearchReservedInstancesConfiguration_sizeFlexEligible = OpenSearchReservedInstancesConfiguration.AddMember("sizeFlexEligible", smithyprelude.Boolean)
-
-	OpenSearchReservedInstances_configuration = OpenSearchReservedInstances.AddMember("configuration", OpenSearchReservedInstancesConfiguration)
-
-	OpenSearchReservedInstances_costCalculation = OpenSearchReservedInstances.AddMember("costCalculation", ReservedInstancesCostCalculation)
-
-	Order_ASC = Order.AddMember("ASC", smithyprelude.Unit)
-
-	Order_DESC = Order.AddMember("DESC", smithyprelude.Unit)
-
-	OrderBy_dimension = OrderBy.AddMember("dimension", smithyprelude.String)
-
-	OrderBy_order = OrderBy.AddMember("order", Order)
-
-	PaymentOption_ALL_UPFRONT = PaymentOption.AddMember("ALL_UPFRONT", smithyprelude.Unit)
-
-	PaymentOption_PARTIAL_UPFRONT = PaymentOption.AddMember("PARTIAL_UPFRONT", smithyprelude.Unit)
-
-	PaymentOption_NO_UPFRONT = PaymentOption.AddMember("NO_UPFRONT", smithyprelude.Unit)
-
-	Term_ONE_YEAR = Term.AddMember("ONE_YEAR", smithyprelude.Unit)
-
-	Term_THREE_YEARS = Term.AddMember("THREE_YEARS", smithyprelude.Unit)
-
-	PreferredCommitment_term = PreferredCommitment.AddMember("term", Term)
-
-	PreferredCommitment_paymentOption = PreferredCommitment.AddMember("paymentOption", PaymentOption)
-
-	RdsDbInstanceConfiguration_instance = RdsDbInstanceConfiguration.AddMember("instance", DbInstanceConfiguration)
-
-	RdsDbInstance_configuration = RdsDbInstance.AddMember("configuration", RdsDbInstanceConfiguration)
-
-	RdsDbInstance_costCalculation = RdsDbInstance.AddMember("costCalculation", ResourceCostCalculation)
-
-	RdsDbInstanceStorageConfiguration_storageType = RdsDbInstanceStorageConfiguration.AddMember("storageType", smithyprelude.String)
-
-	RdsDbInstanceStorageConfiguration_allocatedStorageInGb = RdsDbInstanceStorageConfiguration.AddMember("allocatedStorageInGb", smithyprelude.Double)
-
-	RdsDbInstanceStorageConfiguration_iops = RdsDbInstanceStorageConfiguration.AddMember("iops", smithyprelude.Double)
-
-	RdsDbInstanceStorageConfiguration_storageThroughput = RdsDbInstanceStorageConfiguration.AddMember("storageThroughput", smithyprelude.Double)
-
-	RdsDbInstanceStorage_configuration = RdsDbInstanceStorage.AddMember("configuration", RdsDbInstanceStorageConfiguration)
-
-	RdsDbInstanceStorage_costCalculation = RdsDbInstanceStorage.AddMember("costCalculation", ResourceCostCalculation)
-
-	RdsReservedInstancesConfiguration_accountScope = RdsReservedInstancesConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_service = RdsReservedInstancesConfiguration.AddMember("service", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_term = RdsReservedInstancesConfiguration.AddMember("term", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_paymentOption = RdsReservedInstancesConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_reservedInstancesRegion = RdsReservedInstancesConfiguration.AddMember("reservedInstancesRegion", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_upfrontCost = RdsReservedInstancesConfiguration.AddMember("upfrontCost", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_monthlyRecurringCost = RdsReservedInstancesConfiguration.AddMember("monthlyRecurringCost", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_normalizedUnitsToPurchase = RdsReservedInstancesConfiguration.AddMember("normalizedUnitsToPurchase", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_numberOfInstancesToPurchase = RdsReservedInstancesConfiguration.AddMember("numberOfInstancesToPurchase", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_instanceFamily = RdsReservedInstancesConfiguration.AddMember("instanceFamily", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_instanceType = RdsReservedInstancesConfiguration.AddMember("instanceType", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_sizeFlexEligible = RdsReservedInstancesConfiguration.AddMember("sizeFlexEligible", smithyprelude.Boolean)
-
-	RdsReservedInstancesConfiguration_currentGeneration = RdsReservedInstancesConfiguration.AddMember("currentGeneration", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_licenseModel = RdsReservedInstancesConfiguration.AddMember("licenseModel", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_databaseEdition = RdsReservedInstancesConfiguration.AddMember("databaseEdition", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_databaseEngine = RdsReservedInstancesConfiguration.AddMember("databaseEngine", smithyprelude.String)
-
-	RdsReservedInstancesConfiguration_deploymentOption = RdsReservedInstancesConfiguration.AddMember("deploymentOption", smithyprelude.String)
-
-	RdsReservedInstances_configuration = RdsReservedInstances.AddMember("configuration", RdsReservedInstancesConfiguration)
-
-	RdsReservedInstances_costCalculation = RdsReservedInstances.AddMember("costCalculation", ReservedInstancesCostCalculation)
-
-	Source_COMPUTE_OPTIMIZER = Source.AddMember("COMPUTE_OPTIMIZER", smithyprelude.Unit)
-
-	Source_COST_EXPLORER = Source.AddMember("COST_EXPLORER", smithyprelude.Unit)
-
-	Recommendation_recommendationId = Recommendation.AddMember("recommendationId", smithyprelude.String)
-
-	Recommendation_accountId = Recommendation.AddMember("accountId", smithyprelude.String)
-
-	Recommendation_region = Recommendation.AddMember("region", smithyprelude.String)
-
-	Recommendation_resourceId = Recommendation.AddMember("resourceId", smithyprelude.String)
-
-	Recommendation_resourceArn = Recommendation.AddMember("resourceArn", smithyprelude.String)
-
-	Recommendation_currentResourceType = Recommendation.AddMember("currentResourceType", smithyprelude.String)
-
-	Recommendation_recommendedResourceType = Recommendation.AddMember("recommendedResourceType", smithyprelude.String)
-
-	Recommendation_estimatedMonthlySavings = Recommendation.AddMember("estimatedMonthlySavings", smithyprelude.Double)
-
-	Recommendation_estimatedSavingsPercentage = Recommendation.AddMember("estimatedSavingsPercentage", smithyprelude.Double)
-
-	Recommendation_estimatedMonthlyCost = Recommendation.AddMember("estimatedMonthlyCost", smithyprelude.Double)
-
-	Recommendation_currencyCode = Recommendation.AddMember("currencyCode", smithyprelude.String)
-
-	Recommendation_implementationEffort = Recommendation.AddMember("implementationEffort", smithyprelude.String)
-
-	Recommendation_restartNeeded = Recommendation.AddMember("restartNeeded", smithyprelude.Boolean)
-
-	Recommendation_actionType = Recommendation.AddMember("actionType", smithyprelude.String)
-
-	Recommendation_rollbackPossible = Recommendation.AddMember("rollbackPossible", smithyprelude.Boolean)
-
-	Recommendation_currentResourceSummary = Recommendation.AddMember("currentResourceSummary", smithyprelude.String)
-
-	Recommendation_recommendedResourceSummary = Recommendation.AddMember("recommendedResourceSummary", smithyprelude.String)
-
-	Recommendation_lastRefreshTimestamp = Recommendation.AddMember("lastRefreshTimestamp", _Datetime)
-
-	Recommendation_recommendationLookbackPeriodInDays = Recommendation.AddMember("recommendationLookbackPeriodInDays", smithyprelude.Integer)
-
-	Recommendation_source = Recommendation.AddMember("source", Source)
-
-	Recommendation_tags = Recommendation.AddMember("tags", _TagList)
-
-	_RecommendationList_member = _RecommendationList.AddMember("member", Recommendation)
-
-	RecommendationSummary_group = RecommendationSummary.AddMember("group", smithyprelude.String)
-
-	RecommendationSummary_estimatedMonthlySavings = RecommendationSummary.AddMember("estimatedMonthlySavings", smithyprelude.Double)
-
-	RecommendationSummary_recommendationCount = RecommendationSummary.AddMember("recommendationCount", smithyprelude.Integer)
-
-	_RecommendationSummariesList_member = _RecommendationSummariesList.AddMember("member", RecommendationSummary)
-
-	RedshiftReservedInstancesConfiguration_accountScope = RedshiftReservedInstancesConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_service = RedshiftReservedInstancesConfiguration.AddMember("service", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_term = RedshiftReservedInstancesConfiguration.AddMember("term", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_paymentOption = RedshiftReservedInstancesConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_reservedInstancesRegion = RedshiftReservedInstancesConfiguration.AddMember("reservedInstancesRegion", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_upfrontCost = RedshiftReservedInstancesConfiguration.AddMember("upfrontCost", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_monthlyRecurringCost = RedshiftReservedInstancesConfiguration.AddMember("monthlyRecurringCost", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_normalizedUnitsToPurchase = RedshiftReservedInstancesConfiguration.AddMember("normalizedUnitsToPurchase", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_numberOfInstancesToPurchase = RedshiftReservedInstancesConfiguration.AddMember("numberOfInstancesToPurchase", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_instanceFamily = RedshiftReservedInstancesConfiguration.AddMember("instanceFamily", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_instanceType = RedshiftReservedInstancesConfiguration.AddMember("instanceType", smithyprelude.String)
-
-	RedshiftReservedInstancesConfiguration_sizeFlexEligible = RedshiftReservedInstancesConfiguration.AddMember("sizeFlexEligible", smithyprelude.Boolean)
-
-	RedshiftReservedInstancesConfiguration_currentGeneration = RedshiftReservedInstancesConfiguration.AddMember("currentGeneration", smithyprelude.String)
-
-	RedshiftReservedInstances_configuration = RedshiftReservedInstances.AddMember("configuration", RedshiftReservedInstancesConfiguration)
-
-	RedshiftReservedInstances_costCalculation = RedshiftReservedInstances.AddMember("costCalculation", ReservedInstancesCostCalculation)
-
-	SageMakerSavingsPlansConfiguration_accountScope = SageMakerSavingsPlansConfiguration.AddMember("accountScope", smithyprelude.String)
-
-	SageMakerSavingsPlansConfiguration_term = SageMakerSavingsPlansConfiguration.AddMember("term", smithyprelude.String)
-
-	SageMakerSavingsPlansConfiguration_paymentOption = SageMakerSavingsPlansConfiguration.AddMember("paymentOption", smithyprelude.String)
-
-	SageMakerSavingsPlansConfiguration_hourlyCommitment = SageMakerSavingsPlansConfiguration.AddMember("hourlyCommitment", smithyprelude.String)
-
-	SageMakerSavingsPlans_configuration = SageMakerSavingsPlans.AddMember("configuration", SageMakerSavingsPlansConfiguration)
-
-	SageMakerSavingsPlans_costCalculation = SageMakerSavingsPlans.AddMember("costCalculation", SavingsPlansCostCalculation)
-
-	WorkSpaces_costCalculation = WorkSpaces.AddMember("costCalculation", ResourceCostCalculation)
-
-	SageMakerEndpoint_costCalculation = SageMakerEndpoint.AddMember("costCalculation", ResourceCostCalculation)
-
-	ResourceDetails_lambdaFunction = ResourceDetails.AddMember("lambdaFunction", LambdaFunction)
-
-	ResourceDetails_ecsService = ResourceDetails.AddMember("ecsService", EcsService)
-
-	ResourceDetails_ec2Instance = ResourceDetails.AddMember("ec2Instance", Ec2Instance)
-
-	ResourceDetails_ebsVolume = ResourceDetails.AddMember("ebsVolume", EbsVolume)
-
-	ResourceDetails_ec2AutoScalingGroup = ResourceDetails.AddMember("ec2AutoScalingGroup", Ec2AutoScalingGroup)
-
-	ResourceDetails_ec2ReservedInstances = ResourceDetails.AddMember("ec2ReservedInstances", Ec2ReservedInstances)
-
-	ResourceDetails_rdsReservedInstances = ResourceDetails.AddMember("rdsReservedInstances", RdsReservedInstances)
-
-	ResourceDetails_elastiCacheReservedInstances = ResourceDetails.AddMember("elastiCacheReservedInstances", ElastiCacheReservedInstances)
-
-	ResourceDetails_openSearchReservedInstances = ResourceDetails.AddMember("openSearchReservedInstances", OpenSearchReservedInstances)
-
-	ResourceDetails_redshiftReservedInstances = ResourceDetails.AddMember("redshiftReservedInstances", RedshiftReservedInstances)
-
-	ResourceDetails_ec2InstanceSavingsPlans = ResourceDetails.AddMember("ec2InstanceSavingsPlans", Ec2InstanceSavingsPlans)
-
-	ResourceDetails_computeSavingsPlans = ResourceDetails.AddMember("computeSavingsPlans", ComputeSavingsPlans)
-
-	ResourceDetails_sageMakerSavingsPlans = ResourceDetails.AddMember("sageMakerSavingsPlans", SageMakerSavingsPlans)
-
-	ResourceDetails_rdsDbInstance = ResourceDetails.AddMember("rdsDbInstance", RdsDbInstance)
-
-	ResourceDetails_rdsDbInstanceStorage = ResourceDetails.AddMember("rdsDbInstanceStorage", RdsDbInstanceStorage)
-
-	ResourceDetails_auroraDbClusterStorage = ResourceDetails.AddMember("auroraDbClusterStorage", AuroraDbClusterStorage)
-
-	ResourceDetails_dynamoDbReservedCapacity = ResourceDetails.AddMember("dynamoDbReservedCapacity", DynamoDbReservedCapacity)
-
-	ResourceDetails_memoryDbReservedInstances = ResourceDetails.AddMember("memoryDbReservedInstances", MemoryDbReservedInstances)
-
-	ResourceDetails_natGateway = ResourceDetails.AddMember("natGateway", NatGateway)
-
-	ResourceDetails_dynamoDbTable = ResourceDetails.AddMember("dynamoDbTable", DynamoDbTable)
-
-	ResourceDetails_elastiCacheCluster = ResourceDetails.AddMember("elastiCacheCluster", ElastiCacheCluster)
-
-	ResourceDetails_memoryDbCluster = ResourceDetails.AddMember("memoryDbCluster", MemoryDbCluster)
-
-	ResourceDetails_documentDbCluster = ResourceDetails.AddMember("documentDbCluster", DocumentDbCluster)
-
-	ResourceDetails_workSpaces = ResourceDetails.AddMember("workSpaces", WorkSpaces)
-
-	ResourceDetails_sageMakerEndpoint = ResourceDetails.AddMember("sageMakerEndpoint", SageMakerEndpoint)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	SavingsEstimationMode_BEFORE_DISCOUNTS = SavingsEstimationMode.AddMember("BEFORE_DISCOUNTS", smithyprelude.Unit)
-
-	SavingsEstimationMode_AFTER_DISCOUNTS = SavingsEstimationMode.AddMember("AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	SummaryMetrics_SAVINGS_PERCENTAGE = SummaryMetrics.AddMember("SAVINGS_PERCENTAGE", smithyprelude.Unit)
-
-	_SummaryMetricsList_member = _SummaryMetricsList.AddMember("member", SummaryMetrics)
-
-	SummaryMetricsResult_savingsPercentage = SummaryMetricsResult.AddMember("savingsPercentage", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	TimePeriod_start = TimePeriod.AddMember("start", smithyprelude.String)
-
-	TimePeriod_end = TimePeriod.AddMember("end", smithyprelude.String)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionDetail_fieldName = ValidationExceptionDetail.AddMember("fieldName", smithyprelude.String)
-
-	ValidationExceptionDetail_message = ValidationExceptionDetail.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionDetails_member = _ValidationExceptionDetails.AddMember("member", ValidationExceptionDetail)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fields = ValidationException.AddMember("fields", _ValidationExceptionDetails)
-
-	GetPreferencesResponse_savingsEstimationMode = GetPreferencesResponse.AddMember("savingsEstimationMode", SavingsEstimationMode)
-
-	GetPreferencesResponse_memberAccountDiscountVisibility = GetPreferencesResponse.AddMember("memberAccountDiscountVisibility", MemberAccountDiscountVisibility)
-
-	GetPreferencesResponse_preferredCommitment = GetPreferencesResponse.AddMember("preferredCommitment", PreferredCommitment)
-
-	GetRecommendationRequest_recommendationId = GetRecommendationRequest.AddMember("recommendationId", smithyprelude.String)
-
-	GetRecommendationResponse_recommendationId = GetRecommendationResponse.AddMember("recommendationId", smithyprelude.String)
-
-	GetRecommendationResponse_resourceId = GetRecommendationResponse.AddMember("resourceId", smithyprelude.String)
-
-	GetRecommendationResponse_resourceArn = GetRecommendationResponse.AddMember("resourceArn", smithyprelude.String)
-
-	GetRecommendationResponse_accountId = GetRecommendationResponse.AddMember("accountId", smithyprelude.String)
-
-	GetRecommendationResponse_currencyCode = GetRecommendationResponse.AddMember("currencyCode", smithyprelude.String)
-
-	GetRecommendationResponse_recommendationLookbackPeriodInDays = GetRecommendationResponse.AddMember("recommendationLookbackPeriodInDays", smithyprelude.Integer)
-
-	GetRecommendationResponse_costCalculationLookbackPeriodInDays = GetRecommendationResponse.AddMember("costCalculationLookbackPeriodInDays", smithyprelude.Integer)
-
-	GetRecommendationResponse_estimatedSavingsPercentage = GetRecommendationResponse.AddMember("estimatedSavingsPercentage", smithyprelude.Double)
-
-	GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod = GetRecommendationResponse.AddMember("estimatedSavingsOverCostCalculationLookbackPeriod", smithyprelude.Double)
-
-	GetRecommendationResponse_currentResourceType = GetRecommendationResponse.AddMember("currentResourceType", ResourceType)
-
-	GetRecommendationResponse_recommendedResourceType = GetRecommendationResponse.AddMember("recommendedResourceType", ResourceType)
-
-	GetRecommendationResponse_region = GetRecommendationResponse.AddMember("region", smithyprelude.String)
-
-	GetRecommendationResponse_source = GetRecommendationResponse.AddMember("source", Source)
-
-	GetRecommendationResponse_lastRefreshTimestamp = GetRecommendationResponse.AddMember("lastRefreshTimestamp", _Datetime)
-
-	GetRecommendationResponse_estimatedMonthlySavings = GetRecommendationResponse.AddMember("estimatedMonthlySavings", smithyprelude.Double)
-
-	GetRecommendationResponse_estimatedMonthlyCost = GetRecommendationResponse.AddMember("estimatedMonthlyCost", smithyprelude.Double)
-
-	GetRecommendationResponse_implementationEffort = GetRecommendationResponse.AddMember("implementationEffort", ImplementationEffort)
-
-	GetRecommendationResponse_restartNeeded = GetRecommendationResponse.AddMember("restartNeeded", smithyprelude.Boolean)
-
-	GetRecommendationResponse_actionType = GetRecommendationResponse.AddMember("actionType", ActionType)
-
-	GetRecommendationResponse_rollbackPossible = GetRecommendationResponse.AddMember("rollbackPossible", smithyprelude.Boolean)
-
-	GetRecommendationResponse_currentResourceDetails = GetRecommendationResponse.AddMember("currentResourceDetails", ResourceDetails)
-
-	GetRecommendationResponse_recommendedResourceDetails = GetRecommendationResponse.AddMember("recommendedResourceDetails", ResourceDetails)
-
-	GetRecommendationResponse_tags = GetRecommendationResponse.AddMember("tags", _TagList)
-
-	ListEfficiencyMetricsRequest_groupBy = ListEfficiencyMetricsRequest.AddMember("groupBy", smithyprelude.String)
-
-	ListEfficiencyMetricsRequest_granularity = ListEfficiencyMetricsRequest.AddMember("granularity", GranularityType)
-
-	ListEfficiencyMetricsRequest_timePeriod = ListEfficiencyMetricsRequest.AddMember("timePeriod", TimePeriod)
-
-	ListEfficiencyMetricsRequest_maxResults = ListEfficiencyMetricsRequest.AddMember("maxResults", _MaxResults)
-
-	ListEfficiencyMetricsRequest_orderBy = ListEfficiencyMetricsRequest.AddMember("orderBy", OrderBy)
-
-	ListEfficiencyMetricsRequest_nextToken = ListEfficiencyMetricsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListEfficiencyMetricsResponse_efficiencyMetricsByGroup = ListEfficiencyMetricsResponse.AddMember("efficiencyMetricsByGroup", _EfficiencyMetricsByGroupList)
-
-	ListEfficiencyMetricsResponse_nextToken = ListEfficiencyMetricsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListEnrollmentStatusesRequest_includeOrganizationInfo = ListEnrollmentStatusesRequest.AddMember("includeOrganizationInfo", smithyprelude.PrimitiveBoolean)
-
-	ListEnrollmentStatusesRequest_accountId = ListEnrollmentStatusesRequest.AddMember("accountId", _AccountId)
-
-	ListEnrollmentStatusesRequest_nextToken = ListEnrollmentStatusesRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListEnrollmentStatusesRequest_maxResults = ListEnrollmentStatusesRequest.AddMember("maxResults", _MaxResults)
-
-	ListEnrollmentStatusesResponse_items = ListEnrollmentStatusesResponse.AddMember("items", _AccountEnrollmentStatuses)
-
-	ListEnrollmentStatusesResponse_includeMemberAccounts = ListEnrollmentStatusesResponse.AddMember("includeMemberAccounts", smithyprelude.Boolean)
-
-	ListEnrollmentStatusesResponse_nextToken = ListEnrollmentStatusesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListRecommendationsRequest_filter = ListRecommendationsRequest.AddMember("filter", Filter)
-
-	ListRecommendationsRequest_orderBy = ListRecommendationsRequest.AddMember("orderBy", OrderBy)
-
-	ListRecommendationsRequest_includeAllRecommendations = ListRecommendationsRequest.AddMember("includeAllRecommendations", smithyprelude.PrimitiveBoolean)
-
-	ListRecommendationsRequest_maxResults = ListRecommendationsRequest.AddMember("maxResults", _MaxResults)
-
-	ListRecommendationsRequest_nextToken = ListRecommendationsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListRecommendationsResponse_items = ListRecommendationsResponse.AddMember("items", _RecommendationList)
-
-	ListRecommendationsResponse_nextToken = ListRecommendationsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListRecommendationSummariesRequest_filter = ListRecommendationSummariesRequest.AddMember("filter", Filter)
-
-	ListRecommendationSummariesRequest_groupBy = ListRecommendationSummariesRequest.AddMember("groupBy", smithyprelude.String)
-
-	ListRecommendationSummariesRequest_maxResults = ListRecommendationSummariesRequest.AddMember("maxResults", _MaxResults)
-
-	ListRecommendationSummariesRequest_metrics = ListRecommendationSummariesRequest.AddMember("metrics", _SummaryMetricsList)
-
-	ListRecommendationSummariesRequest_nextToken = ListRecommendationSummariesRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListRecommendationSummariesResponse_estimatedTotalDedupedSavings = ListRecommendationSummariesResponse.AddMember("estimatedTotalDedupedSavings", smithyprelude.Double)
-
-	ListRecommendationSummariesResponse_items = ListRecommendationSummariesResponse.AddMember("items", _RecommendationSummariesList)
-
-	ListRecommendationSummariesResponse_groupBy = ListRecommendationSummariesResponse.AddMember("groupBy", smithyprelude.String)
-
-	ListRecommendationSummariesResponse_currencyCode = ListRecommendationSummariesResponse.AddMember("currencyCode", smithyprelude.String)
-
-	ListRecommendationSummariesResponse_metrics = ListRecommendationSummariesResponse.AddMember("metrics", SummaryMetricsResult)
-
-	ListRecommendationSummariesResponse_nextToken = ListRecommendationSummariesResponse.AddMember("nextToken", smithyprelude.String)
-
-	UpdateEnrollmentStatusRequest_status = UpdateEnrollmentStatusRequest.AddMember("status", EnrollmentStatus)
-
-	UpdateEnrollmentStatusRequest_includeMemberAccounts = UpdateEnrollmentStatusRequest.AddMember("includeMemberAccounts", smithyprelude.Boolean)
-
-	UpdateEnrollmentStatusResponse_status = UpdateEnrollmentStatusResponse.AddMember("status", smithyprelude.String)
-
-	UpdatePreferencesRequest_savingsEstimationMode = UpdatePreferencesRequest.AddMember("savingsEstimationMode", SavingsEstimationMode)
-
-	UpdatePreferencesRequest_memberAccountDiscountVisibility = UpdatePreferencesRequest.AddMember("memberAccountDiscountVisibility", MemberAccountDiscountVisibility)
-
-	UpdatePreferencesRequest_preferredCommitment = UpdatePreferencesRequest.AddMember("preferredCommitment", PreferredCommitment)
-
-	UpdatePreferencesResponse_savingsEstimationMode = UpdatePreferencesResponse.AddMember("savingsEstimationMode", SavingsEstimationMode)
-
-	UpdatePreferencesResponse_memberAccountDiscountVisibility = UpdatePreferencesResponse.AddMember("memberAccountDiscountVisibility", MemberAccountDiscountVisibility)
-
-	UpdatePreferencesResponse_preferredCommitment = UpdatePreferencesResponse.AddMember("preferredCommitment", PreferredCommitment)
-
+const blob = "" +
+	"estimatedSavingsOverCostCalculationLookbackPeriodElastiCacheReservedInstancesConfigurationOpenSearch" +
+	"ReservedInstancesConfigurationestimatedMonthlyAmortizedReservationCostMemoryDbReservedInstancesConfi" +
+	"gurationRedshiftReservedInstancesConfigurationestimatedNetUnusedAmortizedCommitmentsDynamoDbReserved" +
+	"CapacityConfigurationBlockStoragePerformanceConfigurationEc2InstanceSavingsPlansConfigurationAuroraD" +
+	"bClusterStorageConfigurationListRecommendationSummariesResponsecostCalculationLookbackPeriodInDaysLi" +
+	"stRecommendationSummariesRequestSageMakerSavingsPlansConfigurationrecommendationLookbackPeriodInDays" +
+	"Ec2ReservedInstancesConfigurationRdsDbInstanceStorageConfigurationRdsReservedInstancesConfigurationC" +
+	"omputeSavingsPlansConfigurationEc2AutoScalingGroupConfigurationReservedInstancesCostCalculationELAST" +
+	"I_CACHE_RESERVED_INSTANCESMemberAccountDiscountVisibilitymemberAccountDiscountVisibilitymonthlySavin" +
+	"gsPlansEligibleCostnumberOfCapacityUnitsToPurchaseListEnrollmentStatusesResponseMixedInstanceConfigu" +
+	"rationListOPEN_SEARCH_RESERVED_INSTANCESUpdateEnrollmentStatusResponsemonthlyReservationEligibleCost" +
+	"ListEfficiencyMetricsResponseListEnrollmentStatusesRequestUpdateEnrollmentStatusRequestEfficiencyMet" +
+	"ricsByGroupListListEfficiencyMetricsRequestMEMORY_DB_RESERVED_INSTANCESelastiCacheReservedInstancese" +
+	"stimatedCostBeforeDiscountsestimatedTotalDedupedSavingsDYNAMO_DB_RESERVED_CAPACITYLambdaFunctionConf" +
+	"igurationListRecommendationsResponsePURCHASE_RESERVED_INSTANCESREDSHIFT_RESERVED_INSTANCESRecommenda" +
+	"tionSummariesListSavingsPlansCostCalculationestimatedCostAfterDiscountsnumberOfInstancesToPurchaseop" +
+	"enSearchReservedInstancesCostOptimizationHubServiceEC2_INSTANCE_SAVINGS_PLANSListRecommendationsRequ" +
+	"estRdsDbInstanceConfigurationValidationExceptionDetailsestimatedMonthlyCommitmentestimatedSavingsPer" +
+	"centagerecommendedResourceDetailsrecommendedResourceSummaryAURORA_DB_CLUSTER_STORAGEAccountEnrollmen" +
+	"tStatusesGetRecommendationResponseResourceNotFoundExceptionUpdatePreferencesResponseValidationExcept" +
+	"ionReasonincludeAllRecommendationsmemoryDbReservedInstancesnormalizedUnitsToPurchaseredshiftReserved" +
+	"InstancesreservedInstancesDiscountEc2InstanceConfigurationGetRecommendationRequestImplementationEffo" +
+	"rtListReservedInstancesPricingSAGE_MAKER_SAVINGS_PLANSUpdatePreferencesRequestdynamoDbReservedCapaci" +
+	"tyefficiencyMetricsByGrouppacketsInFromDestinationEc2AutoScalingGroupTypeEcsServiceConfigurationFIEL" +
+	"D_VALIDATION_FAILEDInternalServerExceptionNatGatewayConfigurationRDS_DB_INSTANCE_STORAGEResourceCost" +
+	"Calculationec2InstanceSavingsPlansestimatedMonthlySavingsincludeOrganizationInforecommendedResourceT" +
+	"ypereservedInstancesRegionEC2_AUTO_SCALING_GROUPEC2_RESERVED_INSTANCESEbsVolumeConfigurationGetPrefe" +
+	"rencesResponsePURCHASE_SAVINGS_PLANSRDS_RESERVED_INSTANCESauroraDbClusterStoragecurrentResourceDetai" +
+	"lscurrentResourceSummaryAccessDeniedExceptionCOMPUTE_SAVINGS_PLANSGetPreferencesRequestRecommendatio" +
+	"nSummarySavingsEstimationModeactiveConnectionCountestimatedOnDemandCostimplementationEffortsincludeM" +
+	"emberAccountssageMakerSavingsPlanssavingsEstimationModeComputeConfigurationELASTI_CACHE_CLUSTERMIXED" +
+	"_INSTANCE_TYPESRecommendationIdListSINGLE_INSTANCE_TYPESummaryMetricsResultallocatedStorageInGbec2Re" +
+	"servedInstancesestimatedMonthlyCostlastRefreshTimestamplastUpdatedTimestampmonthlyRecurringCostrdsDb" +
+	"InstanceStoragerdsReservedInstancessavingsPlansDiscountDOCUMENT_DB_CLUSTERMIGRATE_TO_GRAVITONPreferr" +
+	"edCommitmentSAGE_MAKER_ENDPOINTSavingsPlansPricingThrottlingExceptioncomputeSavingsPlanscurrentResou" +
+	"rceTypeec2AutoScalingGrouppacketsInFromSourcepreferredCommitmentrecommendationCountAllocationStrateg" +
+	"yElastiCacheClusterEstimatedDiscountsRecommendationListSAVINGS_PERCENTAGESummaryMetricsListallocatio" +
+	"nStrategyelastiCacheClusterestimatedDiscountssavingsPlansRegionCOMPUTE_OPTIMIZERDocumentDbClusterMEM" +
+	"ORY_DB_CLUSTERMetricsByTimeListSageMakerEndpointcurrentGenerationdocumentDbClusterrecommendationIdss" +
+	"ageMakerEndpointsavingsPercentagestorageThroughputBEFORE_DISCOUNTSPrimitiveBooleanResourceTypeListcr" +
+	"eatedTimestampdeploymentOptionhourlyCommitmentrollbackPossiblesizeFlexEligibleAFTER_DISCOUNTSDYNAMO_" +
+	"DB_TABLEGranularityTypeLAMBDA_FUNCTIONMemoryDbClusterPARTIAL_UPFRONTResourceArnListResourcePricingat" +
+	"tachmentStatedatabaseEditiondbInstanceClassmemoryDbClusterActionTypeListResourceIdListdatabaseEngine" +
+	"instanceFamilylambdaFunctionmemorySizeInMBmixedInstancesAccountIdListCOST_EXPLORERDynamoDbTablePayme" +
+	"ntOptioncapacityUnitsconfigurationdynamoDbTablemetricsByTimeofferingClassotherDiscountpaymentOptionr" +
+	"esourceTypesrestartNeededLOWEST_PRICEaccountScopearchitecturecurrencyCodeinstanceTypelicenseModelres" +
+	"ourceArnsALL_UPFRONTECS_SERVICENAT_GATEWAYPRIORITIZEDTHREE_YEARSWORK_SPACESactionTypesgranularityper" +
+	"formanceproductCoderesourceIdsstorageTypeupfrontCostusageAmountEBS_VOLUMEMaxResultsNO_UPFRONTRegionL" +
+	"istTimePeriodWorkSpacesaccountIdsecsServicemaxResultsnatGatewaythroughputtimePeriodworkSpacesRIGHTSI" +
+	"ZEUsageListVERY_HIGHdimensionebsVolumefieldNamenextTokenoperationtimestampusageTypeDatetimeINACTIVEO" +
+	"NE_YEARSCALE_INVERY_LOWplatformsizeInGbIntegerMONTHLYOrderByTagListUPGRADEgroupBymessageorderByprici" +
+	"ngregionsservicetenancyDELETEDoubleFilterMEDIUMStringfieldsfilterreasonstatususagesDAILYOTHERitemssc" +
+	"orespendvalueDESCLongNONESTOPTermiopstagstermunitvCpuASCkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.costoptimizationhub", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 2692, Target: 0, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1909, Target: 1, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1100, Target: 2, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 950, Target: 3, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1409, Target: 4, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 428, Target: 5, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1040, Target: 6, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1959, Target: 7, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1625, Target: 8, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2824, Target: 9, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5081, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1884, Target: 11, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4823, Target: 18, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5171, Target: 159, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3255, Target: 582, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3998, Target: 582, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1884, Target: 16, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 11, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4356, Target: 18, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4356, Target: 19, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 18, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4258, Target: 21, Traits: 0, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4893, Target: 583, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5225, Target: 583, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5067, Target: 583, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2714, Target: 583, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1436, Target: 583, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3374, Target: 583, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5123, Target: 583, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5007, Target: 583, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4258, Target: 30, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 21, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3583, Target: 32, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4642, Target: 583, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4525, Target: 583, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 393, Target: 35, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 38, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 393, Target: 38, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4730, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 321, Target: 40, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5233, Target: 584, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4863, Target: 584, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3055, Target: 43, Traits: 0, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5249, Target: 584, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4328, Target: 585, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4549, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5023, Target: 581, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 699, Target: 48, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 51, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 442, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 699, Target: 51, Traits: 0, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4030, Target: 581, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4983, Target: 56, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1706, Target: 57, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4228, Target: 581, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3780, Target: 59, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 284, Target: 61, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 64, Traits: 0, StrLen: 13, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 353, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 284, Target: 64, Traits: 0, StrLen: 37, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5109, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2603, Target: 581, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4741, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3275, Target: 581, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 919, Target: 581, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4408, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4382, Target: 74, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2670, Target: 76, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 79, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2670, Target: 79, Traits: 0, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3933, Target: 452, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4697, Target: 40, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4198, Target: 581, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 731, Target: 83, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 86, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 731, Target: 86, Traits: 0, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4300, Target: 189, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4342, Target: 230, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4695, Target: 91, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3691, Target: 32, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2350, Target: 91, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3135, Target: 583, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3095, Target: 583, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 357, Target: 94, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 97, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2134, Target: 97, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4300, Target: 189, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 357, Target: 99, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 102, Traits: 0, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 442, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 357, Target: 102, Traits: 0, StrLen: 36, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4030, Target: 581, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4300, Target: 581, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3745, Target: 581, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 600, Target: 109, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 112, Traits: 0, StrLen: 13, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 353, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 600, Target: 112, Traits: 0, StrLen: 33, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5109, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2603, Target: 581, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4741, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3275, Target: 581, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 581, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 581, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4300, Target: 581, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4573, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3848, Target: 581, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5023, Target: 581, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5116, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4062, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2373, Target: 129, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 132, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2373, Target: 132, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 43, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1187, Target: 134, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4447, Target: 226, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5074, Target: 581, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5081, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1187, Target: 138, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 134, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3601, Target: 140, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 49, Target: 142, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 145, Traits: 0, StrLen: 13, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 353, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 49, Target: 145, Traits: 0, StrLen: 41, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5109, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2603, Target: 581, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4741, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3275, Target: 581, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 581, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 581, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4300, Target: 581, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4573, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3848, Target: 581, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4062, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 954, Target: 159, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4993, Target: 583, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4991, Target: 583, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3619, Target: 162, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3335, Target: 584, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2109, Target: 584, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4473, Target: 584, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 5135, Target: 166, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4512, Target: 586, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4046, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2971, Target: 187, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4823, Target: 19, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5102, Target: 351, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4499, Target: 427, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4675, Target: 30, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5237, Target: 464, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4719, Target: 391, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4597, Target: 360, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3882, Target: 324, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4108, Target: 178, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5183, Target: 583, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5046, Target: 583, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2182, Target: 181, Traits: 0, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5015, Target: 583, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4525, Target: 583, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5141, Target: 583, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4916, Target: 583, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4911, Target: 583, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2182, Target: 187, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 181, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 985, Target: 189, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4695, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2419, Target: 191, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5081, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1382, Target: 193, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 196, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1382, Target: 196, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 43, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4773, Target: 198, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 826, Target: 199, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4609, Target: 583, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5221, Target: 583, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4138, Target: 202, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 170, Target: 204, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 207, Traits: 0, StrLen: 13, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 353, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 170, Target: 207, Traits: 0, StrLen: 38, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5109, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2603, Target: 581, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4741, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3275, Target: 581, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 581, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 581, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4573, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4300, Target: 581, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4062, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3848, Target: 581, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3814, Target: 221, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5198, Target: 584, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3034, Target: 584, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 5203, Target: 584, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4965, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3814, Target: 226, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 221, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 980, Target: 228, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4695, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 980, Target: 230, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 228, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2442, Target: 232, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 235, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2442, Target: 235, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2929, Target: 587, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3526, Target: 587, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2326, Target: 587, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 90, Target: 239, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 242, Traits: 0, StrLen: 13, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 353, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 90, Target: 242, Traits: 0, StrLen: 40, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5109, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2603, Target: 581, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4741, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3275, Target: 581, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 581, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 581, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4573, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3848, Target: 581, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4062, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5053, Target: 255, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5253, Target: 583, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5213, Target: 583, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5053, Target: 258, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4920, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5088, Target: 255, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4395, Target: 261, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4609, Target: 583, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4153, Target: 583, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4783, Target: 583, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3393, Target: 265, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5241, Target: 466, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4486, Target: 261, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 633, Target: 268, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 271, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1703, Target: 271, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4300, Target: 57, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 633, Target: 273, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 276, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 633, Target: 276, Traits: 0, StrLen: 33, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4730, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3175, Target: 584, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 5233, Target: 584, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3933, Target: 584, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 666, Target: 281, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 284, Traits: 0, StrLen: 13, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 353, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 666, Target: 284, Traits: 0, StrLen: 33, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5109, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2603, Target: 581, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4741, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3275, Target: 581, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 581, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 581, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4300, Target: 581, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4573, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4062, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3848, Target: 581, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4585, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4213, Target: 581, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4286, Target: 581, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4014, Target: 581, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 432, Target: 302, Traits: 0, StrLen: 14, Count: 21, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3882, Target: 581, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4823, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5102, Target: 581, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4719, Target: 581, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4597, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3488, Target: 581, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2580, Target: 581, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2534, Target: 584, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1781, Target: 584, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3215, Target: 584, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4561, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2971, Target: 581, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4512, Target: 586, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4675, Target: 581, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4046, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2802, Target: 581, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1833, Target: 581, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3235, Target: 56, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 566, Target: 585, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1820, Target: 449, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5237, Target: 464, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3115, Target: 324, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 581, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3637, Target: 326, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 302, Traits: 0, StrLen: 6, Count: 21, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1490, Target: 328, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 330, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2887, Target: 330, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5074, Target: 581, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2534, Target: 584, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3564, Target: 585, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 208, Target: 334, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 337, Traits: 0, StrLen: 13, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 353, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 208, Target: 337, Traits: 0, StrLen: 38, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5109, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2603, Target: 581, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4741, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3275, Target: 581, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 581, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 581, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4300, Target: 581, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4573, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4062, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3848, Target: 581, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4793, Target: 351, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 581, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 763, Target: 353, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5095, Target: 355, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2206, Target: 355, Traits: 0, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2950, Target: 584, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1070, Target: 584, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3916, Target: 584, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 130, Target: 584, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4168, Target: 360, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 581, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2488, Target: 362, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5177, Target: 480, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5095, Target: 396, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1818, Target: 365, Traits: 0, StrLen: 15, Count: 25, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 4314, Target: 193, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4833, Target: 129, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2511, Target: 94, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4929, Target: 76, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3507, Target: 83, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3195, Target: 109, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3315, Target: 281, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1271, Target: 142, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1598, Target: 239, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2084, Target: 334, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2511, Target: 99, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3469, Target: 48, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3013, Target: 431, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3295, Target: 268, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3295, Target: 273, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2758, Target: 35, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2278, Target: 61, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2034, Target: 204, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4853, Target: 232, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4434, Target: 74, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3709, Target: 140, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4243, Target: 202, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3865, Target: 59, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4883, Target: 494, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3899, Target: 429, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4272, Target: 391, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 581, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1934, Target: 393, Traits: 3, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5081, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4719, Target: 581, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4183, Target: 396, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1299, Target: 584, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 246, Target: 584, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3727, Target: 162, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1544, Target: 584, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2591, Target: 401, Traits: 0, StrLen: 12, Count: 25, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1651, Target: 583, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4123, Target: 583, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4763, Target: 583, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4620, Target: 583, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2626, Target: 583, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1651, Target: 583, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2845, Target: 583, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2230, Target: 583, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2648, Target: 583, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2736, Target: 583, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1010, Target: 583, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1463, Target: 583, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 795, Target: 583, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2465, Target: 583, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2465, Target: 583, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1859, Target: 583, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1355, Target: 583, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1243, Target: 583, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4631, Target: 583, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4093, Target: 583, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3075, Target: 583, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3797, Target: 583, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3355, Target: 583, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4664, Target: 583, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3412, Target: 583, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3982, Target: 427, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 401, Traits: 0, StrLen: 6, Count: 25, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3831, Target: 429, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 532, Target: 431, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4421, Target: 434, Traits: 0, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 463, Target: 442, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 532, Target: 434, Traits: 0, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4537, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5241, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4486, Target: 581, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4030, Target: 581, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2908, Target: 439, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3950, Target: 583, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4078, Target: 583, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1517, Target: 442, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5095, Target: 444, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3431, Target: 444, Traits: 0, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 888, Target: 584, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1755, Target: 584, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3916, Target: 584, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2950, Target: 584, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3539, Target: 449, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3763, Target: 583, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4369, Target: 583, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 408, Target: 452, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4695, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5031, Target: 584, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3155, Target: 455, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3655, Target: 583, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3673, Target: 457, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 455, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3155, Target: 459, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3916, Target: 581, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5060, Target: 461, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5256, Target: 581, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5208, Target: 581, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5060, Target: 464, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 461, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5229, Target: 466, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4999, Target: 583, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4653, Target: 583, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3450, Target: 469, Traits: 4, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5081, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4803, Target: 471, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4514, Target: 581, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 438, Target: 581, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4902, Target: 474, Traits: 0, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4974, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4752, Target: 584, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4956, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4708, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5245, Target: 581, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4902, Target: 480, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 474, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1729, Target: 482, Traits: 5, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5081, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5165, Target: 491, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5153, Target: 489, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1729, Target: 486, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4938, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5081, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1729, Target: 489, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 857, Target: 486, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1984, Target: 491, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2396, Target: 583, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5188, Target: 583, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4813, Target: 494, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 463, Target: 362, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2866, Target: 496, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2692, Target: 497, Traits: 0, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3034, Target: 439, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 857, Target: 199, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3545, Target: 265, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2158, Target: 501, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3882, Target: 581, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1909, Target: 503, Traits: 0, StrLen: 25, Count: 23, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3882, Target: 581, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4719, Target: 581, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4597, Target: 581, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4823, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4561, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 566, Target: 585, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 463, Target: 585, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1781, Target: 584, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 0, Target: 584, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3488, Target: 401, Traits: 0, StrLen: 19, Count: 25, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2580, Target: 401, Traits: 0, StrLen: 23, Count: 25, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5102, Target: 581, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1820, Target: 449, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3235, Target: 56, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2534, Target: 584, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3215, Target: 584, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2971, Target: 181, Traits: 0, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4512, Target: 586, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4675, Target: 21, Traits: 0, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4046, Target: 586, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2780, Target: 365, Traits: 0, StrLen: 22, Count: 25, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1807, Target: 365, Traits: 0, StrLen: 26, Count: 25, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 5237, Target: 464, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1215, Target: 527, Traits: 0, StrLen: 28, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5074, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4686, Target: 178, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4873, Target: 471, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4843, Target: 198, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5088, Target: 258, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4947, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 534, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2302, Target: 138, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4947, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1129, Target: 537, Traits: 0, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2557, Target: 588, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4823, Target: 18, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4947, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4843, Target: 198, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 950, Target: 542, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5193, Target: 16, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2992, Target: 586, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4947, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1677, Target: 546, Traits: 0, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5159, Target: 166, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5088, Target: 258, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2009, Target: 588, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4843, Target: 198, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4947, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1409, Target: 552, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5193, Target: 326, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4947, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 498, Target: 555, Traits: 0, StrLen: 34, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5159, Target: 166, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5074, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4843, Target: 198, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4447, Target: 457, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4947, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 428, Target: 561, Traits: 0, StrLen: 35, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1327, Target: 584, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 5193, Target: 328, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5074, Target: 581, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4561, Target: 581, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4447, Target: 459, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4947, Target: 581, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1158, Target: 568, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5171, Target: 159, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2992, Target: 586, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1040, Target: 571, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5171, Target: 581, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2254, Target: 573, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3034, Target: 439, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 857, Target: 199, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3545, Target: 265, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1959, Target: 577, Traits: 0, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3034, Target: 439, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 857, Target: 199, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3545, Target: 265, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5147, Target: 581, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 3246, Target: 582, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 935, Target: 583, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 5129, Target: 584, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 2},
+		{StrOff: 5039, Target: 585, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 3975, Target: 586, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 5217, Target: 587, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
+		{StrOff: 3966, Target: 588, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [589]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+}
+
+var GetPreferences = &handles[0]
+
+var GetRecommendation = &handles[1]
+
+var ListEfficiencyMetrics = &handles[2]
+
+var ListEnrollmentStatuses = &handles[3]
+
+var ListRecommendations = &handles[4]
+
+var ListRecommendationSummaries = &handles[5]
+
+var UpdateEnrollmentStatus = &handles[6]
+
+var UpdatePreferences = &handles[7]
+
+var _CostOptimizationHubService = &handles[8]
+
+var AccessDeniedException = &handles[9]
+var AccessDeniedException_message = &handles[10]
+
+var AccountEnrollmentStatus = &handles[11]
+var AccountEnrollmentStatus_accountId = &handles[12]
+var AccountEnrollmentStatus_status = &handles[13]
+var AccountEnrollmentStatus_lastUpdatedTimestamp = &handles[14]
+var AccountEnrollmentStatus_createdTimestamp = &handles[15]
+
+var _AccountEnrollmentStatuses = &handles[16]
+var _AccountEnrollmentStatuses_member = &handles[17]
+
+var _AccountId = &handles[18]
+
+var _AccountIdList = &handles[19]
+var _AccountIdList_member = &handles[20]
+
+var ActionType = &handles[21]
+var ActionType_RIGHTSIZE = &handles[22]
+var ActionType_STOP = &handles[23]
+var ActionType_UPGRADE = &handles[24]
+var ActionType_PURCHASE_SAVINGS_PLANS = &handles[25]
+var ActionType_PURCHASE_RESERVED_INSTANCES = &handles[26]
+var ActionType_MIGRATE_TO_GRAVITON = &handles[27]
+var ActionType_DELETE = &handles[28]
+var ActionType_SCALE_IN = &handles[29]
+
+var _ActionTypeList = &handles[30]
+var _ActionTypeList_member = &handles[31]
+
+var AllocationStrategy = &handles[32]
+var AllocationStrategy_PRIORITIZED = &handles[33]
+var AllocationStrategy_LOWEST_PRICE = &handles[34]
+
+var AuroraDbClusterStorage = &handles[35]
+var AuroraDbClusterStorage_configuration = &handles[36]
+var AuroraDbClusterStorage_costCalculation = &handles[37]
+
+var AuroraDbClusterStorageConfiguration = &handles[38]
+var AuroraDbClusterStorageConfiguration_storageType = &handles[39]
+
+var BlockStoragePerformanceConfiguration = &handles[40]
+var BlockStoragePerformanceConfiguration_iops = &handles[41]
+var BlockStoragePerformanceConfiguration_throughput = &handles[42]
+
+var ComputeConfiguration = &handles[43]
+var ComputeConfiguration_vCpu = &handles[44]
+var ComputeConfiguration_memorySizeInMB = &handles[45]
+var ComputeConfiguration_architecture = &handles[46]
+var ComputeConfiguration_platform = &handles[47]
+
+var ComputeSavingsPlans = &handles[48]
+var ComputeSavingsPlans_configuration = &handles[49]
+var ComputeSavingsPlans_costCalculation = &handles[50]
+
+var ComputeSavingsPlansConfiguration = &handles[51]
+var ComputeSavingsPlansConfiguration_accountScope = &handles[52]
+var ComputeSavingsPlansConfiguration_term = &handles[53]
+var ComputeSavingsPlansConfiguration_paymentOption = &handles[54]
+var ComputeSavingsPlansConfiguration_hourlyCommitment = &handles[55]
+
+var _Datetime = &handles[56]
+
+var DbInstanceConfiguration = &handles[57]
+var DbInstanceConfiguration_dbInstanceClass = &handles[58]
+
+var DocumentDbCluster = &handles[59]
+var DocumentDbCluster_costCalculation = &handles[60]
+
+var DynamoDbReservedCapacity = &handles[61]
+var DynamoDbReservedCapacity_configuration = &handles[62]
+var DynamoDbReservedCapacity_costCalculation = &handles[63]
+
+var DynamoDbReservedCapacityConfiguration = &handles[64]
+var DynamoDbReservedCapacityConfiguration_accountScope = &handles[65]
+var DynamoDbReservedCapacityConfiguration_service = &handles[66]
+var DynamoDbReservedCapacityConfiguration_term = &handles[67]
+var DynamoDbReservedCapacityConfiguration_paymentOption = &handles[68]
+var DynamoDbReservedCapacityConfiguration_reservedInstancesRegion = &handles[69]
+var DynamoDbReservedCapacityConfiguration_upfrontCost = &handles[70]
+var DynamoDbReservedCapacityConfiguration_monthlyRecurringCost = &handles[71]
+var DynamoDbReservedCapacityConfiguration_numberOfCapacityUnitsToPurchase = &handles[72]
+var DynamoDbReservedCapacityConfiguration_capacityUnits = &handles[73]
+
+var DynamoDbTable = &handles[74]
+var DynamoDbTable_costCalculation = &handles[75]
+
+var EbsVolume = &handles[76]
+var EbsVolume_configuration = &handles[77]
+var EbsVolume_costCalculation = &handles[78]
+
+var EbsVolumeConfiguration = &handles[79]
+var EbsVolumeConfiguration_storage = &handles[80]
+var EbsVolumeConfiguration_performance = &handles[81]
+var EbsVolumeConfiguration_attachmentState = &handles[82]
+
+var Ec2AutoScalingGroup = &handles[83]
+var Ec2AutoScalingGroup_configuration = &handles[84]
+var Ec2AutoScalingGroup_costCalculation = &handles[85]
+
+var Ec2AutoScalingGroupConfiguration = &handles[86]
+var Ec2AutoScalingGroupConfiguration_instance = &handles[87]
+var Ec2AutoScalingGroupConfiguration_mixedInstances = &handles[88]
+var Ec2AutoScalingGroupConfiguration_type = &handles[89]
+var Ec2AutoScalingGroupConfiguration_allocationStrategy = &handles[90]
+
+var Ec2AutoScalingGroupType = &handles[91]
+var Ec2AutoScalingGroupType_SINGLE_INSTANCE_TYPE = &handles[92]
+var Ec2AutoScalingGroupType_MIXED_INSTANCE_TYPES = &handles[93]
+
+var Ec2Instance = &handles[94]
+var Ec2Instance_configuration = &handles[95]
+var Ec2Instance_costCalculation = &handles[96]
+
+var Ec2InstanceConfiguration = &handles[97]
+var Ec2InstanceConfiguration_instance = &handles[98]
+
+var Ec2InstanceSavingsPlans = &handles[99]
+var Ec2InstanceSavingsPlans_configuration = &handles[100]
+var Ec2InstanceSavingsPlans_costCalculation = &handles[101]
+
+var Ec2InstanceSavingsPlansConfiguration = &handles[102]
+var Ec2InstanceSavingsPlansConfiguration_accountScope = &handles[103]
+var Ec2InstanceSavingsPlansConfiguration_term = &handles[104]
+var Ec2InstanceSavingsPlansConfiguration_paymentOption = &handles[105]
+var Ec2InstanceSavingsPlansConfiguration_hourlyCommitment = &handles[106]
+var Ec2InstanceSavingsPlansConfiguration_instanceFamily = &handles[107]
+var Ec2InstanceSavingsPlansConfiguration_savingsPlansRegion = &handles[108]
+
+var Ec2ReservedInstances = &handles[109]
+var Ec2ReservedInstances_configuration = &handles[110]
+var Ec2ReservedInstances_costCalculation = &handles[111]
+
+var Ec2ReservedInstancesConfiguration = &handles[112]
+var Ec2ReservedInstancesConfiguration_accountScope = &handles[113]
+var Ec2ReservedInstancesConfiguration_service = &handles[114]
+var Ec2ReservedInstancesConfiguration_term = &handles[115]
+var Ec2ReservedInstancesConfiguration_paymentOption = &handles[116]
+var Ec2ReservedInstancesConfiguration_reservedInstancesRegion = &handles[117]
+var Ec2ReservedInstancesConfiguration_upfrontCost = &handles[118]
+var Ec2ReservedInstancesConfiguration_monthlyRecurringCost = &handles[119]
+var Ec2ReservedInstancesConfiguration_normalizedUnitsToPurchase = &handles[120]
+var Ec2ReservedInstancesConfiguration_numberOfInstancesToPurchase = &handles[121]
+var Ec2ReservedInstancesConfiguration_offeringClass = &handles[122]
+var Ec2ReservedInstancesConfiguration_instanceFamily = &handles[123]
+var Ec2ReservedInstancesConfiguration_instanceType = &handles[124]
+var Ec2ReservedInstancesConfiguration_currentGeneration = &handles[125]
+var Ec2ReservedInstancesConfiguration_platform = &handles[126]
+var Ec2ReservedInstancesConfiguration_tenancy = &handles[127]
+var Ec2ReservedInstancesConfiguration_sizeFlexEligible = &handles[128]
+
+var EcsService = &handles[129]
+var EcsService_configuration = &handles[130]
+var EcsService_costCalculation = &handles[131]
+
+var EcsServiceConfiguration = &handles[132]
+var EcsServiceConfiguration_compute = &handles[133]
+
+var EfficiencyMetricsByGroup = &handles[134]
+var EfficiencyMetricsByGroup_metricsByTime = &handles[135]
+var EfficiencyMetricsByGroup_group = &handles[136]
+var EfficiencyMetricsByGroup_message = &handles[137]
+
+var _EfficiencyMetricsByGroupList = &handles[138]
+var _EfficiencyMetricsByGroupList_member = &handles[139]
+
+var ElastiCacheCluster = &handles[140]
+var ElastiCacheCluster_costCalculation = &handles[141]
+
+var ElastiCacheReservedInstances = &handles[142]
+var ElastiCacheReservedInstances_configuration = &handles[143]
+var ElastiCacheReservedInstances_costCalculation = &handles[144]
+
+var ElastiCacheReservedInstancesConfiguration = &handles[145]
+var ElastiCacheReservedInstancesConfiguration_accountScope = &handles[146]
+var ElastiCacheReservedInstancesConfiguration_service = &handles[147]
+var ElastiCacheReservedInstancesConfiguration_term = &handles[148]
+var ElastiCacheReservedInstancesConfiguration_paymentOption = &handles[149]
+var ElastiCacheReservedInstancesConfiguration_reservedInstancesRegion = &handles[150]
+var ElastiCacheReservedInstancesConfiguration_upfrontCost = &handles[151]
+var ElastiCacheReservedInstancesConfiguration_monthlyRecurringCost = &handles[152]
+var ElastiCacheReservedInstancesConfiguration_normalizedUnitsToPurchase = &handles[153]
+var ElastiCacheReservedInstancesConfiguration_numberOfInstancesToPurchase = &handles[154]
+var ElastiCacheReservedInstancesConfiguration_instanceFamily = &handles[155]
+var ElastiCacheReservedInstancesConfiguration_instanceType = &handles[156]
+var ElastiCacheReservedInstancesConfiguration_currentGeneration = &handles[157]
+var ElastiCacheReservedInstancesConfiguration_sizeFlexEligible = &handles[158]
+
+var EnrollmentStatus = &handles[159]
+var EnrollmentStatus_ACTIVE = &handles[160]
+var EnrollmentStatus_INACTIVE = &handles[161]
+
+var EstimatedDiscounts = &handles[162]
+var EstimatedDiscounts_savingsPlansDiscount = &handles[163]
+var EstimatedDiscounts_reservedInstancesDiscount = &handles[164]
+var EstimatedDiscounts_otherDiscount = &handles[165]
+
+var Filter = &handles[166]
+var Filter_restartNeeded = &handles[167]
+var Filter_rollbackPossible = &handles[168]
+var Filter_implementationEfforts = &handles[169]
+var Filter_accountIds = &handles[170]
+var Filter_regions = &handles[171]
+var Filter_resourceTypes = &handles[172]
+var Filter_actionTypes = &handles[173]
+var Filter_tags = &handles[174]
+var Filter_resourceIds = &handles[175]
+var Filter_resourceArns = &handles[176]
+var Filter_recommendationIds = &handles[177]
+
+var GranularityType = &handles[178]
+var GranularityType_DAILY = &handles[179]
+var GranularityType_MONTHLY = &handles[180]
+
+var ImplementationEffort = &handles[181]
+var ImplementationEffort_VERY_LOW = &handles[182]
+var ImplementationEffort_LOW = &handles[183]
+var ImplementationEffort_MEDIUM = &handles[184]
+var ImplementationEffort_HIGH = &handles[185]
+var ImplementationEffort_VERY_HIGH = &handles[186]
+
+var _ImplementationEffortList = &handles[187]
+var _ImplementationEffortList_member = &handles[188]
+
+var InstanceConfiguration = &handles[189]
+var InstanceConfiguration_type = &handles[190]
+
+var InternalServerException = &handles[191]
+var InternalServerException_message = &handles[192]
+
+var LambdaFunction = &handles[193]
+var LambdaFunction_configuration = &handles[194]
+var LambdaFunction_costCalculation = &handles[195]
+
+var LambdaFunctionConfiguration = &handles[196]
+var LambdaFunctionConfiguration_compute = &handles[197]
+
+var _MaxResults = &handles[198]
+
+var MemberAccountDiscountVisibility = &handles[199]
+var MemberAccountDiscountVisibility_ALL = &handles[200]
+var MemberAccountDiscountVisibility_NONE = &handles[201]
+
+var MemoryDbCluster = &handles[202]
+var MemoryDbCluster_costCalculation = &handles[203]
+
+var MemoryDbReservedInstances = &handles[204]
+var MemoryDbReservedInstances_configuration = &handles[205]
+var MemoryDbReservedInstances_costCalculation = &handles[206]
+
+var MemoryDbReservedInstancesConfiguration = &handles[207]
+var MemoryDbReservedInstancesConfiguration_accountScope = &handles[208]
+var MemoryDbReservedInstancesConfiguration_service = &handles[209]
+var MemoryDbReservedInstancesConfiguration_term = &handles[210]
+var MemoryDbReservedInstancesConfiguration_paymentOption = &handles[211]
+var MemoryDbReservedInstancesConfiguration_reservedInstancesRegion = &handles[212]
+var MemoryDbReservedInstancesConfiguration_upfrontCost = &handles[213]
+var MemoryDbReservedInstancesConfiguration_monthlyRecurringCost = &handles[214]
+var MemoryDbReservedInstancesConfiguration_normalizedUnitsToPurchase = &handles[215]
+var MemoryDbReservedInstancesConfiguration_numberOfInstancesToPurchase = &handles[216]
+var MemoryDbReservedInstancesConfiguration_instanceType = &handles[217]
+var MemoryDbReservedInstancesConfiguration_instanceFamily = &handles[218]
+var MemoryDbReservedInstancesConfiguration_sizeFlexEligible = &handles[219]
+var MemoryDbReservedInstancesConfiguration_currentGeneration = &handles[220]
+
+var MetricsByTime = &handles[221]
+var MetricsByTime_score = &handles[222]
+var MetricsByTime_savings = &handles[223]
+var MetricsByTime_spend = &handles[224]
+var MetricsByTime_timestamp = &handles[225]
+
+var _MetricsByTimeList = &handles[226]
+var _MetricsByTimeList_member = &handles[227]
+
+var MixedInstanceConfiguration = &handles[228]
+var MixedInstanceConfiguration_type = &handles[229]
+
+var _MixedInstanceConfigurationList = &handles[230]
+var _MixedInstanceConfigurationList_member = &handles[231]
+
+var NatGateway = &handles[232]
+var NatGateway_configuration = &handles[233]
+var NatGateway_costCalculation = &handles[234]
+
+var NatGatewayConfiguration = &handles[235]
+var NatGatewayConfiguration_activeConnectionCount = &handles[236]
+var NatGatewayConfiguration_packetsInFromSource = &handles[237]
+var NatGatewayConfiguration_packetsInFromDestination = &handles[238]
+
+var OpenSearchReservedInstances = &handles[239]
+var OpenSearchReservedInstances_configuration = &handles[240]
+var OpenSearchReservedInstances_costCalculation = &handles[241]
+
+var OpenSearchReservedInstancesConfiguration = &handles[242]
+var OpenSearchReservedInstancesConfiguration_accountScope = &handles[243]
+var OpenSearchReservedInstancesConfiguration_service = &handles[244]
+var OpenSearchReservedInstancesConfiguration_term = &handles[245]
+var OpenSearchReservedInstancesConfiguration_paymentOption = &handles[246]
+var OpenSearchReservedInstancesConfiguration_reservedInstancesRegion = &handles[247]
+var OpenSearchReservedInstancesConfiguration_upfrontCost = &handles[248]
+var OpenSearchReservedInstancesConfiguration_monthlyRecurringCost = &handles[249]
+var OpenSearchReservedInstancesConfiguration_normalizedUnitsToPurchase = &handles[250]
+var OpenSearchReservedInstancesConfiguration_numberOfInstancesToPurchase = &handles[251]
+var OpenSearchReservedInstancesConfiguration_instanceType = &handles[252]
+var OpenSearchReservedInstancesConfiguration_currentGeneration = &handles[253]
+var OpenSearchReservedInstancesConfiguration_sizeFlexEligible = &handles[254]
+
+var Order = &handles[255]
+var Order_ASC = &handles[256]
+var Order_DESC = &handles[257]
+
+var OrderBy = &handles[258]
+var OrderBy_dimension = &handles[259]
+var OrderBy_order = &handles[260]
+
+var PaymentOption = &handles[261]
+var PaymentOption_ALL_UPFRONT = &handles[262]
+var PaymentOption_PARTIAL_UPFRONT = &handles[263]
+var PaymentOption_NO_UPFRONT = &handles[264]
+
+var PreferredCommitment = &handles[265]
+var PreferredCommitment_term = &handles[266]
+var PreferredCommitment_paymentOption = &handles[267]
+
+var RdsDbInstance = &handles[268]
+var RdsDbInstance_configuration = &handles[269]
+var RdsDbInstance_costCalculation = &handles[270]
+
+var RdsDbInstanceConfiguration = &handles[271]
+var RdsDbInstanceConfiguration_instance = &handles[272]
+
+var RdsDbInstanceStorage = &handles[273]
+var RdsDbInstanceStorage_configuration = &handles[274]
+var RdsDbInstanceStorage_costCalculation = &handles[275]
+
+var RdsDbInstanceStorageConfiguration = &handles[276]
+var RdsDbInstanceStorageConfiguration_storageType = &handles[277]
+var RdsDbInstanceStorageConfiguration_allocatedStorageInGb = &handles[278]
+var RdsDbInstanceStorageConfiguration_iops = &handles[279]
+var RdsDbInstanceStorageConfiguration_storageThroughput = &handles[280]
+
+var RdsReservedInstances = &handles[281]
+var RdsReservedInstances_configuration = &handles[282]
+var RdsReservedInstances_costCalculation = &handles[283]
+
+var RdsReservedInstancesConfiguration = &handles[284]
+var RdsReservedInstancesConfiguration_accountScope = &handles[285]
+var RdsReservedInstancesConfiguration_service = &handles[286]
+var RdsReservedInstancesConfiguration_term = &handles[287]
+var RdsReservedInstancesConfiguration_paymentOption = &handles[288]
+var RdsReservedInstancesConfiguration_reservedInstancesRegion = &handles[289]
+var RdsReservedInstancesConfiguration_upfrontCost = &handles[290]
+var RdsReservedInstancesConfiguration_monthlyRecurringCost = &handles[291]
+var RdsReservedInstancesConfiguration_normalizedUnitsToPurchase = &handles[292]
+var RdsReservedInstancesConfiguration_numberOfInstancesToPurchase = &handles[293]
+var RdsReservedInstancesConfiguration_instanceFamily = &handles[294]
+var RdsReservedInstancesConfiguration_instanceType = &handles[295]
+var RdsReservedInstancesConfiguration_sizeFlexEligible = &handles[296]
+var RdsReservedInstancesConfiguration_currentGeneration = &handles[297]
+var RdsReservedInstancesConfiguration_licenseModel = &handles[298]
+var RdsReservedInstancesConfiguration_databaseEdition = &handles[299]
+var RdsReservedInstancesConfiguration_databaseEngine = &handles[300]
+var RdsReservedInstancesConfiguration_deploymentOption = &handles[301]
+
+var Recommendation = &handles[302]
+var Recommendation_recommendationId = &handles[303]
+var Recommendation_accountId = &handles[304]
+var Recommendation_region = &handles[305]
+var Recommendation_resourceId = &handles[306]
+var Recommendation_resourceArn = &handles[307]
+var Recommendation_currentResourceType = &handles[308]
+var Recommendation_recommendedResourceType = &handles[309]
+var Recommendation_estimatedMonthlySavings = &handles[310]
+var Recommendation_estimatedSavingsPercentage = &handles[311]
+var Recommendation_estimatedMonthlyCost = &handles[312]
+var Recommendation_currencyCode = &handles[313]
+var Recommendation_implementationEffort = &handles[314]
+var Recommendation_restartNeeded = &handles[315]
+var Recommendation_actionType = &handles[316]
+var Recommendation_rollbackPossible = &handles[317]
+var Recommendation_currentResourceSummary = &handles[318]
+var Recommendation_recommendedResourceSummary = &handles[319]
+var Recommendation_lastRefreshTimestamp = &handles[320]
+var Recommendation_recommendationLookbackPeriodInDays = &handles[321]
+var Recommendation_source = &handles[322]
+var Recommendation_tags = &handles[323]
+
+var _RecommendationIdList = &handles[324]
+var _RecommendationIdList_member = &handles[325]
+
+var _RecommendationList = &handles[326]
+var _RecommendationList_member = &handles[327]
+
+var _RecommendationSummariesList = &handles[328]
+var _RecommendationSummariesList_member = &handles[329]
+
+var RecommendationSummary = &handles[330]
+var RecommendationSummary_group = &handles[331]
+var RecommendationSummary_estimatedMonthlySavings = &handles[332]
+var RecommendationSummary_recommendationCount = &handles[333]
+
+var RedshiftReservedInstances = &handles[334]
+var RedshiftReservedInstances_configuration = &handles[335]
+var RedshiftReservedInstances_costCalculation = &handles[336]
+
+var RedshiftReservedInstancesConfiguration = &handles[337]
+var RedshiftReservedInstancesConfiguration_accountScope = &handles[338]
+var RedshiftReservedInstancesConfiguration_service = &handles[339]
+var RedshiftReservedInstancesConfiguration_term = &handles[340]
+var RedshiftReservedInstancesConfiguration_paymentOption = &handles[341]
+var RedshiftReservedInstancesConfiguration_reservedInstancesRegion = &handles[342]
+var RedshiftReservedInstancesConfiguration_upfrontCost = &handles[343]
+var RedshiftReservedInstancesConfiguration_monthlyRecurringCost = &handles[344]
+var RedshiftReservedInstancesConfiguration_normalizedUnitsToPurchase = &handles[345]
+var RedshiftReservedInstancesConfiguration_numberOfInstancesToPurchase = &handles[346]
+var RedshiftReservedInstancesConfiguration_instanceFamily = &handles[347]
+var RedshiftReservedInstancesConfiguration_instanceType = &handles[348]
+var RedshiftReservedInstancesConfiguration_sizeFlexEligible = &handles[349]
+var RedshiftReservedInstancesConfiguration_currentGeneration = &handles[350]
+
+var _RegionList = &handles[351]
+var _RegionList_member = &handles[352]
+
+var ReservedInstancesCostCalculation = &handles[353]
+var ReservedInstancesCostCalculation_pricing = &handles[354]
+
+var ReservedInstancesPricing = &handles[355]
+var ReservedInstancesPricing_estimatedOnDemandCost = &handles[356]
+var ReservedInstancesPricing_monthlyReservationEligibleCost = &handles[357]
+var ReservedInstancesPricing_savingsPercentage = &handles[358]
+var ReservedInstancesPricing_estimatedMonthlyAmortizedReservationCost = &handles[359]
+
+var _ResourceArnList = &handles[360]
+var _ResourceArnList_member = &handles[361]
+
+var ResourceCostCalculation = &handles[362]
+var ResourceCostCalculation_usages = &handles[363]
+var ResourceCostCalculation_pricing = &handles[364]
+
+var ResourceDetails = &handles[365]
+var ResourceDetails_lambdaFunction = &handles[366]
+var ResourceDetails_ecsService = &handles[367]
+var ResourceDetails_ec2Instance = &handles[368]
+var ResourceDetails_ebsVolume = &handles[369]
+var ResourceDetails_ec2AutoScalingGroup = &handles[370]
+var ResourceDetails_ec2ReservedInstances = &handles[371]
+var ResourceDetails_rdsReservedInstances = &handles[372]
+var ResourceDetails_elastiCacheReservedInstances = &handles[373]
+var ResourceDetails_openSearchReservedInstances = &handles[374]
+var ResourceDetails_redshiftReservedInstances = &handles[375]
+var ResourceDetails_ec2InstanceSavingsPlans = &handles[376]
+var ResourceDetails_computeSavingsPlans = &handles[377]
+var ResourceDetails_sageMakerSavingsPlans = &handles[378]
+var ResourceDetails_rdsDbInstance = &handles[379]
+var ResourceDetails_rdsDbInstanceStorage = &handles[380]
+var ResourceDetails_auroraDbClusterStorage = &handles[381]
+var ResourceDetails_dynamoDbReservedCapacity = &handles[382]
+var ResourceDetails_memoryDbReservedInstances = &handles[383]
+var ResourceDetails_natGateway = &handles[384]
+var ResourceDetails_dynamoDbTable = &handles[385]
+var ResourceDetails_elastiCacheCluster = &handles[386]
+var ResourceDetails_memoryDbCluster = &handles[387]
+var ResourceDetails_documentDbCluster = &handles[388]
+var ResourceDetails_workSpaces = &handles[389]
+var ResourceDetails_sageMakerEndpoint = &handles[390]
+
+var _ResourceIdList = &handles[391]
+var _ResourceIdList_member = &handles[392]
+
+var ResourceNotFoundException = &handles[393]
+var ResourceNotFoundException_message = &handles[394]
+var ResourceNotFoundException_resourceId = &handles[395]
+
+var ResourcePricing = &handles[396]
+var ResourcePricing_estimatedCostBeforeDiscounts = &handles[397]
+var ResourcePricing_estimatedNetUnusedAmortizedCommitments = &handles[398]
+var ResourcePricing_estimatedDiscounts = &handles[399]
+var ResourcePricing_estimatedCostAfterDiscounts = &handles[400]
+
+var ResourceType = &handles[401]
+var ResourceType_EC2_INSTANCE = &handles[402]
+var ResourceType_LAMBDA_FUNCTION = &handles[403]
+var ResourceType_EBS_VOLUME = &handles[404]
+var ResourceType_ECS_SERVICE = &handles[405]
+var ResourceType_EC2_AUTO_SCALING_GROUP = &handles[406]
+var ResourceType_EC2_INSTANCE_SAVINGS_PLANS = &handles[407]
+var ResourceType_COMPUTE_SAVINGS_PLANS = &handles[408]
+var ResourceType_SAGE_MAKER_SAVINGS_PLANS = &handles[409]
+var ResourceType_EC2_RESERVED_INSTANCES = &handles[410]
+var ResourceType_RDS_RESERVED_INSTANCES = &handles[411]
+var ResourceType_OPEN_SEARCH_RESERVED_INSTANCES = &handles[412]
+var ResourceType_REDSHIFT_RESERVED_INSTANCES = &handles[413]
+var ResourceType_ELASTI_CACHE_RESERVED_INSTANCES = &handles[414]
+var ResourceType_RDS_DB_INSTANCE_STORAGE = &handles[415]
+var ResourceType_RDS_DB_INSTANCE = &handles[416]
+var ResourceType_AURORA_DB_CLUSTER_STORAGE = &handles[417]
+var ResourceType_DYNAMO_DB_RESERVED_CAPACITY = &handles[418]
+var ResourceType_MEMORY_DB_RESERVED_INSTANCES = &handles[419]
+var ResourceType_NAT_GATEWAY = &handles[420]
+var ResourceType_DYNAMO_DB_TABLE = &handles[421]
+var ResourceType_ELASTI_CACHE_CLUSTER = &handles[422]
+var ResourceType_MEMORY_DB_CLUSTER = &handles[423]
+var ResourceType_DOCUMENT_DB_CLUSTER = &handles[424]
+var ResourceType_WORK_SPACES = &handles[425]
+var ResourceType_SAGE_MAKER_ENDPOINT = &handles[426]
+
+var _ResourceTypeList = &handles[427]
+var _ResourceTypeList_member = &handles[428]
+
+var SageMakerEndpoint = &handles[429]
+var SageMakerEndpoint_costCalculation = &handles[430]
+
+var SageMakerSavingsPlans = &handles[431]
+var SageMakerSavingsPlans_configuration = &handles[432]
+var SageMakerSavingsPlans_costCalculation = &handles[433]
+
+var SageMakerSavingsPlansConfiguration = &handles[434]
+var SageMakerSavingsPlansConfiguration_accountScope = &handles[435]
+var SageMakerSavingsPlansConfiguration_term = &handles[436]
+var SageMakerSavingsPlansConfiguration_paymentOption = &handles[437]
+var SageMakerSavingsPlansConfiguration_hourlyCommitment = &handles[438]
+
+var SavingsEstimationMode = &handles[439]
+var SavingsEstimationMode_BEFORE_DISCOUNTS = &handles[440]
+var SavingsEstimationMode_AFTER_DISCOUNTS = &handles[441]
+
+var SavingsPlansCostCalculation = &handles[442]
+var SavingsPlansCostCalculation_pricing = &handles[443]
+
+var SavingsPlansPricing = &handles[444]
+var SavingsPlansPricing_monthlySavingsPlansEligibleCost = &handles[445]
+var SavingsPlansPricing_estimatedMonthlyCommitment = &handles[446]
+var SavingsPlansPricing_savingsPercentage = &handles[447]
+var SavingsPlansPricing_estimatedOnDemandCost = &handles[448]
+
+var Source = &handles[449]
+var Source_COMPUTE_OPTIMIZER = &handles[450]
+var Source_COST_EXPLORER = &handles[451]
+
+var StorageConfiguration = &handles[452]
+var StorageConfiguration_type = &handles[453]
+var StorageConfiguration_sizeInGb = &handles[454]
+
+var SummaryMetrics = &handles[455]
+var SummaryMetrics_SAVINGS_PERCENTAGE = &handles[456]
+
+var _SummaryMetricsList = &handles[457]
+var _SummaryMetricsList_member = &handles[458]
+
+var SummaryMetricsResult = &handles[459]
+var SummaryMetricsResult_savingsPercentage = &handles[460]
+
+var Tag = &handles[461]
+var Tag_key = &handles[462]
+var Tag_value = &handles[463]
+
+var _TagList = &handles[464]
+var _TagList_member = &handles[465]
+
+var Term = &handles[466]
+var Term_ONE_YEAR = &handles[467]
+var Term_THREE_YEARS = &handles[468]
+
+var ThrottlingException = &handles[469]
+var ThrottlingException_message = &handles[470]
+
+var TimePeriod = &handles[471]
+var TimePeriod_start = &handles[472]
+var TimePeriod_end = &handles[473]
+
+var Usage = &handles[474]
+var Usage_usageType = &handles[475]
+var Usage_usageAmount = &handles[476]
+var Usage_operation = &handles[477]
+var Usage_productCode = &handles[478]
+var Usage_unit = &handles[479]
+
+var _UsageList = &handles[480]
+var _UsageList_member = &handles[481]
+
+var ValidationException = &handles[482]
+var ValidationException_message = &handles[483]
+var ValidationException_reason = &handles[484]
+var ValidationException_fields = &handles[485]
+
+var ValidationExceptionDetail = &handles[486]
+var ValidationExceptionDetail_fieldName = &handles[487]
+var ValidationExceptionDetail_message = &handles[488]
+
+var _ValidationExceptionDetails = &handles[489]
+var _ValidationExceptionDetails_member = &handles[490]
+
+var ValidationExceptionReason = &handles[491]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[492]
+var ValidationExceptionReason_OTHER = &handles[493]
+
+var WorkSpaces = &handles[494]
+var WorkSpaces_costCalculation = &handles[495]
+
+var GetPreferencesRequest = &handles[496]
+
+var GetPreferencesResponse = &handles[497]
+var GetPreferencesResponse_savingsEstimationMode = &handles[498]
+var GetPreferencesResponse_memberAccountDiscountVisibility = &handles[499]
+var GetPreferencesResponse_preferredCommitment = &handles[500]
+
+var GetRecommendationRequest = &handles[501]
+var GetRecommendationRequest_recommendationId = &handles[502]
+
+var GetRecommendationResponse = &handles[503]
+var GetRecommendationResponse_recommendationId = &handles[504]
+var GetRecommendationResponse_resourceId = &handles[505]
+var GetRecommendationResponse_resourceArn = &handles[506]
+var GetRecommendationResponse_accountId = &handles[507]
+var GetRecommendationResponse_currencyCode = &handles[508]
+var GetRecommendationResponse_recommendationLookbackPeriodInDays = &handles[509]
+var GetRecommendationResponse_costCalculationLookbackPeriodInDays = &handles[510]
+var GetRecommendationResponse_estimatedSavingsPercentage = &handles[511]
+var GetRecommendationResponse_estimatedSavingsOverCostCalculationLookbackPeriod = &handles[512]
+var GetRecommendationResponse_currentResourceType = &handles[513]
+var GetRecommendationResponse_recommendedResourceType = &handles[514]
+var GetRecommendationResponse_region = &handles[515]
+var GetRecommendationResponse_source = &handles[516]
+var GetRecommendationResponse_lastRefreshTimestamp = &handles[517]
+var GetRecommendationResponse_estimatedMonthlySavings = &handles[518]
+var GetRecommendationResponse_estimatedMonthlyCost = &handles[519]
+var GetRecommendationResponse_implementationEffort = &handles[520]
+var GetRecommendationResponse_restartNeeded = &handles[521]
+var GetRecommendationResponse_actionType = &handles[522]
+var GetRecommendationResponse_rollbackPossible = &handles[523]
+var GetRecommendationResponse_currentResourceDetails = &handles[524]
+var GetRecommendationResponse_recommendedResourceDetails = &handles[525]
+var GetRecommendationResponse_tags = &handles[526]
+
+var ListEfficiencyMetricsRequest = &handles[527]
+var ListEfficiencyMetricsRequest_groupBy = &handles[528]
+var ListEfficiencyMetricsRequest_granularity = &handles[529]
+var ListEfficiencyMetricsRequest_timePeriod = &handles[530]
+var ListEfficiencyMetricsRequest_maxResults = &handles[531]
+var ListEfficiencyMetricsRequest_orderBy = &handles[532]
+var ListEfficiencyMetricsRequest_nextToken = &handles[533]
+
+var ListEfficiencyMetricsResponse = &handles[534]
+var ListEfficiencyMetricsResponse_efficiencyMetricsByGroup = &handles[535]
+var ListEfficiencyMetricsResponse_nextToken = &handles[536]
+
+var ListEnrollmentStatusesRequest = &handles[537]
+var ListEnrollmentStatusesRequest_includeOrganizationInfo = &handles[538]
+var ListEnrollmentStatusesRequest_accountId = &handles[539]
+var ListEnrollmentStatusesRequest_nextToken = &handles[540]
+var ListEnrollmentStatusesRequest_maxResults = &handles[541]
+
+var ListEnrollmentStatusesResponse = &handles[542]
+var ListEnrollmentStatusesResponse_items = &handles[543]
+var ListEnrollmentStatusesResponse_includeMemberAccounts = &handles[544]
+var ListEnrollmentStatusesResponse_nextToken = &handles[545]
+
+var ListRecommendationsRequest = &handles[546]
+var ListRecommendationsRequest_filter = &handles[547]
+var ListRecommendationsRequest_orderBy = &handles[548]
+var ListRecommendationsRequest_includeAllRecommendations = &handles[549]
+var ListRecommendationsRequest_maxResults = &handles[550]
+var ListRecommendationsRequest_nextToken = &handles[551]
+
+var ListRecommendationsResponse = &handles[552]
+var ListRecommendationsResponse_items = &handles[553]
+var ListRecommendationsResponse_nextToken = &handles[554]
+
+var ListRecommendationSummariesRequest = &handles[555]
+var ListRecommendationSummariesRequest_filter = &handles[556]
+var ListRecommendationSummariesRequest_groupBy = &handles[557]
+var ListRecommendationSummariesRequest_maxResults = &handles[558]
+var ListRecommendationSummariesRequest_metrics = &handles[559]
+var ListRecommendationSummariesRequest_nextToken = &handles[560]
+
+var ListRecommendationSummariesResponse = &handles[561]
+var ListRecommendationSummariesResponse_estimatedTotalDedupedSavings = &handles[562]
+var ListRecommendationSummariesResponse_items = &handles[563]
+var ListRecommendationSummariesResponse_groupBy = &handles[564]
+var ListRecommendationSummariesResponse_currencyCode = &handles[565]
+var ListRecommendationSummariesResponse_metrics = &handles[566]
+var ListRecommendationSummariesResponse_nextToken = &handles[567]
+
+var UpdateEnrollmentStatusRequest = &handles[568]
+var UpdateEnrollmentStatusRequest_status = &handles[569]
+var UpdateEnrollmentStatusRequest_includeMemberAccounts = &handles[570]
+
+var UpdateEnrollmentStatusResponse = &handles[571]
+var UpdateEnrollmentStatusResponse_status = &handles[572]
+
+var UpdatePreferencesRequest = &handles[573]
+var UpdatePreferencesRequest_savingsEstimationMode = &handles[574]
+var UpdatePreferencesRequest_memberAccountDiscountVisibility = &handles[575]
+var UpdatePreferencesRequest_preferredCommitment = &handles[576]
+
+var UpdatePreferencesResponse = &handles[577]
+var UpdatePreferencesResponse_savingsEstimationMode = &handles[578]
+var UpdatePreferencesResponse_memberAccountDiscountVisibility = &handles[579]
+var UpdatePreferencesResponse_preferredCommitment = &handles[580]
+
+var CostOptimizationHubService = &smithy.ServiceSchema{Schema: &handles[8], Version: "2022-07-26"}

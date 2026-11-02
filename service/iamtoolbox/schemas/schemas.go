@@ -4,281 +4,263 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetRequestAuthorizationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "GetRequestAuthorizationDetails",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/authorization-details/{authorizationId}",
-	Code: 200})
-
-var _AuthRequestService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AuthRequestService",
-}, smithy.ShapeTypeService, 0)
-
-var AuthRequestService = smithy.NewServiceSchema(_AuthRequestService, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AttachedTo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AttachedTo",
-}, smithy.ShapeTypeStructure, 1)
-var AttachedTo_arn *smithy.Schema
-
-var _AttachedToList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AttachedToList",
-}, smithy.ShapeTypeList, 1)
-var _AttachedToList_member *smithy.Schema
-
-var _AuthorizationContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "AuthorizationContext",
-}, smithy.ShapeTypeMap, 2)
-var _AuthorizationContext_key *smithy.Schema
-
-var _AuthorizationContext_value *smithy.Schema
-
-var EvaluatedEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "EvaluatedEffect",
-}, smithy.ShapeTypeEnum, 3)
-var EvaluatedEffect_ALLOW *smithy.Schema
-
-var EvaluatedEffect_EXPLICIT_DENY *smithy.Schema
-
-var EvaluatedEffect_IMPLICIT_DENY *smithy.Schema
-
-var Evaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "Evaluation",
-}, smithy.ShapeTypeStructure, 5)
-var Evaluation_action *smithy.Schema
-
-var Evaluation_resource *smithy.Schema
-
-var Evaluation_context *smithy.Schema
-
-var Evaluation_evaluatedEffect *smithy.Schema
-
-var Evaluation_matchedPolicies *smithy.Schema
-
-var _Evaluations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "Evaluations",
-}, smithy.ShapeTypeList, 1)
-var _Evaluations_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var MatchedPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "MatchedPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var MatchedPolicy_uri *smithy.Schema
-
-var MatchedPolicy_matchedStatements *smithy.Schema
-
-var _MatchedPolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "MatchedPolicyList",
-}, smithy.ShapeTypeList, 1)
-var _MatchedPolicyList_member *smithy.Schema
-
-var MatchedStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "MatchedStatement",
-}, smithy.ShapeTypeStructure, 2)
-var MatchedStatement_sid *smithy.Schema
-
-var MatchedStatement_evaluatedEffect *smithy.Schema
-
-var _MatchedStatementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "MatchedStatementList",
-}, smithy.ShapeTypeList, 1)
-var _MatchedStatementList_member *smithy.Schema
-
-var PolicyInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "PolicyInfo",
-}, smithy.ShapeTypeStructure, 4)
-var PolicyInfo_type *smithy.Schema
-
-var PolicyInfo_inline *smithy.Schema
-
-var PolicyInfo_uri *smithy.Schema
-
-var PolicyInfo_attachedTo *smithy.Schema
-
-var _PolicyInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "PolicyInfoList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyInfoList_member *smithy.Schema
-
-var PolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "PolicyType",
-}, smithy.ShapeTypeEnum, 7)
-var PolicyType_IDENTITY_BASED_POLICY *smithy.Schema
-
-var PolicyType_RESOURCE_BASED_POLICY *smithy.Schema
-
-var PolicyType_PERMISSIONS_BOUNDARY *smithy.Schema
-
-var PolicyType_SESSION_POLICY *smithy.Schema
-
-var PolicyType_SERVICE_CONTROL_POLICY *smithy.Schema
-
-var PolicyType_RESOURCE_CONTROL_POLICY *smithy.Schema
-
-var PolicyType_VPC_ENDPOINT_POLICY *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var StatementEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "StatementEffect",
-}, smithy.ShapeTypeEnum, 2)
-var StatementEffect_ALLOW *smithy.Schema
-
-var StatementEffect_DENY *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var GetRequestAuthorizationDetailsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "GetRequestAuthorizationDetailsInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetRequestAuthorizationDetailsInput_authorizationId *smithy.Schema
-
-var GetRequestAuthorizationDetailsInput_nextToken *smithy.Schema
-
-var GetRequestAuthorizationDetailsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iamtoolbox",
-	Name:      "GetRequestAuthorizationDetailsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetRequestAuthorizationDetailsOutput_requestContext *smithy.Schema
-
-var GetRequestAuthorizationDetailsOutput_evaluations *smithy.Schema
-
-var GetRequestAuthorizationDetailsOutput_policies *smithy.Schema
-
-var GetRequestAuthorizationDetailsOutput_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AttachedTo_arn = AttachedTo.AddMember("arn", smithyprelude.String)
-
-	_AttachedToList_member = _AttachedToList.AddMember("member", AttachedTo)
-
-	_AuthorizationContext_key = _AuthorizationContext.AddMember("key", smithyprelude.String)
-
-	_AuthorizationContext_value = _AuthorizationContext.AddMember("value", smithyprelude.Document)
-
-	EvaluatedEffect_ALLOW = EvaluatedEffect.AddMember("ALLOW", smithyprelude.Unit)
-
-	EvaluatedEffect_EXPLICIT_DENY = EvaluatedEffect.AddMember("EXPLICIT_DENY", smithyprelude.Unit)
-
-	EvaluatedEffect_IMPLICIT_DENY = EvaluatedEffect.AddMember("IMPLICIT_DENY", smithyprelude.Unit)
-
-	StatementEffect_ALLOW = StatementEffect.AddMember("ALLOW", smithyprelude.Unit)
-
-	StatementEffect_DENY = StatementEffect.AddMember("DENY", smithyprelude.Unit)
-
-	MatchedStatement_sid = MatchedStatement.AddMember("sid", smithyprelude.String)
-
-	MatchedStatement_evaluatedEffect = MatchedStatement.AddMember("evaluatedEffect", StatementEffect)
-
-	_MatchedStatementList_member = _MatchedStatementList.AddMember("member", MatchedStatement)
-
-	MatchedPolicy_uri = MatchedPolicy.AddMember("uri", smithyprelude.String)
-
-	MatchedPolicy_matchedStatements = MatchedPolicy.AddMember("matchedStatements", _MatchedStatementList)
-
-	_MatchedPolicyList_member = _MatchedPolicyList.AddMember("member", MatchedPolicy)
-
-	Evaluation_action = Evaluation.AddMember("action", smithyprelude.String)
-
-	Evaluation_resource = Evaluation.AddMember("resource", smithyprelude.String)
-
-	Evaluation_context = Evaluation.AddMember("context", _AuthorizationContext)
-
-	Evaluation_evaluatedEffect = Evaluation.AddMember("evaluatedEffect", EvaluatedEffect)
-
-	Evaluation_matchedPolicies = Evaluation.AddMember("matchedPolicies", _MatchedPolicyList)
-
-	_Evaluations_member = _Evaluations.AddMember("member", Evaluation)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	PolicyType_IDENTITY_BASED_POLICY = PolicyType.AddMember("IDENTITY_BASED_POLICY", smithyprelude.Unit)
-
-	PolicyType_RESOURCE_BASED_POLICY = PolicyType.AddMember("RESOURCE_BASED_POLICY", smithyprelude.Unit)
-
-	PolicyType_PERMISSIONS_BOUNDARY = PolicyType.AddMember("PERMISSIONS_BOUNDARY", smithyprelude.Unit)
-
-	PolicyType_SESSION_POLICY = PolicyType.AddMember("SESSION_POLICY", smithyprelude.Unit)
-
-	PolicyType_SERVICE_CONTROL_POLICY = PolicyType.AddMember("SERVICE_CONTROL_POLICY", smithyprelude.Unit)
-
-	PolicyType_RESOURCE_CONTROL_POLICY = PolicyType.AddMember("RESOURCE_CONTROL_POLICY", smithyprelude.Unit)
-
-	PolicyType_VPC_ENDPOINT_POLICY = PolicyType.AddMember("VPC_ENDPOINT_POLICY", smithyprelude.Unit)
-
-	PolicyInfo_type = PolicyInfo.AddMember("type", PolicyType)
-
-	PolicyInfo_inline = PolicyInfo.AddMember("inline", smithyprelude.Boolean)
-
-	PolicyInfo_uri = PolicyInfo.AddMember("uri", smithyprelude.String)
-
-	PolicyInfo_attachedTo = PolicyInfo.AddMember("attachedTo", _AttachedToList)
-
-	_PolicyInfoList_member = _PolicyInfoList.AddMember("member", PolicyInfo)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	GetRequestAuthorizationDetailsInput_authorizationId = GetRequestAuthorizationDetailsInput.AddMember("authorizationId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetRequestAuthorizationDetailsInput_nextToken = GetRequestAuthorizationDetailsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetRequestAuthorizationDetailsOutput_requestContext = GetRequestAuthorizationDetailsOutput.AddMember("requestContext", _AuthorizationContext)
-
-	GetRequestAuthorizationDetailsOutput_evaluations = GetRequestAuthorizationDetailsOutput.AddMember("evaluations", _Evaluations)
-
-	GetRequestAuthorizationDetailsOutput_policies = GetRequestAuthorizationDetailsOutput.AddMember("policies", _PolicyInfoList)
-
-	GetRequestAuthorizationDetailsOutput_nextToken = GetRequestAuthorizationDetailsOutput.AddMember("nextToken", smithyprelude.String)
-
+const blob = "" +
+	"GetRequestAuthorizationDetailsOutputGetRequestAuthorizationDetailsInputResourceNotFoundExceptionInte" +
+	"rnalServerExceptionRESOURCE_CONTROL_POLICYSERVICE_CONTROL_POLICYAccessDeniedExceptionIDENTITY_BASED_" +
+	"POLICYRESOURCE_BASED_POLICYAuthorizationContextMatchedStatementListPERMISSIONS_BOUNDARYVPC_ENDPOINT_" +
+	"POLICYValidationExceptionAuthRequestServiceMatchedPolicyListmatchedStatementsEvaluatedEffectStatemen" +
+	"tEffectauthorizationIdevaluatedEffectmatchedPoliciesAttachedToListPolicyInfoListSESSION_POLICYreques" +
+	"tContextEXPLICIT_DENYIMPLICIT_DENYEvaluationsevaluationsPolicyTypeattachedTonextTokenDocumentpolicie" +
+	"sresourceBooleancontextmessageStringactioninlinememberALLOWvalueUnittypearnkeysiduri"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.iamtoolbox", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 325, Target: 1, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 164, Target: 2, Traits: 2, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 623, Target: 65, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 452, Target: 4, Traits: 1, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 672, Target: 65, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 452, Target: 6, Traits: 1, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 648, Target: 4, Traits: 1, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 227, Target: 8, Traits: 1, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 675, Target: 65, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 659, Target: 66, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 377, Target: 11, Traits: 1, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 654, Target: 67, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 508, Target: 67, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 521, Target: 67, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 534, Target: 15, Traits: 1, StrLen: 10, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 636, Target: 65, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 601, Target: 65, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 616, Target: 8, Traits: 1, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 422, Target: 11, Traits: 1, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 437, Target: 28, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 534, Target: 21, Traits: 1, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 648, Target: 15, Traits: 1, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 96, Target: 23, Traits: 3, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 623, Target: 65, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 343, Target: 25, Traits: 1, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 681, Target: 65, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 360, Target: 33, Traits: 1, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 343, Target: 28, Traits: 1, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 648, Target: 25, Traits: 1, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 247, Target: 30, Traits: 1, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 678, Target: 65, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 422, Target: 52, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 247, Target: 33, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 648, Target: 30, Traits: 1, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 466, Target: 35, Traits: 1, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 668, Target: 42, Traits: 1, StrLen: 4, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 642, Target: 68, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 681, Target: 65, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 566, Target: 6, Traits: 1, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 466, Target: 40, Traits: 1, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 648, Target: 35, Traits: 1, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 556, Target: 42, Traits: 1, StrLen: 10, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 185, Target: 67, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 206, Target: 67, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 267, Target: 67, Traits: 1, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 480, Target: 67, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 142, Target: 67, Traits: 1, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 119, Target: 67, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 287, Target: 67, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 71, Target: 50, Traits: 4, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 623, Target: 65, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 392, Target: 52, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 654, Target: 67, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 517, Target: 67, Traits: 1, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 306, Target: 55, Traits: 5, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 623, Target: 65, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 36, Target: 57, Traits: 1, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 407, Target: 65, Traits: 6, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 576, Target: 65, Traits: 7, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 60, Traits: 1, StrLen: 36, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 494, Target: 8, Traits: 1, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 545, Target: 21, Traits: 1, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 593, Target: 40, Traits: 1, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 576, Target: 65, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 630, Target: 65, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 585, Target: 66, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 2},
+		{StrOff: 664, Target: 67, Traits: 1, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 609, Target: 68, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/authorization-details/{authorizationId}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [69]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+}
+
+var GetRequestAuthorizationDetails = &handles[0]
+
+var _AuthRequestService = &handles[1]
+
+var AccessDeniedException = &handles[2]
+var AccessDeniedException_message = &handles[3]
+
+var AttachedTo = &handles[4]
+var AttachedTo_arn = &handles[5]
+
+var _AttachedToList = &handles[6]
+var _AttachedToList_member = &handles[7]
+
+var _AuthorizationContext = &handles[8]
+var _AuthorizationContext_key = &handles[9]
+var _AuthorizationContext_value = &handles[10]
+
+var EvaluatedEffect = &handles[11]
+var EvaluatedEffect_ALLOW = &handles[12]
+var EvaluatedEffect_EXPLICIT_DENY = &handles[13]
+var EvaluatedEffect_IMPLICIT_DENY = &handles[14]
+
+var Evaluation = &handles[15]
+var Evaluation_action = &handles[16]
+var Evaluation_resource = &handles[17]
+var Evaluation_context = &handles[18]
+var Evaluation_evaluatedEffect = &handles[19]
+var Evaluation_matchedPolicies = &handles[20]
+
+var _Evaluations = &handles[21]
+var _Evaluations_member = &handles[22]
+
+var InternalServerException = &handles[23]
+var InternalServerException_message = &handles[24]
+
+var MatchedPolicy = &handles[25]
+var MatchedPolicy_uri = &handles[26]
+var MatchedPolicy_matchedStatements = &handles[27]
+
+var _MatchedPolicyList = &handles[28]
+var _MatchedPolicyList_member = &handles[29]
+
+var MatchedStatement = &handles[30]
+var MatchedStatement_sid = &handles[31]
+var MatchedStatement_evaluatedEffect = &handles[32]
+
+var _MatchedStatementList = &handles[33]
+var _MatchedStatementList_member = &handles[34]
+
+var PolicyInfo = &handles[35]
+var PolicyInfo_type = &handles[36]
+var PolicyInfo_inline = &handles[37]
+var PolicyInfo_uri = &handles[38]
+var PolicyInfo_attachedTo = &handles[39]
+
+var _PolicyInfoList = &handles[40]
+var _PolicyInfoList_member = &handles[41]
+
+var PolicyType = &handles[42]
+var PolicyType_IDENTITY_BASED_POLICY = &handles[43]
+var PolicyType_RESOURCE_BASED_POLICY = &handles[44]
+var PolicyType_PERMISSIONS_BOUNDARY = &handles[45]
+var PolicyType_SESSION_POLICY = &handles[46]
+var PolicyType_SERVICE_CONTROL_POLICY = &handles[47]
+var PolicyType_RESOURCE_CONTROL_POLICY = &handles[48]
+var PolicyType_VPC_ENDPOINT_POLICY = &handles[49]
+
+var ResourceNotFoundException = &handles[50]
+var ResourceNotFoundException_message = &handles[51]
+
+var StatementEffect = &handles[52]
+var StatementEffect_ALLOW = &handles[53]
+var StatementEffect_DENY = &handles[54]
+
+var ValidationException = &handles[55]
+var ValidationException_message = &handles[56]
+
+var GetRequestAuthorizationDetailsInput = &handles[57]
+var GetRequestAuthorizationDetailsInput_authorizationId = &handles[58]
+var GetRequestAuthorizationDetailsInput_nextToken = &handles[59]
+
+var GetRequestAuthorizationDetailsOutput = &handles[60]
+var GetRequestAuthorizationDetailsOutput_requestContext = &handles[61]
+var GetRequestAuthorizationDetailsOutput_evaluations = &handles[62]
+var GetRequestAuthorizationDetailsOutput_policies = &handles[63]
+var GetRequestAuthorizationDetailsOutput_nextToken = &handles[64]
+
+var AuthRequestService = &smithy.ServiceSchema{Schema: &handles[1], Version: "2018-05-10"}

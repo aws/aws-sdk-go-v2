@@ -4,446 +4,389 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "GetDeployments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetDeployments",
-	Code: 200})
-
-var GetDeviceRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "GetDeviceRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetDeviceRegistration",
-	Code: 200})
-
-var SendHeartbeat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "SendHeartbeat",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/SendHeartbeat",
-	Code: 200})
-
-var _AmazonSageMakerEdge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "AmazonSageMakerEdge",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonSageMakerEdge = smithy.NewServiceSchema(_AmazonSageMakerEdge, "2020-09-23")
-
-var _CacheTTLSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "CacheTTLSeconds",
-}, smithy.ShapeTypeString, 0)
-
-var Checksum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Checksum",
-}, smithy.ShapeTypeStructure, 2)
-var Checksum_Type *smithy.Schema
-
-var Checksum_Sum *smithy.Schema
-
-var _ChecksumString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "ChecksumString",
-}, smithy.ShapeTypeString, 0)
-
-var ChecksumType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "ChecksumType",
-}, smithy.ShapeTypeEnum, 1)
-var ChecksumType_Sha1 *smithy.Schema
-
-var Definition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Definition",
-}, smithy.ShapeTypeStructure, 4)
-var Definition_ModelHandle *smithy.Schema
-
-var Definition_S3Url *smithy.Schema
-
-var Definition_Checksum *smithy.Schema
-
-var Definition_State *smithy.Schema
-
-var _Definitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Definitions",
-}, smithy.ShapeTypeList, 1)
-var _Definitions_member *smithy.Schema
-
-var DeploymentModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "DeploymentModel",
-}, smithy.ShapeTypeStructure, 8)
-var DeploymentModel_ModelHandle *smithy.Schema
-
-var DeploymentModel_ModelName *smithy.Schema
-
-var DeploymentModel_ModelVersion *smithy.Schema
-
-var DeploymentModel_DesiredState *smithy.Schema
-
-var DeploymentModel_State *smithy.Schema
-
-var DeploymentModel_Status *smithy.Schema
-
-var DeploymentModel_StatusReason *smithy.Schema
-
-var DeploymentModel_RollbackFailureReason *smithy.Schema
-
-var _DeploymentModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "DeploymentModels",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentModels_member *smithy.Schema
-
-var DeploymentResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "DeploymentResult",
-}, smithy.ShapeTypeStructure, 6)
-var DeploymentResult_DeploymentName *smithy.Schema
-
-var DeploymentResult_DeploymentStatus *smithy.Schema
-
-var DeploymentResult_DeploymentStatusMessage *smithy.Schema
-
-var DeploymentResult_DeploymentStartTime *smithy.Schema
-
-var DeploymentResult_DeploymentEndTime *smithy.Schema
-
-var DeploymentResult_DeploymentModels *smithy.Schema
-
-var DeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "DeploymentStatus",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentStatus_Success *smithy.Schema
-
-var DeploymentStatus_Fail *smithy.Schema
-
-var DeploymentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "DeploymentType",
-}, smithy.ShapeTypeEnum, 1)
-var DeploymentType_Model *smithy.Schema
-
-var _DeviceFleetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "DeviceFleetName",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "DeviceName",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "DeviceRegistration",
-}, smithy.ShapeTypeString, 0)
-
-var _Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Dimension",
-}, smithy.ShapeTypeString, 0)
-
-var EdgeDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "EdgeDeployment",
-}, smithy.ShapeTypeStructure, 4)
-var EdgeDeployment_DeploymentName *smithy.Schema
-
-var EdgeDeployment_Type *smithy.Schema
-
-var EdgeDeployment_FailureHandlingPolicy *smithy.Schema
-
-var EdgeDeployment_Definitions *smithy.Schema
-
-var _EdgeDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "EdgeDeployments",
-}, smithy.ShapeTypeList, 1)
-var _EdgeDeployments_member *smithy.Schema
-
-var EdgeMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "EdgeMetric",
-}, smithy.ShapeTypeStructure, 4)
-var EdgeMetric_Dimension *smithy.Schema
-
-var EdgeMetric_MetricName *smithy.Schema
-
-var EdgeMetric_Value *smithy.Schema
-
-var EdgeMetric_Timestamp *smithy.Schema
-
-var _EdgeMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "EdgeMetrics",
-}, smithy.ShapeTypeList, 1)
-var _EdgeMetrics_member *smithy.Schema
-
-var _EntityName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "EntityName",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FailureHandlingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "FailureHandlingPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var FailureHandlingPolicy_RollbackOnFailure *smithy.Schema
-
-var FailureHandlingPolicy_DoNothing *smithy.Schema
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InternalServiceException_Message *smithy.Schema
-
-var _Metric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Metric",
-}, smithy.ShapeTypeString, 0)
-
-var Model = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Model",
-}, smithy.ShapeTypeStructure, 5)
-var Model_ModelName *smithy.Schema
-
-var Model_ModelVersion *smithy.Schema
-
-var Model_LatestSampleTime *smithy.Schema
-
-var Model_LatestInference *smithy.Schema
-
-var Model_ModelMetrics *smithy.Schema
-
-var _ModelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "ModelName",
-}, smithy.ShapeTypeString, 0)
-
-var _Models = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Models",
-}, smithy.ShapeTypeList, 1)
-var _Models_member *smithy.Schema
-
-var ModelState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "ModelState",
-}, smithy.ShapeTypeEnum, 2)
-var ModelState_Deploy *smithy.Schema
-
-var ModelState_Undeploy *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Value",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var GetDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "GetDeploymentsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDeploymentsRequest_DeviceName *smithy.Schema
-
-var GetDeploymentsRequest_DeviceFleetName *smithy.Schema
-
-var GetDeploymentsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "GetDeploymentsResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeploymentsResult_Deployments *smithy.Schema
-
-var GetDeviceRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "GetDeviceRegistrationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDeviceRegistrationRequest_DeviceName *smithy.Schema
-
-var GetDeviceRegistrationRequest_DeviceFleetName *smithy.Schema
-
-var GetDeviceRegistrationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "GetDeviceRegistrationResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetDeviceRegistrationResult_DeviceRegistration *smithy.Schema
-
-var GetDeviceRegistrationResult_CacheTTL *smithy.Schema
-
-var SendHeartbeatRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakeredge",
-	Name:      "SendHeartbeatRequest",
-}, smithy.ShapeTypeStructure, 6)
-var SendHeartbeatRequest_AgentMetrics *smithy.Schema
-
-var SendHeartbeatRequest_Models *smithy.Schema
-
-var SendHeartbeatRequest_AgentVersion *smithy.Schema
-
-var SendHeartbeatRequest_DeviceName *smithy.Schema
-
-var SendHeartbeatRequest_DeviceFleetName *smithy.Schema
-
-var SendHeartbeatRequest_DeploymentResult *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ChecksumType_Sha1 = ChecksumType.AddMember("Sha1", smithyprelude.Unit)
-
-	Checksum_Type = Checksum.AddMember("Type", ChecksumType)
-
-	Checksum_Sum = Checksum.AddMember("Sum", _ChecksumString)
-
-	ModelState_Deploy = ModelState.AddMember("Deploy", smithyprelude.Unit)
-
-	ModelState_Undeploy = ModelState.AddMember("Undeploy", smithyprelude.Unit)
-
-	Definition_ModelHandle = Definition.AddMember("ModelHandle", _EntityName)
-
-	Definition_S3Url = Definition.AddMember("S3Url", _S3Uri)
-
-	Definition_Checksum = Definition.AddMember("Checksum", Checksum)
-
-	Definition_State = Definition.AddMember("State", ModelState)
-
-	_Definitions_member = _Definitions.AddMember("member", Definition)
-
-	DeploymentStatus_Success = DeploymentStatus.AddMember("Success", smithyprelude.Unit)
-
-	DeploymentStatus_Fail = DeploymentStatus.AddMember("Fail", smithyprelude.Unit)
-
-	DeploymentModel_ModelHandle = DeploymentModel.AddMember("ModelHandle", _EntityName)
-
-	DeploymentModel_ModelName = DeploymentModel.AddMember("ModelName", _ModelName)
-
-	DeploymentModel_ModelVersion = DeploymentModel.AddMember("ModelVersion", _Version)
-
-	DeploymentModel_DesiredState = DeploymentModel.AddMember("DesiredState", ModelState)
-
-	DeploymentModel_State = DeploymentModel.AddMember("State", ModelState)
-
-	DeploymentModel_Status = DeploymentModel.AddMember("Status", DeploymentStatus)
-
-	DeploymentModel_StatusReason = DeploymentModel.AddMember("StatusReason", _String)
-
-	DeploymentModel_RollbackFailureReason = DeploymentModel.AddMember("RollbackFailureReason", _String)
-
-	_DeploymentModels_member = _DeploymentModels.AddMember("member", DeploymentModel)
-
-	DeploymentResult_DeploymentName = DeploymentResult.AddMember("DeploymentName", _EntityName)
-
-	DeploymentResult_DeploymentStatus = DeploymentResult.AddMember("DeploymentStatus", _EntityName)
-
-	DeploymentResult_DeploymentStatusMessage = DeploymentResult.AddMember("DeploymentStatusMessage", _String)
-
-	DeploymentResult_DeploymentStartTime = DeploymentResult.AddMember("DeploymentStartTime", _Timestamp)
-
-	DeploymentResult_DeploymentEndTime = DeploymentResult.AddMember("DeploymentEndTime", _Timestamp)
-
-	DeploymentResult_DeploymentModels = DeploymentResult.AddMember("DeploymentModels", _DeploymentModels)
-
-	DeploymentType_Model = DeploymentType.AddMember("Model", smithyprelude.Unit)
-
-	FailureHandlingPolicy_RollbackOnFailure = FailureHandlingPolicy.AddMember("RollbackOnFailure", smithyprelude.Unit)
-
-	FailureHandlingPolicy_DoNothing = FailureHandlingPolicy.AddMember("DoNothing", smithyprelude.Unit)
-
-	EdgeDeployment_DeploymentName = EdgeDeployment.AddMember("DeploymentName", _EntityName)
-
-	EdgeDeployment_Type = EdgeDeployment.AddMember("Type", DeploymentType)
-
-	EdgeDeployment_FailureHandlingPolicy = EdgeDeployment.AddMember("FailureHandlingPolicy", FailureHandlingPolicy)
-
-	EdgeDeployment_Definitions = EdgeDeployment.AddMember("Definitions", _Definitions)
-
-	_EdgeDeployments_member = _EdgeDeployments.AddMember("member", EdgeDeployment)
-
-	EdgeMetric_Dimension = EdgeMetric.AddMember("Dimension", _Dimension)
-
-	EdgeMetric_MetricName = EdgeMetric.AddMember("MetricName", _Metric)
-
-	EdgeMetric_Value = EdgeMetric.AddMember("Value", _Value)
-
-	EdgeMetric_Timestamp = EdgeMetric.AddMember("Timestamp", _Timestamp)
-
-	_EdgeMetrics_member = _EdgeMetrics.AddMember("member", EdgeMetric)
-
-	InternalServiceException_Message = InternalServiceException.AddMember("Message", _ErrorMessage)
-
-	Model_ModelName = Model.AddMember("ModelName", _ModelName)
-
-	Model_ModelVersion = Model.AddMember("ModelVersion", _Version)
-
-	Model_LatestSampleTime = Model.AddMember("LatestSampleTime", _Timestamp)
-
-	Model_LatestInference = Model.AddMember("LatestInference", _Timestamp)
-
-	Model_ModelMetrics = Model.AddMember("ModelMetrics", _EdgeMetrics)
-
-	_Models_member = _Models.AddMember("member", Model)
-
-	GetDeploymentsRequest_DeviceName = GetDeploymentsRequest.AddMember("DeviceName", _DeviceName)
-
-	GetDeploymentsRequest_DeviceFleetName = GetDeploymentsRequest.AddMember("DeviceFleetName", _DeviceFleetName)
-
-	GetDeploymentsResult_Deployments = GetDeploymentsResult.AddMember("Deployments", _EdgeDeployments)
-
-	GetDeviceRegistrationRequest_DeviceName = GetDeviceRegistrationRequest.AddMember("DeviceName", _DeviceName)
-
-	GetDeviceRegistrationRequest_DeviceFleetName = GetDeviceRegistrationRequest.AddMember("DeviceFleetName", _DeviceFleetName)
-
-	GetDeviceRegistrationResult_DeviceRegistration = GetDeviceRegistrationResult.AddMember("DeviceRegistration", _DeviceRegistration)
-
-	GetDeviceRegistrationResult_CacheTTL = GetDeviceRegistrationResult.AddMember("CacheTTL", _CacheTTLSeconds)
-
-	SendHeartbeatRequest_AgentMetrics = SendHeartbeatRequest.AddMember("AgentMetrics", _EdgeMetrics)
-
-	SendHeartbeatRequest_Models = SendHeartbeatRequest.AddMember("Models", _Models)
-
-	SendHeartbeatRequest_AgentVersion = SendHeartbeatRequest.AddMember("AgentVersion", _Version)
-
-	SendHeartbeatRequest_DeviceName = SendHeartbeatRequest.AddMember("DeviceName", _DeviceName)
-
-	SendHeartbeatRequest_DeviceFleetName = SendHeartbeatRequest.AddMember("DeviceFleetName", _DeviceFleetName)
-
-	SendHeartbeatRequest_DeploymentResult = SendHeartbeatRequest.AddMember("DeploymentResult", DeploymentResult)
-
+const blob = "" +
+	"GetDeviceRegistrationRequestGetDeviceRegistrationResultInternalServiceExceptionDeploymentStatusMessa" +
+	"geFailureHandlingPolicyGetDeploymentsRequestRollbackFailureReasonGetDeploymentsResultSendHeartbeatRe" +
+	"questAmazonSageMakerEdgeDeploymentStartTimeDeploymentEndTimeRollbackOnFailureDeploymentModelsDeploym" +
+	"entResultLatestSampleTimeCacheTTLSecondsDeviceFleetNameEdgeDeploymentsLatestInferenceChecksumStringD" +
+	"eploymentNameDeploymentTypeAgentMetricsAgentVersionChecksumTypeDesiredStateErrorMessageModelMetricsM" +
+	"odelVersionStatusReasonDefinitionsEdgeMetricsModelHandleDeviceNameEntityNameMetricNameModelStateDime" +
+	"nsionDoNothingModelNameTimestampUndeploySuccessmemberS3UriS3UrlValueSha1UnitSum"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.sagemakeredge", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 123, Target: 0, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 185, Target: 2, Traits: 2, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 205, Target: 3, Traits: 3, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 325, Target: 4, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 385, Target: 5, Traits: 3, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 423, Target: 9, Traits: 3, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 676, Target: 8, Traits: 3, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 385, Target: 8, Traits: 3, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 451, Target: 9, Traits: 3, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 668, Target: 102, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 523, Target: 11, Traits: 3, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 545, Target: 59, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 658, Target: 79, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 385, Target: 5, Traits: 3, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 470, Target: 76, Traits: 3, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 523, Target: 16, Traits: 3, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 647, Target: 11, Traits: 3, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 277, Target: 18, Traits: 3, StrLen: 15, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 545, Target: 59, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 614, Target: 73, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 499, Target: 83, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 463, Target: 76, Traits: 3, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 470, Target: 76, Traits: 3, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 89, Target: 36, Traits: 3, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 511, Target: 80, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 144, Target: 80, Traits: 3, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 277, Target: 27, Traits: 3, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 647, Target: 18, Traits: 3, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 293, Target: 29, Traits: 3, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 399, Target: 59, Traits: 3, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 79, Target: 59, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 79, Target: 80, Traits: 3, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 81, Traits: 3, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 243, Target: 81, Traits: 3, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 277, Target: 27, Traits: 3, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 79, Target: 36, Traits: 3, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 640, Target: 102, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 102, Target: 102, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 413, Target: 39, Traits: 3, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 287, Target: 102, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 340, Target: 41, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 556, Target: 42, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3, Target: 43, Traits: 3, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 596, Target: 44, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 220, Target: 45, Traits: 3, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 399, Target: 59, Traits: 3, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 423, Target: 39, Traits: 3, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 102, Target: 61, Traits: 3, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 523, Target: 16, Traits: 3, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 355, Target: 50, Traits: 3, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 647, Target: 45, Traits: 3, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 534, Target: 52, Traits: 3, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 596, Target: 44, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 576, Target: 66, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 663, Target: 82, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 623, Target: 81, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 534, Target: 57, Traits: 3, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 647, Target: 52, Traits: 3, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 566, Target: 59, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 475, Target: 60, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 102, Target: 61, Traits: 3, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 260, Target: 102, Traits: 3, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 605, Target: 102, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 55, Target: 64, Traits: 4, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 95, Target: 60, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 432, Target: 66, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 287, Target: 67, Traits: 3, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 614, Target: 73, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 499, Target: 83, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 309, Target: 81, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 370, Target: 81, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 487, Target: 57, Traits: 3, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 614, Target: 73, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 287, Target: 74, Traits: 3, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 647, Target: 67, Traits: 3, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 586, Target: 76, Traits: 3, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 79, Target: 102, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 632, Target: 102, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 653, Target: 79, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 393, Target: 80, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 623, Target: 81, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 663, Target: 82, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 444, Target: 83, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 123, Target: 84, Traits: 3, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 556, Target: 42, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 340, Target: 41, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 165, Target: 87, Traits: 3, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 126, Target: 50, Traits: 3, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 89, Traits: 3, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 556, Target: 42, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 340, Target: 41, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 28, Target: 92, Traits: 3, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3, Target: 43, Traits: 3, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 325, Target: 4, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 185, Target: 95, Traits: 3, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 427, Target: 57, Traits: 3, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 287, Target: 74, Traits: 3, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 439, Target: 83, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 556, Target: 42, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 340, Target: 41, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 293, Target: 29, Traits: 3, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 672, Target: 102, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetDeployments",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetDeviceRegistration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/SendHeartbeat",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+	},
 }
+
+var handles = [103]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+}
+
+var GetDeployments = &handles[0]
+
+var GetDeviceRegistration = &handles[1]
+
+var SendHeartbeat = &handles[2]
+
+var _AmazonSageMakerEdge = &handles[3]
+
+var _CacheTTLSeconds = &handles[4]
+
+var Checksum = &handles[5]
+var Checksum_Type = &handles[6]
+var Checksum_Sum = &handles[7]
+
+var _ChecksumString = &handles[8]
+
+var ChecksumType = &handles[9]
+var ChecksumType_Sha1 = &handles[10]
+
+var Definition = &handles[11]
+var Definition_ModelHandle = &handles[12]
+var Definition_S3Url = &handles[13]
+var Definition_Checksum = &handles[14]
+var Definition_State = &handles[15]
+
+var _Definitions = &handles[16]
+var _Definitions_member = &handles[17]
+
+var DeploymentModel = &handles[18]
+var DeploymentModel_ModelHandle = &handles[19]
+var DeploymentModel_ModelName = &handles[20]
+var DeploymentModel_ModelVersion = &handles[21]
+var DeploymentModel_DesiredState = &handles[22]
+var DeploymentModel_State = &handles[23]
+var DeploymentModel_Status = &handles[24]
+var DeploymentModel_StatusReason = &handles[25]
+var DeploymentModel_RollbackFailureReason = &handles[26]
+
+var _DeploymentModels = &handles[27]
+var _DeploymentModels_member = &handles[28]
+
+var DeploymentResult = &handles[29]
+var DeploymentResult_DeploymentName = &handles[30]
+var DeploymentResult_DeploymentStatus = &handles[31]
+var DeploymentResult_DeploymentStatusMessage = &handles[32]
+var DeploymentResult_DeploymentStartTime = &handles[33]
+var DeploymentResult_DeploymentEndTime = &handles[34]
+var DeploymentResult_DeploymentModels = &handles[35]
+
+var DeploymentStatus = &handles[36]
+var DeploymentStatus_Success = &handles[37]
+var DeploymentStatus_Fail = &handles[38]
+
+var DeploymentType = &handles[39]
+var DeploymentType_Model = &handles[40]
+
+var _DeviceFleetName = &handles[41]
+
+var _DeviceName = &handles[42]
+
+var _DeviceRegistration = &handles[43]
+
+var _Dimension = &handles[44]
+
+var EdgeDeployment = &handles[45]
+var EdgeDeployment_DeploymentName = &handles[46]
+var EdgeDeployment_Type = &handles[47]
+var EdgeDeployment_FailureHandlingPolicy = &handles[48]
+var EdgeDeployment_Definitions = &handles[49]
+
+var _EdgeDeployments = &handles[50]
+var _EdgeDeployments_member = &handles[51]
+
+var EdgeMetric = &handles[52]
+var EdgeMetric_Dimension = &handles[53]
+var EdgeMetric_MetricName = &handles[54]
+var EdgeMetric_Value = &handles[55]
+var EdgeMetric_Timestamp = &handles[56]
+
+var _EdgeMetrics = &handles[57]
+var _EdgeMetrics_member = &handles[58]
+
+var _EntityName = &handles[59]
+
+var _ErrorMessage = &handles[60]
+
+var FailureHandlingPolicy = &handles[61]
+var FailureHandlingPolicy_RollbackOnFailure = &handles[62]
+var FailureHandlingPolicy_DoNothing = &handles[63]
+
+var InternalServiceException = &handles[64]
+var InternalServiceException_Message = &handles[65]
+
+var _Metric = &handles[66]
+
+var Model = &handles[67]
+var Model_ModelName = &handles[68]
+var Model_ModelVersion = &handles[69]
+var Model_LatestSampleTime = &handles[70]
+var Model_LatestInference = &handles[71]
+var Model_ModelMetrics = &handles[72]
+
+var _ModelName = &handles[73]
+
+var _Models = &handles[74]
+var _Models_member = &handles[75]
+
+var ModelState = &handles[76]
+var ModelState_Deploy = &handles[77]
+var ModelState_Undeploy = &handles[78]
+
+var _S3Uri = &handles[79]
+
+var _String = &handles[80]
+
+var _Timestamp = &handles[81]
+
+var _Value = &handles[82]
+
+var _Version = &handles[83]
+
+var GetDeploymentsRequest = &handles[84]
+var GetDeploymentsRequest_DeviceName = &handles[85]
+var GetDeploymentsRequest_DeviceFleetName = &handles[86]
+
+var GetDeploymentsResult = &handles[87]
+var GetDeploymentsResult_Deployments = &handles[88]
+
+var GetDeviceRegistrationRequest = &handles[89]
+var GetDeviceRegistrationRequest_DeviceName = &handles[90]
+var GetDeviceRegistrationRequest_DeviceFleetName = &handles[91]
+
+var GetDeviceRegistrationResult = &handles[92]
+var GetDeviceRegistrationResult_DeviceRegistration = &handles[93]
+var GetDeviceRegistrationResult_CacheTTL = &handles[94]
+
+var SendHeartbeatRequest = &handles[95]
+var SendHeartbeatRequest_AgentMetrics = &handles[96]
+var SendHeartbeatRequest_Models = &handles[97]
+var SendHeartbeatRequest_AgentVersion = &handles[98]
+var SendHeartbeatRequest_DeviceName = &handles[99]
+var SendHeartbeatRequest_DeviceFleetName = &handles[100]
+var SendHeartbeatRequest_DeploymentResult = &handles[101]
+
+var AmazonSageMakerEdge = &smithy.ServiceSchema{Schema: &handles[3], Version: "2020-09-23"}

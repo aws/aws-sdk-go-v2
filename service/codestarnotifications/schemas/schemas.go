@@ -4,919 +4,806 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateNotificationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CreateNotificationRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/createNotificationRule",
-	Code: 200})
-
-var DeleteNotificationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteNotificationRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/deleteNotificationRule",
-	Code: 200})
-
-var DeleteTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteTarget",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/deleteTarget",
-	Code: 200})
-
-var DescribeNotificationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DescribeNotificationRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/describeNotificationRule",
-	Code: 200})
-
-var ListEventTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/listEventTypes",
-	Code: 200})
-
-var ListNotificationRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/listNotificationRules",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/listTagsForResource",
-	Code: 200})
-
-var ListTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/listTargets",
-	Code: 200})
-
-var Subscribe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Subscribe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/subscribe",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tagResource",
-	Code: 200})
-
-var Unsubscribe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Unsubscribe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/unsubscribe",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/untagResource/{Arn}",
-	Code: 200})
-
-var UpdateNotificationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UpdateNotificationRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/updateNotificationRule",
-	Code: 200})
-
-var _CodeStarNotifications_20191015 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CodeStarNotifications_20191015",
-}, smithy.ShapeTypeService, 0)
-
-var CodeStarNotifications_20191015 = smithy.NewServiceSchema(_CodeStarNotifications_20191015, "2019-10-15")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConfigurationException_Message *smithy.Schema
-
-var _CreatedTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CreatedTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DetailType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DetailType",
-}, smithy.ShapeTypeEnum, 2)
-var DetailType_BASIC *smithy.Schema
-
-var DetailType_FULL *smithy.Schema
-
-var _EventTypeBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeBatch",
-}, smithy.ShapeTypeList, 1)
-var _EventTypeBatch_member *smithy.Schema
-
-var _EventTypeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeId",
-}, smithy.ShapeTypeString, 0)
-
-var _EventTypeIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeIds",
-}, smithy.ShapeTypeList, 1)
-var _EventTypeIds_member *smithy.Schema
-
-var _EventTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var EventTypeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "EventTypeSummary",
-}, smithy.ShapeTypeStructure, 4)
-var EventTypeSummary_EventTypeId *smithy.Schema
-
-var EventTypeSummary_ServiceName *smithy.Schema
-
-var EventTypeSummary_EventTypeName *smithy.Schema
-
-var EventTypeSummary_ResourceType *smithy.Schema
-
-var _ForceUnsubscribeAll = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ForceUnsubscribeAll",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var _LastModifiedTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "LastModifiedTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var ListEventTypesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventTypesFilter_Name *smithy.Schema
-
-var ListEventTypesFilter_Value *smithy.Schema
-
-var ListEventTypesFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var ListEventTypesFilterName_RESOURCE_TYPE *smithy.Schema
-
-var ListEventTypesFilterName_SERVICE_NAME *smithy.Schema
-
-var _ListEventTypesFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListEventTypesFilters_member *smithy.Schema
-
-var _ListEventTypesFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var ListNotificationRulesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationRulesFilter_Name *smithy.Schema
-
-var ListNotificationRulesFilter_Value *smithy.Schema
-
-var ListNotificationRulesFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesFilterName",
-}, smithy.ShapeTypeEnum, 4)
-var ListNotificationRulesFilterName_EVENT_TYPE_ID *smithy.Schema
-
-var ListNotificationRulesFilterName_CREATED_BY *smithy.Schema
-
-var ListNotificationRulesFilterName_RESOURCE *smithy.Schema
-
-var ListNotificationRulesFilterName_TARGET_ADDRESS *smithy.Schema
-
-var _ListNotificationRulesFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListNotificationRulesFilters_member *smithy.Schema
-
-var _ListNotificationRulesFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var ListTargetsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ListTargetsFilter_Name *smithy.Schema
-
-var ListTargetsFilter_Value *smithy.Schema
-
-var ListTargetsFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsFilterName",
-}, smithy.ShapeTypeEnum, 3)
-var ListTargetsFilterName_TARGET_TYPE *smithy.Schema
-
-var ListTargetsFilterName_TARGET_ADDRESS *smithy.Schema
-
-var ListTargetsFilterName_TARGET_STATUS *smithy.Schema
-
-var _ListTargetsFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListTargetsFilters_member *smithy.Schema
-
-var _ListTargetsFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationRuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationRuleBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleBatch",
-}, smithy.ShapeTypeList, 1)
-var _NotificationRuleBatch_member *smithy.Schema
-
-var _NotificationRuleCreatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleCreatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationRuleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleId",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationRuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _NotificationRuleResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleResource",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationRuleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleStatus",
-}, smithy.ShapeTypeEnum, 2)
-var NotificationRuleStatus_ENABLED *smithy.Schema
-
-var NotificationRuleStatus_DISABLED *smithy.Schema
-
-var NotificationRuleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "NotificationRuleSummary",
-}, smithy.ShapeTypeStructure, 2)
-var NotificationRuleSummary_Id *smithy.Schema
-
-var NotificationRuleSummary_Arn *smithy.Schema
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Target",
-}, smithy.ShapeTypeStructure, 2)
-var Target_TargetType *smithy.Schema
-
-var Target_TargetAddress *smithy.Schema
-
-var _TargetAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Targets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "Targets",
-}, smithy.ShapeTypeList, 1)
-var _Targets_member *smithy.Schema
-
-var _TargetsBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetsBatch",
-}, smithy.ShapeTypeList, 1)
-var _TargetsBatch_member *smithy.Schema
-
-var TargetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetStatus",
-}, smithy.ShapeTypeEnum, 5)
-var TargetStatus_PENDING *smithy.Schema
-
-var TargetStatus_ACTIVE *smithy.Schema
-
-var TargetStatus_UNREACHABLE *smithy.Schema
-
-var TargetStatus_INACTIVE *smithy.Schema
-
-var TargetStatus_DEACTIVATED *smithy.Schema
-
-var TargetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetSummary",
-}, smithy.ShapeTypeStructure, 3)
-var TargetSummary_TargetAddress *smithy.Schema
-
-var TargetSummary_TargetType *smithy.Schema
-
-var TargetSummary_TargetStatus *smithy.Schema
-
-var _TargetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TargetType",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateNotificationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CreateNotificationRuleRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateNotificationRuleRequest_Name *smithy.Schema
-
-var CreateNotificationRuleRequest_EventTypeIds *smithy.Schema
-
-var CreateNotificationRuleRequest_Resource *smithy.Schema
-
-var CreateNotificationRuleRequest_Targets *smithy.Schema
-
-var CreateNotificationRuleRequest_DetailType *smithy.Schema
-
-var CreateNotificationRuleRequest_ClientRequestToken *smithy.Schema
-
-var CreateNotificationRuleRequest_Tags *smithy.Schema
-
-var CreateNotificationRuleRequest_Status *smithy.Schema
-
-var CreateNotificationRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "CreateNotificationRuleResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNotificationRuleResult_Arn *smithy.Schema
-
-var DeleteNotificationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteNotificationRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNotificationRuleRequest_Arn *smithy.Schema
-
-var DeleteNotificationRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteNotificationRuleResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNotificationRuleResult_Arn *smithy.Schema
-
-var DeleteTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteTargetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTargetRequest_TargetAddress *smithy.Schema
-
-var DeleteTargetRequest_ForceUnsubscribeAll *smithy.Schema
-
-var DeleteTargetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DeleteTargetResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeNotificationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DescribeNotificationRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeNotificationRuleRequest_Arn *smithy.Schema
-
-var DescribeNotificationRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "DescribeNotificationRuleResult",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeNotificationRuleResult_Arn *smithy.Schema
-
-var DescribeNotificationRuleResult_Name *smithy.Schema
-
-var DescribeNotificationRuleResult_EventTypes *smithy.Schema
-
-var DescribeNotificationRuleResult_Resource *smithy.Schema
-
-var DescribeNotificationRuleResult_Targets *smithy.Schema
-
-var DescribeNotificationRuleResult_DetailType *smithy.Schema
-
-var DescribeNotificationRuleResult_CreatedBy *smithy.Schema
-
-var DescribeNotificationRuleResult_Status *smithy.Schema
-
-var DescribeNotificationRuleResult_CreatedTimestamp *smithy.Schema
-
-var DescribeNotificationRuleResult_LastModifiedTimestamp *smithy.Schema
-
-var DescribeNotificationRuleResult_Tags *smithy.Schema
-
-var ListEventTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEventTypesRequest_Filters *smithy.Schema
-
-var ListEventTypesRequest_NextToken *smithy.Schema
-
-var ListEventTypesRequest_MaxResults *smithy.Schema
-
-var ListEventTypesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListEventTypesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventTypesResult_EventTypes *smithy.Schema
-
-var ListEventTypesResult_NextToken *smithy.Schema
-
-var ListNotificationRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListNotificationRulesRequest_Filters *smithy.Schema
-
-var ListNotificationRulesRequest_NextToken *smithy.Schema
-
-var ListNotificationRulesRequest_MaxResults *smithy.Schema
-
-var ListNotificationRulesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListNotificationRulesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotificationRulesResult_NextToken *smithy.Schema
-
-var ListNotificationRulesResult_NotificationRules *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_Arn *smithy.Schema
-
-var ListTagsForResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTagsForResourceResult",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResult_Tags *smithy.Schema
-
-var ListTargetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTargetsRequest_Filters *smithy.Schema
-
-var ListTargetsRequest_NextToken *smithy.Schema
-
-var ListTargetsRequest_MaxResults *smithy.Schema
-
-var ListTargetsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "ListTargetsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListTargetsResult_Targets *smithy.Schema
-
-var ListTargetsResult_NextToken *smithy.Schema
-
-var SubscribeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "SubscribeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SubscribeRequest_Arn *smithy.Schema
-
-var SubscribeRequest_Target *smithy.Schema
-
-var SubscribeRequest_ClientRequestToken *smithy.Schema
-
-var SubscribeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "SubscribeResult",
-}, smithy.ShapeTypeStructure, 1)
-var SubscribeResult_Arn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_Arn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "TagResourceResult",
-}, smithy.ShapeTypeStructure, 1)
-var TagResourceResult_Tags *smithy.Schema
-
-var UnsubscribeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UnsubscribeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UnsubscribeRequest_Arn *smithy.Schema
-
-var UnsubscribeRequest_TargetAddress *smithy.Schema
-
-var UnsubscribeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UnsubscribeResult",
-}, smithy.ShapeTypeStructure, 1)
-var UnsubscribeResult_Arn *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_Arn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UntagResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateNotificationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UpdateNotificationRuleRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateNotificationRuleRequest_Arn *smithy.Schema
-
-var UpdateNotificationRuleRequest_Name *smithy.Schema
-
-var UpdateNotificationRuleRequest_Status *smithy.Schema
-
-var UpdateNotificationRuleRequest_EventTypeIds *smithy.Schema
-
-var UpdateNotificationRuleRequest_Targets *smithy.Schema
-
-var UpdateNotificationRuleRequest_DetailType *smithy.Schema
-
-var UpdateNotificationRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarnotifications",
-	Name:      "UpdateNotificationRuleResult",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _Message)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _Message)
-
-	ConfigurationException_Message = ConfigurationException.AddMember("Message", _Message)
-
-	DetailType_BASIC = DetailType.AddMember("BASIC", smithyprelude.Unit)
-
-	DetailType_FULL = DetailType.AddMember("FULL", smithyprelude.Unit)
-
-	EventTypeSummary_EventTypeId = EventTypeSummary.AddMember("EventTypeId", _EventTypeId)
-
-	EventTypeSummary_ServiceName = EventTypeSummary.AddMember("ServiceName", _ServiceName)
-
-	EventTypeSummary_EventTypeName = EventTypeSummary.AddMember("EventTypeName", _EventTypeName)
-
-	EventTypeSummary_ResourceType = EventTypeSummary.AddMember("ResourceType", _ResourceType)
-
-	_EventTypeBatch_member = _EventTypeBatch.AddMember("member", EventTypeSummary)
-
-	_EventTypeIds_member = _EventTypeIds.AddMember("member", _EventTypeId)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _Message)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _Message)
-
-	ListEventTypesFilterName_RESOURCE_TYPE = ListEventTypesFilterName.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
-
-	ListEventTypesFilterName_SERVICE_NAME = ListEventTypesFilterName.AddMember("SERVICE_NAME", smithyprelude.Unit)
-
-	ListEventTypesFilter_Name = ListEventTypesFilter.AddMember("Name", ListEventTypesFilterName)
-
-	ListEventTypesFilter_Value = ListEventTypesFilter.AddMember("Value", _ListEventTypesFilterValue)
-
-	_ListEventTypesFilters_member = _ListEventTypesFilters.AddMember("member", ListEventTypesFilter)
-
-	ListNotificationRulesFilterName_EVENT_TYPE_ID = ListNotificationRulesFilterName.AddMember("EVENT_TYPE_ID", smithyprelude.Unit)
-
-	ListNotificationRulesFilterName_CREATED_BY = ListNotificationRulesFilterName.AddMember("CREATED_BY", smithyprelude.Unit)
-
-	ListNotificationRulesFilterName_RESOURCE = ListNotificationRulesFilterName.AddMember("RESOURCE", smithyprelude.Unit)
-
-	ListNotificationRulesFilterName_TARGET_ADDRESS = ListNotificationRulesFilterName.AddMember("TARGET_ADDRESS", smithyprelude.Unit)
-
-	ListNotificationRulesFilter_Name = ListNotificationRulesFilter.AddMember("Name", ListNotificationRulesFilterName)
-
-	ListNotificationRulesFilter_Value = ListNotificationRulesFilter.AddMember("Value", _ListNotificationRulesFilterValue)
-
-	_ListNotificationRulesFilters_member = _ListNotificationRulesFilters.AddMember("member", ListNotificationRulesFilter)
-
-	ListTargetsFilterName_TARGET_TYPE = ListTargetsFilterName.AddMember("TARGET_TYPE", smithyprelude.Unit)
-
-	ListTargetsFilterName_TARGET_ADDRESS = ListTargetsFilterName.AddMember("TARGET_ADDRESS", smithyprelude.Unit)
-
-	ListTargetsFilterName_TARGET_STATUS = ListTargetsFilterName.AddMember("TARGET_STATUS", smithyprelude.Unit)
-
-	ListTargetsFilter_Name = ListTargetsFilter.AddMember("Name", ListTargetsFilterName)
-
-	ListTargetsFilter_Value = ListTargetsFilter.AddMember("Value", _ListTargetsFilterValue)
-
-	_ListTargetsFilters_member = _ListTargetsFilters.AddMember("member", ListTargetsFilter)
-
-	NotificationRuleSummary_Id = NotificationRuleSummary.AddMember("Id", _NotificationRuleId)
-
-	NotificationRuleSummary_Arn = NotificationRuleSummary.AddMember("Arn", _NotificationRuleArn)
-
-	_NotificationRuleBatch_member = _NotificationRuleBatch.AddMember("member", NotificationRuleSummary)
-
-	NotificationRuleStatus_ENABLED = NotificationRuleStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	NotificationRuleStatus_DISABLED = NotificationRuleStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _Message)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _Message)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	Target_TargetType = Target.AddMember("TargetType", _TargetType)
-
-	Target_TargetAddress = Target.AddMember("TargetAddress", _TargetAddress)
-
-	_Targets_member = _Targets.AddMember("member", Target)
-
-	TargetStatus_PENDING = TargetStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	TargetStatus_ACTIVE = TargetStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TargetStatus_UNREACHABLE = TargetStatus.AddMember("UNREACHABLE", smithyprelude.Unit)
-
-	TargetStatus_INACTIVE = TargetStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	TargetStatus_DEACTIVATED = TargetStatus.AddMember("DEACTIVATED", smithyprelude.Unit)
-
-	TargetSummary_TargetAddress = TargetSummary.AddMember("TargetAddress", _TargetAddress)
-
-	TargetSummary_TargetType = TargetSummary.AddMember("TargetType", _TargetType)
-
-	TargetSummary_TargetStatus = TargetSummary.AddMember("TargetStatus", TargetStatus)
-
-	_TargetsBatch_member = _TargetsBatch.AddMember("member", TargetSummary)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _Message)
-
-	CreateNotificationRuleRequest_Name = CreateNotificationRuleRequest.AddMember("Name", _NotificationRuleName)
-
-	CreateNotificationRuleRequest_EventTypeIds = CreateNotificationRuleRequest.AddMember("EventTypeIds", _EventTypeIds)
-
-	CreateNotificationRuleRequest_Resource = CreateNotificationRuleRequest.AddMember("Resource", _NotificationRuleResource)
-
-	CreateNotificationRuleRequest_Targets = CreateNotificationRuleRequest.AddMember("Targets", _Targets)
-
-	CreateNotificationRuleRequest_DetailType = CreateNotificationRuleRequest.AddMember("DetailType", DetailType)
-
-	CreateNotificationRuleRequest_ClientRequestToken = CreateNotificationRuleRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateNotificationRuleRequest_Tags = CreateNotificationRuleRequest.AddMember("Tags", _Tags)
-
-	CreateNotificationRuleRequest_Status = CreateNotificationRuleRequest.AddMember("Status", NotificationRuleStatus)
-
-	CreateNotificationRuleResult_Arn = CreateNotificationRuleResult.AddMember("Arn", _NotificationRuleArn)
-
-	DeleteNotificationRuleRequest_Arn = DeleteNotificationRuleRequest.AddMember("Arn", _NotificationRuleArn)
-
-	DeleteNotificationRuleResult_Arn = DeleteNotificationRuleResult.AddMember("Arn", _NotificationRuleArn)
-
-	DeleteTargetRequest_TargetAddress = DeleteTargetRequest.AddMember("TargetAddress", _TargetAddress)
-
-	DeleteTargetRequest_ForceUnsubscribeAll = DeleteTargetRequest.AddMember("ForceUnsubscribeAll", _ForceUnsubscribeAll)
-
-	DescribeNotificationRuleRequest_Arn = DescribeNotificationRuleRequest.AddMember("Arn", _NotificationRuleArn)
-
-	DescribeNotificationRuleResult_Arn = DescribeNotificationRuleResult.AddMember("Arn", _NotificationRuleArn)
-
-	DescribeNotificationRuleResult_Name = DescribeNotificationRuleResult.AddMember("Name", _NotificationRuleName)
-
-	DescribeNotificationRuleResult_EventTypes = DescribeNotificationRuleResult.AddMember("EventTypes", _EventTypeBatch)
-
-	DescribeNotificationRuleResult_Resource = DescribeNotificationRuleResult.AddMember("Resource", _NotificationRuleResource)
-
-	DescribeNotificationRuleResult_Targets = DescribeNotificationRuleResult.AddMember("Targets", _TargetsBatch)
-
-	DescribeNotificationRuleResult_DetailType = DescribeNotificationRuleResult.AddMember("DetailType", DetailType)
-
-	DescribeNotificationRuleResult_CreatedBy = DescribeNotificationRuleResult.AddMember("CreatedBy", _NotificationRuleCreatedBy)
-
-	DescribeNotificationRuleResult_Status = DescribeNotificationRuleResult.AddMember("Status", NotificationRuleStatus)
-
-	DescribeNotificationRuleResult_CreatedTimestamp = DescribeNotificationRuleResult.AddMember("CreatedTimestamp", _CreatedTimestamp)
-
-	DescribeNotificationRuleResult_LastModifiedTimestamp = DescribeNotificationRuleResult.AddMember("LastModifiedTimestamp", _LastModifiedTimestamp)
-
-	DescribeNotificationRuleResult_Tags = DescribeNotificationRuleResult.AddMember("Tags", _Tags)
-
-	ListEventTypesRequest_Filters = ListEventTypesRequest.AddMember("Filters", _ListEventTypesFilters)
-
-	ListEventTypesRequest_NextToken = ListEventTypesRequest.AddMember("NextToken", _NextToken)
-
-	ListEventTypesRequest_MaxResults = ListEventTypesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListEventTypesResult_EventTypes = ListEventTypesResult.AddMember("EventTypes", _EventTypeBatch)
-
-	ListEventTypesResult_NextToken = ListEventTypesResult.AddMember("NextToken", _NextToken)
-
-	ListNotificationRulesRequest_Filters = ListNotificationRulesRequest.AddMember("Filters", _ListNotificationRulesFilters)
-
-	ListNotificationRulesRequest_NextToken = ListNotificationRulesRequest.AddMember("NextToken", _NextToken)
-
-	ListNotificationRulesRequest_MaxResults = ListNotificationRulesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListNotificationRulesResult_NextToken = ListNotificationRulesResult.AddMember("NextToken", _NextToken)
-
-	ListNotificationRulesResult_NotificationRules = ListNotificationRulesResult.AddMember("NotificationRules", _NotificationRuleBatch)
-
-	ListTagsForResourceRequest_Arn = ListTagsForResourceRequest.AddMember("Arn", _NotificationRuleArn)
-
-	ListTagsForResourceResult_Tags = ListTagsForResourceResult.AddMember("Tags", _Tags)
-
-	ListTargetsRequest_Filters = ListTargetsRequest.AddMember("Filters", _ListTargetsFilters)
-
-	ListTargetsRequest_NextToken = ListTargetsRequest.AddMember("NextToken", _NextToken)
-
-	ListTargetsRequest_MaxResults = ListTargetsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTargetsResult_Targets = ListTargetsResult.AddMember("Targets", _TargetsBatch)
-
-	ListTargetsResult_NextToken = ListTargetsResult.AddMember("NextToken", _NextToken)
-
-	SubscribeRequest_Arn = SubscribeRequest.AddMember("Arn", _NotificationRuleArn)
-
-	SubscribeRequest_Target = SubscribeRequest.AddMember("Target", Target)
-
-	SubscribeRequest_ClientRequestToken = SubscribeRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	SubscribeResult_Arn = SubscribeResult.AddMember("Arn", _NotificationRuleArn)
-
-	TagResourceRequest_Arn = TagResourceRequest.AddMember("Arn", _NotificationRuleArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	TagResourceResult_Tags = TagResourceResult.AddMember("Tags", _Tags)
-
-	UnsubscribeRequest_Arn = UnsubscribeRequest.AddMember("Arn", _NotificationRuleArn)
-
-	UnsubscribeRequest_TargetAddress = UnsubscribeRequest.AddMember("TargetAddress", _TargetAddress)
-
-	UnsubscribeResult_Arn = UnsubscribeResult.AddMember("Arn", _NotificationRuleArn)
-
-	UntagResourceRequest_Arn = UntagResourceRequest.AddMember("Arn", _NotificationRuleArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateNotificationRuleRequest_Arn = UpdateNotificationRuleRequest.AddMember("Arn", _NotificationRuleArn)
-
-	UpdateNotificationRuleRequest_Name = UpdateNotificationRuleRequest.AddMember("Name", _NotificationRuleName)
-
-	UpdateNotificationRuleRequest_Status = UpdateNotificationRuleRequest.AddMember("Status", NotificationRuleStatus)
-
-	UpdateNotificationRuleRequest_EventTypeIds = UpdateNotificationRuleRequest.AddMember("EventTypeIds", _EventTypeIds)
-
-	UpdateNotificationRuleRequest_Targets = UpdateNotificationRuleRequest.AddMember("Targets", _Targets)
-
-	UpdateNotificationRuleRequest_DetailType = UpdateNotificationRuleRequest.AddMember("DetailType", DetailType)
-
+const blob = "" +
+	"ListNotificationRulesFilterValueConcurrentModificationExceptionDescribeNotificationRuleRequestListNo" +
+	"tificationRulesFilterNameCodeStarNotifications_20191015DescribeNotificationRuleResultResourceAlready" +
+	"ExistsExceptionCreateNotificationRuleRequestDeleteNotificationRuleRequestUpdateNotificationRuleReque" +
+	"stCreateNotificationRuleResultDeleteNotificationRuleResultListNotificationRulesFiltersListNotificati" +
+	"onRulesRequestUpdateNotificationRuleResultListNotificationRulesResultListTagsForResourceRequestInval" +
+	"idNextTokenExceptionListEventTypesFilterValueListTagsForResourceResultNotificationRuleCreatedByResou" +
+	"rceNotFoundExceptionListEventTypesFilterNameNotificationRuleResourceNotificationRuleSummaryConfigura" +
+	"tionExceptionLimitExceededExceptionListTargetsFilterValueNotificationRuleStatusAccessDeniedException" +
+	"LastModifiedTimestampListEventTypesFiltersListEventTypesRequestListTargetsFilterNameNotificationRule" +
+	"BatchListEventTypesResultNotificationRuleNameUntagResourceRequestDeleteTargetRequestForceUnsubscribe" +
+	"AllNotificationRuleArnUntagResourceResultValidationExceptionClientRequestTokenDeleteTargetResultList" +
+	"TargetsFiltersListTargetsRequestNotificationRuleIdTagResourceRequestUnsubscribeRequestListTargetsRes" +
+	"ultTagResourceResultUnsubscribeResultCreatedTimestampEventTypeSummarySubscribeRequestSubscribeResult" +
+	"EventTypeBatchTARGET_ADDRESSEVENT_TYPE_IDEventTypeNameRESOURCE_TYPETARGET_STATUSTargetAddressTargetS" +
+	"ummaryEventTypeIdsResourceTypeSERVICE_NAMETargetStatusTargetsBatchDEACTIVATEDServiceNameTARGET_TYPEU" +
+	"NREACHABLECREATED_BYDetailTypeMaxResultsTargetTypeDISABLEDINACTIVETagValueENABLEDMessagePENDINGTagKe" +
+	"ysmemberBASICvalueFULLUnitkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.codestarnotifications", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 215, Target: 0, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 244, Target: 1, Traits: 1, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 965, Target: 2, Traits: 2, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 63, Target: 3, Traits: 3, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 520, Target: 4, Traits: 4, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 5, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 469, Target: 6, Traits: 6, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 735, Target: 7, Traits: 7, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1269, Target: 8, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1150, Target: 9, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 989, Target: 10, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 945, Target: 11, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 273, Target: 12, Traits: 12, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 125, Target: 13, Traits: 13, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 779, Target: 14, Traits: 14, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1060, Target: 16, Traits: 13, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 32, Target: 17, Traits: 15, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 691, Target: 19, Traits: 15, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1237, Target: 21, Traits: 13, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1520, Target: 22, Traits: 13, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1608, Target: 208, Traits: 13, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1618, Target: 208, Traits: 13, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1300, Target: 25, Traits: 13, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 31, Traits: 13, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1406, Target: 27, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1406, Target: 28, Traits: 13, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 27, Traits: 13, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1341, Target: 30, Traits: 13, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1253, Target: 31, Traits: 13, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1406, Target: 27, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1477, Target: 93, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1341, Target: 30, Traits: 13, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1418, Target: 92, Traits: 13, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 984, Target: 36, Traits: 13, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 495, Target: 37, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 800, Target: 39, Traits: 13, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 713, Target: 40, Traits: 15, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 520, Target: 42, Traits: 13, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 121, Target: 45, Traits: 13, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 27, Target: 50, Traits: 13, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 620, Target: 45, Traits: 13, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1354, Target: 208, Traits: 13, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1430, Target: 208, Traits: 13, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 821, Target: 48, Traits: 13, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 42, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 520, Target: 50, Traits: 13, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 51, Traits: 13, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 121, Target: 54, Traits: 13, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 27, Target: 61, Traits: 13, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 94, Target: 54, Traits: 13, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1328, Target: 208, Traits: 13, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1510, Target: 208, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1354, Target: 208, Traits: 13, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1314, Target: 208, Traits: 13, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 358, Target: 59, Traits: 13, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 51, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 61, Traits: 13, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 735, Target: 62, Traits: 13, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 121, Target: 65, Traits: 13, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 27, Target: 71, Traits: 13, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 863, Target: 65, Traits: 13, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1488, Target: 208, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1314, Target: 208, Traits: 13, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1367, Target: 208, Traits: 13, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1096, Target: 69, Traits: 13, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 62, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 735, Target: 71, Traits: 13, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1530, Target: 72, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 502, Target: 74, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1003, Target: 75, Traits: 13, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 884, Target: 76, Traits: 13, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 85, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 570, Target: 78, Traits: 13, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1132, Target: 79, Traits: 13, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 925, Target: 80, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 644, Target: 81, Traits: 13, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 757, Target: 82, Traits: 13, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1574, Target: 208, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1550, Target: 208, Traits: 13, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 668, Target: 85, Traits: 13, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1148, Target: 79, Traits: 13, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 185, Target: 88, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 595, Target: 90, Traits: 18, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1418, Target: 92, Traits: 13, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1477, Target: 93, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1595, Target: 94, Traits: 13, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1595, Target: 95, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 94, Traits: 13, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 473, Target: 97, Traits: 13, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1626, Target: 94, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1613, Target: 100, Traits: 13, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1566, Target: 100, Traits: 13, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 739, Target: 101, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1540, Target: 119, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1380, Target: 104, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1380, Target: 104, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 739, Target: 105, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 101, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1454, Target: 107, Traits: 13, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1602, Target: 115, Traits: 13, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1442, Target: 109, Traits: 13, StrLen: 12, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1588, Target: 208, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1560, Target: 208, Traits: 13, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1499, Target: 208, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1558, Target: 208, Traits: 13, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1466, Target: 208, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1393, Target: 115, Traits: 13, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1380, Target: 104, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1540, Target: 119, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1442, Target: 109, Traits: 13, StrLen: 12, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1540, Target: 119, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1041, Target: 120, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1581, Target: 73, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 215, Target: 122, Traits: 13, StrLen: 29, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 121, Target: 80, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1406, Target: 28, Traits: 13, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 185, Target: 81, Traits: 13, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 739, Target: 105, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1520, Target: 22, Traits: 13, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1060, Target: 16, Traits: 13, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 473, Target: 97, Traits: 13, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 773, Target: 82, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 302, Target: 131, Traits: 13, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 244, Target: 133, Traits: 13, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 330, Target: 135, Traits: 13, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 965, Target: 137, Traits: 13, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1380, Target: 104, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 984, Target: 36, Traits: 13, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1078, Target: 140, Traits: 13, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 63, Target: 141, Traits: 13, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 155, Target: 143, Traits: 13, StrLen: 30, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 80, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 524, Target: 25, Traits: 13, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 185, Target: 81, Traits: 13, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 739, Target: 107, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1520, Target: 22, Traits: 13, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 586, Target: 78, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 773, Target: 82, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1237, Target: 21, Traits: 13, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 800, Target: 39, Traits: 13, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 473, Target: 97, Traits: 13, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 842, Target: 155, Traits: 13, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 379, Target: 48, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 502, Target: 74, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1530, Target: 72, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 905, Target: 159, Traits: 13, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 524, Target: 25, Traits: 13, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 502, Target: 74, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 386, Target: 162, Traits: 13, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 379, Target: 59, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 502, Target: 74, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1530, Target: 72, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 442, Target: 166, Traits: 13, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 502, Target: 74, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4, Target: 76, Traits: 13, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 469, Target: 169, Traits: 13, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 545, Target: 171, Traits: 13, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 473, Target: 97, Traits: 13, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1114, Target: 173, Traits: 13, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 379, Target: 69, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 502, Target: 74, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1530, Target: 72, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1186, Target: 177, Traits: 13, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 739, Target: 107, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 502, Target: 74, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1269, Target: 180, Traits: 13, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 739, Target: 101, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1060, Target: 16, Traits: 13, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1285, Target: 184, Traits: 13, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1150, Target: 186, Traits: 13, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 473, Target: 97, Traits: 13, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1203, Target: 189, Traits: 13, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 473, Target: 97, Traits: 13, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1168, Target: 191, Traits: 13, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1380, Target: 104, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1220, Target: 194, Traits: 13, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 945, Target: 196, Traits: 13, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 20, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1595, Target: 95, Traits: 21, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1022, Target: 199, Traits: 13, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 273, Target: 200, Traits: 13, StrLen: 29, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1019, Target: 75, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 80, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 773, Target: 82, Traits: 13, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1406, Target: 28, Traits: 13, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 739, Target: 105, Traits: 13, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1520, Target: 22, Traits: 13, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 414, Target: 207, Traits: 13, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1622, Target: 208, Traits: 13, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/createNotificationRule",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/deleteNotificationRule",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/deleteTarget",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/describeNotificationRule",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/listEventTypes",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/listNotificationRules",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/listTagsForResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/listTargets",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/subscribe",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/unsubscribe",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/untagResource/{Arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/updateNotificationRule",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [209]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+}
+
+var CreateNotificationRule = &handles[0]
+
+var DeleteNotificationRule = &handles[1]
+
+var DeleteTarget = &handles[2]
+
+var DescribeNotificationRule = &handles[3]
+
+var ListEventTypes = &handles[4]
+
+var ListNotificationRules = &handles[5]
+
+var ListTagsForResource = &handles[6]
+
+var ListTargets = &handles[7]
+
+var Subscribe = &handles[8]
+
+var TagResource = &handles[9]
+
+var Unsubscribe = &handles[10]
+
+var UntagResource = &handles[11]
+
+var UpdateNotificationRule = &handles[12]
+
+var _CodeStarNotifications_20191015 = &handles[13]
+
+var AccessDeniedException = &handles[14]
+var AccessDeniedException_Message = &handles[15]
+
+var _ClientRequestToken = &handles[16]
+
+var ConcurrentModificationException = &handles[17]
+var ConcurrentModificationException_Message = &handles[18]
+
+var ConfigurationException = &handles[19]
+var ConfigurationException_Message = &handles[20]
+
+var _CreatedTimestamp = &handles[21]
+
+var DetailType = &handles[22]
+var DetailType_BASIC = &handles[23]
+var DetailType_FULL = &handles[24]
+
+var _EventTypeBatch = &handles[25]
+var _EventTypeBatch_member = &handles[26]
+
+var _EventTypeId = &handles[27]
+
+var _EventTypeIds = &handles[28]
+var _EventTypeIds_member = &handles[29]
+
+var _EventTypeName = &handles[30]
+
+var EventTypeSummary = &handles[31]
+var EventTypeSummary_EventTypeId = &handles[32]
+var EventTypeSummary_ServiceName = &handles[33]
+var EventTypeSummary_EventTypeName = &handles[34]
+var EventTypeSummary_ResourceType = &handles[35]
+
+var _ForceUnsubscribeAll = &handles[36]
+
+var InvalidNextTokenException = &handles[37]
+var InvalidNextTokenException_Message = &handles[38]
+
+var _LastModifiedTimestamp = &handles[39]
+
+var LimitExceededException = &handles[40]
+var LimitExceededException_Message = &handles[41]
+
+var ListEventTypesFilter = &handles[42]
+var ListEventTypesFilter_Name = &handles[43]
+var ListEventTypesFilter_Value = &handles[44]
+
+var ListEventTypesFilterName = &handles[45]
+var ListEventTypesFilterName_RESOURCE_TYPE = &handles[46]
+var ListEventTypesFilterName_SERVICE_NAME = &handles[47]
+
+var _ListEventTypesFilters = &handles[48]
+var _ListEventTypesFilters_member = &handles[49]
+
+var _ListEventTypesFilterValue = &handles[50]
+
+var ListNotificationRulesFilter = &handles[51]
+var ListNotificationRulesFilter_Name = &handles[52]
+var ListNotificationRulesFilter_Value = &handles[53]
+
+var ListNotificationRulesFilterName = &handles[54]
+var ListNotificationRulesFilterName_EVENT_TYPE_ID = &handles[55]
+var ListNotificationRulesFilterName_CREATED_BY = &handles[56]
+var ListNotificationRulesFilterName_RESOURCE = &handles[57]
+var ListNotificationRulesFilterName_TARGET_ADDRESS = &handles[58]
+
+var _ListNotificationRulesFilters = &handles[59]
+var _ListNotificationRulesFilters_member = &handles[60]
+
+var _ListNotificationRulesFilterValue = &handles[61]
+
+var ListTargetsFilter = &handles[62]
+var ListTargetsFilter_Name = &handles[63]
+var ListTargetsFilter_Value = &handles[64]
+
+var ListTargetsFilterName = &handles[65]
+var ListTargetsFilterName_TARGET_TYPE = &handles[66]
+var ListTargetsFilterName_TARGET_ADDRESS = &handles[67]
+var ListTargetsFilterName_TARGET_STATUS = &handles[68]
+
+var _ListTargetsFilters = &handles[69]
+var _ListTargetsFilters_member = &handles[70]
+
+var _ListTargetsFilterValue = &handles[71]
+
+var _MaxResults = &handles[72]
+
+var _Message = &handles[73]
+
+var _NextToken = &handles[74]
+
+var _NotificationRuleArn = &handles[75]
+
+var _NotificationRuleBatch = &handles[76]
+var _NotificationRuleBatch_member = &handles[77]
+
+var _NotificationRuleCreatedBy = &handles[78]
+
+var _NotificationRuleId = &handles[79]
+
+var _NotificationRuleName = &handles[80]
+
+var _NotificationRuleResource = &handles[81]
+
+var NotificationRuleStatus = &handles[82]
+var NotificationRuleStatus_ENABLED = &handles[83]
+var NotificationRuleStatus_DISABLED = &handles[84]
+
+var NotificationRuleSummary = &handles[85]
+var NotificationRuleSummary_Id = &handles[86]
+var NotificationRuleSummary_Arn = &handles[87]
+
+var ResourceAlreadyExistsException = &handles[88]
+var ResourceAlreadyExistsException_Message = &handles[89]
+
+var ResourceNotFoundException = &handles[90]
+var ResourceNotFoundException_Message = &handles[91]
+
+var _ResourceType = &handles[92]
+
+var _ServiceName = &handles[93]
+
+var _TagKey = &handles[94]
+
+var _TagKeys = &handles[95]
+var _TagKeys_member = &handles[96]
+
+var _Tags = &handles[97]
+var _Tags_key = &handles[98]
+var _Tags_value = &handles[99]
+
+var _TagValue = &handles[100]
+
+var Target = &handles[101]
+var Target_TargetType = &handles[102]
+var Target_TargetAddress = &handles[103]
+
+var _TargetAddress = &handles[104]
+
+var _Targets = &handles[105]
+var _Targets_member = &handles[106]
+
+var _TargetsBatch = &handles[107]
+var _TargetsBatch_member = &handles[108]
+
+var TargetStatus = &handles[109]
+var TargetStatus_PENDING = &handles[110]
+var TargetStatus_ACTIVE = &handles[111]
+var TargetStatus_UNREACHABLE = &handles[112]
+var TargetStatus_INACTIVE = &handles[113]
+var TargetStatus_DEACTIVATED = &handles[114]
+
+var TargetSummary = &handles[115]
+var TargetSummary_TargetAddress = &handles[116]
+var TargetSummary_TargetType = &handles[117]
+var TargetSummary_TargetStatus = &handles[118]
+
+var _TargetType = &handles[119]
+
+var ValidationException = &handles[120]
+var ValidationException_Message = &handles[121]
+
+var CreateNotificationRuleRequest = &handles[122]
+var CreateNotificationRuleRequest_Name = &handles[123]
+var CreateNotificationRuleRequest_EventTypeIds = &handles[124]
+var CreateNotificationRuleRequest_Resource = &handles[125]
+var CreateNotificationRuleRequest_Targets = &handles[126]
+var CreateNotificationRuleRequest_DetailType = &handles[127]
+var CreateNotificationRuleRequest_ClientRequestToken = &handles[128]
+var CreateNotificationRuleRequest_Tags = &handles[129]
+var CreateNotificationRuleRequest_Status = &handles[130]
+
+var CreateNotificationRuleResult = &handles[131]
+var CreateNotificationRuleResult_Arn = &handles[132]
+
+var DeleteNotificationRuleRequest = &handles[133]
+var DeleteNotificationRuleRequest_Arn = &handles[134]
+
+var DeleteNotificationRuleResult = &handles[135]
+var DeleteNotificationRuleResult_Arn = &handles[136]
+
+var DeleteTargetRequest = &handles[137]
+var DeleteTargetRequest_TargetAddress = &handles[138]
+var DeleteTargetRequest_ForceUnsubscribeAll = &handles[139]
+
+var DeleteTargetResult = &handles[140]
+
+var DescribeNotificationRuleRequest = &handles[141]
+var DescribeNotificationRuleRequest_Arn = &handles[142]
+
+var DescribeNotificationRuleResult = &handles[143]
+var DescribeNotificationRuleResult_Arn = &handles[144]
+var DescribeNotificationRuleResult_Name = &handles[145]
+var DescribeNotificationRuleResult_EventTypes = &handles[146]
+var DescribeNotificationRuleResult_Resource = &handles[147]
+var DescribeNotificationRuleResult_Targets = &handles[148]
+var DescribeNotificationRuleResult_DetailType = &handles[149]
+var DescribeNotificationRuleResult_CreatedBy = &handles[150]
+var DescribeNotificationRuleResult_Status = &handles[151]
+var DescribeNotificationRuleResult_CreatedTimestamp = &handles[152]
+var DescribeNotificationRuleResult_LastModifiedTimestamp = &handles[153]
+var DescribeNotificationRuleResult_Tags = &handles[154]
+
+var ListEventTypesRequest = &handles[155]
+var ListEventTypesRequest_Filters = &handles[156]
+var ListEventTypesRequest_NextToken = &handles[157]
+var ListEventTypesRequest_MaxResults = &handles[158]
+
+var ListEventTypesResult = &handles[159]
+var ListEventTypesResult_EventTypes = &handles[160]
+var ListEventTypesResult_NextToken = &handles[161]
+
+var ListNotificationRulesRequest = &handles[162]
+var ListNotificationRulesRequest_Filters = &handles[163]
+var ListNotificationRulesRequest_NextToken = &handles[164]
+var ListNotificationRulesRequest_MaxResults = &handles[165]
+
+var ListNotificationRulesResult = &handles[166]
+var ListNotificationRulesResult_NextToken = &handles[167]
+var ListNotificationRulesResult_NotificationRules = &handles[168]
+
+var ListTagsForResourceRequest = &handles[169]
+var ListTagsForResourceRequest_Arn = &handles[170]
+
+var ListTagsForResourceResult = &handles[171]
+var ListTagsForResourceResult_Tags = &handles[172]
+
+var ListTargetsRequest = &handles[173]
+var ListTargetsRequest_Filters = &handles[174]
+var ListTargetsRequest_NextToken = &handles[175]
+var ListTargetsRequest_MaxResults = &handles[176]
+
+var ListTargetsResult = &handles[177]
+var ListTargetsResult_Targets = &handles[178]
+var ListTargetsResult_NextToken = &handles[179]
+
+var SubscribeRequest = &handles[180]
+var SubscribeRequest_Arn = &handles[181]
+var SubscribeRequest_Target = &handles[182]
+var SubscribeRequest_ClientRequestToken = &handles[183]
+
+var SubscribeResult = &handles[184]
+var SubscribeResult_Arn = &handles[185]
+
+var TagResourceRequest = &handles[186]
+var TagResourceRequest_Arn = &handles[187]
+var TagResourceRequest_Tags = &handles[188]
+
+var TagResourceResult = &handles[189]
+var TagResourceResult_Tags = &handles[190]
+
+var UnsubscribeRequest = &handles[191]
+var UnsubscribeRequest_Arn = &handles[192]
+var UnsubscribeRequest_TargetAddress = &handles[193]
+
+var UnsubscribeResult = &handles[194]
+var UnsubscribeResult_Arn = &handles[195]
+
+var UntagResourceRequest = &handles[196]
+var UntagResourceRequest_Arn = &handles[197]
+var UntagResourceRequest_TagKeys = &handles[198]
+
+var UntagResourceResult = &handles[199]
+
+var UpdateNotificationRuleRequest = &handles[200]
+var UpdateNotificationRuleRequest_Arn = &handles[201]
+var UpdateNotificationRuleRequest_Name = &handles[202]
+var UpdateNotificationRuleRequest_Status = &handles[203]
+var UpdateNotificationRuleRequest_EventTypeIds = &handles[204]
+var UpdateNotificationRuleRequest_Targets = &handles[205]
+var UpdateNotificationRuleRequest_DetailType = &handles[206]
+
+var UpdateNotificationRuleResult = &handles[207]
+
+var CodeStarNotifications_20191015 = &smithy.ServiceSchema{Schema: &handles[13], Version: "2019-10-15"}

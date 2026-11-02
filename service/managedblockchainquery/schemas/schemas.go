@@ -4,1128 +4,971 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetTokenBalance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/batch-get-token-balance",
-	Code: 200})
-
-var GetAssetContract = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetAssetContract",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/get-asset-contract",
-	Code: 200})
-
-var GetTokenBalance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTokenBalance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/get-token-balance",
-	Code: 200})
-
-var GetTransaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTransaction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/get-transaction",
-	Code: 200})
-
-var ListAssetContracts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListAssetContracts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/list-asset-contracts",
-	Code: 200})
-
-var ListFilteredTransactionEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/list-filtered-transaction-events",
-	Code: 200})
-
-var ListTokenBalances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTokenBalances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/list-token-balances",
-	Code: 200})
-
-var ListTransactionEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/list-transaction-events",
-	Code: 200})
-
-var ListTransactions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/list-transactions",
-	Code: 200})
-
-var _TietonChainQueryService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TietonChainQueryService",
-}, smithy.ShapeTypeService, 0)
-
-var TietonChainQueryService = smithy.NewServiceSchema(_TietonChainQueryService, "2023-05-04")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AddressIdentifierFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "AddressIdentifierFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AddressIdentifierFilter_transactionEventToAddress *smithy.Schema
-
-var AssetContract = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "AssetContract",
-}, smithy.ShapeTypeStructure, 3)
-var AssetContract_contractIdentifier *smithy.Schema
-
-var AssetContract_tokenStandard *smithy.Schema
-
-var AssetContract_deployerAddress *smithy.Schema
-
-var _AssetContractList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "AssetContractList",
-}, smithy.ShapeTypeList, 1)
-var _AssetContractList_member *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceErrorItem",
-}, smithy.ShapeTypeStructure, 6)
-var BatchGetTokenBalanceErrorItem_tokenIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_ownerIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_atBlockchainInstant *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_errorCode *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_errorMessage *smithy.Schema
-
-var BatchGetTokenBalanceErrorItem_errorType *smithy.Schema
-
-var _BatchGetTokenBalanceErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetTokenBalanceErrors_member *smithy.Schema
-
-var BatchGetTokenBalanceInputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceInputItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchGetTokenBalanceInputItem_tokenIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceInputItem_ownerIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceInputItem_atBlockchainInstant *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceOutputItem",
-}, smithy.ShapeTypeStructure, 5)
-var BatchGetTokenBalanceOutputItem_ownerIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem_tokenIdentifier *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem_balance *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem_atBlockchainInstant *smithy.Schema
-
-var BatchGetTokenBalanceOutputItem_lastUpdatedTime *smithy.Schema
-
-var _BatchGetTokenBalanceOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceOutputList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetTokenBalanceOutputList_member *smithy.Schema
-
-var BlockchainInstant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BlockchainInstant",
-}, smithy.ShapeTypeStructure, 1)
-var BlockchainInstant_time *smithy.Schema
-
-var _BlockHash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BlockHash",
-}, smithy.ShapeTypeString, 0)
-
-var _ChainAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ChainAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _ChainAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ChainAddresses",
-}, smithy.ShapeTypeList, 1)
-var _ChainAddresses_member *smithy.Schema
-
-var _ConfirmationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ConfirmationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ConfirmationStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ConfirmationStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmationStatusFilter_include *smithy.Schema
-
-var _ConfirmationStatusIncludeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ConfirmationStatusIncludeList",
-}, smithy.ShapeTypeList, 1)
-var _ConfirmationStatusIncludeList_member *smithy.Schema
-
-var ContractFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ContractFilter",
-}, smithy.ShapeTypeStructure, 3)
-var ContractFilter_network *smithy.Schema
-
-var ContractFilter_tokenStandard *smithy.Schema
-
-var ContractFilter_deployerAddress *smithy.Schema
-
-var ContractIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ContractIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var ContractIdentifier_network *smithy.Schema
-
-var ContractIdentifier_contractAddress *smithy.Schema
-
-var ContractMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ContractMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var ContractMetadata_name *smithy.Schema
-
-var ContractMetadata_symbol *smithy.Schema
-
-var ContractMetadata_decimals *smithy.Schema
-
-var _ErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ExecutionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _GetTokenBalanceInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTokenBalanceInputList",
-}, smithy.ShapeTypeList, 1)
-var _GetTokenBalanceInputList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var ListFilteredTransactionEventsSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEventsSort",
-}, smithy.ShapeTypeStructure, 2)
-var ListFilteredTransactionEventsSort_sortBy *smithy.Schema
-
-var ListFilteredTransactionEventsSort_sortOrder *smithy.Schema
-
-var _ListFilteredTransactionEventsSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEventsSortBy",
-}, smithy.ShapeTypeString, 0)
-
-var ListTransactionsSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionsSort",
-}, smithy.ShapeTypeStructure, 2)
-var ListTransactionsSort_sortBy *smithy.Schema
-
-var ListTransactionsSort_sortOrder *smithy.Schema
-
-var _ListTransactionsSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionsSortBy",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OwnerFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "OwnerFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OwnerFilter_address *smithy.Schema
-
-var OwnerIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "OwnerIdentifier",
-}, smithy.ShapeTypeStructure, 1)
-var OwnerIdentifier_address *smithy.Schema
-
-var _QueryNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryNetwork",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTokenId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTokenId",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTokenStandard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTokenStandard",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTransactionEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTransactionEventType",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTransactionHash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTransactionHash",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryTransactionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QueryTransactionId",
-}, smithy.ShapeTypeString, 0)
-
-var _QuotaCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "QuotaCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TimeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TimeFilter",
-}, smithy.ShapeTypeStructure, 2)
-var TimeFilter_from *smithy.Schema
-
-var TimeFilter_to *smithy.Schema
-
-var TokenBalance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TokenBalance",
-}, smithy.ShapeTypeStructure, 5)
-var TokenBalance_ownerIdentifier *smithy.Schema
-
-var TokenBalance_tokenIdentifier *smithy.Schema
-
-var TokenBalance_balance *smithy.Schema
-
-var TokenBalance_atBlockchainInstant *smithy.Schema
-
-var TokenBalance_lastUpdatedTime *smithy.Schema
-
-var _TokenBalanceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TokenBalanceList",
-}, smithy.ShapeTypeList, 1)
-var _TokenBalanceList_member *smithy.Schema
-
-var TokenFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TokenFilter",
-}, smithy.ShapeTypeStructure, 3)
-var TokenFilter_network *smithy.Schema
-
-var TokenFilter_contractAddress *smithy.Schema
-
-var TokenFilter_tokenId *smithy.Schema
-
-var TokenIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TokenIdentifier",
-}, smithy.ShapeTypeStructure, 3)
-var TokenIdentifier_network *smithy.Schema
-
-var TokenIdentifier_contractAddress *smithy.Schema
-
-var TokenIdentifier_tokenId *smithy.Schema
-
-var Transaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "Transaction",
-}, smithy.ShapeTypeStructure, 20)
-var Transaction_network *smithy.Schema
-
-var Transaction_blockHash *smithy.Schema
-
-var Transaction_transactionHash *smithy.Schema
-
-var Transaction_blockNumber *smithy.Schema
-
-var Transaction_transactionTimestamp *smithy.Schema
-
-var Transaction_transactionIndex *smithy.Schema
-
-var Transaction_numberOfTransactions *smithy.Schema
-
-var Transaction_to *smithy.Schema
-
-var Transaction_from *smithy.Schema
-
-var Transaction_contractAddress *smithy.Schema
-
-var Transaction_gasUsed *smithy.Schema
-
-var Transaction_cumulativeGasUsed *smithy.Schema
-
-var Transaction_effectiveGasPrice *smithy.Schema
-
-var Transaction_signatureV *smithy.Schema
-
-var Transaction_signatureR *smithy.Schema
-
-var Transaction_signatureS *smithy.Schema
-
-var Transaction_transactionFee *smithy.Schema
-
-var Transaction_transactionId *smithy.Schema
-
-var Transaction_confirmationStatus *smithy.Schema
-
-var Transaction_executionStatus *smithy.Schema
-
-var TransactionEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TransactionEvent",
-}, smithy.ShapeTypeStructure, 16)
-var TransactionEvent_network *smithy.Schema
-
-var TransactionEvent_transactionHash *smithy.Schema
-
-var TransactionEvent_eventType *smithy.Schema
-
-var TransactionEvent_from *smithy.Schema
-
-var TransactionEvent_to *smithy.Schema
-
-var TransactionEvent_value *smithy.Schema
-
-var TransactionEvent_contractAddress *smithy.Schema
-
-var TransactionEvent_tokenId *smithy.Schema
-
-var TransactionEvent_transactionId *smithy.Schema
-
-var TransactionEvent_voutIndex *smithy.Schema
-
-var TransactionEvent_voutSpent *smithy.Schema
-
-var TransactionEvent_spentVoutTransactionId *smithy.Schema
-
-var TransactionEvent_spentVoutTransactionHash *smithy.Schema
-
-var TransactionEvent_spentVoutIndex *smithy.Schema
-
-var TransactionEvent_blockchainInstant *smithy.Schema
-
-var TransactionEvent_confirmationStatus *smithy.Schema
-
-var _TransactionEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TransactionEventList",
-}, smithy.ShapeTypeList, 1)
-var _TransactionEventList_member *smithy.Schema
-
-var TransactionOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TransactionOutputItem",
-}, smithy.ShapeTypeStructure, 5)
-var TransactionOutputItem_transactionHash *smithy.Schema
-
-var TransactionOutputItem_transactionId *smithy.Schema
-
-var TransactionOutputItem_network *smithy.Schema
-
-var TransactionOutputItem_transactionTimestamp *smithy.Schema
-
-var TransactionOutputItem_confirmationStatus *smithy.Schema
-
-var _TransactionOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "TransactionOutputList",
-}, smithy.ShapeTypeList, 1)
-var _TransactionOutputList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var VoutFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "VoutFilter",
-}, smithy.ShapeTypeStructure, 1)
-var VoutFilter_voutSpent *smithy.Schema
-
-var BatchGetTokenBalanceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetTokenBalanceInput_getTokenBalanceInputs *smithy.Schema
-
-var BatchGetTokenBalanceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "BatchGetTokenBalanceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetTokenBalanceOutput_tokenBalances *smithy.Schema
-
-var BatchGetTokenBalanceOutput_errors *smithy.Schema
-
-var GetAssetContractInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetAssetContractInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAssetContractInput_contractIdentifier *smithy.Schema
-
-var GetAssetContractOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetAssetContractOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetAssetContractOutput_contractIdentifier *smithy.Schema
-
-var GetAssetContractOutput_tokenStandard *smithy.Schema
-
-var GetAssetContractOutput_deployerAddress *smithy.Schema
-
-var GetAssetContractOutput_metadata *smithy.Schema
-
-var GetTokenBalanceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTokenBalanceInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetTokenBalanceInput_tokenIdentifier *smithy.Schema
-
-var GetTokenBalanceInput_ownerIdentifier *smithy.Schema
-
-var GetTokenBalanceInput_atBlockchainInstant *smithy.Schema
-
-var GetTokenBalanceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTokenBalanceOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetTokenBalanceOutput_ownerIdentifier *smithy.Schema
-
-var GetTokenBalanceOutput_tokenIdentifier *smithy.Schema
-
-var GetTokenBalanceOutput_balance *smithy.Schema
-
-var GetTokenBalanceOutput_atBlockchainInstant *smithy.Schema
-
-var GetTokenBalanceOutput_lastUpdatedTime *smithy.Schema
-
-var GetTransactionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTransactionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetTransactionInput_transactionHash *smithy.Schema
-
-var GetTransactionInput_transactionId *smithy.Schema
-
-var GetTransactionInput_network *smithy.Schema
-
-var GetTransactionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "GetTransactionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTransactionOutput_transaction *smithy.Schema
-
-var ListAssetContractsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListAssetContractsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssetContractsInput_contractFilter *smithy.Schema
-
-var ListAssetContractsInput_nextToken *smithy.Schema
-
-var ListAssetContractsInput_maxResults *smithy.Schema
-
-var ListAssetContractsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListAssetContractsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssetContractsOutput_contracts *smithy.Schema
-
-var ListAssetContractsOutput_nextToken *smithy.Schema
-
-var ListFilteredTransactionEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEventsInput",
-}, smithy.ShapeTypeStructure, 8)
-var ListFilteredTransactionEventsInput_network *smithy.Schema
-
-var ListFilteredTransactionEventsInput_addressIdentifierFilter *smithy.Schema
-
-var ListFilteredTransactionEventsInput_timeFilter *smithy.Schema
-
-var ListFilteredTransactionEventsInput_voutFilter *smithy.Schema
-
-var ListFilteredTransactionEventsInput_confirmationStatusFilter *smithy.Schema
-
-var ListFilteredTransactionEventsInput_sort *smithy.Schema
-
-var ListFilteredTransactionEventsInput_nextToken *smithy.Schema
-
-var ListFilteredTransactionEventsInput_maxResults *smithy.Schema
-
-var ListFilteredTransactionEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListFilteredTransactionEventsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFilteredTransactionEventsOutput_events *smithy.Schema
-
-var ListFilteredTransactionEventsOutput_nextToken *smithy.Schema
-
-var ListTokenBalancesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTokenBalancesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListTokenBalancesInput_ownerFilter *smithy.Schema
-
-var ListTokenBalancesInput_tokenFilter *smithy.Schema
-
-var ListTokenBalancesInput_nextToken *smithy.Schema
-
-var ListTokenBalancesInput_maxResults *smithy.Schema
-
-var ListTokenBalancesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTokenBalancesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTokenBalancesOutput_tokenBalances *smithy.Schema
-
-var ListTokenBalancesOutput_nextToken *smithy.Schema
-
-var ListTransactionEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionEventsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListTransactionEventsInput_transactionHash *smithy.Schema
-
-var ListTransactionEventsInput_transactionId *smithy.Schema
-
-var ListTransactionEventsInput_network *smithy.Schema
-
-var ListTransactionEventsInput_nextToken *smithy.Schema
-
-var ListTransactionEventsInput_maxResults *smithy.Schema
-
-var ListTransactionEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionEventsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTransactionEventsOutput_events *smithy.Schema
-
-var ListTransactionEventsOutput_nextToken *smithy.Schema
-
-var ListTransactionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionsInput",
-}, smithy.ShapeTypeStructure, 8)
-var ListTransactionsInput_address *smithy.Schema
-
-var ListTransactionsInput_network *smithy.Schema
-
-var ListTransactionsInput_fromBlockchainInstant *smithy.Schema
-
-var ListTransactionsInput_toBlockchainInstant *smithy.Schema
-
-var ListTransactionsInput_sort *smithy.Schema
-
-var ListTransactionsInput_nextToken *smithy.Schema
-
-var ListTransactionsInput_maxResults *smithy.Schema
-
-var ListTransactionsInput_confirmationStatusFilter *smithy.Schema
-
-var ListTransactionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.managedblockchainquery",
-	Name:      "ListTransactionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTransactionsOutput_transactions *smithy.Schema
-
-var ListTransactionsOutput_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ExceptionMessage)
-
-	_ChainAddresses_member = _ChainAddresses.AddMember("member", _ChainAddress)
-
-	AddressIdentifierFilter_transactionEventToAddress = AddressIdentifierFilter.AddMember("transactionEventToAddress", _ChainAddresses)
-
-	ContractIdentifier_network = ContractIdentifier.AddMember("network", _QueryNetwork)
-
-	ContractIdentifier_contractAddress = ContractIdentifier.AddMember("contractAddress", _ChainAddress)
-
-	AssetContract_contractIdentifier = AssetContract.AddMember("contractIdentifier", ContractIdentifier)
-
-	AssetContract_tokenStandard = AssetContract.AddMember("tokenStandard", _QueryTokenStandard)
-
-	AssetContract_deployerAddress = AssetContract.AddMember("deployerAddress", _ChainAddress)
-
-	_AssetContractList_member = _AssetContractList.AddMember("member", AssetContract)
-
-	TokenIdentifier_network = TokenIdentifier.AddMember("network", _QueryNetwork)
-
-	TokenIdentifier_contractAddress = TokenIdentifier.AddMember("contractAddress", _ChainAddress)
-
-	TokenIdentifier_tokenId = TokenIdentifier.AddMember("tokenId", _QueryTokenId)
-
-	OwnerIdentifier_address = OwnerIdentifier.AddMember("address", _ChainAddress)
-
-	BlockchainInstant_time = BlockchainInstant.AddMember("time", smithyprelude.Timestamp)
-
-	BatchGetTokenBalanceErrorItem_tokenIdentifier = BatchGetTokenBalanceErrorItem.AddMember("tokenIdentifier", TokenIdentifier)
-
-	BatchGetTokenBalanceErrorItem_ownerIdentifier = BatchGetTokenBalanceErrorItem.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	BatchGetTokenBalanceErrorItem_atBlockchainInstant = BatchGetTokenBalanceErrorItem.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	BatchGetTokenBalanceErrorItem_errorCode = BatchGetTokenBalanceErrorItem.AddMember("errorCode", smithyprelude.String)
-
-	BatchGetTokenBalanceErrorItem_errorMessage = BatchGetTokenBalanceErrorItem.AddMember("errorMessage", smithyprelude.String)
-
-	BatchGetTokenBalanceErrorItem_errorType = BatchGetTokenBalanceErrorItem.AddMember("errorType", _ErrorType)
-
-	_BatchGetTokenBalanceErrors_member = _BatchGetTokenBalanceErrors.AddMember("member", BatchGetTokenBalanceErrorItem)
-
-	BatchGetTokenBalanceInputItem_tokenIdentifier = BatchGetTokenBalanceInputItem.AddMember("tokenIdentifier", TokenIdentifier)
-
-	BatchGetTokenBalanceInputItem_ownerIdentifier = BatchGetTokenBalanceInputItem.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	BatchGetTokenBalanceInputItem_atBlockchainInstant = BatchGetTokenBalanceInputItem.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	BatchGetTokenBalanceOutputItem_ownerIdentifier = BatchGetTokenBalanceOutputItem.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	BatchGetTokenBalanceOutputItem_tokenIdentifier = BatchGetTokenBalanceOutputItem.AddMember("tokenIdentifier", TokenIdentifier)
-
-	BatchGetTokenBalanceOutputItem_balance = BatchGetTokenBalanceOutputItem.AddMember("balance", smithyprelude.String)
-
-	BatchGetTokenBalanceOutputItem_atBlockchainInstant = BatchGetTokenBalanceOutputItem.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	BatchGetTokenBalanceOutputItem_lastUpdatedTime = BatchGetTokenBalanceOutputItem.AddMember("lastUpdatedTime", BlockchainInstant)
-
-	_BatchGetTokenBalanceOutputList_member = _BatchGetTokenBalanceOutputList.AddMember("member", BatchGetTokenBalanceOutputItem)
-
-	_ConfirmationStatusIncludeList_member = _ConfirmationStatusIncludeList.AddMember("member", _ConfirmationStatus)
-
-	ConfirmationStatusFilter_include = ConfirmationStatusFilter.AddMember("include", _ConfirmationStatusIncludeList)
-
-	ContractFilter_network = ContractFilter.AddMember("network", _QueryNetwork)
-
-	ContractFilter_tokenStandard = ContractFilter.AddMember("tokenStandard", _QueryTokenStandard)
-
-	ContractFilter_deployerAddress = ContractFilter.AddMember("deployerAddress", _ChainAddress)
-
-	ContractMetadata_name = ContractMetadata.AddMember("name", smithyprelude.String)
-
-	ContractMetadata_symbol = ContractMetadata.AddMember("symbol", smithyprelude.String)
-
-	ContractMetadata_decimals = ContractMetadata.AddMember("decimals", smithyprelude.Integer)
-
-	_GetTokenBalanceInputList_member = _GetTokenBalanceInputList.AddMember("member", BatchGetTokenBalanceInputItem)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ExceptionMessage)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ListFilteredTransactionEventsSort_sortBy = ListFilteredTransactionEventsSort.AddMember("sortBy", _ListFilteredTransactionEventsSortBy)
-
-	ListFilteredTransactionEventsSort_sortOrder = ListFilteredTransactionEventsSort.AddMember("sortOrder", _SortOrder)
-
-	ListTransactionsSort_sortBy = ListTransactionsSort.AddMember("sortBy", _ListTransactionsSortBy)
-
-	ListTransactionsSort_sortOrder = ListTransactionsSort.AddMember("sortOrder", _SortOrder)
-
-	OwnerFilter_address = OwnerFilter.AddMember("address", _ChainAddress)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ExceptionMessage)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _ResourceId)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ExceptionMessage)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _ResourceId)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _ServiceCode)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _QuotaCode)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ExceptionMessage)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _ServiceCode)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _QuotaCode)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	TimeFilter_from = TimeFilter.AddMember("from", BlockchainInstant)
-
-	TimeFilter_to = TimeFilter.AddMember("to", BlockchainInstant)
-
-	TokenBalance_ownerIdentifier = TokenBalance.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	TokenBalance_tokenIdentifier = TokenBalance.AddMember("tokenIdentifier", TokenIdentifier)
-
-	TokenBalance_balance = TokenBalance.AddMember("balance", smithyprelude.String)
-
-	TokenBalance_atBlockchainInstant = TokenBalance.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	TokenBalance_lastUpdatedTime = TokenBalance.AddMember("lastUpdatedTime", BlockchainInstant)
-
-	_TokenBalanceList_member = _TokenBalanceList.AddMember("member", TokenBalance)
-
-	TokenFilter_network = TokenFilter.AddMember("network", _QueryNetwork)
-
-	TokenFilter_contractAddress = TokenFilter.AddMember("contractAddress", _ChainAddress)
-
-	TokenFilter_tokenId = TokenFilter.AddMember("tokenId", _QueryTokenId)
-
-	Transaction_network = Transaction.AddMember("network", _QueryNetwork)
-
-	Transaction_blockHash = Transaction.AddMember("blockHash", _BlockHash)
-
-	Transaction_transactionHash = Transaction.AddMember("transactionHash", _QueryTransactionHash)
-
-	Transaction_blockNumber = Transaction.AddMember("blockNumber", smithyprelude.String)
-
-	Transaction_transactionTimestamp = Transaction.AddMember("transactionTimestamp", smithyprelude.Timestamp)
-
-	Transaction_transactionIndex = Transaction.AddMember("transactionIndex", smithyprelude.Long)
-
-	Transaction_numberOfTransactions = Transaction.AddMember("numberOfTransactions", smithyprelude.Long)
-
-	Transaction_to = Transaction.AddMember("to", _ChainAddress)
-
-	Transaction_from = Transaction.AddMember("from", _ChainAddress)
-
-	Transaction_contractAddress = Transaction.AddMember("contractAddress", _ChainAddress)
-
-	Transaction_gasUsed = Transaction.AddMember("gasUsed", smithyprelude.String)
-
-	Transaction_cumulativeGasUsed = Transaction.AddMember("cumulativeGasUsed", smithyprelude.String)
-
-	Transaction_effectiveGasPrice = Transaction.AddMember("effectiveGasPrice", smithyprelude.String)
-
-	Transaction_signatureV = Transaction.AddMember("signatureV", smithyprelude.Integer)
-
-	Transaction_signatureR = Transaction.AddMember("signatureR", smithyprelude.String)
-
-	Transaction_signatureS = Transaction.AddMember("signatureS", smithyprelude.String)
-
-	Transaction_transactionFee = Transaction.AddMember("transactionFee", smithyprelude.String)
-
-	Transaction_transactionId = Transaction.AddMember("transactionId", smithyprelude.String)
-
-	Transaction_confirmationStatus = Transaction.AddMember("confirmationStatus", _ConfirmationStatus)
-
-	Transaction_executionStatus = Transaction.AddMember("executionStatus", _ExecutionStatus)
-
-	TransactionEvent_network = TransactionEvent.AddMember("network", _QueryNetwork)
-
-	TransactionEvent_transactionHash = TransactionEvent.AddMember("transactionHash", _QueryTransactionHash)
-
-	TransactionEvent_eventType = TransactionEvent.AddMember("eventType", _QueryTransactionEventType)
-
-	TransactionEvent_from = TransactionEvent.AddMember("from", _ChainAddress)
-
-	TransactionEvent_to = TransactionEvent.AddMember("to", _ChainAddress)
-
-	TransactionEvent_value = TransactionEvent.AddMember("value", smithyprelude.String)
-
-	TransactionEvent_contractAddress = TransactionEvent.AddMember("contractAddress", _ChainAddress)
-
-	TransactionEvent_tokenId = TransactionEvent.AddMember("tokenId", _QueryTokenId)
-
-	TransactionEvent_transactionId = TransactionEvent.AddMember("transactionId", smithyprelude.String)
-
-	TransactionEvent_voutIndex = TransactionEvent.AddMember("voutIndex", smithyprelude.Integer)
-
-	TransactionEvent_voutSpent = TransactionEvent.AddMember("voutSpent", smithyprelude.Boolean)
-
-	TransactionEvent_spentVoutTransactionId = TransactionEvent.AddMember("spentVoutTransactionId", smithyprelude.String)
-
-	TransactionEvent_spentVoutTransactionHash = TransactionEvent.AddMember("spentVoutTransactionHash", smithyprelude.String)
-
-	TransactionEvent_spentVoutIndex = TransactionEvent.AddMember("spentVoutIndex", smithyprelude.Integer)
-
-	TransactionEvent_blockchainInstant = TransactionEvent.AddMember("blockchainInstant", BlockchainInstant)
-
-	TransactionEvent_confirmationStatus = TransactionEvent.AddMember("confirmationStatus", _ConfirmationStatus)
-
-	_TransactionEventList_member = _TransactionEventList.AddMember("member", TransactionEvent)
-
-	TransactionOutputItem_transactionHash = TransactionOutputItem.AddMember("transactionHash", _QueryTransactionHash)
-
-	TransactionOutputItem_transactionId = TransactionOutputItem.AddMember("transactionId", _QueryTransactionId)
-
-	TransactionOutputItem_network = TransactionOutputItem.AddMember("network", _QueryNetwork)
-
-	TransactionOutputItem_transactionTimestamp = TransactionOutputItem.AddMember("transactionTimestamp", smithyprelude.Timestamp)
-
-	TransactionOutputItem_confirmationStatus = TransactionOutputItem.AddMember("confirmationStatus", _ConfirmationStatus)
-
-	_TransactionOutputList_member = _TransactionOutputList.AddMember("member", TransactionOutputItem)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ExceptionMessage)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	VoutFilter_voutSpent = VoutFilter.AddMember("voutSpent", smithyprelude.Boolean)
-
-	BatchGetTokenBalanceInput_getTokenBalanceInputs = BatchGetTokenBalanceInput.AddMember("getTokenBalanceInputs", _GetTokenBalanceInputList)
-
-	BatchGetTokenBalanceOutput_tokenBalances = BatchGetTokenBalanceOutput.AddMember("tokenBalances", _BatchGetTokenBalanceOutputList)
-
-	BatchGetTokenBalanceOutput_errors = BatchGetTokenBalanceOutput.AddMember("errors", _BatchGetTokenBalanceErrors)
-
-	GetAssetContractInput_contractIdentifier = GetAssetContractInput.AddMember("contractIdentifier", ContractIdentifier)
-
-	GetAssetContractOutput_contractIdentifier = GetAssetContractOutput.AddMember("contractIdentifier", ContractIdentifier)
-
-	GetAssetContractOutput_tokenStandard = GetAssetContractOutput.AddMember("tokenStandard", _QueryTokenStandard)
-
-	GetAssetContractOutput_deployerAddress = GetAssetContractOutput.AddMember("deployerAddress", _ChainAddress)
-
-	GetAssetContractOutput_metadata = GetAssetContractOutput.AddMember("metadata", ContractMetadata)
-
-	GetTokenBalanceInput_tokenIdentifier = GetTokenBalanceInput.AddMember("tokenIdentifier", TokenIdentifier)
-
-	GetTokenBalanceInput_ownerIdentifier = GetTokenBalanceInput.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	GetTokenBalanceInput_atBlockchainInstant = GetTokenBalanceInput.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	GetTokenBalanceOutput_ownerIdentifier = GetTokenBalanceOutput.AddMember("ownerIdentifier", OwnerIdentifier)
-
-	GetTokenBalanceOutput_tokenIdentifier = GetTokenBalanceOutput.AddMember("tokenIdentifier", TokenIdentifier)
-
-	GetTokenBalanceOutput_balance = GetTokenBalanceOutput.AddMember("balance", smithyprelude.String)
-
-	GetTokenBalanceOutput_atBlockchainInstant = GetTokenBalanceOutput.AddMember("atBlockchainInstant", BlockchainInstant)
-
-	GetTokenBalanceOutput_lastUpdatedTime = GetTokenBalanceOutput.AddMember("lastUpdatedTime", BlockchainInstant)
-
-	GetTransactionInput_transactionHash = GetTransactionInput.AddMember("transactionHash", _QueryTransactionHash)
-
-	GetTransactionInput_transactionId = GetTransactionInput.AddMember("transactionId", _QueryTransactionId)
-
-	GetTransactionInput_network = GetTransactionInput.AddMember("network", _QueryNetwork)
-
-	GetTransactionOutput_transaction = GetTransactionOutput.AddMember("transaction", Transaction)
-
-	ListAssetContractsInput_contractFilter = ListAssetContractsInput.AddMember("contractFilter", ContractFilter)
-
-	ListAssetContractsInput_nextToken = ListAssetContractsInput.AddMember("nextToken", _NextToken)
-
-	ListAssetContractsInput_maxResults = ListAssetContractsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAssetContractsOutput_contracts = ListAssetContractsOutput.AddMember("contracts", _AssetContractList)
-
-	ListAssetContractsOutput_nextToken = ListAssetContractsOutput.AddMember("nextToken", _NextToken)
-
-	ListFilteredTransactionEventsInput_network = ListFilteredTransactionEventsInput.AddMember("network", smithyprelude.String)
-
-	ListFilteredTransactionEventsInput_addressIdentifierFilter = ListFilteredTransactionEventsInput.AddMember("addressIdentifierFilter", AddressIdentifierFilter)
-
-	ListFilteredTransactionEventsInput_timeFilter = ListFilteredTransactionEventsInput.AddMember("timeFilter", TimeFilter)
-
-	ListFilteredTransactionEventsInput_voutFilter = ListFilteredTransactionEventsInput.AddMember("voutFilter", VoutFilter)
-
-	ListFilteredTransactionEventsInput_confirmationStatusFilter = ListFilteredTransactionEventsInput.AddMember("confirmationStatusFilter", ConfirmationStatusFilter)
-
-	ListFilteredTransactionEventsInput_sort = ListFilteredTransactionEventsInput.AddMember("sort", ListFilteredTransactionEventsSort)
-
-	ListFilteredTransactionEventsInput_nextToken = ListFilteredTransactionEventsInput.AddMember("nextToken", _NextToken)
-
-	ListFilteredTransactionEventsInput_maxResults = ListFilteredTransactionEventsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListFilteredTransactionEventsOutput_events = ListFilteredTransactionEventsOutput.AddMember("events", _TransactionEventList)
-
-	ListFilteredTransactionEventsOutput_nextToken = ListFilteredTransactionEventsOutput.AddMember("nextToken", _NextToken)
-
-	ListTokenBalancesInput_ownerFilter = ListTokenBalancesInput.AddMember("ownerFilter", OwnerFilter)
-
-	ListTokenBalancesInput_tokenFilter = ListTokenBalancesInput.AddMember("tokenFilter", TokenFilter)
-
-	ListTokenBalancesInput_nextToken = ListTokenBalancesInput.AddMember("nextToken", _NextToken)
-
-	ListTokenBalancesInput_maxResults = ListTokenBalancesInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListTokenBalancesOutput_tokenBalances = ListTokenBalancesOutput.AddMember("tokenBalances", _TokenBalanceList)
-
-	ListTokenBalancesOutput_nextToken = ListTokenBalancesOutput.AddMember("nextToken", _NextToken)
-
-	ListTransactionEventsInput_transactionHash = ListTransactionEventsInput.AddMember("transactionHash", _QueryTransactionHash)
-
-	ListTransactionEventsInput_transactionId = ListTransactionEventsInput.AddMember("transactionId", _QueryTransactionId)
-
-	ListTransactionEventsInput_network = ListTransactionEventsInput.AddMember("network", _QueryNetwork)
-
-	ListTransactionEventsInput_nextToken = ListTransactionEventsInput.AddMember("nextToken", _NextToken)
-
-	ListTransactionEventsInput_maxResults = ListTransactionEventsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListTransactionEventsOutput_events = ListTransactionEventsOutput.AddMember("events", _TransactionEventList)
-
-	ListTransactionEventsOutput_nextToken = ListTransactionEventsOutput.AddMember("nextToken", _NextToken)
-
-	ListTransactionsInput_address = ListTransactionsInput.AddMember("address", _ChainAddress)
-
-	ListTransactionsInput_network = ListTransactionsInput.AddMember("network", _QueryNetwork)
-
-	ListTransactionsInput_fromBlockchainInstant = ListTransactionsInput.AddMember("fromBlockchainInstant", BlockchainInstant)
-
-	ListTransactionsInput_toBlockchainInstant = ListTransactionsInput.AddMember("toBlockchainInstant", BlockchainInstant)
-
-	ListTransactionsInput_sort = ListTransactionsInput.AddMember("sort", ListTransactionsSort)
-
-	ListTransactionsInput_nextToken = ListTransactionsInput.AddMember("nextToken", _NextToken)
-
-	ListTransactionsInput_maxResults = ListTransactionsInput.AddMember("maxResults", smithyprelude.Integer)
-
-	ListTransactionsInput_confirmationStatusFilter = ListTransactionsInput.AddMember("confirmationStatusFilter", ConfirmationStatusFilter)
-
-	ListTransactionsOutput_transactions = ListTransactionsOutput.AddMember("transactions", _TransactionOutputList)
-
-	ListTransactionsOutput_nextToken = ListTransactionsOutput.AddMember("nextToken", _NextToken)
-
+const blob = "" +
+	"ListFilteredTransactionEventsOutputListFilteredTransactionEventsSortByListFilteredTransactionEventsI" +
+	"nputBatchGetTokenBalanceOutputItemBatchGetTokenBalanceOutputListBatchGetTokenBalanceErrorItemBatchGe" +
+	"tTokenBalanceInputItemConfirmationStatusIncludeListServiceQuotaExceededExceptionValidationExceptionF" +
+	"ieldListListTransactionEventsOutputBatchGetTokenBalanceErrorsListTransactionEventsInputQueryTransact" +
+	"ionEventTypeResourceNotFoundExceptionValidationExceptionReasontransactionEventToAddressConfirmationS" +
+	"tatusFilterGetTokenBalanceInputListListAssetContractsOutputconfirmationStatusFilterspentVoutTransact" +
+	"ionHashAddressIdentifierFilterInternalServerExceptionListAssetContractsInputListTokenBalancesOutputT" +
+	"ietonChainQueryServiceaddressIdentifierFilterGetAssetContractOutputListTokenBalancesInputListTransac" +
+	"tionsOutputListTransactionsSortByspentVoutTransactionIdAccessDeniedExceptionGetAssetContractInputLis" +
+	"tTransactionsInputTransactionOutputItemTransactionOutputListfromBlockchainInstantgetTokenBalanceInpu" +
+	"tsGetTransactionOutputQueryTransactionHashTransactionEventListnumberOfTransactionstransactionTimesta" +
+	"mpGetTransactionInputThrottlingExceptionatBlockchainInstanttoBlockchainInstantContractIdentifierQuer" +
+	"yTokenStandardQueryTransactionIdcontractIdentifierAssetContractListblockchainInstantcumulativeGasUse" +
+	"deffectiveGasPriceretryAfterSecondsContractMetadataExceptionMessageTokenBalanceListtransactionIndexE" +
+	"xecutionStatusOwnerIdentifierTokenIdentifiercontractAddressdeployerAddressexecutionStatuslastUpdated" +
+	"TimeownerIdentifiertokenIdentifiertransactionHashChainAddressesContractFiltercontractFilterspentVout" +
+	"IndextransactionFeetokenBalancestokenStandardtransactionIdQueryNetworkQueryTokenIdResourceTypeerrorM" +
+	"essageresourceTypetransactionsOwnerFilterServiceCodeTokenFilterblockNumberownerFilterserviceCodetoke" +
+	"nFilterResourceIdTimeFilterVoutFiltermaxResultsresourceIdsignatureRsignatureSsignatureVtimeFiltervou" +
+	"tFilterBlockHashErrorTypeNextTokenQuotaCodeSortOrderblockHashcontractserrorCodeerrorTypeeventTypefie" +
+	"ldListnextTokenquotaCodesortOrdervoutIndexvoutSpentdecimalsmetadataBooleanIntegerbalancegasUsedinclu" +
+	"demessagenetworkStringerrorseventsmemberreasonsortBysymbolvalueLongname"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.managedblockchainquery", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 104, Target: 0, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 745, Target: 1, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 109, Target: 2, Traits: 2, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1002, Target: 3, Traits: 3, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 535, Target: 4, Traits: 4, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 5, Traits: 5, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 676, Target: 6, Traits: 6, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 308, Target: 7, Traits: 7, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 789, Target: 8, Traits: 8, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 699, Target: 9, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 855, Target: 10, Traits: 10, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2102, Target: 64, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 607, Target: 12, Traits: 9, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 45, Traits: 9, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 539, Target: 14, Traits: 9, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1232, Target: 56, Traits: 9, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1632, Target: 86, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1459, Target: 44, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1250, Target: 18, Traits: 9, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 14, Traits: 9, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 164, Target: 20, Traits: 9, StrLen: 29, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1519, Target: 125, Traits: 9, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1504, Target: 82, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1140, Target: 41, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1970, Target: 265, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1694, Target: 265, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1979, Target: 63, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 335, Target: 27, Traits: 9, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 20, Traits: 9, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 193, Target: 29, Traits: 9, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1519, Target: 125, Traits: 9, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1504, Target: 82, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1140, Target: 41, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 104, Target: 33, Traits: 9, StrLen: 30, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1504, Target: 82, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1519, Target: 125, Traits: 9, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2081, Target: 265, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1140, Target: 41, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1489, Target: 41, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 134, Target: 39, Traits: 9, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 33, Traits: 9, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 964, Target: 41, Traits: 9, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1887, Target: 266, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1907, Target: 43, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1549, Target: 44, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1549, Target: 45, Traits: 9, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 44, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 222, Target: 47, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 487, Target: 48, Traits: 9, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2095, Target: 50, Traits: 9, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 222, Target: 50, Traits: 9, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 47, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1563, Target: 52, Traits: 9, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1632, Target: 86, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1459, Target: 44, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1178, Target: 56, Traits: 9, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1444, Target: 44, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1335, Target: 59, Traits: 9, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2167, Target: 265, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2152, Target: 265, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2051, Target: 267, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1916, Target: 63, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1351, Target: 64, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1399, Target: 65, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 511, Target: 66, Traits: 9, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 29, Traits: 9, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 630, Target: 68, Traits: 11, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2102, Target: 64, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1318, Target: 267, Traits: 12, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 35, Target: 71, Traits: 9, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2146, Target: 74, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2024, Target: 104, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 35, Target: 74, Traits: 9, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 811, Target: 75, Traits: 9, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2146, Target: 78, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2024, Target: 104, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 811, Target: 78, Traits: 9, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1925, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1730, Target: 80, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 722, Target: 44, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1414, Target: 82, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 722, Target: 44, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1658, Target: 84, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1670, Target: 85, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1196, Target: 86, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 387, Target: 87, Traits: 9, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1022, Target: 88, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1214, Target: 89, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1934, Target: 90, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1807, Target: 91, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 412, Target: 92, Traits: 13, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2102, Target: 64, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1847, Target: 91, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1706, Target: 96, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 96, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1741, Target: 97, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 251, Target: 98, Traits: 14, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2102, Target: 64, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1847, Target: 91, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1706, Target: 96, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1785, Target: 97, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2015, Target: 90, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1943, Target: 104, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1121, Target: 105, Traits: 15, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2102, Target: 64, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1785, Target: 97, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2015, Target: 90, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1318, Target: 267, Traits: 12, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1817, Target: 110, Traits: 9, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 960, Target: 41, Traits: 9, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 702, Target: 41, Traits: 9, StrLen: 2, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 112, Target: 113, Traits: 9, StrLen: 12, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1504, Target: 82, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1519, Target: 125, Traits: 9, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2081, Target: 265, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1140, Target: 41, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1489, Target: 41, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1367, Target: 119, Traits: 9, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 113, Traits: 9, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1752, Target: 121, Traits: 9, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1444, Target: 44, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1519, Target: 85, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1429, Target: 125, Traits: 9, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1444, Target: 44, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1519, Target: 85, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12, Target: 129, Traits: 9, StrLen: 11, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1952, Target: 43, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1534, Target: 88, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1763, Target: 265, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1082, Target: 266, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1383, Target: 268, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1062, Target: 268, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 702, Target: 44, Traits: 9, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 960, Target: 44, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1444, Target: 44, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2088, Target: 265, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1284, Target: 265, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1301, Target: 265, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1877, Target: 267, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1857, Target: 265, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1867, Target: 265, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1605, Target: 265, Traits: 9, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1645, Target: 265, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 559, Target: 47, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1474, Target: 65, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12, Target: 150, Traits: 9, StrLen: 16, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1534, Target: 88, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1988, Target: 87, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 960, Target: 44, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 702, Target: 44, Traits: 9, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2158, Target: 265, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1444, Target: 44, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1519, Target: 85, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1645, Target: 265, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2033, Target: 267, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2042, Target: 269, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 833, Target: 265, Traits: 9, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 583, Target: 265, Traits: 9, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1591, Target: 267, Traits: 9, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1267, Target: 41, Traits: 9, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 559, Target: 47, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1042, Target: 167, Traits: 9, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 150, Traits: 9, StrLen: 6, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 918, Target: 169, Traits: 9, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1534, Target: 88, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1645, Target: 89, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1082, Target: 266, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 559, Target: 47, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 939, Target: 175, Traits: 9, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 169, Traits: 9, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 280, Target: 177, Traits: 16, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2102, Target: 64, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2140, Target: 186, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1997, Target: 184, Traits: 9, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 280, Target: 181, Traits: 9, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2167, Target: 265, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2102, Target: 265, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 280, Target: 184, Traits: 9, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2134, Target: 181, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 437, Target: 186, Traits: 9, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1827, Target: 187, Traits: 9, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2042, Target: 269, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 193, Target: 189, Traits: 9, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 981, Target: 66, Traits: 9, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 104, Target: 191, Traits: 9, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1619, Target: 39, Traits: 9, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2122, Target: 27, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 876, Target: 194, Traits: 9, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1232, Target: 56, Traits: 9, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 745, Target: 196, Traits: 9, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1232, Target: 56, Traits: 9, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1632, Target: 86, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1459, Target: 44, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 59, Traits: 9, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 198, Target: 201, Traits: 9, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1519, Target: 125, Traits: 9, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1504, Target: 82, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1140, Target: 41, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 109, Target: 205, Traits: 9, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1504, Target: 82, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1519, Target: 125, Traits: 9, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2081, Target: 265, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1140, Target: 41, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1489, Target: 41, Traits: 9, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1102, Target: 211, Traits: 9, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1534, Target: 88, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1645, Target: 89, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1002, Target: 215, Traits: 9, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 129, Traits: 9, StrLen: 11, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 653, Target: 217, Traits: 9, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1577, Target: 52, Traits: 9, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1837, Target: 267, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 535, Target: 221, Traits: 9, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1961, Target: 18, Traits: 9, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 70, Target: 224, Traits: 9, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 265, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 722, Target: 12, Traits: 9, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1887, Target: 110, Traits: 9, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1897, Target: 187, Traits: 9, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 559, Target: 48, Traits: 9, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2024, Target: 71, Traits: 9, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1837, Target: 267, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 0, Target: 233, Traits: 9, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2128, Target: 167, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 767, Target: 236, Traits: 9, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1774, Target: 80, Traits: 9, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1796, Target: 121, Traits: 9, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1837, Target: 267, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 676, Target: 241, Traits: 9, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1619, Target: 119, Traits: 9, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 361, Target: 244, Traits: 9, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1534, Target: 88, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1645, Target: 89, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1837, Target: 267, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 308, Target: 250, Traits: 9, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2128, Target: 167, Traits: 9, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 897, Target: 253, Traits: 9, StrLen: 21, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 722, Target: 44, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2109, Target: 84, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 960, Target: 41, Traits: 9, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1159, Target: 41, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2024, Target: 75, Traits: 9, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1837, Target: 267, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 559, Target: 48, Traits: 9, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 789, Target: 262, Traits: 9, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1718, Target: 175, Traits: 9, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2006, Target: 79, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2116, Target: 265, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1093, Target: 266, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 2074, Target: 267, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 2163, Target: 268, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
+		{StrOff: 2067, Target: 269, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/batch-get-token-balance",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/get-asset-contract",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/get-token-balance",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/get-transaction",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/list-asset-contracts",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/list-filtered-transaction-events",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/list-token-balances",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/list-transaction-events",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/list-transactions",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [270]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+}
+
+var BatchGetTokenBalance = &handles[0]
+
+var GetAssetContract = &handles[1]
+
+var GetTokenBalance = &handles[2]
+
+var GetTransaction = &handles[3]
+
+var ListAssetContracts = &handles[4]
+
+var ListFilteredTransactionEvents = &handles[5]
+
+var ListTokenBalances = &handles[6]
+
+var ListTransactionEvents = &handles[7]
+
+var ListTransactions = &handles[8]
+
+var _TietonChainQueryService = &handles[9]
+
+var AccessDeniedException = &handles[10]
+var AccessDeniedException_message = &handles[11]
+
+var AddressIdentifierFilter = &handles[12]
+var AddressIdentifierFilter_transactionEventToAddress = &handles[13]
+
+var AssetContract = &handles[14]
+var AssetContract_contractIdentifier = &handles[15]
+var AssetContract_tokenStandard = &handles[16]
+var AssetContract_deployerAddress = &handles[17]
+
+var _AssetContractList = &handles[18]
+var _AssetContractList_member = &handles[19]
+
+var BatchGetTokenBalanceErrorItem = &handles[20]
+var BatchGetTokenBalanceErrorItem_tokenIdentifier = &handles[21]
+var BatchGetTokenBalanceErrorItem_ownerIdentifier = &handles[22]
+var BatchGetTokenBalanceErrorItem_atBlockchainInstant = &handles[23]
+var BatchGetTokenBalanceErrorItem_errorCode = &handles[24]
+var BatchGetTokenBalanceErrorItem_errorMessage = &handles[25]
+var BatchGetTokenBalanceErrorItem_errorType = &handles[26]
+
+var _BatchGetTokenBalanceErrors = &handles[27]
+var _BatchGetTokenBalanceErrors_member = &handles[28]
+
+var BatchGetTokenBalanceInputItem = &handles[29]
+var BatchGetTokenBalanceInputItem_tokenIdentifier = &handles[30]
+var BatchGetTokenBalanceInputItem_ownerIdentifier = &handles[31]
+var BatchGetTokenBalanceInputItem_atBlockchainInstant = &handles[32]
+
+var BatchGetTokenBalanceOutputItem = &handles[33]
+var BatchGetTokenBalanceOutputItem_ownerIdentifier = &handles[34]
+var BatchGetTokenBalanceOutputItem_tokenIdentifier = &handles[35]
+var BatchGetTokenBalanceOutputItem_balance = &handles[36]
+var BatchGetTokenBalanceOutputItem_atBlockchainInstant = &handles[37]
+var BatchGetTokenBalanceOutputItem_lastUpdatedTime = &handles[38]
+
+var _BatchGetTokenBalanceOutputList = &handles[39]
+var _BatchGetTokenBalanceOutputList_member = &handles[40]
+
+var BlockchainInstant = &handles[41]
+var BlockchainInstant_time = &handles[42]
+
+var _BlockHash = &handles[43]
+
+var _ChainAddress = &handles[44]
+
+var _ChainAddresses = &handles[45]
+var _ChainAddresses_member = &handles[46]
+
+var _ConfirmationStatus = &handles[47]
+
+var ConfirmationStatusFilter = &handles[48]
+var ConfirmationStatusFilter_include = &handles[49]
+
+var _ConfirmationStatusIncludeList = &handles[50]
+var _ConfirmationStatusIncludeList_member = &handles[51]
+
+var ContractFilter = &handles[52]
+var ContractFilter_network = &handles[53]
+var ContractFilter_tokenStandard = &handles[54]
+var ContractFilter_deployerAddress = &handles[55]
+
+var ContractIdentifier = &handles[56]
+var ContractIdentifier_network = &handles[57]
+var ContractIdentifier_contractAddress = &handles[58]
+
+var ContractMetadata = &handles[59]
+var ContractMetadata_name = &handles[60]
+var ContractMetadata_symbol = &handles[61]
+var ContractMetadata_decimals = &handles[62]
+
+var _ErrorType = &handles[63]
+
+var _ExceptionMessage = &handles[64]
+
+var _ExecutionStatus = &handles[65]
+
+var _GetTokenBalanceInputList = &handles[66]
+var _GetTokenBalanceInputList_member = &handles[67]
+
+var InternalServerException = &handles[68]
+var InternalServerException_message = &handles[69]
+var InternalServerException_retryAfterSeconds = &handles[70]
+
+var ListFilteredTransactionEventsSort = &handles[71]
+var ListFilteredTransactionEventsSort_sortBy = &handles[72]
+var ListFilteredTransactionEventsSort_sortOrder = &handles[73]
+
+var _ListFilteredTransactionEventsSortBy = &handles[74]
+
+var ListTransactionsSort = &handles[75]
+var ListTransactionsSort_sortBy = &handles[76]
+var ListTransactionsSort_sortOrder = &handles[77]
+
+var _ListTransactionsSortBy = &handles[78]
+
+var _NextToken = &handles[79]
+
+var OwnerFilter = &handles[80]
+var OwnerFilter_address = &handles[81]
+
+var OwnerIdentifier = &handles[82]
+var OwnerIdentifier_address = &handles[83]
+
+var _QueryNetwork = &handles[84]
+
+var _QueryTokenId = &handles[85]
+
+var _QueryTokenStandard = &handles[86]
+
+var _QueryTransactionEventType = &handles[87]
+
+var _QueryTransactionHash = &handles[88]
+
+var _QueryTransactionId = &handles[89]
+
+var _QuotaCode = &handles[90]
+
+var _ResourceId = &handles[91]
+
+var ResourceNotFoundException = &handles[92]
+var ResourceNotFoundException_message = &handles[93]
+var ResourceNotFoundException_resourceId = &handles[94]
+var ResourceNotFoundException_resourceType = &handles[95]
+
+var _ResourceType = &handles[96]
+
+var _ServiceCode = &handles[97]
+
+var ServiceQuotaExceededException = &handles[98]
+var ServiceQuotaExceededException_message = &handles[99]
+var ServiceQuotaExceededException_resourceId = &handles[100]
+var ServiceQuotaExceededException_resourceType = &handles[101]
+var ServiceQuotaExceededException_serviceCode = &handles[102]
+var ServiceQuotaExceededException_quotaCode = &handles[103]
+
+var _SortOrder = &handles[104]
+
+var ThrottlingException = &handles[105]
+var ThrottlingException_message = &handles[106]
+var ThrottlingException_serviceCode = &handles[107]
+var ThrottlingException_quotaCode = &handles[108]
+var ThrottlingException_retryAfterSeconds = &handles[109]
+
+var TimeFilter = &handles[110]
+var TimeFilter_from = &handles[111]
+var TimeFilter_to = &handles[112]
+
+var TokenBalance = &handles[113]
+var TokenBalance_ownerIdentifier = &handles[114]
+var TokenBalance_tokenIdentifier = &handles[115]
+var TokenBalance_balance = &handles[116]
+var TokenBalance_atBlockchainInstant = &handles[117]
+var TokenBalance_lastUpdatedTime = &handles[118]
+
+var _TokenBalanceList = &handles[119]
+var _TokenBalanceList_member = &handles[120]
+
+var TokenFilter = &handles[121]
+var TokenFilter_network = &handles[122]
+var TokenFilter_contractAddress = &handles[123]
+var TokenFilter_tokenId = &handles[124]
+
+var TokenIdentifier = &handles[125]
+var TokenIdentifier_network = &handles[126]
+var TokenIdentifier_contractAddress = &handles[127]
+var TokenIdentifier_tokenId = &handles[128]
+
+var Transaction = &handles[129]
+var Transaction_network = &handles[130]
+var Transaction_blockHash = &handles[131]
+var Transaction_transactionHash = &handles[132]
+var Transaction_blockNumber = &handles[133]
+var Transaction_transactionTimestamp = &handles[134]
+var Transaction_transactionIndex = &handles[135]
+var Transaction_numberOfTransactions = &handles[136]
+var Transaction_to = &handles[137]
+var Transaction_from = &handles[138]
+var Transaction_contractAddress = &handles[139]
+var Transaction_gasUsed = &handles[140]
+var Transaction_cumulativeGasUsed = &handles[141]
+var Transaction_effectiveGasPrice = &handles[142]
+var Transaction_signatureV = &handles[143]
+var Transaction_signatureR = &handles[144]
+var Transaction_signatureS = &handles[145]
+var Transaction_transactionFee = &handles[146]
+var Transaction_transactionId = &handles[147]
+var Transaction_confirmationStatus = &handles[148]
+var Transaction_executionStatus = &handles[149]
+
+var TransactionEvent = &handles[150]
+var TransactionEvent_network = &handles[151]
+var TransactionEvent_transactionHash = &handles[152]
+var TransactionEvent_eventType = &handles[153]
+var TransactionEvent_from = &handles[154]
+var TransactionEvent_to = &handles[155]
+var TransactionEvent_value = &handles[156]
+var TransactionEvent_contractAddress = &handles[157]
+var TransactionEvent_tokenId = &handles[158]
+var TransactionEvent_transactionId = &handles[159]
+var TransactionEvent_voutIndex = &handles[160]
+var TransactionEvent_voutSpent = &handles[161]
+var TransactionEvent_spentVoutTransactionId = &handles[162]
+var TransactionEvent_spentVoutTransactionHash = &handles[163]
+var TransactionEvent_spentVoutIndex = &handles[164]
+var TransactionEvent_blockchainInstant = &handles[165]
+var TransactionEvent_confirmationStatus = &handles[166]
+
+var _TransactionEventList = &handles[167]
+var _TransactionEventList_member = &handles[168]
+
+var TransactionOutputItem = &handles[169]
+var TransactionOutputItem_transactionHash = &handles[170]
+var TransactionOutputItem_transactionId = &handles[171]
+var TransactionOutputItem_network = &handles[172]
+var TransactionOutputItem_transactionTimestamp = &handles[173]
+var TransactionOutputItem_confirmationStatus = &handles[174]
+
+var _TransactionOutputList = &handles[175]
+var _TransactionOutputList_member = &handles[176]
+
+var ValidationException = &handles[177]
+var ValidationException_message = &handles[178]
+var ValidationException_reason = &handles[179]
+var ValidationException_fieldList = &handles[180]
+
+var ValidationExceptionField = &handles[181]
+var ValidationExceptionField_name = &handles[182]
+var ValidationExceptionField_message = &handles[183]
+
+var _ValidationExceptionFieldList = &handles[184]
+var _ValidationExceptionFieldList_member = &handles[185]
+
+var _ValidationExceptionReason = &handles[186]
+
+var VoutFilter = &handles[187]
+var VoutFilter_voutSpent = &handles[188]
+
+var BatchGetTokenBalanceInput = &handles[189]
+var BatchGetTokenBalanceInput_getTokenBalanceInputs = &handles[190]
+
+var BatchGetTokenBalanceOutput = &handles[191]
+var BatchGetTokenBalanceOutput_tokenBalances = &handles[192]
+var BatchGetTokenBalanceOutput_errors = &handles[193]
+
+var GetAssetContractInput = &handles[194]
+var GetAssetContractInput_contractIdentifier = &handles[195]
+
+var GetAssetContractOutput = &handles[196]
+var GetAssetContractOutput_contractIdentifier = &handles[197]
+var GetAssetContractOutput_tokenStandard = &handles[198]
+var GetAssetContractOutput_deployerAddress = &handles[199]
+var GetAssetContractOutput_metadata = &handles[200]
+
+var GetTokenBalanceInput = &handles[201]
+var GetTokenBalanceInput_tokenIdentifier = &handles[202]
+var GetTokenBalanceInput_ownerIdentifier = &handles[203]
+var GetTokenBalanceInput_atBlockchainInstant = &handles[204]
+
+var GetTokenBalanceOutput = &handles[205]
+var GetTokenBalanceOutput_ownerIdentifier = &handles[206]
+var GetTokenBalanceOutput_tokenIdentifier = &handles[207]
+var GetTokenBalanceOutput_balance = &handles[208]
+var GetTokenBalanceOutput_atBlockchainInstant = &handles[209]
+var GetTokenBalanceOutput_lastUpdatedTime = &handles[210]
+
+var GetTransactionInput = &handles[211]
+var GetTransactionInput_transactionHash = &handles[212]
+var GetTransactionInput_transactionId = &handles[213]
+var GetTransactionInput_network = &handles[214]
+
+var GetTransactionOutput = &handles[215]
+var GetTransactionOutput_transaction = &handles[216]
+
+var ListAssetContractsInput = &handles[217]
+var ListAssetContractsInput_contractFilter = &handles[218]
+var ListAssetContractsInput_nextToken = &handles[219]
+var ListAssetContractsInput_maxResults = &handles[220]
+
+var ListAssetContractsOutput = &handles[221]
+var ListAssetContractsOutput_contracts = &handles[222]
+var ListAssetContractsOutput_nextToken = &handles[223]
+
+var ListFilteredTransactionEventsInput = &handles[224]
+var ListFilteredTransactionEventsInput_network = &handles[225]
+var ListFilteredTransactionEventsInput_addressIdentifierFilter = &handles[226]
+var ListFilteredTransactionEventsInput_timeFilter = &handles[227]
+var ListFilteredTransactionEventsInput_voutFilter = &handles[228]
+var ListFilteredTransactionEventsInput_confirmationStatusFilter = &handles[229]
+var ListFilteredTransactionEventsInput_sort = &handles[230]
+var ListFilteredTransactionEventsInput_nextToken = &handles[231]
+var ListFilteredTransactionEventsInput_maxResults = &handles[232]
+
+var ListFilteredTransactionEventsOutput = &handles[233]
+var ListFilteredTransactionEventsOutput_events = &handles[234]
+var ListFilteredTransactionEventsOutput_nextToken = &handles[235]
+
+var ListTokenBalancesInput = &handles[236]
+var ListTokenBalancesInput_ownerFilter = &handles[237]
+var ListTokenBalancesInput_tokenFilter = &handles[238]
+var ListTokenBalancesInput_nextToken = &handles[239]
+var ListTokenBalancesInput_maxResults = &handles[240]
+
+var ListTokenBalancesOutput = &handles[241]
+var ListTokenBalancesOutput_tokenBalances = &handles[242]
+var ListTokenBalancesOutput_nextToken = &handles[243]
+
+var ListTransactionEventsInput = &handles[244]
+var ListTransactionEventsInput_transactionHash = &handles[245]
+var ListTransactionEventsInput_transactionId = &handles[246]
+var ListTransactionEventsInput_network = &handles[247]
+var ListTransactionEventsInput_nextToken = &handles[248]
+var ListTransactionEventsInput_maxResults = &handles[249]
+
+var ListTransactionEventsOutput = &handles[250]
+var ListTransactionEventsOutput_events = &handles[251]
+var ListTransactionEventsOutput_nextToken = &handles[252]
+
+var ListTransactionsInput = &handles[253]
+var ListTransactionsInput_address = &handles[254]
+var ListTransactionsInput_network = &handles[255]
+var ListTransactionsInput_fromBlockchainInstant = &handles[256]
+var ListTransactionsInput_toBlockchainInstant = &handles[257]
+var ListTransactionsInput_sort = &handles[258]
+var ListTransactionsInput_nextToken = &handles[259]
+var ListTransactionsInput_maxResults = &handles[260]
+var ListTransactionsInput_confirmationStatusFilter = &handles[261]
+
+var ListTransactionsOutput = &handles[262]
+var ListTransactionsOutput_transactions = &handles[263]
+var ListTransactionsOutput_nextToken = &handles[264]
+
+var TietonChainQueryService = &smithy.ServiceSchema{Schema: &handles[9], Version: "2023-05-04"}

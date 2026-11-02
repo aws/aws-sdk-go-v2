@@ -4,499 +4,433 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DescribeServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "DescribeServices",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAttributeValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetAttributeValues",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPriceListFileUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetPriceListFileUrl",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetProducts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetProducts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPriceLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "ListPriceLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSPriceListService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "AWSPriceListService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSPriceListService = smithy.NewServiceSchema(_AWSPriceListService, "2017-10-15")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AttributeNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "AttributeNameList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeNameList_member *smithy.Schema
-
-var AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeStructure, 1)
-var AttributeValue_Value *smithy.Schema
-
-var _AttributeValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "AttributeValueList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeValueList_member *smithy.Schema
-
-var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "CurrencyCode",
-}, smithy.ShapeTypeString, 0)
-
-var _DescribeServicesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "DescribeServicesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _EffectiveDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "EffectiveDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExpiredNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "ExpiredNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ExpiredNextTokenException_Message *smithy.Schema
-
-var _Field = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "Field",
-}, smithy.ShapeTypeString, 0)
-
-var _FileFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "FileFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _FileFormats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "FileFormats",
-}, smithy.ShapeTypeList, 1)
-var _FileFormats_member *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 3)
-var Filter_Type *smithy.Schema
-
-var Filter_Field *smithy.Schema
-
-var Filter_Value *smithy.Schema
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var FilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "FilterType",
-}, smithy.ShapeTypeEnum, 5)
-var FilterType_TERM_MATCH *smithy.Schema
-
-var FilterType_EQUALS *smithy.Schema
-
-var FilterType_CONTAINS *smithy.Schema
-
-var FilterType_ANY_OF *smithy.Schema
-
-var FilterType_NONE_OF *smithy.Schema
-
-var _FormatVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "FormatVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _GetAttributeValuesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetAttributeValuesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _GetProductsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetProductsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalErrorException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NotFoundException_Message *smithy.Schema
-
-var PriceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "PriceList",
-}, smithy.ShapeTypeStructure, 4)
-var PriceList_PriceListArn *smithy.Schema
-
-var PriceList_RegionCode *smithy.Schema
-
-var PriceList_CurrencyCode *smithy.Schema
-
-var PriceList_FileFormats *smithy.Schema
-
-var _PriceListArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "PriceListArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PriceListJsonItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "PriceListJsonItems",
-}, smithy.ShapeTypeList, 1)
-var _PriceListJsonItems_member *smithy.Schema
-
-var _PriceLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "PriceLists",
-}, smithy.ShapeTypeList, 1)
-var _PriceLists_member *smithy.Schema
-
-var _RegionCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "RegionCode",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "Service",
-}, smithy.ShapeTypeStructure, 2)
-var Service_ServiceCode *smithy.Schema
-
-var Service_AttributeNames *smithy.Schema
-
-var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "ServiceList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceList_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _SynthesizedJsonPriceListJsonItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "SynthesizedJsonPriceListJsonItem",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var DescribeServicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "DescribeServicesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeServicesRequest_ServiceCode *smithy.Schema
-
-var DescribeServicesRequest_FormatVersion *smithy.Schema
-
-var DescribeServicesRequest_NextToken *smithy.Schema
-
-var DescribeServicesRequest_MaxResults *smithy.Schema
-
-var DescribeServicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "DescribeServicesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeServicesResponse_Services *smithy.Schema
-
-var DescribeServicesResponse_FormatVersion *smithy.Schema
-
-var DescribeServicesResponse_NextToken *smithy.Schema
-
-var GetAttributeValuesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetAttributeValuesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetAttributeValuesRequest_ServiceCode *smithy.Schema
-
-var GetAttributeValuesRequest_AttributeName *smithy.Schema
-
-var GetAttributeValuesRequest_NextToken *smithy.Schema
-
-var GetAttributeValuesRequest_MaxResults *smithy.Schema
-
-var GetAttributeValuesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetAttributeValuesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAttributeValuesResponse_AttributeValues *smithy.Schema
-
-var GetAttributeValuesResponse_NextToken *smithy.Schema
-
-var GetPriceListFileUrlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetPriceListFileUrlRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetPriceListFileUrlRequest_PriceListArn *smithy.Schema
-
-var GetPriceListFileUrlRequest_FileFormat *smithy.Schema
-
-var GetPriceListFileUrlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetPriceListFileUrlResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPriceListFileUrlResponse_Url *smithy.Schema
-
-var GetProductsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetProductsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetProductsRequest_ServiceCode *smithy.Schema
-
-var GetProductsRequest_Filters *smithy.Schema
-
-var GetProductsRequest_FormatVersion *smithy.Schema
-
-var GetProductsRequest_NextToken *smithy.Schema
-
-var GetProductsRequest_MaxResults *smithy.Schema
-
-var GetProductsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "GetProductsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetProductsResponse_FormatVersion *smithy.Schema
-
-var GetProductsResponse_PriceList *smithy.Schema
-
-var GetProductsResponse_NextToken *smithy.Schema
-
-var ListPriceListsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "ListPriceListsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListPriceListsRequest_ServiceCode *smithy.Schema
-
-var ListPriceListsRequest_EffectiveDate *smithy.Schema
-
-var ListPriceListsRequest_RegionCode *smithy.Schema
-
-var ListPriceListsRequest_CurrencyCode *smithy.Schema
-
-var ListPriceListsRequest_NextToken *smithy.Schema
-
-var ListPriceListsRequest_MaxResults *smithy.Schema
-
-var ListPriceListsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricing",
-	Name:      "ListPriceListsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPriceListsResponse_PriceLists *smithy.Schema
-
-var ListPriceListsResponse_NextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _errorMessage)
-
-	_AttributeNameList_member = _AttributeNameList.AddMember("member", _String)
-
-	AttributeValue_Value = AttributeValue.AddMember("Value", _String)
-
-	_AttributeValueList_member = _AttributeValueList.AddMember("member", AttributeValue)
-
-	ExpiredNextTokenException_Message = ExpiredNextTokenException.AddMember("Message", _errorMessage)
-
-	_FileFormats_member = _FileFormats.AddMember("member", _FileFormat)
-
-	FilterType_TERM_MATCH = FilterType.AddMember("TERM_MATCH", smithyprelude.Unit)
-
-	FilterType_EQUALS = FilterType.AddMember("EQUALS", smithyprelude.Unit)
-
-	FilterType_CONTAINS = FilterType.AddMember("CONTAINS", smithyprelude.Unit)
-
-	FilterType_ANY_OF = FilterType.AddMember("ANY_OF", smithyprelude.Unit)
-
-	FilterType_NONE_OF = FilterType.AddMember("NONE_OF", smithyprelude.Unit)
-
-	Filter_Type = Filter.AddMember("Type", FilterType)
-
-	Filter_Field = Filter.AddMember("Field", _Field)
-
-	Filter_Value = Filter.AddMember("Value", _Value)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	InternalErrorException_Message = InternalErrorException.AddMember("Message", _errorMessage)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _errorMessage)
-
-	InvalidParameterException_Message = InvalidParameterException.AddMember("Message", _errorMessage)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _errorMessage)
-
-	PriceList_PriceListArn = PriceList.AddMember("PriceListArn", _PriceListArn)
-
-	PriceList_RegionCode = PriceList.AddMember("RegionCode", _RegionCode)
-
-	PriceList_CurrencyCode = PriceList.AddMember("CurrencyCode", _CurrencyCode)
-
-	PriceList_FileFormats = PriceList.AddMember("FileFormats", _FileFormats)
-
-	_PriceListJsonItems_member = _PriceListJsonItems.AddMember("member", _SynthesizedJsonPriceListJsonItem)
-
-	_PriceLists_member = _PriceLists.AddMember("member", PriceList)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _errorMessage)
-
-	Service_ServiceCode = Service.AddMember("ServiceCode", _String)
-
-	Service_AttributeNames = Service.AddMember("AttributeNames", _AttributeNameList)
-
-	_ServiceList_member = _ServiceList.AddMember("member", Service)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _errorMessage)
-
-	DescribeServicesRequest_ServiceCode = DescribeServicesRequest.AddMember("ServiceCode", _String)
-
-	DescribeServicesRequest_FormatVersion = DescribeServicesRequest.AddMember("FormatVersion", _FormatVersion)
-
-	DescribeServicesRequest_NextToken = DescribeServicesRequest.AddMember("NextToken", _String)
-
-	DescribeServicesRequest_MaxResults = DescribeServicesRequest.AddMember("MaxResults", _DescribeServicesMaxResults)
-
-	DescribeServicesResponse_Services = DescribeServicesResponse.AddMember("Services", _ServiceList)
-
-	DescribeServicesResponse_FormatVersion = DescribeServicesResponse.AddMember("FormatVersion", _FormatVersion)
-
-	DescribeServicesResponse_NextToken = DescribeServicesResponse.AddMember("NextToken", _String)
-
-	GetAttributeValuesRequest_ServiceCode = GetAttributeValuesRequest.AddMember("ServiceCode", _String)
-
-	GetAttributeValuesRequest_AttributeName = GetAttributeValuesRequest.AddMember("AttributeName", _String)
-
-	GetAttributeValuesRequest_NextToken = GetAttributeValuesRequest.AddMember("NextToken", _String)
-
-	GetAttributeValuesRequest_MaxResults = GetAttributeValuesRequest.AddMember("MaxResults", _GetAttributeValuesMaxResults)
-
-	GetAttributeValuesResponse_AttributeValues = GetAttributeValuesResponse.AddMember("AttributeValues", _AttributeValueList)
-
-	GetAttributeValuesResponse_NextToken = GetAttributeValuesResponse.AddMember("NextToken", _String)
-
-	GetPriceListFileUrlRequest_PriceListArn = GetPriceListFileUrlRequest.AddMember("PriceListArn", _PriceListArn)
-
-	GetPriceListFileUrlRequest_FileFormat = GetPriceListFileUrlRequest.AddMember("FileFormat", _FileFormat)
-
-	GetPriceListFileUrlResponse_Url = GetPriceListFileUrlResponse.AddMember("Url", _String)
-
-	GetProductsRequest_ServiceCode = GetProductsRequest.AddMember("ServiceCode", _String)
-
-	GetProductsRequest_Filters = GetProductsRequest.AddMember("Filters", _Filters)
-
-	GetProductsRequest_FormatVersion = GetProductsRequest.AddMember("FormatVersion", _FormatVersion)
-
-	GetProductsRequest_NextToken = GetProductsRequest.AddMember("NextToken", _String)
-
-	GetProductsRequest_MaxResults = GetProductsRequest.AddMember("MaxResults", _GetProductsMaxResults)
-
-	GetProductsResponse_FormatVersion = GetProductsResponse.AddMember("FormatVersion", _FormatVersion)
-
-	GetProductsResponse_PriceList = GetProductsResponse.AddMember("PriceList", _PriceListJsonItems)
-
-	GetProductsResponse_NextToken = GetProductsResponse.AddMember("NextToken", _String)
-
-	ListPriceListsRequest_ServiceCode = ListPriceListsRequest.AddMember("ServiceCode", _ServiceCode)
-
-	ListPriceListsRequest_EffectiveDate = ListPriceListsRequest.AddMember("EffectiveDate", _EffectiveDate)
-
-	ListPriceListsRequest_RegionCode = ListPriceListsRequest.AddMember("RegionCode", _RegionCode)
-
-	ListPriceListsRequest_CurrencyCode = ListPriceListsRequest.AddMember("CurrencyCode", _CurrencyCode)
-
-	ListPriceListsRequest_NextToken = ListPriceListsRequest.AddMember("NextToken", _String)
-
-	ListPriceListsRequest_MaxResults = ListPriceListsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListPriceListsResponse_PriceLists = ListPriceListsResponse.AddMember("PriceLists", _PriceLists)
-
-	ListPriceListsResponse_NextToken = ListPriceListsResponse.AddMember("NextToken", _String)
-
+const blob = "" +
+	"SynthesizedJsonPriceListJsonItemGetAttributeValuesMaxResultsGetPriceListFileUrlResponseDescribeServi" +
+	"cesMaxResultsGetAttributeValuesResponseGetPriceListFileUrlRequestExpiredNextTokenExceptionGetAttribu" +
+	"teValuesRequestInvalidNextTokenExceptionInvalidParameterExceptionResourceNotFoundExceptionDescribeSe" +
+	"rvicesResponseDescribeServicesRequestInternalErrorExceptionListPriceListsResponseAccessDeniedExcepti" +
+	"onGetProductsMaxResultsListPriceListsRequestAWSPriceListServiceGetProductsResponseThrottlingExceptio" +
+	"nAttributeValueListGetProductsRequestPriceListJsonItemsAttributeNameListAttributeNamesEffectiveDateF" +
+	"ormatVersionCurrencyCodePriceListArnerrorMessageFileFormatsServiceCodeServiceListFilterTypeRegionCod" +
+	"eTERM_MATCHCONTAINSFiltersNONE_OFANY_OFEQUALSStringmemberFieldUnit"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.pricing", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 87, Target: 0, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 32, Target: 1, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 60, Target: 2, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 402, Target: 3, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 359, Target: 4, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 444, Target: 5, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 381, Target: 6, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 641, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 555, Target: 8, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 751, Target: 67, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 35, Target: 10, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 44, Target: 67, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 501, Target: 12, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 751, Target: 10, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 612, Target: 14, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 87, Target: 15, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 586, Target: 16, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 636, Target: 17, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 165, Target: 18, Traits: 2, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 641, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 757, Target: 20, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 648, Target: 21, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 648, Target: 22, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 751, Target: 21, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 681, Target: 24, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 687, Target: 30, Traits: 0, StrLen: 4, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 757, Target: 20, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 44, Target: 71, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 719, Target: 28, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 751, Target: 24, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 681, Target: 30, Traits: 0, StrLen: 10, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 701, Target: 114, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 739, Target: 114, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 711, Target: 114, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 733, Target: 114, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 726, Target: 114, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 599, Target: 36, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 32, Target: 37, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 402, Target: 38, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 337, Target: 39, Traits: 3, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 641, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 215, Target: 41, Traits: 2, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 641, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 240, Target: 43, Traits: 2, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 641, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 50, Target: 45, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 273, Target: 46, Traits: 2, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 641, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15, Target: 48, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 624, Target: 53, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 691, Target: 58, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 14, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 648, Target: 22, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 624, Target: 53, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 537, Target: 54, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 751, Target: 68, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 363, Target: 56, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 751, Target: 48, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 691, Target: 58, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 265, Target: 59, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 641, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 95, Target: 61, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 659, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 572, Target: 8, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 659, Target: 64, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 670, Target: 65, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 751, Target: 61, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 745, Target: 67, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 68, Traits: 6, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 482, Target: 69, Traits: 7, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 641, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 44, Target: 71, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 314, Target: 72, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 659, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 599, Target: 36, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 172, Target: 67, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 50, Target: 15, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 290, Target: 77, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 95, Target: 65, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 599, Target: 36, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 172, Target: 67, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 190, Target: 81, Traits: 0, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 659, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 555, Target: 67, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 172, Target: 67, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 50, Target: 37, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 113, Target: 86, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 35, Target: 12, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 172, Target: 67, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 139, Target: 89, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 624, Target: 53, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 648, Target: 21, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 60, Target: 92, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 76, Target: 67, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 519, Target: 94, Traits: 0, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 659, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 719, Target: 28, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 599, Target: 36, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 172, Target: 67, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 50, Target: 38, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 463, Target: 100, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 599, Target: 36, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15, Target: 54, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 172, Target: 67, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 423, Target: 104, Traits: 0, StrLen: 21, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 659, Target: 64, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 586, Target: 16, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 691, Target: 58, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 14, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 172, Target: 67, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 50, Target: 45, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 359, Target: 111, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 363, Target: 56, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 172, Target: 67, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 762, Target: 114, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [115]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+}
+
+var DescribeServices = &handles[0]
+
+var GetAttributeValues = &handles[1]
+
+var GetPriceListFileUrl = &handles[2]
+
+var GetProducts = &handles[3]
+
+var ListPriceLists = &handles[4]
+
+var _AWSPriceListService = &handles[5]
+
+var AccessDeniedException = &handles[6]
+var AccessDeniedException_Message = &handles[7]
+
+var _AttributeNameList = &handles[8]
+var _AttributeNameList_member = &handles[9]
+
+var AttributeValue = &handles[10]
+var AttributeValue_Value = &handles[11]
+
+var _AttributeValueList = &handles[12]
+var _AttributeValueList_member = &handles[13]
+
+var _CurrencyCode = &handles[14]
+
+var _DescribeServicesMaxResults = &handles[15]
+
+var _EffectiveDate = &handles[16]
+
+var _errorMessage = &handles[17]
+
+var ExpiredNextTokenException = &handles[18]
+var ExpiredNextTokenException_Message = &handles[19]
+
+var _Field = &handles[20]
+
+var _FileFormat = &handles[21]
+
+var _FileFormats = &handles[22]
+var _FileFormats_member = &handles[23]
+
+var Filter = &handles[24]
+var Filter_Type = &handles[25]
+var Filter_Field = &handles[26]
+var Filter_Value = &handles[27]
+
+var _Filters = &handles[28]
+var _Filters_member = &handles[29]
+
+var FilterType = &handles[30]
+var FilterType_TERM_MATCH = &handles[31]
+var FilterType_EQUALS = &handles[32]
+var FilterType_CONTAINS = &handles[33]
+var FilterType_ANY_OF = &handles[34]
+var FilterType_NONE_OF = &handles[35]
+
+var _FormatVersion = &handles[36]
+
+var _GetAttributeValuesMaxResults = &handles[37]
+
+var _GetProductsMaxResults = &handles[38]
+
+var InternalErrorException = &handles[39]
+var InternalErrorException_Message = &handles[40]
+
+var InvalidNextTokenException = &handles[41]
+var InvalidNextTokenException_Message = &handles[42]
+
+var InvalidParameterException = &handles[43]
+var InvalidParameterException_Message = &handles[44]
+
+var _MaxResults = &handles[45]
+
+var NotFoundException = &handles[46]
+var NotFoundException_Message = &handles[47]
+
+var PriceList = &handles[48]
+var PriceList_PriceListArn = &handles[49]
+var PriceList_RegionCode = &handles[50]
+var PriceList_CurrencyCode = &handles[51]
+var PriceList_FileFormats = &handles[52]
+
+var _PriceListArn = &handles[53]
+
+var _PriceListJsonItems = &handles[54]
+var _PriceListJsonItems_member = &handles[55]
+
+var _PriceLists = &handles[56]
+var _PriceLists_member = &handles[57]
+
+var _RegionCode = &handles[58]
+
+var ResourceNotFoundException = &handles[59]
+var ResourceNotFoundException_Message = &handles[60]
+
+var Service = &handles[61]
+var Service_ServiceCode = &handles[62]
+var Service_AttributeNames = &handles[63]
+
+var _ServiceCode = &handles[64]
+
+var _ServiceList = &handles[65]
+var _ServiceList_member = &handles[66]
+
+var _String = &handles[67]
+
+var _SynthesizedJsonPriceListJsonItem = &handles[68]
+
+var ThrottlingException = &handles[69]
+var ThrottlingException_Message = &handles[70]
+
+var _Value = &handles[71]
+
+var DescribeServicesRequest = &handles[72]
+var DescribeServicesRequest_ServiceCode = &handles[73]
+var DescribeServicesRequest_FormatVersion = &handles[74]
+var DescribeServicesRequest_NextToken = &handles[75]
+var DescribeServicesRequest_MaxResults = &handles[76]
+
+var DescribeServicesResponse = &handles[77]
+var DescribeServicesResponse_Services = &handles[78]
+var DescribeServicesResponse_FormatVersion = &handles[79]
+var DescribeServicesResponse_NextToken = &handles[80]
+
+var GetAttributeValuesRequest = &handles[81]
+var GetAttributeValuesRequest_ServiceCode = &handles[82]
+var GetAttributeValuesRequest_AttributeName = &handles[83]
+var GetAttributeValuesRequest_NextToken = &handles[84]
+var GetAttributeValuesRequest_MaxResults = &handles[85]
+
+var GetAttributeValuesResponse = &handles[86]
+var GetAttributeValuesResponse_AttributeValues = &handles[87]
+var GetAttributeValuesResponse_NextToken = &handles[88]
+
+var GetPriceListFileUrlRequest = &handles[89]
+var GetPriceListFileUrlRequest_PriceListArn = &handles[90]
+var GetPriceListFileUrlRequest_FileFormat = &handles[91]
+
+var GetPriceListFileUrlResponse = &handles[92]
+var GetPriceListFileUrlResponse_Url = &handles[93]
+
+var GetProductsRequest = &handles[94]
+var GetProductsRequest_ServiceCode = &handles[95]
+var GetProductsRequest_Filters = &handles[96]
+var GetProductsRequest_FormatVersion = &handles[97]
+var GetProductsRequest_NextToken = &handles[98]
+var GetProductsRequest_MaxResults = &handles[99]
+
+var GetProductsResponse = &handles[100]
+var GetProductsResponse_FormatVersion = &handles[101]
+var GetProductsResponse_PriceList = &handles[102]
+var GetProductsResponse_NextToken = &handles[103]
+
+var ListPriceListsRequest = &handles[104]
+var ListPriceListsRequest_ServiceCode = &handles[105]
+var ListPriceListsRequest_EffectiveDate = &handles[106]
+var ListPriceListsRequest_RegionCode = &handles[107]
+var ListPriceListsRequest_CurrencyCode = &handles[108]
+var ListPriceListsRequest_NextToken = &handles[109]
+var ListPriceListsRequest_MaxResults = &handles[110]
+
+var ListPriceListsResponse = &handles[111]
+var ListPriceListsResponse_PriceLists = &handles[112]
+var ListPriceListsResponse_NextToken = &handles[113]
+
+var AWSPriceListService = &smithy.ServiceSchema{Schema: &handles[5], Version: "2017-10-15"}

@@ -7,133 +7,138 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/@connections/{ConnectionId}",
-	Code: 204})
+const blob = "" +
+	"PayloadTooLargeExceptionApiGatewayManagementApiDeleteConnectionRequestPostToConnectionRequestLimitEx" +
+	"ceededExceptionGetConnectionResponseGetConnectionRequestForbiddenException__timestampIso8601GoneExce" +
+	"ptionConnectionIdLastActiveAtConnectedAtUserAgentIdentitySourceIp__stringMessageData"
 
-var GetConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "GetConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/@connections/{ConnectionId}",
-	Code: 200})
-
-var PostToConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "PostToConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/@connections/{ConnectionId}",
-	Code: 200})
-
-var _ApiGatewayManagementApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "ApiGatewayManagementApi",
-}, smithy.ShapeTypeService, 0)
-
-var ApiGatewayManagementApi = smithy.NewServiceSchema(_ApiGatewayManagementApi, "2018-11-29")
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "__timestampIso8601",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _Data = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "Data",
-}, smithy.ShapeTypeBlob, 0)
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-
-var GoneException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "GoneException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 410})
-
-var Identity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "Identity",
-}, smithy.ShapeTypeStructure, 2)
-var Identity_SourceIp *smithy.Schema
-
-var Identity_UserAgent *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-
-var PayloadTooLargeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "PayloadTooLargeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 413})
-var PayloadTooLargeException_Message *smithy.Schema
-
-var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "DeleteConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionRequest_ConnectionId *smithy.Schema
-
-var GetConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "GetConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectionRequest_ConnectionId *smithy.Schema
-
-var GetConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "GetConnectionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetConnectionResponse_ConnectedAt *smithy.Schema
-
-var GetConnectionResponse_Identity *smithy.Schema
-
-var GetConnectionResponse_LastActiveAt *smithy.Schema
-
-var PostToConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewaymanagementapi",
-	Name:      "PostToConnectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PostToConnectionRequest_Data *smithy.Schema
-
-var PostToConnectionRequest_ConnectionId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Identity_SourceIp = Identity.AddMember("SourceIp", ___string, &smithytraits.JSONName{Name: "sourceIp"})
-
-	Identity_UserAgent = Identity.AddMember("UserAgent", ___string, &smithytraits.JSONName{Name: "userAgent"})
-
-	PayloadTooLargeException_Message = PayloadTooLargeException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	DeleteConnectionRequest_ConnectionId = DeleteConnectionRequest.AddMember("ConnectionId", ___string, &smithytraits.HTTPLabel{})
-
-	GetConnectionRequest_ConnectionId = GetConnectionRequest.AddMember("ConnectionId", ___string, &smithytraits.HTTPLabel{})
-
-	GetConnectionResponse_ConnectedAt = GetConnectionResponse.AddMember("ConnectedAt", ___timestampIso8601, &smithytraits.JSONName{Name: "connectedAt"})
-
-	GetConnectionResponse_Identity = GetConnectionResponse.AddMember("Identity", Identity, &smithytraits.JSONName{Name: "identity"})
-
-	GetConnectionResponse_LastActiveAt = GetConnectionResponse.AddMember("LastActiveAt", ___timestampIso8601, &smithytraits.JSONName{Name: "lastActiveAt"})
-
-	PostToConnectionRequest_Data = PostToConnectionRequest.AddMember("Data", _Data, &smithytraits.HTTPPayload{})
-
-	PostToConnectionRequest_ConnectionId = PostToConnectionRequest.AddMember("ConnectionId", ___string, &smithytraits.HTTPLabel{})
-
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.apigatewaymanagementapi"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 47, Target: 0, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 115, Target: 1, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 70, Target: 2, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 24, Target: 3, Traits: 3, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 265, Target: 4, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 174, Target: 5, Traits: 4, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 280, Target: 6, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 156, Target: 7, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 192, Target: 8, Traits: 6, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 249, Target: 9, Traits: 3, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 257, Target: 4, Traits: 7, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 240, Target: 4, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 93, Target: 12, Traits: 9, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 0, Target: 13, Traits: 10, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 273, Target: 4, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 47, Target: 15, Traits: 3, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 205, Target: 4, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 136, Target: 17, Traits: 3, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 205, Target: 4, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 115, Target: 19, Traits: 3, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 5, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 249, Target: 9, Traits: 14, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 217, Target: 5, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 70, Target: 23, Traits: 3, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 280, Target: 6, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 205, Target: 4, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/@connections/{ConnectionId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/@connections/{ConnectionId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/@connections/{ConnectionId}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 410}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sourceIp"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userAgent"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 413}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "connectedAt"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "identity"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "lastActiveAt"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800},
+	},
 }
+
+var handles = [26]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+}
+
+var DeleteConnection = &handles[0]
+
+var GetConnection = &handles[1]
+
+var PostToConnection = &handles[2]
+
+var _ApiGatewayManagementApi = &handles[3]
+
+var ___string = &handles[4]
+
+var ___timestampIso8601 = &handles[5]
+
+var _Data = &handles[6]
+
+var ForbiddenException = &handles[7]
+
+var GoneException = &handles[8]
+
+var Identity = &handles[9]
+var Identity_SourceIp = &handles[10]
+var Identity_UserAgent = &handles[11]
+
+var LimitExceededException = &handles[12]
+
+var PayloadTooLargeException = &handles[13]
+var PayloadTooLargeException_Message = &handles[14]
+
+var DeleteConnectionRequest = &handles[15]
+var DeleteConnectionRequest_ConnectionId = &handles[16]
+
+var GetConnectionRequest = &handles[17]
+var GetConnectionRequest_ConnectionId = &handles[18]
+
+var GetConnectionResponse = &handles[19]
+var GetConnectionResponse_ConnectedAt = &handles[20]
+var GetConnectionResponse_Identity = &handles[21]
+var GetConnectionResponse_LastActiveAt = &handles[22]
+
+var PostToConnectionRequest = &handles[23]
+var PostToConnectionRequest_Data = &handles[24]
+var PostToConnectionRequest_ConnectionId = &handles[25]
+
+var ApiGatewayManagementApi = &smithy.ServiceSchema{Schema: &handles[3], Version: "2018-11-29"}

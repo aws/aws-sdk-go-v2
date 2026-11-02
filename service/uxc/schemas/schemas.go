@@ -4,255 +4,237 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetAccountCustomizations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "GetAccountCustomizations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/account-customizations",
-	Code: 200})
-
-var ListServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "ListServices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/services",
-	Code: 200})
-
-var UpdateAccountCustomizations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "UpdateAccountCustomizations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/v1/account-customizations",
-	Code: 200})
-
-var _AWSAccountUXSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "AWSAccountUXSetting",
-}, smithy.ShapeTypeService, 0)
-
-var AWSAccountUXSetting = smithy.NewServiceSchema(_AWSAccountUXSetting, "2024-07-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccountColor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "AccountColor",
-}, smithy.ShapeTypeEnum, 10)
-var AccountColor_NONE *smithy.Schema
-
-var AccountColor_PINK *smithy.Schema
-
-var AccountColor_PURPLE *smithy.Schema
-
-var AccountColor_DARKBLUE *smithy.Schema
-
-var AccountColor_LIGHTBLUE *smithy.Schema
-
-var AccountColor_TEAL *smithy.Schema
-
-var AccountColor_GREEN *smithy.Schema
-
-var AccountColor_YELLOW *smithy.Schema
-
-var AccountColor_ORANGE *smithy.Schema
-
-var AccountColor_RED *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "RegionsList",
-}, smithy.ShapeTypeList, 1)
-var _RegionsList_member *smithy.Schema
-
-var _Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "Service",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "ServiceList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceList_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_path *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var GetAccountCustomizationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "GetAccountCustomizationsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountCustomizationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "GetAccountCustomizationsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetAccountCustomizationsOutput_accountColor *smithy.Schema
-
-var GetAccountCustomizationsOutput_visibleServices *smithy.Schema
-
-var GetAccountCustomizationsOutput_visibleRegions *smithy.Schema
-
-var ListServicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "ListServicesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesInput_nextToken *smithy.Schema
-
-var ListServicesInput_maxResults *smithy.Schema
-
-var ListServicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "ListServicesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesOutput_nextToken *smithy.Schema
-
-var ListServicesOutput_services *smithy.Schema
-
-var UpdateAccountCustomizationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "UpdateAccountCustomizationsInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateAccountCustomizationsInput_accountColor *smithy.Schema
-
-var UpdateAccountCustomizationsInput_visibleServices *smithy.Schema
-
-var UpdateAccountCustomizationsInput_visibleRegions *smithy.Schema
-
-var UpdateAccountCustomizationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.uxc",
-	Name:      "UpdateAccountCustomizationsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateAccountCustomizationsOutput_accountColor *smithy.Schema
-
-var UpdateAccountCustomizationsOutput_visibleServices *smithy.Schema
-
-var UpdateAccountCustomizationsOutput_visibleRegions *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AccountColor_NONE = AccountColor.AddMember("NONE", smithyprelude.Unit)
-
-	AccountColor_PINK = AccountColor.AddMember("PINK", smithyprelude.Unit)
-
-	AccountColor_PURPLE = AccountColor.AddMember("PURPLE", smithyprelude.Unit)
-
-	AccountColor_DARKBLUE = AccountColor.AddMember("DARKBLUE", smithyprelude.Unit)
-
-	AccountColor_LIGHTBLUE = AccountColor.AddMember("LIGHTBLUE", smithyprelude.Unit)
-
-	AccountColor_TEAL = AccountColor.AddMember("TEAL", smithyprelude.Unit)
-
-	AccountColor_GREEN = AccountColor.AddMember("GREEN", smithyprelude.Unit)
-
-	AccountColor_YELLOW = AccountColor.AddMember("YELLOW", smithyprelude.Unit)
-
-	AccountColor_ORANGE = AccountColor.AddMember("ORANGE", smithyprelude.Unit)
-
-	AccountColor_RED = AccountColor.AddMember("RED", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	_RegionsList_member = _RegionsList.AddMember("member", _Region)
-
-	_ServiceList_member = _ServiceList.AddMember("member", _Service)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationExceptionField_path = ValidationExceptionField.AddMember("path", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	GetAccountCustomizationsOutput_accountColor = GetAccountCustomizationsOutput.AddMember("accountColor", AccountColor)
-
-	GetAccountCustomizationsOutput_visibleServices = GetAccountCustomizationsOutput.AddMember("visibleServices", _ServiceList)
-
-	GetAccountCustomizationsOutput_visibleRegions = GetAccountCustomizationsOutput.AddMember("visibleRegions", _RegionsList)
-
-	ListServicesInput_nextToken = ListServicesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListServicesInput_maxResults = ListServicesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListServicesOutput_nextToken = ListServicesOutput.AddMember("nextToken", _NextToken)
-
-	ListServicesOutput_services = ListServicesOutput.AddMember("services", _ServiceList)
-
-	UpdateAccountCustomizationsInput_accountColor = UpdateAccountCustomizationsInput.AddMember("accountColor", AccountColor)
-
-	UpdateAccountCustomizationsInput_visibleServices = UpdateAccountCustomizationsInput.AddMember("visibleServices", _ServiceList)
-
-	UpdateAccountCustomizationsInput_visibleRegions = UpdateAccountCustomizationsInput.AddMember("visibleRegions", _RegionsList)
-
-	UpdateAccountCustomizationsOutput_accountColor = UpdateAccountCustomizationsOutput.AddMember("accountColor", AccountColor)
-
-	UpdateAccountCustomizationsOutput_visibleServices = UpdateAccountCustomizationsOutput.AddMember("visibleServices", _ServiceList)
-
-	UpdateAccountCustomizationsOutput_visibleRegions = UpdateAccountCustomizationsOutput.AddMember("visibleRegions", _RegionsList)
-
+const blob = "" +
+	"UpdateAccountCustomizationsOutputUpdateAccountCustomizationsInputGetAccountCustomizationsOutputGetAc" +
+	"countCustomizationsInputValidationExceptionFieldListInternalServerExceptionAccessDeniedExceptionAWSA" +
+	"ccountUXSettingThrottlingExceptionListServicesOutputListServicesInputvisibleServicesvisibleRegionsAc" +
+	"countColoraccountColorRegionsListServiceListMaxResultsmaxResultsLIGHTBLUENextTokenfieldListnextToken" +
+	"DARKBLUEservicesmessageORANGEPURPLEStringYELLOWmemberGREENNONEPINKTEALUnitpathRED"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.uxc", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 65, Target: 0, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 234, Target: 1, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 2, Traits: 2, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 196, Target: 3, Traits: 3, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 175, Target: 4, Traits: 4, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 416, Target: 56, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 298, Target: 6, Traits: 3, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 458, Target: 57, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 462, Target: 57, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 429, Target: 57, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 400, Target: 57, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 364, Target: 57, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 466, Target: 57, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 453, Target: 57, Traits: 3, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 441, Target: 57, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 423, Target: 57, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 478, Target: 57, Traits: 3, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 152, Target: 17, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 416, Target: 56, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 344, Target: 19, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 373, Target: 20, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 291, Target: 21, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 322, Target: 22, Traits: 3, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 447, Target: 21, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 238, Target: 24, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 333, Target: 25, Traits: 3, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 447, Target: 24, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 215, Target: 27, Traits: 6, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 416, Target: 56, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 124, Target: 29, Traits: 7, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 416, Target: 56, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 382, Target: 35, Traits: 3, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 124, Target: 32, Traits: 3, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 474, Target: 56, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 416, Target: 56, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 124, Target: 35, Traits: 3, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 447, Target: 32, Traits: 3, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 95, Target: 37, Traits: 3, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 65, Target: 38, Traits: 3, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 310, Target: 6, Traits: 3, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 269, Target: 25, Traits: 3, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 284, Target: 22, Traits: 3, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 252, Target: 42, Traits: 3, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 391, Target: 20, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 354, Target: 19, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 234, Target: 45, Traits: 3, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 391, Target: 20, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 408, Target: 25, Traits: 3, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 33, Target: 48, Traits: 3, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 310, Target: 6, Traits: 3, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 269, Target: 25, Traits: 3, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 284, Target: 22, Traits: 3, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 52, Traits: 3, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 310, Target: 6, Traits: 3, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 269, Target: 25, Traits: 3, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 284, Target: 22, Traits: 3, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 435, Target: 56, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 470, Target: 57, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/account-customizations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/services",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/v1/account-customizations",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [58]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+}
+
+var GetAccountCustomizations = &handles[0]
+
+var ListServices = &handles[1]
+
+var UpdateAccountCustomizations = &handles[2]
+
+var _AWSAccountUXSetting = &handles[3]
+
+var AccessDeniedException = &handles[4]
+var AccessDeniedException_message = &handles[5]
+
+var AccountColor = &handles[6]
+var AccountColor_NONE = &handles[7]
+var AccountColor_PINK = &handles[8]
+var AccountColor_PURPLE = &handles[9]
+var AccountColor_DARKBLUE = &handles[10]
+var AccountColor_LIGHTBLUE = &handles[11]
+var AccountColor_TEAL = &handles[12]
+var AccountColor_GREEN = &handles[13]
+var AccountColor_YELLOW = &handles[14]
+var AccountColor_ORANGE = &handles[15]
+var AccountColor_RED = &handles[16]
+
+var InternalServerException = &handles[17]
+var InternalServerException_message = &handles[18]
+
+var _MaxResults = &handles[19]
+
+var _NextToken = &handles[20]
+
+var _Region = &handles[21]
+
+var _RegionsList = &handles[22]
+var _RegionsList_member = &handles[23]
+
+var _Service = &handles[24]
+
+var _ServiceList = &handles[25]
+var _ServiceList_member = &handles[26]
+
+var ThrottlingException = &handles[27]
+var ThrottlingException_message = &handles[28]
+
+var ValidationException = &handles[29]
+var ValidationException_message = &handles[30]
+var ValidationException_fieldList = &handles[31]
+
+var ValidationExceptionField = &handles[32]
+var ValidationExceptionField_path = &handles[33]
+var ValidationExceptionField_message = &handles[34]
+
+var _ValidationExceptionFieldList = &handles[35]
+var _ValidationExceptionFieldList_member = &handles[36]
+
+var GetAccountCustomizationsInput = &handles[37]
+
+var GetAccountCustomizationsOutput = &handles[38]
+var GetAccountCustomizationsOutput_accountColor = &handles[39]
+var GetAccountCustomizationsOutput_visibleServices = &handles[40]
+var GetAccountCustomizationsOutput_visibleRegions = &handles[41]
+
+var ListServicesInput = &handles[42]
+var ListServicesInput_nextToken = &handles[43]
+var ListServicesInput_maxResults = &handles[44]
+
+var ListServicesOutput = &handles[45]
+var ListServicesOutput_nextToken = &handles[46]
+var ListServicesOutput_services = &handles[47]
+
+var UpdateAccountCustomizationsInput = &handles[48]
+var UpdateAccountCustomizationsInput_accountColor = &handles[49]
+var UpdateAccountCustomizationsInput_visibleServices = &handles[50]
+var UpdateAccountCustomizationsInput_visibleRegions = &handles[51]
+
+var UpdateAccountCustomizationsOutput = &handles[52]
+var UpdateAccountCustomizationsOutput_accountColor = &handles[53]
+var UpdateAccountCustomizationsOutput_visibleServices = &handles[54]
+var UpdateAccountCustomizationsOutput_visibleRegions = &handles[55]
+
+var AWSAccountUXSetting = &smithy.ServiceSchema{Schema: &handles[3], Version: "2024-07-01"}

@@ -4,227 +4,208 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetIceServerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "GetIceServerConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/get-ice-server-config",
-	Code: 200})
+const blob = "" +
+	"SendAlexaOfferToMasterResponseSendAlexaOfferToMasterRequestClientLimitExceededExceptionGetIceServerC" +
+	"onfigResponseAWSAcuitySignalingServiceGetIceServerConfigRequestResourceNotFoundExceptionInvalidArgum" +
+	"entExceptionSessionExpiredExceptionInvalidClientExceptionNotAuthorizedExceptionMessagePayloadSenderC" +
+	"lientIdIceServerListErrorMessageResourceARNChannelARNPasswordUsernamemessageAnswermemberTURNUnitUris" +
+	"Ttl"
 
-var SendAlexaOfferToMaster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "SendAlexaOfferToMaster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/send-alexa-offer-to-master",
-	Code: 200})
-
-var _AWSAcuitySignalingService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "AWSAcuitySignalingService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSAcuitySignalingService = smithy.NewServiceSchema(_AWSAcuitySignalingService, "2019-12-04")
-
-var _Answer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "Answer",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0)
-
-var ClientLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "ClientLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ClientLimitExceededException_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var IceServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "IceServer",
-}, smithy.ShapeTypeStructure, 4)
-var IceServer_Uris *smithy.Schema
-
-var IceServer_Username *smithy.Schema
-
-var IceServer_Password *smithy.Schema
-
-var IceServer_Ttl *smithy.Schema
-
-var _IceServerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "IceServerList",
-}, smithy.ShapeTypeList, 1)
-var _IceServerList_member *smithy.Schema
-
-var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidArgumentException_Message *smithy.Schema
-
-var InvalidClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "InvalidClientException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidClientException_message *smithy.Schema
-
-var _MessagePayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "MessagePayload",
-}, smithy.ShapeTypeString, 0)
-
-var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var NotAuthorizedException_Message *smithy.Schema
-
-var _Password = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "Password",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "Service",
-}, smithy.ShapeTypeEnum, 1)
-var Service_TURN *smithy.Schema
-
-var SessionExpiredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "SessionExpiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SessionExpiredException_message *smithy.Schema
-
-var _Ttl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "Ttl",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _Uris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "Uris",
-}, smithy.ShapeTypeList, 1)
-var _Uris_member *smithy.Schema
-
-var _Username = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "Username",
-}, smithy.ShapeTypeString, 0)
-
-var GetIceServerConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "GetIceServerConfigRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetIceServerConfigRequest_ChannelARN *smithy.Schema
-
-var GetIceServerConfigRequest_ClientId *smithy.Schema
-
-var GetIceServerConfigRequest_Service *smithy.Schema
-
-var GetIceServerConfigRequest_Username *smithy.Schema
-
-var GetIceServerConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "GetIceServerConfigResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIceServerConfigResponse_IceServerList *smithy.Schema
-
-var SendAlexaOfferToMasterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "SendAlexaOfferToMasterRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SendAlexaOfferToMasterRequest_ChannelARN *smithy.Schema
-
-var SendAlexaOfferToMasterRequest_SenderClientId *smithy.Schema
-
-var SendAlexaOfferToMasterRequest_MessagePayload *smithy.Schema
-
-var SendAlexaOfferToMasterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideosignaling",
-	Name:      "SendAlexaOfferToMasterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var SendAlexaOfferToMasterResponse_Answer *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ClientLimitExceededException_Message = ClientLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	_Uris_member = _Uris.AddMember("member", _Uri)
-
-	IceServer_Uris = IceServer.AddMember("Uris", _Uris)
-
-	IceServer_Username = IceServer.AddMember("Username", _Username)
-
-	IceServer_Password = IceServer.AddMember("Password", _Password)
-
-	IceServer_Ttl = IceServer.AddMember("Ttl", _Ttl)
-
-	_IceServerList_member = _IceServerList.AddMember("member", IceServer)
-
-	InvalidArgumentException_Message = InvalidArgumentException.AddMember("Message", _ErrorMessage)
-
-	InvalidClientException_message = InvalidClientException.AddMember("message", _ErrorMessage)
-
-	NotAuthorizedException_Message = NotAuthorizedException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	Service_TURN = Service.AddMember("TURN", smithyprelude.Unit)
-
-	SessionExpiredException_message = SessionExpiredException.AddMember("message", _ErrorMessage)
-
-	GetIceServerConfigRequest_ChannelARN = GetIceServerConfigRequest.AddMember("ChannelARN", _ResourceARN)
-
-	GetIceServerConfigRequest_ClientId = GetIceServerConfigRequest.AddMember("ClientId", _ClientId)
-
-	GetIceServerConfigRequest_Service = GetIceServerConfigRequest.AddMember("Service", Service)
-
-	GetIceServerConfigRequest_Username = GetIceServerConfigRequest.AddMember("Username", _Username)
-
-	GetIceServerConfigResponse_IceServerList = GetIceServerConfigResponse.AddMember("IceServerList", _IceServerList)
-
-	SendAlexaOfferToMasterRequest_ChannelARN = SendAlexaOfferToMasterRequest.AddMember("ChannelARN", _ResourceARN)
-
-	SendAlexaOfferToMasterRequest_SenderClientId = SendAlexaOfferToMasterRequest.AddMember("SenderClientId", _ClientId)
-
-	SendAlexaOfferToMasterRequest_MessagePayload = SendAlexaOfferToMasterRequest.AddMember("MessagePayload", _MessagePayload)
-
-	SendAlexaOfferToMasterResponse_Answer = SendAlexaOfferToMasterResponse.AddMember("Answer", _Answer)
-
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.kinesisvideosignaling", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 87, Target: 0, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 1, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 113, Target: 2, Traits: 2, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 376, Target: 3, Traits: 2, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 299, Target: 4, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 59, Target: 5, Traits: 3, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 7, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 320, Target: 7, Traits: 2, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 90, Target: 8, Traits: 2, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 396, Target: 32, Traits: 2, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 361, Target: 34, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 353, Target: 22, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 400, Target: 30, Traits: 2, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 307, Target: 13, Traits: 2, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 382, Target: 8, Traits: 2, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 188, Target: 15, Traits: 3, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 7, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 235, Target: 17, Traits: 3, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 369, Target: 7, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 279, Target: 19, Traits: 2, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 257, Target: 20, Traits: 4, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 7, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 353, Target: 22, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 332, Target: 23, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 163, Target: 24, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 7, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 131, Target: 26, Traits: 2, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 388, Target: 48, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 212, Target: 28, Traits: 3, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 369, Target: 7, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 400, Target: 30, Traits: 2, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 396, Target: 31, Traits: 2, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 396, Target: 32, Traits: 2, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 382, Target: 31, Traits: 2, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 361, Target: 34, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 138, Target: 35, Traits: 2, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 343, Target: 23, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 299, Target: 4, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 131, Target: 26, Traits: 2, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 361, Target: 34, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 87, Target: 40, Traits: 2, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 307, Target: 13, Traits: 2, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 30, Target: 42, Traits: 2, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 343, Target: 23, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 293, Target: 4, Traits: 2, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 279, Target: 19, Traits: 2, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 46, Traits: 2, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 376, Target: 3, Traits: 2, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 392, Target: 48, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/get-ice-server-config",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/send-alexa-offer-to-master",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [49]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+}
+
+var GetIceServerConfig = &handles[0]
+
+var SendAlexaOfferToMaster = &handles[1]
+
+var _AWSAcuitySignalingService = &handles[2]
+
+var _Answer = &handles[3]
+
+var _ClientId = &handles[4]
+
+var ClientLimitExceededException = &handles[5]
+var ClientLimitExceededException_Message = &handles[6]
+
+var _ErrorMessage = &handles[7]
+
+var IceServer = &handles[8]
+var IceServer_Uris = &handles[9]
+var IceServer_Username = &handles[10]
+var IceServer_Password = &handles[11]
+var IceServer_Ttl = &handles[12]
+
+var _IceServerList = &handles[13]
+var _IceServerList_member = &handles[14]
+
+var InvalidArgumentException = &handles[15]
+var InvalidArgumentException_Message = &handles[16]
+
+var InvalidClientException = &handles[17]
+var InvalidClientException_message = &handles[18]
+
+var _MessagePayload = &handles[19]
+
+var NotAuthorizedException = &handles[20]
+var NotAuthorizedException_Message = &handles[21]
+
+var _Password = &handles[22]
+
+var _ResourceARN = &handles[23]
+
+var ResourceNotFoundException = &handles[24]
+var ResourceNotFoundException_Message = &handles[25]
+
+var Service = &handles[26]
+var Service_TURN = &handles[27]
+
+var SessionExpiredException = &handles[28]
+var SessionExpiredException_message = &handles[29]
+
+var _Ttl = &handles[30]
+
+var _Uri = &handles[31]
+
+var _Uris = &handles[32]
+var _Uris_member = &handles[33]
+
+var _Username = &handles[34]
+
+var GetIceServerConfigRequest = &handles[35]
+var GetIceServerConfigRequest_ChannelARN = &handles[36]
+var GetIceServerConfigRequest_ClientId = &handles[37]
+var GetIceServerConfigRequest_Service = &handles[38]
+var GetIceServerConfigRequest_Username = &handles[39]
+
+var GetIceServerConfigResponse = &handles[40]
+var GetIceServerConfigResponse_IceServerList = &handles[41]
+
+var SendAlexaOfferToMasterRequest = &handles[42]
+var SendAlexaOfferToMasterRequest_ChannelARN = &handles[43]
+var SendAlexaOfferToMasterRequest_SenderClientId = &handles[44]
+var SendAlexaOfferToMasterRequest_MessagePayload = &handles[45]
+
+var SendAlexaOfferToMasterResponse = &handles[46]
+var SendAlexaOfferToMasterResponse_Answer = &handles[47]
+
+var AWSAcuitySignalingService = &smithy.ServiceSchema{Schema: &handles[2], Version: "2019-12-04"}

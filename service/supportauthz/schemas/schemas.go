@@ -4,887 +4,783 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateSupportPermit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "CreateSupportPermit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/support-permits",
-	Code: 200})
-
-var DeleteSupportPermit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "DeleteSupportPermit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/support-permits/{supportPermitIdentifier}",
-	Code: 200})
-
-var GetAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "GetAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/actions/{action}",
-	Code: 200})
-
-var GetSupportPermit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "GetSupportPermit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/support-permits/{supportPermitIdentifier}",
-	Code: 200})
-
-var ListActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListActions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/actions",
-	Code: 200})
-
-var ListSupportPermitRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListSupportPermitRequests",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/support-permit-requests",
-	Code: 200})
-
-var ListSupportPermits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListSupportPermits",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/support-permits",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var RejectSupportPermitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "RejectSupportPermitRequest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/support-permit-requests/{requestArn}/reject",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var _SupportAuthZ = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportAuthZ",
-}, smithy.ShapeTypeService, 0)
-
-var SupportAuthZ = smithy.NewServiceSchema(_SupportAuthZ, "2026-06-30")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Action",
-}, smithy.ShapeTypeString, 0)
-
-var _ActionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ActionDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _Actions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Actions",
-}, smithy.ShapeTypeList, 1)
-var _Actions_member *smithy.Schema
-
-var ActionSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ActionSet",
-}, smithy.ShapeTypeUnion, 2)
-var ActionSet_allActions *smithy.Schema
-
-var ActionSet_actions *smithy.Schema
-
-var _ActionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ActionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ActionSummaries_member *smithy.Schema
-
-var ActionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ActionSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ActionSummary_action *smithy.Schema
-
-var ActionSummary_service *smithy.Schema
-
-var ActionSummary_description *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var Condition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Condition",
-}, smithy.ShapeTypeUnion, 2)
-var Condition_allowAfter *smithy.Schema
-
-var Condition_allowBefore *smithy.Schema
-
-var _Conditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Conditions",
-}, smithy.ShapeTypeList, 1)
-var _Conditions_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var Permit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Permit",
-}, smithy.ShapeTypeStructure, 3)
-var Permit_actions *smithy.Schema
-
-var Permit_resources *smithy.Schema
-
-var Permit_conditions *smithy.Schema
-
-var _RequestArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "RequestArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Resource",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _Resources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Resources",
-}, smithy.ShapeTypeList, 1)
-var _Resources_member *smithy.Schema
-
-var ResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ResourceSet",
-}, smithy.ShapeTypeUnion, 2)
-var ResourceSet_allResourcesInRegion *smithy.Schema
-
-var ResourceSet_resources *smithy.Schema
-
-var _Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Service",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var SigningKeyInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SigningKeyInfo",
-}, smithy.ShapeTypeUnion, 1)
-var SigningKeyInfo_kmsKey *smithy.Schema
-
-var _SupportCaseDisplayId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportCaseDisplayId",
-}, smithy.ShapeTypeString, 0)
-
-var _SupportPermitIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportPermitIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var SupportPermitRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportPermitRequest",
-}, smithy.ShapeTypeStructure, 6)
-var SupportPermitRequest_requestArn *smithy.Schema
-
-var SupportPermitRequest_permit *smithy.Schema
-
-var SupportPermitRequest_supportCaseDisplayId *smithy.Schema
-
-var SupportPermitRequest_status *smithy.Schema
-
-var SupportPermitRequest_createdAt *smithy.Schema
-
-var SupportPermitRequest_updatedAt *smithy.Schema
-
-var _SupportPermitRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportPermitRequests",
-}, smithy.ShapeTypeList, 1)
-var _SupportPermitRequests_member *smithy.Schema
-
-var SupportPermitRequestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportPermitRequestStatus",
-}, smithy.ShapeTypeEnum, 4)
-var SupportPermitRequestStatus_PENDING *smithy.Schema
-
-var SupportPermitRequestStatus_ACCEPTED *smithy.Schema
-
-var SupportPermitRequestStatus_REJECTED *smithy.Schema
-
-var SupportPermitRequestStatus_CANCELLED *smithy.Schema
-
-var SupportPermitStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportPermitStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SupportPermitStatus_ACTIVE *smithy.Schema
-
-var SupportPermitStatus_INACTIVE *smithy.Schema
-
-var SupportPermitStatus_DELETING *smithy.Schema
-
-var _SupportPermitStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportPermitStatuses",
-}, smithy.ShapeTypeList, 1)
-var _SupportPermitStatuses_member *smithy.Schema
-
-var _SupportPermitSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportPermitSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SupportPermitSummaries_member *smithy.Schema
-
-var SupportPermitSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "SupportPermitSummary",
-}, smithy.ShapeTypeStructure, 7)
-var SupportPermitSummary_name *smithy.Schema
-
-var SupportPermitSummary_arn *smithy.Schema
-
-var SupportPermitSummary_permit *smithy.Schema
-
-var SupportPermitSummary_status *smithy.Schema
-
-var SupportPermitSummary_signingKeyInfo *smithy.Schema
-
-var SupportPermitSummary_createdAt *smithy.Schema
-
-var SupportPermitSummary_supportCaseDisplayId *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_path *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var CreateSupportPermitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "CreateSupportPermitInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateSupportPermitInput_permit *smithy.Schema
-
-var CreateSupportPermitInput_name *smithy.Schema
-
-var CreateSupportPermitInput_description *smithy.Schema
-
-var CreateSupportPermitInput_signingKeyInfo *smithy.Schema
-
-var CreateSupportPermitInput_supportCaseDisplayId *smithy.Schema
-
-var CreateSupportPermitInput_clientToken *smithy.Schema
-
-var CreateSupportPermitInput_tags *smithy.Schema
-
-var CreateSupportPermitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "CreateSupportPermitOutput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateSupportPermitOutput_name *smithy.Schema
-
-var CreateSupportPermitOutput_arn *smithy.Schema
-
-var CreateSupportPermitOutput_description *smithy.Schema
-
-var CreateSupportPermitOutput_permit *smithy.Schema
-
-var CreateSupportPermitOutput_status *smithy.Schema
-
-var CreateSupportPermitOutput_signingKeyInfo *smithy.Schema
-
-var CreateSupportPermitOutput_createdAt *smithy.Schema
-
-var CreateSupportPermitOutput_supportCaseDisplayId *smithy.Schema
-
-var CreateSupportPermitOutput_tags *smithy.Schema
-
-var DeleteSupportPermitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "DeleteSupportPermitInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSupportPermitInput_supportPermitIdentifier *smithy.Schema
-
-var DeleteSupportPermitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "DeleteSupportPermitOutput",
-}, smithy.ShapeTypeStructure, 8)
-var DeleteSupportPermitOutput_name *smithy.Schema
-
-var DeleteSupportPermitOutput_arn *smithy.Schema
-
-var DeleteSupportPermitOutput_description *smithy.Schema
-
-var DeleteSupportPermitOutput_permit *smithy.Schema
-
-var DeleteSupportPermitOutput_status *smithy.Schema
-
-var DeleteSupportPermitOutput_signingKeyInfo *smithy.Schema
-
-var DeleteSupportPermitOutput_createdAt *smithy.Schema
-
-var DeleteSupportPermitOutput_supportCaseDisplayId *smithy.Schema
-
-var GetActionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "GetActionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetActionInput_action *smithy.Schema
-
-var GetActionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "GetActionOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetActionOutput_action *smithy.Schema
-
-var GetActionOutput_service *smithy.Schema
-
-var GetActionOutput_description *smithy.Schema
-
-var GetSupportPermitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "GetSupportPermitInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSupportPermitInput_supportPermitIdentifier *smithy.Schema
-
-var GetSupportPermitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "GetSupportPermitOutput",
-}, smithy.ShapeTypeStructure, 9)
-var GetSupportPermitOutput_name *smithy.Schema
-
-var GetSupportPermitOutput_arn *smithy.Schema
-
-var GetSupportPermitOutput_description *smithy.Schema
-
-var GetSupportPermitOutput_permit *smithy.Schema
-
-var GetSupportPermitOutput_status *smithy.Schema
-
-var GetSupportPermitOutput_signingKeyInfo *smithy.Schema
-
-var GetSupportPermitOutput_createdAt *smithy.Schema
-
-var GetSupportPermitOutput_supportCaseDisplayId *smithy.Schema
-
-var GetSupportPermitOutput_tags *smithy.Schema
-
-var ListActionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListActionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListActionsInput_nextToken *smithy.Schema
-
-var ListActionsInput_maxResults *smithy.Schema
-
-var ListActionsInput_service *smithy.Schema
-
-var ListActionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListActionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListActionsOutput_actionSummaries *smithy.Schema
-
-var ListActionsOutput_nextToken *smithy.Schema
-
-var ListSupportPermitRequestsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListSupportPermitRequestsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSupportPermitRequestsInput_nextToken *smithy.Schema
-
-var ListSupportPermitRequestsInput_maxResults *smithy.Schema
-
-var ListSupportPermitRequestsInput_supportCaseDisplayId *smithy.Schema
-
-var ListSupportPermitRequestsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListSupportPermitRequestsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSupportPermitRequestsOutput_supportPermitRequests *smithy.Schema
-
-var ListSupportPermitRequestsOutput_nextToken *smithy.Schema
-
-var ListSupportPermitsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListSupportPermitsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSupportPermitsInput_nextToken *smithy.Schema
-
-var ListSupportPermitsInput_maxResults *smithy.Schema
-
-var ListSupportPermitsInput_supportPermitStatuses *smithy.Schema
-
-var ListSupportPermitsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListSupportPermitsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSupportPermitsOutput_supportPermits *smithy.Schema
-
-var ListSupportPermitsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var RejectSupportPermitRequestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "RejectSupportPermitRequestInput",
-}, smithy.ShapeTypeStructure, 1)
-var RejectSupportPermitRequestInput_requestArn *smithy.Schema
-
-var RejectSupportPermitRequestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "RejectSupportPermitRequestOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RejectSupportPermitRequestOutput_requestArn *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.supportauthz",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_Actions_member = _Actions.AddMember("member", _Action)
-
-	ActionSet_allActions = ActionSet.AddMember("allActions", smithyprelude.Unit)
-
-	ActionSet_actions = ActionSet.AddMember("actions", _Actions)
-
-	ActionSummary_action = ActionSummary.AddMember("action", _Action)
-
-	ActionSummary_service = ActionSummary.AddMember("service", _Service)
-
-	ActionSummary_description = ActionSummary.AddMember("description", _ActionDescription)
-
-	_ActionSummaries_member = _ActionSummaries.AddMember("member", ActionSummary)
-
-	Condition_allowAfter = Condition.AddMember("allowAfter", smithyprelude.Timestamp)
-
-	Condition_allowBefore = Condition.AddMember("allowBefore", smithyprelude.Timestamp)
-
-	_Conditions_member = _Conditions.AddMember("member", Condition)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	_Resources_member = _Resources.AddMember("member", _Resource)
-
-	ResourceSet_allResourcesInRegion = ResourceSet.AddMember("allResourcesInRegion", smithyprelude.Unit)
-
-	ResourceSet_resources = ResourceSet.AddMember("resources", _Resources)
-
-	Permit_actions = Permit.AddMember("actions", ActionSet)
-
-	Permit_resources = Permit.AddMember("resources", ResourceSet)
-
-	Permit_conditions = Permit.AddMember("conditions", _Conditions)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	SigningKeyInfo_kmsKey = SigningKeyInfo.AddMember("kmsKey", _KmsKeyArn)
-
-	SupportPermitRequestStatus_PENDING = SupportPermitRequestStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	SupportPermitRequestStatus_ACCEPTED = SupportPermitRequestStatus.AddMember("ACCEPTED", smithyprelude.Unit)
-
-	SupportPermitRequestStatus_REJECTED = SupportPermitRequestStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	SupportPermitRequestStatus_CANCELLED = SupportPermitRequestStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	SupportPermitRequest_requestArn = SupportPermitRequest.AddMember("requestArn", _RequestArn)
-
-	SupportPermitRequest_permit = SupportPermitRequest.AddMember("permit", Permit)
-
-	SupportPermitRequest_supportCaseDisplayId = SupportPermitRequest.AddMember("supportCaseDisplayId", _SupportCaseDisplayId)
-
-	SupportPermitRequest_status = SupportPermitRequest.AddMember("status", SupportPermitRequestStatus)
-
-	SupportPermitRequest_createdAt = SupportPermitRequest.AddMember("createdAt", smithyprelude.Timestamp)
-
-	SupportPermitRequest_updatedAt = SupportPermitRequest.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	_SupportPermitRequests_member = _SupportPermitRequests.AddMember("member", SupportPermitRequest)
-
-	SupportPermitStatus_ACTIVE = SupportPermitStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	SupportPermitStatus_INACTIVE = SupportPermitStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	SupportPermitStatus_DELETING = SupportPermitStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	_SupportPermitStatuses_member = _SupportPermitStatuses.AddMember("member", SupportPermitStatus)
-
-	SupportPermitSummary_name = SupportPermitSummary.AddMember("name", _Name)
-
-	SupportPermitSummary_arn = SupportPermitSummary.AddMember("arn", _Arn)
-
-	SupportPermitSummary_permit = SupportPermitSummary.AddMember("permit", Permit)
-
-	SupportPermitSummary_status = SupportPermitSummary.AddMember("status", SupportPermitStatus)
-
-	SupportPermitSummary_signingKeyInfo = SupportPermitSummary.AddMember("signingKeyInfo", SigningKeyInfo)
-
-	SupportPermitSummary_createdAt = SupportPermitSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	SupportPermitSummary_supportCaseDisplayId = SupportPermitSummary.AddMember("supportCaseDisplayId", _SupportCaseDisplayId)
-
-	_SupportPermitSummaries_member = _SupportPermitSummaries.AddMember("member", SupportPermitSummary)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionField_path = ValidationExceptionField.AddMember("path", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	CreateSupportPermitInput_permit = CreateSupportPermitInput.AddMember("permit", Permit)
-
-	CreateSupportPermitInput_name = CreateSupportPermitInput.AddMember("name", _Name)
-
-	CreateSupportPermitInput_description = CreateSupportPermitInput.AddMember("description", _Description)
-
-	CreateSupportPermitInput_signingKeyInfo = CreateSupportPermitInput.AddMember("signingKeyInfo", SigningKeyInfo)
-
-	CreateSupportPermitInput_supportCaseDisplayId = CreateSupportPermitInput.AddMember("supportCaseDisplayId", _SupportCaseDisplayId)
-
-	CreateSupportPermitInput_clientToken = CreateSupportPermitInput.AddMember("clientToken", _ClientToken)
-
-	CreateSupportPermitInput_tags = CreateSupportPermitInput.AddMember("tags", _Tags)
-
-	CreateSupportPermitOutput_name = CreateSupportPermitOutput.AddMember("name", _Name)
-
-	CreateSupportPermitOutput_arn = CreateSupportPermitOutput.AddMember("arn", _Arn)
-
-	CreateSupportPermitOutput_description = CreateSupportPermitOutput.AddMember("description", _Description)
-
-	CreateSupportPermitOutput_permit = CreateSupportPermitOutput.AddMember("permit", Permit)
-
-	CreateSupportPermitOutput_status = CreateSupportPermitOutput.AddMember("status", SupportPermitStatus)
-
-	CreateSupportPermitOutput_signingKeyInfo = CreateSupportPermitOutput.AddMember("signingKeyInfo", SigningKeyInfo)
-
-	CreateSupportPermitOutput_createdAt = CreateSupportPermitOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	CreateSupportPermitOutput_supportCaseDisplayId = CreateSupportPermitOutput.AddMember("supportCaseDisplayId", _SupportCaseDisplayId)
-
-	CreateSupportPermitOutput_tags = CreateSupportPermitOutput.AddMember("tags", _Tags)
-
-	DeleteSupportPermitInput_supportPermitIdentifier = DeleteSupportPermitInput.AddMember("supportPermitIdentifier", _Arn, &smithytraits.HTTPLabel{})
-
-	DeleteSupportPermitOutput_name = DeleteSupportPermitOutput.AddMember("name", _Name)
-
-	DeleteSupportPermitOutput_arn = DeleteSupportPermitOutput.AddMember("arn", _Arn)
-
-	DeleteSupportPermitOutput_description = DeleteSupportPermitOutput.AddMember("description", _Description)
-
-	DeleteSupportPermitOutput_permit = DeleteSupportPermitOutput.AddMember("permit", Permit)
-
-	DeleteSupportPermitOutput_status = DeleteSupportPermitOutput.AddMember("status", SupportPermitStatus)
-
-	DeleteSupportPermitOutput_signingKeyInfo = DeleteSupportPermitOutput.AddMember("signingKeyInfo", SigningKeyInfo)
-
-	DeleteSupportPermitOutput_createdAt = DeleteSupportPermitOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	DeleteSupportPermitOutput_supportCaseDisplayId = DeleteSupportPermitOutput.AddMember("supportCaseDisplayId", _SupportCaseDisplayId)
-
-	GetActionInput_action = GetActionInput.AddMember("action", _Action, &smithytraits.HTTPLabel{})
-
-	GetActionOutput_action = GetActionOutput.AddMember("action", _Action)
-
-	GetActionOutput_service = GetActionOutput.AddMember("service", _Service)
-
-	GetActionOutput_description = GetActionOutput.AddMember("description", _ActionDescription)
-
-	GetSupportPermitInput_supportPermitIdentifier = GetSupportPermitInput.AddMember("supportPermitIdentifier", _SupportPermitIdentifier, &smithytraits.HTTPLabel{})
-
-	GetSupportPermitOutput_name = GetSupportPermitOutput.AddMember("name", _Name)
-
-	GetSupportPermitOutput_arn = GetSupportPermitOutput.AddMember("arn", _Arn)
-
-	GetSupportPermitOutput_description = GetSupportPermitOutput.AddMember("description", _Description)
-
-	GetSupportPermitOutput_permit = GetSupportPermitOutput.AddMember("permit", Permit)
-
-	GetSupportPermitOutput_status = GetSupportPermitOutput.AddMember("status", SupportPermitStatus)
-
-	GetSupportPermitOutput_signingKeyInfo = GetSupportPermitOutput.AddMember("signingKeyInfo", SigningKeyInfo)
-
-	GetSupportPermitOutput_createdAt = GetSupportPermitOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GetSupportPermitOutput_supportCaseDisplayId = GetSupportPermitOutput.AddMember("supportCaseDisplayId", _SupportCaseDisplayId)
-
-	GetSupportPermitOutput_tags = GetSupportPermitOutput.AddMember("tags", _Tags)
-
-	ListActionsInput_nextToken = ListActionsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListActionsInput_maxResults = ListActionsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListActionsInput_service = ListActionsInput.AddMember("service", _Service, &smithytraits.HTTPQuery{Name: "service"})
-
-	ListActionsOutput_actionSummaries = ListActionsOutput.AddMember("actionSummaries", _ActionSummaries)
-
-	ListActionsOutput_nextToken = ListActionsOutput.AddMember("nextToken", _NextToken)
-
-	ListSupportPermitRequestsInput_nextToken = ListSupportPermitRequestsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSupportPermitRequestsInput_maxResults = ListSupportPermitRequestsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSupportPermitRequestsInput_supportCaseDisplayId = ListSupportPermitRequestsInput.AddMember("supportCaseDisplayId", _SupportCaseDisplayId, &smithytraits.HTTPQuery{Name: "supportCaseDisplayId"})
-
-	ListSupportPermitRequestsOutput_supportPermitRequests = ListSupportPermitRequestsOutput.AddMember("supportPermitRequests", _SupportPermitRequests)
-
-	ListSupportPermitRequestsOutput_nextToken = ListSupportPermitRequestsOutput.AddMember("nextToken", _NextToken)
-
-	ListSupportPermitsInput_nextToken = ListSupportPermitsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSupportPermitsInput_maxResults = ListSupportPermitsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSupportPermitsInput_supportPermitStatuses = ListSupportPermitsInput.AddMember("supportPermitStatuses", _SupportPermitStatuses, &smithytraits.HTTPQuery{Name: "supportPermitStatuses"})
-
-	ListSupportPermitsOutput_supportPermits = ListSupportPermitsOutput.AddMember("supportPermits", _SupportPermitSummaries)
-
-	ListSupportPermitsOutput_nextToken = ListSupportPermitsOutput.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _Tags)
-
-	RejectSupportPermitRequestInput_requestArn = RejectSupportPermitRequestInput.AddMember("requestArn", _RequestArn, &smithytraits.HTTPLabel{})
-
-	RejectSupportPermitRequestOutput_requestArn = RejectSupportPermitRequestOutput.AddMember("requestArn", _RequestArn)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _Tags)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
+const blob = "" +
+	"RejectSupportPermitRequestOutputListSupportPermitRequestsOutputRejectSupportPermitRequestInputListSu" +
+	"pportPermitRequestsInputServiceQuotaExceededExceptionValidationExceptionFieldListSupportPermitReques" +
+	"tStatusCreateSupportPermitOutputDeleteSupportPermitOutputListTagsForResourceOutputResourceNotFoundEx" +
+	"ceptionCreateSupportPermitInputDeleteSupportPermitInputListSupportPermitsOutputListTagsForResourceIn" +
+	"putInternalServerExceptionListSupportPermitsInputSupportPermitIdentifiersupportPermitIdentifierGetSu" +
+	"pportPermitOutputSupportPermitSummariesAccessDeniedExceptionGetSupportPermitInputSupportPermitStatus" +
+	"essupportPermitRequestssupportPermitStatusesSupportCaseDisplayIdSupportPermitSummaryallResourcesInRe" +
+	"gionsupportCaseDisplayIdThrottlingExceptionUntagResourceOutputUntagResourceInputActionDescriptionCon" +
+	"flictExceptionListActionsOutputTagResourceOutputretryAfterSecondsListActionsInputTagResourceInputAct" +
+	"ionSummariesGetActionOutputactionSummariesGetActionInputSigningKeyInfosigningKeyInfosupportPermitsAc" +
+	"tionSummarySupportAuthZresourceTypeClientTokenResourceSetallowBeforeclientTokendescriptionresourceAr" +
+	"nserviceCodeConditionsMaxResultsRequestArnTagKeyListallActionsallowAfterconditionsmaxResultsrequestA" +
+	"rnresourceIdActionSetCANCELLEDKmsKeyArnNextTokenTimestampcreatedAtfieldListnextTokenquotaCoderesourc" +
+	"esupdatedAtACCEPTEDDELETINGINACTIVEREJECTEDTagValueIntegerPENDINGactionsmessagetagKeysStringkmsKeyme" +
+	"mberpermitstatusvalueNameUnitnamepathtagsarnkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.supportauthz", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 207, Target: 0, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 232, Target: 1, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 912, Target: 2, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 495, Target: 3, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 814, Target: 4, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 32, Target: 5, Traits: 5, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 355, Target: 6, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 257, Target: 7, Traits: 7, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 8, Traits: 8, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 831, Target: 9, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 743, Target: 10, Traits: 10, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1011, Target: 11, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 539, Target: 12, Traits: 12, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1372, Target: 204, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 780, Target: 14, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 780, Target: 15, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 818, Target: 16, Traits: 11, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 14, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1212, Target: 18, Traits: 11, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1152, Target: 205, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1365, Target: 16, Traits: 11, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 897, Target: 21, Traits: 11, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 23, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 998, Target: 23, Traits: 11, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 927, Target: 14, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1101, Target: 61, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1079, Target: 15, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1098, Target: 27, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1035, Target: 28, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1112, Target: 29, Traits: 11, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1162, Target: 206, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1057, Target: 206, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1112, Target: 32, Traits: 11, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 29, Traits: 11, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 797, Target: 34, Traits: 13, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1372, Target: 204, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1202, Target: 204, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1023, Target: 204, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 786, Target: 38, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 403, Target: 39, Traits: 14, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1372, Target: 204, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 848, Target: 207, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1230, Target: 42, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1122, Target: 43, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1421, Target: 44, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1239, Target: 45, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 13, Target: 46, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 18, Traits: 11, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1293, Target: 58, Traits: 11, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1172, Target: 32, Traits: 11, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1132, Target: 50, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 268, Target: 51, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 282, Target: 52, Traits: 16, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1372, Target: 204, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1202, Target: 204, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1023, Target: 204, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 687, Target: 56, Traits: 11, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 51, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1046, Target: 58, Traits: 11, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 684, Target: 205, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1293, Target: 56, Traits: 11, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 124, Target: 61, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 124, Target: 62, Traits: 17, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1372, Target: 204, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1202, Target: 204, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1023, Target: 204, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1101, Target: 204, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1284, Target: 204, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 956, Target: 68, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1392, Target: 42, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 644, Target: 70, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 449, Target: 71, Traits: 11, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6, Target: 72, Traits: 11, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1192, Target: 50, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1404, Target: 46, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 704, Target: 70, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1410, Target: 81, Traits: 11, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1257, Target: 206, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1302, Target: 206, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 36, Target: 79, Traits: 11, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 72, Traits: 11, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 181, Target: 81, Traits: 11, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1358, Target: 205, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1311, Target: 205, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1335, Target: 205, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1221, Target: 205, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 581, Target: 86, Traits: 11, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1329, Target: 205, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1327, Target: 205, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1319, Target: 205, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 581, Target: 90, Traits: 11, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 86, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 517, Target: 92, Traits: 11, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 94, Traits: 11, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 664, Target: 94, Traits: 11, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1429, Target: 44, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1441, Target: 27, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1404, Target: 46, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1410, Target: 86, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 970, Target: 68, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1257, Target: 206, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 704, Target: 70, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1142, Target: 102, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1142, Target: 103, Traits: 11, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 102, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 261, Target: 105, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1444, Target: 102, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1416, Target: 108, Traits: 11, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1343, Target: 108, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 724, Target: 109, Traits: 18, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1372, Target: 204, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 848, Target: 207, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 153, Target: 112, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1372, Target: 204, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1266, Target: 118, Traits: 11, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 153, Target: 115, Traits: 11, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1433, Target: 204, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1372, Target: 204, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 153, Target: 118, Traits: 11, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1398, Target: 115, Traits: 11, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 307, Target: 120, Traits: 11, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1404, Target: 46, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1429, Target: 44, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1079, Target: 38, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 970, Target: 68, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 704, Target: 70, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1068, Target: 28, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1437, Target: 105, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 207, Target: 128, Traits: 11, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1429, Target: 44, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1441, Target: 27, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1079, Target: 38, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1404, Target: 46, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1410, Target: 86, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 970, Target: 68, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1257, Target: 206, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 704, Target: 70, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1437, Target: 105, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 331, Target: 138, Traits: 11, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 472, Target: 27, Traits: 20, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 232, Target: 140, Traits: 11, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1429, Target: 44, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1441, Target: 27, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1079, Target: 38, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1404, Target: 46, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1410, Target: 86, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 970, Target: 68, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1257, Target: 206, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 704, Target: 70, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 942, Target: 149, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 927, Target: 14, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 912, Target: 151, Traits: 11, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 927, Target: 14, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1101, Target: 61, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1079, Target: 15, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 560, Target: 155, Traits: 11, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 472, Target: 71, Traits: 20, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 495, Target: 157, Traits: 11, StrLen: 22, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1429, Target: 44, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1441, Target: 27, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1079, Target: 38, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1404, Target: 46, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1410, Target: 86, Traits: 11, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 970, Target: 68, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1257, Target: 206, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 704, Target: 70, Traits: 11, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1437, Target: 105, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 865, Target: 167, Traits: 11, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1275, Target: 45, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1182, Target: 43, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1101, Target: 61, Traits: 23, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 814, Target: 171, Traits: 11, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 927, Target: 21, Traits: 11, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1275, Target: 45, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 94, Target: 174, Traits: 11, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1275, Target: 45, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1182, Target: 43, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 704, Target: 70, Traits: 24, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 32, Target: 178, Traits: 11, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 602, Target: 79, Traits: 11, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1275, Target: 45, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 426, Target: 181, Traits: 11, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1275, Target: 45, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1182, Target: 43, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 623, Target: 90, Traits: 25, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 355, Target: 185, Traits: 11, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 984, Target: 92, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1275, Target: 45, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 379, Target: 188, Traits: 11, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1090, Target: 27, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 257, Target: 190, Traits: 11, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1437, Target: 105, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 63, Target: 192, Traits: 11, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1192, Target: 50, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 194, Traits: 11, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1192, Target: 50, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 881, Target: 196, Traits: 11, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1090, Target: 27, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1437, Target: 105, Traits: 11, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 831, Target: 199, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 762, Target: 200, Traits: 11, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1090, Target: 27, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1379, Target: 103, Traits: 26, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 743, Target: 203, Traits: 11, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1386, Target: 204, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1425, Target: 205, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 1248, Target: 206, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 1351, Target: 207, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/support-permits",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/support-permits/{supportPermitIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/actions/{action}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/support-permits/{supportPermitIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/actions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/support-permit-requests",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/support-permits",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/support-permit-requests/{requestArn}/reject",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "service"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "supportCaseDisplayId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "supportPermitStatuses"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [208]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+}
+
+var CreateSupportPermit = &handles[0]
+
+var DeleteSupportPermit = &handles[1]
+
+var GetAction = &handles[2]
+
+var GetSupportPermit = &handles[3]
+
+var ListActions = &handles[4]
+
+var ListSupportPermitRequests = &handles[5]
+
+var ListSupportPermits = &handles[6]
+
+var ListTagsForResource = &handles[7]
+
+var RejectSupportPermitRequest = &handles[8]
+
+var TagResource = &handles[9]
+
+var UntagResource = &handles[10]
+
+var _SupportAuthZ = &handles[11]
+
+var AccessDeniedException = &handles[12]
+var AccessDeniedException_message = &handles[13]
+
+var _Action = &handles[14]
+
+var _ActionDescription = &handles[15]
+
+var _Actions = &handles[16]
+var _Actions_member = &handles[17]
+
+var ActionSet = &handles[18]
+var ActionSet_allActions = &handles[19]
+var ActionSet_actions = &handles[20]
+
+var _ActionSummaries = &handles[21]
+var _ActionSummaries_member = &handles[22]
+
+var ActionSummary = &handles[23]
+var ActionSummary_action = &handles[24]
+var ActionSummary_service = &handles[25]
+var ActionSummary_description = &handles[26]
+
+var _Arn = &handles[27]
+
+var _ClientToken = &handles[28]
+
+var Condition = &handles[29]
+var Condition_allowAfter = &handles[30]
+var Condition_allowBefore = &handles[31]
+
+var _Conditions = &handles[32]
+var _Conditions_member = &handles[33]
+
+var ConflictException = &handles[34]
+var ConflictException_message = &handles[35]
+var ConflictException_resourceId = &handles[36]
+var ConflictException_resourceType = &handles[37]
+
+var _Description = &handles[38]
+
+var InternalServerException = &handles[39]
+var InternalServerException_message = &handles[40]
+var InternalServerException_retryAfterSeconds = &handles[41]
+
+var _KmsKeyArn = &handles[42]
+
+var _MaxResults = &handles[43]
+
+var _Name = &handles[44]
+
+var _NextToken = &handles[45]
+
+var Permit = &handles[46]
+var Permit_actions = &handles[47]
+var Permit_resources = &handles[48]
+var Permit_conditions = &handles[49]
+
+var _RequestArn = &handles[50]
+
+var _Resource = &handles[51]
+
+var ResourceNotFoundException = &handles[52]
+var ResourceNotFoundException_message = &handles[53]
+var ResourceNotFoundException_resourceId = &handles[54]
+var ResourceNotFoundException_resourceType = &handles[55]
+
+var _Resources = &handles[56]
+var _Resources_member = &handles[57]
+
+var ResourceSet = &handles[58]
+var ResourceSet_allResourcesInRegion = &handles[59]
+var ResourceSet_resources = &handles[60]
+
+var _Service = &handles[61]
+
+var ServiceQuotaExceededException = &handles[62]
+var ServiceQuotaExceededException_message = &handles[63]
+var ServiceQuotaExceededException_resourceId = &handles[64]
+var ServiceQuotaExceededException_resourceType = &handles[65]
+var ServiceQuotaExceededException_serviceCode = &handles[66]
+var ServiceQuotaExceededException_quotaCode = &handles[67]
+
+var SigningKeyInfo = &handles[68]
+var SigningKeyInfo_kmsKey = &handles[69]
+
+var _SupportCaseDisplayId = &handles[70]
+
+var _SupportPermitIdentifier = &handles[71]
+
+var SupportPermitRequest = &handles[72]
+var SupportPermitRequest_requestArn = &handles[73]
+var SupportPermitRequest_permit = &handles[74]
+var SupportPermitRequest_supportCaseDisplayId = &handles[75]
+var SupportPermitRequest_status = &handles[76]
+var SupportPermitRequest_createdAt = &handles[77]
+var SupportPermitRequest_updatedAt = &handles[78]
+
+var _SupportPermitRequests = &handles[79]
+var _SupportPermitRequests_member = &handles[80]
+
+var SupportPermitRequestStatus = &handles[81]
+var SupportPermitRequestStatus_PENDING = &handles[82]
+var SupportPermitRequestStatus_ACCEPTED = &handles[83]
+var SupportPermitRequestStatus_REJECTED = &handles[84]
+var SupportPermitRequestStatus_CANCELLED = &handles[85]
+
+var SupportPermitStatus = &handles[86]
+var SupportPermitStatus_ACTIVE = &handles[87]
+var SupportPermitStatus_INACTIVE = &handles[88]
+var SupportPermitStatus_DELETING = &handles[89]
+
+var _SupportPermitStatuses = &handles[90]
+var _SupportPermitStatuses_member = &handles[91]
+
+var _SupportPermitSummaries = &handles[92]
+var _SupportPermitSummaries_member = &handles[93]
+
+var SupportPermitSummary = &handles[94]
+var SupportPermitSummary_name = &handles[95]
+var SupportPermitSummary_arn = &handles[96]
+var SupportPermitSummary_permit = &handles[97]
+var SupportPermitSummary_status = &handles[98]
+var SupportPermitSummary_signingKeyInfo = &handles[99]
+var SupportPermitSummary_createdAt = &handles[100]
+var SupportPermitSummary_supportCaseDisplayId = &handles[101]
+
+var _TagKey = &handles[102]
+
+var _TagKeyList = &handles[103]
+var _TagKeyList_member = &handles[104]
+
+var _Tags = &handles[105]
+var _Tags_key = &handles[106]
+var _Tags_value = &handles[107]
+
+var _TagValue = &handles[108]
+
+var ThrottlingException = &handles[109]
+var ThrottlingException_message = &handles[110]
+var ThrottlingException_retryAfterSeconds = &handles[111]
+
+var ValidationException = &handles[112]
+var ValidationException_message = &handles[113]
+var ValidationException_fieldList = &handles[114]
+
+var ValidationExceptionField = &handles[115]
+var ValidationExceptionField_path = &handles[116]
+var ValidationExceptionField_message = &handles[117]
+
+var _ValidationExceptionFieldList = &handles[118]
+var _ValidationExceptionFieldList_member = &handles[119]
+
+var CreateSupportPermitInput = &handles[120]
+var CreateSupportPermitInput_permit = &handles[121]
+var CreateSupportPermitInput_name = &handles[122]
+var CreateSupportPermitInput_description = &handles[123]
+var CreateSupportPermitInput_signingKeyInfo = &handles[124]
+var CreateSupportPermitInput_supportCaseDisplayId = &handles[125]
+var CreateSupportPermitInput_clientToken = &handles[126]
+var CreateSupportPermitInput_tags = &handles[127]
+
+var CreateSupportPermitOutput = &handles[128]
+var CreateSupportPermitOutput_name = &handles[129]
+var CreateSupportPermitOutput_arn = &handles[130]
+var CreateSupportPermitOutput_description = &handles[131]
+var CreateSupportPermitOutput_permit = &handles[132]
+var CreateSupportPermitOutput_status = &handles[133]
+var CreateSupportPermitOutput_signingKeyInfo = &handles[134]
+var CreateSupportPermitOutput_createdAt = &handles[135]
+var CreateSupportPermitOutput_supportCaseDisplayId = &handles[136]
+var CreateSupportPermitOutput_tags = &handles[137]
+
+var DeleteSupportPermitInput = &handles[138]
+var DeleteSupportPermitInput_supportPermitIdentifier = &handles[139]
+
+var DeleteSupportPermitOutput = &handles[140]
+var DeleteSupportPermitOutput_name = &handles[141]
+var DeleteSupportPermitOutput_arn = &handles[142]
+var DeleteSupportPermitOutput_description = &handles[143]
+var DeleteSupportPermitOutput_permit = &handles[144]
+var DeleteSupportPermitOutput_status = &handles[145]
+var DeleteSupportPermitOutput_signingKeyInfo = &handles[146]
+var DeleteSupportPermitOutput_createdAt = &handles[147]
+var DeleteSupportPermitOutput_supportCaseDisplayId = &handles[148]
+
+var GetActionInput = &handles[149]
+var GetActionInput_action = &handles[150]
+
+var GetActionOutput = &handles[151]
+var GetActionOutput_action = &handles[152]
+var GetActionOutput_service = &handles[153]
+var GetActionOutput_description = &handles[154]
+
+var GetSupportPermitInput = &handles[155]
+var GetSupportPermitInput_supportPermitIdentifier = &handles[156]
+
+var GetSupportPermitOutput = &handles[157]
+var GetSupportPermitOutput_name = &handles[158]
+var GetSupportPermitOutput_arn = &handles[159]
+var GetSupportPermitOutput_description = &handles[160]
+var GetSupportPermitOutput_permit = &handles[161]
+var GetSupportPermitOutput_status = &handles[162]
+var GetSupportPermitOutput_signingKeyInfo = &handles[163]
+var GetSupportPermitOutput_createdAt = &handles[164]
+var GetSupportPermitOutput_supportCaseDisplayId = &handles[165]
+var GetSupportPermitOutput_tags = &handles[166]
+
+var ListActionsInput = &handles[167]
+var ListActionsInput_nextToken = &handles[168]
+var ListActionsInput_maxResults = &handles[169]
+var ListActionsInput_service = &handles[170]
+
+var ListActionsOutput = &handles[171]
+var ListActionsOutput_actionSummaries = &handles[172]
+var ListActionsOutput_nextToken = &handles[173]
+
+var ListSupportPermitRequestsInput = &handles[174]
+var ListSupportPermitRequestsInput_nextToken = &handles[175]
+var ListSupportPermitRequestsInput_maxResults = &handles[176]
+var ListSupportPermitRequestsInput_supportCaseDisplayId = &handles[177]
+
+var ListSupportPermitRequestsOutput = &handles[178]
+var ListSupportPermitRequestsOutput_supportPermitRequests = &handles[179]
+var ListSupportPermitRequestsOutput_nextToken = &handles[180]
+
+var ListSupportPermitsInput = &handles[181]
+var ListSupportPermitsInput_nextToken = &handles[182]
+var ListSupportPermitsInput_maxResults = &handles[183]
+var ListSupportPermitsInput_supportPermitStatuses = &handles[184]
+
+var ListSupportPermitsOutput = &handles[185]
+var ListSupportPermitsOutput_supportPermits = &handles[186]
+var ListSupportPermitsOutput_nextToken = &handles[187]
+
+var ListTagsForResourceInput = &handles[188]
+var ListTagsForResourceInput_resourceArn = &handles[189]
+
+var ListTagsForResourceOutput = &handles[190]
+var ListTagsForResourceOutput_tags = &handles[191]
+
+var RejectSupportPermitRequestInput = &handles[192]
+var RejectSupportPermitRequestInput_requestArn = &handles[193]
+
+var RejectSupportPermitRequestOutput = &handles[194]
+var RejectSupportPermitRequestOutput_requestArn = &handles[195]
+
+var TagResourceInput = &handles[196]
+var TagResourceInput_resourceArn = &handles[197]
+var TagResourceInput_tags = &handles[198]
+
+var TagResourceOutput = &handles[199]
+
+var UntagResourceInput = &handles[200]
+var UntagResourceInput_resourceArn = &handles[201]
+var UntagResourceInput_tagKeys = &handles[202]
+
+var UntagResourceOutput = &handles[203]
+
+var SupportAuthZ = &smithy.ServiceSchema{Schema: &handles[11], Version: "2026-06-30"}

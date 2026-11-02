@@ -4,214 +4,209 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var InvokeEndpointWithBidirectionalStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InvokeEndpointWithBidirectionalStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/endpoints/{EndpointName}/invocations-bidirectional-stream",
-	Code: 200})
-
-var _AmazonSageMakerRuntimeHttp2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "AmazonSageMakerRuntimeHttp2",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonSageMakerRuntimeHttp2 = smithy.NewServiceSchema(_AmazonSageMakerRuntimeHttp2, "2025-10-01")
-
-var InputValidationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InputValidationError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InputValidationError_Message *smithy.Schema
-
-var InputValidationError_ErrorCode *smithy.Schema
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerError_Message *smithy.Schema
-
-var InternalServerError_ErrorCode *smithy.Schema
-
-var InternalStreamFailure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InternalStreamFailure",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalStreamFailure_Message *smithy.Schema
-
-var ModelError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ModelError",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var ModelError_Message *smithy.Schema
-
-var ModelError_OriginalStatusCode *smithy.Schema
-
-var ModelError_OriginalMessage *smithy.Schema
-
-var ModelError_LogStreamArn *smithy.Schema
-
-var ModelError_ErrorCode *smithy.Schema
-
-var ModelStreamError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ModelStreamError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ModelStreamError_Message *smithy.Schema
-
-var ModelStreamError_ErrorCode *smithy.Schema
-
-var RequestPayloadPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "RequestPayloadPart",
-}, smithy.ShapeTypeStructure, 4)
-var RequestPayloadPart_Bytes *smithy.Schema
-
-var RequestPayloadPart_DataType *smithy.Schema
-
-var RequestPayloadPart_CompletionState *smithy.Schema
-
-var RequestPayloadPart_P *smithy.Schema
-
-var RequestStreamEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "RequestStreamEvent",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Streaming{})
-var RequestStreamEvent_PayloadPart *smithy.Schema
-
-var ResponsePayloadPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ResponsePayloadPart",
-}, smithy.ShapeTypeStructure, 4)
-var ResponsePayloadPart_Bytes *smithy.Schema
-
-var ResponsePayloadPart_DataType *smithy.Schema
-
-var ResponsePayloadPart_CompletionState *smithy.Schema
-
-var ResponsePayloadPart_P *smithy.Schema
-
-var ResponseStreamEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ResponseStreamEvent",
-}, smithy.ShapeTypeUnion, 3, &smithytraits.Streaming{})
-var ResponseStreamEvent_PayloadPart *smithy.Schema
-
-var ResponseStreamEvent_ModelStreamError *smithy.Schema
-
-var ResponseStreamEvent_InternalStreamFailure *smithy.Schema
-
-var _SensitiveBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "SensitiveBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var ServiceUnavailableError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ServiceUnavailableError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableError_Message *smithy.Schema
-
-var ServiceUnavailableError_ErrorCode *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InvokeEndpointWithBidirectionalStreamInput",
-}, smithy.ShapeTypeStructure, 5)
-var InvokeEndpointWithBidirectionalStreamInput_EndpointName *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput_Body *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput_TargetVariant *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput_ModelQueryString *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InvokeEndpointWithBidirectionalStreamOutput",
-}, smithy.ShapeTypeStructure, 2)
-var InvokeEndpointWithBidirectionalStreamOutput_Body *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	InputValidationError_Message = InputValidationError.AddMember("Message", smithyprelude.String)
-
-	InputValidationError_ErrorCode = InputValidationError.AddMember("ErrorCode", smithyprelude.String)
-
-	InternalServerError_Message = InternalServerError.AddMember("Message", smithyprelude.String)
-
-	InternalServerError_ErrorCode = InternalServerError.AddMember("ErrorCode", smithyprelude.String)
-
-	InternalStreamFailure_Message = InternalStreamFailure.AddMember("Message", smithyprelude.String)
-
-	ModelError_Message = ModelError.AddMember("Message", smithyprelude.String)
-
-	ModelError_OriginalStatusCode = ModelError.AddMember("OriginalStatusCode", smithyprelude.Integer)
-
-	ModelError_OriginalMessage = ModelError.AddMember("OriginalMessage", smithyprelude.String)
-
-	ModelError_LogStreamArn = ModelError.AddMember("LogStreamArn", smithyprelude.String)
-
-	ModelError_ErrorCode = ModelError.AddMember("ErrorCode", smithyprelude.String)
-
-	ModelStreamError_Message = ModelStreamError.AddMember("Message", smithyprelude.String)
-
-	ModelStreamError_ErrorCode = ModelStreamError.AddMember("ErrorCode", smithyprelude.String)
-
-	RequestPayloadPart_Bytes = RequestPayloadPart.AddMember("Bytes", _SensitiveBlob, &smithytraits.EventPayload{})
-
-	RequestPayloadPart_DataType = RequestPayloadPart.AddMember("DataType", smithyprelude.String, &smithytraits.EventHeader{})
-
-	RequestPayloadPart_CompletionState = RequestPayloadPart.AddMember("CompletionState", smithyprelude.String, &smithytraits.EventHeader{})
-
-	RequestPayloadPart_P = RequestPayloadPart.AddMember("P", smithyprelude.String, &smithytraits.EventHeader{})
-
-	RequestStreamEvent_PayloadPart = RequestStreamEvent.AddMember("PayloadPart", RequestPayloadPart)
-
-	ResponsePayloadPart_Bytes = ResponsePayloadPart.AddMember("Bytes", _SensitiveBlob, &smithytraits.EventPayload{})
-
-	ResponsePayloadPart_DataType = ResponsePayloadPart.AddMember("DataType", smithyprelude.String, &smithytraits.EventHeader{})
-
-	ResponsePayloadPart_CompletionState = ResponsePayloadPart.AddMember("CompletionState", smithyprelude.String, &smithytraits.EventHeader{})
-
-	ResponsePayloadPart_P = ResponsePayloadPart.AddMember("P", smithyprelude.String, &smithytraits.EventHeader{})
-
-	ResponseStreamEvent_PayloadPart = ResponseStreamEvent.AddMember("PayloadPart", ResponsePayloadPart)
-
-	ResponseStreamEvent_ModelStreamError = ResponseStreamEvent.AddMember("ModelStreamError", ModelStreamError)
-
-	ResponseStreamEvent_InternalStreamFailure = ResponseStreamEvent.AddMember("InternalStreamFailure", InternalStreamFailure)
-
-	ServiceUnavailableError_Message = ServiceUnavailableError.AddMember("Message", smithyprelude.String)
-
-	ServiceUnavailableError_ErrorCode = ServiceUnavailableError.AddMember("ErrorCode", smithyprelude.String)
-
-	InvokeEndpointWithBidirectionalStreamInput_EndpointName = InvokeEndpointWithBidirectionalStreamInput.AddMember("EndpointName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	InvokeEndpointWithBidirectionalStreamInput_Body = InvokeEndpointWithBidirectionalStreamInput.AddMember("Body", RequestStreamEvent, &smithytraits.HTTPPayload{})
-
-	InvokeEndpointWithBidirectionalStreamInput_TargetVariant = InvokeEndpointWithBidirectionalStreamInput.AddMember("TargetVariant", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Target-Variant"})
-
-	InvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath = InvokeEndpointWithBidirectionalStreamInput.AddMember("ModelInvocationPath", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Model-Invocation-Path"})
-
-	InvokeEndpointWithBidirectionalStreamInput_ModelQueryString = InvokeEndpointWithBidirectionalStreamInput.AddMember("ModelQueryString", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Model-Query-String"})
-
-	InvokeEndpointWithBidirectionalStreamOutput_Body = InvokeEndpointWithBidirectionalStreamOutput.AddMember("Body", ResponseStreamEvent, &smithytraits.HTTPPayload{})
-
-	InvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant = InvokeEndpointWithBidirectionalStreamOutput.AddMember("InvokedProductionVariant", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-Invoked-Production-Variant"})
-
+const blob = "" +
+	"InvokeEndpointWithBidirectionalStreamOutputInvokeEndpointWithBidirectionalStreamInputAmazonSageMaker" +
+	"RuntimeHttp2InvokedProductionVariantServiceUnavailableErrorInternalStreamFailureInputValidationError" +
+	"InternalServerErrorModelInvocationPathResponsePayloadPartResponseStreamEventOriginalStatusCodeReques" +
+	"tPayloadPartRequestStreamEventModelQueryStringModelStreamErrorCompletionStateOriginalMessageSensitiv" +
+	"eBlobTargetVariantEndpointNameLogStreamArnModelErrorErrorCodeDataTypeIntegerBytesBody"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.sagemakerruntimehttp2", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 85, Target: 1, Traits: 1, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 180, Target: 2, Traits: 2, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 385, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 452, Target: 48, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 200, Target: 5, Traits: 3, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 385, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 452, Target: 48, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 159, Target: 8, Traits: 4, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 385, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 442, Target: 10, Traits: 5, StrLen: 10, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 385, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 276, Target: 49, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 377, Target: 48, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 430, Target: 48, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 452, Target: 48, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 346, Target: 16, Traits: 6, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 385, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 452, Target: 48, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 294, Target: 19, Traits: 1, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 476, Target: 35, Traits: 7, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 461, Target: 48, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 362, Target: 48, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 119, Target: 48, Traits: 8, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 312, Target: 24, Traits: 9, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 246, Target: 19, Traits: 1, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 238, Target: 26, Traits: 1, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 476, Target: 35, Traits: 7, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 461, Target: 48, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 362, Target: 48, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 119, Target: 48, Traits: 8, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 257, Target: 31, Traits: 9, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 246, Target: 26, Traits: 1, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 346, Target: 16, Traits: 6, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 159, Target: 8, Traits: 4, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 392, Target: 35, Traits: 10, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 136, Target: 36, Traits: 11, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 385, Target: 48, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 452, Target: 48, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 43, Target: 39, Traits: 1, StrLen: 42, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 418, Target: 48, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 481, Target: 24, Traits: 13, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 405, Target: 48, Traits: 14, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 219, Target: 48, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 330, Target: 48, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 45, Traits: 1, StrLen: 43, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 481, Target: 31, Traits: 13, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 112, Target: 48, Traits: 17, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 340, Target: 48, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 469, Target: 49, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/endpoints/{EndpointName}/invocations-bidirectional-stream",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.EventPayload{}}, DirectMask: 0x100000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.EventHeader{}}, DirectMask: 0x400000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Target-Variant"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Model-Invocation-Path"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Model-Query-String"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Invoked-Production-Variant"}}, DirectMask: 0x80},
+	},
 }
+
+var handles = [50]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+}
+
+var InvokeEndpointWithBidirectionalStream = &handles[0]
+
+var _AmazonSageMakerRuntimeHttp2 = &handles[1]
+
+var InputValidationError = &handles[2]
+var InputValidationError_Message = &handles[3]
+var InputValidationError_ErrorCode = &handles[4]
+
+var InternalServerError = &handles[5]
+var InternalServerError_Message = &handles[6]
+var InternalServerError_ErrorCode = &handles[7]
+
+var InternalStreamFailure = &handles[8]
+var InternalStreamFailure_Message = &handles[9]
+
+var ModelError = &handles[10]
+var ModelError_Message = &handles[11]
+var ModelError_OriginalStatusCode = &handles[12]
+var ModelError_OriginalMessage = &handles[13]
+var ModelError_LogStreamArn = &handles[14]
+var ModelError_ErrorCode = &handles[15]
+
+var ModelStreamError = &handles[16]
+var ModelStreamError_Message = &handles[17]
+var ModelStreamError_ErrorCode = &handles[18]
+
+var RequestPayloadPart = &handles[19]
+var RequestPayloadPart_Bytes = &handles[20]
+var RequestPayloadPart_DataType = &handles[21]
+var RequestPayloadPart_CompletionState = &handles[22]
+var RequestPayloadPart_P = &handles[23]
+
+var RequestStreamEvent = &handles[24]
+var RequestStreamEvent_PayloadPart = &handles[25]
+
+var ResponsePayloadPart = &handles[26]
+var ResponsePayloadPart_Bytes = &handles[27]
+var ResponsePayloadPart_DataType = &handles[28]
+var ResponsePayloadPart_CompletionState = &handles[29]
+var ResponsePayloadPart_P = &handles[30]
+
+var ResponseStreamEvent = &handles[31]
+var ResponseStreamEvent_PayloadPart = &handles[32]
+var ResponseStreamEvent_ModelStreamError = &handles[33]
+var ResponseStreamEvent_InternalStreamFailure = &handles[34]
+
+var _SensitiveBlob = &handles[35]
+
+var ServiceUnavailableError = &handles[36]
+var ServiceUnavailableError_Message = &handles[37]
+var ServiceUnavailableError_ErrorCode = &handles[38]
+
+var InvokeEndpointWithBidirectionalStreamInput = &handles[39]
+var InvokeEndpointWithBidirectionalStreamInput_EndpointName = &handles[40]
+var InvokeEndpointWithBidirectionalStreamInput_Body = &handles[41]
+var InvokeEndpointWithBidirectionalStreamInput_TargetVariant = &handles[42]
+var InvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath = &handles[43]
+var InvokeEndpointWithBidirectionalStreamInput_ModelQueryString = &handles[44]
+
+var InvokeEndpointWithBidirectionalStreamOutput = &handles[45]
+var InvokeEndpointWithBidirectionalStreamOutput_Body = &handles[46]
+var InvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant = &handles[47]
+
+var AmazonSageMakerRuntimeHttp2 = &smithy.ServiceSchema{Schema: &handles[1], Version: "2025-10-01"}

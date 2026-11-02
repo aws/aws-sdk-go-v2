@@ -4,533 +4,470 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchMeterUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "BatchMeterUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var MeterUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "MeterUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "RegisterUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResolveCustomer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ResolveCustomer",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSMPMeteringService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "AWSMPMeteringService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMPMeteringService = smithy.NewServiceSchema(_AWSMPMeteringService, "2016-01-14")
-
-var _AgreementId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "AgreementId",
-}, smithy.ShapeTypeString, 0)
-
-var _AllocatedUsageQuantity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "AllocatedUsageQuantity",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerAWSAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "CustomerAWSAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "CustomerIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var CustomerNotEntitledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "CustomerNotEntitledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var CustomerNotEntitledException_message *smithy.Schema
-
-var DisabledApiException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "DisabledApiException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DisabledApiException_message *smithy.Schema
-
-var DuplicateRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "DuplicateRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DuplicateRequestException_message *smithy.Schema
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExpiredTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ExpiredTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ExpiredTokenException_message *smithy.Schema
-
-var IdempotencyConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "IdempotencyConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var IdempotencyConflictException_message *smithy.Schema
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServiceErrorException_message *smithy.Schema
-
-var InvalidCustomerIdentifierException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidCustomerIdentifierException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidCustomerIdentifierException_message *smithy.Schema
-
-var InvalidEndpointRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidEndpointRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidEndpointRegionException_message *smithy.Schema
-
-var InvalidLicenseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidLicenseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidLicenseException_message *smithy.Schema
-
-var InvalidProductCodeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidProductCodeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidProductCodeException_message *smithy.Schema
-
-var InvalidPublicKeyVersionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidPublicKeyVersionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidPublicKeyVersionException_message *smithy.Schema
-
-var InvalidRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidRegionException_message *smithy.Schema
-
-var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidTagException_message *smithy.Schema
-
-var InvalidTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidTokenException_message *smithy.Schema
-
-var InvalidUsageAllocationsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidUsageAllocationsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidUsageAllocationsException_message *smithy.Schema
-
-var InvalidUsageDimensionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "InvalidUsageDimensionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidUsageDimensionException_message *smithy.Schema
-
-var _LicenseArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "LicenseArn",
-}, smithy.ShapeTypeString, 0)
-
-var Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Metadata",
-}, smithy.ShapeTypeStructure, 1)
-var Metadata_AgreementId *smithy.Schema
-
-var _Nonce = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Nonce",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var PlatformNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "PlatformNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var PlatformNotSupportedException_message *smithy.Schema
-
-var _ProductCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ProductCode",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ThrottlingException_message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TimestampOutOfBoundsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "TimestampOutOfBoundsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TimestampOutOfBoundsException_message *smithy.Schema
-
-var UsageAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageAllocation",
-}, smithy.ShapeTypeStructure, 2)
-var UsageAllocation_AllocatedUsageQuantity *smithy.Schema
-
-var UsageAllocation_Tags *smithy.Schema
-
-var _UsageAllocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageAllocations",
-}, smithy.ShapeTypeList, 1)
-var _UsageAllocations_member *smithy.Schema
-
-var _UsageDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageDimension",
-}, smithy.ShapeTypeString, 0)
-
-var _UsageQuantity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageQuantity",
-}, smithy.ShapeTypeInteger, 0)
-
-var UsageRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecord",
-}, smithy.ShapeTypeStructure, 7)
-var UsageRecord_Timestamp *smithy.Schema
-
-var UsageRecord_CustomerIdentifier *smithy.Schema
-
-var UsageRecord_Dimension *smithy.Schema
-
-var UsageRecord_Quantity *smithy.Schema
-
-var UsageRecord_UsageAllocations *smithy.Schema
-
-var UsageRecord_CustomerAWSAccountId *smithy.Schema
-
-var UsageRecord_LicenseArn *smithy.Schema
-
-var _UsageRecordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecordList",
-}, smithy.ShapeTypeList, 1)
-var _UsageRecordList_member *smithy.Schema
-
-var UsageRecordResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecordResult",
-}, smithy.ShapeTypeStructure, 3)
-var UsageRecordResult_UsageRecord *smithy.Schema
-
-var UsageRecordResult_MeteringRecordId *smithy.Schema
-
-var UsageRecordResult_Status *smithy.Schema
-
-var _UsageRecordResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecordResultList",
-}, smithy.ShapeTypeList, 1)
-var _UsageRecordResultList_member *smithy.Schema
-
-var UsageRecordResultStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "UsageRecordResultStatus",
-}, smithy.ShapeTypeEnum, 3)
-var UsageRecordResultStatus_SUCCESS *smithy.Schema
-
-var UsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED *smithy.Schema
-
-var UsageRecordResultStatus_DUPLICATE_RECORD *smithy.Schema
-
-var _VersionInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "VersionInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var BatchMeterUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "BatchMeterUsageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchMeterUsageRequest_UsageRecords *smithy.Schema
-
-var BatchMeterUsageRequest_ProductCode *smithy.Schema
-
-var BatchMeterUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "BatchMeterUsageResult",
-}, smithy.ShapeTypeStructure, 2)
-var BatchMeterUsageResult_Results *smithy.Schema
-
-var BatchMeterUsageResult_UnprocessedRecords *smithy.Schema
-
-var MeterUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "MeterUsageRequest",
-}, smithy.ShapeTypeStructure, 7)
-var MeterUsageRequest_ProductCode *smithy.Schema
-
-var MeterUsageRequest_Timestamp *smithy.Schema
-
-var MeterUsageRequest_UsageDimension *smithy.Schema
-
-var MeterUsageRequest_UsageQuantity *smithy.Schema
-
-var MeterUsageRequest_DryRun *smithy.Schema
-
-var MeterUsageRequest_UsageAllocations *smithy.Schema
-
-var MeterUsageRequest_ClientToken *smithy.Schema
-
-var MeterUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "MeterUsageResult",
-}, smithy.ShapeTypeStructure, 1)
-var MeterUsageResult_MeteringRecordId *smithy.Schema
-
-var RegisterUsageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "RegisterUsageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterUsageRequest_ProductCode *smithy.Schema
-
-var RegisterUsageRequest_PublicKeyVersion *smithy.Schema
-
-var RegisterUsageRequest_Nonce *smithy.Schema
-
-var RegisterUsageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "RegisterUsageResult",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterUsageResult_PublicKeyRotationTimestamp *smithy.Schema
-
-var RegisterUsageResult_Signature *smithy.Schema
-
-var ResolveCustomerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ResolveCustomerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResolveCustomerRequest_RegistrationToken *smithy.Schema
-
-var ResolveCustomerResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacemetering",
-	Name:      "ResolveCustomerResult",
-}, smithy.ShapeTypeStructure, 5)
-var ResolveCustomerResult_CustomerIdentifier *smithy.Schema
-
-var ResolveCustomerResult_ProductCode *smithy.Schema
-
-var ResolveCustomerResult_CustomerAWSAccountId *smithy.Schema
-
-var ResolveCustomerResult_LicenseArn *smithy.Schema
-
-var ResolveCustomerResult_Metadata *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	CustomerNotEntitledException_message = CustomerNotEntitledException.AddMember("message", _errorMessage)
-
-	DisabledApiException_message = DisabledApiException.AddMember("message", _errorMessage)
-
-	DuplicateRequestException_message = DuplicateRequestException.AddMember("message", _errorMessage)
-
-	ExpiredTokenException_message = ExpiredTokenException.AddMember("message", _errorMessage)
-
-	IdempotencyConflictException_message = IdempotencyConflictException.AddMember("message", _errorMessage)
-
-	InternalServiceErrorException_message = InternalServiceErrorException.AddMember("message", _errorMessage)
-
-	InvalidCustomerIdentifierException_message = InvalidCustomerIdentifierException.AddMember("message", _errorMessage)
-
-	InvalidEndpointRegionException_message = InvalidEndpointRegionException.AddMember("message", _errorMessage)
-
-	InvalidLicenseException_message = InvalidLicenseException.AddMember("message", _errorMessage)
-
-	InvalidProductCodeException_message = InvalidProductCodeException.AddMember("message", _errorMessage)
-
-	InvalidPublicKeyVersionException_message = InvalidPublicKeyVersionException.AddMember("message", _errorMessage)
-
-	InvalidRegionException_message = InvalidRegionException.AddMember("message", _errorMessage)
-
-	InvalidTagException_message = InvalidTagException.AddMember("message", _errorMessage)
-
-	InvalidTokenException_message = InvalidTokenException.AddMember("message", _errorMessage)
-
-	InvalidUsageAllocationsException_message = InvalidUsageAllocationsException.AddMember("message", _errorMessage)
-
-	InvalidUsageDimensionException_message = InvalidUsageDimensionException.AddMember("message", _errorMessage)
-
-	Metadata_AgreementId = Metadata.AddMember("AgreementId", _AgreementId)
-
-	PlatformNotSupportedException_message = PlatformNotSupportedException.AddMember("message", _errorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _errorMessage)
-
-	TimestampOutOfBoundsException_message = TimestampOutOfBoundsException.AddMember("message", _errorMessage)
-
-	UsageAllocation_AllocatedUsageQuantity = UsageAllocation.AddMember("AllocatedUsageQuantity", _AllocatedUsageQuantity)
-
-	UsageAllocation_Tags = UsageAllocation.AddMember("Tags", _TagList)
-
-	_UsageAllocations_member = _UsageAllocations.AddMember("member", UsageAllocation)
-
-	UsageRecord_Timestamp = UsageRecord.AddMember("Timestamp", _Timestamp)
-
-	UsageRecord_CustomerIdentifier = UsageRecord.AddMember("CustomerIdentifier", _CustomerIdentifier)
-
-	UsageRecord_Dimension = UsageRecord.AddMember("Dimension", _UsageDimension)
-
-	UsageRecord_Quantity = UsageRecord.AddMember("Quantity", _UsageQuantity)
-
-	UsageRecord_UsageAllocations = UsageRecord.AddMember("UsageAllocations", _UsageAllocations)
-
-	UsageRecord_CustomerAWSAccountId = UsageRecord.AddMember("CustomerAWSAccountId", _CustomerAWSAccountId)
-
-	UsageRecord_LicenseArn = UsageRecord.AddMember("LicenseArn", _LicenseArn)
-
-	_UsageRecordList_member = _UsageRecordList.AddMember("member", UsageRecord)
-
-	UsageRecordResultStatus_SUCCESS = UsageRecordResultStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	UsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED = UsageRecordResultStatus.AddMember("CUSTOMER_NOT_SUBSCRIBED", smithyprelude.Unit)
-
-	UsageRecordResultStatus_DUPLICATE_RECORD = UsageRecordResultStatus.AddMember("DUPLICATE_RECORD", smithyprelude.Unit)
-
-	UsageRecordResult_UsageRecord = UsageRecordResult.AddMember("UsageRecord", UsageRecord)
-
-	UsageRecordResult_MeteringRecordId = UsageRecordResult.AddMember("MeteringRecordId", _String)
-
-	UsageRecordResult_Status = UsageRecordResult.AddMember("Status", UsageRecordResultStatus)
-
-	_UsageRecordResultList_member = _UsageRecordResultList.AddMember("member", UsageRecordResult)
-
-	BatchMeterUsageRequest_UsageRecords = BatchMeterUsageRequest.AddMember("UsageRecords", _UsageRecordList)
-
-	BatchMeterUsageRequest_ProductCode = BatchMeterUsageRequest.AddMember("ProductCode", _ProductCode)
-
-	BatchMeterUsageResult_Results = BatchMeterUsageResult.AddMember("Results", _UsageRecordResultList)
-
-	BatchMeterUsageResult_UnprocessedRecords = BatchMeterUsageResult.AddMember("UnprocessedRecords", _UsageRecordList)
-
-	MeterUsageRequest_ProductCode = MeterUsageRequest.AddMember("ProductCode", _ProductCode)
-
-	MeterUsageRequest_Timestamp = MeterUsageRequest.AddMember("Timestamp", _Timestamp)
-
-	MeterUsageRequest_UsageDimension = MeterUsageRequest.AddMember("UsageDimension", _UsageDimension)
-
-	MeterUsageRequest_UsageQuantity = MeterUsageRequest.AddMember("UsageQuantity", _UsageQuantity)
-
-	MeterUsageRequest_DryRun = MeterUsageRequest.AddMember("DryRun", _Boolean)
-
-	MeterUsageRequest_UsageAllocations = MeterUsageRequest.AddMember("UsageAllocations", _UsageAllocations)
-
-	MeterUsageRequest_ClientToken = MeterUsageRequest.AddMember("ClientToken", _ClientToken)
-
-	MeterUsageResult_MeteringRecordId = MeterUsageResult.AddMember("MeteringRecordId", _String)
-
-	RegisterUsageRequest_ProductCode = RegisterUsageRequest.AddMember("ProductCode", _ProductCode)
-
-	RegisterUsageRequest_PublicKeyVersion = RegisterUsageRequest.AddMember("PublicKeyVersion", _VersionInteger)
-
-	RegisterUsageRequest_Nonce = RegisterUsageRequest.AddMember("Nonce", _Nonce)
-
-	RegisterUsageResult_PublicKeyRotationTimestamp = RegisterUsageResult.AddMember("PublicKeyRotationTimestamp", _Timestamp)
-
-	RegisterUsageResult_Signature = RegisterUsageResult.AddMember("Signature", _NonEmptyString)
-
-	ResolveCustomerRequest_RegistrationToken = ResolveCustomerRequest.AddMember("RegistrationToken", _NonEmptyString)
-
-	ResolveCustomerResult_CustomerIdentifier = ResolveCustomerResult.AddMember("CustomerIdentifier", _CustomerIdentifier)
-
-	ResolveCustomerResult_ProductCode = ResolveCustomerResult.AddMember("ProductCode", _ProductCode)
-
-	ResolveCustomerResult_CustomerAWSAccountId = ResolveCustomerResult.AddMember("CustomerAWSAccountId", _CustomerAWSAccountId)
-
-	ResolveCustomerResult_LicenseArn = ResolveCustomerResult.AddMember("LicenseArn", _LicenseArn)
-
-	ResolveCustomerResult_Metadata = ResolveCustomerResult.AddMember("Metadata", Metadata)
-
+const blob = "" +
+	"InvalidCustomerIdentifierExceptionInvalidPublicKeyVersionExceptionInvalidUsageAllocationsExceptionIn" +
+	"validEndpointRegionExceptionInvalidUsageDimensionExceptionInternalServiceErrorExceptionPlatformNotSu" +
+	"pportedExceptionTimestampOutOfBoundsExceptionCustomerNotEntitledExceptionIdempotencyConflictExceptio" +
+	"nInvalidProductCodeExceptionPublicKeyRotationTimestampDuplicateRequestExceptionCUSTOMER_NOT_SUBSCRIB" +
+	"EDInvalidLicenseExceptionUsageRecordResultStatusAllocatedUsageQuantityBatchMeterUsageRequestInvalidR" +
+	"egionExceptionResolveCustomerRequestBatchMeterUsageResultExpiredTokenExceptionInvalidTokenExceptionR" +
+	"esolveCustomerResultUsageRecordResultListAWSMPMeteringServiceCustomerAWSAccountIdDisabledApiExceptio" +
+	"nRegisterUsageRequestInvalidTagExceptionRegisterUsageResultThrottlingExceptionUnprocessedRecordsRegi" +
+	"strationTokenDUPLICATE_RECORDMeteringRecordIdUsageRecordListNonEmptyStringVersionIntegerUsageRecords" +
+	"errorMessageAgreementIdClientTokenLicenseArnSignatureMetadataTagValueBooleanResultsSUCCESSTagListmes" +
+	"sageDryRunTagKeymemberNonceTagsUnit"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.marketplacemetering", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 470, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 475, Target: 1, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 701, Target: 2, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 514, Target: 3, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 641, Target: 4, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 912, Target: 5, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 448, Target: 6, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 969, Target: 7, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 923, Target: 8, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 661, Target: 9, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7, Target: 10, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 245, Target: 11, Traits: 1, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 681, Target: 13, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 354, Target: 15, Traits: 1, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 900, Target: 17, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 557, Target: 18, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 273, Target: 20, Traits: 2, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 22, Traits: 3, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 24, Traits: 1, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 98, Target: 26, Traits: 1, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 402, Target: 28, Traits: 1, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 301, Target: 30, Traits: 1, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 34, Target: 32, Traits: 1, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 492, Target: 34, Traits: 1, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 721, Target: 36, Traits: 1, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 578, Target: 38, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 66, Target: 40, Traits: 1, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 128, Target: 42, Traits: 1, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 934, Target: 44, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 953, Target: 45, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 912, Target: 5, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1022, Target: 47, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 860, Target: 48, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 187, Target: 49, Traits: 1, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 308, Target: 51, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 868, Target: 52, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 728, Target: 53, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 47, Target: 56, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 964, Target: 59, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1010, Target: 56, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 990, Target: 57, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1016, Target: 53, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 961, Target: 59, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 759, Target: 60, Traits: 1, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 216, Target: 62, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 216, Target: 63, Traits: 1, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 17, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 73, Target: 65, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 448, Target: 6, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1027, Target: 57, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 73, Target: 68, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1016, Target: 65, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 135, Target: 70, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 457, Target: 71, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 425, Target: 72, Traits: 0, StrLen: 11, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 216, Target: 62, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7, Target: 10, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 140, Target: 70, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 462, Target: 71, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 73, Target: 68, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 661, Target: 9, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 934, Target: 44, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 845, Target: 80, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1016, Target: 72, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 425, Target: 82, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 425, Target: 72, Traits: 0, StrLen: 11, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 829, Target: 52, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 442, Target: 88, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 620, Target: 86, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1016, Target: 82, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 425, Target: 88, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 983, Target: 124, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 379, Target: 124, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 813, Target: 124, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 874, Target: 92, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 470, Target: 93, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 888, Target: 80, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 308, Target: 51, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 536, Target: 96, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 976, Target: 86, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 778, Target: 80, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 475, Target: 99, Traits: 0, StrLen: 17, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 308, Target: 51, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 216, Target: 62, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 135, Target: 70, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 457, Target: 71, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1004, Target: 7, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 73, Target: 68, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 923, Target: 8, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 541, Target: 107, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 829, Target: 52, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 701, Target: 109, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 308, Target: 51, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 41, Target: 92, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1022, Target: 47, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 740, Target: 113, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 328, Target: 62, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 944, Target: 48, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 514, Target: 116, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 796, Target: 48, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 599, Target: 118, Traits: 0, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7, Target: 10, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 308, Target: 51, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 661, Target: 9, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 934, Target: 44, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 953, Target: 45, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1031, Target: 124, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}},
+	},
 }
+
+var handles = [125]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+}
+
+var BatchMeterUsage = &handles[0]
+
+var MeterUsage = &handles[1]
+
+var RegisterUsage = &handles[2]
+
+var ResolveCustomer = &handles[3]
+
+var _AWSMPMeteringService = &handles[4]
+
+var _AgreementId = &handles[5]
+
+var _AllocatedUsageQuantity = &handles[6]
+
+var _Boolean = &handles[7]
+
+var _ClientToken = &handles[8]
+
+var _CustomerAWSAccountId = &handles[9]
+
+var _CustomerIdentifier = &handles[10]
+
+var CustomerNotEntitledException = &handles[11]
+var CustomerNotEntitledException_message = &handles[12]
+
+var DisabledApiException = &handles[13]
+var DisabledApiException_message = &handles[14]
+
+var DuplicateRequestException = &handles[15]
+var DuplicateRequestException_message = &handles[16]
+
+var _errorMessage = &handles[17]
+
+var ExpiredTokenException = &handles[18]
+var ExpiredTokenException_message = &handles[19]
+
+var IdempotencyConflictException = &handles[20]
+var IdempotencyConflictException_message = &handles[21]
+
+var InternalServiceErrorException = &handles[22]
+var InternalServiceErrorException_message = &handles[23]
+
+var InvalidCustomerIdentifierException = &handles[24]
+var InvalidCustomerIdentifierException_message = &handles[25]
+
+var InvalidEndpointRegionException = &handles[26]
+var InvalidEndpointRegionException_message = &handles[27]
+
+var InvalidLicenseException = &handles[28]
+var InvalidLicenseException_message = &handles[29]
+
+var InvalidProductCodeException = &handles[30]
+var InvalidProductCodeException_message = &handles[31]
+
+var InvalidPublicKeyVersionException = &handles[32]
+var InvalidPublicKeyVersionException_message = &handles[33]
+
+var InvalidRegionException = &handles[34]
+var InvalidRegionException_message = &handles[35]
+
+var InvalidTagException = &handles[36]
+var InvalidTagException_message = &handles[37]
+
+var InvalidTokenException = &handles[38]
+var InvalidTokenException_message = &handles[39]
+
+var InvalidUsageAllocationsException = &handles[40]
+var InvalidUsageAllocationsException_message = &handles[41]
+
+var InvalidUsageDimensionException = &handles[42]
+var InvalidUsageDimensionException_message = &handles[43]
+
+var _LicenseArn = &handles[44]
+
+var Metadata = &handles[45]
+var Metadata_AgreementId = &handles[46]
+
+var _Nonce = &handles[47]
+
+var _NonEmptyString = &handles[48]
+
+var PlatformNotSupportedException = &handles[49]
+var PlatformNotSupportedException_message = &handles[50]
+
+var _ProductCode = &handles[51]
+
+var _String = &handles[52]
+
+var Tag = &handles[53]
+var Tag_Key = &handles[54]
+var Tag_Value = &handles[55]
+
+var _TagKey = &handles[56]
+
+var _TagList = &handles[57]
+var _TagList_member = &handles[58]
+
+var _TagValue = &handles[59]
+
+var ThrottlingException = &handles[60]
+var ThrottlingException_message = &handles[61]
+
+var _Timestamp = &handles[62]
+
+var TimestampOutOfBoundsException = &handles[63]
+var TimestampOutOfBoundsException_message = &handles[64]
+
+var UsageAllocation = &handles[65]
+var UsageAllocation_AllocatedUsageQuantity = &handles[66]
+var UsageAllocation_Tags = &handles[67]
+
+var _UsageAllocations = &handles[68]
+var _UsageAllocations_member = &handles[69]
+
+var _UsageDimension = &handles[70]
+
+var _UsageQuantity = &handles[71]
+
+var UsageRecord = &handles[72]
+var UsageRecord_Timestamp = &handles[73]
+var UsageRecord_CustomerIdentifier = &handles[74]
+var UsageRecord_Dimension = &handles[75]
+var UsageRecord_Quantity = &handles[76]
+var UsageRecord_UsageAllocations = &handles[77]
+var UsageRecord_CustomerAWSAccountId = &handles[78]
+var UsageRecord_LicenseArn = &handles[79]
+
+var _UsageRecordList = &handles[80]
+var _UsageRecordList_member = &handles[81]
+
+var UsageRecordResult = &handles[82]
+var UsageRecordResult_UsageRecord = &handles[83]
+var UsageRecordResult_MeteringRecordId = &handles[84]
+var UsageRecordResult_Status = &handles[85]
+
+var _UsageRecordResultList = &handles[86]
+var _UsageRecordResultList_member = &handles[87]
+
+var UsageRecordResultStatus = &handles[88]
+var UsageRecordResultStatus_SUCCESS = &handles[89]
+var UsageRecordResultStatus_CUSTOMER_NOT_SUBSCRIBED = &handles[90]
+var UsageRecordResultStatus_DUPLICATE_RECORD = &handles[91]
+
+var _VersionInteger = &handles[92]
+
+var BatchMeterUsageRequest = &handles[93]
+var BatchMeterUsageRequest_UsageRecords = &handles[94]
+var BatchMeterUsageRequest_ProductCode = &handles[95]
+
+var BatchMeterUsageResult = &handles[96]
+var BatchMeterUsageResult_Results = &handles[97]
+var BatchMeterUsageResult_UnprocessedRecords = &handles[98]
+
+var MeterUsageRequest = &handles[99]
+var MeterUsageRequest_ProductCode = &handles[100]
+var MeterUsageRequest_Timestamp = &handles[101]
+var MeterUsageRequest_UsageDimension = &handles[102]
+var MeterUsageRequest_UsageQuantity = &handles[103]
+var MeterUsageRequest_DryRun = &handles[104]
+var MeterUsageRequest_UsageAllocations = &handles[105]
+var MeterUsageRequest_ClientToken = &handles[106]
+
+var MeterUsageResult = &handles[107]
+var MeterUsageResult_MeteringRecordId = &handles[108]
+
+var RegisterUsageRequest = &handles[109]
+var RegisterUsageRequest_ProductCode = &handles[110]
+var RegisterUsageRequest_PublicKeyVersion = &handles[111]
+var RegisterUsageRequest_Nonce = &handles[112]
+
+var RegisterUsageResult = &handles[113]
+var RegisterUsageResult_PublicKeyRotationTimestamp = &handles[114]
+var RegisterUsageResult_Signature = &handles[115]
+
+var ResolveCustomerRequest = &handles[116]
+var ResolveCustomerRequest_RegistrationToken = &handles[117]
+
+var ResolveCustomerResult = &handles[118]
+var ResolveCustomerResult_CustomerIdentifier = &handles[119]
+var ResolveCustomerResult_ProductCode = &handles[120]
+var ResolveCustomerResult_CustomerAWSAccountId = &handles[121]
+var ResolveCustomerResult_LicenseArn = &handles[122]
+var ResolveCustomerResult_Metadata = &handles[123]
+
+var AWSMPMeteringService = &smithy.ServiceSchema{Schema: &handles[4], Version: "2016-01-14"}

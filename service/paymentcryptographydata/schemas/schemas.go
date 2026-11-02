@@ -4,2612 +4,2199 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DecryptData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DecryptData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/keys/{KeyIdentifier}/decrypt",
-	Code: 200})
-
-var EncryptData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EncryptData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/keys/{KeyIdentifier}/encrypt",
-	Code: 200})
-
-var GenerateAs2805KekValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateAs2805KekValidation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/as2805kekvalidation/generate",
-	Code: 200})
-
-var GenerateAuthRequestCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateAuthRequestCryptogram",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/cryptogram/generate",
-	Code: 200})
-
-var GenerateCardValidationData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateCardValidationData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/cardvalidationdata/generate",
-	Code: 200})
-
-var GenerateMac = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateMac",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/mac/generate",
-	Code: 200})
-
-var GenerateMacEmvPinChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateMacEmvPinChange",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/macemvpinchange/generate",
-	Code: 200})
-
-var GeneratePinData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GeneratePinData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/pindata/generate",
-	Code: 200})
-
-var ReEncryptData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ReEncryptData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/keys/{IncomingKeyIdentifier}/reencrypt",
-	Code: 200})
-
-var TranslateKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslateKeyMaterial",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/keymaterial/translate",
-	Code: 200})
-
-var TranslatePinData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslatePinData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/pindata/translate",
-	Code: 200})
-
-var VerifyAuthRequestCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyAuthRequestCryptogram",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/cryptogram/verify",
-	Code: 200})
-
-var VerifyCardValidationData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyCardValidationData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/cardvalidationdata/verify",
-	Code: 200})
-
-var VerifyMac = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyMac",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/mac/verify",
-	Code: 200})
-
-var VerifyPinData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyPinData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/pindata/verify",
-	Code: 200})
-
-var _PaymentCryptographyDataPlane = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PaymentCryptographyDataPlane",
-}, smithy.ShapeTypeService, 0)
-
-var PaymentCryptographyDataPlane = smithy.NewServiceSchema(_PaymentCryptographyDataPlane, "2022-02-03")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AmexAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "AmexAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var AmexAttributes_MajorKeyDerivationMode *smithy.Schema
-
-var AmexAttributes_PrimaryAccountNumber *smithy.Schema
-
-var AmexAttributes_PanSequenceNumber *smithy.Schema
-
-var AmexAttributes_ApplicationTransactionCounter *smithy.Schema
-
-var AmexAttributes_AuthorizationRequestKeyIdentifier *smithy.Schema
-
-var AmexAttributes_CurrentPinAttributes *smithy.Schema
-
-var AmexCardSecurityCodeVersion1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "AmexCardSecurityCodeVersion1",
-}, smithy.ShapeTypeStructure, 1)
-var AmexCardSecurityCodeVersion1_CardExpiryDate *smithy.Schema
-
-var AmexCardSecurityCodeVersion2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "AmexCardSecurityCodeVersion2",
-}, smithy.ShapeTypeStructure, 2)
-var AmexCardSecurityCodeVersion2_CardExpiryDate *smithy.Schema
-
-var AmexCardSecurityCodeVersion2_ServiceCode *smithy.Schema
-
-var _ApplicationCryptogramType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ApplicationCryptogramType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var As2805KekValidationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "As2805KekValidationType",
-}, smithy.ShapeTypeUnion, 2)
-var As2805KekValidationType_KekValidationRequest *smithy.Schema
-
-var As2805KekValidationType_KekValidationResponse *smithy.Schema
-
-var As2805PekDerivationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "As2805PekDerivationAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var As2805PekDerivationAttributes_SystemTraceAuditNumber *smithy.Schema
-
-var As2805PekDerivationAttributes_TransactionAmount *smithy.Schema
-
-var _As2805RandomKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "As2805RandomKeyMaterial",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AsymmetricEncryptionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "AsymmetricEncryptionAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var AsymmetricEncryptionAttributes_PaddingType *smithy.Schema
-
-var _AuthRequestCryptogramType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "AuthRequestCryptogramType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AuthResponseValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "AuthResponseValueType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CardExpiryDateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CardExpiryDateType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CardGenerationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CardGenerationAttributes",
-}, smithy.ShapeTypeUnion, 7)
-var CardGenerationAttributes_AmexCardSecurityCodeVersion1 *smithy.Schema
-
-var CardGenerationAttributes_AmexCardSecurityCodeVersion2 *smithy.Schema
-
-var CardGenerationAttributes_CardVerificationValue1 *smithy.Schema
-
-var CardGenerationAttributes_CardVerificationValue2 *smithy.Schema
-
-var CardGenerationAttributes_CardHolderVerificationValue *smithy.Schema
-
-var CardGenerationAttributes_DynamicCardVerificationCode *smithy.Schema
-
-var CardGenerationAttributes_DynamicCardVerificationValue *smithy.Schema
-
-var CardHolderVerificationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CardHolderVerificationValue",
-}, smithy.ShapeTypeStructure, 3)
-var CardHolderVerificationValue_UnpredictableNumber *smithy.Schema
-
-var CardHolderVerificationValue_PanSequenceNumber *smithy.Schema
-
-var CardHolderVerificationValue_ApplicationTransactionCounter *smithy.Schema
-
-var CardVerificationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CardVerificationAttributes",
-}, smithy.ShapeTypeUnion, 8)
-var CardVerificationAttributes_AmexCardSecurityCodeVersion1 *smithy.Schema
-
-var CardVerificationAttributes_AmexCardSecurityCodeVersion2 *smithy.Schema
-
-var CardVerificationAttributes_CardVerificationValue1 *smithy.Schema
-
-var CardVerificationAttributes_CardVerificationValue2 *smithy.Schema
-
-var CardVerificationAttributes_CardHolderVerificationValue *smithy.Schema
-
-var CardVerificationAttributes_DynamicCardVerificationCode *smithy.Schema
-
-var CardVerificationAttributes_DynamicCardVerificationValue *smithy.Schema
-
-var CardVerificationAttributes_DiscoverDynamicCardVerificationCode *smithy.Schema
-
-var CardVerificationValue1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CardVerificationValue1",
-}, smithy.ShapeTypeStructure, 2)
-var CardVerificationValue1_CardExpiryDate *smithy.Schema
-
-var CardVerificationValue1_ServiceCode *smithy.Schema
-
-var CardVerificationValue2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CardVerificationValue2",
-}, smithy.ShapeTypeStructure, 1)
-var CardVerificationValue2_CardExpiryDate *smithy.Schema
-
-var _CertificateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CertificateType",
-}, smithy.ShapeTypeString, 0)
-
-var _CipherTextType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CipherTextType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CommandMessageDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CommandMessageDataType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CryptogramAuthResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CryptogramAuthResponse",
-}, smithy.ShapeTypeUnion, 2)
-var CryptogramAuthResponse_ArpcMethod1 *smithy.Schema
-
-var CryptogramAuthResponse_ArpcMethod2 *smithy.Schema
-
-var CryptogramVerificationArpcMethod1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CryptogramVerificationArpcMethod1",
-}, smithy.ShapeTypeStructure, 1)
-var CryptogramVerificationArpcMethod1_AuthResponseCode *smithy.Schema
-
-var CryptogramVerificationArpcMethod2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CryptogramVerificationArpcMethod2",
-}, smithy.ShapeTypeStructure, 2)
-var CryptogramVerificationArpcMethod2_CardStatusUpdate *smithy.Schema
-
-var CryptogramVerificationArpcMethod2_ProprietaryAuthenticationData *smithy.Schema
-
-var CurrentPinAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "CurrentPinAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var CurrentPinAttributes_CurrentPinPekIdentifier *smithy.Schema
-
-var CurrentPinAttributes_CurrentEncryptedPinBlock *smithy.Schema
-
-var _DecimalizationTableType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DecimalizationTableType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var DerivationMethodAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DerivationMethodAttributes",
-}, smithy.ShapeTypeUnion, 5)
-var DerivationMethodAttributes_EmvCommon *smithy.Schema
-
-var DerivationMethodAttributes_Amex *smithy.Schema
-
-var DerivationMethodAttributes_Visa *smithy.Schema
-
-var DerivationMethodAttributes_Emv2000 *smithy.Schema
-
-var DerivationMethodAttributes_Mastercard *smithy.Schema
-
-var DiffieHellmanDerivationData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DiffieHellmanDerivationData",
-}, smithy.ShapeTypeUnion, 1)
-var DiffieHellmanDerivationData_SharedInformation *smithy.Schema
-
-var DiscoverDynamicCardVerificationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DiscoverDynamicCardVerificationCode",
-}, smithy.ShapeTypeStructure, 3)
-var DiscoverDynamicCardVerificationCode_CardExpiryDate *smithy.Schema
-
-var DiscoverDynamicCardVerificationCode_UnpredictableNumber *smithy.Schema
-
-var DiscoverDynamicCardVerificationCode_ApplicationTransactionCounter *smithy.Schema
-
-var DukptAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DukptAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var DukptAttributes_KeySerialNumber *smithy.Schema
-
-var DukptAttributes_DukptDerivationType *smithy.Schema
-
-var DukptDerivationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DukptDerivationAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var DukptDerivationAttributes_KeySerialNumber *smithy.Schema
-
-var DukptDerivationAttributes_DukptKeyDerivationType *smithy.Schema
-
-var DukptDerivationAttributes_DukptKeyVariant *smithy.Schema
-
-var DukptDerivationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DukptDerivationType",
-}, smithy.ShapeTypeEnum, 5)
-var DukptDerivationType_TDES_2KEY *smithy.Schema
-
-var DukptDerivationType_TDES_3KEY *smithy.Schema
-
-var DukptDerivationType_AES_128 *smithy.Schema
-
-var DukptDerivationType_AES_192 *smithy.Schema
-
-var DukptDerivationType_AES_256 *smithy.Schema
-
-var DukptEncryptionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DukptEncryptionAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var DukptEncryptionAttributes_KeySerialNumber *smithy.Schema
-
-var DukptEncryptionAttributes_Mode *smithy.Schema
-
-var DukptEncryptionAttributes_DukptKeyDerivationType *smithy.Schema
-
-var DukptEncryptionAttributes_DukptKeyVariant *smithy.Schema
-
-var DukptEncryptionAttributes_InitializationVector *smithy.Schema
-
-var DukptEncryptionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DukptEncryptionMode",
-}, smithy.ShapeTypeEnum, 2)
-var DukptEncryptionMode_ECB *smithy.Schema
-
-var DukptEncryptionMode_CBC *smithy.Schema
-
-var DukptKeyVariant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DukptKeyVariant",
-}, smithy.ShapeTypeEnum, 3)
-var DukptKeyVariant_BIDIRECTIONAL *smithy.Schema
-
-var DukptKeyVariant_REQUEST *smithy.Schema
-
-var DukptKeyVariant_RESPONSE *smithy.Schema
-
-var DynamicCardVerificationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DynamicCardVerificationCode",
-}, smithy.ShapeTypeStructure, 4)
-var DynamicCardVerificationCode_UnpredictableNumber *smithy.Schema
-
-var DynamicCardVerificationCode_PanSequenceNumber *smithy.Schema
-
-var DynamicCardVerificationCode_ApplicationTransactionCounter *smithy.Schema
-
-var DynamicCardVerificationCode_TrackData *smithy.Schema
-
-var DynamicCardVerificationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DynamicCardVerificationValue",
-}, smithy.ShapeTypeStructure, 4)
-var DynamicCardVerificationValue_PanSequenceNumber *smithy.Schema
-
-var DynamicCardVerificationValue_CardExpiryDate *smithy.Schema
-
-var DynamicCardVerificationValue_ServiceCode *smithy.Schema
-
-var DynamicCardVerificationValue_ApplicationTransactionCounter *smithy.Schema
-
-var EcdhDerivationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EcdhDerivationAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var EcdhDerivationAttributes_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var EcdhDerivationAttributes_PublicKeyCertificate *smithy.Schema
-
-var EcdhDerivationAttributes_KeyAlgorithm *smithy.Schema
-
-var EcdhDerivationAttributes_KeyDerivationFunction *smithy.Schema
-
-var EcdhDerivationAttributes_KeyDerivationHashAlgorithm *smithy.Schema
-
-var EcdhDerivationAttributes_SharedInformation *smithy.Schema
-
-var Emv2000Attributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "Emv2000Attributes",
-}, smithy.ShapeTypeStructure, 4)
-var Emv2000Attributes_MajorKeyDerivationMode *smithy.Schema
-
-var Emv2000Attributes_PrimaryAccountNumber *smithy.Schema
-
-var Emv2000Attributes_PanSequenceNumber *smithy.Schema
-
-var Emv2000Attributes_ApplicationTransactionCounter *smithy.Schema
-
-var EmvCommonAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EmvCommonAttributes",
-}, smithy.ShapeTypeStructure, 7)
-var EmvCommonAttributes_MajorKeyDerivationMode *smithy.Schema
-
-var EmvCommonAttributes_PrimaryAccountNumber *smithy.Schema
-
-var EmvCommonAttributes_PanSequenceNumber *smithy.Schema
-
-var EmvCommonAttributes_ApplicationCryptogram *smithy.Schema
-
-var EmvCommonAttributes_Mode *smithy.Schema
-
-var EmvCommonAttributes_PinBlockPaddingType *smithy.Schema
-
-var EmvCommonAttributes_PinBlockLengthPosition *smithy.Schema
-
-var EmvEncryptionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EmvEncryptionAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var EmvEncryptionAttributes_MajorKeyDerivationMode *smithy.Schema
-
-var EmvEncryptionAttributes_PrimaryAccountNumber *smithy.Schema
-
-var EmvEncryptionAttributes_PanSequenceNumber *smithy.Schema
-
-var EmvEncryptionAttributes_SessionDerivationData *smithy.Schema
-
-var EmvEncryptionAttributes_Mode *smithy.Schema
-
-var EmvEncryptionAttributes_InitializationVector *smithy.Schema
-
-var EmvEncryptionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EmvEncryptionMode",
-}, smithy.ShapeTypeEnum, 2)
-var EmvEncryptionMode_ECB *smithy.Schema
-
-var EmvEncryptionMode_CBC *smithy.Schema
-
-var EmvMajorKeyDerivationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EmvMajorKeyDerivationMode",
-}, smithy.ShapeTypeEnum, 2)
-var EmvMajorKeyDerivationMode_EMV_OPTION_A *smithy.Schema
-
-var EmvMajorKeyDerivationMode_EMV_OPTION_B *smithy.Schema
-
-var _EncryptedPinBlockType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EncryptedPinBlockType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EncryptionDecryptionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EncryptionDecryptionAttributes",
-}, smithy.ShapeTypeUnion, 4)
-var EncryptionDecryptionAttributes_Symmetric *smithy.Schema
-
-var EncryptionDecryptionAttributes_Asymmetric *smithy.Schema
-
-var EncryptionDecryptionAttributes_Dukpt *smithy.Schema
-
-var EncryptionDecryptionAttributes_Emv *smithy.Schema
-
-var EncryptionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EncryptionMode",
-}, smithy.ShapeTypeEnum, 8)
-var EncryptionMode_ECB *smithy.Schema
-
-var EncryptionMode_CBC *smithy.Schema
-
-var EncryptionMode_CFB *smithy.Schema
-
-var EncryptionMode_CFB1 *smithy.Schema
-
-var EncryptionMode_CFB8 *smithy.Schema
-
-var EncryptionMode_CFB64 *smithy.Schema
-
-var EncryptionMode_CFB128 *smithy.Schema
-
-var EncryptionMode_OFB *smithy.Schema
-
-var _HexEvenLengthBetween16And32 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "HexEvenLengthBetween16And32",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _HexLength16Or20Or24 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "HexLength16Or20Or24",
-}, smithy.ShapeTypeString, 0)
-
-var _HexLengthBetween2And4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "HexLengthBetween2And4",
-}, smithy.ShapeTypeString, 0)
-
-var _HexLengthBetween2And8 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "HexLengthBetween2And8",
-}, smithy.ShapeTypeString, 0)
-
-var _HexLengthEquals1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "HexLengthEquals1",
-}, smithy.ShapeTypeString, 0)
-
-var _HexLengthEquals4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "HexLengthEquals4",
-}, smithy.ShapeTypeString, 0)
-
-var _HexLengthEquals8 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "HexLengthEquals8",
-}, smithy.ShapeTypeString, 0)
-
-var Ibm3624NaturalPin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "Ibm3624NaturalPin",
-}, smithy.ShapeTypeStructure, 3)
-var Ibm3624NaturalPin_DecimalizationTable *smithy.Schema
-
-var Ibm3624NaturalPin_PinValidationDataPadCharacter *smithy.Schema
-
-var Ibm3624NaturalPin_PinValidationData *smithy.Schema
-
-var Ibm3624PinFromOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "Ibm3624PinFromOffset",
-}, smithy.ShapeTypeStructure, 4)
-var Ibm3624PinFromOffset_DecimalizationTable *smithy.Schema
-
-var Ibm3624PinFromOffset_PinValidationDataPadCharacter *smithy.Schema
-
-var Ibm3624PinFromOffset_PinValidationData *smithy.Schema
-
-var Ibm3624PinFromOffset_PinOffset *smithy.Schema
-
-var Ibm3624PinOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "Ibm3624PinOffset",
-}, smithy.ShapeTypeStructure, 4)
-var Ibm3624PinOffset_EncryptedPinBlock *smithy.Schema
-
-var Ibm3624PinOffset_DecimalizationTable *smithy.Schema
-
-var Ibm3624PinOffset_PinValidationDataPadCharacter *smithy.Schema
-
-var Ibm3624PinOffset_PinValidationData *smithy.Schema
-
-var Ibm3624PinVerification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "Ibm3624PinVerification",
-}, smithy.ShapeTypeStructure, 4)
-var Ibm3624PinVerification_DecimalizationTable *smithy.Schema
-
-var Ibm3624PinVerification_PinValidationDataPadCharacter *smithy.Schema
-
-var Ibm3624PinVerification_PinValidationData *smithy.Schema
-
-var Ibm3624PinVerification_PinOffset *smithy.Schema
-
-var Ibm3624RandomPin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "Ibm3624RandomPin",
-}, smithy.ShapeTypeStructure, 3)
-var Ibm3624RandomPin_DecimalizationTable *smithy.Schema
-
-var Ibm3624RandomPin_PinValidationDataPadCharacter *smithy.Schema
-
-var Ibm3624RandomPin_PinValidationData *smithy.Schema
-
-var IncomingDiffieHellmanTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "IncomingDiffieHellmanTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var IncomingDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier *smithy.Schema
-
-var IncomingDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var IncomingDiffieHellmanTr31KeyBlock_PublicKeyCertificate *smithy.Schema
-
-var IncomingDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm *smithy.Schema
-
-var IncomingDiffieHellmanTr31KeyBlock_KeyDerivationFunction *smithy.Schema
-
-var IncomingDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm *smithy.Schema
-
-var IncomingDiffieHellmanTr31KeyBlock_DerivationData *smithy.Schema
-
-var IncomingDiffieHellmanTr31KeyBlock_WrappedKeyBlock *smithy.Schema
-
-var IncomingKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "IncomingKeyMaterial",
-}, smithy.ShapeTypeUnion, 1)
-var IncomingKeyMaterial_DiffieHellmanTr31KeyBlock *smithy.Schema
-
-var _InitializationVectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "InitializationVectorType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _IntegerRangeBetween0And6 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "IntegerRangeBetween0And6",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerRangeBetween3And5Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "IntegerRangeBetween3And5Type",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerRangeBetween4And12 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "IntegerRangeBetween4And12",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerRangeBetween4And32 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "IntegerRangeBetween4And32",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var KekValidationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KekValidationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var KekValidationRequest_DeriveKeyAlgorithm *smithy.Schema
-
-var KekValidationRequest_RandomKeyMaxLength *smithy.Schema
-
-var KekValidationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KekValidationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var KekValidationResponse_RandomKeySend *smithy.Schema
-
-var _KeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyArnOrKeyAliasType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KeyArnOrKeyAliasType",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyCheckValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KeyCheckValue",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyCheckValueAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KeyCheckValueAlgorithm",
-}, smithy.ShapeTypeString, 0)
-
-var KeyDerivationFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KeyDerivationFunction",
-}, smithy.ShapeTypeEnum, 2)
-var KeyDerivationFunction_NIST_SP800 *smithy.Schema
-
-var KeyDerivationFunction_ANSI_X963 *smithy.Schema
-
-var KeyDerivationHashAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KeyDerivationHashAlgorithm",
-}, smithy.ShapeTypeEnum, 3)
-var KeyDerivationHashAlgorithm_SHA_256 *smithy.Schema
-
-var KeyDerivationHashAlgorithm_SHA_384 *smithy.Schema
-
-var KeyDerivationHashAlgorithm_SHA_512 *smithy.Schema
-
-var _KeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "KeyMaterial",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var MacAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MacAlgorithm",
-}, smithy.ShapeTypeEnum, 9)
-var MacAlgorithm_ISO9797_ALGORITHM1 *smithy.Schema
-
-var MacAlgorithm_ISO9797_ALGORITHM3 *smithy.Schema
-
-var MacAlgorithm_CMAC *smithy.Schema
-
-var MacAlgorithm_HMAC *smithy.Schema
-
-var MacAlgorithm_HMAC_SHA224 *smithy.Schema
-
-var MacAlgorithm_HMAC_SHA256 *smithy.Schema
-
-var MacAlgorithm_HMAC_SHA384 *smithy.Schema
-
-var MacAlgorithm_HMAC_SHA512 *smithy.Schema
-
-var MacAlgorithm_AS2805_4_1 *smithy.Schema
-
-var MacAlgorithmDukpt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MacAlgorithmDukpt",
-}, smithy.ShapeTypeStructure, 3)
-var MacAlgorithmDukpt_KeySerialNumber *smithy.Schema
-
-var MacAlgorithmDukpt_DukptKeyVariant *smithy.Schema
-
-var MacAlgorithmDukpt_DukptDerivationType *smithy.Schema
-
-var MacAlgorithmEmv = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MacAlgorithmEmv",
-}, smithy.ShapeTypeStructure, 5)
-var MacAlgorithmEmv_MajorKeyDerivationMode *smithy.Schema
-
-var MacAlgorithmEmv_PrimaryAccountNumber *smithy.Schema
-
-var MacAlgorithmEmv_PanSequenceNumber *smithy.Schema
-
-var MacAlgorithmEmv_SessionKeyDerivationMode *smithy.Schema
-
-var MacAlgorithmEmv_SessionKeyDerivationValue *smithy.Schema
-
-var MacAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MacAttributes",
-}, smithy.ShapeTypeUnion, 5)
-var MacAttributes_Algorithm *smithy.Schema
-
-var MacAttributes_EmvMac *smithy.Schema
-
-var MacAttributes_DukptIso9797Algorithm1 *smithy.Schema
-
-var MacAttributes_DukptIso9797Algorithm3 *smithy.Schema
-
-var MacAttributes_DukptCmac *smithy.Schema
-
-var _MacOutputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MacOutputType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MacType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MacType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var MajorKeyDerivationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MajorKeyDerivationMode",
-}, smithy.ShapeTypeEnum, 2)
-var MajorKeyDerivationMode_EMV_OPTION_A *smithy.Schema
-
-var MajorKeyDerivationMode_EMV_OPTION_B *smithy.Schema
-
-var MasterCardAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MasterCardAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var MasterCardAttributes_MajorKeyDerivationMode *smithy.Schema
-
-var MasterCardAttributes_PrimaryAccountNumber *smithy.Schema
-
-var MasterCardAttributes_PanSequenceNumber *smithy.Schema
-
-var MasterCardAttributes_ApplicationCryptogram *smithy.Schema
-
-var _MessageDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "MessageDataType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _NumberLengthEquals2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "NumberLengthEquals2",
-}, smithy.ShapeTypeString, 0)
-
-var OutgoingKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "OutgoingKeyMaterial",
-}, smithy.ShapeTypeUnion, 1)
-var OutgoingKeyMaterial_Tr31KeyBlock *smithy.Schema
-
-var OutgoingTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "OutgoingTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 1)
-var OutgoingTr31KeyBlock_WrappingKeyIdentifier *smithy.Schema
-
-var PaddingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PaddingType",
-}, smithy.ShapeTypeEnum, 4)
-var PaddingType_PKCS1 *smithy.Schema
-
-var PaddingType_OAEP_SHA1 *smithy.Schema
-
-var PaddingType_OAEP_SHA256 *smithy.Schema
-
-var PaddingType_OAEP_SHA512 *smithy.Schema
-
-var PinBlockFormatForEmvPinChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinBlockFormatForEmvPinChange",
-}, smithy.ShapeTypeEnum, 3)
-var PinBlockFormatForEmvPinChange_ISO_FORMAT_0 *smithy.Schema
-
-var PinBlockFormatForEmvPinChange_ISO_FORMAT_1 *smithy.Schema
-
-var PinBlockFormatForEmvPinChange_ISO_FORMAT_3 *smithy.Schema
-
-var PinBlockFormatForPinData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinBlockFormatForPinData",
-}, smithy.ShapeTypeEnum, 4)
-var PinBlockFormatForPinData_ISO_FORMAT_0 *smithy.Schema
-
-var PinBlockFormatForPinData_ISO_FORMAT_1 *smithy.Schema
-
-var PinBlockFormatForPinData_ISO_FORMAT_3 *smithy.Schema
-
-var PinBlockFormatForPinData_ISO_FORMAT_4 *smithy.Schema
-
-var _PinBlockLengthEquals16 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinBlockLengthEquals16",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PinBlockLengthPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinBlockLengthPosition",
-}, smithy.ShapeTypeEnum, 2)
-var PinBlockLengthPosition_NONE *smithy.Schema
-
-var PinBlockLengthPosition_FRONT_OF_PIN_BLOCK *smithy.Schema
-
-var PinBlockPaddingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinBlockPaddingType",
-}, smithy.ShapeTypeEnum, 2)
-var PinBlockPaddingType_NO_PADDING *smithy.Schema
-
-var PinBlockPaddingType_ISO_IEC_7816_4 *smithy.Schema
-
-var _PinChangeMacOutputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinChangeMacOutputType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PinData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinData",
-}, smithy.ShapeTypeUnion, 2)
-var PinData_PinOffset *smithy.Schema
-
-var PinData_VerificationValue *smithy.Schema
-
-var PinGenerationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinGenerationAttributes",
-}, smithy.ShapeTypeUnion, 6)
-var PinGenerationAttributes_VisaPin *smithy.Schema
-
-var PinGenerationAttributes_VisaPinVerificationValue *smithy.Schema
-
-var PinGenerationAttributes_Ibm3624PinOffset *smithy.Schema
-
-var PinGenerationAttributes_Ibm3624NaturalPin *smithy.Schema
-
-var PinGenerationAttributes_Ibm3624RandomPin *smithy.Schema
-
-var PinGenerationAttributes_Ibm3624PinFromOffset *smithy.Schema
-
-var _PinOffsetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinOffsetType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PinValidationDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinValidationDataType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PinVerificationAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PinVerificationAttributes",
-}, smithy.ShapeTypeUnion, 2)
-var PinVerificationAttributes_VisaPin *smithy.Schema
-
-var PinVerificationAttributes_Ibm3624Pin *smithy.Schema
-
-var _PlainTextOutputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PlainTextOutputType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PlainTextType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PlainTextType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PrimaryAccountNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "PrimaryAccountNumberType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ProprietaryAuthenticationDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ProprietaryAuthenticationDataType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var RandomKeyMaxLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "RandomKeyMaxLength",
-}, smithy.ShapeTypeEnum, 3)
-var RandomKeyMaxLength_BYTES_8 *smithy.Schema
-
-var RandomKeyMaxLength_BYTES_16 *smithy.Schema
-
-var RandomKeyMaxLength_BYTES_24 *smithy.Schema
-
-var RandomKeySendVariantMask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "RandomKeySendVariantMask",
-}, smithy.ShapeTypeEnum, 2)
-var RandomKeySendVariantMask_VARIANT_MASK_82C0 *smithy.Schema
-
-var RandomKeySendVariantMask_VARIANT_MASK_82 *smithy.Schema
-
-var ReEncryptionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ReEncryptionAttributes",
-}, smithy.ShapeTypeUnion, 3)
-var ReEncryptionAttributes_Symmetric *smithy.Schema
-
-var ReEncryptionAttributes_Asymmetric *smithy.Schema
-
-var ReEncryptionAttributes_Dukpt *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var _ServiceCodeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ServiceCodeType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SessionDerivationDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionDerivationDataType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SessionKeyAmex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyAmex",
-}, smithy.ShapeTypeStructure, 2)
-var SessionKeyAmex_PrimaryAccountNumber *smithy.Schema
-
-var SessionKeyAmex_PanSequenceNumber *smithy.Schema
-
-var SessionKeyDerivation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyDerivation",
-}, smithy.ShapeTypeUnion, 6)
-var SessionKeyDerivation_EmvCommon *smithy.Schema
-
-var SessionKeyDerivation_Mastercard *smithy.Schema
-
-var SessionKeyDerivation_Emv2000 *smithy.Schema
-
-var SessionKeyDerivation_Amex *smithy.Schema
-
-var SessionKeyDerivation_Visa *smithy.Schema
-
-var SessionKeyDerivation_UnionPay *smithy.Schema
-
-var SessionKeyDerivationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyDerivationMode",
-}, smithy.ShapeTypeEnum, 6)
-var SessionKeyDerivationMode_EMV_COMMON_SESSION_KEY *smithy.Schema
-
-var SessionKeyDerivationMode_EMV2000 *smithy.Schema
-
-var SessionKeyDerivationMode_AMEX *smithy.Schema
-
-var SessionKeyDerivationMode_MASTERCARD_SESSION_KEY *smithy.Schema
-
-var SessionKeyDerivationMode_VISA *smithy.Schema
-
-var SessionKeyDerivationMode_UNION_PAY *smithy.Schema
-
-var SessionKeyDerivationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyDerivationValue",
-}, smithy.ShapeTypeUnion, 2)
-var SessionKeyDerivationValue_ApplicationCryptogram *smithy.Schema
-
-var SessionKeyDerivationValue_ApplicationTransactionCounter *smithy.Schema
-
-var SessionKeyEmv2000 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyEmv2000",
-}, smithy.ShapeTypeStructure, 3)
-var SessionKeyEmv2000_PrimaryAccountNumber *smithy.Schema
-
-var SessionKeyEmv2000_PanSequenceNumber *smithy.Schema
-
-var SessionKeyEmv2000_ApplicationTransactionCounter *smithy.Schema
-
-var SessionKeyEmvCommon = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyEmvCommon",
-}, smithy.ShapeTypeStructure, 3)
-var SessionKeyEmvCommon_PrimaryAccountNumber *smithy.Schema
-
-var SessionKeyEmvCommon_PanSequenceNumber *smithy.Schema
-
-var SessionKeyEmvCommon_ApplicationTransactionCounter *smithy.Schema
-
-var SessionKeyMastercard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyMastercard",
-}, smithy.ShapeTypeStructure, 4)
-var SessionKeyMastercard_PrimaryAccountNumber *smithy.Schema
-
-var SessionKeyMastercard_PanSequenceNumber *smithy.Schema
-
-var SessionKeyMastercard_ApplicationTransactionCounter *smithy.Schema
-
-var SessionKeyMastercard_UnpredictableNumber *smithy.Schema
-
-var SessionKeyUnionPay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyUnionPay",
-}, smithy.ShapeTypeStructure, 3)
-var SessionKeyUnionPay_PrimaryAccountNumber *smithy.Schema
-
-var SessionKeyUnionPay_PanSequenceNumber *smithy.Schema
-
-var SessionKeyUnionPay_ApplicationTransactionCounter *smithy.Schema
-
-var SessionKeyVisa = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SessionKeyVisa",
-}, smithy.ShapeTypeStructure, 2)
-var SessionKeyVisa_PrimaryAccountNumber *smithy.Schema
-
-var SessionKeyVisa_PanSequenceNumber *smithy.Schema
-
-var _SharedInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SharedInformation",
-}, smithy.ShapeTypeString, 0)
-
-var SymmetricEncryptionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SymmetricEncryptionAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var SymmetricEncryptionAttributes_Mode *smithy.Schema
-
-var SymmetricEncryptionAttributes_InitializationVector *smithy.Schema
-
-var SymmetricEncryptionAttributes_PaddingType *smithy.Schema
-
-var SymmetricKeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SymmetricKeyAlgorithm",
-}, smithy.ShapeTypeEnum, 9)
-var SymmetricKeyAlgorithm_TDES_2KEY *smithy.Schema
-
-var SymmetricKeyAlgorithm_TDES_3KEY *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_128 *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_192 *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_256 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA256 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA384 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA512 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA224 *smithy.Schema
-
-var _SystemTraceAuditNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "SystemTraceAuditNumberType",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Tr31WrappedKeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "Tr31WrappedKeyBlock",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TrackDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TrackDataType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TransactionAmountType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TransactionAmountType",
-}, smithy.ShapeTypeString, 0)
-
-var _TransactionDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TransactionDataType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var TranslationIsoFormats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslationIsoFormats",
-}, smithy.ShapeTypeUnion, 5)
-var TranslationIsoFormats_IsoFormat0 *smithy.Schema
-
-var TranslationIsoFormats_IsoFormat1 *smithy.Schema
-
-var TranslationIsoFormats_IsoFormat3 *smithy.Schema
-
-var TranslationIsoFormats_IsoFormat4 *smithy.Schema
-
-var TranslationIsoFormats_As2805Format0 *smithy.Schema
-
-var TranslationPinDataAs2805Format0 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslationPinDataAs2805Format0",
-}, smithy.ShapeTypeStructure, 1)
-var TranslationPinDataAs2805Format0_PrimaryAccountNumber *smithy.Schema
-
-var TranslationPinDataIsoFormat034 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslationPinDataIsoFormat034",
-}, smithy.ShapeTypeStructure, 1)
-var TranslationPinDataIsoFormat034_PrimaryAccountNumber *smithy.Schema
-
-var TranslationPinDataIsoFormat1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslationPinDataIsoFormat1",
-}, smithy.ShapeTypeStructure, 0)
-
-var _ValidationDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ValidationDataType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_path *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var VerificationFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerificationFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var VerificationFailedException_Reason *smithy.Schema
-
-var VerificationFailedException_Message *smithy.Schema
-
-var _VerificationFailedReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerificationFailedReason",
-}, smithy.ShapeTypeString, 0)
-
-var _VerificationValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerificationValueType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var VisaAmexDerivationOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VisaAmexDerivationOutputs",
-}, smithy.ShapeTypeStructure, 4)
-var VisaAmexDerivationOutputs_AuthorizationRequestKeyArn *smithy.Schema
-
-var VisaAmexDerivationOutputs_AuthorizationRequestKeyCheckValue *smithy.Schema
-
-var VisaAmexDerivationOutputs_CurrentPinPekArn *smithy.Schema
-
-var VisaAmexDerivationOutputs_CurrentPinPekKeyCheckValue *smithy.Schema
-
-var VisaAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VisaAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var VisaAttributes_MajorKeyDerivationMode *smithy.Schema
-
-var VisaAttributes_PrimaryAccountNumber *smithy.Schema
-
-var VisaAttributes_PanSequenceNumber *smithy.Schema
-
-var VisaAttributes_ApplicationTransactionCounter *smithy.Schema
-
-var VisaAttributes_AuthorizationRequestKeyIdentifier *smithy.Schema
-
-var VisaAttributes_CurrentPinAttributes *smithy.Schema
-
-var VisaPin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VisaPin",
-}, smithy.ShapeTypeStructure, 1)
-var VisaPin_PinVerificationKeyIndex *smithy.Schema
-
-var VisaPinVerification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VisaPinVerification",
-}, smithy.ShapeTypeStructure, 2)
-var VisaPinVerification_PinVerificationKeyIndex *smithy.Schema
-
-var VisaPinVerification_VerificationValue *smithy.Schema
-
-var VisaPinVerificationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VisaPinVerificationValue",
-}, smithy.ShapeTypeStructure, 2)
-var VisaPinVerificationValue_EncryptedPinBlock *smithy.Schema
-
-var VisaPinVerificationValue_PinVerificationKeyIndex *smithy.Schema
-
-var WrappedKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "WrappedKey",
-}, smithy.ShapeTypeStructure, 2)
-var WrappedKey_WrappedKeyMaterial *smithy.Schema
-
-var WrappedKey_KeyCheckValueAlgorithm *smithy.Schema
-
-var WrappedKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "WrappedKeyMaterial",
-}, smithy.ShapeTypeUnion, 2)
-var WrappedKeyMaterial_Tr31KeyBlock *smithy.Schema
-
-var WrappedKeyMaterial_DiffieHellmanSymmetricKey *smithy.Schema
-
-var _WrappedKeyMaterialFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "WrappedKeyMaterialFormat",
-}, smithy.ShapeTypeString, 0)
-
-var WrappedWorkingKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "WrappedWorkingKey",
-}, smithy.ShapeTypeStructure, 3)
-var WrappedWorkingKey_WrappedKeyMaterial *smithy.Schema
-
-var WrappedWorkingKey_KeyCheckValue *smithy.Schema
-
-var WrappedWorkingKey_WrappedKeyMaterialFormat *smithy.Schema
-
-var DecryptDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DecryptDataInput",
-}, smithy.ShapeTypeStructure, 4)
-var DecryptDataInput_KeyIdentifier *smithy.Schema
-
-var DecryptDataInput_CipherText *smithy.Schema
-
-var DecryptDataInput_DecryptionAttributes *smithy.Schema
-
-var DecryptDataInput_WrappedKey *smithy.Schema
-
-var DecryptDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "DecryptDataOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DecryptDataOutput_KeyArn *smithy.Schema
-
-var DecryptDataOutput_KeyCheckValue *smithy.Schema
-
-var DecryptDataOutput_PlainText *smithy.Schema
-
-var EncryptDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EncryptDataInput",
-}, smithy.ShapeTypeStructure, 4)
-var EncryptDataInput_KeyIdentifier *smithy.Schema
-
-var EncryptDataInput_PlainText *smithy.Schema
-
-var EncryptDataInput_EncryptionAttributes *smithy.Schema
-
-var EncryptDataInput_WrappedKey *smithy.Schema
-
-var EncryptDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "EncryptDataOutput",
-}, smithy.ShapeTypeStructure, 3)
-var EncryptDataOutput_KeyArn *smithy.Schema
-
-var EncryptDataOutput_KeyCheckValue *smithy.Schema
-
-var EncryptDataOutput_CipherText *smithy.Schema
-
-var GenerateAs2805KekValidationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateAs2805KekValidationInput",
-}, smithy.ShapeTypeStructure, 3)
-var GenerateAs2805KekValidationInput_KeyIdentifier *smithy.Schema
-
-var GenerateAs2805KekValidationInput_KekValidationType *smithy.Schema
-
-var GenerateAs2805KekValidationInput_RandomKeySendVariantMask *smithy.Schema
-
-var GenerateAs2805KekValidationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateAs2805KekValidationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GenerateAs2805KekValidationOutput_KeyArn *smithy.Schema
-
-var GenerateAs2805KekValidationOutput_KeyCheckValue *smithy.Schema
-
-var GenerateAs2805KekValidationOutput_RandomKeySend *smithy.Schema
-
-var GenerateAs2805KekValidationOutput_RandomKeyReceive *smithy.Schema
-
-var GenerateAuthRequestCryptogramInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateAuthRequestCryptogramInput",
-}, smithy.ShapeTypeStructure, 4)
-var GenerateAuthRequestCryptogramInput_KeyIdentifier *smithy.Schema
-
-var GenerateAuthRequestCryptogramInput_TransactionData *smithy.Schema
-
-var GenerateAuthRequestCryptogramInput_MajorKeyDerivationMode *smithy.Schema
-
-var GenerateAuthRequestCryptogramInput_SessionKeyDerivationAttributes *smithy.Schema
-
-var GenerateAuthRequestCryptogramOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateAuthRequestCryptogramOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GenerateAuthRequestCryptogramOutput_KeyArn *smithy.Schema
-
-var GenerateAuthRequestCryptogramOutput_KeyCheckValue *smithy.Schema
-
-var GenerateAuthRequestCryptogramOutput_AuthRequestCryptogram *smithy.Schema
-
-var GenerateCardValidationDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateCardValidationDataInput",
-}, smithy.ShapeTypeStructure, 4)
-var GenerateCardValidationDataInput_KeyIdentifier *smithy.Schema
-
-var GenerateCardValidationDataInput_PrimaryAccountNumber *smithy.Schema
-
-var GenerateCardValidationDataInput_GenerationAttributes *smithy.Schema
-
-var GenerateCardValidationDataInput_ValidationDataLength *smithy.Schema
-
-var GenerateCardValidationDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateCardValidationDataOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GenerateCardValidationDataOutput_KeyArn *smithy.Schema
-
-var GenerateCardValidationDataOutput_KeyCheckValue *smithy.Schema
-
-var GenerateCardValidationDataOutput_ValidationData *smithy.Schema
-
-var GenerateMacEmvPinChangeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateMacEmvPinChangeInput",
-}, smithy.ShapeTypeStructure, 7)
-var GenerateMacEmvPinChangeInput_NewPinPekIdentifier *smithy.Schema
-
-var GenerateMacEmvPinChangeInput_NewEncryptedPinBlock *smithy.Schema
-
-var GenerateMacEmvPinChangeInput_PinBlockFormat *smithy.Schema
-
-var GenerateMacEmvPinChangeInput_SecureMessagingIntegrityKeyIdentifier *smithy.Schema
-
-var GenerateMacEmvPinChangeInput_SecureMessagingConfidentialityKeyIdentifier *smithy.Schema
-
-var GenerateMacEmvPinChangeInput_MessageData *smithy.Schema
-
-var GenerateMacEmvPinChangeInput_DerivationMethodAttributes *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateMacEmvPinChangeOutput",
-}, smithy.ShapeTypeStructure, 9)
-var GenerateMacEmvPinChangeOutput_NewPinPekArn *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyArn *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyArn *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput_Mac *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput_EncryptedPinBlock *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput_NewPinPekKeyCheckValue *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyCheckValue *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyCheckValue *smithy.Schema
-
-var GenerateMacEmvPinChangeOutput_VisaAmexDerivationOutputs *smithy.Schema
-
-var GenerateMacInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateMacInput",
-}, smithy.ShapeTypeStructure, 4)
-var GenerateMacInput_KeyIdentifier *smithy.Schema
-
-var GenerateMacInput_MessageData *smithy.Schema
-
-var GenerateMacInput_GenerationAttributes *smithy.Schema
-
-var GenerateMacInput_MacLength *smithy.Schema
-
-var GenerateMacOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GenerateMacOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GenerateMacOutput_KeyArn *smithy.Schema
-
-var GenerateMacOutput_KeyCheckValue *smithy.Schema
-
-var GenerateMacOutput_Mac *smithy.Schema
-
-var GeneratePinDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GeneratePinDataInput",
-}, smithy.ShapeTypeStructure, 7)
-var GeneratePinDataInput_GenerationKeyIdentifier *smithy.Schema
-
-var GeneratePinDataInput_EncryptionKeyIdentifier *smithy.Schema
-
-var GeneratePinDataInput_GenerationAttributes *smithy.Schema
-
-var GeneratePinDataInput_PinDataLength *smithy.Schema
-
-var GeneratePinDataInput_PrimaryAccountNumber *smithy.Schema
-
-var GeneratePinDataInput_PinBlockFormat *smithy.Schema
-
-var GeneratePinDataInput_EncryptionWrappedKey *smithy.Schema
-
-var GeneratePinDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "GeneratePinDataOutput",
-}, smithy.ShapeTypeStructure, 6)
-var GeneratePinDataOutput_GenerationKeyArn *smithy.Schema
-
-var GeneratePinDataOutput_GenerationKeyCheckValue *smithy.Schema
-
-var GeneratePinDataOutput_EncryptionKeyArn *smithy.Schema
-
-var GeneratePinDataOutput_EncryptionKeyCheckValue *smithy.Schema
-
-var GeneratePinDataOutput_EncryptedPinBlock *smithy.Schema
-
-var GeneratePinDataOutput_PinData *smithy.Schema
-
-var ReEncryptDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ReEncryptDataInput",
-}, smithy.ShapeTypeStructure, 7)
-var ReEncryptDataInput_IncomingKeyIdentifier *smithy.Schema
-
-var ReEncryptDataInput_OutgoingKeyIdentifier *smithy.Schema
-
-var ReEncryptDataInput_CipherText *smithy.Schema
-
-var ReEncryptDataInput_IncomingEncryptionAttributes *smithy.Schema
-
-var ReEncryptDataInput_OutgoingEncryptionAttributes *smithy.Schema
-
-var ReEncryptDataInput_IncomingWrappedKey *smithy.Schema
-
-var ReEncryptDataInput_OutgoingWrappedKey *smithy.Schema
-
-var ReEncryptDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "ReEncryptDataOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ReEncryptDataOutput_KeyArn *smithy.Schema
-
-var ReEncryptDataOutput_KeyCheckValue *smithy.Schema
-
-var ReEncryptDataOutput_CipherText *smithy.Schema
-
-var TranslateKeyMaterialInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslateKeyMaterialInput",
-}, smithy.ShapeTypeStructure, 3)
-var TranslateKeyMaterialInput_IncomingKeyMaterial *smithy.Schema
-
-var TranslateKeyMaterialInput_OutgoingKeyMaterial *smithy.Schema
-
-var TranslateKeyMaterialInput_KeyCheckValueAlgorithm *smithy.Schema
-
-var TranslateKeyMaterialOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslateKeyMaterialOutput",
-}, smithy.ShapeTypeStructure, 1)
-var TranslateKeyMaterialOutput_WrappedKey *smithy.Schema
-
-var TranslatePinDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslatePinDataInput",
-}, smithy.ShapeTypeStructure, 10)
-var TranslatePinDataInput_IncomingKeyIdentifier *smithy.Schema
-
-var TranslatePinDataInput_OutgoingKeyIdentifier *smithy.Schema
-
-var TranslatePinDataInput_IncomingTranslationAttributes *smithy.Schema
-
-var TranslatePinDataInput_OutgoingTranslationAttributes *smithy.Schema
-
-var TranslatePinDataInput_EncryptedPinBlock *smithy.Schema
-
-var TranslatePinDataInput_IncomingDukptAttributes *smithy.Schema
-
-var TranslatePinDataInput_OutgoingDukptAttributes *smithy.Schema
-
-var TranslatePinDataInput_IncomingWrappedKey *smithy.Schema
-
-var TranslatePinDataInput_OutgoingWrappedKey *smithy.Schema
-
-var TranslatePinDataInput_IncomingAs2805Attributes *smithy.Schema
-
-var TranslatePinDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "TranslatePinDataOutput",
-}, smithy.ShapeTypeStructure, 3)
-var TranslatePinDataOutput_PinBlock *smithy.Schema
-
-var TranslatePinDataOutput_KeyArn *smithy.Schema
-
-var TranslatePinDataOutput_KeyCheckValue *smithy.Schema
-
-var VerifyAuthRequestCryptogramInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyAuthRequestCryptogramInput",
-}, smithy.ShapeTypeStructure, 6)
-var VerifyAuthRequestCryptogramInput_KeyIdentifier *smithy.Schema
-
-var VerifyAuthRequestCryptogramInput_TransactionData *smithy.Schema
-
-var VerifyAuthRequestCryptogramInput_AuthRequestCryptogram *smithy.Schema
-
-var VerifyAuthRequestCryptogramInput_MajorKeyDerivationMode *smithy.Schema
-
-var VerifyAuthRequestCryptogramInput_SessionKeyDerivationAttributes *smithy.Schema
-
-var VerifyAuthRequestCryptogramInput_AuthResponseAttributes *smithy.Schema
-
-var VerifyAuthRequestCryptogramOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyAuthRequestCryptogramOutput",
-}, smithy.ShapeTypeStructure, 3)
-var VerifyAuthRequestCryptogramOutput_KeyArn *smithy.Schema
-
-var VerifyAuthRequestCryptogramOutput_KeyCheckValue *smithy.Schema
-
-var VerifyAuthRequestCryptogramOutput_AuthResponseValue *smithy.Schema
-
-var VerifyCardValidationDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyCardValidationDataInput",
-}, smithy.ShapeTypeStructure, 4)
-var VerifyCardValidationDataInput_KeyIdentifier *smithy.Schema
-
-var VerifyCardValidationDataInput_PrimaryAccountNumber *smithy.Schema
-
-var VerifyCardValidationDataInput_VerificationAttributes *smithy.Schema
-
-var VerifyCardValidationDataInput_ValidationData *smithy.Schema
-
-var VerifyCardValidationDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyCardValidationDataOutput",
-}, smithy.ShapeTypeStructure, 2)
-var VerifyCardValidationDataOutput_KeyArn *smithy.Schema
-
-var VerifyCardValidationDataOutput_KeyCheckValue *smithy.Schema
-
-var VerifyMacInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyMacInput",
-}, smithy.ShapeTypeStructure, 5)
-var VerifyMacInput_KeyIdentifier *smithy.Schema
-
-var VerifyMacInput_MessageData *smithy.Schema
-
-var VerifyMacInput_Mac *smithy.Schema
-
-var VerifyMacInput_VerificationAttributes *smithy.Schema
-
-var VerifyMacInput_MacLength *smithy.Schema
-
-var VerifyMacOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyMacOutput",
-}, smithy.ShapeTypeStructure, 2)
-var VerifyMacOutput_KeyArn *smithy.Schema
-
-var VerifyMacOutput_KeyCheckValue *smithy.Schema
-
-var VerifyPinDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyPinDataInput",
-}, smithy.ShapeTypeStructure, 9)
-var VerifyPinDataInput_VerificationKeyIdentifier *smithy.Schema
-
-var VerifyPinDataInput_EncryptionKeyIdentifier *smithy.Schema
-
-var VerifyPinDataInput_VerificationAttributes *smithy.Schema
-
-var VerifyPinDataInput_EncryptedPinBlock *smithy.Schema
-
-var VerifyPinDataInput_PrimaryAccountNumber *smithy.Schema
-
-var VerifyPinDataInput_PinBlockFormat *smithy.Schema
-
-var VerifyPinDataInput_PinDataLength *smithy.Schema
-
-var VerifyPinDataInput_DukptAttributes *smithy.Schema
-
-var VerifyPinDataInput_EncryptionWrappedKey *smithy.Schema
-
-var VerifyPinDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptographydata",
-	Name:      "VerifyPinDataOutput",
-}, smithy.ShapeTypeStructure, 4)
-var VerifyPinDataOutput_VerificationKeyArn *smithy.Schema
-
-var VerifyPinDataOutput_VerificationKeyCheckValue *smithy.Schema
-
-var VerifyPinDataOutput_EncryptionKeyArn *smithy.Schema
-
-var VerifyPinDataOutput_EncryptionKeyCheckValue *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	MajorKeyDerivationMode_EMV_OPTION_A = MajorKeyDerivationMode.AddMember("EMV_OPTION_A", smithyprelude.Unit)
-
-	MajorKeyDerivationMode_EMV_OPTION_B = MajorKeyDerivationMode.AddMember("EMV_OPTION_B", smithyprelude.Unit)
-
-	CurrentPinAttributes_CurrentPinPekIdentifier = CurrentPinAttributes.AddMember("CurrentPinPekIdentifier", _KeyArnOrKeyAliasType)
-
-	CurrentPinAttributes_CurrentEncryptedPinBlock = CurrentPinAttributes.AddMember("CurrentEncryptedPinBlock", _PinBlockLengthEquals16)
-
-	AmexAttributes_MajorKeyDerivationMode = AmexAttributes.AddMember("MajorKeyDerivationMode", MajorKeyDerivationMode)
-
-	AmexAttributes_PrimaryAccountNumber = AmexAttributes.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	AmexAttributes_PanSequenceNumber = AmexAttributes.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	AmexAttributes_ApplicationTransactionCounter = AmexAttributes.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
-
-	AmexAttributes_AuthorizationRequestKeyIdentifier = AmexAttributes.AddMember("AuthorizationRequestKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	AmexAttributes_CurrentPinAttributes = AmexAttributes.AddMember("CurrentPinAttributes", CurrentPinAttributes)
-
-	AmexCardSecurityCodeVersion1_CardExpiryDate = AmexCardSecurityCodeVersion1.AddMember("CardExpiryDate", _CardExpiryDateType)
-
-	AmexCardSecurityCodeVersion2_CardExpiryDate = AmexCardSecurityCodeVersion2.AddMember("CardExpiryDate", _CardExpiryDateType)
-
-	AmexCardSecurityCodeVersion2_ServiceCode = AmexCardSecurityCodeVersion2.AddMember("ServiceCode", _ServiceCodeType)
-
-	SymmetricKeyAlgorithm_TDES_2KEY = SymmetricKeyAlgorithm.AddMember("TDES_2KEY", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_TDES_3KEY = SymmetricKeyAlgorithm.AddMember("TDES_3KEY", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_128 = SymmetricKeyAlgorithm.AddMember("AES_128", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_192 = SymmetricKeyAlgorithm.AddMember("AES_192", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_256 = SymmetricKeyAlgorithm.AddMember("AES_256", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA256 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA256", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA384 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA384", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA512 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA512", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA224 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA224", smithyprelude.Unit)
-
-	RandomKeyMaxLength_BYTES_8 = RandomKeyMaxLength.AddMember("BYTES_8", smithyprelude.Unit)
-
-	RandomKeyMaxLength_BYTES_16 = RandomKeyMaxLength.AddMember("BYTES_16", smithyprelude.Unit)
-
-	RandomKeyMaxLength_BYTES_24 = RandomKeyMaxLength.AddMember("BYTES_24", smithyprelude.Unit)
-
-	KekValidationRequest_DeriveKeyAlgorithm = KekValidationRequest.AddMember("DeriveKeyAlgorithm", SymmetricKeyAlgorithm)
-
-	KekValidationRequest_RandomKeyMaxLength = KekValidationRequest.AddMember("RandomKeyMaxLength", RandomKeyMaxLength)
-
-	KekValidationResponse_RandomKeySend = KekValidationResponse.AddMember("RandomKeySend", _As2805RandomKeyMaterial)
-
-	As2805KekValidationType_KekValidationRequest = As2805KekValidationType.AddMember("KekValidationRequest", KekValidationRequest)
-
-	As2805KekValidationType_KekValidationResponse = As2805KekValidationType.AddMember("KekValidationResponse", KekValidationResponse)
-
-	As2805PekDerivationAttributes_SystemTraceAuditNumber = As2805PekDerivationAttributes.AddMember("SystemTraceAuditNumber", _SystemTraceAuditNumberType)
-
-	As2805PekDerivationAttributes_TransactionAmount = As2805PekDerivationAttributes.AddMember("TransactionAmount", _TransactionAmountType)
-
-	PaddingType_PKCS1 = PaddingType.AddMember("PKCS1", smithyprelude.Unit)
-
-	PaddingType_OAEP_SHA1 = PaddingType.AddMember("OAEP_SHA1", smithyprelude.Unit)
-
-	PaddingType_OAEP_SHA256 = PaddingType.AddMember("OAEP_SHA256", smithyprelude.Unit)
-
-	PaddingType_OAEP_SHA512 = PaddingType.AddMember("OAEP_SHA512", smithyprelude.Unit)
-
-	AsymmetricEncryptionAttributes_PaddingType = AsymmetricEncryptionAttributes.AddMember("PaddingType", PaddingType)
-
-	CardVerificationValue1_CardExpiryDate = CardVerificationValue1.AddMember("CardExpiryDate", _CardExpiryDateType)
-
-	CardVerificationValue1_ServiceCode = CardVerificationValue1.AddMember("ServiceCode", _ServiceCodeType)
-
-	CardVerificationValue2_CardExpiryDate = CardVerificationValue2.AddMember("CardExpiryDate", _CardExpiryDateType)
-
-	CardHolderVerificationValue_UnpredictableNumber = CardHolderVerificationValue.AddMember("UnpredictableNumber", _HexLengthBetween2And8)
-
-	CardHolderVerificationValue_PanSequenceNumber = CardHolderVerificationValue.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	CardHolderVerificationValue_ApplicationTransactionCounter = CardHolderVerificationValue.AddMember("ApplicationTransactionCounter", _HexLengthBetween2And4)
-
-	DynamicCardVerificationCode_UnpredictableNumber = DynamicCardVerificationCode.AddMember("UnpredictableNumber", _HexLengthBetween2And8)
-
-	DynamicCardVerificationCode_PanSequenceNumber = DynamicCardVerificationCode.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	DynamicCardVerificationCode_ApplicationTransactionCounter = DynamicCardVerificationCode.AddMember("ApplicationTransactionCounter", _HexLengthBetween2And4)
-
-	DynamicCardVerificationCode_TrackData = DynamicCardVerificationCode.AddMember("TrackData", _TrackDataType)
-
-	DynamicCardVerificationValue_PanSequenceNumber = DynamicCardVerificationValue.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	DynamicCardVerificationValue_CardExpiryDate = DynamicCardVerificationValue.AddMember("CardExpiryDate", _CardExpiryDateType)
-
-	DynamicCardVerificationValue_ServiceCode = DynamicCardVerificationValue.AddMember("ServiceCode", _ServiceCodeType)
-
-	DynamicCardVerificationValue_ApplicationTransactionCounter = DynamicCardVerificationValue.AddMember("ApplicationTransactionCounter", _HexLengthBetween2And4)
-
-	CardGenerationAttributes_AmexCardSecurityCodeVersion1 = CardGenerationAttributes.AddMember("AmexCardSecurityCodeVersion1", AmexCardSecurityCodeVersion1)
-
-	CardGenerationAttributes_AmexCardSecurityCodeVersion2 = CardGenerationAttributes.AddMember("AmexCardSecurityCodeVersion2", AmexCardSecurityCodeVersion2)
-
-	CardGenerationAttributes_CardVerificationValue1 = CardGenerationAttributes.AddMember("CardVerificationValue1", CardVerificationValue1)
-
-	CardGenerationAttributes_CardVerificationValue2 = CardGenerationAttributes.AddMember("CardVerificationValue2", CardVerificationValue2)
-
-	CardGenerationAttributes_CardHolderVerificationValue = CardGenerationAttributes.AddMember("CardHolderVerificationValue", CardHolderVerificationValue)
-
-	CardGenerationAttributes_DynamicCardVerificationCode = CardGenerationAttributes.AddMember("DynamicCardVerificationCode", DynamicCardVerificationCode)
-
-	CardGenerationAttributes_DynamicCardVerificationValue = CardGenerationAttributes.AddMember("DynamicCardVerificationValue", DynamicCardVerificationValue)
-
-	DiscoverDynamicCardVerificationCode_CardExpiryDate = DiscoverDynamicCardVerificationCode.AddMember("CardExpiryDate", _CardExpiryDateType)
-
-	DiscoverDynamicCardVerificationCode_UnpredictableNumber = DiscoverDynamicCardVerificationCode.AddMember("UnpredictableNumber", _HexLengthBetween2And8)
-
-	DiscoverDynamicCardVerificationCode_ApplicationTransactionCounter = DiscoverDynamicCardVerificationCode.AddMember("ApplicationTransactionCounter", _HexLengthBetween2And4)
-
-	CardVerificationAttributes_AmexCardSecurityCodeVersion1 = CardVerificationAttributes.AddMember("AmexCardSecurityCodeVersion1", AmexCardSecurityCodeVersion1)
-
-	CardVerificationAttributes_AmexCardSecurityCodeVersion2 = CardVerificationAttributes.AddMember("AmexCardSecurityCodeVersion2", AmexCardSecurityCodeVersion2)
-
-	CardVerificationAttributes_CardVerificationValue1 = CardVerificationAttributes.AddMember("CardVerificationValue1", CardVerificationValue1)
-
-	CardVerificationAttributes_CardVerificationValue2 = CardVerificationAttributes.AddMember("CardVerificationValue2", CardVerificationValue2)
-
-	CardVerificationAttributes_CardHolderVerificationValue = CardVerificationAttributes.AddMember("CardHolderVerificationValue", CardHolderVerificationValue)
-
-	CardVerificationAttributes_DynamicCardVerificationCode = CardVerificationAttributes.AddMember("DynamicCardVerificationCode", DynamicCardVerificationCode)
-
-	CardVerificationAttributes_DynamicCardVerificationValue = CardVerificationAttributes.AddMember("DynamicCardVerificationValue", DynamicCardVerificationValue)
-
-	CardVerificationAttributes_DiscoverDynamicCardVerificationCode = CardVerificationAttributes.AddMember("DiscoverDynamicCardVerificationCode", DiscoverDynamicCardVerificationCode)
-
-	CryptogramVerificationArpcMethod1_AuthResponseCode = CryptogramVerificationArpcMethod1.AddMember("AuthResponseCode", _HexLengthEquals4)
-
-	CryptogramVerificationArpcMethod2_CardStatusUpdate = CryptogramVerificationArpcMethod2.AddMember("CardStatusUpdate", _HexLengthEquals8)
-
-	CryptogramVerificationArpcMethod2_ProprietaryAuthenticationData = CryptogramVerificationArpcMethod2.AddMember("ProprietaryAuthenticationData", _ProprietaryAuthenticationDataType)
-
-	CryptogramAuthResponse_ArpcMethod1 = CryptogramAuthResponse.AddMember("ArpcMethod1", CryptogramVerificationArpcMethod1)
-
-	CryptogramAuthResponse_ArpcMethod2 = CryptogramAuthResponse.AddMember("ArpcMethod2", CryptogramVerificationArpcMethod2)
-
-	EmvEncryptionMode_ECB = EmvEncryptionMode.AddMember("ECB", smithyprelude.Unit)
-
-	EmvEncryptionMode_CBC = EmvEncryptionMode.AddMember("CBC", smithyprelude.Unit)
-
-	PinBlockPaddingType_NO_PADDING = PinBlockPaddingType.AddMember("NO_PADDING", smithyprelude.Unit)
-
-	PinBlockPaddingType_ISO_IEC_7816_4 = PinBlockPaddingType.AddMember("ISO_IEC_7816_4", smithyprelude.Unit)
-
-	PinBlockLengthPosition_NONE = PinBlockLengthPosition.AddMember("NONE", smithyprelude.Unit)
-
-	PinBlockLengthPosition_FRONT_OF_PIN_BLOCK = PinBlockLengthPosition.AddMember("FRONT_OF_PIN_BLOCK", smithyprelude.Unit)
-
-	EmvCommonAttributes_MajorKeyDerivationMode = EmvCommonAttributes.AddMember("MajorKeyDerivationMode", MajorKeyDerivationMode)
-
-	EmvCommonAttributes_PrimaryAccountNumber = EmvCommonAttributes.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	EmvCommonAttributes_PanSequenceNumber = EmvCommonAttributes.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	EmvCommonAttributes_ApplicationCryptogram = EmvCommonAttributes.AddMember("ApplicationCryptogram", _ApplicationCryptogramType)
-
-	EmvCommonAttributes_Mode = EmvCommonAttributes.AddMember("Mode", EmvEncryptionMode)
-
-	EmvCommonAttributes_PinBlockPaddingType = EmvCommonAttributes.AddMember("PinBlockPaddingType", PinBlockPaddingType)
-
-	EmvCommonAttributes_PinBlockLengthPosition = EmvCommonAttributes.AddMember("PinBlockLengthPosition", PinBlockLengthPosition)
-
-	VisaAttributes_MajorKeyDerivationMode = VisaAttributes.AddMember("MajorKeyDerivationMode", MajorKeyDerivationMode)
-
-	VisaAttributes_PrimaryAccountNumber = VisaAttributes.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	VisaAttributes_PanSequenceNumber = VisaAttributes.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	VisaAttributes_ApplicationTransactionCounter = VisaAttributes.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
-
-	VisaAttributes_AuthorizationRequestKeyIdentifier = VisaAttributes.AddMember("AuthorizationRequestKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	VisaAttributes_CurrentPinAttributes = VisaAttributes.AddMember("CurrentPinAttributes", CurrentPinAttributes)
-
-	Emv2000Attributes_MajorKeyDerivationMode = Emv2000Attributes.AddMember("MajorKeyDerivationMode", MajorKeyDerivationMode)
-
-	Emv2000Attributes_PrimaryAccountNumber = Emv2000Attributes.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	Emv2000Attributes_PanSequenceNumber = Emv2000Attributes.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	Emv2000Attributes_ApplicationTransactionCounter = Emv2000Attributes.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
-
-	MasterCardAttributes_MajorKeyDerivationMode = MasterCardAttributes.AddMember("MajorKeyDerivationMode", MajorKeyDerivationMode)
-
-	MasterCardAttributes_PrimaryAccountNumber = MasterCardAttributes.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	MasterCardAttributes_PanSequenceNumber = MasterCardAttributes.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	MasterCardAttributes_ApplicationCryptogram = MasterCardAttributes.AddMember("ApplicationCryptogram", _ApplicationCryptogramType)
-
-	DerivationMethodAttributes_EmvCommon = DerivationMethodAttributes.AddMember("EmvCommon", EmvCommonAttributes)
-
-	DerivationMethodAttributes_Amex = DerivationMethodAttributes.AddMember("Amex", AmexAttributes)
-
-	DerivationMethodAttributes_Visa = DerivationMethodAttributes.AddMember("Visa", VisaAttributes)
-
-	DerivationMethodAttributes_Emv2000 = DerivationMethodAttributes.AddMember("Emv2000", Emv2000Attributes)
-
-	DerivationMethodAttributes_Mastercard = DerivationMethodAttributes.AddMember("Mastercard", MasterCardAttributes)
-
-	DiffieHellmanDerivationData_SharedInformation = DiffieHellmanDerivationData.AddMember("SharedInformation", _SharedInformation)
-
-	DukptDerivationType_TDES_2KEY = DukptDerivationType.AddMember("TDES_2KEY", smithyprelude.Unit)
-
-	DukptDerivationType_TDES_3KEY = DukptDerivationType.AddMember("TDES_3KEY", smithyprelude.Unit)
-
-	DukptDerivationType_AES_128 = DukptDerivationType.AddMember("AES_128", smithyprelude.Unit)
-
-	DukptDerivationType_AES_192 = DukptDerivationType.AddMember("AES_192", smithyprelude.Unit)
-
-	DukptDerivationType_AES_256 = DukptDerivationType.AddMember("AES_256", smithyprelude.Unit)
-
-	DukptAttributes_KeySerialNumber = DukptAttributes.AddMember("KeySerialNumber", _HexLength16Or20Or24)
-
-	DukptAttributes_DukptDerivationType = DukptAttributes.AddMember("DukptDerivationType", DukptDerivationType)
-
-	DukptKeyVariant_BIDIRECTIONAL = DukptKeyVariant.AddMember("BIDIRECTIONAL", smithyprelude.Unit)
-
-	DukptKeyVariant_REQUEST = DukptKeyVariant.AddMember("REQUEST", smithyprelude.Unit)
-
-	DukptKeyVariant_RESPONSE = DukptKeyVariant.AddMember("RESPONSE", smithyprelude.Unit)
-
-	DukptDerivationAttributes_KeySerialNumber = DukptDerivationAttributes.AddMember("KeySerialNumber", _HexLength16Or20Or24)
-
-	DukptDerivationAttributes_DukptKeyDerivationType = DukptDerivationAttributes.AddMember("DukptKeyDerivationType", DukptDerivationType)
-
-	DukptDerivationAttributes_DukptKeyVariant = DukptDerivationAttributes.AddMember("DukptKeyVariant", DukptKeyVariant)
-
-	DukptEncryptionMode_ECB = DukptEncryptionMode.AddMember("ECB", smithyprelude.Unit)
-
-	DukptEncryptionMode_CBC = DukptEncryptionMode.AddMember("CBC", smithyprelude.Unit)
-
-	DukptEncryptionAttributes_KeySerialNumber = DukptEncryptionAttributes.AddMember("KeySerialNumber", _HexLength16Or20Or24)
-
-	DukptEncryptionAttributes_Mode = DukptEncryptionAttributes.AddMember("Mode", DukptEncryptionMode)
-
-	DukptEncryptionAttributes_DukptKeyDerivationType = DukptEncryptionAttributes.AddMember("DukptKeyDerivationType", DukptDerivationType)
-
-	DukptEncryptionAttributes_DukptKeyVariant = DukptEncryptionAttributes.AddMember("DukptKeyVariant", DukptKeyVariant)
-
-	DukptEncryptionAttributes_InitializationVector = DukptEncryptionAttributes.AddMember("InitializationVector", _InitializationVectorType)
-
-	KeyDerivationFunction_NIST_SP800 = KeyDerivationFunction.AddMember("NIST_SP800", smithyprelude.Unit)
-
-	KeyDerivationFunction_ANSI_X963 = KeyDerivationFunction.AddMember("ANSI_X963", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_256 = KeyDerivationHashAlgorithm.AddMember("SHA_256", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_384 = KeyDerivationHashAlgorithm.AddMember("SHA_384", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_512 = KeyDerivationHashAlgorithm.AddMember("SHA_512", smithyprelude.Unit)
-
-	EcdhDerivationAttributes_CertificateAuthorityPublicKeyIdentifier = EcdhDerivationAttributes.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	EcdhDerivationAttributes_PublicKeyCertificate = EcdhDerivationAttributes.AddMember("PublicKeyCertificate", _CertificateType)
-
-	EcdhDerivationAttributes_KeyAlgorithm = EcdhDerivationAttributes.AddMember("KeyAlgorithm", SymmetricKeyAlgorithm)
-
-	EcdhDerivationAttributes_KeyDerivationFunction = EcdhDerivationAttributes.AddMember("KeyDerivationFunction", KeyDerivationFunction)
-
-	EcdhDerivationAttributes_KeyDerivationHashAlgorithm = EcdhDerivationAttributes.AddMember("KeyDerivationHashAlgorithm", KeyDerivationHashAlgorithm)
-
-	EcdhDerivationAttributes_SharedInformation = EcdhDerivationAttributes.AddMember("SharedInformation", _SharedInformation)
-
-	EmvMajorKeyDerivationMode_EMV_OPTION_A = EmvMajorKeyDerivationMode.AddMember("EMV_OPTION_A", smithyprelude.Unit)
-
-	EmvMajorKeyDerivationMode_EMV_OPTION_B = EmvMajorKeyDerivationMode.AddMember("EMV_OPTION_B", smithyprelude.Unit)
-
-	EmvEncryptionAttributes_MajorKeyDerivationMode = EmvEncryptionAttributes.AddMember("MajorKeyDerivationMode", EmvMajorKeyDerivationMode)
-
-	EmvEncryptionAttributes_PrimaryAccountNumber = EmvEncryptionAttributes.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	EmvEncryptionAttributes_PanSequenceNumber = EmvEncryptionAttributes.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	EmvEncryptionAttributes_SessionDerivationData = EmvEncryptionAttributes.AddMember("SessionDerivationData", _SessionDerivationDataType)
-
-	EmvEncryptionAttributes_Mode = EmvEncryptionAttributes.AddMember("Mode", EmvEncryptionMode)
-
-	EmvEncryptionAttributes_InitializationVector = EmvEncryptionAttributes.AddMember("InitializationVector", _InitializationVectorType)
-
-	EncryptionMode_ECB = EncryptionMode.AddMember("ECB", smithyprelude.Unit)
-
-	EncryptionMode_CBC = EncryptionMode.AddMember("CBC", smithyprelude.Unit)
-
-	EncryptionMode_CFB = EncryptionMode.AddMember("CFB", smithyprelude.Unit)
-
-	EncryptionMode_CFB1 = EncryptionMode.AddMember("CFB1", smithyprelude.Unit)
-
-	EncryptionMode_CFB8 = EncryptionMode.AddMember("CFB8", smithyprelude.Unit)
-
-	EncryptionMode_CFB64 = EncryptionMode.AddMember("CFB64", smithyprelude.Unit)
-
-	EncryptionMode_CFB128 = EncryptionMode.AddMember("CFB128", smithyprelude.Unit)
-
-	EncryptionMode_OFB = EncryptionMode.AddMember("OFB", smithyprelude.Unit)
-
-	SymmetricEncryptionAttributes_Mode = SymmetricEncryptionAttributes.AddMember("Mode", EncryptionMode)
-
-	SymmetricEncryptionAttributes_InitializationVector = SymmetricEncryptionAttributes.AddMember("InitializationVector", _InitializationVectorType)
-
-	SymmetricEncryptionAttributes_PaddingType = SymmetricEncryptionAttributes.AddMember("PaddingType", PaddingType)
-
-	EncryptionDecryptionAttributes_Symmetric = EncryptionDecryptionAttributes.AddMember("Symmetric", SymmetricEncryptionAttributes)
-
-	EncryptionDecryptionAttributes_Asymmetric = EncryptionDecryptionAttributes.AddMember("Asymmetric", AsymmetricEncryptionAttributes)
-
-	EncryptionDecryptionAttributes_Dukpt = EncryptionDecryptionAttributes.AddMember("Dukpt", DukptEncryptionAttributes)
-
-	EncryptionDecryptionAttributes_Emv = EncryptionDecryptionAttributes.AddMember("Emv", EmvEncryptionAttributes)
-
-	Ibm3624NaturalPin_DecimalizationTable = Ibm3624NaturalPin.AddMember("DecimalizationTable", _DecimalizationTableType)
-
-	Ibm3624NaturalPin_PinValidationDataPadCharacter = Ibm3624NaturalPin.AddMember("PinValidationDataPadCharacter", _HexLengthEquals1)
-
-	Ibm3624NaturalPin_PinValidationData = Ibm3624NaturalPin.AddMember("PinValidationData", _PinValidationDataType)
-
-	Ibm3624PinFromOffset_DecimalizationTable = Ibm3624PinFromOffset.AddMember("DecimalizationTable", _DecimalizationTableType)
-
-	Ibm3624PinFromOffset_PinValidationDataPadCharacter = Ibm3624PinFromOffset.AddMember("PinValidationDataPadCharacter", _HexLengthEquals1)
-
-	Ibm3624PinFromOffset_PinValidationData = Ibm3624PinFromOffset.AddMember("PinValidationData", _PinValidationDataType)
-
-	Ibm3624PinFromOffset_PinOffset = Ibm3624PinFromOffset.AddMember("PinOffset", _PinOffsetType)
-
-	Ibm3624PinOffset_EncryptedPinBlock = Ibm3624PinOffset.AddMember("EncryptedPinBlock", _EncryptedPinBlockType)
-
-	Ibm3624PinOffset_DecimalizationTable = Ibm3624PinOffset.AddMember("DecimalizationTable", _DecimalizationTableType)
-
-	Ibm3624PinOffset_PinValidationDataPadCharacter = Ibm3624PinOffset.AddMember("PinValidationDataPadCharacter", _HexLengthEquals1)
-
-	Ibm3624PinOffset_PinValidationData = Ibm3624PinOffset.AddMember("PinValidationData", _PinValidationDataType)
-
-	Ibm3624PinVerification_DecimalizationTable = Ibm3624PinVerification.AddMember("DecimalizationTable", _DecimalizationTableType)
-
-	Ibm3624PinVerification_PinValidationDataPadCharacter = Ibm3624PinVerification.AddMember("PinValidationDataPadCharacter", _HexLengthEquals1)
-
-	Ibm3624PinVerification_PinValidationData = Ibm3624PinVerification.AddMember("PinValidationData", _PinValidationDataType)
-
-	Ibm3624PinVerification_PinOffset = Ibm3624PinVerification.AddMember("PinOffset", _PinOffsetType)
-
-	Ibm3624RandomPin_DecimalizationTable = Ibm3624RandomPin.AddMember("DecimalizationTable", _DecimalizationTableType)
-
-	Ibm3624RandomPin_PinValidationDataPadCharacter = Ibm3624RandomPin.AddMember("PinValidationDataPadCharacter", _HexLengthEquals1)
-
-	Ibm3624RandomPin_PinValidationData = Ibm3624RandomPin.AddMember("PinValidationData", _PinValidationDataType)
-
-	IncomingDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = IncomingDiffieHellmanTr31KeyBlock.AddMember("PrivateKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	IncomingDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = IncomingDiffieHellmanTr31KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	IncomingDiffieHellmanTr31KeyBlock_PublicKeyCertificate = IncomingDiffieHellmanTr31KeyBlock.AddMember("PublicKeyCertificate", _CertificateType)
-
-	IncomingDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = IncomingDiffieHellmanTr31KeyBlock.AddMember("DeriveKeyAlgorithm", SymmetricKeyAlgorithm)
-
-	IncomingDiffieHellmanTr31KeyBlock_KeyDerivationFunction = IncomingDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationFunction", KeyDerivationFunction)
-
-	IncomingDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = IncomingDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationHashAlgorithm", KeyDerivationHashAlgorithm)
-
-	IncomingDiffieHellmanTr31KeyBlock_DerivationData = IncomingDiffieHellmanTr31KeyBlock.AddMember("DerivationData", DiffieHellmanDerivationData)
-
-	IncomingDiffieHellmanTr31KeyBlock_WrappedKeyBlock = IncomingDiffieHellmanTr31KeyBlock.AddMember("WrappedKeyBlock", _Tr31WrappedKeyBlock)
-
-	IncomingKeyMaterial_DiffieHellmanTr31KeyBlock = IncomingKeyMaterial.AddMember("DiffieHellmanTr31KeyBlock", IncomingDiffieHellmanTr31KeyBlock)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	MacAlgorithm_ISO9797_ALGORITHM1 = MacAlgorithm.AddMember("ISO9797_ALGORITHM1", smithyprelude.Unit)
-
-	MacAlgorithm_ISO9797_ALGORITHM3 = MacAlgorithm.AddMember("ISO9797_ALGORITHM3", smithyprelude.Unit)
-
-	MacAlgorithm_CMAC = MacAlgorithm.AddMember("CMAC", smithyprelude.Unit)
-
-	MacAlgorithm_HMAC = MacAlgorithm.AddMember("HMAC", smithyprelude.Unit)
-
-	MacAlgorithm_HMAC_SHA224 = MacAlgorithm.AddMember("HMAC_SHA224", smithyprelude.Unit)
-
-	MacAlgorithm_HMAC_SHA256 = MacAlgorithm.AddMember("HMAC_SHA256", smithyprelude.Unit)
-
-	MacAlgorithm_HMAC_SHA384 = MacAlgorithm.AddMember("HMAC_SHA384", smithyprelude.Unit)
-
-	MacAlgorithm_HMAC_SHA512 = MacAlgorithm.AddMember("HMAC_SHA512", smithyprelude.Unit)
-
-	MacAlgorithm_AS2805_4_1 = MacAlgorithm.AddMember("AS2805_4_1", smithyprelude.Unit)
-
-	MacAlgorithmDukpt_KeySerialNumber = MacAlgorithmDukpt.AddMember("KeySerialNumber", _HexLength16Or20Or24)
-
-	MacAlgorithmDukpt_DukptKeyVariant = MacAlgorithmDukpt.AddMember("DukptKeyVariant", DukptKeyVariant)
-
-	MacAlgorithmDukpt_DukptDerivationType = MacAlgorithmDukpt.AddMember("DukptDerivationType", DukptDerivationType)
-
-	SessionKeyDerivationMode_EMV_COMMON_SESSION_KEY = SessionKeyDerivationMode.AddMember("EMV_COMMON_SESSION_KEY", smithyprelude.Unit)
-
-	SessionKeyDerivationMode_EMV2000 = SessionKeyDerivationMode.AddMember("EMV2000", smithyprelude.Unit)
-
-	SessionKeyDerivationMode_AMEX = SessionKeyDerivationMode.AddMember("AMEX", smithyprelude.Unit)
-
-	SessionKeyDerivationMode_MASTERCARD_SESSION_KEY = SessionKeyDerivationMode.AddMember("MASTERCARD_SESSION_KEY", smithyprelude.Unit)
-
-	SessionKeyDerivationMode_VISA = SessionKeyDerivationMode.AddMember("VISA", smithyprelude.Unit)
-
-	SessionKeyDerivationMode_UNION_PAY = SessionKeyDerivationMode.AddMember("UNION_PAY", smithyprelude.Unit)
-
-	SessionKeyDerivationValue_ApplicationCryptogram = SessionKeyDerivationValue.AddMember("ApplicationCryptogram", _ApplicationCryptogramType)
-
-	SessionKeyDerivationValue_ApplicationTransactionCounter = SessionKeyDerivationValue.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
-
-	MacAlgorithmEmv_MajorKeyDerivationMode = MacAlgorithmEmv.AddMember("MajorKeyDerivationMode", MajorKeyDerivationMode)
-
-	MacAlgorithmEmv_PrimaryAccountNumber = MacAlgorithmEmv.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	MacAlgorithmEmv_PanSequenceNumber = MacAlgorithmEmv.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	MacAlgorithmEmv_SessionKeyDerivationMode = MacAlgorithmEmv.AddMember("SessionKeyDerivationMode", SessionKeyDerivationMode)
-
-	MacAlgorithmEmv_SessionKeyDerivationValue = MacAlgorithmEmv.AddMember("SessionKeyDerivationValue", SessionKeyDerivationValue)
-
-	MacAttributes_Algorithm = MacAttributes.AddMember("Algorithm", MacAlgorithm)
-
-	MacAttributes_EmvMac = MacAttributes.AddMember("EmvMac", MacAlgorithmEmv)
-
-	MacAttributes_DukptIso9797Algorithm1 = MacAttributes.AddMember("DukptIso9797Algorithm1", MacAlgorithmDukpt)
-
-	MacAttributes_DukptIso9797Algorithm3 = MacAttributes.AddMember("DukptIso9797Algorithm3", MacAlgorithmDukpt)
-
-	MacAttributes_DukptCmac = MacAttributes.AddMember("DukptCmac", MacAlgorithmDukpt)
-
-	OutgoingTr31KeyBlock_WrappingKeyIdentifier = OutgoingTr31KeyBlock.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	OutgoingKeyMaterial_Tr31KeyBlock = OutgoingKeyMaterial.AddMember("Tr31KeyBlock", OutgoingTr31KeyBlock)
-
-	PinBlockFormatForEmvPinChange_ISO_FORMAT_0 = PinBlockFormatForEmvPinChange.AddMember("ISO_FORMAT_0", smithyprelude.Unit)
-
-	PinBlockFormatForEmvPinChange_ISO_FORMAT_1 = PinBlockFormatForEmvPinChange.AddMember("ISO_FORMAT_1", smithyprelude.Unit)
-
-	PinBlockFormatForEmvPinChange_ISO_FORMAT_3 = PinBlockFormatForEmvPinChange.AddMember("ISO_FORMAT_3", smithyprelude.Unit)
-
-	PinBlockFormatForPinData_ISO_FORMAT_0 = PinBlockFormatForPinData.AddMember("ISO_FORMAT_0", smithyprelude.Unit)
-
-	PinBlockFormatForPinData_ISO_FORMAT_1 = PinBlockFormatForPinData.AddMember("ISO_FORMAT_1", smithyprelude.Unit)
-
-	PinBlockFormatForPinData_ISO_FORMAT_3 = PinBlockFormatForPinData.AddMember("ISO_FORMAT_3", smithyprelude.Unit)
-
-	PinBlockFormatForPinData_ISO_FORMAT_4 = PinBlockFormatForPinData.AddMember("ISO_FORMAT_4", smithyprelude.Unit)
-
-	PinData_PinOffset = PinData.AddMember("PinOffset", _PinOffsetType)
-
-	PinData_VerificationValue = PinData.AddMember("VerificationValue", _VerificationValueType)
-
-	VisaPin_PinVerificationKeyIndex = VisaPin.AddMember("PinVerificationKeyIndex", _IntegerRangeBetween0And6)
-
-	VisaPinVerificationValue_EncryptedPinBlock = VisaPinVerificationValue.AddMember("EncryptedPinBlock", _EncryptedPinBlockType)
-
-	VisaPinVerificationValue_PinVerificationKeyIndex = VisaPinVerificationValue.AddMember("PinVerificationKeyIndex", _IntegerRangeBetween0And6)
-
-	PinGenerationAttributes_VisaPin = PinGenerationAttributes.AddMember("VisaPin", VisaPin)
-
-	PinGenerationAttributes_VisaPinVerificationValue = PinGenerationAttributes.AddMember("VisaPinVerificationValue", VisaPinVerificationValue)
-
-	PinGenerationAttributes_Ibm3624PinOffset = PinGenerationAttributes.AddMember("Ibm3624PinOffset", Ibm3624PinOffset)
-
-	PinGenerationAttributes_Ibm3624NaturalPin = PinGenerationAttributes.AddMember("Ibm3624NaturalPin", Ibm3624NaturalPin)
-
-	PinGenerationAttributes_Ibm3624RandomPin = PinGenerationAttributes.AddMember("Ibm3624RandomPin", Ibm3624RandomPin)
-
-	PinGenerationAttributes_Ibm3624PinFromOffset = PinGenerationAttributes.AddMember("Ibm3624PinFromOffset", Ibm3624PinFromOffset)
-
-	VisaPinVerification_PinVerificationKeyIndex = VisaPinVerification.AddMember("PinVerificationKeyIndex", _IntegerRangeBetween0And6)
-
-	VisaPinVerification_VerificationValue = VisaPinVerification.AddMember("VerificationValue", _VerificationValueType)
-
-	PinVerificationAttributes_VisaPin = PinVerificationAttributes.AddMember("VisaPin", VisaPinVerification)
-
-	PinVerificationAttributes_Ibm3624Pin = PinVerificationAttributes.AddMember("Ibm3624Pin", Ibm3624PinVerification)
-
-	RandomKeySendVariantMask_VARIANT_MASK_82C0 = RandomKeySendVariantMask.AddMember("VARIANT_MASK_82C0", smithyprelude.Unit)
-
-	RandomKeySendVariantMask_VARIANT_MASK_82 = RandomKeySendVariantMask.AddMember("VARIANT_MASK_82", smithyprelude.Unit)
-
-	ReEncryptionAttributes_Symmetric = ReEncryptionAttributes.AddMember("Symmetric", SymmetricEncryptionAttributes)
-
-	ReEncryptionAttributes_Asymmetric = ReEncryptionAttributes.AddMember("Asymmetric", AsymmetricEncryptionAttributes)
-
-	ReEncryptionAttributes_Dukpt = ReEncryptionAttributes.AddMember("Dukpt", DukptEncryptionAttributes)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", smithyprelude.String)
-
-	SessionKeyAmex_PrimaryAccountNumber = SessionKeyAmex.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	SessionKeyAmex_PanSequenceNumber = SessionKeyAmex.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	SessionKeyEmvCommon_PrimaryAccountNumber = SessionKeyEmvCommon.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	SessionKeyEmvCommon_PanSequenceNumber = SessionKeyEmvCommon.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	SessionKeyEmvCommon_ApplicationTransactionCounter = SessionKeyEmvCommon.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
-
-	SessionKeyMastercard_PrimaryAccountNumber = SessionKeyMastercard.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	SessionKeyMastercard_PanSequenceNumber = SessionKeyMastercard.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	SessionKeyMastercard_ApplicationTransactionCounter = SessionKeyMastercard.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
-
-	SessionKeyMastercard_UnpredictableNumber = SessionKeyMastercard.AddMember("UnpredictableNumber", _HexLengthEquals8)
-
-	SessionKeyEmv2000_PrimaryAccountNumber = SessionKeyEmv2000.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	SessionKeyEmv2000_PanSequenceNumber = SessionKeyEmv2000.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	SessionKeyEmv2000_ApplicationTransactionCounter = SessionKeyEmv2000.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
-
-	SessionKeyVisa_PrimaryAccountNumber = SessionKeyVisa.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	SessionKeyVisa_PanSequenceNumber = SessionKeyVisa.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	SessionKeyUnionPay_PrimaryAccountNumber = SessionKeyUnionPay.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	SessionKeyUnionPay_PanSequenceNumber = SessionKeyUnionPay.AddMember("PanSequenceNumber", _NumberLengthEquals2)
-
-	SessionKeyUnionPay_ApplicationTransactionCounter = SessionKeyUnionPay.AddMember("ApplicationTransactionCounter", _HexLengthEquals4)
-
-	SessionKeyDerivation_EmvCommon = SessionKeyDerivation.AddMember("EmvCommon", SessionKeyEmvCommon)
-
-	SessionKeyDerivation_Mastercard = SessionKeyDerivation.AddMember("Mastercard", SessionKeyMastercard)
-
-	SessionKeyDerivation_Emv2000 = SessionKeyDerivation.AddMember("Emv2000", SessionKeyEmv2000)
-
-	SessionKeyDerivation_Amex = SessionKeyDerivation.AddMember("Amex", SessionKeyAmex)
-
-	SessionKeyDerivation_Visa = SessionKeyDerivation.AddMember("Visa", SessionKeyVisa)
-
-	SessionKeyDerivation_UnionPay = SessionKeyDerivation.AddMember("UnionPay", SessionKeyUnionPay)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	TranslationPinDataIsoFormat034_PrimaryAccountNumber = TranslationPinDataIsoFormat034.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	TranslationPinDataAs2805Format0_PrimaryAccountNumber = TranslationPinDataAs2805Format0.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	TranslationIsoFormats_IsoFormat0 = TranslationIsoFormats.AddMember("IsoFormat0", TranslationPinDataIsoFormat034)
-
-	TranslationIsoFormats_IsoFormat1 = TranslationIsoFormats.AddMember("IsoFormat1", TranslationPinDataIsoFormat1)
-
-	TranslationIsoFormats_IsoFormat3 = TranslationIsoFormats.AddMember("IsoFormat3", TranslationPinDataIsoFormat034)
-
-	TranslationIsoFormats_IsoFormat4 = TranslationIsoFormats.AddMember("IsoFormat4", TranslationPinDataIsoFormat034)
-
-	TranslationIsoFormats_As2805Format0 = TranslationIsoFormats.AddMember("As2805Format0", TranslationPinDataAs2805Format0)
-
-	ValidationExceptionField_path = ValidationExceptionField.AddMember("path", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	VerificationFailedException_Reason = VerificationFailedException.AddMember("Reason", _VerificationFailedReason)
-
-	VerificationFailedException_Message = VerificationFailedException.AddMember("Message", smithyprelude.String)
-
-	VisaAmexDerivationOutputs_AuthorizationRequestKeyArn = VisaAmexDerivationOutputs.AddMember("AuthorizationRequestKeyArn", _KeyArn)
-
-	VisaAmexDerivationOutputs_AuthorizationRequestKeyCheckValue = VisaAmexDerivationOutputs.AddMember("AuthorizationRequestKeyCheckValue", _KeyCheckValue)
-
-	VisaAmexDerivationOutputs_CurrentPinPekArn = VisaAmexDerivationOutputs.AddMember("CurrentPinPekArn", _KeyArn)
-
-	VisaAmexDerivationOutputs_CurrentPinPekKeyCheckValue = VisaAmexDerivationOutputs.AddMember("CurrentPinPekKeyCheckValue", _KeyCheckValue)
-
-	WrappedKeyMaterial_Tr31KeyBlock = WrappedKeyMaterial.AddMember("Tr31KeyBlock", _Tr31WrappedKeyBlock)
-
-	WrappedKeyMaterial_DiffieHellmanSymmetricKey = WrappedKeyMaterial.AddMember("DiffieHellmanSymmetricKey", EcdhDerivationAttributes)
-
-	WrappedKey_WrappedKeyMaterial = WrappedKey.AddMember("WrappedKeyMaterial", WrappedKeyMaterial)
-
-	WrappedKey_KeyCheckValueAlgorithm = WrappedKey.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	WrappedWorkingKey_WrappedKeyMaterial = WrappedWorkingKey.AddMember("WrappedKeyMaterial", _KeyMaterial)
-
-	WrappedWorkingKey_KeyCheckValue = WrappedWorkingKey.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	WrappedWorkingKey_WrappedKeyMaterialFormat = WrappedWorkingKey.AddMember("WrappedKeyMaterialFormat", _WrappedKeyMaterialFormat)
-
-	DecryptDataInput_KeyIdentifier = DecryptDataInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType, &smithytraits.HTTPLabel{})
-
-	DecryptDataInput_CipherText = DecryptDataInput.AddMember("CipherText", _CipherTextType)
-
-	DecryptDataInput_DecryptionAttributes = DecryptDataInput.AddMember("DecryptionAttributes", EncryptionDecryptionAttributes)
-
-	DecryptDataInput_WrappedKey = DecryptDataInput.AddMember("WrappedKey", WrappedKey)
-
-	DecryptDataOutput_KeyArn = DecryptDataOutput.AddMember("KeyArn", _KeyArn)
-
-	DecryptDataOutput_KeyCheckValue = DecryptDataOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	DecryptDataOutput_PlainText = DecryptDataOutput.AddMember("PlainText", _PlainTextOutputType)
-
-	EncryptDataInput_KeyIdentifier = EncryptDataInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType, &smithytraits.HTTPLabel{})
-
-	EncryptDataInput_PlainText = EncryptDataInput.AddMember("PlainText", _PlainTextType)
-
-	EncryptDataInput_EncryptionAttributes = EncryptDataInput.AddMember("EncryptionAttributes", EncryptionDecryptionAttributes)
-
-	EncryptDataInput_WrappedKey = EncryptDataInput.AddMember("WrappedKey", WrappedKey)
-
-	EncryptDataOutput_KeyArn = EncryptDataOutput.AddMember("KeyArn", _KeyArn)
-
-	EncryptDataOutput_KeyCheckValue = EncryptDataOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	EncryptDataOutput_CipherText = EncryptDataOutput.AddMember("CipherText", _CipherTextType)
-
-	GenerateAs2805KekValidationInput_KeyIdentifier = GenerateAs2805KekValidationInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GenerateAs2805KekValidationInput_KekValidationType = GenerateAs2805KekValidationInput.AddMember("KekValidationType", As2805KekValidationType)
-
-	GenerateAs2805KekValidationInput_RandomKeySendVariantMask = GenerateAs2805KekValidationInput.AddMember("RandomKeySendVariantMask", RandomKeySendVariantMask)
-
-	GenerateAs2805KekValidationOutput_KeyArn = GenerateAs2805KekValidationOutput.AddMember("KeyArn", _KeyArn)
-
-	GenerateAs2805KekValidationOutput_KeyCheckValue = GenerateAs2805KekValidationOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	GenerateAs2805KekValidationOutput_RandomKeySend = GenerateAs2805KekValidationOutput.AddMember("RandomKeySend", _As2805RandomKeyMaterial)
-
-	GenerateAs2805KekValidationOutput_RandomKeyReceive = GenerateAs2805KekValidationOutput.AddMember("RandomKeyReceive", _As2805RandomKeyMaterial)
-
-	GenerateAuthRequestCryptogramInput_KeyIdentifier = GenerateAuthRequestCryptogramInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GenerateAuthRequestCryptogramInput_TransactionData = GenerateAuthRequestCryptogramInput.AddMember("TransactionData", _TransactionDataType)
-
-	GenerateAuthRequestCryptogramInput_MajorKeyDerivationMode = GenerateAuthRequestCryptogramInput.AddMember("MajorKeyDerivationMode", MajorKeyDerivationMode)
-
-	GenerateAuthRequestCryptogramInput_SessionKeyDerivationAttributes = GenerateAuthRequestCryptogramInput.AddMember("SessionKeyDerivationAttributes", SessionKeyDerivation)
-
-	GenerateAuthRequestCryptogramOutput_KeyArn = GenerateAuthRequestCryptogramOutput.AddMember("KeyArn", _KeyArn)
-
-	GenerateAuthRequestCryptogramOutput_KeyCheckValue = GenerateAuthRequestCryptogramOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	GenerateAuthRequestCryptogramOutput_AuthRequestCryptogram = GenerateAuthRequestCryptogramOutput.AddMember("AuthRequestCryptogram", _AuthRequestCryptogramType)
-
-	GenerateCardValidationDataInput_KeyIdentifier = GenerateCardValidationDataInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GenerateCardValidationDataInput_PrimaryAccountNumber = GenerateCardValidationDataInput.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	GenerateCardValidationDataInput_GenerationAttributes = GenerateCardValidationDataInput.AddMember("GenerationAttributes", CardGenerationAttributes)
-
-	GenerateCardValidationDataInput_ValidationDataLength = GenerateCardValidationDataInput.AddMember("ValidationDataLength", _IntegerRangeBetween3And5Type)
-
-	GenerateCardValidationDataOutput_KeyArn = GenerateCardValidationDataOutput.AddMember("KeyArn", _KeyArn)
-
-	GenerateCardValidationDataOutput_KeyCheckValue = GenerateCardValidationDataOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	GenerateCardValidationDataOutput_ValidationData = GenerateCardValidationDataOutput.AddMember("ValidationData", _ValidationDataType)
-
-	GenerateMacEmvPinChangeInput_NewPinPekIdentifier = GenerateMacEmvPinChangeInput.AddMember("NewPinPekIdentifier", _KeyArnOrKeyAliasType)
-
-	GenerateMacEmvPinChangeInput_NewEncryptedPinBlock = GenerateMacEmvPinChangeInput.AddMember("NewEncryptedPinBlock", _PinBlockLengthEquals16)
-
-	GenerateMacEmvPinChangeInput_PinBlockFormat = GenerateMacEmvPinChangeInput.AddMember("PinBlockFormat", PinBlockFormatForEmvPinChange)
-
-	GenerateMacEmvPinChangeInput_SecureMessagingIntegrityKeyIdentifier = GenerateMacEmvPinChangeInput.AddMember("SecureMessagingIntegrityKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GenerateMacEmvPinChangeInput_SecureMessagingConfidentialityKeyIdentifier = GenerateMacEmvPinChangeInput.AddMember("SecureMessagingConfidentialityKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GenerateMacEmvPinChangeInput_MessageData = GenerateMacEmvPinChangeInput.AddMember("MessageData", _CommandMessageDataType)
-
-	GenerateMacEmvPinChangeInput_DerivationMethodAttributes = GenerateMacEmvPinChangeInput.AddMember("DerivationMethodAttributes", DerivationMethodAttributes)
-
-	GenerateMacEmvPinChangeOutput_NewPinPekArn = GenerateMacEmvPinChangeOutput.AddMember("NewPinPekArn", _KeyArn)
-
-	GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyArn = GenerateMacEmvPinChangeOutput.AddMember("SecureMessagingIntegrityKeyArn", _KeyArn)
-
-	GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyArn = GenerateMacEmvPinChangeOutput.AddMember("SecureMessagingConfidentialityKeyArn", _KeyArn)
-
-	GenerateMacEmvPinChangeOutput_Mac = GenerateMacEmvPinChangeOutput.AddMember("Mac", _PinChangeMacOutputType)
-
-	GenerateMacEmvPinChangeOutput_EncryptedPinBlock = GenerateMacEmvPinChangeOutput.AddMember("EncryptedPinBlock", _EncryptedPinBlockType)
-
-	GenerateMacEmvPinChangeOutput_NewPinPekKeyCheckValue = GenerateMacEmvPinChangeOutput.AddMember("NewPinPekKeyCheckValue", _KeyCheckValue)
-
-	GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyCheckValue = GenerateMacEmvPinChangeOutput.AddMember("SecureMessagingIntegrityKeyCheckValue", _KeyCheckValue)
-
-	GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyCheckValue = GenerateMacEmvPinChangeOutput.AddMember("SecureMessagingConfidentialityKeyCheckValue", _KeyCheckValue)
-
-	GenerateMacEmvPinChangeOutput_VisaAmexDerivationOutputs = GenerateMacEmvPinChangeOutput.AddMember("VisaAmexDerivationOutputs", VisaAmexDerivationOutputs)
-
-	GenerateMacInput_KeyIdentifier = GenerateMacInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GenerateMacInput_MessageData = GenerateMacInput.AddMember("MessageData", _MessageDataType)
-
-	GenerateMacInput_GenerationAttributes = GenerateMacInput.AddMember("GenerationAttributes", MacAttributes)
-
-	GenerateMacInput_MacLength = GenerateMacInput.AddMember("MacLength", _IntegerRangeBetween4And32)
-
-	GenerateMacOutput_KeyArn = GenerateMacOutput.AddMember("KeyArn", _KeyArn)
-
-	GenerateMacOutput_KeyCheckValue = GenerateMacOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	GenerateMacOutput_Mac = GenerateMacOutput.AddMember("Mac", _MacOutputType)
-
-	GeneratePinDataInput_GenerationKeyIdentifier = GeneratePinDataInput.AddMember("GenerationKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GeneratePinDataInput_EncryptionKeyIdentifier = GeneratePinDataInput.AddMember("EncryptionKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GeneratePinDataInput_GenerationAttributes = GeneratePinDataInput.AddMember("GenerationAttributes", PinGenerationAttributes)
-
-	GeneratePinDataInput_PinDataLength = GeneratePinDataInput.AddMember("PinDataLength", _IntegerRangeBetween4And12)
-
-	GeneratePinDataInput_PrimaryAccountNumber = GeneratePinDataInput.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	GeneratePinDataInput_PinBlockFormat = GeneratePinDataInput.AddMember("PinBlockFormat", PinBlockFormatForPinData)
-
-	GeneratePinDataInput_EncryptionWrappedKey = GeneratePinDataInput.AddMember("EncryptionWrappedKey", WrappedKey)
-
-	GeneratePinDataOutput_GenerationKeyArn = GeneratePinDataOutput.AddMember("GenerationKeyArn", _KeyArn)
-
-	GeneratePinDataOutput_GenerationKeyCheckValue = GeneratePinDataOutput.AddMember("GenerationKeyCheckValue", _KeyCheckValue)
-
-	GeneratePinDataOutput_EncryptionKeyArn = GeneratePinDataOutput.AddMember("EncryptionKeyArn", _KeyArn)
-
-	GeneratePinDataOutput_EncryptionKeyCheckValue = GeneratePinDataOutput.AddMember("EncryptionKeyCheckValue", _KeyCheckValue)
-
-	GeneratePinDataOutput_EncryptedPinBlock = GeneratePinDataOutput.AddMember("EncryptedPinBlock", _EncryptedPinBlockType)
-
-	GeneratePinDataOutput_PinData = GeneratePinDataOutput.AddMember("PinData", PinData)
-
-	ReEncryptDataInput_IncomingKeyIdentifier = ReEncryptDataInput.AddMember("IncomingKeyIdentifier", _KeyArnOrKeyAliasType, &smithytraits.HTTPLabel{})
-
-	ReEncryptDataInput_OutgoingKeyIdentifier = ReEncryptDataInput.AddMember("OutgoingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ReEncryptDataInput_CipherText = ReEncryptDataInput.AddMember("CipherText", _CipherTextType)
-
-	ReEncryptDataInput_IncomingEncryptionAttributes = ReEncryptDataInput.AddMember("IncomingEncryptionAttributes", ReEncryptionAttributes)
-
-	ReEncryptDataInput_OutgoingEncryptionAttributes = ReEncryptDataInput.AddMember("OutgoingEncryptionAttributes", ReEncryptionAttributes)
-
-	ReEncryptDataInput_IncomingWrappedKey = ReEncryptDataInput.AddMember("IncomingWrappedKey", WrappedKey)
-
-	ReEncryptDataInput_OutgoingWrappedKey = ReEncryptDataInput.AddMember("OutgoingWrappedKey", WrappedKey)
-
-	ReEncryptDataOutput_KeyArn = ReEncryptDataOutput.AddMember("KeyArn", _KeyArn)
-
-	ReEncryptDataOutput_KeyCheckValue = ReEncryptDataOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	ReEncryptDataOutput_CipherText = ReEncryptDataOutput.AddMember("CipherText", _CipherTextType)
-
-	TranslateKeyMaterialInput_IncomingKeyMaterial = TranslateKeyMaterialInput.AddMember("IncomingKeyMaterial", IncomingKeyMaterial)
-
-	TranslateKeyMaterialInput_OutgoingKeyMaterial = TranslateKeyMaterialInput.AddMember("OutgoingKeyMaterial", OutgoingKeyMaterial)
-
-	TranslateKeyMaterialInput_KeyCheckValueAlgorithm = TranslateKeyMaterialInput.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	TranslateKeyMaterialOutput_WrappedKey = TranslateKeyMaterialOutput.AddMember("WrappedKey", WrappedWorkingKey)
-
-	TranslatePinDataInput_IncomingKeyIdentifier = TranslatePinDataInput.AddMember("IncomingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	TranslatePinDataInput_OutgoingKeyIdentifier = TranslatePinDataInput.AddMember("OutgoingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	TranslatePinDataInput_IncomingTranslationAttributes = TranslatePinDataInput.AddMember("IncomingTranslationAttributes", TranslationIsoFormats)
-
-	TranslatePinDataInput_OutgoingTranslationAttributes = TranslatePinDataInput.AddMember("OutgoingTranslationAttributes", TranslationIsoFormats)
-
-	TranslatePinDataInput_EncryptedPinBlock = TranslatePinDataInput.AddMember("EncryptedPinBlock", _HexEvenLengthBetween16And32)
-
-	TranslatePinDataInput_IncomingDukptAttributes = TranslatePinDataInput.AddMember("IncomingDukptAttributes", DukptDerivationAttributes)
-
-	TranslatePinDataInput_OutgoingDukptAttributes = TranslatePinDataInput.AddMember("OutgoingDukptAttributes", DukptDerivationAttributes)
-
-	TranslatePinDataInput_IncomingWrappedKey = TranslatePinDataInput.AddMember("IncomingWrappedKey", WrappedKey)
-
-	TranslatePinDataInput_OutgoingWrappedKey = TranslatePinDataInput.AddMember("OutgoingWrappedKey", WrappedKey)
-
-	TranslatePinDataInput_IncomingAs2805Attributes = TranslatePinDataInput.AddMember("IncomingAs2805Attributes", As2805PekDerivationAttributes)
-
-	TranslatePinDataOutput_PinBlock = TranslatePinDataOutput.AddMember("PinBlock", _EncryptedPinBlockType)
-
-	TranslatePinDataOutput_KeyArn = TranslatePinDataOutput.AddMember("KeyArn", _KeyArn)
-
-	TranslatePinDataOutput_KeyCheckValue = TranslatePinDataOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	VerifyAuthRequestCryptogramInput_KeyIdentifier = VerifyAuthRequestCryptogramInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	VerifyAuthRequestCryptogramInput_TransactionData = VerifyAuthRequestCryptogramInput.AddMember("TransactionData", _TransactionDataType)
-
-	VerifyAuthRequestCryptogramInput_AuthRequestCryptogram = VerifyAuthRequestCryptogramInput.AddMember("AuthRequestCryptogram", _AuthRequestCryptogramType)
-
-	VerifyAuthRequestCryptogramInput_MajorKeyDerivationMode = VerifyAuthRequestCryptogramInput.AddMember("MajorKeyDerivationMode", MajorKeyDerivationMode)
-
-	VerifyAuthRequestCryptogramInput_SessionKeyDerivationAttributes = VerifyAuthRequestCryptogramInput.AddMember("SessionKeyDerivationAttributes", SessionKeyDerivation)
-
-	VerifyAuthRequestCryptogramInput_AuthResponseAttributes = VerifyAuthRequestCryptogramInput.AddMember("AuthResponseAttributes", CryptogramAuthResponse)
-
-	VerifyAuthRequestCryptogramOutput_KeyArn = VerifyAuthRequestCryptogramOutput.AddMember("KeyArn", _KeyArn)
-
-	VerifyAuthRequestCryptogramOutput_KeyCheckValue = VerifyAuthRequestCryptogramOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	VerifyAuthRequestCryptogramOutput_AuthResponseValue = VerifyAuthRequestCryptogramOutput.AddMember("AuthResponseValue", _AuthResponseValueType)
-
-	VerifyCardValidationDataInput_KeyIdentifier = VerifyCardValidationDataInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	VerifyCardValidationDataInput_PrimaryAccountNumber = VerifyCardValidationDataInput.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	VerifyCardValidationDataInput_VerificationAttributes = VerifyCardValidationDataInput.AddMember("VerificationAttributes", CardVerificationAttributes)
-
-	VerifyCardValidationDataInput_ValidationData = VerifyCardValidationDataInput.AddMember("ValidationData", _ValidationDataType)
-
-	VerifyCardValidationDataOutput_KeyArn = VerifyCardValidationDataOutput.AddMember("KeyArn", _KeyArn)
-
-	VerifyCardValidationDataOutput_KeyCheckValue = VerifyCardValidationDataOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	VerifyMacInput_KeyIdentifier = VerifyMacInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	VerifyMacInput_MessageData = VerifyMacInput.AddMember("MessageData", _MessageDataType)
-
-	VerifyMacInput_Mac = VerifyMacInput.AddMember("Mac", _MacType)
-
-	VerifyMacInput_VerificationAttributes = VerifyMacInput.AddMember("VerificationAttributes", MacAttributes)
-
-	VerifyMacInput_MacLength = VerifyMacInput.AddMember("MacLength", _IntegerRangeBetween4And32)
-
-	VerifyMacOutput_KeyArn = VerifyMacOutput.AddMember("KeyArn", _KeyArn)
-
-	VerifyMacOutput_KeyCheckValue = VerifyMacOutput.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	VerifyPinDataInput_VerificationKeyIdentifier = VerifyPinDataInput.AddMember("VerificationKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	VerifyPinDataInput_EncryptionKeyIdentifier = VerifyPinDataInput.AddMember("EncryptionKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	VerifyPinDataInput_VerificationAttributes = VerifyPinDataInput.AddMember("VerificationAttributes", PinVerificationAttributes)
-
-	VerifyPinDataInput_EncryptedPinBlock = VerifyPinDataInput.AddMember("EncryptedPinBlock", _EncryptedPinBlockType)
-
-	VerifyPinDataInput_PrimaryAccountNumber = VerifyPinDataInput.AddMember("PrimaryAccountNumber", _PrimaryAccountNumberType)
-
-	VerifyPinDataInput_PinBlockFormat = VerifyPinDataInput.AddMember("PinBlockFormat", PinBlockFormatForPinData)
-
-	VerifyPinDataInput_PinDataLength = VerifyPinDataInput.AddMember("PinDataLength", _IntegerRangeBetween4And12)
-
-	VerifyPinDataInput_DukptAttributes = VerifyPinDataInput.AddMember("DukptAttributes", DukptAttributes)
-
-	VerifyPinDataInput_EncryptionWrappedKey = VerifyPinDataInput.AddMember("EncryptionWrappedKey", WrappedKey)
-
-	VerifyPinDataOutput_VerificationKeyArn = VerifyPinDataOutput.AddMember("VerificationKeyArn", _KeyArn)
-
-	VerifyPinDataOutput_VerificationKeyCheckValue = VerifyPinDataOutput.AddMember("VerificationKeyCheckValue", _KeyCheckValue)
-
-	VerifyPinDataOutput_EncryptionKeyArn = VerifyPinDataOutput.AddMember("EncryptionKeyArn", _KeyArn)
-
-	VerifyPinDataOutput_EncryptionKeyCheckValue = VerifyPinDataOutput.AddMember("EncryptionKeyCheckValue", _KeyCheckValue)
-
+const blob = "" +
+	"SecureMessagingConfidentialityKeyCheckValueSecureMessagingConfidentialityKeyIdentifierCertificateAut" +
+	"horityPublicKeyIdentifierSecureMessagingIntegrityKeyCheckValueSecureMessagingIntegrityKeyIdentifierS" +
+	"ecureMessagingConfidentialityKeyArnDiscoverDynamicCardVerificationCodeGenerateAuthRequestCryptogramO" +
+	"utputGenerateAuthRequestCryptogramInputAuthorizationRequestKeyCheckValueAuthorizationRequestKeyIdent" +
+	"ifierCryptogramVerificationArpcMethod1CryptogramVerificationArpcMethod2GenerateAs2805KekValidationOu" +
+	"tputIncomingDiffieHellmanTr31KeyBlockProprietaryAuthenticationDataTypeVerifyAuthRequestCryptogramOut" +
+	"putGenerateAs2805KekValidationInputGenerateCardValidationDataOutputVerifyAuthRequestCryptogramInputG" +
+	"enerateCardValidationDataInputTranslationPinDataAs2805Format0AsymmetricEncryptionAttributesEncryptio" +
+	"nDecryptionAttributesSecureMessagingIntegrityKeyArnSessionKeyDerivationAttributesTranslationPinDataI" +
+	"soFormat034VerifyCardValidationDataOutputApplicationTransactionCounterAs2805PekDerivationAttributesG" +
+	"enerateMacEmvPinChangeOutputIncomingTranslationAttributesOutgoingTranslationAttributesPinBlockFormat" +
+	"ForEmvPinChangePinValidationDataPadCharacterSymmetricEncryptionAttributesVerifyCardValidationDataInp" +
+	"utAmexCardSecurityCodeVersion1AmexCardSecurityCodeVersion2DynamicCardVerificationValueGenerateMacEmv" +
+	"PinChangeInputIncomingEncryptionAttributesIntegerRangeBetween3And5TypeOutgoingEncryptionAttributesPa" +
+	"ymentCryptographyDataPlaneTranslationPinDataIsoFormat1ValidationExceptionFieldListCardHolderVerifica" +
+	"tionValueDiffieHellmanDerivationDataHexEvenLengthBetween16And32VerificationFailedExceptionAuthorizat" +
+	"ionRequestKeyArnCardVerificationAttributesCurrentPinPekKeyCheckValueDerivationMethodAttributesKeyDer" +
+	"ivationHashAlgorithmSystemTraceAuditNumberTypeTranslateKeyMaterialOutputApplicationCryptogramTypeAut" +
+	"hRequestCryptogramTypeDiffieHellmanSymmetricKeyDukptDerivationAttributesDukptEncryptionAttributesEmv" +
+	"MajorKeyDerivationModeIntegerRangeBetween4And12IntegerRangeBetween4And32PinVerificationAttributesRes" +
+	"ourceNotFoundExceptionSessionDerivationDataTypeSessionKeyDerivationValueTranslateKeyMaterialInputVer" +
+	"ificationKeyCheckValueVerificationKeyIdentifierVisaAmexDerivationOutputsCardGenerationAttributesCurr" +
+	"entEncryptedPinBlockEcdhDerivationAttributesIncomingAs2805AttributesInitializationVectorTypeIntegerR" +
+	"angeBetween0And6PinBlockFormatForPinDataPrimaryAccountNumberTypeRandomKeySendVariantMaskSessionKeyDe" +
+	"rivationModeVerificationFailedReasonVisaPinVerificationValueWrappedKeyMaterialFormatAs2805KekValidat" +
+	"ionTypeAs2805RandomKeyMaterialCurrentPinPekIdentifierDecimalizationTableTypeEmvEncryptionAttributesE" +
+	"ncryptionKeyCheckValueEncryptionKeyIdentifierGenerationKeyCheckValueGenerationKeyIdentifierIncomingD" +
+	"ukptAttributesInternalServerExceptionOutgoingDukptAttributesPinGenerationAttributesPinVerificationKe" +
+	"yIndexAuthResponseAttributesCardVerificationValue1CardVerificationValue2CommandMessageDataTypeCrypto" +
+	"gramAuthResponseDukptIso9797Algorithm1DukptIso9797Algorithm3DukptKeyDerivationTypeEMV_COMMON_SESSION" +
+	"_KEYIbm3624PinVerificationKeyCheckValueAlgorithmMASTERCARD_SESSION_KEYNewPinPekKeyCheckValuePinBlock" +
+	"LengthEquals16PinBlockLengthPositionPinChangeMacOutputTypeReEncryptionAttributesTranslatePinDataOutp" +
+	"utAccessDeniedExceptionAuthResponseValueTypeEncryptedPinBlockTypeGeneratePinDataOutputHexLengthBetwe" +
+	"en2And4HexLengthBetween2And8IncomingKeyIdentifierKekValidationResponseKeyDerivationFunctionOutgoingK" +
+	"eyIdentifierPinValidationDataTypeSymmetricKeyAlgorithmTransactionAmountTypeTranslatePinDataInputTran" +
+	"slationIsoFormatsVerificationValueTypeWrappingKeyIdentifierCurrentPinAttributesEncryptionWrappedKeyG" +
+	"eneratePinDataInputIbm3624PinFromOffsetKekValidationRequestKeyArnOrKeyAliasTypeMasterCardAttributesN" +
+	"ewEncryptedPinBlockOutgoingTr31KeyBlockPrivateKeyIdentifierPublicKeyCertificateSessionKeyMastercardV" +
+	"alidationDataLengthDukptDerivationTypeDukptEncryptionModeEmvCommonAttributesHexLength16Or20Or24Incom" +
+	"ingKeyMaterialNewPinPekIdentifierNumberLengthEquals2OutgoingKeyMaterialPinBlockPaddingTypePlainTextO" +
+	"utputTypeReEncryptDataOutputSessionKeyEmvCommonThrottlingExceptionTr31WrappedKeyBlockTransactionData" +
+	"TypeUnpredictableNumberVerifyPinDataOutputCardExpiryDateTypeDeriveKeyAlgorithmFRONT_OF_PIN_BLOCKISO9" +
+	"797_ALGORITHM1ISO9797_ALGORITHM3IncomingWrappedKeyOutgoingWrappedKeyRandomKeyMaxLengthReEncryptDataI" +
+	"nputSessionKeyUnionPayVerificationKeyArnVerifyPinDataInputDecryptDataOutputEmv2000AttributesEmvEncry" +
+	"ptionModeGenerateMacOutputIbm3624NaturalPinMacAlgorithmDukptPanSequenceNumberSessionKeyEmv2000Shared" +
+	"InformationVARIANT_MASK_82C0WrappedWorkingKeyAuthResponseCodeCardStatusUpdateCurrentPinPekArnDecrypt" +
+	"DataInputEncryptionKeyArnGenerateMacInputGenerationKeyArnHexLengthEquals1HexLengthEquals4HexLengthEq" +
+	"uals8Ibm3624PinOffsetIbm3624RandomPinRandomKeyReceiveCertificateTypeDukptKeyVariantKeySerialNumberMa" +
+	"cAlgorithmEmvServiceCodeTypeVerifyMacOutputAmexAttributesCipherTextTypeISO_IEC_7816_4SessionKeyAmexS" +
+	"essionKeyVisaVerifyMacInputVisaAttributesBIDIRECTIONALMacAttributesPinDataLengthPinOffsetTypePlainTe" +
+	"xtTypeTrackDataTypeEMV_OPTION_AEMV_OPTION_BISO_FORMAT_0ISO_FORMAT_1ISO_FORMAT_3ISO_FORMAT_4NewPinPek" +
+	"ArnHMAC_SHA224HMAC_SHA256HMAC_SHA384HMAC_SHA512OAEP_SHA256OAEP_SHA512AS2805_4_1IsoFormat3IsoFormat4N" +
+	"IST_SP800NO_PADDINGResourceIdANSI_X963DukptCmacMacLengthOAEP_SHA1TDES_2KEYTDES_3KEYUNION_PAYfieldLis" +
+	"tBYTES_16BYTES_24RESPONSEAES_128AES_192AES_256BYTES_8EMV2000MacTypeREQUESTSHA_256SHA_384SHA_512messa" +
+	"geCFB128EmvMacStringmemberCFB64PKCS1AMEXCFB8CMACNONEUnitVISApathCBCECBOFB"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.paymentcryptographydata", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 4358, Target: 0, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4011, Target: 1, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 471, Target: 2, Traits: 2, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 270, Target: 3, Traits: 3, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 635, Target: 4, Traits: 4, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 999, Target: 5, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 999, Target: 6, Traits: 6, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3265, Target: 7, Traits: 7, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4009, Target: 8, Traits: 8, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1746, Target: 9, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3180, Target: 10, Traits: 10, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 570, Target: 11, Traits: 11, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 911, Target: 12, Traits: 12, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4828, Target: 13, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4123, Target: 14, Traits: 14, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1398, Target: 15, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 3202, Target: 16, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2879, Target: 624, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4843, Target: 18, Traits: 15, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 185, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 372, Target: 234, Traits: 15, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3559, Target: 80, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1202, Target: 25, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4142, Target: 42, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1230, Target: 27, Traits: 15, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4142, Target: 42, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4813, Target: 341, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 30, Traits: 18, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2484, Target: 31, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3639, Target: 228, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3349, Target: 231, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 970, Target: 34, Traits: 15, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1720, Target: 398, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3454, Target: 403, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2507, Target: 37, Traits: 18, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 761, Target: 38, Traits: 15, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3979, Target: 287, Traits: 15, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1797, Target: 40, Traits: 18, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3223, Target: 41, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4142, Target: 42, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2172, Target: 43, Traits: 15, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1202, Target: 25, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1230, Target: 27, Traits: 15, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2828, Target: 64, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2850, Target: 67, Traits: 15, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1482, Target: 51, Traits: 15, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 243, Target: 122, Traits: 15, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1258, Target: 127, Traits: 15, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1482, Target: 51, Traits: 15, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4104, Target: 183, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 182, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1616, Target: 55, Traits: 15, StrLen: 26, Count: 8, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1202, Target: 25, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1230, Target: 27, Traits: 15, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2828, Target: 64, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2850, Target: 67, Traits: 15, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1482, Target: 51, Traits: 15, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 243, Target: 122, Traits: 15, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1258, Target: 127, Traits: 15, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 235, Target: 92, Traits: 15, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2828, Target: 64, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4142, Target: 42, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4813, Target: 341, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2850, Target: 67, Traits: 15, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4142, Target: 42, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4753, Target: 69, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4857, Target: 70, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2872, Target: 71, Traits: 18, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2894, Target: 72, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 427, Target: 75, Traits: 15, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 460, Target: 77, Traits: 15, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 405, Target: 75, Traits: 15, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4545, Target: 185, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 438, Target: 77, Traits: 15, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4561, Target: 186, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 537, Target: 327, Traits: 17, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3559, Target: 80, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2530, Target: 234, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2196, Target: 301, Traits: 17, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2553, Target: 83, Traits: 18, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1668, Target: 84, Traits: 15, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3857, Target: 144, Traits: 15, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1202, Target: 18, Traits: 15, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2147, Target: 435, Traits: 15, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4375, Target: 139, Traits: 15, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3789, Target: 276, Traits: 15, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1509, Target: 90, Traits: 15, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 4494, Target: 383, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 235, Target: 92, Traits: 15, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4142, Target: 42, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4104, Target: 183, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 182, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2699, Target: 96, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4783, Target: 181, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3819, Target: 103, Traits: 15, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1847, Target: 99, Traits: 15, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4783, Target: 181, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2960, Target: 103, Traits: 15, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4768, Target: 118, Traits: 15, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3819, Target: 103, Traits: 15, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5265, Target: 625, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5274, Target: 625, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5325, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5332, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5339, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1872, Target: 109, Traits: 15, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4783, Target: 181, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1918, Target: 115, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2960, Target: 103, Traits: 15, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4768, Target: 118, Traits: 15, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2268, Target: 221, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3838, Target: 115, Traits: 15, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5467, Target: 625, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5464, Target: 625, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4768, Target: 118, Traits: 15, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4941, Target: 625, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5367, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5317, Target: 625, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 243, Target: 122, Traits: 15, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4104, Target: 183, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 182, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5006, Target: 402, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1258, Target: 127, Traits: 15, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4142, Target: 42, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4813, Target: 341, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 182, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2220, Target: 132, Traits: 15, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 86, Target: 234, Traits: 15, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3759, Target: 69, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3442, Target: 388, Traits: 15, StrLen: 12, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3370, Target: 237, Traits: 15, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1694, Target: 240, Traits: 15, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4494, Target: 383, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4375, Target: 139, Traits: 15, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 185, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3857, Target: 144, Traits: 15, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 30, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1918, Target: 159, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3971, Target: 305, Traits: 15, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3114, Target: 302, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2576, Target: 152, Traits: 15, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1900, Target: 162, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2022, Target: 342, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1918, Target: 159, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2268, Target: 221, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4392, Target: 159, Traits: 15, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5467, Target: 625, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5464, Target: 625, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1897, Target: 162, Traits: 15, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5019, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5031, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3244, Target: 165, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 791, Target: 166, Traits: 15, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1144, Target: 384, Traits: 15, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 761, Target: 38, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1847, Target: 109, Traits: 15, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1010, Target: 152, Traits: 15, StrLen: 3, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3843, Target: 171, Traits: 15, StrLen: 14, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5467, Target: 625, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5464, Target: 625, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5402, Target: 625, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5402, Target: 625, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5440, Target: 625, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5426, Target: 625, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5402, Target: 625, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5470, Target: 625, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1536, Target: 180, Traits: 18, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3876, Target: 181, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3286, Target: 182, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3307, Target: 183, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4657, Target: 184, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4673, Target: 185, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4689, Target: 186, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4426, Target: 187, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2553, Target: 83, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 184, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 320, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3619, Target: 191, Traits: 15, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2553, Target: 83, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 184, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 320, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4712, Target: 319, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4705, Target: 196, Traits: 15, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2203, Target: 165, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2553, Target: 83, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 184, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 320, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3004, Target: 201, Traits: 15, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2553, Target: 83, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 184, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 320, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4712, Target: 319, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4721, Target: 206, Traits: 15, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2553, Target: 83, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 184, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1115, Target: 320, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 504, Target: 210, Traits: 15, StrLen: 33, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3739, Target: 234, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 86, Target: 234, Traits: 15, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3759, Target: 69, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4160, Target: 388, Traits: 15, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3370, Target: 237, Traits: 15, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1694, Target: 240, Traits: 15, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1522, Target: 90, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4070, Target: 401, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3895, Target: 219, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 512, Target: 210, Traits: 15, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2268, Target: 221, Traits: 18, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2292, Target: 222, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1342, Target: 223, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1922, Target: 224, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1947, Target: 225, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2714, Target: 226, Traits: 19, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2879, Target: 624, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3639, Target: 228, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4160, Target: 388, Traits: 15, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4268, Target: 328, Traits: 15, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3349, Target: 231, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2364, Target: 37, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3659, Target: 234, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3026, Target: 236, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3370, Target: 237, Traits: 15, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5199, Target: 625, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5229, Target: 625, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1694, Target: 240, Traits: 15, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5374, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5381, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5388, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1755, Target: 244, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4443, Target: 245, Traits: 15, StrLen: 12, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4196, Target: 625, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4214, Target: 625, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5444, Target: 625, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5103, Target: 625, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5103, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5114, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5125, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5136, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5169, Target: 625, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4443, Target: 255, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4783, Target: 181, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4768, Target: 118, Traits: 15, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3819, Target: 103, Traits: 15, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4798, Target: 259, Traits: 15, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2388, Target: 353, Traits: 15, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2047, Target: 360, Traits: 15, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4954, Target: 265, Traits: 15, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1711, Target: 245, Traits: 15, StrLen: 9, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5408, Target: 259, Traits: 15, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2916, Target: 255, Traits: 15, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2938, Target: 255, Traits: 15, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5238, Target: 255, Traits: 15, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3145, Target: 271, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5360, Target: 272, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5019, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5031, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3679, Target: 276, Traits: 15, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 30, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2879, Target: 281, Traits: 18, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3933, Target: 282, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3952, Target: 283, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 525, Target: 285, Traits: 15, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3719, Target: 285, Traits: 15, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3538, Target: 234, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3979, Target: 287, Traits: 15, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5431, Target: 625, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5256, Target: 625, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5147, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5158, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1086, Target: 292, Traits: 15, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5043, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5055, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5067, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2316, Target: 296, Traits: 15, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5043, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5055, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5067, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5079, Target: 625, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3092, Target: 301, Traits: 18, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3114, Target: 302, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5448, Target: 625, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4178, Target: 625, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3971, Target: 305, Traits: 15, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5209, Target: 625, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4871, Target: 625, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3136, Target: 308, Traits: 18, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 741, Target: 309, Traits: 15, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 4712, Target: 319, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1269, Target: 429, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2760, Target: 312, Traits: 15, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2436, Target: 442, Traits: 15, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2436, Target: 447, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4705, Target: 196, Traits: 15, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4426, Target: 187, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4721, Target: 206, Traits: 15, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3619, Target: 191, Traits: 15, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4980, Target: 319, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3412, Target: 320, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1972, Target: 321, Traits: 15, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2436, Target: 444, Traits: 15, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3004, Target: 201, Traits: 15, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3990, Target: 324, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4993, Target: 325, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 18, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 537, Target: 327, Traits: 18, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4268, Target: 328, Traits: 15, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5346, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5301, Target: 625, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5309, Target: 625, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2364, Target: 332, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4511, Target: 625, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4511, Target: 625, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3158, Target: 335, Traits: 15, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1144, Target: 384, Traits: 15, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 761, Target: 38, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1847, Target: 109, Traits: 15, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1997, Target: 339, Traits: 20, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5219, Target: 624, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4813, Target: 341, Traits: 18, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2022, Target: 342, Traits: 18, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4885, Target: 343, Traits: 15, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 851, Target: 346, Traits: 15, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3857, Target: 367, Traits: 15, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3789, Target: 371, Traits: 15, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4375, Target: 363, Traits: 15, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1202, Target: 343, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2147, Target: 380, Traits: 15, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4314, Target: 376, Traits: 15, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2388, Target: 353, Traits: 15, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2982, Target: 625, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5353, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5436, Target: 625, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3048, Target: 625, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5456, Target: 625, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5283, Target: 625, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2047, Target: 360, Traits: 15, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1772, Target: 30, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 185, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4477, Target: 363, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 185, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4028, Target: 367, Traits: 15, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 185, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3779, Target: 371, Traits: 15, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 185, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4104, Target: 186, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4304, Target: 376, Traits: 15, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 185, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4899, Target: 380, Traits: 15, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4494, Target: 383, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1144, Target: 384, Traits: 15, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1918, Target: 171, Traits: 15, StrLen: 4, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2268, Target: 221, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3979, Target: 287, Traits: 15, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3433, Target: 388, Traits: 15, StrLen: 21, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5265, Target: 625, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5274, Target: 625, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5325, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5332, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5339, Target: 625, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5114, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5125, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5136, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5103, Target: 625, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1720, Target: 398, Traits: 15, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4047, Target: 399, Traits: 21, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2879, Target: 624, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4066, Target: 401, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5006, Target: 402, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3454, Target: 403, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4085, Target: 404, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3496, Target: 405, Traits: 15, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 899, Target: 413, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1444, Target: 415, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5179, Target: 413, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5189, Target: 413, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 748, Target: 411, Traits: 15, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 730, Target: 411, Traits: 15, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 881, Target: 413, Traits: 15, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1426, Target: 415, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3415, Target: 416, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1454, Target: 417, Traits: 22, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5395, Target: 624, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5292, Target: 423, Traits: 15, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1454, Target: 420, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5460, Target: 624, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5395, Target: 624, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1454, Target: 423, Traits: 15, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5420, Target: 420, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1563, Target: 425, Traits: 23, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2430, Target: 428, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2879, Target: 624, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2412, Target: 428, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3517, Target: 429, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2147, Target: 430, Traits: 15, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1590, Target: 233, Traits: 15, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 339, Target: 235, Traits: 15, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4577, Target: 233, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1642, Target: 235, Traits: 15, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4927, Target: 435, Traits: 15, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4460, Target: 282, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 941, Target: 185, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 372, Target: 234, Traits: 15, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3559, Target: 80, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2436, Target: 442, Traits: 15, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2783, Target: 222, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2436, Target: 444, Traits: 15, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2783, Target: 222, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1269, Target: 429, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2436, Target: 447, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2203, Target: 165, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2783, Target: 222, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2460, Target: 450, Traits: 15, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2460, Target: 453, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3026, Target: 236, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2460, Target: 453, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 525, Target: 401, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1822, Target: 132, Traits: 15, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2460, Target: 456, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4528, Target: 457, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2460, Target: 244, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2460, Target: 456, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4593, Target: 461, Traits: 15, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4857, Target: 70, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 801, Target: 166, Traits: 15, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2460, Target: 450, Traits: 15, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4358, Target: 466, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3990, Target: 324, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4288, Target: 470, Traits: 15, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3990, Target: 325, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 771, Target: 166, Traits: 15, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2460, Target: 450, Traits: 15, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4011, Target: 475, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4857, Target: 70, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 603, Target: 479, Traits: 15, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2490, Target: 31, Traits: 15, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2364, Target: 332, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 471, Target: 483, Traits: 15, StrLen: 33, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2364, Target: 37, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4737, Target: 37, Traits: 17, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 305, Target: 488, Traits: 15, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4085, Target: 404, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 851, Target: 346, Traits: 15, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 270, Target: 493, Traits: 15, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 278, Target: 40, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 699, Target: 497, Traits: 15, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2176, Target: 43, Traits: 15, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3799, Target: 223, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 635, Target: 502, Traits: 15, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 647, Target: 416, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1286, Target: 506, Traits: 15, StrLen: 28, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3914, Target: 234, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3699, Target: 301, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1086, Target: 292, Traits: 15, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 162, Target: 234, Traits: 15, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 43, Target: 234, Traits: 15, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2879, Target: 71, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1668, Target: 84, Traits: 15, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 999, Target: 514, Traits: 15, StrLen: 29, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5091, Target: 233, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 821, Target: 233, Traits: 15, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 199, Target: 233, Traits: 15, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1007, Target: 308, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2203, Target: 165, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3070, Target: 235, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 125, Target: 235, Traits: 15, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 235, Traits: 15, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2147, Target: 430, Traits: 15, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4625, Target: 524, Traits: 15, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2879, Target: 281, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2176, Target: 265, Traits: 15, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 5247, Target: 225, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4409, Target: 529, Traits: 15, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1007, Target: 271, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3599, Target: 533, Traits: 15, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2668, Target: 234, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2622, Target: 234, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2176, Target: 312, Traits: 15, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4967, Target: 224, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1086, Target: 296, Traits: 15, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3579, Target: 450, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3265, Target: 541, Traits: 15, StrLen: 21, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4641, Target: 233, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2645, Target: 235, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4609, Target: 233, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2599, Target: 235, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2203, Target: 165, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 741, Target: 309, Traits: 15, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4286, Target: 548, Traits: 15, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3328, Target: 234, Traits: 24, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3391, Target: 234, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4857, Target: 70, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1314, Target: 335, Traits: 15, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1370, Target: 335, Traits: 15, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4232, Target: 450, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4250, Target: 450, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4009, Target: 556, Traits: 15, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4857, Target: 70, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2072, Target: 560, Traits: 15, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3895, Target: 219, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3952, Target: 283, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3026, Target: 236, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1746, Target: 564, Traits: 15, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2460, Target: 457, Traits: 15, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3475, Target: 566, Traits: 15, StrLen: 21, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3328, Target: 234, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3391, Target: 234, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1028, Target: 405, Traits: 15, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1057, Target: 405, Traits: 15, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2203, Target: 180, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2691, Target: 99, Traits: 15, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2737, Target: 99, Traits: 15, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4232, Target: 450, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4250, Target: 450, Traits: 15, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2244, Target: 34, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3180, Target: 577, Traits: 15, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1086, Target: 165, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 667, Target: 581, Traits: 15, StrLen: 32, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4085, Target: 404, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 278, Target: 40, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 273, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 851, Target: 346, Traits: 15, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2806, Target: 72, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 570, Target: 588, Traits: 15, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3223, Target: 41, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1173, Target: 592, Traits: 15, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1620, Target: 55, Traits: 15, StrLen: 22, Count: 8, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 647, Target: 416, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 911, Target: 597, Traits: 15, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4913, Target: 600, Traits: 15, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 234, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2879, Target: 281, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1007, Target: 272, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1620, Target: 265, Traits: 15, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 5247, Target: 225, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4828, Target: 606, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 229, Target: 233, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 235, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4340, Target: 609, Traits: 15, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2122, Target: 234, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2622, Target: 234, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1620, Target: 321, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2203, Target: 165, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2340, Target: 326, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1086, Target: 296, Traits: 15, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4967, Target: 224, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2699, Target: 96, Traits: 15, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3579, Target: 450, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4123, Target: 619, Traits: 15, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4322, Target: 233, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2097, Target: 235, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4609, Target: 233, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2599, Target: 235, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5414, Target: 624, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 5452, Target: 625, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/keys/{KeyIdentifier}/decrypt",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/keys/{KeyIdentifier}/encrypt",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/as2805kekvalidation/generate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/cryptogram/generate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/cardvalidationdata/generate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/mac/generate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/macemvpinchange/generate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/pindata/generate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/keys/{IncomingKeyIdentifier}/reencrypt",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/keymaterial/translate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/pindata/translate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/cryptogram/verify",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/cardvalidationdata/verify",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/mac/verify",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/pindata/verify",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+	},
 }
+
+var handles = [626]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+}
+
+var DecryptData = &handles[0]
+
+var EncryptData = &handles[1]
+
+var GenerateAs2805KekValidation = &handles[2]
+
+var GenerateAuthRequestCryptogram = &handles[3]
+
+var GenerateCardValidationData = &handles[4]
+
+var GenerateMac = &handles[5]
+
+var GenerateMacEmvPinChange = &handles[6]
+
+var GeneratePinData = &handles[7]
+
+var ReEncryptData = &handles[8]
+
+var TranslateKeyMaterial = &handles[9]
+
+var TranslatePinData = &handles[10]
+
+var VerifyAuthRequestCryptogram = &handles[11]
+
+var VerifyCardValidationData = &handles[12]
+
+var VerifyMac = &handles[13]
+
+var VerifyPinData = &handles[14]
+
+var _PaymentCryptographyDataPlane = &handles[15]
+
+var AccessDeniedException = &handles[16]
+var AccessDeniedException_Message = &handles[17]
+
+var AmexAttributes = &handles[18]
+var AmexAttributes_MajorKeyDerivationMode = &handles[19]
+var AmexAttributes_PrimaryAccountNumber = &handles[20]
+var AmexAttributes_PanSequenceNumber = &handles[21]
+var AmexAttributes_ApplicationTransactionCounter = &handles[22]
+var AmexAttributes_AuthorizationRequestKeyIdentifier = &handles[23]
+var AmexAttributes_CurrentPinAttributes = &handles[24]
+
+var AmexCardSecurityCodeVersion1 = &handles[25]
+var AmexCardSecurityCodeVersion1_CardExpiryDate = &handles[26]
+
+var AmexCardSecurityCodeVersion2 = &handles[27]
+var AmexCardSecurityCodeVersion2_CardExpiryDate = &handles[28]
+var AmexCardSecurityCodeVersion2_ServiceCode = &handles[29]
+
+var _ApplicationCryptogramType = &handles[30]
+
+var As2805KekValidationType = &handles[31]
+var As2805KekValidationType_KekValidationRequest = &handles[32]
+var As2805KekValidationType_KekValidationResponse = &handles[33]
+
+var As2805PekDerivationAttributes = &handles[34]
+var As2805PekDerivationAttributes_SystemTraceAuditNumber = &handles[35]
+var As2805PekDerivationAttributes_TransactionAmount = &handles[36]
+
+var _As2805RandomKeyMaterial = &handles[37]
+
+var AsymmetricEncryptionAttributes = &handles[38]
+var AsymmetricEncryptionAttributes_PaddingType = &handles[39]
+
+var _AuthRequestCryptogramType = &handles[40]
+
+var _AuthResponseValueType = &handles[41]
+
+var _CardExpiryDateType = &handles[42]
+
+var CardGenerationAttributes = &handles[43]
+var CardGenerationAttributes_AmexCardSecurityCodeVersion1 = &handles[44]
+var CardGenerationAttributes_AmexCardSecurityCodeVersion2 = &handles[45]
+var CardGenerationAttributes_CardVerificationValue1 = &handles[46]
+var CardGenerationAttributes_CardVerificationValue2 = &handles[47]
+var CardGenerationAttributes_CardHolderVerificationValue = &handles[48]
+var CardGenerationAttributes_DynamicCardVerificationCode = &handles[49]
+var CardGenerationAttributes_DynamicCardVerificationValue = &handles[50]
+
+var CardHolderVerificationValue = &handles[51]
+var CardHolderVerificationValue_UnpredictableNumber = &handles[52]
+var CardHolderVerificationValue_PanSequenceNumber = &handles[53]
+var CardHolderVerificationValue_ApplicationTransactionCounter = &handles[54]
+
+var CardVerificationAttributes = &handles[55]
+var CardVerificationAttributes_AmexCardSecurityCodeVersion1 = &handles[56]
+var CardVerificationAttributes_AmexCardSecurityCodeVersion2 = &handles[57]
+var CardVerificationAttributes_CardVerificationValue1 = &handles[58]
+var CardVerificationAttributes_CardVerificationValue2 = &handles[59]
+var CardVerificationAttributes_CardHolderVerificationValue = &handles[60]
+var CardVerificationAttributes_DynamicCardVerificationCode = &handles[61]
+var CardVerificationAttributes_DynamicCardVerificationValue = &handles[62]
+var CardVerificationAttributes_DiscoverDynamicCardVerificationCode = &handles[63]
+
+var CardVerificationValue1 = &handles[64]
+var CardVerificationValue1_CardExpiryDate = &handles[65]
+var CardVerificationValue1_ServiceCode = &handles[66]
+
+var CardVerificationValue2 = &handles[67]
+var CardVerificationValue2_CardExpiryDate = &handles[68]
+
+var _CertificateType = &handles[69]
+
+var _CipherTextType = &handles[70]
+
+var _CommandMessageDataType = &handles[71]
+
+var CryptogramAuthResponse = &handles[72]
+var CryptogramAuthResponse_ArpcMethod1 = &handles[73]
+var CryptogramAuthResponse_ArpcMethod2 = &handles[74]
+
+var CryptogramVerificationArpcMethod1 = &handles[75]
+var CryptogramVerificationArpcMethod1_AuthResponseCode = &handles[76]
+
+var CryptogramVerificationArpcMethod2 = &handles[77]
+var CryptogramVerificationArpcMethod2_CardStatusUpdate = &handles[78]
+var CryptogramVerificationArpcMethod2_ProprietaryAuthenticationData = &handles[79]
+
+var CurrentPinAttributes = &handles[80]
+var CurrentPinAttributes_CurrentPinPekIdentifier = &handles[81]
+var CurrentPinAttributes_CurrentEncryptedPinBlock = &handles[82]
+
+var _DecimalizationTableType = &handles[83]
+
+var DerivationMethodAttributes = &handles[84]
+var DerivationMethodAttributes_EmvCommon = &handles[85]
+var DerivationMethodAttributes_Amex = &handles[86]
+var DerivationMethodAttributes_Visa = &handles[87]
+var DerivationMethodAttributes_Emv2000 = &handles[88]
+var DerivationMethodAttributes_Mastercard = &handles[89]
+
+var DiffieHellmanDerivationData = &handles[90]
+var DiffieHellmanDerivationData_SharedInformation = &handles[91]
+
+var DiscoverDynamicCardVerificationCode = &handles[92]
+var DiscoverDynamicCardVerificationCode_CardExpiryDate = &handles[93]
+var DiscoverDynamicCardVerificationCode_UnpredictableNumber = &handles[94]
+var DiscoverDynamicCardVerificationCode_ApplicationTransactionCounter = &handles[95]
+
+var DukptAttributes = &handles[96]
+var DukptAttributes_KeySerialNumber = &handles[97]
+var DukptAttributes_DukptDerivationType = &handles[98]
+
+var DukptDerivationAttributes = &handles[99]
+var DukptDerivationAttributes_KeySerialNumber = &handles[100]
+var DukptDerivationAttributes_DukptKeyDerivationType = &handles[101]
+var DukptDerivationAttributes_DukptKeyVariant = &handles[102]
+
+var DukptDerivationType = &handles[103]
+var DukptDerivationType_TDES_2KEY = &handles[104]
+var DukptDerivationType_TDES_3KEY = &handles[105]
+var DukptDerivationType_AES_128 = &handles[106]
+var DukptDerivationType_AES_192 = &handles[107]
+var DukptDerivationType_AES_256 = &handles[108]
+
+var DukptEncryptionAttributes = &handles[109]
+var DukptEncryptionAttributes_KeySerialNumber = &handles[110]
+var DukptEncryptionAttributes_Mode = &handles[111]
+var DukptEncryptionAttributes_DukptKeyDerivationType = &handles[112]
+var DukptEncryptionAttributes_DukptKeyVariant = &handles[113]
+var DukptEncryptionAttributes_InitializationVector = &handles[114]
+
+var DukptEncryptionMode = &handles[115]
+var DukptEncryptionMode_ECB = &handles[116]
+var DukptEncryptionMode_CBC = &handles[117]
+
+var DukptKeyVariant = &handles[118]
+var DukptKeyVariant_BIDIRECTIONAL = &handles[119]
+var DukptKeyVariant_REQUEST = &handles[120]
+var DukptKeyVariant_RESPONSE = &handles[121]
+
+var DynamicCardVerificationCode = &handles[122]
+var DynamicCardVerificationCode_UnpredictableNumber = &handles[123]
+var DynamicCardVerificationCode_PanSequenceNumber = &handles[124]
+var DynamicCardVerificationCode_ApplicationTransactionCounter = &handles[125]
+var DynamicCardVerificationCode_TrackData = &handles[126]
+
+var DynamicCardVerificationValue = &handles[127]
+var DynamicCardVerificationValue_PanSequenceNumber = &handles[128]
+var DynamicCardVerificationValue_CardExpiryDate = &handles[129]
+var DynamicCardVerificationValue_ServiceCode = &handles[130]
+var DynamicCardVerificationValue_ApplicationTransactionCounter = &handles[131]
+
+var EcdhDerivationAttributes = &handles[132]
+var EcdhDerivationAttributes_CertificateAuthorityPublicKeyIdentifier = &handles[133]
+var EcdhDerivationAttributes_PublicKeyCertificate = &handles[134]
+var EcdhDerivationAttributes_KeyAlgorithm = &handles[135]
+var EcdhDerivationAttributes_KeyDerivationFunction = &handles[136]
+var EcdhDerivationAttributes_KeyDerivationHashAlgorithm = &handles[137]
+var EcdhDerivationAttributes_SharedInformation = &handles[138]
+
+var Emv2000Attributes = &handles[139]
+var Emv2000Attributes_MajorKeyDerivationMode = &handles[140]
+var Emv2000Attributes_PrimaryAccountNumber = &handles[141]
+var Emv2000Attributes_PanSequenceNumber = &handles[142]
+var Emv2000Attributes_ApplicationTransactionCounter = &handles[143]
+
+var EmvCommonAttributes = &handles[144]
+var EmvCommonAttributes_MajorKeyDerivationMode = &handles[145]
+var EmvCommonAttributes_PrimaryAccountNumber = &handles[146]
+var EmvCommonAttributes_PanSequenceNumber = &handles[147]
+var EmvCommonAttributes_ApplicationCryptogram = &handles[148]
+var EmvCommonAttributes_Mode = &handles[149]
+var EmvCommonAttributes_PinBlockPaddingType = &handles[150]
+var EmvCommonAttributes_PinBlockLengthPosition = &handles[151]
+
+var EmvEncryptionAttributes = &handles[152]
+var EmvEncryptionAttributes_MajorKeyDerivationMode = &handles[153]
+var EmvEncryptionAttributes_PrimaryAccountNumber = &handles[154]
+var EmvEncryptionAttributes_PanSequenceNumber = &handles[155]
+var EmvEncryptionAttributes_SessionDerivationData = &handles[156]
+var EmvEncryptionAttributes_Mode = &handles[157]
+var EmvEncryptionAttributes_InitializationVector = &handles[158]
+
+var EmvEncryptionMode = &handles[159]
+var EmvEncryptionMode_ECB = &handles[160]
+var EmvEncryptionMode_CBC = &handles[161]
+
+var EmvMajorKeyDerivationMode = &handles[162]
+var EmvMajorKeyDerivationMode_EMV_OPTION_A = &handles[163]
+var EmvMajorKeyDerivationMode_EMV_OPTION_B = &handles[164]
+
+var _EncryptedPinBlockType = &handles[165]
+
+var EncryptionDecryptionAttributes = &handles[166]
+var EncryptionDecryptionAttributes_Symmetric = &handles[167]
+var EncryptionDecryptionAttributes_Asymmetric = &handles[168]
+var EncryptionDecryptionAttributes_Dukpt = &handles[169]
+var EncryptionDecryptionAttributes_Emv = &handles[170]
+
+var EncryptionMode = &handles[171]
+var EncryptionMode_ECB = &handles[172]
+var EncryptionMode_CBC = &handles[173]
+var EncryptionMode_CFB = &handles[174]
+var EncryptionMode_CFB1 = &handles[175]
+var EncryptionMode_CFB8 = &handles[176]
+var EncryptionMode_CFB64 = &handles[177]
+var EncryptionMode_CFB128 = &handles[178]
+var EncryptionMode_OFB = &handles[179]
+
+var _HexEvenLengthBetween16And32 = &handles[180]
+
+var _HexLength16Or20Or24 = &handles[181]
+
+var _HexLengthBetween2And4 = &handles[182]
+
+var _HexLengthBetween2And8 = &handles[183]
+
+var _HexLengthEquals1 = &handles[184]
+
+var _HexLengthEquals4 = &handles[185]
+
+var _HexLengthEquals8 = &handles[186]
+
+var Ibm3624NaturalPin = &handles[187]
+var Ibm3624NaturalPin_DecimalizationTable = &handles[188]
+var Ibm3624NaturalPin_PinValidationDataPadCharacter = &handles[189]
+var Ibm3624NaturalPin_PinValidationData = &handles[190]
+
+var Ibm3624PinFromOffset = &handles[191]
+var Ibm3624PinFromOffset_DecimalizationTable = &handles[192]
+var Ibm3624PinFromOffset_PinValidationDataPadCharacter = &handles[193]
+var Ibm3624PinFromOffset_PinValidationData = &handles[194]
+var Ibm3624PinFromOffset_PinOffset = &handles[195]
+
+var Ibm3624PinOffset = &handles[196]
+var Ibm3624PinOffset_EncryptedPinBlock = &handles[197]
+var Ibm3624PinOffset_DecimalizationTable = &handles[198]
+var Ibm3624PinOffset_PinValidationDataPadCharacter = &handles[199]
+var Ibm3624PinOffset_PinValidationData = &handles[200]
+
+var Ibm3624PinVerification = &handles[201]
+var Ibm3624PinVerification_DecimalizationTable = &handles[202]
+var Ibm3624PinVerification_PinValidationDataPadCharacter = &handles[203]
+var Ibm3624PinVerification_PinValidationData = &handles[204]
+var Ibm3624PinVerification_PinOffset = &handles[205]
+
+var Ibm3624RandomPin = &handles[206]
+var Ibm3624RandomPin_DecimalizationTable = &handles[207]
+var Ibm3624RandomPin_PinValidationDataPadCharacter = &handles[208]
+var Ibm3624RandomPin_PinValidationData = &handles[209]
+
+var IncomingDiffieHellmanTr31KeyBlock = &handles[210]
+var IncomingDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = &handles[211]
+var IncomingDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = &handles[212]
+var IncomingDiffieHellmanTr31KeyBlock_PublicKeyCertificate = &handles[213]
+var IncomingDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = &handles[214]
+var IncomingDiffieHellmanTr31KeyBlock_KeyDerivationFunction = &handles[215]
+var IncomingDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = &handles[216]
+var IncomingDiffieHellmanTr31KeyBlock_DerivationData = &handles[217]
+var IncomingDiffieHellmanTr31KeyBlock_WrappedKeyBlock = &handles[218]
+
+var IncomingKeyMaterial = &handles[219]
+var IncomingKeyMaterial_DiffieHellmanTr31KeyBlock = &handles[220]
+
+var _InitializationVectorType = &handles[221]
+
+var _IntegerRangeBetween0And6 = &handles[222]
+
+var _IntegerRangeBetween3And5Type = &handles[223]
+
+var _IntegerRangeBetween4And12 = &handles[224]
+
+var _IntegerRangeBetween4And32 = &handles[225]
+
+var InternalServerException = &handles[226]
+var InternalServerException_Message = &handles[227]
+
+var KekValidationRequest = &handles[228]
+var KekValidationRequest_DeriveKeyAlgorithm = &handles[229]
+var KekValidationRequest_RandomKeyMaxLength = &handles[230]
+
+var KekValidationResponse = &handles[231]
+var KekValidationResponse_RandomKeySend = &handles[232]
+
+var _KeyArn = &handles[233]
+
+var _KeyArnOrKeyAliasType = &handles[234]
+
+var _KeyCheckValue = &handles[235]
+
+var _KeyCheckValueAlgorithm = &handles[236]
+
+var KeyDerivationFunction = &handles[237]
+var KeyDerivationFunction_NIST_SP800 = &handles[238]
+var KeyDerivationFunction_ANSI_X963 = &handles[239]
+
+var KeyDerivationHashAlgorithm = &handles[240]
+var KeyDerivationHashAlgorithm_SHA_256 = &handles[241]
+var KeyDerivationHashAlgorithm_SHA_384 = &handles[242]
+var KeyDerivationHashAlgorithm_SHA_512 = &handles[243]
+
+var _KeyMaterial = &handles[244]
+
+var MacAlgorithm = &handles[245]
+var MacAlgorithm_ISO9797_ALGORITHM1 = &handles[246]
+var MacAlgorithm_ISO9797_ALGORITHM3 = &handles[247]
+var MacAlgorithm_CMAC = &handles[248]
+var MacAlgorithm_HMAC = &handles[249]
+var MacAlgorithm_HMAC_SHA224 = &handles[250]
+var MacAlgorithm_HMAC_SHA256 = &handles[251]
+var MacAlgorithm_HMAC_SHA384 = &handles[252]
+var MacAlgorithm_HMAC_SHA512 = &handles[253]
+var MacAlgorithm_AS2805_4_1 = &handles[254]
+
+var MacAlgorithmDukpt = &handles[255]
+var MacAlgorithmDukpt_KeySerialNumber = &handles[256]
+var MacAlgorithmDukpt_DukptKeyVariant = &handles[257]
+var MacAlgorithmDukpt_DukptDerivationType = &handles[258]
+
+var MacAlgorithmEmv = &handles[259]
+var MacAlgorithmEmv_MajorKeyDerivationMode = &handles[260]
+var MacAlgorithmEmv_PrimaryAccountNumber = &handles[261]
+var MacAlgorithmEmv_PanSequenceNumber = &handles[262]
+var MacAlgorithmEmv_SessionKeyDerivationMode = &handles[263]
+var MacAlgorithmEmv_SessionKeyDerivationValue = &handles[264]
+
+var MacAttributes = &handles[265]
+var MacAttributes_Algorithm = &handles[266]
+var MacAttributes_EmvMac = &handles[267]
+var MacAttributes_DukptIso9797Algorithm1 = &handles[268]
+var MacAttributes_DukptIso9797Algorithm3 = &handles[269]
+var MacAttributes_DukptCmac = &handles[270]
+
+var _MacOutputType = &handles[271]
+
+var _MacType = &handles[272]
+
+var MajorKeyDerivationMode = &handles[273]
+var MajorKeyDerivationMode_EMV_OPTION_A = &handles[274]
+var MajorKeyDerivationMode_EMV_OPTION_B = &handles[275]
+
+var MasterCardAttributes = &handles[276]
+var MasterCardAttributes_MajorKeyDerivationMode = &handles[277]
+var MasterCardAttributes_PrimaryAccountNumber = &handles[278]
+var MasterCardAttributes_PanSequenceNumber = &handles[279]
+var MasterCardAttributes_ApplicationCryptogram = &handles[280]
+
+var _MessageDataType = &handles[281]
+
+var _NumberLengthEquals2 = &handles[282]
+
+var OutgoingKeyMaterial = &handles[283]
+var OutgoingKeyMaterial_Tr31KeyBlock = &handles[284]
+
+var OutgoingTr31KeyBlock = &handles[285]
+var OutgoingTr31KeyBlock_WrappingKeyIdentifier = &handles[286]
+
+var PaddingType = &handles[287]
+var PaddingType_PKCS1 = &handles[288]
+var PaddingType_OAEP_SHA1 = &handles[289]
+var PaddingType_OAEP_SHA256 = &handles[290]
+var PaddingType_OAEP_SHA512 = &handles[291]
+
+var PinBlockFormatForEmvPinChange = &handles[292]
+var PinBlockFormatForEmvPinChange_ISO_FORMAT_0 = &handles[293]
+var PinBlockFormatForEmvPinChange_ISO_FORMAT_1 = &handles[294]
+var PinBlockFormatForEmvPinChange_ISO_FORMAT_3 = &handles[295]
+
+var PinBlockFormatForPinData = &handles[296]
+var PinBlockFormatForPinData_ISO_FORMAT_0 = &handles[297]
+var PinBlockFormatForPinData_ISO_FORMAT_1 = &handles[298]
+var PinBlockFormatForPinData_ISO_FORMAT_3 = &handles[299]
+var PinBlockFormatForPinData_ISO_FORMAT_4 = &handles[300]
+
+var _PinBlockLengthEquals16 = &handles[301]
+
+var PinBlockLengthPosition = &handles[302]
+var PinBlockLengthPosition_NONE = &handles[303]
+var PinBlockLengthPosition_FRONT_OF_PIN_BLOCK = &handles[304]
+
+var PinBlockPaddingType = &handles[305]
+var PinBlockPaddingType_NO_PADDING = &handles[306]
+var PinBlockPaddingType_ISO_IEC_7816_4 = &handles[307]
+
+var _PinChangeMacOutputType = &handles[308]
+
+var PinData = &handles[309]
+var PinData_PinOffset = &handles[310]
+var PinData_VerificationValue = &handles[311]
+
+var PinGenerationAttributes = &handles[312]
+var PinGenerationAttributes_VisaPin = &handles[313]
+var PinGenerationAttributes_VisaPinVerificationValue = &handles[314]
+var PinGenerationAttributes_Ibm3624PinOffset = &handles[315]
+var PinGenerationAttributes_Ibm3624NaturalPin = &handles[316]
+var PinGenerationAttributes_Ibm3624RandomPin = &handles[317]
+var PinGenerationAttributes_Ibm3624PinFromOffset = &handles[318]
+
+var _PinOffsetType = &handles[319]
+
+var _PinValidationDataType = &handles[320]
+
+var PinVerificationAttributes = &handles[321]
+var PinVerificationAttributes_VisaPin = &handles[322]
+var PinVerificationAttributes_Ibm3624Pin = &handles[323]
+
+var _PlainTextOutputType = &handles[324]
+
+var _PlainTextType = &handles[325]
+
+var _PrimaryAccountNumberType = &handles[326]
+
+var _ProprietaryAuthenticationDataType = &handles[327]
+
+var RandomKeyMaxLength = &handles[328]
+var RandomKeyMaxLength_BYTES_8 = &handles[329]
+var RandomKeyMaxLength_BYTES_16 = &handles[330]
+var RandomKeyMaxLength_BYTES_24 = &handles[331]
+
+var RandomKeySendVariantMask = &handles[332]
+var RandomKeySendVariantMask_VARIANT_MASK_82C0 = &handles[333]
+var RandomKeySendVariantMask_VARIANT_MASK_82 = &handles[334]
+
+var ReEncryptionAttributes = &handles[335]
+var ReEncryptionAttributes_Symmetric = &handles[336]
+var ReEncryptionAttributes_Asymmetric = &handles[337]
+var ReEncryptionAttributes_Dukpt = &handles[338]
+
+var ResourceNotFoundException = &handles[339]
+var ResourceNotFoundException_ResourceId = &handles[340]
+
+var _ServiceCodeType = &handles[341]
+
+var _SessionDerivationDataType = &handles[342]
+
+var SessionKeyAmex = &handles[343]
+var SessionKeyAmex_PrimaryAccountNumber = &handles[344]
+var SessionKeyAmex_PanSequenceNumber = &handles[345]
+
+var SessionKeyDerivation = &handles[346]
+var SessionKeyDerivation_EmvCommon = &handles[347]
+var SessionKeyDerivation_Mastercard = &handles[348]
+var SessionKeyDerivation_Emv2000 = &handles[349]
+var SessionKeyDerivation_Amex = &handles[350]
+var SessionKeyDerivation_Visa = &handles[351]
+var SessionKeyDerivation_UnionPay = &handles[352]
+
+var SessionKeyDerivationMode = &handles[353]
+var SessionKeyDerivationMode_EMV_COMMON_SESSION_KEY = &handles[354]
+var SessionKeyDerivationMode_EMV2000 = &handles[355]
+var SessionKeyDerivationMode_AMEX = &handles[356]
+var SessionKeyDerivationMode_MASTERCARD_SESSION_KEY = &handles[357]
+var SessionKeyDerivationMode_VISA = &handles[358]
+var SessionKeyDerivationMode_UNION_PAY = &handles[359]
+
+var SessionKeyDerivationValue = &handles[360]
+var SessionKeyDerivationValue_ApplicationCryptogram = &handles[361]
+var SessionKeyDerivationValue_ApplicationTransactionCounter = &handles[362]
+
+var SessionKeyEmv2000 = &handles[363]
+var SessionKeyEmv2000_PrimaryAccountNumber = &handles[364]
+var SessionKeyEmv2000_PanSequenceNumber = &handles[365]
+var SessionKeyEmv2000_ApplicationTransactionCounter = &handles[366]
+
+var SessionKeyEmvCommon = &handles[367]
+var SessionKeyEmvCommon_PrimaryAccountNumber = &handles[368]
+var SessionKeyEmvCommon_PanSequenceNumber = &handles[369]
+var SessionKeyEmvCommon_ApplicationTransactionCounter = &handles[370]
+
+var SessionKeyMastercard = &handles[371]
+var SessionKeyMastercard_PrimaryAccountNumber = &handles[372]
+var SessionKeyMastercard_PanSequenceNumber = &handles[373]
+var SessionKeyMastercard_ApplicationTransactionCounter = &handles[374]
+var SessionKeyMastercard_UnpredictableNumber = &handles[375]
+
+var SessionKeyUnionPay = &handles[376]
+var SessionKeyUnionPay_PrimaryAccountNumber = &handles[377]
+var SessionKeyUnionPay_PanSequenceNumber = &handles[378]
+var SessionKeyUnionPay_ApplicationTransactionCounter = &handles[379]
+
+var SessionKeyVisa = &handles[380]
+var SessionKeyVisa_PrimaryAccountNumber = &handles[381]
+var SessionKeyVisa_PanSequenceNumber = &handles[382]
+
+var _SharedInformation = &handles[383]
+
+var SymmetricEncryptionAttributes = &handles[384]
+var SymmetricEncryptionAttributes_Mode = &handles[385]
+var SymmetricEncryptionAttributes_InitializationVector = &handles[386]
+var SymmetricEncryptionAttributes_PaddingType = &handles[387]
+
+var SymmetricKeyAlgorithm = &handles[388]
+var SymmetricKeyAlgorithm_TDES_2KEY = &handles[389]
+var SymmetricKeyAlgorithm_TDES_3KEY = &handles[390]
+var SymmetricKeyAlgorithm_AES_128 = &handles[391]
+var SymmetricKeyAlgorithm_AES_192 = &handles[392]
+var SymmetricKeyAlgorithm_AES_256 = &handles[393]
+var SymmetricKeyAlgorithm_HMAC_SHA256 = &handles[394]
+var SymmetricKeyAlgorithm_HMAC_SHA384 = &handles[395]
+var SymmetricKeyAlgorithm_HMAC_SHA512 = &handles[396]
+var SymmetricKeyAlgorithm_HMAC_SHA224 = &handles[397]
+
+var _SystemTraceAuditNumberType = &handles[398]
+
+var ThrottlingException = &handles[399]
+var ThrottlingException_Message = &handles[400]
+
+var _Tr31WrappedKeyBlock = &handles[401]
+
+var _TrackDataType = &handles[402]
+
+var _TransactionAmountType = &handles[403]
+
+var _TransactionDataType = &handles[404]
+
+var TranslationIsoFormats = &handles[405]
+var TranslationIsoFormats_IsoFormat0 = &handles[406]
+var TranslationIsoFormats_IsoFormat1 = &handles[407]
+var TranslationIsoFormats_IsoFormat3 = &handles[408]
+var TranslationIsoFormats_IsoFormat4 = &handles[409]
+var TranslationIsoFormats_As2805Format0 = &handles[410]
+
+var TranslationPinDataAs2805Format0 = &handles[411]
+var TranslationPinDataAs2805Format0_PrimaryAccountNumber = &handles[412]
+
+var TranslationPinDataIsoFormat034 = &handles[413]
+var TranslationPinDataIsoFormat034_PrimaryAccountNumber = &handles[414]
+
+var TranslationPinDataIsoFormat1 = &handles[415]
+
+var _ValidationDataType = &handles[416]
+
+var ValidationException = &handles[417]
+var ValidationException_message = &handles[418]
+var ValidationException_fieldList = &handles[419]
+
+var ValidationExceptionField = &handles[420]
+var ValidationExceptionField_path = &handles[421]
+var ValidationExceptionField_message = &handles[422]
+
+var _ValidationExceptionFieldList = &handles[423]
+var _ValidationExceptionFieldList_member = &handles[424]
+
+var VerificationFailedException = &handles[425]
+var VerificationFailedException_Reason = &handles[426]
+var VerificationFailedException_Message = &handles[427]
+
+var _VerificationFailedReason = &handles[428]
+
+var _VerificationValueType = &handles[429]
+
+var VisaAmexDerivationOutputs = &handles[430]
+var VisaAmexDerivationOutputs_AuthorizationRequestKeyArn = &handles[431]
+var VisaAmexDerivationOutputs_AuthorizationRequestKeyCheckValue = &handles[432]
+var VisaAmexDerivationOutputs_CurrentPinPekArn = &handles[433]
+var VisaAmexDerivationOutputs_CurrentPinPekKeyCheckValue = &handles[434]
+
+var VisaAttributes = &handles[435]
+var VisaAttributes_MajorKeyDerivationMode = &handles[436]
+var VisaAttributes_PrimaryAccountNumber = &handles[437]
+var VisaAttributes_PanSequenceNumber = &handles[438]
+var VisaAttributes_ApplicationTransactionCounter = &handles[439]
+var VisaAttributes_AuthorizationRequestKeyIdentifier = &handles[440]
+var VisaAttributes_CurrentPinAttributes = &handles[441]
+
+var VisaPin = &handles[442]
+var VisaPin_PinVerificationKeyIndex = &handles[443]
+
+var VisaPinVerification = &handles[444]
+var VisaPinVerification_PinVerificationKeyIndex = &handles[445]
+var VisaPinVerification_VerificationValue = &handles[446]
+
+var VisaPinVerificationValue = &handles[447]
+var VisaPinVerificationValue_EncryptedPinBlock = &handles[448]
+var VisaPinVerificationValue_PinVerificationKeyIndex = &handles[449]
+
+var WrappedKey = &handles[450]
+var WrappedKey_WrappedKeyMaterial = &handles[451]
+var WrappedKey_KeyCheckValueAlgorithm = &handles[452]
+
+var WrappedKeyMaterial = &handles[453]
+var WrappedKeyMaterial_Tr31KeyBlock = &handles[454]
+var WrappedKeyMaterial_DiffieHellmanSymmetricKey = &handles[455]
+
+var _WrappedKeyMaterialFormat = &handles[456]
+
+var WrappedWorkingKey = &handles[457]
+var WrappedWorkingKey_WrappedKeyMaterial = &handles[458]
+var WrappedWorkingKey_KeyCheckValue = &handles[459]
+var WrappedWorkingKey_WrappedKeyMaterialFormat = &handles[460]
+
+var DecryptDataInput = &handles[461]
+var DecryptDataInput_KeyIdentifier = &handles[462]
+var DecryptDataInput_CipherText = &handles[463]
+var DecryptDataInput_DecryptionAttributes = &handles[464]
+var DecryptDataInput_WrappedKey = &handles[465]
+
+var DecryptDataOutput = &handles[466]
+var DecryptDataOutput_KeyArn = &handles[467]
+var DecryptDataOutput_KeyCheckValue = &handles[468]
+var DecryptDataOutput_PlainText = &handles[469]
+
+var EncryptDataInput = &handles[470]
+var EncryptDataInput_KeyIdentifier = &handles[471]
+var EncryptDataInput_PlainText = &handles[472]
+var EncryptDataInput_EncryptionAttributes = &handles[473]
+var EncryptDataInput_WrappedKey = &handles[474]
+
+var EncryptDataOutput = &handles[475]
+var EncryptDataOutput_KeyArn = &handles[476]
+var EncryptDataOutput_KeyCheckValue = &handles[477]
+var EncryptDataOutput_CipherText = &handles[478]
+
+var GenerateAs2805KekValidationInput = &handles[479]
+var GenerateAs2805KekValidationInput_KeyIdentifier = &handles[480]
+var GenerateAs2805KekValidationInput_KekValidationType = &handles[481]
+var GenerateAs2805KekValidationInput_RandomKeySendVariantMask = &handles[482]
+
+var GenerateAs2805KekValidationOutput = &handles[483]
+var GenerateAs2805KekValidationOutput_KeyArn = &handles[484]
+var GenerateAs2805KekValidationOutput_KeyCheckValue = &handles[485]
+var GenerateAs2805KekValidationOutput_RandomKeySend = &handles[486]
+var GenerateAs2805KekValidationOutput_RandomKeyReceive = &handles[487]
+
+var GenerateAuthRequestCryptogramInput = &handles[488]
+var GenerateAuthRequestCryptogramInput_KeyIdentifier = &handles[489]
+var GenerateAuthRequestCryptogramInput_TransactionData = &handles[490]
+var GenerateAuthRequestCryptogramInput_MajorKeyDerivationMode = &handles[491]
+var GenerateAuthRequestCryptogramInput_SessionKeyDerivationAttributes = &handles[492]
+
+var GenerateAuthRequestCryptogramOutput = &handles[493]
+var GenerateAuthRequestCryptogramOutput_KeyArn = &handles[494]
+var GenerateAuthRequestCryptogramOutput_KeyCheckValue = &handles[495]
+var GenerateAuthRequestCryptogramOutput_AuthRequestCryptogram = &handles[496]
+
+var GenerateCardValidationDataInput = &handles[497]
+var GenerateCardValidationDataInput_KeyIdentifier = &handles[498]
+var GenerateCardValidationDataInput_PrimaryAccountNumber = &handles[499]
+var GenerateCardValidationDataInput_GenerationAttributes = &handles[500]
+var GenerateCardValidationDataInput_ValidationDataLength = &handles[501]
+
+var GenerateCardValidationDataOutput = &handles[502]
+var GenerateCardValidationDataOutput_KeyArn = &handles[503]
+var GenerateCardValidationDataOutput_KeyCheckValue = &handles[504]
+var GenerateCardValidationDataOutput_ValidationData = &handles[505]
+
+var GenerateMacEmvPinChangeInput = &handles[506]
+var GenerateMacEmvPinChangeInput_NewPinPekIdentifier = &handles[507]
+var GenerateMacEmvPinChangeInput_NewEncryptedPinBlock = &handles[508]
+var GenerateMacEmvPinChangeInput_PinBlockFormat = &handles[509]
+var GenerateMacEmvPinChangeInput_SecureMessagingIntegrityKeyIdentifier = &handles[510]
+var GenerateMacEmvPinChangeInput_SecureMessagingConfidentialityKeyIdentifier = &handles[511]
+var GenerateMacEmvPinChangeInput_MessageData = &handles[512]
+var GenerateMacEmvPinChangeInput_DerivationMethodAttributes = &handles[513]
+
+var GenerateMacEmvPinChangeOutput = &handles[514]
+var GenerateMacEmvPinChangeOutput_NewPinPekArn = &handles[515]
+var GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyArn = &handles[516]
+var GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyArn = &handles[517]
+var GenerateMacEmvPinChangeOutput_Mac = &handles[518]
+var GenerateMacEmvPinChangeOutput_EncryptedPinBlock = &handles[519]
+var GenerateMacEmvPinChangeOutput_NewPinPekKeyCheckValue = &handles[520]
+var GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyCheckValue = &handles[521]
+var GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyCheckValue = &handles[522]
+var GenerateMacEmvPinChangeOutput_VisaAmexDerivationOutputs = &handles[523]
+
+var GenerateMacInput = &handles[524]
+var GenerateMacInput_KeyIdentifier = &handles[525]
+var GenerateMacInput_MessageData = &handles[526]
+var GenerateMacInput_GenerationAttributes = &handles[527]
+var GenerateMacInput_MacLength = &handles[528]
+
+var GenerateMacOutput = &handles[529]
+var GenerateMacOutput_KeyArn = &handles[530]
+var GenerateMacOutput_KeyCheckValue = &handles[531]
+var GenerateMacOutput_Mac = &handles[532]
+
+var GeneratePinDataInput = &handles[533]
+var GeneratePinDataInput_GenerationKeyIdentifier = &handles[534]
+var GeneratePinDataInput_EncryptionKeyIdentifier = &handles[535]
+var GeneratePinDataInput_GenerationAttributes = &handles[536]
+var GeneratePinDataInput_PinDataLength = &handles[537]
+var GeneratePinDataInput_PrimaryAccountNumber = &handles[538]
+var GeneratePinDataInput_PinBlockFormat = &handles[539]
+var GeneratePinDataInput_EncryptionWrappedKey = &handles[540]
+
+var GeneratePinDataOutput = &handles[541]
+var GeneratePinDataOutput_GenerationKeyArn = &handles[542]
+var GeneratePinDataOutput_GenerationKeyCheckValue = &handles[543]
+var GeneratePinDataOutput_EncryptionKeyArn = &handles[544]
+var GeneratePinDataOutput_EncryptionKeyCheckValue = &handles[545]
+var GeneratePinDataOutput_EncryptedPinBlock = &handles[546]
+var GeneratePinDataOutput_PinData = &handles[547]
+
+var ReEncryptDataInput = &handles[548]
+var ReEncryptDataInput_IncomingKeyIdentifier = &handles[549]
+var ReEncryptDataInput_OutgoingKeyIdentifier = &handles[550]
+var ReEncryptDataInput_CipherText = &handles[551]
+var ReEncryptDataInput_IncomingEncryptionAttributes = &handles[552]
+var ReEncryptDataInput_OutgoingEncryptionAttributes = &handles[553]
+var ReEncryptDataInput_IncomingWrappedKey = &handles[554]
+var ReEncryptDataInput_OutgoingWrappedKey = &handles[555]
+
+var ReEncryptDataOutput = &handles[556]
+var ReEncryptDataOutput_KeyArn = &handles[557]
+var ReEncryptDataOutput_KeyCheckValue = &handles[558]
+var ReEncryptDataOutput_CipherText = &handles[559]
+
+var TranslateKeyMaterialInput = &handles[560]
+var TranslateKeyMaterialInput_IncomingKeyMaterial = &handles[561]
+var TranslateKeyMaterialInput_OutgoingKeyMaterial = &handles[562]
+var TranslateKeyMaterialInput_KeyCheckValueAlgorithm = &handles[563]
+
+var TranslateKeyMaterialOutput = &handles[564]
+var TranslateKeyMaterialOutput_WrappedKey = &handles[565]
+
+var TranslatePinDataInput = &handles[566]
+var TranslatePinDataInput_IncomingKeyIdentifier = &handles[567]
+var TranslatePinDataInput_OutgoingKeyIdentifier = &handles[568]
+var TranslatePinDataInput_IncomingTranslationAttributes = &handles[569]
+var TranslatePinDataInput_OutgoingTranslationAttributes = &handles[570]
+var TranslatePinDataInput_EncryptedPinBlock = &handles[571]
+var TranslatePinDataInput_IncomingDukptAttributes = &handles[572]
+var TranslatePinDataInput_OutgoingDukptAttributes = &handles[573]
+var TranslatePinDataInput_IncomingWrappedKey = &handles[574]
+var TranslatePinDataInput_OutgoingWrappedKey = &handles[575]
+var TranslatePinDataInput_IncomingAs2805Attributes = &handles[576]
+
+var TranslatePinDataOutput = &handles[577]
+var TranslatePinDataOutput_PinBlock = &handles[578]
+var TranslatePinDataOutput_KeyArn = &handles[579]
+var TranslatePinDataOutput_KeyCheckValue = &handles[580]
+
+var VerifyAuthRequestCryptogramInput = &handles[581]
+var VerifyAuthRequestCryptogramInput_KeyIdentifier = &handles[582]
+var VerifyAuthRequestCryptogramInput_TransactionData = &handles[583]
+var VerifyAuthRequestCryptogramInput_AuthRequestCryptogram = &handles[584]
+var VerifyAuthRequestCryptogramInput_MajorKeyDerivationMode = &handles[585]
+var VerifyAuthRequestCryptogramInput_SessionKeyDerivationAttributes = &handles[586]
+var VerifyAuthRequestCryptogramInput_AuthResponseAttributes = &handles[587]
+
+var VerifyAuthRequestCryptogramOutput = &handles[588]
+var VerifyAuthRequestCryptogramOutput_KeyArn = &handles[589]
+var VerifyAuthRequestCryptogramOutput_KeyCheckValue = &handles[590]
+var VerifyAuthRequestCryptogramOutput_AuthResponseValue = &handles[591]
+
+var VerifyCardValidationDataInput = &handles[592]
+var VerifyCardValidationDataInput_KeyIdentifier = &handles[593]
+var VerifyCardValidationDataInput_PrimaryAccountNumber = &handles[594]
+var VerifyCardValidationDataInput_VerificationAttributes = &handles[595]
+var VerifyCardValidationDataInput_ValidationData = &handles[596]
+
+var VerifyCardValidationDataOutput = &handles[597]
+var VerifyCardValidationDataOutput_KeyArn = &handles[598]
+var VerifyCardValidationDataOutput_KeyCheckValue = &handles[599]
+
+var VerifyMacInput = &handles[600]
+var VerifyMacInput_KeyIdentifier = &handles[601]
+var VerifyMacInput_MessageData = &handles[602]
+var VerifyMacInput_Mac = &handles[603]
+var VerifyMacInput_VerificationAttributes = &handles[604]
+var VerifyMacInput_MacLength = &handles[605]
+
+var VerifyMacOutput = &handles[606]
+var VerifyMacOutput_KeyArn = &handles[607]
+var VerifyMacOutput_KeyCheckValue = &handles[608]
+
+var VerifyPinDataInput = &handles[609]
+var VerifyPinDataInput_VerificationKeyIdentifier = &handles[610]
+var VerifyPinDataInput_EncryptionKeyIdentifier = &handles[611]
+var VerifyPinDataInput_VerificationAttributes = &handles[612]
+var VerifyPinDataInput_EncryptedPinBlock = &handles[613]
+var VerifyPinDataInput_PrimaryAccountNumber = &handles[614]
+var VerifyPinDataInput_PinBlockFormat = &handles[615]
+var VerifyPinDataInput_PinDataLength = &handles[616]
+var VerifyPinDataInput_DukptAttributes = &handles[617]
+var VerifyPinDataInput_EncryptionWrappedKey = &handles[618]
+
+var VerifyPinDataOutput = &handles[619]
+var VerifyPinDataOutput_VerificationKeyArn = &handles[620]
+var VerifyPinDataOutput_VerificationKeyCheckValue = &handles[621]
+var VerifyPinDataOutput_EncryptionKeyArn = &handles[622]
+var VerifyPinDataOutput_EncryptionKeyCheckValue = &handles[623]
+
+var PaymentCryptographyDataPlane = &smithy.ServiceSchema{Schema: &handles[15], Version: "2022-02-03"}

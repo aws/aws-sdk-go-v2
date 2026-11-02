@@ -4,2893 +4,2518 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateWhatsAppBusinessAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AssociateWhatsAppBusinessAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/signup",
-	Code: 200})
-
-var CreateWhatsAppDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/waba/dataset",
-	Code: 200})
-
-var CreateWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/flow/create",
-	Code: 200})
-
-var CreateWhatsAppMessageTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/template/put",
-	Code: 200})
-
-var CreateWhatsAppMessageTemplateFromLibrary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateFromLibrary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/template/create",
-	Code: 200})
-
-var CreateWhatsAppMessageTemplateMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/template/media",
-	Code: 200})
-
-var DeleteWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/whatsapp/flow",
-	Code: 200})
-
-var DeleteWhatsAppMessageMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/whatsapp/media",
-	Code: 200})
-
-var DeleteWhatsAppMessageTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/whatsapp/template",
-	Code: 200})
-
-var DeprecateWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeprecateWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/flow/deprecate",
-	Code: 200})
-
-var DisassociateWhatsAppBusinessAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DisassociateWhatsAppBusinessAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/whatsapp/waba/disassociate",
-	Code: 200})
-
-var GetLinkedWhatsAppBusinessAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/waba/details",
-	Code: 200})
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountPhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/waba/phone/details",
-	Code: 200})
-
-var GetWhatsAppBusinessPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppBusinessPublicKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/business-public-key",
-	Code: 200})
-
-var GetWhatsAppCallPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppCallPermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/call/permission/get",
-	Code: 200})
-
-var GetWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/flow",
-	Code: 200})
-
-var GetWhatsAppFlowPreview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowPreview",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/flow/preview",
-	Code: 200})
-
-var GetWhatsAppMessageMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/media/get",
-	Code: 200})
-
-var GetWhatsAppMessageTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/template",
-	Code: 200})
-
-var ListLinkedWhatsAppBusinessAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListLinkedWhatsAppBusinessAccounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/waba/list",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/tags/list",
-	Code: 200})
-
-var ListWhatsAppFlowAssets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowAssets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/flow/assets",
-	Code: 200})
-
-var ListWhatsAppFlows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlows",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/flow/list",
-	Code: 200})
-
-var ListWhatsAppMessageTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppMessageTemplates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/whatsapp/template/list",
-	Code: 200})
-
-var ListWhatsAppTemplateLibrary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppTemplateLibrary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/template/library",
-	Code: 200})
-
-var PostWhatsAppMessageMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PostWhatsAppMessageMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/media",
-	Code: 200})
-
-var PublishWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PublishWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/flow/publish",
-	Code: 200})
-
-var PutWhatsAppBusinessAccountEventDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessAccountEventDestinations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/v1/whatsapp/waba/eventdestinations",
-	Code: 200})
-
-var PutWhatsAppBusinessPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessPublicKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/v1/whatsapp/business-public-key",
-	Code: 200})
-
-var SendWhatsAppCallEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppCallEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/call/event",
-	Code: 200})
-
-var SendWhatsAppConversionEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppConversionEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/waba/dataset/events",
-	Code: 200})
-
-var SendWhatsAppMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/send",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/tags/tag-resource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/tags/untag-resource",
-	Code: 200})
-
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateLinkedWhatsAppBusinessAccountPhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/v1/whatsapp/waba/phone",
-	Code: 200})
-
-var UpdateWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/flow/update",
-	Code: 200})
-
-var UpdateWhatsAppFlowAssets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowAssets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/flow/assets/update",
-	Code: 200})
-
-var UpdateWhatsAppMessageTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppMessageTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/whatsapp/template",
-	Code: 200})
-
-var _SocialMessaging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SocialMessaging",
-}, smithy.ShapeTypeService, 0)
-
-var SocialMessaging = smithy.NewServiceSchema(_SocialMessaging, "2024-01-01")
-
-var AccessDeniedByMetaException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AccessDeniedByMetaException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedByMetaException_message *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AddContactNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AddContactNumber",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AddLearnMoreLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AddLearnMoreLink",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AddSecurityRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AddSecurityRecommendation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AddTrackPackageLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AddTrackPackageLink",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociateInProgressToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AssociateInProgressToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _BusinessPublicKeyPem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "BusinessPublicKeyPem",
-}, smithy.ShapeTypeString, 0)
-
-var _BusinessPublicKeySignatureStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "BusinessPublicKeySignatureStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _ButtonType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ButtonType",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeExpirationMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CodeExpirationMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _DeleteAllLanguages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteAllLanguages",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DependencyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DependencyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502})
-var DependencyException_message *smithy.Schema
-
-var _DirectSendEnforcementStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DirectSendEnforcementStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectSendEnforcementStatusExpiresAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DirectSendEnforcementStatusExpiresAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EventDestinationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "EventDestinationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Filter",
-}, smithy.ShapeTypeMap, 2)
-var _Filter_key *smithy.Schema
-
-var _Filter_value *smithy.Schema
-
-var _Headers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Headers",
-}, smithy.ShapeTypeMap, 2)
-var _Headers_key *smithy.Schema
-
-var _Headers_value *smithy.Schema
-
-var _IanaTimezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "IanaTimezone",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceException_message *smithy.Schema
-
-var InvalidParametersException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "InvalidParametersException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParametersException_message *smithy.Schema
-
-var _Iso8601Duration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Iso8601Duration",
-}, smithy.ShapeTypeString, 0)
-
-var _IsoCountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "IsoCountryCode",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var LibraryTemplateBodyInputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LibraryTemplateBodyInputs",
-}, smithy.ShapeTypeStructure, 5)
-var LibraryTemplateBodyInputs_addContactNumber *smithy.Schema
-
-var LibraryTemplateBodyInputs_addLearnMoreLink *smithy.Schema
-
-var LibraryTemplateBodyInputs_addSecurityRecommendation *smithy.Schema
-
-var LibraryTemplateBodyInputs_addTrackPackageLink *smithy.Schema
-
-var LibraryTemplateBodyInputs_codeExpirationMinutes *smithy.Schema
-
-var LibraryTemplateButtonInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LibraryTemplateButtonInput",
-}, smithy.ShapeTypeStructure, 6)
-var LibraryTemplateButtonInput_type *smithy.Schema
-
-var LibraryTemplateButtonInput_phoneNumber *smithy.Schema
-
-var LibraryTemplateButtonInput_url *smithy.Schema
-
-var LibraryTemplateButtonInput_otpType *smithy.Schema
-
-var LibraryTemplateButtonInput_zeroTapTermsAccepted *smithy.Schema
-
-var LibraryTemplateButtonInput_supportedApps *smithy.Schema
-
-var LibraryTemplateButtonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LibraryTemplateButtonList",
-}, smithy.ShapeTypeStructure, 7)
-var LibraryTemplateButtonList_type *smithy.Schema
-
-var LibraryTemplateButtonList_text *smithy.Schema
-
-var LibraryTemplateButtonList_phoneNumber *smithy.Schema
-
-var LibraryTemplateButtonList_url *smithy.Schema
-
-var LibraryTemplateButtonList_otpType *smithy.Schema
-
-var LibraryTemplateButtonList_zeroTapTermsAccepted *smithy.Schema
-
-var LibraryTemplateButtonList_supportedApps *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_message *smithy.Schema
-
-var _LinkedAccountWithIncompleteSetup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedAccountWithIncompleteSetup",
-}, smithy.ShapeTypeMap, 2)
-var _LinkedAccountWithIncompleteSetup_key *smithy.Schema
-
-var _LinkedAccountWithIncompleteSetup_value *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccount",
-}, smithy.ShapeTypeStructure, 12)
-var LinkedWhatsAppBusinessAccount_arn *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_id *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_wabaId *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_registrationStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_linkDate *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_wabaName *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_eventDestinations *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_directSendEnforcementStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_datasetId *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_phoneNumbers *smithy.Schema
-
-var _LinkedWhatsAppBusinessAccountArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LinkedWhatsAppBusinessAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var LinkedWhatsAppBusinessAccountIdMetaData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountIdMetaData",
-}, smithy.ShapeTypeStructure, 4)
-var LinkedWhatsAppBusinessAccountIdMetaData_accountName *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountIdMetaData_wabaId *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountSummary",
-}, smithy.ShapeTypeStructure, 11)
-var LinkedWhatsAppBusinessAccountSummary_arn *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_id *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_wabaId *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_registrationStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_linkDate *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_wabaName *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_eventDestinations *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_datasetId *smithy.Schema
-
-var _LinkedWhatsAppBusinessAccountSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _LinkedWhatsAppBusinessAccountSummaryList_member *smithy.Schema
-
-var _LinkedWhatsAppPhoneNumberArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppPhoneNumberArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MetaFlowApplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowApplicationId",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowApplicationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowApplicationInfo",
-}, smithy.ShapeTypeStructure, 3)
-var MetaFlowApplicationInfo_link *smithy.Schema
-
-var MetaFlowApplicationInfo_name *smithy.Schema
-
-var MetaFlowApplicationInfo_id *smithy.Schema
-
-var _MetaFlowApplicationLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowApplicationLink",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowApplicationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowApplicationName",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowAsset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAsset",
-}, smithy.ShapeTypeStructure, 3)
-var MetaFlowAsset_name *smithy.Schema
-
-var MetaFlowAsset_assetType *smithy.Schema
-
-var MetaFlowAsset_downloadUrl *smithy.Schema
-
-var _MetaFlowAssetDownloadUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAssetDownloadUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowAssetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAssetList",
-}, smithy.ShapeTypeList, 1)
-var _MetaFlowAssetList_member *smithy.Schema
-
-var _MetaFlowAssetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAssetName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowAssetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAssetType",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowCategory",
-}, smithy.ShapeTypeEnum, 9)
-var MetaFlowCategory_SIGN_UP *smithy.Schema
-
-var MetaFlowCategory_SIGN_IN *smithy.Schema
-
-var MetaFlowCategory_APPOINTMENT_BOOKING *smithy.Schema
-
-var MetaFlowCategory_LEAD_GENERATION *smithy.Schema
-
-var MetaFlowCategory_SHOPPING *smithy.Schema
-
-var MetaFlowCategory_CONTACT_US *smithy.Schema
-
-var MetaFlowCategory_CUSTOMER_SUPPORT *smithy.Schema
-
-var MetaFlowCategory_SURVEY *smithy.Schema
-
-var MetaFlowCategory_OTHER *smithy.Schema
-
-var _MetaFlowCategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowCategoryList",
-}, smithy.ShapeTypeList, 1)
-var _MetaFlowCategoryList_member *smithy.Schema
-
-var _MetaFlowDataApiVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowDataApiVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowEndpointUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowEndpointUri",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowHealthEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthEntity",
-}, smithy.ShapeTypeStructure, 3)
-var MetaFlowHealthEntity_entityType *smithy.Schema
-
-var MetaFlowHealthEntity_id *smithy.Schema
-
-var MetaFlowHealthEntity_canSendMessage *smithy.Schema
-
-var _MetaFlowHealthEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthEntityList",
-}, smithy.ShapeTypeList, 1)
-var _MetaFlowHealthEntityList_member *smithy.Schema
-
-var _MetaFlowHealthEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthEntityType",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowHealthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthStatus",
-}, smithy.ShapeTypeStructure, 2)
-var MetaFlowHealthStatus_canSendMessage *smithy.Schema
-
-var MetaFlowHealthStatus_entities *smithy.Schema
-
-var _MetaFlowHealthStatusAvailability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthStatusAvailability",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowId",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowJsonBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowJsonBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _MetaFlowJsonVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowJsonVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowName",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowPreviewInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowPreviewInfo",
-}, smithy.ShapeTypeStructure, 2)
-var MetaFlowPreviewInfo_previewUrl *smithy.Schema
-
-var MetaFlowPreviewInfo_expiresAt *smithy.Schema
-
-var _MetaFlowPreviewUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowPreviewUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowStatus",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowSummary",
-}, smithy.ShapeTypeStructure, 5)
-var MetaFlowSummary_flowId *smithy.Schema
-
-var MetaFlowSummary_flowName *smithy.Schema
-
-var MetaFlowSummary_flowStatus *smithy.Schema
-
-var MetaFlowSummary_flowCategories *smithy.Schema
-
-var MetaFlowSummary_validationErrors *smithy.Schema
-
-var _MetaFlowSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MetaFlowSummaryList_member *smithy.Schema
-
-var _MetaFlowTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowTimestamp",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowValidationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowValidationError",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowWabaCurrency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowWabaCurrency",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowWabaTemplateNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowWabaTemplateNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowWabaTimezoneId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowWabaTimezoneId",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowWhatsAppBusinessAccountInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowWhatsAppBusinessAccountInfo",
-}, smithy.ShapeTypeStructure, 5)
-var MetaFlowWhatsAppBusinessAccountInfo_id *smithy.Schema
-
-var MetaFlowWhatsAppBusinessAccountInfo_name *smithy.Schema
-
-var MetaFlowWhatsAppBusinessAccountInfo_currency *smithy.Schema
-
-var MetaFlowWhatsAppBusinessAccountInfo_timezoneId *smithy.Schema
-
-var MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace *smithy.Schema
-
-var _MetaIndustries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaIndustries",
-}, smithy.ShapeTypeList, 1)
-var _MetaIndustries_member *smithy.Schema
-
-var _MetaIndustry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaIndustry",
-}, smithy.ShapeTypeString, 0)
-
-var MetaLibraryTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplate",
-}, smithy.ShapeTypeStructure, 6)
-var MetaLibraryTemplate_templateName *smithy.Schema
-
-var MetaLibraryTemplate_libraryTemplateName *smithy.Schema
-
-var MetaLibraryTemplate_templateCategory *smithy.Schema
-
-var MetaLibraryTemplate_templateLanguage *smithy.Schema
-
-var MetaLibraryTemplate_libraryTemplateButtonInputs *smithy.Schema
-
-var MetaLibraryTemplate_libraryTemplateBodyInputs *smithy.Schema
-
-var _MetaLibraryTemplateButtonInputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplateButtonInputs",
-}, smithy.ShapeTypeList, 1)
-var _MetaLibraryTemplateButtonInputs_member *smithy.Schema
-
-var _MetaLibraryTemplateButtonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplateButtonList",
-}, smithy.ShapeTypeList, 1)
-var _MetaLibraryTemplateButtonList_member *smithy.Schema
-
-var MetaLibraryTemplateDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplateDefinition",
-}, smithy.ShapeTypeStructure, 11)
-var MetaLibraryTemplateDefinition_templateName *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateLanguage *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateCategory *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateTopic *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateUseCase *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateIndustry *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateHeader *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateBody *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateButtons *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateId *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateBodyExampleParams *smithy.Schema
-
-var _MetaLibraryTemplatesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplatesList",
-}, smithy.ShapeTypeList, 1)
-var _MetaLibraryTemplatesList_member *smithy.Schema
-
-var _MetaParameterFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaParameterFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplate",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateBody",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateBodyExampleParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateBodyExampleParams",
-}, smithy.ShapeTypeList, 1)
-var _MetaTemplateBodyExampleParams_member *smithy.Schema
-
-var _MetaTemplateCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateComponents",
-}, smithy.ShapeTypeBlob, 0)
-
-var _MetaTemplateCtaLinkTrackingOptedOut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateCtaLinkTrackingOptedOut",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _MetaTemplateDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateDefinition",
-}, smithy.ShapeTypeBlob, 0)
-
-var _MetaTemplateHeader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateHeader",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateId",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateLanguage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateLanguage",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateQualityScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateQualityScore",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateSource",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateTopic",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateUseCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateUseCase",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaText",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaUrlWithSuffixExample = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaUrlWithSuffixExample",
-}, smithy.ShapeTypeMap, 2)
-var _MetaUrlWithSuffixExample_key *smithy.Schema
-
-var _MetaUrlWithSuffixExample_value *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OtpType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "OtpType",
-}, smithy.ShapeTypeString, 0)
-
-var _PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PhoneNumber",
-}, smithy.ShapeTypeString, 0)
-
-var RegistrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "RegistrationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var RegistrationStatus_COMPLETE *smithy.Schema
-
-var RegistrationStatus_INCOMPLETE *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3File = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "S3File",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var S3File_bucketName *smithy.Schema
-
-var S3File_key *smithy.Schema
-
-var S3PresignedUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "S3PresignedUrl",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var S3PresignedUrl_url *smithy.Schema
-
-var S3PresignedUrl_headers *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _SupportedApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SupportedApp",
-}, smithy.ShapeTypeMap, 2)
-var _SupportedApp_key *smithy.Schema
-
-var _SupportedApp_value *smithy.Schema
-
-var _SupportedApps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SupportedApps",
-}, smithy.ShapeTypeList, 1)
-var _SupportedApps_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TemplateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TemplateSummary",
-}, smithy.ShapeTypeStructure, 8)
-var TemplateSummary_templateName *smithy.Schema
-
-var TemplateSummary_metaTemplateId *smithy.Schema
-
-var TemplateSummary_templateStatus *smithy.Schema
-
-var TemplateSummary_templateQualityScore *smithy.Schema
-
-var TemplateSummary_templateLanguage *smithy.Schema
-
-var TemplateSummary_templateCategory *smithy.Schema
-
-var TemplateSummary_templateSource *smithy.Schema
-
-var TemplateSummary_correctCategory *smithy.Schema
-
-var _TemplateSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TemplateSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateSummaryList_member *smithy.Schema
-
-var ThrottledRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ThrottledRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottledRequestException_message *smithy.Schema
-
-var _TwoFactorPin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TwoFactorPin",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ValidationErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ValidationErrorList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationErrorList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var WabaPhoneNumberSetupFinalization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WabaPhoneNumberSetupFinalization",
-}, smithy.ShapeTypeStructure, 4)
-var WabaPhoneNumberSetupFinalization_id *smithy.Schema
-
-var WabaPhoneNumberSetupFinalization_twoFactorPin *smithy.Schema
-
-var WabaPhoneNumberSetupFinalization_dataLocalizationRegion *smithy.Schema
-
-var WabaPhoneNumberSetupFinalization_tags *smithy.Schema
-
-var _WabaPhoneNumberSetupFinalizationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WabaPhoneNumberSetupFinalizationList",
-}, smithy.ShapeTypeList, 1)
-var _WabaPhoneNumberSetupFinalizationList_member *smithy.Schema
-
-var WabaSetupFinalization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WabaSetupFinalization",
-}, smithy.ShapeTypeStructure, 3)
-var WabaSetupFinalization_id *smithy.Schema
-
-var WabaSetupFinalization_eventDestinations *smithy.Schema
-
-var WabaSetupFinalization_tags *smithy.Schema
-
-var WhatsAppBusinessAccountEventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountEventDestination",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppBusinessAccountEventDestination_eventDestinationArn *smithy.Schema
-
-var WhatsAppBusinessAccountEventDestination_roleArn *smithy.Schema
-
-var _WhatsAppBusinessAccountEventDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountEventDestinations",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppBusinessAccountEventDestinations_member *smithy.Schema
-
-var _WhatsAppBusinessAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppBusinessAccountLinkDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountLinkDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _WhatsAppBusinessAccountMarketingMessagesOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountMarketingMessagesOnboardingStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppBusinessAccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountName",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppBusinessScopedUserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessScopedUserId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _WhatsAppCallbackPermissionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallbackPermissionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppCallEventBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallEventBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var WhatsAppCallHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallHours",
-}, smithy.ShapeTypeStructure, 4)
-var WhatsAppCallHours_enabled *smithy.Schema
-
-var WhatsAppCallHours_timezone *smithy.Schema
-
-var WhatsAppCallHours_weeklyOperatingHours *smithy.Schema
-
-var WhatsAppCallHours_holidaySchedule *smithy.Schema
-
-var _WhatsAppCallIconVisibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallIconVisibility",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppCallPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermission",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppCallPermission_status *smithy.Schema
-
-var WhatsAppCallPermission_expirationTime *smithy.Schema
-
-var WhatsAppCallPermissionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionAction",
-}, smithy.ShapeTypeStructure, 3)
-var WhatsAppCallPermissionAction_actionName *smithy.Schema
-
-var WhatsAppCallPermissionAction_canPerformAction *smithy.Schema
-
-var WhatsAppCallPermissionAction_limits *smithy.Schema
-
-var _WhatsAppCallPermissionActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionActionList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppCallPermissionActionList_member *smithy.Schema
-
-var _WhatsAppCallPermissionActionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionActionName",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppCallPermissionLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionLimit",
-}, smithy.ShapeTypeStructure, 4)
-var WhatsAppCallPermissionLimit_timePeriod *smithy.Schema
-
-var WhatsAppCallPermissionLimit_maxAllowed *smithy.Schema
-
-var WhatsAppCallPermissionLimit_currentUsage *smithy.Schema
-
-var WhatsAppCallPermissionLimit_limitExpirationTime *smithy.Schema
-
-var _WhatsAppCallPermissionLimitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionLimitList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppCallPermissionLimitList_member *smithy.Schema
-
-var _WhatsAppCallPermissionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppCallSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallSettings",
-}, smithy.ShapeTypeStructure, 4)
-var WhatsAppCallSettings_callEnabled *smithy.Schema
-
-var WhatsAppCallSettings_callHours *smithy.Schema
-
-var WhatsAppCallSettings_callIconVisibility *smithy.Schema
-
-var WhatsAppCallSettings_callbackPermissionStatus *smithy.Schema
-
-var _WhatsAppConversionEventBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppConversionEventBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _WhatsAppDatasetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDatasetId",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDate",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppDayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDayOfWeek",
-}, smithy.ShapeTypeEnum, 7)
-var WhatsAppDayOfWeek_MONDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_TUESDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_WEDNESDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_THURSDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_FRIDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_SATURDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_SUNDAY *smithy.Schema
-
-var _WhatsAppDestinationPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDestinationPhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _WhatsAppDisplayPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDisplayPhoneNumber",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppHolidayScheduleEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppHolidayScheduleEntry",
-}, smithy.ShapeTypeStructure, 3)
-var WhatsAppHolidayScheduleEntry_date *smithy.Schema
-
-var WhatsAppHolidayScheduleEntry_startTime *smithy.Schema
-
-var WhatsAppHolidayScheduleEntry_endTime *smithy.Schema
-
-var _WhatsAppHolidayScheduleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppHolidayScheduleList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppHolidayScheduleList_member *smithy.Schema
-
-var _WhatsAppMediaId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppMediaId",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppMessageBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppMessageBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _WhatsAppPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumber",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppPhoneNumberDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberDetail",
-}, smithy.ShapeTypeStructure, 8)
-var WhatsAppPhoneNumberDetail_arn *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_phoneNumber *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_phoneNumberId *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_metaPhoneNumberId *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_displayPhoneNumberName *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_displayPhoneNumber *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_qualityRating *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_dataLocalizationRegion *smithy.Schema
-
-var _WhatsAppPhoneNumberDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberDetailList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppPhoneNumberDetailList_member *smithy.Schema
-
-var _WhatsAppPhoneNumberId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberId",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppPhoneNumberName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberName",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppPhoneNumberQualityRating = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberQualityRating",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppPhoneNumberSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberSummary",
-}, smithy.ShapeTypeStructure, 8)
-var WhatsAppPhoneNumberSummary_arn *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_phoneNumber *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_phoneNumberId *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_metaPhoneNumberId *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_displayPhoneNumberName *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_displayPhoneNumber *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_qualityRating *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_dataLocalizationRegion *smithy.Schema
-
-var _WhatsAppPhoneNumberSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppPhoneNumberSummaryList_member *smithy.Schema
-
-var WhatsAppSetupFinalization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppSetupFinalization",
-}, smithy.ShapeTypeStructure, 4)
-var WhatsAppSetupFinalization_associateInProgressToken *smithy.Schema
-
-var WhatsAppSetupFinalization_phoneNumbers *smithy.Schema
-
-var WhatsAppSetupFinalization_phoneNumberParent *smithy.Schema
-
-var WhatsAppSetupFinalization_waba *smithy.Schema
-
-var WhatsAppSignupCallback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppSignupCallback",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppSignupCallback_accessToken *smithy.Schema
-
-var WhatsAppSignupCallback_callbackUrl *smithy.Schema
-
-var WhatsAppSignupCallbackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppSignupCallbackResult",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppSignupCallbackResult_associateInProgressToken *smithy.Schema
-
-var WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup *smithy.Schema
-
-var WhatsAppTimeOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppTimeOfDay",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppTimeOfDay_hours *smithy.Schema
-
-var WhatsAppTimeOfDay_minutes *smithy.Schema
-
-var WhatsAppWeeklyOperatingHoursEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppWeeklyOperatingHoursEntry",
-}, smithy.ShapeTypeStructure, 3)
-var WhatsAppWeeklyOperatingHoursEntry_dayOfWeek *smithy.Schema
-
-var WhatsAppWeeklyOperatingHoursEntry_openTime *smithy.Schema
-
-var WhatsAppWeeklyOperatingHoursEntry_closeTime *smithy.Schema
-
-var _WhatsAppWeeklyOperatingHoursList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppWeeklyOperatingHoursList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppWeeklyOperatingHoursList_member *smithy.Schema
-
-var _ZeroTapTermsAccepted = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ZeroTapTermsAccepted",
-}, smithy.ShapeTypeBoolean, 0)
-
-var AssociateWhatsAppBusinessAccountInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AssociateWhatsAppBusinessAccountInput",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateWhatsAppBusinessAccountInput_signupCallback *smithy.Schema
-
-var AssociateWhatsAppBusinessAccountInput_setupFinalization *smithy.Schema
-
-var AssociateWhatsAppBusinessAccountOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AssociateWhatsAppBusinessAccountOutput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateWhatsAppBusinessAccountOutput_signupCallbackResult *smithy.Schema
-
-var AssociateWhatsAppBusinessAccountOutput_statusCode *smithy.Schema
-
-var AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId *smithy.Schema
-
-var CreateWhatsAppDatasetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppDatasetInput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatsAppDatasetInput_id *smithy.Schema
-
-var CreateWhatsAppDatasetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppDatasetOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatsAppDatasetOutput_datasetId *smithy.Schema
-
-var CreateWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateWhatsAppFlowInput_id *smithy.Schema
-
-var CreateWhatsAppFlowInput_flowName *smithy.Schema
-
-var CreateWhatsAppFlowInput_categories *smithy.Schema
-
-var CreateWhatsAppFlowInput_flowJson *smithy.Schema
-
-var CreateWhatsAppFlowInput_publish *smithy.Schema
-
-var CreateWhatsAppFlowInput_cloneFlowId *smithy.Schema
-
-var CreateWhatsAppFlowInput_endpointUri *smithy.Schema
-
-var CreateWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWhatsAppFlowOutput_flowId *smithy.Schema
-
-var CreateWhatsAppFlowOutput_validationErrors *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateFromLibraryInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryInput_id *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateFromLibraryOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryOutput_category *smithy.Schema
-
-var CreateWhatsAppMessageTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWhatsAppMessageTemplateInput_templateDefinition *smithy.Schema
-
-var CreateWhatsAppMessageTemplateInput_id *smithy.Schema
-
-var CreateWhatsAppMessageTemplateMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateMediaInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWhatsAppMessageTemplateMediaInput_id *smithy.Schema
-
-var CreateWhatsAppMessageTemplateMediaInput_sourceS3File *smithy.Schema
-
-var CreateWhatsAppMessageTemplateMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateMediaOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle *smithy.Schema
-
-var CreateWhatsAppMessageTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateWhatsAppMessageTemplateOutput_metaTemplateId *smithy.Schema
-
-var CreateWhatsAppMessageTemplateOutput_templateStatus *smithy.Schema
-
-var CreateWhatsAppMessageTemplateOutput_category *smithy.Schema
-
-var DeleteWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWhatsAppFlowInput_id *smithy.Schema
-
-var DeleteWhatsAppFlowInput_flowId *smithy.Schema
-
-var DeleteWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteWhatsAppMessageMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageMediaInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWhatsAppMessageMediaInput_mediaId *smithy.Schema
-
-var DeleteWhatsAppMessageMediaInput_originationPhoneNumberId *smithy.Schema
-
-var DeleteWhatsAppMessageMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageMediaOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWhatsAppMessageMediaOutput_success *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageTemplateInput",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteWhatsAppMessageTemplateInput_metaTemplateId *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateInput_deleteAllLanguages *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateInput_id *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateInput_templateName *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageTemplateOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeprecateWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeprecateWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeprecateWhatsAppFlowInput_id *smithy.Schema
-
-var DeprecateWhatsAppFlowInput_flowId *smithy.Schema
-
-var DeprecateWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeprecateWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateWhatsAppBusinessAccountInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DisassociateWhatsAppBusinessAccountInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateWhatsAppBusinessAccountInput_id *smithy.Schema
-
-var DisassociateWhatsAppBusinessAccountOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DisassociateWhatsAppBusinessAccountOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetLinkedWhatsAppBusinessAccountInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLinkedWhatsAppBusinessAccountInput_id *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLinkedWhatsAppBusinessAccountOutput_account *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountPhoneNumberInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLinkedWhatsAppBusinessAccountPhoneNumberInput_id *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountPhoneNumberOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings *smithy.Schema
-
-var GetWhatsAppBusinessPublicKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppBusinessPublicKeyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId *smithy.Schema
-
-var GetWhatsAppBusinessPublicKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppBusinessPublicKeyOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppBusinessPublicKeyOutput_businessPublicKey *smithy.Schema
-
-var GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus *smithy.Schema
-
-var GetWhatsAppCallPermissionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppCallPermissionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetWhatsAppCallPermissionInput_originationPhoneNumberId *smithy.Schema
-
-var GetWhatsAppCallPermissionInput_destinationPhoneNumber *smithy.Schema
-
-var GetWhatsAppCallPermissionInput_endUserBsuid *smithy.Schema
-
-var GetWhatsAppCallPermissionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppCallPermissionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppCallPermissionOutput_permission *smithy.Schema
-
-var GetWhatsAppCallPermissionOutput_actions *smithy.Schema
-
-var GetWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppFlowInput_id *smithy.Schema
-
-var GetWhatsAppFlowInput_flowId *smithy.Schema
-
-var GetWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 12)
-var GetWhatsAppFlowOutput_flowId *smithy.Schema
-
-var GetWhatsAppFlowOutput_flowName *smithy.Schema
-
-var GetWhatsAppFlowOutput_flowStatus *smithy.Schema
-
-var GetWhatsAppFlowOutput_categories *smithy.Schema
-
-var GetWhatsAppFlowOutput_validationErrors *smithy.Schema
-
-var GetWhatsAppFlowOutput_jsonVersion *smithy.Schema
-
-var GetWhatsAppFlowOutput_dataApiVersion *smithy.Schema
-
-var GetWhatsAppFlowOutput_endpointUri *smithy.Schema
-
-var GetWhatsAppFlowOutput_preview *smithy.Schema
-
-var GetWhatsAppFlowOutput_whatsAppBusinessAccount *smithy.Schema
-
-var GetWhatsAppFlowOutput_application *smithy.Schema
-
-var GetWhatsAppFlowOutput_healthStatus *smithy.Schema
-
-var GetWhatsAppFlowPreviewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowPreviewInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetWhatsAppFlowPreviewInput_id *smithy.Schema
-
-var GetWhatsAppFlowPreviewInput_flowId *smithy.Schema
-
-var GetWhatsAppFlowPreviewInput_invalidate *smithy.Schema
-
-var GetWhatsAppFlowPreviewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowPreviewOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppFlowPreviewOutput_flowId *smithy.Schema
-
-var GetWhatsAppFlowPreviewOutput_preview *smithy.Schema
-
-var GetWhatsAppMessageMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageMediaInput",
-}, smithy.ShapeTypeStructure, 5)
-var GetWhatsAppMessageMediaInput_mediaId *smithy.Schema
-
-var GetWhatsAppMessageMediaInput_originationPhoneNumberId *smithy.Schema
-
-var GetWhatsAppMessageMediaInput_metadataOnly *smithy.Schema
-
-var GetWhatsAppMessageMediaInput_destinationS3PresignedUrl *smithy.Schema
-
-var GetWhatsAppMessageMediaInput_destinationS3File *smithy.Schema
-
-var GetWhatsAppMessageMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageMediaOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppMessageMediaOutput_mimeType *smithy.Schema
-
-var GetWhatsAppMessageMediaOutput_fileSize *smithy.Schema
-
-var GetWhatsAppMessageTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageTemplateInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetWhatsAppMessageTemplateInput_metaTemplateId *smithy.Schema
-
-var GetWhatsAppMessageTemplateInput_id *smithy.Schema
-
-var GetWhatsAppMessageTemplateInput_templateName *smithy.Schema
-
-var GetWhatsAppMessageTemplateInput_templateLanguageCode *smithy.Schema
-
-var GetWhatsAppMessageTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWhatsAppMessageTemplateOutput_template *smithy.Schema
-
-var ListLinkedWhatsAppBusinessAccountsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListLinkedWhatsAppBusinessAccountsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLinkedWhatsAppBusinessAccountsInput_nextToken *smithy.Schema
-
-var ListLinkedWhatsAppBusinessAccountsInput_maxResults *smithy.Schema
-
-var ListLinkedWhatsAppBusinessAccountsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListLinkedWhatsAppBusinessAccountsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts *smithy.Schema
-
-var ListLinkedWhatsAppBusinessAccountsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_statusCode *smithy.Schema
-
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var ListWhatsAppFlowAssetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowAssetsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListWhatsAppFlowAssetsInput_id *smithy.Schema
-
-var ListWhatsAppFlowAssetsInput_flowId *smithy.Schema
-
-var ListWhatsAppFlowAssetsInput_nextToken *smithy.Schema
-
-var ListWhatsAppFlowAssetsInput_maxResults *smithy.Schema
-
-var ListWhatsAppFlowAssetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowAssetsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatsAppFlowAssetsOutput_flowAssets *smithy.Schema
-
-var ListWhatsAppFlowAssetsOutput_nextToken *smithy.Schema
-
-var ListWhatsAppFlowsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListWhatsAppFlowsInput_id *smithy.Schema
-
-var ListWhatsAppFlowsInput_nextToken *smithy.Schema
-
-var ListWhatsAppFlowsInput_maxResults *smithy.Schema
-
-var ListWhatsAppFlowsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatsAppFlowsOutput_flows *smithy.Schema
-
-var ListWhatsAppFlowsOutput_nextToken *smithy.Schema
-
-var ListWhatsAppMessageTemplatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppMessageTemplatesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListWhatsAppMessageTemplatesInput_id *smithy.Schema
-
-var ListWhatsAppMessageTemplatesInput_nextToken *smithy.Schema
-
-var ListWhatsAppMessageTemplatesInput_maxResults *smithy.Schema
-
-var ListWhatsAppMessageTemplatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppMessageTemplatesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatsAppMessageTemplatesOutput_templates *smithy.Schema
-
-var ListWhatsAppMessageTemplatesOutput_nextToken *smithy.Schema
-
-var ListWhatsAppTemplateLibraryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppTemplateLibraryInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListWhatsAppTemplateLibraryInput_nextToken *smithy.Schema
-
-var ListWhatsAppTemplateLibraryInput_maxResults *smithy.Schema
-
-var ListWhatsAppTemplateLibraryInput_id *smithy.Schema
-
-var ListWhatsAppTemplateLibraryInput_filters *smithy.Schema
-
-var ListWhatsAppTemplateLibraryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppTemplateLibraryOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates *smithy.Schema
-
-var ListWhatsAppTemplateLibraryOutput_nextToken *smithy.Schema
-
-var PostWhatsAppMessageMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PostWhatsAppMessageMediaInput",
-}, smithy.ShapeTypeStructure, 3)
-var PostWhatsAppMessageMediaInput_originationPhoneNumberId *smithy.Schema
-
-var PostWhatsAppMessageMediaInput_sourceS3PresignedUrl *smithy.Schema
-
-var PostWhatsAppMessageMediaInput_sourceS3File *smithy.Schema
-
-var PostWhatsAppMessageMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PostWhatsAppMessageMediaOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PostWhatsAppMessageMediaOutput_mediaId *smithy.Schema
-
-var PublishWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PublishWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 2)
-var PublishWhatsAppFlowInput_id *smithy.Schema
-
-var PublishWhatsAppFlowInput_flowId *smithy.Schema
-
-var PublishWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PublishWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutWhatsAppBusinessAccountEventDestinationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessAccountEventDestinationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutWhatsAppBusinessAccountEventDestinationsInput_id *smithy.Schema
-
-var PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations *smithy.Schema
-
-var PutWhatsAppBusinessAccountEventDestinationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessAccountEventDestinationsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutWhatsAppBusinessPublicKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessPublicKeyInput",
-}, smithy.ShapeTypeStructure, 3)
-var PutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId *smithy.Schema
-
-var PutWhatsAppBusinessPublicKeyInput_businessPublicKey *smithy.Schema
-
-var PutWhatsAppBusinessPublicKeyInput_kmsKeyArn *smithy.Schema
-
-var PutWhatsAppBusinessPublicKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessPublicKeyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SendWhatsAppCallEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppCallEventInput",
-}, smithy.ShapeTypeStructure, 3)
-var SendWhatsAppCallEventInput_originationPhoneNumberId *smithy.Schema
-
-var SendWhatsAppCallEventInput_metaApiVersion *smithy.Schema
-
-var SendWhatsAppCallEventInput_callEvent *smithy.Schema
-
-var SendWhatsAppCallEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppCallEventOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SendWhatsAppCallEventOutput_callId *smithy.Schema
-
-var SendWhatsAppConversionEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppConversionEventInput",
-}, smithy.ShapeTypeStructure, 3)
-var SendWhatsAppConversionEventInput_id *smithy.Schema
-
-var SendWhatsAppConversionEventInput_datasetId *smithy.Schema
-
-var SendWhatsAppConversionEventInput_eventData *smithy.Schema
-
-var SendWhatsAppConversionEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppConversionEventOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SendWhatsAppConversionEventOutput_requestId *smithy.Schema
-
-var SendWhatsAppMessageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppMessageInput",
-}, smithy.ShapeTypeStructure, 3)
-var SendWhatsAppMessageInput_originationPhoneNumberId *smithy.Schema
-
-var SendWhatsAppMessageInput_message *smithy.Schema
-
-var SendWhatsAppMessageInput_metaApiVersion *smithy.Schema
-
-var SendWhatsAppMessageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppMessageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SendWhatsAppMessageOutput_messageId *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var TagResourceOutput_statusCode *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UntagResourceOutput_statusCode *smithy.Schema
-
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id *smithy.Schema
-
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings *smithy.Schema
-
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId *smithy.Schema
-
-var UpdateWhatsAppFlowAssetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowAssetsInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateWhatsAppFlowAssetsInput_id *smithy.Schema
-
-var UpdateWhatsAppFlowAssetsInput_flowId *smithy.Schema
-
-var UpdateWhatsAppFlowAssetsInput_flowJson *smithy.Schema
-
-var UpdateWhatsAppFlowAssetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowAssetsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWhatsAppFlowAssetsOutput_validationErrors *smithy.Schema
-
-var UpdateWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateWhatsAppFlowInput_id *smithy.Schema
-
-var UpdateWhatsAppFlowInput_flowId *smithy.Schema
-
-var UpdateWhatsAppFlowInput_flowName *smithy.Schema
-
-var UpdateWhatsAppFlowInput_categories *smithy.Schema
-
-var UpdateWhatsAppFlowInput_endpointUri *smithy.Schema
-
-var UpdateWhatsAppFlowInput_metaAppId *smithy.Schema
-
-var UpdateWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateWhatsAppMessageTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppMessageTemplateInput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateWhatsAppMessageTemplateInput_id *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_metaTemplateId *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_templateName *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_templateLanguageCode *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_parameterFormat *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_templateCategory *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_templateComponents *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppMessageTemplateOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedByMetaException_message = AccessDeniedByMetaException.AddMember("message", _ErrorMessage)
-
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	DependencyException_message = DependencyException.AddMember("message", _ErrorMessage)
-
-	_Filter_key = _Filter.AddMember("key", smithyprelude.String)
-
-	_Filter_value = _Filter.AddMember("value", smithyprelude.String)
-
-	_Headers_key = _Headers.AddMember("key", smithyprelude.String)
-
-	_Headers_value = _Headers.AddMember("value", smithyprelude.String)
-
-	InternalServiceException_message = InternalServiceException.AddMember("message", _ErrorMessage)
-
-	InvalidParametersException_message = InvalidParametersException.AddMember("message", _ErrorMessage)
-
-	LibraryTemplateBodyInputs_addContactNumber = LibraryTemplateBodyInputs.AddMember("addContactNumber", _AddContactNumber)
-
-	LibraryTemplateBodyInputs_addLearnMoreLink = LibraryTemplateBodyInputs.AddMember("addLearnMoreLink", _AddLearnMoreLink)
-
-	LibraryTemplateBodyInputs_addSecurityRecommendation = LibraryTemplateBodyInputs.AddMember("addSecurityRecommendation", _AddSecurityRecommendation)
-
-	LibraryTemplateBodyInputs_addTrackPackageLink = LibraryTemplateBodyInputs.AddMember("addTrackPackageLink", _AddTrackPackageLink)
-
-	LibraryTemplateBodyInputs_codeExpirationMinutes = LibraryTemplateBodyInputs.AddMember("codeExpirationMinutes", _CodeExpirationMinutes)
-
-	_MetaUrlWithSuffixExample_key = _MetaUrlWithSuffixExample.AddMember("key", smithyprelude.String)
-
-	_MetaUrlWithSuffixExample_value = _MetaUrlWithSuffixExample.AddMember("value", smithyprelude.String)
-
-	_SupportedApp_key = _SupportedApp.AddMember("key", smithyprelude.String)
-
-	_SupportedApp_value = _SupportedApp.AddMember("value", smithyprelude.String)
-
-	_SupportedApps_member = _SupportedApps.AddMember("member", _SupportedApp)
-
-	LibraryTemplateButtonInput_type = LibraryTemplateButtonInput.AddMember("type", _ButtonType)
-
-	LibraryTemplateButtonInput_phoneNumber = LibraryTemplateButtonInput.AddMember("phoneNumber", _PhoneNumber)
-
-	LibraryTemplateButtonInput_url = LibraryTemplateButtonInput.AddMember("url", _MetaUrlWithSuffixExample)
-
-	LibraryTemplateButtonInput_otpType = LibraryTemplateButtonInput.AddMember("otpType", _OtpType)
-
-	LibraryTemplateButtonInput_zeroTapTermsAccepted = LibraryTemplateButtonInput.AddMember("zeroTapTermsAccepted", _ZeroTapTermsAccepted)
-
-	LibraryTemplateButtonInput_supportedApps = LibraryTemplateButtonInput.AddMember("supportedApps", _SupportedApps)
-
-	LibraryTemplateButtonList_type = LibraryTemplateButtonList.AddMember("type", _ButtonType)
-
-	LibraryTemplateButtonList_text = LibraryTemplateButtonList.AddMember("text", _MetaText)
-
-	LibraryTemplateButtonList_phoneNumber = LibraryTemplateButtonList.AddMember("phoneNumber", _PhoneNumber)
-
-	LibraryTemplateButtonList_url = LibraryTemplateButtonList.AddMember("url", _MetaUrl)
-
-	LibraryTemplateButtonList_otpType = LibraryTemplateButtonList.AddMember("otpType", _OtpType)
-
-	LibraryTemplateButtonList_zeroTapTermsAccepted = LibraryTemplateButtonList.AddMember("zeroTapTermsAccepted", _ZeroTapTermsAccepted)
-
-	LibraryTemplateButtonList_supportedApps = LibraryTemplateButtonList.AddMember("supportedApps", _SupportedApps)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	RegistrationStatus_COMPLETE = RegistrationStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	RegistrationStatus_INCOMPLETE = RegistrationStatus.AddMember("INCOMPLETE", smithyprelude.Unit)
-
-	WhatsAppPhoneNumberDetail_arn = WhatsAppPhoneNumberDetail.AddMember("arn", _LinkedWhatsAppPhoneNumberArn)
-
-	WhatsAppPhoneNumberDetail_phoneNumber = WhatsAppPhoneNumberDetail.AddMember("phoneNumber", _PhoneNumber)
-
-	WhatsAppPhoneNumberDetail_phoneNumberId = WhatsAppPhoneNumberDetail.AddMember("phoneNumberId", _WhatsAppPhoneNumberId)
-
-	WhatsAppPhoneNumberDetail_metaPhoneNumberId = WhatsAppPhoneNumberDetail.AddMember("metaPhoneNumberId", _WhatsAppPhoneNumber)
-
-	WhatsAppPhoneNumberDetail_displayPhoneNumberName = WhatsAppPhoneNumberDetail.AddMember("displayPhoneNumberName", _WhatsAppPhoneNumberName)
-
-	WhatsAppPhoneNumberDetail_displayPhoneNumber = WhatsAppPhoneNumberDetail.AddMember("displayPhoneNumber", _WhatsAppDisplayPhoneNumber)
-
-	WhatsAppPhoneNumberDetail_qualityRating = WhatsAppPhoneNumberDetail.AddMember("qualityRating", _WhatsAppPhoneNumberQualityRating)
-
-	WhatsAppPhoneNumberDetail_dataLocalizationRegion = WhatsAppPhoneNumberDetail.AddMember("dataLocalizationRegion", _IsoCountryCode)
-
-	_WhatsAppPhoneNumberDetailList_member = _WhatsAppPhoneNumberDetailList.AddMember("member", WhatsAppPhoneNumberDetail)
-
-	LinkedWhatsAppBusinessAccountIdMetaData_accountName = LinkedWhatsAppBusinessAccountIdMetaData.AddMember("accountName", _WhatsAppBusinessAccountName)
-
-	LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus = LinkedWhatsAppBusinessAccountIdMetaData.AddMember("registrationStatus", RegistrationStatus)
-
-	LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers = LinkedWhatsAppBusinessAccountIdMetaData.AddMember("unregisteredWhatsAppPhoneNumbers", _WhatsAppPhoneNumberDetailList)
-
-	LinkedWhatsAppBusinessAccountIdMetaData_wabaId = LinkedWhatsAppBusinessAccountIdMetaData.AddMember("wabaId", _LinkedWhatsAppBusinessAccountId)
-
-	_LinkedAccountWithIncompleteSetup_key = _LinkedAccountWithIncompleteSetup.AddMember("key", _WhatsAppBusinessAccountId)
-
-	_LinkedAccountWithIncompleteSetup_value = _LinkedAccountWithIncompleteSetup.AddMember("value", LinkedWhatsAppBusinessAccountIdMetaData)
-
-	WhatsAppBusinessAccountEventDestination_eventDestinationArn = WhatsAppBusinessAccountEventDestination.AddMember("eventDestinationArn", _EventDestinationArn)
-
-	WhatsAppBusinessAccountEventDestination_roleArn = WhatsAppBusinessAccountEventDestination.AddMember("roleArn", _RoleArn)
-
-	_WhatsAppBusinessAccountEventDestinations_member = _WhatsAppBusinessAccountEventDestinations.AddMember("member", WhatsAppBusinessAccountEventDestination)
-
-	WhatsAppPhoneNumberSummary_arn = WhatsAppPhoneNumberSummary.AddMember("arn", _LinkedWhatsAppPhoneNumberArn)
-
-	WhatsAppPhoneNumberSummary_phoneNumber = WhatsAppPhoneNumberSummary.AddMember("phoneNumber", _PhoneNumber)
-
-	WhatsAppPhoneNumberSummary_phoneNumberId = WhatsAppPhoneNumberSummary.AddMember("phoneNumberId", _WhatsAppPhoneNumberId)
-
-	WhatsAppPhoneNumberSummary_metaPhoneNumberId = WhatsAppPhoneNumberSummary.AddMember("metaPhoneNumberId", _WhatsAppPhoneNumber)
-
-	WhatsAppPhoneNumberSummary_displayPhoneNumberName = WhatsAppPhoneNumberSummary.AddMember("displayPhoneNumberName", _WhatsAppPhoneNumberName)
-
-	WhatsAppPhoneNumberSummary_displayPhoneNumber = WhatsAppPhoneNumberSummary.AddMember("displayPhoneNumber", _WhatsAppDisplayPhoneNumber)
-
-	WhatsAppPhoneNumberSummary_qualityRating = WhatsAppPhoneNumberSummary.AddMember("qualityRating", _WhatsAppPhoneNumberQualityRating)
-
-	WhatsAppPhoneNumberSummary_dataLocalizationRegion = WhatsAppPhoneNumberSummary.AddMember("dataLocalizationRegion", _IsoCountryCode)
-
-	_WhatsAppPhoneNumberSummaryList_member = _WhatsAppPhoneNumberSummaryList.AddMember("member", WhatsAppPhoneNumberSummary)
-
-	LinkedWhatsAppBusinessAccount_arn = LinkedWhatsAppBusinessAccount.AddMember("arn", _LinkedWhatsAppBusinessAccountArn)
-
-	LinkedWhatsAppBusinessAccount_id = LinkedWhatsAppBusinessAccount.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	LinkedWhatsAppBusinessAccount_wabaId = LinkedWhatsAppBusinessAccount.AddMember("wabaId", _WhatsAppBusinessAccountId)
-
-	LinkedWhatsAppBusinessAccount_registrationStatus = LinkedWhatsAppBusinessAccount.AddMember("registrationStatus", RegistrationStatus)
-
-	LinkedWhatsAppBusinessAccount_linkDate = LinkedWhatsAppBusinessAccount.AddMember("linkDate", _WhatsAppBusinessAccountLinkDate)
-
-	LinkedWhatsAppBusinessAccount_wabaName = LinkedWhatsAppBusinessAccount.AddMember("wabaName", _WhatsAppBusinessAccountName)
-
-	LinkedWhatsAppBusinessAccount_eventDestinations = LinkedWhatsAppBusinessAccount.AddMember("eventDestinations", _WhatsAppBusinessAccountEventDestinations)
-
-	LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus = LinkedWhatsAppBusinessAccount.AddMember("marketingMessagesOnboardingStatus", _WhatsAppBusinessAccountMarketingMessagesOnboardingStatus)
-
-	LinkedWhatsAppBusinessAccount_directSendEnforcementStatus = LinkedWhatsAppBusinessAccount.AddMember("directSendEnforcementStatus", _DirectSendEnforcementStatus)
-
-	LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt = LinkedWhatsAppBusinessAccount.AddMember("directSendEnforcementStatusExpiresAt", _DirectSendEnforcementStatusExpiresAt)
-
-	LinkedWhatsAppBusinessAccount_datasetId = LinkedWhatsAppBusinessAccount.AddMember("datasetId", _WhatsAppDatasetId)
-
-	LinkedWhatsAppBusinessAccount_phoneNumbers = LinkedWhatsAppBusinessAccount.AddMember("phoneNumbers", _WhatsAppPhoneNumberSummaryList)
-
-	LinkedWhatsAppBusinessAccountSummary_arn = LinkedWhatsAppBusinessAccountSummary.AddMember("arn", _LinkedWhatsAppBusinessAccountArn)
-
-	LinkedWhatsAppBusinessAccountSummary_id = LinkedWhatsAppBusinessAccountSummary.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	LinkedWhatsAppBusinessAccountSummary_wabaId = LinkedWhatsAppBusinessAccountSummary.AddMember("wabaId", _WhatsAppBusinessAccountId)
-
-	LinkedWhatsAppBusinessAccountSummary_registrationStatus = LinkedWhatsAppBusinessAccountSummary.AddMember("registrationStatus", RegistrationStatus)
-
-	LinkedWhatsAppBusinessAccountSummary_linkDate = LinkedWhatsAppBusinessAccountSummary.AddMember("linkDate", _WhatsAppBusinessAccountLinkDate)
-
-	LinkedWhatsAppBusinessAccountSummary_wabaName = LinkedWhatsAppBusinessAccountSummary.AddMember("wabaName", _WhatsAppBusinessAccountName)
-
-	LinkedWhatsAppBusinessAccountSummary_eventDestinations = LinkedWhatsAppBusinessAccountSummary.AddMember("eventDestinations", _WhatsAppBusinessAccountEventDestinations)
-
-	LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus = LinkedWhatsAppBusinessAccountSummary.AddMember("marketingMessagesOnboardingStatus", _WhatsAppBusinessAccountMarketingMessagesOnboardingStatus)
-
-	LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus = LinkedWhatsAppBusinessAccountSummary.AddMember("directSendEnforcementStatus", _DirectSendEnforcementStatus)
-
-	LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt = LinkedWhatsAppBusinessAccountSummary.AddMember("directSendEnforcementStatusExpiresAt", _DirectSendEnforcementStatusExpiresAt)
-
-	LinkedWhatsAppBusinessAccountSummary_datasetId = LinkedWhatsAppBusinessAccountSummary.AddMember("datasetId", _WhatsAppDatasetId)
-
-	_LinkedWhatsAppBusinessAccountSummaryList_member = _LinkedWhatsAppBusinessAccountSummaryList.AddMember("member", LinkedWhatsAppBusinessAccountSummary)
-
-	MetaFlowApplicationInfo_link = MetaFlowApplicationInfo.AddMember("link", _MetaFlowApplicationLink)
-
-	MetaFlowApplicationInfo_name = MetaFlowApplicationInfo.AddMember("name", _MetaFlowApplicationName)
-
-	MetaFlowApplicationInfo_id = MetaFlowApplicationInfo.AddMember("id", _MetaFlowApplicationId)
-
-	MetaFlowAsset_name = MetaFlowAsset.AddMember("name", _MetaFlowAssetName)
-
-	MetaFlowAsset_assetType = MetaFlowAsset.AddMember("assetType", _MetaFlowAssetType)
-
-	MetaFlowAsset_downloadUrl = MetaFlowAsset.AddMember("downloadUrl", _MetaFlowAssetDownloadUrl)
-
-	_MetaFlowAssetList_member = _MetaFlowAssetList.AddMember("member", MetaFlowAsset)
-
-	MetaFlowCategory_SIGN_UP = MetaFlowCategory.AddMember("SIGN_UP", smithyprelude.Unit)
-
-	MetaFlowCategory_SIGN_IN = MetaFlowCategory.AddMember("SIGN_IN", smithyprelude.Unit)
-
-	MetaFlowCategory_APPOINTMENT_BOOKING = MetaFlowCategory.AddMember("APPOINTMENT_BOOKING", smithyprelude.Unit)
-
-	MetaFlowCategory_LEAD_GENERATION = MetaFlowCategory.AddMember("LEAD_GENERATION", smithyprelude.Unit)
-
-	MetaFlowCategory_SHOPPING = MetaFlowCategory.AddMember("SHOPPING", smithyprelude.Unit)
-
-	MetaFlowCategory_CONTACT_US = MetaFlowCategory.AddMember("CONTACT_US", smithyprelude.Unit)
-
-	MetaFlowCategory_CUSTOMER_SUPPORT = MetaFlowCategory.AddMember("CUSTOMER_SUPPORT", smithyprelude.Unit)
-
-	MetaFlowCategory_SURVEY = MetaFlowCategory.AddMember("SURVEY", smithyprelude.Unit)
-
-	MetaFlowCategory_OTHER = MetaFlowCategory.AddMember("OTHER", smithyprelude.Unit)
-
-	_MetaFlowCategoryList_member = _MetaFlowCategoryList.AddMember("member", MetaFlowCategory)
-
-	MetaFlowHealthEntity_entityType = MetaFlowHealthEntity.AddMember("entityType", _MetaFlowHealthEntityType)
-
-	MetaFlowHealthEntity_id = MetaFlowHealthEntity.AddMember("id", smithyprelude.String)
-
-	MetaFlowHealthEntity_canSendMessage = MetaFlowHealthEntity.AddMember("canSendMessage", _MetaFlowHealthStatusAvailability)
-
-	_MetaFlowHealthEntityList_member = _MetaFlowHealthEntityList.AddMember("member", MetaFlowHealthEntity)
-
-	MetaFlowHealthStatus_canSendMessage = MetaFlowHealthStatus.AddMember("canSendMessage", _MetaFlowHealthStatusAvailability)
-
-	MetaFlowHealthStatus_entities = MetaFlowHealthStatus.AddMember("entities", _MetaFlowHealthEntityList)
-
-	MetaFlowPreviewInfo_previewUrl = MetaFlowPreviewInfo.AddMember("previewUrl", _MetaFlowPreviewUrl)
-
-	MetaFlowPreviewInfo_expiresAt = MetaFlowPreviewInfo.AddMember("expiresAt", _MetaFlowTimestamp)
-
-	_ValidationErrorList_member = _ValidationErrorList.AddMember("member", _MetaFlowValidationError)
-
-	MetaFlowSummary_flowId = MetaFlowSummary.AddMember("flowId", _MetaFlowId)
-
-	MetaFlowSummary_flowName = MetaFlowSummary.AddMember("flowName", _MetaFlowName)
-
-	MetaFlowSummary_flowStatus = MetaFlowSummary.AddMember("flowStatus", _MetaFlowStatus)
-
-	MetaFlowSummary_flowCategories = MetaFlowSummary.AddMember("flowCategories", _MetaFlowCategoryList)
-
-	MetaFlowSummary_validationErrors = MetaFlowSummary.AddMember("validationErrors", _ValidationErrorList)
-
-	_MetaFlowSummaryList_member = _MetaFlowSummaryList.AddMember("member", MetaFlowSummary)
-
-	MetaFlowWhatsAppBusinessAccountInfo_id = MetaFlowWhatsAppBusinessAccountInfo.AddMember("id", _WhatsAppBusinessAccountId)
-
-	MetaFlowWhatsAppBusinessAccountInfo_name = MetaFlowWhatsAppBusinessAccountInfo.AddMember("name", _WhatsAppBusinessAccountName)
-
-	MetaFlowWhatsAppBusinessAccountInfo_currency = MetaFlowWhatsAppBusinessAccountInfo.AddMember("currency", _MetaFlowWabaCurrency)
-
-	MetaFlowWhatsAppBusinessAccountInfo_timezoneId = MetaFlowWhatsAppBusinessAccountInfo.AddMember("timezoneId", _MetaFlowWabaTimezoneId)
-
-	MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace = MetaFlowWhatsAppBusinessAccountInfo.AddMember("messageTemplateNamespace", _MetaFlowWabaTemplateNamespace)
-
-	_MetaIndustries_member = _MetaIndustries.AddMember("member", _MetaIndustry)
-
-	_MetaLibraryTemplateButtonInputs_member = _MetaLibraryTemplateButtonInputs.AddMember("member", LibraryTemplateButtonInput)
-
-	MetaLibraryTemplate_templateName = MetaLibraryTemplate.AddMember("templateName", _MetaTemplateName)
-
-	MetaLibraryTemplate_libraryTemplateName = MetaLibraryTemplate.AddMember("libraryTemplateName", _MetaTemplateName)
-
-	MetaLibraryTemplate_templateCategory = MetaLibraryTemplate.AddMember("templateCategory", _MetaTemplateCategory)
-
-	MetaLibraryTemplate_templateLanguage = MetaLibraryTemplate.AddMember("templateLanguage", _MetaTemplateLanguage)
-
-	MetaLibraryTemplate_libraryTemplateButtonInputs = MetaLibraryTemplate.AddMember("libraryTemplateButtonInputs", _MetaLibraryTemplateButtonInputs)
-
-	MetaLibraryTemplate_libraryTemplateBodyInputs = MetaLibraryTemplate.AddMember("libraryTemplateBodyInputs", LibraryTemplateBodyInputs)
-
-	_MetaLibraryTemplateButtonList_member = _MetaLibraryTemplateButtonList.AddMember("member", LibraryTemplateButtonList)
-
-	_MetaTemplateBodyExampleParams_member = _MetaTemplateBodyExampleParams.AddMember("member", smithyprelude.String)
-
-	MetaLibraryTemplateDefinition_templateName = MetaLibraryTemplateDefinition.AddMember("templateName", _MetaTemplateName)
-
-	MetaLibraryTemplateDefinition_templateLanguage = MetaLibraryTemplateDefinition.AddMember("templateLanguage", _MetaTemplateLanguage)
-
-	MetaLibraryTemplateDefinition_templateCategory = MetaLibraryTemplateDefinition.AddMember("templateCategory", _MetaTemplateCategory)
-
-	MetaLibraryTemplateDefinition_templateTopic = MetaLibraryTemplateDefinition.AddMember("templateTopic", _MetaTemplateTopic)
-
-	MetaLibraryTemplateDefinition_templateUseCase = MetaLibraryTemplateDefinition.AddMember("templateUseCase", _MetaTemplateUseCase)
-
-	MetaLibraryTemplateDefinition_templateIndustry = MetaLibraryTemplateDefinition.AddMember("templateIndustry", _MetaIndustries)
-
-	MetaLibraryTemplateDefinition_templateHeader = MetaLibraryTemplateDefinition.AddMember("templateHeader", _MetaTemplateHeader)
-
-	MetaLibraryTemplateDefinition_templateBody = MetaLibraryTemplateDefinition.AddMember("templateBody", _MetaTemplateBody)
-
-	MetaLibraryTemplateDefinition_templateButtons = MetaLibraryTemplateDefinition.AddMember("templateButtons", _MetaLibraryTemplateButtonList)
-
-	MetaLibraryTemplateDefinition_templateId = MetaLibraryTemplateDefinition.AddMember("templateId", _MetaTemplateId)
-
-	MetaLibraryTemplateDefinition_templateBodyExampleParams = MetaLibraryTemplateDefinition.AddMember("templateBodyExampleParams", _MetaTemplateBodyExampleParams)
-
-	_MetaLibraryTemplatesList_member = _MetaLibraryTemplatesList.AddMember("member", MetaLibraryTemplateDefinition)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	S3File_bucketName = S3File.AddMember("bucketName", smithyprelude.String)
-
-	S3File_key = S3File.AddMember("key", smithyprelude.String)
-
-	S3PresignedUrl_url = S3PresignedUrl.AddMember("url", smithyprelude.String)
-
-	S3PresignedUrl_headers = S3PresignedUrl.AddMember("headers", _Headers)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	Tag_key = Tag.AddMember("key", smithyprelude.String)
-
-	Tag_value = Tag.AddMember("value", smithyprelude.String)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TemplateSummary_templateName = TemplateSummary.AddMember("templateName", _MetaTemplateName)
-
-	TemplateSummary_metaTemplateId = TemplateSummary.AddMember("metaTemplateId", _MetaTemplateId)
-
-	TemplateSummary_templateStatus = TemplateSummary.AddMember("templateStatus", _MetaTemplateStatus)
-
-	TemplateSummary_templateQualityScore = TemplateSummary.AddMember("templateQualityScore", _MetaTemplateQualityScore)
-
-	TemplateSummary_templateLanguage = TemplateSummary.AddMember("templateLanguage", _MetaTemplateLanguage)
-
-	TemplateSummary_templateCategory = TemplateSummary.AddMember("templateCategory", _MetaTemplateCategory)
-
-	TemplateSummary_templateSource = TemplateSummary.AddMember("templateSource", _MetaTemplateSource)
-
-	TemplateSummary_correctCategory = TemplateSummary.AddMember("correctCategory", _MetaTemplateCategory)
-
-	_TemplateSummaryList_member = _TemplateSummaryList.AddMember("member", TemplateSummary)
-
-	ThrottledRequestException_message = ThrottledRequestException.AddMember("message", _ErrorMessage)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	WabaPhoneNumberSetupFinalization_id = WabaPhoneNumberSetupFinalization.AddMember("id", _WhatsAppPhoneNumber)
-
-	WabaPhoneNumberSetupFinalization_twoFactorPin = WabaPhoneNumberSetupFinalization.AddMember("twoFactorPin", _TwoFactorPin)
-
-	WabaPhoneNumberSetupFinalization_dataLocalizationRegion = WabaPhoneNumberSetupFinalization.AddMember("dataLocalizationRegion", _IsoCountryCode)
-
-	WabaPhoneNumberSetupFinalization_tags = WabaPhoneNumberSetupFinalization.AddMember("tags", _TagList)
-
-	_WabaPhoneNumberSetupFinalizationList_member = _WabaPhoneNumberSetupFinalizationList.AddMember("member", WabaPhoneNumberSetupFinalization)
-
-	WabaSetupFinalization_id = WabaSetupFinalization.AddMember("id", _WhatsAppBusinessAccountId)
-
-	WabaSetupFinalization_eventDestinations = WabaSetupFinalization.AddMember("eventDestinations", _WhatsAppBusinessAccountEventDestinations)
-
-	WabaSetupFinalization_tags = WabaSetupFinalization.AddMember("tags", _TagList)
-
-	WhatsAppDayOfWeek_MONDAY = WhatsAppDayOfWeek.AddMember("MONDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_TUESDAY = WhatsAppDayOfWeek.AddMember("TUESDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_WEDNESDAY = WhatsAppDayOfWeek.AddMember("WEDNESDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_THURSDAY = WhatsAppDayOfWeek.AddMember("THURSDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_FRIDAY = WhatsAppDayOfWeek.AddMember("FRIDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_SATURDAY = WhatsAppDayOfWeek.AddMember("SATURDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_SUNDAY = WhatsAppDayOfWeek.AddMember("SUNDAY", smithyprelude.Unit)
-
-	WhatsAppTimeOfDay_hours = WhatsAppTimeOfDay.AddMember("hours", smithyprelude.Integer)
-
-	WhatsAppTimeOfDay_minutes = WhatsAppTimeOfDay.AddMember("minutes", smithyprelude.Integer)
-
-	WhatsAppWeeklyOperatingHoursEntry_dayOfWeek = WhatsAppWeeklyOperatingHoursEntry.AddMember("dayOfWeek", WhatsAppDayOfWeek)
-
-	WhatsAppWeeklyOperatingHoursEntry_openTime = WhatsAppWeeklyOperatingHoursEntry.AddMember("openTime", WhatsAppTimeOfDay)
-
-	WhatsAppWeeklyOperatingHoursEntry_closeTime = WhatsAppWeeklyOperatingHoursEntry.AddMember("closeTime", WhatsAppTimeOfDay)
-
-	_WhatsAppWeeklyOperatingHoursList_member = _WhatsAppWeeklyOperatingHoursList.AddMember("member", WhatsAppWeeklyOperatingHoursEntry)
-
-	WhatsAppHolidayScheduleEntry_date = WhatsAppHolidayScheduleEntry.AddMember("date", _WhatsAppDate)
-
-	WhatsAppHolidayScheduleEntry_startTime = WhatsAppHolidayScheduleEntry.AddMember("startTime", WhatsAppTimeOfDay)
-
-	WhatsAppHolidayScheduleEntry_endTime = WhatsAppHolidayScheduleEntry.AddMember("endTime", WhatsAppTimeOfDay)
-
-	_WhatsAppHolidayScheduleList_member = _WhatsAppHolidayScheduleList.AddMember("member", WhatsAppHolidayScheduleEntry)
-
-	WhatsAppCallHours_enabled = WhatsAppCallHours.AddMember("enabled", smithyprelude.Boolean)
-
-	WhatsAppCallHours_timezone = WhatsAppCallHours.AddMember("timezone", _IanaTimezone)
-
-	WhatsAppCallHours_weeklyOperatingHours = WhatsAppCallHours.AddMember("weeklyOperatingHours", _WhatsAppWeeklyOperatingHoursList)
-
-	WhatsAppCallHours_holidaySchedule = WhatsAppCallHours.AddMember("holidaySchedule", _WhatsAppHolidayScheduleList)
-
-	WhatsAppCallPermission_status = WhatsAppCallPermission.AddMember("status", _WhatsAppCallPermissionStatus)
-
-	WhatsAppCallPermission_expirationTime = WhatsAppCallPermission.AddMember("expirationTime", smithyprelude.Timestamp)
-
-	WhatsAppCallPermissionLimit_timePeriod = WhatsAppCallPermissionLimit.AddMember("timePeriod", _Iso8601Duration)
-
-	WhatsAppCallPermissionLimit_maxAllowed = WhatsAppCallPermissionLimit.AddMember("maxAllowed", smithyprelude.Integer)
-
-	WhatsAppCallPermissionLimit_currentUsage = WhatsAppCallPermissionLimit.AddMember("currentUsage", smithyprelude.Integer)
-
-	WhatsAppCallPermissionLimit_limitExpirationTime = WhatsAppCallPermissionLimit.AddMember("limitExpirationTime", smithyprelude.Timestamp)
-
-	_WhatsAppCallPermissionLimitList_member = _WhatsAppCallPermissionLimitList.AddMember("member", WhatsAppCallPermissionLimit)
-
-	WhatsAppCallPermissionAction_actionName = WhatsAppCallPermissionAction.AddMember("actionName", _WhatsAppCallPermissionActionName)
-
-	WhatsAppCallPermissionAction_canPerformAction = WhatsAppCallPermissionAction.AddMember("canPerformAction", smithyprelude.Boolean)
-
-	WhatsAppCallPermissionAction_limits = WhatsAppCallPermissionAction.AddMember("limits", _WhatsAppCallPermissionLimitList)
-
-	_WhatsAppCallPermissionActionList_member = _WhatsAppCallPermissionActionList.AddMember("member", WhatsAppCallPermissionAction)
-
-	WhatsAppCallSettings_callEnabled = WhatsAppCallSettings.AddMember("callEnabled", smithyprelude.Boolean)
-
-	WhatsAppCallSettings_callHours = WhatsAppCallSettings.AddMember("callHours", WhatsAppCallHours)
-
-	WhatsAppCallSettings_callIconVisibility = WhatsAppCallSettings.AddMember("callIconVisibility", _WhatsAppCallIconVisibility)
-
-	WhatsAppCallSettings_callbackPermissionStatus = WhatsAppCallSettings.AddMember("callbackPermissionStatus", _WhatsAppCallbackPermissionStatus)
-
-	WhatsAppSetupFinalization_associateInProgressToken = WhatsAppSetupFinalization.AddMember("associateInProgressToken", _AssociateInProgressToken)
-
-	WhatsAppSetupFinalization_phoneNumbers = WhatsAppSetupFinalization.AddMember("phoneNumbers", _WabaPhoneNumberSetupFinalizationList)
-
-	WhatsAppSetupFinalization_phoneNumberParent = WhatsAppSetupFinalization.AddMember("phoneNumberParent", _LinkedWhatsAppBusinessAccountId)
-
-	WhatsAppSetupFinalization_waba = WhatsAppSetupFinalization.AddMember("waba", WabaSetupFinalization)
-
-	WhatsAppSignupCallback_accessToken = WhatsAppSignupCallback.AddMember("accessToken", smithyprelude.String)
-
-	WhatsAppSignupCallback_callbackUrl = WhatsAppSignupCallback.AddMember("callbackUrl", smithyprelude.String)
-
-	WhatsAppSignupCallbackResult_associateInProgressToken = WhatsAppSignupCallbackResult.AddMember("associateInProgressToken", _AssociateInProgressToken)
-
-	WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup = WhatsAppSignupCallbackResult.AddMember("linkedAccountsWithIncompleteSetup", _LinkedAccountWithIncompleteSetup)
-
-	AssociateWhatsAppBusinessAccountInput_signupCallback = AssociateWhatsAppBusinessAccountInput.AddMember("signupCallback", WhatsAppSignupCallback)
-
-	AssociateWhatsAppBusinessAccountInput_setupFinalization = AssociateWhatsAppBusinessAccountInput.AddMember("setupFinalization", WhatsAppSetupFinalization)
-
-	AssociateWhatsAppBusinessAccountOutput_signupCallbackResult = AssociateWhatsAppBusinessAccountOutput.AddMember("signupCallbackResult", WhatsAppSignupCallbackResult)
-
-	AssociateWhatsAppBusinessAccountOutput_statusCode = AssociateWhatsAppBusinessAccountOutput.AddMember("statusCode", smithyprelude.Integer)
-
-	AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId = AssociateWhatsAppBusinessAccountOutput.AddMember("linkedWhatsAppBusinessAccountId", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppDatasetInput_id = CreateWhatsAppDatasetInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppDatasetOutput_datasetId = CreateWhatsAppDatasetOutput.AddMember("datasetId", _WhatsAppDatasetId)
-
-	CreateWhatsAppFlowInput_id = CreateWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppFlowInput_flowName = CreateWhatsAppFlowInput.AddMember("flowName", _MetaFlowName)
-
-	CreateWhatsAppFlowInput_categories = CreateWhatsAppFlowInput.AddMember("categories", _MetaFlowCategoryList)
-
-	CreateWhatsAppFlowInput_flowJson = CreateWhatsAppFlowInput.AddMember("flowJson", _MetaFlowJsonBlob)
-
-	CreateWhatsAppFlowInput_publish = CreateWhatsAppFlowInput.AddMember("publish", smithyprelude.Boolean)
-
-	CreateWhatsAppFlowInput_cloneFlowId = CreateWhatsAppFlowInput.AddMember("cloneFlowId", _MetaFlowId)
-
-	CreateWhatsAppFlowInput_endpointUri = CreateWhatsAppFlowInput.AddMember("endpointUri", _MetaFlowEndpointUri)
-
-	CreateWhatsAppFlowOutput_flowId = CreateWhatsAppFlowOutput.AddMember("flowId", _MetaFlowId)
-
-	CreateWhatsAppFlowOutput_validationErrors = CreateWhatsAppFlowOutput.AddMember("validationErrors", _ValidationErrorList)
-
-	CreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate = CreateWhatsAppMessageTemplateFromLibraryInput.AddMember("metaLibraryTemplate", MetaLibraryTemplate)
-
-	CreateWhatsAppMessageTemplateFromLibraryInput_id = CreateWhatsAppMessageTemplateFromLibraryInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId = CreateWhatsAppMessageTemplateFromLibraryOutput.AddMember("metaTemplateId", _MetaTemplateId)
-
-	CreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus = CreateWhatsAppMessageTemplateFromLibraryOutput.AddMember("templateStatus", smithyprelude.String)
-
-	CreateWhatsAppMessageTemplateFromLibraryOutput_category = CreateWhatsAppMessageTemplateFromLibraryOutput.AddMember("category", _MetaTemplateCategory)
-
-	CreateWhatsAppMessageTemplateInput_templateDefinition = CreateWhatsAppMessageTemplateInput.AddMember("templateDefinition", _MetaTemplateDefinition)
-
-	CreateWhatsAppMessageTemplateInput_id = CreateWhatsAppMessageTemplateInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppMessageTemplateMediaInput_id = CreateWhatsAppMessageTemplateMediaInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppMessageTemplateMediaInput_sourceS3File = CreateWhatsAppMessageTemplateMediaInput.AddMember("sourceS3File", S3File)
-
-	CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle = CreateWhatsAppMessageTemplateMediaOutput.AddMember("metaHeaderHandle", smithyprelude.String)
-
-	CreateWhatsAppMessageTemplateOutput_metaTemplateId = CreateWhatsAppMessageTemplateOutput.AddMember("metaTemplateId", _MetaTemplateId)
-
-	CreateWhatsAppMessageTemplateOutput_templateStatus = CreateWhatsAppMessageTemplateOutput.AddMember("templateStatus", smithyprelude.String)
-
-	CreateWhatsAppMessageTemplateOutput_category = CreateWhatsAppMessageTemplateOutput.AddMember("category", _MetaTemplateCategory)
-
-	DeleteWhatsAppFlowInput_id = DeleteWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	DeleteWhatsAppFlowInput_flowId = DeleteWhatsAppFlowInput.AddMember("flowId", _MetaFlowId, &smithytraits.HTTPQuery{Name: "flowId"})
-
-	DeleteWhatsAppMessageMediaInput_mediaId = DeleteWhatsAppMessageMediaInput.AddMember("mediaId", _WhatsAppMediaId, &smithytraits.HTTPQuery{Name: "mediaId"})
-
-	DeleteWhatsAppMessageMediaInput_originationPhoneNumberId = DeleteWhatsAppMessageMediaInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId, &smithytraits.HTTPQuery{Name: "originationPhoneNumberId"})
-
-	DeleteWhatsAppMessageMediaOutput_success = DeleteWhatsAppMessageMediaOutput.AddMember("success", smithyprelude.Boolean)
-
-	DeleteWhatsAppMessageTemplateInput_metaTemplateId = DeleteWhatsAppMessageTemplateInput.AddMember("metaTemplateId", _MetaTemplateId, &smithytraits.HTTPQuery{Name: "metaTemplateId"})
-
-	DeleteWhatsAppMessageTemplateInput_deleteAllLanguages = DeleteWhatsAppMessageTemplateInput.AddMember("deleteAllLanguages", _DeleteAllLanguages, &smithytraits.HTTPQuery{Name: "deleteAllTemplates"})
-
-	DeleteWhatsAppMessageTemplateInput_id = DeleteWhatsAppMessageTemplateInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	DeleteWhatsAppMessageTemplateInput_templateName = DeleteWhatsAppMessageTemplateInput.AddMember("templateName", _MetaTemplateName, &smithytraits.HTTPQuery{Name: "templateName"})
-
-	DeprecateWhatsAppFlowInput_id = DeprecateWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	DeprecateWhatsAppFlowInput_flowId = DeprecateWhatsAppFlowInput.AddMember("flowId", _MetaFlowId)
-
-	DisassociateWhatsAppBusinessAccountInput_id = DisassociateWhatsAppBusinessAccountInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetLinkedWhatsAppBusinessAccountInput_id = GetLinkedWhatsAppBusinessAccountInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetLinkedWhatsAppBusinessAccountOutput_account = GetLinkedWhatsAppBusinessAccountOutput.AddMember("account", LinkedWhatsAppBusinessAccount)
-
-	GetLinkedWhatsAppBusinessAccountPhoneNumberInput_id = GetLinkedWhatsAppBusinessAccountPhoneNumberInput.AddMember("id", _WhatsAppPhoneNumberId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber = GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.AddMember("phoneNumber", WhatsAppPhoneNumberDetail)
-
-	GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId = GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.AddMember("linkedWhatsAppBusinessAccountId", _LinkedWhatsAppBusinessAccountId)
-
-	GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings = GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.AddMember("callSettings", WhatsAppCallSettings)
-
-	GetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = GetWhatsAppBusinessPublicKeyInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId, &smithytraits.HTTPQuery{Name: "originationPhoneNumberId"})
-
-	GetWhatsAppBusinessPublicKeyOutput_businessPublicKey = GetWhatsAppBusinessPublicKeyOutput.AddMember("businessPublicKey", _BusinessPublicKeyPem)
-
-	GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus = GetWhatsAppBusinessPublicKeyOutput.AddMember("businessPublicKeySignatureStatus", _BusinessPublicKeySignatureStatus)
-
-	GetWhatsAppCallPermissionInput_originationPhoneNumberId = GetWhatsAppCallPermissionInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	GetWhatsAppCallPermissionInput_destinationPhoneNumber = GetWhatsAppCallPermissionInput.AddMember("destinationPhoneNumber", _WhatsAppDestinationPhoneNumber)
-
-	GetWhatsAppCallPermissionInput_endUserBsuid = GetWhatsAppCallPermissionInput.AddMember("endUserBsuid", _WhatsAppBusinessScopedUserId)
-
-	GetWhatsAppCallPermissionOutput_permission = GetWhatsAppCallPermissionOutput.AddMember("permission", WhatsAppCallPermission)
-
-	GetWhatsAppCallPermissionOutput_actions = GetWhatsAppCallPermissionOutput.AddMember("actions", _WhatsAppCallPermissionActionList)
-
-	GetWhatsAppFlowInput_id = GetWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetWhatsAppFlowInput_flowId = GetWhatsAppFlowInput.AddMember("flowId", _MetaFlowId, &smithytraits.HTTPQuery{Name: "flowId"})
-
-	GetWhatsAppFlowOutput_flowId = GetWhatsAppFlowOutput.AddMember("flowId", _MetaFlowId)
-
-	GetWhatsAppFlowOutput_flowName = GetWhatsAppFlowOutput.AddMember("flowName", _MetaFlowName)
-
-	GetWhatsAppFlowOutput_flowStatus = GetWhatsAppFlowOutput.AddMember("flowStatus", _MetaFlowStatus)
-
-	GetWhatsAppFlowOutput_categories = GetWhatsAppFlowOutput.AddMember("categories", _MetaFlowCategoryList)
-
-	GetWhatsAppFlowOutput_validationErrors = GetWhatsAppFlowOutput.AddMember("validationErrors", _ValidationErrorList)
-
-	GetWhatsAppFlowOutput_jsonVersion = GetWhatsAppFlowOutput.AddMember("jsonVersion", _MetaFlowJsonVersion)
-
-	GetWhatsAppFlowOutput_dataApiVersion = GetWhatsAppFlowOutput.AddMember("dataApiVersion", _MetaFlowDataApiVersion)
-
-	GetWhatsAppFlowOutput_endpointUri = GetWhatsAppFlowOutput.AddMember("endpointUri", _MetaFlowEndpointUri)
-
-	GetWhatsAppFlowOutput_preview = GetWhatsAppFlowOutput.AddMember("preview", MetaFlowPreviewInfo)
-
-	GetWhatsAppFlowOutput_whatsAppBusinessAccount = GetWhatsAppFlowOutput.AddMember("whatsAppBusinessAccount", MetaFlowWhatsAppBusinessAccountInfo)
-
-	GetWhatsAppFlowOutput_application = GetWhatsAppFlowOutput.AddMember("application", MetaFlowApplicationInfo)
-
-	GetWhatsAppFlowOutput_healthStatus = GetWhatsAppFlowOutput.AddMember("healthStatus", MetaFlowHealthStatus)
-
-	GetWhatsAppFlowPreviewInput_id = GetWhatsAppFlowPreviewInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetWhatsAppFlowPreviewInput_flowId = GetWhatsAppFlowPreviewInput.AddMember("flowId", _MetaFlowId, &smithytraits.HTTPQuery{Name: "flowId"})
-
-	GetWhatsAppFlowPreviewInput_invalidate = GetWhatsAppFlowPreviewInput.AddMember("invalidate", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "invalidate"})
-
-	GetWhatsAppFlowPreviewOutput_flowId = GetWhatsAppFlowPreviewOutput.AddMember("flowId", _MetaFlowId)
-
-	GetWhatsAppFlowPreviewOutput_preview = GetWhatsAppFlowPreviewOutput.AddMember("preview", MetaFlowPreviewInfo)
-
-	GetWhatsAppMessageMediaInput_mediaId = GetWhatsAppMessageMediaInput.AddMember("mediaId", _WhatsAppMediaId)
-
-	GetWhatsAppMessageMediaInput_originationPhoneNumberId = GetWhatsAppMessageMediaInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	GetWhatsAppMessageMediaInput_metadataOnly = GetWhatsAppMessageMediaInput.AddMember("metadataOnly", smithyprelude.Boolean)
-
-	GetWhatsAppMessageMediaInput_destinationS3PresignedUrl = GetWhatsAppMessageMediaInput.AddMember("destinationS3PresignedUrl", S3PresignedUrl)
-
-	GetWhatsAppMessageMediaInput_destinationS3File = GetWhatsAppMessageMediaInput.AddMember("destinationS3File", S3File)
-
-	GetWhatsAppMessageMediaOutput_mimeType = GetWhatsAppMessageMediaOutput.AddMember("mimeType", smithyprelude.String)
-
-	GetWhatsAppMessageMediaOutput_fileSize = GetWhatsAppMessageMediaOutput.AddMember("fileSize", smithyprelude.Long)
-
-	GetWhatsAppMessageTemplateInput_metaTemplateId = GetWhatsAppMessageTemplateInput.AddMember("metaTemplateId", _MetaTemplateId, &smithytraits.HTTPQuery{Name: "metaTemplateId"})
-
-	GetWhatsAppMessageTemplateInput_id = GetWhatsAppMessageTemplateInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetWhatsAppMessageTemplateInput_templateName = GetWhatsAppMessageTemplateInput.AddMember("templateName", _MetaTemplateName, &smithytraits.HTTPQuery{Name: "templateName"})
-
-	GetWhatsAppMessageTemplateInput_templateLanguageCode = GetWhatsAppMessageTemplateInput.AddMember("templateLanguageCode", _MetaTemplateLanguage, &smithytraits.HTTPQuery{Name: "templateLanguageCode"})
-
-	GetWhatsAppMessageTemplateOutput_template = GetWhatsAppMessageTemplateOutput.AddMember("template", _MetaTemplate)
-
-	ListLinkedWhatsAppBusinessAccountsInput_nextToken = ListLinkedWhatsAppBusinessAccountsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListLinkedWhatsAppBusinessAccountsInput_maxResults = ListLinkedWhatsAppBusinessAccountsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts = ListLinkedWhatsAppBusinessAccountsOutput.AddMember("linkedAccounts", _LinkedWhatsAppBusinessAccountSummaryList)
-
-	ListLinkedWhatsAppBusinessAccountsOutput_nextToken = ListLinkedWhatsAppBusinessAccountsOutput.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListTagsForResourceOutput_statusCode = ListTagsForResourceOutput.AddMember("statusCode", smithyprelude.Integer)
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagList)
-
-	ListWhatsAppFlowAssetsInput_id = ListWhatsAppFlowAssetsInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	ListWhatsAppFlowAssetsInput_flowId = ListWhatsAppFlowAssetsInput.AddMember("flowId", _MetaFlowId, &smithytraits.HTTPQuery{Name: "flowId"})
-
-	ListWhatsAppFlowAssetsInput_nextToken = ListWhatsAppFlowAssetsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWhatsAppFlowAssetsInput_maxResults = ListWhatsAppFlowAssetsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWhatsAppFlowAssetsOutput_flowAssets = ListWhatsAppFlowAssetsOutput.AddMember("flowAssets", _MetaFlowAssetList)
-
-	ListWhatsAppFlowAssetsOutput_nextToken = ListWhatsAppFlowAssetsOutput.AddMember("nextToken", _NextToken)
-
-	ListWhatsAppFlowsInput_id = ListWhatsAppFlowsInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	ListWhatsAppFlowsInput_nextToken = ListWhatsAppFlowsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWhatsAppFlowsInput_maxResults = ListWhatsAppFlowsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWhatsAppFlowsOutput_flows = ListWhatsAppFlowsOutput.AddMember("flows", _MetaFlowSummaryList)
-
-	ListWhatsAppFlowsOutput_nextToken = ListWhatsAppFlowsOutput.AddMember("nextToken", _NextToken)
-
-	ListWhatsAppMessageTemplatesInput_id = ListWhatsAppMessageTemplatesInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	ListWhatsAppMessageTemplatesInput_nextToken = ListWhatsAppMessageTemplatesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWhatsAppMessageTemplatesInput_maxResults = ListWhatsAppMessageTemplatesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWhatsAppMessageTemplatesOutput_templates = ListWhatsAppMessageTemplatesOutput.AddMember("templates", _TemplateSummaryList)
-
-	ListWhatsAppMessageTemplatesOutput_nextToken = ListWhatsAppMessageTemplatesOutput.AddMember("nextToken", _NextToken)
-
-	ListWhatsAppTemplateLibraryInput_nextToken = ListWhatsAppTemplateLibraryInput.AddMember("nextToken", _NextToken)
-
-	ListWhatsAppTemplateLibraryInput_maxResults = ListWhatsAppTemplateLibraryInput.AddMember("maxResults", _MaxResults)
-
-	ListWhatsAppTemplateLibraryInput_id = ListWhatsAppTemplateLibraryInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	ListWhatsAppTemplateLibraryInput_filters = ListWhatsAppTemplateLibraryInput.AddMember("filters", _Filter)
-
-	ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates = ListWhatsAppTemplateLibraryOutput.AddMember("metaLibraryTemplates", _MetaLibraryTemplatesList)
-
-	ListWhatsAppTemplateLibraryOutput_nextToken = ListWhatsAppTemplateLibraryOutput.AddMember("nextToken", _NextToken)
-
-	PostWhatsAppMessageMediaInput_originationPhoneNumberId = PostWhatsAppMessageMediaInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	PostWhatsAppMessageMediaInput_sourceS3PresignedUrl = PostWhatsAppMessageMediaInput.AddMember("sourceS3PresignedUrl", S3PresignedUrl)
-
-	PostWhatsAppMessageMediaInput_sourceS3File = PostWhatsAppMessageMediaInput.AddMember("sourceS3File", S3File)
-
-	PostWhatsAppMessageMediaOutput_mediaId = PostWhatsAppMessageMediaOutput.AddMember("mediaId", _WhatsAppMediaId)
-
-	PublishWhatsAppFlowInput_id = PublishWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	PublishWhatsAppFlowInput_flowId = PublishWhatsAppFlowInput.AddMember("flowId", _MetaFlowId)
-
-	PutWhatsAppBusinessAccountEventDestinationsInput_id = PutWhatsAppBusinessAccountEventDestinationsInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations = PutWhatsAppBusinessAccountEventDestinationsInput.AddMember("eventDestinations", _WhatsAppBusinessAccountEventDestinations)
-
-	PutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = PutWhatsAppBusinessPublicKeyInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	PutWhatsAppBusinessPublicKeyInput_businessPublicKey = PutWhatsAppBusinessPublicKeyInput.AddMember("businessPublicKey", _BusinessPublicKeyPem)
-
-	PutWhatsAppBusinessPublicKeyInput_kmsKeyArn = PutWhatsAppBusinessPublicKeyInput.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	SendWhatsAppCallEventInput_originationPhoneNumberId = SendWhatsAppCallEventInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	SendWhatsAppCallEventInput_metaApiVersion = SendWhatsAppCallEventInput.AddMember("metaApiVersion", smithyprelude.String)
-
-	SendWhatsAppCallEventInput_callEvent = SendWhatsAppCallEventInput.AddMember("callEvent", _WhatsAppCallEventBlob)
-
-	SendWhatsAppCallEventOutput_callId = SendWhatsAppCallEventOutput.AddMember("callId", smithyprelude.String)
-
-	SendWhatsAppConversionEventInput_id = SendWhatsAppConversionEventInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	SendWhatsAppConversionEventInput_datasetId = SendWhatsAppConversionEventInput.AddMember("datasetId", _WhatsAppDatasetId)
-
-	SendWhatsAppConversionEventInput_eventData = SendWhatsAppConversionEventInput.AddMember("eventData", _WhatsAppConversionEventBlob)
-
-	SendWhatsAppConversionEventOutput_requestId = SendWhatsAppConversionEventOutput.AddMember("requestId", smithyprelude.String)
-
-	SendWhatsAppMessageInput_originationPhoneNumberId = SendWhatsAppMessageInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	SendWhatsAppMessageInput_message = SendWhatsAppMessageInput.AddMember("message", _WhatsAppMessageBlob)
-
-	SendWhatsAppMessageInput_metaApiVersion = SendWhatsAppMessageInput.AddMember("metaApiVersion", smithyprelude.String)
-
-	SendWhatsAppMessageOutput_messageId = SendWhatsAppMessageOutput.AddMember("messageId", smithyprelude.String)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _Arn)
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagList)
-
-	TagResourceOutput_statusCode = TagResourceOutput.AddMember("statusCode", smithyprelude.Integer)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _Arn)
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _StringList)
-
-	UntagResourceOutput_statusCode = UntagResourceOutput.AddMember("statusCode", smithyprelude.Integer)
-
-	UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id = UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput.AddMember("id", _WhatsAppPhoneNumberId, &smithytraits.HTTPQuery{Name: "id"})
-
-	UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings = UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput.AddMember("callSettings", WhatsAppCallSettings)
-
-	UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId = UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput.AddMember("phoneNumberId", _WhatsAppPhoneNumberId)
-
-	UpdateWhatsAppFlowAssetsInput_id = UpdateWhatsAppFlowAssetsInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	UpdateWhatsAppFlowAssetsInput_flowId = UpdateWhatsAppFlowAssetsInput.AddMember("flowId", _MetaFlowId)
-
-	UpdateWhatsAppFlowAssetsInput_flowJson = UpdateWhatsAppFlowAssetsInput.AddMember("flowJson", _MetaFlowJsonBlob)
-
-	UpdateWhatsAppFlowAssetsOutput_validationErrors = UpdateWhatsAppFlowAssetsOutput.AddMember("validationErrors", _ValidationErrorList)
-
-	UpdateWhatsAppFlowInput_id = UpdateWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	UpdateWhatsAppFlowInput_flowId = UpdateWhatsAppFlowInput.AddMember("flowId", _MetaFlowId)
-
-	UpdateWhatsAppFlowInput_flowName = UpdateWhatsAppFlowInput.AddMember("flowName", _MetaFlowName)
-
-	UpdateWhatsAppFlowInput_categories = UpdateWhatsAppFlowInput.AddMember("categories", _MetaFlowCategoryList)
-
-	UpdateWhatsAppFlowInput_endpointUri = UpdateWhatsAppFlowInput.AddMember("endpointUri", _MetaFlowEndpointUri)
-
-	UpdateWhatsAppFlowInput_metaAppId = UpdateWhatsAppFlowInput.AddMember("metaAppId", _MetaFlowApplicationId)
-
-	UpdateWhatsAppMessageTemplateInput_id = UpdateWhatsAppMessageTemplateInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	UpdateWhatsAppMessageTemplateInput_metaTemplateId = UpdateWhatsAppMessageTemplateInput.AddMember("metaTemplateId", _MetaTemplateId)
-
-	UpdateWhatsAppMessageTemplateInput_templateName = UpdateWhatsAppMessageTemplateInput.AddMember("templateName", _MetaTemplateName)
-
-	UpdateWhatsAppMessageTemplateInput_templateLanguageCode = UpdateWhatsAppMessageTemplateInput.AddMember("templateLanguageCode", _MetaTemplateLanguage)
-
-	UpdateWhatsAppMessageTemplateInput_parameterFormat = UpdateWhatsAppMessageTemplateInput.AddMember("parameterFormat", _MetaParameterFormat)
-
-	UpdateWhatsAppMessageTemplateInput_templateCategory = UpdateWhatsAppMessageTemplateInput.AddMember("templateCategory", _MetaTemplateCategory)
-
-	UpdateWhatsAppMessageTemplateInput_templateComponents = UpdateWhatsAppMessageTemplateInput.AddMember("templateComponents", _MetaTemplateComponents)
-
-	UpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut = UpdateWhatsAppMessageTemplateInput.AddMember("ctaUrlLinkTrackingOptedOut", _MetaTemplateCtaLinkTrackingOptedOut)
-
+const blob = "" +
+	"WhatsAppBusinessAccountMarketingMessagesOnboardingStatusUpdateLinkedWhatsAppBusinessAccountPhoneNumb" +
+	"erOutputUpdateLinkedWhatsAppBusinessAccountPhoneNumberInputGetLinkedWhatsAppBusinessAccountPhoneNumb" +
+	"erOutputPutWhatsAppBusinessAccountEventDestinationsOutputGetLinkedWhatsAppBusinessAccountPhoneNumber" +
+	"InputPutWhatsAppBusinessAccountEventDestinationsInputCreateWhatsAppMessageTemplateFromLibraryOutputC" +
+	"reateWhatsAppMessageTemplateFromLibraryInputDisassociateWhatsAppBusinessAccountOutputCreateWhatsAppM" +
+	"essageTemplateMediaOutputDisassociateWhatsAppBusinessAccountInputLinkedWhatsAppBusinessAccountSummar" +
+	"yListListLinkedWhatsAppBusinessAccountsOutputCreateWhatsAppMessageTemplateMediaInputLinkedWhatsAppBu" +
+	"sinessAccountIdMetaDataListLinkedWhatsAppBusinessAccountsInputAssociateWhatsAppBusinessAccountOutput" +
+	"GetLinkedWhatsAppBusinessAccountOutputAssociateWhatsAppBusinessAccountInputGetLinkedWhatsAppBusiness" +
+	"AccountInputDirectSendEnforcementStatusExpiresAtWabaPhoneNumberSetupFinalizationListdirectSendEnforc" +
+	"ementStatusExpiresAtCreateWhatsAppMessageTemplateOutputDeleteWhatsAppMessageTemplateOutputMetaFlowWh" +
+	"atsAppBusinessAccountInfoMetaTemplateCtaLinkTrackingOptedOutUpdateWhatsAppMessageTemplateOutputCreat" +
+	"eWhatsAppMessageTemplateInputDeleteWhatsAppMessageTemplateInputGetWhatsAppBusinessPublicKeyOutputLis" +
+	"tWhatsAppMessageTemplatesOutputPutWhatsAppBusinessPublicKeyOutputUpdateWhatsAppMessageTemplateInputG" +
+	"etWhatsAppBusinessPublicKeyInputListWhatsAppMessageTemplatesInputListWhatsAppTemplateLibraryOutputPu" +
+	"tWhatsAppBusinessPublicKeyInputSendWhatsAppConversionEventOutputWhatsAppWeeklyOperatingHoursEntrylin" +
+	"kedAccountsWithIncompleteSetupmarketingMessagesOnboardingStatusBusinessPublicKeySignatureStatusDelet" +
+	"eWhatsAppMessageMediaOutputGetWhatsAppMessageTemplateOutputLinkedAccountWithIncompleteSetupLinkedWha" +
+	"tsAppBusinessAccountArnListWhatsAppTemplateLibraryInputMetaFlowHealthStatusAvailabilitySendWhatsAppC" +
+	"onversionEventInputWhatsAppCallPermissionActionListWhatsAppCallPermissionActionNameWhatsAppCallbackP" +
+	"ermissionStatusWhatsAppPhoneNumberQualityRatingWhatsAppWeeklyOperatingHoursListbusinessPublicKeySign" +
+	"atureStatusunregisteredWhatsAppPhoneNumbersDeleteWhatsAppMessageMediaInputGetWhatsAppCallPermissionO" +
+	"utputGetWhatsAppMessageTemplateInputMetaLibraryTemplateButtonInputsWhatsAppBusinessAccountLinkDateWh" +
+	"atsAppCallPermissionLimitListlinkedWhatsAppBusinessAccountIdGetWhatsAppCallPermissionInputPostWhatsA" +
+	"ppMessageMediaOutputUpdateWhatsAppFlowAssetsOutputWhatsAppDestinationPhoneNumberWhatsAppPhoneNumberS" +
+	"ummaryListGetWhatsAppMessageMediaOutputMetaFlowWabaTemplateNamespaceMetaLibraryTemplateButtonListMet" +
+	"aLibraryTemplateDefinitionMetaTemplateBodyExampleParamsPostWhatsAppMessageMediaInputUpdateWhatsAppFl" +
+	"owAssetsInputWhatsAppPhoneNumberDetailListGetWhatsAppFlowPreviewOutputGetWhatsAppMessageMediaInputLi" +
+	"nkedWhatsAppPhoneNumberArnListWhatsAppFlowAssetsOutputWhatsAppBusinessScopedUserIdWhatsAppCallPermis" +
+	"sionStatusWhatsAppHolidayScheduleEntryWhatsAppSignupCallbackResultAccessDeniedByMetaExceptionCreateW" +
+	"hatsAppDatasetOutputDeprecateWhatsAppFlowOutputGetWhatsAppFlowPreviewInputListWhatsAppFlowAssetsInpu" +
+	"tSendWhatsAppCallEventOutputWhatsAppBusinessAccountNameWhatsAppConversionEventBlobWhatsAppHolidaySch" +
+	"eduleListlibraryTemplateButtonInputsCreateWhatsAppDatasetInputDeprecateWhatsAppFlowInputInvalidParam" +
+	"etersExceptionSendWhatsAppCallEventInputWhatsAppCallIconVisibilityWhatsAppDisplayPhoneNumberctaUrlLi" +
+	"nkTrackingOptedOutAddSecurityRecommendationLibraryTemplateBodyInputsListTagsForResourceOutputPublish" +
+	"WhatsAppFlowOutputResourceNotFoundExceptionSendWhatsAppMessageOutputThrottledRequestExceptionWhatsAp" +
+	"pSetupFinalizationaddSecurityRecommendationdestinationS3PresignedUrllibraryTemplateBodyInputstemplat" +
+	"eBodyExampleParamsAssociateInProgressTokenCreateWhatsAppFlowOutputDeleteWhatsAppFlowOutputInternalSe" +
+	"rviceExceptionListTagsForResourceInputMetaFlowAssetDownloadUrlMetaFlowHealthEntityListMetaFlowHealth" +
+	"EntityTypeMetaLibraryTemplatesListMetaTemplateQualityScoreMetaUrlWithSuffixExamplePublishWhatsAppFlo" +
+	"wInputSendWhatsAppMessageInputUpdateWhatsAppFlowOutputassociateInProgressTokencallbackPermissionStat" +
+	"usmessageTemplateNamespaceoriginationPhoneNumberIdCreateWhatsAppFlowInputDeleteWhatsAppFlowInputList" +
+	"WhatsAppFlowsOutputMetaFlowApplicationInfoMetaFlowApplicationLinkMetaFlowApplicationNameMetaFlowVali" +
+	"dationErrorUpdateWhatsAppFlowInputWhatsAppPhoneNumberNamewhatsAppBusinessAccountLimitExceededExcepti" +
+	"onListWhatsAppFlowsInputMetaFlowDataApiVersionMetaFlowWabaTimezoneIdMetaTemplateComponentsMetaTempla" +
+	"teDefinitiondataLocalizationRegiondestinationPhoneNumberdisplayPhoneNumberNameAccessDeniedExceptionC" +
+	"odeExpirationMinutesGetWhatsAppFlowOutputMetaFlowApplicationIdWabaSetupFinalizationWhatsAppCallEvent" +
+	"BlobWhatsAppPhoneNumberIdcodeExpirationMinutesBusinessPublicKeyPemGetWhatsAppFlowInputMetaFlowCatego" +
+	"ryListMetaFlowWabaCurrencyMetaTemplateCategoryMetaTemplateLanguageWhatsAppCallSettingsZeroTapTermsAc" +
+	"ceptedmetaLibraryTemplatessignupCallbackResultsourceS3PresignedUrltemplateLanguageCodetemplateQualit" +
+	"yScoreweeklyOperatingHourszeroTapTermsAcceptedAPPOINTMENT_BOOKINGAddTrackPackageLinkDependencyExcept" +
+	"ionEventDestinationArnMetaFlowEndpointUriMetaFlowJsonVersionMetaFlowPreviewInfoMetaFlowSummaryListMe" +
+	"taParameterFormatMetaTemplateUseCaseTemplateSummaryListUntagResourceOutputValidationErrorListValidat" +
+	"ionExceptionWhatsAppMessageBlobaddTrackPackageLinkeventDestinationArnlibraryTemplateNamelimitExpirat" +
+	"ionTimeDeleteAllLanguagesMetaFlowPreviewUrlMetaTemplateHeaderMetaTemplateSourceMetaTemplateStatusReg" +
+	"istrationStatusUntagResourceInputcallIconVisibilitydeleteAllLanguagesregistrationStatustemplateCompo" +
+	"nentstemplateDefinitionConflictExceptionMetaFlowAssetListMetaFlowAssetNameMetaFlowAssetTypeMetaFlowT" +
+	"imestampMetaTemplateTopicTagResourceOutputWhatsAppCallHoursWhatsAppDatasetIdWhatsAppDayOfWeekWhatsAp" +
+	"pTimeOfDaydestinationS3FileeventDestinationsmetaPhoneNumberIdphoneNumberParentsetupFinalizationAddCo" +
+	"ntactNumberAddLearnMoreLinkCUSTOMER_SUPPORTMetaFlowJsonBlobMetaTemplateNameTagResourceInputaddContac" +
+	"tNumberaddLearnMoreLinkcanPerformActionmetaHeaderHandletemplateCategorytemplateIndustryvalidationErr" +
+	"orsIso8601DurationLEAD_GENERATIONSocialMessagingWhatsAppMediaIdcorrectCategoryholidayScheduleparamet" +
+	"erFormattemplateButtonstemplateUseCaseIsoCountryCodeMetaFlowStatusMetaIndustriesMetaTemplateIdcanSen" +
+	"dMessagedataApiVersionexpirationTimeflowCategoriesmetaApiVersionmetaTemplateIdtemplateHeadertemplate" +
+	"SourcetemplateStatusSupportedAppsphoneNumberIdqualityRatingsupportedAppstemplateTopicErrorMessageIan" +
+	"aTimezoneMetaFlowNameMetaIndustryTwoFactorPinWhatsAppDatecallSettingscurrentUsageendUserBsuidhealthS" +
+	"tatusmetadataOnlyphoneNumberssourceS3FiletemplateNametwoFactorPinaccessTokenaccountNameapplicationca" +
+	"llEnabledcallbackUrlcloneFlowIddownloadUrlendpointUrijsonVersionresourceArnButtonTypeCONTACT_USINCOM" +
+	"PLETEMaxResultsMetaFlowIdStringListactionNamebucketNamecategoriesentityTypeflowAssetsflowStatusinval" +
+	"idatemaxAllowedmaxResultspermissionpreviewUrlstatusCodetemplateIdtimePeriodtimezoneIdKmsKeyArnNextTo" +
+	"kenWEDNESDAYassetTypecallEventcallHourscloseTimedatasetIddayOfWeekeventDataexpiresAtkmsKeyArnmessage" +
+	"IdmetaAppIdnextTokenrequestIdstartTimetemplatesMetaTextSATURDAYSHOPPINGTHURSDAYcategorycurrencyentit" +
+	"iesfileSizeflowJsonflowNamelinkDatemimeTypeopenTimewabaNameBooleanHeadersIntegerOtpTypeRoleArnSIGN_I" +
+	"NSIGN_UPTUESDAYTagListactionsenabledendTimefiltersheadersmediaIdminutesotpTypepublishroleArnsuccesst" +
+	"agKeysFRIDAYFilterMONDAYSUNDAYSURVEYcallIdflowIdlimitsmemberwabaIdOTHERflowshoursvalueLongUnitnameta" +
+	"gstexttypekeyurl"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.socialmessaging", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 762, Target: 0, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2993, Target: 1, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3742, Target: 2, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 353, Target: 3, Traits: 3, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 353, Target: 4, Traits: 4, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 485, Target: 5, Traits: 5, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3766, Target: 6, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1695, Target: 7, Traits: 7, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1055, Target: 8, Traits: 8, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3020, Target: 9, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 444, Target: 10, Traits: 10, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 159, Target: 11, Traits: 11, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 159, Target: 12, Traits: 12, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1263, Target: 13, Traits: 13, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2174, Target: 14, Traits: 14, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2742, Target: 15, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2742, Target: 16, Traits: 16, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2510, Target: 17, Traits: 17, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1727, Target: 18, Traits: 18, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 605, Target: 19, Traits: 19, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3468, Target: 20, Traits: 20, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2826, Target: 21, Traits: 21, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4196, Target: 22, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1297, Target: 23, Traits: 23, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1465, Target: 24, Traits: 24, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2390, Target: 25, Traits: 25, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3493, Target: 26, Traits: 26, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 208, Target: 27, Traits: 27, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1331, Target: 28, Traits: 28, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3101, Target: 29, Traits: 29, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1531, Target: 30, Traits: 30, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3543, Target: 31, Traits: 31, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5725, Target: 32, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5255, Target: 33, Traits: 33, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 56, Target: 34, Traits: 34, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2420, Target: 35, Traits: 35, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2420, Target: 36, Traits: 36, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1160, Target: 37, Traits: 37, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6133, Target: 38, Traits: 38, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2966, Target: 39, Traits: 39, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4578, Target: 41, Traits: 39, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5895, Target: 43, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 5911, Target: 44, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 3418, Target: 45, Traits: 38, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 5065, Target: 46, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1820, Target: 47, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3718, Target: 48, Traits: 40, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4746, Target: 49, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1663, Target: 50, Traits: 38, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6775, Target: 51, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4599, Target: 52, Traits: 38, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 5623, Target: 53, Traits: 41, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5407, Target: 55, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 5084, Target: 56, Traits: 42, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 912, Target: 58, Traits: 38, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 912, Target: 59, Traits: 38, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 6485, Target: 60, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5103, Target: 61, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7412, Target: 62, Traits: 38, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 7510, Target: 664, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7481, Target: 664, Traits: 38, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7266, Target: 65, Traits: 38, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 7510, Target: 664, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7481, Target: 664, Traits: 38, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6497, Target: 68, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3790, Target: 69, Traits: 43, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3288, Target: 71, Traits: 44, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6103, Target: 73, Traits: 38, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6238, Target: 74, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6985, Target: 75, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3443, Target: 76, Traits: 38, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5991, Target: 43, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6007, Target: 44, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3618, Target: 45, Traits: 38, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5331, Target: 46, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4725, Target: 52, Traits: 38, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2240, Target: 82, Traits: 38, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7506, Target: 51, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5861, Target: 260, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7513, Target: 255, Traits: 38, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 7371, Target: 259, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5026, Target: 422, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6459, Target: 278, Traits: 38, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2572, Target: 89, Traits: 38, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7506, Target: 51, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7502, Target: 253, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5861, Target: 260, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7513, Target: 254, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7371, Target: 259, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5026, Target: 422, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6459, Target: 278, Traits: 38, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4380, Target: 97, Traits: 44, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1759, Target: 99, Traits: 38, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 7510, Target: 319, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7481, Target: 117, Traits: 38, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 62, Target: 102, Traits: 38, StrLen: 29, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5916, Target: 115, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7460, Target: 319, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5569, Target: 261, Traits: 38, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7227, Target: 320, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7251, Target: 322, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5827, Target: 317, Traits: 38, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1630, Target: 321, Traits: 38, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 984, Target: 58, Traits: 38, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 984, Target: 59, Traits: 38, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7048, Target: 356, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6617, Target: 400, Traits: 38, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1791, Target: 115, Traits: 38, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 684, Target: 116, Traits: 38, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 684, Target: 117, Traits: 38, StrLen: 39, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6676, Target: 322, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5569, Target: 261, Traits: 38, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2111, Target: 386, Traits: 38, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7460, Target: 116, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 565, Target: 122, Traits: 38, StrLen: 36, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5916, Target: 115, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7460, Target: 319, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5569, Target: 261, Traits: 38, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7227, Target: 320, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7251, Target: 322, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5827, Target: 317, Traits: 38, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1630, Target: 321, Traits: 38, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 984, Target: 58, Traits: 38, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 984, Target: 59, Traits: 38, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7048, Target: 356, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 565, Target: 134, Traits: 38, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 122, Traits: 38, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2798, Target: 136, Traits: 38, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6805, Target: 137, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4641, Target: 138, Traits: 38, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4219, Target: 139, Traits: 38, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1597, Target: 143, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7494, Target: 144, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2921, Target: 138, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4242, Target: 143, Traits: 38, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4265, Target: 144, Traits: 38, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3838, Target: 145, Traits: 38, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7494, Target: 152, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7012, Target: 153, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6731, Target: 149, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3838, Target: 149, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5640, Target: 150, Traits: 38, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 145, Traits: 38, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5657, Target: 152, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5674, Target: 153, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4786, Target: 154, Traits: 38, StrLen: 16, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7301, Target: 665, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7294, Target: 665, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5046, Target: 665, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6118, Target: 665, Traits: 38, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7163, Target: 665, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6785, Target: 665, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5927, Target: 665, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7430, Target: 665, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7466, Target: 665, Traits: 38, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4786, Target: 164, Traits: 38, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 154, Traits: 38, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4424, Target: 166, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5122, Target: 167, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3862, Target: 168, Traits: 38, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6865, Target: 174, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2921, Target: 664, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6294, Target: 178, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3862, Target: 172, Traits: 38, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 168, Traits: 38, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3886, Target: 174, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1855, Target: 175, Traits: 38, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6294, Target: 178, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7195, Target: 172, Traits: 38, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1855, Target: 178, Traits: 38, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6815, Target: 179, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5943, Target: 180, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 5141, Target: 181, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6509, Target: 182, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5160, Target: 183, Traits: 38, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6935, Target: 186, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7075, Target: 196, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5425, Target: 186, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6252, Target: 187, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5179, Target: 188, Traits: 38, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7442, Target: 179, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7219, Target: 182, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6885, Target: 187, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6336, Target: 164, Traits: 38, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6087, Target: 299, Traits: 38, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5179, Target: 194, Traits: 38, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 188, Traits: 38, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5691, Target: 196, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4288, Target: 197, Traits: 38, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4806, Target: 198, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2539, Target: 199, Traits: 38, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4446, Target: 200, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1090, Target: 201, Traits: 38, StrLen: 35, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 319, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7494, Target: 322, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7187, Target: 198, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6975, Target: 200, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4102, Target: 199, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6266, Target: 207, Traits: 38, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 209, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6521, Target: 209, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2236, Target: 210, Traits: 38, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6641, Target: 247, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5369, Target: 247, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6055, Target: 240, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4966, Target: 246, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3209, Target: 217, Traits: 38, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3668, Target: 76, Traits: 38, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2236, Target: 217, Traits: 38, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 82, Traits: 38, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2568, Target: 219, Traits: 38, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 89, Traits: 38, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2597, Target: 221, Traits: 38, StrLen: 29, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6641, Target: 247, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4966, Target: 246, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6055, Target: 240, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6472, Target: 251, Traits: 38, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6223, Target: 252, Traits: 38, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6071, Target: 207, Traits: 38, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6378, Target: 244, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3693, Target: 237, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6208, Target: 219, Traits: 38, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6955, Target: 245, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3693, Target: 238, Traits: 38, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3910, Target: 233, Traits: 38, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 221, Traits: 38, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5198, Target: 235, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1125, Target: 236, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2626, Target: 237, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2626, Target: 238, Traits: 38, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 664, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4826, Target: 240, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4468, Target: 241, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 1125, Target: 242, Traits: 38, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 4490, Target: 243, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 5443, Target: 244, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6280, Target: 245, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4846, Target: 246, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5959, Target: 247, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3934, Target: 248, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5461, Target: 249, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5479, Target: 250, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5708, Target: 251, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5217, Target: 252, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7147, Target: 253, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3958, Target: 254, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3958, Target: 255, Traits: 38, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 7510, Target: 664, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7481, Target: 664, Traits: 38, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6994, Target: 258, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7280, Target: 259, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 91, Target: 260, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5497, Target: 261, Traits: 38, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6797, Target: 665, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6795, Target: 665, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3518, Target: 264, Traits: 45, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7287, Target: 266, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5821, Target: 267, Traits: 40, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6845, Target: 664, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7510, Target: 664, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3654, Target: 270, Traits: 40, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7513, Target: 664, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7350, Target: 65, Traits: 38, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 6825, Target: 273, Traits: 38, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 664, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6420, Target: 275, Traits: 38, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 7510, Target: 664, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7481, Target: 664, Traits: 38, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6420, Target: 278, Traits: 38, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 275, Traits: 38, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3472, Target: 280, Traits: 38, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7510, Target: 664, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7481, Target: 664, Traits: 38, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7315, Target: 283, Traits: 38, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 280, Traits: 38, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5236, Target: 285, Traits: 38, StrLen: 15, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6641, Target: 247, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6364, Target: 245, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6406, Target: 250, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4986, Target: 248, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4966, Target: 246, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6055, Target: 240, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6392, Target: 249, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6163, Target: 240, Traits: 38, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5236, Target: 294, Traits: 38, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 285, Traits: 38, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3568, Target: 296, Traits: 46, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6533, Target: 298, Traits: 40, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5274, Target: 299, Traits: 38, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 197, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5293, Target: 301, Traits: 44, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4102, Target: 60, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 948, Target: 303, Traits: 38, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 376, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6653, Target: 298, Traits: 47, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4512, Target: 74, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7498, Target: 283, Traits: 38, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 948, Target: 308, Traits: 38, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 303, Traits: 38, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4662, Target: 310, Traits: 38, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 319, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5827, Target: 317, Traits: 38, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7498, Target: 283, Traits: 38, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 211, Target: 314, Traits: 38, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5350, Target: 61, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7385, Target: 266, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 211, Target: 317, Traits: 38, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 314, Traits: 38, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 690, Target: 319, Traits: 38, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2267, Target: 320, Traits: 38, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 0, Target: 321, Traits: 38, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3128, Target: 322, Traits: 38, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2854, Target: 323, Traits: 40, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1983, Target: 324, Traits: 38, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4683, Target: 325, Traits: 40, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 5742, Target: 326, Traits: 38, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7329, Target: 666, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6975, Target: 68, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5006, Target: 420, Traits: 38, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6178, Target: 372, Traits: 38, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3340, Target: 331, Traits: 38, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1919, Target: 332, Traits: 38, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6945, Target: 349, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6322, Target: 667, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1919, Target: 335, Traits: 38, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6835, Target: 341, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6023, Target: 666, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7448, Target: 347, Traits: 38, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1919, Target: 339, Traits: 38, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 335, Traits: 38, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1951, Target: 341, Traits: 38, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2298, Target: 342, Traits: 38, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6965, Target: 73, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6905, Target: 668, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6569, Target: 668, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5388, Target: 667, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2298, Target: 347, Traits: 38, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 342, Traits: 38, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2882, Target: 349, Traits: 38, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4866, Target: 350, Traits: 38, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6698, Target: 666, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7030, Target: 326, Traits: 38, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5533, Target: 331, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4078, Target: 324, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3155, Target: 355, Traits: 40, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 5759, Target: 356, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6545, Target: 357, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5776, Target: 358, Traits: 38, StrLen: 17, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7418, Target: 665, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7308, Target: 665, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7003, Target: 665, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7171, Target: 665, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7406, Target: 665, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7155, Target: 665, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7424, Target: 665, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2450, Target: 366, Traits: 40, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3366, Target: 367, Traits: 38, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2910, Target: 368, Traits: 38, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 58, Target: 357, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7129, Target: 413, Traits: 38, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7336, Target: 413, Traits: 38, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3182, Target: 372, Traits: 38, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 368, Traits: 38, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6148, Target: 374, Traits: 38, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5312, Target: 375, Traits: 40, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 2015, Target: 376, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2713, Target: 377, Traits: 38, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5916, Target: 136, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5861, Target: 260, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6433, Target: 388, Traits: 38, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5844, Target: 376, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4556, Target: 389, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4556, Target: 367, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6446, Target: 390, Traits: 38, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4512, Target: 74, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2713, Target: 386, Traits: 38, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 377, Traits: 38, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4704, Target: 388, Traits: 38, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4334, Target: 389, Traits: 38, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2015, Target: 390, Traits: 38, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2480, Target: 391, Traits: 38, StrLen: 26, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5916, Target: 136, Traits: 38, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5861, Target: 260, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6433, Target: 388, Traits: 38, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5844, Target: 376, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4556, Target: 389, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4556, Target: 367, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6446, Target: 390, Traits: 38, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4512, Target: 74, Traits: 38, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2480, Target: 400, Traits: 38, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 391, Traits: 38, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3593, Target: 402, Traits: 38, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4054, Target: 48, Traits: 47, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6617, Target: 308, Traits: 38, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5861, Target: 116, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7251, Target: 310, Traits: 38, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2938, Target: 407, Traits: 38, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6665, Target: 664, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6709, Target: 664, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2938, Target: 410, Traits: 38, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4054, Target: 48, Traits: 47, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1597, Target: 99, Traits: 38, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 5793, Target: 413, Traits: 38, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7476, Target: 668, Traits: 38, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7364, Target: 668, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1564, Target: 416, Traits: 38, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7057, Target: 358, Traits: 38, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7243, Target: 413, Traits: 38, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7039, Target: 413, Traits: 38, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2047, Target: 420, Traits: 38, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 7454, Target: 416, Traits: 38, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4886, Target: 422, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 838, Target: 423, Traits: 38, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4926, Target: 407, Traits: 38, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5878, Target: 402, Traits: 38, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 762, Target: 426, Traits: 38, StrLen: 38, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4926, Target: 410, Traits: 38, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6945, Target: 668, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2329, Target: 116, Traits: 38, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3236, Target: 430, Traits: 38, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2993, Target: 432, Traits: 38, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7048, Target: 356, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4150, Target: 434, Traits: 38, StrLen: 23, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7219, Target: 182, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6855, Target: 164, Traits: 38, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7211, Target: 180, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 7378, Target: 666, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6720, Target: 179, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6742, Target: 167, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3742, Target: 442, Traits: 38, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7442, Target: 179, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6087, Target: 299, Traits: 38, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 399, Target: 445, Traits: 38, StrLen: 45, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4906, Target: 210, Traits: 38, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 353, Target: 448, Traits: 38, StrLen: 46, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6364, Target: 245, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6406, Target: 664, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7179, Target: 240, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1195, Target: 452, Traits: 38, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5605, Target: 243, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 645, Target: 455, Traits: 38, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6629, Target: 267, Traits: 47, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 485, Target: 458, Traits: 38, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6039, Target: 664, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1020, Target: 460, Traits: 38, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6364, Target: 245, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6406, Target: 664, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7179, Target: 240, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4173, Target: 464, Traits: 38, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7442, Target: 179, Traits: 49, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3766, Target: 467, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2143, Target: 468, Traits: 38, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7357, Target: 374, Traits: 50, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4126, Target: 388, Traits: 51, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1695, Target: 471, Traits: 38, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7392, Target: 666, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1229, Target: 473, Traits: 38, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6364, Target: 245, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5551, Target: 55, Traits: 53, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6641, Target: 247, Traits: 54, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1055, Target: 478, Traits: 38, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3262, Target: 479, Traits: 38, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7442, Target: 179, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3020, Target: 482, Traits: 38, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 525, Target: 483, Traits: 38, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 444, Target: 485, Traits: 38, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 875, Target: 486, Traits: 38, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 800, Target: 488, Traits: 38, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6676, Target: 102, Traits: 38, StrLen: 7, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 257, Target: 490, Traits: 38, StrLen: 48, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 388, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 159, Target: 492, Traits: 38, StrLen: 49, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5861, Target: 377, Traits: 38, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2329, Target: 116, Traits: 38, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6557, Target: 350, Traits: 38, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1399, Target: 496, Traits: 38, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4126, Target: 388, Traits: 51, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1263, Target: 498, Traits: 38, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2079, Target: 49, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2079, Target: 50, Traits: 38, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2360, Target: 501, Traits: 38, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4126, Target: 388, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4534, Target: 366, Traits: 47, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6581, Target: 323, Traits: 47, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2174, Target: 505, Traits: 38, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6925, Target: 332, Traits: 38, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7322, Target: 339, Traits: 38, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4766, Target: 508, Traits: 38, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7442, Target: 179, Traits: 49, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4620, Target: 511, Traits: 38, StrLen: 21, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7442, Target: 179, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7219, Target: 182, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6885, Target: 187, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6855, Target: 164, Traits: 38, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6087, Target: 299, Traits: 38, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6753, Target: 181, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6308, Target: 166, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6742, Target: 167, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6935, Target: 183, Traits: 38, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4357, Target: 201, Traits: 38, StrLen: 23, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6687, Target: 139, Traits: 38, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6593, Target: 175, Traits: 38, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3047, Target: 524, Traits: 38, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7442, Target: 179, Traits: 49, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6895, Target: 666, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2742, Target: 528, Traits: 38, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7442, Target: 179, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6935, Target: 183, Traits: 38, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2770, Target: 531, Traits: 38, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7357, Target: 374, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4126, Target: 388, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6605, Target: 666, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3643, Target: 270, Traits: 47, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5810, Target: 267, Traits: 47, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2510, Target: 537, Traits: 38, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7235, Target: 664, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7203, Target: 669, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2205, Target: 540, Traits: 38, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6364, Target: 245, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6641, Target: 247, Traits: 54, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4966, Target: 246, Traits: 56, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1727, Target: 545, Traits: 38, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3693, Target: 236, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 723, Target: 547, Traits: 38, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7111, Target: 258, Traits: 57, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6915, Target: 137, Traits: 58, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 605, Target: 550, Traits: 38, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1597, Target: 134, Traits: 38, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7111, Target: 258, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3814, Target: 553, Traits: 38, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6764, Target: 47, Traits: 59, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3468, Target: 555, Traits: 38, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6945, Target: 668, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7498, Target: 283, Traits: 38, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3074, Target: 558, Traits: 38, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7442, Target: 179, Traits: 49, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7111, Target: 258, Traits: 57, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6915, Target: 137, Traits: 58, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2826, Target: 563, Traits: 38, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6875, Target: 150, Traits: 38, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7111, Target: 258, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4402, Target: 566, Traits: 38, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7111, Target: 258, Traits: 57, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6915, Target: 137, Traits: 58, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4196, Target: 570, Traits: 38, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7471, Target: 194, Traits: 38, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7111, Target: 258, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1432, Target: 573, Traits: 38, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7111, Target: 258, Traits: 57, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6915, Target: 137, Traits: 58, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1297, Target: 577, Traits: 38, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7138, Target: 294, Traits: 38, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7111, Target: 258, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1823, Target: 580, Traits: 38, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7111, Target: 258, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6915, Target: 137, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2921, Target: 116, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7343, Target: 62, Traits: 38, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1465, Target: 585, Traits: 38, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4906, Target: 233, Traits: 38, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7111, Target: 258, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2655, Target: 588, Traits: 38, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4126, Target: 388, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4946, Target: 270, Traits: 47, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6629, Target: 267, Traits: 47, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2390, Target: 592, Traits: 38, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7357, Target: 374, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3982, Target: 594, Traits: 38, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7442, Target: 179, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3493, Target: 597, Traits: 38, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 305, Target: 598, Traits: 38, StrLen: 48, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5827, Target: 317, Traits: 38, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 208, Target: 601, Traits: 38, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1498, Target: 602, Traits: 38, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4126, Target: 388, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2079, Target: 49, Traits: 38, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7084, Target: 75, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1331, Target: 606, Traits: 38, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 607, Traits: 38, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4126, Target: 388, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6350, Target: 664, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7021, Target: 325, Traits: 47, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 3101, Target: 611, Traits: 38, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7436, Target: 664, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1887, Target: 613, Traits: 38, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7048, Target: 356, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7066, Target: 355, Traits: 47, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1531, Target: 617, Traits: 38, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7120, Target: 664, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4006, Target: 619, Traits: 38, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4126, Target: 388, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4102, Target: 375, Traits: 47, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 6350, Target: 664, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3543, Target: 623, Traits: 38, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7093, Target: 664, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5975, Target: 625, Traits: 38, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6764, Target: 47, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7498, Target: 283, Traits: 38, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5725, Target: 628, Traits: 38, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6945, Target: 668, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5515, Target: 630, Traits: 38, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6764, Target: 47, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7399, Target: 273, Traits: 38, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5255, Target: 633, Traits: 38, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6945, Target: 668, Traits: 38, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 108, Target: 635, Traits: 38, StrLen: 51, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 388, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6557, Target: 350, Traits: 38, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 56, Target: 638, Traits: 38, StrLen: 52, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6433, Target: 388, Traits: 38, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2684, Target: 640, Traits: 38, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7442, Target: 179, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7211, Target: 180, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 2420, Target: 644, Traits: 38, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6087, Target: 299, Traits: 38, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4311, Target: 646, Traits: 38, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7442, Target: 179, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7219, Target: 182, Traits: 38, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6855, Target: 164, Traits: 38, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6742, Target: 167, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7102, Target: 138, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4030, Target: 653, Traits: 38, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 654, Traits: 38, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2921, Target: 116, Traits: 38, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6364, Target: 245, Traits: 38, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6641, Target: 247, Traits: 38, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4966, Target: 246, Traits: 38, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6193, Target: 235, Traits: 38, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6055, Target: 240, Traits: 38, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5587, Target: 241, Traits: 38, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 3392, Target: 242, Traits: 38, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1160, Target: 663, Traits: 38, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6825, Target: 664, Traits: 38, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 7490, Target: 665, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 7259, Target: 666, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 5699, Target: 667, Traits: 38, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 7273, Target: 668, Traits: 38, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 7486, Target: 669, Traits: 38, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/signup",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/waba/dataset",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/flow/create",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/template/put",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/template/create",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/template/media",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/whatsapp/flow",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/whatsapp/media",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/whatsapp/template",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/flow/deprecate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/whatsapp/waba/disassociate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/waba/details",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/waba/phone/details",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/business-public-key",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/call/permission/get",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/flow",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/flow/preview",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/media/get",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/template",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/waba/list",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/tags/list",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/flow/assets",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/flow/list",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/whatsapp/template/list",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/template/library",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/media",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/flow/publish",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/v1/whatsapp/waba/eventdestinations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/v1/whatsapp/business-public-key",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/call/event",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/waba/dataset/events",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/send",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/tags/tag-resource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/tags/untag-resource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/v1/whatsapp/waba/phone",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/flow/update",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/flow/assets/update",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/whatsapp/template",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "id"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "flowId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "mediaId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "originationPhoneNumberId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "metaTemplateId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "deleteAllTemplates"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "templateName"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "invalidate"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "templateLanguageCode"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [670]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+}
+
+var AssociateWhatsAppBusinessAccount = &handles[0]
+
+var CreateWhatsAppDataset = &handles[1]
+
+var CreateWhatsAppFlow = &handles[2]
+
+var CreateWhatsAppMessageTemplate = &handles[3]
+
+var CreateWhatsAppMessageTemplateFromLibrary = &handles[4]
+
+var CreateWhatsAppMessageTemplateMedia = &handles[5]
+
+var DeleteWhatsAppFlow = &handles[6]
+
+var DeleteWhatsAppMessageMedia = &handles[7]
+
+var DeleteWhatsAppMessageTemplate = &handles[8]
+
+var DeprecateWhatsAppFlow = &handles[9]
+
+var DisassociateWhatsAppBusinessAccount = &handles[10]
+
+var GetLinkedWhatsAppBusinessAccount = &handles[11]
+
+var GetLinkedWhatsAppBusinessAccountPhoneNumber = &handles[12]
+
+var GetWhatsAppBusinessPublicKey = &handles[13]
+
+var GetWhatsAppCallPermission = &handles[14]
+
+var GetWhatsAppFlow = &handles[15]
+
+var GetWhatsAppFlowPreview = &handles[16]
+
+var GetWhatsAppMessageMedia = &handles[17]
+
+var GetWhatsAppMessageTemplate = &handles[18]
+
+var ListLinkedWhatsAppBusinessAccounts = &handles[19]
+
+var ListTagsForResource = &handles[20]
+
+var ListWhatsAppFlowAssets = &handles[21]
+
+var ListWhatsAppFlows = &handles[22]
+
+var ListWhatsAppMessageTemplates = &handles[23]
+
+var ListWhatsAppTemplateLibrary = &handles[24]
+
+var PostWhatsAppMessageMedia = &handles[25]
+
+var PublishWhatsAppFlow = &handles[26]
+
+var PutWhatsAppBusinessAccountEventDestinations = &handles[27]
+
+var PutWhatsAppBusinessPublicKey = &handles[28]
+
+var SendWhatsAppCallEvent = &handles[29]
+
+var SendWhatsAppConversionEvent = &handles[30]
+
+var SendWhatsAppMessage = &handles[31]
+
+var TagResource = &handles[32]
+
+var UntagResource = &handles[33]
+
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumber = &handles[34]
+
+var UpdateWhatsAppFlow = &handles[35]
+
+var UpdateWhatsAppFlowAssets = &handles[36]
+
+var UpdateWhatsAppMessageTemplate = &handles[37]
+
+var _SocialMessaging = &handles[38]
+
+var AccessDeniedByMetaException = &handles[39]
+var AccessDeniedByMetaException_message = &handles[40]
+
+var AccessDeniedException = &handles[41]
+var AccessDeniedException_message = &handles[42]
+
+var _AddContactNumber = &handles[43]
+
+var _AddLearnMoreLink = &handles[44]
+
+var _AddSecurityRecommendation = &handles[45]
+
+var _AddTrackPackageLink = &handles[46]
+
+var _Arn = &handles[47]
+
+var _AssociateInProgressToken = &handles[48]
+
+var _BusinessPublicKeyPem = &handles[49]
+
+var _BusinessPublicKeySignatureStatus = &handles[50]
+
+var _ButtonType = &handles[51]
+
+var _CodeExpirationMinutes = &handles[52]
+
+var ConflictException = &handles[53]
+var ConflictException_message = &handles[54]
+
+var _DeleteAllLanguages = &handles[55]
+
+var DependencyException = &handles[56]
+var DependencyException_message = &handles[57]
+
+var _DirectSendEnforcementStatus = &handles[58]
+
+var _DirectSendEnforcementStatusExpiresAt = &handles[59]
+
+var _ErrorMessage = &handles[60]
+
+var _EventDestinationArn = &handles[61]
+
+var _Filter = &handles[62]
+var _Filter_key = &handles[63]
+var _Filter_value = &handles[64]
+
+var _Headers = &handles[65]
+var _Headers_key = &handles[66]
+var _Headers_value = &handles[67]
+
+var _IanaTimezone = &handles[68]
+
+var InternalServiceException = &handles[69]
+var InternalServiceException_message = &handles[70]
+
+var InvalidParametersException = &handles[71]
+var InvalidParametersException_message = &handles[72]
+
+var _Iso8601Duration = &handles[73]
+
+var _IsoCountryCode = &handles[74]
+
+var _KmsKeyArn = &handles[75]
+
+var LibraryTemplateBodyInputs = &handles[76]
+var LibraryTemplateBodyInputs_addContactNumber = &handles[77]
+var LibraryTemplateBodyInputs_addLearnMoreLink = &handles[78]
+var LibraryTemplateBodyInputs_addSecurityRecommendation = &handles[79]
+var LibraryTemplateBodyInputs_addTrackPackageLink = &handles[80]
+var LibraryTemplateBodyInputs_codeExpirationMinutes = &handles[81]
+
+var LibraryTemplateButtonInput = &handles[82]
+var LibraryTemplateButtonInput_type = &handles[83]
+var LibraryTemplateButtonInput_phoneNumber = &handles[84]
+var LibraryTemplateButtonInput_url = &handles[85]
+var LibraryTemplateButtonInput_otpType = &handles[86]
+var LibraryTemplateButtonInput_zeroTapTermsAccepted = &handles[87]
+var LibraryTemplateButtonInput_supportedApps = &handles[88]
+
+var LibraryTemplateButtonList = &handles[89]
+var LibraryTemplateButtonList_type = &handles[90]
+var LibraryTemplateButtonList_text = &handles[91]
+var LibraryTemplateButtonList_phoneNumber = &handles[92]
+var LibraryTemplateButtonList_url = &handles[93]
+var LibraryTemplateButtonList_otpType = &handles[94]
+var LibraryTemplateButtonList_zeroTapTermsAccepted = &handles[95]
+var LibraryTemplateButtonList_supportedApps = &handles[96]
+
+var LimitExceededException = &handles[97]
+var LimitExceededException_message = &handles[98]
+
+var _LinkedAccountWithIncompleteSetup = &handles[99]
+var _LinkedAccountWithIncompleteSetup_key = &handles[100]
+var _LinkedAccountWithIncompleteSetup_value = &handles[101]
+
+var LinkedWhatsAppBusinessAccount = &handles[102]
+var LinkedWhatsAppBusinessAccount_arn = &handles[103]
+var LinkedWhatsAppBusinessAccount_id = &handles[104]
+var LinkedWhatsAppBusinessAccount_wabaId = &handles[105]
+var LinkedWhatsAppBusinessAccount_registrationStatus = &handles[106]
+var LinkedWhatsAppBusinessAccount_linkDate = &handles[107]
+var LinkedWhatsAppBusinessAccount_wabaName = &handles[108]
+var LinkedWhatsAppBusinessAccount_eventDestinations = &handles[109]
+var LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus = &handles[110]
+var LinkedWhatsAppBusinessAccount_directSendEnforcementStatus = &handles[111]
+var LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt = &handles[112]
+var LinkedWhatsAppBusinessAccount_datasetId = &handles[113]
+var LinkedWhatsAppBusinessAccount_phoneNumbers = &handles[114]
+
+var _LinkedWhatsAppBusinessAccountArn = &handles[115]
+
+var _LinkedWhatsAppBusinessAccountId = &handles[116]
+
+var LinkedWhatsAppBusinessAccountIdMetaData = &handles[117]
+var LinkedWhatsAppBusinessAccountIdMetaData_accountName = &handles[118]
+var LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus = &handles[119]
+var LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers = &handles[120]
+var LinkedWhatsAppBusinessAccountIdMetaData_wabaId = &handles[121]
+
+var LinkedWhatsAppBusinessAccountSummary = &handles[122]
+var LinkedWhatsAppBusinessAccountSummary_arn = &handles[123]
+var LinkedWhatsAppBusinessAccountSummary_id = &handles[124]
+var LinkedWhatsAppBusinessAccountSummary_wabaId = &handles[125]
+var LinkedWhatsAppBusinessAccountSummary_registrationStatus = &handles[126]
+var LinkedWhatsAppBusinessAccountSummary_linkDate = &handles[127]
+var LinkedWhatsAppBusinessAccountSummary_wabaName = &handles[128]
+var LinkedWhatsAppBusinessAccountSummary_eventDestinations = &handles[129]
+var LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus = &handles[130]
+var LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus = &handles[131]
+var LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt = &handles[132]
+var LinkedWhatsAppBusinessAccountSummary_datasetId = &handles[133]
+
+var _LinkedWhatsAppBusinessAccountSummaryList = &handles[134]
+var _LinkedWhatsAppBusinessAccountSummaryList_member = &handles[135]
+
+var _LinkedWhatsAppPhoneNumberArn = &handles[136]
+
+var _MaxResults = &handles[137]
+
+var _MetaFlowApplicationId = &handles[138]
+
+var MetaFlowApplicationInfo = &handles[139]
+var MetaFlowApplicationInfo_link = &handles[140]
+var MetaFlowApplicationInfo_name = &handles[141]
+var MetaFlowApplicationInfo_id = &handles[142]
+
+var _MetaFlowApplicationLink = &handles[143]
+
+var _MetaFlowApplicationName = &handles[144]
+
+var MetaFlowAsset = &handles[145]
+var MetaFlowAsset_name = &handles[146]
+var MetaFlowAsset_assetType = &handles[147]
+var MetaFlowAsset_downloadUrl = &handles[148]
+
+var _MetaFlowAssetDownloadUrl = &handles[149]
+
+var _MetaFlowAssetList = &handles[150]
+var _MetaFlowAssetList_member = &handles[151]
+
+var _MetaFlowAssetName = &handles[152]
+
+var _MetaFlowAssetType = &handles[153]
+
+var MetaFlowCategory = &handles[154]
+var MetaFlowCategory_SIGN_UP = &handles[155]
+var MetaFlowCategory_SIGN_IN = &handles[156]
+var MetaFlowCategory_APPOINTMENT_BOOKING = &handles[157]
+var MetaFlowCategory_LEAD_GENERATION = &handles[158]
+var MetaFlowCategory_SHOPPING = &handles[159]
+var MetaFlowCategory_CONTACT_US = &handles[160]
+var MetaFlowCategory_CUSTOMER_SUPPORT = &handles[161]
+var MetaFlowCategory_SURVEY = &handles[162]
+var MetaFlowCategory_OTHER = &handles[163]
+
+var _MetaFlowCategoryList = &handles[164]
+var _MetaFlowCategoryList_member = &handles[165]
+
+var _MetaFlowDataApiVersion = &handles[166]
+
+var _MetaFlowEndpointUri = &handles[167]
+
+var MetaFlowHealthEntity = &handles[168]
+var MetaFlowHealthEntity_entityType = &handles[169]
+var MetaFlowHealthEntity_id = &handles[170]
+var MetaFlowHealthEntity_canSendMessage = &handles[171]
+
+var _MetaFlowHealthEntityList = &handles[172]
+var _MetaFlowHealthEntityList_member = &handles[173]
+
+var _MetaFlowHealthEntityType = &handles[174]
+
+var MetaFlowHealthStatus = &handles[175]
+var MetaFlowHealthStatus_canSendMessage = &handles[176]
+var MetaFlowHealthStatus_entities = &handles[177]
+
+var _MetaFlowHealthStatusAvailability = &handles[178]
+
+var _MetaFlowId = &handles[179]
+
+var _MetaFlowJsonBlob = &handles[180]
+
+var _MetaFlowJsonVersion = &handles[181]
+
+var _MetaFlowName = &handles[182]
+
+var MetaFlowPreviewInfo = &handles[183]
+var MetaFlowPreviewInfo_previewUrl = &handles[184]
+var MetaFlowPreviewInfo_expiresAt = &handles[185]
+
+var _MetaFlowPreviewUrl = &handles[186]
+
+var _MetaFlowStatus = &handles[187]
+
+var MetaFlowSummary = &handles[188]
+var MetaFlowSummary_flowId = &handles[189]
+var MetaFlowSummary_flowName = &handles[190]
+var MetaFlowSummary_flowStatus = &handles[191]
+var MetaFlowSummary_flowCategories = &handles[192]
+var MetaFlowSummary_validationErrors = &handles[193]
+
+var _MetaFlowSummaryList = &handles[194]
+var _MetaFlowSummaryList_member = &handles[195]
+
+var _MetaFlowTimestamp = &handles[196]
+
+var _MetaFlowValidationError = &handles[197]
+
+var _MetaFlowWabaCurrency = &handles[198]
+
+var _MetaFlowWabaTemplateNamespace = &handles[199]
+
+var _MetaFlowWabaTimezoneId = &handles[200]
+
+var MetaFlowWhatsAppBusinessAccountInfo = &handles[201]
+var MetaFlowWhatsAppBusinessAccountInfo_id = &handles[202]
+var MetaFlowWhatsAppBusinessAccountInfo_name = &handles[203]
+var MetaFlowWhatsAppBusinessAccountInfo_currency = &handles[204]
+var MetaFlowWhatsAppBusinessAccountInfo_timezoneId = &handles[205]
+var MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace = &handles[206]
+
+var _MetaIndustries = &handles[207]
+var _MetaIndustries_member = &handles[208]
+
+var _MetaIndustry = &handles[209]
+
+var MetaLibraryTemplate = &handles[210]
+var MetaLibraryTemplate_templateName = &handles[211]
+var MetaLibraryTemplate_libraryTemplateName = &handles[212]
+var MetaLibraryTemplate_templateCategory = &handles[213]
+var MetaLibraryTemplate_templateLanguage = &handles[214]
+var MetaLibraryTemplate_libraryTemplateButtonInputs = &handles[215]
+var MetaLibraryTemplate_libraryTemplateBodyInputs = &handles[216]
+
+var _MetaLibraryTemplateButtonInputs = &handles[217]
+var _MetaLibraryTemplateButtonInputs_member = &handles[218]
+
+var _MetaLibraryTemplateButtonList = &handles[219]
+var _MetaLibraryTemplateButtonList_member = &handles[220]
+
+var MetaLibraryTemplateDefinition = &handles[221]
+var MetaLibraryTemplateDefinition_templateName = &handles[222]
+var MetaLibraryTemplateDefinition_templateLanguage = &handles[223]
+var MetaLibraryTemplateDefinition_templateCategory = &handles[224]
+var MetaLibraryTemplateDefinition_templateTopic = &handles[225]
+var MetaLibraryTemplateDefinition_templateUseCase = &handles[226]
+var MetaLibraryTemplateDefinition_templateIndustry = &handles[227]
+var MetaLibraryTemplateDefinition_templateHeader = &handles[228]
+var MetaLibraryTemplateDefinition_templateBody = &handles[229]
+var MetaLibraryTemplateDefinition_templateButtons = &handles[230]
+var MetaLibraryTemplateDefinition_templateId = &handles[231]
+var MetaLibraryTemplateDefinition_templateBodyExampleParams = &handles[232]
+
+var _MetaLibraryTemplatesList = &handles[233]
+var _MetaLibraryTemplatesList_member = &handles[234]
+
+var _MetaParameterFormat = &handles[235]
+
+var _MetaTemplate = &handles[236]
+
+var _MetaTemplateBody = &handles[237]
+
+var _MetaTemplateBodyExampleParams = &handles[238]
+var _MetaTemplateBodyExampleParams_member = &handles[239]
+
+var _MetaTemplateCategory = &handles[240]
+
+var _MetaTemplateComponents = &handles[241]
+
+var _MetaTemplateCtaLinkTrackingOptedOut = &handles[242]
+
+var _MetaTemplateDefinition = &handles[243]
+
+var _MetaTemplateHeader = &handles[244]
+
+var _MetaTemplateId = &handles[245]
+
+var _MetaTemplateLanguage = &handles[246]
+
+var _MetaTemplateName = &handles[247]
+
+var _MetaTemplateQualityScore = &handles[248]
+
+var _MetaTemplateSource = &handles[249]
+
+var _MetaTemplateStatus = &handles[250]
+
+var _MetaTemplateTopic = &handles[251]
+
+var _MetaTemplateUseCase = &handles[252]
+
+var _MetaText = &handles[253]
+
+var _MetaUrl = &handles[254]
+
+var _MetaUrlWithSuffixExample = &handles[255]
+var _MetaUrlWithSuffixExample_key = &handles[256]
+var _MetaUrlWithSuffixExample_value = &handles[257]
+
+var _NextToken = &handles[258]
+
+var _OtpType = &handles[259]
+
+var _PhoneNumber = &handles[260]
+
+var RegistrationStatus = &handles[261]
+var RegistrationStatus_COMPLETE = &handles[262]
+var RegistrationStatus_INCOMPLETE = &handles[263]
+
+var ResourceNotFoundException = &handles[264]
+var ResourceNotFoundException_message = &handles[265]
+
+var _RoleArn = &handles[266]
+
+var S3File = &handles[267]
+var S3File_bucketName = &handles[268]
+var S3File_key = &handles[269]
+
+var S3PresignedUrl = &handles[270]
+var S3PresignedUrl_url = &handles[271]
+var S3PresignedUrl_headers = &handles[272]
+
+var _StringList = &handles[273]
+var _StringList_member = &handles[274]
+
+var _SupportedApp = &handles[275]
+var _SupportedApp_key = &handles[276]
+var _SupportedApp_value = &handles[277]
+
+var _SupportedApps = &handles[278]
+var _SupportedApps_member = &handles[279]
+
+var Tag = &handles[280]
+var Tag_key = &handles[281]
+var Tag_value = &handles[282]
+
+var _TagList = &handles[283]
+var _TagList_member = &handles[284]
+
+var TemplateSummary = &handles[285]
+var TemplateSummary_templateName = &handles[286]
+var TemplateSummary_metaTemplateId = &handles[287]
+var TemplateSummary_templateStatus = &handles[288]
+var TemplateSummary_templateQualityScore = &handles[289]
+var TemplateSummary_templateLanguage = &handles[290]
+var TemplateSummary_templateCategory = &handles[291]
+var TemplateSummary_templateSource = &handles[292]
+var TemplateSummary_correctCategory = &handles[293]
+
+var _TemplateSummaryList = &handles[294]
+var _TemplateSummaryList_member = &handles[295]
+
+var ThrottledRequestException = &handles[296]
+var ThrottledRequestException_message = &handles[297]
+
+var _TwoFactorPin = &handles[298]
+
+var _ValidationErrorList = &handles[299]
+var _ValidationErrorList_member = &handles[300]
+
+var ValidationException = &handles[301]
+var ValidationException_message = &handles[302]
+
+var WabaPhoneNumberSetupFinalization = &handles[303]
+var WabaPhoneNumberSetupFinalization_id = &handles[304]
+var WabaPhoneNumberSetupFinalization_twoFactorPin = &handles[305]
+var WabaPhoneNumberSetupFinalization_dataLocalizationRegion = &handles[306]
+var WabaPhoneNumberSetupFinalization_tags = &handles[307]
+
+var _WabaPhoneNumberSetupFinalizationList = &handles[308]
+var _WabaPhoneNumberSetupFinalizationList_member = &handles[309]
+
+var WabaSetupFinalization = &handles[310]
+var WabaSetupFinalization_id = &handles[311]
+var WabaSetupFinalization_eventDestinations = &handles[312]
+var WabaSetupFinalization_tags = &handles[313]
+
+var WhatsAppBusinessAccountEventDestination = &handles[314]
+var WhatsAppBusinessAccountEventDestination_eventDestinationArn = &handles[315]
+var WhatsAppBusinessAccountEventDestination_roleArn = &handles[316]
+
+var _WhatsAppBusinessAccountEventDestinations = &handles[317]
+var _WhatsAppBusinessAccountEventDestinations_member = &handles[318]
+
+var _WhatsAppBusinessAccountId = &handles[319]
+
+var _WhatsAppBusinessAccountLinkDate = &handles[320]
+
+var _WhatsAppBusinessAccountMarketingMessagesOnboardingStatus = &handles[321]
+
+var _WhatsAppBusinessAccountName = &handles[322]
+
+var _WhatsAppBusinessScopedUserId = &handles[323]
+
+var _WhatsAppCallbackPermissionStatus = &handles[324]
+
+var _WhatsAppCallEventBlob = &handles[325]
+
+var WhatsAppCallHours = &handles[326]
+var WhatsAppCallHours_enabled = &handles[327]
+var WhatsAppCallHours_timezone = &handles[328]
+var WhatsAppCallHours_weeklyOperatingHours = &handles[329]
+var WhatsAppCallHours_holidaySchedule = &handles[330]
+
+var _WhatsAppCallIconVisibility = &handles[331]
+
+var WhatsAppCallPermission = &handles[332]
+var WhatsAppCallPermission_status = &handles[333]
+var WhatsAppCallPermission_expirationTime = &handles[334]
+
+var WhatsAppCallPermissionAction = &handles[335]
+var WhatsAppCallPermissionAction_actionName = &handles[336]
+var WhatsAppCallPermissionAction_canPerformAction = &handles[337]
+var WhatsAppCallPermissionAction_limits = &handles[338]
+
+var _WhatsAppCallPermissionActionList = &handles[339]
+var _WhatsAppCallPermissionActionList_member = &handles[340]
+
+var _WhatsAppCallPermissionActionName = &handles[341]
+
+var WhatsAppCallPermissionLimit = &handles[342]
+var WhatsAppCallPermissionLimit_timePeriod = &handles[343]
+var WhatsAppCallPermissionLimit_maxAllowed = &handles[344]
+var WhatsAppCallPermissionLimit_currentUsage = &handles[345]
+var WhatsAppCallPermissionLimit_limitExpirationTime = &handles[346]
+
+var _WhatsAppCallPermissionLimitList = &handles[347]
+var _WhatsAppCallPermissionLimitList_member = &handles[348]
+
+var _WhatsAppCallPermissionStatus = &handles[349]
+
+var WhatsAppCallSettings = &handles[350]
+var WhatsAppCallSettings_callEnabled = &handles[351]
+var WhatsAppCallSettings_callHours = &handles[352]
+var WhatsAppCallSettings_callIconVisibility = &handles[353]
+var WhatsAppCallSettings_callbackPermissionStatus = &handles[354]
+
+var _WhatsAppConversionEventBlob = &handles[355]
+
+var _WhatsAppDatasetId = &handles[356]
+
+var _WhatsAppDate = &handles[357]
+
+var WhatsAppDayOfWeek = &handles[358]
+var WhatsAppDayOfWeek_MONDAY = &handles[359]
+var WhatsAppDayOfWeek_TUESDAY = &handles[360]
+var WhatsAppDayOfWeek_WEDNESDAY = &handles[361]
+var WhatsAppDayOfWeek_THURSDAY = &handles[362]
+var WhatsAppDayOfWeek_FRIDAY = &handles[363]
+var WhatsAppDayOfWeek_SATURDAY = &handles[364]
+var WhatsAppDayOfWeek_SUNDAY = &handles[365]
+
+var _WhatsAppDestinationPhoneNumber = &handles[366]
+
+var _WhatsAppDisplayPhoneNumber = &handles[367]
+
+var WhatsAppHolidayScheduleEntry = &handles[368]
+var WhatsAppHolidayScheduleEntry_date = &handles[369]
+var WhatsAppHolidayScheduleEntry_startTime = &handles[370]
+var WhatsAppHolidayScheduleEntry_endTime = &handles[371]
+
+var _WhatsAppHolidayScheduleList = &handles[372]
+var _WhatsAppHolidayScheduleList_member = &handles[373]
+
+var _WhatsAppMediaId = &handles[374]
+
+var _WhatsAppMessageBlob = &handles[375]
+
+var _WhatsAppPhoneNumber = &handles[376]
+
+var WhatsAppPhoneNumberDetail = &handles[377]
+var WhatsAppPhoneNumberDetail_arn = &handles[378]
+var WhatsAppPhoneNumberDetail_phoneNumber = &handles[379]
+var WhatsAppPhoneNumberDetail_phoneNumberId = &handles[380]
+var WhatsAppPhoneNumberDetail_metaPhoneNumberId = &handles[381]
+var WhatsAppPhoneNumberDetail_displayPhoneNumberName = &handles[382]
+var WhatsAppPhoneNumberDetail_displayPhoneNumber = &handles[383]
+var WhatsAppPhoneNumberDetail_qualityRating = &handles[384]
+var WhatsAppPhoneNumberDetail_dataLocalizationRegion = &handles[385]
+
+var _WhatsAppPhoneNumberDetailList = &handles[386]
+var _WhatsAppPhoneNumberDetailList_member = &handles[387]
+
+var _WhatsAppPhoneNumberId = &handles[388]
+
+var _WhatsAppPhoneNumberName = &handles[389]
+
+var _WhatsAppPhoneNumberQualityRating = &handles[390]
+
+var WhatsAppPhoneNumberSummary = &handles[391]
+var WhatsAppPhoneNumberSummary_arn = &handles[392]
+var WhatsAppPhoneNumberSummary_phoneNumber = &handles[393]
+var WhatsAppPhoneNumberSummary_phoneNumberId = &handles[394]
+var WhatsAppPhoneNumberSummary_metaPhoneNumberId = &handles[395]
+var WhatsAppPhoneNumberSummary_displayPhoneNumberName = &handles[396]
+var WhatsAppPhoneNumberSummary_displayPhoneNumber = &handles[397]
+var WhatsAppPhoneNumberSummary_qualityRating = &handles[398]
+var WhatsAppPhoneNumberSummary_dataLocalizationRegion = &handles[399]
+
+var _WhatsAppPhoneNumberSummaryList = &handles[400]
+var _WhatsAppPhoneNumberSummaryList_member = &handles[401]
+
+var WhatsAppSetupFinalization = &handles[402]
+var WhatsAppSetupFinalization_associateInProgressToken = &handles[403]
+var WhatsAppSetupFinalization_phoneNumbers = &handles[404]
+var WhatsAppSetupFinalization_phoneNumberParent = &handles[405]
+var WhatsAppSetupFinalization_waba = &handles[406]
+
+var WhatsAppSignupCallback = &handles[407]
+var WhatsAppSignupCallback_accessToken = &handles[408]
+var WhatsAppSignupCallback_callbackUrl = &handles[409]
+
+var WhatsAppSignupCallbackResult = &handles[410]
+var WhatsAppSignupCallbackResult_associateInProgressToken = &handles[411]
+var WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup = &handles[412]
+
+var WhatsAppTimeOfDay = &handles[413]
+var WhatsAppTimeOfDay_hours = &handles[414]
+var WhatsAppTimeOfDay_minutes = &handles[415]
+
+var WhatsAppWeeklyOperatingHoursEntry = &handles[416]
+var WhatsAppWeeklyOperatingHoursEntry_dayOfWeek = &handles[417]
+var WhatsAppWeeklyOperatingHoursEntry_openTime = &handles[418]
+var WhatsAppWeeklyOperatingHoursEntry_closeTime = &handles[419]
+
+var _WhatsAppWeeklyOperatingHoursList = &handles[420]
+var _WhatsAppWeeklyOperatingHoursList_member = &handles[421]
+
+var _ZeroTapTermsAccepted = &handles[422]
+
+var AssociateWhatsAppBusinessAccountInput = &handles[423]
+var AssociateWhatsAppBusinessAccountInput_signupCallback = &handles[424]
+var AssociateWhatsAppBusinessAccountInput_setupFinalization = &handles[425]
+
+var AssociateWhatsAppBusinessAccountOutput = &handles[426]
+var AssociateWhatsAppBusinessAccountOutput_signupCallbackResult = &handles[427]
+var AssociateWhatsAppBusinessAccountOutput_statusCode = &handles[428]
+var AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId = &handles[429]
+
+var CreateWhatsAppDatasetInput = &handles[430]
+var CreateWhatsAppDatasetInput_id = &handles[431]
+
+var CreateWhatsAppDatasetOutput = &handles[432]
+var CreateWhatsAppDatasetOutput_datasetId = &handles[433]
+
+var CreateWhatsAppFlowInput = &handles[434]
+var CreateWhatsAppFlowInput_id = &handles[435]
+var CreateWhatsAppFlowInput_flowName = &handles[436]
+var CreateWhatsAppFlowInput_categories = &handles[437]
+var CreateWhatsAppFlowInput_flowJson = &handles[438]
+var CreateWhatsAppFlowInput_publish = &handles[439]
+var CreateWhatsAppFlowInput_cloneFlowId = &handles[440]
+var CreateWhatsAppFlowInput_endpointUri = &handles[441]
+
+var CreateWhatsAppFlowOutput = &handles[442]
+var CreateWhatsAppFlowOutput_flowId = &handles[443]
+var CreateWhatsAppFlowOutput_validationErrors = &handles[444]
+
+var CreateWhatsAppMessageTemplateFromLibraryInput = &handles[445]
+var CreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate = &handles[446]
+var CreateWhatsAppMessageTemplateFromLibraryInput_id = &handles[447]
+
+var CreateWhatsAppMessageTemplateFromLibraryOutput = &handles[448]
+var CreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId = &handles[449]
+var CreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus = &handles[450]
+var CreateWhatsAppMessageTemplateFromLibraryOutput_category = &handles[451]
+
+var CreateWhatsAppMessageTemplateInput = &handles[452]
+var CreateWhatsAppMessageTemplateInput_templateDefinition = &handles[453]
+var CreateWhatsAppMessageTemplateInput_id = &handles[454]
+
+var CreateWhatsAppMessageTemplateMediaInput = &handles[455]
+var CreateWhatsAppMessageTemplateMediaInput_id = &handles[456]
+var CreateWhatsAppMessageTemplateMediaInput_sourceS3File = &handles[457]
+
+var CreateWhatsAppMessageTemplateMediaOutput = &handles[458]
+var CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle = &handles[459]
+
+var CreateWhatsAppMessageTemplateOutput = &handles[460]
+var CreateWhatsAppMessageTemplateOutput_metaTemplateId = &handles[461]
+var CreateWhatsAppMessageTemplateOutput_templateStatus = &handles[462]
+var CreateWhatsAppMessageTemplateOutput_category = &handles[463]
+
+var DeleteWhatsAppFlowInput = &handles[464]
+var DeleteWhatsAppFlowInput_id = &handles[465]
+var DeleteWhatsAppFlowInput_flowId = &handles[466]
+
+var DeleteWhatsAppFlowOutput = &handles[467]
+
+var DeleteWhatsAppMessageMediaInput = &handles[468]
+var DeleteWhatsAppMessageMediaInput_mediaId = &handles[469]
+var DeleteWhatsAppMessageMediaInput_originationPhoneNumberId = &handles[470]
+
+var DeleteWhatsAppMessageMediaOutput = &handles[471]
+var DeleteWhatsAppMessageMediaOutput_success = &handles[472]
+
+var DeleteWhatsAppMessageTemplateInput = &handles[473]
+var DeleteWhatsAppMessageTemplateInput_metaTemplateId = &handles[474]
+var DeleteWhatsAppMessageTemplateInput_deleteAllLanguages = &handles[475]
+var DeleteWhatsAppMessageTemplateInput_id = &handles[476]
+var DeleteWhatsAppMessageTemplateInput_templateName = &handles[477]
+
+var DeleteWhatsAppMessageTemplateOutput = &handles[478]
+
+var DeprecateWhatsAppFlowInput = &handles[479]
+var DeprecateWhatsAppFlowInput_id = &handles[480]
+var DeprecateWhatsAppFlowInput_flowId = &handles[481]
+
+var DeprecateWhatsAppFlowOutput = &handles[482]
+
+var DisassociateWhatsAppBusinessAccountInput = &handles[483]
+var DisassociateWhatsAppBusinessAccountInput_id = &handles[484]
+
+var DisassociateWhatsAppBusinessAccountOutput = &handles[485]
+
+var GetLinkedWhatsAppBusinessAccountInput = &handles[486]
+var GetLinkedWhatsAppBusinessAccountInput_id = &handles[487]
+
+var GetLinkedWhatsAppBusinessAccountOutput = &handles[488]
+var GetLinkedWhatsAppBusinessAccountOutput_account = &handles[489]
+
+var GetLinkedWhatsAppBusinessAccountPhoneNumberInput = &handles[490]
+var GetLinkedWhatsAppBusinessAccountPhoneNumberInput_id = &handles[491]
+
+var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = &handles[492]
+var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber = &handles[493]
+var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId = &handles[494]
+var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings = &handles[495]
+
+var GetWhatsAppBusinessPublicKeyInput = &handles[496]
+var GetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = &handles[497]
+
+var GetWhatsAppBusinessPublicKeyOutput = &handles[498]
+var GetWhatsAppBusinessPublicKeyOutput_businessPublicKey = &handles[499]
+var GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus = &handles[500]
+
+var GetWhatsAppCallPermissionInput = &handles[501]
+var GetWhatsAppCallPermissionInput_originationPhoneNumberId = &handles[502]
+var GetWhatsAppCallPermissionInput_destinationPhoneNumber = &handles[503]
+var GetWhatsAppCallPermissionInput_endUserBsuid = &handles[504]
+
+var GetWhatsAppCallPermissionOutput = &handles[505]
+var GetWhatsAppCallPermissionOutput_permission = &handles[506]
+var GetWhatsAppCallPermissionOutput_actions = &handles[507]
+
+var GetWhatsAppFlowInput = &handles[508]
+var GetWhatsAppFlowInput_id = &handles[509]
+var GetWhatsAppFlowInput_flowId = &handles[510]
+
+var GetWhatsAppFlowOutput = &handles[511]
+var GetWhatsAppFlowOutput_flowId = &handles[512]
+var GetWhatsAppFlowOutput_flowName = &handles[513]
+var GetWhatsAppFlowOutput_flowStatus = &handles[514]
+var GetWhatsAppFlowOutput_categories = &handles[515]
+var GetWhatsAppFlowOutput_validationErrors = &handles[516]
+var GetWhatsAppFlowOutput_jsonVersion = &handles[517]
+var GetWhatsAppFlowOutput_dataApiVersion = &handles[518]
+var GetWhatsAppFlowOutput_endpointUri = &handles[519]
+var GetWhatsAppFlowOutput_preview = &handles[520]
+var GetWhatsAppFlowOutput_whatsAppBusinessAccount = &handles[521]
+var GetWhatsAppFlowOutput_application = &handles[522]
+var GetWhatsAppFlowOutput_healthStatus = &handles[523]
+
+var GetWhatsAppFlowPreviewInput = &handles[524]
+var GetWhatsAppFlowPreviewInput_id = &handles[525]
+var GetWhatsAppFlowPreviewInput_flowId = &handles[526]
+var GetWhatsAppFlowPreviewInput_invalidate = &handles[527]
+
+var GetWhatsAppFlowPreviewOutput = &handles[528]
+var GetWhatsAppFlowPreviewOutput_flowId = &handles[529]
+var GetWhatsAppFlowPreviewOutput_preview = &handles[530]
+
+var GetWhatsAppMessageMediaInput = &handles[531]
+var GetWhatsAppMessageMediaInput_mediaId = &handles[532]
+var GetWhatsAppMessageMediaInput_originationPhoneNumberId = &handles[533]
+var GetWhatsAppMessageMediaInput_metadataOnly = &handles[534]
+var GetWhatsAppMessageMediaInput_destinationS3PresignedUrl = &handles[535]
+var GetWhatsAppMessageMediaInput_destinationS3File = &handles[536]
+
+var GetWhatsAppMessageMediaOutput = &handles[537]
+var GetWhatsAppMessageMediaOutput_mimeType = &handles[538]
+var GetWhatsAppMessageMediaOutput_fileSize = &handles[539]
+
+var GetWhatsAppMessageTemplateInput = &handles[540]
+var GetWhatsAppMessageTemplateInput_metaTemplateId = &handles[541]
+var GetWhatsAppMessageTemplateInput_id = &handles[542]
+var GetWhatsAppMessageTemplateInput_templateName = &handles[543]
+var GetWhatsAppMessageTemplateInput_templateLanguageCode = &handles[544]
+
+var GetWhatsAppMessageTemplateOutput = &handles[545]
+var GetWhatsAppMessageTemplateOutput_template = &handles[546]
+
+var ListLinkedWhatsAppBusinessAccountsInput = &handles[547]
+var ListLinkedWhatsAppBusinessAccountsInput_nextToken = &handles[548]
+var ListLinkedWhatsAppBusinessAccountsInput_maxResults = &handles[549]
+
+var ListLinkedWhatsAppBusinessAccountsOutput = &handles[550]
+var ListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts = &handles[551]
+var ListLinkedWhatsAppBusinessAccountsOutput_nextToken = &handles[552]
+
+var ListTagsForResourceInput = &handles[553]
+var ListTagsForResourceInput_resourceArn = &handles[554]
+
+var ListTagsForResourceOutput = &handles[555]
+var ListTagsForResourceOutput_statusCode = &handles[556]
+var ListTagsForResourceOutput_tags = &handles[557]
+
+var ListWhatsAppFlowAssetsInput = &handles[558]
+var ListWhatsAppFlowAssetsInput_id = &handles[559]
+var ListWhatsAppFlowAssetsInput_flowId = &handles[560]
+var ListWhatsAppFlowAssetsInput_nextToken = &handles[561]
+var ListWhatsAppFlowAssetsInput_maxResults = &handles[562]
+
+var ListWhatsAppFlowAssetsOutput = &handles[563]
+var ListWhatsAppFlowAssetsOutput_flowAssets = &handles[564]
+var ListWhatsAppFlowAssetsOutput_nextToken = &handles[565]
+
+var ListWhatsAppFlowsInput = &handles[566]
+var ListWhatsAppFlowsInput_id = &handles[567]
+var ListWhatsAppFlowsInput_nextToken = &handles[568]
+var ListWhatsAppFlowsInput_maxResults = &handles[569]
+
+var ListWhatsAppFlowsOutput = &handles[570]
+var ListWhatsAppFlowsOutput_flows = &handles[571]
+var ListWhatsAppFlowsOutput_nextToken = &handles[572]
+
+var ListWhatsAppMessageTemplatesInput = &handles[573]
+var ListWhatsAppMessageTemplatesInput_id = &handles[574]
+var ListWhatsAppMessageTemplatesInput_nextToken = &handles[575]
+var ListWhatsAppMessageTemplatesInput_maxResults = &handles[576]
+
+var ListWhatsAppMessageTemplatesOutput = &handles[577]
+var ListWhatsAppMessageTemplatesOutput_templates = &handles[578]
+var ListWhatsAppMessageTemplatesOutput_nextToken = &handles[579]
+
+var ListWhatsAppTemplateLibraryInput = &handles[580]
+var ListWhatsAppTemplateLibraryInput_nextToken = &handles[581]
+var ListWhatsAppTemplateLibraryInput_maxResults = &handles[582]
+var ListWhatsAppTemplateLibraryInput_id = &handles[583]
+var ListWhatsAppTemplateLibraryInput_filters = &handles[584]
+
+var ListWhatsAppTemplateLibraryOutput = &handles[585]
+var ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates = &handles[586]
+var ListWhatsAppTemplateLibraryOutput_nextToken = &handles[587]
+
+var PostWhatsAppMessageMediaInput = &handles[588]
+var PostWhatsAppMessageMediaInput_originationPhoneNumberId = &handles[589]
+var PostWhatsAppMessageMediaInput_sourceS3PresignedUrl = &handles[590]
+var PostWhatsAppMessageMediaInput_sourceS3File = &handles[591]
+
+var PostWhatsAppMessageMediaOutput = &handles[592]
+var PostWhatsAppMessageMediaOutput_mediaId = &handles[593]
+
+var PublishWhatsAppFlowInput = &handles[594]
+var PublishWhatsAppFlowInput_id = &handles[595]
+var PublishWhatsAppFlowInput_flowId = &handles[596]
+
+var PublishWhatsAppFlowOutput = &handles[597]
+
+var PutWhatsAppBusinessAccountEventDestinationsInput = &handles[598]
+var PutWhatsAppBusinessAccountEventDestinationsInput_id = &handles[599]
+var PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations = &handles[600]
+
+var PutWhatsAppBusinessAccountEventDestinationsOutput = &handles[601]
+
+var PutWhatsAppBusinessPublicKeyInput = &handles[602]
+var PutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = &handles[603]
+var PutWhatsAppBusinessPublicKeyInput_businessPublicKey = &handles[604]
+var PutWhatsAppBusinessPublicKeyInput_kmsKeyArn = &handles[605]
+
+var PutWhatsAppBusinessPublicKeyOutput = &handles[606]
+
+var SendWhatsAppCallEventInput = &handles[607]
+var SendWhatsAppCallEventInput_originationPhoneNumberId = &handles[608]
+var SendWhatsAppCallEventInput_metaApiVersion = &handles[609]
+var SendWhatsAppCallEventInput_callEvent = &handles[610]
+
+var SendWhatsAppCallEventOutput = &handles[611]
+var SendWhatsAppCallEventOutput_callId = &handles[612]
+
+var SendWhatsAppConversionEventInput = &handles[613]
+var SendWhatsAppConversionEventInput_id = &handles[614]
+var SendWhatsAppConversionEventInput_datasetId = &handles[615]
+var SendWhatsAppConversionEventInput_eventData = &handles[616]
+
+var SendWhatsAppConversionEventOutput = &handles[617]
+var SendWhatsAppConversionEventOutput_requestId = &handles[618]
+
+var SendWhatsAppMessageInput = &handles[619]
+var SendWhatsAppMessageInput_originationPhoneNumberId = &handles[620]
+var SendWhatsAppMessageInput_message = &handles[621]
+var SendWhatsAppMessageInput_metaApiVersion = &handles[622]
+
+var SendWhatsAppMessageOutput = &handles[623]
+var SendWhatsAppMessageOutput_messageId = &handles[624]
+
+var TagResourceInput = &handles[625]
+var TagResourceInput_resourceArn = &handles[626]
+var TagResourceInput_tags = &handles[627]
+
+var TagResourceOutput = &handles[628]
+var TagResourceOutput_statusCode = &handles[629]
+
+var UntagResourceInput = &handles[630]
+var UntagResourceInput_resourceArn = &handles[631]
+var UntagResourceInput_tagKeys = &handles[632]
+
+var UntagResourceOutput = &handles[633]
+var UntagResourceOutput_statusCode = &handles[634]
+
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput = &handles[635]
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id = &handles[636]
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings = &handles[637]
+
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput = &handles[638]
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId = &handles[639]
+
+var UpdateWhatsAppFlowAssetsInput = &handles[640]
+var UpdateWhatsAppFlowAssetsInput_id = &handles[641]
+var UpdateWhatsAppFlowAssetsInput_flowId = &handles[642]
+var UpdateWhatsAppFlowAssetsInput_flowJson = &handles[643]
+
+var UpdateWhatsAppFlowAssetsOutput = &handles[644]
+var UpdateWhatsAppFlowAssetsOutput_validationErrors = &handles[645]
+
+var UpdateWhatsAppFlowInput = &handles[646]
+var UpdateWhatsAppFlowInput_id = &handles[647]
+var UpdateWhatsAppFlowInput_flowId = &handles[648]
+var UpdateWhatsAppFlowInput_flowName = &handles[649]
+var UpdateWhatsAppFlowInput_categories = &handles[650]
+var UpdateWhatsAppFlowInput_endpointUri = &handles[651]
+var UpdateWhatsAppFlowInput_metaAppId = &handles[652]
+
+var UpdateWhatsAppFlowOutput = &handles[653]
+
+var UpdateWhatsAppMessageTemplateInput = &handles[654]
+var UpdateWhatsAppMessageTemplateInput_id = &handles[655]
+var UpdateWhatsAppMessageTemplateInput_metaTemplateId = &handles[656]
+var UpdateWhatsAppMessageTemplateInput_templateName = &handles[657]
+var UpdateWhatsAppMessageTemplateInput_templateLanguageCode = &handles[658]
+var UpdateWhatsAppMessageTemplateInput_parameterFormat = &handles[659]
+var UpdateWhatsAppMessageTemplateInput_templateCategory = &handles[660]
+var UpdateWhatsAppMessageTemplateInput_templateComponents = &handles[661]
+var UpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut = &handles[662]
+
+var UpdateWhatsAppMessageTemplateOutput = &handles[663]
+
+var SocialMessaging = &smithy.ServiceSchema{Schema: &handles[38], Version: "2024-01-01"}

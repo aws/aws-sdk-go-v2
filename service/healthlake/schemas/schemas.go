@@ -4,2618 +4,2214 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "CreateDataTransformationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/data-transformation-profile",
-	Code: 201})
-
-var CreateFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "CreateFHIRDatastore",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DeleteDataTransformationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/data-transformation-profile/{ProfileId}",
-	Code: 200})
-
-var DeleteFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DeleteFHIRDatastore",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDataTransformationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeDataTransformationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/data-transformation-job/{JobId}",
-	Code: 200})
-
-var DescribeFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRDatastore",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFHIRExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFHIRImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "GetDataTransformationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/data-transformation-profile/{ProfileId}",
-	Code: 200})
-
-var ListDataTransformationJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/data-transformation-jobs",
-	Code: 200})
-
-var ListDataTransformationProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/data-transformation-profile",
-	Code: 200})
-
-var ListDataTransformationProfileVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationProfileVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/data-transformation-profile/{ProfileId}/versions",
-	Code: 200})
-
-var ListFHIRDatastores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRDatastores",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFHIRExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRExportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFHIRImportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRImportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PublishDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "PublishDataTransformationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/data-transformation-profile/{ProfileId}/publish",
-	Code: 200})
-
-var RestoreFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "RestoreFHIRDatastore",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDataTransformationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartDataTransformationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/data-transformation-job",
-	Code: 200})
-
-var StartFHIRExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartFHIRExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartFHIRImportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartFHIRImportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDataTransformationProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateDataTransformationProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/data-transformation-profile/{ProfileId}",
-	Code: 200})
-
-var UpdateFHIRDatastore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateFHIRDatastore",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProfileWithAgent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateProfileWithAgent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/update-profile-with-agent",
-	Code: 200})
-
-var _HealthLake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "HealthLake",
-}, smithy.ShapeTypeService, 0)
-
-var HealthLake = smithy.NewServiceSchema(_HealthLake, "2017-07-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AgentErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AgentErrorType",
-}, smithy.ShapeTypeEnum, 5)
-var AgentErrorType_InternalServerException *smithy.Schema
-
-var AgentErrorType_ResourceNotFoundException *smithy.Schema
-
-var AgentErrorType_ValidationException *smithy.Schema
-
-var AgentErrorType_AccessDeniedException *smithy.Schema
-
-var AgentErrorType_ThrottlingException *smithy.Schema
-
-var AgentInputMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AgentInputMessage",
-}, smithy.ShapeTypeStructure, 2)
-var AgentInputMessage_Body *smithy.Schema
-
-var AgentInputMessage_Type *smithy.Schema
-
-var AgentInputMessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AgentInputMessageType",
-}, smithy.ShapeTypeEnum, 2)
-var AgentInputMessageType_NORMAL *smithy.Schema
-
-var AgentInputMessageType_USER_CONFIRMATION_RESPONSE *smithy.Schema
-
-var _AgentMessageString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AgentMessageString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AgentOutputMessageStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AgentOutputMessageStream",
-}, smithy.ShapeTypeUnion, 5, &smithytraits.Streaming{})
-var AgentOutputMessageStream_TextMessageEvent *smithy.Schema
-
-var AgentOutputMessageStream_ProgressEvent *smithy.Schema
-
-var AgentOutputMessageStream_HeartbeatEvent *smithy.Schema
-
-var AgentOutputMessageStream_ErrorEvent *smithy.Schema
-
-var AgentOutputMessageStream_EndOfOutputEvent *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var AnalyticsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AnalyticsConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AnalyticsConfiguration_Status *smithy.Schema
-
-var AnalyticsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AnalyticsStatus",
-}, smithy.ShapeTypeEnum, 6)
-var AnalyticsStatus_ENABLED *smithy.Schema
-
-var AnalyticsStatus_ENABLING *smithy.Schema
-
-var AnalyticsStatus_DISABLED *smithy.Schema
-
-var AnalyticsStatus_DISABLING *smithy.Schema
-
-var AnalyticsStatus_PAUSING *smithy.Schema
-
-var AnalyticsStatus_PAUSED *smithy.Schema
-
-var AuthorizationStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "AuthorizationStrategy",
-}, smithy.ShapeTypeEnum, 3)
-var AuthorizationStrategy_SMARTV1 *smithy.Schema
-
-var AuthorizationStrategy_SMART_ON_FHIR *smithy.Schema
-
-var AuthorizationStrategy_AWS_AUTH *smithy.Schema
-
-var BackupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "BackupConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var BackupConfiguration_Status *smithy.Schema
-
-var BackupConfiguration_BackupType *smithy.Schema
-
-var BackupConfiguration_RetentionPeriodInDays *smithy.Schema
-
-var BackupConfiguration_BackupTagsEnabled *smithy.Schema
-
-var _BackupRetentionPeriodInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "BackupRetentionPeriodInDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var BackupStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "BackupStatus",
-}, smithy.ShapeTypeEnum, 2)
-var BackupStatus_ENABLED *smithy.Schema
-
-var BackupStatus_DISABLED *smithy.Schema
-
-var BackupType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "BackupType",
-}, smithy.ShapeTypeEnum, 1)
-var BackupType_CONTINUOUS *smithy.Schema
-
-var _BoundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "BoundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var _BoundedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "BoundedString",
-}, smithy.ShapeTypeString, 0)
-
-var _ChangeDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ChangeDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ClientTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var CmkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "CmkType",
-}, smithy.ShapeTypeEnum, 2)
-var CmkType_CM_CMK *smithy.Schema
-
-var CmkType_AO_CMK *smithy.Schema
-
-var _ConfigurationMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ConfigurationMetadata",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ContinuousBackupRestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ContinuousBackupRestoreConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ContinuousBackupRestoreConfiguration_RestorePointTime *smithy.Schema
-
-var _ConversationIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ConversationIdString",
-}, smithy.ShapeTypeString, 0)
-
-var CreateDataTransformationProfileSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "CreateDataTransformationProfileSource",
-}, smithy.ShapeTypeUnion, 4)
-var CreateDataTransformationProfileSource_StarterProfile *smithy.Schema
-
-var CreateDataTransformationProfileSource_ExistingVersionedProfileId *smithy.Schema
-
-var CreateDataTransformationProfileSource_ProfileMapping *smithy.Schema
-
-var CreateDataTransformationProfileSource_SampleData *smithy.Schema
-
-var _DatastoreArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DatastoreArn",
-}, smithy.ShapeTypeString, 0)
-
-var DatastoreBackupStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DatastoreBackupStatus",
-}, smithy.ShapeTypeStructure, 5)
-var DatastoreBackupStatus_Configuration *smithy.Schema
-
-var DatastoreBackupStatus_BackupEnabledAt *smithy.Schema
-
-var DatastoreBackupStatus_EarliestRestorePoint *smithy.Schema
-
-var DatastoreBackupStatus_LatestRestorePoint *smithy.Schema
-
-var DatastoreBackupStatus_ScheduledPermanentDeletionTime *smithy.Schema
-
-var DatastoreFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DatastoreFilter",
-}, smithy.ShapeTypeStructure, 4)
-var DatastoreFilter_DatastoreName *smithy.Schema
-
-var DatastoreFilter_DatastoreStatus *smithy.Schema
-
-var DatastoreFilter_CreatedBefore *smithy.Schema
-
-var DatastoreFilter_CreatedAfter *smithy.Schema
-
-var _DatastoreId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DatastoreId",
-}, smithy.ShapeTypeString, 0)
-
-var _DatastoreName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DatastoreName",
-}, smithy.ShapeTypeString, 0)
-
-var DatastoreProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DatastoreProperties",
-}, smithy.ShapeTypeStructure, 15)
-var DatastoreProperties_DatastoreId *smithy.Schema
-
-var DatastoreProperties_DatastoreArn *smithy.Schema
-
-var DatastoreProperties_DatastoreName *smithy.Schema
-
-var DatastoreProperties_DatastoreStatus *smithy.Schema
-
-var DatastoreProperties_CreatedAt *smithy.Schema
-
-var DatastoreProperties_DatastoreTypeVersion *smithy.Schema
-
-var DatastoreProperties_DatastoreEndpoint *smithy.Schema
-
-var DatastoreProperties_SseConfiguration *smithy.Schema
-
-var DatastoreProperties_PreloadDataConfig *smithy.Schema
-
-var DatastoreProperties_IdentityProviderConfiguration *smithy.Schema
-
-var DatastoreProperties_ErrorCause *smithy.Schema
-
-var DatastoreProperties_NlpConfiguration *smithy.Schema
-
-var DatastoreProperties_AnalyticsConfiguration *smithy.Schema
-
-var DatastoreProperties_ProfileConfiguration *smithy.Schema
-
-var DatastoreProperties_BackupStatusInfo *smithy.Schema
-
-var _DatastorePropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DatastorePropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _DatastorePropertiesList_member *smithy.Schema
-
-var DatastoreStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DatastoreStatus",
-}, smithy.ShapeTypeEnum, 7)
-var DatastoreStatus_CREATING *smithy.Schema
-
-var DatastoreStatus_ACTIVE *smithy.Schema
-
-var DatastoreStatus_DELETING *smithy.Schema
-
-var DatastoreStatus_DELETED *smithy.Schema
-
-var DatastoreStatus_CREATE_FAILED *smithy.Schema
-
-var DatastoreStatus_UPDATING *smithy.Schema
-
-var DatastoreStatus_UPDATE_FAILED *smithy.Schema
-
-var _DataTransformationChatOptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationChatOptionsList",
-}, smithy.ShapeTypeList, 1)
-var _DataTransformationChatOptionsList_member *smithy.Schema
-
-var _DataTransformationChatOptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationChatOptionString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DataTransformationIamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationIamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DataTransformationJobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationJobId",
-}, smithy.ShapeTypeString, 0)
-
-var _DataTransformationJobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationJobName",
-}, smithy.ShapeTypeString, 0)
-
-var _DataTransformationNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationNextToken",
-}, smithy.ShapeTypeString, 0)
-
-var DataTransformationProfileSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationProfileSummary",
-}, smithy.ShapeTypeStructure, 7)
-var DataTransformationProfileSummary_ProfileId *smithy.Schema
-
-var DataTransformationProfileSummary_Version *smithy.Schema
-
-var DataTransformationProfileSummary_SourceFormat *smithy.Schema
-
-var DataTransformationProfileSummary_TargetFormat *smithy.Schema
-
-var DataTransformationProfileSummary_ProfileName *smithy.Schema
-
-var DataTransformationProfileSummary_ProfileDescription *smithy.Schema
-
-var DataTransformationProfileSummary_LastUpdatedAt *smithy.Schema
-
-var _DataTransformationProfileSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationProfileSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DataTransformationProfileSummaryList_member *smithy.Schema
-
-var DataTransformationProfileVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationProfileVersionSummary",
-}, smithy.ShapeTypeStructure, 7)
-var DataTransformationProfileVersionSummary_ProfileId *smithy.Schema
-
-var DataTransformationProfileVersionSummary_Version *smithy.Schema
-
-var DataTransformationProfileVersionSummary_SourceFormat *smithy.Schema
-
-var DataTransformationProfileVersionSummary_TargetFormat *smithy.Schema
-
-var DataTransformationProfileVersionSummary_ProfileName *smithy.Schema
-
-var DataTransformationProfileVersionSummary_ChangeDescription *smithy.Schema
-
-var DataTransformationProfileVersionSummary_LastUpdatedAt *smithy.Schema
-
-var _DataTransformationProfileVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationProfileVersionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DataTransformationProfileVersionSummaryList_member *smithy.Schema
-
-var DataTransformationS3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationS3Configuration",
-}, smithy.ShapeTypeStructure, 2)
-var DataTransformationS3Configuration_S3Uri *smithy.Schema
-
-var DataTransformationS3Configuration_KmsKeyId *smithy.Schema
-
-var _DataTransformationS3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationS3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _DataTransformationTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DataTransformationTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DataTransformationTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DefaultEnabledBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DefaultEnabledBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _DefaultProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DefaultProfiles",
-}, smithy.ShapeTypeList, 1)
-var _DefaultProfiles_member *smithy.Schema
-
-var _EncryptionKeyID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "EncryptionKeyID",
-}, smithy.ShapeTypeString, 0)
-
-var EndOfOutputEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "EndOfOutputEvent",
-}, smithy.ShapeTypeStructure, 3)
-var EndOfOutputEvent_FinalResponseMessage *smithy.Schema
-
-var EndOfOutputEvent_Options *smithy.Schema
-
-var EndOfOutputEvent_ConversationId *smithy.Schema
-
-var ErrorCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ErrorCategory",
-}, smithy.ShapeTypeEnum, 2)
-var ErrorCategory_RETRYABLE_ERROR *smithy.Schema
-
-var ErrorCategory_NON_RETRYABLE_ERROR *smithy.Schema
-
-var ErrorCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ErrorCause",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorCause_ErrorMessage *smithy.Schema
-
-var ErrorCause_ErrorCategory *smithy.Schema
-
-var ErrorEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ErrorEvent",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorEvent_Error *smithy.Schema
-
-var ErrorEvent_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExistingVersionedProfileSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ExistingVersionedProfileSource",
-}, smithy.ShapeTypeStructure, 2)
-var ExistingVersionedProfileSource_ProfileId *smithy.Schema
-
-var ExistingVersionedProfileSource_Version *smithy.Schema
-
-var ExportJobProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ExportJobProperties",
-}, smithy.ShapeTypeStructure, 9)
-var ExportJobProperties_JobId *smithy.Schema
-
-var ExportJobProperties_JobName *smithy.Schema
-
-var ExportJobProperties_JobStatus *smithy.Schema
-
-var ExportJobProperties_SubmitTime *smithy.Schema
-
-var ExportJobProperties_EndTime *smithy.Schema
-
-var ExportJobProperties_DatastoreId *smithy.Schema
-
-var ExportJobProperties_OutputDataConfig *smithy.Schema
-
-var ExportJobProperties_DataAccessRoleArn *smithy.Schema
-
-var ExportJobProperties_Message *smithy.Schema
-
-var _ExportJobPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ExportJobPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _ExportJobPropertiesList_member *smithy.Schema
-
-var FailedDependencyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "FailedDependencyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var FailedDependencyException_Message *smithy.Schema
-
-var FHIRVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "FHIRVersion",
-}, smithy.ShapeTypeEnum, 1)
-var FHIRVersion_R4 *smithy.Schema
-
-var _GenericDouble = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "GenericDouble",
-}, smithy.ShapeTypeDouble, 0)
-
-var _GenericLong = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "GenericLong",
-}, smithy.ShapeTypeLong, 0)
-
-var _HealthLakeBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "HealthLakeBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _HealthLakeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "HealthLakeString",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthLakeTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "HealthLakeTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var HeartbeatEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "HeartbeatEvent",
-}, smithy.ShapeTypeStructure, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var IdentityProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "IdentityProviderConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var IdentityProviderConfiguration_AuthorizationStrategy *smithy.Schema
-
-var IdentityProviderConfiguration_FineGrainedAuthorizationEnabled *smithy.Schema
-
-var IdentityProviderConfiguration_Metadata *smithy.Schema
-
-var IdentityProviderConfiguration_IdpLambdaArn *smithy.Schema
-
-var ImportJobProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ImportJobProperties",
-}, smithy.ShapeTypeStructure, 12)
-var ImportJobProperties_JobId *smithy.Schema
-
-var ImportJobProperties_JobName *smithy.Schema
-
-var ImportJobProperties_JobStatus *smithy.Schema
-
-var ImportJobProperties_SubmitTime *smithy.Schema
-
-var ImportJobProperties_EndTime *smithy.Schema
-
-var ImportJobProperties_DatastoreId *smithy.Schema
-
-var ImportJobProperties_InputDataConfig *smithy.Schema
-
-var ImportJobProperties_JobOutputDataConfig *smithy.Schema
-
-var ImportJobProperties_JobProgressReport *smithy.Schema
-
-var ImportJobProperties_DataAccessRoleArn *smithy.Schema
-
-var ImportJobProperties_Message *smithy.Schema
-
-var ImportJobProperties_ValidationLevel *smithy.Schema
-
-var _ImportJobPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ImportJobPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _ImportJobPropertiesList_member *smithy.Schema
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeUnion, 1)
-var InputDataConfig_S3Uri *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0)
-
-var JobProgressReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "JobProgressReport",
-}, smithy.ShapeTypeStructure, 17)
-var JobProgressReport_TotalNumberOfScannedFiles *smithy.Schema
-
-var JobProgressReport_TotalSizeOfScannedFilesInMB *smithy.Schema
-
-var JobProgressReport_TotalNumberOfImportedFiles *smithy.Schema
-
-var JobProgressReport_TotalNumberOfResourcesScanned *smithy.Schema
-
-var JobProgressReport_TotalNumberOfResourcesImported *smithy.Schema
-
-var JobProgressReport_TotalNumberOfResourcesWithCustomerError *smithy.Schema
-
-var JobProgressReport_TotalNumberOfFilesReadWithCustomerError *smithy.Schema
-
-var JobProgressReport_TotalNumberOfScannedNonFhirFiles *smithy.Schema
-
-var JobProgressReport_TotalSizeOfScannedNonFhirFilesInMB *smithy.Schema
-
-var JobProgressReport_TotalNumberOfImportedNonFhirFiles *smithy.Schema
-
-var JobProgressReport_TotalNumberOfNonFhirResourcesScanned *smithy.Schema
-
-var JobProgressReport_TotalNumberOfNonFhirResourcesImported *smithy.Schema
-
-var JobProgressReport_TotalNumberOfNonFhirResourcesWithCustomerError *smithy.Schema
-
-var JobProgressReport_TotalNumberOfNonFhirFilesReadWithCustomerError *smithy.Schema
-
-var JobProgressReport_Throughput *smithy.Schema
-
-var JobProgressReport_TotalFilesConverted *smithy.Schema
-
-var JobProgressReport_TotalResourcesGenerated *smithy.Schema
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 10)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_QUEUED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_COMPLETED_WITH_ERRORS *smithy.Schema
-
-var JobStatus_COMPLETED *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_CANCEL_SUBMITTED *smithy.Schema
-
-var JobStatus_CANCEL_IN_PROGRESS *smithy.Schema
-
-var JobStatus_CANCEL_COMPLETED *smithy.Schema
-
-var JobStatus_CANCEL_FAILED *smithy.Schema
-
-var KmsEncryptionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "KmsEncryptionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var KmsEncryptionConfig_CmkType *smithy.Schema
-
-var KmsEncryptionConfig_KmsKeyId *smithy.Schema
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _LambdaArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "LambdaArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "MaxResultsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NlpConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "NlpConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NlpConfiguration_Status *smithy.Schema
-
-var NlpStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "NlpStatus",
-}, smithy.ShapeTypeEnum, 4)
-var NlpStatus_ENABLED *smithy.Schema
-
-var NlpStatus_ENABLING *smithy.Schema
-
-var NlpStatus_DISABLED *smithy.Schema
-
-var NlpStatus_DISABLING *smithy.Schema
-
-var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "OutputDataConfig",
-}, smithy.ShapeTypeUnion, 1)
-var OutputDataConfig_S3Configuration *smithy.Schema
-
-var PreloadDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "PreloadDataConfig",
-}, smithy.ShapeTypeStructure, 1)
-var PreloadDataConfig_PreloadDataType *smithy.Schema
-
-var PreloadDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "PreloadDataType",
-}, smithy.ShapeTypeEnum, 1)
-var PreloadDataType_SYNTHEA *smithy.Schema
-
-var ProfileConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ProfileConfiguration_DefaultProfiles *smithy.Schema
-
-var _ProfileDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfileIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileIdString",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfileMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileMapping",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ProfileMapping_key *smithy.Schema
-
-var _ProfileMapping_value *smithy.Schema
-
-var _ProfileMappingKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileMappingKey",
-}, smithy.ShapeTypeString, 0)
-
-var ProfileMappingSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileMappingSource",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var ProfileMappingSource_ProfileMapping *smithy.Schema
-
-var _ProfileMappingValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileMappingValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfileNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfileVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProfileVersion",
-}, smithy.ShapeTypeInteger, 0)
-
-var ProgressEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ProgressEvent",
-}, smithy.ShapeTypeStructure, 1)
-var ProgressEvent_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var RestoreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "RestoreConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var RestoreConfiguration_ContinuousBackupRestoreConfiguration *smithy.Schema
-
-var S3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "S3Configuration",
-}, smithy.ShapeTypeStructure, 2)
-var S3Configuration_S3Uri *smithy.Schema
-
-var S3Configuration_KmsKeyId *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _SampleDataS3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "SampleDataS3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var SampleDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "SampleDataSource",
-}, smithy.ShapeTypeStructure, 1)
-var SampleDataSource_S3Uri *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var SourceFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "SourceFormat",
-}, smithy.ShapeTypeEnum, 2)
-var SourceFormat_CCDA *smithy.Schema
-
-var SourceFormat_CSV *smithy.Schema
-
-var SseConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "SseConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SseConfiguration_KmsEncryptionConfig *smithy.Schema
-
-var StarterProfileSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StarterProfileSource",
-}, smithy.ShapeTypeStructure, 1)
-var StarterProfileSource_StarterProfileName *smithy.Schema
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TargetFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TargetFormat",
-}, smithy.ShapeTypeEnum, 1)
-var TargetFormat_FHIR_R4 *smithy.Schema
-
-var TextMessageEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TextMessageEvent",
-}, smithy.ShapeTypeStructure, 1)
-var TextMessageEvent_Message *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var TransformationInputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TransformationInputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var TransformationInputDataConfig_S3Uri *smithy.Schema
-
-var TransformationInputDataConfig_SourceFormat *smithy.Schema
-
-var TransformationJobProgressReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TransformationJobProgressReport",
-}, smithy.ShapeTypeStructure, 4)
-var TransformationJobProgressReport_TotalFilesScanned *smithy.Schema
-
-var TransformationJobProgressReport_TotalFilesConverted *smithy.Schema
-
-var TransformationJobProgressReport_TotalFilesFailed *smithy.Schema
-
-var TransformationJobProgressReport_TotalResourcesGenerated *smithy.Schema
-
-var TransformationJobProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TransformationJobProperties",
-}, smithy.ShapeTypeStructure, 15)
-var TransformationJobProperties_JobId *smithy.Schema
-
-var TransformationJobProperties_JobStatus *smithy.Schema
-
-var TransformationJobProperties_InputDataConfig *smithy.Schema
-
-var TransformationJobProperties_OutputDataConfig *smithy.Schema
-
-var TransformationJobProperties_DataAccessRoleArn *smithy.Schema
-
-var TransformationJobProperties_SubmitTime *smithy.Schema
-
-var TransformationJobProperties_JobName *smithy.Schema
-
-var TransformationJobProperties_ProfileId *smithy.Schema
-
-var TransformationJobProperties_ProfileName *smithy.Schema
-
-var TransformationJobProperties_ProfileVersion *smithy.Schema
-
-var TransformationJobProperties_EndTime *smithy.Schema
-
-var TransformationJobProperties_DriftDetectionEnabled *smithy.Schema
-
-var TransformationJobProperties_ProvenanceEnabled *smithy.Schema
-
-var TransformationJobProperties_Message *smithy.Schema
-
-var TransformationJobProperties_JobProgressReport *smithy.Schema
-
-var TransformationJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TransformationJobStatus",
-}, smithy.ShapeTypeEnum, 6)
-var TransformationJobStatus_SUBMITTED *smithy.Schema
-
-var TransformationJobStatus_QUEUED *smithy.Schema
-
-var TransformationJobStatus_IN_PROGRESS *smithy.Schema
-
-var TransformationJobStatus_COMPLETED *smithy.Schema
-
-var TransformationJobStatus_COMPLETED_WITH_ERRORS *smithy.Schema
-
-var TransformationJobStatus_FAILED *smithy.Schema
-
-var TransformationJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TransformationJobSummary",
-}, smithy.ShapeTypeStructure, 6)
-var TransformationJobSummary_JobId *smithy.Schema
-
-var TransformationJobSummary_JobStatus *smithy.Schema
-
-var TransformationJobSummary_SubmitTime *smithy.Schema
-
-var TransformationJobSummary_JobName *smithy.Schema
-
-var TransformationJobSummary_EndTime *smithy.Schema
-
-var TransformationJobSummary_SourceFormat *smithy.Schema
-
-var _TransformationJobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TransformationJobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TransformationJobSummaryList_member *smithy.Schema
-
-var TransformationOutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TransformationOutputDataConfig",
-}, smithy.ShapeTypeStructure, 1)
-var TransformationOutputDataConfig_S3Configuration *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ValidationLevel",
-}, smithy.ShapeTypeEnum, 3)
-var ValidationLevel_STRICT *smithy.Schema
-
-var ValidationLevel_STRUCTURE_ONLY *smithy.Schema
-
-var ValidationLevel_MINIMAL *smithy.Schema
-
-var CreateDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "CreateDataTransformationProfileRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateDataTransformationProfileRequest_SourceFormat *smithy.Schema
-
-var CreateDataTransformationProfileRequest_Source *smithy.Schema
-
-var CreateDataTransformationProfileRequest_KmsKeyId *smithy.Schema
-
-var CreateDataTransformationProfileRequest_ProfileDescription *smithy.Schema
-
-var CreateDataTransformationProfileRequest_ProfileName *smithy.Schema
-
-var CreateDataTransformationProfileRequest_Tags *smithy.Schema
-
-var CreateDataTransformationProfileRequest_ClientToken *smithy.Schema
-
-var CreateDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "CreateDataTransformationProfileResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreateDataTransformationProfileResponse_ProfileId *smithy.Schema
-
-var CreateDataTransformationProfileResponse_Version *smithy.Schema
-
-var CreateDataTransformationProfileResponse_SourceFormat *smithy.Schema
-
-var CreateDataTransformationProfileResponse_TargetFormat *smithy.Schema
-
-var CreateDataTransformationProfileResponse_ProfileName *smithy.Schema
-
-var CreateDataTransformationProfileResponse_LastUpdatedAt *smithy.Schema
-
-var CreateFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "CreateFHIRDatastoreRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateFHIRDatastoreRequest_DatastoreName *smithy.Schema
-
-var CreateFHIRDatastoreRequest_DatastoreTypeVersion *smithy.Schema
-
-var CreateFHIRDatastoreRequest_SseConfiguration *smithy.Schema
-
-var CreateFHIRDatastoreRequest_PreloadDataConfig *smithy.Schema
-
-var CreateFHIRDatastoreRequest_ClientToken *smithy.Schema
-
-var CreateFHIRDatastoreRequest_Tags *smithy.Schema
-
-var CreateFHIRDatastoreRequest_IdentityProviderConfiguration *smithy.Schema
-
-var CreateFHIRDatastoreRequest_AnalyticsConfiguration *smithy.Schema
-
-var CreateFHIRDatastoreRequest_NlpConfiguration *smithy.Schema
-
-var CreateFHIRDatastoreRequest_ProfileConfiguration *smithy.Schema
-
-var CreateFHIRDatastoreRequest_BackupConfiguration *smithy.Schema
-
-var CreateFHIRDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "CreateFHIRDatastoreResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateFHIRDatastoreResponse_DatastoreId *smithy.Schema
-
-var CreateFHIRDatastoreResponse_DatastoreArn *smithy.Schema
-
-var CreateFHIRDatastoreResponse_DatastoreStatus *smithy.Schema
-
-var CreateFHIRDatastoreResponse_DatastoreEndpoint *smithy.Schema
-
-var DeleteDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DeleteDataTransformationProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataTransformationProfileRequest_ProfileId *smithy.Schema
-
-var DeleteDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DeleteDataTransformationProfileResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDataTransformationProfileResponse_ProfileId *smithy.Schema
-
-var DeleteDataTransformationProfileResponse_ProfileName *smithy.Schema
-
-var DeleteDataTransformationProfileResponse_DeletionTime *smithy.Schema
-
-var DeleteFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DeleteFHIRDatastoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFHIRDatastoreRequest_DatastoreId *smithy.Schema
-
-var DeleteFHIRDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DeleteFHIRDatastoreResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteFHIRDatastoreResponse_DatastoreId *smithy.Schema
-
-var DeleteFHIRDatastoreResponse_DatastoreArn *smithy.Schema
-
-var DeleteFHIRDatastoreResponse_DatastoreStatus *smithy.Schema
-
-var DeleteFHIRDatastoreResponse_DatastoreEndpoint *smithy.Schema
-
-var DescribeDataTransformationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeDataTransformationJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDataTransformationJobRequest_JobId *smithy.Schema
-
-var DescribeDataTransformationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeDataTransformationJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDataTransformationJobResponse_TransformationJobProperties *smithy.Schema
-
-var DescribeFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRDatastoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFHIRDatastoreRequest_DatastoreId *smithy.Schema
-
-var DescribeFHIRDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRDatastoreResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFHIRDatastoreResponse_DatastoreProperties *smithy.Schema
-
-var DescribeFHIRExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRExportJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFHIRExportJobRequest_DatastoreId *smithy.Schema
-
-var DescribeFHIRExportJobRequest_JobId *smithy.Schema
-
-var DescribeFHIRExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRExportJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFHIRExportJobResponse_ExportJobProperties *smithy.Schema
-
-var DescribeFHIRImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRImportJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFHIRImportJobRequest_DatastoreId *smithy.Schema
-
-var DescribeFHIRImportJobRequest_JobId *smithy.Schema
-
-var DescribeFHIRImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "DescribeFHIRImportJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFHIRImportJobResponse_ImportJobProperties *smithy.Schema
-
-var GetDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "GetDataTransformationProfileRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDataTransformationProfileRequest_ProfileId *smithy.Schema
-
-var GetDataTransformationProfileRequest_ProfileVersion *smithy.Schema
-
-var GetDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "GetDataTransformationProfileResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetDataTransformationProfileResponse_ProfileId *smithy.Schema
-
-var GetDataTransformationProfileResponse_Version *smithy.Schema
-
-var GetDataTransformationProfileResponse_SourceFormat *smithy.Schema
-
-var GetDataTransformationProfileResponse_TargetFormat *smithy.Schema
-
-var GetDataTransformationProfileResponse_ProfileMapping *smithy.Schema
-
-var GetDataTransformationProfileResponse_ProfileName *smithy.Schema
-
-var GetDataTransformationProfileResponse_ProfileDescription *smithy.Schema
-
-var GetDataTransformationProfileResponse_ChangeDescription *smithy.Schema
-
-var GetDataTransformationProfileResponse_LastUpdatedAt *smithy.Schema
-
-var ListDataTransformationJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationJobsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListDataTransformationJobsRequest_MaxResults *smithy.Schema
-
-var ListDataTransformationJobsRequest_NextToken *smithy.Schema
-
-var ListDataTransformationJobsRequest_JobStatus *smithy.Schema
-
-var ListDataTransformationJobsRequest_JobName *smithy.Schema
-
-var ListDataTransformationJobsRequest_SubmittedAfter *smithy.Schema
-
-var ListDataTransformationJobsRequest_SubmittedBefore *smithy.Schema
-
-var ListDataTransformationJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataTransformationJobsResponse_Items *smithy.Schema
-
-var ListDataTransformationJobsResponse_NextToken *smithy.Schema
-
-var ListDataTransformationProfilesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationProfilesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDataTransformationProfilesRequest_SourceFormat *smithy.Schema
-
-var ListDataTransformationProfilesRequest_MaxResults *smithy.Schema
-
-var ListDataTransformationProfilesRequest_NextToken *smithy.Schema
-
-var ListDataTransformationProfilesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationProfilesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataTransformationProfilesResponse_Items *smithy.Schema
-
-var ListDataTransformationProfilesResponse_NextToken *smithy.Schema
-
-var ListDataTransformationProfileVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationProfileVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDataTransformationProfileVersionsRequest_ProfileId *smithy.Schema
-
-var ListDataTransformationProfileVersionsRequest_MaxResults *smithy.Schema
-
-var ListDataTransformationProfileVersionsRequest_NextToken *smithy.Schema
-
-var ListDataTransformationProfileVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListDataTransformationProfileVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataTransformationProfileVersionsResponse_Items *smithy.Schema
-
-var ListDataTransformationProfileVersionsResponse_NextToken *smithy.Schema
-
-var ListFHIRDatastoresRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRDatastoresRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListFHIRDatastoresRequest_Filter *smithy.Schema
-
-var ListFHIRDatastoresRequest_NextToken *smithy.Schema
-
-var ListFHIRDatastoresRequest_MaxResults *smithy.Schema
-
-var ListFHIRDatastoresResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRDatastoresResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFHIRDatastoresResponse_DatastorePropertiesList *smithy.Schema
-
-var ListFHIRDatastoresResponse_NextToken *smithy.Schema
-
-var ListFHIRExportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRExportJobsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListFHIRExportJobsRequest_DatastoreId *smithy.Schema
-
-var ListFHIRExportJobsRequest_NextToken *smithy.Schema
-
-var ListFHIRExportJobsRequest_MaxResults *smithy.Schema
-
-var ListFHIRExportJobsRequest_JobName *smithy.Schema
-
-var ListFHIRExportJobsRequest_JobStatus *smithy.Schema
-
-var ListFHIRExportJobsRequest_SubmittedBefore *smithy.Schema
-
-var ListFHIRExportJobsRequest_SubmittedAfter *smithy.Schema
-
-var ListFHIRExportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRExportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFHIRExportJobsResponse_ExportJobPropertiesList *smithy.Schema
-
-var ListFHIRExportJobsResponse_NextToken *smithy.Schema
-
-var ListFHIRImportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRImportJobsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListFHIRImportJobsRequest_DatastoreId *smithy.Schema
-
-var ListFHIRImportJobsRequest_NextToken *smithy.Schema
-
-var ListFHIRImportJobsRequest_MaxResults *smithy.Schema
-
-var ListFHIRImportJobsRequest_JobName *smithy.Schema
-
-var ListFHIRImportJobsRequest_JobStatus *smithy.Schema
-
-var ListFHIRImportJobsRequest_SubmittedBefore *smithy.Schema
-
-var ListFHIRImportJobsRequest_SubmittedAfter *smithy.Schema
-
-var ListFHIRImportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListFHIRImportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFHIRImportJobsResponse_ImportJobPropertiesList *smithy.Schema
-
-var ListFHIRImportJobsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PublishDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "PublishDataTransformationProfileRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PublishDataTransformationProfileRequest_ProfileId *smithy.Schema
-
-var PublishDataTransformationProfileRequest_SourceFormat *smithy.Schema
-
-var PublishDataTransformationProfileRequest_FromExistingVersion *smithy.Schema
-
-var PublishDataTransformationProfileRequest_ChangeDescription *smithy.Schema
-
-var PublishDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "PublishDataTransformationProfileResponse",
-}, smithy.ShapeTypeStructure, 6)
-var PublishDataTransformationProfileResponse_ProfileId *smithy.Schema
-
-var PublishDataTransformationProfileResponse_Version *smithy.Schema
-
-var PublishDataTransformationProfileResponse_SourceFormat *smithy.Schema
-
-var PublishDataTransformationProfileResponse_TargetFormat *smithy.Schema
-
-var PublishDataTransformationProfileResponse_ProfileName *smithy.Schema
-
-var PublishDataTransformationProfileResponse_LastUpdatedAt *smithy.Schema
-
-var RestoreFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "RestoreFHIRDatastoreRequest",
-}, smithy.ShapeTypeStructure, 10)
-var RestoreFHIRDatastoreRequest_SourceDatastoreId *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_RestoreConfiguration *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_DatastoreName *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_SseConfiguration *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_ClientToken *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_Tags *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_IdentityProviderConfiguration *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_AnalyticsConfiguration *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_NlpConfiguration *smithy.Schema
-
-var RestoreFHIRDatastoreRequest_ProfileConfiguration *smithy.Schema
-
-var RestoreFHIRDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "RestoreFHIRDatastoreResponse",
-}, smithy.ShapeTypeStructure, 4)
-var RestoreFHIRDatastoreResponse_DatastoreId *smithy.Schema
-
-var RestoreFHIRDatastoreResponse_DatastoreArn *smithy.Schema
-
-var RestoreFHIRDatastoreResponse_DatastoreStatus *smithy.Schema
-
-var RestoreFHIRDatastoreResponse_DatastoreEndpoint *smithy.Schema
-
-var StartDataTransformationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartDataTransformationJobRequest",
-}, smithy.ShapeTypeStructure, 8)
-var StartDataTransformationJobRequest_InputDataConfig *smithy.Schema
-
-var StartDataTransformationJobRequest_OutputDataConfig *smithy.Schema
-
-var StartDataTransformationJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartDataTransformationJobRequest_ClientToken *smithy.Schema
-
-var StartDataTransformationJobRequest_JobName *smithy.Schema
-
-var StartDataTransformationJobRequest_ProfileId *smithy.Schema
-
-var StartDataTransformationJobRequest_DriftDetectionEnabled *smithy.Schema
-
-var StartDataTransformationJobRequest_ProvenanceEnabled *smithy.Schema
-
-var StartDataTransformationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartDataTransformationJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartDataTransformationJobResponse_JobId *smithy.Schema
-
-var StartDataTransformationJobResponse_JobStatus *smithy.Schema
-
-var StartFHIRExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartFHIRExportJobRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartFHIRExportJobRequest_JobName *smithy.Schema
-
-var StartFHIRExportJobRequest_OutputDataConfig *smithy.Schema
-
-var StartFHIRExportJobRequest_DatastoreId *smithy.Schema
-
-var StartFHIRExportJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartFHIRExportJobRequest_ClientToken *smithy.Schema
-
-var StartFHIRExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartFHIRExportJobResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartFHIRExportJobResponse_JobId *smithy.Schema
-
-var StartFHIRExportJobResponse_JobStatus *smithy.Schema
-
-var StartFHIRExportJobResponse_DatastoreId *smithy.Schema
-
-var StartFHIRImportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartFHIRImportJobRequest",
-}, smithy.ShapeTypeStructure, 11)
-var StartFHIRImportJobRequest_JobName *smithy.Schema
-
-var StartFHIRImportJobRequest_InputDataConfig *smithy.Schema
-
-var StartFHIRImportJobRequest_JobOutputDataConfig *smithy.Schema
-
-var StartFHIRImportJobRequest_DatastoreId *smithy.Schema
-
-var StartFHIRImportJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartFHIRImportJobRequest_ClientToken *smithy.Schema
-
-var StartFHIRImportJobRequest_ValidationLevel *smithy.Schema
-
-var StartFHIRImportJobRequest_ProfileId *smithy.Schema
-
-var StartFHIRImportJobRequest_InputFormat *smithy.Schema
-
-var StartFHIRImportJobRequest_DriftDetectionEnabled *smithy.Schema
-
-var StartFHIRImportJobRequest_ProvenanceEnabled *smithy.Schema
-
-var StartFHIRImportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "StartFHIRImportJobResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartFHIRImportJobResponse_JobId *smithy.Schema
-
-var StartFHIRImportJobResponse_JobStatus *smithy.Schema
-
-var StartFHIRImportJobResponse_DatastoreId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDataTransformationProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateDataTransformationProfileRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateDataTransformationProfileRequest_ProfileId *smithy.Schema
-
-var UpdateDataTransformationProfileRequest_ProfileMapping *smithy.Schema
-
-var UpdateDataTransformationProfileRequest_ChangeDescription *smithy.Schema
-
-var UpdateDataTransformationProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateDataTransformationProfileResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateDataTransformationProfileResponse_ProfileId *smithy.Schema
-
-var UpdateDataTransformationProfileResponse_SourceFormat *smithy.Schema
-
-var UpdateDataTransformationProfileResponse_TargetFormat *smithy.Schema
-
-var UpdateDataTransformationProfileResponse_ProfileName *smithy.Schema
-
-var UpdateDataTransformationProfileResponse_LastUpdatedAt *smithy.Schema
-
-var UpdateFHIRDatastoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateFHIRDatastoreRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateFHIRDatastoreRequest_DatastoreId *smithy.Schema
-
-var UpdateFHIRDatastoreRequest_DatastoreName *smithy.Schema
-
-var UpdateFHIRDatastoreRequest_AnalyticsConfiguration *smithy.Schema
-
-var UpdateFHIRDatastoreRequest_NlpConfiguration *smithy.Schema
-
-var UpdateFHIRDatastoreRequest_ProfileConfiguration *smithy.Schema
-
-var UpdateFHIRDatastoreRequest_IdentityProviderConfiguration *smithy.Schema
-
-var UpdateFHIRDatastoreRequest_BackupConfiguration *smithy.Schema
-
-var UpdateFHIRDatastoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateFHIRDatastoreResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFHIRDatastoreResponse_DatastoreProperties *smithy.Schema
-
-var UpdateProfileWithAgentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateProfileWithAgentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateProfileWithAgentRequest_ProfileId *smithy.Schema
-
-var UpdateProfileWithAgentRequest_InputMessage *smithy.Schema
-
-var UpdateProfileWithAgentRequest_ConversationId *smithy.Schema
-
-var UpdateProfileWithAgentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.healthlake",
-	Name:      "UpdateProfileWithAgentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateProfileWithAgentResponse_AgentResponse *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _HealthLakeString)
-
-	AgentErrorType_InternalServerException = AgentErrorType.AddMember("InternalServerException", smithyprelude.Unit)
-
-	AgentErrorType_ResourceNotFoundException = AgentErrorType.AddMember("ResourceNotFoundException", smithyprelude.Unit)
-
-	AgentErrorType_ValidationException = AgentErrorType.AddMember("ValidationException", smithyprelude.Unit)
-
-	AgentErrorType_AccessDeniedException = AgentErrorType.AddMember("AccessDeniedException", smithyprelude.Unit)
-
-	AgentErrorType_ThrottlingException = AgentErrorType.AddMember("ThrottlingException", smithyprelude.Unit)
-
-	AgentInputMessageType_NORMAL = AgentInputMessageType.AddMember("NORMAL", smithyprelude.Unit)
-
-	AgentInputMessageType_USER_CONFIRMATION_RESPONSE = AgentInputMessageType.AddMember("USER_CONFIRMATION_RESPONSE", smithyprelude.Unit)
-
-	AgentInputMessage_Body = AgentInputMessage.AddMember("Body", _AgentMessageString)
-
-	AgentInputMessage_Type = AgentInputMessage.AddMember("Type", AgentInputMessageType)
-
-	TextMessageEvent_Message = TextMessageEvent.AddMember("Message", _AgentMessageString)
-
-	ProgressEvent_Message = ProgressEvent.AddMember("Message", _AgentMessageString)
-
-	ErrorEvent_Error = ErrorEvent.AddMember("Error", AgentErrorType)
-
-	ErrorEvent_Message = ErrorEvent.AddMember("Message", _AgentMessageString)
-
-	_DataTransformationChatOptionsList_member = _DataTransformationChatOptionsList.AddMember("member", _DataTransformationChatOptionString)
-
-	EndOfOutputEvent_FinalResponseMessage = EndOfOutputEvent.AddMember("FinalResponseMessage", _AgentMessageString)
-
-	EndOfOutputEvent_Options = EndOfOutputEvent.AddMember("Options", _DataTransformationChatOptionsList)
-
-	EndOfOutputEvent_ConversationId = EndOfOutputEvent.AddMember("ConversationId", _ConversationIdString)
-
-	AgentOutputMessageStream_TextMessageEvent = AgentOutputMessageStream.AddMember("TextMessageEvent", TextMessageEvent)
-
-	AgentOutputMessageStream_ProgressEvent = AgentOutputMessageStream.AddMember("ProgressEvent", ProgressEvent)
-
-	AgentOutputMessageStream_HeartbeatEvent = AgentOutputMessageStream.AddMember("HeartbeatEvent", HeartbeatEvent)
-
-	AgentOutputMessageStream_ErrorEvent = AgentOutputMessageStream.AddMember("ErrorEvent", ErrorEvent)
-
-	AgentOutputMessageStream_EndOfOutputEvent = AgentOutputMessageStream.AddMember("EndOfOutputEvent", EndOfOutputEvent)
-
-	AnalyticsStatus_ENABLED = AnalyticsStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	AnalyticsStatus_ENABLING = AnalyticsStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	AnalyticsStatus_DISABLED = AnalyticsStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	AnalyticsStatus_DISABLING = AnalyticsStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	AnalyticsStatus_PAUSING = AnalyticsStatus.AddMember("PAUSING", smithyprelude.Unit)
-
-	AnalyticsStatus_PAUSED = AnalyticsStatus.AddMember("PAUSED", smithyprelude.Unit)
-
-	AnalyticsConfiguration_Status = AnalyticsConfiguration.AddMember("Status", AnalyticsStatus)
-
-	AuthorizationStrategy_SMARTV1 = AuthorizationStrategy.AddMember("SMARTV1", smithyprelude.Unit)
-
-	AuthorizationStrategy_SMART_ON_FHIR = AuthorizationStrategy.AddMember("SMART_ON_FHIR", smithyprelude.Unit)
-
-	AuthorizationStrategy_AWS_AUTH = AuthorizationStrategy.AddMember("AWS_AUTH", smithyprelude.Unit)
-
-	BackupStatus_ENABLED = BackupStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	BackupStatus_DISABLED = BackupStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	BackupType_CONTINUOUS = BackupType.AddMember("CONTINUOUS", smithyprelude.Unit)
-
-	BackupConfiguration_Status = BackupConfiguration.AddMember("Status", BackupStatus)
-
-	BackupConfiguration_BackupType = BackupConfiguration.AddMember("BackupType", BackupType)
-
-	BackupConfiguration_RetentionPeriodInDays = BackupConfiguration.AddMember("RetentionPeriodInDays", _BackupRetentionPeriodInDays)
-
-	BackupConfiguration_BackupTagsEnabled = BackupConfiguration.AddMember("BackupTagsEnabled", _HealthLakeBoolean)
-
-	CmkType_CM_CMK = CmkType.AddMember("CM_CMK", smithyprelude.Unit)
-
-	CmkType_AO_CMK = CmkType.AddMember("AO_CMK", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _HealthLakeString)
-
-	ContinuousBackupRestoreConfiguration_RestorePointTime = ContinuousBackupRestoreConfiguration.AddMember("RestorePointTime", _HealthLakeTimestamp)
-
-	StarterProfileSource_StarterProfileName = StarterProfileSource.AddMember("StarterProfileName", smithyprelude.String)
-
-	ExistingVersionedProfileSource_ProfileId = ExistingVersionedProfileSource.AddMember("ProfileId", smithyprelude.String)
-
-	ExistingVersionedProfileSource_Version = ExistingVersionedProfileSource.AddMember("Version", smithyprelude.Integer)
-
-	_StringMap_key = _StringMap.AddMember("key", smithyprelude.String)
-
-	_StringMap_value = _StringMap.AddMember("value", smithyprelude.String)
-
-	ProfileMappingSource_ProfileMapping = ProfileMappingSource.AddMember("ProfileMapping", _StringMap)
-
-	SampleDataSource_S3Uri = SampleDataSource.AddMember("S3Uri", _SampleDataS3Uri)
-
-	CreateDataTransformationProfileSource_StarterProfile = CreateDataTransformationProfileSource.AddMember("StarterProfile", StarterProfileSource)
-
-	CreateDataTransformationProfileSource_ExistingVersionedProfileId = CreateDataTransformationProfileSource.AddMember("ExistingVersionedProfileId", ExistingVersionedProfileSource)
-
-	CreateDataTransformationProfileSource_ProfileMapping = CreateDataTransformationProfileSource.AddMember("ProfileMapping", ProfileMappingSource)
-
-	CreateDataTransformationProfileSource_SampleData = CreateDataTransformationProfileSource.AddMember("SampleData", SampleDataSource)
-
-	DatastoreBackupStatus_Configuration = DatastoreBackupStatus.AddMember("Configuration", BackupConfiguration)
-
-	DatastoreBackupStatus_BackupEnabledAt = DatastoreBackupStatus.AddMember("BackupEnabledAt", _HealthLakeTimestamp)
-
-	DatastoreBackupStatus_EarliestRestorePoint = DatastoreBackupStatus.AddMember("EarliestRestorePoint", _HealthLakeTimestamp)
-
-	DatastoreBackupStatus_LatestRestorePoint = DatastoreBackupStatus.AddMember("LatestRestorePoint", _HealthLakeTimestamp)
-
-	DatastoreBackupStatus_ScheduledPermanentDeletionTime = DatastoreBackupStatus.AddMember("ScheduledPermanentDeletionTime", _HealthLakeTimestamp)
-
-	DatastoreStatus_CREATING = DatastoreStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	DatastoreStatus_ACTIVE = DatastoreStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DatastoreStatus_DELETING = DatastoreStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	DatastoreStatus_DELETED = DatastoreStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	DatastoreStatus_CREATE_FAILED = DatastoreStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	DatastoreStatus_UPDATING = DatastoreStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	DatastoreStatus_UPDATE_FAILED = DatastoreStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	DatastoreFilter_DatastoreName = DatastoreFilter.AddMember("DatastoreName", _DatastoreName)
-
-	DatastoreFilter_DatastoreStatus = DatastoreFilter.AddMember("DatastoreStatus", DatastoreStatus)
-
-	DatastoreFilter_CreatedBefore = DatastoreFilter.AddMember("CreatedBefore", _HealthLakeTimestamp)
-
-	DatastoreFilter_CreatedAfter = DatastoreFilter.AddMember("CreatedAfter", _HealthLakeTimestamp)
-
-	FHIRVersion_R4 = FHIRVersion.AddMember("R4", smithyprelude.Unit)
-
-	KmsEncryptionConfig_CmkType = KmsEncryptionConfig.AddMember("CmkType", CmkType)
-
-	KmsEncryptionConfig_KmsKeyId = KmsEncryptionConfig.AddMember("KmsKeyId", _EncryptionKeyID)
-
-	SseConfiguration_KmsEncryptionConfig = SseConfiguration.AddMember("KmsEncryptionConfig", KmsEncryptionConfig)
-
-	PreloadDataType_SYNTHEA = PreloadDataType.AddMember("SYNTHEA", smithyprelude.Unit)
-
-	PreloadDataConfig_PreloadDataType = PreloadDataConfig.AddMember("PreloadDataType", PreloadDataType)
-
-	IdentityProviderConfiguration_AuthorizationStrategy = IdentityProviderConfiguration.AddMember("AuthorizationStrategy", AuthorizationStrategy)
-
-	IdentityProviderConfiguration_FineGrainedAuthorizationEnabled = IdentityProviderConfiguration.AddMember("FineGrainedAuthorizationEnabled", _HealthLakeBoolean)
-
-	IdentityProviderConfiguration_Metadata = IdentityProviderConfiguration.AddMember("Metadata", _ConfigurationMetadata)
-
-	IdentityProviderConfiguration_IdpLambdaArn = IdentityProviderConfiguration.AddMember("IdpLambdaArn", _LambdaArn)
-
-	ErrorCategory_RETRYABLE_ERROR = ErrorCategory.AddMember("RETRYABLE_ERROR", smithyprelude.Unit)
-
-	ErrorCategory_NON_RETRYABLE_ERROR = ErrorCategory.AddMember("NON_RETRYABLE_ERROR", smithyprelude.Unit)
-
-	ErrorCause_ErrorMessage = ErrorCause.AddMember("ErrorMessage", _ErrorMessage)
-
-	ErrorCause_ErrorCategory = ErrorCause.AddMember("ErrorCategory", ErrorCategory)
-
-	NlpStatus_ENABLED = NlpStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	NlpStatus_ENABLING = NlpStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	NlpStatus_DISABLED = NlpStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	NlpStatus_DISABLING = NlpStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	NlpConfiguration_Status = NlpConfiguration.AddMember("Status", NlpStatus)
-
-	_DefaultProfiles_member = _DefaultProfiles.AddMember("member", _HealthLakeString)
-
-	ProfileConfiguration_DefaultProfiles = ProfileConfiguration.AddMember("DefaultProfiles", _DefaultProfiles)
-
-	DatastoreProperties_DatastoreId = DatastoreProperties.AddMember("DatastoreId", _DatastoreId)
-
-	DatastoreProperties_DatastoreArn = DatastoreProperties.AddMember("DatastoreArn", _DatastoreArn)
-
-	DatastoreProperties_DatastoreName = DatastoreProperties.AddMember("DatastoreName", _DatastoreName)
-
-	DatastoreProperties_DatastoreStatus = DatastoreProperties.AddMember("DatastoreStatus", DatastoreStatus)
-
-	DatastoreProperties_CreatedAt = DatastoreProperties.AddMember("CreatedAt", _HealthLakeTimestamp)
-
-	DatastoreProperties_DatastoreTypeVersion = DatastoreProperties.AddMember("DatastoreTypeVersion", FHIRVersion)
-
-	DatastoreProperties_DatastoreEndpoint = DatastoreProperties.AddMember("DatastoreEndpoint", _HealthLakeString)
-
-	DatastoreProperties_SseConfiguration = DatastoreProperties.AddMember("SseConfiguration", SseConfiguration)
-
-	DatastoreProperties_PreloadDataConfig = DatastoreProperties.AddMember("PreloadDataConfig", PreloadDataConfig)
-
-	DatastoreProperties_IdentityProviderConfiguration = DatastoreProperties.AddMember("IdentityProviderConfiguration", IdentityProviderConfiguration)
-
-	DatastoreProperties_ErrorCause = DatastoreProperties.AddMember("ErrorCause", ErrorCause)
-
-	DatastoreProperties_NlpConfiguration = DatastoreProperties.AddMember("NlpConfiguration", NlpConfiguration)
-
-	DatastoreProperties_AnalyticsConfiguration = DatastoreProperties.AddMember("AnalyticsConfiguration", AnalyticsConfiguration)
-
-	DatastoreProperties_ProfileConfiguration = DatastoreProperties.AddMember("ProfileConfiguration", ProfileConfiguration)
-
-	DatastoreProperties_BackupStatusInfo = DatastoreProperties.AddMember("BackupStatusInfo", DatastoreBackupStatus)
-
-	_DatastorePropertiesList_member = _DatastorePropertiesList.AddMember("member", DatastoreProperties)
-
-	SourceFormat_CCDA = SourceFormat.AddMember("CCDA", smithyprelude.Unit)
-
-	SourceFormat_CSV = SourceFormat.AddMember("CSV", smithyprelude.Unit)
-
-	TargetFormat_FHIR_R4 = TargetFormat.AddMember("FHIR_R4", smithyprelude.Unit)
-
-	DataTransformationProfileSummary_ProfileId = DataTransformationProfileSummary.AddMember("ProfileId", _ProfileIdString)
-
-	DataTransformationProfileSummary_Version = DataTransformationProfileSummary.AddMember("Version", _ProfileVersion)
-
-	DataTransformationProfileSummary_SourceFormat = DataTransformationProfileSummary.AddMember("SourceFormat", SourceFormat)
-
-	DataTransformationProfileSummary_TargetFormat = DataTransformationProfileSummary.AddMember("TargetFormat", TargetFormat)
-
-	DataTransformationProfileSummary_ProfileName = DataTransformationProfileSummary.AddMember("ProfileName", _ProfileNameString)
-
-	DataTransformationProfileSummary_ProfileDescription = DataTransformationProfileSummary.AddMember("ProfileDescription", _ProfileDescription)
-
-	DataTransformationProfileSummary_LastUpdatedAt = DataTransformationProfileSummary.AddMember("LastUpdatedAt", _DateTime)
-
-	_DataTransformationProfileSummaryList_member = _DataTransformationProfileSummaryList.AddMember("member", DataTransformationProfileSummary)
-
-	DataTransformationProfileVersionSummary_ProfileId = DataTransformationProfileVersionSummary.AddMember("ProfileId", _ProfileIdString)
-
-	DataTransformationProfileVersionSummary_Version = DataTransformationProfileVersionSummary.AddMember("Version", _ProfileVersion)
-
-	DataTransformationProfileVersionSummary_SourceFormat = DataTransformationProfileVersionSummary.AddMember("SourceFormat", SourceFormat)
-
-	DataTransformationProfileVersionSummary_TargetFormat = DataTransformationProfileVersionSummary.AddMember("TargetFormat", TargetFormat)
-
-	DataTransformationProfileVersionSummary_ProfileName = DataTransformationProfileVersionSummary.AddMember("ProfileName", _ProfileNameString)
-
-	DataTransformationProfileVersionSummary_ChangeDescription = DataTransformationProfileVersionSummary.AddMember("ChangeDescription", _ChangeDescription)
-
-	DataTransformationProfileVersionSummary_LastUpdatedAt = DataTransformationProfileVersionSummary.AddMember("LastUpdatedAt", _DateTime)
-
-	_DataTransformationProfileVersionSummaryList_member = _DataTransformationProfileVersionSummaryList.AddMember("member", DataTransformationProfileVersionSummary)
-
-	DataTransformationS3Configuration_S3Uri = DataTransformationS3Configuration.AddMember("S3Uri", _DataTransformationS3Uri)
-
-	DataTransformationS3Configuration_KmsKeyId = DataTransformationS3Configuration.AddMember("KmsKeyId", _KmsKeyId)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_QUEUED = JobStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_COMPLETED_WITH_ERRORS = JobStatus.AddMember("COMPLETED_WITH_ERRORS", smithyprelude.Unit)
-
-	JobStatus_COMPLETED = JobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_CANCEL_SUBMITTED = JobStatus.AddMember("CANCEL_SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_CANCEL_IN_PROGRESS = JobStatus.AddMember("CANCEL_IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_CANCEL_COMPLETED = JobStatus.AddMember("CANCEL_COMPLETED", smithyprelude.Unit)
-
-	JobStatus_CANCEL_FAILED = JobStatus.AddMember("CANCEL_FAILED", smithyprelude.Unit)
-
-	S3Configuration_S3Uri = S3Configuration.AddMember("S3Uri", _S3Uri)
-
-	S3Configuration_KmsKeyId = S3Configuration.AddMember("KmsKeyId", _EncryptionKeyID)
-
-	OutputDataConfig_S3Configuration = OutputDataConfig.AddMember("S3Configuration", S3Configuration)
-
-	ExportJobProperties_JobId = ExportJobProperties.AddMember("JobId", _JobId)
-
-	ExportJobProperties_JobName = ExportJobProperties.AddMember("JobName", _JobName)
-
-	ExportJobProperties_JobStatus = ExportJobProperties.AddMember("JobStatus", JobStatus)
-
-	ExportJobProperties_SubmitTime = ExportJobProperties.AddMember("SubmitTime", _HealthLakeTimestamp)
-
-	ExportJobProperties_EndTime = ExportJobProperties.AddMember("EndTime", _HealthLakeTimestamp)
-
-	ExportJobProperties_DatastoreId = ExportJobProperties.AddMember("DatastoreId", _DatastoreId)
-
-	ExportJobProperties_OutputDataConfig = ExportJobProperties.AddMember("OutputDataConfig", OutputDataConfig)
-
-	ExportJobProperties_DataAccessRoleArn = ExportJobProperties.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	ExportJobProperties_Message = ExportJobProperties.AddMember("Message", _Message)
-
-	_ExportJobPropertiesList_member = _ExportJobPropertiesList.AddMember("member", ExportJobProperties)
-
-	FailedDependencyException_Message = FailedDependencyException.AddMember("Message", _HealthLakeString)
-
-	InputDataConfig_S3Uri = InputDataConfig.AddMember("S3Uri", _S3Uri)
-
-	JobProgressReport_TotalNumberOfScannedFiles = JobProgressReport.AddMember("TotalNumberOfScannedFiles", _GenericLong)
-
-	JobProgressReport_TotalSizeOfScannedFilesInMB = JobProgressReport.AddMember("TotalSizeOfScannedFilesInMB", _GenericDouble)
-
-	JobProgressReport_TotalNumberOfImportedFiles = JobProgressReport.AddMember("TotalNumberOfImportedFiles", _GenericLong)
-
-	JobProgressReport_TotalNumberOfResourcesScanned = JobProgressReport.AddMember("TotalNumberOfResourcesScanned", _GenericLong)
-
-	JobProgressReport_TotalNumberOfResourcesImported = JobProgressReport.AddMember("TotalNumberOfResourcesImported", _GenericLong)
-
-	JobProgressReport_TotalNumberOfResourcesWithCustomerError = JobProgressReport.AddMember("TotalNumberOfResourcesWithCustomerError", _GenericLong)
-
-	JobProgressReport_TotalNumberOfFilesReadWithCustomerError = JobProgressReport.AddMember("TotalNumberOfFilesReadWithCustomerError", _GenericLong)
-
-	JobProgressReport_TotalNumberOfScannedNonFhirFiles = JobProgressReport.AddMember("TotalNumberOfScannedNonFhirFiles", _GenericLong)
-
-	JobProgressReport_TotalSizeOfScannedNonFhirFilesInMB = JobProgressReport.AddMember("TotalSizeOfScannedNonFhirFilesInMB", _GenericDouble)
-
-	JobProgressReport_TotalNumberOfImportedNonFhirFiles = JobProgressReport.AddMember("TotalNumberOfImportedNonFhirFiles", _GenericLong)
-
-	JobProgressReport_TotalNumberOfNonFhirResourcesScanned = JobProgressReport.AddMember("TotalNumberOfNonFhirResourcesScanned", _GenericLong)
-
-	JobProgressReport_TotalNumberOfNonFhirResourcesImported = JobProgressReport.AddMember("TotalNumberOfNonFhirResourcesImported", _GenericLong)
-
-	JobProgressReport_TotalNumberOfNonFhirResourcesWithCustomerError = JobProgressReport.AddMember("TotalNumberOfNonFhirResourcesWithCustomerError", _GenericLong)
-
-	JobProgressReport_TotalNumberOfNonFhirFilesReadWithCustomerError = JobProgressReport.AddMember("TotalNumberOfNonFhirFilesReadWithCustomerError", _GenericLong)
-
-	JobProgressReport_Throughput = JobProgressReport.AddMember("Throughput", _GenericDouble)
-
-	JobProgressReport_TotalFilesConverted = JobProgressReport.AddMember("TotalFilesConverted", _GenericLong)
-
-	JobProgressReport_TotalResourcesGenerated = JobProgressReport.AddMember("TotalResourcesGenerated", _GenericLong)
-
-	ValidationLevel_STRICT = ValidationLevel.AddMember("STRICT", smithyprelude.Unit)
-
-	ValidationLevel_STRUCTURE_ONLY = ValidationLevel.AddMember("STRUCTURE_ONLY", smithyprelude.Unit)
-
-	ValidationLevel_MINIMAL = ValidationLevel.AddMember("MINIMAL", smithyprelude.Unit)
-
-	ImportJobProperties_JobId = ImportJobProperties.AddMember("JobId", _JobId)
-
-	ImportJobProperties_JobName = ImportJobProperties.AddMember("JobName", _JobName)
-
-	ImportJobProperties_JobStatus = ImportJobProperties.AddMember("JobStatus", JobStatus)
-
-	ImportJobProperties_SubmitTime = ImportJobProperties.AddMember("SubmitTime", _HealthLakeTimestamp)
-
-	ImportJobProperties_EndTime = ImportJobProperties.AddMember("EndTime", _HealthLakeTimestamp)
-
-	ImportJobProperties_DatastoreId = ImportJobProperties.AddMember("DatastoreId", _DatastoreId)
-
-	ImportJobProperties_InputDataConfig = ImportJobProperties.AddMember("InputDataConfig", InputDataConfig)
-
-	ImportJobProperties_JobOutputDataConfig = ImportJobProperties.AddMember("JobOutputDataConfig", OutputDataConfig)
-
-	ImportJobProperties_JobProgressReport = ImportJobProperties.AddMember("JobProgressReport", JobProgressReport)
-
-	ImportJobProperties_DataAccessRoleArn = ImportJobProperties.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	ImportJobProperties_Message = ImportJobProperties.AddMember("Message", _Message)
-
-	ImportJobProperties_ValidationLevel = ImportJobProperties.AddMember("ValidationLevel", ValidationLevel)
-
-	_ImportJobPropertiesList_member = _ImportJobPropertiesList.AddMember("member", ImportJobProperties)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _HealthLakeString)
-
-	_ProfileMapping_key = _ProfileMapping.AddMember("key", _ProfileMappingKey)
-
-	_ProfileMapping_value = _ProfileMapping.AddMember("value", _ProfileMappingValue)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _HealthLakeString)
-
-	RestoreConfiguration_ContinuousBackupRestoreConfiguration = RestoreConfiguration.AddMember("ContinuousBackupRestoreConfiguration", ContinuousBackupRestoreConfiguration)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _HealthLakeString)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	_TagMap_key = _TagMap.AddMember("key", _DataTransformationTagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _DataTransformationTagValue)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _HealthLakeString)
-
-	TransformationInputDataConfig_S3Uri = TransformationInputDataConfig.AddMember("S3Uri", _DataTransformationS3Uri)
-
-	TransformationInputDataConfig_SourceFormat = TransformationInputDataConfig.AddMember("SourceFormat", SourceFormat)
-
-	TransformationJobProgressReport_TotalFilesScanned = TransformationJobProgressReport.AddMember("TotalFilesScanned", smithyprelude.Long)
-
-	TransformationJobProgressReport_TotalFilesConverted = TransformationJobProgressReport.AddMember("TotalFilesConverted", smithyprelude.Long)
-
-	TransformationJobProgressReport_TotalFilesFailed = TransformationJobProgressReport.AddMember("TotalFilesFailed", smithyprelude.Long)
-
-	TransformationJobProgressReport_TotalResourcesGenerated = TransformationJobProgressReport.AddMember("TotalResourcesGenerated", smithyprelude.Long)
-
-	TransformationJobStatus_SUBMITTED = TransformationJobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	TransformationJobStatus_QUEUED = TransformationJobStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	TransformationJobStatus_IN_PROGRESS = TransformationJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	TransformationJobStatus_COMPLETED = TransformationJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	TransformationJobStatus_COMPLETED_WITH_ERRORS = TransformationJobStatus.AddMember("COMPLETED_WITH_ERRORS", smithyprelude.Unit)
-
-	TransformationJobStatus_FAILED = TransformationJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	TransformationOutputDataConfig_S3Configuration = TransformationOutputDataConfig.AddMember("S3Configuration", DataTransformationS3Configuration)
-
-	TransformationJobProperties_JobId = TransformationJobProperties.AddMember("JobId", _DataTransformationJobId)
-
-	TransformationJobProperties_JobStatus = TransformationJobProperties.AddMember("JobStatus", TransformationJobStatus)
-
-	TransformationJobProperties_InputDataConfig = TransformationJobProperties.AddMember("InputDataConfig", TransformationInputDataConfig)
-
-	TransformationJobProperties_OutputDataConfig = TransformationJobProperties.AddMember("OutputDataConfig", TransformationOutputDataConfig)
-
-	TransformationJobProperties_DataAccessRoleArn = TransformationJobProperties.AddMember("DataAccessRoleArn", _DataTransformationIamRoleArn)
-
-	TransformationJobProperties_SubmitTime = TransformationJobProperties.AddMember("SubmitTime", _DateTime)
-
-	TransformationJobProperties_JobName = TransformationJobProperties.AddMember("JobName", _DataTransformationJobName)
-
-	TransformationJobProperties_ProfileId = TransformationJobProperties.AddMember("ProfileId", _ProfileIdString)
-
-	TransformationJobProperties_ProfileName = TransformationJobProperties.AddMember("ProfileName", _ProfileNameString)
-
-	TransformationJobProperties_ProfileVersion = TransformationJobProperties.AddMember("ProfileVersion", smithyprelude.Integer)
-
-	TransformationJobProperties_EndTime = TransformationJobProperties.AddMember("EndTime", _DateTime)
-
-	TransformationJobProperties_DriftDetectionEnabled = TransformationJobProperties.AddMember("DriftDetectionEnabled", smithyprelude.Boolean)
-
-	TransformationJobProperties_ProvenanceEnabled = TransformationJobProperties.AddMember("ProvenanceEnabled", smithyprelude.Boolean)
-
-	TransformationJobProperties_Message = TransformationJobProperties.AddMember("Message", _BoundedString)
-
-	TransformationJobProperties_JobProgressReport = TransformationJobProperties.AddMember("JobProgressReport", TransformationJobProgressReport)
-
-	TransformationJobSummary_JobId = TransformationJobSummary.AddMember("JobId", _DataTransformationJobId)
-
-	TransformationJobSummary_JobStatus = TransformationJobSummary.AddMember("JobStatus", TransformationJobStatus)
-
-	TransformationJobSummary_SubmitTime = TransformationJobSummary.AddMember("SubmitTime", _DateTime)
-
-	TransformationJobSummary_JobName = TransformationJobSummary.AddMember("JobName", _DataTransformationJobName)
-
-	TransformationJobSummary_EndTime = TransformationJobSummary.AddMember("EndTime", _DateTime)
-
-	TransformationJobSummary_SourceFormat = TransformationJobSummary.AddMember("SourceFormat", SourceFormat)
-
-	_TransformationJobSummaryList_member = _TransformationJobSummaryList.AddMember("member", TransformationJobSummary)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _HealthLakeString)
-
-	CreateDataTransformationProfileRequest_SourceFormat = CreateDataTransformationProfileRequest.AddMember("SourceFormat", SourceFormat)
-
-	CreateDataTransformationProfileRequest_Source = CreateDataTransformationProfileRequest.AddMember("Source", CreateDataTransformationProfileSource)
-
-	CreateDataTransformationProfileRequest_KmsKeyId = CreateDataTransformationProfileRequest.AddMember("KmsKeyId", _KmsKeyId)
-
-	CreateDataTransformationProfileRequest_ProfileDescription = CreateDataTransformationProfileRequest.AddMember("ProfileDescription", _ProfileDescription)
-
-	CreateDataTransformationProfileRequest_ProfileName = CreateDataTransformationProfileRequest.AddMember("ProfileName", _ProfileNameString)
-
-	CreateDataTransformationProfileRequest_Tags = CreateDataTransformationProfileRequest.AddMember("Tags", _TagMap)
-
-	CreateDataTransformationProfileRequest_ClientToken = CreateDataTransformationProfileRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateDataTransformationProfileResponse_ProfileId = CreateDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
-
-	CreateDataTransformationProfileResponse_Version = CreateDataTransformationProfileResponse.AddMember("Version", _ProfileVersion)
-
-	CreateDataTransformationProfileResponse_SourceFormat = CreateDataTransformationProfileResponse.AddMember("SourceFormat", SourceFormat)
-
-	CreateDataTransformationProfileResponse_TargetFormat = CreateDataTransformationProfileResponse.AddMember("TargetFormat", TargetFormat)
-
-	CreateDataTransformationProfileResponse_ProfileName = CreateDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
-
-	CreateDataTransformationProfileResponse_LastUpdatedAt = CreateDataTransformationProfileResponse.AddMember("LastUpdatedAt", _DateTime)
-
-	CreateFHIRDatastoreRequest_DatastoreName = CreateFHIRDatastoreRequest.AddMember("DatastoreName", _DatastoreName)
-
-	CreateFHIRDatastoreRequest_DatastoreTypeVersion = CreateFHIRDatastoreRequest.AddMember("DatastoreTypeVersion", FHIRVersion)
-
-	CreateFHIRDatastoreRequest_SseConfiguration = CreateFHIRDatastoreRequest.AddMember("SseConfiguration", SseConfiguration)
-
-	CreateFHIRDatastoreRequest_PreloadDataConfig = CreateFHIRDatastoreRequest.AddMember("PreloadDataConfig", PreloadDataConfig)
-
-	CreateFHIRDatastoreRequest_ClientToken = CreateFHIRDatastoreRequest.AddMember("ClientToken", _ClientTokenString)
-
-	CreateFHIRDatastoreRequest_Tags = CreateFHIRDatastoreRequest.AddMember("Tags", _TagList)
-
-	CreateFHIRDatastoreRequest_IdentityProviderConfiguration = CreateFHIRDatastoreRequest.AddMember("IdentityProviderConfiguration", IdentityProviderConfiguration)
-
-	CreateFHIRDatastoreRequest_AnalyticsConfiguration = CreateFHIRDatastoreRequest.AddMember("AnalyticsConfiguration", AnalyticsConfiguration)
-
-	CreateFHIRDatastoreRequest_NlpConfiguration = CreateFHIRDatastoreRequest.AddMember("NlpConfiguration", NlpConfiguration)
-
-	CreateFHIRDatastoreRequest_ProfileConfiguration = CreateFHIRDatastoreRequest.AddMember("ProfileConfiguration", ProfileConfiguration)
-
-	CreateFHIRDatastoreRequest_BackupConfiguration = CreateFHIRDatastoreRequest.AddMember("BackupConfiguration", BackupConfiguration)
-
-	CreateFHIRDatastoreResponse_DatastoreId = CreateFHIRDatastoreResponse.AddMember("DatastoreId", _DatastoreId)
-
-	CreateFHIRDatastoreResponse_DatastoreArn = CreateFHIRDatastoreResponse.AddMember("DatastoreArn", _DatastoreArn)
-
-	CreateFHIRDatastoreResponse_DatastoreStatus = CreateFHIRDatastoreResponse.AddMember("DatastoreStatus", DatastoreStatus)
-
-	CreateFHIRDatastoreResponse_DatastoreEndpoint = CreateFHIRDatastoreResponse.AddMember("DatastoreEndpoint", _BoundedLengthString)
-
-	DeleteDataTransformationProfileRequest_ProfileId = DeleteDataTransformationProfileRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
-
-	DeleteDataTransformationProfileResponse_ProfileId = DeleteDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
-
-	DeleteDataTransformationProfileResponse_ProfileName = DeleteDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
-
-	DeleteDataTransformationProfileResponse_DeletionTime = DeleteDataTransformationProfileResponse.AddMember("DeletionTime", _DateTime)
-
-	DeleteFHIRDatastoreRequest_DatastoreId = DeleteFHIRDatastoreRequest.AddMember("DatastoreId", _DatastoreId)
-
-	DeleteFHIRDatastoreResponse_DatastoreId = DeleteFHIRDatastoreResponse.AddMember("DatastoreId", _DatastoreId)
-
-	DeleteFHIRDatastoreResponse_DatastoreArn = DeleteFHIRDatastoreResponse.AddMember("DatastoreArn", _DatastoreArn)
-
-	DeleteFHIRDatastoreResponse_DatastoreStatus = DeleteFHIRDatastoreResponse.AddMember("DatastoreStatus", DatastoreStatus)
-
-	DeleteFHIRDatastoreResponse_DatastoreEndpoint = DeleteFHIRDatastoreResponse.AddMember("DatastoreEndpoint", _BoundedLengthString)
-
-	DescribeDataTransformationJobRequest_JobId = DescribeDataTransformationJobRequest.AddMember("JobId", _DataTransformationJobId, &smithytraits.HTTPLabel{})
-
-	DescribeDataTransformationJobResponse_TransformationJobProperties = DescribeDataTransformationJobResponse.AddMember("TransformationJobProperties", TransformationJobProperties)
-
-	DescribeFHIRDatastoreRequest_DatastoreId = DescribeFHIRDatastoreRequest.AddMember("DatastoreId", _DatastoreId)
-
-	DescribeFHIRDatastoreResponse_DatastoreProperties = DescribeFHIRDatastoreResponse.AddMember("DatastoreProperties", DatastoreProperties)
-
-	DescribeFHIRExportJobRequest_DatastoreId = DescribeFHIRExportJobRequest.AddMember("DatastoreId", _DatastoreId)
-
-	DescribeFHIRExportJobRequest_JobId = DescribeFHIRExportJobRequest.AddMember("JobId", _JobId)
-
-	DescribeFHIRExportJobResponse_ExportJobProperties = DescribeFHIRExportJobResponse.AddMember("ExportJobProperties", ExportJobProperties)
-
-	DescribeFHIRImportJobRequest_DatastoreId = DescribeFHIRImportJobRequest.AddMember("DatastoreId", _DatastoreId)
-
-	DescribeFHIRImportJobRequest_JobId = DescribeFHIRImportJobRequest.AddMember("JobId", _JobId)
-
-	DescribeFHIRImportJobResponse_ImportJobProperties = DescribeFHIRImportJobResponse.AddMember("ImportJobProperties", ImportJobProperties)
-
-	GetDataTransformationProfileRequest_ProfileId = GetDataTransformationProfileRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
-
-	GetDataTransformationProfileRequest_ProfileVersion = GetDataTransformationProfileRequest.AddMember("ProfileVersion", _ProfileVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	GetDataTransformationProfileResponse_ProfileId = GetDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
-
-	GetDataTransformationProfileResponse_Version = GetDataTransformationProfileResponse.AddMember("Version", _ProfileVersion)
-
-	GetDataTransformationProfileResponse_SourceFormat = GetDataTransformationProfileResponse.AddMember("SourceFormat", SourceFormat)
-
-	GetDataTransformationProfileResponse_TargetFormat = GetDataTransformationProfileResponse.AddMember("TargetFormat", TargetFormat)
-
-	GetDataTransformationProfileResponse_ProfileMapping = GetDataTransformationProfileResponse.AddMember("ProfileMapping", _ProfileMapping)
-
-	GetDataTransformationProfileResponse_ProfileName = GetDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
-
-	GetDataTransformationProfileResponse_ProfileDescription = GetDataTransformationProfileResponse.AddMember("ProfileDescription", _ProfileDescription)
-
-	GetDataTransformationProfileResponse_ChangeDescription = GetDataTransformationProfileResponse.AddMember("ChangeDescription", _ChangeDescription)
-
-	GetDataTransformationProfileResponse_LastUpdatedAt = GetDataTransformationProfileResponse.AddMember("LastUpdatedAt", _DateTime)
-
-	ListDataTransformationJobsRequest_MaxResults = ListDataTransformationJobsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDataTransformationJobsRequest_NextToken = ListDataTransformationJobsRequest.AddMember("NextToken", _DataTransformationNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDataTransformationJobsRequest_JobStatus = ListDataTransformationJobsRequest.AddMember("JobStatus", TransformationJobStatus, &smithytraits.HTTPQuery{Name: "jobStatus"})
-
-	ListDataTransformationJobsRequest_JobName = ListDataTransformationJobsRequest.AddMember("JobName", _DataTransformationJobName, &smithytraits.HTTPQuery{Name: "jobName"})
-
-	ListDataTransformationJobsRequest_SubmittedAfter = ListDataTransformationJobsRequest.AddMember("SubmittedAfter", _DateTime, &smithytraits.HTTPQuery{Name: "submittedAfter"})
-
-	ListDataTransformationJobsRequest_SubmittedBefore = ListDataTransformationJobsRequest.AddMember("SubmittedBefore", _DateTime, &smithytraits.HTTPQuery{Name: "submittedBefore"})
-
-	ListDataTransformationJobsResponse_Items = ListDataTransformationJobsResponse.AddMember("Items", _TransformationJobSummaryList)
-
-	ListDataTransformationJobsResponse_NextToken = ListDataTransformationJobsResponse.AddMember("NextToken", _DataTransformationNextToken)
-
-	ListDataTransformationProfilesRequest_SourceFormat = ListDataTransformationProfilesRequest.AddMember("SourceFormat", SourceFormat, &smithytraits.HTTPQuery{Name: "sourceFormat"})
-
-	ListDataTransformationProfilesRequest_MaxResults = ListDataTransformationProfilesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDataTransformationProfilesRequest_NextToken = ListDataTransformationProfilesRequest.AddMember("NextToken", _DataTransformationNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDataTransformationProfilesResponse_Items = ListDataTransformationProfilesResponse.AddMember("Items", _DataTransformationProfileSummaryList)
-
-	ListDataTransformationProfilesResponse_NextToken = ListDataTransformationProfilesResponse.AddMember("NextToken", _DataTransformationNextToken)
-
-	ListDataTransformationProfileVersionsRequest_ProfileId = ListDataTransformationProfileVersionsRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
-
-	ListDataTransformationProfileVersionsRequest_MaxResults = ListDataTransformationProfileVersionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDataTransformationProfileVersionsRequest_NextToken = ListDataTransformationProfileVersionsRequest.AddMember("NextToken", _DataTransformationNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDataTransformationProfileVersionsResponse_Items = ListDataTransformationProfileVersionsResponse.AddMember("Items", _DataTransformationProfileVersionSummaryList)
-
-	ListDataTransformationProfileVersionsResponse_NextToken = ListDataTransformationProfileVersionsResponse.AddMember("NextToken", _DataTransformationNextToken)
-
-	ListFHIRDatastoresRequest_Filter = ListFHIRDatastoresRequest.AddMember("Filter", DatastoreFilter)
-
-	ListFHIRDatastoresRequest_NextToken = ListFHIRDatastoresRequest.AddMember("NextToken", _NextToken)
-
-	ListFHIRDatastoresRequest_MaxResults = ListFHIRDatastoresRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListFHIRDatastoresResponse_DatastorePropertiesList = ListFHIRDatastoresResponse.AddMember("DatastorePropertiesList", _DatastorePropertiesList)
-
-	ListFHIRDatastoresResponse_NextToken = ListFHIRDatastoresResponse.AddMember("NextToken", _NextToken)
-
-	ListFHIRExportJobsRequest_DatastoreId = ListFHIRExportJobsRequest.AddMember("DatastoreId", _DatastoreId)
-
-	ListFHIRExportJobsRequest_NextToken = ListFHIRExportJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListFHIRExportJobsRequest_MaxResults = ListFHIRExportJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListFHIRExportJobsRequest_JobName = ListFHIRExportJobsRequest.AddMember("JobName", _JobName)
-
-	ListFHIRExportJobsRequest_JobStatus = ListFHIRExportJobsRequest.AddMember("JobStatus", JobStatus)
-
-	ListFHIRExportJobsRequest_SubmittedBefore = ListFHIRExportJobsRequest.AddMember("SubmittedBefore", _HealthLakeTimestamp)
-
-	ListFHIRExportJobsRequest_SubmittedAfter = ListFHIRExportJobsRequest.AddMember("SubmittedAfter", _HealthLakeTimestamp)
-
-	ListFHIRExportJobsResponse_ExportJobPropertiesList = ListFHIRExportJobsResponse.AddMember("ExportJobPropertiesList", _ExportJobPropertiesList)
-
-	ListFHIRExportJobsResponse_NextToken = ListFHIRExportJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListFHIRImportJobsRequest_DatastoreId = ListFHIRImportJobsRequest.AddMember("DatastoreId", _DatastoreId)
-
-	ListFHIRImportJobsRequest_NextToken = ListFHIRImportJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListFHIRImportJobsRequest_MaxResults = ListFHIRImportJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListFHIRImportJobsRequest_JobName = ListFHIRImportJobsRequest.AddMember("JobName", _JobName)
-
-	ListFHIRImportJobsRequest_JobStatus = ListFHIRImportJobsRequest.AddMember("JobStatus", JobStatus)
-
-	ListFHIRImportJobsRequest_SubmittedBefore = ListFHIRImportJobsRequest.AddMember("SubmittedBefore", _HealthLakeTimestamp)
-
-	ListFHIRImportJobsRequest_SubmittedAfter = ListFHIRImportJobsRequest.AddMember("SubmittedAfter", _HealthLakeTimestamp)
-
-	ListFHIRImportJobsResponse_ImportJobPropertiesList = ListFHIRImportJobsResponse.AddMember("ImportJobPropertiesList", _ImportJobPropertiesList)
-
-	ListFHIRImportJobsResponse_NextToken = ListFHIRImportJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PublishDataTransformationProfileRequest_ProfileId = PublishDataTransformationProfileRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
-
-	PublishDataTransformationProfileRequest_SourceFormat = PublishDataTransformationProfileRequest.AddMember("SourceFormat", SourceFormat, &smithytraits.HTTPQuery{Name: "sourceFormat"})
-
-	PublishDataTransformationProfileRequest_FromExistingVersion = PublishDataTransformationProfileRequest.AddMember("FromExistingVersion", _ProfileVersion)
-
-	PublishDataTransformationProfileRequest_ChangeDescription = PublishDataTransformationProfileRequest.AddMember("ChangeDescription", _ChangeDescription)
-
-	PublishDataTransformationProfileResponse_ProfileId = PublishDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
-
-	PublishDataTransformationProfileResponse_Version = PublishDataTransformationProfileResponse.AddMember("Version", _ProfileVersion)
-
-	PublishDataTransformationProfileResponse_SourceFormat = PublishDataTransformationProfileResponse.AddMember("SourceFormat", SourceFormat)
-
-	PublishDataTransformationProfileResponse_TargetFormat = PublishDataTransformationProfileResponse.AddMember("TargetFormat", TargetFormat)
-
-	PublishDataTransformationProfileResponse_ProfileName = PublishDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
-
-	PublishDataTransformationProfileResponse_LastUpdatedAt = PublishDataTransformationProfileResponse.AddMember("LastUpdatedAt", _DateTime)
-
-	RestoreFHIRDatastoreRequest_SourceDatastoreId = RestoreFHIRDatastoreRequest.AddMember("SourceDatastoreId", _DatastoreId)
-
-	RestoreFHIRDatastoreRequest_RestoreConfiguration = RestoreFHIRDatastoreRequest.AddMember("RestoreConfiguration", RestoreConfiguration)
-
-	RestoreFHIRDatastoreRequest_DatastoreName = RestoreFHIRDatastoreRequest.AddMember("DatastoreName", _DatastoreName)
-
-	RestoreFHIRDatastoreRequest_SseConfiguration = RestoreFHIRDatastoreRequest.AddMember("SseConfiguration", SseConfiguration)
-
-	RestoreFHIRDatastoreRequest_ClientToken = RestoreFHIRDatastoreRequest.AddMember("ClientToken", _ClientTokenString)
-
-	RestoreFHIRDatastoreRequest_Tags = RestoreFHIRDatastoreRequest.AddMember("Tags", _TagList)
-
-	RestoreFHIRDatastoreRequest_IdentityProviderConfiguration = RestoreFHIRDatastoreRequest.AddMember("IdentityProviderConfiguration", IdentityProviderConfiguration)
-
-	RestoreFHIRDatastoreRequest_AnalyticsConfiguration = RestoreFHIRDatastoreRequest.AddMember("AnalyticsConfiguration", AnalyticsConfiguration)
-
-	RestoreFHIRDatastoreRequest_NlpConfiguration = RestoreFHIRDatastoreRequest.AddMember("NlpConfiguration", NlpConfiguration)
-
-	RestoreFHIRDatastoreRequest_ProfileConfiguration = RestoreFHIRDatastoreRequest.AddMember("ProfileConfiguration", ProfileConfiguration)
-
-	RestoreFHIRDatastoreResponse_DatastoreId = RestoreFHIRDatastoreResponse.AddMember("DatastoreId", _DatastoreId)
-
-	RestoreFHIRDatastoreResponse_DatastoreArn = RestoreFHIRDatastoreResponse.AddMember("DatastoreArn", _DatastoreArn)
-
-	RestoreFHIRDatastoreResponse_DatastoreStatus = RestoreFHIRDatastoreResponse.AddMember("DatastoreStatus", DatastoreStatus)
-
-	RestoreFHIRDatastoreResponse_DatastoreEndpoint = RestoreFHIRDatastoreResponse.AddMember("DatastoreEndpoint", _BoundedLengthString)
-
-	StartDataTransformationJobRequest_InputDataConfig = StartDataTransformationJobRequest.AddMember("InputDataConfig", TransformationInputDataConfig)
-
-	StartDataTransformationJobRequest_OutputDataConfig = StartDataTransformationJobRequest.AddMember("OutputDataConfig", TransformationOutputDataConfig)
-
-	StartDataTransformationJobRequest_DataAccessRoleArn = StartDataTransformationJobRequest.AddMember("DataAccessRoleArn", _DataTransformationIamRoleArn)
-
-	StartDataTransformationJobRequest_ClientToken = StartDataTransformationJobRequest.AddMember("ClientToken", _ClientToken)
-
-	StartDataTransformationJobRequest_JobName = StartDataTransformationJobRequest.AddMember("JobName", _DataTransformationJobName)
-
-	StartDataTransformationJobRequest_ProfileId = StartDataTransformationJobRequest.AddMember("ProfileId", _ProfileIdString)
-
-	StartDataTransformationJobRequest_DriftDetectionEnabled = StartDataTransformationJobRequest.AddMember("DriftDetectionEnabled", smithyprelude.Boolean)
-
-	StartDataTransformationJobRequest_ProvenanceEnabled = StartDataTransformationJobRequest.AddMember("ProvenanceEnabled", smithyprelude.Boolean)
-
-	StartDataTransformationJobResponse_JobId = StartDataTransformationJobResponse.AddMember("JobId", _DataTransformationJobId)
-
-	StartDataTransformationJobResponse_JobStatus = StartDataTransformationJobResponse.AddMember("JobStatus", TransformationJobStatus)
-
-	StartFHIRExportJobRequest_JobName = StartFHIRExportJobRequest.AddMember("JobName", _JobName)
-
-	StartFHIRExportJobRequest_OutputDataConfig = StartFHIRExportJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartFHIRExportJobRequest_DatastoreId = StartFHIRExportJobRequest.AddMember("DatastoreId", _DatastoreId)
-
-	StartFHIRExportJobRequest_DataAccessRoleArn = StartFHIRExportJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartFHIRExportJobRequest_ClientToken = StartFHIRExportJobRequest.AddMember("ClientToken", _ClientTokenString)
-
-	StartFHIRExportJobResponse_JobId = StartFHIRExportJobResponse.AddMember("JobId", _JobId)
-
-	StartFHIRExportJobResponse_JobStatus = StartFHIRExportJobResponse.AddMember("JobStatus", JobStatus)
-
-	StartFHIRExportJobResponse_DatastoreId = StartFHIRExportJobResponse.AddMember("DatastoreId", _DatastoreId)
-
-	StartFHIRImportJobRequest_JobName = StartFHIRImportJobRequest.AddMember("JobName", _JobName)
-
-	StartFHIRImportJobRequest_InputDataConfig = StartFHIRImportJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartFHIRImportJobRequest_JobOutputDataConfig = StartFHIRImportJobRequest.AddMember("JobOutputDataConfig", OutputDataConfig)
-
-	StartFHIRImportJobRequest_DatastoreId = StartFHIRImportJobRequest.AddMember("DatastoreId", _DatastoreId)
-
-	StartFHIRImportJobRequest_DataAccessRoleArn = StartFHIRImportJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartFHIRImportJobRequest_ClientToken = StartFHIRImportJobRequest.AddMember("ClientToken", _ClientTokenString)
-
-	StartFHIRImportJobRequest_ValidationLevel = StartFHIRImportJobRequest.AddMember("ValidationLevel", ValidationLevel)
-
-	StartFHIRImportJobRequest_ProfileId = StartFHIRImportJobRequest.AddMember("ProfileId", _BoundedLengthString)
-
-	StartFHIRImportJobRequest_InputFormat = StartFHIRImportJobRequest.AddMember("InputFormat", _BoundedLengthString)
-
-	StartFHIRImportJobRequest_DriftDetectionEnabled = StartFHIRImportJobRequest.AddMember("DriftDetectionEnabled", _HealthLakeBoolean)
-
-	StartFHIRImportJobRequest_ProvenanceEnabled = StartFHIRImportJobRequest.AddMember("ProvenanceEnabled", _DefaultEnabledBoolean)
-
-	StartFHIRImportJobResponse_JobId = StartFHIRImportJobResponse.AddMember("JobId", _JobId)
-
-	StartFHIRImportJobResponse_JobStatus = StartFHIRImportJobResponse.AddMember("JobStatus", JobStatus)
-
-	StartFHIRImportJobResponse_DatastoreId = StartFHIRImportJobResponse.AddMember("DatastoreId", _DatastoreId)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateDataTransformationProfileRequest_ProfileId = UpdateDataTransformationProfileRequest.AddMember("ProfileId", _ProfileIdString, &smithytraits.HTTPLabel{})
-
-	UpdateDataTransformationProfileRequest_ProfileMapping = UpdateDataTransformationProfileRequest.AddMember("ProfileMapping", _ProfileMapping)
-
-	UpdateDataTransformationProfileRequest_ChangeDescription = UpdateDataTransformationProfileRequest.AddMember("ChangeDescription", _ChangeDescription)
-
-	UpdateDataTransformationProfileResponse_ProfileId = UpdateDataTransformationProfileResponse.AddMember("ProfileId", _ProfileIdString)
-
-	UpdateDataTransformationProfileResponse_SourceFormat = UpdateDataTransformationProfileResponse.AddMember("SourceFormat", SourceFormat)
-
-	UpdateDataTransformationProfileResponse_TargetFormat = UpdateDataTransformationProfileResponse.AddMember("TargetFormat", TargetFormat)
-
-	UpdateDataTransformationProfileResponse_ProfileName = UpdateDataTransformationProfileResponse.AddMember("ProfileName", _ProfileNameString)
-
-	UpdateDataTransformationProfileResponse_LastUpdatedAt = UpdateDataTransformationProfileResponse.AddMember("LastUpdatedAt", _DateTime)
-
-	UpdateFHIRDatastoreRequest_DatastoreId = UpdateFHIRDatastoreRequest.AddMember("DatastoreId", _DatastoreId)
-
-	UpdateFHIRDatastoreRequest_DatastoreName = UpdateFHIRDatastoreRequest.AddMember("DatastoreName", _DatastoreName)
-
-	UpdateFHIRDatastoreRequest_AnalyticsConfiguration = UpdateFHIRDatastoreRequest.AddMember("AnalyticsConfiguration", AnalyticsConfiguration)
-
-	UpdateFHIRDatastoreRequest_NlpConfiguration = UpdateFHIRDatastoreRequest.AddMember("NlpConfiguration", NlpConfiguration)
-
-	UpdateFHIRDatastoreRequest_ProfileConfiguration = UpdateFHIRDatastoreRequest.AddMember("ProfileConfiguration", ProfileConfiguration)
-
-	UpdateFHIRDatastoreRequest_IdentityProviderConfiguration = UpdateFHIRDatastoreRequest.AddMember("IdentityProviderConfiguration", IdentityProviderConfiguration)
-
-	UpdateFHIRDatastoreRequest_BackupConfiguration = UpdateFHIRDatastoreRequest.AddMember("BackupConfiguration", BackupConfiguration)
-
-	UpdateFHIRDatastoreResponse_DatastoreProperties = UpdateFHIRDatastoreResponse.AddMember("DatastoreProperties", DatastoreProperties)
-
-	UpdateProfileWithAgentRequest_ProfileId = UpdateProfileWithAgentRequest.AddMember("ProfileId", _ProfileIdString)
-
-	UpdateProfileWithAgentRequest_InputMessage = UpdateProfileWithAgentRequest.AddMember("InputMessage", AgentInputMessage)
-
-	UpdateProfileWithAgentRequest_ConversationId = UpdateProfileWithAgentRequest.AddMember("ConversationId", _ConversationIdString)
-
-	UpdateProfileWithAgentResponse_AgentResponse = UpdateProfileWithAgentResponse.AddMember("AgentResponse", AgentOutputMessageStream, &smithytraits.HTTPPayload{})
-
+const blob = "" +
+	"TotalNumberOfNonFhirFilesReadWithCustomerErrorTotalNumberOfNonFhirResourcesWithCustomerErrorListData" +
+	"TransformationProfileVersionsResponseListDataTransformationProfileVersionsRequestDataTransformationP" +
+	"rofileVersionSummaryListPublishDataTransformationProfileResponseCreateDataTransformationProfileRespo" +
+	"nseDeleteDataTransformationProfileResponsePublishDataTransformationProfileRequestTotalNumberOfFilesR" +
+	"eadWithCustomerErrorTotalNumberOfResourcesWithCustomerErrorUpdateDataTransformationProfileResponseCr" +
+	"eateDataTransformationProfileRequestDeleteDataTransformationProfileRequestListDataTransformationProf" +
+	"ilesResponseUpdateDataTransformationProfileRequestCreateDataTransformationProfileSourceDescribeDataT" +
+	"ransformationJobResponseListDataTransformationProfilesRequestTotalNumberOfNonFhirResourcesImportedCo" +
+	"ntinuousBackupRestoreConfigurationDataTransformationProfileSummaryListDescribeDataTransformationJobR" +
+	"equestGetDataTransformationProfileResponseTotalNumberOfNonFhirResourcesScannedGetDataTransformationP" +
+	"rofileRequestDataTransformationChatOptionStringListDataTransformationJobsResponseStartDataTransforma" +
+	"tionJobResponseTotalSizeOfScannedNonFhirFilesInMBDataTransformationChatOptionsListDataTransformation" +
+	"S3ConfigurationListDataTransformationJobsRequestStartDataTransformationJobRequestTotalNumberOfImport" +
+	"edNonFhirFilesTotalNumberOfScannedNonFhirFilesFineGrainedAuthorizationEnabledTransformationJobProgre" +
+	"ssReportExistingVersionedProfileSourceScheduledPermanentDeletionTimeTotalNumberOfResourcesImportedTr" +
+	"ansformationOutputDataConfigUpdateProfileWithAgentResponseDescribeFHIRDatastoreResponseDescribeFHIRE" +
+	"xportJobResponseDescribeFHIRImportJobResponseIdentityProviderConfigurationServiceQuotaExceededExcept" +
+	"ionTotalNumberOfResourcesScannedTransformationInputDataConfigUpdateProfileWithAgentRequestDataTransf" +
+	"ormationIamRoleArnDescribeFHIRDatastoreRequestDescribeFHIRExportJobRequestDescribeFHIRImportJobReque" +
+	"stRestoreFHIRDatastoreResponseTransformationJobSummaryListBackupRetentionPeriodInDaysCreateFHIRDatas" +
+	"toreResponseDataTransformationNextTokenDeleteFHIRDatastoreResponseListTagsForResourceResponseRestore" +
+	"FHIRDatastoreRequestTotalSizeOfScannedFilesInMBTransformationJobPropertiesUpdateFHIRDatastoreRespons" +
+	"eCreateFHIRDatastoreRequestDataTransformationTagValueDeleteFHIRDatastoreRequestExistingVersionedProf" +
+	"ileIdListFHIRDatastoresResponseListFHIRExportJobsResponseListFHIRImportJobsResponseListTagsForResour" +
+	"ceRequestStartFHIRExportJobResponseStartFHIRImportJobResponseTotalNumberOfImportedFilesUSER_CONFIRMA" +
+	"TION_RESPONSEUpdateFHIRDatastoreRequestDataTransformationJobNameFailedDependencyExceptionListFHIRDat" +
+	"astoresRequestListFHIRExportJobsRequestListFHIRImportJobsRequestResourceNotFoundExceptionStartFHIREx" +
+	"portJobRequestStartFHIRImportJobRequestTotalNumberOfScannedFilesAgentOutputMessageStreamDataTransfor" +
+	"mationTagKeyDataTransformationJobIdDataTransformationS3UriDatastorePropertiesListExportJobProperties" +
+	"ListImportJobPropertiesListInternalServerExceptionTotalResourcesGeneratedTransformationJobStatusAnal" +
+	"yticsConfigurationAccessDeniedExceptionAgentInputMessageTypeAuthorizationStrategyCOMPLETED_WITH_ERRO" +
+	"RSConfigurationMetadataDatastoreBackupStatusDefaultEnabledBooleanDriftDetectionEnabledUntagResourceR" +
+	"esponseConversationIdStringDatastoreTypeVersionEarliestRestorePointFinalResponseMessageProfileConfig" +
+	"urationProfileMappingSourceStarterProfileSourceUntagResourceRequestBackupConfigurationBoundedLengthS" +
+	"tringFromExistingVersionHealthLakeTimestampJobOutputDataConfigKmsEncryptionConfigNON_RETRYABLE_ERROR" +
+	"ProfileMappingValueTagResourceResponseThrottlingExceptionTotalFilesConvertedValidationExceptionAgent" +
+	"MessageStringAmazonResourceNameCANCEL_IN_PROGRESSLatestRestorePointProfileDescriptionStarterProfileN" +
+	"ameTagResourceRequestBackupTagsEnabledChangeDescriptionClientTokenStringConflictExceptionDataAccessR" +
+	"oleArnDatastoreEndpointHealthLakeBooleanMaxResultsIntegerPreloadDataConfigProfileMappingKeyProfileNa" +
+	"meStringProvenanceEnabledSourceDatastoreIdTotalFilesScannedBackupStatusInfoCANCEL_COMPLETEDCANCEL_SU" +
+	"BMITTEDEndOfOutputEventHealthLakeStringNlpConfigurationRestorePointTimeSampleDataSourceSseConfigurat" +
+	"ionTextMessageEventTotalFilesFailedAnalyticsStatusBackupEnabledAtDatastoreFilterDatastoreStatusDefau" +
+	"ltProfilesEncryptionKeyIDPreloadDataTypeProfileIdStringSampleDataS3UriSubmittedBeforeValidationLevel" +
+	"AgentErrorTypeHeartbeatEventSTRUCTURE_ONLYSubmittedAfterBoundedStringCANCEL_FAILEDCREATE_FAILEDCreat" +
+	"edBeforeDatastoreNameErrorCategoryGenericDoubleLastUpdatedAtProgressEventSMART_ON_FHIRUPDATE_FAILEDC" +
+	"reatedAfterDatastoreArnErrorMessageIdpLambdaArnSourceFormatTargetFormatFHIRVersionGenericLongInputFo" +
+	"rmatResourceARNBackupTypeCONTINUOUSErrorCauseErrorEventSubmitTimeTagKeyListThroughputCreatedAtDISABL" +
+	"INGNlpStatusStringMapAWS_AUTHCREATINGDELETINGDISABLEDDateTimeENABLINGKmsKeyIdUPDATINGCmkTypeDELETEDE" +
+	"NABLEDEndTimeFHIR_R4MINIMALPAUSINGSMARTV1SYNTHEATagKeysTagListACTIVEAO_CMKCM_CMKNORMALPAUSEDQUEUEDST" +
+	"RICTTagMapmemberItemsvalueBodyCCDAUnitCSVkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.healthlake", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 264, Target: 0, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1985, Target: 1, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 303, Target: 2, Traits: 2, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2039, Target: 3, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 687, Target: 4, Traits: 3, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1558, Target: 5, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1587, Target: 6, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1616, Target: 7, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 906, Target: 8, Traits: 4, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1047, Target: 9, Traits: 5, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 574, Target: 10, Traits: 6, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 92, Target: 11, Traits: 7, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2305, Target: 12, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2331, Target: 13, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2357, Target: 14, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2066, Target: 15, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 224, Target: 16, Traits: 8, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1902, Target: 17, Traits: 1, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1081, Target: 18, Traits: 9, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2409, Target: 19, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2435, Target: 20, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3519, Target: 21, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3186, Target: 22, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 459, Target: 23, Traits: 10, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2174, Target: 24, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1528, Target: 25, Traits: 11, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3424, Target: 26, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 3018, Target: 27, Traits: 12, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 206, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4300, Target: 29, Traits: 1, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2927, Target: 624, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2664, Target: 624, Traits: 1, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3576, Target: 624, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3018, Target: 624, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3538, Target: 624, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3039, Target: 35, Traits: 1, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4926, Target: 41, Traits: 13, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3056, Target: 38, Traits: 1, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3039, Target: 38, Traits: 1, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4880, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2487, Target: 624, Traits: 1, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3595, Target: 41, Traits: 14, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2764, Target: 42, Traits: 15, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 4103, Target: 339, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4460, Target: 300, Traits: 1, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4314, Target: 208, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4645, Target: 180, Traits: 1, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4007, Target: 170, Traits: 1, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3613, Target: 48, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2996, Target: 49, Traits: 1, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2990, Target: 51, Traits: 1, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4135, Target: 51, Traits: 1, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4799, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4761, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4745, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4694, Target: 624, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4827, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4886, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3060, Target: 58, Traits: 1, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4834, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4473, Target: 624, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4721, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3367, Target: 62, Traits: 1, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2990, Target: 68, Traits: 1, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4615, Target: 71, Traits: 1, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1964, Target: 67, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3721, Target: 205, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1958, Target: 67, Traits: 1, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3132, Target: 68, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4799, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4745, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4615, Target: 71, Traits: 1, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4625, Target: 624, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3386, Target: 73, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4356, Target: 74, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3738, Target: 75, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3755, Target: 76, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3755, Target: 77, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4785, Target: 78, Traits: 1, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4874, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4868, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3102, Target: 81, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3772, Target: 82, Traits: 16, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 206, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 798, Target: 84, Traits: 1, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4055, Target: 207, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3207, Target: 86, Traits: 1, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 650, Target: 87, Traits: 1, StrLen: 37, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3327, Target: 320, Traits: 1, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2279, Target: 184, Traits: 1, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3307, Target: 295, Traits: 13, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4071, Target: 311, Traits: 1, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4511, Target: 92, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3123, Target: 93, Traits: 1, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 821, Target: 62, Traits: 1, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4150, Target: 207, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3247, Target: 207, Traits: 1, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3649, Target: 207, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1438, Target: 207, Traits: 1, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4165, Target: 99, Traits: 1, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4408, Target: 105, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4180, Target: 124, Traits: 1, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4395, Target: 207, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4499, Target: 207, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4408, Target: 105, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2858, Target: 106, Traits: 1, StrLen: 19, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4511, Target: 92, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4408, Target: 105, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4180, Target: 124, Traits: 1, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4685, Target: 207, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 201, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3806, Target: 206, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4087, Target: 318, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3857, Target: 283, Traits: 1, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1645, Target: 210, Traits: 1, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4635, Target: 177, Traits: 1, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4039, Target: 274, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2996, Target: 49, Traits: 1, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3287, Target: 287, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3959, Target: 93, Traits: 1, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2858, Target: 122, Traits: 1, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 106, Traits: 1, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4180, Target: 124, Traits: 1, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4729, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4862, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4737, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4792, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4382, Target: 624, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4777, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4486, Target: 624, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1149, Target: 132, Traits: 1, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 134, Traits: 13, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 134, Traits: 14, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1790, Target: 135, Traits: 1, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2812, Target: 136, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2539, Target: 137, Traits: 1, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2012, Target: 138, Traits: 1, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 834, Target: 139, Traits: 1, StrLen: 32, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 299, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4559, Target: 337, Traits: 1, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3667, Target: 289, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4447, Target: 165, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 834, Target: 147, Traits: 1, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 139, Traits: 1, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 181, Target: 149, Traits: 1, StrLen: 39, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 299, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4559, Target: 337, Traits: 1, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3738, Target: 75, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4447, Target: 165, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 181, Target: 157, Traits: 1, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 149, Traits: 1, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1182, Target: 159, Traits: 1, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2853, Target: 162, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4769, Target: 268, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2835, Target: 162, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2788, Target: 163, Traits: 1, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2227, Target: 164, Traits: 1, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4753, Target: 165, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 3144, Target: 166, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 4195, Target: 167, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 206, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4210, Target: 169, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4007, Target: 170, Traits: 1, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3267, Target: 41, Traits: 13, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1171, Target: 132, Traits: 1, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3207, Target: 86, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4421, Target: 174, Traits: 1, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3485, Target: 624, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3481, Target: 624, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4635, Target: 177, Traits: 1, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4523, Target: 183, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4421, Target: 174, Traits: 1, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4645, Target: 180, Traits: 1, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 41, Target: 29, Traits: 1, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2775, Target: 41, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4523, Target: 183, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1408, Target: 184, Traits: 1, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 625, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 626, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2881, Target: 187, Traits: 1, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2830, Target: 234, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2557, Target: 235, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 254, Traits: 1, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4655, Target: 207, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4806, Target: 207, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1512, Target: 281, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3789, Target: 209, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2775, Target: 272, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2881, Target: 197, Traits: 1, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 187, Traits: 1, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2564, Target: 199, Traits: 17, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 206, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4571, Target: 201, Traits: 1, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4818, Target: 624, Traits: 1, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4434, Target: 203, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 4582, Target: 204, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 3823, Target: 205, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 4023, Target: 206, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3424, Target: 207, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 4314, Target: 208, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1808, Target: 209, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1645, Target: 210, Traits: 1, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3060, Target: 58, Traits: 1, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1346, Target: 205, Traits: 1, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3115, Target: 81, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4535, Target: 269, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2904, Target: 215, Traits: 1, StrLen: 19, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2830, Target: 234, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2557, Target: 235, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 254, Traits: 1, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4655, Target: 207, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4806, Target: 207, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1746, Target: 230, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3443, Target: 281, Traits: 1, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1391, Target: 236, Traits: 1, StrLen: 17, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3789, Target: 209, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2775, Target: 272, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4285, Target: 387, Traits: 1, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2904, Target: 228, Traits: 1, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 215, Traits: 1, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1746, Target: 230, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2853, Target: 309, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2927, Target: 232, Traits: 18, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 206, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2830, Target: 234, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2557, Target: 235, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1391, Target: 236, Traits: 1, StrLen: 17, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2739, Target: 204, Traits: 1, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2120, Target: 203, Traits: 1, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2461, Target: 204, Traits: 1, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1703, Target: 204, Traits: 1, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1468, Target: 204, Traits: 1, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 420, Target: 204, Traits: 1, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 381, Target: 204, Traits: 1, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1314, Target: 204, Traits: 1, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1115, Target: 203, Traits: 1, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1281, Target: 204, Traits: 1, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 942, Target: 204, Traits: 1, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 761, Target: 204, Traits: 1, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 46, Target: 204, Traits: 1, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 0, Target: 204, Traits: 1, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4675, Target: 203, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3557, Target: 204, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2950, Target: 204, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2987, Target: 254, Traits: 1, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3998, Target: 624, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4892, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3638, Target: 624, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3081, Target: 624, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3081, Target: 624, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4376, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3991, Target: 624, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3631, Target: 624, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3975, Target: 624, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4369, Target: 624, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3462, Target: 265, Traits: 1, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4785, Target: 78, Traits: 1, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4769, Target: 169, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4769, Target: 268, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4538, Target: 269, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3840, Target: 270, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3840, Target: 271, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2775, Target: 272, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2030, Target: 273, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4039, Target: 274, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2990, Target: 276, Traits: 1, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4703, Target: 276, Traits: 1, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4799, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4761, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4745, Target: 624, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4694, Target: 624, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1512, Target: 281, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1200, Target: 306, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3857, Target: 283, Traits: 1, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4225, Target: 285, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4225, Target: 285, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4841, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3287, Target: 287, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4195, Target: 167, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3667, Target: 289, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4240, Target: 290, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3307, Target: 291, Traits: 14, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 4941, Target: 294, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4921, Target: 297, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3874, Target: 294, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3307, Target: 295, Traits: 14, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3307, Target: 322, Traits: 1, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3500, Target: 297, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3891, Target: 298, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 114, Target: 299, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4460, Target: 300, Traits: 1, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 41, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2664, Target: 302, Traits: 19, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 206, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 814, Target: 304, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 798, Target: 84, Traits: 1, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1200, Target: 306, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2853, Target: 309, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4769, Target: 169, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2853, Target: 309, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4255, Target: 310, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4071, Target: 311, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2853, Target: 310, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1674, Target: 313, Traits: 20, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 206, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4930, Target: 624, Traits: 1, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4938, Target: 624, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4087, Target: 318, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3462, Target: 265, Traits: 1, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3327, Target: 320, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3685, Target: 625, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4712, Target: 322, Traits: 1, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 4941, Target: 625, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4921, Target: 625, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2070, Target: 325, Traits: 1, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2809, Target: 328, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2248, Target: 336, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2806, Target: 328, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4665, Target: 329, Traits: 1, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 328, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4855, Target: 331, Traits: 1, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 325, Traits: 1, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4904, Target: 333, Traits: 1, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 4941, Target: 163, Traits: 1, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4921, Target: 164, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2245, Target: 336, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4559, Target: 337, Traits: 1, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4813, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4103, Target: 339, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 41, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3538, Target: 341, Traits: 21, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 206, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1732, Target: 343, Traits: 1, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2853, Target: 162, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1377, Target: 346, Traits: 1, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3942, Target: 627, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3557, Target: 627, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4119, Target: 627, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2950, Target: 627, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2147, Target: 351, Traits: 1, StrLen: 27, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2830, Target: 136, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 367, Traits: 1, StrLen: 9, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1746, Target: 343, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1512, Target: 383, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3789, Target: 135, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4655, Target: 165, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2557, Target: 137, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 114, Target: 626, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4806, Target: 165, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3165, Target: 628, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3908, Target: 628, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2775, Target: 74, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1391, Target: 346, Traits: 1, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2973, Target: 367, Traits: 1, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3998, Target: 624, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4892, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3638, Target: 624, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3081, Target: 624, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3081, Target: 624, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4376, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1930, Target: 374, Traits: 1, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2830, Target: 136, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 367, Traits: 1, StrLen: 9, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4655, Target: 165, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2557, Target: 137, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4806, Target: 165, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1930, Target: 381, Traits: 1, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4910, Target: 374, Traits: 1, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1498, Target: 383, Traits: 1, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1200, Target: 159, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3576, Target: 385, Traits: 20, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2775, Target: 206, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4285, Target: 387, Traits: 1, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4898, Target: 624, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4328, Target: 624, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4820, Target: 624, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 498, Target: 391, Traits: 1, StrLen: 38, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 681, Target: 87, Traits: 1, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4769, Target: 268, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3667, Target: 289, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2070, Target: 333, Traits: 1, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3755, Target: 76, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 264, Target: 399, Traits: 1, StrLen: 39, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 299, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4559, Target: 337, Traits: 1, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4447, Target: 165, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2201, Target: 406, Traits: 1, StrLen: 26, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4408, Target: 105, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3227, Target: 201, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4087, Target: 318, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3857, Target: 283, Traits: 1, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3755, Target: 77, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2070, Target: 331, Traits: 1, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1645, Target: 210, Traits: 1, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2996, Target: 49, Traits: 1, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4039, Target: 274, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3287, Target: 287, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3367, Target: 62, Traits: 1, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1985, Target: 418, Traits: 1, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4511, Target: 92, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4180, Target: 124, Traits: 1, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3806, Target: 73, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 536, Target: 423, Traits: 1, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 303, Target: 425, Traits: 1, StrLen: 39, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1456, Target: 165, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2253, Target: 429, Traits: 1, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2039, Target: 431, Traits: 1, StrLen: 27, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4511, Target: 92, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4180, Target: 124, Traits: 1, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3806, Target: 73, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 870, Target: 436, Traits: 1, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2830, Target: 136, Traits: 22, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 687, Target: 438, Traits: 1, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2147, Target: 351, Traits: 1, StrLen: 27, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1818, Target: 440, Traits: 1, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1558, Target: 442, Traits: 1, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2858, Target: 106, Traits: 1, StrLen: 19, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1846, Target: 444, Traits: 1, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2830, Target: 234, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1587, Target: 447, Traits: 1, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2881, Target: 187, Traits: 1, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1874, Target: 449, Traits: 1, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2830, Target: 234, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1616, Target: 452, Traits: 1, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2904, Target: 215, Traits: 1, StrLen: 19, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 978, Target: 454, Traits: 1, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 114, Target: 299, Traits: 23, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 906, Target: 457, Traits: 1, StrLen: 36, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 299, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4559, Target: 337, Traits: 1, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3307, Target: 291, Traits: 13, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3667, Target: 289, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3738, Target: 75, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4447, Target: 165, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1215, Target: 467, Traits: 1, StrLen: 33, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3840, Target: 270, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2030, Target: 138, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 367, Traits: 26, StrLen: 9, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2557, Target: 137, Traits: 27, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4342, Target: 165, Traits: 28, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4270, Target: 165, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1047, Target: 474, Traits: 1, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4916, Target: 381, Traits: 1, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2030, Target: 138, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 724, Target: 477, Traits: 1, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4547, Target: 315, Traits: 30, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3840, Target: 270, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2030, Target: 138, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 574, Target: 481, Traits: 1, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4916, Target: 147, Traits: 1, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2030, Target: 138, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 137, Target: 484, Traits: 1, StrLen: 44, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3840, Target: 270, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2030, Target: 138, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 92, Target: 488, Traits: 1, StrLen: 45, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4916, Target: 157, Traits: 1, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2030, Target: 138, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2589, Target: 491, Traits: 1, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4174, Target: 99, Traits: 1, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2030, Target: 273, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3840, Target: 271, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2305, Target: 495, Traits: 1, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2858, Target: 122, Traits: 1, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2030, Target: 273, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2614, Target: 498, Traits: 1, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2030, Target: 273, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3840, Target: 271, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2557, Target: 235, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 254, Traits: 1, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4270, Target: 207, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4342, Target: 207, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2331, Target: 506, Traits: 1, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2881, Target: 197, Traits: 1, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2030, Target: 273, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2639, Target: 509, Traits: 1, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2030, Target: 273, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3840, Target: 271, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2557, Target: 235, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 254, Traits: 1, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4270, Target: 207, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4342, Target: 207, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2357, Target: 517, Traits: 1, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2904, Target: 228, Traits: 1, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2030, Target: 273, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2383, Target: 520, Traits: 1, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4604, Target: 48, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2066, Target: 522, Traits: 1, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2070, Target: 331, Traits: 1, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 342, Target: 524, Traits: 1, StrLen: 39, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 30, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3405, Target: 299, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3738, Target: 75, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 529, Traits: 1, StrLen: 40, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 121, Target: 299, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4559, Target: 337, Traits: 1, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4447, Target: 165, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2093, Target: 536, Traits: 1, StrLen: 27, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3925, Target: 104, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 814, Target: 304, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4408, Target: 105, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4087, Target: 318, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3755, Target: 77, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2070, Target: 331, Traits: 1, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1645, Target: 210, Traits: 1, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2996, Target: 49, Traits: 1, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4039, Target: 274, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3287, Target: 287, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1902, Target: 547, Traits: 1, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4511, Target: 92, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4180, Target: 124, Traits: 1, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3806, Target: 73, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1248, Target: 552, Traits: 1, StrLen: 33, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1746, Target: 343, Traits: 1, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1512, Target: 383, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3789, Target: 135, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3755, Target: 76, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2557, Target: 137, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3165, Target: 628, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3908, Target: 628, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1081, Target: 561, Traits: 1, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2830, Target: 136, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 367, Traits: 1, StrLen: 9, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2689, Target: 564, Traits: 1, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2557, Target: 235, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1512, Target: 281, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3789, Target: 209, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3755, Target: 77, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2409, Target: 570, Traits: 1, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2830, Target: 234, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 254, Traits: 1, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2714, Target: 574, Traits: 1, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2557, Target: 235, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1746, Target: 230, Traits: 1, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3443, Target: 281, Traits: 1, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3789, Target: 209, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3755, Target: 77, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4285, Target: 387, Traits: 1, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2296, Target: 73, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4593, Target: 73, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3165, Target: 205, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3908, Target: 166, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2435, Target: 586, Traits: 1, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2830, Target: 234, Traits: 1, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 254, Traits: 1, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3703, Target: 590, Traits: 1, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4604, Target: 48, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2070, Target: 331, Traits: 1, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3519, Target: 593, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3347, Target: 594, Traits: 1, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4604, Target: 48, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4848, Target: 329, Traits: 1, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3186, Target: 597, Traits: 1, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 612, Target: 598, Traits: 1, StrLen: 38, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3307, Target: 291, Traits: 13, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3738, Target: 75, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 459, Target: 602, Traits: 1, StrLen: 39, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4547, Target: 315, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4559, Target: 337, Traits: 1, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3692, Target: 298, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4447, Target: 165, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2513, Target: 608, Traits: 1, StrLen: 26, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3931, Target: 104, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4408, Target: 105, Traits: 1, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2996, Target: 49, Traits: 1, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4039, Target: 274, Traits: 1, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3287, Target: 287, Traits: 1, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1645, Target: 210, Traits: 1, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3367, Target: 62, Traits: 1, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2174, Target: 616, Traits: 1, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2858, Target: 106, Traits: 1, StrLen: 19, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1761, Target: 618, Traits: 1, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2296, Target: 290, Traits: 1, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3044, Target: 35, Traits: 1, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3207, Target: 86, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1528, Target: 622, Traits: 1, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1545, Target: 42, Traits: 31, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4934, Target: 624, Traits: 1, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 1041, Target: 625, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 3850, Target: 626, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 4589, Target: 627, Traits: 1, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
+		{StrOff: 3158, Target: 628, Traits: 1, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/data-transformation-profile",
+			Code: 201}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/data-transformation-profile/{ProfileId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/data-transformation-job/{JobId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/data-transformation-profile/{ProfileId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/data-transformation-jobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/data-transformation-profile",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/data-transformation-profile/{ProfileId}/versions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/data-transformation-profile/{ProfileId}/publish",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/data-transformation-job",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/data-transformation-profile/{ProfileId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/update-profile-with-agent",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "version"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobStatus"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobName"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "submittedAfter"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "submittedBefore"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sourceFormat"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800},
+	},
 }
+
+var handles = [629]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+}
+
+var CreateDataTransformationProfile = &handles[0]
+
+var CreateFHIRDatastore = &handles[1]
+
+var DeleteDataTransformationProfile = &handles[2]
+
+var DeleteFHIRDatastore = &handles[3]
+
+var DescribeDataTransformationJob = &handles[4]
+
+var DescribeFHIRDatastore = &handles[5]
+
+var DescribeFHIRExportJob = &handles[6]
+
+var DescribeFHIRImportJob = &handles[7]
+
+var GetDataTransformationProfile = &handles[8]
+
+var ListDataTransformationJobs = &handles[9]
+
+var ListDataTransformationProfiles = &handles[10]
+
+var ListDataTransformationProfileVersions = &handles[11]
+
+var ListFHIRDatastores = &handles[12]
+
+var ListFHIRExportJobs = &handles[13]
+
+var ListFHIRImportJobs = &handles[14]
+
+var ListTagsForResource = &handles[15]
+
+var PublishDataTransformationProfile = &handles[16]
+
+var RestoreFHIRDatastore = &handles[17]
+
+var StartDataTransformationJob = &handles[18]
+
+var StartFHIRExportJob = &handles[19]
+
+var StartFHIRImportJob = &handles[20]
+
+var TagResource = &handles[21]
+
+var UntagResource = &handles[22]
+
+var UpdateDataTransformationProfile = &handles[23]
+
+var UpdateFHIRDatastore = &handles[24]
+
+var UpdateProfileWithAgent = &handles[25]
+
+var _HealthLake = &handles[26]
+
+var AccessDeniedException = &handles[27]
+var AccessDeniedException_Message = &handles[28]
+
+var AgentErrorType = &handles[29]
+var AgentErrorType_InternalServerException = &handles[30]
+var AgentErrorType_ResourceNotFoundException = &handles[31]
+var AgentErrorType_ValidationException = &handles[32]
+var AgentErrorType_AccessDeniedException = &handles[33]
+var AgentErrorType_ThrottlingException = &handles[34]
+
+var AgentInputMessage = &handles[35]
+var AgentInputMessage_Body = &handles[36]
+var AgentInputMessage_Type = &handles[37]
+
+var AgentInputMessageType = &handles[38]
+var AgentInputMessageType_NORMAL = &handles[39]
+var AgentInputMessageType_USER_CONFIRMATION_RESPONSE = &handles[40]
+
+var _AgentMessageString = &handles[41]
+
+var AgentOutputMessageStream = &handles[42]
+var AgentOutputMessageStream_TextMessageEvent = &handles[43]
+var AgentOutputMessageStream_ProgressEvent = &handles[44]
+var AgentOutputMessageStream_HeartbeatEvent = &handles[45]
+var AgentOutputMessageStream_ErrorEvent = &handles[46]
+var AgentOutputMessageStream_EndOfOutputEvent = &handles[47]
+
+var _AmazonResourceName = &handles[48]
+
+var AnalyticsConfiguration = &handles[49]
+var AnalyticsConfiguration_Status = &handles[50]
+
+var AnalyticsStatus = &handles[51]
+var AnalyticsStatus_ENABLED = &handles[52]
+var AnalyticsStatus_ENABLING = &handles[53]
+var AnalyticsStatus_DISABLED = &handles[54]
+var AnalyticsStatus_DISABLING = &handles[55]
+var AnalyticsStatus_PAUSING = &handles[56]
+var AnalyticsStatus_PAUSED = &handles[57]
+
+var AuthorizationStrategy = &handles[58]
+var AuthorizationStrategy_SMARTV1 = &handles[59]
+var AuthorizationStrategy_SMART_ON_FHIR = &handles[60]
+var AuthorizationStrategy_AWS_AUTH = &handles[61]
+
+var BackupConfiguration = &handles[62]
+var BackupConfiguration_Status = &handles[63]
+var BackupConfiguration_BackupType = &handles[64]
+var BackupConfiguration_RetentionPeriodInDays = &handles[65]
+var BackupConfiguration_BackupTagsEnabled = &handles[66]
+
+var _BackupRetentionPeriodInDays = &handles[67]
+
+var BackupStatus = &handles[68]
+var BackupStatus_ENABLED = &handles[69]
+var BackupStatus_DISABLED = &handles[70]
+
+var BackupType = &handles[71]
+var BackupType_CONTINUOUS = &handles[72]
+
+var _BoundedLengthString = &handles[73]
+
+var _BoundedString = &handles[74]
+
+var _ChangeDescription = &handles[75]
+
+var _ClientToken = &handles[76]
+
+var _ClientTokenString = &handles[77]
+
+var CmkType = &handles[78]
+var CmkType_CM_CMK = &handles[79]
+var CmkType_AO_CMK = &handles[80]
+
+var _ConfigurationMetadata = &handles[81]
+
+var ConflictException = &handles[82]
+var ConflictException_Message = &handles[83]
+
+var ContinuousBackupRestoreConfiguration = &handles[84]
+var ContinuousBackupRestoreConfiguration_RestorePointTime = &handles[85]
+
+var _ConversationIdString = &handles[86]
+
+var CreateDataTransformationProfileSource = &handles[87]
+var CreateDataTransformationProfileSource_StarterProfile = &handles[88]
+var CreateDataTransformationProfileSource_ExistingVersionedProfileId = &handles[89]
+var CreateDataTransformationProfileSource_ProfileMapping = &handles[90]
+var CreateDataTransformationProfileSource_SampleData = &handles[91]
+
+var _DatastoreArn = &handles[92]
+
+var DatastoreBackupStatus = &handles[93]
+var DatastoreBackupStatus_Configuration = &handles[94]
+var DatastoreBackupStatus_BackupEnabledAt = &handles[95]
+var DatastoreBackupStatus_EarliestRestorePoint = &handles[96]
+var DatastoreBackupStatus_LatestRestorePoint = &handles[97]
+var DatastoreBackupStatus_ScheduledPermanentDeletionTime = &handles[98]
+
+var DatastoreFilter = &handles[99]
+var DatastoreFilter_DatastoreName = &handles[100]
+var DatastoreFilter_DatastoreStatus = &handles[101]
+var DatastoreFilter_CreatedBefore = &handles[102]
+var DatastoreFilter_CreatedAfter = &handles[103]
+
+var _DatastoreId = &handles[104]
+
+var _DatastoreName = &handles[105]
+
+var DatastoreProperties = &handles[106]
+var DatastoreProperties_DatastoreId = &handles[107]
+var DatastoreProperties_DatastoreArn = &handles[108]
+var DatastoreProperties_DatastoreName = &handles[109]
+var DatastoreProperties_DatastoreStatus = &handles[110]
+var DatastoreProperties_CreatedAt = &handles[111]
+var DatastoreProperties_DatastoreTypeVersion = &handles[112]
+var DatastoreProperties_DatastoreEndpoint = &handles[113]
+var DatastoreProperties_SseConfiguration = &handles[114]
+var DatastoreProperties_PreloadDataConfig = &handles[115]
+var DatastoreProperties_IdentityProviderConfiguration = &handles[116]
+var DatastoreProperties_ErrorCause = &handles[117]
+var DatastoreProperties_NlpConfiguration = &handles[118]
+var DatastoreProperties_AnalyticsConfiguration = &handles[119]
+var DatastoreProperties_ProfileConfiguration = &handles[120]
+var DatastoreProperties_BackupStatusInfo = &handles[121]
+
+var _DatastorePropertiesList = &handles[122]
+var _DatastorePropertiesList_member = &handles[123]
+
+var DatastoreStatus = &handles[124]
+var DatastoreStatus_CREATING = &handles[125]
+var DatastoreStatus_ACTIVE = &handles[126]
+var DatastoreStatus_DELETING = &handles[127]
+var DatastoreStatus_DELETED = &handles[128]
+var DatastoreStatus_CREATE_FAILED = &handles[129]
+var DatastoreStatus_UPDATING = &handles[130]
+var DatastoreStatus_UPDATE_FAILED = &handles[131]
+
+var _DataTransformationChatOptionsList = &handles[132]
+var _DataTransformationChatOptionsList_member = &handles[133]
+
+var _DataTransformationChatOptionString = &handles[134]
+
+var _DataTransformationIamRoleArn = &handles[135]
+
+var _DataTransformationJobId = &handles[136]
+
+var _DataTransformationJobName = &handles[137]
+
+var _DataTransformationNextToken = &handles[138]
+
+var DataTransformationProfileSummary = &handles[139]
+var DataTransformationProfileSummary_ProfileId = &handles[140]
+var DataTransformationProfileSummary_Version = &handles[141]
+var DataTransformationProfileSummary_SourceFormat = &handles[142]
+var DataTransformationProfileSummary_TargetFormat = &handles[143]
+var DataTransformationProfileSummary_ProfileName = &handles[144]
+var DataTransformationProfileSummary_ProfileDescription = &handles[145]
+var DataTransformationProfileSummary_LastUpdatedAt = &handles[146]
+
+var _DataTransformationProfileSummaryList = &handles[147]
+var _DataTransformationProfileSummaryList_member = &handles[148]
+
+var DataTransformationProfileVersionSummary = &handles[149]
+var DataTransformationProfileVersionSummary_ProfileId = &handles[150]
+var DataTransformationProfileVersionSummary_Version = &handles[151]
+var DataTransformationProfileVersionSummary_SourceFormat = &handles[152]
+var DataTransformationProfileVersionSummary_TargetFormat = &handles[153]
+var DataTransformationProfileVersionSummary_ProfileName = &handles[154]
+var DataTransformationProfileVersionSummary_ChangeDescription = &handles[155]
+var DataTransformationProfileVersionSummary_LastUpdatedAt = &handles[156]
+
+var _DataTransformationProfileVersionSummaryList = &handles[157]
+var _DataTransformationProfileVersionSummaryList_member = &handles[158]
+
+var DataTransformationS3Configuration = &handles[159]
+var DataTransformationS3Configuration_S3Uri = &handles[160]
+var DataTransformationS3Configuration_KmsKeyId = &handles[161]
+
+var _DataTransformationS3Uri = &handles[162]
+
+var _DataTransformationTagKey = &handles[163]
+
+var _DataTransformationTagValue = &handles[164]
+
+var _DateTime = &handles[165]
+
+var _DefaultEnabledBoolean = &handles[166]
+
+var _DefaultProfiles = &handles[167]
+var _DefaultProfiles_member = &handles[168]
+
+var _EncryptionKeyID = &handles[169]
+
+var EndOfOutputEvent = &handles[170]
+var EndOfOutputEvent_FinalResponseMessage = &handles[171]
+var EndOfOutputEvent_Options = &handles[172]
+var EndOfOutputEvent_ConversationId = &handles[173]
+
+var ErrorCategory = &handles[174]
+var ErrorCategory_RETRYABLE_ERROR = &handles[175]
+var ErrorCategory_NON_RETRYABLE_ERROR = &handles[176]
+
+var ErrorCause = &handles[177]
+var ErrorCause_ErrorMessage = &handles[178]
+var ErrorCause_ErrorCategory = &handles[179]
+
+var ErrorEvent = &handles[180]
+var ErrorEvent_Error = &handles[181]
+var ErrorEvent_Message = &handles[182]
+
+var _ErrorMessage = &handles[183]
+
+var ExistingVersionedProfileSource = &handles[184]
+var ExistingVersionedProfileSource_ProfileId = &handles[185]
+var ExistingVersionedProfileSource_Version = &handles[186]
+
+var ExportJobProperties = &handles[187]
+var ExportJobProperties_JobId = &handles[188]
+var ExportJobProperties_JobName = &handles[189]
+var ExportJobProperties_JobStatus = &handles[190]
+var ExportJobProperties_SubmitTime = &handles[191]
+var ExportJobProperties_EndTime = &handles[192]
+var ExportJobProperties_DatastoreId = &handles[193]
+var ExportJobProperties_OutputDataConfig = &handles[194]
+var ExportJobProperties_DataAccessRoleArn = &handles[195]
+var ExportJobProperties_Message = &handles[196]
+
+var _ExportJobPropertiesList = &handles[197]
+var _ExportJobPropertiesList_member = &handles[198]
+
+var FailedDependencyException = &handles[199]
+var FailedDependencyException_Message = &handles[200]
+
+var FHIRVersion = &handles[201]
+var FHIRVersion_R4 = &handles[202]
+
+var _GenericDouble = &handles[203]
+
+var _GenericLong = &handles[204]
+
+var _HealthLakeBoolean = &handles[205]
+
+var _HealthLakeString = &handles[206]
+
+var _HealthLakeTimestamp = &handles[207]
+
+var HeartbeatEvent = &handles[208]
+
+var _IamRoleArn = &handles[209]
+
+var IdentityProviderConfiguration = &handles[210]
+var IdentityProviderConfiguration_AuthorizationStrategy = &handles[211]
+var IdentityProviderConfiguration_FineGrainedAuthorizationEnabled = &handles[212]
+var IdentityProviderConfiguration_Metadata = &handles[213]
+var IdentityProviderConfiguration_IdpLambdaArn = &handles[214]
+
+var ImportJobProperties = &handles[215]
+var ImportJobProperties_JobId = &handles[216]
+var ImportJobProperties_JobName = &handles[217]
+var ImportJobProperties_JobStatus = &handles[218]
+var ImportJobProperties_SubmitTime = &handles[219]
+var ImportJobProperties_EndTime = &handles[220]
+var ImportJobProperties_DatastoreId = &handles[221]
+var ImportJobProperties_InputDataConfig = &handles[222]
+var ImportJobProperties_JobOutputDataConfig = &handles[223]
+var ImportJobProperties_JobProgressReport = &handles[224]
+var ImportJobProperties_DataAccessRoleArn = &handles[225]
+var ImportJobProperties_Message = &handles[226]
+var ImportJobProperties_ValidationLevel = &handles[227]
+
+var _ImportJobPropertiesList = &handles[228]
+var _ImportJobPropertiesList_member = &handles[229]
+
+var InputDataConfig = &handles[230]
+var InputDataConfig_S3Uri = &handles[231]
+
+var InternalServerException = &handles[232]
+var InternalServerException_Message = &handles[233]
+
+var _JobId = &handles[234]
+
+var _JobName = &handles[235]
+
+var JobProgressReport = &handles[236]
+var JobProgressReport_TotalNumberOfScannedFiles = &handles[237]
+var JobProgressReport_TotalSizeOfScannedFilesInMB = &handles[238]
+var JobProgressReport_TotalNumberOfImportedFiles = &handles[239]
+var JobProgressReport_TotalNumberOfResourcesScanned = &handles[240]
+var JobProgressReport_TotalNumberOfResourcesImported = &handles[241]
+var JobProgressReport_TotalNumberOfResourcesWithCustomerError = &handles[242]
+var JobProgressReport_TotalNumberOfFilesReadWithCustomerError = &handles[243]
+var JobProgressReport_TotalNumberOfScannedNonFhirFiles = &handles[244]
+var JobProgressReport_TotalSizeOfScannedNonFhirFilesInMB = &handles[245]
+var JobProgressReport_TotalNumberOfImportedNonFhirFiles = &handles[246]
+var JobProgressReport_TotalNumberOfNonFhirResourcesScanned = &handles[247]
+var JobProgressReport_TotalNumberOfNonFhirResourcesImported = &handles[248]
+var JobProgressReport_TotalNumberOfNonFhirResourcesWithCustomerError = &handles[249]
+var JobProgressReport_TotalNumberOfNonFhirFilesReadWithCustomerError = &handles[250]
+var JobProgressReport_Throughput = &handles[251]
+var JobProgressReport_TotalFilesConverted = &handles[252]
+var JobProgressReport_TotalResourcesGenerated = &handles[253]
+
+var JobStatus = &handles[254]
+var JobStatus_SUBMITTED = &handles[255]
+var JobStatus_QUEUED = &handles[256]
+var JobStatus_IN_PROGRESS = &handles[257]
+var JobStatus_COMPLETED_WITH_ERRORS = &handles[258]
+var JobStatus_COMPLETED = &handles[259]
+var JobStatus_FAILED = &handles[260]
+var JobStatus_CANCEL_SUBMITTED = &handles[261]
+var JobStatus_CANCEL_IN_PROGRESS = &handles[262]
+var JobStatus_CANCEL_COMPLETED = &handles[263]
+var JobStatus_CANCEL_FAILED = &handles[264]
+
+var KmsEncryptionConfig = &handles[265]
+var KmsEncryptionConfig_CmkType = &handles[266]
+var KmsEncryptionConfig_KmsKeyId = &handles[267]
+
+var _KmsKeyId = &handles[268]
+
+var _LambdaArn = &handles[269]
+
+var _MaxResults = &handles[270]
+
+var _MaxResultsInteger = &handles[271]
+
+var _Message = &handles[272]
+
+var _NextToken = &handles[273]
+
+var NlpConfiguration = &handles[274]
+var NlpConfiguration_Status = &handles[275]
+
+var NlpStatus = &handles[276]
+var NlpStatus_ENABLED = &handles[277]
+var NlpStatus_ENABLING = &handles[278]
+var NlpStatus_DISABLED = &handles[279]
+var NlpStatus_DISABLING = &handles[280]
+
+var OutputDataConfig = &handles[281]
+var OutputDataConfig_S3Configuration = &handles[282]
+
+var PreloadDataConfig = &handles[283]
+var PreloadDataConfig_PreloadDataType = &handles[284]
+
+var PreloadDataType = &handles[285]
+var PreloadDataType_SYNTHEA = &handles[286]
+
+var ProfileConfiguration = &handles[287]
+var ProfileConfiguration_DefaultProfiles = &handles[288]
+
+var _ProfileDescription = &handles[289]
+
+var _ProfileIdString = &handles[290]
+
+var _ProfileMapping = &handles[291]
+var _ProfileMapping_key = &handles[292]
+var _ProfileMapping_value = &handles[293]
+
+var _ProfileMappingKey = &handles[294]
+
+var ProfileMappingSource = &handles[295]
+var ProfileMappingSource_ProfileMapping = &handles[296]
+
+var _ProfileMappingValue = &handles[297]
+
+var _ProfileNameString = &handles[298]
+
+var _ProfileVersion = &handles[299]
+
+var ProgressEvent = &handles[300]
+var ProgressEvent_Message = &handles[301]
+
+var ResourceNotFoundException = &handles[302]
+var ResourceNotFoundException_Message = &handles[303]
+
+var RestoreConfiguration = &handles[304]
+var RestoreConfiguration_ContinuousBackupRestoreConfiguration = &handles[305]
+
+var S3Configuration = &handles[306]
+var S3Configuration_S3Uri = &handles[307]
+var S3Configuration_KmsKeyId = &handles[308]
+
+var _S3Uri = &handles[309]
+
+var _SampleDataS3Uri = &handles[310]
+
+var SampleDataSource = &handles[311]
+var SampleDataSource_S3Uri = &handles[312]
+
+var ServiceQuotaExceededException = &handles[313]
+var ServiceQuotaExceededException_Message = &handles[314]
+
+var SourceFormat = &handles[315]
+var SourceFormat_CCDA = &handles[316]
+var SourceFormat_CSV = &handles[317]
+
+var SseConfiguration = &handles[318]
+var SseConfiguration_KmsEncryptionConfig = &handles[319]
+
+var StarterProfileSource = &handles[320]
+var StarterProfileSource_StarterProfileName = &handles[321]
+
+var _StringMap = &handles[322]
+var _StringMap_key = &handles[323]
+var _StringMap_value = &handles[324]
+
+var Tag = &handles[325]
+var Tag_Key = &handles[326]
+var Tag_Value = &handles[327]
+
+var _TagKey = &handles[328]
+
+var _TagKeyList = &handles[329]
+var _TagKeyList_member = &handles[330]
+
+var _TagList = &handles[331]
+var _TagList_member = &handles[332]
+
+var _TagMap = &handles[333]
+var _TagMap_key = &handles[334]
+var _TagMap_value = &handles[335]
+
+var _TagValue = &handles[336]
+
+var TargetFormat = &handles[337]
+var TargetFormat_FHIR_R4 = &handles[338]
+
+var TextMessageEvent = &handles[339]
+var TextMessageEvent_Message = &handles[340]
+
+var ThrottlingException = &handles[341]
+var ThrottlingException_Message = &handles[342]
+
+var TransformationInputDataConfig = &handles[343]
+var TransformationInputDataConfig_S3Uri = &handles[344]
+var TransformationInputDataConfig_SourceFormat = &handles[345]
+
+var TransformationJobProgressReport = &handles[346]
+var TransformationJobProgressReport_TotalFilesScanned = &handles[347]
+var TransformationJobProgressReport_TotalFilesConverted = &handles[348]
+var TransformationJobProgressReport_TotalFilesFailed = &handles[349]
+var TransformationJobProgressReport_TotalResourcesGenerated = &handles[350]
+
+var TransformationJobProperties = &handles[351]
+var TransformationJobProperties_JobId = &handles[352]
+var TransformationJobProperties_JobStatus = &handles[353]
+var TransformationJobProperties_InputDataConfig = &handles[354]
+var TransformationJobProperties_OutputDataConfig = &handles[355]
+var TransformationJobProperties_DataAccessRoleArn = &handles[356]
+var TransformationJobProperties_SubmitTime = &handles[357]
+var TransformationJobProperties_JobName = &handles[358]
+var TransformationJobProperties_ProfileId = &handles[359]
+var TransformationJobProperties_ProfileName = &handles[360]
+var TransformationJobProperties_ProfileVersion = &handles[361]
+var TransformationJobProperties_EndTime = &handles[362]
+var TransformationJobProperties_DriftDetectionEnabled = &handles[363]
+var TransformationJobProperties_ProvenanceEnabled = &handles[364]
+var TransformationJobProperties_Message = &handles[365]
+var TransformationJobProperties_JobProgressReport = &handles[366]
+
+var TransformationJobStatus = &handles[367]
+var TransformationJobStatus_SUBMITTED = &handles[368]
+var TransformationJobStatus_QUEUED = &handles[369]
+var TransformationJobStatus_IN_PROGRESS = &handles[370]
+var TransformationJobStatus_COMPLETED = &handles[371]
+var TransformationJobStatus_COMPLETED_WITH_ERRORS = &handles[372]
+var TransformationJobStatus_FAILED = &handles[373]
+
+var TransformationJobSummary = &handles[374]
+var TransformationJobSummary_JobId = &handles[375]
+var TransformationJobSummary_JobStatus = &handles[376]
+var TransformationJobSummary_SubmitTime = &handles[377]
+var TransformationJobSummary_JobName = &handles[378]
+var TransformationJobSummary_EndTime = &handles[379]
+var TransformationJobSummary_SourceFormat = &handles[380]
+
+var _TransformationJobSummaryList = &handles[381]
+var _TransformationJobSummaryList_member = &handles[382]
+
+var TransformationOutputDataConfig = &handles[383]
+var TransformationOutputDataConfig_S3Configuration = &handles[384]
+
+var ValidationException = &handles[385]
+var ValidationException_Message = &handles[386]
+
+var ValidationLevel = &handles[387]
+var ValidationLevel_STRICT = &handles[388]
+var ValidationLevel_STRUCTURE_ONLY = &handles[389]
+var ValidationLevel_MINIMAL = &handles[390]
+
+var CreateDataTransformationProfileRequest = &handles[391]
+var CreateDataTransformationProfileRequest_SourceFormat = &handles[392]
+var CreateDataTransformationProfileRequest_Source = &handles[393]
+var CreateDataTransformationProfileRequest_KmsKeyId = &handles[394]
+var CreateDataTransformationProfileRequest_ProfileDescription = &handles[395]
+var CreateDataTransformationProfileRequest_ProfileName = &handles[396]
+var CreateDataTransformationProfileRequest_Tags = &handles[397]
+var CreateDataTransformationProfileRequest_ClientToken = &handles[398]
+
+var CreateDataTransformationProfileResponse = &handles[399]
+var CreateDataTransformationProfileResponse_ProfileId = &handles[400]
+var CreateDataTransformationProfileResponse_Version = &handles[401]
+var CreateDataTransformationProfileResponse_SourceFormat = &handles[402]
+var CreateDataTransformationProfileResponse_TargetFormat = &handles[403]
+var CreateDataTransformationProfileResponse_ProfileName = &handles[404]
+var CreateDataTransformationProfileResponse_LastUpdatedAt = &handles[405]
+
+var CreateFHIRDatastoreRequest = &handles[406]
+var CreateFHIRDatastoreRequest_DatastoreName = &handles[407]
+var CreateFHIRDatastoreRequest_DatastoreTypeVersion = &handles[408]
+var CreateFHIRDatastoreRequest_SseConfiguration = &handles[409]
+var CreateFHIRDatastoreRequest_PreloadDataConfig = &handles[410]
+var CreateFHIRDatastoreRequest_ClientToken = &handles[411]
+var CreateFHIRDatastoreRequest_Tags = &handles[412]
+var CreateFHIRDatastoreRequest_IdentityProviderConfiguration = &handles[413]
+var CreateFHIRDatastoreRequest_AnalyticsConfiguration = &handles[414]
+var CreateFHIRDatastoreRequest_NlpConfiguration = &handles[415]
+var CreateFHIRDatastoreRequest_ProfileConfiguration = &handles[416]
+var CreateFHIRDatastoreRequest_BackupConfiguration = &handles[417]
+
+var CreateFHIRDatastoreResponse = &handles[418]
+var CreateFHIRDatastoreResponse_DatastoreId = &handles[419]
+var CreateFHIRDatastoreResponse_DatastoreArn = &handles[420]
+var CreateFHIRDatastoreResponse_DatastoreStatus = &handles[421]
+var CreateFHIRDatastoreResponse_DatastoreEndpoint = &handles[422]
+
+var DeleteDataTransformationProfileRequest = &handles[423]
+var DeleteDataTransformationProfileRequest_ProfileId = &handles[424]
+
+var DeleteDataTransformationProfileResponse = &handles[425]
+var DeleteDataTransformationProfileResponse_ProfileId = &handles[426]
+var DeleteDataTransformationProfileResponse_ProfileName = &handles[427]
+var DeleteDataTransformationProfileResponse_DeletionTime = &handles[428]
+
+var DeleteFHIRDatastoreRequest = &handles[429]
+var DeleteFHIRDatastoreRequest_DatastoreId = &handles[430]
+
+var DeleteFHIRDatastoreResponse = &handles[431]
+var DeleteFHIRDatastoreResponse_DatastoreId = &handles[432]
+var DeleteFHIRDatastoreResponse_DatastoreArn = &handles[433]
+var DeleteFHIRDatastoreResponse_DatastoreStatus = &handles[434]
+var DeleteFHIRDatastoreResponse_DatastoreEndpoint = &handles[435]
+
+var DescribeDataTransformationJobRequest = &handles[436]
+var DescribeDataTransformationJobRequest_JobId = &handles[437]
+
+var DescribeDataTransformationJobResponse = &handles[438]
+var DescribeDataTransformationJobResponse_TransformationJobProperties = &handles[439]
+
+var DescribeFHIRDatastoreRequest = &handles[440]
+var DescribeFHIRDatastoreRequest_DatastoreId = &handles[441]
+
+var DescribeFHIRDatastoreResponse = &handles[442]
+var DescribeFHIRDatastoreResponse_DatastoreProperties = &handles[443]
+
+var DescribeFHIRExportJobRequest = &handles[444]
+var DescribeFHIRExportJobRequest_DatastoreId = &handles[445]
+var DescribeFHIRExportJobRequest_JobId = &handles[446]
+
+var DescribeFHIRExportJobResponse = &handles[447]
+var DescribeFHIRExportJobResponse_ExportJobProperties = &handles[448]
+
+var DescribeFHIRImportJobRequest = &handles[449]
+var DescribeFHIRImportJobRequest_DatastoreId = &handles[450]
+var DescribeFHIRImportJobRequest_JobId = &handles[451]
+
+var DescribeFHIRImportJobResponse = &handles[452]
+var DescribeFHIRImportJobResponse_ImportJobProperties = &handles[453]
+
+var GetDataTransformationProfileRequest = &handles[454]
+var GetDataTransformationProfileRequest_ProfileId = &handles[455]
+var GetDataTransformationProfileRequest_ProfileVersion = &handles[456]
+
+var GetDataTransformationProfileResponse = &handles[457]
+var GetDataTransformationProfileResponse_ProfileId = &handles[458]
+var GetDataTransformationProfileResponse_Version = &handles[459]
+var GetDataTransformationProfileResponse_SourceFormat = &handles[460]
+var GetDataTransformationProfileResponse_TargetFormat = &handles[461]
+var GetDataTransformationProfileResponse_ProfileMapping = &handles[462]
+var GetDataTransformationProfileResponse_ProfileName = &handles[463]
+var GetDataTransformationProfileResponse_ProfileDescription = &handles[464]
+var GetDataTransformationProfileResponse_ChangeDescription = &handles[465]
+var GetDataTransformationProfileResponse_LastUpdatedAt = &handles[466]
+
+var ListDataTransformationJobsRequest = &handles[467]
+var ListDataTransformationJobsRequest_MaxResults = &handles[468]
+var ListDataTransformationJobsRequest_NextToken = &handles[469]
+var ListDataTransformationJobsRequest_JobStatus = &handles[470]
+var ListDataTransformationJobsRequest_JobName = &handles[471]
+var ListDataTransformationJobsRequest_SubmittedAfter = &handles[472]
+var ListDataTransformationJobsRequest_SubmittedBefore = &handles[473]
+
+var ListDataTransformationJobsResponse = &handles[474]
+var ListDataTransformationJobsResponse_Items = &handles[475]
+var ListDataTransformationJobsResponse_NextToken = &handles[476]
+
+var ListDataTransformationProfilesRequest = &handles[477]
+var ListDataTransformationProfilesRequest_SourceFormat = &handles[478]
+var ListDataTransformationProfilesRequest_MaxResults = &handles[479]
+var ListDataTransformationProfilesRequest_NextToken = &handles[480]
+
+var ListDataTransformationProfilesResponse = &handles[481]
+var ListDataTransformationProfilesResponse_Items = &handles[482]
+var ListDataTransformationProfilesResponse_NextToken = &handles[483]
+
+var ListDataTransformationProfileVersionsRequest = &handles[484]
+var ListDataTransformationProfileVersionsRequest_ProfileId = &handles[485]
+var ListDataTransformationProfileVersionsRequest_MaxResults = &handles[486]
+var ListDataTransformationProfileVersionsRequest_NextToken = &handles[487]
+
+var ListDataTransformationProfileVersionsResponse = &handles[488]
+var ListDataTransformationProfileVersionsResponse_Items = &handles[489]
+var ListDataTransformationProfileVersionsResponse_NextToken = &handles[490]
+
+var ListFHIRDatastoresRequest = &handles[491]
+var ListFHIRDatastoresRequest_Filter = &handles[492]
+var ListFHIRDatastoresRequest_NextToken = &handles[493]
+var ListFHIRDatastoresRequest_MaxResults = &handles[494]
+
+var ListFHIRDatastoresResponse = &handles[495]
+var ListFHIRDatastoresResponse_DatastorePropertiesList = &handles[496]
+var ListFHIRDatastoresResponse_NextToken = &handles[497]
+
+var ListFHIRExportJobsRequest = &handles[498]
+var ListFHIRExportJobsRequest_DatastoreId = &handles[499]
+var ListFHIRExportJobsRequest_NextToken = &handles[500]
+var ListFHIRExportJobsRequest_MaxResults = &handles[501]
+var ListFHIRExportJobsRequest_JobName = &handles[502]
+var ListFHIRExportJobsRequest_JobStatus = &handles[503]
+var ListFHIRExportJobsRequest_SubmittedBefore = &handles[504]
+var ListFHIRExportJobsRequest_SubmittedAfter = &handles[505]
+
+var ListFHIRExportJobsResponse = &handles[506]
+var ListFHIRExportJobsResponse_ExportJobPropertiesList = &handles[507]
+var ListFHIRExportJobsResponse_NextToken = &handles[508]
+
+var ListFHIRImportJobsRequest = &handles[509]
+var ListFHIRImportJobsRequest_DatastoreId = &handles[510]
+var ListFHIRImportJobsRequest_NextToken = &handles[511]
+var ListFHIRImportJobsRequest_MaxResults = &handles[512]
+var ListFHIRImportJobsRequest_JobName = &handles[513]
+var ListFHIRImportJobsRequest_JobStatus = &handles[514]
+var ListFHIRImportJobsRequest_SubmittedBefore = &handles[515]
+var ListFHIRImportJobsRequest_SubmittedAfter = &handles[516]
+
+var ListFHIRImportJobsResponse = &handles[517]
+var ListFHIRImportJobsResponse_ImportJobPropertiesList = &handles[518]
+var ListFHIRImportJobsResponse_NextToken = &handles[519]
+
+var ListTagsForResourceRequest = &handles[520]
+var ListTagsForResourceRequest_ResourceARN = &handles[521]
+
+var ListTagsForResourceResponse = &handles[522]
+var ListTagsForResourceResponse_Tags = &handles[523]
+
+var PublishDataTransformationProfileRequest = &handles[524]
+var PublishDataTransformationProfileRequest_ProfileId = &handles[525]
+var PublishDataTransformationProfileRequest_SourceFormat = &handles[526]
+var PublishDataTransformationProfileRequest_FromExistingVersion = &handles[527]
+var PublishDataTransformationProfileRequest_ChangeDescription = &handles[528]
+
+var PublishDataTransformationProfileResponse = &handles[529]
+var PublishDataTransformationProfileResponse_ProfileId = &handles[530]
+var PublishDataTransformationProfileResponse_Version = &handles[531]
+var PublishDataTransformationProfileResponse_SourceFormat = &handles[532]
+var PublishDataTransformationProfileResponse_TargetFormat = &handles[533]
+var PublishDataTransformationProfileResponse_ProfileName = &handles[534]
+var PublishDataTransformationProfileResponse_LastUpdatedAt = &handles[535]
+
+var RestoreFHIRDatastoreRequest = &handles[536]
+var RestoreFHIRDatastoreRequest_SourceDatastoreId = &handles[537]
+var RestoreFHIRDatastoreRequest_RestoreConfiguration = &handles[538]
+var RestoreFHIRDatastoreRequest_DatastoreName = &handles[539]
+var RestoreFHIRDatastoreRequest_SseConfiguration = &handles[540]
+var RestoreFHIRDatastoreRequest_ClientToken = &handles[541]
+var RestoreFHIRDatastoreRequest_Tags = &handles[542]
+var RestoreFHIRDatastoreRequest_IdentityProviderConfiguration = &handles[543]
+var RestoreFHIRDatastoreRequest_AnalyticsConfiguration = &handles[544]
+var RestoreFHIRDatastoreRequest_NlpConfiguration = &handles[545]
+var RestoreFHIRDatastoreRequest_ProfileConfiguration = &handles[546]
+
+var RestoreFHIRDatastoreResponse = &handles[547]
+var RestoreFHIRDatastoreResponse_DatastoreId = &handles[548]
+var RestoreFHIRDatastoreResponse_DatastoreArn = &handles[549]
+var RestoreFHIRDatastoreResponse_DatastoreStatus = &handles[550]
+var RestoreFHIRDatastoreResponse_DatastoreEndpoint = &handles[551]
+
+var StartDataTransformationJobRequest = &handles[552]
+var StartDataTransformationJobRequest_InputDataConfig = &handles[553]
+var StartDataTransformationJobRequest_OutputDataConfig = &handles[554]
+var StartDataTransformationJobRequest_DataAccessRoleArn = &handles[555]
+var StartDataTransformationJobRequest_ClientToken = &handles[556]
+var StartDataTransformationJobRequest_JobName = &handles[557]
+var StartDataTransformationJobRequest_ProfileId = &handles[558]
+var StartDataTransformationJobRequest_DriftDetectionEnabled = &handles[559]
+var StartDataTransformationJobRequest_ProvenanceEnabled = &handles[560]
+
+var StartDataTransformationJobResponse = &handles[561]
+var StartDataTransformationJobResponse_JobId = &handles[562]
+var StartDataTransformationJobResponse_JobStatus = &handles[563]
+
+var StartFHIRExportJobRequest = &handles[564]
+var StartFHIRExportJobRequest_JobName = &handles[565]
+var StartFHIRExportJobRequest_OutputDataConfig = &handles[566]
+var StartFHIRExportJobRequest_DatastoreId = &handles[567]
+var StartFHIRExportJobRequest_DataAccessRoleArn = &handles[568]
+var StartFHIRExportJobRequest_ClientToken = &handles[569]
+
+var StartFHIRExportJobResponse = &handles[570]
+var StartFHIRExportJobResponse_JobId = &handles[571]
+var StartFHIRExportJobResponse_JobStatus = &handles[572]
+var StartFHIRExportJobResponse_DatastoreId = &handles[573]
+
+var StartFHIRImportJobRequest = &handles[574]
+var StartFHIRImportJobRequest_JobName = &handles[575]
+var StartFHIRImportJobRequest_InputDataConfig = &handles[576]
+var StartFHIRImportJobRequest_JobOutputDataConfig = &handles[577]
+var StartFHIRImportJobRequest_DatastoreId = &handles[578]
+var StartFHIRImportJobRequest_DataAccessRoleArn = &handles[579]
+var StartFHIRImportJobRequest_ClientToken = &handles[580]
+var StartFHIRImportJobRequest_ValidationLevel = &handles[581]
+var StartFHIRImportJobRequest_ProfileId = &handles[582]
+var StartFHIRImportJobRequest_InputFormat = &handles[583]
+var StartFHIRImportJobRequest_DriftDetectionEnabled = &handles[584]
+var StartFHIRImportJobRequest_ProvenanceEnabled = &handles[585]
+
+var StartFHIRImportJobResponse = &handles[586]
+var StartFHIRImportJobResponse_JobId = &handles[587]
+var StartFHIRImportJobResponse_JobStatus = &handles[588]
+var StartFHIRImportJobResponse_DatastoreId = &handles[589]
+
+var TagResourceRequest = &handles[590]
+var TagResourceRequest_ResourceARN = &handles[591]
+var TagResourceRequest_Tags = &handles[592]
+
+var TagResourceResponse = &handles[593]
+
+var UntagResourceRequest = &handles[594]
+var UntagResourceRequest_ResourceARN = &handles[595]
+var UntagResourceRequest_TagKeys = &handles[596]
+
+var UntagResourceResponse = &handles[597]
+
+var UpdateDataTransformationProfileRequest = &handles[598]
+var UpdateDataTransformationProfileRequest_ProfileId = &handles[599]
+var UpdateDataTransformationProfileRequest_ProfileMapping = &handles[600]
+var UpdateDataTransformationProfileRequest_ChangeDescription = &handles[601]
+
+var UpdateDataTransformationProfileResponse = &handles[602]
+var UpdateDataTransformationProfileResponse_ProfileId = &handles[603]
+var UpdateDataTransformationProfileResponse_SourceFormat = &handles[604]
+var UpdateDataTransformationProfileResponse_TargetFormat = &handles[605]
+var UpdateDataTransformationProfileResponse_ProfileName = &handles[606]
+var UpdateDataTransformationProfileResponse_LastUpdatedAt = &handles[607]
+
+var UpdateFHIRDatastoreRequest = &handles[608]
+var UpdateFHIRDatastoreRequest_DatastoreId = &handles[609]
+var UpdateFHIRDatastoreRequest_DatastoreName = &handles[610]
+var UpdateFHIRDatastoreRequest_AnalyticsConfiguration = &handles[611]
+var UpdateFHIRDatastoreRequest_NlpConfiguration = &handles[612]
+var UpdateFHIRDatastoreRequest_ProfileConfiguration = &handles[613]
+var UpdateFHIRDatastoreRequest_IdentityProviderConfiguration = &handles[614]
+var UpdateFHIRDatastoreRequest_BackupConfiguration = &handles[615]
+
+var UpdateFHIRDatastoreResponse = &handles[616]
+var UpdateFHIRDatastoreResponse_DatastoreProperties = &handles[617]
+
+var UpdateProfileWithAgentRequest = &handles[618]
+var UpdateProfileWithAgentRequest_ProfileId = &handles[619]
+var UpdateProfileWithAgentRequest_InputMessage = &handles[620]
+var UpdateProfileWithAgentRequest_ConversationId = &handles[621]
+
+var UpdateProfileWithAgentResponse = &handles[622]
+var UpdateProfileWithAgentResponse_AgentResponse = &handles[623]
+
+var HealthLake = &smithy.ServiceSchema{Schema: &handles[26], Version: "2017-07-01"}

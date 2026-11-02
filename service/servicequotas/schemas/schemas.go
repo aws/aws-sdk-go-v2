@@ -4,1754 +4,1474 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateServiceQuotaTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AssociateServiceQuotaTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSupportCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "CreateSupportCase",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteServiceQuotaIncreaseRequestFromTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DeleteServiceQuotaIncreaseRequestFromTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateServiceQuotaTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DisassociateServiceQuotaTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAssociationForServiceQuotaTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAssociationForServiceQuotaTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAutoManagementConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAutoManagementConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAWSDefaultServiceQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAWSDefaultServiceQuota",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetQuotaUtilizationReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetQuotaUtilizationReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRequestedServiceQuotaChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetRequestedServiceQuotaChange",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetServiceQuota",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceQuotaIncreaseRequestFromTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetServiceQuotaIncreaseRequestFromTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAWSDefaultServiceQuotas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListAWSDefaultServiceQuotas",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRequestedServiceQuotaChangeHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListRequestedServiceQuotaChangeHistory",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRequestedServiceQuotaChangeHistoryByQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListRequestedServiceQuotaChangeHistoryByQuota",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServiceQuotaIncreaseRequestsInTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServiceQuotaIncreaseRequestsInTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServiceQuotas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServiceQuotas",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServices",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutServiceQuotaIncreaseRequestIntoTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "PutServiceQuotaIncreaseRequestIntoTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var RequestServiceQuotaIncrease = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "RequestServiceQuotaIncrease",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartAutoManagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StartAutoManagement",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartQuotaUtilizationReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StartQuotaUtilizationReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopAutoManagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StopAutoManagement",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAutoManagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "UpdateAutoManagement",
-}, smithy.ShapeTypeOperation, 0)
-
-var _ServiceQuotasV20190624 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceQuotasV20190624",
-}, smithy.ShapeTypeService, 0)
-
-var ServiceQuotasV20190624 = smithy.NewServiceSchema(_ServiceQuotasV20190624, "2019-06-24")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AdjustableAtLevelEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AdjustableAtLevelEnum",
-}, smithy.ShapeTypeEnum, 3)
-var AdjustableAtLevelEnum_ACCOUNT *smithy.Schema
-
-var AdjustableAtLevelEnum_PER_RESOURCE *smithy.Schema
-
-var AdjustableAtLevelEnum_ALL *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var AppliedLevelEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AppliedLevelEnum",
-}, smithy.ShapeTypeEnum, 3)
-var AppliedLevelEnum_ACCOUNT *smithy.Schema
-
-var AppliedLevelEnum_RESOURCE *smithy.Schema
-
-var AppliedLevelEnum_ALL *smithy.Schema
-
-var _AppliedValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AppliedValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _AwsRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AwsRegion",
-}, smithy.ShapeTypeString, 0)
-
-var AWSServiceAccessNotEnabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AWSServiceAccessNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AWSServiceAccessNotEnabledException_Message *smithy.Schema
-
-var _CustomerServiceEngagementId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "CustomerServiceEngagementId",
-}, smithy.ShapeTypeString, 0)
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DefaultValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DefaultValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var DependencyAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DependencyAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var DependencyAccessDeniedException_Message *smithy.Schema
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 4)
-var ErrorCode_DEPENDENCY_ACCESS_DENIED_ERROR *smithy.Schema
-
-var ErrorCode_DEPENDENCY_THROTTLING_ERROR *smithy.Schema
-
-var ErrorCode_DEPENDENCY_SERVICE_ERROR *smithy.Schema
-
-var ErrorCode_SERVICE_QUOTA_NOT_AVAILABLE_ERROR *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ErrorReason",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorReason_ErrorCode *smithy.Schema
-
-var ErrorReason_ErrorMessage *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExcludedLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ExcludedLimit",
-}, smithy.ShapeTypeString, 0)
-
-var _ExcludedQuotaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ExcludedQuotaList",
-}, smithy.ShapeTypeList, 1)
-var _ExcludedQuotaList_member *smithy.Schema
-
-var _ExcludedService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ExcludedService",
-}, smithy.ShapeTypeString, 0)
-
-var _ExclusionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ExclusionList",
-}, smithy.ShapeTypeMap, 2)
-var _ExclusionList_key *smithy.Schema
-
-var _ExclusionList_value *smithy.Schema
-
-var _ExclusionQuotaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ExclusionQuotaList",
-}, smithy.ShapeTypeMap, 2)
-var _ExclusionQuotaList_key *smithy.Schema
-
-var _ExclusionQuotaList_value *smithy.Schema
-
-var _GlobalQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GlobalQuota",
-}, smithy.ShapeTypeBoolean, 0)
-
-var IllegalArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "IllegalArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var IllegalArgumentException_Message *smithy.Schema
-
-var _InputTagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "InputTagKeys",
-}, smithy.ShapeTypeList, 1)
-var _InputTagKeys_member *smithy.Schema
-
-var _InputTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "InputTags",
-}, smithy.ShapeTypeList, 1)
-var _InputTags_member *smithy.Schema
-
-var InvalidPaginationTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "InvalidPaginationTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidPaginationTokenException_Message *smithy.Schema
-
-var InvalidResourceStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "InvalidResourceStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 405})
-var InvalidResourceStateException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsUtilization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "MaxResultsUtilization",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MetricDimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "MetricDimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricDimensionsMapDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "MetricDimensionsMapDefinition",
-}, smithy.ShapeTypeMap, 2)
-var _MetricDimensionsMapDefinition_key *smithy.Schema
-
-var _MetricDimensionsMapDefinition_value *smithy.Schema
-
-var _MetricDimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "MetricDimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var MetricInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "MetricInfo",
-}, smithy.ShapeTypeStructure, 4)
-var MetricInfo_MetricNamespace *smithy.Schema
-
-var MetricInfo_MetricName *smithy.Schema
-
-var MetricInfo_MetricDimensions *smithy.Schema
-
-var MetricInfo_MetricStatisticRecommendation *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoAvailableOrganizationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "NoAvailableOrganizationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var NoAvailableOrganizationException_Message *smithy.Schema
-
-var NoSuchResourceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "NoSuchResourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NoSuchResourceException_Message *smithy.Schema
-
-var OptInLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "OptInLevel",
-}, smithy.ShapeTypeEnum, 1)
-var OptInLevel_ACCOUNT *smithy.Schema
-
-var OptInStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "OptInStatus",
-}, smithy.ShapeTypeEnum, 2)
-var OptInStatus_ENABLED *smithy.Schema
-
-var OptInStatus_DISABLED *smithy.Schema
-
-var OptInType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "OptInType",
-}, smithy.ShapeTypeEnum, 2)
-var OptInType_NotifyOnly *smithy.Schema
-
-var OptInType_NotifyAndAdjust *smithy.Schema
-
-var OrganizationNotInAllFeaturesModeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "OrganizationNotInAllFeaturesModeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var OrganizationNotInAllFeaturesModeException_Message *smithy.Schema
-
-var _OutputTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "OutputTags",
-}, smithy.ShapeTypeList, 1)
-var _OutputTags_member *smithy.Schema
-
-var PeriodUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "PeriodUnit",
-}, smithy.ShapeTypeEnum, 7)
-var PeriodUnit_MICROSECOND *smithy.Schema
-
-var PeriodUnit_MILLISECOND *smithy.Schema
-
-var PeriodUnit_SECOND *smithy.Schema
-
-var PeriodUnit_MINUTE *smithy.Schema
-
-var PeriodUnit_HOUR *smithy.Schema
-
-var PeriodUnit_DAY *smithy.Schema
-
-var PeriodUnit_WEEK *smithy.Schema
-
-var _PeriodValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "PeriodValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var _QuotaAdjustable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaAdjustable",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _QuotaArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaArn",
-}, smithy.ShapeTypeString, 0)
-
-var _QuotaCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaCode",
-}, smithy.ShapeTypeString, 0)
-
-var _QuotaContextId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaContextId",
-}, smithy.ShapeTypeString, 0)
-
-var QuotaContextInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaContextInfo",
-}, smithy.ShapeTypeStructure, 4)
-var QuotaContextInfo_ContextScope *smithy.Schema
-
-var QuotaContextInfo_ContextScopeType *smithy.Schema
-
-var QuotaContextInfo_ContextId *smithy.Schema
-
-var QuotaContextInfo_AdjustableAtLevel *smithy.Schema
-
-var QuotaContextScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaContextScope",
-}, smithy.ShapeTypeEnum, 2)
-var QuotaContextScope_RESOURCE *smithy.Schema
-
-var QuotaContextScope_ACCOUNT *smithy.Schema
-
-var _QuotaContextScopeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaContextScopeType",
-}, smithy.ShapeTypeString, 0)
-
-var _QuotaDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaDescription",
-}, smithy.ShapeTypeString, 0)
-
-var QuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var QuotaExceededException_Message *smithy.Schema
-
-var QuotaInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaInfo",
-}, smithy.ShapeTypeStructure, 2)
-var QuotaInfo_QuotaCode *smithy.Schema
-
-var QuotaInfo_QuotaName *smithy.Schema
-
-var _QuotaInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaInfoList",
-}, smithy.ShapeTypeList, 1)
-var _QuotaInfoList_member *smithy.Schema
-
-var _QuotaMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaMetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _QuotaMetricNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaMetricNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var _QuotaName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaName",
-}, smithy.ShapeTypeString, 0)
-
-var QuotaPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var QuotaPeriod_PeriodValue *smithy.Schema
-
-var QuotaPeriod_PeriodUnit *smithy.Schema
-
-var _QuotaUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaUnit",
-}, smithy.ShapeTypeString, 0)
-
-var QuotaUtilizationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaUtilizationInfo",
-}, smithy.ShapeTypeStructure, 9)
-var QuotaUtilizationInfo_QuotaCode *smithy.Schema
-
-var QuotaUtilizationInfo_ServiceCode *smithy.Schema
-
-var QuotaUtilizationInfo_QuotaName *smithy.Schema
-
-var QuotaUtilizationInfo_Namespace *smithy.Schema
-
-var QuotaUtilizationInfo_Utilization *smithy.Schema
-
-var QuotaUtilizationInfo_DefaultValue *smithy.Schema
-
-var QuotaUtilizationInfo_AppliedValue *smithy.Schema
-
-var QuotaUtilizationInfo_ServiceName *smithy.Schema
-
-var QuotaUtilizationInfo_Adjustable *smithy.Schema
-
-var _QuotaUtilizationInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaUtilizationInfoList",
-}, smithy.ShapeTypeList, 1)
-var _QuotaUtilizationInfoList_member *smithy.Schema
-
-var _QuotaValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "QuotaValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _ReportErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ReportErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ReportErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ReportErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ReportId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ReportId",
-}, smithy.ShapeTypeString, 0)
-
-var _ReportMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ReportMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ReportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ReportStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ReportStatus_PENDING *smithy.Schema
-
-var ReportStatus_IN_PROGRESS *smithy.Schema
-
-var ReportStatus_COMPLETED *smithy.Schema
-
-var ReportStatus_FAILED *smithy.Schema
-
-var RequestedServiceQuotaChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "RequestedServiceQuotaChange",
-}, smithy.ShapeTypeStructure, 17)
-var RequestedServiceQuotaChange_Id *smithy.Schema
-
-var RequestedServiceQuotaChange_RequestType *smithy.Schema
-
-var RequestedServiceQuotaChange_CaseId *smithy.Schema
-
-var RequestedServiceQuotaChange_ServiceCode *smithy.Schema
-
-var RequestedServiceQuotaChange_ServiceName *smithy.Schema
-
-var RequestedServiceQuotaChange_QuotaCode *smithy.Schema
-
-var RequestedServiceQuotaChange_QuotaName *smithy.Schema
-
-var RequestedServiceQuotaChange_DesiredValue *smithy.Schema
-
-var RequestedServiceQuotaChange_Status *smithy.Schema
-
-var RequestedServiceQuotaChange_Created *smithy.Schema
-
-var RequestedServiceQuotaChange_LastUpdated *smithy.Schema
-
-var RequestedServiceQuotaChange_Requester *smithy.Schema
-
-var RequestedServiceQuotaChange_QuotaArn *smithy.Schema
-
-var RequestedServiceQuotaChange_GlobalQuota *smithy.Schema
-
-var RequestedServiceQuotaChange_Unit *smithy.Schema
-
-var RequestedServiceQuotaChange_QuotaRequestedAtLevel *smithy.Schema
-
-var RequestedServiceQuotaChange_QuotaContext *smithy.Schema
-
-var _RequestedServiceQuotaChangeHistoryListDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "RequestedServiceQuotaChangeHistoryListDefinition",
-}, smithy.ShapeTypeList, 1)
-var _RequestedServiceQuotaChangeHistoryListDefinition_member *smithy.Schema
-
-var _Requester = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "Requester",
-}, smithy.ShapeTypeString, 0)
-
-var _RequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "RequestId",
-}, smithy.ShapeTypeString, 0)
-
-var RequestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "RequestStatus",
-}, smithy.ShapeTypeEnum, 7)
-var RequestStatus_PENDING *smithy.Schema
-
-var RequestStatus_CASE_OPENED *smithy.Schema
-
-var RequestStatus_APPROVED *smithy.Schema
-
-var RequestStatus_DENIED *smithy.Schema
-
-var RequestStatus_CASE_CLOSED *smithy.Schema
-
-var RequestStatus_NOT_APPROVED *smithy.Schema
-
-var RequestStatus_INVALID_REQUEST *smithy.Schema
-
-var RequestType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "RequestType",
-}, smithy.ShapeTypeEnum, 1)
-var RequestType_AutomaticManagement *smithy.Schema
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServiceException_Message *smithy.Schema
-
-var ServiceInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceInfo_ServiceCode *smithy.Schema
-
-var ServiceInfo_ServiceName *smithy.Schema
-
-var _ServiceInfoListDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceInfoListDefinition",
-}, smithy.ShapeTypeList, 1)
-var _ServiceInfoListDefinition_member *smithy.Schema
-
-var _ServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceQuota",
-}, smithy.ShapeTypeStructure, 15)
-var ServiceQuota_ServiceCode *smithy.Schema
-
-var ServiceQuota_ServiceName *smithy.Schema
-
-var ServiceQuota_QuotaArn *smithy.Schema
-
-var ServiceQuota_QuotaCode *smithy.Schema
-
-var ServiceQuota_QuotaName *smithy.Schema
-
-var ServiceQuota_Value *smithy.Schema
-
-var ServiceQuota_Unit *smithy.Schema
-
-var ServiceQuota_Adjustable *smithy.Schema
-
-var ServiceQuota_GlobalQuota *smithy.Schema
-
-var ServiceQuota_UsageMetric *smithy.Schema
-
-var ServiceQuota_Period *smithy.Schema
-
-var ServiceQuota_ErrorReason *smithy.Schema
-
-var ServiceQuota_QuotaAppliedAtLevel *smithy.Schema
-
-var ServiceQuota_QuotaContext *smithy.Schema
-
-var ServiceQuota_Description *smithy.Schema
-
-var ServiceQuotaIncreaseRequestInTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceQuotaIncreaseRequestInTemplate",
-}, smithy.ShapeTypeStructure, 8)
-var ServiceQuotaIncreaseRequestInTemplate_ServiceCode *smithy.Schema
-
-var ServiceQuotaIncreaseRequestInTemplate_ServiceName *smithy.Schema
-
-var ServiceQuotaIncreaseRequestInTemplate_QuotaCode *smithy.Schema
-
-var ServiceQuotaIncreaseRequestInTemplate_QuotaName *smithy.Schema
-
-var ServiceQuotaIncreaseRequestInTemplate_DesiredValue *smithy.Schema
-
-var ServiceQuotaIncreaseRequestInTemplate_AwsRegion *smithy.Schema
-
-var ServiceQuotaIncreaseRequestInTemplate_Unit *smithy.Schema
-
-var ServiceQuotaIncreaseRequestInTemplate_GlobalQuota *smithy.Schema
-
-var _ServiceQuotaIncreaseRequestInTemplateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceQuotaIncreaseRequestInTemplateList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceQuotaIncreaseRequestInTemplateList_member *smithy.Schema
-
-var _ServiceQuotaListDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceQuotaListDefinition",
-}, smithy.ShapeTypeList, 1)
-var _ServiceQuotaListDefinition_member *smithy.Schema
-
-var ServiceQuotaTemplateAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceQuotaTemplateAssociationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ServiceQuotaTemplateAssociationStatus_ASSOCIATED *smithy.Schema
-
-var ServiceQuotaTemplateAssociationStatus_DISASSOCIATED *smithy.Schema
-
-var ServiceQuotaTemplateNotInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ServiceQuotaTemplateNotInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ServiceQuotaTemplateNotInUseException_Message *smithy.Schema
-
-var _Statistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "Statistic",
-}, smithy.ShapeTypeString, 0)
-
-var _SupportCaseAllowed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "SupportCaseAllowed",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var TagPolicyViolationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TagPolicyViolationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var TagPolicyViolationException_Message *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TemplatesNotAvailableInRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TemplatesNotAvailableInRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var TemplatesNotAvailableInRegionException_Message *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var _TotalCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TotalCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _UtilizationPct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "UtilizationPct",
-}, smithy.ShapeTypeDouble, 0)
-
-var AssociateServiceQuotaTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AssociateServiceQuotaTemplateRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateServiceQuotaTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "AssociateServiceQuotaTemplateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateSupportCaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "CreateSupportCaseRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSupportCaseRequest_RequestId *smithy.Schema
-
-var CreateSupportCaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "CreateSupportCaseResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteServiceQuotaIncreaseRequestFromTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DeleteServiceQuotaIncreaseRequestFromTemplateRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode *smithy.Schema
-
-var DeleteServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode *smithy.Schema
-
-var DeleteServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion *smithy.Schema
-
-var DeleteServiceQuotaIncreaseRequestFromTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DeleteServiceQuotaIncreaseRequestFromTemplateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateServiceQuotaTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DisassociateServiceQuotaTemplateRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateServiceQuotaTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "DisassociateServiceQuotaTemplateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAssociationForServiceQuotaTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAssociationForServiceQuotaTemplateRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAssociationForServiceQuotaTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAssociationForServiceQuotaTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus *smithy.Schema
-
-var GetAutoManagementConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAutoManagementConfigurationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAutoManagementConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAutoManagementConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetAutoManagementConfigurationResponse_OptInLevel *smithy.Schema
-
-var GetAutoManagementConfigurationResponse_OptInType *smithy.Schema
-
-var GetAutoManagementConfigurationResponse_NotificationArn *smithy.Schema
-
-var GetAutoManagementConfigurationResponse_OptInStatus *smithy.Schema
-
-var GetAutoManagementConfigurationResponse_ExclusionList *smithy.Schema
-
-var GetAWSDefaultServiceQuotaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAWSDefaultServiceQuotaRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAWSDefaultServiceQuotaRequest_ServiceCode *smithy.Schema
-
-var GetAWSDefaultServiceQuotaRequest_QuotaCode *smithy.Schema
-
-var GetAWSDefaultServiceQuotaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetAWSDefaultServiceQuotaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAWSDefaultServiceQuotaResponse_Quota *smithy.Schema
-
-var GetQuotaUtilizationReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetQuotaUtilizationReportRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetQuotaUtilizationReportRequest_ReportId *smithy.Schema
-
-var GetQuotaUtilizationReportRequest_NextToken *smithy.Schema
-
-var GetQuotaUtilizationReportRequest_MaxResults *smithy.Schema
-
-var GetQuotaUtilizationReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetQuotaUtilizationReportResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetQuotaUtilizationReportResponse_ReportId *smithy.Schema
-
-var GetQuotaUtilizationReportResponse_Status *smithy.Schema
-
-var GetQuotaUtilizationReportResponse_GeneratedAt *smithy.Schema
-
-var GetQuotaUtilizationReportResponse_TotalCount *smithy.Schema
-
-var GetQuotaUtilizationReportResponse_Quotas *smithy.Schema
-
-var GetQuotaUtilizationReportResponse_NextToken *smithy.Schema
-
-var GetQuotaUtilizationReportResponse_ErrorCode *smithy.Schema
-
-var GetQuotaUtilizationReportResponse_ErrorMessage *smithy.Schema
-
-var GetRequestedServiceQuotaChangeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetRequestedServiceQuotaChangeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRequestedServiceQuotaChangeRequest_RequestId *smithy.Schema
-
-var GetRequestedServiceQuotaChangeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetRequestedServiceQuotaChangeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRequestedServiceQuotaChangeResponse_RequestedQuota *smithy.Schema
-
-var GetServiceQuotaIncreaseRequestFromTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetServiceQuotaIncreaseRequestFromTemplateRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode *smithy.Schema
-
-var GetServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode *smithy.Schema
-
-var GetServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion *smithy.Schema
-
-var GetServiceQuotaIncreaseRequestFromTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetServiceQuotaIncreaseRequestFromTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate *smithy.Schema
-
-var GetServiceQuotaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetServiceQuotaRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetServiceQuotaRequest_ServiceCode *smithy.Schema
-
-var GetServiceQuotaRequest_QuotaCode *smithy.Schema
-
-var GetServiceQuotaRequest_ContextId *smithy.Schema
-
-var GetServiceQuotaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "GetServiceQuotaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceQuotaResponse_Quota *smithy.Schema
-
-var ListAWSDefaultServiceQuotasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListAWSDefaultServiceQuotasRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAWSDefaultServiceQuotasRequest_ServiceCode *smithy.Schema
-
-var ListAWSDefaultServiceQuotasRequest_NextToken *smithy.Schema
-
-var ListAWSDefaultServiceQuotasRequest_MaxResults *smithy.Schema
-
-var ListAWSDefaultServiceQuotasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListAWSDefaultServiceQuotasResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAWSDefaultServiceQuotasResponse_NextToken *smithy.Schema
-
-var ListAWSDefaultServiceQuotasResponse_Quotas *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryByQuotaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListRequestedServiceQuotaChangeHistoryByQuotaRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_ServiceCode *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaCode *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_Status *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_NextToken *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_MaxResults *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaRequestedAtLevel *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryByQuotaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListRequestedServiceQuotaChangeHistoryByQuotaResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListRequestedServiceQuotaChangeHistoryRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListRequestedServiceQuotaChangeHistoryRequest_ServiceCode *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryRequest_Status *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryRequest_NextToken *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryRequest_MaxResults *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryRequest_QuotaRequestedAtLevel *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListRequestedServiceQuotaChangeHistoryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRequestedServiceQuotaChangeHistoryResponse_NextToken *smithy.Schema
-
-var ListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas *smithy.Schema
-
-var ListServiceQuotaIncreaseRequestsInTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServiceQuotaIncreaseRequestsInTemplateRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceQuotaIncreaseRequestsInTemplateRequest_ServiceCode *smithy.Schema
-
-var ListServiceQuotaIncreaseRequestsInTemplateRequest_AwsRegion *smithy.Schema
-
-var ListServiceQuotaIncreaseRequestsInTemplateRequest_NextToken *smithy.Schema
-
-var ListServiceQuotaIncreaseRequestsInTemplateRequest_MaxResults *smithy.Schema
-
-var ListServiceQuotaIncreaseRequestsInTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServiceQuotaIncreaseRequestsInTemplateResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList *smithy.Schema
-
-var ListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken *smithy.Schema
-
-var ListServiceQuotasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServiceQuotasRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListServiceQuotasRequest_ServiceCode *smithy.Schema
-
-var ListServiceQuotasRequest_NextToken *smithy.Schema
-
-var ListServiceQuotasRequest_MaxResults *smithy.Schema
-
-var ListServiceQuotasRequest_QuotaCode *smithy.Schema
-
-var ListServiceQuotasRequest_QuotaAppliedAtLevel *smithy.Schema
-
-var ListServiceQuotasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServiceQuotasResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceQuotasResponse_NextToken *smithy.Schema
-
-var ListServiceQuotasResponse_Quotas *smithy.Schema
-
-var ListServicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServicesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesRequest_NextToken *smithy.Schema
-
-var ListServicesRequest_MaxResults *smithy.Schema
-
-var ListServicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListServicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesResponse_NextToken *smithy.Schema
-
-var ListServicesResponse_Services *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutServiceQuotaIncreaseRequestIntoTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "PutServiceQuotaIncreaseRequestIntoTemplateRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutServiceQuotaIncreaseRequestIntoTemplateRequest_QuotaCode *smithy.Schema
-
-var PutServiceQuotaIncreaseRequestIntoTemplateRequest_ServiceCode *smithy.Schema
-
-var PutServiceQuotaIncreaseRequestIntoTemplateRequest_AwsRegion *smithy.Schema
-
-var PutServiceQuotaIncreaseRequestIntoTemplateRequest_DesiredValue *smithy.Schema
-
-var PutServiceQuotaIncreaseRequestIntoTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "PutServiceQuotaIncreaseRequestIntoTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutServiceQuotaIncreaseRequestIntoTemplateResponse_ServiceQuotaIncreaseRequestInTemplate *smithy.Schema
-
-var RequestServiceQuotaIncreaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "RequestServiceQuotaIncreaseRequest",
-}, smithy.ShapeTypeStructure, 5)
-var RequestServiceQuotaIncreaseRequest_ServiceCode *smithy.Schema
-
-var RequestServiceQuotaIncreaseRequest_QuotaCode *smithy.Schema
-
-var RequestServiceQuotaIncreaseRequest_DesiredValue *smithy.Schema
-
-var RequestServiceQuotaIncreaseRequest_ContextId *smithy.Schema
-
-var RequestServiceQuotaIncreaseRequest_SupportCaseAllowed *smithy.Schema
-
-var RequestServiceQuotaIncreaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "RequestServiceQuotaIncreaseResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RequestServiceQuotaIncreaseResponse_RequestedQuota *smithy.Schema
-
-var StartAutoManagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StartAutoManagementRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartAutoManagementRequest_OptInLevel *smithy.Schema
-
-var StartAutoManagementRequest_OptInType *smithy.Schema
-
-var StartAutoManagementRequest_NotificationArn *smithy.Schema
-
-var StartAutoManagementRequest_ExclusionList *smithy.Schema
-
-var StartAutoManagementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StartAutoManagementResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartQuotaUtilizationReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StartQuotaUtilizationReportRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartQuotaUtilizationReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StartQuotaUtilizationReportResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartQuotaUtilizationReportResponse_ReportId *smithy.Schema
-
-var StartQuotaUtilizationReportResponse_Status *smithy.Schema
-
-var StartQuotaUtilizationReportResponse_Message *smithy.Schema
-
-var StopAutoManagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StopAutoManagementRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopAutoManagementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "StopAutoManagementResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAutoManagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "UpdateAutoManagementRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateAutoManagementRequest_OptInType *smithy.Schema
-
-var UpdateAutoManagementRequest_NotificationArn *smithy.Schema
-
-var UpdateAutoManagementRequest_ExclusionList *smithy.Schema
-
-var UpdateAutoManagementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicequotas",
-	Name:      "UpdateAutoManagementResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessage)
-
-	AdjustableAtLevelEnum_ACCOUNT = AdjustableAtLevelEnum.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	AdjustableAtLevelEnum_PER_RESOURCE = AdjustableAtLevelEnum.AddMember("PER_RESOURCE", smithyprelude.Unit)
-
-	AdjustableAtLevelEnum_ALL = AdjustableAtLevelEnum.AddMember("ALL", smithyprelude.Unit)
-
-	AppliedLevelEnum_ACCOUNT = AppliedLevelEnum.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	AppliedLevelEnum_RESOURCE = AppliedLevelEnum.AddMember("RESOURCE", smithyprelude.Unit)
-
-	AppliedLevelEnum_ALL = AppliedLevelEnum.AddMember("ALL", smithyprelude.Unit)
-
-	AWSServiceAccessNotEnabledException_Message = AWSServiceAccessNotEnabledException.AddMember("Message", _ExceptionMessage)
-
-	DependencyAccessDeniedException_Message = DependencyAccessDeniedException.AddMember("Message", _ExceptionMessage)
-
-	ErrorCode_DEPENDENCY_ACCESS_DENIED_ERROR = ErrorCode.AddMember("DEPENDENCY_ACCESS_DENIED_ERROR", smithyprelude.Unit)
-
-	ErrorCode_DEPENDENCY_THROTTLING_ERROR = ErrorCode.AddMember("DEPENDENCY_THROTTLING_ERROR", smithyprelude.Unit)
-
-	ErrorCode_DEPENDENCY_SERVICE_ERROR = ErrorCode.AddMember("DEPENDENCY_SERVICE_ERROR", smithyprelude.Unit)
-
-	ErrorCode_SERVICE_QUOTA_NOT_AVAILABLE_ERROR = ErrorCode.AddMember("SERVICE_QUOTA_NOT_AVAILABLE_ERROR", smithyprelude.Unit)
-
-	ErrorReason_ErrorCode = ErrorReason.AddMember("ErrorCode", ErrorCode)
-
-	ErrorReason_ErrorMessage = ErrorReason.AddMember("ErrorMessage", _ErrorMessage)
-
-	_ExcludedQuotaList_member = _ExcludedQuotaList.AddMember("member", _ExcludedLimit)
-
-	_ExclusionList_key = _ExclusionList.AddMember("key", _ExcludedService)
-
-	_ExclusionList_value = _ExclusionList.AddMember("value", _ExcludedQuotaList)
-
-	QuotaInfo_QuotaCode = QuotaInfo.AddMember("QuotaCode", _QuotaCode)
-
-	QuotaInfo_QuotaName = QuotaInfo.AddMember("QuotaName", _QuotaName)
-
-	_QuotaInfoList_member = _QuotaInfoList.AddMember("member", QuotaInfo)
-
-	_ExclusionQuotaList_key = _ExclusionQuotaList.AddMember("key", _ExcludedService)
-
-	_ExclusionQuotaList_value = _ExclusionQuotaList.AddMember("value", _QuotaInfoList)
-
-	IllegalArgumentException_Message = IllegalArgumentException.AddMember("Message", _ExceptionMessage)
-
-	_InputTagKeys_member = _InputTagKeys.AddMember("member", _TagKey)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_InputTags_member = _InputTags.AddMember("member", Tag)
-
-	InvalidPaginationTokenException_Message = InvalidPaginationTokenException.AddMember("Message", _ExceptionMessage)
-
-	InvalidResourceStateException_Message = InvalidResourceStateException.AddMember("Message", _ExceptionMessage)
-
-	_MetricDimensionsMapDefinition_key = _MetricDimensionsMapDefinition.AddMember("key", _MetricDimensionName)
-
-	_MetricDimensionsMapDefinition_value = _MetricDimensionsMapDefinition.AddMember("value", _MetricDimensionValue)
-
-	MetricInfo_MetricNamespace = MetricInfo.AddMember("MetricNamespace", _QuotaMetricNamespace)
-
-	MetricInfo_MetricName = MetricInfo.AddMember("MetricName", _QuotaMetricName)
-
-	MetricInfo_MetricDimensions = MetricInfo.AddMember("MetricDimensions", _MetricDimensionsMapDefinition)
-
-	MetricInfo_MetricStatisticRecommendation = MetricInfo.AddMember("MetricStatisticRecommendation", _Statistic)
-
-	NoAvailableOrganizationException_Message = NoAvailableOrganizationException.AddMember("Message", _ExceptionMessage)
-
-	NoSuchResourceException_Message = NoSuchResourceException.AddMember("Message", _ExceptionMessage)
-
-	OptInLevel_ACCOUNT = OptInLevel.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	OptInStatus_ENABLED = OptInStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	OptInStatus_DISABLED = OptInStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	OptInType_NotifyOnly = OptInType.AddMember("NotifyOnly", smithyprelude.Unit)
-
-	OptInType_NotifyAndAdjust = OptInType.AddMember("NotifyAndAdjust", smithyprelude.Unit)
-
-	OrganizationNotInAllFeaturesModeException_Message = OrganizationNotInAllFeaturesModeException.AddMember("Message", _ExceptionMessage)
-
-	_OutputTags_member = _OutputTags.AddMember("member", Tag)
-
-	PeriodUnit_MICROSECOND = PeriodUnit.AddMember("MICROSECOND", smithyprelude.Unit)
-
-	PeriodUnit_MILLISECOND = PeriodUnit.AddMember("MILLISECOND", smithyprelude.Unit)
-
-	PeriodUnit_SECOND = PeriodUnit.AddMember("SECOND", smithyprelude.Unit)
-
-	PeriodUnit_MINUTE = PeriodUnit.AddMember("MINUTE", smithyprelude.Unit)
-
-	PeriodUnit_HOUR = PeriodUnit.AddMember("HOUR", smithyprelude.Unit)
-
-	PeriodUnit_DAY = PeriodUnit.AddMember("DAY", smithyprelude.Unit)
-
-	PeriodUnit_WEEK = PeriodUnit.AddMember("WEEK", smithyprelude.Unit)
-
-	QuotaContextScope_RESOURCE = QuotaContextScope.AddMember("RESOURCE", smithyprelude.Unit)
-
-	QuotaContextScope_ACCOUNT = QuotaContextScope.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	QuotaContextInfo_ContextScope = QuotaContextInfo.AddMember("ContextScope", QuotaContextScope)
-
-	QuotaContextInfo_ContextScopeType = QuotaContextInfo.AddMember("ContextScopeType", _QuotaContextScopeType)
-
-	QuotaContextInfo_ContextId = QuotaContextInfo.AddMember("ContextId", _QuotaContextId)
-
-	QuotaContextInfo_AdjustableAtLevel = QuotaContextInfo.AddMember("AdjustableAtLevel", AdjustableAtLevelEnum)
-
-	QuotaExceededException_Message = QuotaExceededException.AddMember("Message", _ExceptionMessage)
-
-	QuotaPeriod_PeriodValue = QuotaPeriod.AddMember("PeriodValue", _PeriodValue)
-
-	QuotaPeriod_PeriodUnit = QuotaPeriod.AddMember("PeriodUnit", PeriodUnit)
-
-	QuotaUtilizationInfo_QuotaCode = QuotaUtilizationInfo.AddMember("QuotaCode", _QuotaCode)
-
-	QuotaUtilizationInfo_ServiceCode = QuotaUtilizationInfo.AddMember("ServiceCode", _ServiceCode)
-
-	QuotaUtilizationInfo_QuotaName = QuotaUtilizationInfo.AddMember("QuotaName", _QuotaName)
-
-	QuotaUtilizationInfo_Namespace = QuotaUtilizationInfo.AddMember("Namespace", _QuotaMetricNamespace)
-
-	QuotaUtilizationInfo_Utilization = QuotaUtilizationInfo.AddMember("Utilization", _UtilizationPct)
-
-	QuotaUtilizationInfo_DefaultValue = QuotaUtilizationInfo.AddMember("DefaultValue", _DefaultValue)
-
-	QuotaUtilizationInfo_AppliedValue = QuotaUtilizationInfo.AddMember("AppliedValue", _AppliedValue)
-
-	QuotaUtilizationInfo_ServiceName = QuotaUtilizationInfo.AddMember("ServiceName", _ServiceName)
-
-	QuotaUtilizationInfo_Adjustable = QuotaUtilizationInfo.AddMember("Adjustable", _QuotaAdjustable)
-
-	_QuotaUtilizationInfoList_member = _QuotaUtilizationInfoList.AddMember("member", QuotaUtilizationInfo)
-
-	ReportStatus_PENDING = ReportStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ReportStatus_IN_PROGRESS = ReportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ReportStatus_COMPLETED = ReportStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ReportStatus_FAILED = ReportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	RequestType_AutomaticManagement = RequestType.AddMember("AutomaticManagement", smithyprelude.Unit)
-
-	RequestStatus_PENDING = RequestStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	RequestStatus_CASE_OPENED = RequestStatus.AddMember("CASE_OPENED", smithyprelude.Unit)
-
-	RequestStatus_APPROVED = RequestStatus.AddMember("APPROVED", smithyprelude.Unit)
-
-	RequestStatus_DENIED = RequestStatus.AddMember("DENIED", smithyprelude.Unit)
-
-	RequestStatus_CASE_CLOSED = RequestStatus.AddMember("CASE_CLOSED", smithyprelude.Unit)
-
-	RequestStatus_NOT_APPROVED = RequestStatus.AddMember("NOT_APPROVED", smithyprelude.Unit)
-
-	RequestStatus_INVALID_REQUEST = RequestStatus.AddMember("INVALID_REQUEST", smithyprelude.Unit)
-
-	RequestedServiceQuotaChange_Id = RequestedServiceQuotaChange.AddMember("Id", _RequestId)
-
-	RequestedServiceQuotaChange_RequestType = RequestedServiceQuotaChange.AddMember("RequestType", RequestType)
-
-	RequestedServiceQuotaChange_CaseId = RequestedServiceQuotaChange.AddMember("CaseId", _CustomerServiceEngagementId)
-
-	RequestedServiceQuotaChange_ServiceCode = RequestedServiceQuotaChange.AddMember("ServiceCode", _ServiceCode)
-
-	RequestedServiceQuotaChange_ServiceName = RequestedServiceQuotaChange.AddMember("ServiceName", _ServiceName)
-
-	RequestedServiceQuotaChange_QuotaCode = RequestedServiceQuotaChange.AddMember("QuotaCode", _QuotaCode)
-
-	RequestedServiceQuotaChange_QuotaName = RequestedServiceQuotaChange.AddMember("QuotaName", _QuotaName)
-
-	RequestedServiceQuotaChange_DesiredValue = RequestedServiceQuotaChange.AddMember("DesiredValue", _QuotaValue)
-
-	RequestedServiceQuotaChange_Status = RequestedServiceQuotaChange.AddMember("Status", RequestStatus)
-
-	RequestedServiceQuotaChange_Created = RequestedServiceQuotaChange.AddMember("Created", _DateTime)
-
-	RequestedServiceQuotaChange_LastUpdated = RequestedServiceQuotaChange.AddMember("LastUpdated", _DateTime)
-
-	RequestedServiceQuotaChange_Requester = RequestedServiceQuotaChange.AddMember("Requester", _Requester)
-
-	RequestedServiceQuotaChange_QuotaArn = RequestedServiceQuotaChange.AddMember("QuotaArn", _QuotaArn)
-
-	RequestedServiceQuotaChange_GlobalQuota = RequestedServiceQuotaChange.AddMember("GlobalQuota", _GlobalQuota)
-
-	RequestedServiceQuotaChange_Unit = RequestedServiceQuotaChange.AddMember("Unit", _QuotaUnit)
-
-	RequestedServiceQuotaChange_QuotaRequestedAtLevel = RequestedServiceQuotaChange.AddMember("QuotaRequestedAtLevel", AppliedLevelEnum)
-
-	RequestedServiceQuotaChange_QuotaContext = RequestedServiceQuotaChange.AddMember("QuotaContext", QuotaContextInfo)
-
-	_RequestedServiceQuotaChangeHistoryListDefinition_member = _RequestedServiceQuotaChangeHistoryListDefinition.AddMember("member", RequestedServiceQuotaChange)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _ExceptionMessage)
-
-	ServiceException_Message = ServiceException.AddMember("Message", _ExceptionMessage)
-
-	ServiceInfo_ServiceCode = ServiceInfo.AddMember("ServiceCode", _ServiceCode)
-
-	ServiceInfo_ServiceName = ServiceInfo.AddMember("ServiceName", _ServiceName)
-
-	_ServiceInfoListDefinition_member = _ServiceInfoListDefinition.AddMember("member", ServiceInfo)
-
-	ServiceQuota_ServiceCode = ServiceQuota.AddMember("ServiceCode", _ServiceCode)
-
-	ServiceQuota_ServiceName = ServiceQuota.AddMember("ServiceName", _ServiceName)
-
-	ServiceQuota_QuotaArn = ServiceQuota.AddMember("QuotaArn", _QuotaArn)
-
-	ServiceQuota_QuotaCode = ServiceQuota.AddMember("QuotaCode", _QuotaCode)
-
-	ServiceQuota_QuotaName = ServiceQuota.AddMember("QuotaName", _QuotaName)
-
-	ServiceQuota_Value = ServiceQuota.AddMember("Value", _QuotaValue)
-
-	ServiceQuota_Unit = ServiceQuota.AddMember("Unit", _QuotaUnit)
-
-	ServiceQuota_Adjustable = ServiceQuota.AddMember("Adjustable", _QuotaAdjustable)
-
-	ServiceQuota_GlobalQuota = ServiceQuota.AddMember("GlobalQuota", _GlobalQuota)
-
-	ServiceQuota_UsageMetric = ServiceQuota.AddMember("UsageMetric", MetricInfo)
-
-	ServiceQuota_Period = ServiceQuota.AddMember("Period", QuotaPeriod)
-
-	ServiceQuota_ErrorReason = ServiceQuota.AddMember("ErrorReason", ErrorReason)
-
-	ServiceQuota_QuotaAppliedAtLevel = ServiceQuota.AddMember("QuotaAppliedAtLevel", AppliedLevelEnum)
-
-	ServiceQuota_QuotaContext = ServiceQuota.AddMember("QuotaContext", QuotaContextInfo)
-
-	ServiceQuota_Description = ServiceQuota.AddMember("Description", _QuotaDescription)
-
-	ServiceQuotaIncreaseRequestInTemplate_ServiceCode = ServiceQuotaIncreaseRequestInTemplate.AddMember("ServiceCode", _ServiceCode)
-
-	ServiceQuotaIncreaseRequestInTemplate_ServiceName = ServiceQuotaIncreaseRequestInTemplate.AddMember("ServiceName", _ServiceName)
-
-	ServiceQuotaIncreaseRequestInTemplate_QuotaCode = ServiceQuotaIncreaseRequestInTemplate.AddMember("QuotaCode", _QuotaCode)
-
-	ServiceQuotaIncreaseRequestInTemplate_QuotaName = ServiceQuotaIncreaseRequestInTemplate.AddMember("QuotaName", _QuotaName)
-
-	ServiceQuotaIncreaseRequestInTemplate_DesiredValue = ServiceQuotaIncreaseRequestInTemplate.AddMember("DesiredValue", _QuotaValue)
-
-	ServiceQuotaIncreaseRequestInTemplate_AwsRegion = ServiceQuotaIncreaseRequestInTemplate.AddMember("AwsRegion", _AwsRegion)
-
-	ServiceQuotaIncreaseRequestInTemplate_Unit = ServiceQuotaIncreaseRequestInTemplate.AddMember("Unit", _QuotaUnit)
-
-	ServiceQuotaIncreaseRequestInTemplate_GlobalQuota = ServiceQuotaIncreaseRequestInTemplate.AddMember("GlobalQuota", _GlobalQuota)
-
-	_ServiceQuotaIncreaseRequestInTemplateList_member = _ServiceQuotaIncreaseRequestInTemplateList.AddMember("member", ServiceQuotaIncreaseRequestInTemplate)
-
-	_ServiceQuotaListDefinition_member = _ServiceQuotaListDefinition.AddMember("member", ServiceQuota)
-
-	ServiceQuotaTemplateAssociationStatus_ASSOCIATED = ServiceQuotaTemplateAssociationStatus.AddMember("ASSOCIATED", smithyprelude.Unit)
-
-	ServiceQuotaTemplateAssociationStatus_DISASSOCIATED = ServiceQuotaTemplateAssociationStatus.AddMember("DISASSOCIATED", smithyprelude.Unit)
-
-	ServiceQuotaTemplateNotInUseException_Message = ServiceQuotaTemplateNotInUseException.AddMember("Message", _ExceptionMessage)
-
-	TagPolicyViolationException_Message = TagPolicyViolationException.AddMember("Message", _ExceptionMessage)
-
-	TemplatesNotAvailableInRegionException_Message = TemplatesNotAvailableInRegionException.AddMember("Message", _ExceptionMessage)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _ExceptionMessage)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _ExceptionMessage)
-
-	CreateSupportCaseRequest_RequestId = CreateSupportCaseRequest.AddMember("RequestId", _RequestId)
-
-	DeleteServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode = DeleteServiceQuotaIncreaseRequestFromTemplateRequest.AddMember("ServiceCode", _ServiceCode)
-
-	DeleteServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode = DeleteServiceQuotaIncreaseRequestFromTemplateRequest.AddMember("QuotaCode", _QuotaCode)
-
-	DeleteServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion = DeleteServiceQuotaIncreaseRequestFromTemplateRequest.AddMember("AwsRegion", _AwsRegion)
-
-	GetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus = GetAssociationForServiceQuotaTemplateResponse.AddMember("ServiceQuotaTemplateAssociationStatus", ServiceQuotaTemplateAssociationStatus)
-
-	GetAutoManagementConfigurationResponse_OptInLevel = GetAutoManagementConfigurationResponse.AddMember("OptInLevel", OptInLevel)
-
-	GetAutoManagementConfigurationResponse_OptInType = GetAutoManagementConfigurationResponse.AddMember("OptInType", OptInType)
-
-	GetAutoManagementConfigurationResponse_NotificationArn = GetAutoManagementConfigurationResponse.AddMember("NotificationArn", _AmazonResourceName)
-
-	GetAutoManagementConfigurationResponse_OptInStatus = GetAutoManagementConfigurationResponse.AddMember("OptInStatus", OptInStatus)
-
-	GetAutoManagementConfigurationResponse_ExclusionList = GetAutoManagementConfigurationResponse.AddMember("ExclusionList", _ExclusionQuotaList)
-
-	GetAWSDefaultServiceQuotaRequest_ServiceCode = GetAWSDefaultServiceQuotaRequest.AddMember("ServiceCode", _ServiceCode)
-
-	GetAWSDefaultServiceQuotaRequest_QuotaCode = GetAWSDefaultServiceQuotaRequest.AddMember("QuotaCode", _QuotaCode)
-
-	GetAWSDefaultServiceQuotaResponse_Quota = GetAWSDefaultServiceQuotaResponse.AddMember("Quota", ServiceQuota)
-
-	GetQuotaUtilizationReportRequest_ReportId = GetQuotaUtilizationReportRequest.AddMember("ReportId", _ReportId)
-
-	GetQuotaUtilizationReportRequest_NextToken = GetQuotaUtilizationReportRequest.AddMember("NextToken", _NextToken)
-
-	GetQuotaUtilizationReportRequest_MaxResults = GetQuotaUtilizationReportRequest.AddMember("MaxResults", _MaxResultsUtilization)
-
-	GetQuotaUtilizationReportResponse_ReportId = GetQuotaUtilizationReportResponse.AddMember("ReportId", _ReportId)
-
-	GetQuotaUtilizationReportResponse_Status = GetQuotaUtilizationReportResponse.AddMember("Status", ReportStatus)
-
-	GetQuotaUtilizationReportResponse_GeneratedAt = GetQuotaUtilizationReportResponse.AddMember("GeneratedAt", _DateTime)
-
-	GetQuotaUtilizationReportResponse_TotalCount = GetQuotaUtilizationReportResponse.AddMember("TotalCount", _TotalCount)
-
-	GetQuotaUtilizationReportResponse_Quotas = GetQuotaUtilizationReportResponse.AddMember("Quotas", _QuotaUtilizationInfoList)
-
-	GetQuotaUtilizationReportResponse_NextToken = GetQuotaUtilizationReportResponse.AddMember("NextToken", _NextToken)
-
-	GetQuotaUtilizationReportResponse_ErrorCode = GetQuotaUtilizationReportResponse.AddMember("ErrorCode", _ReportErrorCode)
-
-	GetQuotaUtilizationReportResponse_ErrorMessage = GetQuotaUtilizationReportResponse.AddMember("ErrorMessage", _ReportErrorMessage)
-
-	GetRequestedServiceQuotaChangeRequest_RequestId = GetRequestedServiceQuotaChangeRequest.AddMember("RequestId", _RequestId)
-
-	GetRequestedServiceQuotaChangeResponse_RequestedQuota = GetRequestedServiceQuotaChangeResponse.AddMember("RequestedQuota", RequestedServiceQuotaChange)
-
-	GetServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode = GetServiceQuotaIncreaseRequestFromTemplateRequest.AddMember("ServiceCode", _ServiceCode)
-
-	GetServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode = GetServiceQuotaIncreaseRequestFromTemplateRequest.AddMember("QuotaCode", _QuotaCode)
-
-	GetServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion = GetServiceQuotaIncreaseRequestFromTemplateRequest.AddMember("AwsRegion", _AwsRegion)
-
-	GetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate = GetServiceQuotaIncreaseRequestFromTemplateResponse.AddMember("ServiceQuotaIncreaseRequestInTemplate", ServiceQuotaIncreaseRequestInTemplate)
-
-	GetServiceQuotaRequest_ServiceCode = GetServiceQuotaRequest.AddMember("ServiceCode", _ServiceCode)
-
-	GetServiceQuotaRequest_QuotaCode = GetServiceQuotaRequest.AddMember("QuotaCode", _QuotaCode)
-
-	GetServiceQuotaRequest_ContextId = GetServiceQuotaRequest.AddMember("ContextId", _QuotaContextId)
-
-	GetServiceQuotaResponse_Quota = GetServiceQuotaResponse.AddMember("Quota", ServiceQuota)
-
-	ListAWSDefaultServiceQuotasRequest_ServiceCode = ListAWSDefaultServiceQuotasRequest.AddMember("ServiceCode", _ServiceCode)
-
-	ListAWSDefaultServiceQuotasRequest_NextToken = ListAWSDefaultServiceQuotasRequest.AddMember("NextToken", _NextToken)
-
-	ListAWSDefaultServiceQuotasRequest_MaxResults = ListAWSDefaultServiceQuotasRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAWSDefaultServiceQuotasResponse_NextToken = ListAWSDefaultServiceQuotasResponse.AddMember("NextToken", _NextToken)
-
-	ListAWSDefaultServiceQuotasResponse_Quotas = ListAWSDefaultServiceQuotasResponse.AddMember("Quotas", _ServiceQuotaListDefinition)
-
-	ListRequestedServiceQuotaChangeHistoryByQuotaRequest_ServiceCode = ListRequestedServiceQuotaChangeHistoryByQuotaRequest.AddMember("ServiceCode", _ServiceCode)
-
-	ListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaCode = ListRequestedServiceQuotaChangeHistoryByQuotaRequest.AddMember("QuotaCode", _QuotaCode)
-
-	ListRequestedServiceQuotaChangeHistoryByQuotaRequest_Status = ListRequestedServiceQuotaChangeHistoryByQuotaRequest.AddMember("Status", RequestStatus)
-
-	ListRequestedServiceQuotaChangeHistoryByQuotaRequest_NextToken = ListRequestedServiceQuotaChangeHistoryByQuotaRequest.AddMember("NextToken", _NextToken)
-
-	ListRequestedServiceQuotaChangeHistoryByQuotaRequest_MaxResults = ListRequestedServiceQuotaChangeHistoryByQuotaRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaRequestedAtLevel = ListRequestedServiceQuotaChangeHistoryByQuotaRequest.AddMember("QuotaRequestedAtLevel", AppliedLevelEnum)
-
-	ListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken = ListRequestedServiceQuotaChangeHistoryByQuotaResponse.AddMember("NextToken", _NextToken)
-
-	ListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas = ListRequestedServiceQuotaChangeHistoryByQuotaResponse.AddMember("RequestedQuotas", _RequestedServiceQuotaChangeHistoryListDefinition)
-
-	ListRequestedServiceQuotaChangeHistoryRequest_ServiceCode = ListRequestedServiceQuotaChangeHistoryRequest.AddMember("ServiceCode", _ServiceCode)
-
-	ListRequestedServiceQuotaChangeHistoryRequest_Status = ListRequestedServiceQuotaChangeHistoryRequest.AddMember("Status", RequestStatus)
-
-	ListRequestedServiceQuotaChangeHistoryRequest_NextToken = ListRequestedServiceQuotaChangeHistoryRequest.AddMember("NextToken", _NextToken)
-
-	ListRequestedServiceQuotaChangeHistoryRequest_MaxResults = ListRequestedServiceQuotaChangeHistoryRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRequestedServiceQuotaChangeHistoryRequest_QuotaRequestedAtLevel = ListRequestedServiceQuotaChangeHistoryRequest.AddMember("QuotaRequestedAtLevel", AppliedLevelEnum)
-
-	ListRequestedServiceQuotaChangeHistoryResponse_NextToken = ListRequestedServiceQuotaChangeHistoryResponse.AddMember("NextToken", _NextToken)
-
-	ListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas = ListRequestedServiceQuotaChangeHistoryResponse.AddMember("RequestedQuotas", _RequestedServiceQuotaChangeHistoryListDefinition)
-
-	ListServiceQuotaIncreaseRequestsInTemplateRequest_ServiceCode = ListServiceQuotaIncreaseRequestsInTemplateRequest.AddMember("ServiceCode", _ServiceCode)
-
-	ListServiceQuotaIncreaseRequestsInTemplateRequest_AwsRegion = ListServiceQuotaIncreaseRequestsInTemplateRequest.AddMember("AwsRegion", _AwsRegion)
-
-	ListServiceQuotaIncreaseRequestsInTemplateRequest_NextToken = ListServiceQuotaIncreaseRequestsInTemplateRequest.AddMember("NextToken", _NextToken)
-
-	ListServiceQuotaIncreaseRequestsInTemplateRequest_MaxResults = ListServiceQuotaIncreaseRequestsInTemplateRequest.AddMember("MaxResults", _MaxResults)
-
-	ListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList = ListServiceQuotaIncreaseRequestsInTemplateResponse.AddMember("ServiceQuotaIncreaseRequestInTemplateList", _ServiceQuotaIncreaseRequestInTemplateList)
-
-	ListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken = ListServiceQuotaIncreaseRequestsInTemplateResponse.AddMember("NextToken", _NextToken)
-
-	ListServiceQuotasRequest_ServiceCode = ListServiceQuotasRequest.AddMember("ServiceCode", _ServiceCode)
-
-	ListServiceQuotasRequest_NextToken = ListServiceQuotasRequest.AddMember("NextToken", _NextToken)
-
-	ListServiceQuotasRequest_MaxResults = ListServiceQuotasRequest.AddMember("MaxResults", _MaxResults)
-
-	ListServiceQuotasRequest_QuotaCode = ListServiceQuotasRequest.AddMember("QuotaCode", _QuotaCode)
-
-	ListServiceQuotasRequest_QuotaAppliedAtLevel = ListServiceQuotasRequest.AddMember("QuotaAppliedAtLevel", AppliedLevelEnum)
-
-	ListServiceQuotasResponse_NextToken = ListServiceQuotasResponse.AddMember("NextToken", _NextToken)
-
-	ListServiceQuotasResponse_Quotas = ListServiceQuotasResponse.AddMember("Quotas", _ServiceQuotaListDefinition)
-
-	ListServicesRequest_NextToken = ListServicesRequest.AddMember("NextToken", _NextToken)
-
-	ListServicesRequest_MaxResults = ListServicesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListServicesResponse_NextToken = ListServicesResponse.AddMember("NextToken", _NextToken)
-
-	ListServicesResponse_Services = ListServicesResponse.AddMember("Services", _ServiceInfoListDefinition)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _OutputTags)
-
-	PutServiceQuotaIncreaseRequestIntoTemplateRequest_QuotaCode = PutServiceQuotaIncreaseRequestIntoTemplateRequest.AddMember("QuotaCode", _QuotaCode)
-
-	PutServiceQuotaIncreaseRequestIntoTemplateRequest_ServiceCode = PutServiceQuotaIncreaseRequestIntoTemplateRequest.AddMember("ServiceCode", _ServiceCode)
-
-	PutServiceQuotaIncreaseRequestIntoTemplateRequest_AwsRegion = PutServiceQuotaIncreaseRequestIntoTemplateRequest.AddMember("AwsRegion", _AwsRegion)
-
-	PutServiceQuotaIncreaseRequestIntoTemplateRequest_DesiredValue = PutServiceQuotaIncreaseRequestIntoTemplateRequest.AddMember("DesiredValue", _QuotaValue)
-
-	PutServiceQuotaIncreaseRequestIntoTemplateResponse_ServiceQuotaIncreaseRequestInTemplate = PutServiceQuotaIncreaseRequestIntoTemplateResponse.AddMember("ServiceQuotaIncreaseRequestInTemplate", ServiceQuotaIncreaseRequestInTemplate)
-
-	RequestServiceQuotaIncreaseRequest_ServiceCode = RequestServiceQuotaIncreaseRequest.AddMember("ServiceCode", _ServiceCode)
-
-	RequestServiceQuotaIncreaseRequest_QuotaCode = RequestServiceQuotaIncreaseRequest.AddMember("QuotaCode", _QuotaCode)
-
-	RequestServiceQuotaIncreaseRequest_DesiredValue = RequestServiceQuotaIncreaseRequest.AddMember("DesiredValue", _QuotaValue)
-
-	RequestServiceQuotaIncreaseRequest_ContextId = RequestServiceQuotaIncreaseRequest.AddMember("ContextId", _QuotaContextId)
-
-	RequestServiceQuotaIncreaseRequest_SupportCaseAllowed = RequestServiceQuotaIncreaseRequest.AddMember("SupportCaseAllowed", _SupportCaseAllowed)
-
-	RequestServiceQuotaIncreaseResponse_RequestedQuota = RequestServiceQuotaIncreaseResponse.AddMember("RequestedQuota", RequestedServiceQuotaChange)
-
-	StartAutoManagementRequest_OptInLevel = StartAutoManagementRequest.AddMember("OptInLevel", OptInLevel)
-
-	StartAutoManagementRequest_OptInType = StartAutoManagementRequest.AddMember("OptInType", OptInType)
-
-	StartAutoManagementRequest_NotificationArn = StartAutoManagementRequest.AddMember("NotificationArn", _AmazonResourceName)
-
-	StartAutoManagementRequest_ExclusionList = StartAutoManagementRequest.AddMember("ExclusionList", _ExclusionList)
-
-	StartQuotaUtilizationReportResponse_ReportId = StartQuotaUtilizationReportResponse.AddMember("ReportId", _ReportId)
-
-	StartQuotaUtilizationReportResponse_Status = StartQuotaUtilizationReportResponse.AddMember("Status", ReportStatus)
-
-	StartQuotaUtilizationReportResponse_Message = StartQuotaUtilizationReportResponse.AddMember("Message", _ReportMessage)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _InputTags)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _InputTagKeys)
-
-	UpdateAutoManagementRequest_OptInType = UpdateAutoManagementRequest.AddMember("OptInType", OptInType)
-
-	UpdateAutoManagementRequest_NotificationArn = UpdateAutoManagementRequest.AddMember("NotificationArn", _AmazonResourceName)
-
-	UpdateAutoManagementRequest_ExclusionList = UpdateAutoManagementRequest.AddMember("ExclusionList", _ExclusionList)
-
+const blob = "" +
+	"DeleteServiceQuotaIncreaseRequestFromTemplateResponseListRequestedServiceQuotaChangeHistoryByQuotaRe" +
+	"sponseDeleteServiceQuotaIncreaseRequestFromTemplateRequestListRequestedServiceQuotaChangeHistoryByQu" +
+	"otaRequestGetServiceQuotaIncreaseRequestFromTemplateResponseListServiceQuotaIncreaseRequestsInTempla" +
+	"teResponsePutServiceQuotaIncreaseRequestIntoTemplateResponseGetServiceQuotaIncreaseRequestFromTempla" +
+	"teRequestListServiceQuotaIncreaseRequestsInTemplateRequestPutServiceQuotaIncreaseRequestIntoTemplate" +
+	"RequestRequestedServiceQuotaChangeHistoryListDefinitionListRequestedServiceQuotaChangeHistoryRespons" +
+	"eGetAssociationForServiceQuotaTemplateResponseListRequestedServiceQuotaChangeHistoryRequestGetAssoci" +
+	"ationForServiceQuotaTemplateRequestOrganizationNotInAllFeaturesModeExceptionServiceQuotaIncreaseRequ" +
+	"estInTemplateListDisassociateServiceQuotaTemplateResponseDisassociateServiceQuotaTemplateRequestGetA" +
+	"utoManagementConfigurationResponseGetRequestedServiceQuotaChangeResponseTemplatesNotAvailableInRegio" +
+	"nExceptionAssociateServiceQuotaTemplateResponseGetAutoManagementConfigurationRequestGetRequestedServ" +
+	"iceQuotaChangeRequestServiceQuotaTemplateAssociationStatusServiceQuotaTemplateNotInUseExceptionAssoc" +
+	"iateServiceQuotaTemplateRequestAWSServiceAccessNotEnabledExceptionListAWSDefaultServiceQuotasRespons" +
+	"eRequestServiceQuotaIncreaseResponseStartQuotaUtilizationReportResponseListAWSDefaultServiceQuotasRe" +
+	"questRequestServiceQuotaIncreaseRequestStartQuotaUtilizationReportRequestGetAWSDefaultServiceQuotaRe" +
+	"sponseGetQuotaUtilizationReportResponseSERVICE_QUOTA_NOT_AVAILABLE_ERRORGetAWSDefaultServiceQuotaReq" +
+	"uestGetQuotaUtilizationReportRequestNoAvailableOrganizationExceptionDependencyAccessDeniedExceptionI" +
+	"nvalidPaginationTokenExceptionDEPENDENCY_ACCESS_DENIED_ERRORResourceAlreadyExistsExceptionInvalidRes" +
+	"ourceStateExceptionMetricDimensionsMapDefinitionMetricStatisticRecommendationUpdateAutoManagementRes" +
+	"ponseCustomerServiceEngagementIdDEPENDENCY_THROTTLING_ERRORListTagsForResourceResponseStartAutoManag" +
+	"ementResponseTagPolicyViolationExceptionUpdateAutoManagementRequestListTagsForResourceRequestService" +
+	"QuotaListDefinitionStartAutoManagementRequestStopAutoManagementResponseCreateSupportCaseResponseList" +
+	"ServiceQuotasResponseServiceInfoListDefinitionStopAutoManagementRequestCreateSupportCaseRequestDEPEN" +
+	"DENCY_SERVICE_ERRORIllegalArgumentExceptionListServiceQuotasRequestQuotaUtilizationInfoListTooManyRe" +
+	"questsExceptionGetServiceQuotaResponseNoSuchResourceExceptionGetServiceQuotaRequestQuotaExceededExce" +
+	"ptionServiceQuotasV20190624AdjustableAtLevelEnumMaxResultsUtilizationQuotaContextScopeTypeQuotaReque" +
+	"stedAtLevelUntagResourceResponseListServicesResponseMetricDimensionValueQuotaMetricNamespaceTooManyT" +
+	"agsExceptionUntagResourceRequestAutomaticManagementListServicesRequestMetricDimensionNameQuotaApplie" +
+	"dAtLevelTagResourceResponseAmazonResourceNameExclusionQuotaListReportErrorMessageSupportCaseAllowedT" +
+	"agResourceRequestExcludedQuotaListAppliedLevelEnumExceptionMessageQuotaContextInfoQuotaDescriptionSe" +
+	"rviceExceptionExcludedServiceINVALID_REQUESTNotificationArnNotifyAndAdjustQuotaAdjustableReportError" +
+	"CodeRequestedQuotasQuotaContextIdUtilizationPctDISASSOCIATEDExcludedLimitExclusionListQuotaInfoListR" +
+	"eportMessageRequestStatusAppliedValueDefaultValueDesiredValueInputTagKeysNOT_APPROVEDPER_RESOURCERep" +
+	"ortStatusCASE_CLOSEDCASE_OPENEDErrorReasonGeneratedAtGlobalQuotaIN_PROGRESSLastUpdatedMICROSECONDMIL" +
+	"LISECONDOptInStatusPeriodValueQuotaPeriodRequestTypeResourceARNServiceCodeServiceNameUsageMetricMetr" +
+	"icInfoNotifyOnlyOptInLevelOutputTagsPeriodUnitQuotaValueTotalCountAwsRegionCOMPLETEDInputTagsNextTok" +
+	"enOptInTypeQuotaCodeQuotaNameQuotaUnitRequestIdRequesterDISABLEDDateTimeQuotaArnReportIdTagValueACCO" +
+	"UNTCreatedENABLEDPENDINGCaseIdFAILEDMINUTEmembervalueHOURWEEKALLDAYkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.servicequotas", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1010, Target: 0, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2171, Target: 1, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 2, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 817, Target: 3, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 601, Target: 4, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 896, Target: 5, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1473, Target: 6, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1506, Target: 7, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 934, Target: 8, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 210, Target: 9, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 210, Target: 10, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1266, Target: 11, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 53, Target: 12, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 53, Target: 13, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 260, Target: 14, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2196, Target: 15, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2632, Target: 16, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1959, Target: 17, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 310, Target: 18, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1301, Target: 19, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1986, Target: 20, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1336, Target: 21, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2145, Target: 22, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2808, Target: 23, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2611, Target: 24, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1877, Target: 25, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2505, Target: 26, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1678, Target: 27, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2527, Target: 29, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3696, Target: 410, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3285, Target: 410, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3761, Target: 410, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2827, Target: 33, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2934, Target: 34, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3696, Target: 410, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3289, Target: 410, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3761, Target: 410, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3225, Target: 38, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 3566, Target: 39, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1231, Target: 40, Traits: 1, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1905, Target: 42, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3664, Target: 43, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 3237, Target: 44, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 1668, Target: 45, Traits: 1, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3095, Target: 47, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1730, Target: 410, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1932, Target: 410, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2295, Target: 410, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1539, Target: 410, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2869, Target: 52, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3331, Target: 53, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3095, Target: 47, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2869, Target: 52, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2950, Target: 56, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3160, Target: 57, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2917, Target: 58, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 57, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3014, Target: 60, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3173, Target: 61, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3767, Target: 60, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 58, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2845, Target: 64, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3767, Target: 60, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 135, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3353, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 2319, Target: 68, Traits: 2, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3261, Target: 70, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 248, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3584, Target: 72, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 245, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1699, Target: 74, Traits: 2, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1790, Target: 76, Traits: 3, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 78, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2548, Target: 79, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2770, Target: 80, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1819, Target: 81, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3767, Target: 80, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3748, Target: 84, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2652, Target: 84, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3496, Target: 85, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2677, Target: 138, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2677, Target: 137, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1819, Target: 81, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1848, Target: 243, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1636, Target: 91, Traits: 1, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2438, Target: 93, Traits: 4, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3516, Target: 95, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3696, Target: 410, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3408, Target: 97, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3710, Target: 410, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3656, Target: 410, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3602, Target: 100, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3506, Target: 410, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3059, Target: 410, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 735, Target: 103, Traits: 2, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3526, Target: 105, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 245, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3536, Target: 107, Traits: 0, StrLen: 10, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3386, Target: 410, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3397, Target: 410, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3391, Target: 410, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3736, Target: 410, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3753, Target: 410, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3764, Target: 410, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3757, Target: 410, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3419, Target: 115, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3074, Target: 116, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 3672, Target: 117, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3119, Target: 119, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2966, Target: 120, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2574, Target: 125, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2574, Target: 128, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3124, Target: 119, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2527, Target: 29, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2569, Target: 125, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3289, Target: 410, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3696, Target: 410, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2569, Target: 128, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2982, Target: 129, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2483, Target: 130, Traits: 5, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3186, Target: 132, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3620, Target: 139, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3186, Target: 135, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 132, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2672, Target: 137, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2672, Target: 138, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3620, Target: 139, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3430, Target: 140, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3419, Target: 115, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3536, Target: 107, Traits: 0, StrLen: 10, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3629, Target: 143, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2367, Target: 144, Traits: 0, StrLen: 20, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3620, Target: 139, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2683, Target: 138, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1346, Target: 259, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3237, Target: 44, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3225, Target: 38, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3474, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2527, Target: 116, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2367, Target: 154, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 144, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3546, Target: 156, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 3089, Target: 157, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2863, Target: 158, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3680, Target: 159, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3199, Target: 160, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3297, Target: 161, Traits: 0, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3717, Target: 410, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3364, Target: 410, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3575, Target: 410, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3730, Target: 410, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 57, Target: 166, Traits: 0, StrLen: 27, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1930, Target: 187, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3441, Target: 196, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3724, Target: 42, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3474, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3620, Target: 139, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3249, Target: 156, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1152, Target: 188, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3703, Target: 43, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3375, Target: 43, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3647, Target: 186, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3672, Target: 117, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3353, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3542, Target: 143, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2590, Target: 34, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2569, Target: 120, Traits: 0, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 507, Target: 184, Traits: 0, StrLen: 48, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 166, Traits: 0, StrLen: 6, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3647, Target: 186, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3638, Target: 187, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3212, Target: 188, Traits: 0, StrLen: 13, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3717, Target: 410, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3320, Target: 410, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3277, Target: 410, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1748, Target: 410, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3309, Target: 410, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3273, Target: 410, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3029, Target: 410, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3441, Target: 196, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2732, Target: 410, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1760, Target: 198, Traits: 2, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2998, Target: 201, Traits: 6, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2221, Target: 203, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3474, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2221, Target: 206, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 203, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3474, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6, Target: 209, Traits: 0, StrLen: 12, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3474, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3672, Target: 117, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3620, Target: 139, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2667, Target: 156, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3542, Target: 143, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2527, Target: 116, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3353, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3485, Target: 85, Traits: 0, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3419, Target: 140, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3331, Target: 53, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2789, Target: 34, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2569, Target: 120, Traits: 0, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2987, Target: 129, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 776, Target: 225, Traits: 0, StrLen: 37, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3474, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3620, Target: 139, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3249, Target: 156, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3566, Target: 39, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3542, Target: 143, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3353, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 776, Target: 234, Traits: 0, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 225, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2093, Target: 236, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3742, Target: 209, Traits: 0, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1121, Target: 238, Traits: 0, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3150, Target: 410, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3147, Target: 410, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1158, Target: 241, Traits: 2, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1854, Target: 243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2881, Target: 244, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1963, Target: 245, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3269, Target: 248, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2667, Target: 251, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3266, Target: 248, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2013, Target: 249, Traits: 7, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3688, Target: 251, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 972, Target: 252, Traits: 4, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2391, Target: 254, Traits: 8, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2692, Target: 256, Traits: 2, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2874, Target: 56, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3556, Target: 258, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3133, Target: 259, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 1195, Target: 260, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1010, Target: 261, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2271, Target: 262, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3638, Target: 187, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2171, Target: 264, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 106, Target: 265, Traits: 0, StrLen: 52, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3566, Target: 39, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 269, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 857, Target: 270, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 817, Target: 271, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 691, Target: 272, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 601, Target: 273, Traits: 0, StrLen: 45, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1121, Target: 238, Traits: 0, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1047, Target: 275, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 896, Target: 276, Traits: 0, StrLen: 38, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3516, Target: 95, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3602, Target: 100, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3044, Target: 33, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3408, Target: 97, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3173, Target: 64, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1572, Target: 282, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1473, Target: 285, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13, Target: 209, Traits: 0, StrLen: 5, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1604, Target: 287, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3680, Target: 159, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 79, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1506, Target: 291, Traits: 0, StrLen: 33, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3680, Target: 159, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1152, Target: 161, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3342, Target: 43, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3556, Target: 258, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1287, Target: 154, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3095, Target: 157, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2869, Target: 158, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1084, Target: 300, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3638, Target: 187, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 934, Target: 302, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3104, Target: 166, Traits: 0, StrLen: 14, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 360, Target: 304, Traits: 0, StrLen: 49, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3566, Target: 39, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 210, Target: 308, Traits: 0, StrLen: 50, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 776, Target: 225, Traits: 0, StrLen: 37, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2461, Target: 310, Traits: 0, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3124, Target: 119, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2415, Target: 314, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13, Target: 209, Traits: 0, StrLen: 5, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1371, Target: 316, Traits: 0, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 78, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1266, Target: 320, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1287, Target: 236, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 158, Target: 323, Traits: 0, StrLen: 52, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1152, Target: 188, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 78, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2590, Target: 34, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 53, Target: 330, Traits: 0, StrLen: 53, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3104, Target: 184, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 646, Target: 333, Traits: 0, StrLen: 45, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1152, Target: 188, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 78, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2590, Target: 34, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 555, Target: 339, Traits: 0, StrLen: 46, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3104, Target: 184, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 409, Target: 342, Traits: 0, StrLen: 49, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3566, Target: 39, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 78, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 260, Target: 347, Traits: 0, StrLen: 50, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 776, Target: 234, Traits: 0, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2343, Target: 350, Traits: 0, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 78, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2789, Target: 34, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2196, Target: 356, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1287, Target: 236, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2751, Target: 359, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 78, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2632, Target: 362, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 90, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 206, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2067, Target: 365, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3452, Target: 33, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1959, Target: 367, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1963, Target: 105, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 458, Target: 369, Traits: 0, StrLen: 49, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3566, Target: 39, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3249, Target: 156, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 310, Target: 374, Traits: 0, StrLen: 50, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 776, Target: 225, Traits: 0, StrLen: 37, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1405, Target: 376, Traits: 0, StrLen: 34, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3463, Target: 200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3611, Target: 118, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3249, Target: 156, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3124, Target: 119, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2881, Target: 244, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1301, Target: 382, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3104, Target: 166, Traits: 0, StrLen: 14, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2119, Target: 384, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3516, Target: 95, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3602, Target: 100, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3044, Target: 33, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3173, Target: 61, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1986, Target: 389, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1439, Target: 390, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1336, Target: 391, Traits: 0, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3680, Target: 159, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1152, Target: 161, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2874, Target: 160, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2246, Target: 395, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2145, Target: 396, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 397, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3452, Target: 33, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1963, Target: 72, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2808, Target: 400, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2712, Target: 401, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3452, Target: 33, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3266, Target: 70, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2611, Target: 404, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2040, Target: 405, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3602, Target: 100, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3044, Target: 33, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3173, Target: 61, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1877, Target: 409, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3542, Target: 410, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 405}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [411]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+}
+
+var AssociateServiceQuotaTemplate = &handles[0]
+
+var CreateSupportCase = &handles[1]
+
+var DeleteServiceQuotaIncreaseRequestFromTemplate = &handles[2]
+
+var DisassociateServiceQuotaTemplate = &handles[3]
+
+var GetAssociationForServiceQuotaTemplate = &handles[4]
+
+var GetAutoManagementConfiguration = &handles[5]
+
+var GetAWSDefaultServiceQuota = &handles[6]
+
+var GetQuotaUtilizationReport = &handles[7]
+
+var GetRequestedServiceQuotaChange = &handles[8]
+
+var GetServiceQuota = &handles[9]
+
+var GetServiceQuotaIncreaseRequestFromTemplate = &handles[10]
+
+var ListAWSDefaultServiceQuotas = &handles[11]
+
+var ListRequestedServiceQuotaChangeHistory = &handles[12]
+
+var ListRequestedServiceQuotaChangeHistoryByQuota = &handles[13]
+
+var ListServiceQuotaIncreaseRequestsInTemplate = &handles[14]
+
+var ListServiceQuotas = &handles[15]
+
+var ListServices = &handles[16]
+
+var ListTagsForResource = &handles[17]
+
+var PutServiceQuotaIncreaseRequestIntoTemplate = &handles[18]
+
+var RequestServiceQuotaIncrease = &handles[19]
+
+var StartAutoManagement = &handles[20]
+
+var StartQuotaUtilizationReport = &handles[21]
+
+var StopAutoManagement = &handles[22]
+
+var TagResource = &handles[23]
+
+var UntagResource = &handles[24]
+
+var UpdateAutoManagement = &handles[25]
+
+var _ServiceQuotasV20190624 = &handles[26]
+
+var AccessDeniedException = &handles[27]
+var AccessDeniedException_Message = &handles[28]
+
+var AdjustableAtLevelEnum = &handles[29]
+var AdjustableAtLevelEnum_ACCOUNT = &handles[30]
+var AdjustableAtLevelEnum_PER_RESOURCE = &handles[31]
+var AdjustableAtLevelEnum_ALL = &handles[32]
+
+var _AmazonResourceName = &handles[33]
+
+var AppliedLevelEnum = &handles[34]
+var AppliedLevelEnum_ACCOUNT = &handles[35]
+var AppliedLevelEnum_RESOURCE = &handles[36]
+var AppliedLevelEnum_ALL = &handles[37]
+
+var _AppliedValue = &handles[38]
+
+var _AwsRegion = &handles[39]
+
+var AWSServiceAccessNotEnabledException = &handles[40]
+var AWSServiceAccessNotEnabledException_Message = &handles[41]
+
+var _CustomerServiceEngagementId = &handles[42]
+
+var _DateTime = &handles[43]
+
+var _DefaultValue = &handles[44]
+
+var DependencyAccessDeniedException = &handles[45]
+var DependencyAccessDeniedException_Message = &handles[46]
+
+var ErrorCode = &handles[47]
+var ErrorCode_DEPENDENCY_ACCESS_DENIED_ERROR = &handles[48]
+var ErrorCode_DEPENDENCY_THROTTLING_ERROR = &handles[49]
+var ErrorCode_DEPENDENCY_SERVICE_ERROR = &handles[50]
+var ErrorCode_SERVICE_QUOTA_NOT_AVAILABLE_ERROR = &handles[51]
+
+var _ErrorMessage = &handles[52]
+
+var ErrorReason = &handles[53]
+var ErrorReason_ErrorCode = &handles[54]
+var ErrorReason_ErrorMessage = &handles[55]
+
+var _ExceptionMessage = &handles[56]
+
+var _ExcludedLimit = &handles[57]
+
+var _ExcludedQuotaList = &handles[58]
+var _ExcludedQuotaList_member = &handles[59]
+
+var _ExcludedService = &handles[60]
+
+var _ExclusionList = &handles[61]
+var _ExclusionList_key = &handles[62]
+var _ExclusionList_value = &handles[63]
+
+var _ExclusionQuotaList = &handles[64]
+var _ExclusionQuotaList_key = &handles[65]
+var _ExclusionQuotaList_value = &handles[66]
+
+var _GlobalQuota = &handles[67]
+
+var IllegalArgumentException = &handles[68]
+var IllegalArgumentException_Message = &handles[69]
+
+var _InputTagKeys = &handles[70]
+var _InputTagKeys_member = &handles[71]
+
+var _InputTags = &handles[72]
+var _InputTags_member = &handles[73]
+
+var InvalidPaginationTokenException = &handles[74]
+var InvalidPaginationTokenException_Message = &handles[75]
+
+var InvalidResourceStateException = &handles[76]
+var InvalidResourceStateException_Message = &handles[77]
+
+var _MaxResults = &handles[78]
+
+var _MaxResultsUtilization = &handles[79]
+
+var _MetricDimensionName = &handles[80]
+
+var _MetricDimensionsMapDefinition = &handles[81]
+var _MetricDimensionsMapDefinition_key = &handles[82]
+var _MetricDimensionsMapDefinition_value = &handles[83]
+
+var _MetricDimensionValue = &handles[84]
+
+var MetricInfo = &handles[85]
+var MetricInfo_MetricNamespace = &handles[86]
+var MetricInfo_MetricName = &handles[87]
+var MetricInfo_MetricDimensions = &handles[88]
+var MetricInfo_MetricStatisticRecommendation = &handles[89]
+
+var _NextToken = &handles[90]
+
+var NoAvailableOrganizationException = &handles[91]
+var NoAvailableOrganizationException_Message = &handles[92]
+
+var NoSuchResourceException = &handles[93]
+var NoSuchResourceException_Message = &handles[94]
+
+var OptInLevel = &handles[95]
+var OptInLevel_ACCOUNT = &handles[96]
+
+var OptInStatus = &handles[97]
+var OptInStatus_ENABLED = &handles[98]
+var OptInStatus_DISABLED = &handles[99]
+
+var OptInType = &handles[100]
+var OptInType_NotifyOnly = &handles[101]
+var OptInType_NotifyAndAdjust = &handles[102]
+
+var OrganizationNotInAllFeaturesModeException = &handles[103]
+var OrganizationNotInAllFeaturesModeException_Message = &handles[104]
+
+var _OutputTags = &handles[105]
+var _OutputTags_member = &handles[106]
+
+var PeriodUnit = &handles[107]
+var PeriodUnit_MICROSECOND = &handles[108]
+var PeriodUnit_MILLISECOND = &handles[109]
+var PeriodUnit_SECOND = &handles[110]
+var PeriodUnit_MINUTE = &handles[111]
+var PeriodUnit_HOUR = &handles[112]
+var PeriodUnit_DAY = &handles[113]
+var PeriodUnit_WEEK = &handles[114]
+
+var _PeriodValue = &handles[115]
+
+var _QuotaAdjustable = &handles[116]
+
+var _QuotaArn = &handles[117]
+
+var _QuotaCode = &handles[118]
+
+var _QuotaContextId = &handles[119]
+
+var QuotaContextInfo = &handles[120]
+var QuotaContextInfo_ContextScope = &handles[121]
+var QuotaContextInfo_ContextScopeType = &handles[122]
+var QuotaContextInfo_ContextId = &handles[123]
+var QuotaContextInfo_AdjustableAtLevel = &handles[124]
+
+var QuotaContextScope = &handles[125]
+var QuotaContextScope_RESOURCE = &handles[126]
+var QuotaContextScope_ACCOUNT = &handles[127]
+
+var _QuotaContextScopeType = &handles[128]
+
+var _QuotaDescription = &handles[129]
+
+var QuotaExceededException = &handles[130]
+var QuotaExceededException_Message = &handles[131]
+
+var QuotaInfo = &handles[132]
+var QuotaInfo_QuotaCode = &handles[133]
+var QuotaInfo_QuotaName = &handles[134]
+
+var _QuotaInfoList = &handles[135]
+var _QuotaInfoList_member = &handles[136]
+
+var _QuotaMetricName = &handles[137]
+
+var _QuotaMetricNamespace = &handles[138]
+
+var _QuotaName = &handles[139]
+
+var QuotaPeriod = &handles[140]
+var QuotaPeriod_PeriodValue = &handles[141]
+var QuotaPeriod_PeriodUnit = &handles[142]
+
+var _QuotaUnit = &handles[143]
+
+var QuotaUtilizationInfo = &handles[144]
+var QuotaUtilizationInfo_QuotaCode = &handles[145]
+var QuotaUtilizationInfo_ServiceCode = &handles[146]
+var QuotaUtilizationInfo_QuotaName = &handles[147]
+var QuotaUtilizationInfo_Namespace = &handles[148]
+var QuotaUtilizationInfo_Utilization = &handles[149]
+var QuotaUtilizationInfo_DefaultValue = &handles[150]
+var QuotaUtilizationInfo_AppliedValue = &handles[151]
+var QuotaUtilizationInfo_ServiceName = &handles[152]
+var QuotaUtilizationInfo_Adjustable = &handles[153]
+
+var _QuotaUtilizationInfoList = &handles[154]
+var _QuotaUtilizationInfoList_member = &handles[155]
+
+var _QuotaValue = &handles[156]
+
+var _ReportErrorCode = &handles[157]
+
+var _ReportErrorMessage = &handles[158]
+
+var _ReportId = &handles[159]
+
+var _ReportMessage = &handles[160]
+
+var ReportStatus = &handles[161]
+var ReportStatus_PENDING = &handles[162]
+var ReportStatus_IN_PROGRESS = &handles[163]
+var ReportStatus_COMPLETED = &handles[164]
+var ReportStatus_FAILED = &handles[165]
+
+var RequestedServiceQuotaChange = &handles[166]
+var RequestedServiceQuotaChange_Id = &handles[167]
+var RequestedServiceQuotaChange_RequestType = &handles[168]
+var RequestedServiceQuotaChange_CaseId = &handles[169]
+var RequestedServiceQuotaChange_ServiceCode = &handles[170]
+var RequestedServiceQuotaChange_ServiceName = &handles[171]
+var RequestedServiceQuotaChange_QuotaCode = &handles[172]
+var RequestedServiceQuotaChange_QuotaName = &handles[173]
+var RequestedServiceQuotaChange_DesiredValue = &handles[174]
+var RequestedServiceQuotaChange_Status = &handles[175]
+var RequestedServiceQuotaChange_Created = &handles[176]
+var RequestedServiceQuotaChange_LastUpdated = &handles[177]
+var RequestedServiceQuotaChange_Requester = &handles[178]
+var RequestedServiceQuotaChange_QuotaArn = &handles[179]
+var RequestedServiceQuotaChange_GlobalQuota = &handles[180]
+var RequestedServiceQuotaChange_Unit = &handles[181]
+var RequestedServiceQuotaChange_QuotaRequestedAtLevel = &handles[182]
+var RequestedServiceQuotaChange_QuotaContext = &handles[183]
+
+var _RequestedServiceQuotaChangeHistoryListDefinition = &handles[184]
+var _RequestedServiceQuotaChangeHistoryListDefinition_member = &handles[185]
+
+var _Requester = &handles[186]
+
+var _RequestId = &handles[187]
+
+var RequestStatus = &handles[188]
+var RequestStatus_PENDING = &handles[189]
+var RequestStatus_CASE_OPENED = &handles[190]
+var RequestStatus_APPROVED = &handles[191]
+var RequestStatus_DENIED = &handles[192]
+var RequestStatus_CASE_CLOSED = &handles[193]
+var RequestStatus_NOT_APPROVED = &handles[194]
+var RequestStatus_INVALID_REQUEST = &handles[195]
+
+var RequestType = &handles[196]
+var RequestType_AutomaticManagement = &handles[197]
+
+var ResourceAlreadyExistsException = &handles[198]
+var ResourceAlreadyExistsException_Message = &handles[199]
+
+var _ServiceCode = &handles[200]
+
+var ServiceException = &handles[201]
+var ServiceException_Message = &handles[202]
+
+var ServiceInfo = &handles[203]
+var ServiceInfo_ServiceCode = &handles[204]
+var ServiceInfo_ServiceName = &handles[205]
+
+var _ServiceInfoListDefinition = &handles[206]
+var _ServiceInfoListDefinition_member = &handles[207]
+
+var _ServiceName = &handles[208]
+
+var ServiceQuota = &handles[209]
+var ServiceQuota_ServiceCode = &handles[210]
+var ServiceQuota_ServiceName = &handles[211]
+var ServiceQuota_QuotaArn = &handles[212]
+var ServiceQuota_QuotaCode = &handles[213]
+var ServiceQuota_QuotaName = &handles[214]
+var ServiceQuota_Value = &handles[215]
+var ServiceQuota_Unit = &handles[216]
+var ServiceQuota_Adjustable = &handles[217]
+var ServiceQuota_GlobalQuota = &handles[218]
+var ServiceQuota_UsageMetric = &handles[219]
+var ServiceQuota_Period = &handles[220]
+var ServiceQuota_ErrorReason = &handles[221]
+var ServiceQuota_QuotaAppliedAtLevel = &handles[222]
+var ServiceQuota_QuotaContext = &handles[223]
+var ServiceQuota_Description = &handles[224]
+
+var ServiceQuotaIncreaseRequestInTemplate = &handles[225]
+var ServiceQuotaIncreaseRequestInTemplate_ServiceCode = &handles[226]
+var ServiceQuotaIncreaseRequestInTemplate_ServiceName = &handles[227]
+var ServiceQuotaIncreaseRequestInTemplate_QuotaCode = &handles[228]
+var ServiceQuotaIncreaseRequestInTemplate_QuotaName = &handles[229]
+var ServiceQuotaIncreaseRequestInTemplate_DesiredValue = &handles[230]
+var ServiceQuotaIncreaseRequestInTemplate_AwsRegion = &handles[231]
+var ServiceQuotaIncreaseRequestInTemplate_Unit = &handles[232]
+var ServiceQuotaIncreaseRequestInTemplate_GlobalQuota = &handles[233]
+
+var _ServiceQuotaIncreaseRequestInTemplateList = &handles[234]
+var _ServiceQuotaIncreaseRequestInTemplateList_member = &handles[235]
+
+var _ServiceQuotaListDefinition = &handles[236]
+var _ServiceQuotaListDefinition_member = &handles[237]
+
+var ServiceQuotaTemplateAssociationStatus = &handles[238]
+var ServiceQuotaTemplateAssociationStatus_ASSOCIATED = &handles[239]
+var ServiceQuotaTemplateAssociationStatus_DISASSOCIATED = &handles[240]
+
+var ServiceQuotaTemplateNotInUseException = &handles[241]
+var ServiceQuotaTemplateNotInUseException_Message = &handles[242]
+
+var _Statistic = &handles[243]
+
+var _SupportCaseAllowed = &handles[244]
+
+var Tag = &handles[245]
+var Tag_Key = &handles[246]
+var Tag_Value = &handles[247]
+
+var _TagKey = &handles[248]
+
+var TagPolicyViolationException = &handles[249]
+var TagPolicyViolationException_Message = &handles[250]
+
+var _TagValue = &handles[251]
+
+var TemplatesNotAvailableInRegionException = &handles[252]
+var TemplatesNotAvailableInRegionException_Message = &handles[253]
+
+var TooManyRequestsException = &handles[254]
+var TooManyRequestsException_Message = &handles[255]
+
+var TooManyTagsException = &handles[256]
+var TooManyTagsException_Message = &handles[257]
+
+var _TotalCount = &handles[258]
+
+var _UtilizationPct = &handles[259]
+
+var AssociateServiceQuotaTemplateRequest = &handles[260]
+
+var AssociateServiceQuotaTemplateResponse = &handles[261]
+
+var CreateSupportCaseRequest = &handles[262]
+var CreateSupportCaseRequest_RequestId = &handles[263]
+
+var CreateSupportCaseResponse = &handles[264]
+
+var DeleteServiceQuotaIncreaseRequestFromTemplateRequest = &handles[265]
+var DeleteServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode = &handles[266]
+var DeleteServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode = &handles[267]
+var DeleteServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion = &handles[268]
+
+var DeleteServiceQuotaIncreaseRequestFromTemplateResponse = &handles[269]
+
+var DisassociateServiceQuotaTemplateRequest = &handles[270]
+
+var DisassociateServiceQuotaTemplateResponse = &handles[271]
+
+var GetAssociationForServiceQuotaTemplateRequest = &handles[272]
+
+var GetAssociationForServiceQuotaTemplateResponse = &handles[273]
+var GetAssociationForServiceQuotaTemplateResponse_ServiceQuotaTemplateAssociationStatus = &handles[274]
+
+var GetAutoManagementConfigurationRequest = &handles[275]
+
+var GetAutoManagementConfigurationResponse = &handles[276]
+var GetAutoManagementConfigurationResponse_OptInLevel = &handles[277]
+var GetAutoManagementConfigurationResponse_OptInType = &handles[278]
+var GetAutoManagementConfigurationResponse_NotificationArn = &handles[279]
+var GetAutoManagementConfigurationResponse_OptInStatus = &handles[280]
+var GetAutoManagementConfigurationResponse_ExclusionList = &handles[281]
+
+var GetAWSDefaultServiceQuotaRequest = &handles[282]
+var GetAWSDefaultServiceQuotaRequest_ServiceCode = &handles[283]
+var GetAWSDefaultServiceQuotaRequest_QuotaCode = &handles[284]
+
+var GetAWSDefaultServiceQuotaResponse = &handles[285]
+var GetAWSDefaultServiceQuotaResponse_Quota = &handles[286]
+
+var GetQuotaUtilizationReportRequest = &handles[287]
+var GetQuotaUtilizationReportRequest_ReportId = &handles[288]
+var GetQuotaUtilizationReportRequest_NextToken = &handles[289]
+var GetQuotaUtilizationReportRequest_MaxResults = &handles[290]
+
+var GetQuotaUtilizationReportResponse = &handles[291]
+var GetQuotaUtilizationReportResponse_ReportId = &handles[292]
+var GetQuotaUtilizationReportResponse_Status = &handles[293]
+var GetQuotaUtilizationReportResponse_GeneratedAt = &handles[294]
+var GetQuotaUtilizationReportResponse_TotalCount = &handles[295]
+var GetQuotaUtilizationReportResponse_Quotas = &handles[296]
+var GetQuotaUtilizationReportResponse_NextToken = &handles[297]
+var GetQuotaUtilizationReportResponse_ErrorCode = &handles[298]
+var GetQuotaUtilizationReportResponse_ErrorMessage = &handles[299]
+
+var GetRequestedServiceQuotaChangeRequest = &handles[300]
+var GetRequestedServiceQuotaChangeRequest_RequestId = &handles[301]
+
+var GetRequestedServiceQuotaChangeResponse = &handles[302]
+var GetRequestedServiceQuotaChangeResponse_RequestedQuota = &handles[303]
+
+var GetServiceQuotaIncreaseRequestFromTemplateRequest = &handles[304]
+var GetServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode = &handles[305]
+var GetServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode = &handles[306]
+var GetServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion = &handles[307]
+
+var GetServiceQuotaIncreaseRequestFromTemplateResponse = &handles[308]
+var GetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate = &handles[309]
+
+var GetServiceQuotaRequest = &handles[310]
+var GetServiceQuotaRequest_ServiceCode = &handles[311]
+var GetServiceQuotaRequest_QuotaCode = &handles[312]
+var GetServiceQuotaRequest_ContextId = &handles[313]
+
+var GetServiceQuotaResponse = &handles[314]
+var GetServiceQuotaResponse_Quota = &handles[315]
+
+var ListAWSDefaultServiceQuotasRequest = &handles[316]
+var ListAWSDefaultServiceQuotasRequest_ServiceCode = &handles[317]
+var ListAWSDefaultServiceQuotasRequest_NextToken = &handles[318]
+var ListAWSDefaultServiceQuotasRequest_MaxResults = &handles[319]
+
+var ListAWSDefaultServiceQuotasResponse = &handles[320]
+var ListAWSDefaultServiceQuotasResponse_NextToken = &handles[321]
+var ListAWSDefaultServiceQuotasResponse_Quotas = &handles[322]
+
+var ListRequestedServiceQuotaChangeHistoryByQuotaRequest = &handles[323]
+var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_ServiceCode = &handles[324]
+var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaCode = &handles[325]
+var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_Status = &handles[326]
+var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_NextToken = &handles[327]
+var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_MaxResults = &handles[328]
+var ListRequestedServiceQuotaChangeHistoryByQuotaRequest_QuotaRequestedAtLevel = &handles[329]
+
+var ListRequestedServiceQuotaChangeHistoryByQuotaResponse = &handles[330]
+var ListRequestedServiceQuotaChangeHistoryByQuotaResponse_NextToken = &handles[331]
+var ListRequestedServiceQuotaChangeHistoryByQuotaResponse_RequestedQuotas = &handles[332]
+
+var ListRequestedServiceQuotaChangeHistoryRequest = &handles[333]
+var ListRequestedServiceQuotaChangeHistoryRequest_ServiceCode = &handles[334]
+var ListRequestedServiceQuotaChangeHistoryRequest_Status = &handles[335]
+var ListRequestedServiceQuotaChangeHistoryRequest_NextToken = &handles[336]
+var ListRequestedServiceQuotaChangeHistoryRequest_MaxResults = &handles[337]
+var ListRequestedServiceQuotaChangeHistoryRequest_QuotaRequestedAtLevel = &handles[338]
+
+var ListRequestedServiceQuotaChangeHistoryResponse = &handles[339]
+var ListRequestedServiceQuotaChangeHistoryResponse_NextToken = &handles[340]
+var ListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas = &handles[341]
+
+var ListServiceQuotaIncreaseRequestsInTemplateRequest = &handles[342]
+var ListServiceQuotaIncreaseRequestsInTemplateRequest_ServiceCode = &handles[343]
+var ListServiceQuotaIncreaseRequestsInTemplateRequest_AwsRegion = &handles[344]
+var ListServiceQuotaIncreaseRequestsInTemplateRequest_NextToken = &handles[345]
+var ListServiceQuotaIncreaseRequestsInTemplateRequest_MaxResults = &handles[346]
+
+var ListServiceQuotaIncreaseRequestsInTemplateResponse = &handles[347]
+var ListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList = &handles[348]
+var ListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken = &handles[349]
+
+var ListServiceQuotasRequest = &handles[350]
+var ListServiceQuotasRequest_ServiceCode = &handles[351]
+var ListServiceQuotasRequest_NextToken = &handles[352]
+var ListServiceQuotasRequest_MaxResults = &handles[353]
+var ListServiceQuotasRequest_QuotaCode = &handles[354]
+var ListServiceQuotasRequest_QuotaAppliedAtLevel = &handles[355]
+
+var ListServiceQuotasResponse = &handles[356]
+var ListServiceQuotasResponse_NextToken = &handles[357]
+var ListServiceQuotasResponse_Quotas = &handles[358]
+
+var ListServicesRequest = &handles[359]
+var ListServicesRequest_NextToken = &handles[360]
+var ListServicesRequest_MaxResults = &handles[361]
+
+var ListServicesResponse = &handles[362]
+var ListServicesResponse_NextToken = &handles[363]
+var ListServicesResponse_Services = &handles[364]
+
+var ListTagsForResourceRequest = &handles[365]
+var ListTagsForResourceRequest_ResourceARN = &handles[366]
+
+var ListTagsForResourceResponse = &handles[367]
+var ListTagsForResourceResponse_Tags = &handles[368]
+
+var PutServiceQuotaIncreaseRequestIntoTemplateRequest = &handles[369]
+var PutServiceQuotaIncreaseRequestIntoTemplateRequest_QuotaCode = &handles[370]
+var PutServiceQuotaIncreaseRequestIntoTemplateRequest_ServiceCode = &handles[371]
+var PutServiceQuotaIncreaseRequestIntoTemplateRequest_AwsRegion = &handles[372]
+var PutServiceQuotaIncreaseRequestIntoTemplateRequest_DesiredValue = &handles[373]
+
+var PutServiceQuotaIncreaseRequestIntoTemplateResponse = &handles[374]
+var PutServiceQuotaIncreaseRequestIntoTemplateResponse_ServiceQuotaIncreaseRequestInTemplate = &handles[375]
+
+var RequestServiceQuotaIncreaseRequest = &handles[376]
+var RequestServiceQuotaIncreaseRequest_ServiceCode = &handles[377]
+var RequestServiceQuotaIncreaseRequest_QuotaCode = &handles[378]
+var RequestServiceQuotaIncreaseRequest_DesiredValue = &handles[379]
+var RequestServiceQuotaIncreaseRequest_ContextId = &handles[380]
+var RequestServiceQuotaIncreaseRequest_SupportCaseAllowed = &handles[381]
+
+var RequestServiceQuotaIncreaseResponse = &handles[382]
+var RequestServiceQuotaIncreaseResponse_RequestedQuota = &handles[383]
+
+var StartAutoManagementRequest = &handles[384]
+var StartAutoManagementRequest_OptInLevel = &handles[385]
+var StartAutoManagementRequest_OptInType = &handles[386]
+var StartAutoManagementRequest_NotificationArn = &handles[387]
+var StartAutoManagementRequest_ExclusionList = &handles[388]
+
+var StartAutoManagementResponse = &handles[389]
+
+var StartQuotaUtilizationReportRequest = &handles[390]
+
+var StartQuotaUtilizationReportResponse = &handles[391]
+var StartQuotaUtilizationReportResponse_ReportId = &handles[392]
+var StartQuotaUtilizationReportResponse_Status = &handles[393]
+var StartQuotaUtilizationReportResponse_Message = &handles[394]
+
+var StopAutoManagementRequest = &handles[395]
+
+var StopAutoManagementResponse = &handles[396]
+
+var TagResourceRequest = &handles[397]
+var TagResourceRequest_ResourceARN = &handles[398]
+var TagResourceRequest_Tags = &handles[399]
+
+var TagResourceResponse = &handles[400]
+
+var UntagResourceRequest = &handles[401]
+var UntagResourceRequest_ResourceARN = &handles[402]
+var UntagResourceRequest_TagKeys = &handles[403]
+
+var UntagResourceResponse = &handles[404]
+
+var UpdateAutoManagementRequest = &handles[405]
+var UpdateAutoManagementRequest_OptInType = &handles[406]
+var UpdateAutoManagementRequest_NotificationArn = &handles[407]
+var UpdateAutoManagementRequest_ExclusionList = &handles[408]
+
+var UpdateAutoManagementResponse = &handles[409]
+
+var ServiceQuotasV20190624 = &smithy.ServiceSchema{Schema: &handles[26], Version: "2019-06-24"}

@@ -4,1903 +4,1634 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptChannelHandshake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AcceptChannelHandshake",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/AcceptChannelHandshake",
-	Code: 200})
-
-var CancelChannelHandshake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CancelChannelHandshake",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CancelChannelHandshake",
-	Code: 200})
-
-var CreateChannelHandshake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateChannelHandshake",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateChannelHandshake",
-	Code: 200})
-
-var CreateProgramManagementAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateProgramManagementAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateProgramManagementAccount",
-	Code: 200})
-
-var CreateRelationship = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateRelationship",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateRelationship",
-	Code: 200})
-
-var DeleteProgramManagementAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "DeleteProgramManagementAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DeleteProgramManagementAccount",
-	Code: 200})
-
-var DeleteRelationship = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "DeleteRelationship",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DeleteRelationship",
-	Code: 200})
-
-var GetRelationship = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "GetRelationship",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetRelationship",
-	Code: 200})
-
-var ListChannelHandshakes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListChannelHandshakes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListChannelHandshakes",
-	Code: 200})
-
-var ListProgramManagementAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListProgramManagementAccounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListProgramManagementAccounts",
-	Code: 200})
-
-var ListRelationships = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListRelationships",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListRelationships",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var RejectChannelHandshake = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RejectChannelHandshake",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/RejectChannelHandshake",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/TagResource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UntagResource",
-	Code: 200})
-
-var UpdateProgramManagementAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UpdateProgramManagementAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UpdateProgramManagementAccount",
-	Code: 200})
-
-var UpdateRelationship = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UpdateRelationship",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UpdateRelationship",
-	Code: 200})
-
-var _PartnerCentralChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "PartnerCentralChannel",
-}, smithy.ShapeTypeService, 0)
-
-var PartnerCentralChannel = smithy.NewServiceSchema(_PartnerCentralChannel, "2024-03-18")
-
-var AcceptChannelHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AcceptChannelHandshakeDetail",
-}, smithy.ShapeTypeStructure, 3)
-var AcceptChannelHandshakeDetail_id *smithy.Schema
-
-var AcceptChannelHandshakeDetail_arn *smithy.Schema
-
-var AcceptChannelHandshakeDetail_status *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessDeniedException_reason *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociatedResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AssociatedResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociatedResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AssociatedResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociatedResourceIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AssociatedResourceIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedResourceIdentifierList_member *smithy.Schema
-
-var AssociationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AssociationType",
-}, smithy.ShapeTypeEnum, 3)
-var AssociationType_DOWNSTREAM_SELLER *smithy.Schema
-
-var AssociationType_END_CUSTOMER *smithy.Schema
-
-var AssociationType_INTERNAL *smithy.Schema
-
-var _AssociationTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AssociationTypeList",
-}, smithy.ShapeTypeList, 1)
-var _AssociationTypeList_member *smithy.Schema
-
-var CancelChannelHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CancelChannelHandshakeDetail",
-}, smithy.ShapeTypeStructure, 3)
-var CancelChannelHandshakeDetail_id *smithy.Schema
-
-var CancelChannelHandshakeDetail_arn *smithy.Schema
-
-var CancelChannelHandshakeDetail_status *smithy.Schema
-
-var _Catalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Catalog",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelHandshakeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ChannelHandshakeId",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelHandshakeIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ChannelHandshakeIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelHandshakePayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ChannelHandshakePayload",
-}, smithy.ShapeTypeUnion, 2)
-var ChannelHandshakePayload_startServicePeriodPayload *smithy.Schema
-
-var ChannelHandshakePayload_revokeServicePeriodPayload *smithy.Schema
-
-var _ChannelHandshakeSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ChannelHandshakeSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ChannelHandshakeSummaries_member *smithy.Schema
-
-var ChannelHandshakeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ChannelHandshakeSummary",
-}, smithy.ShapeTypeStructure, 13)
-var ChannelHandshakeSummary_id *smithy.Schema
-
-var ChannelHandshakeSummary_arn *smithy.Schema
-
-var ChannelHandshakeSummary_catalog *smithy.Schema
-
-var ChannelHandshakeSummary_handshakeType *smithy.Schema
-
-var ChannelHandshakeSummary_ownerAccountId *smithy.Schema
-
-var ChannelHandshakeSummary_senderAccountId *smithy.Schema
-
-var ChannelHandshakeSummary_senderDisplayName *smithy.Schema
-
-var ChannelHandshakeSummary_receiverAccountId *smithy.Schema
-
-var ChannelHandshakeSummary_associatedResourceId *smithy.Schema
-
-var ChannelHandshakeSummary_detail *smithy.Schema
-
-var ChannelHandshakeSummary_createdAt *smithy.Schema
-
-var ChannelHandshakeSummary_updatedAt *smithy.Schema
-
-var ChannelHandshakeSummary_status *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var Coverage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Coverage",
-}, smithy.ShapeTypeEnum, 2)
-var Coverage_ENTIRE_ORGANIZATION *smithy.Schema
-
-var Coverage_MANAGEMENT_ACCOUNT_ONLY *smithy.Schema
-
-var CreateChannelHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateChannelHandshakeDetail",
-}, smithy.ShapeTypeStructure, 2)
-var CreateChannelHandshakeDetail_id *smithy.Schema
-
-var CreateChannelHandshakeDetail_arn *smithy.Schema
-
-var CreateProgramManagementAccountDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateProgramManagementAccountDetail",
-}, smithy.ShapeTypeStructure, 2)
-var CreateProgramManagementAccountDetail_id *smithy.Schema
-
-var CreateProgramManagementAccountDetail_arn *smithy.Schema
-
-var CreateRelationshipDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateRelationshipDetail",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRelationshipDetail_arn *smithy.Schema
-
-var CreateRelationshipDetail_id *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var HandshakeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "HandshakeDetail",
-}, smithy.ShapeTypeUnion, 3)
-var HandshakeDetail_startServicePeriodHandshakeDetail *smithy.Schema
-
-var HandshakeDetail_revokeServicePeriodHandshakeDetail *smithy.Schema
-
-var HandshakeDetail_programManagementAccountHandshakeDetail *smithy.Schema
-
-var HandshakeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "HandshakeStatus",
-}, smithy.ShapeTypeEnum, 5)
-var HandshakeStatus_PENDING *smithy.Schema
-
-var HandshakeStatus_ACCEPTED *smithy.Schema
-
-var HandshakeStatus_REJECTED *smithy.Schema
-
-var HandshakeStatus_CANCELED *smithy.Schema
-
-var HandshakeStatus_EXPIRED *smithy.Schema
-
-var _HandshakeStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "HandshakeStatusList",
-}, smithy.ShapeTypeList, 1)
-var _HandshakeStatusList_member *smithy.Schema
-
-var HandshakeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "HandshakeType",
-}, smithy.ShapeTypeEnum, 3)
-var HandshakeType_START_SERVICE_PERIOD *smithy.Schema
-
-var HandshakeType_REVOKE_SERVICE_PERIOD *smithy.Schema
-
-var HandshakeType_PROGRAM_MANAGEMENT_ACCOUNT *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var ListChannelHandshakesTypeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListChannelHandshakesTypeFilters",
-}, smithy.ShapeTypeUnion, 3)
-var ListChannelHandshakesTypeFilters_startServicePeriodTypeFilters *smithy.Schema
-
-var ListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters *smithy.Schema
-
-var ListChannelHandshakesTypeFilters_programManagementAccountTypeFilters *smithy.Schema
-
-var ListChannelHandshakesTypeSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListChannelHandshakesTypeSort",
-}, smithy.ShapeTypeUnion, 3)
-var ListChannelHandshakesTypeSort_startServicePeriodTypeSort *smithy.Schema
-
-var ListChannelHandshakesTypeSort_revokeServicePeriodTypeSort *smithy.Schema
-
-var ListChannelHandshakesTypeSort_programManagementAccountTypeSort *smithy.Schema
-
-var ListProgramManagementAccountsSortBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListProgramManagementAccountsSortBase",
-}, smithy.ShapeTypeStructure, 2)
-var ListProgramManagementAccountsSortBase_sortOrder *smithy.Schema
-
-var ListProgramManagementAccountsSortBase_sortBy *smithy.Schema
-
-var ListProgramManagementAccountsSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListProgramManagementAccountsSortName",
-}, smithy.ShapeTypeEnum, 1)
-var ListProgramManagementAccountsSortName_UPDATED_AT *smithy.Schema
-
-var ListRelationshipsSortBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListRelationshipsSortBase",
-}, smithy.ShapeTypeStructure, 2)
-var ListRelationshipsSortBase_sortOrder *smithy.Schema
-
-var ListRelationshipsSortBase_sortBy *smithy.Schema
-
-var ListRelationshipsSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListRelationshipsSortName",
-}, smithy.ShapeTypeEnum, 1)
-var ListRelationshipsSortName_UPDATED_AT *smithy.Schema
-
-var _MinimumNoticeDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "MinimumNoticeDays",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Note = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Note",
-}, smithy.ShapeTypeString, 0)
-
-var ParticipantType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ParticipantType",
-}, smithy.ShapeTypeEnum, 2)
-var ParticipantType_SENDER *smithy.Schema
-
-var ParticipantType_RECEIVER *smithy.Schema
-
-var PartnerLedSupport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "PartnerLedSupport",
-}, smithy.ShapeTypeStructure, 3)
-var PartnerLedSupport_coverage *smithy.Schema
-
-var PartnerLedSupport_provider *smithy.Schema
-
-var PartnerLedSupport_tamLocation *smithy.Schema
-
-var _PartnerProfileDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "PartnerProfileDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var Program = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Program",
-}, smithy.ShapeTypeEnum, 3)
-var Program_SOLUTION_PROVIDER *smithy.Schema
-
-var Program_DISTRIBUTION *smithy.Schema
-
-var Program_DISTRIBUTION_SELLER *smithy.Schema
-
-var _ProgramList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramList",
-}, smithy.ShapeTypeList, 1)
-var _ProgramList_member *smithy.Schema
-
-var _ProgramManagementAccountDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _ProgramManagementAccountDisplayNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountDisplayNameList",
-}, smithy.ShapeTypeList, 1)
-var _ProgramManagementAccountDisplayNameList_member *smithy.Schema
-
-var ProgramManagementAccountHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountHandshakeDetail",
-}, smithy.ShapeTypeStructure, 1)
-var ProgramManagementAccountHandshakeDetail_program *smithy.Schema
-
-var _ProgramManagementAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _ProgramManagementAccountIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ProgramManagementAccountIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _ProgramManagementAccountIdentifierList_member *smithy.Schema
-
-var ProgramManagementAccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ProgramManagementAccountStatus_PENDING *smithy.Schema
-
-var ProgramManagementAccountStatus_ACTIVE *smithy.Schema
-
-var ProgramManagementAccountStatus_INACTIVE *smithy.Schema
-
-var _ProgramManagementAccountStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountStatusList",
-}, smithy.ShapeTypeList, 1)
-var _ProgramManagementAccountStatusList_member *smithy.Schema
-
-var _ProgramManagementAccountSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ProgramManagementAccountSummaries_member *smithy.Schema
-
-var ProgramManagementAccountSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountSummary",
-}, smithy.ShapeTypeStructure, 11)
-var ProgramManagementAccountSummary_id *smithy.Schema
-
-var ProgramManagementAccountSummary_revision *smithy.Schema
-
-var ProgramManagementAccountSummary_catalog *smithy.Schema
-
-var ProgramManagementAccountSummary_program *smithy.Schema
-
-var ProgramManagementAccountSummary_displayName *smithy.Schema
-
-var ProgramManagementAccountSummary_accountId *smithy.Schema
-
-var ProgramManagementAccountSummary_arn *smithy.Schema
-
-var ProgramManagementAccountSummary_createdAt *smithy.Schema
-
-var ProgramManagementAccountSummary_updatedAt *smithy.Schema
-
-var ProgramManagementAccountSummary_startDate *smithy.Schema
-
-var ProgramManagementAccountSummary_status *smithy.Schema
-
-var ProgramManagementAccountTypeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountTypeFilters",
-}, smithy.ShapeTypeStructure, 1)
-var ProgramManagementAccountTypeFilters_programs *smithy.Schema
-
-var ProgramManagementAccountTypeSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountTypeSort",
-}, smithy.ShapeTypeStructure, 2)
-var ProgramManagementAccountTypeSort_sortOrder *smithy.Schema
-
-var ProgramManagementAccountTypeSort_sortBy *smithy.Schema
-
-var ProgramManagementAccountTypeSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ProgramManagementAccountTypeSortName",
-}, smithy.ShapeTypeEnum, 1)
-var ProgramManagementAccountTypeSortName_UPDATED_AT *smithy.Schema
-
-var Provider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Provider",
-}, smithy.ShapeTypeEnum, 2)
-var Provider_DISTRIBUTOR *smithy.Schema
-
-var Provider_DISTRIBUTION_SELLER *smithy.Schema
-
-var RejectChannelHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RejectChannelHandshakeDetail",
-}, smithy.ShapeTypeStructure, 3)
-var RejectChannelHandshakeDetail_id *smithy.Schema
-
-var RejectChannelHandshakeDetail_arn *smithy.Schema
-
-var RejectChannelHandshakeDetail_status *smithy.Schema
-
-var RelationshipDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RelationshipDetail",
-}, smithy.ShapeTypeStructure, 13)
-var RelationshipDetail_arn *smithy.Schema
-
-var RelationshipDetail_id *smithy.Schema
-
-var RelationshipDetail_revision *smithy.Schema
-
-var RelationshipDetail_catalog *smithy.Schema
-
-var RelationshipDetail_associationType *smithy.Schema
-
-var RelationshipDetail_programManagementAccountId *smithy.Schema
-
-var RelationshipDetail_associatedAccountId *smithy.Schema
-
-var RelationshipDetail_displayName *smithy.Schema
-
-var RelationshipDetail_resaleAccountModel *smithy.Schema
-
-var RelationshipDetail_sector *smithy.Schema
-
-var RelationshipDetail_createdAt *smithy.Schema
-
-var RelationshipDetail_updatedAt *smithy.Schema
-
-var RelationshipDetail_startDate *smithy.Schema
-
-var _RelationshipDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RelationshipDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var _RelationshipDisplayNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RelationshipDisplayNameList",
-}, smithy.ShapeTypeList, 1)
-var _RelationshipDisplayNameList_member *smithy.Schema
-
-var _RelationshipId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RelationshipId",
-}, smithy.ShapeTypeString, 0)
-
-var _RelationshipIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RelationshipIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _RelationshipSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RelationshipSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RelationshipSummaries_member *smithy.Schema
-
-var RelationshipSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RelationshipSummary",
-}, smithy.ShapeTypeStructure, 12)
-var RelationshipSummary_arn *smithy.Schema
-
-var RelationshipSummary_id *smithy.Schema
-
-var RelationshipSummary_revision *smithy.Schema
-
-var RelationshipSummary_catalog *smithy.Schema
-
-var RelationshipSummary_associationType *smithy.Schema
-
-var RelationshipSummary_programManagementAccountId *smithy.Schema
-
-var RelationshipSummary_associatedAccountId *smithy.Schema
-
-var RelationshipSummary_displayName *smithy.Schema
-
-var RelationshipSummary_sector *smithy.Schema
-
-var RelationshipSummary_createdAt *smithy.Schema
-
-var RelationshipSummary_updatedAt *smithy.Schema
-
-var RelationshipSummary_startDate *smithy.Schema
-
-var ResaleAccountModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ResaleAccountModel",
-}, smithy.ShapeTypeEnum, 3)
-var ResaleAccountModel_DISTRIBUTOR *smithy.Schema
-
-var ResaleAccountModel_END_CUSTOMER *smithy.Schema
-
-var ResaleAccountModel_SOLUTION_PROVIDER *smithy.Schema
-
-var ResoldEnterprise = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ResoldEnterprise",
-}, smithy.ShapeTypeStructure, 3)
-var ResoldEnterprise_coverage *smithy.Schema
-
-var ResoldEnterprise_tamLocation *smithy.Schema
-
-var ResoldEnterprise_chargeAccountId *smithy.Schema
-
-var ResoldUnifiedOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ResoldUnifiedOperations",
-}, smithy.ShapeTypeStructure, 3)
-var ResoldUnifiedOperations_coverage *smithy.Schema
-
-var ResoldUnifiedOperations_tamLocation *smithy.Schema
-
-var ResoldUnifiedOperations_chargeAccountId *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _Revision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Revision",
-}, smithy.ShapeTypeString, 0)
-
-var RevokeServicePeriodHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RevokeServicePeriodHandshakeDetail",
-}, smithy.ShapeTypeStructure, 5)
-var RevokeServicePeriodHandshakeDetail_note *smithy.Schema
-
-var RevokeServicePeriodHandshakeDetail_servicePeriodType *smithy.Schema
-
-var RevokeServicePeriodHandshakeDetail_minimumNoticeDays *smithy.Schema
-
-var RevokeServicePeriodHandshakeDetail_startDate *smithy.Schema
-
-var RevokeServicePeriodHandshakeDetail_endDate *smithy.Schema
-
-var RevokeServicePeriodPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RevokeServicePeriodPayload",
-}, smithy.ShapeTypeStructure, 2)
-var RevokeServicePeriodPayload_programManagementAccountIdentifier *smithy.Schema
-
-var RevokeServicePeriodPayload_note *smithy.Schema
-
-var RevokeServicePeriodTypeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RevokeServicePeriodTypeFilters",
-}, smithy.ShapeTypeStructure, 1)
-var RevokeServicePeriodTypeFilters_servicePeriodTypes *smithy.Schema
-
-var RevokeServicePeriodTypeSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RevokeServicePeriodTypeSort",
-}, smithy.ShapeTypeStructure, 2)
-var RevokeServicePeriodTypeSort_sortOrder *smithy.Schema
-
-var RevokeServicePeriodTypeSort_sortBy *smithy.Schema
-
-var RevokeServicePeriodTypeSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RevokeServicePeriodTypeSortName",
-}, smithy.ShapeTypeEnum, 1)
-var RevokeServicePeriodTypeSortName_UPDATED_AT *smithy.Schema
-
-var Sector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Sector",
-}, smithy.ShapeTypeEnum, 3)
-var Sector_COMMERCIAL *smithy.Schema
-
-var Sector_GOVERNMENT *smithy.Schema
-
-var Sector_GOVERNMENT_EXCEPTION *smithy.Schema
-
-var ServicePeriodType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ServicePeriodType",
-}, smithy.ShapeTypeEnum, 2)
-var ServicePeriodType_MINIMUM_NOTICE_PERIOD *smithy.Schema
-
-var ServicePeriodType_FIXED_COMMITMENT_PERIOD *smithy.Schema
-
-var _ServicePeriodTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ServicePeriodTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ServicePeriodTypeList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var StartServicePeriodHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "StartServicePeriodHandshakeDetail",
-}, smithy.ShapeTypeStructure, 5)
-var StartServicePeriodHandshakeDetail_note *smithy.Schema
-
-var StartServicePeriodHandshakeDetail_servicePeriodType *smithy.Schema
-
-var StartServicePeriodHandshakeDetail_minimumNoticeDays *smithy.Schema
-
-var StartServicePeriodHandshakeDetail_startDate *smithy.Schema
-
-var StartServicePeriodHandshakeDetail_endDate *smithy.Schema
-
-var StartServicePeriodPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "StartServicePeriodPayload",
-}, smithy.ShapeTypeStructure, 5)
-var StartServicePeriodPayload_programManagementAccountIdentifier *smithy.Schema
-
-var StartServicePeriodPayload_note *smithy.Schema
-
-var StartServicePeriodPayload_servicePeriodType *smithy.Schema
-
-var StartServicePeriodPayload_minimumNoticeDays *smithy.Schema
-
-var StartServicePeriodPayload_endDate *smithy.Schema
-
-var StartServicePeriodTypeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "StartServicePeriodTypeFilters",
-}, smithy.ShapeTypeStructure, 1)
-var StartServicePeriodTypeFilters_servicePeriodTypes *smithy.Schema
-
-var StartServicePeriodTypeSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "StartServicePeriodTypeSort",
-}, smithy.ShapeTypeStructure, 2)
-var StartServicePeriodTypeSort_sortOrder *smithy.Schema
-
-var StartServicePeriodTypeSort_sortBy *smithy.Schema
-
-var StartServicePeriodTypeSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "StartServicePeriodTypeSortName",
-}, smithy.ShapeTypeEnum, 1)
-var StartServicePeriodTypeSortName_UPDATED_AT *smithy.Schema
-
-var SupportPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "SupportPlan",
-}, smithy.ShapeTypeUnion, 3)
-var SupportPlan_resoldEnterprise *smithy.Schema
-
-var SupportPlan_partnerLedSupport *smithy.Schema
-
-var SupportPlan_resoldUnifiedOperations *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TaggableArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "TaggableArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var UpdateProgramManagementAccountDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UpdateProgramManagementAccountDetail",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateProgramManagementAccountDetail_id *smithy.Schema
-
-var UpdateProgramManagementAccountDetail_arn *smithy.Schema
-
-var UpdateProgramManagementAccountDetail_revision *smithy.Schema
-
-var UpdateProgramManagementAccountDetail_displayName *smithy.Schema
-
-var UpdateRelationshipDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UpdateRelationshipDetail",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateRelationshipDetail_arn *smithy.Schema
-
-var UpdateRelationshipDetail_id *smithy.Schema
-
-var UpdateRelationshipDetail_revision *smithy.Schema
-
-var UpdateRelationshipDetail_displayName *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 3)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_code *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var ValidationExceptionReason_REQUEST_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED *smithy.Schema
-
-var AcceptChannelHandshakeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AcceptChannelHandshakeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AcceptChannelHandshakeRequest_catalog *smithy.Schema
-
-var AcceptChannelHandshakeRequest_identifier *smithy.Schema
-
-var AcceptChannelHandshakeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "AcceptChannelHandshakeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptChannelHandshakeResponse_channelHandshakeDetail *smithy.Schema
-
-var CancelChannelHandshakeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CancelChannelHandshakeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelChannelHandshakeRequest_catalog *smithy.Schema
-
-var CancelChannelHandshakeRequest_identifier *smithy.Schema
-
-var CancelChannelHandshakeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CancelChannelHandshakeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CancelChannelHandshakeResponse_channelHandshakeDetail *smithy.Schema
-
-var CreateChannelHandshakeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateChannelHandshakeRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateChannelHandshakeRequest_handshakeType *smithy.Schema
-
-var CreateChannelHandshakeRequest_catalog *smithy.Schema
-
-var CreateChannelHandshakeRequest_associatedResourceIdentifier *smithy.Schema
-
-var CreateChannelHandshakeRequest_payload *smithy.Schema
-
-var CreateChannelHandshakeRequest_clientToken *smithy.Schema
-
-var CreateChannelHandshakeRequest_tags *smithy.Schema
-
-var CreateChannelHandshakeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateChannelHandshakeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChannelHandshakeResponse_channelHandshakeDetail *smithy.Schema
-
-var CreateProgramManagementAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateProgramManagementAccountRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateProgramManagementAccountRequest_catalog *smithy.Schema
-
-var CreateProgramManagementAccountRequest_program *smithy.Schema
-
-var CreateProgramManagementAccountRequest_displayName *smithy.Schema
-
-var CreateProgramManagementAccountRequest_accountId *smithy.Schema
-
-var CreateProgramManagementAccountRequest_clientToken *smithy.Schema
-
-var CreateProgramManagementAccountRequest_tags *smithy.Schema
-
-var CreateProgramManagementAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateProgramManagementAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateProgramManagementAccountResponse_programManagementAccountDetail *smithy.Schema
-
-var CreateRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateRelationshipRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateRelationshipRequest_catalog *smithy.Schema
-
-var CreateRelationshipRequest_associationType *smithy.Schema
-
-var CreateRelationshipRequest_programManagementAccountIdentifier *smithy.Schema
-
-var CreateRelationshipRequest_associatedAccountId *smithy.Schema
-
-var CreateRelationshipRequest_displayName *smithy.Schema
-
-var CreateRelationshipRequest_resaleAccountModel *smithy.Schema
-
-var CreateRelationshipRequest_sector *smithy.Schema
-
-var CreateRelationshipRequest_clientToken *smithy.Schema
-
-var CreateRelationshipRequest_tags *smithy.Schema
-
-var CreateRelationshipRequest_requestedSupportPlan *smithy.Schema
-
-var CreateRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "CreateRelationshipResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRelationshipResponse_relationshipDetail *smithy.Schema
-
-var DeleteProgramManagementAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "DeleteProgramManagementAccountRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteProgramManagementAccountRequest_catalog *smithy.Schema
-
-var DeleteProgramManagementAccountRequest_identifier *smithy.Schema
-
-var DeleteProgramManagementAccountRequest_clientToken *smithy.Schema
-
-var DeleteProgramManagementAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "DeleteProgramManagementAccountResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "DeleteRelationshipRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteRelationshipRequest_catalog *smithy.Schema
-
-var DeleteRelationshipRequest_identifier *smithy.Schema
-
-var DeleteRelationshipRequest_programManagementAccountIdentifier *smithy.Schema
-
-var DeleteRelationshipRequest_clientToken *smithy.Schema
-
-var DeleteRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "DeleteRelationshipResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "GetRelationshipRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetRelationshipRequest_catalog *smithy.Schema
-
-var GetRelationshipRequest_programManagementAccountIdentifier *smithy.Schema
-
-var GetRelationshipRequest_identifier *smithy.Schema
-
-var GetRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "GetRelationshipResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRelationshipResponse_relationshipDetail *smithy.Schema
-
-var ListChannelHandshakesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListChannelHandshakesRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListChannelHandshakesRequest_handshakeType *smithy.Schema
-
-var ListChannelHandshakesRequest_catalog *smithy.Schema
-
-var ListChannelHandshakesRequest_participantType *smithy.Schema
-
-var ListChannelHandshakesRequest_maxResults *smithy.Schema
-
-var ListChannelHandshakesRequest_statuses *smithy.Schema
-
-var ListChannelHandshakesRequest_associatedResourceIdentifiers *smithy.Schema
-
-var ListChannelHandshakesRequest_handshakeTypeFilters *smithy.Schema
-
-var ListChannelHandshakesRequest_handshakeTypeSort *smithy.Schema
-
-var ListChannelHandshakesRequest_nextToken *smithy.Schema
-
-var ListChannelHandshakesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListChannelHandshakesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelHandshakesResponse_items *smithy.Schema
-
-var ListChannelHandshakesResponse_nextToken *smithy.Schema
-
-var ListProgramManagementAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListProgramManagementAccountsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListProgramManagementAccountsRequest_catalog *smithy.Schema
-
-var ListProgramManagementAccountsRequest_maxResults *smithy.Schema
-
-var ListProgramManagementAccountsRequest_displayNames *smithy.Schema
-
-var ListProgramManagementAccountsRequest_programs *smithy.Schema
-
-var ListProgramManagementAccountsRequest_accountIds *smithy.Schema
-
-var ListProgramManagementAccountsRequest_statuses *smithy.Schema
-
-var ListProgramManagementAccountsRequest_sort *smithy.Schema
-
-var ListProgramManagementAccountsRequest_nextToken *smithy.Schema
-
-var ListProgramManagementAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListProgramManagementAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProgramManagementAccountsResponse_items *smithy.Schema
-
-var ListProgramManagementAccountsResponse_nextToken *smithy.Schema
-
-var ListRelationshipsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListRelationshipsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListRelationshipsRequest_catalog *smithy.Schema
-
-var ListRelationshipsRequest_maxResults *smithy.Schema
-
-var ListRelationshipsRequest_associatedAccountIds *smithy.Schema
-
-var ListRelationshipsRequest_associationTypes *smithy.Schema
-
-var ListRelationshipsRequest_displayNames *smithy.Schema
-
-var ListRelationshipsRequest_programManagementAccountIdentifiers *smithy.Schema
-
-var ListRelationshipsRequest_sort *smithy.Schema
-
-var ListRelationshipsRequest_nextToken *smithy.Schema
-
-var ListRelationshipsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListRelationshipsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRelationshipsResponse_items *smithy.Schema
-
-var ListRelationshipsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RejectChannelHandshakeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RejectChannelHandshakeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RejectChannelHandshakeRequest_catalog *smithy.Schema
-
-var RejectChannelHandshakeRequest_identifier *smithy.Schema
-
-var RejectChannelHandshakeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "RejectChannelHandshakeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RejectChannelHandshakeResponse_channelHandshakeDetail *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateProgramManagementAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UpdateProgramManagementAccountRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateProgramManagementAccountRequest_catalog *smithy.Schema
-
-var UpdateProgramManagementAccountRequest_identifier *smithy.Schema
-
-var UpdateProgramManagementAccountRequest_revision *smithy.Schema
-
-var UpdateProgramManagementAccountRequest_displayName *smithy.Schema
-
-var UpdateProgramManagementAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UpdateProgramManagementAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateProgramManagementAccountResponse_programManagementAccountDetail *smithy.Schema
-
-var UpdateRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UpdateRelationshipRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateRelationshipRequest_catalog *smithy.Schema
-
-var UpdateRelationshipRequest_identifier *smithy.Schema
-
-var UpdateRelationshipRequest_programManagementAccountIdentifier *smithy.Schema
-
-var UpdateRelationshipRequest_revision *smithy.Schema
-
-var UpdateRelationshipRequest_displayName *smithy.Schema
-
-var UpdateRelationshipRequest_requestedSupportPlan *smithy.Schema
-
-var UpdateRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralchannel",
-	Name:      "UpdateRelationshipResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRelationshipResponse_relationshipDetail *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	HandshakeStatus_PENDING = HandshakeStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	HandshakeStatus_ACCEPTED = HandshakeStatus.AddMember("ACCEPTED", smithyprelude.Unit)
-
-	HandshakeStatus_REJECTED = HandshakeStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	HandshakeStatus_CANCELED = HandshakeStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	HandshakeStatus_EXPIRED = HandshakeStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	AcceptChannelHandshakeDetail_id = AcceptChannelHandshakeDetail.AddMember("id", _ChannelHandshakeId)
-
-	AcceptChannelHandshakeDetail_arn = AcceptChannelHandshakeDetail.AddMember("arn", _Arn)
-
-	AcceptChannelHandshakeDetail_status = AcceptChannelHandshakeDetail.AddMember("status", HandshakeStatus)
-
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AccessDeniedException_reason = AccessDeniedException.AddMember("reason", smithyprelude.String)
-
-	_AccountIdList_member = _AccountIdList.AddMember("member", _AccountId)
-
-	_AssociatedResourceIdentifierList_member = _AssociatedResourceIdentifierList.AddMember("member", _AssociatedResourceIdentifier)
-
-	AssociationType_DOWNSTREAM_SELLER = AssociationType.AddMember("DOWNSTREAM_SELLER", smithyprelude.Unit)
-
-	AssociationType_END_CUSTOMER = AssociationType.AddMember("END_CUSTOMER", smithyprelude.Unit)
-
-	AssociationType_INTERNAL = AssociationType.AddMember("INTERNAL", smithyprelude.Unit)
-
-	_AssociationTypeList_member = _AssociationTypeList.AddMember("member", AssociationType)
-
-	CancelChannelHandshakeDetail_id = CancelChannelHandshakeDetail.AddMember("id", _ChannelHandshakeId)
-
-	CancelChannelHandshakeDetail_arn = CancelChannelHandshakeDetail.AddMember("arn", _Arn)
-
-	CancelChannelHandshakeDetail_status = CancelChannelHandshakeDetail.AddMember("status", HandshakeStatus)
-
-	ServicePeriodType_MINIMUM_NOTICE_PERIOD = ServicePeriodType.AddMember("MINIMUM_NOTICE_PERIOD", smithyprelude.Unit)
-
-	ServicePeriodType_FIXED_COMMITMENT_PERIOD = ServicePeriodType.AddMember("FIXED_COMMITMENT_PERIOD", smithyprelude.Unit)
-
-	StartServicePeriodPayload_programManagementAccountIdentifier = StartServicePeriodPayload.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
-
-	StartServicePeriodPayload_note = StartServicePeriodPayload.AddMember("note", _Note)
-
-	StartServicePeriodPayload_servicePeriodType = StartServicePeriodPayload.AddMember("servicePeriodType", ServicePeriodType)
-
-	StartServicePeriodPayload_minimumNoticeDays = StartServicePeriodPayload.AddMember("minimumNoticeDays", _MinimumNoticeDays)
-
-	StartServicePeriodPayload_endDate = StartServicePeriodPayload.AddMember("endDate", _DateTime)
-
-	RevokeServicePeriodPayload_programManagementAccountIdentifier = RevokeServicePeriodPayload.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
-
-	RevokeServicePeriodPayload_note = RevokeServicePeriodPayload.AddMember("note", _Note)
-
-	ChannelHandshakePayload_startServicePeriodPayload = ChannelHandshakePayload.AddMember("startServicePeriodPayload", StartServicePeriodPayload)
-
-	ChannelHandshakePayload_revokeServicePeriodPayload = ChannelHandshakePayload.AddMember("revokeServicePeriodPayload", RevokeServicePeriodPayload)
-
-	HandshakeType_START_SERVICE_PERIOD = HandshakeType.AddMember("START_SERVICE_PERIOD", smithyprelude.Unit)
-
-	HandshakeType_REVOKE_SERVICE_PERIOD = HandshakeType.AddMember("REVOKE_SERVICE_PERIOD", smithyprelude.Unit)
-
-	HandshakeType_PROGRAM_MANAGEMENT_ACCOUNT = HandshakeType.AddMember("PROGRAM_MANAGEMENT_ACCOUNT", smithyprelude.Unit)
-
-	StartServicePeriodHandshakeDetail_note = StartServicePeriodHandshakeDetail.AddMember("note", _Note)
-
-	StartServicePeriodHandshakeDetail_servicePeriodType = StartServicePeriodHandshakeDetail.AddMember("servicePeriodType", ServicePeriodType)
-
-	StartServicePeriodHandshakeDetail_minimumNoticeDays = StartServicePeriodHandshakeDetail.AddMember("minimumNoticeDays", _MinimumNoticeDays)
-
-	StartServicePeriodHandshakeDetail_startDate = StartServicePeriodHandshakeDetail.AddMember("startDate", _DateTime)
-
-	StartServicePeriodHandshakeDetail_endDate = StartServicePeriodHandshakeDetail.AddMember("endDate", _DateTime)
-
-	RevokeServicePeriodHandshakeDetail_note = RevokeServicePeriodHandshakeDetail.AddMember("note", _Note)
-
-	RevokeServicePeriodHandshakeDetail_servicePeriodType = RevokeServicePeriodHandshakeDetail.AddMember("servicePeriodType", ServicePeriodType)
-
-	RevokeServicePeriodHandshakeDetail_minimumNoticeDays = RevokeServicePeriodHandshakeDetail.AddMember("minimumNoticeDays", _MinimumNoticeDays)
-
-	RevokeServicePeriodHandshakeDetail_startDate = RevokeServicePeriodHandshakeDetail.AddMember("startDate", _DateTime)
-
-	RevokeServicePeriodHandshakeDetail_endDate = RevokeServicePeriodHandshakeDetail.AddMember("endDate", _DateTime)
-
-	Program_SOLUTION_PROVIDER = Program.AddMember("SOLUTION_PROVIDER", smithyprelude.Unit)
-
-	Program_DISTRIBUTION = Program.AddMember("DISTRIBUTION", smithyprelude.Unit)
-
-	Program_DISTRIBUTION_SELLER = Program.AddMember("DISTRIBUTION_SELLER", smithyprelude.Unit)
-
-	ProgramManagementAccountHandshakeDetail_program = ProgramManagementAccountHandshakeDetail.AddMember("program", Program)
-
-	HandshakeDetail_startServicePeriodHandshakeDetail = HandshakeDetail.AddMember("startServicePeriodHandshakeDetail", StartServicePeriodHandshakeDetail)
-
-	HandshakeDetail_revokeServicePeriodHandshakeDetail = HandshakeDetail.AddMember("revokeServicePeriodHandshakeDetail", RevokeServicePeriodHandshakeDetail)
-
-	HandshakeDetail_programManagementAccountHandshakeDetail = HandshakeDetail.AddMember("programManagementAccountHandshakeDetail", ProgramManagementAccountHandshakeDetail)
-
-	ChannelHandshakeSummary_id = ChannelHandshakeSummary.AddMember("id", _ChannelHandshakeId)
-
-	ChannelHandshakeSummary_arn = ChannelHandshakeSummary.AddMember("arn", _Arn)
-
-	ChannelHandshakeSummary_catalog = ChannelHandshakeSummary.AddMember("catalog", _Catalog)
-
-	ChannelHandshakeSummary_handshakeType = ChannelHandshakeSummary.AddMember("handshakeType", HandshakeType)
-
-	ChannelHandshakeSummary_ownerAccountId = ChannelHandshakeSummary.AddMember("ownerAccountId", _AccountId)
-
-	ChannelHandshakeSummary_senderAccountId = ChannelHandshakeSummary.AddMember("senderAccountId", _AccountId)
-
-	ChannelHandshakeSummary_senderDisplayName = ChannelHandshakeSummary.AddMember("senderDisplayName", _PartnerProfileDisplayName)
-
-	ChannelHandshakeSummary_receiverAccountId = ChannelHandshakeSummary.AddMember("receiverAccountId", _AccountId)
-
-	ChannelHandshakeSummary_associatedResourceId = ChannelHandshakeSummary.AddMember("associatedResourceId", _AssociatedResourceId)
-
-	ChannelHandshakeSummary_detail = ChannelHandshakeSummary.AddMember("detail", HandshakeDetail)
-
-	ChannelHandshakeSummary_createdAt = ChannelHandshakeSummary.AddMember("createdAt", _DateTime)
-
-	ChannelHandshakeSummary_updatedAt = ChannelHandshakeSummary.AddMember("updatedAt", _DateTime)
-
-	ChannelHandshakeSummary_status = ChannelHandshakeSummary.AddMember("status", HandshakeStatus)
-
-	_ChannelHandshakeSummaries_member = _ChannelHandshakeSummaries.AddMember("member", ChannelHandshakeSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	Coverage_ENTIRE_ORGANIZATION = Coverage.AddMember("ENTIRE_ORGANIZATION", smithyprelude.Unit)
-
-	Coverage_MANAGEMENT_ACCOUNT_ONLY = Coverage.AddMember("MANAGEMENT_ACCOUNT_ONLY", smithyprelude.Unit)
-
-	CreateChannelHandshakeDetail_id = CreateChannelHandshakeDetail.AddMember("id", _ChannelHandshakeId)
-
-	CreateChannelHandshakeDetail_arn = CreateChannelHandshakeDetail.AddMember("arn", _Arn)
-
-	CreateProgramManagementAccountDetail_id = CreateProgramManagementAccountDetail.AddMember("id", _ProgramManagementAccountId)
-
-	CreateProgramManagementAccountDetail_arn = CreateProgramManagementAccountDetail.AddMember("arn", _Arn)
-
-	CreateRelationshipDetail_arn = CreateRelationshipDetail.AddMember("arn", _Arn)
-
-	CreateRelationshipDetail_id = CreateRelationshipDetail.AddMember("id", _RelationshipId)
-
-	_HandshakeStatusList_member = _HandshakeStatusList.AddMember("member", HandshakeStatus)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	_ServicePeriodTypeList_member = _ServicePeriodTypeList.AddMember("member", ServicePeriodType)
-
-	StartServicePeriodTypeFilters_servicePeriodTypes = StartServicePeriodTypeFilters.AddMember("servicePeriodTypes", _ServicePeriodTypeList)
-
-	RevokeServicePeriodTypeFilters_servicePeriodTypes = RevokeServicePeriodTypeFilters.AddMember("servicePeriodTypes", _ServicePeriodTypeList)
-
-	_ProgramList_member = _ProgramList.AddMember("member", Program)
-
-	ProgramManagementAccountTypeFilters_programs = ProgramManagementAccountTypeFilters.AddMember("programs", _ProgramList)
-
-	ListChannelHandshakesTypeFilters_startServicePeriodTypeFilters = ListChannelHandshakesTypeFilters.AddMember("startServicePeriodTypeFilters", StartServicePeriodTypeFilters)
-
-	ListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters = ListChannelHandshakesTypeFilters.AddMember("revokeServicePeriodTypeFilters", RevokeServicePeriodTypeFilters)
-
-	ListChannelHandshakesTypeFilters_programManagementAccountTypeFilters = ListChannelHandshakesTypeFilters.AddMember("programManagementAccountTypeFilters", ProgramManagementAccountTypeFilters)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	StartServicePeriodTypeSortName_UPDATED_AT = StartServicePeriodTypeSortName.AddMember("UPDATED_AT", smithyprelude.Unit)
-
-	StartServicePeriodTypeSort_sortOrder = StartServicePeriodTypeSort.AddMember("sortOrder", SortOrder)
-
-	StartServicePeriodTypeSort_sortBy = StartServicePeriodTypeSort.AddMember("sortBy", StartServicePeriodTypeSortName)
-
-	RevokeServicePeriodTypeSortName_UPDATED_AT = RevokeServicePeriodTypeSortName.AddMember("UPDATED_AT", smithyprelude.Unit)
-
-	RevokeServicePeriodTypeSort_sortOrder = RevokeServicePeriodTypeSort.AddMember("sortOrder", SortOrder)
-
-	RevokeServicePeriodTypeSort_sortBy = RevokeServicePeriodTypeSort.AddMember("sortBy", RevokeServicePeriodTypeSortName)
-
-	ProgramManagementAccountTypeSortName_UPDATED_AT = ProgramManagementAccountTypeSortName.AddMember("UPDATED_AT", smithyprelude.Unit)
-
-	ProgramManagementAccountTypeSort_sortOrder = ProgramManagementAccountTypeSort.AddMember("sortOrder", SortOrder)
-
-	ProgramManagementAccountTypeSort_sortBy = ProgramManagementAccountTypeSort.AddMember("sortBy", ProgramManagementAccountTypeSortName)
-
-	ListChannelHandshakesTypeSort_startServicePeriodTypeSort = ListChannelHandshakesTypeSort.AddMember("startServicePeriodTypeSort", StartServicePeriodTypeSort)
-
-	ListChannelHandshakesTypeSort_revokeServicePeriodTypeSort = ListChannelHandshakesTypeSort.AddMember("revokeServicePeriodTypeSort", RevokeServicePeriodTypeSort)
-
-	ListChannelHandshakesTypeSort_programManagementAccountTypeSort = ListChannelHandshakesTypeSort.AddMember("programManagementAccountTypeSort", ProgramManagementAccountTypeSort)
-
-	ListProgramManagementAccountsSortName_UPDATED_AT = ListProgramManagementAccountsSortName.AddMember("UPDATED_AT", smithyprelude.Unit)
-
-	ListProgramManagementAccountsSortBase_sortOrder = ListProgramManagementAccountsSortBase.AddMember("sortOrder", SortOrder)
-
-	ListProgramManagementAccountsSortBase_sortBy = ListProgramManagementAccountsSortBase.AddMember("sortBy", ListProgramManagementAccountsSortName)
-
-	ListRelationshipsSortName_UPDATED_AT = ListRelationshipsSortName.AddMember("UPDATED_AT", smithyprelude.Unit)
-
-	ListRelationshipsSortBase_sortOrder = ListRelationshipsSortBase.AddMember("sortOrder", SortOrder)
-
-	ListRelationshipsSortBase_sortBy = ListRelationshipsSortBase.AddMember("sortBy", ListRelationshipsSortName)
-
-	ParticipantType_SENDER = ParticipantType.AddMember("SENDER", smithyprelude.Unit)
-
-	ParticipantType_RECEIVER = ParticipantType.AddMember("RECEIVER", smithyprelude.Unit)
-
-	Provider_DISTRIBUTOR = Provider.AddMember("DISTRIBUTOR", smithyprelude.Unit)
-
-	Provider_DISTRIBUTION_SELLER = Provider.AddMember("DISTRIBUTION_SELLER", smithyprelude.Unit)
-
-	PartnerLedSupport_coverage = PartnerLedSupport.AddMember("coverage", Coverage)
-
-	PartnerLedSupport_provider = PartnerLedSupport.AddMember("provider", Provider)
-
-	PartnerLedSupport_tamLocation = PartnerLedSupport.AddMember("tamLocation", smithyprelude.String)
-
-	_ProgramManagementAccountDisplayNameList_member = _ProgramManagementAccountDisplayNameList.AddMember("member", _ProgramManagementAccountDisplayName)
-
-	_ProgramManagementAccountIdentifierList_member = _ProgramManagementAccountIdentifierList.AddMember("member", _ProgramManagementAccountIdentifier)
-
-	ProgramManagementAccountStatus_PENDING = ProgramManagementAccountStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ProgramManagementAccountStatus_ACTIVE = ProgramManagementAccountStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ProgramManagementAccountStatus_INACTIVE = ProgramManagementAccountStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	_ProgramManagementAccountStatusList_member = _ProgramManagementAccountStatusList.AddMember("member", ProgramManagementAccountStatus)
-
-	ProgramManagementAccountSummary_id = ProgramManagementAccountSummary.AddMember("id", _ProgramManagementAccountId)
-
-	ProgramManagementAccountSummary_revision = ProgramManagementAccountSummary.AddMember("revision", _Revision)
-
-	ProgramManagementAccountSummary_catalog = ProgramManagementAccountSummary.AddMember("catalog", _Catalog)
-
-	ProgramManagementAccountSummary_program = ProgramManagementAccountSummary.AddMember("program", Program)
-
-	ProgramManagementAccountSummary_displayName = ProgramManagementAccountSummary.AddMember("displayName", _ProgramManagementAccountDisplayName)
-
-	ProgramManagementAccountSummary_accountId = ProgramManagementAccountSummary.AddMember("accountId", _AccountId)
-
-	ProgramManagementAccountSummary_arn = ProgramManagementAccountSummary.AddMember("arn", _Arn)
-
-	ProgramManagementAccountSummary_createdAt = ProgramManagementAccountSummary.AddMember("createdAt", _DateTime)
-
-	ProgramManagementAccountSummary_updatedAt = ProgramManagementAccountSummary.AddMember("updatedAt", _DateTime)
-
-	ProgramManagementAccountSummary_startDate = ProgramManagementAccountSummary.AddMember("startDate", _DateTime)
-
-	ProgramManagementAccountSummary_status = ProgramManagementAccountSummary.AddMember("status", ProgramManagementAccountStatus)
-
-	_ProgramManagementAccountSummaries_member = _ProgramManagementAccountSummaries.AddMember("member", ProgramManagementAccountSummary)
-
-	RejectChannelHandshakeDetail_id = RejectChannelHandshakeDetail.AddMember("id", _ChannelHandshakeId)
-
-	RejectChannelHandshakeDetail_arn = RejectChannelHandshakeDetail.AddMember("arn", _Arn)
-
-	RejectChannelHandshakeDetail_status = RejectChannelHandshakeDetail.AddMember("status", HandshakeStatus)
-
-	ResaleAccountModel_DISTRIBUTOR = ResaleAccountModel.AddMember("DISTRIBUTOR", smithyprelude.Unit)
-
-	ResaleAccountModel_END_CUSTOMER = ResaleAccountModel.AddMember("END_CUSTOMER", smithyprelude.Unit)
-
-	ResaleAccountModel_SOLUTION_PROVIDER = ResaleAccountModel.AddMember("SOLUTION_PROVIDER", smithyprelude.Unit)
-
-	Sector_COMMERCIAL = Sector.AddMember("COMMERCIAL", smithyprelude.Unit)
-
-	Sector_GOVERNMENT = Sector.AddMember("GOVERNMENT", smithyprelude.Unit)
-
-	Sector_GOVERNMENT_EXCEPTION = Sector.AddMember("GOVERNMENT_EXCEPTION", smithyprelude.Unit)
-
-	RelationshipDetail_arn = RelationshipDetail.AddMember("arn", _Arn)
-
-	RelationshipDetail_id = RelationshipDetail.AddMember("id", _RelationshipId)
-
-	RelationshipDetail_revision = RelationshipDetail.AddMember("revision", _Revision)
-
-	RelationshipDetail_catalog = RelationshipDetail.AddMember("catalog", _Catalog)
-
-	RelationshipDetail_associationType = RelationshipDetail.AddMember("associationType", AssociationType)
-
-	RelationshipDetail_programManagementAccountId = RelationshipDetail.AddMember("programManagementAccountId", _ProgramManagementAccountId)
-
-	RelationshipDetail_associatedAccountId = RelationshipDetail.AddMember("associatedAccountId", _AccountId)
-
-	RelationshipDetail_displayName = RelationshipDetail.AddMember("displayName", _RelationshipDisplayName)
-
-	RelationshipDetail_resaleAccountModel = RelationshipDetail.AddMember("resaleAccountModel", ResaleAccountModel)
-
-	RelationshipDetail_sector = RelationshipDetail.AddMember("sector", Sector)
-
-	RelationshipDetail_createdAt = RelationshipDetail.AddMember("createdAt", _DateTime)
-
-	RelationshipDetail_updatedAt = RelationshipDetail.AddMember("updatedAt", _DateTime)
-
-	RelationshipDetail_startDate = RelationshipDetail.AddMember("startDate", _DateTime)
-
-	_RelationshipDisplayNameList_member = _RelationshipDisplayNameList.AddMember("member", _RelationshipDisplayName)
-
-	RelationshipSummary_arn = RelationshipSummary.AddMember("arn", _Arn)
-
-	RelationshipSummary_id = RelationshipSummary.AddMember("id", _RelationshipId)
-
-	RelationshipSummary_revision = RelationshipSummary.AddMember("revision", _Revision)
-
-	RelationshipSummary_catalog = RelationshipSummary.AddMember("catalog", _Catalog)
-
-	RelationshipSummary_associationType = RelationshipSummary.AddMember("associationType", AssociationType)
-
-	RelationshipSummary_programManagementAccountId = RelationshipSummary.AddMember("programManagementAccountId", _ProgramManagementAccountId)
-
-	RelationshipSummary_associatedAccountId = RelationshipSummary.AddMember("associatedAccountId", _AccountId)
-
-	RelationshipSummary_displayName = RelationshipSummary.AddMember("displayName", _RelationshipDisplayName)
-
-	RelationshipSummary_sector = RelationshipSummary.AddMember("sector", Sector)
-
-	RelationshipSummary_createdAt = RelationshipSummary.AddMember("createdAt", _DateTime)
-
-	RelationshipSummary_updatedAt = RelationshipSummary.AddMember("updatedAt", _DateTime)
-
-	RelationshipSummary_startDate = RelationshipSummary.AddMember("startDate", _DateTime)
-
-	_RelationshipSummaries_member = _RelationshipSummaries.AddMember("member", RelationshipSummary)
-
-	ResoldEnterprise_coverage = ResoldEnterprise.AddMember("coverage", Coverage)
-
-	ResoldEnterprise_tamLocation = ResoldEnterprise.AddMember("tamLocation", smithyprelude.String)
-
-	ResoldEnterprise_chargeAccountId = ResoldEnterprise.AddMember("chargeAccountId", _AccountId)
-
-	ResoldUnifiedOperations_coverage = ResoldUnifiedOperations.AddMember("coverage", Coverage)
-
-	ResoldUnifiedOperations_tamLocation = ResoldUnifiedOperations.AddMember("tamLocation", smithyprelude.String)
-
-	ResoldUnifiedOperations_chargeAccountId = ResoldUnifiedOperations.AddMember("chargeAccountId", _AccountId)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	SupportPlan_resoldEnterprise = SupportPlan.AddMember("resoldEnterprise", ResoldEnterprise)
-
-	SupportPlan_partnerLedSupport = SupportPlan.AddMember("partnerLedSupport", PartnerLedSupport)
-
-	SupportPlan_resoldUnifiedOperations = SupportPlan.AddMember("resoldUnifiedOperations", ResoldUnifiedOperations)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	UpdateProgramManagementAccountDetail_id = UpdateProgramManagementAccountDetail.AddMember("id", _ProgramManagementAccountId)
-
-	UpdateProgramManagementAccountDetail_arn = UpdateProgramManagementAccountDetail.AddMember("arn", _Arn)
-
-	UpdateProgramManagementAccountDetail_revision = UpdateProgramManagementAccountDetail.AddMember("revision", _Revision)
-
-	UpdateProgramManagementAccountDetail_displayName = UpdateProgramManagementAccountDetail.AddMember("displayName", _ProgramManagementAccountDisplayName)
-
-	UpdateRelationshipDetail_arn = UpdateRelationshipDetail.AddMember("arn", _Arn)
-
-	UpdateRelationshipDetail_id = UpdateRelationshipDetail.AddMember("id", _RelationshipId)
-
-	UpdateRelationshipDetail_revision = UpdateRelationshipDetail.AddMember("revision", _Revision)
-
-	UpdateRelationshipDetail_displayName = UpdateRelationshipDetail.AddMember("displayName", _RelationshipDisplayName)
-
-	ValidationExceptionReason_REQUEST_VALIDATION_FAILED = ValidationExceptionReason.AddMember("REQUEST_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_BUSINESS_VALIDATION_FAILED = ValidationExceptionReason.AddMember("BUSINESS_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_code = ValidationExceptionField.AddMember("code", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	AcceptChannelHandshakeRequest_catalog = AcceptChannelHandshakeRequest.AddMember("catalog", _Catalog)
-
-	AcceptChannelHandshakeRequest_identifier = AcceptChannelHandshakeRequest.AddMember("identifier", _ChannelHandshakeIdentifier)
-
-	AcceptChannelHandshakeResponse_channelHandshakeDetail = AcceptChannelHandshakeResponse.AddMember("channelHandshakeDetail", AcceptChannelHandshakeDetail)
-
-	CancelChannelHandshakeRequest_catalog = CancelChannelHandshakeRequest.AddMember("catalog", _Catalog)
-
-	CancelChannelHandshakeRequest_identifier = CancelChannelHandshakeRequest.AddMember("identifier", _ChannelHandshakeIdentifier)
-
-	CancelChannelHandshakeResponse_channelHandshakeDetail = CancelChannelHandshakeResponse.AddMember("channelHandshakeDetail", CancelChannelHandshakeDetail)
-
-	CreateChannelHandshakeRequest_handshakeType = CreateChannelHandshakeRequest.AddMember("handshakeType", HandshakeType)
-
-	CreateChannelHandshakeRequest_catalog = CreateChannelHandshakeRequest.AddMember("catalog", _Catalog)
-
-	CreateChannelHandshakeRequest_associatedResourceIdentifier = CreateChannelHandshakeRequest.AddMember("associatedResourceIdentifier", _AssociatedResourceIdentifier)
-
-	CreateChannelHandshakeRequest_payload = CreateChannelHandshakeRequest.AddMember("payload", ChannelHandshakePayload)
-
-	CreateChannelHandshakeRequest_clientToken = CreateChannelHandshakeRequest.AddMember("clientToken", _ClientToken)
-
-	CreateChannelHandshakeRequest_tags = CreateChannelHandshakeRequest.AddMember("tags", _TagList)
-
-	CreateChannelHandshakeResponse_channelHandshakeDetail = CreateChannelHandshakeResponse.AddMember("channelHandshakeDetail", CreateChannelHandshakeDetail)
-
-	CreateProgramManagementAccountRequest_catalog = CreateProgramManagementAccountRequest.AddMember("catalog", _Catalog)
-
-	CreateProgramManagementAccountRequest_program = CreateProgramManagementAccountRequest.AddMember("program", Program)
-
-	CreateProgramManagementAccountRequest_displayName = CreateProgramManagementAccountRequest.AddMember("displayName", _ProgramManagementAccountDisplayName)
-
-	CreateProgramManagementAccountRequest_accountId = CreateProgramManagementAccountRequest.AddMember("accountId", _AccountId)
-
-	CreateProgramManagementAccountRequest_clientToken = CreateProgramManagementAccountRequest.AddMember("clientToken", _ClientToken)
-
-	CreateProgramManagementAccountRequest_tags = CreateProgramManagementAccountRequest.AddMember("tags", _TagList)
-
-	CreateProgramManagementAccountResponse_programManagementAccountDetail = CreateProgramManagementAccountResponse.AddMember("programManagementAccountDetail", CreateProgramManagementAccountDetail)
-
-	CreateRelationshipRequest_catalog = CreateRelationshipRequest.AddMember("catalog", _Catalog)
-
-	CreateRelationshipRequest_associationType = CreateRelationshipRequest.AddMember("associationType", AssociationType)
-
-	CreateRelationshipRequest_programManagementAccountIdentifier = CreateRelationshipRequest.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
-
-	CreateRelationshipRequest_associatedAccountId = CreateRelationshipRequest.AddMember("associatedAccountId", _AccountId)
-
-	CreateRelationshipRequest_displayName = CreateRelationshipRequest.AddMember("displayName", _RelationshipDisplayName)
-
-	CreateRelationshipRequest_resaleAccountModel = CreateRelationshipRequest.AddMember("resaleAccountModel", ResaleAccountModel)
-
-	CreateRelationshipRequest_sector = CreateRelationshipRequest.AddMember("sector", Sector)
-
-	CreateRelationshipRequest_clientToken = CreateRelationshipRequest.AddMember("clientToken", _ClientToken)
-
-	CreateRelationshipRequest_tags = CreateRelationshipRequest.AddMember("tags", _TagList)
-
-	CreateRelationshipRequest_requestedSupportPlan = CreateRelationshipRequest.AddMember("requestedSupportPlan", SupportPlan)
-
-	CreateRelationshipResponse_relationshipDetail = CreateRelationshipResponse.AddMember("relationshipDetail", CreateRelationshipDetail)
-
-	DeleteProgramManagementAccountRequest_catalog = DeleteProgramManagementAccountRequest.AddMember("catalog", _Catalog)
-
-	DeleteProgramManagementAccountRequest_identifier = DeleteProgramManagementAccountRequest.AddMember("identifier", _ProgramManagementAccountIdentifier)
-
-	DeleteProgramManagementAccountRequest_clientToken = DeleteProgramManagementAccountRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteRelationshipRequest_catalog = DeleteRelationshipRequest.AddMember("catalog", _Catalog)
-
-	DeleteRelationshipRequest_identifier = DeleteRelationshipRequest.AddMember("identifier", _RelationshipIdentifier)
-
-	DeleteRelationshipRequest_programManagementAccountIdentifier = DeleteRelationshipRequest.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
-
-	DeleteRelationshipRequest_clientToken = DeleteRelationshipRequest.AddMember("clientToken", _ClientToken)
-
-	GetRelationshipRequest_catalog = GetRelationshipRequest.AddMember("catalog", _Catalog)
-
-	GetRelationshipRequest_programManagementAccountIdentifier = GetRelationshipRequest.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
-
-	GetRelationshipRequest_identifier = GetRelationshipRequest.AddMember("identifier", _RelationshipIdentifier)
-
-	GetRelationshipResponse_relationshipDetail = GetRelationshipResponse.AddMember("relationshipDetail", RelationshipDetail)
-
-	ListChannelHandshakesRequest_handshakeType = ListChannelHandshakesRequest.AddMember("handshakeType", HandshakeType)
-
-	ListChannelHandshakesRequest_catalog = ListChannelHandshakesRequest.AddMember("catalog", _Catalog)
-
-	ListChannelHandshakesRequest_participantType = ListChannelHandshakesRequest.AddMember("participantType", ParticipantType)
-
-	ListChannelHandshakesRequest_maxResults = ListChannelHandshakesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListChannelHandshakesRequest_statuses = ListChannelHandshakesRequest.AddMember("statuses", _HandshakeStatusList)
-
-	ListChannelHandshakesRequest_associatedResourceIdentifiers = ListChannelHandshakesRequest.AddMember("associatedResourceIdentifiers", _AssociatedResourceIdentifierList)
-
-	ListChannelHandshakesRequest_handshakeTypeFilters = ListChannelHandshakesRequest.AddMember("handshakeTypeFilters", ListChannelHandshakesTypeFilters)
-
-	ListChannelHandshakesRequest_handshakeTypeSort = ListChannelHandshakesRequest.AddMember("handshakeTypeSort", ListChannelHandshakesTypeSort)
-
-	ListChannelHandshakesRequest_nextToken = ListChannelHandshakesRequest.AddMember("nextToken", _NextToken)
-
-	ListChannelHandshakesResponse_items = ListChannelHandshakesResponse.AddMember("items", _ChannelHandshakeSummaries)
-
-	ListChannelHandshakesResponse_nextToken = ListChannelHandshakesResponse.AddMember("nextToken", _NextToken)
-
-	ListProgramManagementAccountsRequest_catalog = ListProgramManagementAccountsRequest.AddMember("catalog", _Catalog)
-
-	ListProgramManagementAccountsRequest_maxResults = ListProgramManagementAccountsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListProgramManagementAccountsRequest_displayNames = ListProgramManagementAccountsRequest.AddMember("displayNames", _ProgramManagementAccountDisplayNameList)
-
-	ListProgramManagementAccountsRequest_programs = ListProgramManagementAccountsRequest.AddMember("programs", _ProgramList)
-
-	ListProgramManagementAccountsRequest_accountIds = ListProgramManagementAccountsRequest.AddMember("accountIds", _AccountIdList)
-
-	ListProgramManagementAccountsRequest_statuses = ListProgramManagementAccountsRequest.AddMember("statuses", _ProgramManagementAccountStatusList)
-
-	ListProgramManagementAccountsRequest_sort = ListProgramManagementAccountsRequest.AddMember("sort", ListProgramManagementAccountsSortBase)
-
-	ListProgramManagementAccountsRequest_nextToken = ListProgramManagementAccountsRequest.AddMember("nextToken", _NextToken)
-
-	ListProgramManagementAccountsResponse_items = ListProgramManagementAccountsResponse.AddMember("items", _ProgramManagementAccountSummaries)
-
-	ListProgramManagementAccountsResponse_nextToken = ListProgramManagementAccountsResponse.AddMember("nextToken", _NextToken)
-
-	ListRelationshipsRequest_catalog = ListRelationshipsRequest.AddMember("catalog", _Catalog)
-
-	ListRelationshipsRequest_maxResults = ListRelationshipsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListRelationshipsRequest_associatedAccountIds = ListRelationshipsRequest.AddMember("associatedAccountIds", _AccountIdList)
-
-	ListRelationshipsRequest_associationTypes = ListRelationshipsRequest.AddMember("associationTypes", _AssociationTypeList)
-
-	ListRelationshipsRequest_displayNames = ListRelationshipsRequest.AddMember("displayNames", _RelationshipDisplayNameList)
-
-	ListRelationshipsRequest_programManagementAccountIdentifiers = ListRelationshipsRequest.AddMember("programManagementAccountIdentifiers", _ProgramManagementAccountIdentifierList)
-
-	ListRelationshipsRequest_sort = ListRelationshipsRequest.AddMember("sort", ListRelationshipsSortBase)
-
-	ListRelationshipsRequest_nextToken = ListRelationshipsRequest.AddMember("nextToken", _NextToken)
-
-	ListRelationshipsResponse_items = ListRelationshipsResponse.AddMember("items", _RelationshipSummaries)
-
-	ListRelationshipsResponse_nextToken = ListRelationshipsResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _TaggableArn)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	RejectChannelHandshakeRequest_catalog = RejectChannelHandshakeRequest.AddMember("catalog", _Catalog)
-
-	RejectChannelHandshakeRequest_identifier = RejectChannelHandshakeRequest.AddMember("identifier", _ChannelHandshakeIdentifier)
-
-	RejectChannelHandshakeResponse_channelHandshakeDetail = RejectChannelHandshakeResponse.AddMember("channelHandshakeDetail", RejectChannelHandshakeDetail)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _TaggableArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _TaggableArn)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-	UpdateProgramManagementAccountRequest_catalog = UpdateProgramManagementAccountRequest.AddMember("catalog", _Catalog)
-
-	UpdateProgramManagementAccountRequest_identifier = UpdateProgramManagementAccountRequest.AddMember("identifier", _ProgramManagementAccountIdentifier)
-
-	UpdateProgramManagementAccountRequest_revision = UpdateProgramManagementAccountRequest.AddMember("revision", _Revision)
-
-	UpdateProgramManagementAccountRequest_displayName = UpdateProgramManagementAccountRequest.AddMember("displayName", _ProgramManagementAccountDisplayName)
-
-	UpdateProgramManagementAccountResponse_programManagementAccountDetail = UpdateProgramManagementAccountResponse.AddMember("programManagementAccountDetail", UpdateProgramManagementAccountDetail)
-
-	UpdateRelationshipRequest_catalog = UpdateRelationshipRequest.AddMember("catalog", _Catalog)
-
-	UpdateRelationshipRequest_identifier = UpdateRelationshipRequest.AddMember("identifier", _RelationshipIdentifier)
-
-	UpdateRelationshipRequest_programManagementAccountIdentifier = UpdateRelationshipRequest.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
-
-	UpdateRelationshipRequest_revision = UpdateRelationshipRequest.AddMember("revision", _Revision)
-
-	UpdateRelationshipRequest_displayName = UpdateRelationshipRequest.AddMember("displayName", _RelationshipDisplayName)
-
-	UpdateRelationshipRequest_requestedSupportPlan = UpdateRelationshipRequest.AddMember("requestedSupportPlan", SupportPlan)
-
-	UpdateRelationshipResponse_relationshipDetail = UpdateRelationshipResponse.AddMember("relationshipDetail", UpdateRelationshipDetail)
-
+const blob = "" +
+	"ProgramManagementAccountDisplayNameListProgramManagementAccountHandshakeDetailprogramManagementAccou" +
+	"ntHandshakeDetailCreateProgramManagementAccountResponseDeleteProgramManagementAccountResponseProgram" +
+	"ManagementAccountIdentifierListUpdateProgramManagementAccountResponseCreateProgramManagementAccountR" +
+	"equestDeleteProgramManagementAccountRequestListProgramManagementAccountsResponseListProgramManagemen" +
+	"tAccountsSortBaseListProgramManagementAccountsSortNameUpdateProgramManagementAccountRequestCreatePro" +
+	"gramManagementAccountDetailListProgramManagementAccountsRequestProgramManagementAccountTypeSortNameU" +
+	"pdateProgramManagementAccountDetailProgramManagementAccountTypeFiltersprogramManagementAccountIdenti" +
+	"fiersprogramManagementAccountTypeFiltersProgramManagementAccountStatusListRevokeServicePeriodHandsha" +
+	"keDetailrevokeServicePeriodHandshakeDetailProgramManagementAccountSummariesStartServicePeriodHandsha" +
+	"keDetailstartServicePeriodHandshakeDetailAssociatedResourceIdentifierListListChannelHandshakesTypeFi" +
+	"ltersprogramManagementAccountTypeSortProgramManagementAccountSummaryRevokeServicePeriodTypeSortNameA" +
+	"cceptChannelHandshakeResponseCancelChannelHandshakeResponseCreateChannelHandshakeResponseRejectChann" +
+	"elHandshakeResponseRevokeServicePeriodTypeFiltersStartServicePeriodTypeSortNameprogramManagementAcco" +
+	"untDetailrevokeServicePeriodTypeFiltersAcceptChannelHandshakeRequestCancelChannelHandshakeRequestCre" +
+	"ateChannelHandshakeRequestListChannelHandshakesResponseListChannelHandshakesTypeSortRejectChannelHan" +
+	"dshakeRequestServiceQuotaExceededExceptionStartServicePeriodTypeFiltersassociatedResourceIdentifiers" +
+	"startServicePeriodTypeFiltersAcceptChannelHandshakeDetailCancelChannelHandshakeDetailCreateChannelHa" +
+	"ndshakeDetailListChannelHandshakesRequestRejectChannelHandshakeDetailValidationExceptionFieldListLis" +
+	"tTagsForResourceResponseRelationshipDisplayNameListrevokeServicePeriodTypeSortBUSINESS_VALIDATION_FA" +
+	"ILEDChannelHandshakeIdentifierCreateRelationshipResponseDeleteRelationshipResponseListTagsForResourc" +
+	"eRequestPROGRAM_MANAGEMENT_ACCOUNTRevokeServicePeriodPayloadUpdateRelationshipResponserevokeServiceP" +
+	"eriodPayloadstartServicePeriodTypeSortChannelHandshakeSummariesCreateRelationshipRequestDeleteRelati" +
+	"onshipRequestListRelationshipsResponseListRelationshipsSortBaseListRelationshipsSortNamePartnerProfi" +
+	"leDisplayNameREQUEST_VALIDATION_FAILEDResourceNotFoundExceptionStartServicePeriodPayloadUpdateRelati" +
+	"onshipRequestValidationExceptionReasonstartServicePeriodPayloadCreateRelationshipDetailListRelations" +
+	"hipsRequestUpdateRelationshipDetailChannelHandshakePayloadChannelHandshakeSummaryFIXED_COMMITMENT_PE" +
+	"RIODGetRelationshipResponseInternalServerExceptionMANAGEMENT_ACCOUNT_ONLYResoldUnifiedOperationsreso" +
+	"ldUnifiedOperationsGetRelationshipRequestRelationshipIdentifierchannelHandshakeDetailAccessDeniedExc" +
+	"eptionMINIMUM_NOTICE_PERIODPartnerCentralChannelREVOKE_SERVICE_PERIODRelationshipSummariesServicePer" +
+	"iodTypeListUntagResourceResponseGOVERNMENT_EXCEPTIONSTART_SERVICE_PERIODUntagResourceRequestassociat" +
+	"edAccountIdshandshakeTypeFiltersrequestedSupportPlanAssociationTypeListDISTRIBUTION_SELLERENTIRE_ORG" +
+	"ANIZATIONHandshakeStatusListRelationshipSummaryTagResourceResponseThrottlingExceptionResaleAccountMo" +
+	"delTagResourceRequestrelationshipDetailresaleAccountModelservicePeriodTypesConflictExceptionDOWNSTRE" +
+	"AM_SELLERMinimumNoticeDaysPartnerLedSupportSOLUTION_PROVIDERhandshakeTypeSortminimumNoticeDayspartne" +
+	"rLedSupportreceiverAccountIdsenderDisplayNameResoldEnterpriseassociationTypesresoldEnterprisePartici" +
+	"pantTypechargeAccountIdparticipantTypesenderAccountIdownerAccountIdAccountIdListHandshakeTypeEND_CUS" +
+	"TOMERdisplayNamesresourceTypeClientTokenDISTRIBUTORProgramListTaggableArnclientTokenresourceArnservi" +
+	"ceCodetamLocationCOMMERCIALDESCENDINGTagKeyListUPDATED_ATaccountIdsidentifiermaxResultsresourceIdASC" +
+	"ENDINGNextTokenSortOrdercreatedAtfieldListnextTokenquotaCodesortOrderstartDateupdatedAtACCEPTEDCANCE" +
+	"LEDCoverageDateTimeINACTIVEINTERNALProviderRECEIVERREJECTEDRevisionTagValuecoverageprogramsproviderr" +
+	"evisionstatusesCatalogEXPIREDIntegerPENDINGTagListcatalogendDatemessagepayloadtagKeysSENDERSectorStr" +
+	"ingdetailmemberreasonsectorsortByitemsvalueNoteUnitcodenamenotetagsarnkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.partnercentralchannel", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1099, Target: 0, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1129, Target: 1, Traits: 1, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1159, Target: 2, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 117, Target: 3, Traits: 3, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1930, Target: 4, Traits: 4, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 155, Target: 5, Traits: 5, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1956, Target: 6, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2604, Target: 7, Traits: 7, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 973, Target: 8, Traits: 8, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 343, Target: 9, Traits: 9, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2213, Target: 10, Traits: 10, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1797, Target: 11, Traits: 11, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1189, Target: 12, Traits: 12, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3147, Target: 13, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2911, Target: 14, Traits: 14, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 231, Target: 15, Traits: 15, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2060, Target: 16, Traits: 16, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2827, Target: 17, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1629, Target: 18, Traits: 17, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1772, Target: 44, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4007, Target: 87, Traits: 17, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2785, Target: 22, Traits: 18, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4064, Target: 451, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4115, Target: 451, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 210, Target: 25, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3567, Target: 26, Traits: 17, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 25, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3670, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 941, Target: 29, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 941, Target: 30, Traits: 17, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 941, Target: 31, Traits: 17, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 30, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3052, Target: 33, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3292, Target: 452, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3593, Target: 452, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3927, Target: 452, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3052, Target: 37, Traits: 17, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 33, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1657, Target: 39, Traits: 17, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1772, Target: 44, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4007, Target: 87, Traits: 17, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4015, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1904, Target: 44, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1904, Target: 45, Traits: 17, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2535, Target: 46, Traits: 17, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2438, Target: 269, Traits: 17, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2086, Target: 236, Traits: 17, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2138, Target: 49, Traits: 17, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 51, Traits: 17, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2558, Target: 51, Traits: 17, StrLen: 23, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1772, Target: 44, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3012, Target: 95, Traits: 17, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3553, Target: 25, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3538, Target: 25, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3428, Target: 129, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3411, Target: 25, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 29, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4103, Target: 83, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3824, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3878, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4007, Target: 87, Traits: 17, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3629, Target: 65, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3275, Target: 66, Traits: 20, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4064, Target: 451, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3787, Target: 451, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3617, Target: 451, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3903, Target: 70, Traits: 17, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3090, Target: 452, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2650, Target: 452, Traits: 17, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1685, Target: 73, Traits: 17, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1772, Target: 44, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 491, Target: 76, Traits: 17, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1772, Target: 141, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2463, Target: 79, Traits: 17, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 196, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3911, Target: 82, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 63, Target: 83, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 908, Target: 263, Traits: 17, StrLen: 33, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 808, Target: 230, Traits: 17, StrLen: 34, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 78, Target: 139, Traits: 17, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3109, Target: 87, Traits: 17, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4036, Target: 452, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3887, Target: 452, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3951, Target: 452, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3895, Target: 452, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4022, Target: 452, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3109, Target: 93, Traits: 17, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 87, Traits: 17, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3580, Target: 95, Traits: 17, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2952, Target: 452, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2848, Target: 452, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2008, Target: 452, Traits: 17, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2627, Target: 99, Traits: 22, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4064, Target: 451, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 973, Target: 101, Traits: 17, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1600, Target: 275, Traits: 17, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1309, Target: 239, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 705, Target: 165, Traits: 17, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1455, Target: 105, Traits: 17, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2112, Target: 277, Traits: 17, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1851, Target: 241, Traits: 17, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1005, Target: 167, Traits: 17, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 380, Target: 109, Traits: 17, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3860, Target: 260, Traits: 17, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4127, Target: 112, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 417, Target: 112, Traits: 17, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3747, Target: 452, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2238, Target: 114, Traits: 17, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3860, Target: 260, Traits: 17, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4127, Target: 117, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2263, Target: 117, Traits: 17, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3747, Target: 452, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3309, Target: 119, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3806, Target: 120, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4143, Target: 121, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3493, Target: 122, Traits: 17, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4085, Target: 452, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3943, Target: 452, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3326, Target: 125, Traits: 17, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3975, Target: 70, Traits: 17, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3991, Target: 172, Traits: 17, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3706, Target: 451, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2288, Target: 129, Traits: 17, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 130, Traits: 17, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3343, Target: 452, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3071, Target: 452, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3071, Target: 452, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3651, Target: 134, Traits: 17, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 130, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 0, Target: 136, Traits: 17, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 137, Traits: 17, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 136, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 39, Target: 139, Traits: 17, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 78, Target: 130, Traits: 17, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 193, Target: 141, Traits: 17, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 193, Target: 142, Traits: 17, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 193, Target: 143, Traits: 17, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 142, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 740, Target: 145, Traits: 17, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4036, Target: 452, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3921, Target: 452, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3919, Target: 452, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 740, Target: 149, Traits: 17, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 145, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 842, Target: 151, Traits: 17, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 153, Traits: 17, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1037, Target: 153, Traits: 17, StrLen: 31, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1772, Target: 141, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3999, Target: 229, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 78, Target: 130, Traits: 17, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3605, Target: 136, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3757, Target: 25, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3824, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3878, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3869, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4007, Target: 145, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 635, Target: 165, Traits: 17, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3983, Target: 134, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 563, Target: 167, Traits: 17, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3860, Target: 260, Traits: 17, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4127, Target: 170, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 563, Target: 170, Traits: 17, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3747, Target: 452, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3935, Target: 172, Traits: 17, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3640, Target: 452, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3071, Target: 452, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1741, Target: 175, Traits: 17, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1772, Target: 44, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4007, Target: 87, Traits: 17, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2469, Target: 179, Traits: 17, StrLen: 18, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 196, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3999, Target: 229, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3461, Target: 33, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 670, Target: 141, Traits: 17, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2992, Target: 25, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 193, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3239, Target: 213, Traits: 17, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4121, Target: 246, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3824, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3878, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3869, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1824, Target: 193, Traits: 17, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1824, Target: 194, Traits: 17, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 193, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2741, Target: 196, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2741, Target: 197, Traits: 17, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2869, Target: 198, Traits: 17, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 200, Traits: 17, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3128, Target: 200, Traits: 17, StrLen: 19, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 196, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3999, Target: 229, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3461, Target: 33, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 670, Target: 141, Traits: 17, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2992, Target: 25, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 193, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4121, Target: 246, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3824, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3878, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3869, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3185, Target: 213, Traits: 17, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3640, Target: 452, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3593, Target: 452, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3343, Target: 452, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3445, Target: 217, Traits: 17, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3975, Target: 70, Traits: 17, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3706, Target: 451, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3508, Target: 25, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2673, Target: 221, Traits: 17, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3975, Target: 70, Traits: 17, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3706, Target: 451, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3508, Target: 25, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2338, Target: 225, Traits: 23, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4064, Target: 451, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3787, Target: 451, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3617, Target: 451, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3959, Target: 229, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 774, Target: 230, Traits: 17, StrLen: 34, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4159, Target: 121, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3257, Target: 250, Traits: 17, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3377, Target: 119, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4057, Target: 82, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2034, Target: 236, Traits: 17, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 670, Target: 142, Traits: 17, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4159, Target: 121, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1219, Target: 239, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3257, Target: 253, Traits: 17, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1068, Target: 241, Traits: 17, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3860, Target: 260, Traits: 17, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4127, Target: 244, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1068, Target: 244, Traits: 17, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3747, Target: 452, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4091, Target: 246, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3717, Target: 452, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2932, Target: 452, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2932, Target: 452, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1074, Target: 250, Traits: 17, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2806, Target: 452, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2581, Target: 452, Traits: 17, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2890, Target: 253, Traits: 17, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 250, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1513, Target: 255, Traits: 24, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4064, Target: 451, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3787, Target: 451, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3617, Target: 451, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3851, Target: 451, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3815, Target: 260, Traits: 17, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3797, Target: 452, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3727, Target: 452, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 875, Target: 263, Traits: 17, StrLen: 33, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4159, Target: 121, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3257, Target: 250, Traits: 17, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3377, Target: 119, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 82, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4057, Target: 82, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2363, Target: 269, Traits: 17, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 670, Target: 142, Traits: 17, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4159, Target: 121, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3257, Target: 250, Traits: 17, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3377, Target: 119, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4057, Target: 82, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1542, Target: 275, Traits: 17, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3257, Target: 253, Traits: 17, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1249, Target: 277, Traits: 17, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3860, Target: 260, Traits: 17, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4127, Target: 280, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1249, Target: 280, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3747, Target: 452, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3041, Target: 282, Traits: 17, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3477, Target: 217, Traits: 17, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3394, Target: 125, Traits: 17, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2696, Target: 221, Traits: 17, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1801, Target: 286, Traits: 17, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4170, Target: 290, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4138, Target: 295, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3662, Target: 289, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3737, Target: 290, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3737, Target: 291, Traits: 17, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 290, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4043, Target: 293, Traits: 17, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 286, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3967, Target: 295, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3166, Target: 296, Traits: 25, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4064, Target: 451, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3695, Target: 451, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3851, Target: 451, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 599, Target: 300, Traits: 17, StrLen: 36, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1772, Target: 141, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3999, Target: 229, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 136, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2511, Target: 305, Traits: 17, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4167, Target: 28, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 196, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3999, Target: 229, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 193, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1769, Target: 310, Traits: 26, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4064, Target: 451, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4115, Target: 320, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3833, Target: 318, Traits: 17, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1769, Target: 314, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4155, Target: 451, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4151, Target: 451, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4064, Target: 451, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1769, Target: 318, Traits: 17, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4109, Target: 314, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2413, Target: 320, Traits: 17, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2313, Target: 452, Traits: 17, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1878, Target: 452, Traits: 17, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1339, Target: 323, Traits: 17, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3767, Target: 45, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1099, Target: 326, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2763, Target: 18, Traits: 17, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1368, Target: 328, Traits: 17, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3767, Target: 45, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1129, Target: 331, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2763, Target: 39, Traits: 17, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1397, Target: 333, Traits: 17, StrLen: 29, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3012, Target: 95, Traits: 17, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1571, Target: 30, Traits: 17, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4071, Target: 46, Traits: 17, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3673, Target: 65, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4163, Target: 293, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1159, Target: 340, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2763, Target: 73, Traits: 17, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 269, Target: 342, Traits: 17, StrLen: 37, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 78, Target: 130, Traits: 17, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3605, Target: 136, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3757, Target: 25, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3673, Target: 65, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4163, Target: 293, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 117, Target: 349, Traits: 17, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1279, Target: 76, Traits: 17, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2163, Target: 351, Traits: 17, StrLen: 25, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3461, Target: 33, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 670, Target: 142, Traits: 17, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2992, Target: 25, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 193, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3239, Target: 213, Traits: 17, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4121, Target: 246, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3673, Target: 65, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4163, Target: 293, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3032, Target: 282, Traits: 17, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1930, Target: 362, Traits: 17, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3221, Target: 79, Traits: 17, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 306, Target: 364, Traits: 17, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3767, Target: 142, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3673, Target: 65, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 155, Target: 368, Traits: 17, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2188, Target: 369, Traits: 17, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3767, Target: 197, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 670, Target: 142, Traits: 17, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3673, Target: 65, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1956, Target: 374, Traits: 17, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2719, Target: 375, Traits: 17, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 670, Target: 142, Traits: 17, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3767, Target: 197, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2604, Target: 379, Traits: 17, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3221, Target: 179, Traits: 17, StrLen: 18, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1713, Target: 381, Traits: 17, StrLen: 28, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3012, Target: 95, Traits: 17, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3523, Target: 122, Traits: 17, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3777, Target: 453, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4007, Target: 93, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1571, Target: 31, Traits: 17, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3012, Target: 101, Traits: 17, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3360, Target: 105, Traits: 17, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3842, Target: 120, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1426, Target: 391, Traits: 17, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4133, Target: 49, Traits: 17, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3842, Target: 120, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 527, Target: 394, Traits: 17, StrLen: 36, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3777, Target: 453, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3605, Target: 137, Traits: 17, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3983, Target: 134, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3757, Target: 26, Traits: 17, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4007, Target: 149, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3860, Target: 109, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3842, Target: 120, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 343, Target: 403, Traits: 17, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4133, Target: 151, Traits: 17, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3842, Target: 120, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2487, Target: 406, Traits: 17, StrLen: 24, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3777, Target: 453, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2992, Target: 26, Traits: 17, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3461, Target: 37, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 194, Traits: 17, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 670, Target: 143, Traits: 17, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3860, Target: 114, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3842, Target: 120, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2213, Target: 415, Traits: 17, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4133, Target: 198, Traits: 17, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3842, Target: 120, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1982, Target: 418, Traits: 17, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3684, Target: 289, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1797, Target: 420, Traits: 17, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4163, Target: 293, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1484, Target: 422, Traits: 17, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3767, Target: 45, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1189, Target: 425, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2763, Target: 175, Traits: 17, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3203, Target: 427, Traits: 17, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3684, Target: 289, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4163, Target: 293, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3147, Target: 430, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2972, Target: 431, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3684, Target: 289, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4078, Target: 291, Traits: 17, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2911, Target: 434, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 454, Target: 435, Traits: 17, StrLen: 37, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3767, Target: 142, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3999, Target: 229, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 136, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 231, Target: 440, Traits: 17, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1279, Target: 300, Traits: 17, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2388, Target: 442, Traits: 17, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4050, Target: 43, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3767, Target: 197, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 670, Target: 142, Traits: 17, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3999, Target: 229, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 193, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3032, Target: 282, Traits: 17, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2060, Target: 449, Traits: 17, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3221, Target: 305, Traits: 17, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4097, Target: 451, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 4147, Target: 452, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 4029, Target: 453, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/AcceptChannelHandshake",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CancelChannelHandshake",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateChannelHandshake",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateProgramManagementAccount",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateRelationship",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DeleteProgramManagementAccount",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DeleteRelationship",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetRelationship",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListChannelHandshakes",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListProgramManagementAccounts",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListRelationships",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListTagsForResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/RejectChannelHandshake",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/TagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UntagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UpdateProgramManagementAccount",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UpdateRelationship",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [454]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+}
+
+var AcceptChannelHandshake = &handles[0]
+
+var CancelChannelHandshake = &handles[1]
+
+var CreateChannelHandshake = &handles[2]
+
+var CreateProgramManagementAccount = &handles[3]
+
+var CreateRelationship = &handles[4]
+
+var DeleteProgramManagementAccount = &handles[5]
+
+var DeleteRelationship = &handles[6]
+
+var GetRelationship = &handles[7]
+
+var ListChannelHandshakes = &handles[8]
+
+var ListProgramManagementAccounts = &handles[9]
+
+var ListRelationships = &handles[10]
+
+var ListTagsForResource = &handles[11]
+
+var RejectChannelHandshake = &handles[12]
+
+var TagResource = &handles[13]
+
+var UntagResource = &handles[14]
+
+var UpdateProgramManagementAccount = &handles[15]
+
+var UpdateRelationship = &handles[16]
+
+var _PartnerCentralChannel = &handles[17]
+
+var AcceptChannelHandshakeDetail = &handles[18]
+var AcceptChannelHandshakeDetail_id = &handles[19]
+var AcceptChannelHandshakeDetail_arn = &handles[20]
+var AcceptChannelHandshakeDetail_status = &handles[21]
+
+var AccessDeniedException = &handles[22]
+var AccessDeniedException_message = &handles[23]
+var AccessDeniedException_reason = &handles[24]
+
+var _AccountId = &handles[25]
+
+var _AccountIdList = &handles[26]
+var _AccountIdList_member = &handles[27]
+
+var _Arn = &handles[28]
+
+var _AssociatedResourceId = &handles[29]
+
+var _AssociatedResourceIdentifier = &handles[30]
+
+var _AssociatedResourceIdentifierList = &handles[31]
+var _AssociatedResourceIdentifierList_member = &handles[32]
+
+var AssociationType = &handles[33]
+var AssociationType_DOWNSTREAM_SELLER = &handles[34]
+var AssociationType_END_CUSTOMER = &handles[35]
+var AssociationType_INTERNAL = &handles[36]
+
+var _AssociationTypeList = &handles[37]
+var _AssociationTypeList_member = &handles[38]
+
+var CancelChannelHandshakeDetail = &handles[39]
+var CancelChannelHandshakeDetail_id = &handles[40]
+var CancelChannelHandshakeDetail_arn = &handles[41]
+var CancelChannelHandshakeDetail_status = &handles[42]
+
+var _Catalog = &handles[43]
+
+var _ChannelHandshakeId = &handles[44]
+
+var _ChannelHandshakeIdentifier = &handles[45]
+
+var ChannelHandshakePayload = &handles[46]
+var ChannelHandshakePayload_startServicePeriodPayload = &handles[47]
+var ChannelHandshakePayload_revokeServicePeriodPayload = &handles[48]
+
+var _ChannelHandshakeSummaries = &handles[49]
+var _ChannelHandshakeSummaries_member = &handles[50]
+
+var ChannelHandshakeSummary = &handles[51]
+var ChannelHandshakeSummary_id = &handles[52]
+var ChannelHandshakeSummary_arn = &handles[53]
+var ChannelHandshakeSummary_catalog = &handles[54]
+var ChannelHandshakeSummary_handshakeType = &handles[55]
+var ChannelHandshakeSummary_ownerAccountId = &handles[56]
+var ChannelHandshakeSummary_senderAccountId = &handles[57]
+var ChannelHandshakeSummary_senderDisplayName = &handles[58]
+var ChannelHandshakeSummary_receiverAccountId = &handles[59]
+var ChannelHandshakeSummary_associatedResourceId = &handles[60]
+var ChannelHandshakeSummary_detail = &handles[61]
+var ChannelHandshakeSummary_createdAt = &handles[62]
+var ChannelHandshakeSummary_updatedAt = &handles[63]
+var ChannelHandshakeSummary_status = &handles[64]
+
+var _ClientToken = &handles[65]
+
+var ConflictException = &handles[66]
+var ConflictException_message = &handles[67]
+var ConflictException_resourceId = &handles[68]
+var ConflictException_resourceType = &handles[69]
+
+var Coverage = &handles[70]
+var Coverage_ENTIRE_ORGANIZATION = &handles[71]
+var Coverage_MANAGEMENT_ACCOUNT_ONLY = &handles[72]
+
+var CreateChannelHandshakeDetail = &handles[73]
+var CreateChannelHandshakeDetail_id = &handles[74]
+var CreateChannelHandshakeDetail_arn = &handles[75]
+
+var CreateProgramManagementAccountDetail = &handles[76]
+var CreateProgramManagementAccountDetail_id = &handles[77]
+var CreateProgramManagementAccountDetail_arn = &handles[78]
+
+var CreateRelationshipDetail = &handles[79]
+var CreateRelationshipDetail_arn = &handles[80]
+var CreateRelationshipDetail_id = &handles[81]
+
+var _DateTime = &handles[82]
+
+var HandshakeDetail = &handles[83]
+var HandshakeDetail_startServicePeriodHandshakeDetail = &handles[84]
+var HandshakeDetail_revokeServicePeriodHandshakeDetail = &handles[85]
+var HandshakeDetail_programManagementAccountHandshakeDetail = &handles[86]
+
+var HandshakeStatus = &handles[87]
+var HandshakeStatus_PENDING = &handles[88]
+var HandshakeStatus_ACCEPTED = &handles[89]
+var HandshakeStatus_REJECTED = &handles[90]
+var HandshakeStatus_CANCELED = &handles[91]
+var HandshakeStatus_EXPIRED = &handles[92]
+
+var _HandshakeStatusList = &handles[93]
+var _HandshakeStatusList_member = &handles[94]
+
+var HandshakeType = &handles[95]
+var HandshakeType_START_SERVICE_PERIOD = &handles[96]
+var HandshakeType_REVOKE_SERVICE_PERIOD = &handles[97]
+var HandshakeType_PROGRAM_MANAGEMENT_ACCOUNT = &handles[98]
+
+var InternalServerException = &handles[99]
+var InternalServerException_message = &handles[100]
+
+var ListChannelHandshakesTypeFilters = &handles[101]
+var ListChannelHandshakesTypeFilters_startServicePeriodTypeFilters = &handles[102]
+var ListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters = &handles[103]
+var ListChannelHandshakesTypeFilters_programManagementAccountTypeFilters = &handles[104]
+
+var ListChannelHandshakesTypeSort = &handles[105]
+var ListChannelHandshakesTypeSort_startServicePeriodTypeSort = &handles[106]
+var ListChannelHandshakesTypeSort_revokeServicePeriodTypeSort = &handles[107]
+var ListChannelHandshakesTypeSort_programManagementAccountTypeSort = &handles[108]
+
+var ListProgramManagementAccountsSortBase = &handles[109]
+var ListProgramManagementAccountsSortBase_sortOrder = &handles[110]
+var ListProgramManagementAccountsSortBase_sortBy = &handles[111]
+
+var ListProgramManagementAccountsSortName = &handles[112]
+var ListProgramManagementAccountsSortName_UPDATED_AT = &handles[113]
+
+var ListRelationshipsSortBase = &handles[114]
+var ListRelationshipsSortBase_sortOrder = &handles[115]
+var ListRelationshipsSortBase_sortBy = &handles[116]
+
+var ListRelationshipsSortName = &handles[117]
+var ListRelationshipsSortName_UPDATED_AT = &handles[118]
+
+var _MinimumNoticeDays = &handles[119]
+
+var _NextToken = &handles[120]
+
+var _Note = &handles[121]
+
+var ParticipantType = &handles[122]
+var ParticipantType_SENDER = &handles[123]
+var ParticipantType_RECEIVER = &handles[124]
+
+var PartnerLedSupport = &handles[125]
+var PartnerLedSupport_coverage = &handles[126]
+var PartnerLedSupport_provider = &handles[127]
+var PartnerLedSupport_tamLocation = &handles[128]
+
+var _PartnerProfileDisplayName = &handles[129]
+
+var Program = &handles[130]
+var Program_SOLUTION_PROVIDER = &handles[131]
+var Program_DISTRIBUTION = &handles[132]
+var Program_DISTRIBUTION_SELLER = &handles[133]
+
+var _ProgramList = &handles[134]
+var _ProgramList_member = &handles[135]
+
+var _ProgramManagementAccountDisplayName = &handles[136]
+
+var _ProgramManagementAccountDisplayNameList = &handles[137]
+var _ProgramManagementAccountDisplayNameList_member = &handles[138]
+
+var ProgramManagementAccountHandshakeDetail = &handles[139]
+var ProgramManagementAccountHandshakeDetail_program = &handles[140]
+
+var _ProgramManagementAccountId = &handles[141]
+
+var _ProgramManagementAccountIdentifier = &handles[142]
+
+var _ProgramManagementAccountIdentifierList = &handles[143]
+var _ProgramManagementAccountIdentifierList_member = &handles[144]
+
+var ProgramManagementAccountStatus = &handles[145]
+var ProgramManagementAccountStatus_PENDING = &handles[146]
+var ProgramManagementAccountStatus_ACTIVE = &handles[147]
+var ProgramManagementAccountStatus_INACTIVE = &handles[148]
+
+var _ProgramManagementAccountStatusList = &handles[149]
+var _ProgramManagementAccountStatusList_member = &handles[150]
+
+var _ProgramManagementAccountSummaries = &handles[151]
+var _ProgramManagementAccountSummaries_member = &handles[152]
+
+var ProgramManagementAccountSummary = &handles[153]
+var ProgramManagementAccountSummary_id = &handles[154]
+var ProgramManagementAccountSummary_revision = &handles[155]
+var ProgramManagementAccountSummary_catalog = &handles[156]
+var ProgramManagementAccountSummary_program = &handles[157]
+var ProgramManagementAccountSummary_displayName = &handles[158]
+var ProgramManagementAccountSummary_accountId = &handles[159]
+var ProgramManagementAccountSummary_arn = &handles[160]
+var ProgramManagementAccountSummary_createdAt = &handles[161]
+var ProgramManagementAccountSummary_updatedAt = &handles[162]
+var ProgramManagementAccountSummary_startDate = &handles[163]
+var ProgramManagementAccountSummary_status = &handles[164]
+
+var ProgramManagementAccountTypeFilters = &handles[165]
+var ProgramManagementAccountTypeFilters_programs = &handles[166]
+
+var ProgramManagementAccountTypeSort = &handles[167]
+var ProgramManagementAccountTypeSort_sortOrder = &handles[168]
+var ProgramManagementAccountTypeSort_sortBy = &handles[169]
+
+var ProgramManagementAccountTypeSortName = &handles[170]
+var ProgramManagementAccountTypeSortName_UPDATED_AT = &handles[171]
+
+var Provider = &handles[172]
+var Provider_DISTRIBUTOR = &handles[173]
+var Provider_DISTRIBUTION_SELLER = &handles[174]
+
+var RejectChannelHandshakeDetail = &handles[175]
+var RejectChannelHandshakeDetail_id = &handles[176]
+var RejectChannelHandshakeDetail_arn = &handles[177]
+var RejectChannelHandshakeDetail_status = &handles[178]
+
+var RelationshipDetail = &handles[179]
+var RelationshipDetail_arn = &handles[180]
+var RelationshipDetail_id = &handles[181]
+var RelationshipDetail_revision = &handles[182]
+var RelationshipDetail_catalog = &handles[183]
+var RelationshipDetail_associationType = &handles[184]
+var RelationshipDetail_programManagementAccountId = &handles[185]
+var RelationshipDetail_associatedAccountId = &handles[186]
+var RelationshipDetail_displayName = &handles[187]
+var RelationshipDetail_resaleAccountModel = &handles[188]
+var RelationshipDetail_sector = &handles[189]
+var RelationshipDetail_createdAt = &handles[190]
+var RelationshipDetail_updatedAt = &handles[191]
+var RelationshipDetail_startDate = &handles[192]
+
+var _RelationshipDisplayName = &handles[193]
+
+var _RelationshipDisplayNameList = &handles[194]
+var _RelationshipDisplayNameList_member = &handles[195]
+
+var _RelationshipId = &handles[196]
+
+var _RelationshipIdentifier = &handles[197]
+
+var _RelationshipSummaries = &handles[198]
+var _RelationshipSummaries_member = &handles[199]
+
+var RelationshipSummary = &handles[200]
+var RelationshipSummary_arn = &handles[201]
+var RelationshipSummary_id = &handles[202]
+var RelationshipSummary_revision = &handles[203]
+var RelationshipSummary_catalog = &handles[204]
+var RelationshipSummary_associationType = &handles[205]
+var RelationshipSummary_programManagementAccountId = &handles[206]
+var RelationshipSummary_associatedAccountId = &handles[207]
+var RelationshipSummary_displayName = &handles[208]
+var RelationshipSummary_sector = &handles[209]
+var RelationshipSummary_createdAt = &handles[210]
+var RelationshipSummary_updatedAt = &handles[211]
+var RelationshipSummary_startDate = &handles[212]
+
+var ResaleAccountModel = &handles[213]
+var ResaleAccountModel_DISTRIBUTOR = &handles[214]
+var ResaleAccountModel_END_CUSTOMER = &handles[215]
+var ResaleAccountModel_SOLUTION_PROVIDER = &handles[216]
+
+var ResoldEnterprise = &handles[217]
+var ResoldEnterprise_coverage = &handles[218]
+var ResoldEnterprise_tamLocation = &handles[219]
+var ResoldEnterprise_chargeAccountId = &handles[220]
+
+var ResoldUnifiedOperations = &handles[221]
+var ResoldUnifiedOperations_coverage = &handles[222]
+var ResoldUnifiedOperations_tamLocation = &handles[223]
+var ResoldUnifiedOperations_chargeAccountId = &handles[224]
+
+var ResourceNotFoundException = &handles[225]
+var ResourceNotFoundException_message = &handles[226]
+var ResourceNotFoundException_resourceId = &handles[227]
+var ResourceNotFoundException_resourceType = &handles[228]
+
+var _Revision = &handles[229]
+
+var RevokeServicePeriodHandshakeDetail = &handles[230]
+var RevokeServicePeriodHandshakeDetail_note = &handles[231]
+var RevokeServicePeriodHandshakeDetail_servicePeriodType = &handles[232]
+var RevokeServicePeriodHandshakeDetail_minimumNoticeDays = &handles[233]
+var RevokeServicePeriodHandshakeDetail_startDate = &handles[234]
+var RevokeServicePeriodHandshakeDetail_endDate = &handles[235]
+
+var RevokeServicePeriodPayload = &handles[236]
+var RevokeServicePeriodPayload_programManagementAccountIdentifier = &handles[237]
+var RevokeServicePeriodPayload_note = &handles[238]
+
+var RevokeServicePeriodTypeFilters = &handles[239]
+var RevokeServicePeriodTypeFilters_servicePeriodTypes = &handles[240]
+
+var RevokeServicePeriodTypeSort = &handles[241]
+var RevokeServicePeriodTypeSort_sortOrder = &handles[242]
+var RevokeServicePeriodTypeSort_sortBy = &handles[243]
+
+var RevokeServicePeriodTypeSortName = &handles[244]
+var RevokeServicePeriodTypeSortName_UPDATED_AT = &handles[245]
+
+var Sector = &handles[246]
+var Sector_COMMERCIAL = &handles[247]
+var Sector_GOVERNMENT = &handles[248]
+var Sector_GOVERNMENT_EXCEPTION = &handles[249]
+
+var ServicePeriodType = &handles[250]
+var ServicePeriodType_MINIMUM_NOTICE_PERIOD = &handles[251]
+var ServicePeriodType_FIXED_COMMITMENT_PERIOD = &handles[252]
+
+var _ServicePeriodTypeList = &handles[253]
+var _ServicePeriodTypeList_member = &handles[254]
+
+var ServiceQuotaExceededException = &handles[255]
+var ServiceQuotaExceededException_message = &handles[256]
+var ServiceQuotaExceededException_resourceId = &handles[257]
+var ServiceQuotaExceededException_resourceType = &handles[258]
+var ServiceQuotaExceededException_quotaCode = &handles[259]
+
+var SortOrder = &handles[260]
+var SortOrder_ASCENDING = &handles[261]
+var SortOrder_DESCENDING = &handles[262]
+
+var StartServicePeriodHandshakeDetail = &handles[263]
+var StartServicePeriodHandshakeDetail_note = &handles[264]
+var StartServicePeriodHandshakeDetail_servicePeriodType = &handles[265]
+var StartServicePeriodHandshakeDetail_minimumNoticeDays = &handles[266]
+var StartServicePeriodHandshakeDetail_startDate = &handles[267]
+var StartServicePeriodHandshakeDetail_endDate = &handles[268]
+
+var StartServicePeriodPayload = &handles[269]
+var StartServicePeriodPayload_programManagementAccountIdentifier = &handles[270]
+var StartServicePeriodPayload_note = &handles[271]
+var StartServicePeriodPayload_servicePeriodType = &handles[272]
+var StartServicePeriodPayload_minimumNoticeDays = &handles[273]
+var StartServicePeriodPayload_endDate = &handles[274]
+
+var StartServicePeriodTypeFilters = &handles[275]
+var StartServicePeriodTypeFilters_servicePeriodTypes = &handles[276]
+
+var StartServicePeriodTypeSort = &handles[277]
+var StartServicePeriodTypeSort_sortOrder = &handles[278]
+var StartServicePeriodTypeSort_sortBy = &handles[279]
+
+var StartServicePeriodTypeSortName = &handles[280]
+var StartServicePeriodTypeSortName_UPDATED_AT = &handles[281]
+
+var SupportPlan = &handles[282]
+var SupportPlan_resoldEnterprise = &handles[283]
+var SupportPlan_partnerLedSupport = &handles[284]
+var SupportPlan_resoldUnifiedOperations = &handles[285]
+
+var Tag = &handles[286]
+var Tag_key = &handles[287]
+var Tag_value = &handles[288]
+
+var _TaggableArn = &handles[289]
+
+var _TagKey = &handles[290]
+
+var _TagKeyList = &handles[291]
+var _TagKeyList_member = &handles[292]
+
+var _TagList = &handles[293]
+var _TagList_member = &handles[294]
+
+var _TagValue = &handles[295]
+
+var ThrottlingException = &handles[296]
+var ThrottlingException_message = &handles[297]
+var ThrottlingException_serviceCode = &handles[298]
+var ThrottlingException_quotaCode = &handles[299]
+
+var UpdateProgramManagementAccountDetail = &handles[300]
+var UpdateProgramManagementAccountDetail_id = &handles[301]
+var UpdateProgramManagementAccountDetail_arn = &handles[302]
+var UpdateProgramManagementAccountDetail_revision = &handles[303]
+var UpdateProgramManagementAccountDetail_displayName = &handles[304]
+
+var UpdateRelationshipDetail = &handles[305]
+var UpdateRelationshipDetail_arn = &handles[306]
+var UpdateRelationshipDetail_id = &handles[307]
+var UpdateRelationshipDetail_revision = &handles[308]
+var UpdateRelationshipDetail_displayName = &handles[309]
+
+var ValidationException = &handles[310]
+var ValidationException_message = &handles[311]
+var ValidationException_reason = &handles[312]
+var ValidationException_fieldList = &handles[313]
+
+var ValidationExceptionField = &handles[314]
+var ValidationExceptionField_name = &handles[315]
+var ValidationExceptionField_code = &handles[316]
+var ValidationExceptionField_message = &handles[317]
+
+var _ValidationExceptionFieldList = &handles[318]
+var _ValidationExceptionFieldList_member = &handles[319]
+
+var ValidationExceptionReason = &handles[320]
+var ValidationExceptionReason_REQUEST_VALIDATION_FAILED = &handles[321]
+var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED = &handles[322]
+
+var AcceptChannelHandshakeRequest = &handles[323]
+var AcceptChannelHandshakeRequest_catalog = &handles[324]
+var AcceptChannelHandshakeRequest_identifier = &handles[325]
+
+var AcceptChannelHandshakeResponse = &handles[326]
+var AcceptChannelHandshakeResponse_channelHandshakeDetail = &handles[327]
+
+var CancelChannelHandshakeRequest = &handles[328]
+var CancelChannelHandshakeRequest_catalog = &handles[329]
+var CancelChannelHandshakeRequest_identifier = &handles[330]
+
+var CancelChannelHandshakeResponse = &handles[331]
+var CancelChannelHandshakeResponse_channelHandshakeDetail = &handles[332]
+
+var CreateChannelHandshakeRequest = &handles[333]
+var CreateChannelHandshakeRequest_handshakeType = &handles[334]
+var CreateChannelHandshakeRequest_catalog = &handles[335]
+var CreateChannelHandshakeRequest_associatedResourceIdentifier = &handles[336]
+var CreateChannelHandshakeRequest_payload = &handles[337]
+var CreateChannelHandshakeRequest_clientToken = &handles[338]
+var CreateChannelHandshakeRequest_tags = &handles[339]
+
+var CreateChannelHandshakeResponse = &handles[340]
+var CreateChannelHandshakeResponse_channelHandshakeDetail = &handles[341]
+
+var CreateProgramManagementAccountRequest = &handles[342]
+var CreateProgramManagementAccountRequest_catalog = &handles[343]
+var CreateProgramManagementAccountRequest_program = &handles[344]
+var CreateProgramManagementAccountRequest_displayName = &handles[345]
+var CreateProgramManagementAccountRequest_accountId = &handles[346]
+var CreateProgramManagementAccountRequest_clientToken = &handles[347]
+var CreateProgramManagementAccountRequest_tags = &handles[348]
+
+var CreateProgramManagementAccountResponse = &handles[349]
+var CreateProgramManagementAccountResponse_programManagementAccountDetail = &handles[350]
+
+var CreateRelationshipRequest = &handles[351]
+var CreateRelationshipRequest_catalog = &handles[352]
+var CreateRelationshipRequest_associationType = &handles[353]
+var CreateRelationshipRequest_programManagementAccountIdentifier = &handles[354]
+var CreateRelationshipRequest_associatedAccountId = &handles[355]
+var CreateRelationshipRequest_displayName = &handles[356]
+var CreateRelationshipRequest_resaleAccountModel = &handles[357]
+var CreateRelationshipRequest_sector = &handles[358]
+var CreateRelationshipRequest_clientToken = &handles[359]
+var CreateRelationshipRequest_tags = &handles[360]
+var CreateRelationshipRequest_requestedSupportPlan = &handles[361]
+
+var CreateRelationshipResponse = &handles[362]
+var CreateRelationshipResponse_relationshipDetail = &handles[363]
+
+var DeleteProgramManagementAccountRequest = &handles[364]
+var DeleteProgramManagementAccountRequest_catalog = &handles[365]
+var DeleteProgramManagementAccountRequest_identifier = &handles[366]
+var DeleteProgramManagementAccountRequest_clientToken = &handles[367]
+
+var DeleteProgramManagementAccountResponse = &handles[368]
+
+var DeleteRelationshipRequest = &handles[369]
+var DeleteRelationshipRequest_catalog = &handles[370]
+var DeleteRelationshipRequest_identifier = &handles[371]
+var DeleteRelationshipRequest_programManagementAccountIdentifier = &handles[372]
+var DeleteRelationshipRequest_clientToken = &handles[373]
+
+var DeleteRelationshipResponse = &handles[374]
+
+var GetRelationshipRequest = &handles[375]
+var GetRelationshipRequest_catalog = &handles[376]
+var GetRelationshipRequest_programManagementAccountIdentifier = &handles[377]
+var GetRelationshipRequest_identifier = &handles[378]
+
+var GetRelationshipResponse = &handles[379]
+var GetRelationshipResponse_relationshipDetail = &handles[380]
+
+var ListChannelHandshakesRequest = &handles[381]
+var ListChannelHandshakesRequest_handshakeType = &handles[382]
+var ListChannelHandshakesRequest_catalog = &handles[383]
+var ListChannelHandshakesRequest_participantType = &handles[384]
+var ListChannelHandshakesRequest_maxResults = &handles[385]
+var ListChannelHandshakesRequest_statuses = &handles[386]
+var ListChannelHandshakesRequest_associatedResourceIdentifiers = &handles[387]
+var ListChannelHandshakesRequest_handshakeTypeFilters = &handles[388]
+var ListChannelHandshakesRequest_handshakeTypeSort = &handles[389]
+var ListChannelHandshakesRequest_nextToken = &handles[390]
+
+var ListChannelHandshakesResponse = &handles[391]
+var ListChannelHandshakesResponse_items = &handles[392]
+var ListChannelHandshakesResponse_nextToken = &handles[393]
+
+var ListProgramManagementAccountsRequest = &handles[394]
+var ListProgramManagementAccountsRequest_catalog = &handles[395]
+var ListProgramManagementAccountsRequest_maxResults = &handles[396]
+var ListProgramManagementAccountsRequest_displayNames = &handles[397]
+var ListProgramManagementAccountsRequest_programs = &handles[398]
+var ListProgramManagementAccountsRequest_accountIds = &handles[399]
+var ListProgramManagementAccountsRequest_statuses = &handles[400]
+var ListProgramManagementAccountsRequest_sort = &handles[401]
+var ListProgramManagementAccountsRequest_nextToken = &handles[402]
+
+var ListProgramManagementAccountsResponse = &handles[403]
+var ListProgramManagementAccountsResponse_items = &handles[404]
+var ListProgramManagementAccountsResponse_nextToken = &handles[405]
+
+var ListRelationshipsRequest = &handles[406]
+var ListRelationshipsRequest_catalog = &handles[407]
+var ListRelationshipsRequest_maxResults = &handles[408]
+var ListRelationshipsRequest_associatedAccountIds = &handles[409]
+var ListRelationshipsRequest_associationTypes = &handles[410]
+var ListRelationshipsRequest_displayNames = &handles[411]
+var ListRelationshipsRequest_programManagementAccountIdentifiers = &handles[412]
+var ListRelationshipsRequest_sort = &handles[413]
+var ListRelationshipsRequest_nextToken = &handles[414]
+
+var ListRelationshipsResponse = &handles[415]
+var ListRelationshipsResponse_items = &handles[416]
+var ListRelationshipsResponse_nextToken = &handles[417]
+
+var ListTagsForResourceRequest = &handles[418]
+var ListTagsForResourceRequest_resourceArn = &handles[419]
+
+var ListTagsForResourceResponse = &handles[420]
+var ListTagsForResourceResponse_tags = &handles[421]
+
+var RejectChannelHandshakeRequest = &handles[422]
+var RejectChannelHandshakeRequest_catalog = &handles[423]
+var RejectChannelHandshakeRequest_identifier = &handles[424]
+
+var RejectChannelHandshakeResponse = &handles[425]
+var RejectChannelHandshakeResponse_channelHandshakeDetail = &handles[426]
+
+var TagResourceRequest = &handles[427]
+var TagResourceRequest_resourceArn = &handles[428]
+var TagResourceRequest_tags = &handles[429]
+
+var TagResourceResponse = &handles[430]
+
+var UntagResourceRequest = &handles[431]
+var UntagResourceRequest_resourceArn = &handles[432]
+var UntagResourceRequest_tagKeys = &handles[433]
+
+var UntagResourceResponse = &handles[434]
+
+var UpdateProgramManagementAccountRequest = &handles[435]
+var UpdateProgramManagementAccountRequest_catalog = &handles[436]
+var UpdateProgramManagementAccountRequest_identifier = &handles[437]
+var UpdateProgramManagementAccountRequest_revision = &handles[438]
+var UpdateProgramManagementAccountRequest_displayName = &handles[439]
+
+var UpdateProgramManagementAccountResponse = &handles[440]
+var UpdateProgramManagementAccountResponse_programManagementAccountDetail = &handles[441]
+
+var UpdateRelationshipRequest = &handles[442]
+var UpdateRelationshipRequest_catalog = &handles[443]
+var UpdateRelationshipRequest_identifier = &handles[444]
+var UpdateRelationshipRequest_programManagementAccountIdentifier = &handles[445]
+var UpdateRelationshipRequest_revision = &handles[446]
+var UpdateRelationshipRequest_displayName = &handles[447]
+var UpdateRelationshipRequest_requestedSupportPlan = &handles[448]
+
+var UpdateRelationshipResponse = &handles[449]
+var UpdateRelationshipResponse_relationshipDetail = &handles[450]
+
+var PartnerCentralChannel = &smithy.ServiceSchema{Schema: &handles[17], Version: "2024-03-18"}

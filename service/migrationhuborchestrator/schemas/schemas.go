@@ -4,2427 +4,2056 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/template",
-	Code: 200})
-
-var CreateWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateWorkflow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/migrationworkflow/",
-	Code: 200})
-
-var CreateWorkflowStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateWorkflowStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/workflowstep",
-	Code: 200})
-
-var CreateWorkflowStepGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateWorkflowStepGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/workflowstepgroups",
-	Code: 200})
-
-var DeleteTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/template/{id}",
-	Code: 200})
-
-var DeleteWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteWorkflow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/migrationworkflow/{id}",
-	Code: 202})
-
-var DeleteWorkflowStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteWorkflowStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/workflowstep/{id}",
-	Code: 200})
-
-var DeleteWorkflowStepGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteWorkflowStepGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/workflowstepgroup/{id}",
-	Code: 202})
-
-var GetTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/migrationworkflowtemplate/{id}",
-	Code: 200})
-
-var GetTemplateStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetTemplateStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/templatestep/{id}",
-	Code: 200})
-
-var GetTemplateStepGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetTemplateStepGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/templates/{templateId}/stepgroups/{id}",
-	Code: 200})
-
-var GetWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetWorkflow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/migrationworkflow/{id}",
-	Code: 200})
-
-var GetWorkflowStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetWorkflowStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/workflowstep/{id}",
-	Code: 200})
-
-var GetWorkflowStepGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetWorkflowStepGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/workflowstepgroup/{id}",
-	Code: 200})
-
-var ListPlugins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListPlugins",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/plugins",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ListTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTemplates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/migrationworkflowtemplates",
-	Code: 200})
-
-var ListTemplateStepGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTemplateStepGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/templatestepgroups/{templateId}",
-	Code: 200})
-
-var ListTemplateSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTemplateSteps",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/templatesteps",
-	Code: 200})
-
-var ListWorkflows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListWorkflows",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/migrationworkflows",
-	Code: 200})
-
-var ListWorkflowStepGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListWorkflowStepGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/workflowstepgroups",
-	Code: 200})
-
-var ListWorkflowSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListWorkflowSteps",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/workflow/{workflowId}/workflowstepgroups/{stepGroupId}/workflowsteps",
-	Code: 200})
-
-var RetryWorkflowStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "RetryWorkflowStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/retryworkflowstep/{id}",
-	Code: 200})
-
-var StartWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StartWorkflow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/migrationworkflow/{id}/start",
-	Code: 200})
-
-var StopWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StopWorkflow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/migrationworkflow/{id}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/template/{id}",
-	Code: 200})
-
-var UpdateWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateWorkflow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/migrationworkflow/{id}",
-	Code: 200})
-
-var UpdateWorkflowStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateWorkflowStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/workflowstep/{id}",
-	Code: 200})
-
-var UpdateWorkflowStepGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateWorkflowStepGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/workflowstepgroup/{id}",
-	Code: 202})
-
-var _AWSMigrationHubOrchestrator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "AWSMigrationHubOrchestrator",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMigrationHubOrchestrator = smithy.NewServiceSchema(_AWSMigrationHubOrchestrator, "2021-08-28")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ApplicationConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ApplicationConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _DataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DataType",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _IPAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "IPAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MaxStringList",
-}, smithy.ShapeTypeList, 1)
-var _MaxStringList_member *smithy.Schema
-
-var _MaxStringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MaxStringValue",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationWorkflowDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MigrationWorkflowDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationWorkflowId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MigrationWorkflowId",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationWorkflowName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MigrationWorkflowName",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationWorkflowStatusEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MigrationWorkflowStatusEnum",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationWorkflowSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MigrationWorkflowSummary",
-}, smithy.ShapeTypeStructure, 10)
-var MigrationWorkflowSummary_id *smithy.Schema
-
-var MigrationWorkflowSummary_name *smithy.Schema
-
-var MigrationWorkflowSummary_templateId *smithy.Schema
-
-var MigrationWorkflowSummary_adsApplicationConfigurationName *smithy.Schema
-
-var MigrationWorkflowSummary_status *smithy.Schema
-
-var MigrationWorkflowSummary_creationTime *smithy.Schema
-
-var MigrationWorkflowSummary_endTime *smithy.Schema
-
-var MigrationWorkflowSummary_statusMessage *smithy.Schema
-
-var MigrationWorkflowSummary_completedSteps *smithy.Schema
-
-var MigrationWorkflowSummary_totalSteps *smithy.Schema
-
-var _MigrationWorkflowSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "MigrationWorkflowSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MigrationWorkflowSummaryList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Owner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "Owner",
-}, smithy.ShapeTypeString, 0)
-
-var PlatformCommand = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "PlatformCommand",
-}, smithy.ShapeTypeStructure, 2)
-var PlatformCommand_linux *smithy.Schema
-
-var PlatformCommand_windows *smithy.Schema
-
-var PlatformScriptKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "PlatformScriptKey",
-}, smithy.ShapeTypeStructure, 2)
-var PlatformScriptKey_linux *smithy.Schema
-
-var PlatformScriptKey_windows *smithy.Schema
-
-var _PluginHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "PluginHealth",
-}, smithy.ShapeTypeString, 0)
-
-var _PluginId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "PluginId",
-}, smithy.ShapeTypeString, 0)
-
-var _PluginSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "PluginSummaries",
-}, smithy.ShapeTypeList, 1)
-var _PluginSummaries_member *smithy.Schema
-
-var PluginSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "PluginSummary",
-}, smithy.ShapeTypeStructure, 6)
-var PluginSummary_pluginId *smithy.Schema
-
-var PluginSummary_hostname *smithy.Schema
-
-var PluginSummary_status *smithy.Schema
-
-var PluginSummary_ipAddress *smithy.Schema
-
-var PluginSummary_version *smithy.Schema
-
-var PluginSummary_registeredTime *smithy.Schema
-
-var _PluginVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "PluginVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RunEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "RunEnvironment",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var _StepActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepActionType",
-}, smithy.ShapeTypeString, 0)
-
-var StepAutomationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepAutomationConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var StepAutomationConfiguration_scriptLocationS3Bucket *smithy.Schema
-
-var StepAutomationConfiguration_scriptLocationS3Key *smithy.Schema
-
-var StepAutomationConfiguration_command *smithy.Schema
-
-var StepAutomationConfiguration_runEnvironment *smithy.Schema
-
-var StepAutomationConfiguration_targetType *smithy.Schema
-
-var _StepDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _StepGroupDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepGroupDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _StepGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _StepGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _StepGroupStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepGroupStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _StepId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepId",
-}, smithy.ShapeTypeString, 0)
-
-var StepInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepInput",
-}, smithy.ShapeTypeUnion, 4)
-var StepInput_integerValue *smithy.Schema
-
-var StepInput_stringValue *smithy.Schema
-
-var StepInput_listOfStringsValue *smithy.Schema
-
-var StepInput_mapOfStringValue *smithy.Schema
-
-var _StepInputParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepInputParameters",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _StepInputParameters_key *smithy.Schema
-
-var _StepInputParameters_value *smithy.Schema
-
-var _StepInputParametersKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepInputParametersKey",
-}, smithy.ShapeTypeString, 0)
-
-var _StepName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepName",
-}, smithy.ShapeTypeString, 0)
-
-var StepOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepOutput",
-}, smithy.ShapeTypeStructure, 3)
-var StepOutput_name *smithy.Schema
-
-var StepOutput_dataType *smithy.Schema
-
-var StepOutput_required *smithy.Schema
-
-var _StepOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepOutputList",
-}, smithy.ShapeTypeList, 1)
-var _StepOutputList_member *smithy.Schema
-
-var _StepStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StepStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _StringListMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StringListMember",
-}, smithy.ShapeTypeString, 0)
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var _StringMapKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StringMapKey",
-}, smithy.ShapeTypeString, 0)
-
-var _StringMapValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StringMapValue",
-}, smithy.ShapeTypeString, 0)
-
-var _StringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StringValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TargetType",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateId",
-}, smithy.ShapeTypeString, 0)
-
-var TemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateInput",
-}, smithy.ShapeTypeStructure, 3)
-var TemplateInput_inputName *smithy.Schema
-
-var TemplateInput_dataType *smithy.Schema
-
-var TemplateInput_required *smithy.Schema
-
-var _TemplateInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateInputList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateInputList_member *smithy.Schema
-
-var _TemplateInputName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateInputName",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var TemplateSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateSource",
-}, smithy.ShapeTypeUnion, 1)
-var TemplateSource_workflowId *smithy.Schema
-
-var _TemplateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateStatus",
-}, smithy.ShapeTypeString, 0)
-
-var TemplateStepGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateStepGroupSummary",
-}, smithy.ShapeTypeStructure, 4)
-var TemplateStepGroupSummary_id *smithy.Schema
-
-var TemplateStepGroupSummary_name *smithy.Schema
-
-var TemplateStepGroupSummary_previous *smithy.Schema
-
-var TemplateStepGroupSummary_next *smithy.Schema
-
-var _TemplateStepGroupSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateStepGroupSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateStepGroupSummaryList_member *smithy.Schema
-
-var TemplateStepSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateStepSummary",
-}, smithy.ShapeTypeStructure, 9)
-var TemplateStepSummary_id *smithy.Schema
-
-var TemplateStepSummary_stepGroupId *smithy.Schema
-
-var TemplateStepSummary_templateId *smithy.Schema
-
-var TemplateStepSummary_name *smithy.Schema
-
-var TemplateStepSummary_stepActionType *smithy.Schema
-
-var TemplateStepSummary_targetType *smithy.Schema
-
-var TemplateStepSummary_owner *smithy.Schema
-
-var TemplateStepSummary_previous *smithy.Schema
-
-var TemplateStepSummary_next *smithy.Schema
-
-var _TemplateStepSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateStepSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateStepSummaryList_member *smithy.Schema
-
-var TemplateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateSummary",
-}, smithy.ShapeTypeStructure, 4)
-var TemplateSummary_id *smithy.Schema
-
-var TemplateSummary_name *smithy.Schema
-
-var TemplateSummary_arn *smithy.Schema
-
-var TemplateSummary_description *smithy.Schema
-
-var _TemplateSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TemplateSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateSummaryList_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var Tool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "Tool",
-}, smithy.ShapeTypeStructure, 2)
-var Tool_name *smithy.Schema
-
-var Tool_url *smithy.Schema
-
-var _ToolsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ToolsList",
-}, smithy.ShapeTypeList, 1)
-var _ToolsList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var WorkflowStepAutomationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepAutomationConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var WorkflowStepAutomationConfiguration_scriptLocationS3Bucket *smithy.Schema
-
-var WorkflowStepAutomationConfiguration_scriptLocationS3Key *smithy.Schema
-
-var WorkflowStepAutomationConfiguration_command *smithy.Schema
-
-var WorkflowStepAutomationConfiguration_runEnvironment *smithy.Schema
-
-var WorkflowStepAutomationConfiguration_targetType *smithy.Schema
-
-var _WorkflowStepGroupsSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepGroupsSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowStepGroupsSummaryList_member *smithy.Schema
-
-var WorkflowStepGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepGroupSummary",
-}, smithy.ShapeTypeStructure, 6)
-var WorkflowStepGroupSummary_id *smithy.Schema
-
-var WorkflowStepGroupSummary_name *smithy.Schema
-
-var WorkflowStepGroupSummary_owner *smithy.Schema
-
-var WorkflowStepGroupSummary_status *smithy.Schema
-
-var WorkflowStepGroupSummary_previous *smithy.Schema
-
-var WorkflowStepGroupSummary_next *smithy.Schema
-
-var WorkflowStepOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepOutput",
-}, smithy.ShapeTypeStructure, 4)
-var WorkflowStepOutput_name *smithy.Schema
-
-var WorkflowStepOutput_dataType *smithy.Schema
-
-var WorkflowStepOutput_required *smithy.Schema
-
-var WorkflowStepOutput_value *smithy.Schema
-
-var _WorkflowStepOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepOutputList",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowStepOutputList_member *smithy.Schema
-
-var _WorkflowStepOutputName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepOutputName",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowStepOutputUnion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepOutputUnion",
-}, smithy.ShapeTypeUnion, 3)
-var WorkflowStepOutputUnion_integerValue *smithy.Schema
-
-var WorkflowStepOutputUnion_stringValue *smithy.Schema
-
-var WorkflowStepOutputUnion_listOfStringValue *smithy.Schema
-
-var _WorkflowStepsSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepsSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowStepsSummaryList_member *smithy.Schema
-
-var WorkflowStepSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "WorkflowStepSummary",
-}, smithy.ShapeTypeStructure, 13)
-var WorkflowStepSummary_stepId *smithy.Schema
-
-var WorkflowStepSummary_name *smithy.Schema
-
-var WorkflowStepSummary_stepActionType *smithy.Schema
-
-var WorkflowStepSummary_owner *smithy.Schema
-
-var WorkflowStepSummary_previous *smithy.Schema
-
-var WorkflowStepSummary_next *smithy.Schema
-
-var WorkflowStepSummary_status *smithy.Schema
-
-var WorkflowStepSummary_statusMessage *smithy.Schema
-
-var WorkflowStepSummary_noOfSrvCompleted *smithy.Schema
-
-var WorkflowStepSummary_noOfSrvFailed *smithy.Schema
-
-var WorkflowStepSummary_totalNoOfSrv *smithy.Schema
-
-var WorkflowStepSummary_description *smithy.Schema
-
-var WorkflowStepSummary_scriptLocation *smithy.Schema
-
-var CreateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateTemplateRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTemplateRequest_templateName *smithy.Schema
-
-var CreateTemplateRequest_templateDescription *smithy.Schema
-
-var CreateTemplateRequest_templateSource *smithy.Schema
-
-var CreateTemplateRequest_clientToken *smithy.Schema
-
-var CreateTemplateRequest_tags *smithy.Schema
-
-var CreateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateTemplateResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateTemplateResponse_templateId *smithy.Schema
-
-var CreateTemplateResponse_templateArn *smithy.Schema
-
-var CreateTemplateResponse_tags *smithy.Schema
-
-var CreateMigrationWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateMigrationWorkflowRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateMigrationWorkflowRequest_name *smithy.Schema
-
-var CreateMigrationWorkflowRequest_description *smithy.Schema
-
-var CreateMigrationWorkflowRequest_templateId *smithy.Schema
-
-var CreateMigrationWorkflowRequest_applicationConfigurationId *smithy.Schema
-
-var CreateMigrationWorkflowRequest_inputParameters *smithy.Schema
-
-var CreateMigrationWorkflowRequest_stepTargets *smithy.Schema
-
-var CreateMigrationWorkflowRequest_tags *smithy.Schema
-
-var CreateMigrationWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateMigrationWorkflowResponse",
-}, smithy.ShapeTypeStructure, 11)
-var CreateMigrationWorkflowResponse_id *smithy.Schema
-
-var CreateMigrationWorkflowResponse_arn *smithy.Schema
-
-var CreateMigrationWorkflowResponse_name *smithy.Schema
-
-var CreateMigrationWorkflowResponse_description *smithy.Schema
-
-var CreateMigrationWorkflowResponse_templateId *smithy.Schema
-
-var CreateMigrationWorkflowResponse_adsApplicationConfigurationId *smithy.Schema
-
-var CreateMigrationWorkflowResponse_workflowInputs *smithy.Schema
-
-var CreateMigrationWorkflowResponse_stepTargets *smithy.Schema
-
-var CreateMigrationWorkflowResponse_status *smithy.Schema
-
-var CreateMigrationWorkflowResponse_creationTime *smithy.Schema
-
-var CreateMigrationWorkflowResponse_tags *smithy.Schema
-
-var CreateWorkflowStepGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateWorkflowStepGroupRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWorkflowStepGroupRequest_workflowId *smithy.Schema
-
-var CreateWorkflowStepGroupRequest_name *smithy.Schema
-
-var CreateWorkflowStepGroupRequest_description *smithy.Schema
-
-var CreateWorkflowStepGroupRequest_next *smithy.Schema
-
-var CreateWorkflowStepGroupRequest_previous *smithy.Schema
-
-var CreateWorkflowStepGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateWorkflowStepGroupResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateWorkflowStepGroupResponse_workflowId *smithy.Schema
-
-var CreateWorkflowStepGroupResponse_name *smithy.Schema
-
-var CreateWorkflowStepGroupResponse_id *smithy.Schema
-
-var CreateWorkflowStepGroupResponse_description *smithy.Schema
-
-var CreateWorkflowStepGroupResponse_tools *smithy.Schema
-
-var CreateWorkflowStepGroupResponse_next *smithy.Schema
-
-var CreateWorkflowStepGroupResponse_previous *smithy.Schema
-
-var CreateWorkflowStepGroupResponse_creationTime *smithy.Schema
-
-var CreateWorkflowStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateWorkflowStepRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateWorkflowStepRequest_name *smithy.Schema
-
-var CreateWorkflowStepRequest_stepGroupId *smithy.Schema
-
-var CreateWorkflowStepRequest_workflowId *smithy.Schema
-
-var CreateWorkflowStepRequest_stepActionType *smithy.Schema
-
-var CreateWorkflowStepRequest_description *smithy.Schema
-
-var CreateWorkflowStepRequest_workflowStepAutomationConfiguration *smithy.Schema
-
-var CreateWorkflowStepRequest_stepTarget *smithy.Schema
-
-var CreateWorkflowStepRequest_outputs *smithy.Schema
-
-var CreateWorkflowStepRequest_previous *smithy.Schema
-
-var CreateWorkflowStepRequest_next *smithy.Schema
-
-var CreateWorkflowStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "CreateWorkflowStepResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWorkflowStepResponse_id *smithy.Schema
-
-var CreateWorkflowStepResponse_stepGroupId *smithy.Schema
-
-var CreateWorkflowStepResponse_workflowId *smithy.Schema
-
-var CreateWorkflowStepResponse_name *smithy.Schema
-
-var DeleteTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTemplateRequest_id *smithy.Schema
-
-var DeleteTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteTemplateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteMigrationWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteMigrationWorkflowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMigrationWorkflowRequest_id *smithy.Schema
-
-var DeleteMigrationWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteMigrationWorkflowResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteMigrationWorkflowResponse_id *smithy.Schema
-
-var DeleteMigrationWorkflowResponse_arn *smithy.Schema
-
-var DeleteMigrationWorkflowResponse_status *smithy.Schema
-
-var DeleteWorkflowStepGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteWorkflowStepGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWorkflowStepGroupRequest_workflowId *smithy.Schema
-
-var DeleteWorkflowStepGroupRequest_id *smithy.Schema
-
-var DeleteWorkflowStepGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteWorkflowStepGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteWorkflowStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteWorkflowStepRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteWorkflowStepRequest_id *smithy.Schema
-
-var DeleteWorkflowStepRequest_stepGroupId *smithy.Schema
-
-var DeleteWorkflowStepRequest_workflowId *smithy.Schema
-
-var DeleteWorkflowStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "DeleteWorkflowStepResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetMigrationWorkflowTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetMigrationWorkflowTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMigrationWorkflowTemplateRequest_id *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetMigrationWorkflowTemplateResponse",
-}, smithy.ShapeTypeStructure, 12)
-var GetMigrationWorkflowTemplateResponse_id *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_templateArn *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_name *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_description *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_inputs *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_tools *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_creationTime *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_owner *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_status *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_statusMessage *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_templateClass *smithy.Schema
-
-var GetMigrationWorkflowTemplateResponse_tags *smithy.Schema
-
-var GetTemplateStepGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetTemplateStepGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTemplateStepGroupRequest_templateId *smithy.Schema
-
-var GetTemplateStepGroupRequest_id *smithy.Schema
-
-var GetTemplateStepGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetTemplateStepGroupResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetTemplateStepGroupResponse_templateId *smithy.Schema
-
-var GetTemplateStepGroupResponse_id *smithy.Schema
-
-var GetTemplateStepGroupResponse_name *smithy.Schema
-
-var GetTemplateStepGroupResponse_description *smithy.Schema
-
-var GetTemplateStepGroupResponse_status *smithy.Schema
-
-var GetTemplateStepGroupResponse_creationTime *smithy.Schema
-
-var GetTemplateStepGroupResponse_lastModifiedTime *smithy.Schema
-
-var GetTemplateStepGroupResponse_tools *smithy.Schema
-
-var GetTemplateStepGroupResponse_previous *smithy.Schema
-
-var GetTemplateStepGroupResponse_next *smithy.Schema
-
-var GetTemplateStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetTemplateStepRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTemplateStepRequest_id *smithy.Schema
-
-var GetTemplateStepRequest_templateId *smithy.Schema
-
-var GetTemplateStepRequest_stepGroupId *smithy.Schema
-
-var GetTemplateStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetTemplateStepResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetTemplateStepResponse_id *smithy.Schema
-
-var GetTemplateStepResponse_stepGroupId *smithy.Schema
-
-var GetTemplateStepResponse_templateId *smithy.Schema
-
-var GetTemplateStepResponse_name *smithy.Schema
-
-var GetTemplateStepResponse_description *smithy.Schema
-
-var GetTemplateStepResponse_stepActionType *smithy.Schema
-
-var GetTemplateStepResponse_creationTime *smithy.Schema
-
-var GetTemplateStepResponse_previous *smithy.Schema
-
-var GetTemplateStepResponse_next *smithy.Schema
-
-var GetTemplateStepResponse_outputs *smithy.Schema
-
-var GetTemplateStepResponse_stepAutomationConfiguration *smithy.Schema
-
-var GetMigrationWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetMigrationWorkflowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMigrationWorkflowRequest_id *smithy.Schema
-
-var GetMigrationWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetMigrationWorkflowResponse",
-}, smithy.ShapeTypeStructure, 20)
-var GetMigrationWorkflowResponse_id *smithy.Schema
-
-var GetMigrationWorkflowResponse_arn *smithy.Schema
-
-var GetMigrationWorkflowResponse_name *smithy.Schema
-
-var GetMigrationWorkflowResponse_description *smithy.Schema
-
-var GetMigrationWorkflowResponse_templateId *smithy.Schema
-
-var GetMigrationWorkflowResponse_adsApplicationConfigurationId *smithy.Schema
-
-var GetMigrationWorkflowResponse_adsApplicationName *smithy.Schema
-
-var GetMigrationWorkflowResponse_status *smithy.Schema
-
-var GetMigrationWorkflowResponse_statusMessage *smithy.Schema
-
-var GetMigrationWorkflowResponse_creationTime *smithy.Schema
-
-var GetMigrationWorkflowResponse_lastStartTime *smithy.Schema
-
-var GetMigrationWorkflowResponse_lastStopTime *smithy.Schema
-
-var GetMigrationWorkflowResponse_lastModifiedTime *smithy.Schema
-
-var GetMigrationWorkflowResponse_endTime *smithy.Schema
-
-var GetMigrationWorkflowResponse_tools *smithy.Schema
-
-var GetMigrationWorkflowResponse_totalSteps *smithy.Schema
-
-var GetMigrationWorkflowResponse_completedSteps *smithy.Schema
-
-var GetMigrationWorkflowResponse_workflowInputs *smithy.Schema
-
-var GetMigrationWorkflowResponse_tags *smithy.Schema
-
-var GetMigrationWorkflowResponse_workflowBucket *smithy.Schema
-
-var GetWorkflowStepGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetWorkflowStepGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetWorkflowStepGroupRequest_id *smithy.Schema
-
-var GetWorkflowStepGroupRequest_workflowId *smithy.Schema
-
-var GetWorkflowStepGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetWorkflowStepGroupResponse",
-}, smithy.ShapeTypeStructure, 12)
-var GetWorkflowStepGroupResponse_id *smithy.Schema
-
-var GetWorkflowStepGroupResponse_workflowId *smithy.Schema
-
-var GetWorkflowStepGroupResponse_name *smithy.Schema
-
-var GetWorkflowStepGroupResponse_description *smithy.Schema
-
-var GetWorkflowStepGroupResponse_status *smithy.Schema
-
-var GetWorkflowStepGroupResponse_owner *smithy.Schema
-
-var GetWorkflowStepGroupResponse_creationTime *smithy.Schema
-
-var GetWorkflowStepGroupResponse_lastModifiedTime *smithy.Schema
-
-var GetWorkflowStepGroupResponse_endTime *smithy.Schema
-
-var GetWorkflowStepGroupResponse_tools *smithy.Schema
-
-var GetWorkflowStepGroupResponse_previous *smithy.Schema
-
-var GetWorkflowStepGroupResponse_next *smithy.Schema
-
-var GetWorkflowStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetWorkflowStepRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetWorkflowStepRequest_workflowId *smithy.Schema
-
-var GetWorkflowStepRequest_stepGroupId *smithy.Schema
-
-var GetWorkflowStepRequest_id *smithy.Schema
-
-var GetWorkflowStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "GetWorkflowStepResponse",
-}, smithy.ShapeTypeStructure, 21)
-var GetWorkflowStepResponse_name *smithy.Schema
-
-var GetWorkflowStepResponse_stepGroupId *smithy.Schema
-
-var GetWorkflowStepResponse_workflowId *smithy.Schema
-
-var GetWorkflowStepResponse_stepId *smithy.Schema
-
-var GetWorkflowStepResponse_description *smithy.Schema
-
-var GetWorkflowStepResponse_stepActionType *smithy.Schema
-
-var GetWorkflowStepResponse_owner *smithy.Schema
-
-var GetWorkflowStepResponse_workflowStepAutomationConfiguration *smithy.Schema
-
-var GetWorkflowStepResponse_stepTarget *smithy.Schema
-
-var GetWorkflowStepResponse_outputs *smithy.Schema
-
-var GetWorkflowStepResponse_previous *smithy.Schema
-
-var GetWorkflowStepResponse_next *smithy.Schema
-
-var GetWorkflowStepResponse_status *smithy.Schema
-
-var GetWorkflowStepResponse_statusMessage *smithy.Schema
-
-var GetWorkflowStepResponse_scriptOutputLocation *smithy.Schema
-
-var GetWorkflowStepResponse_creationTime *smithy.Schema
-
-var GetWorkflowStepResponse_lastStartTime *smithy.Schema
-
-var GetWorkflowStepResponse_endTime *smithy.Schema
-
-var GetWorkflowStepResponse_noOfSrvCompleted *smithy.Schema
-
-var GetWorkflowStepResponse_noOfSrvFailed *smithy.Schema
-
-var GetWorkflowStepResponse_totalNoOfSrv *smithy.Schema
-
-var ListPluginsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListPluginsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPluginsRequest_maxResults *smithy.Schema
-
-var ListPluginsRequest_nextToken *smithy.Schema
-
-var ListPluginsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListPluginsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPluginsResponse_nextToken *smithy.Schema
-
-var ListPluginsResponse_plugins *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListMigrationWorkflowTemplatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListMigrationWorkflowTemplatesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMigrationWorkflowTemplatesRequest_maxResults *smithy.Schema
-
-var ListMigrationWorkflowTemplatesRequest_nextToken *smithy.Schema
-
-var ListMigrationWorkflowTemplatesRequest_name *smithy.Schema
-
-var ListMigrationWorkflowTemplatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListMigrationWorkflowTemplatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMigrationWorkflowTemplatesResponse_nextToken *smithy.Schema
-
-var ListMigrationWorkflowTemplatesResponse_templateSummary *smithy.Schema
-
-var ListTemplateStepGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTemplateStepGroupsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTemplateStepGroupsRequest_maxResults *smithy.Schema
-
-var ListTemplateStepGroupsRequest_nextToken *smithy.Schema
-
-var ListTemplateStepGroupsRequest_templateId *smithy.Schema
-
-var ListTemplateStepGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTemplateStepGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTemplateStepGroupsResponse_nextToken *smithy.Schema
-
-var ListTemplateStepGroupsResponse_templateStepGroupSummary *smithy.Schema
-
-var ListTemplateStepsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTemplateStepsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListTemplateStepsRequest_maxResults *smithy.Schema
-
-var ListTemplateStepsRequest_nextToken *smithy.Schema
-
-var ListTemplateStepsRequest_templateId *smithy.Schema
-
-var ListTemplateStepsRequest_stepGroupId *smithy.Schema
-
-var ListTemplateStepsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListTemplateStepsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTemplateStepsResponse_nextToken *smithy.Schema
-
-var ListTemplateStepsResponse_templateStepSummaryList *smithy.Schema
-
-var ListMigrationWorkflowsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListMigrationWorkflowsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListMigrationWorkflowsRequest_maxResults *smithy.Schema
-
-var ListMigrationWorkflowsRequest_nextToken *smithy.Schema
-
-var ListMigrationWorkflowsRequest_templateId *smithy.Schema
-
-var ListMigrationWorkflowsRequest_adsApplicationConfigurationName *smithy.Schema
-
-var ListMigrationWorkflowsRequest_status *smithy.Schema
-
-var ListMigrationWorkflowsRequest_name *smithy.Schema
-
-var ListMigrationWorkflowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListMigrationWorkflowsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMigrationWorkflowsResponse_nextToken *smithy.Schema
-
-var ListMigrationWorkflowsResponse_migrationWorkflowSummary *smithy.Schema
-
-var ListWorkflowStepGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListWorkflowStepGroupsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWorkflowStepGroupsRequest_nextToken *smithy.Schema
-
-var ListWorkflowStepGroupsRequest_maxResults *smithy.Schema
-
-var ListWorkflowStepGroupsRequest_workflowId *smithy.Schema
-
-var ListWorkflowStepGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListWorkflowStepGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkflowStepGroupsResponse_nextToken *smithy.Schema
-
-var ListWorkflowStepGroupsResponse_workflowStepGroupsSummary *smithy.Schema
-
-var ListWorkflowStepsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListWorkflowStepsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListWorkflowStepsRequest_nextToken *smithy.Schema
-
-var ListWorkflowStepsRequest_maxResults *smithy.Schema
-
-var ListWorkflowStepsRequest_workflowId *smithy.Schema
-
-var ListWorkflowStepsRequest_stepGroupId *smithy.Schema
-
-var ListWorkflowStepsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "ListWorkflowStepsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkflowStepsResponse_nextToken *smithy.Schema
-
-var ListWorkflowStepsResponse_workflowStepsSummary *smithy.Schema
-
-var RetryWorkflowStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "RetryWorkflowStepRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RetryWorkflowStepRequest_workflowId *smithy.Schema
-
-var RetryWorkflowStepRequest_stepGroupId *smithy.Schema
-
-var RetryWorkflowStepRequest_id *smithy.Schema
-
-var RetryWorkflowStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "RetryWorkflowStepResponse",
-}, smithy.ShapeTypeStructure, 4)
-var RetryWorkflowStepResponse_stepGroupId *smithy.Schema
-
-var RetryWorkflowStepResponse_workflowId *smithy.Schema
-
-var RetryWorkflowStepResponse_id *smithy.Schema
-
-var RetryWorkflowStepResponse_status *smithy.Schema
-
-var StartMigrationWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StartMigrationWorkflowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartMigrationWorkflowRequest_id *smithy.Schema
-
-var StartMigrationWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StartMigrationWorkflowResponse",
-}, smithy.ShapeTypeStructure, 5)
-var StartMigrationWorkflowResponse_id *smithy.Schema
-
-var StartMigrationWorkflowResponse_arn *smithy.Schema
-
-var StartMigrationWorkflowResponse_status *smithy.Schema
-
-var StartMigrationWorkflowResponse_statusMessage *smithy.Schema
-
-var StartMigrationWorkflowResponse_lastStartTime *smithy.Schema
-
-var StopMigrationWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StopMigrationWorkflowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopMigrationWorkflowRequest_id *smithy.Schema
-
-var StopMigrationWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "StopMigrationWorkflowResponse",
-}, smithy.ShapeTypeStructure, 5)
-var StopMigrationWorkflowResponse_id *smithy.Schema
-
-var StopMigrationWorkflowResponse_arn *smithy.Schema
-
-var StopMigrationWorkflowResponse_status *smithy.Schema
-
-var StopMigrationWorkflowResponse_statusMessage *smithy.Schema
-
-var StopMigrationWorkflowResponse_lastStopTime *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateTemplateRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateTemplateRequest_id *smithy.Schema
-
-var UpdateTemplateRequest_templateName *smithy.Schema
-
-var UpdateTemplateRequest_templateDescription *smithy.Schema
-
-var UpdateTemplateRequest_clientToken *smithy.Schema
-
-var UpdateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateTemplateResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateTemplateResponse_templateId *smithy.Schema
-
-var UpdateTemplateResponse_templateArn *smithy.Schema
-
-var UpdateTemplateResponse_tags *smithy.Schema
-
-var UpdateMigrationWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateMigrationWorkflowRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateMigrationWorkflowRequest_id *smithy.Schema
-
-var UpdateMigrationWorkflowRequest_name *smithy.Schema
-
-var UpdateMigrationWorkflowRequest_description *smithy.Schema
-
-var UpdateMigrationWorkflowRequest_inputParameters *smithy.Schema
-
-var UpdateMigrationWorkflowRequest_stepTargets *smithy.Schema
-
-var UpdateMigrationWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateMigrationWorkflowResponse",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateMigrationWorkflowResponse_id *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_arn *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_name *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_description *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_templateId *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_adsApplicationConfigurationId *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_workflowInputs *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_stepTargets *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_status *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_creationTime *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_lastModifiedTime *smithy.Schema
-
-var UpdateMigrationWorkflowResponse_tags *smithy.Schema
-
-var UpdateWorkflowStepGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateWorkflowStepGroupRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateWorkflowStepGroupRequest_workflowId *smithy.Schema
-
-var UpdateWorkflowStepGroupRequest_id *smithy.Schema
-
-var UpdateWorkflowStepGroupRequest_name *smithy.Schema
-
-var UpdateWorkflowStepGroupRequest_description *smithy.Schema
-
-var UpdateWorkflowStepGroupRequest_next *smithy.Schema
-
-var UpdateWorkflowStepGroupRequest_previous *smithy.Schema
-
-var UpdateWorkflowStepGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateWorkflowStepGroupResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateWorkflowStepGroupResponse_workflowId *smithy.Schema
-
-var UpdateWorkflowStepGroupResponse_name *smithy.Schema
-
-var UpdateWorkflowStepGroupResponse_id *smithy.Schema
-
-var UpdateWorkflowStepGroupResponse_description *smithy.Schema
-
-var UpdateWorkflowStepGroupResponse_tools *smithy.Schema
-
-var UpdateWorkflowStepGroupResponse_next *smithy.Schema
-
-var UpdateWorkflowStepGroupResponse_previous *smithy.Schema
-
-var UpdateWorkflowStepGroupResponse_lastModifiedTime *smithy.Schema
-
-var UpdateWorkflowStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateWorkflowStepRequest",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateWorkflowStepRequest_id *smithy.Schema
-
-var UpdateWorkflowStepRequest_stepGroupId *smithy.Schema
-
-var UpdateWorkflowStepRequest_workflowId *smithy.Schema
-
-var UpdateWorkflowStepRequest_name *smithy.Schema
-
-var UpdateWorkflowStepRequest_description *smithy.Schema
-
-var UpdateWorkflowStepRequest_stepActionType *smithy.Schema
-
-var UpdateWorkflowStepRequest_workflowStepAutomationConfiguration *smithy.Schema
-
-var UpdateWorkflowStepRequest_stepTarget *smithy.Schema
-
-var UpdateWorkflowStepRequest_outputs *smithy.Schema
-
-var UpdateWorkflowStepRequest_previous *smithy.Schema
-
-var UpdateWorkflowStepRequest_next *smithy.Schema
-
-var UpdateWorkflowStepRequest_status *smithy.Schema
-
-var UpdateWorkflowStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhuborchestrator",
-	Name:      "UpdateWorkflowStepResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateWorkflowStepResponse_id *smithy.Schema
-
-var UpdateWorkflowStepResponse_stepGroupId *smithy.Schema
-
-var UpdateWorkflowStepResponse_workflowId *smithy.Schema
-
-var UpdateWorkflowStepResponse_name *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	_MaxStringList_member = _MaxStringList.AddMember("member", _MaxStringValue)
-
-	MigrationWorkflowSummary_id = MigrationWorkflowSummary.AddMember("id", _MigrationWorkflowId)
-
-	MigrationWorkflowSummary_name = MigrationWorkflowSummary.AddMember("name", smithyprelude.String)
-
-	MigrationWorkflowSummary_templateId = MigrationWorkflowSummary.AddMember("templateId", smithyprelude.String)
-
-	MigrationWorkflowSummary_adsApplicationConfigurationName = MigrationWorkflowSummary.AddMember("adsApplicationConfigurationName", smithyprelude.String)
-
-	MigrationWorkflowSummary_status = MigrationWorkflowSummary.AddMember("status", _MigrationWorkflowStatusEnum)
-
-	MigrationWorkflowSummary_creationTime = MigrationWorkflowSummary.AddMember("creationTime", smithyprelude.Timestamp)
-
-	MigrationWorkflowSummary_endTime = MigrationWorkflowSummary.AddMember("endTime", smithyprelude.Timestamp)
-
-	MigrationWorkflowSummary_statusMessage = MigrationWorkflowSummary.AddMember("statusMessage", smithyprelude.String)
-
-	MigrationWorkflowSummary_completedSteps = MigrationWorkflowSummary.AddMember("completedSteps", smithyprelude.Integer)
-
-	MigrationWorkflowSummary_totalSteps = MigrationWorkflowSummary.AddMember("totalSteps", smithyprelude.Integer)
-
-	_MigrationWorkflowSummaryList_member = _MigrationWorkflowSummaryList.AddMember("member", MigrationWorkflowSummary)
-
-	PlatformCommand_linux = PlatformCommand.AddMember("linux", smithyprelude.String)
-
-	PlatformCommand_windows = PlatformCommand.AddMember("windows", smithyprelude.String)
-
-	PlatformScriptKey_linux = PlatformScriptKey.AddMember("linux", _S3Key)
-
-	PlatformScriptKey_windows = PlatformScriptKey.AddMember("windows", _S3Key)
-
-	PluginSummary_pluginId = PluginSummary.AddMember("pluginId", _PluginId)
-
-	PluginSummary_hostname = PluginSummary.AddMember("hostname", smithyprelude.String)
-
-	PluginSummary_status = PluginSummary.AddMember("status", _PluginHealth)
-
-	PluginSummary_ipAddress = PluginSummary.AddMember("ipAddress", _IPAddress)
-
-	PluginSummary_version = PluginSummary.AddMember("version", _PluginVersion)
-
-	PluginSummary_registeredTime = PluginSummary.AddMember("registeredTime", smithyprelude.String)
-
-	_PluginSummaries_member = _PluginSummaries.AddMember("member", PluginSummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	StepAutomationConfiguration_scriptLocationS3Bucket = StepAutomationConfiguration.AddMember("scriptLocationS3Bucket", smithyprelude.String)
-
-	StepAutomationConfiguration_scriptLocationS3Key = StepAutomationConfiguration.AddMember("scriptLocationS3Key", PlatformScriptKey)
-
-	StepAutomationConfiguration_command = StepAutomationConfiguration.AddMember("command", PlatformCommand)
-
-	StepAutomationConfiguration_runEnvironment = StepAutomationConfiguration.AddMember("runEnvironment", _RunEnvironment)
-
-	StepAutomationConfiguration_targetType = StepAutomationConfiguration.AddMember("targetType", _TargetType)
-
-	_StringList_member = _StringList.AddMember("member", _StringListMember)
-
-	_StringMap_key = _StringMap.AddMember("key", _StringMapKey)
-
-	_StringMap_value = _StringMap.AddMember("value", _StringMapValue)
-
-	StepInput_integerValue = StepInput.AddMember("integerValue", smithyprelude.Integer)
-
-	StepInput_stringValue = StepInput.AddMember("stringValue", _StringValue)
-
-	StepInput_listOfStringsValue = StepInput.AddMember("listOfStringsValue", _StringList)
-
-	StepInput_mapOfStringValue = StepInput.AddMember("mapOfStringValue", _StringMap)
-
-	_StepInputParameters_key = _StepInputParameters.AddMember("key", _StepInputParametersKey)
-
-	_StepInputParameters_value = _StepInputParameters.AddMember("value", StepInput)
-
-	StepOutput_name = StepOutput.AddMember("name", smithyprelude.String)
-
-	StepOutput_dataType = StepOutput.AddMember("dataType", _DataType)
-
-	StepOutput_required = StepOutput.AddMember("required", smithyprelude.Boolean)
-
-	_StepOutputList_member = _StepOutputList.AddMember("member", StepOutput)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	TemplateInput_inputName = TemplateInput.AddMember("inputName", _TemplateInputName)
-
-	TemplateInput_dataType = TemplateInput.AddMember("dataType", _DataType)
-
-	TemplateInput_required = TemplateInput.AddMember("required", smithyprelude.Boolean)
-
-	_TemplateInputList_member = _TemplateInputList.AddMember("member", TemplateInput)
-
-	TemplateSource_workflowId = TemplateSource.AddMember("workflowId", _MigrationWorkflowId)
-
-	TemplateStepGroupSummary_id = TemplateStepGroupSummary.AddMember("id", smithyprelude.String)
-
-	TemplateStepGroupSummary_name = TemplateStepGroupSummary.AddMember("name", smithyprelude.String)
-
-	TemplateStepGroupSummary_previous = TemplateStepGroupSummary.AddMember("previous", _StringList)
-
-	TemplateStepGroupSummary_next = TemplateStepGroupSummary.AddMember("next", _StringList)
-
-	_TemplateStepGroupSummaryList_member = _TemplateStepGroupSummaryList.AddMember("member", TemplateStepGroupSummary)
-
-	TemplateStepSummary_id = TemplateStepSummary.AddMember("id", smithyprelude.String)
-
-	TemplateStepSummary_stepGroupId = TemplateStepSummary.AddMember("stepGroupId", smithyprelude.String)
-
-	TemplateStepSummary_templateId = TemplateStepSummary.AddMember("templateId", smithyprelude.String)
-
-	TemplateStepSummary_name = TemplateStepSummary.AddMember("name", smithyprelude.String)
-
-	TemplateStepSummary_stepActionType = TemplateStepSummary.AddMember("stepActionType", _StepActionType)
-
-	TemplateStepSummary_targetType = TemplateStepSummary.AddMember("targetType", _TargetType)
-
-	TemplateStepSummary_owner = TemplateStepSummary.AddMember("owner", _Owner)
-
-	TemplateStepSummary_previous = TemplateStepSummary.AddMember("previous", _StringList)
-
-	TemplateStepSummary_next = TemplateStepSummary.AddMember("next", _StringList)
-
-	_TemplateStepSummaryList_member = _TemplateStepSummaryList.AddMember("member", TemplateStepSummary)
-
-	TemplateSummary_id = TemplateSummary.AddMember("id", smithyprelude.String)
-
-	TemplateSummary_name = TemplateSummary.AddMember("name", smithyprelude.String)
-
-	TemplateSummary_arn = TemplateSummary.AddMember("arn", smithyprelude.String)
-
-	TemplateSummary_description = TemplateSummary.AddMember("description", smithyprelude.String)
-
-	_TemplateSummaryList_member = _TemplateSummaryList.AddMember("member", TemplateSummary)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	Tool_name = Tool.AddMember("name", smithyprelude.String)
-
-	Tool_url = Tool.AddMember("url", smithyprelude.String)
-
-	_ToolsList_member = _ToolsList.AddMember("member", Tool)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	WorkflowStepAutomationConfiguration_scriptLocationS3Bucket = WorkflowStepAutomationConfiguration.AddMember("scriptLocationS3Bucket", _S3Bucket)
-
-	WorkflowStepAutomationConfiguration_scriptLocationS3Key = WorkflowStepAutomationConfiguration.AddMember("scriptLocationS3Key", PlatformScriptKey)
-
-	WorkflowStepAutomationConfiguration_command = WorkflowStepAutomationConfiguration.AddMember("command", PlatformCommand)
-
-	WorkflowStepAutomationConfiguration_runEnvironment = WorkflowStepAutomationConfiguration.AddMember("runEnvironment", _RunEnvironment)
-
-	WorkflowStepAutomationConfiguration_targetType = WorkflowStepAutomationConfiguration.AddMember("targetType", _TargetType)
-
-	WorkflowStepGroupSummary_id = WorkflowStepGroupSummary.AddMember("id", smithyprelude.String)
-
-	WorkflowStepGroupSummary_name = WorkflowStepGroupSummary.AddMember("name", smithyprelude.String)
-
-	WorkflowStepGroupSummary_owner = WorkflowStepGroupSummary.AddMember("owner", _Owner)
-
-	WorkflowStepGroupSummary_status = WorkflowStepGroupSummary.AddMember("status", _StepGroupStatus)
-
-	WorkflowStepGroupSummary_previous = WorkflowStepGroupSummary.AddMember("previous", _StringList)
-
-	WorkflowStepGroupSummary_next = WorkflowStepGroupSummary.AddMember("next", _StringList)
-
-	_WorkflowStepGroupsSummaryList_member = _WorkflowStepGroupsSummaryList.AddMember("member", WorkflowStepGroupSummary)
-
-	WorkflowStepOutputUnion_integerValue = WorkflowStepOutputUnion.AddMember("integerValue", smithyprelude.Integer)
-
-	WorkflowStepOutputUnion_stringValue = WorkflowStepOutputUnion.AddMember("stringValue", _MaxStringValue)
-
-	WorkflowStepOutputUnion_listOfStringValue = WorkflowStepOutputUnion.AddMember("listOfStringValue", _MaxStringList)
-
-	WorkflowStepOutput_name = WorkflowStepOutput.AddMember("name", _WorkflowStepOutputName)
-
-	WorkflowStepOutput_dataType = WorkflowStepOutput.AddMember("dataType", _DataType)
-
-	WorkflowStepOutput_required = WorkflowStepOutput.AddMember("required", smithyprelude.Boolean)
-
-	WorkflowStepOutput_value = WorkflowStepOutput.AddMember("value", WorkflowStepOutputUnion)
-
-	_WorkflowStepOutputList_member = _WorkflowStepOutputList.AddMember("member", WorkflowStepOutput)
-
-	WorkflowStepSummary_stepId = WorkflowStepSummary.AddMember("stepId", smithyprelude.String)
-
-	WorkflowStepSummary_name = WorkflowStepSummary.AddMember("name", smithyprelude.String)
-
-	WorkflowStepSummary_stepActionType = WorkflowStepSummary.AddMember("stepActionType", _StepActionType)
-
-	WorkflowStepSummary_owner = WorkflowStepSummary.AddMember("owner", _Owner)
-
-	WorkflowStepSummary_previous = WorkflowStepSummary.AddMember("previous", _StringList)
-
-	WorkflowStepSummary_next = WorkflowStepSummary.AddMember("next", _StringList)
-
-	WorkflowStepSummary_status = WorkflowStepSummary.AddMember("status", _StepStatus)
-
-	WorkflowStepSummary_statusMessage = WorkflowStepSummary.AddMember("statusMessage", smithyprelude.String)
-
-	WorkflowStepSummary_noOfSrvCompleted = WorkflowStepSummary.AddMember("noOfSrvCompleted", smithyprelude.Integer)
-
-	WorkflowStepSummary_noOfSrvFailed = WorkflowStepSummary.AddMember("noOfSrvFailed", smithyprelude.Integer)
-
-	WorkflowStepSummary_totalNoOfSrv = WorkflowStepSummary.AddMember("totalNoOfSrv", smithyprelude.Integer)
-
-	WorkflowStepSummary_description = WorkflowStepSummary.AddMember("description", smithyprelude.String)
-
-	WorkflowStepSummary_scriptLocation = WorkflowStepSummary.AddMember("scriptLocation", smithyprelude.String)
-
-	_WorkflowStepsSummaryList_member = _WorkflowStepsSummaryList.AddMember("member", WorkflowStepSummary)
-
-	CreateTemplateRequest_templateName = CreateTemplateRequest.AddMember("templateName", smithyprelude.String)
-
-	CreateTemplateRequest_templateDescription = CreateTemplateRequest.AddMember("templateDescription", smithyprelude.String)
-
-	CreateTemplateRequest_templateSource = CreateTemplateRequest.AddMember("templateSource", TemplateSource)
-
-	CreateTemplateRequest_clientToken = CreateTemplateRequest.AddMember("clientToken", _ClientToken)
-
-	CreateTemplateRequest_tags = CreateTemplateRequest.AddMember("tags", _TagMap)
-
-	CreateTemplateResponse_templateId = CreateTemplateResponse.AddMember("templateId", smithyprelude.String)
-
-	CreateTemplateResponse_templateArn = CreateTemplateResponse.AddMember("templateArn", smithyprelude.String)
-
-	CreateTemplateResponse_tags = CreateTemplateResponse.AddMember("tags", _StringMap)
-
-	CreateMigrationWorkflowRequest_name = CreateMigrationWorkflowRequest.AddMember("name", smithyprelude.String)
-
-	CreateMigrationWorkflowRequest_description = CreateMigrationWorkflowRequest.AddMember("description", smithyprelude.String)
-
-	CreateMigrationWorkflowRequest_templateId = CreateMigrationWorkflowRequest.AddMember("templateId", smithyprelude.String)
-
-	CreateMigrationWorkflowRequest_applicationConfigurationId = CreateMigrationWorkflowRequest.AddMember("applicationConfigurationId", smithyprelude.String)
-
-	CreateMigrationWorkflowRequest_inputParameters = CreateMigrationWorkflowRequest.AddMember("inputParameters", _StepInputParameters)
-
-	CreateMigrationWorkflowRequest_stepTargets = CreateMigrationWorkflowRequest.AddMember("stepTargets", _StringList)
-
-	CreateMigrationWorkflowRequest_tags = CreateMigrationWorkflowRequest.AddMember("tags", _StringMap)
-
-	CreateMigrationWorkflowResponse_id = CreateMigrationWorkflowResponse.AddMember("id", _MigrationWorkflowId)
-
-	CreateMigrationWorkflowResponse_arn = CreateMigrationWorkflowResponse.AddMember("arn", smithyprelude.String)
-
-	CreateMigrationWorkflowResponse_name = CreateMigrationWorkflowResponse.AddMember("name", smithyprelude.String)
-
-	CreateMigrationWorkflowResponse_description = CreateMigrationWorkflowResponse.AddMember("description", smithyprelude.String)
-
-	CreateMigrationWorkflowResponse_templateId = CreateMigrationWorkflowResponse.AddMember("templateId", smithyprelude.String)
-
-	CreateMigrationWorkflowResponse_adsApplicationConfigurationId = CreateMigrationWorkflowResponse.AddMember("adsApplicationConfigurationId", smithyprelude.String)
-
-	CreateMigrationWorkflowResponse_workflowInputs = CreateMigrationWorkflowResponse.AddMember("workflowInputs", _StepInputParameters)
-
-	CreateMigrationWorkflowResponse_stepTargets = CreateMigrationWorkflowResponse.AddMember("stepTargets", _StringList)
-
-	CreateMigrationWorkflowResponse_status = CreateMigrationWorkflowResponse.AddMember("status", _MigrationWorkflowStatusEnum)
-
-	CreateMigrationWorkflowResponse_creationTime = CreateMigrationWorkflowResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	CreateMigrationWorkflowResponse_tags = CreateMigrationWorkflowResponse.AddMember("tags", _StringMap)
-
-	CreateWorkflowStepGroupRequest_workflowId = CreateWorkflowStepGroupRequest.AddMember("workflowId", _MigrationWorkflowId)
-
-	CreateWorkflowStepGroupRequest_name = CreateWorkflowStepGroupRequest.AddMember("name", _StepGroupName)
-
-	CreateWorkflowStepGroupRequest_description = CreateWorkflowStepGroupRequest.AddMember("description", _StepGroupDescription)
-
-	CreateWorkflowStepGroupRequest_next = CreateWorkflowStepGroupRequest.AddMember("next", _StringList)
-
-	CreateWorkflowStepGroupRequest_previous = CreateWorkflowStepGroupRequest.AddMember("previous", _StringList)
-
-	CreateWorkflowStepGroupResponse_workflowId = CreateWorkflowStepGroupResponse.AddMember("workflowId", smithyprelude.String)
-
-	CreateWorkflowStepGroupResponse_name = CreateWorkflowStepGroupResponse.AddMember("name", smithyprelude.String)
-
-	CreateWorkflowStepGroupResponse_id = CreateWorkflowStepGroupResponse.AddMember("id", smithyprelude.String)
-
-	CreateWorkflowStepGroupResponse_description = CreateWorkflowStepGroupResponse.AddMember("description", smithyprelude.String)
-
-	CreateWorkflowStepGroupResponse_tools = CreateWorkflowStepGroupResponse.AddMember("tools", _ToolsList)
-
-	CreateWorkflowStepGroupResponse_next = CreateWorkflowStepGroupResponse.AddMember("next", _StringList)
-
-	CreateWorkflowStepGroupResponse_previous = CreateWorkflowStepGroupResponse.AddMember("previous", _StringList)
-
-	CreateWorkflowStepGroupResponse_creationTime = CreateWorkflowStepGroupResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	CreateWorkflowStepRequest_name = CreateWorkflowStepRequest.AddMember("name", _MigrationWorkflowName)
-
-	CreateWorkflowStepRequest_stepGroupId = CreateWorkflowStepRequest.AddMember("stepGroupId", _StepGroupId)
-
-	CreateWorkflowStepRequest_workflowId = CreateWorkflowStepRequest.AddMember("workflowId", _MigrationWorkflowId)
-
-	CreateWorkflowStepRequest_stepActionType = CreateWorkflowStepRequest.AddMember("stepActionType", _StepActionType)
-
-	CreateWorkflowStepRequest_description = CreateWorkflowStepRequest.AddMember("description", _MigrationWorkflowDescription)
-
-	CreateWorkflowStepRequest_workflowStepAutomationConfiguration = CreateWorkflowStepRequest.AddMember("workflowStepAutomationConfiguration", WorkflowStepAutomationConfiguration)
-
-	CreateWorkflowStepRequest_stepTarget = CreateWorkflowStepRequest.AddMember("stepTarget", _StringList)
-
-	CreateWorkflowStepRequest_outputs = CreateWorkflowStepRequest.AddMember("outputs", _WorkflowStepOutputList)
-
-	CreateWorkflowStepRequest_previous = CreateWorkflowStepRequest.AddMember("previous", _StringList)
-
-	CreateWorkflowStepRequest_next = CreateWorkflowStepRequest.AddMember("next", _StringList)
-
-	CreateWorkflowStepResponse_id = CreateWorkflowStepResponse.AddMember("id", smithyprelude.String)
-
-	CreateWorkflowStepResponse_stepGroupId = CreateWorkflowStepResponse.AddMember("stepGroupId", smithyprelude.String)
-
-	CreateWorkflowStepResponse_workflowId = CreateWorkflowStepResponse.AddMember("workflowId", smithyprelude.String)
-
-	CreateWorkflowStepResponse_name = CreateWorkflowStepResponse.AddMember("name", smithyprelude.String)
-
-	DeleteTemplateRequest_id = DeleteTemplateRequest.AddMember("id", _TemplateId, &smithytraits.HTTPLabel{})
-
-	DeleteMigrationWorkflowRequest_id = DeleteMigrationWorkflowRequest.AddMember("id", _MigrationWorkflowId, &smithytraits.HTTPLabel{})
-
-	DeleteMigrationWorkflowResponse_id = DeleteMigrationWorkflowResponse.AddMember("id", _MigrationWorkflowId)
-
-	DeleteMigrationWorkflowResponse_arn = DeleteMigrationWorkflowResponse.AddMember("arn", smithyprelude.String)
-
-	DeleteMigrationWorkflowResponse_status = DeleteMigrationWorkflowResponse.AddMember("status", _MigrationWorkflowStatusEnum)
-
-	DeleteWorkflowStepGroupRequest_workflowId = DeleteWorkflowStepGroupRequest.AddMember("workflowId", _MigrationWorkflowId, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	DeleteWorkflowStepGroupRequest_id = DeleteWorkflowStepGroupRequest.AddMember("id", _StepGroupId, &smithytraits.HTTPLabel{})
-
-	DeleteWorkflowStepRequest_id = DeleteWorkflowStepRequest.AddMember("id", _StepId, &smithytraits.HTTPLabel{})
-
-	DeleteWorkflowStepRequest_stepGroupId = DeleteWorkflowStepRequest.AddMember("stepGroupId", _StepGroupId, &smithytraits.HTTPQuery{Name: "stepGroupId"})
-
-	DeleteWorkflowStepRequest_workflowId = DeleteWorkflowStepRequest.AddMember("workflowId", _MigrationWorkflowId, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	GetMigrationWorkflowTemplateRequest_id = GetMigrationWorkflowTemplateRequest.AddMember("id", _TemplateId, &smithytraits.HTTPLabel{})
-
-	GetMigrationWorkflowTemplateResponse_id = GetMigrationWorkflowTemplateResponse.AddMember("id", smithyprelude.String)
-
-	GetMigrationWorkflowTemplateResponse_templateArn = GetMigrationWorkflowTemplateResponse.AddMember("templateArn", smithyprelude.String)
-
-	GetMigrationWorkflowTemplateResponse_name = GetMigrationWorkflowTemplateResponse.AddMember("name", smithyprelude.String)
-
-	GetMigrationWorkflowTemplateResponse_description = GetMigrationWorkflowTemplateResponse.AddMember("description", smithyprelude.String)
-
-	GetMigrationWorkflowTemplateResponse_inputs = GetMigrationWorkflowTemplateResponse.AddMember("inputs", _TemplateInputList)
-
-	GetMigrationWorkflowTemplateResponse_tools = GetMigrationWorkflowTemplateResponse.AddMember("tools", _ToolsList)
-
-	GetMigrationWorkflowTemplateResponse_creationTime = GetMigrationWorkflowTemplateResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	GetMigrationWorkflowTemplateResponse_owner = GetMigrationWorkflowTemplateResponse.AddMember("owner", smithyprelude.String)
-
-	GetMigrationWorkflowTemplateResponse_status = GetMigrationWorkflowTemplateResponse.AddMember("status", _TemplateStatus)
-
-	GetMigrationWorkflowTemplateResponse_statusMessage = GetMigrationWorkflowTemplateResponse.AddMember("statusMessage", smithyprelude.String)
-
-	GetMigrationWorkflowTemplateResponse_templateClass = GetMigrationWorkflowTemplateResponse.AddMember("templateClass", smithyprelude.String)
-
-	GetMigrationWorkflowTemplateResponse_tags = GetMigrationWorkflowTemplateResponse.AddMember("tags", _StringMap)
-
-	GetTemplateStepGroupRequest_templateId = GetTemplateStepGroupRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPLabel{})
-
-	GetTemplateStepGroupRequest_id = GetTemplateStepGroupRequest.AddMember("id", _StepGroupId, &smithytraits.HTTPLabel{})
-
-	GetTemplateStepGroupResponse_templateId = GetTemplateStepGroupResponse.AddMember("templateId", smithyprelude.String)
-
-	GetTemplateStepGroupResponse_id = GetTemplateStepGroupResponse.AddMember("id", smithyprelude.String)
-
-	GetTemplateStepGroupResponse_name = GetTemplateStepGroupResponse.AddMember("name", smithyprelude.String)
-
-	GetTemplateStepGroupResponse_description = GetTemplateStepGroupResponse.AddMember("description", smithyprelude.String)
-
-	GetTemplateStepGroupResponse_status = GetTemplateStepGroupResponse.AddMember("status", _StepGroupStatus)
-
-	GetTemplateStepGroupResponse_creationTime = GetTemplateStepGroupResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	GetTemplateStepGroupResponse_lastModifiedTime = GetTemplateStepGroupResponse.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	GetTemplateStepGroupResponse_tools = GetTemplateStepGroupResponse.AddMember("tools", _ToolsList)
-
-	GetTemplateStepGroupResponse_previous = GetTemplateStepGroupResponse.AddMember("previous", _StringList)
-
-	GetTemplateStepGroupResponse_next = GetTemplateStepGroupResponse.AddMember("next", _StringList)
-
-	GetTemplateStepRequest_id = GetTemplateStepRequest.AddMember("id", _StepId, &smithytraits.HTTPLabel{})
-
-	GetTemplateStepRequest_templateId = GetTemplateStepRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPQuery{Name: "templateId"})
-
-	GetTemplateStepRequest_stepGroupId = GetTemplateStepRequest.AddMember("stepGroupId", _StepGroupId, &smithytraits.HTTPQuery{Name: "stepGroupId"})
-
-	GetTemplateStepResponse_id = GetTemplateStepResponse.AddMember("id", _StepId)
-
-	GetTemplateStepResponse_stepGroupId = GetTemplateStepResponse.AddMember("stepGroupId", _StepGroupId)
-
-	GetTemplateStepResponse_templateId = GetTemplateStepResponse.AddMember("templateId", _TemplateId)
-
-	GetTemplateStepResponse_name = GetTemplateStepResponse.AddMember("name", smithyprelude.String)
-
-	GetTemplateStepResponse_description = GetTemplateStepResponse.AddMember("description", smithyprelude.String)
-
-	GetTemplateStepResponse_stepActionType = GetTemplateStepResponse.AddMember("stepActionType", _StepActionType)
-
-	GetTemplateStepResponse_creationTime = GetTemplateStepResponse.AddMember("creationTime", smithyprelude.String)
-
-	GetTemplateStepResponse_previous = GetTemplateStepResponse.AddMember("previous", _StringList)
-
-	GetTemplateStepResponse_next = GetTemplateStepResponse.AddMember("next", _StringList)
-
-	GetTemplateStepResponse_outputs = GetTemplateStepResponse.AddMember("outputs", _StepOutputList)
-
-	GetTemplateStepResponse_stepAutomationConfiguration = GetTemplateStepResponse.AddMember("stepAutomationConfiguration", StepAutomationConfiguration)
-
-	GetMigrationWorkflowRequest_id = GetMigrationWorkflowRequest.AddMember("id", _MigrationWorkflowId, &smithytraits.HTTPLabel{})
-
-	GetMigrationWorkflowResponse_id = GetMigrationWorkflowResponse.AddMember("id", _MigrationWorkflowId)
-
-	GetMigrationWorkflowResponse_arn = GetMigrationWorkflowResponse.AddMember("arn", smithyprelude.String)
-
-	GetMigrationWorkflowResponse_name = GetMigrationWorkflowResponse.AddMember("name", smithyprelude.String)
-
-	GetMigrationWorkflowResponse_description = GetMigrationWorkflowResponse.AddMember("description", smithyprelude.String)
-
-	GetMigrationWorkflowResponse_templateId = GetMigrationWorkflowResponse.AddMember("templateId", smithyprelude.String)
-
-	GetMigrationWorkflowResponse_adsApplicationConfigurationId = GetMigrationWorkflowResponse.AddMember("adsApplicationConfigurationId", smithyprelude.String)
-
-	GetMigrationWorkflowResponse_adsApplicationName = GetMigrationWorkflowResponse.AddMember("adsApplicationName", smithyprelude.String)
-
-	GetMigrationWorkflowResponse_status = GetMigrationWorkflowResponse.AddMember("status", _MigrationWorkflowStatusEnum)
-
-	GetMigrationWorkflowResponse_statusMessage = GetMigrationWorkflowResponse.AddMember("statusMessage", smithyprelude.String)
-
-	GetMigrationWorkflowResponse_creationTime = GetMigrationWorkflowResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	GetMigrationWorkflowResponse_lastStartTime = GetMigrationWorkflowResponse.AddMember("lastStartTime", smithyprelude.Timestamp)
-
-	GetMigrationWorkflowResponse_lastStopTime = GetMigrationWorkflowResponse.AddMember("lastStopTime", smithyprelude.Timestamp)
-
-	GetMigrationWorkflowResponse_lastModifiedTime = GetMigrationWorkflowResponse.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	GetMigrationWorkflowResponse_endTime = GetMigrationWorkflowResponse.AddMember("endTime", smithyprelude.Timestamp)
-
-	GetMigrationWorkflowResponse_tools = GetMigrationWorkflowResponse.AddMember("tools", _ToolsList)
-
-	GetMigrationWorkflowResponse_totalSteps = GetMigrationWorkflowResponse.AddMember("totalSteps", smithyprelude.Integer)
-
-	GetMigrationWorkflowResponse_completedSteps = GetMigrationWorkflowResponse.AddMember("completedSteps", smithyprelude.Integer)
-
-	GetMigrationWorkflowResponse_workflowInputs = GetMigrationWorkflowResponse.AddMember("workflowInputs", _StepInputParameters)
-
-	GetMigrationWorkflowResponse_tags = GetMigrationWorkflowResponse.AddMember("tags", _StringMap)
-
-	GetMigrationWorkflowResponse_workflowBucket = GetMigrationWorkflowResponse.AddMember("workflowBucket", smithyprelude.String)
-
-	GetWorkflowStepGroupRequest_id = GetWorkflowStepGroupRequest.AddMember("id", _StepGroupId, &smithytraits.HTTPLabel{})
-
-	GetWorkflowStepGroupRequest_workflowId = GetWorkflowStepGroupRequest.AddMember("workflowId", _MigrationWorkflowId, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	GetWorkflowStepGroupResponse_id = GetWorkflowStepGroupResponse.AddMember("id", _StepGroupId)
-
-	GetWorkflowStepGroupResponse_workflowId = GetWorkflowStepGroupResponse.AddMember("workflowId", smithyprelude.String)
-
-	GetWorkflowStepGroupResponse_name = GetWorkflowStepGroupResponse.AddMember("name", smithyprelude.String)
-
-	GetWorkflowStepGroupResponse_description = GetWorkflowStepGroupResponse.AddMember("description", smithyprelude.String)
-
-	GetWorkflowStepGroupResponse_status = GetWorkflowStepGroupResponse.AddMember("status", _StepGroupStatus)
-
-	GetWorkflowStepGroupResponse_owner = GetWorkflowStepGroupResponse.AddMember("owner", _Owner)
-
-	GetWorkflowStepGroupResponse_creationTime = GetWorkflowStepGroupResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	GetWorkflowStepGroupResponse_lastModifiedTime = GetWorkflowStepGroupResponse.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	GetWorkflowStepGroupResponse_endTime = GetWorkflowStepGroupResponse.AddMember("endTime", smithyprelude.Timestamp)
-
-	GetWorkflowStepGroupResponse_tools = GetWorkflowStepGroupResponse.AddMember("tools", _ToolsList)
-
-	GetWorkflowStepGroupResponse_previous = GetWorkflowStepGroupResponse.AddMember("previous", _StringList)
-
-	GetWorkflowStepGroupResponse_next = GetWorkflowStepGroupResponse.AddMember("next", _StringList)
-
-	GetWorkflowStepRequest_workflowId = GetWorkflowStepRequest.AddMember("workflowId", _MigrationWorkflowId, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	GetWorkflowStepRequest_stepGroupId = GetWorkflowStepRequest.AddMember("stepGroupId", _StepGroupId, &smithytraits.HTTPQuery{Name: "stepGroupId"})
-
-	GetWorkflowStepRequest_id = GetWorkflowStepRequest.AddMember("id", _StepId, &smithytraits.HTTPLabel{})
-
-	GetWorkflowStepResponse_name = GetWorkflowStepResponse.AddMember("name", smithyprelude.String)
-
-	GetWorkflowStepResponse_stepGroupId = GetWorkflowStepResponse.AddMember("stepGroupId", smithyprelude.String)
-
-	GetWorkflowStepResponse_workflowId = GetWorkflowStepResponse.AddMember("workflowId", smithyprelude.String)
-
-	GetWorkflowStepResponse_stepId = GetWorkflowStepResponse.AddMember("stepId", smithyprelude.String)
-
-	GetWorkflowStepResponse_description = GetWorkflowStepResponse.AddMember("description", smithyprelude.String)
-
-	GetWorkflowStepResponse_stepActionType = GetWorkflowStepResponse.AddMember("stepActionType", _StepActionType)
-
-	GetWorkflowStepResponse_owner = GetWorkflowStepResponse.AddMember("owner", _Owner)
-
-	GetWorkflowStepResponse_workflowStepAutomationConfiguration = GetWorkflowStepResponse.AddMember("workflowStepAutomationConfiguration", WorkflowStepAutomationConfiguration)
-
-	GetWorkflowStepResponse_stepTarget = GetWorkflowStepResponse.AddMember("stepTarget", _StringList)
-
-	GetWorkflowStepResponse_outputs = GetWorkflowStepResponse.AddMember("outputs", _WorkflowStepOutputList)
-
-	GetWorkflowStepResponse_previous = GetWorkflowStepResponse.AddMember("previous", _StringList)
-
-	GetWorkflowStepResponse_next = GetWorkflowStepResponse.AddMember("next", _StringList)
-
-	GetWorkflowStepResponse_status = GetWorkflowStepResponse.AddMember("status", _StepStatus)
-
-	GetWorkflowStepResponse_statusMessage = GetWorkflowStepResponse.AddMember("statusMessage", smithyprelude.String)
-
-	GetWorkflowStepResponse_scriptOutputLocation = GetWorkflowStepResponse.AddMember("scriptOutputLocation", smithyprelude.String)
-
-	GetWorkflowStepResponse_creationTime = GetWorkflowStepResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	GetWorkflowStepResponse_lastStartTime = GetWorkflowStepResponse.AddMember("lastStartTime", smithyprelude.Timestamp)
-
-	GetWorkflowStepResponse_endTime = GetWorkflowStepResponse.AddMember("endTime", smithyprelude.Timestamp)
-
-	GetWorkflowStepResponse_noOfSrvCompleted = GetWorkflowStepResponse.AddMember("noOfSrvCompleted", smithyprelude.Integer)
-
-	GetWorkflowStepResponse_noOfSrvFailed = GetWorkflowStepResponse.AddMember("noOfSrvFailed", smithyprelude.Integer)
-
-	GetWorkflowStepResponse_totalNoOfSrv = GetWorkflowStepResponse.AddMember("totalNoOfSrv", smithyprelude.Integer)
-
-	ListPluginsRequest_maxResults = ListPluginsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListPluginsRequest_nextToken = ListPluginsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListPluginsResponse_nextToken = ListPluginsResponse.AddMember("nextToken", _NextToken)
-
-	ListPluginsResponse_plugins = ListPluginsResponse.AddMember("plugins", _PluginSummaries)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ListMigrationWorkflowTemplatesRequest_maxResults = ListMigrationWorkflowTemplatesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMigrationWorkflowTemplatesRequest_nextToken = ListMigrationWorkflowTemplatesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMigrationWorkflowTemplatesRequest_name = ListMigrationWorkflowTemplatesRequest.AddMember("name", _TemplateName, &smithytraits.HTTPQuery{Name: "name"})
-
-	ListMigrationWorkflowTemplatesResponse_nextToken = ListMigrationWorkflowTemplatesResponse.AddMember("nextToken", _NextToken)
-
-	ListMigrationWorkflowTemplatesResponse_templateSummary = ListMigrationWorkflowTemplatesResponse.AddMember("templateSummary", _TemplateSummaryList)
-
-	ListTemplateStepGroupsRequest_maxResults = ListTemplateStepGroupsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTemplateStepGroupsRequest_nextToken = ListTemplateStepGroupsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTemplateStepGroupsRequest_templateId = ListTemplateStepGroupsRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPLabel{})
-
-	ListTemplateStepGroupsResponse_nextToken = ListTemplateStepGroupsResponse.AddMember("nextToken", _NextToken)
-
-	ListTemplateStepGroupsResponse_templateStepGroupSummary = ListTemplateStepGroupsResponse.AddMember("templateStepGroupSummary", _TemplateStepGroupSummaryList)
-
-	ListTemplateStepsRequest_maxResults = ListTemplateStepsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTemplateStepsRequest_nextToken = ListTemplateStepsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTemplateStepsRequest_templateId = ListTemplateStepsRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPQuery{Name: "templateId"})
-
-	ListTemplateStepsRequest_stepGroupId = ListTemplateStepsRequest.AddMember("stepGroupId", _StepGroupId, &smithytraits.HTTPQuery{Name: "stepGroupId"})
-
-	ListTemplateStepsResponse_nextToken = ListTemplateStepsResponse.AddMember("nextToken", _NextToken)
-
-	ListTemplateStepsResponse_templateStepSummaryList = ListTemplateStepsResponse.AddMember("templateStepSummaryList", _TemplateStepSummaryList)
-
-	ListMigrationWorkflowsRequest_maxResults = ListMigrationWorkflowsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMigrationWorkflowsRequest_nextToken = ListMigrationWorkflowsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMigrationWorkflowsRequest_templateId = ListMigrationWorkflowsRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPQuery{Name: "templateId"})
-
-	ListMigrationWorkflowsRequest_adsApplicationConfigurationName = ListMigrationWorkflowsRequest.AddMember("adsApplicationConfigurationName", _ApplicationConfigurationName, &smithytraits.HTTPQuery{Name: "adsApplicationConfigurationName"})
-
-	ListMigrationWorkflowsRequest_status = ListMigrationWorkflowsRequest.AddMember("status", _MigrationWorkflowStatusEnum, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListMigrationWorkflowsRequest_name = ListMigrationWorkflowsRequest.AddMember("name", smithyprelude.String, &smithytraits.HTTPQuery{Name: "name"})
-
-	ListMigrationWorkflowsResponse_nextToken = ListMigrationWorkflowsResponse.AddMember("nextToken", _NextToken)
-
-	ListMigrationWorkflowsResponse_migrationWorkflowSummary = ListMigrationWorkflowsResponse.AddMember("migrationWorkflowSummary", _MigrationWorkflowSummaryList)
-
-	ListWorkflowStepGroupsRequest_nextToken = ListWorkflowStepGroupsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkflowStepGroupsRequest_maxResults = ListWorkflowStepGroupsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkflowStepGroupsRequest_workflowId = ListWorkflowStepGroupsRequest.AddMember("workflowId", _MigrationWorkflowId, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	ListWorkflowStepGroupsResponse_nextToken = ListWorkflowStepGroupsResponse.AddMember("nextToken", _NextToken)
-
-	ListWorkflowStepGroupsResponse_workflowStepGroupsSummary = ListWorkflowStepGroupsResponse.AddMember("workflowStepGroupsSummary", _WorkflowStepGroupsSummaryList)
-
-	ListWorkflowStepsRequest_nextToken = ListWorkflowStepsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkflowStepsRequest_maxResults = ListWorkflowStepsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkflowStepsRequest_workflowId = ListWorkflowStepsRequest.AddMember("workflowId", _MigrationWorkflowId, &smithytraits.HTTPLabel{})
-
-	ListWorkflowStepsRequest_stepGroupId = ListWorkflowStepsRequest.AddMember("stepGroupId", _StepGroupId, &smithytraits.HTTPLabel{})
-
-	ListWorkflowStepsResponse_nextToken = ListWorkflowStepsResponse.AddMember("nextToken", _NextToken)
-
-	ListWorkflowStepsResponse_workflowStepsSummary = ListWorkflowStepsResponse.AddMember("workflowStepsSummary", _WorkflowStepsSummaryList)
-
-	RetryWorkflowStepRequest_workflowId = RetryWorkflowStepRequest.AddMember("workflowId", _MigrationWorkflowId, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	RetryWorkflowStepRequest_stepGroupId = RetryWorkflowStepRequest.AddMember("stepGroupId", _StepGroupId, &smithytraits.HTTPQuery{Name: "stepGroupId"})
-
-	RetryWorkflowStepRequest_id = RetryWorkflowStepRequest.AddMember("id", _StepId, &smithytraits.HTTPLabel{})
-
-	RetryWorkflowStepResponse_stepGroupId = RetryWorkflowStepResponse.AddMember("stepGroupId", smithyprelude.String)
-
-	RetryWorkflowStepResponse_workflowId = RetryWorkflowStepResponse.AddMember("workflowId", smithyprelude.String)
-
-	RetryWorkflowStepResponse_id = RetryWorkflowStepResponse.AddMember("id", smithyprelude.String)
-
-	RetryWorkflowStepResponse_status = RetryWorkflowStepResponse.AddMember("status", _StepStatus)
-
-	StartMigrationWorkflowRequest_id = StartMigrationWorkflowRequest.AddMember("id", _MigrationWorkflowId, &smithytraits.HTTPLabel{})
-
-	StartMigrationWorkflowResponse_id = StartMigrationWorkflowResponse.AddMember("id", _MigrationWorkflowId)
-
-	StartMigrationWorkflowResponse_arn = StartMigrationWorkflowResponse.AddMember("arn", smithyprelude.String)
-
-	StartMigrationWorkflowResponse_status = StartMigrationWorkflowResponse.AddMember("status", _MigrationWorkflowStatusEnum)
-
-	StartMigrationWorkflowResponse_statusMessage = StartMigrationWorkflowResponse.AddMember("statusMessage", smithyprelude.String)
-
-	StartMigrationWorkflowResponse_lastStartTime = StartMigrationWorkflowResponse.AddMember("lastStartTime", smithyprelude.Timestamp)
-
-	StopMigrationWorkflowRequest_id = StopMigrationWorkflowRequest.AddMember("id", _MigrationWorkflowId, &smithytraits.HTTPLabel{})
-
-	StopMigrationWorkflowResponse_id = StopMigrationWorkflowResponse.AddMember("id", _MigrationWorkflowId)
-
-	StopMigrationWorkflowResponse_arn = StopMigrationWorkflowResponse.AddMember("arn", smithyprelude.String)
-
-	StopMigrationWorkflowResponse_status = StopMigrationWorkflowResponse.AddMember("status", _MigrationWorkflowStatusEnum)
-
-	StopMigrationWorkflowResponse_statusMessage = StopMigrationWorkflowResponse.AddMember("statusMessage", smithyprelude.String)
-
-	StopMigrationWorkflowResponse_lastStopTime = StopMigrationWorkflowResponse.AddMember("lastStopTime", smithyprelude.Timestamp)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateTemplateRequest_id = UpdateTemplateRequest.AddMember("id", _TemplateId, &smithytraits.HTTPLabel{})
-
-	UpdateTemplateRequest_templateName = UpdateTemplateRequest.AddMember("templateName", smithyprelude.String)
-
-	UpdateTemplateRequest_templateDescription = UpdateTemplateRequest.AddMember("templateDescription", smithyprelude.String)
-
-	UpdateTemplateRequest_clientToken = UpdateTemplateRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateTemplateResponse_templateId = UpdateTemplateResponse.AddMember("templateId", smithyprelude.String)
-
-	UpdateTemplateResponse_templateArn = UpdateTemplateResponse.AddMember("templateArn", smithyprelude.String)
-
-	UpdateTemplateResponse_tags = UpdateTemplateResponse.AddMember("tags", _StringMap)
-
-	UpdateMigrationWorkflowRequest_id = UpdateMigrationWorkflowRequest.AddMember("id", _MigrationWorkflowId, &smithytraits.HTTPLabel{})
-
-	UpdateMigrationWorkflowRequest_name = UpdateMigrationWorkflowRequest.AddMember("name", smithyprelude.String)
-
-	UpdateMigrationWorkflowRequest_description = UpdateMigrationWorkflowRequest.AddMember("description", smithyprelude.String)
-
-	UpdateMigrationWorkflowRequest_inputParameters = UpdateMigrationWorkflowRequest.AddMember("inputParameters", _StepInputParameters)
-
-	UpdateMigrationWorkflowRequest_stepTargets = UpdateMigrationWorkflowRequest.AddMember("stepTargets", _StringList)
-
-	UpdateMigrationWorkflowResponse_id = UpdateMigrationWorkflowResponse.AddMember("id", _MigrationWorkflowId)
-
-	UpdateMigrationWorkflowResponse_arn = UpdateMigrationWorkflowResponse.AddMember("arn", smithyprelude.String)
-
-	UpdateMigrationWorkflowResponse_name = UpdateMigrationWorkflowResponse.AddMember("name", smithyprelude.String)
-
-	UpdateMigrationWorkflowResponse_description = UpdateMigrationWorkflowResponse.AddMember("description", smithyprelude.String)
-
-	UpdateMigrationWorkflowResponse_templateId = UpdateMigrationWorkflowResponse.AddMember("templateId", smithyprelude.String)
-
-	UpdateMigrationWorkflowResponse_adsApplicationConfigurationId = UpdateMigrationWorkflowResponse.AddMember("adsApplicationConfigurationId", smithyprelude.String)
-
-	UpdateMigrationWorkflowResponse_workflowInputs = UpdateMigrationWorkflowResponse.AddMember("workflowInputs", _StepInputParameters)
-
-	UpdateMigrationWorkflowResponse_stepTargets = UpdateMigrationWorkflowResponse.AddMember("stepTargets", _StringList)
-
-	UpdateMigrationWorkflowResponse_status = UpdateMigrationWorkflowResponse.AddMember("status", _MigrationWorkflowStatusEnum)
-
-	UpdateMigrationWorkflowResponse_creationTime = UpdateMigrationWorkflowResponse.AddMember("creationTime", smithyprelude.Timestamp)
-
-	UpdateMigrationWorkflowResponse_lastModifiedTime = UpdateMigrationWorkflowResponse.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	UpdateMigrationWorkflowResponse_tags = UpdateMigrationWorkflowResponse.AddMember("tags", _StringMap)
-
-	UpdateWorkflowStepGroupRequest_workflowId = UpdateWorkflowStepGroupRequest.AddMember("workflowId", _MigrationWorkflowId, &smithytraits.HTTPQuery{Name: "workflowId"})
-
-	UpdateWorkflowStepGroupRequest_id = UpdateWorkflowStepGroupRequest.AddMember("id", _StepGroupId, &smithytraits.HTTPLabel{})
-
-	UpdateWorkflowStepGroupRequest_name = UpdateWorkflowStepGroupRequest.AddMember("name", _StepGroupName)
-
-	UpdateWorkflowStepGroupRequest_description = UpdateWorkflowStepGroupRequest.AddMember("description", _StepGroupDescription)
-
-	UpdateWorkflowStepGroupRequest_next = UpdateWorkflowStepGroupRequest.AddMember("next", _StringList)
-
-	UpdateWorkflowStepGroupRequest_previous = UpdateWorkflowStepGroupRequest.AddMember("previous", _StringList)
-
-	UpdateWorkflowStepGroupResponse_workflowId = UpdateWorkflowStepGroupResponse.AddMember("workflowId", smithyprelude.String)
-
-	UpdateWorkflowStepGroupResponse_name = UpdateWorkflowStepGroupResponse.AddMember("name", smithyprelude.String)
-
-	UpdateWorkflowStepGroupResponse_id = UpdateWorkflowStepGroupResponse.AddMember("id", smithyprelude.String)
-
-	UpdateWorkflowStepGroupResponse_description = UpdateWorkflowStepGroupResponse.AddMember("description", smithyprelude.String)
-
-	UpdateWorkflowStepGroupResponse_tools = UpdateWorkflowStepGroupResponse.AddMember("tools", _ToolsList)
-
-	UpdateWorkflowStepGroupResponse_next = UpdateWorkflowStepGroupResponse.AddMember("next", _StringList)
-
-	UpdateWorkflowStepGroupResponse_previous = UpdateWorkflowStepGroupResponse.AddMember("previous", _StringList)
-
-	UpdateWorkflowStepGroupResponse_lastModifiedTime = UpdateWorkflowStepGroupResponse.AddMember("lastModifiedTime", smithyprelude.Timestamp)
-
-	UpdateWorkflowStepRequest_id = UpdateWorkflowStepRequest.AddMember("id", _StepId, &smithytraits.HTTPLabel{})
-
-	UpdateWorkflowStepRequest_stepGroupId = UpdateWorkflowStepRequest.AddMember("stepGroupId", _StepGroupId)
-
-	UpdateWorkflowStepRequest_workflowId = UpdateWorkflowStepRequest.AddMember("workflowId", _MigrationWorkflowId)
-
-	UpdateWorkflowStepRequest_name = UpdateWorkflowStepRequest.AddMember("name", _StepName)
-
-	UpdateWorkflowStepRequest_description = UpdateWorkflowStepRequest.AddMember("description", _StepDescription)
-
-	UpdateWorkflowStepRequest_stepActionType = UpdateWorkflowStepRequest.AddMember("stepActionType", _StepActionType)
-
-	UpdateWorkflowStepRequest_workflowStepAutomationConfiguration = UpdateWorkflowStepRequest.AddMember("workflowStepAutomationConfiguration", WorkflowStepAutomationConfiguration)
-
-	UpdateWorkflowStepRequest_stepTarget = UpdateWorkflowStepRequest.AddMember("stepTarget", _StringList)
-
-	UpdateWorkflowStepRequest_outputs = UpdateWorkflowStepRequest.AddMember("outputs", _WorkflowStepOutputList)
-
-	UpdateWorkflowStepRequest_previous = UpdateWorkflowStepRequest.AddMember("previous", _StringList)
-
-	UpdateWorkflowStepRequest_next = UpdateWorkflowStepRequest.AddMember("next", _StringList)
-
-	UpdateWorkflowStepRequest_status = UpdateWorkflowStepRequest.AddMember("status", _StepStatus)
-
-	UpdateWorkflowStepResponse_id = UpdateWorkflowStepResponse.AddMember("id", _StepId)
-
-	UpdateWorkflowStepResponse_stepGroupId = UpdateWorkflowStepResponse.AddMember("stepGroupId", smithyprelude.String)
-
-	UpdateWorkflowStepResponse_workflowId = UpdateWorkflowStepResponse.AddMember("workflowId", smithyprelude.String)
-
-	UpdateWorkflowStepResponse_name = UpdateWorkflowStepResponse.AddMember("name", smithyprelude.String)
-
+const blob = "" +
+	"ListMigrationWorkflowTemplatesResponseListMigrationWorkflowTemplatesRequestGetMigrationWorkflowTempl" +
+	"ateResponseGetMigrationWorkflowTemplateRequestWorkflowStepAutomationConfigurationworkflowStepAutomat" +
+	"ionConfigurationCreateMigrationWorkflowResponseCreateWorkflowStepGroupResponseDeleteMigrationWorkflo" +
+	"wResponseDeleteWorkflowStepGroupResponseUpdateMigrationWorkflowResponseUpdateWorkflowStepGroupRespon" +
+	"seadsApplicationConfigurationNameCreateMigrationWorkflowRequestCreateWorkflowStepGroupRequestDeleteM" +
+	"igrationWorkflowRequestDeleteWorkflowStepGroupRequestListMigrationWorkflowsResponseListTemplateStepG" +
+	"roupsResponseListWorkflowStepGroupsResponseStartMigrationWorkflowResponseUpdateMigrationWorkflowRequ" +
+	"estUpdateWorkflowStepGroupRequestListMigrationWorkflowsRequestListTemplateStepGroupsRequestListWorkf" +
+	"lowStepGroupsRequestStartMigrationWorkflowRequestStopMigrationWorkflowResponseWorkflowStepGroupsSumm" +
+	"aryListadsApplicationConfigurationIdGetMigrationWorkflowResponseGetTemplateStepGroupResponseGetWorkf" +
+	"lowStepGroupResponseMigrationWorkflowDescriptionMigrationWorkflowSummaryListStopMigrationWorkflowReq" +
+	"uestTemplateStepGroupSummaryListAWSMigrationHubOrchestratorGetMigrationWorkflowRequestGetTemplateSte" +
+	"pGroupRequestGetWorkflowStepGroupRequestListTagsForResourceResponseMigrationWorkflowStatusEnumstepAu" +
+	"tomationConfigurationCreateWorkflowStepResponseDeleteWorkflowStepResponseListTagsForResourceRequestU" +
+	"pdateWorkflowStepResponseapplicationConfigurationIdCreateWorkflowStepRequestDeleteWorkflowStepReques" +
+	"tListTemplateStepsResponseListWorkflowStepsResponseResourceNotFoundExceptionRetryWorkflowStepRespons" +
+	"eUpdateWorkflowStepRequestworkflowStepGroupsSummaryListTemplateStepsRequestListWorkflowStepsRequestR" +
+	"etryWorkflowStepRequestWorkflowStepGroupSummaryWorkflowStepsSummaryListmigrationWorkflowSummarytempl" +
+	"ateStepGroupSummaryGetTemplateStepResponseGetWorkflowStepResponseInternalServerExceptionTemplateStep" +
+	"SummaryListWorkflowStepOutputUniontemplateStepSummaryListCreateTemplateResponseDeleteTemplateRespons" +
+	"eGetTemplateStepRequestGetWorkflowStepRequestStepInputParametersKeyUpdateTemplateResponseWorkflowSte" +
+	"pOutputListWorkflowStepOutputNamescriptLocationS3BucketAccessDeniedExceptionCreateTemplateRequestDel" +
+	"eteTemplateRequestMigrationWorkflowNameUntagResourceResponseUpdateTemplateRequestStepGroupDescriptio" +
+	"nUntagResourceRequestscriptOutputLocationworkflowStepsSummaryListPluginsResponseMigrationWorkflowIdT" +
+	"agResourceResponseTemplateSummaryListThrottlingExceptionValidationExceptionWorkflowStepSummaryscript" +
+	"LocationS3KeytemplateDescriptionListPluginsRequestTagResourceRequestadsApplicationNamelistOfStringsV" +
+	"alueConflictExceptionPlatformScriptKeyTemplateInputListTemplateInputNamelistOfStringValueStringListM" +
+	"emberlastModifiedTimemapOfStringValuenoOfSrvCompletedPlatformCommandPluginSummariesStepDescriptionSt" +
+	"epGroupStatusinputParameterstemplateSummaryMaxStringValueRunEnvironmentStepActionTypeStringMapValueT" +
+	"emplateSourceTemplateStatuscompletedStepsregisteredTimerunEnvironmentstepActionTypetemplateSourcewor" +
+	"kflowBucketworkflowInputsListTemplatesListWorkflowsMaxStringListPluginSummaryPluginVersionStartWorkf" +
+	"lowStepGroupNamelastStartTimenoOfSrvFailedstatusMessagetemplateClassPluginHealthStopWorkflowStringMa" +
+	"pKeyTemplateNamecreationTimeintegerValuelastStopTimetemplateNametotalNoOfSrvClientTokenResourceArnSt" +
+	"epGroupIdclientTokendescriptionresourceArnstepGroupIdstepTargetsstringValuetemplateArnMaxResultsStep" +
+	"StatusTagKeyListTargetTypeTemplateIdmaxResultstargetTypetemplateIdtotalStepsworkflowIdIPAddressNextT" +
+	"okenTimestampToolsListinputNameipAddressnextTokenDataTypePluginIdStepNameTagValuedataTypehostnameplu" +
+	"ginIdpreviousrequiredBooleanIntegercommandendTimemessageoutputspluginstagKeysversionwindowsStepIdTag" +
+	"MapinputsmemberstepIdOwnerlinuxownertoolsvaluetagsarnkeyurl"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.migrationhuborchestrator", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1957, Target: 0, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 247, Target: 1, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 247, Target: 2, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 247, Target: 3, Traits: 3, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1979, Target: 4, Traits: 4, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 309, Target: 5, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 309, Target: 6, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 309, Target: 7, Traits: 7, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 964, Target: 8, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 964, Target: 9, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 964, Target: 10, Traits: 10, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 992, Target: 11, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 992, Target: 12, Traits: 12, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 992, Target: 13, Traits: 13, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2361, Target: 14, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1240, Target: 15, Traits: 15, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3025, Target: 16, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 583, Target: 17, Traits: 17, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1501, Target: 18, Traits: 18, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3038, Target: 19, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 613, Target: 20, Traits: 20, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1526, Target: 21, Traits: 21, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1576, Target: 22, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3090, Target: 23, Traits: 23, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3180, Target: 24, Traits: 24, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2399, Target: 25, Traits: 25, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2239, Target: 26, Traits: 26, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2067, Target: 27, Traits: 27, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 371, Target: 28, Traits: 28, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 371, Target: 29, Traits: 29, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 371, Target: 30, Traits: 30, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1132, Target: 31, Traits: 31, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2155, Target: 32, Traits: 32, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3649, Target: 567, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 405, Target: 34, Traits: 31, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3276, Target: 35, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2604, Target: 36, Traits: 33, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3649, Target: 567, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3549, Target: 38, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1865, Target: 39, Traits: 34, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3649, Target: 567, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3486, Target: 41, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3386, Target: 42, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3051, Target: 43, Traits: 31, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 45, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2843, Target: 45, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1020, Target: 46, Traits: 31, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2380, Target: 47, Traits: 31, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2218, Target: 48, Traits: 31, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1267, Target: 49, Traits: 31, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1048, Target: 50, Traits: 31, StrLen: 24, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 402, Target: 567, Traits: 31, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 49, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3642, Target: 568, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3142, Target: 567, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2927, Target: 569, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3466, Target: 569, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1048, Target: 61, Traits: 31, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 50, Traits: 31, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3495, Target: 63, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3721, Target: 64, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2753, Target: 65, Traits: 31, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3726, Target: 567, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3684, Target: 567, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2621, Target: 68, Traits: 31, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3726, Target: 88, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3684, Target: 88, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3168, Target: 71, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3557, Target: 72, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2768, Target: 73, Traits: 31, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 75, Traits: 31, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3064, Target: 75, Traits: 31, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3597, Target: 72, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3589, Target: 567, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 71, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3531, Target: 41, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3677, Target: 82, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2941, Target: 567, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3077, Target: 82, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3287, Target: 83, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1551, Target: 84, Traits: 35, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3649, Target: 567, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2857, Target: 86, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2147, Target: 87, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2508, Target: 88, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2871, Target: 89, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 154, Target: 90, Traits: 31, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2133, Target: 567, Traits: 31, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2494, Target: 68, Traits: 31, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3635, Target: 65, Traits: 31, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2955, Target: 86, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3446, Target: 135, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2783, Target: 96, Traits: 31, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2281, Target: 97, Traits: 31, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3298, Target: 98, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3103, Target: 99, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2798, Target: 100, Traits: 31, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3691, Target: 101, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2045, Target: 102, Traits: 31, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3228, Target: 569, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3364, Target: 127, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2586, Target: 119, Traits: 31, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2721, Target: 122, Traits: 31, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2045, Target: 107, Traits: 36, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3753, Target: 110, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3741, Target: 102, Traits: 31, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2045, Target: 110, Traits: 31, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3565, Target: 111, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1919, Target: 112, Traits: 31, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3581, Target: 38, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3613, Target: 570, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2097, Target: 116, Traits: 31, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 112, Traits: 31, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3396, Target: 118, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2689, Target: 119, Traits: 31, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 121, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2689, Target: 121, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2885, Target: 122, Traits: 31, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3753, Target: 125, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3741, Target: 126, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3192, Target: 125, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2885, Target: 126, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2678, Target: 127, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3406, Target: 128, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3406, Target: 129, Traits: 31, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 128, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3697, Target: 131, Traits: 31, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3753, Target: 128, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3741, Target: 134, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3573, Target: 134, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3416, Target: 135, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3426, Target: 136, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2638, Target: 137, Traits: 31, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 143, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3581, Target: 38, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3613, Target: 570, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2638, Target: 141, Traits: 31, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 137, Traits: 31, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2655, Target: 143, Traits: 31, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3204, Target: 144, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2899, Target: 145, Traits: 31, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3476, Target: 47, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2913, Target: 147, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1104, Target: 148, Traits: 31, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1104, Target: 153, Traits: 31, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 148, Traits: 31, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1888, Target: 155, Traits: 31, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2969, Target: 89, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3446, Target: 135, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3731, Target: 64, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1888, Target: 165, Traits: 31, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 155, Traits: 31, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2418, Target: 167, Traits: 31, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3750, Target: 567, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2418, Target: 172, Traits: 31, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 167, Traits: 31, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2437, Target: 174, Traits: 37, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3649, Target: 567, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3513, Target: 176, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3756, Target: 567, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3513, Target: 179, Traits: 31, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 176, Traits: 31, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2456, Target: 181, Traits: 38, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3649, Target: 567, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 146, Target: 183, Traits: 31, StrLen: 35, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2133, Target: 87, Traits: 31, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2494, Target: 68, Traits: 31, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3635, Target: 65, Traits: 31, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2955, Target: 86, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3446, Target: 135, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 878, Target: 189, Traits: 31, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 191, Traits: 31, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1723, Target: 191, Traits: 31, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3731, Target: 64, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 100, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1911, Target: 198, Traits: 31, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 205, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3581, Target: 38, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3613, Target: 570, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3741, Target: 206, Traits: 31, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2089, Target: 203, Traits: 31, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 198, Traits: 31, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2111, Target: 205, Traits: 31, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1911, Target: 206, Traits: 31, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3228, Target: 569, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3364, Target: 45, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2672, Target: 43, Traits: 31, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1747, Target: 210, Traits: 31, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3709, Target: 212, Traits: 31, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2475, Target: 212, Traits: 31, StrLen: 19, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3715, Target: 567, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2969, Target: 89, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3731, Target: 64, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3142, Target: 118, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 567, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2737, Target: 569, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3129, Target: 569, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3264, Target: 569, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2133, Target: 567, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2176, Target: 226, Traits: 31, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3252, Target: 567, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2513, Target: 567, Traits: 31, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2983, Target: 145, Traits: 31, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 3309, Target: 35, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3746, Target: 131, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1957, Target: 232, Traits: 31, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3375, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3746, Target: 122, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 433, Target: 236, Traits: 31, StrLen: 30, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1425, Target: 567, Traits: 31, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2813, Target: 107, Traits: 39, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3353, Target: 119, Traits: 31, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3746, Target: 122, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 216, Target: 244, Traits: 31, StrLen: 31, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3750, Target: 567, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 907, Target: 567, Traits: 31, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3011, Target: 107, Traits: 39, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3353, Target: 119, Traits: 31, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3142, Target: 49, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3746, Target: 122, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 463, Target: 256, Traits: 31, StrLen: 30, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3476, Target: 47, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 99, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 97, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 247, Target: 262, Traits: 31, StrLen: 31, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3476, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3736, Target: 179, Traits: 31, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1451, Target: 271, Traits: 31, StrLen: 25, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 48, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 47, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2969, Target: 89, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 46, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 181, Target: 183, Traits: 31, StrLen: 35, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3353, Target: 119, Traits: 31, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3656, Target: 203, Traits: 31, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1321, Target: 282, Traits: 31, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2197, Target: 287, Traits: 31, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 136, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1979, Target: 289, Traits: 31, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 493, Target: 290, Traits: 31, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 278, Target: 292, Traits: 31, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3750, Target: 567, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 49, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 523, Target: 296, Traits: 31, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3476, Target: 47, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 98, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 309, Target: 299, Traits: 31, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1476, Target: 300, Traits: 31, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 101, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 47, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1347, Target: 304, Traits: 31, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 111, Target: 305, Traits: 31, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 136, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 75, Target: 307, Traits: 31, StrLen: 36, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3375, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3703, Target: 141, Traits: 31, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3736, Target: 179, Traits: 31, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3731, Target: 567, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 147, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 567, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3155, Target: 567, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3746, Target: 122, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1186, Target: 320, Traits: 31, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3456, Target: 136, Traits: 40, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 98, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 964, Target: 323, Traits: 31, StrLen: 28, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 100, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2705, Target: 568, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3736, Target: 179, Traits: 31, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2001, Target: 334, Traits: 31, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 101, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 136, Traits: 43, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1819, Target: 338, Traits: 31, StrLen: 23, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 101, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 136, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2969, Target: 89, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3216, Target: 567, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3656, Target: 116, Traits: 31, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1294, Target: 90, Traits: 31, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1159, Target: 350, Traits: 31, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 936, Target: 352, Traits: 31, StrLen: 28, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3750, Target: 567, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 907, Target: 567, Traits: 31, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2568, Target: 567, Traits: 31, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 49, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 567, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3116, Target: 568, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3240, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2705, Target: 568, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3642, Target: 568, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3736, Target: 179, Traits: 31, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3466, Target: 569, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2927, Target: 569, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3011, Target: 107, Traits: 39, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3746, Target: 122, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2997, Target: 567, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1213, Target: 373, Traits: 31, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 98, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 47, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 992, Target: 376, Traits: 31, StrLen: 28, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 98, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 100, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3731, Target: 64, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2705, Target: 568, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3642, Target: 568, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3736, Target: 179, Traits: 31, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2023, Target: 389, Traits: 31, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3476, Target: 47, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 101, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1842, Target: 393, Traits: 31, StrLen: 23, Count: 21, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3715, Target: 567, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2969, Target: 89, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3731, Target: 64, Traits: 31, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 181, Target: 183, Traits: 31, StrLen: 35, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3353, Target: 119, Traits: 31, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3656, Target: 203, Traits: 31, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3142, Target: 118, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 567, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2321, Target: 567, Traits: 31, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3116, Target: 568, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3642, Target: 568, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2737, Target: 569, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3129, Target: 569, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3264, Target: 569, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2532, Target: 415, Traits: 31, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3436, Target: 42, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3540, Target: 63, Traits: 45, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2361, Target: 418, Traits: 31, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3663, Target: 73, Traits: 31, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1373, Target: 421, Traits: 31, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3331, Target: 83, Traits: 40, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1240, Target: 423, Traits: 31, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3746, Target: 131, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 38, Target: 425, Traits: 31, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3436, Target: 42, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3540, Target: 63, Traits: 45, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 144, Traits: 46, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 429, Traits: 31, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2828, Target: 172, Traits: 31, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 762, Target: 432, Traits: 31, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3436, Target: 42, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3540, Target: 63, Traits: 45, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 136, Traits: 40, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 583, Target: 436, Traits: 31, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1795, Target: 153, Traits: 31, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1651, Target: 439, Traits: 31, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3436, Target: 42, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3540, Target: 63, Traits: 45, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 136, Traits: 43, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1501, Target: 444, Traits: 31, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1934, Target: 165, Traits: 31, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 733, Target: 447, Traits: 31, StrLen: 29, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3436, Target: 42, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3540, Target: 63, Traits: 45, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 136, Traits: 43, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 402, Target: 34, Traits: 47, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 49, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 46, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 553, Target: 454, Traits: 31, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1771, Target: 61, Traits: 31, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 791, Target: 457, Traits: 31, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 45, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3436, Target: 42, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3476, Target: 47, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 613, Target: 461, Traits: 31, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1626, Target: 189, Traits: 31, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1675, Target: 464, Traits: 31, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 45, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3436, Target: 42, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3476, Target: 47, Traits: 40, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 40, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1526, Target: 469, Traits: 31, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3540, Target: 63, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2341, Target: 210, Traits: 31, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1699, Target: 472, Traits: 31, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3476, Target: 47, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 101, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1576, Target: 476, Traits: 31, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3342, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 118, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 820, Target: 481, Traits: 31, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 643, Target: 483, Traits: 31, StrLen: 30, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3750, Target: 567, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 49, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 567, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3116, Target: 568, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1076, Target: 489, Traits: 31, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 849, Target: 491, Traits: 31, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3750, Target: 567, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 49, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3142, Target: 567, Traits: 31, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3240, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2550, Target: 497, Traits: 31, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3331, Target: 83, Traits: 40, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3746, Target: 131, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2399, Target: 500, Traits: 31, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2301, Target: 501, Traits: 31, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3331, Target: 83, Traits: 40, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3670, Target: 129, Traits: 49, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2239, Target: 504, Traits: 31, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2260, Target: 505, Traits: 31, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 136, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3252, Target: 567, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2513, Target: 567, Traits: 31, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3309, Target: 35, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2067, Target: 510, Traits: 31, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3375, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3746, Target: 122, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 673, Target: 514, Traits: 31, StrLen: 30, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2813, Target: 107, Traits: 39, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3353, Target: 119, Traits: 31, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 340, Target: 520, Traits: 31, StrLen: 31, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 47, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3750, Target: 567, Traits: 31, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3456, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 907, Target: 567, Traits: 31, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3011, Target: 107, Traits: 39, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3353, Target: 119, Traits: 31, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3142, Target: 49, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3216, Target: 568, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2705, Target: 568, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3746, Target: 122, Traits: 31, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 703, Target: 533, Traits: 31, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3476, Target: 47, Traits: 41, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 98, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 99, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 97, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 371, Target: 540, Traits: 31, StrLen: 31, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3476, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2459, Target: 567, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3736, Target: 179, Traits: 31, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2705, Target: 568, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1601, Target: 549, Traits: 31, StrLen: 25, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 101, Traits: 40, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 98, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 47, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 111, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3320, Target: 96, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2969, Target: 89, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 181, Target: 183, Traits: 31, StrLen: 35, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3353, Target: 119, Traits: 31, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3656, Target: 203, Traits: 31, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 119, Traits: 31, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3540, Target: 119, Traits: 31, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3142, Target: 118, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1399, Target: 562, Traits: 31, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2459, Target: 101, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3342, Target: 567, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 567, Traits: 31, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3593, Target: 567, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2592, Target: 567, Traits: 31, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 3504, Target: 568, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 3628, Target: 569, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 3621, Target: 570, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/template",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/migrationworkflow/",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/workflowstep",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/workflowstepgroups",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/template/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/migrationworkflow/{id}",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/workflowstep/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/workflowstepgroup/{id}",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/migrationworkflowtemplate/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/templatestep/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/templates/{templateId}/stepgroups/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/migrationworkflow/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/workflowstep/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/workflowstepgroup/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/plugins",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/migrationworkflowtemplates",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/templatestepgroups/{templateId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/templatesteps",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/migrationworkflows",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/workflowstepgroups",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/workflow/{workflowId}/workflowstepgroups/{stepGroupId}/workflowsteps",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/retryworkflowstep/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/migrationworkflow/{id}/start",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/migrationworkflow/{id}/stop",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/template/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/migrationworkflow/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/workflowstep/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/workflowstepgroup/{id}",
+			Code: 202}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "workflowId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "stepGroupId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "templateId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "adsApplicationConfigurationName"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [571]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+}
+
+var CreateTemplate = &handles[0]
+
+var CreateWorkflow = &handles[1]
+
+var CreateWorkflowStep = &handles[2]
+
+var CreateWorkflowStepGroup = &handles[3]
+
+var DeleteTemplate = &handles[4]
+
+var DeleteWorkflow = &handles[5]
+
+var DeleteWorkflowStep = &handles[6]
+
+var DeleteWorkflowStepGroup = &handles[7]
+
+var GetTemplate = &handles[8]
+
+var GetTemplateStep = &handles[9]
+
+var GetTemplateStepGroup = &handles[10]
+
+var GetWorkflow = &handles[11]
+
+var GetWorkflowStep = &handles[12]
+
+var GetWorkflowStepGroup = &handles[13]
+
+var ListPlugins = &handles[14]
+
+var ListTagsForResource = &handles[15]
+
+var ListTemplates = &handles[16]
+
+var ListTemplateStepGroups = &handles[17]
+
+var ListTemplateSteps = &handles[18]
+
+var ListWorkflows = &handles[19]
+
+var ListWorkflowStepGroups = &handles[20]
+
+var ListWorkflowSteps = &handles[21]
+
+var RetryWorkflowStep = &handles[22]
+
+var StartWorkflow = &handles[23]
+
+var StopWorkflow = &handles[24]
+
+var TagResource = &handles[25]
+
+var UntagResource = &handles[26]
+
+var UpdateTemplate = &handles[27]
+
+var UpdateWorkflow = &handles[28]
+
+var UpdateWorkflowStep = &handles[29]
+
+var UpdateWorkflowStepGroup = &handles[30]
+
+var _AWSMigrationHubOrchestrator = &handles[31]
+
+var AccessDeniedException = &handles[32]
+var AccessDeniedException_message = &handles[33]
+
+var _ApplicationConfigurationName = &handles[34]
+
+var _ClientToken = &handles[35]
+
+var ConflictException = &handles[36]
+var ConflictException_message = &handles[37]
+
+var _DataType = &handles[38]
+
+var InternalServerException = &handles[39]
+var InternalServerException_message = &handles[40]
+
+var _IPAddress = &handles[41]
+
+var _MaxResults = &handles[42]
+
+var _MaxStringList = &handles[43]
+var _MaxStringList_member = &handles[44]
+
+var _MaxStringValue = &handles[45]
+
+var _MigrationWorkflowDescription = &handles[46]
+
+var _MigrationWorkflowId = &handles[47]
+
+var _MigrationWorkflowName = &handles[48]
+
+var _MigrationWorkflowStatusEnum = &handles[49]
+
+var MigrationWorkflowSummary = &handles[50]
+var MigrationWorkflowSummary_id = &handles[51]
+var MigrationWorkflowSummary_name = &handles[52]
+var MigrationWorkflowSummary_templateId = &handles[53]
+var MigrationWorkflowSummary_adsApplicationConfigurationName = &handles[54]
+var MigrationWorkflowSummary_status = &handles[55]
+var MigrationWorkflowSummary_creationTime = &handles[56]
+var MigrationWorkflowSummary_endTime = &handles[57]
+var MigrationWorkflowSummary_statusMessage = &handles[58]
+var MigrationWorkflowSummary_completedSteps = &handles[59]
+var MigrationWorkflowSummary_totalSteps = &handles[60]
+
+var _MigrationWorkflowSummaryList = &handles[61]
+var _MigrationWorkflowSummaryList_member = &handles[62]
+
+var _NextToken = &handles[63]
+
+var _Owner = &handles[64]
+
+var PlatformCommand = &handles[65]
+var PlatformCommand_linux = &handles[66]
+var PlatformCommand_windows = &handles[67]
+
+var PlatformScriptKey = &handles[68]
+var PlatformScriptKey_linux = &handles[69]
+var PlatformScriptKey_windows = &handles[70]
+
+var _PluginHealth = &handles[71]
+
+var _PluginId = &handles[72]
+
+var _PluginSummaries = &handles[73]
+var _PluginSummaries_member = &handles[74]
+
+var PluginSummary = &handles[75]
+var PluginSummary_pluginId = &handles[76]
+var PluginSummary_hostname = &handles[77]
+var PluginSummary_status = &handles[78]
+var PluginSummary_ipAddress = &handles[79]
+var PluginSummary_version = &handles[80]
+var PluginSummary_registeredTime = &handles[81]
+
+var _PluginVersion = &handles[82]
+
+var _ResourceArn = &handles[83]
+
+var ResourceNotFoundException = &handles[84]
+var ResourceNotFoundException_message = &handles[85]
+
+var _RunEnvironment = &handles[86]
+
+var _S3Bucket = &handles[87]
+
+var _S3Key = &handles[88]
+
+var _StepActionType = &handles[89]
+
+var StepAutomationConfiguration = &handles[90]
+var StepAutomationConfiguration_scriptLocationS3Bucket = &handles[91]
+var StepAutomationConfiguration_scriptLocationS3Key = &handles[92]
+var StepAutomationConfiguration_command = &handles[93]
+var StepAutomationConfiguration_runEnvironment = &handles[94]
+var StepAutomationConfiguration_targetType = &handles[95]
+
+var _StepDescription = &handles[96]
+
+var _StepGroupDescription = &handles[97]
+
+var _StepGroupId = &handles[98]
+
+var _StepGroupName = &handles[99]
+
+var _StepGroupStatus = &handles[100]
+
+var _StepId = &handles[101]
+
+var StepInput = &handles[102]
+var StepInput_integerValue = &handles[103]
+var StepInput_stringValue = &handles[104]
+var StepInput_listOfStringsValue = &handles[105]
+var StepInput_mapOfStringValue = &handles[106]
+
+var _StepInputParameters = &handles[107]
+var _StepInputParameters_key = &handles[108]
+var _StepInputParameters_value = &handles[109]
+
+var _StepInputParametersKey = &handles[110]
+
+var _StepName = &handles[111]
+
+var StepOutput = &handles[112]
+var StepOutput_name = &handles[113]
+var StepOutput_dataType = &handles[114]
+var StepOutput_required = &handles[115]
+
+var _StepOutputList = &handles[116]
+var _StepOutputList_member = &handles[117]
+
+var _StepStatus = &handles[118]
+
+var _StringList = &handles[119]
+var _StringList_member = &handles[120]
+
+var _StringListMember = &handles[121]
+
+var _StringMap = &handles[122]
+var _StringMap_key = &handles[123]
+var _StringMap_value = &handles[124]
+
+var _StringMapKey = &handles[125]
+
+var _StringMapValue = &handles[126]
+
+var _StringValue = &handles[127]
+
+var _TagKey = &handles[128]
+
+var _TagKeyList = &handles[129]
+var _TagKeyList_member = &handles[130]
+
+var _TagMap = &handles[131]
+var _TagMap_key = &handles[132]
+var _TagMap_value = &handles[133]
+
+var _TagValue = &handles[134]
+
+var _TargetType = &handles[135]
+
+var _TemplateId = &handles[136]
+
+var TemplateInput = &handles[137]
+var TemplateInput_inputName = &handles[138]
+var TemplateInput_dataType = &handles[139]
+var TemplateInput_required = &handles[140]
+
+var _TemplateInputList = &handles[141]
+var _TemplateInputList_member = &handles[142]
+
+var _TemplateInputName = &handles[143]
+
+var _TemplateName = &handles[144]
+
+var TemplateSource = &handles[145]
+var TemplateSource_workflowId = &handles[146]
+
+var _TemplateStatus = &handles[147]
+
+var TemplateStepGroupSummary = &handles[148]
+var TemplateStepGroupSummary_id = &handles[149]
+var TemplateStepGroupSummary_name = &handles[150]
+var TemplateStepGroupSummary_previous = &handles[151]
+var TemplateStepGroupSummary_next = &handles[152]
+
+var _TemplateStepGroupSummaryList = &handles[153]
+var _TemplateStepGroupSummaryList_member = &handles[154]
+
+var TemplateStepSummary = &handles[155]
+var TemplateStepSummary_id = &handles[156]
+var TemplateStepSummary_stepGroupId = &handles[157]
+var TemplateStepSummary_templateId = &handles[158]
+var TemplateStepSummary_name = &handles[159]
+var TemplateStepSummary_stepActionType = &handles[160]
+var TemplateStepSummary_targetType = &handles[161]
+var TemplateStepSummary_owner = &handles[162]
+var TemplateStepSummary_previous = &handles[163]
+var TemplateStepSummary_next = &handles[164]
+
+var _TemplateStepSummaryList = &handles[165]
+var _TemplateStepSummaryList_member = &handles[166]
+
+var TemplateSummary = &handles[167]
+var TemplateSummary_id = &handles[168]
+var TemplateSummary_name = &handles[169]
+var TemplateSummary_arn = &handles[170]
+var TemplateSummary_description = &handles[171]
+
+var _TemplateSummaryList = &handles[172]
+var _TemplateSummaryList_member = &handles[173]
+
+var ThrottlingException = &handles[174]
+var ThrottlingException_message = &handles[175]
+
+var Tool = &handles[176]
+var Tool_name = &handles[177]
+var Tool_url = &handles[178]
+
+var _ToolsList = &handles[179]
+var _ToolsList_member = &handles[180]
+
+var ValidationException = &handles[181]
+var ValidationException_message = &handles[182]
+
+var WorkflowStepAutomationConfiguration = &handles[183]
+var WorkflowStepAutomationConfiguration_scriptLocationS3Bucket = &handles[184]
+var WorkflowStepAutomationConfiguration_scriptLocationS3Key = &handles[185]
+var WorkflowStepAutomationConfiguration_command = &handles[186]
+var WorkflowStepAutomationConfiguration_runEnvironment = &handles[187]
+var WorkflowStepAutomationConfiguration_targetType = &handles[188]
+
+var _WorkflowStepGroupsSummaryList = &handles[189]
+var _WorkflowStepGroupsSummaryList_member = &handles[190]
+
+var WorkflowStepGroupSummary = &handles[191]
+var WorkflowStepGroupSummary_id = &handles[192]
+var WorkflowStepGroupSummary_name = &handles[193]
+var WorkflowStepGroupSummary_owner = &handles[194]
+var WorkflowStepGroupSummary_status = &handles[195]
+var WorkflowStepGroupSummary_previous = &handles[196]
+var WorkflowStepGroupSummary_next = &handles[197]
+
+var WorkflowStepOutput = &handles[198]
+var WorkflowStepOutput_name = &handles[199]
+var WorkflowStepOutput_dataType = &handles[200]
+var WorkflowStepOutput_required = &handles[201]
+var WorkflowStepOutput_value = &handles[202]
+
+var _WorkflowStepOutputList = &handles[203]
+var _WorkflowStepOutputList_member = &handles[204]
+
+var _WorkflowStepOutputName = &handles[205]
+
+var WorkflowStepOutputUnion = &handles[206]
+var WorkflowStepOutputUnion_integerValue = &handles[207]
+var WorkflowStepOutputUnion_stringValue = &handles[208]
+var WorkflowStepOutputUnion_listOfStringValue = &handles[209]
+
+var _WorkflowStepsSummaryList = &handles[210]
+var _WorkflowStepsSummaryList_member = &handles[211]
+
+var WorkflowStepSummary = &handles[212]
+var WorkflowStepSummary_stepId = &handles[213]
+var WorkflowStepSummary_name = &handles[214]
+var WorkflowStepSummary_stepActionType = &handles[215]
+var WorkflowStepSummary_owner = &handles[216]
+var WorkflowStepSummary_previous = &handles[217]
+var WorkflowStepSummary_next = &handles[218]
+var WorkflowStepSummary_status = &handles[219]
+var WorkflowStepSummary_statusMessage = &handles[220]
+var WorkflowStepSummary_noOfSrvCompleted = &handles[221]
+var WorkflowStepSummary_noOfSrvFailed = &handles[222]
+var WorkflowStepSummary_totalNoOfSrv = &handles[223]
+var WorkflowStepSummary_description = &handles[224]
+var WorkflowStepSummary_scriptLocation = &handles[225]
+
+var CreateTemplateRequest = &handles[226]
+var CreateTemplateRequest_templateName = &handles[227]
+var CreateTemplateRequest_templateDescription = &handles[228]
+var CreateTemplateRequest_templateSource = &handles[229]
+var CreateTemplateRequest_clientToken = &handles[230]
+var CreateTemplateRequest_tags = &handles[231]
+
+var CreateTemplateResponse = &handles[232]
+var CreateTemplateResponse_templateId = &handles[233]
+var CreateTemplateResponse_templateArn = &handles[234]
+var CreateTemplateResponse_tags = &handles[235]
+
+var CreateMigrationWorkflowRequest = &handles[236]
+var CreateMigrationWorkflowRequest_name = &handles[237]
+var CreateMigrationWorkflowRequest_description = &handles[238]
+var CreateMigrationWorkflowRequest_templateId = &handles[239]
+var CreateMigrationWorkflowRequest_applicationConfigurationId = &handles[240]
+var CreateMigrationWorkflowRequest_inputParameters = &handles[241]
+var CreateMigrationWorkflowRequest_stepTargets = &handles[242]
+var CreateMigrationWorkflowRequest_tags = &handles[243]
+
+var CreateMigrationWorkflowResponse = &handles[244]
+var CreateMigrationWorkflowResponse_id = &handles[245]
+var CreateMigrationWorkflowResponse_arn = &handles[246]
+var CreateMigrationWorkflowResponse_name = &handles[247]
+var CreateMigrationWorkflowResponse_description = &handles[248]
+var CreateMigrationWorkflowResponse_templateId = &handles[249]
+var CreateMigrationWorkflowResponse_adsApplicationConfigurationId = &handles[250]
+var CreateMigrationWorkflowResponse_workflowInputs = &handles[251]
+var CreateMigrationWorkflowResponse_stepTargets = &handles[252]
+var CreateMigrationWorkflowResponse_status = &handles[253]
+var CreateMigrationWorkflowResponse_creationTime = &handles[254]
+var CreateMigrationWorkflowResponse_tags = &handles[255]
+
+var CreateWorkflowStepGroupRequest = &handles[256]
+var CreateWorkflowStepGroupRequest_workflowId = &handles[257]
+var CreateWorkflowStepGroupRequest_name = &handles[258]
+var CreateWorkflowStepGroupRequest_description = &handles[259]
+var CreateWorkflowStepGroupRequest_next = &handles[260]
+var CreateWorkflowStepGroupRequest_previous = &handles[261]
+
+var CreateWorkflowStepGroupResponse = &handles[262]
+var CreateWorkflowStepGroupResponse_workflowId = &handles[263]
+var CreateWorkflowStepGroupResponse_name = &handles[264]
+var CreateWorkflowStepGroupResponse_id = &handles[265]
+var CreateWorkflowStepGroupResponse_description = &handles[266]
+var CreateWorkflowStepGroupResponse_tools = &handles[267]
+var CreateWorkflowStepGroupResponse_next = &handles[268]
+var CreateWorkflowStepGroupResponse_previous = &handles[269]
+var CreateWorkflowStepGroupResponse_creationTime = &handles[270]
+
+var CreateWorkflowStepRequest = &handles[271]
+var CreateWorkflowStepRequest_name = &handles[272]
+var CreateWorkflowStepRequest_stepGroupId = &handles[273]
+var CreateWorkflowStepRequest_workflowId = &handles[274]
+var CreateWorkflowStepRequest_stepActionType = &handles[275]
+var CreateWorkflowStepRequest_description = &handles[276]
+var CreateWorkflowStepRequest_workflowStepAutomationConfiguration = &handles[277]
+var CreateWorkflowStepRequest_stepTarget = &handles[278]
+var CreateWorkflowStepRequest_outputs = &handles[279]
+var CreateWorkflowStepRequest_previous = &handles[280]
+var CreateWorkflowStepRequest_next = &handles[281]
+
+var CreateWorkflowStepResponse = &handles[282]
+var CreateWorkflowStepResponse_id = &handles[283]
+var CreateWorkflowStepResponse_stepGroupId = &handles[284]
+var CreateWorkflowStepResponse_workflowId = &handles[285]
+var CreateWorkflowStepResponse_name = &handles[286]
+
+var DeleteTemplateRequest = &handles[287]
+var DeleteTemplateRequest_id = &handles[288]
+
+var DeleteTemplateResponse = &handles[289]
+
+var DeleteMigrationWorkflowRequest = &handles[290]
+var DeleteMigrationWorkflowRequest_id = &handles[291]
+
+var DeleteMigrationWorkflowResponse = &handles[292]
+var DeleteMigrationWorkflowResponse_id = &handles[293]
+var DeleteMigrationWorkflowResponse_arn = &handles[294]
+var DeleteMigrationWorkflowResponse_status = &handles[295]
+
+var DeleteWorkflowStepGroupRequest = &handles[296]
+var DeleteWorkflowStepGroupRequest_workflowId = &handles[297]
+var DeleteWorkflowStepGroupRequest_id = &handles[298]
+
+var DeleteWorkflowStepGroupResponse = &handles[299]
+
+var DeleteWorkflowStepRequest = &handles[300]
+var DeleteWorkflowStepRequest_id = &handles[301]
+var DeleteWorkflowStepRequest_stepGroupId = &handles[302]
+var DeleteWorkflowStepRequest_workflowId = &handles[303]
+
+var DeleteWorkflowStepResponse = &handles[304]
+
+var GetMigrationWorkflowTemplateRequest = &handles[305]
+var GetMigrationWorkflowTemplateRequest_id = &handles[306]
+
+var GetMigrationWorkflowTemplateResponse = &handles[307]
+var GetMigrationWorkflowTemplateResponse_id = &handles[308]
+var GetMigrationWorkflowTemplateResponse_templateArn = &handles[309]
+var GetMigrationWorkflowTemplateResponse_name = &handles[310]
+var GetMigrationWorkflowTemplateResponse_description = &handles[311]
+var GetMigrationWorkflowTemplateResponse_inputs = &handles[312]
+var GetMigrationWorkflowTemplateResponse_tools = &handles[313]
+var GetMigrationWorkflowTemplateResponse_creationTime = &handles[314]
+var GetMigrationWorkflowTemplateResponse_owner = &handles[315]
+var GetMigrationWorkflowTemplateResponse_status = &handles[316]
+var GetMigrationWorkflowTemplateResponse_statusMessage = &handles[317]
+var GetMigrationWorkflowTemplateResponse_templateClass = &handles[318]
+var GetMigrationWorkflowTemplateResponse_tags = &handles[319]
+
+var GetTemplateStepGroupRequest = &handles[320]
+var GetTemplateStepGroupRequest_templateId = &handles[321]
+var GetTemplateStepGroupRequest_id = &handles[322]
+
+var GetTemplateStepGroupResponse = &handles[323]
+var GetTemplateStepGroupResponse_templateId = &handles[324]
+var GetTemplateStepGroupResponse_id = &handles[325]
+var GetTemplateStepGroupResponse_name = &handles[326]
+var GetTemplateStepGroupResponse_description = &handles[327]
+var GetTemplateStepGroupResponse_status = &handles[328]
+var GetTemplateStepGroupResponse_creationTime = &handles[329]
+var GetTemplateStepGroupResponse_lastModifiedTime = &handles[330]
+var GetTemplateStepGroupResponse_tools = &handles[331]
+var GetTemplateStepGroupResponse_previous = &handles[332]
+var GetTemplateStepGroupResponse_next = &handles[333]
+
+var GetTemplateStepRequest = &handles[334]
+var GetTemplateStepRequest_id = &handles[335]
+var GetTemplateStepRequest_templateId = &handles[336]
+var GetTemplateStepRequest_stepGroupId = &handles[337]
+
+var GetTemplateStepResponse = &handles[338]
+var GetTemplateStepResponse_id = &handles[339]
+var GetTemplateStepResponse_stepGroupId = &handles[340]
+var GetTemplateStepResponse_templateId = &handles[341]
+var GetTemplateStepResponse_name = &handles[342]
+var GetTemplateStepResponse_description = &handles[343]
+var GetTemplateStepResponse_stepActionType = &handles[344]
+var GetTemplateStepResponse_creationTime = &handles[345]
+var GetTemplateStepResponse_previous = &handles[346]
+var GetTemplateStepResponse_next = &handles[347]
+var GetTemplateStepResponse_outputs = &handles[348]
+var GetTemplateStepResponse_stepAutomationConfiguration = &handles[349]
+
+var GetMigrationWorkflowRequest = &handles[350]
+var GetMigrationWorkflowRequest_id = &handles[351]
+
+var GetMigrationWorkflowResponse = &handles[352]
+var GetMigrationWorkflowResponse_id = &handles[353]
+var GetMigrationWorkflowResponse_arn = &handles[354]
+var GetMigrationWorkflowResponse_name = &handles[355]
+var GetMigrationWorkflowResponse_description = &handles[356]
+var GetMigrationWorkflowResponse_templateId = &handles[357]
+var GetMigrationWorkflowResponse_adsApplicationConfigurationId = &handles[358]
+var GetMigrationWorkflowResponse_adsApplicationName = &handles[359]
+var GetMigrationWorkflowResponse_status = &handles[360]
+var GetMigrationWorkflowResponse_statusMessage = &handles[361]
+var GetMigrationWorkflowResponse_creationTime = &handles[362]
+var GetMigrationWorkflowResponse_lastStartTime = &handles[363]
+var GetMigrationWorkflowResponse_lastStopTime = &handles[364]
+var GetMigrationWorkflowResponse_lastModifiedTime = &handles[365]
+var GetMigrationWorkflowResponse_endTime = &handles[366]
+var GetMigrationWorkflowResponse_tools = &handles[367]
+var GetMigrationWorkflowResponse_totalSteps = &handles[368]
+var GetMigrationWorkflowResponse_completedSteps = &handles[369]
+var GetMigrationWorkflowResponse_workflowInputs = &handles[370]
+var GetMigrationWorkflowResponse_tags = &handles[371]
+var GetMigrationWorkflowResponse_workflowBucket = &handles[372]
+
+var GetWorkflowStepGroupRequest = &handles[373]
+var GetWorkflowStepGroupRequest_id = &handles[374]
+var GetWorkflowStepGroupRequest_workflowId = &handles[375]
+
+var GetWorkflowStepGroupResponse = &handles[376]
+var GetWorkflowStepGroupResponse_id = &handles[377]
+var GetWorkflowStepGroupResponse_workflowId = &handles[378]
+var GetWorkflowStepGroupResponse_name = &handles[379]
+var GetWorkflowStepGroupResponse_description = &handles[380]
+var GetWorkflowStepGroupResponse_status = &handles[381]
+var GetWorkflowStepGroupResponse_owner = &handles[382]
+var GetWorkflowStepGroupResponse_creationTime = &handles[383]
+var GetWorkflowStepGroupResponse_lastModifiedTime = &handles[384]
+var GetWorkflowStepGroupResponse_endTime = &handles[385]
+var GetWorkflowStepGroupResponse_tools = &handles[386]
+var GetWorkflowStepGroupResponse_previous = &handles[387]
+var GetWorkflowStepGroupResponse_next = &handles[388]
+
+var GetWorkflowStepRequest = &handles[389]
+var GetWorkflowStepRequest_workflowId = &handles[390]
+var GetWorkflowStepRequest_stepGroupId = &handles[391]
+var GetWorkflowStepRequest_id = &handles[392]
+
+var GetWorkflowStepResponse = &handles[393]
+var GetWorkflowStepResponse_name = &handles[394]
+var GetWorkflowStepResponse_stepGroupId = &handles[395]
+var GetWorkflowStepResponse_workflowId = &handles[396]
+var GetWorkflowStepResponse_stepId = &handles[397]
+var GetWorkflowStepResponse_description = &handles[398]
+var GetWorkflowStepResponse_stepActionType = &handles[399]
+var GetWorkflowStepResponse_owner = &handles[400]
+var GetWorkflowStepResponse_workflowStepAutomationConfiguration = &handles[401]
+var GetWorkflowStepResponse_stepTarget = &handles[402]
+var GetWorkflowStepResponse_outputs = &handles[403]
+var GetWorkflowStepResponse_previous = &handles[404]
+var GetWorkflowStepResponse_next = &handles[405]
+var GetWorkflowStepResponse_status = &handles[406]
+var GetWorkflowStepResponse_statusMessage = &handles[407]
+var GetWorkflowStepResponse_scriptOutputLocation = &handles[408]
+var GetWorkflowStepResponse_creationTime = &handles[409]
+var GetWorkflowStepResponse_lastStartTime = &handles[410]
+var GetWorkflowStepResponse_endTime = &handles[411]
+var GetWorkflowStepResponse_noOfSrvCompleted = &handles[412]
+var GetWorkflowStepResponse_noOfSrvFailed = &handles[413]
+var GetWorkflowStepResponse_totalNoOfSrv = &handles[414]
+
+var ListPluginsRequest = &handles[415]
+var ListPluginsRequest_maxResults = &handles[416]
+var ListPluginsRequest_nextToken = &handles[417]
+
+var ListPluginsResponse = &handles[418]
+var ListPluginsResponse_nextToken = &handles[419]
+var ListPluginsResponse_plugins = &handles[420]
+
+var ListTagsForResourceRequest = &handles[421]
+var ListTagsForResourceRequest_resourceArn = &handles[422]
+
+var ListTagsForResourceResponse = &handles[423]
+var ListTagsForResourceResponse_tags = &handles[424]
+
+var ListMigrationWorkflowTemplatesRequest = &handles[425]
+var ListMigrationWorkflowTemplatesRequest_maxResults = &handles[426]
+var ListMigrationWorkflowTemplatesRequest_nextToken = &handles[427]
+var ListMigrationWorkflowTemplatesRequest_name = &handles[428]
+
+var ListMigrationWorkflowTemplatesResponse = &handles[429]
+var ListMigrationWorkflowTemplatesResponse_nextToken = &handles[430]
+var ListMigrationWorkflowTemplatesResponse_templateSummary = &handles[431]
+
+var ListTemplateStepGroupsRequest = &handles[432]
+var ListTemplateStepGroupsRequest_maxResults = &handles[433]
+var ListTemplateStepGroupsRequest_nextToken = &handles[434]
+var ListTemplateStepGroupsRequest_templateId = &handles[435]
+
+var ListTemplateStepGroupsResponse = &handles[436]
+var ListTemplateStepGroupsResponse_nextToken = &handles[437]
+var ListTemplateStepGroupsResponse_templateStepGroupSummary = &handles[438]
+
+var ListTemplateStepsRequest = &handles[439]
+var ListTemplateStepsRequest_maxResults = &handles[440]
+var ListTemplateStepsRequest_nextToken = &handles[441]
+var ListTemplateStepsRequest_templateId = &handles[442]
+var ListTemplateStepsRequest_stepGroupId = &handles[443]
+
+var ListTemplateStepsResponse = &handles[444]
+var ListTemplateStepsResponse_nextToken = &handles[445]
+var ListTemplateStepsResponse_templateStepSummaryList = &handles[446]
+
+var ListMigrationWorkflowsRequest = &handles[447]
+var ListMigrationWorkflowsRequest_maxResults = &handles[448]
+var ListMigrationWorkflowsRequest_nextToken = &handles[449]
+var ListMigrationWorkflowsRequest_templateId = &handles[450]
+var ListMigrationWorkflowsRequest_adsApplicationConfigurationName = &handles[451]
+var ListMigrationWorkflowsRequest_status = &handles[452]
+var ListMigrationWorkflowsRequest_name = &handles[453]
+
+var ListMigrationWorkflowsResponse = &handles[454]
+var ListMigrationWorkflowsResponse_nextToken = &handles[455]
+var ListMigrationWorkflowsResponse_migrationWorkflowSummary = &handles[456]
+
+var ListWorkflowStepGroupsRequest = &handles[457]
+var ListWorkflowStepGroupsRequest_nextToken = &handles[458]
+var ListWorkflowStepGroupsRequest_maxResults = &handles[459]
+var ListWorkflowStepGroupsRequest_workflowId = &handles[460]
+
+var ListWorkflowStepGroupsResponse = &handles[461]
+var ListWorkflowStepGroupsResponse_nextToken = &handles[462]
+var ListWorkflowStepGroupsResponse_workflowStepGroupsSummary = &handles[463]
+
+var ListWorkflowStepsRequest = &handles[464]
+var ListWorkflowStepsRequest_nextToken = &handles[465]
+var ListWorkflowStepsRequest_maxResults = &handles[466]
+var ListWorkflowStepsRequest_workflowId = &handles[467]
+var ListWorkflowStepsRequest_stepGroupId = &handles[468]
+
+var ListWorkflowStepsResponse = &handles[469]
+var ListWorkflowStepsResponse_nextToken = &handles[470]
+var ListWorkflowStepsResponse_workflowStepsSummary = &handles[471]
+
+var RetryWorkflowStepRequest = &handles[472]
+var RetryWorkflowStepRequest_workflowId = &handles[473]
+var RetryWorkflowStepRequest_stepGroupId = &handles[474]
+var RetryWorkflowStepRequest_id = &handles[475]
+
+var RetryWorkflowStepResponse = &handles[476]
+var RetryWorkflowStepResponse_stepGroupId = &handles[477]
+var RetryWorkflowStepResponse_workflowId = &handles[478]
+var RetryWorkflowStepResponse_id = &handles[479]
+var RetryWorkflowStepResponse_status = &handles[480]
+
+var StartMigrationWorkflowRequest = &handles[481]
+var StartMigrationWorkflowRequest_id = &handles[482]
+
+var StartMigrationWorkflowResponse = &handles[483]
+var StartMigrationWorkflowResponse_id = &handles[484]
+var StartMigrationWorkflowResponse_arn = &handles[485]
+var StartMigrationWorkflowResponse_status = &handles[486]
+var StartMigrationWorkflowResponse_statusMessage = &handles[487]
+var StartMigrationWorkflowResponse_lastStartTime = &handles[488]
+
+var StopMigrationWorkflowRequest = &handles[489]
+var StopMigrationWorkflowRequest_id = &handles[490]
+
+var StopMigrationWorkflowResponse = &handles[491]
+var StopMigrationWorkflowResponse_id = &handles[492]
+var StopMigrationWorkflowResponse_arn = &handles[493]
+var StopMigrationWorkflowResponse_status = &handles[494]
+var StopMigrationWorkflowResponse_statusMessage = &handles[495]
+var StopMigrationWorkflowResponse_lastStopTime = &handles[496]
+
+var TagResourceRequest = &handles[497]
+var TagResourceRequest_resourceArn = &handles[498]
+var TagResourceRequest_tags = &handles[499]
+
+var TagResourceResponse = &handles[500]
+
+var UntagResourceRequest = &handles[501]
+var UntagResourceRequest_resourceArn = &handles[502]
+var UntagResourceRequest_tagKeys = &handles[503]
+
+var UntagResourceResponse = &handles[504]
+
+var UpdateTemplateRequest = &handles[505]
+var UpdateTemplateRequest_id = &handles[506]
+var UpdateTemplateRequest_templateName = &handles[507]
+var UpdateTemplateRequest_templateDescription = &handles[508]
+var UpdateTemplateRequest_clientToken = &handles[509]
+
+var UpdateTemplateResponse = &handles[510]
+var UpdateTemplateResponse_templateId = &handles[511]
+var UpdateTemplateResponse_templateArn = &handles[512]
+var UpdateTemplateResponse_tags = &handles[513]
+
+var UpdateMigrationWorkflowRequest = &handles[514]
+var UpdateMigrationWorkflowRequest_id = &handles[515]
+var UpdateMigrationWorkflowRequest_name = &handles[516]
+var UpdateMigrationWorkflowRequest_description = &handles[517]
+var UpdateMigrationWorkflowRequest_inputParameters = &handles[518]
+var UpdateMigrationWorkflowRequest_stepTargets = &handles[519]
+
+var UpdateMigrationWorkflowResponse = &handles[520]
+var UpdateMigrationWorkflowResponse_id = &handles[521]
+var UpdateMigrationWorkflowResponse_arn = &handles[522]
+var UpdateMigrationWorkflowResponse_name = &handles[523]
+var UpdateMigrationWorkflowResponse_description = &handles[524]
+var UpdateMigrationWorkflowResponse_templateId = &handles[525]
+var UpdateMigrationWorkflowResponse_adsApplicationConfigurationId = &handles[526]
+var UpdateMigrationWorkflowResponse_workflowInputs = &handles[527]
+var UpdateMigrationWorkflowResponse_stepTargets = &handles[528]
+var UpdateMigrationWorkflowResponse_status = &handles[529]
+var UpdateMigrationWorkflowResponse_creationTime = &handles[530]
+var UpdateMigrationWorkflowResponse_lastModifiedTime = &handles[531]
+var UpdateMigrationWorkflowResponse_tags = &handles[532]
+
+var UpdateWorkflowStepGroupRequest = &handles[533]
+var UpdateWorkflowStepGroupRequest_workflowId = &handles[534]
+var UpdateWorkflowStepGroupRequest_id = &handles[535]
+var UpdateWorkflowStepGroupRequest_name = &handles[536]
+var UpdateWorkflowStepGroupRequest_description = &handles[537]
+var UpdateWorkflowStepGroupRequest_next = &handles[538]
+var UpdateWorkflowStepGroupRequest_previous = &handles[539]
+
+var UpdateWorkflowStepGroupResponse = &handles[540]
+var UpdateWorkflowStepGroupResponse_workflowId = &handles[541]
+var UpdateWorkflowStepGroupResponse_name = &handles[542]
+var UpdateWorkflowStepGroupResponse_id = &handles[543]
+var UpdateWorkflowStepGroupResponse_description = &handles[544]
+var UpdateWorkflowStepGroupResponse_tools = &handles[545]
+var UpdateWorkflowStepGroupResponse_next = &handles[546]
+var UpdateWorkflowStepGroupResponse_previous = &handles[547]
+var UpdateWorkflowStepGroupResponse_lastModifiedTime = &handles[548]
+
+var UpdateWorkflowStepRequest = &handles[549]
+var UpdateWorkflowStepRequest_id = &handles[550]
+var UpdateWorkflowStepRequest_stepGroupId = &handles[551]
+var UpdateWorkflowStepRequest_workflowId = &handles[552]
+var UpdateWorkflowStepRequest_name = &handles[553]
+var UpdateWorkflowStepRequest_description = &handles[554]
+var UpdateWorkflowStepRequest_stepActionType = &handles[555]
+var UpdateWorkflowStepRequest_workflowStepAutomationConfiguration = &handles[556]
+var UpdateWorkflowStepRequest_stepTarget = &handles[557]
+var UpdateWorkflowStepRequest_outputs = &handles[558]
+var UpdateWorkflowStepRequest_previous = &handles[559]
+var UpdateWorkflowStepRequest_next = &handles[560]
+var UpdateWorkflowStepRequest_status = &handles[561]
+
+var UpdateWorkflowStepResponse = &handles[562]
+var UpdateWorkflowStepResponse_id = &handles[563]
+var UpdateWorkflowStepResponse_stepGroupId = &handles[564]
+var UpdateWorkflowStepResponse_workflowId = &handles[565]
+var UpdateWorkflowStepResponse_name = &handles[566]
+
+var AWSMigrationHubOrchestrator = &smithy.ServiceSchema{Schema: &handles[31], Version: "2021-08-28"}

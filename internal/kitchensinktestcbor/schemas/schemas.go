@@ -4,215 +4,199 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CborGetItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetItem",
-}, smithy.ShapeTypeOperation, 0)
+const blob = "" +
+	"CborPutCompressedDataOutputCborPutCompressedDataInputRpcV2CborKitchenSinkCborGetListsOutputCborGetIt" +
+	"emOutputCborGetListsInputCborGetMapsOutputCborGetItemInputCborGetMapsInputCborItemNotFoundDenseInteg" +
+	"erListSparseStringListDenseIntegerMapDenseStringListDenseStructListListValueStructSparseStringMapDen" +
+	"seStringMapDenseStructMapMapValueStructsparseStringsintegersstringsstructsmembervaluedatanamekeyid"
 
-var CborGetLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var CborGetMaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetMaps",
-}, smithy.ShapeTypeOperation, 0)
-
-var CborPutCompressedData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborPutCompressedData",
-}, smithy.ShapeTypeOperation, 0)
-
-var _RpcV2CborKitchenSink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "RpcV2CborKitchenSink",
-}, smithy.ShapeTypeService, 0)
-
-var RpcV2CborKitchenSink = smithy.NewServiceSchema(_RpcV2CborKitchenSink, "2025-03-01")
-
-var CborItemNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborItemNotFound",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"})
-
-var _DenseIntegerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "DenseIntegerList",
-}, smithy.ShapeTypeList, 1)
-var _DenseIntegerList_member *smithy.Schema
-
-var _DenseIntegerMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "DenseIntegerMap",
-}, smithy.ShapeTypeMap, 2)
-var _DenseIntegerMap_key *smithy.Schema
-
-var _DenseIntegerMap_value *smithy.Schema
-
-var _DenseStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "DenseStringList",
-}, smithy.ShapeTypeList, 1)
-var _DenseStringList_member *smithy.Schema
-
-var _DenseStringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "DenseStringMap",
-}, smithy.ShapeTypeMap, 2)
-var _DenseStringMap_key *smithy.Schema
-
-var _DenseStringMap_value *smithy.Schema
-
-var _DenseStructList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "DenseStructList",
-}, smithy.ShapeTypeList, 1)
-var _DenseStructList_member *smithy.Schema
-
-var _DenseStructMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "DenseStructMap",
-}, smithy.ShapeTypeMap, 2)
-var _DenseStructMap_key *smithy.Schema
-
-var _DenseStructMap_value *smithy.Schema
-
-var ListValueStruct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "ListValueStruct",
-}, smithy.ShapeTypeStructure, 1)
-var ListValueStruct_name *smithy.Schema
-
-var MapValueStruct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "MapValueStruct",
-}, smithy.ShapeTypeStructure, 1)
-var MapValueStruct_name *smithy.Schema
-
-var _SparseStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "SparseStringList",
-}, smithy.ShapeTypeList, 1)
-var _SparseStringList_member *smithy.Schema
-
-var _SparseStringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "SparseStringMap",
-}, smithy.ShapeTypeMap, 2)
-var _SparseStringMap_key *smithy.Schema
-
-var _SparseStringMap_value *smithy.Schema
-
-var CborGetItemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetItemInput",
-}, smithy.ShapeTypeStructure, 1)
-var CborGetItemInput_id *smithy.Schema
-
-var CborGetItemOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetItemOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CborGetListsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetListsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CborGetListsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetListsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CborGetListsOutput_strings *smithy.Schema
-
-var CborGetListsOutput_integers *smithy.Schema
-
-var CborGetListsOutput_structs *smithy.Schema
-
-var CborGetListsOutput_sparseStrings *smithy.Schema
-
-var CborGetMapsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetMapsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CborGetMapsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborGetMapsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CborGetMapsOutput_strings *smithy.Schema
-
-var CborGetMapsOutput_integers *smithy.Schema
-
-var CborGetMapsOutput_structs *smithy.Schema
-
-var CborGetMapsOutput_sparseStrings *smithy.Schema
-
-var CborPutCompressedDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborPutCompressedDataInput",
-}, smithy.ShapeTypeStructure, 1)
-var CborPutCompressedDataInput_data *smithy.Schema
-
-var CborPutCompressedDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestcbor",
-	Name:      "CborPutCompressedDataOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_DenseIntegerList_member = _DenseIntegerList.AddMember("member", smithyprelude.Integer)
-
-	_DenseIntegerMap_key = _DenseIntegerMap.AddMember("key", smithyprelude.String)
-
-	_DenseIntegerMap_value = _DenseIntegerMap.AddMember("value", smithyprelude.Integer)
-
-	_DenseStringList_member = _DenseStringList.AddMember("member", smithyprelude.String)
-
-	_DenseStringMap_key = _DenseStringMap.AddMember("key", smithyprelude.String)
-
-	_DenseStringMap_value = _DenseStringMap.AddMember("value", smithyprelude.String)
-
-	ListValueStruct_name = ListValueStruct.AddMember("name", smithyprelude.String)
-
-	_DenseStructList_member = _DenseStructList.AddMember("member", ListValueStruct)
-
-	MapValueStruct_name = MapValueStruct.AddMember("name", smithyprelude.String)
-
-	_DenseStructMap_key = _DenseStructMap.AddMember("key", smithyprelude.String)
-
-	_DenseStructMap_value = _DenseStructMap.AddMember("value", MapValueStruct)
-
-	_SparseStringList_member = _SparseStringList.AddMember("member", smithyprelude.String)
-
-	_SparseStringMap_key = _SparseStringMap.AddMember("key", smithyprelude.String)
-
-	_SparseStringMap_value = _SparseStringMap.AddMember("value", smithyprelude.String)
-
-	CborGetItemInput_id = CborGetItemInput.AddMember("id", smithyprelude.String)
-
-	CborGetListsOutput_strings = CborGetListsOutput.AddMember("strings", _DenseStringList)
-
-	CborGetListsOutput_integers = CborGetListsOutput.AddMember("integers", _DenseIntegerList)
-
-	CborGetListsOutput_structs = CborGetListsOutput.AddMember("structs", _DenseStructList)
-
-	CborGetListsOutput_sparseStrings = CborGetListsOutput.AddMember("sparseStrings", _SparseStringList)
-
-	CborGetMapsOutput_strings = CborGetMapsOutput.AddMember("strings", _DenseStringMap)
-
-	CborGetMapsOutput_integers = CborGetMapsOutput.AddMember("integers", _DenseIntegerMap)
-
-	CborGetMapsOutput_structs = CborGetMapsOutput.AddMember("structs", _DenseStructMap)
-
-	CborGetMapsOutput_sparseStrings = CborGetMapsOutput.AddMember("sparseStrings", _SparseStringMap)
-
-	CborPutCompressedDataInput_data = CborPutCompressedDataInput.AddMember("data", smithyprelude.String)
-
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"aws.kitchensinktestcbor", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 91, Target: 0, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 73, Target: 1, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 125, Target: 2, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 3, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 53, Target: 4, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 174, Target: 5, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 190, Target: 6, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 374, Target: 48, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 222, Target: 8, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 393, Target: 49, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 380, Target: 48, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 237, Target: 11, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 374, Target: 49, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 297, Target: 13, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 393, Target: 49, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 380, Target: 49, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 252, Target: 16, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 374, Target: 21, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 311, Target: 18, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 393, Target: 49, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 380, Target: 23, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 267, Target: 21, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 389, Target: 49, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 325, Target: 23, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 389, Target: 49, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 206, Target: 25, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 374, Target: 49, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 282, Target: 27, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 393, Target: 49, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 380, Target: 49, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 142, Target: 30, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 396, Target: 49, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 91, Target: 32, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 108, Target: 33, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 73, Target: 34, Traits: 0, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 360, Target: 11, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 352, Target: 6, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 367, Target: 16, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 339, Target: 25, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 158, Target: 39, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 125, Target: 40, Traits: 0, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 360, Target: 13, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 352, Target: 8, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 367, Target: 18, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 339, Target: 27, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 27, Target: 45, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 385, Target: 49, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 47, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 195, Target: 48, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 212, Target: 49, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+	},
 }
+
+var handles = [50]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+}
+
+var CborGetItem = &handles[0]
+
+var CborGetLists = &handles[1]
+
+var CborGetMaps = &handles[2]
+
+var CborPutCompressedData = &handles[3]
+
+var _RpcV2CborKitchenSink = &handles[4]
+
+var CborItemNotFound = &handles[5]
+
+var _DenseIntegerList = &handles[6]
+var _DenseIntegerList_member = &handles[7]
+
+var _DenseIntegerMap = &handles[8]
+var _DenseIntegerMap_key = &handles[9]
+var _DenseIntegerMap_value = &handles[10]
+
+var _DenseStringList = &handles[11]
+var _DenseStringList_member = &handles[12]
+
+var _DenseStringMap = &handles[13]
+var _DenseStringMap_key = &handles[14]
+var _DenseStringMap_value = &handles[15]
+
+var _DenseStructList = &handles[16]
+var _DenseStructList_member = &handles[17]
+
+var _DenseStructMap = &handles[18]
+var _DenseStructMap_key = &handles[19]
+var _DenseStructMap_value = &handles[20]
+
+var ListValueStruct = &handles[21]
+var ListValueStruct_name = &handles[22]
+
+var MapValueStruct = &handles[23]
+var MapValueStruct_name = &handles[24]
+
+var _SparseStringList = &handles[25]
+var _SparseStringList_member = &handles[26]
+
+var _SparseStringMap = &handles[27]
+var _SparseStringMap_key = &handles[28]
+var _SparseStringMap_value = &handles[29]
+
+var CborGetItemInput = &handles[30]
+var CborGetItemInput_id = &handles[31]
+
+var CborGetItemOutput = &handles[32]
+
+var CborGetListsInput = &handles[33]
+
+var CborGetListsOutput = &handles[34]
+var CborGetListsOutput_strings = &handles[35]
+var CborGetListsOutput_integers = &handles[36]
+var CborGetListsOutput_structs = &handles[37]
+var CborGetListsOutput_sparseStrings = &handles[38]
+
+var CborGetMapsInput = &handles[39]
+
+var CborGetMapsOutput = &handles[40]
+var CborGetMapsOutput_strings = &handles[41]
+var CborGetMapsOutput_integers = &handles[42]
+var CborGetMapsOutput_structs = &handles[43]
+var CborGetMapsOutput_sparseStrings = &handles[44]
+
+var CborPutCompressedDataInput = &handles[45]
+var CborPutCompressedDataInput_data = &handles[46]
+
+var CborPutCompressedDataOutput = &handles[47]
+
+var RpcV2CborKitchenSink = &smithy.ServiceSchema{Schema: &handles[4], Version: "2025-03-01"}

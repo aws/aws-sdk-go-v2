@@ -4,572 +4,510 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetEstimatedCarbonEmissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedCarbonEmissions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/estimated-carbon-emissions",
-	Code: 200})
-
-var GetEstimatedCarbonEmissionsDimensionValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedCarbonEmissionsDimensionValues",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/estimated-carbon-emissions-dimension-values",
-	Code: 200})
-
-var GetEstimatedWaterAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedWaterAllocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/estimated-water-allocation",
-	Code: 200})
-
-var GetEstimatedWaterAllocationDimensionValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedWaterAllocationDimensionValues",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/estimated-water-allocation-dimension-values",
-	Code: 200})
-
-var _AwsSustainabilityApiService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "AwsSustainabilityApiService",
-}, smithy.ShapeTypeService, 0)
-
-var AwsSustainabilityApiService = smithy.NewServiceSchema(_AwsSustainabilityApiService, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "Dimension",
-}, smithy.ShapeTypeEnum, 3)
-var Dimension_USAGE_ACCOUNT_ID *smithy.Schema
-
-var Dimension_REGION *smithy.Schema
-
-var Dimension_SERVICE *smithy.Schema
-
-var DimensionEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "DimensionEntry",
-}, smithy.ShapeTypeStructure, 2)
-var DimensionEntry_Dimension *smithy.Schema
-
-var DimensionEntry_Value *smithy.Schema
-
-var _DimensionEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "DimensionEntryList",
-}, smithy.ShapeTypeList, 1)
-var _DimensionEntryList_member *smithy.Schema
-
-var _DimensionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "DimensionList",
-}, smithy.ShapeTypeList, 1)
-var _DimensionList_member *smithy.Schema
-
-var _DimensionListMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "DimensionListMap",
-}, smithy.ShapeTypeMap, 2)
-var _DimensionListMap_key *smithy.Schema
-
-var _DimensionListMap_value *smithy.Schema
-
-var _DimensionsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "DimensionsMap",
-}, smithy.ShapeTypeMap, 2)
-var _DimensionsMap_key *smithy.Schema
-
-var _DimensionsMap_value *smithy.Schema
-
-var _DimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "DimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DimensionValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "DimensionValueList",
-}, smithy.ShapeTypeList, 1)
-var _DimensionValueList_member *smithy.Schema
-
-var Emissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "Emissions",
-}, smithy.ShapeTypeStructure, 2)
-var Emissions_Value *smithy.Schema
-
-var Emissions_Unit *smithy.Schema
-
-var _EmissionsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "EmissionsMap",
-}, smithy.ShapeTypeMap, 2)
-var _EmissionsMap_key *smithy.Schema
-
-var _EmissionsMap_value *smithy.Schema
-
-var EmissionsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "EmissionsType",
-}, smithy.ShapeTypeEnum, 7)
-var EmissionsType_TOTAL_LBM_CARBON_EMISSIONS *smithy.Schema
-
-var EmissionsType_TOTAL_MBM_CARBON_EMISSIONS *smithy.Schema
-
-var EmissionsType_TOTAL_SCOPE_1_CARBON_EMISSIONS *smithy.Schema
-
-var EmissionsType_TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS *smithy.Schema
-
-var EmissionsType_TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS *smithy.Schema
-
-var EmissionsType_TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS *smithy.Schema
-
-var EmissionsType_TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS *smithy.Schema
-
-var _EmissionsTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "EmissionsTypeList",
-}, smithy.ShapeTypeList, 1)
-var _EmissionsTypeList_member *smithy.Schema
-
-var EmissionsUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "EmissionsUnit",
-}, smithy.ShapeTypeEnum, 1)
-var EmissionsUnit_MT_CO2E *smithy.Schema
-
-var EstimatedCarbonEmissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "EstimatedCarbonEmissions",
-}, smithy.ShapeTypeStructure, 4)
-var EstimatedCarbonEmissions_TimePeriod *smithy.Schema
-
-var EstimatedCarbonEmissions_DimensionsValues *smithy.Schema
-
-var EstimatedCarbonEmissions_ModelVersion *smithy.Schema
-
-var EstimatedCarbonEmissions_EmissionsValues *smithy.Schema
-
-var _EstimatedCarbonEmissionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "EstimatedCarbonEmissionsList",
-}, smithy.ShapeTypeList, 1)
-var _EstimatedCarbonEmissionsList_member *smithy.Schema
-
-var EstimatedWaterAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "EstimatedWaterAllocation",
-}, smithy.ShapeTypeStructure, 4)
-var EstimatedWaterAllocation_TimePeriod *smithy.Schema
-
-var EstimatedWaterAllocation_DimensionsValues *smithy.Schema
-
-var EstimatedWaterAllocation_ModelVersion *smithy.Schema
-
-var EstimatedWaterAllocation_AllocationValues *smithy.Schema
-
-var _EstimatedWaterAllocationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "EstimatedWaterAllocationList",
-}, smithy.ShapeTypeList, 1)
-var _EstimatedWaterAllocationList_member *smithy.Schema
-
-var FilterExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "FilterExpression",
-}, smithy.ShapeTypeStructure, 1)
-var FilterExpression_Dimensions *smithy.Schema
-
-var GranularityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GranularityConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var GranularityConfiguration_FiscalYearStartMonth *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "ModelVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _Month = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "Month",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var TimeGranularity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "TimeGranularity",
-}, smithy.ShapeTypeEnum, 5)
-var TimeGranularity_YEARLY_CALENDAR *smithy.Schema
-
-var TimeGranularity_YEARLY_FISCAL *smithy.Schema
-
-var TimeGranularity_QUARTERLY_CALENDAR *smithy.Schema
-
-var TimeGranularity_QUARTERLY_FISCAL *smithy.Schema
-
-var TimeGranularity_MONTHLY *smithy.Schema
-
-var TimePeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "TimePeriod",
-}, smithy.ShapeTypeStructure, 2)
-var TimePeriod_Start *smithy.Schema
-
-var TimePeriod_End *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var WaterAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "WaterAllocation",
-}, smithy.ShapeTypeStructure, 2)
-var WaterAllocation_Value *smithy.Schema
-
-var WaterAllocation_Unit *smithy.Schema
-
-var _WaterAllocationMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "WaterAllocationMap",
-}, smithy.ShapeTypeMap, 2)
-var _WaterAllocationMap_key *smithy.Schema
-
-var _WaterAllocationMap_value *smithy.Schema
-
-var WaterAllocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "WaterAllocationType",
-}, smithy.ShapeTypeEnum, 1)
-var WaterAllocationType_TOTAL_WATER_WITHDRAWALS *smithy.Schema
-
-var _WaterAllocationTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "WaterAllocationTypeList",
-}, smithy.ShapeTypeList, 1)
-var _WaterAllocationTypeList_member *smithy.Schema
-
-var WaterAllocationUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "WaterAllocationUnit",
-}, smithy.ShapeTypeEnum, 1)
-var WaterAllocationUnit_CUBIC_METERS *smithy.Schema
-
-var GetEstimatedCarbonEmissionsDimensionValuesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedCarbonEmissionsDimensionValuesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetEstimatedCarbonEmissionsDimensionValuesRequest_TimePeriod *smithy.Schema
-
-var GetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions *smithy.Schema
-
-var GetEstimatedCarbonEmissionsDimensionValuesRequest_MaxResults *smithy.Schema
-
-var GetEstimatedCarbonEmissionsDimensionValuesRequest_NextToken *smithy.Schema
-
-var GetEstimatedCarbonEmissionsDimensionValuesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedCarbonEmissionsDimensionValuesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetEstimatedCarbonEmissionsDimensionValuesResponse_Results *smithy.Schema
-
-var GetEstimatedCarbonEmissionsDimensionValuesResponse_NextToken *smithy.Schema
-
-var GetEstimatedCarbonEmissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedCarbonEmissionsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var GetEstimatedCarbonEmissionsRequest_TimePeriod *smithy.Schema
-
-var GetEstimatedCarbonEmissionsRequest_GroupBy *smithy.Schema
-
-var GetEstimatedCarbonEmissionsRequest_FilterBy *smithy.Schema
-
-var GetEstimatedCarbonEmissionsRequest_EmissionsTypes *smithy.Schema
-
-var GetEstimatedCarbonEmissionsRequest_Granularity *smithy.Schema
-
-var GetEstimatedCarbonEmissionsRequest_GranularityConfiguration *smithy.Schema
-
-var GetEstimatedCarbonEmissionsRequest_MaxResults *smithy.Schema
-
-var GetEstimatedCarbonEmissionsRequest_NextToken *smithy.Schema
-
-var GetEstimatedCarbonEmissionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedCarbonEmissionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetEstimatedCarbonEmissionsResponse_Results *smithy.Schema
-
-var GetEstimatedCarbonEmissionsResponse_NextToken *smithy.Schema
-
-var GetEstimatedWaterAllocationDimensionValuesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedWaterAllocationDimensionValuesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetEstimatedWaterAllocationDimensionValuesRequest_TimePeriod *smithy.Schema
-
-var GetEstimatedWaterAllocationDimensionValuesRequest_Dimensions *smithy.Schema
-
-var GetEstimatedWaterAllocationDimensionValuesRequest_MaxResults *smithy.Schema
-
-var GetEstimatedWaterAllocationDimensionValuesRequest_NextToken *smithy.Schema
-
-var GetEstimatedWaterAllocationDimensionValuesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedWaterAllocationDimensionValuesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetEstimatedWaterAllocationDimensionValuesResponse_Results *smithy.Schema
-
-var GetEstimatedWaterAllocationDimensionValuesResponse_NextToken *smithy.Schema
-
-var GetEstimatedWaterAllocationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedWaterAllocationRequest",
-}, smithy.ShapeTypeStructure, 7)
-var GetEstimatedWaterAllocationRequest_TimePeriod *smithy.Schema
-
-var GetEstimatedWaterAllocationRequest_GroupBy *smithy.Schema
-
-var GetEstimatedWaterAllocationRequest_FilterBy *smithy.Schema
-
-var GetEstimatedWaterAllocationRequest_AllocationTypes *smithy.Schema
-
-var GetEstimatedWaterAllocationRequest_Granularity *smithy.Schema
-
-var GetEstimatedWaterAllocationRequest_MaxResults *smithy.Schema
-
-var GetEstimatedWaterAllocationRequest_NextToken *smithy.Schema
-
-var GetEstimatedWaterAllocationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sustainability",
-	Name:      "GetEstimatedWaterAllocationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetEstimatedWaterAllocationResponse_Results *smithy.Schema
-
-var GetEstimatedWaterAllocationResponse_NextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	Dimension_USAGE_ACCOUNT_ID = Dimension.AddMember("USAGE_ACCOUNT_ID", smithyprelude.Unit)
-
-	Dimension_REGION = Dimension.AddMember("REGION", smithyprelude.Unit)
-
-	Dimension_SERVICE = Dimension.AddMember("SERVICE", smithyprelude.Unit)
-
-	DimensionEntry_Dimension = DimensionEntry.AddMember("Dimension", Dimension)
-
-	DimensionEntry_Value = DimensionEntry.AddMember("Value", _DimensionValue)
-
-	_DimensionEntryList_member = _DimensionEntryList.AddMember("member", DimensionEntry)
-
-	_DimensionList_member = _DimensionList.AddMember("member", Dimension)
-
-	_DimensionValueList_member = _DimensionValueList.AddMember("member", _DimensionValue)
-
-	_DimensionListMap_key = _DimensionListMap.AddMember("key", Dimension)
-
-	_DimensionListMap_value = _DimensionListMap.AddMember("value", _DimensionValueList)
-
-	_DimensionsMap_key = _DimensionsMap.AddMember("key", Dimension)
-
-	_DimensionsMap_value = _DimensionsMap.AddMember("value", _DimensionValue)
-
-	EmissionsUnit_MT_CO2E = EmissionsUnit.AddMember("MT_CO2E", smithyprelude.Unit)
-
-	Emissions_Value = Emissions.AddMember("Value", smithyprelude.Double)
-
-	Emissions_Unit = Emissions.AddMember("Unit", EmissionsUnit)
-
-	EmissionsType_TOTAL_LBM_CARBON_EMISSIONS = EmissionsType.AddMember("TOTAL_LBM_CARBON_EMISSIONS", smithyprelude.Unit)
-
-	EmissionsType_TOTAL_MBM_CARBON_EMISSIONS = EmissionsType.AddMember("TOTAL_MBM_CARBON_EMISSIONS", smithyprelude.Unit)
-
-	EmissionsType_TOTAL_SCOPE_1_CARBON_EMISSIONS = EmissionsType.AddMember("TOTAL_SCOPE_1_CARBON_EMISSIONS", smithyprelude.Unit)
-
-	EmissionsType_TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS = EmissionsType.AddMember("TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS", smithyprelude.Unit)
-
-	EmissionsType_TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS = EmissionsType.AddMember("TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS", smithyprelude.Unit)
-
-	EmissionsType_TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS = EmissionsType.AddMember("TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS", smithyprelude.Unit)
-
-	EmissionsType_TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS = EmissionsType.AddMember("TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS", smithyprelude.Unit)
-
-	_EmissionsMap_key = _EmissionsMap.AddMember("key", EmissionsType)
-
-	_EmissionsMap_value = _EmissionsMap.AddMember("value", Emissions)
-
-	_EmissionsTypeList_member = _EmissionsTypeList.AddMember("member", EmissionsType)
-
-	TimePeriod_Start = TimePeriod.AddMember("Start", _Timestamp)
-
-	TimePeriod_End = TimePeriod.AddMember("End", _Timestamp)
-
-	EstimatedCarbonEmissions_TimePeriod = EstimatedCarbonEmissions.AddMember("TimePeriod", TimePeriod)
-
-	EstimatedCarbonEmissions_DimensionsValues = EstimatedCarbonEmissions.AddMember("DimensionsValues", _DimensionsMap)
-
-	EstimatedCarbonEmissions_ModelVersion = EstimatedCarbonEmissions.AddMember("ModelVersion", _ModelVersion)
-
-	EstimatedCarbonEmissions_EmissionsValues = EstimatedCarbonEmissions.AddMember("EmissionsValues", _EmissionsMap)
-
-	_EstimatedCarbonEmissionsList_member = _EstimatedCarbonEmissionsList.AddMember("member", EstimatedCarbonEmissions)
-
-	WaterAllocationType_TOTAL_WATER_WITHDRAWALS = WaterAllocationType.AddMember("TOTAL_WATER_WITHDRAWALS", smithyprelude.Unit)
-
-	WaterAllocationUnit_CUBIC_METERS = WaterAllocationUnit.AddMember("CUBIC_METERS", smithyprelude.Unit)
-
-	WaterAllocation_Value = WaterAllocation.AddMember("Value", smithyprelude.Double)
-
-	WaterAllocation_Unit = WaterAllocation.AddMember("Unit", WaterAllocationUnit)
-
-	_WaterAllocationMap_key = _WaterAllocationMap.AddMember("key", WaterAllocationType)
-
-	_WaterAllocationMap_value = _WaterAllocationMap.AddMember("value", WaterAllocation)
-
-	EstimatedWaterAllocation_TimePeriod = EstimatedWaterAllocation.AddMember("TimePeriod", TimePeriod)
-
-	EstimatedWaterAllocation_DimensionsValues = EstimatedWaterAllocation.AddMember("DimensionsValues", _DimensionsMap)
-
-	EstimatedWaterAllocation_ModelVersion = EstimatedWaterAllocation.AddMember("ModelVersion", _ModelVersion)
-
-	EstimatedWaterAllocation_AllocationValues = EstimatedWaterAllocation.AddMember("AllocationValues", _WaterAllocationMap)
-
-	_EstimatedWaterAllocationList_member = _EstimatedWaterAllocationList.AddMember("member", EstimatedWaterAllocation)
-
-	FilterExpression_Dimensions = FilterExpression.AddMember("Dimensions", _DimensionListMap)
-
-	GranularityConfiguration_FiscalYearStartMonth = GranularityConfiguration.AddMember("FiscalYearStartMonth", _Month)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	TimeGranularity_YEARLY_CALENDAR = TimeGranularity.AddMember("YEARLY_CALENDAR", smithyprelude.Unit)
-
-	TimeGranularity_YEARLY_FISCAL = TimeGranularity.AddMember("YEARLY_FISCAL", smithyprelude.Unit)
-
-	TimeGranularity_QUARTERLY_CALENDAR = TimeGranularity.AddMember("QUARTERLY_CALENDAR", smithyprelude.Unit)
-
-	TimeGranularity_QUARTERLY_FISCAL = TimeGranularity.AddMember("QUARTERLY_FISCAL", smithyprelude.Unit)
-
-	TimeGranularity_MONTHLY = TimeGranularity.AddMember("MONTHLY", smithyprelude.Unit)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	_WaterAllocationTypeList_member = _WaterAllocationTypeList.AddMember("member", WaterAllocationType)
-
-	GetEstimatedCarbonEmissionsDimensionValuesRequest_TimePeriod = GetEstimatedCarbonEmissionsDimensionValuesRequest.AddMember("TimePeriod", TimePeriod)
-
-	GetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions = GetEstimatedCarbonEmissionsDimensionValuesRequest.AddMember("Dimensions", _DimensionList)
-
-	GetEstimatedCarbonEmissionsDimensionValuesRequest_MaxResults = GetEstimatedCarbonEmissionsDimensionValuesRequest.AddMember("MaxResults", _MaxResults)
-
-	GetEstimatedCarbonEmissionsDimensionValuesRequest_NextToken = GetEstimatedCarbonEmissionsDimensionValuesRequest.AddMember("NextToken", _NextToken)
-
-	GetEstimatedCarbonEmissionsDimensionValuesResponse_Results = GetEstimatedCarbonEmissionsDimensionValuesResponse.AddMember("Results", _DimensionEntryList)
-
-	GetEstimatedCarbonEmissionsDimensionValuesResponse_NextToken = GetEstimatedCarbonEmissionsDimensionValuesResponse.AddMember("NextToken", _NextToken)
-
-	GetEstimatedCarbonEmissionsRequest_TimePeriod = GetEstimatedCarbonEmissionsRequest.AddMember("TimePeriod", TimePeriod)
-
-	GetEstimatedCarbonEmissionsRequest_GroupBy = GetEstimatedCarbonEmissionsRequest.AddMember("GroupBy", _DimensionList)
-
-	GetEstimatedCarbonEmissionsRequest_FilterBy = GetEstimatedCarbonEmissionsRequest.AddMember("FilterBy", FilterExpression)
-
-	GetEstimatedCarbonEmissionsRequest_EmissionsTypes = GetEstimatedCarbonEmissionsRequest.AddMember("EmissionsTypes", _EmissionsTypeList)
-
-	GetEstimatedCarbonEmissionsRequest_Granularity = GetEstimatedCarbonEmissionsRequest.AddMember("Granularity", TimeGranularity)
-
-	GetEstimatedCarbonEmissionsRequest_GranularityConfiguration = GetEstimatedCarbonEmissionsRequest.AddMember("GranularityConfiguration", GranularityConfiguration)
-
-	GetEstimatedCarbonEmissionsRequest_MaxResults = GetEstimatedCarbonEmissionsRequest.AddMember("MaxResults", _MaxResults)
-
-	GetEstimatedCarbonEmissionsRequest_NextToken = GetEstimatedCarbonEmissionsRequest.AddMember("NextToken", _NextToken)
-
-	GetEstimatedCarbonEmissionsResponse_Results = GetEstimatedCarbonEmissionsResponse.AddMember("Results", _EstimatedCarbonEmissionsList)
-
-	GetEstimatedCarbonEmissionsResponse_NextToken = GetEstimatedCarbonEmissionsResponse.AddMember("NextToken", _NextToken)
-
-	GetEstimatedWaterAllocationDimensionValuesRequest_TimePeriod = GetEstimatedWaterAllocationDimensionValuesRequest.AddMember("TimePeriod", TimePeriod)
-
-	GetEstimatedWaterAllocationDimensionValuesRequest_Dimensions = GetEstimatedWaterAllocationDimensionValuesRequest.AddMember("Dimensions", _DimensionList)
-
-	GetEstimatedWaterAllocationDimensionValuesRequest_MaxResults = GetEstimatedWaterAllocationDimensionValuesRequest.AddMember("MaxResults", _MaxResults)
-
-	GetEstimatedWaterAllocationDimensionValuesRequest_NextToken = GetEstimatedWaterAllocationDimensionValuesRequest.AddMember("NextToken", _NextToken)
-
-	GetEstimatedWaterAllocationDimensionValuesResponse_Results = GetEstimatedWaterAllocationDimensionValuesResponse.AddMember("Results", _DimensionEntryList)
-
-	GetEstimatedWaterAllocationDimensionValuesResponse_NextToken = GetEstimatedWaterAllocationDimensionValuesResponse.AddMember("NextToken", _NextToken)
-
-	GetEstimatedWaterAllocationRequest_TimePeriod = GetEstimatedWaterAllocationRequest.AddMember("TimePeriod", TimePeriod)
-
-	GetEstimatedWaterAllocationRequest_GroupBy = GetEstimatedWaterAllocationRequest.AddMember("GroupBy", _DimensionList)
-
-	GetEstimatedWaterAllocationRequest_FilterBy = GetEstimatedWaterAllocationRequest.AddMember("FilterBy", FilterExpression)
-
-	GetEstimatedWaterAllocationRequest_AllocationTypes = GetEstimatedWaterAllocationRequest.AddMember("AllocationTypes", _WaterAllocationTypeList)
-
-	GetEstimatedWaterAllocationRequest_Granularity = GetEstimatedWaterAllocationRequest.AddMember("Granularity", TimeGranularity)
-
-	GetEstimatedWaterAllocationRequest_MaxResults = GetEstimatedWaterAllocationRequest.AddMember("MaxResults", _MaxResults)
-
-	GetEstimatedWaterAllocationRequest_NextToken = GetEstimatedWaterAllocationRequest.AddMember("NextToken", _NextToken)
-
-	GetEstimatedWaterAllocationResponse_Results = GetEstimatedWaterAllocationResponse.AddMember("Results", _EstimatedWaterAllocationList)
-
-	GetEstimatedWaterAllocationResponse_NextToken = GetEstimatedWaterAllocationResponse.AddMember("NextToken", _NextToken)
-
+const blob = "" +
+	"GetEstimatedCarbonEmissionsDimensionValuesResponseGetEstimatedWaterAllocationDimensionValuesResponse" +
+	"GetEstimatedCarbonEmissionsDimensionValuesRequestGetEstimatedWaterAllocationDimensionValuesRequestGe" +
+	"tEstimatedCarbonEmissionsResponseGetEstimatedWaterAllocationResponseGetEstimatedCarbonEmissionsReque" +
+	"stGetEstimatedWaterAllocationRequestTOTAL_SCOPE_2_LBM_CARBON_EMISSIONSTOTAL_SCOPE_2_MBM_CARBON_EMISS" +
+	"IONSTOTAL_SCOPE_3_LBM_CARBON_EMISSIONSTOTAL_SCOPE_3_MBM_CARBON_EMISSIONSTOTAL_SCOPE_1_CARBON_EMISSIO" +
+	"NSEstimatedCarbonEmissionsListEstimatedWaterAllocationListAwsSustainabilityApiServiceTOTAL_LBM_CARBO" +
+	"N_EMISSIONSTOTAL_MBM_CARBON_EMISSIONSGranularityConfigurationInternalServerExceptionTOTAL_WATER_WITH" +
+	"DRAWALSWaterAllocationTypeListAccessDeniedExceptionFiscalYearStartMonthThrottlingExceptionValidation" +
+	"ExceptionWaterAllocationUnitDimensionEntryListDimensionValueListQUARTERLY_CALENDARWaterAllocationMap" +
+	"EmissionsTypeListAllocationValuesDimensionListMapDimensionsValuesFilterExpressionQUARTERLY_FISCALUSA" +
+	"GE_ACCOUNT_IDAllocationTypesEmissionsValuesTimeGranularityYEARLY_CALENDAREmissionsTypesDimensionsMap" +
+	"EmissionsUnitYEARLY_FISCALCUBIC_METERSEmissionsMapModelVersionMaxResultsTimePeriodNextTokenTimestamp" +
+	"FilterByGroupByMONTHLYMT_CO2EMessageSERVICEDoubleREGIONStringmembervalueEndkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.sustainability", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 1, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 50, Target: 2, Traits: 2, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 50, Target: 3, Traits: 3, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 558, Target: 4, Traits: 4, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 730, Target: 5, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1229, Target: 134, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 27, Target: 7, Traits: 4, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 997, Target: 135, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1249, Target: 135, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1236, Target: 135, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 828, Target: 11, Traits: 4, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 27, Target: 7, Traits: 4, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 36, Target: 24, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 828, Target: 14, Traits: 4, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1261, Target: 11, Traits: 4, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 933, Target: 16, Traits: 4, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1261, Target: 7, Traits: 4, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 933, Target: 18, Traits: 4, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1275, Target: 7, Traits: 4, StrLen: 3, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1267, Target: 25, Traits: 4, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1087, Target: 21, Traits: 4, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1275, Target: 7, Traits: 4, StrLen: 3, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1267, Target: 24, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 27, Target: 24, Traits: 4, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 846, Target: 25, Traits: 4, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1261, Target: 24, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18, Target: 27, Traits: 4, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 36, Target: 136, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 824, Target: 43, Traits: 4, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1138, Target: 30, Traits: 4, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1275, Target: 33, Traits: 4, StrLen: 3, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1267, Target: 27, Traits: 4, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 900, Target: 33, Traits: 4, StrLen: 13, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 585, Target: 135, Traits: 4, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 611, Target: 135, Traits: 4, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 472, Target: 135, Traits: 4, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 336, Target: 135, Traits: 4, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 370, Target: 135, Traits: 4, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 404, Target: 135, Traits: 4, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 438, Target: 135, Traits: 4, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 900, Target: 41, Traits: 4, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1261, Target: 33, Traits: 4, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1100, Target: 43, Traits: 4, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1222, Target: 135, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3, Target: 45, Traits: 4, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1172, Target: 77, Traits: 4, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 949, Target: 21, Traits: 4, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1150, Target: 66, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1028, Target: 30, Traits: 4, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 502, Target: 50, Traits: 4, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1261, Target: 45, Traits: 4, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 53, Target: 52, Traits: 4, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1172, Target: 77, Traits: 4, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 949, Target: 21, Traits: 4, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1150, Target: 66, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 917, Target: 86, Traits: 4, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 530, Target: 57, Traits: 4, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1261, Target: 52, Traits: 4, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 965, Target: 59, Traits: 4, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 949, Target: 18, Traits: 4, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 637, Target: 61, Traits: 4, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 751, Target: 67, Traits: 4, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 661, Target: 63, Traits: 7, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1229, Target: 134, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1162, Target: 65, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1150, Target: 66, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 766, Target: 67, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 771, Target: 69, Traits: 8, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1229, Target: 134, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1043, Target: 71, Traits: 4, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1058, Target: 135, Traits: 4, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1113, Target: 135, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 864, Target: 135, Traits: 4, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 981, Target: 135, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1215, Target: 135, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1172, Target: 77, Traits: 4, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 761, Target: 80, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1272, Target: 80, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1191, Target: 80, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 790, Target: 81, Traits: 11, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1229, Target: 134, Traits: 6, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 62, Target: 83, Traits: 4, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 36, Target: 136, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 824, Target: 93, Traits: 4, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 882, Target: 86, Traits: 4, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1275, Target: 89, Traits: 4, StrLen: 3, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1267, Target: 83, Traits: 4, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 707, Target: 89, Traits: 4, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 684, Target: 135, Traits: 4, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 707, Target: 91, Traits: 4, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1261, Target: 89, Traits: 4, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 809, Target: 93, Traits: 4, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1126, Target: 135, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 100, Target: 95, Traits: 4, StrLen: 49, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1172, Target: 77, Traits: 4, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 949, Target: 16, Traits: 4, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1162, Target: 65, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 100, Traits: 4, StrLen: 50, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1165, Target: 14, Traits: 4, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 268, Target: 103, Traits: 4, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1172, Target: 77, Traits: 4, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1208, Target: 16, Traits: 4, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1200, Target: 59, Traits: 4, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1073, Target: 41, Traits: 4, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 637, Target: 71, Traits: 4, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 637, Target: 61, Traits: 4, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1162, Target: 65, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 198, Target: 112, Traits: 4, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1165, Target: 50, Traits: 4, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 149, Target: 115, Traits: 4, StrLen: 49, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1172, Target: 77, Traits: 4, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 949, Target: 16, Traits: 4, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1162, Target: 65, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 50, Target: 120, Traits: 4, StrLen: 50, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1165, Target: 14, Traits: 4, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 302, Target: 123, Traits: 4, StrLen: 34, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1172, Target: 77, Traits: 4, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1208, Target: 16, Traits: 4, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1200, Target: 59, Traits: 4, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1013, Target: 91, Traits: 4, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 637, Target: 71, Traits: 4, StrLen: 11, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1162, Target: 65, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 233, Target: 131, Traits: 4, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1165, Target: 57, Traits: 4, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1182, Target: 68, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1255, Target: 134, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 824, Target: 135, Traits: 4, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 1243, Target: 136, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/estimated-carbon-emissions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/estimated-carbon-emissions-dimension-values",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/estimated-water-allocation",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/estimated-water-allocation-dimension-values",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [137]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+}
+
+var GetEstimatedCarbonEmissions = &handles[0]
+
+var GetEstimatedCarbonEmissionsDimensionValues = &handles[1]
+
+var GetEstimatedWaterAllocation = &handles[2]
+
+var GetEstimatedWaterAllocationDimensionValues = &handles[3]
+
+var _AwsSustainabilityApiService = &handles[4]
+
+var AccessDeniedException = &handles[5]
+var AccessDeniedException_Message = &handles[6]
+
+var Dimension = &handles[7]
+var Dimension_USAGE_ACCOUNT_ID = &handles[8]
+var Dimension_REGION = &handles[9]
+var Dimension_SERVICE = &handles[10]
+
+var DimensionEntry = &handles[11]
+var DimensionEntry_Dimension = &handles[12]
+var DimensionEntry_Value = &handles[13]
+
+var _DimensionEntryList = &handles[14]
+var _DimensionEntryList_member = &handles[15]
+
+var _DimensionList = &handles[16]
+var _DimensionList_member = &handles[17]
+
+var _DimensionListMap = &handles[18]
+var _DimensionListMap_key = &handles[19]
+var _DimensionListMap_value = &handles[20]
+
+var _DimensionsMap = &handles[21]
+var _DimensionsMap_key = &handles[22]
+var _DimensionsMap_value = &handles[23]
+
+var _DimensionValue = &handles[24]
+
+var _DimensionValueList = &handles[25]
+var _DimensionValueList_member = &handles[26]
+
+var Emissions = &handles[27]
+var Emissions_Value = &handles[28]
+var Emissions_Unit = &handles[29]
+
+var _EmissionsMap = &handles[30]
+var _EmissionsMap_key = &handles[31]
+var _EmissionsMap_value = &handles[32]
+
+var EmissionsType = &handles[33]
+var EmissionsType_TOTAL_LBM_CARBON_EMISSIONS = &handles[34]
+var EmissionsType_TOTAL_MBM_CARBON_EMISSIONS = &handles[35]
+var EmissionsType_TOTAL_SCOPE_1_CARBON_EMISSIONS = &handles[36]
+var EmissionsType_TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS = &handles[37]
+var EmissionsType_TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS = &handles[38]
+var EmissionsType_TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS = &handles[39]
+var EmissionsType_TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS = &handles[40]
+
+var _EmissionsTypeList = &handles[41]
+var _EmissionsTypeList_member = &handles[42]
+
+var EmissionsUnit = &handles[43]
+var EmissionsUnit_MT_CO2E = &handles[44]
+
+var EstimatedCarbonEmissions = &handles[45]
+var EstimatedCarbonEmissions_TimePeriod = &handles[46]
+var EstimatedCarbonEmissions_DimensionsValues = &handles[47]
+var EstimatedCarbonEmissions_ModelVersion = &handles[48]
+var EstimatedCarbonEmissions_EmissionsValues = &handles[49]
+
+var _EstimatedCarbonEmissionsList = &handles[50]
+var _EstimatedCarbonEmissionsList_member = &handles[51]
+
+var EstimatedWaterAllocation = &handles[52]
+var EstimatedWaterAllocation_TimePeriod = &handles[53]
+var EstimatedWaterAllocation_DimensionsValues = &handles[54]
+var EstimatedWaterAllocation_ModelVersion = &handles[55]
+var EstimatedWaterAllocation_AllocationValues = &handles[56]
+
+var _EstimatedWaterAllocationList = &handles[57]
+var _EstimatedWaterAllocationList_member = &handles[58]
+
+var FilterExpression = &handles[59]
+var FilterExpression_Dimensions = &handles[60]
+
+var GranularityConfiguration = &handles[61]
+var GranularityConfiguration_FiscalYearStartMonth = &handles[62]
+
+var InternalServerException = &handles[63]
+var InternalServerException_Message = &handles[64]
+
+var _MaxResults = &handles[65]
+
+var _ModelVersion = &handles[66]
+
+var _Month = &handles[67]
+
+var _NextToken = &handles[68]
+
+var ThrottlingException = &handles[69]
+var ThrottlingException_Message = &handles[70]
+
+var TimeGranularity = &handles[71]
+var TimeGranularity_YEARLY_CALENDAR = &handles[72]
+var TimeGranularity_YEARLY_FISCAL = &handles[73]
+var TimeGranularity_QUARTERLY_CALENDAR = &handles[74]
+var TimeGranularity_QUARTERLY_FISCAL = &handles[75]
+var TimeGranularity_MONTHLY = &handles[76]
+
+var TimePeriod = &handles[77]
+var TimePeriod_Start = &handles[78]
+var TimePeriod_End = &handles[79]
+
+var _Timestamp = &handles[80]
+
+var ValidationException = &handles[81]
+var ValidationException_Message = &handles[82]
+
+var WaterAllocation = &handles[83]
+var WaterAllocation_Value = &handles[84]
+var WaterAllocation_Unit = &handles[85]
+
+var _WaterAllocationMap = &handles[86]
+var _WaterAllocationMap_key = &handles[87]
+var _WaterAllocationMap_value = &handles[88]
+
+var WaterAllocationType = &handles[89]
+var WaterAllocationType_TOTAL_WATER_WITHDRAWALS = &handles[90]
+
+var _WaterAllocationTypeList = &handles[91]
+var _WaterAllocationTypeList_member = &handles[92]
+
+var WaterAllocationUnit = &handles[93]
+var WaterAllocationUnit_CUBIC_METERS = &handles[94]
+
+var GetEstimatedCarbonEmissionsDimensionValuesRequest = &handles[95]
+var GetEstimatedCarbonEmissionsDimensionValuesRequest_TimePeriod = &handles[96]
+var GetEstimatedCarbonEmissionsDimensionValuesRequest_Dimensions = &handles[97]
+var GetEstimatedCarbonEmissionsDimensionValuesRequest_MaxResults = &handles[98]
+var GetEstimatedCarbonEmissionsDimensionValuesRequest_NextToken = &handles[99]
+
+var GetEstimatedCarbonEmissionsDimensionValuesResponse = &handles[100]
+var GetEstimatedCarbonEmissionsDimensionValuesResponse_Results = &handles[101]
+var GetEstimatedCarbonEmissionsDimensionValuesResponse_NextToken = &handles[102]
+
+var GetEstimatedCarbonEmissionsRequest = &handles[103]
+var GetEstimatedCarbonEmissionsRequest_TimePeriod = &handles[104]
+var GetEstimatedCarbonEmissionsRequest_GroupBy = &handles[105]
+var GetEstimatedCarbonEmissionsRequest_FilterBy = &handles[106]
+var GetEstimatedCarbonEmissionsRequest_EmissionsTypes = &handles[107]
+var GetEstimatedCarbonEmissionsRequest_Granularity = &handles[108]
+var GetEstimatedCarbonEmissionsRequest_GranularityConfiguration = &handles[109]
+var GetEstimatedCarbonEmissionsRequest_MaxResults = &handles[110]
+var GetEstimatedCarbonEmissionsRequest_NextToken = &handles[111]
+
+var GetEstimatedCarbonEmissionsResponse = &handles[112]
+var GetEstimatedCarbonEmissionsResponse_Results = &handles[113]
+var GetEstimatedCarbonEmissionsResponse_NextToken = &handles[114]
+
+var GetEstimatedWaterAllocationDimensionValuesRequest = &handles[115]
+var GetEstimatedWaterAllocationDimensionValuesRequest_TimePeriod = &handles[116]
+var GetEstimatedWaterAllocationDimensionValuesRequest_Dimensions = &handles[117]
+var GetEstimatedWaterAllocationDimensionValuesRequest_MaxResults = &handles[118]
+var GetEstimatedWaterAllocationDimensionValuesRequest_NextToken = &handles[119]
+
+var GetEstimatedWaterAllocationDimensionValuesResponse = &handles[120]
+var GetEstimatedWaterAllocationDimensionValuesResponse_Results = &handles[121]
+var GetEstimatedWaterAllocationDimensionValuesResponse_NextToken = &handles[122]
+
+var GetEstimatedWaterAllocationRequest = &handles[123]
+var GetEstimatedWaterAllocationRequest_TimePeriod = &handles[124]
+var GetEstimatedWaterAllocationRequest_GroupBy = &handles[125]
+var GetEstimatedWaterAllocationRequest_FilterBy = &handles[126]
+var GetEstimatedWaterAllocationRequest_AllocationTypes = &handles[127]
+var GetEstimatedWaterAllocationRequest_Granularity = &handles[128]
+var GetEstimatedWaterAllocationRequest_MaxResults = &handles[129]
+var GetEstimatedWaterAllocationRequest_NextToken = &handles[130]
+
+var GetEstimatedWaterAllocationResponse = &handles[131]
+var GetEstimatedWaterAllocationResponse_Results = &handles[132]
+var GetEstimatedWaterAllocationResponse_NextToken = &handles[133]
+
+var AwsSustainabilityApiService = &smithy.ServiceSchema{Schema: &handles[4], Version: "2018-05-10"}

@@ -4,7900 +4,6544 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DeleteRecommendationPreferences",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeRecommendationExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DescribeRecommendationExportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportAutoScalingGroupRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportAutoScalingGroupRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportEBSVolumeRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportEBSVolumeRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportEC2InstanceRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportEC2InstanceRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportECSServiceRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportECSServiceRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportIdleRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportIdleRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportLambdaFunctionRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportLambdaFunctionRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportLicenseRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportLicenseRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportRDSDatabaseRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportRDSDatabaseRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAutoScalingGroupRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetAutoScalingGroupRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEBSVolumeRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEBSVolumeRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEC2InstanceRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEC2InstanceRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEC2RecommendationProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEC2RecommendationProjectedMetrics",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetECSServiceRecommendationProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetECSServiceRecommendationProjectedMetrics",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetECSServiceRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetECSServiceRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEffectiveRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEffectiveRecommendationPreferences",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEnrollmentStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEnrollmentStatusesForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEnrollmentStatusesForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetIdleRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetIdleRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetLambdaFunctionRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetLambdaFunctionRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetLicenseRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetLicenseRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRDSDatabaseRecommendationProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRDSDatabaseRecommendationProjectedMetrics",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRDSDatabaseRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRDSDatabaseRecommendations",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRecommendationPreferences",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRecommendationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRecommendationSummaries",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PutRecommendationPreferences",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "UpdateEnrollmentStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var _ComputeOptimizerService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ComputeOptimizerService",
-}, smithy.ShapeTypeService, 0)
-
-var ComputeOptimizerService = smithy.NewServiceSchema(_ComputeOptimizerService, "2019-11-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccountEnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AccountEnrollmentStatus",
-}, smithy.ShapeTypeStructure, 4)
-var AccountEnrollmentStatus_accountId *smithy.Schema
-
-var AccountEnrollmentStatus_status *smithy.Schema
-
-var AccountEnrollmentStatus_statusReason *smithy.Schema
-
-var AccountEnrollmentStatus_lastUpdatedTimestamp *smithy.Schema
-
-var _AccountEnrollmentStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AccountEnrollmentStatuses",
-}, smithy.ShapeTypeList, 1)
-var _AccountEnrollmentStatuses_member *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AccountIds",
-}, smithy.ShapeTypeList, 1)
-var _AccountIds_member *smithy.Schema
-
-var _AllocatedStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AllocatedStorage",
-}, smithy.ShapeTypeInteger, 0)
-
-var AllocationStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AllocationStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var AllocationStrategy_PRIORITIZED *smithy.Schema
-
-var AllocationStrategy_LOWEST_PRICE *smithy.Schema
-
-var AsgType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AsgType",
-}, smithy.ShapeTypeEnum, 2)
-var AsgType_SINGLE_INSTANCE_TYPE *smithy.Schema
-
-var AsgType_MIXED_INSTANCE_TYPE *smithy.Schema
-
-var AutoScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingConfiguration",
-}, smithy.ShapeTypeEnum, 2)
-var AutoScalingConfiguration_TARGET_TRACKING_SCALING_CPU *smithy.Schema
-
-var AutoScalingConfiguration_TARGET_TRACKING_SCALING_MEMORY *smithy.Schema
-
-var _AutoScalingGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AutoScalingGroupArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupArns",
-}, smithy.ShapeTypeList, 1)
-var _AutoScalingGroupArns_member *smithy.Schema
-
-var AutoScalingGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var AutoScalingGroupConfiguration_desiredCapacity *smithy.Schema
-
-var AutoScalingGroupConfiguration_minSize *smithy.Schema
-
-var AutoScalingGroupConfiguration_maxSize *smithy.Schema
-
-var AutoScalingGroupConfiguration_instanceType *smithy.Schema
-
-var AutoScalingGroupConfiguration_allocationStrategy *smithy.Schema
-
-var AutoScalingGroupConfiguration_estimatedInstanceHourReductionPercentage *smithy.Schema
-
-var AutoScalingGroupConfiguration_type *smithy.Schema
-
-var AutoScalingGroupConfiguration_mixedInstanceTypes *smithy.Schema
-
-var AutoScalingGroupEstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupEstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var AutoScalingGroupEstimatedMonthlySavings_currency *smithy.Schema
-
-var AutoScalingGroupEstimatedMonthlySavings_value *smithy.Schema
-
-var _AutoScalingGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var AutoScalingGroupRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupRecommendation",
-}, smithy.ShapeTypeStructure, 13)
-var AutoScalingGroupRecommendation_accountId *smithy.Schema
-
-var AutoScalingGroupRecommendation_autoScalingGroupArn *smithy.Schema
-
-var AutoScalingGroupRecommendation_autoScalingGroupName *smithy.Schema
-
-var AutoScalingGroupRecommendation_finding *smithy.Schema
-
-var AutoScalingGroupRecommendation_utilizationMetrics *smithy.Schema
-
-var AutoScalingGroupRecommendation_lookBackPeriodInDays *smithy.Schema
-
-var AutoScalingGroupRecommendation_currentConfiguration *smithy.Schema
-
-var AutoScalingGroupRecommendation_currentInstanceGpuInfo *smithy.Schema
-
-var AutoScalingGroupRecommendation_recommendationOptions *smithy.Schema
-
-var AutoScalingGroupRecommendation_lastRefreshTimestamp *smithy.Schema
-
-var AutoScalingGroupRecommendation_currentPerformanceRisk *smithy.Schema
-
-var AutoScalingGroupRecommendation_effectiveRecommendationPreferences *smithy.Schema
-
-var AutoScalingGroupRecommendation_inferredWorkloadTypes *smithy.Schema
-
-var AutoScalingGroupRecommendationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupRecommendationOption",
-}, smithy.ShapeTypeStructure, 8)
-var AutoScalingGroupRecommendationOption_configuration *smithy.Schema
-
-var AutoScalingGroupRecommendationOption_instanceGpuInfo *smithy.Schema
-
-var AutoScalingGroupRecommendationOption_projectedUtilizationMetrics *smithy.Schema
-
-var AutoScalingGroupRecommendationOption_performanceRisk *smithy.Schema
-
-var AutoScalingGroupRecommendationOption_rank *smithy.Schema
-
-var AutoScalingGroupRecommendationOption_savingsOpportunity *smithy.Schema
-
-var AutoScalingGroupRecommendationOption_savingsOpportunityAfterDiscounts *smithy.Schema
-
-var AutoScalingGroupRecommendationOption_migrationEffort *smithy.Schema
-
-var _AutoScalingGroupRecommendationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupRecommendationOptions",
-}, smithy.ShapeTypeList, 1)
-var _AutoScalingGroupRecommendationOptions_member *smithy.Schema
-
-var _AutoScalingGroupRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _AutoScalingGroupRecommendations_member *smithy.Schema
-
-var AutoScalingGroupSavingsOpportunityAfterDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "AutoScalingGroupSavingsOpportunityAfterDiscounts",
-}, smithy.ShapeTypeStructure, 2)
-var AutoScalingGroupSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage *smithy.Schema
-
-var AutoScalingGroupSavingsOpportunityAfterDiscounts_estimatedMonthlySavings *smithy.Schema
-
-var _Code = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Code",
-}, smithy.ShapeTypeString, 0)
-
-var ContainerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ContainerConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ContainerConfiguration_containerName *smithy.Schema
-
-var ContainerConfiguration_memorySizeConfiguration *smithy.Schema
-
-var ContainerConfiguration_cpu *smithy.Schema
-
-var _ContainerConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ContainerConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _ContainerConfigurations_member *smithy.Schema
-
-var _ContainerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ContainerName",
-}, smithy.ShapeTypeString, 0)
-
-var ContainerRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ContainerRecommendation",
-}, smithy.ShapeTypeStructure, 3)
-var ContainerRecommendation_containerName *smithy.Schema
-
-var ContainerRecommendation_memorySizeConfiguration *smithy.Schema
-
-var ContainerRecommendation_cpu *smithy.Schema
-
-var _ContainerRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ContainerRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _ContainerRecommendations_member *smithy.Schema
-
-var _CpuSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CpuSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var CpuVendorArchitecture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CpuVendorArchitecture",
-}, smithy.ShapeTypeEnum, 2)
-var CpuVendorArchitecture_AWS_ARM64 *smithy.Schema
-
-var CpuVendorArchitecture_CURRENT *smithy.Schema
-
-var _CpuVendorArchitectures = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CpuVendorArchitectures",
-}, smithy.ShapeTypeList, 1)
-var _CpuVendorArchitectures_member *smithy.Schema
-
-var _CreationTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CreationTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Currency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Currency",
-}, smithy.ShapeTypeEnum, 2)
-var Currency_USD *smithy.Schema
-
-var Currency_CNY *smithy.Schema
-
-var _CurrentDBInstanceClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CurrentDBInstanceClass",
-}, smithy.ShapeTypeString, 0)
-
-var _CurrentInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CurrentInstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var CurrentPerformanceRisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CurrentPerformanceRisk",
-}, smithy.ShapeTypeEnum, 4)
-var CurrentPerformanceRisk_VERY_LOW *smithy.Schema
-
-var CurrentPerformanceRisk_LOW *smithy.Schema
-
-var CurrentPerformanceRisk_MEDIUM *smithy.Schema
-
-var CurrentPerformanceRisk_HIGH *smithy.Schema
-
-var CurrentPerformanceRiskRatings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CurrentPerformanceRiskRatings",
-}, smithy.ShapeTypeStructure, 4)
-var CurrentPerformanceRiskRatings_high *smithy.Schema
-
-var CurrentPerformanceRiskRatings_medium *smithy.Schema
-
-var CurrentPerformanceRiskRatings_low *smithy.Schema
-
-var CurrentPerformanceRiskRatings_veryLow *smithy.Schema
-
-var CustomizableMetricHeadroom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CustomizableMetricHeadroom",
-}, smithy.ShapeTypeEnum, 4)
-var CustomizableMetricHeadroom_PERCENT_30 *smithy.Schema
-
-var CustomizableMetricHeadroom_PERCENT_20 *smithy.Schema
-
-var CustomizableMetricHeadroom_PERCENT_10 *smithy.Schema
-
-var CustomizableMetricHeadroom_PERCENT_0 *smithy.Schema
-
-var CustomizableMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CustomizableMetricName",
-}, smithy.ShapeTypeEnum, 2)
-var CustomizableMetricName_CPU_UTILIZATION *smithy.Schema
-
-var CustomizableMetricName_MEMORY_UTILIZATION *smithy.Schema
-
-var CustomizableMetricParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CustomizableMetricParameters",
-}, smithy.ShapeTypeStructure, 2)
-var CustomizableMetricParameters_threshold *smithy.Schema
-
-var CustomizableMetricParameters_headroom *smithy.Schema
-
-var CustomizableMetricThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "CustomizableMetricThreshold",
-}, smithy.ShapeTypeEnum, 3)
-var CustomizableMetricThreshold_P90 *smithy.Schema
-
-var CustomizableMetricThreshold_P95 *smithy.Schema
-
-var CustomizableMetricThreshold_P99_5 *smithy.Schema
-
-var _DBClusterIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DBClusterIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _DBInstanceClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DBInstanceClass",
-}, smithy.ShapeTypeString, 0)
-
-var DBStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DBStorageConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var DBStorageConfiguration_storageType *smithy.Schema
-
-var DBStorageConfiguration_allocatedStorage *smithy.Schema
-
-var DBStorageConfiguration_iops *smithy.Schema
-
-var DBStorageConfiguration_maxAllocatedStorage *smithy.Schema
-
-var DBStorageConfiguration_storageThroughput *smithy.Schema
-
-var _DesiredCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DesiredCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DestinationBucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DestinationBucket",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DestinationKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationKeyPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DestinationKeyPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Dimension",
-}, smithy.ShapeTypeEnum, 2)
-var Dimension_SAVINGS_VALUE *smithy.Schema
-
-var Dimension_SAVINGS_VALUE_AFTER_DISCOUNT *smithy.Schema
-
-var EBSEffectiveRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSEffectiveRecommendationPreferences",
-}, smithy.ShapeTypeStructure, 2)
-var EBSEffectiveRecommendationPreferences_savingsEstimationMode *smithy.Schema
-
-var EBSEffectiveRecommendationPreferences_lookBackPeriod *smithy.Schema
-
-var EBSEstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSEstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var EBSEstimatedMonthlySavings_currency *smithy.Schema
-
-var EBSEstimatedMonthlySavings_value *smithy.Schema
-
-var EBSFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSFilter",
-}, smithy.ShapeTypeStructure, 2)
-var EBSFilter_name *smithy.Schema
-
-var EBSFilter_values *smithy.Schema
-
-var EBSFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSFilterName",
-}, smithy.ShapeTypeEnum, 1)
-var EBSFilterName_FINDING *smithy.Schema
-
-var _EBSFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSFilters",
-}, smithy.ShapeTypeList, 1)
-var _EBSFilters_member *smithy.Schema
-
-var EBSFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSFinding",
-}, smithy.ShapeTypeEnum, 2)
-var EBSFinding_OPTIMIZED *smithy.Schema
-
-var EBSFinding_NOT_OPTIMIZED *smithy.Schema
-
-var EBSMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSMetricName",
-}, smithy.ShapeTypeEnum, 6)
-var EBSMetricName_VOLUME_READ_OPS_PER_SECOND *smithy.Schema
-
-var EBSMetricName_VOLUME_WRITE_OPS_PER_SECOND *smithy.Schema
-
-var EBSMetricName_VOLUME_READ_BYTES_PER_SECOND *smithy.Schema
-
-var EBSMetricName_VOLUME_WRITE_BYTES_PER_SECOND *smithy.Schema
-
-var EBSMetricName_VOLUME_IOPS_EXCEEDED *smithy.Schema
-
-var EBSMetricName_VOLUME_THROUGHPUT_EXCEEDED *smithy.Schema
-
-var EBSSavingsEstimationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSSavingsEstimationMode",
-}, smithy.ShapeTypeStructure, 1)
-var EBSSavingsEstimationMode_source *smithy.Schema
-
-var EBSSavingsEstimationModeSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSSavingsEstimationModeSource",
-}, smithy.ShapeTypeEnum, 3)
-var EBSSavingsEstimationModeSource_PUBLIC_PRICING *smithy.Schema
-
-var EBSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING *smithy.Schema
-
-var EBSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB *smithy.Schema
-
-var EBSSavingsOpportunityAfterDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSSavingsOpportunityAfterDiscounts",
-}, smithy.ShapeTypeStructure, 2)
-var EBSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage *smithy.Schema
-
-var EBSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings *smithy.Schema
-
-var EBSUtilizationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSUtilizationMetric",
-}, smithy.ShapeTypeStructure, 3)
-var EBSUtilizationMetric_name *smithy.Schema
-
-var EBSUtilizationMetric_statistic *smithy.Schema
-
-var EBSUtilizationMetric_value *smithy.Schema
-
-var _EBSUtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EBSUtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _EBSUtilizationMetrics_member *smithy.Schema
-
-var ECSEffectiveRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSEffectiveRecommendationPreferences",
-}, smithy.ShapeTypeStructure, 2)
-var ECSEffectiveRecommendationPreferences_savingsEstimationMode *smithy.Schema
-
-var ECSEffectiveRecommendationPreferences_lookBackPeriod *smithy.Schema
-
-var ECSEstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSEstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var ECSEstimatedMonthlySavings_currency *smithy.Schema
-
-var ECSEstimatedMonthlySavings_value *smithy.Schema
-
-var ECSSavingsEstimationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSSavingsEstimationMode",
-}, smithy.ShapeTypeStructure, 1)
-var ECSSavingsEstimationMode_source *smithy.Schema
-
-var ECSSavingsEstimationModeSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSSavingsEstimationModeSource",
-}, smithy.ShapeTypeEnum, 3)
-var ECSSavingsEstimationModeSource_PUBLIC_PRICING *smithy.Schema
-
-var ECSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING *smithy.Schema
-
-var ECSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB *smithy.Schema
-
-var ECSSavingsOpportunityAfterDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSSavingsOpportunityAfterDiscounts",
-}, smithy.ShapeTypeStructure, 2)
-var ECSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage *smithy.Schema
-
-var ECSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings *smithy.Schema
-
-var ECSServiceLaunchType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceLaunchType",
-}, smithy.ShapeTypeEnum, 2)
-var ECSServiceLaunchType_EC2 *smithy.Schema
-
-var ECSServiceLaunchType_FARGATE *smithy.Schema
-
-var ECSServiceMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceMetricName",
-}, smithy.ShapeTypeEnum, 2)
-var ECSServiceMetricName_CPU *smithy.Schema
-
-var ECSServiceMetricName_MEMORY *smithy.Schema
-
-var ECSServiceMetricStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceMetricStatistic",
-}, smithy.ShapeTypeEnum, 2)
-var ECSServiceMetricStatistic_MAXIMUM *smithy.Schema
-
-var ECSServiceMetricStatistic_AVERAGE *smithy.Schema
-
-var ECSServiceProjectedMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceProjectedMetric",
-}, smithy.ShapeTypeStructure, 4)
-var ECSServiceProjectedMetric_name *smithy.Schema
-
-var ECSServiceProjectedMetric_timestamps *smithy.Schema
-
-var ECSServiceProjectedMetric_upperBoundValues *smithy.Schema
-
-var ECSServiceProjectedMetric_lowerBoundValues *smithy.Schema
-
-var _ECSServiceProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceProjectedMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ECSServiceProjectedMetrics_member *smithy.Schema
-
-var ECSServiceProjectedUtilizationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceProjectedUtilizationMetric",
-}, smithy.ShapeTypeStructure, 4)
-var ECSServiceProjectedUtilizationMetric_name *smithy.Schema
-
-var ECSServiceProjectedUtilizationMetric_statistic *smithy.Schema
-
-var ECSServiceProjectedUtilizationMetric_lowerBoundValue *smithy.Schema
-
-var ECSServiceProjectedUtilizationMetric_upperBoundValue *smithy.Schema
-
-var _ECSServiceProjectedUtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceProjectedUtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ECSServiceProjectedUtilizationMetrics_member *smithy.Schema
-
-var ECSServiceRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendation",
-}, smithy.ShapeTypeStructure, 13)
-var ECSServiceRecommendation_serviceArn *smithy.Schema
-
-var ECSServiceRecommendation_accountId *smithy.Schema
-
-var ECSServiceRecommendation_currentServiceConfiguration *smithy.Schema
-
-var ECSServiceRecommendation_utilizationMetrics *smithy.Schema
-
-var ECSServiceRecommendation_lookbackPeriodInDays *smithy.Schema
-
-var ECSServiceRecommendation_launchType *smithy.Schema
-
-var ECSServiceRecommendation_lastRefreshTimestamp *smithy.Schema
-
-var ECSServiceRecommendation_finding *smithy.Schema
-
-var ECSServiceRecommendation_findingReasonCodes *smithy.Schema
-
-var ECSServiceRecommendation_serviceRecommendationOptions *smithy.Schema
-
-var ECSServiceRecommendation_currentPerformanceRisk *smithy.Schema
-
-var ECSServiceRecommendation_effectiveRecommendationPreferences *smithy.Schema
-
-var ECSServiceRecommendation_tags *smithy.Schema
-
-var ECSServiceRecommendationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendationFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ECSServiceRecommendationFilter_name *smithy.Schema
-
-var ECSServiceRecommendationFilter_values *smithy.Schema
-
-var ECSServiceRecommendationFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendationFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var ECSServiceRecommendationFilterName_FINDING *smithy.Schema
-
-var ECSServiceRecommendationFilterName_FINDING_REASON_CODE *smithy.Schema
-
-var _ECSServiceRecommendationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendationFilters",
-}, smithy.ShapeTypeList, 1)
-var _ECSServiceRecommendationFilters_member *smithy.Schema
-
-var ECSServiceRecommendationFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendationFinding",
-}, smithy.ShapeTypeEnum, 3)
-var ECSServiceRecommendationFinding_OPTIMIZED *smithy.Schema
-
-var ECSServiceRecommendationFinding_UNDER_PROVISIONED *smithy.Schema
-
-var ECSServiceRecommendationFinding_OVER_PROVISIONED *smithy.Schema
-
-var ECSServiceRecommendationFindingReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendationFindingReasonCode",
-}, smithy.ShapeTypeEnum, 4)
-var ECSServiceRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED *smithy.Schema
-
-var ECSServiceRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED *smithy.Schema
-
-var ECSServiceRecommendationFindingReasonCode_CPU_OVER_PROVISIONED *smithy.Schema
-
-var ECSServiceRecommendationFindingReasonCode_CPU_UNDER_PROVISIONED *smithy.Schema
-
-var _ECSServiceRecommendationFindingReasonCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendationFindingReasonCodes",
-}, smithy.ShapeTypeList, 1)
-var _ECSServiceRecommendationFindingReasonCodes_member *smithy.Schema
-
-var ECSServiceRecommendationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendationOption",
-}, smithy.ShapeTypeStructure, 6)
-var ECSServiceRecommendationOption_memory *smithy.Schema
-
-var ECSServiceRecommendationOption_cpu *smithy.Schema
-
-var ECSServiceRecommendationOption_savingsOpportunity *smithy.Schema
-
-var ECSServiceRecommendationOption_savingsOpportunityAfterDiscounts *smithy.Schema
-
-var ECSServiceRecommendationOption_projectedUtilizationMetrics *smithy.Schema
-
-var ECSServiceRecommendationOption_containerRecommendations *smithy.Schema
-
-var _ECSServiceRecommendationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendationOptions",
-}, smithy.ShapeTypeList, 1)
-var _ECSServiceRecommendationOptions_member *smithy.Schema
-
-var _ECSServiceRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _ECSServiceRecommendations_member *smithy.Schema
-
-var ECSServiceRecommendedOptionProjectedMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendedOptionProjectedMetric",
-}, smithy.ShapeTypeStructure, 3)
-var ECSServiceRecommendedOptionProjectedMetric_recommendedCpuUnits *smithy.Schema
-
-var ECSServiceRecommendedOptionProjectedMetric_recommendedMemorySize *smithy.Schema
-
-var ECSServiceRecommendedOptionProjectedMetric_projectedMetrics *smithy.Schema
-
-var _ECSServiceRecommendedOptionProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceRecommendedOptionProjectedMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ECSServiceRecommendedOptionProjectedMetrics_member *smithy.Schema
-
-var ECSServiceUtilizationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceUtilizationMetric",
-}, smithy.ShapeTypeStructure, 3)
-var ECSServiceUtilizationMetric_name *smithy.Schema
-
-var ECSServiceUtilizationMetric_statistic *smithy.Schema
-
-var ECSServiceUtilizationMetric_value *smithy.Schema
-
-var _ECSServiceUtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ECSServiceUtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ECSServiceUtilizationMetrics_member *smithy.Schema
-
-var EffectivePreferredResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EffectivePreferredResource",
-}, smithy.ShapeTypeStructure, 4)
-var EffectivePreferredResource_name *smithy.Schema
-
-var EffectivePreferredResource_includeList *smithy.Schema
-
-var EffectivePreferredResource_effectiveIncludeList *smithy.Schema
-
-var EffectivePreferredResource_excludeList *smithy.Schema
-
-var _EffectivePreferredResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EffectivePreferredResources",
-}, smithy.ShapeTypeList, 1)
-var _EffectivePreferredResources_member *smithy.Schema
-
-var EffectiveRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EffectiveRecommendationPreferences",
-}, smithy.ShapeTypeStructure, 8)
-var EffectiveRecommendationPreferences_cpuVendorArchitectures *smithy.Schema
-
-var EffectiveRecommendationPreferences_enhancedInfrastructureMetrics *smithy.Schema
-
-var EffectiveRecommendationPreferences_inferredWorkloadTypes *smithy.Schema
-
-var EffectiveRecommendationPreferences_externalMetricsPreference *smithy.Schema
-
-var EffectiveRecommendationPreferences_lookBackPeriod *smithy.Schema
-
-var EffectiveRecommendationPreferences_utilizationPreferences *smithy.Schema
-
-var EffectiveRecommendationPreferences_preferredResources *smithy.Schema
-
-var EffectiveRecommendationPreferences_savingsEstimationMode *smithy.Schema
-
-var _Engine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Engine",
-}, smithy.ShapeTypeString, 0)
-
-var _EngineVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EngineVersion",
-}, smithy.ShapeTypeString, 0)
-
-var EnhancedInfrastructureMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EnhancedInfrastructureMetrics",
-}, smithy.ShapeTypeEnum, 2)
-var EnhancedInfrastructureMetrics_ACTIVE *smithy.Schema
-
-var EnhancedInfrastructureMetrics_INACTIVE *smithy.Schema
-
-var EnrollmentFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EnrollmentFilter",
-}, smithy.ShapeTypeStructure, 2)
-var EnrollmentFilter_name *smithy.Schema
-
-var EnrollmentFilter_values *smithy.Schema
-
-var EnrollmentFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EnrollmentFilterName",
-}, smithy.ShapeTypeEnum, 1)
-var EnrollmentFilterName_STATUS *smithy.Schema
-
-var _EnrollmentFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EnrollmentFilters",
-}, smithy.ShapeTypeList, 1)
-var _EnrollmentFilters_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var EstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "EstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var EstimatedMonthlySavings_currency *smithy.Schema
-
-var EstimatedMonthlySavings_value *smithy.Schema
-
-var ExportableAutoScalingGroupField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableAutoScalingGroupField",
-}, smithy.ShapeTypeEnum, 73)
-var ExportableAutoScalingGroupField_ACCOUNT_ID *smithy.Schema
-
-var ExportableAutoScalingGroupField_AUTO_SCALING_GROUP_ARN *smithy.Schema
-
-var ExportableAutoScalingGroupField_AUTO_SCALING_GROUP_NAME *smithy.Schema
-
-var ExportableAutoScalingGroupField_FINDING *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_LOOKBACK_PERIOD_IN_DAYS *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_INSTANCE_TYPE *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_DESIRED_CAPACITY *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MIN_SIZE *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MAX_SIZE *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_ALLOCATION_STRATEGY *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MIXED_INSTANCE_TYPES *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_TYPE *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_ON_DEMAND_PRICE *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_VCPUS *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_MEMORY *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_STORAGE *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_NETWORK *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_INSTANCE_TYPE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_DESIRED_CAPACITY *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MIN_SIZE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MAX_SIZE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_ESTIMATED_INSTANCE_HOUR_REDUCTION_PERCENTAGE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_ALLOCATION_STRATEGY *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MIXED_INSTANCE_TYPES *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_TYPE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_VCPUS *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_MEMORY *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STORAGE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_NETWORK *smithy.Schema
-
-var ExportableAutoScalingGroupField_LAST_REFRESH_TIMESTAMP *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE *smithy.Schema
-
-var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES *smithy.Schema
-
-var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS *smithy.Schema
-
-var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES *smithy.Schema
-
-var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES *smithy.Schema
-
-var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD *smithy.Schema
-
-var ExportableAutoScalingGroupField_INFERRED_WORKLOAD_TYPES *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_MIGRATION_EFFORT *smithy.Schema
-
-var ExportableAutoScalingGroupField_CURRENT_INSTANCE_GPU_INFO *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS *smithy.Schema
-
-var _ExportableAutoScalingGroupFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableAutoScalingGroupFields",
-}, smithy.ShapeTypeList, 1)
-var _ExportableAutoScalingGroupFields_member *smithy.Schema
-
-var ExportableECSServiceField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableECSServiceField",
-}, smithy.ShapeTypeEnum, 29)
-var ExportableECSServiceField_ACCOUNT_ID *smithy.Schema
-
-var ExportableECSServiceField_SERVICE_ARN *smithy.Schema
-
-var ExportableECSServiceField_LOOKBACK_PERIOD_IN_DAYS *smithy.Schema
-
-var ExportableECSServiceField_LAST_REFRESH_TIMESTAMP *smithy.Schema
-
-var ExportableECSServiceField_LAUNCH_TYPE *smithy.Schema
-
-var ExportableECSServiceField_CURRENT_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_MEMORY *smithy.Schema
-
-var ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_CPU *smithy.Schema
-
-var ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_TASK_DEFINITION_ARN *smithy.Schema
-
-var ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_AUTO_SCALING_CONFIGURATION *smithy.Schema
-
-var ExportableECSServiceField_CURRENT_SERVICE_CONTAINER_CONFIGURATIONS *smithy.Schema
-
-var ExportableECSServiceField_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableECSServiceField_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableECSServiceField_FINDING *smithy.Schema
-
-var ExportableECSServiceField_FINDING_REASON_CODES *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_MEMORY *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_CPU *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_CONTAINER_RECOMMENDATIONS *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableECSServiceField_TAGS *smithy.Schema
-
-var ExportableECSServiceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableECSServiceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD *smithy.Schema
-
-var _ExportableECSServiceFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableECSServiceFields",
-}, smithy.ShapeTypeList, 1)
-var _ExportableECSServiceFields_member *smithy.Schema
-
-var ExportableIdleField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableIdleField",
-}, smithy.ShapeTypeEnum, 39)
-var ExportableIdleField_ACCOUNT_ID *smithy.Schema
-
-var ExportableIdleField_RESOURCE_ARN *smithy.Schema
-
-var ExportableIdleField_RESOURCE_ID *smithy.Schema
-
-var ExportableIdleField_RESOURCE_TYPE *smithy.Schema
-
-var ExportableIdleField_LAST_REFRESH_TIMESTAMP *smithy.Schema
-
-var ExportableIdleField_LOOKBACK_PERIOD_IN_DAYS *smithy.Schema
-
-var ExportableIdleField_SAVINGS_OPPORTUNITY *smithy.Schema
-
-var ExportableIdleField_SAVINGS_OPPORTUNITY_AFTER_DISCOUNT *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_ACTIVE_CONNECTION_COUNT_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_PACKETS_IN_FROM_SOURCE_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_PACKETS_IN_FROM_DESTINATION_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_CONSUMED_READ_CAPACITY_UNITS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_CONSUMED_WRITE_CAPACITY_UNITS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_NEW_CONNECTIONS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_ENGINE_CPU_UTILIZATION_MAXIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_CACHE_HITS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_CACHE_MISSES_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_KEYSPACE_HITS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_KEYSPACE_MISSES_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_IS_IDLE_MINIMUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_USER_CONNECTED_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_INVOCATIONS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_GET_TYPE_CMDS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_SET_TYPE_CMDS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_ELASTI_CACHE_PROCESSING_UNITS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_CURR_CONNECTIONS_SUM *smithy.Schema
-
-var ExportableIdleField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_SUM *smithy.Schema
-
-var ExportableIdleField_FINDING *smithy.Schema
-
-var ExportableIdleField_FINDING_DESCRIPTION *smithy.Schema
-
-var ExportableIdleField_TAGS *smithy.Schema
-
-var _ExportableIdleFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableIdleFields",
-}, smithy.ShapeTypeList, 1)
-var _ExportableIdleFields_member *smithy.Schema
-
-var ExportableInstanceField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableInstanceField",
-}, smithy.ShapeTypeEnum, 71)
-var ExportableInstanceField_ACCOUNT_ID *smithy.Schema
-
-var ExportableInstanceField_INSTANCE_ARN *smithy.Schema
-
-var ExportableInstanceField_INSTANCE_NAME *smithy.Schema
-
-var ExportableInstanceField_FINDING *smithy.Schema
-
-var ExportableInstanceField_Finding_Reason_Codes *smithy.Schema
-
-var ExportableInstanceField_LOOKBACK_PERIOD_IN_DAYS *smithy.Schema
-
-var ExportableInstanceField_CURRENT_INSTANCE_TYPE *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_CURRENT_ON_DEMAND_PRICE *smithy.Schema
-
-var ExportableInstanceField_CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE *smithy.Schema
-
-var ExportableInstanceField_CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE *smithy.Schema
-
-var ExportableInstanceField_CURRENT_VCPUS *smithy.Schema
-
-var ExportableInstanceField_CURRENT_MEMORY *smithy.Schema
-
-var ExportableInstanceField_CURRENT_STORAGE *smithy.Schema
-
-var ExportableInstanceField_CURRENT_NETWORK *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_INSTANCE_TYPE *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_PLATFORM_DIFFERENCES *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_VCPUS *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_MEMORY *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_STORAGE *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_NETWORK *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_ARN *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_TYPE *smithy.Schema
-
-var ExportableInstanceField_LAST_REFRESH_TIMESTAMP *smithy.Schema
-
-var ExportableInstanceField_CURRENT_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE *smithy.Schema
-
-var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES *smithy.Schema
-
-var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS *smithy.Schema
-
-var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES *smithy.Schema
-
-var ExportableInstanceField_INFERRED_WORKLOAD_TYPES *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_MIGRATION_EFFORT *smithy.Schema
-
-var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_EXTERNAL_METRICS_SOURCE *smithy.Schema
-
-var ExportableInstanceField_TAGS *smithy.Schema
-
-var ExportableInstanceField_INSTANCE_STATE *smithy.Schema
-
-var ExportableInstanceField_EXTERNAL_METRIC_STATUS_CODE *smithy.Schema
-
-var ExportableInstanceField_EXTERNAL_METRIC_STATUS_REASON *smithy.Schema
-
-var ExportableInstanceField_CURRENT_INSTANCE_GPU_INFO *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM *smithy.Schema
-
-var ExportableInstanceField_IDLE *smithy.Schema
-
-var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES *smithy.Schema
-
-var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD *smithy.Schema
-
-var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_UTILIZATION_PREFERENCES *smithy.Schema
-
-var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS *smithy.Schema
-
-var _ExportableInstanceFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableInstanceFields",
-}, smithy.ShapeTypeList, 1)
-var _ExportableInstanceFields_member *smithy.Schema
-
-var ExportableLambdaFunctionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableLambdaFunctionField",
-}, smithy.ShapeTypeEnum, 31)
-var ExportableLambdaFunctionField_ACCOUNT_ID *smithy.Schema
-
-var ExportableLambdaFunctionField_FUNCTION_ARN *smithy.Schema
-
-var ExportableLambdaFunctionField_FUNCTION_VERSION *smithy.Schema
-
-var ExportableLambdaFunctionField_FINDING *smithy.Schema
-
-var ExportableLambdaFunctionField_FINDING_REASON_CODES *smithy.Schema
-
-var ExportableLambdaFunctionField_NUMBER_OF_INVOCATIONS *smithy.Schema
-
-var ExportableLambdaFunctionField_UTILIZATION_METRICS_DURATION_MAXIMUM *smithy.Schema
-
-var ExportableLambdaFunctionField_UTILIZATION_METRICS_DURATION_AVERAGE *smithy.Schema
-
-var ExportableLambdaFunctionField_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableLambdaFunctionField_UTILIZATION_METRICS_MEMORY_AVERAGE *smithy.Schema
-
-var ExportableLambdaFunctionField_LOOKBACK_PERIOD_IN_DAYS *smithy.Schema
-
-var ExportableLambdaFunctionField_CURRENT_CONFIGURATION_MEMORY_SIZE *smithy.Schema
-
-var ExportableLambdaFunctionField_CURRENT_CONFIGURATION_TIMEOUT *smithy.Schema
-
-var ExportableLambdaFunctionField_CURRENT_COST_TOTAL *smithy.Schema
-
-var ExportableLambdaFunctionField_CURRENT_COST_AVERAGE *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_CONFIGURATION_MEMORY_SIZE *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_COST_LOW *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_COST_HIGH *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_LOWER_BOUND *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_UPPER_BOUND *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_EXPECTED *smithy.Schema
-
-var ExportableLambdaFunctionField_LAST_REFRESH_TIMESTAMP *smithy.Schema
-
-var ExportableLambdaFunctionField_CURRENT_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE *smithy.Schema
-
-var ExportableLambdaFunctionField_TAGS *smithy.Schema
-
-var ExportableLambdaFunctionField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS *smithy.Schema
-
-var _ExportableLambdaFunctionFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableLambdaFunctionFields",
-}, smithy.ShapeTypeList, 1)
-var _ExportableLambdaFunctionFields_member *smithy.Schema
-
-var ExportableLicenseField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableLicenseField",
-}, smithy.ShapeTypeEnum, 21)
-var ExportableLicenseField_ACCOUNT_ID *smithy.Schema
-
-var ExportableLicenseField_RESOURCE_ARN *smithy.Schema
-
-var ExportableLicenseField_LOOKBACK_PERIOD_IN_DAYS *smithy.Schema
-
-var ExportableLicenseField_LAST_REFRESH_TIMESTAMP *smithy.Schema
-
-var ExportableLicenseField_LICENSE_FINDING *smithy.Schema
-
-var ExportableLicenseField_LICENSE_FINDING_REASON_CODES *smithy.Schema
-
-var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_NUMBER_OF_CORES *smithy.Schema
-
-var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPE *smithy.Schema
-
-var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEM *smithy.Schema
-
-var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_NAME *smithy.Schema
-
-var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_EDITION *smithy.Schema
-
-var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_MODEL *smithy.Schema
-
-var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_VERSION *smithy.Schema
-
-var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_METRICS_SOURCE *smithy.Schema
-
-var ExportableLicenseField_RECOMMENDATION_OPTIONS_OPERATING_SYSTEM *smithy.Schema
-
-var ExportableLicenseField_RECOMMENDATION_OPTIONS_LICENSE_EDITION *smithy.Schema
-
-var ExportableLicenseField_RECOMMENDATION_OPTIONS_LICENSE_MODEL *smithy.Schema
-
-var ExportableLicenseField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE *smithy.Schema
-
-var ExportableLicenseField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY *smithy.Schema
-
-var ExportableLicenseField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE *smithy.Schema
-
-var ExportableLicenseField_TAGS *smithy.Schema
-
-var _ExportableLicenseFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableLicenseFields",
-}, smithy.ShapeTypeList, 1)
-var _ExportableLicenseFields_member *smithy.Schema
-
-var ExportableRDSDBField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableRDSDBField",
-}, smithy.ShapeTypeEnum, 82)
-var ExportableRDSDBField_RESOURCE_ARN *smithy.Schema
-
-var ExportableRDSDBField_ACCOUNT_ID *smithy.Schema
-
-var ExportableRDSDBField_ENGINE *smithy.Schema
-
-var ExportableRDSDBField_ENGINE_VERSION *smithy.Schema
-
-var ExportableRDSDBField_IDLE *smithy.Schema
-
-var ExportableRDSDBField_MULTI_AZ_DB_INSTANCE *smithy.Schema
-
-var ExportableRDSDBField_CLUSTER_WRITER *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_DB_INSTANCE_CLASS *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_STORAGE_TYPE *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_ALLOCATED_STORAGE *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_MAX_ALLOCATED_STORAGE *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_IOPS *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_STORAGE_THROUGHPUT *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_INSTANCE_ON_DEMAND_HOURLY_PRICE *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_ON_DEMAND_MONTHLY_PRICE *smithy.Schema
-
-var ExportableRDSDBField_LOOKBACK_PERIOD_IN_DAYS *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST *smithy.Schema
-
-var ExportableRDSDBField_CURRENT_INSTANCE_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_MEMORY_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_STORAGE_SPACE_UTILIZATION_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_READ_THROUGHPUT_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_THROUGHPUT_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_STORAGE_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_STORAGE_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_HEALTH_STATE_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_DECLINED_SQL_TOTAL_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_CONN_TOTAL_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_READ_IOPS_EPHEMERAL_STORAGE_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_WRITE_IOPS_EPHEMERAL_STORAGE_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_BYTES_USED_AVERAGE *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_READ_IOPS_AVERAGE *smithy.Schema
-
-var ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_WRITE_IOPS_AVERAGE *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_FINDING *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_FINDING_REASON_CODES *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_FINDING *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_FINDING_REASON_CODES *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_DB_INSTANCE_CLASS *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_RANK *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_STORAGE_TYPE *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ALLOCATED_STORAGE *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_MAX_ALLOCATED_STORAGE *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_IOPS *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_STORAGE_THROUGHPUT *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_RANK *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOURLY_PRICE *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ON_DEMAND_MONTHLY_PRICE *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES *smithy.Schema
-
-var ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS *smithy.Schema
-
-var ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD *smithy.Schema
-
-var ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE *smithy.Schema
-
-var ExportableRDSDBField_LAST_REFRESH_TIMESTAMP *smithy.Schema
-
-var ExportableRDSDBField_TAGS *smithy.Schema
-
-var ExportableRDSDBField_DB_CLUSTER_IDENTIFIER *smithy.Schema
-
-var ExportableRDSDBField_PROMOTION_TIER *smithy.Schema
-
-var _ExportableRDSDBFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableRDSDBFields",
-}, smithy.ShapeTypeList, 1)
-var _ExportableRDSDBFields_member *smithy.Schema
-
-var ExportableVolumeField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableVolumeField",
-}, smithy.ShapeTypeEnum, 38)
-var ExportableVolumeField_ACCOUNT_ID *smithy.Schema
-
-var ExportableVolumeField_VOLUME_ARN *smithy.Schema
-
-var ExportableVolumeField_FINDING *smithy.Schema
-
-var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_READ_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_WRITE_BYTES_PER_SECOND_MAXIMUM *smithy.Schema
-
-var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_IOPS_EXCEEDED_MAXIMUM *smithy.Schema
-
-var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_THROUGHPUT_EXCEEDED_MAXIMUM *smithy.Schema
-
-var ExportableVolumeField_LOOKBACK_PERIOD_IN_DAYS *smithy.Schema
-
-var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_TYPE *smithy.Schema
-
-var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BASELINE_IOPS *smithy.Schema
-
-var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT *smithy.Schema
-
-var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BURST_IOPS *smithy.Schema
-
-var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BURST_THROUGHPUT *smithy.Schema
-
-var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_SIZE *smithy.Schema
-
-var ExportableVolumeField_CURRENT_MONTHLY_PRICE *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_TYPE *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_IOPS *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_IOPS *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_THROUGHPUT *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_SIZE *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_MONTHLY_PRICE *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableVolumeField_LAST_REFRESH_TIMESTAMP *smithy.Schema
-
-var ExportableVolumeField_CURRENT_PERFORMANCE_RISK *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE *smithy.Schema
-
-var ExportableVolumeField_TAGS *smithy.Schema
-
-var ExportableVolumeField_ROOT_VOLUME *smithy.Schema
-
-var ExportableVolumeField_CURRENT_CONFIGURATION_ROOT_VOLUME *smithy.Schema
-
-var ExportableVolumeField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS *smithy.Schema
-
-var ExportableVolumeField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD *smithy.Schema
-
-var _ExportableVolumeFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportableVolumeFields",
-}, smithy.ShapeTypeList, 1)
-var _ExportableVolumeFields_member *smithy.Schema
-
-var ExportDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportDestination",
-}, smithy.ShapeTypeStructure, 1)
-var ExportDestination_s3 *smithy.Schema
-
-var ExternalMetricsPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExternalMetricsPreference",
-}, smithy.ShapeTypeStructure, 1)
-var ExternalMetricsPreference_source *smithy.Schema
-
-var ExternalMetricsSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExternalMetricsSource",
-}, smithy.ShapeTypeEnum, 4)
-var ExternalMetricsSource_DATADOG *smithy.Schema
-
-var ExternalMetricsSource_DYNATRACE *smithy.Schema
-
-var ExternalMetricsSource_NEWRELIC *smithy.Schema
-
-var ExternalMetricsSource_INSTANA *smithy.Schema
-
-var ExternalMetricStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExternalMetricStatus",
-}, smithy.ShapeTypeStructure, 2)
-var ExternalMetricStatus_statusCode *smithy.Schema
-
-var ExternalMetricStatus_statusReason *smithy.Schema
-
-var ExternalMetricStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExternalMetricStatusCode",
-}, smithy.ShapeTypeEnum, 10)
-var ExternalMetricStatusCode_NO_EXTERNAL_METRIC_SET *smithy.Schema
-
-var ExternalMetricStatusCode_INTEGRATION_SUCCESS *smithy.Schema
-
-var ExternalMetricStatusCode_DATADOG_INTEGRATION_ERROR *smithy.Schema
-
-var ExternalMetricStatusCode_DYNATRACE_INTEGRATION_ERROR *smithy.Schema
-
-var ExternalMetricStatusCode_NEWRELIC_INTEGRATION_ERROR *smithy.Schema
-
-var ExternalMetricStatusCode_INSTANA_INTEGRATION_ERROR *smithy.Schema
-
-var ExternalMetricStatusCode_INSUFFICIENT_DATADOG_METRICS *smithy.Schema
-
-var ExternalMetricStatusCode_INSUFFICIENT_DYNATRACE_METRICS *smithy.Schema
-
-var ExternalMetricStatusCode_INSUFFICIENT_NEWRELIC_METRICS *smithy.Schema
-
-var ExternalMetricStatusCode_INSUFFICIENT_INSTANA_METRICS *smithy.Schema
-
-var _ExternalMetricStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExternalMetricStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _FailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FailureReason",
-}, smithy.ShapeTypeString, 0)
-
-var FileFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FileFormat",
-}, smithy.ShapeTypeEnum, 1)
-var FileFormat_CSV *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_name *smithy.Schema
-
-var Filter_values *smithy.Schema
-
-var FilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FilterName",
-}, smithy.ShapeTypeEnum, 4)
-var FilterName_FINDING *smithy.Schema
-
-var FilterName_FINDING_REASON_CODES *smithy.Schema
-
-var FilterName_RECOMMENDATION_SOURCE_TYPE *smithy.Schema
-
-var FilterName_INFERRED_WORKLOAD_TYPES *smithy.Schema
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var Finding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Finding",
-}, smithy.ShapeTypeEnum, 4)
-var Finding_UNDER_PROVISIONED *smithy.Schema
-
-var Finding_OVER_PROVISIONED *smithy.Schema
-
-var Finding_OPTIMIZED *smithy.Schema
-
-var Finding_NOT_OPTIMIZED *smithy.Schema
-
-var FindingReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FindingReasonCode",
-}, smithy.ShapeTypeEnum, 2)
-var FindingReasonCode_MEMORY_OVER_PROVISIONED *smithy.Schema
-
-var FindingReasonCode_MEMORY_UNDER_PROVISIONED *smithy.Schema
-
-var _FunctionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FunctionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _FunctionArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FunctionArns",
-}, smithy.ShapeTypeList, 1)
-var _FunctionArns_member *smithy.Schema
-
-var _FunctionVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "FunctionVersion",
-}, smithy.ShapeTypeString, 0)
-
-var GetRecommendationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRecommendationError",
-}, smithy.ShapeTypeStructure, 3)
-var GetRecommendationError_identifier *smithy.Schema
-
-var GetRecommendationError_code *smithy.Schema
-
-var GetRecommendationError_message *smithy.Schema
-
-var _GetRecommendationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRecommendationErrors",
-}, smithy.ShapeTypeList, 1)
-var _GetRecommendationErrors_member *smithy.Schema
-
-var Gpu = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Gpu",
-}, smithy.ShapeTypeStructure, 2)
-var Gpu_gpuCount *smithy.Schema
-
-var Gpu_gpuMemorySizeInMiB *smithy.Schema
-
-var _GpuCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GpuCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var GpuInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GpuInfo",
-}, smithy.ShapeTypeStructure, 1)
-var GpuInfo_gpus *smithy.Schema
-
-var _GpuMemorySizeInMiB = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GpuMemorySizeInMiB",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Gpus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Gpus",
-}, smithy.ShapeTypeList, 1)
-var _Gpus_member *smithy.Schema
-
-var _High = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "High",
-}, smithy.ShapeTypeLong, 0)
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var Idle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Idle",
-}, smithy.ShapeTypeEnum, 2)
-var Idle_TRUE *smithy.Schema
-
-var Idle_FALSE *smithy.Schema
-
-var IdleDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleDimension",
-}, smithy.ShapeTypeStructure, 2)
-var IdleDimension_key *smithy.Schema
-
-var IdleDimension_values *smithy.Schema
-
-var _IdleDimensionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleDimensionKey",
-}, smithy.ShapeTypeString, 0)
-
-var _IdleDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleDimensions",
-}, smithy.ShapeTypeList, 1)
-var _IdleDimensions_member *smithy.Schema
-
-var _IdleDimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleDimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _IdleDimensionValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleDimensionValues",
-}, smithy.ShapeTypeList, 1)
-var _IdleDimensionValues_member *smithy.Schema
-
-var IdleEstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleEstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var IdleEstimatedMonthlySavings_currency *smithy.Schema
-
-var IdleEstimatedMonthlySavings_value *smithy.Schema
-
-var IdleFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleFinding",
-}, smithy.ShapeTypeEnum, 3)
-var IdleFinding_IDLE *smithy.Schema
-
-var IdleFinding_UNATTACHED *smithy.Schema
-
-var IdleFinding_UNUSED *smithy.Schema
-
-var _IdleFindingDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleFindingDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _IdleMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var IdleMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleMetricName",
-}, smithy.ShapeTypeEnum, 28)
-var IdleMetricName_CPU *smithy.Schema
-
-var IdleMetricName_MEMORY *smithy.Schema
-
-var IdleMetricName_NETWORK_OUT_BYTES_PER_SECOND *smithy.Schema
-
-var IdleMetricName_NETWORK_IN_BYTES_PER_SECOND *smithy.Schema
-
-var IdleMetricName_DATABASE_CONNECTIONS *smithy.Schema
-
-var IdleMetricName_EBS_VOLUME_READ_IOPS *smithy.Schema
-
-var IdleMetricName_EBS_VOLUME_WRITE_IOPS *smithy.Schema
-
-var IdleMetricName_VOLUME_READ_OPS_PER_SECOND *smithy.Schema
-
-var IdleMetricName_VOLUME_WRITE_OPS_PER_SECOND *smithy.Schema
-
-var IdleMetricName_ACTIVE_CONNECTION_COUNT *smithy.Schema
-
-var IdleMetricName_PACKETS_IN_FROM_SOURCE *smithy.Schema
-
-var IdleMetricName_PACKETS_IN_FROM_DESTINATION *smithy.Schema
-
-var IdleMetricName_CONSUMED_READ_CAPACITY_UNITS *smithy.Schema
-
-var IdleMetricName_CONSUMED_WRITE_CAPACITY_UNITS *smithy.Schema
-
-var IdleMetricName_CONSUMED_CHANGE_DATA_CAPTURE_UNITS *smithy.Schema
-
-var IdleMetricName_NEW_CONNECTIONS *smithy.Schema
-
-var IdleMetricName_ENGINE_CPU_UTILIZATION *smithy.Schema
-
-var IdleMetricName_CACHE_HITS *smithy.Schema
-
-var IdleMetricName_CACHE_MISSES *smithy.Schema
-
-var IdleMetricName_KEYSPACE_HITS *smithy.Schema
-
-var IdleMetricName_KEYSPACE_MISSES *smithy.Schema
-
-var IdleMetricName_IS_IDLE *smithy.Schema
-
-var IdleMetricName_USER_CONNECTED *smithy.Schema
-
-var IdleMetricName_INVOCATIONS *smithy.Schema
-
-var IdleMetricName_GET_TYPE_CMDS *smithy.Schema
-
-var IdleMetricName_SET_TYPE_CMDS *smithy.Schema
-
-var IdleMetricName_ELASTI_CACHE_PROCESSING_UNITS *smithy.Schema
-
-var IdleMetricName_CURR_CONNECTIONS *smithy.Schema
-
-var IdleRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleRecommendation",
-}, smithy.ShapeTypeStructure, 12)
-var IdleRecommendation_resourceArn *smithy.Schema
-
-var IdleRecommendation_resourceId *smithy.Schema
-
-var IdleRecommendation_resourceType *smithy.Schema
-
-var IdleRecommendation_accountId *smithy.Schema
-
-var IdleRecommendation_finding *smithy.Schema
-
-var IdleRecommendation_findingDescription *smithy.Schema
-
-var IdleRecommendation_savingsOpportunity *smithy.Schema
-
-var IdleRecommendation_savingsOpportunityAfterDiscounts *smithy.Schema
-
-var IdleRecommendation_utilizationMetrics *smithy.Schema
-
-var IdleRecommendation_lookBackPeriodInDays *smithy.Schema
-
-var IdleRecommendation_lastRefreshTimestamp *smithy.Schema
-
-var IdleRecommendation_tags *smithy.Schema
-
-var IdleRecommendationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleRecommendationError",
-}, smithy.ShapeTypeStructure, 4)
-var IdleRecommendationError_identifier *smithy.Schema
-
-var IdleRecommendationError_code *smithy.Schema
-
-var IdleRecommendationError_message *smithy.Schema
-
-var IdleRecommendationError_resourceType *smithy.Schema
-
-var _IdleRecommendationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleRecommendationErrors",
-}, smithy.ShapeTypeList, 1)
-var _IdleRecommendationErrors_member *smithy.Schema
-
-var IdleRecommendationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleRecommendationFilter",
-}, smithy.ShapeTypeStructure, 2)
-var IdleRecommendationFilter_name *smithy.Schema
-
-var IdleRecommendationFilter_values *smithy.Schema
-
-var IdleRecommendationFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleRecommendationFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var IdleRecommendationFilterName_FINDING *smithy.Schema
-
-var IdleRecommendationFilterName_RESOURCE_TYPE *smithy.Schema
-
-var _IdleRecommendationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleRecommendationFilters",
-}, smithy.ShapeTypeList, 1)
-var _IdleRecommendationFilters_member *smithy.Schema
-
-var IdleRecommendationResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleRecommendationResourceType",
-}, smithy.ShapeTypeEnum, 12)
-var IdleRecommendationResourceType_EC2_INSTANCE *smithy.Schema
-
-var IdleRecommendationResourceType_AUTO_SCALING_GROUP *smithy.Schema
-
-var IdleRecommendationResourceType_EBS_VOLUME *smithy.Schema
-
-var IdleRecommendationResourceType_ECS_SERVICE *smithy.Schema
-
-var IdleRecommendationResourceType_RDS_DB_INSTANCE *smithy.Schema
-
-var IdleRecommendationResourceType_NAT_GATEWAY *smithy.Schema
-
-var IdleRecommendationResourceType_DYNAMO_DB_TABLE *smithy.Schema
-
-var IdleRecommendationResourceType_ELASTI_CACHE_CLUSTER *smithy.Schema
-
-var IdleRecommendationResourceType_MEMORY_DB_CLUSTER *smithy.Schema
-
-var IdleRecommendationResourceType_DOCUMENT_DB_CLUSTER *smithy.Schema
-
-var IdleRecommendationResourceType_WORKSPACES *smithy.Schema
-
-var IdleRecommendationResourceType_SAGE_MAKER_ENDPOINT *smithy.Schema
-
-var _IdleRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _IdleRecommendations_member *smithy.Schema
-
-var IdleSavingsOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleSavingsOpportunity",
-}, smithy.ShapeTypeStructure, 2)
-var IdleSavingsOpportunity_savingsOpportunityPercentage *smithy.Schema
-
-var IdleSavingsOpportunity_estimatedMonthlySavings *smithy.Schema
-
-var IdleSavingsOpportunityAfterDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleSavingsOpportunityAfterDiscounts",
-}, smithy.ShapeTypeStructure, 2)
-var IdleSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage *smithy.Schema
-
-var IdleSavingsOpportunityAfterDiscounts_estimatedMonthlySavings *smithy.Schema
-
-var _IdleSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleSummaries",
-}, smithy.ShapeTypeList, 1)
-var _IdleSummaries_member *smithy.Schema
-
-var IdleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleSummary",
-}, smithy.ShapeTypeStructure, 2)
-var IdleSummary_name *smithy.Schema
-
-var IdleSummary_value *smithy.Schema
-
-var IdleUtilizationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleUtilizationMetric",
-}, smithy.ShapeTypeStructure, 4)
-var IdleUtilizationMetric_name *smithy.Schema
-
-var IdleUtilizationMetric_statistic *smithy.Schema
-
-var IdleUtilizationMetric_value *smithy.Schema
-
-var IdleUtilizationMetric_dimensions *smithy.Schema
-
-var _IdleUtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IdleUtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _IdleUtilizationMetrics_member *smithy.Schema
-
-var _IncludeMemberAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "IncludeMemberAccounts",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InferredWorkloadSaving = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InferredWorkloadSaving",
-}, smithy.ShapeTypeStructure, 2)
-var InferredWorkloadSaving_inferredWorkloadTypes *smithy.Schema
-
-var InferredWorkloadSaving_estimatedMonthlySavings *smithy.Schema
-
-var _InferredWorkloadSavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InferredWorkloadSavings",
-}, smithy.ShapeTypeList, 1)
-var _InferredWorkloadSavings_member *smithy.Schema
-
-var InferredWorkloadType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InferredWorkloadType",
-}, smithy.ShapeTypeEnum, 9)
-var InferredWorkloadType_AMAZON_EMR *smithy.Schema
-
-var InferredWorkloadType_APACHE_CASSANDRA *smithy.Schema
-
-var InferredWorkloadType_APACHE_HADOOP *smithy.Schema
-
-var InferredWorkloadType_MEMCACHED *smithy.Schema
-
-var InferredWorkloadType_NGINX *smithy.Schema
-
-var InferredWorkloadType_POSTGRE_SQL *smithy.Schema
-
-var InferredWorkloadType_REDIS *smithy.Schema
-
-var InferredWorkloadType_KAFKA *smithy.Schema
-
-var InferredWorkloadType_SQLSERVER *smithy.Schema
-
-var _InferredWorkloadTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InferredWorkloadTypes",
-}, smithy.ShapeTypeList, 1)
-var _InferredWorkloadTypes_member *smithy.Schema
-
-var InferredWorkloadTypesPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InferredWorkloadTypesPreference",
-}, smithy.ShapeTypeEnum, 2)
-var InferredWorkloadTypesPreference_ACTIVE *smithy.Schema
-
-var InferredWorkloadTypesPreference_INACTIVE *smithy.Schema
-
-var _InstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _InstanceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceArns",
-}, smithy.ShapeTypeList, 1)
-var _InstanceArns_member *smithy.Schema
-
-var InstanceEstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceEstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var InstanceEstimatedMonthlySavings_currency *smithy.Schema
-
-var InstanceEstimatedMonthlySavings_value *smithy.Schema
-
-var InstanceIdle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceIdle",
-}, smithy.ShapeTypeEnum, 2)
-var InstanceIdle_TRUE *smithy.Schema
-
-var InstanceIdle_FALSE *smithy.Schema
-
-var _InstanceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceName",
-}, smithy.ShapeTypeString, 0)
-
-var InstanceRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceRecommendation",
-}, smithy.ShapeTypeStructure, 19)
-var InstanceRecommendation_instanceArn *smithy.Schema
-
-var InstanceRecommendation_accountId *smithy.Schema
-
-var InstanceRecommendation_instanceName *smithy.Schema
-
-var InstanceRecommendation_currentInstanceType *smithy.Schema
-
-var InstanceRecommendation_finding *smithy.Schema
-
-var InstanceRecommendation_findingReasonCodes *smithy.Schema
-
-var InstanceRecommendation_utilizationMetrics *smithy.Schema
-
-var InstanceRecommendation_lookBackPeriodInDays *smithy.Schema
-
-var InstanceRecommendation_recommendationOptions *smithy.Schema
-
-var InstanceRecommendation_recommendationSources *smithy.Schema
-
-var InstanceRecommendation_lastRefreshTimestamp *smithy.Schema
-
-var InstanceRecommendation_currentPerformanceRisk *smithy.Schema
-
-var InstanceRecommendation_effectiveRecommendationPreferences *smithy.Schema
-
-var InstanceRecommendation_inferredWorkloadTypes *smithy.Schema
-
-var InstanceRecommendation_instanceState *smithy.Schema
-
-var InstanceRecommendation_tags *smithy.Schema
-
-var InstanceRecommendation_externalMetricStatus *smithy.Schema
-
-var InstanceRecommendation_currentInstanceGpuInfo *smithy.Schema
-
-var InstanceRecommendation_idle *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceRecommendationFindingReasonCode",
-}, smithy.ShapeTypeEnum, 20)
-var InstanceRecommendationFindingReasonCode_CPU_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_CPU_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_EBS_THROUGHPUT_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_EBS_THROUGHPUT_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_EBS_IOPS_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_EBS_IOPS_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_NETWORK_BANDWIDTH_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_NETWORK_BANDWIDTH_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_NETWORK_PPS_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_NETWORK_PPS_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_DISK_IOPS_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_DISK_IOPS_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_DISK_THROUGHPUT_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_DISK_THROUGHPUT_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_GPU_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_GPU_OVER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_GPU_MEMORY_UNDER_PROVISIONED *smithy.Schema
-
-var InstanceRecommendationFindingReasonCode_GPU_MEMORY_OVER_PROVISIONED *smithy.Schema
-
-var _InstanceRecommendationFindingReasonCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceRecommendationFindingReasonCodes",
-}, smithy.ShapeTypeList, 1)
-var _InstanceRecommendationFindingReasonCodes_member *smithy.Schema
-
-var InstanceRecommendationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceRecommendationOption",
-}, smithy.ShapeTypeStructure, 9)
-var InstanceRecommendationOption_instanceType *smithy.Schema
-
-var InstanceRecommendationOption_instanceGpuInfo *smithy.Schema
-
-var InstanceRecommendationOption_projectedUtilizationMetrics *smithy.Schema
-
-var InstanceRecommendationOption_platformDifferences *smithy.Schema
-
-var InstanceRecommendationOption_performanceRisk *smithy.Schema
-
-var InstanceRecommendationOption_rank *smithy.Schema
-
-var InstanceRecommendationOption_savingsOpportunity *smithy.Schema
-
-var InstanceRecommendationOption_savingsOpportunityAfterDiscounts *smithy.Schema
-
-var InstanceRecommendationOption_migrationEffort *smithy.Schema
-
-var _InstanceRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _InstanceRecommendations_member *smithy.Schema
-
-var InstanceSavingsEstimationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceSavingsEstimationMode",
-}, smithy.ShapeTypeStructure, 1)
-var InstanceSavingsEstimationMode_source *smithy.Schema
-
-var InstanceSavingsEstimationModeSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceSavingsEstimationModeSource",
-}, smithy.ShapeTypeEnum, 3)
-var InstanceSavingsEstimationModeSource_PUBLIC_PRICING *smithy.Schema
-
-var InstanceSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING *smithy.Schema
-
-var InstanceSavingsEstimationModeSource_COST_OPTIMIZATION_HUB *smithy.Schema
-
-var InstanceSavingsOpportunityAfterDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceSavingsOpportunityAfterDiscounts",
-}, smithy.ShapeTypeStructure, 2)
-var InstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage *smithy.Schema
-
-var InstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings *smithy.Schema
-
-var InstanceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceState",
-}, smithy.ShapeTypeEnum, 6)
-var InstanceState_PENDING *smithy.Schema
-
-var InstanceState_RUNNING *smithy.Schema
-
-var InstanceState_SHUTTING_DOWN *smithy.Schema
-
-var InstanceState_TERMINATED *smithy.Schema
-
-var InstanceState_STOPPING *smithy.Schema
-
-var InstanceState_STOPPED *smithy.Schema
-
-var _InstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterValueException_message *smithy.Schema
-
-var JobFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "JobFilter",
-}, smithy.ShapeTypeStructure, 2)
-var JobFilter_name *smithy.Schema
-
-var JobFilter_values *smithy.Schema
-
-var JobFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "JobFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var JobFilterName_RESOURCE_TYPE *smithy.Schema
-
-var JobFilterName_JOB_STATUS *smithy.Schema
-
-var _JobFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "JobFilters",
-}, smithy.ShapeTypeList, 1)
-var _JobFilters_member *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "JobIds",
-}, smithy.ShapeTypeList, 1)
-var _JobIds_member *smithy.Schema
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var JobStatus_QUEUED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_COMPLETE *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var LambdaEffectiveRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaEffectiveRecommendationPreferences",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaEffectiveRecommendationPreferences_savingsEstimationMode *smithy.Schema
-
-var LambdaEstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaEstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaEstimatedMonthlySavings_currency *smithy.Schema
-
-var LambdaEstimatedMonthlySavings_value *smithy.Schema
-
-var LambdaFunctionMemoryMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionMemoryMetricName",
-}, smithy.ShapeTypeEnum, 1)
-var LambdaFunctionMemoryMetricName_DURATION *smithy.Schema
-
-var LambdaFunctionMemoryMetricStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionMemoryMetricStatistic",
-}, smithy.ShapeTypeEnum, 3)
-var LambdaFunctionMemoryMetricStatistic_LOWER_BOUND *smithy.Schema
-
-var LambdaFunctionMemoryMetricStatistic_UPPER_BOUND *smithy.Schema
-
-var LambdaFunctionMemoryMetricStatistic_EXPECTED *smithy.Schema
-
-var LambdaFunctionMemoryProjectedMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionMemoryProjectedMetric",
-}, smithy.ShapeTypeStructure, 3)
-var LambdaFunctionMemoryProjectedMetric_name *smithy.Schema
-
-var LambdaFunctionMemoryProjectedMetric_statistic *smithy.Schema
-
-var LambdaFunctionMemoryProjectedMetric_value *smithy.Schema
-
-var _LambdaFunctionMemoryProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionMemoryProjectedMetrics",
-}, smithy.ShapeTypeList, 1)
-var _LambdaFunctionMemoryProjectedMetrics_member *smithy.Schema
-
-var LambdaFunctionMemoryRecommendationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionMemoryRecommendationOption",
-}, smithy.ShapeTypeStructure, 5)
-var LambdaFunctionMemoryRecommendationOption_rank *smithy.Schema
-
-var LambdaFunctionMemoryRecommendationOption_memorySize *smithy.Schema
-
-var LambdaFunctionMemoryRecommendationOption_projectedUtilizationMetrics *smithy.Schema
-
-var LambdaFunctionMemoryRecommendationOption_savingsOpportunity *smithy.Schema
-
-var LambdaFunctionMemoryRecommendationOption_savingsOpportunityAfterDiscounts *smithy.Schema
-
-var _LambdaFunctionMemoryRecommendationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionMemoryRecommendationOptions",
-}, smithy.ShapeTypeList, 1)
-var _LambdaFunctionMemoryRecommendationOptions_member *smithy.Schema
-
-var LambdaFunctionMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionMetricName",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaFunctionMetricName_DURATION *smithy.Schema
-
-var LambdaFunctionMetricName_MEMORY *smithy.Schema
-
-var LambdaFunctionMetricStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionMetricStatistic",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaFunctionMetricStatistic_MAXIMUM *smithy.Schema
-
-var LambdaFunctionMetricStatistic_AVERAGE *smithy.Schema
-
-var LambdaFunctionRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionRecommendation",
-}, smithy.ShapeTypeStructure, 14)
-var LambdaFunctionRecommendation_functionArn *smithy.Schema
-
-var LambdaFunctionRecommendation_functionVersion *smithy.Schema
-
-var LambdaFunctionRecommendation_accountId *smithy.Schema
-
-var LambdaFunctionRecommendation_currentMemorySize *smithy.Schema
-
-var LambdaFunctionRecommendation_numberOfInvocations *smithy.Schema
-
-var LambdaFunctionRecommendation_utilizationMetrics *smithy.Schema
-
-var LambdaFunctionRecommendation_lookbackPeriodInDays *smithy.Schema
-
-var LambdaFunctionRecommendation_lastRefreshTimestamp *smithy.Schema
-
-var LambdaFunctionRecommendation_finding *smithy.Schema
-
-var LambdaFunctionRecommendation_findingReasonCodes *smithy.Schema
-
-var LambdaFunctionRecommendation_memorySizeRecommendationOptions *smithy.Schema
-
-var LambdaFunctionRecommendation_currentPerformanceRisk *smithy.Schema
-
-var LambdaFunctionRecommendation_effectiveRecommendationPreferences *smithy.Schema
-
-var LambdaFunctionRecommendation_tags *smithy.Schema
-
-var LambdaFunctionRecommendationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionRecommendationFilter",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaFunctionRecommendationFilter_name *smithy.Schema
-
-var LambdaFunctionRecommendationFilter_values *smithy.Schema
-
-var LambdaFunctionRecommendationFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionRecommendationFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaFunctionRecommendationFilterName_FINDING *smithy.Schema
-
-var LambdaFunctionRecommendationFilterName_FINDING_REASON_CODE *smithy.Schema
-
-var _LambdaFunctionRecommendationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionRecommendationFilters",
-}, smithy.ShapeTypeList, 1)
-var _LambdaFunctionRecommendationFilters_member *smithy.Schema
-
-var LambdaFunctionRecommendationFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionRecommendationFinding",
-}, smithy.ShapeTypeEnum, 3)
-var LambdaFunctionRecommendationFinding_OPTIMIZED *smithy.Schema
-
-var LambdaFunctionRecommendationFinding_NOT_OPTIMIZED *smithy.Schema
-
-var LambdaFunctionRecommendationFinding_UNAVAILABLE *smithy.Schema
-
-var LambdaFunctionRecommendationFindingReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionRecommendationFindingReasonCode",
-}, smithy.ShapeTypeEnum, 4)
-var LambdaFunctionRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED *smithy.Schema
-
-var LambdaFunctionRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED *smithy.Schema
-
-var LambdaFunctionRecommendationFindingReasonCode_INSUFFICIENT_DATA *smithy.Schema
-
-var LambdaFunctionRecommendationFindingReasonCode_INCONCLUSIVE *smithy.Schema
-
-var _LambdaFunctionRecommendationFindingReasonCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionRecommendationFindingReasonCodes",
-}, smithy.ShapeTypeList, 1)
-var _LambdaFunctionRecommendationFindingReasonCodes_member *smithy.Schema
-
-var _LambdaFunctionRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _LambdaFunctionRecommendations_member *smithy.Schema
-
-var LambdaFunctionUtilizationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionUtilizationMetric",
-}, smithy.ShapeTypeStructure, 3)
-var LambdaFunctionUtilizationMetric_name *smithy.Schema
-
-var LambdaFunctionUtilizationMetric_statistic *smithy.Schema
-
-var LambdaFunctionUtilizationMetric_value *smithy.Schema
-
-var _LambdaFunctionUtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaFunctionUtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _LambdaFunctionUtilizationMetrics_member *smithy.Schema
-
-var LambdaSavingsEstimationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaSavingsEstimationMode",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaSavingsEstimationMode_source *smithy.Schema
-
-var LambdaSavingsEstimationModeSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaSavingsEstimationModeSource",
-}, smithy.ShapeTypeEnum, 3)
-var LambdaSavingsEstimationModeSource_PUBLIC_PRICING *smithy.Schema
-
-var LambdaSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING *smithy.Schema
-
-var LambdaSavingsEstimationModeSource_COST_OPTIMIZATION_HUB *smithy.Schema
-
-var LambdaSavingsOpportunityAfterDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LambdaSavingsOpportunityAfterDiscounts",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage *smithy.Schema
-
-var LambdaSavingsOpportunityAfterDiscounts_estimatedMonthlySavings *smithy.Schema
-
-var _LastRefreshTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LastRefreshTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _LastUpdatedTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LastUpdatedTimestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LicenseConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var LicenseConfiguration_numberOfCores *smithy.Schema
-
-var LicenseConfiguration_instanceType *smithy.Schema
-
-var LicenseConfiguration_operatingSystem *smithy.Schema
-
-var LicenseConfiguration_licenseEdition *smithy.Schema
-
-var LicenseConfiguration_licenseName *smithy.Schema
-
-var LicenseConfiguration_licenseModel *smithy.Schema
-
-var LicenseConfiguration_licenseVersion *smithy.Schema
-
-var LicenseConfiguration_metricsSource *smithy.Schema
-
-var LicenseEdition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseEdition",
-}, smithy.ShapeTypeEnum, 4)
-var LicenseEdition_ENTERPRISE *smithy.Schema
-
-var LicenseEdition_STANDARD *smithy.Schema
-
-var LicenseEdition_FREE *smithy.Schema
-
-var LicenseEdition_NO_LICENSE_EDITION_FOUND *smithy.Schema
-
-var LicenseFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseFinding",
-}, smithy.ShapeTypeEnum, 3)
-var LicenseFinding_INSUFFICIENT_METRICS *smithy.Schema
-
-var LicenseFinding_OPTIMIZED *smithy.Schema
-
-var LicenseFinding_NOT_OPTIMIZED *smithy.Schema
-
-var LicenseFindingReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseFindingReasonCode",
-}, smithy.ShapeTypeEnum, 4)
-var LicenseFindingReasonCode_CW_APP_INSIGHTS_DISABLED *smithy.Schema
-
-var LicenseFindingReasonCode_CW_APP_INSIGHTS_ERROR *smithy.Schema
-
-var LicenseFindingReasonCode_LICENSE_OVER_PROVISIONED *smithy.Schema
-
-var LicenseFindingReasonCode_OPTIMIZED *smithy.Schema
-
-var _LicenseFindingReasonCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseFindingReasonCodes",
-}, smithy.ShapeTypeList, 1)
-var _LicenseFindingReasonCodes_member *smithy.Schema
-
-var LicenseModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseModel",
-}, smithy.ShapeTypeEnum, 2)
-var LicenseModel_LICENSE_INCLUDED *smithy.Schema
-
-var LicenseModel_BRING_YOUR_OWN_LICENSE *smithy.Schema
-
-var LicenseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseName",
-}, smithy.ShapeTypeEnum, 1)
-var LicenseName_SQLSERVER *smithy.Schema
-
-var LicenseRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseRecommendation",
-}, smithy.ShapeTypeStructure, 9)
-var LicenseRecommendation_resourceArn *smithy.Schema
-
-var LicenseRecommendation_accountId *smithy.Schema
-
-var LicenseRecommendation_currentLicenseConfiguration *smithy.Schema
-
-var LicenseRecommendation_lookbackPeriodInDays *smithy.Schema
-
-var LicenseRecommendation_lastRefreshTimestamp *smithy.Schema
-
-var LicenseRecommendation_finding *smithy.Schema
-
-var LicenseRecommendation_findingReasonCodes *smithy.Schema
-
-var LicenseRecommendation_licenseRecommendationOptions *smithy.Schema
-
-var LicenseRecommendation_tags *smithy.Schema
-
-var LicenseRecommendationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseRecommendationFilter",
-}, smithy.ShapeTypeStructure, 2)
-var LicenseRecommendationFilter_name *smithy.Schema
-
-var LicenseRecommendationFilter_values *smithy.Schema
-
-var LicenseRecommendationFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseRecommendationFilterName",
-}, smithy.ShapeTypeEnum, 3)
-var LicenseRecommendationFilterName_LICENSE_FINDING *smithy.Schema
-
-var LicenseRecommendationFilterName_LICENSE_FINDING_REASON_CODE *smithy.Schema
-
-var LicenseRecommendationFilterName_LICENSE_NAME *smithy.Schema
-
-var _LicenseRecommendationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseRecommendationFilters",
-}, smithy.ShapeTypeList, 1)
-var _LicenseRecommendationFilters_member *smithy.Schema
-
-var LicenseRecommendationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseRecommendationOption",
-}, smithy.ShapeTypeStructure, 5)
-var LicenseRecommendationOption_rank *smithy.Schema
-
-var LicenseRecommendationOption_operatingSystem *smithy.Schema
-
-var LicenseRecommendationOption_licenseEdition *smithy.Schema
-
-var LicenseRecommendationOption_licenseModel *smithy.Schema
-
-var LicenseRecommendationOption_savingsOpportunity *smithy.Schema
-
-var _LicenseRecommendationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseRecommendationOptions",
-}, smithy.ShapeTypeList, 1)
-var _LicenseRecommendationOptions_member *smithy.Schema
-
-var _LicenseRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _LicenseRecommendations_member *smithy.Schema
-
-var _LicenseVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LicenseVersion",
-}, smithy.ShapeTypeString, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_message *smithy.Schema
-
-var _LookBackPeriodInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LookBackPeriodInDays",
-}, smithy.ShapeTypeDouble, 0)
-
-var LookBackPeriodPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LookBackPeriodPreference",
-}, smithy.ShapeTypeEnum, 3)
-var LookBackPeriodPreference_DAYS_14 *smithy.Schema
-
-var LookBackPeriodPreference_DAYS_32 *smithy.Schema
-
-var LookBackPeriodPreference_DAYS_93 *smithy.Schema
-
-var _Low = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Low",
-}, smithy.ShapeTypeLong, 0)
-
-var _LowerBoundValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "LowerBoundValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MaxSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Medium = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Medium",
-}, smithy.ShapeTypeLong, 0)
-
-var _MemberAccountsEnrolled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MemberAccountsEnrolled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _MemorySize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MemorySize",
-}, smithy.ShapeTypeInteger, 0)
-
-var MemorySizeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MemorySizeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MemorySizeConfiguration_memory *smithy.Schema
-
-var MemorySizeConfiguration_memoryReservation *smithy.Schema
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _MetadataKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetadataKey",
-}, smithy.ShapeTypeString, 0)
-
-var MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetricName",
-}, smithy.ShapeTypeEnum, 16)
-var MetricName_CPU *smithy.Schema
-
-var MetricName_MEMORY *smithy.Schema
-
-var MetricName_EBS_READ_OPS_PER_SECOND *smithy.Schema
-
-var MetricName_EBS_WRITE_OPS_PER_SECOND *smithy.Schema
-
-var MetricName_EBS_READ_BYTES_PER_SECOND *smithy.Schema
-
-var MetricName_EBS_WRITE_BYTES_PER_SECOND *smithy.Schema
-
-var MetricName_DISK_READ_OPS_PER_SECOND *smithy.Schema
-
-var MetricName_DISK_WRITE_OPS_PER_SECOND *smithy.Schema
-
-var MetricName_DISK_READ_BYTES_PER_SECOND *smithy.Schema
-
-var MetricName_DISK_WRITE_BYTES_PER_SECOND *smithy.Schema
-
-var MetricName_NETWORK_IN_BYTES_PER_SECOND *smithy.Schema
-
-var MetricName_NETWORK_OUT_BYTES_PER_SECOND *smithy.Schema
-
-var MetricName_NETWORK_PACKETS_IN_PER_SECOND *smithy.Schema
-
-var MetricName_NETWORK_PACKETS_OUT_PER_SECOND *smithy.Schema
-
-var MetricName_GPU_PERCENTAGE *smithy.Schema
-
-var MetricName_GPU_MEMORY_PERCENTAGE *smithy.Schema
-
-var _MetricProviderArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetricProviderArn",
-}, smithy.ShapeTypeString, 0)
-
-var MetricSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetricSource",
-}, smithy.ShapeTypeStructure, 2)
-var MetricSource_provider *smithy.Schema
-
-var MetricSource_providerArn *smithy.Schema
-
-var MetricSourceProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetricSourceProvider",
-}, smithy.ShapeTypeEnum, 1)
-var MetricSourceProvider_CloudWatchAppInsights *smithy.Schema
-
-var _MetricsSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetricsSource",
-}, smithy.ShapeTypeList, 1)
-var _MetricsSource_member *smithy.Schema
-
-var MetricStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetricStatistic",
-}, smithy.ShapeTypeEnum, 2)
-var MetricStatistic_MAXIMUM *smithy.Schema
-
-var MetricStatistic_AVERAGE *smithy.Schema
-
-var _MetricValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetricValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _MetricValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MetricValues",
-}, smithy.ShapeTypeList, 1)
-var _MetricValues_member *smithy.Schema
-
-var MigrationEffort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MigrationEffort",
-}, smithy.ShapeTypeEnum, 4)
-var MigrationEffort_VERY_LOW *smithy.Schema
-
-var MigrationEffort_LOW *smithy.Schema
-
-var MigrationEffort_MEDIUM *smithy.Schema
-
-var MigrationEffort_HIGH *smithy.Schema
-
-var _MinSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MinSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var MissingAuthenticationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MissingAuthenticationToken",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var MissingAuthenticationToken_message *smithy.Schema
-
-var _MixedInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MixedInstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var _MixedInstanceTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "MixedInstanceTypes",
-}, smithy.ShapeTypeList, 1)
-var _MixedInstanceTypes_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableCpu = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NullableCpu",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NullableEstimatedInstanceHourReductionPercentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NullableEstimatedInstanceHourReductionPercentage",
-}, smithy.ShapeTypeDouble, 0)
-
-var _NullableInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NullableInstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableIOPS = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NullableIOPS",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NullableMaxAllocatedStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NullableMaxAllocatedStorage",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NullableMemory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NullableMemory",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NullableMemoryReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NullableMemoryReservation",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NullableStorageThroughput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NullableStorageThroughput",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NumberOfCores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NumberOfCores",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NumberOfInvocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NumberOfInvocations",
-}, smithy.ShapeTypeLong, 0)
-
-var _NumberOfMemberAccountsOptedIn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "NumberOfMemberAccountsOptedIn",
-}, smithy.ShapeTypeInteger, 0)
-
-var _OperatingSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "OperatingSystem",
-}, smithy.ShapeTypeString, 0)
-
-var OptInRequiredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "OptInRequiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var OptInRequiredException_message *smithy.Schema
-
-var Order = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Order",
-}, smithy.ShapeTypeEnum, 2)
-var Order_ASC *smithy.Schema
-
-var Order_DESC *smithy.Schema
-
-var OrderBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "OrderBy",
-}, smithy.ShapeTypeStructure, 2)
-var OrderBy_dimension *smithy.Schema
-
-var OrderBy_order *smithy.Schema
-
-var _PerformanceRisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PerformanceRisk",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Period = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Period",
-}, smithy.ShapeTypeInteger, 0)
-
-var PlatformDifference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PlatformDifference",
-}, smithy.ShapeTypeEnum, 6)
-var PlatformDifference_HYPERVISOR *smithy.Schema
-
-var PlatformDifference_NETWORK_INTERFACE *smithy.Schema
-
-var PlatformDifference_STORAGE_INTERFACE *smithy.Schema
-
-var PlatformDifference_INSTANCE_STORE_AVAILABILITY *smithy.Schema
-
-var PlatformDifference_VIRTUALIZATION_TYPE *smithy.Schema
-
-var PlatformDifference_ARCHITECTURE *smithy.Schema
-
-var _PlatformDifferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PlatformDifferences",
-}, smithy.ShapeTypeList, 1)
-var _PlatformDifferences_member *smithy.Schema
-
-var PreferredResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PreferredResource",
-}, smithy.ShapeTypeStructure, 3)
-var PreferredResource_name *smithy.Schema
-
-var PreferredResource_includeList *smithy.Schema
-
-var PreferredResource_excludeList *smithy.Schema
-
-var PreferredResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PreferredResourceName",
-}, smithy.ShapeTypeEnum, 1)
-var PreferredResourceName_EC2_INSTANCE_TYPES *smithy.Schema
-
-var _PreferredResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PreferredResources",
-}, smithy.ShapeTypeList, 1)
-var _PreferredResources_member *smithy.Schema
-
-var _PreferredResourceValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PreferredResourceValue",
-}, smithy.ShapeTypeString, 0)
-
-var _PreferredResourceValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PreferredResourceValues",
-}, smithy.ShapeTypeList, 1)
-var _PreferredResourceValues_member *smithy.Schema
-
-var ProjectedMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ProjectedMetric",
-}, smithy.ShapeTypeStructure, 3)
-var ProjectedMetric_name *smithy.Schema
-
-var ProjectedMetric_timestamps *smithy.Schema
-
-var ProjectedMetric_values *smithy.Schema
-
-var _ProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ProjectedMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ProjectedMetrics_member *smithy.Schema
-
-var _ProjectedUtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ProjectedUtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _ProjectedUtilizationMetrics_member *smithy.Schema
-
-var _PromotionTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PromotionTier",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Rank = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Rank",
-}, smithy.ShapeTypeInteger, 0)
-
-var RDSCurrentInstancePerformanceRisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSCurrentInstancePerformanceRisk",
-}, smithy.ShapeTypeEnum, 4)
-var RDSCurrentInstancePerformanceRisk_VERY_LOW *smithy.Schema
-
-var RDSCurrentInstancePerformanceRisk_LOW *smithy.Schema
-
-var RDSCurrentInstancePerformanceRisk_MEDIUM *smithy.Schema
-
-var RDSCurrentInstancePerformanceRisk_HIGH *smithy.Schema
-
-var RDSDatabaseProjectedMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDatabaseProjectedMetric",
-}, smithy.ShapeTypeStructure, 3)
-var RDSDatabaseProjectedMetric_name *smithy.Schema
-
-var RDSDatabaseProjectedMetric_timestamps *smithy.Schema
-
-var RDSDatabaseProjectedMetric_values *smithy.Schema
-
-var _RDSDatabaseProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDatabaseProjectedMetrics",
-}, smithy.ShapeTypeList, 1)
-var _RDSDatabaseProjectedMetrics_member *smithy.Schema
-
-var RDSDatabaseRecommendedOptionProjectedMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDatabaseRecommendedOptionProjectedMetric",
-}, smithy.ShapeTypeStructure, 3)
-var RDSDatabaseRecommendedOptionProjectedMetric_recommendedDBInstanceClass *smithy.Schema
-
-var RDSDatabaseRecommendedOptionProjectedMetric_rank *smithy.Schema
-
-var RDSDatabaseRecommendedOptionProjectedMetric_projectedMetrics *smithy.Schema
-
-var _RDSDatabaseRecommendedOptionProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDatabaseRecommendedOptionProjectedMetrics",
-}, smithy.ShapeTypeList, 1)
-var _RDSDatabaseRecommendedOptionProjectedMetrics_member *smithy.Schema
-
-var RDSDBInstanceRecommendationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBInstanceRecommendationOption",
-}, smithy.ShapeTypeStructure, 6)
-var RDSDBInstanceRecommendationOption_dbInstanceClass *smithy.Schema
-
-var RDSDBInstanceRecommendationOption_projectedUtilizationMetrics *smithy.Schema
-
-var RDSDBInstanceRecommendationOption_performanceRisk *smithy.Schema
-
-var RDSDBInstanceRecommendationOption_rank *smithy.Schema
-
-var RDSDBInstanceRecommendationOption_savingsOpportunity *smithy.Schema
-
-var RDSDBInstanceRecommendationOption_savingsOpportunityAfterDiscounts *smithy.Schema
-
-var _RDSDBInstanceRecommendationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBInstanceRecommendationOptions",
-}, smithy.ShapeTypeList, 1)
-var _RDSDBInstanceRecommendationOptions_member *smithy.Schema
-
-var RDSDBMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBMetricName",
-}, smithy.ShapeTypeEnum, 21)
-var RDSDBMetricName_CPU *smithy.Schema
-
-var RDSDBMetricName_MEMORY *smithy.Schema
-
-var RDSDBMetricName_EBS_VOLUME_STORAGE_SPACE_UTILIZATION *smithy.Schema
-
-var RDSDBMetricName_NETWORK_RECEIVE_THROUGHPUT *smithy.Schema
-
-var RDSDBMetricName_NETWORK_TRANSMIT_THROUGHPUT *smithy.Schema
-
-var RDSDBMetricName_EBS_VOLUME_READ_IOPS *smithy.Schema
-
-var RDSDBMetricName_EBS_VOLUME_WRITE_IOPS *smithy.Schema
-
-var RDSDBMetricName_EBS_VOLUME_READ_THROUGHPUT *smithy.Schema
-
-var RDSDBMetricName_EBS_VOLUME_WRITE_THROUGHPUT *smithy.Schema
-
-var RDSDBMetricName_DATABASE_CONNECTIONS *smithy.Schema
-
-var RDSDBMetricName_STORAGE_NETWORK_RECEIVE_THROUGHPUT *smithy.Schema
-
-var RDSDBMetricName_STORAGE_NETWORK_TRANSMIT_THROUGHPUT *smithy.Schema
-
-var RDSDBMetricName_AURORA_MEMORY_HEALTH_STATE *smithy.Schema
-
-var RDSDBMetricName_AURORA_MEMORY_NUM_DECLINED_SQL *smithy.Schema
-
-var RDSDBMetricName_AURORA_MEMORY_NUM_KILL_CONN_TOTAL *smithy.Schema
-
-var RDSDBMetricName_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL *smithy.Schema
-
-var RDSDBMetricName_READ_IOPS_EPHEMERAL_STORAGE *smithy.Schema
-
-var RDSDBMetricName_WRITE_IOPS_EPHEMERAL_STORAGE *smithy.Schema
-
-var RDSDBMetricName_VOLUME_READ_IOPS *smithy.Schema
-
-var RDSDBMetricName_VOLUME_BYTES_USED *smithy.Schema
-
-var RDSDBMetricName_VOLUME_WRITE_IOPS *smithy.Schema
-
-var RDSDBMetricStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBMetricStatistic",
-}, smithy.ShapeTypeEnum, 3)
-var RDSDBMetricStatistic_MAXIMUM *smithy.Schema
-
-var RDSDBMetricStatistic_MINIMUM *smithy.Schema
-
-var RDSDBMetricStatistic_AVERAGE *smithy.Schema
-
-var _RDSDBProjectedUtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBProjectedUtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _RDSDBProjectedUtilizationMetrics_member *smithy.Schema
-
-var RDSDBRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBRecommendation",
-}, smithy.ShapeTypeStructure, 22)
-var RDSDBRecommendation_resourceArn *smithy.Schema
-
-var RDSDBRecommendation_accountId *smithy.Schema
-
-var RDSDBRecommendation_engine *smithy.Schema
-
-var RDSDBRecommendation_engineVersion *smithy.Schema
-
-var RDSDBRecommendation_promotionTier *smithy.Schema
-
-var RDSDBRecommendation_currentDBInstanceClass *smithy.Schema
-
-var RDSDBRecommendation_currentStorageConfiguration *smithy.Schema
-
-var RDSDBRecommendation_dbClusterIdentifier *smithy.Schema
-
-var RDSDBRecommendation_idle *smithy.Schema
-
-var RDSDBRecommendation_instanceFinding *smithy.Schema
-
-var RDSDBRecommendation_storageFinding *smithy.Schema
-
-var RDSDBRecommendation_instanceFindingReasonCodes *smithy.Schema
-
-var RDSDBRecommendation_currentInstancePerformanceRisk *smithy.Schema
-
-var RDSDBRecommendation_currentStorageEstimatedMonthlyVolumeIOPsCostVariation *smithy.Schema
-
-var RDSDBRecommendation_storageFindingReasonCodes *smithy.Schema
-
-var RDSDBRecommendation_instanceRecommendationOptions *smithy.Schema
-
-var RDSDBRecommendation_storageRecommendationOptions *smithy.Schema
-
-var RDSDBRecommendation_utilizationMetrics *smithy.Schema
-
-var RDSDBRecommendation_effectiveRecommendationPreferences *smithy.Schema
-
-var RDSDBRecommendation_lookbackPeriodInDays *smithy.Schema
-
-var RDSDBRecommendation_lastRefreshTimestamp *smithy.Schema
-
-var RDSDBRecommendation_tags *smithy.Schema
-
-var RDSDBRecommendationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBRecommendationFilter",
-}, smithy.ShapeTypeStructure, 2)
-var RDSDBRecommendationFilter_name *smithy.Schema
-
-var RDSDBRecommendationFilter_values *smithy.Schema
-
-var RDSDBRecommendationFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBRecommendationFilterName",
-}, smithy.ShapeTypeEnum, 5)
-var RDSDBRecommendationFilterName_INSTANCE_FINDING *smithy.Schema
-
-var RDSDBRecommendationFilterName_INSTANCE_FINDING_REASON_CODE *smithy.Schema
-
-var RDSDBRecommendationFilterName_STORAGE_FINDING *smithy.Schema
-
-var RDSDBRecommendationFilterName_STORAGE_FINDING_REASON_CODE *smithy.Schema
-
-var RDSDBRecommendationFilterName_IDLE *smithy.Schema
-
-var _RDSDBRecommendationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBRecommendationFilters",
-}, smithy.ShapeTypeList, 1)
-var _RDSDBRecommendationFilters_member *smithy.Schema
-
-var _RDSDBRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _RDSDBRecommendations_member *smithy.Schema
-
-var RDSDBStorageRecommendationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBStorageRecommendationOption",
-}, smithy.ShapeTypeStructure, 5)
-var RDSDBStorageRecommendationOption_storageConfiguration *smithy.Schema
-
-var RDSDBStorageRecommendationOption_rank *smithy.Schema
-
-var RDSDBStorageRecommendationOption_savingsOpportunity *smithy.Schema
-
-var RDSDBStorageRecommendationOption_savingsOpportunityAfterDiscounts *smithy.Schema
-
-var RDSDBStorageRecommendationOption_estimatedMonthlyVolumeIOPsCostVariation *smithy.Schema
-
-var _RDSDBStorageRecommendationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBStorageRecommendationOptions",
-}, smithy.ShapeTypeList, 1)
-var _RDSDBStorageRecommendationOptions_member *smithy.Schema
-
-var RDSDBUtilizationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBUtilizationMetric",
-}, smithy.ShapeTypeStructure, 3)
-var RDSDBUtilizationMetric_name *smithy.Schema
-
-var RDSDBUtilizationMetric_statistic *smithy.Schema
-
-var RDSDBUtilizationMetric_value *smithy.Schema
-
-var _RDSDBUtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSDBUtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _RDSDBUtilizationMetrics_member *smithy.Schema
-
-var RDSEffectiveRecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSEffectiveRecommendationPreferences",
-}, smithy.ShapeTypeStructure, 4)
-var RDSEffectiveRecommendationPreferences_cpuVendorArchitectures *smithy.Schema
-
-var RDSEffectiveRecommendationPreferences_enhancedInfrastructureMetrics *smithy.Schema
-
-var RDSEffectiveRecommendationPreferences_lookBackPeriod *smithy.Schema
-
-var RDSEffectiveRecommendationPreferences_savingsEstimationMode *smithy.Schema
-
-var RDSEstimatedMonthlyVolumeIOPsCostVariation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSEstimatedMonthlyVolumeIOPsCostVariation",
-}, smithy.ShapeTypeEnum, 4)
-var RDSEstimatedMonthlyVolumeIOPsCostVariation_NONE *smithy.Schema
-
-var RDSEstimatedMonthlyVolumeIOPsCostVariation_LOW *smithy.Schema
-
-var RDSEstimatedMonthlyVolumeIOPsCostVariation_MEDIUM *smithy.Schema
-
-var RDSEstimatedMonthlyVolumeIOPsCostVariation_HIGH *smithy.Schema
-
-var RDSInstanceEstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSInstanceEstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var RDSInstanceEstimatedMonthlySavings_currency *smithy.Schema
-
-var RDSInstanceEstimatedMonthlySavings_value *smithy.Schema
-
-var RDSInstanceFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSInstanceFinding",
-}, smithy.ShapeTypeEnum, 3)
-var RDSInstanceFinding_OPTIMIZED *smithy.Schema
-
-var RDSInstanceFinding_UNDER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFinding_OVER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSInstanceFindingReasonCode",
-}, smithy.ShapeTypeEnum, 14)
-var RDSInstanceFindingReasonCode_CPU_OVER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_NETWORK_BANDWIDTH_OVER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_EBS_IOPS_OVER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_EBS_IOPS_UNDER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_EBS_THROUGHPUT_OVER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_CPU_UNDER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_NETWORK_BANDWIDTH_UNDER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_EBS_THROUGHPUT_UNDER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_NEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLE *smithy.Schema
-
-var RDSInstanceFindingReasonCode_NEW_ENGINE_VERSION_AVAILABLE *smithy.Schema
-
-var RDSInstanceFindingReasonCode_DB_CLUSTER_WRITER_UNDER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_MEMORY_UNDER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_INSTANCE_STORAGE_READ_IOPS_UNDER_PROVISIONED *smithy.Schema
-
-var RDSInstanceFindingReasonCode_INSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONED *smithy.Schema
-
-var _RDSInstanceFindingReasonCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSInstanceFindingReasonCodes",
-}, smithy.ShapeTypeList, 1)
-var _RDSInstanceFindingReasonCodes_member *smithy.Schema
-
-var RDSInstanceSavingsOpportunityAfterDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSInstanceSavingsOpportunityAfterDiscounts",
-}, smithy.ShapeTypeStructure, 2)
-var RDSInstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage *smithy.Schema
-
-var RDSInstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings *smithy.Schema
-
-var RDSSavingsEstimationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSSavingsEstimationMode",
-}, smithy.ShapeTypeStructure, 1)
-var RDSSavingsEstimationMode_source *smithy.Schema
-
-var RDSSavingsEstimationModeSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSSavingsEstimationModeSource",
-}, smithy.ShapeTypeEnum, 3)
-var RDSSavingsEstimationModeSource_PUBLIC_PRICING *smithy.Schema
-
-var RDSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING *smithy.Schema
-
-var RDSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB *smithy.Schema
-
-var RDSStorageEstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSStorageEstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 2)
-var RDSStorageEstimatedMonthlySavings_currency *smithy.Schema
-
-var RDSStorageEstimatedMonthlySavings_value *smithy.Schema
-
-var RDSStorageFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSStorageFinding",
-}, smithy.ShapeTypeEnum, 4)
-var RDSStorageFinding_OPTIMIZED *smithy.Schema
-
-var RDSStorageFinding_UNDER_PROVISIONED *smithy.Schema
-
-var RDSStorageFinding_OVER_PROVISIONED *smithy.Schema
-
-var RDSStorageFinding_NOT_OPTIMIZED *smithy.Schema
-
-var RDSStorageFindingReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSStorageFindingReasonCode",
-}, smithy.ShapeTypeEnum, 7)
-var RDSStorageFindingReasonCode_EBS_VOLUME_ALLOCATED_STORAGE_UNDER_PROVISIONED *smithy.Schema
-
-var RDSStorageFindingReasonCode_EBS_VOLUME_THROUGHPUT_UNDER_PROVISIONED *smithy.Schema
-
-var RDSStorageFindingReasonCode_EBS_VOLUME_IOPS_OVER_PROVISIONED *smithy.Schema
-
-var RDSStorageFindingReasonCode_EBS_VOLUME_THROUGHPUT_OVER_PROVISIONED *smithy.Schema
-
-var RDSStorageFindingReasonCode_NEW_GENERATION_STORAGE_TYPE_AVAILABLE *smithy.Schema
-
-var RDSStorageFindingReasonCode_DB_CLUSTER_STORAGE_OPTION_AVAILABLE *smithy.Schema
-
-var RDSStorageFindingReasonCode_DB_CLUSTER_STORAGE_SAVINGS_AVAILABLE *smithy.Schema
-
-var _RDSStorageFindingReasonCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSStorageFindingReasonCodes",
-}, smithy.ShapeTypeList, 1)
-var _RDSStorageFindingReasonCodes_member *smithy.Schema
-
-var RDSStorageSavingsOpportunityAfterDiscounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RDSStorageSavingsOpportunityAfterDiscounts",
-}, smithy.ShapeTypeStructure, 2)
-var RDSStorageSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage *smithy.Schema
-
-var RDSStorageSavingsOpportunityAfterDiscounts_estimatedMonthlySavings *smithy.Schema
-
-var _ReasonCodeSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ReasonCodeSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ReasonCodeSummaries_member *smithy.Schema
-
-var ReasonCodeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ReasonCodeSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ReasonCodeSummary_name *smithy.Schema
-
-var ReasonCodeSummary_value *smithy.Schema
-
-var RecommendationExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationExportJob",
-}, smithy.ShapeTypeStructure, 7)
-var RecommendationExportJob_jobId *smithy.Schema
-
-var RecommendationExportJob_destination *smithy.Schema
-
-var RecommendationExportJob_resourceType *smithy.Schema
-
-var RecommendationExportJob_status *smithy.Schema
-
-var RecommendationExportJob_creationTimestamp *smithy.Schema
-
-var RecommendationExportJob_lastUpdatedTimestamp *smithy.Schema
-
-var RecommendationExportJob_failureReason *smithy.Schema
-
-var _RecommendationExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationExportJobs",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationExportJobs_member *smithy.Schema
-
-var _RecommendationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationOptions",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationOptions_member *smithy.Schema
-
-var RecommendationPreferenceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationPreferenceName",
-}, smithy.ShapeTypeEnum, 6)
-var RecommendationPreferenceName_ENHANCED_INFRASTRUCTURE_METRICS *smithy.Schema
-
-var RecommendationPreferenceName_INFERRED_WORKLOAD_TYPES *smithy.Schema
-
-var RecommendationPreferenceName_EXTERNAL_METRICS_PREFERENCE *smithy.Schema
-
-var RecommendationPreferenceName_LOOKBACK_PERIOD_PREFERENCE *smithy.Schema
-
-var RecommendationPreferenceName_PREFERRED_RESOURCES *smithy.Schema
-
-var RecommendationPreferenceName_UTILIZATION_PREFERENCES *smithy.Schema
-
-var _RecommendationPreferenceNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationPreferenceNames",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationPreferenceNames_member *smithy.Schema
-
-var RecommendationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationPreferences",
-}, smithy.ShapeTypeStructure, 1)
-var RecommendationPreferences_cpuVendorArchitectures *smithy.Schema
-
-var RecommendationPreferencesDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationPreferencesDetail",
-}, smithy.ShapeTypeStructure, 9)
-var RecommendationPreferencesDetail_scope *smithy.Schema
-
-var RecommendationPreferencesDetail_resourceType *smithy.Schema
-
-var RecommendationPreferencesDetail_enhancedInfrastructureMetrics *smithy.Schema
-
-var RecommendationPreferencesDetail_inferredWorkloadTypes *smithy.Schema
-
-var RecommendationPreferencesDetail_externalMetricsPreference *smithy.Schema
-
-var RecommendationPreferencesDetail_lookBackPeriod *smithy.Schema
-
-var RecommendationPreferencesDetail_utilizationPreferences *smithy.Schema
-
-var RecommendationPreferencesDetail_preferredResources *smithy.Schema
-
-var RecommendationPreferencesDetail_savingsEstimationMode *smithy.Schema
-
-var _RecommendationPreferencesDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationPreferencesDetails",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationPreferencesDetails_member *smithy.Schema
-
-var RecommendationSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationSource",
-}, smithy.ShapeTypeStructure, 2)
-var RecommendationSource_recommendationSourceArn *smithy.Schema
-
-var RecommendationSource_recommendationSourceType *smithy.Schema
-
-var _RecommendationSourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationSourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RecommendationSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationSources",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationSources_member *smithy.Schema
-
-var RecommendationSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationSourceType",
-}, smithy.ShapeTypeEnum, 16)
-var RecommendationSourceType_EC2_INSTANCE *smithy.Schema
-
-var RecommendationSourceType_AUTO_SCALING_GROUP *smithy.Schema
-
-var RecommendationSourceType_EBS_VOLUME *smithy.Schema
-
-var RecommendationSourceType_LAMBDA_FUNCTION *smithy.Schema
-
-var RecommendationSourceType_ECS_SERVICE *smithy.Schema
-
-var RecommendationSourceType_LICENSE *smithy.Schema
-
-var RecommendationSourceType_RDS_DB_INSTANCE *smithy.Schema
-
-var RecommendationSourceType_RDS_DB_INSTANCE_STORAGE *smithy.Schema
-
-var RecommendationSourceType_AURORA_DB_CLUSTER_STORAGE *smithy.Schema
-
-var RecommendationSourceType_NAT_GATEWAY *smithy.Schema
-
-var RecommendationSourceType_DYNAMO_DB_TABLE *smithy.Schema
-
-var RecommendationSourceType_ELASTI_CACHE_CLUSTER *smithy.Schema
-
-var RecommendationSourceType_MEMORY_DB_CLUSTER *smithy.Schema
-
-var RecommendationSourceType_DOCUMENT_DB_CLUSTER *smithy.Schema
-
-var RecommendationSourceType_WORKSPACES *smithy.Schema
-
-var RecommendationSourceType_SAGE_MAKER_ENDPOINT *smithy.Schema
-
-var _RecommendationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationSummaries_member *smithy.Schema
-
-var RecommendationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendationSummary",
-}, smithy.ShapeTypeStructure, 9)
-var RecommendationSummary_summaries *smithy.Schema
-
-var RecommendationSummary_idleSummaries *smithy.Schema
-
-var RecommendationSummary_recommendationResourceType *smithy.Schema
-
-var RecommendationSummary_accountId *smithy.Schema
-
-var RecommendationSummary_savingsOpportunity *smithy.Schema
-
-var RecommendationSummary_idleSavingsOpportunity *smithy.Schema
-
-var RecommendationSummary_aggregatedSavingsOpportunity *smithy.Schema
-
-var RecommendationSummary_currentPerformanceRiskRatings *smithy.Schema
-
-var RecommendationSummary_inferredWorkloadSavings *smithy.Schema
-
-var _RecommendedDBInstanceClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendedDBInstanceClass",
-}, smithy.ShapeTypeString, 0)
-
-var _RecommendedInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendedInstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var RecommendedOptionProjectedMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendedOptionProjectedMetric",
-}, smithy.ShapeTypeStructure, 3)
-var RecommendedOptionProjectedMetric_recommendedInstanceType *smithy.Schema
-
-var RecommendedOptionProjectedMetric_rank *smithy.Schema
-
-var RecommendedOptionProjectedMetric_projectedMetrics *smithy.Schema
-
-var _RecommendedOptionProjectedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RecommendedOptionProjectedMetrics",
-}, smithy.ShapeTypeList, 1)
-var _RecommendedOptionProjectedMetrics_member *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ResourceArns",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArns_member *smithy.Schema
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 10)
-var ResourceType_EC2_INSTANCE *smithy.Schema
-
-var ResourceType_AUTO_SCALING_GROUP *smithy.Schema
-
-var ResourceType_EBS_VOLUME *smithy.Schema
-
-var ResourceType_LAMBDA_FUNCTION *smithy.Schema
-
-var ResourceType_NOT_APPLICABLE *smithy.Schema
-
-var ResourceType_ECS_SERVICE *smithy.Schema
-
-var ResourceType_LICENSE *smithy.Schema
-
-var ResourceType_RDS_DB_INSTANCE *smithy.Schema
-
-var ResourceType_AURORA_DB_CLUSTER_STORAGE *smithy.Schema
-
-var ResourceType_IDLE *smithy.Schema
-
-var _RootVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "RootVolume",
-}, smithy.ShapeTypeBoolean, 0)
-
-var S3Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "S3Destination",
-}, smithy.ShapeTypeStructure, 3)
-var S3Destination_bucket *smithy.Schema
-
-var S3Destination_key *smithy.Schema
-
-var S3Destination_metadataKey *smithy.Schema
-
-var S3DestinationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "S3DestinationConfig",
-}, smithy.ShapeTypeStructure, 2)
-var S3DestinationConfig_bucket *smithy.Schema
-
-var S3DestinationConfig_keyPrefix *smithy.Schema
-
-var SavingsEstimationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "SavingsEstimationMode",
-}, smithy.ShapeTypeEnum, 2)
-var SavingsEstimationMode_AFTER_DISCOUNTS *smithy.Schema
-
-var SavingsEstimationMode_BEFORE_DISCOUNTS *smithy.Schema
-
-var SavingsOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "SavingsOpportunity",
-}, smithy.ShapeTypeStructure, 2)
-var SavingsOpportunity_savingsOpportunityPercentage *smithy.Schema
-
-var SavingsOpportunity_estimatedMonthlySavings *smithy.Schema
-
-var _SavingsOpportunityPercentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "SavingsOpportunityPercentage",
-}, smithy.ShapeTypeDouble, 0)
-
-var Scope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Scope",
-}, smithy.ShapeTypeStructure, 2)
-var Scope_name *smithy.Schema
-
-var Scope_value *smithy.Schema
-
-var ScopeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ScopeName",
-}, smithy.ShapeTypeEnum, 3)
-var ScopeName_ORGANIZATION *smithy.Schema
-
-var ScopeName_ACCOUNT_ID *smithy.Schema
-
-var ScopeName_RESOURCE_ARN *smithy.Schema
-
-var _ScopeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ScopeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ServiceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ServiceArns",
-}, smithy.ShapeTypeList, 1)
-var _ServiceArns_member *smithy.Schema
-
-var ServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ServiceConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var ServiceConfiguration_memory *smithy.Schema
-
-var ServiceConfiguration_cpu *smithy.Schema
-
-var ServiceConfiguration_containerConfigurations *smithy.Schema
-
-var ServiceConfiguration_autoScalingConfiguration *smithy.Schema
-
-var ServiceConfiguration_taskDefinitionArn *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 4)
-var Status_ACTIVE *smithy.Schema
-
-var Status_INACTIVE *smithy.Schema
-
-var Status_PENDING *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var _StatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "StatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _StorageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "StorageType",
-}, smithy.ShapeTypeString, 0)
-
-var _Summaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Summaries",
-}, smithy.ShapeTypeList, 1)
-var _Summaries_member *smithy.Schema
-
-var Summary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Summary",
-}, smithy.ShapeTypeStructure, 3)
-var Summary_name *smithy.Schema
-
-var Summary_value *smithy.Schema
-
-var Summary_reasonCodeSummaries *smithy.Schema
-
-var _SummaryValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "SummaryValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskDefinitionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "TaskDefinitionArn",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Timestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Timestamps",
-}, smithy.ShapeTypeList, 1)
-var _Timestamps_member *smithy.Schema
-
-var _UpperBoundValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "UpperBoundValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var UtilizationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "UtilizationMetric",
-}, smithy.ShapeTypeStructure, 3)
-var UtilizationMetric_name *smithy.Schema
-
-var UtilizationMetric_statistic *smithy.Schema
-
-var UtilizationMetric_value *smithy.Schema
-
-var _UtilizationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "UtilizationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _UtilizationMetrics_member *smithy.Schema
-
-var UtilizationPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "UtilizationPreference",
-}, smithy.ShapeTypeStructure, 2)
-var UtilizationPreference_metricName *smithy.Schema
-
-var UtilizationPreference_metricParameters *smithy.Schema
-
-var _UtilizationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "UtilizationPreferences",
-}, smithy.ShapeTypeList, 1)
-var _UtilizationPreferences_member *smithy.Schema
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "Value",
-}, smithy.ShapeTypeDouble, 0)
-
-var _VeryLow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VeryLow",
-}, smithy.ShapeTypeLong, 0)
-
-var _VolumeArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeArn",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeArns",
-}, smithy.ShapeTypeList, 1)
-var _VolumeArns_member *smithy.Schema
-
-var _VolumeBaselineIOPS = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeBaselineIOPS",
-}, smithy.ShapeTypeInteger, 0)
-
-var _VolumeBaselineThroughput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeBaselineThroughput",
-}, smithy.ShapeTypeInteger, 0)
-
-var _VolumeBurstIOPS = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeBurstIOPS",
-}, smithy.ShapeTypeInteger, 0)
-
-var _VolumeBurstThroughput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeBurstThroughput",
-}, smithy.ShapeTypeInteger, 0)
-
-var VolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var VolumeConfiguration_volumeType *smithy.Schema
-
-var VolumeConfiguration_volumeSize *smithy.Schema
-
-var VolumeConfiguration_volumeBaselineIOPS *smithy.Schema
-
-var VolumeConfiguration_volumeBurstIOPS *smithy.Schema
-
-var VolumeConfiguration_volumeBaselineThroughput *smithy.Schema
-
-var VolumeConfiguration_volumeBurstThroughput *smithy.Schema
-
-var VolumeConfiguration_rootVolume *smithy.Schema
-
-var VolumeRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeRecommendation",
-}, smithy.ShapeTypeStructure, 11)
-var VolumeRecommendation_volumeArn *smithy.Schema
-
-var VolumeRecommendation_accountId *smithy.Schema
-
-var VolumeRecommendation_currentConfiguration *smithy.Schema
-
-var VolumeRecommendation_finding *smithy.Schema
-
-var VolumeRecommendation_utilizationMetrics *smithy.Schema
-
-var VolumeRecommendation_lookBackPeriodInDays *smithy.Schema
-
-var VolumeRecommendation_volumeRecommendationOptions *smithy.Schema
-
-var VolumeRecommendation_lastRefreshTimestamp *smithy.Schema
-
-var VolumeRecommendation_currentPerformanceRisk *smithy.Schema
-
-var VolumeRecommendation_effectiveRecommendationPreferences *smithy.Schema
-
-var VolumeRecommendation_tags *smithy.Schema
-
-var VolumeRecommendationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeRecommendationOption",
-}, smithy.ShapeTypeStructure, 5)
-var VolumeRecommendationOption_configuration *smithy.Schema
-
-var VolumeRecommendationOption_performanceRisk *smithy.Schema
-
-var VolumeRecommendationOption_rank *smithy.Schema
-
-var VolumeRecommendationOption_savingsOpportunity *smithy.Schema
-
-var VolumeRecommendationOption_savingsOpportunityAfterDiscounts *smithy.Schema
-
-var _VolumeRecommendationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeRecommendationOptions",
-}, smithy.ShapeTypeList, 1)
-var _VolumeRecommendationOptions_member *smithy.Schema
-
-var _VolumeRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeRecommendations",
-}, smithy.ShapeTypeList, 1)
-var _VolumeRecommendations_member *smithy.Schema
-
-var _VolumeSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _VolumeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "VolumeType",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteRecommendationPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DeleteRecommendationPreferencesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRecommendationPreferencesRequest_resourceType *smithy.Schema
-
-var DeleteRecommendationPreferencesRequest_scope *smithy.Schema
-
-var DeleteRecommendationPreferencesRequest_recommendationPreferenceNames *smithy.Schema
-
-var DeleteRecommendationPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DeleteRecommendationPreferencesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeRecommendationExportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DescribeRecommendationExportJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeRecommendationExportJobsRequest_jobIds *smithy.Schema
-
-var DescribeRecommendationExportJobsRequest_filters *smithy.Schema
-
-var DescribeRecommendationExportJobsRequest_nextToken *smithy.Schema
-
-var DescribeRecommendationExportJobsRequest_maxResults *smithy.Schema
-
-var DescribeRecommendationExportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "DescribeRecommendationExportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRecommendationExportJobsResponse_recommendationExportJobs *smithy.Schema
-
-var DescribeRecommendationExportJobsResponse_nextToken *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportAutoScalingGroupRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ExportAutoScalingGroupRecommendationsRequest_accountIds *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsRequest_filters *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsRequest_fieldsToExport *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsRequest_s3DestinationConfig *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsRequest_fileFormat *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsRequest_includeMemberAccounts *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsRequest_recommendationPreferences *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportAutoScalingGroupRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportAutoScalingGroupRecommendationsResponse_jobId *smithy.Schema
-
-var ExportAutoScalingGroupRecommendationsResponse_s3Destination *smithy.Schema
-
-var ExportEBSVolumeRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportEBSVolumeRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ExportEBSVolumeRecommendationsRequest_accountIds *smithy.Schema
-
-var ExportEBSVolumeRecommendationsRequest_filters *smithy.Schema
-
-var ExportEBSVolumeRecommendationsRequest_fieldsToExport *smithy.Schema
-
-var ExportEBSVolumeRecommendationsRequest_s3DestinationConfig *smithy.Schema
-
-var ExportEBSVolumeRecommendationsRequest_fileFormat *smithy.Schema
-
-var ExportEBSVolumeRecommendationsRequest_includeMemberAccounts *smithy.Schema
-
-var ExportEBSVolumeRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportEBSVolumeRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportEBSVolumeRecommendationsResponse_jobId *smithy.Schema
-
-var ExportEBSVolumeRecommendationsResponse_s3Destination *smithy.Schema
-
-var ExportEC2InstanceRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportEC2InstanceRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ExportEC2InstanceRecommendationsRequest_accountIds *smithy.Schema
-
-var ExportEC2InstanceRecommendationsRequest_filters *smithy.Schema
-
-var ExportEC2InstanceRecommendationsRequest_fieldsToExport *smithy.Schema
-
-var ExportEC2InstanceRecommendationsRequest_s3DestinationConfig *smithy.Schema
-
-var ExportEC2InstanceRecommendationsRequest_fileFormat *smithy.Schema
-
-var ExportEC2InstanceRecommendationsRequest_includeMemberAccounts *smithy.Schema
-
-var ExportEC2InstanceRecommendationsRequest_recommendationPreferences *smithy.Schema
-
-var ExportEC2InstanceRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportEC2InstanceRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportEC2InstanceRecommendationsResponse_jobId *smithy.Schema
-
-var ExportEC2InstanceRecommendationsResponse_s3Destination *smithy.Schema
-
-var ExportECSServiceRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportECSServiceRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ExportECSServiceRecommendationsRequest_accountIds *smithy.Schema
-
-var ExportECSServiceRecommendationsRequest_filters *smithy.Schema
-
-var ExportECSServiceRecommendationsRequest_fieldsToExport *smithy.Schema
-
-var ExportECSServiceRecommendationsRequest_s3DestinationConfig *smithy.Schema
-
-var ExportECSServiceRecommendationsRequest_fileFormat *smithy.Schema
-
-var ExportECSServiceRecommendationsRequest_includeMemberAccounts *smithy.Schema
-
-var ExportECSServiceRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportECSServiceRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportECSServiceRecommendationsResponse_jobId *smithy.Schema
-
-var ExportECSServiceRecommendationsResponse_s3Destination *smithy.Schema
-
-var ExportIdleRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportIdleRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ExportIdleRecommendationsRequest_accountIds *smithy.Schema
-
-var ExportIdleRecommendationsRequest_filters *smithy.Schema
-
-var ExportIdleRecommendationsRequest_fieldsToExport *smithy.Schema
-
-var ExportIdleRecommendationsRequest_s3DestinationConfig *smithy.Schema
-
-var ExportIdleRecommendationsRequest_fileFormat *smithy.Schema
-
-var ExportIdleRecommendationsRequest_includeMemberAccounts *smithy.Schema
-
-var ExportIdleRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportIdleRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportIdleRecommendationsResponse_jobId *smithy.Schema
-
-var ExportIdleRecommendationsResponse_s3Destination *smithy.Schema
-
-var ExportLambdaFunctionRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportLambdaFunctionRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ExportLambdaFunctionRecommendationsRequest_accountIds *smithy.Schema
-
-var ExportLambdaFunctionRecommendationsRequest_filters *smithy.Schema
-
-var ExportLambdaFunctionRecommendationsRequest_fieldsToExport *smithy.Schema
-
-var ExportLambdaFunctionRecommendationsRequest_s3DestinationConfig *smithy.Schema
-
-var ExportLambdaFunctionRecommendationsRequest_fileFormat *smithy.Schema
-
-var ExportLambdaFunctionRecommendationsRequest_includeMemberAccounts *smithy.Schema
-
-var ExportLambdaFunctionRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportLambdaFunctionRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportLambdaFunctionRecommendationsResponse_jobId *smithy.Schema
-
-var ExportLambdaFunctionRecommendationsResponse_s3Destination *smithy.Schema
-
-var ExportLicenseRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportLicenseRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ExportLicenseRecommendationsRequest_accountIds *smithy.Schema
-
-var ExportLicenseRecommendationsRequest_filters *smithy.Schema
-
-var ExportLicenseRecommendationsRequest_fieldsToExport *smithy.Schema
-
-var ExportLicenseRecommendationsRequest_s3DestinationConfig *smithy.Schema
-
-var ExportLicenseRecommendationsRequest_fileFormat *smithy.Schema
-
-var ExportLicenseRecommendationsRequest_includeMemberAccounts *smithy.Schema
-
-var ExportLicenseRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportLicenseRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportLicenseRecommendationsResponse_jobId *smithy.Schema
-
-var ExportLicenseRecommendationsResponse_s3Destination *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportRDSDatabaseRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ExportRDSDatabaseRecommendationsRequest_accountIds *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsRequest_filters *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsRequest_fieldsToExport *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsRequest_s3DestinationConfig *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsRequest_fileFormat *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsRequest_includeMemberAccounts *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsRequest_recommendationPreferences *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "ExportRDSDatabaseRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExportRDSDatabaseRecommendationsResponse_jobId *smithy.Schema
-
-var ExportRDSDatabaseRecommendationsResponse_s3Destination *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetAutoScalingGroupRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetAutoScalingGroupRecommendationsRequest_accountIds *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsRequest_autoScalingGroupArns *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsRequest_nextToken *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsRequest_maxResults *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsRequest_filters *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsRequest_recommendationPreferences *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetAutoScalingGroupRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetAutoScalingGroupRecommendationsResponse_nextToken *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations *smithy.Schema
-
-var GetAutoScalingGroupRecommendationsResponse_errors *smithy.Schema
-
-var GetEBSVolumeRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEBSVolumeRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetEBSVolumeRecommendationsRequest_volumeArns *smithy.Schema
-
-var GetEBSVolumeRecommendationsRequest_nextToken *smithy.Schema
-
-var GetEBSVolumeRecommendationsRequest_maxResults *smithy.Schema
-
-var GetEBSVolumeRecommendationsRequest_filters *smithy.Schema
-
-var GetEBSVolumeRecommendationsRequest_accountIds *smithy.Schema
-
-var GetEBSVolumeRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEBSVolumeRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetEBSVolumeRecommendationsResponse_nextToken *smithy.Schema
-
-var GetEBSVolumeRecommendationsResponse_volumeRecommendations *smithy.Schema
-
-var GetEBSVolumeRecommendationsResponse_errors *smithy.Schema
-
-var GetEC2InstanceRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEC2InstanceRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetEC2InstanceRecommendationsRequest_instanceArns *smithy.Schema
-
-var GetEC2InstanceRecommendationsRequest_nextToken *smithy.Schema
-
-var GetEC2InstanceRecommendationsRequest_maxResults *smithy.Schema
-
-var GetEC2InstanceRecommendationsRequest_filters *smithy.Schema
-
-var GetEC2InstanceRecommendationsRequest_accountIds *smithy.Schema
-
-var GetEC2InstanceRecommendationsRequest_recommendationPreferences *smithy.Schema
-
-var GetEC2InstanceRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEC2InstanceRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetEC2InstanceRecommendationsResponse_nextToken *smithy.Schema
-
-var GetEC2InstanceRecommendationsResponse_instanceRecommendations *smithy.Schema
-
-var GetEC2InstanceRecommendationsResponse_errors *smithy.Schema
-
-var GetEC2RecommendationProjectedMetricsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEC2RecommendationProjectedMetricsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetEC2RecommendationProjectedMetricsRequest_instanceArn *smithy.Schema
-
-var GetEC2RecommendationProjectedMetricsRequest_stat *smithy.Schema
-
-var GetEC2RecommendationProjectedMetricsRequest_period *smithy.Schema
-
-var GetEC2RecommendationProjectedMetricsRequest_startTime *smithy.Schema
-
-var GetEC2RecommendationProjectedMetricsRequest_endTime *smithy.Schema
-
-var GetEC2RecommendationProjectedMetricsRequest_recommendationPreferences *smithy.Schema
-
-var GetEC2RecommendationProjectedMetricsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEC2RecommendationProjectedMetricsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetEC2RecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics *smithy.Schema
-
-var GetECSServiceRecommendationProjectedMetricsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetECSServiceRecommendationProjectedMetricsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetECSServiceRecommendationProjectedMetricsRequest_serviceArn *smithy.Schema
-
-var GetECSServiceRecommendationProjectedMetricsRequest_stat *smithy.Schema
-
-var GetECSServiceRecommendationProjectedMetricsRequest_period *smithy.Schema
-
-var GetECSServiceRecommendationProjectedMetricsRequest_startTime *smithy.Schema
-
-var GetECSServiceRecommendationProjectedMetricsRequest_endTime *smithy.Schema
-
-var GetECSServiceRecommendationProjectedMetricsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetECSServiceRecommendationProjectedMetricsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetECSServiceRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics *smithy.Schema
-
-var GetECSServiceRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetECSServiceRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetECSServiceRecommendationsRequest_serviceArns *smithy.Schema
-
-var GetECSServiceRecommendationsRequest_nextToken *smithy.Schema
-
-var GetECSServiceRecommendationsRequest_maxResults *smithy.Schema
-
-var GetECSServiceRecommendationsRequest_filters *smithy.Schema
-
-var GetECSServiceRecommendationsRequest_accountIds *smithy.Schema
-
-var GetECSServiceRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetECSServiceRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetECSServiceRecommendationsResponse_nextToken *smithy.Schema
-
-var GetECSServiceRecommendationsResponse_ecsServiceRecommendations *smithy.Schema
-
-var GetECSServiceRecommendationsResponse_errors *smithy.Schema
-
-var GetEffectiveRecommendationPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEffectiveRecommendationPreferencesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetEffectiveRecommendationPreferencesRequest_resourceArn *smithy.Schema
-
-var GetEffectiveRecommendationPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEffectiveRecommendationPreferencesResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics *smithy.Schema
-
-var GetEffectiveRecommendationPreferencesResponse_externalMetricsPreference *smithy.Schema
-
-var GetEffectiveRecommendationPreferencesResponse_lookBackPeriod *smithy.Schema
-
-var GetEffectiveRecommendationPreferencesResponse_utilizationPreferences *smithy.Schema
-
-var GetEffectiveRecommendationPreferencesResponse_preferredResources *smithy.Schema
-
-var GetEnrollmentStatusesForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEnrollmentStatusesForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetEnrollmentStatusesForOrganizationRequest_filters *smithy.Schema
-
-var GetEnrollmentStatusesForOrganizationRequest_nextToken *smithy.Schema
-
-var GetEnrollmentStatusesForOrganizationRequest_maxResults *smithy.Schema
-
-var GetEnrollmentStatusesForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEnrollmentStatusesForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetEnrollmentStatusesForOrganizationResponse_accountEnrollmentStatuses *smithy.Schema
-
-var GetEnrollmentStatusesForOrganizationResponse_nextToken *smithy.Schema
-
-var GetEnrollmentStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEnrollmentStatusRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetEnrollmentStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetEnrollmentStatusResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetEnrollmentStatusResponse_status *smithy.Schema
-
-var GetEnrollmentStatusResponse_statusReason *smithy.Schema
-
-var GetEnrollmentStatusResponse_memberAccountsEnrolled *smithy.Schema
-
-var GetEnrollmentStatusResponse_lastUpdatedTimestamp *smithy.Schema
-
-var GetEnrollmentStatusResponse_numberOfMemberAccountsOptedIn *smithy.Schema
-
-var GetIdleRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetIdleRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetIdleRecommendationsRequest_resourceArns *smithy.Schema
-
-var GetIdleRecommendationsRequest_nextToken *smithy.Schema
-
-var GetIdleRecommendationsRequest_maxResults *smithy.Schema
-
-var GetIdleRecommendationsRequest_filters *smithy.Schema
-
-var GetIdleRecommendationsRequest_accountIds *smithy.Schema
-
-var GetIdleRecommendationsRequest_orderBy *smithy.Schema
-
-var GetIdleRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetIdleRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetIdleRecommendationsResponse_nextToken *smithy.Schema
-
-var GetIdleRecommendationsResponse_idleRecommendations *smithy.Schema
-
-var GetIdleRecommendationsResponse_errors *smithy.Schema
-
-var GetLambdaFunctionRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetLambdaFunctionRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetLambdaFunctionRecommendationsRequest_functionArns *smithy.Schema
-
-var GetLambdaFunctionRecommendationsRequest_accountIds *smithy.Schema
-
-var GetLambdaFunctionRecommendationsRequest_filters *smithy.Schema
-
-var GetLambdaFunctionRecommendationsRequest_nextToken *smithy.Schema
-
-var GetLambdaFunctionRecommendationsRequest_maxResults *smithy.Schema
-
-var GetLambdaFunctionRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetLambdaFunctionRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetLambdaFunctionRecommendationsResponse_nextToken *smithy.Schema
-
-var GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations *smithy.Schema
-
-var GetLicenseRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetLicenseRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetLicenseRecommendationsRequest_resourceArns *smithy.Schema
-
-var GetLicenseRecommendationsRequest_nextToken *smithy.Schema
-
-var GetLicenseRecommendationsRequest_maxResults *smithy.Schema
-
-var GetLicenseRecommendationsRequest_filters *smithy.Schema
-
-var GetLicenseRecommendationsRequest_accountIds *smithy.Schema
-
-var GetLicenseRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetLicenseRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetLicenseRecommendationsResponse_nextToken *smithy.Schema
-
-var GetLicenseRecommendationsResponse_licenseRecommendations *smithy.Schema
-
-var GetLicenseRecommendationsResponse_errors *smithy.Schema
-
-var GetRDSDatabaseRecommendationProjectedMetricsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRDSDatabaseRecommendationProjectedMetricsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetRDSDatabaseRecommendationProjectedMetricsRequest_resourceArn *smithy.Schema
-
-var GetRDSDatabaseRecommendationProjectedMetricsRequest_stat *smithy.Schema
-
-var GetRDSDatabaseRecommendationProjectedMetricsRequest_period *smithy.Schema
-
-var GetRDSDatabaseRecommendationProjectedMetricsRequest_startTime *smithy.Schema
-
-var GetRDSDatabaseRecommendationProjectedMetricsRequest_endTime *smithy.Schema
-
-var GetRDSDatabaseRecommendationProjectedMetricsRequest_recommendationPreferences *smithy.Schema
-
-var GetRDSDatabaseRecommendationProjectedMetricsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRDSDatabaseRecommendationProjectedMetricsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics *smithy.Schema
-
-var GetRDSDatabaseRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRDSDatabaseRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetRDSDatabaseRecommendationsRequest_resourceArns *smithy.Schema
-
-var GetRDSDatabaseRecommendationsRequest_nextToken *smithy.Schema
-
-var GetRDSDatabaseRecommendationsRequest_maxResults *smithy.Schema
-
-var GetRDSDatabaseRecommendationsRequest_filters *smithy.Schema
-
-var GetRDSDatabaseRecommendationsRequest_accountIds *smithy.Schema
-
-var GetRDSDatabaseRecommendationsRequest_recommendationPreferences *smithy.Schema
-
-var GetRDSDatabaseRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRDSDatabaseRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetRDSDatabaseRecommendationsResponse_nextToken *smithy.Schema
-
-var GetRDSDatabaseRecommendationsResponse_rdsDBRecommendations *smithy.Schema
-
-var GetRDSDatabaseRecommendationsResponse_errors *smithy.Schema
-
-var GetRecommendationPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRecommendationPreferencesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetRecommendationPreferencesRequest_resourceType *smithy.Schema
-
-var GetRecommendationPreferencesRequest_scope *smithy.Schema
-
-var GetRecommendationPreferencesRequest_nextToken *smithy.Schema
-
-var GetRecommendationPreferencesRequest_maxResults *smithy.Schema
-
-var GetRecommendationPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRecommendationPreferencesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRecommendationPreferencesResponse_nextToken *smithy.Schema
-
-var GetRecommendationPreferencesResponse_recommendationPreferencesDetails *smithy.Schema
-
-var GetRecommendationSummariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRecommendationSummariesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetRecommendationSummariesRequest_accountIds *smithy.Schema
-
-var GetRecommendationSummariesRequest_nextToken *smithy.Schema
-
-var GetRecommendationSummariesRequest_maxResults *smithy.Schema
-
-var GetRecommendationSummariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "GetRecommendationSummariesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRecommendationSummariesResponse_nextToken *smithy.Schema
-
-var GetRecommendationSummariesResponse_recommendationSummaries *smithy.Schema
-
-var PutRecommendationPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PutRecommendationPreferencesRequest",
-}, smithy.ShapeTypeStructure, 9)
-var PutRecommendationPreferencesRequest_resourceType *smithy.Schema
-
-var PutRecommendationPreferencesRequest_scope *smithy.Schema
-
-var PutRecommendationPreferencesRequest_enhancedInfrastructureMetrics *smithy.Schema
-
-var PutRecommendationPreferencesRequest_inferredWorkloadTypes *smithy.Schema
-
-var PutRecommendationPreferencesRequest_externalMetricsPreference *smithy.Schema
-
-var PutRecommendationPreferencesRequest_lookBackPeriod *smithy.Schema
-
-var PutRecommendationPreferencesRequest_utilizationPreferences *smithy.Schema
-
-var PutRecommendationPreferencesRequest_preferredResources *smithy.Schema
-
-var PutRecommendationPreferencesRequest_savingsEstimationMode *smithy.Schema
-
-var PutRecommendationPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "PutRecommendationPreferencesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateEnrollmentStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "UpdateEnrollmentStatusRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateEnrollmentStatusRequest_status *smithy.Schema
-
-var UpdateEnrollmentStatusRequest_includeMemberAccounts *smithy.Schema
-
-var UpdateEnrollmentStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizer",
-	Name:      "UpdateEnrollmentStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateEnrollmentStatusResponse_status *smithy.Schema
-
-var UpdateEnrollmentStatusResponse_statusReason *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	Status_ACTIVE = Status.AddMember("ACTIVE", smithyprelude.Unit)
-
-	Status_INACTIVE = Status.AddMember("INACTIVE", smithyprelude.Unit)
-
-	Status_PENDING = Status.AddMember("PENDING", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	AccountEnrollmentStatus_accountId = AccountEnrollmentStatus.AddMember("accountId", _AccountId)
-
-	AccountEnrollmentStatus_status = AccountEnrollmentStatus.AddMember("status", Status)
-
-	AccountEnrollmentStatus_statusReason = AccountEnrollmentStatus.AddMember("statusReason", _StatusReason)
-
-	AccountEnrollmentStatus_lastUpdatedTimestamp = AccountEnrollmentStatus.AddMember("lastUpdatedTimestamp", _LastUpdatedTimestamp)
-
-	_AccountEnrollmentStatuses_member = _AccountEnrollmentStatuses.AddMember("member", AccountEnrollmentStatus)
-
-	_AccountIds_member = _AccountIds.AddMember("member", _AccountId)
-
-	AllocationStrategy_PRIORITIZED = AllocationStrategy.AddMember("PRIORITIZED", smithyprelude.Unit)
-
-	AllocationStrategy_LOWEST_PRICE = AllocationStrategy.AddMember("LOWEST_PRICE", smithyprelude.Unit)
-
-	AsgType_SINGLE_INSTANCE_TYPE = AsgType.AddMember("SINGLE_INSTANCE_TYPE", smithyprelude.Unit)
-
-	AsgType_MIXED_INSTANCE_TYPE = AsgType.AddMember("MIXED_INSTANCE_TYPE", smithyprelude.Unit)
-
-	AutoScalingConfiguration_TARGET_TRACKING_SCALING_CPU = AutoScalingConfiguration.AddMember("TARGET_TRACKING_SCALING_CPU", smithyprelude.Unit)
-
-	AutoScalingConfiguration_TARGET_TRACKING_SCALING_MEMORY = AutoScalingConfiguration.AddMember("TARGET_TRACKING_SCALING_MEMORY", smithyprelude.Unit)
-
-	_AutoScalingGroupArns_member = _AutoScalingGroupArns.AddMember("member", _AutoScalingGroupArn)
-
-	_MixedInstanceTypes_member = _MixedInstanceTypes.AddMember("member", _MixedInstanceType)
-
-	AutoScalingGroupConfiguration_desiredCapacity = AutoScalingGroupConfiguration.AddMember("desiredCapacity", _DesiredCapacity)
-
-	AutoScalingGroupConfiguration_minSize = AutoScalingGroupConfiguration.AddMember("minSize", _MinSize)
-
-	AutoScalingGroupConfiguration_maxSize = AutoScalingGroupConfiguration.AddMember("maxSize", _MaxSize)
-
-	AutoScalingGroupConfiguration_instanceType = AutoScalingGroupConfiguration.AddMember("instanceType", _NullableInstanceType)
-
-	AutoScalingGroupConfiguration_allocationStrategy = AutoScalingGroupConfiguration.AddMember("allocationStrategy", AllocationStrategy)
-
-	AutoScalingGroupConfiguration_estimatedInstanceHourReductionPercentage = AutoScalingGroupConfiguration.AddMember("estimatedInstanceHourReductionPercentage", _NullableEstimatedInstanceHourReductionPercentage)
-
-	AutoScalingGroupConfiguration_type = AutoScalingGroupConfiguration.AddMember("type", AsgType)
-
-	AutoScalingGroupConfiguration_mixedInstanceTypes = AutoScalingGroupConfiguration.AddMember("mixedInstanceTypes", _MixedInstanceTypes)
-
-	Currency_USD = Currency.AddMember("USD", smithyprelude.Unit)
-
-	Currency_CNY = Currency.AddMember("CNY", smithyprelude.Unit)
-
-	AutoScalingGroupEstimatedMonthlySavings_currency = AutoScalingGroupEstimatedMonthlySavings.AddMember("currency", Currency)
-
-	AutoScalingGroupEstimatedMonthlySavings_value = AutoScalingGroupEstimatedMonthlySavings.AddMember("value", _Value)
-
-	Finding_UNDER_PROVISIONED = Finding.AddMember("UNDER_PROVISIONED", smithyprelude.Unit)
-
-	Finding_OVER_PROVISIONED = Finding.AddMember("OVER_PROVISIONED", smithyprelude.Unit)
-
-	Finding_OPTIMIZED = Finding.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	Finding_NOT_OPTIMIZED = Finding.AddMember("NOT_OPTIMIZED", smithyprelude.Unit)
-
-	MetricName_CPU = MetricName.AddMember("CPU", smithyprelude.Unit)
-
-	MetricName_MEMORY = MetricName.AddMember("MEMORY", smithyprelude.Unit)
-
-	MetricName_EBS_READ_OPS_PER_SECOND = MetricName.AddMember("EBS_READ_OPS_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_EBS_WRITE_OPS_PER_SECOND = MetricName.AddMember("EBS_WRITE_OPS_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_EBS_READ_BYTES_PER_SECOND = MetricName.AddMember("EBS_READ_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_EBS_WRITE_BYTES_PER_SECOND = MetricName.AddMember("EBS_WRITE_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_DISK_READ_OPS_PER_SECOND = MetricName.AddMember("DISK_READ_OPS_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_DISK_WRITE_OPS_PER_SECOND = MetricName.AddMember("DISK_WRITE_OPS_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_DISK_READ_BYTES_PER_SECOND = MetricName.AddMember("DISK_READ_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_DISK_WRITE_BYTES_PER_SECOND = MetricName.AddMember("DISK_WRITE_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_NETWORK_IN_BYTES_PER_SECOND = MetricName.AddMember("NETWORK_IN_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_NETWORK_OUT_BYTES_PER_SECOND = MetricName.AddMember("NETWORK_OUT_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_NETWORK_PACKETS_IN_PER_SECOND = MetricName.AddMember("NETWORK_PACKETS_IN_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_NETWORK_PACKETS_OUT_PER_SECOND = MetricName.AddMember("NETWORK_PACKETS_OUT_PER_SECOND", smithyprelude.Unit)
-
-	MetricName_GPU_PERCENTAGE = MetricName.AddMember("GPU_PERCENTAGE", smithyprelude.Unit)
-
-	MetricName_GPU_MEMORY_PERCENTAGE = MetricName.AddMember("GPU_MEMORY_PERCENTAGE", smithyprelude.Unit)
-
-	MetricStatistic_MAXIMUM = MetricStatistic.AddMember("MAXIMUM", smithyprelude.Unit)
-
-	MetricStatistic_AVERAGE = MetricStatistic.AddMember("AVERAGE", smithyprelude.Unit)
-
-	UtilizationMetric_name = UtilizationMetric.AddMember("name", MetricName)
-
-	UtilizationMetric_statistic = UtilizationMetric.AddMember("statistic", MetricStatistic)
-
-	UtilizationMetric_value = UtilizationMetric.AddMember("value", _MetricValue)
-
-	_UtilizationMetrics_member = _UtilizationMetrics.AddMember("member", UtilizationMetric)
-
-	Gpu_gpuCount = Gpu.AddMember("gpuCount", _GpuCount)
-
-	Gpu_gpuMemorySizeInMiB = Gpu.AddMember("gpuMemorySizeInMiB", _GpuMemorySizeInMiB)
-
-	_Gpus_member = _Gpus.AddMember("member", Gpu)
-
-	GpuInfo_gpus = GpuInfo.AddMember("gpus", _Gpus)
-
-	_ProjectedUtilizationMetrics_member = _ProjectedUtilizationMetrics.AddMember("member", UtilizationMetric)
-
-	EstimatedMonthlySavings_currency = EstimatedMonthlySavings.AddMember("currency", Currency)
-
-	EstimatedMonthlySavings_value = EstimatedMonthlySavings.AddMember("value", _Value)
-
-	SavingsOpportunity_savingsOpportunityPercentage = SavingsOpportunity.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	SavingsOpportunity_estimatedMonthlySavings = SavingsOpportunity.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	AutoScalingGroupSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = AutoScalingGroupSavingsOpportunityAfterDiscounts.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	AutoScalingGroupSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = AutoScalingGroupSavingsOpportunityAfterDiscounts.AddMember("estimatedMonthlySavings", AutoScalingGroupEstimatedMonthlySavings)
-
-	MigrationEffort_VERY_LOW = MigrationEffort.AddMember("VERY_LOW", smithyprelude.Unit)
-
-	MigrationEffort_LOW = MigrationEffort.AddMember("LOW", smithyprelude.Unit)
-
-	MigrationEffort_MEDIUM = MigrationEffort.AddMember("MEDIUM", smithyprelude.Unit)
-
-	MigrationEffort_HIGH = MigrationEffort.AddMember("HIGH", smithyprelude.Unit)
-
-	AutoScalingGroupRecommendationOption_configuration = AutoScalingGroupRecommendationOption.AddMember("configuration", AutoScalingGroupConfiguration)
-
-	AutoScalingGroupRecommendationOption_instanceGpuInfo = AutoScalingGroupRecommendationOption.AddMember("instanceGpuInfo", GpuInfo)
-
-	AutoScalingGroupRecommendationOption_projectedUtilizationMetrics = AutoScalingGroupRecommendationOption.AddMember("projectedUtilizationMetrics", _ProjectedUtilizationMetrics)
-
-	AutoScalingGroupRecommendationOption_performanceRisk = AutoScalingGroupRecommendationOption.AddMember("performanceRisk", _PerformanceRisk)
-
-	AutoScalingGroupRecommendationOption_rank = AutoScalingGroupRecommendationOption.AddMember("rank", _Rank)
-
-	AutoScalingGroupRecommendationOption_savingsOpportunity = AutoScalingGroupRecommendationOption.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	AutoScalingGroupRecommendationOption_savingsOpportunityAfterDiscounts = AutoScalingGroupRecommendationOption.AddMember("savingsOpportunityAfterDiscounts", AutoScalingGroupSavingsOpportunityAfterDiscounts)
-
-	AutoScalingGroupRecommendationOption_migrationEffort = AutoScalingGroupRecommendationOption.AddMember("migrationEffort", MigrationEffort)
-
-	_AutoScalingGroupRecommendationOptions_member = _AutoScalingGroupRecommendationOptions.AddMember("member", AutoScalingGroupRecommendationOption)
-
-	CurrentPerformanceRisk_VERY_LOW = CurrentPerformanceRisk.AddMember("VERY_LOW", smithyprelude.Unit)
-
-	CurrentPerformanceRisk_LOW = CurrentPerformanceRisk.AddMember("LOW", smithyprelude.Unit)
-
-	CurrentPerformanceRisk_MEDIUM = CurrentPerformanceRisk.AddMember("MEDIUM", smithyprelude.Unit)
-
-	CurrentPerformanceRisk_HIGH = CurrentPerformanceRisk.AddMember("HIGH", smithyprelude.Unit)
-
-	CpuVendorArchitecture_AWS_ARM64 = CpuVendorArchitecture.AddMember("AWS_ARM64", smithyprelude.Unit)
-
-	CpuVendorArchitecture_CURRENT = CpuVendorArchitecture.AddMember("CURRENT", smithyprelude.Unit)
-
-	_CpuVendorArchitectures_member = _CpuVendorArchitectures.AddMember("member", CpuVendorArchitecture)
-
-	EnhancedInfrastructureMetrics_ACTIVE = EnhancedInfrastructureMetrics.AddMember("ACTIVE", smithyprelude.Unit)
-
-	EnhancedInfrastructureMetrics_INACTIVE = EnhancedInfrastructureMetrics.AddMember("INACTIVE", smithyprelude.Unit)
-
-	InferredWorkloadTypesPreference_ACTIVE = InferredWorkloadTypesPreference.AddMember("ACTIVE", smithyprelude.Unit)
-
-	InferredWorkloadTypesPreference_INACTIVE = InferredWorkloadTypesPreference.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ExternalMetricsSource_DATADOG = ExternalMetricsSource.AddMember("DATADOG", smithyprelude.Unit)
-
-	ExternalMetricsSource_DYNATRACE = ExternalMetricsSource.AddMember("DYNATRACE", smithyprelude.Unit)
-
-	ExternalMetricsSource_NEWRELIC = ExternalMetricsSource.AddMember("NEWRELIC", smithyprelude.Unit)
-
-	ExternalMetricsSource_INSTANA = ExternalMetricsSource.AddMember("INSTANA", smithyprelude.Unit)
-
-	ExternalMetricsPreference_source = ExternalMetricsPreference.AddMember("source", ExternalMetricsSource)
-
-	LookBackPeriodPreference_DAYS_14 = LookBackPeriodPreference.AddMember("DAYS_14", smithyprelude.Unit)
-
-	LookBackPeriodPreference_DAYS_32 = LookBackPeriodPreference.AddMember("DAYS_32", smithyprelude.Unit)
-
-	LookBackPeriodPreference_DAYS_93 = LookBackPeriodPreference.AddMember("DAYS_93", smithyprelude.Unit)
-
-	CustomizableMetricName_CPU_UTILIZATION = CustomizableMetricName.AddMember("CPU_UTILIZATION", smithyprelude.Unit)
-
-	CustomizableMetricName_MEMORY_UTILIZATION = CustomizableMetricName.AddMember("MEMORY_UTILIZATION", smithyprelude.Unit)
-
-	CustomizableMetricThreshold_P90 = CustomizableMetricThreshold.AddMember("P90", smithyprelude.Unit)
-
-	CustomizableMetricThreshold_P95 = CustomizableMetricThreshold.AddMember("P95", smithyprelude.Unit)
-
-	CustomizableMetricThreshold_P99_5 = CustomizableMetricThreshold.AddMember("P99_5", smithyprelude.Unit)
-
-	CustomizableMetricHeadroom_PERCENT_30 = CustomizableMetricHeadroom.AddMember("PERCENT_30", smithyprelude.Unit)
-
-	CustomizableMetricHeadroom_PERCENT_20 = CustomizableMetricHeadroom.AddMember("PERCENT_20", smithyprelude.Unit)
-
-	CustomizableMetricHeadroom_PERCENT_10 = CustomizableMetricHeadroom.AddMember("PERCENT_10", smithyprelude.Unit)
-
-	CustomizableMetricHeadroom_PERCENT_0 = CustomizableMetricHeadroom.AddMember("PERCENT_0", smithyprelude.Unit)
-
-	CustomizableMetricParameters_threshold = CustomizableMetricParameters.AddMember("threshold", CustomizableMetricThreshold)
-
-	CustomizableMetricParameters_headroom = CustomizableMetricParameters.AddMember("headroom", CustomizableMetricHeadroom)
-
-	UtilizationPreference_metricName = UtilizationPreference.AddMember("metricName", CustomizableMetricName)
-
-	UtilizationPreference_metricParameters = UtilizationPreference.AddMember("metricParameters", CustomizableMetricParameters)
-
-	_UtilizationPreferences_member = _UtilizationPreferences.AddMember("member", UtilizationPreference)
-
-	PreferredResourceName_EC2_INSTANCE_TYPES = PreferredResourceName.AddMember("EC2_INSTANCE_TYPES", smithyprelude.Unit)
-
-	_PreferredResourceValues_member = _PreferredResourceValues.AddMember("member", _PreferredResourceValue)
-
-	EffectivePreferredResource_name = EffectivePreferredResource.AddMember("name", PreferredResourceName)
-
-	EffectivePreferredResource_includeList = EffectivePreferredResource.AddMember("includeList", _PreferredResourceValues)
-
-	EffectivePreferredResource_effectiveIncludeList = EffectivePreferredResource.AddMember("effectiveIncludeList", _PreferredResourceValues)
-
-	EffectivePreferredResource_excludeList = EffectivePreferredResource.AddMember("excludeList", _PreferredResourceValues)
-
-	_EffectivePreferredResources_member = _EffectivePreferredResources.AddMember("member", EffectivePreferredResource)
-
-	InstanceSavingsEstimationModeSource_PUBLIC_PRICING = InstanceSavingsEstimationModeSource.AddMember("PUBLIC_PRICING", smithyprelude.Unit)
-
-	InstanceSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = InstanceSavingsEstimationModeSource.AddMember("COST_EXPLORER_RIGHTSIZING", smithyprelude.Unit)
-
-	InstanceSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = InstanceSavingsEstimationModeSource.AddMember("COST_OPTIMIZATION_HUB", smithyprelude.Unit)
-
-	InstanceSavingsEstimationMode_source = InstanceSavingsEstimationMode.AddMember("source", InstanceSavingsEstimationModeSource)
-
-	EffectiveRecommendationPreferences_cpuVendorArchitectures = EffectiveRecommendationPreferences.AddMember("cpuVendorArchitectures", _CpuVendorArchitectures)
-
-	EffectiveRecommendationPreferences_enhancedInfrastructureMetrics = EffectiveRecommendationPreferences.AddMember("enhancedInfrastructureMetrics", EnhancedInfrastructureMetrics)
-
-	EffectiveRecommendationPreferences_inferredWorkloadTypes = EffectiveRecommendationPreferences.AddMember("inferredWorkloadTypes", InferredWorkloadTypesPreference)
-
-	EffectiveRecommendationPreferences_externalMetricsPreference = EffectiveRecommendationPreferences.AddMember("externalMetricsPreference", ExternalMetricsPreference)
-
-	EffectiveRecommendationPreferences_lookBackPeriod = EffectiveRecommendationPreferences.AddMember("lookBackPeriod", LookBackPeriodPreference)
-
-	EffectiveRecommendationPreferences_utilizationPreferences = EffectiveRecommendationPreferences.AddMember("utilizationPreferences", _UtilizationPreferences)
-
-	EffectiveRecommendationPreferences_preferredResources = EffectiveRecommendationPreferences.AddMember("preferredResources", _EffectivePreferredResources)
-
-	EffectiveRecommendationPreferences_savingsEstimationMode = EffectiveRecommendationPreferences.AddMember("savingsEstimationMode", InstanceSavingsEstimationMode)
-
-	InferredWorkloadType_AMAZON_EMR = InferredWorkloadType.AddMember("AMAZON_EMR", smithyprelude.Unit)
-
-	InferredWorkloadType_APACHE_CASSANDRA = InferredWorkloadType.AddMember("APACHE_CASSANDRA", smithyprelude.Unit)
-
-	InferredWorkloadType_APACHE_HADOOP = InferredWorkloadType.AddMember("APACHE_HADOOP", smithyprelude.Unit)
-
-	InferredWorkloadType_MEMCACHED = InferredWorkloadType.AddMember("MEMCACHED", smithyprelude.Unit)
-
-	InferredWorkloadType_NGINX = InferredWorkloadType.AddMember("NGINX", smithyprelude.Unit)
-
-	InferredWorkloadType_POSTGRE_SQL = InferredWorkloadType.AddMember("POSTGRE_SQL", smithyprelude.Unit)
-
-	InferredWorkloadType_REDIS = InferredWorkloadType.AddMember("REDIS", smithyprelude.Unit)
-
-	InferredWorkloadType_KAFKA = InferredWorkloadType.AddMember("KAFKA", smithyprelude.Unit)
-
-	InferredWorkloadType_SQLSERVER = InferredWorkloadType.AddMember("SQLSERVER", smithyprelude.Unit)
-
-	_InferredWorkloadTypes_member = _InferredWorkloadTypes.AddMember("member", InferredWorkloadType)
-
-	AutoScalingGroupRecommendation_accountId = AutoScalingGroupRecommendation.AddMember("accountId", _AccountId)
-
-	AutoScalingGroupRecommendation_autoScalingGroupArn = AutoScalingGroupRecommendation.AddMember("autoScalingGroupArn", _AutoScalingGroupArn)
-
-	AutoScalingGroupRecommendation_autoScalingGroupName = AutoScalingGroupRecommendation.AddMember("autoScalingGroupName", _AutoScalingGroupName)
-
-	AutoScalingGroupRecommendation_finding = AutoScalingGroupRecommendation.AddMember("finding", Finding)
-
-	AutoScalingGroupRecommendation_utilizationMetrics = AutoScalingGroupRecommendation.AddMember("utilizationMetrics", _UtilizationMetrics)
-
-	AutoScalingGroupRecommendation_lookBackPeriodInDays = AutoScalingGroupRecommendation.AddMember("lookBackPeriodInDays", _LookBackPeriodInDays)
-
-	AutoScalingGroupRecommendation_currentConfiguration = AutoScalingGroupRecommendation.AddMember("currentConfiguration", AutoScalingGroupConfiguration)
-
-	AutoScalingGroupRecommendation_currentInstanceGpuInfo = AutoScalingGroupRecommendation.AddMember("currentInstanceGpuInfo", GpuInfo)
-
-	AutoScalingGroupRecommendation_recommendationOptions = AutoScalingGroupRecommendation.AddMember("recommendationOptions", _AutoScalingGroupRecommendationOptions)
-
-	AutoScalingGroupRecommendation_lastRefreshTimestamp = AutoScalingGroupRecommendation.AddMember("lastRefreshTimestamp", _LastRefreshTimestamp)
-
-	AutoScalingGroupRecommendation_currentPerformanceRisk = AutoScalingGroupRecommendation.AddMember("currentPerformanceRisk", CurrentPerformanceRisk)
-
-	AutoScalingGroupRecommendation_effectiveRecommendationPreferences = AutoScalingGroupRecommendation.AddMember("effectiveRecommendationPreferences", EffectiveRecommendationPreferences)
-
-	AutoScalingGroupRecommendation_inferredWorkloadTypes = AutoScalingGroupRecommendation.AddMember("inferredWorkloadTypes", _InferredWorkloadTypes)
-
-	_AutoScalingGroupRecommendations_member = _AutoScalingGroupRecommendations.AddMember("member", AutoScalingGroupRecommendation)
-
-	MemorySizeConfiguration_memory = MemorySizeConfiguration.AddMember("memory", _NullableMemory)
-
-	MemorySizeConfiguration_memoryReservation = MemorySizeConfiguration.AddMember("memoryReservation", _NullableMemoryReservation)
-
-	ContainerConfiguration_containerName = ContainerConfiguration.AddMember("containerName", _ContainerName)
-
-	ContainerConfiguration_memorySizeConfiguration = ContainerConfiguration.AddMember("memorySizeConfiguration", MemorySizeConfiguration)
-
-	ContainerConfiguration_cpu = ContainerConfiguration.AddMember("cpu", _NullableCpu)
-
-	_ContainerConfigurations_member = _ContainerConfigurations.AddMember("member", ContainerConfiguration)
-
-	ContainerRecommendation_containerName = ContainerRecommendation.AddMember("containerName", _ContainerName)
-
-	ContainerRecommendation_memorySizeConfiguration = ContainerRecommendation.AddMember("memorySizeConfiguration", MemorySizeConfiguration)
-
-	ContainerRecommendation_cpu = ContainerRecommendation.AddMember("cpu", _NullableCpu)
-
-	_ContainerRecommendations_member = _ContainerRecommendations.AddMember("member", ContainerRecommendation)
-
-	CurrentPerformanceRiskRatings_high = CurrentPerformanceRiskRatings.AddMember("high", _High)
-
-	CurrentPerformanceRiskRatings_medium = CurrentPerformanceRiskRatings.AddMember("medium", _Medium)
-
-	CurrentPerformanceRiskRatings_low = CurrentPerformanceRiskRatings.AddMember("low", _Low)
-
-	CurrentPerformanceRiskRatings_veryLow = CurrentPerformanceRiskRatings.AddMember("veryLow", _VeryLow)
-
-	DBStorageConfiguration_storageType = DBStorageConfiguration.AddMember("storageType", _StorageType)
-
-	DBStorageConfiguration_allocatedStorage = DBStorageConfiguration.AddMember("allocatedStorage", _AllocatedStorage)
-
-	DBStorageConfiguration_iops = DBStorageConfiguration.AddMember("iops", _NullableIOPS)
-
-	DBStorageConfiguration_maxAllocatedStorage = DBStorageConfiguration.AddMember("maxAllocatedStorage", _NullableMaxAllocatedStorage)
-
-	DBStorageConfiguration_storageThroughput = DBStorageConfiguration.AddMember("storageThroughput", _NullableStorageThroughput)
-
-	Dimension_SAVINGS_VALUE = Dimension.AddMember("SAVINGS_VALUE", smithyprelude.Unit)
-
-	Dimension_SAVINGS_VALUE_AFTER_DISCOUNT = Dimension.AddMember("SAVINGS_VALUE_AFTER_DISCOUNT", smithyprelude.Unit)
-
-	EBSSavingsEstimationModeSource_PUBLIC_PRICING = EBSSavingsEstimationModeSource.AddMember("PUBLIC_PRICING", smithyprelude.Unit)
-
-	EBSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = EBSSavingsEstimationModeSource.AddMember("COST_EXPLORER_RIGHTSIZING", smithyprelude.Unit)
-
-	EBSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = EBSSavingsEstimationModeSource.AddMember("COST_OPTIMIZATION_HUB", smithyprelude.Unit)
-
-	EBSSavingsEstimationMode_source = EBSSavingsEstimationMode.AddMember("source", EBSSavingsEstimationModeSource)
-
-	EBSEffectiveRecommendationPreferences_savingsEstimationMode = EBSEffectiveRecommendationPreferences.AddMember("savingsEstimationMode", EBSSavingsEstimationMode)
-
-	EBSEffectiveRecommendationPreferences_lookBackPeriod = EBSEffectiveRecommendationPreferences.AddMember("lookBackPeriod", LookBackPeriodPreference)
-
-	EBSEstimatedMonthlySavings_currency = EBSEstimatedMonthlySavings.AddMember("currency", Currency)
-
-	EBSEstimatedMonthlySavings_value = EBSEstimatedMonthlySavings.AddMember("value", _Value)
-
-	EBSFilterName_FINDING = EBSFilterName.AddMember("FINDING", smithyprelude.Unit)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
-
-	EBSFilter_name = EBSFilter.AddMember("name", EBSFilterName)
-
-	EBSFilter_values = EBSFilter.AddMember("values", _FilterValues)
-
-	_EBSFilters_member = _EBSFilters.AddMember("member", EBSFilter)
-
-	EBSFinding_OPTIMIZED = EBSFinding.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	EBSFinding_NOT_OPTIMIZED = EBSFinding.AddMember("NOT_OPTIMIZED", smithyprelude.Unit)
-
-	EBSMetricName_VOLUME_READ_OPS_PER_SECOND = EBSMetricName.AddMember("VOLUME_READ_OPS_PER_SECOND", smithyprelude.Unit)
-
-	EBSMetricName_VOLUME_WRITE_OPS_PER_SECOND = EBSMetricName.AddMember("VOLUME_WRITE_OPS_PER_SECOND", smithyprelude.Unit)
-
-	EBSMetricName_VOLUME_READ_BYTES_PER_SECOND = EBSMetricName.AddMember("VOLUME_READ_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	EBSMetricName_VOLUME_WRITE_BYTES_PER_SECOND = EBSMetricName.AddMember("VOLUME_WRITE_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	EBSMetricName_VOLUME_IOPS_EXCEEDED = EBSMetricName.AddMember("VOLUME_IOPS_EXCEEDED", smithyprelude.Unit)
-
-	EBSMetricName_VOLUME_THROUGHPUT_EXCEEDED = EBSMetricName.AddMember("VOLUME_THROUGHPUT_EXCEEDED", smithyprelude.Unit)
-
-	EBSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = EBSSavingsOpportunityAfterDiscounts.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	EBSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = EBSSavingsOpportunityAfterDiscounts.AddMember("estimatedMonthlySavings", EBSEstimatedMonthlySavings)
-
-	EBSUtilizationMetric_name = EBSUtilizationMetric.AddMember("name", EBSMetricName)
-
-	EBSUtilizationMetric_statistic = EBSUtilizationMetric.AddMember("statistic", MetricStatistic)
-
-	EBSUtilizationMetric_value = EBSUtilizationMetric.AddMember("value", _MetricValue)
-
-	_EBSUtilizationMetrics_member = _EBSUtilizationMetrics.AddMember("member", EBSUtilizationMetric)
-
-	ECSSavingsEstimationModeSource_PUBLIC_PRICING = ECSSavingsEstimationModeSource.AddMember("PUBLIC_PRICING", smithyprelude.Unit)
-
-	ECSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = ECSSavingsEstimationModeSource.AddMember("COST_EXPLORER_RIGHTSIZING", smithyprelude.Unit)
-
-	ECSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = ECSSavingsEstimationModeSource.AddMember("COST_OPTIMIZATION_HUB", smithyprelude.Unit)
-
-	ECSSavingsEstimationMode_source = ECSSavingsEstimationMode.AddMember("source", ECSSavingsEstimationModeSource)
-
-	ECSEffectiveRecommendationPreferences_savingsEstimationMode = ECSEffectiveRecommendationPreferences.AddMember("savingsEstimationMode", ECSSavingsEstimationMode)
-
-	ECSEffectiveRecommendationPreferences_lookBackPeriod = ECSEffectiveRecommendationPreferences.AddMember("lookBackPeriod", LookBackPeriodPreference)
-
-	ECSEstimatedMonthlySavings_currency = ECSEstimatedMonthlySavings.AddMember("currency", Currency)
-
-	ECSEstimatedMonthlySavings_value = ECSEstimatedMonthlySavings.AddMember("value", _Value)
-
-	ECSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = ECSSavingsOpportunityAfterDiscounts.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	ECSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = ECSSavingsOpportunityAfterDiscounts.AddMember("estimatedMonthlySavings", ECSEstimatedMonthlySavings)
-
-	ECSServiceLaunchType_EC2 = ECSServiceLaunchType.AddMember("EC2", smithyprelude.Unit)
-
-	ECSServiceLaunchType_FARGATE = ECSServiceLaunchType.AddMember("FARGATE", smithyprelude.Unit)
-
-	ECSServiceMetricName_CPU = ECSServiceMetricName.AddMember("CPU", smithyprelude.Unit)
-
-	ECSServiceMetricName_MEMORY = ECSServiceMetricName.AddMember("MEMORY", smithyprelude.Unit)
-
-	ECSServiceMetricStatistic_MAXIMUM = ECSServiceMetricStatistic.AddMember("MAXIMUM", smithyprelude.Unit)
-
-	ECSServiceMetricStatistic_AVERAGE = ECSServiceMetricStatistic.AddMember("AVERAGE", smithyprelude.Unit)
-
-	_Timestamps_member = _Timestamps.AddMember("member", _Timestamp)
-
-	_MetricValues_member = _MetricValues.AddMember("member", _MetricValue)
-
-	ECSServiceProjectedMetric_name = ECSServiceProjectedMetric.AddMember("name", ECSServiceMetricName)
-
-	ECSServiceProjectedMetric_timestamps = ECSServiceProjectedMetric.AddMember("timestamps", _Timestamps)
-
-	ECSServiceProjectedMetric_upperBoundValues = ECSServiceProjectedMetric.AddMember("upperBoundValues", _MetricValues)
-
-	ECSServiceProjectedMetric_lowerBoundValues = ECSServiceProjectedMetric.AddMember("lowerBoundValues", _MetricValues)
-
-	_ECSServiceProjectedMetrics_member = _ECSServiceProjectedMetrics.AddMember("member", ECSServiceProjectedMetric)
-
-	ECSServiceProjectedUtilizationMetric_name = ECSServiceProjectedUtilizationMetric.AddMember("name", ECSServiceMetricName)
-
-	ECSServiceProjectedUtilizationMetric_statistic = ECSServiceProjectedUtilizationMetric.AddMember("statistic", ECSServiceMetricStatistic)
-
-	ECSServiceProjectedUtilizationMetric_lowerBoundValue = ECSServiceProjectedUtilizationMetric.AddMember("lowerBoundValue", _LowerBoundValue)
-
-	ECSServiceProjectedUtilizationMetric_upperBoundValue = ECSServiceProjectedUtilizationMetric.AddMember("upperBoundValue", _UpperBoundValue)
-
-	_ECSServiceProjectedUtilizationMetrics_member = _ECSServiceProjectedUtilizationMetrics.AddMember("member", ECSServiceProjectedUtilizationMetric)
-
-	ServiceConfiguration_memory = ServiceConfiguration.AddMember("memory", _NullableMemory)
-
-	ServiceConfiguration_cpu = ServiceConfiguration.AddMember("cpu", _NullableCpu)
-
-	ServiceConfiguration_containerConfigurations = ServiceConfiguration.AddMember("containerConfigurations", _ContainerConfigurations)
-
-	ServiceConfiguration_autoScalingConfiguration = ServiceConfiguration.AddMember("autoScalingConfiguration", AutoScalingConfiguration)
-
-	ServiceConfiguration_taskDefinitionArn = ServiceConfiguration.AddMember("taskDefinitionArn", _TaskDefinitionArn)
-
-	ECSServiceUtilizationMetric_name = ECSServiceUtilizationMetric.AddMember("name", ECSServiceMetricName)
-
-	ECSServiceUtilizationMetric_statistic = ECSServiceUtilizationMetric.AddMember("statistic", ECSServiceMetricStatistic)
-
-	ECSServiceUtilizationMetric_value = ECSServiceUtilizationMetric.AddMember("value", _MetricValue)
-
-	_ECSServiceUtilizationMetrics_member = _ECSServiceUtilizationMetrics.AddMember("member", ECSServiceUtilizationMetric)
-
-	ECSServiceRecommendationFinding_OPTIMIZED = ECSServiceRecommendationFinding.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	ECSServiceRecommendationFinding_UNDER_PROVISIONED = ECSServiceRecommendationFinding.AddMember("UNDER_PROVISIONED", smithyprelude.Unit)
-
-	ECSServiceRecommendationFinding_OVER_PROVISIONED = ECSServiceRecommendationFinding.AddMember("OVER_PROVISIONED", smithyprelude.Unit)
-
-	ECSServiceRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED = ECSServiceRecommendationFindingReasonCode.AddMember("MEMORY_OVER_PROVISIONED", smithyprelude.Unit)
-
-	ECSServiceRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED = ECSServiceRecommendationFindingReasonCode.AddMember("MEMORY_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	ECSServiceRecommendationFindingReasonCode_CPU_OVER_PROVISIONED = ECSServiceRecommendationFindingReasonCode.AddMember("CPU_OVER_PROVISIONED", smithyprelude.Unit)
-
-	ECSServiceRecommendationFindingReasonCode_CPU_UNDER_PROVISIONED = ECSServiceRecommendationFindingReasonCode.AddMember("CPU_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	_ECSServiceRecommendationFindingReasonCodes_member = _ECSServiceRecommendationFindingReasonCodes.AddMember("member", ECSServiceRecommendationFindingReasonCode)
-
-	ECSServiceRecommendationOption_memory = ECSServiceRecommendationOption.AddMember("memory", _NullableMemory)
-
-	ECSServiceRecommendationOption_cpu = ECSServiceRecommendationOption.AddMember("cpu", _NullableCpu)
-
-	ECSServiceRecommendationOption_savingsOpportunity = ECSServiceRecommendationOption.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	ECSServiceRecommendationOption_savingsOpportunityAfterDiscounts = ECSServiceRecommendationOption.AddMember("savingsOpportunityAfterDiscounts", ECSSavingsOpportunityAfterDiscounts)
-
-	ECSServiceRecommendationOption_projectedUtilizationMetrics = ECSServiceRecommendationOption.AddMember("projectedUtilizationMetrics", _ECSServiceProjectedUtilizationMetrics)
-
-	ECSServiceRecommendationOption_containerRecommendations = ECSServiceRecommendationOption.AddMember("containerRecommendations", _ContainerRecommendations)
-
-	_ECSServiceRecommendationOptions_member = _ECSServiceRecommendationOptions.AddMember("member", ECSServiceRecommendationOption)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	ECSServiceRecommendation_serviceArn = ECSServiceRecommendation.AddMember("serviceArn", _ServiceArn)
-
-	ECSServiceRecommendation_accountId = ECSServiceRecommendation.AddMember("accountId", _AccountId)
-
-	ECSServiceRecommendation_currentServiceConfiguration = ECSServiceRecommendation.AddMember("currentServiceConfiguration", ServiceConfiguration)
-
-	ECSServiceRecommendation_utilizationMetrics = ECSServiceRecommendation.AddMember("utilizationMetrics", _ECSServiceUtilizationMetrics)
-
-	ECSServiceRecommendation_lookbackPeriodInDays = ECSServiceRecommendation.AddMember("lookbackPeriodInDays", _LookBackPeriodInDays)
-
-	ECSServiceRecommendation_launchType = ECSServiceRecommendation.AddMember("launchType", ECSServiceLaunchType)
-
-	ECSServiceRecommendation_lastRefreshTimestamp = ECSServiceRecommendation.AddMember("lastRefreshTimestamp", _LastRefreshTimestamp)
-
-	ECSServiceRecommendation_finding = ECSServiceRecommendation.AddMember("finding", ECSServiceRecommendationFinding)
-
-	ECSServiceRecommendation_findingReasonCodes = ECSServiceRecommendation.AddMember("findingReasonCodes", _ECSServiceRecommendationFindingReasonCodes)
-
-	ECSServiceRecommendation_serviceRecommendationOptions = ECSServiceRecommendation.AddMember("serviceRecommendationOptions", _ECSServiceRecommendationOptions)
-
-	ECSServiceRecommendation_currentPerformanceRisk = ECSServiceRecommendation.AddMember("currentPerformanceRisk", CurrentPerformanceRisk)
-
-	ECSServiceRecommendation_effectiveRecommendationPreferences = ECSServiceRecommendation.AddMember("effectiveRecommendationPreferences", ECSEffectiveRecommendationPreferences)
-
-	ECSServiceRecommendation_tags = ECSServiceRecommendation.AddMember("tags", _Tags)
-
-	ECSServiceRecommendationFilterName_FINDING = ECSServiceRecommendationFilterName.AddMember("FINDING", smithyprelude.Unit)
-
-	ECSServiceRecommendationFilterName_FINDING_REASON_CODE = ECSServiceRecommendationFilterName.AddMember("FINDING_REASON_CODE", smithyprelude.Unit)
-
-	ECSServiceRecommendationFilter_name = ECSServiceRecommendationFilter.AddMember("name", ECSServiceRecommendationFilterName)
-
-	ECSServiceRecommendationFilter_values = ECSServiceRecommendationFilter.AddMember("values", _FilterValues)
-
-	_ECSServiceRecommendationFilters_member = _ECSServiceRecommendationFilters.AddMember("member", ECSServiceRecommendationFilter)
-
-	_ECSServiceRecommendations_member = _ECSServiceRecommendations.AddMember("member", ECSServiceRecommendation)
-
-	ECSServiceRecommendedOptionProjectedMetric_recommendedCpuUnits = ECSServiceRecommendedOptionProjectedMetric.AddMember("recommendedCpuUnits", _CpuSize)
-
-	ECSServiceRecommendedOptionProjectedMetric_recommendedMemorySize = ECSServiceRecommendedOptionProjectedMetric.AddMember("recommendedMemorySize", _MemorySize)
-
-	ECSServiceRecommendedOptionProjectedMetric_projectedMetrics = ECSServiceRecommendedOptionProjectedMetric.AddMember("projectedMetrics", _ECSServiceProjectedMetrics)
-
-	_ECSServiceRecommendedOptionProjectedMetrics_member = _ECSServiceRecommendedOptionProjectedMetrics.AddMember("member", ECSServiceRecommendedOptionProjectedMetric)
-
-	EnrollmentFilterName_STATUS = EnrollmentFilterName.AddMember("STATUS", smithyprelude.Unit)
-
-	EnrollmentFilter_name = EnrollmentFilter.AddMember("name", EnrollmentFilterName)
-
-	EnrollmentFilter_values = EnrollmentFilter.AddMember("values", _FilterValues)
-
-	_EnrollmentFilters_member = _EnrollmentFilters.AddMember("member", EnrollmentFilter)
-
-	ExportableAutoScalingGroupField_ACCOUNT_ID = ExportableAutoScalingGroupField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_AUTO_SCALING_GROUP_ARN = ExportableAutoScalingGroupField.AddMember("AUTO_SCALING_GROUP_ARN", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_AUTO_SCALING_GROUP_NAME = ExportableAutoScalingGroupField.AddMember("AUTO_SCALING_GROUP_NAME", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_FINDING = ExportableAutoScalingGroupField.AddMember("FINDING", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_LOOKBACK_PERIOD_IN_DAYS = ExportableAutoScalingGroupField.AddMember("LOOKBACK_PERIOD_IN_DAYS", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_INSTANCE_TYPE = ExportableAutoScalingGroupField.AddMember("CURRENT_CONFIGURATION_INSTANCE_TYPE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_DESIRED_CAPACITY = ExportableAutoScalingGroupField.AddMember("CURRENT_CONFIGURATION_DESIRED_CAPACITY", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MIN_SIZE = ExportableAutoScalingGroupField.AddMember("CURRENT_CONFIGURATION_MIN_SIZE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MAX_SIZE = ExportableAutoScalingGroupField.AddMember("CURRENT_CONFIGURATION_MAX_SIZE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_ALLOCATION_STRATEGY = ExportableAutoScalingGroupField.AddMember("CURRENT_CONFIGURATION_ALLOCATION_STRATEGY", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MIXED_INSTANCE_TYPES = ExportableAutoScalingGroupField.AddMember("CURRENT_CONFIGURATION_MIXED_INSTANCE_TYPES", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_TYPE = ExportableAutoScalingGroupField.AddMember("CURRENT_CONFIGURATION_TYPE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_ON_DEMAND_PRICE = ExportableAutoScalingGroupField.AddMember("CURRENT_ON_DEMAND_PRICE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = ExportableAutoScalingGroupField.AddMember("CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = ExportableAutoScalingGroupField.AddMember("CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_VCPUS = ExportableAutoScalingGroupField.AddMember("CURRENT_VCPUS", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_MEMORY = ExportableAutoScalingGroupField.AddMember("CURRENT_MEMORY", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_STORAGE = ExportableAutoScalingGroupField.AddMember("CURRENT_STORAGE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_NETWORK = ExportableAutoScalingGroupField.AddMember("CURRENT_NETWORK", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_INSTANCE_TYPE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_INSTANCE_TYPE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_DESIRED_CAPACITY = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_DESIRED_CAPACITY", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MIN_SIZE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_MIN_SIZE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MAX_SIZE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_MAX_SIZE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_ESTIMATED_INSTANCE_HOUR_REDUCTION_PERCENTAGE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_ESTIMATED_INSTANCE_HOUR_REDUCTION_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_ALLOCATION_STRATEGY = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_ALLOCATION_STRATEGY", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MIXED_INSTANCE_TYPES = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_MIXED_INSTANCE_TYPES", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_TYPE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_TYPE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_VCPUS = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_VCPUS", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_MEMORY = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_MEMORY", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STORAGE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_STORAGE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_NETWORK = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_NETWORK", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_LAST_REFRESH_TIMESTAMP = ExportableAutoScalingGroupField.AddMember("LAST_REFRESH_TIMESTAMP", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_PERFORMANCE_RISK = ExportableAutoScalingGroupField.AddMember("CURRENT_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = ExportableAutoScalingGroupField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = ExportableAutoScalingGroupField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES = ExportableAutoScalingGroupField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES = ExportableAutoScalingGroupField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = ExportableAutoScalingGroupField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_INFERRED_WORKLOAD_TYPES = ExportableAutoScalingGroupField.AddMember("INFERRED_WORKLOAD_TYPES", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_MIGRATION_EFFORT = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_MIGRATION_EFFORT", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_CURRENT_INSTANCE_GPU_INFO = ExportableAutoScalingGroupField.AddMember("CURRENT_INSTANCE_GPU_INFO", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = ExportableAutoScalingGroupField.AddMember("UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MAXIMUM = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_MAXIMUM = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = ExportableAutoScalingGroupField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = ExportableAutoScalingGroupField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	_ExportableAutoScalingGroupFields_member = _ExportableAutoScalingGroupFields.AddMember("member", ExportableAutoScalingGroupField)
-
-	ExportableECSServiceField_ACCOUNT_ID = ExportableECSServiceField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ExportableECSServiceField_SERVICE_ARN = ExportableECSServiceField.AddMember("SERVICE_ARN", smithyprelude.Unit)
-
-	ExportableECSServiceField_LOOKBACK_PERIOD_IN_DAYS = ExportableECSServiceField.AddMember("LOOKBACK_PERIOD_IN_DAYS", smithyprelude.Unit)
-
-	ExportableECSServiceField_LAST_REFRESH_TIMESTAMP = ExportableECSServiceField.AddMember("LAST_REFRESH_TIMESTAMP", smithyprelude.Unit)
-
-	ExportableECSServiceField_LAUNCH_TYPE = ExportableECSServiceField.AddMember("LAUNCH_TYPE", smithyprelude.Unit)
-
-	ExportableECSServiceField_CURRENT_PERFORMANCE_RISK = ExportableECSServiceField.AddMember("CURRENT_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_MEMORY = ExportableECSServiceField.AddMember("CURRENT_SERVICE_CONFIGURATION_MEMORY", smithyprelude.Unit)
-
-	ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_CPU = ExportableECSServiceField.AddMember("CURRENT_SERVICE_CONFIGURATION_CPU", smithyprelude.Unit)
-
-	ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_TASK_DEFINITION_ARN = ExportableECSServiceField.AddMember("CURRENT_SERVICE_CONFIGURATION_TASK_DEFINITION_ARN", smithyprelude.Unit)
-
-	ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_AUTO_SCALING_CONFIGURATION = ExportableECSServiceField.AddMember("CURRENT_SERVICE_CONFIGURATION_AUTO_SCALING_CONFIGURATION", smithyprelude.Unit)
-
-	ExportableECSServiceField_CURRENT_SERVICE_CONTAINER_CONFIGURATIONS = ExportableECSServiceField.AddMember("CURRENT_SERVICE_CONTAINER_CONFIGURATIONS", smithyprelude.Unit)
-
-	ExportableECSServiceField_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableECSServiceField.AddMember("UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableECSServiceField_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableECSServiceField.AddMember("UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableECSServiceField_FINDING = ExportableECSServiceField.AddMember("FINDING", smithyprelude.Unit)
-
-	ExportableECSServiceField_FINDING_REASON_CODES = ExportableECSServiceField.AddMember("FINDING_REASON_CODES", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_MEMORY = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_MEMORY", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_CPU = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_CPU", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_CONTAINER_RECOMMENDATIONS = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_CONTAINER_RECOMMENDATIONS", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableECSServiceField_TAGS = ExportableECSServiceField.AddMember("TAGS", smithyprelude.Unit)
-
-	ExportableECSServiceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = ExportableECSServiceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = ExportableECSServiceField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableECSServiceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = ExportableECSServiceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD", smithyprelude.Unit)
-
-	_ExportableECSServiceFields_member = _ExportableECSServiceFields.AddMember("member", ExportableECSServiceField)
-
-	ExportableIdleField_ACCOUNT_ID = ExportableIdleField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ExportableIdleField_RESOURCE_ARN = ExportableIdleField.AddMember("RESOURCE_ARN", smithyprelude.Unit)
-
-	ExportableIdleField_RESOURCE_ID = ExportableIdleField.AddMember("RESOURCE_ID", smithyprelude.Unit)
-
-	ExportableIdleField_RESOURCE_TYPE = ExportableIdleField.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
-
-	ExportableIdleField_LAST_REFRESH_TIMESTAMP = ExportableIdleField.AddMember("LAST_REFRESH_TIMESTAMP", smithyprelude.Unit)
-
-	ExportableIdleField_LOOKBACK_PERIOD_IN_DAYS = ExportableIdleField.AddMember("LOOKBACK_PERIOD_IN_DAYS", smithyprelude.Unit)
-
-	ExportableIdleField_SAVINGS_OPPORTUNITY = ExportableIdleField.AddMember("SAVINGS_OPPORTUNITY", smithyprelude.Unit)
-
-	ExportableIdleField_SAVINGS_OPPORTUNITY_AFTER_DISCOUNT = ExportableIdleField.AddMember("SAVINGS_OPPORTUNITY_AFTER_DISCOUNT", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_ACTIVE_CONNECTION_COUNT_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_ACTIVE_CONNECTION_COUNT_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_PACKETS_IN_FROM_SOURCE_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_PACKETS_IN_FROM_SOURCE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_PACKETS_IN_FROM_DESTINATION_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_PACKETS_IN_FROM_DESTINATION_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_CONSUMED_READ_CAPACITY_UNITS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_CONSUMED_READ_CAPACITY_UNITS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_CONSUMED_WRITE_CAPACITY_UNITS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_CONSUMED_WRITE_CAPACITY_UNITS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_NEW_CONNECTIONS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_NEW_CONNECTIONS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_ENGINE_CPU_UTILIZATION_MAXIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_ENGINE_CPU_UTILIZATION_MAXIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_CACHE_HITS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_CACHE_HITS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_CACHE_MISSES_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_CACHE_MISSES_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_KEYSPACE_HITS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_KEYSPACE_HITS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_KEYSPACE_MISSES_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_KEYSPACE_MISSES_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_IS_IDLE_MINIMUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_IS_IDLE_MINIMUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_USER_CONNECTED_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_USER_CONNECTED_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_INVOCATIONS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_INVOCATIONS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_GET_TYPE_CMDS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_GET_TYPE_CMDS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_SET_TYPE_CMDS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_SET_TYPE_CMDS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_ELASTI_CACHE_PROCESSING_UNITS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_ELASTI_CACHE_PROCESSING_UNITS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_CURR_CONNECTIONS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_CURR_CONNECTIONS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_SUM = ExportableIdleField.AddMember("UTILIZATION_METRICS_DATABASE_CONNECTIONS_SUM", smithyprelude.Unit)
-
-	ExportableIdleField_FINDING = ExportableIdleField.AddMember("FINDING", smithyprelude.Unit)
-
-	ExportableIdleField_FINDING_DESCRIPTION = ExportableIdleField.AddMember("FINDING_DESCRIPTION", smithyprelude.Unit)
-
-	ExportableIdleField_TAGS = ExportableIdleField.AddMember("TAGS", smithyprelude.Unit)
-
-	_ExportableIdleFields_member = _ExportableIdleFields.AddMember("member", ExportableIdleField)
-
-	ExportableInstanceField_ACCOUNT_ID = ExportableInstanceField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ExportableInstanceField_INSTANCE_ARN = ExportableInstanceField.AddMember("INSTANCE_ARN", smithyprelude.Unit)
-
-	ExportableInstanceField_INSTANCE_NAME = ExportableInstanceField.AddMember("INSTANCE_NAME", smithyprelude.Unit)
-
-	ExportableInstanceField_FINDING = ExportableInstanceField.AddMember("FINDING", smithyprelude.Unit)
-
-	ExportableInstanceField_Finding_Reason_Codes = ExportableInstanceField.AddMember("Finding_Reason_Codes", smithyprelude.Unit)
-
-	ExportableInstanceField_LOOKBACK_PERIOD_IN_DAYS = ExportableInstanceField.AddMember("LOOKBACK_PERIOD_IN_DAYS", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_INSTANCE_TYPE = ExportableInstanceField.AddMember("CURRENT_INSTANCE_TYPE", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_ON_DEMAND_PRICE = ExportableInstanceField.AddMember("CURRENT_ON_DEMAND_PRICE", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = ExportableInstanceField.AddMember("CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = ExportableInstanceField.AddMember("CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_VCPUS = ExportableInstanceField.AddMember("CURRENT_VCPUS", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_MEMORY = ExportableInstanceField.AddMember("CURRENT_MEMORY", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_STORAGE = ExportableInstanceField.AddMember("CURRENT_STORAGE", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_NETWORK = ExportableInstanceField.AddMember("CURRENT_NETWORK", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_INSTANCE_TYPE = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_INSTANCE_TYPE", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_PLATFORM_DIFFERENCES = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_PLATFORM_DIFFERENCES", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_VCPUS = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_VCPUS", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_MEMORY = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_MEMORY", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_STORAGE = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_STORAGE", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_NETWORK = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_NETWORK", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_ARN = ExportableInstanceField.AddMember("RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_ARN", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_TYPE = ExportableInstanceField.AddMember("RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_TYPE", smithyprelude.Unit)
-
-	ExportableInstanceField_LAST_REFRESH_TIMESTAMP = ExportableInstanceField.AddMember("LAST_REFRESH_TIMESTAMP", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_PERFORMANCE_RISK = ExportableInstanceField.AddMember("CURRENT_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE", smithyprelude.Unit)
-
-	ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = ExportableInstanceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES", smithyprelude.Unit)
-
-	ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = ExportableInstanceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS", smithyprelude.Unit)
-
-	ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES = ExportableInstanceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES", smithyprelude.Unit)
-
-	ExportableInstanceField_INFERRED_WORKLOAD_TYPES = ExportableInstanceField.AddMember("INFERRED_WORKLOAD_TYPES", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_MIGRATION_EFFORT = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_MIGRATION_EFFORT", smithyprelude.Unit)
-
-	ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_EXTERNAL_METRICS_SOURCE = ExportableInstanceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_EXTERNAL_METRICS_SOURCE", smithyprelude.Unit)
-
-	ExportableInstanceField_TAGS = ExportableInstanceField.AddMember("TAGS", smithyprelude.Unit)
-
-	ExportableInstanceField_INSTANCE_STATE = ExportableInstanceField.AddMember("INSTANCE_STATE", smithyprelude.Unit)
-
-	ExportableInstanceField_EXTERNAL_METRIC_STATUS_CODE = ExportableInstanceField.AddMember("EXTERNAL_METRIC_STATUS_CODE", smithyprelude.Unit)
-
-	ExportableInstanceField_EXTERNAL_METRIC_STATUS_REASON = ExportableInstanceField.AddMember("EXTERNAL_METRIC_STATUS_REASON", smithyprelude.Unit)
-
-	ExportableInstanceField_CURRENT_INSTANCE_GPU_INFO = ExportableInstanceField.AddMember("CURRENT_INSTANCE_GPU_INFO", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = ExportableInstanceField.AddMember("UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableInstanceField_IDLE = ExportableInstanceField.AddMember("IDLE", smithyprelude.Unit)
-
-	ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES = ExportableInstanceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES", smithyprelude.Unit)
-
-	ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = ExportableInstanceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD", smithyprelude.Unit)
-
-	ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_UTILIZATION_PREFERENCES = ExportableInstanceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_UTILIZATION_PREFERENCES", smithyprelude.Unit)
-
-	ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = ExportableInstanceField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = ExportableInstanceField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	_ExportableInstanceFields_member = _ExportableInstanceFields.AddMember("member", ExportableInstanceField)
-
-	ExportableLambdaFunctionField_ACCOUNT_ID = ExportableLambdaFunctionField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_FUNCTION_ARN = ExportableLambdaFunctionField.AddMember("FUNCTION_ARN", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_FUNCTION_VERSION = ExportableLambdaFunctionField.AddMember("FUNCTION_VERSION", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_FINDING = ExportableLambdaFunctionField.AddMember("FINDING", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_FINDING_REASON_CODES = ExportableLambdaFunctionField.AddMember("FINDING_REASON_CODES", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_NUMBER_OF_INVOCATIONS = ExportableLambdaFunctionField.AddMember("NUMBER_OF_INVOCATIONS", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_UTILIZATION_METRICS_DURATION_MAXIMUM = ExportableLambdaFunctionField.AddMember("UTILIZATION_METRICS_DURATION_MAXIMUM", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_UTILIZATION_METRICS_DURATION_AVERAGE = ExportableLambdaFunctionField.AddMember("UTILIZATION_METRICS_DURATION_AVERAGE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableLambdaFunctionField.AddMember("UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_UTILIZATION_METRICS_MEMORY_AVERAGE = ExportableLambdaFunctionField.AddMember("UTILIZATION_METRICS_MEMORY_AVERAGE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_LOOKBACK_PERIOD_IN_DAYS = ExportableLambdaFunctionField.AddMember("LOOKBACK_PERIOD_IN_DAYS", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_CURRENT_CONFIGURATION_MEMORY_SIZE = ExportableLambdaFunctionField.AddMember("CURRENT_CONFIGURATION_MEMORY_SIZE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_CURRENT_CONFIGURATION_TIMEOUT = ExportableLambdaFunctionField.AddMember("CURRENT_CONFIGURATION_TIMEOUT", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_CURRENT_COST_TOTAL = ExportableLambdaFunctionField.AddMember("CURRENT_COST_TOTAL", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_CURRENT_COST_AVERAGE = ExportableLambdaFunctionField.AddMember("CURRENT_COST_AVERAGE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_CONFIGURATION_MEMORY_SIZE = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_MEMORY_SIZE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_COST_LOW = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_COST_LOW", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_COST_HIGH = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_COST_HIGH", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_LOWER_BOUND = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_LOWER_BOUND", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_UPPER_BOUND = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_UPPER_BOUND", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_EXPECTED = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_EXPECTED", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_LAST_REFRESH_TIMESTAMP = ExportableLambdaFunctionField.AddMember("LAST_REFRESH_TIMESTAMP", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_CURRENT_PERFORMANCE_RISK = ExportableLambdaFunctionField.AddMember("CURRENT_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_TAGS = ExportableLambdaFunctionField.AddMember("TAGS", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = ExportableLambdaFunctionField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = ExportableLambdaFunctionField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	_ExportableLambdaFunctionFields_member = _ExportableLambdaFunctionFields.AddMember("member", ExportableLambdaFunctionField)
-
-	ExportableLicenseField_ACCOUNT_ID = ExportableLicenseField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ExportableLicenseField_RESOURCE_ARN = ExportableLicenseField.AddMember("RESOURCE_ARN", smithyprelude.Unit)
-
-	ExportableLicenseField_LOOKBACK_PERIOD_IN_DAYS = ExportableLicenseField.AddMember("LOOKBACK_PERIOD_IN_DAYS", smithyprelude.Unit)
-
-	ExportableLicenseField_LAST_REFRESH_TIMESTAMP = ExportableLicenseField.AddMember("LAST_REFRESH_TIMESTAMP", smithyprelude.Unit)
-
-	ExportableLicenseField_LICENSE_FINDING = ExportableLicenseField.AddMember("LICENSE_FINDING", smithyprelude.Unit)
-
-	ExportableLicenseField_LICENSE_FINDING_REASON_CODES = ExportableLicenseField.AddMember("LICENSE_FINDING_REASON_CODES", smithyprelude.Unit)
-
-	ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_NUMBER_OF_CORES = ExportableLicenseField.AddMember("CURRENT_LICENSE_CONFIGURATION_NUMBER_OF_CORES", smithyprelude.Unit)
-
-	ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPE = ExportableLicenseField.AddMember("CURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPE", smithyprelude.Unit)
-
-	ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEM = ExportableLicenseField.AddMember("CURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEM", smithyprelude.Unit)
-
-	ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_NAME = ExportableLicenseField.AddMember("CURRENT_LICENSE_CONFIGURATION_LICENSE_NAME", smithyprelude.Unit)
-
-	ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_EDITION = ExportableLicenseField.AddMember("CURRENT_LICENSE_CONFIGURATION_LICENSE_EDITION", smithyprelude.Unit)
-
-	ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_MODEL = ExportableLicenseField.AddMember("CURRENT_LICENSE_CONFIGURATION_LICENSE_MODEL", smithyprelude.Unit)
-
-	ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_VERSION = ExportableLicenseField.AddMember("CURRENT_LICENSE_CONFIGURATION_LICENSE_VERSION", smithyprelude.Unit)
-
-	ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_METRICS_SOURCE = ExportableLicenseField.AddMember("CURRENT_LICENSE_CONFIGURATION_METRICS_SOURCE", smithyprelude.Unit)
-
-	ExportableLicenseField_RECOMMENDATION_OPTIONS_OPERATING_SYSTEM = ExportableLicenseField.AddMember("RECOMMENDATION_OPTIONS_OPERATING_SYSTEM", smithyprelude.Unit)
-
-	ExportableLicenseField_RECOMMENDATION_OPTIONS_LICENSE_EDITION = ExportableLicenseField.AddMember("RECOMMENDATION_OPTIONS_LICENSE_EDITION", smithyprelude.Unit)
-
-	ExportableLicenseField_RECOMMENDATION_OPTIONS_LICENSE_MODEL = ExportableLicenseField.AddMember("RECOMMENDATION_OPTIONS_LICENSE_MODEL", smithyprelude.Unit)
-
-	ExportableLicenseField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = ExportableLicenseField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableLicenseField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = ExportableLicenseField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY", smithyprelude.Unit)
-
-	ExportableLicenseField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = ExportableLicenseField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE", smithyprelude.Unit)
-
-	ExportableLicenseField_TAGS = ExportableLicenseField.AddMember("TAGS", smithyprelude.Unit)
-
-	_ExportableLicenseFields_member = _ExportableLicenseFields.AddMember("member", ExportableLicenseField)
-
-	ExportableRDSDBField_RESOURCE_ARN = ExportableRDSDBField.AddMember("RESOURCE_ARN", smithyprelude.Unit)
-
-	ExportableRDSDBField_ACCOUNT_ID = ExportableRDSDBField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ExportableRDSDBField_ENGINE = ExportableRDSDBField.AddMember("ENGINE", smithyprelude.Unit)
-
-	ExportableRDSDBField_ENGINE_VERSION = ExportableRDSDBField.AddMember("ENGINE_VERSION", smithyprelude.Unit)
-
-	ExportableRDSDBField_IDLE = ExportableRDSDBField.AddMember("IDLE", smithyprelude.Unit)
-
-	ExportableRDSDBField_MULTI_AZ_DB_INSTANCE = ExportableRDSDBField.AddMember("MULTI_AZ_DB_INSTANCE", smithyprelude.Unit)
-
-	ExportableRDSDBField_CLUSTER_WRITER = ExportableRDSDBField.AddMember("CLUSTER_WRITER", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_DB_INSTANCE_CLASS = ExportableRDSDBField.AddMember("CURRENT_DB_INSTANCE_CLASS", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_STORAGE_TYPE = ExportableRDSDBField.AddMember("CURRENT_STORAGE_CONFIGURATION_STORAGE_TYPE", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_ALLOCATED_STORAGE = ExportableRDSDBField.AddMember("CURRENT_STORAGE_CONFIGURATION_ALLOCATED_STORAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_MAX_ALLOCATED_STORAGE = ExportableRDSDBField.AddMember("CURRENT_STORAGE_CONFIGURATION_MAX_ALLOCATED_STORAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_IOPS = ExportableRDSDBField.AddMember("CURRENT_STORAGE_CONFIGURATION_IOPS", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_STORAGE_THROUGHPUT = ExportableRDSDBField.AddMember("CURRENT_STORAGE_CONFIGURATION_STORAGE_THROUGHPUT", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION = ExportableRDSDBField.AddMember("CURRENT_STORAGE_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_INSTANCE_ON_DEMAND_HOURLY_PRICE = ExportableRDSDBField.AddMember("CURRENT_INSTANCE_ON_DEMAND_HOURLY_PRICE", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_ON_DEMAND_MONTHLY_PRICE = ExportableRDSDBField.AddMember("CURRENT_STORAGE_ON_DEMAND_MONTHLY_PRICE", smithyprelude.Unit)
-
-	ExportableRDSDBField_LOOKBACK_PERIOD_IN_DAYS = ExportableRDSDBField.AddMember("LOOKBACK_PERIOD_IN_DAYS", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST = ExportableRDSDBField.AddMember("CURRENT_STORAGE_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST = ExportableRDSDBField.AddMember("CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST = ExportableRDSDBField.AddMember("CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST", smithyprelude.Unit)
-
-	ExportableRDSDBField_CURRENT_INSTANCE_PERFORMANCE_RISK = ExportableRDSDBField.AddMember("CURRENT_INSTANCE_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_MEMORY_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_MEMORY_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_STORAGE_SPACE_UTILIZATION_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_EBS_VOLUME_STORAGE_SPACE_UTILIZATION_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_READ_THROUGHPUT_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_EBS_VOLUME_READ_THROUGHPUT_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_THROUGHPUT_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_EBS_VOLUME_WRITE_THROUGHPUT_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_STORAGE_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_STORAGE_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_STORAGE_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_STORAGE_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_HEALTH_STATE_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_AURORA_MEMORY_HEALTH_STATE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_DECLINED_SQL_TOTAL_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_AURORA_MEMORY_NUM_DECLINED_SQL_TOTAL_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_CONN_TOTAL_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_CONN_TOTAL_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_READ_IOPS_EPHEMERAL_STORAGE_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_READ_IOPS_EPHEMERAL_STORAGE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_WRITE_IOPS_EPHEMERAL_STORAGE_MAXIMUM = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_WRITE_IOPS_EPHEMERAL_STORAGE_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_BYTES_USED_AVERAGE = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_VOLUME_BYTES_USED_AVERAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_READ_IOPS_AVERAGE = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_VOLUME_READ_IOPS_AVERAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_WRITE_IOPS_AVERAGE = ExportableRDSDBField.AddMember("UTILIZATION_METRICS_VOLUME_WRITE_IOPS_AVERAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_FINDING = ExportableRDSDBField.AddMember("INSTANCE_FINDING", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_FINDING_REASON_CODES = ExportableRDSDBField.AddMember("INSTANCE_FINDING_REASON_CODES", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_FINDING = ExportableRDSDBField.AddMember("STORAGE_FINDING", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_FINDING_REASON_CODES = ExportableRDSDBField.AddMember("STORAGE_FINDING_REASON_CODES", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_DB_INSTANCE_CLASS = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_DB_INSTANCE_CLASS", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_RANK = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_RANK", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_STORAGE_TYPE = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_STORAGE_TYPE", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ALLOCATED_STORAGE = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ALLOCATED_STORAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_MAX_ALLOCATED_STORAGE = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_MAX_ALLOCATED_STORAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_IOPS = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_IOPS", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_STORAGE_THROUGHPUT = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_STORAGE_THROUGHPUT", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_RANK = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_RANK", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOURLY_PRICE = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOURLY_PRICE", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = ExportableRDSDBField.AddMember("INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ON_DEMAND_MONTHLY_PRICE = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ON_DEMAND_MONTHLY_PRICE", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = ExportableRDSDBField.AddMember("STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = ExportableRDSDBField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES", smithyprelude.Unit)
-
-	ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = ExportableRDSDBField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS", smithyprelude.Unit)
-
-	ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = ExportableRDSDBField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD", smithyprelude.Unit)
-
-	ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = ExportableRDSDBField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE", smithyprelude.Unit)
-
-	ExportableRDSDBField_LAST_REFRESH_TIMESTAMP = ExportableRDSDBField.AddMember("LAST_REFRESH_TIMESTAMP", smithyprelude.Unit)
-
-	ExportableRDSDBField_TAGS = ExportableRDSDBField.AddMember("TAGS", smithyprelude.Unit)
-
-	ExportableRDSDBField_DB_CLUSTER_IDENTIFIER = ExportableRDSDBField.AddMember("DB_CLUSTER_IDENTIFIER", smithyprelude.Unit)
-
-	ExportableRDSDBField_PROMOTION_TIER = ExportableRDSDBField.AddMember("PROMOTION_TIER", smithyprelude.Unit)
-
-	_ExportableRDSDBFields_member = _ExportableRDSDBFields.AddMember("member", ExportableRDSDBField)
-
-	ExportableVolumeField_ACCOUNT_ID = ExportableVolumeField.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ExportableVolumeField_VOLUME_ARN = ExportableVolumeField.AddMember("VOLUME_ARN", smithyprelude.Unit)
-
-	ExportableVolumeField_FINDING = ExportableVolumeField.AddMember("FINDING", smithyprelude.Unit)
-
-	ExportableVolumeField_UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM = ExportableVolumeField.AddMember("UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableVolumeField_UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM = ExportableVolumeField.AddMember("UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableVolumeField_UTILIZATION_METRICS_VOLUME_READ_BYTES_PER_SECOND_MAXIMUM = ExportableVolumeField.AddMember("UTILIZATION_METRICS_VOLUME_READ_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableVolumeField_UTILIZATION_METRICS_VOLUME_WRITE_BYTES_PER_SECOND_MAXIMUM = ExportableVolumeField.AddMember("UTILIZATION_METRICS_VOLUME_WRITE_BYTES_PER_SECOND_MAXIMUM", smithyprelude.Unit)
-
-	ExportableVolumeField_UTILIZATION_METRICS_VOLUME_IOPS_EXCEEDED_MAXIMUM = ExportableVolumeField.AddMember("UTILIZATION_METRICS_VOLUME_IOPS_EXCEEDED_MAXIMUM", smithyprelude.Unit)
-
-	ExportableVolumeField_UTILIZATION_METRICS_VOLUME_THROUGHPUT_EXCEEDED_MAXIMUM = ExportableVolumeField.AddMember("UTILIZATION_METRICS_VOLUME_THROUGHPUT_EXCEEDED_MAXIMUM", smithyprelude.Unit)
-
-	ExportableVolumeField_LOOKBACK_PERIOD_IN_DAYS = ExportableVolumeField.AddMember("LOOKBACK_PERIOD_IN_DAYS", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_TYPE = ExportableVolumeField.AddMember("CURRENT_CONFIGURATION_VOLUME_TYPE", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BASELINE_IOPS = ExportableVolumeField.AddMember("CURRENT_CONFIGURATION_VOLUME_BASELINE_IOPS", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT = ExportableVolumeField.AddMember("CURRENT_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BURST_IOPS = ExportableVolumeField.AddMember("CURRENT_CONFIGURATION_VOLUME_BURST_IOPS", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BURST_THROUGHPUT = ExportableVolumeField.AddMember("CURRENT_CONFIGURATION_VOLUME_BURST_THROUGHPUT", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_SIZE = ExportableVolumeField.AddMember("CURRENT_CONFIGURATION_VOLUME_SIZE", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_MONTHLY_PRICE = ExportableVolumeField.AddMember("CURRENT_MONTHLY_PRICE", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_TYPE = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_TYPE", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_IOPS = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_IOPS", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_IOPS = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_IOPS", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_THROUGHPUT = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_THROUGHPUT", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_SIZE = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_SIZE", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_MONTHLY_PRICE = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_MONTHLY_PRICE", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableVolumeField_LAST_REFRESH_TIMESTAMP = ExportableVolumeField.AddMember("LAST_REFRESH_TIMESTAMP", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_PERFORMANCE_RISK = ExportableVolumeField.AddMember("CURRENT_PERFORMANCE_RISK", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE", smithyprelude.Unit)
-
-	ExportableVolumeField_TAGS = ExportableVolumeField.AddMember("TAGS", smithyprelude.Unit)
-
-	ExportableVolumeField_ROOT_VOLUME = ExportableVolumeField.AddMember("ROOT_VOLUME", smithyprelude.Unit)
-
-	ExportableVolumeField_CURRENT_CONFIGURATION_ROOT_VOLUME = ExportableVolumeField.AddMember("CURRENT_CONFIGURATION_ROOT_VOLUME", smithyprelude.Unit)
-
-	ExportableVolumeField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = ExportableVolumeField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = ExportableVolumeField.AddMember("RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	ExportableVolumeField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = ExportableVolumeField.AddMember("EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD", smithyprelude.Unit)
-
-	_ExportableVolumeFields_member = _ExportableVolumeFields.AddMember("member", ExportableVolumeField)
-
-	S3Destination_bucket = S3Destination.AddMember("bucket", _DestinationBucket)
-
-	S3Destination_key = S3Destination.AddMember("key", _DestinationKey)
-
-	S3Destination_metadataKey = S3Destination.AddMember("metadataKey", _MetadataKey)
-
-	ExportDestination_s3 = ExportDestination.AddMember("s3", S3Destination)
-
-	ExternalMetricStatusCode_NO_EXTERNAL_METRIC_SET = ExternalMetricStatusCode.AddMember("NO_EXTERNAL_METRIC_SET", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_INTEGRATION_SUCCESS = ExternalMetricStatusCode.AddMember("INTEGRATION_SUCCESS", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_DATADOG_INTEGRATION_ERROR = ExternalMetricStatusCode.AddMember("DATADOG_INTEGRATION_ERROR", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_DYNATRACE_INTEGRATION_ERROR = ExternalMetricStatusCode.AddMember("DYNATRACE_INTEGRATION_ERROR", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_NEWRELIC_INTEGRATION_ERROR = ExternalMetricStatusCode.AddMember("NEWRELIC_INTEGRATION_ERROR", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_INSTANA_INTEGRATION_ERROR = ExternalMetricStatusCode.AddMember("INSTANA_INTEGRATION_ERROR", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_INSUFFICIENT_DATADOG_METRICS = ExternalMetricStatusCode.AddMember("INSUFFICIENT_DATADOG_METRICS", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_INSUFFICIENT_DYNATRACE_METRICS = ExternalMetricStatusCode.AddMember("INSUFFICIENT_DYNATRACE_METRICS", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_INSUFFICIENT_NEWRELIC_METRICS = ExternalMetricStatusCode.AddMember("INSUFFICIENT_NEWRELIC_METRICS", smithyprelude.Unit)
-
-	ExternalMetricStatusCode_INSUFFICIENT_INSTANA_METRICS = ExternalMetricStatusCode.AddMember("INSUFFICIENT_INSTANA_METRICS", smithyprelude.Unit)
-
-	ExternalMetricStatus_statusCode = ExternalMetricStatus.AddMember("statusCode", ExternalMetricStatusCode)
-
-	ExternalMetricStatus_statusReason = ExternalMetricStatus.AddMember("statusReason", _ExternalMetricStatusReason)
-
-	FileFormat_CSV = FileFormat.AddMember("CSV", smithyprelude.Unit)
-
-	FilterName_FINDING = FilterName.AddMember("FINDING", smithyprelude.Unit)
-
-	FilterName_FINDING_REASON_CODES = FilterName.AddMember("FINDING_REASON_CODES", smithyprelude.Unit)
-
-	FilterName_RECOMMENDATION_SOURCE_TYPE = FilterName.AddMember("RECOMMENDATION_SOURCE_TYPE", smithyprelude.Unit)
-
-	FilterName_INFERRED_WORKLOAD_TYPES = FilterName.AddMember("INFERRED_WORKLOAD_TYPES", smithyprelude.Unit)
-
-	Filter_name = Filter.AddMember("name", FilterName)
-
-	Filter_values = Filter.AddMember("values", _FilterValues)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	FindingReasonCode_MEMORY_OVER_PROVISIONED = FindingReasonCode.AddMember("MEMORY_OVER_PROVISIONED", smithyprelude.Unit)
-
-	FindingReasonCode_MEMORY_UNDER_PROVISIONED = FindingReasonCode.AddMember("MEMORY_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	_FunctionArns_member = _FunctionArns.AddMember("member", _FunctionArn)
-
-	GetRecommendationError_identifier = GetRecommendationError.AddMember("identifier", _Identifier)
-
-	GetRecommendationError_code = GetRecommendationError.AddMember("code", _Code)
-
-	GetRecommendationError_message = GetRecommendationError.AddMember("message", _Message)
-
-	_GetRecommendationErrors_member = _GetRecommendationErrors.AddMember("member", GetRecommendationError)
-
-	Idle_TRUE = Idle.AddMember("TRUE", smithyprelude.Unit)
-
-	Idle_FALSE = Idle.AddMember("FALSE", smithyprelude.Unit)
-
-	_IdleDimensionValues_member = _IdleDimensionValues.AddMember("member", _IdleDimensionValue)
-
-	IdleDimension_key = IdleDimension.AddMember("key", _IdleDimensionKey)
-
-	IdleDimension_values = IdleDimension.AddMember("values", _IdleDimensionValues)
-
-	_IdleDimensions_member = _IdleDimensions.AddMember("member", IdleDimension)
-
-	IdleEstimatedMonthlySavings_currency = IdleEstimatedMonthlySavings.AddMember("currency", Currency)
-
-	IdleEstimatedMonthlySavings_value = IdleEstimatedMonthlySavings.AddMember("value", _Value)
-
-	IdleFinding_IDLE = IdleFinding.AddMember("IDLE", smithyprelude.Unit)
-
-	IdleFinding_UNATTACHED = IdleFinding.AddMember("UNATTACHED", smithyprelude.Unit)
-
-	IdleFinding_UNUSED = IdleFinding.AddMember("UNUSED", smithyprelude.Unit)
-
-	IdleMetricName_CPU = IdleMetricName.AddMember("CPU", smithyprelude.Unit)
-
-	IdleMetricName_MEMORY = IdleMetricName.AddMember("MEMORY", smithyprelude.Unit)
-
-	IdleMetricName_NETWORK_OUT_BYTES_PER_SECOND = IdleMetricName.AddMember("NETWORK_OUT_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	IdleMetricName_NETWORK_IN_BYTES_PER_SECOND = IdleMetricName.AddMember("NETWORK_IN_BYTES_PER_SECOND", smithyprelude.Unit)
-
-	IdleMetricName_DATABASE_CONNECTIONS = IdleMetricName.AddMember("DATABASE_CONNECTIONS", smithyprelude.Unit)
-
-	IdleMetricName_EBS_VOLUME_READ_IOPS = IdleMetricName.AddMember("EBS_VOLUME_READ_IOPS", smithyprelude.Unit)
-
-	IdleMetricName_EBS_VOLUME_WRITE_IOPS = IdleMetricName.AddMember("EBS_VOLUME_WRITE_IOPS", smithyprelude.Unit)
-
-	IdleMetricName_VOLUME_READ_OPS_PER_SECOND = IdleMetricName.AddMember("VOLUME_READ_OPS_PER_SECOND", smithyprelude.Unit)
-
-	IdleMetricName_VOLUME_WRITE_OPS_PER_SECOND = IdleMetricName.AddMember("VOLUME_WRITE_OPS_PER_SECOND", smithyprelude.Unit)
-
-	IdleMetricName_ACTIVE_CONNECTION_COUNT = IdleMetricName.AddMember("ACTIVE_CONNECTION_COUNT", smithyprelude.Unit)
-
-	IdleMetricName_PACKETS_IN_FROM_SOURCE = IdleMetricName.AddMember("PACKETS_IN_FROM_SOURCE", smithyprelude.Unit)
-
-	IdleMetricName_PACKETS_IN_FROM_DESTINATION = IdleMetricName.AddMember("PACKETS_IN_FROM_DESTINATION", smithyprelude.Unit)
-
-	IdleMetricName_CONSUMED_READ_CAPACITY_UNITS = IdleMetricName.AddMember("CONSUMED_READ_CAPACITY_UNITS", smithyprelude.Unit)
-
-	IdleMetricName_CONSUMED_WRITE_CAPACITY_UNITS = IdleMetricName.AddMember("CONSUMED_WRITE_CAPACITY_UNITS", smithyprelude.Unit)
-
-	IdleMetricName_CONSUMED_CHANGE_DATA_CAPTURE_UNITS = IdleMetricName.AddMember("CONSUMED_CHANGE_DATA_CAPTURE_UNITS", smithyprelude.Unit)
-
-	IdleMetricName_NEW_CONNECTIONS = IdleMetricName.AddMember("NEW_CONNECTIONS", smithyprelude.Unit)
-
-	IdleMetricName_ENGINE_CPU_UTILIZATION = IdleMetricName.AddMember("ENGINE_CPU_UTILIZATION", smithyprelude.Unit)
-
-	IdleMetricName_CACHE_HITS = IdleMetricName.AddMember("CACHE_HITS", smithyprelude.Unit)
-
-	IdleMetricName_CACHE_MISSES = IdleMetricName.AddMember("CACHE_MISSES", smithyprelude.Unit)
-
-	IdleMetricName_KEYSPACE_HITS = IdleMetricName.AddMember("KEYSPACE_HITS", smithyprelude.Unit)
-
-	IdleMetricName_KEYSPACE_MISSES = IdleMetricName.AddMember("KEYSPACE_MISSES", smithyprelude.Unit)
-
-	IdleMetricName_IS_IDLE = IdleMetricName.AddMember("IS_IDLE", smithyprelude.Unit)
-
-	IdleMetricName_USER_CONNECTED = IdleMetricName.AddMember("USER_CONNECTED", smithyprelude.Unit)
-
-	IdleMetricName_INVOCATIONS = IdleMetricName.AddMember("INVOCATIONS", smithyprelude.Unit)
-
-	IdleMetricName_GET_TYPE_CMDS = IdleMetricName.AddMember("GET_TYPE_CMDS", smithyprelude.Unit)
-
-	IdleMetricName_SET_TYPE_CMDS = IdleMetricName.AddMember("SET_TYPE_CMDS", smithyprelude.Unit)
-
-	IdleMetricName_ELASTI_CACHE_PROCESSING_UNITS = IdleMetricName.AddMember("ELASTI_CACHE_PROCESSING_UNITS", smithyprelude.Unit)
-
-	IdleMetricName_CURR_CONNECTIONS = IdleMetricName.AddMember("CURR_CONNECTIONS", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_EC2_INSTANCE = IdleRecommendationResourceType.AddMember("EC2_INSTANCE", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_AUTO_SCALING_GROUP = IdleRecommendationResourceType.AddMember("AUTO_SCALING_GROUP", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_EBS_VOLUME = IdleRecommendationResourceType.AddMember("EBS_VOLUME", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_ECS_SERVICE = IdleRecommendationResourceType.AddMember("ECS_SERVICE", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_RDS_DB_INSTANCE = IdleRecommendationResourceType.AddMember("RDS_DB_INSTANCE", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_NAT_GATEWAY = IdleRecommendationResourceType.AddMember("NAT_GATEWAY", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_DYNAMO_DB_TABLE = IdleRecommendationResourceType.AddMember("DYNAMO_DB_TABLE", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_ELASTI_CACHE_CLUSTER = IdleRecommendationResourceType.AddMember("ELASTI_CACHE_CLUSTER", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_MEMORY_DB_CLUSTER = IdleRecommendationResourceType.AddMember("MEMORY_DB_CLUSTER", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_DOCUMENT_DB_CLUSTER = IdleRecommendationResourceType.AddMember("DOCUMENT_DB_CLUSTER", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_WORKSPACES = IdleRecommendationResourceType.AddMember("WORKSPACES", smithyprelude.Unit)
-
-	IdleRecommendationResourceType_SAGE_MAKER_ENDPOINT = IdleRecommendationResourceType.AddMember("SAGE_MAKER_ENDPOINT", smithyprelude.Unit)
-
-	IdleSavingsOpportunity_savingsOpportunityPercentage = IdleSavingsOpportunity.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	IdleSavingsOpportunity_estimatedMonthlySavings = IdleSavingsOpportunity.AddMember("estimatedMonthlySavings", IdleEstimatedMonthlySavings)
-
-	IdleSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = IdleSavingsOpportunityAfterDiscounts.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	IdleSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = IdleSavingsOpportunityAfterDiscounts.AddMember("estimatedMonthlySavings", IdleEstimatedMonthlySavings)
-
-	IdleUtilizationMetric_name = IdleUtilizationMetric.AddMember("name", IdleMetricName)
-
-	IdleUtilizationMetric_statistic = IdleUtilizationMetric.AddMember("statistic", MetricStatistic)
-
-	IdleUtilizationMetric_value = IdleUtilizationMetric.AddMember("value", _MetricValue)
-
-	IdleUtilizationMetric_dimensions = IdleUtilizationMetric.AddMember("dimensions", _IdleDimensions)
-
-	_IdleUtilizationMetrics_member = _IdleUtilizationMetrics.AddMember("member", IdleUtilizationMetric)
-
-	IdleRecommendation_resourceArn = IdleRecommendation.AddMember("resourceArn", _ResourceArn)
-
-	IdleRecommendation_resourceId = IdleRecommendation.AddMember("resourceId", _ResourceId)
-
-	IdleRecommendation_resourceType = IdleRecommendation.AddMember("resourceType", IdleRecommendationResourceType)
-
-	IdleRecommendation_accountId = IdleRecommendation.AddMember("accountId", _AccountId)
-
-	IdleRecommendation_finding = IdleRecommendation.AddMember("finding", IdleFinding)
-
-	IdleRecommendation_findingDescription = IdleRecommendation.AddMember("findingDescription", _IdleFindingDescription)
-
-	IdleRecommendation_savingsOpportunity = IdleRecommendation.AddMember("savingsOpportunity", IdleSavingsOpportunity)
-
-	IdleRecommendation_savingsOpportunityAfterDiscounts = IdleRecommendation.AddMember("savingsOpportunityAfterDiscounts", IdleSavingsOpportunityAfterDiscounts)
-
-	IdleRecommendation_utilizationMetrics = IdleRecommendation.AddMember("utilizationMetrics", _IdleUtilizationMetrics)
-
-	IdleRecommendation_lookBackPeriodInDays = IdleRecommendation.AddMember("lookBackPeriodInDays", _LookBackPeriodInDays)
-
-	IdleRecommendation_lastRefreshTimestamp = IdleRecommendation.AddMember("lastRefreshTimestamp", _LastRefreshTimestamp)
-
-	IdleRecommendation_tags = IdleRecommendation.AddMember("tags", _Tags)
-
-	IdleRecommendationError_identifier = IdleRecommendationError.AddMember("identifier", _Identifier)
-
-	IdleRecommendationError_code = IdleRecommendationError.AddMember("code", _Code)
-
-	IdleRecommendationError_message = IdleRecommendationError.AddMember("message", _Message)
-
-	IdleRecommendationError_resourceType = IdleRecommendationError.AddMember("resourceType", IdleRecommendationResourceType)
-
-	_IdleRecommendationErrors_member = _IdleRecommendationErrors.AddMember("member", IdleRecommendationError)
-
-	IdleRecommendationFilterName_FINDING = IdleRecommendationFilterName.AddMember("FINDING", smithyprelude.Unit)
-
-	IdleRecommendationFilterName_RESOURCE_TYPE = IdleRecommendationFilterName.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
-
-	IdleRecommendationFilter_name = IdleRecommendationFilter.AddMember("name", IdleRecommendationFilterName)
-
-	IdleRecommendationFilter_values = IdleRecommendationFilter.AddMember("values", _FilterValues)
-
-	_IdleRecommendationFilters_member = _IdleRecommendationFilters.AddMember("member", IdleRecommendationFilter)
-
-	_IdleRecommendations_member = _IdleRecommendations.AddMember("member", IdleRecommendation)
-
-	IdleSummary_name = IdleSummary.AddMember("name", IdleFinding)
-
-	IdleSummary_value = IdleSummary.AddMember("value", _SummaryValue)
-
-	_IdleSummaries_member = _IdleSummaries.AddMember("member", IdleSummary)
-
-	InferredWorkloadSaving_inferredWorkloadTypes = InferredWorkloadSaving.AddMember("inferredWorkloadTypes", _InferredWorkloadTypes)
-
-	InferredWorkloadSaving_estimatedMonthlySavings = InferredWorkloadSaving.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	_InferredWorkloadSavings_member = _InferredWorkloadSavings.AddMember("member", InferredWorkloadSaving)
-
-	_InstanceArns_member = _InstanceArns.AddMember("member", _InstanceArn)
-
-	InstanceEstimatedMonthlySavings_currency = InstanceEstimatedMonthlySavings.AddMember("currency", Currency)
-
-	InstanceEstimatedMonthlySavings_value = InstanceEstimatedMonthlySavings.AddMember("value", _Value)
-
-	InstanceIdle_TRUE = InstanceIdle.AddMember("TRUE", smithyprelude.Unit)
-
-	InstanceIdle_FALSE = InstanceIdle.AddMember("FALSE", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_CPU_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("CPU_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_CPU_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("CPU_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("MEMORY_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("MEMORY_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_EBS_THROUGHPUT_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("EBS_THROUGHPUT_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_EBS_THROUGHPUT_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("EBS_THROUGHPUT_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_EBS_IOPS_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("EBS_IOPS_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_EBS_IOPS_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("EBS_IOPS_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_NETWORK_BANDWIDTH_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("NETWORK_BANDWIDTH_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_NETWORK_BANDWIDTH_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("NETWORK_BANDWIDTH_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_NETWORK_PPS_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("NETWORK_PPS_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_NETWORK_PPS_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("NETWORK_PPS_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_DISK_IOPS_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("DISK_IOPS_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_DISK_IOPS_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("DISK_IOPS_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_DISK_THROUGHPUT_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("DISK_THROUGHPUT_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_DISK_THROUGHPUT_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("DISK_THROUGHPUT_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_GPU_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("GPU_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_GPU_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("GPU_OVER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_GPU_MEMORY_UNDER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("GPU_MEMORY_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	InstanceRecommendationFindingReasonCode_GPU_MEMORY_OVER_PROVISIONED = InstanceRecommendationFindingReasonCode.AddMember("GPU_MEMORY_OVER_PROVISIONED", smithyprelude.Unit)
-
-	_InstanceRecommendationFindingReasonCodes_member = _InstanceRecommendationFindingReasonCodes.AddMember("member", InstanceRecommendationFindingReasonCode)
-
-	PlatformDifference_HYPERVISOR = PlatformDifference.AddMember("HYPERVISOR", smithyprelude.Unit)
-
-	PlatformDifference_NETWORK_INTERFACE = PlatformDifference.AddMember("NETWORK_INTERFACE", smithyprelude.Unit)
-
-	PlatformDifference_STORAGE_INTERFACE = PlatformDifference.AddMember("STORAGE_INTERFACE", smithyprelude.Unit)
-
-	PlatformDifference_INSTANCE_STORE_AVAILABILITY = PlatformDifference.AddMember("INSTANCE_STORE_AVAILABILITY", smithyprelude.Unit)
-
-	PlatformDifference_VIRTUALIZATION_TYPE = PlatformDifference.AddMember("VIRTUALIZATION_TYPE", smithyprelude.Unit)
-
-	PlatformDifference_ARCHITECTURE = PlatformDifference.AddMember("ARCHITECTURE", smithyprelude.Unit)
-
-	_PlatformDifferences_member = _PlatformDifferences.AddMember("member", PlatformDifference)
-
-	InstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = InstanceSavingsOpportunityAfterDiscounts.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	InstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = InstanceSavingsOpportunityAfterDiscounts.AddMember("estimatedMonthlySavings", InstanceEstimatedMonthlySavings)
-
-	InstanceRecommendationOption_instanceType = InstanceRecommendationOption.AddMember("instanceType", _InstanceType)
-
-	InstanceRecommendationOption_instanceGpuInfo = InstanceRecommendationOption.AddMember("instanceGpuInfo", GpuInfo)
-
-	InstanceRecommendationOption_projectedUtilizationMetrics = InstanceRecommendationOption.AddMember("projectedUtilizationMetrics", _ProjectedUtilizationMetrics)
-
-	InstanceRecommendationOption_platformDifferences = InstanceRecommendationOption.AddMember("platformDifferences", _PlatformDifferences)
-
-	InstanceRecommendationOption_performanceRisk = InstanceRecommendationOption.AddMember("performanceRisk", _PerformanceRisk)
-
-	InstanceRecommendationOption_rank = InstanceRecommendationOption.AddMember("rank", _Rank)
-
-	InstanceRecommendationOption_savingsOpportunity = InstanceRecommendationOption.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	InstanceRecommendationOption_savingsOpportunityAfterDiscounts = InstanceRecommendationOption.AddMember("savingsOpportunityAfterDiscounts", InstanceSavingsOpportunityAfterDiscounts)
-
-	InstanceRecommendationOption_migrationEffort = InstanceRecommendationOption.AddMember("migrationEffort", MigrationEffort)
-
-	_RecommendationOptions_member = _RecommendationOptions.AddMember("member", InstanceRecommendationOption)
-
-	RecommendationSourceType_EC2_INSTANCE = RecommendationSourceType.AddMember("EC2_INSTANCE", smithyprelude.Unit)
-
-	RecommendationSourceType_AUTO_SCALING_GROUP = RecommendationSourceType.AddMember("AUTO_SCALING_GROUP", smithyprelude.Unit)
-
-	RecommendationSourceType_EBS_VOLUME = RecommendationSourceType.AddMember("EBS_VOLUME", smithyprelude.Unit)
-
-	RecommendationSourceType_LAMBDA_FUNCTION = RecommendationSourceType.AddMember("LAMBDA_FUNCTION", smithyprelude.Unit)
-
-	RecommendationSourceType_ECS_SERVICE = RecommendationSourceType.AddMember("ECS_SERVICE", smithyprelude.Unit)
-
-	RecommendationSourceType_LICENSE = RecommendationSourceType.AddMember("LICENSE", smithyprelude.Unit)
-
-	RecommendationSourceType_RDS_DB_INSTANCE = RecommendationSourceType.AddMember("RDS_DB_INSTANCE", smithyprelude.Unit)
-
-	RecommendationSourceType_RDS_DB_INSTANCE_STORAGE = RecommendationSourceType.AddMember("RDS_DB_INSTANCE_STORAGE", smithyprelude.Unit)
-
-	RecommendationSourceType_AURORA_DB_CLUSTER_STORAGE = RecommendationSourceType.AddMember("AURORA_DB_CLUSTER_STORAGE", smithyprelude.Unit)
-
-	RecommendationSourceType_NAT_GATEWAY = RecommendationSourceType.AddMember("NAT_GATEWAY", smithyprelude.Unit)
-
-	RecommendationSourceType_DYNAMO_DB_TABLE = RecommendationSourceType.AddMember("DYNAMO_DB_TABLE", smithyprelude.Unit)
-
-	RecommendationSourceType_ELASTI_CACHE_CLUSTER = RecommendationSourceType.AddMember("ELASTI_CACHE_CLUSTER", smithyprelude.Unit)
-
-	RecommendationSourceType_MEMORY_DB_CLUSTER = RecommendationSourceType.AddMember("MEMORY_DB_CLUSTER", smithyprelude.Unit)
-
-	RecommendationSourceType_DOCUMENT_DB_CLUSTER = RecommendationSourceType.AddMember("DOCUMENT_DB_CLUSTER", smithyprelude.Unit)
-
-	RecommendationSourceType_WORKSPACES = RecommendationSourceType.AddMember("WORKSPACES", smithyprelude.Unit)
-
-	RecommendationSourceType_SAGE_MAKER_ENDPOINT = RecommendationSourceType.AddMember("SAGE_MAKER_ENDPOINT", smithyprelude.Unit)
-
-	RecommendationSource_recommendationSourceArn = RecommendationSource.AddMember("recommendationSourceArn", _RecommendationSourceArn)
-
-	RecommendationSource_recommendationSourceType = RecommendationSource.AddMember("recommendationSourceType", RecommendationSourceType)
-
-	_RecommendationSources_member = _RecommendationSources.AddMember("member", RecommendationSource)
-
-	InstanceState_PENDING = InstanceState.AddMember("PENDING", smithyprelude.Unit)
-
-	InstanceState_RUNNING = InstanceState.AddMember("RUNNING", smithyprelude.Unit)
-
-	InstanceState_SHUTTING_DOWN = InstanceState.AddMember("SHUTTING_DOWN", smithyprelude.Unit)
-
-	InstanceState_TERMINATED = InstanceState.AddMember("TERMINATED", smithyprelude.Unit)
-
-	InstanceState_STOPPING = InstanceState.AddMember("STOPPING", smithyprelude.Unit)
-
-	InstanceState_STOPPED = InstanceState.AddMember("STOPPED", smithyprelude.Unit)
-
-	InstanceRecommendation_instanceArn = InstanceRecommendation.AddMember("instanceArn", _InstanceArn)
-
-	InstanceRecommendation_accountId = InstanceRecommendation.AddMember("accountId", _AccountId)
-
-	InstanceRecommendation_instanceName = InstanceRecommendation.AddMember("instanceName", _InstanceName)
-
-	InstanceRecommendation_currentInstanceType = InstanceRecommendation.AddMember("currentInstanceType", _CurrentInstanceType)
-
-	InstanceRecommendation_finding = InstanceRecommendation.AddMember("finding", Finding)
-
-	InstanceRecommendation_findingReasonCodes = InstanceRecommendation.AddMember("findingReasonCodes", _InstanceRecommendationFindingReasonCodes)
-
-	InstanceRecommendation_utilizationMetrics = InstanceRecommendation.AddMember("utilizationMetrics", _UtilizationMetrics)
-
-	InstanceRecommendation_lookBackPeriodInDays = InstanceRecommendation.AddMember("lookBackPeriodInDays", _LookBackPeriodInDays)
-
-	InstanceRecommendation_recommendationOptions = InstanceRecommendation.AddMember("recommendationOptions", _RecommendationOptions)
-
-	InstanceRecommendation_recommendationSources = InstanceRecommendation.AddMember("recommendationSources", _RecommendationSources)
-
-	InstanceRecommendation_lastRefreshTimestamp = InstanceRecommendation.AddMember("lastRefreshTimestamp", _LastRefreshTimestamp)
-
-	InstanceRecommendation_currentPerformanceRisk = InstanceRecommendation.AddMember("currentPerformanceRisk", CurrentPerformanceRisk)
-
-	InstanceRecommendation_effectiveRecommendationPreferences = InstanceRecommendation.AddMember("effectiveRecommendationPreferences", EffectiveRecommendationPreferences)
-
-	InstanceRecommendation_inferredWorkloadTypes = InstanceRecommendation.AddMember("inferredWorkloadTypes", _InferredWorkloadTypes)
-
-	InstanceRecommendation_instanceState = InstanceRecommendation.AddMember("instanceState", InstanceState)
-
-	InstanceRecommendation_tags = InstanceRecommendation.AddMember("tags", _Tags)
-
-	InstanceRecommendation_externalMetricStatus = InstanceRecommendation.AddMember("externalMetricStatus", ExternalMetricStatus)
-
-	InstanceRecommendation_currentInstanceGpuInfo = InstanceRecommendation.AddMember("currentInstanceGpuInfo", GpuInfo)
-
-	InstanceRecommendation_idle = InstanceRecommendation.AddMember("idle", InstanceIdle)
-
-	_InstanceRecommendations_member = _InstanceRecommendations.AddMember("member", InstanceRecommendation)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", _ErrorMessage)
-
-	JobFilterName_RESOURCE_TYPE = JobFilterName.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
-
-	JobFilterName_JOB_STATUS = JobFilterName.AddMember("JOB_STATUS", smithyprelude.Unit)
-
-	JobFilter_name = JobFilter.AddMember("name", JobFilterName)
-
-	JobFilter_values = JobFilter.AddMember("values", _FilterValues)
-
-	_JobFilters_member = _JobFilters.AddMember("member", JobFilter)
-
-	_JobIds_member = _JobIds.AddMember("member", _JobId)
-
-	JobStatus_QUEUED = JobStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_COMPLETE = JobStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	LambdaSavingsEstimationModeSource_PUBLIC_PRICING = LambdaSavingsEstimationModeSource.AddMember("PUBLIC_PRICING", smithyprelude.Unit)
-
-	LambdaSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = LambdaSavingsEstimationModeSource.AddMember("COST_EXPLORER_RIGHTSIZING", smithyprelude.Unit)
-
-	LambdaSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = LambdaSavingsEstimationModeSource.AddMember("COST_OPTIMIZATION_HUB", smithyprelude.Unit)
-
-	LambdaSavingsEstimationMode_source = LambdaSavingsEstimationMode.AddMember("source", LambdaSavingsEstimationModeSource)
-
-	LambdaEffectiveRecommendationPreferences_savingsEstimationMode = LambdaEffectiveRecommendationPreferences.AddMember("savingsEstimationMode", LambdaSavingsEstimationMode)
-
-	LambdaEstimatedMonthlySavings_currency = LambdaEstimatedMonthlySavings.AddMember("currency", Currency)
-
-	LambdaEstimatedMonthlySavings_value = LambdaEstimatedMonthlySavings.AddMember("value", _Value)
-
-	LambdaFunctionMemoryMetricName_DURATION = LambdaFunctionMemoryMetricName.AddMember("DURATION", smithyprelude.Unit)
-
-	LambdaFunctionMemoryMetricStatistic_LOWER_BOUND = LambdaFunctionMemoryMetricStatistic.AddMember("LOWER_BOUND", smithyprelude.Unit)
-
-	LambdaFunctionMemoryMetricStatistic_UPPER_BOUND = LambdaFunctionMemoryMetricStatistic.AddMember("UPPER_BOUND", smithyprelude.Unit)
-
-	LambdaFunctionMemoryMetricStatistic_EXPECTED = LambdaFunctionMemoryMetricStatistic.AddMember("EXPECTED", smithyprelude.Unit)
-
-	LambdaFunctionMemoryProjectedMetric_name = LambdaFunctionMemoryProjectedMetric.AddMember("name", LambdaFunctionMemoryMetricName)
-
-	LambdaFunctionMemoryProjectedMetric_statistic = LambdaFunctionMemoryProjectedMetric.AddMember("statistic", LambdaFunctionMemoryMetricStatistic)
-
-	LambdaFunctionMemoryProjectedMetric_value = LambdaFunctionMemoryProjectedMetric.AddMember("value", _MetricValue)
-
-	_LambdaFunctionMemoryProjectedMetrics_member = _LambdaFunctionMemoryProjectedMetrics.AddMember("member", LambdaFunctionMemoryProjectedMetric)
-
-	LambdaSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = LambdaSavingsOpportunityAfterDiscounts.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	LambdaSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = LambdaSavingsOpportunityAfterDiscounts.AddMember("estimatedMonthlySavings", LambdaEstimatedMonthlySavings)
-
-	LambdaFunctionMemoryRecommendationOption_rank = LambdaFunctionMemoryRecommendationOption.AddMember("rank", _Rank)
-
-	LambdaFunctionMemoryRecommendationOption_memorySize = LambdaFunctionMemoryRecommendationOption.AddMember("memorySize", _MemorySize)
-
-	LambdaFunctionMemoryRecommendationOption_projectedUtilizationMetrics = LambdaFunctionMemoryRecommendationOption.AddMember("projectedUtilizationMetrics", _LambdaFunctionMemoryProjectedMetrics)
-
-	LambdaFunctionMemoryRecommendationOption_savingsOpportunity = LambdaFunctionMemoryRecommendationOption.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	LambdaFunctionMemoryRecommendationOption_savingsOpportunityAfterDiscounts = LambdaFunctionMemoryRecommendationOption.AddMember("savingsOpportunityAfterDiscounts", LambdaSavingsOpportunityAfterDiscounts)
-
-	_LambdaFunctionMemoryRecommendationOptions_member = _LambdaFunctionMemoryRecommendationOptions.AddMember("member", LambdaFunctionMemoryRecommendationOption)
-
-	LambdaFunctionMetricName_DURATION = LambdaFunctionMetricName.AddMember("DURATION", smithyprelude.Unit)
-
-	LambdaFunctionMetricName_MEMORY = LambdaFunctionMetricName.AddMember("MEMORY", smithyprelude.Unit)
-
-	LambdaFunctionMetricStatistic_MAXIMUM = LambdaFunctionMetricStatistic.AddMember("MAXIMUM", smithyprelude.Unit)
-
-	LambdaFunctionMetricStatistic_AVERAGE = LambdaFunctionMetricStatistic.AddMember("AVERAGE", smithyprelude.Unit)
-
-	LambdaFunctionUtilizationMetric_name = LambdaFunctionUtilizationMetric.AddMember("name", LambdaFunctionMetricName)
-
-	LambdaFunctionUtilizationMetric_statistic = LambdaFunctionUtilizationMetric.AddMember("statistic", LambdaFunctionMetricStatistic)
-
-	LambdaFunctionUtilizationMetric_value = LambdaFunctionUtilizationMetric.AddMember("value", _MetricValue)
-
-	_LambdaFunctionUtilizationMetrics_member = _LambdaFunctionUtilizationMetrics.AddMember("member", LambdaFunctionUtilizationMetric)
-
-	LambdaFunctionRecommendationFinding_OPTIMIZED = LambdaFunctionRecommendationFinding.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	LambdaFunctionRecommendationFinding_NOT_OPTIMIZED = LambdaFunctionRecommendationFinding.AddMember("NOT_OPTIMIZED", smithyprelude.Unit)
-
-	LambdaFunctionRecommendationFinding_UNAVAILABLE = LambdaFunctionRecommendationFinding.AddMember("UNAVAILABLE", smithyprelude.Unit)
-
-	LambdaFunctionRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED = LambdaFunctionRecommendationFindingReasonCode.AddMember("MEMORY_OVER_PROVISIONED", smithyprelude.Unit)
-
-	LambdaFunctionRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED = LambdaFunctionRecommendationFindingReasonCode.AddMember("MEMORY_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	LambdaFunctionRecommendationFindingReasonCode_INSUFFICIENT_DATA = LambdaFunctionRecommendationFindingReasonCode.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
-
-	LambdaFunctionRecommendationFindingReasonCode_INCONCLUSIVE = LambdaFunctionRecommendationFindingReasonCode.AddMember("INCONCLUSIVE", smithyprelude.Unit)
-
-	_LambdaFunctionRecommendationFindingReasonCodes_member = _LambdaFunctionRecommendationFindingReasonCodes.AddMember("member", LambdaFunctionRecommendationFindingReasonCode)
-
-	LambdaFunctionRecommendation_functionArn = LambdaFunctionRecommendation.AddMember("functionArn", _FunctionArn)
-
-	LambdaFunctionRecommendation_functionVersion = LambdaFunctionRecommendation.AddMember("functionVersion", _FunctionVersion)
-
-	LambdaFunctionRecommendation_accountId = LambdaFunctionRecommendation.AddMember("accountId", _AccountId)
-
-	LambdaFunctionRecommendation_currentMemorySize = LambdaFunctionRecommendation.AddMember("currentMemorySize", _MemorySize)
-
-	LambdaFunctionRecommendation_numberOfInvocations = LambdaFunctionRecommendation.AddMember("numberOfInvocations", _NumberOfInvocations)
-
-	LambdaFunctionRecommendation_utilizationMetrics = LambdaFunctionRecommendation.AddMember("utilizationMetrics", _LambdaFunctionUtilizationMetrics)
-
-	LambdaFunctionRecommendation_lookbackPeriodInDays = LambdaFunctionRecommendation.AddMember("lookbackPeriodInDays", _LookBackPeriodInDays)
-
-	LambdaFunctionRecommendation_lastRefreshTimestamp = LambdaFunctionRecommendation.AddMember("lastRefreshTimestamp", _LastRefreshTimestamp)
-
-	LambdaFunctionRecommendation_finding = LambdaFunctionRecommendation.AddMember("finding", LambdaFunctionRecommendationFinding)
-
-	LambdaFunctionRecommendation_findingReasonCodes = LambdaFunctionRecommendation.AddMember("findingReasonCodes", _LambdaFunctionRecommendationFindingReasonCodes)
-
-	LambdaFunctionRecommendation_memorySizeRecommendationOptions = LambdaFunctionRecommendation.AddMember("memorySizeRecommendationOptions", _LambdaFunctionMemoryRecommendationOptions)
-
-	LambdaFunctionRecommendation_currentPerformanceRisk = LambdaFunctionRecommendation.AddMember("currentPerformanceRisk", CurrentPerformanceRisk)
-
-	LambdaFunctionRecommendation_effectiveRecommendationPreferences = LambdaFunctionRecommendation.AddMember("effectiveRecommendationPreferences", LambdaEffectiveRecommendationPreferences)
-
-	LambdaFunctionRecommendation_tags = LambdaFunctionRecommendation.AddMember("tags", _Tags)
-
-	LambdaFunctionRecommendationFilterName_FINDING = LambdaFunctionRecommendationFilterName.AddMember("FINDING", smithyprelude.Unit)
-
-	LambdaFunctionRecommendationFilterName_FINDING_REASON_CODE = LambdaFunctionRecommendationFilterName.AddMember("FINDING_REASON_CODE", smithyprelude.Unit)
-
-	LambdaFunctionRecommendationFilter_name = LambdaFunctionRecommendationFilter.AddMember("name", LambdaFunctionRecommendationFilterName)
-
-	LambdaFunctionRecommendationFilter_values = LambdaFunctionRecommendationFilter.AddMember("values", _FilterValues)
-
-	_LambdaFunctionRecommendationFilters_member = _LambdaFunctionRecommendationFilters.AddMember("member", LambdaFunctionRecommendationFilter)
-
-	_LambdaFunctionRecommendations_member = _LambdaFunctionRecommendations.AddMember("member", LambdaFunctionRecommendation)
-
-	LicenseEdition_ENTERPRISE = LicenseEdition.AddMember("ENTERPRISE", smithyprelude.Unit)
-
-	LicenseEdition_STANDARD = LicenseEdition.AddMember("STANDARD", smithyprelude.Unit)
-
-	LicenseEdition_FREE = LicenseEdition.AddMember("FREE", smithyprelude.Unit)
-
-	LicenseEdition_NO_LICENSE_EDITION_FOUND = LicenseEdition.AddMember("NO_LICENSE_EDITION_FOUND", smithyprelude.Unit)
-
-	LicenseName_SQLSERVER = LicenseName.AddMember("SQLSERVER", smithyprelude.Unit)
-
-	LicenseModel_LICENSE_INCLUDED = LicenseModel.AddMember("LICENSE_INCLUDED", smithyprelude.Unit)
-
-	LicenseModel_BRING_YOUR_OWN_LICENSE = LicenseModel.AddMember("BRING_YOUR_OWN_LICENSE", smithyprelude.Unit)
-
-	MetricSourceProvider_CloudWatchAppInsights = MetricSourceProvider.AddMember("CloudWatchAppInsights", smithyprelude.Unit)
-
-	MetricSource_provider = MetricSource.AddMember("provider", MetricSourceProvider)
-
-	MetricSource_providerArn = MetricSource.AddMember("providerArn", _MetricProviderArn)
-
-	_MetricsSource_member = _MetricsSource.AddMember("member", MetricSource)
-
-	LicenseConfiguration_numberOfCores = LicenseConfiguration.AddMember("numberOfCores", _NumberOfCores)
-
-	LicenseConfiguration_instanceType = LicenseConfiguration.AddMember("instanceType", _InstanceType)
-
-	LicenseConfiguration_operatingSystem = LicenseConfiguration.AddMember("operatingSystem", _OperatingSystem)
-
-	LicenseConfiguration_licenseEdition = LicenseConfiguration.AddMember("licenseEdition", LicenseEdition)
-
-	LicenseConfiguration_licenseName = LicenseConfiguration.AddMember("licenseName", LicenseName)
-
-	LicenseConfiguration_licenseModel = LicenseConfiguration.AddMember("licenseModel", LicenseModel)
-
-	LicenseConfiguration_licenseVersion = LicenseConfiguration.AddMember("licenseVersion", _LicenseVersion)
-
-	LicenseConfiguration_metricsSource = LicenseConfiguration.AddMember("metricsSource", _MetricsSource)
-
-	LicenseFinding_INSUFFICIENT_METRICS = LicenseFinding.AddMember("INSUFFICIENT_METRICS", smithyprelude.Unit)
-
-	LicenseFinding_OPTIMIZED = LicenseFinding.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	LicenseFinding_NOT_OPTIMIZED = LicenseFinding.AddMember("NOT_OPTIMIZED", smithyprelude.Unit)
-
-	LicenseFindingReasonCode_CW_APP_INSIGHTS_DISABLED = LicenseFindingReasonCode.AddMember("CW_APP_INSIGHTS_DISABLED", smithyprelude.Unit)
-
-	LicenseFindingReasonCode_CW_APP_INSIGHTS_ERROR = LicenseFindingReasonCode.AddMember("CW_APP_INSIGHTS_ERROR", smithyprelude.Unit)
-
-	LicenseFindingReasonCode_LICENSE_OVER_PROVISIONED = LicenseFindingReasonCode.AddMember("LICENSE_OVER_PROVISIONED", smithyprelude.Unit)
-
-	LicenseFindingReasonCode_OPTIMIZED = LicenseFindingReasonCode.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	_LicenseFindingReasonCodes_member = _LicenseFindingReasonCodes.AddMember("member", LicenseFindingReasonCode)
-
-	LicenseRecommendationOption_rank = LicenseRecommendationOption.AddMember("rank", _Rank)
-
-	LicenseRecommendationOption_operatingSystem = LicenseRecommendationOption.AddMember("operatingSystem", _OperatingSystem)
-
-	LicenseRecommendationOption_licenseEdition = LicenseRecommendationOption.AddMember("licenseEdition", LicenseEdition)
-
-	LicenseRecommendationOption_licenseModel = LicenseRecommendationOption.AddMember("licenseModel", LicenseModel)
-
-	LicenseRecommendationOption_savingsOpportunity = LicenseRecommendationOption.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	_LicenseRecommendationOptions_member = _LicenseRecommendationOptions.AddMember("member", LicenseRecommendationOption)
-
-	LicenseRecommendation_resourceArn = LicenseRecommendation.AddMember("resourceArn", _ResourceArn)
-
-	LicenseRecommendation_accountId = LicenseRecommendation.AddMember("accountId", _AccountId)
-
-	LicenseRecommendation_currentLicenseConfiguration = LicenseRecommendation.AddMember("currentLicenseConfiguration", LicenseConfiguration)
-
-	LicenseRecommendation_lookbackPeriodInDays = LicenseRecommendation.AddMember("lookbackPeriodInDays", _LookBackPeriodInDays)
-
-	LicenseRecommendation_lastRefreshTimestamp = LicenseRecommendation.AddMember("lastRefreshTimestamp", _LastRefreshTimestamp)
-
-	LicenseRecommendation_finding = LicenseRecommendation.AddMember("finding", LicenseFinding)
-
-	LicenseRecommendation_findingReasonCodes = LicenseRecommendation.AddMember("findingReasonCodes", _LicenseFindingReasonCodes)
-
-	LicenseRecommendation_licenseRecommendationOptions = LicenseRecommendation.AddMember("licenseRecommendationOptions", _LicenseRecommendationOptions)
-
-	LicenseRecommendation_tags = LicenseRecommendation.AddMember("tags", _Tags)
-
-	LicenseRecommendationFilterName_LICENSE_FINDING = LicenseRecommendationFilterName.AddMember("LICENSE_FINDING", smithyprelude.Unit)
-
-	LicenseRecommendationFilterName_LICENSE_FINDING_REASON_CODE = LicenseRecommendationFilterName.AddMember("LICENSE_FINDING_REASON_CODE", smithyprelude.Unit)
-
-	LicenseRecommendationFilterName_LICENSE_NAME = LicenseRecommendationFilterName.AddMember("LICENSE_NAME", smithyprelude.Unit)
-
-	LicenseRecommendationFilter_name = LicenseRecommendationFilter.AddMember("name", LicenseRecommendationFilterName)
-
-	LicenseRecommendationFilter_values = LicenseRecommendationFilter.AddMember("values", _FilterValues)
-
-	_LicenseRecommendationFilters_member = _LicenseRecommendationFilters.AddMember("member", LicenseRecommendationFilter)
-
-	_LicenseRecommendations_member = _LicenseRecommendations.AddMember("member", LicenseRecommendation)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	MissingAuthenticationToken_message = MissingAuthenticationToken.AddMember("message", _ErrorMessage)
-
-	OptInRequiredException_message = OptInRequiredException.AddMember("message", _ErrorMessage)
-
-	Order_ASC = Order.AddMember("ASC", smithyprelude.Unit)
-
-	Order_DESC = Order.AddMember("DESC", smithyprelude.Unit)
-
-	OrderBy_dimension = OrderBy.AddMember("dimension", Dimension)
-
-	OrderBy_order = OrderBy.AddMember("order", Order)
-
-	PreferredResource_name = PreferredResource.AddMember("name", PreferredResourceName)
-
-	PreferredResource_includeList = PreferredResource.AddMember("includeList", _PreferredResourceValues)
-
-	PreferredResource_excludeList = PreferredResource.AddMember("excludeList", _PreferredResourceValues)
-
-	_PreferredResources_member = _PreferredResources.AddMember("member", PreferredResource)
-
-	ProjectedMetric_name = ProjectedMetric.AddMember("name", MetricName)
-
-	ProjectedMetric_timestamps = ProjectedMetric.AddMember("timestamps", _Timestamps)
-
-	ProjectedMetric_values = ProjectedMetric.AddMember("values", _MetricValues)
-
-	_ProjectedMetrics_member = _ProjectedMetrics.AddMember("member", ProjectedMetric)
-
-	RDSCurrentInstancePerformanceRisk_VERY_LOW = RDSCurrentInstancePerformanceRisk.AddMember("VERY_LOW", smithyprelude.Unit)
-
-	RDSCurrentInstancePerformanceRisk_LOW = RDSCurrentInstancePerformanceRisk.AddMember("LOW", smithyprelude.Unit)
-
-	RDSCurrentInstancePerformanceRisk_MEDIUM = RDSCurrentInstancePerformanceRisk.AddMember("MEDIUM", smithyprelude.Unit)
-
-	RDSCurrentInstancePerformanceRisk_HIGH = RDSCurrentInstancePerformanceRisk.AddMember("HIGH", smithyprelude.Unit)
-
-	RDSDBMetricName_CPU = RDSDBMetricName.AddMember("CPU", smithyprelude.Unit)
-
-	RDSDBMetricName_MEMORY = RDSDBMetricName.AddMember("MEMORY", smithyprelude.Unit)
-
-	RDSDBMetricName_EBS_VOLUME_STORAGE_SPACE_UTILIZATION = RDSDBMetricName.AddMember("EBS_VOLUME_STORAGE_SPACE_UTILIZATION", smithyprelude.Unit)
-
-	RDSDBMetricName_NETWORK_RECEIVE_THROUGHPUT = RDSDBMetricName.AddMember("NETWORK_RECEIVE_THROUGHPUT", smithyprelude.Unit)
-
-	RDSDBMetricName_NETWORK_TRANSMIT_THROUGHPUT = RDSDBMetricName.AddMember("NETWORK_TRANSMIT_THROUGHPUT", smithyprelude.Unit)
-
-	RDSDBMetricName_EBS_VOLUME_READ_IOPS = RDSDBMetricName.AddMember("EBS_VOLUME_READ_IOPS", smithyprelude.Unit)
-
-	RDSDBMetricName_EBS_VOLUME_WRITE_IOPS = RDSDBMetricName.AddMember("EBS_VOLUME_WRITE_IOPS", smithyprelude.Unit)
-
-	RDSDBMetricName_EBS_VOLUME_READ_THROUGHPUT = RDSDBMetricName.AddMember("EBS_VOLUME_READ_THROUGHPUT", smithyprelude.Unit)
-
-	RDSDBMetricName_EBS_VOLUME_WRITE_THROUGHPUT = RDSDBMetricName.AddMember("EBS_VOLUME_WRITE_THROUGHPUT", smithyprelude.Unit)
-
-	RDSDBMetricName_DATABASE_CONNECTIONS = RDSDBMetricName.AddMember("DATABASE_CONNECTIONS", smithyprelude.Unit)
-
-	RDSDBMetricName_STORAGE_NETWORK_RECEIVE_THROUGHPUT = RDSDBMetricName.AddMember("STORAGE_NETWORK_RECEIVE_THROUGHPUT", smithyprelude.Unit)
-
-	RDSDBMetricName_STORAGE_NETWORK_TRANSMIT_THROUGHPUT = RDSDBMetricName.AddMember("STORAGE_NETWORK_TRANSMIT_THROUGHPUT", smithyprelude.Unit)
-
-	RDSDBMetricName_AURORA_MEMORY_HEALTH_STATE = RDSDBMetricName.AddMember("AURORA_MEMORY_HEALTH_STATE", smithyprelude.Unit)
-
-	RDSDBMetricName_AURORA_MEMORY_NUM_DECLINED_SQL = RDSDBMetricName.AddMember("AURORA_MEMORY_NUM_DECLINED_SQL", smithyprelude.Unit)
-
-	RDSDBMetricName_AURORA_MEMORY_NUM_KILL_CONN_TOTAL = RDSDBMetricName.AddMember("AURORA_MEMORY_NUM_KILL_CONN_TOTAL", smithyprelude.Unit)
-
-	RDSDBMetricName_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL = RDSDBMetricName.AddMember("AURORA_MEMORY_NUM_KILL_QUERY_TOTAL", smithyprelude.Unit)
-
-	RDSDBMetricName_READ_IOPS_EPHEMERAL_STORAGE = RDSDBMetricName.AddMember("READ_IOPS_EPHEMERAL_STORAGE", smithyprelude.Unit)
-
-	RDSDBMetricName_WRITE_IOPS_EPHEMERAL_STORAGE = RDSDBMetricName.AddMember("WRITE_IOPS_EPHEMERAL_STORAGE", smithyprelude.Unit)
-
-	RDSDBMetricName_VOLUME_READ_IOPS = RDSDBMetricName.AddMember("VOLUME_READ_IOPS", smithyprelude.Unit)
-
-	RDSDBMetricName_VOLUME_BYTES_USED = RDSDBMetricName.AddMember("VOLUME_BYTES_USED", smithyprelude.Unit)
-
-	RDSDBMetricName_VOLUME_WRITE_IOPS = RDSDBMetricName.AddMember("VOLUME_WRITE_IOPS", smithyprelude.Unit)
-
-	RDSDatabaseProjectedMetric_name = RDSDatabaseProjectedMetric.AddMember("name", RDSDBMetricName)
-
-	RDSDatabaseProjectedMetric_timestamps = RDSDatabaseProjectedMetric.AddMember("timestamps", _Timestamps)
-
-	RDSDatabaseProjectedMetric_values = RDSDatabaseProjectedMetric.AddMember("values", _MetricValues)
-
-	_RDSDatabaseProjectedMetrics_member = _RDSDatabaseProjectedMetrics.AddMember("member", RDSDatabaseProjectedMetric)
-
-	RDSDatabaseRecommendedOptionProjectedMetric_recommendedDBInstanceClass = RDSDatabaseRecommendedOptionProjectedMetric.AddMember("recommendedDBInstanceClass", _RecommendedDBInstanceClass)
-
-	RDSDatabaseRecommendedOptionProjectedMetric_rank = RDSDatabaseRecommendedOptionProjectedMetric.AddMember("rank", _Rank)
-
-	RDSDatabaseRecommendedOptionProjectedMetric_projectedMetrics = RDSDatabaseRecommendedOptionProjectedMetric.AddMember("projectedMetrics", _RDSDatabaseProjectedMetrics)
-
-	_RDSDatabaseRecommendedOptionProjectedMetrics_member = _RDSDatabaseRecommendedOptionProjectedMetrics.AddMember("member", RDSDatabaseRecommendedOptionProjectedMetric)
-
-	RDSDBMetricStatistic_MAXIMUM = RDSDBMetricStatistic.AddMember("MAXIMUM", smithyprelude.Unit)
-
-	RDSDBMetricStatistic_MINIMUM = RDSDBMetricStatistic.AddMember("MINIMUM", smithyprelude.Unit)
-
-	RDSDBMetricStatistic_AVERAGE = RDSDBMetricStatistic.AddMember("AVERAGE", smithyprelude.Unit)
-
-	RDSDBUtilizationMetric_name = RDSDBUtilizationMetric.AddMember("name", RDSDBMetricName)
-
-	RDSDBUtilizationMetric_statistic = RDSDBUtilizationMetric.AddMember("statistic", RDSDBMetricStatistic)
-
-	RDSDBUtilizationMetric_value = RDSDBUtilizationMetric.AddMember("value", _MetricValue)
-
-	_RDSDBProjectedUtilizationMetrics_member = _RDSDBProjectedUtilizationMetrics.AddMember("member", RDSDBUtilizationMetric)
-
-	RDSInstanceEstimatedMonthlySavings_currency = RDSInstanceEstimatedMonthlySavings.AddMember("currency", Currency)
-
-	RDSInstanceEstimatedMonthlySavings_value = RDSInstanceEstimatedMonthlySavings.AddMember("value", _Value)
-
-	RDSInstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = RDSInstanceSavingsOpportunityAfterDiscounts.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	RDSInstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = RDSInstanceSavingsOpportunityAfterDiscounts.AddMember("estimatedMonthlySavings", RDSInstanceEstimatedMonthlySavings)
-
-	RDSDBInstanceRecommendationOption_dbInstanceClass = RDSDBInstanceRecommendationOption.AddMember("dbInstanceClass", _DBInstanceClass)
-
-	RDSDBInstanceRecommendationOption_projectedUtilizationMetrics = RDSDBInstanceRecommendationOption.AddMember("projectedUtilizationMetrics", _RDSDBProjectedUtilizationMetrics)
-
-	RDSDBInstanceRecommendationOption_performanceRisk = RDSDBInstanceRecommendationOption.AddMember("performanceRisk", _PerformanceRisk)
-
-	RDSDBInstanceRecommendationOption_rank = RDSDBInstanceRecommendationOption.AddMember("rank", _Rank)
-
-	RDSDBInstanceRecommendationOption_savingsOpportunity = RDSDBInstanceRecommendationOption.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	RDSDBInstanceRecommendationOption_savingsOpportunityAfterDiscounts = RDSDBInstanceRecommendationOption.AddMember("savingsOpportunityAfterDiscounts", RDSInstanceSavingsOpportunityAfterDiscounts)
-
-	_RDSDBInstanceRecommendationOptions_member = _RDSDBInstanceRecommendationOptions.AddMember("member", RDSDBInstanceRecommendationOption)
-
-	RDSInstanceFinding_OPTIMIZED = RDSInstanceFinding.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	RDSInstanceFinding_UNDER_PROVISIONED = RDSInstanceFinding.AddMember("UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFinding_OVER_PROVISIONED = RDSInstanceFinding.AddMember("OVER_PROVISIONED", smithyprelude.Unit)
-
-	RDSStorageFinding_OPTIMIZED = RDSStorageFinding.AddMember("OPTIMIZED", smithyprelude.Unit)
-
-	RDSStorageFinding_UNDER_PROVISIONED = RDSStorageFinding.AddMember("UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSStorageFinding_OVER_PROVISIONED = RDSStorageFinding.AddMember("OVER_PROVISIONED", smithyprelude.Unit)
-
-	RDSStorageFinding_NOT_OPTIMIZED = RDSStorageFinding.AddMember("NOT_OPTIMIZED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_CPU_OVER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("CPU_OVER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_NETWORK_BANDWIDTH_OVER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("NETWORK_BANDWIDTH_OVER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_EBS_IOPS_OVER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("EBS_IOPS_OVER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_EBS_IOPS_UNDER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("EBS_IOPS_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_EBS_THROUGHPUT_OVER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("EBS_THROUGHPUT_OVER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_CPU_UNDER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("CPU_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_NETWORK_BANDWIDTH_UNDER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("NETWORK_BANDWIDTH_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_EBS_THROUGHPUT_UNDER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("EBS_THROUGHPUT_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_NEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLE = RDSInstanceFindingReasonCode.AddMember("NEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLE", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_NEW_ENGINE_VERSION_AVAILABLE = RDSInstanceFindingReasonCode.AddMember("NEW_ENGINE_VERSION_AVAILABLE", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_DB_CLUSTER_WRITER_UNDER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("DB_CLUSTER_WRITER_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_MEMORY_UNDER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("MEMORY_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_INSTANCE_STORAGE_READ_IOPS_UNDER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("INSTANCE_STORAGE_READ_IOPS_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSInstanceFindingReasonCode_INSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONED = RDSInstanceFindingReasonCode.AddMember("INSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	_RDSInstanceFindingReasonCodes_member = _RDSInstanceFindingReasonCodes.AddMember("member", RDSInstanceFindingReasonCode)
-
-	RDSEstimatedMonthlyVolumeIOPsCostVariation_NONE = RDSEstimatedMonthlyVolumeIOPsCostVariation.AddMember("NONE", smithyprelude.Unit)
-
-	RDSEstimatedMonthlyVolumeIOPsCostVariation_LOW = RDSEstimatedMonthlyVolumeIOPsCostVariation.AddMember("LOW", smithyprelude.Unit)
-
-	RDSEstimatedMonthlyVolumeIOPsCostVariation_MEDIUM = RDSEstimatedMonthlyVolumeIOPsCostVariation.AddMember("MEDIUM", smithyprelude.Unit)
-
-	RDSEstimatedMonthlyVolumeIOPsCostVariation_HIGH = RDSEstimatedMonthlyVolumeIOPsCostVariation.AddMember("HIGH", smithyprelude.Unit)
-
-	RDSStorageFindingReasonCode_EBS_VOLUME_ALLOCATED_STORAGE_UNDER_PROVISIONED = RDSStorageFindingReasonCode.AddMember("EBS_VOLUME_ALLOCATED_STORAGE_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSStorageFindingReasonCode_EBS_VOLUME_THROUGHPUT_UNDER_PROVISIONED = RDSStorageFindingReasonCode.AddMember("EBS_VOLUME_THROUGHPUT_UNDER_PROVISIONED", smithyprelude.Unit)
-
-	RDSStorageFindingReasonCode_EBS_VOLUME_IOPS_OVER_PROVISIONED = RDSStorageFindingReasonCode.AddMember("EBS_VOLUME_IOPS_OVER_PROVISIONED", smithyprelude.Unit)
-
-	RDSStorageFindingReasonCode_EBS_VOLUME_THROUGHPUT_OVER_PROVISIONED = RDSStorageFindingReasonCode.AddMember("EBS_VOLUME_THROUGHPUT_OVER_PROVISIONED", smithyprelude.Unit)
-
-	RDSStorageFindingReasonCode_NEW_GENERATION_STORAGE_TYPE_AVAILABLE = RDSStorageFindingReasonCode.AddMember("NEW_GENERATION_STORAGE_TYPE_AVAILABLE", smithyprelude.Unit)
-
-	RDSStorageFindingReasonCode_DB_CLUSTER_STORAGE_OPTION_AVAILABLE = RDSStorageFindingReasonCode.AddMember("DB_CLUSTER_STORAGE_OPTION_AVAILABLE", smithyprelude.Unit)
-
-	RDSStorageFindingReasonCode_DB_CLUSTER_STORAGE_SAVINGS_AVAILABLE = RDSStorageFindingReasonCode.AddMember("DB_CLUSTER_STORAGE_SAVINGS_AVAILABLE", smithyprelude.Unit)
-
-	_RDSStorageFindingReasonCodes_member = _RDSStorageFindingReasonCodes.AddMember("member", RDSStorageFindingReasonCode)
-
-	RDSStorageEstimatedMonthlySavings_currency = RDSStorageEstimatedMonthlySavings.AddMember("currency", Currency)
-
-	RDSStorageEstimatedMonthlySavings_value = RDSStorageEstimatedMonthlySavings.AddMember("value", _Value)
-
-	RDSStorageSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = RDSStorageSavingsOpportunityAfterDiscounts.AddMember("savingsOpportunityPercentage", _SavingsOpportunityPercentage)
-
-	RDSStorageSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = RDSStorageSavingsOpportunityAfterDiscounts.AddMember("estimatedMonthlySavings", RDSStorageEstimatedMonthlySavings)
-
-	RDSDBStorageRecommendationOption_storageConfiguration = RDSDBStorageRecommendationOption.AddMember("storageConfiguration", DBStorageConfiguration)
-
-	RDSDBStorageRecommendationOption_rank = RDSDBStorageRecommendationOption.AddMember("rank", _Rank)
-
-	RDSDBStorageRecommendationOption_savingsOpportunity = RDSDBStorageRecommendationOption.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	RDSDBStorageRecommendationOption_savingsOpportunityAfterDiscounts = RDSDBStorageRecommendationOption.AddMember("savingsOpportunityAfterDiscounts", RDSStorageSavingsOpportunityAfterDiscounts)
-
-	RDSDBStorageRecommendationOption_estimatedMonthlyVolumeIOPsCostVariation = RDSDBStorageRecommendationOption.AddMember("estimatedMonthlyVolumeIOPsCostVariation", RDSEstimatedMonthlyVolumeIOPsCostVariation)
-
-	_RDSDBStorageRecommendationOptions_member = _RDSDBStorageRecommendationOptions.AddMember("member", RDSDBStorageRecommendationOption)
-
-	_RDSDBUtilizationMetrics_member = _RDSDBUtilizationMetrics.AddMember("member", RDSDBUtilizationMetric)
-
-	RDSSavingsEstimationModeSource_PUBLIC_PRICING = RDSSavingsEstimationModeSource.AddMember("PUBLIC_PRICING", smithyprelude.Unit)
-
-	RDSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = RDSSavingsEstimationModeSource.AddMember("COST_EXPLORER_RIGHTSIZING", smithyprelude.Unit)
-
-	RDSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = RDSSavingsEstimationModeSource.AddMember("COST_OPTIMIZATION_HUB", smithyprelude.Unit)
-
-	RDSSavingsEstimationMode_source = RDSSavingsEstimationMode.AddMember("source", RDSSavingsEstimationModeSource)
-
-	RDSEffectiveRecommendationPreferences_cpuVendorArchitectures = RDSEffectiveRecommendationPreferences.AddMember("cpuVendorArchitectures", _CpuVendorArchitectures)
-
-	RDSEffectiveRecommendationPreferences_enhancedInfrastructureMetrics = RDSEffectiveRecommendationPreferences.AddMember("enhancedInfrastructureMetrics", EnhancedInfrastructureMetrics)
-
-	RDSEffectiveRecommendationPreferences_lookBackPeriod = RDSEffectiveRecommendationPreferences.AddMember("lookBackPeriod", LookBackPeriodPreference)
-
-	RDSEffectiveRecommendationPreferences_savingsEstimationMode = RDSEffectiveRecommendationPreferences.AddMember("savingsEstimationMode", RDSSavingsEstimationMode)
-
-	RDSDBRecommendation_resourceArn = RDSDBRecommendation.AddMember("resourceArn", _ResourceArn)
-
-	RDSDBRecommendation_accountId = RDSDBRecommendation.AddMember("accountId", _AccountId)
-
-	RDSDBRecommendation_engine = RDSDBRecommendation.AddMember("engine", _Engine)
-
-	RDSDBRecommendation_engineVersion = RDSDBRecommendation.AddMember("engineVersion", _EngineVersion)
-
-	RDSDBRecommendation_promotionTier = RDSDBRecommendation.AddMember("promotionTier", _PromotionTier)
-
-	RDSDBRecommendation_currentDBInstanceClass = RDSDBRecommendation.AddMember("currentDBInstanceClass", _CurrentDBInstanceClass)
-
-	RDSDBRecommendation_currentStorageConfiguration = RDSDBRecommendation.AddMember("currentStorageConfiguration", DBStorageConfiguration)
-
-	RDSDBRecommendation_dbClusterIdentifier = RDSDBRecommendation.AddMember("dbClusterIdentifier", _DBClusterIdentifier)
-
-	RDSDBRecommendation_idle = RDSDBRecommendation.AddMember("idle", Idle)
-
-	RDSDBRecommendation_instanceFinding = RDSDBRecommendation.AddMember("instanceFinding", RDSInstanceFinding)
-
-	RDSDBRecommendation_storageFinding = RDSDBRecommendation.AddMember("storageFinding", RDSStorageFinding)
-
-	RDSDBRecommendation_instanceFindingReasonCodes = RDSDBRecommendation.AddMember("instanceFindingReasonCodes", _RDSInstanceFindingReasonCodes)
-
-	RDSDBRecommendation_currentInstancePerformanceRisk = RDSDBRecommendation.AddMember("currentInstancePerformanceRisk", RDSCurrentInstancePerformanceRisk)
-
-	RDSDBRecommendation_currentStorageEstimatedMonthlyVolumeIOPsCostVariation = RDSDBRecommendation.AddMember("currentStorageEstimatedMonthlyVolumeIOPsCostVariation", RDSEstimatedMonthlyVolumeIOPsCostVariation)
-
-	RDSDBRecommendation_storageFindingReasonCodes = RDSDBRecommendation.AddMember("storageFindingReasonCodes", _RDSStorageFindingReasonCodes)
-
-	RDSDBRecommendation_instanceRecommendationOptions = RDSDBRecommendation.AddMember("instanceRecommendationOptions", _RDSDBInstanceRecommendationOptions)
-
-	RDSDBRecommendation_storageRecommendationOptions = RDSDBRecommendation.AddMember("storageRecommendationOptions", _RDSDBStorageRecommendationOptions)
-
-	RDSDBRecommendation_utilizationMetrics = RDSDBRecommendation.AddMember("utilizationMetrics", _RDSDBUtilizationMetrics)
-
-	RDSDBRecommendation_effectiveRecommendationPreferences = RDSDBRecommendation.AddMember("effectiveRecommendationPreferences", RDSEffectiveRecommendationPreferences)
-
-	RDSDBRecommendation_lookbackPeriodInDays = RDSDBRecommendation.AddMember("lookbackPeriodInDays", _LookBackPeriodInDays)
-
-	RDSDBRecommendation_lastRefreshTimestamp = RDSDBRecommendation.AddMember("lastRefreshTimestamp", _LastRefreshTimestamp)
-
-	RDSDBRecommendation_tags = RDSDBRecommendation.AddMember("tags", _Tags)
-
-	RDSDBRecommendationFilterName_INSTANCE_FINDING = RDSDBRecommendationFilterName.AddMember("INSTANCE_FINDING", smithyprelude.Unit)
-
-	RDSDBRecommendationFilterName_INSTANCE_FINDING_REASON_CODE = RDSDBRecommendationFilterName.AddMember("INSTANCE_FINDING_REASON_CODE", smithyprelude.Unit)
-
-	RDSDBRecommendationFilterName_STORAGE_FINDING = RDSDBRecommendationFilterName.AddMember("STORAGE_FINDING", smithyprelude.Unit)
-
-	RDSDBRecommendationFilterName_STORAGE_FINDING_REASON_CODE = RDSDBRecommendationFilterName.AddMember("STORAGE_FINDING_REASON_CODE", smithyprelude.Unit)
-
-	RDSDBRecommendationFilterName_IDLE = RDSDBRecommendationFilterName.AddMember("IDLE", smithyprelude.Unit)
-
-	RDSDBRecommendationFilter_name = RDSDBRecommendationFilter.AddMember("name", RDSDBRecommendationFilterName)
-
-	RDSDBRecommendationFilter_values = RDSDBRecommendationFilter.AddMember("values", _FilterValues)
-
-	_RDSDBRecommendationFilters_member = _RDSDBRecommendationFilters.AddMember("member", RDSDBRecommendationFilter)
-
-	_RDSDBRecommendations_member = _RDSDBRecommendations.AddMember("member", RDSDBRecommendation)
-
-	ReasonCodeSummary_name = ReasonCodeSummary.AddMember("name", FindingReasonCode)
-
-	ReasonCodeSummary_value = ReasonCodeSummary.AddMember("value", _SummaryValue)
-
-	_ReasonCodeSummaries_member = _ReasonCodeSummaries.AddMember("member", ReasonCodeSummary)
-
-	ResourceType_EC2_INSTANCE = ResourceType.AddMember("EC2_INSTANCE", smithyprelude.Unit)
-
-	ResourceType_AUTO_SCALING_GROUP = ResourceType.AddMember("AUTO_SCALING_GROUP", smithyprelude.Unit)
-
-	ResourceType_EBS_VOLUME = ResourceType.AddMember("EBS_VOLUME", smithyprelude.Unit)
-
-	ResourceType_LAMBDA_FUNCTION = ResourceType.AddMember("LAMBDA_FUNCTION", smithyprelude.Unit)
-
-	ResourceType_NOT_APPLICABLE = ResourceType.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
-
-	ResourceType_ECS_SERVICE = ResourceType.AddMember("ECS_SERVICE", smithyprelude.Unit)
-
-	ResourceType_LICENSE = ResourceType.AddMember("LICENSE", smithyprelude.Unit)
-
-	ResourceType_RDS_DB_INSTANCE = ResourceType.AddMember("RDS_DB_INSTANCE", smithyprelude.Unit)
-
-	ResourceType_AURORA_DB_CLUSTER_STORAGE = ResourceType.AddMember("AURORA_DB_CLUSTER_STORAGE", smithyprelude.Unit)
-
-	ResourceType_IDLE = ResourceType.AddMember("IDLE", smithyprelude.Unit)
-
-	RecommendationExportJob_jobId = RecommendationExportJob.AddMember("jobId", _JobId)
-
-	RecommendationExportJob_destination = RecommendationExportJob.AddMember("destination", ExportDestination)
-
-	RecommendationExportJob_resourceType = RecommendationExportJob.AddMember("resourceType", ResourceType)
-
-	RecommendationExportJob_status = RecommendationExportJob.AddMember("status", JobStatus)
-
-	RecommendationExportJob_creationTimestamp = RecommendationExportJob.AddMember("creationTimestamp", _CreationTimestamp)
-
-	RecommendationExportJob_lastUpdatedTimestamp = RecommendationExportJob.AddMember("lastUpdatedTimestamp", _LastUpdatedTimestamp)
-
-	RecommendationExportJob_failureReason = RecommendationExportJob.AddMember("failureReason", _FailureReason)
-
-	_RecommendationExportJobs_member = _RecommendationExportJobs.AddMember("member", RecommendationExportJob)
-
-	RecommendationPreferenceName_ENHANCED_INFRASTRUCTURE_METRICS = RecommendationPreferenceName.AddMember("ENHANCED_INFRASTRUCTURE_METRICS", smithyprelude.Unit)
-
-	RecommendationPreferenceName_INFERRED_WORKLOAD_TYPES = RecommendationPreferenceName.AddMember("INFERRED_WORKLOAD_TYPES", smithyprelude.Unit)
-
-	RecommendationPreferenceName_EXTERNAL_METRICS_PREFERENCE = RecommendationPreferenceName.AddMember("EXTERNAL_METRICS_PREFERENCE", smithyprelude.Unit)
-
-	RecommendationPreferenceName_LOOKBACK_PERIOD_PREFERENCE = RecommendationPreferenceName.AddMember("LOOKBACK_PERIOD_PREFERENCE", smithyprelude.Unit)
-
-	RecommendationPreferenceName_PREFERRED_RESOURCES = RecommendationPreferenceName.AddMember("PREFERRED_RESOURCES", smithyprelude.Unit)
-
-	RecommendationPreferenceName_UTILIZATION_PREFERENCES = RecommendationPreferenceName.AddMember("UTILIZATION_PREFERENCES", smithyprelude.Unit)
-
-	_RecommendationPreferenceNames_member = _RecommendationPreferenceNames.AddMember("member", RecommendationPreferenceName)
-
-	RecommendationPreferences_cpuVendorArchitectures = RecommendationPreferences.AddMember("cpuVendorArchitectures", _CpuVendorArchitectures)
-
-	ScopeName_ORGANIZATION = ScopeName.AddMember("ORGANIZATION", smithyprelude.Unit)
-
-	ScopeName_ACCOUNT_ID = ScopeName.AddMember("ACCOUNT_ID", smithyprelude.Unit)
-
-	ScopeName_RESOURCE_ARN = ScopeName.AddMember("RESOURCE_ARN", smithyprelude.Unit)
-
-	Scope_name = Scope.AddMember("name", ScopeName)
-
-	Scope_value = Scope.AddMember("value", _ScopeValue)
-
-	SavingsEstimationMode_AFTER_DISCOUNTS = SavingsEstimationMode.AddMember("AFTER_DISCOUNTS", smithyprelude.Unit)
-
-	SavingsEstimationMode_BEFORE_DISCOUNTS = SavingsEstimationMode.AddMember("BEFORE_DISCOUNTS", smithyprelude.Unit)
-
-	RecommendationPreferencesDetail_scope = RecommendationPreferencesDetail.AddMember("scope", Scope)
-
-	RecommendationPreferencesDetail_resourceType = RecommendationPreferencesDetail.AddMember("resourceType", ResourceType)
-
-	RecommendationPreferencesDetail_enhancedInfrastructureMetrics = RecommendationPreferencesDetail.AddMember("enhancedInfrastructureMetrics", EnhancedInfrastructureMetrics)
-
-	RecommendationPreferencesDetail_inferredWorkloadTypes = RecommendationPreferencesDetail.AddMember("inferredWorkloadTypes", InferredWorkloadTypesPreference)
-
-	RecommendationPreferencesDetail_externalMetricsPreference = RecommendationPreferencesDetail.AddMember("externalMetricsPreference", ExternalMetricsPreference)
-
-	RecommendationPreferencesDetail_lookBackPeriod = RecommendationPreferencesDetail.AddMember("lookBackPeriod", LookBackPeriodPreference)
-
-	RecommendationPreferencesDetail_utilizationPreferences = RecommendationPreferencesDetail.AddMember("utilizationPreferences", _UtilizationPreferences)
-
-	RecommendationPreferencesDetail_preferredResources = RecommendationPreferencesDetail.AddMember("preferredResources", _EffectivePreferredResources)
-
-	RecommendationPreferencesDetail_savingsEstimationMode = RecommendationPreferencesDetail.AddMember("savingsEstimationMode", SavingsEstimationMode)
-
-	_RecommendationPreferencesDetails_member = _RecommendationPreferencesDetails.AddMember("member", RecommendationPreferencesDetail)
-
-	Summary_name = Summary.AddMember("name", Finding)
-
-	Summary_value = Summary.AddMember("value", _SummaryValue)
-
-	Summary_reasonCodeSummaries = Summary.AddMember("reasonCodeSummaries", _ReasonCodeSummaries)
-
-	_Summaries_member = _Summaries.AddMember("member", Summary)
-
-	RecommendationSummary_summaries = RecommendationSummary.AddMember("summaries", _Summaries)
-
-	RecommendationSummary_idleSummaries = RecommendationSummary.AddMember("idleSummaries", _IdleSummaries)
-
-	RecommendationSummary_recommendationResourceType = RecommendationSummary.AddMember("recommendationResourceType", RecommendationSourceType)
-
-	RecommendationSummary_accountId = RecommendationSummary.AddMember("accountId", _AccountId)
-
-	RecommendationSummary_savingsOpportunity = RecommendationSummary.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	RecommendationSummary_idleSavingsOpportunity = RecommendationSummary.AddMember("idleSavingsOpportunity", SavingsOpportunity)
-
-	RecommendationSummary_aggregatedSavingsOpportunity = RecommendationSummary.AddMember("aggregatedSavingsOpportunity", SavingsOpportunity)
-
-	RecommendationSummary_currentPerformanceRiskRatings = RecommendationSummary.AddMember("currentPerformanceRiskRatings", CurrentPerformanceRiskRatings)
-
-	RecommendationSummary_inferredWorkloadSavings = RecommendationSummary.AddMember("inferredWorkloadSavings", _InferredWorkloadSavings)
-
-	_RecommendationSummaries_member = _RecommendationSummaries.AddMember("member", RecommendationSummary)
-
-	RecommendedOptionProjectedMetric_recommendedInstanceType = RecommendedOptionProjectedMetric.AddMember("recommendedInstanceType", _RecommendedInstanceType)
-
-	RecommendedOptionProjectedMetric_rank = RecommendedOptionProjectedMetric.AddMember("rank", _Rank)
-
-	RecommendedOptionProjectedMetric_projectedMetrics = RecommendedOptionProjectedMetric.AddMember("projectedMetrics", _ProjectedMetrics)
-
-	_RecommendedOptionProjectedMetrics_member = _RecommendedOptionProjectedMetrics.AddMember("member", RecommendedOptionProjectedMetric)
-
-	_ResourceArns_member = _ResourceArns.AddMember("member", _ResourceArn)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	S3DestinationConfig_bucket = S3DestinationConfig.AddMember("bucket", _DestinationBucket)
-
-	S3DestinationConfig_keyPrefix = S3DestinationConfig.AddMember("keyPrefix", _DestinationKeyPrefix)
-
-	_ServiceArns_member = _ServiceArns.AddMember("member", _ServiceArn)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", _ErrorMessage)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	_VolumeArns_member = _VolumeArns.AddMember("member", _VolumeArn)
-
-	VolumeConfiguration_volumeType = VolumeConfiguration.AddMember("volumeType", _VolumeType)
-
-	VolumeConfiguration_volumeSize = VolumeConfiguration.AddMember("volumeSize", _VolumeSize)
-
-	VolumeConfiguration_volumeBaselineIOPS = VolumeConfiguration.AddMember("volumeBaselineIOPS", _VolumeBaselineIOPS)
-
-	VolumeConfiguration_volumeBurstIOPS = VolumeConfiguration.AddMember("volumeBurstIOPS", _VolumeBurstIOPS)
-
-	VolumeConfiguration_volumeBaselineThroughput = VolumeConfiguration.AddMember("volumeBaselineThroughput", _VolumeBaselineThroughput)
-
-	VolumeConfiguration_volumeBurstThroughput = VolumeConfiguration.AddMember("volumeBurstThroughput", _VolumeBurstThroughput)
-
-	VolumeConfiguration_rootVolume = VolumeConfiguration.AddMember("rootVolume", _RootVolume)
-
-	VolumeRecommendationOption_configuration = VolumeRecommendationOption.AddMember("configuration", VolumeConfiguration)
-
-	VolumeRecommendationOption_performanceRisk = VolumeRecommendationOption.AddMember("performanceRisk", _PerformanceRisk)
-
-	VolumeRecommendationOption_rank = VolumeRecommendationOption.AddMember("rank", _Rank)
-
-	VolumeRecommendationOption_savingsOpportunity = VolumeRecommendationOption.AddMember("savingsOpportunity", SavingsOpportunity)
-
-	VolumeRecommendationOption_savingsOpportunityAfterDiscounts = VolumeRecommendationOption.AddMember("savingsOpportunityAfterDiscounts", EBSSavingsOpportunityAfterDiscounts)
-
-	_VolumeRecommendationOptions_member = _VolumeRecommendationOptions.AddMember("member", VolumeRecommendationOption)
-
-	VolumeRecommendation_volumeArn = VolumeRecommendation.AddMember("volumeArn", _VolumeArn)
-
-	VolumeRecommendation_accountId = VolumeRecommendation.AddMember("accountId", _AccountId)
-
-	VolumeRecommendation_currentConfiguration = VolumeRecommendation.AddMember("currentConfiguration", VolumeConfiguration)
-
-	VolumeRecommendation_finding = VolumeRecommendation.AddMember("finding", EBSFinding)
-
-	VolumeRecommendation_utilizationMetrics = VolumeRecommendation.AddMember("utilizationMetrics", _EBSUtilizationMetrics)
-
-	VolumeRecommendation_lookBackPeriodInDays = VolumeRecommendation.AddMember("lookBackPeriodInDays", _LookBackPeriodInDays)
-
-	VolumeRecommendation_volumeRecommendationOptions = VolumeRecommendation.AddMember("volumeRecommendationOptions", _VolumeRecommendationOptions)
-
-	VolumeRecommendation_lastRefreshTimestamp = VolumeRecommendation.AddMember("lastRefreshTimestamp", _LastRefreshTimestamp)
-
-	VolumeRecommendation_currentPerformanceRisk = VolumeRecommendation.AddMember("currentPerformanceRisk", CurrentPerformanceRisk)
-
-	VolumeRecommendation_effectiveRecommendationPreferences = VolumeRecommendation.AddMember("effectiveRecommendationPreferences", EBSEffectiveRecommendationPreferences)
-
-	VolumeRecommendation_tags = VolumeRecommendation.AddMember("tags", _Tags)
-
-	_VolumeRecommendations_member = _VolumeRecommendations.AddMember("member", VolumeRecommendation)
-
-	DeleteRecommendationPreferencesRequest_resourceType = DeleteRecommendationPreferencesRequest.AddMember("resourceType", ResourceType)
-
-	DeleteRecommendationPreferencesRequest_scope = DeleteRecommendationPreferencesRequest.AddMember("scope", Scope)
-
-	DeleteRecommendationPreferencesRequest_recommendationPreferenceNames = DeleteRecommendationPreferencesRequest.AddMember("recommendationPreferenceNames", _RecommendationPreferenceNames)
-
-	DescribeRecommendationExportJobsRequest_jobIds = DescribeRecommendationExportJobsRequest.AddMember("jobIds", _JobIds)
-
-	DescribeRecommendationExportJobsRequest_filters = DescribeRecommendationExportJobsRequest.AddMember("filters", _JobFilters)
-
-	DescribeRecommendationExportJobsRequest_nextToken = DescribeRecommendationExportJobsRequest.AddMember("nextToken", _NextToken)
-
-	DescribeRecommendationExportJobsRequest_maxResults = DescribeRecommendationExportJobsRequest.AddMember("maxResults", _MaxResults)
-
-	DescribeRecommendationExportJobsResponse_recommendationExportJobs = DescribeRecommendationExportJobsResponse.AddMember("recommendationExportJobs", _RecommendationExportJobs)
-
-	DescribeRecommendationExportJobsResponse_nextToken = DescribeRecommendationExportJobsResponse.AddMember("nextToken", _NextToken)
-
-	ExportAutoScalingGroupRecommendationsRequest_accountIds = ExportAutoScalingGroupRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	ExportAutoScalingGroupRecommendationsRequest_filters = ExportAutoScalingGroupRecommendationsRequest.AddMember("filters", _Filters)
-
-	ExportAutoScalingGroupRecommendationsRequest_fieldsToExport = ExportAutoScalingGroupRecommendationsRequest.AddMember("fieldsToExport", _ExportableAutoScalingGroupFields)
-
-	ExportAutoScalingGroupRecommendationsRequest_s3DestinationConfig = ExportAutoScalingGroupRecommendationsRequest.AddMember("s3DestinationConfig", S3DestinationConfig)
-
-	ExportAutoScalingGroupRecommendationsRequest_fileFormat = ExportAutoScalingGroupRecommendationsRequest.AddMember("fileFormat", FileFormat)
-
-	ExportAutoScalingGroupRecommendationsRequest_includeMemberAccounts = ExportAutoScalingGroupRecommendationsRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	ExportAutoScalingGroupRecommendationsRequest_recommendationPreferences = ExportAutoScalingGroupRecommendationsRequest.AddMember("recommendationPreferences", RecommendationPreferences)
-
-	ExportAutoScalingGroupRecommendationsResponse_jobId = ExportAutoScalingGroupRecommendationsResponse.AddMember("jobId", _JobId)
-
-	ExportAutoScalingGroupRecommendationsResponse_s3Destination = ExportAutoScalingGroupRecommendationsResponse.AddMember("s3Destination", S3Destination)
-
-	ExportEBSVolumeRecommendationsRequest_accountIds = ExportEBSVolumeRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	ExportEBSVolumeRecommendationsRequest_filters = ExportEBSVolumeRecommendationsRequest.AddMember("filters", _EBSFilters)
-
-	ExportEBSVolumeRecommendationsRequest_fieldsToExport = ExportEBSVolumeRecommendationsRequest.AddMember("fieldsToExport", _ExportableVolumeFields)
-
-	ExportEBSVolumeRecommendationsRequest_s3DestinationConfig = ExportEBSVolumeRecommendationsRequest.AddMember("s3DestinationConfig", S3DestinationConfig)
-
-	ExportEBSVolumeRecommendationsRequest_fileFormat = ExportEBSVolumeRecommendationsRequest.AddMember("fileFormat", FileFormat)
-
-	ExportEBSVolumeRecommendationsRequest_includeMemberAccounts = ExportEBSVolumeRecommendationsRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	ExportEBSVolumeRecommendationsResponse_jobId = ExportEBSVolumeRecommendationsResponse.AddMember("jobId", _JobId)
-
-	ExportEBSVolumeRecommendationsResponse_s3Destination = ExportEBSVolumeRecommendationsResponse.AddMember("s3Destination", S3Destination)
-
-	ExportEC2InstanceRecommendationsRequest_accountIds = ExportEC2InstanceRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	ExportEC2InstanceRecommendationsRequest_filters = ExportEC2InstanceRecommendationsRequest.AddMember("filters", _Filters)
-
-	ExportEC2InstanceRecommendationsRequest_fieldsToExport = ExportEC2InstanceRecommendationsRequest.AddMember("fieldsToExport", _ExportableInstanceFields)
-
-	ExportEC2InstanceRecommendationsRequest_s3DestinationConfig = ExportEC2InstanceRecommendationsRequest.AddMember("s3DestinationConfig", S3DestinationConfig)
-
-	ExportEC2InstanceRecommendationsRequest_fileFormat = ExportEC2InstanceRecommendationsRequest.AddMember("fileFormat", FileFormat)
-
-	ExportEC2InstanceRecommendationsRequest_includeMemberAccounts = ExportEC2InstanceRecommendationsRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	ExportEC2InstanceRecommendationsRequest_recommendationPreferences = ExportEC2InstanceRecommendationsRequest.AddMember("recommendationPreferences", RecommendationPreferences)
-
-	ExportEC2InstanceRecommendationsResponse_jobId = ExportEC2InstanceRecommendationsResponse.AddMember("jobId", _JobId)
-
-	ExportEC2InstanceRecommendationsResponse_s3Destination = ExportEC2InstanceRecommendationsResponse.AddMember("s3Destination", S3Destination)
-
-	ExportECSServiceRecommendationsRequest_accountIds = ExportECSServiceRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	ExportECSServiceRecommendationsRequest_filters = ExportECSServiceRecommendationsRequest.AddMember("filters", _ECSServiceRecommendationFilters)
-
-	ExportECSServiceRecommendationsRequest_fieldsToExport = ExportECSServiceRecommendationsRequest.AddMember("fieldsToExport", _ExportableECSServiceFields)
-
-	ExportECSServiceRecommendationsRequest_s3DestinationConfig = ExportECSServiceRecommendationsRequest.AddMember("s3DestinationConfig", S3DestinationConfig)
-
-	ExportECSServiceRecommendationsRequest_fileFormat = ExportECSServiceRecommendationsRequest.AddMember("fileFormat", FileFormat)
-
-	ExportECSServiceRecommendationsRequest_includeMemberAccounts = ExportECSServiceRecommendationsRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	ExportECSServiceRecommendationsResponse_jobId = ExportECSServiceRecommendationsResponse.AddMember("jobId", _JobId)
-
-	ExportECSServiceRecommendationsResponse_s3Destination = ExportECSServiceRecommendationsResponse.AddMember("s3Destination", S3Destination)
-
-	ExportIdleRecommendationsRequest_accountIds = ExportIdleRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	ExportIdleRecommendationsRequest_filters = ExportIdleRecommendationsRequest.AddMember("filters", _IdleRecommendationFilters)
-
-	ExportIdleRecommendationsRequest_fieldsToExport = ExportIdleRecommendationsRequest.AddMember("fieldsToExport", _ExportableIdleFields)
-
-	ExportIdleRecommendationsRequest_s3DestinationConfig = ExportIdleRecommendationsRequest.AddMember("s3DestinationConfig", S3DestinationConfig)
-
-	ExportIdleRecommendationsRequest_fileFormat = ExportIdleRecommendationsRequest.AddMember("fileFormat", FileFormat)
-
-	ExportIdleRecommendationsRequest_includeMemberAccounts = ExportIdleRecommendationsRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	ExportIdleRecommendationsResponse_jobId = ExportIdleRecommendationsResponse.AddMember("jobId", _JobId)
-
-	ExportIdleRecommendationsResponse_s3Destination = ExportIdleRecommendationsResponse.AddMember("s3Destination", S3Destination)
-
-	ExportLambdaFunctionRecommendationsRequest_accountIds = ExportLambdaFunctionRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	ExportLambdaFunctionRecommendationsRequest_filters = ExportLambdaFunctionRecommendationsRequest.AddMember("filters", _LambdaFunctionRecommendationFilters)
-
-	ExportLambdaFunctionRecommendationsRequest_fieldsToExport = ExportLambdaFunctionRecommendationsRequest.AddMember("fieldsToExport", _ExportableLambdaFunctionFields)
-
-	ExportLambdaFunctionRecommendationsRequest_s3DestinationConfig = ExportLambdaFunctionRecommendationsRequest.AddMember("s3DestinationConfig", S3DestinationConfig)
-
-	ExportLambdaFunctionRecommendationsRequest_fileFormat = ExportLambdaFunctionRecommendationsRequest.AddMember("fileFormat", FileFormat)
-
-	ExportLambdaFunctionRecommendationsRequest_includeMemberAccounts = ExportLambdaFunctionRecommendationsRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	ExportLambdaFunctionRecommendationsResponse_jobId = ExportLambdaFunctionRecommendationsResponse.AddMember("jobId", _JobId)
-
-	ExportLambdaFunctionRecommendationsResponse_s3Destination = ExportLambdaFunctionRecommendationsResponse.AddMember("s3Destination", S3Destination)
-
-	ExportLicenseRecommendationsRequest_accountIds = ExportLicenseRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	ExportLicenseRecommendationsRequest_filters = ExportLicenseRecommendationsRequest.AddMember("filters", _LicenseRecommendationFilters)
-
-	ExportLicenseRecommendationsRequest_fieldsToExport = ExportLicenseRecommendationsRequest.AddMember("fieldsToExport", _ExportableLicenseFields)
-
-	ExportLicenseRecommendationsRequest_s3DestinationConfig = ExportLicenseRecommendationsRequest.AddMember("s3DestinationConfig", S3DestinationConfig)
-
-	ExportLicenseRecommendationsRequest_fileFormat = ExportLicenseRecommendationsRequest.AddMember("fileFormat", FileFormat)
-
-	ExportLicenseRecommendationsRequest_includeMemberAccounts = ExportLicenseRecommendationsRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	ExportLicenseRecommendationsResponse_jobId = ExportLicenseRecommendationsResponse.AddMember("jobId", _JobId)
-
-	ExportLicenseRecommendationsResponse_s3Destination = ExportLicenseRecommendationsResponse.AddMember("s3Destination", S3Destination)
-
-	ExportRDSDatabaseRecommendationsRequest_accountIds = ExportRDSDatabaseRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	ExportRDSDatabaseRecommendationsRequest_filters = ExportRDSDatabaseRecommendationsRequest.AddMember("filters", _RDSDBRecommendationFilters)
-
-	ExportRDSDatabaseRecommendationsRequest_fieldsToExport = ExportRDSDatabaseRecommendationsRequest.AddMember("fieldsToExport", _ExportableRDSDBFields)
-
-	ExportRDSDatabaseRecommendationsRequest_s3DestinationConfig = ExportRDSDatabaseRecommendationsRequest.AddMember("s3DestinationConfig", S3DestinationConfig)
-
-	ExportRDSDatabaseRecommendationsRequest_fileFormat = ExportRDSDatabaseRecommendationsRequest.AddMember("fileFormat", FileFormat)
-
-	ExportRDSDatabaseRecommendationsRequest_includeMemberAccounts = ExportRDSDatabaseRecommendationsRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	ExportRDSDatabaseRecommendationsRequest_recommendationPreferences = ExportRDSDatabaseRecommendationsRequest.AddMember("recommendationPreferences", RecommendationPreferences)
-
-	ExportRDSDatabaseRecommendationsResponse_jobId = ExportRDSDatabaseRecommendationsResponse.AddMember("jobId", _JobId)
-
-	ExportRDSDatabaseRecommendationsResponse_s3Destination = ExportRDSDatabaseRecommendationsResponse.AddMember("s3Destination", S3Destination)
-
-	GetAutoScalingGroupRecommendationsRequest_accountIds = GetAutoScalingGroupRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	GetAutoScalingGroupRecommendationsRequest_autoScalingGroupArns = GetAutoScalingGroupRecommendationsRequest.AddMember("autoScalingGroupArns", _AutoScalingGroupArns)
-
-	GetAutoScalingGroupRecommendationsRequest_nextToken = GetAutoScalingGroupRecommendationsRequest.AddMember("nextToken", _NextToken)
-
-	GetAutoScalingGroupRecommendationsRequest_maxResults = GetAutoScalingGroupRecommendationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetAutoScalingGroupRecommendationsRequest_filters = GetAutoScalingGroupRecommendationsRequest.AddMember("filters", _Filters)
-
-	GetAutoScalingGroupRecommendationsRequest_recommendationPreferences = GetAutoScalingGroupRecommendationsRequest.AddMember("recommendationPreferences", RecommendationPreferences)
-
-	GetAutoScalingGroupRecommendationsResponse_nextToken = GetAutoScalingGroupRecommendationsResponse.AddMember("nextToken", _NextToken)
-
-	GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations = GetAutoScalingGroupRecommendationsResponse.AddMember("autoScalingGroupRecommendations", _AutoScalingGroupRecommendations)
-
-	GetAutoScalingGroupRecommendationsResponse_errors = GetAutoScalingGroupRecommendationsResponse.AddMember("errors", _GetRecommendationErrors)
-
-	GetEBSVolumeRecommendationsRequest_volumeArns = GetEBSVolumeRecommendationsRequest.AddMember("volumeArns", _VolumeArns)
-
-	GetEBSVolumeRecommendationsRequest_nextToken = GetEBSVolumeRecommendationsRequest.AddMember("nextToken", _NextToken)
-
-	GetEBSVolumeRecommendationsRequest_maxResults = GetEBSVolumeRecommendationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetEBSVolumeRecommendationsRequest_filters = GetEBSVolumeRecommendationsRequest.AddMember("filters", _EBSFilters)
-
-	GetEBSVolumeRecommendationsRequest_accountIds = GetEBSVolumeRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	GetEBSVolumeRecommendationsResponse_nextToken = GetEBSVolumeRecommendationsResponse.AddMember("nextToken", _NextToken)
-
-	GetEBSVolumeRecommendationsResponse_volumeRecommendations = GetEBSVolumeRecommendationsResponse.AddMember("volumeRecommendations", _VolumeRecommendations)
-
-	GetEBSVolumeRecommendationsResponse_errors = GetEBSVolumeRecommendationsResponse.AddMember("errors", _GetRecommendationErrors)
-
-	GetEC2InstanceRecommendationsRequest_instanceArns = GetEC2InstanceRecommendationsRequest.AddMember("instanceArns", _InstanceArns)
-
-	GetEC2InstanceRecommendationsRequest_nextToken = GetEC2InstanceRecommendationsRequest.AddMember("nextToken", _NextToken)
-
-	GetEC2InstanceRecommendationsRequest_maxResults = GetEC2InstanceRecommendationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetEC2InstanceRecommendationsRequest_filters = GetEC2InstanceRecommendationsRequest.AddMember("filters", _Filters)
-
-	GetEC2InstanceRecommendationsRequest_accountIds = GetEC2InstanceRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	GetEC2InstanceRecommendationsRequest_recommendationPreferences = GetEC2InstanceRecommendationsRequest.AddMember("recommendationPreferences", RecommendationPreferences)
-
-	GetEC2InstanceRecommendationsResponse_nextToken = GetEC2InstanceRecommendationsResponse.AddMember("nextToken", _NextToken)
-
-	GetEC2InstanceRecommendationsResponse_instanceRecommendations = GetEC2InstanceRecommendationsResponse.AddMember("instanceRecommendations", _InstanceRecommendations)
-
-	GetEC2InstanceRecommendationsResponse_errors = GetEC2InstanceRecommendationsResponse.AddMember("errors", _GetRecommendationErrors)
-
-	GetEC2RecommendationProjectedMetricsRequest_instanceArn = GetEC2RecommendationProjectedMetricsRequest.AddMember("instanceArn", _InstanceArn)
-
-	GetEC2RecommendationProjectedMetricsRequest_stat = GetEC2RecommendationProjectedMetricsRequest.AddMember("stat", MetricStatistic)
-
-	GetEC2RecommendationProjectedMetricsRequest_period = GetEC2RecommendationProjectedMetricsRequest.AddMember("period", _Period)
-
-	GetEC2RecommendationProjectedMetricsRequest_startTime = GetEC2RecommendationProjectedMetricsRequest.AddMember("startTime", _Timestamp)
-
-	GetEC2RecommendationProjectedMetricsRequest_endTime = GetEC2RecommendationProjectedMetricsRequest.AddMember("endTime", _Timestamp)
-
-	GetEC2RecommendationProjectedMetricsRequest_recommendationPreferences = GetEC2RecommendationProjectedMetricsRequest.AddMember("recommendationPreferences", RecommendationPreferences)
-
-	GetEC2RecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics = GetEC2RecommendationProjectedMetricsResponse.AddMember("recommendedOptionProjectedMetrics", _RecommendedOptionProjectedMetrics)
-
-	GetECSServiceRecommendationProjectedMetricsRequest_serviceArn = GetECSServiceRecommendationProjectedMetricsRequest.AddMember("serviceArn", _ServiceArn)
-
-	GetECSServiceRecommendationProjectedMetricsRequest_stat = GetECSServiceRecommendationProjectedMetricsRequest.AddMember("stat", MetricStatistic)
-
-	GetECSServiceRecommendationProjectedMetricsRequest_period = GetECSServiceRecommendationProjectedMetricsRequest.AddMember("period", _Period)
-
-	GetECSServiceRecommendationProjectedMetricsRequest_startTime = GetECSServiceRecommendationProjectedMetricsRequest.AddMember("startTime", _Timestamp)
-
-	GetECSServiceRecommendationProjectedMetricsRequest_endTime = GetECSServiceRecommendationProjectedMetricsRequest.AddMember("endTime", _Timestamp)
-
-	GetECSServiceRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics = GetECSServiceRecommendationProjectedMetricsResponse.AddMember("recommendedOptionProjectedMetrics", _ECSServiceRecommendedOptionProjectedMetrics)
-
-	GetECSServiceRecommendationsRequest_serviceArns = GetECSServiceRecommendationsRequest.AddMember("serviceArns", _ServiceArns)
-
-	GetECSServiceRecommendationsRequest_nextToken = GetECSServiceRecommendationsRequest.AddMember("nextToken", _NextToken)
-
-	GetECSServiceRecommendationsRequest_maxResults = GetECSServiceRecommendationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetECSServiceRecommendationsRequest_filters = GetECSServiceRecommendationsRequest.AddMember("filters", _ECSServiceRecommendationFilters)
-
-	GetECSServiceRecommendationsRequest_accountIds = GetECSServiceRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	GetECSServiceRecommendationsResponse_nextToken = GetECSServiceRecommendationsResponse.AddMember("nextToken", _NextToken)
-
-	GetECSServiceRecommendationsResponse_ecsServiceRecommendations = GetECSServiceRecommendationsResponse.AddMember("ecsServiceRecommendations", _ECSServiceRecommendations)
-
-	GetECSServiceRecommendationsResponse_errors = GetECSServiceRecommendationsResponse.AddMember("errors", _GetRecommendationErrors)
-
-	GetEffectiveRecommendationPreferencesRequest_resourceArn = GetEffectiveRecommendationPreferencesRequest.AddMember("resourceArn", _ResourceArn)
-
-	GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics = GetEffectiveRecommendationPreferencesResponse.AddMember("enhancedInfrastructureMetrics", EnhancedInfrastructureMetrics)
-
-	GetEffectiveRecommendationPreferencesResponse_externalMetricsPreference = GetEffectiveRecommendationPreferencesResponse.AddMember("externalMetricsPreference", ExternalMetricsPreference)
-
-	GetEffectiveRecommendationPreferencesResponse_lookBackPeriod = GetEffectiveRecommendationPreferencesResponse.AddMember("lookBackPeriod", LookBackPeriodPreference)
-
-	GetEffectiveRecommendationPreferencesResponse_utilizationPreferences = GetEffectiveRecommendationPreferencesResponse.AddMember("utilizationPreferences", _UtilizationPreferences)
-
-	GetEffectiveRecommendationPreferencesResponse_preferredResources = GetEffectiveRecommendationPreferencesResponse.AddMember("preferredResources", _EffectivePreferredResources)
-
-	GetEnrollmentStatusesForOrganizationRequest_filters = GetEnrollmentStatusesForOrganizationRequest.AddMember("filters", _EnrollmentFilters)
-
-	GetEnrollmentStatusesForOrganizationRequest_nextToken = GetEnrollmentStatusesForOrganizationRequest.AddMember("nextToken", _NextToken)
-
-	GetEnrollmentStatusesForOrganizationRequest_maxResults = GetEnrollmentStatusesForOrganizationRequest.AddMember("maxResults", _MaxResults)
-
-	GetEnrollmentStatusesForOrganizationResponse_accountEnrollmentStatuses = GetEnrollmentStatusesForOrganizationResponse.AddMember("accountEnrollmentStatuses", _AccountEnrollmentStatuses)
-
-	GetEnrollmentStatusesForOrganizationResponse_nextToken = GetEnrollmentStatusesForOrganizationResponse.AddMember("nextToken", _NextToken)
-
-	GetEnrollmentStatusResponse_status = GetEnrollmentStatusResponse.AddMember("status", Status)
-
-	GetEnrollmentStatusResponse_statusReason = GetEnrollmentStatusResponse.AddMember("statusReason", _StatusReason)
-
-	GetEnrollmentStatusResponse_memberAccountsEnrolled = GetEnrollmentStatusResponse.AddMember("memberAccountsEnrolled", _MemberAccountsEnrolled)
-
-	GetEnrollmentStatusResponse_lastUpdatedTimestamp = GetEnrollmentStatusResponse.AddMember("lastUpdatedTimestamp", _LastUpdatedTimestamp)
-
-	GetEnrollmentStatusResponse_numberOfMemberAccountsOptedIn = GetEnrollmentStatusResponse.AddMember("numberOfMemberAccountsOptedIn", _NumberOfMemberAccountsOptedIn)
-
-	GetIdleRecommendationsRequest_resourceArns = GetIdleRecommendationsRequest.AddMember("resourceArns", _ResourceArns)
-
-	GetIdleRecommendationsRequest_nextToken = GetIdleRecommendationsRequest.AddMember("nextToken", _NextToken)
-
-	GetIdleRecommendationsRequest_maxResults = GetIdleRecommendationsRequest.AddMember("maxResults", _IdleMaxResults)
-
-	GetIdleRecommendationsRequest_filters = GetIdleRecommendationsRequest.AddMember("filters", _IdleRecommendationFilters)
-
-	GetIdleRecommendationsRequest_accountIds = GetIdleRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	GetIdleRecommendationsRequest_orderBy = GetIdleRecommendationsRequest.AddMember("orderBy", OrderBy)
-
-	GetIdleRecommendationsResponse_nextToken = GetIdleRecommendationsResponse.AddMember("nextToken", _NextToken)
-
-	GetIdleRecommendationsResponse_idleRecommendations = GetIdleRecommendationsResponse.AddMember("idleRecommendations", _IdleRecommendations)
-
-	GetIdleRecommendationsResponse_errors = GetIdleRecommendationsResponse.AddMember("errors", _IdleRecommendationErrors)
-
-	GetLambdaFunctionRecommendationsRequest_functionArns = GetLambdaFunctionRecommendationsRequest.AddMember("functionArns", _FunctionArns)
-
-	GetLambdaFunctionRecommendationsRequest_accountIds = GetLambdaFunctionRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	GetLambdaFunctionRecommendationsRequest_filters = GetLambdaFunctionRecommendationsRequest.AddMember("filters", _LambdaFunctionRecommendationFilters)
-
-	GetLambdaFunctionRecommendationsRequest_nextToken = GetLambdaFunctionRecommendationsRequest.AddMember("nextToken", _NextToken)
-
-	GetLambdaFunctionRecommendationsRequest_maxResults = GetLambdaFunctionRecommendationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetLambdaFunctionRecommendationsResponse_nextToken = GetLambdaFunctionRecommendationsResponse.AddMember("nextToken", _NextToken)
-
-	GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations = GetLambdaFunctionRecommendationsResponse.AddMember("lambdaFunctionRecommendations", _LambdaFunctionRecommendations)
-
-	GetLicenseRecommendationsRequest_resourceArns = GetLicenseRecommendationsRequest.AddMember("resourceArns", _ResourceArns)
-
-	GetLicenseRecommendationsRequest_nextToken = GetLicenseRecommendationsRequest.AddMember("nextToken", _NextToken)
-
-	GetLicenseRecommendationsRequest_maxResults = GetLicenseRecommendationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetLicenseRecommendationsRequest_filters = GetLicenseRecommendationsRequest.AddMember("filters", _LicenseRecommendationFilters)
-
-	GetLicenseRecommendationsRequest_accountIds = GetLicenseRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	GetLicenseRecommendationsResponse_nextToken = GetLicenseRecommendationsResponse.AddMember("nextToken", _NextToken)
-
-	GetLicenseRecommendationsResponse_licenseRecommendations = GetLicenseRecommendationsResponse.AddMember("licenseRecommendations", _LicenseRecommendations)
-
-	GetLicenseRecommendationsResponse_errors = GetLicenseRecommendationsResponse.AddMember("errors", _GetRecommendationErrors)
-
-	GetRDSDatabaseRecommendationProjectedMetricsRequest_resourceArn = GetRDSDatabaseRecommendationProjectedMetricsRequest.AddMember("resourceArn", _ResourceArn)
-
-	GetRDSDatabaseRecommendationProjectedMetricsRequest_stat = GetRDSDatabaseRecommendationProjectedMetricsRequest.AddMember("stat", MetricStatistic)
-
-	GetRDSDatabaseRecommendationProjectedMetricsRequest_period = GetRDSDatabaseRecommendationProjectedMetricsRequest.AddMember("period", _Period)
-
-	GetRDSDatabaseRecommendationProjectedMetricsRequest_startTime = GetRDSDatabaseRecommendationProjectedMetricsRequest.AddMember("startTime", _Timestamp)
-
-	GetRDSDatabaseRecommendationProjectedMetricsRequest_endTime = GetRDSDatabaseRecommendationProjectedMetricsRequest.AddMember("endTime", _Timestamp)
-
-	GetRDSDatabaseRecommendationProjectedMetricsRequest_recommendationPreferences = GetRDSDatabaseRecommendationProjectedMetricsRequest.AddMember("recommendationPreferences", RecommendationPreferences)
-
-	GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics = GetRDSDatabaseRecommendationProjectedMetricsResponse.AddMember("recommendedOptionProjectedMetrics", _RDSDatabaseRecommendedOptionProjectedMetrics)
-
-	GetRDSDatabaseRecommendationsRequest_resourceArns = GetRDSDatabaseRecommendationsRequest.AddMember("resourceArns", _ResourceArns)
-
-	GetRDSDatabaseRecommendationsRequest_nextToken = GetRDSDatabaseRecommendationsRequest.AddMember("nextToken", _NextToken)
-
-	GetRDSDatabaseRecommendationsRequest_maxResults = GetRDSDatabaseRecommendationsRequest.AddMember("maxResults", _MaxResults)
-
-	GetRDSDatabaseRecommendationsRequest_filters = GetRDSDatabaseRecommendationsRequest.AddMember("filters", _RDSDBRecommendationFilters)
-
-	GetRDSDatabaseRecommendationsRequest_accountIds = GetRDSDatabaseRecommendationsRequest.AddMember("accountIds", _AccountIds)
-
-	GetRDSDatabaseRecommendationsRequest_recommendationPreferences = GetRDSDatabaseRecommendationsRequest.AddMember("recommendationPreferences", RecommendationPreferences)
-
-	GetRDSDatabaseRecommendationsResponse_nextToken = GetRDSDatabaseRecommendationsResponse.AddMember("nextToken", _NextToken)
-
-	GetRDSDatabaseRecommendationsResponse_rdsDBRecommendations = GetRDSDatabaseRecommendationsResponse.AddMember("rdsDBRecommendations", _RDSDBRecommendations)
-
-	GetRDSDatabaseRecommendationsResponse_errors = GetRDSDatabaseRecommendationsResponse.AddMember("errors", _GetRecommendationErrors)
-
-	GetRecommendationPreferencesRequest_resourceType = GetRecommendationPreferencesRequest.AddMember("resourceType", ResourceType)
-
-	GetRecommendationPreferencesRequest_scope = GetRecommendationPreferencesRequest.AddMember("scope", Scope)
-
-	GetRecommendationPreferencesRequest_nextToken = GetRecommendationPreferencesRequest.AddMember("nextToken", _NextToken)
-
-	GetRecommendationPreferencesRequest_maxResults = GetRecommendationPreferencesRequest.AddMember("maxResults", _MaxResults)
-
-	GetRecommendationPreferencesResponse_nextToken = GetRecommendationPreferencesResponse.AddMember("nextToken", _NextToken)
-
-	GetRecommendationPreferencesResponse_recommendationPreferencesDetails = GetRecommendationPreferencesResponse.AddMember("recommendationPreferencesDetails", _RecommendationPreferencesDetails)
-
-	GetRecommendationSummariesRequest_accountIds = GetRecommendationSummariesRequest.AddMember("accountIds", _AccountIds)
-
-	GetRecommendationSummariesRequest_nextToken = GetRecommendationSummariesRequest.AddMember("nextToken", _NextToken)
-
-	GetRecommendationSummariesRequest_maxResults = GetRecommendationSummariesRequest.AddMember("maxResults", _MaxResults)
-
-	GetRecommendationSummariesResponse_nextToken = GetRecommendationSummariesResponse.AddMember("nextToken", _NextToken)
-
-	GetRecommendationSummariesResponse_recommendationSummaries = GetRecommendationSummariesResponse.AddMember("recommendationSummaries", _RecommendationSummaries)
-
-	PutRecommendationPreferencesRequest_resourceType = PutRecommendationPreferencesRequest.AddMember("resourceType", ResourceType)
-
-	PutRecommendationPreferencesRequest_scope = PutRecommendationPreferencesRequest.AddMember("scope", Scope)
-
-	PutRecommendationPreferencesRequest_enhancedInfrastructureMetrics = PutRecommendationPreferencesRequest.AddMember("enhancedInfrastructureMetrics", EnhancedInfrastructureMetrics)
-
-	PutRecommendationPreferencesRequest_inferredWorkloadTypes = PutRecommendationPreferencesRequest.AddMember("inferredWorkloadTypes", InferredWorkloadTypesPreference)
-
-	PutRecommendationPreferencesRequest_externalMetricsPreference = PutRecommendationPreferencesRequest.AddMember("externalMetricsPreference", ExternalMetricsPreference)
-
-	PutRecommendationPreferencesRequest_lookBackPeriod = PutRecommendationPreferencesRequest.AddMember("lookBackPeriod", LookBackPeriodPreference)
-
-	PutRecommendationPreferencesRequest_utilizationPreferences = PutRecommendationPreferencesRequest.AddMember("utilizationPreferences", _UtilizationPreferences)
-
-	PutRecommendationPreferencesRequest_preferredResources = PutRecommendationPreferencesRequest.AddMember("preferredResources", _PreferredResources)
-
-	PutRecommendationPreferencesRequest_savingsEstimationMode = PutRecommendationPreferencesRequest.AddMember("savingsEstimationMode", SavingsEstimationMode)
-
-	UpdateEnrollmentStatusRequest_status = UpdateEnrollmentStatusRequest.AddMember("status", Status)
-
-	UpdateEnrollmentStatusRequest_includeMemberAccounts = UpdateEnrollmentStatusRequest.AddMember("includeMemberAccounts", _IncludeMemberAccounts)
-
-	UpdateEnrollmentStatusResponse_status = UpdateEnrollmentStatusResponse.AddMember("status", Status)
-
-	UpdateEnrollmentStatusResponse_statusReason = UpdateEnrollmentStatusResponse.AddMember("statusReason", _StatusReason)
-
+const blob = "" +
+	"INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTSRECOMMENDATION_OPT" +
+	"IONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUMSTORAGE_RECOMMENDATION_OPTIONS_ESTIM" +
+	"ATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COSTRECOMMENDATION_OPTIONS_CONFIGURATION_ESTIMATED_INSTANC" +
+	"E_HOUR_REDUCTION_PERCENTAGESTORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_D" +
+	"ISCOUNTSSTORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COSTINSTANCE_REC" +
+	"OMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTSSTORAGE_RECOMMENDATION_OPTIONS_ES" +
+	"TIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COSTINSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AF" +
+	"TER_DISCOUNTS_PERCENTAGESTORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUN" +
+	"TSSTORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGERECOMMENDATION_OPTION" +
+	"S_PROJECTED_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUMSTORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTH" +
+	"LY_VOLUME_IOPS_COST_VARIATIONINSTANCE_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIM" +
+	"UMRECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_LOWER_BOUNDRECOMMENDATION_OPTIONS_PR" +
+	"OJECTED_UTILIZATION_METRICS_DURATION_UPPER_BOUNDRECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS" +
+	"_GPU_MEMORY_MAXIMUMRECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_EXPECTEDEFFECTIVE_R" +
+	"ECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICSRECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_" +
+	"NO_UPFRONT_RESERVED_PRICECURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COSTRECOMMEN" +
+	"DATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUMRECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_" +
+	"NO_UPFRONT_RESERVED_PRICECURRENT_STORAGE_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COSTCURRENT_ST" +
+	"ORAGE_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COSTRECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_M" +
+	"ETRICS_GPU_MAXIMUMUTILIZATION_METRICS_AURORA_MEMORY_NUM_DECLINED_SQL_TOTAL_MAXIMUMUTILIZATION_METRIC" +
+	"S_EBS_VOLUME_STORAGE_SPACE_UTILIZATION_MAXIMUMINSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOU" +
+	"RLY_PRICERECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_THROUGHPUTUTILIZATION_METRICS_STORAGE_" +
+	"NETWORK_TRANSMIT_THROUGHPUT_MAXIMUMINSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGEUTI" +
+	"LIZATION_METRICS_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL_MAXIMUMUTILIZATION_METRICS_STORAGE_NETWORK_RECEI" +
+	"VE_THROUGHPUT_MAXIMUMEFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURESSTORAGE_RECOMMENDA" +
+	"TION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGEUTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_CONN_TOTAL_MAX" +
+	"IMUMCURRENT_STORAGE_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATIONEFFECTIVE_RECOMMENDATION_PREFERENCES" +
+	"_EXTERNAL_METRICS_SOURCEEFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPESEFFECTIVE_RECOMM" +
+	"ENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODEEFFECTIVE_RECOMMENDATION_PREFERENCES_UTILIZATION_PREFERE" +
+	"NCESRECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_THROUGHPUTUTILIZATION_METRICS_NETWORK_PACKETS_" +
+	"OUT_PER_SECOND_MAXIMUMRECOMMENDATION_OPTIONS_CONFIGURATION_MIXED_INSTANCE_TYPESRECOMMENDATION_OPTION" +
+	"S_CONFIGURATION_VOLUME_BASELINE_IOPSUTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUMUTILIZA" +
+	"TION_METRICS_VOLUME_WRITE_BYTES_PER_SECOND_MAXIMUMCURRENT_SERVICE_CONFIGURATION_AUTO_SCALING_CONFIGU" +
+	"RATIONEFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCESRECOMMENDATION_OPTIONS_CONFIGURATION_A" +
+	"LLOCATION_STRATEGYUTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUMUTILIZATION_METRICS_VOLUME" +
+	"_READ_BYTES_PER_SECOND_MAXIMUMUTILIZATION_METRICS_WRITE_IOPS_EPHEMERAL_STORAGE_MAXIMUMUTILIZATION_ME" +
+	"TRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUMUTILIZATION_METRICS_EBS_VOLUME_WRITE_THROUGHPUT_MAXIMUMUTIL" +
+	"IZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUMUTILIZATION_METRICS_NETWORK_TRANSMIT_THROUGHPUT_M" +
+	"AXIMUMUTILIZATION_METRICS_PACKETS_IN_FROM_DESTINATION_MAXIMUMUTILIZATION_METRICS_READ_IOPS_EPHEMERAL" +
+	"_STORAGE_MAXIMUMUTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUMRECOMMENDATION_OPTIONS_CONFIG" +
+	"URATION_VOLUME_BURST_IOPSSTORAGE_RECOMMENDATION_OPTIONS_ON_DEMAND_MONTHLY_PRICEUTILIZATION_METRICS_A" +
+	"URORA_MEMORY_HEALTH_STATE_MAXIMUMUTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUMUTILIZATION_M" +
+	"ETRICS_EBS_VOLUME_READ_THROUGHPUT_MAXIMUMUTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUMUTILI" +
+	"ZATION_METRICS_NETWORK_RECEIVE_THROUGHPUT_MAXIMUMUTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXI" +
+	"MUMUTILIZATION_METRICS_VOLUME_THROUGHPUT_EXCEEDED_MAXIMUMCURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESE" +
+	"RVED_PRICERECOMMENDATION_OPTIONS_CONFIGURATION_DESIRED_CAPACITYUTILIZATION_METRICS_CONSUMED_WRITE_CA" +
+	"PACITY_UNITS_SUMUTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUMUTILIZATION_METRICS_EBS_READ_BY" +
+	"TES_PER_SECOND_MAXIMUMUTILIZATION_METRICS_ELASTI_CACHE_PROCESSING_UNITS_SUMcurrentStorageEstimatedMo" +
+	"nthlyVolumeIOPsCostVariationEFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIODGetRDSDatabaseRecomm" +
+	"endationProjectedMetricsResponseSTORAGE_RECOMMENDATION_OPTIONS_MAX_ALLOCATED_STORAGEUTILIZATION_METR" +
+	"ICS_CONSUMED_READ_CAPACITY_UNITS_SUMUTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUMUTILIZATION_" +
+	"METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUMCURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICECURRENT_S" +
+	"TORAGE_CONFIGURATION_MAX_ALLOCATED_STORAGEGetECSServiceRecommendationProjectedMetricsResponseGetRDSD" +
+	"atabaseRecommendationProjectedMetricsRequestUTILIZATION_METRICS_ACTIVE_CONNECTION_COUNT_MAXIMUMUTILI" +
+	"ZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUMGetECSServiceRecommendationProjectedMetricsRequestRECO" +
+	"MMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_TYPERECOMMENDATION_OPTIONS_CONFIGURATION_INSTANCE_TYPEUTIL" +
+	"IZATION_METRICS_ENGINE_CPU_UTILIZATION_MAXIMUMUTILIZATION_METRICS_PACKETS_IN_FROM_SOURCE_MAXIMUMCURR" +
+	"ENT_SERVICE_CONFIGURATION_TASK_DEFINITION_ARNINSTANCE_RECOMMENDATION_OPTIONS_DB_INSTANCE_CLASSRECOMM" +
+	"ENDATIONS_SOURCES_RECOMMENDATION_SOURCE_ARNSTORAGE_RECOMMENDATION_OPTIONS_STORAGE_THROUGHPUTUTILIZAT" +
+	"ION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUMAutoScalingGroupSavingsOpportunityAfterDiscountsCURRENT_CON" +
+	"FIGURATION_VOLUME_BASELINE_THROUGHPUTCURRENT_STORAGE_CONFIGURATION_STORAGE_THROUGHPUTINSTANCE_RECOMM" +
+	"ENDATION_OPTIONS_PERFORMANCE_RISKNullableEstimatedInstanceHourReductionPercentageRECOMMENDATION_OPTI" +
+	"ONS_CONFIGURATION_MEMORY_SIZERECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_SIZERECOMMENDATION_OPTIONS_" +
+	"CONFIGURATION_VOLUME_TYPERECOMMENDATION_OPTIONS_CONTAINER_RECOMMENDATIONSSTORAGE_RECOMMENDATION_OPTI" +
+	"ONS_ALLOCATED_STORAGEUTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUMUTILIZATION_METRICS_EBS_VOLUME_" +
+	"READ_IOPS_MAXIMUMUTILIZATION_METRICS_VOLUME_IOPS_EXCEEDED_MAXIMUMCURRENT_STORAGE_CONFIGURATION_ALLOC" +
+	"ATED_STORAGECURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEMEBS_VOLUME_ALLOCATED_STORAGE_UNDER_PROVISI" +
+	"ONEDLambdaFunctionRecommendationFindingReasonCodesCURRENT_CONFIGURATION_VOLUME_BURST_THROUGHPUTCURRE" +
+	"NT_LICENSE_CONFIGURATION_LICENSE_EDITIONCURRENT_LICENSE_CONFIGURATION_LICENSE_VERSIONCURRENT_LICENSE" +
+	"_CONFIGURATION_NUMBER_OF_CORESExportAutoScalingGroupRecommendationsResponseGetEffectiveRecommendatio" +
+	"nPreferencesResponseINSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONEDRECOMMENDATION_OPTIONS_CONFIGURATIO" +
+	"N_MAX_SIZERECOMMENDATION_OPTIONS_CONFIGURATION_MIN_SIZEUTILIZATION_METRICS_VOLUME_BYTES_USED_AVERAGE" +
+	"UTILIZATION_METRICS_VOLUME_WRITE_IOPS_AVERAGECURRENT_LICENSE_CONFIGURATION_METRICS_SOURCEExportAutoS" +
+	"calingGroupRecommendationsRequestGetEC2RecommendationProjectedMetricsResponseGetEffectiveRecommendat" +
+	"ionPreferencesRequestGetEnrollmentStatusesForOrganizationResponseINSTANCE_STORAGE_READ_IOPS_UNDER_PR" +
+	"OVISIONEDRDSDatabaseRecommendedOptionProjectedMetricsUTILIZATION_METRICS_DATABASE_CONNECTIONS_SUMUTI" +
+	"LIZATION_METRICS_VOLUME_READ_IOPS_AVERAGECURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPECURRENT_LICENSE_" +
+	"CONFIGURATION_LICENSE_MODELECSServiceRecommendedOptionProjectedMetricsExportLambdaFunctionRecommenda" +
+	"tionsResponseGetEC2RecommendationProjectedMetricsRequestGetEnrollmentStatusesForOrganizationRequestR" +
+	"DSInstanceSavingsOpportunityAfterDiscountsRECOMMENDATION_OPTIONS_PLATFORM_DIFFERENCESSTORAGE_RECOMME" +
+	"NDATION_OPTIONS_STORAGE_TYPECURRENT_CONFIGURATION_MIXED_INSTANCE_TYPESCURRENT_CONFIGURATION_VOLUME_B" +
+	"ASELINE_IOPSCURRENT_LICENSE_CONFIGURATION_LICENSE_NAMECURRENT_STORAGE_CONFIGURATION_STORAGE_TYPEECSS" +
+	"erviceRecommendationFindingReasonCodesExportLambdaFunctionRecommendationsRequestGetAutoScalingGroupR" +
+	"ecommendationsResponseNEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLERDSEstimatedMonthlyVolumeIOPsCostVar" +
+	"iationRDSStorageSavingsOpportunityAfterDiscountsCURRENT_CONFIGURATION_ALLOCATION_STRATEGYGetAutoScal" +
+	"ingGroupRecommendationsRequestLambdaFunctionMemoryRecommendationOptionsRECOMMENDATION_OPTIONS_CONFIG" +
+	"URATION_TYPECURRENT_SERVICE_CONTAINER_CONFIGURATIONSDescribeRecommendationExportJobsResponseExportEC" +
+	"2InstanceRecommendationsResponseExportRDSDatabaseRecommendationsResponseGetLambdaFunctionRecommendat" +
+	"ionsResponseInstanceRecommendationFindingReasonCodesLambdaEffectiveRecommendationPreferencesRECOMMEN" +
+	"DATION_OPTIONS_INSTANCE_GPU_INFOUTILIZATION_METRICS_CURR_CONNECTIONS_SUMestimatedInstanceHourReducti" +
+	"onPercentageAutoScalingGroupEstimatedMonthlySavingsCURRENT_CONFIGURATION_VOLUME_BURST_IOPSCURRENT_IN" +
+	"STANCE_ON_DEMAND_HOURLY_PRICECURRENT_STORAGE_ON_DEMAND_MONTHLY_PRICEDeleteRecommendationPreferencesR" +
+	"esponseDescribeRecommendationExportJobsRequestEBS_VOLUME_THROUGHPUT_UNDER_PROVISIONEDExportEC2Instan" +
+	"ceRecommendationsRequestExportECSServiceRecommendationsResponseExportRDSDatabaseRecommendationsReque" +
+	"stGetLambdaFunctionRecommendationsRequestRECOMMENDATION_OPTIONS_MIGRATION_EFFORTRECOMMENDATION_OPTIO" +
+	"NS_OPERATING_SYSTEMUTILIZATION_METRICS_KEYSPACE_MISSES_SUMUTILIZATION_METRICS_NEW_CONNECTIONS_SUMest" +
+	"imatedMonthlyVolumeIOPsCostVariationCURRENT_CONFIGURATION_DESIRED_CAPACITYDeleteRecommendationPrefer" +
+	"encesRequestEBS_VOLUME_THROUGHPUT_OVER_PROVISIONEDExportEBSVolumeRecommendationsResponseExportECSSer" +
+	"viceRecommendationsRequestLambdaFunctionRecommendationFilterNameLambdaSavingsOpportunityAfterDiscoun" +
+	"tsRECOMMENDATION_OPTIONS_LICENSE_EDITIONRECOMMENDATION_OPTIONS_ON_DEMAND_PRICEUTILIZATION_METRICS_US" +
+	"ER_CONNECTED_SUMAutoScalingGroupRecommendationOptionsEBSEffectiveRecommendationPreferencesECSEffecti" +
+	"veRecommendationPreferencesECSServiceProjectedUtilizationMetricsExportEBSVolumeRecommendationsReques" +
+	"tGetEC2InstanceRecommendationsResponseGetRDSDatabaseRecommendationsResponseNEW_GENERATION_STORAGE_TY" +
+	"PE_AVAILABLERDSEffectiveRecommendationPreferencesUTILIZATION_METRICS_GET_TYPE_CMDS_SUMUTILIZATION_ME" +
+	"TRICS_KEYSPACE_HITS_SUMUTILIZATION_METRICS_SET_TYPE_CMDS_SUMCURRENT_SERVICE_CONFIGURATION_MEMORYDB_C" +
+	"LUSTER_STORAGE_SAVINGS_AVAILABLEExportLicenseRecommendationsResponseGetEC2InstanceRecommendationsReq" +
+	"uestGetECSServiceRecommendationsResponseGetRDSDatabaseRecommendationsRequestGetRecommendationPrefere" +
+	"ncesResponseINSTANCE_RECOMMENDATION_OPTIONS_RANKIdleSavingsOpportunityAfterDiscountsLambdaFunctionMe" +
+	"moryProjectedMetricsPutRecommendationPreferencesResponseRECOMMENDATION_OPTIONS_INSTANCE_TYPERECOMMEN" +
+	"DATION_OPTIONS_LICENSE_MODELRECOMMENDATION_OPTIONS_MONTHLY_PRICEUTILIZATION_METRICS_CACHE_MISSES_SUM" +
+	"UTILIZATION_METRICS_DURATION_AVERAGEUTILIZATION_METRICS_DURATION_MAXIMUMCURRENT_CONFIGURATION_INSTAN" +
+	"CE_TYPEDB_CLUSTER_STORAGE_OPTION_AVAILABLEDB_CLUSTER_WRITER_UNDER_PROVISIONEDEBSSavingsOpportunityAf" +
+	"terDiscountsECSSavingsOpportunityAfterDiscountsExportLicenseRecommendationsRequestGetEBSVolumeRecomm" +
+	"endationsResponseGetECSServiceRecommendationsRequestGetRecommendationPreferencesRequestInstanceSavin" +
+	"gsEstimationModeSourceLambdaFunctionMemoryMetricStatisticLambdaFunctionRecommendationFiltersNETWORK_" +
+	"BANDWIDTH_UNDER_PROVISIONEDPutRecommendationPreferencesRequestSTORAGE_RECOMMENDATION_OPTIONS_IOPSSTO" +
+	"RAGE_RECOMMENDATION_OPTIONS_RANKUTILIZATION_METRICS_INVOCATIONS_SUMUTILIZATION_METRICS_IS_IDLE_MINIM" +
+	"UMCONSUMED_CHANGE_DATA_CAPTURE_UNITSCURRENT_STORAGE_CONFIGURATION_IOPSECSServiceRecommendationFilter" +
+	"NameGetEBSVolumeRecommendationsRequestGetRecommendationSummariesResponseNETWORK_BANDWIDTH_OVER_PROVI" +
+	"SIONEDRDSDBInstanceRecommendationOptionsRDSInstanceEstimatedMonthlySavingsUTILIZATION_METRICS_CACHE_" +
+	"HITS_SUMUTILIZATION_METRICS_MEMORY_AVERAGEeffectiveRecommendationPreferencesCURRENT_CONFIGURATION_ME" +
+	"MORY_SIZECURRENT_CONFIGURATION_ROOT_VOLUMECURRENT_CONFIGURATION_VOLUME_SIZECURRENT_CONFIGURATION_VOL" +
+	"UME_TYPECURRENT_INSTANCE_PERFORMANCE_RISKCURRENT_SERVICE_CONFIGURATION_CPUDISK_THROUGHPUT_UNDER_PROV" +
+	"ISIONEDExportIdleRecommendationsResponseGetLicenseRecommendationsResponseGetRecommendationSummariesR" +
+	"equestLambdaSavingsEstimationModeSourceRDSCurrentInstancePerformanceRiskRDSDBStorageRecommendationOp" +
+	"tionsRDSStorageEstimatedMonthlySavingsrecommendedOptionProjectedMetricsDISK_THROUGHPUT_OVER_PROVISIO" +
+	"NEDEBS_THROUGHPUT_UNDER_PROVISIONEDEBS_VOLUME_IOPS_OVER_PROVISIONEDExportIdleRecommendationsRequestE" +
+	"xportableAutoScalingGroupFieldsGetLicenseRecommendationsRequestLambdaFunctionUtilizationMetricsRDSDB" +
+	"ProjectedUtilizationMetricsRECOMMENDATION_OPTIONS_COST_HIGHRecommendationPreferencesDetailsrecommend" +
+	"ationPreferencesDetailssavingsOpportunityAfterDiscountsEBS_THROUGHPUT_OVER_PROVISIONEDECSServiceReco" +
+	"mmendationFiltersECSServiceRecommendationOptionsInferredWorkloadTypesPreferenceLicenseRecommendation" +
+	"FilterNameRECOMMENDATION_OPTIONS_COST_LOWautoScalingGroupRecommendationsmemorySizeRecommendationOpti" +
+	"onsCURRENT_CONFIGURATION_MAX_SIZECURRENT_CONFIGURATION_MIN_SIZEEBSSavingsEstimationModeSourceECSSavi" +
+	"ngsEstimationModeSourceExportableLambdaFunctionFieldsGetIdleRecommendationsResponseINSUFFICIENT_DYNA" +
+	"TRACE_METRICSIdleRecommendationResourceTypeInvalidParameterValueExceptionLambdaFunctionMemoryMetricN" +
+	"ameRDSSavingsEstimationModeSourceRECOMMENDATION_OPTIONS_NETWORKTARGET_TRACKING_SCALING_MEMORYUpdateE" +
+	"nrollmentStatusResponsecurrentInstancePerformanceRiskAutoScalingGroupConfigurationCURRENT_CONFIGURAT" +
+	"ION_TIMEOUTCurrentPerformanceRiskRatingsEXTERNAL_METRIC_STATUS_REASONEnhancedInfrastructureMetricsGe" +
+	"tIdleRecommendationsRequestINSTANCE_FINDING_REASON_CODESINSUFFICIENT_NEWRELIC_METRICSLambdaEstimated" +
+	"MonthlySavingsLambdaFunctionMetricStatisticNETWORK_PPS_UNDER_PROVISIONEDNumberOfMemberAccountsOptedI" +
+	"nRDSDBRecommendationFilterNameRDSInstanceFindingReasonCodesRECOMMENDATION_OPTIONS_MEMORYRecommendati" +
+	"onPreferenceNamesUpdateEnrollmentStatusRequestcurrentPerformanceRiskRatingsenhancedInfrastructureMet" +
+	"ricsinstanceRecommendationOptionslambdaFunctionRecommendationsnumberOfMemberAccountsOptedInrecommend" +
+	"ationPreferenceNamesCustomizableMetricParametersECSServiceUtilizationMetricsGPU_MEMORY_UNDER_PROVISI" +
+	"ONEDINSUFFICIENT_DATADOG_METRICSINSUFFICIENT_INSTANA_METRICSIdleRecommendationFilterNameLICENSE_FIND" +
+	"ING_REASON_CODESLicenseRecommendationFiltersLicenseRecommendationOptionsNETWORK_PPS_OVER_PROVISIONED" +
+	"NEW_ENGINE_VERSION_AVAILABLERDSStorageFindingReasonCodesRECOMMENDATION_OPTIONS_VCPUSSTORAGE_FINDING_" +
+	"REASON_CODESSavingsOpportunityPercentageaggregatedSavingsOpportunitylicenseRecommendationOptionssavi" +
+	"ngsOpportunityPercentageserviceRecommendationOptionsstorageRecommendationOptionsCustomizableMetricTh" +
+	"resholdDISK_IOPS_UNDER_PROVISIONEDDYNATRACE_INTEGRATION_ERROREXTERNAL_METRICS_PREFERENCEEXTERNAL_MET" +
+	"RIC_STATUS_CODEEffectivePreferredResourcesGPU_MEMORY_OVER_PROVISIONEDGetEnrollmentStatusResponseINST" +
+	"ANCE_STORE_AVAILABILITYIdleEstimatedMonthlySavingsNullableMaxAllocatedStorageRDSDatabaseProjectedMet" +
+	"ricsServiceUnavailableExceptionTARGET_TRACKING_SCALING_CPUVolumeRecommendationOptionscurrentLicenseC" +
+	"onfigurationcurrentServiceConfigurationcurrentStorageConfigurationprojectedUtilizationMetricsvolumeR" +
+	"ecommendationOptionsCURRENT_CONFIGURATION_TYPECustomizableMetricHeadroomDISK_IOPS_OVER_PROVISIONEDEB" +
+	"SEstimatedMonthlySavingsEBS_IOPS_UNDER_PROVISIONEDECSEstimatedMonthlySavingsECSServiceProjectedMetri" +
+	"csExportableECSServiceFieldsExternalMetricStatusReasonGetEnrollmentStatusRequestLOOKBACK_PERIOD_PREF" +
+	"ERENCEMissingAuthenticationTokenNEWRELIC_INTEGRATION_ERRORRDSDBRecommendationFiltersRECOMMENDATION_O" +
+	"PTIONS_CPURecommendedDBInstanceClassinstanceFindingReasonCodesrecommendationResourceTyperecommendedD" +
+	"BInstanceClassAURORA_DB_CLUSTER_STORAGEAccountEnrollmentStatusesCOST_EXPLORER_RIGHTSIZINGCURRENT_DB_" +
+	"INSTANCE_CLASSCURRENT_INSTANCE_GPU_INFODATADOG_INTEGRATION_ERROREBS_IOPS_OVER_PROVISIONEDECSServiceM" +
+	"etricStatisticExternalMetricsPreferenceINSTANA_INTEGRATION_ERRORIdleRecommendationFiltersLicenseFind" +
+	"ingReasonCodesNullableMemoryReservationNullableStorageThroughputResourceNotFoundExceptionaccountEnro" +
+	"llmentStatusesecsServiceRecommendationsexternalMetricsPreferencestorageFindingReasonCodesAutoScaling" +
+	"ConfigurationCURRENT_PERFORMANCE_RISKCW_APP_INSIGHTS_DISABLEDContainerRecommendationsExportableInsta" +
+	"nceFieldsExternalMetricStatusCodeIdleRecommendationErrorsLICENSE_OVER_PROVISIONEDLambdaFunctionMetri" +
+	"cNameLookBackPeriodPreferenceNO_LICENSE_EDITION_FOUNDRecommendationSourceTypeVolumeBaselineThroughpu" +
+	"tautoScalingConfigurationcontainerRecommendationsrecommendationExportJobsrecommendationSourceTypevol" +
+	"umeBaselineThroughputAUTO_SCALING_GROUP_NAMECURRENT_ON_DEMAND_PRICEComputeOptimizerServiceContainerC" +
+	"onfigurationsExportableLicenseFieldsGetRecommendationErrorsInferredWorkloadSavingsInternalServerExce" +
+	"ptionLOOKBACK_PERIOD_IN_DAYSMemorySizeConfigurationPreferredResourceValuesRDSDBUtilizationMetricsRDS" +
+	"_DB_INSTANCE_STORAGERecommendationSourceArnRecommendedInstanceTypecontainerConfigurationsestimatedMo" +
+	"nthlySavingsinferredWorkloadSavingsinstanceRecommendationsmemorySizeConfigurationrecommendationSourc" +
+	"eArnrecommendationSummariesrecommendedInstanceTypeAUTO_SCALING_GROUP_ARNBRING_YOUR_OWN_LICENSECpuVen" +
+	"dorArchitecturesCurrentDBInstanceClassCustomizableMetricNameDBStorageConfigurationExportableVolumeFi" +
+	"eldsIdleFindingDescriptionIdleUtilizationMetricsLAST_REFRESH_TIMESTAMPLimitExceededExceptionMemberAc" +
+	"countsEnrolledNO_EXTERNAL_METRIC_SETOptInRequiredExceptionUtilizationPreferencescpuVendorArchitectur" +
+	"escurrentDBInstanceClasscurrentInstanceGpuInfoidleSavingsOpportunitylicenseRecommendationsmemberAcco" +
+	"untsEnrolledutilizationPreferencesAccessDeniedExceptionCOST_OPTIMIZATION_HUBCPU_UNDER_PROVISIONEDCUR" +
+	"RENT_INSTANCE_TYPECURRENT_MONTHLY_PRICECW_APP_INSIGHTS_ERRORCloudWatchAppInsightsDB_CLUSTER_IDENTIFI" +
+	"EREBSUtilizationMetricsExportableRDSDBFieldsExternalMetricsSourceGPU_UNDER_PROVISIONEDIncludeMemberA" +
+	"ccountsNUMBER_OF_INVOCATIONSPreferredResourceNameRecommendationSourcesRecommendationSummaryVolumeBur" +
+	"stThroughputincludeMemberAccountsinferredWorkloadTypesrecommendationOptionsrecommendationSourcesreco" +
+	"mmendedMemorySizesavingsEstimationModevolumeBurstThroughputvolumeRecommendationsAutoScalingGroupArns" +
+	"AutoScalingGroupNameCPU_OVER_PROVISIONEDCURRENT_COST_AVERAGEDestinationKeyPrefixECSServiceLaunchType" +
+	"ECSServiceMetricNameELASTI_CACHE_CLUSTEREnrollmentFilterNameExportableIdleFieldsFinding_Reason_Codes" +
+	"GPU_OVER_PROVISIONEDINSUFFICIENT_METRICSLastRefreshTimestampLastUpdatedTimestampLookBackPeriodInDays" +
+	"MULTI_AZ_DB_INSTANCEMetricSourceProviderNullableInstanceTypeRDSDBMetricStatisticRDSDBRecommendations" +
+	"SINGLE_INSTANCE_TYPEautoScalingGroupArnsautoScalingGroupNamecurrentConfigurationeffectiveIncludeList" +
+	"externalMetricStatuslastRefreshTimestamplastUpdatedTimestamplookBackPeriodInDayslookbackPeriodInDays" +
+	"rdsDBRecommendationsstorageConfigurationCurrentInstanceTypeDBClusterIdentifierDOCUMENT_DB_CLUSTERFIN" +
+	"DING_DESCRIPTIONINTEGRATION_SUCCESSIdleDimensionValuesNumberOfInvocationsPlatformDifferencesReasonCo" +
+	"deSummariesS3DestinationConfigSAGE_MAKER_ENDPOINTThrottlingExceptionVIRTUALIZATION_TYPEVolumeConfigu" +
+	"rationcurrentInstanceTypedbClusterIdentifieridleRecommendationsmaxAllocatedStoragenumberOfInvocation" +
+	"splatformDifferencesreasonCodeSummariesrecommendedCpuUnitss3DestinationConfigAllocationStrategyCURRE" +
+	"NT_COST_TOTALEC2_INSTANCE_TYPESGpuMemorySizeInMiBMEMORY_UTILIZATIONMixedInstanceTypesVolumeBaselineI" +
+	"OPSallocationStrategyfindingDescriptionfindingReasonCodesgpuMemorySizeInMiBmixedInstanceTypespreferr" +
+	"edResourcesutilizationMetricsvolumeBaselineIOPSCreationTimestampDestinationBucketEnrollmentFiltersEx" +
+	"portDestinationMEMORY_DB_CLUSTERMetricProviderArnNETWORK_INTERFACEReasonCodeSummarySTORAGE_INTERFACE" +
+	"TaskDefinitionArncreationTimestampcurrentMemorySizememoryReservationstorageThroughputtaskDefinitionA" +
+	"rnAPACHE_CASSANDRABEFORE_DISCOUNTSFUNCTION_VERSIONIdleDimensionKeyLICENSE_INCLUDEDallocatedStoragelo" +
+	"werBoundValuesmetricParametersprojectedMetricsupperBoundValuesCURRENT_NETWORKDYNAMO_DB_TABLEDesiredC" +
+	"apacityFunctionVersionLAMBDA_FUNCTIONLowerBoundValueMigrationEffortOperatingSystemRDSDBMetricNameUpp" +
+	"erBoundValueVolumeBurstIOPSdbInstanceClassdesiredCapacityfunctionVersioninstanceGpuInfomigrationEffo" +
+	"rtoperatingSystemperformanceRiskvolumeBurstIOPSCURRENT_MEMORYINSTANCE_STATEIdleDimensionsIdleMaxResu" +
+	"ltsIdleMetricNameLicenseEditionLicenseVersionNOT_APPLICABLEPROMOTION_TIERPUBLIC_PRICINGfieldsToExpor" +
+	"tlicenseEditionlicenseVersionAPACHE_HADOOPCURRENT_VCPUSContainerNameEBSFilterNameEBSMetricNameEngine" +
+	"VersionFailureReasonINSTANCE_NAMEIdleSummariesInstanceStateJobFilterNameNOT_OPTIMIZEDNumberOfCoresPr" +
+	"omotionTierRESOURCE_TYPESHUTTING_DOWNconfigurationcontainerNameengineVersionfailureReasonidleSummari" +
+	"esinstanceStatemetricsSourcenumberOfCorespromotionTierErrorMessageFUNCTION_ARNFilterValuesFunctionAr" +
+	"nsINCONCLUSIVEINSTANCE_ARNInstanceArnsInstanceIdleInstanceNameLOWEST_PRICELicenseModelMetricValuesNu" +
+	"llableIOPSORGANIZATIONRESOURCE_ARNResourceArnsSummaryValuefunctionArnsinstanceArnsinstanceNameinstan" +
+	"ceTypelicenseModelresourceArnsresourceTypestatusReasonECS_SERVICEIN_PROGRESSIdleSummaryLAUNCH_TYPELi" +
+	"censeNameMetadataKeyNAT_GATEWAYNullableCpuPOSTGRE_SQLPRIORITIZEDRESOURCE_IDSERVICE_ARNServiceArnsSto" +
+	"rageTypeUNAVAILABLEdestinationexcludeListincludeListlicenseNamemetadataKeyproviderArnserviceArnsstor" +
+	"ageTypeACCOUNT_IDAMAZON_EMRAccountIdsEBSFiltersEBSFindingENTERPRISEFileFormatHYPERVISORJOB_STATUSJob" +
+	"FiltersPERCENT_10PERCENT_20PERCENT_30ResourceIdRootVolumeScopeValueTERMINATEDTimestampsUNATTACHEDVOL" +
+	"UME_ARNVolumeArnsVolumeSizeVolumeTypeWORKSPACESaccountIdsdimensionsfileFormatidentifierlaunchTypemax" +
+	"ResultsmetricNameresourceIdrootVolumestatusCodetimestampsvolumeArnsvolumeSizevolumeTypeAWS_ARM64JobS" +
+	"tatusMEMCACHEDNextTokenPERCENT_0SQLSERVERScopeNamekeyPrefixnextTokenstartTimestatisticsummariesthres" +
+	"holdCOMPLETECurrencyGpuCountINACTIVESTOPPINGTagValueVERY_LOWcurrencygpuCountheadroomAsgTypeCpuSizeDA" +
+	"YS_14DAYS_32DAYS_93FARGATEMaxSizeMinSizeOrderByPENDINGRUNNINGSTOPPEDVeryLowendTimefiltersmaxSizemess" +
+	"ageminSizeorderByveryLowFAILEDJobIdsMEDIUMMediumQUEUEDTagKeyUNUSEDbucketerrorsjobIdsmediumperiodvalu" +
+	"esFALSEKAFKANGINXP99_5REDISscopeFREEGpusHighNONERankTAGSTRUETagscodegpushighiopsnameranktagstypeASCC" +
+	"NYCSVP90P95USD"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.computeoptimizer", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 9168, Target: 0, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8652, Target: 1, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6930, Target: 2, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 9750, Target: 3, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8692, Target: 4, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 9324, Target: 5, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 12307, Target: 6, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7770, Target: 7, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10532, Target: 8, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8732, Target: 9, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8280, Target: 10, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 11282, Target: 11, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10201, Target: 12, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7333, Target: 13, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5242, Target: 14, Traits: 0, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10604, Target: 15, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6975, Target: 16, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7421, Target: 17, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7421, Target: 18, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 13353, Target: 19, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8772, Target: 20, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 12340, Target: 21, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4880, Target: 22, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10238, Target: 23, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10676, Target: 24, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 11838, Target: 25, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 10820, Target: 26, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 13593, Target: 27, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 16867, Target: 28, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 17834, Target: 29, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15939, Target: 31, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21242, Target: 1598, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21242, Target: 1603, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18940, Target: 1121, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 15939, Target: 36, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 31, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21527, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21527, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 38, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15161, Target: 41, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 19477, Target: 42, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21353, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21062, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22084, Target: 45, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18800, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3059, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16389, Target: 48, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15231, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13563, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18380, Target: 51, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 18380, Target: 52, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 51, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13653, Target: 54, Traits: 0, StrLen: 29, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20342, Target: 156, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22203, Target: 1237, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22189, Target: 1192, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 21194, Target: 1246, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19603, Target: 42, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8972, Target: 1245, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 22392, Target: 45, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19675, Target: 1241, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9012, Target: 63, Traits: 0, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 18400, Target: 66, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6936, Target: 67, Traits: 0, StrLen: 30, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18820, Target: 51, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18840, Target: 66, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19621, Target: 775, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19711, Target: 1630, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18960, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 18860, Target: 54, Traits: 0, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17724, Target: 797, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18254, Target: 90, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18920, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14146, Target: 123, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12042, Target: 302, Traits: 0, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18233, Target: 931, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10016, Target: 81, Traits: 0, StrLen: 36, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20837, Target: 54, Traits: 0, StrLen: 13, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20372, Target: 797, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15366, Target: 1292, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20417, Target: 1264, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12923, Target: 94, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20387, Target: 1232, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10016, Target: 90, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 81, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6936, Target: 92, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 67, Traits: 0, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5941, Target: 94, Traits: 0, StrLen: 48, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 63, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6745, Target: 97, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 16890, Target: 98, Traits: 0, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20850, Target: 104, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17258, Target: 1196, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17680, Target: 1244, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16890, Target: 102, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 98, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20655, Target: 104, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 16461, Target: 105, Traits: 0, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20850, Target: 104, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17258, Target: 1196, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17680, Target: 1244, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16461, Target: 109, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 105, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22091, Target: 111, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 17394, Target: 112, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21887, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1525, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17394, Target: 115, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 112, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19747, Target: 117, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 22012, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22411, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22399, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17416, Target: 121, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 19040, Target: 122, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 13711, Target: 123, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22052, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1164, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22236, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12855, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13711, Target: 128, Traits: 0, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22372, Target: 802, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 22284, Target: 1193, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 20098, Target: 1189, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 22217, Target: 1638, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 15446, Target: 133, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21627, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21617, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21607, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21923, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17438, Target: 138, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5623, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19549, Target: 1937, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14320, Target: 141, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21995, Target: 144, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22076, Target: 133, Traits: 0, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14880, Target: 144, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22405, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22408, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22317, Target: 1937, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19059, Target: 148, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 15821, Target: 149, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 17460, Target: 150, Traits: 0, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21496, Target: 1604, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20082, Target: 41, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22376, Target: 1247, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 19363, Target: 1248, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 19968, Target: 1251, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 20192, Target: 156, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 19764, Target: 157, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 18460, Target: 158, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 18460, Target: 159, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 19139, Target: 160, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 538, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 538, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10053, Target: 163, Traits: 0, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18317, Target: 186, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18960, Target: 1185, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15498, Target: 166, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 20668, Target: 169, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 172, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20668, Target: 172, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21537, Target: 174, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 169, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21547, Target: 176, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20776, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20772, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20681, Target: 179, Traits: 0, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4369, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3936, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3494, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3213, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6537, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4423, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13263, Target: 186, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13433, Target: 188, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13263, Target: 188, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20573, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15964, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17855, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11177, Target: 192, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 166, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18002, Target: 195, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 179, Traits: 0, StrLen: 4, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21977, Target: 1226, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1229, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 18002, Target: 199, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 195, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10090, Target: 201, Traits: 0, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18317, Target: 207, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18960, Target: 1185, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15550, Target: 204, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13293, Target: 207, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13433, Target: 209, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13293, Target: 209, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20573, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15964, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17855, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11212, Target: 213, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 204, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18480, Target: 216, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 7336, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22119, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18500, Target: 219, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1091, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 139, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16089, Target: 222, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 157, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7193, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15576, Target: 225, Traits: 0, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 219, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21847, Target: 1623, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20146, Target: 1230, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20098, Target: 1230, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15576, Target: 230, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 225, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10127, Target: 232, Traits: 0, StrLen: 36, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 219, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21977, Target: 222, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 20098, Target: 1190, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 20146, Target: 1625, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10127, Target: 237, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 232, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5245, Target: 239, Traits: 0, StrLen: 24, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21485, Target: 1587, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15312, Target: 1590, Traits: 0, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19711, Target: 293, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18980, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 21787, Target: 216, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18920, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 19621, Target: 261, Traits: 0, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19639, Target: 270, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14824, Target: 279, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14146, Target: 123, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12042, Target: 201, Traits: 0, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22388, Target: 1616, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11770, Target: 253, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 256, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11770, Target: 256, Traits: 0, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12986, Target: 259, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 253, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8196, Target: 261, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20776, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6687, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9734, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8196, Target: 265, Traits: 0, StrLen: 41, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15046, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14380, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18420, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17876, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8196, Target: 270, Traits: 0, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 265, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13017, Target: 272, Traits: 0, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13172, Target: 1249, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17680, Target: 1244, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12923, Target: 213, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15366, Target: 237, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16725, Target: 109, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13017, Target: 279, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 272, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9330, Target: 281, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 239, Traits: 0, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7727, Target: 283, Traits: 0, StrLen: 42, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 19439, Target: 111, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18296, Target: 1195, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 20130, Target: 230, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7727, Target: 287, Traits: 0, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 283, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14348, Target: 289, Traits: 0, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 219, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21977, Target: 222, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1229, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 14348, Target: 293, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 289, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15015, Target: 295, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1279, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21441, Target: 1284, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18880, Target: 1284, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21430, Target: 1284, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15015, Target: 300, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 295, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6978, Target: 302, Traits: 0, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17680, Target: 115, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14175, Target: 313, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18233, Target: 933, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16339, Target: 737, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18960, Target: 1185, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17812, Target: 1635, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19693, Target: 300, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18317, Target: 1001, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20694, Target: 311, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 20694, Target: 312, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 13769, Target: 313, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5364, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22028, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18540, Target: 316, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 319, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18540, Target: 319, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13756, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19781, Target: 321, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 316, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20954, Target: 323, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9028, Target: 324, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12699, Target: 327, Traits: 0, StrLen: 31, Count: 73, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17350, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16821, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1071, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1625, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5395, Target: 1937, Traits: 0, StrLen: 51, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5088, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4669, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4241, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5036, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4616, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4133, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3586, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3696, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3418, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3136, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2964, Target: 1937, Traits: 0, StrLen: 58, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17005, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11072, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9636, Target: 1937, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13233, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13203, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8448, Target: 1937, Traits: 0, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8028, Target: 1937, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15420, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16844, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5140, Target: 1937, Traits: 0, StrLen: 51, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4457, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20642, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20447, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1525, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20162, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5546, Target: 1937, Traits: 0, StrLen: 50, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4510, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7110, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7065, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 246, Target: 1937, Traits: 0, StrLen: 81, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3362, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3022, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8571, Target: 1937, Traits: 0, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1038, Target: 1937, Traits: 0, StrLen: 64, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1592, Target: 1937, Traits: 0, StrLen: 67, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6094, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9940, Target: 1937, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1659, Target: 1937, Traits: 0, StrLen: 66, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1457, Target: 1937, Traits: 0, StrLen: 68, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14656, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14059, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5851, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13533, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17548, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16413, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2244, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2421, Target: 1937, Traits: 0, StrLen: 61, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1389, Target: 1937, Traits: 0, StrLen: 68, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2724, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3306, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4828, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2761, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9441, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16014, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8892, Target: 1937, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 912, Target: 1937, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 115, Target: 1937, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1854, Target: 1937, Traits: 0, StrLen: 64, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1248, Target: 1937, Traits: 0, StrLen: 71, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2784, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 655, Target: 1937, Traits: 0, StrLen: 69, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 73, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 70, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12699, Target: 401, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 327, Traits: 0, StrLen: 6, Count: 73, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15602, Target: 403, Traits: 0, StrLen: 25, Count: 29, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21375, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17005, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17548, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21287, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16413, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10460, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12241, Target: 1937, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5696, Target: 1937, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3250, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8612, Target: 1937, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1071, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1625, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14059, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15784, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2244, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6325, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1038, Target: 1937, Traits: 0, StrLen: 64, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1592, Target: 1937, Traits: 0, StrLen: 67, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22352, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2784, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 655, Target: 1937, Traits: 0, StrLen: 69, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 73, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 70, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4828, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15602, Target: 433, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 403, Traits: 0, StrLen: 6, Count: 29, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18560, Target: 435, Traits: 0, StrLen: 19, Count: 39, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21122, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21364, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20811, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17548, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17005, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 678, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 678, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1071, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1625, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3418, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3696, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6421, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6469, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5892, Target: 1937, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4349, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3916, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5344, Target: 1937, Traits: 0, StrLen: 51, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5646, Target: 1937, Traits: 0, StrLen: 50, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3806, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4984, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4563, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9558, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5596, Target: 1937, Traits: 0, StrLen: 50, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11974, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10964, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10386, Target: 1937, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9519, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11667, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9978, Target: 1937, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11632, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10349, Target: 1937, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10423, Target: 1937, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4722, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8932, Target: 1937, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7553, Target: 1937, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19097, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22352, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18560, Target: 475, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 435, Traits: 0, StrLen: 6, Count: 39, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16485, Target: 477, Traits: 0, StrLen: 23, Count: 71, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21014, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20720, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18580, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17005, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17897, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1071, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1625, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5395, Target: 1937, Traits: 0, StrLen: 51, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5088, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4669, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4241, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5036, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4616, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4133, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3586, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3696, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3418, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3136, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2964, Target: 1937, Traits: 0, StrLen: 58, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16844, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5140, Target: 1937, Traits: 0, StrLen: 51, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4457, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20642, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20447, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1525, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20162, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10856, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1038, Target: 1937, Traits: 0, StrLen: 64, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1592, Target: 1937, Traits: 0, StrLen: 67, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7942, Target: 1937, Traits: 0, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6094, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14656, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14059, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5851, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13533, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9940, Target: 1937, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1659, Target: 1937, Traits: 0, StrLen: 66, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1457, Target: 1937, Traits: 0, StrLen: 68, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5794, Target: 1937, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5496, Target: 1937, Traits: 0, StrLen: 50, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17548, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16413, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2244, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2421, Target: 1937, Traits: 0, StrLen: 61, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1389, Target: 1937, Traits: 0, StrLen: 68, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2724, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2761, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9441, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2664, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22352, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20461, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14988, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13740, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16014, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8892, Target: 1937, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 912, Target: 1937, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 115, Target: 1937, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 879, Target: 1937, Traits: 0, StrLen: 75, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 82, Target: 1937, Traits: 0, StrLen: 82, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11690, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3306, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4828, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2844, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2784, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 655, Target: 1937, Traits: 0, StrLen: 69, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 73, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 70, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16485, Target: 549, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 477, Traits: 0, StrLen: 6, Count: 71, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13323, Target: 551, Traits: 0, StrLen: 29, Count: 31, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20966, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20034, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18107, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11036, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11000, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1625, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12008, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17005, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12076, Target: 1937, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13682, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19495, Target: 1937, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18440, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6181, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13110, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12827, Target: 1937, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1102, Target: 1937, Traits: 0, StrLen: 73, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1175, Target: 1937, Traits: 0, StrLen: 73, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1319, Target: 1937, Traits: 0, StrLen: 70, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17548, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16413, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2244, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22352, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2784, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 655, Target: 1937, Traits: 0, StrLen: 69, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 73, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 70, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13323, Target: 583, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 551, Traits: 0, StrLen: 6, Count: 31, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16913, Target: 585, Traits: 0, StrLen: 22, Count: 21, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21122, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17005, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17548, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14488, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14488, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6885, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7641, Target: 1937, Traits: 0, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6612, Target: 1937, Traits: 0, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8112, Target: 1937, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6795, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7684, Target: 1937, Traits: 0, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6840, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7245, Target: 1937, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9480, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9902, Target: 1937, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10892, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2244, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22352, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16913, Target: 607, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 585, Traits: 0, StrLen: 6, Count: 21, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18023, Target: 609, Traits: 0, StrLen: 20, Count: 82, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21122, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5616, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14604, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11690, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18700, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11145, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15989, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8154, Target: 1937, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6565, Target: 1937, Traits: 0, StrLen: 47, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5191, Target: 1937, Traits: 0, StrLen: 51, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11736, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6037, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2604, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9090, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9129, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17005, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1725, Target: 1937, Traits: 0, StrLen: 65, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1790, Target: 1937, Traits: 0, StrLen: 64, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1525, Target: 1937, Traits: 0, StrLen: 67, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12208, Target: 1937, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1071, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1625, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1982, Target: 1937, Traits: 0, StrLen: 64, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4295, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3751, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6469, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5892, Target: 1937, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4187, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3641, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6421, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2359, Target: 1937, Traits: 0, StrLen: 62, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2172, Target: 1937, Traits: 0, StrLen: 63, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4079, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1918, Target: 1937, Traits: 0, StrLen: 64, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2543, Target: 1937, Traits: 0, StrLen: 61, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2297, Target: 1937, Traits: 0, StrLen: 62, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3861, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3530, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7155, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7597, Target: 1937, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7200, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13827, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13827, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14684, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14684, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5745, Target: 1937, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10712, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6085, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1029, Target: 1937, Traits: 0, StrLen: 73, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7985, Target: 1937, Traits: 0, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6373, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4932, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11562, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5843, Target: 1937, Traits: 0, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11597, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 954, Target: 1937, Traits: 0, StrLen: 75, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2046, Target: 1937, Traits: 0, StrLen: 63, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2235, Target: 1937, Traits: 0, StrLen: 62, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 1937, Traits: 0, StrLen: 66, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 488, Target: 1937, Traits: 0, StrLen: 63, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 646, Target: 1937, Traits: 0, StrLen: 78, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 1937, Traits: 0, StrLen: 82, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 488, Target: 1937, Traits: 0, StrLen: 79, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4025, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 408, Target: 1937, Traits: 0, StrLen: 80, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 567, Target: 1937, Traits: 0, StrLen: 79, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 164, Target: 1937, Traits: 0, StrLen: 82, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2482, Target: 1937, Traits: 0, StrLen: 61, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 327, Target: 1937, Traits: 0, StrLen: 65, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 724, Target: 1937, Traits: 0, StrLen: 62, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 802, Target: 1937, Traits: 0, StrLen: 77, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 327, Target: 1937, Traits: 0, StrLen: 81, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 724, Target: 1937, Traits: 0, StrLen: 78, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2421, Target: 1937, Traits: 0, StrLen: 61, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1389, Target: 1937, Traits: 0, StrLen: 68, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4828, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2784, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17548, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22352, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17981, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20559, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18023, Target: 692, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 609, Traits: 0, StrLen: 6, Count: 82, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17482, Target: 694, Traits: 0, StrLen: 21, Count: 38, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21697, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4349, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3916, Target: 1937, Traits: 0, StrLen: 55, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3474, Target: 1937, Traits: 0, StrLen: 56, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3193, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6517, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4403, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17005, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12175, Target: 1937, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8070, Target: 1937, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5989, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9051, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6750, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12142, Target: 1937, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17918, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6277, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3079, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2109, Target: 1937, Traits: 0, StrLen: 63, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3971, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2904, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6229, Target: 1937, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10928, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6094, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17548, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16413, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2244, Target: 1937, Traits: 0, StrLen: 53, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 57, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 54, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22352, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12131, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12109, Target: 1937, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2784, Target: 1937, Traits: 0, StrLen: 60, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 655, Target: 1937, Traits: 0, StrLen: 69, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9, Target: 1937, Traits: 0, StrLen: 73, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 497, Target: 1937, Traits: 0, StrLen: 70, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4828, Target: 1937, Traits: 0, StrLen: 52, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17482, Target: 733, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 694, Traits: 0, StrLen: 6, Count: 38, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19798, Target: 735, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 2, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16114, Target: 737, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13433, Target: 739, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18044, Target: 739, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 14417, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13396, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13869, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14445, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15628, Target: 744, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21837, Target: 747, Traits: 0, StrLen: 10, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21242, Target: 758, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16509, Target: 747, Traits: 0, StrLen: 24, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 17614, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19116, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16039, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14934, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15732, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16139, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14404, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13383, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13856, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14432, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15628, Target: 758, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 20707, Target: 759, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21567, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22402, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9854, Target: 762, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 765, Traits: 0, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9854, Target: 765, Traits: 0, StrLen: 10, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5520, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2761, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11485, Target: 770, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 762, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20978, Target: 772, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 20978, Target: 773, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 772, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6732, Target: 775, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6687, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9734, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20776, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20772, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6732, Target: 780, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15046, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14380, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20990, Target: 783, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 20990, Target: 784, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 783, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20207, Target: 786, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 16936, Target: 787, Traits: 0, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21777, Target: 803, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22364, Target: 97, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22196, Target: 1199, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16936, Target: 791, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 787, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17739, Target: 793, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22068, Target: 796, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 19657, Target: 799, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22020, Target: 796, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 17739, Target: 797, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22368, Target: 800, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19531, Target: 799, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 22336, Target: 800, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 793, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22340, Target: 802, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 19068, Target: 803, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10748, Target: 804, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22356, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22302, Target: 1937, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19135, Target: 807, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21950, Target: 810, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22296, Target: 814, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20050, Target: 810, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 20475, Target: 811, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 807, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19135, Target: 813, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 19135, Target: 814, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 813, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15123, Target: 816, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17504, Target: 819, Traits: 0, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 11690, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21687, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22260, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17504, Target: 823, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 20489, Target: 824, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 20503, Target: 825, Traits: 0, StrLen: 14, Count: 28, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1091, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 139, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3438, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3716, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6441, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6489, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5912, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4369, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3936, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5364, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5666, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3826, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5004, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4583, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11702, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9578, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5616, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11994, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10984, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10406, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9539, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11687, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9998, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11652, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10369, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10443, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4742, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8952, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12313, Target: 854, Traits: 0, StrLen: 18, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21218, Target: 1547, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21817, Target: 1550, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21230, Target: 882, Traits: 0, StrLen: 12, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19621, Target: 819, Traits: 0, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19621, Target: 823, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12923, Target: 897, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12923, Target: 900, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19711, Target: 913, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18960, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 18920, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 22388, Target: 1616, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16533, Target: 867, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21777, Target: 803, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22364, Target: 97, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22196, Target: 1199, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21230, Target: 882, Traits: 0, StrLen: 12, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16533, Target: 872, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 867, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14460, Target: 874, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 877, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14460, Target: 877, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20811, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16164, Target: 880, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 874, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13413, Target: 882, Traits: 0, StrLen: 30, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 19513, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16821, Target: 1937, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2002, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21254, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17097, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21320, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20177, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18520, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19815, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19078, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21737, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19230, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12313, Target: 895, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 854, Traits: 0, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10748, Target: 897, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 816, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10748, Target: 900, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 816, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20733, Target: 903, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 905, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21276, Target: 905, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 819, Traits: 0, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1611, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17526, Target: 908, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 825, Traits: 0, StrLen: 4, Count: 28, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21977, Target: 1226, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1229, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 21757, Target: 811, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17526, Target: 913, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 908, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18086, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 16959, Target: 916, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18233, Target: 931, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 17189, Target: 324, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16959, Target: 919, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 916, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13048, Target: 921, Traits: 0, StrLen: 20, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21517, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20002, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20629, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21905, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22312, Target: 1937, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21342, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22322, Target: 1937, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22307, Target: 1937, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21932, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13048, Target: 931, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 921, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13048, Target: 933, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5364, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22028, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21026, Target: 936, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21026, Target: 937, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 936, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11943, Target: 939, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 21038, Target: 942, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22356, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22302, Target: 1937, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21050, Target: 945, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8701, Target: 946, Traits: 0, StrLen: 22, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21170, Target: 936, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21182, Target: 945, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19306, Target: 122, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19621, Target: 775, Traits: 0, StrLen: 7, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19639, Target: 987, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19711, Target: 1630, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18960, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 18254, Target: 1479, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18275, Target: 1508, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18920, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14146, Target: 123, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12042, Target: 302, Traits: 0, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18233, Target: 931, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20902, Target: 1010, Traits: 0, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22388, Target: 1616, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18900, Target: 744, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17724, Target: 797, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17746, Target: 942, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8812, Target: 966, Traits: 0, StrLen: 39, Count: 20, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18420, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17876, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15046, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14380, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12955, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12603, Target: 1937, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16064, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15524, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11872, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11492, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14572, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13943, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15472, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14907, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12571, Target: 1937, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12274, Target: 1937, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18065, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18600, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14376, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15042, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8812, Target: 987, Traits: 0, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 966, Traits: 0, StrLen: 6, Count: 20, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11911, Target: 989, Traits: 0, StrLen: 28, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21194, Target: 1017, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20372, Target: 797, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15366, Target: 1292, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19401, Target: 1273, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20417, Target: 1264, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12923, Target: 1007, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20387, Target: 1232, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8701, Target: 999, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 946, Traits: 0, StrLen: 6, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11387, Target: 1001, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13433, Target: 1003, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 11387, Target: 1003, Traits: 0, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20573, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15964, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17855, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7902, Target: 1007, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 939, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20746, Target: 1010, Traits: 0, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22147, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22154, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20824, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21667, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22036, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22161, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17154, Target: 1017, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 16982, Target: 1018, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13443, Target: 1020, Traits: 3, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20759, Target: 1022, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1025, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20759, Target: 1025, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20811, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21587, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21597, Target: 1028, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1022, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22230, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 22230, Target: 1031, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1030, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21896, Target: 1033, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22248, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21265, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22004, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22224, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8852, Target: 1038, Traits: 0, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 18317, Target: 1111, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13885, Target: 1040, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 13473, Target: 1043, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1155, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11422, Target: 1045, Traits: 0, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1164, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1237, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1381, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10784, Target: 1049, Traits: 0, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1043, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21977, Target: 1045, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1229, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10784, Target: 1053, Traits: 0, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1049, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8530, Target: 1055, Traits: 0, StrLen: 40, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13172, Target: 1195, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 15366, Target: 1053, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12923, Target: 1117, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8530, Target: 1061, Traits: 0, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1055, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16581, Target: 1063, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1155, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 139, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13914, Target: 1066, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 157, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7193, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6704, Target: 1069, Traits: 0, StrLen: 28, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21158, Target: 783, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20357, Target: 786, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19934, Target: 1195, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 19382, Target: 1253, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 19711, Target: 1109, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18980, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 18920, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 19621, Target: 1092, Traits: 0, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19639, Target: 1101, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13172, Target: 1061, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14146, Target: 123, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12042, Target: 1038, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22388, Target: 1616, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9826, Target: 1084, Traits: 0, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1087, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9826, Target: 1087, Traits: 0, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13836, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11457, Target: 1090, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1084, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6704, Target: 1092, Traits: 0, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20776, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20772, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21408, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6704, Target: 1096, Traits: 0, StrLen: 45, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 15046, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14380, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14404, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21002, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6704, Target: 1101, Traits: 0, StrLen: 46, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1096, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7776, Target: 1103, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1069, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12763, Target: 1105, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1063, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21977, Target: 1066, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1229, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 12763, Target: 1109, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1105, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12406, Target: 1111, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13433, Target: 1113, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12406, Target: 1113, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20573, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15964, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17855, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9864, Target: 1117, Traits: 0, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 1040, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18640, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 18660, Target: 1121, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 15292, Target: 1122, Traits: 0, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20928, Target: 1252, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 21194, Target: 1017, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20402, Target: 1255, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20601, Target: 1131, Traits: 0, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21452, Target: 1150, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21206, Target: 1147, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 20615, Target: 1181, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20915, Target: 1224, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20517, Target: 1131, Traits: 0, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21557, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1480, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22332, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16629, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16189, Target: 1136, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18620, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20776, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20772, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16189, Target: 1140, Traits: 0, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 16437, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17939, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16557, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20776, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16189, Target: 1145, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1140, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21074, Target: 1147, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20066, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17372, Target: 1937, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21298, Target: 1150, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21932, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10538, Target: 1152, Traits: 0, StrLen: 21, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21218, Target: 1547, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15285, Target: 1122, Traits: 0, StrLen: 27, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18980, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 18920, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 19621, Target: 1136, Traits: 0, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19639, Target: 1145, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14768, Target: 1177, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22388, Target: 1616, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13079, Target: 1162, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1165, Traits: 0, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13079, Target: 1165, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 14488, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14488, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8142, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14516, Target: 1169, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1162, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14544, Target: 1171, Traits: 0, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 20402, Target: 1255, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20601, Target: 1131, Traits: 0, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21206, Target: 1147, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14544, Target: 1177, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1171, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10538, Target: 1179, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1152, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20531, Target: 1181, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 17570, Target: 1182, Traits: 3, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18680, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 16605, Target: 1185, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22098, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22105, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22112, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20237, Target: 1189, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 20237, Target: 1190, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 20493, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 22126, Target: 1192, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 22242, Target: 1193, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 17592, Target: 1194, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 17028, Target: 1195, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 17028, Target: 1196, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13172, Target: 1249, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 19951, Target: 1250, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 20959, Target: 1199, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21309, Target: 1200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 13493, Target: 1201, Traits: 0, StrLen: 10, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1091, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 139, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5415, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5108, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4689, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4261, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5056, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4636, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4153, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3606, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3716, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3438, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3156, Target: 1937, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2984, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 932, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 135, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19832, Target: 1218, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 18720, Target: 1219, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21474, Target: 1222, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21474, Target: 1218, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18720, Target: 1222, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 17960, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18052, Target: 1224, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1219, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11442, Target: 1226, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 157, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7193, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21086, Target: 1229, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 21086, Target: 1230, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1229, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 20252, Target: 1232, Traits: 0, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22052, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1164, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22236, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12855, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22133, Target: 1237, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 15706, Target: 1238, Traits: 1, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19567, Target: 1240, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 19567, Target: 1241, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1240, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21914, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21331, Target: 1244, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 6133, Target: 1245, Traits: 0, StrLen: 48, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 18740, Target: 1246, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21098, Target: 1247, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 15150, Target: 1248, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 16214, Target: 1249, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 16214, Target: 1250, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 16239, Target: 1251, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 20785, Target: 1252, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 19154, Target: 1253, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 13972, Target: 1254, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 20267, Target: 1255, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 17636, Target: 1256, Traits: 1, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22140, Target: 1258, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22396, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19105, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22140, Target: 1261, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21757, Target: 160, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22210, Target: 1258, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12457, Target: 1264, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 16613, Target: 1265, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 19173, Target: 1266, Traits: 0, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21577, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19849, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19883, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15096, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19268, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2469, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19173, Target: 1273, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1266, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15024, Target: 1275, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1279, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21441, Target: 1284, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21430, Target: 1284, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18128, Target: 1279, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 19513, Target: 1937, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15024, Target: 1281, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1275, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17051, Target: 1283, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 17051, Target: 1284, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1283, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4908, Target: 1286, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1201, Traits: 0, StrLen: 4, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21847, Target: 1623, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22296, Target: 1230, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4908, Target: 1290, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1286, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10137, Target: 1292, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1626, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20798, Target: 1294, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 22348, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 12439, Target: 1296, Traits: 0, StrLen: 33, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22052, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1164, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22236, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12855, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15177, Target: 1301, Traits: 0, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1322, Traits: 0, StrLen: 4, Count: 21, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21847, Target: 1623, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22296, Target: 1230, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15177, Target: 1305, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1301, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7509, Target: 1307, Traits: 0, StrLen: 43, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 15888, Target: 1539, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 20130, Target: 1305, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7509, Target: 1311, Traits: 0, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1307, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11906, Target: 1313, Traits: 0, StrLen: 33, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20327, Target: 149, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15366, Target: 1348, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20417, Target: 1264, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12923, Target: 1434, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11906, Target: 1320, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1313, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20282, Target: 1322, Traits: 0, StrLen: 15, Count: 21, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1091, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 139, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2002, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2387, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2200, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6489, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5912, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4207, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3661, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6441, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2379, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2192, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4099, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1938, Target: 1937, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2563, Target: 1937, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2317, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3881, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3550, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6493, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7175, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5916, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18760, Target: 1344, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 157, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11695, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7193, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12795, Target: 1348, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1394, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14001, Target: 1350, Traits: 0, StrLen: 19, Count: 22, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21218, Target: 1547, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20863, Target: 311, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20863, Target: 312, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 20941, Target: 1294, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17702, Target: 121, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15339, Target: 150, Traits: 0, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19325, Target: 148, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17746, Target: 804, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15836, Target: 1413, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16364, Target: 1446, Traits: 0, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 15836, Target: 1432, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 13623, Target: 1296, Traits: 0, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4775, Target: 1405, Traits: 0, StrLen: 53, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16364, Target: 1459, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14204, Target: 1320, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14852, Target: 1392, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19711, Target: 1398, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12042, Target: 1400, Traits: 0, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18980, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 18920, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 22388, Target: 1616, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14001, Target: 1373, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1376, Traits: 0, StrLen: 4, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 773, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14001, Target: 1376, Traits: 0, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 13827, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13827, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14684, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14684, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11690, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15758, Target: 1382, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1373, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18780, Target: 1384, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1350, Traits: 0, StrLen: 6, Count: 22, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12472, Target: 1386, Traits: 0, StrLen: 32, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 19020, Target: 150, Traits: 0, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12923, Target: 1461, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9597, Target: 1405, Traits: 0, StrLen: 39, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12472, Target: 1392, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1386, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17074, Target: 1394, Traits: 0, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1322, Traits: 0, StrLen: 4, Count: 21, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21977, Target: 1344, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1229, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17074, Target: 1398, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1394, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10312, Target: 1400, Traits: 0, StrLen: 37, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17680, Target: 115, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14175, Target: 313, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18960, Target: 1185, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18317, Target: 1437, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8364, Target: 1405, Traits: 0, StrLen: 42, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 22344, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1164, Target: 1937, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22236, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12855, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11940, Target: 1410, Traits: 0, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 14030, Target: 1413, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20776, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6687, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9734, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14030, Target: 1417, Traits: 0, StrLen: 28, Count: 14, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 18420, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11872, Target: 1937, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16064, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15524, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12955, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17876, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11492, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12603, Target: 1937, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8322, Target: 1937, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14600, Target: 1937, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11142, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14380, Target: 1937, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7465, Target: 1937, Traits: 0, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7020, Target: 1937, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14030, Target: 1432, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1417, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7899, Target: 1434, Traits: 0, StrLen: 43, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 1410, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13503, Target: 1437, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13433, Target: 1439, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 13503, Target: 1439, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20573, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15964, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17855, Target: 1937, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12505, Target: 1443, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22060, Target: 118, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 14628, Target: 1446, Traits: 0, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 20776, Target: 1937, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6687, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9734, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20772, Target: 1937, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14628, Target: 1451, Traits: 0, StrLen: 27, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6658, Target: 1937, Traits: 0, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9246, Target: 1937, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12635, Target: 1937, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9712, Target: 1937, Traits: 0, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10275, Target: 1937, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11107, Target: 1937, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10496, Target: 1937, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14628, Target: 1459, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1451, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8406, Target: 1461, Traits: 0, StrLen: 42, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 1443, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19192, Target: 1464, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1466, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19866, Target: 1466, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 780, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1611, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 8660, Target: 1469, Traits: 0, StrLen: 23, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21419, Target: 735, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21230, Target: 1553, Traits: 0, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21242, Target: 1033, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19917, Target: 117, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 18940, Target: 1121, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 20876, Target: 759, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8660, Target: 1477, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1469, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8550, Target: 1479, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 989, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14088, Target: 1481, Traits: 0, StrLen: 28, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1426, Target: 1937, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2761, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14961, Target: 1937, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15680, Target: 1937, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3343, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2881, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14088, Target: 1488, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1481, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6987, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17680, Target: 115, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12859, Target: 1492, Traits: 0, StrLen: 31, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22327, Target: 1579, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21230, Target: 1553, Traits: 0, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 14175, Target: 313, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18233, Target: 933, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16339, Target: 737, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18960, Target: 1185, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17812, Target: 1635, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19693, Target: 300, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18317, Target: 1572, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12859, Target: 1502, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1492, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16653, Target: 1504, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17281, Target: 1507, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16773, Target: 1510, Traits: 0, StrLen: 24, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17120, Target: 1507, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 18149, Target: 1508, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1504, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16653, Target: 1510, Traits: 0, StrLen: 24, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 19513, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16821, Target: 1937, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2002, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20222, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21254, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6620, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17097, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17097, Target: 1937, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15914, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21320, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20177, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18520, Target: 1937, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19815, Target: 1937, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19078, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21737, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19230, Target: 1937, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11841, Target: 1527, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1529, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18170, Target: 1529, Traits: 0, StrLen: 21, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21986, Target: 1605, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20889, Target: 903, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15862, Target: 1510, Traits: 0, StrLen: 26, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17746, Target: 1575, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14740, Target: 1575, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14146, Target: 128, Traits: 0, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17212, Target: 919, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15810, Target: 1539, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 17143, Target: 1540, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7520, Target: 1541, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 17327, Target: 1540, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 20130, Target: 1290, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7520, Target: 1545, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1541, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21134, Target: 1547, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21134, Target: 1548, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1547, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21637, Target: 1550, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 16264, Target: 1551, Traits: 4, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13431, Target: 1553, Traits: 0, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 19513, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 16821, Target: 1937, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2002, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20222, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20545, Target: 1937, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21254, Target: 1937, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6620, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17097, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15914, Target: 1937, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11690, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21647, Target: 1564, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 19211, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22266, Target: 157, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21950, Target: 158, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21463, Target: 1200, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19211, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22266, Target: 157, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21950, Target: 159, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 11395, Target: 1572, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 67, Target: 1937, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20018, Target: 1937, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5957, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14796, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 17189, Target: 324, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14712, Target: 1578, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 21657, Target: 1579, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1582, Traits: 0, StrLen: 4, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1586, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21941, Target: 1582, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 21110, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21507, Target: 1937, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21122, Target: 1937, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21657, Target: 1586, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21386, Target: 1587, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21386, Target: 1588, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1587, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15319, Target: 1590, Traits: 0, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 13172, Target: 1249, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17680, Target: 1244, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 17166, Target: 102, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 16701, Target: 48, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19985, Target: 1619, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15204, Target: 1596, Traits: 5, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7434, Target: 1598, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5364, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22028, Target: 1937, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22147, Target: 1937, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22224, Target: 1937, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15642, Target: 1603, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21397, Target: 1604, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 11855, Target: 1605, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1607, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18184, Target: 1607, Traits: 0, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 775, Traits: 0, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1611, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 19420, Target: 1464, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21146, Target: 1611, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 22044, Target: 1612, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21950, Target: 1615, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22296, Target: 1618, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22254, Target: 1615, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 22360, Target: 1616, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1612, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22044, Target: 1618, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 19900, Target: 1619, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 19249, Target: 1620, Traits: 6, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22196, Target: 323, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18651, Target: 1622, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 21677, Target: 1623, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1622, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 20297, Target: 1625, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 10146, Target: 1626, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22380, Target: 1201, Traits: 0, StrLen: 4, Count: 16, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21977, Target: 1226, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22296, Target: 1229, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 10146, Target: 1630, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1626, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17658, Target: 1632, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21807, Target: 138, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 20114, Target: 141, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 17658, Target: 1635, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1632, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13459, Target: 1637, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 22168, Target: 1638, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 21707, Target: 1639, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 21707, Target: 1640, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1639, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19585, Target: 1642, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 16677, Target: 1643, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 20312, Target: 1644, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 18191, Target: 1645, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 19287, Target: 1646, Traits: 0, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21877, Target: 1677, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21867, Target: 1676, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 19729, Target: 1642, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 20432, Target: 1644, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 16797, Target: 1643, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 18338, Target: 1645, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 21827, Target: 1564, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9759, Target: 1654, Traits: 0, StrLen: 20, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21857, Target: 1639, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21747, Target: 38, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18860, Target: 1646, Traits: 0, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19621, Target: 176, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19711, Target: 199, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18960, Target: 1184, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 15393, Target: 1672, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18920, Target: 1120, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14146, Target: 123, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 12042, Target: 163, Traits: 0, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22388, Target: 1616, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 15258, Target: 1666, Traits: 0, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 20837, Target: 1646, Traits: 0, StrLen: 13, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 20417, Target: 1264, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 22384, Target: 1295, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 12923, Target: 1575, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12923, Target: 192, Traits: 0, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 15258, Target: 1672, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1666, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9759, Target: 1674, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 17790, Target: 1654, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21717, Target: 1676, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 21727, Target: 1677, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9674, Target: 1678, Traits: 0, StrLen: 38, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21230, Target: 1553, Traits: 0, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22327, Target: 1579, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14291, Target: 1488, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9168, Target: 1682, Traits: 0, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9207, Target: 1683, Traits: 0, StrLen: 39, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1031, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 1028, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8652, Target: 1688, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16749, Target: 1477, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7289, Target: 1691, Traits: 0, StrLen: 44, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 770, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20587, Target: 401, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19458, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21767, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12891, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6930, Target: 1699, Traits: 0, StrLen: 45, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10164, Target: 1702, Traits: 0, StrLen: 37, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20587, Target: 733, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19458, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21767, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9750, Target: 1709, Traits: 0, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9285, Target: 1712, Traits: 0, StrLen: 39, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 770, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20587, Target: 549, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19458, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21767, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12891, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8692, Target: 1720, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9788, Target: 1723, Traits: 0, StrLen: 38, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 259, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20587, Target: 433, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19458, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21767, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9324, Target: 1730, Traits: 0, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 12667, Target: 1733, Traits: 0, StrLen: 32, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 880, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20587, Target: 475, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19458, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21767, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12307, Target: 1740, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8238, Target: 1743, Traits: 0, StrLen: 42, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 1090, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20587, Target: 583, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19458, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21767, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7770, Target: 1750, Traits: 0, StrLen: 43, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11247, Target: 1753, Traits: 0, StrLen: 35, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 1169, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20587, Target: 607, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19458, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21767, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 10532, Target: 1760, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9363, Target: 1763, Traits: 0, StrLen: 39, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 1382, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 20587, Target: 692, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19458, Target: 1569, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21767, Target: 760, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 12891, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8732, Target: 1771, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22278, Target: 1030, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19458, Target: 1565, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8489, Target: 1774, Traits: 0, StrLen: 41, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18820, Target: 52, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22182, Target: 770, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12891, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8280, Target: 1781, Traits: 0, StrLen: 42, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13141, Target: 92, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22272, Target: 791, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11804, Target: 1785, Traits: 0, StrLen: 34, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21857, Target: 1640, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22182, Target: 174, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11282, Target: 1791, Traits: 0, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18359, Target: 1674, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22272, Target: 791, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10568, Target: 1795, Traits: 0, StrLen: 36, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21170, Target: 937, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22182, Target: 770, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12891, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10201, Target: 1802, Traits: 0, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17235, Target: 999, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22272, Target: 791, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7813, Target: 1806, Traits: 0, StrLen: 43, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21170, Target: 936, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21242, Target: 1226, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22290, Target: 1265, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 21968, Target: 1622, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 22175, Target: 1622, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 12891, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7333, Target: 1813, Traits: 0, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12538, Target: 1545, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5446, Target: 1815, Traits: 0, StrLen: 50, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21485, Target: 1587, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21242, Target: 1226, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22290, Target: 1265, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 21968, Target: 1622, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 22175, Target: 1622, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5242, Target: 1821, Traits: 0, StrLen: 51, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12538, Target: 287, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11317, Target: 1823, Traits: 0, StrLen: 35, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21485, Target: 1588, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22182, Target: 259, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10604, Target: 1829, Traits: 0, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 16314, Target: 281, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22272, Target: 791, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7377, Target: 1833, Traits: 0, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21218, Target: 1547, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6975, Target: 1835, Traits: 0, StrLen: 45, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14175, Target: 313, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16339, Target: 737, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18960, Target: 1185, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17812, Target: 1635, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19693, Target: 300, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7856, Target: 1841, Traits: 0, StrLen: 43, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 22182, Target: 321, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7421, Target: 1845, Traits: 0, StrLen: 44, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 16289, Target: 36, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 15654, Target: 1848, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 15069, Target: 1849, Traits: 0, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21242, Target: 1598, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21242, Target: 1603, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17790, Target: 1194, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 18940, Target: 1121, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 14262, Target: 1254, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 13798, Target: 1855, Traits: 0, StrLen: 29, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21218, Target: 1548, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 824, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22182, Target: 880, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22210, Target: 1261, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 13353, Target: 1862, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19344, Target: 895, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22272, Target: 872, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9402, Target: 1866, Traits: 0, StrLen: 39, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21158, Target: 784, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22182, Target: 1090, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8772, Target: 1872, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14233, Target: 1103, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12731, Target: 1875, Traits: 0, StrLen: 32, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21218, Target: 1548, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22182, Target: 1169, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12340, Target: 1881, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17768, Target: 1179, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22272, Target: 791, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5293, Target: 1885, Traits: 0, StrLen: 51, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21218, Target: 1547, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21242, Target: 1226, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22290, Target: 1265, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 21968, Target: 1622, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 22175, Target: 1622, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 12891, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4880, Target: 1892, Traits: 0, StrLen: 52, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 12538, Target: 1311, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 10640, Target: 1894, Traits: 0, StrLen: 36, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21218, Target: 1548, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 22182, Target: 1382, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12891, Target: 1490, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 10238, Target: 1901, Traits: 0, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19000, Target: 1384, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 22272, Target: 791, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11352, Target: 1905, Traits: 0, StrLen: 35, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21230, Target: 1553, Traits: 0, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22327, Target: 1579, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 10676, Target: 1910, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 12891, Target: 1502, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12373, Target: 1913, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21747, Target: 39, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 21797, Target: 1191, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 11838, Target: 1917, Traits: 0, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21959, Target: 1243, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 17304, Target: 1527, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 11527, Target: 1920, Traits: 0, StrLen: 35, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21230, Target: 1553, Traits: 0, StrLen: 12, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 22327, Target: 1579, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 14175, Target: 313, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18233, Target: 933, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 16339, Target: 737, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 18960, Target: 1185, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 17812, Target: 1635, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 19693, Target: 1281, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 18317, Target: 1572, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 10820, Target: 1930, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14117, Target: 1931, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21242, Target: 1598, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 18212, Target: 915, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 13593, Target: 1934, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 21242, Target: 1598, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 21242, Target: 1603, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 19453, Target: 1937, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [1938]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+	smithy.NewStaticSchema(&set, 884),
+	smithy.NewStaticSchema(&set, 885),
+	smithy.NewStaticSchema(&set, 886),
+	smithy.NewStaticSchema(&set, 887),
+	smithy.NewStaticSchema(&set, 888),
+	smithy.NewStaticSchema(&set, 889),
+	smithy.NewStaticSchema(&set, 890),
+	smithy.NewStaticSchema(&set, 891),
+	smithy.NewStaticSchema(&set, 892),
+	smithy.NewStaticSchema(&set, 893),
+	smithy.NewStaticSchema(&set, 894),
+	smithy.NewStaticSchema(&set, 895),
+	smithy.NewStaticSchema(&set, 896),
+	smithy.NewStaticSchema(&set, 897),
+	smithy.NewStaticSchema(&set, 898),
+	smithy.NewStaticSchema(&set, 899),
+	smithy.NewStaticSchema(&set, 900),
+	smithy.NewStaticSchema(&set, 901),
+	smithy.NewStaticSchema(&set, 902),
+	smithy.NewStaticSchema(&set, 903),
+	smithy.NewStaticSchema(&set, 904),
+	smithy.NewStaticSchema(&set, 905),
+	smithy.NewStaticSchema(&set, 906),
+	smithy.NewStaticSchema(&set, 907),
+	smithy.NewStaticSchema(&set, 908),
+	smithy.NewStaticSchema(&set, 909),
+	smithy.NewStaticSchema(&set, 910),
+	smithy.NewStaticSchema(&set, 911),
+	smithy.NewStaticSchema(&set, 912),
+	smithy.NewStaticSchema(&set, 913),
+	smithy.NewStaticSchema(&set, 914),
+	smithy.NewStaticSchema(&set, 915),
+	smithy.NewStaticSchema(&set, 916),
+	smithy.NewStaticSchema(&set, 917),
+	smithy.NewStaticSchema(&set, 918),
+	smithy.NewStaticSchema(&set, 919),
+	smithy.NewStaticSchema(&set, 920),
+	smithy.NewStaticSchema(&set, 921),
+	smithy.NewStaticSchema(&set, 922),
+	smithy.NewStaticSchema(&set, 923),
+	smithy.NewStaticSchema(&set, 924),
+	smithy.NewStaticSchema(&set, 925),
+	smithy.NewStaticSchema(&set, 926),
+	smithy.NewStaticSchema(&set, 927),
+	smithy.NewStaticSchema(&set, 928),
+	smithy.NewStaticSchema(&set, 929),
+	smithy.NewStaticSchema(&set, 930),
+	smithy.NewStaticSchema(&set, 931),
+	smithy.NewStaticSchema(&set, 932),
+	smithy.NewStaticSchema(&set, 933),
+	smithy.NewStaticSchema(&set, 934),
+	smithy.NewStaticSchema(&set, 935),
+	smithy.NewStaticSchema(&set, 936),
+	smithy.NewStaticSchema(&set, 937),
+	smithy.NewStaticSchema(&set, 938),
+	smithy.NewStaticSchema(&set, 939),
+	smithy.NewStaticSchema(&set, 940),
+	smithy.NewStaticSchema(&set, 941),
+	smithy.NewStaticSchema(&set, 942),
+	smithy.NewStaticSchema(&set, 943),
+	smithy.NewStaticSchema(&set, 944),
+	smithy.NewStaticSchema(&set, 945),
+	smithy.NewStaticSchema(&set, 946),
+	smithy.NewStaticSchema(&set, 947),
+	smithy.NewStaticSchema(&set, 948),
+	smithy.NewStaticSchema(&set, 949),
+	smithy.NewStaticSchema(&set, 950),
+	smithy.NewStaticSchema(&set, 951),
+	smithy.NewStaticSchema(&set, 952),
+	smithy.NewStaticSchema(&set, 953),
+	smithy.NewStaticSchema(&set, 954),
+	smithy.NewStaticSchema(&set, 955),
+	smithy.NewStaticSchema(&set, 956),
+	smithy.NewStaticSchema(&set, 957),
+	smithy.NewStaticSchema(&set, 958),
+	smithy.NewStaticSchema(&set, 959),
+	smithy.NewStaticSchema(&set, 960),
+	smithy.NewStaticSchema(&set, 961),
+	smithy.NewStaticSchema(&set, 962),
+	smithy.NewStaticSchema(&set, 963),
+	smithy.NewStaticSchema(&set, 964),
+	smithy.NewStaticSchema(&set, 965),
+	smithy.NewStaticSchema(&set, 966),
+	smithy.NewStaticSchema(&set, 967),
+	smithy.NewStaticSchema(&set, 968),
+	smithy.NewStaticSchema(&set, 969),
+	smithy.NewStaticSchema(&set, 970),
+	smithy.NewStaticSchema(&set, 971),
+	smithy.NewStaticSchema(&set, 972),
+	smithy.NewStaticSchema(&set, 973),
+	smithy.NewStaticSchema(&set, 974),
+	smithy.NewStaticSchema(&set, 975),
+	smithy.NewStaticSchema(&set, 976),
+	smithy.NewStaticSchema(&set, 977),
+	smithy.NewStaticSchema(&set, 978),
+	smithy.NewStaticSchema(&set, 979),
+	smithy.NewStaticSchema(&set, 980),
+	smithy.NewStaticSchema(&set, 981),
+	smithy.NewStaticSchema(&set, 982),
+	smithy.NewStaticSchema(&set, 983),
+	smithy.NewStaticSchema(&set, 984),
+	smithy.NewStaticSchema(&set, 985),
+	smithy.NewStaticSchema(&set, 986),
+	smithy.NewStaticSchema(&set, 987),
+	smithy.NewStaticSchema(&set, 988),
+	smithy.NewStaticSchema(&set, 989),
+	smithy.NewStaticSchema(&set, 990),
+	smithy.NewStaticSchema(&set, 991),
+	smithy.NewStaticSchema(&set, 992),
+	smithy.NewStaticSchema(&set, 993),
+	smithy.NewStaticSchema(&set, 994),
+	smithy.NewStaticSchema(&set, 995),
+	smithy.NewStaticSchema(&set, 996),
+	smithy.NewStaticSchema(&set, 997),
+	smithy.NewStaticSchema(&set, 998),
+	smithy.NewStaticSchema(&set, 999),
+	smithy.NewStaticSchema(&set, 1000),
+	smithy.NewStaticSchema(&set, 1001),
+	smithy.NewStaticSchema(&set, 1002),
+	smithy.NewStaticSchema(&set, 1003),
+	smithy.NewStaticSchema(&set, 1004),
+	smithy.NewStaticSchema(&set, 1005),
+	smithy.NewStaticSchema(&set, 1006),
+	smithy.NewStaticSchema(&set, 1007),
+	smithy.NewStaticSchema(&set, 1008),
+	smithy.NewStaticSchema(&set, 1009),
+	smithy.NewStaticSchema(&set, 1010),
+	smithy.NewStaticSchema(&set, 1011),
+	smithy.NewStaticSchema(&set, 1012),
+	smithy.NewStaticSchema(&set, 1013),
+	smithy.NewStaticSchema(&set, 1014),
+	smithy.NewStaticSchema(&set, 1015),
+	smithy.NewStaticSchema(&set, 1016),
+	smithy.NewStaticSchema(&set, 1017),
+	smithy.NewStaticSchema(&set, 1018),
+	smithy.NewStaticSchema(&set, 1019),
+	smithy.NewStaticSchema(&set, 1020),
+	smithy.NewStaticSchema(&set, 1021),
+	smithy.NewStaticSchema(&set, 1022),
+	smithy.NewStaticSchema(&set, 1023),
+	smithy.NewStaticSchema(&set, 1024),
+	smithy.NewStaticSchema(&set, 1025),
+	smithy.NewStaticSchema(&set, 1026),
+	smithy.NewStaticSchema(&set, 1027),
+	smithy.NewStaticSchema(&set, 1028),
+	smithy.NewStaticSchema(&set, 1029),
+	smithy.NewStaticSchema(&set, 1030),
+	smithy.NewStaticSchema(&set, 1031),
+	smithy.NewStaticSchema(&set, 1032),
+	smithy.NewStaticSchema(&set, 1033),
+	smithy.NewStaticSchema(&set, 1034),
+	smithy.NewStaticSchema(&set, 1035),
+	smithy.NewStaticSchema(&set, 1036),
+	smithy.NewStaticSchema(&set, 1037),
+	smithy.NewStaticSchema(&set, 1038),
+	smithy.NewStaticSchema(&set, 1039),
+	smithy.NewStaticSchema(&set, 1040),
+	smithy.NewStaticSchema(&set, 1041),
+	smithy.NewStaticSchema(&set, 1042),
+	smithy.NewStaticSchema(&set, 1043),
+	smithy.NewStaticSchema(&set, 1044),
+	smithy.NewStaticSchema(&set, 1045),
+	smithy.NewStaticSchema(&set, 1046),
+	smithy.NewStaticSchema(&set, 1047),
+	smithy.NewStaticSchema(&set, 1048),
+	smithy.NewStaticSchema(&set, 1049),
+	smithy.NewStaticSchema(&set, 1050),
+	smithy.NewStaticSchema(&set, 1051),
+	smithy.NewStaticSchema(&set, 1052),
+	smithy.NewStaticSchema(&set, 1053),
+	smithy.NewStaticSchema(&set, 1054),
+	smithy.NewStaticSchema(&set, 1055),
+	smithy.NewStaticSchema(&set, 1056),
+	smithy.NewStaticSchema(&set, 1057),
+	smithy.NewStaticSchema(&set, 1058),
+	smithy.NewStaticSchema(&set, 1059),
+	smithy.NewStaticSchema(&set, 1060),
+	smithy.NewStaticSchema(&set, 1061),
+	smithy.NewStaticSchema(&set, 1062),
+	smithy.NewStaticSchema(&set, 1063),
+	smithy.NewStaticSchema(&set, 1064),
+	smithy.NewStaticSchema(&set, 1065),
+	smithy.NewStaticSchema(&set, 1066),
+	smithy.NewStaticSchema(&set, 1067),
+	smithy.NewStaticSchema(&set, 1068),
+	smithy.NewStaticSchema(&set, 1069),
+	smithy.NewStaticSchema(&set, 1070),
+	smithy.NewStaticSchema(&set, 1071),
+	smithy.NewStaticSchema(&set, 1072),
+	smithy.NewStaticSchema(&set, 1073),
+	smithy.NewStaticSchema(&set, 1074),
+	smithy.NewStaticSchema(&set, 1075),
+	smithy.NewStaticSchema(&set, 1076),
+	smithy.NewStaticSchema(&set, 1077),
+	smithy.NewStaticSchema(&set, 1078),
+	smithy.NewStaticSchema(&set, 1079),
+	smithy.NewStaticSchema(&set, 1080),
+	smithy.NewStaticSchema(&set, 1081),
+	smithy.NewStaticSchema(&set, 1082),
+	smithy.NewStaticSchema(&set, 1083),
+	smithy.NewStaticSchema(&set, 1084),
+	smithy.NewStaticSchema(&set, 1085),
+	smithy.NewStaticSchema(&set, 1086),
+	smithy.NewStaticSchema(&set, 1087),
+	smithy.NewStaticSchema(&set, 1088),
+	smithy.NewStaticSchema(&set, 1089),
+	smithy.NewStaticSchema(&set, 1090),
+	smithy.NewStaticSchema(&set, 1091),
+	smithy.NewStaticSchema(&set, 1092),
+	smithy.NewStaticSchema(&set, 1093),
+	smithy.NewStaticSchema(&set, 1094),
+	smithy.NewStaticSchema(&set, 1095),
+	smithy.NewStaticSchema(&set, 1096),
+	smithy.NewStaticSchema(&set, 1097),
+	smithy.NewStaticSchema(&set, 1098),
+	smithy.NewStaticSchema(&set, 1099),
+	smithy.NewStaticSchema(&set, 1100),
+	smithy.NewStaticSchema(&set, 1101),
+	smithy.NewStaticSchema(&set, 1102),
+	smithy.NewStaticSchema(&set, 1103),
+	smithy.NewStaticSchema(&set, 1104),
+	smithy.NewStaticSchema(&set, 1105),
+	smithy.NewStaticSchema(&set, 1106),
+	smithy.NewStaticSchema(&set, 1107),
+	smithy.NewStaticSchema(&set, 1108),
+	smithy.NewStaticSchema(&set, 1109),
+	smithy.NewStaticSchema(&set, 1110),
+	smithy.NewStaticSchema(&set, 1111),
+	smithy.NewStaticSchema(&set, 1112),
+	smithy.NewStaticSchema(&set, 1113),
+	smithy.NewStaticSchema(&set, 1114),
+	smithy.NewStaticSchema(&set, 1115),
+	smithy.NewStaticSchema(&set, 1116),
+	smithy.NewStaticSchema(&set, 1117),
+	smithy.NewStaticSchema(&set, 1118),
+	smithy.NewStaticSchema(&set, 1119),
+	smithy.NewStaticSchema(&set, 1120),
+	smithy.NewStaticSchema(&set, 1121),
+	smithy.NewStaticSchema(&set, 1122),
+	smithy.NewStaticSchema(&set, 1123),
+	smithy.NewStaticSchema(&set, 1124),
+	smithy.NewStaticSchema(&set, 1125),
+	smithy.NewStaticSchema(&set, 1126),
+	smithy.NewStaticSchema(&set, 1127),
+	smithy.NewStaticSchema(&set, 1128),
+	smithy.NewStaticSchema(&set, 1129),
+	smithy.NewStaticSchema(&set, 1130),
+	smithy.NewStaticSchema(&set, 1131),
+	smithy.NewStaticSchema(&set, 1132),
+	smithy.NewStaticSchema(&set, 1133),
+	smithy.NewStaticSchema(&set, 1134),
+	smithy.NewStaticSchema(&set, 1135),
+	smithy.NewStaticSchema(&set, 1136),
+	smithy.NewStaticSchema(&set, 1137),
+	smithy.NewStaticSchema(&set, 1138),
+	smithy.NewStaticSchema(&set, 1139),
+	smithy.NewStaticSchema(&set, 1140),
+	smithy.NewStaticSchema(&set, 1141),
+	smithy.NewStaticSchema(&set, 1142),
+	smithy.NewStaticSchema(&set, 1143),
+	smithy.NewStaticSchema(&set, 1144),
+	smithy.NewStaticSchema(&set, 1145),
+	smithy.NewStaticSchema(&set, 1146),
+	smithy.NewStaticSchema(&set, 1147),
+	smithy.NewStaticSchema(&set, 1148),
+	smithy.NewStaticSchema(&set, 1149),
+	smithy.NewStaticSchema(&set, 1150),
+	smithy.NewStaticSchema(&set, 1151),
+	smithy.NewStaticSchema(&set, 1152),
+	smithy.NewStaticSchema(&set, 1153),
+	smithy.NewStaticSchema(&set, 1154),
+	smithy.NewStaticSchema(&set, 1155),
+	smithy.NewStaticSchema(&set, 1156),
+	smithy.NewStaticSchema(&set, 1157),
+	smithy.NewStaticSchema(&set, 1158),
+	smithy.NewStaticSchema(&set, 1159),
+	smithy.NewStaticSchema(&set, 1160),
+	smithy.NewStaticSchema(&set, 1161),
+	smithy.NewStaticSchema(&set, 1162),
+	smithy.NewStaticSchema(&set, 1163),
+	smithy.NewStaticSchema(&set, 1164),
+	smithy.NewStaticSchema(&set, 1165),
+	smithy.NewStaticSchema(&set, 1166),
+	smithy.NewStaticSchema(&set, 1167),
+	smithy.NewStaticSchema(&set, 1168),
+	smithy.NewStaticSchema(&set, 1169),
+	smithy.NewStaticSchema(&set, 1170),
+	smithy.NewStaticSchema(&set, 1171),
+	smithy.NewStaticSchema(&set, 1172),
+	smithy.NewStaticSchema(&set, 1173),
+	smithy.NewStaticSchema(&set, 1174),
+	smithy.NewStaticSchema(&set, 1175),
+	smithy.NewStaticSchema(&set, 1176),
+	smithy.NewStaticSchema(&set, 1177),
+	smithy.NewStaticSchema(&set, 1178),
+	smithy.NewStaticSchema(&set, 1179),
+	smithy.NewStaticSchema(&set, 1180),
+	smithy.NewStaticSchema(&set, 1181),
+	smithy.NewStaticSchema(&set, 1182),
+	smithy.NewStaticSchema(&set, 1183),
+	smithy.NewStaticSchema(&set, 1184),
+	smithy.NewStaticSchema(&set, 1185),
+	smithy.NewStaticSchema(&set, 1186),
+	smithy.NewStaticSchema(&set, 1187),
+	smithy.NewStaticSchema(&set, 1188),
+	smithy.NewStaticSchema(&set, 1189),
+	smithy.NewStaticSchema(&set, 1190),
+	smithy.NewStaticSchema(&set, 1191),
+	smithy.NewStaticSchema(&set, 1192),
+	smithy.NewStaticSchema(&set, 1193),
+	smithy.NewStaticSchema(&set, 1194),
+	smithy.NewStaticSchema(&set, 1195),
+	smithy.NewStaticSchema(&set, 1196),
+	smithy.NewStaticSchema(&set, 1197),
+	smithy.NewStaticSchema(&set, 1198),
+	smithy.NewStaticSchema(&set, 1199),
+	smithy.NewStaticSchema(&set, 1200),
+	smithy.NewStaticSchema(&set, 1201),
+	smithy.NewStaticSchema(&set, 1202),
+	smithy.NewStaticSchema(&set, 1203),
+	smithy.NewStaticSchema(&set, 1204),
+	smithy.NewStaticSchema(&set, 1205),
+	smithy.NewStaticSchema(&set, 1206),
+	smithy.NewStaticSchema(&set, 1207),
+	smithy.NewStaticSchema(&set, 1208),
+	smithy.NewStaticSchema(&set, 1209),
+	smithy.NewStaticSchema(&set, 1210),
+	smithy.NewStaticSchema(&set, 1211),
+	smithy.NewStaticSchema(&set, 1212),
+	smithy.NewStaticSchema(&set, 1213),
+	smithy.NewStaticSchema(&set, 1214),
+	smithy.NewStaticSchema(&set, 1215),
+	smithy.NewStaticSchema(&set, 1216),
+	smithy.NewStaticSchema(&set, 1217),
+	smithy.NewStaticSchema(&set, 1218),
+	smithy.NewStaticSchema(&set, 1219),
+	smithy.NewStaticSchema(&set, 1220),
+	smithy.NewStaticSchema(&set, 1221),
+	smithy.NewStaticSchema(&set, 1222),
+	smithy.NewStaticSchema(&set, 1223),
+	smithy.NewStaticSchema(&set, 1224),
+	smithy.NewStaticSchema(&set, 1225),
+	smithy.NewStaticSchema(&set, 1226),
+	smithy.NewStaticSchema(&set, 1227),
+	smithy.NewStaticSchema(&set, 1228),
+	smithy.NewStaticSchema(&set, 1229),
+	smithy.NewStaticSchema(&set, 1230),
+	smithy.NewStaticSchema(&set, 1231),
+	smithy.NewStaticSchema(&set, 1232),
+	smithy.NewStaticSchema(&set, 1233),
+	smithy.NewStaticSchema(&set, 1234),
+	smithy.NewStaticSchema(&set, 1235),
+	smithy.NewStaticSchema(&set, 1236),
+	smithy.NewStaticSchema(&set, 1237),
+	smithy.NewStaticSchema(&set, 1238),
+	smithy.NewStaticSchema(&set, 1239),
+	smithy.NewStaticSchema(&set, 1240),
+	smithy.NewStaticSchema(&set, 1241),
+	smithy.NewStaticSchema(&set, 1242),
+	smithy.NewStaticSchema(&set, 1243),
+	smithy.NewStaticSchema(&set, 1244),
+	smithy.NewStaticSchema(&set, 1245),
+	smithy.NewStaticSchema(&set, 1246),
+	smithy.NewStaticSchema(&set, 1247),
+	smithy.NewStaticSchema(&set, 1248),
+	smithy.NewStaticSchema(&set, 1249),
+	smithy.NewStaticSchema(&set, 1250),
+	smithy.NewStaticSchema(&set, 1251),
+	smithy.NewStaticSchema(&set, 1252),
+	smithy.NewStaticSchema(&set, 1253),
+	smithy.NewStaticSchema(&set, 1254),
+	smithy.NewStaticSchema(&set, 1255),
+	smithy.NewStaticSchema(&set, 1256),
+	smithy.NewStaticSchema(&set, 1257),
+	smithy.NewStaticSchema(&set, 1258),
+	smithy.NewStaticSchema(&set, 1259),
+	smithy.NewStaticSchema(&set, 1260),
+	smithy.NewStaticSchema(&set, 1261),
+	smithy.NewStaticSchema(&set, 1262),
+	smithy.NewStaticSchema(&set, 1263),
+	smithy.NewStaticSchema(&set, 1264),
+	smithy.NewStaticSchema(&set, 1265),
+	smithy.NewStaticSchema(&set, 1266),
+	smithy.NewStaticSchema(&set, 1267),
+	smithy.NewStaticSchema(&set, 1268),
+	smithy.NewStaticSchema(&set, 1269),
+	smithy.NewStaticSchema(&set, 1270),
+	smithy.NewStaticSchema(&set, 1271),
+	smithy.NewStaticSchema(&set, 1272),
+	smithy.NewStaticSchema(&set, 1273),
+	smithy.NewStaticSchema(&set, 1274),
+	smithy.NewStaticSchema(&set, 1275),
+	smithy.NewStaticSchema(&set, 1276),
+	smithy.NewStaticSchema(&set, 1277),
+	smithy.NewStaticSchema(&set, 1278),
+	smithy.NewStaticSchema(&set, 1279),
+	smithy.NewStaticSchema(&set, 1280),
+	smithy.NewStaticSchema(&set, 1281),
+	smithy.NewStaticSchema(&set, 1282),
+	smithy.NewStaticSchema(&set, 1283),
+	smithy.NewStaticSchema(&set, 1284),
+	smithy.NewStaticSchema(&set, 1285),
+	smithy.NewStaticSchema(&set, 1286),
+	smithy.NewStaticSchema(&set, 1287),
+	smithy.NewStaticSchema(&set, 1288),
+	smithy.NewStaticSchema(&set, 1289),
+	smithy.NewStaticSchema(&set, 1290),
+	smithy.NewStaticSchema(&set, 1291),
+	smithy.NewStaticSchema(&set, 1292),
+	smithy.NewStaticSchema(&set, 1293),
+	smithy.NewStaticSchema(&set, 1294),
+	smithy.NewStaticSchema(&set, 1295),
+	smithy.NewStaticSchema(&set, 1296),
+	smithy.NewStaticSchema(&set, 1297),
+	smithy.NewStaticSchema(&set, 1298),
+	smithy.NewStaticSchema(&set, 1299),
+	smithy.NewStaticSchema(&set, 1300),
+	smithy.NewStaticSchema(&set, 1301),
+	smithy.NewStaticSchema(&set, 1302),
+	smithy.NewStaticSchema(&set, 1303),
+	smithy.NewStaticSchema(&set, 1304),
+	smithy.NewStaticSchema(&set, 1305),
+	smithy.NewStaticSchema(&set, 1306),
+	smithy.NewStaticSchema(&set, 1307),
+	smithy.NewStaticSchema(&set, 1308),
+	smithy.NewStaticSchema(&set, 1309),
+	smithy.NewStaticSchema(&set, 1310),
+	smithy.NewStaticSchema(&set, 1311),
+	smithy.NewStaticSchema(&set, 1312),
+	smithy.NewStaticSchema(&set, 1313),
+	smithy.NewStaticSchema(&set, 1314),
+	smithy.NewStaticSchema(&set, 1315),
+	smithy.NewStaticSchema(&set, 1316),
+	smithy.NewStaticSchema(&set, 1317),
+	smithy.NewStaticSchema(&set, 1318),
+	smithy.NewStaticSchema(&set, 1319),
+	smithy.NewStaticSchema(&set, 1320),
+	smithy.NewStaticSchema(&set, 1321),
+	smithy.NewStaticSchema(&set, 1322),
+	smithy.NewStaticSchema(&set, 1323),
+	smithy.NewStaticSchema(&set, 1324),
+	smithy.NewStaticSchema(&set, 1325),
+	smithy.NewStaticSchema(&set, 1326),
+	smithy.NewStaticSchema(&set, 1327),
+	smithy.NewStaticSchema(&set, 1328),
+	smithy.NewStaticSchema(&set, 1329),
+	smithy.NewStaticSchema(&set, 1330),
+	smithy.NewStaticSchema(&set, 1331),
+	smithy.NewStaticSchema(&set, 1332),
+	smithy.NewStaticSchema(&set, 1333),
+	smithy.NewStaticSchema(&set, 1334),
+	smithy.NewStaticSchema(&set, 1335),
+	smithy.NewStaticSchema(&set, 1336),
+	smithy.NewStaticSchema(&set, 1337),
+	smithy.NewStaticSchema(&set, 1338),
+	smithy.NewStaticSchema(&set, 1339),
+	smithy.NewStaticSchema(&set, 1340),
+	smithy.NewStaticSchema(&set, 1341),
+	smithy.NewStaticSchema(&set, 1342),
+	smithy.NewStaticSchema(&set, 1343),
+	smithy.NewStaticSchema(&set, 1344),
+	smithy.NewStaticSchema(&set, 1345),
+	smithy.NewStaticSchema(&set, 1346),
+	smithy.NewStaticSchema(&set, 1347),
+	smithy.NewStaticSchema(&set, 1348),
+	smithy.NewStaticSchema(&set, 1349),
+	smithy.NewStaticSchema(&set, 1350),
+	smithy.NewStaticSchema(&set, 1351),
+	smithy.NewStaticSchema(&set, 1352),
+	smithy.NewStaticSchema(&set, 1353),
+	smithy.NewStaticSchema(&set, 1354),
+	smithy.NewStaticSchema(&set, 1355),
+	smithy.NewStaticSchema(&set, 1356),
+	smithy.NewStaticSchema(&set, 1357),
+	smithy.NewStaticSchema(&set, 1358),
+	smithy.NewStaticSchema(&set, 1359),
+	smithy.NewStaticSchema(&set, 1360),
+	smithy.NewStaticSchema(&set, 1361),
+	smithy.NewStaticSchema(&set, 1362),
+	smithy.NewStaticSchema(&set, 1363),
+	smithy.NewStaticSchema(&set, 1364),
+	smithy.NewStaticSchema(&set, 1365),
+	smithy.NewStaticSchema(&set, 1366),
+	smithy.NewStaticSchema(&set, 1367),
+	smithy.NewStaticSchema(&set, 1368),
+	smithy.NewStaticSchema(&set, 1369),
+	smithy.NewStaticSchema(&set, 1370),
+	smithy.NewStaticSchema(&set, 1371),
+	smithy.NewStaticSchema(&set, 1372),
+	smithy.NewStaticSchema(&set, 1373),
+	smithy.NewStaticSchema(&set, 1374),
+	smithy.NewStaticSchema(&set, 1375),
+	smithy.NewStaticSchema(&set, 1376),
+	smithy.NewStaticSchema(&set, 1377),
+	smithy.NewStaticSchema(&set, 1378),
+	smithy.NewStaticSchema(&set, 1379),
+	smithy.NewStaticSchema(&set, 1380),
+	smithy.NewStaticSchema(&set, 1381),
+	smithy.NewStaticSchema(&set, 1382),
+	smithy.NewStaticSchema(&set, 1383),
+	smithy.NewStaticSchema(&set, 1384),
+	smithy.NewStaticSchema(&set, 1385),
+	smithy.NewStaticSchema(&set, 1386),
+	smithy.NewStaticSchema(&set, 1387),
+	smithy.NewStaticSchema(&set, 1388),
+	smithy.NewStaticSchema(&set, 1389),
+	smithy.NewStaticSchema(&set, 1390),
+	smithy.NewStaticSchema(&set, 1391),
+	smithy.NewStaticSchema(&set, 1392),
+	smithy.NewStaticSchema(&set, 1393),
+	smithy.NewStaticSchema(&set, 1394),
+	smithy.NewStaticSchema(&set, 1395),
+	smithy.NewStaticSchema(&set, 1396),
+	smithy.NewStaticSchema(&set, 1397),
+	smithy.NewStaticSchema(&set, 1398),
+	smithy.NewStaticSchema(&set, 1399),
+	smithy.NewStaticSchema(&set, 1400),
+	smithy.NewStaticSchema(&set, 1401),
+	smithy.NewStaticSchema(&set, 1402),
+	smithy.NewStaticSchema(&set, 1403),
+	smithy.NewStaticSchema(&set, 1404),
+	smithy.NewStaticSchema(&set, 1405),
+	smithy.NewStaticSchema(&set, 1406),
+	smithy.NewStaticSchema(&set, 1407),
+	smithy.NewStaticSchema(&set, 1408),
+	smithy.NewStaticSchema(&set, 1409),
+	smithy.NewStaticSchema(&set, 1410),
+	smithy.NewStaticSchema(&set, 1411),
+	smithy.NewStaticSchema(&set, 1412),
+	smithy.NewStaticSchema(&set, 1413),
+	smithy.NewStaticSchema(&set, 1414),
+	smithy.NewStaticSchema(&set, 1415),
+	smithy.NewStaticSchema(&set, 1416),
+	smithy.NewStaticSchema(&set, 1417),
+	smithy.NewStaticSchema(&set, 1418),
+	smithy.NewStaticSchema(&set, 1419),
+	smithy.NewStaticSchema(&set, 1420),
+	smithy.NewStaticSchema(&set, 1421),
+	smithy.NewStaticSchema(&set, 1422),
+	smithy.NewStaticSchema(&set, 1423),
+	smithy.NewStaticSchema(&set, 1424),
+	smithy.NewStaticSchema(&set, 1425),
+	smithy.NewStaticSchema(&set, 1426),
+	smithy.NewStaticSchema(&set, 1427),
+	smithy.NewStaticSchema(&set, 1428),
+	smithy.NewStaticSchema(&set, 1429),
+	smithy.NewStaticSchema(&set, 1430),
+	smithy.NewStaticSchema(&set, 1431),
+	smithy.NewStaticSchema(&set, 1432),
+	smithy.NewStaticSchema(&set, 1433),
+	smithy.NewStaticSchema(&set, 1434),
+	smithy.NewStaticSchema(&set, 1435),
+	smithy.NewStaticSchema(&set, 1436),
+	smithy.NewStaticSchema(&set, 1437),
+	smithy.NewStaticSchema(&set, 1438),
+	smithy.NewStaticSchema(&set, 1439),
+	smithy.NewStaticSchema(&set, 1440),
+	smithy.NewStaticSchema(&set, 1441),
+	smithy.NewStaticSchema(&set, 1442),
+	smithy.NewStaticSchema(&set, 1443),
+	smithy.NewStaticSchema(&set, 1444),
+	smithy.NewStaticSchema(&set, 1445),
+	smithy.NewStaticSchema(&set, 1446),
+	smithy.NewStaticSchema(&set, 1447),
+	smithy.NewStaticSchema(&set, 1448),
+	smithy.NewStaticSchema(&set, 1449),
+	smithy.NewStaticSchema(&set, 1450),
+	smithy.NewStaticSchema(&set, 1451),
+	smithy.NewStaticSchema(&set, 1452),
+	smithy.NewStaticSchema(&set, 1453),
+	smithy.NewStaticSchema(&set, 1454),
+	smithy.NewStaticSchema(&set, 1455),
+	smithy.NewStaticSchema(&set, 1456),
+	smithy.NewStaticSchema(&set, 1457),
+	smithy.NewStaticSchema(&set, 1458),
+	smithy.NewStaticSchema(&set, 1459),
+	smithy.NewStaticSchema(&set, 1460),
+	smithy.NewStaticSchema(&set, 1461),
+	smithy.NewStaticSchema(&set, 1462),
+	smithy.NewStaticSchema(&set, 1463),
+	smithy.NewStaticSchema(&set, 1464),
+	smithy.NewStaticSchema(&set, 1465),
+	smithy.NewStaticSchema(&set, 1466),
+	smithy.NewStaticSchema(&set, 1467),
+	smithy.NewStaticSchema(&set, 1468),
+	smithy.NewStaticSchema(&set, 1469),
+	smithy.NewStaticSchema(&set, 1470),
+	smithy.NewStaticSchema(&set, 1471),
+	smithy.NewStaticSchema(&set, 1472),
+	smithy.NewStaticSchema(&set, 1473),
+	smithy.NewStaticSchema(&set, 1474),
+	smithy.NewStaticSchema(&set, 1475),
+	smithy.NewStaticSchema(&set, 1476),
+	smithy.NewStaticSchema(&set, 1477),
+	smithy.NewStaticSchema(&set, 1478),
+	smithy.NewStaticSchema(&set, 1479),
+	smithy.NewStaticSchema(&set, 1480),
+	smithy.NewStaticSchema(&set, 1481),
+	smithy.NewStaticSchema(&set, 1482),
+	smithy.NewStaticSchema(&set, 1483),
+	smithy.NewStaticSchema(&set, 1484),
+	smithy.NewStaticSchema(&set, 1485),
+	smithy.NewStaticSchema(&set, 1486),
+	smithy.NewStaticSchema(&set, 1487),
+	smithy.NewStaticSchema(&set, 1488),
+	smithy.NewStaticSchema(&set, 1489),
+	smithy.NewStaticSchema(&set, 1490),
+	smithy.NewStaticSchema(&set, 1491),
+	smithy.NewStaticSchema(&set, 1492),
+	smithy.NewStaticSchema(&set, 1493),
+	smithy.NewStaticSchema(&set, 1494),
+	smithy.NewStaticSchema(&set, 1495),
+	smithy.NewStaticSchema(&set, 1496),
+	smithy.NewStaticSchema(&set, 1497),
+	smithy.NewStaticSchema(&set, 1498),
+	smithy.NewStaticSchema(&set, 1499),
+	smithy.NewStaticSchema(&set, 1500),
+	smithy.NewStaticSchema(&set, 1501),
+	smithy.NewStaticSchema(&set, 1502),
+	smithy.NewStaticSchema(&set, 1503),
+	smithy.NewStaticSchema(&set, 1504),
+	smithy.NewStaticSchema(&set, 1505),
+	smithy.NewStaticSchema(&set, 1506),
+	smithy.NewStaticSchema(&set, 1507),
+	smithy.NewStaticSchema(&set, 1508),
+	smithy.NewStaticSchema(&set, 1509),
+	smithy.NewStaticSchema(&set, 1510),
+	smithy.NewStaticSchema(&set, 1511),
+	smithy.NewStaticSchema(&set, 1512),
+	smithy.NewStaticSchema(&set, 1513),
+	smithy.NewStaticSchema(&set, 1514),
+	smithy.NewStaticSchema(&set, 1515),
+	smithy.NewStaticSchema(&set, 1516),
+	smithy.NewStaticSchema(&set, 1517),
+	smithy.NewStaticSchema(&set, 1518),
+	smithy.NewStaticSchema(&set, 1519),
+	smithy.NewStaticSchema(&set, 1520),
+	smithy.NewStaticSchema(&set, 1521),
+	smithy.NewStaticSchema(&set, 1522),
+	smithy.NewStaticSchema(&set, 1523),
+	smithy.NewStaticSchema(&set, 1524),
+	smithy.NewStaticSchema(&set, 1525),
+	smithy.NewStaticSchema(&set, 1526),
+	smithy.NewStaticSchema(&set, 1527),
+	smithy.NewStaticSchema(&set, 1528),
+	smithy.NewStaticSchema(&set, 1529),
+	smithy.NewStaticSchema(&set, 1530),
+	smithy.NewStaticSchema(&set, 1531),
+	smithy.NewStaticSchema(&set, 1532),
+	smithy.NewStaticSchema(&set, 1533),
+	smithy.NewStaticSchema(&set, 1534),
+	smithy.NewStaticSchema(&set, 1535),
+	smithy.NewStaticSchema(&set, 1536),
+	smithy.NewStaticSchema(&set, 1537),
+	smithy.NewStaticSchema(&set, 1538),
+	smithy.NewStaticSchema(&set, 1539),
+	smithy.NewStaticSchema(&set, 1540),
+	smithy.NewStaticSchema(&set, 1541),
+	smithy.NewStaticSchema(&set, 1542),
+	smithy.NewStaticSchema(&set, 1543),
+	smithy.NewStaticSchema(&set, 1544),
+	smithy.NewStaticSchema(&set, 1545),
+	smithy.NewStaticSchema(&set, 1546),
+	smithy.NewStaticSchema(&set, 1547),
+	smithy.NewStaticSchema(&set, 1548),
+	smithy.NewStaticSchema(&set, 1549),
+	smithy.NewStaticSchema(&set, 1550),
+	smithy.NewStaticSchema(&set, 1551),
+	smithy.NewStaticSchema(&set, 1552),
+	smithy.NewStaticSchema(&set, 1553),
+	smithy.NewStaticSchema(&set, 1554),
+	smithy.NewStaticSchema(&set, 1555),
+	smithy.NewStaticSchema(&set, 1556),
+	smithy.NewStaticSchema(&set, 1557),
+	smithy.NewStaticSchema(&set, 1558),
+	smithy.NewStaticSchema(&set, 1559),
+	smithy.NewStaticSchema(&set, 1560),
+	smithy.NewStaticSchema(&set, 1561),
+	smithy.NewStaticSchema(&set, 1562),
+	smithy.NewStaticSchema(&set, 1563),
+	smithy.NewStaticSchema(&set, 1564),
+	smithy.NewStaticSchema(&set, 1565),
+	smithy.NewStaticSchema(&set, 1566),
+	smithy.NewStaticSchema(&set, 1567),
+	smithy.NewStaticSchema(&set, 1568),
+	smithy.NewStaticSchema(&set, 1569),
+	smithy.NewStaticSchema(&set, 1570),
+	smithy.NewStaticSchema(&set, 1571),
+	smithy.NewStaticSchema(&set, 1572),
+	smithy.NewStaticSchema(&set, 1573),
+	smithy.NewStaticSchema(&set, 1574),
+	smithy.NewStaticSchema(&set, 1575),
+	smithy.NewStaticSchema(&set, 1576),
+	smithy.NewStaticSchema(&set, 1577),
+	smithy.NewStaticSchema(&set, 1578),
+	smithy.NewStaticSchema(&set, 1579),
+	smithy.NewStaticSchema(&set, 1580),
+	smithy.NewStaticSchema(&set, 1581),
+	smithy.NewStaticSchema(&set, 1582),
+	smithy.NewStaticSchema(&set, 1583),
+	smithy.NewStaticSchema(&set, 1584),
+	smithy.NewStaticSchema(&set, 1585),
+	smithy.NewStaticSchema(&set, 1586),
+	smithy.NewStaticSchema(&set, 1587),
+	smithy.NewStaticSchema(&set, 1588),
+	smithy.NewStaticSchema(&set, 1589),
+	smithy.NewStaticSchema(&set, 1590),
+	smithy.NewStaticSchema(&set, 1591),
+	smithy.NewStaticSchema(&set, 1592),
+	smithy.NewStaticSchema(&set, 1593),
+	smithy.NewStaticSchema(&set, 1594),
+	smithy.NewStaticSchema(&set, 1595),
+	smithy.NewStaticSchema(&set, 1596),
+	smithy.NewStaticSchema(&set, 1597),
+	smithy.NewStaticSchema(&set, 1598),
+	smithy.NewStaticSchema(&set, 1599),
+	smithy.NewStaticSchema(&set, 1600),
+	smithy.NewStaticSchema(&set, 1601),
+	smithy.NewStaticSchema(&set, 1602),
+	smithy.NewStaticSchema(&set, 1603),
+	smithy.NewStaticSchema(&set, 1604),
+	smithy.NewStaticSchema(&set, 1605),
+	smithy.NewStaticSchema(&set, 1606),
+	smithy.NewStaticSchema(&set, 1607),
+	smithy.NewStaticSchema(&set, 1608),
+	smithy.NewStaticSchema(&set, 1609),
+	smithy.NewStaticSchema(&set, 1610),
+	smithy.NewStaticSchema(&set, 1611),
+	smithy.NewStaticSchema(&set, 1612),
+	smithy.NewStaticSchema(&set, 1613),
+	smithy.NewStaticSchema(&set, 1614),
+	smithy.NewStaticSchema(&set, 1615),
+	smithy.NewStaticSchema(&set, 1616),
+	smithy.NewStaticSchema(&set, 1617),
+	smithy.NewStaticSchema(&set, 1618),
+	smithy.NewStaticSchema(&set, 1619),
+	smithy.NewStaticSchema(&set, 1620),
+	smithy.NewStaticSchema(&set, 1621),
+	smithy.NewStaticSchema(&set, 1622),
+	smithy.NewStaticSchema(&set, 1623),
+	smithy.NewStaticSchema(&set, 1624),
+	smithy.NewStaticSchema(&set, 1625),
+	smithy.NewStaticSchema(&set, 1626),
+	smithy.NewStaticSchema(&set, 1627),
+	smithy.NewStaticSchema(&set, 1628),
+	smithy.NewStaticSchema(&set, 1629),
+	smithy.NewStaticSchema(&set, 1630),
+	smithy.NewStaticSchema(&set, 1631),
+	smithy.NewStaticSchema(&set, 1632),
+	smithy.NewStaticSchema(&set, 1633),
+	smithy.NewStaticSchema(&set, 1634),
+	smithy.NewStaticSchema(&set, 1635),
+	smithy.NewStaticSchema(&set, 1636),
+	smithy.NewStaticSchema(&set, 1637),
+	smithy.NewStaticSchema(&set, 1638),
+	smithy.NewStaticSchema(&set, 1639),
+	smithy.NewStaticSchema(&set, 1640),
+	smithy.NewStaticSchema(&set, 1641),
+	smithy.NewStaticSchema(&set, 1642),
+	smithy.NewStaticSchema(&set, 1643),
+	smithy.NewStaticSchema(&set, 1644),
+	smithy.NewStaticSchema(&set, 1645),
+	smithy.NewStaticSchema(&set, 1646),
+	smithy.NewStaticSchema(&set, 1647),
+	smithy.NewStaticSchema(&set, 1648),
+	smithy.NewStaticSchema(&set, 1649),
+	smithy.NewStaticSchema(&set, 1650),
+	smithy.NewStaticSchema(&set, 1651),
+	smithy.NewStaticSchema(&set, 1652),
+	smithy.NewStaticSchema(&set, 1653),
+	smithy.NewStaticSchema(&set, 1654),
+	smithy.NewStaticSchema(&set, 1655),
+	smithy.NewStaticSchema(&set, 1656),
+	smithy.NewStaticSchema(&set, 1657),
+	smithy.NewStaticSchema(&set, 1658),
+	smithy.NewStaticSchema(&set, 1659),
+	smithy.NewStaticSchema(&set, 1660),
+	smithy.NewStaticSchema(&set, 1661),
+	smithy.NewStaticSchema(&set, 1662),
+	smithy.NewStaticSchema(&set, 1663),
+	smithy.NewStaticSchema(&set, 1664),
+	smithy.NewStaticSchema(&set, 1665),
+	smithy.NewStaticSchema(&set, 1666),
+	smithy.NewStaticSchema(&set, 1667),
+	smithy.NewStaticSchema(&set, 1668),
+	smithy.NewStaticSchema(&set, 1669),
+	smithy.NewStaticSchema(&set, 1670),
+	smithy.NewStaticSchema(&set, 1671),
+	smithy.NewStaticSchema(&set, 1672),
+	smithy.NewStaticSchema(&set, 1673),
+	smithy.NewStaticSchema(&set, 1674),
+	smithy.NewStaticSchema(&set, 1675),
+	smithy.NewStaticSchema(&set, 1676),
+	smithy.NewStaticSchema(&set, 1677),
+	smithy.NewStaticSchema(&set, 1678),
+	smithy.NewStaticSchema(&set, 1679),
+	smithy.NewStaticSchema(&set, 1680),
+	smithy.NewStaticSchema(&set, 1681),
+	smithy.NewStaticSchema(&set, 1682),
+	smithy.NewStaticSchema(&set, 1683),
+	smithy.NewStaticSchema(&set, 1684),
+	smithy.NewStaticSchema(&set, 1685),
+	smithy.NewStaticSchema(&set, 1686),
+	smithy.NewStaticSchema(&set, 1687),
+	smithy.NewStaticSchema(&set, 1688),
+	smithy.NewStaticSchema(&set, 1689),
+	smithy.NewStaticSchema(&set, 1690),
+	smithy.NewStaticSchema(&set, 1691),
+	smithy.NewStaticSchema(&set, 1692),
+	smithy.NewStaticSchema(&set, 1693),
+	smithy.NewStaticSchema(&set, 1694),
+	smithy.NewStaticSchema(&set, 1695),
+	smithy.NewStaticSchema(&set, 1696),
+	smithy.NewStaticSchema(&set, 1697),
+	smithy.NewStaticSchema(&set, 1698),
+	smithy.NewStaticSchema(&set, 1699),
+	smithy.NewStaticSchema(&set, 1700),
+	smithy.NewStaticSchema(&set, 1701),
+	smithy.NewStaticSchema(&set, 1702),
+	smithy.NewStaticSchema(&set, 1703),
+	smithy.NewStaticSchema(&set, 1704),
+	smithy.NewStaticSchema(&set, 1705),
+	smithy.NewStaticSchema(&set, 1706),
+	smithy.NewStaticSchema(&set, 1707),
+	smithy.NewStaticSchema(&set, 1708),
+	smithy.NewStaticSchema(&set, 1709),
+	smithy.NewStaticSchema(&set, 1710),
+	smithy.NewStaticSchema(&set, 1711),
+	smithy.NewStaticSchema(&set, 1712),
+	smithy.NewStaticSchema(&set, 1713),
+	smithy.NewStaticSchema(&set, 1714),
+	smithy.NewStaticSchema(&set, 1715),
+	smithy.NewStaticSchema(&set, 1716),
+	smithy.NewStaticSchema(&set, 1717),
+	smithy.NewStaticSchema(&set, 1718),
+	smithy.NewStaticSchema(&set, 1719),
+	smithy.NewStaticSchema(&set, 1720),
+	smithy.NewStaticSchema(&set, 1721),
+	smithy.NewStaticSchema(&set, 1722),
+	smithy.NewStaticSchema(&set, 1723),
+	smithy.NewStaticSchema(&set, 1724),
+	smithy.NewStaticSchema(&set, 1725),
+	smithy.NewStaticSchema(&set, 1726),
+	smithy.NewStaticSchema(&set, 1727),
+	smithy.NewStaticSchema(&set, 1728),
+	smithy.NewStaticSchema(&set, 1729),
+	smithy.NewStaticSchema(&set, 1730),
+	smithy.NewStaticSchema(&set, 1731),
+	smithy.NewStaticSchema(&set, 1732),
+	smithy.NewStaticSchema(&set, 1733),
+	smithy.NewStaticSchema(&set, 1734),
+	smithy.NewStaticSchema(&set, 1735),
+	smithy.NewStaticSchema(&set, 1736),
+	smithy.NewStaticSchema(&set, 1737),
+	smithy.NewStaticSchema(&set, 1738),
+	smithy.NewStaticSchema(&set, 1739),
+	smithy.NewStaticSchema(&set, 1740),
+	smithy.NewStaticSchema(&set, 1741),
+	smithy.NewStaticSchema(&set, 1742),
+	smithy.NewStaticSchema(&set, 1743),
+	smithy.NewStaticSchema(&set, 1744),
+	smithy.NewStaticSchema(&set, 1745),
+	smithy.NewStaticSchema(&set, 1746),
+	smithy.NewStaticSchema(&set, 1747),
+	smithy.NewStaticSchema(&set, 1748),
+	smithy.NewStaticSchema(&set, 1749),
+	smithy.NewStaticSchema(&set, 1750),
+	smithy.NewStaticSchema(&set, 1751),
+	smithy.NewStaticSchema(&set, 1752),
+	smithy.NewStaticSchema(&set, 1753),
+	smithy.NewStaticSchema(&set, 1754),
+	smithy.NewStaticSchema(&set, 1755),
+	smithy.NewStaticSchema(&set, 1756),
+	smithy.NewStaticSchema(&set, 1757),
+	smithy.NewStaticSchema(&set, 1758),
+	smithy.NewStaticSchema(&set, 1759),
+	smithy.NewStaticSchema(&set, 1760),
+	smithy.NewStaticSchema(&set, 1761),
+	smithy.NewStaticSchema(&set, 1762),
+	smithy.NewStaticSchema(&set, 1763),
+	smithy.NewStaticSchema(&set, 1764),
+	smithy.NewStaticSchema(&set, 1765),
+	smithy.NewStaticSchema(&set, 1766),
+	smithy.NewStaticSchema(&set, 1767),
+	smithy.NewStaticSchema(&set, 1768),
+	smithy.NewStaticSchema(&set, 1769),
+	smithy.NewStaticSchema(&set, 1770),
+	smithy.NewStaticSchema(&set, 1771),
+	smithy.NewStaticSchema(&set, 1772),
+	smithy.NewStaticSchema(&set, 1773),
+	smithy.NewStaticSchema(&set, 1774),
+	smithy.NewStaticSchema(&set, 1775),
+	smithy.NewStaticSchema(&set, 1776),
+	smithy.NewStaticSchema(&set, 1777),
+	smithy.NewStaticSchema(&set, 1778),
+	smithy.NewStaticSchema(&set, 1779),
+	smithy.NewStaticSchema(&set, 1780),
+	smithy.NewStaticSchema(&set, 1781),
+	smithy.NewStaticSchema(&set, 1782),
+	smithy.NewStaticSchema(&set, 1783),
+	smithy.NewStaticSchema(&set, 1784),
+	smithy.NewStaticSchema(&set, 1785),
+	smithy.NewStaticSchema(&set, 1786),
+	smithy.NewStaticSchema(&set, 1787),
+	smithy.NewStaticSchema(&set, 1788),
+	smithy.NewStaticSchema(&set, 1789),
+	smithy.NewStaticSchema(&set, 1790),
+	smithy.NewStaticSchema(&set, 1791),
+	smithy.NewStaticSchema(&set, 1792),
+	smithy.NewStaticSchema(&set, 1793),
+	smithy.NewStaticSchema(&set, 1794),
+	smithy.NewStaticSchema(&set, 1795),
+	smithy.NewStaticSchema(&set, 1796),
+	smithy.NewStaticSchema(&set, 1797),
+	smithy.NewStaticSchema(&set, 1798),
+	smithy.NewStaticSchema(&set, 1799),
+	smithy.NewStaticSchema(&set, 1800),
+	smithy.NewStaticSchema(&set, 1801),
+	smithy.NewStaticSchema(&set, 1802),
+	smithy.NewStaticSchema(&set, 1803),
+	smithy.NewStaticSchema(&set, 1804),
+	smithy.NewStaticSchema(&set, 1805),
+	smithy.NewStaticSchema(&set, 1806),
+	smithy.NewStaticSchema(&set, 1807),
+	smithy.NewStaticSchema(&set, 1808),
+	smithy.NewStaticSchema(&set, 1809),
+	smithy.NewStaticSchema(&set, 1810),
+	smithy.NewStaticSchema(&set, 1811),
+	smithy.NewStaticSchema(&set, 1812),
+	smithy.NewStaticSchema(&set, 1813),
+	smithy.NewStaticSchema(&set, 1814),
+	smithy.NewStaticSchema(&set, 1815),
+	smithy.NewStaticSchema(&set, 1816),
+	smithy.NewStaticSchema(&set, 1817),
+	smithy.NewStaticSchema(&set, 1818),
+	smithy.NewStaticSchema(&set, 1819),
+	smithy.NewStaticSchema(&set, 1820),
+	smithy.NewStaticSchema(&set, 1821),
+	smithy.NewStaticSchema(&set, 1822),
+	smithy.NewStaticSchema(&set, 1823),
+	smithy.NewStaticSchema(&set, 1824),
+	smithy.NewStaticSchema(&set, 1825),
+	smithy.NewStaticSchema(&set, 1826),
+	smithy.NewStaticSchema(&set, 1827),
+	smithy.NewStaticSchema(&set, 1828),
+	smithy.NewStaticSchema(&set, 1829),
+	smithy.NewStaticSchema(&set, 1830),
+	smithy.NewStaticSchema(&set, 1831),
+	smithy.NewStaticSchema(&set, 1832),
+	smithy.NewStaticSchema(&set, 1833),
+	smithy.NewStaticSchema(&set, 1834),
+	smithy.NewStaticSchema(&set, 1835),
+	smithy.NewStaticSchema(&set, 1836),
+	smithy.NewStaticSchema(&set, 1837),
+	smithy.NewStaticSchema(&set, 1838),
+	smithy.NewStaticSchema(&set, 1839),
+	smithy.NewStaticSchema(&set, 1840),
+	smithy.NewStaticSchema(&set, 1841),
+	smithy.NewStaticSchema(&set, 1842),
+	smithy.NewStaticSchema(&set, 1843),
+	smithy.NewStaticSchema(&set, 1844),
+	smithy.NewStaticSchema(&set, 1845),
+	smithy.NewStaticSchema(&set, 1846),
+	smithy.NewStaticSchema(&set, 1847),
+	smithy.NewStaticSchema(&set, 1848),
+	smithy.NewStaticSchema(&set, 1849),
+	smithy.NewStaticSchema(&set, 1850),
+	smithy.NewStaticSchema(&set, 1851),
+	smithy.NewStaticSchema(&set, 1852),
+	smithy.NewStaticSchema(&set, 1853),
+	smithy.NewStaticSchema(&set, 1854),
+	smithy.NewStaticSchema(&set, 1855),
+	smithy.NewStaticSchema(&set, 1856),
+	smithy.NewStaticSchema(&set, 1857),
+	smithy.NewStaticSchema(&set, 1858),
+	smithy.NewStaticSchema(&set, 1859),
+	smithy.NewStaticSchema(&set, 1860),
+	smithy.NewStaticSchema(&set, 1861),
+	smithy.NewStaticSchema(&set, 1862),
+	smithy.NewStaticSchema(&set, 1863),
+	smithy.NewStaticSchema(&set, 1864),
+	smithy.NewStaticSchema(&set, 1865),
+	smithy.NewStaticSchema(&set, 1866),
+	smithy.NewStaticSchema(&set, 1867),
+	smithy.NewStaticSchema(&set, 1868),
+	smithy.NewStaticSchema(&set, 1869),
+	smithy.NewStaticSchema(&set, 1870),
+	smithy.NewStaticSchema(&set, 1871),
+	smithy.NewStaticSchema(&set, 1872),
+	smithy.NewStaticSchema(&set, 1873),
+	smithy.NewStaticSchema(&set, 1874),
+	smithy.NewStaticSchema(&set, 1875),
+	smithy.NewStaticSchema(&set, 1876),
+	smithy.NewStaticSchema(&set, 1877),
+	smithy.NewStaticSchema(&set, 1878),
+	smithy.NewStaticSchema(&set, 1879),
+	smithy.NewStaticSchema(&set, 1880),
+	smithy.NewStaticSchema(&set, 1881),
+	smithy.NewStaticSchema(&set, 1882),
+	smithy.NewStaticSchema(&set, 1883),
+	smithy.NewStaticSchema(&set, 1884),
+	smithy.NewStaticSchema(&set, 1885),
+	smithy.NewStaticSchema(&set, 1886),
+	smithy.NewStaticSchema(&set, 1887),
+	smithy.NewStaticSchema(&set, 1888),
+	smithy.NewStaticSchema(&set, 1889),
+	smithy.NewStaticSchema(&set, 1890),
+	smithy.NewStaticSchema(&set, 1891),
+	smithy.NewStaticSchema(&set, 1892),
+	smithy.NewStaticSchema(&set, 1893),
+	smithy.NewStaticSchema(&set, 1894),
+	smithy.NewStaticSchema(&set, 1895),
+	smithy.NewStaticSchema(&set, 1896),
+	smithy.NewStaticSchema(&set, 1897),
+	smithy.NewStaticSchema(&set, 1898),
+	smithy.NewStaticSchema(&set, 1899),
+	smithy.NewStaticSchema(&set, 1900),
+	smithy.NewStaticSchema(&set, 1901),
+	smithy.NewStaticSchema(&set, 1902),
+	smithy.NewStaticSchema(&set, 1903),
+	smithy.NewStaticSchema(&set, 1904),
+	smithy.NewStaticSchema(&set, 1905),
+	smithy.NewStaticSchema(&set, 1906),
+	smithy.NewStaticSchema(&set, 1907),
+	smithy.NewStaticSchema(&set, 1908),
+	smithy.NewStaticSchema(&set, 1909),
+	smithy.NewStaticSchema(&set, 1910),
+	smithy.NewStaticSchema(&set, 1911),
+	smithy.NewStaticSchema(&set, 1912),
+	smithy.NewStaticSchema(&set, 1913),
+	smithy.NewStaticSchema(&set, 1914),
+	smithy.NewStaticSchema(&set, 1915),
+	smithy.NewStaticSchema(&set, 1916),
+	smithy.NewStaticSchema(&set, 1917),
+	smithy.NewStaticSchema(&set, 1918),
+	smithy.NewStaticSchema(&set, 1919),
+	smithy.NewStaticSchema(&set, 1920),
+	smithy.NewStaticSchema(&set, 1921),
+	smithy.NewStaticSchema(&set, 1922),
+	smithy.NewStaticSchema(&set, 1923),
+	smithy.NewStaticSchema(&set, 1924),
+	smithy.NewStaticSchema(&set, 1925),
+	smithy.NewStaticSchema(&set, 1926),
+	smithy.NewStaticSchema(&set, 1927),
+	smithy.NewStaticSchema(&set, 1928),
+	smithy.NewStaticSchema(&set, 1929),
+	smithy.NewStaticSchema(&set, 1930),
+	smithy.NewStaticSchema(&set, 1931),
+	smithy.NewStaticSchema(&set, 1932),
+	smithy.NewStaticSchema(&set, 1933),
+	smithy.NewStaticSchema(&set, 1934),
+	smithy.NewStaticSchema(&set, 1935),
+	smithy.NewStaticSchema(&set, 1936),
+	smithy.NewStaticSchema(&set, 1937),
+}
+
+var DeleteRecommendationPreferences = &handles[0]
+
+var DescribeRecommendationExportJobs = &handles[1]
+
+var ExportAutoScalingGroupRecommendations = &handles[2]
+
+var ExportEBSVolumeRecommendations = &handles[3]
+
+var ExportEC2InstanceRecommendations = &handles[4]
+
+var ExportECSServiceRecommendations = &handles[5]
+
+var ExportIdleRecommendations = &handles[6]
+
+var ExportLambdaFunctionRecommendations = &handles[7]
+
+var ExportLicenseRecommendations = &handles[8]
+
+var ExportRDSDatabaseRecommendations = &handles[9]
+
+var GetAutoScalingGroupRecommendations = &handles[10]
+
+var GetEBSVolumeRecommendations = &handles[11]
+
+var GetEC2InstanceRecommendations = &handles[12]
+
+var GetEC2RecommendationProjectedMetrics = &handles[13]
+
+var GetECSServiceRecommendationProjectedMetrics = &handles[14]
+
+var GetECSServiceRecommendations = &handles[15]
+
+var GetEffectiveRecommendationPreferences = &handles[16]
+
+var GetEnrollmentStatus = &handles[17]
+
+var GetEnrollmentStatusesForOrganization = &handles[18]
+
+var GetIdleRecommendations = &handles[19]
+
+var GetLambdaFunctionRecommendations = &handles[20]
+
+var GetLicenseRecommendations = &handles[21]
+
+var GetRDSDatabaseRecommendationProjectedMetrics = &handles[22]
+
+var GetRDSDatabaseRecommendations = &handles[23]
+
+var GetRecommendationPreferences = &handles[24]
+
+var GetRecommendationSummaries = &handles[25]
+
+var PutRecommendationPreferences = &handles[26]
+
+var UpdateEnrollmentStatus = &handles[27]
+
+var _ComputeOptimizerService = &handles[28]
+
+var AccessDeniedException = &handles[29]
+var AccessDeniedException_message = &handles[30]
+
+var AccountEnrollmentStatus = &handles[31]
+var AccountEnrollmentStatus_accountId = &handles[32]
+var AccountEnrollmentStatus_status = &handles[33]
+var AccountEnrollmentStatus_statusReason = &handles[34]
+var AccountEnrollmentStatus_lastUpdatedTimestamp = &handles[35]
+
+var _AccountEnrollmentStatuses = &handles[36]
+var _AccountEnrollmentStatuses_member = &handles[37]
+
+var _AccountId = &handles[38]
+
+var _AccountIds = &handles[39]
+var _AccountIds_member = &handles[40]
+
+var _AllocatedStorage = &handles[41]
+
+var AllocationStrategy = &handles[42]
+var AllocationStrategy_PRIORITIZED = &handles[43]
+var AllocationStrategy_LOWEST_PRICE = &handles[44]
+
+var AsgType = &handles[45]
+var AsgType_SINGLE_INSTANCE_TYPE = &handles[46]
+var AsgType_MIXED_INSTANCE_TYPE = &handles[47]
+
+var AutoScalingConfiguration = &handles[48]
+var AutoScalingConfiguration_TARGET_TRACKING_SCALING_CPU = &handles[49]
+var AutoScalingConfiguration_TARGET_TRACKING_SCALING_MEMORY = &handles[50]
+
+var _AutoScalingGroupArn = &handles[51]
+
+var _AutoScalingGroupArns = &handles[52]
+var _AutoScalingGroupArns_member = &handles[53]
+
+var AutoScalingGroupConfiguration = &handles[54]
+var AutoScalingGroupConfiguration_desiredCapacity = &handles[55]
+var AutoScalingGroupConfiguration_minSize = &handles[56]
+var AutoScalingGroupConfiguration_maxSize = &handles[57]
+var AutoScalingGroupConfiguration_instanceType = &handles[58]
+var AutoScalingGroupConfiguration_allocationStrategy = &handles[59]
+var AutoScalingGroupConfiguration_estimatedInstanceHourReductionPercentage = &handles[60]
+var AutoScalingGroupConfiguration_type = &handles[61]
+var AutoScalingGroupConfiguration_mixedInstanceTypes = &handles[62]
+
+var AutoScalingGroupEstimatedMonthlySavings = &handles[63]
+var AutoScalingGroupEstimatedMonthlySavings_currency = &handles[64]
+var AutoScalingGroupEstimatedMonthlySavings_value = &handles[65]
+
+var _AutoScalingGroupName = &handles[66]
+
+var AutoScalingGroupRecommendation = &handles[67]
+var AutoScalingGroupRecommendation_accountId = &handles[68]
+var AutoScalingGroupRecommendation_autoScalingGroupArn = &handles[69]
+var AutoScalingGroupRecommendation_autoScalingGroupName = &handles[70]
+var AutoScalingGroupRecommendation_finding = &handles[71]
+var AutoScalingGroupRecommendation_utilizationMetrics = &handles[72]
+var AutoScalingGroupRecommendation_lookBackPeriodInDays = &handles[73]
+var AutoScalingGroupRecommendation_currentConfiguration = &handles[74]
+var AutoScalingGroupRecommendation_currentInstanceGpuInfo = &handles[75]
+var AutoScalingGroupRecommendation_recommendationOptions = &handles[76]
+var AutoScalingGroupRecommendation_lastRefreshTimestamp = &handles[77]
+var AutoScalingGroupRecommendation_currentPerformanceRisk = &handles[78]
+var AutoScalingGroupRecommendation_effectiveRecommendationPreferences = &handles[79]
+var AutoScalingGroupRecommendation_inferredWorkloadTypes = &handles[80]
+
+var AutoScalingGroupRecommendationOption = &handles[81]
+var AutoScalingGroupRecommendationOption_configuration = &handles[82]
+var AutoScalingGroupRecommendationOption_instanceGpuInfo = &handles[83]
+var AutoScalingGroupRecommendationOption_projectedUtilizationMetrics = &handles[84]
+var AutoScalingGroupRecommendationOption_performanceRisk = &handles[85]
+var AutoScalingGroupRecommendationOption_rank = &handles[86]
+var AutoScalingGroupRecommendationOption_savingsOpportunity = &handles[87]
+var AutoScalingGroupRecommendationOption_savingsOpportunityAfterDiscounts = &handles[88]
+var AutoScalingGroupRecommendationOption_migrationEffort = &handles[89]
+
+var _AutoScalingGroupRecommendationOptions = &handles[90]
+var _AutoScalingGroupRecommendationOptions_member = &handles[91]
+
+var _AutoScalingGroupRecommendations = &handles[92]
+var _AutoScalingGroupRecommendations_member = &handles[93]
+
+var AutoScalingGroupSavingsOpportunityAfterDiscounts = &handles[94]
+var AutoScalingGroupSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = &handles[95]
+var AutoScalingGroupSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = &handles[96]
+
+var _Code = &handles[97]
+
+var ContainerConfiguration = &handles[98]
+var ContainerConfiguration_containerName = &handles[99]
+var ContainerConfiguration_memorySizeConfiguration = &handles[100]
+var ContainerConfiguration_cpu = &handles[101]
+
+var _ContainerConfigurations = &handles[102]
+var _ContainerConfigurations_member = &handles[103]
+
+var _ContainerName = &handles[104]
+
+var ContainerRecommendation = &handles[105]
+var ContainerRecommendation_containerName = &handles[106]
+var ContainerRecommendation_memorySizeConfiguration = &handles[107]
+var ContainerRecommendation_cpu = &handles[108]
+
+var _ContainerRecommendations = &handles[109]
+var _ContainerRecommendations_member = &handles[110]
+
+var _CpuSize = &handles[111]
+
+var CpuVendorArchitecture = &handles[112]
+var CpuVendorArchitecture_AWS_ARM64 = &handles[113]
+var CpuVendorArchitecture_CURRENT = &handles[114]
+
+var _CpuVendorArchitectures = &handles[115]
+var _CpuVendorArchitectures_member = &handles[116]
+
+var _CreationTimestamp = &handles[117]
+
+var Currency = &handles[118]
+var Currency_USD = &handles[119]
+var Currency_CNY = &handles[120]
+
+var _CurrentDBInstanceClass = &handles[121]
+
+var _CurrentInstanceType = &handles[122]
+
+var CurrentPerformanceRisk = &handles[123]
+var CurrentPerformanceRisk_VERY_LOW = &handles[124]
+var CurrentPerformanceRisk_LOW = &handles[125]
+var CurrentPerformanceRisk_MEDIUM = &handles[126]
+var CurrentPerformanceRisk_HIGH = &handles[127]
+
+var CurrentPerformanceRiskRatings = &handles[128]
+var CurrentPerformanceRiskRatings_high = &handles[129]
+var CurrentPerformanceRiskRatings_medium = &handles[130]
+var CurrentPerformanceRiskRatings_low = &handles[131]
+var CurrentPerformanceRiskRatings_veryLow = &handles[132]
+
+var CustomizableMetricHeadroom = &handles[133]
+var CustomizableMetricHeadroom_PERCENT_30 = &handles[134]
+var CustomizableMetricHeadroom_PERCENT_20 = &handles[135]
+var CustomizableMetricHeadroom_PERCENT_10 = &handles[136]
+var CustomizableMetricHeadroom_PERCENT_0 = &handles[137]
+
+var CustomizableMetricName = &handles[138]
+var CustomizableMetricName_CPU_UTILIZATION = &handles[139]
+var CustomizableMetricName_MEMORY_UTILIZATION = &handles[140]
+
+var CustomizableMetricParameters = &handles[141]
+var CustomizableMetricParameters_threshold = &handles[142]
+var CustomizableMetricParameters_headroom = &handles[143]
+
+var CustomizableMetricThreshold = &handles[144]
+var CustomizableMetricThreshold_P90 = &handles[145]
+var CustomizableMetricThreshold_P95 = &handles[146]
+var CustomizableMetricThreshold_P99_5 = &handles[147]
+
+var _DBClusterIdentifier = &handles[148]
+
+var _DBInstanceClass = &handles[149]
+
+var DBStorageConfiguration = &handles[150]
+var DBStorageConfiguration_storageType = &handles[151]
+var DBStorageConfiguration_allocatedStorage = &handles[152]
+var DBStorageConfiguration_iops = &handles[153]
+var DBStorageConfiguration_maxAllocatedStorage = &handles[154]
+var DBStorageConfiguration_storageThroughput = &handles[155]
+
+var _DesiredCapacity = &handles[156]
+
+var _DestinationBucket = &handles[157]
+
+var _DestinationKey = &handles[158]
+
+var _DestinationKeyPrefix = &handles[159]
+
+var Dimension = &handles[160]
+var Dimension_SAVINGS_VALUE = &handles[161]
+var Dimension_SAVINGS_VALUE_AFTER_DISCOUNT = &handles[162]
+
+var EBSEffectiveRecommendationPreferences = &handles[163]
+var EBSEffectiveRecommendationPreferences_savingsEstimationMode = &handles[164]
+var EBSEffectiveRecommendationPreferences_lookBackPeriod = &handles[165]
+
+var EBSEstimatedMonthlySavings = &handles[166]
+var EBSEstimatedMonthlySavings_currency = &handles[167]
+var EBSEstimatedMonthlySavings_value = &handles[168]
+
+var EBSFilter = &handles[169]
+var EBSFilter_name = &handles[170]
+var EBSFilter_values = &handles[171]
+
+var EBSFilterName = &handles[172]
+var EBSFilterName_FINDING = &handles[173]
+
+var _EBSFilters = &handles[174]
+var _EBSFilters_member = &handles[175]
+
+var EBSFinding = &handles[176]
+var EBSFinding_OPTIMIZED = &handles[177]
+var EBSFinding_NOT_OPTIMIZED = &handles[178]
+
+var EBSMetricName = &handles[179]
+var EBSMetricName_VOLUME_READ_OPS_PER_SECOND = &handles[180]
+var EBSMetricName_VOLUME_WRITE_OPS_PER_SECOND = &handles[181]
+var EBSMetricName_VOLUME_READ_BYTES_PER_SECOND = &handles[182]
+var EBSMetricName_VOLUME_WRITE_BYTES_PER_SECOND = &handles[183]
+var EBSMetricName_VOLUME_IOPS_EXCEEDED = &handles[184]
+var EBSMetricName_VOLUME_THROUGHPUT_EXCEEDED = &handles[185]
+
+var EBSSavingsEstimationMode = &handles[186]
+var EBSSavingsEstimationMode_source = &handles[187]
+
+var EBSSavingsEstimationModeSource = &handles[188]
+var EBSSavingsEstimationModeSource_PUBLIC_PRICING = &handles[189]
+var EBSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = &handles[190]
+var EBSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = &handles[191]
+
+var EBSSavingsOpportunityAfterDiscounts = &handles[192]
+var EBSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = &handles[193]
+var EBSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = &handles[194]
+
+var EBSUtilizationMetric = &handles[195]
+var EBSUtilizationMetric_name = &handles[196]
+var EBSUtilizationMetric_statistic = &handles[197]
+var EBSUtilizationMetric_value = &handles[198]
+
+var _EBSUtilizationMetrics = &handles[199]
+var _EBSUtilizationMetrics_member = &handles[200]
+
+var ECSEffectiveRecommendationPreferences = &handles[201]
+var ECSEffectiveRecommendationPreferences_savingsEstimationMode = &handles[202]
+var ECSEffectiveRecommendationPreferences_lookBackPeriod = &handles[203]
+
+var ECSEstimatedMonthlySavings = &handles[204]
+var ECSEstimatedMonthlySavings_currency = &handles[205]
+var ECSEstimatedMonthlySavings_value = &handles[206]
+
+var ECSSavingsEstimationMode = &handles[207]
+var ECSSavingsEstimationMode_source = &handles[208]
+
+var ECSSavingsEstimationModeSource = &handles[209]
+var ECSSavingsEstimationModeSource_PUBLIC_PRICING = &handles[210]
+var ECSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = &handles[211]
+var ECSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = &handles[212]
+
+var ECSSavingsOpportunityAfterDiscounts = &handles[213]
+var ECSSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = &handles[214]
+var ECSSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = &handles[215]
+
+var ECSServiceLaunchType = &handles[216]
+var ECSServiceLaunchType_EC2 = &handles[217]
+var ECSServiceLaunchType_FARGATE = &handles[218]
+
+var ECSServiceMetricName = &handles[219]
+var ECSServiceMetricName_CPU = &handles[220]
+var ECSServiceMetricName_MEMORY = &handles[221]
+
+var ECSServiceMetricStatistic = &handles[222]
+var ECSServiceMetricStatistic_MAXIMUM = &handles[223]
+var ECSServiceMetricStatistic_AVERAGE = &handles[224]
+
+var ECSServiceProjectedMetric = &handles[225]
+var ECSServiceProjectedMetric_name = &handles[226]
+var ECSServiceProjectedMetric_timestamps = &handles[227]
+var ECSServiceProjectedMetric_upperBoundValues = &handles[228]
+var ECSServiceProjectedMetric_lowerBoundValues = &handles[229]
+
+var _ECSServiceProjectedMetrics = &handles[230]
+var _ECSServiceProjectedMetrics_member = &handles[231]
+
+var ECSServiceProjectedUtilizationMetric = &handles[232]
+var ECSServiceProjectedUtilizationMetric_name = &handles[233]
+var ECSServiceProjectedUtilizationMetric_statistic = &handles[234]
+var ECSServiceProjectedUtilizationMetric_lowerBoundValue = &handles[235]
+var ECSServiceProjectedUtilizationMetric_upperBoundValue = &handles[236]
+
+var _ECSServiceProjectedUtilizationMetrics = &handles[237]
+var _ECSServiceProjectedUtilizationMetrics_member = &handles[238]
+
+var ECSServiceRecommendation = &handles[239]
+var ECSServiceRecommendation_serviceArn = &handles[240]
+var ECSServiceRecommendation_accountId = &handles[241]
+var ECSServiceRecommendation_currentServiceConfiguration = &handles[242]
+var ECSServiceRecommendation_utilizationMetrics = &handles[243]
+var ECSServiceRecommendation_lookbackPeriodInDays = &handles[244]
+var ECSServiceRecommendation_launchType = &handles[245]
+var ECSServiceRecommendation_lastRefreshTimestamp = &handles[246]
+var ECSServiceRecommendation_finding = &handles[247]
+var ECSServiceRecommendation_findingReasonCodes = &handles[248]
+var ECSServiceRecommendation_serviceRecommendationOptions = &handles[249]
+var ECSServiceRecommendation_currentPerformanceRisk = &handles[250]
+var ECSServiceRecommendation_effectiveRecommendationPreferences = &handles[251]
+var ECSServiceRecommendation_tags = &handles[252]
+
+var ECSServiceRecommendationFilter = &handles[253]
+var ECSServiceRecommendationFilter_name = &handles[254]
+var ECSServiceRecommendationFilter_values = &handles[255]
+
+var ECSServiceRecommendationFilterName = &handles[256]
+var ECSServiceRecommendationFilterName_FINDING = &handles[257]
+var ECSServiceRecommendationFilterName_FINDING_REASON_CODE = &handles[258]
+
+var _ECSServiceRecommendationFilters = &handles[259]
+var _ECSServiceRecommendationFilters_member = &handles[260]
+
+var ECSServiceRecommendationFinding = &handles[261]
+var ECSServiceRecommendationFinding_OPTIMIZED = &handles[262]
+var ECSServiceRecommendationFinding_UNDER_PROVISIONED = &handles[263]
+var ECSServiceRecommendationFinding_OVER_PROVISIONED = &handles[264]
+
+var ECSServiceRecommendationFindingReasonCode = &handles[265]
+var ECSServiceRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED = &handles[266]
+var ECSServiceRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED = &handles[267]
+var ECSServiceRecommendationFindingReasonCode_CPU_OVER_PROVISIONED = &handles[268]
+var ECSServiceRecommendationFindingReasonCode_CPU_UNDER_PROVISIONED = &handles[269]
+
+var _ECSServiceRecommendationFindingReasonCodes = &handles[270]
+var _ECSServiceRecommendationFindingReasonCodes_member = &handles[271]
+
+var ECSServiceRecommendationOption = &handles[272]
+var ECSServiceRecommendationOption_memory = &handles[273]
+var ECSServiceRecommendationOption_cpu = &handles[274]
+var ECSServiceRecommendationOption_savingsOpportunity = &handles[275]
+var ECSServiceRecommendationOption_savingsOpportunityAfterDiscounts = &handles[276]
+var ECSServiceRecommendationOption_projectedUtilizationMetrics = &handles[277]
+var ECSServiceRecommendationOption_containerRecommendations = &handles[278]
+
+var _ECSServiceRecommendationOptions = &handles[279]
+var _ECSServiceRecommendationOptions_member = &handles[280]
+
+var _ECSServiceRecommendations = &handles[281]
+var _ECSServiceRecommendations_member = &handles[282]
+
+var ECSServiceRecommendedOptionProjectedMetric = &handles[283]
+var ECSServiceRecommendedOptionProjectedMetric_recommendedCpuUnits = &handles[284]
+var ECSServiceRecommendedOptionProjectedMetric_recommendedMemorySize = &handles[285]
+var ECSServiceRecommendedOptionProjectedMetric_projectedMetrics = &handles[286]
+
+var _ECSServiceRecommendedOptionProjectedMetrics = &handles[287]
+var _ECSServiceRecommendedOptionProjectedMetrics_member = &handles[288]
+
+var ECSServiceUtilizationMetric = &handles[289]
+var ECSServiceUtilizationMetric_name = &handles[290]
+var ECSServiceUtilizationMetric_statistic = &handles[291]
+var ECSServiceUtilizationMetric_value = &handles[292]
+
+var _ECSServiceUtilizationMetrics = &handles[293]
+var _ECSServiceUtilizationMetrics_member = &handles[294]
+
+var EffectivePreferredResource = &handles[295]
+var EffectivePreferredResource_name = &handles[296]
+var EffectivePreferredResource_includeList = &handles[297]
+var EffectivePreferredResource_effectiveIncludeList = &handles[298]
+var EffectivePreferredResource_excludeList = &handles[299]
+
+var _EffectivePreferredResources = &handles[300]
+var _EffectivePreferredResources_member = &handles[301]
+
+var EffectiveRecommendationPreferences = &handles[302]
+var EffectiveRecommendationPreferences_cpuVendorArchitectures = &handles[303]
+var EffectiveRecommendationPreferences_enhancedInfrastructureMetrics = &handles[304]
+var EffectiveRecommendationPreferences_inferredWorkloadTypes = &handles[305]
+var EffectiveRecommendationPreferences_externalMetricsPreference = &handles[306]
+var EffectiveRecommendationPreferences_lookBackPeriod = &handles[307]
+var EffectiveRecommendationPreferences_utilizationPreferences = &handles[308]
+var EffectiveRecommendationPreferences_preferredResources = &handles[309]
+var EffectiveRecommendationPreferences_savingsEstimationMode = &handles[310]
+
+var _Engine = &handles[311]
+
+var _EngineVersion = &handles[312]
+
+var EnhancedInfrastructureMetrics = &handles[313]
+var EnhancedInfrastructureMetrics_ACTIVE = &handles[314]
+var EnhancedInfrastructureMetrics_INACTIVE = &handles[315]
+
+var EnrollmentFilter = &handles[316]
+var EnrollmentFilter_name = &handles[317]
+var EnrollmentFilter_values = &handles[318]
+
+var EnrollmentFilterName = &handles[319]
+var EnrollmentFilterName_STATUS = &handles[320]
+
+var _EnrollmentFilters = &handles[321]
+var _EnrollmentFilters_member = &handles[322]
+
+var _ErrorMessage = &handles[323]
+
+var EstimatedMonthlySavings = &handles[324]
+var EstimatedMonthlySavings_currency = &handles[325]
+var EstimatedMonthlySavings_value = &handles[326]
+
+var ExportableAutoScalingGroupField = &handles[327]
+var ExportableAutoScalingGroupField_ACCOUNT_ID = &handles[328]
+var ExportableAutoScalingGroupField_AUTO_SCALING_GROUP_ARN = &handles[329]
+var ExportableAutoScalingGroupField_AUTO_SCALING_GROUP_NAME = &handles[330]
+var ExportableAutoScalingGroupField_FINDING = &handles[331]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[332]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[333]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM = &handles[334]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM = &handles[335]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM = &handles[336]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM = &handles[337]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM = &handles[338]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM = &handles[339]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM = &handles[340]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM = &handles[341]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = &handles[342]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = &handles[343]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM = &handles[344]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM = &handles[345]
+var ExportableAutoScalingGroupField_LOOKBACK_PERIOD_IN_DAYS = &handles[346]
+var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_INSTANCE_TYPE = &handles[347]
+var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_DESIRED_CAPACITY = &handles[348]
+var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MIN_SIZE = &handles[349]
+var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MAX_SIZE = &handles[350]
+var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_ALLOCATION_STRATEGY = &handles[351]
+var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_MIXED_INSTANCE_TYPES = &handles[352]
+var ExportableAutoScalingGroupField_CURRENT_CONFIGURATION_TYPE = &handles[353]
+var ExportableAutoScalingGroupField_CURRENT_ON_DEMAND_PRICE = &handles[354]
+var ExportableAutoScalingGroupField_CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = &handles[355]
+var ExportableAutoScalingGroupField_CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = &handles[356]
+var ExportableAutoScalingGroupField_CURRENT_VCPUS = &handles[357]
+var ExportableAutoScalingGroupField_CURRENT_MEMORY = &handles[358]
+var ExportableAutoScalingGroupField_CURRENT_STORAGE = &handles[359]
+var ExportableAutoScalingGroupField_CURRENT_NETWORK = &handles[360]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_INSTANCE_TYPE = &handles[361]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_DESIRED_CAPACITY = &handles[362]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MIN_SIZE = &handles[363]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MAX_SIZE = &handles[364]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_ESTIMATED_INSTANCE_HOUR_REDUCTION_PERCENTAGE = &handles[365]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_ALLOCATION_STRATEGY = &handles[366]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_MIXED_INSTANCE_TYPES = &handles[367]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_CONFIGURATION_TYPE = &handles[368]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[369]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[370]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = &handles[371]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE = &handles[372]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = &handles[373]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = &handles[374]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_VCPUS = &handles[375]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_MEMORY = &handles[376]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_STORAGE = &handles[377]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_NETWORK = &handles[378]
+var ExportableAutoScalingGroupField_LAST_REFRESH_TIMESTAMP = &handles[379]
+var ExportableAutoScalingGroupField_CURRENT_PERFORMANCE_RISK = &handles[380]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = &handles[381]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = &handles[382]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = &handles[383]
+var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = &handles[384]
+var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = &handles[385]
+var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES = &handles[386]
+var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES = &handles[387]
+var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = &handles[388]
+var ExportableAutoScalingGroupField_INFERRED_WORKLOAD_TYPES = &handles[389]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_MIGRATION_EFFORT = &handles[390]
+var ExportableAutoScalingGroupField_CURRENT_INSTANCE_GPU_INFO = &handles[391]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO = &handles[392]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = &handles[393]
+var ExportableAutoScalingGroupField_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = &handles[394]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MAXIMUM = &handles[395]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_MAXIMUM = &handles[396]
+var ExportableAutoScalingGroupField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = &handles[397]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = &handles[398]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = &handles[399]
+var ExportableAutoScalingGroupField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = &handles[400]
+
+var _ExportableAutoScalingGroupFields = &handles[401]
+var _ExportableAutoScalingGroupFields_member = &handles[402]
+
+var ExportableECSServiceField = &handles[403]
+var ExportableECSServiceField_ACCOUNT_ID = &handles[404]
+var ExportableECSServiceField_SERVICE_ARN = &handles[405]
+var ExportableECSServiceField_LOOKBACK_PERIOD_IN_DAYS = &handles[406]
+var ExportableECSServiceField_LAST_REFRESH_TIMESTAMP = &handles[407]
+var ExportableECSServiceField_LAUNCH_TYPE = &handles[408]
+var ExportableECSServiceField_CURRENT_PERFORMANCE_RISK = &handles[409]
+var ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_MEMORY = &handles[410]
+var ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_CPU = &handles[411]
+var ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_TASK_DEFINITION_ARN = &handles[412]
+var ExportableECSServiceField_CURRENT_SERVICE_CONFIGURATION_AUTO_SCALING_CONFIGURATION = &handles[413]
+var ExportableECSServiceField_CURRENT_SERVICE_CONTAINER_CONFIGURATIONS = &handles[414]
+var ExportableECSServiceField_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[415]
+var ExportableECSServiceField_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[416]
+var ExportableECSServiceField_FINDING = &handles[417]
+var ExportableECSServiceField_FINDING_REASON_CODES = &handles[418]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_MEMORY = &handles[419]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_CPU = &handles[420]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = &handles[421]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = &handles[422]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = &handles[423]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_CONTAINER_RECOMMENDATIONS = &handles[424]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[425]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[426]
+var ExportableECSServiceField_TAGS = &handles[427]
+var ExportableECSServiceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = &handles[428]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = &handles[429]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = &handles[430]
+var ExportableECSServiceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = &handles[431]
+var ExportableECSServiceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = &handles[432]
+
+var _ExportableECSServiceFields = &handles[433]
+var _ExportableECSServiceFields_member = &handles[434]
+
+var ExportableIdleField = &handles[435]
+var ExportableIdleField_ACCOUNT_ID = &handles[436]
+var ExportableIdleField_RESOURCE_ARN = &handles[437]
+var ExportableIdleField_RESOURCE_ID = &handles[438]
+var ExportableIdleField_RESOURCE_TYPE = &handles[439]
+var ExportableIdleField_LAST_REFRESH_TIMESTAMP = &handles[440]
+var ExportableIdleField_LOOKBACK_PERIOD_IN_DAYS = &handles[441]
+var ExportableIdleField_SAVINGS_OPPORTUNITY = &handles[442]
+var ExportableIdleField_SAVINGS_OPPORTUNITY_AFTER_DISCOUNT = &handles[443]
+var ExportableIdleField_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[444]
+var ExportableIdleField_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[445]
+var ExportableIdleField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = &handles[446]
+var ExportableIdleField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = &handles[447]
+var ExportableIdleField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM = &handles[448]
+var ExportableIdleField_UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM = &handles[449]
+var ExportableIdleField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM = &handles[450]
+var ExportableIdleField_UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM = &handles[451]
+var ExportableIdleField_UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM = &handles[452]
+var ExportableIdleField_UTILIZATION_METRICS_ACTIVE_CONNECTION_COUNT_MAXIMUM = &handles[453]
+var ExportableIdleField_UTILIZATION_METRICS_PACKETS_IN_FROM_SOURCE_MAXIMUM = &handles[454]
+var ExportableIdleField_UTILIZATION_METRICS_PACKETS_IN_FROM_DESTINATION_MAXIMUM = &handles[455]
+var ExportableIdleField_UTILIZATION_METRICS_CONSUMED_READ_CAPACITY_UNITS_SUM = &handles[456]
+var ExportableIdleField_UTILIZATION_METRICS_CONSUMED_WRITE_CAPACITY_UNITS_SUM = &handles[457]
+var ExportableIdleField_UTILIZATION_METRICS_NEW_CONNECTIONS_SUM = &handles[458]
+var ExportableIdleField_UTILIZATION_METRICS_ENGINE_CPU_UTILIZATION_MAXIMUM = &handles[459]
+var ExportableIdleField_UTILIZATION_METRICS_CACHE_HITS_SUM = &handles[460]
+var ExportableIdleField_UTILIZATION_METRICS_CACHE_MISSES_SUM = &handles[461]
+var ExportableIdleField_UTILIZATION_METRICS_KEYSPACE_HITS_SUM = &handles[462]
+var ExportableIdleField_UTILIZATION_METRICS_KEYSPACE_MISSES_SUM = &handles[463]
+var ExportableIdleField_UTILIZATION_METRICS_IS_IDLE_MINIMUM = &handles[464]
+var ExportableIdleField_UTILIZATION_METRICS_USER_CONNECTED_SUM = &handles[465]
+var ExportableIdleField_UTILIZATION_METRICS_INVOCATIONS_SUM = &handles[466]
+var ExportableIdleField_UTILIZATION_METRICS_GET_TYPE_CMDS_SUM = &handles[467]
+var ExportableIdleField_UTILIZATION_METRICS_SET_TYPE_CMDS_SUM = &handles[468]
+var ExportableIdleField_UTILIZATION_METRICS_ELASTI_CACHE_PROCESSING_UNITS_SUM = &handles[469]
+var ExportableIdleField_UTILIZATION_METRICS_CURR_CONNECTIONS_SUM = &handles[470]
+var ExportableIdleField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_SUM = &handles[471]
+var ExportableIdleField_FINDING = &handles[472]
+var ExportableIdleField_FINDING_DESCRIPTION = &handles[473]
+var ExportableIdleField_TAGS = &handles[474]
+
+var _ExportableIdleFields = &handles[475]
+var _ExportableIdleFields_member = &handles[476]
+
+var ExportableInstanceField = &handles[477]
+var ExportableInstanceField_ACCOUNT_ID = &handles[478]
+var ExportableInstanceField_INSTANCE_ARN = &handles[479]
+var ExportableInstanceField_INSTANCE_NAME = &handles[480]
+var ExportableInstanceField_FINDING = &handles[481]
+var ExportableInstanceField_Finding_Reason_Codes = &handles[482]
+var ExportableInstanceField_LOOKBACK_PERIOD_IN_DAYS = &handles[483]
+var ExportableInstanceField_CURRENT_INSTANCE_TYPE = &handles[484]
+var ExportableInstanceField_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[485]
+var ExportableInstanceField_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[486]
+var ExportableInstanceField_UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM = &handles[487]
+var ExportableInstanceField_UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM = &handles[488]
+var ExportableInstanceField_UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM = &handles[489]
+var ExportableInstanceField_UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM = &handles[490]
+var ExportableInstanceField_UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM = &handles[491]
+var ExportableInstanceField_UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM = &handles[492]
+var ExportableInstanceField_UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM = &handles[493]
+var ExportableInstanceField_UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM = &handles[494]
+var ExportableInstanceField_UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM = &handles[495]
+var ExportableInstanceField_UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM = &handles[496]
+var ExportableInstanceField_UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM = &handles[497]
+var ExportableInstanceField_UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM = &handles[498]
+var ExportableInstanceField_CURRENT_ON_DEMAND_PRICE = &handles[499]
+var ExportableInstanceField_CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = &handles[500]
+var ExportableInstanceField_CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = &handles[501]
+var ExportableInstanceField_CURRENT_VCPUS = &handles[502]
+var ExportableInstanceField_CURRENT_MEMORY = &handles[503]
+var ExportableInstanceField_CURRENT_STORAGE = &handles[504]
+var ExportableInstanceField_CURRENT_NETWORK = &handles[505]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_INSTANCE_TYPE = &handles[506]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[507]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[508]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_PLATFORM_DIFFERENCES = &handles[509]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = &handles[510]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_VCPUS = &handles[511]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_MEMORY = &handles[512]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_STORAGE = &handles[513]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_NETWORK = &handles[514]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE = &handles[515]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE = &handles[516]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE = &handles[517]
+var ExportableInstanceField_RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_ARN = &handles[518]
+var ExportableInstanceField_RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_TYPE = &handles[519]
+var ExportableInstanceField_LAST_REFRESH_TIMESTAMP = &handles[520]
+var ExportableInstanceField_CURRENT_PERFORMANCE_RISK = &handles[521]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = &handles[522]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = &handles[523]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = &handles[524]
+var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = &handles[525]
+var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = &handles[526]
+var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_INFERRED_WORKLOAD_TYPES = &handles[527]
+var ExportableInstanceField_INFERRED_WORKLOAD_TYPES = &handles[528]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_MIGRATION_EFFORT = &handles[529]
+var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_EXTERNAL_METRICS_SOURCE = &handles[530]
+var ExportableInstanceField_TAGS = &handles[531]
+var ExportableInstanceField_INSTANCE_STATE = &handles[532]
+var ExportableInstanceField_EXTERNAL_METRIC_STATUS_CODE = &handles[533]
+var ExportableInstanceField_EXTERNAL_METRIC_STATUS_REASON = &handles[534]
+var ExportableInstanceField_CURRENT_INSTANCE_GPU_INFO = &handles[535]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_INSTANCE_GPU_INFO = &handles[536]
+var ExportableInstanceField_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = &handles[537]
+var ExportableInstanceField_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = &handles[538]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_PERCENTAGE_MAXIMUM = &handles[539]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_GPU_MEMORY_PERCENTAGE_MAXIMUM = &handles[540]
+var ExportableInstanceField_IDLE = &handles[541]
+var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_PREFERRED_RESOURCES = &handles[542]
+var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = &handles[543]
+var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_UTILIZATION_PREFERENCES = &handles[544]
+var ExportableInstanceField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = &handles[545]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = &handles[546]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = &handles[547]
+var ExportableInstanceField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = &handles[548]
+
+var _ExportableInstanceFields = &handles[549]
+var _ExportableInstanceFields_member = &handles[550]
+
+var ExportableLambdaFunctionField = &handles[551]
+var ExportableLambdaFunctionField_ACCOUNT_ID = &handles[552]
+var ExportableLambdaFunctionField_FUNCTION_ARN = &handles[553]
+var ExportableLambdaFunctionField_FUNCTION_VERSION = &handles[554]
+var ExportableLambdaFunctionField_FINDING = &handles[555]
+var ExportableLambdaFunctionField_FINDING_REASON_CODES = &handles[556]
+var ExportableLambdaFunctionField_NUMBER_OF_INVOCATIONS = &handles[557]
+var ExportableLambdaFunctionField_UTILIZATION_METRICS_DURATION_MAXIMUM = &handles[558]
+var ExportableLambdaFunctionField_UTILIZATION_METRICS_DURATION_AVERAGE = &handles[559]
+var ExportableLambdaFunctionField_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[560]
+var ExportableLambdaFunctionField_UTILIZATION_METRICS_MEMORY_AVERAGE = &handles[561]
+var ExportableLambdaFunctionField_LOOKBACK_PERIOD_IN_DAYS = &handles[562]
+var ExportableLambdaFunctionField_CURRENT_CONFIGURATION_MEMORY_SIZE = &handles[563]
+var ExportableLambdaFunctionField_CURRENT_CONFIGURATION_TIMEOUT = &handles[564]
+var ExportableLambdaFunctionField_CURRENT_COST_TOTAL = &handles[565]
+var ExportableLambdaFunctionField_CURRENT_COST_AVERAGE = &handles[566]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_CONFIGURATION_MEMORY_SIZE = &handles[567]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_COST_LOW = &handles[568]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_COST_HIGH = &handles[569]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_LOWER_BOUND = &handles[570]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_UPPER_BOUND = &handles[571]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_DURATION_EXPECTED = &handles[572]
+var ExportableLambdaFunctionField_LAST_REFRESH_TIMESTAMP = &handles[573]
+var ExportableLambdaFunctionField_CURRENT_PERFORMANCE_RISK = &handles[574]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = &handles[575]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = &handles[576]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = &handles[577]
+var ExportableLambdaFunctionField_TAGS = &handles[578]
+var ExportableLambdaFunctionField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = &handles[579]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = &handles[580]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = &handles[581]
+var ExportableLambdaFunctionField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = &handles[582]
+
+var _ExportableLambdaFunctionFields = &handles[583]
+var _ExportableLambdaFunctionFields_member = &handles[584]
+
+var ExportableLicenseField = &handles[585]
+var ExportableLicenseField_ACCOUNT_ID = &handles[586]
+var ExportableLicenseField_RESOURCE_ARN = &handles[587]
+var ExportableLicenseField_LOOKBACK_PERIOD_IN_DAYS = &handles[588]
+var ExportableLicenseField_LAST_REFRESH_TIMESTAMP = &handles[589]
+var ExportableLicenseField_LICENSE_FINDING = &handles[590]
+var ExportableLicenseField_LICENSE_FINDING_REASON_CODES = &handles[591]
+var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_NUMBER_OF_CORES = &handles[592]
+var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_INSTANCE_TYPE = &handles[593]
+var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_OPERATING_SYSTEM = &handles[594]
+var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_NAME = &handles[595]
+var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_EDITION = &handles[596]
+var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_MODEL = &handles[597]
+var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_LICENSE_VERSION = &handles[598]
+var ExportableLicenseField_CURRENT_LICENSE_CONFIGURATION_METRICS_SOURCE = &handles[599]
+var ExportableLicenseField_RECOMMENDATION_OPTIONS_OPERATING_SYSTEM = &handles[600]
+var ExportableLicenseField_RECOMMENDATION_OPTIONS_LICENSE_EDITION = &handles[601]
+var ExportableLicenseField_RECOMMENDATION_OPTIONS_LICENSE_MODEL = &handles[602]
+var ExportableLicenseField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = &handles[603]
+var ExportableLicenseField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = &handles[604]
+var ExportableLicenseField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = &handles[605]
+var ExportableLicenseField_TAGS = &handles[606]
+
+var _ExportableLicenseFields = &handles[607]
+var _ExportableLicenseFields_member = &handles[608]
+
+var ExportableRDSDBField = &handles[609]
+var ExportableRDSDBField_RESOURCE_ARN = &handles[610]
+var ExportableRDSDBField_ACCOUNT_ID = &handles[611]
+var ExportableRDSDBField_ENGINE = &handles[612]
+var ExportableRDSDBField_ENGINE_VERSION = &handles[613]
+var ExportableRDSDBField_IDLE = &handles[614]
+var ExportableRDSDBField_MULTI_AZ_DB_INSTANCE = &handles[615]
+var ExportableRDSDBField_CLUSTER_WRITER = &handles[616]
+var ExportableRDSDBField_CURRENT_DB_INSTANCE_CLASS = &handles[617]
+var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_STORAGE_TYPE = &handles[618]
+var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_ALLOCATED_STORAGE = &handles[619]
+var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_MAX_ALLOCATED_STORAGE = &handles[620]
+var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_IOPS = &handles[621]
+var ExportableRDSDBField_CURRENT_STORAGE_CONFIGURATION_STORAGE_THROUGHPUT = &handles[622]
+var ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION = &handles[623]
+var ExportableRDSDBField_CURRENT_INSTANCE_ON_DEMAND_HOURLY_PRICE = &handles[624]
+var ExportableRDSDBField_CURRENT_STORAGE_ON_DEMAND_MONTHLY_PRICE = &handles[625]
+var ExportableRDSDBField_LOOKBACK_PERIOD_IN_DAYS = &handles[626]
+var ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST = &handles[627]
+var ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST = &handles[628]
+var ExportableRDSDBField_CURRENT_STORAGE_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST = &handles[629]
+var ExportableRDSDBField_CURRENT_INSTANCE_PERFORMANCE_RISK = &handles[630]
+var ExportableRDSDBField_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[631]
+var ExportableRDSDBField_UTILIZATION_METRICS_MEMORY_MAXIMUM = &handles[632]
+var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_STORAGE_SPACE_UTILIZATION_MAXIMUM = &handles[633]
+var ExportableRDSDBField_UTILIZATION_METRICS_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM = &handles[634]
+var ExportableRDSDBField_UTILIZATION_METRICS_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM = &handles[635]
+var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_READ_IOPS_MAXIMUM = &handles[636]
+var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_IOPS_MAXIMUM = &handles[637]
+var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_READ_THROUGHPUT_MAXIMUM = &handles[638]
+var ExportableRDSDBField_UTILIZATION_METRICS_EBS_VOLUME_WRITE_THROUGHPUT_MAXIMUM = &handles[639]
+var ExportableRDSDBField_UTILIZATION_METRICS_DATABASE_CONNECTIONS_MAXIMUM = &handles[640]
+var ExportableRDSDBField_UTILIZATION_METRICS_STORAGE_NETWORK_RECEIVE_THROUGHPUT_MAXIMUM = &handles[641]
+var ExportableRDSDBField_UTILIZATION_METRICS_STORAGE_NETWORK_TRANSMIT_THROUGHPUT_MAXIMUM = &handles[642]
+var ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_HEALTH_STATE_MAXIMUM = &handles[643]
+var ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_DECLINED_SQL_TOTAL_MAXIMUM = &handles[644]
+var ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_CONN_TOTAL_MAXIMUM = &handles[645]
+var ExportableRDSDBField_UTILIZATION_METRICS_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL_MAXIMUM = &handles[646]
+var ExportableRDSDBField_UTILIZATION_METRICS_READ_IOPS_EPHEMERAL_STORAGE_MAXIMUM = &handles[647]
+var ExportableRDSDBField_UTILIZATION_METRICS_WRITE_IOPS_EPHEMERAL_STORAGE_MAXIMUM = &handles[648]
+var ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_BYTES_USED_AVERAGE = &handles[649]
+var ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_READ_IOPS_AVERAGE = &handles[650]
+var ExportableRDSDBField_UTILIZATION_METRICS_VOLUME_WRITE_IOPS_AVERAGE = &handles[651]
+var ExportableRDSDBField_INSTANCE_FINDING = &handles[652]
+var ExportableRDSDBField_INSTANCE_FINDING_REASON_CODES = &handles[653]
+var ExportableRDSDBField_STORAGE_FINDING = &handles[654]
+var ExportableRDSDBField_STORAGE_FINDING_REASON_CODES = &handles[655]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_DB_INSTANCE_CLASS = &handles[656]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_RANK = &handles[657]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = &handles[658]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM = &handles[659]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_STORAGE_TYPE = &handles[660]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ALLOCATED_STORAGE = &handles[661]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_MAX_ALLOCATED_STORAGE = &handles[662]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_IOPS = &handles[663]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_STORAGE_THROUGHPUT = &handles[664]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_RANK = &handles[665]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_VOLUME_IOPS_COST_VARIATION = &handles[666]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_INSTANCE_ON_DEMAND_HOURLY_PRICE = &handles[667]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = &handles[668]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = &handles[669]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = &handles[670]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = &handles[671]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = &handles[672]
+var ExportableRDSDBField_INSTANCE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = &handles[673]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ON_DEMAND_MONTHLY_PRICE = &handles[674]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_INSTANCE_ON_DEMAND_MONTHLY_COST = &handles[675]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_ON_DEMAND_MONTHLY_COST = &handles[676]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_CLUSTER_STORAGE_IO_ON_DEMAND_MONTHLY_COST = &handles[677]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = &handles[678]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = &handles[679]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = &handles[680]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = &handles[681]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = &handles[682]
+var ExportableRDSDBField_STORAGE_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = &handles[683]
+var ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_CPU_VENDOR_ARCHITECTURES = &handles[684]
+var ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_ENHANCED_INFRASTRUCTURE_METRICS = &handles[685]
+var ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = &handles[686]
+var ExportableRDSDBField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = &handles[687]
+var ExportableRDSDBField_LAST_REFRESH_TIMESTAMP = &handles[688]
+var ExportableRDSDBField_TAGS = &handles[689]
+var ExportableRDSDBField_DB_CLUSTER_IDENTIFIER = &handles[690]
+var ExportableRDSDBField_PROMOTION_TIER = &handles[691]
+
+var _ExportableRDSDBFields = &handles[692]
+var _ExportableRDSDBFields_member = &handles[693]
+
+var ExportableVolumeField = &handles[694]
+var ExportableVolumeField_ACCOUNT_ID = &handles[695]
+var ExportableVolumeField_VOLUME_ARN = &handles[696]
+var ExportableVolumeField_FINDING = &handles[697]
+var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_READ_OPS_PER_SECOND_MAXIMUM = &handles[698]
+var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_WRITE_OPS_PER_SECOND_MAXIMUM = &handles[699]
+var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_READ_BYTES_PER_SECOND_MAXIMUM = &handles[700]
+var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_WRITE_BYTES_PER_SECOND_MAXIMUM = &handles[701]
+var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_IOPS_EXCEEDED_MAXIMUM = &handles[702]
+var ExportableVolumeField_UTILIZATION_METRICS_VOLUME_THROUGHPUT_EXCEEDED_MAXIMUM = &handles[703]
+var ExportableVolumeField_LOOKBACK_PERIOD_IN_DAYS = &handles[704]
+var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_TYPE = &handles[705]
+var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BASELINE_IOPS = &handles[706]
+var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT = &handles[707]
+var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BURST_IOPS = &handles[708]
+var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_BURST_THROUGHPUT = &handles[709]
+var ExportableVolumeField_CURRENT_CONFIGURATION_VOLUME_SIZE = &handles[710]
+var ExportableVolumeField_CURRENT_MONTHLY_PRICE = &handles[711]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_TYPE = &handles[712]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_IOPS = &handles[713]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BASELINE_THROUGHPUT = &handles[714]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_IOPS = &handles[715]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_BURST_THROUGHPUT = &handles[716]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_CONFIGURATION_VOLUME_SIZE = &handles[717]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_MONTHLY_PRICE = &handles[718]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_PERFORMANCE_RISK = &handles[719]
+var ExportableVolumeField_LAST_REFRESH_TIMESTAMP = &handles[720]
+var ExportableVolumeField_CURRENT_PERFORMANCE_RISK = &handles[721]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_PERCENTAGE = &handles[722]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY = &handles[723]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE = &handles[724]
+var ExportableVolumeField_TAGS = &handles[725]
+var ExportableVolumeField_ROOT_VOLUME = &handles[726]
+var ExportableVolumeField_CURRENT_CONFIGURATION_ROOT_VOLUME = &handles[727]
+var ExportableVolumeField_EFFECTIVE_RECOMMENDATION_PREFERENCES_SAVINGS_ESTIMATION_MODE = &handles[728]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_SAVINGS_OPPORTUNITY_AFTER_DISCOUNTS_PERCENTAGE = &handles[729]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_CURRENCY_AFTER_DISCOUNTS = &handles[730]
+var ExportableVolumeField_RECOMMENDATION_OPTIONS_ESTIMATED_MONTHLY_SAVINGS_VALUE_AFTER_DISCOUNTS = &handles[731]
+var ExportableVolumeField_EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD = &handles[732]
+
+var _ExportableVolumeFields = &handles[733]
+var _ExportableVolumeFields_member = &handles[734]
+
+var ExportDestination = &handles[735]
+var ExportDestination_s3 = &handles[736]
+
+var ExternalMetricsPreference = &handles[737]
+var ExternalMetricsPreference_source = &handles[738]
+
+var ExternalMetricsSource = &handles[739]
+var ExternalMetricsSource_DATADOG = &handles[740]
+var ExternalMetricsSource_DYNATRACE = &handles[741]
+var ExternalMetricsSource_NEWRELIC = &handles[742]
+var ExternalMetricsSource_INSTANA = &handles[743]
+
+var ExternalMetricStatus = &handles[744]
+var ExternalMetricStatus_statusCode = &handles[745]
+var ExternalMetricStatus_statusReason = &handles[746]
+
+var ExternalMetricStatusCode = &handles[747]
+var ExternalMetricStatusCode_NO_EXTERNAL_METRIC_SET = &handles[748]
+var ExternalMetricStatusCode_INTEGRATION_SUCCESS = &handles[749]
+var ExternalMetricStatusCode_DATADOG_INTEGRATION_ERROR = &handles[750]
+var ExternalMetricStatusCode_DYNATRACE_INTEGRATION_ERROR = &handles[751]
+var ExternalMetricStatusCode_NEWRELIC_INTEGRATION_ERROR = &handles[752]
+var ExternalMetricStatusCode_INSTANA_INTEGRATION_ERROR = &handles[753]
+var ExternalMetricStatusCode_INSUFFICIENT_DATADOG_METRICS = &handles[754]
+var ExternalMetricStatusCode_INSUFFICIENT_DYNATRACE_METRICS = &handles[755]
+var ExternalMetricStatusCode_INSUFFICIENT_NEWRELIC_METRICS = &handles[756]
+var ExternalMetricStatusCode_INSUFFICIENT_INSTANA_METRICS = &handles[757]
+
+var _ExternalMetricStatusReason = &handles[758]
+
+var _FailureReason = &handles[759]
+
+var FileFormat = &handles[760]
+var FileFormat_CSV = &handles[761]
+
+var Filter = &handles[762]
+var Filter_name = &handles[763]
+var Filter_values = &handles[764]
+
+var FilterName = &handles[765]
+var FilterName_FINDING = &handles[766]
+var FilterName_FINDING_REASON_CODES = &handles[767]
+var FilterName_RECOMMENDATION_SOURCE_TYPE = &handles[768]
+var FilterName_INFERRED_WORKLOAD_TYPES = &handles[769]
+
+var _Filters = &handles[770]
+var _Filters_member = &handles[771]
+
+var _FilterValue = &handles[772]
+
+var _FilterValues = &handles[773]
+var _FilterValues_member = &handles[774]
+
+var Finding = &handles[775]
+var Finding_UNDER_PROVISIONED = &handles[776]
+var Finding_OVER_PROVISIONED = &handles[777]
+var Finding_OPTIMIZED = &handles[778]
+var Finding_NOT_OPTIMIZED = &handles[779]
+
+var FindingReasonCode = &handles[780]
+var FindingReasonCode_MEMORY_OVER_PROVISIONED = &handles[781]
+var FindingReasonCode_MEMORY_UNDER_PROVISIONED = &handles[782]
+
+var _FunctionArn = &handles[783]
+
+var _FunctionArns = &handles[784]
+var _FunctionArns_member = &handles[785]
+
+var _FunctionVersion = &handles[786]
+
+var GetRecommendationError = &handles[787]
+var GetRecommendationError_identifier = &handles[788]
+var GetRecommendationError_code = &handles[789]
+var GetRecommendationError_message = &handles[790]
+
+var _GetRecommendationErrors = &handles[791]
+var _GetRecommendationErrors_member = &handles[792]
+
+var Gpu = &handles[793]
+var Gpu_gpuCount = &handles[794]
+var Gpu_gpuMemorySizeInMiB = &handles[795]
+
+var _GpuCount = &handles[796]
+
+var GpuInfo = &handles[797]
+var GpuInfo_gpus = &handles[798]
+
+var _GpuMemorySizeInMiB = &handles[799]
+
+var _Gpus = &handles[800]
+var _Gpus_member = &handles[801]
+
+var _High = &handles[802]
+
+var _Identifier = &handles[803]
+
+var Idle = &handles[804]
+var Idle_TRUE = &handles[805]
+var Idle_FALSE = &handles[806]
+
+var IdleDimension = &handles[807]
+var IdleDimension_key = &handles[808]
+var IdleDimension_values = &handles[809]
+
+var _IdleDimensionKey = &handles[810]
+
+var _IdleDimensions = &handles[811]
+var _IdleDimensions_member = &handles[812]
+
+var _IdleDimensionValue = &handles[813]
+
+var _IdleDimensionValues = &handles[814]
+var _IdleDimensionValues_member = &handles[815]
+
+var IdleEstimatedMonthlySavings = &handles[816]
+var IdleEstimatedMonthlySavings_currency = &handles[817]
+var IdleEstimatedMonthlySavings_value = &handles[818]
+
+var IdleFinding = &handles[819]
+var IdleFinding_IDLE = &handles[820]
+var IdleFinding_UNATTACHED = &handles[821]
+var IdleFinding_UNUSED = &handles[822]
+
+var _IdleFindingDescription = &handles[823]
+
+var _IdleMaxResults = &handles[824]
+
+var IdleMetricName = &handles[825]
+var IdleMetricName_CPU = &handles[826]
+var IdleMetricName_MEMORY = &handles[827]
+var IdleMetricName_NETWORK_OUT_BYTES_PER_SECOND = &handles[828]
+var IdleMetricName_NETWORK_IN_BYTES_PER_SECOND = &handles[829]
+var IdleMetricName_DATABASE_CONNECTIONS = &handles[830]
+var IdleMetricName_EBS_VOLUME_READ_IOPS = &handles[831]
+var IdleMetricName_EBS_VOLUME_WRITE_IOPS = &handles[832]
+var IdleMetricName_VOLUME_READ_OPS_PER_SECOND = &handles[833]
+var IdleMetricName_VOLUME_WRITE_OPS_PER_SECOND = &handles[834]
+var IdleMetricName_ACTIVE_CONNECTION_COUNT = &handles[835]
+var IdleMetricName_PACKETS_IN_FROM_SOURCE = &handles[836]
+var IdleMetricName_PACKETS_IN_FROM_DESTINATION = &handles[837]
+var IdleMetricName_CONSUMED_READ_CAPACITY_UNITS = &handles[838]
+var IdleMetricName_CONSUMED_WRITE_CAPACITY_UNITS = &handles[839]
+var IdleMetricName_CONSUMED_CHANGE_DATA_CAPTURE_UNITS = &handles[840]
+var IdleMetricName_NEW_CONNECTIONS = &handles[841]
+var IdleMetricName_ENGINE_CPU_UTILIZATION = &handles[842]
+var IdleMetricName_CACHE_HITS = &handles[843]
+var IdleMetricName_CACHE_MISSES = &handles[844]
+var IdleMetricName_KEYSPACE_HITS = &handles[845]
+var IdleMetricName_KEYSPACE_MISSES = &handles[846]
+var IdleMetricName_IS_IDLE = &handles[847]
+var IdleMetricName_USER_CONNECTED = &handles[848]
+var IdleMetricName_INVOCATIONS = &handles[849]
+var IdleMetricName_GET_TYPE_CMDS = &handles[850]
+var IdleMetricName_SET_TYPE_CMDS = &handles[851]
+var IdleMetricName_ELASTI_CACHE_PROCESSING_UNITS = &handles[852]
+var IdleMetricName_CURR_CONNECTIONS = &handles[853]
+
+var IdleRecommendation = &handles[854]
+var IdleRecommendation_resourceArn = &handles[855]
+var IdleRecommendation_resourceId = &handles[856]
+var IdleRecommendation_resourceType = &handles[857]
+var IdleRecommendation_accountId = &handles[858]
+var IdleRecommendation_finding = &handles[859]
+var IdleRecommendation_findingDescription = &handles[860]
+var IdleRecommendation_savingsOpportunity = &handles[861]
+var IdleRecommendation_savingsOpportunityAfterDiscounts = &handles[862]
+var IdleRecommendation_utilizationMetrics = &handles[863]
+var IdleRecommendation_lookBackPeriodInDays = &handles[864]
+var IdleRecommendation_lastRefreshTimestamp = &handles[865]
+var IdleRecommendation_tags = &handles[866]
+
+var IdleRecommendationError = &handles[867]
+var IdleRecommendationError_identifier = &handles[868]
+var IdleRecommendationError_code = &handles[869]
+var IdleRecommendationError_message = &handles[870]
+var IdleRecommendationError_resourceType = &handles[871]
+
+var _IdleRecommendationErrors = &handles[872]
+var _IdleRecommendationErrors_member = &handles[873]
+
+var IdleRecommendationFilter = &handles[874]
+var IdleRecommendationFilter_name = &handles[875]
+var IdleRecommendationFilter_values = &handles[876]
+
+var IdleRecommendationFilterName = &handles[877]
+var IdleRecommendationFilterName_FINDING = &handles[878]
+var IdleRecommendationFilterName_RESOURCE_TYPE = &handles[879]
+
+var _IdleRecommendationFilters = &handles[880]
+var _IdleRecommendationFilters_member = &handles[881]
+
+var IdleRecommendationResourceType = &handles[882]
+var IdleRecommendationResourceType_EC2_INSTANCE = &handles[883]
+var IdleRecommendationResourceType_AUTO_SCALING_GROUP = &handles[884]
+var IdleRecommendationResourceType_EBS_VOLUME = &handles[885]
+var IdleRecommendationResourceType_ECS_SERVICE = &handles[886]
+var IdleRecommendationResourceType_RDS_DB_INSTANCE = &handles[887]
+var IdleRecommendationResourceType_NAT_GATEWAY = &handles[888]
+var IdleRecommendationResourceType_DYNAMO_DB_TABLE = &handles[889]
+var IdleRecommendationResourceType_ELASTI_CACHE_CLUSTER = &handles[890]
+var IdleRecommendationResourceType_MEMORY_DB_CLUSTER = &handles[891]
+var IdleRecommendationResourceType_DOCUMENT_DB_CLUSTER = &handles[892]
+var IdleRecommendationResourceType_WORKSPACES = &handles[893]
+var IdleRecommendationResourceType_SAGE_MAKER_ENDPOINT = &handles[894]
+
+var _IdleRecommendations = &handles[895]
+var _IdleRecommendations_member = &handles[896]
+
+var IdleSavingsOpportunity = &handles[897]
+var IdleSavingsOpportunity_savingsOpportunityPercentage = &handles[898]
+var IdleSavingsOpportunity_estimatedMonthlySavings = &handles[899]
+
+var IdleSavingsOpportunityAfterDiscounts = &handles[900]
+var IdleSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = &handles[901]
+var IdleSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = &handles[902]
+
+var _IdleSummaries = &handles[903]
+var _IdleSummaries_member = &handles[904]
+
+var IdleSummary = &handles[905]
+var IdleSummary_name = &handles[906]
+var IdleSummary_value = &handles[907]
+
+var IdleUtilizationMetric = &handles[908]
+var IdleUtilizationMetric_name = &handles[909]
+var IdleUtilizationMetric_statistic = &handles[910]
+var IdleUtilizationMetric_value = &handles[911]
+var IdleUtilizationMetric_dimensions = &handles[912]
+
+var _IdleUtilizationMetrics = &handles[913]
+var _IdleUtilizationMetrics_member = &handles[914]
+
+var _IncludeMemberAccounts = &handles[915]
+
+var InferredWorkloadSaving = &handles[916]
+var InferredWorkloadSaving_inferredWorkloadTypes = &handles[917]
+var InferredWorkloadSaving_estimatedMonthlySavings = &handles[918]
+
+var _InferredWorkloadSavings = &handles[919]
+var _InferredWorkloadSavings_member = &handles[920]
+
+var InferredWorkloadType = &handles[921]
+var InferredWorkloadType_AMAZON_EMR = &handles[922]
+var InferredWorkloadType_APACHE_CASSANDRA = &handles[923]
+var InferredWorkloadType_APACHE_HADOOP = &handles[924]
+var InferredWorkloadType_MEMCACHED = &handles[925]
+var InferredWorkloadType_NGINX = &handles[926]
+var InferredWorkloadType_POSTGRE_SQL = &handles[927]
+var InferredWorkloadType_REDIS = &handles[928]
+var InferredWorkloadType_KAFKA = &handles[929]
+var InferredWorkloadType_SQLSERVER = &handles[930]
+
+var _InferredWorkloadTypes = &handles[931]
+var _InferredWorkloadTypes_member = &handles[932]
+
+var InferredWorkloadTypesPreference = &handles[933]
+var InferredWorkloadTypesPreference_ACTIVE = &handles[934]
+var InferredWorkloadTypesPreference_INACTIVE = &handles[935]
+
+var _InstanceArn = &handles[936]
+
+var _InstanceArns = &handles[937]
+var _InstanceArns_member = &handles[938]
+
+var InstanceEstimatedMonthlySavings = &handles[939]
+var InstanceEstimatedMonthlySavings_currency = &handles[940]
+var InstanceEstimatedMonthlySavings_value = &handles[941]
+
+var InstanceIdle = &handles[942]
+var InstanceIdle_TRUE = &handles[943]
+var InstanceIdle_FALSE = &handles[944]
+
+var _InstanceName = &handles[945]
+
+var InstanceRecommendation = &handles[946]
+var InstanceRecommendation_instanceArn = &handles[947]
+var InstanceRecommendation_accountId = &handles[948]
+var InstanceRecommendation_instanceName = &handles[949]
+var InstanceRecommendation_currentInstanceType = &handles[950]
+var InstanceRecommendation_finding = &handles[951]
+var InstanceRecommendation_findingReasonCodes = &handles[952]
+var InstanceRecommendation_utilizationMetrics = &handles[953]
+var InstanceRecommendation_lookBackPeriodInDays = &handles[954]
+var InstanceRecommendation_recommendationOptions = &handles[955]
+var InstanceRecommendation_recommendationSources = &handles[956]
+var InstanceRecommendation_lastRefreshTimestamp = &handles[957]
+var InstanceRecommendation_currentPerformanceRisk = &handles[958]
+var InstanceRecommendation_effectiveRecommendationPreferences = &handles[959]
+var InstanceRecommendation_inferredWorkloadTypes = &handles[960]
+var InstanceRecommendation_instanceState = &handles[961]
+var InstanceRecommendation_tags = &handles[962]
+var InstanceRecommendation_externalMetricStatus = &handles[963]
+var InstanceRecommendation_currentInstanceGpuInfo = &handles[964]
+var InstanceRecommendation_idle = &handles[965]
+
+var InstanceRecommendationFindingReasonCode = &handles[966]
+var InstanceRecommendationFindingReasonCode_CPU_OVER_PROVISIONED = &handles[967]
+var InstanceRecommendationFindingReasonCode_CPU_UNDER_PROVISIONED = &handles[968]
+var InstanceRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED = &handles[969]
+var InstanceRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED = &handles[970]
+var InstanceRecommendationFindingReasonCode_EBS_THROUGHPUT_OVER_PROVISIONED = &handles[971]
+var InstanceRecommendationFindingReasonCode_EBS_THROUGHPUT_UNDER_PROVISIONED = &handles[972]
+var InstanceRecommendationFindingReasonCode_EBS_IOPS_OVER_PROVISIONED = &handles[973]
+var InstanceRecommendationFindingReasonCode_EBS_IOPS_UNDER_PROVISIONED = &handles[974]
+var InstanceRecommendationFindingReasonCode_NETWORK_BANDWIDTH_OVER_PROVISIONED = &handles[975]
+var InstanceRecommendationFindingReasonCode_NETWORK_BANDWIDTH_UNDER_PROVISIONED = &handles[976]
+var InstanceRecommendationFindingReasonCode_NETWORK_PPS_OVER_PROVISIONED = &handles[977]
+var InstanceRecommendationFindingReasonCode_NETWORK_PPS_UNDER_PROVISIONED = &handles[978]
+var InstanceRecommendationFindingReasonCode_DISK_IOPS_OVER_PROVISIONED = &handles[979]
+var InstanceRecommendationFindingReasonCode_DISK_IOPS_UNDER_PROVISIONED = &handles[980]
+var InstanceRecommendationFindingReasonCode_DISK_THROUGHPUT_OVER_PROVISIONED = &handles[981]
+var InstanceRecommendationFindingReasonCode_DISK_THROUGHPUT_UNDER_PROVISIONED = &handles[982]
+var InstanceRecommendationFindingReasonCode_GPU_UNDER_PROVISIONED = &handles[983]
+var InstanceRecommendationFindingReasonCode_GPU_OVER_PROVISIONED = &handles[984]
+var InstanceRecommendationFindingReasonCode_GPU_MEMORY_UNDER_PROVISIONED = &handles[985]
+var InstanceRecommendationFindingReasonCode_GPU_MEMORY_OVER_PROVISIONED = &handles[986]
+
+var _InstanceRecommendationFindingReasonCodes = &handles[987]
+var _InstanceRecommendationFindingReasonCodes_member = &handles[988]
+
+var InstanceRecommendationOption = &handles[989]
+var InstanceRecommendationOption_instanceType = &handles[990]
+var InstanceRecommendationOption_instanceGpuInfo = &handles[991]
+var InstanceRecommendationOption_projectedUtilizationMetrics = &handles[992]
+var InstanceRecommendationOption_platformDifferences = &handles[993]
+var InstanceRecommendationOption_performanceRisk = &handles[994]
+var InstanceRecommendationOption_rank = &handles[995]
+var InstanceRecommendationOption_savingsOpportunity = &handles[996]
+var InstanceRecommendationOption_savingsOpportunityAfterDiscounts = &handles[997]
+var InstanceRecommendationOption_migrationEffort = &handles[998]
+
+var _InstanceRecommendations = &handles[999]
+var _InstanceRecommendations_member = &handles[1000]
+
+var InstanceSavingsEstimationMode = &handles[1001]
+var InstanceSavingsEstimationMode_source = &handles[1002]
+
+var InstanceSavingsEstimationModeSource = &handles[1003]
+var InstanceSavingsEstimationModeSource_PUBLIC_PRICING = &handles[1004]
+var InstanceSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = &handles[1005]
+var InstanceSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = &handles[1006]
+
+var InstanceSavingsOpportunityAfterDiscounts = &handles[1007]
+var InstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = &handles[1008]
+var InstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = &handles[1009]
+
+var InstanceState = &handles[1010]
+var InstanceState_PENDING = &handles[1011]
+var InstanceState_RUNNING = &handles[1012]
+var InstanceState_SHUTTING_DOWN = &handles[1013]
+var InstanceState_TERMINATED = &handles[1014]
+var InstanceState_STOPPING = &handles[1015]
+var InstanceState_STOPPED = &handles[1016]
+
+var _InstanceType = &handles[1017]
+
+var InternalServerException = &handles[1018]
+var InternalServerException_message = &handles[1019]
+
+var InvalidParameterValueException = &handles[1020]
+var InvalidParameterValueException_message = &handles[1021]
+
+var JobFilter = &handles[1022]
+var JobFilter_name = &handles[1023]
+var JobFilter_values = &handles[1024]
+
+var JobFilterName = &handles[1025]
+var JobFilterName_RESOURCE_TYPE = &handles[1026]
+var JobFilterName_JOB_STATUS = &handles[1027]
+
+var _JobFilters = &handles[1028]
+var _JobFilters_member = &handles[1029]
+
+var _JobId = &handles[1030]
+
+var _JobIds = &handles[1031]
+var _JobIds_member = &handles[1032]
+
+var JobStatus = &handles[1033]
+var JobStatus_QUEUED = &handles[1034]
+var JobStatus_IN_PROGRESS = &handles[1035]
+var JobStatus_COMPLETE = &handles[1036]
+var JobStatus_FAILED = &handles[1037]
+
+var LambdaEffectiveRecommendationPreferences = &handles[1038]
+var LambdaEffectiveRecommendationPreferences_savingsEstimationMode = &handles[1039]
+
+var LambdaEstimatedMonthlySavings = &handles[1040]
+var LambdaEstimatedMonthlySavings_currency = &handles[1041]
+var LambdaEstimatedMonthlySavings_value = &handles[1042]
+
+var LambdaFunctionMemoryMetricName = &handles[1043]
+var LambdaFunctionMemoryMetricName_DURATION = &handles[1044]
+
+var LambdaFunctionMemoryMetricStatistic = &handles[1045]
+var LambdaFunctionMemoryMetricStatistic_LOWER_BOUND = &handles[1046]
+var LambdaFunctionMemoryMetricStatistic_UPPER_BOUND = &handles[1047]
+var LambdaFunctionMemoryMetricStatistic_EXPECTED = &handles[1048]
+
+var LambdaFunctionMemoryProjectedMetric = &handles[1049]
+var LambdaFunctionMemoryProjectedMetric_name = &handles[1050]
+var LambdaFunctionMemoryProjectedMetric_statistic = &handles[1051]
+var LambdaFunctionMemoryProjectedMetric_value = &handles[1052]
+
+var _LambdaFunctionMemoryProjectedMetrics = &handles[1053]
+var _LambdaFunctionMemoryProjectedMetrics_member = &handles[1054]
+
+var LambdaFunctionMemoryRecommendationOption = &handles[1055]
+var LambdaFunctionMemoryRecommendationOption_rank = &handles[1056]
+var LambdaFunctionMemoryRecommendationOption_memorySize = &handles[1057]
+var LambdaFunctionMemoryRecommendationOption_projectedUtilizationMetrics = &handles[1058]
+var LambdaFunctionMemoryRecommendationOption_savingsOpportunity = &handles[1059]
+var LambdaFunctionMemoryRecommendationOption_savingsOpportunityAfterDiscounts = &handles[1060]
+
+var _LambdaFunctionMemoryRecommendationOptions = &handles[1061]
+var _LambdaFunctionMemoryRecommendationOptions_member = &handles[1062]
+
+var LambdaFunctionMetricName = &handles[1063]
+var LambdaFunctionMetricName_DURATION = &handles[1064]
+var LambdaFunctionMetricName_MEMORY = &handles[1065]
+
+var LambdaFunctionMetricStatistic = &handles[1066]
+var LambdaFunctionMetricStatistic_MAXIMUM = &handles[1067]
+var LambdaFunctionMetricStatistic_AVERAGE = &handles[1068]
+
+var LambdaFunctionRecommendation = &handles[1069]
+var LambdaFunctionRecommendation_functionArn = &handles[1070]
+var LambdaFunctionRecommendation_functionVersion = &handles[1071]
+var LambdaFunctionRecommendation_accountId = &handles[1072]
+var LambdaFunctionRecommendation_currentMemorySize = &handles[1073]
+var LambdaFunctionRecommendation_numberOfInvocations = &handles[1074]
+var LambdaFunctionRecommendation_utilizationMetrics = &handles[1075]
+var LambdaFunctionRecommendation_lookbackPeriodInDays = &handles[1076]
+var LambdaFunctionRecommendation_lastRefreshTimestamp = &handles[1077]
+var LambdaFunctionRecommendation_finding = &handles[1078]
+var LambdaFunctionRecommendation_findingReasonCodes = &handles[1079]
+var LambdaFunctionRecommendation_memorySizeRecommendationOptions = &handles[1080]
+var LambdaFunctionRecommendation_currentPerformanceRisk = &handles[1081]
+var LambdaFunctionRecommendation_effectiveRecommendationPreferences = &handles[1082]
+var LambdaFunctionRecommendation_tags = &handles[1083]
+
+var LambdaFunctionRecommendationFilter = &handles[1084]
+var LambdaFunctionRecommendationFilter_name = &handles[1085]
+var LambdaFunctionRecommendationFilter_values = &handles[1086]
+
+var LambdaFunctionRecommendationFilterName = &handles[1087]
+var LambdaFunctionRecommendationFilterName_FINDING = &handles[1088]
+var LambdaFunctionRecommendationFilterName_FINDING_REASON_CODE = &handles[1089]
+
+var _LambdaFunctionRecommendationFilters = &handles[1090]
+var _LambdaFunctionRecommendationFilters_member = &handles[1091]
+
+var LambdaFunctionRecommendationFinding = &handles[1092]
+var LambdaFunctionRecommendationFinding_OPTIMIZED = &handles[1093]
+var LambdaFunctionRecommendationFinding_NOT_OPTIMIZED = &handles[1094]
+var LambdaFunctionRecommendationFinding_UNAVAILABLE = &handles[1095]
+
+var LambdaFunctionRecommendationFindingReasonCode = &handles[1096]
+var LambdaFunctionRecommendationFindingReasonCode_MEMORY_OVER_PROVISIONED = &handles[1097]
+var LambdaFunctionRecommendationFindingReasonCode_MEMORY_UNDER_PROVISIONED = &handles[1098]
+var LambdaFunctionRecommendationFindingReasonCode_INSUFFICIENT_DATA = &handles[1099]
+var LambdaFunctionRecommendationFindingReasonCode_INCONCLUSIVE = &handles[1100]
+
+var _LambdaFunctionRecommendationFindingReasonCodes = &handles[1101]
+var _LambdaFunctionRecommendationFindingReasonCodes_member = &handles[1102]
+
+var _LambdaFunctionRecommendations = &handles[1103]
+var _LambdaFunctionRecommendations_member = &handles[1104]
+
+var LambdaFunctionUtilizationMetric = &handles[1105]
+var LambdaFunctionUtilizationMetric_name = &handles[1106]
+var LambdaFunctionUtilizationMetric_statistic = &handles[1107]
+var LambdaFunctionUtilizationMetric_value = &handles[1108]
+
+var _LambdaFunctionUtilizationMetrics = &handles[1109]
+var _LambdaFunctionUtilizationMetrics_member = &handles[1110]
+
+var LambdaSavingsEstimationMode = &handles[1111]
+var LambdaSavingsEstimationMode_source = &handles[1112]
+
+var LambdaSavingsEstimationModeSource = &handles[1113]
+var LambdaSavingsEstimationModeSource_PUBLIC_PRICING = &handles[1114]
+var LambdaSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = &handles[1115]
+var LambdaSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = &handles[1116]
+
+var LambdaSavingsOpportunityAfterDiscounts = &handles[1117]
+var LambdaSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = &handles[1118]
+var LambdaSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = &handles[1119]
+
+var _LastRefreshTimestamp = &handles[1120]
+
+var _LastUpdatedTimestamp = &handles[1121]
+
+var LicenseConfiguration = &handles[1122]
+var LicenseConfiguration_numberOfCores = &handles[1123]
+var LicenseConfiguration_instanceType = &handles[1124]
+var LicenseConfiguration_operatingSystem = &handles[1125]
+var LicenseConfiguration_licenseEdition = &handles[1126]
+var LicenseConfiguration_licenseName = &handles[1127]
+var LicenseConfiguration_licenseModel = &handles[1128]
+var LicenseConfiguration_licenseVersion = &handles[1129]
+var LicenseConfiguration_metricsSource = &handles[1130]
+
+var LicenseEdition = &handles[1131]
+var LicenseEdition_ENTERPRISE = &handles[1132]
+var LicenseEdition_STANDARD = &handles[1133]
+var LicenseEdition_FREE = &handles[1134]
+var LicenseEdition_NO_LICENSE_EDITION_FOUND = &handles[1135]
+
+var LicenseFinding = &handles[1136]
+var LicenseFinding_INSUFFICIENT_METRICS = &handles[1137]
+var LicenseFinding_OPTIMIZED = &handles[1138]
+var LicenseFinding_NOT_OPTIMIZED = &handles[1139]
+
+var LicenseFindingReasonCode = &handles[1140]
+var LicenseFindingReasonCode_CW_APP_INSIGHTS_DISABLED = &handles[1141]
+var LicenseFindingReasonCode_CW_APP_INSIGHTS_ERROR = &handles[1142]
+var LicenseFindingReasonCode_LICENSE_OVER_PROVISIONED = &handles[1143]
+var LicenseFindingReasonCode_OPTIMIZED = &handles[1144]
+
+var _LicenseFindingReasonCodes = &handles[1145]
+var _LicenseFindingReasonCodes_member = &handles[1146]
+
+var LicenseModel = &handles[1147]
+var LicenseModel_LICENSE_INCLUDED = &handles[1148]
+var LicenseModel_BRING_YOUR_OWN_LICENSE = &handles[1149]
+
+var LicenseName = &handles[1150]
+var LicenseName_SQLSERVER = &handles[1151]
+
+var LicenseRecommendation = &handles[1152]
+var LicenseRecommendation_resourceArn = &handles[1153]
+var LicenseRecommendation_accountId = &handles[1154]
+var LicenseRecommendation_currentLicenseConfiguration = &handles[1155]
+var LicenseRecommendation_lookbackPeriodInDays = &handles[1156]
+var LicenseRecommendation_lastRefreshTimestamp = &handles[1157]
+var LicenseRecommendation_finding = &handles[1158]
+var LicenseRecommendation_findingReasonCodes = &handles[1159]
+var LicenseRecommendation_licenseRecommendationOptions = &handles[1160]
+var LicenseRecommendation_tags = &handles[1161]
+
+var LicenseRecommendationFilter = &handles[1162]
+var LicenseRecommendationFilter_name = &handles[1163]
+var LicenseRecommendationFilter_values = &handles[1164]
+
+var LicenseRecommendationFilterName = &handles[1165]
+var LicenseRecommendationFilterName_LICENSE_FINDING = &handles[1166]
+var LicenseRecommendationFilterName_LICENSE_FINDING_REASON_CODE = &handles[1167]
+var LicenseRecommendationFilterName_LICENSE_NAME = &handles[1168]
+
+var _LicenseRecommendationFilters = &handles[1169]
+var _LicenseRecommendationFilters_member = &handles[1170]
+
+var LicenseRecommendationOption = &handles[1171]
+var LicenseRecommendationOption_rank = &handles[1172]
+var LicenseRecommendationOption_operatingSystem = &handles[1173]
+var LicenseRecommendationOption_licenseEdition = &handles[1174]
+var LicenseRecommendationOption_licenseModel = &handles[1175]
+var LicenseRecommendationOption_savingsOpportunity = &handles[1176]
+
+var _LicenseRecommendationOptions = &handles[1177]
+var _LicenseRecommendationOptions_member = &handles[1178]
+
+var _LicenseRecommendations = &handles[1179]
+var _LicenseRecommendations_member = &handles[1180]
+
+var _LicenseVersion = &handles[1181]
+
+var LimitExceededException = &handles[1182]
+var LimitExceededException_message = &handles[1183]
+
+var _LookBackPeriodInDays = &handles[1184]
+
+var LookBackPeriodPreference = &handles[1185]
+var LookBackPeriodPreference_DAYS_14 = &handles[1186]
+var LookBackPeriodPreference_DAYS_32 = &handles[1187]
+var LookBackPeriodPreference_DAYS_93 = &handles[1188]
+
+var _Low = &handles[1189]
+
+var _LowerBoundValue = &handles[1190]
+
+var _MaxResults = &handles[1191]
+
+var _MaxSize = &handles[1192]
+
+var _Medium = &handles[1193]
+
+var _MemberAccountsEnrolled = &handles[1194]
+
+var _MemorySize = &handles[1195]
+
+var MemorySizeConfiguration = &handles[1196]
+var MemorySizeConfiguration_memory = &handles[1197]
+var MemorySizeConfiguration_memoryReservation = &handles[1198]
+
+var _Message = &handles[1199]
+
+var _MetadataKey = &handles[1200]
+
+var MetricName = &handles[1201]
+var MetricName_CPU = &handles[1202]
+var MetricName_MEMORY = &handles[1203]
+var MetricName_EBS_READ_OPS_PER_SECOND = &handles[1204]
+var MetricName_EBS_WRITE_OPS_PER_SECOND = &handles[1205]
+var MetricName_EBS_READ_BYTES_PER_SECOND = &handles[1206]
+var MetricName_EBS_WRITE_BYTES_PER_SECOND = &handles[1207]
+var MetricName_DISK_READ_OPS_PER_SECOND = &handles[1208]
+var MetricName_DISK_WRITE_OPS_PER_SECOND = &handles[1209]
+var MetricName_DISK_READ_BYTES_PER_SECOND = &handles[1210]
+var MetricName_DISK_WRITE_BYTES_PER_SECOND = &handles[1211]
+var MetricName_NETWORK_IN_BYTES_PER_SECOND = &handles[1212]
+var MetricName_NETWORK_OUT_BYTES_PER_SECOND = &handles[1213]
+var MetricName_NETWORK_PACKETS_IN_PER_SECOND = &handles[1214]
+var MetricName_NETWORK_PACKETS_OUT_PER_SECOND = &handles[1215]
+var MetricName_GPU_PERCENTAGE = &handles[1216]
+var MetricName_GPU_MEMORY_PERCENTAGE = &handles[1217]
+
+var _MetricProviderArn = &handles[1218]
+
+var MetricSource = &handles[1219]
+var MetricSource_provider = &handles[1220]
+var MetricSource_providerArn = &handles[1221]
+
+var MetricSourceProvider = &handles[1222]
+var MetricSourceProvider_CloudWatchAppInsights = &handles[1223]
+
+var _MetricsSource = &handles[1224]
+var _MetricsSource_member = &handles[1225]
+
+var MetricStatistic = &handles[1226]
+var MetricStatistic_MAXIMUM = &handles[1227]
+var MetricStatistic_AVERAGE = &handles[1228]
+
+var _MetricValue = &handles[1229]
+
+var _MetricValues = &handles[1230]
+var _MetricValues_member = &handles[1231]
+
+var MigrationEffort = &handles[1232]
+var MigrationEffort_VERY_LOW = &handles[1233]
+var MigrationEffort_LOW = &handles[1234]
+var MigrationEffort_MEDIUM = &handles[1235]
+var MigrationEffort_HIGH = &handles[1236]
+
+var _MinSize = &handles[1237]
+
+var MissingAuthenticationToken = &handles[1238]
+var MissingAuthenticationToken_message = &handles[1239]
+
+var _MixedInstanceType = &handles[1240]
+
+var _MixedInstanceTypes = &handles[1241]
+var _MixedInstanceTypes_member = &handles[1242]
+
+var _NextToken = &handles[1243]
+
+var _NullableCpu = &handles[1244]
+
+var _NullableEstimatedInstanceHourReductionPercentage = &handles[1245]
+
+var _NullableInstanceType = &handles[1246]
+
+var _NullableIOPS = &handles[1247]
+
+var _NullableMaxAllocatedStorage = &handles[1248]
+
+var _NullableMemory = &handles[1249]
+
+var _NullableMemoryReservation = &handles[1250]
+
+var _NullableStorageThroughput = &handles[1251]
+
+var _NumberOfCores = &handles[1252]
+
+var _NumberOfInvocations = &handles[1253]
+
+var _NumberOfMemberAccountsOptedIn = &handles[1254]
+
+var _OperatingSystem = &handles[1255]
+
+var OptInRequiredException = &handles[1256]
+var OptInRequiredException_message = &handles[1257]
+
+var Order = &handles[1258]
+var Order_ASC = &handles[1259]
+var Order_DESC = &handles[1260]
+
+var OrderBy = &handles[1261]
+var OrderBy_dimension = &handles[1262]
+var OrderBy_order = &handles[1263]
+
+var _PerformanceRisk = &handles[1264]
+
+var _Period = &handles[1265]
+
+var PlatformDifference = &handles[1266]
+var PlatformDifference_HYPERVISOR = &handles[1267]
+var PlatformDifference_NETWORK_INTERFACE = &handles[1268]
+var PlatformDifference_STORAGE_INTERFACE = &handles[1269]
+var PlatformDifference_INSTANCE_STORE_AVAILABILITY = &handles[1270]
+var PlatformDifference_VIRTUALIZATION_TYPE = &handles[1271]
+var PlatformDifference_ARCHITECTURE = &handles[1272]
+
+var _PlatformDifferences = &handles[1273]
+var _PlatformDifferences_member = &handles[1274]
+
+var PreferredResource = &handles[1275]
+var PreferredResource_name = &handles[1276]
+var PreferredResource_includeList = &handles[1277]
+var PreferredResource_excludeList = &handles[1278]
+
+var PreferredResourceName = &handles[1279]
+var PreferredResourceName_EC2_INSTANCE_TYPES = &handles[1280]
+
+var _PreferredResources = &handles[1281]
+var _PreferredResources_member = &handles[1282]
+
+var _PreferredResourceValue = &handles[1283]
+
+var _PreferredResourceValues = &handles[1284]
+var _PreferredResourceValues_member = &handles[1285]
+
+var ProjectedMetric = &handles[1286]
+var ProjectedMetric_name = &handles[1287]
+var ProjectedMetric_timestamps = &handles[1288]
+var ProjectedMetric_values = &handles[1289]
+
+var _ProjectedMetrics = &handles[1290]
+var _ProjectedMetrics_member = &handles[1291]
+
+var _ProjectedUtilizationMetrics = &handles[1292]
+var _ProjectedUtilizationMetrics_member = &handles[1293]
+
+var _PromotionTier = &handles[1294]
+
+var _Rank = &handles[1295]
+
+var RDSCurrentInstancePerformanceRisk = &handles[1296]
+var RDSCurrentInstancePerformanceRisk_VERY_LOW = &handles[1297]
+var RDSCurrentInstancePerformanceRisk_LOW = &handles[1298]
+var RDSCurrentInstancePerformanceRisk_MEDIUM = &handles[1299]
+var RDSCurrentInstancePerformanceRisk_HIGH = &handles[1300]
+
+var RDSDatabaseProjectedMetric = &handles[1301]
+var RDSDatabaseProjectedMetric_name = &handles[1302]
+var RDSDatabaseProjectedMetric_timestamps = &handles[1303]
+var RDSDatabaseProjectedMetric_values = &handles[1304]
+
+var _RDSDatabaseProjectedMetrics = &handles[1305]
+var _RDSDatabaseProjectedMetrics_member = &handles[1306]
+
+var RDSDatabaseRecommendedOptionProjectedMetric = &handles[1307]
+var RDSDatabaseRecommendedOptionProjectedMetric_recommendedDBInstanceClass = &handles[1308]
+var RDSDatabaseRecommendedOptionProjectedMetric_rank = &handles[1309]
+var RDSDatabaseRecommendedOptionProjectedMetric_projectedMetrics = &handles[1310]
+
+var _RDSDatabaseRecommendedOptionProjectedMetrics = &handles[1311]
+var _RDSDatabaseRecommendedOptionProjectedMetrics_member = &handles[1312]
+
+var RDSDBInstanceRecommendationOption = &handles[1313]
+var RDSDBInstanceRecommendationOption_dbInstanceClass = &handles[1314]
+var RDSDBInstanceRecommendationOption_projectedUtilizationMetrics = &handles[1315]
+var RDSDBInstanceRecommendationOption_performanceRisk = &handles[1316]
+var RDSDBInstanceRecommendationOption_rank = &handles[1317]
+var RDSDBInstanceRecommendationOption_savingsOpportunity = &handles[1318]
+var RDSDBInstanceRecommendationOption_savingsOpportunityAfterDiscounts = &handles[1319]
+
+var _RDSDBInstanceRecommendationOptions = &handles[1320]
+var _RDSDBInstanceRecommendationOptions_member = &handles[1321]
+
+var RDSDBMetricName = &handles[1322]
+var RDSDBMetricName_CPU = &handles[1323]
+var RDSDBMetricName_MEMORY = &handles[1324]
+var RDSDBMetricName_EBS_VOLUME_STORAGE_SPACE_UTILIZATION = &handles[1325]
+var RDSDBMetricName_NETWORK_RECEIVE_THROUGHPUT = &handles[1326]
+var RDSDBMetricName_NETWORK_TRANSMIT_THROUGHPUT = &handles[1327]
+var RDSDBMetricName_EBS_VOLUME_READ_IOPS = &handles[1328]
+var RDSDBMetricName_EBS_VOLUME_WRITE_IOPS = &handles[1329]
+var RDSDBMetricName_EBS_VOLUME_READ_THROUGHPUT = &handles[1330]
+var RDSDBMetricName_EBS_VOLUME_WRITE_THROUGHPUT = &handles[1331]
+var RDSDBMetricName_DATABASE_CONNECTIONS = &handles[1332]
+var RDSDBMetricName_STORAGE_NETWORK_RECEIVE_THROUGHPUT = &handles[1333]
+var RDSDBMetricName_STORAGE_NETWORK_TRANSMIT_THROUGHPUT = &handles[1334]
+var RDSDBMetricName_AURORA_MEMORY_HEALTH_STATE = &handles[1335]
+var RDSDBMetricName_AURORA_MEMORY_NUM_DECLINED_SQL = &handles[1336]
+var RDSDBMetricName_AURORA_MEMORY_NUM_KILL_CONN_TOTAL = &handles[1337]
+var RDSDBMetricName_AURORA_MEMORY_NUM_KILL_QUERY_TOTAL = &handles[1338]
+var RDSDBMetricName_READ_IOPS_EPHEMERAL_STORAGE = &handles[1339]
+var RDSDBMetricName_WRITE_IOPS_EPHEMERAL_STORAGE = &handles[1340]
+var RDSDBMetricName_VOLUME_READ_IOPS = &handles[1341]
+var RDSDBMetricName_VOLUME_BYTES_USED = &handles[1342]
+var RDSDBMetricName_VOLUME_WRITE_IOPS = &handles[1343]
+
+var RDSDBMetricStatistic = &handles[1344]
+var RDSDBMetricStatistic_MAXIMUM = &handles[1345]
+var RDSDBMetricStatistic_MINIMUM = &handles[1346]
+var RDSDBMetricStatistic_AVERAGE = &handles[1347]
+
+var _RDSDBProjectedUtilizationMetrics = &handles[1348]
+var _RDSDBProjectedUtilizationMetrics_member = &handles[1349]
+
+var RDSDBRecommendation = &handles[1350]
+var RDSDBRecommendation_resourceArn = &handles[1351]
+var RDSDBRecommendation_accountId = &handles[1352]
+var RDSDBRecommendation_engine = &handles[1353]
+var RDSDBRecommendation_engineVersion = &handles[1354]
+var RDSDBRecommendation_promotionTier = &handles[1355]
+var RDSDBRecommendation_currentDBInstanceClass = &handles[1356]
+var RDSDBRecommendation_currentStorageConfiguration = &handles[1357]
+var RDSDBRecommendation_dbClusterIdentifier = &handles[1358]
+var RDSDBRecommendation_idle = &handles[1359]
+var RDSDBRecommendation_instanceFinding = &handles[1360]
+var RDSDBRecommendation_storageFinding = &handles[1361]
+var RDSDBRecommendation_instanceFindingReasonCodes = &handles[1362]
+var RDSDBRecommendation_currentInstancePerformanceRisk = &handles[1363]
+var RDSDBRecommendation_currentStorageEstimatedMonthlyVolumeIOPsCostVariation = &handles[1364]
+var RDSDBRecommendation_storageFindingReasonCodes = &handles[1365]
+var RDSDBRecommendation_instanceRecommendationOptions = &handles[1366]
+var RDSDBRecommendation_storageRecommendationOptions = &handles[1367]
+var RDSDBRecommendation_utilizationMetrics = &handles[1368]
+var RDSDBRecommendation_effectiveRecommendationPreferences = &handles[1369]
+var RDSDBRecommendation_lookbackPeriodInDays = &handles[1370]
+var RDSDBRecommendation_lastRefreshTimestamp = &handles[1371]
+var RDSDBRecommendation_tags = &handles[1372]
+
+var RDSDBRecommendationFilter = &handles[1373]
+var RDSDBRecommendationFilter_name = &handles[1374]
+var RDSDBRecommendationFilter_values = &handles[1375]
+
+var RDSDBRecommendationFilterName = &handles[1376]
+var RDSDBRecommendationFilterName_INSTANCE_FINDING = &handles[1377]
+var RDSDBRecommendationFilterName_INSTANCE_FINDING_REASON_CODE = &handles[1378]
+var RDSDBRecommendationFilterName_STORAGE_FINDING = &handles[1379]
+var RDSDBRecommendationFilterName_STORAGE_FINDING_REASON_CODE = &handles[1380]
+var RDSDBRecommendationFilterName_IDLE = &handles[1381]
+
+var _RDSDBRecommendationFilters = &handles[1382]
+var _RDSDBRecommendationFilters_member = &handles[1383]
+
+var _RDSDBRecommendations = &handles[1384]
+var _RDSDBRecommendations_member = &handles[1385]
+
+var RDSDBStorageRecommendationOption = &handles[1386]
+var RDSDBStorageRecommendationOption_storageConfiguration = &handles[1387]
+var RDSDBStorageRecommendationOption_rank = &handles[1388]
+var RDSDBStorageRecommendationOption_savingsOpportunity = &handles[1389]
+var RDSDBStorageRecommendationOption_savingsOpportunityAfterDiscounts = &handles[1390]
+var RDSDBStorageRecommendationOption_estimatedMonthlyVolumeIOPsCostVariation = &handles[1391]
+
+var _RDSDBStorageRecommendationOptions = &handles[1392]
+var _RDSDBStorageRecommendationOptions_member = &handles[1393]
+
+var RDSDBUtilizationMetric = &handles[1394]
+var RDSDBUtilizationMetric_name = &handles[1395]
+var RDSDBUtilizationMetric_statistic = &handles[1396]
+var RDSDBUtilizationMetric_value = &handles[1397]
+
+var _RDSDBUtilizationMetrics = &handles[1398]
+var _RDSDBUtilizationMetrics_member = &handles[1399]
+
+var RDSEffectiveRecommendationPreferences = &handles[1400]
+var RDSEffectiveRecommendationPreferences_cpuVendorArchitectures = &handles[1401]
+var RDSEffectiveRecommendationPreferences_enhancedInfrastructureMetrics = &handles[1402]
+var RDSEffectiveRecommendationPreferences_lookBackPeriod = &handles[1403]
+var RDSEffectiveRecommendationPreferences_savingsEstimationMode = &handles[1404]
+
+var RDSEstimatedMonthlyVolumeIOPsCostVariation = &handles[1405]
+var RDSEstimatedMonthlyVolumeIOPsCostVariation_NONE = &handles[1406]
+var RDSEstimatedMonthlyVolumeIOPsCostVariation_LOW = &handles[1407]
+var RDSEstimatedMonthlyVolumeIOPsCostVariation_MEDIUM = &handles[1408]
+var RDSEstimatedMonthlyVolumeIOPsCostVariation_HIGH = &handles[1409]
+
+var RDSInstanceEstimatedMonthlySavings = &handles[1410]
+var RDSInstanceEstimatedMonthlySavings_currency = &handles[1411]
+var RDSInstanceEstimatedMonthlySavings_value = &handles[1412]
+
+var RDSInstanceFinding = &handles[1413]
+var RDSInstanceFinding_OPTIMIZED = &handles[1414]
+var RDSInstanceFinding_UNDER_PROVISIONED = &handles[1415]
+var RDSInstanceFinding_OVER_PROVISIONED = &handles[1416]
+
+var RDSInstanceFindingReasonCode = &handles[1417]
+var RDSInstanceFindingReasonCode_CPU_OVER_PROVISIONED = &handles[1418]
+var RDSInstanceFindingReasonCode_NETWORK_BANDWIDTH_OVER_PROVISIONED = &handles[1419]
+var RDSInstanceFindingReasonCode_EBS_IOPS_OVER_PROVISIONED = &handles[1420]
+var RDSInstanceFindingReasonCode_EBS_IOPS_UNDER_PROVISIONED = &handles[1421]
+var RDSInstanceFindingReasonCode_EBS_THROUGHPUT_OVER_PROVISIONED = &handles[1422]
+var RDSInstanceFindingReasonCode_CPU_UNDER_PROVISIONED = &handles[1423]
+var RDSInstanceFindingReasonCode_NETWORK_BANDWIDTH_UNDER_PROVISIONED = &handles[1424]
+var RDSInstanceFindingReasonCode_EBS_THROUGHPUT_UNDER_PROVISIONED = &handles[1425]
+var RDSInstanceFindingReasonCode_NEW_GENERATION_DB_INSTANCE_CLASS_AVAILABLE = &handles[1426]
+var RDSInstanceFindingReasonCode_NEW_ENGINE_VERSION_AVAILABLE = &handles[1427]
+var RDSInstanceFindingReasonCode_DB_CLUSTER_WRITER_UNDER_PROVISIONED = &handles[1428]
+var RDSInstanceFindingReasonCode_MEMORY_UNDER_PROVISIONED = &handles[1429]
+var RDSInstanceFindingReasonCode_INSTANCE_STORAGE_READ_IOPS_UNDER_PROVISIONED = &handles[1430]
+var RDSInstanceFindingReasonCode_INSTANCE_STORAGE_WRITE_IOPS_UNDER_PROVISIONED = &handles[1431]
+
+var _RDSInstanceFindingReasonCodes = &handles[1432]
+var _RDSInstanceFindingReasonCodes_member = &handles[1433]
+
+var RDSInstanceSavingsOpportunityAfterDiscounts = &handles[1434]
+var RDSInstanceSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = &handles[1435]
+var RDSInstanceSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = &handles[1436]
+
+var RDSSavingsEstimationMode = &handles[1437]
+var RDSSavingsEstimationMode_source = &handles[1438]
+
+var RDSSavingsEstimationModeSource = &handles[1439]
+var RDSSavingsEstimationModeSource_PUBLIC_PRICING = &handles[1440]
+var RDSSavingsEstimationModeSource_COST_EXPLORER_RIGHTSIZING = &handles[1441]
+var RDSSavingsEstimationModeSource_COST_OPTIMIZATION_HUB = &handles[1442]
+
+var RDSStorageEstimatedMonthlySavings = &handles[1443]
+var RDSStorageEstimatedMonthlySavings_currency = &handles[1444]
+var RDSStorageEstimatedMonthlySavings_value = &handles[1445]
+
+var RDSStorageFinding = &handles[1446]
+var RDSStorageFinding_OPTIMIZED = &handles[1447]
+var RDSStorageFinding_UNDER_PROVISIONED = &handles[1448]
+var RDSStorageFinding_OVER_PROVISIONED = &handles[1449]
+var RDSStorageFinding_NOT_OPTIMIZED = &handles[1450]
+
+var RDSStorageFindingReasonCode = &handles[1451]
+var RDSStorageFindingReasonCode_EBS_VOLUME_ALLOCATED_STORAGE_UNDER_PROVISIONED = &handles[1452]
+var RDSStorageFindingReasonCode_EBS_VOLUME_THROUGHPUT_UNDER_PROVISIONED = &handles[1453]
+var RDSStorageFindingReasonCode_EBS_VOLUME_IOPS_OVER_PROVISIONED = &handles[1454]
+var RDSStorageFindingReasonCode_EBS_VOLUME_THROUGHPUT_OVER_PROVISIONED = &handles[1455]
+var RDSStorageFindingReasonCode_NEW_GENERATION_STORAGE_TYPE_AVAILABLE = &handles[1456]
+var RDSStorageFindingReasonCode_DB_CLUSTER_STORAGE_OPTION_AVAILABLE = &handles[1457]
+var RDSStorageFindingReasonCode_DB_CLUSTER_STORAGE_SAVINGS_AVAILABLE = &handles[1458]
+
+var _RDSStorageFindingReasonCodes = &handles[1459]
+var _RDSStorageFindingReasonCodes_member = &handles[1460]
+
+var RDSStorageSavingsOpportunityAfterDiscounts = &handles[1461]
+var RDSStorageSavingsOpportunityAfterDiscounts_savingsOpportunityPercentage = &handles[1462]
+var RDSStorageSavingsOpportunityAfterDiscounts_estimatedMonthlySavings = &handles[1463]
+
+var _ReasonCodeSummaries = &handles[1464]
+var _ReasonCodeSummaries_member = &handles[1465]
+
+var ReasonCodeSummary = &handles[1466]
+var ReasonCodeSummary_name = &handles[1467]
+var ReasonCodeSummary_value = &handles[1468]
+
+var RecommendationExportJob = &handles[1469]
+var RecommendationExportJob_jobId = &handles[1470]
+var RecommendationExportJob_destination = &handles[1471]
+var RecommendationExportJob_resourceType = &handles[1472]
+var RecommendationExportJob_status = &handles[1473]
+var RecommendationExportJob_creationTimestamp = &handles[1474]
+var RecommendationExportJob_lastUpdatedTimestamp = &handles[1475]
+var RecommendationExportJob_failureReason = &handles[1476]
+
+var _RecommendationExportJobs = &handles[1477]
+var _RecommendationExportJobs_member = &handles[1478]
+
+var _RecommendationOptions = &handles[1479]
+var _RecommendationOptions_member = &handles[1480]
+
+var RecommendationPreferenceName = &handles[1481]
+var RecommendationPreferenceName_ENHANCED_INFRASTRUCTURE_METRICS = &handles[1482]
+var RecommendationPreferenceName_INFERRED_WORKLOAD_TYPES = &handles[1483]
+var RecommendationPreferenceName_EXTERNAL_METRICS_PREFERENCE = &handles[1484]
+var RecommendationPreferenceName_LOOKBACK_PERIOD_PREFERENCE = &handles[1485]
+var RecommendationPreferenceName_PREFERRED_RESOURCES = &handles[1486]
+var RecommendationPreferenceName_UTILIZATION_PREFERENCES = &handles[1487]
+
+var _RecommendationPreferenceNames = &handles[1488]
+var _RecommendationPreferenceNames_member = &handles[1489]
+
+var RecommendationPreferences = &handles[1490]
+var RecommendationPreferences_cpuVendorArchitectures = &handles[1491]
+
+var RecommendationPreferencesDetail = &handles[1492]
+var RecommendationPreferencesDetail_scope = &handles[1493]
+var RecommendationPreferencesDetail_resourceType = &handles[1494]
+var RecommendationPreferencesDetail_enhancedInfrastructureMetrics = &handles[1495]
+var RecommendationPreferencesDetail_inferredWorkloadTypes = &handles[1496]
+var RecommendationPreferencesDetail_externalMetricsPreference = &handles[1497]
+var RecommendationPreferencesDetail_lookBackPeriod = &handles[1498]
+var RecommendationPreferencesDetail_utilizationPreferences = &handles[1499]
+var RecommendationPreferencesDetail_preferredResources = &handles[1500]
+var RecommendationPreferencesDetail_savingsEstimationMode = &handles[1501]
+
+var _RecommendationPreferencesDetails = &handles[1502]
+var _RecommendationPreferencesDetails_member = &handles[1503]
+
+var RecommendationSource = &handles[1504]
+var RecommendationSource_recommendationSourceArn = &handles[1505]
+var RecommendationSource_recommendationSourceType = &handles[1506]
+
+var _RecommendationSourceArn = &handles[1507]
+
+var _RecommendationSources = &handles[1508]
+var _RecommendationSources_member = &handles[1509]
+
+var RecommendationSourceType = &handles[1510]
+var RecommendationSourceType_EC2_INSTANCE = &handles[1511]
+var RecommendationSourceType_AUTO_SCALING_GROUP = &handles[1512]
+var RecommendationSourceType_EBS_VOLUME = &handles[1513]
+var RecommendationSourceType_LAMBDA_FUNCTION = &handles[1514]
+var RecommendationSourceType_ECS_SERVICE = &handles[1515]
+var RecommendationSourceType_LICENSE = &handles[1516]
+var RecommendationSourceType_RDS_DB_INSTANCE = &handles[1517]
+var RecommendationSourceType_RDS_DB_INSTANCE_STORAGE = &handles[1518]
+var RecommendationSourceType_AURORA_DB_CLUSTER_STORAGE = &handles[1519]
+var RecommendationSourceType_NAT_GATEWAY = &handles[1520]
+var RecommendationSourceType_DYNAMO_DB_TABLE = &handles[1521]
+var RecommendationSourceType_ELASTI_CACHE_CLUSTER = &handles[1522]
+var RecommendationSourceType_MEMORY_DB_CLUSTER = &handles[1523]
+var RecommendationSourceType_DOCUMENT_DB_CLUSTER = &handles[1524]
+var RecommendationSourceType_WORKSPACES = &handles[1525]
+var RecommendationSourceType_SAGE_MAKER_ENDPOINT = &handles[1526]
+
+var _RecommendationSummaries = &handles[1527]
+var _RecommendationSummaries_member = &handles[1528]
+
+var RecommendationSummary = &handles[1529]
+var RecommendationSummary_summaries = &handles[1530]
+var RecommendationSummary_idleSummaries = &handles[1531]
+var RecommendationSummary_recommendationResourceType = &handles[1532]
+var RecommendationSummary_accountId = &handles[1533]
+var RecommendationSummary_savingsOpportunity = &handles[1534]
+var RecommendationSummary_idleSavingsOpportunity = &handles[1535]
+var RecommendationSummary_aggregatedSavingsOpportunity = &handles[1536]
+var RecommendationSummary_currentPerformanceRiskRatings = &handles[1537]
+var RecommendationSummary_inferredWorkloadSavings = &handles[1538]
+
+var _RecommendedDBInstanceClass = &handles[1539]
+
+var _RecommendedInstanceType = &handles[1540]
+
+var RecommendedOptionProjectedMetric = &handles[1541]
+var RecommendedOptionProjectedMetric_recommendedInstanceType = &handles[1542]
+var RecommendedOptionProjectedMetric_rank = &handles[1543]
+var RecommendedOptionProjectedMetric_projectedMetrics = &handles[1544]
+
+var _RecommendedOptionProjectedMetrics = &handles[1545]
+var _RecommendedOptionProjectedMetrics_member = &handles[1546]
+
+var _ResourceArn = &handles[1547]
+
+var _ResourceArns = &handles[1548]
+var _ResourceArns_member = &handles[1549]
+
+var _ResourceId = &handles[1550]
+
+var ResourceNotFoundException = &handles[1551]
+var ResourceNotFoundException_message = &handles[1552]
+
+var ResourceType = &handles[1553]
+var ResourceType_EC2_INSTANCE = &handles[1554]
+var ResourceType_AUTO_SCALING_GROUP = &handles[1555]
+var ResourceType_EBS_VOLUME = &handles[1556]
+var ResourceType_LAMBDA_FUNCTION = &handles[1557]
+var ResourceType_NOT_APPLICABLE = &handles[1558]
+var ResourceType_ECS_SERVICE = &handles[1559]
+var ResourceType_LICENSE = &handles[1560]
+var ResourceType_RDS_DB_INSTANCE = &handles[1561]
+var ResourceType_AURORA_DB_CLUSTER_STORAGE = &handles[1562]
+var ResourceType_IDLE = &handles[1563]
+
+var _RootVolume = &handles[1564]
+
+var S3Destination = &handles[1565]
+var S3Destination_bucket = &handles[1566]
+var S3Destination_key = &handles[1567]
+var S3Destination_metadataKey = &handles[1568]
+
+var S3DestinationConfig = &handles[1569]
+var S3DestinationConfig_bucket = &handles[1570]
+var S3DestinationConfig_keyPrefix = &handles[1571]
+
+var SavingsEstimationMode = &handles[1572]
+var SavingsEstimationMode_AFTER_DISCOUNTS = &handles[1573]
+var SavingsEstimationMode_BEFORE_DISCOUNTS = &handles[1574]
+
+var SavingsOpportunity = &handles[1575]
+var SavingsOpportunity_savingsOpportunityPercentage = &handles[1576]
+var SavingsOpportunity_estimatedMonthlySavings = &handles[1577]
+
+var _SavingsOpportunityPercentage = &handles[1578]
+
+var Scope = &handles[1579]
+var Scope_name = &handles[1580]
+var Scope_value = &handles[1581]
+
+var ScopeName = &handles[1582]
+var ScopeName_ORGANIZATION = &handles[1583]
+var ScopeName_ACCOUNT_ID = &handles[1584]
+var ScopeName_RESOURCE_ARN = &handles[1585]
+
+var _ScopeValue = &handles[1586]
+
+var _ServiceArn = &handles[1587]
+
+var _ServiceArns = &handles[1588]
+var _ServiceArns_member = &handles[1589]
+
+var ServiceConfiguration = &handles[1590]
+var ServiceConfiguration_memory = &handles[1591]
+var ServiceConfiguration_cpu = &handles[1592]
+var ServiceConfiguration_containerConfigurations = &handles[1593]
+var ServiceConfiguration_autoScalingConfiguration = &handles[1594]
+var ServiceConfiguration_taskDefinitionArn = &handles[1595]
+
+var ServiceUnavailableException = &handles[1596]
+var ServiceUnavailableException_message = &handles[1597]
+
+var Status = &handles[1598]
+var Status_ACTIVE = &handles[1599]
+var Status_INACTIVE = &handles[1600]
+var Status_PENDING = &handles[1601]
+var Status_FAILED = &handles[1602]
+
+var _StatusReason = &handles[1603]
+
+var _StorageType = &handles[1604]
+
+var _Summaries = &handles[1605]
+var _Summaries_member = &handles[1606]
+
+var Summary = &handles[1607]
+var Summary_name = &handles[1608]
+var Summary_value = &handles[1609]
+var Summary_reasonCodeSummaries = &handles[1610]
+
+var _SummaryValue = &handles[1611]
+
+var Tag = &handles[1612]
+var Tag_key = &handles[1613]
+var Tag_value = &handles[1614]
+
+var _TagKey = &handles[1615]
+
+var _Tags = &handles[1616]
+var _Tags_member = &handles[1617]
+
+var _TagValue = &handles[1618]
+
+var _TaskDefinitionArn = &handles[1619]
+
+var ThrottlingException = &handles[1620]
+var ThrottlingException_message = &handles[1621]
+
+var _Timestamp = &handles[1622]
+
+var _Timestamps = &handles[1623]
+var _Timestamps_member = &handles[1624]
+
+var _UpperBoundValue = &handles[1625]
+
+var UtilizationMetric = &handles[1626]
+var UtilizationMetric_name = &handles[1627]
+var UtilizationMetric_statistic = &handles[1628]
+var UtilizationMetric_value = &handles[1629]
+
+var _UtilizationMetrics = &handles[1630]
+var _UtilizationMetrics_member = &handles[1631]
+
+var UtilizationPreference = &handles[1632]
+var UtilizationPreference_metricName = &handles[1633]
+var UtilizationPreference_metricParameters = &handles[1634]
+
+var _UtilizationPreferences = &handles[1635]
+var _UtilizationPreferences_member = &handles[1636]
+
+var _Value = &handles[1637]
+
+var _VeryLow = &handles[1638]
+
+var _VolumeArn = &handles[1639]
+
+var _VolumeArns = &handles[1640]
+var _VolumeArns_member = &handles[1641]
+
+var _VolumeBaselineIOPS = &handles[1642]
+
+var _VolumeBaselineThroughput = &handles[1643]
+
+var _VolumeBurstIOPS = &handles[1644]
+
+var _VolumeBurstThroughput = &handles[1645]
+
+var VolumeConfiguration = &handles[1646]
+var VolumeConfiguration_volumeType = &handles[1647]
+var VolumeConfiguration_volumeSize = &handles[1648]
+var VolumeConfiguration_volumeBaselineIOPS = &handles[1649]
+var VolumeConfiguration_volumeBurstIOPS = &handles[1650]
+var VolumeConfiguration_volumeBaselineThroughput = &handles[1651]
+var VolumeConfiguration_volumeBurstThroughput = &handles[1652]
+var VolumeConfiguration_rootVolume = &handles[1653]
+
+var VolumeRecommendation = &handles[1654]
+var VolumeRecommendation_volumeArn = &handles[1655]
+var VolumeRecommendation_accountId = &handles[1656]
+var VolumeRecommendation_currentConfiguration = &handles[1657]
+var VolumeRecommendation_finding = &handles[1658]
+var VolumeRecommendation_utilizationMetrics = &handles[1659]
+var VolumeRecommendation_lookBackPeriodInDays = &handles[1660]
+var VolumeRecommendation_volumeRecommendationOptions = &handles[1661]
+var VolumeRecommendation_lastRefreshTimestamp = &handles[1662]
+var VolumeRecommendation_currentPerformanceRisk = &handles[1663]
+var VolumeRecommendation_effectiveRecommendationPreferences = &handles[1664]
+var VolumeRecommendation_tags = &handles[1665]
+
+var VolumeRecommendationOption = &handles[1666]
+var VolumeRecommendationOption_configuration = &handles[1667]
+var VolumeRecommendationOption_performanceRisk = &handles[1668]
+var VolumeRecommendationOption_rank = &handles[1669]
+var VolumeRecommendationOption_savingsOpportunity = &handles[1670]
+var VolumeRecommendationOption_savingsOpportunityAfterDiscounts = &handles[1671]
+
+var _VolumeRecommendationOptions = &handles[1672]
+var _VolumeRecommendationOptions_member = &handles[1673]
+
+var _VolumeRecommendations = &handles[1674]
+var _VolumeRecommendations_member = &handles[1675]
+
+var _VolumeSize = &handles[1676]
+
+var _VolumeType = &handles[1677]
+
+var DeleteRecommendationPreferencesRequest = &handles[1678]
+var DeleteRecommendationPreferencesRequest_resourceType = &handles[1679]
+var DeleteRecommendationPreferencesRequest_scope = &handles[1680]
+var DeleteRecommendationPreferencesRequest_recommendationPreferenceNames = &handles[1681]
+
+var DeleteRecommendationPreferencesResponse = &handles[1682]
+
+var DescribeRecommendationExportJobsRequest = &handles[1683]
+var DescribeRecommendationExportJobsRequest_jobIds = &handles[1684]
+var DescribeRecommendationExportJobsRequest_filters = &handles[1685]
+var DescribeRecommendationExportJobsRequest_nextToken = &handles[1686]
+var DescribeRecommendationExportJobsRequest_maxResults = &handles[1687]
+
+var DescribeRecommendationExportJobsResponse = &handles[1688]
+var DescribeRecommendationExportJobsResponse_recommendationExportJobs = &handles[1689]
+var DescribeRecommendationExportJobsResponse_nextToken = &handles[1690]
+
+var ExportAutoScalingGroupRecommendationsRequest = &handles[1691]
+var ExportAutoScalingGroupRecommendationsRequest_accountIds = &handles[1692]
+var ExportAutoScalingGroupRecommendationsRequest_filters = &handles[1693]
+var ExportAutoScalingGroupRecommendationsRequest_fieldsToExport = &handles[1694]
+var ExportAutoScalingGroupRecommendationsRequest_s3DestinationConfig = &handles[1695]
+var ExportAutoScalingGroupRecommendationsRequest_fileFormat = &handles[1696]
+var ExportAutoScalingGroupRecommendationsRequest_includeMemberAccounts = &handles[1697]
+var ExportAutoScalingGroupRecommendationsRequest_recommendationPreferences = &handles[1698]
+
+var ExportAutoScalingGroupRecommendationsResponse = &handles[1699]
+var ExportAutoScalingGroupRecommendationsResponse_jobId = &handles[1700]
+var ExportAutoScalingGroupRecommendationsResponse_s3Destination = &handles[1701]
+
+var ExportEBSVolumeRecommendationsRequest = &handles[1702]
+var ExportEBSVolumeRecommendationsRequest_accountIds = &handles[1703]
+var ExportEBSVolumeRecommendationsRequest_filters = &handles[1704]
+var ExportEBSVolumeRecommendationsRequest_fieldsToExport = &handles[1705]
+var ExportEBSVolumeRecommendationsRequest_s3DestinationConfig = &handles[1706]
+var ExportEBSVolumeRecommendationsRequest_fileFormat = &handles[1707]
+var ExportEBSVolumeRecommendationsRequest_includeMemberAccounts = &handles[1708]
+
+var ExportEBSVolumeRecommendationsResponse = &handles[1709]
+var ExportEBSVolumeRecommendationsResponse_jobId = &handles[1710]
+var ExportEBSVolumeRecommendationsResponse_s3Destination = &handles[1711]
+
+var ExportEC2InstanceRecommendationsRequest = &handles[1712]
+var ExportEC2InstanceRecommendationsRequest_accountIds = &handles[1713]
+var ExportEC2InstanceRecommendationsRequest_filters = &handles[1714]
+var ExportEC2InstanceRecommendationsRequest_fieldsToExport = &handles[1715]
+var ExportEC2InstanceRecommendationsRequest_s3DestinationConfig = &handles[1716]
+var ExportEC2InstanceRecommendationsRequest_fileFormat = &handles[1717]
+var ExportEC2InstanceRecommendationsRequest_includeMemberAccounts = &handles[1718]
+var ExportEC2InstanceRecommendationsRequest_recommendationPreferences = &handles[1719]
+
+var ExportEC2InstanceRecommendationsResponse = &handles[1720]
+var ExportEC2InstanceRecommendationsResponse_jobId = &handles[1721]
+var ExportEC2InstanceRecommendationsResponse_s3Destination = &handles[1722]
+
+var ExportECSServiceRecommendationsRequest = &handles[1723]
+var ExportECSServiceRecommendationsRequest_accountIds = &handles[1724]
+var ExportECSServiceRecommendationsRequest_filters = &handles[1725]
+var ExportECSServiceRecommendationsRequest_fieldsToExport = &handles[1726]
+var ExportECSServiceRecommendationsRequest_s3DestinationConfig = &handles[1727]
+var ExportECSServiceRecommendationsRequest_fileFormat = &handles[1728]
+var ExportECSServiceRecommendationsRequest_includeMemberAccounts = &handles[1729]
+
+var ExportECSServiceRecommendationsResponse = &handles[1730]
+var ExportECSServiceRecommendationsResponse_jobId = &handles[1731]
+var ExportECSServiceRecommendationsResponse_s3Destination = &handles[1732]
+
+var ExportIdleRecommendationsRequest = &handles[1733]
+var ExportIdleRecommendationsRequest_accountIds = &handles[1734]
+var ExportIdleRecommendationsRequest_filters = &handles[1735]
+var ExportIdleRecommendationsRequest_fieldsToExport = &handles[1736]
+var ExportIdleRecommendationsRequest_s3DestinationConfig = &handles[1737]
+var ExportIdleRecommendationsRequest_fileFormat = &handles[1738]
+var ExportIdleRecommendationsRequest_includeMemberAccounts = &handles[1739]
+
+var ExportIdleRecommendationsResponse = &handles[1740]
+var ExportIdleRecommendationsResponse_jobId = &handles[1741]
+var ExportIdleRecommendationsResponse_s3Destination = &handles[1742]
+
+var ExportLambdaFunctionRecommendationsRequest = &handles[1743]
+var ExportLambdaFunctionRecommendationsRequest_accountIds = &handles[1744]
+var ExportLambdaFunctionRecommendationsRequest_filters = &handles[1745]
+var ExportLambdaFunctionRecommendationsRequest_fieldsToExport = &handles[1746]
+var ExportLambdaFunctionRecommendationsRequest_s3DestinationConfig = &handles[1747]
+var ExportLambdaFunctionRecommendationsRequest_fileFormat = &handles[1748]
+var ExportLambdaFunctionRecommendationsRequest_includeMemberAccounts = &handles[1749]
+
+var ExportLambdaFunctionRecommendationsResponse = &handles[1750]
+var ExportLambdaFunctionRecommendationsResponse_jobId = &handles[1751]
+var ExportLambdaFunctionRecommendationsResponse_s3Destination = &handles[1752]
+
+var ExportLicenseRecommendationsRequest = &handles[1753]
+var ExportLicenseRecommendationsRequest_accountIds = &handles[1754]
+var ExportLicenseRecommendationsRequest_filters = &handles[1755]
+var ExportLicenseRecommendationsRequest_fieldsToExport = &handles[1756]
+var ExportLicenseRecommendationsRequest_s3DestinationConfig = &handles[1757]
+var ExportLicenseRecommendationsRequest_fileFormat = &handles[1758]
+var ExportLicenseRecommendationsRequest_includeMemberAccounts = &handles[1759]
+
+var ExportLicenseRecommendationsResponse = &handles[1760]
+var ExportLicenseRecommendationsResponse_jobId = &handles[1761]
+var ExportLicenseRecommendationsResponse_s3Destination = &handles[1762]
+
+var ExportRDSDatabaseRecommendationsRequest = &handles[1763]
+var ExportRDSDatabaseRecommendationsRequest_accountIds = &handles[1764]
+var ExportRDSDatabaseRecommendationsRequest_filters = &handles[1765]
+var ExportRDSDatabaseRecommendationsRequest_fieldsToExport = &handles[1766]
+var ExportRDSDatabaseRecommendationsRequest_s3DestinationConfig = &handles[1767]
+var ExportRDSDatabaseRecommendationsRequest_fileFormat = &handles[1768]
+var ExportRDSDatabaseRecommendationsRequest_includeMemberAccounts = &handles[1769]
+var ExportRDSDatabaseRecommendationsRequest_recommendationPreferences = &handles[1770]
+
+var ExportRDSDatabaseRecommendationsResponse = &handles[1771]
+var ExportRDSDatabaseRecommendationsResponse_jobId = &handles[1772]
+var ExportRDSDatabaseRecommendationsResponse_s3Destination = &handles[1773]
+
+var GetAutoScalingGroupRecommendationsRequest = &handles[1774]
+var GetAutoScalingGroupRecommendationsRequest_accountIds = &handles[1775]
+var GetAutoScalingGroupRecommendationsRequest_autoScalingGroupArns = &handles[1776]
+var GetAutoScalingGroupRecommendationsRequest_nextToken = &handles[1777]
+var GetAutoScalingGroupRecommendationsRequest_maxResults = &handles[1778]
+var GetAutoScalingGroupRecommendationsRequest_filters = &handles[1779]
+var GetAutoScalingGroupRecommendationsRequest_recommendationPreferences = &handles[1780]
+
+var GetAutoScalingGroupRecommendationsResponse = &handles[1781]
+var GetAutoScalingGroupRecommendationsResponse_nextToken = &handles[1782]
+var GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations = &handles[1783]
+var GetAutoScalingGroupRecommendationsResponse_errors = &handles[1784]
+
+var GetEBSVolumeRecommendationsRequest = &handles[1785]
+var GetEBSVolumeRecommendationsRequest_volumeArns = &handles[1786]
+var GetEBSVolumeRecommendationsRequest_nextToken = &handles[1787]
+var GetEBSVolumeRecommendationsRequest_maxResults = &handles[1788]
+var GetEBSVolumeRecommendationsRequest_filters = &handles[1789]
+var GetEBSVolumeRecommendationsRequest_accountIds = &handles[1790]
+
+var GetEBSVolumeRecommendationsResponse = &handles[1791]
+var GetEBSVolumeRecommendationsResponse_nextToken = &handles[1792]
+var GetEBSVolumeRecommendationsResponse_volumeRecommendations = &handles[1793]
+var GetEBSVolumeRecommendationsResponse_errors = &handles[1794]
+
+var GetEC2InstanceRecommendationsRequest = &handles[1795]
+var GetEC2InstanceRecommendationsRequest_instanceArns = &handles[1796]
+var GetEC2InstanceRecommendationsRequest_nextToken = &handles[1797]
+var GetEC2InstanceRecommendationsRequest_maxResults = &handles[1798]
+var GetEC2InstanceRecommendationsRequest_filters = &handles[1799]
+var GetEC2InstanceRecommendationsRequest_accountIds = &handles[1800]
+var GetEC2InstanceRecommendationsRequest_recommendationPreferences = &handles[1801]
+
+var GetEC2InstanceRecommendationsResponse = &handles[1802]
+var GetEC2InstanceRecommendationsResponse_nextToken = &handles[1803]
+var GetEC2InstanceRecommendationsResponse_instanceRecommendations = &handles[1804]
+var GetEC2InstanceRecommendationsResponse_errors = &handles[1805]
+
+var GetEC2RecommendationProjectedMetricsRequest = &handles[1806]
+var GetEC2RecommendationProjectedMetricsRequest_instanceArn = &handles[1807]
+var GetEC2RecommendationProjectedMetricsRequest_stat = &handles[1808]
+var GetEC2RecommendationProjectedMetricsRequest_period = &handles[1809]
+var GetEC2RecommendationProjectedMetricsRequest_startTime = &handles[1810]
+var GetEC2RecommendationProjectedMetricsRequest_endTime = &handles[1811]
+var GetEC2RecommendationProjectedMetricsRequest_recommendationPreferences = &handles[1812]
+
+var GetEC2RecommendationProjectedMetricsResponse = &handles[1813]
+var GetEC2RecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics = &handles[1814]
+
+var GetECSServiceRecommendationProjectedMetricsRequest = &handles[1815]
+var GetECSServiceRecommendationProjectedMetricsRequest_serviceArn = &handles[1816]
+var GetECSServiceRecommendationProjectedMetricsRequest_stat = &handles[1817]
+var GetECSServiceRecommendationProjectedMetricsRequest_period = &handles[1818]
+var GetECSServiceRecommendationProjectedMetricsRequest_startTime = &handles[1819]
+var GetECSServiceRecommendationProjectedMetricsRequest_endTime = &handles[1820]
+
+var GetECSServiceRecommendationProjectedMetricsResponse = &handles[1821]
+var GetECSServiceRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics = &handles[1822]
+
+var GetECSServiceRecommendationsRequest = &handles[1823]
+var GetECSServiceRecommendationsRequest_serviceArns = &handles[1824]
+var GetECSServiceRecommendationsRequest_nextToken = &handles[1825]
+var GetECSServiceRecommendationsRequest_maxResults = &handles[1826]
+var GetECSServiceRecommendationsRequest_filters = &handles[1827]
+var GetECSServiceRecommendationsRequest_accountIds = &handles[1828]
+
+var GetECSServiceRecommendationsResponse = &handles[1829]
+var GetECSServiceRecommendationsResponse_nextToken = &handles[1830]
+var GetECSServiceRecommendationsResponse_ecsServiceRecommendations = &handles[1831]
+var GetECSServiceRecommendationsResponse_errors = &handles[1832]
+
+var GetEffectiveRecommendationPreferencesRequest = &handles[1833]
+var GetEffectiveRecommendationPreferencesRequest_resourceArn = &handles[1834]
+
+var GetEffectiveRecommendationPreferencesResponse = &handles[1835]
+var GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics = &handles[1836]
+var GetEffectiveRecommendationPreferencesResponse_externalMetricsPreference = &handles[1837]
+var GetEffectiveRecommendationPreferencesResponse_lookBackPeriod = &handles[1838]
+var GetEffectiveRecommendationPreferencesResponse_utilizationPreferences = &handles[1839]
+var GetEffectiveRecommendationPreferencesResponse_preferredResources = &handles[1840]
+
+var GetEnrollmentStatusesForOrganizationRequest = &handles[1841]
+var GetEnrollmentStatusesForOrganizationRequest_filters = &handles[1842]
+var GetEnrollmentStatusesForOrganizationRequest_nextToken = &handles[1843]
+var GetEnrollmentStatusesForOrganizationRequest_maxResults = &handles[1844]
+
+var GetEnrollmentStatusesForOrganizationResponse = &handles[1845]
+var GetEnrollmentStatusesForOrganizationResponse_accountEnrollmentStatuses = &handles[1846]
+var GetEnrollmentStatusesForOrganizationResponse_nextToken = &handles[1847]
+
+var GetEnrollmentStatusRequest = &handles[1848]
+
+var GetEnrollmentStatusResponse = &handles[1849]
+var GetEnrollmentStatusResponse_status = &handles[1850]
+var GetEnrollmentStatusResponse_statusReason = &handles[1851]
+var GetEnrollmentStatusResponse_memberAccountsEnrolled = &handles[1852]
+var GetEnrollmentStatusResponse_lastUpdatedTimestamp = &handles[1853]
+var GetEnrollmentStatusResponse_numberOfMemberAccountsOptedIn = &handles[1854]
+
+var GetIdleRecommendationsRequest = &handles[1855]
+var GetIdleRecommendationsRequest_resourceArns = &handles[1856]
+var GetIdleRecommendationsRequest_nextToken = &handles[1857]
+var GetIdleRecommendationsRequest_maxResults = &handles[1858]
+var GetIdleRecommendationsRequest_filters = &handles[1859]
+var GetIdleRecommendationsRequest_accountIds = &handles[1860]
+var GetIdleRecommendationsRequest_orderBy = &handles[1861]
+
+var GetIdleRecommendationsResponse = &handles[1862]
+var GetIdleRecommendationsResponse_nextToken = &handles[1863]
+var GetIdleRecommendationsResponse_idleRecommendations = &handles[1864]
+var GetIdleRecommendationsResponse_errors = &handles[1865]
+
+var GetLambdaFunctionRecommendationsRequest = &handles[1866]
+var GetLambdaFunctionRecommendationsRequest_functionArns = &handles[1867]
+var GetLambdaFunctionRecommendationsRequest_accountIds = &handles[1868]
+var GetLambdaFunctionRecommendationsRequest_filters = &handles[1869]
+var GetLambdaFunctionRecommendationsRequest_nextToken = &handles[1870]
+var GetLambdaFunctionRecommendationsRequest_maxResults = &handles[1871]
+
+var GetLambdaFunctionRecommendationsResponse = &handles[1872]
+var GetLambdaFunctionRecommendationsResponse_nextToken = &handles[1873]
+var GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations = &handles[1874]
+
+var GetLicenseRecommendationsRequest = &handles[1875]
+var GetLicenseRecommendationsRequest_resourceArns = &handles[1876]
+var GetLicenseRecommendationsRequest_nextToken = &handles[1877]
+var GetLicenseRecommendationsRequest_maxResults = &handles[1878]
+var GetLicenseRecommendationsRequest_filters = &handles[1879]
+var GetLicenseRecommendationsRequest_accountIds = &handles[1880]
+
+var GetLicenseRecommendationsResponse = &handles[1881]
+var GetLicenseRecommendationsResponse_nextToken = &handles[1882]
+var GetLicenseRecommendationsResponse_licenseRecommendations = &handles[1883]
+var GetLicenseRecommendationsResponse_errors = &handles[1884]
+
+var GetRDSDatabaseRecommendationProjectedMetricsRequest = &handles[1885]
+var GetRDSDatabaseRecommendationProjectedMetricsRequest_resourceArn = &handles[1886]
+var GetRDSDatabaseRecommendationProjectedMetricsRequest_stat = &handles[1887]
+var GetRDSDatabaseRecommendationProjectedMetricsRequest_period = &handles[1888]
+var GetRDSDatabaseRecommendationProjectedMetricsRequest_startTime = &handles[1889]
+var GetRDSDatabaseRecommendationProjectedMetricsRequest_endTime = &handles[1890]
+var GetRDSDatabaseRecommendationProjectedMetricsRequest_recommendationPreferences = &handles[1891]
+
+var GetRDSDatabaseRecommendationProjectedMetricsResponse = &handles[1892]
+var GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics = &handles[1893]
+
+var GetRDSDatabaseRecommendationsRequest = &handles[1894]
+var GetRDSDatabaseRecommendationsRequest_resourceArns = &handles[1895]
+var GetRDSDatabaseRecommendationsRequest_nextToken = &handles[1896]
+var GetRDSDatabaseRecommendationsRequest_maxResults = &handles[1897]
+var GetRDSDatabaseRecommendationsRequest_filters = &handles[1898]
+var GetRDSDatabaseRecommendationsRequest_accountIds = &handles[1899]
+var GetRDSDatabaseRecommendationsRequest_recommendationPreferences = &handles[1900]
+
+var GetRDSDatabaseRecommendationsResponse = &handles[1901]
+var GetRDSDatabaseRecommendationsResponse_nextToken = &handles[1902]
+var GetRDSDatabaseRecommendationsResponse_rdsDBRecommendations = &handles[1903]
+var GetRDSDatabaseRecommendationsResponse_errors = &handles[1904]
+
+var GetRecommendationPreferencesRequest = &handles[1905]
+var GetRecommendationPreferencesRequest_resourceType = &handles[1906]
+var GetRecommendationPreferencesRequest_scope = &handles[1907]
+var GetRecommendationPreferencesRequest_nextToken = &handles[1908]
+var GetRecommendationPreferencesRequest_maxResults = &handles[1909]
+
+var GetRecommendationPreferencesResponse = &handles[1910]
+var GetRecommendationPreferencesResponse_nextToken = &handles[1911]
+var GetRecommendationPreferencesResponse_recommendationPreferencesDetails = &handles[1912]
+
+var GetRecommendationSummariesRequest = &handles[1913]
+var GetRecommendationSummariesRequest_accountIds = &handles[1914]
+var GetRecommendationSummariesRequest_nextToken = &handles[1915]
+var GetRecommendationSummariesRequest_maxResults = &handles[1916]
+
+var GetRecommendationSummariesResponse = &handles[1917]
+var GetRecommendationSummariesResponse_nextToken = &handles[1918]
+var GetRecommendationSummariesResponse_recommendationSummaries = &handles[1919]
+
+var PutRecommendationPreferencesRequest = &handles[1920]
+var PutRecommendationPreferencesRequest_resourceType = &handles[1921]
+var PutRecommendationPreferencesRequest_scope = &handles[1922]
+var PutRecommendationPreferencesRequest_enhancedInfrastructureMetrics = &handles[1923]
+var PutRecommendationPreferencesRequest_inferredWorkloadTypes = &handles[1924]
+var PutRecommendationPreferencesRequest_externalMetricsPreference = &handles[1925]
+var PutRecommendationPreferencesRequest_lookBackPeriod = &handles[1926]
+var PutRecommendationPreferencesRequest_utilizationPreferences = &handles[1927]
+var PutRecommendationPreferencesRequest_preferredResources = &handles[1928]
+var PutRecommendationPreferencesRequest_savingsEstimationMode = &handles[1929]
+
+var PutRecommendationPreferencesResponse = &handles[1930]
+
+var UpdateEnrollmentStatusRequest = &handles[1931]
+var UpdateEnrollmentStatusRequest_status = &handles[1932]
+var UpdateEnrollmentStatusRequest_includeMemberAccounts = &handles[1933]
+
+var UpdateEnrollmentStatusResponse = &handles[1934]
+var UpdateEnrollmentStatusResponse_status = &handles[1935]
+var UpdateEnrollmentStatusResponse_statusReason = &handles[1936]
+
+var ComputeOptimizerService = &smithy.ServiceSchema{Schema: &handles[28], Version: "2019-11-01"}

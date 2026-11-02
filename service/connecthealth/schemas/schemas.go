@@ -4,1715 +4,1502 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ActivateSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ActivateSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}/activate",
-	Code: 200})
-
-var CreateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/domain",
-	Code: 201})
-
-var CreateSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/domains/{domainId}/subscriptions",
-	Code: 201})
-
-var DeactivateSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeactivateSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}/deactivate",
-	Code: 200})
-
-var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeleteDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/domain/{domainId}",
-	Code: 200})
-
-var GetDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/domain/{domainId}",
-	Code: 200})
-
-var GetMedicalScribeListeningSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetMedicalScribeListeningSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/medical-scribe-stream/domain/{domainId}/subscription/{subscriptionId}/session/{sessionId}",
-	Code: 200})
-
-var GetPatientInsightsJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetPatientInsightsJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/domain/{domainId}/patient-insights-job/{jobId}",
-	Code: 200})
-
-var GetSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/domains/{domainId}/subscriptions/{subscriptionId}",
-	Code: 200})
-
-var ListDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/domain",
-	Code: 200})
-
-var ListSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListSubscriptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/domains/{domainId}/subscriptions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var StartMedicalScribeListeningSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartMedicalScribeListeningSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/medical-scribe-stream/",
-	Code: 200})
-
-var StartPatientInsightsJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartPatientInsightsJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/domain/{domainId}/patient-insights-job",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var _ConnectHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ConnectHealth",
-}, smithy.ShapeTypeService, 0)
-
-var ConnectHealth = smithy.NewServiceSchema(_ConnectHealth, "2025-01-29")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var AccessDeniedException_message *smithy.Schema
-
-var ArtifactDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ArtifactDetails",
-}, smithy.ShapeTypeStructure, 3)
-var ArtifactDetails_outputLocation *smithy.Schema
-
-var ArtifactDetails_status *smithy.Schema
-
-var ArtifactDetails_failureReason *smithy.Schema
-
-var _AudioChunk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "AudioChunk",
-}, smithy.ShapeTypeBlob, 0)
-
-var _AudioOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "AudioOffset",
-}, smithy.ShapeTypeDouble, 0)
-
-var ClinicalNoteGenerationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ClinicalNoteGenerationResult",
-}, smithy.ShapeTypeStructure, 3)
-var ClinicalNoteGenerationResult_noteResult *smithy.Schema
-
-var ClinicalNoteGenerationResult_transcriptResult *smithy.Schema
-
-var ClinicalNoteGenerationResult_afterVisitSummaryResult *smithy.Schema
-
-var ClinicalNoteGenerationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ClinicalNoteGenerationSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ClinicalNoteGenerationSettings_noteTemplateSettings *smithy.Schema
-
-var ClinicalNoteGenerationSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ClinicalNoteGenerationSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ClinicalNoteGenerationSettingsResponse_noteTemplateSettings *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CreateWebAppConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateWebAppConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var CreateWebAppConfiguration_ehrRole *smithy.Schema
-
-var CreateWebAppConfiguration_idcInstanceId *smithy.Schema
-
-var CreateWebAppConfiguration_idcRegion *smithy.Schema
-
-var CustomTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CustomTemplate",
-}, smithy.ShapeTypeStructure, 2)
-var CustomTemplate_templateType *smithy.Schema
-
-var CustomTemplate_templateInstructions *smithy.Schema
-
-var CustomTemplateBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CustomTemplateBase",
-}, smithy.ShapeTypeEnum, 6)
-var CustomTemplateBase_HISTORY_AND_PHYSICAL *smithy.Schema
-
-var CustomTemplateBase_GIRPP *smithy.Schema
-
-var CustomTemplateBase_DAP *smithy.Schema
-
-var CustomTemplateBase_SIRP *smithy.Schema
-
-var CustomTemplateBase_BIRP *smithy.Schema
-
-var CustomTemplateBase_BEHAVIORAL_SOAP *smithy.Schema
-
-var CustomTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CustomTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CustomTemplateResponse_templateType *smithy.Schema
-
-var _DomainArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainId",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var DomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DomainStatus_ACTIVE *smithy.Schema
-
-var DomainStatus_DELETING *smithy.Schema
-
-var DomainStatus_DELETED *smithy.Schema
-
-var DomainSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainSummary",
-}, smithy.ShapeTypeStructure, 5)
-var DomainSummary_domainId *smithy.Schema
-
-var DomainSummary_arn *smithy.Schema
-
-var DomainSummary_name *smithy.Schema
-
-var DomainSummary_status *smithy.Schema
-
-var DomainSummary_createdAt *smithy.Schema
-
-var _DomainSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DomainSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DomainSummaryList_member *smithy.Schema
-
-var EncounterContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "EncounterContext",
-}, smithy.ShapeTypeStructure, 1)
-var EncounterContext_unstructuredContext *smithy.Schema
-
-var EncryptionContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "EncryptionContext",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionContext_encryptionType *smithy.Schema
-
-var EncryptionContext_kmsKeyArn *smithy.Schema
-
-var EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionType_AWS_OWNED_KEY *smithy.Schema
-
-var EncryptionType_CUSTOMER_MANAGED_KEY *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FHIRServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "FHIRServer",
-}, smithy.ShapeTypeStructure, 2)
-var FHIRServer_fhirEndpoint *smithy.Schema
-
-var FHIRServer_oauthToken *smithy.Schema
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var InputDataConfig_fhirServer *smithy.Schema
-
-var InputDataConfig_s3Sources *smithy.Schema
-
-var InsightsContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InsightsContext",
-}, smithy.ShapeTypeStructure, 1)
-var InsightsContext_insightsType *smithy.Schema
-
-var InsightsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InsightsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var InsightsOutput_uri *smithy.Schema
-
-var InsightsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InsightsType",
-}, smithy.ShapeTypeEnum, 1)
-var InsightsType_PRE_VISIT *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _JobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "JobArn",
-}, smithy.ShapeTypeString, 0)
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_SUCCEEDED *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var ManagedNoteTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ManagedNoteTemplate",
-}, smithy.ShapeTypeEnum, 7)
-var ManagedNoteTemplate_HISTORY_AND_PHYSICAL *smithy.Schema
-
-var ManagedNoteTemplate_GIRPP *smithy.Schema
-
-var ManagedNoteTemplate_DAP *smithy.Schema
-
-var ManagedNoteTemplate_SIRP *smithy.Schema
-
-var ManagedNoteTemplate_BIRP *smithy.Schema
-
-var ManagedNoteTemplate_BEHAVIORAL_SOAP *smithy.Schema
-
-var ManagedNoteTemplate_PHYSICAL_SOAP *smithy.Schema
-
-var ManagedTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ManagedTemplate",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedTemplate_templateType *smithy.Schema
-
-var ManagedTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ManagedTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedTemplateResponse_templateType *smithy.Schema
-
-var MedicalScribeAudioEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeAudioEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeAudioEvent_audioChunk *smithy.Schema
-
-var MedicalScribeBinaryAudioEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeBinaryAudioEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeBinaryAudioEvent_audioChunk *smithy.Schema
-
-var MedicalScribeChannelDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeChannelDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var MedicalScribeChannelDefinition_channelId *smithy.Schema
-
-var MedicalScribeChannelDefinition_participantRole *smithy.Schema
-
-var _MedicalScribeChannelDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeChannelDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _MedicalScribeChannelDefinitions_member *smithy.Schema
-
-var _MedicalScribeChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeChannelId",
-}, smithy.ShapeTypeInteger, 0)
-
-var MedicalScribeConfigurationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeConfigurationEvent",
-}, smithy.ShapeTypeStructure, 3)
-var MedicalScribeConfigurationEvent_postStreamActionSettings *smithy.Schema
-
-var MedicalScribeConfigurationEvent_channelDefinitions *smithy.Schema
-
-var MedicalScribeConfigurationEvent_encounterContext *smithy.Schema
-
-var MedicalScribeInputStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeInputStream",
-}, smithy.ShapeTypeUnion, 4, &smithytraits.Streaming{})
-var MedicalScribeInputStream_audioEvent *smithy.Schema
-
-var MedicalScribeInputStream_binaryAudioEvent *smithy.Schema
-
-var MedicalScribeInputStream_sessionControlEvent *smithy.Schema
-
-var MedicalScribeInputStream_configurationEvent *smithy.Schema
-
-var MedicalScribeLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeLanguageCode",
-}, smithy.ShapeTypeEnum, 2)
-var MedicalScribeLanguageCode_EN_US *smithy.Schema
-
-var MedicalScribeLanguageCode_MULTI *smithy.Schema
-
-var MedicalScribeListeningSessionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeListeningSessionDetails",
-}, smithy.ShapeTypeStructure, 13)
-var MedicalScribeListeningSessionDetails_sessionId *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_domainId *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_subscriptionId *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_languageCode *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_mediaSampleRateHertz *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_mediaEncoding *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_channelDefinitions *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_postStreamActionSettings *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_postStreamActionResult *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_encounterContextProvided *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_streamStatus *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_streamCreationTime *smithy.Schema
-
-var MedicalScribeListeningSessionDetails_streamEndTime *smithy.Schema
-
-var MedicalScribeMediaEncoding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeMediaEncoding",
-}, smithy.ShapeTypeEnum, 2)
-var MedicalScribeMediaEncoding_PCM *smithy.Schema
-
-var MedicalScribeMediaEncoding_FLAC *smithy.Schema
-
-var _MedicalScribeMediaSampleRateHertz = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeMediaSampleRateHertz",
-}, smithy.ShapeTypeInteger, 0)
-
-var MedicalScribeOutputStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeOutputStream",
-}, smithy.ShapeTypeUnion, 3, &smithytraits.Streaming{})
-var MedicalScribeOutputStream_transcriptEvent *smithy.Schema
-
-var MedicalScribeOutputStream_internalFailureException *smithy.Schema
-
-var MedicalScribeOutputStream_validationException *smithy.Schema
-
-var MedicalScribeParticipantRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeParticipantRole",
-}, smithy.ShapeTypeEnum, 2)
-var MedicalScribeParticipantRole_PATIENT *smithy.Schema
-
-var MedicalScribeParticipantRole_CLINICIAN *smithy.Schema
-
-var MedicalScribePostStreamActionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribePostStreamActionSettings",
-}, smithy.ShapeTypeStructure, 2)
-var MedicalScribePostStreamActionSettings_outputS3Uri *smithy.Schema
-
-var MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings *smithy.Schema
-
-var MedicalScribePostStreamActionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribePostStreamActionSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var MedicalScribePostStreamActionSettingsResponse_outputS3Uri *smithy.Schema
-
-var MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings *smithy.Schema
-
-var MedicalScribePostStreamActionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribePostStreamActionsResult",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult *smithy.Schema
-
-var MedicalScribeSessionControlEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeSessionControlEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeSessionControlEvent_type *smithy.Schema
-
-var MedicalScribeSessionControlEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeSessionControlEventType",
-}, smithy.ShapeTypeEnum, 1)
-var MedicalScribeSessionControlEventType_END_OF_SESSION *smithy.Schema
-
-var MedicalScribeStreamStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeStreamStatus",
-}, smithy.ShapeTypeEnum, 4)
-var MedicalScribeStreamStatus_IN_PROGRESS *smithy.Schema
-
-var MedicalScribeStreamStatus_PAUSED *smithy.Schema
-
-var MedicalScribeStreamStatus_FAILED *smithy.Schema
-
-var MedicalScribeStreamStatus_COMPLETED *smithy.Schema
-
-var MedicalScribeTranscriptEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeTranscriptEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeTranscriptEvent_transcriptSegment *smithy.Schema
-
-var MedicalScribeTranscriptSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "MedicalScribeTranscriptSegment",
-}, smithy.ShapeTypeStructure, 6)
-var MedicalScribeTranscriptSegment_segmentId *smithy.Schema
-
-var MedicalScribeTranscriptSegment_audioBeginOffset *smithy.Schema
-
-var MedicalScribeTranscriptSegment_audioEndOffset *smithy.Schema
-
-var MedicalScribeTranscriptSegment_isPartial *smithy.Schema
-
-var MedicalScribeTranscriptSegment_channelId *smithy.Schema
-
-var MedicalScribeTranscriptSegment_content *smithy.Schema
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonNullBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "NonNullBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var NoteTemplateSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "NoteTemplateSettings",
-}, smithy.ShapeTypeUnion, 2)
-var NoteTemplateSettings_managedTemplate *smithy.Schema
-
-var NoteTemplateSettings_customTemplate *smithy.Schema
-
-var NoteTemplateSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "NoteTemplateSettingsResponse",
-}, smithy.ShapeTypeUnion, 2)
-var NoteTemplateSettingsResponse_managedTemplate *smithy.Schema
-
-var NoteTemplateSettingsResponse_customTemplate *smithy.Schema
-
-var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "OutputDataConfig",
-}, smithy.ShapeTypeStructure, 1)
-var OutputDataConfig_s3OutputPath *smithy.Schema
-
-var PatientInsightsEncounterContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "PatientInsightsEncounterContext",
-}, smithy.ShapeTypeStructure, 1)
-var PatientInsightsEncounterContext_encounterReason *smithy.Schema
-
-var PatientInsightsPatientContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "PatientInsightsPatientContext",
-}, smithy.ShapeTypeStructure, 3)
-var PatientInsightsPatientContext_patientId *smithy.Schema
-
-var PatientInsightsPatientContext_dateOfBirth *smithy.Schema
-
-var PatientInsightsPatientContext_pronouns *smithy.Schema
-
-var PostStreamArtifactGenerationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "PostStreamArtifactGenerationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var PostStreamArtifactGenerationStatus_IN_PROGRESS *smithy.Schema
-
-var PostStreamArtifactGenerationStatus_FAILED *smithy.Schema
-
-var PostStreamArtifactGenerationStatus_COMPLETED *smithy.Schema
-
-var Pronouns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "Pronouns",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var Pronouns_HE_HIM *smithy.Schema
-
-var Pronouns_SHE_HER *smithy.Schema
-
-var Pronouns_THEY_THEM *smithy.Schema
-
-var ProviderRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ProviderRole",
-}, smithy.ShapeTypeEnum, 1)
-var ProviderRole_CLINICIAN *smithy.Schema
-
-var _RequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "RequestId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var S3Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "S3Source",
-}, smithy.ShapeTypeStructure, 1)
-var S3Source_uri *smithy.Schema
-
-var _S3Sources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "S3Sources",
-}, smithy.ShapeTypeList, 1)
-var _S3Sources_member *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _ScribeSessionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ScribeSessionId",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveIsoDateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SensitiveIsoDateString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveMarkdownString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SensitiveMarkdownString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveNonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SensitiveNonEmptyString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveSectionHeaderString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SensitiveSectionHeaderString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var Specialty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "Specialty",
-}, smithy.ShapeTypeEnum, 1)
-var Specialty_PRIMARY_CARE *smithy.Schema
-
-var _SubscriptionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionArn",
-}, smithy.ShapeTypeString, 0)
-
-var SubscriptionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionDescription",
-}, smithy.ShapeTypeStructure, 8)
-var SubscriptionDescription_domainId *smithy.Schema
-
-var SubscriptionDescription_subscriptionId *smithy.Schema
-
-var SubscriptionDescription_arn *smithy.Schema
-
-var SubscriptionDescription_status *smithy.Schema
-
-var SubscriptionDescription_createdAt *smithy.Schema
-
-var SubscriptionDescription_lastUpdatedAt *smithy.Schema
-
-var SubscriptionDescription_activatedAt *smithy.Schema
-
-var SubscriptionDescription_deactivatedAt *smithy.Schema
-
-var _SubscriptionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubscriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionList_member *smithy.Schema
-
-var SubscriptionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "SubscriptionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SubscriptionStatus_ACTIVE *smithy.Schema
-
-var SubscriptionStatus_INACTIVE *smithy.Schema
-
-var SubscriptionStatus_DELETED *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateInstructions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TemplateInstructions",
-}, smithy.ShapeTypeList, 1)
-var _TemplateInstructions_member *smithy.Schema
-
-var TemplateSectionInstruction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TemplateSectionInstruction",
-}, smithy.ShapeTypeStructure, 2)
-var TemplateSectionInstruction_sectionHeader *smithy.Schema
-
-var TemplateSectionInstruction_sectionInstruction *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "Uri",
-}, smithy.ShapeTypeString, 0)
-
-var UserContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "UserContext",
-}, smithy.ShapeTypeStructure, 3)
-var UserContext_role *smithy.Schema
-
-var UserContext_userId *smithy.Schema
-
-var UserContext_specialty *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var WebAppConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "WebAppConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var WebAppConfiguration_ehrRole *smithy.Schema
-
-var WebAppConfiguration_idcApplicationId *smithy.Schema
-
-var WebAppConfiguration_idcRegion *smithy.Schema
-
-var _WebAppUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "WebAppUrl",
-}, smithy.ShapeTypeString, 0)
-
-var ActivateSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ActivateSubscriptionInput",
-}, smithy.ShapeTypeStructure, 2)
-var ActivateSubscriptionInput_domainId *smithy.Schema
-
-var ActivateSubscriptionInput_subscriptionId *smithy.Schema
-
-var ActivateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ActivateSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ActivateSubscriptionOutput_subscription *smithy.Schema
-
-var CreateDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateDomainInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDomainInput_name *smithy.Schema
-
-var CreateDomainInput_kmsKeyArn *smithy.Schema
-
-var CreateDomainInput_webAppSetupConfiguration *smithy.Schema
-
-var CreateDomainInput_tags *smithy.Schema
-
-var CreateDomainOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateDomainOutput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateDomainOutput_domainId *smithy.Schema
-
-var CreateDomainOutput_arn *smithy.Schema
-
-var CreateDomainOutput_name *smithy.Schema
-
-var CreateDomainOutput_kmsKeyArn *smithy.Schema
-
-var CreateDomainOutput_encryptionContext *smithy.Schema
-
-var CreateDomainOutput_status *smithy.Schema
-
-var CreateDomainOutput_webAppUrl *smithy.Schema
-
-var CreateDomainOutput_webAppConfiguration *smithy.Schema
-
-var CreateDomainOutput_createdAt *smithy.Schema
-
-var CreateSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateSubscriptionInput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSubscriptionInput_domainId *smithy.Schema
-
-var CreateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "CreateSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSubscriptionOutput_domainId *smithy.Schema
-
-var CreateSubscriptionOutput_subscriptionId *smithy.Schema
-
-var CreateSubscriptionOutput_arn *smithy.Schema
-
-var CreateSubscriptionOutput_status *smithy.Schema
-
-var CreateSubscriptionOutput_createdAt *smithy.Schema
-
-var CreateSubscriptionOutput_lastUpdatedAt *smithy.Schema
-
-var CreateSubscriptionOutput_activatedAt *smithy.Schema
-
-var CreateSubscriptionOutput_deactivatedAt *smithy.Schema
-
-var DeactivateSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeactivateSubscriptionInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeactivateSubscriptionInput_domainId *smithy.Schema
-
-var DeactivateSubscriptionInput_subscriptionId *smithy.Schema
-
-var DeactivateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeactivateSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeactivateSubscriptionOutput_subscription *smithy.Schema
-
-var DeleteDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeleteDomainInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainInput_domainId *smithy.Schema
-
-var DeleteDomainOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "DeleteDomainOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDomainOutput_domainId *smithy.Schema
-
-var DeleteDomainOutput_arn *smithy.Schema
-
-var DeleteDomainOutput_status *smithy.Schema
-
-var GetDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetDomainInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainInput_domainId *smithy.Schema
-
-var GetDomainOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetDomainOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetDomainOutput_domainId *smithy.Schema
-
-var GetDomainOutput_arn *smithy.Schema
-
-var GetDomainOutput_name *smithy.Schema
-
-var GetDomainOutput_kmsKeyArn *smithy.Schema
-
-var GetDomainOutput_encryptionContext *smithy.Schema
-
-var GetDomainOutput_status *smithy.Schema
-
-var GetDomainOutput_webAppUrl *smithy.Schema
-
-var GetDomainOutput_webAppConfiguration *smithy.Schema
-
-var GetDomainOutput_createdAt *smithy.Schema
-
-var GetDomainOutput_tags *smithy.Schema
-
-var GetMedicalScribeListeningSessionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetMedicalScribeListeningSessionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMedicalScribeListeningSessionInput_sessionId *smithy.Schema
-
-var GetMedicalScribeListeningSessionInput_domainId *smithy.Schema
-
-var GetMedicalScribeListeningSessionInput_subscriptionId *smithy.Schema
-
-var GetMedicalScribeListeningSessionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetMedicalScribeListeningSessionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails *smithy.Schema
-
-var GetPatientInsightsJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetPatientInsightsJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetPatientInsightsJobRequest_domainId *smithy.Schema
-
-var GetPatientInsightsJobRequest_jobId *smithy.Schema
-
-var GetPatientInsightsJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetPatientInsightsJobResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetPatientInsightsJobResponse_jobId *smithy.Schema
-
-var GetPatientInsightsJobResponse_jobArn *smithy.Schema
-
-var GetPatientInsightsJobResponse_jobStatus *smithy.Schema
-
-var GetPatientInsightsJobResponse_creationTime *smithy.Schema
-
-var GetPatientInsightsJobResponse_updatedTime *smithy.Schema
-
-var GetPatientInsightsJobResponse_insightsOutput *smithy.Schema
-
-var GetPatientInsightsJobResponse_statusDetails *smithy.Schema
-
-var GetPatientInsightsJobResponse_patientContext *smithy.Schema
-
-var GetPatientInsightsJobResponse_insightsContext *smithy.Schema
-
-var GetPatientInsightsJobResponse_encounterContext *smithy.Schema
-
-var GetPatientInsightsJobResponse_userContext *smithy.Schema
-
-var GetPatientInsightsJobResponse_inputDataConfig *smithy.Schema
-
-var GetPatientInsightsJobResponse_outputDataConfig *smithy.Schema
-
-var GetSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetSubscriptionInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetSubscriptionInput_domainId *smithy.Schema
-
-var GetSubscriptionInput_subscriptionId *smithy.Schema
-
-var GetSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "GetSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSubscriptionOutput_subscription *smithy.Schema
-
-var ListDomainsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListDomainsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListDomainsInput_status *smithy.Schema
-
-var ListDomainsInput_maxResults *smithy.Schema
-
-var ListDomainsInput_nextToken *smithy.Schema
-
-var ListDomainsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListDomainsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsOutput_domains *smithy.Schema
-
-var ListDomainsOutput_nextToken *smithy.Schema
-
-var ListSubscriptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListSubscriptionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSubscriptionsInput_domainId *smithy.Schema
-
-var ListSubscriptionsInput_maxResults *smithy.Schema
-
-var ListSubscriptionsInput_nextToken *smithy.Schema
-
-var ListSubscriptionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListSubscriptionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscriptionsOutput_subscriptions *smithy.Schema
-
-var ListSubscriptionsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartMedicalScribeListeningSessionInput",
-}, smithy.ShapeTypeStructure, 7)
-var StartMedicalScribeListeningSessionInput_sessionId *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_domainId *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_subscriptionId *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_languageCode *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_mediaSampleRateHertz *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_mediaEncoding *smithy.Schema
-
-var StartMedicalScribeListeningSessionInput_inputStream *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartMedicalScribeListeningSessionOutput",
-}, smithy.ShapeTypeStructure, 8)
-var StartMedicalScribeListeningSessionOutput_sessionId *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_domainId *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_subscriptionId *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_requestId *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_languageCode *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_mediaEncoding *smithy.Schema
-
-var StartMedicalScribeListeningSessionOutput_responseStream *smithy.Schema
-
-var StartPatientInsightsJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartPatientInsightsJobRequest",
-}, smithy.ShapeTypeStructure, 8)
-var StartPatientInsightsJobRequest_domainId *smithy.Schema
-
-var StartPatientInsightsJobRequest_patientContext *smithy.Schema
-
-var StartPatientInsightsJobRequest_insightsContext *smithy.Schema
-
-var StartPatientInsightsJobRequest_encounterContext *smithy.Schema
-
-var StartPatientInsightsJobRequest_userContext *smithy.Schema
-
-var StartPatientInsightsJobRequest_inputDataConfig *smithy.Schema
-
-var StartPatientInsightsJobRequest_outputDataConfig *smithy.Schema
-
-var StartPatientInsightsJobRequest_clientToken *smithy.Schema
-
-var StartPatientInsightsJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "StartPatientInsightsJobResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartPatientInsightsJobResponse_jobArn *smithy.Schema
-
-var StartPatientInsightsJobResponse_jobId *smithy.Schema
-
-var StartPatientInsightsJobResponse_creationTime *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connecthealth",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	PostStreamArtifactGenerationStatus_IN_PROGRESS = PostStreamArtifactGenerationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	PostStreamArtifactGenerationStatus_FAILED = PostStreamArtifactGenerationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	PostStreamArtifactGenerationStatus_COMPLETED = PostStreamArtifactGenerationStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ArtifactDetails_outputLocation = ArtifactDetails.AddMember("outputLocation", _Uri)
-
-	ArtifactDetails_status = ArtifactDetails.AddMember("status", PostStreamArtifactGenerationStatus)
-
-	ArtifactDetails_failureReason = ArtifactDetails.AddMember("failureReason", _ErrorMessage)
-
-	ClinicalNoteGenerationResult_noteResult = ClinicalNoteGenerationResult.AddMember("noteResult", ArtifactDetails)
-
-	ClinicalNoteGenerationResult_transcriptResult = ClinicalNoteGenerationResult.AddMember("transcriptResult", ArtifactDetails)
-
-	ClinicalNoteGenerationResult_afterVisitSummaryResult = ClinicalNoteGenerationResult.AddMember("afterVisitSummaryResult", ArtifactDetails)
-
-	ManagedNoteTemplate_HISTORY_AND_PHYSICAL = ManagedNoteTemplate.AddMember("HISTORY_AND_PHYSICAL", smithyprelude.Unit)
-
-	ManagedNoteTemplate_GIRPP = ManagedNoteTemplate.AddMember("GIRPP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_DAP = ManagedNoteTemplate.AddMember("DAP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_SIRP = ManagedNoteTemplate.AddMember("SIRP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_BIRP = ManagedNoteTemplate.AddMember("BIRP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_BEHAVIORAL_SOAP = ManagedNoteTemplate.AddMember("BEHAVIORAL_SOAP", smithyprelude.Unit)
-
-	ManagedNoteTemplate_PHYSICAL_SOAP = ManagedNoteTemplate.AddMember("PHYSICAL_SOAP", smithyprelude.Unit)
-
-	ManagedTemplate_templateType = ManagedTemplate.AddMember("templateType", ManagedNoteTemplate)
-
-	CustomTemplateBase_HISTORY_AND_PHYSICAL = CustomTemplateBase.AddMember("HISTORY_AND_PHYSICAL", smithyprelude.Unit)
-
-	CustomTemplateBase_GIRPP = CustomTemplateBase.AddMember("GIRPP", smithyprelude.Unit)
-
-	CustomTemplateBase_DAP = CustomTemplateBase.AddMember("DAP", smithyprelude.Unit)
-
-	CustomTemplateBase_SIRP = CustomTemplateBase.AddMember("SIRP", smithyprelude.Unit)
-
-	CustomTemplateBase_BIRP = CustomTemplateBase.AddMember("BIRP", smithyprelude.Unit)
-
-	CustomTemplateBase_BEHAVIORAL_SOAP = CustomTemplateBase.AddMember("BEHAVIORAL_SOAP", smithyprelude.Unit)
-
-	TemplateSectionInstruction_sectionHeader = TemplateSectionInstruction.AddMember("sectionHeader", _SensitiveSectionHeaderString)
-
-	TemplateSectionInstruction_sectionInstruction = TemplateSectionInstruction.AddMember("sectionInstruction", _SensitiveMarkdownString)
-
-	_TemplateInstructions_member = _TemplateInstructions.AddMember("member", TemplateSectionInstruction)
-
-	CustomTemplate_templateType = CustomTemplate.AddMember("templateType", CustomTemplateBase)
-
-	CustomTemplate_templateInstructions = CustomTemplate.AddMember("templateInstructions", _TemplateInstructions)
-
-	NoteTemplateSettings_managedTemplate = NoteTemplateSettings.AddMember("managedTemplate", ManagedTemplate)
-
-	NoteTemplateSettings_customTemplate = NoteTemplateSettings.AddMember("customTemplate", CustomTemplate)
-
-	ClinicalNoteGenerationSettings_noteTemplateSettings = ClinicalNoteGenerationSettings.AddMember("noteTemplateSettings", NoteTemplateSettings)
-
-	ManagedTemplateResponse_templateType = ManagedTemplateResponse.AddMember("templateType", ManagedNoteTemplate)
-
-	CustomTemplateResponse_templateType = CustomTemplateResponse.AddMember("templateType", CustomTemplateBase)
-
-	NoteTemplateSettingsResponse_managedTemplate = NoteTemplateSettingsResponse.AddMember("managedTemplate", ManagedTemplateResponse)
-
-	NoteTemplateSettingsResponse_customTemplate = NoteTemplateSettingsResponse.AddMember("customTemplate", CustomTemplateResponse)
-
-	ClinicalNoteGenerationSettingsResponse_noteTemplateSettings = ClinicalNoteGenerationSettingsResponse.AddMember("noteTemplateSettings", NoteTemplateSettingsResponse)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	CreateWebAppConfiguration_ehrRole = CreateWebAppConfiguration.AddMember("ehrRole", smithyprelude.String)
-
-	CreateWebAppConfiguration_idcInstanceId = CreateWebAppConfiguration.AddMember("idcInstanceId", smithyprelude.String)
-
-	CreateWebAppConfiguration_idcRegion = CreateWebAppConfiguration.AddMember("idcRegion", smithyprelude.String)
-
-	DomainStatus_ACTIVE = DomainStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DomainStatus_DELETING = DomainStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	DomainStatus_DELETED = DomainStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	DomainSummary_domainId = DomainSummary.AddMember("domainId", _DomainId)
-
-	DomainSummary_arn = DomainSummary.AddMember("arn", _DomainArn)
-
-	DomainSummary_name = DomainSummary.AddMember("name", _DomainName)
-
-	DomainSummary_status = DomainSummary.AddMember("status", DomainStatus)
-
-	DomainSummary_createdAt = DomainSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	_DomainSummaryList_member = _DomainSummaryList.AddMember("member", DomainSummary)
-
-	EncounterContext_unstructuredContext = EncounterContext.AddMember("unstructuredContext", _SensitiveMarkdownString)
-
-	EncryptionType_AWS_OWNED_KEY = EncryptionType.AddMember("AWS_OWNED_KEY", smithyprelude.Unit)
-
-	EncryptionType_CUSTOMER_MANAGED_KEY = EncryptionType.AddMember("CUSTOMER_MANAGED_KEY", smithyprelude.Unit)
-
-	EncryptionContext_encryptionType = EncryptionContext.AddMember("encryptionType", EncryptionType)
-
-	EncryptionContext_kmsKeyArn = EncryptionContext.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	FHIRServer_fhirEndpoint = FHIRServer.AddMember("fhirEndpoint", _NonEmptyString)
-
-	FHIRServer_oauthToken = FHIRServer.AddMember("oauthToken", _SensitiveNonEmptyString)
-
-	S3Source_uri = S3Source.AddMember("uri", _S3Uri)
-
-	_S3Sources_member = _S3Sources.AddMember("member", S3Source)
-
-	InputDataConfig_fhirServer = InputDataConfig.AddMember("fhirServer", FHIRServer)
-
-	InputDataConfig_s3Sources = InputDataConfig.AddMember("s3Sources", _S3Sources)
-
-	InsightsType_PRE_VISIT = InsightsType.AddMember("PRE_VISIT", smithyprelude.Unit)
-
-	InsightsContext_insightsType = InsightsContext.AddMember("insightsType", InsightsType)
-
-	InsightsOutput_uri = InsightsOutput.AddMember("uri", _S3Uri)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_SUCCEEDED = JobStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	MedicalScribeAudioEvent_audioChunk = MedicalScribeAudioEvent.AddMember("audioChunk", _AudioChunk)
-
-	MedicalScribeBinaryAudioEvent_audioChunk = MedicalScribeBinaryAudioEvent.AddMember("audioChunk", _AudioChunk, &smithytraits.EventPayload{})
-
-	MedicalScribeParticipantRole_PATIENT = MedicalScribeParticipantRole.AddMember("PATIENT", smithyprelude.Unit)
-
-	MedicalScribeParticipantRole_CLINICIAN = MedicalScribeParticipantRole.AddMember("CLINICIAN", smithyprelude.Unit)
-
-	MedicalScribeChannelDefinition_channelId = MedicalScribeChannelDefinition.AddMember("channelId", _MedicalScribeChannelId)
-
-	MedicalScribeChannelDefinition_participantRole = MedicalScribeChannelDefinition.AddMember("participantRole", MedicalScribeParticipantRole)
-
-	_MedicalScribeChannelDefinitions_member = _MedicalScribeChannelDefinitions.AddMember("member", MedicalScribeChannelDefinition)
-
-	MedicalScribePostStreamActionSettings_outputS3Uri = MedicalScribePostStreamActionSettings.AddMember("outputS3Uri", _S3Uri)
-
-	MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings = MedicalScribePostStreamActionSettings.AddMember("clinicalNoteGenerationSettings", ClinicalNoteGenerationSettings)
-
-	MedicalScribeConfigurationEvent_postStreamActionSettings = MedicalScribeConfigurationEvent.AddMember("postStreamActionSettings", MedicalScribePostStreamActionSettings)
-
-	MedicalScribeConfigurationEvent_channelDefinitions = MedicalScribeConfigurationEvent.AddMember("channelDefinitions", _MedicalScribeChannelDefinitions)
-
-	MedicalScribeConfigurationEvent_encounterContext = MedicalScribeConfigurationEvent.AddMember("encounterContext", EncounterContext)
-
-	MedicalScribeSessionControlEventType_END_OF_SESSION = MedicalScribeSessionControlEventType.AddMember("END_OF_SESSION", smithyprelude.Unit)
-
-	MedicalScribeSessionControlEvent_type = MedicalScribeSessionControlEvent.AddMember("type", MedicalScribeSessionControlEventType)
-
-	MedicalScribeInputStream_audioEvent = MedicalScribeInputStream.AddMember("audioEvent", MedicalScribeAudioEvent)
-
-	MedicalScribeInputStream_binaryAudioEvent = MedicalScribeInputStream.AddMember("binaryAudioEvent", MedicalScribeBinaryAudioEvent)
-
-	MedicalScribeInputStream_sessionControlEvent = MedicalScribeInputStream.AddMember("sessionControlEvent", MedicalScribeSessionControlEvent)
-
-	MedicalScribeInputStream_configurationEvent = MedicalScribeInputStream.AddMember("configurationEvent", MedicalScribeConfigurationEvent)
-
-	MedicalScribeLanguageCode_EN_US = MedicalScribeLanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	MedicalScribeLanguageCode_MULTI = MedicalScribeLanguageCode.AddMember("MULTI", smithyprelude.Unit)
-
-	MedicalScribeMediaEncoding_PCM = MedicalScribeMediaEncoding.AddMember("PCM", smithyprelude.Unit)
-
-	MedicalScribeMediaEncoding_FLAC = MedicalScribeMediaEncoding.AddMember("FLAC", smithyprelude.Unit)
-
-	MedicalScribePostStreamActionSettingsResponse_outputS3Uri = MedicalScribePostStreamActionSettingsResponse.AddMember("outputS3Uri", _S3Uri)
-
-	MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings = MedicalScribePostStreamActionSettingsResponse.AddMember("clinicalNoteGenerationSettings", ClinicalNoteGenerationSettingsResponse)
-
-	MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult = MedicalScribePostStreamActionsResult.AddMember("clinicalNoteGenerationResult", ClinicalNoteGenerationResult)
-
-	MedicalScribeStreamStatus_IN_PROGRESS = MedicalScribeStreamStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	MedicalScribeStreamStatus_PAUSED = MedicalScribeStreamStatus.AddMember("PAUSED", smithyprelude.Unit)
-
-	MedicalScribeStreamStatus_FAILED = MedicalScribeStreamStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	MedicalScribeStreamStatus_COMPLETED = MedicalScribeStreamStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	MedicalScribeListeningSessionDetails_sessionId = MedicalScribeListeningSessionDetails.AddMember("sessionId", _ScribeSessionId)
-
-	MedicalScribeListeningSessionDetails_domainId = MedicalScribeListeningSessionDetails.AddMember("domainId", _DomainId)
-
-	MedicalScribeListeningSessionDetails_subscriptionId = MedicalScribeListeningSessionDetails.AddMember("subscriptionId", _SubscriptionId)
-
-	MedicalScribeListeningSessionDetails_languageCode = MedicalScribeListeningSessionDetails.AddMember("languageCode", MedicalScribeLanguageCode)
-
-	MedicalScribeListeningSessionDetails_mediaSampleRateHertz = MedicalScribeListeningSessionDetails.AddMember("mediaSampleRateHertz", _MedicalScribeMediaSampleRateHertz)
-
-	MedicalScribeListeningSessionDetails_mediaEncoding = MedicalScribeListeningSessionDetails.AddMember("mediaEncoding", MedicalScribeMediaEncoding)
-
-	MedicalScribeListeningSessionDetails_channelDefinitions = MedicalScribeListeningSessionDetails.AddMember("channelDefinitions", _MedicalScribeChannelDefinitions)
-
-	MedicalScribeListeningSessionDetails_postStreamActionSettings = MedicalScribeListeningSessionDetails.AddMember("postStreamActionSettings", MedicalScribePostStreamActionSettingsResponse)
-
-	MedicalScribeListeningSessionDetails_postStreamActionResult = MedicalScribeListeningSessionDetails.AddMember("postStreamActionResult", MedicalScribePostStreamActionsResult)
-
-	MedicalScribeListeningSessionDetails_encounterContextProvided = MedicalScribeListeningSessionDetails.AddMember("encounterContextProvided", _NonNullBoolean)
-
-	MedicalScribeListeningSessionDetails_streamStatus = MedicalScribeListeningSessionDetails.AddMember("streamStatus", MedicalScribeStreamStatus)
-
-	MedicalScribeListeningSessionDetails_streamCreationTime = MedicalScribeListeningSessionDetails.AddMember("streamCreationTime", smithyprelude.Timestamp)
-
-	MedicalScribeListeningSessionDetails_streamEndTime = MedicalScribeListeningSessionDetails.AddMember("streamEndTime", smithyprelude.Timestamp)
-
-	MedicalScribeTranscriptSegment_segmentId = MedicalScribeTranscriptSegment.AddMember("segmentId", smithyprelude.String)
-
-	MedicalScribeTranscriptSegment_audioBeginOffset = MedicalScribeTranscriptSegment.AddMember("audioBeginOffset", _AudioOffset)
-
-	MedicalScribeTranscriptSegment_audioEndOffset = MedicalScribeTranscriptSegment.AddMember("audioEndOffset", _AudioOffset)
-
-	MedicalScribeTranscriptSegment_isPartial = MedicalScribeTranscriptSegment.AddMember("isPartial", _NonNullBoolean)
-
-	MedicalScribeTranscriptSegment_channelId = MedicalScribeTranscriptSegment.AddMember("channelId", smithyprelude.String)
-
-	MedicalScribeTranscriptSegment_content = MedicalScribeTranscriptSegment.AddMember("content", smithyprelude.String)
-
-	MedicalScribeTranscriptEvent_transcriptSegment = MedicalScribeTranscriptEvent.AddMember("transcriptSegment", MedicalScribeTranscriptSegment)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	MedicalScribeOutputStream_transcriptEvent = MedicalScribeOutputStream.AddMember("transcriptEvent", MedicalScribeTranscriptEvent)
-
-	MedicalScribeOutputStream_internalFailureException = MedicalScribeOutputStream.AddMember("internalFailureException", InternalServerException)
-
-	MedicalScribeOutputStream_validationException = MedicalScribeOutputStream.AddMember("validationException", ValidationException)
-
-	OutputDataConfig_s3OutputPath = OutputDataConfig.AddMember("s3OutputPath", _S3Uri)
-
-	PatientInsightsEncounterContext_encounterReason = PatientInsightsEncounterContext.AddMember("encounterReason", _SensitiveNonEmptyString)
-
-	Pronouns_HE_HIM = Pronouns.AddMember("HE_HIM", smithyprelude.Unit)
-
-	Pronouns_SHE_HER = Pronouns.AddMember("SHE_HER", smithyprelude.Unit)
-
-	Pronouns_THEY_THEM = Pronouns.AddMember("THEY_THEM", smithyprelude.Unit)
-
-	PatientInsightsPatientContext_patientId = PatientInsightsPatientContext.AddMember("patientId", _SensitiveNonEmptyString)
-
-	PatientInsightsPatientContext_dateOfBirth = PatientInsightsPatientContext.AddMember("dateOfBirth", _SensitiveIsoDateString)
-
-	PatientInsightsPatientContext_pronouns = PatientInsightsPatientContext.AddMember("pronouns", Pronouns)
-
-	ProviderRole_CLINICIAN = ProviderRole.AddMember("CLINICIAN", smithyprelude.Unit)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	Specialty_PRIMARY_CARE = Specialty.AddMember("PRIMARY_CARE", smithyprelude.Unit)
-
-	SubscriptionStatus_ACTIVE = SubscriptionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	SubscriptionStatus_INACTIVE = SubscriptionStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	SubscriptionStatus_DELETED = SubscriptionStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	SubscriptionDescription_domainId = SubscriptionDescription.AddMember("domainId", _DomainId)
-
-	SubscriptionDescription_subscriptionId = SubscriptionDescription.AddMember("subscriptionId", _SubscriptionId)
-
-	SubscriptionDescription_arn = SubscriptionDescription.AddMember("arn", _SubscriptionArn)
-
-	SubscriptionDescription_status = SubscriptionDescription.AddMember("status", SubscriptionStatus)
-
-	SubscriptionDescription_createdAt = SubscriptionDescription.AddMember("createdAt", smithyprelude.Timestamp)
-
-	SubscriptionDescription_lastUpdatedAt = SubscriptionDescription.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	SubscriptionDescription_activatedAt = SubscriptionDescription.AddMember("activatedAt", smithyprelude.Timestamp)
-
-	SubscriptionDescription_deactivatedAt = SubscriptionDescription.AddMember("deactivatedAt", smithyprelude.Timestamp)
-
-	_SubscriptionList_member = _SubscriptionList.AddMember("member", SubscriptionDescription)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	UserContext_role = UserContext.AddMember("role", ProviderRole)
-
-	UserContext_userId = UserContext.AddMember("userId", _SensitiveNonEmptyString)
-
-	UserContext_specialty = UserContext.AddMember("specialty", Specialty)
-
-	WebAppConfiguration_ehrRole = WebAppConfiguration.AddMember("ehrRole", smithyprelude.String)
-
-	WebAppConfiguration_idcApplicationId = WebAppConfiguration.AddMember("idcApplicationId", smithyprelude.String)
-
-	WebAppConfiguration_idcRegion = WebAppConfiguration.AddMember("idcRegion", smithyprelude.String)
-
-	ActivateSubscriptionInput_domainId = ActivateSubscriptionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ActivateSubscriptionInput_subscriptionId = ActivateSubscriptionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPLabel{})
-
-	ActivateSubscriptionOutput_subscription = ActivateSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
-
-	CreateDomainInput_name = CreateDomainInput.AddMember("name", _DomainName)
-
-	CreateDomainInput_kmsKeyArn = CreateDomainInput.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateDomainInput_webAppSetupConfiguration = CreateDomainInput.AddMember("webAppSetupConfiguration", CreateWebAppConfiguration)
-
-	CreateDomainInput_tags = CreateDomainInput.AddMember("tags", _TagMap)
-
-	CreateDomainOutput_domainId = CreateDomainOutput.AddMember("domainId", _DomainId)
-
-	CreateDomainOutput_arn = CreateDomainOutput.AddMember("arn", _DomainArn)
-
-	CreateDomainOutput_name = CreateDomainOutput.AddMember("name", _DomainName)
-
-	CreateDomainOutput_kmsKeyArn = CreateDomainOutput.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateDomainOutput_encryptionContext = CreateDomainOutput.AddMember("encryptionContext", EncryptionContext)
-
-	CreateDomainOutput_status = CreateDomainOutput.AddMember("status", DomainStatus)
-
-	CreateDomainOutput_webAppUrl = CreateDomainOutput.AddMember("webAppUrl", _WebAppUrl)
-
-	CreateDomainOutput_webAppConfiguration = CreateDomainOutput.AddMember("webAppConfiguration", WebAppConfiguration)
-
-	CreateDomainOutput_createdAt = CreateDomainOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	CreateSubscriptionInput_domainId = CreateSubscriptionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	CreateSubscriptionOutput_domainId = CreateSubscriptionOutput.AddMember("domainId", _DomainId)
-
-	CreateSubscriptionOutput_subscriptionId = CreateSubscriptionOutput.AddMember("subscriptionId", _SubscriptionId)
-
-	CreateSubscriptionOutput_arn = CreateSubscriptionOutput.AddMember("arn", _SubscriptionArn)
-
-	CreateSubscriptionOutput_status = CreateSubscriptionOutput.AddMember("status", SubscriptionStatus)
-
-	CreateSubscriptionOutput_createdAt = CreateSubscriptionOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	CreateSubscriptionOutput_lastUpdatedAt = CreateSubscriptionOutput.AddMember("lastUpdatedAt", smithyprelude.Timestamp)
-
-	CreateSubscriptionOutput_activatedAt = CreateSubscriptionOutput.AddMember("activatedAt", smithyprelude.Timestamp)
-
-	CreateSubscriptionOutput_deactivatedAt = CreateSubscriptionOutput.AddMember("deactivatedAt", smithyprelude.Timestamp)
-
-	DeactivateSubscriptionInput_domainId = DeactivateSubscriptionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeactivateSubscriptionInput_subscriptionId = DeactivateSubscriptionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPLabel{})
-
-	DeactivateSubscriptionOutput_subscription = DeactivateSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
-
-	DeleteDomainInput_domainId = DeleteDomainInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteDomainOutput_domainId = DeleteDomainOutput.AddMember("domainId", _DomainId)
-
-	DeleteDomainOutput_arn = DeleteDomainOutput.AddMember("arn", _DomainArn)
-
-	DeleteDomainOutput_status = DeleteDomainOutput.AddMember("status", DomainStatus)
-
-	GetDomainInput_domainId = GetDomainInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetDomainOutput_domainId = GetDomainOutput.AddMember("domainId", _DomainId)
-
-	GetDomainOutput_arn = GetDomainOutput.AddMember("arn", _DomainArn)
-
-	GetDomainOutput_name = GetDomainOutput.AddMember("name", _DomainName)
-
-	GetDomainOutput_kmsKeyArn = GetDomainOutput.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	GetDomainOutput_encryptionContext = GetDomainOutput.AddMember("encryptionContext", EncryptionContext)
-
-	GetDomainOutput_status = GetDomainOutput.AddMember("status", DomainStatus)
-
-	GetDomainOutput_webAppUrl = GetDomainOutput.AddMember("webAppUrl", _WebAppUrl)
-
-	GetDomainOutput_webAppConfiguration = GetDomainOutput.AddMember("webAppConfiguration", WebAppConfiguration)
-
-	GetDomainOutput_createdAt = GetDomainOutput.AddMember("createdAt", smithyprelude.Timestamp)
-
-	GetDomainOutput_tags = GetDomainOutput.AddMember("tags", _TagMap)
-
-	GetMedicalScribeListeningSessionInput_sessionId = GetMedicalScribeListeningSessionInput.AddMember("sessionId", _ScribeSessionId, &smithytraits.HTTPLabel{})
-
-	GetMedicalScribeListeningSessionInput_domainId = GetMedicalScribeListeningSessionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetMedicalScribeListeningSessionInput_subscriptionId = GetMedicalScribeListeningSessionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPLabel{})
-
-	GetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails = GetMedicalScribeListeningSessionOutput.AddMember("medicalScribeListeningSessionDetails", MedicalScribeListeningSessionDetails)
-
-	GetPatientInsightsJobRequest_domainId = GetPatientInsightsJobRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetPatientInsightsJobRequest_jobId = GetPatientInsightsJobRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	GetPatientInsightsJobResponse_jobId = GetPatientInsightsJobResponse.AddMember("jobId", _JobId)
-
-	GetPatientInsightsJobResponse_jobArn = GetPatientInsightsJobResponse.AddMember("jobArn", _JobArn)
-
-	GetPatientInsightsJobResponse_jobStatus = GetPatientInsightsJobResponse.AddMember("jobStatus", JobStatus)
-
-	GetPatientInsightsJobResponse_creationTime = GetPatientInsightsJobResponse.AddMember("creationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetPatientInsightsJobResponse_updatedTime = GetPatientInsightsJobResponse.AddMember("updatedTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetPatientInsightsJobResponse_insightsOutput = GetPatientInsightsJobResponse.AddMember("insightsOutput", InsightsOutput)
-
-	GetPatientInsightsJobResponse_statusDetails = GetPatientInsightsJobResponse.AddMember("statusDetails", _NonEmptyString)
-
-	GetPatientInsightsJobResponse_patientContext = GetPatientInsightsJobResponse.AddMember("patientContext", PatientInsightsPatientContext)
-
-	GetPatientInsightsJobResponse_insightsContext = GetPatientInsightsJobResponse.AddMember("insightsContext", InsightsContext)
-
-	GetPatientInsightsJobResponse_encounterContext = GetPatientInsightsJobResponse.AddMember("encounterContext", PatientInsightsEncounterContext)
-
-	GetPatientInsightsJobResponse_userContext = GetPatientInsightsJobResponse.AddMember("userContext", UserContext)
-
-	GetPatientInsightsJobResponse_inputDataConfig = GetPatientInsightsJobResponse.AddMember("inputDataConfig", InputDataConfig)
-
-	GetPatientInsightsJobResponse_outputDataConfig = GetPatientInsightsJobResponse.AddMember("outputDataConfig", OutputDataConfig)
-
-	GetSubscriptionInput_domainId = GetSubscriptionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetSubscriptionInput_subscriptionId = GetSubscriptionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPLabel{})
-
-	GetSubscriptionOutput_subscription = GetSubscriptionOutput.AddMember("subscription", SubscriptionDescription)
-
-	ListDomainsInput_status = ListDomainsInput.AddMember("status", DomainStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListDomainsInput_maxResults = ListDomainsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDomainsInput_nextToken = ListDomainsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDomainsOutput_domains = ListDomainsOutput.AddMember("domains", _DomainSummaryList)
-
-	ListDomainsOutput_nextToken = ListDomainsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListSubscriptionsInput_domainId = ListSubscriptionsInput.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ListSubscriptionsInput_maxResults = ListSubscriptionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSubscriptionsInput_nextToken = ListSubscriptionsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSubscriptionsOutput_subscriptions = ListSubscriptionsOutput.AddMember("subscriptions", _SubscriptionList)
-
-	ListSubscriptionsOutput_nextToken = ListSubscriptionsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagMap)
-
-	StartMedicalScribeListeningSessionInput_sessionId = StartMedicalScribeListeningSessionInput.AddMember("sessionId", _ScribeSessionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-session-id"})
-
-	StartMedicalScribeListeningSessionInput_domainId = StartMedicalScribeListeningSessionInput.AddMember("domainId", _DomainId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-domain-id"})
-
-	StartMedicalScribeListeningSessionInput_subscriptionId = StartMedicalScribeListeningSessionInput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-subscription-id"})
-
-	StartMedicalScribeListeningSessionInput_languageCode = StartMedicalScribeListeningSessionInput.AddMember("languageCode", MedicalScribeLanguageCode, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-language-code"})
-
-	StartMedicalScribeListeningSessionInput_mediaSampleRateHertz = StartMedicalScribeListeningSessionInput.AddMember("mediaSampleRateHertz", _MedicalScribeMediaSampleRateHertz, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-sample-rate"})
-
-	StartMedicalScribeListeningSessionInput_mediaEncoding = StartMedicalScribeListeningSessionInput.AddMember("mediaEncoding", MedicalScribeMediaEncoding, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-media-encoding"})
-
-	StartMedicalScribeListeningSessionInput_inputStream = StartMedicalScribeListeningSessionInput.AddMember("inputStream", MedicalScribeInputStream, &smithytraits.HTTPPayload{})
-
-	StartMedicalScribeListeningSessionOutput_sessionId = StartMedicalScribeListeningSessionOutput.AddMember("sessionId", _ScribeSessionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-session-id"})
-
-	StartMedicalScribeListeningSessionOutput_domainId = StartMedicalScribeListeningSessionOutput.AddMember("domainId", _DomainId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-domain-id"})
-
-	StartMedicalScribeListeningSessionOutput_subscriptionId = StartMedicalScribeListeningSessionOutput.AddMember("subscriptionId", _SubscriptionId, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-subscription-id"})
-
-	StartMedicalScribeListeningSessionOutput_requestId = StartMedicalScribeListeningSessionOutput.AddMember("requestId", _RequestId, &smithytraits.HTTPHeader{Name: "x-amzn-request-id"})
-
-	StartMedicalScribeListeningSessionOutput_languageCode = StartMedicalScribeListeningSessionOutput.AddMember("languageCode", MedicalScribeLanguageCode, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-language-code"})
-
-	StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz = StartMedicalScribeListeningSessionOutput.AddMember("mediaSampleRateHertz", _MedicalScribeMediaSampleRateHertz, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-sample-rate"})
-
-	StartMedicalScribeListeningSessionOutput_mediaEncoding = StartMedicalScribeListeningSessionOutput.AddMember("mediaEncoding", MedicalScribeMediaEncoding, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-media-encoding"})
-
-	StartMedicalScribeListeningSessionOutput_responseStream = StartMedicalScribeListeningSessionOutput.AddMember("responseStream", MedicalScribeOutputStream, &smithytraits.HTTPPayload{})
-
-	StartPatientInsightsJobRequest_domainId = StartPatientInsightsJobRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	StartPatientInsightsJobRequest_patientContext = StartPatientInsightsJobRequest.AddMember("patientContext", PatientInsightsPatientContext)
-
-	StartPatientInsightsJobRequest_insightsContext = StartPatientInsightsJobRequest.AddMember("insightsContext", InsightsContext)
-
-	StartPatientInsightsJobRequest_encounterContext = StartPatientInsightsJobRequest.AddMember("encounterContext", PatientInsightsEncounterContext)
-
-	StartPatientInsightsJobRequest_userContext = StartPatientInsightsJobRequest.AddMember("userContext", UserContext)
-
-	StartPatientInsightsJobRequest_inputDataConfig = StartPatientInsightsJobRequest.AddMember("inputDataConfig", InputDataConfig)
-
-	StartPatientInsightsJobRequest_outputDataConfig = StartPatientInsightsJobRequest.AddMember("outputDataConfig", OutputDataConfig)
-
-	StartPatientInsightsJobRequest_clientToken = StartPatientInsightsJobRequest.AddMember("clientToken", _NonEmptyString)
-
-	StartPatientInsightsJobResponse_jobArn = StartPatientInsightsJobResponse.AddMember("jobArn", _JobArn)
-
-	StartPatientInsightsJobResponse_jobId = StartPatientInsightsJobResponse.AddMember("jobId", _JobId)
-
-	StartPatientInsightsJobResponse_creationTime = StartPatientInsightsJobResponse.AddMember("creationTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagMap)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
+const blob = "" +
+	"MedicalScribePostStreamActionSettingsResponseStartMedicalScribeListeningSessionOutputStartMedicalScr" +
+	"ibeListeningSessionInputClinicalNoteGenerationSettingsResponseGetMedicalScribeListeningSessionOutput" +
+	"GetMedicalScribeListeningSessionInputMedicalScribeListeningSessionDetailsMedicalScribePostStreamActi" +
+	"onsResultMedicalScribeSessionControlEventTypemedicalScribeListeningSessionDetailsPostStreamArtifactG" +
+	"enerationStatusMedicalScribeMediaSampleRateHertzMedicalScribeChannelDefinitionsMedicalScribeConfigur" +
+	"ationEventPatientInsightsEncounterContextStartPatientInsightsJobResponseMedicalScribeTranscriptSegme" +
+	"ntStartPatientInsightsJobRequestclinicalNoteGenerationSettingsGetPatientInsightsJobResponseMedicalSc" +
+	"ribeBinaryAudioEventPatientInsightsPatientContextServiceQuotaExceededExceptionClinicalNoteGeneration" +
+	"ResultDeactivateSubscriptionOutputGetPatientInsightsJobRequestMedicalScribeParticipantRoleMedicalScr" +
+	"ibeTranscriptEventNoteTemplateSettingsResponseSensitiveSectionHeaderStringclinicalNoteGenerationResu" +
+	"ltDeactivateSubscriptionInputActivateSubscriptionOutputMedicalScribeMediaEncodingTemplateSectionInst" +
+	"ructionActivateSubscriptionInputCreateWebAppConfigurationListTagsForResourceOutputMedicalScribeLangu" +
+	"ageCodeMedicalScribeOutputStreamMedicalScribeStreamStatusResourceNotFoundExceptionCreateSubscription" +
+	"OutputListTagsForResourceInputMedicalScribeInputStreamencounterContextProvidedinternalFailureExcepti" +
+	"onpostStreamActionSettingswebAppSetupConfigurationCreateSubscriptionInputInternalServerExceptionList" +
+	"SubscriptionsOutputManagedTemplateResponseMedicalScribeAudioEventSensitiveMarkdownStringSensitiveNon" +
+	"EmptyStringSubscriptionDescriptionafterVisitSummaryResultCustomTemplateResponseListSubscriptionsInpu" +
+	"tMedicalScribeChannelIdSensitiveIsoDateStringpostStreamActionResultAccessDeniedExceptionGetSubscript" +
+	"ionOutputCUSTOMER_MANAGED_KEYGetSubscriptionInputHISTORY_AND_PHYSICALTemplateInstructionsmediaSample" +
+	"RateHertznoteTemplateSettingstemplateInstructionsManagedNoteTemplateThrottlingExceptionValidationExc" +
+	"eptionsessionControlEventunstructuredContextvalidationExceptionwebAppConfigurationCreateDomainOutput" +
+	"CustomTemplateBaseDeleteDomainOutputSubscriptionStatusUntagResourceInputchannelDefinitionsconfigurat" +
+	"ionEventsectionInstructionstreamCreationTimeConflictExceptionCreateDomainInputDeleteDomainInputDomai" +
+	"nSummaryListEncryptionContextListDomainsOutputencryptionContexttranscriptSegmentListDomainsInputOutp" +
+	"utDataConfigSubscriptionListTagResourceInputaudioBeginOffsetbinaryAudioEventidcApplicationIdoutputDa" +
+	"taConfigtranscriptResultArtifactDetailsBEHAVIORAL_SOAPGetDomainOutputInputDataConfigInsightsContextS" +
+	"cribeSessionIdSubscriptionArnencounterReasoninputDataConfiginsightsContextmanagedTemplateparticipant" +
+	"RoletranscriptEventEND_OF_SESSIONEncryptionTypeGetDomainInputInsightsOutputNonNullBooleanSubscriptio" +
+	"nIdaudioEndOffsetcustomTemplateencryptionTypeinsightsOutputoutputLocationpatientContextresponseStrea" +
+	"msubscriptionIdAWS_OWNED_KEYConnectHealthPHYSICAL_SOAPdeactivatedAtfailureReasonidcInstanceIdlastUpd" +
+	"atedAtmediaEncodingsectionHeaderstatusDetailsstreamEndTimesubscriptionsDomainStatusErrorMessageInsig" +
+	"htsTypePRIMARY_CAREProviderRolecreationTimefhirEndpointinsightsTypelanguageCodes3OutputPathstreamSta" +
+	"tustemplateTypeAudioOffsetIN_PROGRESSUserContextclientTokendateOfBirthinputStreamoutputS3Uriresource" +
+	"ArnupdatedTimeuserContextAudioChunkDomainNameFHIRServerTagKeyListaudioChunkaudioEventfhirServermaxRe" +
+	"sultsnoteResultoauthTokenCLINICIANCOMPLETEDDomainArnJobStatusKmsKeyArnPRE_VISITRequestIdS3SourcesSUB" +
+	"MITTEDSUCCEEDEDSpecialtyTHEY_THEMTimestampWebAppUrlchannelIdcreatedAtidcRegionisPartialjobStatuskmsK" +
+	"eyArnnextTokenpatientIdrequestIds3SourcessegmentIdsessionIdspecialtywebAppUrlDELETINGDomainIdINACTIV" +
+	"EPronounsTagValuedomainIdpronounsDELETEDIntegerPATIENTSHE_HERcontentdomainsehrRolemessagetagKeysFAIL" +
+	"EDHE_HIMJobArnPAUSEDTagMapjobArnmemberuserIdEN_USGIRPPJobIdMULTIjobIdvalueBIRPFLACSIRPUnitnameroleta" +
+	"gstypeDAPPCMarnkeyuri"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.connecthealth", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1029, Target: 0, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2082, Target: 1, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1282, Target: 2, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 806, Target: 3, Traits: 3, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2118, Target: 4, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2554, Target: 5, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 162, Target: 6, Traits: 6, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 662, Target: 7, Traits: 7, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1788, Target: 8, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2329, Target: 9, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1496, Target: 10, Traits: 10, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1157, Target: 11, Traits: 11, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 45, Target: 12, Traits: 12, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 541, Target: 13, Traits: 13, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2428, Target: 14, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2154, Target: 15, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2928, Target: 16, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1767, Target: 17, Traits: 17, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3782, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2524, Target: 19, Traits: 16, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2859, Target: 256, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3032, Target: 198, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2967, Target: 74, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3325, Target: 23, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 3215, Target: 24, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 778, Target: 25, Traits: 16, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3405, Target: 19, Traits: 16, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2508, Target: 19, Traits: 16, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1634, Target: 19, Traits: 16, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 124, Target: 29, Traits: 16, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1909, Target: 184, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 124, Target: 31, Traits: 16, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1909, Target: 187, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2244, Target: 33, Traits: 18, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3782, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1132, Target: 35, Traits: 16, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3775, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2980, Target: 405, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3569, Target: 405, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1657, Target: 39, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3203, Target: 42, Traits: 16, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1929, Target: 249, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2100, Target: 42, Traits: 16, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1849, Target: 406, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3849, Target: 406, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3906, Target: 406, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3882, Target: 406, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3874, Target: 406, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2539, Target: 406, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1657, Target: 49, Traits: 16, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3203, Target: 42, Traits: 16, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3443, Target: 51, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3685, Target: 52, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3335, Target: 53, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3071, Target: 54, Traits: 16, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3695, Target: 406, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3677, Target: 406, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3733, Target: 406, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2295, Target: 58, Traits: 16, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3912, Target: 51, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3890, Target: 53, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3032, Target: 54, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3560, Target: 407, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2295, Target: 64, Traits: 16, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3832, Target: 58, Traits: 16, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 525, Target: 66, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2025, Target: 218, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2312, Target: 68, Traits: 16, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2831, Target: 71, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3596, Target: 96, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2733, Target: 71, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2915, Target: 406, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1809, Target: 406, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3083, Target: 74, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3345, Target: 75, Traits: 16, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3143, Target: 182, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3415, Target: 219, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2569, Target: 78, Traits: 16, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3385, Target: 75, Traits: 16, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3632, Target: 213, Traits: 16, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2584, Target: 81, Traits: 16, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3155, Target: 85, Traits: 16, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2761, Target: 83, Traits: 16, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3918, Target: 215, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3095, Target: 85, Traits: 16, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3470, Target: 406, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1473, Target: 87, Traits: 20, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3782, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3808, Target: 89, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3854, Target: 90, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3452, Target: 91, Traits: 16, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3497, Target: 406, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3226, Target: 406, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3796, Target: 406, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3506, Target: 406, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3461, Target: 96, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1949, Target: 97, Traits: 16, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1849, Target: 406, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3849, Target: 406, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3906, Target: 406, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3882, Target: 406, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3874, Target: 406, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2539, Target: 406, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2941, Target: 406, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1519, Target: 105, Traits: 16, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3203, Target: 97, Traits: 16, StrLen: 12, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1519, Target: 107, Traits: 16, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3203, Target: 97, Traits: 16, StrLen: 12, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1542, Target: 109, Traits: 16, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3365, Target: 23, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 691, Target: 111, Traits: 16, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3365, Target: 23, Traits: 21, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 448, Target: 113, Traits: 16, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3551, Target: 118, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2689, Target: 153, Traits: 16, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 448, Target: 116, Traits: 16, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3832, Target: 113, Traits: 16, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1701, Target: 118, Traits: 16, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 479, Target: 119, Traits: 16, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1402, Target: 156, Traits: 16, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2172, Target: 116, Traits: 16, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1354, Target: 66, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1330, Target: 123, Traits: 22, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 3375, Target: 109, Traits: 16, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2460, Target: 111, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2006, Target: 164, Traits: 16, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2190, Target: 119, Traits: 16, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1182, Target: 128, Traits: 16, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3844, Target: 406, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3859, Target: 406, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 237, Target: 131, Traits: 16, StrLen: 36, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3650, Target: 216, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3717, Target: 52, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3167, Target: 128, Traits: 16, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1889, Target: 148, Traits: 16, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3006, Target: 145, Traits: 16, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2172, Target: 116, Traits: 16, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1402, Target: 159, Traits: 16, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1745, Target: 162, Traits: 16, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1354, Target: 183, Traits: 16, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3191, Target: 168, Traits: 16, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2226, Target: 407, Traits: 16, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3045, Target: 407, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1055, Target: 145, Traits: 16, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3909, Target: 406, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3878, Target: 406, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 415, Target: 148, Traits: 16, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1207, Target: 149, Traits: 22, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2704, Target: 173, Traits: 16, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1378, Target: 87, Traits: 23, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2044, Target: 261, Traits: 24, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 862, Target: 153, Traits: 16, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3747, Target: 406, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3425, Target: 406, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 156, Traits: 16, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3281, Target: 215, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 632, Target: 29, Traits: 16, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 159, Traits: 16, StrLen: 45, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3281, Target: 215, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 632, Target: 31, Traits: 16, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 273, Target: 162, Traits: 16, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 974, Target: 25, Traits: 16, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 309, Target: 164, Traits: 16, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3902, Target: 166, Traits: 16, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 309, Target: 166, Traits: 16, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2719, Target: 406, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1232, Target: 168, Traits: 16, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3226, Target: 406, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3814, Target: 406, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3796, Target: 406, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3434, Target: 406, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 890, Target: 173, Traits: 16, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2363, Target: 175, Traits: 16, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 572, Target: 175, Traits: 16, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3641, Target: 405, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2444, Target: 24, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2803, Target: 24, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 3578, Target: 183, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3551, Target: 405, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3761, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1597, Target: 182, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2775, Target: 183, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 918, Target: 184, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2674, Target: 105, Traits: 16, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2817, Target: 39, Traits: 16, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 918, Target: 187, Traits: 16, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2674, Target: 107, Traits: 16, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2817, Target: 49, Traits: 16, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2396, Target: 190, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3179, Target: 215, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 510, Target: 192, Traits: 16, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2629, Target: 219, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 720, Target: 194, Traits: 16, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3614, Target: 219, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3259, Target: 217, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3725, Target: 202, Traits: 19, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 381, Target: 198, Traits: 16, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3226, Target: 406, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3796, Target: 406, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3434, Target: 406, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3701, Target: 202, Traits: 25, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3802, Target: 406, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3754, Target: 406, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3524, Target: 406, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3119, Target: 206, Traits: 16, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3425, Target: 406, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3479, Target: 208, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1257, Target: 209, Traits: 26, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3782, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3488, Target: 211, Traits: 16, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3918, Target: 215, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3488, Target: 213, Traits: 16, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3832, Target: 211, Traits: 16, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3287, Target: 215, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2599, Target: 216, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1723, Target: 217, Traits: 25, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1565, Target: 218, Traits: 25, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1588, Target: 219, Traits: 25, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 946, Target: 220, Traits: 25, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 749, Target: 221, Traits: 27, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3782, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3515, Target: 223, Traits: 16, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3107, Target: 406, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2614, Target: 225, Traits: 16, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1611, Target: 226, Traits: 16, StrLen: 23, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3912, Target: 225, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3032, Target: 238, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3560, Target: 407, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2993, Target: 407, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2956, Target: 407, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2954, Target: 407, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2789, Target: 235, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2412, Target: 236, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3832, Target: 226, Traits: 16, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2136, Target: 238, Traits: 16, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3695, Target: 406, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3693, Target: 406, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3733, Target: 406, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3355, Target: 242, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3355, Target: 243, Traits: 16, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3832, Target: 242, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3820, Target: 245, Traits: 16, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3915, Target: 242, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 248, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3709, Target: 248, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1869, Target: 249, Traits: 16, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3832, Target: 251, Traits: 16, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1081, Target: 251, Traits: 16, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3019, Target: 220, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2208, Target: 218, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1968, Target: 254, Traits: 28, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3782, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3289, Target: 256, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3237, Target: 257, Traits: 16, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3894, Target: 206, Traits: 16, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3838, Target: 219, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3659, Target: 223, Traits: 16, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1987, Target: 261, Traits: 29, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3782, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1138, Target: 263, Traits: 16, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3775, Target: 405, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 405, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3569, Target: 405, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3542, Target: 267, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1107, Target: 268, Traits: 16, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 30, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1029, Target: 271, Traits: 16, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2901, Target: 226, Traits: 16, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2261, Target: 273, Traits: 16, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3890, Target: 53, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3596, Target: 96, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1426, Target: 35, Traits: 16, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3898, Target: 245, Traits: 16, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2082, Target: 278, Traits: 16, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3912, Target: 51, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3890, Target: 53, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3596, Target: 96, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2346, Target: 68, Traits: 16, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3032, Target: 54, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3668, Target: 267, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2063, Target: 263, Traits: 16, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3560, Target: 407, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1450, Target: 288, Traits: 16, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1282, Target: 290, Traits: 16, StrLen: 24, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3912, Target: 225, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3032, Target: 238, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3560, Target: 407, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2993, Target: 407, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2956, Target: 407, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2954, Target: 407, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1002, Target: 299, Traits: 16, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 30, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 806, Target: 302, Traits: 16, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2901, Target: 226, Traits: 16, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2278, Target: 304, Traits: 16, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2118, Target: 306, Traits: 16, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3912, Target: 51, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3032, Target: 54, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2747, Target: 310, Traits: 16, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2554, Target: 312, Traits: 16, StrLen: 15, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3912, Target: 51, Traits: 16, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3890, Target: 53, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3596, Target: 96, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2346, Target: 68, Traits: 16, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3032, Target: 54, Traits: 16, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3668, Target: 267, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2063, Target: 263, Traits: 16, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3560, Target: 407, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3898, Target: 245, Traits: 16, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 200, Target: 323, Traits: 16, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3650, Target: 216, Traits: 30, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 30, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 162, Target: 327, Traits: 16, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 345, Target: 131, Traits: 16, StrLen: 36, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 834, Target: 329, Traits: 16, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3864, Target: 90, Traits: 30, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 662, Target: 332, Traits: 16, StrLen: 29, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3864, Target: 90, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3826, Target: 89, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3587, Target: 91, Traits: 16, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3131, Target: 407, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3303, Target: 407, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2845, Target: 83, Traits: 16, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3032, Target: 182, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2873, Target: 194, Traits: 16, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2659, Target: 81, Traits: 16, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1354, Target: 192, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3314, Target: 257, Traits: 16, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2644, Target: 78, Traits: 16, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2492, Target: 190, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1829, Target: 346, Traits: 16, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 30, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1788, Target: 349, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2901, Target: 226, Traits: 16, StrLen: 12, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2380, Target: 351, Traits: 16, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3032, Target: 54, Traits: 32, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3395, Target: 408, Traits: 33, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3605, Target: 405, Traits: 34, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2329, Target: 355, Traits: 16, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3768, Target: 64, Traits: 16, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 405, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1679, Target: 358, Traits: 16, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3395, Target: 408, Traits: 33, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3605, Target: 405, Traits: 34, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1496, Target: 362, Traits: 16, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3058, Target: 236, Traits: 16, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3605, Target: 405, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1306, Target: 365, Traits: 16, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3292, Target: 405, Traits: 30, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1157, Target: 367, Traits: 16, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3898, Target: 245, Traits: 16, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 85, Target: 369, Traits: 16, StrLen: 39, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3650, Target: 216, Traits: 35, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3717, Target: 52, Traits: 36, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 37, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3167, Target: 128, Traits: 38, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1889, Target: 148, Traits: 39, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3006, Target: 145, Traits: 40, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3270, Target: 123, Traits: 41, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 45, Target: 377, Traits: 16, StrLen: 40, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3650, Target: 216, Traits: 35, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3717, Target: 52, Traits: 36, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2901, Target: 235, Traits: 37, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3623, Target: 208, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3167, Target: 128, Traits: 38, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1889, Target: 148, Traits: 39, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3006, Target: 145, Traits: 40, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2887, Target: 149, Traits: 41, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 602, Target: 386, Traits: 16, StrLen: 30, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3717, Target: 52, Traits: 30, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2873, Target: 194, Traits: 16, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2659, Target: 81, Traits: 16, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1354, Target: 192, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3314, Target: 257, Traits: 16, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2644, Target: 78, Traits: 16, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2492, Target: 190, Traits: 16, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3248, Target: 182, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 541, Target: 395, Traits: 16, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3826, Target: 89, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3864, Target: 90, Traits: 16, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3131, Target: 407, Traits: 31, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2428, Target: 399, Traits: 16, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3292, Target: 405, Traits: 30, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3898, Target: 245, Traits: 16, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2154, Target: 402, Traits: 16, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3292, Target: 405, Traits: 30, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3789, Target: 243, Traits: 43, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 968, Target: 405, Traits: 16, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 3886, Target: 406, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 3533, Target: 407, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 3740, Target: 408, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/domains/{domainId}/subscriptions/{subscriptionId}/activate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/domain",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/domains/{domainId}/subscriptions",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/domains/{domainId}/subscriptions/{subscriptionId}/deactivate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/domain/{domainId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/domain/{domainId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/medical-scribe-stream/domain/{domainId}/subscription/{subscriptionId}/session/{sessionId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/domain/{domainId}/patient-insights-job/{jobId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/domains/{domainId}/subscriptions/{subscriptionId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/domain",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/domains/{domainId}/subscriptions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/medical-scribe-stream/",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/domain/{domainId}/patient-insights-job",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.EventPayload{}}, DirectMask: 0x100000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-session-id"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-domain-id"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-subscription-id"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-language-code"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-sample-rate"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-medscribe-media-encoding"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-request-id"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [409]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+}
+
+var ActivateSubscription = &handles[0]
+
+var CreateDomain = &handles[1]
+
+var CreateSubscription = &handles[2]
+
+var DeactivateSubscription = &handles[3]
+
+var DeleteDomain = &handles[4]
+
+var GetDomain = &handles[5]
+
+var GetMedicalScribeListeningSession = &handles[6]
+
+var GetPatientInsightsJob = &handles[7]
+
+var GetSubscription = &handles[8]
+
+var ListDomains = &handles[9]
+
+var ListSubscriptions = &handles[10]
+
+var ListTagsForResource = &handles[11]
+
+var StartMedicalScribeListeningSession = &handles[12]
+
+var StartPatientInsightsJob = &handles[13]
+
+var TagResource = &handles[14]
+
+var UntagResource = &handles[15]
+
+var _ConnectHealth = &handles[16]
+
+var AccessDeniedException = &handles[17]
+var AccessDeniedException_message = &handles[18]
+
+var ArtifactDetails = &handles[19]
+var ArtifactDetails_outputLocation = &handles[20]
+var ArtifactDetails_status = &handles[21]
+var ArtifactDetails_failureReason = &handles[22]
+
+var _AudioChunk = &handles[23]
+
+var _AudioOffset = &handles[24]
+
+var ClinicalNoteGenerationResult = &handles[25]
+var ClinicalNoteGenerationResult_noteResult = &handles[26]
+var ClinicalNoteGenerationResult_transcriptResult = &handles[27]
+var ClinicalNoteGenerationResult_afterVisitSummaryResult = &handles[28]
+
+var ClinicalNoteGenerationSettings = &handles[29]
+var ClinicalNoteGenerationSettings_noteTemplateSettings = &handles[30]
+
+var ClinicalNoteGenerationSettingsResponse = &handles[31]
+var ClinicalNoteGenerationSettingsResponse_noteTemplateSettings = &handles[32]
+
+var ConflictException = &handles[33]
+var ConflictException_message = &handles[34]
+
+var CreateWebAppConfiguration = &handles[35]
+var CreateWebAppConfiguration_ehrRole = &handles[36]
+var CreateWebAppConfiguration_idcInstanceId = &handles[37]
+var CreateWebAppConfiguration_idcRegion = &handles[38]
+
+var CustomTemplate = &handles[39]
+var CustomTemplate_templateType = &handles[40]
+var CustomTemplate_templateInstructions = &handles[41]
+
+var CustomTemplateBase = &handles[42]
+var CustomTemplateBase_HISTORY_AND_PHYSICAL = &handles[43]
+var CustomTemplateBase_GIRPP = &handles[44]
+var CustomTemplateBase_DAP = &handles[45]
+var CustomTemplateBase_SIRP = &handles[46]
+var CustomTemplateBase_BIRP = &handles[47]
+var CustomTemplateBase_BEHAVIORAL_SOAP = &handles[48]
+
+var CustomTemplateResponse = &handles[49]
+var CustomTemplateResponse_templateType = &handles[50]
+
+var _DomainArn = &handles[51]
+
+var _DomainId = &handles[52]
+
+var _DomainName = &handles[53]
+
+var DomainStatus = &handles[54]
+var DomainStatus_ACTIVE = &handles[55]
+var DomainStatus_DELETING = &handles[56]
+var DomainStatus_DELETED = &handles[57]
+
+var DomainSummary = &handles[58]
+var DomainSummary_domainId = &handles[59]
+var DomainSummary_arn = &handles[60]
+var DomainSummary_name = &handles[61]
+var DomainSummary_status = &handles[62]
+var DomainSummary_createdAt = &handles[63]
+
+var _DomainSummaryList = &handles[64]
+var _DomainSummaryList_member = &handles[65]
+
+var EncounterContext = &handles[66]
+var EncounterContext_unstructuredContext = &handles[67]
+
+var EncryptionContext = &handles[68]
+var EncryptionContext_encryptionType = &handles[69]
+var EncryptionContext_kmsKeyArn = &handles[70]
+
+var EncryptionType = &handles[71]
+var EncryptionType_AWS_OWNED_KEY = &handles[72]
+var EncryptionType_CUSTOMER_MANAGED_KEY = &handles[73]
+
+var _ErrorMessage = &handles[74]
+
+var FHIRServer = &handles[75]
+var FHIRServer_fhirEndpoint = &handles[76]
+var FHIRServer_oauthToken = &handles[77]
+
+var InputDataConfig = &handles[78]
+var InputDataConfig_fhirServer = &handles[79]
+var InputDataConfig_s3Sources = &handles[80]
+
+var InsightsContext = &handles[81]
+var InsightsContext_insightsType = &handles[82]
+
+var InsightsOutput = &handles[83]
+var InsightsOutput_uri = &handles[84]
+
+var InsightsType = &handles[85]
+var InsightsType_PRE_VISIT = &handles[86]
+
+var InternalServerException = &handles[87]
+var InternalServerException_message = &handles[88]
+
+var _JobArn = &handles[89]
+
+var _JobId = &handles[90]
+
+var JobStatus = &handles[91]
+var JobStatus_SUBMITTED = &handles[92]
+var JobStatus_IN_PROGRESS = &handles[93]
+var JobStatus_FAILED = &handles[94]
+var JobStatus_SUCCEEDED = &handles[95]
+
+var _KmsKeyArn = &handles[96]
+
+var ManagedNoteTemplate = &handles[97]
+var ManagedNoteTemplate_HISTORY_AND_PHYSICAL = &handles[98]
+var ManagedNoteTemplate_GIRPP = &handles[99]
+var ManagedNoteTemplate_DAP = &handles[100]
+var ManagedNoteTemplate_SIRP = &handles[101]
+var ManagedNoteTemplate_BIRP = &handles[102]
+var ManagedNoteTemplate_BEHAVIORAL_SOAP = &handles[103]
+var ManagedNoteTemplate_PHYSICAL_SOAP = &handles[104]
+
+var ManagedTemplate = &handles[105]
+var ManagedTemplate_templateType = &handles[106]
+
+var ManagedTemplateResponse = &handles[107]
+var ManagedTemplateResponse_templateType = &handles[108]
+
+var MedicalScribeAudioEvent = &handles[109]
+var MedicalScribeAudioEvent_audioChunk = &handles[110]
+
+var MedicalScribeBinaryAudioEvent = &handles[111]
+var MedicalScribeBinaryAudioEvent_audioChunk = &handles[112]
+
+var MedicalScribeChannelDefinition = &handles[113]
+var MedicalScribeChannelDefinition_channelId = &handles[114]
+var MedicalScribeChannelDefinition_participantRole = &handles[115]
+
+var _MedicalScribeChannelDefinitions = &handles[116]
+var _MedicalScribeChannelDefinitions_member = &handles[117]
+
+var _MedicalScribeChannelId = &handles[118]
+
+var MedicalScribeConfigurationEvent = &handles[119]
+var MedicalScribeConfigurationEvent_postStreamActionSettings = &handles[120]
+var MedicalScribeConfigurationEvent_channelDefinitions = &handles[121]
+var MedicalScribeConfigurationEvent_encounterContext = &handles[122]
+
+var MedicalScribeInputStream = &handles[123]
+var MedicalScribeInputStream_audioEvent = &handles[124]
+var MedicalScribeInputStream_binaryAudioEvent = &handles[125]
+var MedicalScribeInputStream_sessionControlEvent = &handles[126]
+var MedicalScribeInputStream_configurationEvent = &handles[127]
+
+var MedicalScribeLanguageCode = &handles[128]
+var MedicalScribeLanguageCode_EN_US = &handles[129]
+var MedicalScribeLanguageCode_MULTI = &handles[130]
+
+var MedicalScribeListeningSessionDetails = &handles[131]
+var MedicalScribeListeningSessionDetails_sessionId = &handles[132]
+var MedicalScribeListeningSessionDetails_domainId = &handles[133]
+var MedicalScribeListeningSessionDetails_subscriptionId = &handles[134]
+var MedicalScribeListeningSessionDetails_languageCode = &handles[135]
+var MedicalScribeListeningSessionDetails_mediaSampleRateHertz = &handles[136]
+var MedicalScribeListeningSessionDetails_mediaEncoding = &handles[137]
+var MedicalScribeListeningSessionDetails_channelDefinitions = &handles[138]
+var MedicalScribeListeningSessionDetails_postStreamActionSettings = &handles[139]
+var MedicalScribeListeningSessionDetails_postStreamActionResult = &handles[140]
+var MedicalScribeListeningSessionDetails_encounterContextProvided = &handles[141]
+var MedicalScribeListeningSessionDetails_streamStatus = &handles[142]
+var MedicalScribeListeningSessionDetails_streamCreationTime = &handles[143]
+var MedicalScribeListeningSessionDetails_streamEndTime = &handles[144]
+
+var MedicalScribeMediaEncoding = &handles[145]
+var MedicalScribeMediaEncoding_PCM = &handles[146]
+var MedicalScribeMediaEncoding_FLAC = &handles[147]
+
+var _MedicalScribeMediaSampleRateHertz = &handles[148]
+
+var MedicalScribeOutputStream = &handles[149]
+var MedicalScribeOutputStream_transcriptEvent = &handles[150]
+var MedicalScribeOutputStream_internalFailureException = &handles[151]
+var MedicalScribeOutputStream_validationException = &handles[152]
+
+var MedicalScribeParticipantRole = &handles[153]
+var MedicalScribeParticipantRole_PATIENT = &handles[154]
+var MedicalScribeParticipantRole_CLINICIAN = &handles[155]
+
+var MedicalScribePostStreamActionSettings = &handles[156]
+var MedicalScribePostStreamActionSettings_outputS3Uri = &handles[157]
+var MedicalScribePostStreamActionSettings_clinicalNoteGenerationSettings = &handles[158]
+
+var MedicalScribePostStreamActionSettingsResponse = &handles[159]
+var MedicalScribePostStreamActionSettingsResponse_outputS3Uri = &handles[160]
+var MedicalScribePostStreamActionSettingsResponse_clinicalNoteGenerationSettings = &handles[161]
+
+var MedicalScribePostStreamActionsResult = &handles[162]
+var MedicalScribePostStreamActionsResult_clinicalNoteGenerationResult = &handles[163]
+
+var MedicalScribeSessionControlEvent = &handles[164]
+var MedicalScribeSessionControlEvent_type = &handles[165]
+
+var MedicalScribeSessionControlEventType = &handles[166]
+var MedicalScribeSessionControlEventType_END_OF_SESSION = &handles[167]
+
+var MedicalScribeStreamStatus = &handles[168]
+var MedicalScribeStreamStatus_IN_PROGRESS = &handles[169]
+var MedicalScribeStreamStatus_PAUSED = &handles[170]
+var MedicalScribeStreamStatus_FAILED = &handles[171]
+var MedicalScribeStreamStatus_COMPLETED = &handles[172]
+
+var MedicalScribeTranscriptEvent = &handles[173]
+var MedicalScribeTranscriptEvent_transcriptSegment = &handles[174]
+
+var MedicalScribeTranscriptSegment = &handles[175]
+var MedicalScribeTranscriptSegment_segmentId = &handles[176]
+var MedicalScribeTranscriptSegment_audioBeginOffset = &handles[177]
+var MedicalScribeTranscriptSegment_audioEndOffset = &handles[178]
+var MedicalScribeTranscriptSegment_isPartial = &handles[179]
+var MedicalScribeTranscriptSegment_channelId = &handles[180]
+var MedicalScribeTranscriptSegment_content = &handles[181]
+
+var _NonEmptyString = &handles[182]
+
+var _NonNullBoolean = &handles[183]
+
+var NoteTemplateSettings = &handles[184]
+var NoteTemplateSettings_managedTemplate = &handles[185]
+var NoteTemplateSettings_customTemplate = &handles[186]
+
+var NoteTemplateSettingsResponse = &handles[187]
+var NoteTemplateSettingsResponse_managedTemplate = &handles[188]
+var NoteTemplateSettingsResponse_customTemplate = &handles[189]
+
+var OutputDataConfig = &handles[190]
+var OutputDataConfig_s3OutputPath = &handles[191]
+
+var PatientInsightsEncounterContext = &handles[192]
+var PatientInsightsEncounterContext_encounterReason = &handles[193]
+
+var PatientInsightsPatientContext = &handles[194]
+var PatientInsightsPatientContext_patientId = &handles[195]
+var PatientInsightsPatientContext_dateOfBirth = &handles[196]
+var PatientInsightsPatientContext_pronouns = &handles[197]
+
+var PostStreamArtifactGenerationStatus = &handles[198]
+var PostStreamArtifactGenerationStatus_IN_PROGRESS = &handles[199]
+var PostStreamArtifactGenerationStatus_FAILED = &handles[200]
+var PostStreamArtifactGenerationStatus_COMPLETED = &handles[201]
+
+var Pronouns = &handles[202]
+var Pronouns_HE_HIM = &handles[203]
+var Pronouns_SHE_HER = &handles[204]
+var Pronouns_THEY_THEM = &handles[205]
+
+var ProviderRole = &handles[206]
+var ProviderRole_CLINICIAN = &handles[207]
+
+var _RequestId = &handles[208]
+
+var ResourceNotFoundException = &handles[209]
+var ResourceNotFoundException_message = &handles[210]
+
+var S3Source = &handles[211]
+var S3Source_uri = &handles[212]
+
+var _S3Sources = &handles[213]
+var _S3Sources_member = &handles[214]
+
+var _S3Uri = &handles[215]
+
+var _ScribeSessionId = &handles[216]
+
+var _SensitiveIsoDateString = &handles[217]
+
+var _SensitiveMarkdownString = &handles[218]
+
+var _SensitiveNonEmptyString = &handles[219]
+
+var _SensitiveSectionHeaderString = &handles[220]
+
+var ServiceQuotaExceededException = &handles[221]
+var ServiceQuotaExceededException_message = &handles[222]
+
+var Specialty = &handles[223]
+var Specialty_PRIMARY_CARE = &handles[224]
+
+var _SubscriptionArn = &handles[225]
+
+var SubscriptionDescription = &handles[226]
+var SubscriptionDescription_domainId = &handles[227]
+var SubscriptionDescription_subscriptionId = &handles[228]
+var SubscriptionDescription_arn = &handles[229]
+var SubscriptionDescription_status = &handles[230]
+var SubscriptionDescription_createdAt = &handles[231]
+var SubscriptionDescription_lastUpdatedAt = &handles[232]
+var SubscriptionDescription_activatedAt = &handles[233]
+var SubscriptionDescription_deactivatedAt = &handles[234]
+
+var _SubscriptionId = &handles[235]
+
+var _SubscriptionList = &handles[236]
+var _SubscriptionList_member = &handles[237]
+
+var SubscriptionStatus = &handles[238]
+var SubscriptionStatus_ACTIVE = &handles[239]
+var SubscriptionStatus_INACTIVE = &handles[240]
+var SubscriptionStatus_DELETED = &handles[241]
+
+var _TagKey = &handles[242]
+
+var _TagKeyList = &handles[243]
+var _TagKeyList_member = &handles[244]
+
+var _TagMap = &handles[245]
+var _TagMap_key = &handles[246]
+var _TagMap_value = &handles[247]
+
+var _TagValue = &handles[248]
+
+var _TemplateInstructions = &handles[249]
+var _TemplateInstructions_member = &handles[250]
+
+var TemplateSectionInstruction = &handles[251]
+var TemplateSectionInstruction_sectionHeader = &handles[252]
+var TemplateSectionInstruction_sectionInstruction = &handles[253]
+
+var ThrottlingException = &handles[254]
+var ThrottlingException_message = &handles[255]
+
+var _Uri = &handles[256]
+
+var UserContext = &handles[257]
+var UserContext_role = &handles[258]
+var UserContext_userId = &handles[259]
+var UserContext_specialty = &handles[260]
+
+var ValidationException = &handles[261]
+var ValidationException_message = &handles[262]
+
+var WebAppConfiguration = &handles[263]
+var WebAppConfiguration_ehrRole = &handles[264]
+var WebAppConfiguration_idcApplicationId = &handles[265]
+var WebAppConfiguration_idcRegion = &handles[266]
+
+var _WebAppUrl = &handles[267]
+
+var ActivateSubscriptionInput = &handles[268]
+var ActivateSubscriptionInput_domainId = &handles[269]
+var ActivateSubscriptionInput_subscriptionId = &handles[270]
+
+var ActivateSubscriptionOutput = &handles[271]
+var ActivateSubscriptionOutput_subscription = &handles[272]
+
+var CreateDomainInput = &handles[273]
+var CreateDomainInput_name = &handles[274]
+var CreateDomainInput_kmsKeyArn = &handles[275]
+var CreateDomainInput_webAppSetupConfiguration = &handles[276]
+var CreateDomainInput_tags = &handles[277]
+
+var CreateDomainOutput = &handles[278]
+var CreateDomainOutput_domainId = &handles[279]
+var CreateDomainOutput_arn = &handles[280]
+var CreateDomainOutput_name = &handles[281]
+var CreateDomainOutput_kmsKeyArn = &handles[282]
+var CreateDomainOutput_encryptionContext = &handles[283]
+var CreateDomainOutput_status = &handles[284]
+var CreateDomainOutput_webAppUrl = &handles[285]
+var CreateDomainOutput_webAppConfiguration = &handles[286]
+var CreateDomainOutput_createdAt = &handles[287]
+
+var CreateSubscriptionInput = &handles[288]
+var CreateSubscriptionInput_domainId = &handles[289]
+
+var CreateSubscriptionOutput = &handles[290]
+var CreateSubscriptionOutput_domainId = &handles[291]
+var CreateSubscriptionOutput_subscriptionId = &handles[292]
+var CreateSubscriptionOutput_arn = &handles[293]
+var CreateSubscriptionOutput_status = &handles[294]
+var CreateSubscriptionOutput_createdAt = &handles[295]
+var CreateSubscriptionOutput_lastUpdatedAt = &handles[296]
+var CreateSubscriptionOutput_activatedAt = &handles[297]
+var CreateSubscriptionOutput_deactivatedAt = &handles[298]
+
+var DeactivateSubscriptionInput = &handles[299]
+var DeactivateSubscriptionInput_domainId = &handles[300]
+var DeactivateSubscriptionInput_subscriptionId = &handles[301]
+
+var DeactivateSubscriptionOutput = &handles[302]
+var DeactivateSubscriptionOutput_subscription = &handles[303]
+
+var DeleteDomainInput = &handles[304]
+var DeleteDomainInput_domainId = &handles[305]
+
+var DeleteDomainOutput = &handles[306]
+var DeleteDomainOutput_domainId = &handles[307]
+var DeleteDomainOutput_arn = &handles[308]
+var DeleteDomainOutput_status = &handles[309]
+
+var GetDomainInput = &handles[310]
+var GetDomainInput_domainId = &handles[311]
+
+var GetDomainOutput = &handles[312]
+var GetDomainOutput_domainId = &handles[313]
+var GetDomainOutput_arn = &handles[314]
+var GetDomainOutput_name = &handles[315]
+var GetDomainOutput_kmsKeyArn = &handles[316]
+var GetDomainOutput_encryptionContext = &handles[317]
+var GetDomainOutput_status = &handles[318]
+var GetDomainOutput_webAppUrl = &handles[319]
+var GetDomainOutput_webAppConfiguration = &handles[320]
+var GetDomainOutput_createdAt = &handles[321]
+var GetDomainOutput_tags = &handles[322]
+
+var GetMedicalScribeListeningSessionInput = &handles[323]
+var GetMedicalScribeListeningSessionInput_sessionId = &handles[324]
+var GetMedicalScribeListeningSessionInput_domainId = &handles[325]
+var GetMedicalScribeListeningSessionInput_subscriptionId = &handles[326]
+
+var GetMedicalScribeListeningSessionOutput = &handles[327]
+var GetMedicalScribeListeningSessionOutput_medicalScribeListeningSessionDetails = &handles[328]
+
+var GetPatientInsightsJobRequest = &handles[329]
+var GetPatientInsightsJobRequest_domainId = &handles[330]
+var GetPatientInsightsJobRequest_jobId = &handles[331]
+
+var GetPatientInsightsJobResponse = &handles[332]
+var GetPatientInsightsJobResponse_jobId = &handles[333]
+var GetPatientInsightsJobResponse_jobArn = &handles[334]
+var GetPatientInsightsJobResponse_jobStatus = &handles[335]
+var GetPatientInsightsJobResponse_creationTime = &handles[336]
+var GetPatientInsightsJobResponse_updatedTime = &handles[337]
+var GetPatientInsightsJobResponse_insightsOutput = &handles[338]
+var GetPatientInsightsJobResponse_statusDetails = &handles[339]
+var GetPatientInsightsJobResponse_patientContext = &handles[340]
+var GetPatientInsightsJobResponse_insightsContext = &handles[341]
+var GetPatientInsightsJobResponse_encounterContext = &handles[342]
+var GetPatientInsightsJobResponse_userContext = &handles[343]
+var GetPatientInsightsJobResponse_inputDataConfig = &handles[344]
+var GetPatientInsightsJobResponse_outputDataConfig = &handles[345]
+
+var GetSubscriptionInput = &handles[346]
+var GetSubscriptionInput_domainId = &handles[347]
+var GetSubscriptionInput_subscriptionId = &handles[348]
+
+var GetSubscriptionOutput = &handles[349]
+var GetSubscriptionOutput_subscription = &handles[350]
+
+var ListDomainsInput = &handles[351]
+var ListDomainsInput_status = &handles[352]
+var ListDomainsInput_maxResults = &handles[353]
+var ListDomainsInput_nextToken = &handles[354]
+
+var ListDomainsOutput = &handles[355]
+var ListDomainsOutput_domains = &handles[356]
+var ListDomainsOutput_nextToken = &handles[357]
+
+var ListSubscriptionsInput = &handles[358]
+var ListSubscriptionsInput_domainId = &handles[359]
+var ListSubscriptionsInput_maxResults = &handles[360]
+var ListSubscriptionsInput_nextToken = &handles[361]
+
+var ListSubscriptionsOutput = &handles[362]
+var ListSubscriptionsOutput_subscriptions = &handles[363]
+var ListSubscriptionsOutput_nextToken = &handles[364]
+
+var ListTagsForResourceInput = &handles[365]
+var ListTagsForResourceInput_resourceArn = &handles[366]
+
+var ListTagsForResourceOutput = &handles[367]
+var ListTagsForResourceOutput_tags = &handles[368]
+
+var StartMedicalScribeListeningSessionInput = &handles[369]
+var StartMedicalScribeListeningSessionInput_sessionId = &handles[370]
+var StartMedicalScribeListeningSessionInput_domainId = &handles[371]
+var StartMedicalScribeListeningSessionInput_subscriptionId = &handles[372]
+var StartMedicalScribeListeningSessionInput_languageCode = &handles[373]
+var StartMedicalScribeListeningSessionInput_mediaSampleRateHertz = &handles[374]
+var StartMedicalScribeListeningSessionInput_mediaEncoding = &handles[375]
+var StartMedicalScribeListeningSessionInput_inputStream = &handles[376]
+
+var StartMedicalScribeListeningSessionOutput = &handles[377]
+var StartMedicalScribeListeningSessionOutput_sessionId = &handles[378]
+var StartMedicalScribeListeningSessionOutput_domainId = &handles[379]
+var StartMedicalScribeListeningSessionOutput_subscriptionId = &handles[380]
+var StartMedicalScribeListeningSessionOutput_requestId = &handles[381]
+var StartMedicalScribeListeningSessionOutput_languageCode = &handles[382]
+var StartMedicalScribeListeningSessionOutput_mediaSampleRateHertz = &handles[383]
+var StartMedicalScribeListeningSessionOutput_mediaEncoding = &handles[384]
+var StartMedicalScribeListeningSessionOutput_responseStream = &handles[385]
+
+var StartPatientInsightsJobRequest = &handles[386]
+var StartPatientInsightsJobRequest_domainId = &handles[387]
+var StartPatientInsightsJobRequest_patientContext = &handles[388]
+var StartPatientInsightsJobRequest_insightsContext = &handles[389]
+var StartPatientInsightsJobRequest_encounterContext = &handles[390]
+var StartPatientInsightsJobRequest_userContext = &handles[391]
+var StartPatientInsightsJobRequest_inputDataConfig = &handles[392]
+var StartPatientInsightsJobRequest_outputDataConfig = &handles[393]
+var StartPatientInsightsJobRequest_clientToken = &handles[394]
+
+var StartPatientInsightsJobResponse = &handles[395]
+var StartPatientInsightsJobResponse_jobArn = &handles[396]
+var StartPatientInsightsJobResponse_jobId = &handles[397]
+var StartPatientInsightsJobResponse_creationTime = &handles[398]
+
+var TagResourceInput = &handles[399]
+var TagResourceInput_resourceArn = &handles[400]
+var TagResourceInput_tags = &handles[401]
+
+var UntagResourceInput = &handles[402]
+var UntagResourceInput_resourceArn = &handles[403]
+var UntagResourceInput_tagKeys = &handles[404]
+
+var ConnectHealth = &smithy.ServiceSchema{Schema: &handles[16], Version: "2025-01-29"}

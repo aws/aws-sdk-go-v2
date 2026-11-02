@@ -4,1401 +4,1211 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchAddChannelRoleToAccessors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddChannelRoleToAccessors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/spaces/{spaceId}/channels/{channelId}/roles",
-	Code: 200})
-
-var BatchAddRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddRole",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/spaces/{spaceId}/roles",
-	Code: 200})
-
-var BatchRemoveChannelRoleFromAccessors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveChannelRoleFromAccessors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/spaces/{spaceId}/channels/{channelId}/roles",
-	Code: 200})
-
-var BatchRemoveRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveRole",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/spaces/{spaceId}/roles",
-	Code: 200})
-
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/spaces/{spaceId}/channels",
-	Code: 200})
-
-var CreateSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/spaces",
-	Code: 200})
-
-var DeleteSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "DeleteSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/spaces/{spaceId}",
-	Code: 200})
-
-var DeregisterAdmin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "DeregisterAdmin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/spaces/{spaceId}/admins/{adminId}",
-	Code: 200})
-
-var GetChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/spaces/{spaceId}/channels/{channelId}",
-	Code: 200})
-
-var GetSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/spaces/{spaceId}",
-	Code: 200})
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/spaces/{spaceId}/channels",
-	Code: 200})
-
-var ListSpaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListSpaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/spaces",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var RegisterAdmin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "RegisterAdmin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/spaces/{spaceId}/admins/{adminId}",
-	Code: 200})
-
-var SendInvites = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SendInvites",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/spaces/{spaceId}/invite",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/spaces/{spaceId}/channels/{channelId}",
-	Code: 200})
-
-var UpdateSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/spaces/{spaceId}",
-	Code: 200})
-
-var _RepostSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "RepostSpace",
-}, smithy.ShapeTypeService, 0)
-
-var RepostSpace = smithy.NewServiceSchema(_RepostSpace, "2022-05-13")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccessorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AccessorId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessorIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AccessorIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccessorIdList_member *smithy.Schema
-
-var _AdminId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AdminId",
-}, smithy.ShapeTypeString, 0)
-
-var _AllowedDomainsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AllowedDomainsList",
-}, smithy.ShapeTypeList, 1)
-var _AllowedDomainsList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var BatchError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchError_accessorId *smithy.Schema
-
-var BatchError_error *smithy.Schema
-
-var BatchError_message *smithy.Schema
-
-var _BatchErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchErrorList_member *smithy.Schema
-
-var ChannelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelData",
-}, smithy.ShapeTypeStructure, 9)
-var ChannelData_spaceId *smithy.Schema
-
-var ChannelData_channelId *smithy.Schema
-
-var ChannelData_channelName *smithy.Schema
-
-var ChannelData_channelDescription *smithy.Schema
-
-var ChannelData_createDateTime *smithy.Schema
-
-var ChannelData_deleteDateTime *smithy.Schema
-
-var ChannelData_channelStatus *smithy.Schema
-
-var ChannelData_userCount *smithy.Schema
-
-var ChannelData_groupCount *smithy.Schema
-
-var _ChannelDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelId",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ChannelRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelRole",
-}, smithy.ShapeTypeEnum, 4)
-var ChannelRole_ASKER *smithy.Schema
-
-var ChannelRole_EXPERT *smithy.Schema
-
-var ChannelRole_MODERATOR *smithy.Schema
-
-var ChannelRole_SUPPORTREQUESTOR *smithy.Schema
-
-var _ChannelRoleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelRoleList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelRoleList_member *smithy.Schema
-
-var _ChannelRoles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelRoles",
-}, smithy.ShapeTypeMap, 2)
-var _ChannelRoles_key *smithy.Schema
-
-var _ChannelRoles_value *smithy.Schema
-
-var _ChannelsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelsList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelsList_member *smithy.Schema
-
-var ChannelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelStatus",
-}, smithy.ShapeTypeEnum, 6)
-var ChannelStatus_CREATED *smithy.Schema
-
-var ChannelStatus_CREATING *smithy.Schema
-
-var ChannelStatus_CREATE_FAILED *smithy.Schema
-
-var ChannelStatus_DELETED *smithy.Schema
-
-var ChannelStatus_DELETING *smithy.Schema
-
-var ChannelStatus_DELETE_FAILED *smithy.Schema
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ConfigurationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ConfigurationStatus_CONFIGURED *smithy.Schema
-
-var ConfigurationStatus_UNCONFIGURED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _ContentSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ContentSize",
-}, smithy.ShapeTypeLong, 0)
-
-var _EmailDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "EmailDomain",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FeatureEnableParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "FeatureEnableParameter",
-}, smithy.ShapeTypeEnum, 2)
-var FeatureEnableParameter_ENABLED *smithy.Schema
-
-var FeatureEnableParameter_DISABLED *smithy.Schema
-
-var FeatureEnableStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "FeatureEnableStatus",
-}, smithy.ShapeTypeEnum, 3)
-var FeatureEnableStatus_ENABLED *smithy.Schema
-
-var FeatureEnableStatus_DISABLED *smithy.Schema
-
-var FeatureEnableStatus_NOT_ALLOWED *smithy.Schema
-
-var _GroupAdmins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GroupAdmins",
-}, smithy.ShapeTypeList, 1)
-var _GroupAdmins_member *smithy.Schema
-
-var _GroupCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GroupCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IdentityStoreId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "IdentityStoreId",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var _InviteBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "InviteBody",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _InviteTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "InviteTitle",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _KMSKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "KMSKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ListChannelsLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListChannelsLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListSpacesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListSpacesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProvisioningStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ProvisioningStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var Role = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Role",
-}, smithy.ShapeTypeEnum, 4)
-var Role_EXPERT *smithy.Schema
-
-var Role_MODERATOR *smithy.Schema
-
-var Role_ADMINISTRATOR *smithy.Schema
-
-var Role_SUPPORTREQUESTOR *smithy.Schema
-
-var _RoleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "RoleList",
-}, smithy.ShapeTypeList, 1)
-var _RoleList_member *smithy.Schema
-
-var _Roles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Roles",
-}, smithy.ShapeTypeMap, 2)
-var _Roles_key *smithy.Schema
-
-var _Roles_value *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var SpaceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceData",
-}, smithy.ShapeTypeStructure, 17)
-var SpaceData_spaceId *smithy.Schema
-
-var SpaceData_arn *smithy.Schema
-
-var SpaceData_name *smithy.Schema
-
-var SpaceData_description *smithy.Schema
-
-var SpaceData_status *smithy.Schema
-
-var SpaceData_configurationStatus *smithy.Schema
-
-var SpaceData_vanityDomainStatus *smithy.Schema
-
-var SpaceData_vanityDomain *smithy.Schema
-
-var SpaceData_randomDomain *smithy.Schema
-
-var SpaceData_tier *smithy.Schema
-
-var SpaceData_storageLimit *smithy.Schema
-
-var SpaceData_createDateTime *smithy.Schema
-
-var SpaceData_deleteDateTime *smithy.Schema
-
-var SpaceData_userKMSKey *smithy.Schema
-
-var SpaceData_userCount *smithy.Schema
-
-var SpaceData_contentSize *smithy.Schema
-
-var SpaceData_supportedEmailDomains *smithy.Schema
-
-var _SpaceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SpaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _SpaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SpacesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpacesList",
-}, smithy.ShapeTypeList, 1)
-var _SpacesList_member *smithy.Schema
-
-var _SpaceSubdomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceSubdomain",
-}, smithy.ShapeTypeString, 0)
-
-var _StorageLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "StorageLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var SupportedEmailDomainsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SupportedEmailDomainsParameters",
-}, smithy.ShapeTypeStructure, 2)
-var SupportedEmailDomainsParameters_enabled *smithy.Schema
-
-var SupportedEmailDomainsParameters_allowedDomains *smithy.Schema
-
-var SupportedEmailDomainsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SupportedEmailDomainsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SupportedEmailDomainsStatus_enabled *smithy.Schema
-
-var SupportedEmailDomainsStatus_allowedDomains *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TierLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TierLevel",
-}, smithy.ShapeTypeEnum, 2)
-var TierLevel_BASIC *smithy.Schema
-
-var TierLevel_STANDARD *smithy.Schema
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var _UserAdmins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UserAdmins",
-}, smithy.ShapeTypeList, 1)
-var _UserAdmins_member *smithy.Schema
-
-var _UserCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UserCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var VanityDomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "VanityDomainStatus",
-}, smithy.ShapeTypeEnum, 3)
-var VanityDomainStatus_PENDING *smithy.Schema
-
-var VanityDomainStatus_APPROVED *smithy.Schema
-
-var VanityDomainStatus_UNAPPROVED *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddChannelRoleToAccessorsInput",
-}, smithy.ShapeTypeStructure, 4)
-var BatchAddChannelRoleToAccessorsInput_spaceId *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsInput_channelId *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsInput_accessorIds *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsInput_channelRole *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddChannelRoleToAccessorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAddChannelRoleToAccessorsOutput_addedAccessorIds *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsOutput_errors *smithy.Schema
-
-var BatchAddRoleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddRoleInput",
-}, smithy.ShapeTypeStructure, 3)
-var BatchAddRoleInput_spaceId *smithy.Schema
-
-var BatchAddRoleInput_accessorIds *smithy.Schema
-
-var BatchAddRoleInput_role *smithy.Schema
-
-var BatchAddRoleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddRoleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAddRoleOutput_addedAccessorIds *smithy.Schema
-
-var BatchAddRoleOutput_errors *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveChannelRoleFromAccessorsInput",
-}, smithy.ShapeTypeStructure, 4)
-var BatchRemoveChannelRoleFromAccessorsInput_spaceId *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsInput_channelId *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsInput_accessorIds *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsInput_channelRole *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveChannelRoleFromAccessorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsOutput_errors *smithy.Schema
-
-var BatchRemoveRoleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveRoleInput",
-}, smithy.ShapeTypeStructure, 3)
-var BatchRemoveRoleInput_spaceId *smithy.Schema
-
-var BatchRemoveRoleInput_accessorIds *smithy.Schema
-
-var BatchRemoveRoleInput_role *smithy.Schema
-
-var BatchRemoveRoleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveRoleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchRemoveRoleOutput_removedAccessorIds *smithy.Schema
-
-var BatchRemoveRoleOutput_errors *smithy.Schema
-
-var CreateChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateChannelInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateChannelInput_spaceId *smithy.Schema
-
-var CreateChannelInput_channelName *smithy.Schema
-
-var CreateChannelInput_channelDescription *smithy.Schema
-
-var CreateChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateChannelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChannelOutput_channelId *smithy.Schema
-
-var CreateSpaceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateSpaceInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSpaceInput_name *smithy.Schema
-
-var CreateSpaceInput_subdomain *smithy.Schema
-
-var CreateSpaceInput_tier *smithy.Schema
-
-var CreateSpaceInput_description *smithy.Schema
-
-var CreateSpaceInput_userKMSKey *smithy.Schema
-
-var CreateSpaceInput_tags *smithy.Schema
-
-var CreateSpaceInput_roleArn *smithy.Schema
-
-var CreateSpaceInput_supportedEmailDomains *smithy.Schema
-
-var CreateSpaceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateSpaceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSpaceOutput_spaceId *smithy.Schema
-
-var DeleteSpaceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "DeleteSpaceInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSpaceInput_spaceId *smithy.Schema
-
-var DeregisterAdminInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "DeregisterAdminInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterAdminInput_spaceId *smithy.Schema
-
-var DeregisterAdminInput_adminId *smithy.Schema
-
-var GetChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetChannelInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetChannelInput_spaceId *smithy.Schema
-
-var GetChannelInput_channelId *smithy.Schema
-
-var GetChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetChannelOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetChannelOutput_spaceId *smithy.Schema
-
-var GetChannelOutput_channelId *smithy.Schema
-
-var GetChannelOutput_channelName *smithy.Schema
-
-var GetChannelOutput_channelDescription *smithy.Schema
-
-var GetChannelOutput_createDateTime *smithy.Schema
-
-var GetChannelOutput_deleteDateTime *smithy.Schema
-
-var GetChannelOutput_channelRoles *smithy.Schema
-
-var GetChannelOutput_channelStatus *smithy.Schema
-
-var GetSpaceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetSpaceInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSpaceInput_spaceId *smithy.Schema
-
-var GetSpaceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetSpaceOutput",
-}, smithy.ShapeTypeStructure, 24)
-var GetSpaceOutput_spaceId *smithy.Schema
-
-var GetSpaceOutput_arn *smithy.Schema
-
-var GetSpaceOutput_name *smithy.Schema
-
-var GetSpaceOutput_status *smithy.Schema
-
-var GetSpaceOutput_configurationStatus *smithy.Schema
-
-var GetSpaceOutput_clientId *smithy.Schema
-
-var GetSpaceOutput_identityStoreId *smithy.Schema
-
-var GetSpaceOutput_applicationArn *smithy.Schema
-
-var GetSpaceOutput_description *smithy.Schema
-
-var GetSpaceOutput_vanityDomainStatus *smithy.Schema
-
-var GetSpaceOutput_vanityDomain *smithy.Schema
-
-var GetSpaceOutput_randomDomain *smithy.Schema
-
-var GetSpaceOutput_customerRoleArn *smithy.Schema
-
-var GetSpaceOutput_createDateTime *smithy.Schema
-
-var GetSpaceOutput_deleteDateTime *smithy.Schema
-
-var GetSpaceOutput_tier *smithy.Schema
-
-var GetSpaceOutput_storageLimit *smithy.Schema
-
-var GetSpaceOutput_userAdmins *smithy.Schema
-
-var GetSpaceOutput_groupAdmins *smithy.Schema
-
-var GetSpaceOutput_roles *smithy.Schema
-
-var GetSpaceOutput_userKMSKey *smithy.Schema
-
-var GetSpaceOutput_userCount *smithy.Schema
-
-var GetSpaceOutput_contentSize *smithy.Schema
-
-var GetSpaceOutput_supportedEmailDomains *smithy.Schema
-
-var ListChannelsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListChannelsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelsInput_spaceId *smithy.Schema
-
-var ListChannelsInput_nextToken *smithy.Schema
-
-var ListChannelsInput_maxResults *smithy.Schema
-
-var ListChannelsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListChannelsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsOutput_channels *smithy.Schema
-
-var ListChannelsOutput_nextToken *smithy.Schema
-
-var ListSpacesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListSpacesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSpacesInput_nextToken *smithy.Schema
-
-var ListSpacesInput_maxResults *smithy.Schema
-
-var ListSpacesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListSpacesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSpacesOutput_spaces *smithy.Schema
-
-var ListSpacesOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterAdminInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "RegisterAdminInput",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterAdminInput_spaceId *smithy.Schema
-
-var RegisterAdminInput_adminId *smithy.Schema
-
-var SendInvitesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SendInvitesInput",
-}, smithy.ShapeTypeStructure, 4)
-var SendInvitesInput_spaceId *smithy.Schema
-
-var SendInvitesInput_accessorIds *smithy.Schema
-
-var SendInvitesInput_title *smithy.Schema
-
-var SendInvitesInput_body *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateChannelInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChannelInput_spaceId *smithy.Schema
-
-var UpdateChannelInput_channelId *smithy.Schema
-
-var UpdateChannelInput_channelName *smithy.Schema
-
-var UpdateChannelInput_channelDescription *smithy.Schema
-
-var UpdateChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateChannelOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateSpaceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateSpaceInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSpaceInput_spaceId *smithy.Schema
-
-var UpdateSpaceInput_description *smithy.Schema
-
-var UpdateSpaceInput_tier *smithy.Schema
-
-var UpdateSpaceInput_roleArn *smithy.Schema
-
-var UpdateSpaceInput_supportedEmailDomains *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_AccessorIdList_member = _AccessorIdList.AddMember("member", _AccessorId)
-
-	_AllowedDomainsList_member = _AllowedDomainsList.AddMember("member", _EmailDomain)
-
-	BatchError_accessorId = BatchError.AddMember("accessorId", _AccessorId)
-
-	BatchError_error = BatchError.AddMember("error", _ErrorCode)
-
-	BatchError_message = BatchError.AddMember("message", _ErrorMessage)
-
-	_BatchErrorList_member = _BatchErrorList.AddMember("member", BatchError)
-
-	ChannelStatus_CREATED = ChannelStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	ChannelStatus_CREATING = ChannelStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ChannelStatus_CREATE_FAILED = ChannelStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	ChannelStatus_DELETED = ChannelStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	ChannelStatus_DELETING = ChannelStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ChannelStatus_DELETE_FAILED = ChannelStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	ChannelData_spaceId = ChannelData.AddMember("spaceId", _SpaceId)
-
-	ChannelData_channelId = ChannelData.AddMember("channelId", _ChannelId)
-
-	ChannelData_channelName = ChannelData.AddMember("channelName", _ChannelName)
-
-	ChannelData_channelDescription = ChannelData.AddMember("channelDescription", _ChannelDescription)
-
-	ChannelData_createDateTime = ChannelData.AddMember("createDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ChannelData_deleteDateTime = ChannelData.AddMember("deleteDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ChannelData_channelStatus = ChannelData.AddMember("channelStatus", ChannelStatus)
-
-	ChannelData_userCount = ChannelData.AddMember("userCount", _UserCount)
-
-	ChannelData_groupCount = ChannelData.AddMember("groupCount", _GroupCount)
-
-	ChannelRole_ASKER = ChannelRole.AddMember("ASKER", smithyprelude.Unit)
-
-	ChannelRole_EXPERT = ChannelRole.AddMember("EXPERT", smithyprelude.Unit)
-
-	ChannelRole_MODERATOR = ChannelRole.AddMember("MODERATOR", smithyprelude.Unit)
-
-	ChannelRole_SUPPORTREQUESTOR = ChannelRole.AddMember("SUPPORTREQUESTOR", smithyprelude.Unit)
-
-	_ChannelRoleList_member = _ChannelRoleList.AddMember("member", ChannelRole)
-
-	_ChannelRoles_key = _ChannelRoles.AddMember("key", _AccessorId)
-
-	_ChannelRoles_value = _ChannelRoles.AddMember("value", _ChannelRoleList)
-
-	_ChannelsList_member = _ChannelsList.AddMember("member", ChannelData)
-
-	ConfigurationStatus_CONFIGURED = ConfigurationStatus.AddMember("CONFIGURED", smithyprelude.Unit)
-
-	ConfigurationStatus_UNCONFIGURED = ConfigurationStatus.AddMember("UNCONFIGURED", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	FeatureEnableParameter_ENABLED = FeatureEnableParameter.AddMember("ENABLED", smithyprelude.Unit)
-
-	FeatureEnableParameter_DISABLED = FeatureEnableParameter.AddMember("DISABLED", smithyprelude.Unit)
-
-	FeatureEnableStatus_ENABLED = FeatureEnableStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	FeatureEnableStatus_DISABLED = FeatureEnableStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	FeatureEnableStatus_NOT_ALLOWED = FeatureEnableStatus.AddMember("NOT_ALLOWED", smithyprelude.Unit)
-
-	_GroupAdmins_member = _GroupAdmins.AddMember("member", _AdminId)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	Role_EXPERT = Role.AddMember("EXPERT", smithyprelude.Unit)
-
-	Role_MODERATOR = Role.AddMember("MODERATOR", smithyprelude.Unit)
-
-	Role_ADMINISTRATOR = Role.AddMember("ADMINISTRATOR", smithyprelude.Unit)
-
-	Role_SUPPORTREQUESTOR = Role.AddMember("SUPPORTREQUESTOR", smithyprelude.Unit)
-
-	_RoleList_member = _RoleList.AddMember("member", Role)
-
-	_Roles_key = _Roles.AddMember("key", _AccessorId)
-
-	_Roles_value = _Roles.AddMember("value", _RoleList)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	VanityDomainStatus_PENDING = VanityDomainStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	VanityDomainStatus_APPROVED = VanityDomainStatus.AddMember("APPROVED", smithyprelude.Unit)
-
-	VanityDomainStatus_UNAPPROVED = VanityDomainStatus.AddMember("UNAPPROVED", smithyprelude.Unit)
-
-	TierLevel_BASIC = TierLevel.AddMember("BASIC", smithyprelude.Unit)
-
-	TierLevel_STANDARD = TierLevel.AddMember("STANDARD", smithyprelude.Unit)
-
-	SupportedEmailDomainsStatus_enabled = SupportedEmailDomainsStatus.AddMember("enabled", FeatureEnableStatus)
-
-	SupportedEmailDomainsStatus_allowedDomains = SupportedEmailDomainsStatus.AddMember("allowedDomains", _AllowedDomainsList)
-
-	SpaceData_spaceId = SpaceData.AddMember("spaceId", _SpaceId)
-
-	SpaceData_arn = SpaceData.AddMember("arn", _Arn)
-
-	SpaceData_name = SpaceData.AddMember("name", _SpaceName)
-
-	SpaceData_description = SpaceData.AddMember("description", _SpaceDescription)
-
-	SpaceData_status = SpaceData.AddMember("status", _ProvisioningStatus)
-
-	SpaceData_configurationStatus = SpaceData.AddMember("configurationStatus", ConfigurationStatus)
-
-	SpaceData_vanityDomainStatus = SpaceData.AddMember("vanityDomainStatus", VanityDomainStatus)
-
-	SpaceData_vanityDomain = SpaceData.AddMember("vanityDomain", _Url)
-
-	SpaceData_randomDomain = SpaceData.AddMember("randomDomain", _Url)
-
-	SpaceData_tier = SpaceData.AddMember("tier", TierLevel)
-
-	SpaceData_storageLimit = SpaceData.AddMember("storageLimit", _StorageLimit)
-
-	SpaceData_createDateTime = SpaceData.AddMember("createDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SpaceData_deleteDateTime = SpaceData.AddMember("deleteDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SpaceData_userKMSKey = SpaceData.AddMember("userKMSKey", _KMSKey)
-
-	SpaceData_userCount = SpaceData.AddMember("userCount", _UserCount)
-
-	SpaceData_contentSize = SpaceData.AddMember("contentSize", _ContentSize)
-
-	SpaceData_supportedEmailDomains = SpaceData.AddMember("supportedEmailDomains", SupportedEmailDomainsStatus)
-
-	_SpacesList_member = _SpacesList.AddMember("member", SpaceData)
-
-	SupportedEmailDomainsParameters_enabled = SupportedEmailDomainsParameters.AddMember("enabled", FeatureEnableParameter)
-
-	SupportedEmailDomainsParameters_allowedDomains = SupportedEmailDomainsParameters.AddMember("allowedDomains", _AllowedDomainsList)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	_UserAdmins_member = _UserAdmins.AddMember("member", _AdminId)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	BatchAddChannelRoleToAccessorsInput_spaceId = BatchAddChannelRoleToAccessorsInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	BatchAddChannelRoleToAccessorsInput_channelId = BatchAddChannelRoleToAccessorsInput.AddMember("channelId", _ChannelId, &smithytraits.HTTPLabel{})
-
-	BatchAddChannelRoleToAccessorsInput_accessorIds = BatchAddChannelRoleToAccessorsInput.AddMember("accessorIds", _AccessorIdList)
-
-	BatchAddChannelRoleToAccessorsInput_channelRole = BatchAddChannelRoleToAccessorsInput.AddMember("channelRole", ChannelRole)
-
-	BatchAddChannelRoleToAccessorsOutput_addedAccessorIds = BatchAddChannelRoleToAccessorsOutput.AddMember("addedAccessorIds", _AccessorIdList)
-
-	BatchAddChannelRoleToAccessorsOutput_errors = BatchAddChannelRoleToAccessorsOutput.AddMember("errors", _BatchErrorList)
-
-	BatchAddRoleInput_spaceId = BatchAddRoleInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	BatchAddRoleInput_accessorIds = BatchAddRoleInput.AddMember("accessorIds", _AccessorIdList)
-
-	BatchAddRoleInput_role = BatchAddRoleInput.AddMember("role", Role)
-
-	BatchAddRoleOutput_addedAccessorIds = BatchAddRoleOutput.AddMember("addedAccessorIds", _AccessorIdList)
-
-	BatchAddRoleOutput_errors = BatchAddRoleOutput.AddMember("errors", _BatchErrorList)
-
-	BatchRemoveChannelRoleFromAccessorsInput_spaceId = BatchRemoveChannelRoleFromAccessorsInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	BatchRemoveChannelRoleFromAccessorsInput_channelId = BatchRemoveChannelRoleFromAccessorsInput.AddMember("channelId", _ChannelId, &smithytraits.HTTPLabel{})
-
-	BatchRemoveChannelRoleFromAccessorsInput_accessorIds = BatchRemoveChannelRoleFromAccessorsInput.AddMember("accessorIds", _AccessorIdList)
-
-	BatchRemoveChannelRoleFromAccessorsInput_channelRole = BatchRemoveChannelRoleFromAccessorsInput.AddMember("channelRole", ChannelRole)
-
-	BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds = BatchRemoveChannelRoleFromAccessorsOutput.AddMember("removedAccessorIds", _AccessorIdList)
-
-	BatchRemoveChannelRoleFromAccessorsOutput_errors = BatchRemoveChannelRoleFromAccessorsOutput.AddMember("errors", _BatchErrorList)
-
-	BatchRemoveRoleInput_spaceId = BatchRemoveRoleInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	BatchRemoveRoleInput_accessorIds = BatchRemoveRoleInput.AddMember("accessorIds", _AccessorIdList)
-
-	BatchRemoveRoleInput_role = BatchRemoveRoleInput.AddMember("role", Role)
-
-	BatchRemoveRoleOutput_removedAccessorIds = BatchRemoveRoleOutput.AddMember("removedAccessorIds", _AccessorIdList)
-
-	BatchRemoveRoleOutput_errors = BatchRemoveRoleOutput.AddMember("errors", _BatchErrorList)
-
-	CreateChannelInput_spaceId = CreateChannelInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	CreateChannelInput_channelName = CreateChannelInput.AddMember("channelName", _ChannelName)
-
-	CreateChannelInput_channelDescription = CreateChannelInput.AddMember("channelDescription", _ChannelDescription)
-
-	CreateChannelOutput_channelId = CreateChannelOutput.AddMember("channelId", _ChannelId)
-
-	CreateSpaceInput_name = CreateSpaceInput.AddMember("name", _SpaceName)
-
-	CreateSpaceInput_subdomain = CreateSpaceInput.AddMember("subdomain", _SpaceSubdomain)
-
-	CreateSpaceInput_tier = CreateSpaceInput.AddMember("tier", TierLevel)
-
-	CreateSpaceInput_description = CreateSpaceInput.AddMember("description", _SpaceDescription)
-
-	CreateSpaceInput_userKMSKey = CreateSpaceInput.AddMember("userKMSKey", _KMSKey)
-
-	CreateSpaceInput_tags = CreateSpaceInput.AddMember("tags", _Tags)
-
-	CreateSpaceInput_roleArn = CreateSpaceInput.AddMember("roleArn", _Arn)
-
-	CreateSpaceInput_supportedEmailDomains = CreateSpaceInput.AddMember("supportedEmailDomains", SupportedEmailDomainsParameters)
-
-	CreateSpaceOutput_spaceId = CreateSpaceOutput.AddMember("spaceId", _SpaceId)
-
-	DeleteSpaceInput_spaceId = DeleteSpaceInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	DeregisterAdminInput_spaceId = DeregisterAdminInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	DeregisterAdminInput_adminId = DeregisterAdminInput.AddMember("adminId", _AdminId, &smithytraits.HTTPLabel{})
-
-	GetChannelInput_spaceId = GetChannelInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	GetChannelInput_channelId = GetChannelInput.AddMember("channelId", _ChannelId, &smithytraits.HTTPLabel{})
-
-	GetChannelOutput_spaceId = GetChannelOutput.AddMember("spaceId", _SpaceId)
-
-	GetChannelOutput_channelId = GetChannelOutput.AddMember("channelId", _ChannelId)
-
-	GetChannelOutput_channelName = GetChannelOutput.AddMember("channelName", _ChannelName)
-
-	GetChannelOutput_channelDescription = GetChannelOutput.AddMember("channelDescription", _ChannelDescription)
-
-	GetChannelOutput_createDateTime = GetChannelOutput.AddMember("createDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetChannelOutput_deleteDateTime = GetChannelOutput.AddMember("deleteDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetChannelOutput_channelRoles = GetChannelOutput.AddMember("channelRoles", _ChannelRoles)
-
-	GetChannelOutput_channelStatus = GetChannelOutput.AddMember("channelStatus", ChannelStatus)
-
-	GetSpaceInput_spaceId = GetSpaceInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	GetSpaceOutput_spaceId = GetSpaceOutput.AddMember("spaceId", _SpaceId)
-
-	GetSpaceOutput_arn = GetSpaceOutput.AddMember("arn", _Arn)
-
-	GetSpaceOutput_name = GetSpaceOutput.AddMember("name", _SpaceName)
-
-	GetSpaceOutput_status = GetSpaceOutput.AddMember("status", _ProvisioningStatus)
-
-	GetSpaceOutput_configurationStatus = GetSpaceOutput.AddMember("configurationStatus", ConfigurationStatus)
-
-	GetSpaceOutput_clientId = GetSpaceOutput.AddMember("clientId", _ClientId)
-
-	GetSpaceOutput_identityStoreId = GetSpaceOutput.AddMember("identityStoreId", _IdentityStoreId)
-
-	GetSpaceOutput_applicationArn = GetSpaceOutput.AddMember("applicationArn", _Arn)
-
-	GetSpaceOutput_description = GetSpaceOutput.AddMember("description", _SpaceDescription)
-
-	GetSpaceOutput_vanityDomainStatus = GetSpaceOutput.AddMember("vanityDomainStatus", VanityDomainStatus)
-
-	GetSpaceOutput_vanityDomain = GetSpaceOutput.AddMember("vanityDomain", _Url)
-
-	GetSpaceOutput_randomDomain = GetSpaceOutput.AddMember("randomDomain", _Url)
-
-	GetSpaceOutput_customerRoleArn = GetSpaceOutput.AddMember("customerRoleArn", _Arn)
-
-	GetSpaceOutput_createDateTime = GetSpaceOutput.AddMember("createDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetSpaceOutput_deleteDateTime = GetSpaceOutput.AddMember("deleteDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetSpaceOutput_tier = GetSpaceOutput.AddMember("tier", TierLevel)
-
-	GetSpaceOutput_storageLimit = GetSpaceOutput.AddMember("storageLimit", _StorageLimit)
-
-	GetSpaceOutput_userAdmins = GetSpaceOutput.AddMember("userAdmins", _UserAdmins)
-
-	GetSpaceOutput_groupAdmins = GetSpaceOutput.AddMember("groupAdmins", _GroupAdmins)
-
-	GetSpaceOutput_roles = GetSpaceOutput.AddMember("roles", _Roles)
-
-	GetSpaceOutput_userKMSKey = GetSpaceOutput.AddMember("userKMSKey", _KMSKey)
-
-	GetSpaceOutput_userCount = GetSpaceOutput.AddMember("userCount", _UserCount)
-
-	GetSpaceOutput_contentSize = GetSpaceOutput.AddMember("contentSize", _ContentSize)
-
-	GetSpaceOutput_supportedEmailDomains = GetSpaceOutput.AddMember("supportedEmailDomains", SupportedEmailDomainsStatus)
-
-	ListChannelsInput_spaceId = ListChannelsInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	ListChannelsInput_nextToken = ListChannelsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListChannelsInput_maxResults = ListChannelsInput.AddMember("maxResults", _ListChannelsLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListChannelsOutput_channels = ListChannelsOutput.AddMember("channels", _ChannelsList)
-
-	ListChannelsOutput_nextToken = ListChannelsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListSpacesInput_nextToken = ListSpacesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSpacesInput_maxResults = ListSpacesInput.AddMember("maxResults", _ListSpacesLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSpacesOutput_spaces = ListSpacesOutput.AddMember("spaces", _SpacesList)
-
-	ListSpacesOutput_nextToken = ListSpacesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	RegisterAdminInput_spaceId = RegisterAdminInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	RegisterAdminInput_adminId = RegisterAdminInput.AddMember("adminId", _AdminId, &smithytraits.HTTPLabel{})
-
-	SendInvitesInput_spaceId = SendInvitesInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	SendInvitesInput_accessorIds = SendInvitesInput.AddMember("accessorIds", _AccessorIdList)
-
-	SendInvitesInput_title = SendInvitesInput.AddMember("title", _InviteTitle)
-
-	SendInvitesInput_body = SendInvitesInput.AddMember("body", _InviteBody)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateChannelInput_spaceId = UpdateChannelInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	UpdateChannelInput_channelId = UpdateChannelInput.AddMember("channelId", _ChannelId, &smithytraits.HTTPLabel{})
-
-	UpdateChannelInput_channelName = UpdateChannelInput.AddMember("channelName", _ChannelName)
-
-	UpdateChannelInput_channelDescription = UpdateChannelInput.AddMember("channelDescription", _ChannelDescription)
-
-	UpdateSpaceInput_spaceId = UpdateSpaceInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	UpdateSpaceInput_description = UpdateSpaceInput.AddMember("description", _SpaceDescription)
-
-	UpdateSpaceInput_tier = UpdateSpaceInput.AddMember("tier", TierLevel)
-
-	UpdateSpaceInput_roleArn = UpdateSpaceInput.AddMember("roleArn", _Arn)
-
-	UpdateSpaceInput_supportedEmailDomains = UpdateSpaceInput.AddMember("supportedEmailDomains", SupportedEmailDomainsParameters)
-
+const blob = "" +
+	"BatchRemoveChannelRoleFromAccessorsOutputBatchRemoveChannelRoleFromAccessorsInputBatchAddChannelRole" +
+	"ToAccessorsOutputBatchAddChannelRoleToAccessorsInputSupportedEmailDomainsParametersServiceQuotaExcee" +
+	"dedExceptionValidationExceptionFieldListListTagsForResourceResponseSupportedEmailDomainsStatusListTa" +
+	"gsForResourceRequestResourceNotFoundExceptionValidationExceptionReasonFIELD_VALIDATION_FAILEDInterna" +
+	"lServerExceptionFeatureEnableParameterAccessDeniedExceptionBatchRemoveRoleOutputUntagResourceRespons" +
+	"esupportedEmailDomainsBatchRemoveRoleInputDeregisterAdminInputUntagResourceRequestConfigurationStatu" +
+	"sCreateChannelOutputFeatureEnableStatusTagResourceResponseThrottlingExceptionUpdateChannelOutputconf" +
+	"igurationStatusAllowedDomainsListBatchAddRoleOutputChannelDescriptionCreateChannelInputListChannelsO" +
+	"utputProvisioningStatusRegisterAdminInputTagResourceRequestUpdateChannelInputVanityDomainStatuschann" +
+	"elDescriptionremovedAccessorIdsvanityDomainStatusBatchAddRoleInputConflictExceptionCreateSpaceOutput" +
+	"ListChannelsInputListChannelsLimitUNKNOWN_OPERATIONretryAfterSecondsCreateSpaceInputDeleteSpaceInput" +
+	"GetChannelOutputListSpacesOutputSUPPORTREQUESTORSendInvitesInputSpaceDescriptionUpdateSpaceInputadde" +
+	"dAccessorIdsChannelRoleListGetChannelInputIdentityStoreIdListSpacesInputListSpacesLimitcustomerRoleA" +
+	"rnidentityStoreIdAccessorIdListBatchErrorListGetSpaceOutputSpaceSubdomainallowedDomainsapplicationAr" +
+	"ncreateDateTimedeleteDateTimeADMINISTRATORCREATE_FAILEDChannelStatusDELETE_FAILEDGetSpaceInputchanne" +
+	"lStatusCANNOT_PARSEChannelRolesChannelsListErrorMessageStorageLimitUNCONFIGUREDchannelRolesrandomDom" +
+	"ainresourceTypestorageLimitChannelDataChannelNameContentSizeGroupAdminsInviteTitleNOT_ALLOWEDRepostS" +
+	"paceaccessorIdschannelNamecontentSizedescriptiongroupAdminsresourceArnserviceCodeGroupCountInviteBod" +
+	"ySpacesListTagKeyListUNAPPROVEDUserAdminsgroupCountmaxResultsresourceIduserAdminsuserKMSKeyChannelId" +
+	"ErrorCodeMODERATORSpaceDataSpaceNameTierLevelTimestampUserCountchannelIdfieldListnextTokenquotaCodes" +
+	"ubdomainuserCountCREATINGClientIdDELETINGDISABLEDSTANDARDTagValuechannelsclientIdAdminIdCREATEDDELET" +
+	"EDENABLEDIntegerPENDINGSpaceIdadminIdenabledmessageroleArnspaceIdtagKeysEXPERTStringerrorsmemberreas" +
+	"onspacesstatusASKERBASICOTHERrolestitlevalueUnitbodynametagstierUrlarnkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.repostspace", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 81, Target: 0, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 733, Target: 1, Traits: 1, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 2, Traits: 2, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 459, Target: 3, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 601, Target: 4, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 983, Target: 5, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1084, Target: 6, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 542, Target: 7, Traits: 7, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1100, Target: 8, Traits: 8, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1345, Target: 9, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 787, Target: 10, Traits: 10, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1116, Target: 11, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 240, Target: 12, Traits: 12, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 823, Target: 13, Traits: 13, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1148, Target: 14, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 639, Target: 15, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 480, Target: 16, Traits: 16, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 677, Target: 17, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1180, Target: 18, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1693, Target: 19, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 438, Target: 20, Traits: 20, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2144, Target: 323, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 920, Target: 22, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1317, Target: 23, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 22, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2081, Target: 25, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 715, Target: 26, Traits: 19, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 76, Traits: 21, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1299, Target: 28, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1331, Target: 29, Traits: 19, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1704, Target: 22, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2184, Target: 77, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2144, Target: 78, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1331, Target: 33, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 29, Traits: 19, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1627, Target: 35, Traits: 19, StrLen: 11, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1963, Target: 46, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1715, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 45, Traits: 21, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1401, Target: 324, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1415, Target: 324, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1494, Target: 60, Traits: 19, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2008, Target: 168, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1841, Target: 88, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 751, Target: 45, Traits: 23, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1891, Target: 46, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1638, Target: 47, Traits: 23, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 11, Target: 48, Traits: 19, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2214, Target: 325, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2172, Target: 325, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1909, Target: 325, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1132, Target: 325, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1212, Target: 53, Traits: 19, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 48, Traits: 19, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1519, Target: 55, Traits: 19, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2270, Target: 22, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2239, Target: 53, Traits: 19, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1531, Target: 58, Traits: 19, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 35, Traits: 19, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1455, Target: 60, Traits: 19, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2088, Target: 325, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2017, Target: 325, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1442, Target: 325, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2095, Target: 325, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2033, Target: 325, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1468, Target: 325, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2025, Target: 67, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 582, Target: 68, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1569, Target: 325, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1567, Target: 325, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 966, Target: 71, Traits: 24, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2144, Target: 323, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1861, Target: 323, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1603, Target: 323, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1649, Target: 75, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 161, Target: 76, Traits: 23, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1900, Target: 77, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1543, Target: 78, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 416, Target: 79, Traits: 19, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2102, Target: 325, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2041, Target: 325, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 620, Target: 82, Traits: 19, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2102, Target: 325, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2041, Target: 325, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1682, Target: 325, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1660, Target: 86, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 25, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1781, Target: 88, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1242, Target: 89, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 393, Target: 90, Traits: 25, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2144, Target: 323, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1051, Target: 326, Traits: 26, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1791, Target: 93, Traits: 23, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1671, Target: 94, Traits: 23, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1885, Target: 95, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1017, Target: 96, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1272, Target: 97, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 805, Target: 98, Traits: 19, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 320, Target: 99, Traits: 27, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2144, Target: 323, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1861, Target: 323, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1603, Target: 323, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 18, Target: 103, Traits: 19, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2172, Target: 325, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1909, Target: 325, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1429, Target: 325, Traits: 19, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1132, Target: 325, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1219, Target: 108, Traits: 19, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 103, Traits: 19, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1526, Target: 110, Traits: 19, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2270, Target: 22, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2239, Target: 108, Traits: 19, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 183, Target: 113, Traits: 28, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2144, Target: 323, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1861, Target: 323, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1603, Target: 323, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1770, Target: 323, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1990, Target: 323, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1918, Target: 119, Traits: 19, StrLen: 9, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2267, Target: 28, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2252, Target: 139, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1737, Target: 137, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2208, Target: 98, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 696, Target: 68, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 931, Target: 183, Traits: 19, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 931, Target: 165, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1591, Target: 165, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2260, Target: 162, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1615, Target: 143, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1401, Target: 324, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1415, Target: 324, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1881, Target: 95, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2008, Target: 168, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1726, Target: 75, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 501, Target: 147, Traits: 19, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1164, Target: 137, Traits: 23, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2123, Target: 138, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1927, Target: 139, Traits: 23, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1801, Target: 140, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 119, Traits: 19, StrLen: 6, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1359, Target: 142, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1555, Target: 143, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 152, Target: 144, Traits: 19, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2137, Target: 79, Traits: 19, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1373, Target: 26, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 267, Target: 147, Traits: 19, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2137, Target: 82, Traits: 19, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1373, Target: 26, Traits: 19, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1811, Target: 150, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1811, Target: 151, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 150, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 244, Target: 153, Traits: 23, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2270, Target: 150, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2239, Target: 156, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2057, Target: 156, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 658, Target: 157, Traits: 29, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2144, Target: 323, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1770, Target: 323, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1990, Target: 323, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1051, Target: 326, Traits: 26, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1936, Target: 162, Traits: 19, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2219, Target: 325, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2049, Target: 325, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2264, Target: 165, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1831, Target: 166, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 25, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1954, Target: 168, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 212, Target: 169, Traits: 30, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2144, Target: 323, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2196, Target: 178, Traits: 19, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1972, Target: 176, Traits: 19, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 212, Target: 173, Traits: 19, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2252, Target: 323, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2144, Target: 323, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 212, Target: 176, Traits: 19, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2190, Target: 173, Traits: 19, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 345, Target: 178, Traits: 19, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1034, Target: 325, Traits: 19, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1507, Target: 325, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 370, Target: 325, Traits: 19, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2224, Target: 325, Traits: 19, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 877, Target: 183, Traits: 19, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2116, Target: 325, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1823, Target: 325, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1821, Target: 325, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 117, Target: 187, Traits: 19, StrLen: 35, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1963, Target: 46, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 23, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1579, Target: 48, Traits: 19, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 81, Target: 192, Traits: 19, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 23, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2184, Target: 33, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 949, Target: 195, Traits: 19, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 23, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2151, Target: 103, Traits: 19, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 733, Target: 199, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 23, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2184, Target: 33, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 41, Target: 202, Traits: 19, StrLen: 40, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1963, Target: 46, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 23, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1579, Target: 48, Traits: 19, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 0, Target: 207, Traits: 19, StrLen: 41, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 913, Target: 23, Traits: 19, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2184, Target: 33, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 522, Target: 210, Traits: 19, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 23, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2151, Target: 103, Traits: 19, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 459, Target: 214, Traits: 19, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 913, Target: 23, Traits: 19, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2184, Target: 33, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 769, Target: 217, Traits: 19, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1715, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 45, Traits: 21, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 601, Target: 221, Traits: 19, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1963, Target: 46, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1068, Target: 223, Traits: 19, StrLen: 16, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2252, Target: 139, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1999, Target: 142, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2260, Target: 162, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1737, Target: 137, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1881, Target: 95, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2256, Target: 153, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2151, Target: 28, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 501, Target: 144, Traits: 19, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 983, Target: 232, Traits: 19, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1084, Target: 234, Traits: 19, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 542, Target: 236, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2130, Target: 25, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1227, Target: 239, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1963, Target: 46, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 242, Traits: 19, StrLen: 16, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1963, Target: 46, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1715, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 45, Traits: 21, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1401, Target: 324, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1415, Target: 324, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1579, Target: 55, Traits: 19, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1494, Target: 60, Traits: 19, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1481, Target: 251, Traits: 19, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1345, Target: 253, Traits: 19, StrLen: 14, Count: 24, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2267, Target: 28, Traits: 19, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2252, Target: 139, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2208, Target: 98, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 696, Target: 68, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2073, Target: 67, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1302, Target: 89, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1387, Target: 28, Traits: 19, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1737, Target: 137, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 931, Target: 183, Traits: 19, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 931, Target: 165, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1591, Target: 165, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1287, Target: 28, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1401, Target: 324, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1415, Target: 324, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2260, Target: 162, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1615, Target: 143, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1871, Target: 166, Traits: 19, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1748, Target: 86, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2229, Target: 110, Traits: 19, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1881, Target: 95, Traits: 19, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2008, Target: 168, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1726, Target: 75, Traits: 19, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 501, Target: 147, Traits: 19, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1000, Target: 278, Traits: 19, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1981, Target: 323, Traits: 32, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1851, Target: 96, Traits: 33, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 787, Target: 282, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2065, Target: 58, Traits: 19, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1981, Target: 323, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1257, Target: 285, Traits: 19, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1981, Target: 323, Traits: 32, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1851, Target: 97, Traits: 33, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1116, Target: 288, Traits: 19, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2202, Target: 140, Traits: 19, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1981, Target: 323, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 294, Target: 291, Traits: 19, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1759, Target: 28, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 240, Target: 293, Traits: 19, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2256, Target: 153, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 823, Target: 295, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2130, Target: 25, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1148, Target: 298, Traits: 19, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 23, Traits: 19, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2234, Target: 94, Traits: 21, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2248, Target: 93, Traits: 21, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 841, Target: 303, Traits: 19, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1759, Target: 28, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2256, Target: 153, Traits: 21, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 639, Target: 306, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 562, Target: 307, Traits: 19, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1759, Target: 28, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2165, Target: 151, Traits: 34, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 480, Target: 310, Traits: 19, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 859, Target: 311, Traits: 19, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1963, Target: 46, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1715, Target: 47, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 45, Traits: 21, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 677, Target: 316, Traits: 19, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1180, Target: 317, Traits: 19, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2158, Target: 138, Traits: 31, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1737, Target: 137, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2260, Target: 162, Traits: 19, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2151, Target: 28, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 501, Target: 144, Traits: 19, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2178, Target: 323, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1945, Target: 324, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 2244, Target: 325, Traits: 19, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 2109, Target: 326, Traits: 19, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/spaces/{spaceId}/channels/{channelId}/roles",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/spaces/{spaceId}/roles",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/spaces/{spaceId}/channels/{channelId}/roles",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/spaces/{spaceId}/roles",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/spaces/{spaceId}/channels",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/spaces",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/spaces/{spaceId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/spaces/{spaceId}/admins/{adminId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/spaces/{spaceId}/channels/{channelId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/spaces/{spaceId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/spaces/{spaceId}/channels",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/spaces",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/spaces/{spaceId}/admins/{adminId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/spaces/{spaceId}/invite",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/spaces/{spaceId}/channels/{channelId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/spaces/{spaceId}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [327]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+}
+
+var BatchAddChannelRoleToAccessors = &handles[0]
+
+var BatchAddRole = &handles[1]
+
+var BatchRemoveChannelRoleFromAccessors = &handles[2]
+
+var BatchRemoveRole = &handles[3]
+
+var CreateChannel = &handles[4]
+
+var CreateSpace = &handles[5]
+
+var DeleteSpace = &handles[6]
+
+var DeregisterAdmin = &handles[7]
+
+var GetChannel = &handles[8]
+
+var GetSpace = &handles[9]
+
+var ListChannels = &handles[10]
+
+var ListSpaces = &handles[11]
+
+var ListTagsForResource = &handles[12]
+
+var RegisterAdmin = &handles[13]
+
+var SendInvites = &handles[14]
+
+var TagResource = &handles[15]
+
+var UntagResource = &handles[16]
+
+var UpdateChannel = &handles[17]
+
+var UpdateSpace = &handles[18]
+
+var _RepostSpace = &handles[19]
+
+var AccessDeniedException = &handles[20]
+var AccessDeniedException_message = &handles[21]
+
+var _AccessorId = &handles[22]
+
+var _AccessorIdList = &handles[23]
+var _AccessorIdList_member = &handles[24]
+
+var _AdminId = &handles[25]
+
+var _AllowedDomainsList = &handles[26]
+var _AllowedDomainsList_member = &handles[27]
+
+var _Arn = &handles[28]
+
+var BatchError = &handles[29]
+var BatchError_accessorId = &handles[30]
+var BatchError_error = &handles[31]
+var BatchError_message = &handles[32]
+
+var _BatchErrorList = &handles[33]
+var _BatchErrorList_member = &handles[34]
+
+var ChannelData = &handles[35]
+var ChannelData_spaceId = &handles[36]
+var ChannelData_channelId = &handles[37]
+var ChannelData_channelName = &handles[38]
+var ChannelData_channelDescription = &handles[39]
+var ChannelData_createDateTime = &handles[40]
+var ChannelData_deleteDateTime = &handles[41]
+var ChannelData_channelStatus = &handles[42]
+var ChannelData_userCount = &handles[43]
+var ChannelData_groupCount = &handles[44]
+
+var _ChannelDescription = &handles[45]
+
+var _ChannelId = &handles[46]
+
+var _ChannelName = &handles[47]
+
+var ChannelRole = &handles[48]
+var ChannelRole_ASKER = &handles[49]
+var ChannelRole_EXPERT = &handles[50]
+var ChannelRole_MODERATOR = &handles[51]
+var ChannelRole_SUPPORTREQUESTOR = &handles[52]
+
+var _ChannelRoleList = &handles[53]
+var _ChannelRoleList_member = &handles[54]
+
+var _ChannelRoles = &handles[55]
+var _ChannelRoles_key = &handles[56]
+var _ChannelRoles_value = &handles[57]
+
+var _ChannelsList = &handles[58]
+var _ChannelsList_member = &handles[59]
+
+var ChannelStatus = &handles[60]
+var ChannelStatus_CREATED = &handles[61]
+var ChannelStatus_CREATING = &handles[62]
+var ChannelStatus_CREATE_FAILED = &handles[63]
+var ChannelStatus_DELETED = &handles[64]
+var ChannelStatus_DELETING = &handles[65]
+var ChannelStatus_DELETE_FAILED = &handles[66]
+
+var _ClientId = &handles[67]
+
+var ConfigurationStatus = &handles[68]
+var ConfigurationStatus_CONFIGURED = &handles[69]
+var ConfigurationStatus_UNCONFIGURED = &handles[70]
+
+var ConflictException = &handles[71]
+var ConflictException_message = &handles[72]
+var ConflictException_resourceId = &handles[73]
+var ConflictException_resourceType = &handles[74]
+
+var _ContentSize = &handles[75]
+
+var _EmailDomain = &handles[76]
+
+var _ErrorCode = &handles[77]
+
+var _ErrorMessage = &handles[78]
+
+var FeatureEnableParameter = &handles[79]
+var FeatureEnableParameter_ENABLED = &handles[80]
+var FeatureEnableParameter_DISABLED = &handles[81]
+
+var FeatureEnableStatus = &handles[82]
+var FeatureEnableStatus_ENABLED = &handles[83]
+var FeatureEnableStatus_DISABLED = &handles[84]
+var FeatureEnableStatus_NOT_ALLOWED = &handles[85]
+
+var _GroupAdmins = &handles[86]
+var _GroupAdmins_member = &handles[87]
+
+var _GroupCount = &handles[88]
+
+var _IdentityStoreId = &handles[89]
+
+var InternalServerException = &handles[90]
+var InternalServerException_message = &handles[91]
+var InternalServerException_retryAfterSeconds = &handles[92]
+
+var _InviteBody = &handles[93]
+
+var _InviteTitle = &handles[94]
+
+var _KMSKey = &handles[95]
+
+var _ListChannelsLimit = &handles[96]
+
+var _ListSpacesLimit = &handles[97]
+
+var _ProvisioningStatus = &handles[98]
+
+var ResourceNotFoundException = &handles[99]
+var ResourceNotFoundException_message = &handles[100]
+var ResourceNotFoundException_resourceId = &handles[101]
+var ResourceNotFoundException_resourceType = &handles[102]
+
+var Role = &handles[103]
+var Role_EXPERT = &handles[104]
+var Role_MODERATOR = &handles[105]
+var Role_ADMINISTRATOR = &handles[106]
+var Role_SUPPORTREQUESTOR = &handles[107]
+
+var _RoleList = &handles[108]
+var _RoleList_member = &handles[109]
+
+var _Roles = &handles[110]
+var _Roles_key = &handles[111]
+var _Roles_value = &handles[112]
+
+var ServiceQuotaExceededException = &handles[113]
+var ServiceQuotaExceededException_message = &handles[114]
+var ServiceQuotaExceededException_resourceId = &handles[115]
+var ServiceQuotaExceededException_resourceType = &handles[116]
+var ServiceQuotaExceededException_serviceCode = &handles[117]
+var ServiceQuotaExceededException_quotaCode = &handles[118]
+
+var SpaceData = &handles[119]
+var SpaceData_spaceId = &handles[120]
+var SpaceData_arn = &handles[121]
+var SpaceData_name = &handles[122]
+var SpaceData_description = &handles[123]
+var SpaceData_status = &handles[124]
+var SpaceData_configurationStatus = &handles[125]
+var SpaceData_vanityDomainStatus = &handles[126]
+var SpaceData_vanityDomain = &handles[127]
+var SpaceData_randomDomain = &handles[128]
+var SpaceData_tier = &handles[129]
+var SpaceData_storageLimit = &handles[130]
+var SpaceData_createDateTime = &handles[131]
+var SpaceData_deleteDateTime = &handles[132]
+var SpaceData_userKMSKey = &handles[133]
+var SpaceData_userCount = &handles[134]
+var SpaceData_contentSize = &handles[135]
+var SpaceData_supportedEmailDomains = &handles[136]
+
+var _SpaceDescription = &handles[137]
+
+var _SpaceId = &handles[138]
+
+var _SpaceName = &handles[139]
+
+var _SpacesList = &handles[140]
+var _SpacesList_member = &handles[141]
+
+var _SpaceSubdomain = &handles[142]
+
+var _StorageLimit = &handles[143]
+
+var SupportedEmailDomainsParameters = &handles[144]
+var SupportedEmailDomainsParameters_enabled = &handles[145]
+var SupportedEmailDomainsParameters_allowedDomains = &handles[146]
+
+var SupportedEmailDomainsStatus = &handles[147]
+var SupportedEmailDomainsStatus_enabled = &handles[148]
+var SupportedEmailDomainsStatus_allowedDomains = &handles[149]
+
+var _TagKey = &handles[150]
+
+var _TagKeyList = &handles[151]
+var _TagKeyList_member = &handles[152]
+
+var _Tags = &handles[153]
+var _Tags_key = &handles[154]
+var _Tags_value = &handles[155]
+
+var _TagValue = &handles[156]
+
+var ThrottlingException = &handles[157]
+var ThrottlingException_message = &handles[158]
+var ThrottlingException_serviceCode = &handles[159]
+var ThrottlingException_quotaCode = &handles[160]
+var ThrottlingException_retryAfterSeconds = &handles[161]
+
+var TierLevel = &handles[162]
+var TierLevel_BASIC = &handles[163]
+var TierLevel_STANDARD = &handles[164]
+
+var _Url = &handles[165]
+
+var _UserAdmins = &handles[166]
+var _UserAdmins_member = &handles[167]
+
+var _UserCount = &handles[168]
+
+var ValidationException = &handles[169]
+var ValidationException_message = &handles[170]
+var ValidationException_reason = &handles[171]
+var ValidationException_fieldList = &handles[172]
+
+var ValidationExceptionField = &handles[173]
+var ValidationExceptionField_name = &handles[174]
+var ValidationExceptionField_message = &handles[175]
+
+var _ValidationExceptionFieldList = &handles[176]
+var _ValidationExceptionFieldList_member = &handles[177]
+
+var ValidationExceptionReason = &handles[178]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[179]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[180]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[181]
+var ValidationExceptionReason_OTHER = &handles[182]
+
+var VanityDomainStatus = &handles[183]
+var VanityDomainStatus_PENDING = &handles[184]
+var VanityDomainStatus_APPROVED = &handles[185]
+var VanityDomainStatus_UNAPPROVED = &handles[186]
+
+var BatchAddChannelRoleToAccessorsInput = &handles[187]
+var BatchAddChannelRoleToAccessorsInput_spaceId = &handles[188]
+var BatchAddChannelRoleToAccessorsInput_channelId = &handles[189]
+var BatchAddChannelRoleToAccessorsInput_accessorIds = &handles[190]
+var BatchAddChannelRoleToAccessorsInput_channelRole = &handles[191]
+
+var BatchAddChannelRoleToAccessorsOutput = &handles[192]
+var BatchAddChannelRoleToAccessorsOutput_addedAccessorIds = &handles[193]
+var BatchAddChannelRoleToAccessorsOutput_errors = &handles[194]
+
+var BatchAddRoleInput = &handles[195]
+var BatchAddRoleInput_spaceId = &handles[196]
+var BatchAddRoleInput_accessorIds = &handles[197]
+var BatchAddRoleInput_role = &handles[198]
+
+var BatchAddRoleOutput = &handles[199]
+var BatchAddRoleOutput_addedAccessorIds = &handles[200]
+var BatchAddRoleOutput_errors = &handles[201]
+
+var BatchRemoveChannelRoleFromAccessorsInput = &handles[202]
+var BatchRemoveChannelRoleFromAccessorsInput_spaceId = &handles[203]
+var BatchRemoveChannelRoleFromAccessorsInput_channelId = &handles[204]
+var BatchRemoveChannelRoleFromAccessorsInput_accessorIds = &handles[205]
+var BatchRemoveChannelRoleFromAccessorsInput_channelRole = &handles[206]
+
+var BatchRemoveChannelRoleFromAccessorsOutput = &handles[207]
+var BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds = &handles[208]
+var BatchRemoveChannelRoleFromAccessorsOutput_errors = &handles[209]
+
+var BatchRemoveRoleInput = &handles[210]
+var BatchRemoveRoleInput_spaceId = &handles[211]
+var BatchRemoveRoleInput_accessorIds = &handles[212]
+var BatchRemoveRoleInput_role = &handles[213]
+
+var BatchRemoveRoleOutput = &handles[214]
+var BatchRemoveRoleOutput_removedAccessorIds = &handles[215]
+var BatchRemoveRoleOutput_errors = &handles[216]
+
+var CreateChannelInput = &handles[217]
+var CreateChannelInput_spaceId = &handles[218]
+var CreateChannelInput_channelName = &handles[219]
+var CreateChannelInput_channelDescription = &handles[220]
+
+var CreateChannelOutput = &handles[221]
+var CreateChannelOutput_channelId = &handles[222]
+
+var CreateSpaceInput = &handles[223]
+var CreateSpaceInput_name = &handles[224]
+var CreateSpaceInput_subdomain = &handles[225]
+var CreateSpaceInput_tier = &handles[226]
+var CreateSpaceInput_description = &handles[227]
+var CreateSpaceInput_userKMSKey = &handles[228]
+var CreateSpaceInput_tags = &handles[229]
+var CreateSpaceInput_roleArn = &handles[230]
+var CreateSpaceInput_supportedEmailDomains = &handles[231]
+
+var CreateSpaceOutput = &handles[232]
+var CreateSpaceOutput_spaceId = &handles[233]
+
+var DeleteSpaceInput = &handles[234]
+var DeleteSpaceInput_spaceId = &handles[235]
+
+var DeregisterAdminInput = &handles[236]
+var DeregisterAdminInput_spaceId = &handles[237]
+var DeregisterAdminInput_adminId = &handles[238]
+
+var GetChannelInput = &handles[239]
+var GetChannelInput_spaceId = &handles[240]
+var GetChannelInput_channelId = &handles[241]
+
+var GetChannelOutput = &handles[242]
+var GetChannelOutput_spaceId = &handles[243]
+var GetChannelOutput_channelId = &handles[244]
+var GetChannelOutput_channelName = &handles[245]
+var GetChannelOutput_channelDescription = &handles[246]
+var GetChannelOutput_createDateTime = &handles[247]
+var GetChannelOutput_deleteDateTime = &handles[248]
+var GetChannelOutput_channelRoles = &handles[249]
+var GetChannelOutput_channelStatus = &handles[250]
+
+var GetSpaceInput = &handles[251]
+var GetSpaceInput_spaceId = &handles[252]
+
+var GetSpaceOutput = &handles[253]
+var GetSpaceOutput_spaceId = &handles[254]
+var GetSpaceOutput_arn = &handles[255]
+var GetSpaceOutput_name = &handles[256]
+var GetSpaceOutput_status = &handles[257]
+var GetSpaceOutput_configurationStatus = &handles[258]
+var GetSpaceOutput_clientId = &handles[259]
+var GetSpaceOutput_identityStoreId = &handles[260]
+var GetSpaceOutput_applicationArn = &handles[261]
+var GetSpaceOutput_description = &handles[262]
+var GetSpaceOutput_vanityDomainStatus = &handles[263]
+var GetSpaceOutput_vanityDomain = &handles[264]
+var GetSpaceOutput_randomDomain = &handles[265]
+var GetSpaceOutput_customerRoleArn = &handles[266]
+var GetSpaceOutput_createDateTime = &handles[267]
+var GetSpaceOutput_deleteDateTime = &handles[268]
+var GetSpaceOutput_tier = &handles[269]
+var GetSpaceOutput_storageLimit = &handles[270]
+var GetSpaceOutput_userAdmins = &handles[271]
+var GetSpaceOutput_groupAdmins = &handles[272]
+var GetSpaceOutput_roles = &handles[273]
+var GetSpaceOutput_userKMSKey = &handles[274]
+var GetSpaceOutput_userCount = &handles[275]
+var GetSpaceOutput_contentSize = &handles[276]
+var GetSpaceOutput_supportedEmailDomains = &handles[277]
+
+var ListChannelsInput = &handles[278]
+var ListChannelsInput_spaceId = &handles[279]
+var ListChannelsInput_nextToken = &handles[280]
+var ListChannelsInput_maxResults = &handles[281]
+
+var ListChannelsOutput = &handles[282]
+var ListChannelsOutput_channels = &handles[283]
+var ListChannelsOutput_nextToken = &handles[284]
+
+var ListSpacesInput = &handles[285]
+var ListSpacesInput_nextToken = &handles[286]
+var ListSpacesInput_maxResults = &handles[287]
+
+var ListSpacesOutput = &handles[288]
+var ListSpacesOutput_spaces = &handles[289]
+var ListSpacesOutput_nextToken = &handles[290]
+
+var ListTagsForResourceRequest = &handles[291]
+var ListTagsForResourceRequest_resourceArn = &handles[292]
+
+var ListTagsForResourceResponse = &handles[293]
+var ListTagsForResourceResponse_tags = &handles[294]
+
+var RegisterAdminInput = &handles[295]
+var RegisterAdminInput_spaceId = &handles[296]
+var RegisterAdminInput_adminId = &handles[297]
+
+var SendInvitesInput = &handles[298]
+var SendInvitesInput_spaceId = &handles[299]
+var SendInvitesInput_accessorIds = &handles[300]
+var SendInvitesInput_title = &handles[301]
+var SendInvitesInput_body = &handles[302]
+
+var TagResourceRequest = &handles[303]
+var TagResourceRequest_resourceArn = &handles[304]
+var TagResourceRequest_tags = &handles[305]
+
+var TagResourceResponse = &handles[306]
+
+var UntagResourceRequest = &handles[307]
+var UntagResourceRequest_resourceArn = &handles[308]
+var UntagResourceRequest_tagKeys = &handles[309]
+
+var UntagResourceResponse = &handles[310]
+
+var UpdateChannelInput = &handles[311]
+var UpdateChannelInput_spaceId = &handles[312]
+var UpdateChannelInput_channelId = &handles[313]
+var UpdateChannelInput_channelName = &handles[314]
+var UpdateChannelInput_channelDescription = &handles[315]
+
+var UpdateChannelOutput = &handles[316]
+
+var UpdateSpaceInput = &handles[317]
+var UpdateSpaceInput_spaceId = &handles[318]
+var UpdateSpaceInput_description = &handles[319]
+var UpdateSpaceInput_tier = &handles[320]
+var UpdateSpaceInput_roleArn = &handles[321]
+var UpdateSpaceInput_supportedEmailDomains = &handles[322]
+
+var RepostSpace = &smithy.ServiceSchema{Schema: &handles[19], Version: "2022-05-13"}

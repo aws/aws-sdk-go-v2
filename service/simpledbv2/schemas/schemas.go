@@ -4,385 +4,337 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "GetExport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v2/GetExport",
-	Code: 200})
-
-var ListExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ListExports",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v2/ListExports",
-	Code: 200})
-
-var StartDomainExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "StartDomainExport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v2/StartDomainExport",
-	Code: 200})
-
-var _SimpleDBv2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "SimpleDBv2",
-}, smithy.ShapeTypeService, 0)
-
-var SimpleDBv2 = smithy.NewServiceSchema(_SimpleDBv2, "2025-09-26")
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConflictException_message *smithy.Schema
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _ExportArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ExportArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ExportDataCutoffTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ExportDataCutoffTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ExportManifestSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ExportManifestSummary",
-}, smithy.ShapeTypeString, 0)
-
-var ExportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ExportStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ExportStatus_PENDING *smithy.Schema
-
-var ExportStatus_IN_PROGRESS *smithy.Schema
-
-var ExportStatus_SUCCEEDED *smithy.Schema
-
-var ExportStatus_FAILED *smithy.Schema
-
-var _ExportSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ExportSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ExportSummaries_member *smithy.Schema
-
-var ExportSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ExportSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ExportSummary_exportArn *smithy.Schema
-
-var ExportSummary_exportStatus *smithy.Schema
-
-var ExportSummary_requestedAt *smithy.Schema
-
-var ExportSummary_domainName *smithy.Schema
-
-var _FailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "FailureCode",
-}, smithy.ShapeTypeString, 0)
-
-var _FailureMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "FailureMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_message *smithy.Schema
-
-var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterCombinationException_message *smithy.Schema
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterValueException_message *smithy.Schema
-
-var _ItemsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ItemsCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoSuchDomainException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "NoSuchDomainException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NoSuchDomainException_message *smithy.Schema
-
-var NoSuchExportException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "NoSuchExportException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NoSuchExportException_message *smithy.Schema
-
-var NumberExportsLimitExceeded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "NumberExportsLimitExceeded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var NumberExportsLimitExceeded_message *smithy.Schema
-
-var _RequestedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "RequestedAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3KeyPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "S3KeyPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var S3SseAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "S3SseAlgorithm",
-}, smithy.ShapeTypeEnum, 2)
-var S3SseAlgorithm_AES256 *smithy.Schema
-
-var S3SseAlgorithm_KMS *smithy.Schema
-
-var _S3SseKmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "S3SseKmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var GetExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "GetExportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetExportRequest_exportArn *smithy.Schema
-
-var GetExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "GetExportResponse",
-}, smithy.ShapeTypeStructure, 15)
-var GetExportResponse_exportArn *smithy.Schema
-
-var GetExportResponse_clientToken *smithy.Schema
-
-var GetExportResponse_exportStatus *smithy.Schema
-
-var GetExportResponse_domainName *smithy.Schema
-
-var GetExportResponse_requestedAt *smithy.Schema
-
-var GetExportResponse_s3Bucket *smithy.Schema
-
-var GetExportResponse_s3KeyPrefix *smithy.Schema
-
-var GetExportResponse_s3SseAlgorithm *smithy.Schema
-
-var GetExportResponse_s3SseKmsKeyId *smithy.Schema
-
-var GetExportResponse_s3BucketOwner *smithy.Schema
-
-var GetExportResponse_failureCode *smithy.Schema
-
-var GetExportResponse_failureMessage *smithy.Schema
-
-var GetExportResponse_exportManifest *smithy.Schema
-
-var GetExportResponse_itemsCount *smithy.Schema
-
-var GetExportResponse_exportDataCutoffTime *smithy.Schema
-
-var ListExportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ListExportsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListExportsRequest_domainName *smithy.Schema
-
-var ListExportsRequest_maxResults *smithy.Schema
-
-var ListExportsRequest_nextToken *smithy.Schema
-
-var ListExportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "ListExportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListExportsResponse_exportSummaries *smithy.Schema
-
-var ListExportsResponse_nextToken *smithy.Schema
-
-var StartDomainExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "StartDomainExportRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartDomainExportRequest_clientToken *smithy.Schema
-
-var StartDomainExportRequest_domainName *smithy.Schema
-
-var StartDomainExportRequest_s3Bucket *smithy.Schema
-
-var StartDomainExportRequest_s3KeyPrefix *smithy.Schema
-
-var StartDomainExportRequest_s3SseAlgorithm *smithy.Schema
-
-var StartDomainExportRequest_s3SseKmsKeyId *smithy.Schema
-
-var StartDomainExportRequest_s3BucketOwner *smithy.Schema
-
-var StartDomainExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.simpledbv2",
-	Name:      "StartDomainExportResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartDomainExportResponse_clientToken *smithy.Schema
-
-var StartDomainExportResponse_exportArn *smithy.Schema
-
-var StartDomainExportResponse_requestedAt *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ExportStatus_PENDING = ExportStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ExportStatus_IN_PROGRESS = ExportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ExportStatus_SUCCEEDED = ExportStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ExportStatus_FAILED = ExportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ExportSummary_exportArn = ExportSummary.AddMember("exportArn", _ExportArn)
-
-	ExportSummary_exportStatus = ExportSummary.AddMember("exportStatus", ExportStatus)
-
-	ExportSummary_requestedAt = ExportSummary.AddMember("requestedAt", _RequestedAt)
-
-	ExportSummary_domainName = ExportSummary.AddMember("domainName", _DomainName)
-
-	_ExportSummaries_member = _ExportSummaries.AddMember("member", ExportSummary)
-
-	InvalidNextTokenException_message = InvalidNextTokenException.AddMember("message", smithyprelude.String)
-
-	InvalidParameterCombinationException_message = InvalidParameterCombinationException.AddMember("message", smithyprelude.String)
-
-	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", smithyprelude.String)
-
-	NoSuchDomainException_message = NoSuchDomainException.AddMember("message", smithyprelude.String)
-
-	NoSuchExportException_message = NoSuchExportException.AddMember("message", smithyprelude.String)
-
-	NumberExportsLimitExceeded_message = NumberExportsLimitExceeded.AddMember("message", smithyprelude.String)
-
-	S3SseAlgorithm_AES256 = S3SseAlgorithm.AddMember("AES256", smithyprelude.Unit)
-
-	S3SseAlgorithm_KMS = S3SseAlgorithm.AddMember("KMS", smithyprelude.Unit)
-
-	GetExportRequest_exportArn = GetExportRequest.AddMember("exportArn", _ExportArn)
-
-	GetExportResponse_exportArn = GetExportResponse.AddMember("exportArn", _ExportArn)
-
-	GetExportResponse_clientToken = GetExportResponse.AddMember("clientToken", _IdempotencyToken)
-
-	GetExportResponse_exportStatus = GetExportResponse.AddMember("exportStatus", ExportStatus)
-
-	GetExportResponse_domainName = GetExportResponse.AddMember("domainName", _DomainName)
-
-	GetExportResponse_requestedAt = GetExportResponse.AddMember("requestedAt", _RequestedAt)
-
-	GetExportResponse_s3Bucket = GetExportResponse.AddMember("s3Bucket", _S3BucketName)
-
-	GetExportResponse_s3KeyPrefix = GetExportResponse.AddMember("s3KeyPrefix", _S3KeyPrefix)
-
-	GetExportResponse_s3SseAlgorithm = GetExportResponse.AddMember("s3SseAlgorithm", S3SseAlgorithm)
-
-	GetExportResponse_s3SseKmsKeyId = GetExportResponse.AddMember("s3SseKmsKeyId", _S3SseKmsKeyId)
-
-	GetExportResponse_s3BucketOwner = GetExportResponse.AddMember("s3BucketOwner", _AwsAccountId)
-
-	GetExportResponse_failureCode = GetExportResponse.AddMember("failureCode", _FailureCode)
-
-	GetExportResponse_failureMessage = GetExportResponse.AddMember("failureMessage", _FailureMessage)
-
-	GetExportResponse_exportManifest = GetExportResponse.AddMember("exportManifest", _ExportManifestSummary)
-
-	GetExportResponse_itemsCount = GetExportResponse.AddMember("itemsCount", _ItemsCount)
-
-	GetExportResponse_exportDataCutoffTime = GetExportResponse.AddMember("exportDataCutoffTime", _ExportDataCutoffTime)
-
-	ListExportsRequest_domainName = ListExportsRequest.AddMember("domainName", _DomainName)
-
-	ListExportsRequest_maxResults = ListExportsRequest.AddMember("maxResults", _MaxResults)
-
-	ListExportsRequest_nextToken = ListExportsRequest.AddMember("nextToken", _NextToken)
-
-	ListExportsResponse_exportSummaries = ListExportsResponse.AddMember("exportSummaries", _ExportSummaries)
-
-	ListExportsResponse_nextToken = ListExportsResponse.AddMember("nextToken", _NextToken)
-
-	StartDomainExportRequest_clientToken = StartDomainExportRequest.AddMember("clientToken", _IdempotencyToken)
-
-	StartDomainExportRequest_domainName = StartDomainExportRequest.AddMember("domainName", _DomainName)
-
-	StartDomainExportRequest_s3Bucket = StartDomainExportRequest.AddMember("s3Bucket", _S3BucketName)
-
-	StartDomainExportRequest_s3KeyPrefix = StartDomainExportRequest.AddMember("s3KeyPrefix", _S3KeyPrefix)
-
-	StartDomainExportRequest_s3SseAlgorithm = StartDomainExportRequest.AddMember("s3SseAlgorithm", S3SseAlgorithm)
-
-	StartDomainExportRequest_s3SseKmsKeyId = StartDomainExportRequest.AddMember("s3SseKmsKeyId", _S3SseKmsKeyId)
-
-	StartDomainExportRequest_s3BucketOwner = StartDomainExportRequest.AddMember("s3BucketOwner", _AwsAccountId)
-
-	StartDomainExportResponse_clientToken = StartDomainExportResponse.AddMember("clientToken", _IdempotencyToken)
-
-	StartDomainExportResponse_exportArn = StartDomainExportResponse.AddMember("exportArn", _ExportArn)
-
-	StartDomainExportResponse_requestedAt = StartDomainExportResponse.AddMember("requestedAt", _RequestedAt)
-
+const blob = "" +
+	"InvalidParameterCombinationExceptionInvalidParameterValueExceptionNumberExportsLimitExceededInvalidN" +
+	"extTokenExceptionStartDomainExportResponseStartDomainExportRequestExportManifestSummaryNoSuchDomainE" +
+	"xceptionNoSuchExportExceptionExportDataCutoffTimeexportDataCutoffTimeListExportsResponseListExportsR" +
+	"equestConflictExceptionGetExportResponseGetExportRequestIdempotencyTokenExportSummariesexportSummari" +
+	"esFailureMessageS3SseAlgorithmexportManifestfailureMessages3SseAlgorithmExportSummaryS3SseKmsKeyIds3" +
+	"BucketOwners3SseKmsKeyIdAwsAccountIdExportStatusS3BucketNameexportStatusFailureCodeIN_PROGRESSReques" +
+	"tedAtS3KeyPrefixclientTokenfailureCoderequestedAts3KeyPrefixDomainNameItemsCountMaxResultsSimpleDBv2" +
+	"domainNameitemsCountmaxResultsExportArnSUCCEEDEDexportArnnextTokenPENDINGmessageAES256FAILEDStringme" +
+	"mberUnitKMS"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.simpledbv2", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 323, Target: 0, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 269, Target: 1, Traits: 1, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 117, Target: 2, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 690, Target: 3, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 524, Target: 4, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 306, Target: 5, Traits: 4, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 773, Target: 85, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 660, Target: 7, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 730, Target: 8, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 229, Target: 9, Traits: 3, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 166, Target: 10, Traits: 3, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 536, Target: 11, Traits: 3, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 766, Target: 86, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 583, Target: 86, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 739, Target: 86, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 786, Target: 86, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 372, Target: 16, Traits: 3, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 798, Target: 18, Traits: 3, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 472, Target: 18, Traits: 3, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 748, Target: 8, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 560, Target: 11, Traits: 3, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 638, Target: 41, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 700, Target: 7, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 572, Target: 23, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 402, Target: 24, Traits: 3, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 356, Target: 25, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 92, Target: 26, Traits: 4, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 773, Target: 85, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 28, Traits: 4, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 773, Target: 85, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 36, Target: 30, Traits: 4, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 773, Target: 85, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 670, Target: 32, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 680, Target: 33, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 99, Target: 34, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 187, Target: 35, Traits: 4, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 773, Target: 85, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 208, Target: 37, Traits: 4, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 773, Target: 85, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 66, Target: 39, Traits: 5, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 773, Target: 85, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 594, Target: 41, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 548, Target: 42, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 605, Target: 43, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 416, Target: 44, Traits: 3, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 780, Target: 86, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 808, Target: 86, Traits: 3, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 485, Target: 47, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 340, Target: 48, Traits: 3, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 748, Target: 8, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 323, Target: 50, Traits: 3, StrLen: 17, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 748, Target: 8, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 616, Target: 25, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 560, Target: 11, Traits: 3, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 700, Target: 7, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 638, Target: 41, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 498, Target: 42, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 649, Target: 43, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 458, Target: 44, Traits: 3, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 511, Target: 47, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 498, Target: 4, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 627, Target: 23, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 444, Target: 24, Traits: 3, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 430, Target: 10, Traits: 3, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 710, Target: 32, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 249, Target: 9, Traits: 3, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 288, Target: 66, Traits: 3, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 700, Target: 7, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 720, Target: 33, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 757, Target: 34, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 269, Target: 70, Traits: 3, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 387, Target: 16, Traits: 3, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 757, Target: 34, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 142, Target: 73, Traits: 3, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 616, Target: 25, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 700, Target: 7, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 498, Target: 42, Traits: 3, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 649, Target: 43, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 458, Target: 44, Traits: 3, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 511, Target: 47, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 498, Target: 4, Traits: 3, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 117, Target: 81, Traits: 3, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 616, Target: 25, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 748, Target: 8, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 638, Target: 41, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 792, Target: 85, Traits: 3, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 804, Target: 86, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v2/GetExport",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v2/ListExports",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v2/StartDomainExport",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [87]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+}
+
+var GetExport = &handles[0]
+
+var ListExports = &handles[1]
+
+var StartDomainExport = &handles[2]
+
+var _SimpleDBv2 = &handles[3]
+
+var _AwsAccountId = &handles[4]
+
+var ConflictException = &handles[5]
+var ConflictException_message = &handles[6]
+
+var _DomainName = &handles[7]
+
+var _ExportArn = &handles[8]
+
+var _ExportDataCutoffTime = &handles[9]
+
+var _ExportManifestSummary = &handles[10]
+
+var ExportStatus = &handles[11]
+var ExportStatus_PENDING = &handles[12]
+var ExportStatus_IN_PROGRESS = &handles[13]
+var ExportStatus_SUCCEEDED = &handles[14]
+var ExportStatus_FAILED = &handles[15]
+
+var _ExportSummaries = &handles[16]
+var _ExportSummaries_member = &handles[17]
+
+var ExportSummary = &handles[18]
+var ExportSummary_exportArn = &handles[19]
+var ExportSummary_exportStatus = &handles[20]
+var ExportSummary_requestedAt = &handles[21]
+var ExportSummary_domainName = &handles[22]
+
+var _FailureCode = &handles[23]
+
+var _FailureMessage = &handles[24]
+
+var _IdempotencyToken = &handles[25]
+
+var InvalidNextTokenException = &handles[26]
+var InvalidNextTokenException_message = &handles[27]
+
+var InvalidParameterCombinationException = &handles[28]
+var InvalidParameterCombinationException_message = &handles[29]
+
+var InvalidParameterValueException = &handles[30]
+var InvalidParameterValueException_message = &handles[31]
+
+var _ItemsCount = &handles[32]
+
+var _MaxResults = &handles[33]
+
+var _NextToken = &handles[34]
+
+var NoSuchDomainException = &handles[35]
+var NoSuchDomainException_message = &handles[36]
+
+var NoSuchExportException = &handles[37]
+var NoSuchExportException_message = &handles[38]
+
+var NumberExportsLimitExceeded = &handles[39]
+var NumberExportsLimitExceeded_message = &handles[40]
+
+var _RequestedAt = &handles[41]
+
+var _S3BucketName = &handles[42]
+
+var _S3KeyPrefix = &handles[43]
+
+var S3SseAlgorithm = &handles[44]
+var S3SseAlgorithm_AES256 = &handles[45]
+var S3SseAlgorithm_KMS = &handles[46]
+
+var _S3SseKmsKeyId = &handles[47]
+
+var GetExportRequest = &handles[48]
+var GetExportRequest_exportArn = &handles[49]
+
+var GetExportResponse = &handles[50]
+var GetExportResponse_exportArn = &handles[51]
+var GetExportResponse_clientToken = &handles[52]
+var GetExportResponse_exportStatus = &handles[53]
+var GetExportResponse_domainName = &handles[54]
+var GetExportResponse_requestedAt = &handles[55]
+var GetExportResponse_s3Bucket = &handles[56]
+var GetExportResponse_s3KeyPrefix = &handles[57]
+var GetExportResponse_s3SseAlgorithm = &handles[58]
+var GetExportResponse_s3SseKmsKeyId = &handles[59]
+var GetExportResponse_s3BucketOwner = &handles[60]
+var GetExportResponse_failureCode = &handles[61]
+var GetExportResponse_failureMessage = &handles[62]
+var GetExportResponse_exportManifest = &handles[63]
+var GetExportResponse_itemsCount = &handles[64]
+var GetExportResponse_exportDataCutoffTime = &handles[65]
+
+var ListExportsRequest = &handles[66]
+var ListExportsRequest_domainName = &handles[67]
+var ListExportsRequest_maxResults = &handles[68]
+var ListExportsRequest_nextToken = &handles[69]
+
+var ListExportsResponse = &handles[70]
+var ListExportsResponse_exportSummaries = &handles[71]
+var ListExportsResponse_nextToken = &handles[72]
+
+var StartDomainExportRequest = &handles[73]
+var StartDomainExportRequest_clientToken = &handles[74]
+var StartDomainExportRequest_domainName = &handles[75]
+var StartDomainExportRequest_s3Bucket = &handles[76]
+var StartDomainExportRequest_s3KeyPrefix = &handles[77]
+var StartDomainExportRequest_s3SseAlgorithm = &handles[78]
+var StartDomainExportRequest_s3SseKmsKeyId = &handles[79]
+var StartDomainExportRequest_s3BucketOwner = &handles[80]
+
+var StartDomainExportResponse = &handles[81]
+var StartDomainExportResponse_clientToken = &handles[82]
+var StartDomainExportResponse_exportArn = &handles[83]
+var StartDomainExportResponse_requestedAt = &handles[84]
+
+var SimpleDBv2 = &smithy.ServiceSchema{Schema: &handles[3], Version: "2025-09-26"}

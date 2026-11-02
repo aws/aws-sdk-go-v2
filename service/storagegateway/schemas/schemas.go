@@ -4,5921 +4,4903 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ActivateGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActivateGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddTagsToResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddTagsToResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddUploadBuffer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddUploadBuffer",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddWorkingStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddWorkingStorage",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssignTapePool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssignTapePool",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssociateFileSystem",
-}, smithy.ShapeTypeOperation, 0)
-
-var AttachVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AttachVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelArchival = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelArchival",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelCacheReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelCacheReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelRetrieval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelRetrieval",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCachediSCSIVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateCachediSCSIVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateNFSFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateNFSFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSMBFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSMBFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSnapshotFromVolumeRecoveryPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotFromVolumeRecoveryPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateStorediSCSIVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateStorediSCSIVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTapePool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapePool",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapes",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTapeWithBarcode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapeWithBarcode",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAutomaticTapeCreationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteAutomaticTapeCreationPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBandwidthRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteBandwidthRateLimit",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCacheReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteCacheReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteChapCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteChapCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSnapshotSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteSnapshotSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTape = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTape",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTapeArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTapePool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapePool",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAvailabilityMonitorTest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeAvailabilityMonitorTest",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeBandwidthRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimit",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeBandwidthRateLimitSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCachediSCSIVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCachediSCSIVolumes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCacheReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeChapCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeChapCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFileSystemAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeFileSystemAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeGatewayInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeGatewayInformation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeMaintenanceStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeMaintenanceStartTime",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeNFSFileShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeNFSFileShares",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSMBFileShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBFileShares",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSMBSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSnapshotSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSnapshotSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeStorediSCSIVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeStorediSCSIVolumes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTapeArchives = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeArchives",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTapeRecoveryPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeRecoveryPoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUploadBuffer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeUploadBuffer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeVTLDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeVTLDevices",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWorkingStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeWorkingStorage",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetachVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DetachVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisableGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisassociateFileSystem",
-}, smithy.ShapeTypeOperation, 0)
-
-var EvictFilesFailingUpload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EvictFilesFailingUpload",
-}, smithy.ShapeTypeOperation, 0)
-
-var JoinDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "JoinDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutomaticTapeCreationPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListAutomaticTapeCreationPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCacheReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListCacheReports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFileShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileShares",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFileSystemAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSystemAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListGateways",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLocalDisks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListLocalDisks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTapePools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapePools",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVolumeInitiators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeInitiators",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVolumeRecoveryPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeRecoveryPoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumes",
-}, smithy.ShapeTypeOperation, 0)
-
-var NotifyWhenUploaded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotifyWhenUploaded",
-}, smithy.ShapeTypeOperation, 0)
-
-var RefreshCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RefreshCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTagsFromResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RemoveTagsFromResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResetCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ResetCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var RetrieveTapeArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var RetrieveTapeRecoveryPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeRecoveryPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetLocalConsolePassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetLocalConsolePassword",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetSMBGuestPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetSMBGuestPassword",
-}, smithy.ShapeTypeOperation, 0)
-
-var ShutdownGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ShutdownGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartAvailabilityMonitorTest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartAvailabilityMonitorTest",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartCacheReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartCacheReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAutomaticTapeCreationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateAutomaticTapeCreationPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateBandwidthRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimit",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateBandwidthRateLimitSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateChapCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateChapCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateFileSystemAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateFileSystemAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGatewayInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewayInformation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGatewaySoftwareNow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewaySoftwareNow",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateMaintenanceStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateMaintenanceStartTime",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateNFSFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateNFSFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSMBFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSMBFileShareVisibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareVisibility",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSMBLocalGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBLocalGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSMBSecurityStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBSecurityStrategy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSnapshotSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSnapshotSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateVTLDeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateVTLDeviceType",
-}, smithy.ShapeTypeOperation, 0)
-
-var _StorageGateway_20130630 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorageGateway_20130630",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://storagegateway.amazonaws.com/doc/2013-06-30"})
-
-var StorageGateway_20130630 = smithy.NewServiceSchema(_StorageGateway_20130630, "2013-06-30")
-
-var _ActivationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActivationKey",
-}, smithy.ShapeTypeString, 0)
-
-var ActiveDirectoryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActiveDirectoryStatus",
-}, smithy.ShapeTypeEnum, 8)
-var ActiveDirectoryStatus_ACCESS_DENIED *smithy.Schema
-
-var ActiveDirectoryStatus_DETACHED *smithy.Schema
-
-var ActiveDirectoryStatus_JOINED *smithy.Schema
-
-var ActiveDirectoryStatus_JOINING *smithy.Schema
-
-var ActiveDirectoryStatus_NETWORK_ERROR *smithy.Schema
-
-var ActiveDirectoryStatus_TIMEOUT *smithy.Schema
-
-var ActiveDirectoryStatus_UNKNOWN_ERROR *smithy.Schema
-
-var ActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS *smithy.Schema
-
-var _AuditDestinationARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AuditDestinationARN",
-}, smithy.ShapeTypeString, 0)
-
-var _Authentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Authentication",
-}, smithy.ShapeTypeString, 0)
-
-var AutomaticTapeCreationPolicyInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticTapeCreationPolicyInfo",
-}, smithy.ShapeTypeStructure, 2)
-var AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules *smithy.Schema
-
-var AutomaticTapeCreationPolicyInfo_GatewayARN *smithy.Schema
-
-var _AutomaticTapeCreationPolicyInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticTapeCreationPolicyInfos",
-}, smithy.ShapeTypeList, 1)
-var _AutomaticTapeCreationPolicyInfos_member *smithy.Schema
-
-var AutomaticTapeCreationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticTapeCreationRule",
-}, smithy.ShapeTypeStructure, 5)
-var AutomaticTapeCreationRule_TapeBarcodePrefix *smithy.Schema
-
-var AutomaticTapeCreationRule_PoolId *smithy.Schema
-
-var AutomaticTapeCreationRule_TapeSizeInBytes *smithy.Schema
-
-var AutomaticTapeCreationRule_MinimumNumTapes *smithy.Schema
-
-var AutomaticTapeCreationRule_Worm *smithy.Schema
-
-var _AutomaticTapeCreationRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticTapeCreationRules",
-}, smithy.ShapeTypeList, 1)
-var _AutomaticTapeCreationRules_member *smithy.Schema
-
-var AutomaticUpdatePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticUpdatePolicy",
-}, smithy.ShapeTypeEnum, 2)
-var AutomaticUpdatePolicy_ALL_VERSIONS *smithy.Schema
-
-var AutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY *smithy.Schema
-
-var AvailabilityMonitorTestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AvailabilityMonitorTestStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AvailabilityMonitorTestStatus_COMPLETE *smithy.Schema
-
-var AvailabilityMonitorTestStatus_FAILED *smithy.Schema
-
-var AvailabilityMonitorTestStatus_PENDING *smithy.Schema
-
-var _BandwidthDownloadRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthDownloadRateLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var BandwidthRateLimitInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthRateLimitInterval",
-}, smithy.ShapeTypeStructure, 7)
-var BandwidthRateLimitInterval_StartHourOfDay *smithy.Schema
-
-var BandwidthRateLimitInterval_StartMinuteOfHour *smithy.Schema
-
-var BandwidthRateLimitInterval_EndHourOfDay *smithy.Schema
-
-var BandwidthRateLimitInterval_EndMinuteOfHour *smithy.Schema
-
-var BandwidthRateLimitInterval_DaysOfWeek *smithy.Schema
-
-var BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec *smithy.Schema
-
-var BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec *smithy.Schema
-
-var _BandwidthRateLimitIntervals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthRateLimitIntervals",
-}, smithy.ShapeTypeList, 1)
-var _BandwidthRateLimitIntervals_member *smithy.Schema
-
-var _BandwidthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthType",
-}, smithy.ShapeTypeString, 0)
-
-var _BandwidthUploadRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthUploadRateLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Boolean2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Boolean2",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CacheAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var CacheAttributes_CacheStaleTimeoutInSeconds *smithy.Schema
-
-var CachediSCSIVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CachediSCSIVolume",
-}, smithy.ShapeTypeStructure, 13)
-var CachediSCSIVolume_VolumeARN *smithy.Schema
-
-var CachediSCSIVolume_VolumeId *smithy.Schema
-
-var CachediSCSIVolume_VolumeType *smithy.Schema
-
-var CachediSCSIVolume_VolumeStatus *smithy.Schema
-
-var CachediSCSIVolume_VolumeAttachmentStatus *smithy.Schema
-
-var CachediSCSIVolume_VolumeSizeInBytes *smithy.Schema
-
-var CachediSCSIVolume_VolumeProgress *smithy.Schema
-
-var CachediSCSIVolume_SourceSnapshotId *smithy.Schema
-
-var CachediSCSIVolume_VolumeiSCSIAttributes *smithy.Schema
-
-var CachediSCSIVolume_CreatedDate *smithy.Schema
-
-var CachediSCSIVolume_VolumeUsedInBytes *smithy.Schema
-
-var CachediSCSIVolume_KMSKey *smithy.Schema
-
-var CachediSCSIVolume_TargetName *smithy.Schema
-
-var _CachediSCSIVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CachediSCSIVolumes",
-}, smithy.ShapeTypeList, 1)
-var _CachediSCSIVolumes_member *smithy.Schema
-
-var _CacheReportARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportARN",
-}, smithy.ShapeTypeString, 0)
-
-var CacheReportFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilter",
-}, smithy.ShapeTypeStructure, 2)
-var CacheReportFilter_Name *smithy.Schema
-
-var CacheReportFilter_Values *smithy.Schema
-
-var _CacheReportFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilterList",
-}, smithy.ShapeTypeList, 1)
-var _CacheReportFilterList_member *smithy.Schema
-
-var CacheReportFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var CacheReportFilterName_UploadState *smithy.Schema
-
-var CacheReportFilterName_UploadFailureReason *smithy.Schema
-
-var _CacheReportFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _CacheReportFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _CacheReportFilterValues_member *smithy.Schema
-
-var CacheReportInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportInfo",
-}, smithy.ShapeTypeStructure, 12)
-var CacheReportInfo_CacheReportARN *smithy.Schema
-
-var CacheReportInfo_CacheReportStatus *smithy.Schema
-
-var CacheReportInfo_ReportCompletionPercent *smithy.Schema
-
-var CacheReportInfo_EndTime *smithy.Schema
-
-var CacheReportInfo_Role *smithy.Schema
-
-var CacheReportInfo_FileShareARN *smithy.Schema
-
-var CacheReportInfo_LocationARN *smithy.Schema
-
-var CacheReportInfo_StartTime *smithy.Schema
-
-var CacheReportInfo_InclusionFilters *smithy.Schema
-
-var CacheReportInfo_ExclusionFilters *smithy.Schema
-
-var CacheReportInfo_ReportName *smithy.Schema
-
-var CacheReportInfo_Tags *smithy.Schema
-
-var _CacheReportList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportList",
-}, smithy.ShapeTypeList, 1)
-var _CacheReportList_member *smithy.Schema
-
-var _CacheReportName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportName",
-}, smithy.ShapeTypeString, 0)
-
-var CacheReportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportStatus",
-}, smithy.ShapeTypeEnum, 5)
-var CacheReportStatus_IN_PROGRESS *smithy.Schema
-
-var CacheReportStatus_COMPLETED *smithy.Schema
-
-var CacheReportStatus_CANCELED *smithy.Schema
-
-var CacheReportStatus_FAILED *smithy.Schema
-
-var CacheReportStatus_ERROR *smithy.Schema
-
-var _CacheStaleTimeoutInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheStaleTimeoutInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var CaseSensitivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CaseSensitivity",
-}, smithy.ShapeTypeEnum, 2)
-var CaseSensitivity_ClientSpecified *smithy.Schema
-
-var CaseSensitivity_CaseSensitive *smithy.Schema
-
-var _ChapCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ChapCredentials",
-}, smithy.ShapeTypeList, 1)
-var _ChapCredentials_member *smithy.Schema
-
-var ChapInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ChapInfo",
-}, smithy.ShapeTypeStructure, 4)
-var ChapInfo_TargetARN *smithy.Schema
-
-var ChapInfo_SecretToAuthenticateInitiator *smithy.Schema
-
-var ChapInfo_InitiatorName *smithy.Schema
-
-var ChapInfo_SecretToAuthenticateTarget *smithy.Schema
-
-var _ChapSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ChapSecret",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _CloudWatchLogGroupARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CloudWatchLogGroupARN",
-}, smithy.ShapeTypeString, 0)
-
-var _CreatedDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreatedDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DayOfMonth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DayOfMonth",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DaysOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DaysOfWeek",
-}, smithy.ShapeTypeList, 1)
-var _DaysOfWeek_member *smithy.Schema
-
-var _DeprecationDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeprecationDate",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DeviceiSCSIAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeviceiSCSIAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var DeviceiSCSIAttributes_TargetARN *smithy.Schema
-
-var DeviceiSCSIAttributes_NetworkInterfaceId *smithy.Schema
-
-var DeviceiSCSIAttributes_NetworkInterfacePort *smithy.Schema
-
-var DeviceiSCSIAttributes_ChapEnabled *smithy.Schema
-
-var _DeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeviceType",
-}, smithy.ShapeTypeString, 0)
-
-var Disk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Disk",
-}, smithy.ShapeTypeStructure, 8)
-var Disk_DiskId *smithy.Schema
-
-var Disk_DiskPath *smithy.Schema
-
-var Disk_DiskNode *smithy.Schema
-
-var Disk_DiskStatus *smithy.Schema
-
-var Disk_DiskSizeInBytes *smithy.Schema
-
-var Disk_DiskAllocationType *smithy.Schema
-
-var Disk_DiskAllocationResource *smithy.Schema
-
-var Disk_DiskAttributeList *smithy.Schema
-
-var _DiskAllocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskAllocationType",
-}, smithy.ShapeTypeString, 0)
-
-var _DiskAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _DiskAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _DiskAttributeList_member *smithy.Schema
-
-var _DiskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskId",
-}, smithy.ShapeTypeString, 0)
-
-var _DiskIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskIds",
-}, smithy.ShapeTypeList, 1)
-var _DiskIds_member *smithy.Schema
-
-var _Disks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Disks",
-}, smithy.ShapeTypeList, 1)
-var _Disks_member *smithy.Schema
-
-var _DNSHostName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DNSHostName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainUserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DomainUserName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainUserPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DomainUserPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _DoubleObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DoubleObject",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Ec2InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Ec2InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var _Ec2InstanceRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Ec2InstanceRegion",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeEnum, 3)
-var EncryptionType_SseS3 *smithy.Schema
-
-var EncryptionType_SseKms *smithy.Schema
-
-var EncryptionType_DsseKms *smithy.Schema
-
-var EndpointNetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EndpointNetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EndpointNetworkConfiguration_IpAddresses *smithy.Schema
-
-var _EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EndpointType",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 62)
-var ErrorCode_ActivationKeyExpired *smithy.Schema
-
-var ErrorCode_ActivationKeyInvalid *smithy.Schema
-
-var ErrorCode_ActivationKeyNotFound *smithy.Schema
-
-var ErrorCode_GatewayInternalError *smithy.Schema
-
-var ErrorCode_GatewayNotConnected *smithy.Schema
-
-var ErrorCode_GatewayNotFound *smithy.Schema
-
-var ErrorCode_GatewayProxyNetworkConnectionBusy *smithy.Schema
-
-var ErrorCode_AuthenticationFailure *smithy.Schema
-
-var ErrorCode_BandwidthThrottleScheduleNotFound *smithy.Schema
-
-var ErrorCode_Blocked *smithy.Schema
-
-var ErrorCode_CannotExportSnapshot *smithy.Schema
-
-var ErrorCode_ChapCredentialNotFound *smithy.Schema
-
-var ErrorCode_DiskAlreadyAllocated *smithy.Schema
-
-var ErrorCode_DiskDoesNotExist *smithy.Schema
-
-var ErrorCode_DiskSizeGreaterThanVolumeMaxSize *smithy.Schema
-
-var ErrorCode_DiskSizeLessThanVolumeSize *smithy.Schema
-
-var ErrorCode_DiskSizeNotGigAligned *smithy.Schema
-
-var ErrorCode_DuplicateCertificateInfo *smithy.Schema
-
-var ErrorCode_DuplicateSchedule *smithy.Schema
-
-var ErrorCode_EndpointNotFound *smithy.Schema
-
-var ErrorCode_IAMNotSupported *smithy.Schema
-
-var ErrorCode_InitiatorInvalid *smithy.Schema
-
-var ErrorCode_InitiatorNotFound *smithy.Schema
-
-var ErrorCode_InternalError *smithy.Schema
-
-var ErrorCode_InvalidGateway *smithy.Schema
-
-var ErrorCode_InvalidEndpoint *smithy.Schema
-
-var ErrorCode_InvalidParameters *smithy.Schema
-
-var ErrorCode_InvalidSchedule *smithy.Schema
-
-var ErrorCode_LocalStorageLimitExceeded *smithy.Schema
-
-var ErrorCode_LunAlreadyAllocated_ *smithy.Schema
-
-var ErrorCode_LunInvalid *smithy.Schema
-
-var ErrorCode_JoinDomainInProgress *smithy.Schema
-
-var ErrorCode_MaximumContentLengthExceeded *smithy.Schema
-
-var ErrorCode_MaximumTapeCartridgeCountExceeded *smithy.Schema
-
-var ErrorCode_MaximumVolumeCountExceeded *smithy.Schema
-
-var ErrorCode_NetworkConfigurationChanged *smithy.Schema
-
-var ErrorCode_NoDisksAvailable *smithy.Schema
-
-var ErrorCode_NotImplemented *smithy.Schema
-
-var ErrorCode_NotSupported *smithy.Schema
-
-var ErrorCode_OperationAborted *smithy.Schema
-
-var ErrorCode_OutdatedGateway *smithy.Schema
-
-var ErrorCode_ParametersNotImplemented *smithy.Schema
-
-var ErrorCode_RegionInvalid *smithy.Schema
-
-var ErrorCode_RequestTimeout *smithy.Schema
-
-var ErrorCode_ServiceUnavailable *smithy.Schema
-
-var ErrorCode_SnapshotDeleted *smithy.Schema
-
-var ErrorCode_SnapshotIdInvalid *smithy.Schema
-
-var ErrorCode_SnapshotInProgress *smithy.Schema
-
-var ErrorCode_SnapshotNotFound *smithy.Schema
-
-var ErrorCode_SnapshotScheduleNotFound *smithy.Schema
-
-var ErrorCode_StagingAreaFull *smithy.Schema
-
-var ErrorCode_StorageFailure *smithy.Schema
-
-var ErrorCode_TapeCartridgeNotFound *smithy.Schema
-
-var ErrorCode_TargetAlreadyExists *smithy.Schema
-
-var ErrorCode_TargetInvalid *smithy.Schema
-
-var ErrorCode_TargetNotFound *smithy.Schema
-
-var ErrorCode_UnauthorizedOperation *smithy.Schema
-
-var ErrorCode_VolumeAlreadyExists *smithy.Schema
-
-var ErrorCode_VolumeIdInvalid *smithy.Schema
-
-var ErrorCode_VolumeInUse *smithy.Schema
-
-var ErrorCode_VolumeNotFound *smithy.Schema
-
-var ErrorCode_VolumeNotReady *smithy.Schema
-
-var _errorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "errorDetails",
-}, smithy.ShapeTypeMap, 2)
-var _errorDetails_key *smithy.Schema
-
-var _errorDetails_value *smithy.Schema
-
-var _FileShareARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareARN",
-}, smithy.ShapeTypeString, 0)
-
-var _FileShareARNList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareARNList",
-}, smithy.ShapeTypeList, 1)
-var _FileShareARNList_member *smithy.Schema
-
-var _FileShareClientList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareClientList",
-}, smithy.ShapeTypeList, 1)
-var _FileShareClientList_member *smithy.Schema
-
-var _FileShareId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareId",
-}, smithy.ShapeTypeString, 0)
-
-var FileShareInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareInfo",
-}, smithy.ShapeTypeStructure, 5)
-var FileShareInfo_FileShareType *smithy.Schema
-
-var FileShareInfo_FileShareARN *smithy.Schema
-
-var FileShareInfo_FileShareId *smithy.Schema
-
-var FileShareInfo_FileShareStatus *smithy.Schema
-
-var FileShareInfo_GatewayARN *smithy.Schema
-
-var _FileShareInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareInfoList",
-}, smithy.ShapeTypeList, 1)
-var _FileShareInfoList_member *smithy.Schema
-
-var _FileShareName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareName",
-}, smithy.ShapeTypeString, 0)
-
-var _FileShareStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareStatus",
-}, smithy.ShapeTypeString, 0)
-
-var FileShareType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareType",
-}, smithy.ShapeTypeEnum, 2)
-var FileShareType_NFS *smithy.Schema
-
-var FileShareType_SMB *smithy.Schema
-
-var _FileSystemAssociationARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationARN",
-}, smithy.ShapeTypeString, 0)
-
-var _FileSystemAssociationARNList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationARNList",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemAssociationARNList_member *smithy.Schema
-
-var _FileSystemAssociationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationId",
-}, smithy.ShapeTypeString, 0)
-
-var FileSystemAssociationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationInfo",
-}, smithy.ShapeTypeStructure, 9)
-var FileSystemAssociationInfo_FileSystemAssociationARN *smithy.Schema
-
-var FileSystemAssociationInfo_LocationARN *smithy.Schema
-
-var FileSystemAssociationInfo_FileSystemAssociationStatus *smithy.Schema
-
-var FileSystemAssociationInfo_AuditDestinationARN *smithy.Schema
-
-var FileSystemAssociationInfo_GatewayARN *smithy.Schema
-
-var FileSystemAssociationInfo_Tags *smithy.Schema
-
-var FileSystemAssociationInfo_CacheAttributes *smithy.Schema
-
-var FileSystemAssociationInfo_EndpointNetworkConfiguration *smithy.Schema
-
-var FileSystemAssociationInfo_FileSystemAssociationStatusDetails *smithy.Schema
-
-var _FileSystemAssociationInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationInfoList",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemAssociationInfoList_member *smithy.Schema
-
-var _FileSystemAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var FileSystemAssociationStatusDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationStatusDetail",
-}, smithy.ShapeTypeStructure, 1)
-var FileSystemAssociationStatusDetail_ErrorCode *smithy.Schema
-
-var _FileSystemAssociationStatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationStatusDetails",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemAssociationStatusDetails_member *smithy.Schema
-
-var FileSystemAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationSummary",
-}, smithy.ShapeTypeStructure, 4)
-var FileSystemAssociationSummary_FileSystemAssociationId *smithy.Schema
-
-var FileSystemAssociationSummary_FileSystemAssociationARN *smithy.Schema
-
-var FileSystemAssociationSummary_FileSystemAssociationStatus *smithy.Schema
-
-var FileSystemAssociationSummary_GatewayARN *smithy.Schema
-
-var _FileSystemAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemAssociationSummaryList_member *smithy.Schema
-
-var _FileSystemAssociationSyncErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationSyncErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _FileSystemLocationARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemLocationARN",
-}, smithy.ShapeTypeString, 0)
-
-var _Folder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Folder",
-}, smithy.ShapeTypeString, 0)
-
-var _FolderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FolderList",
-}, smithy.ShapeTypeList, 1)
-var _FolderList_member *smithy.Schema
-
-var _GatewayARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayARN",
-}, smithy.ShapeTypeString, 0)
-
-var GatewayCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayCapacity",
-}, smithy.ShapeTypeEnum, 3)
-var GatewayCapacity_Small *smithy.Schema
-
-var GatewayCapacity_Medium *smithy.Schema
-
-var GatewayCapacity_Large *smithy.Schema
-
-var _GatewayId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayId",
-}, smithy.ShapeTypeString, 0)
-
-var GatewayInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayInfo",
-}, smithy.ShapeTypeStructure, 11)
-var GatewayInfo_GatewayId *smithy.Schema
-
-var GatewayInfo_GatewayARN *smithy.Schema
-
-var GatewayInfo_GatewayType *smithy.Schema
-
-var GatewayInfo_GatewayOperationalState *smithy.Schema
-
-var GatewayInfo_GatewayName *smithy.Schema
-
-var GatewayInfo_Ec2InstanceId *smithy.Schema
-
-var GatewayInfo_Ec2InstanceRegion *smithy.Schema
-
-var GatewayInfo_HostEnvironment *smithy.Schema
-
-var GatewayInfo_HostEnvironmentId *smithy.Schema
-
-var GatewayInfo_DeprecationDate *smithy.Schema
-
-var GatewayInfo_SoftwareVersion *smithy.Schema
-
-var _GatewayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayName",
-}, smithy.ShapeTypeString, 0)
-
-var _GatewayNetworkInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayNetworkInterfaces",
-}, smithy.ShapeTypeList, 1)
-var _GatewayNetworkInterfaces_member *smithy.Schema
-
-var _GatewayOperationalState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayOperationalState",
-}, smithy.ShapeTypeString, 0)
-
-var _Gateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Gateways",
-}, smithy.ShapeTypeList, 1)
-var _Gateways_member *smithy.Schema
-
-var _GatewayState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayState",
-}, smithy.ShapeTypeString, 0)
-
-var _GatewayTimezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayTimezone",
-}, smithy.ShapeTypeString, 0)
-
-var _GatewayType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayType",
-}, smithy.ShapeTypeString, 0)
-
-var _Host = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Host",
-}, smithy.ShapeTypeString, 0)
-
-var HostEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "HostEnvironment",
-}, smithy.ShapeTypeEnum, 6)
-var HostEnvironment_VMWARE *smithy.Schema
-
-var HostEnvironment_HYPER_V *smithy.Schema
-
-var HostEnvironment_EC2 *smithy.Schema
-
-var HostEnvironment_KVM *smithy.Schema
-
-var HostEnvironment_OTHER *smithy.Schema
-
-var HostEnvironment_SNOWBALL *smithy.Schema
-
-var _HostEnvironmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "HostEnvironmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _Hosts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Hosts",
-}, smithy.ShapeTypeList, 1)
-var _Hosts_member *smithy.Schema
-
-var _HourOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "HourOfDay",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Initiator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Initiator",
-}, smithy.ShapeTypeString, 0)
-
-var _Initiators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Initiators",
-}, smithy.ShapeTypeList, 1)
-var _Initiators_member *smithy.Schema
-
-var _integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerError_message *smithy.Schema
-
-var InternalServerError_error *smithy.Schema
-
-var InvalidGatewayRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "InvalidGatewayRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidGatewayRequestException_message *smithy.Schema
-
-var InvalidGatewayRequestException_error *smithy.Schema
-
-var _IpAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "IpAddressList",
-}, smithy.ShapeTypeList, 1)
-var _IpAddressList_member *smithy.Schema
-
-var _IPV4Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "IPV4Address",
-}, smithy.ShapeTypeString, 0)
-
-var _Ipv4OrIpv6AddressCIDR = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Ipv4OrIpv6AddressCIDR",
-}, smithy.ShapeTypeString, 0)
-
-var _IqnName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "IqnName",
-}, smithy.ShapeTypeString, 0)
-
-var _KMSKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "KMSKey",
-}, smithy.ShapeTypeString, 0)
-
-var _LastSoftwareUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "LastSoftwareUpdate",
-}, smithy.ShapeTypeString, 0)
-
-var _LocalConsolePassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "LocalConsolePassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _LocationARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "LocationARN",
-}, smithy.ShapeTypeString, 0)
-
-var _long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "long",
-}, smithy.ShapeTypeLong, 0)
-
-var _Marker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Marker",
-}, smithy.ShapeTypeString, 0)
-
-var _MediumChangerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "MediumChangerType",
-}, smithy.ShapeTypeString, 0)
-
-var _MinimumNumTapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "MinimumNumTapes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MinuteOfHour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "MinuteOfHour",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NetworkInterface",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Sensitive{})
-var NetworkInterface_Ipv4Address *smithy.Schema
-
-var NetworkInterface_MacAddress *smithy.Schema
-
-var NetworkInterface_Ipv6Address *smithy.Schema
-
-var _NetworkInterfaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NetworkInterfaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _NextUpdateAvailabilityDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NextUpdateAvailabilityDate",
-}, smithy.ShapeTypeString, 0)
-
-var NFSFileShareDefaults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NFSFileShareDefaults",
-}, smithy.ShapeTypeStructure, 4)
-var NFSFileShareDefaults_FileMode *smithy.Schema
-
-var NFSFileShareDefaults_DirectoryMode *smithy.Schema
-
-var NFSFileShareDefaults_GroupId *smithy.Schema
-
-var NFSFileShareDefaults_OwnerId *smithy.Schema
-
-var NFSFileShareInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NFSFileShareInfo",
-}, smithy.ShapeTypeStructure, 25)
-var NFSFileShareInfo_NFSFileShareDefaults *smithy.Schema
-
-var NFSFileShareInfo_FileShareARN *smithy.Schema
-
-var NFSFileShareInfo_FileShareId *smithy.Schema
-
-var NFSFileShareInfo_FileShareStatus *smithy.Schema
-
-var NFSFileShareInfo_GatewayARN *smithy.Schema
-
-var NFSFileShareInfo_EncryptionType *smithy.Schema
-
-var NFSFileShareInfo_KMSEncrypted *smithy.Schema
-
-var NFSFileShareInfo_KMSKey *smithy.Schema
-
-var NFSFileShareInfo_Path *smithy.Schema
-
-var NFSFileShareInfo_Role *smithy.Schema
-
-var NFSFileShareInfo_LocationARN *smithy.Schema
-
-var NFSFileShareInfo_DefaultStorageClass *smithy.Schema
-
-var NFSFileShareInfo_ObjectACL *smithy.Schema
-
-var NFSFileShareInfo_ClientList *smithy.Schema
-
-var NFSFileShareInfo_Squash *smithy.Schema
-
-var NFSFileShareInfo_ReadOnly *smithy.Schema
-
-var NFSFileShareInfo_GuessMIMETypeEnabled *smithy.Schema
-
-var NFSFileShareInfo_RequesterPays *smithy.Schema
-
-var NFSFileShareInfo_Tags *smithy.Schema
-
-var NFSFileShareInfo_FileShareName *smithy.Schema
-
-var NFSFileShareInfo_CacheAttributes *smithy.Schema
-
-var NFSFileShareInfo_NotificationPolicy *smithy.Schema
-
-var NFSFileShareInfo_VPCEndpointDNSName *smithy.Schema
-
-var NFSFileShareInfo_BucketRegion *smithy.Schema
-
-var NFSFileShareInfo_AuditDestinationARN *smithy.Schema
-
-var _NFSFileShareInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NFSFileShareInfoList",
-}, smithy.ShapeTypeList, 1)
-var _NFSFileShareInfoList_member *smithy.Schema
-
-var _NotificationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotificationId",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotificationPolicy",
-}, smithy.ShapeTypeString, 0)
-
-var _NumTapesToCreate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NumTapesToCreate",
-}, smithy.ShapeTypeInteger, 0)
-
-var ObjectACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ObjectACL",
-}, smithy.ShapeTypeEnum, 7)
-var ObjectACL_private *smithy.Schema
-
-var ObjectACL_public_read *smithy.Schema
-
-var ObjectACL_public_read_write *smithy.Schema
-
-var ObjectACL_authenticated_read *smithy.Schema
-
-var ObjectACL_bucket_owner_read *smithy.Schema
-
-var ObjectACL_bucket_owner_full_control *smithy.Schema
-
-var ObjectACL_aws_exec_read *smithy.Schema
-
-var _OrganizationalUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "OrganizationalUnit",
-}, smithy.ShapeTypeString, 0)
-
-var _Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Path",
-}, smithy.ShapeTypeString, 0)
-
-var _PermissionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PermissionId",
-}, smithy.ShapeTypeLong, 0)
-
-var _PermissionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PermissionMode",
-}, smithy.ShapeTypeString, 0)
-
-var _PoolARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolARN",
-}, smithy.ShapeTypeString, 0)
-
-var _PoolARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolARNs",
-}, smithy.ShapeTypeList, 1)
-var _PoolARNs_member *smithy.Schema
-
-var _PoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolId",
-}, smithy.ShapeTypeString, 0)
-
-var PoolInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolInfo",
-}, smithy.ShapeTypeStructure, 6)
-var PoolInfo_PoolARN *smithy.Schema
-
-var PoolInfo_PoolName *smithy.Schema
-
-var PoolInfo_StorageClass *smithy.Schema
-
-var PoolInfo_RetentionLockType *smithy.Schema
-
-var PoolInfo_RetentionLockTimeInDays *smithy.Schema
-
-var PoolInfo_PoolStatus *smithy.Schema
-
-var _PoolInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolInfos",
-}, smithy.ShapeTypeList, 1)
-var _PoolInfos_member *smithy.Schema
-
-var _PoolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolName",
-}, smithy.ShapeTypeString, 0)
-
-var PoolStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolStatus",
-}, smithy.ShapeTypeEnum, 2)
-var PoolStatus_ACTIVE *smithy.Schema
-
-var PoolStatus_DELETED *smithy.Schema
-
-var _PositiveIntObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PositiveIntObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RecurrenceInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RecurrenceInHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RegionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RegionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ReportCompletionPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ReportCompletionPercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _RetentionLockTimeInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetentionLockTimeInDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var RetentionLockType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetentionLockType",
-}, smithy.ShapeTypeEnum, 3)
-var RetentionLockType_COMPLIANCE *smithy.Schema
-
-var RetentionLockType_GOVERNANCE *smithy.Schema
-
-var RetentionLockType_NONE *smithy.Schema
-
-var _Role = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Role",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceUnavailableError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ServiceUnavailableError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableError_message *smithy.Schema
-
-var ServiceUnavailableError_error *smithy.Schema
-
-var SMBFileShareInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBFileShareInfo",
-}, smithy.ShapeTypeStructure, 30)
-var SMBFileShareInfo_FileShareARN *smithy.Schema
-
-var SMBFileShareInfo_FileShareId *smithy.Schema
-
-var SMBFileShareInfo_FileShareStatus *smithy.Schema
-
-var SMBFileShareInfo_GatewayARN *smithy.Schema
-
-var SMBFileShareInfo_EncryptionType *smithy.Schema
-
-var SMBFileShareInfo_KMSEncrypted *smithy.Schema
-
-var SMBFileShareInfo_KMSKey *smithy.Schema
-
-var SMBFileShareInfo_Path *smithy.Schema
-
-var SMBFileShareInfo_Role *smithy.Schema
-
-var SMBFileShareInfo_LocationARN *smithy.Schema
-
-var SMBFileShareInfo_DefaultStorageClass *smithy.Schema
-
-var SMBFileShareInfo_ObjectACL *smithy.Schema
-
-var SMBFileShareInfo_ReadOnly *smithy.Schema
-
-var SMBFileShareInfo_GuessMIMETypeEnabled *smithy.Schema
-
-var SMBFileShareInfo_RequesterPays *smithy.Schema
-
-var SMBFileShareInfo_SMBACLEnabled *smithy.Schema
-
-var SMBFileShareInfo_AccessBasedEnumeration *smithy.Schema
-
-var SMBFileShareInfo_AdminUserList *smithy.Schema
-
-var SMBFileShareInfo_ValidUserList *smithy.Schema
-
-var SMBFileShareInfo_InvalidUserList *smithy.Schema
-
-var SMBFileShareInfo_AuditDestinationARN *smithy.Schema
-
-var SMBFileShareInfo_Authentication *smithy.Schema
-
-var SMBFileShareInfo_CaseSensitivity *smithy.Schema
-
-var SMBFileShareInfo_Tags *smithy.Schema
-
-var SMBFileShareInfo_FileShareName *smithy.Schema
-
-var SMBFileShareInfo_CacheAttributes *smithy.Schema
-
-var SMBFileShareInfo_NotificationPolicy *smithy.Schema
-
-var SMBFileShareInfo_VPCEndpointDNSName *smithy.Schema
-
-var SMBFileShareInfo_BucketRegion *smithy.Schema
-
-var SMBFileShareInfo_OplocksEnabled *smithy.Schema
-
-var _SMBFileShareInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBFileShareInfoList",
-}, smithy.ShapeTypeList, 1)
-var _SMBFileShareInfoList_member *smithy.Schema
-
-var _SMBGuestPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBGuestPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SMBLocalGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBLocalGroups",
-}, smithy.ShapeTypeStructure, 1)
-var SMBLocalGroups_GatewayAdmins *smithy.Schema
-
-var SMBSecurityStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBSecurityStrategy",
-}, smithy.ShapeTypeEnum, 4)
-var SMBSecurityStrategy_ClientSpecified *smithy.Schema
-
-var SMBSecurityStrategy_MandatorySigning *smithy.Schema
-
-var SMBSecurityStrategy_MandatoryEncryption *smithy.Schema
-
-var SMBSecurityStrategy_MandatoryEncryptionNoAes128 *smithy.Schema
-
-var _SnapshotDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SnapshotDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _SnapshotId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SnapshotId",
-}, smithy.ShapeTypeString, 0)
-
-var SoftwareUpdatePreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SoftwareUpdatePreferences",
-}, smithy.ShapeTypeStructure, 1)
-var SoftwareUpdatePreferences_AutomaticUpdatePolicy *smithy.Schema
-
-var _SoftwareUpdatesEndDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SoftwareUpdatesEndDate",
-}, smithy.ShapeTypeString, 0)
-
-var _SoftwareVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SoftwareVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _Squash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Squash",
-}, smithy.ShapeTypeString, 0)
-
-var _StorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorageClass",
-}, smithy.ShapeTypeString, 0)
-
-var StorageGatewayError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorageGatewayError",
-}, smithy.ShapeTypeStructure, 2)
-var StorageGatewayError_errorCode *smithy.Schema
-
-var StorageGatewayError_errorDetails *smithy.Schema
-
-var StorediSCSIVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorediSCSIVolume",
-}, smithy.ShapeTypeStructure, 15)
-var StorediSCSIVolume_VolumeARN *smithy.Schema
-
-var StorediSCSIVolume_VolumeId *smithy.Schema
-
-var StorediSCSIVolume_VolumeType *smithy.Schema
-
-var StorediSCSIVolume_VolumeStatus *smithy.Schema
-
-var StorediSCSIVolume_VolumeAttachmentStatus *smithy.Schema
-
-var StorediSCSIVolume_VolumeSizeInBytes *smithy.Schema
-
-var StorediSCSIVolume_VolumeProgress *smithy.Schema
-
-var StorediSCSIVolume_VolumeDiskId *smithy.Schema
-
-var StorediSCSIVolume_SourceSnapshotId *smithy.Schema
-
-var StorediSCSIVolume_PreservedExistingData *smithy.Schema
-
-var StorediSCSIVolume_VolumeiSCSIAttributes *smithy.Schema
-
-var StorediSCSIVolume_CreatedDate *smithy.Schema
-
-var StorediSCSIVolume_VolumeUsedInBytes *smithy.Schema
-
-var StorediSCSIVolume_KMSKey *smithy.Schema
-
-var StorediSCSIVolume_TargetName *smithy.Schema
-
-var _StorediSCSIVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorediSCSIVolumes",
-}, smithy.ShapeTypeList, 1)
-var _StorediSCSIVolumes_member *smithy.Schema
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var _SupportedGatewayCapacities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SupportedGatewayCapacities",
-}, smithy.ShapeTypeList, 1)
-var _SupportedGatewayCapacities_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Tape = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Tape",
-}, smithy.ShapeTypeStructure, 13)
-var Tape_TapeARN *smithy.Schema
-
-var Tape_TapeBarcode *smithy.Schema
-
-var Tape_TapeCreatedDate *smithy.Schema
-
-var Tape_TapeSizeInBytes *smithy.Schema
-
-var Tape_TapeStatus *smithy.Schema
-
-var Tape_VTLDevice *smithy.Schema
-
-var Tape_Progress *smithy.Schema
-
-var Tape_TapeUsedInBytes *smithy.Schema
-
-var Tape_KMSKey *smithy.Schema
-
-var Tape_PoolId *smithy.Schema
-
-var Tape_Worm *smithy.Schema
-
-var Tape_RetentionStartDate *smithy.Schema
-
-var Tape_PoolEntryDate *smithy.Schema
-
-var TapeArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeArchive",
-}, smithy.ShapeTypeStructure, 13)
-var TapeArchive_TapeARN *smithy.Schema
-
-var TapeArchive_TapeBarcode *smithy.Schema
-
-var TapeArchive_TapeCreatedDate *smithy.Schema
-
-var TapeArchive_TapeSizeInBytes *smithy.Schema
-
-var TapeArchive_CompletionTime *smithy.Schema
-
-var TapeArchive_RetrievedTo *smithy.Schema
-
-var TapeArchive_TapeStatus *smithy.Schema
-
-var TapeArchive_TapeUsedInBytes *smithy.Schema
-
-var TapeArchive_KMSKey *smithy.Schema
-
-var TapeArchive_PoolId *smithy.Schema
-
-var TapeArchive_Worm *smithy.Schema
-
-var TapeArchive_RetentionStartDate *smithy.Schema
-
-var TapeArchive_PoolEntryDate *smithy.Schema
-
-var _TapeArchives = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeArchives",
-}, smithy.ShapeTypeList, 1)
-var _TapeArchives_member *smithy.Schema
-
-var _TapeArchiveStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeArchiveStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _TapeARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeARN",
-}, smithy.ShapeTypeString, 0)
-
-var _TapeARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeARNs",
-}, smithy.ShapeTypeList, 1)
-var _TapeARNs_member *smithy.Schema
-
-var _TapeBarcode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeBarcode",
-}, smithy.ShapeTypeString, 0)
-
-var _TapeBarcodePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeBarcodePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _TapeDriveType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeDriveType",
-}, smithy.ShapeTypeString, 0)
-
-var TapeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeInfo",
-}, smithy.ShapeTypeStructure, 8)
-var TapeInfo_TapeARN *smithy.Schema
-
-var TapeInfo_TapeBarcode *smithy.Schema
-
-var TapeInfo_TapeSizeInBytes *smithy.Schema
-
-var TapeInfo_TapeStatus *smithy.Schema
-
-var TapeInfo_GatewayARN *smithy.Schema
-
-var TapeInfo_PoolId *smithy.Schema
-
-var TapeInfo_RetentionStartDate *smithy.Schema
-
-var TapeInfo_PoolEntryDate *smithy.Schema
-
-var _TapeInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeInfos",
-}, smithy.ShapeTypeList, 1)
-var _TapeInfos_member *smithy.Schema
-
-var TapeRecoveryPointInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeRecoveryPointInfo",
-}, smithy.ShapeTypeStructure, 4)
-var TapeRecoveryPointInfo_TapeARN *smithy.Schema
-
-var TapeRecoveryPointInfo_TapeRecoveryPointTime *smithy.Schema
-
-var TapeRecoveryPointInfo_TapeSizeInBytes *smithy.Schema
-
-var TapeRecoveryPointInfo_TapeStatus *smithy.Schema
-
-var _TapeRecoveryPointInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeRecoveryPointInfos",
-}, smithy.ShapeTypeList, 1)
-var _TapeRecoveryPointInfos_member *smithy.Schema
-
-var _TapeRecoveryPointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeRecoveryPointStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _Tapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Tapes",
-}, smithy.ShapeTypeList, 1)
-var _Tapes_member *smithy.Schema
-
-var _TapeSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeSize",
-}, smithy.ShapeTypeLong, 0)
-
-var _TapeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeStatus",
-}, smithy.ShapeTypeString, 0)
-
-var TapeStorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeStorageClass",
-}, smithy.ShapeTypeEnum, 2)
-var TapeStorageClass_DEEP_ARCHIVE *smithy.Schema
-
-var TapeStorageClass_GLACIER *smithy.Schema
-
-var _TapeUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeUsage",
-}, smithy.ShapeTypeLong, 0)
-
-var _TargetARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TargetARN",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TargetName",
-}, smithy.ShapeTypeString, 0)
-
-var _Time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Time",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TimeoutInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TimeoutInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _UserList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UserList",
-}, smithy.ShapeTypeList, 1)
-var _UserList_member *smithy.Schema
-
-var _UserListUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UserListUser",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeARN",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeARNs",
-}, smithy.ShapeTypeList, 1)
-var _VolumeARNs_member *smithy.Schema
-
-var _VolumeAttachmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeAttachmentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeId",
-}, smithy.ShapeTypeString, 0)
-
-var VolumeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeInfo",
-}, smithy.ShapeTypeStructure, 7)
-var VolumeInfo_VolumeARN *smithy.Schema
-
-var VolumeInfo_VolumeId *smithy.Schema
-
-var VolumeInfo_GatewayARN *smithy.Schema
-
-var VolumeInfo_GatewayId *smithy.Schema
-
-var VolumeInfo_VolumeType *smithy.Schema
-
-var VolumeInfo_VolumeSizeInBytes *smithy.Schema
-
-var VolumeInfo_VolumeAttachmentStatus *smithy.Schema
-
-var _VolumeInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeInfos",
-}, smithy.ShapeTypeList, 1)
-var _VolumeInfos_member *smithy.Schema
-
-var VolumeiSCSIAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeiSCSIAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var VolumeiSCSIAttributes_TargetARN *smithy.Schema
-
-var VolumeiSCSIAttributes_NetworkInterfaceId *smithy.Schema
-
-var VolumeiSCSIAttributes_NetworkInterfacePort *smithy.Schema
-
-var VolumeiSCSIAttributes_LunNumber *smithy.Schema
-
-var VolumeiSCSIAttributes_ChapEnabled *smithy.Schema
-
-var VolumeRecoveryPointInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeRecoveryPointInfo",
-}, smithy.ShapeTypeStructure, 4)
-var VolumeRecoveryPointInfo_VolumeARN *smithy.Schema
-
-var VolumeRecoveryPointInfo_VolumeSizeInBytes *smithy.Schema
-
-var VolumeRecoveryPointInfo_VolumeUsageInBytes *smithy.Schema
-
-var VolumeRecoveryPointInfo_VolumeRecoveryPointTime *smithy.Schema
-
-var _VolumeRecoveryPointInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeRecoveryPointInfos",
-}, smithy.ShapeTypeList, 1)
-var _VolumeRecoveryPointInfos_member *smithy.Schema
-
-var _VolumeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeType",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeUsedInBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeUsedInBytes",
-}, smithy.ShapeTypeLong, 0)
-
-var VTLDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDevice",
-}, smithy.ShapeTypeStructure, 5)
-var VTLDevice_VTLDeviceARN *smithy.Schema
-
-var VTLDevice_VTLDeviceType *smithy.Schema
-
-var VTLDevice_VTLDeviceVendor *smithy.Schema
-
-var VTLDevice_VTLDeviceProductIdentifier *smithy.Schema
-
-var VTLDevice_DeviceiSCSIAttributes *smithy.Schema
-
-var _VTLDeviceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _VTLDeviceARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceARNs",
-}, smithy.ShapeTypeList, 1)
-var _VTLDeviceARNs_member *smithy.Schema
-
-var _VTLDeviceProductIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceProductIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _VTLDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDevices",
-}, smithy.ShapeTypeList, 1)
-var _VTLDevices_member *smithy.Schema
-
-var _VTLDeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceType",
-}, smithy.ShapeTypeString, 0)
-
-var _VTLDeviceVendor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceVendor",
-}, smithy.ShapeTypeString, 0)
-
-var ActivateGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActivateGatewayInput",
-}, smithy.ShapeTypeStructure, 8)
-var ActivateGatewayInput_ActivationKey *smithy.Schema
-
-var ActivateGatewayInput_GatewayName *smithy.Schema
-
-var ActivateGatewayInput_GatewayTimezone *smithy.Schema
-
-var ActivateGatewayInput_GatewayRegion *smithy.Schema
-
-var ActivateGatewayInput_GatewayType *smithy.Schema
-
-var ActivateGatewayInput_TapeDriveType *smithy.Schema
-
-var ActivateGatewayInput_MediumChangerType *smithy.Schema
-
-var ActivateGatewayInput_Tags *smithy.Schema
-
-var ActivateGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActivateGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ActivateGatewayOutput_GatewayARN *smithy.Schema
-
-var AddCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddCacheInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddCacheInput_GatewayARN *smithy.Schema
-
-var AddCacheInput_DiskIds *smithy.Schema
-
-var AddCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddCacheOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddCacheOutput_GatewayARN *smithy.Schema
-
-var AddTagsToResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddTagsToResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsToResourceInput_ResourceARN *smithy.Schema
-
-var AddTagsToResourceInput_Tags *smithy.Schema
-
-var AddTagsToResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddTagsToResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddTagsToResourceOutput_ResourceARN *smithy.Schema
-
-var AddUploadBufferInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddUploadBufferInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddUploadBufferInput_GatewayARN *smithy.Schema
-
-var AddUploadBufferInput_DiskIds *smithy.Schema
-
-var AddUploadBufferOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddUploadBufferOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddUploadBufferOutput_GatewayARN *smithy.Schema
-
-var AddWorkingStorageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddWorkingStorageInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddWorkingStorageInput_GatewayARN *smithy.Schema
-
-var AddWorkingStorageInput_DiskIds *smithy.Schema
-
-var AddWorkingStorageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddWorkingStorageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddWorkingStorageOutput_GatewayARN *smithy.Schema
-
-var AssignTapePoolInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssignTapePoolInput",
-}, smithy.ShapeTypeStructure, 3)
-var AssignTapePoolInput_TapeARN *smithy.Schema
-
-var AssignTapePoolInput_PoolId *smithy.Schema
-
-var AssignTapePoolInput_BypassGovernanceRetention *smithy.Schema
-
-var AssignTapePoolOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssignTapePoolOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssignTapePoolOutput_TapeARN *smithy.Schema
-
-var AssociateFileSystemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssociateFileSystemInput",
-}, smithy.ShapeTypeStructure, 9)
-var AssociateFileSystemInput_UserName *smithy.Schema
-
-var AssociateFileSystemInput_Password *smithy.Schema
-
-var AssociateFileSystemInput_ClientToken *smithy.Schema
-
-var AssociateFileSystemInput_GatewayARN *smithy.Schema
-
-var AssociateFileSystemInput_LocationARN *smithy.Schema
-
-var AssociateFileSystemInput_Tags *smithy.Schema
-
-var AssociateFileSystemInput_AuditDestinationARN *smithy.Schema
-
-var AssociateFileSystemInput_CacheAttributes *smithy.Schema
-
-var AssociateFileSystemInput_EndpointNetworkConfiguration *smithy.Schema
-
-var AssociateFileSystemOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssociateFileSystemOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateFileSystemOutput_FileSystemAssociationARN *smithy.Schema
-
-var AttachVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AttachVolumeInput",
-}, smithy.ShapeTypeStructure, 5)
-var AttachVolumeInput_GatewayARN *smithy.Schema
-
-var AttachVolumeInput_TargetName *smithy.Schema
-
-var AttachVolumeInput_VolumeARN *smithy.Schema
-
-var AttachVolumeInput_NetworkInterfaceId *smithy.Schema
-
-var AttachVolumeInput_DiskId *smithy.Schema
-
-var AttachVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AttachVolumeOutput",
-}, smithy.ShapeTypeStructure, 2)
-var AttachVolumeOutput_VolumeARN *smithy.Schema
-
-var AttachVolumeOutput_TargetARN *smithy.Schema
-
-var CancelArchivalInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelArchivalInput",
-}, smithy.ShapeTypeStructure, 2)
-var CancelArchivalInput_GatewayARN *smithy.Schema
-
-var CancelArchivalInput_TapeARN *smithy.Schema
-
-var CancelArchivalOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelArchivalOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelArchivalOutput_TapeARN *smithy.Schema
-
-var CancelCacheReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelCacheReportInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelCacheReportInput_CacheReportARN *smithy.Schema
-
-var CancelCacheReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelCacheReportOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelCacheReportOutput_CacheReportARN *smithy.Schema
-
-var CancelRetrievalInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelRetrievalInput",
-}, smithy.ShapeTypeStructure, 2)
-var CancelRetrievalInput_GatewayARN *smithy.Schema
-
-var CancelRetrievalInput_TapeARN *smithy.Schema
-
-var CancelRetrievalOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelRetrievalOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelRetrievalOutput_TapeARN *smithy.Schema
-
-var CreateCachediSCSIVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateCachediSCSIVolumeInput",
-}, smithy.ShapeTypeStructure, 10)
-var CreateCachediSCSIVolumeInput_GatewayARN *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_VolumeSizeInBytes *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_SnapshotId *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_TargetName *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_SourceVolumeARN *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_NetworkInterfaceId *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_ClientToken *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_KMSEncrypted *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_KMSKey *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_Tags *smithy.Schema
-
-var CreateCachediSCSIVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateCachediSCSIVolumeOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateCachediSCSIVolumeOutput_VolumeARN *smithy.Schema
-
-var CreateCachediSCSIVolumeOutput_TargetARN *smithy.Schema
-
-var CreateNFSFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateNFSFileShareInput",
-}, smithy.ShapeTypeStructure, 22)
-var CreateNFSFileShareInput_ClientToken *smithy.Schema
-
-var CreateNFSFileShareInput_NFSFileShareDefaults *smithy.Schema
-
-var CreateNFSFileShareInput_GatewayARN *smithy.Schema
-
-var CreateNFSFileShareInput_EncryptionType *smithy.Schema
-
-var CreateNFSFileShareInput_KMSEncrypted *smithy.Schema
-
-var CreateNFSFileShareInput_KMSKey *smithy.Schema
-
-var CreateNFSFileShareInput_Role *smithy.Schema
-
-var CreateNFSFileShareInput_LocationARN *smithy.Schema
-
-var CreateNFSFileShareInput_DefaultStorageClass *smithy.Schema
-
-var CreateNFSFileShareInput_ObjectACL *smithy.Schema
-
-var CreateNFSFileShareInput_ClientList *smithy.Schema
-
-var CreateNFSFileShareInput_Squash *smithy.Schema
-
-var CreateNFSFileShareInput_ReadOnly *smithy.Schema
-
-var CreateNFSFileShareInput_GuessMIMETypeEnabled *smithy.Schema
-
-var CreateNFSFileShareInput_RequesterPays *smithy.Schema
-
-var CreateNFSFileShareInput_Tags *smithy.Schema
-
-var CreateNFSFileShareInput_FileShareName *smithy.Schema
-
-var CreateNFSFileShareInput_CacheAttributes *smithy.Schema
-
-var CreateNFSFileShareInput_NotificationPolicy *smithy.Schema
-
-var CreateNFSFileShareInput_VPCEndpointDNSName *smithy.Schema
-
-var CreateNFSFileShareInput_BucketRegion *smithy.Schema
-
-var CreateNFSFileShareInput_AuditDestinationARN *smithy.Schema
-
-var CreateNFSFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateNFSFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNFSFileShareOutput_FileShareARN *smithy.Schema
-
-var CreateSMBFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSMBFileShareInput",
-}, smithy.ShapeTypeStructure, 27)
-var CreateSMBFileShareInput_ClientToken *smithy.Schema
-
-var CreateSMBFileShareInput_GatewayARN *smithy.Schema
-
-var CreateSMBFileShareInput_EncryptionType *smithy.Schema
-
-var CreateSMBFileShareInput_KMSEncrypted *smithy.Schema
-
-var CreateSMBFileShareInput_KMSKey *smithy.Schema
-
-var CreateSMBFileShareInput_Role *smithy.Schema
-
-var CreateSMBFileShareInput_LocationARN *smithy.Schema
-
-var CreateSMBFileShareInput_DefaultStorageClass *smithy.Schema
-
-var CreateSMBFileShareInput_ObjectACL *smithy.Schema
-
-var CreateSMBFileShareInput_ReadOnly *smithy.Schema
-
-var CreateSMBFileShareInput_GuessMIMETypeEnabled *smithy.Schema
-
-var CreateSMBFileShareInput_RequesterPays *smithy.Schema
-
-var CreateSMBFileShareInput_SMBACLEnabled *smithy.Schema
-
-var CreateSMBFileShareInput_AccessBasedEnumeration *smithy.Schema
-
-var CreateSMBFileShareInput_AdminUserList *smithy.Schema
-
-var CreateSMBFileShareInput_ValidUserList *smithy.Schema
-
-var CreateSMBFileShareInput_InvalidUserList *smithy.Schema
-
-var CreateSMBFileShareInput_AuditDestinationARN *smithy.Schema
-
-var CreateSMBFileShareInput_Authentication *smithy.Schema
-
-var CreateSMBFileShareInput_CaseSensitivity *smithy.Schema
-
-var CreateSMBFileShareInput_Tags *smithy.Schema
-
-var CreateSMBFileShareInput_FileShareName *smithy.Schema
-
-var CreateSMBFileShareInput_CacheAttributes *smithy.Schema
-
-var CreateSMBFileShareInput_NotificationPolicy *smithy.Schema
-
-var CreateSMBFileShareInput_VPCEndpointDNSName *smithy.Schema
-
-var CreateSMBFileShareInput_BucketRegion *smithy.Schema
-
-var CreateSMBFileShareInput_OplocksEnabled *smithy.Schema
-
-var CreateSMBFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSMBFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSMBFileShareOutput_FileShareARN *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotFromVolumeRecoveryPointInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateSnapshotFromVolumeRecoveryPointInput_VolumeARN *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointInput_Tags *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotFromVolumeRecoveryPointOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime *smithy.Schema
-
-var CreateSnapshotInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateSnapshotInput_VolumeARN *smithy.Schema
-
-var CreateSnapshotInput_SnapshotDescription *smithy.Schema
-
-var CreateSnapshotInput_Tags *smithy.Schema
-
-var CreateSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSnapshotOutput_VolumeARN *smithy.Schema
-
-var CreateSnapshotOutput_SnapshotId *smithy.Schema
-
-var CreateStorediSCSIVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateStorediSCSIVolumeInput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateStorediSCSIVolumeInput_GatewayARN *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_DiskId *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_SnapshotId *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_PreserveExistingData *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_TargetName *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_NetworkInterfaceId *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_KMSEncrypted *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_KMSKey *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_Tags *smithy.Schema
-
-var CreateStorediSCSIVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateStorediSCSIVolumeOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateStorediSCSIVolumeOutput_VolumeARN *smithy.Schema
-
-var CreateStorediSCSIVolumeOutput_VolumeSizeInBytes *smithy.Schema
-
-var CreateStorediSCSIVolumeOutput_TargetARN *smithy.Schema
-
-var CreateTapePoolInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapePoolInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTapePoolInput_PoolName *smithy.Schema
-
-var CreateTapePoolInput_StorageClass *smithy.Schema
-
-var CreateTapePoolInput_RetentionLockType *smithy.Schema
-
-var CreateTapePoolInput_RetentionLockTimeInDays *smithy.Schema
-
-var CreateTapePoolInput_Tags *smithy.Schema
-
-var CreateTapePoolOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapePoolOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTapePoolOutput_PoolARN *smithy.Schema
-
-var CreateTapesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapesInput",
-}, smithy.ShapeTypeStructure, 10)
-var CreateTapesInput_GatewayARN *smithy.Schema
-
-var CreateTapesInput_TapeSizeInBytes *smithy.Schema
-
-var CreateTapesInput_ClientToken *smithy.Schema
-
-var CreateTapesInput_NumTapesToCreate *smithy.Schema
-
-var CreateTapesInput_TapeBarcodePrefix *smithy.Schema
-
-var CreateTapesInput_KMSEncrypted *smithy.Schema
-
-var CreateTapesInput_KMSKey *smithy.Schema
-
-var CreateTapesInput_PoolId *smithy.Schema
-
-var CreateTapesInput_Worm *smithy.Schema
-
-var CreateTapesInput_Tags *smithy.Schema
-
-var CreateTapesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTapesOutput_TapeARNs *smithy.Schema
-
-var CreateTapeWithBarcodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapeWithBarcodeInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateTapeWithBarcodeInput_GatewayARN *smithy.Schema
-
-var CreateTapeWithBarcodeInput_TapeSizeInBytes *smithy.Schema
-
-var CreateTapeWithBarcodeInput_TapeBarcode *smithy.Schema
-
-var CreateTapeWithBarcodeInput_KMSEncrypted *smithy.Schema
-
-var CreateTapeWithBarcodeInput_KMSKey *smithy.Schema
-
-var CreateTapeWithBarcodeInput_PoolId *smithy.Schema
-
-var CreateTapeWithBarcodeInput_Worm *smithy.Schema
-
-var CreateTapeWithBarcodeInput_Tags *smithy.Schema
-
-var CreateTapeWithBarcodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapeWithBarcodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTapeWithBarcodeOutput_TapeARN *smithy.Schema
-
-var DeleteAutomaticTapeCreationPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteAutomaticTapeCreationPolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAutomaticTapeCreationPolicyInput_GatewayARN *smithy.Schema
-
-var DeleteAutomaticTapeCreationPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteAutomaticTapeCreationPolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAutomaticTapeCreationPolicyOutput_GatewayARN *smithy.Schema
-
-var DeleteBandwidthRateLimitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteBandwidthRateLimitInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBandwidthRateLimitInput_GatewayARN *smithy.Schema
-
-var DeleteBandwidthRateLimitInput_BandwidthType *smithy.Schema
-
-var DeleteBandwidthRateLimitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteBandwidthRateLimitOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBandwidthRateLimitOutput_GatewayARN *smithy.Schema
-
-var DeleteCacheReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteCacheReportInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCacheReportInput_CacheReportARN *smithy.Schema
-
-var DeleteCacheReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteCacheReportOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCacheReportOutput_CacheReportARN *smithy.Schema
-
-var DeleteChapCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteChapCredentialsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChapCredentialsInput_TargetARN *smithy.Schema
-
-var DeleteChapCredentialsInput_InitiatorName *smithy.Schema
-
-var DeleteChapCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteChapCredentialsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChapCredentialsOutput_TargetARN *smithy.Schema
-
-var DeleteChapCredentialsOutput_InitiatorName *smithy.Schema
-
-var DeleteFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteFileShareInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileShareInput_FileShareARN *smithy.Schema
-
-var DeleteFileShareInput_ForceDelete *smithy.Schema
-
-var DeleteFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFileShareOutput_FileShareARN *smithy.Schema
-
-var DeleteGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayInput_GatewayARN *smithy.Schema
-
-var DeleteGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayOutput_GatewayARN *smithy.Schema
-
-var DeleteSnapshotScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteSnapshotScheduleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSnapshotScheduleInput_VolumeARN *smithy.Schema
-
-var DeleteSnapshotScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteSnapshotScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSnapshotScheduleOutput_VolumeARN *smithy.Schema
-
-var DeleteTapeArchiveInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeArchiveInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTapeArchiveInput_TapeARN *smithy.Schema
-
-var DeleteTapeArchiveInput_BypassGovernanceRetention *smithy.Schema
-
-var DeleteTapeArchiveOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeArchiveOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTapeArchiveOutput_TapeARN *smithy.Schema
-
-var DeleteTapeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteTapeInput_GatewayARN *smithy.Schema
-
-var DeleteTapeInput_TapeARN *smithy.Schema
-
-var DeleteTapeInput_BypassGovernanceRetention *smithy.Schema
-
-var DeleteTapeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTapeOutput_TapeARN *smithy.Schema
-
-var DeleteTapePoolInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapePoolInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTapePoolInput_PoolARN *smithy.Schema
-
-var DeleteTapePoolOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapePoolOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTapePoolOutput_PoolARN *smithy.Schema
-
-var DeleteVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteVolumeInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVolumeInput_VolumeARN *smithy.Schema
-
-var DeleteVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteVolumeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVolumeOutput_VolumeARN *smithy.Schema
-
-var DescribeAvailabilityMonitorTestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeAvailabilityMonitorTestInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAvailabilityMonitorTestInput_GatewayARN *smithy.Schema
-
-var DescribeAvailabilityMonitorTestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeAvailabilityMonitorTestOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAvailabilityMonitorTestOutput_GatewayARN *smithy.Schema
-
-var DescribeAvailabilityMonitorTestOutput_Status *smithy.Schema
-
-var DescribeAvailabilityMonitorTestOutput_StartTime *smithy.Schema
-
-var DescribeBandwidthRateLimitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeBandwidthRateLimitInput_GatewayARN *smithy.Schema
-
-var DescribeBandwidthRateLimitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeBandwidthRateLimitOutput_GatewayARN *smithy.Schema
-
-var DescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec *smithy.Schema
-
-var DescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec *smithy.Schema
-
-var DescribeBandwidthRateLimitScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitScheduleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeBandwidthRateLimitScheduleInput_GatewayARN *smithy.Schema
-
-var DescribeBandwidthRateLimitScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitScheduleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeBandwidthRateLimitScheduleOutput_GatewayARN *smithy.Schema
-
-var DescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals *smithy.Schema
-
-var DescribeCachediSCSIVolumesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCachediSCSIVolumesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCachediSCSIVolumesInput_VolumeARNs *smithy.Schema
-
-var DescribeCachediSCSIVolumesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCachediSCSIVolumesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCachediSCSIVolumesOutput_CachediSCSIVolumes *smithy.Schema
-
-var DescribeCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCacheInput_GatewayARN *smithy.Schema
-
-var DescribeCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheOutput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeCacheOutput_GatewayARN *smithy.Schema
-
-var DescribeCacheOutput_DiskIds *smithy.Schema
-
-var DescribeCacheOutput_CacheAllocatedInBytes *smithy.Schema
-
-var DescribeCacheOutput_CacheUsedPercentage *smithy.Schema
-
-var DescribeCacheOutput_CacheDirtyPercentage *smithy.Schema
-
-var DescribeCacheOutput_CacheHitPercentage *smithy.Schema
-
-var DescribeCacheOutput_CacheMissPercentage *smithy.Schema
-
-var DescribeCacheReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheReportInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCacheReportInput_CacheReportARN *smithy.Schema
-
-var DescribeCacheReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheReportOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCacheReportOutput_CacheReportInfo *smithy.Schema
-
-var DescribeChapCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeChapCredentialsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChapCredentialsInput_TargetARN *smithy.Schema
-
-var DescribeChapCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeChapCredentialsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChapCredentialsOutput_ChapCredentials *smithy.Schema
-
-var DescribeFileSystemAssociationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeFileSystemAssociationsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFileSystemAssociationsInput_FileSystemAssociationARNList *smithy.Schema
-
-var DescribeFileSystemAssociationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeFileSystemAssociationsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList *smithy.Schema
-
-var DescribeGatewayInformationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeGatewayInformationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeGatewayInformationInput_GatewayARN *smithy.Schema
-
-var DescribeGatewayInformationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeGatewayInformationOutput",
-}, smithy.ShapeTypeStructure, 22)
-var DescribeGatewayInformationOutput_GatewayARN *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayId *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayName *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayTimezone *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayState *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayNetworkInterfaces *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayType *smithy.Schema
-
-var DescribeGatewayInformationOutput_NextUpdateAvailabilityDate *smithy.Schema
-
-var DescribeGatewayInformationOutput_LastSoftwareUpdate *smithy.Schema
-
-var DescribeGatewayInformationOutput_Ec2InstanceId *smithy.Schema
-
-var DescribeGatewayInformationOutput_Ec2InstanceRegion *smithy.Schema
-
-var DescribeGatewayInformationOutput_Tags *smithy.Schema
-
-var DescribeGatewayInformationOutput_VPCEndpoint *smithy.Schema
-
-var DescribeGatewayInformationOutput_CloudWatchLogGroupARN *smithy.Schema
-
-var DescribeGatewayInformationOutput_HostEnvironment *smithy.Schema
-
-var DescribeGatewayInformationOutput_EndpointType *smithy.Schema
-
-var DescribeGatewayInformationOutput_SoftwareUpdatesEndDate *smithy.Schema
-
-var DescribeGatewayInformationOutput_DeprecationDate *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayCapacity *smithy.Schema
-
-var DescribeGatewayInformationOutput_SupportedGatewayCapacities *smithy.Schema
-
-var DescribeGatewayInformationOutput_HostEnvironmentId *smithy.Schema
-
-var DescribeGatewayInformationOutput_SoftwareVersion *smithy.Schema
-
-var DescribeMaintenanceStartTimeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeMaintenanceStartTimeInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeMaintenanceStartTimeInput_GatewayARN *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeMaintenanceStartTimeOutput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeMaintenanceStartTimeOutput_GatewayARN *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_HourOfDay *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_MinuteOfHour *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_DayOfWeek *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_DayOfMonth *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_Timezone *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences *smithy.Schema
-
-var DescribeNFSFileSharesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeNFSFileSharesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeNFSFileSharesInput_FileShareARNList *smithy.Schema
-
-var DescribeNFSFileSharesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeNFSFileSharesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeNFSFileSharesOutput_NFSFileShareInfoList *smithy.Schema
-
-var DescribeSMBFileSharesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBFileSharesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSMBFileSharesInput_FileShareARNList *smithy.Schema
-
-var DescribeSMBFileSharesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBFileSharesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSMBFileSharesOutput_SMBFileShareInfoList *smithy.Schema
-
-var DescribeSMBSettingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBSettingsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSMBSettingsInput_GatewayARN *smithy.Schema
-
-var DescribeSMBSettingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBSettingsOutput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeSMBSettingsOutput_GatewayARN *smithy.Schema
-
-var DescribeSMBSettingsOutput_DomainName *smithy.Schema
-
-var DescribeSMBSettingsOutput_ActiveDirectoryStatus *smithy.Schema
-
-var DescribeSMBSettingsOutput_SMBGuestPasswordSet *smithy.Schema
-
-var DescribeSMBSettingsOutput_SMBSecurityStrategy *smithy.Schema
-
-var DescribeSMBSettingsOutput_FileSharesVisible *smithy.Schema
-
-var DescribeSMBSettingsOutput_SMBLocalGroups *smithy.Schema
-
-var DescribeSnapshotScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSnapshotScheduleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSnapshotScheduleInput_VolumeARN *smithy.Schema
-
-var DescribeSnapshotScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSnapshotScheduleOutput",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeSnapshotScheduleOutput_VolumeARN *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_StartAt *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_RecurrenceInHours *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_Description *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_Timezone *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_Tags *smithy.Schema
-
-var DescribeStorediSCSIVolumesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeStorediSCSIVolumesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStorediSCSIVolumesInput_VolumeARNs *smithy.Schema
-
-var DescribeStorediSCSIVolumesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeStorediSCSIVolumesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStorediSCSIVolumesOutput_StorediSCSIVolumes *smithy.Schema
-
-var DescribeTapeArchivesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeArchivesInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTapeArchivesInput_TapeARNs *smithy.Schema
-
-var DescribeTapeArchivesInput_Marker *smithy.Schema
-
-var DescribeTapeArchivesInput_Limit *smithy.Schema
-
-var DescribeTapeArchivesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeArchivesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTapeArchivesOutput_TapeArchives *smithy.Schema
-
-var DescribeTapeArchivesOutput_Marker *smithy.Schema
-
-var DescribeTapeRecoveryPointsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeRecoveryPointsInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTapeRecoveryPointsInput_GatewayARN *smithy.Schema
-
-var DescribeTapeRecoveryPointsInput_Marker *smithy.Schema
-
-var DescribeTapeRecoveryPointsInput_Limit *smithy.Schema
-
-var DescribeTapeRecoveryPointsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeRecoveryPointsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTapeRecoveryPointsOutput_GatewayARN *smithy.Schema
-
-var DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos *smithy.Schema
-
-var DescribeTapeRecoveryPointsOutput_Marker *smithy.Schema
-
-var DescribeTapesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapesInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeTapesInput_GatewayARN *smithy.Schema
-
-var DescribeTapesInput_TapeARNs *smithy.Schema
-
-var DescribeTapesInput_Marker *smithy.Schema
-
-var DescribeTapesInput_Limit *smithy.Schema
-
-var DescribeTapesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTapesOutput_Tapes *smithy.Schema
-
-var DescribeTapesOutput_Marker *smithy.Schema
-
-var DescribeUploadBufferInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeUploadBufferInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeUploadBufferInput_GatewayARN *smithy.Schema
-
-var DescribeUploadBufferOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeUploadBufferOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeUploadBufferOutput_GatewayARN *smithy.Schema
-
-var DescribeUploadBufferOutput_DiskIds *smithy.Schema
-
-var DescribeUploadBufferOutput_UploadBufferUsedInBytes *smithy.Schema
-
-var DescribeUploadBufferOutput_UploadBufferAllocatedInBytes *smithy.Schema
-
-var DescribeVTLDevicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeVTLDevicesInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeVTLDevicesInput_GatewayARN *smithy.Schema
-
-var DescribeVTLDevicesInput_VTLDeviceARNs *smithy.Schema
-
-var DescribeVTLDevicesInput_Marker *smithy.Schema
-
-var DescribeVTLDevicesInput_Limit *smithy.Schema
-
-var DescribeVTLDevicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeVTLDevicesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeVTLDevicesOutput_GatewayARN *smithy.Schema
-
-var DescribeVTLDevicesOutput_VTLDevices *smithy.Schema
-
-var DescribeVTLDevicesOutput_Marker *smithy.Schema
-
-var DescribeWorkingStorageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeWorkingStorageInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkingStorageInput_GatewayARN *smithy.Schema
-
-var DescribeWorkingStorageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeWorkingStorageOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeWorkingStorageOutput_GatewayARN *smithy.Schema
-
-var DescribeWorkingStorageOutput_DiskIds *smithy.Schema
-
-var DescribeWorkingStorageOutput_WorkingStorageUsedInBytes *smithy.Schema
-
-var DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes *smithy.Schema
-
-var DetachVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DetachVolumeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DetachVolumeInput_VolumeARN *smithy.Schema
-
-var DetachVolumeInput_ForceDetach *smithy.Schema
-
-var DetachVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DetachVolumeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DetachVolumeOutput_VolumeARN *smithy.Schema
-
-var DisableGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisableGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableGatewayInput_GatewayARN *smithy.Schema
-
-var DisableGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisableGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableGatewayOutput_GatewayARN *smithy.Schema
-
-var DisassociateFileSystemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisassociateFileSystemInput",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateFileSystemInput_FileSystemAssociationARN *smithy.Schema
-
-var DisassociateFileSystemInput_ForceDelete *smithy.Schema
-
-var DisassociateFileSystemOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisassociateFileSystemOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateFileSystemOutput_FileSystemAssociationARN *smithy.Schema
-
-var EvictFilesFailingUploadInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EvictFilesFailingUploadInput",
-}, smithy.ShapeTypeStructure, 2)
-var EvictFilesFailingUploadInput_FileShareARN *smithy.Schema
-
-var EvictFilesFailingUploadInput_ForceRemove *smithy.Schema
-
-var EvictFilesFailingUploadOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EvictFilesFailingUploadOutput",
-}, smithy.ShapeTypeStructure, 1)
-var EvictFilesFailingUploadOutput_NotificationId *smithy.Schema
-
-var JoinDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "JoinDomainInput",
-}, smithy.ShapeTypeStructure, 7)
-var JoinDomainInput_GatewayARN *smithy.Schema
-
-var JoinDomainInput_DomainName *smithy.Schema
-
-var JoinDomainInput_OrganizationalUnit *smithy.Schema
-
-var JoinDomainInput_DomainControllers *smithy.Schema
-
-var JoinDomainInput_TimeoutInSeconds *smithy.Schema
-
-var JoinDomainInput_UserName *smithy.Schema
-
-var JoinDomainInput_Password *smithy.Schema
-
-var JoinDomainOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "JoinDomainOutput",
-}, smithy.ShapeTypeStructure, 2)
-var JoinDomainOutput_GatewayARN *smithy.Schema
-
-var JoinDomainOutput_ActiveDirectoryStatus *smithy.Schema
-
-var ListAutomaticTapeCreationPoliciesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListAutomaticTapeCreationPoliciesInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListAutomaticTapeCreationPoliciesInput_GatewayARN *smithy.Schema
-
-var ListAutomaticTapeCreationPoliciesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListAutomaticTapeCreationPoliciesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos *smithy.Schema
-
-var ListCacheReportsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListCacheReportsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListCacheReportsInput_Marker *smithy.Schema
-
-var ListCacheReportsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListCacheReportsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCacheReportsOutput_CacheReportList *smithy.Schema
-
-var ListCacheReportsOutput_Marker *smithy.Schema
-
-var ListFileSharesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSharesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSharesInput_GatewayARN *smithy.Schema
-
-var ListFileSharesInput_Limit *smithy.Schema
-
-var ListFileSharesInput_Marker *smithy.Schema
-
-var ListFileSharesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSharesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSharesOutput_Marker *smithy.Schema
-
-var ListFileSharesOutput_NextMarker *smithy.Schema
-
-var ListFileSharesOutput_FileShareInfoList *smithy.Schema
-
-var ListFileSystemAssociationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSystemAssociationsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSystemAssociationsInput_GatewayARN *smithy.Schema
-
-var ListFileSystemAssociationsInput_Limit *smithy.Schema
-
-var ListFileSystemAssociationsInput_Marker *smithy.Schema
-
-var ListFileSystemAssociationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSystemAssociationsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSystemAssociationsOutput_Marker *smithy.Schema
-
-var ListFileSystemAssociationsOutput_NextMarker *smithy.Schema
-
-var ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList *smithy.Schema
-
-var ListGatewaysInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListGatewaysInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewaysInput_Marker *smithy.Schema
-
-var ListGatewaysInput_Limit *smithy.Schema
-
-var ListGatewaysOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListGatewaysOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewaysOutput_Gateways *smithy.Schema
-
-var ListGatewaysOutput_Marker *smithy.Schema
-
-var ListLocalDisksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListLocalDisksInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListLocalDisksInput_GatewayARN *smithy.Schema
-
-var ListLocalDisksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListLocalDisksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLocalDisksOutput_GatewayARN *smithy.Schema
-
-var ListLocalDisksOutput_Disks *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceInput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceInput_Marker *smithy.Schema
-
-var ListTagsForResourceInput_Limit *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceOutput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceOutput_Marker *smithy.Schema
-
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListTapePoolsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapePoolsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTapePoolsInput_PoolARNs *smithy.Schema
-
-var ListTapePoolsInput_Marker *smithy.Schema
-
-var ListTapePoolsInput_Limit *smithy.Schema
-
-var ListTapePoolsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapePoolsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTapePoolsOutput_PoolInfos *smithy.Schema
-
-var ListTapePoolsOutput_Marker *smithy.Schema
-
-var ListTapesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTapesInput_TapeARNs *smithy.Schema
-
-var ListTapesInput_Marker *smithy.Schema
-
-var ListTapesInput_Limit *smithy.Schema
-
-var ListTapesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTapesOutput_TapeInfos *smithy.Schema
-
-var ListTapesOutput_Marker *smithy.Schema
-
-var ListVolumeInitiatorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeInitiatorsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListVolumeInitiatorsInput_VolumeARN *smithy.Schema
-
-var ListVolumeInitiatorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeInitiatorsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListVolumeInitiatorsOutput_Initiators *smithy.Schema
-
-var ListVolumeRecoveryPointsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeRecoveryPointsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListVolumeRecoveryPointsInput_GatewayARN *smithy.Schema
-
-var ListVolumeRecoveryPointsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeRecoveryPointsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVolumeRecoveryPointsOutput_GatewayARN *smithy.Schema
-
-var ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos *smithy.Schema
-
-var ListVolumesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListVolumesInput_GatewayARN *smithy.Schema
-
-var ListVolumesInput_Marker *smithy.Schema
-
-var ListVolumesInput_Limit *smithy.Schema
-
-var ListVolumesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListVolumesOutput_GatewayARN *smithy.Schema
-
-var ListVolumesOutput_Marker *smithy.Schema
-
-var ListVolumesOutput_VolumeInfos *smithy.Schema
-
-var NotifyWhenUploadedInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotifyWhenUploadedInput",
-}, smithy.ShapeTypeStructure, 1)
-var NotifyWhenUploadedInput_FileShareARN *smithy.Schema
-
-var NotifyWhenUploadedOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotifyWhenUploadedOutput",
-}, smithy.ShapeTypeStructure, 2)
-var NotifyWhenUploadedOutput_FileShareARN *smithy.Schema
-
-var NotifyWhenUploadedOutput_NotificationId *smithy.Schema
-
-var RefreshCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RefreshCacheInput",
-}, smithy.ShapeTypeStructure, 3)
-var RefreshCacheInput_FileShareARN *smithy.Schema
-
-var RefreshCacheInput_FolderList *smithy.Schema
-
-var RefreshCacheInput_Recursive *smithy.Schema
-
-var RefreshCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RefreshCacheOutput",
-}, smithy.ShapeTypeStructure, 2)
-var RefreshCacheOutput_FileShareARN *smithy.Schema
-
-var RefreshCacheOutput_NotificationId *smithy.Schema
-
-var RemoveTagsFromResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RemoveTagsFromResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsFromResourceInput_ResourceARN *smithy.Schema
-
-var RemoveTagsFromResourceInput_TagKeys *smithy.Schema
-
-var RemoveTagsFromResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RemoveTagsFromResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveTagsFromResourceOutput_ResourceARN *smithy.Schema
-
-var ResetCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ResetCacheInput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetCacheInput_GatewayARN *smithy.Schema
-
-var ResetCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ResetCacheOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetCacheOutput_GatewayARN *smithy.Schema
-
-var RetrieveTapeArchiveInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeArchiveInput",
-}, smithy.ShapeTypeStructure, 2)
-var RetrieveTapeArchiveInput_TapeARN *smithy.Schema
-
-var RetrieveTapeArchiveInput_GatewayARN *smithy.Schema
-
-var RetrieveTapeArchiveOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeArchiveOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RetrieveTapeArchiveOutput_TapeARN *smithy.Schema
-
-var RetrieveTapeRecoveryPointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeRecoveryPointInput",
-}, smithy.ShapeTypeStructure, 2)
-var RetrieveTapeRecoveryPointInput_TapeARN *smithy.Schema
-
-var RetrieveTapeRecoveryPointInput_GatewayARN *smithy.Schema
-
-var RetrieveTapeRecoveryPointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeRecoveryPointOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RetrieveTapeRecoveryPointOutput_TapeARN *smithy.Schema
-
-var SetLocalConsolePasswordInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetLocalConsolePasswordInput",
-}, smithy.ShapeTypeStructure, 2)
-var SetLocalConsolePasswordInput_GatewayARN *smithy.Schema
-
-var SetLocalConsolePasswordInput_LocalConsolePassword *smithy.Schema
-
-var SetLocalConsolePasswordOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetLocalConsolePasswordOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SetLocalConsolePasswordOutput_GatewayARN *smithy.Schema
-
-var SetSMBGuestPasswordInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetSMBGuestPasswordInput",
-}, smithy.ShapeTypeStructure, 2)
-var SetSMBGuestPasswordInput_GatewayARN *smithy.Schema
-
-var SetSMBGuestPasswordInput_Password *smithy.Schema
-
-var SetSMBGuestPasswordOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetSMBGuestPasswordOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SetSMBGuestPasswordOutput_GatewayARN *smithy.Schema
-
-var ShutdownGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ShutdownGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var ShutdownGatewayInput_GatewayARN *smithy.Schema
-
-var ShutdownGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ShutdownGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ShutdownGatewayOutput_GatewayARN *smithy.Schema
-
-var StartAvailabilityMonitorTestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartAvailabilityMonitorTestInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartAvailabilityMonitorTestInput_GatewayARN *smithy.Schema
-
-var StartAvailabilityMonitorTestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartAvailabilityMonitorTestOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartAvailabilityMonitorTestOutput_GatewayARN *smithy.Schema
-
-var StartCacheReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartCacheReportInput",
-}, smithy.ShapeTypeStructure, 9)
-var StartCacheReportInput_FileShareARN *smithy.Schema
-
-var StartCacheReportInput_Role *smithy.Schema
-
-var StartCacheReportInput_LocationARN *smithy.Schema
-
-var StartCacheReportInput_BucketRegion *smithy.Schema
-
-var StartCacheReportInput_VPCEndpointDNSName *smithy.Schema
-
-var StartCacheReportInput_InclusionFilters *smithy.Schema
-
-var StartCacheReportInput_ExclusionFilters *smithy.Schema
-
-var StartCacheReportInput_ClientToken *smithy.Schema
-
-var StartCacheReportInput_Tags *smithy.Schema
-
-var StartCacheReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartCacheReportOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartCacheReportOutput_CacheReportARN *smithy.Schema
-
-var StartGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartGatewayInput_GatewayARN *smithy.Schema
-
-var StartGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartGatewayOutput_GatewayARN *smithy.Schema
-
-var UpdateAutomaticTapeCreationPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateAutomaticTapeCreationPolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules *smithy.Schema
-
-var UpdateAutomaticTapeCreationPolicyInput_GatewayARN *smithy.Schema
-
-var UpdateAutomaticTapeCreationPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateAutomaticTapeCreationPolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAutomaticTapeCreationPolicyOutput_GatewayARN *smithy.Schema
-
-var UpdateBandwidthRateLimitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBandwidthRateLimitInput_GatewayARN *smithy.Schema
-
-var UpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec *smithy.Schema
-
-var UpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec *smithy.Schema
-
-var UpdateBandwidthRateLimitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBandwidthRateLimitOutput_GatewayARN *smithy.Schema
-
-var UpdateBandwidthRateLimitScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitScheduleInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBandwidthRateLimitScheduleInput_GatewayARN *smithy.Schema
-
-var UpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals *smithy.Schema
-
-var UpdateBandwidthRateLimitScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBandwidthRateLimitScheduleOutput_GatewayARN *smithy.Schema
-
-var UpdateChapCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateChapCredentialsInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChapCredentialsInput_TargetARN *smithy.Schema
-
-var UpdateChapCredentialsInput_SecretToAuthenticateInitiator *smithy.Schema
-
-var UpdateChapCredentialsInput_InitiatorName *smithy.Schema
-
-var UpdateChapCredentialsInput_SecretToAuthenticateTarget *smithy.Schema
-
-var UpdateChapCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateChapCredentialsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateChapCredentialsOutput_TargetARN *smithy.Schema
-
-var UpdateChapCredentialsOutput_InitiatorName *smithy.Schema
-
-var UpdateFileSystemAssociationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateFileSystemAssociationInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateFileSystemAssociationInput_FileSystemAssociationARN *smithy.Schema
-
-var UpdateFileSystemAssociationInput_UserName *smithy.Schema
-
-var UpdateFileSystemAssociationInput_Password *smithy.Schema
-
-var UpdateFileSystemAssociationInput_AuditDestinationARN *smithy.Schema
-
-var UpdateFileSystemAssociationInput_CacheAttributes *smithy.Schema
-
-var UpdateFileSystemAssociationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateFileSystemAssociationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFileSystemAssociationOutput_FileSystemAssociationARN *smithy.Schema
-
-var UpdateGatewayInformationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewayInformationInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateGatewayInformationInput_GatewayARN *smithy.Schema
-
-var UpdateGatewayInformationInput_GatewayName *smithy.Schema
-
-var UpdateGatewayInformationInput_GatewayTimezone *smithy.Schema
-
-var UpdateGatewayInformationInput_CloudWatchLogGroupARN *smithy.Schema
-
-var UpdateGatewayInformationInput_GatewayCapacity *smithy.Schema
-
-var UpdateGatewayInformationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewayInformationOutput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateGatewayInformationOutput_GatewayARN *smithy.Schema
-
-var UpdateGatewayInformationOutput_GatewayName *smithy.Schema
-
-var UpdateGatewaySoftwareNowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewaySoftwareNowInput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewaySoftwareNowInput_GatewayARN *smithy.Schema
-
-var UpdateGatewaySoftwareNowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewaySoftwareNowOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewaySoftwareNowOutput_GatewayARN *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateMaintenanceStartTimeInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateMaintenanceStartTimeInput_GatewayARN *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_HourOfDay *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_MinuteOfHour *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_DayOfWeek *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_DayOfMonth *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences *smithy.Schema
-
-var UpdateMaintenanceStartTimeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateMaintenanceStartTimeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateMaintenanceStartTimeOutput_GatewayARN *smithy.Schema
-
-var UpdateNFSFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateNFSFileShareInput",
-}, smithy.ShapeTypeStructure, 16)
-var UpdateNFSFileShareInput_FileShareARN *smithy.Schema
-
-var UpdateNFSFileShareInput_EncryptionType *smithy.Schema
-
-var UpdateNFSFileShareInput_KMSEncrypted *smithy.Schema
-
-var UpdateNFSFileShareInput_KMSKey *smithy.Schema
-
-var UpdateNFSFileShareInput_NFSFileShareDefaults *smithy.Schema
-
-var UpdateNFSFileShareInput_DefaultStorageClass *smithy.Schema
-
-var UpdateNFSFileShareInput_ObjectACL *smithy.Schema
-
-var UpdateNFSFileShareInput_ClientList *smithy.Schema
-
-var UpdateNFSFileShareInput_Squash *smithy.Schema
-
-var UpdateNFSFileShareInput_ReadOnly *smithy.Schema
-
-var UpdateNFSFileShareInput_GuessMIMETypeEnabled *smithy.Schema
-
-var UpdateNFSFileShareInput_RequesterPays *smithy.Schema
-
-var UpdateNFSFileShareInput_FileShareName *smithy.Schema
-
-var UpdateNFSFileShareInput_CacheAttributes *smithy.Schema
-
-var UpdateNFSFileShareInput_NotificationPolicy *smithy.Schema
-
-var UpdateNFSFileShareInput_AuditDestinationARN *smithy.Schema
-
-var UpdateNFSFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateNFSFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateNFSFileShareOutput_FileShareARN *smithy.Schema
-
-var UpdateSMBFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareInput",
-}, smithy.ShapeTypeStructure, 20)
-var UpdateSMBFileShareInput_FileShareARN *smithy.Schema
-
-var UpdateSMBFileShareInput_EncryptionType *smithy.Schema
-
-var UpdateSMBFileShareInput_KMSEncrypted *smithy.Schema
-
-var UpdateSMBFileShareInput_KMSKey *smithy.Schema
-
-var UpdateSMBFileShareInput_DefaultStorageClass *smithy.Schema
-
-var UpdateSMBFileShareInput_ObjectACL *smithy.Schema
-
-var UpdateSMBFileShareInput_ReadOnly *smithy.Schema
-
-var UpdateSMBFileShareInput_GuessMIMETypeEnabled *smithy.Schema
-
-var UpdateSMBFileShareInput_RequesterPays *smithy.Schema
-
-var UpdateSMBFileShareInput_SMBACLEnabled *smithy.Schema
-
-var UpdateSMBFileShareInput_AccessBasedEnumeration *smithy.Schema
-
-var UpdateSMBFileShareInput_AdminUserList *smithy.Schema
-
-var UpdateSMBFileShareInput_ValidUserList *smithy.Schema
-
-var UpdateSMBFileShareInput_InvalidUserList *smithy.Schema
-
-var UpdateSMBFileShareInput_AuditDestinationARN *smithy.Schema
-
-var UpdateSMBFileShareInput_CaseSensitivity *smithy.Schema
-
-var UpdateSMBFileShareInput_FileShareName *smithy.Schema
-
-var UpdateSMBFileShareInput_CacheAttributes *smithy.Schema
-
-var UpdateSMBFileShareInput_NotificationPolicy *smithy.Schema
-
-var UpdateSMBFileShareInput_OplocksEnabled *smithy.Schema
-
-var UpdateSMBFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSMBFileShareOutput_FileShareARN *smithy.Schema
-
-var UpdateSMBFileShareVisibilityInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareVisibilityInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSMBFileShareVisibilityInput_GatewayARN *smithy.Schema
-
-var UpdateSMBFileShareVisibilityInput_FileSharesVisible *smithy.Schema
-
-var UpdateSMBFileShareVisibilityOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareVisibilityOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSMBFileShareVisibilityOutput_GatewayARN *smithy.Schema
-
-var UpdateSMBLocalGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBLocalGroupsInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSMBLocalGroupsInput_GatewayARN *smithy.Schema
-
-var UpdateSMBLocalGroupsInput_SMBLocalGroups *smithy.Schema
-
-var UpdateSMBLocalGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBLocalGroupsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSMBLocalGroupsOutput_GatewayARN *smithy.Schema
-
-var UpdateSMBSecurityStrategyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBSecurityStrategyInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSMBSecurityStrategyInput_GatewayARN *smithy.Schema
-
-var UpdateSMBSecurityStrategyInput_SMBSecurityStrategy *smithy.Schema
-
-var UpdateSMBSecurityStrategyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBSecurityStrategyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSMBSecurityStrategyOutput_GatewayARN *smithy.Schema
-
-var UpdateSnapshotScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSnapshotScheduleInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSnapshotScheduleInput_VolumeARN *smithy.Schema
-
-var UpdateSnapshotScheduleInput_StartAt *smithy.Schema
-
-var UpdateSnapshotScheduleInput_RecurrenceInHours *smithy.Schema
-
-var UpdateSnapshotScheduleInput_Description *smithy.Schema
-
-var UpdateSnapshotScheduleInput_Tags *smithy.Schema
-
-var UpdateSnapshotScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSnapshotScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSnapshotScheduleOutput_VolumeARN *smithy.Schema
-
-var UpdateVTLDeviceTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateVTLDeviceTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateVTLDeviceTypeInput_VTLDeviceARN *smithy.Schema
-
-var UpdateVTLDeviceTypeInput_DeviceType *smithy.Schema
-
-var UpdateVTLDeviceTypeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateVTLDeviceTypeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVTLDeviceTypeOutput_VTLDeviceARN *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ActiveDirectoryStatus_ACCESS_DENIED = ActiveDirectoryStatus.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_DETACHED = ActiveDirectoryStatus.AddMember("DETACHED", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_JOINED = ActiveDirectoryStatus.AddMember("JOINED", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_JOINING = ActiveDirectoryStatus.AddMember("JOINING", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_NETWORK_ERROR = ActiveDirectoryStatus.AddMember("NETWORK_ERROR", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_TIMEOUT = ActiveDirectoryStatus.AddMember("TIMEOUT", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_UNKNOWN_ERROR = ActiveDirectoryStatus.AddMember("UNKNOWN_ERROR", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS = ActiveDirectoryStatus.AddMember("INSUFFICIENT_PERMISSIONS", smithyprelude.Unit)
-
-	AutomaticTapeCreationRule_TapeBarcodePrefix = AutomaticTapeCreationRule.AddMember("TapeBarcodePrefix", _TapeBarcodePrefix)
-
-	AutomaticTapeCreationRule_PoolId = AutomaticTapeCreationRule.AddMember("PoolId", _PoolId)
-
-	AutomaticTapeCreationRule_TapeSizeInBytes = AutomaticTapeCreationRule.AddMember("TapeSizeInBytes", _TapeSize)
-
-	AutomaticTapeCreationRule_MinimumNumTapes = AutomaticTapeCreationRule.AddMember("MinimumNumTapes", _MinimumNumTapes)
-
-	AutomaticTapeCreationRule_Worm = AutomaticTapeCreationRule.AddMember("Worm", _Boolean2)
-
-	_AutomaticTapeCreationRules_member = _AutomaticTapeCreationRules.AddMember("member", AutomaticTapeCreationRule)
-
-	AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules = AutomaticTapeCreationPolicyInfo.AddMember("AutomaticTapeCreationRules", _AutomaticTapeCreationRules)
-
-	AutomaticTapeCreationPolicyInfo_GatewayARN = AutomaticTapeCreationPolicyInfo.AddMember("GatewayARN", _GatewayARN)
-
-	_AutomaticTapeCreationPolicyInfos_member = _AutomaticTapeCreationPolicyInfos.AddMember("member", AutomaticTapeCreationPolicyInfo)
-
-	AutomaticUpdatePolicy_ALL_VERSIONS = AutomaticUpdatePolicy.AddMember("ALL_VERSIONS", smithyprelude.Unit)
-
-	AutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY = AutomaticUpdatePolicy.AddMember("EMERGENCY_VERSIONS_ONLY", smithyprelude.Unit)
-
-	AvailabilityMonitorTestStatus_COMPLETE = AvailabilityMonitorTestStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	AvailabilityMonitorTestStatus_FAILED = AvailabilityMonitorTestStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	AvailabilityMonitorTestStatus_PENDING = AvailabilityMonitorTestStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	_DaysOfWeek_member = _DaysOfWeek.AddMember("member", _DayOfWeek)
-
-	BandwidthRateLimitInterval_StartHourOfDay = BandwidthRateLimitInterval.AddMember("StartHourOfDay", _HourOfDay)
-
-	BandwidthRateLimitInterval_StartMinuteOfHour = BandwidthRateLimitInterval.AddMember("StartMinuteOfHour", _MinuteOfHour)
-
-	BandwidthRateLimitInterval_EndHourOfDay = BandwidthRateLimitInterval.AddMember("EndHourOfDay", _HourOfDay)
-
-	BandwidthRateLimitInterval_EndMinuteOfHour = BandwidthRateLimitInterval.AddMember("EndMinuteOfHour", _MinuteOfHour)
-
-	BandwidthRateLimitInterval_DaysOfWeek = BandwidthRateLimitInterval.AddMember("DaysOfWeek", _DaysOfWeek)
-
-	BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = BandwidthRateLimitInterval.AddMember("AverageUploadRateLimitInBitsPerSec", _BandwidthUploadRateLimit)
-
-	BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec = BandwidthRateLimitInterval.AddMember("AverageDownloadRateLimitInBitsPerSec", _BandwidthDownloadRateLimit)
-
-	_BandwidthRateLimitIntervals_member = _BandwidthRateLimitIntervals.AddMember("member", BandwidthRateLimitInterval)
-
-	CacheAttributes_CacheStaleTimeoutInSeconds = CacheAttributes.AddMember("CacheStaleTimeoutInSeconds", _CacheStaleTimeoutInSeconds)
-
-	VolumeiSCSIAttributes_TargetARN = VolumeiSCSIAttributes.AddMember("TargetARN", _TargetARN)
-
-	VolumeiSCSIAttributes_NetworkInterfaceId = VolumeiSCSIAttributes.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	VolumeiSCSIAttributes_NetworkInterfacePort = VolumeiSCSIAttributes.AddMember("NetworkInterfacePort", _integer)
-
-	VolumeiSCSIAttributes_LunNumber = VolumeiSCSIAttributes.AddMember("LunNumber", _PositiveIntObject)
-
-	VolumeiSCSIAttributes_ChapEnabled = VolumeiSCSIAttributes.AddMember("ChapEnabled", _Boolean2)
-
-	CachediSCSIVolume_VolumeARN = CachediSCSIVolume.AddMember("VolumeARN", _VolumeARN)
-
-	CachediSCSIVolume_VolumeId = CachediSCSIVolume.AddMember("VolumeId", _VolumeId)
-
-	CachediSCSIVolume_VolumeType = CachediSCSIVolume.AddMember("VolumeType", _VolumeType)
-
-	CachediSCSIVolume_VolumeStatus = CachediSCSIVolume.AddMember("VolumeStatus", _VolumeStatus)
-
-	CachediSCSIVolume_VolumeAttachmentStatus = CachediSCSIVolume.AddMember("VolumeAttachmentStatus", _VolumeAttachmentStatus)
-
-	CachediSCSIVolume_VolumeSizeInBytes = CachediSCSIVolume.AddMember("VolumeSizeInBytes", _long)
-
-	CachediSCSIVolume_VolumeProgress = CachediSCSIVolume.AddMember("VolumeProgress", _DoubleObject)
-
-	CachediSCSIVolume_SourceSnapshotId = CachediSCSIVolume.AddMember("SourceSnapshotId", _SnapshotId)
-
-	CachediSCSIVolume_VolumeiSCSIAttributes = CachediSCSIVolume.AddMember("VolumeiSCSIAttributes", VolumeiSCSIAttributes)
-
-	CachediSCSIVolume_CreatedDate = CachediSCSIVolume.AddMember("CreatedDate", _CreatedDate)
-
-	CachediSCSIVolume_VolumeUsedInBytes = CachediSCSIVolume.AddMember("VolumeUsedInBytes", _VolumeUsedInBytes)
-
-	CachediSCSIVolume_KMSKey = CachediSCSIVolume.AddMember("KMSKey", _KMSKey)
-
-	CachediSCSIVolume_TargetName = CachediSCSIVolume.AddMember("TargetName", _TargetName)
-
-	_CachediSCSIVolumes_member = _CachediSCSIVolumes.AddMember("member", CachediSCSIVolume)
-
-	CacheReportFilterName_UploadState = CacheReportFilterName.AddMember("UploadState", smithyprelude.Unit)
-
-	CacheReportFilterName_UploadFailureReason = CacheReportFilterName.AddMember("UploadFailureReason", smithyprelude.Unit)
-
-	_CacheReportFilterValues_member = _CacheReportFilterValues.AddMember("member", _CacheReportFilterValue)
-
-	CacheReportFilter_Name = CacheReportFilter.AddMember("Name", CacheReportFilterName)
-
-	CacheReportFilter_Values = CacheReportFilter.AddMember("Values", _CacheReportFilterValues)
-
-	_CacheReportFilterList_member = _CacheReportFilterList.AddMember("member", CacheReportFilter)
-
-	CacheReportStatus_IN_PROGRESS = CacheReportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	CacheReportStatus_COMPLETED = CacheReportStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	CacheReportStatus_CANCELED = CacheReportStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	CacheReportStatus_FAILED = CacheReportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CacheReportStatus_ERROR = CacheReportStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	CacheReportInfo_CacheReportARN = CacheReportInfo.AddMember("CacheReportARN", _CacheReportARN)
-
-	CacheReportInfo_CacheReportStatus = CacheReportInfo.AddMember("CacheReportStatus", CacheReportStatus)
-
-	CacheReportInfo_ReportCompletionPercent = CacheReportInfo.AddMember("ReportCompletionPercent", _ReportCompletionPercent)
-
-	CacheReportInfo_EndTime = CacheReportInfo.AddMember("EndTime", _Time)
-
-	CacheReportInfo_Role = CacheReportInfo.AddMember("Role", _Role)
-
-	CacheReportInfo_FileShareARN = CacheReportInfo.AddMember("FileShareARN", _FileShareARN)
-
-	CacheReportInfo_LocationARN = CacheReportInfo.AddMember("LocationARN", _LocationARN)
-
-	CacheReportInfo_StartTime = CacheReportInfo.AddMember("StartTime", _Time)
-
-	CacheReportInfo_InclusionFilters = CacheReportInfo.AddMember("InclusionFilters", _CacheReportFilterList)
-
-	CacheReportInfo_ExclusionFilters = CacheReportInfo.AddMember("ExclusionFilters", _CacheReportFilterList)
-
-	CacheReportInfo_ReportName = CacheReportInfo.AddMember("ReportName", _CacheReportName)
-
-	CacheReportInfo_Tags = CacheReportInfo.AddMember("Tags", _Tags)
-
-	_CacheReportList_member = _CacheReportList.AddMember("member", CacheReportInfo)
-
-	CaseSensitivity_ClientSpecified = CaseSensitivity.AddMember("ClientSpecified", smithyprelude.Unit)
-
-	CaseSensitivity_CaseSensitive = CaseSensitivity.AddMember("CaseSensitive", smithyprelude.Unit)
-
-	ChapInfo_TargetARN = ChapInfo.AddMember("TargetARN", _TargetARN)
-
-	ChapInfo_SecretToAuthenticateInitiator = ChapInfo.AddMember("SecretToAuthenticateInitiator", _ChapSecret)
-
-	ChapInfo_InitiatorName = ChapInfo.AddMember("InitiatorName", _IqnName)
-
-	ChapInfo_SecretToAuthenticateTarget = ChapInfo.AddMember("SecretToAuthenticateTarget", _ChapSecret)
-
-	_ChapCredentials_member = _ChapCredentials.AddMember("member", ChapInfo)
-
-	DeviceiSCSIAttributes_TargetARN = DeviceiSCSIAttributes.AddMember("TargetARN", _TargetARN)
-
-	DeviceiSCSIAttributes_NetworkInterfaceId = DeviceiSCSIAttributes.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	DeviceiSCSIAttributes_NetworkInterfacePort = DeviceiSCSIAttributes.AddMember("NetworkInterfacePort", _integer)
-
-	DeviceiSCSIAttributes_ChapEnabled = DeviceiSCSIAttributes.AddMember("ChapEnabled", _Boolean2)
-
-	_DiskAttributeList_member = _DiskAttributeList.AddMember("member", _DiskAttribute)
-
-	Disk_DiskId = Disk.AddMember("DiskId", _DiskId)
-
-	Disk_DiskPath = Disk.AddMember("DiskPath", _string)
-
-	Disk_DiskNode = Disk.AddMember("DiskNode", _string)
-
-	Disk_DiskStatus = Disk.AddMember("DiskStatus", _string)
-
-	Disk_DiskSizeInBytes = Disk.AddMember("DiskSizeInBytes", _long)
-
-	Disk_DiskAllocationType = Disk.AddMember("DiskAllocationType", _DiskAllocationType)
-
-	Disk_DiskAllocationResource = Disk.AddMember("DiskAllocationResource", _string)
-
-	Disk_DiskAttributeList = Disk.AddMember("DiskAttributeList", _DiskAttributeList)
-
-	_DiskIds_member = _DiskIds.AddMember("member", _DiskId)
-
-	_Disks_member = _Disks.AddMember("member", Disk)
-
-	EncryptionType_SseS3 = EncryptionType.AddMember("SseS3", smithyprelude.Unit)
-
-	EncryptionType_SseKms = EncryptionType.AddMember("SseKms", smithyprelude.Unit)
-
-	EncryptionType_DsseKms = EncryptionType.AddMember("DsseKms", smithyprelude.Unit)
-
-	_IpAddressList_member = _IpAddressList.AddMember("member", _IPV4Address)
-
-	EndpointNetworkConfiguration_IpAddresses = EndpointNetworkConfiguration.AddMember("IpAddresses", _IpAddressList)
-
-	ErrorCode_ActivationKeyExpired = ErrorCode.AddMember("ActivationKeyExpired", smithyprelude.Unit)
-
-	ErrorCode_ActivationKeyInvalid = ErrorCode.AddMember("ActivationKeyInvalid", smithyprelude.Unit)
-
-	ErrorCode_ActivationKeyNotFound = ErrorCode.AddMember("ActivationKeyNotFound", smithyprelude.Unit)
-
-	ErrorCode_GatewayInternalError = ErrorCode.AddMember("GatewayInternalError", smithyprelude.Unit)
-
-	ErrorCode_GatewayNotConnected = ErrorCode.AddMember("GatewayNotConnected", smithyprelude.Unit)
-
-	ErrorCode_GatewayNotFound = ErrorCode.AddMember("GatewayNotFound", smithyprelude.Unit)
-
-	ErrorCode_GatewayProxyNetworkConnectionBusy = ErrorCode.AddMember("GatewayProxyNetworkConnectionBusy", smithyprelude.Unit)
-
-	ErrorCode_AuthenticationFailure = ErrorCode.AddMember("AuthenticationFailure", smithyprelude.Unit)
-
-	ErrorCode_BandwidthThrottleScheduleNotFound = ErrorCode.AddMember("BandwidthThrottleScheduleNotFound", smithyprelude.Unit)
-
-	ErrorCode_Blocked = ErrorCode.AddMember("Blocked", smithyprelude.Unit)
-
-	ErrorCode_CannotExportSnapshot = ErrorCode.AddMember("CannotExportSnapshot", smithyprelude.Unit)
-
-	ErrorCode_ChapCredentialNotFound = ErrorCode.AddMember("ChapCredentialNotFound", smithyprelude.Unit)
-
-	ErrorCode_DiskAlreadyAllocated = ErrorCode.AddMember("DiskAlreadyAllocated", smithyprelude.Unit)
-
-	ErrorCode_DiskDoesNotExist = ErrorCode.AddMember("DiskDoesNotExist", smithyprelude.Unit)
-
-	ErrorCode_DiskSizeGreaterThanVolumeMaxSize = ErrorCode.AddMember("DiskSizeGreaterThanVolumeMaxSize", smithyprelude.Unit)
-
-	ErrorCode_DiskSizeLessThanVolumeSize = ErrorCode.AddMember("DiskSizeLessThanVolumeSize", smithyprelude.Unit)
-
-	ErrorCode_DiskSizeNotGigAligned = ErrorCode.AddMember("DiskSizeNotGigAligned", smithyprelude.Unit)
-
-	ErrorCode_DuplicateCertificateInfo = ErrorCode.AddMember("DuplicateCertificateInfo", smithyprelude.Unit)
-
-	ErrorCode_DuplicateSchedule = ErrorCode.AddMember("DuplicateSchedule", smithyprelude.Unit)
-
-	ErrorCode_EndpointNotFound = ErrorCode.AddMember("EndpointNotFound", smithyprelude.Unit)
-
-	ErrorCode_IAMNotSupported = ErrorCode.AddMember("IAMNotSupported", smithyprelude.Unit)
-
-	ErrorCode_InitiatorInvalid = ErrorCode.AddMember("InitiatorInvalid", smithyprelude.Unit)
-
-	ErrorCode_InitiatorNotFound = ErrorCode.AddMember("InitiatorNotFound", smithyprelude.Unit)
-
-	ErrorCode_InternalError = ErrorCode.AddMember("InternalError", smithyprelude.Unit)
-
-	ErrorCode_InvalidGateway = ErrorCode.AddMember("InvalidGateway", smithyprelude.Unit)
-
-	ErrorCode_InvalidEndpoint = ErrorCode.AddMember("InvalidEndpoint", smithyprelude.Unit)
-
-	ErrorCode_InvalidParameters = ErrorCode.AddMember("InvalidParameters", smithyprelude.Unit)
-
-	ErrorCode_InvalidSchedule = ErrorCode.AddMember("InvalidSchedule", smithyprelude.Unit)
-
-	ErrorCode_LocalStorageLimitExceeded = ErrorCode.AddMember("LocalStorageLimitExceeded", smithyprelude.Unit)
-
-	ErrorCode_LunAlreadyAllocated_ = ErrorCode.AddMember("LunAlreadyAllocated_", smithyprelude.Unit)
-
-	ErrorCode_LunInvalid = ErrorCode.AddMember("LunInvalid", smithyprelude.Unit)
-
-	ErrorCode_JoinDomainInProgress = ErrorCode.AddMember("JoinDomainInProgress", smithyprelude.Unit)
-
-	ErrorCode_MaximumContentLengthExceeded = ErrorCode.AddMember("MaximumContentLengthExceeded", smithyprelude.Unit)
-
-	ErrorCode_MaximumTapeCartridgeCountExceeded = ErrorCode.AddMember("MaximumTapeCartridgeCountExceeded", smithyprelude.Unit)
-
-	ErrorCode_MaximumVolumeCountExceeded = ErrorCode.AddMember("MaximumVolumeCountExceeded", smithyprelude.Unit)
-
-	ErrorCode_NetworkConfigurationChanged = ErrorCode.AddMember("NetworkConfigurationChanged", smithyprelude.Unit)
-
-	ErrorCode_NoDisksAvailable = ErrorCode.AddMember("NoDisksAvailable", smithyprelude.Unit)
-
-	ErrorCode_NotImplemented = ErrorCode.AddMember("NotImplemented", smithyprelude.Unit)
-
-	ErrorCode_NotSupported = ErrorCode.AddMember("NotSupported", smithyprelude.Unit)
-
-	ErrorCode_OperationAborted = ErrorCode.AddMember("OperationAborted", smithyprelude.Unit)
-
-	ErrorCode_OutdatedGateway = ErrorCode.AddMember("OutdatedGateway", smithyprelude.Unit)
-
-	ErrorCode_ParametersNotImplemented = ErrorCode.AddMember("ParametersNotImplemented", smithyprelude.Unit)
-
-	ErrorCode_RegionInvalid = ErrorCode.AddMember("RegionInvalid", smithyprelude.Unit)
-
-	ErrorCode_RequestTimeout = ErrorCode.AddMember("RequestTimeout", smithyprelude.Unit)
-
-	ErrorCode_ServiceUnavailable = ErrorCode.AddMember("ServiceUnavailable", smithyprelude.Unit)
-
-	ErrorCode_SnapshotDeleted = ErrorCode.AddMember("SnapshotDeleted", smithyprelude.Unit)
-
-	ErrorCode_SnapshotIdInvalid = ErrorCode.AddMember("SnapshotIdInvalid", smithyprelude.Unit)
-
-	ErrorCode_SnapshotInProgress = ErrorCode.AddMember("SnapshotInProgress", smithyprelude.Unit)
-
-	ErrorCode_SnapshotNotFound = ErrorCode.AddMember("SnapshotNotFound", smithyprelude.Unit)
-
-	ErrorCode_SnapshotScheduleNotFound = ErrorCode.AddMember("SnapshotScheduleNotFound", smithyprelude.Unit)
-
-	ErrorCode_StagingAreaFull = ErrorCode.AddMember("StagingAreaFull", smithyprelude.Unit)
-
-	ErrorCode_StorageFailure = ErrorCode.AddMember("StorageFailure", smithyprelude.Unit)
-
-	ErrorCode_TapeCartridgeNotFound = ErrorCode.AddMember("TapeCartridgeNotFound", smithyprelude.Unit)
-
-	ErrorCode_TargetAlreadyExists = ErrorCode.AddMember("TargetAlreadyExists", smithyprelude.Unit)
-
-	ErrorCode_TargetInvalid = ErrorCode.AddMember("TargetInvalid", smithyprelude.Unit)
-
-	ErrorCode_TargetNotFound = ErrorCode.AddMember("TargetNotFound", smithyprelude.Unit)
-
-	ErrorCode_UnauthorizedOperation = ErrorCode.AddMember("UnauthorizedOperation", smithyprelude.Unit)
-
-	ErrorCode_VolumeAlreadyExists = ErrorCode.AddMember("VolumeAlreadyExists", smithyprelude.Unit)
-
-	ErrorCode_VolumeIdInvalid = ErrorCode.AddMember("VolumeIdInvalid", smithyprelude.Unit)
-
-	ErrorCode_VolumeInUse = ErrorCode.AddMember("VolumeInUse", smithyprelude.Unit)
-
-	ErrorCode_VolumeNotFound = ErrorCode.AddMember("VolumeNotFound", smithyprelude.Unit)
-
-	ErrorCode_VolumeNotReady = ErrorCode.AddMember("VolumeNotReady", smithyprelude.Unit)
-
-	_errorDetails_key = _errorDetails.AddMember("key", _string)
-
-	_errorDetails_value = _errorDetails.AddMember("value", _string)
-
-	_FileShareARNList_member = _FileShareARNList.AddMember("member", _FileShareARN)
-
-	_FileShareClientList_member = _FileShareClientList.AddMember("member", _Ipv4OrIpv6AddressCIDR)
-
-	FileShareType_NFS = FileShareType.AddMember("NFS", smithyprelude.Unit)
-
-	FileShareType_SMB = FileShareType.AddMember("SMB", smithyprelude.Unit)
-
-	FileShareInfo_FileShareType = FileShareInfo.AddMember("FileShareType", FileShareType)
-
-	FileShareInfo_FileShareARN = FileShareInfo.AddMember("FileShareARN", _FileShareARN)
-
-	FileShareInfo_FileShareId = FileShareInfo.AddMember("FileShareId", _FileShareId)
-
-	FileShareInfo_FileShareStatus = FileShareInfo.AddMember("FileShareStatus", _FileShareStatus)
-
-	FileShareInfo_GatewayARN = FileShareInfo.AddMember("GatewayARN", _GatewayARN)
-
-	_FileShareInfoList_member = _FileShareInfoList.AddMember("member", FileShareInfo)
-
-	_FileSystemAssociationARNList_member = _FileSystemAssociationARNList.AddMember("member", _FileSystemAssociationARN)
-
-	FileSystemAssociationStatusDetail_ErrorCode = FileSystemAssociationStatusDetail.AddMember("ErrorCode", _FileSystemAssociationSyncErrorCode)
-
-	_FileSystemAssociationStatusDetails_member = _FileSystemAssociationStatusDetails.AddMember("member", FileSystemAssociationStatusDetail)
-
-	FileSystemAssociationInfo_FileSystemAssociationARN = FileSystemAssociationInfo.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	FileSystemAssociationInfo_LocationARN = FileSystemAssociationInfo.AddMember("LocationARN", _FileSystemLocationARN)
-
-	FileSystemAssociationInfo_FileSystemAssociationStatus = FileSystemAssociationInfo.AddMember("FileSystemAssociationStatus", _FileSystemAssociationStatus)
-
-	FileSystemAssociationInfo_AuditDestinationARN = FileSystemAssociationInfo.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	FileSystemAssociationInfo_GatewayARN = FileSystemAssociationInfo.AddMember("GatewayARN", _GatewayARN)
-
-	FileSystemAssociationInfo_Tags = FileSystemAssociationInfo.AddMember("Tags", _Tags)
-
-	FileSystemAssociationInfo_CacheAttributes = FileSystemAssociationInfo.AddMember("CacheAttributes", CacheAttributes)
-
-	FileSystemAssociationInfo_EndpointNetworkConfiguration = FileSystemAssociationInfo.AddMember("EndpointNetworkConfiguration", EndpointNetworkConfiguration)
-
-	FileSystemAssociationInfo_FileSystemAssociationStatusDetails = FileSystemAssociationInfo.AddMember("FileSystemAssociationStatusDetails", _FileSystemAssociationStatusDetails)
-
-	_FileSystemAssociationInfoList_member = _FileSystemAssociationInfoList.AddMember("member", FileSystemAssociationInfo)
-
-	FileSystemAssociationSummary_FileSystemAssociationId = FileSystemAssociationSummary.AddMember("FileSystemAssociationId", _FileSystemAssociationId)
-
-	FileSystemAssociationSummary_FileSystemAssociationARN = FileSystemAssociationSummary.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	FileSystemAssociationSummary_FileSystemAssociationStatus = FileSystemAssociationSummary.AddMember("FileSystemAssociationStatus", _FileSystemAssociationStatus)
-
-	FileSystemAssociationSummary_GatewayARN = FileSystemAssociationSummary.AddMember("GatewayARN", _GatewayARN)
-
-	_FileSystemAssociationSummaryList_member = _FileSystemAssociationSummaryList.AddMember("member", FileSystemAssociationSummary)
-
-	_FolderList_member = _FolderList.AddMember("member", _Folder)
-
-	GatewayCapacity_Small = GatewayCapacity.AddMember("Small", smithyprelude.Unit)
-
-	GatewayCapacity_Medium = GatewayCapacity.AddMember("Medium", smithyprelude.Unit)
-
-	GatewayCapacity_Large = GatewayCapacity.AddMember("Large", smithyprelude.Unit)
-
-	HostEnvironment_VMWARE = HostEnvironment.AddMember("VMWARE", smithyprelude.Unit)
-
-	HostEnvironment_HYPER_V = HostEnvironment.AddMember("HYPER_V", smithyprelude.Unit)
-
-	HostEnvironment_EC2 = HostEnvironment.AddMember("EC2", smithyprelude.Unit)
-
-	HostEnvironment_KVM = HostEnvironment.AddMember("KVM", smithyprelude.Unit)
-
-	HostEnvironment_OTHER = HostEnvironment.AddMember("OTHER", smithyprelude.Unit)
-
-	HostEnvironment_SNOWBALL = HostEnvironment.AddMember("SNOWBALL", smithyprelude.Unit)
-
-	GatewayInfo_GatewayId = GatewayInfo.AddMember("GatewayId", _GatewayId)
-
-	GatewayInfo_GatewayARN = GatewayInfo.AddMember("GatewayARN", _GatewayARN)
-
-	GatewayInfo_GatewayType = GatewayInfo.AddMember("GatewayType", _GatewayType)
-
-	GatewayInfo_GatewayOperationalState = GatewayInfo.AddMember("GatewayOperationalState", _GatewayOperationalState)
-
-	GatewayInfo_GatewayName = GatewayInfo.AddMember("GatewayName", _string)
-
-	GatewayInfo_Ec2InstanceId = GatewayInfo.AddMember("Ec2InstanceId", _Ec2InstanceId)
-
-	GatewayInfo_Ec2InstanceRegion = GatewayInfo.AddMember("Ec2InstanceRegion", _Ec2InstanceRegion)
-
-	GatewayInfo_HostEnvironment = GatewayInfo.AddMember("HostEnvironment", HostEnvironment)
-
-	GatewayInfo_HostEnvironmentId = GatewayInfo.AddMember("HostEnvironmentId", _HostEnvironmentId)
-
-	GatewayInfo_DeprecationDate = GatewayInfo.AddMember("DeprecationDate", _DeprecationDate)
-
-	GatewayInfo_SoftwareVersion = GatewayInfo.AddMember("SoftwareVersion", _SoftwareVersion)
-
-	NetworkInterface_Ipv4Address = NetworkInterface.AddMember("Ipv4Address", _string)
-
-	NetworkInterface_MacAddress = NetworkInterface.AddMember("MacAddress", _string)
-
-	NetworkInterface_Ipv6Address = NetworkInterface.AddMember("Ipv6Address", _string)
-
-	_GatewayNetworkInterfaces_member = _GatewayNetworkInterfaces.AddMember("member", NetworkInterface)
-
-	_Gateways_member = _Gateways.AddMember("member", GatewayInfo)
-
-	_Hosts_member = _Hosts.AddMember("member", _Host)
-
-	_Initiators_member = _Initiators.AddMember("member", _Initiator)
-
-	StorageGatewayError_errorCode = StorageGatewayError.AddMember("errorCode", ErrorCode)
-
-	StorageGatewayError_errorDetails = StorageGatewayError.AddMember("errorDetails", _errorDetails)
-
-	InternalServerError_message = InternalServerError.AddMember("message", _string)
-
-	InternalServerError_error = InternalServerError.AddMember("error", StorageGatewayError)
-
-	InvalidGatewayRequestException_message = InvalidGatewayRequestException.AddMember("message", _string)
-
-	InvalidGatewayRequestException_error = InvalidGatewayRequestException.AddMember("error", StorageGatewayError)
-
-	NFSFileShareDefaults_FileMode = NFSFileShareDefaults.AddMember("FileMode", _PermissionMode)
-
-	NFSFileShareDefaults_DirectoryMode = NFSFileShareDefaults.AddMember("DirectoryMode", _PermissionMode)
-
-	NFSFileShareDefaults_GroupId = NFSFileShareDefaults.AddMember("GroupId", _PermissionId)
-
-	NFSFileShareDefaults_OwnerId = NFSFileShareDefaults.AddMember("OwnerId", _PermissionId)
-
-	ObjectACL_private = ObjectACL.AddMember("private", smithyprelude.Unit)
-
-	ObjectACL_public_read = ObjectACL.AddMember("public_read", smithyprelude.Unit)
-
-	ObjectACL_public_read_write = ObjectACL.AddMember("public_read_write", smithyprelude.Unit)
-
-	ObjectACL_authenticated_read = ObjectACL.AddMember("authenticated_read", smithyprelude.Unit)
-
-	ObjectACL_bucket_owner_read = ObjectACL.AddMember("bucket_owner_read", smithyprelude.Unit)
-
-	ObjectACL_bucket_owner_full_control = ObjectACL.AddMember("bucket_owner_full_control", smithyprelude.Unit)
-
-	ObjectACL_aws_exec_read = ObjectACL.AddMember("aws_exec_read", smithyprelude.Unit)
-
-	NFSFileShareInfo_NFSFileShareDefaults = NFSFileShareInfo.AddMember("NFSFileShareDefaults", NFSFileShareDefaults)
-
-	NFSFileShareInfo_FileShareARN = NFSFileShareInfo.AddMember("FileShareARN", _FileShareARN)
-
-	NFSFileShareInfo_FileShareId = NFSFileShareInfo.AddMember("FileShareId", _FileShareId)
-
-	NFSFileShareInfo_FileShareStatus = NFSFileShareInfo.AddMember("FileShareStatus", _FileShareStatus)
-
-	NFSFileShareInfo_GatewayARN = NFSFileShareInfo.AddMember("GatewayARN", _GatewayARN)
-
-	NFSFileShareInfo_EncryptionType = NFSFileShareInfo.AddMember("EncryptionType", EncryptionType)
-
-	NFSFileShareInfo_KMSEncrypted = NFSFileShareInfo.AddMember("KMSEncrypted", _Boolean2)
-
-	NFSFileShareInfo_KMSKey = NFSFileShareInfo.AddMember("KMSKey", _KMSKey)
-
-	NFSFileShareInfo_Path = NFSFileShareInfo.AddMember("Path", _Path)
-
-	NFSFileShareInfo_Role = NFSFileShareInfo.AddMember("Role", _Role)
-
-	NFSFileShareInfo_LocationARN = NFSFileShareInfo.AddMember("LocationARN", _LocationARN)
-
-	NFSFileShareInfo_DefaultStorageClass = NFSFileShareInfo.AddMember("DefaultStorageClass", _StorageClass)
-
-	NFSFileShareInfo_ObjectACL = NFSFileShareInfo.AddMember("ObjectACL", ObjectACL)
-
-	NFSFileShareInfo_ClientList = NFSFileShareInfo.AddMember("ClientList", _FileShareClientList)
-
-	NFSFileShareInfo_Squash = NFSFileShareInfo.AddMember("Squash", _Squash)
-
-	NFSFileShareInfo_ReadOnly = NFSFileShareInfo.AddMember("ReadOnly", _Boolean)
-
-	NFSFileShareInfo_GuessMIMETypeEnabled = NFSFileShareInfo.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	NFSFileShareInfo_RequesterPays = NFSFileShareInfo.AddMember("RequesterPays", _Boolean)
-
-	NFSFileShareInfo_Tags = NFSFileShareInfo.AddMember("Tags", _Tags)
-
-	NFSFileShareInfo_FileShareName = NFSFileShareInfo.AddMember("FileShareName", _FileShareName)
-
-	NFSFileShareInfo_CacheAttributes = NFSFileShareInfo.AddMember("CacheAttributes", CacheAttributes)
-
-	NFSFileShareInfo_NotificationPolicy = NFSFileShareInfo.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	NFSFileShareInfo_VPCEndpointDNSName = NFSFileShareInfo.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	NFSFileShareInfo_BucketRegion = NFSFileShareInfo.AddMember("BucketRegion", _RegionId)
-
-	NFSFileShareInfo_AuditDestinationARN = NFSFileShareInfo.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	_NFSFileShareInfoList_member = _NFSFileShareInfoList.AddMember("member", NFSFileShareInfo)
-
-	_PoolARNs_member = _PoolARNs.AddMember("member", _PoolARN)
-
-	TapeStorageClass_DEEP_ARCHIVE = TapeStorageClass.AddMember("DEEP_ARCHIVE", smithyprelude.Unit)
-
-	TapeStorageClass_GLACIER = TapeStorageClass.AddMember("GLACIER", smithyprelude.Unit)
-
-	RetentionLockType_COMPLIANCE = RetentionLockType.AddMember("COMPLIANCE", smithyprelude.Unit)
-
-	RetentionLockType_GOVERNANCE = RetentionLockType.AddMember("GOVERNANCE", smithyprelude.Unit)
-
-	RetentionLockType_NONE = RetentionLockType.AddMember("NONE", smithyprelude.Unit)
-
-	PoolStatus_ACTIVE = PoolStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	PoolStatus_DELETED = PoolStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	PoolInfo_PoolARN = PoolInfo.AddMember("PoolARN", _PoolARN)
-
-	PoolInfo_PoolName = PoolInfo.AddMember("PoolName", _PoolName)
-
-	PoolInfo_StorageClass = PoolInfo.AddMember("StorageClass", TapeStorageClass)
-
-	PoolInfo_RetentionLockType = PoolInfo.AddMember("RetentionLockType", RetentionLockType)
-
-	PoolInfo_RetentionLockTimeInDays = PoolInfo.AddMember("RetentionLockTimeInDays", _RetentionLockTimeInDays)
-
-	PoolInfo_PoolStatus = PoolInfo.AddMember("PoolStatus", PoolStatus)
-
-	_PoolInfos_member = _PoolInfos.AddMember("member", PoolInfo)
-
-	ServiceUnavailableError_message = ServiceUnavailableError.AddMember("message", _string)
-
-	ServiceUnavailableError_error = ServiceUnavailableError.AddMember("error", StorageGatewayError)
-
-	_UserList_member = _UserList.AddMember("member", _UserListUser)
-
-	SMBFileShareInfo_FileShareARN = SMBFileShareInfo.AddMember("FileShareARN", _FileShareARN)
-
-	SMBFileShareInfo_FileShareId = SMBFileShareInfo.AddMember("FileShareId", _FileShareId)
-
-	SMBFileShareInfo_FileShareStatus = SMBFileShareInfo.AddMember("FileShareStatus", _FileShareStatus)
-
-	SMBFileShareInfo_GatewayARN = SMBFileShareInfo.AddMember("GatewayARN", _GatewayARN)
-
-	SMBFileShareInfo_EncryptionType = SMBFileShareInfo.AddMember("EncryptionType", EncryptionType)
-
-	SMBFileShareInfo_KMSEncrypted = SMBFileShareInfo.AddMember("KMSEncrypted", _Boolean2)
-
-	SMBFileShareInfo_KMSKey = SMBFileShareInfo.AddMember("KMSKey", _KMSKey)
-
-	SMBFileShareInfo_Path = SMBFileShareInfo.AddMember("Path", _Path)
-
-	SMBFileShareInfo_Role = SMBFileShareInfo.AddMember("Role", _Role)
-
-	SMBFileShareInfo_LocationARN = SMBFileShareInfo.AddMember("LocationARN", _LocationARN)
-
-	SMBFileShareInfo_DefaultStorageClass = SMBFileShareInfo.AddMember("DefaultStorageClass", _StorageClass)
-
-	SMBFileShareInfo_ObjectACL = SMBFileShareInfo.AddMember("ObjectACL", ObjectACL)
-
-	SMBFileShareInfo_ReadOnly = SMBFileShareInfo.AddMember("ReadOnly", _Boolean)
-
-	SMBFileShareInfo_GuessMIMETypeEnabled = SMBFileShareInfo.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	SMBFileShareInfo_RequesterPays = SMBFileShareInfo.AddMember("RequesterPays", _Boolean)
-
-	SMBFileShareInfo_SMBACLEnabled = SMBFileShareInfo.AddMember("SMBACLEnabled", _Boolean)
-
-	SMBFileShareInfo_AccessBasedEnumeration = SMBFileShareInfo.AddMember("AccessBasedEnumeration", _Boolean)
-
-	SMBFileShareInfo_AdminUserList = SMBFileShareInfo.AddMember("AdminUserList", _UserList)
-
-	SMBFileShareInfo_ValidUserList = SMBFileShareInfo.AddMember("ValidUserList", _UserList)
-
-	SMBFileShareInfo_InvalidUserList = SMBFileShareInfo.AddMember("InvalidUserList", _UserList)
-
-	SMBFileShareInfo_AuditDestinationARN = SMBFileShareInfo.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	SMBFileShareInfo_Authentication = SMBFileShareInfo.AddMember("Authentication", _Authentication)
-
-	SMBFileShareInfo_CaseSensitivity = SMBFileShareInfo.AddMember("CaseSensitivity", CaseSensitivity)
-
-	SMBFileShareInfo_Tags = SMBFileShareInfo.AddMember("Tags", _Tags)
-
-	SMBFileShareInfo_FileShareName = SMBFileShareInfo.AddMember("FileShareName", _FileShareName)
-
-	SMBFileShareInfo_CacheAttributes = SMBFileShareInfo.AddMember("CacheAttributes", CacheAttributes)
-
-	SMBFileShareInfo_NotificationPolicy = SMBFileShareInfo.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	SMBFileShareInfo_VPCEndpointDNSName = SMBFileShareInfo.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	SMBFileShareInfo_BucketRegion = SMBFileShareInfo.AddMember("BucketRegion", _RegionId)
-
-	SMBFileShareInfo_OplocksEnabled = SMBFileShareInfo.AddMember("OplocksEnabled", _Boolean)
-
-	_SMBFileShareInfoList_member = _SMBFileShareInfoList.AddMember("member", SMBFileShareInfo)
-
-	SMBLocalGroups_GatewayAdmins = SMBLocalGroups.AddMember("GatewayAdmins", _UserList)
-
-	SMBSecurityStrategy_ClientSpecified = SMBSecurityStrategy.AddMember("ClientSpecified", smithyprelude.Unit)
-
-	SMBSecurityStrategy_MandatorySigning = SMBSecurityStrategy.AddMember("MandatorySigning", smithyprelude.Unit)
-
-	SMBSecurityStrategy_MandatoryEncryption = SMBSecurityStrategy.AddMember("MandatoryEncryption", smithyprelude.Unit)
-
-	SMBSecurityStrategy_MandatoryEncryptionNoAes128 = SMBSecurityStrategy.AddMember("MandatoryEncryptionNoAes128", smithyprelude.Unit)
-
-	SoftwareUpdatePreferences_AutomaticUpdatePolicy = SoftwareUpdatePreferences.AddMember("AutomaticUpdatePolicy", AutomaticUpdatePolicy)
-
-	StorediSCSIVolume_VolumeARN = StorediSCSIVolume.AddMember("VolumeARN", _VolumeARN)
-
-	StorediSCSIVolume_VolumeId = StorediSCSIVolume.AddMember("VolumeId", _VolumeId)
-
-	StorediSCSIVolume_VolumeType = StorediSCSIVolume.AddMember("VolumeType", _VolumeType)
-
-	StorediSCSIVolume_VolumeStatus = StorediSCSIVolume.AddMember("VolumeStatus", _VolumeStatus)
-
-	StorediSCSIVolume_VolumeAttachmentStatus = StorediSCSIVolume.AddMember("VolumeAttachmentStatus", _VolumeAttachmentStatus)
-
-	StorediSCSIVolume_VolumeSizeInBytes = StorediSCSIVolume.AddMember("VolumeSizeInBytes", _long)
-
-	StorediSCSIVolume_VolumeProgress = StorediSCSIVolume.AddMember("VolumeProgress", _DoubleObject)
-
-	StorediSCSIVolume_VolumeDiskId = StorediSCSIVolume.AddMember("VolumeDiskId", _DiskId)
-
-	StorediSCSIVolume_SourceSnapshotId = StorediSCSIVolume.AddMember("SourceSnapshotId", _SnapshotId)
-
-	StorediSCSIVolume_PreservedExistingData = StorediSCSIVolume.AddMember("PreservedExistingData", _Boolean2)
-
-	StorediSCSIVolume_VolumeiSCSIAttributes = StorediSCSIVolume.AddMember("VolumeiSCSIAttributes", VolumeiSCSIAttributes)
-
-	StorediSCSIVolume_CreatedDate = StorediSCSIVolume.AddMember("CreatedDate", _CreatedDate)
-
-	StorediSCSIVolume_VolumeUsedInBytes = StorediSCSIVolume.AddMember("VolumeUsedInBytes", _VolumeUsedInBytes)
-
-	StorediSCSIVolume_KMSKey = StorediSCSIVolume.AddMember("KMSKey", _KMSKey)
-
-	StorediSCSIVolume_TargetName = StorediSCSIVolume.AddMember("TargetName", _TargetName)
-
-	_StorediSCSIVolumes_member = _StorediSCSIVolumes.AddMember("member", StorediSCSIVolume)
-
-	_SupportedGatewayCapacities_member = _SupportedGatewayCapacities.AddMember("member", GatewayCapacity)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	Tape_TapeARN = Tape.AddMember("TapeARN", _TapeARN)
-
-	Tape_TapeBarcode = Tape.AddMember("TapeBarcode", _TapeBarcode)
-
-	Tape_TapeCreatedDate = Tape.AddMember("TapeCreatedDate", _Time)
-
-	Tape_TapeSizeInBytes = Tape.AddMember("TapeSizeInBytes", _TapeSize)
-
-	Tape_TapeStatus = Tape.AddMember("TapeStatus", _TapeStatus)
-
-	Tape_VTLDevice = Tape.AddMember("VTLDevice", _VTLDeviceARN)
-
-	Tape_Progress = Tape.AddMember("Progress", _DoubleObject)
-
-	Tape_TapeUsedInBytes = Tape.AddMember("TapeUsedInBytes", _TapeUsage)
-
-	Tape_KMSKey = Tape.AddMember("KMSKey", _KMSKey)
-
-	Tape_PoolId = Tape.AddMember("PoolId", _PoolId)
-
-	Tape_Worm = Tape.AddMember("Worm", _Boolean2)
-
-	Tape_RetentionStartDate = Tape.AddMember("RetentionStartDate", _Time)
-
-	Tape_PoolEntryDate = Tape.AddMember("PoolEntryDate", _Time)
-
-	TapeArchive_TapeARN = TapeArchive.AddMember("TapeARN", _TapeARN)
-
-	TapeArchive_TapeBarcode = TapeArchive.AddMember("TapeBarcode", _TapeBarcode)
-
-	TapeArchive_TapeCreatedDate = TapeArchive.AddMember("TapeCreatedDate", _Time)
-
-	TapeArchive_TapeSizeInBytes = TapeArchive.AddMember("TapeSizeInBytes", _TapeSize)
-
-	TapeArchive_CompletionTime = TapeArchive.AddMember("CompletionTime", _Time)
-
-	TapeArchive_RetrievedTo = TapeArchive.AddMember("RetrievedTo", _GatewayARN)
-
-	TapeArchive_TapeStatus = TapeArchive.AddMember("TapeStatus", _TapeArchiveStatus)
-
-	TapeArchive_TapeUsedInBytes = TapeArchive.AddMember("TapeUsedInBytes", _TapeUsage)
-
-	TapeArchive_KMSKey = TapeArchive.AddMember("KMSKey", _KMSKey)
-
-	TapeArchive_PoolId = TapeArchive.AddMember("PoolId", _PoolId)
-
-	TapeArchive_Worm = TapeArchive.AddMember("Worm", _Boolean2)
-
-	TapeArchive_RetentionStartDate = TapeArchive.AddMember("RetentionStartDate", _Time)
-
-	TapeArchive_PoolEntryDate = TapeArchive.AddMember("PoolEntryDate", _Time)
-
-	_TapeArchives_member = _TapeArchives.AddMember("member", TapeArchive)
-
-	_TapeARNs_member = _TapeARNs.AddMember("member", _TapeARN)
-
-	TapeInfo_TapeARN = TapeInfo.AddMember("TapeARN", _TapeARN)
-
-	TapeInfo_TapeBarcode = TapeInfo.AddMember("TapeBarcode", _TapeBarcode)
-
-	TapeInfo_TapeSizeInBytes = TapeInfo.AddMember("TapeSizeInBytes", _TapeSize)
-
-	TapeInfo_TapeStatus = TapeInfo.AddMember("TapeStatus", _TapeStatus)
-
-	TapeInfo_GatewayARN = TapeInfo.AddMember("GatewayARN", _GatewayARN)
-
-	TapeInfo_PoolId = TapeInfo.AddMember("PoolId", _PoolId)
-
-	TapeInfo_RetentionStartDate = TapeInfo.AddMember("RetentionStartDate", _Time)
-
-	TapeInfo_PoolEntryDate = TapeInfo.AddMember("PoolEntryDate", _Time)
-
-	_TapeInfos_member = _TapeInfos.AddMember("member", TapeInfo)
-
-	TapeRecoveryPointInfo_TapeARN = TapeRecoveryPointInfo.AddMember("TapeARN", _TapeARN)
-
-	TapeRecoveryPointInfo_TapeRecoveryPointTime = TapeRecoveryPointInfo.AddMember("TapeRecoveryPointTime", _Time)
-
-	TapeRecoveryPointInfo_TapeSizeInBytes = TapeRecoveryPointInfo.AddMember("TapeSizeInBytes", _TapeSize)
-
-	TapeRecoveryPointInfo_TapeStatus = TapeRecoveryPointInfo.AddMember("TapeStatus", _TapeRecoveryPointStatus)
-
-	_TapeRecoveryPointInfos_member = _TapeRecoveryPointInfos.AddMember("member", TapeRecoveryPointInfo)
-
-	_Tapes_member = _Tapes.AddMember("member", Tape)
-
-	_VolumeARNs_member = _VolumeARNs.AddMember("member", _VolumeARN)
-
-	VolumeInfo_VolumeARN = VolumeInfo.AddMember("VolumeARN", _VolumeARN)
-
-	VolumeInfo_VolumeId = VolumeInfo.AddMember("VolumeId", _VolumeId)
-
-	VolumeInfo_GatewayARN = VolumeInfo.AddMember("GatewayARN", _GatewayARN)
-
-	VolumeInfo_GatewayId = VolumeInfo.AddMember("GatewayId", _GatewayId)
-
-	VolumeInfo_VolumeType = VolumeInfo.AddMember("VolumeType", _VolumeType)
-
-	VolumeInfo_VolumeSizeInBytes = VolumeInfo.AddMember("VolumeSizeInBytes", _long)
-
-	VolumeInfo_VolumeAttachmentStatus = VolumeInfo.AddMember("VolumeAttachmentStatus", _VolumeAttachmentStatus)
-
-	_VolumeInfos_member = _VolumeInfos.AddMember("member", VolumeInfo)
-
-	VolumeRecoveryPointInfo_VolumeARN = VolumeRecoveryPointInfo.AddMember("VolumeARN", _VolumeARN)
-
-	VolumeRecoveryPointInfo_VolumeSizeInBytes = VolumeRecoveryPointInfo.AddMember("VolumeSizeInBytes", _long)
-
-	VolumeRecoveryPointInfo_VolumeUsageInBytes = VolumeRecoveryPointInfo.AddMember("VolumeUsageInBytes", _long)
-
-	VolumeRecoveryPointInfo_VolumeRecoveryPointTime = VolumeRecoveryPointInfo.AddMember("VolumeRecoveryPointTime", _string)
-
-	_VolumeRecoveryPointInfos_member = _VolumeRecoveryPointInfos.AddMember("member", VolumeRecoveryPointInfo)
-
-	VTLDevice_VTLDeviceARN = VTLDevice.AddMember("VTLDeviceARN", _VTLDeviceARN)
-
-	VTLDevice_VTLDeviceType = VTLDevice.AddMember("VTLDeviceType", _VTLDeviceType)
-
-	VTLDevice_VTLDeviceVendor = VTLDevice.AddMember("VTLDeviceVendor", _VTLDeviceVendor)
-
-	VTLDevice_VTLDeviceProductIdentifier = VTLDevice.AddMember("VTLDeviceProductIdentifier", _VTLDeviceProductIdentifier)
-
-	VTLDevice_DeviceiSCSIAttributes = VTLDevice.AddMember("DeviceiSCSIAttributes", DeviceiSCSIAttributes)
-
-	_VTLDeviceARNs_member = _VTLDeviceARNs.AddMember("member", _VTLDeviceARN)
-
-	_VTLDevices_member = _VTLDevices.AddMember("member", VTLDevice)
-
-	ActivateGatewayInput_ActivationKey = ActivateGatewayInput.AddMember("ActivationKey", _ActivationKey)
-
-	ActivateGatewayInput_GatewayName = ActivateGatewayInput.AddMember("GatewayName", _GatewayName)
-
-	ActivateGatewayInput_GatewayTimezone = ActivateGatewayInput.AddMember("GatewayTimezone", _GatewayTimezone)
-
-	ActivateGatewayInput_GatewayRegion = ActivateGatewayInput.AddMember("GatewayRegion", _RegionId)
-
-	ActivateGatewayInput_GatewayType = ActivateGatewayInput.AddMember("GatewayType", _GatewayType)
-
-	ActivateGatewayInput_TapeDriveType = ActivateGatewayInput.AddMember("TapeDriveType", _TapeDriveType)
-
-	ActivateGatewayInput_MediumChangerType = ActivateGatewayInput.AddMember("MediumChangerType", _MediumChangerType)
-
-	ActivateGatewayInput_Tags = ActivateGatewayInput.AddMember("Tags", _Tags)
-
-	ActivateGatewayOutput_GatewayARN = ActivateGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	AddCacheInput_GatewayARN = AddCacheInput.AddMember("GatewayARN", _GatewayARN)
-
-	AddCacheInput_DiskIds = AddCacheInput.AddMember("DiskIds", _DiskIds)
-
-	AddCacheOutput_GatewayARN = AddCacheOutput.AddMember("GatewayARN", _GatewayARN)
-
-	AddTagsToResourceInput_ResourceARN = AddTagsToResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	AddTagsToResourceInput_Tags = AddTagsToResourceInput.AddMember("Tags", _Tags)
-
-	AddTagsToResourceOutput_ResourceARN = AddTagsToResourceOutput.AddMember("ResourceARN", _ResourceARN)
-
-	AddUploadBufferInput_GatewayARN = AddUploadBufferInput.AddMember("GatewayARN", _GatewayARN)
-
-	AddUploadBufferInput_DiskIds = AddUploadBufferInput.AddMember("DiskIds", _DiskIds)
-
-	AddUploadBufferOutput_GatewayARN = AddUploadBufferOutput.AddMember("GatewayARN", _GatewayARN)
-
-	AddWorkingStorageInput_GatewayARN = AddWorkingStorageInput.AddMember("GatewayARN", _GatewayARN)
-
-	AddWorkingStorageInput_DiskIds = AddWorkingStorageInput.AddMember("DiskIds", _DiskIds)
-
-	AddWorkingStorageOutput_GatewayARN = AddWorkingStorageOutput.AddMember("GatewayARN", _GatewayARN)
-
-	AssignTapePoolInput_TapeARN = AssignTapePoolInput.AddMember("TapeARN", _TapeARN)
-
-	AssignTapePoolInput_PoolId = AssignTapePoolInput.AddMember("PoolId", _PoolId)
-
-	AssignTapePoolInput_BypassGovernanceRetention = AssignTapePoolInput.AddMember("BypassGovernanceRetention", _Boolean2)
-
-	AssignTapePoolOutput_TapeARN = AssignTapePoolOutput.AddMember("TapeARN", _TapeARN)
-
-	AssociateFileSystemInput_UserName = AssociateFileSystemInput.AddMember("UserName", _DomainUserName)
-
-	AssociateFileSystemInput_Password = AssociateFileSystemInput.AddMember("Password", _DomainUserPassword)
-
-	AssociateFileSystemInput_ClientToken = AssociateFileSystemInput.AddMember("ClientToken", _ClientToken)
-
-	AssociateFileSystemInput_GatewayARN = AssociateFileSystemInput.AddMember("GatewayARN", _GatewayARN)
-
-	AssociateFileSystemInput_LocationARN = AssociateFileSystemInput.AddMember("LocationARN", _FileSystemLocationARN)
-
-	AssociateFileSystemInput_Tags = AssociateFileSystemInput.AddMember("Tags", _Tags)
-
-	AssociateFileSystemInput_AuditDestinationARN = AssociateFileSystemInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	AssociateFileSystemInput_CacheAttributes = AssociateFileSystemInput.AddMember("CacheAttributes", CacheAttributes)
-
-	AssociateFileSystemInput_EndpointNetworkConfiguration = AssociateFileSystemInput.AddMember("EndpointNetworkConfiguration", EndpointNetworkConfiguration)
-
-	AssociateFileSystemOutput_FileSystemAssociationARN = AssociateFileSystemOutput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	AttachVolumeInput_GatewayARN = AttachVolumeInput.AddMember("GatewayARN", _GatewayARN)
-
-	AttachVolumeInput_TargetName = AttachVolumeInput.AddMember("TargetName", _TargetName)
-
-	AttachVolumeInput_VolumeARN = AttachVolumeInput.AddMember("VolumeARN", _VolumeARN)
-
-	AttachVolumeInput_NetworkInterfaceId = AttachVolumeInput.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	AttachVolumeInput_DiskId = AttachVolumeInput.AddMember("DiskId", _DiskId)
-
-	AttachVolumeOutput_VolumeARN = AttachVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	AttachVolumeOutput_TargetARN = AttachVolumeOutput.AddMember("TargetARN", _TargetARN)
-
-	CancelArchivalInput_GatewayARN = CancelArchivalInput.AddMember("GatewayARN", _GatewayARN)
-
-	CancelArchivalInput_TapeARN = CancelArchivalInput.AddMember("TapeARN", _TapeARN)
-
-	CancelArchivalOutput_TapeARN = CancelArchivalOutput.AddMember("TapeARN", _TapeARN)
-
-	CancelCacheReportInput_CacheReportARN = CancelCacheReportInput.AddMember("CacheReportARN", _CacheReportARN)
-
-	CancelCacheReportOutput_CacheReportARN = CancelCacheReportOutput.AddMember("CacheReportARN", _CacheReportARN)
-
-	CancelRetrievalInput_GatewayARN = CancelRetrievalInput.AddMember("GatewayARN", _GatewayARN)
-
-	CancelRetrievalInput_TapeARN = CancelRetrievalInput.AddMember("TapeARN", _TapeARN)
-
-	CancelRetrievalOutput_TapeARN = CancelRetrievalOutput.AddMember("TapeARN", _TapeARN)
-
-	CreateCachediSCSIVolumeInput_GatewayARN = CreateCachediSCSIVolumeInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateCachediSCSIVolumeInput_VolumeSizeInBytes = CreateCachediSCSIVolumeInput.AddMember("VolumeSizeInBytes", _long)
-
-	CreateCachediSCSIVolumeInput_SnapshotId = CreateCachediSCSIVolumeInput.AddMember("SnapshotId", _SnapshotId)
-
-	CreateCachediSCSIVolumeInput_TargetName = CreateCachediSCSIVolumeInput.AddMember("TargetName", _TargetName)
-
-	CreateCachediSCSIVolumeInput_SourceVolumeARN = CreateCachediSCSIVolumeInput.AddMember("SourceVolumeARN", _VolumeARN)
-
-	CreateCachediSCSIVolumeInput_NetworkInterfaceId = CreateCachediSCSIVolumeInput.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	CreateCachediSCSIVolumeInput_ClientToken = CreateCachediSCSIVolumeInput.AddMember("ClientToken", _ClientToken)
-
-	CreateCachediSCSIVolumeInput_KMSEncrypted = CreateCachediSCSIVolumeInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateCachediSCSIVolumeInput_KMSKey = CreateCachediSCSIVolumeInput.AddMember("KMSKey", _KMSKey)
-
-	CreateCachediSCSIVolumeInput_Tags = CreateCachediSCSIVolumeInput.AddMember("Tags", _Tags)
-
-	CreateCachediSCSIVolumeOutput_VolumeARN = CreateCachediSCSIVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateCachediSCSIVolumeOutput_TargetARN = CreateCachediSCSIVolumeOutput.AddMember("TargetARN", _TargetARN)
-
-	CreateNFSFileShareInput_ClientToken = CreateNFSFileShareInput.AddMember("ClientToken", _ClientToken)
-
-	CreateNFSFileShareInput_NFSFileShareDefaults = CreateNFSFileShareInput.AddMember("NFSFileShareDefaults", NFSFileShareDefaults)
-
-	CreateNFSFileShareInput_GatewayARN = CreateNFSFileShareInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateNFSFileShareInput_EncryptionType = CreateNFSFileShareInput.AddMember("EncryptionType", EncryptionType)
-
-	CreateNFSFileShareInput_KMSEncrypted = CreateNFSFileShareInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateNFSFileShareInput_KMSKey = CreateNFSFileShareInput.AddMember("KMSKey", _KMSKey)
-
-	CreateNFSFileShareInput_Role = CreateNFSFileShareInput.AddMember("Role", _Role)
-
-	CreateNFSFileShareInput_LocationARN = CreateNFSFileShareInput.AddMember("LocationARN", _LocationARN)
-
-	CreateNFSFileShareInput_DefaultStorageClass = CreateNFSFileShareInput.AddMember("DefaultStorageClass", _StorageClass)
-
-	CreateNFSFileShareInput_ObjectACL = CreateNFSFileShareInput.AddMember("ObjectACL", ObjectACL)
-
-	CreateNFSFileShareInput_ClientList = CreateNFSFileShareInput.AddMember("ClientList", _FileShareClientList)
-
-	CreateNFSFileShareInput_Squash = CreateNFSFileShareInput.AddMember("Squash", _Squash)
-
-	CreateNFSFileShareInput_ReadOnly = CreateNFSFileShareInput.AddMember("ReadOnly", _Boolean)
-
-	CreateNFSFileShareInput_GuessMIMETypeEnabled = CreateNFSFileShareInput.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	CreateNFSFileShareInput_RequesterPays = CreateNFSFileShareInput.AddMember("RequesterPays", _Boolean)
-
-	CreateNFSFileShareInput_Tags = CreateNFSFileShareInput.AddMember("Tags", _Tags)
-
-	CreateNFSFileShareInput_FileShareName = CreateNFSFileShareInput.AddMember("FileShareName", _FileShareName)
-
-	CreateNFSFileShareInput_CacheAttributes = CreateNFSFileShareInput.AddMember("CacheAttributes", CacheAttributes)
-
-	CreateNFSFileShareInput_NotificationPolicy = CreateNFSFileShareInput.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	CreateNFSFileShareInput_VPCEndpointDNSName = CreateNFSFileShareInput.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	CreateNFSFileShareInput_BucketRegion = CreateNFSFileShareInput.AddMember("BucketRegion", _RegionId)
-
-	CreateNFSFileShareInput_AuditDestinationARN = CreateNFSFileShareInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	CreateNFSFileShareOutput_FileShareARN = CreateNFSFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	CreateSMBFileShareInput_ClientToken = CreateSMBFileShareInput.AddMember("ClientToken", _ClientToken)
-
-	CreateSMBFileShareInput_GatewayARN = CreateSMBFileShareInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateSMBFileShareInput_EncryptionType = CreateSMBFileShareInput.AddMember("EncryptionType", EncryptionType)
-
-	CreateSMBFileShareInput_KMSEncrypted = CreateSMBFileShareInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateSMBFileShareInput_KMSKey = CreateSMBFileShareInput.AddMember("KMSKey", _KMSKey)
-
-	CreateSMBFileShareInput_Role = CreateSMBFileShareInput.AddMember("Role", _Role)
-
-	CreateSMBFileShareInput_LocationARN = CreateSMBFileShareInput.AddMember("LocationARN", _LocationARN)
-
-	CreateSMBFileShareInput_DefaultStorageClass = CreateSMBFileShareInput.AddMember("DefaultStorageClass", _StorageClass)
-
-	CreateSMBFileShareInput_ObjectACL = CreateSMBFileShareInput.AddMember("ObjectACL", ObjectACL)
-
-	CreateSMBFileShareInput_ReadOnly = CreateSMBFileShareInput.AddMember("ReadOnly", _Boolean)
-
-	CreateSMBFileShareInput_GuessMIMETypeEnabled = CreateSMBFileShareInput.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	CreateSMBFileShareInput_RequesterPays = CreateSMBFileShareInput.AddMember("RequesterPays", _Boolean)
-
-	CreateSMBFileShareInput_SMBACLEnabled = CreateSMBFileShareInput.AddMember("SMBACLEnabled", _Boolean)
-
-	CreateSMBFileShareInput_AccessBasedEnumeration = CreateSMBFileShareInput.AddMember("AccessBasedEnumeration", _Boolean)
-
-	CreateSMBFileShareInput_AdminUserList = CreateSMBFileShareInput.AddMember("AdminUserList", _UserList)
-
-	CreateSMBFileShareInput_ValidUserList = CreateSMBFileShareInput.AddMember("ValidUserList", _UserList)
-
-	CreateSMBFileShareInput_InvalidUserList = CreateSMBFileShareInput.AddMember("InvalidUserList", _UserList)
-
-	CreateSMBFileShareInput_AuditDestinationARN = CreateSMBFileShareInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	CreateSMBFileShareInput_Authentication = CreateSMBFileShareInput.AddMember("Authentication", _Authentication)
-
-	CreateSMBFileShareInput_CaseSensitivity = CreateSMBFileShareInput.AddMember("CaseSensitivity", CaseSensitivity)
-
-	CreateSMBFileShareInput_Tags = CreateSMBFileShareInput.AddMember("Tags", _Tags)
-
-	CreateSMBFileShareInput_FileShareName = CreateSMBFileShareInput.AddMember("FileShareName", _FileShareName)
-
-	CreateSMBFileShareInput_CacheAttributes = CreateSMBFileShareInput.AddMember("CacheAttributes", CacheAttributes)
-
-	CreateSMBFileShareInput_NotificationPolicy = CreateSMBFileShareInput.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	CreateSMBFileShareInput_VPCEndpointDNSName = CreateSMBFileShareInput.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	CreateSMBFileShareInput_BucketRegion = CreateSMBFileShareInput.AddMember("BucketRegion", _RegionId)
-
-	CreateSMBFileShareInput_OplocksEnabled = CreateSMBFileShareInput.AddMember("OplocksEnabled", _Boolean)
-
-	CreateSMBFileShareOutput_FileShareARN = CreateSMBFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	CreateSnapshotFromVolumeRecoveryPointInput_VolumeARN = CreateSnapshotFromVolumeRecoveryPointInput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription = CreateSnapshotFromVolumeRecoveryPointInput.AddMember("SnapshotDescription", _SnapshotDescription)
-
-	CreateSnapshotFromVolumeRecoveryPointInput_Tags = CreateSnapshotFromVolumeRecoveryPointInput.AddMember("Tags", _Tags)
-
-	CreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId = CreateSnapshotFromVolumeRecoveryPointOutput.AddMember("SnapshotId", _SnapshotId)
-
-	CreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN = CreateSnapshotFromVolumeRecoveryPointOutput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime = CreateSnapshotFromVolumeRecoveryPointOutput.AddMember("VolumeRecoveryPointTime", _string)
-
-	CreateSnapshotInput_VolumeARN = CreateSnapshotInput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateSnapshotInput_SnapshotDescription = CreateSnapshotInput.AddMember("SnapshotDescription", _SnapshotDescription)
-
-	CreateSnapshotInput_Tags = CreateSnapshotInput.AddMember("Tags", _Tags)
-
-	CreateSnapshotOutput_VolumeARN = CreateSnapshotOutput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateSnapshotOutput_SnapshotId = CreateSnapshotOutput.AddMember("SnapshotId", _SnapshotId)
-
-	CreateStorediSCSIVolumeInput_GatewayARN = CreateStorediSCSIVolumeInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateStorediSCSIVolumeInput_DiskId = CreateStorediSCSIVolumeInput.AddMember("DiskId", _DiskId)
-
-	CreateStorediSCSIVolumeInput_SnapshotId = CreateStorediSCSIVolumeInput.AddMember("SnapshotId", _SnapshotId)
-
-	CreateStorediSCSIVolumeInput_PreserveExistingData = CreateStorediSCSIVolumeInput.AddMember("PreserveExistingData", _Boolean2)
-
-	CreateStorediSCSIVolumeInput_TargetName = CreateStorediSCSIVolumeInput.AddMember("TargetName", _TargetName)
-
-	CreateStorediSCSIVolumeInput_NetworkInterfaceId = CreateStorediSCSIVolumeInput.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	CreateStorediSCSIVolumeInput_KMSEncrypted = CreateStorediSCSIVolumeInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateStorediSCSIVolumeInput_KMSKey = CreateStorediSCSIVolumeInput.AddMember("KMSKey", _KMSKey)
-
-	CreateStorediSCSIVolumeInput_Tags = CreateStorediSCSIVolumeInput.AddMember("Tags", _Tags)
-
-	CreateStorediSCSIVolumeOutput_VolumeARN = CreateStorediSCSIVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateStorediSCSIVolumeOutput_VolumeSizeInBytes = CreateStorediSCSIVolumeOutput.AddMember("VolumeSizeInBytes", _long)
-
-	CreateStorediSCSIVolumeOutput_TargetARN = CreateStorediSCSIVolumeOutput.AddMember("TargetARN", _TargetARN)
-
-	CreateTapePoolInput_PoolName = CreateTapePoolInput.AddMember("PoolName", _PoolName)
-
-	CreateTapePoolInput_StorageClass = CreateTapePoolInput.AddMember("StorageClass", TapeStorageClass)
-
-	CreateTapePoolInput_RetentionLockType = CreateTapePoolInput.AddMember("RetentionLockType", RetentionLockType)
-
-	CreateTapePoolInput_RetentionLockTimeInDays = CreateTapePoolInput.AddMember("RetentionLockTimeInDays", _RetentionLockTimeInDays)
-
-	CreateTapePoolInput_Tags = CreateTapePoolInput.AddMember("Tags", _Tags)
-
-	CreateTapePoolOutput_PoolARN = CreateTapePoolOutput.AddMember("PoolARN", _PoolARN)
-
-	CreateTapesInput_GatewayARN = CreateTapesInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateTapesInput_TapeSizeInBytes = CreateTapesInput.AddMember("TapeSizeInBytes", _TapeSize)
-
-	CreateTapesInput_ClientToken = CreateTapesInput.AddMember("ClientToken", _ClientToken)
-
-	CreateTapesInput_NumTapesToCreate = CreateTapesInput.AddMember("NumTapesToCreate", _NumTapesToCreate)
-
-	CreateTapesInput_TapeBarcodePrefix = CreateTapesInput.AddMember("TapeBarcodePrefix", _TapeBarcodePrefix)
-
-	CreateTapesInput_KMSEncrypted = CreateTapesInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateTapesInput_KMSKey = CreateTapesInput.AddMember("KMSKey", _KMSKey)
-
-	CreateTapesInput_PoolId = CreateTapesInput.AddMember("PoolId", _PoolId)
-
-	CreateTapesInput_Worm = CreateTapesInput.AddMember("Worm", _Boolean2)
-
-	CreateTapesInput_Tags = CreateTapesInput.AddMember("Tags", _Tags)
-
-	CreateTapesOutput_TapeARNs = CreateTapesOutput.AddMember("TapeARNs", _TapeARNs)
-
-	CreateTapeWithBarcodeInput_GatewayARN = CreateTapeWithBarcodeInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateTapeWithBarcodeInput_TapeSizeInBytes = CreateTapeWithBarcodeInput.AddMember("TapeSizeInBytes", _TapeSize)
-
-	CreateTapeWithBarcodeInput_TapeBarcode = CreateTapeWithBarcodeInput.AddMember("TapeBarcode", _TapeBarcode)
-
-	CreateTapeWithBarcodeInput_KMSEncrypted = CreateTapeWithBarcodeInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateTapeWithBarcodeInput_KMSKey = CreateTapeWithBarcodeInput.AddMember("KMSKey", _KMSKey)
-
-	CreateTapeWithBarcodeInput_PoolId = CreateTapeWithBarcodeInput.AddMember("PoolId", _PoolId)
-
-	CreateTapeWithBarcodeInput_Worm = CreateTapeWithBarcodeInput.AddMember("Worm", _Boolean2)
-
-	CreateTapeWithBarcodeInput_Tags = CreateTapeWithBarcodeInput.AddMember("Tags", _Tags)
-
-	CreateTapeWithBarcodeOutput_TapeARN = CreateTapeWithBarcodeOutput.AddMember("TapeARN", _TapeARN)
-
-	DeleteAutomaticTapeCreationPolicyInput_GatewayARN = DeleteAutomaticTapeCreationPolicyInput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteAutomaticTapeCreationPolicyOutput_GatewayARN = DeleteAutomaticTapeCreationPolicyOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteBandwidthRateLimitInput_GatewayARN = DeleteBandwidthRateLimitInput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteBandwidthRateLimitInput_BandwidthType = DeleteBandwidthRateLimitInput.AddMember("BandwidthType", _BandwidthType)
-
-	DeleteBandwidthRateLimitOutput_GatewayARN = DeleteBandwidthRateLimitOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteCacheReportInput_CacheReportARN = DeleteCacheReportInput.AddMember("CacheReportARN", _CacheReportARN)
-
-	DeleteCacheReportOutput_CacheReportARN = DeleteCacheReportOutput.AddMember("CacheReportARN", _CacheReportARN)
-
-	DeleteChapCredentialsInput_TargetARN = DeleteChapCredentialsInput.AddMember("TargetARN", _TargetARN)
-
-	DeleteChapCredentialsInput_InitiatorName = DeleteChapCredentialsInput.AddMember("InitiatorName", _IqnName)
-
-	DeleteChapCredentialsOutput_TargetARN = DeleteChapCredentialsOutput.AddMember("TargetARN", _TargetARN)
-
-	DeleteChapCredentialsOutput_InitiatorName = DeleteChapCredentialsOutput.AddMember("InitiatorName", _IqnName)
-
-	DeleteFileShareInput_FileShareARN = DeleteFileShareInput.AddMember("FileShareARN", _FileShareARN)
-
-	DeleteFileShareInput_ForceDelete = DeleteFileShareInput.AddMember("ForceDelete", _Boolean2)
-
-	DeleteFileShareOutput_FileShareARN = DeleteFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	DeleteGatewayInput_GatewayARN = DeleteGatewayInput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteGatewayOutput_GatewayARN = DeleteGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteSnapshotScheduleInput_VolumeARN = DeleteSnapshotScheduleInput.AddMember("VolumeARN", _VolumeARN)
-
-	DeleteSnapshotScheduleOutput_VolumeARN = DeleteSnapshotScheduleOutput.AddMember("VolumeARN", _VolumeARN)
-
-	DeleteTapeArchiveInput_TapeARN = DeleteTapeArchiveInput.AddMember("TapeARN", _TapeARN)
-
-	DeleteTapeArchiveInput_BypassGovernanceRetention = DeleteTapeArchiveInput.AddMember("BypassGovernanceRetention", _Boolean2)
-
-	DeleteTapeArchiveOutput_TapeARN = DeleteTapeArchiveOutput.AddMember("TapeARN", _TapeARN)
-
-	DeleteTapeInput_GatewayARN = DeleteTapeInput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteTapeInput_TapeARN = DeleteTapeInput.AddMember("TapeARN", _TapeARN)
-
-	DeleteTapeInput_BypassGovernanceRetention = DeleteTapeInput.AddMember("BypassGovernanceRetention", _Boolean2)
-
-	DeleteTapeOutput_TapeARN = DeleteTapeOutput.AddMember("TapeARN", _TapeARN)
-
-	DeleteTapePoolInput_PoolARN = DeleteTapePoolInput.AddMember("PoolARN", _PoolARN)
-
-	DeleteTapePoolOutput_PoolARN = DeleteTapePoolOutput.AddMember("PoolARN", _PoolARN)
-
-	DeleteVolumeInput_VolumeARN = DeleteVolumeInput.AddMember("VolumeARN", _VolumeARN)
-
-	DeleteVolumeOutput_VolumeARN = DeleteVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	DescribeAvailabilityMonitorTestInput_GatewayARN = DescribeAvailabilityMonitorTestInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeAvailabilityMonitorTestOutput_GatewayARN = DescribeAvailabilityMonitorTestOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeAvailabilityMonitorTestOutput_Status = DescribeAvailabilityMonitorTestOutput.AddMember("Status", AvailabilityMonitorTestStatus)
-
-	DescribeAvailabilityMonitorTestOutput_StartTime = DescribeAvailabilityMonitorTestOutput.AddMember("StartTime", _Time)
-
-	DescribeBandwidthRateLimitInput_GatewayARN = DescribeBandwidthRateLimitInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeBandwidthRateLimitOutput_GatewayARN = DescribeBandwidthRateLimitOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec = DescribeBandwidthRateLimitOutput.AddMember("AverageUploadRateLimitInBitsPerSec", _BandwidthUploadRateLimit)
-
-	DescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec = DescribeBandwidthRateLimitOutput.AddMember("AverageDownloadRateLimitInBitsPerSec", _BandwidthDownloadRateLimit)
-
-	DescribeBandwidthRateLimitScheduleInput_GatewayARN = DescribeBandwidthRateLimitScheduleInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeBandwidthRateLimitScheduleOutput_GatewayARN = DescribeBandwidthRateLimitScheduleOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = DescribeBandwidthRateLimitScheduleOutput.AddMember("BandwidthRateLimitIntervals", _BandwidthRateLimitIntervals)
-
-	DescribeCachediSCSIVolumesInput_VolumeARNs = DescribeCachediSCSIVolumesInput.AddMember("VolumeARNs", _VolumeARNs)
-
-	DescribeCachediSCSIVolumesOutput_CachediSCSIVolumes = DescribeCachediSCSIVolumesOutput.AddMember("CachediSCSIVolumes", _CachediSCSIVolumes)
-
-	DescribeCacheInput_GatewayARN = DescribeCacheInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeCacheOutput_GatewayARN = DescribeCacheOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeCacheOutput_DiskIds = DescribeCacheOutput.AddMember("DiskIds", _DiskIds)
-
-	DescribeCacheOutput_CacheAllocatedInBytes = DescribeCacheOutput.AddMember("CacheAllocatedInBytes", _long)
-
-	DescribeCacheOutput_CacheUsedPercentage = DescribeCacheOutput.AddMember("CacheUsedPercentage", _double)
-
-	DescribeCacheOutput_CacheDirtyPercentage = DescribeCacheOutput.AddMember("CacheDirtyPercentage", _double)
-
-	DescribeCacheOutput_CacheHitPercentage = DescribeCacheOutput.AddMember("CacheHitPercentage", _double)
-
-	DescribeCacheOutput_CacheMissPercentage = DescribeCacheOutput.AddMember("CacheMissPercentage", _double)
-
-	DescribeCacheReportInput_CacheReportARN = DescribeCacheReportInput.AddMember("CacheReportARN", _CacheReportARN)
-
-	DescribeCacheReportOutput_CacheReportInfo = DescribeCacheReportOutput.AddMember("CacheReportInfo", CacheReportInfo)
-
-	DescribeChapCredentialsInput_TargetARN = DescribeChapCredentialsInput.AddMember("TargetARN", _TargetARN)
-
-	DescribeChapCredentialsOutput_ChapCredentials = DescribeChapCredentialsOutput.AddMember("ChapCredentials", _ChapCredentials)
-
-	DescribeFileSystemAssociationsInput_FileSystemAssociationARNList = DescribeFileSystemAssociationsInput.AddMember("FileSystemAssociationARNList", _FileSystemAssociationARNList)
-
-	DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList = DescribeFileSystemAssociationsOutput.AddMember("FileSystemAssociationInfoList", _FileSystemAssociationInfoList)
-
-	DescribeGatewayInformationInput_GatewayARN = DescribeGatewayInformationInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeGatewayInformationOutput_GatewayARN = DescribeGatewayInformationOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeGatewayInformationOutput_GatewayId = DescribeGatewayInformationOutput.AddMember("GatewayId", _GatewayId)
-
-	DescribeGatewayInformationOutput_GatewayName = DescribeGatewayInformationOutput.AddMember("GatewayName", _string)
-
-	DescribeGatewayInformationOutput_GatewayTimezone = DescribeGatewayInformationOutput.AddMember("GatewayTimezone", _GatewayTimezone)
-
-	DescribeGatewayInformationOutput_GatewayState = DescribeGatewayInformationOutput.AddMember("GatewayState", _GatewayState)
-
-	DescribeGatewayInformationOutput_GatewayNetworkInterfaces = DescribeGatewayInformationOutput.AddMember("GatewayNetworkInterfaces", _GatewayNetworkInterfaces)
-
-	DescribeGatewayInformationOutput_GatewayType = DescribeGatewayInformationOutput.AddMember("GatewayType", _GatewayType)
-
-	DescribeGatewayInformationOutput_NextUpdateAvailabilityDate = DescribeGatewayInformationOutput.AddMember("NextUpdateAvailabilityDate", _NextUpdateAvailabilityDate)
-
-	DescribeGatewayInformationOutput_LastSoftwareUpdate = DescribeGatewayInformationOutput.AddMember("LastSoftwareUpdate", _LastSoftwareUpdate)
-
-	DescribeGatewayInformationOutput_Ec2InstanceId = DescribeGatewayInformationOutput.AddMember("Ec2InstanceId", _Ec2InstanceId)
-
-	DescribeGatewayInformationOutput_Ec2InstanceRegion = DescribeGatewayInformationOutput.AddMember("Ec2InstanceRegion", _Ec2InstanceRegion)
-
-	DescribeGatewayInformationOutput_Tags = DescribeGatewayInformationOutput.AddMember("Tags", _Tags)
-
-	DescribeGatewayInformationOutput_VPCEndpoint = DescribeGatewayInformationOutput.AddMember("VPCEndpoint", _string)
-
-	DescribeGatewayInformationOutput_CloudWatchLogGroupARN = DescribeGatewayInformationOutput.AddMember("CloudWatchLogGroupARN", _CloudWatchLogGroupARN)
-
-	DescribeGatewayInformationOutput_HostEnvironment = DescribeGatewayInformationOutput.AddMember("HostEnvironment", HostEnvironment)
-
-	DescribeGatewayInformationOutput_EndpointType = DescribeGatewayInformationOutput.AddMember("EndpointType", _EndpointType)
-
-	DescribeGatewayInformationOutput_SoftwareUpdatesEndDate = DescribeGatewayInformationOutput.AddMember("SoftwareUpdatesEndDate", _SoftwareUpdatesEndDate)
-
-	DescribeGatewayInformationOutput_DeprecationDate = DescribeGatewayInformationOutput.AddMember("DeprecationDate", _DeprecationDate)
-
-	DescribeGatewayInformationOutput_GatewayCapacity = DescribeGatewayInformationOutput.AddMember("GatewayCapacity", GatewayCapacity)
-
-	DescribeGatewayInformationOutput_SupportedGatewayCapacities = DescribeGatewayInformationOutput.AddMember("SupportedGatewayCapacities", _SupportedGatewayCapacities)
-
-	DescribeGatewayInformationOutput_HostEnvironmentId = DescribeGatewayInformationOutput.AddMember("HostEnvironmentId", _HostEnvironmentId)
-
-	DescribeGatewayInformationOutput_SoftwareVersion = DescribeGatewayInformationOutput.AddMember("SoftwareVersion", _SoftwareVersion)
-
-	DescribeMaintenanceStartTimeInput_GatewayARN = DescribeMaintenanceStartTimeInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeMaintenanceStartTimeOutput_GatewayARN = DescribeMaintenanceStartTimeOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeMaintenanceStartTimeOutput_HourOfDay = DescribeMaintenanceStartTimeOutput.AddMember("HourOfDay", _HourOfDay)
-
-	DescribeMaintenanceStartTimeOutput_MinuteOfHour = DescribeMaintenanceStartTimeOutput.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	DescribeMaintenanceStartTimeOutput_DayOfWeek = DescribeMaintenanceStartTimeOutput.AddMember("DayOfWeek", _DayOfWeek)
-
-	DescribeMaintenanceStartTimeOutput_DayOfMonth = DescribeMaintenanceStartTimeOutput.AddMember("DayOfMonth", _DayOfMonth)
-
-	DescribeMaintenanceStartTimeOutput_Timezone = DescribeMaintenanceStartTimeOutput.AddMember("Timezone", _GatewayTimezone)
-
-	DescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences = DescribeMaintenanceStartTimeOutput.AddMember("SoftwareUpdatePreferences", SoftwareUpdatePreferences)
-
-	DescribeNFSFileSharesInput_FileShareARNList = DescribeNFSFileSharesInput.AddMember("FileShareARNList", _FileShareARNList)
-
-	DescribeNFSFileSharesOutput_NFSFileShareInfoList = DescribeNFSFileSharesOutput.AddMember("NFSFileShareInfoList", _NFSFileShareInfoList)
-
-	DescribeSMBFileSharesInput_FileShareARNList = DescribeSMBFileSharesInput.AddMember("FileShareARNList", _FileShareARNList)
-
-	DescribeSMBFileSharesOutput_SMBFileShareInfoList = DescribeSMBFileSharesOutput.AddMember("SMBFileShareInfoList", _SMBFileShareInfoList)
-
-	DescribeSMBSettingsInput_GatewayARN = DescribeSMBSettingsInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeSMBSettingsOutput_GatewayARN = DescribeSMBSettingsOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeSMBSettingsOutput_DomainName = DescribeSMBSettingsOutput.AddMember("DomainName", _DomainName)
-
-	DescribeSMBSettingsOutput_ActiveDirectoryStatus = DescribeSMBSettingsOutput.AddMember("ActiveDirectoryStatus", ActiveDirectoryStatus)
-
-	DescribeSMBSettingsOutput_SMBGuestPasswordSet = DescribeSMBSettingsOutput.AddMember("SMBGuestPasswordSet", _Boolean)
-
-	DescribeSMBSettingsOutput_SMBSecurityStrategy = DescribeSMBSettingsOutput.AddMember("SMBSecurityStrategy", SMBSecurityStrategy)
-
-	DescribeSMBSettingsOutput_FileSharesVisible = DescribeSMBSettingsOutput.AddMember("FileSharesVisible", _Boolean)
-
-	DescribeSMBSettingsOutput_SMBLocalGroups = DescribeSMBSettingsOutput.AddMember("SMBLocalGroups", SMBLocalGroups)
-
-	DescribeSnapshotScheduleInput_VolumeARN = DescribeSnapshotScheduleInput.AddMember("VolumeARN", _VolumeARN)
-
-	DescribeSnapshotScheduleOutput_VolumeARN = DescribeSnapshotScheduleOutput.AddMember("VolumeARN", _VolumeARN)
-
-	DescribeSnapshotScheduleOutput_StartAt = DescribeSnapshotScheduleOutput.AddMember("StartAt", _HourOfDay)
-
-	DescribeSnapshotScheduleOutput_RecurrenceInHours = DescribeSnapshotScheduleOutput.AddMember("RecurrenceInHours", _RecurrenceInHours)
-
-	DescribeSnapshotScheduleOutput_Description = DescribeSnapshotScheduleOutput.AddMember("Description", _Description)
-
-	DescribeSnapshotScheduleOutput_Timezone = DescribeSnapshotScheduleOutput.AddMember("Timezone", _GatewayTimezone)
-
-	DescribeSnapshotScheduleOutput_Tags = DescribeSnapshotScheduleOutput.AddMember("Tags", _Tags)
-
-	DescribeStorediSCSIVolumesInput_VolumeARNs = DescribeStorediSCSIVolumesInput.AddMember("VolumeARNs", _VolumeARNs)
-
-	DescribeStorediSCSIVolumesOutput_StorediSCSIVolumes = DescribeStorediSCSIVolumesOutput.AddMember("StorediSCSIVolumes", _StorediSCSIVolumes)
-
-	DescribeTapeArchivesInput_TapeARNs = DescribeTapeArchivesInput.AddMember("TapeARNs", _TapeARNs)
-
-	DescribeTapeArchivesInput_Marker = DescribeTapeArchivesInput.AddMember("Marker", _Marker)
-
-	DescribeTapeArchivesInput_Limit = DescribeTapeArchivesInput.AddMember("Limit", _PositiveIntObject)
-
-	DescribeTapeArchivesOutput_TapeArchives = DescribeTapeArchivesOutput.AddMember("TapeArchives", _TapeArchives)
-
-	DescribeTapeArchivesOutput_Marker = DescribeTapeArchivesOutput.AddMember("Marker", _Marker)
-
-	DescribeTapeRecoveryPointsInput_GatewayARN = DescribeTapeRecoveryPointsInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeTapeRecoveryPointsInput_Marker = DescribeTapeRecoveryPointsInput.AddMember("Marker", _Marker)
-
-	DescribeTapeRecoveryPointsInput_Limit = DescribeTapeRecoveryPointsInput.AddMember("Limit", _PositiveIntObject)
-
-	DescribeTapeRecoveryPointsOutput_GatewayARN = DescribeTapeRecoveryPointsOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos = DescribeTapeRecoveryPointsOutput.AddMember("TapeRecoveryPointInfos", _TapeRecoveryPointInfos)
-
-	DescribeTapeRecoveryPointsOutput_Marker = DescribeTapeRecoveryPointsOutput.AddMember("Marker", _Marker)
-
-	DescribeTapesInput_GatewayARN = DescribeTapesInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeTapesInput_TapeARNs = DescribeTapesInput.AddMember("TapeARNs", _TapeARNs)
-
-	DescribeTapesInput_Marker = DescribeTapesInput.AddMember("Marker", _Marker)
-
-	DescribeTapesInput_Limit = DescribeTapesInput.AddMember("Limit", _PositiveIntObject)
-
-	DescribeTapesOutput_Tapes = DescribeTapesOutput.AddMember("Tapes", _Tapes)
-
-	DescribeTapesOutput_Marker = DescribeTapesOutput.AddMember("Marker", _Marker)
-
-	DescribeUploadBufferInput_GatewayARN = DescribeUploadBufferInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeUploadBufferOutput_GatewayARN = DescribeUploadBufferOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeUploadBufferOutput_DiskIds = DescribeUploadBufferOutput.AddMember("DiskIds", _DiskIds)
-
-	DescribeUploadBufferOutput_UploadBufferUsedInBytes = DescribeUploadBufferOutput.AddMember("UploadBufferUsedInBytes", _long)
-
-	DescribeUploadBufferOutput_UploadBufferAllocatedInBytes = DescribeUploadBufferOutput.AddMember("UploadBufferAllocatedInBytes", _long)
-
-	DescribeVTLDevicesInput_GatewayARN = DescribeVTLDevicesInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeVTLDevicesInput_VTLDeviceARNs = DescribeVTLDevicesInput.AddMember("VTLDeviceARNs", _VTLDeviceARNs)
-
-	DescribeVTLDevicesInput_Marker = DescribeVTLDevicesInput.AddMember("Marker", _Marker)
-
-	DescribeVTLDevicesInput_Limit = DescribeVTLDevicesInput.AddMember("Limit", _PositiveIntObject)
-
-	DescribeVTLDevicesOutput_GatewayARN = DescribeVTLDevicesOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeVTLDevicesOutput_VTLDevices = DescribeVTLDevicesOutput.AddMember("VTLDevices", _VTLDevices)
-
-	DescribeVTLDevicesOutput_Marker = DescribeVTLDevicesOutput.AddMember("Marker", _Marker)
-
-	DescribeWorkingStorageInput_GatewayARN = DescribeWorkingStorageInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeWorkingStorageOutput_GatewayARN = DescribeWorkingStorageOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeWorkingStorageOutput_DiskIds = DescribeWorkingStorageOutput.AddMember("DiskIds", _DiskIds)
-
-	DescribeWorkingStorageOutput_WorkingStorageUsedInBytes = DescribeWorkingStorageOutput.AddMember("WorkingStorageUsedInBytes", _long)
-
-	DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes = DescribeWorkingStorageOutput.AddMember("WorkingStorageAllocatedInBytes", _long)
-
-	DetachVolumeInput_VolumeARN = DetachVolumeInput.AddMember("VolumeARN", _VolumeARN)
-
-	DetachVolumeInput_ForceDetach = DetachVolumeInput.AddMember("ForceDetach", _Boolean)
-
-	DetachVolumeOutput_VolumeARN = DetachVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	DisableGatewayInput_GatewayARN = DisableGatewayInput.AddMember("GatewayARN", _GatewayARN)
-
-	DisableGatewayOutput_GatewayARN = DisableGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DisassociateFileSystemInput_FileSystemAssociationARN = DisassociateFileSystemInput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	DisassociateFileSystemInput_ForceDelete = DisassociateFileSystemInput.AddMember("ForceDelete", _Boolean2)
-
-	DisassociateFileSystemOutput_FileSystemAssociationARN = DisassociateFileSystemOutput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	EvictFilesFailingUploadInput_FileShareARN = EvictFilesFailingUploadInput.AddMember("FileShareARN", _FileShareARN)
-
-	EvictFilesFailingUploadInput_ForceRemove = EvictFilesFailingUploadInput.AddMember("ForceRemove", _Boolean2)
-
-	EvictFilesFailingUploadOutput_NotificationId = EvictFilesFailingUploadOutput.AddMember("NotificationId", _string)
-
-	JoinDomainInput_GatewayARN = JoinDomainInput.AddMember("GatewayARN", _GatewayARN)
-
-	JoinDomainInput_DomainName = JoinDomainInput.AddMember("DomainName", _DomainName)
-
-	JoinDomainInput_OrganizationalUnit = JoinDomainInput.AddMember("OrganizationalUnit", _OrganizationalUnit)
-
-	JoinDomainInput_DomainControllers = JoinDomainInput.AddMember("DomainControllers", _Hosts)
-
-	JoinDomainInput_TimeoutInSeconds = JoinDomainInput.AddMember("TimeoutInSeconds", _TimeoutInSeconds)
-
-	JoinDomainInput_UserName = JoinDomainInput.AddMember("UserName", _DomainUserName)
-
-	JoinDomainInput_Password = JoinDomainInput.AddMember("Password", _DomainUserPassword)
-
-	JoinDomainOutput_GatewayARN = JoinDomainOutput.AddMember("GatewayARN", _GatewayARN)
-
-	JoinDomainOutput_ActiveDirectoryStatus = JoinDomainOutput.AddMember("ActiveDirectoryStatus", ActiveDirectoryStatus)
-
-	ListAutomaticTapeCreationPoliciesInput_GatewayARN = ListAutomaticTapeCreationPoliciesInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos = ListAutomaticTapeCreationPoliciesOutput.AddMember("AutomaticTapeCreationPolicyInfos", _AutomaticTapeCreationPolicyInfos)
-
-	ListCacheReportsInput_Marker = ListCacheReportsInput.AddMember("Marker", _Marker)
-
-	ListCacheReportsOutput_CacheReportList = ListCacheReportsOutput.AddMember("CacheReportList", _CacheReportList)
-
-	ListCacheReportsOutput_Marker = ListCacheReportsOutput.AddMember("Marker", _Marker)
-
-	ListFileSharesInput_GatewayARN = ListFileSharesInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListFileSharesInput_Limit = ListFileSharesInput.AddMember("Limit", _PositiveIntObject)
-
-	ListFileSharesInput_Marker = ListFileSharesInput.AddMember("Marker", _Marker)
-
-	ListFileSharesOutput_Marker = ListFileSharesOutput.AddMember("Marker", _Marker)
-
-	ListFileSharesOutput_NextMarker = ListFileSharesOutput.AddMember("NextMarker", _Marker)
-
-	ListFileSharesOutput_FileShareInfoList = ListFileSharesOutput.AddMember("FileShareInfoList", _FileShareInfoList)
-
-	ListFileSystemAssociationsInput_GatewayARN = ListFileSystemAssociationsInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListFileSystemAssociationsInput_Limit = ListFileSystemAssociationsInput.AddMember("Limit", _PositiveIntObject)
-
-	ListFileSystemAssociationsInput_Marker = ListFileSystemAssociationsInput.AddMember("Marker", _Marker)
-
-	ListFileSystemAssociationsOutput_Marker = ListFileSystemAssociationsOutput.AddMember("Marker", _Marker)
-
-	ListFileSystemAssociationsOutput_NextMarker = ListFileSystemAssociationsOutput.AddMember("NextMarker", _Marker)
-
-	ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList = ListFileSystemAssociationsOutput.AddMember("FileSystemAssociationSummaryList", _FileSystemAssociationSummaryList)
-
-	ListGatewaysInput_Marker = ListGatewaysInput.AddMember("Marker", _Marker)
-
-	ListGatewaysInput_Limit = ListGatewaysInput.AddMember("Limit", _PositiveIntObject)
-
-	ListGatewaysOutput_Gateways = ListGatewaysOutput.AddMember("Gateways", _Gateways)
-
-	ListGatewaysOutput_Marker = ListGatewaysOutput.AddMember("Marker", _Marker)
-
-	ListLocalDisksInput_GatewayARN = ListLocalDisksInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListLocalDisksOutput_GatewayARN = ListLocalDisksOutput.AddMember("GatewayARN", _GatewayARN)
-
-	ListLocalDisksOutput_Disks = ListLocalDisksOutput.AddMember("Disks", _Disks)
-
-	ListTagsForResourceInput_ResourceARN = ListTagsForResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	ListTagsForResourceInput_Marker = ListTagsForResourceInput.AddMember("Marker", _Marker)
-
-	ListTagsForResourceInput_Limit = ListTagsForResourceInput.AddMember("Limit", _PositiveIntObject)
-
-	ListTagsForResourceOutput_ResourceARN = ListTagsForResourceOutput.AddMember("ResourceARN", _ResourceARN)
-
-	ListTagsForResourceOutput_Marker = ListTagsForResourceOutput.AddMember("Marker", _Marker)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _Tags)
-
-	ListTapePoolsInput_PoolARNs = ListTapePoolsInput.AddMember("PoolARNs", _PoolARNs)
-
-	ListTapePoolsInput_Marker = ListTapePoolsInput.AddMember("Marker", _Marker)
-
-	ListTapePoolsInput_Limit = ListTapePoolsInput.AddMember("Limit", _PositiveIntObject)
-
-	ListTapePoolsOutput_PoolInfos = ListTapePoolsOutput.AddMember("PoolInfos", _PoolInfos)
-
-	ListTapePoolsOutput_Marker = ListTapePoolsOutput.AddMember("Marker", _Marker)
-
-	ListTapesInput_TapeARNs = ListTapesInput.AddMember("TapeARNs", _TapeARNs)
-
-	ListTapesInput_Marker = ListTapesInput.AddMember("Marker", _Marker)
-
-	ListTapesInput_Limit = ListTapesInput.AddMember("Limit", _PositiveIntObject)
-
-	ListTapesOutput_TapeInfos = ListTapesOutput.AddMember("TapeInfos", _TapeInfos)
-
-	ListTapesOutput_Marker = ListTapesOutput.AddMember("Marker", _Marker)
-
-	ListVolumeInitiatorsInput_VolumeARN = ListVolumeInitiatorsInput.AddMember("VolumeARN", _VolumeARN)
-
-	ListVolumeInitiatorsOutput_Initiators = ListVolumeInitiatorsOutput.AddMember("Initiators", _Initiators)
-
-	ListVolumeRecoveryPointsInput_GatewayARN = ListVolumeRecoveryPointsInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListVolumeRecoveryPointsOutput_GatewayARN = ListVolumeRecoveryPointsOutput.AddMember("GatewayARN", _GatewayARN)
-
-	ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos = ListVolumeRecoveryPointsOutput.AddMember("VolumeRecoveryPointInfos", _VolumeRecoveryPointInfos)
-
-	ListVolumesInput_GatewayARN = ListVolumesInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListVolumesInput_Marker = ListVolumesInput.AddMember("Marker", _Marker)
-
-	ListVolumesInput_Limit = ListVolumesInput.AddMember("Limit", _PositiveIntObject)
-
-	ListVolumesOutput_GatewayARN = ListVolumesOutput.AddMember("GatewayARN", _GatewayARN)
-
-	ListVolumesOutput_Marker = ListVolumesOutput.AddMember("Marker", _Marker)
-
-	ListVolumesOutput_VolumeInfos = ListVolumesOutput.AddMember("VolumeInfos", _VolumeInfos)
-
-	NotifyWhenUploadedInput_FileShareARN = NotifyWhenUploadedInput.AddMember("FileShareARN", _FileShareARN)
-
-	NotifyWhenUploadedOutput_FileShareARN = NotifyWhenUploadedOutput.AddMember("FileShareARN", _FileShareARN)
-
-	NotifyWhenUploadedOutput_NotificationId = NotifyWhenUploadedOutput.AddMember("NotificationId", _NotificationId)
-
-	RefreshCacheInput_FileShareARN = RefreshCacheInput.AddMember("FileShareARN", _FileShareARN)
-
-	RefreshCacheInput_FolderList = RefreshCacheInput.AddMember("FolderList", _FolderList)
-
-	RefreshCacheInput_Recursive = RefreshCacheInput.AddMember("Recursive", _Boolean)
-
-	RefreshCacheOutput_FileShareARN = RefreshCacheOutput.AddMember("FileShareARN", _FileShareARN)
-
-	RefreshCacheOutput_NotificationId = RefreshCacheOutput.AddMember("NotificationId", _NotificationId)
-
-	RemoveTagsFromResourceInput_ResourceARN = RemoveTagsFromResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	RemoveTagsFromResourceInput_TagKeys = RemoveTagsFromResourceInput.AddMember("TagKeys", _TagKeys)
-
-	RemoveTagsFromResourceOutput_ResourceARN = RemoveTagsFromResourceOutput.AddMember("ResourceARN", _ResourceARN)
-
-	ResetCacheInput_GatewayARN = ResetCacheInput.AddMember("GatewayARN", _GatewayARN)
-
-	ResetCacheOutput_GatewayARN = ResetCacheOutput.AddMember("GatewayARN", _GatewayARN)
-
-	RetrieveTapeArchiveInput_TapeARN = RetrieveTapeArchiveInput.AddMember("TapeARN", _TapeARN)
-
-	RetrieveTapeArchiveInput_GatewayARN = RetrieveTapeArchiveInput.AddMember("GatewayARN", _GatewayARN)
-
-	RetrieveTapeArchiveOutput_TapeARN = RetrieveTapeArchiveOutput.AddMember("TapeARN", _TapeARN)
-
-	RetrieveTapeRecoveryPointInput_TapeARN = RetrieveTapeRecoveryPointInput.AddMember("TapeARN", _TapeARN)
-
-	RetrieveTapeRecoveryPointInput_GatewayARN = RetrieveTapeRecoveryPointInput.AddMember("GatewayARN", _GatewayARN)
-
-	RetrieveTapeRecoveryPointOutput_TapeARN = RetrieveTapeRecoveryPointOutput.AddMember("TapeARN", _TapeARN)
-
-	SetLocalConsolePasswordInput_GatewayARN = SetLocalConsolePasswordInput.AddMember("GatewayARN", _GatewayARN)
-
-	SetLocalConsolePasswordInput_LocalConsolePassword = SetLocalConsolePasswordInput.AddMember("LocalConsolePassword", _LocalConsolePassword)
-
-	SetLocalConsolePasswordOutput_GatewayARN = SetLocalConsolePasswordOutput.AddMember("GatewayARN", _GatewayARN)
-
-	SetSMBGuestPasswordInput_GatewayARN = SetSMBGuestPasswordInput.AddMember("GatewayARN", _GatewayARN)
-
-	SetSMBGuestPasswordInput_Password = SetSMBGuestPasswordInput.AddMember("Password", _SMBGuestPassword)
-
-	SetSMBGuestPasswordOutput_GatewayARN = SetSMBGuestPasswordOutput.AddMember("GatewayARN", _GatewayARN)
-
-	ShutdownGatewayInput_GatewayARN = ShutdownGatewayInput.AddMember("GatewayARN", _GatewayARN)
-
-	ShutdownGatewayOutput_GatewayARN = ShutdownGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	StartAvailabilityMonitorTestInput_GatewayARN = StartAvailabilityMonitorTestInput.AddMember("GatewayARN", _GatewayARN)
-
-	StartAvailabilityMonitorTestOutput_GatewayARN = StartAvailabilityMonitorTestOutput.AddMember("GatewayARN", _GatewayARN)
-
-	StartCacheReportInput_FileShareARN = StartCacheReportInput.AddMember("FileShareARN", _FileShareARN)
-
-	StartCacheReportInput_Role = StartCacheReportInput.AddMember("Role", _Role)
-
-	StartCacheReportInput_LocationARN = StartCacheReportInput.AddMember("LocationARN", _LocationARN)
-
-	StartCacheReportInput_BucketRegion = StartCacheReportInput.AddMember("BucketRegion", _RegionId)
-
-	StartCacheReportInput_VPCEndpointDNSName = StartCacheReportInput.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	StartCacheReportInput_InclusionFilters = StartCacheReportInput.AddMember("InclusionFilters", _CacheReportFilterList)
-
-	StartCacheReportInput_ExclusionFilters = StartCacheReportInput.AddMember("ExclusionFilters", _CacheReportFilterList)
-
-	StartCacheReportInput_ClientToken = StartCacheReportInput.AddMember("ClientToken", _ClientToken)
-
-	StartCacheReportInput_Tags = StartCacheReportInput.AddMember("Tags", _Tags)
-
-	StartCacheReportOutput_CacheReportARN = StartCacheReportOutput.AddMember("CacheReportARN", _CacheReportARN)
-
-	StartGatewayInput_GatewayARN = StartGatewayInput.AddMember("GatewayARN", _GatewayARN)
-
-	StartGatewayOutput_GatewayARN = StartGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules = UpdateAutomaticTapeCreationPolicyInput.AddMember("AutomaticTapeCreationRules", _AutomaticTapeCreationRules)
-
-	UpdateAutomaticTapeCreationPolicyInput_GatewayARN = UpdateAutomaticTapeCreationPolicyInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateAutomaticTapeCreationPolicyOutput_GatewayARN = UpdateAutomaticTapeCreationPolicyOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateBandwidthRateLimitInput_GatewayARN = UpdateBandwidthRateLimitInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec = UpdateBandwidthRateLimitInput.AddMember("AverageUploadRateLimitInBitsPerSec", _BandwidthUploadRateLimit)
-
-	UpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec = UpdateBandwidthRateLimitInput.AddMember("AverageDownloadRateLimitInBitsPerSec", _BandwidthDownloadRateLimit)
-
-	UpdateBandwidthRateLimitOutput_GatewayARN = UpdateBandwidthRateLimitOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateBandwidthRateLimitScheduleInput_GatewayARN = UpdateBandwidthRateLimitScheduleInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = UpdateBandwidthRateLimitScheduleInput.AddMember("BandwidthRateLimitIntervals", _BandwidthRateLimitIntervals)
-
-	UpdateBandwidthRateLimitScheduleOutput_GatewayARN = UpdateBandwidthRateLimitScheduleOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateChapCredentialsInput_TargetARN = UpdateChapCredentialsInput.AddMember("TargetARN", _TargetARN)
-
-	UpdateChapCredentialsInput_SecretToAuthenticateInitiator = UpdateChapCredentialsInput.AddMember("SecretToAuthenticateInitiator", _ChapSecret)
-
-	UpdateChapCredentialsInput_InitiatorName = UpdateChapCredentialsInput.AddMember("InitiatorName", _IqnName)
-
-	UpdateChapCredentialsInput_SecretToAuthenticateTarget = UpdateChapCredentialsInput.AddMember("SecretToAuthenticateTarget", _ChapSecret)
-
-	UpdateChapCredentialsOutput_TargetARN = UpdateChapCredentialsOutput.AddMember("TargetARN", _TargetARN)
-
-	UpdateChapCredentialsOutput_InitiatorName = UpdateChapCredentialsOutput.AddMember("InitiatorName", _IqnName)
-
-	UpdateFileSystemAssociationInput_FileSystemAssociationARN = UpdateFileSystemAssociationInput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	UpdateFileSystemAssociationInput_UserName = UpdateFileSystemAssociationInput.AddMember("UserName", _DomainUserName)
-
-	UpdateFileSystemAssociationInput_Password = UpdateFileSystemAssociationInput.AddMember("Password", _DomainUserPassword)
-
-	UpdateFileSystemAssociationInput_AuditDestinationARN = UpdateFileSystemAssociationInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	UpdateFileSystemAssociationInput_CacheAttributes = UpdateFileSystemAssociationInput.AddMember("CacheAttributes", CacheAttributes)
-
-	UpdateFileSystemAssociationOutput_FileSystemAssociationARN = UpdateFileSystemAssociationOutput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	UpdateGatewayInformationInput_GatewayARN = UpdateGatewayInformationInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateGatewayInformationInput_GatewayName = UpdateGatewayInformationInput.AddMember("GatewayName", _GatewayName)
-
-	UpdateGatewayInformationInput_GatewayTimezone = UpdateGatewayInformationInput.AddMember("GatewayTimezone", _GatewayTimezone)
-
-	UpdateGatewayInformationInput_CloudWatchLogGroupARN = UpdateGatewayInformationInput.AddMember("CloudWatchLogGroupARN", _CloudWatchLogGroupARN)
-
-	UpdateGatewayInformationInput_GatewayCapacity = UpdateGatewayInformationInput.AddMember("GatewayCapacity", GatewayCapacity)
-
-	UpdateGatewayInformationOutput_GatewayARN = UpdateGatewayInformationOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateGatewayInformationOutput_GatewayName = UpdateGatewayInformationOutput.AddMember("GatewayName", _string)
-
-	UpdateGatewaySoftwareNowInput_GatewayARN = UpdateGatewaySoftwareNowInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateGatewaySoftwareNowOutput_GatewayARN = UpdateGatewaySoftwareNowOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateMaintenanceStartTimeInput_GatewayARN = UpdateMaintenanceStartTimeInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateMaintenanceStartTimeInput_HourOfDay = UpdateMaintenanceStartTimeInput.AddMember("HourOfDay", _HourOfDay)
-
-	UpdateMaintenanceStartTimeInput_MinuteOfHour = UpdateMaintenanceStartTimeInput.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	UpdateMaintenanceStartTimeInput_DayOfWeek = UpdateMaintenanceStartTimeInput.AddMember("DayOfWeek", _DayOfWeek)
-
-	UpdateMaintenanceStartTimeInput_DayOfMonth = UpdateMaintenanceStartTimeInput.AddMember("DayOfMonth", _DayOfMonth)
-
-	UpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences = UpdateMaintenanceStartTimeInput.AddMember("SoftwareUpdatePreferences", SoftwareUpdatePreferences)
-
-	UpdateMaintenanceStartTimeOutput_GatewayARN = UpdateMaintenanceStartTimeOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateNFSFileShareInput_FileShareARN = UpdateNFSFileShareInput.AddMember("FileShareARN", _FileShareARN)
-
-	UpdateNFSFileShareInput_EncryptionType = UpdateNFSFileShareInput.AddMember("EncryptionType", EncryptionType)
-
-	UpdateNFSFileShareInput_KMSEncrypted = UpdateNFSFileShareInput.AddMember("KMSEncrypted", _Boolean)
-
-	UpdateNFSFileShareInput_KMSKey = UpdateNFSFileShareInput.AddMember("KMSKey", _KMSKey)
-
-	UpdateNFSFileShareInput_NFSFileShareDefaults = UpdateNFSFileShareInput.AddMember("NFSFileShareDefaults", NFSFileShareDefaults)
-
-	UpdateNFSFileShareInput_DefaultStorageClass = UpdateNFSFileShareInput.AddMember("DefaultStorageClass", _StorageClass)
-
-	UpdateNFSFileShareInput_ObjectACL = UpdateNFSFileShareInput.AddMember("ObjectACL", ObjectACL)
-
-	UpdateNFSFileShareInput_ClientList = UpdateNFSFileShareInput.AddMember("ClientList", _FileShareClientList)
-
-	UpdateNFSFileShareInput_Squash = UpdateNFSFileShareInput.AddMember("Squash", _Squash)
-
-	UpdateNFSFileShareInput_ReadOnly = UpdateNFSFileShareInput.AddMember("ReadOnly", _Boolean)
-
-	UpdateNFSFileShareInput_GuessMIMETypeEnabled = UpdateNFSFileShareInput.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	UpdateNFSFileShareInput_RequesterPays = UpdateNFSFileShareInput.AddMember("RequesterPays", _Boolean)
-
-	UpdateNFSFileShareInput_FileShareName = UpdateNFSFileShareInput.AddMember("FileShareName", _FileShareName)
-
-	UpdateNFSFileShareInput_CacheAttributes = UpdateNFSFileShareInput.AddMember("CacheAttributes", CacheAttributes)
-
-	UpdateNFSFileShareInput_NotificationPolicy = UpdateNFSFileShareInput.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	UpdateNFSFileShareInput_AuditDestinationARN = UpdateNFSFileShareInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	UpdateNFSFileShareOutput_FileShareARN = UpdateNFSFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	UpdateSMBFileShareInput_FileShareARN = UpdateSMBFileShareInput.AddMember("FileShareARN", _FileShareARN)
-
-	UpdateSMBFileShareInput_EncryptionType = UpdateSMBFileShareInput.AddMember("EncryptionType", EncryptionType)
-
-	UpdateSMBFileShareInput_KMSEncrypted = UpdateSMBFileShareInput.AddMember("KMSEncrypted", _Boolean)
-
-	UpdateSMBFileShareInput_KMSKey = UpdateSMBFileShareInput.AddMember("KMSKey", _KMSKey)
-
-	UpdateSMBFileShareInput_DefaultStorageClass = UpdateSMBFileShareInput.AddMember("DefaultStorageClass", _StorageClass)
-
-	UpdateSMBFileShareInput_ObjectACL = UpdateSMBFileShareInput.AddMember("ObjectACL", ObjectACL)
-
-	UpdateSMBFileShareInput_ReadOnly = UpdateSMBFileShareInput.AddMember("ReadOnly", _Boolean)
-
-	UpdateSMBFileShareInput_GuessMIMETypeEnabled = UpdateSMBFileShareInput.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	UpdateSMBFileShareInput_RequesterPays = UpdateSMBFileShareInput.AddMember("RequesterPays", _Boolean)
-
-	UpdateSMBFileShareInput_SMBACLEnabled = UpdateSMBFileShareInput.AddMember("SMBACLEnabled", _Boolean)
-
-	UpdateSMBFileShareInput_AccessBasedEnumeration = UpdateSMBFileShareInput.AddMember("AccessBasedEnumeration", _Boolean)
-
-	UpdateSMBFileShareInput_AdminUserList = UpdateSMBFileShareInput.AddMember("AdminUserList", _UserList)
-
-	UpdateSMBFileShareInput_ValidUserList = UpdateSMBFileShareInput.AddMember("ValidUserList", _UserList)
-
-	UpdateSMBFileShareInput_InvalidUserList = UpdateSMBFileShareInput.AddMember("InvalidUserList", _UserList)
-
-	UpdateSMBFileShareInput_AuditDestinationARN = UpdateSMBFileShareInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	UpdateSMBFileShareInput_CaseSensitivity = UpdateSMBFileShareInput.AddMember("CaseSensitivity", CaseSensitivity)
-
-	UpdateSMBFileShareInput_FileShareName = UpdateSMBFileShareInput.AddMember("FileShareName", _FileShareName)
-
-	UpdateSMBFileShareInput_CacheAttributes = UpdateSMBFileShareInput.AddMember("CacheAttributes", CacheAttributes)
-
-	UpdateSMBFileShareInput_NotificationPolicy = UpdateSMBFileShareInput.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	UpdateSMBFileShareInput_OplocksEnabled = UpdateSMBFileShareInput.AddMember("OplocksEnabled", _Boolean)
-
-	UpdateSMBFileShareOutput_FileShareARN = UpdateSMBFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	UpdateSMBFileShareVisibilityInput_GatewayARN = UpdateSMBFileShareVisibilityInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBFileShareVisibilityInput_FileSharesVisible = UpdateSMBFileShareVisibilityInput.AddMember("FileSharesVisible", _Boolean)
-
-	UpdateSMBFileShareVisibilityOutput_GatewayARN = UpdateSMBFileShareVisibilityOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBLocalGroupsInput_GatewayARN = UpdateSMBLocalGroupsInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBLocalGroupsInput_SMBLocalGroups = UpdateSMBLocalGroupsInput.AddMember("SMBLocalGroups", SMBLocalGroups)
-
-	UpdateSMBLocalGroupsOutput_GatewayARN = UpdateSMBLocalGroupsOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBSecurityStrategyInput_GatewayARN = UpdateSMBSecurityStrategyInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBSecurityStrategyInput_SMBSecurityStrategy = UpdateSMBSecurityStrategyInput.AddMember("SMBSecurityStrategy", SMBSecurityStrategy)
-
-	UpdateSMBSecurityStrategyOutput_GatewayARN = UpdateSMBSecurityStrategyOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSnapshotScheduleInput_VolumeARN = UpdateSnapshotScheduleInput.AddMember("VolumeARN", _VolumeARN)
-
-	UpdateSnapshotScheduleInput_StartAt = UpdateSnapshotScheduleInput.AddMember("StartAt", _HourOfDay)
-
-	UpdateSnapshotScheduleInput_RecurrenceInHours = UpdateSnapshotScheduleInput.AddMember("RecurrenceInHours", _RecurrenceInHours)
-
-	UpdateSnapshotScheduleInput_Description = UpdateSnapshotScheduleInput.AddMember("Description", _Description)
-
-	UpdateSnapshotScheduleInput_Tags = UpdateSnapshotScheduleInput.AddMember("Tags", _Tags)
-
-	UpdateSnapshotScheduleOutput_VolumeARN = UpdateSnapshotScheduleOutput.AddMember("VolumeARN", _VolumeARN)
-
-	UpdateVTLDeviceTypeInput_VTLDeviceARN = UpdateVTLDeviceTypeInput.AddMember("VTLDeviceARN", _VTLDeviceARN)
-
-	UpdateVTLDeviceTypeInput_DeviceType = UpdateVTLDeviceTypeInput.AddMember("DeviceType", _DeviceType)
-
-	UpdateVTLDeviceTypeOutput_VTLDeviceARN = UpdateVTLDeviceTypeOutput.AddMember("VTLDeviceARN", _VTLDeviceARN)
-
+const blob = "" +
+	"CreateSnapshotFromVolumeRecoveryPointOutputCreateSnapshotFromVolumeRecoveryPointInputDescribeBandwid" +
+	"thRateLimitScheduleOutputDeleteAutomaticTapeCreationPolicyOutputDescribeBandwidthRateLimitScheduleIn" +
+	"putListAutomaticTapeCreationPoliciesOutputUpdateAutomaticTapeCreationPolicyOutputDeleteAutomaticTape" +
+	"CreationPolicyInputListAutomaticTapeCreationPoliciesInputUpdateAutomaticTapeCreationPolicyInputUpdat" +
+	"eBandwidthRateLimitScheduleOutputDescribeAvailabilityMonitorTestOutputUpdateBandwidthRateLimitSchedu" +
+	"leInputAverageDownloadRateLimitInBitsPerSecDescribeAvailabilityMonitorTestInputDescribeFileSystemAss" +
+	"ociationsOutputDescribeFileSystemAssociationsInputAverageUploadRateLimitInBitsPerSecDescribeMaintena" +
+	"nceStartTimeOutputFileSystemAssociationStatusDetailsFileSystemAssociationSyncErrorCodeStartAvailabil" +
+	"ityMonitorTestOutputUpdateSMBFileShareVisibilityOutputBandwidthThrottleScheduleNotFoundDescribeMaint" +
+	"enanceStartTimeInputGatewayProxyNetworkConnectionBusyMaximumTapeCartridgeCountExceededStartAvailabil" +
+	"ityMonitorTestInputUpdateFileSystemAssociationOutputUpdateSMBFileShareVisibilityInputAutomaticTapeCr" +
+	"eationPolicyInfosDescribeBandwidthRateLimitOutputDescribeCachediSCSIVolumesOutputDescribeGatewayInfo" +
+	"rmationOutputDescribeStorediSCSIVolumesOutputDescribeTapeRecoveryPointsOutputDiskSizeGreaterThanVolu" +
+	"meMaxSizeFileSystemAssociationSummaryListListFileSystemAssociationsOutputUpdateFileSystemAssociation" +
+	"InputUpdateMaintenanceStartTimeOutputDescribeBandwidthRateLimitInputDescribeCachediSCSIVolumesInputD" +
+	"escribeGatewayInformationInputDescribeStorediSCSIVolumesInputDescribeTapeRecoveryPointsInputListFile" +
+	"SystemAssociationsInputRetrieveTapeRecoveryPointOutputUpdateMaintenanceStartTimeInputUpdateSMBSecuri" +
+	"tyStrategyOutputDeleteBandwidthRateLimitOutputDescribeSnapshotScheduleOutputInvalidGatewayRequestExc" +
+	"eptionListVolumeRecoveryPointsOutputRetrieveTapeRecoveryPointInputUpdateBandwidthRateLimitOutputUpda" +
+	"teGatewayInformationOutputUpdateGatewaySoftwareNowOutputUpdateSMBSecurityStrategyInputWorkingStorage" +
+	"AllocatedInBytesAvailabilityMonitorTestStatusCreateCachediSCSIVolumeOutputCreateStorediSCSIVolumeOut" +
+	"putDeleteBandwidthRateLimitInputDescribeChapCredentialsOutputDescribeSnapshotScheduleInputEvictFiles" +
+	"FailingUploadOutputFileSystemAssociationInfoListListVolumeRecoveryPointsInputSecretToAuthenticateIni" +
+	"tiatorSetLocalConsolePasswordOutputUpdateBandwidthRateLimitInputUpdateGatewayInformationInputUpdateG" +
+	"atewaySoftwareNowInputCreateCachediSCSIVolumeInputCreateStorediSCSIVolumeInputDeleteSnapshotSchedule" +
+	"OutputDescribeChapCredentialsInputDescribeWorkingStorageOutputDisassociateFileSystemOutputEndpointNe" +
+	"tworkConfigurationEvictFilesFailingUploadInputFileSystemAssociationARNListMaximumContentLengthExceed" +
+	"edRemoveTagsFromResourceOutputSetLocalConsolePasswordInputUpdateSnapshotScheduleOutputUploadBufferAl" +
+	"locatedInBytesBandwidthRateLimitIntervalsCreateTapeWithBarcodeOutputDeleteChapCredentialsOutputDelet" +
+	"eSnapshotScheduleInputDescribeNFSFileSharesOutputDescribeSMBFileSharesOutputDescribeWorkingStorageIn" +
+	"putDisassociateFileSystemInputMandatoryEncryptionNoAes128NetworkConfigurationChangedRemoveTagsFromRe" +
+	"sourceInputUpdateChapCredentialsOutputUpdateSnapshotScheduleInputAutomaticTapeCreationRulesBandwidth" +
+	"DownloadRateLimitCacheStaleTimeoutInSecondsCreateTapeWithBarcodeInputDeleteChapCredentialsInputDescr" +
+	"ibeNFSFileSharesInputDescribeSMBFileSharesInputDescribeTapeArchivesOutputDescribeUploadBufferOutputD" +
+	"iskSizeLessThanVolumeSizeListVolumeInitiatorsOutputMaximumVolumeCountExceededNextUpdateAvailabilityD" +
+	"ateSecretToAuthenticateTargetSupportedGatewayCapacitiesUpdateChapCredentialsInputUpdateSMBLocalGroup" +
+	"sOutputVTLDeviceProductIdentifierAssociateFileSystemOutputBypassGovernanceRetentionDescribeCacheRepo" +
+	"rtOutputDescribeSMBSettingsOutputDescribeTapeArchivesInputDescribeUploadBufferInputListTagsForResour" +
+	"ceOutputListVolumeInitiatorsInputLocalStorageLimitExceededRetrieveTapeArchiveOutputSetSMBGuestPasswo" +
+	"rdOutputSoftwareUpdatePreferencesUpdateSMBLocalGroupsInputUpdateVTLDeviceTypeOutputWorkingStorageUse" +
+	"dInBytesbucket_owner_full_controlAssociateFileSystemInputBandwidthUploadRateLimitCreateNFSFileShareO" +
+	"utputCreateSMBFileShareOutputDescribeCacheReportInputDescribeSMBSettingsInputDescribeVTLDevicesOutpu" +
+	"tDuplicateCertificateInfoGatewayNetworkInterfacesINSUFFICIENT_PERMISSIONSListTagsForResourceInputNot" +
+	"ifyWhenUploadedOutputParametersNotImplementedRetrieveTapeArchiveInputSetSMBGuestPasswordInputSnapsho" +
+	"tScheduleNotFoundUpdateNFSFileShareOutputUpdateSMBFileShareOutputUpdateVTLDeviceTypeInputVolumeRecov" +
+	"eryPointInfosAddTagsToResourceOutputAddWorkingStorageOutputCacheReportFilterValuesCancelCacheReportO" +
+	"utputCreateNFSFileShareInputCreateSMBFileShareInputDeleteCacheReportOutputDeleteTapeArchiveOutputDes" +
+	"cribeVTLDevicesInputEMERGENCY_VERSIONS_ONLYFileSystemAssociationIdGatewayOperationalStateNotifyWhenU" +
+	"ploadedInputReportCompletionPercentRetentionLockTimeInDaysServiceUnavailableErrorStorageGateway_2013" +
+	"0630TapeRecoveryPointStatusUpdateNFSFileShareInputUpdateSMBFileShareInputUploadBufferUsedInBytesVolu" +
+	"meRecoveryPointTimeAccessBasedEnumerationAddTagsToResourceInputAddWorkingStorageInputCancelCacheRepo" +
+	"rtInputChapCredentialNotFoundDeleteCacheReportInputDeleteTapeArchiveInputDiskAllocationResourceListC" +
+	"acheReportsOutputSoftwareUpdatesEndDateStartCacheReportOutputTapeRecoveryPointInfosVolumeAttachmentS" +
+	"tatusActivateGatewayOutputActivationKeyNotFoundActiveDirectoryStatusAddUploadBufferOutputAuthenticat" +
+	"ionFailureAutomaticUpdatePolicyCacheAllocatedInBytesCacheReportFilterListCacheReportFilterNameCancel" +
+	"RetrievalOutputCloudWatchLogGroupARNDeleteFileShareOutputDeviceiSCSIAttributesDiskSizeNotGigAlignedF" +
+	"ileSystemLocationARNIpv4OrIpv6AddressCIDRListCacheReportsInputPreservedExistingDataShutdownGatewayOu" +
+	"tputStartCacheReportInputTapeCartridgeNotFoundTapeRecoveryPointTimeUnauthorizedOperationVolumeiSCSIA" +
+	"ttributesActivateGatewayInputActivationKeyExpiredActivationKeyInvalidAddUploadBufferInputAssignTapeP" +
+	"oolOutputCacheDirtyPercentageCancelArchivalOutputCancelRetrievalInputCannotExportSnapshotCreateSnaps" +
+	"hotOutputCreateTapePoolOutputDeleteFileShareInputDeleteTapePoolOutputDisableGatewayOutputDiskAlready" +
+	"AllocatedGatewayInternalErrorGuessMIMETypeEnabledJoinDomainInProgressListFileSharesOutputListLocalDi" +
+	"sksOutputLunAlreadyAllocated_NFSFileShareDefaultsNFSFileShareInfoListNetworkInterfacePortPreserveExi" +
+	"stingDataSMBFileShareInfoListShutdownGatewayInputAssignTapePoolInputAuditDestinationARNCacheMissPerc" +
+	"entageCacheUsedPercentageCancelArchivalInputCreateSnapshotInputCreateTapePoolInputDefaultStorageClas" +
+	"sDeleteGatewayOutputDeleteTapePoolInputDescribeCacheOutputDescribeTapesOutputDisableGatewayInputFile" +
+	"ShareClientListGatewayNotConnectedInternalServerErrorListFileSharesInputListLocalDisksInputListTapeP" +
+	"oolsOutputSMBGuestPasswordSetSnapshotDescriptionStorageGatewayErrorTargetAlreadyExistsUploadFailureR" +
+	"easonVolumeAlreadyExistsAttachVolumeOutputCacheHitPercentageDeleteGatewayInputDeleteVolumeOutputDesc" +
+	"ribeCacheInputDescribeTapesInputDetachVolumeOutputDiskAllocationTypeDomainUserPasswordLastSoftwareUp" +
+	"dateListGatewaysOutputListTapePoolsInputNetworkInterfaceIdNotificationPolicyOrganizationalUnitRefres" +
+	"hCacheOutputRetentionStartDateSnapshotInProgressStartGatewayOutputVPCEndpointDNSNameVolumeUsageInByt" +
+	"esauthenticated_readAttachVolumeInputCacheReportStatusCreateTapesOutputDeleteVolumeInputDetachVolume" +
+	"InputDiskAttributeListDomainControllersDuplicateScheduleEc2InstanceRegionFileSharesVisibleHostEnviro" +
+	"nmentIdInitiatorNotFoundInvalidParametersListGatewaysInputListVolumesOutputMediumChangerTypePositive" +
+	"IntObjectRecurrenceInHoursRefreshCacheInputRetentionLockTypeSnapshotIdInvalidStartGatewayInputStartM" +
+	"inuteOfHourTapeArchiveStatusTapeBarcodePrefixVolumeSizeInBytesVolumeUsedInBytesbucket_owner_readpubl" +
+	"ic_read_writeCreateTapesInputDeleteTapeOutputDiskDoesNotExistEndpointNotFoundExclusionFiltersFileSha" +
+	"reARNListInclusionFiltersInitiatorInvalidJoinDomainOutputListVolumesInputMandatorySigningNoDisksAvai" +
+	"lableNumTapesToCreateOperationAbortedResetCacheOutputSnapshotNotFoundSourceSnapshotIdTapeStorageClas" +
+	"sCacheAttributesCacheReportInfoCacheReportListCacheReportNameCaseSensitivityClientSpecifiedDeleteTap" +
+	"eInputDeprecationDateDiskSizeInBytesEndMinuteOfHourFileShareStatusGatewayCapacityGatewayNotFoundGate" +
+	"wayTimezoneIAMNotSupportedInvalidEndpointInvalidScheduleInvalidUserListJoinDomainInputListTapesOutpu" +
+	"tMinimumNumTapesOutdatedGatewayResetCacheInputSnapshotDeletedSoftwareVersionSourceVolumeARNStagingAr" +
+	"eaFullTapeCreatedDateTapeSizeInBytesTapeUsedInBytesVTLDeviceVendorVolumeIdInvalidAddCacheOutputCache" +
+	"ReportARNCompletionTimeDomainUserNameEncryptionTypeListTapesInputNotificationIdOplocksEnabledPermiss" +
+	"ionModeRequestTimeoutStartHourOfDayStorageFailureTargetNotFoundVolumeNotFoundVolumeNotReadyVolumePro" +
+	"gressACCESS_DENIEDAddCacheInputAdminUserListBandwidthTypeCaseSensitiveDirectoryModeEc2InstanceIdFile" +
+	"ShareNameFileShareTypeGatewayAdminsGatewayRegionInitiatorNameIpAddressListNETWORK_ERRORPoolEntryDate" +
+	"RegionInvalidRequesterPaysSMBACLEnabledTapeDriveTypeTargetInvalidUNKNOWN_ERRORVTLDeviceARNsValidUser" +
+	"Listaws_exec_readALL_VERSIONSBucketRegionDEEP_ARCHIVEDoubleObjectEndHourOfDayEndpointTypeGatewayStat" +
+	"eKMSEncryptedPermissionIdUserListUserVolumeDiskIdVolumeStatuserrorDetailsChapEnabledClientTokenDNSHo" +
+	"stNameFileShareIdForceDeleteForceDetachForceRemoveGatewayNameGatewayTypeIN_PROGRESSIPV4AddressIpAddr" +
+	"essesIpv4AddressResourceARNRetrievedToUploadStateVolumeInUseVolumeInfosCOMPLIANCEChapSecretDayOfMont" +
+	"hDaysOfWeekDiskStatusDomainNameFolderListGOVERNANCEGatewayARNLunInvalidMacAddressNextMarkerPoolStatu" +
+	"sTapeStatusTargetNameVolumeARNsVolumeTypeCOMPLETEDDayOfWeekGatewayIdLunNumberObjectACLPoolInfosRecur" +
+	"siveTapeInfosTapeUsageTargetARNerrorCodeBoolean2CANCELEDChapInfoDETACHEDDiskNodeDiskPathFileModePool" +
+	"ARNsPoolNameReadOnlyRegionIdSNOWBALLTagValueTapeARNsBlockedDELETEDDiskIdsDsseKmsEndTimeGLACIERGroupI" +
+	"dHYPER_VIqnNameJOININGOwnerIdPENDINGStartAtTIMEOUTTagKeysintegermessageprivateACTIVEFAILEDJOINEDKMSK" +
+	"eyPoolIdSquashSseKmsVMWAREdoublememberstringHostsLargeOTHERSmallSseS3valueNONERoleWormlongEC2KVMkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.storagegateway", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 5305, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8481, Target: 1, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4513, Target: 2, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5368, Target: 3, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4536, Target: 4, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5889, Target: 5, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3633, Target: 6, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6824, Target: 7, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5929, Target: 8, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4582, Target: 9, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5494, Target: 10, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2045, Target: 11, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4081, Target: 12, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4105, Target: 13, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 14, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 15, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2074, Target: 16, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6009, Target: 17, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7254, Target: 18, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2841, Target: 19, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 125, Target: 20, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1716, Target: 21, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4651, Target: 22, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2868, Target: 23, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5536, Target: 24, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6501, Target: 25, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2478, Target: 26, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4674, Target: 27, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4674, Target: 28, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6049, Target: 29, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6878, Target: 30, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 433, Target: 31, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 85, Target: 32, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 85, Target: 33, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1149, Target: 34, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1149, Target: 35, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3683, Target: 36, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2132, Target: 37, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 579, Target: 38, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1181, Target: 39, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 684, Target: 40, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2922, Target: 41, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2949, Target: 42, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3708, Target: 43, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1746, Target: 44, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1213, Target: 45, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3347, Target: 46, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1245, Target: 47, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6558, Target: 48, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3373, Target: 49, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4177, Target: 50, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2534, Target: 51, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6932, Target: 52, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6069, Target: 53, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2562, Target: 54, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2190, Target: 55, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6149, Target: 56, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 203, Target: 57, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5195, Target: 58, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6169, Target: 59, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1341, Target: 60, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7004, Target: 61, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6189, Target: 62, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3783, Target: 63, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 6691, Target: 64, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 8286, Target: 65, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3425, Target: 66, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1806, Target: 67, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7458, Target: 68, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4297, Target: 69, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7094, Target: 70, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2702, Target: 71, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7937, Target: 72, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3858, Target: 73, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1623, Target: 74, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2306, Target: 75, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3883, Target: 76, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5683, Target: 77, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 786, Target: 78, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5239, Target: 79, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 7148, Target: 80, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 242, Target: 81, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 395, Target: 82, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 395, Target: 83, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3111, Target: 84, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1019, Target: 85, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1896, Target: 86, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1926, Target: 87, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1405, Target: 88, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4417, Target: 89, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 820, Target: 90, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 820, Target: 91, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3581, Target: 92, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1685, Target: 93, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2758, Target: 94, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3958, Target: 95, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4881, Target: 96, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 5326, Target: 97, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5347, Target: 98, Traits: 0, StrLen: 21, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8705, Target: 1422, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9664, Target: 1422, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9890, Target: 1422, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9815, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8874, Target: 1422, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9843, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8965, Target: 1422, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4249, Target: 1422, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5389, Target: 108, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1085, Target: 109, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3165, Target: 120, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1085, Target: 112, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 109, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3165, Target: 114, Traits: 0, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7628, Target: 639, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9902, Target: 494, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8421, Target: 662, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 8301, Target: 435, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9982, Target: 143, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3165, Target: 120, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 114, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5410, Target: 122, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9017, Target: 1422, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4720, Target: 1422, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2016, Target: 125, Traits: 0, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9541, Target: 1422, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9884, Target: 1422, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9829, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3191, Target: 129, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 2814, Target: 130, Traits: 0, StrLen: 26, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8621, Target: 412, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7594, Target: 436, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9065, Target: 412, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8136, Target: 436, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9401, Target: 213, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 650, Target: 141, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 507, Target: 129, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2814, Target: 138, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 130, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8744, Target: 140, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4057, Target: 141, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 9640, Target: 142, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 9640, Target: 143, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3217, Target: 196, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1157, Target: 146, Traits: 0, StrLen: 17, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8466, Target: 679, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9531, Target: 704, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9149, Target: 703, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5283, Target: 678, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7645, Target: 432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 8691, Target: 246, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 7969, Target: 564, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5788, Target: 690, Traits: 0, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8410, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7662, Target: 705, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9511, Target: 669, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1157, Target: 160, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 146, Traits: 0, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8495, Target: 162, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4559, Target: 163, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5490, Target: 168, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4576, Target: 172, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5452, Target: 166, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 163, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5473, Target: 168, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9338, Target: 1422, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6786, Target: 1422, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4559, Target: 171, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4559, Target: 172, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 171, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8016, Target: 174, Traits: 0, StrLen: 15, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8495, Target: 162, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7237, Target: 190, Traits: 0, StrLen: 17, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4812, Target: 511, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9780, Target: 670, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9978, Target: 518, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5609, Target: 431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 703, Target: 670, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7809, Target: 166, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7777, Target: 166, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8051, Target: 189, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8031, Target: 187, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 174, Traits: 0, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8046, Target: 189, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7237, Target: 190, Traits: 0, StrLen: 17, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9272, Target: 1422, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9541, Target: 1422, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9648, Target: 1422, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9884, Target: 1422, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8882, Target: 1422, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3217, Target: 196, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 8061, Target: 197, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8076, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8757, Target: 1422, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2140, Target: 200, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 202, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9656, Target: 202, Traits: 0, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2277, Target: 207, Traits: 2, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8848, Target: 427, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3503, Target: 207, Traits: 2, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9381, Target: 207, Traits: 3, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9184, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5515, Target: 209, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8410, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 9391, Target: 211, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 9550, Target: 212, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 9401, Target: 213, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 212, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8106, Target: 215, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6737, Target: 216, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5557, Target: 217, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7040, Target: 441, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6269, Target: 416, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9173, Target: 143, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3967, Target: 222, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1277, Target: 223, Traits: 0, StrLen: 4, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9143, Target: 236, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9680, Target: 592, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9672, Target: 592, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9411, Target: 592, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8121, Target: 432, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 6950, Target: 232, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5173, Target: 592, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7305, Target: 234, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6950, Target: 232, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7305, Target: 233, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7305, Target: 234, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 233, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9143, Target: 236, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9766, Target: 237, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 236, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6198, Target: 239, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 223, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9195, Target: 241, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9421, Target: 242, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8523, Target: 243, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6968, Target: 244, Traits: 3, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9926, Target: 245, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 9053, Target: 246, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 8783, Target: 247, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7356, Target: 248, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8537, Target: 249, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9964, Target: 1422, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9914, Target: 1422, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9773, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2590, Target: 253, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9294, Target: 423, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9077, Target: 255, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 777, Target: 256, Traits: 0, StrLen: 9, Count: 62, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5829, Target: 1422, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5849, Target: 1422, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5326, Target: 1422, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6109, Target: 1422, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6615, Target: 1422, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8181, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 920, Target: 1422, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5389, Target: 1422, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 854, Target: 1422, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9752, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5969, Target: 1422, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5107, Target: 1422, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6089, Target: 1422, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7745, Target: 1422, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1277, Target: 1422, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3399, Target: 1422, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5578, Target: 1422, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4201, Target: 1422, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7339, Target: 1422, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7761, Target: 1422, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8211, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7825, Target: 1422, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7407, Target: 1422, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6116, Target: 1422, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1776, Target: 1422, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8226, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7424, Target: 1422, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8241, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3833, Target: 1422, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6209, Target: 1422, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9461, Target: 1422, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6149, Target: 1422, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2674, Target: 1422, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 953, Target: 1422, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3451, Target: 1422, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3057, Target: 1422, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7889, Target: 1422, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4331, Target: 1422, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8214, Target: 1422, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7921, Target: 1422, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8316, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4321, Target: 1422, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8900, Target: 1422, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8607, Target: 1422, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4858, Target: 1422, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8346, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7560, Target: 1422, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7130, Target: 1422, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7953, Target: 1422, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4393, Target: 1422, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8391, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8635, Target: 1422, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5725, Target: 1422, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6767, Target: 1422, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8952, Target: 1422, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8649, Target: 1422, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5767, Target: 1422, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6805, Target: 1422, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8466, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9349, Target: 1422, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8663, Target: 1422, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8677, Target: 1422, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9161, Target: 319, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 9996, Target: 592, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9969, Target: 592, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7793, Target: 323, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 322, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6596, Target: 325, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 426, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9206, Target: 327, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6252, Target: 328, Traits: 0, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8809, Target: 338, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9206, Target: 327, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8151, Target: 337, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6252, Target: 334, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 328, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8796, Target: 336, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8151, Target: 337, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8809, Target: 338, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2930, Target: 1422, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 826, Target: 1422, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2646, Target: 341, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2646, Target: 342, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 341, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4743, Target: 344, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2219, Target: 345, Traits: 0, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2646, Target: 341, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5609, Target: 370, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 718, Target: 357, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2590, Target: 253, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 718, Target: 360, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2219, Target: 355, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 345, Traits: 0, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 718, Target: 357, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 718, Target: 358, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 777, Target: 369, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 718, Target: 360, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 358, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1309, Target: 362, Traits: 0, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4743, Target: 344, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2646, Target: 341, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 718, Target: 357, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1309, Target: 367, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 362, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 752, Target: 369, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5599, Target: 370, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9431, Target: 371, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9431, Target: 372, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 371, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8166, Target: 375, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9959, Target: 1422, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7475, Target: 1422, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9949, Target: 1422, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9559, Target: 379, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1189, Target: 380, Traits: 0, StrLen: 11, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9559, Target: 379, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9261, Target: 400, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4766, Target: 395, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9250, Target: 592, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8783, Target: 247, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7356, Target: 248, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7390, Target: 402, Traits: 0, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7390, Target: 409, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8106, Target: 215, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8361, Target: 568, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9250, Target: 392, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4225, Target: 393, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 437, Traits: 2, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4766, Target: 395, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7008, Target: 396, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 380, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9089, Target: 398, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8196, Target: 399, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9261, Target: 400, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7390, Target: 401, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7390, Target: 402, Traits: 0, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9920, Target: 1422, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9801, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9990, Target: 1422, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9993, Target: 1422, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9954, Target: 1422, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9728, Target: 1422, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7390, Target: 409, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9944, Target: 410, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 401, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8626, Target: 412, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2297, Target: 413, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3435, Target: 414, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 413, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9857, Target: 416, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 6634, Target: 417, Traits: 4, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9864, Target: 592, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9161, Target: 571, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1776, Target: 420, Traits: 5, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9864, Target: 592, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9161, Target: 571, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8861, Target: 423, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 425, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9283, Target: 425, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5620, Target: 426, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9808, Target: 427, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6986, Target: 429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2309, Target: 430, Traits: 3, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5609, Target: 431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9986, Target: 432, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7475, Target: 434, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8301, Target: 435, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 7599, Target: 436, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4232, Target: 437, Traits: 3, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9305, Target: 592, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9471, Target: 592, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5626, Target: 592, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7040, Target: 441, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3477, Target: 442, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6229, Target: 443, Traits: 0, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9688, Target: 490, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8770, Target: 490, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9794, Target: 489, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9822, Target: 489, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 6249, Target: 448, Traits: 0, StrLen: 16, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6229, Target: 443, Traits: 0, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9206, Target: 327, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8151, Target: 337, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8537, Target: 249, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9101, Target: 143, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9684, Target: 488, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9978, Target: 518, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5609, Target: 431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6482, Target: 570, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9577, Target: 479, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6605, Target: 325, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9908, Target: 569, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9712, Target: 142, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6129, Target: 142, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8913, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8796, Target: 336, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7058, Target: 477, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7166, Target: 241, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9029, Target: 510, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6249, Target: 474, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 448, Traits: 0, StrLen: 6, Count: 25, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8565, Target: 476, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7058, Target: 477, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7905, Target: 478, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 9577, Target: 479, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9871, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7696, Target: 1422, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7696, Target: 1422, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7202, Target: 1422, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7679, Target: 1422, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4008, Target: 1422, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9004, Target: 1422, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7076, Target: 487, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9684, Target: 488, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9113, Target: 489, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 8593, Target: 490, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9696, Target: 491, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9696, Target: 492, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 491, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9902, Target: 494, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9586, Target: 495, Traits: 0, StrLen: 8, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9696, Target: 491, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9704, Target: 504, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6489, Target: 664, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7543, Target: 514, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4835, Target: 513, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9491, Target: 505, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9586, Target: 502, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 495, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9704, Target: 504, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9491, Target: 505, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9878, Target: 1422, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9759, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7492, Target: 508, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 7509, Target: 509, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 9720, Target: 510, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4812, Target: 511, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 9316, Target: 512, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4835, Target: 513, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 7543, Target: 514, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9371, Target: 1422, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9441, Target: 1422, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9974, Target: 1422, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9978, Target: 518, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4858, Target: 519, Traits: 6, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9864, Target: 592, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9161, Target: 571, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6309, Target: 522, Traits: 0, StrLen: 16, Count: 30, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9206, Target: 327, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8151, Target: 337, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8537, Target: 249, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9101, Target: 143, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9684, Target: 488, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9978, Target: 518, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5609, Target: 431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6482, Target: 570, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9577, Target: 479, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9712, Target: 142, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6129, Target: 142, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8913, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8926, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5019, Target: 142, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8731, Target: 672, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8991, Target: 672, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8256, Target: 672, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5389, Target: 108, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8061, Target: 197, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8796, Target: 336, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7058, Target: 477, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7166, Target: 241, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9029, Target: 510, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8579, Target: 142, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6309, Target: 553, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 522, Traits: 0, StrLen: 6, Count: 30, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3886, Target: 555, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3587, Target: 556, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8822, Target: 672, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1691, Target: 558, Traits: 0, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 8076, Target: 1422, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7873, Target: 1422, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3030, Target: 1422, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3030, Target: 1422, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6729, Target: 563, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7560, Target: 564, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3908, Target: 565, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5410, Target: 122, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5217, Target: 567, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8361, Target: 568, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9908, Target: 569, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6489, Target: 570, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6748, Target: 571, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9631, Target: 256, Traits: 0, StrLen: 9, Count: 62, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9161, Target: 319, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1221, Target: 574, Traits: 0, StrLen: 17, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8466, Target: 679, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9531, Target: 704, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9149, Target: 703, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5283, Target: 678, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7645, Target: 432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 8691, Target: 246, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 9137, Target: 236, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7969, Target: 564, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5662, Target: 143, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5788, Target: 690, Traits: 0, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8410, Target: 210, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 7662, Target: 705, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9511, Target: 669, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1221, Target: 590, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 574, Traits: 0, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9938, Target: 592, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3529, Target: 593, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 375, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2708, Target: 595, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5336, Target: 598, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4576, Target: 603, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9850, Target: 598, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9850, Target: 599, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 598, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 595, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9736, Target: 603, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 140, Target: 604, Traits: 0, StrLen: 4, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7628, Target: 638, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8406, Target: 670, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8421, Target: 662, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9501, Target: 663, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3607, Target: 712, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6161, Target: 246, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 8436, Target: 667, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9902, Target: 494, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9982, Target: 143, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7112, Target: 670, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8887, Target: 670, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3355, Target: 618, Traits: 0, StrLen: 11, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7628, Target: 638, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8406, Target: 670, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8421, Target: 662, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 8509, Target: 670, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9327, Target: 374, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9501, Target: 634, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8436, Target: 667, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9902, Target: 494, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9982, Target: 143, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7112, Target: 670, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8887, Target: 670, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3355, Target: 632, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 618, Traits: 0, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7611, Target: 634, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9744, Target: 636, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 635, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7628, Target: 638, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7628, Target: 639, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8939, Target: 640, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9604, Target: 641, Traits: 0, StrLen: 8, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7628, Target: 638, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8421, Target: 662, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9501, Target: 663, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9902, Target: 494, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7112, Target: 670, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8887, Target: 670, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 9604, Target: 650, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 641, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5261, Target: 652, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5746, Target: 670, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 8421, Target: 662, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9501, Target: 659, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5261, Target: 657, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 652, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4904, Target: 659, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6566, Target: 660, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 604, Traits: 0, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8421, Target: 662, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 9501, Target: 663, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7985, Target: 664, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 9041, Target: 1422, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9787, Target: 1422, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9613, Target: 667, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9511, Target: 669, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 708, Target: 670, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 3227, Target: 671, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 8263, Target: 672, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 674, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9125, Target: 674, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9521, Target: 676, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 675, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5283, Target: 678, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8466, Target: 679, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9360, Target: 680, Traits: 0, StrLen: 10, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8466, Target: 679, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9559, Target: 379, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9531, Target: 704, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7645, Target: 432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5283, Target: 678, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9360, Target: 688, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 680, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5788, Target: 690, Traits: 0, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7040, Target: 441, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6269, Target: 416, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9568, Target: 508, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9173, Target: 143, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4489, Target: 696, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7645, Target: 432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7184, Target: 432, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4996, Target: 592, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4489, Target: 701, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 696, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9149, Target: 703, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 9531, Target: 704, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 7662, Target: 705, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 3607, Target: 706, Traits: 0, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8978, Target: 712, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3964, Target: 718, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8451, Target: 719, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3607, Target: 715, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5557, Target: 217, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 8978, Target: 712, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8978, Target: 713, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 712, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3607, Target: 715, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4185, Target: 716, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 9932, Target: 706, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3964, Target: 718, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 8451, Target: 719, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5809, Target: 720, Traits: 0, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5326, Target: 97, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9250, Target: 392, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8196, Target: 399, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8835, Target: 510, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9261, Target: 400, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8939, Target: 640, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7475, Target: 434, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5305, Target: 729, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8718, Target: 731, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9766, Target: 237, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8481, Target: 734, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5041, Target: 736, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9316, Target: 512, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4513, Target: 739, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9316, Target: 512, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5869, Target: 741, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9766, Target: 237, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5368, Target: 744, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5063, Target: 746, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9766, Target: 237, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4536, Target: 749, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6349, Target: 751, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9902, Target: 494, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3658, Target: 143, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5889, Target: 755, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4033, Target: 757, Traits: 0, StrLen: 24, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8529, Target: 243, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2321, Target: 244, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9184, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5609, Target: 370, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2590, Target: 253, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3633, Target: 767, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2646, Target: 341, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7220, Target: 769, Traits: 0, StrLen: 17, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9511, Target: 669, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7040, Target: 441, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9143, Target: 236, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6824, Target: 775, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6425, Target: 778, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5929, Target: 781, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5085, Target: 783, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8495, Target: 162, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4582, Target: 785, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8495, Target: 162, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5949, Target: 787, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5494, Target: 790, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2422, Target: 792, Traits: 0, StrLen: 28, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7645, Target: 432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7560, Target: 564, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9511, Target: 669, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8376, Target: 675, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7040, Target: 441, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9184, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9101, Target: 142, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2045, Target: 803, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4605, Target: 806, Traits: 0, StrLen: 23, Count: 22, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9184, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6229, Target: 443, Traits: 0, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8537, Target: 249, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9101, Target: 142, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9978, Target: 518, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5609, Target: 431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6482, Target: 570, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9577, Target: 479, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6605, Target: 325, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9908, Target: 569, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9712, Target: 142, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6129, Target: 142, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8913, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8796, Target: 336, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7058, Target: 477, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7166, Target: 241, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9029, Target: 510, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4081, Target: 829, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4628, Target: 831, Traits: 0, StrLen: 23, Count: 27, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9184, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8537, Target: 249, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9101, Target: 142, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9978, Target: 518, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5609, Target: 431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6482, Target: 570, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9577, Target: 479, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9712, Target: 142, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6129, Target: 142, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8913, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8926, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5019, Target: 142, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8731, Target: 672, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8991, Target: 672, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8256, Target: 672, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5389, Target: 108, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8061, Target: 197, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8796, Target: 336, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7058, Target: 477, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7166, Target: 241, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9029, Target: 510, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8579, Target: 142, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4105, Target: 859, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 43, Target: 861, Traits: 0, StrLen: 42, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6729, Target: 563, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 865, Traits: 0, StrLen: 43, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7560, Target: 564, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4996, Target: 592, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6444, Target: 869, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6729, Target: 563, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5989, Target: 873, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7560, Target: 564, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2450, Target: 876, Traits: 0, StrLen: 28, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9143, Target: 236, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7560, Target: 564, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6289, Target: 143, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9511, Target: 669, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7040, Target: 441, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9101, Target: 142, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2074, Target: 886, Traits: 0, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7645, Target: 432, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6463, Target: 890, Traits: 0, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9704, Target: 504, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6489, Target: 664, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7543, Target: 514, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4835, Target: 513, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6009, Target: 896, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9696, Target: 491, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7713, Target: 898, Traits: 0, StrLen: 16, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8421, Target: 662, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 9184, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7905, Target: 478, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7628, Target: 639, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9101, Target: 142, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9902, Target: 494, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9982, Target: 143, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7254, Target: 909, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 636, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3243, Target: 911, Traits: 0, StrLen: 26, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8421, Target: 662, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7628, Target: 638, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9101, Target: 142, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9902, Target: 494, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9982, Target: 143, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2841, Target: 920, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 281, Target: 922, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 125, Target: 924, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2103, Target: 926, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8744, Target: 140, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1716, Target: 929, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5129, Target: 931, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8495, Target: 162, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4651, Target: 933, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8495, Target: 162, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3269, Target: 935, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8848, Target: 427, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 938, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8848, Target: 427, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6029, Target: 941, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9217, Target: 143, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5536, Target: 944, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6860, Target: 946, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6501, Target: 948, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2895, Target: 950, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2478, Target: 952, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5151, Target: 954, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3658, Target: 143, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4674, Target: 957, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8091, Target: 959, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3658, Target: 143, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7729, Target: 963, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6520, Target: 965, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9696, Target: 491, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6049, Target: 967, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9696, Target: 491, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7271, Target: 969, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6878, Target: 971, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 543, Target: 973, Traits: 0, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 433, Target: 975, Traits: 0, StrLen: 37, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 739, Target: 125, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 703, Target: 670, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1437, Target: 979, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1117, Target: 981, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 650, Target: 141, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 507, Target: 129, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 164, Target: 985, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 85, Target: 987, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2814, Target: 138, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1468, Target: 990, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9521, Target: 676, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1149, Target: 992, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1157, Target: 160, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6896, Target: 994, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6539, Target: 996, Traits: 0, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9766, Target: 237, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5431, Target: 432, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 6406, Target: 245, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 5909, Target: 245, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 6842, Target: 245, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 6387, Target: 245, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4129, Target: 1004, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8495, Target: 162, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3683, Target: 1006, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8016, Target: 174, Traits: 0, StrLen: 15, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2506, Target: 1008, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2132, Target: 1010, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2140, Target: 200, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 615, Target: 1012, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2646, Target: 342, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 579, Target: 1014, Traits: 0, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2219, Target: 355, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1499, Target: 1016, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1181, Target: 1018, Traits: 0, StrLen: 32, Count: 22, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9559, Target: 379, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9250, Target: 592, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8196, Target: 399, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9089, Target: 398, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4225, Target: 393, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9261, Target: 400, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3477, Target: 442, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6986, Target: 429, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8783, Target: 247, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7356, Target: 248, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7166, Target: 592, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5515, Target: 209, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7390, Target: 402, Traits: 0, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9077, Target: 255, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5217, Target: 567, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8106, Target: 215, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8166, Target: 375, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3529, Target: 593, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7390, Target: 409, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8361, Target: 568, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 887, Target: 1041, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 684, Target: 1043, Traits: 0, StrLen: 34, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8626, Target: 412, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7599, Target: 436, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9550, Target: 212, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9391, Target: 211, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8203, Target: 399, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3908, Target: 565, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3295, Target: 1051, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 323, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2922, Target: 1053, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6249, Target: 474, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3321, Target: 1055, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 323, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2949, Target: 1057, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6309, Target: 553, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4153, Target: 1059, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 1061, Traits: 0, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9421, Target: 242, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5347, Target: 98, Traits: 0, StrLen: 21, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6710, Target: 142, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1691, Target: 558, Traits: 0, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 7373, Target: 142, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3587, Target: 556, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2161, Target: 1069, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1746, Target: 1071, Traits: 0, StrLen: 30, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9836, Target: 412, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7509, Target: 509, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6737, Target: 216, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8203, Target: 399, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1530, Target: 1078, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9521, Target: 676, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1213, Target: 1080, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1221, Target: 590, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3733, Target: 1082, Traits: 0, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 636, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3347, Target: 1086, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3355, Target: 632, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1561, Target: 1089, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1245, Target: 1093, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5261, Target: 657, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6914, Target: 1097, Traits: 0, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9744, Target: 636, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6558, Target: 1102, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6566, Target: 660, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3758, Target: 1105, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3373, Target: 1107, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9766, Target: 237, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4973, Target: 432, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2786, Target: 432, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4697, Target: 1112, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8978, Target: 713, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4177, Target: 1117, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4185, Target: 716, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2976, Target: 1121, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2534, Target: 1123, Traits: 0, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9766, Target: 237, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3983, Target: 432, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1986, Target: 432, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 7288, Target: 1128, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9228, Target: 142, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6932, Target: 1131, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6577, Target: 1133, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6069, Target: 1135, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3003, Target: 1137, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2646, Target: 341, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9217, Target: 143, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2562, Target: 1140, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2646, Target: 341, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2618, Target: 1142, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9239, Target: 143, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2190, Target: 1145, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8565, Target: 592, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8271, Target: 1147, Traits: 0, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9421, Target: 242, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7076, Target: 487, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7322, Target: 410, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3227, Target: 671, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8529, Target: 243, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2321, Target: 244, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7841, Target: 1155, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5347, Target: 98, Traits: 0, StrLen: 21, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 319, Target: 1158, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 203, Target: 1160, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1085, Target: 112, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5641, Target: 1162, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5195, Target: 1164, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8031, Target: 187, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6653, Target: 1167, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6169, Target: 1171, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9481, Target: 433, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6252, Target: 334, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1592, Target: 1175, Traits: 0, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1341, Target: 1179, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9481, Target: 433, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1309, Target: 367, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7441, Target: 1183, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7004, Target: 1186, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7008, Target: 396, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6672, Target: 1189, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6189, Target: 1191, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6198, Target: 239, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4273, Target: 1194, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9316, Target: 512, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3783, Target: 1198, Traits: 0, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9316, Target: 512, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7022, Target: 1202, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9696, Target: 492, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6691, Target: 1206, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9586, Target: 502, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8551, Target: 1209, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 636, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 8286, Target: 1213, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9604, Target: 650, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3808, Target: 1216, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3425, Target: 1218, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3435, Target: 414, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2248, Target: 1220, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1806, Target: 1222, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4489, Target: 701, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7857, Target: 1225, Traits: 0, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 106, Target: 508, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7458, Target: 1229, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9485, Target: 433, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9360, Target: 688, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4789, Target: 1233, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4297, Target: 1235, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8565, Target: 476, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7526, Target: 1238, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9431, Target: 372, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9595, Target: 142, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 7094, Target: 1242, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8565, Target: 476, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3084, Target: 1245, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9316, Target: 512, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9850, Target: 599, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2702, Target: 1248, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9316, Target: 512, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8331, Target: 1250, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7937, Target: 1252, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4345, Target: 1254, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3858, Target: 1257, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1836, Target: 1259, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1623, Target: 1262, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9744, Target: 635, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2730, Target: 1264, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2309, Target: 430, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2306, Target: 1267, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4369, Target: 1269, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2321, Target: 555, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3883, Target: 1272, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6329, Target: 1274, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5683, Target: 1276, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 986, Target: 1278, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 786, Target: 1280, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5704, Target: 1282, Traits: 0, StrLen: 21, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9978, Target: 518, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5609, Target: 431, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9029, Target: 510, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7166, Target: 241, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7809, Target: 166, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 7777, Target: 166, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9184, Target: 208, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5239, Target: 1292, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8495, Target: 162, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7577, Target: 1294, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7148, Target: 1296, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 357, Target: 1298, Traits: 0, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3165, Target: 120, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 242, Target: 1301, Traits: 0, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2335, Target: 1303, Traits: 0, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 650, Target: 141, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 507, Target: 129, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1866, Target: 1307, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 470, Target: 1309, Traits: 0, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2814, Target: 138, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 395, Target: 1312, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3555, Target: 1314, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2277, Target: 207, Traits: 2, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8848, Target: 427, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3503, Target: 207, Traits: 2, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3111, Target: 1319, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9622, Target: 668, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8848, Target: 427, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1373, Target: 1322, Traits: 0, StrLen: 32, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2646, Target: 341, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8529, Target: 243, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2321, Target: 244, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1019, Target: 1328, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2646, Target: 341, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2364, Target: 1330, Traits: 0, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9250, Target: 392, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8196, Target: 399, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5515, Target: 209, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8166, Target: 375, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1896, Target: 1336, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9250, Target: 592, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2393, Target: 1339, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1926, Target: 1341, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1654, Target: 1343, Traits: 0, StrLen: 31, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8626, Target: 412, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7599, Target: 436, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9550, Target: 212, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 9391, Target: 211, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3908, Target: 565, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1405, Target: 1350, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4927, Target: 1352, Traits: 0, StrLen: 23, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8537, Target: 249, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9101, Target: 142, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6229, Target: 443, Traits: 0, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6482, Target: 570, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9577, Target: 479, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6605, Target: 325, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 9908, Target: 569, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9712, Target: 142, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6129, Target: 142, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8913, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8796, Target: 336, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7058, Target: 477, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4417, Target: 1369, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4950, Target: 1371, Traits: 0, StrLen: 23, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8537, Target: 249, Traits: 0, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9101, Target: 142, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 9896, Target: 428, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6482, Target: 570, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9577, Target: 479, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 9712, Target: 142, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6129, Target: 142, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8913, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8926, Target: 142, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5019, Target: 142, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 8731, Target: 672, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8991, Target: 672, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 8256, Target: 672, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6368, Target: 107, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8061, Target: 197, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 8796, Target: 336, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8001, Target: 144, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 7058, Target: 477, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 8579, Target: 142, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4441, Target: 1392, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 7793, Target: 322, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1052, Target: 1394, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7373, Target: 142, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 820, Target: 1397, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3933, Target: 1399, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3587, Target: 556, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3581, Target: 1402, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1956, Target: 1404, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1691, Target: 558, Traits: 0, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1685, Target: 1407, Traits: 0, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 9451, Target: 374, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3138, Target: 1409, Traits: 0, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 9836, Target: 412, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 7509, Target: 509, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6737, Target: 216, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 601, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2758, Target: 1415, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8382, Target: 675, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4465, Target: 1417, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8978, Target: 712, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3967, Target: 222, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 1420, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 8978, Target: 712, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 7090, Target: 1422, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://storagegateway.amazonaws.com/doc/2013-06-30"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [1423]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+	smithy.NewStaticSchema(&set, 884),
+	smithy.NewStaticSchema(&set, 885),
+	smithy.NewStaticSchema(&set, 886),
+	smithy.NewStaticSchema(&set, 887),
+	smithy.NewStaticSchema(&set, 888),
+	smithy.NewStaticSchema(&set, 889),
+	smithy.NewStaticSchema(&set, 890),
+	smithy.NewStaticSchema(&set, 891),
+	smithy.NewStaticSchema(&set, 892),
+	smithy.NewStaticSchema(&set, 893),
+	smithy.NewStaticSchema(&set, 894),
+	smithy.NewStaticSchema(&set, 895),
+	smithy.NewStaticSchema(&set, 896),
+	smithy.NewStaticSchema(&set, 897),
+	smithy.NewStaticSchema(&set, 898),
+	smithy.NewStaticSchema(&set, 899),
+	smithy.NewStaticSchema(&set, 900),
+	smithy.NewStaticSchema(&set, 901),
+	smithy.NewStaticSchema(&set, 902),
+	smithy.NewStaticSchema(&set, 903),
+	smithy.NewStaticSchema(&set, 904),
+	smithy.NewStaticSchema(&set, 905),
+	smithy.NewStaticSchema(&set, 906),
+	smithy.NewStaticSchema(&set, 907),
+	smithy.NewStaticSchema(&set, 908),
+	smithy.NewStaticSchema(&set, 909),
+	smithy.NewStaticSchema(&set, 910),
+	smithy.NewStaticSchema(&set, 911),
+	smithy.NewStaticSchema(&set, 912),
+	smithy.NewStaticSchema(&set, 913),
+	smithy.NewStaticSchema(&set, 914),
+	smithy.NewStaticSchema(&set, 915),
+	smithy.NewStaticSchema(&set, 916),
+	smithy.NewStaticSchema(&set, 917),
+	smithy.NewStaticSchema(&set, 918),
+	smithy.NewStaticSchema(&set, 919),
+	smithy.NewStaticSchema(&set, 920),
+	smithy.NewStaticSchema(&set, 921),
+	smithy.NewStaticSchema(&set, 922),
+	smithy.NewStaticSchema(&set, 923),
+	smithy.NewStaticSchema(&set, 924),
+	smithy.NewStaticSchema(&set, 925),
+	smithy.NewStaticSchema(&set, 926),
+	smithy.NewStaticSchema(&set, 927),
+	smithy.NewStaticSchema(&set, 928),
+	smithy.NewStaticSchema(&set, 929),
+	smithy.NewStaticSchema(&set, 930),
+	smithy.NewStaticSchema(&set, 931),
+	smithy.NewStaticSchema(&set, 932),
+	smithy.NewStaticSchema(&set, 933),
+	smithy.NewStaticSchema(&set, 934),
+	smithy.NewStaticSchema(&set, 935),
+	smithy.NewStaticSchema(&set, 936),
+	smithy.NewStaticSchema(&set, 937),
+	smithy.NewStaticSchema(&set, 938),
+	smithy.NewStaticSchema(&set, 939),
+	smithy.NewStaticSchema(&set, 940),
+	smithy.NewStaticSchema(&set, 941),
+	smithy.NewStaticSchema(&set, 942),
+	smithy.NewStaticSchema(&set, 943),
+	smithy.NewStaticSchema(&set, 944),
+	smithy.NewStaticSchema(&set, 945),
+	smithy.NewStaticSchema(&set, 946),
+	smithy.NewStaticSchema(&set, 947),
+	smithy.NewStaticSchema(&set, 948),
+	smithy.NewStaticSchema(&set, 949),
+	smithy.NewStaticSchema(&set, 950),
+	smithy.NewStaticSchema(&set, 951),
+	smithy.NewStaticSchema(&set, 952),
+	smithy.NewStaticSchema(&set, 953),
+	smithy.NewStaticSchema(&set, 954),
+	smithy.NewStaticSchema(&set, 955),
+	smithy.NewStaticSchema(&set, 956),
+	smithy.NewStaticSchema(&set, 957),
+	smithy.NewStaticSchema(&set, 958),
+	smithy.NewStaticSchema(&set, 959),
+	smithy.NewStaticSchema(&set, 960),
+	smithy.NewStaticSchema(&set, 961),
+	smithy.NewStaticSchema(&set, 962),
+	smithy.NewStaticSchema(&set, 963),
+	smithy.NewStaticSchema(&set, 964),
+	smithy.NewStaticSchema(&set, 965),
+	smithy.NewStaticSchema(&set, 966),
+	smithy.NewStaticSchema(&set, 967),
+	smithy.NewStaticSchema(&set, 968),
+	smithy.NewStaticSchema(&set, 969),
+	smithy.NewStaticSchema(&set, 970),
+	smithy.NewStaticSchema(&set, 971),
+	smithy.NewStaticSchema(&set, 972),
+	smithy.NewStaticSchema(&set, 973),
+	smithy.NewStaticSchema(&set, 974),
+	smithy.NewStaticSchema(&set, 975),
+	smithy.NewStaticSchema(&set, 976),
+	smithy.NewStaticSchema(&set, 977),
+	smithy.NewStaticSchema(&set, 978),
+	smithy.NewStaticSchema(&set, 979),
+	smithy.NewStaticSchema(&set, 980),
+	smithy.NewStaticSchema(&set, 981),
+	smithy.NewStaticSchema(&set, 982),
+	smithy.NewStaticSchema(&set, 983),
+	smithy.NewStaticSchema(&set, 984),
+	smithy.NewStaticSchema(&set, 985),
+	smithy.NewStaticSchema(&set, 986),
+	smithy.NewStaticSchema(&set, 987),
+	smithy.NewStaticSchema(&set, 988),
+	smithy.NewStaticSchema(&set, 989),
+	smithy.NewStaticSchema(&set, 990),
+	smithy.NewStaticSchema(&set, 991),
+	smithy.NewStaticSchema(&set, 992),
+	smithy.NewStaticSchema(&set, 993),
+	smithy.NewStaticSchema(&set, 994),
+	smithy.NewStaticSchema(&set, 995),
+	smithy.NewStaticSchema(&set, 996),
+	smithy.NewStaticSchema(&set, 997),
+	smithy.NewStaticSchema(&set, 998),
+	smithy.NewStaticSchema(&set, 999),
+	smithy.NewStaticSchema(&set, 1000),
+	smithy.NewStaticSchema(&set, 1001),
+	smithy.NewStaticSchema(&set, 1002),
+	smithy.NewStaticSchema(&set, 1003),
+	smithy.NewStaticSchema(&set, 1004),
+	smithy.NewStaticSchema(&set, 1005),
+	smithy.NewStaticSchema(&set, 1006),
+	smithy.NewStaticSchema(&set, 1007),
+	smithy.NewStaticSchema(&set, 1008),
+	smithy.NewStaticSchema(&set, 1009),
+	smithy.NewStaticSchema(&set, 1010),
+	smithy.NewStaticSchema(&set, 1011),
+	smithy.NewStaticSchema(&set, 1012),
+	smithy.NewStaticSchema(&set, 1013),
+	smithy.NewStaticSchema(&set, 1014),
+	smithy.NewStaticSchema(&set, 1015),
+	smithy.NewStaticSchema(&set, 1016),
+	smithy.NewStaticSchema(&set, 1017),
+	smithy.NewStaticSchema(&set, 1018),
+	smithy.NewStaticSchema(&set, 1019),
+	smithy.NewStaticSchema(&set, 1020),
+	smithy.NewStaticSchema(&set, 1021),
+	smithy.NewStaticSchema(&set, 1022),
+	smithy.NewStaticSchema(&set, 1023),
+	smithy.NewStaticSchema(&set, 1024),
+	smithy.NewStaticSchema(&set, 1025),
+	smithy.NewStaticSchema(&set, 1026),
+	smithy.NewStaticSchema(&set, 1027),
+	smithy.NewStaticSchema(&set, 1028),
+	smithy.NewStaticSchema(&set, 1029),
+	smithy.NewStaticSchema(&set, 1030),
+	smithy.NewStaticSchema(&set, 1031),
+	smithy.NewStaticSchema(&set, 1032),
+	smithy.NewStaticSchema(&set, 1033),
+	smithy.NewStaticSchema(&set, 1034),
+	smithy.NewStaticSchema(&set, 1035),
+	smithy.NewStaticSchema(&set, 1036),
+	smithy.NewStaticSchema(&set, 1037),
+	smithy.NewStaticSchema(&set, 1038),
+	smithy.NewStaticSchema(&set, 1039),
+	smithy.NewStaticSchema(&set, 1040),
+	smithy.NewStaticSchema(&set, 1041),
+	smithy.NewStaticSchema(&set, 1042),
+	smithy.NewStaticSchema(&set, 1043),
+	smithy.NewStaticSchema(&set, 1044),
+	smithy.NewStaticSchema(&set, 1045),
+	smithy.NewStaticSchema(&set, 1046),
+	smithy.NewStaticSchema(&set, 1047),
+	smithy.NewStaticSchema(&set, 1048),
+	smithy.NewStaticSchema(&set, 1049),
+	smithy.NewStaticSchema(&set, 1050),
+	smithy.NewStaticSchema(&set, 1051),
+	smithy.NewStaticSchema(&set, 1052),
+	smithy.NewStaticSchema(&set, 1053),
+	smithy.NewStaticSchema(&set, 1054),
+	smithy.NewStaticSchema(&set, 1055),
+	smithy.NewStaticSchema(&set, 1056),
+	smithy.NewStaticSchema(&set, 1057),
+	smithy.NewStaticSchema(&set, 1058),
+	smithy.NewStaticSchema(&set, 1059),
+	smithy.NewStaticSchema(&set, 1060),
+	smithy.NewStaticSchema(&set, 1061),
+	smithy.NewStaticSchema(&set, 1062),
+	smithy.NewStaticSchema(&set, 1063),
+	smithy.NewStaticSchema(&set, 1064),
+	smithy.NewStaticSchema(&set, 1065),
+	smithy.NewStaticSchema(&set, 1066),
+	smithy.NewStaticSchema(&set, 1067),
+	smithy.NewStaticSchema(&set, 1068),
+	smithy.NewStaticSchema(&set, 1069),
+	smithy.NewStaticSchema(&set, 1070),
+	smithy.NewStaticSchema(&set, 1071),
+	smithy.NewStaticSchema(&set, 1072),
+	smithy.NewStaticSchema(&set, 1073),
+	smithy.NewStaticSchema(&set, 1074),
+	smithy.NewStaticSchema(&set, 1075),
+	smithy.NewStaticSchema(&set, 1076),
+	smithy.NewStaticSchema(&set, 1077),
+	smithy.NewStaticSchema(&set, 1078),
+	smithy.NewStaticSchema(&set, 1079),
+	smithy.NewStaticSchema(&set, 1080),
+	smithy.NewStaticSchema(&set, 1081),
+	smithy.NewStaticSchema(&set, 1082),
+	smithy.NewStaticSchema(&set, 1083),
+	smithy.NewStaticSchema(&set, 1084),
+	smithy.NewStaticSchema(&set, 1085),
+	smithy.NewStaticSchema(&set, 1086),
+	smithy.NewStaticSchema(&set, 1087),
+	smithy.NewStaticSchema(&set, 1088),
+	smithy.NewStaticSchema(&set, 1089),
+	smithy.NewStaticSchema(&set, 1090),
+	smithy.NewStaticSchema(&set, 1091),
+	smithy.NewStaticSchema(&set, 1092),
+	smithy.NewStaticSchema(&set, 1093),
+	smithy.NewStaticSchema(&set, 1094),
+	smithy.NewStaticSchema(&set, 1095),
+	smithy.NewStaticSchema(&set, 1096),
+	smithy.NewStaticSchema(&set, 1097),
+	smithy.NewStaticSchema(&set, 1098),
+	smithy.NewStaticSchema(&set, 1099),
+	smithy.NewStaticSchema(&set, 1100),
+	smithy.NewStaticSchema(&set, 1101),
+	smithy.NewStaticSchema(&set, 1102),
+	smithy.NewStaticSchema(&set, 1103),
+	smithy.NewStaticSchema(&set, 1104),
+	smithy.NewStaticSchema(&set, 1105),
+	smithy.NewStaticSchema(&set, 1106),
+	smithy.NewStaticSchema(&set, 1107),
+	smithy.NewStaticSchema(&set, 1108),
+	smithy.NewStaticSchema(&set, 1109),
+	smithy.NewStaticSchema(&set, 1110),
+	smithy.NewStaticSchema(&set, 1111),
+	smithy.NewStaticSchema(&set, 1112),
+	smithy.NewStaticSchema(&set, 1113),
+	smithy.NewStaticSchema(&set, 1114),
+	smithy.NewStaticSchema(&set, 1115),
+	smithy.NewStaticSchema(&set, 1116),
+	smithy.NewStaticSchema(&set, 1117),
+	smithy.NewStaticSchema(&set, 1118),
+	smithy.NewStaticSchema(&set, 1119),
+	smithy.NewStaticSchema(&set, 1120),
+	smithy.NewStaticSchema(&set, 1121),
+	smithy.NewStaticSchema(&set, 1122),
+	smithy.NewStaticSchema(&set, 1123),
+	smithy.NewStaticSchema(&set, 1124),
+	smithy.NewStaticSchema(&set, 1125),
+	smithy.NewStaticSchema(&set, 1126),
+	smithy.NewStaticSchema(&set, 1127),
+	smithy.NewStaticSchema(&set, 1128),
+	smithy.NewStaticSchema(&set, 1129),
+	smithy.NewStaticSchema(&set, 1130),
+	smithy.NewStaticSchema(&set, 1131),
+	smithy.NewStaticSchema(&set, 1132),
+	smithy.NewStaticSchema(&set, 1133),
+	smithy.NewStaticSchema(&set, 1134),
+	smithy.NewStaticSchema(&set, 1135),
+	smithy.NewStaticSchema(&set, 1136),
+	smithy.NewStaticSchema(&set, 1137),
+	smithy.NewStaticSchema(&set, 1138),
+	smithy.NewStaticSchema(&set, 1139),
+	smithy.NewStaticSchema(&set, 1140),
+	smithy.NewStaticSchema(&set, 1141),
+	smithy.NewStaticSchema(&set, 1142),
+	smithy.NewStaticSchema(&set, 1143),
+	smithy.NewStaticSchema(&set, 1144),
+	smithy.NewStaticSchema(&set, 1145),
+	smithy.NewStaticSchema(&set, 1146),
+	smithy.NewStaticSchema(&set, 1147),
+	smithy.NewStaticSchema(&set, 1148),
+	smithy.NewStaticSchema(&set, 1149),
+	smithy.NewStaticSchema(&set, 1150),
+	smithy.NewStaticSchema(&set, 1151),
+	smithy.NewStaticSchema(&set, 1152),
+	smithy.NewStaticSchema(&set, 1153),
+	smithy.NewStaticSchema(&set, 1154),
+	smithy.NewStaticSchema(&set, 1155),
+	smithy.NewStaticSchema(&set, 1156),
+	smithy.NewStaticSchema(&set, 1157),
+	smithy.NewStaticSchema(&set, 1158),
+	smithy.NewStaticSchema(&set, 1159),
+	smithy.NewStaticSchema(&set, 1160),
+	smithy.NewStaticSchema(&set, 1161),
+	smithy.NewStaticSchema(&set, 1162),
+	smithy.NewStaticSchema(&set, 1163),
+	smithy.NewStaticSchema(&set, 1164),
+	smithy.NewStaticSchema(&set, 1165),
+	smithy.NewStaticSchema(&set, 1166),
+	smithy.NewStaticSchema(&set, 1167),
+	smithy.NewStaticSchema(&set, 1168),
+	smithy.NewStaticSchema(&set, 1169),
+	smithy.NewStaticSchema(&set, 1170),
+	smithy.NewStaticSchema(&set, 1171),
+	smithy.NewStaticSchema(&set, 1172),
+	smithy.NewStaticSchema(&set, 1173),
+	smithy.NewStaticSchema(&set, 1174),
+	smithy.NewStaticSchema(&set, 1175),
+	smithy.NewStaticSchema(&set, 1176),
+	smithy.NewStaticSchema(&set, 1177),
+	smithy.NewStaticSchema(&set, 1178),
+	smithy.NewStaticSchema(&set, 1179),
+	smithy.NewStaticSchema(&set, 1180),
+	smithy.NewStaticSchema(&set, 1181),
+	smithy.NewStaticSchema(&set, 1182),
+	smithy.NewStaticSchema(&set, 1183),
+	smithy.NewStaticSchema(&set, 1184),
+	smithy.NewStaticSchema(&set, 1185),
+	smithy.NewStaticSchema(&set, 1186),
+	smithy.NewStaticSchema(&set, 1187),
+	smithy.NewStaticSchema(&set, 1188),
+	smithy.NewStaticSchema(&set, 1189),
+	smithy.NewStaticSchema(&set, 1190),
+	smithy.NewStaticSchema(&set, 1191),
+	smithy.NewStaticSchema(&set, 1192),
+	smithy.NewStaticSchema(&set, 1193),
+	smithy.NewStaticSchema(&set, 1194),
+	smithy.NewStaticSchema(&set, 1195),
+	smithy.NewStaticSchema(&set, 1196),
+	smithy.NewStaticSchema(&set, 1197),
+	smithy.NewStaticSchema(&set, 1198),
+	smithy.NewStaticSchema(&set, 1199),
+	smithy.NewStaticSchema(&set, 1200),
+	smithy.NewStaticSchema(&set, 1201),
+	smithy.NewStaticSchema(&set, 1202),
+	smithy.NewStaticSchema(&set, 1203),
+	smithy.NewStaticSchema(&set, 1204),
+	smithy.NewStaticSchema(&set, 1205),
+	smithy.NewStaticSchema(&set, 1206),
+	smithy.NewStaticSchema(&set, 1207),
+	smithy.NewStaticSchema(&set, 1208),
+	smithy.NewStaticSchema(&set, 1209),
+	smithy.NewStaticSchema(&set, 1210),
+	smithy.NewStaticSchema(&set, 1211),
+	smithy.NewStaticSchema(&set, 1212),
+	smithy.NewStaticSchema(&set, 1213),
+	smithy.NewStaticSchema(&set, 1214),
+	smithy.NewStaticSchema(&set, 1215),
+	smithy.NewStaticSchema(&set, 1216),
+	smithy.NewStaticSchema(&set, 1217),
+	smithy.NewStaticSchema(&set, 1218),
+	smithy.NewStaticSchema(&set, 1219),
+	smithy.NewStaticSchema(&set, 1220),
+	smithy.NewStaticSchema(&set, 1221),
+	smithy.NewStaticSchema(&set, 1222),
+	smithy.NewStaticSchema(&set, 1223),
+	smithy.NewStaticSchema(&set, 1224),
+	smithy.NewStaticSchema(&set, 1225),
+	smithy.NewStaticSchema(&set, 1226),
+	smithy.NewStaticSchema(&set, 1227),
+	smithy.NewStaticSchema(&set, 1228),
+	smithy.NewStaticSchema(&set, 1229),
+	smithy.NewStaticSchema(&set, 1230),
+	smithy.NewStaticSchema(&set, 1231),
+	smithy.NewStaticSchema(&set, 1232),
+	smithy.NewStaticSchema(&set, 1233),
+	smithy.NewStaticSchema(&set, 1234),
+	smithy.NewStaticSchema(&set, 1235),
+	smithy.NewStaticSchema(&set, 1236),
+	smithy.NewStaticSchema(&set, 1237),
+	smithy.NewStaticSchema(&set, 1238),
+	smithy.NewStaticSchema(&set, 1239),
+	smithy.NewStaticSchema(&set, 1240),
+	smithy.NewStaticSchema(&set, 1241),
+	smithy.NewStaticSchema(&set, 1242),
+	smithy.NewStaticSchema(&set, 1243),
+	smithy.NewStaticSchema(&set, 1244),
+	smithy.NewStaticSchema(&set, 1245),
+	smithy.NewStaticSchema(&set, 1246),
+	smithy.NewStaticSchema(&set, 1247),
+	smithy.NewStaticSchema(&set, 1248),
+	smithy.NewStaticSchema(&set, 1249),
+	smithy.NewStaticSchema(&set, 1250),
+	smithy.NewStaticSchema(&set, 1251),
+	smithy.NewStaticSchema(&set, 1252),
+	smithy.NewStaticSchema(&set, 1253),
+	smithy.NewStaticSchema(&set, 1254),
+	smithy.NewStaticSchema(&set, 1255),
+	smithy.NewStaticSchema(&set, 1256),
+	smithy.NewStaticSchema(&set, 1257),
+	smithy.NewStaticSchema(&set, 1258),
+	smithy.NewStaticSchema(&set, 1259),
+	smithy.NewStaticSchema(&set, 1260),
+	smithy.NewStaticSchema(&set, 1261),
+	smithy.NewStaticSchema(&set, 1262),
+	smithy.NewStaticSchema(&set, 1263),
+	smithy.NewStaticSchema(&set, 1264),
+	smithy.NewStaticSchema(&set, 1265),
+	smithy.NewStaticSchema(&set, 1266),
+	smithy.NewStaticSchema(&set, 1267),
+	smithy.NewStaticSchema(&set, 1268),
+	smithy.NewStaticSchema(&set, 1269),
+	smithy.NewStaticSchema(&set, 1270),
+	smithy.NewStaticSchema(&set, 1271),
+	smithy.NewStaticSchema(&set, 1272),
+	smithy.NewStaticSchema(&set, 1273),
+	smithy.NewStaticSchema(&set, 1274),
+	smithy.NewStaticSchema(&set, 1275),
+	smithy.NewStaticSchema(&set, 1276),
+	smithy.NewStaticSchema(&set, 1277),
+	smithy.NewStaticSchema(&set, 1278),
+	smithy.NewStaticSchema(&set, 1279),
+	smithy.NewStaticSchema(&set, 1280),
+	smithy.NewStaticSchema(&set, 1281),
+	smithy.NewStaticSchema(&set, 1282),
+	smithy.NewStaticSchema(&set, 1283),
+	smithy.NewStaticSchema(&set, 1284),
+	smithy.NewStaticSchema(&set, 1285),
+	smithy.NewStaticSchema(&set, 1286),
+	smithy.NewStaticSchema(&set, 1287),
+	smithy.NewStaticSchema(&set, 1288),
+	smithy.NewStaticSchema(&set, 1289),
+	smithy.NewStaticSchema(&set, 1290),
+	smithy.NewStaticSchema(&set, 1291),
+	smithy.NewStaticSchema(&set, 1292),
+	smithy.NewStaticSchema(&set, 1293),
+	smithy.NewStaticSchema(&set, 1294),
+	smithy.NewStaticSchema(&set, 1295),
+	smithy.NewStaticSchema(&set, 1296),
+	smithy.NewStaticSchema(&set, 1297),
+	smithy.NewStaticSchema(&set, 1298),
+	smithy.NewStaticSchema(&set, 1299),
+	smithy.NewStaticSchema(&set, 1300),
+	smithy.NewStaticSchema(&set, 1301),
+	smithy.NewStaticSchema(&set, 1302),
+	smithy.NewStaticSchema(&set, 1303),
+	smithy.NewStaticSchema(&set, 1304),
+	smithy.NewStaticSchema(&set, 1305),
+	smithy.NewStaticSchema(&set, 1306),
+	smithy.NewStaticSchema(&set, 1307),
+	smithy.NewStaticSchema(&set, 1308),
+	smithy.NewStaticSchema(&set, 1309),
+	smithy.NewStaticSchema(&set, 1310),
+	smithy.NewStaticSchema(&set, 1311),
+	smithy.NewStaticSchema(&set, 1312),
+	smithy.NewStaticSchema(&set, 1313),
+	smithy.NewStaticSchema(&set, 1314),
+	smithy.NewStaticSchema(&set, 1315),
+	smithy.NewStaticSchema(&set, 1316),
+	smithy.NewStaticSchema(&set, 1317),
+	smithy.NewStaticSchema(&set, 1318),
+	smithy.NewStaticSchema(&set, 1319),
+	smithy.NewStaticSchema(&set, 1320),
+	smithy.NewStaticSchema(&set, 1321),
+	smithy.NewStaticSchema(&set, 1322),
+	smithy.NewStaticSchema(&set, 1323),
+	smithy.NewStaticSchema(&set, 1324),
+	smithy.NewStaticSchema(&set, 1325),
+	smithy.NewStaticSchema(&set, 1326),
+	smithy.NewStaticSchema(&set, 1327),
+	smithy.NewStaticSchema(&set, 1328),
+	smithy.NewStaticSchema(&set, 1329),
+	smithy.NewStaticSchema(&set, 1330),
+	smithy.NewStaticSchema(&set, 1331),
+	smithy.NewStaticSchema(&set, 1332),
+	smithy.NewStaticSchema(&set, 1333),
+	smithy.NewStaticSchema(&set, 1334),
+	smithy.NewStaticSchema(&set, 1335),
+	smithy.NewStaticSchema(&set, 1336),
+	smithy.NewStaticSchema(&set, 1337),
+	smithy.NewStaticSchema(&set, 1338),
+	smithy.NewStaticSchema(&set, 1339),
+	smithy.NewStaticSchema(&set, 1340),
+	smithy.NewStaticSchema(&set, 1341),
+	smithy.NewStaticSchema(&set, 1342),
+	smithy.NewStaticSchema(&set, 1343),
+	smithy.NewStaticSchema(&set, 1344),
+	smithy.NewStaticSchema(&set, 1345),
+	smithy.NewStaticSchema(&set, 1346),
+	smithy.NewStaticSchema(&set, 1347),
+	smithy.NewStaticSchema(&set, 1348),
+	smithy.NewStaticSchema(&set, 1349),
+	smithy.NewStaticSchema(&set, 1350),
+	smithy.NewStaticSchema(&set, 1351),
+	smithy.NewStaticSchema(&set, 1352),
+	smithy.NewStaticSchema(&set, 1353),
+	smithy.NewStaticSchema(&set, 1354),
+	smithy.NewStaticSchema(&set, 1355),
+	smithy.NewStaticSchema(&set, 1356),
+	smithy.NewStaticSchema(&set, 1357),
+	smithy.NewStaticSchema(&set, 1358),
+	smithy.NewStaticSchema(&set, 1359),
+	smithy.NewStaticSchema(&set, 1360),
+	smithy.NewStaticSchema(&set, 1361),
+	smithy.NewStaticSchema(&set, 1362),
+	smithy.NewStaticSchema(&set, 1363),
+	smithy.NewStaticSchema(&set, 1364),
+	smithy.NewStaticSchema(&set, 1365),
+	smithy.NewStaticSchema(&set, 1366),
+	smithy.NewStaticSchema(&set, 1367),
+	smithy.NewStaticSchema(&set, 1368),
+	smithy.NewStaticSchema(&set, 1369),
+	smithy.NewStaticSchema(&set, 1370),
+	smithy.NewStaticSchema(&set, 1371),
+	smithy.NewStaticSchema(&set, 1372),
+	smithy.NewStaticSchema(&set, 1373),
+	smithy.NewStaticSchema(&set, 1374),
+	smithy.NewStaticSchema(&set, 1375),
+	smithy.NewStaticSchema(&set, 1376),
+	smithy.NewStaticSchema(&set, 1377),
+	smithy.NewStaticSchema(&set, 1378),
+	smithy.NewStaticSchema(&set, 1379),
+	smithy.NewStaticSchema(&set, 1380),
+	smithy.NewStaticSchema(&set, 1381),
+	smithy.NewStaticSchema(&set, 1382),
+	smithy.NewStaticSchema(&set, 1383),
+	smithy.NewStaticSchema(&set, 1384),
+	smithy.NewStaticSchema(&set, 1385),
+	smithy.NewStaticSchema(&set, 1386),
+	smithy.NewStaticSchema(&set, 1387),
+	smithy.NewStaticSchema(&set, 1388),
+	smithy.NewStaticSchema(&set, 1389),
+	smithy.NewStaticSchema(&set, 1390),
+	smithy.NewStaticSchema(&set, 1391),
+	smithy.NewStaticSchema(&set, 1392),
+	smithy.NewStaticSchema(&set, 1393),
+	smithy.NewStaticSchema(&set, 1394),
+	smithy.NewStaticSchema(&set, 1395),
+	smithy.NewStaticSchema(&set, 1396),
+	smithy.NewStaticSchema(&set, 1397),
+	smithy.NewStaticSchema(&set, 1398),
+	smithy.NewStaticSchema(&set, 1399),
+	smithy.NewStaticSchema(&set, 1400),
+	smithy.NewStaticSchema(&set, 1401),
+	smithy.NewStaticSchema(&set, 1402),
+	smithy.NewStaticSchema(&set, 1403),
+	smithy.NewStaticSchema(&set, 1404),
+	smithy.NewStaticSchema(&set, 1405),
+	smithy.NewStaticSchema(&set, 1406),
+	smithy.NewStaticSchema(&set, 1407),
+	smithy.NewStaticSchema(&set, 1408),
+	smithy.NewStaticSchema(&set, 1409),
+	smithy.NewStaticSchema(&set, 1410),
+	smithy.NewStaticSchema(&set, 1411),
+	smithy.NewStaticSchema(&set, 1412),
+	smithy.NewStaticSchema(&set, 1413),
+	smithy.NewStaticSchema(&set, 1414),
+	smithy.NewStaticSchema(&set, 1415),
+	smithy.NewStaticSchema(&set, 1416),
+	smithy.NewStaticSchema(&set, 1417),
+	smithy.NewStaticSchema(&set, 1418),
+	smithy.NewStaticSchema(&set, 1419),
+	smithy.NewStaticSchema(&set, 1420),
+	smithy.NewStaticSchema(&set, 1421),
+	smithy.NewStaticSchema(&set, 1422),
+}
+
+var ActivateGateway = &handles[0]
+
+var AddCache = &handles[1]
+
+var AddTagsToResource = &handles[2]
+
+var AddUploadBuffer = &handles[3]
+
+var AddWorkingStorage = &handles[4]
+
+var AssignTapePool = &handles[5]
+
+var AssociateFileSystem = &handles[6]
+
+var AttachVolume = &handles[7]
+
+var CancelArchival = &handles[8]
+
+var CancelCacheReport = &handles[9]
+
+var CancelRetrieval = &handles[10]
+
+var CreateCachediSCSIVolume = &handles[11]
+
+var CreateNFSFileShare = &handles[12]
+
+var CreateSMBFileShare = &handles[13]
+
+var CreateSnapshot = &handles[14]
+
+var CreateSnapshotFromVolumeRecoveryPoint = &handles[15]
+
+var CreateStorediSCSIVolume = &handles[16]
+
+var CreateTapePool = &handles[17]
+
+var CreateTapes = &handles[18]
+
+var CreateTapeWithBarcode = &handles[19]
+
+var DeleteAutomaticTapeCreationPolicy = &handles[20]
+
+var DeleteBandwidthRateLimit = &handles[21]
+
+var DeleteCacheReport = &handles[22]
+
+var DeleteChapCredentials = &handles[23]
+
+var DeleteFileShare = &handles[24]
+
+var DeleteGateway = &handles[25]
+
+var DeleteSnapshotSchedule = &handles[26]
+
+var DeleteTape = &handles[27]
+
+var DeleteTapeArchive = &handles[28]
+
+var DeleteTapePool = &handles[29]
+
+var DeleteVolume = &handles[30]
+
+var DescribeAvailabilityMonitorTest = &handles[31]
+
+var DescribeBandwidthRateLimit = &handles[32]
+
+var DescribeBandwidthRateLimitSchedule = &handles[33]
+
+var DescribeCache = &handles[34]
+
+var DescribeCachediSCSIVolumes = &handles[35]
+
+var DescribeCacheReport = &handles[36]
+
+var DescribeChapCredentials = &handles[37]
+
+var DescribeFileSystemAssociations = &handles[38]
+
+var DescribeGatewayInformation = &handles[39]
+
+var DescribeMaintenanceStartTime = &handles[40]
+
+var DescribeNFSFileShares = &handles[41]
+
+var DescribeSMBFileShares = &handles[42]
+
+var DescribeSMBSettings = &handles[43]
+
+var DescribeSnapshotSchedule = &handles[44]
+
+var DescribeStorediSCSIVolumes = &handles[45]
+
+var DescribeTapeArchives = &handles[46]
+
+var DescribeTapeRecoveryPoints = &handles[47]
+
+var DescribeTapes = &handles[48]
+
+var DescribeUploadBuffer = &handles[49]
+
+var DescribeVTLDevices = &handles[50]
+
+var DescribeWorkingStorage = &handles[51]
+
+var DetachVolume = &handles[52]
+
+var DisableGateway = &handles[53]
+
+var DisassociateFileSystem = &handles[54]
+
+var EvictFilesFailingUpload = &handles[55]
+
+var JoinDomain = &handles[56]
+
+var ListAutomaticTapeCreationPolicies = &handles[57]
+
+var ListCacheReports = &handles[58]
+
+var ListFileShares = &handles[59]
+
+var ListFileSystemAssociations = &handles[60]
+
+var ListGateways = &handles[61]
+
+var ListLocalDisks = &handles[62]
+
+var ListTagsForResource = &handles[63]
+
+var ListTapePools = &handles[64]
+
+var ListTapes = &handles[65]
+
+var ListVolumeInitiators = &handles[66]
+
+var ListVolumeRecoveryPoints = &handles[67]
+
+var ListVolumes = &handles[68]
+
+var NotifyWhenUploaded = &handles[69]
+
+var RefreshCache = &handles[70]
+
+var RemoveTagsFromResource = &handles[71]
+
+var ResetCache = &handles[72]
+
+var RetrieveTapeArchive = &handles[73]
+
+var RetrieveTapeRecoveryPoint = &handles[74]
+
+var SetLocalConsolePassword = &handles[75]
+
+var SetSMBGuestPassword = &handles[76]
+
+var ShutdownGateway = &handles[77]
+
+var StartAvailabilityMonitorTest = &handles[78]
+
+var StartCacheReport = &handles[79]
+
+var StartGateway = &handles[80]
+
+var UpdateAutomaticTapeCreationPolicy = &handles[81]
+
+var UpdateBandwidthRateLimit = &handles[82]
+
+var UpdateBandwidthRateLimitSchedule = &handles[83]
+
+var UpdateChapCredentials = &handles[84]
+
+var UpdateFileSystemAssociation = &handles[85]
+
+var UpdateGatewayInformation = &handles[86]
+
+var UpdateGatewaySoftwareNow = &handles[87]
+
+var UpdateMaintenanceStartTime = &handles[88]
+
+var UpdateNFSFileShare = &handles[89]
+
+var UpdateSMBFileShare = &handles[90]
+
+var UpdateSMBFileShareVisibility = &handles[91]
+
+var UpdateSMBLocalGroups = &handles[92]
+
+var UpdateSMBSecurityStrategy = &handles[93]
+
+var UpdateSnapshotSchedule = &handles[94]
+
+var UpdateVTLDeviceType = &handles[95]
+
+var _StorageGateway_20130630 = &handles[96]
+
+var _ActivationKey = &handles[97]
+
+var ActiveDirectoryStatus = &handles[98]
+var ActiveDirectoryStatus_ACCESS_DENIED = &handles[99]
+var ActiveDirectoryStatus_DETACHED = &handles[100]
+var ActiveDirectoryStatus_JOINED = &handles[101]
+var ActiveDirectoryStatus_JOINING = &handles[102]
+var ActiveDirectoryStatus_NETWORK_ERROR = &handles[103]
+var ActiveDirectoryStatus_TIMEOUT = &handles[104]
+var ActiveDirectoryStatus_UNKNOWN_ERROR = &handles[105]
+var ActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS = &handles[106]
+
+var _AuditDestinationARN = &handles[107]
+
+var _Authentication = &handles[108]
+
+var AutomaticTapeCreationPolicyInfo = &handles[109]
+var AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules = &handles[110]
+var AutomaticTapeCreationPolicyInfo_GatewayARN = &handles[111]
+
+var _AutomaticTapeCreationPolicyInfos = &handles[112]
+var _AutomaticTapeCreationPolicyInfos_member = &handles[113]
+
+var AutomaticTapeCreationRule = &handles[114]
+var AutomaticTapeCreationRule_TapeBarcodePrefix = &handles[115]
+var AutomaticTapeCreationRule_PoolId = &handles[116]
+var AutomaticTapeCreationRule_TapeSizeInBytes = &handles[117]
+var AutomaticTapeCreationRule_MinimumNumTapes = &handles[118]
+var AutomaticTapeCreationRule_Worm = &handles[119]
+
+var _AutomaticTapeCreationRules = &handles[120]
+var _AutomaticTapeCreationRules_member = &handles[121]
+
+var AutomaticUpdatePolicy = &handles[122]
+var AutomaticUpdatePolicy_ALL_VERSIONS = &handles[123]
+var AutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY = &handles[124]
+
+var AvailabilityMonitorTestStatus = &handles[125]
+var AvailabilityMonitorTestStatus_COMPLETE = &handles[126]
+var AvailabilityMonitorTestStatus_FAILED = &handles[127]
+var AvailabilityMonitorTestStatus_PENDING = &handles[128]
+
+var _BandwidthDownloadRateLimit = &handles[129]
+
+var BandwidthRateLimitInterval = &handles[130]
+var BandwidthRateLimitInterval_StartHourOfDay = &handles[131]
+var BandwidthRateLimitInterval_StartMinuteOfHour = &handles[132]
+var BandwidthRateLimitInterval_EndHourOfDay = &handles[133]
+var BandwidthRateLimitInterval_EndMinuteOfHour = &handles[134]
+var BandwidthRateLimitInterval_DaysOfWeek = &handles[135]
+var BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = &handles[136]
+var BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec = &handles[137]
+
+var _BandwidthRateLimitIntervals = &handles[138]
+var _BandwidthRateLimitIntervals_member = &handles[139]
+
+var _BandwidthType = &handles[140]
+
+var _BandwidthUploadRateLimit = &handles[141]
+
+var _Boolean = &handles[142]
+
+var _Boolean2 = &handles[143]
+
+var CacheAttributes = &handles[144]
+var CacheAttributes_CacheStaleTimeoutInSeconds = &handles[145]
+
+var CachediSCSIVolume = &handles[146]
+var CachediSCSIVolume_VolumeARN = &handles[147]
+var CachediSCSIVolume_VolumeId = &handles[148]
+var CachediSCSIVolume_VolumeType = &handles[149]
+var CachediSCSIVolume_VolumeStatus = &handles[150]
+var CachediSCSIVolume_VolumeAttachmentStatus = &handles[151]
+var CachediSCSIVolume_VolumeSizeInBytes = &handles[152]
+var CachediSCSIVolume_VolumeProgress = &handles[153]
+var CachediSCSIVolume_SourceSnapshotId = &handles[154]
+var CachediSCSIVolume_VolumeiSCSIAttributes = &handles[155]
+var CachediSCSIVolume_CreatedDate = &handles[156]
+var CachediSCSIVolume_VolumeUsedInBytes = &handles[157]
+var CachediSCSIVolume_KMSKey = &handles[158]
+var CachediSCSIVolume_TargetName = &handles[159]
+
+var _CachediSCSIVolumes = &handles[160]
+var _CachediSCSIVolumes_member = &handles[161]
+
+var _CacheReportARN = &handles[162]
+
+var CacheReportFilter = &handles[163]
+var CacheReportFilter_Name = &handles[164]
+var CacheReportFilter_Values = &handles[165]
+
+var _CacheReportFilterList = &handles[166]
+var _CacheReportFilterList_member = &handles[167]
+
+var CacheReportFilterName = &handles[168]
+var CacheReportFilterName_UploadState = &handles[169]
+var CacheReportFilterName_UploadFailureReason = &handles[170]
+
+var _CacheReportFilterValue = &handles[171]
+
+var _CacheReportFilterValues = &handles[172]
+var _CacheReportFilterValues_member = &handles[173]
+
+var CacheReportInfo = &handles[174]
+var CacheReportInfo_CacheReportARN = &handles[175]
+var CacheReportInfo_CacheReportStatus = &handles[176]
+var CacheReportInfo_ReportCompletionPercent = &handles[177]
+var CacheReportInfo_EndTime = &handles[178]
+var CacheReportInfo_Role = &handles[179]
+var CacheReportInfo_FileShareARN = &handles[180]
+var CacheReportInfo_LocationARN = &handles[181]
+var CacheReportInfo_StartTime = &handles[182]
+var CacheReportInfo_InclusionFilters = &handles[183]
+var CacheReportInfo_ExclusionFilters = &handles[184]
+var CacheReportInfo_ReportName = &handles[185]
+var CacheReportInfo_Tags = &handles[186]
+
+var _CacheReportList = &handles[187]
+var _CacheReportList_member = &handles[188]
+
+var _CacheReportName = &handles[189]
+
+var CacheReportStatus = &handles[190]
+var CacheReportStatus_IN_PROGRESS = &handles[191]
+var CacheReportStatus_COMPLETED = &handles[192]
+var CacheReportStatus_CANCELED = &handles[193]
+var CacheReportStatus_FAILED = &handles[194]
+var CacheReportStatus_ERROR = &handles[195]
+
+var _CacheStaleTimeoutInSeconds = &handles[196]
+
+var CaseSensitivity = &handles[197]
+var CaseSensitivity_ClientSpecified = &handles[198]
+var CaseSensitivity_CaseSensitive = &handles[199]
+
+var _ChapCredentials = &handles[200]
+var _ChapCredentials_member = &handles[201]
+
+var ChapInfo = &handles[202]
+var ChapInfo_TargetARN = &handles[203]
+var ChapInfo_SecretToAuthenticateInitiator = &handles[204]
+var ChapInfo_InitiatorName = &handles[205]
+var ChapInfo_SecretToAuthenticateTarget = &handles[206]
+
+var _ChapSecret = &handles[207]
+
+var _ClientToken = &handles[208]
+
+var _CloudWatchLogGroupARN = &handles[209]
+
+var _CreatedDate = &handles[210]
+
+var _DayOfMonth = &handles[211]
+
+var _DayOfWeek = &handles[212]
+
+var _DaysOfWeek = &handles[213]
+var _DaysOfWeek_member = &handles[214]
+
+var _DeprecationDate = &handles[215]
+
+var _Description = &handles[216]
+
+var DeviceiSCSIAttributes = &handles[217]
+var DeviceiSCSIAttributes_TargetARN = &handles[218]
+var DeviceiSCSIAttributes_NetworkInterfaceId = &handles[219]
+var DeviceiSCSIAttributes_NetworkInterfacePort = &handles[220]
+var DeviceiSCSIAttributes_ChapEnabled = &handles[221]
+
+var _DeviceType = &handles[222]
+
+var Disk = &handles[223]
+var Disk_DiskId = &handles[224]
+var Disk_DiskPath = &handles[225]
+var Disk_DiskNode = &handles[226]
+var Disk_DiskStatus = &handles[227]
+var Disk_DiskSizeInBytes = &handles[228]
+var Disk_DiskAllocationType = &handles[229]
+var Disk_DiskAllocationResource = &handles[230]
+var Disk_DiskAttributeList = &handles[231]
+
+var _DiskAllocationType = &handles[232]
+
+var _DiskAttribute = &handles[233]
+
+var _DiskAttributeList = &handles[234]
+var _DiskAttributeList_member = &handles[235]
+
+var _DiskId = &handles[236]
+
+var _DiskIds = &handles[237]
+var _DiskIds_member = &handles[238]
+
+var _Disks = &handles[239]
+var _Disks_member = &handles[240]
+
+var _DNSHostName = &handles[241]
+
+var _DomainName = &handles[242]
+
+var _DomainUserName = &handles[243]
+
+var _DomainUserPassword = &handles[244]
+
+var _double = &handles[245]
+
+var _DoubleObject = &handles[246]
+
+var _Ec2InstanceId = &handles[247]
+
+var _Ec2InstanceRegion = &handles[248]
+
+var EncryptionType = &handles[249]
+var EncryptionType_SseS3 = &handles[250]
+var EncryptionType_SseKms = &handles[251]
+var EncryptionType_DsseKms = &handles[252]
+
+var EndpointNetworkConfiguration = &handles[253]
+var EndpointNetworkConfiguration_IpAddresses = &handles[254]
+
+var _EndpointType = &handles[255]
+
+var ErrorCode = &handles[256]
+var ErrorCode_ActivationKeyExpired = &handles[257]
+var ErrorCode_ActivationKeyInvalid = &handles[258]
+var ErrorCode_ActivationKeyNotFound = &handles[259]
+var ErrorCode_GatewayInternalError = &handles[260]
+var ErrorCode_GatewayNotConnected = &handles[261]
+var ErrorCode_GatewayNotFound = &handles[262]
+var ErrorCode_GatewayProxyNetworkConnectionBusy = &handles[263]
+var ErrorCode_AuthenticationFailure = &handles[264]
+var ErrorCode_BandwidthThrottleScheduleNotFound = &handles[265]
+var ErrorCode_Blocked = &handles[266]
+var ErrorCode_CannotExportSnapshot = &handles[267]
+var ErrorCode_ChapCredentialNotFound = &handles[268]
+var ErrorCode_DiskAlreadyAllocated = &handles[269]
+var ErrorCode_DiskDoesNotExist = &handles[270]
+var ErrorCode_DiskSizeGreaterThanVolumeMaxSize = &handles[271]
+var ErrorCode_DiskSizeLessThanVolumeSize = &handles[272]
+var ErrorCode_DiskSizeNotGigAligned = &handles[273]
+var ErrorCode_DuplicateCertificateInfo = &handles[274]
+var ErrorCode_DuplicateSchedule = &handles[275]
+var ErrorCode_EndpointNotFound = &handles[276]
+var ErrorCode_IAMNotSupported = &handles[277]
+var ErrorCode_InitiatorInvalid = &handles[278]
+var ErrorCode_InitiatorNotFound = &handles[279]
+var ErrorCode_InternalError = &handles[280]
+var ErrorCode_InvalidGateway = &handles[281]
+var ErrorCode_InvalidEndpoint = &handles[282]
+var ErrorCode_InvalidParameters = &handles[283]
+var ErrorCode_InvalidSchedule = &handles[284]
+var ErrorCode_LocalStorageLimitExceeded = &handles[285]
+var ErrorCode_LunAlreadyAllocated_ = &handles[286]
+var ErrorCode_LunInvalid = &handles[287]
+var ErrorCode_JoinDomainInProgress = &handles[288]
+var ErrorCode_MaximumContentLengthExceeded = &handles[289]
+var ErrorCode_MaximumTapeCartridgeCountExceeded = &handles[290]
+var ErrorCode_MaximumVolumeCountExceeded = &handles[291]
+var ErrorCode_NetworkConfigurationChanged = &handles[292]
+var ErrorCode_NoDisksAvailable = &handles[293]
+var ErrorCode_NotImplemented = &handles[294]
+var ErrorCode_NotSupported = &handles[295]
+var ErrorCode_OperationAborted = &handles[296]
+var ErrorCode_OutdatedGateway = &handles[297]
+var ErrorCode_ParametersNotImplemented = &handles[298]
+var ErrorCode_RegionInvalid = &handles[299]
+var ErrorCode_RequestTimeout = &handles[300]
+var ErrorCode_ServiceUnavailable = &handles[301]
+var ErrorCode_SnapshotDeleted = &handles[302]
+var ErrorCode_SnapshotIdInvalid = &handles[303]
+var ErrorCode_SnapshotInProgress = &handles[304]
+var ErrorCode_SnapshotNotFound = &handles[305]
+var ErrorCode_SnapshotScheduleNotFound = &handles[306]
+var ErrorCode_StagingAreaFull = &handles[307]
+var ErrorCode_StorageFailure = &handles[308]
+var ErrorCode_TapeCartridgeNotFound = &handles[309]
+var ErrorCode_TargetAlreadyExists = &handles[310]
+var ErrorCode_TargetInvalid = &handles[311]
+var ErrorCode_TargetNotFound = &handles[312]
+var ErrorCode_UnauthorizedOperation = &handles[313]
+var ErrorCode_VolumeAlreadyExists = &handles[314]
+var ErrorCode_VolumeIdInvalid = &handles[315]
+var ErrorCode_VolumeInUse = &handles[316]
+var ErrorCode_VolumeNotFound = &handles[317]
+var ErrorCode_VolumeNotReady = &handles[318]
+
+var _errorDetails = &handles[319]
+var _errorDetails_key = &handles[320]
+var _errorDetails_value = &handles[321]
+
+var _FileShareARN = &handles[322]
+
+var _FileShareARNList = &handles[323]
+var _FileShareARNList_member = &handles[324]
+
+var _FileShareClientList = &handles[325]
+var _FileShareClientList_member = &handles[326]
+
+var _FileShareId = &handles[327]
+
+var FileShareInfo = &handles[328]
+var FileShareInfo_FileShareType = &handles[329]
+var FileShareInfo_FileShareARN = &handles[330]
+var FileShareInfo_FileShareId = &handles[331]
+var FileShareInfo_FileShareStatus = &handles[332]
+var FileShareInfo_GatewayARN = &handles[333]
+
+var _FileShareInfoList = &handles[334]
+var _FileShareInfoList_member = &handles[335]
+
+var _FileShareName = &handles[336]
+
+var _FileShareStatus = &handles[337]
+
+var FileShareType = &handles[338]
+var FileShareType_NFS = &handles[339]
+var FileShareType_SMB = &handles[340]
+
+var _FileSystemAssociationARN = &handles[341]
+
+var _FileSystemAssociationARNList = &handles[342]
+var _FileSystemAssociationARNList_member = &handles[343]
+
+var _FileSystemAssociationId = &handles[344]
+
+var FileSystemAssociationInfo = &handles[345]
+var FileSystemAssociationInfo_FileSystemAssociationARN = &handles[346]
+var FileSystemAssociationInfo_LocationARN = &handles[347]
+var FileSystemAssociationInfo_FileSystemAssociationStatus = &handles[348]
+var FileSystemAssociationInfo_AuditDestinationARN = &handles[349]
+var FileSystemAssociationInfo_GatewayARN = &handles[350]
+var FileSystemAssociationInfo_Tags = &handles[351]
+var FileSystemAssociationInfo_CacheAttributes = &handles[352]
+var FileSystemAssociationInfo_EndpointNetworkConfiguration = &handles[353]
+var FileSystemAssociationInfo_FileSystemAssociationStatusDetails = &handles[354]
+
+var _FileSystemAssociationInfoList = &handles[355]
+var _FileSystemAssociationInfoList_member = &handles[356]
+
+var _FileSystemAssociationStatus = &handles[357]
+
+var FileSystemAssociationStatusDetail = &handles[358]
+var FileSystemAssociationStatusDetail_ErrorCode = &handles[359]
+
+var _FileSystemAssociationStatusDetails = &handles[360]
+var _FileSystemAssociationStatusDetails_member = &handles[361]
+
+var FileSystemAssociationSummary = &handles[362]
+var FileSystemAssociationSummary_FileSystemAssociationId = &handles[363]
+var FileSystemAssociationSummary_FileSystemAssociationARN = &handles[364]
+var FileSystemAssociationSummary_FileSystemAssociationStatus = &handles[365]
+var FileSystemAssociationSummary_GatewayARN = &handles[366]
+
+var _FileSystemAssociationSummaryList = &handles[367]
+var _FileSystemAssociationSummaryList_member = &handles[368]
+
+var _FileSystemAssociationSyncErrorCode = &handles[369]
+
+var _FileSystemLocationARN = &handles[370]
+
+var _Folder = &handles[371]
+
+var _FolderList = &handles[372]
+var _FolderList_member = &handles[373]
+
+var _GatewayARN = &handles[374]
+
+var GatewayCapacity = &handles[375]
+var GatewayCapacity_Small = &handles[376]
+var GatewayCapacity_Medium = &handles[377]
+var GatewayCapacity_Large = &handles[378]
+
+var _GatewayId = &handles[379]
+
+var GatewayInfo = &handles[380]
+var GatewayInfo_GatewayId = &handles[381]
+var GatewayInfo_GatewayARN = &handles[382]
+var GatewayInfo_GatewayType = &handles[383]
+var GatewayInfo_GatewayOperationalState = &handles[384]
+var GatewayInfo_GatewayName = &handles[385]
+var GatewayInfo_Ec2InstanceId = &handles[386]
+var GatewayInfo_Ec2InstanceRegion = &handles[387]
+var GatewayInfo_HostEnvironment = &handles[388]
+var GatewayInfo_HostEnvironmentId = &handles[389]
+var GatewayInfo_DeprecationDate = &handles[390]
+var GatewayInfo_SoftwareVersion = &handles[391]
+
+var _GatewayName = &handles[392]
+
+var _GatewayNetworkInterfaces = &handles[393]
+var _GatewayNetworkInterfaces_member = &handles[394]
+
+var _GatewayOperationalState = &handles[395]
+
+var _Gateways = &handles[396]
+var _Gateways_member = &handles[397]
+
+var _GatewayState = &handles[398]
+
+var _GatewayTimezone = &handles[399]
+
+var _GatewayType = &handles[400]
+
+var _Host = &handles[401]
+
+var HostEnvironment = &handles[402]
+var HostEnvironment_VMWARE = &handles[403]
+var HostEnvironment_HYPER_V = &handles[404]
+var HostEnvironment_EC2 = &handles[405]
+var HostEnvironment_KVM = &handles[406]
+var HostEnvironment_OTHER = &handles[407]
+var HostEnvironment_SNOWBALL = &handles[408]
+
+var _HostEnvironmentId = &handles[409]
+
+var _Hosts = &handles[410]
+var _Hosts_member = &handles[411]
+
+var _HourOfDay = &handles[412]
+
+var _Initiator = &handles[413]
+
+var _Initiators = &handles[414]
+var _Initiators_member = &handles[415]
+
+var _integer = &handles[416]
+
+var InternalServerError = &handles[417]
+var InternalServerError_message = &handles[418]
+var InternalServerError_error = &handles[419]
+
+var InvalidGatewayRequestException = &handles[420]
+var InvalidGatewayRequestException_message = &handles[421]
+var InvalidGatewayRequestException_error = &handles[422]
+
+var _IpAddressList = &handles[423]
+var _IpAddressList_member = &handles[424]
+
+var _IPV4Address = &handles[425]
+
+var _Ipv4OrIpv6AddressCIDR = &handles[426]
+
+var _IqnName = &handles[427]
+
+var _KMSKey = &handles[428]
+
+var _LastSoftwareUpdate = &handles[429]
+
+var _LocalConsolePassword = &handles[430]
+
+var _LocationARN = &handles[431]
+
+var _long = &handles[432]
+
+var _Marker = &handles[433]
+
+var _MediumChangerType = &handles[434]
+
+var _MinimumNumTapes = &handles[435]
+
+var _MinuteOfHour = &handles[436]
+
+var NetworkInterface = &handles[437]
+var NetworkInterface_Ipv4Address = &handles[438]
+var NetworkInterface_MacAddress = &handles[439]
+var NetworkInterface_Ipv6Address = &handles[440]
+
+var _NetworkInterfaceId = &handles[441]
+
+var _NextUpdateAvailabilityDate = &handles[442]
+
+var NFSFileShareDefaults = &handles[443]
+var NFSFileShareDefaults_FileMode = &handles[444]
+var NFSFileShareDefaults_DirectoryMode = &handles[445]
+var NFSFileShareDefaults_GroupId = &handles[446]
+var NFSFileShareDefaults_OwnerId = &handles[447]
+
+var NFSFileShareInfo = &handles[448]
+var NFSFileShareInfo_NFSFileShareDefaults = &handles[449]
+var NFSFileShareInfo_FileShareARN = &handles[450]
+var NFSFileShareInfo_FileShareId = &handles[451]
+var NFSFileShareInfo_FileShareStatus = &handles[452]
+var NFSFileShareInfo_GatewayARN = &handles[453]
+var NFSFileShareInfo_EncryptionType = &handles[454]
+var NFSFileShareInfo_KMSEncrypted = &handles[455]
+var NFSFileShareInfo_KMSKey = &handles[456]
+var NFSFileShareInfo_Path = &handles[457]
+var NFSFileShareInfo_Role = &handles[458]
+var NFSFileShareInfo_LocationARN = &handles[459]
+var NFSFileShareInfo_DefaultStorageClass = &handles[460]
+var NFSFileShareInfo_ObjectACL = &handles[461]
+var NFSFileShareInfo_ClientList = &handles[462]
+var NFSFileShareInfo_Squash = &handles[463]
+var NFSFileShareInfo_ReadOnly = &handles[464]
+var NFSFileShareInfo_GuessMIMETypeEnabled = &handles[465]
+var NFSFileShareInfo_RequesterPays = &handles[466]
+var NFSFileShareInfo_Tags = &handles[467]
+var NFSFileShareInfo_FileShareName = &handles[468]
+var NFSFileShareInfo_CacheAttributes = &handles[469]
+var NFSFileShareInfo_NotificationPolicy = &handles[470]
+var NFSFileShareInfo_VPCEndpointDNSName = &handles[471]
+var NFSFileShareInfo_BucketRegion = &handles[472]
+var NFSFileShareInfo_AuditDestinationARN = &handles[473]
+
+var _NFSFileShareInfoList = &handles[474]
+var _NFSFileShareInfoList_member = &handles[475]
+
+var _NotificationId = &handles[476]
+
+var _NotificationPolicy = &handles[477]
+
+var _NumTapesToCreate = &handles[478]
+
+var ObjectACL = &handles[479]
+var ObjectACL_private = &handles[480]
+var ObjectACL_public_read = &handles[481]
+var ObjectACL_public_read_write = &handles[482]
+var ObjectACL_authenticated_read = &handles[483]
+var ObjectACL_bucket_owner_read = &handles[484]
+var ObjectACL_bucket_owner_full_control = &handles[485]
+var ObjectACL_aws_exec_read = &handles[486]
+
+var _OrganizationalUnit = &handles[487]
+
+var _Path = &handles[488]
+
+var _PermissionId = &handles[489]
+
+var _PermissionMode = &handles[490]
+
+var _PoolARN = &handles[491]
+
+var _PoolARNs = &handles[492]
+var _PoolARNs_member = &handles[493]
+
+var _PoolId = &handles[494]
+
+var PoolInfo = &handles[495]
+var PoolInfo_PoolARN = &handles[496]
+var PoolInfo_PoolName = &handles[497]
+var PoolInfo_StorageClass = &handles[498]
+var PoolInfo_RetentionLockType = &handles[499]
+var PoolInfo_RetentionLockTimeInDays = &handles[500]
+var PoolInfo_PoolStatus = &handles[501]
+
+var _PoolInfos = &handles[502]
+var _PoolInfos_member = &handles[503]
+
+var _PoolName = &handles[504]
+
+var PoolStatus = &handles[505]
+var PoolStatus_ACTIVE = &handles[506]
+var PoolStatus_DELETED = &handles[507]
+
+var _PositiveIntObject = &handles[508]
+
+var _RecurrenceInHours = &handles[509]
+
+var _RegionId = &handles[510]
+
+var _ReportCompletionPercent = &handles[511]
+
+var _ResourceARN = &handles[512]
+
+var _RetentionLockTimeInDays = &handles[513]
+
+var RetentionLockType = &handles[514]
+var RetentionLockType_COMPLIANCE = &handles[515]
+var RetentionLockType_GOVERNANCE = &handles[516]
+var RetentionLockType_NONE = &handles[517]
+
+var _Role = &handles[518]
+
+var ServiceUnavailableError = &handles[519]
+var ServiceUnavailableError_message = &handles[520]
+var ServiceUnavailableError_error = &handles[521]
+
+var SMBFileShareInfo = &handles[522]
+var SMBFileShareInfo_FileShareARN = &handles[523]
+var SMBFileShareInfo_FileShareId = &handles[524]
+var SMBFileShareInfo_FileShareStatus = &handles[525]
+var SMBFileShareInfo_GatewayARN = &handles[526]
+var SMBFileShareInfo_EncryptionType = &handles[527]
+var SMBFileShareInfo_KMSEncrypted = &handles[528]
+var SMBFileShareInfo_KMSKey = &handles[529]
+var SMBFileShareInfo_Path = &handles[530]
+var SMBFileShareInfo_Role = &handles[531]
+var SMBFileShareInfo_LocationARN = &handles[532]
+var SMBFileShareInfo_DefaultStorageClass = &handles[533]
+var SMBFileShareInfo_ObjectACL = &handles[534]
+var SMBFileShareInfo_ReadOnly = &handles[535]
+var SMBFileShareInfo_GuessMIMETypeEnabled = &handles[536]
+var SMBFileShareInfo_RequesterPays = &handles[537]
+var SMBFileShareInfo_SMBACLEnabled = &handles[538]
+var SMBFileShareInfo_AccessBasedEnumeration = &handles[539]
+var SMBFileShareInfo_AdminUserList = &handles[540]
+var SMBFileShareInfo_ValidUserList = &handles[541]
+var SMBFileShareInfo_InvalidUserList = &handles[542]
+var SMBFileShareInfo_AuditDestinationARN = &handles[543]
+var SMBFileShareInfo_Authentication = &handles[544]
+var SMBFileShareInfo_CaseSensitivity = &handles[545]
+var SMBFileShareInfo_Tags = &handles[546]
+var SMBFileShareInfo_FileShareName = &handles[547]
+var SMBFileShareInfo_CacheAttributes = &handles[548]
+var SMBFileShareInfo_NotificationPolicy = &handles[549]
+var SMBFileShareInfo_VPCEndpointDNSName = &handles[550]
+var SMBFileShareInfo_BucketRegion = &handles[551]
+var SMBFileShareInfo_OplocksEnabled = &handles[552]
+
+var _SMBFileShareInfoList = &handles[553]
+var _SMBFileShareInfoList_member = &handles[554]
+
+var _SMBGuestPassword = &handles[555]
+
+var SMBLocalGroups = &handles[556]
+var SMBLocalGroups_GatewayAdmins = &handles[557]
+
+var SMBSecurityStrategy = &handles[558]
+var SMBSecurityStrategy_ClientSpecified = &handles[559]
+var SMBSecurityStrategy_MandatorySigning = &handles[560]
+var SMBSecurityStrategy_MandatoryEncryption = &handles[561]
+var SMBSecurityStrategy_MandatoryEncryptionNoAes128 = &handles[562]
+
+var _SnapshotDescription = &handles[563]
+
+var _SnapshotId = &handles[564]
+
+var SoftwareUpdatePreferences = &handles[565]
+var SoftwareUpdatePreferences_AutomaticUpdatePolicy = &handles[566]
+
+var _SoftwareUpdatesEndDate = &handles[567]
+
+var _SoftwareVersion = &handles[568]
+
+var _Squash = &handles[569]
+
+var _StorageClass = &handles[570]
+
+var StorageGatewayError = &handles[571]
+var StorageGatewayError_errorCode = &handles[572]
+var StorageGatewayError_errorDetails = &handles[573]
+
+var StorediSCSIVolume = &handles[574]
+var StorediSCSIVolume_VolumeARN = &handles[575]
+var StorediSCSIVolume_VolumeId = &handles[576]
+var StorediSCSIVolume_VolumeType = &handles[577]
+var StorediSCSIVolume_VolumeStatus = &handles[578]
+var StorediSCSIVolume_VolumeAttachmentStatus = &handles[579]
+var StorediSCSIVolume_VolumeSizeInBytes = &handles[580]
+var StorediSCSIVolume_VolumeProgress = &handles[581]
+var StorediSCSIVolume_VolumeDiskId = &handles[582]
+var StorediSCSIVolume_SourceSnapshotId = &handles[583]
+var StorediSCSIVolume_PreservedExistingData = &handles[584]
+var StorediSCSIVolume_VolumeiSCSIAttributes = &handles[585]
+var StorediSCSIVolume_CreatedDate = &handles[586]
+var StorediSCSIVolume_VolumeUsedInBytes = &handles[587]
+var StorediSCSIVolume_KMSKey = &handles[588]
+var StorediSCSIVolume_TargetName = &handles[589]
+
+var _StorediSCSIVolumes = &handles[590]
+var _StorediSCSIVolumes_member = &handles[591]
+
+var _string = &handles[592]
+
+var _SupportedGatewayCapacities = &handles[593]
+var _SupportedGatewayCapacities_member = &handles[594]
+
+var Tag = &handles[595]
+var Tag_Key = &handles[596]
+var Tag_Value = &handles[597]
+
+var _TagKey = &handles[598]
+
+var _TagKeys = &handles[599]
+var _TagKeys_member = &handles[600]
+
+var _Tags = &handles[601]
+var _Tags_member = &handles[602]
+
+var _TagValue = &handles[603]
+
+var Tape = &handles[604]
+var Tape_TapeARN = &handles[605]
+var Tape_TapeBarcode = &handles[606]
+var Tape_TapeCreatedDate = &handles[607]
+var Tape_TapeSizeInBytes = &handles[608]
+var Tape_TapeStatus = &handles[609]
+var Tape_VTLDevice = &handles[610]
+var Tape_Progress = &handles[611]
+var Tape_TapeUsedInBytes = &handles[612]
+var Tape_KMSKey = &handles[613]
+var Tape_PoolId = &handles[614]
+var Tape_Worm = &handles[615]
+var Tape_RetentionStartDate = &handles[616]
+var Tape_PoolEntryDate = &handles[617]
+
+var TapeArchive = &handles[618]
+var TapeArchive_TapeARN = &handles[619]
+var TapeArchive_TapeBarcode = &handles[620]
+var TapeArchive_TapeCreatedDate = &handles[621]
+var TapeArchive_TapeSizeInBytes = &handles[622]
+var TapeArchive_CompletionTime = &handles[623]
+var TapeArchive_RetrievedTo = &handles[624]
+var TapeArchive_TapeStatus = &handles[625]
+var TapeArchive_TapeUsedInBytes = &handles[626]
+var TapeArchive_KMSKey = &handles[627]
+var TapeArchive_PoolId = &handles[628]
+var TapeArchive_Worm = &handles[629]
+var TapeArchive_RetentionStartDate = &handles[630]
+var TapeArchive_PoolEntryDate = &handles[631]
+
+var _TapeArchives = &handles[632]
+var _TapeArchives_member = &handles[633]
+
+var _TapeArchiveStatus = &handles[634]
+
+var _TapeARN = &handles[635]
+
+var _TapeARNs = &handles[636]
+var _TapeARNs_member = &handles[637]
+
+var _TapeBarcode = &handles[638]
+
+var _TapeBarcodePrefix = &handles[639]
+
+var _TapeDriveType = &handles[640]
+
+var TapeInfo = &handles[641]
+var TapeInfo_TapeARN = &handles[642]
+var TapeInfo_TapeBarcode = &handles[643]
+var TapeInfo_TapeSizeInBytes = &handles[644]
+var TapeInfo_TapeStatus = &handles[645]
+var TapeInfo_GatewayARN = &handles[646]
+var TapeInfo_PoolId = &handles[647]
+var TapeInfo_RetentionStartDate = &handles[648]
+var TapeInfo_PoolEntryDate = &handles[649]
+
+var _TapeInfos = &handles[650]
+var _TapeInfos_member = &handles[651]
+
+var TapeRecoveryPointInfo = &handles[652]
+var TapeRecoveryPointInfo_TapeARN = &handles[653]
+var TapeRecoveryPointInfo_TapeRecoveryPointTime = &handles[654]
+var TapeRecoveryPointInfo_TapeSizeInBytes = &handles[655]
+var TapeRecoveryPointInfo_TapeStatus = &handles[656]
+
+var _TapeRecoveryPointInfos = &handles[657]
+var _TapeRecoveryPointInfos_member = &handles[658]
+
+var _TapeRecoveryPointStatus = &handles[659]
+
+var _Tapes = &handles[660]
+var _Tapes_member = &handles[661]
+
+var _TapeSize = &handles[662]
+
+var _TapeStatus = &handles[663]
+
+var TapeStorageClass = &handles[664]
+var TapeStorageClass_DEEP_ARCHIVE = &handles[665]
+var TapeStorageClass_GLACIER = &handles[666]
+
+var _TapeUsage = &handles[667]
+
+var _TargetARN = &handles[668]
+
+var _TargetName = &handles[669]
+
+var _Time = &handles[670]
+
+var _TimeoutInSeconds = &handles[671]
+
+var _UserList = &handles[672]
+var _UserList_member = &handles[673]
+
+var _UserListUser = &handles[674]
+
+var _VolumeARN = &handles[675]
+
+var _VolumeARNs = &handles[676]
+var _VolumeARNs_member = &handles[677]
+
+var _VolumeAttachmentStatus = &handles[678]
+
+var _VolumeId = &handles[679]
+
+var VolumeInfo = &handles[680]
+var VolumeInfo_VolumeARN = &handles[681]
+var VolumeInfo_VolumeId = &handles[682]
+var VolumeInfo_GatewayARN = &handles[683]
+var VolumeInfo_GatewayId = &handles[684]
+var VolumeInfo_VolumeType = &handles[685]
+var VolumeInfo_VolumeSizeInBytes = &handles[686]
+var VolumeInfo_VolumeAttachmentStatus = &handles[687]
+
+var _VolumeInfos = &handles[688]
+var _VolumeInfos_member = &handles[689]
+
+var VolumeiSCSIAttributes = &handles[690]
+var VolumeiSCSIAttributes_TargetARN = &handles[691]
+var VolumeiSCSIAttributes_NetworkInterfaceId = &handles[692]
+var VolumeiSCSIAttributes_NetworkInterfacePort = &handles[693]
+var VolumeiSCSIAttributes_LunNumber = &handles[694]
+var VolumeiSCSIAttributes_ChapEnabled = &handles[695]
+
+var VolumeRecoveryPointInfo = &handles[696]
+var VolumeRecoveryPointInfo_VolumeARN = &handles[697]
+var VolumeRecoveryPointInfo_VolumeSizeInBytes = &handles[698]
+var VolumeRecoveryPointInfo_VolumeUsageInBytes = &handles[699]
+var VolumeRecoveryPointInfo_VolumeRecoveryPointTime = &handles[700]
+
+var _VolumeRecoveryPointInfos = &handles[701]
+var _VolumeRecoveryPointInfos_member = &handles[702]
+
+var _VolumeStatus = &handles[703]
+
+var _VolumeType = &handles[704]
+
+var _VolumeUsedInBytes = &handles[705]
+
+var VTLDevice = &handles[706]
+var VTLDevice_VTLDeviceARN = &handles[707]
+var VTLDevice_VTLDeviceType = &handles[708]
+var VTLDevice_VTLDeviceVendor = &handles[709]
+var VTLDevice_VTLDeviceProductIdentifier = &handles[710]
+var VTLDevice_DeviceiSCSIAttributes = &handles[711]
+
+var _VTLDeviceARN = &handles[712]
+
+var _VTLDeviceARNs = &handles[713]
+var _VTLDeviceARNs_member = &handles[714]
+
+var _VTLDeviceProductIdentifier = &handles[715]
+
+var _VTLDevices = &handles[716]
+var _VTLDevices_member = &handles[717]
+
+var _VTLDeviceType = &handles[718]
+
+var _VTLDeviceVendor = &handles[719]
+
+var ActivateGatewayInput = &handles[720]
+var ActivateGatewayInput_ActivationKey = &handles[721]
+var ActivateGatewayInput_GatewayName = &handles[722]
+var ActivateGatewayInput_GatewayTimezone = &handles[723]
+var ActivateGatewayInput_GatewayRegion = &handles[724]
+var ActivateGatewayInput_GatewayType = &handles[725]
+var ActivateGatewayInput_TapeDriveType = &handles[726]
+var ActivateGatewayInput_MediumChangerType = &handles[727]
+var ActivateGatewayInput_Tags = &handles[728]
+
+var ActivateGatewayOutput = &handles[729]
+var ActivateGatewayOutput_GatewayARN = &handles[730]
+
+var AddCacheInput = &handles[731]
+var AddCacheInput_GatewayARN = &handles[732]
+var AddCacheInput_DiskIds = &handles[733]
+
+var AddCacheOutput = &handles[734]
+var AddCacheOutput_GatewayARN = &handles[735]
+
+var AddTagsToResourceInput = &handles[736]
+var AddTagsToResourceInput_ResourceARN = &handles[737]
+var AddTagsToResourceInput_Tags = &handles[738]
+
+var AddTagsToResourceOutput = &handles[739]
+var AddTagsToResourceOutput_ResourceARN = &handles[740]
+
+var AddUploadBufferInput = &handles[741]
+var AddUploadBufferInput_GatewayARN = &handles[742]
+var AddUploadBufferInput_DiskIds = &handles[743]
+
+var AddUploadBufferOutput = &handles[744]
+var AddUploadBufferOutput_GatewayARN = &handles[745]
+
+var AddWorkingStorageInput = &handles[746]
+var AddWorkingStorageInput_GatewayARN = &handles[747]
+var AddWorkingStorageInput_DiskIds = &handles[748]
+
+var AddWorkingStorageOutput = &handles[749]
+var AddWorkingStorageOutput_GatewayARN = &handles[750]
+
+var AssignTapePoolInput = &handles[751]
+var AssignTapePoolInput_TapeARN = &handles[752]
+var AssignTapePoolInput_PoolId = &handles[753]
+var AssignTapePoolInput_BypassGovernanceRetention = &handles[754]
+
+var AssignTapePoolOutput = &handles[755]
+var AssignTapePoolOutput_TapeARN = &handles[756]
+
+var AssociateFileSystemInput = &handles[757]
+var AssociateFileSystemInput_UserName = &handles[758]
+var AssociateFileSystemInput_Password = &handles[759]
+var AssociateFileSystemInput_ClientToken = &handles[760]
+var AssociateFileSystemInput_GatewayARN = &handles[761]
+var AssociateFileSystemInput_LocationARN = &handles[762]
+var AssociateFileSystemInput_Tags = &handles[763]
+var AssociateFileSystemInput_AuditDestinationARN = &handles[764]
+var AssociateFileSystemInput_CacheAttributes = &handles[765]
+var AssociateFileSystemInput_EndpointNetworkConfiguration = &handles[766]
+
+var AssociateFileSystemOutput = &handles[767]
+var AssociateFileSystemOutput_FileSystemAssociationARN = &handles[768]
+
+var AttachVolumeInput = &handles[769]
+var AttachVolumeInput_GatewayARN = &handles[770]
+var AttachVolumeInput_TargetName = &handles[771]
+var AttachVolumeInput_VolumeARN = &handles[772]
+var AttachVolumeInput_NetworkInterfaceId = &handles[773]
+var AttachVolumeInput_DiskId = &handles[774]
+
+var AttachVolumeOutput = &handles[775]
+var AttachVolumeOutput_VolumeARN = &handles[776]
+var AttachVolumeOutput_TargetARN = &handles[777]
+
+var CancelArchivalInput = &handles[778]
+var CancelArchivalInput_GatewayARN = &handles[779]
+var CancelArchivalInput_TapeARN = &handles[780]
+
+var CancelArchivalOutput = &handles[781]
+var CancelArchivalOutput_TapeARN = &handles[782]
+
+var CancelCacheReportInput = &handles[783]
+var CancelCacheReportInput_CacheReportARN = &handles[784]
+
+var CancelCacheReportOutput = &handles[785]
+var CancelCacheReportOutput_CacheReportARN = &handles[786]
+
+var CancelRetrievalInput = &handles[787]
+var CancelRetrievalInput_GatewayARN = &handles[788]
+var CancelRetrievalInput_TapeARN = &handles[789]
+
+var CancelRetrievalOutput = &handles[790]
+var CancelRetrievalOutput_TapeARN = &handles[791]
+
+var CreateCachediSCSIVolumeInput = &handles[792]
+var CreateCachediSCSIVolumeInput_GatewayARN = &handles[793]
+var CreateCachediSCSIVolumeInput_VolumeSizeInBytes = &handles[794]
+var CreateCachediSCSIVolumeInput_SnapshotId = &handles[795]
+var CreateCachediSCSIVolumeInput_TargetName = &handles[796]
+var CreateCachediSCSIVolumeInput_SourceVolumeARN = &handles[797]
+var CreateCachediSCSIVolumeInput_NetworkInterfaceId = &handles[798]
+var CreateCachediSCSIVolumeInput_ClientToken = &handles[799]
+var CreateCachediSCSIVolumeInput_KMSEncrypted = &handles[800]
+var CreateCachediSCSIVolumeInput_KMSKey = &handles[801]
+var CreateCachediSCSIVolumeInput_Tags = &handles[802]
+
+var CreateCachediSCSIVolumeOutput = &handles[803]
+var CreateCachediSCSIVolumeOutput_VolumeARN = &handles[804]
+var CreateCachediSCSIVolumeOutput_TargetARN = &handles[805]
+
+var CreateNFSFileShareInput = &handles[806]
+var CreateNFSFileShareInput_ClientToken = &handles[807]
+var CreateNFSFileShareInput_NFSFileShareDefaults = &handles[808]
+var CreateNFSFileShareInput_GatewayARN = &handles[809]
+var CreateNFSFileShareInput_EncryptionType = &handles[810]
+var CreateNFSFileShareInput_KMSEncrypted = &handles[811]
+var CreateNFSFileShareInput_KMSKey = &handles[812]
+var CreateNFSFileShareInput_Role = &handles[813]
+var CreateNFSFileShareInput_LocationARN = &handles[814]
+var CreateNFSFileShareInput_DefaultStorageClass = &handles[815]
+var CreateNFSFileShareInput_ObjectACL = &handles[816]
+var CreateNFSFileShareInput_ClientList = &handles[817]
+var CreateNFSFileShareInput_Squash = &handles[818]
+var CreateNFSFileShareInput_ReadOnly = &handles[819]
+var CreateNFSFileShareInput_GuessMIMETypeEnabled = &handles[820]
+var CreateNFSFileShareInput_RequesterPays = &handles[821]
+var CreateNFSFileShareInput_Tags = &handles[822]
+var CreateNFSFileShareInput_FileShareName = &handles[823]
+var CreateNFSFileShareInput_CacheAttributes = &handles[824]
+var CreateNFSFileShareInput_NotificationPolicy = &handles[825]
+var CreateNFSFileShareInput_VPCEndpointDNSName = &handles[826]
+var CreateNFSFileShareInput_BucketRegion = &handles[827]
+var CreateNFSFileShareInput_AuditDestinationARN = &handles[828]
+
+var CreateNFSFileShareOutput = &handles[829]
+var CreateNFSFileShareOutput_FileShareARN = &handles[830]
+
+var CreateSMBFileShareInput = &handles[831]
+var CreateSMBFileShareInput_ClientToken = &handles[832]
+var CreateSMBFileShareInput_GatewayARN = &handles[833]
+var CreateSMBFileShareInput_EncryptionType = &handles[834]
+var CreateSMBFileShareInput_KMSEncrypted = &handles[835]
+var CreateSMBFileShareInput_KMSKey = &handles[836]
+var CreateSMBFileShareInput_Role = &handles[837]
+var CreateSMBFileShareInput_LocationARN = &handles[838]
+var CreateSMBFileShareInput_DefaultStorageClass = &handles[839]
+var CreateSMBFileShareInput_ObjectACL = &handles[840]
+var CreateSMBFileShareInput_ReadOnly = &handles[841]
+var CreateSMBFileShareInput_GuessMIMETypeEnabled = &handles[842]
+var CreateSMBFileShareInput_RequesterPays = &handles[843]
+var CreateSMBFileShareInput_SMBACLEnabled = &handles[844]
+var CreateSMBFileShareInput_AccessBasedEnumeration = &handles[845]
+var CreateSMBFileShareInput_AdminUserList = &handles[846]
+var CreateSMBFileShareInput_ValidUserList = &handles[847]
+var CreateSMBFileShareInput_InvalidUserList = &handles[848]
+var CreateSMBFileShareInput_AuditDestinationARN = &handles[849]
+var CreateSMBFileShareInput_Authentication = &handles[850]
+var CreateSMBFileShareInput_CaseSensitivity = &handles[851]
+var CreateSMBFileShareInput_Tags = &handles[852]
+var CreateSMBFileShareInput_FileShareName = &handles[853]
+var CreateSMBFileShareInput_CacheAttributes = &handles[854]
+var CreateSMBFileShareInput_NotificationPolicy = &handles[855]
+var CreateSMBFileShareInput_VPCEndpointDNSName = &handles[856]
+var CreateSMBFileShareInput_BucketRegion = &handles[857]
+var CreateSMBFileShareInput_OplocksEnabled = &handles[858]
+
+var CreateSMBFileShareOutput = &handles[859]
+var CreateSMBFileShareOutput_FileShareARN = &handles[860]
+
+var CreateSnapshotFromVolumeRecoveryPointInput = &handles[861]
+var CreateSnapshotFromVolumeRecoveryPointInput_VolumeARN = &handles[862]
+var CreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription = &handles[863]
+var CreateSnapshotFromVolumeRecoveryPointInput_Tags = &handles[864]
+
+var CreateSnapshotFromVolumeRecoveryPointOutput = &handles[865]
+var CreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId = &handles[866]
+var CreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN = &handles[867]
+var CreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime = &handles[868]
+
+var CreateSnapshotInput = &handles[869]
+var CreateSnapshotInput_VolumeARN = &handles[870]
+var CreateSnapshotInput_SnapshotDescription = &handles[871]
+var CreateSnapshotInput_Tags = &handles[872]
+
+var CreateSnapshotOutput = &handles[873]
+var CreateSnapshotOutput_VolumeARN = &handles[874]
+var CreateSnapshotOutput_SnapshotId = &handles[875]
+
+var CreateStorediSCSIVolumeInput = &handles[876]
+var CreateStorediSCSIVolumeInput_GatewayARN = &handles[877]
+var CreateStorediSCSIVolumeInput_DiskId = &handles[878]
+var CreateStorediSCSIVolumeInput_SnapshotId = &handles[879]
+var CreateStorediSCSIVolumeInput_PreserveExistingData = &handles[880]
+var CreateStorediSCSIVolumeInput_TargetName = &handles[881]
+var CreateStorediSCSIVolumeInput_NetworkInterfaceId = &handles[882]
+var CreateStorediSCSIVolumeInput_KMSEncrypted = &handles[883]
+var CreateStorediSCSIVolumeInput_KMSKey = &handles[884]
+var CreateStorediSCSIVolumeInput_Tags = &handles[885]
+
+var CreateStorediSCSIVolumeOutput = &handles[886]
+var CreateStorediSCSIVolumeOutput_VolumeARN = &handles[887]
+var CreateStorediSCSIVolumeOutput_VolumeSizeInBytes = &handles[888]
+var CreateStorediSCSIVolumeOutput_TargetARN = &handles[889]
+
+var CreateTapePoolInput = &handles[890]
+var CreateTapePoolInput_PoolName = &handles[891]
+var CreateTapePoolInput_StorageClass = &handles[892]
+var CreateTapePoolInput_RetentionLockType = &handles[893]
+var CreateTapePoolInput_RetentionLockTimeInDays = &handles[894]
+var CreateTapePoolInput_Tags = &handles[895]
+
+var CreateTapePoolOutput = &handles[896]
+var CreateTapePoolOutput_PoolARN = &handles[897]
+
+var CreateTapesInput = &handles[898]
+var CreateTapesInput_GatewayARN = &handles[899]
+var CreateTapesInput_TapeSizeInBytes = &handles[900]
+var CreateTapesInput_ClientToken = &handles[901]
+var CreateTapesInput_NumTapesToCreate = &handles[902]
+var CreateTapesInput_TapeBarcodePrefix = &handles[903]
+var CreateTapesInput_KMSEncrypted = &handles[904]
+var CreateTapesInput_KMSKey = &handles[905]
+var CreateTapesInput_PoolId = &handles[906]
+var CreateTapesInput_Worm = &handles[907]
+var CreateTapesInput_Tags = &handles[908]
+
+var CreateTapesOutput = &handles[909]
+var CreateTapesOutput_TapeARNs = &handles[910]
+
+var CreateTapeWithBarcodeInput = &handles[911]
+var CreateTapeWithBarcodeInput_GatewayARN = &handles[912]
+var CreateTapeWithBarcodeInput_TapeSizeInBytes = &handles[913]
+var CreateTapeWithBarcodeInput_TapeBarcode = &handles[914]
+var CreateTapeWithBarcodeInput_KMSEncrypted = &handles[915]
+var CreateTapeWithBarcodeInput_KMSKey = &handles[916]
+var CreateTapeWithBarcodeInput_PoolId = &handles[917]
+var CreateTapeWithBarcodeInput_Worm = &handles[918]
+var CreateTapeWithBarcodeInput_Tags = &handles[919]
+
+var CreateTapeWithBarcodeOutput = &handles[920]
+var CreateTapeWithBarcodeOutput_TapeARN = &handles[921]
+
+var DeleteAutomaticTapeCreationPolicyInput = &handles[922]
+var DeleteAutomaticTapeCreationPolicyInput_GatewayARN = &handles[923]
+
+var DeleteAutomaticTapeCreationPolicyOutput = &handles[924]
+var DeleteAutomaticTapeCreationPolicyOutput_GatewayARN = &handles[925]
+
+var DeleteBandwidthRateLimitInput = &handles[926]
+var DeleteBandwidthRateLimitInput_GatewayARN = &handles[927]
+var DeleteBandwidthRateLimitInput_BandwidthType = &handles[928]
+
+var DeleteBandwidthRateLimitOutput = &handles[929]
+var DeleteBandwidthRateLimitOutput_GatewayARN = &handles[930]
+
+var DeleteCacheReportInput = &handles[931]
+var DeleteCacheReportInput_CacheReportARN = &handles[932]
+
+var DeleteCacheReportOutput = &handles[933]
+var DeleteCacheReportOutput_CacheReportARN = &handles[934]
+
+var DeleteChapCredentialsInput = &handles[935]
+var DeleteChapCredentialsInput_TargetARN = &handles[936]
+var DeleteChapCredentialsInput_InitiatorName = &handles[937]
+
+var DeleteChapCredentialsOutput = &handles[938]
+var DeleteChapCredentialsOutput_TargetARN = &handles[939]
+var DeleteChapCredentialsOutput_InitiatorName = &handles[940]
+
+var DeleteFileShareInput = &handles[941]
+var DeleteFileShareInput_FileShareARN = &handles[942]
+var DeleteFileShareInput_ForceDelete = &handles[943]
+
+var DeleteFileShareOutput = &handles[944]
+var DeleteFileShareOutput_FileShareARN = &handles[945]
+
+var DeleteGatewayInput = &handles[946]
+var DeleteGatewayInput_GatewayARN = &handles[947]
+
+var DeleteGatewayOutput = &handles[948]
+var DeleteGatewayOutput_GatewayARN = &handles[949]
+
+var DeleteSnapshotScheduleInput = &handles[950]
+var DeleteSnapshotScheduleInput_VolumeARN = &handles[951]
+
+var DeleteSnapshotScheduleOutput = &handles[952]
+var DeleteSnapshotScheduleOutput_VolumeARN = &handles[953]
+
+var DeleteTapeArchiveInput = &handles[954]
+var DeleteTapeArchiveInput_TapeARN = &handles[955]
+var DeleteTapeArchiveInput_BypassGovernanceRetention = &handles[956]
+
+var DeleteTapeArchiveOutput = &handles[957]
+var DeleteTapeArchiveOutput_TapeARN = &handles[958]
+
+var DeleteTapeInput = &handles[959]
+var DeleteTapeInput_GatewayARN = &handles[960]
+var DeleteTapeInput_TapeARN = &handles[961]
+var DeleteTapeInput_BypassGovernanceRetention = &handles[962]
+
+var DeleteTapeOutput = &handles[963]
+var DeleteTapeOutput_TapeARN = &handles[964]
+
+var DeleteTapePoolInput = &handles[965]
+var DeleteTapePoolInput_PoolARN = &handles[966]
+
+var DeleteTapePoolOutput = &handles[967]
+var DeleteTapePoolOutput_PoolARN = &handles[968]
+
+var DeleteVolumeInput = &handles[969]
+var DeleteVolumeInput_VolumeARN = &handles[970]
+
+var DeleteVolumeOutput = &handles[971]
+var DeleteVolumeOutput_VolumeARN = &handles[972]
+
+var DescribeAvailabilityMonitorTestInput = &handles[973]
+var DescribeAvailabilityMonitorTestInput_GatewayARN = &handles[974]
+
+var DescribeAvailabilityMonitorTestOutput = &handles[975]
+var DescribeAvailabilityMonitorTestOutput_GatewayARN = &handles[976]
+var DescribeAvailabilityMonitorTestOutput_Status = &handles[977]
+var DescribeAvailabilityMonitorTestOutput_StartTime = &handles[978]
+
+var DescribeBandwidthRateLimitInput = &handles[979]
+var DescribeBandwidthRateLimitInput_GatewayARN = &handles[980]
+
+var DescribeBandwidthRateLimitOutput = &handles[981]
+var DescribeBandwidthRateLimitOutput_GatewayARN = &handles[982]
+var DescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec = &handles[983]
+var DescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec = &handles[984]
+
+var DescribeBandwidthRateLimitScheduleInput = &handles[985]
+var DescribeBandwidthRateLimitScheduleInput_GatewayARN = &handles[986]
+
+var DescribeBandwidthRateLimitScheduleOutput = &handles[987]
+var DescribeBandwidthRateLimitScheduleOutput_GatewayARN = &handles[988]
+var DescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = &handles[989]
+
+var DescribeCachediSCSIVolumesInput = &handles[990]
+var DescribeCachediSCSIVolumesInput_VolumeARNs = &handles[991]
+
+var DescribeCachediSCSIVolumesOutput = &handles[992]
+var DescribeCachediSCSIVolumesOutput_CachediSCSIVolumes = &handles[993]
+
+var DescribeCacheInput = &handles[994]
+var DescribeCacheInput_GatewayARN = &handles[995]
+
+var DescribeCacheOutput = &handles[996]
+var DescribeCacheOutput_GatewayARN = &handles[997]
+var DescribeCacheOutput_DiskIds = &handles[998]
+var DescribeCacheOutput_CacheAllocatedInBytes = &handles[999]
+var DescribeCacheOutput_CacheUsedPercentage = &handles[1000]
+var DescribeCacheOutput_CacheDirtyPercentage = &handles[1001]
+var DescribeCacheOutput_CacheHitPercentage = &handles[1002]
+var DescribeCacheOutput_CacheMissPercentage = &handles[1003]
+
+var DescribeCacheReportInput = &handles[1004]
+var DescribeCacheReportInput_CacheReportARN = &handles[1005]
+
+var DescribeCacheReportOutput = &handles[1006]
+var DescribeCacheReportOutput_CacheReportInfo = &handles[1007]
+
+var DescribeChapCredentialsInput = &handles[1008]
+var DescribeChapCredentialsInput_TargetARN = &handles[1009]
+
+var DescribeChapCredentialsOutput = &handles[1010]
+var DescribeChapCredentialsOutput_ChapCredentials = &handles[1011]
+
+var DescribeFileSystemAssociationsInput = &handles[1012]
+var DescribeFileSystemAssociationsInput_FileSystemAssociationARNList = &handles[1013]
+
+var DescribeFileSystemAssociationsOutput = &handles[1014]
+var DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList = &handles[1015]
+
+var DescribeGatewayInformationInput = &handles[1016]
+var DescribeGatewayInformationInput_GatewayARN = &handles[1017]
+
+var DescribeGatewayInformationOutput = &handles[1018]
+var DescribeGatewayInformationOutput_GatewayARN = &handles[1019]
+var DescribeGatewayInformationOutput_GatewayId = &handles[1020]
+var DescribeGatewayInformationOutput_GatewayName = &handles[1021]
+var DescribeGatewayInformationOutput_GatewayTimezone = &handles[1022]
+var DescribeGatewayInformationOutput_GatewayState = &handles[1023]
+var DescribeGatewayInformationOutput_GatewayNetworkInterfaces = &handles[1024]
+var DescribeGatewayInformationOutput_GatewayType = &handles[1025]
+var DescribeGatewayInformationOutput_NextUpdateAvailabilityDate = &handles[1026]
+var DescribeGatewayInformationOutput_LastSoftwareUpdate = &handles[1027]
+var DescribeGatewayInformationOutput_Ec2InstanceId = &handles[1028]
+var DescribeGatewayInformationOutput_Ec2InstanceRegion = &handles[1029]
+var DescribeGatewayInformationOutput_Tags = &handles[1030]
+var DescribeGatewayInformationOutput_VPCEndpoint = &handles[1031]
+var DescribeGatewayInformationOutput_CloudWatchLogGroupARN = &handles[1032]
+var DescribeGatewayInformationOutput_HostEnvironment = &handles[1033]
+var DescribeGatewayInformationOutput_EndpointType = &handles[1034]
+var DescribeGatewayInformationOutput_SoftwareUpdatesEndDate = &handles[1035]
+var DescribeGatewayInformationOutput_DeprecationDate = &handles[1036]
+var DescribeGatewayInformationOutput_GatewayCapacity = &handles[1037]
+var DescribeGatewayInformationOutput_SupportedGatewayCapacities = &handles[1038]
+var DescribeGatewayInformationOutput_HostEnvironmentId = &handles[1039]
+var DescribeGatewayInformationOutput_SoftwareVersion = &handles[1040]
+
+var DescribeMaintenanceStartTimeInput = &handles[1041]
+var DescribeMaintenanceStartTimeInput_GatewayARN = &handles[1042]
+
+var DescribeMaintenanceStartTimeOutput = &handles[1043]
+var DescribeMaintenanceStartTimeOutput_GatewayARN = &handles[1044]
+var DescribeMaintenanceStartTimeOutput_HourOfDay = &handles[1045]
+var DescribeMaintenanceStartTimeOutput_MinuteOfHour = &handles[1046]
+var DescribeMaintenanceStartTimeOutput_DayOfWeek = &handles[1047]
+var DescribeMaintenanceStartTimeOutput_DayOfMonth = &handles[1048]
+var DescribeMaintenanceStartTimeOutput_Timezone = &handles[1049]
+var DescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences = &handles[1050]
+
+var DescribeNFSFileSharesInput = &handles[1051]
+var DescribeNFSFileSharesInput_FileShareARNList = &handles[1052]
+
+var DescribeNFSFileSharesOutput = &handles[1053]
+var DescribeNFSFileSharesOutput_NFSFileShareInfoList = &handles[1054]
+
+var DescribeSMBFileSharesInput = &handles[1055]
+var DescribeSMBFileSharesInput_FileShareARNList = &handles[1056]
+
+var DescribeSMBFileSharesOutput = &handles[1057]
+var DescribeSMBFileSharesOutput_SMBFileShareInfoList = &handles[1058]
+
+var DescribeSMBSettingsInput = &handles[1059]
+var DescribeSMBSettingsInput_GatewayARN = &handles[1060]
+
+var DescribeSMBSettingsOutput = &handles[1061]
+var DescribeSMBSettingsOutput_GatewayARN = &handles[1062]
+var DescribeSMBSettingsOutput_DomainName = &handles[1063]
+var DescribeSMBSettingsOutput_ActiveDirectoryStatus = &handles[1064]
+var DescribeSMBSettingsOutput_SMBGuestPasswordSet = &handles[1065]
+var DescribeSMBSettingsOutput_SMBSecurityStrategy = &handles[1066]
+var DescribeSMBSettingsOutput_FileSharesVisible = &handles[1067]
+var DescribeSMBSettingsOutput_SMBLocalGroups = &handles[1068]
+
+var DescribeSnapshotScheduleInput = &handles[1069]
+var DescribeSnapshotScheduleInput_VolumeARN = &handles[1070]
+
+var DescribeSnapshotScheduleOutput = &handles[1071]
+var DescribeSnapshotScheduleOutput_VolumeARN = &handles[1072]
+var DescribeSnapshotScheduleOutput_StartAt = &handles[1073]
+var DescribeSnapshotScheduleOutput_RecurrenceInHours = &handles[1074]
+var DescribeSnapshotScheduleOutput_Description = &handles[1075]
+var DescribeSnapshotScheduleOutput_Timezone = &handles[1076]
+var DescribeSnapshotScheduleOutput_Tags = &handles[1077]
+
+var DescribeStorediSCSIVolumesInput = &handles[1078]
+var DescribeStorediSCSIVolumesInput_VolumeARNs = &handles[1079]
+
+var DescribeStorediSCSIVolumesOutput = &handles[1080]
+var DescribeStorediSCSIVolumesOutput_StorediSCSIVolumes = &handles[1081]
+
+var DescribeTapeArchivesInput = &handles[1082]
+var DescribeTapeArchivesInput_TapeARNs = &handles[1083]
+var DescribeTapeArchivesInput_Marker = &handles[1084]
+var DescribeTapeArchivesInput_Limit = &handles[1085]
+
+var DescribeTapeArchivesOutput = &handles[1086]
+var DescribeTapeArchivesOutput_TapeArchives = &handles[1087]
+var DescribeTapeArchivesOutput_Marker = &handles[1088]
+
+var DescribeTapeRecoveryPointsInput = &handles[1089]
+var DescribeTapeRecoveryPointsInput_GatewayARN = &handles[1090]
+var DescribeTapeRecoveryPointsInput_Marker = &handles[1091]
+var DescribeTapeRecoveryPointsInput_Limit = &handles[1092]
+
+var DescribeTapeRecoveryPointsOutput = &handles[1093]
+var DescribeTapeRecoveryPointsOutput_GatewayARN = &handles[1094]
+var DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos = &handles[1095]
+var DescribeTapeRecoveryPointsOutput_Marker = &handles[1096]
+
+var DescribeTapesInput = &handles[1097]
+var DescribeTapesInput_GatewayARN = &handles[1098]
+var DescribeTapesInput_TapeARNs = &handles[1099]
+var DescribeTapesInput_Marker = &handles[1100]
+var DescribeTapesInput_Limit = &handles[1101]
+
+var DescribeTapesOutput = &handles[1102]
+var DescribeTapesOutput_Tapes = &handles[1103]
+var DescribeTapesOutput_Marker = &handles[1104]
+
+var DescribeUploadBufferInput = &handles[1105]
+var DescribeUploadBufferInput_GatewayARN = &handles[1106]
+
+var DescribeUploadBufferOutput = &handles[1107]
+var DescribeUploadBufferOutput_GatewayARN = &handles[1108]
+var DescribeUploadBufferOutput_DiskIds = &handles[1109]
+var DescribeUploadBufferOutput_UploadBufferUsedInBytes = &handles[1110]
+var DescribeUploadBufferOutput_UploadBufferAllocatedInBytes = &handles[1111]
+
+var DescribeVTLDevicesInput = &handles[1112]
+var DescribeVTLDevicesInput_GatewayARN = &handles[1113]
+var DescribeVTLDevicesInput_VTLDeviceARNs = &handles[1114]
+var DescribeVTLDevicesInput_Marker = &handles[1115]
+var DescribeVTLDevicesInput_Limit = &handles[1116]
+
+var DescribeVTLDevicesOutput = &handles[1117]
+var DescribeVTLDevicesOutput_GatewayARN = &handles[1118]
+var DescribeVTLDevicesOutput_VTLDevices = &handles[1119]
+var DescribeVTLDevicesOutput_Marker = &handles[1120]
+
+var DescribeWorkingStorageInput = &handles[1121]
+var DescribeWorkingStorageInput_GatewayARN = &handles[1122]
+
+var DescribeWorkingStorageOutput = &handles[1123]
+var DescribeWorkingStorageOutput_GatewayARN = &handles[1124]
+var DescribeWorkingStorageOutput_DiskIds = &handles[1125]
+var DescribeWorkingStorageOutput_WorkingStorageUsedInBytes = &handles[1126]
+var DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes = &handles[1127]
+
+var DetachVolumeInput = &handles[1128]
+var DetachVolumeInput_VolumeARN = &handles[1129]
+var DetachVolumeInput_ForceDetach = &handles[1130]
+
+var DetachVolumeOutput = &handles[1131]
+var DetachVolumeOutput_VolumeARN = &handles[1132]
+
+var DisableGatewayInput = &handles[1133]
+var DisableGatewayInput_GatewayARN = &handles[1134]
+
+var DisableGatewayOutput = &handles[1135]
+var DisableGatewayOutput_GatewayARN = &handles[1136]
+
+var DisassociateFileSystemInput = &handles[1137]
+var DisassociateFileSystemInput_FileSystemAssociationARN = &handles[1138]
+var DisassociateFileSystemInput_ForceDelete = &handles[1139]
+
+var DisassociateFileSystemOutput = &handles[1140]
+var DisassociateFileSystemOutput_FileSystemAssociationARN = &handles[1141]
+
+var EvictFilesFailingUploadInput = &handles[1142]
+var EvictFilesFailingUploadInput_FileShareARN = &handles[1143]
+var EvictFilesFailingUploadInput_ForceRemove = &handles[1144]
+
+var EvictFilesFailingUploadOutput = &handles[1145]
+var EvictFilesFailingUploadOutput_NotificationId = &handles[1146]
+
+var JoinDomainInput = &handles[1147]
+var JoinDomainInput_GatewayARN = &handles[1148]
+var JoinDomainInput_DomainName = &handles[1149]
+var JoinDomainInput_OrganizationalUnit = &handles[1150]
+var JoinDomainInput_DomainControllers = &handles[1151]
+var JoinDomainInput_TimeoutInSeconds = &handles[1152]
+var JoinDomainInput_UserName = &handles[1153]
+var JoinDomainInput_Password = &handles[1154]
+
+var JoinDomainOutput = &handles[1155]
+var JoinDomainOutput_GatewayARN = &handles[1156]
+var JoinDomainOutput_ActiveDirectoryStatus = &handles[1157]
+
+var ListAutomaticTapeCreationPoliciesInput = &handles[1158]
+var ListAutomaticTapeCreationPoliciesInput_GatewayARN = &handles[1159]
+
+var ListAutomaticTapeCreationPoliciesOutput = &handles[1160]
+var ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos = &handles[1161]
+
+var ListCacheReportsInput = &handles[1162]
+var ListCacheReportsInput_Marker = &handles[1163]
+
+var ListCacheReportsOutput = &handles[1164]
+var ListCacheReportsOutput_CacheReportList = &handles[1165]
+var ListCacheReportsOutput_Marker = &handles[1166]
+
+var ListFileSharesInput = &handles[1167]
+var ListFileSharesInput_GatewayARN = &handles[1168]
+var ListFileSharesInput_Limit = &handles[1169]
+var ListFileSharesInput_Marker = &handles[1170]
+
+var ListFileSharesOutput = &handles[1171]
+var ListFileSharesOutput_Marker = &handles[1172]
+var ListFileSharesOutput_NextMarker = &handles[1173]
+var ListFileSharesOutput_FileShareInfoList = &handles[1174]
+
+var ListFileSystemAssociationsInput = &handles[1175]
+var ListFileSystemAssociationsInput_GatewayARN = &handles[1176]
+var ListFileSystemAssociationsInput_Limit = &handles[1177]
+var ListFileSystemAssociationsInput_Marker = &handles[1178]
+
+var ListFileSystemAssociationsOutput = &handles[1179]
+var ListFileSystemAssociationsOutput_Marker = &handles[1180]
+var ListFileSystemAssociationsOutput_NextMarker = &handles[1181]
+var ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList = &handles[1182]
+
+var ListGatewaysInput = &handles[1183]
+var ListGatewaysInput_Marker = &handles[1184]
+var ListGatewaysInput_Limit = &handles[1185]
+
+var ListGatewaysOutput = &handles[1186]
+var ListGatewaysOutput_Gateways = &handles[1187]
+var ListGatewaysOutput_Marker = &handles[1188]
+
+var ListLocalDisksInput = &handles[1189]
+var ListLocalDisksInput_GatewayARN = &handles[1190]
+
+var ListLocalDisksOutput = &handles[1191]
+var ListLocalDisksOutput_GatewayARN = &handles[1192]
+var ListLocalDisksOutput_Disks = &handles[1193]
+
+var ListTagsForResourceInput = &handles[1194]
+var ListTagsForResourceInput_ResourceARN = &handles[1195]
+var ListTagsForResourceInput_Marker = &handles[1196]
+var ListTagsForResourceInput_Limit = &handles[1197]
+
+var ListTagsForResourceOutput = &handles[1198]
+var ListTagsForResourceOutput_ResourceARN = &handles[1199]
+var ListTagsForResourceOutput_Marker = &handles[1200]
+var ListTagsForResourceOutput_Tags = &handles[1201]
+
+var ListTapePoolsInput = &handles[1202]
+var ListTapePoolsInput_PoolARNs = &handles[1203]
+var ListTapePoolsInput_Marker = &handles[1204]
+var ListTapePoolsInput_Limit = &handles[1205]
+
+var ListTapePoolsOutput = &handles[1206]
+var ListTapePoolsOutput_PoolInfos = &handles[1207]
+var ListTapePoolsOutput_Marker = &handles[1208]
+
+var ListTapesInput = &handles[1209]
+var ListTapesInput_TapeARNs = &handles[1210]
+var ListTapesInput_Marker = &handles[1211]
+var ListTapesInput_Limit = &handles[1212]
+
+var ListTapesOutput = &handles[1213]
+var ListTapesOutput_TapeInfos = &handles[1214]
+var ListTapesOutput_Marker = &handles[1215]
+
+var ListVolumeInitiatorsInput = &handles[1216]
+var ListVolumeInitiatorsInput_VolumeARN = &handles[1217]
+
+var ListVolumeInitiatorsOutput = &handles[1218]
+var ListVolumeInitiatorsOutput_Initiators = &handles[1219]
+
+var ListVolumeRecoveryPointsInput = &handles[1220]
+var ListVolumeRecoveryPointsInput_GatewayARN = &handles[1221]
+
+var ListVolumeRecoveryPointsOutput = &handles[1222]
+var ListVolumeRecoveryPointsOutput_GatewayARN = &handles[1223]
+var ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos = &handles[1224]
+
+var ListVolumesInput = &handles[1225]
+var ListVolumesInput_GatewayARN = &handles[1226]
+var ListVolumesInput_Marker = &handles[1227]
+var ListVolumesInput_Limit = &handles[1228]
+
+var ListVolumesOutput = &handles[1229]
+var ListVolumesOutput_GatewayARN = &handles[1230]
+var ListVolumesOutput_Marker = &handles[1231]
+var ListVolumesOutput_VolumeInfos = &handles[1232]
+
+var NotifyWhenUploadedInput = &handles[1233]
+var NotifyWhenUploadedInput_FileShareARN = &handles[1234]
+
+var NotifyWhenUploadedOutput = &handles[1235]
+var NotifyWhenUploadedOutput_FileShareARN = &handles[1236]
+var NotifyWhenUploadedOutput_NotificationId = &handles[1237]
+
+var RefreshCacheInput = &handles[1238]
+var RefreshCacheInput_FileShareARN = &handles[1239]
+var RefreshCacheInput_FolderList = &handles[1240]
+var RefreshCacheInput_Recursive = &handles[1241]
+
+var RefreshCacheOutput = &handles[1242]
+var RefreshCacheOutput_FileShareARN = &handles[1243]
+var RefreshCacheOutput_NotificationId = &handles[1244]
+
+var RemoveTagsFromResourceInput = &handles[1245]
+var RemoveTagsFromResourceInput_ResourceARN = &handles[1246]
+var RemoveTagsFromResourceInput_TagKeys = &handles[1247]
+
+var RemoveTagsFromResourceOutput = &handles[1248]
+var RemoveTagsFromResourceOutput_ResourceARN = &handles[1249]
+
+var ResetCacheInput = &handles[1250]
+var ResetCacheInput_GatewayARN = &handles[1251]
+
+var ResetCacheOutput = &handles[1252]
+var ResetCacheOutput_GatewayARN = &handles[1253]
+
+var RetrieveTapeArchiveInput = &handles[1254]
+var RetrieveTapeArchiveInput_TapeARN = &handles[1255]
+var RetrieveTapeArchiveInput_GatewayARN = &handles[1256]
+
+var RetrieveTapeArchiveOutput = &handles[1257]
+var RetrieveTapeArchiveOutput_TapeARN = &handles[1258]
+
+var RetrieveTapeRecoveryPointInput = &handles[1259]
+var RetrieveTapeRecoveryPointInput_TapeARN = &handles[1260]
+var RetrieveTapeRecoveryPointInput_GatewayARN = &handles[1261]
+
+var RetrieveTapeRecoveryPointOutput = &handles[1262]
+var RetrieveTapeRecoveryPointOutput_TapeARN = &handles[1263]
+
+var SetLocalConsolePasswordInput = &handles[1264]
+var SetLocalConsolePasswordInput_GatewayARN = &handles[1265]
+var SetLocalConsolePasswordInput_LocalConsolePassword = &handles[1266]
+
+var SetLocalConsolePasswordOutput = &handles[1267]
+var SetLocalConsolePasswordOutput_GatewayARN = &handles[1268]
+
+var SetSMBGuestPasswordInput = &handles[1269]
+var SetSMBGuestPasswordInput_GatewayARN = &handles[1270]
+var SetSMBGuestPasswordInput_Password = &handles[1271]
+
+var SetSMBGuestPasswordOutput = &handles[1272]
+var SetSMBGuestPasswordOutput_GatewayARN = &handles[1273]
+
+var ShutdownGatewayInput = &handles[1274]
+var ShutdownGatewayInput_GatewayARN = &handles[1275]
+
+var ShutdownGatewayOutput = &handles[1276]
+var ShutdownGatewayOutput_GatewayARN = &handles[1277]
+
+var StartAvailabilityMonitorTestInput = &handles[1278]
+var StartAvailabilityMonitorTestInput_GatewayARN = &handles[1279]
+
+var StartAvailabilityMonitorTestOutput = &handles[1280]
+var StartAvailabilityMonitorTestOutput_GatewayARN = &handles[1281]
+
+var StartCacheReportInput = &handles[1282]
+var StartCacheReportInput_FileShareARN = &handles[1283]
+var StartCacheReportInput_Role = &handles[1284]
+var StartCacheReportInput_LocationARN = &handles[1285]
+var StartCacheReportInput_BucketRegion = &handles[1286]
+var StartCacheReportInput_VPCEndpointDNSName = &handles[1287]
+var StartCacheReportInput_InclusionFilters = &handles[1288]
+var StartCacheReportInput_ExclusionFilters = &handles[1289]
+var StartCacheReportInput_ClientToken = &handles[1290]
+var StartCacheReportInput_Tags = &handles[1291]
+
+var StartCacheReportOutput = &handles[1292]
+var StartCacheReportOutput_CacheReportARN = &handles[1293]
+
+var StartGatewayInput = &handles[1294]
+var StartGatewayInput_GatewayARN = &handles[1295]
+
+var StartGatewayOutput = &handles[1296]
+var StartGatewayOutput_GatewayARN = &handles[1297]
+
+var UpdateAutomaticTapeCreationPolicyInput = &handles[1298]
+var UpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules = &handles[1299]
+var UpdateAutomaticTapeCreationPolicyInput_GatewayARN = &handles[1300]
+
+var UpdateAutomaticTapeCreationPolicyOutput = &handles[1301]
+var UpdateAutomaticTapeCreationPolicyOutput_GatewayARN = &handles[1302]
+
+var UpdateBandwidthRateLimitInput = &handles[1303]
+var UpdateBandwidthRateLimitInput_GatewayARN = &handles[1304]
+var UpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec = &handles[1305]
+var UpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec = &handles[1306]
+
+var UpdateBandwidthRateLimitOutput = &handles[1307]
+var UpdateBandwidthRateLimitOutput_GatewayARN = &handles[1308]
+
+var UpdateBandwidthRateLimitScheduleInput = &handles[1309]
+var UpdateBandwidthRateLimitScheduleInput_GatewayARN = &handles[1310]
+var UpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = &handles[1311]
+
+var UpdateBandwidthRateLimitScheduleOutput = &handles[1312]
+var UpdateBandwidthRateLimitScheduleOutput_GatewayARN = &handles[1313]
+
+var UpdateChapCredentialsInput = &handles[1314]
+var UpdateChapCredentialsInput_TargetARN = &handles[1315]
+var UpdateChapCredentialsInput_SecretToAuthenticateInitiator = &handles[1316]
+var UpdateChapCredentialsInput_InitiatorName = &handles[1317]
+var UpdateChapCredentialsInput_SecretToAuthenticateTarget = &handles[1318]
+
+var UpdateChapCredentialsOutput = &handles[1319]
+var UpdateChapCredentialsOutput_TargetARN = &handles[1320]
+var UpdateChapCredentialsOutput_InitiatorName = &handles[1321]
+
+var UpdateFileSystemAssociationInput = &handles[1322]
+var UpdateFileSystemAssociationInput_FileSystemAssociationARN = &handles[1323]
+var UpdateFileSystemAssociationInput_UserName = &handles[1324]
+var UpdateFileSystemAssociationInput_Password = &handles[1325]
+var UpdateFileSystemAssociationInput_AuditDestinationARN = &handles[1326]
+var UpdateFileSystemAssociationInput_CacheAttributes = &handles[1327]
+
+var UpdateFileSystemAssociationOutput = &handles[1328]
+var UpdateFileSystemAssociationOutput_FileSystemAssociationARN = &handles[1329]
+
+var UpdateGatewayInformationInput = &handles[1330]
+var UpdateGatewayInformationInput_GatewayARN = &handles[1331]
+var UpdateGatewayInformationInput_GatewayName = &handles[1332]
+var UpdateGatewayInformationInput_GatewayTimezone = &handles[1333]
+var UpdateGatewayInformationInput_CloudWatchLogGroupARN = &handles[1334]
+var UpdateGatewayInformationInput_GatewayCapacity = &handles[1335]
+
+var UpdateGatewayInformationOutput = &handles[1336]
+var UpdateGatewayInformationOutput_GatewayARN = &handles[1337]
+var UpdateGatewayInformationOutput_GatewayName = &handles[1338]
+
+var UpdateGatewaySoftwareNowInput = &handles[1339]
+var UpdateGatewaySoftwareNowInput_GatewayARN = &handles[1340]
+
+var UpdateGatewaySoftwareNowOutput = &handles[1341]
+var UpdateGatewaySoftwareNowOutput_GatewayARN = &handles[1342]
+
+var UpdateMaintenanceStartTimeInput = &handles[1343]
+var UpdateMaintenanceStartTimeInput_GatewayARN = &handles[1344]
+var UpdateMaintenanceStartTimeInput_HourOfDay = &handles[1345]
+var UpdateMaintenanceStartTimeInput_MinuteOfHour = &handles[1346]
+var UpdateMaintenanceStartTimeInput_DayOfWeek = &handles[1347]
+var UpdateMaintenanceStartTimeInput_DayOfMonth = &handles[1348]
+var UpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences = &handles[1349]
+
+var UpdateMaintenanceStartTimeOutput = &handles[1350]
+var UpdateMaintenanceStartTimeOutput_GatewayARN = &handles[1351]
+
+var UpdateNFSFileShareInput = &handles[1352]
+var UpdateNFSFileShareInput_FileShareARN = &handles[1353]
+var UpdateNFSFileShareInput_EncryptionType = &handles[1354]
+var UpdateNFSFileShareInput_KMSEncrypted = &handles[1355]
+var UpdateNFSFileShareInput_KMSKey = &handles[1356]
+var UpdateNFSFileShareInput_NFSFileShareDefaults = &handles[1357]
+var UpdateNFSFileShareInput_DefaultStorageClass = &handles[1358]
+var UpdateNFSFileShareInput_ObjectACL = &handles[1359]
+var UpdateNFSFileShareInput_ClientList = &handles[1360]
+var UpdateNFSFileShareInput_Squash = &handles[1361]
+var UpdateNFSFileShareInput_ReadOnly = &handles[1362]
+var UpdateNFSFileShareInput_GuessMIMETypeEnabled = &handles[1363]
+var UpdateNFSFileShareInput_RequesterPays = &handles[1364]
+var UpdateNFSFileShareInput_FileShareName = &handles[1365]
+var UpdateNFSFileShareInput_CacheAttributes = &handles[1366]
+var UpdateNFSFileShareInput_NotificationPolicy = &handles[1367]
+var UpdateNFSFileShareInput_AuditDestinationARN = &handles[1368]
+
+var UpdateNFSFileShareOutput = &handles[1369]
+var UpdateNFSFileShareOutput_FileShareARN = &handles[1370]
+
+var UpdateSMBFileShareInput = &handles[1371]
+var UpdateSMBFileShareInput_FileShareARN = &handles[1372]
+var UpdateSMBFileShareInput_EncryptionType = &handles[1373]
+var UpdateSMBFileShareInput_KMSEncrypted = &handles[1374]
+var UpdateSMBFileShareInput_KMSKey = &handles[1375]
+var UpdateSMBFileShareInput_DefaultStorageClass = &handles[1376]
+var UpdateSMBFileShareInput_ObjectACL = &handles[1377]
+var UpdateSMBFileShareInput_ReadOnly = &handles[1378]
+var UpdateSMBFileShareInput_GuessMIMETypeEnabled = &handles[1379]
+var UpdateSMBFileShareInput_RequesterPays = &handles[1380]
+var UpdateSMBFileShareInput_SMBACLEnabled = &handles[1381]
+var UpdateSMBFileShareInput_AccessBasedEnumeration = &handles[1382]
+var UpdateSMBFileShareInput_AdminUserList = &handles[1383]
+var UpdateSMBFileShareInput_ValidUserList = &handles[1384]
+var UpdateSMBFileShareInput_InvalidUserList = &handles[1385]
+var UpdateSMBFileShareInput_AuditDestinationARN = &handles[1386]
+var UpdateSMBFileShareInput_CaseSensitivity = &handles[1387]
+var UpdateSMBFileShareInput_FileShareName = &handles[1388]
+var UpdateSMBFileShareInput_CacheAttributes = &handles[1389]
+var UpdateSMBFileShareInput_NotificationPolicy = &handles[1390]
+var UpdateSMBFileShareInput_OplocksEnabled = &handles[1391]
+
+var UpdateSMBFileShareOutput = &handles[1392]
+var UpdateSMBFileShareOutput_FileShareARN = &handles[1393]
+
+var UpdateSMBFileShareVisibilityInput = &handles[1394]
+var UpdateSMBFileShareVisibilityInput_GatewayARN = &handles[1395]
+var UpdateSMBFileShareVisibilityInput_FileSharesVisible = &handles[1396]
+
+var UpdateSMBFileShareVisibilityOutput = &handles[1397]
+var UpdateSMBFileShareVisibilityOutput_GatewayARN = &handles[1398]
+
+var UpdateSMBLocalGroupsInput = &handles[1399]
+var UpdateSMBLocalGroupsInput_GatewayARN = &handles[1400]
+var UpdateSMBLocalGroupsInput_SMBLocalGroups = &handles[1401]
+
+var UpdateSMBLocalGroupsOutput = &handles[1402]
+var UpdateSMBLocalGroupsOutput_GatewayARN = &handles[1403]
+
+var UpdateSMBSecurityStrategyInput = &handles[1404]
+var UpdateSMBSecurityStrategyInput_GatewayARN = &handles[1405]
+var UpdateSMBSecurityStrategyInput_SMBSecurityStrategy = &handles[1406]
+
+var UpdateSMBSecurityStrategyOutput = &handles[1407]
+var UpdateSMBSecurityStrategyOutput_GatewayARN = &handles[1408]
+
+var UpdateSnapshotScheduleInput = &handles[1409]
+var UpdateSnapshotScheduleInput_VolumeARN = &handles[1410]
+var UpdateSnapshotScheduleInput_StartAt = &handles[1411]
+var UpdateSnapshotScheduleInput_RecurrenceInHours = &handles[1412]
+var UpdateSnapshotScheduleInput_Description = &handles[1413]
+var UpdateSnapshotScheduleInput_Tags = &handles[1414]
+
+var UpdateSnapshotScheduleOutput = &handles[1415]
+var UpdateSnapshotScheduleOutput_VolumeARN = &handles[1416]
+
+var UpdateVTLDeviceTypeInput = &handles[1417]
+var UpdateVTLDeviceTypeInput_VTLDeviceARN = &handles[1418]
+var UpdateVTLDeviceTypeInput_DeviceType = &handles[1419]
+
+var UpdateVTLDeviceTypeOutput = &handles[1420]
+var UpdateVTLDeviceTypeOutput_VTLDeviceARN = &handles[1421]
+
+var StorageGateway_20130630 = &smithy.ServiceSchema{Schema: &handles[96], Version: "2013-06-30"}

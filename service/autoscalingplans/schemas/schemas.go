@@ -4,1075 +4,906 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateScalingPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "CreateScalingPlan",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteScalingPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DeleteScalingPlan",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeScalingPlanResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DescribeScalingPlanResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeScalingPlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DescribeScalingPlans",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetScalingPlanResourceForecastData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "GetScalingPlanResourceForecastData",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateScalingPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "UpdateScalingPlan",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AnyScaleScalingPlannerFrontendService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "AnyScaleScalingPlannerFrontendService",
-}, smithy.ShapeTypeService, 0)
-
-var AnyScaleScalingPlannerFrontendService = smithy.NewServiceSchema(_AnyScaleScalingPlannerFrontendService, "2018-01-06")
-
-var ApplicationSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ApplicationSource",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationSource_CloudFormationStackARN *smithy.Schema
-
-var ApplicationSource_TagFilters *smithy.Schema
-
-var _ApplicationSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ApplicationSources",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationSources_member *smithy.Schema
-
-var ConcurrentUpdateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ConcurrentUpdateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentUpdateException",
-		StatusCode: 500})
-var ConcurrentUpdateException_Message *smithy.Schema
-
-var _Cooldown = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "Cooldown",
-}, smithy.ShapeTypeInteger, 0)
-
-var CustomizedLoadMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "CustomizedLoadMetricSpecification",
-}, smithy.ShapeTypeStructure, 5)
-var CustomizedLoadMetricSpecification_MetricName *smithy.Schema
-
-var CustomizedLoadMetricSpecification_Namespace *smithy.Schema
-
-var CustomizedLoadMetricSpecification_Dimensions *smithy.Schema
-
-var CustomizedLoadMetricSpecification_Statistic *smithy.Schema
-
-var CustomizedLoadMetricSpecification_Unit *smithy.Schema
-
-var CustomizedScalingMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "CustomizedScalingMetricSpecification",
-}, smithy.ShapeTypeStructure, 5)
-var CustomizedScalingMetricSpecification_MetricName *smithy.Schema
-
-var CustomizedScalingMetricSpecification_Namespace *smithy.Schema
-
-var CustomizedScalingMetricSpecification_Dimensions *smithy.Schema
-
-var CustomizedScalingMetricSpecification_Statistic *smithy.Schema
-
-var CustomizedScalingMetricSpecification_Unit *smithy.Schema
-
-var Datapoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "Datapoint",
-}, smithy.ShapeTypeStructure, 2)
-var Datapoint_Timestamp *smithy.Schema
-
-var Datapoint_Value *smithy.Schema
-
-var _Datapoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "Datapoints",
-}, smithy.ShapeTypeList, 1)
-var _Datapoints_member *smithy.Schema
-
-var _DisableDynamicScaling = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DisableDynamicScaling",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _DisableScaleIn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DisableScaleIn",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ForecastDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ForecastDataType",
-}, smithy.ShapeTypeEnum, 4)
-var ForecastDataType_CapacityForecast *smithy.Schema
-
-var ForecastDataType_LoadForecast *smithy.Schema
-
-var ForecastDataType_ScheduledActionMinCapacity *smithy.Schema
-
-var ForecastDataType_ScheduledActionMaxCapacity *smithy.Schema
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServiceException",
-		StatusCode: 500})
-var InternalServiceException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextTokenException",
-		StatusCode: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
-		StatusCode: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var LoadMetricType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "LoadMetricType",
-}, smithy.ShapeTypeEnum, 4)
-var LoadMetricType_ASGTotalCPUUtilization *smithy.Schema
-
-var LoadMetricType_ASGTotalNetworkIn *smithy.Schema
-
-var LoadMetricType_ASGTotalNetworkOut *smithy.Schema
-
-var LoadMetricType_ALBTargetGroupRequestCount *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetricDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricDimension",
-}, smithy.ShapeTypeStructure, 2)
-var MetricDimension_Name *smithy.Schema
-
-var MetricDimension_Value *smithy.Schema
-
-var _MetricDimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricDimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricDimensions",
-}, smithy.ShapeTypeList, 1)
-var _MetricDimensions_member *smithy.Schema
-
-var _MetricDimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricDimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricScale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricScale",
-}, smithy.ShapeTypeDouble, 0)
-
-var MetricStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricStatistic",
-}, smithy.ShapeTypeEnum, 5)
-var MetricStatistic_Average *smithy.Schema
-
-var MetricStatistic_Minimum *smithy.Schema
-
-var MetricStatistic_Maximum *smithy.Schema
-
-var MetricStatistic_SampleCount *smithy.Schema
-
-var MetricStatistic_Sum *smithy.Schema
-
-var _MetricUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "MetricUnit",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var ObjectNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ObjectNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ObjectNotFoundException",
-		StatusCode: 400})
-var ObjectNotFoundException_Message *smithy.Schema
-
-var _PolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "PolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "PolicyType",
-}, smithy.ShapeTypeEnum, 1)
-var PolicyType_TargetTrackingScaling *smithy.Schema
-
-var PredefinedLoadMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "PredefinedLoadMetricSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var PredefinedLoadMetricSpecification_PredefinedLoadMetricType *smithy.Schema
-
-var PredefinedLoadMetricSpecification_ResourceLabel *smithy.Schema
-
-var PredefinedScalingMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "PredefinedScalingMetricSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var PredefinedScalingMetricSpecification_PredefinedScalingMetricType *smithy.Schema
-
-var PredefinedScalingMetricSpecification_ResourceLabel *smithy.Schema
-
-var PredictiveScalingMaxCapacityBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "PredictiveScalingMaxCapacityBehavior",
-}, smithy.ShapeTypeEnum, 3)
-var PredictiveScalingMaxCapacityBehavior_SetForecastCapacityToMaxCapacity *smithy.Schema
-
-var PredictiveScalingMaxCapacityBehavior_SetMaxCapacityToForecastCapacity *smithy.Schema
-
-var PredictiveScalingMaxCapacityBehavior_SetMaxCapacityAboveForecastCapacity *smithy.Schema
-
-var PredictiveScalingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "PredictiveScalingMode",
-}, smithy.ShapeTypeEnum, 2)
-var PredictiveScalingMode_ForecastAndScale *smithy.Schema
-
-var PredictiveScalingMode_ForecastOnly *smithy.Schema
-
-var _ResourceCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ResourceCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ResourceIdMaxLen1600 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ResourceIdMaxLen1600",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ResourceLabel",
-}, smithy.ShapeTypeString, 0)
-
-var ScalableDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalableDimension",
-}, smithy.ShapeTypeEnum, 8)
-var ScalableDimension_AutoScalingGroupDesiredCapacity *smithy.Schema
-
-var ScalableDimension_ECSServiceDesiredCount *smithy.Schema
-
-var ScalableDimension_EC2SpotFleetRequestTargetCapacity *smithy.Schema
-
-var ScalableDimension_RDSClusterReadReplicaCount *smithy.Schema
-
-var ScalableDimension_DynamoDBTableReadCapacityUnits *smithy.Schema
-
-var ScalableDimension_DynamoDBTableWriteCapacityUnits *smithy.Schema
-
-var ScalableDimension_DynamoDBIndexReadCapacityUnits *smithy.Schema
-
-var ScalableDimension_DynamoDBIndexWriteCapacityUnits *smithy.Schema
-
-var ScalingInstruction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingInstruction",
-}, smithy.ShapeTypeStructure, 14)
-var ScalingInstruction_ServiceNamespace *smithy.Schema
-
-var ScalingInstruction_ResourceId *smithy.Schema
-
-var ScalingInstruction_ScalableDimension *smithy.Schema
-
-var ScalingInstruction_MinCapacity *smithy.Schema
-
-var ScalingInstruction_MaxCapacity *smithy.Schema
-
-var ScalingInstruction_TargetTrackingConfigurations *smithy.Schema
-
-var ScalingInstruction_PredefinedLoadMetricSpecification *smithy.Schema
-
-var ScalingInstruction_CustomizedLoadMetricSpecification *smithy.Schema
-
-var ScalingInstruction_ScheduledActionBufferTime *smithy.Schema
-
-var ScalingInstruction_PredictiveScalingMaxCapacityBehavior *smithy.Schema
-
-var ScalingInstruction_PredictiveScalingMaxCapacityBuffer *smithy.Schema
-
-var ScalingInstruction_PredictiveScalingMode *smithy.Schema
-
-var ScalingInstruction_ScalingPolicyUpdateBehavior *smithy.Schema
-
-var ScalingInstruction_DisableDynamicScaling *smithy.Schema
-
-var _ScalingInstructions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingInstructions",
-}, smithy.ShapeTypeList, 1)
-var _ScalingInstructions_member *smithy.Schema
-
-var ScalingMetricType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingMetricType",
-}, smithy.ShapeTypeEnum, 13)
-var ScalingMetricType_ASGAverageCPUUtilization *smithy.Schema
-
-var ScalingMetricType_ASGAverageNetworkIn *smithy.Schema
-
-var ScalingMetricType_ASGAverageNetworkOut *smithy.Schema
-
-var ScalingMetricType_DynamoDBReadCapacityUtilization *smithy.Schema
-
-var ScalingMetricType_DynamoDBWriteCapacityUtilization *smithy.Schema
-
-var ScalingMetricType_ECSServiceAverageCPUUtilization *smithy.Schema
-
-var ScalingMetricType_ECSServiceAverageMemoryUtilization *smithy.Schema
-
-var ScalingMetricType_ALBRequestCountPerTarget *smithy.Schema
-
-var ScalingMetricType_RDSReaderAverageCPUUtilization *smithy.Schema
-
-var ScalingMetricType_RDSReaderAverageDatabaseConnections *smithy.Schema
-
-var ScalingMetricType_EC2SpotFleetRequestAverageCPUUtilization *smithy.Schema
-
-var ScalingMetricType_EC2SpotFleetRequestAverageNetworkIn *smithy.Schema
-
-var ScalingMetricType_EC2SpotFleetRequestAverageNetworkOut *smithy.Schema
-
-var ScalingPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPlan",
-}, smithy.ShapeTypeStructure, 8)
-var ScalingPlan_ScalingPlanName *smithy.Schema
-
-var ScalingPlan_ScalingPlanVersion *smithy.Schema
-
-var ScalingPlan_ApplicationSource *smithy.Schema
-
-var ScalingPlan_ScalingInstructions *smithy.Schema
-
-var ScalingPlan_StatusCode *smithy.Schema
-
-var ScalingPlan_StatusMessage *smithy.Schema
-
-var ScalingPlan_StatusStartTime *smithy.Schema
-
-var ScalingPlan_CreationTime *smithy.Schema
-
-var _ScalingPlanName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPlanName",
-}, smithy.ShapeTypeString, 0)
-
-var _ScalingPlanNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPlanNames",
-}, smithy.ShapeTypeList, 1)
-var _ScalingPlanNames_member *smithy.Schema
-
-var ScalingPlanResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPlanResource",
-}, smithy.ShapeTypeStructure, 8)
-var ScalingPlanResource_ScalingPlanName *smithy.Schema
-
-var ScalingPlanResource_ScalingPlanVersion *smithy.Schema
-
-var ScalingPlanResource_ServiceNamespace *smithy.Schema
-
-var ScalingPlanResource_ResourceId *smithy.Schema
-
-var ScalingPlanResource_ScalableDimension *smithy.Schema
-
-var ScalingPlanResource_ScalingPolicies *smithy.Schema
-
-var ScalingPlanResource_ScalingStatusCode *smithy.Schema
-
-var ScalingPlanResource_ScalingStatusMessage *smithy.Schema
-
-var _ScalingPlanResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPlanResources",
-}, smithy.ShapeTypeList, 1)
-var _ScalingPlanResources_member *smithy.Schema
-
-var _ScalingPlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPlans",
-}, smithy.ShapeTypeList, 1)
-var _ScalingPlans_member *smithy.Schema
-
-var ScalingPlanStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPlanStatusCode",
-}, smithy.ShapeTypeEnum, 8)
-var ScalingPlanStatusCode_Active *smithy.Schema
-
-var ScalingPlanStatusCode_ActiveWithProblems *smithy.Schema
-
-var ScalingPlanStatusCode_CreationInProgress *smithy.Schema
-
-var ScalingPlanStatusCode_CreationFailed *smithy.Schema
-
-var ScalingPlanStatusCode_DeletionInProgress *smithy.Schema
-
-var ScalingPlanStatusCode_DeletionFailed *smithy.Schema
-
-var ScalingPlanStatusCode_UpdateInProgress *smithy.Schema
-
-var ScalingPlanStatusCode_UpdateFailed *smithy.Schema
-
-var _ScalingPlanVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPlanVersion",
-}, smithy.ShapeTypeLong, 0)
-
-var _ScalingPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPolicies",
-}, smithy.ShapeTypeList, 1)
-var _ScalingPolicies_member *smithy.Schema
-
-var ScalingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPolicy",
-}, smithy.ShapeTypeStructure, 3)
-var ScalingPolicy_PolicyName *smithy.Schema
-
-var ScalingPolicy_PolicyType *smithy.Schema
-
-var ScalingPolicy_TargetTrackingConfiguration *smithy.Schema
-
-var ScalingPolicyUpdateBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingPolicyUpdateBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var ScalingPolicyUpdateBehavior_KeepExternalPolicies *smithy.Schema
-
-var ScalingPolicyUpdateBehavior_ReplaceExternalPolicies *smithy.Schema
-
-var ScalingStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScalingStatusCode",
-}, smithy.ShapeTypeEnum, 3)
-var ScalingStatusCode_Inactive *smithy.Schema
-
-var ScalingStatusCode_PartiallyActive *smithy.Schema
-
-var ScalingStatusCode_Active *smithy.Schema
-
-var _ScheduledActionBufferTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ScheduledActionBufferTime",
-}, smithy.ShapeTypeInteger, 0)
-
-var ServiceNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ServiceNamespace",
-}, smithy.ShapeTypeEnum, 5)
-var ServiceNamespace_AUTOSCALING *smithy.Schema
-
-var ServiceNamespace_ECS *smithy.Schema
-
-var ServiceNamespace_EC2 *smithy.Schema
-
-var ServiceNamespace_RDS *smithy.Schema
-
-var ServiceNamespace_DYNAMODB *smithy.Schema
-
-var TagFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "TagFilter",
-}, smithy.ShapeTypeStructure, 2)
-var TagFilter_Key *smithy.Schema
-
-var TagFilter_Values *smithy.Schema
-
-var _TagFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "TagFilters",
-}, smithy.ShapeTypeList, 1)
-var _TagFilters_member *smithy.Schema
-
-var _TagValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "TagValues",
-}, smithy.ShapeTypeList, 1)
-var _TagValues_member *smithy.Schema
-
-var TargetTrackingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "TargetTrackingConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var TargetTrackingConfiguration_PredefinedScalingMetricSpecification *smithy.Schema
-
-var TargetTrackingConfiguration_CustomizedScalingMetricSpecification *smithy.Schema
-
-var TargetTrackingConfiguration_TargetValue *smithy.Schema
-
-var TargetTrackingConfiguration_DisableScaleIn *smithy.Schema
-
-var TargetTrackingConfiguration_ScaleOutCooldown *smithy.Schema
-
-var TargetTrackingConfiguration_ScaleInCooldown *smithy.Schema
-
-var TargetTrackingConfiguration_EstimatedInstanceWarmup *smithy.Schema
-
-var _TargetTrackingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "TargetTrackingConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _TargetTrackingConfigurations_member *smithy.Schema
-
-var _TimestampType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "TimestampType",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
-		StatusCode: 400})
-var ValidationException_Message *smithy.Schema
-
-var _XmlString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "XmlString",
-}, smithy.ShapeTypeString, 0)
-
-var _XmlStringMaxLen128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "XmlStringMaxLen128",
-}, smithy.ShapeTypeString, 0)
-
-var _XmlStringMaxLen256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "XmlStringMaxLen256",
-}, smithy.ShapeTypeString, 0)
-
-var CreateScalingPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "CreateScalingPlanRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateScalingPlanRequest_ScalingPlanName *smithy.Schema
-
-var CreateScalingPlanRequest_ApplicationSource *smithy.Schema
-
-var CreateScalingPlanRequest_ScalingInstructions *smithy.Schema
-
-var CreateScalingPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "CreateScalingPlanResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateScalingPlanResponse_ScalingPlanVersion *smithy.Schema
-
-var DeleteScalingPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DeleteScalingPlanRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteScalingPlanRequest_ScalingPlanName *smithy.Schema
-
-var DeleteScalingPlanRequest_ScalingPlanVersion *smithy.Schema
-
-var DeleteScalingPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DeleteScalingPlanResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeScalingPlanResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DescribeScalingPlanResourcesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeScalingPlanResourcesRequest_ScalingPlanName *smithy.Schema
-
-var DescribeScalingPlanResourcesRequest_ScalingPlanVersion *smithy.Schema
-
-var DescribeScalingPlanResourcesRequest_MaxResults *smithy.Schema
-
-var DescribeScalingPlanResourcesRequest_NextToken *smithy.Schema
-
-var DescribeScalingPlanResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DescribeScalingPlanResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeScalingPlanResourcesResponse_ScalingPlanResources *smithy.Schema
-
-var DescribeScalingPlanResourcesResponse_NextToken *smithy.Schema
-
-var DescribeScalingPlansRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DescribeScalingPlansRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeScalingPlansRequest_ScalingPlanNames *smithy.Schema
-
-var DescribeScalingPlansRequest_ScalingPlanVersion *smithy.Schema
-
-var DescribeScalingPlansRequest_ApplicationSources *smithy.Schema
-
-var DescribeScalingPlansRequest_MaxResults *smithy.Schema
-
-var DescribeScalingPlansRequest_NextToken *smithy.Schema
-
-var DescribeScalingPlansResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "DescribeScalingPlansResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeScalingPlansResponse_ScalingPlans *smithy.Schema
-
-var DescribeScalingPlansResponse_NextToken *smithy.Schema
-
-var GetScalingPlanResourceForecastDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "GetScalingPlanResourceForecastDataRequest",
-}, smithy.ShapeTypeStructure, 8)
-var GetScalingPlanResourceForecastDataRequest_ScalingPlanName *smithy.Schema
-
-var GetScalingPlanResourceForecastDataRequest_ScalingPlanVersion *smithy.Schema
-
-var GetScalingPlanResourceForecastDataRequest_ServiceNamespace *smithy.Schema
-
-var GetScalingPlanResourceForecastDataRequest_ResourceId *smithy.Schema
-
-var GetScalingPlanResourceForecastDataRequest_ScalableDimension *smithy.Schema
-
-var GetScalingPlanResourceForecastDataRequest_ForecastDataType *smithy.Schema
-
-var GetScalingPlanResourceForecastDataRequest_StartTime *smithy.Schema
-
-var GetScalingPlanResourceForecastDataRequest_EndTime *smithy.Schema
-
-var GetScalingPlanResourceForecastDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "GetScalingPlanResourceForecastDataResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetScalingPlanResourceForecastDataResponse_Datapoints *smithy.Schema
-
-var UpdateScalingPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "UpdateScalingPlanRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateScalingPlanRequest_ScalingPlanName *smithy.Schema
-
-var UpdateScalingPlanRequest_ScalingPlanVersion *smithy.Schema
-
-var UpdateScalingPlanRequest_ApplicationSource *smithy.Schema
-
-var UpdateScalingPlanRequest_ScalingInstructions *smithy.Schema
-
-var UpdateScalingPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.autoscalingplans",
-	Name:      "UpdateScalingPlanResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_TagValues_member = _TagValues.AddMember("member", _XmlStringMaxLen256)
-
-	TagFilter_Key = TagFilter.AddMember("Key", _XmlStringMaxLen128)
-
-	TagFilter_Values = TagFilter.AddMember("Values", _TagValues)
-
-	_TagFilters_member = _TagFilters.AddMember("member", TagFilter)
-
-	ApplicationSource_CloudFormationStackARN = ApplicationSource.AddMember("CloudFormationStackARN", _XmlString)
-
-	ApplicationSource_TagFilters = ApplicationSource.AddMember("TagFilters", _TagFilters)
-
-	_ApplicationSources_member = _ApplicationSources.AddMember("member", ApplicationSource)
-
-	ConcurrentUpdateException_Message = ConcurrentUpdateException.AddMember("Message", _ErrorMessage)
-
-	MetricDimension_Name = MetricDimension.AddMember("Name", _MetricDimensionName)
-
-	MetricDimension_Value = MetricDimension.AddMember("Value", _MetricDimensionValue)
-
-	_MetricDimensions_member = _MetricDimensions.AddMember("member", MetricDimension)
-
-	MetricStatistic_Average = MetricStatistic.AddMember("Average", smithyprelude.Unit)
-
-	MetricStatistic_Minimum = MetricStatistic.AddMember("Minimum", smithyprelude.Unit)
-
-	MetricStatistic_Maximum = MetricStatistic.AddMember("Maximum", smithyprelude.Unit)
-
-	MetricStatistic_SampleCount = MetricStatistic.AddMember("SampleCount", smithyprelude.Unit)
-
-	MetricStatistic_Sum = MetricStatistic.AddMember("Sum", smithyprelude.Unit)
-
-	CustomizedLoadMetricSpecification_MetricName = CustomizedLoadMetricSpecification.AddMember("MetricName", _MetricName)
-
-	CustomizedLoadMetricSpecification_Namespace = CustomizedLoadMetricSpecification.AddMember("Namespace", _MetricNamespace)
-
-	CustomizedLoadMetricSpecification_Dimensions = CustomizedLoadMetricSpecification.AddMember("Dimensions", _MetricDimensions)
-
-	CustomizedLoadMetricSpecification_Statistic = CustomizedLoadMetricSpecification.AddMember("Statistic", MetricStatistic)
-
-	CustomizedLoadMetricSpecification_Unit = CustomizedLoadMetricSpecification.AddMember("Unit", _MetricUnit)
-
-	CustomizedScalingMetricSpecification_MetricName = CustomizedScalingMetricSpecification.AddMember("MetricName", _MetricName)
-
-	CustomizedScalingMetricSpecification_Namespace = CustomizedScalingMetricSpecification.AddMember("Namespace", _MetricNamespace)
-
-	CustomizedScalingMetricSpecification_Dimensions = CustomizedScalingMetricSpecification.AddMember("Dimensions", _MetricDimensions)
-
-	CustomizedScalingMetricSpecification_Statistic = CustomizedScalingMetricSpecification.AddMember("Statistic", MetricStatistic)
-
-	CustomizedScalingMetricSpecification_Unit = CustomizedScalingMetricSpecification.AddMember("Unit", _MetricUnit)
-
-	Datapoint_Timestamp = Datapoint.AddMember("Timestamp", _TimestampType)
-
-	Datapoint_Value = Datapoint.AddMember("Value", _MetricScale)
-
-	_Datapoints_member = _Datapoints.AddMember("member", Datapoint)
-
-	ForecastDataType_CapacityForecast = ForecastDataType.AddMember("CapacityForecast", smithyprelude.Unit)
-
-	ForecastDataType_LoadForecast = ForecastDataType.AddMember("LoadForecast", smithyprelude.Unit)
-
-	ForecastDataType_ScheduledActionMinCapacity = ForecastDataType.AddMember("ScheduledActionMinCapacity", smithyprelude.Unit)
-
-	ForecastDataType_ScheduledActionMaxCapacity = ForecastDataType.AddMember("ScheduledActionMaxCapacity", smithyprelude.Unit)
-
-	InternalServiceException_Message = InternalServiceException.AddMember("Message", _ErrorMessage)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _ErrorMessage)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	LoadMetricType_ASGTotalCPUUtilization = LoadMetricType.AddMember("ASGTotalCPUUtilization", smithyprelude.Unit)
-
-	LoadMetricType_ASGTotalNetworkIn = LoadMetricType.AddMember("ASGTotalNetworkIn", smithyprelude.Unit)
-
-	LoadMetricType_ASGTotalNetworkOut = LoadMetricType.AddMember("ASGTotalNetworkOut", smithyprelude.Unit)
-
-	LoadMetricType_ALBTargetGroupRequestCount = LoadMetricType.AddMember("ALBTargetGroupRequestCount", smithyprelude.Unit)
-
-	ObjectNotFoundException_Message = ObjectNotFoundException.AddMember("Message", _ErrorMessage)
-
-	PolicyType_TargetTrackingScaling = PolicyType.AddMember("TargetTrackingScaling", smithyprelude.Unit)
-
-	PredefinedLoadMetricSpecification_PredefinedLoadMetricType = PredefinedLoadMetricSpecification.AddMember("PredefinedLoadMetricType", LoadMetricType)
-
-	PredefinedLoadMetricSpecification_ResourceLabel = PredefinedLoadMetricSpecification.AddMember("ResourceLabel", _ResourceLabel)
-
-	ScalingMetricType_ASGAverageCPUUtilization = ScalingMetricType.AddMember("ASGAverageCPUUtilization", smithyprelude.Unit)
-
-	ScalingMetricType_ASGAverageNetworkIn = ScalingMetricType.AddMember("ASGAverageNetworkIn", smithyprelude.Unit)
-
-	ScalingMetricType_ASGAverageNetworkOut = ScalingMetricType.AddMember("ASGAverageNetworkOut", smithyprelude.Unit)
-
-	ScalingMetricType_DynamoDBReadCapacityUtilization = ScalingMetricType.AddMember("DynamoDBReadCapacityUtilization", smithyprelude.Unit)
-
-	ScalingMetricType_DynamoDBWriteCapacityUtilization = ScalingMetricType.AddMember("DynamoDBWriteCapacityUtilization", smithyprelude.Unit)
-
-	ScalingMetricType_ECSServiceAverageCPUUtilization = ScalingMetricType.AddMember("ECSServiceAverageCPUUtilization", smithyprelude.Unit)
-
-	ScalingMetricType_ECSServiceAverageMemoryUtilization = ScalingMetricType.AddMember("ECSServiceAverageMemoryUtilization", smithyprelude.Unit)
-
-	ScalingMetricType_ALBRequestCountPerTarget = ScalingMetricType.AddMember("ALBRequestCountPerTarget", smithyprelude.Unit)
-
-	ScalingMetricType_RDSReaderAverageCPUUtilization = ScalingMetricType.AddMember("RDSReaderAverageCPUUtilization", smithyprelude.Unit)
-
-	ScalingMetricType_RDSReaderAverageDatabaseConnections = ScalingMetricType.AddMember("RDSReaderAverageDatabaseConnections", smithyprelude.Unit)
-
-	ScalingMetricType_EC2SpotFleetRequestAverageCPUUtilization = ScalingMetricType.AddMember("EC2SpotFleetRequestAverageCPUUtilization", smithyprelude.Unit)
-
-	ScalingMetricType_EC2SpotFleetRequestAverageNetworkIn = ScalingMetricType.AddMember("EC2SpotFleetRequestAverageNetworkIn", smithyprelude.Unit)
-
-	ScalingMetricType_EC2SpotFleetRequestAverageNetworkOut = ScalingMetricType.AddMember("EC2SpotFleetRequestAverageNetworkOut", smithyprelude.Unit)
-
-	PredefinedScalingMetricSpecification_PredefinedScalingMetricType = PredefinedScalingMetricSpecification.AddMember("PredefinedScalingMetricType", ScalingMetricType)
-
-	PredefinedScalingMetricSpecification_ResourceLabel = PredefinedScalingMetricSpecification.AddMember("ResourceLabel", _ResourceLabel)
-
-	PredictiveScalingMaxCapacityBehavior_SetForecastCapacityToMaxCapacity = PredictiveScalingMaxCapacityBehavior.AddMember("SetForecastCapacityToMaxCapacity", smithyprelude.Unit)
-
-	PredictiveScalingMaxCapacityBehavior_SetMaxCapacityToForecastCapacity = PredictiveScalingMaxCapacityBehavior.AddMember("SetMaxCapacityToForecastCapacity", smithyprelude.Unit)
-
-	PredictiveScalingMaxCapacityBehavior_SetMaxCapacityAboveForecastCapacity = PredictiveScalingMaxCapacityBehavior.AddMember("SetMaxCapacityAboveForecastCapacity", smithyprelude.Unit)
-
-	PredictiveScalingMode_ForecastAndScale = PredictiveScalingMode.AddMember("ForecastAndScale", smithyprelude.Unit)
-
-	PredictiveScalingMode_ForecastOnly = PredictiveScalingMode.AddMember("ForecastOnly", smithyprelude.Unit)
-
-	ScalableDimension_AutoScalingGroupDesiredCapacity = ScalableDimension.AddMember("AutoScalingGroupDesiredCapacity", smithyprelude.Unit)
-
-	ScalableDimension_ECSServiceDesiredCount = ScalableDimension.AddMember("ECSServiceDesiredCount", smithyprelude.Unit)
-
-	ScalableDimension_EC2SpotFleetRequestTargetCapacity = ScalableDimension.AddMember("EC2SpotFleetRequestTargetCapacity", smithyprelude.Unit)
-
-	ScalableDimension_RDSClusterReadReplicaCount = ScalableDimension.AddMember("RDSClusterReadReplicaCount", smithyprelude.Unit)
-
-	ScalableDimension_DynamoDBTableReadCapacityUnits = ScalableDimension.AddMember("DynamoDBTableReadCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_DynamoDBTableWriteCapacityUnits = ScalableDimension.AddMember("DynamoDBTableWriteCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_DynamoDBIndexReadCapacityUnits = ScalableDimension.AddMember("DynamoDBIndexReadCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_DynamoDBIndexWriteCapacityUnits = ScalableDimension.AddMember("DynamoDBIndexWriteCapacityUnits", smithyprelude.Unit)
-
-	ServiceNamespace_AUTOSCALING = ServiceNamespace.AddMember("AUTOSCALING", smithyprelude.Unit)
-
-	ServiceNamespace_ECS = ServiceNamespace.AddMember("ECS", smithyprelude.Unit)
-
-	ServiceNamespace_EC2 = ServiceNamespace.AddMember("EC2", smithyprelude.Unit)
-
-	ServiceNamespace_RDS = ServiceNamespace.AddMember("RDS", smithyprelude.Unit)
-
-	ServiceNamespace_DYNAMODB = ServiceNamespace.AddMember("DYNAMODB", smithyprelude.Unit)
-
-	TargetTrackingConfiguration_PredefinedScalingMetricSpecification = TargetTrackingConfiguration.AddMember("PredefinedScalingMetricSpecification", PredefinedScalingMetricSpecification)
-
-	TargetTrackingConfiguration_CustomizedScalingMetricSpecification = TargetTrackingConfiguration.AddMember("CustomizedScalingMetricSpecification", CustomizedScalingMetricSpecification)
-
-	TargetTrackingConfiguration_TargetValue = TargetTrackingConfiguration.AddMember("TargetValue", _MetricScale)
-
-	TargetTrackingConfiguration_DisableScaleIn = TargetTrackingConfiguration.AddMember("DisableScaleIn", _DisableScaleIn)
-
-	TargetTrackingConfiguration_ScaleOutCooldown = TargetTrackingConfiguration.AddMember("ScaleOutCooldown", _Cooldown)
-
-	TargetTrackingConfiguration_ScaleInCooldown = TargetTrackingConfiguration.AddMember("ScaleInCooldown", _Cooldown)
-
-	TargetTrackingConfiguration_EstimatedInstanceWarmup = TargetTrackingConfiguration.AddMember("EstimatedInstanceWarmup", _Cooldown)
-
-	_TargetTrackingConfigurations_member = _TargetTrackingConfigurations.AddMember("member", TargetTrackingConfiguration)
-
-	ScalingPolicyUpdateBehavior_KeepExternalPolicies = ScalingPolicyUpdateBehavior.AddMember("KeepExternalPolicies", smithyprelude.Unit)
-
-	ScalingPolicyUpdateBehavior_ReplaceExternalPolicies = ScalingPolicyUpdateBehavior.AddMember("ReplaceExternalPolicies", smithyprelude.Unit)
-
-	ScalingInstruction_ServiceNamespace = ScalingInstruction.AddMember("ServiceNamespace", ServiceNamespace)
-
-	ScalingInstruction_ResourceId = ScalingInstruction.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	ScalingInstruction_ScalableDimension = ScalingInstruction.AddMember("ScalableDimension", ScalableDimension)
-
-	ScalingInstruction_MinCapacity = ScalingInstruction.AddMember("MinCapacity", _ResourceCapacity)
-
-	ScalingInstruction_MaxCapacity = ScalingInstruction.AddMember("MaxCapacity", _ResourceCapacity)
-
-	ScalingInstruction_TargetTrackingConfigurations = ScalingInstruction.AddMember("TargetTrackingConfigurations", _TargetTrackingConfigurations)
-
-	ScalingInstruction_PredefinedLoadMetricSpecification = ScalingInstruction.AddMember("PredefinedLoadMetricSpecification", PredefinedLoadMetricSpecification)
-
-	ScalingInstruction_CustomizedLoadMetricSpecification = ScalingInstruction.AddMember("CustomizedLoadMetricSpecification", CustomizedLoadMetricSpecification)
-
-	ScalingInstruction_ScheduledActionBufferTime = ScalingInstruction.AddMember("ScheduledActionBufferTime", _ScheduledActionBufferTime)
-
-	ScalingInstruction_PredictiveScalingMaxCapacityBehavior = ScalingInstruction.AddMember("PredictiveScalingMaxCapacityBehavior", PredictiveScalingMaxCapacityBehavior)
-
-	ScalingInstruction_PredictiveScalingMaxCapacityBuffer = ScalingInstruction.AddMember("PredictiveScalingMaxCapacityBuffer", _ResourceCapacity)
-
-	ScalingInstruction_PredictiveScalingMode = ScalingInstruction.AddMember("PredictiveScalingMode", PredictiveScalingMode)
-
-	ScalingInstruction_ScalingPolicyUpdateBehavior = ScalingInstruction.AddMember("ScalingPolicyUpdateBehavior", ScalingPolicyUpdateBehavior)
-
-	ScalingInstruction_DisableDynamicScaling = ScalingInstruction.AddMember("DisableDynamicScaling", _DisableDynamicScaling)
-
-	_ScalingInstructions_member = _ScalingInstructions.AddMember("member", ScalingInstruction)
-
-	ScalingPlanStatusCode_Active = ScalingPlanStatusCode.AddMember("Active", smithyprelude.Unit)
-
-	ScalingPlanStatusCode_ActiveWithProblems = ScalingPlanStatusCode.AddMember("ActiveWithProblems", smithyprelude.Unit)
-
-	ScalingPlanStatusCode_CreationInProgress = ScalingPlanStatusCode.AddMember("CreationInProgress", smithyprelude.Unit)
-
-	ScalingPlanStatusCode_CreationFailed = ScalingPlanStatusCode.AddMember("CreationFailed", smithyprelude.Unit)
-
-	ScalingPlanStatusCode_DeletionInProgress = ScalingPlanStatusCode.AddMember("DeletionInProgress", smithyprelude.Unit)
-
-	ScalingPlanStatusCode_DeletionFailed = ScalingPlanStatusCode.AddMember("DeletionFailed", smithyprelude.Unit)
-
-	ScalingPlanStatusCode_UpdateInProgress = ScalingPlanStatusCode.AddMember("UpdateInProgress", smithyprelude.Unit)
-
-	ScalingPlanStatusCode_UpdateFailed = ScalingPlanStatusCode.AddMember("UpdateFailed", smithyprelude.Unit)
-
-	ScalingPlan_ScalingPlanName = ScalingPlan.AddMember("ScalingPlanName", _ScalingPlanName)
-
-	ScalingPlan_ScalingPlanVersion = ScalingPlan.AddMember("ScalingPlanVersion", _ScalingPlanVersion)
-
-	ScalingPlan_ApplicationSource = ScalingPlan.AddMember("ApplicationSource", ApplicationSource)
-
-	ScalingPlan_ScalingInstructions = ScalingPlan.AddMember("ScalingInstructions", _ScalingInstructions)
-
-	ScalingPlan_StatusCode = ScalingPlan.AddMember("StatusCode", ScalingPlanStatusCode)
-
-	ScalingPlan_StatusMessage = ScalingPlan.AddMember("StatusMessage", _XmlString)
-
-	ScalingPlan_StatusStartTime = ScalingPlan.AddMember("StatusStartTime", _TimestampType)
-
-	ScalingPlan_CreationTime = ScalingPlan.AddMember("CreationTime", _TimestampType)
-
-	_ScalingPlanNames_member = _ScalingPlanNames.AddMember("member", _ScalingPlanName)
-
-	ScalingPolicy_PolicyName = ScalingPolicy.AddMember("PolicyName", _PolicyName)
-
-	ScalingPolicy_PolicyType = ScalingPolicy.AddMember("PolicyType", PolicyType)
-
-	ScalingPolicy_TargetTrackingConfiguration = ScalingPolicy.AddMember("TargetTrackingConfiguration", TargetTrackingConfiguration)
-
-	_ScalingPolicies_member = _ScalingPolicies.AddMember("member", ScalingPolicy)
-
-	ScalingStatusCode_Inactive = ScalingStatusCode.AddMember("Inactive", smithyprelude.Unit)
-
-	ScalingStatusCode_PartiallyActive = ScalingStatusCode.AddMember("PartiallyActive", smithyprelude.Unit)
-
-	ScalingStatusCode_Active = ScalingStatusCode.AddMember("Active", smithyprelude.Unit)
-
-	ScalingPlanResource_ScalingPlanName = ScalingPlanResource.AddMember("ScalingPlanName", _ScalingPlanName)
-
-	ScalingPlanResource_ScalingPlanVersion = ScalingPlanResource.AddMember("ScalingPlanVersion", _ScalingPlanVersion)
-
-	ScalingPlanResource_ServiceNamespace = ScalingPlanResource.AddMember("ServiceNamespace", ServiceNamespace)
-
-	ScalingPlanResource_ResourceId = ScalingPlanResource.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	ScalingPlanResource_ScalableDimension = ScalingPlanResource.AddMember("ScalableDimension", ScalableDimension)
-
-	ScalingPlanResource_ScalingPolicies = ScalingPlanResource.AddMember("ScalingPolicies", _ScalingPolicies)
-
-	ScalingPlanResource_ScalingStatusCode = ScalingPlanResource.AddMember("ScalingStatusCode", ScalingStatusCode)
-
-	ScalingPlanResource_ScalingStatusMessage = ScalingPlanResource.AddMember("ScalingStatusMessage", _XmlString)
-
-	_ScalingPlanResources_member = _ScalingPlanResources.AddMember("member", ScalingPlanResource)
-
-	_ScalingPlans_member = _ScalingPlans.AddMember("member", ScalingPlan)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	CreateScalingPlanRequest_ScalingPlanName = CreateScalingPlanRequest.AddMember("ScalingPlanName", _ScalingPlanName)
-
-	CreateScalingPlanRequest_ApplicationSource = CreateScalingPlanRequest.AddMember("ApplicationSource", ApplicationSource)
-
-	CreateScalingPlanRequest_ScalingInstructions = CreateScalingPlanRequest.AddMember("ScalingInstructions", _ScalingInstructions)
-
-	CreateScalingPlanResponse_ScalingPlanVersion = CreateScalingPlanResponse.AddMember("ScalingPlanVersion", _ScalingPlanVersion)
-
-	DeleteScalingPlanRequest_ScalingPlanName = DeleteScalingPlanRequest.AddMember("ScalingPlanName", _ScalingPlanName)
-
-	DeleteScalingPlanRequest_ScalingPlanVersion = DeleteScalingPlanRequest.AddMember("ScalingPlanVersion", _ScalingPlanVersion)
-
-	DescribeScalingPlanResourcesRequest_ScalingPlanName = DescribeScalingPlanResourcesRequest.AddMember("ScalingPlanName", _ScalingPlanName)
-
-	DescribeScalingPlanResourcesRequest_ScalingPlanVersion = DescribeScalingPlanResourcesRequest.AddMember("ScalingPlanVersion", _ScalingPlanVersion)
-
-	DescribeScalingPlanResourcesRequest_MaxResults = DescribeScalingPlanResourcesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeScalingPlanResourcesRequest_NextToken = DescribeScalingPlanResourcesRequest.AddMember("NextToken", _NextToken)
-
-	DescribeScalingPlanResourcesResponse_ScalingPlanResources = DescribeScalingPlanResourcesResponse.AddMember("ScalingPlanResources", _ScalingPlanResources)
-
-	DescribeScalingPlanResourcesResponse_NextToken = DescribeScalingPlanResourcesResponse.AddMember("NextToken", _NextToken)
-
-	DescribeScalingPlansRequest_ScalingPlanNames = DescribeScalingPlansRequest.AddMember("ScalingPlanNames", _ScalingPlanNames)
-
-	DescribeScalingPlansRequest_ScalingPlanVersion = DescribeScalingPlansRequest.AddMember("ScalingPlanVersion", _ScalingPlanVersion)
-
-	DescribeScalingPlansRequest_ApplicationSources = DescribeScalingPlansRequest.AddMember("ApplicationSources", _ApplicationSources)
-
-	DescribeScalingPlansRequest_MaxResults = DescribeScalingPlansRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeScalingPlansRequest_NextToken = DescribeScalingPlansRequest.AddMember("NextToken", _NextToken)
-
-	DescribeScalingPlansResponse_ScalingPlans = DescribeScalingPlansResponse.AddMember("ScalingPlans", _ScalingPlans)
-
-	DescribeScalingPlansResponse_NextToken = DescribeScalingPlansResponse.AddMember("NextToken", _NextToken)
-
-	GetScalingPlanResourceForecastDataRequest_ScalingPlanName = GetScalingPlanResourceForecastDataRequest.AddMember("ScalingPlanName", _ScalingPlanName)
-
-	GetScalingPlanResourceForecastDataRequest_ScalingPlanVersion = GetScalingPlanResourceForecastDataRequest.AddMember("ScalingPlanVersion", _ScalingPlanVersion)
-
-	GetScalingPlanResourceForecastDataRequest_ServiceNamespace = GetScalingPlanResourceForecastDataRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	GetScalingPlanResourceForecastDataRequest_ResourceId = GetScalingPlanResourceForecastDataRequest.AddMember("ResourceId", _XmlString)
-
-	GetScalingPlanResourceForecastDataRequest_ScalableDimension = GetScalingPlanResourceForecastDataRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	GetScalingPlanResourceForecastDataRequest_ForecastDataType = GetScalingPlanResourceForecastDataRequest.AddMember("ForecastDataType", ForecastDataType)
-
-	GetScalingPlanResourceForecastDataRequest_StartTime = GetScalingPlanResourceForecastDataRequest.AddMember("StartTime", _TimestampType)
-
-	GetScalingPlanResourceForecastDataRequest_EndTime = GetScalingPlanResourceForecastDataRequest.AddMember("EndTime", _TimestampType)
-
-	GetScalingPlanResourceForecastDataResponse_Datapoints = GetScalingPlanResourceForecastDataResponse.AddMember("Datapoints", _Datapoints)
-
-	UpdateScalingPlanRequest_ScalingPlanName = UpdateScalingPlanRequest.AddMember("ScalingPlanName", _ScalingPlanName)
-
-	UpdateScalingPlanRequest_ScalingPlanVersion = UpdateScalingPlanRequest.AddMember("ScalingPlanVersion", _ScalingPlanVersion)
-
-	UpdateScalingPlanRequest_ApplicationSource = UpdateScalingPlanRequest.AddMember("ApplicationSource", ApplicationSource)
-
-	UpdateScalingPlanRequest_ScalingInstructions = UpdateScalingPlanRequest.AddMember("ScalingInstructions", _ScalingInstructions)
-
+const blob = "" +
+	"GetScalingPlanResourceForecastDataResponseGetScalingPlanResourceForecastDataRequestEC2SpotFleetReque" +
+	"stAverageCPUUtilizationAnyScaleScalingPlannerFrontendServiceCustomizedScalingMetricSpecificationDesc" +
+	"ribeScalingPlanResourcesResponseEC2SpotFleetRequestAverageNetworkOutPredefinedScalingMetricSpecifica" +
+	"tionPredictiveScalingMaxCapacityBehaviorDescribeScalingPlanResourcesRequestEC2SpotFleetRequestAverag" +
+	"eNetworkInRDSReaderAverageDatabaseConnectionsSetMaxCapacityAboveForecastCapacityECSServiceAverageMem" +
+	"oryUtilizationPredictiveScalingMaxCapacityBufferCustomizedLoadMetricSpecificationEC2SpotFleetRequest" +
+	"TargetCapacityPredefinedLoadMetricSpecificationDynamoDBWriteCapacityUtilizationSetForecastCapacityTo" +
+	"MaxCapacitySetMaxCapacityToForecastCapacityAutoScalingGroupDesiredCapacityDynamoDBIndexWriteCapacity" +
+	"UnitsDynamoDBReadCapacityUtilizationDynamoDBTableWriteCapacityUnitsECSServiceAverageCPUUtilizationDy" +
+	"namoDBIndexReadCapacityUnitsDynamoDBTableReadCapacityUnitsRDSReaderAverageCPUUtilizationDescribeScal" +
+	"ingPlansResponseTargetTrackingConfigurationsDescribeScalingPlansRequestPredefinedScalingMetricTypeSc" +
+	"alingPolicyUpdateBehaviorALBTargetGroupRequestCountRDSClusterReadReplicaCountScheduledActionMaxCapac" +
+	"ityScheduledActionMinCapacityConcurrentUpdateExceptionCreateScalingPlanResponseDeleteScalingPlanResp" +
+	"onseInvalidNextTokenExceptionScheduledActionBufferTimeUpdateScalingPlanResponseALBRequestCountPerTar" +
+	"getASGAverageCPUUtilizationCreateScalingPlanRequestDeleteScalingPlanRequestInternalServiceExceptionP" +
+	"redefinedLoadMetricTypeUpdateScalingPlanRequestEstimatedInstanceWarmupObjectNotFoundExceptionReplace" +
+	"ExternalPoliciesASGTotalCPUUtilizationCloudFormationStackARNECSServiceDesiredCountLimitExceededExcep" +
+	"tionDisableDynamicScalingPredictiveScalingModeScalingPlanStatusCodeTargetTrackingScalingASGAverageNe" +
+	"tworkOutKeepExternalPoliciesMetricDimensionValueResourceIdMaxLen1600ScalingStatusMessageASGAverageNe" +
+	"tworkInMetricDimensionNameScalingInstructionsValidationExceptionASGTotalNetworkOutActiveWithProblems" +
+	"ApplicationSourcesCreationInProgressDeletionInProgressScalingPlanVersionXmlStringMaxLen128XmlStringM" +
+	"axLen256ASGTotalNetworkInScalableDimensionScalingStatusCodeCapacityForecastForecastAndScaleForecastD" +
+	"ataTypeMetricDimensionsResourceCapacityScaleOutCooldownScalingPlanNamesServiceNamespaceUpdateInProgr" +
+	"essMetricNamespaceMetricStatisticPartiallyActiveScaleInCooldownScalingPoliciesStatusStartTimeCreatio" +
+	"nFailedDeletionFailedDisableScaleInResourceLabelTimestampTypeCreationTimeErrorMessageForecastOnlyLoa" +
+	"dForecastUpdateFailedAUTOSCALINGMetricScaleSampleCountTargetValueDatapointsMaxResultsMetricUnitPolic" +
+	"yNamePolicyTypeTagFiltersTagValuesDYNAMODBInactiveEndTimeMaximumMinimummemberKeySum"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.autoscalingplans", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1254, Target: 0, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1279, Target: 1, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 196, Target: 2, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 988, Target: 3, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 4, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1354, Target: 5, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 123, Target: 6, Traits: 0, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2000, Target: 7, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1638, Target: 206, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2615, Target: 189, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2000, Target: 10, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 7, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1229, Target: 12, Traits: 1, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1881, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2247, Target: 14, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 548, Target: 15, Traits: 0, StrLen: 33, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2303, Target: 59, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2278, Target: 60, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2213, Target: 56, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2324, Target: 62, Traits: 0, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 800, Target: 68, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 160, Target: 21, Traits: 0, StrLen: 36, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2303, Target: 59, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2278, Target: 60, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2213, Target: 56, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2324, Target: 62, Traits: 0, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 800, Target: 68, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2565, Target: 27, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2448, Target: 203, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1843, Target: 61, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2565, Target: 30, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 27, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1704, Target: 32, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 2421, Target: 33, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 2473, Target: 34, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2191, Target: 35, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2159, Target: 253, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2497, Target: 253, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1203, Target: 253, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1177, Target: 253, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1475, Target: 40, Traits: 2, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1881, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1304, Target: 42, Traits: 3, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1881, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 44, Traits: 4, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1881, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1509, Target: 46, Traits: 0, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1616, Target: 253, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2108, Target: 253, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1964, Target: 253, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1125, Target: 253, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2575, Target: 51, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1828, Target: 52, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1922, Target: 55, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1843, Target: 58, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1907, Target: 55, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2207, Target: 56, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 52, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1828, Target: 58, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2303, Target: 59, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2303, Target: 60, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2532, Target: 61, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 2318, Target: 62, Traits: 0, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 102, Target: 253, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2664, Target: 253, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2657, Target: 253, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2543, Target: 253, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2680, Target: 253, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2585, Target: 68, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1311, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1570, Target: 70, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1881, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2595, Target: 72, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2605, Target: 73, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1767, Target: 253, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 614, Target: 75, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1499, Target: 46, Traits: 0, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2435, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 268, Target: 78, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1071, Target: 117, Traits: 0, StrLen: 27, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2435, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 304, Target: 81, Traits: 0, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 679, Target: 253, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 711, Target: 253, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 445, Target: 253, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1725, Target: 85, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2175, Target: 253, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2485, Target: 253, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2223, Target: 88, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1848, Target: 89, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2435, Target: 90, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2125, Target: 91, Traits: 0, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 743, Target: 253, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1660, Target: 253, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 581, Target: 253, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1151, Target: 253, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 928, Target: 253, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 836, Target: 253, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 898, Target: 253, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 774, Target: 253, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1926, Target: 100, Traits: 0, StrLen: 18, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2271, Target: 180, Traits: 0, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1848, Target: 89, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2125, Target: 91, Traits: 0, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1218, Target: 88, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 321, Target: 88, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1016, Target: 201, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 614, Target: 75, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 548, Target: 15, Traits: 0, StrLen: 33, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1329, Target: 179, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 304, Target: 81, Traits: 0, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 514, Target: 88, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1725, Target: 85, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1098, Target: 172, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1704, Target: 32, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1926, Target: 115, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 100, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1081, Target: 117, Traits: 0, StrLen: 17, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1403, Target: 253, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1888, Target: 253, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1788, Target: 253, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 805, Target: 253, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 647, Target: 253, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 867, Target: 253, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 480, Target: 253, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1379, Target: 253, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 958, Target: 253, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 410, Target: 253, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 83, Target: 253, Traits: 0, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 375, Target: 253, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 232, Target: 253, Traits: 0, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3, Target: 131, Traits: 0, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2255, Target: 140, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2000, Target: 7, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1926, Target: 115, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1757, Target: 156, Traits: 0, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1875, Target: 206, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2378, Target: 203, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2461, Target: 203, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2255, Target: 140, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2255, Target: 141, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 140, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3, Target: 143, Traits: 0, StrLen: 19, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2255, Target: 140, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2271, Target: 180, Traits: 0, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1848, Target: 89, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2125, Target: 91, Traits: 0, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2363, Target: 166, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2142, Target: 175, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1868, Target: 206, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 204, Target: 152, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 143, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 996, Target: 154, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 131, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1746, Target: 156, Traits: 0, StrLen: 21, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1982, Target: 253, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1982, Target: 253, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2018, Target: 253, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2393, Target: 253, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2036, Target: 253, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2407, Target: 253, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2287, Target: 253, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2509, Target: 253, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 2363, Target: 166, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 168, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1098, Target: 168, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2595, Target: 72, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2605, Target: 73, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1016, Target: 193, Traits: 0, StrLen: 27, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1098, Target: 172, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1808, Target: 253, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1593, Target: 253, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2142, Target: 175, Traits: 0, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2642, Target: 253, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2333, Target: 253, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1982, Target: 253, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1329, Target: 179, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2271, Target: 180, Traits: 0, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2521, Target: 253, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 480, Target: 253, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 83, Target: 253, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 410, Target: 253, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2634, Target: 253, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2615, Target: 186, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2677, Target: 207, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2628, Target: 191, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2615, Target: 189, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 186, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2625, Target: 191, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 208, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1016, Target: 193, Traits: 0, StrLen: 27, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 268, Target: 78, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 160, Target: 21, Traits: 0, StrLen: 36, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2554, Target: 61, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2421, Target: 33, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2239, Target: 14, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2348, Target: 14, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1547, Target: 14, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1016, Target: 201, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2671, Target: 193, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2448, Target: 203, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1945, Target: 204, Traits: 6, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1881, Target: 34, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2072, Target: 206, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2072, Target: 207, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2090, Target: 208, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1427, Target: 209, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2255, Target: 140, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2000, Target: 7, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1926, Target: 115, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1254, Target: 213, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1451, Target: 215, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2255, Target: 140, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1279, Target: 218, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 340, Target: 219, Traits: 0, StrLen: 35, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2255, Target: 140, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2575, Target: 51, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1311, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 196, Target: 224, Traits: 0, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 204, Target: 152, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1311, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1044, Target: 227, Traits: 0, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2255, Target: 141, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2000, Target: 10, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2575, Target: 51, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1311, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 988, Target: 233, Traits: 0, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 996, Target: 154, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1311, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 42, Target: 236, Traits: 0, StrLen: 41, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2255, Target: 140, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2271, Target: 180, Traits: 0, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1848, Target: 206, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2125, Target: 91, Traits: 0, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2191, Target: 35, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2384, Target: 203, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2650, Target: 203, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 0, Target: 245, Traits: 0, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2565, Target: 30, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1523, Target: 247, Traits: 0, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2255, Target: 140, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2054, Target: 165, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2000, Target: 7, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1926, Target: 115, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1354, Target: 252, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 800, Target: 253, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentUpdateException",
+			StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServiceException",
+			StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidNextTokenException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ObjectNotFoundException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+	},
 }
+
+var handles = [254]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+}
+
+var CreateScalingPlan = &handles[0]
+
+var DeleteScalingPlan = &handles[1]
+
+var DescribeScalingPlanResources = &handles[2]
+
+var DescribeScalingPlans = &handles[3]
+
+var GetScalingPlanResourceForecastData = &handles[4]
+
+var UpdateScalingPlan = &handles[5]
+
+var _AnyScaleScalingPlannerFrontendService = &handles[6]
+
+var ApplicationSource = &handles[7]
+var ApplicationSource_CloudFormationStackARN = &handles[8]
+var ApplicationSource_TagFilters = &handles[9]
+
+var _ApplicationSources = &handles[10]
+var _ApplicationSources_member = &handles[11]
+
+var ConcurrentUpdateException = &handles[12]
+var ConcurrentUpdateException_Message = &handles[13]
+
+var _Cooldown = &handles[14]
+
+var CustomizedLoadMetricSpecification = &handles[15]
+var CustomizedLoadMetricSpecification_MetricName = &handles[16]
+var CustomizedLoadMetricSpecification_Namespace = &handles[17]
+var CustomizedLoadMetricSpecification_Dimensions = &handles[18]
+var CustomizedLoadMetricSpecification_Statistic = &handles[19]
+var CustomizedLoadMetricSpecification_Unit = &handles[20]
+
+var CustomizedScalingMetricSpecification = &handles[21]
+var CustomizedScalingMetricSpecification_MetricName = &handles[22]
+var CustomizedScalingMetricSpecification_Namespace = &handles[23]
+var CustomizedScalingMetricSpecification_Dimensions = &handles[24]
+var CustomizedScalingMetricSpecification_Statistic = &handles[25]
+var CustomizedScalingMetricSpecification_Unit = &handles[26]
+
+var Datapoint = &handles[27]
+var Datapoint_Timestamp = &handles[28]
+var Datapoint_Value = &handles[29]
+
+var _Datapoints = &handles[30]
+var _Datapoints_member = &handles[31]
+
+var _DisableDynamicScaling = &handles[32]
+
+var _DisableScaleIn = &handles[33]
+
+var _ErrorMessage = &handles[34]
+
+var ForecastDataType = &handles[35]
+var ForecastDataType_CapacityForecast = &handles[36]
+var ForecastDataType_LoadForecast = &handles[37]
+var ForecastDataType_ScheduledActionMinCapacity = &handles[38]
+var ForecastDataType_ScheduledActionMaxCapacity = &handles[39]
+
+var InternalServiceException = &handles[40]
+var InternalServiceException_Message = &handles[41]
+
+var InvalidNextTokenException = &handles[42]
+var InvalidNextTokenException_Message = &handles[43]
+
+var LimitExceededException = &handles[44]
+var LimitExceededException_Message = &handles[45]
+
+var LoadMetricType = &handles[46]
+var LoadMetricType_ASGTotalCPUUtilization = &handles[47]
+var LoadMetricType_ASGTotalNetworkIn = &handles[48]
+var LoadMetricType_ASGTotalNetworkOut = &handles[49]
+var LoadMetricType_ALBTargetGroupRequestCount = &handles[50]
+
+var _MaxResults = &handles[51]
+
+var MetricDimension = &handles[52]
+var MetricDimension_Name = &handles[53]
+var MetricDimension_Value = &handles[54]
+
+var _MetricDimensionName = &handles[55]
+
+var _MetricDimensions = &handles[56]
+var _MetricDimensions_member = &handles[57]
+
+var _MetricDimensionValue = &handles[58]
+
+var _MetricName = &handles[59]
+
+var _MetricNamespace = &handles[60]
+
+var _MetricScale = &handles[61]
+
+var MetricStatistic = &handles[62]
+var MetricStatistic_Average = &handles[63]
+var MetricStatistic_Minimum = &handles[64]
+var MetricStatistic_Maximum = &handles[65]
+var MetricStatistic_SampleCount = &handles[66]
+var MetricStatistic_Sum = &handles[67]
+
+var _MetricUnit = &handles[68]
+
+var _NextToken = &handles[69]
+
+var ObjectNotFoundException = &handles[70]
+var ObjectNotFoundException_Message = &handles[71]
+
+var _PolicyName = &handles[72]
+
+var PolicyType = &handles[73]
+var PolicyType_TargetTrackingScaling = &handles[74]
+
+var PredefinedLoadMetricSpecification = &handles[75]
+var PredefinedLoadMetricSpecification_PredefinedLoadMetricType = &handles[76]
+var PredefinedLoadMetricSpecification_ResourceLabel = &handles[77]
+
+var PredefinedScalingMetricSpecification = &handles[78]
+var PredefinedScalingMetricSpecification_PredefinedScalingMetricType = &handles[79]
+var PredefinedScalingMetricSpecification_ResourceLabel = &handles[80]
+
+var PredictiveScalingMaxCapacityBehavior = &handles[81]
+var PredictiveScalingMaxCapacityBehavior_SetForecastCapacityToMaxCapacity = &handles[82]
+var PredictiveScalingMaxCapacityBehavior_SetMaxCapacityToForecastCapacity = &handles[83]
+var PredictiveScalingMaxCapacityBehavior_SetMaxCapacityAboveForecastCapacity = &handles[84]
+
+var PredictiveScalingMode = &handles[85]
+var PredictiveScalingMode_ForecastAndScale = &handles[86]
+var PredictiveScalingMode_ForecastOnly = &handles[87]
+
+var _ResourceCapacity = &handles[88]
+
+var _ResourceIdMaxLen1600 = &handles[89]
+
+var _ResourceLabel = &handles[90]
+
+var ScalableDimension = &handles[91]
+var ScalableDimension_AutoScalingGroupDesiredCapacity = &handles[92]
+var ScalableDimension_ECSServiceDesiredCount = &handles[93]
+var ScalableDimension_EC2SpotFleetRequestTargetCapacity = &handles[94]
+var ScalableDimension_RDSClusterReadReplicaCount = &handles[95]
+var ScalableDimension_DynamoDBTableReadCapacityUnits = &handles[96]
+var ScalableDimension_DynamoDBTableWriteCapacityUnits = &handles[97]
+var ScalableDimension_DynamoDBIndexReadCapacityUnits = &handles[98]
+var ScalableDimension_DynamoDBIndexWriteCapacityUnits = &handles[99]
+
+var ScalingInstruction = &handles[100]
+var ScalingInstruction_ServiceNamespace = &handles[101]
+var ScalingInstruction_ResourceId = &handles[102]
+var ScalingInstruction_ScalableDimension = &handles[103]
+var ScalingInstruction_MinCapacity = &handles[104]
+var ScalingInstruction_MaxCapacity = &handles[105]
+var ScalingInstruction_TargetTrackingConfigurations = &handles[106]
+var ScalingInstruction_PredefinedLoadMetricSpecification = &handles[107]
+var ScalingInstruction_CustomizedLoadMetricSpecification = &handles[108]
+var ScalingInstruction_ScheduledActionBufferTime = &handles[109]
+var ScalingInstruction_PredictiveScalingMaxCapacityBehavior = &handles[110]
+var ScalingInstruction_PredictiveScalingMaxCapacityBuffer = &handles[111]
+var ScalingInstruction_PredictiveScalingMode = &handles[112]
+var ScalingInstruction_ScalingPolicyUpdateBehavior = &handles[113]
+var ScalingInstruction_DisableDynamicScaling = &handles[114]
+
+var _ScalingInstructions = &handles[115]
+var _ScalingInstructions_member = &handles[116]
+
+var ScalingMetricType = &handles[117]
+var ScalingMetricType_ASGAverageCPUUtilization = &handles[118]
+var ScalingMetricType_ASGAverageNetworkIn = &handles[119]
+var ScalingMetricType_ASGAverageNetworkOut = &handles[120]
+var ScalingMetricType_DynamoDBReadCapacityUtilization = &handles[121]
+var ScalingMetricType_DynamoDBWriteCapacityUtilization = &handles[122]
+var ScalingMetricType_ECSServiceAverageCPUUtilization = &handles[123]
+var ScalingMetricType_ECSServiceAverageMemoryUtilization = &handles[124]
+var ScalingMetricType_ALBRequestCountPerTarget = &handles[125]
+var ScalingMetricType_RDSReaderAverageCPUUtilization = &handles[126]
+var ScalingMetricType_RDSReaderAverageDatabaseConnections = &handles[127]
+var ScalingMetricType_EC2SpotFleetRequestAverageCPUUtilization = &handles[128]
+var ScalingMetricType_EC2SpotFleetRequestAverageNetworkIn = &handles[129]
+var ScalingMetricType_EC2SpotFleetRequestAverageNetworkOut = &handles[130]
+
+var ScalingPlan = &handles[131]
+var ScalingPlan_ScalingPlanName = &handles[132]
+var ScalingPlan_ScalingPlanVersion = &handles[133]
+var ScalingPlan_ApplicationSource = &handles[134]
+var ScalingPlan_ScalingInstructions = &handles[135]
+var ScalingPlan_StatusCode = &handles[136]
+var ScalingPlan_StatusMessage = &handles[137]
+var ScalingPlan_StatusStartTime = &handles[138]
+var ScalingPlan_CreationTime = &handles[139]
+
+var _ScalingPlanName = &handles[140]
+
+var _ScalingPlanNames = &handles[141]
+var _ScalingPlanNames_member = &handles[142]
+
+var ScalingPlanResource = &handles[143]
+var ScalingPlanResource_ScalingPlanName = &handles[144]
+var ScalingPlanResource_ScalingPlanVersion = &handles[145]
+var ScalingPlanResource_ServiceNamespace = &handles[146]
+var ScalingPlanResource_ResourceId = &handles[147]
+var ScalingPlanResource_ScalableDimension = &handles[148]
+var ScalingPlanResource_ScalingPolicies = &handles[149]
+var ScalingPlanResource_ScalingStatusCode = &handles[150]
+var ScalingPlanResource_ScalingStatusMessage = &handles[151]
+
+var _ScalingPlanResources = &handles[152]
+var _ScalingPlanResources_member = &handles[153]
+
+var _ScalingPlans = &handles[154]
+var _ScalingPlans_member = &handles[155]
+
+var ScalingPlanStatusCode = &handles[156]
+var ScalingPlanStatusCode_Active = &handles[157]
+var ScalingPlanStatusCode_ActiveWithProblems = &handles[158]
+var ScalingPlanStatusCode_CreationInProgress = &handles[159]
+var ScalingPlanStatusCode_CreationFailed = &handles[160]
+var ScalingPlanStatusCode_DeletionInProgress = &handles[161]
+var ScalingPlanStatusCode_DeletionFailed = &handles[162]
+var ScalingPlanStatusCode_UpdateInProgress = &handles[163]
+var ScalingPlanStatusCode_UpdateFailed = &handles[164]
+
+var _ScalingPlanVersion = &handles[165]
+
+var _ScalingPolicies = &handles[166]
+var _ScalingPolicies_member = &handles[167]
+
+var ScalingPolicy = &handles[168]
+var ScalingPolicy_PolicyName = &handles[169]
+var ScalingPolicy_PolicyType = &handles[170]
+var ScalingPolicy_TargetTrackingConfiguration = &handles[171]
+
+var ScalingPolicyUpdateBehavior = &handles[172]
+var ScalingPolicyUpdateBehavior_KeepExternalPolicies = &handles[173]
+var ScalingPolicyUpdateBehavior_ReplaceExternalPolicies = &handles[174]
+
+var ScalingStatusCode = &handles[175]
+var ScalingStatusCode_Inactive = &handles[176]
+var ScalingStatusCode_PartiallyActive = &handles[177]
+var ScalingStatusCode_Active = &handles[178]
+
+var _ScheduledActionBufferTime = &handles[179]
+
+var ServiceNamespace = &handles[180]
+var ServiceNamespace_AUTOSCALING = &handles[181]
+var ServiceNamespace_ECS = &handles[182]
+var ServiceNamespace_EC2 = &handles[183]
+var ServiceNamespace_RDS = &handles[184]
+var ServiceNamespace_DYNAMODB = &handles[185]
+
+var TagFilter = &handles[186]
+var TagFilter_Key = &handles[187]
+var TagFilter_Values = &handles[188]
+
+var _TagFilters = &handles[189]
+var _TagFilters_member = &handles[190]
+
+var _TagValues = &handles[191]
+var _TagValues_member = &handles[192]
+
+var TargetTrackingConfiguration = &handles[193]
+var TargetTrackingConfiguration_PredefinedScalingMetricSpecification = &handles[194]
+var TargetTrackingConfiguration_CustomizedScalingMetricSpecification = &handles[195]
+var TargetTrackingConfiguration_TargetValue = &handles[196]
+var TargetTrackingConfiguration_DisableScaleIn = &handles[197]
+var TargetTrackingConfiguration_ScaleOutCooldown = &handles[198]
+var TargetTrackingConfiguration_ScaleInCooldown = &handles[199]
+var TargetTrackingConfiguration_EstimatedInstanceWarmup = &handles[200]
+
+var _TargetTrackingConfigurations = &handles[201]
+var _TargetTrackingConfigurations_member = &handles[202]
+
+var _TimestampType = &handles[203]
+
+var ValidationException = &handles[204]
+var ValidationException_Message = &handles[205]
+
+var _XmlString = &handles[206]
+
+var _XmlStringMaxLen128 = &handles[207]
+
+var _XmlStringMaxLen256 = &handles[208]
+
+var CreateScalingPlanRequest = &handles[209]
+var CreateScalingPlanRequest_ScalingPlanName = &handles[210]
+var CreateScalingPlanRequest_ApplicationSource = &handles[211]
+var CreateScalingPlanRequest_ScalingInstructions = &handles[212]
+
+var CreateScalingPlanResponse = &handles[213]
+var CreateScalingPlanResponse_ScalingPlanVersion = &handles[214]
+
+var DeleteScalingPlanRequest = &handles[215]
+var DeleteScalingPlanRequest_ScalingPlanName = &handles[216]
+var DeleteScalingPlanRequest_ScalingPlanVersion = &handles[217]
+
+var DeleteScalingPlanResponse = &handles[218]
+
+var DescribeScalingPlanResourcesRequest = &handles[219]
+var DescribeScalingPlanResourcesRequest_ScalingPlanName = &handles[220]
+var DescribeScalingPlanResourcesRequest_ScalingPlanVersion = &handles[221]
+var DescribeScalingPlanResourcesRequest_MaxResults = &handles[222]
+var DescribeScalingPlanResourcesRequest_NextToken = &handles[223]
+
+var DescribeScalingPlanResourcesResponse = &handles[224]
+var DescribeScalingPlanResourcesResponse_ScalingPlanResources = &handles[225]
+var DescribeScalingPlanResourcesResponse_NextToken = &handles[226]
+
+var DescribeScalingPlansRequest = &handles[227]
+var DescribeScalingPlansRequest_ScalingPlanNames = &handles[228]
+var DescribeScalingPlansRequest_ScalingPlanVersion = &handles[229]
+var DescribeScalingPlansRequest_ApplicationSources = &handles[230]
+var DescribeScalingPlansRequest_MaxResults = &handles[231]
+var DescribeScalingPlansRequest_NextToken = &handles[232]
+
+var DescribeScalingPlansResponse = &handles[233]
+var DescribeScalingPlansResponse_ScalingPlans = &handles[234]
+var DescribeScalingPlansResponse_NextToken = &handles[235]
+
+var GetScalingPlanResourceForecastDataRequest = &handles[236]
+var GetScalingPlanResourceForecastDataRequest_ScalingPlanName = &handles[237]
+var GetScalingPlanResourceForecastDataRequest_ScalingPlanVersion = &handles[238]
+var GetScalingPlanResourceForecastDataRequest_ServiceNamespace = &handles[239]
+var GetScalingPlanResourceForecastDataRequest_ResourceId = &handles[240]
+var GetScalingPlanResourceForecastDataRequest_ScalableDimension = &handles[241]
+var GetScalingPlanResourceForecastDataRequest_ForecastDataType = &handles[242]
+var GetScalingPlanResourceForecastDataRequest_StartTime = &handles[243]
+var GetScalingPlanResourceForecastDataRequest_EndTime = &handles[244]
+
+var GetScalingPlanResourceForecastDataResponse = &handles[245]
+var GetScalingPlanResourceForecastDataResponse_Datapoints = &handles[246]
+
+var UpdateScalingPlanRequest = &handles[247]
+var UpdateScalingPlanRequest_ScalingPlanName = &handles[248]
+var UpdateScalingPlanRequest_ScalingPlanVersion = &handles[249]
+var UpdateScalingPlanRequest_ApplicationSource = &handles[250]
+var UpdateScalingPlanRequest_ScalingInstructions = &handles[251]
+
+var UpdateScalingPlanResponse = &handles[252]
+
+var AnyScaleScalingPlannerFrontendService = &smithy.ServiceSchema{Schema: &handles[6], Version: "2018-01-06"}

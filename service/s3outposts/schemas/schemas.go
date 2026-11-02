@@ -4,487 +4,431 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "CreateEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/S3Outposts/CreateEndpoint",
-	Code: 200})
-
-var DeleteEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "DeleteEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/S3Outposts/DeleteEndpoint",
-	Code: 200})
-
-var ListEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListEndpoints",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/S3Outposts/ListEndpoints",
-	Code: 200})
-
-var ListOutpostsWithS3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListOutpostsWithS3",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/S3Outposts/ListOutpostsWithS3",
-	Code: 200})
-
-var ListSharedEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListSharedEndpoints",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/S3Outposts/ListSharedEndpoints",
-	Code: 200})
-
-var _S3Outposts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "S3Outposts",
-}, smithy.ShapeTypeService, 0)
-
-var S3Outposts = smithy.NewServiceSchema(_S3Outposts, "2017-07-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _CapacityInBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "CapacityInBytes",
-}, smithy.ShapeTypeLong, 0)
-
-var _CidrBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "CidrBlock",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _CreationTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "CreationTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _CustomerOwnedIpv4Pool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "CustomerOwnedIpv4Pool",
-}, smithy.ShapeTypeString, 0)
-
-var Endpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "Endpoint",
-}, smithy.ShapeTypeStructure, 12)
-var Endpoint_EndpointArn *smithy.Schema
-
-var Endpoint_OutpostsId *smithy.Schema
-
-var Endpoint_CidrBlock *smithy.Schema
-
-var Endpoint_Status *smithy.Schema
-
-var Endpoint_CreationTime *smithy.Schema
-
-var Endpoint_NetworkInterfaces *smithy.Schema
-
-var Endpoint_VpcId *smithy.Schema
-
-var Endpoint_SubnetId *smithy.Schema
-
-var Endpoint_SecurityGroupId *smithy.Schema
-
-var Endpoint_AccessType *smithy.Schema
-
-var Endpoint_CustomerOwnedIpv4Pool *smithy.Schema
-
-var Endpoint_FailedReason *smithy.Schema
-
-var EndpointAccessType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "EndpointAccessType",
-}, smithy.ShapeTypeEnum, 2)
-var EndpointAccessType_PRIVATE *smithy.Schema
-
-var EndpointAccessType_CUSTOMER_OWNED_IP *smithy.Schema
-
-var _EndpointArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "EndpointArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "EndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var _Endpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "Endpoints",
-}, smithy.ShapeTypeList, 1)
-var _Endpoints_member *smithy.Schema
-
-var EndpointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "EndpointStatus",
-}, smithy.ShapeTypeEnum, 5)
-var EndpointStatus_PENDING *smithy.Schema
-
-var EndpointStatus_AVAILABLE *smithy.Schema
-
-var EndpointStatus_DELETING *smithy.Schema
-
-var EndpointStatus_CREATE_FAILED *smithy.Schema
-
-var EndpointStatus_DELETE_FAILED *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FailedReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "FailedReason",
-}, smithy.ShapeTypeStructure, 2)
-var FailedReason_ErrorCode *smithy.Schema
-
-var FailedReason_Message *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "NetworkInterface",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkInterface_NetworkInterfaceId *smithy.Schema
-
-var _NetworkInterfaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "NetworkInterfaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "NetworkInterfaces",
-}, smithy.ShapeTypeList, 1)
-var _NetworkInterfaces_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var Outpost = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "Outpost",
-}, smithy.ShapeTypeStructure, 5)
-var Outpost_OutpostArn *smithy.Schema
-
-var Outpost_S3OutpostArn *smithy.Schema
-
-var Outpost_OutpostId *smithy.Schema
-
-var Outpost_OwnerId *smithy.Schema
-
-var Outpost_CapacityInBytes *smithy.Schema
-
-var _OutpostArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "OutpostArn",
-}, smithy.ShapeTypeString, 0)
-
-var _OutpostId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "OutpostId",
-}, smithy.ShapeTypeString, 0)
-
-var OutpostOfflineException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "OutpostOfflineException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var OutpostOfflineException_Message *smithy.Schema
-
-var _Outposts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "Outposts",
-}, smithy.ShapeTypeList, 1)
-var _Outposts_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _S3OutpostArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "S3OutpostArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var CreateEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "CreateEndpointRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateEndpointRequest_OutpostId *smithy.Schema
-
-var CreateEndpointRequest_SubnetId *smithy.Schema
-
-var CreateEndpointRequest_SecurityGroupId *smithy.Schema
-
-var CreateEndpointRequest_AccessType *smithy.Schema
-
-var CreateEndpointRequest_CustomerOwnedIpv4Pool *smithy.Schema
-
-var CreateEndpointResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "CreateEndpointResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEndpointResult_EndpointArn *smithy.Schema
-
-var DeleteEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "DeleteEndpointRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteEndpointRequest_EndpointId *smithy.Schema
-
-var DeleteEndpointRequest_OutpostId *smithy.Schema
-
-var ListEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListEndpointsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListEndpointsRequest_NextToken *smithy.Schema
-
-var ListEndpointsRequest_MaxResults *smithy.Schema
-
-var ListEndpointsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListEndpointsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListEndpointsResult_Endpoints *smithy.Schema
-
-var ListEndpointsResult_NextToken *smithy.Schema
-
-var ListOutpostsWithS3Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListOutpostsWithS3Request",
-}, smithy.ShapeTypeStructure, 2)
-var ListOutpostsWithS3Request_NextToken *smithy.Schema
-
-var ListOutpostsWithS3Request_MaxResults *smithy.Schema
-
-var ListOutpostsWithS3Result = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListOutpostsWithS3Result",
-}, smithy.ShapeTypeStructure, 2)
-var ListOutpostsWithS3Result_Outposts *smithy.Schema
-
-var ListOutpostsWithS3Result_NextToken *smithy.Schema
-
-var ListSharedEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListSharedEndpointsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSharedEndpointsRequest_NextToken *smithy.Schema
-
-var ListSharedEndpointsRequest_MaxResults *smithy.Schema
-
-var ListSharedEndpointsRequest_OutpostId *smithy.Schema
-
-var ListSharedEndpointsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.s3outposts",
-	Name:      "ListSharedEndpointsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListSharedEndpointsResult_Endpoints *smithy.Schema
-
-var ListSharedEndpointsResult_NextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	EndpointStatus_PENDING = EndpointStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	EndpointStatus_AVAILABLE = EndpointStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	EndpointStatus_DELETING = EndpointStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	EndpointStatus_CREATE_FAILED = EndpointStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	EndpointStatus_DELETE_FAILED = EndpointStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	NetworkInterface_NetworkInterfaceId = NetworkInterface.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	_NetworkInterfaces_member = _NetworkInterfaces.AddMember("member", NetworkInterface)
-
-	EndpointAccessType_PRIVATE = EndpointAccessType.AddMember("PRIVATE", smithyprelude.Unit)
-
-	EndpointAccessType_CUSTOMER_OWNED_IP = EndpointAccessType.AddMember("CUSTOMER_OWNED_IP", smithyprelude.Unit)
-
-	FailedReason_ErrorCode = FailedReason.AddMember("ErrorCode", _ErrorCode)
-
-	FailedReason_Message = FailedReason.AddMember("Message", _Message)
-
-	Endpoint_EndpointArn = Endpoint.AddMember("EndpointArn", _EndpointArn)
-
-	Endpoint_OutpostsId = Endpoint.AddMember("OutpostsId", _OutpostId)
-
-	Endpoint_CidrBlock = Endpoint.AddMember("CidrBlock", _CidrBlock)
-
-	Endpoint_Status = Endpoint.AddMember("Status", EndpointStatus)
-
-	Endpoint_CreationTime = Endpoint.AddMember("CreationTime", _CreationTime)
-
-	Endpoint_NetworkInterfaces = Endpoint.AddMember("NetworkInterfaces", _NetworkInterfaces)
-
-	Endpoint_VpcId = Endpoint.AddMember("VpcId", _VpcId)
-
-	Endpoint_SubnetId = Endpoint.AddMember("SubnetId", _SubnetId)
-
-	Endpoint_SecurityGroupId = Endpoint.AddMember("SecurityGroupId", _SecurityGroupId)
-
-	Endpoint_AccessType = Endpoint.AddMember("AccessType", EndpointAccessType)
-
-	Endpoint_CustomerOwnedIpv4Pool = Endpoint.AddMember("CustomerOwnedIpv4Pool", _CustomerOwnedIpv4Pool)
-
-	Endpoint_FailedReason = Endpoint.AddMember("FailedReason", FailedReason)
-
-	_Endpoints_member = _Endpoints.AddMember("member", Endpoint)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	Outpost_OutpostArn = Outpost.AddMember("OutpostArn", _OutpostArn)
-
-	Outpost_S3OutpostArn = Outpost.AddMember("S3OutpostArn", _S3OutpostArn)
-
-	Outpost_OutpostId = Outpost.AddMember("OutpostId", _OutpostId)
-
-	Outpost_OwnerId = Outpost.AddMember("OwnerId", _AwsAccountId)
-
-	Outpost_CapacityInBytes = Outpost.AddMember("CapacityInBytes", _CapacityInBytes)
-
-	OutpostOfflineException_Message = OutpostOfflineException.AddMember("Message", _ErrorMessage)
-
-	_Outposts_member = _Outposts.AddMember("member", Outpost)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	CreateEndpointRequest_OutpostId = CreateEndpointRequest.AddMember("OutpostId", _OutpostId)
-
-	CreateEndpointRequest_SubnetId = CreateEndpointRequest.AddMember("SubnetId", _SubnetId)
-
-	CreateEndpointRequest_SecurityGroupId = CreateEndpointRequest.AddMember("SecurityGroupId", _SecurityGroupId)
-
-	CreateEndpointRequest_AccessType = CreateEndpointRequest.AddMember("AccessType", EndpointAccessType)
-
-	CreateEndpointRequest_CustomerOwnedIpv4Pool = CreateEndpointRequest.AddMember("CustomerOwnedIpv4Pool", _CustomerOwnedIpv4Pool)
-
-	CreateEndpointResult_EndpointArn = CreateEndpointResult.AddMember("EndpointArn", _EndpointArn)
-
-	DeleteEndpointRequest_EndpointId = DeleteEndpointRequest.AddMember("EndpointId", _EndpointId, &smithytraits.HTTPQuery{Name: "endpointId"})
-
-	DeleteEndpointRequest_OutpostId = DeleteEndpointRequest.AddMember("OutpostId", _OutpostId, &smithytraits.HTTPQuery{Name: "outpostId"})
-
-	ListEndpointsRequest_NextToken = ListEndpointsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListEndpointsRequest_MaxResults = ListEndpointsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListEndpointsResult_Endpoints = ListEndpointsResult.AddMember("Endpoints", _Endpoints)
-
-	ListEndpointsResult_NextToken = ListEndpointsResult.AddMember("NextToken", _NextToken)
-
-	ListOutpostsWithS3Request_NextToken = ListOutpostsWithS3Request.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListOutpostsWithS3Request_MaxResults = ListOutpostsWithS3Request.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListOutpostsWithS3Result_Outposts = ListOutpostsWithS3Result.AddMember("Outposts", _Outposts)
-
-	ListOutpostsWithS3Result_NextToken = ListOutpostsWithS3Result.AddMember("NextToken", _NextToken)
-
-	ListSharedEndpointsRequest_NextToken = ListSharedEndpointsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSharedEndpointsRequest_MaxResults = ListSharedEndpointsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSharedEndpointsRequest_OutpostId = ListSharedEndpointsRequest.AddMember("OutpostId", _OutpostId, &smithytraits.HTTPQuery{Name: "outpostId"})
-
-	ListSharedEndpointsResult_Endpoints = ListSharedEndpointsResult.AddMember("Endpoints", _Endpoints)
-
-	ListSharedEndpointsResult_NextToken = ListSharedEndpointsResult.AddMember("NextToken", _NextToken)
-
+const blob = "" +
+	"ListSharedEndpointsRequestListOutpostsWithS3RequestListSharedEndpointsResultResourceNotFoundExceptio" +
+	"nListOutpostsWithS3ResultInternalServerExceptionOutpostOfflineExceptionAccessDeniedExceptionCreateEn" +
+	"dpointRequestCustomerOwnedIpv4PoolDeleteEndpointRequestCreateEndpointResultListEndpointsRequestListE" +
+	"ndpointsResultThrottlingExceptionValidationExceptionEndpointAccessTypeNetworkInterfaceIdCUSTOMER_OWN" +
+	"ED_IPConflictExceptionNetworkInterfacesCapacityInBytesSecurityGroupIdEndpointStatusCREATE_FAILEDDELE" +
+	"TE_FAILEDAwsAccountIdCreationTimeErrorMessageFailedReasonS3OutpostArnEndpointArnEndpointIdMaxResults" +
+	"OutpostsIdS3OutpostsAVAILABLECidrBlockErrorCodeNextTokenOutpostIdDELETINGSubnetIdOwnerIdPENDINGPRIVA" +
+	"TEmemberVpcIdUnit"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.s3outposts", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 192, Target: 0, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 234, Target: 1, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 275, Target: 2, Traits: 2, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 26, Target: 3, Traits: 3, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 4, Traits: 4, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 610, Target: 5, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 171, Target: 6, Traits: 6, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 538, Target: 42, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 509, Target: 8, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 439, Target: 9, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 629, Target: 10, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 405, Target: 11, Traits: 7, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 538, Target: 42, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 521, Target: 13, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 213, Target: 14, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10, Target: 15, Traits: 5, StrLen: 8, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 569, Target: 31, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 600, Target: 63, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 629, Target: 10, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 477, Target: 35, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 521, Target: 13, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 422, Target: 53, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 708, Target: 77, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 673, Target: 72, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 454, Target: 71, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 360, Target: 28, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 213, Target: 14, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 545, Target: 43, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 352, Target: 28, Traits: 5, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 695, Target: 108, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 388, Target: 108, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 569, Target: 31, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 580, Target: 32, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 10, Target: 33, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 702, Target: 15, Traits: 5, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 469, Target: 35, Traits: 5, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 688, Target: 108, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 620, Target: 108, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 665, Target: 108, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 483, Target: 108, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 496, Target: 108, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 638, Target: 41, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 533, Target: 42, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 545, Target: 43, Traits: 5, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 638, Target: 41, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 538, Target: 49, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 125, Target: 46, Traits: 8, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 538, Target: 42, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 590, Target: 48, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 538, Target: 49, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 370, Target: 50, Traits: 5, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 370, Target: 52, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 370, Target: 52, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 422, Target: 53, Traits: 5, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 702, Target: 50, Traits: 5, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 647, Target: 55, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 30, Target: 56, Traits: 5, StrLen: 7, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 559, Target: 62, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 557, Target: 70, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 656, Target: 63, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 681, Target: 8, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 439, Target: 9, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 559, Target: 62, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 656, Target: 63, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 148, Target: 64, Traits: 9, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 538, Target: 42, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 30, Target: 66, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 702, Target: 56, Traits: 5, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 76, Target: 68, Traits: 10, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 538, Target: 42, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 557, Target: 70, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 454, Target: 71, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 673, Target: 72, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 314, Target: 73, Traits: 11, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 538, Target: 42, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 333, Target: 75, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 538, Target: 42, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 708, Target: 77, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 192, Target: 78, Traits: 5, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 656, Target: 63, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 673, Target: 72, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 454, Target: 71, Traits: 5, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 360, Target: 28, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 213, Target: 14, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 255, Target: 84, Traits: 5, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 569, Target: 31, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 234, Target: 86, Traits: 5, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 580, Target: 32, Traits: 12, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 656, Target: 63, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 275, Target: 89, Traits: 5, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 647, Target: 55, Traits: 14, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 590, Target: 48, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 295, Target: 92, Traits: 5, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10, Target: 33, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 647, Target: 55, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 26, Target: 95, Traits: 5, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 647, Target: 55, Traits: 14, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 590, Target: 48, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 101, Target: 98, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 30, Target: 66, Traits: 5, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 647, Target: 55, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 101, Traits: 5, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 647, Target: 55, Traits: 14, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 590, Target: 48, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 656, Target: 63, Traits: 13, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 51, Target: 105, Traits: 5, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10, Target: 33, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 647, Target: 55, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 713, Target: 108, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/S3Outposts/CreateEndpoint",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/S3Outposts/DeleteEndpoint",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/S3Outposts/ListEndpoints",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/S3Outposts/ListOutpostsWithS3",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/S3Outposts/ListSharedEndpoints",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "endpointId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "outpostId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [109]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+}
+
+var CreateEndpoint = &handles[0]
+
+var DeleteEndpoint = &handles[1]
+
+var ListEndpoints = &handles[2]
+
+var ListOutpostsWithS3 = &handles[3]
+
+var ListSharedEndpoints = &handles[4]
+
+var _S3Outposts = &handles[5]
+
+var AccessDeniedException = &handles[6]
+var AccessDeniedException_Message = &handles[7]
+
+var _AwsAccountId = &handles[8]
+
+var _CapacityInBytes = &handles[9]
+
+var _CidrBlock = &handles[10]
+
+var ConflictException = &handles[11]
+var ConflictException_Message = &handles[12]
+
+var _CreationTime = &handles[13]
+
+var _CustomerOwnedIpv4Pool = &handles[14]
+
+var Endpoint = &handles[15]
+var Endpoint_EndpointArn = &handles[16]
+var Endpoint_OutpostsId = &handles[17]
+var Endpoint_CidrBlock = &handles[18]
+var Endpoint_Status = &handles[19]
+var Endpoint_CreationTime = &handles[20]
+var Endpoint_NetworkInterfaces = &handles[21]
+var Endpoint_VpcId = &handles[22]
+var Endpoint_SubnetId = &handles[23]
+var Endpoint_SecurityGroupId = &handles[24]
+var Endpoint_AccessType = &handles[25]
+var Endpoint_CustomerOwnedIpv4Pool = &handles[26]
+var Endpoint_FailedReason = &handles[27]
+
+var EndpointAccessType = &handles[28]
+var EndpointAccessType_PRIVATE = &handles[29]
+var EndpointAccessType_CUSTOMER_OWNED_IP = &handles[30]
+
+var _EndpointArn = &handles[31]
+
+var _EndpointId = &handles[32]
+
+var _Endpoints = &handles[33]
+var _Endpoints_member = &handles[34]
+
+var EndpointStatus = &handles[35]
+var EndpointStatus_PENDING = &handles[36]
+var EndpointStatus_AVAILABLE = &handles[37]
+var EndpointStatus_DELETING = &handles[38]
+var EndpointStatus_CREATE_FAILED = &handles[39]
+var EndpointStatus_DELETE_FAILED = &handles[40]
+
+var _ErrorCode = &handles[41]
+
+var _ErrorMessage = &handles[42]
+
+var FailedReason = &handles[43]
+var FailedReason_ErrorCode = &handles[44]
+var FailedReason_Message = &handles[45]
+
+var InternalServerException = &handles[46]
+var InternalServerException_Message = &handles[47]
+
+var _MaxResults = &handles[48]
+
+var _Message = &handles[49]
+
+var NetworkInterface = &handles[50]
+var NetworkInterface_NetworkInterfaceId = &handles[51]
+
+var _NetworkInterfaceId = &handles[52]
+
+var _NetworkInterfaces = &handles[53]
+var _NetworkInterfaces_member = &handles[54]
+
+var _NextToken = &handles[55]
+
+var Outpost = &handles[56]
+var Outpost_OutpostArn = &handles[57]
+var Outpost_S3OutpostArn = &handles[58]
+var Outpost_OutpostId = &handles[59]
+var Outpost_OwnerId = &handles[60]
+var Outpost_CapacityInBytes = &handles[61]
+
+var _OutpostArn = &handles[62]
+
+var _OutpostId = &handles[63]
+
+var OutpostOfflineException = &handles[64]
+var OutpostOfflineException_Message = &handles[65]
+
+var _Outposts = &handles[66]
+var _Outposts_member = &handles[67]
+
+var ResourceNotFoundException = &handles[68]
+var ResourceNotFoundException_Message = &handles[69]
+
+var _S3OutpostArn = &handles[70]
+
+var _SecurityGroupId = &handles[71]
+
+var _SubnetId = &handles[72]
+
+var ThrottlingException = &handles[73]
+var ThrottlingException_Message = &handles[74]
+
+var ValidationException = &handles[75]
+var ValidationException_Message = &handles[76]
+
+var _VpcId = &handles[77]
+
+var CreateEndpointRequest = &handles[78]
+var CreateEndpointRequest_OutpostId = &handles[79]
+var CreateEndpointRequest_SubnetId = &handles[80]
+var CreateEndpointRequest_SecurityGroupId = &handles[81]
+var CreateEndpointRequest_AccessType = &handles[82]
+var CreateEndpointRequest_CustomerOwnedIpv4Pool = &handles[83]
+
+var CreateEndpointResult = &handles[84]
+var CreateEndpointResult_EndpointArn = &handles[85]
+
+var DeleteEndpointRequest = &handles[86]
+var DeleteEndpointRequest_EndpointId = &handles[87]
+var DeleteEndpointRequest_OutpostId = &handles[88]
+
+var ListEndpointsRequest = &handles[89]
+var ListEndpointsRequest_NextToken = &handles[90]
+var ListEndpointsRequest_MaxResults = &handles[91]
+
+var ListEndpointsResult = &handles[92]
+var ListEndpointsResult_Endpoints = &handles[93]
+var ListEndpointsResult_NextToken = &handles[94]
+
+var ListOutpostsWithS3Request = &handles[95]
+var ListOutpostsWithS3Request_NextToken = &handles[96]
+var ListOutpostsWithS3Request_MaxResults = &handles[97]
+
+var ListOutpostsWithS3Result = &handles[98]
+var ListOutpostsWithS3Result_Outposts = &handles[99]
+var ListOutpostsWithS3Result_NextToken = &handles[100]
+
+var ListSharedEndpointsRequest = &handles[101]
+var ListSharedEndpointsRequest_NextToken = &handles[102]
+var ListSharedEndpointsRequest_MaxResults = &handles[103]
+var ListSharedEndpointsRequest_OutpostId = &handles[104]
+
+var ListSharedEndpointsResult = &handles[105]
+var ListSharedEndpointsResult_Endpoints = &handles[106]
+var ListSharedEndpointsResult_NextToken = &handles[107]
+
+var S3Outposts = &smithy.ServiceSchema{Schema: &handles[5], Version: "2017-07-25"}

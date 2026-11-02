@@ -4,2791 +4,2424 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateServiceRoleToAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateServiceRoleToAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/greengrass/servicerole",
-	Code: 200})
-
-var BatchAssociateClientDeviceWithCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchAssociateClientDeviceWithCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices",
-	Code: 200})
-
-var BatchDisassociateClientDeviceFromCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchDisassociateClientDeviceFromCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices",
-	Code: 200})
-
-var CancelDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CancelDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/greengrass/v2/deployments/{deploymentId}/cancel",
-	Code: 200})
-
-var CreateComponentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateComponentVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/greengrass/v2/createComponentVersion",
-	Code: 201})
-
-var CreateDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/greengrass/v2/deployments",
-	Code: 201})
-
-var DeleteComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/greengrass/v2/components/{arn}",
-	Code: 204})
-
-var DeleteCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}",
-	Code: 204})
-
-var DeleteDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/greengrass/v2/deployments/{deploymentId}",
-	Code: 204})
-
-var DescribeComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DescribeComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/components/{arn}/metadata",
-	Code: 200})
-
-var DisassociateServiceRoleFromAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateServiceRoleFromAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/greengrass/servicerole",
-	Code: 200})
-
-var GetComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/components/{arn}",
-	Code: 200})
-
-var GetComponentVersionArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentVersionArtifact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/components/{arn}/artifacts/{artifactName+}",
-	Code: 200})
-
-var GetConnectivityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetConnectivityInfo",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/things/{thingName}/connectivityInfo",
-	Code: 200})
-
-var GetCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}",
-	Code: 200})
-
-var GetDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/deployments/{deploymentId}",
-	Code: 200})
-
-var GetServiceRoleForAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetServiceRoleForAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/servicerole",
-	Code: 200})
-
-var ListClientDevicesAssociatedWithCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListClientDevicesAssociatedWithCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices",
-	Code: 200})
-
-var ListComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/components",
-	Code: 200})
-
-var ListComponentVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/components/{arn}/versions",
-	Code: 200})
-
-var ListCoreDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListCoreDevices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/coreDevices",
-	Code: 200})
-
-var ListDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListDeployments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/deployments",
-	Code: 200})
-
-var ListEffectiveDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListEffectiveDeployments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/effectiveDeployments",
-	Code: 200})
-
-var ListInstalledComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListInstalledComponents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/installedComponents",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ResolveComponentCandidates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolveComponentCandidates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/greengrass/v2/resolveComponentCandidates",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateConnectivityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UpdateConnectivityInfo",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/greengrass/things/{thingName}/connectivityInfo",
-	Code: 200})
-
-var _GreengrassV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GreengrassV2",
-}, smithy.ShapeTypeService, 0)
-
-var GreengrassV2 = smithy.NewServiceSchema(_GreengrassV2, "2020-11-30")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AssociateClientDeviceWithCoreDeviceEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateClientDeviceWithCoreDeviceEntry",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateClientDeviceWithCoreDeviceEntry_thingName *smithy.Schema
-
-var _AssociateClientDeviceWithCoreDeviceEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateClientDeviceWithCoreDeviceEntryList",
-}, smithy.ShapeTypeList, 1)
-var _AssociateClientDeviceWithCoreDeviceEntryList_member *smithy.Schema
-
-var AssociateClientDeviceWithCoreDeviceErrorEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateClientDeviceWithCoreDeviceErrorEntry",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateClientDeviceWithCoreDeviceErrorEntry_thingName *smithy.Schema
-
-var AssociateClientDeviceWithCoreDeviceErrorEntry_code *smithy.Schema
-
-var AssociateClientDeviceWithCoreDeviceErrorEntry_message *smithy.Schema
-
-var _AssociateClientDeviceWithCoreDeviceErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateClientDeviceWithCoreDeviceErrorList",
-}, smithy.ShapeTypeList, 1)
-var _AssociateClientDeviceWithCoreDeviceErrorList_member *smithy.Schema
-
-var AssociatedClientDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociatedClientDevice",
-}, smithy.ShapeTypeStructure, 2)
-var AssociatedClientDevice_thingName *smithy.Schema
-
-var AssociatedClientDevice_associationTimestamp *smithy.Schema
-
-var _AssociatedClientDeviceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociatedClientDeviceList",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedClientDeviceList_member *smithy.Schema
-
-var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ClientTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var CloudComponentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CloudComponentState",
-}, smithy.ShapeTypeEnum, 5)
-var CloudComponentState_REQUESTED *smithy.Schema
-
-var CloudComponentState_INITIATED *smithy.Schema
-
-var CloudComponentState_DEPLOYABLE *smithy.Schema
-
-var CloudComponentState_FAILED *smithy.Schema
-
-var CloudComponentState_DEPRECATED *smithy.Schema
-
-var CloudComponentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CloudComponentStatus",
-}, smithy.ShapeTypeStructure, 5)
-var CloudComponentStatus_componentState *smithy.Schema
-
-var CloudComponentStatus_message *smithy.Schema
-
-var CloudComponentStatus_errors *smithy.Schema
-
-var CloudComponentStatus_vendorGuidance *smithy.Schema
-
-var CloudComponentStatus_vendorGuidanceMessage *smithy.Schema
-
-var Component = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Component",
-}, smithy.ShapeTypeStructure, 3)
-var Component_arn *smithy.Schema
-
-var Component_componentName *smithy.Schema
-
-var Component_latestVersion *smithy.Schema
-
-var _ComponentARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentARN",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentCandidate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentCandidate",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentCandidate_componentName *smithy.Schema
-
-var ComponentCandidate_componentVersion *smithy.Schema
-
-var ComponentCandidate_versionRequirements *smithy.Schema
-
-var _ComponentCandidateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentCandidateList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentCandidateList_member *smithy.Schema
-
-var _ComponentConfigurationPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentConfigurationPath",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentConfigurationPathList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentConfigurationPathList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentConfigurationPathList_member *smithy.Schema
-
-var _ComponentConfigurationString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentConfigurationString",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentConfigurationUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentConfigurationUpdate_merge *smithy.Schema
-
-var ComponentConfigurationUpdate_reset *smithy.Schema
-
-var _ComponentDependencyMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDependencyMap",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentDependencyMap_key *smithy.Schema
-
-var _ComponentDependencyMap_value *smithy.Schema
-
-var ComponentDependencyRequirement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDependencyRequirement",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentDependencyRequirement_versionRequirement *smithy.Schema
-
-var ComponentDependencyRequirement_dependencyType *smithy.Schema
-
-var ComponentDependencyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDependencyType",
-}, smithy.ShapeTypeEnum, 2)
-var ComponentDependencyType_HARD *smithy.Schema
-
-var ComponentDependencyType_SOFT *smithy.Schema
-
-var ComponentDeploymentSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDeploymentSpecification",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentDeploymentSpecification_componentVersion *smithy.Schema
-
-var ComponentDeploymentSpecification_configurationUpdate *smithy.Schema
-
-var ComponentDeploymentSpecification_runWith *smithy.Schema
-
-var _ComponentDeploymentSpecifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDeploymentSpecifications",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentDeploymentSpecifications_key *smithy.Schema
-
-var _ComponentDeploymentSpecifications_value *smithy.Schema
-
-var ComponentLatestVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentLatestVersion",
-}, smithy.ShapeTypeStructure, 6)
-var ComponentLatestVersion_arn *smithy.Schema
-
-var ComponentLatestVersion_componentVersion *smithy.Schema
-
-var ComponentLatestVersion_creationTimestamp *smithy.Schema
-
-var ComponentLatestVersion_description *smithy.Schema
-
-var ComponentLatestVersion_publisher *smithy.Schema
-
-var ComponentLatestVersion_platforms *smithy.Schema
-
-var _ComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentList_member *smithy.Schema
-
-var _ComponentNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentPlatform",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentPlatform_name *smithy.Schema
-
-var ComponentPlatform_attributes *smithy.Schema
-
-var _ComponentPlatformList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentPlatformList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentPlatformList_member *smithy.Schema
-
-var ComponentRunWith = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentRunWith",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentRunWith_posixUser *smithy.Schema
-
-var ComponentRunWith_systemResourceLimits *smithy.Schema
-
-var ComponentRunWith_windowsUser *smithy.Schema
-
-var _ComponentVersionARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentVersionList_member *smithy.Schema
-
-var ComponentVersionListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionListItem",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentVersionListItem_componentName *smithy.Schema
-
-var ComponentVersionListItem_componentVersion *smithy.Schema
-
-var ComponentVersionListItem_arn *smithy.Schema
-
-var _ComponentVersionRequirementMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionRequirementMap",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentVersionRequirementMap_key *smithy.Schema
-
-var _ComponentVersionRequirementMap_value *smithy.Schema
-
-var _ComponentVersionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionString",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentVisibilityScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVisibilityScope",
-}, smithy.ShapeTypeEnum, 2)
-var ComponentVisibilityScope_PRIVATE *smithy.Schema
-
-var ComponentVisibilityScope_PUBLIC *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var ConnectivityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ConnectivityInfo",
-}, smithy.ShapeTypeStructure, 4)
-var ConnectivityInfo_id *smithy.Schema
-
-var ConnectivityInfo_hostAddress *smithy.Schema
-
-var ConnectivityInfo_portNumber *smithy.Schema
-
-var ConnectivityInfo_metadata *smithy.Schema
-
-var _connectivityInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "connectivityInfoList",
-}, smithy.ShapeTypeList, 1)
-var _connectivityInfoList_member *smithy.Schema
-
-var CoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDevice",
-}, smithy.ShapeTypeStructure, 6)
-var CoreDevice_coreDeviceThingName *smithy.Schema
-
-var CoreDevice_status *smithy.Schema
-
-var CoreDevice_lastStatusUpdateTimestamp *smithy.Schema
-
-var CoreDevice_platform *smithy.Schema
-
-var CoreDevice_architecture *smithy.Schema
-
-var CoreDevice_runtime *smithy.Schema
-
-var _CoreDeviceArchitectureString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDeviceArchitectureString",
-}, smithy.ShapeTypeString, 0)
-
-var _CoreDevicePlatformString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDevicePlatformString",
-}, smithy.ShapeTypeString, 0)
-
-var _CoreDeviceRuntimeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDeviceRuntimeString",
-}, smithy.ShapeTypeString, 0)
-
-var _CoreDevicesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDevicesList",
-}, smithy.ShapeTypeList, 1)
-var _CoreDevicesList_member *smithy.Schema
-
-var CoreDeviceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDeviceStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CoreDeviceStatus_HEALTHY *smithy.Schema
-
-var CoreDeviceStatus_UNHEALTHY *smithy.Schema
-
-var _CoreDeviceThingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDeviceThingName",
-}, smithy.ShapeTypeString, 0)
-
-var _CPU = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CPU",
-}, smithy.ShapeTypeDouble, 0)
-
-var _DefaultMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DefaultMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Deployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Deployment",
-}, smithy.ShapeTypeStructure, 8)
-var Deployment_targetArn *smithy.Schema
-
-var Deployment_revisionId *smithy.Schema
-
-var Deployment_deploymentId *smithy.Schema
-
-var Deployment_deploymentName *smithy.Schema
-
-var Deployment_creationTimestamp *smithy.Schema
-
-var Deployment_deploymentStatus *smithy.Schema
-
-var Deployment_isLatestForTarget *smithy.Schema
-
-var Deployment_parentTargetArn *smithy.Schema
-
-var DeploymentComponentUpdatePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentComponentUpdatePolicy",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentComponentUpdatePolicy_timeoutInSeconds *smithy.Schema
-
-var DeploymentComponentUpdatePolicy_action *smithy.Schema
-
-var DeploymentComponentUpdatePolicyAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentComponentUpdatePolicyAction",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS *smithy.Schema
-
-var DeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS *smithy.Schema
-
-var DeploymentConfigurationValidationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentConfigurationValidationPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var DeploymentConfigurationValidationPolicy_timeoutInSeconds *smithy.Schema
-
-var DeploymentFailureHandlingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentFailureHandlingPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentFailureHandlingPolicy_ROLLBACK *smithy.Schema
-
-var DeploymentFailureHandlingPolicy_DO_NOTHING *smithy.Schema
-
-var DeploymentHistoryFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentHistoryFilter",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentHistoryFilter_ALL *smithy.Schema
-
-var DeploymentHistoryFilter_LATEST_ONLY *smithy.Schema
-
-var _DeploymentID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentID",
-}, smithy.ShapeTypeString, 0)
-
-var DeploymentIoTJobConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentIoTJobConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var DeploymentIoTJobConfiguration_jobExecutionsRolloutConfig *smithy.Schema
-
-var DeploymentIoTJobConfiguration_abortConfig *smithy.Schema
-
-var DeploymentIoTJobConfiguration_timeoutConfig *smithy.Schema
-
-var _DeploymentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentList_member *smithy.Schema
-
-var _DeploymentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentName",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentNameString",
-}, smithy.ShapeTypeString, 0)
-
-var DeploymentPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentPolicies",
-}, smithy.ShapeTypeStructure, 3)
-var DeploymentPolicies_failureHandlingPolicy *smithy.Schema
-
-var DeploymentPolicies_componentUpdatePolicy *smithy.Schema
-
-var DeploymentPolicies_configurationValidationPolicy *smithy.Schema
-
-var DeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DeploymentStatus_ACTIVE *smithy.Schema
-
-var DeploymentStatus_COMPLETED *smithy.Schema
-
-var DeploymentStatus_CANCELED *smithy.Schema
-
-var DeploymentStatus_FAILED *smithy.Schema
-
-var DeploymentStatus_INACTIVE *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var DisassociateClientDeviceFromCoreDeviceEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateClientDeviceFromCoreDeviceEntry",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateClientDeviceFromCoreDeviceEntry_thingName *smithy.Schema
-
-var _DisassociateClientDeviceFromCoreDeviceEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateClientDeviceFromCoreDeviceEntryList",
-}, smithy.ShapeTypeList, 1)
-var _DisassociateClientDeviceFromCoreDeviceEntryList_member *smithy.Schema
-
-var DisassociateClientDeviceFromCoreDeviceErrorEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateClientDeviceFromCoreDeviceErrorEntry",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName *smithy.Schema
-
-var DisassociateClientDeviceFromCoreDeviceErrorEntry_code *smithy.Schema
-
-var DisassociateClientDeviceFromCoreDeviceErrorEntry_message *smithy.Schema
-
-var _DisassociateClientDeviceFromCoreDeviceErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateClientDeviceFromCoreDeviceErrorList",
-}, smithy.ShapeTypeList, 1)
-var _DisassociateClientDeviceFromCoreDeviceErrorList_member *smithy.Schema
-
-var EffectiveDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeployment",
-}, smithy.ShapeTypeStructure, 11)
-var EffectiveDeployment_deploymentId *smithy.Schema
-
-var EffectiveDeployment_deploymentName *smithy.Schema
-
-var EffectiveDeployment_iotJobId *smithy.Schema
-
-var EffectiveDeployment_iotJobArn *smithy.Schema
-
-var EffectiveDeployment_description *smithy.Schema
-
-var EffectiveDeployment_targetArn *smithy.Schema
-
-var EffectiveDeployment_coreDeviceExecutionStatus *smithy.Schema
-
-var EffectiveDeployment_reason *smithy.Schema
-
-var EffectiveDeployment_creationTimestamp *smithy.Schema
-
-var EffectiveDeployment_modifiedTimestamp *smithy.Schema
-
-var EffectiveDeployment_statusDetails *smithy.Schema
-
-var _EffectiveDeploymentErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _EffectiveDeploymentErrorStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentErrorStack",
-}, smithy.ShapeTypeList, 1)
-var _EffectiveDeploymentErrorStack_member *smithy.Schema
-
-var _EffectiveDeploymentErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var _EffectiveDeploymentErrorTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentErrorTypeList",
-}, smithy.ShapeTypeList, 1)
-var _EffectiveDeploymentErrorTypeList_member *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentExecutionStatus",
-}, smithy.ShapeTypeEnum, 8)
-var EffectiveDeploymentExecutionStatus_IN_PROGRESS *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_QUEUED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_FAILED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_COMPLETED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_TIMED_OUT *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_CANCELED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_REJECTED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_SUCCEEDED *smithy.Schema
-
-var _EffectiveDeploymentsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentsList",
-}, smithy.ShapeTypeList, 1)
-var _EffectiveDeploymentsList_member *smithy.Schema
-
-var EffectiveDeploymentStatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentStatusDetails",
-}, smithy.ShapeTypeStructure, 2)
-var EffectiveDeploymentStatusDetails_errorStack *smithy.Schema
-
-var EffectiveDeploymentStatusDetails_errorTypes *smithy.Schema
-
-var _FileSystemPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "FileSystemPath",
-}, smithy.ShapeTypeString, 0)
-
-var _GenericV2ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GenericV2ARN",
-}, smithy.ShapeTypeString, 0)
-
-var _GGCVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GGCVersion",
-}, smithy.ShapeTypeString, 0)
-
-var InstalledComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponent",
-}, smithy.ShapeTypeStructure, 9)
-var InstalledComponent_componentName *smithy.Schema
-
-var InstalledComponent_componentVersion *smithy.Schema
-
-var InstalledComponent_lifecycleState *smithy.Schema
-
-var InstalledComponent_lifecycleStateDetails *smithy.Schema
-
-var InstalledComponent_isRoot *smithy.Schema
-
-var InstalledComponent_lastStatusChangeTimestamp *smithy.Schema
-
-var InstalledComponent_lastReportedTimestamp *smithy.Schema
-
-var InstalledComponent_lastInstallationSource *smithy.Schema
-
-var InstalledComponent_lifecycleStatusCodes *smithy.Schema
-
-var InstalledComponentLifecycleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentLifecycleState",
-}, smithy.ShapeTypeEnum, 8)
-var InstalledComponentLifecycleState_NEW *smithy.Schema
-
-var InstalledComponentLifecycleState_INSTALLED *smithy.Schema
-
-var InstalledComponentLifecycleState_STARTING *smithy.Schema
-
-var InstalledComponentLifecycleState_RUNNING *smithy.Schema
-
-var InstalledComponentLifecycleState_STOPPING *smithy.Schema
-
-var InstalledComponentLifecycleState_ERRORED *smithy.Schema
-
-var InstalledComponentLifecycleState_BROKEN *smithy.Schema
-
-var InstalledComponentLifecycleState_FINISHED *smithy.Schema
-
-var _InstalledComponentLifecycleStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentLifecycleStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var _InstalledComponentLifecycleStatusCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentLifecycleStatusCodeList",
-}, smithy.ShapeTypeList, 1)
-var _InstalledComponentLifecycleStatusCodeList_member *smithy.Schema
-
-var _InstalledComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentList",
-}, smithy.ShapeTypeList, 1)
-var _InstalledComponentList_member *smithy.Schema
-
-var InstalledComponentTopologyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentTopologyFilter",
-}, smithy.ShapeTypeEnum, 2)
-var InstalledComponentTopologyFilter_ALL *smithy.Schema
-
-var InstalledComponentTopologyFilter_ROOT *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var IotEndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IotEndpointType",
-}, smithy.ShapeTypeEnum, 2)
-var IotEndpointType_fips *smithy.Schema
-
-var IotEndpointType_standard *smithy.Schema
-
-var IoTJobAbortAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortAction",
-}, smithy.ShapeTypeEnum, 1)
-var IoTJobAbortAction_CANCEL *smithy.Schema
-
-var IoTJobAbortConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortConfig",
-}, smithy.ShapeTypeStructure, 1)
-var IoTJobAbortConfig_criteriaList *smithy.Schema
-
-var IoTJobAbortCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortCriteria",
-}, smithy.ShapeTypeStructure, 4)
-var IoTJobAbortCriteria_failureType *smithy.Schema
-
-var IoTJobAbortCriteria_action *smithy.Schema
-
-var IoTJobAbortCriteria_thresholdPercentage *smithy.Schema
-
-var IoTJobAbortCriteria_minNumberOfExecutedThings *smithy.Schema
-
-var _IoTJobAbortCriteriaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortCriteriaList",
-}, smithy.ShapeTypeList, 1)
-var _IoTJobAbortCriteriaList_member *smithy.Schema
-
-var _IoTJobAbortThresholdPercentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortThresholdPercentage",
-}, smithy.ShapeTypeDouble, 0)
-
-var _IoTJobARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobARN",
-}, smithy.ShapeTypeString, 0)
-
-var IoTJobExecutionFailureType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobExecutionFailureType",
-}, smithy.ShapeTypeEnum, 4)
-var IoTJobExecutionFailureType_FAILED *smithy.Schema
-
-var IoTJobExecutionFailureType_REJECTED *smithy.Schema
-
-var IoTJobExecutionFailureType_TIMED_OUT *smithy.Schema
-
-var IoTJobExecutionFailureType_ALL *smithy.Schema
-
-var IoTJobExecutionsRolloutConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobExecutionsRolloutConfig",
-}, smithy.ShapeTypeStructure, 2)
-var IoTJobExecutionsRolloutConfig_exponentialRate *smithy.Schema
-
-var IoTJobExecutionsRolloutConfig_maximumPerMinute *smithy.Schema
-
-var IoTJobExponentialRolloutRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobExponentialRolloutRate",
-}, smithy.ShapeTypeStructure, 3)
-var IoTJobExponentialRolloutRate_baseRatePerMinute *smithy.Schema
-
-var IoTJobExponentialRolloutRate_incrementFactor *smithy.Schema
-
-var IoTJobExponentialRolloutRate_rateIncreaseCriteria *smithy.Schema
-
-var _IoTJobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobId",
-}, smithy.ShapeTypeString, 0)
-
-var _IoTJobInProgressTimeoutInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobInProgressTimeoutInMinutes",
-}, smithy.ShapeTypeLong, 0)
-
-var _IoTJobMaxExecutionsPerMin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobMaxExecutionsPerMin",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IoTJobMinimumNumberOfExecutedThings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobMinimumNumberOfExecutedThings",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IoTJobNumberOfThings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobNumberOfThings",
-}, smithy.ShapeTypeInteger, 0)
-
-var IoTJobRateIncreaseCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobRateIncreaseCriteria",
-}, smithy.ShapeTypeStructure, 2)
-var IoTJobRateIncreaseCriteria_numberOfNotifiedThings *smithy.Schema
-
-var IoTJobRateIncreaseCriteria_numberOfSucceededThings *smithy.Schema
-
-var _IoTJobRolloutBaseRatePerMinute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobRolloutBaseRatePerMinute",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IoTJobRolloutIncrementFactor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobRolloutIncrementFactor",
-}, smithy.ShapeTypeDouble, 0)
-
-var IoTJobTimeoutConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobTimeoutConfig",
-}, smithy.ShapeTypeStructure, 1)
-var IoTJobTimeoutConfig_inProgressTimeoutInMinutes *smithy.Schema
-
-var _IoTThingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTThingName",
-}, smithy.ShapeTypeString, 0)
-
-var _IsLatestForTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IsLatestForTarget",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _IsRoot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IsRoot",
-}, smithy.ShapeTypeBoolean, 0)
-
-var LambdaContainerParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaContainerParams",
-}, smithy.ShapeTypeStructure, 4)
-var LambdaContainerParams_memorySizeInKB *smithy.Schema
-
-var LambdaContainerParams_mountROSysfs *smithy.Schema
-
-var LambdaContainerParams_volumes *smithy.Schema
-
-var LambdaContainerParams_devices *smithy.Schema
-
-var _LambdaDeviceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaDeviceList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaDeviceList_member *smithy.Schema
-
-var LambdaDeviceMount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaDeviceMount",
-}, smithy.ShapeTypeStructure, 3)
-var LambdaDeviceMount_path *smithy.Schema
-
-var LambdaDeviceMount_permission *smithy.Schema
-
-var LambdaDeviceMount_addGroupOwner *smithy.Schema
-
-var _LambdaEnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaEnvironmentVariables",
-}, smithy.ShapeTypeMap, 2)
-var _LambdaEnvironmentVariables_key *smithy.Schema
-
-var _LambdaEnvironmentVariables_value *smithy.Schema
-
-var LambdaEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaEventSource",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaEventSource_topic *smithy.Schema
-
-var LambdaEventSource_type *smithy.Schema
-
-var _LambdaEventSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaEventSourceList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaEventSourceList_member *smithy.Schema
-
-var LambdaEventSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaEventSourceType",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaEventSourceType_PUB_SUB *smithy.Schema
-
-var LambdaEventSourceType_IOT_CORE *smithy.Schema
-
-var _LambdaExecArg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaExecArg",
-}, smithy.ShapeTypeString, 0)
-
-var _LambdaExecArgsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaExecArgsList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaExecArgsList_member *smithy.Schema
-
-var LambdaExecutionParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaExecutionParameters",
-}, smithy.ShapeTypeStructure, 11)
-var LambdaExecutionParameters_eventSources *smithy.Schema
-
-var LambdaExecutionParameters_maxQueueSize *smithy.Schema
-
-var LambdaExecutionParameters_maxInstancesCount *smithy.Schema
-
-var LambdaExecutionParameters_maxIdleTimeInSeconds *smithy.Schema
-
-var LambdaExecutionParameters_timeoutInSeconds *smithy.Schema
-
-var LambdaExecutionParameters_statusTimeoutInSeconds *smithy.Schema
-
-var LambdaExecutionParameters_pinned *smithy.Schema
-
-var LambdaExecutionParameters_inputPayloadEncodingType *smithy.Schema
-
-var LambdaExecutionParameters_execArgs *smithy.Schema
-
-var LambdaExecutionParameters_environmentVariables *smithy.Schema
-
-var LambdaExecutionParameters_linuxProcessParams *smithy.Schema
-
-var LambdaFilesystemPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaFilesystemPermission",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaFilesystemPermission_RO *smithy.Schema
-
-var LambdaFilesystemPermission_RW *smithy.Schema
-
-var LambdaFunctionRecipeSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaFunctionRecipeSource",
-}, smithy.ShapeTypeStructure, 6)
-var LambdaFunctionRecipeSource_lambdaArn *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentName *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentVersion *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentPlatforms *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentDependencies *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentLambdaParameters *smithy.Schema
-
-var LambdaInputPayloadEncodingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaInputPayloadEncodingType",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaInputPayloadEncodingType_JSON *smithy.Schema
-
-var LambdaInputPayloadEncodingType_BINARY *smithy.Schema
-
-var LambdaIsolationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaIsolationMode",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaIsolationMode_GREENGRASS_CONTAINER *smithy.Schema
-
-var LambdaIsolationMode_NO_CONTAINER *smithy.Schema
-
-var LambdaLinuxProcessParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaLinuxProcessParams",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaLinuxProcessParams_isolationMode *smithy.Schema
-
-var LambdaLinuxProcessParams_containerParams *smithy.Schema
-
-var _LambdaVolumeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaVolumeList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaVolumeList_member *smithy.Schema
-
-var LambdaVolumeMount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaVolumeMount",
-}, smithy.ShapeTypeStructure, 4)
-var LambdaVolumeMount_sourcePath *smithy.Schema
-
-var LambdaVolumeMount_destinationPath *smithy.Schema
-
-var LambdaVolumeMount_permission *smithy.Schema
-
-var LambdaVolumeMount_addGroupOwner *smithy.Schema
-
-var _LifecycleStateDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LifecycleStateDetails",
-}, smithy.ShapeTypeString, 0)
-
-var _Memory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Memory",
-}, smithy.ShapeTypeLong, 0)
-
-var _NextTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "NextTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "NullableString",
-}, smithy.ShapeTypeString, 0)
-
-var _OptionalBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "OptionalBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _OptionalInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "OptionalInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PlatformAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "PlatformAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _PlatformAttributesMap_key *smithy.Schema
-
-var _PlatformAttributesMap_value *smithy.Schema
-
-var _PortNumberInt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "PortNumberInt",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PublisherString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "PublisherString",
-}, smithy.ShapeTypeString, 0)
-
-var _Reason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Reason",
-}, smithy.ShapeTypeString, 0)
-
-var _RecipeBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "RecipeBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var RecipeOutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "RecipeOutputFormat",
-}, smithy.ShapeTypeEnum, 2)
-var RecipeOutputFormat_JSON *smithy.Schema
-
-var RecipeOutputFormat_YAML *smithy.Schema
-
-var RequestAlreadyInProgressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "RequestAlreadyInProgressException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var RequestAlreadyInProgressException_message *smithy.Schema
-
-var ResolvedComponentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolvedComponentVersion",
-}, smithy.ShapeTypeStructure, 6)
-var ResolvedComponentVersion_arn *smithy.Schema
-
-var ResolvedComponentVersion_componentName *smithy.Schema
-
-var ResolvedComponentVersion_componentVersion *smithy.Schema
-
-var ResolvedComponentVersion_recipe *smithy.Schema
-
-var ResolvedComponentVersion_vendorGuidance *smithy.Schema
-
-var ResolvedComponentVersion_message *smithy.Schema
-
-var _ResolvedComponentVersionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolvedComponentVersionsList",
-}, smithy.ShapeTypeList, 1)
-var _ResolvedComponentVersionsList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var S3EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "S3EndpointType",
-}, smithy.ShapeTypeEnum, 2)
-var S3EndpointType_REGIONAL *smithy.Schema
-
-var S3EndpointType_GLOBAL *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var SystemResourceLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "SystemResourceLimits",
-}, smithy.ShapeTypeStructure, 2)
-var SystemResourceLimits_memory *smithy.Schema
-
-var SystemResourceLimits_cpus *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TargetARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ThingGroupARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ThingGroupARN",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TopicString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TopicString",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var VendorGuidance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "VendorGuidance",
-}, smithy.ShapeTypeEnum, 3)
-var VendorGuidance_ACTIVE *smithy.Schema
-
-var VendorGuidance_DISCONTINUED *smithy.Schema
-
-var VendorGuidance_DELETED *smithy.Schema
-
-var AssociateServiceRoleToAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateServiceRoleToAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateServiceRoleToAccountRequest_roleArn *smithy.Schema
-
-var AssociateServiceRoleToAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateServiceRoleToAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateServiceRoleToAccountResponse_associatedAt *smithy.Schema
-
-var BatchAssociateClientDeviceWithCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchAssociateClientDeviceWithCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAssociateClientDeviceWithCoreDeviceRequest_entries *smithy.Schema
-
-var BatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var BatchAssociateClientDeviceWithCoreDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchAssociateClientDeviceWithCoreDeviceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries *smithy.Schema
-
-var BatchDisassociateClientDeviceFromCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchDisassociateClientDeviceFromCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDisassociateClientDeviceFromCoreDeviceRequest_entries *smithy.Schema
-
-var BatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var BatchDisassociateClientDeviceFromCoreDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchDisassociateClientDeviceFromCoreDeviceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries *smithy.Schema
-
-var CancelDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CancelDeploymentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelDeploymentRequest_deploymentId *smithy.Schema
-
-var CancelDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CancelDeploymentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CancelDeploymentResponse_message *smithy.Schema
-
-var CreateComponentVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateComponentVersionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateComponentVersionRequest_inlineRecipe *smithy.Schema
-
-var CreateComponentVersionRequest_lambdaFunction *smithy.Schema
-
-var CreateComponentVersionRequest_tags *smithy.Schema
-
-var CreateComponentVersionRequest_clientToken *smithy.Schema
-
-var CreateComponentVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateComponentVersionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateComponentVersionResponse_arn *smithy.Schema
-
-var CreateComponentVersionResponse_componentName *smithy.Schema
-
-var CreateComponentVersionResponse_componentVersion *smithy.Schema
-
-var CreateComponentVersionResponse_creationTimestamp *smithy.Schema
-
-var CreateComponentVersionResponse_status *smithy.Schema
-
-var CreateDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateDeploymentRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateDeploymentRequest_targetArn *smithy.Schema
-
-var CreateDeploymentRequest_deploymentName *smithy.Schema
-
-var CreateDeploymentRequest_components *smithy.Schema
-
-var CreateDeploymentRequest_iotJobConfiguration *smithy.Schema
-
-var CreateDeploymentRequest_deploymentPolicies *smithy.Schema
-
-var CreateDeploymentRequest_parentTargetArn *smithy.Schema
-
-var CreateDeploymentRequest_tags *smithy.Schema
-
-var CreateDeploymentRequest_clientToken *smithy.Schema
-
-var CreateDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateDeploymentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDeploymentResponse_deploymentId *smithy.Schema
-
-var CreateDeploymentResponse_iotJobId *smithy.Schema
-
-var CreateDeploymentResponse_iotJobArn *smithy.Schema
-
-var DeleteComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteComponentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteComponentRequest_arn *smithy.Schema
-
-var DeleteCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var DeleteDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteDeploymentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDeploymentRequest_deploymentId *smithy.Schema
-
-var DescribeComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DescribeComponentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeComponentRequest_arn *smithy.Schema
-
-var DescribeComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DescribeComponentResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeComponentResponse_arn *smithy.Schema
-
-var DescribeComponentResponse_componentName *smithy.Schema
-
-var DescribeComponentResponse_componentVersion *smithy.Schema
-
-var DescribeComponentResponse_creationTimestamp *smithy.Schema
-
-var DescribeComponentResponse_publisher *smithy.Schema
-
-var DescribeComponentResponse_description *smithy.Schema
-
-var DescribeComponentResponse_status *smithy.Schema
-
-var DescribeComponentResponse_platforms *smithy.Schema
-
-var DescribeComponentResponse_tags *smithy.Schema
-
-var DisassociateServiceRoleFromAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateServiceRoleFromAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateServiceRoleFromAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateServiceRoleFromAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateServiceRoleFromAccountResponse_disassociatedAt *smithy.Schema
-
-var GetComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetComponentRequest_recipeOutputFormat *smithy.Schema
-
-var GetComponentRequest_arn *smithy.Schema
-
-var GetComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetComponentResponse_recipeOutputFormat *smithy.Schema
-
-var GetComponentResponse_recipe *smithy.Schema
-
-var GetComponentResponse_tags *smithy.Schema
-
-var GetComponentVersionArtifactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentVersionArtifactRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetComponentVersionArtifactRequest_arn *smithy.Schema
-
-var GetComponentVersionArtifactRequest_artifactName *smithy.Schema
-
-var GetComponentVersionArtifactRequest_s3EndpointType *smithy.Schema
-
-var GetComponentVersionArtifactRequest_iotEndpointType *smithy.Schema
-
-var GetComponentVersionArtifactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentVersionArtifactResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetComponentVersionArtifactResponse_preSignedUrl *smithy.Schema
-
-var GetConnectivityInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetConnectivityInfoRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectivityInfoRequest_thingName *smithy.Schema
-
-var GetConnectivityInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetConnectivityInfoResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetConnectivityInfoResponse_connectivityInfo *smithy.Schema
-
-var GetConnectivityInfoResponse_message *smithy.Schema
-
-var GetCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var GetCoreDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetCoreDeviceResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetCoreDeviceResponse_coreDeviceThingName *smithy.Schema
-
-var GetCoreDeviceResponse_coreVersion *smithy.Schema
-
-var GetCoreDeviceResponse_platform *smithy.Schema
-
-var GetCoreDeviceResponse_architecture *smithy.Schema
-
-var GetCoreDeviceResponse_runtime *smithy.Schema
-
-var GetCoreDeviceResponse_status *smithy.Schema
-
-var GetCoreDeviceResponse_lastStatusUpdateTimestamp *smithy.Schema
-
-var GetCoreDeviceResponse_tags *smithy.Schema
-
-var GetDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetDeploymentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeploymentRequest_deploymentId *smithy.Schema
-
-var GetDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetDeploymentResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetDeploymentResponse_targetArn *smithy.Schema
-
-var GetDeploymentResponse_revisionId *smithy.Schema
-
-var GetDeploymentResponse_deploymentId *smithy.Schema
-
-var GetDeploymentResponse_deploymentName *smithy.Schema
-
-var GetDeploymentResponse_deploymentStatus *smithy.Schema
-
-var GetDeploymentResponse_iotJobId *smithy.Schema
-
-var GetDeploymentResponse_iotJobArn *smithy.Schema
-
-var GetDeploymentResponse_components *smithy.Schema
-
-var GetDeploymentResponse_deploymentPolicies *smithy.Schema
-
-var GetDeploymentResponse_iotJobConfiguration *smithy.Schema
-
-var GetDeploymentResponse_creationTimestamp *smithy.Schema
-
-var GetDeploymentResponse_isLatestForTarget *smithy.Schema
-
-var GetDeploymentResponse_parentTargetArn *smithy.Schema
-
-var GetDeploymentResponse_tags *smithy.Schema
-
-var GetServiceRoleForAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetServiceRoleForAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetServiceRoleForAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetServiceRoleForAccountResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetServiceRoleForAccountResponse_associatedAt *smithy.Schema
-
-var GetServiceRoleForAccountResponse_roleArn *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListClientDevicesAssociatedWithCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceRequest_maxResults *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceRequest_nextToken *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListClientDevicesAssociatedWithCoreDeviceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceResponse_nextToken *smithy.Schema
-
-var ListComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListComponentsRequest_scope *smithy.Schema
-
-var ListComponentsRequest_maxResults *smithy.Schema
-
-var ListComponentsRequest_nextToken *smithy.Schema
-
-var ListComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentsResponse_components *smithy.Schema
-
-var ListComponentsResponse_nextToken *smithy.Schema
-
-var ListComponentVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListComponentVersionsRequest_arn *smithy.Schema
-
-var ListComponentVersionsRequest_maxResults *smithy.Schema
-
-var ListComponentVersionsRequest_nextToken *smithy.Schema
-
-var ListComponentVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentVersionsResponse_componentVersions *smithy.Schema
-
-var ListComponentVersionsResponse_nextToken *smithy.Schema
-
-var ListCoreDevicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListCoreDevicesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListCoreDevicesRequest_thingGroupArn *smithy.Schema
-
-var ListCoreDevicesRequest_status *smithy.Schema
-
-var ListCoreDevicesRequest_maxResults *smithy.Schema
-
-var ListCoreDevicesRequest_nextToken *smithy.Schema
-
-var ListCoreDevicesRequest_runtime *smithy.Schema
-
-var ListCoreDevicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListCoreDevicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCoreDevicesResponse_coreDevices *smithy.Schema
-
-var ListCoreDevicesResponse_nextToken *smithy.Schema
-
-var ListDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListDeploymentsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListDeploymentsRequest_targetArn *smithy.Schema
-
-var ListDeploymentsRequest_historyFilter *smithy.Schema
-
-var ListDeploymentsRequest_parentTargetArn *smithy.Schema
-
-var ListDeploymentsRequest_maxResults *smithy.Schema
-
-var ListDeploymentsRequest_nextToken *smithy.Schema
-
-var ListDeploymentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListDeploymentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeploymentsResponse_deployments *smithy.Schema
-
-var ListDeploymentsResponse_nextToken *smithy.Schema
-
-var ListEffectiveDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListEffectiveDeploymentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEffectiveDeploymentsRequest_coreDeviceThingName *smithy.Schema
-
-var ListEffectiveDeploymentsRequest_maxResults *smithy.Schema
-
-var ListEffectiveDeploymentsRequest_nextToken *smithy.Schema
-
-var ListEffectiveDeploymentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListEffectiveDeploymentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEffectiveDeploymentsResponse_effectiveDeployments *smithy.Schema
-
-var ListEffectiveDeploymentsResponse_nextToken *smithy.Schema
-
-var ListInstalledComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListInstalledComponentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListInstalledComponentsRequest_coreDeviceThingName *smithy.Schema
-
-var ListInstalledComponentsRequest_maxResults *smithy.Schema
-
-var ListInstalledComponentsRequest_nextToken *smithy.Schema
-
-var ListInstalledComponentsRequest_topologyFilter *smithy.Schema
-
-var ListInstalledComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListInstalledComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInstalledComponentsResponse_installedComponents *smithy.Schema
-
-var ListInstalledComponentsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ResolveComponentCandidatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolveComponentCandidatesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ResolveComponentCandidatesRequest_platform *smithy.Schema
-
-var ResolveComponentCandidatesRequest_componentCandidates *smithy.Schema
-
-var ResolveComponentCandidatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolveComponentCandidatesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ResolveComponentCandidatesResponse_resolvedComponentVersions *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConnectivityInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UpdateConnectivityInfoRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectivityInfoRequest_thingName *smithy.Schema
-
-var UpdateConnectivityInfoRequest_connectivityInfo *smithy.Schema
-
-var UpdateConnectivityInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UpdateConnectivityInfoResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectivityInfoResponse_version *smithy.Schema
-
-var UpdateConnectivityInfoResponse_message *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	AssociateClientDeviceWithCoreDeviceEntry_thingName = AssociateClientDeviceWithCoreDeviceEntry.AddMember("thingName", _IoTThingName)
-
-	_AssociateClientDeviceWithCoreDeviceEntryList_member = _AssociateClientDeviceWithCoreDeviceEntryList.AddMember("member", AssociateClientDeviceWithCoreDeviceEntry)
-
-	AssociateClientDeviceWithCoreDeviceErrorEntry_thingName = AssociateClientDeviceWithCoreDeviceErrorEntry.AddMember("thingName", _IoTThingName)
-
-	AssociateClientDeviceWithCoreDeviceErrorEntry_code = AssociateClientDeviceWithCoreDeviceErrorEntry.AddMember("code", _NonEmptyString)
-
-	AssociateClientDeviceWithCoreDeviceErrorEntry_message = AssociateClientDeviceWithCoreDeviceErrorEntry.AddMember("message", _NonEmptyString)
-
-	_AssociateClientDeviceWithCoreDeviceErrorList_member = _AssociateClientDeviceWithCoreDeviceErrorList.AddMember("member", AssociateClientDeviceWithCoreDeviceErrorEntry)
-
-	AssociatedClientDevice_thingName = AssociatedClientDevice.AddMember("thingName", _IoTThingName)
-
-	AssociatedClientDevice_associationTimestamp = AssociatedClientDevice.AddMember("associationTimestamp", _Timestamp)
-
-	_AssociatedClientDeviceList_member = _AssociatedClientDeviceList.AddMember("member", AssociatedClientDevice)
-
-	CloudComponentState_REQUESTED = CloudComponentState.AddMember("REQUESTED", smithyprelude.Unit)
-
-	CloudComponentState_INITIATED = CloudComponentState.AddMember("INITIATED", smithyprelude.Unit)
-
-	CloudComponentState_DEPLOYABLE = CloudComponentState.AddMember("DEPLOYABLE", smithyprelude.Unit)
-
-	CloudComponentState_FAILED = CloudComponentState.AddMember("FAILED", smithyprelude.Unit)
-
-	CloudComponentState_DEPRECATED = CloudComponentState.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	_StringMap_key = _StringMap.AddMember("key", _NonEmptyString)
-
-	_StringMap_value = _StringMap.AddMember("value", _NonEmptyString)
-
-	VendorGuidance_ACTIVE = VendorGuidance.AddMember("ACTIVE", smithyprelude.Unit)
-
-	VendorGuidance_DISCONTINUED = VendorGuidance.AddMember("DISCONTINUED", smithyprelude.Unit)
-
-	VendorGuidance_DELETED = VendorGuidance.AddMember("DELETED", smithyprelude.Unit)
-
-	CloudComponentStatus_componentState = CloudComponentStatus.AddMember("componentState", CloudComponentState)
-
-	CloudComponentStatus_message = CloudComponentStatus.AddMember("message", _NonEmptyString)
-
-	CloudComponentStatus_errors = CloudComponentStatus.AddMember("errors", _StringMap)
-
-	CloudComponentStatus_vendorGuidance = CloudComponentStatus.AddMember("vendorGuidance", VendorGuidance)
-
-	CloudComponentStatus_vendorGuidanceMessage = CloudComponentStatus.AddMember("vendorGuidanceMessage", _NonEmptyString)
-
-	_PlatformAttributesMap_key = _PlatformAttributesMap.AddMember("key", _NonEmptyString)
-
-	_PlatformAttributesMap_value = _PlatformAttributesMap.AddMember("value", _NonEmptyString)
-
-	ComponentPlatform_name = ComponentPlatform.AddMember("name", _NonEmptyString)
-
-	ComponentPlatform_attributes = ComponentPlatform.AddMember("attributes", _PlatformAttributesMap)
-
-	_ComponentPlatformList_member = _ComponentPlatformList.AddMember("member", ComponentPlatform)
-
-	ComponentLatestVersion_arn = ComponentLatestVersion.AddMember("arn", _ComponentVersionARN)
-
-	ComponentLatestVersion_componentVersion = ComponentLatestVersion.AddMember("componentVersion", _ComponentVersionString)
-
-	ComponentLatestVersion_creationTimestamp = ComponentLatestVersion.AddMember("creationTimestamp", _Timestamp)
-
-	ComponentLatestVersion_description = ComponentLatestVersion.AddMember("description", _NonEmptyString)
-
-	ComponentLatestVersion_publisher = ComponentLatestVersion.AddMember("publisher", _NonEmptyString)
-
-	ComponentLatestVersion_platforms = ComponentLatestVersion.AddMember("platforms", _ComponentPlatformList)
-
-	Component_arn = Component.AddMember("arn", _ComponentARN)
-
-	Component_componentName = Component.AddMember("componentName", _ComponentNameString)
-
-	Component_latestVersion = Component.AddMember("latestVersion", ComponentLatestVersion)
-
-	_ComponentVersionRequirementMap_key = _ComponentVersionRequirementMap.AddMember("key", _NonEmptyString)
-
-	_ComponentVersionRequirementMap_value = _ComponentVersionRequirementMap.AddMember("value", _NonEmptyString)
-
-	ComponentCandidate_componentName = ComponentCandidate.AddMember("componentName", _ComponentNameString)
-
-	ComponentCandidate_componentVersion = ComponentCandidate.AddMember("componentVersion", _ComponentVersionString)
-
-	ComponentCandidate_versionRequirements = ComponentCandidate.AddMember("versionRequirements", _ComponentVersionRequirementMap)
-
-	_ComponentCandidateList_member = _ComponentCandidateList.AddMember("member", ComponentCandidate)
-
-	_ComponentConfigurationPathList_member = _ComponentConfigurationPathList.AddMember("member", _ComponentConfigurationPath)
-
-	ComponentConfigurationUpdate_merge = ComponentConfigurationUpdate.AddMember("merge", _ComponentConfigurationString)
-
-	ComponentConfigurationUpdate_reset = ComponentConfigurationUpdate.AddMember("reset", _ComponentConfigurationPathList)
-
-	ComponentDependencyType_HARD = ComponentDependencyType.AddMember("HARD", smithyprelude.Unit)
-
-	ComponentDependencyType_SOFT = ComponentDependencyType.AddMember("SOFT", smithyprelude.Unit)
-
-	ComponentDependencyRequirement_versionRequirement = ComponentDependencyRequirement.AddMember("versionRequirement", _NonEmptyString)
-
-	ComponentDependencyRequirement_dependencyType = ComponentDependencyRequirement.AddMember("dependencyType", ComponentDependencyType)
-
-	_ComponentDependencyMap_key = _ComponentDependencyMap.AddMember("key", _NonEmptyString)
-
-	_ComponentDependencyMap_value = _ComponentDependencyMap.AddMember("value", ComponentDependencyRequirement)
-
-	SystemResourceLimits_memory = SystemResourceLimits.AddMember("memory", _Memory)
-
-	SystemResourceLimits_cpus = SystemResourceLimits.AddMember("cpus", _CPU)
-
-	ComponentRunWith_posixUser = ComponentRunWith.AddMember("posixUser", _NonEmptyString)
-
-	ComponentRunWith_systemResourceLimits = ComponentRunWith.AddMember("systemResourceLimits", SystemResourceLimits)
-
-	ComponentRunWith_windowsUser = ComponentRunWith.AddMember("windowsUser", _NonEmptyString)
-
-	ComponentDeploymentSpecification_componentVersion = ComponentDeploymentSpecification.AddMember("componentVersion", _ComponentVersionString)
-
-	ComponentDeploymentSpecification_configurationUpdate = ComponentDeploymentSpecification.AddMember("configurationUpdate", ComponentConfigurationUpdate)
-
-	ComponentDeploymentSpecification_runWith = ComponentDeploymentSpecification.AddMember("runWith", ComponentRunWith)
-
-	_ComponentDeploymentSpecifications_key = _ComponentDeploymentSpecifications.AddMember("key", _NonEmptyString)
-
-	_ComponentDeploymentSpecifications_value = _ComponentDeploymentSpecifications.AddMember("value", ComponentDeploymentSpecification)
-
-	_ComponentList_member = _ComponentList.AddMember("member", Component)
-
-	ComponentVersionListItem_componentName = ComponentVersionListItem.AddMember("componentName", _ComponentNameString)
-
-	ComponentVersionListItem_componentVersion = ComponentVersionListItem.AddMember("componentVersion", _ComponentVersionString)
-
-	ComponentVersionListItem_arn = ComponentVersionListItem.AddMember("arn", _NonEmptyString)
-
-	_ComponentVersionList_member = _ComponentVersionList.AddMember("member", ComponentVersionListItem)
-
-	ComponentVisibilityScope_PRIVATE = ComponentVisibilityScope.AddMember("PRIVATE", smithyprelude.Unit)
-
-	ComponentVisibilityScope_PUBLIC = ComponentVisibilityScope.AddMember("PUBLIC", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _String)
-
-	ConnectivityInfo_id = ConnectivityInfo.AddMember("id", _String, &smithytraits.JSONName{Name: "Id"})
-
-	ConnectivityInfo_hostAddress = ConnectivityInfo.AddMember("hostAddress", _String, &smithytraits.JSONName{Name: "HostAddress"})
-
-	ConnectivityInfo_portNumber = ConnectivityInfo.AddMember("portNumber", _PortNumberInt, &smithytraits.JSONName{Name: "PortNumber"})
-
-	ConnectivityInfo_metadata = ConnectivityInfo.AddMember("metadata", _String, &smithytraits.JSONName{Name: "Metadata"})
-
-	_connectivityInfoList_member = _connectivityInfoList.AddMember("member", ConnectivityInfo)
-
-	CoreDeviceStatus_HEALTHY = CoreDeviceStatus.AddMember("HEALTHY", smithyprelude.Unit)
-
-	CoreDeviceStatus_UNHEALTHY = CoreDeviceStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	CoreDevice_coreDeviceThingName = CoreDevice.AddMember("coreDeviceThingName", _CoreDeviceThingName)
-
-	CoreDevice_status = CoreDevice.AddMember("status", CoreDeviceStatus)
-
-	CoreDevice_lastStatusUpdateTimestamp = CoreDevice.AddMember("lastStatusUpdateTimestamp", _Timestamp)
-
-	CoreDevice_platform = CoreDevice.AddMember("platform", _CoreDevicePlatformString)
-
-	CoreDevice_architecture = CoreDevice.AddMember("architecture", _CoreDeviceArchitectureString)
-
-	CoreDevice_runtime = CoreDevice.AddMember("runtime", _CoreDeviceRuntimeString)
-
-	_CoreDevicesList_member = _CoreDevicesList.AddMember("member", CoreDevice)
-
-	DeploymentStatus_ACTIVE = DeploymentStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DeploymentStatus_COMPLETED = DeploymentStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	DeploymentStatus_CANCELED = DeploymentStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	DeploymentStatus_FAILED = DeploymentStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DeploymentStatus_INACTIVE = DeploymentStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	Deployment_targetArn = Deployment.AddMember("targetArn", _TargetARN)
-
-	Deployment_revisionId = Deployment.AddMember("revisionId", _NonEmptyString)
-
-	Deployment_deploymentId = Deployment.AddMember("deploymentId", _NonEmptyString)
-
-	Deployment_deploymentName = Deployment.AddMember("deploymentName", _NonEmptyString)
-
-	Deployment_creationTimestamp = Deployment.AddMember("creationTimestamp", _Timestamp)
-
-	Deployment_deploymentStatus = Deployment.AddMember("deploymentStatus", DeploymentStatus)
-
-	Deployment_isLatestForTarget = Deployment.AddMember("isLatestForTarget", _IsLatestForTarget)
-
-	Deployment_parentTargetArn = Deployment.AddMember("parentTargetArn", _ThingGroupARN)
-
-	DeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS = DeploymentComponentUpdatePolicyAction.AddMember("NOTIFY_COMPONENTS", smithyprelude.Unit)
-
-	DeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS = DeploymentComponentUpdatePolicyAction.AddMember("SKIP_NOTIFY_COMPONENTS", smithyprelude.Unit)
-
-	DeploymentComponentUpdatePolicy_timeoutInSeconds = DeploymentComponentUpdatePolicy.AddMember("timeoutInSeconds", _OptionalInteger)
-
-	DeploymentComponentUpdatePolicy_action = DeploymentComponentUpdatePolicy.AddMember("action", DeploymentComponentUpdatePolicyAction)
-
-	DeploymentConfigurationValidationPolicy_timeoutInSeconds = DeploymentConfigurationValidationPolicy.AddMember("timeoutInSeconds", _OptionalInteger)
-
-	DeploymentFailureHandlingPolicy_ROLLBACK = DeploymentFailureHandlingPolicy.AddMember("ROLLBACK", smithyprelude.Unit)
-
-	DeploymentFailureHandlingPolicy_DO_NOTHING = DeploymentFailureHandlingPolicy.AddMember("DO_NOTHING", smithyprelude.Unit)
-
-	DeploymentHistoryFilter_ALL = DeploymentHistoryFilter.AddMember("ALL", smithyprelude.Unit)
-
-	DeploymentHistoryFilter_LATEST_ONLY = DeploymentHistoryFilter.AddMember("LATEST_ONLY", smithyprelude.Unit)
-
-	IoTJobRateIncreaseCriteria_numberOfNotifiedThings = IoTJobRateIncreaseCriteria.AddMember("numberOfNotifiedThings", _IoTJobNumberOfThings)
-
-	IoTJobRateIncreaseCriteria_numberOfSucceededThings = IoTJobRateIncreaseCriteria.AddMember("numberOfSucceededThings", _IoTJobNumberOfThings)
-
-	IoTJobExponentialRolloutRate_baseRatePerMinute = IoTJobExponentialRolloutRate.AddMember("baseRatePerMinute", _IoTJobRolloutBaseRatePerMinute)
-
-	IoTJobExponentialRolloutRate_incrementFactor = IoTJobExponentialRolloutRate.AddMember("incrementFactor", _IoTJobRolloutIncrementFactor)
-
-	IoTJobExponentialRolloutRate_rateIncreaseCriteria = IoTJobExponentialRolloutRate.AddMember("rateIncreaseCriteria", IoTJobRateIncreaseCriteria)
-
-	IoTJobExecutionsRolloutConfig_exponentialRate = IoTJobExecutionsRolloutConfig.AddMember("exponentialRate", IoTJobExponentialRolloutRate)
-
-	IoTJobExecutionsRolloutConfig_maximumPerMinute = IoTJobExecutionsRolloutConfig.AddMember("maximumPerMinute", _IoTJobMaxExecutionsPerMin)
-
-	IoTJobExecutionFailureType_FAILED = IoTJobExecutionFailureType.AddMember("FAILED", smithyprelude.Unit)
-
-	IoTJobExecutionFailureType_REJECTED = IoTJobExecutionFailureType.AddMember("REJECTED", smithyprelude.Unit)
-
-	IoTJobExecutionFailureType_TIMED_OUT = IoTJobExecutionFailureType.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	IoTJobExecutionFailureType_ALL = IoTJobExecutionFailureType.AddMember("ALL", smithyprelude.Unit)
-
-	IoTJobAbortAction_CANCEL = IoTJobAbortAction.AddMember("CANCEL", smithyprelude.Unit)
-
-	IoTJobAbortCriteria_failureType = IoTJobAbortCriteria.AddMember("failureType", IoTJobExecutionFailureType)
-
-	IoTJobAbortCriteria_action = IoTJobAbortCriteria.AddMember("action", IoTJobAbortAction)
-
-	IoTJobAbortCriteria_thresholdPercentage = IoTJobAbortCriteria.AddMember("thresholdPercentage", _IoTJobAbortThresholdPercentage)
-
-	IoTJobAbortCriteria_minNumberOfExecutedThings = IoTJobAbortCriteria.AddMember("minNumberOfExecutedThings", _IoTJobMinimumNumberOfExecutedThings)
-
-	_IoTJobAbortCriteriaList_member = _IoTJobAbortCriteriaList.AddMember("member", IoTJobAbortCriteria)
-
-	IoTJobAbortConfig_criteriaList = IoTJobAbortConfig.AddMember("criteriaList", _IoTJobAbortCriteriaList)
-
-	IoTJobTimeoutConfig_inProgressTimeoutInMinutes = IoTJobTimeoutConfig.AddMember("inProgressTimeoutInMinutes", _IoTJobInProgressTimeoutInMinutes)
-
-	DeploymentIoTJobConfiguration_jobExecutionsRolloutConfig = DeploymentIoTJobConfiguration.AddMember("jobExecutionsRolloutConfig", IoTJobExecutionsRolloutConfig)
-
-	DeploymentIoTJobConfiguration_abortConfig = DeploymentIoTJobConfiguration.AddMember("abortConfig", IoTJobAbortConfig)
-
-	DeploymentIoTJobConfiguration_timeoutConfig = DeploymentIoTJobConfiguration.AddMember("timeoutConfig", IoTJobTimeoutConfig)
-
-	_DeploymentList_member = _DeploymentList.AddMember("member", Deployment)
-
-	DeploymentPolicies_failureHandlingPolicy = DeploymentPolicies.AddMember("failureHandlingPolicy", DeploymentFailureHandlingPolicy)
-
-	DeploymentPolicies_componentUpdatePolicy = DeploymentPolicies.AddMember("componentUpdatePolicy", DeploymentComponentUpdatePolicy)
-
-	DeploymentPolicies_configurationValidationPolicy = DeploymentPolicies.AddMember("configurationValidationPolicy", DeploymentConfigurationValidationPolicy)
-
-	DisassociateClientDeviceFromCoreDeviceEntry_thingName = DisassociateClientDeviceFromCoreDeviceEntry.AddMember("thingName", _IoTThingName)
-
-	_DisassociateClientDeviceFromCoreDeviceEntryList_member = _DisassociateClientDeviceFromCoreDeviceEntryList.AddMember("member", DisassociateClientDeviceFromCoreDeviceEntry)
-
-	DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName = DisassociateClientDeviceFromCoreDeviceErrorEntry.AddMember("thingName", _IoTThingName)
-
-	DisassociateClientDeviceFromCoreDeviceErrorEntry_code = DisassociateClientDeviceFromCoreDeviceErrorEntry.AddMember("code", _NonEmptyString)
-
-	DisassociateClientDeviceFromCoreDeviceErrorEntry_message = DisassociateClientDeviceFromCoreDeviceErrorEntry.AddMember("message", _NonEmptyString)
-
-	_DisassociateClientDeviceFromCoreDeviceErrorList_member = _DisassociateClientDeviceFromCoreDeviceErrorList.AddMember("member", DisassociateClientDeviceFromCoreDeviceErrorEntry)
-
-	EffectiveDeploymentExecutionStatus_IN_PROGRESS = EffectiveDeploymentExecutionStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_QUEUED = EffectiveDeploymentExecutionStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_FAILED = EffectiveDeploymentExecutionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_COMPLETED = EffectiveDeploymentExecutionStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_TIMED_OUT = EffectiveDeploymentExecutionStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_CANCELED = EffectiveDeploymentExecutionStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_REJECTED = EffectiveDeploymentExecutionStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_SUCCEEDED = EffectiveDeploymentExecutionStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	_EffectiveDeploymentErrorStack_member = _EffectiveDeploymentErrorStack.AddMember("member", _EffectiveDeploymentErrorCode)
-
-	_EffectiveDeploymentErrorTypeList_member = _EffectiveDeploymentErrorTypeList.AddMember("member", _EffectiveDeploymentErrorType)
-
-	EffectiveDeploymentStatusDetails_errorStack = EffectiveDeploymentStatusDetails.AddMember("errorStack", _EffectiveDeploymentErrorStack)
-
-	EffectiveDeploymentStatusDetails_errorTypes = EffectiveDeploymentStatusDetails.AddMember("errorTypes", _EffectiveDeploymentErrorTypeList)
-
-	EffectiveDeployment_deploymentId = EffectiveDeployment.AddMember("deploymentId", _DeploymentID)
-
-	EffectiveDeployment_deploymentName = EffectiveDeployment.AddMember("deploymentName", _DeploymentName)
-
-	EffectiveDeployment_iotJobId = EffectiveDeployment.AddMember("iotJobId", _IoTJobId)
-
-	EffectiveDeployment_iotJobArn = EffectiveDeployment.AddMember("iotJobArn", _IoTJobARN)
-
-	EffectiveDeployment_description = EffectiveDeployment.AddMember("description", _Description)
-
-	EffectiveDeployment_targetArn = EffectiveDeployment.AddMember("targetArn", _TargetARN)
-
-	EffectiveDeployment_coreDeviceExecutionStatus = EffectiveDeployment.AddMember("coreDeviceExecutionStatus", EffectiveDeploymentExecutionStatus)
-
-	EffectiveDeployment_reason = EffectiveDeployment.AddMember("reason", _Reason)
-
-	EffectiveDeployment_creationTimestamp = EffectiveDeployment.AddMember("creationTimestamp", _Timestamp)
-
-	EffectiveDeployment_modifiedTimestamp = EffectiveDeployment.AddMember("modifiedTimestamp", _Timestamp)
-
-	EffectiveDeployment_statusDetails = EffectiveDeployment.AddMember("statusDetails", EffectiveDeploymentStatusDetails)
-
-	_EffectiveDeploymentsList_member = _EffectiveDeploymentsList.AddMember("member", EffectiveDeployment)
-
-	InstalledComponentLifecycleState_NEW = InstalledComponentLifecycleState.AddMember("NEW", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_INSTALLED = InstalledComponentLifecycleState.AddMember("INSTALLED", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_STARTING = InstalledComponentLifecycleState.AddMember("STARTING", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_RUNNING = InstalledComponentLifecycleState.AddMember("RUNNING", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_STOPPING = InstalledComponentLifecycleState.AddMember("STOPPING", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_ERRORED = InstalledComponentLifecycleState.AddMember("ERRORED", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_BROKEN = InstalledComponentLifecycleState.AddMember("BROKEN", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_FINISHED = InstalledComponentLifecycleState.AddMember("FINISHED", smithyprelude.Unit)
-
-	_InstalledComponentLifecycleStatusCodeList_member = _InstalledComponentLifecycleStatusCodeList.AddMember("member", _InstalledComponentLifecycleStatusCode)
-
-	InstalledComponent_componentName = InstalledComponent.AddMember("componentName", _ComponentNameString)
-
-	InstalledComponent_componentVersion = InstalledComponent.AddMember("componentVersion", _ComponentVersionString)
-
-	InstalledComponent_lifecycleState = InstalledComponent.AddMember("lifecycleState", InstalledComponentLifecycleState)
-
-	InstalledComponent_lifecycleStateDetails = InstalledComponent.AddMember("lifecycleStateDetails", _LifecycleStateDetails)
-
-	InstalledComponent_isRoot = InstalledComponent.AddMember("isRoot", _IsRoot)
-
-	InstalledComponent_lastStatusChangeTimestamp = InstalledComponent.AddMember("lastStatusChangeTimestamp", _Timestamp)
-
-	InstalledComponent_lastReportedTimestamp = InstalledComponent.AddMember("lastReportedTimestamp", _Timestamp)
-
-	InstalledComponent_lastInstallationSource = InstalledComponent.AddMember("lastInstallationSource", _NonEmptyString)
-
-	InstalledComponent_lifecycleStatusCodes = InstalledComponent.AddMember("lifecycleStatusCodes", _InstalledComponentLifecycleStatusCodeList)
-
-	_InstalledComponentList_member = _InstalledComponentList.AddMember("member", InstalledComponent)
-
-	InstalledComponentTopologyFilter_ALL = InstalledComponentTopologyFilter.AddMember("ALL", smithyprelude.Unit)
-
-	InstalledComponentTopologyFilter_ROOT = InstalledComponentTopologyFilter.AddMember("ROOT", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	IotEndpointType_fips = IotEndpointType.AddMember("fips", smithyprelude.Unit)
-
-	IotEndpointType_standard = IotEndpointType.AddMember("standard", smithyprelude.Unit)
-
-	LambdaFilesystemPermission_RO = LambdaFilesystemPermission.AddMember("RO", smithyprelude.Unit)
-
-	LambdaFilesystemPermission_RW = LambdaFilesystemPermission.AddMember("RW", smithyprelude.Unit)
-
-	LambdaVolumeMount_sourcePath = LambdaVolumeMount.AddMember("sourcePath", _FileSystemPath)
-
-	LambdaVolumeMount_destinationPath = LambdaVolumeMount.AddMember("destinationPath", _FileSystemPath)
-
-	LambdaVolumeMount_permission = LambdaVolumeMount.AddMember("permission", LambdaFilesystemPermission)
-
-	LambdaVolumeMount_addGroupOwner = LambdaVolumeMount.AddMember("addGroupOwner", _OptionalBoolean)
-
-	_LambdaVolumeList_member = _LambdaVolumeList.AddMember("member", LambdaVolumeMount)
-
-	LambdaDeviceMount_path = LambdaDeviceMount.AddMember("path", _FileSystemPath)
-
-	LambdaDeviceMount_permission = LambdaDeviceMount.AddMember("permission", LambdaFilesystemPermission)
-
-	LambdaDeviceMount_addGroupOwner = LambdaDeviceMount.AddMember("addGroupOwner", _OptionalBoolean)
-
-	_LambdaDeviceList_member = _LambdaDeviceList.AddMember("member", LambdaDeviceMount)
-
-	LambdaContainerParams_memorySizeInKB = LambdaContainerParams.AddMember("memorySizeInKB", _OptionalInteger)
-
-	LambdaContainerParams_mountROSysfs = LambdaContainerParams.AddMember("mountROSysfs", _OptionalBoolean)
-
-	LambdaContainerParams_volumes = LambdaContainerParams.AddMember("volumes", _LambdaVolumeList)
-
-	LambdaContainerParams_devices = LambdaContainerParams.AddMember("devices", _LambdaDeviceList)
-
-	_LambdaEnvironmentVariables_key = _LambdaEnvironmentVariables.AddMember("key", _NonEmptyString)
-
-	_LambdaEnvironmentVariables_value = _LambdaEnvironmentVariables.AddMember("value", _String)
-
-	LambdaEventSourceType_PUB_SUB = LambdaEventSourceType.AddMember("PUB_SUB", smithyprelude.Unit)
-
-	LambdaEventSourceType_IOT_CORE = LambdaEventSourceType.AddMember("IOT_CORE", smithyprelude.Unit)
-
-	LambdaEventSource_topic = LambdaEventSource.AddMember("topic", _TopicString)
-
-	LambdaEventSource_type = LambdaEventSource.AddMember("type", LambdaEventSourceType)
-
-	_LambdaEventSourceList_member = _LambdaEventSourceList.AddMember("member", LambdaEventSource)
-
-	_LambdaExecArgsList_member = _LambdaExecArgsList.AddMember("member", _LambdaExecArg)
-
-	LambdaInputPayloadEncodingType_JSON = LambdaInputPayloadEncodingType.AddMember("JSON", smithyprelude.Unit)
-
-	LambdaInputPayloadEncodingType_BINARY = LambdaInputPayloadEncodingType.AddMember("BINARY", smithyprelude.Unit)
-
-	LambdaIsolationMode_GREENGRASS_CONTAINER = LambdaIsolationMode.AddMember("GREENGRASS_CONTAINER", smithyprelude.Unit)
-
-	LambdaIsolationMode_NO_CONTAINER = LambdaIsolationMode.AddMember("NO_CONTAINER", smithyprelude.Unit)
-
-	LambdaLinuxProcessParams_isolationMode = LambdaLinuxProcessParams.AddMember("isolationMode", LambdaIsolationMode)
-
-	LambdaLinuxProcessParams_containerParams = LambdaLinuxProcessParams.AddMember("containerParams", LambdaContainerParams)
-
-	LambdaExecutionParameters_eventSources = LambdaExecutionParameters.AddMember("eventSources", _LambdaEventSourceList)
-
-	LambdaExecutionParameters_maxQueueSize = LambdaExecutionParameters.AddMember("maxQueueSize", _OptionalInteger)
-
-	LambdaExecutionParameters_maxInstancesCount = LambdaExecutionParameters.AddMember("maxInstancesCount", _OptionalInteger)
-
-	LambdaExecutionParameters_maxIdleTimeInSeconds = LambdaExecutionParameters.AddMember("maxIdleTimeInSeconds", _OptionalInteger)
-
-	LambdaExecutionParameters_timeoutInSeconds = LambdaExecutionParameters.AddMember("timeoutInSeconds", _OptionalInteger)
-
-	LambdaExecutionParameters_statusTimeoutInSeconds = LambdaExecutionParameters.AddMember("statusTimeoutInSeconds", _OptionalInteger)
-
-	LambdaExecutionParameters_pinned = LambdaExecutionParameters.AddMember("pinned", _OptionalBoolean)
-
-	LambdaExecutionParameters_inputPayloadEncodingType = LambdaExecutionParameters.AddMember("inputPayloadEncodingType", LambdaInputPayloadEncodingType)
-
-	LambdaExecutionParameters_execArgs = LambdaExecutionParameters.AddMember("execArgs", _LambdaExecArgsList)
-
-	LambdaExecutionParameters_environmentVariables = LambdaExecutionParameters.AddMember("environmentVariables", _LambdaEnvironmentVariables)
-
-	LambdaExecutionParameters_linuxProcessParams = LambdaExecutionParameters.AddMember("linuxProcessParams", LambdaLinuxProcessParams)
-
-	LambdaFunctionRecipeSource_lambdaArn = LambdaFunctionRecipeSource.AddMember("lambdaArn", _NonEmptyString)
-
-	LambdaFunctionRecipeSource_componentName = LambdaFunctionRecipeSource.AddMember("componentName", _ComponentNameString)
-
-	LambdaFunctionRecipeSource_componentVersion = LambdaFunctionRecipeSource.AddMember("componentVersion", _ComponentVersionString)
-
-	LambdaFunctionRecipeSource_componentPlatforms = LambdaFunctionRecipeSource.AddMember("componentPlatforms", _ComponentPlatformList)
-
-	LambdaFunctionRecipeSource_componentDependencies = LambdaFunctionRecipeSource.AddMember("componentDependencies", _ComponentDependencyMap)
-
-	LambdaFunctionRecipeSource_componentLambdaParameters = LambdaFunctionRecipeSource.AddMember("componentLambdaParameters", LambdaExecutionParameters)
-
-	RecipeOutputFormat_JSON = RecipeOutputFormat.AddMember("JSON", smithyprelude.Unit)
-
-	RecipeOutputFormat_YAML = RecipeOutputFormat.AddMember("YAML", smithyprelude.Unit)
-
-	RequestAlreadyInProgressException_message = RequestAlreadyInProgressException.AddMember("message", _String)
-
-	ResolvedComponentVersion_arn = ResolvedComponentVersion.AddMember("arn", _ComponentVersionARN)
-
-	ResolvedComponentVersion_componentName = ResolvedComponentVersion.AddMember("componentName", _ComponentNameString)
-
-	ResolvedComponentVersion_componentVersion = ResolvedComponentVersion.AddMember("componentVersion", _ComponentVersionString)
-
-	ResolvedComponentVersion_recipe = ResolvedComponentVersion.AddMember("recipe", _RecipeBlob)
-
-	ResolvedComponentVersion_vendorGuidance = ResolvedComponentVersion.AddMember("vendorGuidance", VendorGuidance)
-
-	ResolvedComponentVersion_message = ResolvedComponentVersion.AddMember("message", _NonEmptyString)
-
-	_ResolvedComponentVersionsList_member = _ResolvedComponentVersionsList.AddMember("member", ResolvedComponentVersion)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _String)
-
-	S3EndpointType_REGIONAL = S3EndpointType.AddMember("REGIONAL", smithyprelude.Unit)
-
-	S3EndpointType_GLOBAL = S3EndpointType.AddMember("GLOBAL", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fields = ValidationException.AddMember("fields", _ValidationExceptionFieldList)
-
-	AssociateServiceRoleToAccountRequest_roleArn = AssociateServiceRoleToAccountRequest.AddMember("roleArn", _String, &smithytraits.JSONName{Name: "RoleArn"})
-
-	AssociateServiceRoleToAccountResponse_associatedAt = AssociateServiceRoleToAccountResponse.AddMember("associatedAt", _String, &smithytraits.JSONName{Name: "AssociatedAt"})
-
-	BatchAssociateClientDeviceWithCoreDeviceRequest_entries = BatchAssociateClientDeviceWithCoreDeviceRequest.AddMember("entries", _AssociateClientDeviceWithCoreDeviceEntryList)
-
-	BatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName = BatchAssociateClientDeviceWithCoreDeviceRequest.AddMember("coreDeviceThingName", _IoTThingName, &smithytraits.HTTPLabel{})
-
-	BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries = BatchAssociateClientDeviceWithCoreDeviceResponse.AddMember("errorEntries", _AssociateClientDeviceWithCoreDeviceErrorList)
-
-	BatchDisassociateClientDeviceFromCoreDeviceRequest_entries = BatchDisassociateClientDeviceFromCoreDeviceRequest.AddMember("entries", _DisassociateClientDeviceFromCoreDeviceEntryList)
-
-	BatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName = BatchDisassociateClientDeviceFromCoreDeviceRequest.AddMember("coreDeviceThingName", _IoTThingName, &smithytraits.HTTPLabel{})
-
-	BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries = BatchDisassociateClientDeviceFromCoreDeviceResponse.AddMember("errorEntries", _DisassociateClientDeviceFromCoreDeviceErrorList)
-
-	CancelDeploymentRequest_deploymentId = CancelDeploymentRequest.AddMember("deploymentId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	CancelDeploymentResponse_message = CancelDeploymentResponse.AddMember("message", _NonEmptyString)
-
-	CreateComponentVersionRequest_inlineRecipe = CreateComponentVersionRequest.AddMember("inlineRecipe", _RecipeBlob)
-
-	CreateComponentVersionRequest_lambdaFunction = CreateComponentVersionRequest.AddMember("lambdaFunction", LambdaFunctionRecipeSource)
-
-	CreateComponentVersionRequest_tags = CreateComponentVersionRequest.AddMember("tags", _TagMap)
-
-	CreateComponentVersionRequest_clientToken = CreateComponentVersionRequest.AddMember("clientToken", _ClientTokenString)
-
-	CreateComponentVersionResponse_arn = CreateComponentVersionResponse.AddMember("arn", _ComponentVersionARN)
-
-	CreateComponentVersionResponse_componentName = CreateComponentVersionResponse.AddMember("componentName", _ComponentNameString)
-
-	CreateComponentVersionResponse_componentVersion = CreateComponentVersionResponse.AddMember("componentVersion", _ComponentVersionString)
-
-	CreateComponentVersionResponse_creationTimestamp = CreateComponentVersionResponse.AddMember("creationTimestamp", _Timestamp)
-
-	CreateComponentVersionResponse_status = CreateComponentVersionResponse.AddMember("status", CloudComponentStatus)
-
-	CreateDeploymentRequest_targetArn = CreateDeploymentRequest.AddMember("targetArn", _TargetARN)
-
-	CreateDeploymentRequest_deploymentName = CreateDeploymentRequest.AddMember("deploymentName", _DeploymentNameString)
-
-	CreateDeploymentRequest_components = CreateDeploymentRequest.AddMember("components", _ComponentDeploymentSpecifications)
-
-	CreateDeploymentRequest_iotJobConfiguration = CreateDeploymentRequest.AddMember("iotJobConfiguration", DeploymentIoTJobConfiguration)
-
-	CreateDeploymentRequest_deploymentPolicies = CreateDeploymentRequest.AddMember("deploymentPolicies", DeploymentPolicies)
-
-	CreateDeploymentRequest_parentTargetArn = CreateDeploymentRequest.AddMember("parentTargetArn", _ThingGroupARN)
-
-	CreateDeploymentRequest_tags = CreateDeploymentRequest.AddMember("tags", _TagMap)
-
-	CreateDeploymentRequest_clientToken = CreateDeploymentRequest.AddMember("clientToken", _ClientTokenString)
-
-	CreateDeploymentResponse_deploymentId = CreateDeploymentResponse.AddMember("deploymentId", _NonEmptyString)
-
-	CreateDeploymentResponse_iotJobId = CreateDeploymentResponse.AddMember("iotJobId", _NonEmptyString)
-
-	CreateDeploymentResponse_iotJobArn = CreateDeploymentResponse.AddMember("iotJobArn", _IoTJobARN)
-
-	DeleteComponentRequest_arn = DeleteComponentRequest.AddMember("arn", _ComponentVersionARN, &smithytraits.HTTPLabel{})
-
-	DeleteCoreDeviceRequest_coreDeviceThingName = DeleteCoreDeviceRequest.AddMember("coreDeviceThingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	DeleteDeploymentRequest_deploymentId = DeleteDeploymentRequest.AddMember("deploymentId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DescribeComponentRequest_arn = DescribeComponentRequest.AddMember("arn", _ComponentVersionARN, &smithytraits.HTTPLabel{})
-
-	DescribeComponentResponse_arn = DescribeComponentResponse.AddMember("arn", _ComponentVersionARN)
-
-	DescribeComponentResponse_componentName = DescribeComponentResponse.AddMember("componentName", _ComponentNameString)
-
-	DescribeComponentResponse_componentVersion = DescribeComponentResponse.AddMember("componentVersion", _ComponentVersionString)
-
-	DescribeComponentResponse_creationTimestamp = DescribeComponentResponse.AddMember("creationTimestamp", _Timestamp)
-
-	DescribeComponentResponse_publisher = DescribeComponentResponse.AddMember("publisher", _PublisherString)
-
-	DescribeComponentResponse_description = DescribeComponentResponse.AddMember("description", _DescriptionString)
-
-	DescribeComponentResponse_status = DescribeComponentResponse.AddMember("status", CloudComponentStatus)
-
-	DescribeComponentResponse_platforms = DescribeComponentResponse.AddMember("platforms", _ComponentPlatformList)
-
-	DescribeComponentResponse_tags = DescribeComponentResponse.AddMember("tags", _TagMap)
-
-	DisassociateServiceRoleFromAccountResponse_disassociatedAt = DisassociateServiceRoleFromAccountResponse.AddMember("disassociatedAt", _String, &smithytraits.JSONName{Name: "DisassociatedAt"})
-
-	GetComponentRequest_recipeOutputFormat = GetComponentRequest.AddMember("recipeOutputFormat", RecipeOutputFormat, &smithytraits.HTTPQuery{Name: "recipeOutputFormat"})
-
-	GetComponentRequest_arn = GetComponentRequest.AddMember("arn", _ComponentVersionARN, &smithytraits.HTTPLabel{})
-
-	GetComponentResponse_recipeOutputFormat = GetComponentResponse.AddMember("recipeOutputFormat", RecipeOutputFormat)
-
-	GetComponentResponse_recipe = GetComponentResponse.AddMember("recipe", _RecipeBlob)
-
-	GetComponentResponse_tags = GetComponentResponse.AddMember("tags", _TagMap)
-
-	GetComponentVersionArtifactRequest_arn = GetComponentVersionArtifactRequest.AddMember("arn", _ComponentVersionARN, &smithytraits.HTTPLabel{})
-
-	GetComponentVersionArtifactRequest_artifactName = GetComponentVersionArtifactRequest.AddMember("artifactName", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetComponentVersionArtifactRequest_s3EndpointType = GetComponentVersionArtifactRequest.AddMember("s3EndpointType", S3EndpointType, &smithytraits.HTTPQuery{Name: "s3EndpointType"})
-
-	GetComponentVersionArtifactRequest_iotEndpointType = GetComponentVersionArtifactRequest.AddMember("iotEndpointType", IotEndpointType, &smithytraits.HTTPHeader{Name: "x-amz-iot-endpoint-type"})
-
-	GetComponentVersionArtifactResponse_preSignedUrl = GetComponentVersionArtifactResponse.AddMember("preSignedUrl", _NonEmptyString)
-
-	GetConnectivityInfoRequest_thingName = GetConnectivityInfoRequest.AddMember("thingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	GetConnectivityInfoResponse_connectivityInfo = GetConnectivityInfoResponse.AddMember("connectivityInfo", _connectivityInfoList, &smithytraits.JSONName{Name: "ConnectivityInfo"})
-
-	GetConnectivityInfoResponse_message = GetConnectivityInfoResponse.AddMember("message", _String, &smithytraits.JSONName{Name: "Message"})
-
-	GetCoreDeviceRequest_coreDeviceThingName = GetCoreDeviceRequest.AddMember("coreDeviceThingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	GetCoreDeviceResponse_coreDeviceThingName = GetCoreDeviceResponse.AddMember("coreDeviceThingName", _CoreDeviceThingName)
-
-	GetCoreDeviceResponse_coreVersion = GetCoreDeviceResponse.AddMember("coreVersion", _GGCVersion)
-
-	GetCoreDeviceResponse_platform = GetCoreDeviceResponse.AddMember("platform", _CoreDevicePlatformString)
-
-	GetCoreDeviceResponse_architecture = GetCoreDeviceResponse.AddMember("architecture", _CoreDeviceArchitectureString)
-
-	GetCoreDeviceResponse_runtime = GetCoreDeviceResponse.AddMember("runtime", _CoreDeviceRuntimeString)
-
-	GetCoreDeviceResponse_status = GetCoreDeviceResponse.AddMember("status", CoreDeviceStatus)
-
-	GetCoreDeviceResponse_lastStatusUpdateTimestamp = GetCoreDeviceResponse.AddMember("lastStatusUpdateTimestamp", _Timestamp)
-
-	GetCoreDeviceResponse_tags = GetCoreDeviceResponse.AddMember("tags", _TagMap)
-
-	GetDeploymentRequest_deploymentId = GetDeploymentRequest.AddMember("deploymentId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetDeploymentResponse_targetArn = GetDeploymentResponse.AddMember("targetArn", _TargetARN)
-
-	GetDeploymentResponse_revisionId = GetDeploymentResponse.AddMember("revisionId", _NonEmptyString)
-
-	GetDeploymentResponse_deploymentId = GetDeploymentResponse.AddMember("deploymentId", _NonEmptyString)
-
-	GetDeploymentResponse_deploymentName = GetDeploymentResponse.AddMember("deploymentName", _NullableString)
-
-	GetDeploymentResponse_deploymentStatus = GetDeploymentResponse.AddMember("deploymentStatus", DeploymentStatus)
-
-	GetDeploymentResponse_iotJobId = GetDeploymentResponse.AddMember("iotJobId", _NullableString)
-
-	GetDeploymentResponse_iotJobArn = GetDeploymentResponse.AddMember("iotJobArn", _IoTJobARN)
-
-	GetDeploymentResponse_components = GetDeploymentResponse.AddMember("components", _ComponentDeploymentSpecifications)
-
-	GetDeploymentResponse_deploymentPolicies = GetDeploymentResponse.AddMember("deploymentPolicies", DeploymentPolicies)
-
-	GetDeploymentResponse_iotJobConfiguration = GetDeploymentResponse.AddMember("iotJobConfiguration", DeploymentIoTJobConfiguration)
-
-	GetDeploymentResponse_creationTimestamp = GetDeploymentResponse.AddMember("creationTimestamp", _Timestamp)
-
-	GetDeploymentResponse_isLatestForTarget = GetDeploymentResponse.AddMember("isLatestForTarget", _IsLatestForTarget)
-
-	GetDeploymentResponse_parentTargetArn = GetDeploymentResponse.AddMember("parentTargetArn", _ThingGroupARN)
-
-	GetDeploymentResponse_tags = GetDeploymentResponse.AddMember("tags", _TagMap)
-
-	GetServiceRoleForAccountResponse_associatedAt = GetServiceRoleForAccountResponse.AddMember("associatedAt", _String, &smithytraits.JSONName{Name: "AssociatedAt"})
-
-	GetServiceRoleForAccountResponse_roleArn = GetServiceRoleForAccountResponse.AddMember("roleArn", _String, &smithytraits.JSONName{Name: "RoleArn"})
-
-	ListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName = ListClientDevicesAssociatedWithCoreDeviceRequest.AddMember("coreDeviceThingName", _IoTThingName, &smithytraits.HTTPLabel{})
-
-	ListClientDevicesAssociatedWithCoreDeviceRequest_maxResults = ListClientDevicesAssociatedWithCoreDeviceRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClientDevicesAssociatedWithCoreDeviceRequest_nextToken = ListClientDevicesAssociatedWithCoreDeviceRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices = ListClientDevicesAssociatedWithCoreDeviceResponse.AddMember("associatedClientDevices", _AssociatedClientDeviceList)
-
-	ListClientDevicesAssociatedWithCoreDeviceResponse_nextToken = ListClientDevicesAssociatedWithCoreDeviceResponse.AddMember("nextToken", _NextTokenString)
-
-	ListComponentsRequest_scope = ListComponentsRequest.AddMember("scope", ComponentVisibilityScope, &smithytraits.HTTPQuery{Name: "scope"})
-
-	ListComponentsRequest_maxResults = ListComponentsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListComponentsRequest_nextToken = ListComponentsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListComponentsResponse_components = ListComponentsResponse.AddMember("components", _ComponentList)
-
-	ListComponentsResponse_nextToken = ListComponentsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListComponentVersionsRequest_arn = ListComponentVersionsRequest.AddMember("arn", _ComponentARN, &smithytraits.HTTPLabel{})
-
-	ListComponentVersionsRequest_maxResults = ListComponentVersionsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListComponentVersionsRequest_nextToken = ListComponentVersionsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListComponentVersionsResponse_componentVersions = ListComponentVersionsResponse.AddMember("componentVersions", _ComponentVersionList)
-
-	ListComponentVersionsResponse_nextToken = ListComponentVersionsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListCoreDevicesRequest_thingGroupArn = ListCoreDevicesRequest.AddMember("thingGroupArn", _ThingGroupARN, &smithytraits.HTTPQuery{Name: "thingGroupArn"})
-
-	ListCoreDevicesRequest_status = ListCoreDevicesRequest.AddMember("status", CoreDeviceStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListCoreDevicesRequest_maxResults = ListCoreDevicesRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCoreDevicesRequest_nextToken = ListCoreDevicesRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCoreDevicesRequest_runtime = ListCoreDevicesRequest.AddMember("runtime", _CoreDeviceRuntimeString, &smithytraits.HTTPQuery{Name: "runtime"})
-
-	ListCoreDevicesResponse_coreDevices = ListCoreDevicesResponse.AddMember("coreDevices", _CoreDevicesList)
-
-	ListCoreDevicesResponse_nextToken = ListCoreDevicesResponse.AddMember("nextToken", _NextTokenString)
-
-	ListDeploymentsRequest_targetArn = ListDeploymentsRequest.AddMember("targetArn", _TargetARN, &smithytraits.HTTPQuery{Name: "targetArn"})
-
-	ListDeploymentsRequest_historyFilter = ListDeploymentsRequest.AddMember("historyFilter", DeploymentHistoryFilter, &smithytraits.HTTPQuery{Name: "historyFilter"})
-
-	ListDeploymentsRequest_parentTargetArn = ListDeploymentsRequest.AddMember("parentTargetArn", _ThingGroupARN, &smithytraits.HTTPQuery{Name: "parentTargetArn"})
-
-	ListDeploymentsRequest_maxResults = ListDeploymentsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDeploymentsRequest_nextToken = ListDeploymentsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDeploymentsResponse_deployments = ListDeploymentsResponse.AddMember("deployments", _DeploymentList)
-
-	ListDeploymentsResponse_nextToken = ListDeploymentsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListEffectiveDeploymentsRequest_coreDeviceThingName = ListEffectiveDeploymentsRequest.AddMember("coreDeviceThingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	ListEffectiveDeploymentsRequest_maxResults = ListEffectiveDeploymentsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListEffectiveDeploymentsRequest_nextToken = ListEffectiveDeploymentsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListEffectiveDeploymentsResponse_effectiveDeployments = ListEffectiveDeploymentsResponse.AddMember("effectiveDeployments", _EffectiveDeploymentsList)
-
-	ListEffectiveDeploymentsResponse_nextToken = ListEffectiveDeploymentsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListInstalledComponentsRequest_coreDeviceThingName = ListInstalledComponentsRequest.AddMember("coreDeviceThingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	ListInstalledComponentsRequest_maxResults = ListInstalledComponentsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListInstalledComponentsRequest_nextToken = ListInstalledComponentsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListInstalledComponentsRequest_topologyFilter = ListInstalledComponentsRequest.AddMember("topologyFilter", InstalledComponentTopologyFilter, &smithytraits.HTTPQuery{Name: "topologyFilter"})
-
-	ListInstalledComponentsResponse_installedComponents = ListInstalledComponentsResponse.AddMember("installedComponents", _InstalledComponentList)
-
-	ListInstalledComponentsResponse_nextToken = ListInstalledComponentsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _GenericV2ARN, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ResolveComponentCandidatesRequest_platform = ResolveComponentCandidatesRequest.AddMember("platform", ComponentPlatform)
-
-	ResolveComponentCandidatesRequest_componentCandidates = ResolveComponentCandidatesRequest.AddMember("componentCandidates", _ComponentCandidateList)
-
-	ResolveComponentCandidatesResponse_resolvedComponentVersions = ResolveComponentCandidatesResponse.AddMember("resolvedComponentVersions", _ResolvedComponentVersionsList)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _GenericV2ARN, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _GenericV2ARN, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateConnectivityInfoRequest_thingName = UpdateConnectivityInfoRequest.AddMember("thingName", _CoreDeviceThingName, &smithytraits.JSONName{Name: "ThingName"},
-
-		&smithytraits.HTTPLabel{})
-
-	UpdateConnectivityInfoRequest_connectivityInfo = UpdateConnectivityInfoRequest.AddMember("connectivityInfo", _connectivityInfoList, &smithytraits.JSONName{Name: "ConnectivityInfo"})
-
-	UpdateConnectivityInfoResponse_version = UpdateConnectivityInfoResponse.AddMember("version", _String, &smithytraits.JSONName{Name: "Version"})
-
-	UpdateConnectivityInfoResponse_message = UpdateConnectivityInfoResponse.AddMember("message", _String, &smithytraits.JSONName{Name: "Message"})
-
+const blob = "" +
+	"BatchDisassociateClientDeviceFromCoreDeviceResponseBatchDisassociateClientDeviceFromCoreDeviceReques" +
+	"tListClientDevicesAssociatedWithCoreDeviceResponseBatchAssociateClientDeviceWithCoreDeviceResponseDi" +
+	"sassociateClientDeviceFromCoreDeviceErrorEntryListClientDevicesAssociatedWithCoreDeviceRequestBatchA" +
+	"ssociateClientDeviceWithCoreDeviceRequestDisassociateClientDeviceFromCoreDeviceEntryListDisassociate" +
+	"ClientDeviceFromCoreDeviceErrorListAssociateClientDeviceWithCoreDeviceErrorEntryAssociateClientDevic" +
+	"eWithCoreDeviceEntryListAssociateClientDeviceWithCoreDeviceErrorListDisassociateServiceRoleFromAccou" +
+	"ntResponseDisassociateServiceRoleFromAccountRequestInstalledComponentLifecycleStatusCodeListDeployme" +
+	"ntConfigurationValidationPolicyAssociateServiceRoleToAccountResponseDeploymentComponentUpdatePolicyA" +
+	"ctionAssociateServiceRoleToAccountRequestGetComponentVersionArtifactResponseIoTJobMinimumNumberOfExe" +
+	"cutedThingsEffectiveDeploymentExecutionStatusGetComponentVersionArtifactRequestResolveComponentCandi" +
+	"datesResponseComponentDeploymentSpecificationsRequestAlreadyInProgressExceptionResolveComponentCandi" +
+	"datesRequestEffectiveDeploymentErrorTypeListEffectiveDeploymentStatusDetailsGetServiceRoleForAccount" +
+	"ResponseInstalledComponentLifecycleStateInstalledComponentTopologyFilterIoTJobInProgressTimeoutInMin" +
+	"utesListEffectiveDeploymentsResponseDeploymentFailureHandlingPolicyGetServiceRoleForAccountRequestLi" +
+	"stEffectiveDeploymentsRequestListInstalledComponentsResponseComponentConfigurationPathListComponentD" +
+	"ependencyRequirementComponentVersionRequirementMapCreateComponentVersionResponseIoTJobAbortThreshold" +
+	"PercentageIoTJobRolloutBaseRatePerMinuteLambdaInputPayloadEncodingTypeListInstalledComponentsRequest" +
+	"UpdateConnectivityInfoResponseCreateComponentVersionRequestDeploymentIoTJobConfigurationEffectiveDep" +
+	"loymentErrorStackIoTJobExecutionsRolloutConfigListComponentVersionsResponseResolvedComponentVersions" +
+	"ListServiceQuotaExceededExceptionUpdateConnectivityInfoRequestconfigurationValidationPolicyComponent" +
+	"ConfigurationStringComponentConfigurationUpdateCoreDeviceArchitectureStringEffectiveDeploymentErrorC" +
+	"odeIoTJobExponentialRolloutRateIoTJobRolloutIncrementFactorListComponentVersionsRequestValidationExc" +
+	"eptionFieldListGetConnectivityInfoResponseListTagsForResourceResponseAssociatedClientDeviceListGetCo" +
+	"nnectivityInfoRequestIoTJobExecutionFailureTypeIoTJobRateIncreaseCriteriaLambdaEnvironmentVariablesL" +
+	"ambdaFilesystemPermissionLambdaFunctionRecipeSourceListTagsForResourceRequestinProgressTimeoutInMinu" +
+	"tesjobExecutionsRolloutConfigDescribeComponentResponseIoTJobMaxExecutionsPerMinLambdaExecutionParame" +
+	"tersResourceNotFoundExceptionValidationExceptionReasoncomponentLambdaParameterscoreDeviceExecutionSt" +
+	"atuslastStatusChangeTimestamplastStatusUpdateTimestampminNumberOfExecutedThingsresolvedComponentVers" +
+	"ionsCancelDeploymentResponseComponentVersionListItemComponentVisibilityScopeCoreDevicePlatformString" +
+	"CreateDeploymentResponseDescribeComponentRequestEffectiveDeploymentsListLambdaLinuxProcessParamsinpu" +
+	"tPayloadEncodingTypeCancelDeploymentRequestComponentDependencyTypeCoreDeviceRuntimeStringCreateDeplo" +
+	"ymentRequestDeleteCoreDeviceRequestDeleteDeploymentRequestDeploymentHistoryFilterFIELD_VALIDATION_FA" +
+	"ILEDInternalServerExceptionIoTJobAbortCriteriaListListCoreDevicesResponseListDeploymentsResponseasso" +
+	"ciatedClientDevicesnumberOfSucceededThingsComponentCandidateListComponentDependencyMapComponentLates" +
+	"tVersionComponentVersionStringDeleteComponentRequestInstalledComponentListListComponentsResponseList" +
+	"CoreDevicesRequestListDeploymentsRequestSKIP_NOTIFY_COMPONENTSlastInstallationSourcenumberOfNotified" +
+	"ThingsstatusTimeoutInSecondsAccessDeniedExceptionComponentPlatformListGetCoreDeviceResponseGetDeploy" +
+	"mentResponseLambdaContainerParamsLambdaEventSourceListLambdaEventSourceTypeLifecycleStateDetailsList" +
+	"ComponentsRequestPlatformAttributesMapUntagResourceResponsecomponentDependenciescomponentUpdatePolic" +
+	"yfailureHandlingPolicylastReportedTimestamplifecycleStateDetailsvendorGuidanceMessageCloudComponentS" +
+	"tatusDeploymentNameStringGREENGRASS_CONTAINERGetComponentResponseGetCoreDeviceRequestGetDeploymentRe" +
+	"questIoTJobNumberOfThingsSystemResourceLimitsUntagResourceRequestassociationTimestampconnectivityInf" +
+	"oListeffectiveDeploymentsenvironmentVariableslifecycleStatusCodesmaxIdleTimeInSecondsrateIncreaseCri" +
+	"teriasystemResourceLimitsCloudComponentStateComponentNameStringComponentVersionARNCoreDeviceThingNam" +
+	"eGetComponentRequestIoTJobTimeoutConfigLambdaIsolationModeTagResourceResponseThrottlingExceptioncomp" +
+	"onentCandidatesconfigurationUpdatecoreDeviceThingNameinstalledComponentsiotJobConfigurationthreshold" +
+	"PercentageversionRequirementsDeploymentPoliciesLambdaExecArgsListRecipeOutputFormatTagResourceReques" +
+	"tcomponentPlatformsdeploymentPolicieslinuxProcessParamsrecipeOutputFormatClientTokenStringConflictEx" +
+	"ceptionDefaultMaxResultsDescriptionStringIoTJobAbortActionIoTJobAbortConfigIsLatestForTargetLambdaDe" +
+	"viceMountLambdaVolumeMountRetryAfterSecondsUNKNOWN_OPERATIONbaseRatePerMinutecomponentVersionscreati" +
+	"onTimestampisLatestForTargetmaxInstancesCountmodifiedTimestampretryAfterSecondsComponentRunWithCoreD" +
+	"eviceStatusLambdaDeviceListLambdaVolumeListdeploymentStatusmaximumPerMinutetimeoutInSecondsCoreDevic" +
+	"esListIotEndpointTypeNextTokenStringOptionalBooleanOptionalIntegerPublisherStringcontainerParamsdest" +
+	"inationPathdisassociatedAtexponentialRateincrementFactoriotEndpointTypeparentTargetArnDeploymentList" +
+	"FileSystemPathNonEmptyStringNullableStringS3EndpointTypeVendorGuidancecomponentStatedependencyTypede" +
+	"ploymentNamelambdaFunctionmemorySizeInKBs3EndpointTypetopologyFilterPortNumberIntThingGroupARNaddGro" +
+	"upOwnercomponentNamehistoryFilterisolationModelatestVersionstatusDetailsthingGroupArntimeoutConfigCA" +
+	"NNOT_PARSEComponentARNDISCONTINUEDDeploymentIDGenericV2ARNGreengrassV2IoTThingNameNO_CONTAINERarchit" +
+	"ectureartifactNamecriteriaListdeploymentIderrorEntrieseventSourcesinlineRecipemaxQueueSizemountROSys" +
+	"fspreSignedUrlresourceTypeIN_PROGRESSLATEST_ONLYTopicStringabortConfigclientTokencoreDevicescoreVers" +
+	"iondeploymentsdescriptionfailureTypehostAddressresourceArnserviceCodewindowsUserDEPLOYABLEDEPRECATED" +
+	"DO_NOTHINGGGCVersionRecipeBlobTagKeyListattributescomponentserrorStackerrorTypesmaxResultspermission" +
+	"portNumberresourceIdrevisionIdsourcePathCOMPLETEDINITIATEDINSTALLEDIoTJobARNREQUESTEDSUCCEEDEDString" +
+	"MapTIMED_OUTTargetARNUNHEALTHYiotJobArnlambdaArnnextTokenplatformsposixUserpublisherquotaCodetargetA" +
+	"rnthingNameCANCELEDFINISHEDINACTIVEIOT_COREIoTJobIdREGIONALREJECTEDROLLBACKSTARTINGSTOPPINGTagValuee" +
+	"xecArgsiotJobIdmetadatastandardDELETEDERROREDPRIVATEPUB_SUBRUNNINGdevicesentriesmessageroleArnrunWit" +
+	"hruntimetagKeysvolumesBINARYBROKENGLOBALIsRootMemoryPUBLICQUEUEDTagMapactionerrorsfieldsisRootmember" +
+	"pinnedreasonOTHERmergeresetscopetopicvalueHARDJSONROOTSOFTUnitYAMLcodecpusfipsnamepathtagstypeCPUNEW" +
+	"arnkeyRW"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.greengrassv2", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 731, Target: 0, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 150, Target: 1, Traits: 1, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 2, Traits: 2, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2804, Target: 3, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1550, Target: 4, Traits: 4, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2900, Target: 5, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3430, Target: 6, Traits: 6, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3112, Target: 7, Traits: 7, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3135, Target: 8, Traits: 8, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2529, Target: 9, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 568, Target: 10, Traits: 10, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 841, Target: 11, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 841, Target: 12, Traits: 12, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2215, Target: 13, Traits: 13, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3670, Target: 14, Traits: 14, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3691, Target: 15, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1176, Target: 16, Traits: 16, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 101, Target: 17, Traits: 17, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3474, Target: 18, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1846, Target: 19, Traits: 19, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3250, Target: 20, Traits: 20, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3273, Target: 21, Traits: 21, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1304, Target: 22, Traits: 22, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1429, Target: 23, Traits: 23, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2242, Target: 24, Traits: 24, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 979, Target: 25, Traits: 25, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4458, Target: 26, Traits: 26, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3838, Target: 27, Traits: 27, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1700, Target: 28, Traits: 28, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 5758, Target: 29, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 3628, Target: 30, Traits: 30, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 480, Target: 32, Traits: 29, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6402, Target: 315, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 480, Target: 34, Traits: 29, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 32, Traits: 29, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 435, Target: 36, Traits: 29, StrLen: 45, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6402, Target: 315, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6766, Target: 384, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6580, Target: 384, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 524, Target: 40, Traits: 29, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 36, Traits: 29, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2269, Target: 42, Traits: 29, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6402, Target: 315, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4165, Target: 444, Traits: 29, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2269, Target: 45, Traits: 29, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 42, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4773, Target: 47, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4325, Target: 48, Traits: 29, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6276, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6249, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6080, Target: 655, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3198, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6090, Target: 655, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3985, Target: 54, Traits: 29, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5470, Target: 48, Traits: 29, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6580, Target: 384, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6676, Target: 424, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3964, Target: 460, Traits: 29, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3964, Target: 384, Traits: 29, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 660, Target: 60, Traits: 29, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 64, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5607, Target: 103, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5646, Target: 94, Traits: 29, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5710, Target: 64, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 986, Target: 65, Traits: 29, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5607, Target: 103, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4610, Target: 120, Traits: 29, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3342, Target: 69, Traits: 29, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 65, Traits: 29, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1460, Target: 71, Traits: 29, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1460, Target: 72, Traits: 29, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 71, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1991, Target: 74, Traits: 29, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2019, Target: 75, Traits: 29, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6717, Target: 74, Traits: 29, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6722, Target: 72, Traits: 29, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3364, Target: 78, Traits: 29, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6803, Target: 384, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6737, Target: 81, Traits: 29, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1490, Target: 81, Traits: 29, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4610, Target: 384, Traits: 29, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5484, Target: 84, Traits: 29, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3043, Target: 84, Traits: 29, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6742, Target: 655, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6754, Target: 655, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1013, Target: 87, Traits: 29, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4515, Target: 75, Traits: 29, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6594, Target: 109, Traits: 29, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1013, Target: 91, Traits: 29, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6803, Target: 384, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6737, Target: 87, Traits: 29, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3386, Target: 94, Traits: 29, StrLen: 22, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 113, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4994, Target: 444, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6014, Target: 384, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6375, Target: 384, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6357, Target: 107, Traits: 29, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3461, Target: 101, Traits: 29, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 60, Traits: 29, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4344, Target: 103, Traits: 29, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3649, Target: 104, Traits: 29, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6778, Target: 384, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6140, Target: 388, Traits: 29, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3649, Target: 107, Traits: 29, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 104, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5079, Target: 109, Traits: 29, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6366, Target: 384, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4305, Target: 427, Traits: 29, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6069, Target: 384, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4363, Target: 113, Traits: 29, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2828, Target: 114, Traits: 29, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 116, Traits: 29, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2828, Target: 116, Traits: 29, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5607, Target: 103, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6800, Target: 384, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1520, Target: 120, Traits: 29, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6803, Target: 384, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6737, Target: 384, Traits: 29, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3408, Target: 123, Traits: 29, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2852, Target: 124, Traits: 29, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6545, Target: 655, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6652, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4790, Target: 127, Traits: 31, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6210, Target: 423, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5914, Target: 423, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1706, Target: 131, Traits: 29, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 718, Target: 423, Traits: 32, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6036, Target: 423, Traits: 33, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6200, Target: 391, Traits: 34, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6515, Target: 423, Traits: 35, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4185, Target: 136, Traits: 29, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 131, Traits: 29, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 33, Target: 138, Traits: 29, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4534, Target: 153, Traits: 29, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3606, Target: 150, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2729, Target: 444, Traits: 29, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6357, Target: 146, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5794, Target: 145, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6601, Target: 147, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2047, Target: 145, Traits: 29, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2876, Target: 146, Traits: 29, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3066, Target: 147, Traits: 29, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5191, Target: 148, Traits: 29, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 138, Traits: 29, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5095, Target: 150, Traits: 29, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6323, Target: 655, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6321, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4382, Target: 153, Traits: 29, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6794, Target: 154, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 4807, Target: 155, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 692, Target: 156, Traits: 29, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6393, Target: 437, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6220, Target: 384, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5830, Target: 384, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5498, Target: 384, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4994, Target: 444, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5143, Target: 192, Traits: 29, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5011, Target: 316, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5371, Target: 438, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 768, Target: 165, Traits: 29, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5175, Target: 387, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6670, Target: 168, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 768, Target: 168, Traits: 29, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3545, Target: 655, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3540, Target: 655, Traits: 29, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 692, Target: 171, Traits: 29, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5175, Target: 387, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1336, Target: 173, Traits: 29, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6467, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6100, Target: 655, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3158, Target: 176, Traits: 29, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6262, Target: 655, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5937, Target: 655, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5734, Target: 179, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1759, Target: 180, Traits: 29, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2503, Target: 296, Traits: 29, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5959, Target: 280, Traits: 29, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5685, Target: 313, Traits: 29, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5386, Target: 184, Traits: 29, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 156, Traits: 29, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4005, Target: 186, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4005, Target: 187, Traits: 29, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4629, Target: 188, Traits: 29, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3901, Target: 173, Traits: 29, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3880, Target: 165, Traits: 29, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1962, Target: 171, Traits: 29, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1153, Target: 192, Traits: 29, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6429, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6240, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6411, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3198, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6427, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4824, Target: 198, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4824, Target: 199, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 341, Target: 200, Traits: 29, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6402, Target: 315, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 341, Target: 202, Traits: 29, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 200, Traits: 29, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 198, Target: 204, Traits: 29, StrLen: 48, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6402, Target: 315, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6766, Target: 384, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6580, Target: 384, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 388, Target: 208, Traits: 29, StrLen: 47, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 204, Traits: 29, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 911, Target: 210, Traits: 29, StrLen: 19, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5830, Target: 179, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5498, Target: 186, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6507, Target: 303, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6330, Target: 290, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6014, Target: 198, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6393, Target: 437, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2679, Target: 228, Traits: 29, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6706, Target: 393, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4994, Target: 444, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5045, Target: 444, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5659, Target: 239, Traits: 29, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2075, Target: 222, Traits: 29, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1788, Target: 223, Traits: 29, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 222, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1112, Target: 225, Traits: 29, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1112, Target: 226, Traits: 29, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 225, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 911, Target: 228, Traits: 29, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5926, Target: 655, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6658, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3198, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6240, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6303, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6411, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6459, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6285, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2948, Target: 237, Traits: 29, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 210, Traits: 29, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1144, Target: 239, Traits: 29, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6160, Target: 223, Traits: 29, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6170, Target: 226, Traits: 29, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5400, Target: 242, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5746, Target: 243, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6110, Target: 244, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 651, Target: 245, Traits: 29, StrLen: 18, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5607, Target: 103, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3943, Target: 255, Traits: 29, StrLen: 14, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3943, Target: 381, Traits: 29, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6688, Target: 317, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2704, Target: 444, Traits: 29, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3922, Target: 444, Traits: 29, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3562, Target: 384, Traits: 29, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4245, Target: 265, Traits: 29, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1208, Target: 255, Traits: 29, StrLen: 32, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6797, Target: 655, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6258, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6475, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6559, Target: 655, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6483, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6538, Target: 655, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6628, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6419, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 651, Target: 264, Traits: 29, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 651, Target: 265, Traits: 29, StrLen: 41, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 264, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3452, Target: 267, Traits: 29, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 245, Traits: 29, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1240, Target: 269, Traits: 29, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6262, Target: 655, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6750, Target: 655, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3204, Target: 272, Traits: 36, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5062, Target: 413, Traits: 37, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5206, Target: 275, Traits: 29, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6774, Target: 655, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6523, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4841, Target: 278, Traits: 29, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6411, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4858, Target: 280, Traits: 29, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5818, Target: 287, Traits: 29, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3227, Target: 282, Traits: 29, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6025, Target: 291, Traits: 29, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6670, Target: 278, Traits: 29, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4591, Target: 289, Traits: 29, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2754, Target: 306, Traits: 29, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3227, Target: 287, Traits: 29, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 282, Traits: 29, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1580, Target: 289, Traits: 29, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 6267, Target: 290, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2321, Target: 291, Traits: 29, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3198, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6459, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6303, Target: 655, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6262, Target: 655, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1817, Target: 296, Traits: 29, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5326, Target: 299, Traits: 29, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5159, Target: 305, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2103, Target: 299, Traits: 29, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4960, Target: 311, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5341, Target: 312, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 4285, Target: 308, Traits: 29, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6443, Target: 303, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1272, Target: 304, Traits: 29, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 2554, Target: 305, Traits: 29, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 876, Target: 306, Traits: 29, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4105, Target: 307, Traits: 29, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2347, Target: 308, Traits: 29, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3584, Target: 307, Traits: 29, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3319, Target: 307, Traits: 29, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1610, Target: 311, Traits: 29, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2131, Target: 312, Traits: 29, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 4420, Target: 313, Traits: 29, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2477, Target: 304, Traits: 29, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5770, Target: 315, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4875, Target: 316, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 6640, Target: 317, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 3712, Target: 318, Traits: 29, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5526, Target: 387, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5890, Target: 386, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 6615, Target: 374, Traits: 29, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6566, Target: 323, Traits: 29, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5111, Target: 323, Traits: 29, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 325, Traits: 29, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4892, Target: 325, Traits: 29, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6782, Target: 242, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6190, Target: 355, Traits: 29, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5594, Target: 386, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2373, Target: 329, Traits: 29, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6803, Target: 384, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6737, Target: 423, Traits: 29, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3733, Target: 332, Traits: 29, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6732, Target: 445, Traits: 29, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6790, Target: 337, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3733, Target: 335, Traits: 29, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 332, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3754, Target: 337, Traits: 29, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6552, Target: 655, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6435, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4647, Target: 340, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4647, Target: 341, Traits: 29, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 340, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2579, Target: 343, Traits: 29, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5854, Target: 335, Traits: 29, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5878, Target: 387, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5028, Target: 387, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4265, Target: 387, Traits: 29, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5175, Target: 387, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3606, Target: 387, Traits: 29, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6700, Target: 386, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2996, Target: 365, Traits: 29, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6499, Target: 341, Traits: 29, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4225, Target: 329, Traits: 29, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4737, Target: 371, Traits: 29, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2399, Target: 355, Traits: 29, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5895, Target: 655, Traits: 29, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6806, Target: 655, Traits: 29, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2425, Target: 358, Traits: 29, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6339, Target: 384, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5607, Target: 103, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4701, Target: 107, Traits: 29, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3859, Target: 78, Traits: 29, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2654, Target: 343, Traits: 29, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1640, Target: 365, Traits: 29, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6746, Target: 655, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6622, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4439, Target: 368, Traits: 29, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4025, Target: 655, Traits: 29, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5782, Target: 655, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2972, Target: 371, Traits: 29, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5633, Target: 368, Traits: 29, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5281, Target: 318, Traits: 29, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5127, Target: 374, Traits: 29, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 376, Traits: 29, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4909, Target: 376, Traits: 29, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6230, Target: 242, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5296, Target: 242, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6190, Target: 355, Traits: 29, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5594, Target: 386, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3775, Target: 381, Traits: 29, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6646, Target: 382, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 5221, Target: 383, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5414, Target: 384, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5428, Target: 385, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5236, Target: 386, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 5251, Target: 387, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3817, Target: 388, Traits: 29, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6803, Target: 384, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6737, Target: 384, Traits: 29, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5568, Target: 391, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 5266, Target: 392, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2648, Target: 393, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6120, Target: 394, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 4665, Target: 395, Traits: 29, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6746, Target: 655, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6762, Target: 655, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1046, Target: 398, Traits: 38, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1875, Target: 400, Traits: 29, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 113, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5607, Target: 103, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4755, Target: 394, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 3964, Target: 460, Traits: 29, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6580, Target: 384, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1875, Target: 407, Traits: 29, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 400, Traits: 29, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2604, Target: 409, Traits: 39, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6210, Target: 423, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5914, Target: 423, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4926, Target: 413, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 5442, Target: 414, Traits: 29, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6451, Target: 655, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6634, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1904, Target: 417, Traits: 40, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6210, Target: 423, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5914, Target: 423, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6384, Target: 423, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6058, Target: 423, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2013, Target: 423, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6294, Target: 424, Traits: 29, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6803, Target: 384, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6737, Target: 384, Traits: 29, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4125, Target: 427, Traits: 29, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5526, Target: 382, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 6770, Target: 154, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 6130, Target: 430, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6130, Target: 431, Traits: 29, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 430, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6664, Target: 433, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6803, Target: 430, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6737, Target: 436, Traits: 29, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6491, Target: 436, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6312, Target: 437, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5581, Target: 438, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4477, Target: 439, Traits: 41, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6384, Target: 423, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6058, Target: 423, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5062, Target: 413, Traits: 37, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2720, Target: 444, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 5948, Target: 445, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2187, Target: 446, Traits: 38, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6706, Target: 455, Traits: 29, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6682, Target: 453, Traits: 29, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2187, Target: 450, Traits: 29, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6778, Target: 423, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6580, Target: 423, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2187, Target: 453, Traits: 29, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 6694, Target: 450, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2629, Target: 455, Traits: 29, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4943, Target: 655, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5698, Target: 655, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3181, Target: 655, Traits: 29, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6712, Target: 655, Traits: 29, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5456, Target: 460, Traits: 29, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6429, Target: 655, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5722, Target: 655, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6531, Target: 655, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 805, Target: 464, Traits: 29, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6587, Target: 423, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 731, Target: 466, Traits: 29, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5314, Target: 423, Traits: 43, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 294, Target: 468, Traits: 29, StrLen: 47, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6573, Target: 34, Traits: 29, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4534, Target: 315, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 150, Target: 471, Traits: 29, StrLen: 48, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5842, Target: 40, Traits: 29, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 51, Target: 473, Traits: 29, StrLen: 50, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6573, Target: 202, Traits: 29, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4534, Target: 315, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 476, Traits: 29, StrLen: 51, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5842, Target: 208, Traits: 29, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3020, Target: 478, Traits: 29, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5830, Target: 384, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2804, Target: 480, Traits: 29, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6580, Target: 384, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1730, Target: 482, Traits: 29, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5866, Target: 394, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 5512, Target: 358, Traits: 29, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6786, Target: 433, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 5970, Target: 47, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1550, Target: 487, Traits: 29, StrLen: 30, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 113, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5607, Target: 103, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4994, Target: 444, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3606, Target: 54, Traits: 29, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3089, Target: 493, Traits: 29, StrLen: 23, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6393, Target: 437, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5498, Target: 187, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6150, Target: 91, Traits: 29, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4572, Target: 180, Traits: 29, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4719, Target: 188, Traits: 29, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5371, Target: 438, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6786, Target: 433, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 5970, Target: 47, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2900, Target: 502, Traits: 29, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5830, Target: 384, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6507, Target: 384, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6330, Target: 290, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3430, Target: 506, Traits: 29, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 113, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3112, Target: 508, Traits: 29, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4534, Target: 153, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3135, Target: 510, Traits: 29, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5830, Target: 384, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2924, Target: 512, Traits: 29, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 113, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2529, Target: 514, Traits: 29, StrLen: 25, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 113, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5607, Target: 103, Traits: 29, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 123, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4994, Target: 444, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6375, Target: 392, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6014, Target: 199, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3606, Target: 54, Traits: 29, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6357, Target: 107, Traits: 29, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6786, Target: 433, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 610, Target: 524, Traits: 29, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 568, Target: 525, Traits: 29, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5311, Target: 423, Traits: 45, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4401, Target: 527, Traits: 29, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4755, Target: 395, Traits: 46, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6800, Target: 113, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4045, Target: 530, Traits: 29, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4755, Target: 395, Traits: 29, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4755, Target: 394, Traits: 29, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 6786, Target: 433, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 945, Target: 534, Traits: 29, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 113, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5806, Target: 384, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5540, Target: 414, Traits: 47, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5356, Target: 275, Traits: 48, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 841, Target: 539, Traits: 29, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5902, Target: 384, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2295, Target: 541, Traits: 29, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6402, Target: 153, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2215, Target: 543, Traits: 29, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4185, Target: 136, Traits: 49, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6580, Target: 423, Traits: 50, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4065, Target: 546, Traits: 29, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4534, Target: 153, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3670, Target: 548, Traits: 29, StrLen: 21, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4534, Target: 153, Traits: 29, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5992, Target: 244, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6357, Target: 146, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5794, Target: 145, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6601, Target: 147, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3606, Target: 150, Traits: 29, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2729, Target: 444, Traits: 29, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6786, Target: 433, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4085, Target: 557, Traits: 29, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5830, Target: 384, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3691, Target: 559, Traits: 29, StrLen: 21, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6393, Target: 437, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6220, Target: 384, Traits: 29, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5830, Target: 384, Traits: 29, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5498, Target: 385, Traits: 29, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5143, Target: 192, Traits: 29, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6507, Target: 385, Traits: 29, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6330, Target: 290, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6150, Target: 91, Traits: 29, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4719, Target: 188, Traits: 29, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4572, Target: 180, Traits: 29, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4994, Target: 444, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5011, Target: 316, Traits: 29, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5371, Target: 438, Traits: 29, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6786, Target: 433, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1367, Target: 574, Traits: 29, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1176, Target: 575, Traits: 29, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5314, Target: 423, Traits: 43, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6587, Target: 423, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 246, Target: 578, Traits: 29, StrLen: 48, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4534, Target: 315, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6180, Target: 155, Traits: 51, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 101, Target: 582, Traits: 29, StrLen: 49, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3296, Target: 45, Traits: 29, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3796, Target: 585, Traits: 29, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6727, Target: 124, Traits: 53, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6180, Target: 155, Traits: 51, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3474, Target: 589, Traits: 29, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6150, Target: 101, Traits: 29, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2159, Target: 592, Traits: 29, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6800, Target: 64, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6180, Target: 155, Traits: 51, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1846, Target: 596, Traits: 29, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4977, Target: 114, Traits: 29, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3496, Target: 599, Traits: 29, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5672, Target: 438, Traits: 54, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3606, Target: 150, Traits: 55, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6180, Target: 155, Traits: 51, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6601, Target: 147, Traits: 56, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3250, Target: 605, Traits: 29, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5981, Target: 148, Traits: 29, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3518, Target: 608, Traits: 29, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6393, Target: 437, Traits: 57, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5620, Target: 176, Traits: 58, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5371, Target: 438, Traits: 59, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6180, Target: 155, Traits: 51, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3273, Target: 614, Traits: 29, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6003, Target: 184, Traits: 29, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1398, Target: 617, Traits: 29, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4534, Target: 153, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6180, Target: 155, Traits: 51, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1304, Target: 621, Traits: 29, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4205, Target: 237, Traits: 29, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1670, Target: 624, Traits: 29, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4534, Target: 153, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6180, Target: 155, Traits: 51, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5554, Target: 269, Traits: 60, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1429, Target: 629, Traits: 29, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4553, Target: 267, Traits: 29, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 6348, Target: 383, Traits: 29, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2451, Target: 632, Traits: 29, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6047, Target: 243, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2242, Target: 634, Traits: 29, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6786, Target: 433, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1079, Target: 636, Traits: 29, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6357, Target: 104, Traits: 29, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4496, Target: 69, Traits: 29, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 979, Target: 639, Traits: 29, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2779, Target: 407, Traits: 29, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4683, Target: 641, Traits: 29, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6047, Target: 243, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6786, Target: 433, Traits: 29, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4458, Target: 644, Traits: 29, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4145, Target: 645, Traits: 29, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6047, Target: 243, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6608, Target: 431, Traits: 61, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3838, Target: 648, Traits: 29, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1933, Target: 649, Traits: 29, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 6402, Target: 153, Traits: 62, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4185, Target: 136, Traits: 49, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1700, Target: 652, Traits: 29, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4610, Target: 423, Traits: 63, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6580, Target: 423, Traits: 50, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6758, Target: 655, Traits: 29, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/greengrass/servicerole",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/greengrass/v2/deployments/{deploymentId}/cancel",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/greengrass/v2/createComponentVersion",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/greengrass/v2/deployments",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/greengrass/v2/components/{arn}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/greengrass/v2/deployments/{deploymentId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/components/{arn}/metadata",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/greengrass/servicerole",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/components/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/components/{arn}/artifacts/{artifactName+}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/things/{thingName}/connectivityInfo",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/deployments/{deploymentId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/servicerole",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/components",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/components/{arn}/versions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/coreDevices",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/deployments",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/effectiveDeployments",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/installedComponents",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/greengrass/v2/resolveComponentCandidates",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/greengrass/things/{thingName}/connectivityInfo",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Id"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "HostAddress"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "PortNumber"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Metadata"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "RoleArn"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "AssociatedAt"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "DisassociatedAt"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "recipeOutputFormat"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "s3EndpointType"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-iot-endpoint-type"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ConnectivityInfo"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Message"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "scope"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "thingGroupArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "runtime"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "targetArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "historyFilter"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "parentTargetArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "topologyFilter"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ThingName"}, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x5},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Version"}}, DirectMask: 0x1},
+	},
 }
+
+var handles = [656]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+}
+
+var AssociateServiceRoleToAccount = &handles[0]
+
+var BatchAssociateClientDeviceWithCoreDevice = &handles[1]
+
+var BatchDisassociateClientDeviceFromCoreDevice = &handles[2]
+
+var CancelDeployment = &handles[3]
+
+var CreateComponentVersion = &handles[4]
+
+var CreateDeployment = &handles[5]
+
+var DeleteComponent = &handles[6]
+
+var DeleteCoreDevice = &handles[7]
+
+var DeleteDeployment = &handles[8]
+
+var DescribeComponent = &handles[9]
+
+var DisassociateServiceRoleFromAccount = &handles[10]
+
+var GetComponent = &handles[11]
+
+var GetComponentVersionArtifact = &handles[12]
+
+var GetConnectivityInfo = &handles[13]
+
+var GetCoreDevice = &handles[14]
+
+var GetDeployment = &handles[15]
+
+var GetServiceRoleForAccount = &handles[16]
+
+var ListClientDevicesAssociatedWithCoreDevice = &handles[17]
+
+var ListComponents = &handles[18]
+
+var ListComponentVersions = &handles[19]
+
+var ListCoreDevices = &handles[20]
+
+var ListDeployments = &handles[21]
+
+var ListEffectiveDeployments = &handles[22]
+
+var ListInstalledComponents = &handles[23]
+
+var ListTagsForResource = &handles[24]
+
+var ResolveComponentCandidates = &handles[25]
+
+var TagResource = &handles[26]
+
+var UntagResource = &handles[27]
+
+var UpdateConnectivityInfo = &handles[28]
+
+var _GreengrassV2 = &handles[29]
+
+var AccessDeniedException = &handles[30]
+var AccessDeniedException_message = &handles[31]
+
+var AssociateClientDeviceWithCoreDeviceEntry = &handles[32]
+var AssociateClientDeviceWithCoreDeviceEntry_thingName = &handles[33]
+
+var _AssociateClientDeviceWithCoreDeviceEntryList = &handles[34]
+var _AssociateClientDeviceWithCoreDeviceEntryList_member = &handles[35]
+
+var AssociateClientDeviceWithCoreDeviceErrorEntry = &handles[36]
+var AssociateClientDeviceWithCoreDeviceErrorEntry_thingName = &handles[37]
+var AssociateClientDeviceWithCoreDeviceErrorEntry_code = &handles[38]
+var AssociateClientDeviceWithCoreDeviceErrorEntry_message = &handles[39]
+
+var _AssociateClientDeviceWithCoreDeviceErrorList = &handles[40]
+var _AssociateClientDeviceWithCoreDeviceErrorList_member = &handles[41]
+
+var AssociatedClientDevice = &handles[42]
+var AssociatedClientDevice_thingName = &handles[43]
+var AssociatedClientDevice_associationTimestamp = &handles[44]
+
+var _AssociatedClientDeviceList = &handles[45]
+var _AssociatedClientDeviceList_member = &handles[46]
+
+var _ClientTokenString = &handles[47]
+
+var CloudComponentState = &handles[48]
+var CloudComponentState_REQUESTED = &handles[49]
+var CloudComponentState_INITIATED = &handles[50]
+var CloudComponentState_DEPLOYABLE = &handles[51]
+var CloudComponentState_FAILED = &handles[52]
+var CloudComponentState_DEPRECATED = &handles[53]
+
+var CloudComponentStatus = &handles[54]
+var CloudComponentStatus_componentState = &handles[55]
+var CloudComponentStatus_message = &handles[56]
+var CloudComponentStatus_errors = &handles[57]
+var CloudComponentStatus_vendorGuidance = &handles[58]
+var CloudComponentStatus_vendorGuidanceMessage = &handles[59]
+
+var Component = &handles[60]
+var Component_arn = &handles[61]
+var Component_componentName = &handles[62]
+var Component_latestVersion = &handles[63]
+
+var _ComponentARN = &handles[64]
+
+var ComponentCandidate = &handles[65]
+var ComponentCandidate_componentName = &handles[66]
+var ComponentCandidate_componentVersion = &handles[67]
+var ComponentCandidate_versionRequirements = &handles[68]
+
+var _ComponentCandidateList = &handles[69]
+var _ComponentCandidateList_member = &handles[70]
+
+var _ComponentConfigurationPath = &handles[71]
+
+var _ComponentConfigurationPathList = &handles[72]
+var _ComponentConfigurationPathList_member = &handles[73]
+
+var _ComponentConfigurationString = &handles[74]
+
+var ComponentConfigurationUpdate = &handles[75]
+var ComponentConfigurationUpdate_merge = &handles[76]
+var ComponentConfigurationUpdate_reset = &handles[77]
+
+var _ComponentDependencyMap = &handles[78]
+var _ComponentDependencyMap_key = &handles[79]
+var _ComponentDependencyMap_value = &handles[80]
+
+var ComponentDependencyRequirement = &handles[81]
+var ComponentDependencyRequirement_versionRequirement = &handles[82]
+var ComponentDependencyRequirement_dependencyType = &handles[83]
+
+var ComponentDependencyType = &handles[84]
+var ComponentDependencyType_HARD = &handles[85]
+var ComponentDependencyType_SOFT = &handles[86]
+
+var ComponentDeploymentSpecification = &handles[87]
+var ComponentDeploymentSpecification_componentVersion = &handles[88]
+var ComponentDeploymentSpecification_configurationUpdate = &handles[89]
+var ComponentDeploymentSpecification_runWith = &handles[90]
+
+var _ComponentDeploymentSpecifications = &handles[91]
+var _ComponentDeploymentSpecifications_key = &handles[92]
+var _ComponentDeploymentSpecifications_value = &handles[93]
+
+var ComponentLatestVersion = &handles[94]
+var ComponentLatestVersion_arn = &handles[95]
+var ComponentLatestVersion_componentVersion = &handles[96]
+var ComponentLatestVersion_creationTimestamp = &handles[97]
+var ComponentLatestVersion_description = &handles[98]
+var ComponentLatestVersion_publisher = &handles[99]
+var ComponentLatestVersion_platforms = &handles[100]
+
+var _ComponentList = &handles[101]
+var _ComponentList_member = &handles[102]
+
+var _ComponentNameString = &handles[103]
+
+var ComponentPlatform = &handles[104]
+var ComponentPlatform_name = &handles[105]
+var ComponentPlatform_attributes = &handles[106]
+
+var _ComponentPlatformList = &handles[107]
+var _ComponentPlatformList_member = &handles[108]
+
+var ComponentRunWith = &handles[109]
+var ComponentRunWith_posixUser = &handles[110]
+var ComponentRunWith_systemResourceLimits = &handles[111]
+var ComponentRunWith_windowsUser = &handles[112]
+
+var _ComponentVersionARN = &handles[113]
+
+var _ComponentVersionList = &handles[114]
+var _ComponentVersionList_member = &handles[115]
+
+var ComponentVersionListItem = &handles[116]
+var ComponentVersionListItem_componentName = &handles[117]
+var ComponentVersionListItem_componentVersion = &handles[118]
+var ComponentVersionListItem_arn = &handles[119]
+
+var _ComponentVersionRequirementMap = &handles[120]
+var _ComponentVersionRequirementMap_key = &handles[121]
+var _ComponentVersionRequirementMap_value = &handles[122]
+
+var _ComponentVersionString = &handles[123]
+
+var ComponentVisibilityScope = &handles[124]
+var ComponentVisibilityScope_PRIVATE = &handles[125]
+var ComponentVisibilityScope_PUBLIC = &handles[126]
+
+var ConflictException = &handles[127]
+var ConflictException_message = &handles[128]
+var ConflictException_resourceId = &handles[129]
+var ConflictException_resourceType = &handles[130]
+
+var ConnectivityInfo = &handles[131]
+var ConnectivityInfo_id = &handles[132]
+var ConnectivityInfo_hostAddress = &handles[133]
+var ConnectivityInfo_portNumber = &handles[134]
+var ConnectivityInfo_metadata = &handles[135]
+
+var _connectivityInfoList = &handles[136]
+var _connectivityInfoList_member = &handles[137]
+
+var CoreDevice = &handles[138]
+var CoreDevice_coreDeviceThingName = &handles[139]
+var CoreDevice_status = &handles[140]
+var CoreDevice_lastStatusUpdateTimestamp = &handles[141]
+var CoreDevice_platform = &handles[142]
+var CoreDevice_architecture = &handles[143]
+var CoreDevice_runtime = &handles[144]
+
+var _CoreDeviceArchitectureString = &handles[145]
+
+var _CoreDevicePlatformString = &handles[146]
+
+var _CoreDeviceRuntimeString = &handles[147]
+
+var _CoreDevicesList = &handles[148]
+var _CoreDevicesList_member = &handles[149]
+
+var CoreDeviceStatus = &handles[150]
+var CoreDeviceStatus_HEALTHY = &handles[151]
+var CoreDeviceStatus_UNHEALTHY = &handles[152]
+
+var _CoreDeviceThingName = &handles[153]
+
+var _CPU = &handles[154]
+
+var _DefaultMaxResults = &handles[155]
+
+var Deployment = &handles[156]
+var Deployment_targetArn = &handles[157]
+var Deployment_revisionId = &handles[158]
+var Deployment_deploymentId = &handles[159]
+var Deployment_deploymentName = &handles[160]
+var Deployment_creationTimestamp = &handles[161]
+var Deployment_deploymentStatus = &handles[162]
+var Deployment_isLatestForTarget = &handles[163]
+var Deployment_parentTargetArn = &handles[164]
+
+var DeploymentComponentUpdatePolicy = &handles[165]
+var DeploymentComponentUpdatePolicy_timeoutInSeconds = &handles[166]
+var DeploymentComponentUpdatePolicy_action = &handles[167]
+
+var DeploymentComponentUpdatePolicyAction = &handles[168]
+var DeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS = &handles[169]
+var DeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS = &handles[170]
+
+var DeploymentConfigurationValidationPolicy = &handles[171]
+var DeploymentConfigurationValidationPolicy_timeoutInSeconds = &handles[172]
+
+var DeploymentFailureHandlingPolicy = &handles[173]
+var DeploymentFailureHandlingPolicy_ROLLBACK = &handles[174]
+var DeploymentFailureHandlingPolicy_DO_NOTHING = &handles[175]
+
+var DeploymentHistoryFilter = &handles[176]
+var DeploymentHistoryFilter_ALL = &handles[177]
+var DeploymentHistoryFilter_LATEST_ONLY = &handles[178]
+
+var _DeploymentID = &handles[179]
+
+var DeploymentIoTJobConfiguration = &handles[180]
+var DeploymentIoTJobConfiguration_jobExecutionsRolloutConfig = &handles[181]
+var DeploymentIoTJobConfiguration_abortConfig = &handles[182]
+var DeploymentIoTJobConfiguration_timeoutConfig = &handles[183]
+
+var _DeploymentList = &handles[184]
+var _DeploymentList_member = &handles[185]
+
+var _DeploymentName = &handles[186]
+
+var _DeploymentNameString = &handles[187]
+
+var DeploymentPolicies = &handles[188]
+var DeploymentPolicies_failureHandlingPolicy = &handles[189]
+var DeploymentPolicies_componentUpdatePolicy = &handles[190]
+var DeploymentPolicies_configurationValidationPolicy = &handles[191]
+
+var DeploymentStatus = &handles[192]
+var DeploymentStatus_ACTIVE = &handles[193]
+var DeploymentStatus_COMPLETED = &handles[194]
+var DeploymentStatus_CANCELED = &handles[195]
+var DeploymentStatus_FAILED = &handles[196]
+var DeploymentStatus_INACTIVE = &handles[197]
+
+var _Description = &handles[198]
+
+var _DescriptionString = &handles[199]
+
+var DisassociateClientDeviceFromCoreDeviceEntry = &handles[200]
+var DisassociateClientDeviceFromCoreDeviceEntry_thingName = &handles[201]
+
+var _DisassociateClientDeviceFromCoreDeviceEntryList = &handles[202]
+var _DisassociateClientDeviceFromCoreDeviceEntryList_member = &handles[203]
+
+var DisassociateClientDeviceFromCoreDeviceErrorEntry = &handles[204]
+var DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName = &handles[205]
+var DisassociateClientDeviceFromCoreDeviceErrorEntry_code = &handles[206]
+var DisassociateClientDeviceFromCoreDeviceErrorEntry_message = &handles[207]
+
+var _DisassociateClientDeviceFromCoreDeviceErrorList = &handles[208]
+var _DisassociateClientDeviceFromCoreDeviceErrorList_member = &handles[209]
+
+var EffectiveDeployment = &handles[210]
+var EffectiveDeployment_deploymentId = &handles[211]
+var EffectiveDeployment_deploymentName = &handles[212]
+var EffectiveDeployment_iotJobId = &handles[213]
+var EffectiveDeployment_iotJobArn = &handles[214]
+var EffectiveDeployment_description = &handles[215]
+var EffectiveDeployment_targetArn = &handles[216]
+var EffectiveDeployment_coreDeviceExecutionStatus = &handles[217]
+var EffectiveDeployment_reason = &handles[218]
+var EffectiveDeployment_creationTimestamp = &handles[219]
+var EffectiveDeployment_modifiedTimestamp = &handles[220]
+var EffectiveDeployment_statusDetails = &handles[221]
+
+var _EffectiveDeploymentErrorCode = &handles[222]
+
+var _EffectiveDeploymentErrorStack = &handles[223]
+var _EffectiveDeploymentErrorStack_member = &handles[224]
+
+var _EffectiveDeploymentErrorType = &handles[225]
+
+var _EffectiveDeploymentErrorTypeList = &handles[226]
+var _EffectiveDeploymentErrorTypeList_member = &handles[227]
+
+var EffectiveDeploymentExecutionStatus = &handles[228]
+var EffectiveDeploymentExecutionStatus_IN_PROGRESS = &handles[229]
+var EffectiveDeploymentExecutionStatus_QUEUED = &handles[230]
+var EffectiveDeploymentExecutionStatus_FAILED = &handles[231]
+var EffectiveDeploymentExecutionStatus_COMPLETED = &handles[232]
+var EffectiveDeploymentExecutionStatus_TIMED_OUT = &handles[233]
+var EffectiveDeploymentExecutionStatus_CANCELED = &handles[234]
+var EffectiveDeploymentExecutionStatus_REJECTED = &handles[235]
+var EffectiveDeploymentExecutionStatus_SUCCEEDED = &handles[236]
+
+var _EffectiveDeploymentsList = &handles[237]
+var _EffectiveDeploymentsList_member = &handles[238]
+
+var EffectiveDeploymentStatusDetails = &handles[239]
+var EffectiveDeploymentStatusDetails_errorStack = &handles[240]
+var EffectiveDeploymentStatusDetails_errorTypes = &handles[241]
+
+var _FileSystemPath = &handles[242]
+
+var _GenericV2ARN = &handles[243]
+
+var _GGCVersion = &handles[244]
+
+var InstalledComponent = &handles[245]
+var InstalledComponent_componentName = &handles[246]
+var InstalledComponent_componentVersion = &handles[247]
+var InstalledComponent_lifecycleState = &handles[248]
+var InstalledComponent_lifecycleStateDetails = &handles[249]
+var InstalledComponent_isRoot = &handles[250]
+var InstalledComponent_lastStatusChangeTimestamp = &handles[251]
+var InstalledComponent_lastReportedTimestamp = &handles[252]
+var InstalledComponent_lastInstallationSource = &handles[253]
+var InstalledComponent_lifecycleStatusCodes = &handles[254]
+
+var InstalledComponentLifecycleState = &handles[255]
+var InstalledComponentLifecycleState_NEW = &handles[256]
+var InstalledComponentLifecycleState_INSTALLED = &handles[257]
+var InstalledComponentLifecycleState_STARTING = &handles[258]
+var InstalledComponentLifecycleState_RUNNING = &handles[259]
+var InstalledComponentLifecycleState_STOPPING = &handles[260]
+var InstalledComponentLifecycleState_ERRORED = &handles[261]
+var InstalledComponentLifecycleState_BROKEN = &handles[262]
+var InstalledComponentLifecycleState_FINISHED = &handles[263]
+
+var _InstalledComponentLifecycleStatusCode = &handles[264]
+
+var _InstalledComponentLifecycleStatusCodeList = &handles[265]
+var _InstalledComponentLifecycleStatusCodeList_member = &handles[266]
+
+var _InstalledComponentList = &handles[267]
+var _InstalledComponentList_member = &handles[268]
+
+var InstalledComponentTopologyFilter = &handles[269]
+var InstalledComponentTopologyFilter_ALL = &handles[270]
+var InstalledComponentTopologyFilter_ROOT = &handles[271]
+
+var InternalServerException = &handles[272]
+var InternalServerException_message = &handles[273]
+var InternalServerException_retryAfterSeconds = &handles[274]
+
+var IotEndpointType = &handles[275]
+var IotEndpointType_fips = &handles[276]
+var IotEndpointType_standard = &handles[277]
+
+var IoTJobAbortAction = &handles[278]
+var IoTJobAbortAction_CANCEL = &handles[279]
+
+var IoTJobAbortConfig = &handles[280]
+var IoTJobAbortConfig_criteriaList = &handles[281]
+
+var IoTJobAbortCriteria = &handles[282]
+var IoTJobAbortCriteria_failureType = &handles[283]
+var IoTJobAbortCriteria_action = &handles[284]
+var IoTJobAbortCriteria_thresholdPercentage = &handles[285]
+var IoTJobAbortCriteria_minNumberOfExecutedThings = &handles[286]
+
+var _IoTJobAbortCriteriaList = &handles[287]
+var _IoTJobAbortCriteriaList_member = &handles[288]
+
+var _IoTJobAbortThresholdPercentage = &handles[289]
+
+var _IoTJobARN = &handles[290]
+
+var IoTJobExecutionFailureType = &handles[291]
+var IoTJobExecutionFailureType_FAILED = &handles[292]
+var IoTJobExecutionFailureType_REJECTED = &handles[293]
+var IoTJobExecutionFailureType_TIMED_OUT = &handles[294]
+var IoTJobExecutionFailureType_ALL = &handles[295]
+
+var IoTJobExecutionsRolloutConfig = &handles[296]
+var IoTJobExecutionsRolloutConfig_exponentialRate = &handles[297]
+var IoTJobExecutionsRolloutConfig_maximumPerMinute = &handles[298]
+
+var IoTJobExponentialRolloutRate = &handles[299]
+var IoTJobExponentialRolloutRate_baseRatePerMinute = &handles[300]
+var IoTJobExponentialRolloutRate_incrementFactor = &handles[301]
+var IoTJobExponentialRolloutRate_rateIncreaseCriteria = &handles[302]
+
+var _IoTJobId = &handles[303]
+
+var _IoTJobInProgressTimeoutInMinutes = &handles[304]
+
+var _IoTJobMaxExecutionsPerMin = &handles[305]
+
+var _IoTJobMinimumNumberOfExecutedThings = &handles[306]
+
+var _IoTJobNumberOfThings = &handles[307]
+
+var IoTJobRateIncreaseCriteria = &handles[308]
+var IoTJobRateIncreaseCriteria_numberOfNotifiedThings = &handles[309]
+var IoTJobRateIncreaseCriteria_numberOfSucceededThings = &handles[310]
+
+var _IoTJobRolloutBaseRatePerMinute = &handles[311]
+
+var _IoTJobRolloutIncrementFactor = &handles[312]
+
+var IoTJobTimeoutConfig = &handles[313]
+var IoTJobTimeoutConfig_inProgressTimeoutInMinutes = &handles[314]
+
+var _IoTThingName = &handles[315]
+
+var _IsLatestForTarget = &handles[316]
+
+var _IsRoot = &handles[317]
+
+var LambdaContainerParams = &handles[318]
+var LambdaContainerParams_memorySizeInKB = &handles[319]
+var LambdaContainerParams_mountROSysfs = &handles[320]
+var LambdaContainerParams_volumes = &handles[321]
+var LambdaContainerParams_devices = &handles[322]
+
+var _LambdaDeviceList = &handles[323]
+var _LambdaDeviceList_member = &handles[324]
+
+var LambdaDeviceMount = &handles[325]
+var LambdaDeviceMount_path = &handles[326]
+var LambdaDeviceMount_permission = &handles[327]
+var LambdaDeviceMount_addGroupOwner = &handles[328]
+
+var _LambdaEnvironmentVariables = &handles[329]
+var _LambdaEnvironmentVariables_key = &handles[330]
+var _LambdaEnvironmentVariables_value = &handles[331]
+
+var LambdaEventSource = &handles[332]
+var LambdaEventSource_topic = &handles[333]
+var LambdaEventSource_type = &handles[334]
+
+var _LambdaEventSourceList = &handles[335]
+var _LambdaEventSourceList_member = &handles[336]
+
+var LambdaEventSourceType = &handles[337]
+var LambdaEventSourceType_PUB_SUB = &handles[338]
+var LambdaEventSourceType_IOT_CORE = &handles[339]
+
+var _LambdaExecArg = &handles[340]
+
+var _LambdaExecArgsList = &handles[341]
+var _LambdaExecArgsList_member = &handles[342]
+
+var LambdaExecutionParameters = &handles[343]
+var LambdaExecutionParameters_eventSources = &handles[344]
+var LambdaExecutionParameters_maxQueueSize = &handles[345]
+var LambdaExecutionParameters_maxInstancesCount = &handles[346]
+var LambdaExecutionParameters_maxIdleTimeInSeconds = &handles[347]
+var LambdaExecutionParameters_timeoutInSeconds = &handles[348]
+var LambdaExecutionParameters_statusTimeoutInSeconds = &handles[349]
+var LambdaExecutionParameters_pinned = &handles[350]
+var LambdaExecutionParameters_inputPayloadEncodingType = &handles[351]
+var LambdaExecutionParameters_execArgs = &handles[352]
+var LambdaExecutionParameters_environmentVariables = &handles[353]
+var LambdaExecutionParameters_linuxProcessParams = &handles[354]
+
+var LambdaFilesystemPermission = &handles[355]
+var LambdaFilesystemPermission_RO = &handles[356]
+var LambdaFilesystemPermission_RW = &handles[357]
+
+var LambdaFunctionRecipeSource = &handles[358]
+var LambdaFunctionRecipeSource_lambdaArn = &handles[359]
+var LambdaFunctionRecipeSource_componentName = &handles[360]
+var LambdaFunctionRecipeSource_componentVersion = &handles[361]
+var LambdaFunctionRecipeSource_componentPlatforms = &handles[362]
+var LambdaFunctionRecipeSource_componentDependencies = &handles[363]
+var LambdaFunctionRecipeSource_componentLambdaParameters = &handles[364]
+
+var LambdaInputPayloadEncodingType = &handles[365]
+var LambdaInputPayloadEncodingType_JSON = &handles[366]
+var LambdaInputPayloadEncodingType_BINARY = &handles[367]
+
+var LambdaIsolationMode = &handles[368]
+var LambdaIsolationMode_GREENGRASS_CONTAINER = &handles[369]
+var LambdaIsolationMode_NO_CONTAINER = &handles[370]
+
+var LambdaLinuxProcessParams = &handles[371]
+var LambdaLinuxProcessParams_isolationMode = &handles[372]
+var LambdaLinuxProcessParams_containerParams = &handles[373]
+
+var _LambdaVolumeList = &handles[374]
+var _LambdaVolumeList_member = &handles[375]
+
+var LambdaVolumeMount = &handles[376]
+var LambdaVolumeMount_sourcePath = &handles[377]
+var LambdaVolumeMount_destinationPath = &handles[378]
+var LambdaVolumeMount_permission = &handles[379]
+var LambdaVolumeMount_addGroupOwner = &handles[380]
+
+var _LifecycleStateDetails = &handles[381]
+
+var _Memory = &handles[382]
+
+var _NextTokenString = &handles[383]
+
+var _NonEmptyString = &handles[384]
+
+var _NullableString = &handles[385]
+
+var _OptionalBoolean = &handles[386]
+
+var _OptionalInteger = &handles[387]
+
+var _PlatformAttributesMap = &handles[388]
+var _PlatformAttributesMap_key = &handles[389]
+var _PlatformAttributesMap_value = &handles[390]
+
+var _PortNumberInt = &handles[391]
+
+var _PublisherString = &handles[392]
+
+var _Reason = &handles[393]
+
+var _RecipeBlob = &handles[394]
+
+var RecipeOutputFormat = &handles[395]
+var RecipeOutputFormat_JSON = &handles[396]
+var RecipeOutputFormat_YAML = &handles[397]
+
+var RequestAlreadyInProgressException = &handles[398]
+var RequestAlreadyInProgressException_message = &handles[399]
+
+var ResolvedComponentVersion = &handles[400]
+var ResolvedComponentVersion_arn = &handles[401]
+var ResolvedComponentVersion_componentName = &handles[402]
+var ResolvedComponentVersion_componentVersion = &handles[403]
+var ResolvedComponentVersion_recipe = &handles[404]
+var ResolvedComponentVersion_vendorGuidance = &handles[405]
+var ResolvedComponentVersion_message = &handles[406]
+
+var _ResolvedComponentVersionsList = &handles[407]
+var _ResolvedComponentVersionsList_member = &handles[408]
+
+var ResourceNotFoundException = &handles[409]
+var ResourceNotFoundException_message = &handles[410]
+var ResourceNotFoundException_resourceId = &handles[411]
+var ResourceNotFoundException_resourceType = &handles[412]
+
+var _RetryAfterSeconds = &handles[413]
+
+var S3EndpointType = &handles[414]
+var S3EndpointType_REGIONAL = &handles[415]
+var S3EndpointType_GLOBAL = &handles[416]
+
+var ServiceQuotaExceededException = &handles[417]
+var ServiceQuotaExceededException_message = &handles[418]
+var ServiceQuotaExceededException_resourceId = &handles[419]
+var ServiceQuotaExceededException_resourceType = &handles[420]
+var ServiceQuotaExceededException_quotaCode = &handles[421]
+var ServiceQuotaExceededException_serviceCode = &handles[422]
+
+var _String = &handles[423]
+
+var _StringMap = &handles[424]
+var _StringMap_key = &handles[425]
+var _StringMap_value = &handles[426]
+
+var SystemResourceLimits = &handles[427]
+var SystemResourceLimits_memory = &handles[428]
+var SystemResourceLimits_cpus = &handles[429]
+
+var _TagKey = &handles[430]
+
+var _TagKeyList = &handles[431]
+var _TagKeyList_member = &handles[432]
+
+var _TagMap = &handles[433]
+var _TagMap_key = &handles[434]
+var _TagMap_value = &handles[435]
+
+var _TagValue = &handles[436]
+
+var _TargetARN = &handles[437]
+
+var _ThingGroupARN = &handles[438]
+
+var ThrottlingException = &handles[439]
+var ThrottlingException_message = &handles[440]
+var ThrottlingException_quotaCode = &handles[441]
+var ThrottlingException_serviceCode = &handles[442]
+var ThrottlingException_retryAfterSeconds = &handles[443]
+
+var _Timestamp = &handles[444]
+
+var _TopicString = &handles[445]
+
+var ValidationException = &handles[446]
+var ValidationException_message = &handles[447]
+var ValidationException_reason = &handles[448]
+var ValidationException_fields = &handles[449]
+
+var ValidationExceptionField = &handles[450]
+var ValidationExceptionField_name = &handles[451]
+var ValidationExceptionField_message = &handles[452]
+
+var _ValidationExceptionFieldList = &handles[453]
+var _ValidationExceptionFieldList_member = &handles[454]
+
+var ValidationExceptionReason = &handles[455]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[456]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[457]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[458]
+var ValidationExceptionReason_OTHER = &handles[459]
+
+var VendorGuidance = &handles[460]
+var VendorGuidance_ACTIVE = &handles[461]
+var VendorGuidance_DISCONTINUED = &handles[462]
+var VendorGuidance_DELETED = &handles[463]
+
+var AssociateServiceRoleToAccountRequest = &handles[464]
+var AssociateServiceRoleToAccountRequest_roleArn = &handles[465]
+
+var AssociateServiceRoleToAccountResponse = &handles[466]
+var AssociateServiceRoleToAccountResponse_associatedAt = &handles[467]
+
+var BatchAssociateClientDeviceWithCoreDeviceRequest = &handles[468]
+var BatchAssociateClientDeviceWithCoreDeviceRequest_entries = &handles[469]
+var BatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName = &handles[470]
+
+var BatchAssociateClientDeviceWithCoreDeviceResponse = &handles[471]
+var BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries = &handles[472]
+
+var BatchDisassociateClientDeviceFromCoreDeviceRequest = &handles[473]
+var BatchDisassociateClientDeviceFromCoreDeviceRequest_entries = &handles[474]
+var BatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName = &handles[475]
+
+var BatchDisassociateClientDeviceFromCoreDeviceResponse = &handles[476]
+var BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries = &handles[477]
+
+var CancelDeploymentRequest = &handles[478]
+var CancelDeploymentRequest_deploymentId = &handles[479]
+
+var CancelDeploymentResponse = &handles[480]
+var CancelDeploymentResponse_message = &handles[481]
+
+var CreateComponentVersionRequest = &handles[482]
+var CreateComponentVersionRequest_inlineRecipe = &handles[483]
+var CreateComponentVersionRequest_lambdaFunction = &handles[484]
+var CreateComponentVersionRequest_tags = &handles[485]
+var CreateComponentVersionRequest_clientToken = &handles[486]
+
+var CreateComponentVersionResponse = &handles[487]
+var CreateComponentVersionResponse_arn = &handles[488]
+var CreateComponentVersionResponse_componentName = &handles[489]
+var CreateComponentVersionResponse_componentVersion = &handles[490]
+var CreateComponentVersionResponse_creationTimestamp = &handles[491]
+var CreateComponentVersionResponse_status = &handles[492]
+
+var CreateDeploymentRequest = &handles[493]
+var CreateDeploymentRequest_targetArn = &handles[494]
+var CreateDeploymentRequest_deploymentName = &handles[495]
+var CreateDeploymentRequest_components = &handles[496]
+var CreateDeploymentRequest_iotJobConfiguration = &handles[497]
+var CreateDeploymentRequest_deploymentPolicies = &handles[498]
+var CreateDeploymentRequest_parentTargetArn = &handles[499]
+var CreateDeploymentRequest_tags = &handles[500]
+var CreateDeploymentRequest_clientToken = &handles[501]
+
+var CreateDeploymentResponse = &handles[502]
+var CreateDeploymentResponse_deploymentId = &handles[503]
+var CreateDeploymentResponse_iotJobId = &handles[504]
+var CreateDeploymentResponse_iotJobArn = &handles[505]
+
+var DeleteComponentRequest = &handles[506]
+var DeleteComponentRequest_arn = &handles[507]
+
+var DeleteCoreDeviceRequest = &handles[508]
+var DeleteCoreDeviceRequest_coreDeviceThingName = &handles[509]
+
+var DeleteDeploymentRequest = &handles[510]
+var DeleteDeploymentRequest_deploymentId = &handles[511]
+
+var DescribeComponentRequest = &handles[512]
+var DescribeComponentRequest_arn = &handles[513]
+
+var DescribeComponentResponse = &handles[514]
+var DescribeComponentResponse_arn = &handles[515]
+var DescribeComponentResponse_componentName = &handles[516]
+var DescribeComponentResponse_componentVersion = &handles[517]
+var DescribeComponentResponse_creationTimestamp = &handles[518]
+var DescribeComponentResponse_publisher = &handles[519]
+var DescribeComponentResponse_description = &handles[520]
+var DescribeComponentResponse_status = &handles[521]
+var DescribeComponentResponse_platforms = &handles[522]
+var DescribeComponentResponse_tags = &handles[523]
+
+var DisassociateServiceRoleFromAccountRequest = &handles[524]
+
+var DisassociateServiceRoleFromAccountResponse = &handles[525]
+var DisassociateServiceRoleFromAccountResponse_disassociatedAt = &handles[526]
+
+var GetComponentRequest = &handles[527]
+var GetComponentRequest_recipeOutputFormat = &handles[528]
+var GetComponentRequest_arn = &handles[529]
+
+var GetComponentResponse = &handles[530]
+var GetComponentResponse_recipeOutputFormat = &handles[531]
+var GetComponentResponse_recipe = &handles[532]
+var GetComponentResponse_tags = &handles[533]
+
+var GetComponentVersionArtifactRequest = &handles[534]
+var GetComponentVersionArtifactRequest_arn = &handles[535]
+var GetComponentVersionArtifactRequest_artifactName = &handles[536]
+var GetComponentVersionArtifactRequest_s3EndpointType = &handles[537]
+var GetComponentVersionArtifactRequest_iotEndpointType = &handles[538]
+
+var GetComponentVersionArtifactResponse = &handles[539]
+var GetComponentVersionArtifactResponse_preSignedUrl = &handles[540]
+
+var GetConnectivityInfoRequest = &handles[541]
+var GetConnectivityInfoRequest_thingName = &handles[542]
+
+var GetConnectivityInfoResponse = &handles[543]
+var GetConnectivityInfoResponse_connectivityInfo = &handles[544]
+var GetConnectivityInfoResponse_message = &handles[545]
+
+var GetCoreDeviceRequest = &handles[546]
+var GetCoreDeviceRequest_coreDeviceThingName = &handles[547]
+
+var GetCoreDeviceResponse = &handles[548]
+var GetCoreDeviceResponse_coreDeviceThingName = &handles[549]
+var GetCoreDeviceResponse_coreVersion = &handles[550]
+var GetCoreDeviceResponse_platform = &handles[551]
+var GetCoreDeviceResponse_architecture = &handles[552]
+var GetCoreDeviceResponse_runtime = &handles[553]
+var GetCoreDeviceResponse_status = &handles[554]
+var GetCoreDeviceResponse_lastStatusUpdateTimestamp = &handles[555]
+var GetCoreDeviceResponse_tags = &handles[556]
+
+var GetDeploymentRequest = &handles[557]
+var GetDeploymentRequest_deploymentId = &handles[558]
+
+var GetDeploymentResponse = &handles[559]
+var GetDeploymentResponse_targetArn = &handles[560]
+var GetDeploymentResponse_revisionId = &handles[561]
+var GetDeploymentResponse_deploymentId = &handles[562]
+var GetDeploymentResponse_deploymentName = &handles[563]
+var GetDeploymentResponse_deploymentStatus = &handles[564]
+var GetDeploymentResponse_iotJobId = &handles[565]
+var GetDeploymentResponse_iotJobArn = &handles[566]
+var GetDeploymentResponse_components = &handles[567]
+var GetDeploymentResponse_deploymentPolicies = &handles[568]
+var GetDeploymentResponse_iotJobConfiguration = &handles[569]
+var GetDeploymentResponse_creationTimestamp = &handles[570]
+var GetDeploymentResponse_isLatestForTarget = &handles[571]
+var GetDeploymentResponse_parentTargetArn = &handles[572]
+var GetDeploymentResponse_tags = &handles[573]
+
+var GetServiceRoleForAccountRequest = &handles[574]
+
+var GetServiceRoleForAccountResponse = &handles[575]
+var GetServiceRoleForAccountResponse_associatedAt = &handles[576]
+var GetServiceRoleForAccountResponse_roleArn = &handles[577]
+
+var ListClientDevicesAssociatedWithCoreDeviceRequest = &handles[578]
+var ListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName = &handles[579]
+var ListClientDevicesAssociatedWithCoreDeviceRequest_maxResults = &handles[580]
+var ListClientDevicesAssociatedWithCoreDeviceRequest_nextToken = &handles[581]
+
+var ListClientDevicesAssociatedWithCoreDeviceResponse = &handles[582]
+var ListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices = &handles[583]
+var ListClientDevicesAssociatedWithCoreDeviceResponse_nextToken = &handles[584]
+
+var ListComponentsRequest = &handles[585]
+var ListComponentsRequest_scope = &handles[586]
+var ListComponentsRequest_maxResults = &handles[587]
+var ListComponentsRequest_nextToken = &handles[588]
+
+var ListComponentsResponse = &handles[589]
+var ListComponentsResponse_components = &handles[590]
+var ListComponentsResponse_nextToken = &handles[591]
+
+var ListComponentVersionsRequest = &handles[592]
+var ListComponentVersionsRequest_arn = &handles[593]
+var ListComponentVersionsRequest_maxResults = &handles[594]
+var ListComponentVersionsRequest_nextToken = &handles[595]
+
+var ListComponentVersionsResponse = &handles[596]
+var ListComponentVersionsResponse_componentVersions = &handles[597]
+var ListComponentVersionsResponse_nextToken = &handles[598]
+
+var ListCoreDevicesRequest = &handles[599]
+var ListCoreDevicesRequest_thingGroupArn = &handles[600]
+var ListCoreDevicesRequest_status = &handles[601]
+var ListCoreDevicesRequest_maxResults = &handles[602]
+var ListCoreDevicesRequest_nextToken = &handles[603]
+var ListCoreDevicesRequest_runtime = &handles[604]
+
+var ListCoreDevicesResponse = &handles[605]
+var ListCoreDevicesResponse_coreDevices = &handles[606]
+var ListCoreDevicesResponse_nextToken = &handles[607]
+
+var ListDeploymentsRequest = &handles[608]
+var ListDeploymentsRequest_targetArn = &handles[609]
+var ListDeploymentsRequest_historyFilter = &handles[610]
+var ListDeploymentsRequest_parentTargetArn = &handles[611]
+var ListDeploymentsRequest_maxResults = &handles[612]
+var ListDeploymentsRequest_nextToken = &handles[613]
+
+var ListDeploymentsResponse = &handles[614]
+var ListDeploymentsResponse_deployments = &handles[615]
+var ListDeploymentsResponse_nextToken = &handles[616]
+
+var ListEffectiveDeploymentsRequest = &handles[617]
+var ListEffectiveDeploymentsRequest_coreDeviceThingName = &handles[618]
+var ListEffectiveDeploymentsRequest_maxResults = &handles[619]
+var ListEffectiveDeploymentsRequest_nextToken = &handles[620]
+
+var ListEffectiveDeploymentsResponse = &handles[621]
+var ListEffectiveDeploymentsResponse_effectiveDeployments = &handles[622]
+var ListEffectiveDeploymentsResponse_nextToken = &handles[623]
+
+var ListInstalledComponentsRequest = &handles[624]
+var ListInstalledComponentsRequest_coreDeviceThingName = &handles[625]
+var ListInstalledComponentsRequest_maxResults = &handles[626]
+var ListInstalledComponentsRequest_nextToken = &handles[627]
+var ListInstalledComponentsRequest_topologyFilter = &handles[628]
+
+var ListInstalledComponentsResponse = &handles[629]
+var ListInstalledComponentsResponse_installedComponents = &handles[630]
+var ListInstalledComponentsResponse_nextToken = &handles[631]
+
+var ListTagsForResourceRequest = &handles[632]
+var ListTagsForResourceRequest_resourceArn = &handles[633]
+
+var ListTagsForResourceResponse = &handles[634]
+var ListTagsForResourceResponse_tags = &handles[635]
+
+var ResolveComponentCandidatesRequest = &handles[636]
+var ResolveComponentCandidatesRequest_platform = &handles[637]
+var ResolveComponentCandidatesRequest_componentCandidates = &handles[638]
+
+var ResolveComponentCandidatesResponse = &handles[639]
+var ResolveComponentCandidatesResponse_resolvedComponentVersions = &handles[640]
+
+var TagResourceRequest = &handles[641]
+var TagResourceRequest_resourceArn = &handles[642]
+var TagResourceRequest_tags = &handles[643]
+
+var TagResourceResponse = &handles[644]
+
+var UntagResourceRequest = &handles[645]
+var UntagResourceRequest_resourceArn = &handles[646]
+var UntagResourceRequest_tagKeys = &handles[647]
+
+var UntagResourceResponse = &handles[648]
+
+var UpdateConnectivityInfoRequest = &handles[649]
+var UpdateConnectivityInfoRequest_thingName = &handles[650]
+var UpdateConnectivityInfoRequest_connectivityInfo = &handles[651]
+
+var UpdateConnectivityInfoResponse = &handles[652]
+var UpdateConnectivityInfoResponse_version = &handles[653]
+var UpdateConnectivityInfoResponse_message = &handles[654]
+
+var GreengrassV2 = &smithy.ServiceSchema{Schema: &handles[29], Version: "2020-11-30"}

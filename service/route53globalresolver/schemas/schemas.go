@@ -4,4181 +4,3462 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateHostedZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AssociateHostedZone",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/hosted-zone-associations/{hostedZoneId}",
-	Code: 200})
-
-var BatchCreateFirewallRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchCreateFirewallRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/firewall-rules/batch-create",
-	Code: 200})
-
-var BatchDeleteFirewallRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchDeleteFirewallRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/firewall-rules/batch-delete",
-	Code: 200})
-
-var BatchUpdateFirewallRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchUpdateFirewallRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/firewall-rules/batch-update",
-	Code: 200})
-
-var CreateAccessSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateAccessSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/access-sources",
-	Code: 200})
-
-var CreateAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateAccessToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tokens/{dnsViewId}",
-	Code: 200})
-
-var CreateDNSView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateDNSView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/dns-views/{globalResolverId}",
-	Code: 200})
-
-var CreateFirewallDomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateFirewallDomainList",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/firewall-domain-lists/{globalResolverId}",
-	Code: 200})
-
-var CreateFirewallRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateFirewallRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/firewall-rules",
-	Code: 200})
-
-var CreateGlobalResolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateGlobalResolver",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/global-resolver",
-	Code: 200})
-
-var DeleteAccessSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteAccessSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/access-sources/{accessSourceId}",
-	Code: 200})
-
-var DeleteAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteAccessToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tokens/{accessTokenId}",
-	Code: 200})
-
-var DeleteDNSView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteDNSView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/dns-views/{dnsViewId}",
-	Code: 200})
-
-var DeleteFirewallDomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteFirewallDomainList",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/firewall-domain-lists/{firewallDomainListId}",
-	Code: 200})
-
-var DeleteFirewallRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteFirewallRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/firewall-rules/{firewallRuleId}",
-	Code: 200})
-
-var DeleteGlobalResolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteGlobalResolver",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/global-resolver/{globalResolverId}",
-	Code: 200})
-
-var DisableDNSView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DisableDNSView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/dns-views/{dnsViewId}/disable",
-	Code: 200})
-
-var DisassociateHostedZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DisassociateHostedZone",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/hosted-zone-associations/hosted-zone/{hostedZoneId}/resource-arn/{resourceArn+}",
-	Code: 200})
-
-var EnableDNSView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "EnableDNSView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/dns-views/{dnsViewId}/enable",
-	Code: 200})
-
-var GetAccessSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetAccessSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/access-sources/{accessSourceId}",
-	Code: 200})
-
-var GetAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetAccessToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tokens/{accessTokenId}",
-	Code: 200})
-
-var GetDNSView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetDNSView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/dns-views/{dnsViewId}",
-	Code: 200})
-
-var GetFirewallDomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetFirewallDomainList",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/firewall-domain-lists/{firewallDomainListId}",
-	Code: 200})
-
-var GetFirewallRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetFirewallRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/firewall-rules/{firewallRuleId}",
-	Code: 200})
-
-var GetGlobalResolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetGlobalResolver",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/global-resolver/{globalResolverId}",
-	Code: 200})
-
-var GetHostedZoneAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetHostedZoneAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/hosted-zone-associations/{hostedZoneAssociationId}",
-	Code: 200})
-
-var GetManagedFirewallDomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetManagedFirewallDomainList",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/managed-firewall-domain-lists/{managedFirewallDomainListId}",
-	Code: 200})
-
-var ImportFirewallDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ImportFirewallDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/firewall-domain-lists/{firewallDomainListId}/domains/s3_file_url",
-	Code: 200})
-
-var ListAccessSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListAccessSources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/access-sources",
-	Code: 200})
-
-var ListAccessTokens = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListAccessTokens",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tokens/dns-view/{dnsViewId}",
-	Code: 200})
-
-var ListDNSViews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListDNSViews",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/dns-views/resolver/{globalResolverId}",
-	Code: 200})
-
-var ListFirewallDomainLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallDomainLists",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/firewall-domain-lists",
-	Code: 200})
-
-var ListFirewallDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/firewall-domain-lists/{firewallDomainListId}/domains",
-	Code: 200})
-
-var ListFirewallRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/firewall-rules",
-	Code: 200})
-
-var ListGlobalResolvers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListGlobalResolvers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/global-resolver",
-	Code: 200})
-
-var ListHostedZoneAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListHostedZoneAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/hosted-zone-associations",
-	Code: 200})
-
-var ListManagedFirewallDomainLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListManagedFirewallDomainLists",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/list-managed-firewall-domain-lists/{managedFirewallDomainListType}",
-	Code: 200})
-
-var ListSharedDNSViews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListSharedDNSViews",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/shared-dns-views",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/get-all-tags",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tag-resource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/untag-resource",
-	Code: 200})
-
-var UpdateAccessSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateAccessSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/access-sources/{accessSourceId}",
-	Code: 200})
-
-var UpdateAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateAccessToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/tokens/{accessTokenId}",
-	Code: 200})
-
-var UpdateDNSView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateDNSView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/dns-views/{dnsViewId}",
-	Code: 200})
-
-var UpdateFirewallDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateFirewallDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/firewall-domain-lists/{firewallDomainListId}/domains",
-	Code: 200})
-
-var UpdateFirewallRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateFirewallRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/firewall-rules/{firewallRuleId}",
-	Code: 200})
-
-var UpdateGlobalResolver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateGlobalResolver",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/global-resolver/{globalResolverId}",
-	Code: 200})
-
-var UpdateHostedZoneAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateHostedZoneAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/hosted-zone-associations/{hostedZoneAssociationId}",
-	Code: 200})
-
-var _EC2DNSGlobalResolverCustomerAPI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "EC2DNSGlobalResolverCustomerAPI",
-}, smithy.ShapeTypeService, 0)
-
-var EC2DNSGlobalResolverCustomerAPI = smithy.NewServiceSchema(_EC2DNSGlobalResolverCustomerAPI, "2022-09-27")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccessSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AccessSources",
-}, smithy.ShapeTypeList, 1)
-var _AccessSources_member *smithy.Schema
-
-var AccessSourcesItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AccessSourcesItem",
-}, smithy.ShapeTypeStructure, 10)
-var AccessSourcesItem_arn *smithy.Schema
-
-var AccessSourcesItem_cidr *smithy.Schema
-
-var AccessSourcesItem_createdAt *smithy.Schema
-
-var AccessSourcesItem_id *smithy.Schema
-
-var AccessSourcesItem_ipAddressType *smithy.Schema
-
-var AccessSourcesItem_name *smithy.Schema
-
-var AccessSourcesItem_dnsViewId *smithy.Schema
-
-var AccessSourcesItem_protocol *smithy.Schema
-
-var AccessSourcesItem_status *smithy.Schema
-
-var AccessSourcesItem_updatedAt *smithy.Schema
-
-var AccessTokenItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AccessTokenItem",
-}, smithy.ShapeTypeStructure, 9)
-var AccessTokenItem_id *smithy.Schema
-
-var AccessTokenItem_arn *smithy.Schema
-
-var AccessTokenItem_createdAt *smithy.Schema
-
-var AccessTokenItem_dnsViewId *smithy.Schema
-
-var AccessTokenItem_expiresAt *smithy.Schema
-
-var AccessTokenItem_globalResolverId *smithy.Schema
-
-var AccessTokenItem_name *smithy.Schema
-
-var AccessTokenItem_status *smithy.Schema
-
-var AccessTokenItem_updatedAt *smithy.Schema
-
-var _AccessTokens = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AccessTokens",
-}, smithy.ShapeTypeList, 1)
-var _AccessTokens_member *smithy.Schema
-
-var _AccessTokenValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AccessTokenValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var BatchCreateFirewallRuleInputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchCreateFirewallRuleInputItem",
-}, smithy.ShapeTypeStructure, 14)
-var BatchCreateFirewallRuleInputItem_action *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_blockOverrideDnsType *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_blockOverrideDomain *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_blockOverrideTtl *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_blockResponse *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_clientToken *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_confidenceThreshold *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_description *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_dnsAdvancedProtection *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_firewallDomainListId *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_name *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_priority *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_dnsViewId *smithy.Schema
-
-var BatchCreateFirewallRuleInputItem_qType *smithy.Schema
-
-var _BatchCreateFirewallRuleInputItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchCreateFirewallRuleInputItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchCreateFirewallRuleInputItems_member *smithy.Schema
-
-var BatchCreateFirewallRuleOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchCreateFirewallRuleOutputItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateFirewallRuleOutputItem_firewallRule *smithy.Schema
-
-var BatchCreateFirewallRuleOutputItem_code *smithy.Schema
-
-var BatchCreateFirewallRuleOutputItem_message *smithy.Schema
-
-var _BatchCreateFirewallRuleOutputItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchCreateFirewallRuleOutputItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchCreateFirewallRuleOutputItems_member *smithy.Schema
-
-var BatchCreateFirewallRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchCreateFirewallRuleResult",
-}, smithy.ShapeTypeStructure, 19)
-var BatchCreateFirewallRuleResult_action *smithy.Schema
-
-var BatchCreateFirewallRuleResult_blockOverrideDnsType *smithy.Schema
-
-var BatchCreateFirewallRuleResult_blockOverrideDomain *smithy.Schema
-
-var BatchCreateFirewallRuleResult_blockOverrideTtl *smithy.Schema
-
-var BatchCreateFirewallRuleResult_blockResponse *smithy.Schema
-
-var BatchCreateFirewallRuleResult_clientToken *smithy.Schema
-
-var BatchCreateFirewallRuleResult_confidenceThreshold *smithy.Schema
-
-var BatchCreateFirewallRuleResult_createdAt *smithy.Schema
-
-var BatchCreateFirewallRuleResult_description *smithy.Schema
-
-var BatchCreateFirewallRuleResult_dnsAdvancedProtection *smithy.Schema
-
-var BatchCreateFirewallRuleResult_firewallDomainListId *smithy.Schema
-
-var BatchCreateFirewallRuleResult_id *smithy.Schema
-
-var BatchCreateFirewallRuleResult_managedDomainListName *smithy.Schema
-
-var BatchCreateFirewallRuleResult_name *smithy.Schema
-
-var BatchCreateFirewallRuleResult_priority *smithy.Schema
-
-var BatchCreateFirewallRuleResult_dnsViewId *smithy.Schema
-
-var BatchCreateFirewallRuleResult_queryType *smithy.Schema
-
-var BatchCreateFirewallRuleResult_status *smithy.Schema
-
-var BatchCreateFirewallRuleResult_updatedAt *smithy.Schema
-
-var BatchDeleteFirewallRuleInputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchDeleteFirewallRuleInputItem",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteFirewallRuleInputItem_firewallRuleId *smithy.Schema
-
-var _BatchDeleteFirewallRuleInputItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchDeleteFirewallRuleInputItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteFirewallRuleInputItems_member *smithy.Schema
-
-var BatchDeleteFirewallRuleOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchDeleteFirewallRuleOutputItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteFirewallRuleOutputItem_firewallRule *smithy.Schema
-
-var BatchDeleteFirewallRuleOutputItem_code *smithy.Schema
-
-var BatchDeleteFirewallRuleOutputItem_message *smithy.Schema
-
-var _BatchDeleteFirewallRuleOutputItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchDeleteFirewallRuleOutputItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteFirewallRuleOutputItems_member *smithy.Schema
-
-var BatchDeleteFirewallRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchDeleteFirewallRuleResult",
-}, smithy.ShapeTypeStructure, 4)
-var BatchDeleteFirewallRuleResult_clientToken *smithy.Schema
-
-var BatchDeleteFirewallRuleResult_id *smithy.Schema
-
-var BatchDeleteFirewallRuleResult_name *smithy.Schema
-
-var BatchDeleteFirewallRuleResult_status *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchUpdateFirewallRuleInputItem",
-}, smithy.ShapeTypeStructure, 11)
-var BatchUpdateFirewallRuleInputItem_action *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_blockOverrideDnsType *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_blockOverrideDomain *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_blockOverrideTtl *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_blockResponse *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_confidenceThreshold *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_description *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_dnsAdvancedProtection *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_firewallRuleId *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_name *smithy.Schema
-
-var BatchUpdateFirewallRuleInputItem_priority *smithy.Schema
-
-var _BatchUpdateFirewallRuleInputItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchUpdateFirewallRuleInputItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchUpdateFirewallRuleInputItems_member *smithy.Schema
-
-var BatchUpdateFirewallRuleOutputItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchUpdateFirewallRuleOutputItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchUpdateFirewallRuleOutputItem_firewallRule *smithy.Schema
-
-var BatchUpdateFirewallRuleOutputItem_code *smithy.Schema
-
-var BatchUpdateFirewallRuleOutputItem_message *smithy.Schema
-
-var _BatchUpdateFirewallRuleOutputItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchUpdateFirewallRuleOutputItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchUpdateFirewallRuleOutputItems_member *smithy.Schema
-
-var BatchUpdateFirewallRuleResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchUpdateFirewallRuleResult",
-}, smithy.ShapeTypeStructure, 18)
-var BatchUpdateFirewallRuleResult_action *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_blockOverrideDnsType *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_blockOverrideDomain *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_blockOverrideTtl *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_blockResponse *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_clientToken *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_confidenceThreshold *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_createdAt *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_description *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_dnsAdvancedProtection *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_firewallDomainListId *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_id *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_name *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_priority *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_dnsViewId *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_queryType *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_status *smithy.Schema
-
-var BatchUpdateFirewallRuleResult_updatedAt *smithy.Schema
-
-var BlockOverrideDnsQueryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BlockOverrideDnsQueryType",
-}, smithy.ShapeTypeEnum, 1)
-var BlockOverrideDnsQueryType_CNAME *smithy.Schema
-
-var _BlockOverrideTtl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BlockOverrideTtl",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Cidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Cidr",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConfidenceThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ConfidenceThreshold",
-}, smithy.ShapeTypeEnum, 3)
-var ConfidenceThreshold_LOW *smithy.Schema
-
-var ConfidenceThreshold_MEDIUM *smithy.Schema
-
-var ConfidenceThreshold_HIGH *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CRResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CRResourceStatus",
-}, smithy.ShapeTypeEnum, 4)
-var CRResourceStatus_CREATING *smithy.Schema
-
-var CRResourceStatus_OPERATIONAL *smithy.Schema
-
-var CRResourceStatus_UPDATING *smithy.Schema
-
-var CRResourceStatus_DELETING *smithy.Schema
-
-var DnsAdvancedProtection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DnsAdvancedProtection",
-}, smithy.ShapeTypeEnum, 3)
-var DnsAdvancedProtection_DGA *smithy.Schema
-
-var DnsAdvancedProtection_DNS_TUNNELING *smithy.Schema
-
-var DnsAdvancedProtection_DICTIONARY_DGA *smithy.Schema
-
-var DnsProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DnsProtocol",
-}, smithy.ShapeTypeEnum, 3)
-var DnsProtocol_DO53 *smithy.Schema
-
-var DnsProtocol_DOH *smithy.Schema
-
-var DnsProtocol_DOT *smithy.Schema
-
-var _DnsQueryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DnsQueryType",
-}, smithy.ShapeTypeString, 0)
-
-var DnsSecValidationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DnsSecValidationType",
-}, smithy.ShapeTypeEnum, 2)
-var DnsSecValidationType_ENABLED *smithy.Schema
-
-var DnsSecValidationType_DISABLED *smithy.Schema
-
-var _DNSViews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DNSViews",
-}, smithy.ShapeTypeList, 1)
-var _DNSViews_member *smithy.Schema
-
-var DNSViewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DNSViewSummary",
-}, smithy.ShapeTypeStructure, 12)
-var DNSViewSummary_id *smithy.Schema
-
-var DNSViewSummary_arn *smithy.Schema
-
-var DNSViewSummary_clientToken *smithy.Schema
-
-var DNSViewSummary_dnssecValidation *smithy.Schema
-
-var DNSViewSummary_ednsClientSubnet *smithy.Schema
-
-var DNSViewSummary_firewallRulesFailOpen *smithy.Schema
-
-var DNSViewSummary_name *smithy.Schema
-
-var DNSViewSummary_description *smithy.Schema
-
-var DNSViewSummary_globalResolverId *smithy.Schema
-
-var DNSViewSummary_createdAt *smithy.Schema
-
-var DNSViewSummary_updatedAt *smithy.Schema
-
-var DNSViewSummary_status *smithy.Schema
-
-var _Domain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Domain",
-}, smithy.ShapeTypeString, 0)
-
-var _Domains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Domains",
-}, smithy.ShapeTypeList, 1)
-var _Domains_member *smithy.Schema
-
-var EdnsClientSubnetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "EdnsClientSubnetType",
-}, smithy.ShapeTypeEnum, 2)
-var EdnsClientSubnetType_ENABLED *smithy.Schema
-
-var EdnsClientSubnetType_DISABLED *smithy.Schema
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Filters",
-}, smithy.ShapeTypeMap, 2)
-var _Filters_key *smithy.Schema
-
-var _Filters_value *smithy.Schema
-
-var FirewallBlockResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "FirewallBlockResponse",
-}, smithy.ShapeTypeEnum, 3)
-var FirewallBlockResponse_NODATA *smithy.Schema
-
-var FirewallBlockResponse_NXDOMAIN *smithy.Schema
-
-var FirewallBlockResponse_OVERRIDE *smithy.Schema
-
-var _FirewallDomainLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "FirewallDomainLists",
-}, smithy.ShapeTypeList, 1)
-var _FirewallDomainLists_member *smithy.Schema
-
-var FirewallDomainListsItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "FirewallDomainListsItem",
-}, smithy.ShapeTypeStructure, 8)
-var FirewallDomainListsItem_arn *smithy.Schema
-
-var FirewallDomainListsItem_globalResolverId *smithy.Schema
-
-var FirewallDomainListsItem_createdAt *smithy.Schema
-
-var FirewallDomainListsItem_description *smithy.Schema
-
-var FirewallDomainListsItem_id *smithy.Schema
-
-var FirewallDomainListsItem_name *smithy.Schema
-
-var FirewallDomainListsItem_status *smithy.Schema
-
-var FirewallDomainListsItem_updatedAt *smithy.Schema
-
-var FirewallRuleAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "FirewallRuleAction",
-}, smithy.ShapeTypeEnum, 3)
-var FirewallRuleAction_ALLOW *smithy.Schema
-
-var FirewallRuleAction_ALERT *smithy.Schema
-
-var FirewallRuleAction_BLOCK *smithy.Schema
-
-var _FirewallRulePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "FirewallRulePriority",
-}, smithy.ShapeTypeLong, 0)
-
-var _FirewallRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "FirewallRules",
-}, smithy.ShapeTypeList, 1)
-var _FirewallRules_member *smithy.Schema
-
-var FirewallRulesFailOpenType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "FirewallRulesFailOpenType",
-}, smithy.ShapeTypeEnum, 2)
-var FirewallRulesFailOpenType_ENABLED *smithy.Schema
-
-var FirewallRulesFailOpenType_DISABLED *smithy.Schema
-
-var FirewallRulesItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "FirewallRulesItem",
-}, smithy.ShapeTypeStructure, 17)
-var FirewallRulesItem_action *smithy.Schema
-
-var FirewallRulesItem_blockOverrideDnsType *smithy.Schema
-
-var FirewallRulesItem_blockOverrideDomain *smithy.Schema
-
-var FirewallRulesItem_blockOverrideTtl *smithy.Schema
-
-var FirewallRulesItem_blockResponse *smithy.Schema
-
-var FirewallRulesItem_confidenceThreshold *smithy.Schema
-
-var FirewallRulesItem_createdAt *smithy.Schema
-
-var FirewallRulesItem_description *smithy.Schema
-
-var FirewallRulesItem_dnsAdvancedProtection *smithy.Schema
-
-var FirewallRulesItem_firewallDomainListId *smithy.Schema
-
-var FirewallRulesItem_id *smithy.Schema
-
-var FirewallRulesItem_name *smithy.Schema
-
-var FirewallRulesItem_priority *smithy.Schema
-
-var FirewallRulesItem_dnsViewId *smithy.Schema
-
-var FirewallRulesItem_queryType *smithy.Schema
-
-var FirewallRulesItem_status *smithy.Schema
-
-var FirewallRulesItem_updatedAt *smithy.Schema
-
-var GlobalResolverIpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GlobalResolverIpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var GlobalResolverIpAddressType_IPV4 *smithy.Schema
-
-var GlobalResolverIpAddressType_DUAL_STACK *smithy.Schema
-
-var _GlobalResolvers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GlobalResolvers",
-}, smithy.ShapeTypeList, 1)
-var _GlobalResolvers_member *smithy.Schema
-
-var GlobalResolversItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GlobalResolversItem",
-}, smithy.ShapeTypeStructure, 14)
-var GlobalResolversItem_id *smithy.Schema
-
-var GlobalResolversItem_arn *smithy.Schema
-
-var GlobalResolversItem_clientToken *smithy.Schema
-
-var GlobalResolversItem_dnsName *smithy.Schema
-
-var GlobalResolversItem_observabilityRegion *smithy.Schema
-
-var GlobalResolversItem_name *smithy.Schema
-
-var GlobalResolversItem_description *smithy.Schema
-
-var GlobalResolversItem_regions *smithy.Schema
-
-var GlobalResolversItem_createdAt *smithy.Schema
-
-var GlobalResolversItem_updatedAt *smithy.Schema
-
-var GlobalResolversItem_status *smithy.Schema
-
-var GlobalResolversItem_ipv4Addresses *smithy.Schema
-
-var GlobalResolversItem_ipv6Addresses *smithy.Schema
-
-var GlobalResolversItem_ipAddressType *smithy.Schema
-
-var _HostedZoneAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "HostedZoneAssociations",
-}, smithy.ShapeTypeList, 1)
-var _HostedZoneAssociations_member *smithy.Schema
-
-var HostedZoneAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "HostedZoneAssociationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var HostedZoneAssociationStatus_CREATING *smithy.Schema
-
-var HostedZoneAssociationStatus_OPERATIONAL *smithy.Schema
-
-var HostedZoneAssociationStatus_DELETING *smithy.Schema
-
-var HostedZoneAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "HostedZoneAssociationSummary",
-}, smithy.ShapeTypeStructure, 8)
-var HostedZoneAssociationSummary_id *smithy.Schema
-
-var HostedZoneAssociationSummary_resourceArn *smithy.Schema
-
-var HostedZoneAssociationSummary_hostedZoneId *smithy.Schema
-
-var HostedZoneAssociationSummary_hostedZoneName *smithy.Schema
-
-var HostedZoneAssociationSummary_name *smithy.Schema
-
-var HostedZoneAssociationSummary_createdAt *smithy.Schema
-
-var HostedZoneAssociationSummary_updatedAt *smithy.Schema
-
-var HostedZoneAssociationSummary_status *smithy.Schema
-
-var _HostedZoneId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "HostedZoneId",
-}, smithy.ShapeTypeString, 0)
-
-var _HostedZoneName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "HostedZoneName",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var IpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var IpAddressType_IPV4 *smithy.Schema
-
-var IpAddressType_IPV6 *smithy.Schema
-
-var _IPv4Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "IPv4Address",
-}, smithy.ShapeTypeString, 0)
-
-var _IPv4Addresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "IPv4Addresses",
-}, smithy.ShapeTypeList, 1)
-var _IPv4Addresses_member *smithy.Schema
-
-var _IPv6Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "IPv6Address",
-}, smithy.ShapeTypeString, 0)
-
-var _IPv6Addresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "IPv6Addresses",
-}, smithy.ShapeTypeList, 1)
-var _IPv6Addresses_member *smithy.Schema
-
-var _ISO8601TimeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ISO8601TimeString",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _ManagedFirewallDomainLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ManagedFirewallDomainLists",
-}, smithy.ShapeTypeList, 1)
-var _ManagedFirewallDomainLists_member *smithy.Schema
-
-var ManagedFirewallDomainListsItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ManagedFirewallDomainListsItem",
-}, smithy.ShapeTypeStructure, 4)
-var ManagedFirewallDomainListsItem_description *smithy.Schema
-
-var ManagedFirewallDomainListsItem_id *smithy.Schema
-
-var ManagedFirewallDomainListsItem_name *smithy.Schema
-
-var ManagedFirewallDomainListsItem_managedListType *smithy.Schema
-
-var ProfileResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ProfileResourceStatus",
-}, smithy.ShapeTypeEnum, 7)
-var ProfileResourceStatus_CREATING *smithy.Schema
-
-var ProfileResourceStatus_OPERATIONAL *smithy.Schema
-
-var ProfileResourceStatus_UPDATING *smithy.Schema
-
-var ProfileResourceStatus_ENABLING *smithy.Schema
-
-var ProfileResourceStatus_DISABLING *smithy.Schema
-
-var ProfileResourceStatus_DISABLED *smithy.Schema
-
-var ProfileResourceStatus_DELETING *smithy.Schema
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _Regions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Regions",
-}, smithy.ShapeTypeList, 1)
-var _Regions_member *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ResourceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceNameShort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ResourceNameShort",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SharedDNSViews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "SharedDNSViews",
-}, smithy.ShapeTypeList, 1)
-var _SharedDNSViews_member *smithy.Schema
-
-var SharedDNSViewSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "SharedDNSViewSummary",
-}, smithy.ShapeTypeStructure, 13)
-var SharedDNSViewSummary_id *smithy.Schema
-
-var SharedDNSViewSummary_arn *smithy.Schema
-
-var SharedDNSViewSummary_clientToken *smithy.Schema
-
-var SharedDNSViewSummary_dnssecValidation *smithy.Schema
-
-var SharedDNSViewSummary_ednsClientSubnet *smithy.Schema
-
-var SharedDNSViewSummary_firewallRulesFailOpen *smithy.Schema
-
-var SharedDNSViewSummary_name *smithy.Schema
-
-var SharedDNSViewSummary_description *smithy.Schema
-
-var SharedDNSViewSummary_globalResolverId *smithy.Schema
-
-var SharedDNSViewSummary_createdAt *smithy.Schema
-
-var SharedDNSViewSummary_updatedAt *smithy.Schema
-
-var SharedDNSViewSummary_status *smithy.Schema
-
-var SharedDNSViewSummary_ownerAccountId *smithy.Schema
-
-var _Sni = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Sni",
-}, smithy.ShapeTypeString, 0)
-
-var _Strings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Strings",
-}, smithy.ShapeTypeList, 1)
-var _Strings_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TokenStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "TokenStatus",
-}, smithy.ShapeTypeEnum, 3)
-var TokenStatus_CREATING *smithy.Schema
-
-var TokenStatus_OPERATIONAL *smithy.Schema
-
-var TokenStatus_DELETING *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var AssociateHostedZoneInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AssociateHostedZoneInput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateHostedZoneInput_hostedZoneId *smithy.Schema
-
-var AssociateHostedZoneInput_resourceArn *smithy.Schema
-
-var AssociateHostedZoneInput_name *smithy.Schema
-
-var AssociateHostedZoneOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "AssociateHostedZoneOutput",
-}, smithy.ShapeTypeStructure, 8)
-var AssociateHostedZoneOutput_id *smithy.Schema
-
-var AssociateHostedZoneOutput_resourceArn *smithy.Schema
-
-var AssociateHostedZoneOutput_hostedZoneId *smithy.Schema
-
-var AssociateHostedZoneOutput_hostedZoneName *smithy.Schema
-
-var AssociateHostedZoneOutput_name *smithy.Schema
-
-var AssociateHostedZoneOutput_createdAt *smithy.Schema
-
-var AssociateHostedZoneOutput_updatedAt *smithy.Schema
-
-var AssociateHostedZoneOutput_status *smithy.Schema
-
-var BatchCreateFirewallRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchCreateFirewallRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchCreateFirewallRuleInput_firewallRules *smithy.Schema
-
-var BatchCreateFirewallRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchCreateFirewallRuleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchCreateFirewallRuleOutput_failures *smithy.Schema
-
-var BatchCreateFirewallRuleOutput_successes *smithy.Schema
-
-var BatchDeleteFirewallRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchDeleteFirewallRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeleteFirewallRuleInput_firewallRules *smithy.Schema
-
-var BatchDeleteFirewallRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchDeleteFirewallRuleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDeleteFirewallRuleOutput_failures *smithy.Schema
-
-var BatchDeleteFirewallRuleOutput_successes *smithy.Schema
-
-var BatchUpdateFirewallRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchUpdateFirewallRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUpdateFirewallRuleInput_firewallRules *smithy.Schema
-
-var BatchUpdateFirewallRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "BatchUpdateFirewallRuleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchUpdateFirewallRuleOutput_failures *smithy.Schema
-
-var BatchUpdateFirewallRuleOutput_successes *smithy.Schema
-
-var CreateAccessSourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateAccessSourceInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateAccessSourceInput_cidr *smithy.Schema
-
-var CreateAccessSourceInput_clientToken *smithy.Schema
-
-var CreateAccessSourceInput_ipAddressType *smithy.Schema
-
-var CreateAccessSourceInput_name *smithy.Schema
-
-var CreateAccessSourceInput_dnsViewId *smithy.Schema
-
-var CreateAccessSourceInput_protocol *smithy.Schema
-
-var CreateAccessSourceInput_tags *smithy.Schema
-
-var CreateAccessSourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateAccessSourceOutput",
-}, smithy.ShapeTypeStructure, 10)
-var CreateAccessSourceOutput_arn *smithy.Schema
-
-var CreateAccessSourceOutput_cidr *smithy.Schema
-
-var CreateAccessSourceOutput_createdAt *smithy.Schema
-
-var CreateAccessSourceOutput_id *smithy.Schema
-
-var CreateAccessSourceOutput_ipAddressType *smithy.Schema
-
-var CreateAccessSourceOutput_name *smithy.Schema
-
-var CreateAccessSourceOutput_dnsViewId *smithy.Schema
-
-var CreateAccessSourceOutput_protocol *smithy.Schema
-
-var CreateAccessSourceOutput_status *smithy.Schema
-
-var CreateAccessSourceOutput_updatedAt *smithy.Schema
-
-var CreateAccessTokenInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateAccessTokenInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAccessTokenInput_clientToken *smithy.Schema
-
-var CreateAccessTokenInput_dnsViewId *smithy.Schema
-
-var CreateAccessTokenInput_expiresAt *smithy.Schema
-
-var CreateAccessTokenInput_name *smithy.Schema
-
-var CreateAccessTokenInput_tags *smithy.Schema
-
-var CreateAccessTokenOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateAccessTokenOutput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateAccessTokenOutput_id *smithy.Schema
-
-var CreateAccessTokenOutput_arn *smithy.Schema
-
-var CreateAccessTokenOutput_clientToken *smithy.Schema
-
-var CreateAccessTokenOutput_createdAt *smithy.Schema
-
-var CreateAccessTokenOutput_dnsViewId *smithy.Schema
-
-var CreateAccessTokenOutput_expiresAt *smithy.Schema
-
-var CreateAccessTokenOutput_name *smithy.Schema
-
-var CreateAccessTokenOutput_status *smithy.Schema
-
-var CreateAccessTokenOutput_value *smithy.Schema
-
-var CreateDNSViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateDNSViewInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateDNSViewInput_globalResolverId *smithy.Schema
-
-var CreateDNSViewInput_clientToken *smithy.Schema
-
-var CreateDNSViewInput_name *smithy.Schema
-
-var CreateDNSViewInput_dnssecValidation *smithy.Schema
-
-var CreateDNSViewInput_ednsClientSubnet *smithy.Schema
-
-var CreateDNSViewInput_firewallRulesFailOpen *smithy.Schema
-
-var CreateDNSViewInput_description *smithy.Schema
-
-var CreateDNSViewInput_tags *smithy.Schema
-
-var CreateDNSViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateDNSViewOutput",
-}, smithy.ShapeTypeStructure, 12)
-var CreateDNSViewOutput_id *smithy.Schema
-
-var CreateDNSViewOutput_arn *smithy.Schema
-
-var CreateDNSViewOutput_clientToken *smithy.Schema
-
-var CreateDNSViewOutput_dnssecValidation *smithy.Schema
-
-var CreateDNSViewOutput_ednsClientSubnet *smithy.Schema
-
-var CreateDNSViewOutput_firewallRulesFailOpen *smithy.Schema
-
-var CreateDNSViewOutput_name *smithy.Schema
-
-var CreateDNSViewOutput_description *smithy.Schema
-
-var CreateDNSViewOutput_globalResolverId *smithy.Schema
-
-var CreateDNSViewOutput_createdAt *smithy.Schema
-
-var CreateDNSViewOutput_updatedAt *smithy.Schema
-
-var CreateDNSViewOutput_status *smithy.Schema
-
-var CreateFirewallDomainListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateFirewallDomainListInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateFirewallDomainListInput_clientToken *smithy.Schema
-
-var CreateFirewallDomainListInput_globalResolverId *smithy.Schema
-
-var CreateFirewallDomainListInput_description *smithy.Schema
-
-var CreateFirewallDomainListInput_name *smithy.Schema
-
-var CreateFirewallDomainListInput_tags *smithy.Schema
-
-var CreateFirewallDomainListOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateFirewallDomainListOutput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateFirewallDomainListOutput_arn *smithy.Schema
-
-var CreateFirewallDomainListOutput_globalResolverId *smithy.Schema
-
-var CreateFirewallDomainListOutput_createdAt *smithy.Schema
-
-var CreateFirewallDomainListOutput_description *smithy.Schema
-
-var CreateFirewallDomainListOutput_domainCount *smithy.Schema
-
-var CreateFirewallDomainListOutput_id *smithy.Schema
-
-var CreateFirewallDomainListOutput_name *smithy.Schema
-
-var CreateFirewallDomainListOutput_status *smithy.Schema
-
-var CreateFirewallDomainListOutput_updatedAt *smithy.Schema
-
-var CreateFirewallRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateFirewallRuleInput",
-}, smithy.ShapeTypeStructure, 14)
-var CreateFirewallRuleInput_action *smithy.Schema
-
-var CreateFirewallRuleInput_blockOverrideDnsType *smithy.Schema
-
-var CreateFirewallRuleInput_blockOverrideDomain *smithy.Schema
-
-var CreateFirewallRuleInput_blockOverrideTtl *smithy.Schema
-
-var CreateFirewallRuleInput_blockResponse *smithy.Schema
-
-var CreateFirewallRuleInput_clientToken *smithy.Schema
-
-var CreateFirewallRuleInput_confidenceThreshold *smithy.Schema
-
-var CreateFirewallRuleInput_description *smithy.Schema
-
-var CreateFirewallRuleInput_dnsAdvancedProtection *smithy.Schema
-
-var CreateFirewallRuleInput_firewallDomainListId *smithy.Schema
-
-var CreateFirewallRuleInput_name *smithy.Schema
-
-var CreateFirewallRuleInput_priority *smithy.Schema
-
-var CreateFirewallRuleInput_dnsViewId *smithy.Schema
-
-var CreateFirewallRuleInput_qType *smithy.Schema
-
-var CreateFirewallRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateFirewallRuleOutput",
-}, smithy.ShapeTypeStructure, 17)
-var CreateFirewallRuleOutput_action *smithy.Schema
-
-var CreateFirewallRuleOutput_blockOverrideDnsType *smithy.Schema
-
-var CreateFirewallRuleOutput_blockOverrideDomain *smithy.Schema
-
-var CreateFirewallRuleOutput_blockOverrideTtl *smithy.Schema
-
-var CreateFirewallRuleOutput_blockResponse *smithy.Schema
-
-var CreateFirewallRuleOutput_confidenceThreshold *smithy.Schema
-
-var CreateFirewallRuleOutput_createdAt *smithy.Schema
-
-var CreateFirewallRuleOutput_description *smithy.Schema
-
-var CreateFirewallRuleOutput_dnsAdvancedProtection *smithy.Schema
-
-var CreateFirewallRuleOutput_firewallDomainListId *smithy.Schema
-
-var CreateFirewallRuleOutput_id *smithy.Schema
-
-var CreateFirewallRuleOutput_name *smithy.Schema
-
-var CreateFirewallRuleOutput_priority *smithy.Schema
-
-var CreateFirewallRuleOutput_dnsViewId *smithy.Schema
-
-var CreateFirewallRuleOutput_queryType *smithy.Schema
-
-var CreateFirewallRuleOutput_status *smithy.Schema
-
-var CreateFirewallRuleOutput_updatedAt *smithy.Schema
-
-var CreateGlobalResolverInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateGlobalResolverInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateGlobalResolverInput_clientToken *smithy.Schema
-
-var CreateGlobalResolverInput_description *smithy.Schema
-
-var CreateGlobalResolverInput_ipAddressType *smithy.Schema
-
-var CreateGlobalResolverInput_name *smithy.Schema
-
-var CreateGlobalResolverInput_observabilityRegion *smithy.Schema
-
-var CreateGlobalResolverInput_regions *smithy.Schema
-
-var CreateGlobalResolverInput_tags *smithy.Schema
-
-var CreateGlobalResolverOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "CreateGlobalResolverOutput",
-}, smithy.ShapeTypeStructure, 14)
-var CreateGlobalResolverOutput_id *smithy.Schema
-
-var CreateGlobalResolverOutput_arn *smithy.Schema
-
-var CreateGlobalResolverOutput_clientToken *smithy.Schema
-
-var CreateGlobalResolverOutput_createdAt *smithy.Schema
-
-var CreateGlobalResolverOutput_description *smithy.Schema
-
-var CreateGlobalResolverOutput_dnsName *smithy.Schema
-
-var CreateGlobalResolverOutput_ipAddressType *smithy.Schema
-
-var CreateGlobalResolverOutput_ipv4Addresses *smithy.Schema
-
-var CreateGlobalResolverOutput_ipv6Addresses *smithy.Schema
-
-var CreateGlobalResolverOutput_name *smithy.Schema
-
-var CreateGlobalResolverOutput_observabilityRegion *smithy.Schema
-
-var CreateGlobalResolverOutput_regions *smithy.Schema
-
-var CreateGlobalResolverOutput_status *smithy.Schema
-
-var CreateGlobalResolverOutput_updatedAt *smithy.Schema
-
-var DeleteAccessSourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteAccessSourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAccessSourceInput_accessSourceId *smithy.Schema
-
-var DeleteAccessSourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteAccessSourceOutput",
-}, smithy.ShapeTypeStructure, 10)
-var DeleteAccessSourceOutput_arn *smithy.Schema
-
-var DeleteAccessSourceOutput_cidr *smithy.Schema
-
-var DeleteAccessSourceOutput_createdAt *smithy.Schema
-
-var DeleteAccessSourceOutput_id *smithy.Schema
-
-var DeleteAccessSourceOutput_ipAddressType *smithy.Schema
-
-var DeleteAccessSourceOutput_name *smithy.Schema
-
-var DeleteAccessSourceOutput_dnsViewId *smithy.Schema
-
-var DeleteAccessSourceOutput_protocol *smithy.Schema
-
-var DeleteAccessSourceOutput_status *smithy.Schema
-
-var DeleteAccessSourceOutput_updatedAt *smithy.Schema
-
-var DeleteAccessTokenInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteAccessTokenInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAccessTokenInput_accessTokenId *smithy.Schema
-
-var DeleteAccessTokenOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteAccessTokenOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteAccessTokenOutput_id *smithy.Schema
-
-var DeleteAccessTokenOutput_status *smithy.Schema
-
-var DeleteAccessTokenOutput_deletedAt *smithy.Schema
-
-var DeleteDNSViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteDNSViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDNSViewInput_dnsViewId *smithy.Schema
-
-var DeleteDNSViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteDNSViewOutput",
-}, smithy.ShapeTypeStructure, 12)
-var DeleteDNSViewOutput_id *smithy.Schema
-
-var DeleteDNSViewOutput_arn *smithy.Schema
-
-var DeleteDNSViewOutput_clientToken *smithy.Schema
-
-var DeleteDNSViewOutput_dnssecValidation *smithy.Schema
-
-var DeleteDNSViewOutput_ednsClientSubnet *smithy.Schema
-
-var DeleteDNSViewOutput_firewallRulesFailOpen *smithy.Schema
-
-var DeleteDNSViewOutput_name *smithy.Schema
-
-var DeleteDNSViewOutput_description *smithy.Schema
-
-var DeleteDNSViewOutput_globalResolverId *smithy.Schema
-
-var DeleteDNSViewOutput_createdAt *smithy.Schema
-
-var DeleteDNSViewOutput_updatedAt *smithy.Schema
-
-var DeleteDNSViewOutput_status *smithy.Schema
-
-var DeleteFirewallDomainListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteFirewallDomainListInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFirewallDomainListInput_firewallDomainListId *smithy.Schema
-
-var DeleteFirewallDomainListOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteFirewallDomainListOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteFirewallDomainListOutput_arn *smithy.Schema
-
-var DeleteFirewallDomainListOutput_id *smithy.Schema
-
-var DeleteFirewallDomainListOutput_name *smithy.Schema
-
-var DeleteFirewallDomainListOutput_status *smithy.Schema
-
-var DeleteFirewallRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteFirewallRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFirewallRuleInput_firewallRuleId *smithy.Schema
-
-var DeleteFirewallRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteFirewallRuleOutput",
-}, smithy.ShapeTypeStructure, 17)
-var DeleteFirewallRuleOutput_action *smithy.Schema
-
-var DeleteFirewallRuleOutput_blockOverrideDnsType *smithy.Schema
-
-var DeleteFirewallRuleOutput_blockOverrideDomain *smithy.Schema
-
-var DeleteFirewallRuleOutput_blockOverrideTtl *smithy.Schema
-
-var DeleteFirewallRuleOutput_blockResponse *smithy.Schema
-
-var DeleteFirewallRuleOutput_confidenceThreshold *smithy.Schema
-
-var DeleteFirewallRuleOutput_createdAt *smithy.Schema
-
-var DeleteFirewallRuleOutput_description *smithy.Schema
-
-var DeleteFirewallRuleOutput_dnsAdvancedProtection *smithy.Schema
-
-var DeleteFirewallRuleOutput_firewallDomainListId *smithy.Schema
-
-var DeleteFirewallRuleOutput_id *smithy.Schema
-
-var DeleteFirewallRuleOutput_name *smithy.Schema
-
-var DeleteFirewallRuleOutput_priority *smithy.Schema
-
-var DeleteFirewallRuleOutput_dnsViewId *smithy.Schema
-
-var DeleteFirewallRuleOutput_queryType *smithy.Schema
-
-var DeleteFirewallRuleOutput_status *smithy.Schema
-
-var DeleteFirewallRuleOutput_updatedAt *smithy.Schema
-
-var DeleteGlobalResolverInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteGlobalResolverInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGlobalResolverInput_globalResolverId *smithy.Schema
-
-var DeleteGlobalResolverOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DeleteGlobalResolverOutput",
-}, smithy.ShapeTypeStructure, 14)
-var DeleteGlobalResolverOutput_id *smithy.Schema
-
-var DeleteGlobalResolverOutput_arn *smithy.Schema
-
-var DeleteGlobalResolverOutput_clientToken *smithy.Schema
-
-var DeleteGlobalResolverOutput_dnsName *smithy.Schema
-
-var DeleteGlobalResolverOutput_observabilityRegion *smithy.Schema
-
-var DeleteGlobalResolverOutput_name *smithy.Schema
-
-var DeleteGlobalResolverOutput_description *smithy.Schema
-
-var DeleteGlobalResolverOutput_regions *smithy.Schema
-
-var DeleteGlobalResolverOutput_createdAt *smithy.Schema
-
-var DeleteGlobalResolverOutput_updatedAt *smithy.Schema
-
-var DeleteGlobalResolverOutput_status *smithy.Schema
-
-var DeleteGlobalResolverOutput_ipv4Addresses *smithy.Schema
-
-var DeleteGlobalResolverOutput_ipv6Addresses *smithy.Schema
-
-var DeleteGlobalResolverOutput_ipAddressType *smithy.Schema
-
-var DisableDNSViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DisableDNSViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableDNSViewInput_dnsViewId *smithy.Schema
-
-var DisableDNSViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DisableDNSViewOutput",
-}, smithy.ShapeTypeStructure, 12)
-var DisableDNSViewOutput_id *smithy.Schema
-
-var DisableDNSViewOutput_arn *smithy.Schema
-
-var DisableDNSViewOutput_clientToken *smithy.Schema
-
-var DisableDNSViewOutput_dnssecValidation *smithy.Schema
-
-var DisableDNSViewOutput_ednsClientSubnet *smithy.Schema
-
-var DisableDNSViewOutput_firewallRulesFailOpen *smithy.Schema
-
-var DisableDNSViewOutput_name *smithy.Schema
-
-var DisableDNSViewOutput_description *smithy.Schema
-
-var DisableDNSViewOutput_globalResolverId *smithy.Schema
-
-var DisableDNSViewOutput_createdAt *smithy.Schema
-
-var DisableDNSViewOutput_updatedAt *smithy.Schema
-
-var DisableDNSViewOutput_status *smithy.Schema
-
-var DisassociateHostedZoneInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DisassociateHostedZoneInput",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateHostedZoneInput_hostedZoneId *smithy.Schema
-
-var DisassociateHostedZoneInput_resourceArn *smithy.Schema
-
-var DisassociateHostedZoneOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "DisassociateHostedZoneOutput",
-}, smithy.ShapeTypeStructure, 8)
-var DisassociateHostedZoneOutput_id *smithy.Schema
-
-var DisassociateHostedZoneOutput_resourceArn *smithy.Schema
-
-var DisassociateHostedZoneOutput_hostedZoneId *smithy.Schema
-
-var DisassociateHostedZoneOutput_hostedZoneName *smithy.Schema
-
-var DisassociateHostedZoneOutput_name *smithy.Schema
-
-var DisassociateHostedZoneOutput_createdAt *smithy.Schema
-
-var DisassociateHostedZoneOutput_updatedAt *smithy.Schema
-
-var DisassociateHostedZoneOutput_status *smithy.Schema
-
-var EnableDNSViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "EnableDNSViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var EnableDNSViewInput_dnsViewId *smithy.Schema
-
-var EnableDNSViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "EnableDNSViewOutput",
-}, smithy.ShapeTypeStructure, 12)
-var EnableDNSViewOutput_id *smithy.Schema
-
-var EnableDNSViewOutput_arn *smithy.Schema
-
-var EnableDNSViewOutput_clientToken *smithy.Schema
-
-var EnableDNSViewOutput_dnssecValidation *smithy.Schema
-
-var EnableDNSViewOutput_ednsClientSubnet *smithy.Schema
-
-var EnableDNSViewOutput_firewallRulesFailOpen *smithy.Schema
-
-var EnableDNSViewOutput_name *smithy.Schema
-
-var EnableDNSViewOutput_description *smithy.Schema
-
-var EnableDNSViewOutput_globalResolverId *smithy.Schema
-
-var EnableDNSViewOutput_createdAt *smithy.Schema
-
-var EnableDNSViewOutput_updatedAt *smithy.Schema
-
-var EnableDNSViewOutput_status *smithy.Schema
-
-var GetAccessSourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetAccessSourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccessSourceInput_accessSourceId *smithy.Schema
-
-var GetAccessSourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetAccessSourceOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetAccessSourceOutput_arn *smithy.Schema
-
-var GetAccessSourceOutput_cidr *smithy.Schema
-
-var GetAccessSourceOutput_createdAt *smithy.Schema
-
-var GetAccessSourceOutput_id *smithy.Schema
-
-var GetAccessSourceOutput_ipAddressType *smithy.Schema
-
-var GetAccessSourceOutput_name *smithy.Schema
-
-var GetAccessSourceOutput_dnsViewId *smithy.Schema
-
-var GetAccessSourceOutput_protocol *smithy.Schema
-
-var GetAccessSourceOutput_status *smithy.Schema
-
-var GetAccessSourceOutput_updatedAt *smithy.Schema
-
-var GetAccessTokenInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetAccessTokenInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccessTokenInput_accessTokenId *smithy.Schema
-
-var GetAccessTokenOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetAccessTokenOutput",
-}, smithy.ShapeTypeStructure, 11)
-var GetAccessTokenOutput_id *smithy.Schema
-
-var GetAccessTokenOutput_arn *smithy.Schema
-
-var GetAccessTokenOutput_clientToken *smithy.Schema
-
-var GetAccessTokenOutput_createdAt *smithy.Schema
-
-var GetAccessTokenOutput_dnsViewId *smithy.Schema
-
-var GetAccessTokenOutput_expiresAt *smithy.Schema
-
-var GetAccessTokenOutput_globalResolverId *smithy.Schema
-
-var GetAccessTokenOutput_name *smithy.Schema
-
-var GetAccessTokenOutput_status *smithy.Schema
-
-var GetAccessTokenOutput_updatedAt *smithy.Schema
-
-var GetAccessTokenOutput_value *smithy.Schema
-
-var GetDNSViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetDNSViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDNSViewInput_dnsViewId *smithy.Schema
-
-var GetDNSViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetDNSViewOutput",
-}, smithy.ShapeTypeStructure, 12)
-var GetDNSViewOutput_id *smithy.Schema
-
-var GetDNSViewOutput_arn *smithy.Schema
-
-var GetDNSViewOutput_clientToken *smithy.Schema
-
-var GetDNSViewOutput_dnssecValidation *smithy.Schema
-
-var GetDNSViewOutput_ednsClientSubnet *smithy.Schema
-
-var GetDNSViewOutput_firewallRulesFailOpen *smithy.Schema
-
-var GetDNSViewOutput_name *smithy.Schema
-
-var GetDNSViewOutput_description *smithy.Schema
-
-var GetDNSViewOutput_globalResolverId *smithy.Schema
-
-var GetDNSViewOutput_createdAt *smithy.Schema
-
-var GetDNSViewOutput_updatedAt *smithy.Schema
-
-var GetDNSViewOutput_status *smithy.Schema
-
-var GetFirewallDomainListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetFirewallDomainListInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetFirewallDomainListInput_firewallDomainListId *smithy.Schema
-
-var GetFirewallDomainListOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetFirewallDomainListOutput",
-}, smithy.ShapeTypeStructure, 11)
-var GetFirewallDomainListOutput_arn *smithy.Schema
-
-var GetFirewallDomainListOutput_globalResolverId *smithy.Schema
-
-var GetFirewallDomainListOutput_clientToken *smithy.Schema
-
-var GetFirewallDomainListOutput_createdAt *smithy.Schema
-
-var GetFirewallDomainListOutput_description *smithy.Schema
-
-var GetFirewallDomainListOutput_domainCount *smithy.Schema
-
-var GetFirewallDomainListOutput_id *smithy.Schema
-
-var GetFirewallDomainListOutput_name *smithy.Schema
-
-var GetFirewallDomainListOutput_status *smithy.Schema
-
-var GetFirewallDomainListOutput_statusMessage *smithy.Schema
-
-var GetFirewallDomainListOutput_updatedAt *smithy.Schema
-
-var GetFirewallRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetFirewallRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetFirewallRuleInput_firewallRuleId *smithy.Schema
-
-var GetFirewallRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetFirewallRuleOutput",
-}, smithy.ShapeTypeStructure, 17)
-var GetFirewallRuleOutput_action *smithy.Schema
-
-var GetFirewallRuleOutput_blockOverrideDnsType *smithy.Schema
-
-var GetFirewallRuleOutput_blockOverrideDomain *smithy.Schema
-
-var GetFirewallRuleOutput_blockOverrideTtl *smithy.Schema
-
-var GetFirewallRuleOutput_blockResponse *smithy.Schema
-
-var GetFirewallRuleOutput_confidenceThreshold *smithy.Schema
-
-var GetFirewallRuleOutput_createdAt *smithy.Schema
-
-var GetFirewallRuleOutput_description *smithy.Schema
-
-var GetFirewallRuleOutput_dnsAdvancedProtection *smithy.Schema
-
-var GetFirewallRuleOutput_firewallDomainListId *smithy.Schema
-
-var GetFirewallRuleOutput_id *smithy.Schema
-
-var GetFirewallRuleOutput_name *smithy.Schema
-
-var GetFirewallRuleOutput_priority *smithy.Schema
-
-var GetFirewallRuleOutput_dnsViewId *smithy.Schema
-
-var GetFirewallRuleOutput_queryType *smithy.Schema
-
-var GetFirewallRuleOutput_status *smithy.Schema
-
-var GetFirewallRuleOutput_updatedAt *smithy.Schema
-
-var GetGlobalResolverInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetGlobalResolverInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetGlobalResolverInput_globalResolverId *smithy.Schema
-
-var GetGlobalResolverOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetGlobalResolverOutput",
-}, smithy.ShapeTypeStructure, 14)
-var GetGlobalResolverOutput_id *smithy.Schema
-
-var GetGlobalResolverOutput_arn *smithy.Schema
-
-var GetGlobalResolverOutput_clientToken *smithy.Schema
-
-var GetGlobalResolverOutput_dnsName *smithy.Schema
-
-var GetGlobalResolverOutput_observabilityRegion *smithy.Schema
-
-var GetGlobalResolverOutput_name *smithy.Schema
-
-var GetGlobalResolverOutput_description *smithy.Schema
-
-var GetGlobalResolverOutput_regions *smithy.Schema
-
-var GetGlobalResolverOutput_createdAt *smithy.Schema
-
-var GetGlobalResolverOutput_updatedAt *smithy.Schema
-
-var GetGlobalResolverOutput_status *smithy.Schema
-
-var GetGlobalResolverOutput_ipv4Addresses *smithy.Schema
-
-var GetGlobalResolverOutput_ipv6Addresses *smithy.Schema
-
-var GetGlobalResolverOutput_ipAddressType *smithy.Schema
-
-var GetHostedZoneAssociationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetHostedZoneAssociationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHostedZoneAssociationInput_hostedZoneAssociationId *smithy.Schema
-
-var GetHostedZoneAssociationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetHostedZoneAssociationOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetHostedZoneAssociationOutput_id *smithy.Schema
-
-var GetHostedZoneAssociationOutput_resourceArn *smithy.Schema
-
-var GetHostedZoneAssociationOutput_hostedZoneId *smithy.Schema
-
-var GetHostedZoneAssociationOutput_hostedZoneName *smithy.Schema
-
-var GetHostedZoneAssociationOutput_name *smithy.Schema
-
-var GetHostedZoneAssociationOutput_createdAt *smithy.Schema
-
-var GetHostedZoneAssociationOutput_updatedAt *smithy.Schema
-
-var GetHostedZoneAssociationOutput_status *smithy.Schema
-
-var GetManagedFirewallDomainListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetManagedFirewallDomainListInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetManagedFirewallDomainListInput_managedFirewallDomainListId *smithy.Schema
-
-var GetManagedFirewallDomainListOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "GetManagedFirewallDomainListOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetManagedFirewallDomainListOutput_description *smithy.Schema
-
-var GetManagedFirewallDomainListOutput_id *smithy.Schema
-
-var GetManagedFirewallDomainListOutput_name *smithy.Schema
-
-var GetManagedFirewallDomainListOutput_managedListType *smithy.Schema
-
-var ImportFirewallDomainsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ImportFirewallDomainsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ImportFirewallDomainsInput_domainFileUrl *smithy.Schema
-
-var ImportFirewallDomainsInput_firewallDomainListId *smithy.Schema
-
-var ImportFirewallDomainsInput_operation *smithy.Schema
-
-var ImportFirewallDomainsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ImportFirewallDomainsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ImportFirewallDomainsOutput_id *smithy.Schema
-
-var ImportFirewallDomainsOutput_name *smithy.Schema
-
-var ImportFirewallDomainsOutput_status *smithy.Schema
-
-var ListAccessSourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListAccessSourcesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAccessSourcesInput_maxResults *smithy.Schema
-
-var ListAccessSourcesInput_nextToken *smithy.Schema
-
-var ListAccessSourcesInput_filters *smithy.Schema
-
-var ListAccessSourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListAccessSourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccessSourcesOutput_nextToken *smithy.Schema
-
-var ListAccessSourcesOutput_accessSources *smithy.Schema
-
-var ListAccessTokensInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListAccessTokensInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListAccessTokensInput_maxResults *smithy.Schema
-
-var ListAccessTokensInput_nextToken *smithy.Schema
-
-var ListAccessTokensInput_dnsViewId *smithy.Schema
-
-var ListAccessTokensInput_filters *smithy.Schema
-
-var ListAccessTokensOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListAccessTokensOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccessTokensOutput_nextToken *smithy.Schema
-
-var ListAccessTokensOutput_accessTokens *smithy.Schema
-
-var ListDNSViewsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListDNSViewsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListDNSViewsInput_maxResults *smithy.Schema
-
-var ListDNSViewsInput_nextToken *smithy.Schema
-
-var ListDNSViewsInput_globalResolverId *smithy.Schema
-
-var ListDNSViewsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListDNSViewsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDNSViewsOutput_nextToken *smithy.Schema
-
-var ListDNSViewsOutput_dnsViews *smithy.Schema
-
-var ListFirewallDomainListsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallDomainListsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFirewallDomainListsInput_maxResults *smithy.Schema
-
-var ListFirewallDomainListsInput_nextToken *smithy.Schema
-
-var ListFirewallDomainListsInput_globalResolverId *smithy.Schema
-
-var ListFirewallDomainListsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallDomainListsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFirewallDomainListsOutput_nextToken *smithy.Schema
-
-var ListFirewallDomainListsOutput_firewallDomainLists *smithy.Schema
-
-var ListFirewallDomainsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallDomainsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFirewallDomainsInput_maxResults *smithy.Schema
-
-var ListFirewallDomainsInput_nextToken *smithy.Schema
-
-var ListFirewallDomainsInput_firewallDomainListId *smithy.Schema
-
-var ListFirewallDomainsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallDomainsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFirewallDomainsOutput_nextToken *smithy.Schema
-
-var ListFirewallDomainsOutput_domains *smithy.Schema
-
-var ListFirewallRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallRulesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListFirewallRulesInput_maxResults *smithy.Schema
-
-var ListFirewallRulesInput_nextToken *smithy.Schema
-
-var ListFirewallRulesInput_dnsViewId *smithy.Schema
-
-var ListFirewallRulesInput_filters *smithy.Schema
-
-var ListFirewallRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListFirewallRulesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFirewallRulesOutput_nextToken *smithy.Schema
-
-var ListFirewallRulesOutput_firewallRules *smithy.Schema
-
-var ListGlobalResolversInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListGlobalResolversInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGlobalResolversInput_maxResults *smithy.Schema
-
-var ListGlobalResolversInput_nextToken *smithy.Schema
-
-var ListGlobalResolversOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListGlobalResolversOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGlobalResolversOutput_nextToken *smithy.Schema
-
-var ListGlobalResolversOutput_globalResolvers *smithy.Schema
-
-var ListHostedZoneAssociationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListHostedZoneAssociationsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListHostedZoneAssociationsInput_maxResults *smithy.Schema
-
-var ListHostedZoneAssociationsInput_nextToken *smithy.Schema
-
-var ListHostedZoneAssociationsInput_resourceArn *smithy.Schema
-
-var ListHostedZoneAssociationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListHostedZoneAssociationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListHostedZoneAssociationsOutput_nextToken *smithy.Schema
-
-var ListHostedZoneAssociationsOutput_hostedZoneAssociations *smithy.Schema
-
-var ListManagedFirewallDomainListsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListManagedFirewallDomainListsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListManagedFirewallDomainListsInput_maxResults *smithy.Schema
-
-var ListManagedFirewallDomainListsInput_nextToken *smithy.Schema
-
-var ListManagedFirewallDomainListsInput_managedFirewallDomainListType *smithy.Schema
-
-var ListManagedFirewallDomainListsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListManagedFirewallDomainListsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedFirewallDomainListsOutput_nextToken *smithy.Schema
-
-var ListManagedFirewallDomainListsOutput_managedFirewallDomainLists *smithy.Schema
-
-var ListSharedDNSViewsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListSharedDNSViewsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSharedDNSViewsInput_maxResults *smithy.Schema
-
-var ListSharedDNSViewsInput_nextToken *smithy.Schema
-
-var ListSharedDNSViewsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListSharedDNSViewsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSharedDNSViewsOutput_nextToken *smithy.Schema
-
-var ListSharedDNSViewsOutput_dnsViews *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAccessSourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateAccessSourceInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateAccessSourceInput_accessSourceId *smithy.Schema
-
-var UpdateAccessSourceInput_cidr *smithy.Schema
-
-var UpdateAccessSourceInput_ipAddressType *smithy.Schema
-
-var UpdateAccessSourceInput_name *smithy.Schema
-
-var UpdateAccessSourceInput_protocol *smithy.Schema
-
-var UpdateAccessSourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateAccessSourceOutput",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateAccessSourceOutput_arn *smithy.Schema
-
-var UpdateAccessSourceOutput_cidr *smithy.Schema
-
-var UpdateAccessSourceOutput_createdAt *smithy.Schema
-
-var UpdateAccessSourceOutput_id *smithy.Schema
-
-var UpdateAccessSourceOutput_ipAddressType *smithy.Schema
-
-var UpdateAccessSourceOutput_name *smithy.Schema
-
-var UpdateAccessSourceOutput_dnsViewId *smithy.Schema
-
-var UpdateAccessSourceOutput_protocol *smithy.Schema
-
-var UpdateAccessSourceOutput_status *smithy.Schema
-
-var UpdateAccessSourceOutput_updatedAt *smithy.Schema
-
-var UpdateAccessTokenInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateAccessTokenInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAccessTokenInput_accessTokenId *smithy.Schema
-
-var UpdateAccessTokenInput_name *smithy.Schema
-
-var UpdateAccessTokenOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateAccessTokenOutput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAccessTokenOutput_id *smithy.Schema
-
-var UpdateAccessTokenOutput_name *smithy.Schema
-
-var UpdateDNSViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateDNSViewInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateDNSViewInput_dnsViewId *smithy.Schema
-
-var UpdateDNSViewInput_name *smithy.Schema
-
-var UpdateDNSViewInput_description *smithy.Schema
-
-var UpdateDNSViewInput_dnssecValidation *smithy.Schema
-
-var UpdateDNSViewInput_ednsClientSubnet *smithy.Schema
-
-var UpdateDNSViewInput_firewallRulesFailOpen *smithy.Schema
-
-var UpdateDNSViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateDNSViewOutput",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateDNSViewOutput_id *smithy.Schema
-
-var UpdateDNSViewOutput_arn *smithy.Schema
-
-var UpdateDNSViewOutput_clientToken *smithy.Schema
-
-var UpdateDNSViewOutput_dnssecValidation *smithy.Schema
-
-var UpdateDNSViewOutput_ednsClientSubnet *smithy.Schema
-
-var UpdateDNSViewOutput_firewallRulesFailOpen *smithy.Schema
-
-var UpdateDNSViewOutput_name *smithy.Schema
-
-var UpdateDNSViewOutput_description *smithy.Schema
-
-var UpdateDNSViewOutput_globalResolverId *smithy.Schema
-
-var UpdateDNSViewOutput_createdAt *smithy.Schema
-
-var UpdateDNSViewOutput_updatedAt *smithy.Schema
-
-var UpdateDNSViewOutput_status *smithy.Schema
-
-var UpdateFirewallDomainsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateFirewallDomainsInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateFirewallDomainsInput_domains *smithy.Schema
-
-var UpdateFirewallDomainsInput_firewallDomainListId *smithy.Schema
-
-var UpdateFirewallDomainsInput_operation *smithy.Schema
-
-var UpdateFirewallDomainsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateFirewallDomainsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateFirewallDomainsOutput_id *smithy.Schema
-
-var UpdateFirewallDomainsOutput_name *smithy.Schema
-
-var UpdateFirewallDomainsOutput_status *smithy.Schema
-
-var UpdateFirewallRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateFirewallRuleInput",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateFirewallRuleInput_action *smithy.Schema
-
-var UpdateFirewallRuleInput_blockOverrideDnsType *smithy.Schema
-
-var UpdateFirewallRuleInput_blockOverrideDomain *smithy.Schema
-
-var UpdateFirewallRuleInput_blockOverrideTtl *smithy.Schema
-
-var UpdateFirewallRuleInput_blockResponse *smithy.Schema
-
-var UpdateFirewallRuleInput_clientToken *smithy.Schema
-
-var UpdateFirewallRuleInput_confidenceThreshold *smithy.Schema
-
-var UpdateFirewallRuleInput_description *smithy.Schema
-
-var UpdateFirewallRuleInput_dnsAdvancedProtection *smithy.Schema
-
-var UpdateFirewallRuleInput_firewallRuleId *smithy.Schema
-
-var UpdateFirewallRuleInput_name *smithy.Schema
-
-var UpdateFirewallRuleInput_priority *smithy.Schema
-
-var UpdateFirewallRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateFirewallRuleOutput",
-}, smithy.ShapeTypeStructure, 17)
-var UpdateFirewallRuleOutput_action *smithy.Schema
-
-var UpdateFirewallRuleOutput_blockOverrideDnsType *smithy.Schema
-
-var UpdateFirewallRuleOutput_blockOverrideDomain *smithy.Schema
-
-var UpdateFirewallRuleOutput_blockOverrideTtl *smithy.Schema
-
-var UpdateFirewallRuleOutput_blockResponse *smithy.Schema
-
-var UpdateFirewallRuleOutput_confidenceThreshold *smithy.Schema
-
-var UpdateFirewallRuleOutput_createdAt *smithy.Schema
-
-var UpdateFirewallRuleOutput_description *smithy.Schema
-
-var UpdateFirewallRuleOutput_dnsAdvancedProtection *smithy.Schema
-
-var UpdateFirewallRuleOutput_firewallDomainListId *smithy.Schema
-
-var UpdateFirewallRuleOutput_id *smithy.Schema
-
-var UpdateFirewallRuleOutput_name *smithy.Schema
-
-var UpdateFirewallRuleOutput_priority *smithy.Schema
-
-var UpdateFirewallRuleOutput_dnsViewId *smithy.Schema
-
-var UpdateFirewallRuleOutput_queryType *smithy.Schema
-
-var UpdateFirewallRuleOutput_status *smithy.Schema
-
-var UpdateFirewallRuleOutput_updatedAt *smithy.Schema
-
-var UpdateGlobalResolverInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateGlobalResolverInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateGlobalResolverInput_globalResolverId *smithy.Schema
-
-var UpdateGlobalResolverInput_name *smithy.Schema
-
-var UpdateGlobalResolverInput_observabilityRegion *smithy.Schema
-
-var UpdateGlobalResolverInput_description *smithy.Schema
-
-var UpdateGlobalResolverInput_ipAddressType *smithy.Schema
-
-var UpdateGlobalResolverInput_regions *smithy.Schema
-
-var UpdateGlobalResolverOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateGlobalResolverOutput",
-}, smithy.ShapeTypeStructure, 14)
-var UpdateGlobalResolverOutput_id *smithy.Schema
-
-var UpdateGlobalResolverOutput_arn *smithy.Schema
-
-var UpdateGlobalResolverOutput_clientToken *smithy.Schema
-
-var UpdateGlobalResolverOutput_dnsName *smithy.Schema
-
-var UpdateGlobalResolverOutput_observabilityRegion *smithy.Schema
-
-var UpdateGlobalResolverOutput_name *smithy.Schema
-
-var UpdateGlobalResolverOutput_description *smithy.Schema
-
-var UpdateGlobalResolverOutput_regions *smithy.Schema
-
-var UpdateGlobalResolverOutput_createdAt *smithy.Schema
-
-var UpdateGlobalResolverOutput_updatedAt *smithy.Schema
-
-var UpdateGlobalResolverOutput_status *smithy.Schema
-
-var UpdateGlobalResolverOutput_ipv4Addresses *smithy.Schema
-
-var UpdateGlobalResolverOutput_ipv6Addresses *smithy.Schema
-
-var UpdateGlobalResolverOutput_ipAddressType *smithy.Schema
-
-var UpdateHostedZoneAssociationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateHostedZoneAssociationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateHostedZoneAssociationInput_hostedZoneAssociationId *smithy.Schema
-
-var UpdateHostedZoneAssociationInput_name *smithy.Schema
-
-var UpdateHostedZoneAssociationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53globalresolver",
-	Name:      "UpdateHostedZoneAssociationOutput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateHostedZoneAssociationOutput_id *smithy.Schema
-
-var UpdateHostedZoneAssociationOutput_resourceArn *smithy.Schema
-
-var UpdateHostedZoneAssociationOutput_hostedZoneId *smithy.Schema
-
-var UpdateHostedZoneAssociationOutput_hostedZoneName *smithy.Schema
-
-var UpdateHostedZoneAssociationOutput_name *smithy.Schema
-
-var UpdateHostedZoneAssociationOutput_createdAt *smithy.Schema
-
-var UpdateHostedZoneAssociationOutput_updatedAt *smithy.Schema
-
-var UpdateHostedZoneAssociationOutput_status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	IpAddressType_IPV4 = IpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	IpAddressType_IPV6 = IpAddressType.AddMember("IPV6", smithyprelude.Unit)
-
-	DnsProtocol_DO53 = DnsProtocol.AddMember("DO53", smithyprelude.Unit)
-
-	DnsProtocol_DOH = DnsProtocol.AddMember("DOH", smithyprelude.Unit)
-
-	DnsProtocol_DOT = DnsProtocol.AddMember("DOT", smithyprelude.Unit)
-
-	CRResourceStatus_CREATING = CRResourceStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	CRResourceStatus_OPERATIONAL = CRResourceStatus.AddMember("OPERATIONAL", smithyprelude.Unit)
-
-	CRResourceStatus_UPDATING = CRResourceStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	CRResourceStatus_DELETING = CRResourceStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	AccessSourcesItem_arn = AccessSourcesItem.AddMember("arn", _ResourceArn)
-
-	AccessSourcesItem_cidr = AccessSourcesItem.AddMember("cidr", _Cidr)
-
-	AccessSourcesItem_createdAt = AccessSourcesItem.AddMember("createdAt", _ISO8601TimeString)
-
-	AccessSourcesItem_id = AccessSourcesItem.AddMember("id", _ResourceId)
-
-	AccessSourcesItem_ipAddressType = AccessSourcesItem.AddMember("ipAddressType", IpAddressType)
-
-	AccessSourcesItem_name = AccessSourcesItem.AddMember("name", _ResourceNameShort)
-
-	AccessSourcesItem_dnsViewId = AccessSourcesItem.AddMember("dnsViewId", _ResourceId)
-
-	AccessSourcesItem_protocol = AccessSourcesItem.AddMember("protocol", DnsProtocol)
-
-	AccessSourcesItem_status = AccessSourcesItem.AddMember("status", CRResourceStatus)
-
-	AccessSourcesItem_updatedAt = AccessSourcesItem.AddMember("updatedAt", _ISO8601TimeString)
-
-	_AccessSources_member = _AccessSources.AddMember("member", AccessSourcesItem)
-
-	TokenStatus_CREATING = TokenStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	TokenStatus_OPERATIONAL = TokenStatus.AddMember("OPERATIONAL", smithyprelude.Unit)
-
-	TokenStatus_DELETING = TokenStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	AccessTokenItem_id = AccessTokenItem.AddMember("id", _ResourceId)
-
-	AccessTokenItem_arn = AccessTokenItem.AddMember("arn", _ResourceArn)
-
-	AccessTokenItem_createdAt = AccessTokenItem.AddMember("createdAt", _ISO8601TimeString)
-
-	AccessTokenItem_dnsViewId = AccessTokenItem.AddMember("dnsViewId", _ResourceId)
-
-	AccessTokenItem_expiresAt = AccessTokenItem.AddMember("expiresAt", _ISO8601TimeString)
-
-	AccessTokenItem_globalResolverId = AccessTokenItem.AddMember("globalResolverId", _ResourceId)
-
-	AccessTokenItem_name = AccessTokenItem.AddMember("name", _ResourceNameShort)
-
-	AccessTokenItem_status = AccessTokenItem.AddMember("status", TokenStatus)
-
-	AccessTokenItem_updatedAt = AccessTokenItem.AddMember("updatedAt", _ISO8601TimeString)
-
-	_AccessTokens_member = _AccessTokens.AddMember("member", AccessTokenItem)
-
-	FirewallRuleAction_ALLOW = FirewallRuleAction.AddMember("ALLOW", smithyprelude.Unit)
-
-	FirewallRuleAction_ALERT = FirewallRuleAction.AddMember("ALERT", smithyprelude.Unit)
-
-	FirewallRuleAction_BLOCK = FirewallRuleAction.AddMember("BLOCK", smithyprelude.Unit)
-
-	BlockOverrideDnsQueryType_CNAME = BlockOverrideDnsQueryType.AddMember("CNAME", smithyprelude.Unit)
-
-	FirewallBlockResponse_NODATA = FirewallBlockResponse.AddMember("NODATA", smithyprelude.Unit)
-
-	FirewallBlockResponse_NXDOMAIN = FirewallBlockResponse.AddMember("NXDOMAIN", smithyprelude.Unit)
-
-	FirewallBlockResponse_OVERRIDE = FirewallBlockResponse.AddMember("OVERRIDE", smithyprelude.Unit)
-
-	ConfidenceThreshold_LOW = ConfidenceThreshold.AddMember("LOW", smithyprelude.Unit)
-
-	ConfidenceThreshold_MEDIUM = ConfidenceThreshold.AddMember("MEDIUM", smithyprelude.Unit)
-
-	ConfidenceThreshold_HIGH = ConfidenceThreshold.AddMember("HIGH", smithyprelude.Unit)
-
-	DnsAdvancedProtection_DGA = DnsAdvancedProtection.AddMember("DGA", smithyprelude.Unit)
-
-	DnsAdvancedProtection_DNS_TUNNELING = DnsAdvancedProtection.AddMember("DNS_TUNNELING", smithyprelude.Unit)
-
-	DnsAdvancedProtection_DICTIONARY_DGA = DnsAdvancedProtection.AddMember("DICTIONARY_DGA", smithyprelude.Unit)
-
-	BatchCreateFirewallRuleInputItem_action = BatchCreateFirewallRuleInputItem.AddMember("action", FirewallRuleAction)
-
-	BatchCreateFirewallRuleInputItem_blockOverrideDnsType = BatchCreateFirewallRuleInputItem.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	BatchCreateFirewallRuleInputItem_blockOverrideDomain = BatchCreateFirewallRuleInputItem.AddMember("blockOverrideDomain", _Domain)
-
-	BatchCreateFirewallRuleInputItem_blockOverrideTtl = BatchCreateFirewallRuleInputItem.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	BatchCreateFirewallRuleInputItem_blockResponse = BatchCreateFirewallRuleInputItem.AddMember("blockResponse", FirewallBlockResponse)
-
-	BatchCreateFirewallRuleInputItem_clientToken = BatchCreateFirewallRuleInputItem.AddMember("clientToken", _ClientToken)
-
-	BatchCreateFirewallRuleInputItem_confidenceThreshold = BatchCreateFirewallRuleInputItem.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	BatchCreateFirewallRuleInputItem_description = BatchCreateFirewallRuleInputItem.AddMember("description", _ResourceDescription)
-
-	BatchCreateFirewallRuleInputItem_dnsAdvancedProtection = BatchCreateFirewallRuleInputItem.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	BatchCreateFirewallRuleInputItem_firewallDomainListId = BatchCreateFirewallRuleInputItem.AddMember("firewallDomainListId", _ResourceId)
-
-	BatchCreateFirewallRuleInputItem_name = BatchCreateFirewallRuleInputItem.AddMember("name", _ResourceName)
-
-	BatchCreateFirewallRuleInputItem_priority = BatchCreateFirewallRuleInputItem.AddMember("priority", _FirewallRulePriority)
-
-	BatchCreateFirewallRuleInputItem_dnsViewId = BatchCreateFirewallRuleInputItem.AddMember("dnsViewId", _ResourceId)
-
-	BatchCreateFirewallRuleInputItem_qType = BatchCreateFirewallRuleInputItem.AddMember("qType", _DnsQueryType)
-
-	_BatchCreateFirewallRuleInputItems_member = _BatchCreateFirewallRuleInputItems.AddMember("member", BatchCreateFirewallRuleInputItem)
-
-	BatchCreateFirewallRuleResult_action = BatchCreateFirewallRuleResult.AddMember("action", FirewallRuleAction)
-
-	BatchCreateFirewallRuleResult_blockOverrideDnsType = BatchCreateFirewallRuleResult.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	BatchCreateFirewallRuleResult_blockOverrideDomain = BatchCreateFirewallRuleResult.AddMember("blockOverrideDomain", _Domain)
-
-	BatchCreateFirewallRuleResult_blockOverrideTtl = BatchCreateFirewallRuleResult.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	BatchCreateFirewallRuleResult_blockResponse = BatchCreateFirewallRuleResult.AddMember("blockResponse", FirewallBlockResponse)
-
-	BatchCreateFirewallRuleResult_clientToken = BatchCreateFirewallRuleResult.AddMember("clientToken", _ClientToken)
-
-	BatchCreateFirewallRuleResult_confidenceThreshold = BatchCreateFirewallRuleResult.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	BatchCreateFirewallRuleResult_createdAt = BatchCreateFirewallRuleResult.AddMember("createdAt", _ISO8601TimeString)
-
-	BatchCreateFirewallRuleResult_description = BatchCreateFirewallRuleResult.AddMember("description", _ResourceDescription)
-
-	BatchCreateFirewallRuleResult_dnsAdvancedProtection = BatchCreateFirewallRuleResult.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	BatchCreateFirewallRuleResult_firewallDomainListId = BatchCreateFirewallRuleResult.AddMember("firewallDomainListId", _ResourceId)
-
-	BatchCreateFirewallRuleResult_id = BatchCreateFirewallRuleResult.AddMember("id", _ResourceId)
-
-	BatchCreateFirewallRuleResult_managedDomainListName = BatchCreateFirewallRuleResult.AddMember("managedDomainListName", _ResourceName)
-
-	BatchCreateFirewallRuleResult_name = BatchCreateFirewallRuleResult.AddMember("name", _ResourceName)
-
-	BatchCreateFirewallRuleResult_priority = BatchCreateFirewallRuleResult.AddMember("priority", _FirewallRulePriority)
-
-	BatchCreateFirewallRuleResult_dnsViewId = BatchCreateFirewallRuleResult.AddMember("dnsViewId", _ResourceId)
-
-	BatchCreateFirewallRuleResult_queryType = BatchCreateFirewallRuleResult.AddMember("queryType", _DnsQueryType)
-
-	BatchCreateFirewallRuleResult_status = BatchCreateFirewallRuleResult.AddMember("status", CRResourceStatus)
-
-	BatchCreateFirewallRuleResult_updatedAt = BatchCreateFirewallRuleResult.AddMember("updatedAt", _ISO8601TimeString)
-
-	BatchCreateFirewallRuleOutputItem_firewallRule = BatchCreateFirewallRuleOutputItem.AddMember("firewallRule", BatchCreateFirewallRuleResult)
-
-	BatchCreateFirewallRuleOutputItem_code = BatchCreateFirewallRuleOutputItem.AddMember("code", smithyprelude.Integer)
-
-	BatchCreateFirewallRuleOutputItem_message = BatchCreateFirewallRuleOutputItem.AddMember("message", smithyprelude.String)
-
-	_BatchCreateFirewallRuleOutputItems_member = _BatchCreateFirewallRuleOutputItems.AddMember("member", BatchCreateFirewallRuleOutputItem)
-
-	BatchDeleteFirewallRuleInputItem_firewallRuleId = BatchDeleteFirewallRuleInputItem.AddMember("firewallRuleId", _ResourceId)
-
-	_BatchDeleteFirewallRuleInputItems_member = _BatchDeleteFirewallRuleInputItems.AddMember("member", BatchDeleteFirewallRuleInputItem)
-
-	BatchDeleteFirewallRuleResult_clientToken = BatchDeleteFirewallRuleResult.AddMember("clientToken", _ClientToken)
-
-	BatchDeleteFirewallRuleResult_id = BatchDeleteFirewallRuleResult.AddMember("id", _ResourceId)
-
-	BatchDeleteFirewallRuleResult_name = BatchDeleteFirewallRuleResult.AddMember("name", _ResourceName)
-
-	BatchDeleteFirewallRuleResult_status = BatchDeleteFirewallRuleResult.AddMember("status", CRResourceStatus)
-
-	BatchDeleteFirewallRuleOutputItem_firewallRule = BatchDeleteFirewallRuleOutputItem.AddMember("firewallRule", BatchDeleteFirewallRuleResult)
-
-	BatchDeleteFirewallRuleOutputItem_code = BatchDeleteFirewallRuleOutputItem.AddMember("code", smithyprelude.Integer)
-
-	BatchDeleteFirewallRuleOutputItem_message = BatchDeleteFirewallRuleOutputItem.AddMember("message", smithyprelude.String)
-
-	_BatchDeleteFirewallRuleOutputItems_member = _BatchDeleteFirewallRuleOutputItems.AddMember("member", BatchDeleteFirewallRuleOutputItem)
-
-	BatchUpdateFirewallRuleInputItem_action = BatchUpdateFirewallRuleInputItem.AddMember("action", FirewallRuleAction)
-
-	BatchUpdateFirewallRuleInputItem_blockOverrideDnsType = BatchUpdateFirewallRuleInputItem.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	BatchUpdateFirewallRuleInputItem_blockOverrideDomain = BatchUpdateFirewallRuleInputItem.AddMember("blockOverrideDomain", _Domain)
-
-	BatchUpdateFirewallRuleInputItem_blockOverrideTtl = BatchUpdateFirewallRuleInputItem.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	BatchUpdateFirewallRuleInputItem_blockResponse = BatchUpdateFirewallRuleInputItem.AddMember("blockResponse", FirewallBlockResponse)
-
-	BatchUpdateFirewallRuleInputItem_confidenceThreshold = BatchUpdateFirewallRuleInputItem.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	BatchUpdateFirewallRuleInputItem_description = BatchUpdateFirewallRuleInputItem.AddMember("description", _ResourceDescription)
-
-	BatchUpdateFirewallRuleInputItem_dnsAdvancedProtection = BatchUpdateFirewallRuleInputItem.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	BatchUpdateFirewallRuleInputItem_firewallRuleId = BatchUpdateFirewallRuleInputItem.AddMember("firewallRuleId", _ResourceId)
-
-	BatchUpdateFirewallRuleInputItem_name = BatchUpdateFirewallRuleInputItem.AddMember("name", _ResourceName)
-
-	BatchUpdateFirewallRuleInputItem_priority = BatchUpdateFirewallRuleInputItem.AddMember("priority", _FirewallRulePriority)
-
-	_BatchUpdateFirewallRuleInputItems_member = _BatchUpdateFirewallRuleInputItems.AddMember("member", BatchUpdateFirewallRuleInputItem)
-
-	BatchUpdateFirewallRuleResult_action = BatchUpdateFirewallRuleResult.AddMember("action", FirewallRuleAction)
-
-	BatchUpdateFirewallRuleResult_blockOverrideDnsType = BatchUpdateFirewallRuleResult.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	BatchUpdateFirewallRuleResult_blockOverrideDomain = BatchUpdateFirewallRuleResult.AddMember("blockOverrideDomain", _Domain)
-
-	BatchUpdateFirewallRuleResult_blockOverrideTtl = BatchUpdateFirewallRuleResult.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	BatchUpdateFirewallRuleResult_blockResponse = BatchUpdateFirewallRuleResult.AddMember("blockResponse", FirewallBlockResponse)
-
-	BatchUpdateFirewallRuleResult_clientToken = BatchUpdateFirewallRuleResult.AddMember("clientToken", _ClientToken)
-
-	BatchUpdateFirewallRuleResult_confidenceThreshold = BatchUpdateFirewallRuleResult.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	BatchUpdateFirewallRuleResult_createdAt = BatchUpdateFirewallRuleResult.AddMember("createdAt", _ISO8601TimeString)
-
-	BatchUpdateFirewallRuleResult_description = BatchUpdateFirewallRuleResult.AddMember("description", _ResourceDescription)
-
-	BatchUpdateFirewallRuleResult_dnsAdvancedProtection = BatchUpdateFirewallRuleResult.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	BatchUpdateFirewallRuleResult_firewallDomainListId = BatchUpdateFirewallRuleResult.AddMember("firewallDomainListId", _ResourceId)
-
-	BatchUpdateFirewallRuleResult_id = BatchUpdateFirewallRuleResult.AddMember("id", _ResourceId)
-
-	BatchUpdateFirewallRuleResult_name = BatchUpdateFirewallRuleResult.AddMember("name", _ResourceName)
-
-	BatchUpdateFirewallRuleResult_priority = BatchUpdateFirewallRuleResult.AddMember("priority", _FirewallRulePriority)
-
-	BatchUpdateFirewallRuleResult_dnsViewId = BatchUpdateFirewallRuleResult.AddMember("dnsViewId", _ResourceId)
-
-	BatchUpdateFirewallRuleResult_queryType = BatchUpdateFirewallRuleResult.AddMember("queryType", _DnsQueryType)
-
-	BatchUpdateFirewallRuleResult_status = BatchUpdateFirewallRuleResult.AddMember("status", CRResourceStatus)
-
-	BatchUpdateFirewallRuleResult_updatedAt = BatchUpdateFirewallRuleResult.AddMember("updatedAt", _ISO8601TimeString)
-
-	BatchUpdateFirewallRuleOutputItem_firewallRule = BatchUpdateFirewallRuleOutputItem.AddMember("firewallRule", BatchUpdateFirewallRuleResult)
-
-	BatchUpdateFirewallRuleOutputItem_code = BatchUpdateFirewallRuleOutputItem.AddMember("code", smithyprelude.Integer)
-
-	BatchUpdateFirewallRuleOutputItem_message = BatchUpdateFirewallRuleOutputItem.AddMember("message", smithyprelude.String)
-
-	_BatchUpdateFirewallRuleOutputItems_member = _BatchUpdateFirewallRuleOutputItems.AddMember("member", BatchUpdateFirewallRuleOutputItem)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	DnsSecValidationType_ENABLED = DnsSecValidationType.AddMember("ENABLED", smithyprelude.Unit)
-
-	DnsSecValidationType_DISABLED = DnsSecValidationType.AddMember("DISABLED", smithyprelude.Unit)
-
-	EdnsClientSubnetType_ENABLED = EdnsClientSubnetType.AddMember("ENABLED", smithyprelude.Unit)
-
-	EdnsClientSubnetType_DISABLED = EdnsClientSubnetType.AddMember("DISABLED", smithyprelude.Unit)
-
-	FirewallRulesFailOpenType_ENABLED = FirewallRulesFailOpenType.AddMember("ENABLED", smithyprelude.Unit)
-
-	FirewallRulesFailOpenType_DISABLED = FirewallRulesFailOpenType.AddMember("DISABLED", smithyprelude.Unit)
-
-	ProfileResourceStatus_CREATING = ProfileResourceStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ProfileResourceStatus_OPERATIONAL = ProfileResourceStatus.AddMember("OPERATIONAL", smithyprelude.Unit)
-
-	ProfileResourceStatus_UPDATING = ProfileResourceStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	ProfileResourceStatus_ENABLING = ProfileResourceStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	ProfileResourceStatus_DISABLING = ProfileResourceStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	ProfileResourceStatus_DISABLED = ProfileResourceStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ProfileResourceStatus_DELETING = ProfileResourceStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	DNSViewSummary_id = DNSViewSummary.AddMember("id", _ResourceId)
-
-	DNSViewSummary_arn = DNSViewSummary.AddMember("arn", _ResourceArn)
-
-	DNSViewSummary_clientToken = DNSViewSummary.AddMember("clientToken", _ClientToken)
-
-	DNSViewSummary_dnssecValidation = DNSViewSummary.AddMember("dnssecValidation", DnsSecValidationType)
-
-	DNSViewSummary_ednsClientSubnet = DNSViewSummary.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	DNSViewSummary_firewallRulesFailOpen = DNSViewSummary.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	DNSViewSummary_name = DNSViewSummary.AddMember("name", _ResourceName)
-
-	DNSViewSummary_description = DNSViewSummary.AddMember("description", _ResourceDescription)
-
-	DNSViewSummary_globalResolverId = DNSViewSummary.AddMember("globalResolverId", _ResourceId)
-
-	DNSViewSummary_createdAt = DNSViewSummary.AddMember("createdAt", _ISO8601TimeString)
-
-	DNSViewSummary_updatedAt = DNSViewSummary.AddMember("updatedAt", _ISO8601TimeString)
-
-	DNSViewSummary_status = DNSViewSummary.AddMember("status", ProfileResourceStatus)
-
-	_DNSViews_member = _DNSViews.AddMember("member", DNSViewSummary)
-
-	_Domains_member = _Domains.AddMember("member", _Domain)
-
-	_Strings_member = _Strings.AddMember("member", smithyprelude.String)
-
-	_Filters_key = _Filters.AddMember("key", smithyprelude.String)
-
-	_Filters_value = _Filters.AddMember("value", _Strings)
-
-	FirewallDomainListsItem_arn = FirewallDomainListsItem.AddMember("arn", _ResourceArn)
-
-	FirewallDomainListsItem_globalResolverId = FirewallDomainListsItem.AddMember("globalResolverId", _ResourceId)
-
-	FirewallDomainListsItem_createdAt = FirewallDomainListsItem.AddMember("createdAt", _ISO8601TimeString)
-
-	FirewallDomainListsItem_description = FirewallDomainListsItem.AddMember("description", _ResourceDescription)
-
-	FirewallDomainListsItem_id = FirewallDomainListsItem.AddMember("id", _ResourceId)
-
-	FirewallDomainListsItem_name = FirewallDomainListsItem.AddMember("name", _ResourceName)
-
-	FirewallDomainListsItem_status = FirewallDomainListsItem.AddMember("status", CRResourceStatus)
-
-	FirewallDomainListsItem_updatedAt = FirewallDomainListsItem.AddMember("updatedAt", _ISO8601TimeString)
-
-	_FirewallDomainLists_member = _FirewallDomainLists.AddMember("member", FirewallDomainListsItem)
-
-	FirewallRulesItem_action = FirewallRulesItem.AddMember("action", FirewallRuleAction)
-
-	FirewallRulesItem_blockOverrideDnsType = FirewallRulesItem.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	FirewallRulesItem_blockOverrideDomain = FirewallRulesItem.AddMember("blockOverrideDomain", _Domain)
-
-	FirewallRulesItem_blockOverrideTtl = FirewallRulesItem.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	FirewallRulesItem_blockResponse = FirewallRulesItem.AddMember("blockResponse", FirewallBlockResponse)
-
-	FirewallRulesItem_confidenceThreshold = FirewallRulesItem.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	FirewallRulesItem_createdAt = FirewallRulesItem.AddMember("createdAt", _ISO8601TimeString)
-
-	FirewallRulesItem_description = FirewallRulesItem.AddMember("description", _ResourceDescription)
-
-	FirewallRulesItem_dnsAdvancedProtection = FirewallRulesItem.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	FirewallRulesItem_firewallDomainListId = FirewallRulesItem.AddMember("firewallDomainListId", _ResourceId)
-
-	FirewallRulesItem_id = FirewallRulesItem.AddMember("id", _ResourceId)
-
-	FirewallRulesItem_name = FirewallRulesItem.AddMember("name", _ResourceName)
-
-	FirewallRulesItem_priority = FirewallRulesItem.AddMember("priority", _FirewallRulePriority)
-
-	FirewallRulesItem_dnsViewId = FirewallRulesItem.AddMember("dnsViewId", _ResourceId)
-
-	FirewallRulesItem_queryType = FirewallRulesItem.AddMember("queryType", _DnsQueryType)
-
-	FirewallRulesItem_status = FirewallRulesItem.AddMember("status", CRResourceStatus)
-
-	FirewallRulesItem_updatedAt = FirewallRulesItem.AddMember("updatedAt", _ISO8601TimeString)
-
-	_FirewallRules_member = _FirewallRules.AddMember("member", FirewallRulesItem)
-
-	GlobalResolverIpAddressType_IPV4 = GlobalResolverIpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	GlobalResolverIpAddressType_DUAL_STACK = GlobalResolverIpAddressType.AddMember("DUAL_STACK", smithyprelude.Unit)
-
-	_Regions_member = _Regions.AddMember("member", _Region)
-
-	_IPv4Addresses_member = _IPv4Addresses.AddMember("member", _IPv4Address)
-
-	_IPv6Addresses_member = _IPv6Addresses.AddMember("member", _IPv6Address)
-
-	GlobalResolversItem_id = GlobalResolversItem.AddMember("id", _ResourceId)
-
-	GlobalResolversItem_arn = GlobalResolversItem.AddMember("arn", _ResourceArn)
-
-	GlobalResolversItem_clientToken = GlobalResolversItem.AddMember("clientToken", _ClientToken)
-
-	GlobalResolversItem_dnsName = GlobalResolversItem.AddMember("dnsName", _Sni)
-
-	GlobalResolversItem_observabilityRegion = GlobalResolversItem.AddMember("observabilityRegion", _Region)
-
-	GlobalResolversItem_name = GlobalResolversItem.AddMember("name", _ResourceName)
-
-	GlobalResolversItem_description = GlobalResolversItem.AddMember("description", _ResourceDescription)
-
-	GlobalResolversItem_regions = GlobalResolversItem.AddMember("regions", _Regions)
-
-	GlobalResolversItem_createdAt = GlobalResolversItem.AddMember("createdAt", _ISO8601TimeString)
-
-	GlobalResolversItem_updatedAt = GlobalResolversItem.AddMember("updatedAt", _ISO8601TimeString)
-
-	GlobalResolversItem_status = GlobalResolversItem.AddMember("status", CRResourceStatus)
-
-	GlobalResolversItem_ipv4Addresses = GlobalResolversItem.AddMember("ipv4Addresses", _IPv4Addresses)
-
-	GlobalResolversItem_ipv6Addresses = GlobalResolversItem.AddMember("ipv6Addresses", _IPv6Addresses)
-
-	GlobalResolversItem_ipAddressType = GlobalResolversItem.AddMember("ipAddressType", GlobalResolverIpAddressType)
-
-	_GlobalResolvers_member = _GlobalResolvers.AddMember("member", GlobalResolversItem)
-
-	HostedZoneAssociationStatus_CREATING = HostedZoneAssociationStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	HostedZoneAssociationStatus_OPERATIONAL = HostedZoneAssociationStatus.AddMember("OPERATIONAL", smithyprelude.Unit)
-
-	HostedZoneAssociationStatus_DELETING = HostedZoneAssociationStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	HostedZoneAssociationSummary_id = HostedZoneAssociationSummary.AddMember("id", _ResourceId)
-
-	HostedZoneAssociationSummary_resourceArn = HostedZoneAssociationSummary.AddMember("resourceArn", _ResourceArn)
-
-	HostedZoneAssociationSummary_hostedZoneId = HostedZoneAssociationSummary.AddMember("hostedZoneId", _HostedZoneId)
-
-	HostedZoneAssociationSummary_hostedZoneName = HostedZoneAssociationSummary.AddMember("hostedZoneName", _HostedZoneName)
-
-	HostedZoneAssociationSummary_name = HostedZoneAssociationSummary.AddMember("name", _ResourceName)
-
-	HostedZoneAssociationSummary_createdAt = HostedZoneAssociationSummary.AddMember("createdAt", _ISO8601TimeString)
-
-	HostedZoneAssociationSummary_updatedAt = HostedZoneAssociationSummary.AddMember("updatedAt", _ISO8601TimeString)
-
-	HostedZoneAssociationSummary_status = HostedZoneAssociationSummary.AddMember("status", HostedZoneAssociationStatus)
-
-	_HostedZoneAssociations_member = _HostedZoneAssociations.AddMember("member", HostedZoneAssociationSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ManagedFirewallDomainListsItem_description = ManagedFirewallDomainListsItem.AddMember("description", _ResourceDescription)
-
-	ManagedFirewallDomainListsItem_id = ManagedFirewallDomainListsItem.AddMember("id", _ResourceId)
-
-	ManagedFirewallDomainListsItem_name = ManagedFirewallDomainListsItem.AddMember("name", _ResourceName)
-
-	ManagedFirewallDomainListsItem_managedListType = ManagedFirewallDomainListsItem.AddMember("managedListType", smithyprelude.String)
-
-	_ManagedFirewallDomainLists_member = _ManagedFirewallDomainLists.AddMember("member", ManagedFirewallDomainListsItem)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	SharedDNSViewSummary_id = SharedDNSViewSummary.AddMember("id", _ResourceId)
-
-	SharedDNSViewSummary_arn = SharedDNSViewSummary.AddMember("arn", _ResourceArn)
-
-	SharedDNSViewSummary_clientToken = SharedDNSViewSummary.AddMember("clientToken", _ClientToken)
-
-	SharedDNSViewSummary_dnssecValidation = SharedDNSViewSummary.AddMember("dnssecValidation", DnsSecValidationType)
-
-	SharedDNSViewSummary_ednsClientSubnet = SharedDNSViewSummary.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	SharedDNSViewSummary_firewallRulesFailOpen = SharedDNSViewSummary.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	SharedDNSViewSummary_name = SharedDNSViewSummary.AddMember("name", _ResourceName)
-
-	SharedDNSViewSummary_description = SharedDNSViewSummary.AddMember("description", _ResourceDescription)
-
-	SharedDNSViewSummary_globalResolverId = SharedDNSViewSummary.AddMember("globalResolverId", _ResourceId)
-
-	SharedDNSViewSummary_createdAt = SharedDNSViewSummary.AddMember("createdAt", _ISO8601TimeString)
-
-	SharedDNSViewSummary_updatedAt = SharedDNSViewSummary.AddMember("updatedAt", _ISO8601TimeString)
-
-	SharedDNSViewSummary_status = SharedDNSViewSummary.AddMember("status", ProfileResourceStatus)
-
-	SharedDNSViewSummary_ownerAccountId = SharedDNSViewSummary.AddMember("ownerAccountId", _AccountId)
-
-	_SharedDNSViews_member = _SharedDNSViews.AddMember("member", SharedDNSViewSummary)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	AssociateHostedZoneInput_hostedZoneId = AssociateHostedZoneInput.AddMember("hostedZoneId", _HostedZoneId, &smithytraits.HTTPLabel{})
-
-	AssociateHostedZoneInput_resourceArn = AssociateHostedZoneInput.AddMember("resourceArn", _ResourceArn)
-
-	AssociateHostedZoneInput_name = AssociateHostedZoneInput.AddMember("name", _ResourceName)
-
-	AssociateHostedZoneOutput_id = AssociateHostedZoneOutput.AddMember("id", _ResourceId)
-
-	AssociateHostedZoneOutput_resourceArn = AssociateHostedZoneOutput.AddMember("resourceArn", _ResourceArn)
-
-	AssociateHostedZoneOutput_hostedZoneId = AssociateHostedZoneOutput.AddMember("hostedZoneId", _HostedZoneId)
-
-	AssociateHostedZoneOutput_hostedZoneName = AssociateHostedZoneOutput.AddMember("hostedZoneName", _HostedZoneName)
-
-	AssociateHostedZoneOutput_name = AssociateHostedZoneOutput.AddMember("name", _ResourceName)
-
-	AssociateHostedZoneOutput_createdAt = AssociateHostedZoneOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	AssociateHostedZoneOutput_updatedAt = AssociateHostedZoneOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	AssociateHostedZoneOutput_status = AssociateHostedZoneOutput.AddMember("status", HostedZoneAssociationStatus)
-
-	BatchCreateFirewallRuleInput_firewallRules = BatchCreateFirewallRuleInput.AddMember("firewallRules", _BatchCreateFirewallRuleInputItems)
-
-	BatchCreateFirewallRuleOutput_failures = BatchCreateFirewallRuleOutput.AddMember("failures", _BatchCreateFirewallRuleOutputItems)
-
-	BatchCreateFirewallRuleOutput_successes = BatchCreateFirewallRuleOutput.AddMember("successes", _BatchCreateFirewallRuleOutputItems)
-
-	BatchDeleteFirewallRuleInput_firewallRules = BatchDeleteFirewallRuleInput.AddMember("firewallRules", _BatchDeleteFirewallRuleInputItems)
-
-	BatchDeleteFirewallRuleOutput_failures = BatchDeleteFirewallRuleOutput.AddMember("failures", _BatchDeleteFirewallRuleOutputItems)
-
-	BatchDeleteFirewallRuleOutput_successes = BatchDeleteFirewallRuleOutput.AddMember("successes", _BatchDeleteFirewallRuleOutputItems)
-
-	BatchUpdateFirewallRuleInput_firewallRules = BatchUpdateFirewallRuleInput.AddMember("firewallRules", _BatchUpdateFirewallRuleInputItems)
-
-	BatchUpdateFirewallRuleOutput_failures = BatchUpdateFirewallRuleOutput.AddMember("failures", _BatchUpdateFirewallRuleOutputItems)
-
-	BatchUpdateFirewallRuleOutput_successes = BatchUpdateFirewallRuleOutput.AddMember("successes", _BatchUpdateFirewallRuleOutputItems)
-
-	CreateAccessSourceInput_cidr = CreateAccessSourceInput.AddMember("cidr", _Cidr)
-
-	CreateAccessSourceInput_clientToken = CreateAccessSourceInput.AddMember("clientToken", _ClientToken)
-
-	CreateAccessSourceInput_ipAddressType = CreateAccessSourceInput.AddMember("ipAddressType", IpAddressType)
-
-	CreateAccessSourceInput_name = CreateAccessSourceInput.AddMember("name", _ResourceNameShort)
-
-	CreateAccessSourceInput_dnsViewId = CreateAccessSourceInput.AddMember("dnsViewId", _ResourceId)
-
-	CreateAccessSourceInput_protocol = CreateAccessSourceInput.AddMember("protocol", DnsProtocol)
-
-	CreateAccessSourceInput_tags = CreateAccessSourceInput.AddMember("tags", _Tags)
-
-	CreateAccessSourceOutput_arn = CreateAccessSourceOutput.AddMember("arn", _ResourceArn)
-
-	CreateAccessSourceOutput_cidr = CreateAccessSourceOutput.AddMember("cidr", _Cidr)
-
-	CreateAccessSourceOutput_createdAt = CreateAccessSourceOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	CreateAccessSourceOutput_id = CreateAccessSourceOutput.AddMember("id", _ResourceId)
-
-	CreateAccessSourceOutput_ipAddressType = CreateAccessSourceOutput.AddMember("ipAddressType", IpAddressType)
-
-	CreateAccessSourceOutput_name = CreateAccessSourceOutput.AddMember("name", _ResourceNameShort)
-
-	CreateAccessSourceOutput_dnsViewId = CreateAccessSourceOutput.AddMember("dnsViewId", _ResourceId)
-
-	CreateAccessSourceOutput_protocol = CreateAccessSourceOutput.AddMember("protocol", DnsProtocol)
-
-	CreateAccessSourceOutput_status = CreateAccessSourceOutput.AddMember("status", CRResourceStatus)
-
-	CreateAccessSourceOutput_updatedAt = CreateAccessSourceOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	CreateAccessTokenInput_clientToken = CreateAccessTokenInput.AddMember("clientToken", _ClientToken)
-
-	CreateAccessTokenInput_dnsViewId = CreateAccessTokenInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	CreateAccessTokenInput_expiresAt = CreateAccessTokenInput.AddMember("expiresAt", _ISO8601TimeString)
-
-	CreateAccessTokenInput_name = CreateAccessTokenInput.AddMember("name", _ResourceNameShort)
-
-	CreateAccessTokenInput_tags = CreateAccessTokenInput.AddMember("tags", _Tags)
-
-	CreateAccessTokenOutput_id = CreateAccessTokenOutput.AddMember("id", _ResourceId)
-
-	CreateAccessTokenOutput_arn = CreateAccessTokenOutput.AddMember("arn", _ResourceArn)
-
-	CreateAccessTokenOutput_clientToken = CreateAccessTokenOutput.AddMember("clientToken", _ClientToken)
-
-	CreateAccessTokenOutput_createdAt = CreateAccessTokenOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	CreateAccessTokenOutput_dnsViewId = CreateAccessTokenOutput.AddMember("dnsViewId", _ResourceId)
-
-	CreateAccessTokenOutput_expiresAt = CreateAccessTokenOutput.AddMember("expiresAt", _ISO8601TimeString)
-
-	CreateAccessTokenOutput_name = CreateAccessTokenOutput.AddMember("name", _ResourceNameShort)
-
-	CreateAccessTokenOutput_status = CreateAccessTokenOutput.AddMember("status", TokenStatus)
-
-	CreateAccessTokenOutput_value = CreateAccessTokenOutput.AddMember("value", _AccessTokenValue)
-
-	CreateDNSViewInput_globalResolverId = CreateDNSViewInput.AddMember("globalResolverId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	CreateDNSViewInput_clientToken = CreateDNSViewInput.AddMember("clientToken", _ClientToken)
-
-	CreateDNSViewInput_name = CreateDNSViewInput.AddMember("name", _ResourceName)
-
-	CreateDNSViewInput_dnssecValidation = CreateDNSViewInput.AddMember("dnssecValidation", DnsSecValidationType)
-
-	CreateDNSViewInput_ednsClientSubnet = CreateDNSViewInput.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	CreateDNSViewInput_firewallRulesFailOpen = CreateDNSViewInput.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	CreateDNSViewInput_description = CreateDNSViewInput.AddMember("description", _ResourceDescription)
-
-	CreateDNSViewInput_tags = CreateDNSViewInput.AddMember("tags", _Tags)
-
-	CreateDNSViewOutput_id = CreateDNSViewOutput.AddMember("id", _ResourceId)
-
-	CreateDNSViewOutput_arn = CreateDNSViewOutput.AddMember("arn", _ResourceArn)
-
-	CreateDNSViewOutput_clientToken = CreateDNSViewOutput.AddMember("clientToken", _ClientToken)
-
-	CreateDNSViewOutput_dnssecValidation = CreateDNSViewOutput.AddMember("dnssecValidation", DnsSecValidationType)
-
-	CreateDNSViewOutput_ednsClientSubnet = CreateDNSViewOutput.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	CreateDNSViewOutput_firewallRulesFailOpen = CreateDNSViewOutput.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	CreateDNSViewOutput_name = CreateDNSViewOutput.AddMember("name", _ResourceName)
-
-	CreateDNSViewOutput_description = CreateDNSViewOutput.AddMember("description", _ResourceDescription)
-
-	CreateDNSViewOutput_globalResolverId = CreateDNSViewOutput.AddMember("globalResolverId", _ResourceId)
-
-	CreateDNSViewOutput_createdAt = CreateDNSViewOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	CreateDNSViewOutput_updatedAt = CreateDNSViewOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	CreateDNSViewOutput_status = CreateDNSViewOutput.AddMember("status", ProfileResourceStatus)
-
-	CreateFirewallDomainListInput_clientToken = CreateFirewallDomainListInput.AddMember("clientToken", _ClientToken)
-
-	CreateFirewallDomainListInput_globalResolverId = CreateFirewallDomainListInput.AddMember("globalResolverId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	CreateFirewallDomainListInput_description = CreateFirewallDomainListInput.AddMember("description", _ResourceDescription)
-
-	CreateFirewallDomainListInput_name = CreateFirewallDomainListInput.AddMember("name", _ResourceName)
-
-	CreateFirewallDomainListInput_tags = CreateFirewallDomainListInput.AddMember("tags", _Tags)
-
-	CreateFirewallDomainListOutput_arn = CreateFirewallDomainListOutput.AddMember("arn", _ResourceArn)
-
-	CreateFirewallDomainListOutput_globalResolverId = CreateFirewallDomainListOutput.AddMember("globalResolverId", _ResourceId)
-
-	CreateFirewallDomainListOutput_createdAt = CreateFirewallDomainListOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	CreateFirewallDomainListOutput_description = CreateFirewallDomainListOutput.AddMember("description", _ResourceDescription)
-
-	CreateFirewallDomainListOutput_domainCount = CreateFirewallDomainListOutput.AddMember("domainCount", smithyprelude.Integer)
-
-	CreateFirewallDomainListOutput_id = CreateFirewallDomainListOutput.AddMember("id", _ResourceId)
-
-	CreateFirewallDomainListOutput_name = CreateFirewallDomainListOutput.AddMember("name", _ResourceName)
-
-	CreateFirewallDomainListOutput_status = CreateFirewallDomainListOutput.AddMember("status", CRResourceStatus)
-
-	CreateFirewallDomainListOutput_updatedAt = CreateFirewallDomainListOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	CreateFirewallRuleInput_action = CreateFirewallRuleInput.AddMember("action", FirewallRuleAction)
-
-	CreateFirewallRuleInput_blockOverrideDnsType = CreateFirewallRuleInput.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	CreateFirewallRuleInput_blockOverrideDomain = CreateFirewallRuleInput.AddMember("blockOverrideDomain", _Domain)
-
-	CreateFirewallRuleInput_blockOverrideTtl = CreateFirewallRuleInput.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	CreateFirewallRuleInput_blockResponse = CreateFirewallRuleInput.AddMember("blockResponse", FirewallBlockResponse)
-
-	CreateFirewallRuleInput_clientToken = CreateFirewallRuleInput.AddMember("clientToken", _ClientToken)
-
-	CreateFirewallRuleInput_confidenceThreshold = CreateFirewallRuleInput.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	CreateFirewallRuleInput_description = CreateFirewallRuleInput.AddMember("description", _ResourceDescription)
-
-	CreateFirewallRuleInput_dnsAdvancedProtection = CreateFirewallRuleInput.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	CreateFirewallRuleInput_firewallDomainListId = CreateFirewallRuleInput.AddMember("firewallDomainListId", _ResourceId)
-
-	CreateFirewallRuleInput_name = CreateFirewallRuleInput.AddMember("name", _ResourceName)
-
-	CreateFirewallRuleInput_priority = CreateFirewallRuleInput.AddMember("priority", _FirewallRulePriority)
-
-	CreateFirewallRuleInput_dnsViewId = CreateFirewallRuleInput.AddMember("dnsViewId", _ResourceId)
-
-	CreateFirewallRuleInput_qType = CreateFirewallRuleInput.AddMember("qType", _DnsQueryType)
-
-	CreateFirewallRuleOutput_action = CreateFirewallRuleOutput.AddMember("action", FirewallRuleAction)
-
-	CreateFirewallRuleOutput_blockOverrideDnsType = CreateFirewallRuleOutput.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	CreateFirewallRuleOutput_blockOverrideDomain = CreateFirewallRuleOutput.AddMember("blockOverrideDomain", _Domain)
-
-	CreateFirewallRuleOutput_blockOverrideTtl = CreateFirewallRuleOutput.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	CreateFirewallRuleOutput_blockResponse = CreateFirewallRuleOutput.AddMember("blockResponse", FirewallBlockResponse)
-
-	CreateFirewallRuleOutput_confidenceThreshold = CreateFirewallRuleOutput.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	CreateFirewallRuleOutput_createdAt = CreateFirewallRuleOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	CreateFirewallRuleOutput_description = CreateFirewallRuleOutput.AddMember("description", _ResourceDescription)
-
-	CreateFirewallRuleOutput_dnsAdvancedProtection = CreateFirewallRuleOutput.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	CreateFirewallRuleOutput_firewallDomainListId = CreateFirewallRuleOutput.AddMember("firewallDomainListId", _ResourceId)
-
-	CreateFirewallRuleOutput_id = CreateFirewallRuleOutput.AddMember("id", _ResourceId)
-
-	CreateFirewallRuleOutput_name = CreateFirewallRuleOutput.AddMember("name", _ResourceName)
-
-	CreateFirewallRuleOutput_priority = CreateFirewallRuleOutput.AddMember("priority", _FirewallRulePriority)
-
-	CreateFirewallRuleOutput_dnsViewId = CreateFirewallRuleOutput.AddMember("dnsViewId", _ResourceId)
-
-	CreateFirewallRuleOutput_queryType = CreateFirewallRuleOutput.AddMember("queryType", _DnsQueryType)
-
-	CreateFirewallRuleOutput_status = CreateFirewallRuleOutput.AddMember("status", CRResourceStatus)
-
-	CreateFirewallRuleOutput_updatedAt = CreateFirewallRuleOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	CreateGlobalResolverInput_clientToken = CreateGlobalResolverInput.AddMember("clientToken", _ClientToken)
-
-	CreateGlobalResolverInput_description = CreateGlobalResolverInput.AddMember("description", _ResourceDescription)
-
-	CreateGlobalResolverInput_ipAddressType = CreateGlobalResolverInput.AddMember("ipAddressType", GlobalResolverIpAddressType)
-
-	CreateGlobalResolverInput_name = CreateGlobalResolverInput.AddMember("name", _ResourceName)
-
-	CreateGlobalResolverInput_observabilityRegion = CreateGlobalResolverInput.AddMember("observabilityRegion", _Region)
-
-	CreateGlobalResolverInput_regions = CreateGlobalResolverInput.AddMember("regions", _Regions)
-
-	CreateGlobalResolverInput_tags = CreateGlobalResolverInput.AddMember("tags", _Tags)
-
-	CreateGlobalResolverOutput_id = CreateGlobalResolverOutput.AddMember("id", _ResourceId)
-
-	CreateGlobalResolverOutput_arn = CreateGlobalResolverOutput.AddMember("arn", _ResourceArn)
-
-	CreateGlobalResolverOutput_clientToken = CreateGlobalResolverOutput.AddMember("clientToken", _ClientToken)
-
-	CreateGlobalResolverOutput_createdAt = CreateGlobalResolverOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	CreateGlobalResolverOutput_description = CreateGlobalResolverOutput.AddMember("description", _ResourceDescription)
-
-	CreateGlobalResolverOutput_dnsName = CreateGlobalResolverOutput.AddMember("dnsName", _Sni)
-
-	CreateGlobalResolverOutput_ipAddressType = CreateGlobalResolverOutput.AddMember("ipAddressType", GlobalResolverIpAddressType)
-
-	CreateGlobalResolverOutput_ipv4Addresses = CreateGlobalResolverOutput.AddMember("ipv4Addresses", _IPv4Addresses)
-
-	CreateGlobalResolverOutput_ipv6Addresses = CreateGlobalResolverOutput.AddMember("ipv6Addresses", _IPv6Addresses)
-
-	CreateGlobalResolverOutput_name = CreateGlobalResolverOutput.AddMember("name", _ResourceName)
-
-	CreateGlobalResolverOutput_observabilityRegion = CreateGlobalResolverOutput.AddMember("observabilityRegion", _Region)
-
-	CreateGlobalResolverOutput_regions = CreateGlobalResolverOutput.AddMember("regions", _Regions)
-
-	CreateGlobalResolverOutput_status = CreateGlobalResolverOutput.AddMember("status", CRResourceStatus)
-
-	CreateGlobalResolverOutput_updatedAt = CreateGlobalResolverOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	DeleteAccessSourceInput_accessSourceId = DeleteAccessSourceInput.AddMember("accessSourceId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteAccessSourceOutput_arn = DeleteAccessSourceOutput.AddMember("arn", _ResourceArn)
-
-	DeleteAccessSourceOutput_cidr = DeleteAccessSourceOutput.AddMember("cidr", _Cidr)
-
-	DeleteAccessSourceOutput_createdAt = DeleteAccessSourceOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	DeleteAccessSourceOutput_id = DeleteAccessSourceOutput.AddMember("id", _ResourceId)
-
-	DeleteAccessSourceOutput_ipAddressType = DeleteAccessSourceOutput.AddMember("ipAddressType", IpAddressType)
-
-	DeleteAccessSourceOutput_name = DeleteAccessSourceOutput.AddMember("name", _ResourceNameShort)
-
-	DeleteAccessSourceOutput_dnsViewId = DeleteAccessSourceOutput.AddMember("dnsViewId", _ResourceId)
-
-	DeleteAccessSourceOutput_protocol = DeleteAccessSourceOutput.AddMember("protocol", DnsProtocol)
-
-	DeleteAccessSourceOutput_status = DeleteAccessSourceOutput.AddMember("status", CRResourceStatus)
-
-	DeleteAccessSourceOutput_updatedAt = DeleteAccessSourceOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	DeleteAccessTokenInput_accessTokenId = DeleteAccessTokenInput.AddMember("accessTokenId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteAccessTokenOutput_id = DeleteAccessTokenOutput.AddMember("id", _ResourceId)
-
-	DeleteAccessTokenOutput_status = DeleteAccessTokenOutput.AddMember("status", TokenStatus)
-
-	DeleteAccessTokenOutput_deletedAt = DeleteAccessTokenOutput.AddMember("deletedAt", _ISO8601TimeString)
-
-	DeleteDNSViewInput_dnsViewId = DeleteDNSViewInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteDNSViewOutput_id = DeleteDNSViewOutput.AddMember("id", _ResourceId)
-
-	DeleteDNSViewOutput_arn = DeleteDNSViewOutput.AddMember("arn", _ResourceArn)
-
-	DeleteDNSViewOutput_clientToken = DeleteDNSViewOutput.AddMember("clientToken", _ClientToken)
-
-	DeleteDNSViewOutput_dnssecValidation = DeleteDNSViewOutput.AddMember("dnssecValidation", DnsSecValidationType)
-
-	DeleteDNSViewOutput_ednsClientSubnet = DeleteDNSViewOutput.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	DeleteDNSViewOutput_firewallRulesFailOpen = DeleteDNSViewOutput.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	DeleteDNSViewOutput_name = DeleteDNSViewOutput.AddMember("name", _ResourceName)
-
-	DeleteDNSViewOutput_description = DeleteDNSViewOutput.AddMember("description", _ResourceDescription)
-
-	DeleteDNSViewOutput_globalResolverId = DeleteDNSViewOutput.AddMember("globalResolverId", _ResourceId)
-
-	DeleteDNSViewOutput_createdAt = DeleteDNSViewOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	DeleteDNSViewOutput_updatedAt = DeleteDNSViewOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	DeleteDNSViewOutput_status = DeleteDNSViewOutput.AddMember("status", ProfileResourceStatus)
-
-	DeleteFirewallDomainListInput_firewallDomainListId = DeleteFirewallDomainListInput.AddMember("firewallDomainListId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteFirewallDomainListOutput_arn = DeleteFirewallDomainListOutput.AddMember("arn", _ResourceArn)
-
-	DeleteFirewallDomainListOutput_id = DeleteFirewallDomainListOutput.AddMember("id", _ResourceId)
-
-	DeleteFirewallDomainListOutput_name = DeleteFirewallDomainListOutput.AddMember("name", _ResourceName)
-
-	DeleteFirewallDomainListOutput_status = DeleteFirewallDomainListOutput.AddMember("status", CRResourceStatus)
-
-	DeleteFirewallRuleInput_firewallRuleId = DeleteFirewallRuleInput.AddMember("firewallRuleId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteFirewallRuleOutput_action = DeleteFirewallRuleOutput.AddMember("action", FirewallRuleAction)
-
-	DeleteFirewallRuleOutput_blockOverrideDnsType = DeleteFirewallRuleOutput.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	DeleteFirewallRuleOutput_blockOverrideDomain = DeleteFirewallRuleOutput.AddMember("blockOverrideDomain", _Domain)
-
-	DeleteFirewallRuleOutput_blockOverrideTtl = DeleteFirewallRuleOutput.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	DeleteFirewallRuleOutput_blockResponse = DeleteFirewallRuleOutput.AddMember("blockResponse", FirewallBlockResponse)
-
-	DeleteFirewallRuleOutput_confidenceThreshold = DeleteFirewallRuleOutput.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	DeleteFirewallRuleOutput_createdAt = DeleteFirewallRuleOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	DeleteFirewallRuleOutput_description = DeleteFirewallRuleOutput.AddMember("description", _ResourceDescription)
-
-	DeleteFirewallRuleOutput_dnsAdvancedProtection = DeleteFirewallRuleOutput.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	DeleteFirewallRuleOutput_firewallDomainListId = DeleteFirewallRuleOutput.AddMember("firewallDomainListId", _ResourceId)
-
-	DeleteFirewallRuleOutput_id = DeleteFirewallRuleOutput.AddMember("id", _ResourceId)
-
-	DeleteFirewallRuleOutput_name = DeleteFirewallRuleOutput.AddMember("name", _ResourceName)
-
-	DeleteFirewallRuleOutput_priority = DeleteFirewallRuleOutput.AddMember("priority", _FirewallRulePriority)
-
-	DeleteFirewallRuleOutput_dnsViewId = DeleteFirewallRuleOutput.AddMember("dnsViewId", _ResourceId)
-
-	DeleteFirewallRuleOutput_queryType = DeleteFirewallRuleOutput.AddMember("queryType", _DnsQueryType)
-
-	DeleteFirewallRuleOutput_status = DeleteFirewallRuleOutput.AddMember("status", CRResourceStatus)
-
-	DeleteFirewallRuleOutput_updatedAt = DeleteFirewallRuleOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	DeleteGlobalResolverInput_globalResolverId = DeleteGlobalResolverInput.AddMember("globalResolverId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DeleteGlobalResolverOutput_id = DeleteGlobalResolverOutput.AddMember("id", _ResourceId)
-
-	DeleteGlobalResolverOutput_arn = DeleteGlobalResolverOutput.AddMember("arn", _ResourceArn)
-
-	DeleteGlobalResolverOutput_clientToken = DeleteGlobalResolverOutput.AddMember("clientToken", _ClientToken)
-
-	DeleteGlobalResolverOutput_dnsName = DeleteGlobalResolverOutput.AddMember("dnsName", _Sni)
-
-	DeleteGlobalResolverOutput_observabilityRegion = DeleteGlobalResolverOutput.AddMember("observabilityRegion", _Region)
-
-	DeleteGlobalResolverOutput_name = DeleteGlobalResolverOutput.AddMember("name", _ResourceName)
-
-	DeleteGlobalResolverOutput_description = DeleteGlobalResolverOutput.AddMember("description", _ResourceDescription)
-
-	DeleteGlobalResolverOutput_regions = DeleteGlobalResolverOutput.AddMember("regions", _Regions)
-
-	DeleteGlobalResolverOutput_createdAt = DeleteGlobalResolverOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	DeleteGlobalResolverOutput_updatedAt = DeleteGlobalResolverOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	DeleteGlobalResolverOutput_status = DeleteGlobalResolverOutput.AddMember("status", CRResourceStatus)
-
-	DeleteGlobalResolverOutput_ipv4Addresses = DeleteGlobalResolverOutput.AddMember("ipv4Addresses", _IPv4Addresses)
-
-	DeleteGlobalResolverOutput_ipv6Addresses = DeleteGlobalResolverOutput.AddMember("ipv6Addresses", _IPv6Addresses)
-
-	DeleteGlobalResolverOutput_ipAddressType = DeleteGlobalResolverOutput.AddMember("ipAddressType", GlobalResolverIpAddressType)
-
-	DisableDNSViewInput_dnsViewId = DisableDNSViewInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	DisableDNSViewOutput_id = DisableDNSViewOutput.AddMember("id", _ResourceId)
-
-	DisableDNSViewOutput_arn = DisableDNSViewOutput.AddMember("arn", _ResourceArn)
-
-	DisableDNSViewOutput_clientToken = DisableDNSViewOutput.AddMember("clientToken", _ClientToken)
-
-	DisableDNSViewOutput_dnssecValidation = DisableDNSViewOutput.AddMember("dnssecValidation", DnsSecValidationType)
-
-	DisableDNSViewOutput_ednsClientSubnet = DisableDNSViewOutput.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	DisableDNSViewOutput_firewallRulesFailOpen = DisableDNSViewOutput.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	DisableDNSViewOutput_name = DisableDNSViewOutput.AddMember("name", _ResourceName)
-
-	DisableDNSViewOutput_description = DisableDNSViewOutput.AddMember("description", _ResourceDescription)
-
-	DisableDNSViewOutput_globalResolverId = DisableDNSViewOutput.AddMember("globalResolverId", _ResourceId)
-
-	DisableDNSViewOutput_createdAt = DisableDNSViewOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	DisableDNSViewOutput_updatedAt = DisableDNSViewOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	DisableDNSViewOutput_status = DisableDNSViewOutput.AddMember("status", ProfileResourceStatus)
-
-	DisassociateHostedZoneInput_hostedZoneId = DisassociateHostedZoneInput.AddMember("hostedZoneId", _HostedZoneId, &smithytraits.HTTPLabel{})
-
-	DisassociateHostedZoneInput_resourceArn = DisassociateHostedZoneInput.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	DisassociateHostedZoneOutput_id = DisassociateHostedZoneOutput.AddMember("id", _ResourceId)
-
-	DisassociateHostedZoneOutput_resourceArn = DisassociateHostedZoneOutput.AddMember("resourceArn", _ResourceArn)
-
-	DisassociateHostedZoneOutput_hostedZoneId = DisassociateHostedZoneOutput.AddMember("hostedZoneId", _HostedZoneId)
-
-	DisassociateHostedZoneOutput_hostedZoneName = DisassociateHostedZoneOutput.AddMember("hostedZoneName", _HostedZoneName)
-
-	DisassociateHostedZoneOutput_name = DisassociateHostedZoneOutput.AddMember("name", _ResourceName)
-
-	DisassociateHostedZoneOutput_createdAt = DisassociateHostedZoneOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	DisassociateHostedZoneOutput_updatedAt = DisassociateHostedZoneOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	DisassociateHostedZoneOutput_status = DisassociateHostedZoneOutput.AddMember("status", HostedZoneAssociationStatus)
-
-	EnableDNSViewInput_dnsViewId = EnableDNSViewInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	EnableDNSViewOutput_id = EnableDNSViewOutput.AddMember("id", _ResourceId)
-
-	EnableDNSViewOutput_arn = EnableDNSViewOutput.AddMember("arn", _ResourceArn)
-
-	EnableDNSViewOutput_clientToken = EnableDNSViewOutput.AddMember("clientToken", _ClientToken)
-
-	EnableDNSViewOutput_dnssecValidation = EnableDNSViewOutput.AddMember("dnssecValidation", DnsSecValidationType)
-
-	EnableDNSViewOutput_ednsClientSubnet = EnableDNSViewOutput.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	EnableDNSViewOutput_firewallRulesFailOpen = EnableDNSViewOutput.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	EnableDNSViewOutput_name = EnableDNSViewOutput.AddMember("name", _ResourceName)
-
-	EnableDNSViewOutput_description = EnableDNSViewOutput.AddMember("description", _ResourceDescription)
-
-	EnableDNSViewOutput_globalResolverId = EnableDNSViewOutput.AddMember("globalResolverId", _ResourceId)
-
-	EnableDNSViewOutput_createdAt = EnableDNSViewOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	EnableDNSViewOutput_updatedAt = EnableDNSViewOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	EnableDNSViewOutput_status = EnableDNSViewOutput.AddMember("status", ProfileResourceStatus)
-
-	GetAccessSourceInput_accessSourceId = GetAccessSourceInput.AddMember("accessSourceId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetAccessSourceOutput_arn = GetAccessSourceOutput.AddMember("arn", _ResourceArn)
-
-	GetAccessSourceOutput_cidr = GetAccessSourceOutput.AddMember("cidr", _Cidr)
-
-	GetAccessSourceOutput_createdAt = GetAccessSourceOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	GetAccessSourceOutput_id = GetAccessSourceOutput.AddMember("id", _ResourceId)
-
-	GetAccessSourceOutput_ipAddressType = GetAccessSourceOutput.AddMember("ipAddressType", IpAddressType)
-
-	GetAccessSourceOutput_name = GetAccessSourceOutput.AddMember("name", _ResourceNameShort)
-
-	GetAccessSourceOutput_dnsViewId = GetAccessSourceOutput.AddMember("dnsViewId", _ResourceId)
-
-	GetAccessSourceOutput_protocol = GetAccessSourceOutput.AddMember("protocol", DnsProtocol)
-
-	GetAccessSourceOutput_status = GetAccessSourceOutput.AddMember("status", CRResourceStatus)
-
-	GetAccessSourceOutput_updatedAt = GetAccessSourceOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	GetAccessTokenInput_accessTokenId = GetAccessTokenInput.AddMember("accessTokenId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetAccessTokenOutput_id = GetAccessTokenOutput.AddMember("id", _ResourceId)
-
-	GetAccessTokenOutput_arn = GetAccessTokenOutput.AddMember("arn", _ResourceArn)
-
-	GetAccessTokenOutput_clientToken = GetAccessTokenOutput.AddMember("clientToken", _ClientToken)
-
-	GetAccessTokenOutput_createdAt = GetAccessTokenOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	GetAccessTokenOutput_dnsViewId = GetAccessTokenOutput.AddMember("dnsViewId", _ResourceId)
-
-	GetAccessTokenOutput_expiresAt = GetAccessTokenOutput.AddMember("expiresAt", _ISO8601TimeString)
-
-	GetAccessTokenOutput_globalResolverId = GetAccessTokenOutput.AddMember("globalResolverId", _ResourceId)
-
-	GetAccessTokenOutput_name = GetAccessTokenOutput.AddMember("name", _ResourceNameShort)
-
-	GetAccessTokenOutput_status = GetAccessTokenOutput.AddMember("status", TokenStatus)
-
-	GetAccessTokenOutput_updatedAt = GetAccessTokenOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	GetAccessTokenOutput_value = GetAccessTokenOutput.AddMember("value", _AccessTokenValue)
-
-	GetDNSViewInput_dnsViewId = GetDNSViewInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetDNSViewOutput_id = GetDNSViewOutput.AddMember("id", _ResourceId)
-
-	GetDNSViewOutput_arn = GetDNSViewOutput.AddMember("arn", _ResourceArn)
-
-	GetDNSViewOutput_clientToken = GetDNSViewOutput.AddMember("clientToken", _ClientToken)
-
-	GetDNSViewOutput_dnssecValidation = GetDNSViewOutput.AddMember("dnssecValidation", DnsSecValidationType)
-
-	GetDNSViewOutput_ednsClientSubnet = GetDNSViewOutput.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	GetDNSViewOutput_firewallRulesFailOpen = GetDNSViewOutput.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	GetDNSViewOutput_name = GetDNSViewOutput.AddMember("name", _ResourceName)
-
-	GetDNSViewOutput_description = GetDNSViewOutput.AddMember("description", _ResourceDescription)
-
-	GetDNSViewOutput_globalResolverId = GetDNSViewOutput.AddMember("globalResolverId", _ResourceId)
-
-	GetDNSViewOutput_createdAt = GetDNSViewOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	GetDNSViewOutput_updatedAt = GetDNSViewOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	GetDNSViewOutput_status = GetDNSViewOutput.AddMember("status", ProfileResourceStatus)
-
-	GetFirewallDomainListInput_firewallDomainListId = GetFirewallDomainListInput.AddMember("firewallDomainListId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetFirewallDomainListOutput_arn = GetFirewallDomainListOutput.AddMember("arn", _ResourceArn)
-
-	GetFirewallDomainListOutput_globalResolverId = GetFirewallDomainListOutput.AddMember("globalResolverId", _ResourceId)
-
-	GetFirewallDomainListOutput_clientToken = GetFirewallDomainListOutput.AddMember("clientToken", _ClientToken)
-
-	GetFirewallDomainListOutput_createdAt = GetFirewallDomainListOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	GetFirewallDomainListOutput_description = GetFirewallDomainListOutput.AddMember("description", _ResourceDescription)
-
-	GetFirewallDomainListOutput_domainCount = GetFirewallDomainListOutput.AddMember("domainCount", smithyprelude.Integer)
-
-	GetFirewallDomainListOutput_id = GetFirewallDomainListOutput.AddMember("id", _ResourceId)
-
-	GetFirewallDomainListOutput_name = GetFirewallDomainListOutput.AddMember("name", _ResourceName)
-
-	GetFirewallDomainListOutput_status = GetFirewallDomainListOutput.AddMember("status", CRResourceStatus)
-
-	GetFirewallDomainListOutput_statusMessage = GetFirewallDomainListOutput.AddMember("statusMessage", smithyprelude.String)
-
-	GetFirewallDomainListOutput_updatedAt = GetFirewallDomainListOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	GetFirewallRuleInput_firewallRuleId = GetFirewallRuleInput.AddMember("firewallRuleId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetFirewallRuleOutput_action = GetFirewallRuleOutput.AddMember("action", FirewallRuleAction)
-
-	GetFirewallRuleOutput_blockOverrideDnsType = GetFirewallRuleOutput.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	GetFirewallRuleOutput_blockOverrideDomain = GetFirewallRuleOutput.AddMember("blockOverrideDomain", _Domain)
-
-	GetFirewallRuleOutput_blockOverrideTtl = GetFirewallRuleOutput.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	GetFirewallRuleOutput_blockResponse = GetFirewallRuleOutput.AddMember("blockResponse", FirewallBlockResponse)
-
-	GetFirewallRuleOutput_confidenceThreshold = GetFirewallRuleOutput.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	GetFirewallRuleOutput_createdAt = GetFirewallRuleOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	GetFirewallRuleOutput_description = GetFirewallRuleOutput.AddMember("description", _ResourceDescription)
-
-	GetFirewallRuleOutput_dnsAdvancedProtection = GetFirewallRuleOutput.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	GetFirewallRuleOutput_firewallDomainListId = GetFirewallRuleOutput.AddMember("firewallDomainListId", _ResourceId)
-
-	GetFirewallRuleOutput_id = GetFirewallRuleOutput.AddMember("id", _ResourceId)
-
-	GetFirewallRuleOutput_name = GetFirewallRuleOutput.AddMember("name", _ResourceName)
-
-	GetFirewallRuleOutput_priority = GetFirewallRuleOutput.AddMember("priority", _FirewallRulePriority)
-
-	GetFirewallRuleOutput_dnsViewId = GetFirewallRuleOutput.AddMember("dnsViewId", _ResourceId)
-
-	GetFirewallRuleOutput_queryType = GetFirewallRuleOutput.AddMember("queryType", _DnsQueryType)
-
-	GetFirewallRuleOutput_status = GetFirewallRuleOutput.AddMember("status", CRResourceStatus)
-
-	GetFirewallRuleOutput_updatedAt = GetFirewallRuleOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	GetGlobalResolverInput_globalResolverId = GetGlobalResolverInput.AddMember("globalResolverId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetGlobalResolverOutput_id = GetGlobalResolverOutput.AddMember("id", _ResourceId)
-
-	GetGlobalResolverOutput_arn = GetGlobalResolverOutput.AddMember("arn", _ResourceArn)
-
-	GetGlobalResolverOutput_clientToken = GetGlobalResolverOutput.AddMember("clientToken", _ClientToken)
-
-	GetGlobalResolverOutput_dnsName = GetGlobalResolverOutput.AddMember("dnsName", _Sni)
-
-	GetGlobalResolverOutput_observabilityRegion = GetGlobalResolverOutput.AddMember("observabilityRegion", _Region)
-
-	GetGlobalResolverOutput_name = GetGlobalResolverOutput.AddMember("name", _ResourceName)
-
-	GetGlobalResolverOutput_description = GetGlobalResolverOutput.AddMember("description", _ResourceDescription)
-
-	GetGlobalResolverOutput_regions = GetGlobalResolverOutput.AddMember("regions", _Regions)
-
-	GetGlobalResolverOutput_createdAt = GetGlobalResolverOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	GetGlobalResolverOutput_updatedAt = GetGlobalResolverOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	GetGlobalResolverOutput_status = GetGlobalResolverOutput.AddMember("status", CRResourceStatus)
-
-	GetGlobalResolverOutput_ipv4Addresses = GetGlobalResolverOutput.AddMember("ipv4Addresses", _IPv4Addresses)
-
-	GetGlobalResolverOutput_ipv6Addresses = GetGlobalResolverOutput.AddMember("ipv6Addresses", _IPv6Addresses)
-
-	GetGlobalResolverOutput_ipAddressType = GetGlobalResolverOutput.AddMember("ipAddressType", GlobalResolverIpAddressType)
-
-	GetHostedZoneAssociationInput_hostedZoneAssociationId = GetHostedZoneAssociationInput.AddMember("hostedZoneAssociationId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetHostedZoneAssociationOutput_id = GetHostedZoneAssociationOutput.AddMember("id", _ResourceId)
-
-	GetHostedZoneAssociationOutput_resourceArn = GetHostedZoneAssociationOutput.AddMember("resourceArn", _ResourceArn)
-
-	GetHostedZoneAssociationOutput_hostedZoneId = GetHostedZoneAssociationOutput.AddMember("hostedZoneId", _HostedZoneId)
-
-	GetHostedZoneAssociationOutput_hostedZoneName = GetHostedZoneAssociationOutput.AddMember("hostedZoneName", _HostedZoneName)
-
-	GetHostedZoneAssociationOutput_name = GetHostedZoneAssociationOutput.AddMember("name", _ResourceName)
-
-	GetHostedZoneAssociationOutput_createdAt = GetHostedZoneAssociationOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	GetHostedZoneAssociationOutput_updatedAt = GetHostedZoneAssociationOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	GetHostedZoneAssociationOutput_status = GetHostedZoneAssociationOutput.AddMember("status", HostedZoneAssociationStatus)
-
-	GetManagedFirewallDomainListInput_managedFirewallDomainListId = GetManagedFirewallDomainListInput.AddMember("managedFirewallDomainListId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	GetManagedFirewallDomainListOutput_description = GetManagedFirewallDomainListOutput.AddMember("description", _ResourceDescription)
-
-	GetManagedFirewallDomainListOutput_id = GetManagedFirewallDomainListOutput.AddMember("id", _ResourceId)
-
-	GetManagedFirewallDomainListOutput_name = GetManagedFirewallDomainListOutput.AddMember("name", _ResourceName)
-
-	GetManagedFirewallDomainListOutput_managedListType = GetManagedFirewallDomainListOutput.AddMember("managedListType", smithyprelude.String)
-
-	ImportFirewallDomainsInput_domainFileUrl = ImportFirewallDomainsInput.AddMember("domainFileUrl", smithyprelude.String)
-
-	ImportFirewallDomainsInput_firewallDomainListId = ImportFirewallDomainsInput.AddMember("firewallDomainListId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	ImportFirewallDomainsInput_operation = ImportFirewallDomainsInput.AddMember("operation", smithyprelude.String)
-
-	ImportFirewallDomainsOutput_id = ImportFirewallDomainsOutput.AddMember("id", _ResourceId)
-
-	ImportFirewallDomainsOutput_name = ImportFirewallDomainsOutput.AddMember("name", _ResourceName)
-
-	ImportFirewallDomainsOutput_status = ImportFirewallDomainsOutput.AddMember("status", CRResourceStatus)
-
-	ListAccessSourcesInput_maxResults = ListAccessSourcesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListAccessSourcesInput_nextToken = ListAccessSourcesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListAccessSourcesInput_filters = ListAccessSourcesInput.AddMember("filters", _Filters, &smithytraits.HTTPQueryParams{})
-
-	ListAccessSourcesOutput_nextToken = ListAccessSourcesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAccessSourcesOutput_accessSources = ListAccessSourcesOutput.AddMember("accessSources", _AccessSources)
-
-	ListAccessTokensInput_maxResults = ListAccessTokensInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListAccessTokensInput_nextToken = ListAccessTokensInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListAccessTokensInput_dnsViewId = ListAccessTokensInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	ListAccessTokensInput_filters = ListAccessTokensInput.AddMember("filters", _Filters, &smithytraits.HTTPQueryParams{})
-
-	ListAccessTokensOutput_nextToken = ListAccessTokensOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListAccessTokensOutput_accessTokens = ListAccessTokensOutput.AddMember("accessTokens", _AccessTokens)
-
-	ListDNSViewsInput_maxResults = ListDNSViewsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListDNSViewsInput_nextToken = ListDNSViewsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListDNSViewsInput_globalResolverId = ListDNSViewsInput.AddMember("globalResolverId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	ListDNSViewsOutput_nextToken = ListDNSViewsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListDNSViewsOutput_dnsViews = ListDNSViewsOutput.AddMember("dnsViews", _DNSViews)
-
-	ListFirewallDomainListsInput_maxResults = ListFirewallDomainListsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListFirewallDomainListsInput_nextToken = ListFirewallDomainListsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListFirewallDomainListsInput_globalResolverId = ListFirewallDomainListsInput.AddMember("globalResolverId", _ResourceId, &smithytraits.HTTPQuery{Name: "global_resolver_id"})
-
-	ListFirewallDomainListsOutput_nextToken = ListFirewallDomainListsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListFirewallDomainListsOutput_firewallDomainLists = ListFirewallDomainListsOutput.AddMember("firewallDomainLists", _FirewallDomainLists)
-
-	ListFirewallDomainsInput_maxResults = ListFirewallDomainsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListFirewallDomainsInput_nextToken = ListFirewallDomainsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListFirewallDomainsInput_firewallDomainListId = ListFirewallDomainsInput.AddMember("firewallDomainListId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	ListFirewallDomainsOutput_nextToken = ListFirewallDomainsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListFirewallDomainsOutput_domains = ListFirewallDomainsOutput.AddMember("domains", _Domains)
-
-	ListFirewallRulesInput_maxResults = ListFirewallRulesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListFirewallRulesInput_nextToken = ListFirewallRulesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListFirewallRulesInput_dnsViewId = ListFirewallRulesInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPQuery{Name: "dnsview_id"})
-
-	ListFirewallRulesInput_filters = ListFirewallRulesInput.AddMember("filters", _Filters, &smithytraits.HTTPQueryParams{})
-
-	ListFirewallRulesOutput_nextToken = ListFirewallRulesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListFirewallRulesOutput_firewallRules = ListFirewallRulesOutput.AddMember("firewallRules", _FirewallRules)
-
-	ListGlobalResolversInput_maxResults = ListGlobalResolversInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListGlobalResolversInput_nextToken = ListGlobalResolversInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListGlobalResolversOutput_nextToken = ListGlobalResolversOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListGlobalResolversOutput_globalResolvers = ListGlobalResolversOutput.AddMember("globalResolvers", _GlobalResolvers)
-
-	ListHostedZoneAssociationsInput_maxResults = ListHostedZoneAssociationsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListHostedZoneAssociationsInput_nextToken = ListHostedZoneAssociationsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListHostedZoneAssociationsInput_resourceArn = ListHostedZoneAssociationsInput.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListHostedZoneAssociationsOutput_nextToken = ListHostedZoneAssociationsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListHostedZoneAssociationsOutput_hostedZoneAssociations = ListHostedZoneAssociationsOutput.AddMember("hostedZoneAssociations", _HostedZoneAssociations)
-
-	ListManagedFirewallDomainListsInput_maxResults = ListManagedFirewallDomainListsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListManagedFirewallDomainListsInput_nextToken = ListManagedFirewallDomainListsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListManagedFirewallDomainListsInput_managedFirewallDomainListType = ListManagedFirewallDomainListsInput.AddMember("managedFirewallDomainListType", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListManagedFirewallDomainListsOutput_nextToken = ListManagedFirewallDomainListsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListManagedFirewallDomainListsOutput_managedFirewallDomainLists = ListManagedFirewallDomainListsOutput.AddMember("managedFirewallDomainLists", _ManagedFirewallDomainLists)
-
-	ListSharedDNSViewsInput_maxResults = ListSharedDNSViewsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
-
-	ListSharedDNSViewsInput_nextToken = ListSharedDNSViewsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
-
-	ListSharedDNSViewsOutput_nextToken = ListSharedDNSViewsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListSharedDNSViewsOutput_dnsViews = ListSharedDNSViewsOutput.AddMember("dnsViews", _SharedDNSViews)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys)
-
-	UpdateAccessSourceInput_accessSourceId = UpdateAccessSourceInput.AddMember("accessSourceId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UpdateAccessSourceInput_cidr = UpdateAccessSourceInput.AddMember("cidr", _Cidr)
-
-	UpdateAccessSourceInput_ipAddressType = UpdateAccessSourceInput.AddMember("ipAddressType", IpAddressType)
-
-	UpdateAccessSourceInput_name = UpdateAccessSourceInput.AddMember("name", _ResourceNameShort)
-
-	UpdateAccessSourceInput_protocol = UpdateAccessSourceInput.AddMember("protocol", DnsProtocol)
-
-	UpdateAccessSourceOutput_arn = UpdateAccessSourceOutput.AddMember("arn", _ResourceArn)
-
-	UpdateAccessSourceOutput_cidr = UpdateAccessSourceOutput.AddMember("cidr", _Cidr)
-
-	UpdateAccessSourceOutput_createdAt = UpdateAccessSourceOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	UpdateAccessSourceOutput_id = UpdateAccessSourceOutput.AddMember("id", _ResourceId)
-
-	UpdateAccessSourceOutput_ipAddressType = UpdateAccessSourceOutput.AddMember("ipAddressType", IpAddressType)
-
-	UpdateAccessSourceOutput_name = UpdateAccessSourceOutput.AddMember("name", _ResourceNameShort)
-
-	UpdateAccessSourceOutput_dnsViewId = UpdateAccessSourceOutput.AddMember("dnsViewId", _ResourceId)
-
-	UpdateAccessSourceOutput_protocol = UpdateAccessSourceOutput.AddMember("protocol", DnsProtocol)
-
-	UpdateAccessSourceOutput_status = UpdateAccessSourceOutput.AddMember("status", CRResourceStatus)
-
-	UpdateAccessSourceOutput_updatedAt = UpdateAccessSourceOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	UpdateAccessTokenInput_accessTokenId = UpdateAccessTokenInput.AddMember("accessTokenId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UpdateAccessTokenInput_name = UpdateAccessTokenInput.AddMember("name", _ResourceNameShort)
-
-	UpdateAccessTokenOutput_id = UpdateAccessTokenOutput.AddMember("id", _ResourceId)
-
-	UpdateAccessTokenOutput_name = UpdateAccessTokenOutput.AddMember("name", _ResourceNameShort)
-
-	UpdateDNSViewInput_dnsViewId = UpdateDNSViewInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UpdateDNSViewInput_name = UpdateDNSViewInput.AddMember("name", _ResourceName)
-
-	UpdateDNSViewInput_description = UpdateDNSViewInput.AddMember("description", _ResourceDescription)
-
-	UpdateDNSViewInput_dnssecValidation = UpdateDNSViewInput.AddMember("dnssecValidation", DnsSecValidationType)
-
-	UpdateDNSViewInput_ednsClientSubnet = UpdateDNSViewInput.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	UpdateDNSViewInput_firewallRulesFailOpen = UpdateDNSViewInput.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	UpdateDNSViewOutput_id = UpdateDNSViewOutput.AddMember("id", _ResourceId)
-
-	UpdateDNSViewOutput_arn = UpdateDNSViewOutput.AddMember("arn", _ResourceArn)
-
-	UpdateDNSViewOutput_clientToken = UpdateDNSViewOutput.AddMember("clientToken", _ClientToken)
-
-	UpdateDNSViewOutput_dnssecValidation = UpdateDNSViewOutput.AddMember("dnssecValidation", DnsSecValidationType)
-
-	UpdateDNSViewOutput_ednsClientSubnet = UpdateDNSViewOutput.AddMember("ednsClientSubnet", EdnsClientSubnetType)
-
-	UpdateDNSViewOutput_firewallRulesFailOpen = UpdateDNSViewOutput.AddMember("firewallRulesFailOpen", FirewallRulesFailOpenType)
-
-	UpdateDNSViewOutput_name = UpdateDNSViewOutput.AddMember("name", _ResourceName)
-
-	UpdateDNSViewOutput_description = UpdateDNSViewOutput.AddMember("description", _ResourceDescription)
-
-	UpdateDNSViewOutput_globalResolverId = UpdateDNSViewOutput.AddMember("globalResolverId", _ResourceId)
-
-	UpdateDNSViewOutput_createdAt = UpdateDNSViewOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	UpdateDNSViewOutput_updatedAt = UpdateDNSViewOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	UpdateDNSViewOutput_status = UpdateDNSViewOutput.AddMember("status", ProfileResourceStatus)
-
-	UpdateFirewallDomainsInput_domains = UpdateFirewallDomainsInput.AddMember("domains", _Domains)
-
-	UpdateFirewallDomainsInput_firewallDomainListId = UpdateFirewallDomainsInput.AddMember("firewallDomainListId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UpdateFirewallDomainsInput_operation = UpdateFirewallDomainsInput.AddMember("operation", smithyprelude.String)
-
-	UpdateFirewallDomainsOutput_id = UpdateFirewallDomainsOutput.AddMember("id", _ResourceId)
-
-	UpdateFirewallDomainsOutput_name = UpdateFirewallDomainsOutput.AddMember("name", _ResourceName)
-
-	UpdateFirewallDomainsOutput_status = UpdateFirewallDomainsOutput.AddMember("status", CRResourceStatus)
-
-	UpdateFirewallRuleInput_action = UpdateFirewallRuleInput.AddMember("action", FirewallRuleAction)
-
-	UpdateFirewallRuleInput_blockOverrideDnsType = UpdateFirewallRuleInput.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	UpdateFirewallRuleInput_blockOverrideDomain = UpdateFirewallRuleInput.AddMember("blockOverrideDomain", _Domain)
-
-	UpdateFirewallRuleInput_blockOverrideTtl = UpdateFirewallRuleInput.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	UpdateFirewallRuleInput_blockResponse = UpdateFirewallRuleInput.AddMember("blockResponse", FirewallBlockResponse)
-
-	UpdateFirewallRuleInput_clientToken = UpdateFirewallRuleInput.AddMember("clientToken", _ClientToken)
-
-	UpdateFirewallRuleInput_confidenceThreshold = UpdateFirewallRuleInput.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	UpdateFirewallRuleInput_description = UpdateFirewallRuleInput.AddMember("description", _ResourceDescription)
-
-	UpdateFirewallRuleInput_dnsAdvancedProtection = UpdateFirewallRuleInput.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	UpdateFirewallRuleInput_firewallRuleId = UpdateFirewallRuleInput.AddMember("firewallRuleId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UpdateFirewallRuleInput_name = UpdateFirewallRuleInput.AddMember("name", _ResourceName)
-
-	UpdateFirewallRuleInput_priority = UpdateFirewallRuleInput.AddMember("priority", _FirewallRulePriority)
-
-	UpdateFirewallRuleOutput_action = UpdateFirewallRuleOutput.AddMember("action", FirewallRuleAction)
-
-	UpdateFirewallRuleOutput_blockOverrideDnsType = UpdateFirewallRuleOutput.AddMember("blockOverrideDnsType", BlockOverrideDnsQueryType)
-
-	UpdateFirewallRuleOutput_blockOverrideDomain = UpdateFirewallRuleOutput.AddMember("blockOverrideDomain", _Domain)
-
-	UpdateFirewallRuleOutput_blockOverrideTtl = UpdateFirewallRuleOutput.AddMember("blockOverrideTtl", _BlockOverrideTtl)
-
-	UpdateFirewallRuleOutput_blockResponse = UpdateFirewallRuleOutput.AddMember("blockResponse", FirewallBlockResponse)
-
-	UpdateFirewallRuleOutput_confidenceThreshold = UpdateFirewallRuleOutput.AddMember("confidenceThreshold", ConfidenceThreshold)
-
-	UpdateFirewallRuleOutput_createdAt = UpdateFirewallRuleOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	UpdateFirewallRuleOutput_description = UpdateFirewallRuleOutput.AddMember("description", _ResourceDescription)
-
-	UpdateFirewallRuleOutput_dnsAdvancedProtection = UpdateFirewallRuleOutput.AddMember("dnsAdvancedProtection", DnsAdvancedProtection)
-
-	UpdateFirewallRuleOutput_firewallDomainListId = UpdateFirewallRuleOutput.AddMember("firewallDomainListId", _ResourceId)
-
-	UpdateFirewallRuleOutput_id = UpdateFirewallRuleOutput.AddMember("id", _ResourceId)
-
-	UpdateFirewallRuleOutput_name = UpdateFirewallRuleOutput.AddMember("name", _ResourceName)
-
-	UpdateFirewallRuleOutput_priority = UpdateFirewallRuleOutput.AddMember("priority", _FirewallRulePriority)
-
-	UpdateFirewallRuleOutput_dnsViewId = UpdateFirewallRuleOutput.AddMember("dnsViewId", _ResourceId)
-
-	UpdateFirewallRuleOutput_queryType = UpdateFirewallRuleOutput.AddMember("queryType", _DnsQueryType)
-
-	UpdateFirewallRuleOutput_status = UpdateFirewallRuleOutput.AddMember("status", CRResourceStatus)
-
-	UpdateFirewallRuleOutput_updatedAt = UpdateFirewallRuleOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	UpdateGlobalResolverInput_globalResolverId = UpdateGlobalResolverInput.AddMember("globalResolverId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UpdateGlobalResolverInput_name = UpdateGlobalResolverInput.AddMember("name", _ResourceName)
-
-	UpdateGlobalResolverInput_observabilityRegion = UpdateGlobalResolverInput.AddMember("observabilityRegion", _Region)
-
-	UpdateGlobalResolverInput_description = UpdateGlobalResolverInput.AddMember("description", _ResourceDescription)
-
-	UpdateGlobalResolverInput_ipAddressType = UpdateGlobalResolverInput.AddMember("ipAddressType", GlobalResolverIpAddressType)
-
-	UpdateGlobalResolverInput_regions = UpdateGlobalResolverInput.AddMember("regions", _Regions)
-
-	UpdateGlobalResolverOutput_id = UpdateGlobalResolverOutput.AddMember("id", _ResourceId)
-
-	UpdateGlobalResolverOutput_arn = UpdateGlobalResolverOutput.AddMember("arn", _ResourceArn)
-
-	UpdateGlobalResolverOutput_clientToken = UpdateGlobalResolverOutput.AddMember("clientToken", _ClientToken)
-
-	UpdateGlobalResolverOutput_dnsName = UpdateGlobalResolverOutput.AddMember("dnsName", _Sni)
-
-	UpdateGlobalResolverOutput_observabilityRegion = UpdateGlobalResolverOutput.AddMember("observabilityRegion", _Region)
-
-	UpdateGlobalResolverOutput_name = UpdateGlobalResolverOutput.AddMember("name", _ResourceName)
-
-	UpdateGlobalResolverOutput_description = UpdateGlobalResolverOutput.AddMember("description", _ResourceDescription)
-
-	UpdateGlobalResolverOutput_regions = UpdateGlobalResolverOutput.AddMember("regions", _Regions)
-
-	UpdateGlobalResolverOutput_createdAt = UpdateGlobalResolverOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	UpdateGlobalResolverOutput_updatedAt = UpdateGlobalResolverOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	UpdateGlobalResolverOutput_status = UpdateGlobalResolverOutput.AddMember("status", CRResourceStatus)
-
-	UpdateGlobalResolverOutput_ipv4Addresses = UpdateGlobalResolverOutput.AddMember("ipv4Addresses", _IPv4Addresses)
-
-	UpdateGlobalResolverOutput_ipv6Addresses = UpdateGlobalResolverOutput.AddMember("ipv6Addresses", _IPv6Addresses)
-
-	UpdateGlobalResolverOutput_ipAddressType = UpdateGlobalResolverOutput.AddMember("ipAddressType", GlobalResolverIpAddressType)
-
-	UpdateHostedZoneAssociationInput_hostedZoneAssociationId = UpdateHostedZoneAssociationInput.AddMember("hostedZoneAssociationId", _ResourceId, &smithytraits.HTTPLabel{})
-
-	UpdateHostedZoneAssociationInput_name = UpdateHostedZoneAssociationInput.AddMember("name", _ResourceName)
-
-	UpdateHostedZoneAssociationOutput_id = UpdateHostedZoneAssociationOutput.AddMember("id", _ResourceId)
-
-	UpdateHostedZoneAssociationOutput_resourceArn = UpdateHostedZoneAssociationOutput.AddMember("resourceArn", _ResourceArn)
-
-	UpdateHostedZoneAssociationOutput_hostedZoneId = UpdateHostedZoneAssociationOutput.AddMember("hostedZoneId", _HostedZoneId)
-
-	UpdateHostedZoneAssociationOutput_hostedZoneName = UpdateHostedZoneAssociationOutput.AddMember("hostedZoneName", _HostedZoneName)
-
-	UpdateHostedZoneAssociationOutput_name = UpdateHostedZoneAssociationOutput.AddMember("name", _ResourceName)
-
-	UpdateHostedZoneAssociationOutput_createdAt = UpdateHostedZoneAssociationOutput.AddMember("createdAt", _ISO8601TimeString)
-
-	UpdateHostedZoneAssociationOutput_updatedAt = UpdateHostedZoneAssociationOutput.AddMember("updatedAt", _ISO8601TimeString)
-
-	UpdateHostedZoneAssociationOutput_status = UpdateHostedZoneAssociationOutput.AddMember("status", HostedZoneAssociationStatus)
-
+const blob = "" +
+	"ListManagedFirewallDomainListsOutputListManagedFirewallDomainListsInputBatchCreateFirewallRuleOutput" +
+	"ItemsBatchDeleteFirewallRuleOutputItemsBatchUpdateFirewallRuleOutputItemsGetManagedFirewallDomainLis" +
+	"tOutputBatchCreateFirewallRuleInputItemsBatchDeleteFirewallRuleInputItemsBatchUpdateFirewallRuleInpu" +
+	"tItemsGetManagedFirewallDomainListInputUpdateHostedZoneAssociationOutputListHostedZoneAssociationsOu" +
+	"tputUpdateHostedZoneAssociationInputEC2DNSGlobalResolverCustomerAPIListHostedZoneAssociationsInputCr" +
+	"eateFirewallDomainListOutputDeleteFirewallDomainListOutputGetHostedZoneAssociationOutputManagedFirew" +
+	"allDomainListsItemBatchCreateFirewallRuleResultBatchDeleteFirewallRuleResultBatchUpdateFirewallRuleR" +
+	"esultCreateFirewallDomainListInputDeleteFirewallDomainListInputGetHostedZoneAssociationInputListFire" +
+	"wallDomainListsOutputServiceQuotaExceededExceptionmanagedFirewallDomainListTypeDisassociateHostedZon" +
+	"eOutputHostedZoneAssociationSummaryListFirewallDomainListsInputValidationExceptionFieldListDisassoci" +
+	"ateHostedZoneInputGetFirewallDomainListOutputGlobalResolverIpAddressTypeHostedZoneAssociationStatusI" +
+	"mportFirewallDomainsOutputListTagsForResourceResponseUpdateFirewallDomainsOutputmanagedFirewallDomai" +
+	"nListIdCreateGlobalResolverOutputDeleteGlobalResolverOutputGetFirewallDomainListInputImportFirewallD" +
+	"omainsInputListTagsForResourceRequestUpdateFirewallDomainsInputUpdateGlobalResolverOutputmanagedFire" +
+	"wallDomainListsAssociateHostedZoneOutputBlockOverrideDnsQueryTypeCreateGlobalResolverInputDeleteGlob" +
+	"alResolverInputFirewallRulesFailOpenTypeListFirewallDomainsOutputListGlobalResolversOutputResourceNo" +
+	"tFoundExceptionUpdateGlobalResolverInputValidationExceptionReasonAssociateHostedZoneInputCreateAcces" +
+	"sSourceOutputDeleteAccessSourceOutputListFirewallDomainsInputListGlobalResolversInputListSharedDNSVi" +
+	"ewsOutputUpdateAccessSourceOutputCreateAccessSourceInputCreateAccessTokenOutputDeleteAccessSourceInp" +
+	"utDeleteAccessTokenOutputFIELD_VALIDATION_FAILEDGetGlobalResolverOutputInternalServerExceptionListAc" +
+	"cessSourcesOutputListFirewallRulesOutputListSharedDNSViewsInputUpdateAccessSourceInputUpdateAccessTo" +
+	"kenOutputhostedZoneAssociationIdCreateAccessTokenInputDeleteAccessTokenInputGetGlobalResolverInputLi" +
+	"stAccessSourcesInputListAccessTokensOutputListFirewallRulesInputUpdateAccessTokenInputhostedZoneAsso" +
+	"ciationsAccessDeniedExceptionDnsAdvancedProtectionFirewallBlockResponseGetAccessSourceOutputGetFirew" +
+	"allRuleOutputListAccessTokensInputProfileResourceStatusUntagResourceResponsednsAdvancedProtectionfir" +
+	"ewallRulesFailOpenmanagedDomainListNameDisableDNSViewOutputDnsSecValidationTypeEdnsClientSubnetTypeF" +
+	"irewallRulePriorityGetAccessSourceInputGetAccessTokenOutputGetFirewallRuleInputSharedDNSViewSummaryU" +
+	"ntagResourceRequestblockOverrideDnsTypefirewallDomainListIdConfidenceThresholdCreateDNSViewOutputDel" +
+	"eteDNSViewOutputDisableDNSViewInputEnableDNSViewOutputGetAccessTokenInputGlobalResolversItemResource" +
+	"DescriptionTagResourceResponseThrottlingExceptionUpdateDNSViewOutputblockOverrideDomainconfidenceThr" +
+	"esholdfirewallDomainListsobservabilityRegionCreateDNSViewInputDeleteDNSViewInputEnableDNSViewInputFi" +
+	"rewallRuleActionListDNSViewsOutputTagResourceRequestUpdateDNSViewInputAccessSourcesItemConflictExcep" +
+	"tionFirewallRulesItemISO8601TimeStringListDNSViewsInputResourceNameShortUNKNOWN_OPERATIONretryAfterS" +
+	"econdsAccessTokenValueBlockOverrideTtlCRResourceStatusGetDNSViewOutputblockOverrideTtldnssecValidati" +
+	"onednsClientSubnetglobalResolverIdAccessTokenItemGetDNSViewInputglobalResolversmanagedListTypeDICTIO" +
+	"NARY_DGAHostedZoneNameaccessSourceIdfirewallRuleIdhostedZoneNameownerAccountIdDNS_TUNNELINGIPv4Addre" +
+	"ssesIPv6AddressesaccessSourcesaccessTokenIdblockResponsedomainFileUrlipAddressTypeipv4Addressesipv6A" +
+	"ddressesstatusMessageCANNOT_PARSEHostedZoneIdaccessTokenshostedZoneIdresourceTypeClientTokenDnsProto" +
+	"colOPERATIONALResourceArnTokenStatusclientTokendescriptiondomainCountresourceArnserviceCodeDUAL_STAC" +
+	"KResourceIdmaxResultsresourceIdDISABLINGcreatedAtdeletedAtdnsViewIdexpiresAtfieldListnextTokenoperat" +
+	"ionqueryTypequotaCodesuccessesupdatedAtCREATINGDELETINGDISABLEDENABLINGNXDOMAINOVERRIDETagValueUPDAT" +
+	"INGdnsViewsfailurespriorityprotocolENABLEDFiltersIntegerRegionsStringsTagKeysdnsNamedomainsfiltersme" +
+	"ssageregionstagKeysMEDIUMNODATAactionmemberreasonALERTALLOWBLOCKCNAMEOTHERqTypevalueCidrDO53HIGHIPV4" +
+	"IPV6UnitcidrcodenametagsDOHDOTSniarnkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.route53globalresolver", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1415, Target: 0, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 71, Target: 1, Traits: 1, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 105, Target: 2, Traits: 2, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 139, Target: 3, Traits: 3, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1689, Target: 4, Traits: 4, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1856, Target: 5, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2778, Target: 6, Traits: 6, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 498, Target: 7, Traits: 7, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 76, Target: 8, Traits: 8, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1207, Target: 9, Traits: 9, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1713, Target: 10, Traits: 10, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1902, Target: 11, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2797, Target: 12, Traits: 12, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 528, Target: 13, Traits: 13, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 110, Target: 14, Traits: 14, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1233, Target: 15, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2539, Target: 16, Traits: 16, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 879, Target: 17, Traits: 17, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2835, Target: 18, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2371, Target: 19, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2639, Target: 20, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3354, Target: 21, Traits: 21, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1018, Target: 22, Traits: 22, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2392, Target: 23, Traits: 23, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1948, Target: 24, Traits: 24, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 558, Target: 25, Traits: 25, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 173, Target: 26, Traits: 26, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1099, Target: 27, Traits: 27, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1994, Target: 28, Traits: 28, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2220, Target: 29, Traits: 29, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3116, Target: 30, Traits: 30, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 792, Target: 31, Traits: 31, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1540, Target: 32, Traits: 32, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2017, Target: 33, Traits: 33, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1565, Target: 34, Traits: 34, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 372, Target: 35, Traits: 35, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 36, Traits: 36, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1785, Target: 37, Traits: 37, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1126, Target: 38, Traits: 38, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2911, Target: 39, Traits: 39, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2455, Target: 40, Traits: 40, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1809, Target: 41, Traits: 41, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2086, Target: 42, Traits: 42, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2949, Target: 43, Traits: 43, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1153, Target: 44, Traits: 44, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 144, Target: 45, Traits: 45, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1363, Target: 46, Traits: 46, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 339, Target: 47, Traits: 47, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 436, Target: 48, Traits: 48, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2308, Target: 49, Traits: 49, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1998, Target: 51, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 53, Traits: 48, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3170, Target: 53, Traits: 48, StrLen: 17, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4308, Target: 178, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 312, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4127, Target: 197, Traits: 48, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3434, Target: 64, Traits: 48, StrLen: 15, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3967, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 386, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2224, Target: 74, Traits: 48, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 64, Traits: 48, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3306, Target: 76, Traits: 51, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3569, Target: 77, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 207, Target: 78, Traits: 48, StrLen: 32, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4274, Target: 201, Traits: 48, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 207, Target: 93, Traits: 48, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 78, Traits: 48, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 71, Target: 95, Traits: 48, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2497, Target: 101, Traits: 48, StrLen: 12, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4312, Target: 999, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 71, Target: 99, Traits: 48, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 95, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 618, Target: 101, Traits: 48, StrLen: 29, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2518, Target: 343, Traits: 48, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4003, Target: 201, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 240, Target: 121, Traits: 48, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3536, Target: 342, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 240, Target: 123, Traits: 48, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 121, Traits: 48, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 105, Target: 125, Traits: 48, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2497, Target: 131, Traits: 48, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4312, Target: 999, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 105, Target: 129, Traits: 48, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 125, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 647, Target: 131, Traits: 48, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 273, Target: 136, Traits: 48, StrLen: 32, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3536, Target: 342, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 273, Target: 148, Traits: 48, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 136, Traits: 48, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 139, Target: 150, Traits: 48, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2497, Target: 156, Traits: 48, StrLen: 12, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4312, Target: 999, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 139, Target: 154, Traits: 48, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 150, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 676, Target: 156, Traits: 48, StrLen: 29, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4003, Target: 201, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1440, Target: 175, Traits: 48, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4264, Target: 1000, Traits: 48, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3322, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4284, Target: 178, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3781, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2759, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4256, Target: 1000, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4219, Target: 1000, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4292, Target: 1000, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3187, Target: 184, Traits: 52, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3921, Target: 998, Traits: 48, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3769, Target: 998, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3338, Target: 188, Traits: 48, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4039, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3803, Target: 1000, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4095, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4047, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2329, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3505, Target: 1000, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3578, Target: 1000, Traits: 48, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3494, Target: 1000, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3792, Target: 197, Traits: 48, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4288, Target: 1000, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4324, Target: 1000, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4327, Target: 1000, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1453, Target: 201, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2559, Target: 202, Traits: 48, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4135, Target: 1000, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4055, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1795, Target: 205, Traits: 48, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 207, Traits: 48, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2685, Target: 207, Traits: 48, StrLen: 14, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 329, Traits: 48, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19, Target: 220, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1113, Target: 221, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 220, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2579, Target: 223, Traits: 48, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4135, Target: 1000, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4055, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4142, Target: 226, Traits: 48, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 4336, Target: 998, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4279, Target: 372, Traits: 48, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2350, Target: 229, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4225, Target: 1000, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4071, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4079, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 11, Target: 233, Traits: 48, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 235, Traits: 48, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 595, Target: 235, Traits: 48, StrLen: 23, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3098, Target: 244, Traits: 48, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4254, Target: 1000, Traits: 48, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4249, Target: 1000, Traits: 48, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4259, Target: 1000, Traits: 48, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2599, Target: 248, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 1515, Target: 249, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 254, Traits: 48, StrLen: 6, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1515, Target: 251, Traits: 48, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4135, Target: 1000, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4055, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3204, Target: 254, Traits: 48, StrLen: 17, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4003, Target: 201, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1045, Target: 272, Traits: 48, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4296, Target: 1000, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3891, Target: 1000, Traits: 48, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1569, Target: 275, Traits: 48, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 277, Traits: 48, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2873, Target: 277, Traits: 48, StrLen: 19, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4177, Target: 371, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3025, Target: 337, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4205, Target: 338, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3682, Target: 316, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3695, Target: 319, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3669, Target: 272, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 376, Target: 292, Traits: 48, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 298, Traits: 48, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1072, Target: 294, Traits: 48, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4039, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3803, Target: 1000, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4047, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 907, Target: 298, Traits: 48, StrLen: 28, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3757, Target: 307, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3550, Target: 308, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 294, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3733, Target: 307, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3508, Target: 308, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1971, Target: 309, Traits: 53, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3289, Target: 999, Traits: 54, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1059, Target: 312, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4296, Target: 1000, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4300, Target: 1000, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3591, Target: 315, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3591, Target: 316, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 315, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3604, Target: 318, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3604, Target: 319, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 318, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3221, Target: 321, Traits: 55, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 4, Target: 322, Traits: 48, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 324, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 588, Target: 324, Traits: 48, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3479, Target: 998, Traits: 48, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2434, Target: 329, Traits: 48, StrLen: 21, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4039, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3803, Target: 1000, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4095, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4063, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3931, Target: 1000, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4055, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4047, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3038, Target: 337, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4156, Target: 338, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 337, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3814, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2892, Target: 341, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3901, Target: 342, Traits: 48, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3255, Target: 343, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3255, Target: 344, Traits: 48, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1590, Target: 345, Traits: 56, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3921, Target: 998, Traits: 48, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3769, Target: 998, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 821, Target: 349, Traits: 57, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3921, Target: 998, Traits: 48, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3769, Target: 998, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3880, Target: 998, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4012, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1789, Target: 355, Traits: 48, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 357, Traits: 48, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2679, Target: 357, Traits: 48, StrLen: 20, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 329, Traits: 48, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3564, Target: 77, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4330, Target: 371, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4163, Target: 372, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 998, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4170, Target: 374, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4170, Target: 375, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 374, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1130, Target: 377, Traits: 48, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 4336, Target: 374, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4279, Target: 380, Traits: 48, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4087, Target: 380, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2930, Target: 381, Traits: 58, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3880, Target: 998, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4012, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3289, Target: 999, Traits: 54, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3825, Target: 386, Traits: 48, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4039, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3803, Target: 1000, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4047, Target: 1000, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 963, Target: 390, Traits: 59, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4243, Target: 399, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3976, Target: 397, Traits: 48, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 963, Target: 394, Traits: 48, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4316, Target: 998, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4198, Target: 998, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 963, Target: 397, Traits: 48, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 4237, Target: 394, Traits: 48, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1640, Target: 399, Traits: 48, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3272, Target: 1000, Traits: 48, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3721, Target: 1000, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1925, Target: 1000, Traits: 48, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4269, Target: 1000, Traits: 48, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1665, Target: 404, Traits: 48, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3757, Target: 307, Traits: 60, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1415, Target: 408, Traits: 48, StrLen: 25, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3757, Target: 307, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3550, Target: 308, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 294, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 207, Target: 417, Traits: 48, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2497, Target: 93, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 71, Target: 419, Traits: 48, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4111, Target: 99, Traits: 48, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4021, Target: 99, Traits: 48, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 240, Target: 422, Traits: 48, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2497, Target: 123, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 105, Target: 424, Traits: 48, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4111, Target: 129, Traits: 48, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4021, Target: 129, Traits: 48, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 273, Target: 427, Traits: 48, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2497, Target: 148, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 139, Target: 429, Traits: 48, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4111, Target: 154, Traits: 48, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4021, Target: 154, Traits: 48, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1833, Target: 432, Traits: 48, StrLen: 23, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4308, Target: 178, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 312, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4127, Target: 197, Traits: 48, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4320, Target: 377, Traits: 48, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1689, Target: 440, Traits: 48, StrLen: 24, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4308, Target: 178, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 312, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4127, Target: 197, Traits: 48, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2132, Target: 451, Traits: 48, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 60, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3967, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4320, Target: 377, Traits: 48, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1856, Target: 457, Traits: 48, StrLen: 23, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3967, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 386, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4279, Target: 76, Traits: 61, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3044, Target: 467, Traits: 48, StrLen: 18, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3418, Target: 342, Traits: 60, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4320, Target: 377, Traits: 48, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2778, Target: 476, Traits: 48, StrLen: 19, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 329, Traits: 48, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 705, Target: 489, Traits: 48, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 60, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4320, Target: 377, Traits: 48, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 498, Target: 495, Traits: 48, StrLen: 30, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3858, Target: 999, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 212, Target: 505, Traits: 48, StrLen: 23, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4274, Target: 201, Traits: 48, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 76, Target: 520, Traits: 48, StrLen: 24, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4003, Target: 201, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1465, Target: 538, Traits: 48, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 272, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3025, Target: 337, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4205, Target: 338, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4320, Target: 377, Traits: 48, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1207, Target: 546, Traits: 48, StrLen: 26, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4177, Target: 371, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 272, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3682, Target: 316, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3695, Target: 319, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3025, Target: 337, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4205, Target: 338, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1879, Target: 561, Traits: 48, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 342, Traits: 60, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1713, Target: 563, Traits: 48, StrLen: 24, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4308, Target: 178, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 312, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4127, Target: 197, Traits: 48, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2154, Target: 574, Traits: 48, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3630, Target: 342, Traits: 60, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1902, Target: 576, Traits: 48, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 386, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3949, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3062, Target: 580, Traits: 48, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3958, Target: 342, Traits: 60, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2797, Target: 582, Traits: 48, StrLen: 19, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 329, Traits: 48, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 734, Target: 595, Traits: 48, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2739, Target: 342, Traits: 60, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 528, Target: 597, Traits: 48, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 245, Target: 602, Traits: 48, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3536, Target: 342, Traits: 60, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 110, Target: 604, Traits: 48, StrLen: 24, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4003, Target: 201, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1490, Target: 622, Traits: 48, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3418, Target: 342, Traits: 60, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1233, Target: 624, Traits: 48, StrLen: 26, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4177, Target: 371, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3025, Target: 337, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4205, Target: 338, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3682, Target: 316, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3695, Target: 319, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3669, Target: 272, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2816, Target: 639, Traits: 48, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3958, Target: 342, Traits: 60, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2539, Target: 641, Traits: 48, StrLen: 20, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 329, Traits: 48, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 991, Target: 654, Traits: 48, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3757, Target: 307, Traits: 60, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 340, Traits: 60, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 879, Target: 657, Traits: 48, StrLen: 28, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3757, Target: 307, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3550, Target: 308, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 294, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3080, Target: 666, Traits: 48, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3958, Target: 342, Traits: 60, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2835, Target: 668, Traits: 48, StrLen: 19, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 329, Traits: 48, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2619, Target: 681, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 342, Traits: 60, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2371, Target: 683, Traits: 48, StrLen: 21, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4308, Target: 178, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 312, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4127, Target: 197, Traits: 48, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2854, Target: 694, Traits: 48, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3630, Target: 342, Traits: 60, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2639, Target: 696, Traits: 48, StrLen: 20, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3967, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 386, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4279, Target: 76, Traits: 61, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3449, Target: 708, Traits: 48, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3958, Target: 342, Traits: 60, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3354, Target: 710, Traits: 48, StrLen: 16, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 329, Traits: 48, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1259, Target: 723, Traits: 48, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2739, Target: 342, Traits: 60, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1018, Target: 725, Traits: 48, StrLen: 27, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3858, Target: 999, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3708, Target: 998, Traits: 48, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2659, Target: 737, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3536, Target: 342, Traits: 60, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2392, Target: 739, Traits: 48, StrLen: 21, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4003, Target: 201, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2176, Target: 757, Traits: 48, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3418, Target: 342, Traits: 60, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1948, Target: 759, Traits: 48, StrLen: 23, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4177, Target: 371, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3025, Target: 337, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4205, Target: 338, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3682, Target: 316, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3695, Target: 319, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3669, Target: 272, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 763, Target: 774, Traits: 48, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 342, Traits: 60, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 558, Target: 776, Traits: 48, StrLen: 30, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3757, Target: 307, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3550, Target: 308, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 294, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 306, Target: 785, Traits: 48, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1180, Target: 342, Traits: 60, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 173, Target: 787, Traits: 48, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3479, Target: 998, Traits: 48, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1285, Target: 792, Traits: 48, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3656, Target: 998, Traits: 48, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 60, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3994, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1099, Target: 796, Traits: 48, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2198, Target: 800, Traits: 48, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4191, Target: 226, Traits: 64, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1994, Target: 804, Traits: 48, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3617, Target: 51, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2413, Target: 807, Traits: 48, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 60, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4191, Target: 226, Traits: 64, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2220, Target: 812, Traits: 48, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3745, Target: 74, Traits: 48, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3238, Target: 815, Traits: 48, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 60, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3116, Target: 819, Traits: 48, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4103, Target: 205, Traits: 48, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 935, Target: 822, Traits: 48, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 65, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 792, Target: 826, Traits: 48, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3006, Target: 233, Traits: 48, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1737, Target: 829, Traits: 48, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 60, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1540, Target: 833, Traits: 48, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4184, Target: 221, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2242, Target: 836, Traits: 48, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 66, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4191, Target: 226, Traits: 64, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2017, Target: 841, Traits: 48, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2497, Target: 249, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1761, Target: 844, Traits: 48, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1565, Target: 847, Traits: 48, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3464, Target: 275, Traits: 48, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 467, Target: 850, Traits: 48, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 340, Traits: 67, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 372, Target: 854, Traits: 48, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2286, Target: 292, Traits: 48, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 36, Target: 857, Traits: 48, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 850, Target: 998, Traits: 60, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 861, Traits: 48, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1389, Target: 322, Traits: 48, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2040, Target: 864, Traits: 48, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3911, Target: 999, Traits: 62, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3985, Target: 998, Traits: 63, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1785, Target: 867, Traits: 48, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3985, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4103, Target: 355, Traits: 48, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1311, Target: 870, Traits: 48, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1126, Target: 872, Traits: 48, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4320, Target: 377, Traits: 48, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 3134, Target: 874, Traits: 48, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4320, Target: 377, Traits: 48, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2911, Target: 877, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2699, Target: 878, Traits: 48, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4212, Target: 375, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2455, Target: 881, Traits: 48, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2063, Target: 882, Traits: 48, StrLen: 23, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3522, Target: 342, Traits: 60, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4308, Target: 178, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 312, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4127, Target: 197, Traits: 48, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1809, Target: 888, Traits: 48, StrLen: 24, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4308, Target: 178, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 312, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4127, Target: 197, Traits: 48, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2264, Target: 899, Traits: 48, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3630, Target: 342, Traits: 60, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2086, Target: 902, Traits: 48, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 344, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3152, Target: 905, Traits: 48, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3958, Target: 342, Traits: 60, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2949, Target: 912, Traits: 48, StrLen: 19, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 202, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3402, Target: 223, Traits: 48, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2497, Target: 251, Traits: 48, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3418, Target: 342, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 329, Traits: 48, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1337, Target: 925, Traits: 48, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4184, Target: 221, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 60, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3994, Target: 998, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1153, Target: 929, Traits: 48, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 278, Target: 933, Traits: 48, StrLen: 23, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3536, Target: 342, Traits: 60, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 144, Target: 946, Traits: 48, StrLen: 24, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4231, Target: 244, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2719, Target: 175, Traits: 48, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2968, Target: 220, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3370, Target: 177, Traits: 48, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3643, Target: 229, Traits: 48, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2987, Target: 180, Traits: 48, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2476, Target: 193, Traits: 48, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2739, Target: 342, Traits: 48, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4119, Target: 248, Traits: 48, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3958, Target: 342, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4003, Target: 201, Traits: 48, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1615, Target: 964, Traits: 48, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3418, Target: 342, Traits: 60, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3025, Target: 337, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3669, Target: 272, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4205, Target: 338, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1363, Target: 971, Traits: 48, StrLen: 26, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4333, Target: 340, Traits: 48, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3836, Target: 179, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4177, Target: 371, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3025, Target: 337, Traits: 48, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3847, Target: 341, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4205, Target: 338, Traits: 48, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 188, Traits: 48, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3682, Target: 316, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3695, Target: 319, Traits: 48, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3669, Target: 272, Traits: 48, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 404, Target: 986, Traits: 48, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2109, Target: 342, Traits: 60, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 339, Target: 989, Traits: 48, StrLen: 33, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 966, Target: 342, Traits: 48, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3869, Target: 340, Traits: 48, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3757, Target: 307, Traits: 48, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3550, Target: 308, Traits: 48, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4316, Target: 343, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3940, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4030, Target: 321, Traits: 50, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3708, Target: 294, Traits: 48, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3232, Target: 998, Traits: 48, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 4149, Target: 999, Traits: 48, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 4304, Target: 1000, Traits: 48, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/hosted-zone-associations/{hostedZoneId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/firewall-rules/batch-create",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/firewall-rules/batch-delete",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/firewall-rules/batch-update",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/access-sources",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tokens/{dnsViewId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/dns-views/{globalResolverId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/firewall-domain-lists/{globalResolverId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/firewall-rules",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/global-resolver",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/access-sources/{accessSourceId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tokens/{accessTokenId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/dns-views/{dnsViewId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/firewall-domain-lists/{firewallDomainListId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/firewall-rules/{firewallRuleId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/global-resolver/{globalResolverId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/dns-views/{dnsViewId}/disable",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/hosted-zone-associations/hosted-zone/{hostedZoneId}/resource-arn/{resourceArn+}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/dns-views/{dnsViewId}/enable",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/access-sources/{accessSourceId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tokens/{accessTokenId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/dns-views/{dnsViewId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/firewall-domain-lists/{firewallDomainListId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/firewall-rules/{firewallRuleId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/global-resolver/{globalResolverId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/hosted-zone-associations/{hostedZoneAssociationId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/managed-firewall-domain-lists/{managedFirewallDomainListId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/firewall-domain-lists/{firewallDomainListId}/domains/s3_file_url",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/access-sources",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tokens/dns-view/{dnsViewId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/dns-views/resolver/{globalResolverId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/firewall-domain-lists",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/firewall-domain-lists/{firewallDomainListId}/domains",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/firewall-rules",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/global-resolver",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/hosted-zone-associations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/list-managed-firewall-domain-lists/{managedFirewallDomainListType}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/shared-dns-views",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/get-all-tags",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tag-resource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/untag-resource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/access-sources/{accessSourceId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/tokens/{accessTokenId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/dns-views/{dnsViewId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/firewall-domain-lists/{firewallDomainListId}/domains",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/firewall-rules/{firewallRuleId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/global-resolver/{globalResolverId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/hosted-zone-associations/{hostedZoneAssociationId}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "max_results"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "next_token"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPQueryParams{}}, DirectMask: 0x80000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "global_resolver_id"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "dnsview_id"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [1001]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+	smithy.NewStaticSchema(&set, 884),
+	smithy.NewStaticSchema(&set, 885),
+	smithy.NewStaticSchema(&set, 886),
+	smithy.NewStaticSchema(&set, 887),
+	smithy.NewStaticSchema(&set, 888),
+	smithy.NewStaticSchema(&set, 889),
+	smithy.NewStaticSchema(&set, 890),
+	smithy.NewStaticSchema(&set, 891),
+	smithy.NewStaticSchema(&set, 892),
+	smithy.NewStaticSchema(&set, 893),
+	smithy.NewStaticSchema(&set, 894),
+	smithy.NewStaticSchema(&set, 895),
+	smithy.NewStaticSchema(&set, 896),
+	smithy.NewStaticSchema(&set, 897),
+	smithy.NewStaticSchema(&set, 898),
+	smithy.NewStaticSchema(&set, 899),
+	smithy.NewStaticSchema(&set, 900),
+	smithy.NewStaticSchema(&set, 901),
+	smithy.NewStaticSchema(&set, 902),
+	smithy.NewStaticSchema(&set, 903),
+	smithy.NewStaticSchema(&set, 904),
+	smithy.NewStaticSchema(&set, 905),
+	smithy.NewStaticSchema(&set, 906),
+	smithy.NewStaticSchema(&set, 907),
+	smithy.NewStaticSchema(&set, 908),
+	smithy.NewStaticSchema(&set, 909),
+	smithy.NewStaticSchema(&set, 910),
+	smithy.NewStaticSchema(&set, 911),
+	smithy.NewStaticSchema(&set, 912),
+	smithy.NewStaticSchema(&set, 913),
+	smithy.NewStaticSchema(&set, 914),
+	smithy.NewStaticSchema(&set, 915),
+	smithy.NewStaticSchema(&set, 916),
+	smithy.NewStaticSchema(&set, 917),
+	smithy.NewStaticSchema(&set, 918),
+	smithy.NewStaticSchema(&set, 919),
+	smithy.NewStaticSchema(&set, 920),
+	smithy.NewStaticSchema(&set, 921),
+	smithy.NewStaticSchema(&set, 922),
+	smithy.NewStaticSchema(&set, 923),
+	smithy.NewStaticSchema(&set, 924),
+	smithy.NewStaticSchema(&set, 925),
+	smithy.NewStaticSchema(&set, 926),
+	smithy.NewStaticSchema(&set, 927),
+	smithy.NewStaticSchema(&set, 928),
+	smithy.NewStaticSchema(&set, 929),
+	smithy.NewStaticSchema(&set, 930),
+	smithy.NewStaticSchema(&set, 931),
+	smithy.NewStaticSchema(&set, 932),
+	smithy.NewStaticSchema(&set, 933),
+	smithy.NewStaticSchema(&set, 934),
+	smithy.NewStaticSchema(&set, 935),
+	smithy.NewStaticSchema(&set, 936),
+	smithy.NewStaticSchema(&set, 937),
+	smithy.NewStaticSchema(&set, 938),
+	smithy.NewStaticSchema(&set, 939),
+	smithy.NewStaticSchema(&set, 940),
+	smithy.NewStaticSchema(&set, 941),
+	smithy.NewStaticSchema(&set, 942),
+	smithy.NewStaticSchema(&set, 943),
+	smithy.NewStaticSchema(&set, 944),
+	smithy.NewStaticSchema(&set, 945),
+	smithy.NewStaticSchema(&set, 946),
+	smithy.NewStaticSchema(&set, 947),
+	smithy.NewStaticSchema(&set, 948),
+	smithy.NewStaticSchema(&set, 949),
+	smithy.NewStaticSchema(&set, 950),
+	smithy.NewStaticSchema(&set, 951),
+	smithy.NewStaticSchema(&set, 952),
+	smithy.NewStaticSchema(&set, 953),
+	smithy.NewStaticSchema(&set, 954),
+	smithy.NewStaticSchema(&set, 955),
+	smithy.NewStaticSchema(&set, 956),
+	smithy.NewStaticSchema(&set, 957),
+	smithy.NewStaticSchema(&set, 958),
+	smithy.NewStaticSchema(&set, 959),
+	smithy.NewStaticSchema(&set, 960),
+	smithy.NewStaticSchema(&set, 961),
+	smithy.NewStaticSchema(&set, 962),
+	smithy.NewStaticSchema(&set, 963),
+	smithy.NewStaticSchema(&set, 964),
+	smithy.NewStaticSchema(&set, 965),
+	smithy.NewStaticSchema(&set, 966),
+	smithy.NewStaticSchema(&set, 967),
+	smithy.NewStaticSchema(&set, 968),
+	smithy.NewStaticSchema(&set, 969),
+	smithy.NewStaticSchema(&set, 970),
+	smithy.NewStaticSchema(&set, 971),
+	smithy.NewStaticSchema(&set, 972),
+	smithy.NewStaticSchema(&set, 973),
+	smithy.NewStaticSchema(&set, 974),
+	smithy.NewStaticSchema(&set, 975),
+	smithy.NewStaticSchema(&set, 976),
+	smithy.NewStaticSchema(&set, 977),
+	smithy.NewStaticSchema(&set, 978),
+	smithy.NewStaticSchema(&set, 979),
+	smithy.NewStaticSchema(&set, 980),
+	smithy.NewStaticSchema(&set, 981),
+	smithy.NewStaticSchema(&set, 982),
+	smithy.NewStaticSchema(&set, 983),
+	smithy.NewStaticSchema(&set, 984),
+	smithy.NewStaticSchema(&set, 985),
+	smithy.NewStaticSchema(&set, 986),
+	smithy.NewStaticSchema(&set, 987),
+	smithy.NewStaticSchema(&set, 988),
+	smithy.NewStaticSchema(&set, 989),
+	smithy.NewStaticSchema(&set, 990),
+	smithy.NewStaticSchema(&set, 991),
+	smithy.NewStaticSchema(&set, 992),
+	smithy.NewStaticSchema(&set, 993),
+	smithy.NewStaticSchema(&set, 994),
+	smithy.NewStaticSchema(&set, 995),
+	smithy.NewStaticSchema(&set, 996),
+	smithy.NewStaticSchema(&set, 997),
+	smithy.NewStaticSchema(&set, 998),
+	smithy.NewStaticSchema(&set, 999),
+	smithy.NewStaticSchema(&set, 1000),
+}
+
+var AssociateHostedZone = &handles[0]
+
+var BatchCreateFirewallRule = &handles[1]
+
+var BatchDeleteFirewallRule = &handles[2]
+
+var BatchUpdateFirewallRule = &handles[3]
+
+var CreateAccessSource = &handles[4]
+
+var CreateAccessToken = &handles[5]
+
+var CreateDNSView = &handles[6]
+
+var CreateFirewallDomainList = &handles[7]
+
+var CreateFirewallRule = &handles[8]
+
+var CreateGlobalResolver = &handles[9]
+
+var DeleteAccessSource = &handles[10]
+
+var DeleteAccessToken = &handles[11]
+
+var DeleteDNSView = &handles[12]
+
+var DeleteFirewallDomainList = &handles[13]
+
+var DeleteFirewallRule = &handles[14]
+
+var DeleteGlobalResolver = &handles[15]
+
+var DisableDNSView = &handles[16]
+
+var DisassociateHostedZone = &handles[17]
+
+var EnableDNSView = &handles[18]
+
+var GetAccessSource = &handles[19]
+
+var GetAccessToken = &handles[20]
+
+var GetDNSView = &handles[21]
+
+var GetFirewallDomainList = &handles[22]
+
+var GetFirewallRule = &handles[23]
+
+var GetGlobalResolver = &handles[24]
+
+var GetHostedZoneAssociation = &handles[25]
+
+var GetManagedFirewallDomainList = &handles[26]
+
+var ImportFirewallDomains = &handles[27]
+
+var ListAccessSources = &handles[28]
+
+var ListAccessTokens = &handles[29]
+
+var ListDNSViews = &handles[30]
+
+var ListFirewallDomainLists = &handles[31]
+
+var ListFirewallDomains = &handles[32]
+
+var ListFirewallRules = &handles[33]
+
+var ListGlobalResolvers = &handles[34]
+
+var ListHostedZoneAssociations = &handles[35]
+
+var ListManagedFirewallDomainLists = &handles[36]
+
+var ListSharedDNSViews = &handles[37]
+
+var ListTagsForResource = &handles[38]
+
+var TagResource = &handles[39]
+
+var UntagResource = &handles[40]
+
+var UpdateAccessSource = &handles[41]
+
+var UpdateAccessToken = &handles[42]
+
+var UpdateDNSView = &handles[43]
+
+var UpdateFirewallDomains = &handles[44]
+
+var UpdateFirewallRule = &handles[45]
+
+var UpdateGlobalResolver = &handles[46]
+
+var UpdateHostedZoneAssociation = &handles[47]
+
+var _EC2DNSGlobalResolverCustomerAPI = &handles[48]
+
+var AccessDeniedException = &handles[49]
+var AccessDeniedException_message = &handles[50]
+
+var _AccessSources = &handles[51]
+var _AccessSources_member = &handles[52]
+
+var AccessSourcesItem = &handles[53]
+var AccessSourcesItem_arn = &handles[54]
+var AccessSourcesItem_cidr = &handles[55]
+var AccessSourcesItem_createdAt = &handles[56]
+var AccessSourcesItem_id = &handles[57]
+var AccessSourcesItem_ipAddressType = &handles[58]
+var AccessSourcesItem_name = &handles[59]
+var AccessSourcesItem_dnsViewId = &handles[60]
+var AccessSourcesItem_protocol = &handles[61]
+var AccessSourcesItem_status = &handles[62]
+var AccessSourcesItem_updatedAt = &handles[63]
+
+var AccessTokenItem = &handles[64]
+var AccessTokenItem_id = &handles[65]
+var AccessTokenItem_arn = &handles[66]
+var AccessTokenItem_createdAt = &handles[67]
+var AccessTokenItem_dnsViewId = &handles[68]
+var AccessTokenItem_expiresAt = &handles[69]
+var AccessTokenItem_globalResolverId = &handles[70]
+var AccessTokenItem_name = &handles[71]
+var AccessTokenItem_status = &handles[72]
+var AccessTokenItem_updatedAt = &handles[73]
+
+var _AccessTokens = &handles[74]
+var _AccessTokens_member = &handles[75]
+
+var _AccessTokenValue = &handles[76]
+
+var _AccountId = &handles[77]
+
+var BatchCreateFirewallRuleInputItem = &handles[78]
+var BatchCreateFirewallRuleInputItem_action = &handles[79]
+var BatchCreateFirewallRuleInputItem_blockOverrideDnsType = &handles[80]
+var BatchCreateFirewallRuleInputItem_blockOverrideDomain = &handles[81]
+var BatchCreateFirewallRuleInputItem_blockOverrideTtl = &handles[82]
+var BatchCreateFirewallRuleInputItem_blockResponse = &handles[83]
+var BatchCreateFirewallRuleInputItem_clientToken = &handles[84]
+var BatchCreateFirewallRuleInputItem_confidenceThreshold = &handles[85]
+var BatchCreateFirewallRuleInputItem_description = &handles[86]
+var BatchCreateFirewallRuleInputItem_dnsAdvancedProtection = &handles[87]
+var BatchCreateFirewallRuleInputItem_firewallDomainListId = &handles[88]
+var BatchCreateFirewallRuleInputItem_name = &handles[89]
+var BatchCreateFirewallRuleInputItem_priority = &handles[90]
+var BatchCreateFirewallRuleInputItem_dnsViewId = &handles[91]
+var BatchCreateFirewallRuleInputItem_qType = &handles[92]
+
+var _BatchCreateFirewallRuleInputItems = &handles[93]
+var _BatchCreateFirewallRuleInputItems_member = &handles[94]
+
+var BatchCreateFirewallRuleOutputItem = &handles[95]
+var BatchCreateFirewallRuleOutputItem_firewallRule = &handles[96]
+var BatchCreateFirewallRuleOutputItem_code = &handles[97]
+var BatchCreateFirewallRuleOutputItem_message = &handles[98]
+
+var _BatchCreateFirewallRuleOutputItems = &handles[99]
+var _BatchCreateFirewallRuleOutputItems_member = &handles[100]
+
+var BatchCreateFirewallRuleResult = &handles[101]
+var BatchCreateFirewallRuleResult_action = &handles[102]
+var BatchCreateFirewallRuleResult_blockOverrideDnsType = &handles[103]
+var BatchCreateFirewallRuleResult_blockOverrideDomain = &handles[104]
+var BatchCreateFirewallRuleResult_blockOverrideTtl = &handles[105]
+var BatchCreateFirewallRuleResult_blockResponse = &handles[106]
+var BatchCreateFirewallRuleResult_clientToken = &handles[107]
+var BatchCreateFirewallRuleResult_confidenceThreshold = &handles[108]
+var BatchCreateFirewallRuleResult_createdAt = &handles[109]
+var BatchCreateFirewallRuleResult_description = &handles[110]
+var BatchCreateFirewallRuleResult_dnsAdvancedProtection = &handles[111]
+var BatchCreateFirewallRuleResult_firewallDomainListId = &handles[112]
+var BatchCreateFirewallRuleResult_id = &handles[113]
+var BatchCreateFirewallRuleResult_managedDomainListName = &handles[114]
+var BatchCreateFirewallRuleResult_name = &handles[115]
+var BatchCreateFirewallRuleResult_priority = &handles[116]
+var BatchCreateFirewallRuleResult_dnsViewId = &handles[117]
+var BatchCreateFirewallRuleResult_queryType = &handles[118]
+var BatchCreateFirewallRuleResult_status = &handles[119]
+var BatchCreateFirewallRuleResult_updatedAt = &handles[120]
+
+var BatchDeleteFirewallRuleInputItem = &handles[121]
+var BatchDeleteFirewallRuleInputItem_firewallRuleId = &handles[122]
+
+var _BatchDeleteFirewallRuleInputItems = &handles[123]
+var _BatchDeleteFirewallRuleInputItems_member = &handles[124]
+
+var BatchDeleteFirewallRuleOutputItem = &handles[125]
+var BatchDeleteFirewallRuleOutputItem_firewallRule = &handles[126]
+var BatchDeleteFirewallRuleOutputItem_code = &handles[127]
+var BatchDeleteFirewallRuleOutputItem_message = &handles[128]
+
+var _BatchDeleteFirewallRuleOutputItems = &handles[129]
+var _BatchDeleteFirewallRuleOutputItems_member = &handles[130]
+
+var BatchDeleteFirewallRuleResult = &handles[131]
+var BatchDeleteFirewallRuleResult_clientToken = &handles[132]
+var BatchDeleteFirewallRuleResult_id = &handles[133]
+var BatchDeleteFirewallRuleResult_name = &handles[134]
+var BatchDeleteFirewallRuleResult_status = &handles[135]
+
+var BatchUpdateFirewallRuleInputItem = &handles[136]
+var BatchUpdateFirewallRuleInputItem_action = &handles[137]
+var BatchUpdateFirewallRuleInputItem_blockOverrideDnsType = &handles[138]
+var BatchUpdateFirewallRuleInputItem_blockOverrideDomain = &handles[139]
+var BatchUpdateFirewallRuleInputItem_blockOverrideTtl = &handles[140]
+var BatchUpdateFirewallRuleInputItem_blockResponse = &handles[141]
+var BatchUpdateFirewallRuleInputItem_confidenceThreshold = &handles[142]
+var BatchUpdateFirewallRuleInputItem_description = &handles[143]
+var BatchUpdateFirewallRuleInputItem_dnsAdvancedProtection = &handles[144]
+var BatchUpdateFirewallRuleInputItem_firewallRuleId = &handles[145]
+var BatchUpdateFirewallRuleInputItem_name = &handles[146]
+var BatchUpdateFirewallRuleInputItem_priority = &handles[147]
+
+var _BatchUpdateFirewallRuleInputItems = &handles[148]
+var _BatchUpdateFirewallRuleInputItems_member = &handles[149]
+
+var BatchUpdateFirewallRuleOutputItem = &handles[150]
+var BatchUpdateFirewallRuleOutputItem_firewallRule = &handles[151]
+var BatchUpdateFirewallRuleOutputItem_code = &handles[152]
+var BatchUpdateFirewallRuleOutputItem_message = &handles[153]
+
+var _BatchUpdateFirewallRuleOutputItems = &handles[154]
+var _BatchUpdateFirewallRuleOutputItems_member = &handles[155]
+
+var BatchUpdateFirewallRuleResult = &handles[156]
+var BatchUpdateFirewallRuleResult_action = &handles[157]
+var BatchUpdateFirewallRuleResult_blockOverrideDnsType = &handles[158]
+var BatchUpdateFirewallRuleResult_blockOverrideDomain = &handles[159]
+var BatchUpdateFirewallRuleResult_blockOverrideTtl = &handles[160]
+var BatchUpdateFirewallRuleResult_blockResponse = &handles[161]
+var BatchUpdateFirewallRuleResult_clientToken = &handles[162]
+var BatchUpdateFirewallRuleResult_confidenceThreshold = &handles[163]
+var BatchUpdateFirewallRuleResult_createdAt = &handles[164]
+var BatchUpdateFirewallRuleResult_description = &handles[165]
+var BatchUpdateFirewallRuleResult_dnsAdvancedProtection = &handles[166]
+var BatchUpdateFirewallRuleResult_firewallDomainListId = &handles[167]
+var BatchUpdateFirewallRuleResult_id = &handles[168]
+var BatchUpdateFirewallRuleResult_name = &handles[169]
+var BatchUpdateFirewallRuleResult_priority = &handles[170]
+var BatchUpdateFirewallRuleResult_dnsViewId = &handles[171]
+var BatchUpdateFirewallRuleResult_queryType = &handles[172]
+var BatchUpdateFirewallRuleResult_status = &handles[173]
+var BatchUpdateFirewallRuleResult_updatedAt = &handles[174]
+
+var BlockOverrideDnsQueryType = &handles[175]
+var BlockOverrideDnsQueryType_CNAME = &handles[176]
+
+var _BlockOverrideTtl = &handles[177]
+
+var _Cidr = &handles[178]
+
+var _ClientToken = &handles[179]
+
+var ConfidenceThreshold = &handles[180]
+var ConfidenceThreshold_LOW = &handles[181]
+var ConfidenceThreshold_MEDIUM = &handles[182]
+var ConfidenceThreshold_HIGH = &handles[183]
+
+var ConflictException = &handles[184]
+var ConflictException_message = &handles[185]
+var ConflictException_resourceId = &handles[186]
+var ConflictException_resourceType = &handles[187]
+
+var CRResourceStatus = &handles[188]
+var CRResourceStatus_CREATING = &handles[189]
+var CRResourceStatus_OPERATIONAL = &handles[190]
+var CRResourceStatus_UPDATING = &handles[191]
+var CRResourceStatus_DELETING = &handles[192]
+
+var DnsAdvancedProtection = &handles[193]
+var DnsAdvancedProtection_DGA = &handles[194]
+var DnsAdvancedProtection_DNS_TUNNELING = &handles[195]
+var DnsAdvancedProtection_DICTIONARY_DGA = &handles[196]
+
+var DnsProtocol = &handles[197]
+var DnsProtocol_DO53 = &handles[198]
+var DnsProtocol_DOH = &handles[199]
+var DnsProtocol_DOT = &handles[200]
+
+var _DnsQueryType = &handles[201]
+
+var DnsSecValidationType = &handles[202]
+var DnsSecValidationType_ENABLED = &handles[203]
+var DnsSecValidationType_DISABLED = &handles[204]
+
+var _DNSViews = &handles[205]
+var _DNSViews_member = &handles[206]
+
+var DNSViewSummary = &handles[207]
+var DNSViewSummary_id = &handles[208]
+var DNSViewSummary_arn = &handles[209]
+var DNSViewSummary_clientToken = &handles[210]
+var DNSViewSummary_dnssecValidation = &handles[211]
+var DNSViewSummary_ednsClientSubnet = &handles[212]
+var DNSViewSummary_firewallRulesFailOpen = &handles[213]
+var DNSViewSummary_name = &handles[214]
+var DNSViewSummary_description = &handles[215]
+var DNSViewSummary_globalResolverId = &handles[216]
+var DNSViewSummary_createdAt = &handles[217]
+var DNSViewSummary_updatedAt = &handles[218]
+var DNSViewSummary_status = &handles[219]
+
+var _Domain = &handles[220]
+
+var _Domains = &handles[221]
+var _Domains_member = &handles[222]
+
+var EdnsClientSubnetType = &handles[223]
+var EdnsClientSubnetType_ENABLED = &handles[224]
+var EdnsClientSubnetType_DISABLED = &handles[225]
+
+var _Filters = &handles[226]
+var _Filters_key = &handles[227]
+var _Filters_value = &handles[228]
+
+var FirewallBlockResponse = &handles[229]
+var FirewallBlockResponse_NODATA = &handles[230]
+var FirewallBlockResponse_NXDOMAIN = &handles[231]
+var FirewallBlockResponse_OVERRIDE = &handles[232]
+
+var _FirewallDomainLists = &handles[233]
+var _FirewallDomainLists_member = &handles[234]
+
+var FirewallDomainListsItem = &handles[235]
+var FirewallDomainListsItem_arn = &handles[236]
+var FirewallDomainListsItem_globalResolverId = &handles[237]
+var FirewallDomainListsItem_createdAt = &handles[238]
+var FirewallDomainListsItem_description = &handles[239]
+var FirewallDomainListsItem_id = &handles[240]
+var FirewallDomainListsItem_name = &handles[241]
+var FirewallDomainListsItem_status = &handles[242]
+var FirewallDomainListsItem_updatedAt = &handles[243]
+
+var FirewallRuleAction = &handles[244]
+var FirewallRuleAction_ALLOW = &handles[245]
+var FirewallRuleAction_ALERT = &handles[246]
+var FirewallRuleAction_BLOCK = &handles[247]
+
+var _FirewallRulePriority = &handles[248]
+
+var _FirewallRules = &handles[249]
+var _FirewallRules_member = &handles[250]
+
+var FirewallRulesFailOpenType = &handles[251]
+var FirewallRulesFailOpenType_ENABLED = &handles[252]
+var FirewallRulesFailOpenType_DISABLED = &handles[253]
+
+var FirewallRulesItem = &handles[254]
+var FirewallRulesItem_action = &handles[255]
+var FirewallRulesItem_blockOverrideDnsType = &handles[256]
+var FirewallRulesItem_blockOverrideDomain = &handles[257]
+var FirewallRulesItem_blockOverrideTtl = &handles[258]
+var FirewallRulesItem_blockResponse = &handles[259]
+var FirewallRulesItem_confidenceThreshold = &handles[260]
+var FirewallRulesItem_createdAt = &handles[261]
+var FirewallRulesItem_description = &handles[262]
+var FirewallRulesItem_dnsAdvancedProtection = &handles[263]
+var FirewallRulesItem_firewallDomainListId = &handles[264]
+var FirewallRulesItem_id = &handles[265]
+var FirewallRulesItem_name = &handles[266]
+var FirewallRulesItem_priority = &handles[267]
+var FirewallRulesItem_dnsViewId = &handles[268]
+var FirewallRulesItem_queryType = &handles[269]
+var FirewallRulesItem_status = &handles[270]
+var FirewallRulesItem_updatedAt = &handles[271]
+
+var GlobalResolverIpAddressType = &handles[272]
+var GlobalResolverIpAddressType_IPV4 = &handles[273]
+var GlobalResolverIpAddressType_DUAL_STACK = &handles[274]
+
+var _GlobalResolvers = &handles[275]
+var _GlobalResolvers_member = &handles[276]
+
+var GlobalResolversItem = &handles[277]
+var GlobalResolversItem_id = &handles[278]
+var GlobalResolversItem_arn = &handles[279]
+var GlobalResolversItem_clientToken = &handles[280]
+var GlobalResolversItem_dnsName = &handles[281]
+var GlobalResolversItem_observabilityRegion = &handles[282]
+var GlobalResolversItem_name = &handles[283]
+var GlobalResolversItem_description = &handles[284]
+var GlobalResolversItem_regions = &handles[285]
+var GlobalResolversItem_createdAt = &handles[286]
+var GlobalResolversItem_updatedAt = &handles[287]
+var GlobalResolversItem_status = &handles[288]
+var GlobalResolversItem_ipv4Addresses = &handles[289]
+var GlobalResolversItem_ipv6Addresses = &handles[290]
+var GlobalResolversItem_ipAddressType = &handles[291]
+
+var _HostedZoneAssociations = &handles[292]
+var _HostedZoneAssociations_member = &handles[293]
+
+var HostedZoneAssociationStatus = &handles[294]
+var HostedZoneAssociationStatus_CREATING = &handles[295]
+var HostedZoneAssociationStatus_OPERATIONAL = &handles[296]
+var HostedZoneAssociationStatus_DELETING = &handles[297]
+
+var HostedZoneAssociationSummary = &handles[298]
+var HostedZoneAssociationSummary_id = &handles[299]
+var HostedZoneAssociationSummary_resourceArn = &handles[300]
+var HostedZoneAssociationSummary_hostedZoneId = &handles[301]
+var HostedZoneAssociationSummary_hostedZoneName = &handles[302]
+var HostedZoneAssociationSummary_name = &handles[303]
+var HostedZoneAssociationSummary_createdAt = &handles[304]
+var HostedZoneAssociationSummary_updatedAt = &handles[305]
+var HostedZoneAssociationSummary_status = &handles[306]
+
+var _HostedZoneId = &handles[307]
+
+var _HostedZoneName = &handles[308]
+
+var InternalServerException = &handles[309]
+var InternalServerException_message = &handles[310]
+var InternalServerException_retryAfterSeconds = &handles[311]
+
+var IpAddressType = &handles[312]
+var IpAddressType_IPV4 = &handles[313]
+var IpAddressType_IPV6 = &handles[314]
+
+var _IPv4Address = &handles[315]
+
+var _IPv4Addresses = &handles[316]
+var _IPv4Addresses_member = &handles[317]
+
+var _IPv6Address = &handles[318]
+
+var _IPv6Addresses = &handles[319]
+var _IPv6Addresses_member = &handles[320]
+
+var _ISO8601TimeString = &handles[321]
+
+var _ManagedFirewallDomainLists = &handles[322]
+var _ManagedFirewallDomainLists_member = &handles[323]
+
+var ManagedFirewallDomainListsItem = &handles[324]
+var ManagedFirewallDomainListsItem_description = &handles[325]
+var ManagedFirewallDomainListsItem_id = &handles[326]
+var ManagedFirewallDomainListsItem_name = &handles[327]
+var ManagedFirewallDomainListsItem_managedListType = &handles[328]
+
+var ProfileResourceStatus = &handles[329]
+var ProfileResourceStatus_CREATING = &handles[330]
+var ProfileResourceStatus_OPERATIONAL = &handles[331]
+var ProfileResourceStatus_UPDATING = &handles[332]
+var ProfileResourceStatus_ENABLING = &handles[333]
+var ProfileResourceStatus_DISABLING = &handles[334]
+var ProfileResourceStatus_DISABLED = &handles[335]
+var ProfileResourceStatus_DELETING = &handles[336]
+
+var _Region = &handles[337]
+
+var _Regions = &handles[338]
+var _Regions_member = &handles[339]
+
+var _ResourceArn = &handles[340]
+
+var _ResourceDescription = &handles[341]
+
+var _ResourceId = &handles[342]
+
+var _ResourceName = &handles[343]
+
+var _ResourceNameShort = &handles[344]
+
+var ResourceNotFoundException = &handles[345]
+var ResourceNotFoundException_message = &handles[346]
+var ResourceNotFoundException_resourceId = &handles[347]
+var ResourceNotFoundException_resourceType = &handles[348]
+
+var ServiceQuotaExceededException = &handles[349]
+var ServiceQuotaExceededException_message = &handles[350]
+var ServiceQuotaExceededException_resourceId = &handles[351]
+var ServiceQuotaExceededException_resourceType = &handles[352]
+var ServiceQuotaExceededException_serviceCode = &handles[353]
+var ServiceQuotaExceededException_quotaCode = &handles[354]
+
+var _SharedDNSViews = &handles[355]
+var _SharedDNSViews_member = &handles[356]
+
+var SharedDNSViewSummary = &handles[357]
+var SharedDNSViewSummary_id = &handles[358]
+var SharedDNSViewSummary_arn = &handles[359]
+var SharedDNSViewSummary_clientToken = &handles[360]
+var SharedDNSViewSummary_dnssecValidation = &handles[361]
+var SharedDNSViewSummary_ednsClientSubnet = &handles[362]
+var SharedDNSViewSummary_firewallRulesFailOpen = &handles[363]
+var SharedDNSViewSummary_name = &handles[364]
+var SharedDNSViewSummary_description = &handles[365]
+var SharedDNSViewSummary_globalResolverId = &handles[366]
+var SharedDNSViewSummary_createdAt = &handles[367]
+var SharedDNSViewSummary_updatedAt = &handles[368]
+var SharedDNSViewSummary_status = &handles[369]
+var SharedDNSViewSummary_ownerAccountId = &handles[370]
+
+var _Sni = &handles[371]
+
+var _Strings = &handles[372]
+var _Strings_member = &handles[373]
+
+var _TagKey = &handles[374]
+
+var _TagKeys = &handles[375]
+var _TagKeys_member = &handles[376]
+
+var _Tags = &handles[377]
+var _Tags_key = &handles[378]
+var _Tags_value = &handles[379]
+
+var _TagValue = &handles[380]
+
+var ThrottlingException = &handles[381]
+var ThrottlingException_message = &handles[382]
+var ThrottlingException_serviceCode = &handles[383]
+var ThrottlingException_quotaCode = &handles[384]
+var ThrottlingException_retryAfterSeconds = &handles[385]
+
+var TokenStatus = &handles[386]
+var TokenStatus_CREATING = &handles[387]
+var TokenStatus_OPERATIONAL = &handles[388]
+var TokenStatus_DELETING = &handles[389]
+
+var ValidationException = &handles[390]
+var ValidationException_message = &handles[391]
+var ValidationException_reason = &handles[392]
+var ValidationException_fieldList = &handles[393]
+
+var ValidationExceptionField = &handles[394]
+var ValidationExceptionField_name = &handles[395]
+var ValidationExceptionField_message = &handles[396]
+
+var _ValidationExceptionFieldList = &handles[397]
+var _ValidationExceptionFieldList_member = &handles[398]
+
+var ValidationExceptionReason = &handles[399]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[400]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[401]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[402]
+var ValidationExceptionReason_OTHER = &handles[403]
+
+var AssociateHostedZoneInput = &handles[404]
+var AssociateHostedZoneInput_hostedZoneId = &handles[405]
+var AssociateHostedZoneInput_resourceArn = &handles[406]
+var AssociateHostedZoneInput_name = &handles[407]
+
+var AssociateHostedZoneOutput = &handles[408]
+var AssociateHostedZoneOutput_id = &handles[409]
+var AssociateHostedZoneOutput_resourceArn = &handles[410]
+var AssociateHostedZoneOutput_hostedZoneId = &handles[411]
+var AssociateHostedZoneOutput_hostedZoneName = &handles[412]
+var AssociateHostedZoneOutput_name = &handles[413]
+var AssociateHostedZoneOutput_createdAt = &handles[414]
+var AssociateHostedZoneOutput_updatedAt = &handles[415]
+var AssociateHostedZoneOutput_status = &handles[416]
+
+var BatchCreateFirewallRuleInput = &handles[417]
+var BatchCreateFirewallRuleInput_firewallRules = &handles[418]
+
+var BatchCreateFirewallRuleOutput = &handles[419]
+var BatchCreateFirewallRuleOutput_failures = &handles[420]
+var BatchCreateFirewallRuleOutput_successes = &handles[421]
+
+var BatchDeleteFirewallRuleInput = &handles[422]
+var BatchDeleteFirewallRuleInput_firewallRules = &handles[423]
+
+var BatchDeleteFirewallRuleOutput = &handles[424]
+var BatchDeleteFirewallRuleOutput_failures = &handles[425]
+var BatchDeleteFirewallRuleOutput_successes = &handles[426]
+
+var BatchUpdateFirewallRuleInput = &handles[427]
+var BatchUpdateFirewallRuleInput_firewallRules = &handles[428]
+
+var BatchUpdateFirewallRuleOutput = &handles[429]
+var BatchUpdateFirewallRuleOutput_failures = &handles[430]
+var BatchUpdateFirewallRuleOutput_successes = &handles[431]
+
+var CreateAccessSourceInput = &handles[432]
+var CreateAccessSourceInput_cidr = &handles[433]
+var CreateAccessSourceInput_clientToken = &handles[434]
+var CreateAccessSourceInput_ipAddressType = &handles[435]
+var CreateAccessSourceInput_name = &handles[436]
+var CreateAccessSourceInput_dnsViewId = &handles[437]
+var CreateAccessSourceInput_protocol = &handles[438]
+var CreateAccessSourceInput_tags = &handles[439]
+
+var CreateAccessSourceOutput = &handles[440]
+var CreateAccessSourceOutput_arn = &handles[441]
+var CreateAccessSourceOutput_cidr = &handles[442]
+var CreateAccessSourceOutput_createdAt = &handles[443]
+var CreateAccessSourceOutput_id = &handles[444]
+var CreateAccessSourceOutput_ipAddressType = &handles[445]
+var CreateAccessSourceOutput_name = &handles[446]
+var CreateAccessSourceOutput_dnsViewId = &handles[447]
+var CreateAccessSourceOutput_protocol = &handles[448]
+var CreateAccessSourceOutput_status = &handles[449]
+var CreateAccessSourceOutput_updatedAt = &handles[450]
+
+var CreateAccessTokenInput = &handles[451]
+var CreateAccessTokenInput_clientToken = &handles[452]
+var CreateAccessTokenInput_dnsViewId = &handles[453]
+var CreateAccessTokenInput_expiresAt = &handles[454]
+var CreateAccessTokenInput_name = &handles[455]
+var CreateAccessTokenInput_tags = &handles[456]
+
+var CreateAccessTokenOutput = &handles[457]
+var CreateAccessTokenOutput_id = &handles[458]
+var CreateAccessTokenOutput_arn = &handles[459]
+var CreateAccessTokenOutput_clientToken = &handles[460]
+var CreateAccessTokenOutput_createdAt = &handles[461]
+var CreateAccessTokenOutput_dnsViewId = &handles[462]
+var CreateAccessTokenOutput_expiresAt = &handles[463]
+var CreateAccessTokenOutput_name = &handles[464]
+var CreateAccessTokenOutput_status = &handles[465]
+var CreateAccessTokenOutput_value = &handles[466]
+
+var CreateDNSViewInput = &handles[467]
+var CreateDNSViewInput_globalResolverId = &handles[468]
+var CreateDNSViewInput_clientToken = &handles[469]
+var CreateDNSViewInput_name = &handles[470]
+var CreateDNSViewInput_dnssecValidation = &handles[471]
+var CreateDNSViewInput_ednsClientSubnet = &handles[472]
+var CreateDNSViewInput_firewallRulesFailOpen = &handles[473]
+var CreateDNSViewInput_description = &handles[474]
+var CreateDNSViewInput_tags = &handles[475]
+
+var CreateDNSViewOutput = &handles[476]
+var CreateDNSViewOutput_id = &handles[477]
+var CreateDNSViewOutput_arn = &handles[478]
+var CreateDNSViewOutput_clientToken = &handles[479]
+var CreateDNSViewOutput_dnssecValidation = &handles[480]
+var CreateDNSViewOutput_ednsClientSubnet = &handles[481]
+var CreateDNSViewOutput_firewallRulesFailOpen = &handles[482]
+var CreateDNSViewOutput_name = &handles[483]
+var CreateDNSViewOutput_description = &handles[484]
+var CreateDNSViewOutput_globalResolverId = &handles[485]
+var CreateDNSViewOutput_createdAt = &handles[486]
+var CreateDNSViewOutput_updatedAt = &handles[487]
+var CreateDNSViewOutput_status = &handles[488]
+
+var CreateFirewallDomainListInput = &handles[489]
+var CreateFirewallDomainListInput_clientToken = &handles[490]
+var CreateFirewallDomainListInput_globalResolverId = &handles[491]
+var CreateFirewallDomainListInput_description = &handles[492]
+var CreateFirewallDomainListInput_name = &handles[493]
+var CreateFirewallDomainListInput_tags = &handles[494]
+
+var CreateFirewallDomainListOutput = &handles[495]
+var CreateFirewallDomainListOutput_arn = &handles[496]
+var CreateFirewallDomainListOutput_globalResolverId = &handles[497]
+var CreateFirewallDomainListOutput_createdAt = &handles[498]
+var CreateFirewallDomainListOutput_description = &handles[499]
+var CreateFirewallDomainListOutput_domainCount = &handles[500]
+var CreateFirewallDomainListOutput_id = &handles[501]
+var CreateFirewallDomainListOutput_name = &handles[502]
+var CreateFirewallDomainListOutput_status = &handles[503]
+var CreateFirewallDomainListOutput_updatedAt = &handles[504]
+
+var CreateFirewallRuleInput = &handles[505]
+var CreateFirewallRuleInput_action = &handles[506]
+var CreateFirewallRuleInput_blockOverrideDnsType = &handles[507]
+var CreateFirewallRuleInput_blockOverrideDomain = &handles[508]
+var CreateFirewallRuleInput_blockOverrideTtl = &handles[509]
+var CreateFirewallRuleInput_blockResponse = &handles[510]
+var CreateFirewallRuleInput_clientToken = &handles[511]
+var CreateFirewallRuleInput_confidenceThreshold = &handles[512]
+var CreateFirewallRuleInput_description = &handles[513]
+var CreateFirewallRuleInput_dnsAdvancedProtection = &handles[514]
+var CreateFirewallRuleInput_firewallDomainListId = &handles[515]
+var CreateFirewallRuleInput_name = &handles[516]
+var CreateFirewallRuleInput_priority = &handles[517]
+var CreateFirewallRuleInput_dnsViewId = &handles[518]
+var CreateFirewallRuleInput_qType = &handles[519]
+
+var CreateFirewallRuleOutput = &handles[520]
+var CreateFirewallRuleOutput_action = &handles[521]
+var CreateFirewallRuleOutput_blockOverrideDnsType = &handles[522]
+var CreateFirewallRuleOutput_blockOverrideDomain = &handles[523]
+var CreateFirewallRuleOutput_blockOverrideTtl = &handles[524]
+var CreateFirewallRuleOutput_blockResponse = &handles[525]
+var CreateFirewallRuleOutput_confidenceThreshold = &handles[526]
+var CreateFirewallRuleOutput_createdAt = &handles[527]
+var CreateFirewallRuleOutput_description = &handles[528]
+var CreateFirewallRuleOutput_dnsAdvancedProtection = &handles[529]
+var CreateFirewallRuleOutput_firewallDomainListId = &handles[530]
+var CreateFirewallRuleOutput_id = &handles[531]
+var CreateFirewallRuleOutput_name = &handles[532]
+var CreateFirewallRuleOutput_priority = &handles[533]
+var CreateFirewallRuleOutput_dnsViewId = &handles[534]
+var CreateFirewallRuleOutput_queryType = &handles[535]
+var CreateFirewallRuleOutput_status = &handles[536]
+var CreateFirewallRuleOutput_updatedAt = &handles[537]
+
+var CreateGlobalResolverInput = &handles[538]
+var CreateGlobalResolverInput_clientToken = &handles[539]
+var CreateGlobalResolverInput_description = &handles[540]
+var CreateGlobalResolverInput_ipAddressType = &handles[541]
+var CreateGlobalResolverInput_name = &handles[542]
+var CreateGlobalResolverInput_observabilityRegion = &handles[543]
+var CreateGlobalResolverInput_regions = &handles[544]
+var CreateGlobalResolverInput_tags = &handles[545]
+
+var CreateGlobalResolverOutput = &handles[546]
+var CreateGlobalResolverOutput_id = &handles[547]
+var CreateGlobalResolverOutput_arn = &handles[548]
+var CreateGlobalResolverOutput_clientToken = &handles[549]
+var CreateGlobalResolverOutput_createdAt = &handles[550]
+var CreateGlobalResolverOutput_description = &handles[551]
+var CreateGlobalResolverOutput_dnsName = &handles[552]
+var CreateGlobalResolverOutput_ipAddressType = &handles[553]
+var CreateGlobalResolverOutput_ipv4Addresses = &handles[554]
+var CreateGlobalResolverOutput_ipv6Addresses = &handles[555]
+var CreateGlobalResolverOutput_name = &handles[556]
+var CreateGlobalResolverOutput_observabilityRegion = &handles[557]
+var CreateGlobalResolverOutput_regions = &handles[558]
+var CreateGlobalResolverOutput_status = &handles[559]
+var CreateGlobalResolverOutput_updatedAt = &handles[560]
+
+var DeleteAccessSourceInput = &handles[561]
+var DeleteAccessSourceInput_accessSourceId = &handles[562]
+
+var DeleteAccessSourceOutput = &handles[563]
+var DeleteAccessSourceOutput_arn = &handles[564]
+var DeleteAccessSourceOutput_cidr = &handles[565]
+var DeleteAccessSourceOutput_createdAt = &handles[566]
+var DeleteAccessSourceOutput_id = &handles[567]
+var DeleteAccessSourceOutput_ipAddressType = &handles[568]
+var DeleteAccessSourceOutput_name = &handles[569]
+var DeleteAccessSourceOutput_dnsViewId = &handles[570]
+var DeleteAccessSourceOutput_protocol = &handles[571]
+var DeleteAccessSourceOutput_status = &handles[572]
+var DeleteAccessSourceOutput_updatedAt = &handles[573]
+
+var DeleteAccessTokenInput = &handles[574]
+var DeleteAccessTokenInput_accessTokenId = &handles[575]
+
+var DeleteAccessTokenOutput = &handles[576]
+var DeleteAccessTokenOutput_id = &handles[577]
+var DeleteAccessTokenOutput_status = &handles[578]
+var DeleteAccessTokenOutput_deletedAt = &handles[579]
+
+var DeleteDNSViewInput = &handles[580]
+var DeleteDNSViewInput_dnsViewId = &handles[581]
+
+var DeleteDNSViewOutput = &handles[582]
+var DeleteDNSViewOutput_id = &handles[583]
+var DeleteDNSViewOutput_arn = &handles[584]
+var DeleteDNSViewOutput_clientToken = &handles[585]
+var DeleteDNSViewOutput_dnssecValidation = &handles[586]
+var DeleteDNSViewOutput_ednsClientSubnet = &handles[587]
+var DeleteDNSViewOutput_firewallRulesFailOpen = &handles[588]
+var DeleteDNSViewOutput_name = &handles[589]
+var DeleteDNSViewOutput_description = &handles[590]
+var DeleteDNSViewOutput_globalResolverId = &handles[591]
+var DeleteDNSViewOutput_createdAt = &handles[592]
+var DeleteDNSViewOutput_updatedAt = &handles[593]
+var DeleteDNSViewOutput_status = &handles[594]
+
+var DeleteFirewallDomainListInput = &handles[595]
+var DeleteFirewallDomainListInput_firewallDomainListId = &handles[596]
+
+var DeleteFirewallDomainListOutput = &handles[597]
+var DeleteFirewallDomainListOutput_arn = &handles[598]
+var DeleteFirewallDomainListOutput_id = &handles[599]
+var DeleteFirewallDomainListOutput_name = &handles[600]
+var DeleteFirewallDomainListOutput_status = &handles[601]
+
+var DeleteFirewallRuleInput = &handles[602]
+var DeleteFirewallRuleInput_firewallRuleId = &handles[603]
+
+var DeleteFirewallRuleOutput = &handles[604]
+var DeleteFirewallRuleOutput_action = &handles[605]
+var DeleteFirewallRuleOutput_blockOverrideDnsType = &handles[606]
+var DeleteFirewallRuleOutput_blockOverrideDomain = &handles[607]
+var DeleteFirewallRuleOutput_blockOverrideTtl = &handles[608]
+var DeleteFirewallRuleOutput_blockResponse = &handles[609]
+var DeleteFirewallRuleOutput_confidenceThreshold = &handles[610]
+var DeleteFirewallRuleOutput_createdAt = &handles[611]
+var DeleteFirewallRuleOutput_description = &handles[612]
+var DeleteFirewallRuleOutput_dnsAdvancedProtection = &handles[613]
+var DeleteFirewallRuleOutput_firewallDomainListId = &handles[614]
+var DeleteFirewallRuleOutput_id = &handles[615]
+var DeleteFirewallRuleOutput_name = &handles[616]
+var DeleteFirewallRuleOutput_priority = &handles[617]
+var DeleteFirewallRuleOutput_dnsViewId = &handles[618]
+var DeleteFirewallRuleOutput_queryType = &handles[619]
+var DeleteFirewallRuleOutput_status = &handles[620]
+var DeleteFirewallRuleOutput_updatedAt = &handles[621]
+
+var DeleteGlobalResolverInput = &handles[622]
+var DeleteGlobalResolverInput_globalResolverId = &handles[623]
+
+var DeleteGlobalResolverOutput = &handles[624]
+var DeleteGlobalResolverOutput_id = &handles[625]
+var DeleteGlobalResolverOutput_arn = &handles[626]
+var DeleteGlobalResolverOutput_clientToken = &handles[627]
+var DeleteGlobalResolverOutput_dnsName = &handles[628]
+var DeleteGlobalResolverOutput_observabilityRegion = &handles[629]
+var DeleteGlobalResolverOutput_name = &handles[630]
+var DeleteGlobalResolverOutput_description = &handles[631]
+var DeleteGlobalResolverOutput_regions = &handles[632]
+var DeleteGlobalResolverOutput_createdAt = &handles[633]
+var DeleteGlobalResolverOutput_updatedAt = &handles[634]
+var DeleteGlobalResolverOutput_status = &handles[635]
+var DeleteGlobalResolverOutput_ipv4Addresses = &handles[636]
+var DeleteGlobalResolverOutput_ipv6Addresses = &handles[637]
+var DeleteGlobalResolverOutput_ipAddressType = &handles[638]
+
+var DisableDNSViewInput = &handles[639]
+var DisableDNSViewInput_dnsViewId = &handles[640]
+
+var DisableDNSViewOutput = &handles[641]
+var DisableDNSViewOutput_id = &handles[642]
+var DisableDNSViewOutput_arn = &handles[643]
+var DisableDNSViewOutput_clientToken = &handles[644]
+var DisableDNSViewOutput_dnssecValidation = &handles[645]
+var DisableDNSViewOutput_ednsClientSubnet = &handles[646]
+var DisableDNSViewOutput_firewallRulesFailOpen = &handles[647]
+var DisableDNSViewOutput_name = &handles[648]
+var DisableDNSViewOutput_description = &handles[649]
+var DisableDNSViewOutput_globalResolverId = &handles[650]
+var DisableDNSViewOutput_createdAt = &handles[651]
+var DisableDNSViewOutput_updatedAt = &handles[652]
+var DisableDNSViewOutput_status = &handles[653]
+
+var DisassociateHostedZoneInput = &handles[654]
+var DisassociateHostedZoneInput_hostedZoneId = &handles[655]
+var DisassociateHostedZoneInput_resourceArn = &handles[656]
+
+var DisassociateHostedZoneOutput = &handles[657]
+var DisassociateHostedZoneOutput_id = &handles[658]
+var DisassociateHostedZoneOutput_resourceArn = &handles[659]
+var DisassociateHostedZoneOutput_hostedZoneId = &handles[660]
+var DisassociateHostedZoneOutput_hostedZoneName = &handles[661]
+var DisassociateHostedZoneOutput_name = &handles[662]
+var DisassociateHostedZoneOutput_createdAt = &handles[663]
+var DisassociateHostedZoneOutput_updatedAt = &handles[664]
+var DisassociateHostedZoneOutput_status = &handles[665]
+
+var EnableDNSViewInput = &handles[666]
+var EnableDNSViewInput_dnsViewId = &handles[667]
+
+var EnableDNSViewOutput = &handles[668]
+var EnableDNSViewOutput_id = &handles[669]
+var EnableDNSViewOutput_arn = &handles[670]
+var EnableDNSViewOutput_clientToken = &handles[671]
+var EnableDNSViewOutput_dnssecValidation = &handles[672]
+var EnableDNSViewOutput_ednsClientSubnet = &handles[673]
+var EnableDNSViewOutput_firewallRulesFailOpen = &handles[674]
+var EnableDNSViewOutput_name = &handles[675]
+var EnableDNSViewOutput_description = &handles[676]
+var EnableDNSViewOutput_globalResolverId = &handles[677]
+var EnableDNSViewOutput_createdAt = &handles[678]
+var EnableDNSViewOutput_updatedAt = &handles[679]
+var EnableDNSViewOutput_status = &handles[680]
+
+var GetAccessSourceInput = &handles[681]
+var GetAccessSourceInput_accessSourceId = &handles[682]
+
+var GetAccessSourceOutput = &handles[683]
+var GetAccessSourceOutput_arn = &handles[684]
+var GetAccessSourceOutput_cidr = &handles[685]
+var GetAccessSourceOutput_createdAt = &handles[686]
+var GetAccessSourceOutput_id = &handles[687]
+var GetAccessSourceOutput_ipAddressType = &handles[688]
+var GetAccessSourceOutput_name = &handles[689]
+var GetAccessSourceOutput_dnsViewId = &handles[690]
+var GetAccessSourceOutput_protocol = &handles[691]
+var GetAccessSourceOutput_status = &handles[692]
+var GetAccessSourceOutput_updatedAt = &handles[693]
+
+var GetAccessTokenInput = &handles[694]
+var GetAccessTokenInput_accessTokenId = &handles[695]
+
+var GetAccessTokenOutput = &handles[696]
+var GetAccessTokenOutput_id = &handles[697]
+var GetAccessTokenOutput_arn = &handles[698]
+var GetAccessTokenOutput_clientToken = &handles[699]
+var GetAccessTokenOutput_createdAt = &handles[700]
+var GetAccessTokenOutput_dnsViewId = &handles[701]
+var GetAccessTokenOutput_expiresAt = &handles[702]
+var GetAccessTokenOutput_globalResolverId = &handles[703]
+var GetAccessTokenOutput_name = &handles[704]
+var GetAccessTokenOutput_status = &handles[705]
+var GetAccessTokenOutput_updatedAt = &handles[706]
+var GetAccessTokenOutput_value = &handles[707]
+
+var GetDNSViewInput = &handles[708]
+var GetDNSViewInput_dnsViewId = &handles[709]
+
+var GetDNSViewOutput = &handles[710]
+var GetDNSViewOutput_id = &handles[711]
+var GetDNSViewOutput_arn = &handles[712]
+var GetDNSViewOutput_clientToken = &handles[713]
+var GetDNSViewOutput_dnssecValidation = &handles[714]
+var GetDNSViewOutput_ednsClientSubnet = &handles[715]
+var GetDNSViewOutput_firewallRulesFailOpen = &handles[716]
+var GetDNSViewOutput_name = &handles[717]
+var GetDNSViewOutput_description = &handles[718]
+var GetDNSViewOutput_globalResolverId = &handles[719]
+var GetDNSViewOutput_createdAt = &handles[720]
+var GetDNSViewOutput_updatedAt = &handles[721]
+var GetDNSViewOutput_status = &handles[722]
+
+var GetFirewallDomainListInput = &handles[723]
+var GetFirewallDomainListInput_firewallDomainListId = &handles[724]
+
+var GetFirewallDomainListOutput = &handles[725]
+var GetFirewallDomainListOutput_arn = &handles[726]
+var GetFirewallDomainListOutput_globalResolverId = &handles[727]
+var GetFirewallDomainListOutput_clientToken = &handles[728]
+var GetFirewallDomainListOutput_createdAt = &handles[729]
+var GetFirewallDomainListOutput_description = &handles[730]
+var GetFirewallDomainListOutput_domainCount = &handles[731]
+var GetFirewallDomainListOutput_id = &handles[732]
+var GetFirewallDomainListOutput_name = &handles[733]
+var GetFirewallDomainListOutput_status = &handles[734]
+var GetFirewallDomainListOutput_statusMessage = &handles[735]
+var GetFirewallDomainListOutput_updatedAt = &handles[736]
+
+var GetFirewallRuleInput = &handles[737]
+var GetFirewallRuleInput_firewallRuleId = &handles[738]
+
+var GetFirewallRuleOutput = &handles[739]
+var GetFirewallRuleOutput_action = &handles[740]
+var GetFirewallRuleOutput_blockOverrideDnsType = &handles[741]
+var GetFirewallRuleOutput_blockOverrideDomain = &handles[742]
+var GetFirewallRuleOutput_blockOverrideTtl = &handles[743]
+var GetFirewallRuleOutput_blockResponse = &handles[744]
+var GetFirewallRuleOutput_confidenceThreshold = &handles[745]
+var GetFirewallRuleOutput_createdAt = &handles[746]
+var GetFirewallRuleOutput_description = &handles[747]
+var GetFirewallRuleOutput_dnsAdvancedProtection = &handles[748]
+var GetFirewallRuleOutput_firewallDomainListId = &handles[749]
+var GetFirewallRuleOutput_id = &handles[750]
+var GetFirewallRuleOutput_name = &handles[751]
+var GetFirewallRuleOutput_priority = &handles[752]
+var GetFirewallRuleOutput_dnsViewId = &handles[753]
+var GetFirewallRuleOutput_queryType = &handles[754]
+var GetFirewallRuleOutput_status = &handles[755]
+var GetFirewallRuleOutput_updatedAt = &handles[756]
+
+var GetGlobalResolverInput = &handles[757]
+var GetGlobalResolverInput_globalResolverId = &handles[758]
+
+var GetGlobalResolverOutput = &handles[759]
+var GetGlobalResolverOutput_id = &handles[760]
+var GetGlobalResolverOutput_arn = &handles[761]
+var GetGlobalResolverOutput_clientToken = &handles[762]
+var GetGlobalResolverOutput_dnsName = &handles[763]
+var GetGlobalResolverOutput_observabilityRegion = &handles[764]
+var GetGlobalResolverOutput_name = &handles[765]
+var GetGlobalResolverOutput_description = &handles[766]
+var GetGlobalResolverOutput_regions = &handles[767]
+var GetGlobalResolverOutput_createdAt = &handles[768]
+var GetGlobalResolverOutput_updatedAt = &handles[769]
+var GetGlobalResolverOutput_status = &handles[770]
+var GetGlobalResolverOutput_ipv4Addresses = &handles[771]
+var GetGlobalResolverOutput_ipv6Addresses = &handles[772]
+var GetGlobalResolverOutput_ipAddressType = &handles[773]
+
+var GetHostedZoneAssociationInput = &handles[774]
+var GetHostedZoneAssociationInput_hostedZoneAssociationId = &handles[775]
+
+var GetHostedZoneAssociationOutput = &handles[776]
+var GetHostedZoneAssociationOutput_id = &handles[777]
+var GetHostedZoneAssociationOutput_resourceArn = &handles[778]
+var GetHostedZoneAssociationOutput_hostedZoneId = &handles[779]
+var GetHostedZoneAssociationOutput_hostedZoneName = &handles[780]
+var GetHostedZoneAssociationOutput_name = &handles[781]
+var GetHostedZoneAssociationOutput_createdAt = &handles[782]
+var GetHostedZoneAssociationOutput_updatedAt = &handles[783]
+var GetHostedZoneAssociationOutput_status = &handles[784]
+
+var GetManagedFirewallDomainListInput = &handles[785]
+var GetManagedFirewallDomainListInput_managedFirewallDomainListId = &handles[786]
+
+var GetManagedFirewallDomainListOutput = &handles[787]
+var GetManagedFirewallDomainListOutput_description = &handles[788]
+var GetManagedFirewallDomainListOutput_id = &handles[789]
+var GetManagedFirewallDomainListOutput_name = &handles[790]
+var GetManagedFirewallDomainListOutput_managedListType = &handles[791]
+
+var ImportFirewallDomainsInput = &handles[792]
+var ImportFirewallDomainsInput_domainFileUrl = &handles[793]
+var ImportFirewallDomainsInput_firewallDomainListId = &handles[794]
+var ImportFirewallDomainsInput_operation = &handles[795]
+
+var ImportFirewallDomainsOutput = &handles[796]
+var ImportFirewallDomainsOutput_id = &handles[797]
+var ImportFirewallDomainsOutput_name = &handles[798]
+var ImportFirewallDomainsOutput_status = &handles[799]
+
+var ListAccessSourcesInput = &handles[800]
+var ListAccessSourcesInput_maxResults = &handles[801]
+var ListAccessSourcesInput_nextToken = &handles[802]
+var ListAccessSourcesInput_filters = &handles[803]
+
+var ListAccessSourcesOutput = &handles[804]
+var ListAccessSourcesOutput_nextToken = &handles[805]
+var ListAccessSourcesOutput_accessSources = &handles[806]
+
+var ListAccessTokensInput = &handles[807]
+var ListAccessTokensInput_maxResults = &handles[808]
+var ListAccessTokensInput_nextToken = &handles[809]
+var ListAccessTokensInput_dnsViewId = &handles[810]
+var ListAccessTokensInput_filters = &handles[811]
+
+var ListAccessTokensOutput = &handles[812]
+var ListAccessTokensOutput_nextToken = &handles[813]
+var ListAccessTokensOutput_accessTokens = &handles[814]
+
+var ListDNSViewsInput = &handles[815]
+var ListDNSViewsInput_maxResults = &handles[816]
+var ListDNSViewsInput_nextToken = &handles[817]
+var ListDNSViewsInput_globalResolverId = &handles[818]
+
+var ListDNSViewsOutput = &handles[819]
+var ListDNSViewsOutput_nextToken = &handles[820]
+var ListDNSViewsOutput_dnsViews = &handles[821]
+
+var ListFirewallDomainListsInput = &handles[822]
+var ListFirewallDomainListsInput_maxResults = &handles[823]
+var ListFirewallDomainListsInput_nextToken = &handles[824]
+var ListFirewallDomainListsInput_globalResolverId = &handles[825]
+
+var ListFirewallDomainListsOutput = &handles[826]
+var ListFirewallDomainListsOutput_nextToken = &handles[827]
+var ListFirewallDomainListsOutput_firewallDomainLists = &handles[828]
+
+var ListFirewallDomainsInput = &handles[829]
+var ListFirewallDomainsInput_maxResults = &handles[830]
+var ListFirewallDomainsInput_nextToken = &handles[831]
+var ListFirewallDomainsInput_firewallDomainListId = &handles[832]
+
+var ListFirewallDomainsOutput = &handles[833]
+var ListFirewallDomainsOutput_nextToken = &handles[834]
+var ListFirewallDomainsOutput_domains = &handles[835]
+
+var ListFirewallRulesInput = &handles[836]
+var ListFirewallRulesInput_maxResults = &handles[837]
+var ListFirewallRulesInput_nextToken = &handles[838]
+var ListFirewallRulesInput_dnsViewId = &handles[839]
+var ListFirewallRulesInput_filters = &handles[840]
+
+var ListFirewallRulesOutput = &handles[841]
+var ListFirewallRulesOutput_nextToken = &handles[842]
+var ListFirewallRulesOutput_firewallRules = &handles[843]
+
+var ListGlobalResolversInput = &handles[844]
+var ListGlobalResolversInput_maxResults = &handles[845]
+var ListGlobalResolversInput_nextToken = &handles[846]
+
+var ListGlobalResolversOutput = &handles[847]
+var ListGlobalResolversOutput_nextToken = &handles[848]
+var ListGlobalResolversOutput_globalResolvers = &handles[849]
+
+var ListHostedZoneAssociationsInput = &handles[850]
+var ListHostedZoneAssociationsInput_maxResults = &handles[851]
+var ListHostedZoneAssociationsInput_nextToken = &handles[852]
+var ListHostedZoneAssociationsInput_resourceArn = &handles[853]
+
+var ListHostedZoneAssociationsOutput = &handles[854]
+var ListHostedZoneAssociationsOutput_nextToken = &handles[855]
+var ListHostedZoneAssociationsOutput_hostedZoneAssociations = &handles[856]
+
+var ListManagedFirewallDomainListsInput = &handles[857]
+var ListManagedFirewallDomainListsInput_maxResults = &handles[858]
+var ListManagedFirewallDomainListsInput_nextToken = &handles[859]
+var ListManagedFirewallDomainListsInput_managedFirewallDomainListType = &handles[860]
+
+var ListManagedFirewallDomainListsOutput = &handles[861]
+var ListManagedFirewallDomainListsOutput_nextToken = &handles[862]
+var ListManagedFirewallDomainListsOutput_managedFirewallDomainLists = &handles[863]
+
+var ListSharedDNSViewsInput = &handles[864]
+var ListSharedDNSViewsInput_maxResults = &handles[865]
+var ListSharedDNSViewsInput_nextToken = &handles[866]
+
+var ListSharedDNSViewsOutput = &handles[867]
+var ListSharedDNSViewsOutput_nextToken = &handles[868]
+var ListSharedDNSViewsOutput_dnsViews = &handles[869]
+
+var ListTagsForResourceRequest = &handles[870]
+var ListTagsForResourceRequest_resourceArn = &handles[871]
+
+var ListTagsForResourceResponse = &handles[872]
+var ListTagsForResourceResponse_tags = &handles[873]
+
+var TagResourceRequest = &handles[874]
+var TagResourceRequest_resourceArn = &handles[875]
+var TagResourceRequest_tags = &handles[876]
+
+var TagResourceResponse = &handles[877]
+
+var UntagResourceRequest = &handles[878]
+var UntagResourceRequest_resourceArn = &handles[879]
+var UntagResourceRequest_tagKeys = &handles[880]
+
+var UntagResourceResponse = &handles[881]
+
+var UpdateAccessSourceInput = &handles[882]
+var UpdateAccessSourceInput_accessSourceId = &handles[883]
+var UpdateAccessSourceInput_cidr = &handles[884]
+var UpdateAccessSourceInput_ipAddressType = &handles[885]
+var UpdateAccessSourceInput_name = &handles[886]
+var UpdateAccessSourceInput_protocol = &handles[887]
+
+var UpdateAccessSourceOutput = &handles[888]
+var UpdateAccessSourceOutput_arn = &handles[889]
+var UpdateAccessSourceOutput_cidr = &handles[890]
+var UpdateAccessSourceOutput_createdAt = &handles[891]
+var UpdateAccessSourceOutput_id = &handles[892]
+var UpdateAccessSourceOutput_ipAddressType = &handles[893]
+var UpdateAccessSourceOutput_name = &handles[894]
+var UpdateAccessSourceOutput_dnsViewId = &handles[895]
+var UpdateAccessSourceOutput_protocol = &handles[896]
+var UpdateAccessSourceOutput_status = &handles[897]
+var UpdateAccessSourceOutput_updatedAt = &handles[898]
+
+var UpdateAccessTokenInput = &handles[899]
+var UpdateAccessTokenInput_accessTokenId = &handles[900]
+var UpdateAccessTokenInput_name = &handles[901]
+
+var UpdateAccessTokenOutput = &handles[902]
+var UpdateAccessTokenOutput_id = &handles[903]
+var UpdateAccessTokenOutput_name = &handles[904]
+
+var UpdateDNSViewInput = &handles[905]
+var UpdateDNSViewInput_dnsViewId = &handles[906]
+var UpdateDNSViewInput_name = &handles[907]
+var UpdateDNSViewInput_description = &handles[908]
+var UpdateDNSViewInput_dnssecValidation = &handles[909]
+var UpdateDNSViewInput_ednsClientSubnet = &handles[910]
+var UpdateDNSViewInput_firewallRulesFailOpen = &handles[911]
+
+var UpdateDNSViewOutput = &handles[912]
+var UpdateDNSViewOutput_id = &handles[913]
+var UpdateDNSViewOutput_arn = &handles[914]
+var UpdateDNSViewOutput_clientToken = &handles[915]
+var UpdateDNSViewOutput_dnssecValidation = &handles[916]
+var UpdateDNSViewOutput_ednsClientSubnet = &handles[917]
+var UpdateDNSViewOutput_firewallRulesFailOpen = &handles[918]
+var UpdateDNSViewOutput_name = &handles[919]
+var UpdateDNSViewOutput_description = &handles[920]
+var UpdateDNSViewOutput_globalResolverId = &handles[921]
+var UpdateDNSViewOutput_createdAt = &handles[922]
+var UpdateDNSViewOutput_updatedAt = &handles[923]
+var UpdateDNSViewOutput_status = &handles[924]
+
+var UpdateFirewallDomainsInput = &handles[925]
+var UpdateFirewallDomainsInput_domains = &handles[926]
+var UpdateFirewallDomainsInput_firewallDomainListId = &handles[927]
+var UpdateFirewallDomainsInput_operation = &handles[928]
+
+var UpdateFirewallDomainsOutput = &handles[929]
+var UpdateFirewallDomainsOutput_id = &handles[930]
+var UpdateFirewallDomainsOutput_name = &handles[931]
+var UpdateFirewallDomainsOutput_status = &handles[932]
+
+var UpdateFirewallRuleInput = &handles[933]
+var UpdateFirewallRuleInput_action = &handles[934]
+var UpdateFirewallRuleInput_blockOverrideDnsType = &handles[935]
+var UpdateFirewallRuleInput_blockOverrideDomain = &handles[936]
+var UpdateFirewallRuleInput_blockOverrideTtl = &handles[937]
+var UpdateFirewallRuleInput_blockResponse = &handles[938]
+var UpdateFirewallRuleInput_clientToken = &handles[939]
+var UpdateFirewallRuleInput_confidenceThreshold = &handles[940]
+var UpdateFirewallRuleInput_description = &handles[941]
+var UpdateFirewallRuleInput_dnsAdvancedProtection = &handles[942]
+var UpdateFirewallRuleInput_firewallRuleId = &handles[943]
+var UpdateFirewallRuleInput_name = &handles[944]
+var UpdateFirewallRuleInput_priority = &handles[945]
+
+var UpdateFirewallRuleOutput = &handles[946]
+var UpdateFirewallRuleOutput_action = &handles[947]
+var UpdateFirewallRuleOutput_blockOverrideDnsType = &handles[948]
+var UpdateFirewallRuleOutput_blockOverrideDomain = &handles[949]
+var UpdateFirewallRuleOutput_blockOverrideTtl = &handles[950]
+var UpdateFirewallRuleOutput_blockResponse = &handles[951]
+var UpdateFirewallRuleOutput_confidenceThreshold = &handles[952]
+var UpdateFirewallRuleOutput_createdAt = &handles[953]
+var UpdateFirewallRuleOutput_description = &handles[954]
+var UpdateFirewallRuleOutput_dnsAdvancedProtection = &handles[955]
+var UpdateFirewallRuleOutput_firewallDomainListId = &handles[956]
+var UpdateFirewallRuleOutput_id = &handles[957]
+var UpdateFirewallRuleOutput_name = &handles[958]
+var UpdateFirewallRuleOutput_priority = &handles[959]
+var UpdateFirewallRuleOutput_dnsViewId = &handles[960]
+var UpdateFirewallRuleOutput_queryType = &handles[961]
+var UpdateFirewallRuleOutput_status = &handles[962]
+var UpdateFirewallRuleOutput_updatedAt = &handles[963]
+
+var UpdateGlobalResolverInput = &handles[964]
+var UpdateGlobalResolverInput_globalResolverId = &handles[965]
+var UpdateGlobalResolverInput_name = &handles[966]
+var UpdateGlobalResolverInput_observabilityRegion = &handles[967]
+var UpdateGlobalResolverInput_description = &handles[968]
+var UpdateGlobalResolverInput_ipAddressType = &handles[969]
+var UpdateGlobalResolverInput_regions = &handles[970]
+
+var UpdateGlobalResolverOutput = &handles[971]
+var UpdateGlobalResolverOutput_id = &handles[972]
+var UpdateGlobalResolverOutput_arn = &handles[973]
+var UpdateGlobalResolverOutput_clientToken = &handles[974]
+var UpdateGlobalResolverOutput_dnsName = &handles[975]
+var UpdateGlobalResolverOutput_observabilityRegion = &handles[976]
+var UpdateGlobalResolverOutput_name = &handles[977]
+var UpdateGlobalResolverOutput_description = &handles[978]
+var UpdateGlobalResolverOutput_regions = &handles[979]
+var UpdateGlobalResolverOutput_createdAt = &handles[980]
+var UpdateGlobalResolverOutput_updatedAt = &handles[981]
+var UpdateGlobalResolverOutput_status = &handles[982]
+var UpdateGlobalResolverOutput_ipv4Addresses = &handles[983]
+var UpdateGlobalResolverOutput_ipv6Addresses = &handles[984]
+var UpdateGlobalResolverOutput_ipAddressType = &handles[985]
+
+var UpdateHostedZoneAssociationInput = &handles[986]
+var UpdateHostedZoneAssociationInput_hostedZoneAssociationId = &handles[987]
+var UpdateHostedZoneAssociationInput_name = &handles[988]
+
+var UpdateHostedZoneAssociationOutput = &handles[989]
+var UpdateHostedZoneAssociationOutput_id = &handles[990]
+var UpdateHostedZoneAssociationOutput_resourceArn = &handles[991]
+var UpdateHostedZoneAssociationOutput_hostedZoneId = &handles[992]
+var UpdateHostedZoneAssociationOutput_hostedZoneName = &handles[993]
+var UpdateHostedZoneAssociationOutput_name = &handles[994]
+var UpdateHostedZoneAssociationOutput_createdAt = &handles[995]
+var UpdateHostedZoneAssociationOutput_updatedAt = &handles[996]
+var UpdateHostedZoneAssociationOutput_status = &handles[997]
+
+var EC2DNSGlobalResolverCustomerAPI = &smithy.ServiceSchema{Schema: &handles[48], Version: "2022-09-27"}

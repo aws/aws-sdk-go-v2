@@ -4,3738 +4,3153 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateBotVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateBotVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/bots/{name}/versions",
-	Code: 201})
-
-var CreateIntentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateIntentVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/intents/{name}/versions",
-	Code: 201})
-
-var CreateSlotTypeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateSlotTypeVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/slottypes/{name}/versions",
-	Code: 201})
-
-var DeleteBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/bots/{name}",
-	Code: 204})
-
-var DeleteBotAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/bots/{botName}/aliases/{name}",
-	Code: 204})
-
-var DeleteBotChannelAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotChannelAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/bots/{botName}/aliases/{botAlias}/channels/{name}",
-	Code: 204})
-
-var DeleteBotVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/bots/{name}/versions/{version}",
-	Code: 204})
-
-var DeleteIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteIntent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/intents/{name}",
-	Code: 204})
-
-var DeleteIntentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteIntentVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/intents/{name}/versions/{version}",
-	Code: 204})
-
-var DeleteSlotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteSlotType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/slottypes/{name}",
-	Code: 204})
-
-var DeleteSlotTypeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteSlotTypeVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/slottypes/{name}/version/{version}",
-	Code: 204})
-
-var DeleteUtterances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteUtterances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/bots/{botName}/utterances/{userId}",
-	Code: 204})
-
-var GetBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/bots/{name}/versions/{versionOrAlias}",
-	Code: 200})
-
-var GetBotAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/bots/{botName}/aliases/{name}",
-	Code: 200})
-
-var GetBotAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliases",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/bots/{botName}/aliases",
-	Code: 200})
-
-var GetBotChannelAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/bots/{botName}/aliases/{botAlias}/channels/{name}",
-	Code: 200})
-
-var GetBotChannelAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/bots/{botName}/aliases/{botAlias}/channels",
-	Code: 200})
-
-var GetBots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBots",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/bots",
-	Code: 200})
-
-var GetBotVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/bots/{name}/versions",
-	Code: 200})
-
-var GetBuiltinIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/builtins/intents/{signature}",
-	Code: 200})
-
-var GetBuiltinIntents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/builtins/intents",
-	Code: 200})
-
-var GetBuiltinSlotTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinSlotTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/builtins/slottypes",
-	Code: 200})
-
-var GetExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetExport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/exports",
-	Code: 200})
-
-var GetImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetImport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/imports/{importId}",
-	Code: 200})
-
-var GetIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/intents/{name}/versions/{version}",
-	Code: 200})
-
-var GetIntents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/intents",
-	Code: 200})
-
-var GetIntentVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/intents/{name}/versions",
-	Code: 200})
-
-var GetMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/migrations/{migrationId}",
-	Code: 200})
-
-var GetMigrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/migrations",
-	Code: 200})
-
-var GetSlotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/slottypes/{name}/versions/{version}",
-	Code: 200})
-
-var GetSlotTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/slottypes",
-	Code: 200})
-
-var GetSlotTypeVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/slottypes/{name}/versions",
-	Code: 200})
-
-var GetUtterancesView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetUtterancesView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/bots/{botName}/utterances?view=aggregation",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/bots/{name}/versions/$LATEST",
-	Code: 200})
-
-var PutBotAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotAlias",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/bots/{botName}/aliases/{name}",
-	Code: 200})
-
-var PutIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutIntent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/intents/{name}/versions/$LATEST",
-	Code: 200})
-
-var PutSlotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutSlotType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/slottypes/{name}/versions/$LATEST",
-	Code: 200})
-
-var StartImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartImport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/imports",
-	Code: 201})
-
-var StartMigration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartMigration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/migrations",
-	Code: 202})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var _AWSDeepSenseModelBuildingService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AWSDeepSenseModelBuildingService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSDeepSenseModelBuildingService = smithy.NewServiceSchema(_AWSDeepSenseModelBuildingService, "2017-04-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AliasName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AliasName",
-}, smithy.ShapeTypeString, 0)
-
-var _AliasNameOrListAll = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AliasNameOrListAll",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BotAliasMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotAliasMetadata",
-}, smithy.ShapeTypeStructure, 8)
-var BotAliasMetadata_name *smithy.Schema
-
-var BotAliasMetadata_description *smithy.Schema
-
-var BotAliasMetadata_botVersion *smithy.Schema
-
-var BotAliasMetadata_botName *smithy.Schema
-
-var BotAliasMetadata_lastUpdatedDate *smithy.Schema
-
-var BotAliasMetadata_createdDate *smithy.Schema
-
-var BotAliasMetadata_checksum *smithy.Schema
-
-var BotAliasMetadata_conversationLogs *smithy.Schema
-
-var _BotAliasMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotAliasMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _BotAliasMetadataList_member *smithy.Schema
-
-var BotChannelAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotChannelAssociation",
-}, smithy.ShapeTypeStructure, 9)
-var BotChannelAssociation_name *smithy.Schema
-
-var BotChannelAssociation_description *smithy.Schema
-
-var BotChannelAssociation_botAlias *smithy.Schema
-
-var BotChannelAssociation_botName *smithy.Schema
-
-var BotChannelAssociation_createdDate *smithy.Schema
-
-var BotChannelAssociation_type *smithy.Schema
-
-var BotChannelAssociation_botConfiguration *smithy.Schema
-
-var BotChannelAssociation_status *smithy.Schema
-
-var BotChannelAssociation_failureReason *smithy.Schema
-
-var _BotChannelAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotChannelAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _BotChannelAssociationList_member *smithy.Schema
-
-var _BotChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotChannelName",
-}, smithy.ShapeTypeString, 0)
-
-var BotMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotMetadata",
-}, smithy.ShapeTypeStructure, 6)
-var BotMetadata_name *smithy.Schema
-
-var BotMetadata_description *smithy.Schema
-
-var BotMetadata_status *smithy.Schema
-
-var BotMetadata_lastUpdatedDate *smithy.Schema
-
-var BotMetadata_createdDate *smithy.Schema
-
-var BotMetadata_version *smithy.Schema
-
-var _BotMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _BotMetadataList_member *smithy.Schema
-
-var _BotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotName",
-}, smithy.ShapeTypeString, 0)
-
-var _BotVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BotVersions",
-}, smithy.ShapeTypeList, 1)
-var _BotVersions_member *smithy.Schema
-
-var BuiltinIntentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var BuiltinIntentMetadata_signature *smithy.Schema
-
-var BuiltinIntentMetadata_supportedLocales *smithy.Schema
-
-var _BuiltinIntentMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _BuiltinIntentMetadataList_member *smithy.Schema
-
-var _BuiltinIntentSignature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentSignature",
-}, smithy.ShapeTypeString, 0)
-
-var BuiltinIntentSlot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentSlot",
-}, smithy.ShapeTypeStructure, 1)
-var BuiltinIntentSlot_name *smithy.Schema
-
-var _BuiltinIntentSlotList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinIntentSlotList",
-}, smithy.ShapeTypeList, 1)
-var _BuiltinIntentSlotList_member *smithy.Schema
-
-var BuiltinSlotTypeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinSlotTypeMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var BuiltinSlotTypeMetadata_signature *smithy.Schema
-
-var BuiltinSlotTypeMetadata_supportedLocales *smithy.Schema
-
-var _BuiltinSlotTypeMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinSlotTypeMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _BuiltinSlotTypeMetadataList_member *smithy.Schema
-
-var _BuiltinSlotTypeSignature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "BuiltinSlotTypeSignature",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelConfigurationMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ChannelConfigurationMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ChannelConfigurationMap_key *smithy.Schema
-
-var _ChannelConfigurationMap_value *smithy.Schema
-
-var ChannelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ChannelStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ChannelStatus_IN_PROGRESS *smithy.Schema
-
-var ChannelStatus_CREATED *smithy.Schema
-
-var ChannelStatus_FAILED *smithy.Schema
-
-var ChannelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ChannelType",
-}, smithy.ShapeTypeEnum, 4)
-var ChannelType_FACEBOOK *smithy.Schema
-
-var ChannelType_SLACK *smithy.Schema
-
-var ChannelType_TWILIO_SMS *smithy.Schema
-
-var ChannelType_KIK *smithy.Schema
-
-var CodeHook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CodeHook",
-}, smithy.ShapeTypeStructure, 2)
-var CodeHook_uri *smithy.Schema
-
-var CodeHook_messageVersion *smithy.Schema
-
-var _ConfidenceThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ConfidenceThreshold",
-}, smithy.ShapeTypeDouble, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _ContentString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ContentString",
-}, smithy.ShapeTypeString, 0)
-
-var ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ContentType",
-}, smithy.ShapeTypeEnum, 3)
-var ContentType_PLAIN_TEXT *smithy.Schema
-
-var ContentType_SSML *smithy.Schema
-
-var ContentType_CUSTOM_PAYLOAD *smithy.Schema
-
-var _ContextTimeToLiveInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ContextTimeToLiveInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ContextTurnsToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ContextTurnsToLive",
-}, smithy.ShapeTypeInteger, 0)
-
-var ConversationLogsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ConversationLogsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ConversationLogsRequest_logSettings *smithy.Schema
-
-var ConversationLogsRequest_iamRoleArn *smithy.Schema
-
-var ConversationLogsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ConversationLogsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ConversationLogsResponse_logSettings *smithy.Schema
-
-var ConversationLogsResponse_iamRoleArn *smithy.Schema
-
-var _Count = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Count",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CustomOrBuiltinSlotTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CustomOrBuiltinSlotTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Destination",
-}, smithy.ShapeTypeEnum, 2)
-var Destination_CLOUDWATCH_LOGS *smithy.Schema
-
-var Destination_S3 *smithy.Schema
-
-var EnumerationValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "EnumerationValue",
-}, smithy.ShapeTypeStructure, 2)
-var EnumerationValue_value *smithy.Schema
-
-var EnumerationValue_synonyms *smithy.Schema
-
-var _EnumerationValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "EnumerationValues",
-}, smithy.ShapeTypeList, 1)
-var _EnumerationValues_member *smithy.Schema
-
-var ExportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ExportStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ExportStatus_IN_PROGRESS *smithy.Schema
-
-var ExportStatus_READY *smithy.Schema
-
-var ExportStatus_FAILED *smithy.Schema
-
-var ExportType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ExportType",
-}, smithy.ShapeTypeEnum, 2)
-var ExportType_ALEXA_SKILLS_KIT *smithy.Schema
-
-var ExportType_LEX *smithy.Schema
-
-var FollowUpPrompt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "FollowUpPrompt",
-}, smithy.ShapeTypeStructure, 2)
-var FollowUpPrompt_prompt *smithy.Schema
-
-var FollowUpPrompt_rejectionStatement *smithy.Schema
-
-var FulfillmentActivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "FulfillmentActivity",
-}, smithy.ShapeTypeStructure, 2)
-var FulfillmentActivity_type *smithy.Schema
-
-var FulfillmentActivity_codeHook *smithy.Schema
-
-var FulfillmentActivityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "FulfillmentActivityType",
-}, smithy.ShapeTypeEnum, 2)
-var FulfillmentActivityType_RETURN_INTENT *smithy.Schema
-
-var FulfillmentActivityType_CODE_HOOK *smithy.Schema
-
-var _GroupNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GroupNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ImportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ImportStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ImportStatus_IN_PROGRESS *smithy.Schema
-
-var ImportStatus_COMPLETE *smithy.Schema
-
-var ImportStatus_FAILED *smithy.Schema
-
-var InputContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "InputContext",
-}, smithy.ShapeTypeStructure, 1)
-var InputContext_name *smithy.Schema
-
-var _InputContextList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "InputContextList",
-}, smithy.ShapeTypeList, 1)
-var _InputContextList_member *smithy.Schema
-
-var _InputContextName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "InputContextName",
-}, smithy.ShapeTypeString, 0)
-
-var Intent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Intent",
-}, smithy.ShapeTypeStructure, 2)
-var Intent_intentName *smithy.Schema
-
-var Intent_intentVersion *smithy.Schema
-
-var _IntentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentList",
-}, smithy.ShapeTypeList, 1)
-var _IntentList_member *smithy.Schema
-
-var IntentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentMetadata",
-}, smithy.ShapeTypeStructure, 5)
-var IntentMetadata_name *smithy.Schema
-
-var IntentMetadata_description *smithy.Schema
-
-var IntentMetadata_lastUpdatedDate *smithy.Schema
-
-var IntentMetadata_createdDate *smithy.Schema
-
-var IntentMetadata_version *smithy.Schema
-
-var _IntentMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _IntentMetadataList_member *smithy.Schema
-
-var _IntentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentName",
-}, smithy.ShapeTypeString, 0)
-
-var _IntentUtteranceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "IntentUtteranceList",
-}, smithy.ShapeTypeList, 1)
-var _IntentUtteranceList_member *smithy.Schema
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalFailureException_message *smithy.Schema
-
-var KendraConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "KendraConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var KendraConfiguration_kendraIndex *smithy.Schema
-
-var KendraConfiguration_queryFilterString *smithy.Schema
-
-var KendraConfiguration_role *smithy.Schema
-
-var _KendraIndexArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "KendraIndexArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LambdaARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LambdaARN",
-}, smithy.ShapeTypeString, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var LimitExceededException_retryAfterSeconds *smithy.Schema
-
-var LimitExceededException_message *smithy.Schema
-
-var _ListOfUtterance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListOfUtterance",
-}, smithy.ShapeTypeList, 1)
-var _ListOfUtterance_member *smithy.Schema
-
-var _ListsOfUtterances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListsOfUtterances",
-}, smithy.ShapeTypeList, 1)
-var _ListsOfUtterances_member *smithy.Schema
-
-var Locale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Locale",
-}, smithy.ShapeTypeEnum, 13)
-var Locale_DE_DE *smithy.Schema
-
-var Locale_EN_AU *smithy.Schema
-
-var Locale_EN_GB *smithy.Schema
-
-var Locale_EN_IN *smithy.Schema
-
-var Locale_EN_US *smithy.Schema
-
-var Locale_ES_419 *smithy.Schema
-
-var Locale_ES_ES *smithy.Schema
-
-var Locale_ES_US *smithy.Schema
-
-var Locale_FR_FR *smithy.Schema
-
-var Locale_FR_CA *smithy.Schema
-
-var Locale_IT_IT *smithy.Schema
-
-var Locale_JA_JP *smithy.Schema
-
-var Locale_KO_KR *smithy.Schema
-
-var _LocaleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LocaleList",
-}, smithy.ShapeTypeList, 1)
-var _LocaleList_member *smithy.Schema
-
-var LogSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogSettingsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var LogSettingsRequest_logType *smithy.Schema
-
-var LogSettingsRequest_destination *smithy.Schema
-
-var LogSettingsRequest_kmsKeyArn *smithy.Schema
-
-var LogSettingsRequest_resourceArn *smithy.Schema
-
-var _LogSettingsRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogSettingsRequestList",
-}, smithy.ShapeTypeList, 1)
-var _LogSettingsRequestList_member *smithy.Schema
-
-var LogSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogSettingsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var LogSettingsResponse_logType *smithy.Schema
-
-var LogSettingsResponse_destination *smithy.Schema
-
-var LogSettingsResponse_kmsKeyArn *smithy.Schema
-
-var LogSettingsResponse_resourceArn *smithy.Schema
-
-var LogSettingsResponse_resourcePrefix *smithy.Schema
-
-var _LogSettingsResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogSettingsResponseList",
-}, smithy.ShapeTypeList, 1)
-var _LogSettingsResponseList_member *smithy.Schema
-
-var LogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "LogType",
-}, smithy.ShapeTypeEnum, 2)
-var LogType_AUDIO *smithy.Schema
-
-var LogType_TEXT *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MergeStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MergeStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var MergeStrategy_OVERWRITE_LATEST *smithy.Schema
-
-var MergeStrategy_FAIL_ON_CONFLICT *smithy.Schema
-
-var Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Message",
-}, smithy.ShapeTypeStructure, 3)
-var Message_contentType *smithy.Schema
-
-var Message_content *smithy.Schema
-
-var Message_groupNumber *smithy.Schema
-
-var _MessageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MessageList",
-}, smithy.ShapeTypeList, 1)
-var _MessageList_member *smithy.Schema
-
-var _MessageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MessageVersion",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationAlert = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlert",
-}, smithy.ShapeTypeStructure, 4)
-var MigrationAlert_type *smithy.Schema
-
-var MigrationAlert_message *smithy.Schema
-
-var MigrationAlert_details *smithy.Schema
-
-var MigrationAlert_referenceURLs *smithy.Schema
-
-var _MigrationAlertDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertDetail",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationAlertDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertDetails",
-}, smithy.ShapeTypeList, 1)
-var _MigrationAlertDetails_member *smithy.Schema
-
-var _MigrationAlertMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationAlertReferenceURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertReferenceURL",
-}, smithy.ShapeTypeString, 0)
-
-var _MigrationAlertReferenceURLs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertReferenceURLs",
-}, smithy.ShapeTypeList, 1)
-var _MigrationAlertReferenceURLs_member *smithy.Schema
-
-var _MigrationAlerts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlerts",
-}, smithy.ShapeTypeList, 1)
-var _MigrationAlerts_member *smithy.Schema
-
-var MigrationAlertType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationAlertType",
-}, smithy.ShapeTypeEnum, 2)
-var MigrationAlertType_ERROR *smithy.Schema
-
-var MigrationAlertType_WARN *smithy.Schema
-
-var _MigrationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationId",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationSortAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationSortAttribute",
-}, smithy.ShapeTypeEnum, 2)
-var MigrationSortAttribute_V1_BOT_NAME *smithy.Schema
-
-var MigrationSortAttribute_MIGRATION_DATE_TIME *smithy.Schema
-
-var MigrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var MigrationStatus_IN_PROGRESS *smithy.Schema
-
-var MigrationStatus_COMPLETED *smithy.Schema
-
-var MigrationStatus_FAILED *smithy.Schema
-
-var MigrationStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var MigrationStrategy_CREATE_NEW *smithy.Schema
-
-var MigrationStrategy_UPDATE_EXISTING *smithy.Schema
-
-var MigrationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationSummary",
-}, smithy.ShapeTypeStructure, 9)
-var MigrationSummary_migrationId *smithy.Schema
-
-var MigrationSummary_v1BotName *smithy.Schema
-
-var MigrationSummary_v1BotVersion *smithy.Schema
-
-var MigrationSummary_v1BotLocale *smithy.Schema
-
-var MigrationSummary_v2BotId *smithy.Schema
-
-var MigrationSummary_v2BotRole *smithy.Schema
-
-var MigrationSummary_migrationStatus *smithy.Schema
-
-var MigrationSummary_migrationStrategy *smithy.Schema
-
-var MigrationSummary_migrationTimestamp *smithy.Schema
-
-var _MigrationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "MigrationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MigrationSummaryList_member *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var _NumericalVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "NumericalVersion",
-}, smithy.ShapeTypeString, 0)
-
-var ObfuscationSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ObfuscationSetting",
-}, smithy.ShapeTypeEnum, 2)
-var ObfuscationSetting_NONE *smithy.Schema
-
-var ObfuscationSetting_DEFAULT_OBFUSCATION *smithy.Schema
-
-var OutputContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "OutputContext",
-}, smithy.ShapeTypeStructure, 3)
-var OutputContext_name *smithy.Schema
-
-var OutputContext_timeToLiveInSeconds *smithy.Schema
-
-var OutputContext_turnsToLive *smithy.Schema
-
-var _OutputContextList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "OutputContextList",
-}, smithy.ShapeTypeList, 1)
-var _OutputContextList_member *smithy.Schema
-
-var _OutputContextName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "OutputContextName",
-}, smithy.ShapeTypeString, 0)
-
-var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 412})
-var PreconditionFailedException_message *smithy.Schema
-
-var _Priority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Priority",
-}, smithy.ShapeTypeInteger, 0)
-
-var ProcessBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ProcessBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var ProcessBehavior_SAVE *smithy.Schema
-
-var ProcessBehavior_BUILD *smithy.Schema
-
-var Prompt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Prompt",
-}, smithy.ShapeTypeStructure, 3)
-var Prompt_messages *smithy.Schema
-
-var Prompt_maxAttempts *smithy.Schema
-
-var Prompt_responseCard *smithy.Schema
-
-var _PromptMaxAttempts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PromptMaxAttempts",
-}, smithy.ShapeTypeInteger, 0)
-
-var _QueryFilterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "QueryFilterString",
-}, smithy.ShapeTypeString, 0)
-
-var ReferenceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ReferenceType",
-}, smithy.ShapeTypeEnum, 4)
-var ReferenceType_INTENT *smithy.Schema
-
-var ReferenceType_BOT *smithy.Schema
-
-var ReferenceType_BOTALIAS *smithy.Schema
-
-var ReferenceType_BOTCHANNEL *smithy.Schema
-
-var _RegexPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "RegexPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceInUseException_referenceType *smithy.Schema
-
-var ResourceInUseException_exampleReference *smithy.Schema
-
-var _ResourcePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourcePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourceReference",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceReference_name *smithy.Schema
-
-var ResourceReference_version *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 3)
-var ResourceType_BOT *smithy.Schema
-
-var ResourceType_INTENT *smithy.Schema
-
-var ResourceType_SLOT_TYPE *smithy.Schema
-
-var _ResponseCard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ResponseCard",
-}, smithy.ShapeTypeString, 0)
-
-var _roleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "roleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SessionTTL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SessionTTL",
-}, smithy.ShapeTypeInteger, 0)
-
-var Slot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Slot",
-}, smithy.ShapeTypeStructure, 11)
-var Slot_name *smithy.Schema
-
-var Slot_description *smithy.Schema
-
-var Slot_slotConstraint *smithy.Schema
-
-var Slot_slotType *smithy.Schema
-
-var Slot_slotTypeVersion *smithy.Schema
-
-var Slot_valueElicitationPrompt *smithy.Schema
-
-var Slot_priority *smithy.Schema
-
-var Slot_sampleUtterances *smithy.Schema
-
-var Slot_responseCard *smithy.Schema
-
-var Slot_obfuscationSetting *smithy.Schema
-
-var Slot_defaultValueSpec *smithy.Schema
-
-var SlotConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotConstraint",
-}, smithy.ShapeTypeEnum, 2)
-var SlotConstraint_REQUIRED *smithy.Schema
-
-var SlotConstraint_OPTIONAL *smithy.Schema
-
-var SlotDefaultValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotDefaultValue",
-}, smithy.ShapeTypeStructure, 1)
-var SlotDefaultValue_defaultValue *smithy.Schema
-
-var _SlotDefaultValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotDefaultValueList",
-}, smithy.ShapeTypeList, 1)
-var _SlotDefaultValueList_member *smithy.Schema
-
-var SlotDefaultValueSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotDefaultValueSpec",
-}, smithy.ShapeTypeStructure, 1)
-var SlotDefaultValueSpec_defaultValueList *smithy.Schema
-
-var _SlotDefaultValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotDefaultValueString",
-}, smithy.ShapeTypeString, 0)
-
-var _SlotList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotList",
-}, smithy.ShapeTypeList, 1)
-var _SlotList_member *smithy.Schema
-
-var _SlotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotName",
-}, smithy.ShapeTypeString, 0)
-
-var SlotTypeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SlotTypeConfiguration_regexConfiguration *smithy.Schema
-
-var _SlotTypeConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _SlotTypeConfigurations_member *smithy.Schema
-
-var SlotTypeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeMetadata",
-}, smithy.ShapeTypeStructure, 5)
-var SlotTypeMetadata_name *smithy.Schema
-
-var SlotTypeMetadata_description *smithy.Schema
-
-var SlotTypeMetadata_lastUpdatedDate *smithy.Schema
-
-var SlotTypeMetadata_createdDate *smithy.Schema
-
-var SlotTypeMetadata_version *smithy.Schema
-
-var _SlotTypeMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _SlotTypeMetadataList_member *smithy.Schema
-
-var _SlotTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var SlotTypeRegexConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotTypeRegexConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SlotTypeRegexConfiguration_pattern *smithy.Schema
-
-var _SlotUtteranceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotUtteranceList",
-}, smithy.ShapeTypeList, 1)
-var _SlotUtteranceList_member *smithy.Schema
-
-var SlotValueSelectionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SlotValueSelectionStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var SlotValueSelectionStrategy_ORIGINAL_VALUE *smithy.Schema
-
-var SlotValueSelectionStrategy_TOP_RESOLUTION *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var Statement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Statement",
-}, smithy.ShapeTypeStructure, 2)
-var Statement_messages *smithy.Schema
-
-var Statement_responseCard *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 5)
-var Status_BUILDING *smithy.Schema
-
-var Status_READY *smithy.Schema
-
-var Status_READY_BASIC_TESTING *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var Status_NOT_BUILT *smithy.Schema
-
-var StatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StatusType",
-}, smithy.ShapeTypeEnum, 2)
-var StatusType_DETECTED *smithy.Schema
-
-var StatusType_MISSED *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _SynonymList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "SynonymList",
-}, smithy.ShapeTypeList, 1)
-var _SynonymList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _UserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UserId",
-}, smithy.ShapeTypeString, 0)
-
-var _Utterance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Utterance",
-}, smithy.ShapeTypeString, 0)
-
-var UtteranceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UtteranceData",
-}, smithy.ShapeTypeStructure, 5)
-var UtteranceData_utteranceString *smithy.Schema
-
-var UtteranceData_count *smithy.Schema
-
-var UtteranceData_distinctUsers *smithy.Schema
-
-var UtteranceData_firstUtteredDate *smithy.Schema
-
-var UtteranceData_lastUtteredDate *smithy.Schema
-
-var UtteranceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UtteranceList",
-}, smithy.ShapeTypeStructure, 2)
-var UtteranceList_botVersion *smithy.Schema
-
-var UtteranceList_utterances *smithy.Schema
-
-var _UtteranceString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UtteranceString",
-}, smithy.ShapeTypeString, 0)
-
-var _V2BotId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "V2BotId",
-}, smithy.ShapeTypeString, 0)
-
-var _V2BotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "V2BotName",
-}, smithy.ShapeTypeString, 0)
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var CreateBotVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateBotVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateBotVersionRequest_name *smithy.Schema
-
-var CreateBotVersionRequest_checksum *smithy.Schema
-
-var CreateBotVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateBotVersionResponse",
-}, smithy.ShapeTypeStructure, 17)
-var CreateBotVersionResponse_name *smithy.Schema
-
-var CreateBotVersionResponse_description *smithy.Schema
-
-var CreateBotVersionResponse_intents *smithy.Schema
-
-var CreateBotVersionResponse_clarificationPrompt *smithy.Schema
-
-var CreateBotVersionResponse_abortStatement *smithy.Schema
-
-var CreateBotVersionResponse_status *smithy.Schema
-
-var CreateBotVersionResponse_failureReason *smithy.Schema
-
-var CreateBotVersionResponse_lastUpdatedDate *smithy.Schema
-
-var CreateBotVersionResponse_createdDate *smithy.Schema
-
-var CreateBotVersionResponse_idleSessionTTLInSeconds *smithy.Schema
-
-var CreateBotVersionResponse_voiceId *smithy.Schema
-
-var CreateBotVersionResponse_checksum *smithy.Schema
-
-var CreateBotVersionResponse_version *smithy.Schema
-
-var CreateBotVersionResponse_locale *smithy.Schema
-
-var CreateBotVersionResponse_childDirected *smithy.Schema
-
-var CreateBotVersionResponse_enableModelImprovements *smithy.Schema
-
-var CreateBotVersionResponse_detectSentiment *smithy.Schema
-
-var CreateIntentVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateIntentVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateIntentVersionRequest_name *smithy.Schema
-
-var CreateIntentVersionRequest_checksum *smithy.Schema
-
-var CreateIntentVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateIntentVersionResponse",
-}, smithy.ShapeTypeStructure, 18)
-var CreateIntentVersionResponse_name *smithy.Schema
-
-var CreateIntentVersionResponse_description *smithy.Schema
-
-var CreateIntentVersionResponse_slots *smithy.Schema
-
-var CreateIntentVersionResponse_sampleUtterances *smithy.Schema
-
-var CreateIntentVersionResponse_confirmationPrompt *smithy.Schema
-
-var CreateIntentVersionResponse_rejectionStatement *smithy.Schema
-
-var CreateIntentVersionResponse_followUpPrompt *smithy.Schema
-
-var CreateIntentVersionResponse_conclusionStatement *smithy.Schema
-
-var CreateIntentVersionResponse_dialogCodeHook *smithy.Schema
-
-var CreateIntentVersionResponse_fulfillmentActivity *smithy.Schema
-
-var CreateIntentVersionResponse_parentIntentSignature *smithy.Schema
-
-var CreateIntentVersionResponse_lastUpdatedDate *smithy.Schema
-
-var CreateIntentVersionResponse_createdDate *smithy.Schema
-
-var CreateIntentVersionResponse_version *smithy.Schema
-
-var CreateIntentVersionResponse_checksum *smithy.Schema
-
-var CreateIntentVersionResponse_kendraConfiguration *smithy.Schema
-
-var CreateIntentVersionResponse_inputContexts *smithy.Schema
-
-var CreateIntentVersionResponse_outputContexts *smithy.Schema
-
-var CreateSlotTypeVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateSlotTypeVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSlotTypeVersionRequest_name *smithy.Schema
-
-var CreateSlotTypeVersionRequest_checksum *smithy.Schema
-
-var CreateSlotTypeVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "CreateSlotTypeVersionResponse",
-}, smithy.ShapeTypeStructure, 10)
-var CreateSlotTypeVersionResponse_name *smithy.Schema
-
-var CreateSlotTypeVersionResponse_description *smithy.Schema
-
-var CreateSlotTypeVersionResponse_enumerationValues *smithy.Schema
-
-var CreateSlotTypeVersionResponse_lastUpdatedDate *smithy.Schema
-
-var CreateSlotTypeVersionResponse_createdDate *smithy.Schema
-
-var CreateSlotTypeVersionResponse_version *smithy.Schema
-
-var CreateSlotTypeVersionResponse_checksum *smithy.Schema
-
-var CreateSlotTypeVersionResponse_valueSelectionStrategy *smithy.Schema
-
-var CreateSlotTypeVersionResponse_parentSlotTypeSignature *smithy.Schema
-
-var CreateSlotTypeVersionResponse_slotTypeConfigurations *smithy.Schema
-
-var DeleteBotAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotAliasRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBotAliasRequest_name *smithy.Schema
-
-var DeleteBotAliasRequest_botName *smithy.Schema
-
-var DeleteBotChannelAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotChannelAssociationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteBotChannelAssociationRequest_name *smithy.Schema
-
-var DeleteBotChannelAssociationRequest_botName *smithy.Schema
-
-var DeleteBotChannelAssociationRequest_botAlias *smithy.Schema
-
-var DeleteBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBotRequest_name *smithy.Schema
-
-var DeleteBotVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteBotVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBotVersionRequest_name *smithy.Schema
-
-var DeleteBotVersionRequest_version *smithy.Schema
-
-var DeleteIntentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteIntentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIntentRequest_name *smithy.Schema
-
-var DeleteIntentVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteIntentVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteIntentVersionRequest_name *smithy.Schema
-
-var DeleteIntentVersionRequest_version *smithy.Schema
-
-var DeleteSlotTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteSlotTypeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSlotTypeRequest_name *smithy.Schema
-
-var DeleteSlotTypeVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteSlotTypeVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSlotTypeVersionRequest_name *smithy.Schema
-
-var DeleteSlotTypeVersionRequest_version *smithy.Schema
-
-var DeleteUtterancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "DeleteUtterancesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteUtterancesRequest_botName *smithy.Schema
-
-var DeleteUtterancesRequest_userId *smithy.Schema
-
-var GetBotAliasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliasesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetBotAliasesRequest_botName *smithy.Schema
-
-var GetBotAliasesRequest_nextToken *smithy.Schema
-
-var GetBotAliasesRequest_maxResults *smithy.Schema
-
-var GetBotAliasesRequest_nameContains *smithy.Schema
-
-var GetBotAliasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliasesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotAliasesResponse_BotAliases *smithy.Schema
-
-var GetBotAliasesResponse_nextToken *smithy.Schema
-
-var GetBotAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliasRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotAliasRequest_name *smithy.Schema
-
-var GetBotAliasRequest_botName *smithy.Schema
-
-var GetBotAliasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotAliasResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetBotAliasResponse_name *smithy.Schema
-
-var GetBotAliasResponse_description *smithy.Schema
-
-var GetBotAliasResponse_botVersion *smithy.Schema
-
-var GetBotAliasResponse_botName *smithy.Schema
-
-var GetBotAliasResponse_lastUpdatedDate *smithy.Schema
-
-var GetBotAliasResponse_createdDate *smithy.Schema
-
-var GetBotAliasResponse_checksum *smithy.Schema
-
-var GetBotAliasResponse_conversationLogs *smithy.Schema
-
-var GetBotChannelAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBotChannelAssociationRequest_name *smithy.Schema
-
-var GetBotChannelAssociationRequest_botName *smithy.Schema
-
-var GetBotChannelAssociationRequest_botAlias *smithy.Schema
-
-var GetBotChannelAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociationResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetBotChannelAssociationResponse_name *smithy.Schema
-
-var GetBotChannelAssociationResponse_description *smithy.Schema
-
-var GetBotChannelAssociationResponse_botAlias *smithy.Schema
-
-var GetBotChannelAssociationResponse_botName *smithy.Schema
-
-var GetBotChannelAssociationResponse_createdDate *smithy.Schema
-
-var GetBotChannelAssociationResponse_type *smithy.Schema
-
-var GetBotChannelAssociationResponse_botConfiguration *smithy.Schema
-
-var GetBotChannelAssociationResponse_status *smithy.Schema
-
-var GetBotChannelAssociationResponse_failureReason *smithy.Schema
-
-var GetBotChannelAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetBotChannelAssociationsRequest_botName *smithy.Schema
-
-var GetBotChannelAssociationsRequest_botAlias *smithy.Schema
-
-var GetBotChannelAssociationsRequest_nextToken *smithy.Schema
-
-var GetBotChannelAssociationsRequest_maxResults *smithy.Schema
-
-var GetBotChannelAssociationsRequest_nameContains *smithy.Schema
-
-var GetBotChannelAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotChannelAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotChannelAssociationsResponse_botChannelAssociations *smithy.Schema
-
-var GetBotChannelAssociationsResponse_nextToken *smithy.Schema
-
-var GetBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotRequest_name *smithy.Schema
-
-var GetBotRequest_versionOrAlias *smithy.Schema
-
-var GetBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotResponse",
-}, smithy.ShapeTypeStructure, 18)
-var GetBotResponse_name *smithy.Schema
-
-var GetBotResponse_description *smithy.Schema
-
-var GetBotResponse_intents *smithy.Schema
-
-var GetBotResponse_enableModelImprovements *smithy.Schema
-
-var GetBotResponse_nluIntentConfidenceThreshold *smithy.Schema
-
-var GetBotResponse_clarificationPrompt *smithy.Schema
-
-var GetBotResponse_abortStatement *smithy.Schema
-
-var GetBotResponse_status *smithy.Schema
-
-var GetBotResponse_failureReason *smithy.Schema
-
-var GetBotResponse_lastUpdatedDate *smithy.Schema
-
-var GetBotResponse_createdDate *smithy.Schema
-
-var GetBotResponse_idleSessionTTLInSeconds *smithy.Schema
-
-var GetBotResponse_voiceId *smithy.Schema
-
-var GetBotResponse_checksum *smithy.Schema
-
-var GetBotResponse_version *smithy.Schema
-
-var GetBotResponse_locale *smithy.Schema
-
-var GetBotResponse_childDirected *smithy.Schema
-
-var GetBotResponse_detectSentiment *smithy.Schema
-
-var GetBotsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBotsRequest_nextToken *smithy.Schema
-
-var GetBotsRequest_maxResults *smithy.Schema
-
-var GetBotsRequest_nameContains *smithy.Schema
-
-var GetBotsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotsResponse_bots *smithy.Schema
-
-var GetBotsResponse_nextToken *smithy.Schema
-
-var GetBotVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetBotVersionsRequest_name *smithy.Schema
-
-var GetBotVersionsRequest_nextToken *smithy.Schema
-
-var GetBotVersionsRequest_maxResults *smithy.Schema
-
-var GetBotVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBotVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotVersionsResponse_bots *smithy.Schema
-
-var GetBotVersionsResponse_nextToken *smithy.Schema
-
-var GetBuiltinIntentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetBuiltinIntentRequest_signature *smithy.Schema
-
-var GetBuiltinIntentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetBuiltinIntentResponse_signature *smithy.Schema
-
-var GetBuiltinIntentResponse_supportedLocales *smithy.Schema
-
-var GetBuiltinIntentResponse_slots *smithy.Schema
-
-var GetBuiltinIntentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetBuiltinIntentsRequest_locale *smithy.Schema
-
-var GetBuiltinIntentsRequest_signatureContains *smithy.Schema
-
-var GetBuiltinIntentsRequest_nextToken *smithy.Schema
-
-var GetBuiltinIntentsRequest_maxResults *smithy.Schema
-
-var GetBuiltinIntentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinIntentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBuiltinIntentsResponse_intents *smithy.Schema
-
-var GetBuiltinIntentsResponse_nextToken *smithy.Schema
-
-var GetBuiltinSlotTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinSlotTypesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetBuiltinSlotTypesRequest_locale *smithy.Schema
-
-var GetBuiltinSlotTypesRequest_signatureContains *smithy.Schema
-
-var GetBuiltinSlotTypesRequest_nextToken *smithy.Schema
-
-var GetBuiltinSlotTypesRequest_maxResults *smithy.Schema
-
-var GetBuiltinSlotTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetBuiltinSlotTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetBuiltinSlotTypesResponse_slotTypes *smithy.Schema
-
-var GetBuiltinSlotTypesResponse_nextToken *smithy.Schema
-
-var GetExportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetExportRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetExportRequest_name *smithy.Schema
-
-var GetExportRequest_version *smithy.Schema
-
-var GetExportRequest_resourceType *smithy.Schema
-
-var GetExportRequest_exportType *smithy.Schema
-
-var GetExportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetExportResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetExportResponse_name *smithy.Schema
-
-var GetExportResponse_version *smithy.Schema
-
-var GetExportResponse_resourceType *smithy.Schema
-
-var GetExportResponse_exportType *smithy.Schema
-
-var GetExportResponse_exportStatus *smithy.Schema
-
-var GetExportResponse_failureReason *smithy.Schema
-
-var GetExportResponse_url *smithy.Schema
-
-var GetImportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetImportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetImportRequest_importId *smithy.Schema
-
-var GetImportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetImportResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetImportResponse_name *smithy.Schema
-
-var GetImportResponse_resourceType *smithy.Schema
-
-var GetImportResponse_mergeStrategy *smithy.Schema
-
-var GetImportResponse_importId *smithy.Schema
-
-var GetImportResponse_importStatus *smithy.Schema
-
-var GetImportResponse_failureReason *smithy.Schema
-
-var GetImportResponse_createdDate *smithy.Schema
-
-var GetIntentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntentRequest_name *smithy.Schema
-
-var GetIntentRequest_version *smithy.Schema
-
-var GetIntentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentResponse",
-}, smithy.ShapeTypeStructure, 18)
-var GetIntentResponse_name *smithy.Schema
-
-var GetIntentResponse_description *smithy.Schema
-
-var GetIntentResponse_slots *smithy.Schema
-
-var GetIntentResponse_sampleUtterances *smithy.Schema
-
-var GetIntentResponse_confirmationPrompt *smithy.Schema
-
-var GetIntentResponse_rejectionStatement *smithy.Schema
-
-var GetIntentResponse_followUpPrompt *smithy.Schema
-
-var GetIntentResponse_conclusionStatement *smithy.Schema
-
-var GetIntentResponse_dialogCodeHook *smithy.Schema
-
-var GetIntentResponse_fulfillmentActivity *smithy.Schema
-
-var GetIntentResponse_parentIntentSignature *smithy.Schema
-
-var GetIntentResponse_lastUpdatedDate *smithy.Schema
-
-var GetIntentResponse_createdDate *smithy.Schema
-
-var GetIntentResponse_version *smithy.Schema
-
-var GetIntentResponse_checksum *smithy.Schema
-
-var GetIntentResponse_kendraConfiguration *smithy.Schema
-
-var GetIntentResponse_inputContexts *smithy.Schema
-
-var GetIntentResponse_outputContexts *smithy.Schema
-
-var GetIntentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetIntentsRequest_nextToken *smithy.Schema
-
-var GetIntentsRequest_maxResults *smithy.Schema
-
-var GetIntentsRequest_nameContains *smithy.Schema
-
-var GetIntentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntentsResponse_intents *smithy.Schema
-
-var GetIntentsResponse_nextToken *smithy.Schema
-
-var GetIntentVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetIntentVersionsRequest_name *smithy.Schema
-
-var GetIntentVersionsRequest_nextToken *smithy.Schema
-
-var GetIntentVersionsRequest_maxResults *smithy.Schema
-
-var GetIntentVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetIntentVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntentVersionsResponse_intents *smithy.Schema
-
-var GetIntentVersionsResponse_nextToken *smithy.Schema
-
-var GetMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMigrationRequest_migrationId *smithy.Schema
-
-var GetMigrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrationResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetMigrationResponse_migrationId *smithy.Schema
-
-var GetMigrationResponse_v1BotName *smithy.Schema
-
-var GetMigrationResponse_v1BotVersion *smithy.Schema
-
-var GetMigrationResponse_v1BotLocale *smithy.Schema
-
-var GetMigrationResponse_v2BotId *smithy.Schema
-
-var GetMigrationResponse_v2BotRole *smithy.Schema
-
-var GetMigrationResponse_migrationStatus *smithy.Schema
-
-var GetMigrationResponse_migrationStrategy *smithy.Schema
-
-var GetMigrationResponse_migrationTimestamp *smithy.Schema
-
-var GetMigrationResponse_alerts *smithy.Schema
-
-var GetMigrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetMigrationsRequest_sortByAttribute *smithy.Schema
-
-var GetMigrationsRequest_sortByOrder *smithy.Schema
-
-var GetMigrationsRequest_v1BotNameContains *smithy.Schema
-
-var GetMigrationsRequest_migrationStatusEquals *smithy.Schema
-
-var GetMigrationsRequest_maxResults *smithy.Schema
-
-var GetMigrationsRequest_nextToken *smithy.Schema
-
-var GetMigrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetMigrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetMigrationsResponse_migrationSummaries *smithy.Schema
-
-var GetMigrationsResponse_nextToken *smithy.Schema
-
-var GetSlotTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSlotTypeRequest_name *smithy.Schema
-
-var GetSlotTypeRequest_version *smithy.Schema
-
-var GetSlotTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetSlotTypeResponse_name *smithy.Schema
-
-var GetSlotTypeResponse_description *smithy.Schema
-
-var GetSlotTypeResponse_enumerationValues *smithy.Schema
-
-var GetSlotTypeResponse_lastUpdatedDate *smithy.Schema
-
-var GetSlotTypeResponse_createdDate *smithy.Schema
-
-var GetSlotTypeResponse_version *smithy.Schema
-
-var GetSlotTypeResponse_checksum *smithy.Schema
-
-var GetSlotTypeResponse_valueSelectionStrategy *smithy.Schema
-
-var GetSlotTypeResponse_parentSlotTypeSignature *smithy.Schema
-
-var GetSlotTypeResponse_slotTypeConfigurations *smithy.Schema
-
-var GetSlotTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetSlotTypesRequest_nextToken *smithy.Schema
-
-var GetSlotTypesRequest_maxResults *smithy.Schema
-
-var GetSlotTypesRequest_nameContains *smithy.Schema
-
-var GetSlotTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSlotTypesResponse_slotTypes *smithy.Schema
-
-var GetSlotTypesResponse_nextToken *smithy.Schema
-
-var GetSlotTypeVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetSlotTypeVersionsRequest_name *smithy.Schema
-
-var GetSlotTypeVersionsRequest_nextToken *smithy.Schema
-
-var GetSlotTypeVersionsRequest_maxResults *smithy.Schema
-
-var GetSlotTypeVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetSlotTypeVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSlotTypeVersionsResponse_slotTypes *smithy.Schema
-
-var GetSlotTypeVersionsResponse_nextToken *smithy.Schema
-
-var GetUtterancesViewRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetUtterancesViewRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetUtterancesViewRequest_botName *smithy.Schema
-
-var GetUtterancesViewRequest_botVersions *smithy.Schema
-
-var GetUtterancesViewRequest_statusType *smithy.Schema
-
-var GetUtterancesViewResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "GetUtterancesViewResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetUtterancesViewResponse_botName *smithy.Schema
-
-var GetUtterancesViewResponse_utterances *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutBotAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotAliasRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PutBotAliasRequest_name *smithy.Schema
-
-var PutBotAliasRequest_description *smithy.Schema
-
-var PutBotAliasRequest_botVersion *smithy.Schema
-
-var PutBotAliasRequest_botName *smithy.Schema
-
-var PutBotAliasRequest_checksum *smithy.Schema
-
-var PutBotAliasRequest_conversationLogs *smithy.Schema
-
-var PutBotAliasRequest_tags *smithy.Schema
-
-var PutBotAliasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotAliasResponse",
-}, smithy.ShapeTypeStructure, 9)
-var PutBotAliasResponse_name *smithy.Schema
-
-var PutBotAliasResponse_description *smithy.Schema
-
-var PutBotAliasResponse_botVersion *smithy.Schema
-
-var PutBotAliasResponse_botName *smithy.Schema
-
-var PutBotAliasResponse_lastUpdatedDate *smithy.Schema
-
-var PutBotAliasResponse_createdDate *smithy.Schema
-
-var PutBotAliasResponse_checksum *smithy.Schema
-
-var PutBotAliasResponse_conversationLogs *smithy.Schema
-
-var PutBotAliasResponse_tags *smithy.Schema
-
-var PutBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotRequest",
-}, smithy.ShapeTypeStructure, 16)
-var PutBotRequest_name *smithy.Schema
-
-var PutBotRequest_description *smithy.Schema
-
-var PutBotRequest_intents *smithy.Schema
-
-var PutBotRequest_enableModelImprovements *smithy.Schema
-
-var PutBotRequest_nluIntentConfidenceThreshold *smithy.Schema
-
-var PutBotRequest_clarificationPrompt *smithy.Schema
-
-var PutBotRequest_abortStatement *smithy.Schema
-
-var PutBotRequest_idleSessionTTLInSeconds *smithy.Schema
-
-var PutBotRequest_voiceId *smithy.Schema
-
-var PutBotRequest_checksum *smithy.Schema
-
-var PutBotRequest_processBehavior *smithy.Schema
-
-var PutBotRequest_locale *smithy.Schema
-
-var PutBotRequest_childDirected *smithy.Schema
-
-var PutBotRequest_detectSentiment *smithy.Schema
-
-var PutBotRequest_createVersion *smithy.Schema
-
-var PutBotRequest_tags *smithy.Schema
-
-var PutBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutBotResponse",
-}, smithy.ShapeTypeStructure, 20)
-var PutBotResponse_name *smithy.Schema
-
-var PutBotResponse_description *smithy.Schema
-
-var PutBotResponse_intents *smithy.Schema
-
-var PutBotResponse_enableModelImprovements *smithy.Schema
-
-var PutBotResponse_nluIntentConfidenceThreshold *smithy.Schema
-
-var PutBotResponse_clarificationPrompt *smithy.Schema
-
-var PutBotResponse_abortStatement *smithy.Schema
-
-var PutBotResponse_status *smithy.Schema
-
-var PutBotResponse_failureReason *smithy.Schema
-
-var PutBotResponse_lastUpdatedDate *smithy.Schema
-
-var PutBotResponse_createdDate *smithy.Schema
-
-var PutBotResponse_idleSessionTTLInSeconds *smithy.Schema
-
-var PutBotResponse_voiceId *smithy.Schema
-
-var PutBotResponse_checksum *smithy.Schema
-
-var PutBotResponse_version *smithy.Schema
-
-var PutBotResponse_locale *smithy.Schema
-
-var PutBotResponse_childDirected *smithy.Schema
-
-var PutBotResponse_createVersion *smithy.Schema
-
-var PutBotResponse_detectSentiment *smithy.Schema
-
-var PutBotResponse_tags *smithy.Schema
-
-var PutIntentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutIntentRequest",
-}, smithy.ShapeTypeStructure, 16)
-var PutIntentRequest_name *smithy.Schema
-
-var PutIntentRequest_description *smithy.Schema
-
-var PutIntentRequest_slots *smithy.Schema
-
-var PutIntentRequest_sampleUtterances *smithy.Schema
-
-var PutIntentRequest_confirmationPrompt *smithy.Schema
-
-var PutIntentRequest_rejectionStatement *smithy.Schema
-
-var PutIntentRequest_followUpPrompt *smithy.Schema
-
-var PutIntentRequest_conclusionStatement *smithy.Schema
-
-var PutIntentRequest_dialogCodeHook *smithy.Schema
-
-var PutIntentRequest_fulfillmentActivity *smithy.Schema
-
-var PutIntentRequest_parentIntentSignature *smithy.Schema
-
-var PutIntentRequest_checksum *smithy.Schema
-
-var PutIntentRequest_createVersion *smithy.Schema
-
-var PutIntentRequest_kendraConfiguration *smithy.Schema
-
-var PutIntentRequest_inputContexts *smithy.Schema
-
-var PutIntentRequest_outputContexts *smithy.Schema
-
-var PutIntentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutIntentResponse",
-}, smithy.ShapeTypeStructure, 19)
-var PutIntentResponse_name *smithy.Schema
-
-var PutIntentResponse_description *smithy.Schema
-
-var PutIntentResponse_slots *smithy.Schema
-
-var PutIntentResponse_sampleUtterances *smithy.Schema
-
-var PutIntentResponse_confirmationPrompt *smithy.Schema
-
-var PutIntentResponse_rejectionStatement *smithy.Schema
-
-var PutIntentResponse_followUpPrompt *smithy.Schema
-
-var PutIntentResponse_conclusionStatement *smithy.Schema
-
-var PutIntentResponse_dialogCodeHook *smithy.Schema
-
-var PutIntentResponse_fulfillmentActivity *smithy.Schema
-
-var PutIntentResponse_parentIntentSignature *smithy.Schema
-
-var PutIntentResponse_lastUpdatedDate *smithy.Schema
-
-var PutIntentResponse_createdDate *smithy.Schema
-
-var PutIntentResponse_version *smithy.Schema
-
-var PutIntentResponse_checksum *smithy.Schema
-
-var PutIntentResponse_createVersion *smithy.Schema
-
-var PutIntentResponse_kendraConfiguration *smithy.Schema
-
-var PutIntentResponse_inputContexts *smithy.Schema
-
-var PutIntentResponse_outputContexts *smithy.Schema
-
-var PutSlotTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutSlotTypeRequest",
-}, smithy.ShapeTypeStructure, 8)
-var PutSlotTypeRequest_name *smithy.Schema
-
-var PutSlotTypeRequest_description *smithy.Schema
-
-var PutSlotTypeRequest_enumerationValues *smithy.Schema
-
-var PutSlotTypeRequest_checksum *smithy.Schema
-
-var PutSlotTypeRequest_valueSelectionStrategy *smithy.Schema
-
-var PutSlotTypeRequest_createVersion *smithy.Schema
-
-var PutSlotTypeRequest_parentSlotTypeSignature *smithy.Schema
-
-var PutSlotTypeRequest_slotTypeConfigurations *smithy.Schema
-
-var PutSlotTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "PutSlotTypeResponse",
-}, smithy.ShapeTypeStructure, 11)
-var PutSlotTypeResponse_name *smithy.Schema
-
-var PutSlotTypeResponse_description *smithy.Schema
-
-var PutSlotTypeResponse_enumerationValues *smithy.Schema
-
-var PutSlotTypeResponse_lastUpdatedDate *smithy.Schema
-
-var PutSlotTypeResponse_createdDate *smithy.Schema
-
-var PutSlotTypeResponse_version *smithy.Schema
-
-var PutSlotTypeResponse_checksum *smithy.Schema
-
-var PutSlotTypeResponse_valueSelectionStrategy *smithy.Schema
-
-var PutSlotTypeResponse_createVersion *smithy.Schema
-
-var PutSlotTypeResponse_parentSlotTypeSignature *smithy.Schema
-
-var PutSlotTypeResponse_slotTypeConfigurations *smithy.Schema
-
-var StartImportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartImportRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartImportRequest_payload *smithy.Schema
-
-var StartImportRequest_resourceType *smithy.Schema
-
-var StartImportRequest_mergeStrategy *smithy.Schema
-
-var StartImportRequest_tags *smithy.Schema
-
-var StartImportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartImportResponse",
-}, smithy.ShapeTypeStructure, 7)
-var StartImportResponse_name *smithy.Schema
-
-var StartImportResponse_resourceType *smithy.Schema
-
-var StartImportResponse_mergeStrategy *smithy.Schema
-
-var StartImportResponse_importId *smithy.Schema
-
-var StartImportResponse_importStatus *smithy.Schema
-
-var StartImportResponse_tags *smithy.Schema
-
-var StartImportResponse_createdDate *smithy.Schema
-
-var StartMigrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartMigrationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartMigrationRequest_v1BotName *smithy.Schema
-
-var StartMigrationRequest_v1BotVersion *smithy.Schema
-
-var StartMigrationRequest_v2BotName *smithy.Schema
-
-var StartMigrationRequest_v2BotRole *smithy.Schema
-
-var StartMigrationRequest_migrationStrategy *smithy.Schema
-
-var StartMigrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "StartMigrationResponse",
-}, smithy.ShapeTypeStructure, 8)
-var StartMigrationResponse_v1BotName *smithy.Schema
-
-var StartMigrationResponse_v1BotVersion *smithy.Schema
-
-var StartMigrationResponse_v1BotLocale *smithy.Schema
-
-var StartMigrationResponse_v2BotId *smithy.Schema
-
-var StartMigrationResponse_v2BotRole *smithy.Schema
-
-var StartMigrationResponse_migrationId *smithy.Schema
-
-var StartMigrationResponse_migrationStrategy *smithy.Schema
-
-var StartMigrationResponse_migrationTimestamp *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexmodelbuildingservice",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _String)
-
-	LogType_AUDIO = LogType.AddMember("AUDIO", smithyprelude.Unit)
-
-	LogType_TEXT = LogType.AddMember("TEXT", smithyprelude.Unit)
-
-	Destination_CLOUDWATCH_LOGS = Destination.AddMember("CLOUDWATCH_LOGS", smithyprelude.Unit)
-
-	Destination_S3 = Destination.AddMember("S3", smithyprelude.Unit)
-
-	LogSettingsResponse_logType = LogSettingsResponse.AddMember("logType", LogType)
-
-	LogSettingsResponse_destination = LogSettingsResponse.AddMember("destination", Destination)
-
-	LogSettingsResponse_kmsKeyArn = LogSettingsResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	LogSettingsResponse_resourceArn = LogSettingsResponse.AddMember("resourceArn", _ResourceArn)
-
-	LogSettingsResponse_resourcePrefix = LogSettingsResponse.AddMember("resourcePrefix", _ResourcePrefix)
-
-	_LogSettingsResponseList_member = _LogSettingsResponseList.AddMember("member", LogSettingsResponse)
-
-	ConversationLogsResponse_logSettings = ConversationLogsResponse.AddMember("logSettings", _LogSettingsResponseList)
-
-	ConversationLogsResponse_iamRoleArn = ConversationLogsResponse.AddMember("iamRoleArn", _IamRoleArn)
-
-	BotAliasMetadata_name = BotAliasMetadata.AddMember("name", _AliasName)
-
-	BotAliasMetadata_description = BotAliasMetadata.AddMember("description", _Description)
-
-	BotAliasMetadata_botVersion = BotAliasMetadata.AddMember("botVersion", _Version)
-
-	BotAliasMetadata_botName = BotAliasMetadata.AddMember("botName", _BotName)
-
-	BotAliasMetadata_lastUpdatedDate = BotAliasMetadata.AddMember("lastUpdatedDate", _Timestamp)
-
-	BotAliasMetadata_createdDate = BotAliasMetadata.AddMember("createdDate", _Timestamp)
-
-	BotAliasMetadata_checksum = BotAliasMetadata.AddMember("checksum", _String)
-
-	BotAliasMetadata_conversationLogs = BotAliasMetadata.AddMember("conversationLogs", ConversationLogsResponse)
-
-	_BotAliasMetadataList_member = _BotAliasMetadataList.AddMember("member", BotAliasMetadata)
-
-	ChannelType_FACEBOOK = ChannelType.AddMember("FACEBOOK", smithyprelude.Unit)
-
-	ChannelType_SLACK = ChannelType.AddMember("SLACK", smithyprelude.Unit)
-
-	ChannelType_TWILIO_SMS = ChannelType.AddMember("TWILIO_SMS", smithyprelude.Unit)
-
-	ChannelType_KIK = ChannelType.AddMember("KIK", smithyprelude.Unit)
-
-	_ChannelConfigurationMap_key = _ChannelConfigurationMap.AddMember("key", _String)
-
-	_ChannelConfigurationMap_value = _ChannelConfigurationMap.AddMember("value", _String)
-
-	ChannelStatus_IN_PROGRESS = ChannelStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ChannelStatus_CREATED = ChannelStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	ChannelStatus_FAILED = ChannelStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	BotChannelAssociation_name = BotChannelAssociation.AddMember("name", _BotChannelName)
-
-	BotChannelAssociation_description = BotChannelAssociation.AddMember("description", _Description)
-
-	BotChannelAssociation_botAlias = BotChannelAssociation.AddMember("botAlias", _AliasName)
-
-	BotChannelAssociation_botName = BotChannelAssociation.AddMember("botName", _BotName)
-
-	BotChannelAssociation_createdDate = BotChannelAssociation.AddMember("createdDate", _Timestamp)
-
-	BotChannelAssociation_type = BotChannelAssociation.AddMember("type", ChannelType)
-
-	BotChannelAssociation_botConfiguration = BotChannelAssociation.AddMember("botConfiguration", _ChannelConfigurationMap)
-
-	BotChannelAssociation_status = BotChannelAssociation.AddMember("status", ChannelStatus)
-
-	BotChannelAssociation_failureReason = BotChannelAssociation.AddMember("failureReason", _String)
-
-	_BotChannelAssociationList_member = _BotChannelAssociationList.AddMember("member", BotChannelAssociation)
-
-	Status_BUILDING = Status.AddMember("BUILDING", smithyprelude.Unit)
-
-	Status_READY = Status.AddMember("READY", smithyprelude.Unit)
-
-	Status_READY_BASIC_TESTING = Status.AddMember("READY_BASIC_TESTING", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	Status_NOT_BUILT = Status.AddMember("NOT_BUILT", smithyprelude.Unit)
-
-	BotMetadata_name = BotMetadata.AddMember("name", _BotName)
-
-	BotMetadata_description = BotMetadata.AddMember("description", _Description)
-
-	BotMetadata_status = BotMetadata.AddMember("status", Status)
-
-	BotMetadata_lastUpdatedDate = BotMetadata.AddMember("lastUpdatedDate", _Timestamp)
-
-	BotMetadata_createdDate = BotMetadata.AddMember("createdDate", _Timestamp)
-
-	BotMetadata_version = BotMetadata.AddMember("version", _Version)
-
-	_BotMetadataList_member = _BotMetadataList.AddMember("member", BotMetadata)
-
-	_BotVersions_member = _BotVersions.AddMember("member", _Version)
-
-	Locale_DE_DE = Locale.AddMember("DE_DE", smithyprelude.Unit)
-
-	Locale_EN_AU = Locale.AddMember("EN_AU", smithyprelude.Unit)
-
-	Locale_EN_GB = Locale.AddMember("EN_GB", smithyprelude.Unit)
-
-	Locale_EN_IN = Locale.AddMember("EN_IN", smithyprelude.Unit)
-
-	Locale_EN_US = Locale.AddMember("EN_US", smithyprelude.Unit)
-
-	Locale_ES_419 = Locale.AddMember("ES_419", smithyprelude.Unit)
-
-	Locale_ES_ES = Locale.AddMember("ES_ES", smithyprelude.Unit)
-
-	Locale_ES_US = Locale.AddMember("ES_US", smithyprelude.Unit)
-
-	Locale_FR_FR = Locale.AddMember("FR_FR", smithyprelude.Unit)
-
-	Locale_FR_CA = Locale.AddMember("FR_CA", smithyprelude.Unit)
-
-	Locale_IT_IT = Locale.AddMember("IT_IT", smithyprelude.Unit)
-
-	Locale_JA_JP = Locale.AddMember("JA_JP", smithyprelude.Unit)
-
-	Locale_KO_KR = Locale.AddMember("KO_KR", smithyprelude.Unit)
-
-	_LocaleList_member = _LocaleList.AddMember("member", Locale)
-
-	BuiltinIntentMetadata_signature = BuiltinIntentMetadata.AddMember("signature", _BuiltinIntentSignature)
-
-	BuiltinIntentMetadata_supportedLocales = BuiltinIntentMetadata.AddMember("supportedLocales", _LocaleList)
-
-	_BuiltinIntentMetadataList_member = _BuiltinIntentMetadataList.AddMember("member", BuiltinIntentMetadata)
-
-	BuiltinIntentSlot_name = BuiltinIntentSlot.AddMember("name", _String)
-
-	_BuiltinIntentSlotList_member = _BuiltinIntentSlotList.AddMember("member", BuiltinIntentSlot)
-
-	BuiltinSlotTypeMetadata_signature = BuiltinSlotTypeMetadata.AddMember("signature", _BuiltinSlotTypeSignature)
-
-	BuiltinSlotTypeMetadata_supportedLocales = BuiltinSlotTypeMetadata.AddMember("supportedLocales", _LocaleList)
-
-	_BuiltinSlotTypeMetadataList_member = _BuiltinSlotTypeMetadataList.AddMember("member", BuiltinSlotTypeMetadata)
-
-	CodeHook_uri = CodeHook.AddMember("uri", _LambdaARN)
-
-	CodeHook_messageVersion = CodeHook.AddMember("messageVersion", _MessageVersion)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ContentType_PLAIN_TEXT = ContentType.AddMember("PLAIN_TEXT", smithyprelude.Unit)
-
-	ContentType_SSML = ContentType.AddMember("SSML", smithyprelude.Unit)
-
-	ContentType_CUSTOM_PAYLOAD = ContentType.AddMember("CUSTOM_PAYLOAD", smithyprelude.Unit)
-
-	LogSettingsRequest_logType = LogSettingsRequest.AddMember("logType", LogType)
-
-	LogSettingsRequest_destination = LogSettingsRequest.AddMember("destination", Destination)
-
-	LogSettingsRequest_kmsKeyArn = LogSettingsRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	LogSettingsRequest_resourceArn = LogSettingsRequest.AddMember("resourceArn", _ResourceArn)
-
-	_LogSettingsRequestList_member = _LogSettingsRequestList.AddMember("member", LogSettingsRequest)
-
-	ConversationLogsRequest_logSettings = ConversationLogsRequest.AddMember("logSettings", _LogSettingsRequestList)
-
-	ConversationLogsRequest_iamRoleArn = ConversationLogsRequest.AddMember("iamRoleArn", _IamRoleArn)
-
-	_SynonymList_member = _SynonymList.AddMember("member", _Value)
-
-	EnumerationValue_value = EnumerationValue.AddMember("value", _Value)
-
-	EnumerationValue_synonyms = EnumerationValue.AddMember("synonyms", _SynonymList)
-
-	_EnumerationValues_member = _EnumerationValues.AddMember("member", EnumerationValue)
-
-	ExportStatus_IN_PROGRESS = ExportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ExportStatus_READY = ExportStatus.AddMember("READY", smithyprelude.Unit)
-
-	ExportStatus_FAILED = ExportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ExportType_ALEXA_SKILLS_KIT = ExportType.AddMember("ALEXA_SKILLS_KIT", smithyprelude.Unit)
-
-	ExportType_LEX = ExportType.AddMember("LEX", smithyprelude.Unit)
-
-	Message_contentType = Message.AddMember("contentType", ContentType)
-
-	Message_content = Message.AddMember("content", _ContentString)
-
-	Message_groupNumber = Message.AddMember("groupNumber", _GroupNumber)
-
-	_MessageList_member = _MessageList.AddMember("member", Message)
-
-	Prompt_messages = Prompt.AddMember("messages", _MessageList)
-
-	Prompt_maxAttempts = Prompt.AddMember("maxAttempts", _PromptMaxAttempts)
-
-	Prompt_responseCard = Prompt.AddMember("responseCard", _ResponseCard)
-
-	Statement_messages = Statement.AddMember("messages", _MessageList)
-
-	Statement_responseCard = Statement.AddMember("responseCard", _ResponseCard)
-
-	FollowUpPrompt_prompt = FollowUpPrompt.AddMember("prompt", Prompt)
-
-	FollowUpPrompt_rejectionStatement = FollowUpPrompt.AddMember("rejectionStatement", Statement)
-
-	FulfillmentActivityType_RETURN_INTENT = FulfillmentActivityType.AddMember("RETURN_INTENT", smithyprelude.Unit)
-
-	FulfillmentActivityType_CODE_HOOK = FulfillmentActivityType.AddMember("CODE_HOOK", smithyprelude.Unit)
-
-	FulfillmentActivity_type = FulfillmentActivity.AddMember("type", FulfillmentActivityType)
-
-	FulfillmentActivity_codeHook = FulfillmentActivity.AddMember("codeHook", CodeHook)
-
-	ImportStatus_IN_PROGRESS = ImportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ImportStatus_COMPLETE = ImportStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	ImportStatus_FAILED = ImportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	InputContext_name = InputContext.AddMember("name", _InputContextName)
-
-	_InputContextList_member = _InputContextList.AddMember("member", InputContext)
-
-	Intent_intentName = Intent.AddMember("intentName", _IntentName)
-
-	Intent_intentVersion = Intent.AddMember("intentVersion", _Version)
-
-	_IntentList_member = _IntentList.AddMember("member", Intent)
-
-	IntentMetadata_name = IntentMetadata.AddMember("name", _IntentName)
-
-	IntentMetadata_description = IntentMetadata.AddMember("description", _Description)
-
-	IntentMetadata_lastUpdatedDate = IntentMetadata.AddMember("lastUpdatedDate", _Timestamp)
-
-	IntentMetadata_createdDate = IntentMetadata.AddMember("createdDate", _Timestamp)
-
-	IntentMetadata_version = IntentMetadata.AddMember("version", _Version)
-
-	_IntentMetadataList_member = _IntentMetadataList.AddMember("member", IntentMetadata)
-
-	_IntentUtteranceList_member = _IntentUtteranceList.AddMember("member", _Utterance)
-
-	InternalFailureException_message = InternalFailureException.AddMember("message", _String)
-
-	KendraConfiguration_kendraIndex = KendraConfiguration.AddMember("kendraIndex", _KendraIndexArn)
-
-	KendraConfiguration_queryFilterString = KendraConfiguration.AddMember("queryFilterString", _QueryFilterString)
-
-	KendraConfiguration_role = KendraConfiguration.AddMember("role", _roleArn)
-
-	LimitExceededException_retryAfterSeconds = LimitExceededException.AddMember("retryAfterSeconds", _String, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _String)
-
-	UtteranceData_utteranceString = UtteranceData.AddMember("utteranceString", _UtteranceString)
-
-	UtteranceData_count = UtteranceData.AddMember("count", _Count)
-
-	UtteranceData_distinctUsers = UtteranceData.AddMember("distinctUsers", _Count)
-
-	UtteranceData_firstUtteredDate = UtteranceData.AddMember("firstUtteredDate", _Timestamp)
-
-	UtteranceData_lastUtteredDate = UtteranceData.AddMember("lastUtteredDate", _Timestamp)
-
-	_ListOfUtterance_member = _ListOfUtterance.AddMember("member", UtteranceData)
-
-	UtteranceList_botVersion = UtteranceList.AddMember("botVersion", _Version)
-
-	UtteranceList_utterances = UtteranceList.AddMember("utterances", _ListOfUtterance)
-
-	_ListsOfUtterances_member = _ListsOfUtterances.AddMember("member", UtteranceList)
-
-	MergeStrategy_OVERWRITE_LATEST = MergeStrategy.AddMember("OVERWRITE_LATEST", smithyprelude.Unit)
-
-	MergeStrategy_FAIL_ON_CONFLICT = MergeStrategy.AddMember("FAIL_ON_CONFLICT", smithyprelude.Unit)
-
-	MigrationAlertType_ERROR = MigrationAlertType.AddMember("ERROR", smithyprelude.Unit)
-
-	MigrationAlertType_WARN = MigrationAlertType.AddMember("WARN", smithyprelude.Unit)
-
-	_MigrationAlertDetails_member = _MigrationAlertDetails.AddMember("member", _MigrationAlertDetail)
-
-	_MigrationAlertReferenceURLs_member = _MigrationAlertReferenceURLs.AddMember("member", _MigrationAlertReferenceURL)
-
-	MigrationAlert_type = MigrationAlert.AddMember("type", MigrationAlertType)
-
-	MigrationAlert_message = MigrationAlert.AddMember("message", _MigrationAlertMessage)
-
-	MigrationAlert_details = MigrationAlert.AddMember("details", _MigrationAlertDetails)
-
-	MigrationAlert_referenceURLs = MigrationAlert.AddMember("referenceURLs", _MigrationAlertReferenceURLs)
-
-	_MigrationAlerts_member = _MigrationAlerts.AddMember("member", MigrationAlert)
-
-	MigrationSortAttribute_V1_BOT_NAME = MigrationSortAttribute.AddMember("V1_BOT_NAME", smithyprelude.Unit)
-
-	MigrationSortAttribute_MIGRATION_DATE_TIME = MigrationSortAttribute.AddMember("MIGRATION_DATE_TIME", smithyprelude.Unit)
-
-	MigrationStatus_IN_PROGRESS = MigrationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	MigrationStatus_COMPLETED = MigrationStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	MigrationStatus_FAILED = MigrationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	MigrationStrategy_CREATE_NEW = MigrationStrategy.AddMember("CREATE_NEW", smithyprelude.Unit)
-
-	MigrationStrategy_UPDATE_EXISTING = MigrationStrategy.AddMember("UPDATE_EXISTING", smithyprelude.Unit)
-
-	MigrationSummary_migrationId = MigrationSummary.AddMember("migrationId", _MigrationId)
-
-	MigrationSummary_v1BotName = MigrationSummary.AddMember("v1BotName", _BotName)
-
-	MigrationSummary_v1BotVersion = MigrationSummary.AddMember("v1BotVersion", _Version)
-
-	MigrationSummary_v1BotLocale = MigrationSummary.AddMember("v1BotLocale", Locale)
-
-	MigrationSummary_v2BotId = MigrationSummary.AddMember("v2BotId", _V2BotId)
-
-	MigrationSummary_v2BotRole = MigrationSummary.AddMember("v2BotRole", _IamRoleArn)
-
-	MigrationSummary_migrationStatus = MigrationSummary.AddMember("migrationStatus", MigrationStatus)
-
-	MigrationSummary_migrationStrategy = MigrationSummary.AddMember("migrationStrategy", MigrationStrategy)
-
-	MigrationSummary_migrationTimestamp = MigrationSummary.AddMember("migrationTimestamp", _Timestamp)
-
-	_MigrationSummaryList_member = _MigrationSummaryList.AddMember("member", MigrationSummary)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _String)
-
-	ObfuscationSetting_NONE = ObfuscationSetting.AddMember("NONE", smithyprelude.Unit)
-
-	ObfuscationSetting_DEFAULT_OBFUSCATION = ObfuscationSetting.AddMember("DEFAULT_OBFUSCATION", smithyprelude.Unit)
-
-	OutputContext_name = OutputContext.AddMember("name", _OutputContextName)
-
-	OutputContext_timeToLiveInSeconds = OutputContext.AddMember("timeToLiveInSeconds", _ContextTimeToLiveInSeconds)
-
-	OutputContext_turnsToLive = OutputContext.AddMember("turnsToLive", _ContextTurnsToLive)
-
-	_OutputContextList_member = _OutputContextList.AddMember("member", OutputContext)
-
-	PreconditionFailedException_message = PreconditionFailedException.AddMember("message", _String)
-
-	ProcessBehavior_SAVE = ProcessBehavior.AddMember("SAVE", smithyprelude.Unit)
-
-	ProcessBehavior_BUILD = ProcessBehavior.AddMember("BUILD", smithyprelude.Unit)
-
-	ReferenceType_INTENT = ReferenceType.AddMember("INTENT", smithyprelude.Unit)
-
-	ReferenceType_BOT = ReferenceType.AddMember("BOT", smithyprelude.Unit)
-
-	ReferenceType_BOTALIAS = ReferenceType.AddMember("BOTALIAS", smithyprelude.Unit)
-
-	ReferenceType_BOTCHANNEL = ReferenceType.AddMember("BOTCHANNEL", smithyprelude.Unit)
-
-	ResourceReference_name = ResourceReference.AddMember("name", _Name)
-
-	ResourceReference_version = ResourceReference.AddMember("version", _Version)
-
-	ResourceInUseException_referenceType = ResourceInUseException.AddMember("referenceType", ReferenceType)
-
-	ResourceInUseException_exampleReference = ResourceInUseException.AddMember("exampleReference", ResourceReference)
-
-	ResourceType_BOT = ResourceType.AddMember("BOT", smithyprelude.Unit)
-
-	ResourceType_INTENT = ResourceType.AddMember("INTENT", smithyprelude.Unit)
-
-	ResourceType_SLOT_TYPE = ResourceType.AddMember("SLOT_TYPE", smithyprelude.Unit)
-
-	SlotConstraint_REQUIRED = SlotConstraint.AddMember("REQUIRED", smithyprelude.Unit)
-
-	SlotConstraint_OPTIONAL = SlotConstraint.AddMember("OPTIONAL", smithyprelude.Unit)
-
-	_SlotUtteranceList_member = _SlotUtteranceList.AddMember("member", _Utterance)
-
-	SlotDefaultValue_defaultValue = SlotDefaultValue.AddMember("defaultValue", _SlotDefaultValueString)
-
-	_SlotDefaultValueList_member = _SlotDefaultValueList.AddMember("member", SlotDefaultValue)
-
-	SlotDefaultValueSpec_defaultValueList = SlotDefaultValueSpec.AddMember("defaultValueList", _SlotDefaultValueList)
-
-	Slot_name = Slot.AddMember("name", _SlotName)
-
-	Slot_description = Slot.AddMember("description", _Description)
-
-	Slot_slotConstraint = Slot.AddMember("slotConstraint", SlotConstraint)
-
-	Slot_slotType = Slot.AddMember("slotType", _CustomOrBuiltinSlotTypeName)
-
-	Slot_slotTypeVersion = Slot.AddMember("slotTypeVersion", _Version)
-
-	Slot_valueElicitationPrompt = Slot.AddMember("valueElicitationPrompt", Prompt)
-
-	Slot_priority = Slot.AddMember("priority", _Priority)
-
-	Slot_sampleUtterances = Slot.AddMember("sampleUtterances", _SlotUtteranceList)
-
-	Slot_responseCard = Slot.AddMember("responseCard", _ResponseCard)
-
-	Slot_obfuscationSetting = Slot.AddMember("obfuscationSetting", ObfuscationSetting)
-
-	Slot_defaultValueSpec = Slot.AddMember("defaultValueSpec", SlotDefaultValueSpec)
-
-	_SlotList_member = _SlotList.AddMember("member", Slot)
-
-	SlotTypeRegexConfiguration_pattern = SlotTypeRegexConfiguration.AddMember("pattern", _RegexPattern)
-
-	SlotTypeConfiguration_regexConfiguration = SlotTypeConfiguration.AddMember("regexConfiguration", SlotTypeRegexConfiguration)
-
-	_SlotTypeConfigurations_member = _SlotTypeConfigurations.AddMember("member", SlotTypeConfiguration)
-
-	SlotTypeMetadata_name = SlotTypeMetadata.AddMember("name", _SlotTypeName)
-
-	SlotTypeMetadata_description = SlotTypeMetadata.AddMember("description", _Description)
-
-	SlotTypeMetadata_lastUpdatedDate = SlotTypeMetadata.AddMember("lastUpdatedDate", _Timestamp)
-
-	SlotTypeMetadata_createdDate = SlotTypeMetadata.AddMember("createdDate", _Timestamp)
-
-	SlotTypeMetadata_version = SlotTypeMetadata.AddMember("version", _Version)
-
-	_SlotTypeMetadataList_member = _SlotTypeMetadataList.AddMember("member", SlotTypeMetadata)
-
-	SlotValueSelectionStrategy_ORIGINAL_VALUE = SlotValueSelectionStrategy.AddMember("ORIGINAL_VALUE", smithyprelude.Unit)
-
-	SlotValueSelectionStrategy_TOP_RESOLUTION = SlotValueSelectionStrategy.AddMember("TOP_RESOLUTION", smithyprelude.Unit)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	StatusType_DETECTED = StatusType.AddMember("DETECTED", smithyprelude.Unit)
-
-	StatusType_MISSED = StatusType.AddMember("MISSED", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	CreateBotVersionRequest_name = CreateBotVersionRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	CreateBotVersionRequest_checksum = CreateBotVersionRequest.AddMember("checksum", _String)
-
-	CreateBotVersionResponse_name = CreateBotVersionResponse.AddMember("name", _BotName)
-
-	CreateBotVersionResponse_description = CreateBotVersionResponse.AddMember("description", _Description)
-
-	CreateBotVersionResponse_intents = CreateBotVersionResponse.AddMember("intents", _IntentList)
-
-	CreateBotVersionResponse_clarificationPrompt = CreateBotVersionResponse.AddMember("clarificationPrompt", Prompt)
-
-	CreateBotVersionResponse_abortStatement = CreateBotVersionResponse.AddMember("abortStatement", Statement)
-
-	CreateBotVersionResponse_status = CreateBotVersionResponse.AddMember("status", Status)
-
-	CreateBotVersionResponse_failureReason = CreateBotVersionResponse.AddMember("failureReason", _String)
-
-	CreateBotVersionResponse_lastUpdatedDate = CreateBotVersionResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	CreateBotVersionResponse_createdDate = CreateBotVersionResponse.AddMember("createdDate", _Timestamp)
-
-	CreateBotVersionResponse_idleSessionTTLInSeconds = CreateBotVersionResponse.AddMember("idleSessionTTLInSeconds", _SessionTTL)
-
-	CreateBotVersionResponse_voiceId = CreateBotVersionResponse.AddMember("voiceId", _String)
-
-	CreateBotVersionResponse_checksum = CreateBotVersionResponse.AddMember("checksum", _String)
-
-	CreateBotVersionResponse_version = CreateBotVersionResponse.AddMember("version", _Version)
-
-	CreateBotVersionResponse_locale = CreateBotVersionResponse.AddMember("locale", Locale)
-
-	CreateBotVersionResponse_childDirected = CreateBotVersionResponse.AddMember("childDirected", _Boolean)
-
-	CreateBotVersionResponse_enableModelImprovements = CreateBotVersionResponse.AddMember("enableModelImprovements", _Boolean)
-
-	CreateBotVersionResponse_detectSentiment = CreateBotVersionResponse.AddMember("detectSentiment", _Boolean)
-
-	CreateIntentVersionRequest_name = CreateIntentVersionRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	CreateIntentVersionRequest_checksum = CreateIntentVersionRequest.AddMember("checksum", _String)
-
-	CreateIntentVersionResponse_name = CreateIntentVersionResponse.AddMember("name", _IntentName)
-
-	CreateIntentVersionResponse_description = CreateIntentVersionResponse.AddMember("description", _Description)
-
-	CreateIntentVersionResponse_slots = CreateIntentVersionResponse.AddMember("slots", _SlotList)
-
-	CreateIntentVersionResponse_sampleUtterances = CreateIntentVersionResponse.AddMember("sampleUtterances", _IntentUtteranceList)
-
-	CreateIntentVersionResponse_confirmationPrompt = CreateIntentVersionResponse.AddMember("confirmationPrompt", Prompt)
-
-	CreateIntentVersionResponse_rejectionStatement = CreateIntentVersionResponse.AddMember("rejectionStatement", Statement)
-
-	CreateIntentVersionResponse_followUpPrompt = CreateIntentVersionResponse.AddMember("followUpPrompt", FollowUpPrompt)
-
-	CreateIntentVersionResponse_conclusionStatement = CreateIntentVersionResponse.AddMember("conclusionStatement", Statement)
-
-	CreateIntentVersionResponse_dialogCodeHook = CreateIntentVersionResponse.AddMember("dialogCodeHook", CodeHook)
-
-	CreateIntentVersionResponse_fulfillmentActivity = CreateIntentVersionResponse.AddMember("fulfillmentActivity", FulfillmentActivity)
-
-	CreateIntentVersionResponse_parentIntentSignature = CreateIntentVersionResponse.AddMember("parentIntentSignature", _BuiltinIntentSignature)
-
-	CreateIntentVersionResponse_lastUpdatedDate = CreateIntentVersionResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	CreateIntentVersionResponse_createdDate = CreateIntentVersionResponse.AddMember("createdDate", _Timestamp)
-
-	CreateIntentVersionResponse_version = CreateIntentVersionResponse.AddMember("version", _Version)
-
-	CreateIntentVersionResponse_checksum = CreateIntentVersionResponse.AddMember("checksum", _String)
-
-	CreateIntentVersionResponse_kendraConfiguration = CreateIntentVersionResponse.AddMember("kendraConfiguration", KendraConfiguration)
-
-	CreateIntentVersionResponse_inputContexts = CreateIntentVersionResponse.AddMember("inputContexts", _InputContextList)
-
-	CreateIntentVersionResponse_outputContexts = CreateIntentVersionResponse.AddMember("outputContexts", _OutputContextList)
-
-	CreateSlotTypeVersionRequest_name = CreateSlotTypeVersionRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	CreateSlotTypeVersionRequest_checksum = CreateSlotTypeVersionRequest.AddMember("checksum", _String)
-
-	CreateSlotTypeVersionResponse_name = CreateSlotTypeVersionResponse.AddMember("name", _SlotTypeName)
-
-	CreateSlotTypeVersionResponse_description = CreateSlotTypeVersionResponse.AddMember("description", _Description)
-
-	CreateSlotTypeVersionResponse_enumerationValues = CreateSlotTypeVersionResponse.AddMember("enumerationValues", _EnumerationValues)
-
-	CreateSlotTypeVersionResponse_lastUpdatedDate = CreateSlotTypeVersionResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	CreateSlotTypeVersionResponse_createdDate = CreateSlotTypeVersionResponse.AddMember("createdDate", _Timestamp)
-
-	CreateSlotTypeVersionResponse_version = CreateSlotTypeVersionResponse.AddMember("version", _Version)
-
-	CreateSlotTypeVersionResponse_checksum = CreateSlotTypeVersionResponse.AddMember("checksum", _String)
-
-	CreateSlotTypeVersionResponse_valueSelectionStrategy = CreateSlotTypeVersionResponse.AddMember("valueSelectionStrategy", SlotValueSelectionStrategy)
-
-	CreateSlotTypeVersionResponse_parentSlotTypeSignature = CreateSlotTypeVersionResponse.AddMember("parentSlotTypeSignature", _CustomOrBuiltinSlotTypeName)
-
-	CreateSlotTypeVersionResponse_slotTypeConfigurations = CreateSlotTypeVersionResponse.AddMember("slotTypeConfigurations", _SlotTypeConfigurations)
-
-	DeleteBotAliasRequest_name = DeleteBotAliasRequest.AddMember("name", _AliasName, &smithytraits.HTTPLabel{})
-
-	DeleteBotAliasRequest_botName = DeleteBotAliasRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteBotChannelAssociationRequest_name = DeleteBotChannelAssociationRequest.AddMember("name", _BotChannelName, &smithytraits.HTTPLabel{})
-
-	DeleteBotChannelAssociationRequest_botName = DeleteBotChannelAssociationRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteBotChannelAssociationRequest_botAlias = DeleteBotChannelAssociationRequest.AddMember("botAlias", _AliasName, &smithytraits.HTTPLabel{})
-
-	DeleteBotRequest_name = DeleteBotRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteBotVersionRequest_name = DeleteBotVersionRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteBotVersionRequest_version = DeleteBotVersionRequest.AddMember("version", _NumericalVersion, &smithytraits.HTTPLabel{})
-
-	DeleteIntentRequest_name = DeleteIntentRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	DeleteIntentVersionRequest_name = DeleteIntentVersionRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	DeleteIntentVersionRequest_version = DeleteIntentVersionRequest.AddMember("version", _NumericalVersion, &smithytraits.HTTPLabel{})
-
-	DeleteSlotTypeRequest_name = DeleteSlotTypeRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	DeleteSlotTypeVersionRequest_name = DeleteSlotTypeVersionRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	DeleteSlotTypeVersionRequest_version = DeleteSlotTypeVersionRequest.AddMember("version", _NumericalVersion, &smithytraits.HTTPLabel{})
-
-	DeleteUtterancesRequest_botName = DeleteUtterancesRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteUtterancesRequest_userId = DeleteUtterancesRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	GetBotAliasesRequest_botName = GetBotAliasesRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotAliasesRequest_nextToken = GetBotAliasesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBotAliasesRequest_maxResults = GetBotAliasesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBotAliasesRequest_nameContains = GetBotAliasesRequest.AddMember("nameContains", _AliasName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetBotAliasesResponse_BotAliases = GetBotAliasesResponse.AddMember("BotAliases", _BotAliasMetadataList)
-
-	GetBotAliasesResponse_nextToken = GetBotAliasesResponse.AddMember("nextToken", _NextToken)
-
-	GetBotAliasRequest_name = GetBotAliasRequest.AddMember("name", _AliasName, &smithytraits.HTTPLabel{})
-
-	GetBotAliasRequest_botName = GetBotAliasRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotAliasResponse_name = GetBotAliasResponse.AddMember("name", _AliasName)
-
-	GetBotAliasResponse_description = GetBotAliasResponse.AddMember("description", _Description)
-
-	GetBotAliasResponse_botVersion = GetBotAliasResponse.AddMember("botVersion", _Version)
-
-	GetBotAliasResponse_botName = GetBotAliasResponse.AddMember("botName", _BotName)
-
-	GetBotAliasResponse_lastUpdatedDate = GetBotAliasResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	GetBotAliasResponse_createdDate = GetBotAliasResponse.AddMember("createdDate", _Timestamp)
-
-	GetBotAliasResponse_checksum = GetBotAliasResponse.AddMember("checksum", _String)
-
-	GetBotAliasResponse_conversationLogs = GetBotAliasResponse.AddMember("conversationLogs", ConversationLogsResponse)
-
-	GetBotChannelAssociationRequest_name = GetBotChannelAssociationRequest.AddMember("name", _BotChannelName, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationRequest_botName = GetBotChannelAssociationRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationRequest_botAlias = GetBotChannelAssociationRequest.AddMember("botAlias", _AliasName, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationResponse_name = GetBotChannelAssociationResponse.AddMember("name", _BotChannelName)
-
-	GetBotChannelAssociationResponse_description = GetBotChannelAssociationResponse.AddMember("description", _Description)
-
-	GetBotChannelAssociationResponse_botAlias = GetBotChannelAssociationResponse.AddMember("botAlias", _AliasName)
-
-	GetBotChannelAssociationResponse_botName = GetBotChannelAssociationResponse.AddMember("botName", _BotName)
-
-	GetBotChannelAssociationResponse_createdDate = GetBotChannelAssociationResponse.AddMember("createdDate", _Timestamp)
-
-	GetBotChannelAssociationResponse_type = GetBotChannelAssociationResponse.AddMember("type", ChannelType)
-
-	GetBotChannelAssociationResponse_botConfiguration = GetBotChannelAssociationResponse.AddMember("botConfiguration", _ChannelConfigurationMap)
-
-	GetBotChannelAssociationResponse_status = GetBotChannelAssociationResponse.AddMember("status", ChannelStatus)
-
-	GetBotChannelAssociationResponse_failureReason = GetBotChannelAssociationResponse.AddMember("failureReason", _String)
-
-	GetBotChannelAssociationsRequest_botName = GetBotChannelAssociationsRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationsRequest_botAlias = GetBotChannelAssociationsRequest.AddMember("botAlias", _AliasNameOrListAll, &smithytraits.HTTPLabel{})
-
-	GetBotChannelAssociationsRequest_nextToken = GetBotChannelAssociationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBotChannelAssociationsRequest_maxResults = GetBotChannelAssociationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBotChannelAssociationsRequest_nameContains = GetBotChannelAssociationsRequest.AddMember("nameContains", _BotChannelName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetBotChannelAssociationsResponse_botChannelAssociations = GetBotChannelAssociationsResponse.AddMember("botChannelAssociations", _BotChannelAssociationList)
-
-	GetBotChannelAssociationsResponse_nextToken = GetBotChannelAssociationsResponse.AddMember("nextToken", _NextToken)
-
-	GetBotRequest_name = GetBotRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotRequest_versionOrAlias = GetBotRequest.AddMember("versionOrAlias", _String, &smithytraits.HTTPLabel{})
-
-	GetBotResponse_name = GetBotResponse.AddMember("name", _BotName)
-
-	GetBotResponse_description = GetBotResponse.AddMember("description", _Description)
-
-	GetBotResponse_intents = GetBotResponse.AddMember("intents", _IntentList)
-
-	GetBotResponse_enableModelImprovements = GetBotResponse.AddMember("enableModelImprovements", _Boolean)
-
-	GetBotResponse_nluIntentConfidenceThreshold = GetBotResponse.AddMember("nluIntentConfidenceThreshold", _ConfidenceThreshold)
-
-	GetBotResponse_clarificationPrompt = GetBotResponse.AddMember("clarificationPrompt", Prompt)
-
-	GetBotResponse_abortStatement = GetBotResponse.AddMember("abortStatement", Statement)
-
-	GetBotResponse_status = GetBotResponse.AddMember("status", Status)
-
-	GetBotResponse_failureReason = GetBotResponse.AddMember("failureReason", _String)
-
-	GetBotResponse_lastUpdatedDate = GetBotResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	GetBotResponse_createdDate = GetBotResponse.AddMember("createdDate", _Timestamp)
-
-	GetBotResponse_idleSessionTTLInSeconds = GetBotResponse.AddMember("idleSessionTTLInSeconds", _SessionTTL)
-
-	GetBotResponse_voiceId = GetBotResponse.AddMember("voiceId", _String)
-
-	GetBotResponse_checksum = GetBotResponse.AddMember("checksum", _String)
-
-	GetBotResponse_version = GetBotResponse.AddMember("version", _Version)
-
-	GetBotResponse_locale = GetBotResponse.AddMember("locale", Locale)
-
-	GetBotResponse_childDirected = GetBotResponse.AddMember("childDirected", _Boolean)
-
-	GetBotResponse_detectSentiment = GetBotResponse.AddMember("detectSentiment", _Boolean)
-
-	GetBotsRequest_nextToken = GetBotsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBotsRequest_maxResults = GetBotsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBotsRequest_nameContains = GetBotsRequest.AddMember("nameContains", _BotName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetBotsResponse_bots = GetBotsResponse.AddMember("bots", _BotMetadataList)
-
-	GetBotsResponse_nextToken = GetBotsResponse.AddMember("nextToken", _NextToken)
-
-	GetBotVersionsRequest_name = GetBotVersionsRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	GetBotVersionsRequest_nextToken = GetBotVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBotVersionsRequest_maxResults = GetBotVersionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBotVersionsResponse_bots = GetBotVersionsResponse.AddMember("bots", _BotMetadataList)
-
-	GetBotVersionsResponse_nextToken = GetBotVersionsResponse.AddMember("nextToken", _NextToken)
-
-	GetBuiltinIntentRequest_signature = GetBuiltinIntentRequest.AddMember("signature", _BuiltinIntentSignature, &smithytraits.HTTPLabel{})
-
-	GetBuiltinIntentResponse_signature = GetBuiltinIntentResponse.AddMember("signature", _BuiltinIntentSignature)
-
-	GetBuiltinIntentResponse_supportedLocales = GetBuiltinIntentResponse.AddMember("supportedLocales", _LocaleList)
-
-	GetBuiltinIntentResponse_slots = GetBuiltinIntentResponse.AddMember("slots", _BuiltinIntentSlotList)
-
-	GetBuiltinIntentsRequest_locale = GetBuiltinIntentsRequest.AddMember("locale", Locale, &smithytraits.HTTPQuery{Name: "locale"})
-
-	GetBuiltinIntentsRequest_signatureContains = GetBuiltinIntentsRequest.AddMember("signatureContains", _String, &smithytraits.HTTPQuery{Name: "signatureContains"})
-
-	GetBuiltinIntentsRequest_nextToken = GetBuiltinIntentsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBuiltinIntentsRequest_maxResults = GetBuiltinIntentsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBuiltinIntentsResponse_intents = GetBuiltinIntentsResponse.AddMember("intents", _BuiltinIntentMetadataList)
-
-	GetBuiltinIntentsResponse_nextToken = GetBuiltinIntentsResponse.AddMember("nextToken", _NextToken)
-
-	GetBuiltinSlotTypesRequest_locale = GetBuiltinSlotTypesRequest.AddMember("locale", Locale, &smithytraits.HTTPQuery{Name: "locale"})
-
-	GetBuiltinSlotTypesRequest_signatureContains = GetBuiltinSlotTypesRequest.AddMember("signatureContains", _String, &smithytraits.HTTPQuery{Name: "signatureContains"})
-
-	GetBuiltinSlotTypesRequest_nextToken = GetBuiltinSlotTypesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetBuiltinSlotTypesRequest_maxResults = GetBuiltinSlotTypesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetBuiltinSlotTypesResponse_slotTypes = GetBuiltinSlotTypesResponse.AddMember("slotTypes", _BuiltinSlotTypeMetadataList)
-
-	GetBuiltinSlotTypesResponse_nextToken = GetBuiltinSlotTypesResponse.AddMember("nextToken", _NextToken)
-
-	GetExportRequest_name = GetExportRequest.AddMember("name", _Name, &smithytraits.HTTPQuery{Name: "name"})
-
-	GetExportRequest_version = GetExportRequest.AddMember("version", _NumericalVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	GetExportRequest_resourceType = GetExportRequest.AddMember("resourceType", ResourceType, &smithytraits.HTTPQuery{Name: "resourceType"})
-
-	GetExportRequest_exportType = GetExportRequest.AddMember("exportType", ExportType, &smithytraits.HTTPQuery{Name: "exportType"})
-
-	GetExportResponse_name = GetExportResponse.AddMember("name", _Name)
-
-	GetExportResponse_version = GetExportResponse.AddMember("version", _NumericalVersion)
-
-	GetExportResponse_resourceType = GetExportResponse.AddMember("resourceType", ResourceType)
-
-	GetExportResponse_exportType = GetExportResponse.AddMember("exportType", ExportType)
-
-	GetExportResponse_exportStatus = GetExportResponse.AddMember("exportStatus", ExportStatus)
-
-	GetExportResponse_failureReason = GetExportResponse.AddMember("failureReason", _String)
-
-	GetExportResponse_url = GetExportResponse.AddMember("url", _String)
-
-	GetImportRequest_importId = GetImportRequest.AddMember("importId", _String, &smithytraits.HTTPLabel{})
-
-	GetImportResponse_name = GetImportResponse.AddMember("name", _Name)
-
-	GetImportResponse_resourceType = GetImportResponse.AddMember("resourceType", ResourceType)
-
-	GetImportResponse_mergeStrategy = GetImportResponse.AddMember("mergeStrategy", MergeStrategy)
-
-	GetImportResponse_importId = GetImportResponse.AddMember("importId", _String)
-
-	GetImportResponse_importStatus = GetImportResponse.AddMember("importStatus", ImportStatus)
-
-	GetImportResponse_failureReason = GetImportResponse.AddMember("failureReason", _StringList)
-
-	GetImportResponse_createdDate = GetImportResponse.AddMember("createdDate", _Timestamp)
-
-	GetIntentRequest_name = GetIntentRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	GetIntentRequest_version = GetIntentRequest.AddMember("version", _Version, &smithytraits.HTTPLabel{})
-
-	GetIntentResponse_name = GetIntentResponse.AddMember("name", _IntentName)
-
-	GetIntentResponse_description = GetIntentResponse.AddMember("description", _Description)
-
-	GetIntentResponse_slots = GetIntentResponse.AddMember("slots", _SlotList)
-
-	GetIntentResponse_sampleUtterances = GetIntentResponse.AddMember("sampleUtterances", _IntentUtteranceList)
-
-	GetIntentResponse_confirmationPrompt = GetIntentResponse.AddMember("confirmationPrompt", Prompt)
-
-	GetIntentResponse_rejectionStatement = GetIntentResponse.AddMember("rejectionStatement", Statement)
-
-	GetIntentResponse_followUpPrompt = GetIntentResponse.AddMember("followUpPrompt", FollowUpPrompt)
-
-	GetIntentResponse_conclusionStatement = GetIntentResponse.AddMember("conclusionStatement", Statement)
-
-	GetIntentResponse_dialogCodeHook = GetIntentResponse.AddMember("dialogCodeHook", CodeHook)
-
-	GetIntentResponse_fulfillmentActivity = GetIntentResponse.AddMember("fulfillmentActivity", FulfillmentActivity)
-
-	GetIntentResponse_parentIntentSignature = GetIntentResponse.AddMember("parentIntentSignature", _BuiltinIntentSignature)
-
-	GetIntentResponse_lastUpdatedDate = GetIntentResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	GetIntentResponse_createdDate = GetIntentResponse.AddMember("createdDate", _Timestamp)
-
-	GetIntentResponse_version = GetIntentResponse.AddMember("version", _Version)
-
-	GetIntentResponse_checksum = GetIntentResponse.AddMember("checksum", _String)
-
-	GetIntentResponse_kendraConfiguration = GetIntentResponse.AddMember("kendraConfiguration", KendraConfiguration)
-
-	GetIntentResponse_inputContexts = GetIntentResponse.AddMember("inputContexts", _InputContextList)
-
-	GetIntentResponse_outputContexts = GetIntentResponse.AddMember("outputContexts", _OutputContextList)
-
-	GetIntentsRequest_nextToken = GetIntentsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetIntentsRequest_maxResults = GetIntentsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetIntentsRequest_nameContains = GetIntentsRequest.AddMember("nameContains", _IntentName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetIntentsResponse_intents = GetIntentsResponse.AddMember("intents", _IntentMetadataList)
-
-	GetIntentsResponse_nextToken = GetIntentsResponse.AddMember("nextToken", _NextToken)
-
-	GetIntentVersionsRequest_name = GetIntentVersionsRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	GetIntentVersionsRequest_nextToken = GetIntentVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetIntentVersionsRequest_maxResults = GetIntentVersionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetIntentVersionsResponse_intents = GetIntentVersionsResponse.AddMember("intents", _IntentMetadataList)
-
-	GetIntentVersionsResponse_nextToken = GetIntentVersionsResponse.AddMember("nextToken", _NextToken)
-
-	GetMigrationRequest_migrationId = GetMigrationRequest.AddMember("migrationId", _MigrationId, &smithytraits.HTTPLabel{})
-
-	GetMigrationResponse_migrationId = GetMigrationResponse.AddMember("migrationId", _MigrationId)
-
-	GetMigrationResponse_v1BotName = GetMigrationResponse.AddMember("v1BotName", _BotName)
-
-	GetMigrationResponse_v1BotVersion = GetMigrationResponse.AddMember("v1BotVersion", _Version)
-
-	GetMigrationResponse_v1BotLocale = GetMigrationResponse.AddMember("v1BotLocale", Locale)
-
-	GetMigrationResponse_v2BotId = GetMigrationResponse.AddMember("v2BotId", _V2BotId)
-
-	GetMigrationResponse_v2BotRole = GetMigrationResponse.AddMember("v2BotRole", _IamRoleArn)
-
-	GetMigrationResponse_migrationStatus = GetMigrationResponse.AddMember("migrationStatus", MigrationStatus)
-
-	GetMigrationResponse_migrationStrategy = GetMigrationResponse.AddMember("migrationStrategy", MigrationStrategy)
-
-	GetMigrationResponse_migrationTimestamp = GetMigrationResponse.AddMember("migrationTimestamp", _Timestamp)
-
-	GetMigrationResponse_alerts = GetMigrationResponse.AddMember("alerts", _MigrationAlerts)
-
-	GetMigrationsRequest_sortByAttribute = GetMigrationsRequest.AddMember("sortByAttribute", MigrationSortAttribute, &smithytraits.HTTPQuery{Name: "sortByAttribute"})
-
-	GetMigrationsRequest_sortByOrder = GetMigrationsRequest.AddMember("sortByOrder", SortOrder, &smithytraits.HTTPQuery{Name: "sortByOrder"})
-
-	GetMigrationsRequest_v1BotNameContains = GetMigrationsRequest.AddMember("v1BotNameContains", _BotName, &smithytraits.HTTPQuery{Name: "v1BotNameContains"})
-
-	GetMigrationsRequest_migrationStatusEquals = GetMigrationsRequest.AddMember("migrationStatusEquals", MigrationStatus, &smithytraits.HTTPQuery{Name: "migrationStatusEquals"})
-
-	GetMigrationsRequest_maxResults = GetMigrationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetMigrationsRequest_nextToken = GetMigrationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetMigrationsResponse_migrationSummaries = GetMigrationsResponse.AddMember("migrationSummaries", _MigrationSummaryList)
-
-	GetMigrationsResponse_nextToken = GetMigrationsResponse.AddMember("nextToken", _NextToken)
-
-	GetSlotTypeRequest_name = GetSlotTypeRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	GetSlotTypeRequest_version = GetSlotTypeRequest.AddMember("version", _Version, &smithytraits.HTTPLabel{})
-
-	GetSlotTypeResponse_name = GetSlotTypeResponse.AddMember("name", _SlotTypeName)
-
-	GetSlotTypeResponse_description = GetSlotTypeResponse.AddMember("description", _Description)
-
-	GetSlotTypeResponse_enumerationValues = GetSlotTypeResponse.AddMember("enumerationValues", _EnumerationValues)
-
-	GetSlotTypeResponse_lastUpdatedDate = GetSlotTypeResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	GetSlotTypeResponse_createdDate = GetSlotTypeResponse.AddMember("createdDate", _Timestamp)
-
-	GetSlotTypeResponse_version = GetSlotTypeResponse.AddMember("version", _Version)
-
-	GetSlotTypeResponse_checksum = GetSlotTypeResponse.AddMember("checksum", _String)
-
-	GetSlotTypeResponse_valueSelectionStrategy = GetSlotTypeResponse.AddMember("valueSelectionStrategy", SlotValueSelectionStrategy)
-
-	GetSlotTypeResponse_parentSlotTypeSignature = GetSlotTypeResponse.AddMember("parentSlotTypeSignature", _CustomOrBuiltinSlotTypeName)
-
-	GetSlotTypeResponse_slotTypeConfigurations = GetSlotTypeResponse.AddMember("slotTypeConfigurations", _SlotTypeConfigurations)
-
-	GetSlotTypesRequest_nextToken = GetSlotTypesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetSlotTypesRequest_maxResults = GetSlotTypesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetSlotTypesRequest_nameContains = GetSlotTypesRequest.AddMember("nameContains", _SlotTypeName, &smithytraits.HTTPQuery{Name: "nameContains"})
-
-	GetSlotTypesResponse_slotTypes = GetSlotTypesResponse.AddMember("slotTypes", _SlotTypeMetadataList)
-
-	GetSlotTypesResponse_nextToken = GetSlotTypesResponse.AddMember("nextToken", _NextToken)
-
-	GetSlotTypeVersionsRequest_name = GetSlotTypeVersionsRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	GetSlotTypeVersionsRequest_nextToken = GetSlotTypeVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetSlotTypeVersionsRequest_maxResults = GetSlotTypeVersionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetSlotTypeVersionsResponse_slotTypes = GetSlotTypeVersionsResponse.AddMember("slotTypes", _SlotTypeMetadataList)
-
-	GetSlotTypeVersionsResponse_nextToken = GetSlotTypeVersionsResponse.AddMember("nextToken", _NextToken)
-
-	GetUtterancesViewRequest_botName = GetUtterancesViewRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetUtterancesViewRequest_botVersions = GetUtterancesViewRequest.AddMember("botVersions", _BotVersions, &smithytraits.HTTPQuery{Name: "bot_versions"})
-
-	GetUtterancesViewRequest_statusType = GetUtterancesViewRequest.AddMember("statusType", StatusType, &smithytraits.HTTPQuery{Name: "status_type"})
-
-	GetUtterancesViewResponse_botName = GetUtterancesViewResponse.AddMember("botName", _BotName)
-
-	GetUtterancesViewResponse_utterances = GetUtterancesViewResponse.AddMember("utterances", _ListsOfUtterances)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	PutBotAliasRequest_name = PutBotAliasRequest.AddMember("name", _AliasName, &smithytraits.HTTPLabel{})
-
-	PutBotAliasRequest_description = PutBotAliasRequest.AddMember("description", _Description)
-
-	PutBotAliasRequest_botVersion = PutBotAliasRequest.AddMember("botVersion", _Version)
-
-	PutBotAliasRequest_botName = PutBotAliasRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	PutBotAliasRequest_checksum = PutBotAliasRequest.AddMember("checksum", _String)
-
-	PutBotAliasRequest_conversationLogs = PutBotAliasRequest.AddMember("conversationLogs", ConversationLogsRequest)
-
-	PutBotAliasRequest_tags = PutBotAliasRequest.AddMember("tags", _TagList)
-
-	PutBotAliasResponse_name = PutBotAliasResponse.AddMember("name", _AliasName)
-
-	PutBotAliasResponse_description = PutBotAliasResponse.AddMember("description", _Description)
-
-	PutBotAliasResponse_botVersion = PutBotAliasResponse.AddMember("botVersion", _Version)
-
-	PutBotAliasResponse_botName = PutBotAliasResponse.AddMember("botName", _BotName)
-
-	PutBotAliasResponse_lastUpdatedDate = PutBotAliasResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	PutBotAliasResponse_createdDate = PutBotAliasResponse.AddMember("createdDate", _Timestamp)
-
-	PutBotAliasResponse_checksum = PutBotAliasResponse.AddMember("checksum", _String)
-
-	PutBotAliasResponse_conversationLogs = PutBotAliasResponse.AddMember("conversationLogs", ConversationLogsResponse)
-
-	PutBotAliasResponse_tags = PutBotAliasResponse.AddMember("tags", _TagList)
-
-	PutBotRequest_name = PutBotRequest.AddMember("name", _BotName, &smithytraits.HTTPLabel{})
-
-	PutBotRequest_description = PutBotRequest.AddMember("description", _Description)
-
-	PutBotRequest_intents = PutBotRequest.AddMember("intents", _IntentList)
-
-	PutBotRequest_enableModelImprovements = PutBotRequest.AddMember("enableModelImprovements", _Boolean)
-
-	PutBotRequest_nluIntentConfidenceThreshold = PutBotRequest.AddMember("nluIntentConfidenceThreshold", _ConfidenceThreshold)
-
-	PutBotRequest_clarificationPrompt = PutBotRequest.AddMember("clarificationPrompt", Prompt)
-
-	PutBotRequest_abortStatement = PutBotRequest.AddMember("abortStatement", Statement)
-
-	PutBotRequest_idleSessionTTLInSeconds = PutBotRequest.AddMember("idleSessionTTLInSeconds", _SessionTTL)
-
-	PutBotRequest_voiceId = PutBotRequest.AddMember("voiceId", _String)
-
-	PutBotRequest_checksum = PutBotRequest.AddMember("checksum", _String)
-
-	PutBotRequest_processBehavior = PutBotRequest.AddMember("processBehavior", ProcessBehavior)
-
-	PutBotRequest_locale = PutBotRequest.AddMember("locale", Locale)
-
-	PutBotRequest_childDirected = PutBotRequest.AddMember("childDirected", _Boolean)
-
-	PutBotRequest_detectSentiment = PutBotRequest.AddMember("detectSentiment", _Boolean)
-
-	PutBotRequest_createVersion = PutBotRequest.AddMember("createVersion", _Boolean)
-
-	PutBotRequest_tags = PutBotRequest.AddMember("tags", _TagList)
-
-	PutBotResponse_name = PutBotResponse.AddMember("name", _BotName)
-
-	PutBotResponse_description = PutBotResponse.AddMember("description", _Description)
-
-	PutBotResponse_intents = PutBotResponse.AddMember("intents", _IntentList)
-
-	PutBotResponse_enableModelImprovements = PutBotResponse.AddMember("enableModelImprovements", _Boolean)
-
-	PutBotResponse_nluIntentConfidenceThreshold = PutBotResponse.AddMember("nluIntentConfidenceThreshold", _ConfidenceThreshold)
-
-	PutBotResponse_clarificationPrompt = PutBotResponse.AddMember("clarificationPrompt", Prompt)
-
-	PutBotResponse_abortStatement = PutBotResponse.AddMember("abortStatement", Statement)
-
-	PutBotResponse_status = PutBotResponse.AddMember("status", Status)
-
-	PutBotResponse_failureReason = PutBotResponse.AddMember("failureReason", _String)
-
-	PutBotResponse_lastUpdatedDate = PutBotResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	PutBotResponse_createdDate = PutBotResponse.AddMember("createdDate", _Timestamp)
-
-	PutBotResponse_idleSessionTTLInSeconds = PutBotResponse.AddMember("idleSessionTTLInSeconds", _SessionTTL)
-
-	PutBotResponse_voiceId = PutBotResponse.AddMember("voiceId", _String)
-
-	PutBotResponse_checksum = PutBotResponse.AddMember("checksum", _String)
-
-	PutBotResponse_version = PutBotResponse.AddMember("version", _Version)
-
-	PutBotResponse_locale = PutBotResponse.AddMember("locale", Locale)
-
-	PutBotResponse_childDirected = PutBotResponse.AddMember("childDirected", _Boolean)
-
-	PutBotResponse_createVersion = PutBotResponse.AddMember("createVersion", _Boolean)
-
-	PutBotResponse_detectSentiment = PutBotResponse.AddMember("detectSentiment", _Boolean)
-
-	PutBotResponse_tags = PutBotResponse.AddMember("tags", _TagList)
-
-	PutIntentRequest_name = PutIntentRequest.AddMember("name", _IntentName, &smithytraits.HTTPLabel{})
-
-	PutIntentRequest_description = PutIntentRequest.AddMember("description", _Description)
-
-	PutIntentRequest_slots = PutIntentRequest.AddMember("slots", _SlotList)
-
-	PutIntentRequest_sampleUtterances = PutIntentRequest.AddMember("sampleUtterances", _IntentUtteranceList)
-
-	PutIntentRequest_confirmationPrompt = PutIntentRequest.AddMember("confirmationPrompt", Prompt)
-
-	PutIntentRequest_rejectionStatement = PutIntentRequest.AddMember("rejectionStatement", Statement)
-
-	PutIntentRequest_followUpPrompt = PutIntentRequest.AddMember("followUpPrompt", FollowUpPrompt)
-
-	PutIntentRequest_conclusionStatement = PutIntentRequest.AddMember("conclusionStatement", Statement)
-
-	PutIntentRequest_dialogCodeHook = PutIntentRequest.AddMember("dialogCodeHook", CodeHook)
-
-	PutIntentRequest_fulfillmentActivity = PutIntentRequest.AddMember("fulfillmentActivity", FulfillmentActivity)
-
-	PutIntentRequest_parentIntentSignature = PutIntentRequest.AddMember("parentIntentSignature", _BuiltinIntentSignature)
-
-	PutIntentRequest_checksum = PutIntentRequest.AddMember("checksum", _String)
-
-	PutIntentRequest_createVersion = PutIntentRequest.AddMember("createVersion", _Boolean)
-
-	PutIntentRequest_kendraConfiguration = PutIntentRequest.AddMember("kendraConfiguration", KendraConfiguration)
-
-	PutIntentRequest_inputContexts = PutIntentRequest.AddMember("inputContexts", _InputContextList)
-
-	PutIntentRequest_outputContexts = PutIntentRequest.AddMember("outputContexts", _OutputContextList)
-
-	PutIntentResponse_name = PutIntentResponse.AddMember("name", _IntentName)
-
-	PutIntentResponse_description = PutIntentResponse.AddMember("description", _Description)
-
-	PutIntentResponse_slots = PutIntentResponse.AddMember("slots", _SlotList)
-
-	PutIntentResponse_sampleUtterances = PutIntentResponse.AddMember("sampleUtterances", _IntentUtteranceList)
-
-	PutIntentResponse_confirmationPrompt = PutIntentResponse.AddMember("confirmationPrompt", Prompt)
-
-	PutIntentResponse_rejectionStatement = PutIntentResponse.AddMember("rejectionStatement", Statement)
-
-	PutIntentResponse_followUpPrompt = PutIntentResponse.AddMember("followUpPrompt", FollowUpPrompt)
-
-	PutIntentResponse_conclusionStatement = PutIntentResponse.AddMember("conclusionStatement", Statement)
-
-	PutIntentResponse_dialogCodeHook = PutIntentResponse.AddMember("dialogCodeHook", CodeHook)
-
-	PutIntentResponse_fulfillmentActivity = PutIntentResponse.AddMember("fulfillmentActivity", FulfillmentActivity)
-
-	PutIntentResponse_parentIntentSignature = PutIntentResponse.AddMember("parentIntentSignature", _BuiltinIntentSignature)
-
-	PutIntentResponse_lastUpdatedDate = PutIntentResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	PutIntentResponse_createdDate = PutIntentResponse.AddMember("createdDate", _Timestamp)
-
-	PutIntentResponse_version = PutIntentResponse.AddMember("version", _Version)
-
-	PutIntentResponse_checksum = PutIntentResponse.AddMember("checksum", _String)
-
-	PutIntentResponse_createVersion = PutIntentResponse.AddMember("createVersion", _Boolean)
-
-	PutIntentResponse_kendraConfiguration = PutIntentResponse.AddMember("kendraConfiguration", KendraConfiguration)
-
-	PutIntentResponse_inputContexts = PutIntentResponse.AddMember("inputContexts", _InputContextList)
-
-	PutIntentResponse_outputContexts = PutIntentResponse.AddMember("outputContexts", _OutputContextList)
-
-	PutSlotTypeRequest_name = PutSlotTypeRequest.AddMember("name", _SlotTypeName, &smithytraits.HTTPLabel{})
-
-	PutSlotTypeRequest_description = PutSlotTypeRequest.AddMember("description", _Description)
-
-	PutSlotTypeRequest_enumerationValues = PutSlotTypeRequest.AddMember("enumerationValues", _EnumerationValues)
-
-	PutSlotTypeRequest_checksum = PutSlotTypeRequest.AddMember("checksum", _String)
-
-	PutSlotTypeRequest_valueSelectionStrategy = PutSlotTypeRequest.AddMember("valueSelectionStrategy", SlotValueSelectionStrategy)
-
-	PutSlotTypeRequest_createVersion = PutSlotTypeRequest.AddMember("createVersion", _Boolean)
-
-	PutSlotTypeRequest_parentSlotTypeSignature = PutSlotTypeRequest.AddMember("parentSlotTypeSignature", _CustomOrBuiltinSlotTypeName)
-
-	PutSlotTypeRequest_slotTypeConfigurations = PutSlotTypeRequest.AddMember("slotTypeConfigurations", _SlotTypeConfigurations)
-
-	PutSlotTypeResponse_name = PutSlotTypeResponse.AddMember("name", _SlotTypeName)
-
-	PutSlotTypeResponse_description = PutSlotTypeResponse.AddMember("description", _Description)
-
-	PutSlotTypeResponse_enumerationValues = PutSlotTypeResponse.AddMember("enumerationValues", _EnumerationValues)
-
-	PutSlotTypeResponse_lastUpdatedDate = PutSlotTypeResponse.AddMember("lastUpdatedDate", _Timestamp)
-
-	PutSlotTypeResponse_createdDate = PutSlotTypeResponse.AddMember("createdDate", _Timestamp)
-
-	PutSlotTypeResponse_version = PutSlotTypeResponse.AddMember("version", _Version)
-
-	PutSlotTypeResponse_checksum = PutSlotTypeResponse.AddMember("checksum", _String)
-
-	PutSlotTypeResponse_valueSelectionStrategy = PutSlotTypeResponse.AddMember("valueSelectionStrategy", SlotValueSelectionStrategy)
-
-	PutSlotTypeResponse_createVersion = PutSlotTypeResponse.AddMember("createVersion", _Boolean)
-
-	PutSlotTypeResponse_parentSlotTypeSignature = PutSlotTypeResponse.AddMember("parentSlotTypeSignature", _CustomOrBuiltinSlotTypeName)
-
-	PutSlotTypeResponse_slotTypeConfigurations = PutSlotTypeResponse.AddMember("slotTypeConfigurations", _SlotTypeConfigurations)
-
-	StartImportRequest_payload = StartImportRequest.AddMember("payload", _Blob)
-
-	StartImportRequest_resourceType = StartImportRequest.AddMember("resourceType", ResourceType)
-
-	StartImportRequest_mergeStrategy = StartImportRequest.AddMember("mergeStrategy", MergeStrategy)
-
-	StartImportRequest_tags = StartImportRequest.AddMember("tags", _TagList)
-
-	StartImportResponse_name = StartImportResponse.AddMember("name", _Name)
-
-	StartImportResponse_resourceType = StartImportResponse.AddMember("resourceType", ResourceType)
-
-	StartImportResponse_mergeStrategy = StartImportResponse.AddMember("mergeStrategy", MergeStrategy)
-
-	StartImportResponse_importId = StartImportResponse.AddMember("importId", _String)
-
-	StartImportResponse_importStatus = StartImportResponse.AddMember("importStatus", ImportStatus)
-
-	StartImportResponse_tags = StartImportResponse.AddMember("tags", _TagList)
-
-	StartImportResponse_createdDate = StartImportResponse.AddMember("createdDate", _Timestamp)
-
-	StartMigrationRequest_v1BotName = StartMigrationRequest.AddMember("v1BotName", _BotName)
-
-	StartMigrationRequest_v1BotVersion = StartMigrationRequest.AddMember("v1BotVersion", _Version)
-
-	StartMigrationRequest_v2BotName = StartMigrationRequest.AddMember("v2BotName", _V2BotName)
-
-	StartMigrationRequest_v2BotRole = StartMigrationRequest.AddMember("v2BotRole", _IamRoleArn)
-
-	StartMigrationRequest_migrationStrategy = StartMigrationRequest.AddMember("migrationStrategy", MigrationStrategy)
-
-	StartMigrationResponse_v1BotName = StartMigrationResponse.AddMember("v1BotName", _BotName)
-
-	StartMigrationResponse_v1BotVersion = StartMigrationResponse.AddMember("v1BotVersion", _Version)
-
-	StartMigrationResponse_v1BotLocale = StartMigrationResponse.AddMember("v1BotLocale", Locale)
-
-	StartMigrationResponse_v2BotId = StartMigrationResponse.AddMember("v2BotId", _V2BotId)
-
-	StartMigrationResponse_v2BotRole = StartMigrationResponse.AddMember("v2BotRole", _IamRoleArn)
-
-	StartMigrationResponse_migrationId = StartMigrationResponse.AddMember("migrationId", _MigrationId)
-
-	StartMigrationResponse_migrationStrategy = StartMigrationResponse.AddMember("migrationStrategy", MigrationStrategy)
-
-	StartMigrationResponse_migrationTimestamp = StartMigrationResponse.AddMember("migrationTimestamp", _Timestamp)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
+const blob = "" +
+	"DeleteBotChannelAssociationRequestGetBotChannelAssociationsResponseAWSDeepSenseModelBuildingServiceG" +
+	"etBotChannelAssociationResponseGetBotChannelAssociationsRequestGetBotChannelAssociationRequestCreate" +
+	"SlotTypeVersionResponseCreateSlotTypeVersionRequestDeleteSlotTypeVersionRequestnluIntentConfidenceTh" +
+	"resholdBuiltinSlotTypeMetadataListCreateIntentVersionResponseCustomOrBuiltinSlotTypeNameGetBuiltinSl" +
+	"otTypesResponseGetSlotTypeVersionsResponseListTagsForResourceResponseMigrationAlertReferenceURLsPrec" +
+	"onditionFailedExceptionContextTimeToLiveInSecondsCreateIntentVersionRequestDeleteIntentVersionReques" +
+	"tGetBuiltinSlotTypesRequestGetSlotTypeVersionsRequestListTagsForResourceRequestSlotTypeRegexConfigur" +
+	"ationSlotValueSelectionStrategyBotChannelAssociationListBuiltinIntentMetadataListGetBuiltinIntentsRe" +
+	"sponseGetIntentVersionsResponseGetUtterancesViewResponseBuiltinSlotTypeSignatureConversationLogsResp" +
+	"onseCreateBotVersionResponseGetBuiltinIntentResponseGetBuiltinIntentsRequestGetIntentVersionsRequest" +
+	"GetUtterancesViewRequestInternalFailureExceptionChannelConfigurationMapConversationLogsRequestCreate" +
+	"BotVersionRequestDeleteBotVersionRequestDeleteUtterancesRequestFulfillmentActivityTypeGetBuiltinInte" +
+	"ntRequestLogSettingsResponseListenableModelImprovementsidleSessionTTLInSecondsparentSlotTypeSignatur" +
+	"eBuiltinIntentSignatureGetBotVersionsResponseLimitExceededExceptionLogSettingsRequestListMigrationSo" +
+	"rtAttributeResourceInUseExceptionSlotDefaultValueStringSlotTypeConfigurationsStartMigrationResponseb" +
+	"otChannelAssociationsslotTypeConfigurationsvalueElicitationPromptvalueSelectionStrategyAccessDeniedE" +
+	"xceptionBuiltinIntentSlotListDeleteBotAliasRequestDeleteSlotTypeRequestGetBotAliasesResponseGetBotVe" +
+	"rsionsRequestGetMigrationsResponseMigrationAlertDetailsMigrationAlertMessageStartMigrationRequestUnt" +
+	"agResourceResponsemigrationStatusEqualsparentIntentSignatureBotAliasMetadataListGetBotAliasesRequest" +
+	"GetMigrationResponseGetMigrationsRequestGetSlotTypesResponseMigrationSummaryListSlotDefaultValueList" +
+	"SlotDefaultValueSpecUntagResourceRequestBadRequestExceptionDEFAULT_OBFUSCATIONDeleteIntentRequestGet" +
+	"BotAliasResponseGetMigrationRequestGetSlotTypeResponseGetSlotTypesRequestIntentUtteranceListKendraCo" +
+	"nfigurationMIGRATION_DATE_TIMEPutBotAliasResponsePutSlotTypeResponseREADY_BASIC_TESTINGStartImportRe" +
+	"sponseTagResourceResponseclarificationPromptconclusionStatementfulfillmentActivitykendraConfiguratio" +
+	"ntimeToLiveInSecondsAliasNameOrListAllAmazonResourceNameContextTurnsToLiveGetBotAliasRequestGetInten" +
+	"tsResponseGetSlotTypeRequestMigrationAlertTypeObfuscationSettingPutBotAliasRequestPutSlotTypeRequest" +
+	"StartImportRequestTagResourceRequestconfirmationPromptmigrationSummariesmigrationTimestampobfuscatio" +
+	"nSettingregexConfigurationrejectionStatementConflictExceptionEnumerationValuesGetExportResponseGetIm" +
+	"portResponseGetIntentResponseGetIntentsRequestListsOfUtterancesMigrationStrategyNotFoundExceptionOut" +
+	"putContextListOutputContextNamePromptMaxAttemptsPutIntentResponseQueryFilterStringResourceReferenceS" +
+	"lotUtteranceListenumerationValuesmigrationStrategyqueryFilterStringretryAfterSecondssignatureContain" +
+	"sv1BotNameContainsALEXA_SKILLS_KITDeleteBotRequestFAIL_ON_CONFLICTGetExportRequestGetImportRequestGe" +
+	"tIntentRequestInputContextListInputContextNameNumericalVersionOVERWRITE_LATESTPutIntentRequestbotCon" +
+	"figurationconversationLogsdefaultValueListdefaultValueSpecexampleReferencefirstUtteredDatesampleUtte" +
+	"rancessupportedLocalesBotMetadataListCLOUDWATCH_LOGSGetBotsResponseListOfUtteranceMigrationAlertsMig" +
+	"rationStatusProcessBehaviorUPDATE_EXISTINGUtteranceStringdetectSentimentlastUpdatedDatelastUtteredDa" +
+	"teprocessBehaviorslotTypeVersionsortByAttributeutteranceStringBotChannelNameCUSTOM_PAYLOADFollowUpPr" +
+	"omptGetBotResponseGetBotsRequestKendraIndexArnMessageVersionORIGINAL_VALUEPutBotResponseResourcePref" +
+	"ixSlotConstraintTOP_RESOLUTIONabortStatementdialogCodeHookfollowUpPromptmessageVersionoutputContexts" +
+	"resourcePrefixslotConstraintversionOrAliasChannelStatusContentStringGetBotRequestMergeStrategyPutBot" +
+	"RequestRETURN_INTENTReferenceTypeUtteranceDatachildDirectedcreateVersiondistinctUsersfailureReasonin" +
+	"putContextsintentVersionmergeStrategyreferenceTypereferenceURLsExportStatusImportStatusRegexPatternR" +
+	"esourceTypeResponseCardexportStatusimportStatusnameContainsresourceTyperesponseCardv1BotVersionChann" +
+	"elTypeContentTypeDescriptionDestinationGroupNumberIN_PROGRESSMessageListMigrationIdResourceArnSynony" +
+	"mListV1_BOT_NAMEbotVersionscontentTypecreatedDatedescriptiondestinationgroupNumberkendraIndexlogSett" +
+	"ingsmaxAttemptsmigrationIdresourceArnsortByOrderturnsToLivev1BotLocaleBOTCHANNELCREATE_NEWDESCENDING" +
+	"ExportTypeIamRoleArnIntentListIntentNameLocaleListMaxResultsPLAIN_TEXTStatusTypeStringListTWILIO_SMS" +
+	"TagKeyListexportTypeiamRoleArnintentNamemaxResultsstatusTypeutterancesASCENDINGCODE_HOOKCOMPLETEDKms" +
+	"KeyArnLambdaARNNOT_BUILTNextTokenSLOT_TYPESortOrderV2BotNamekmsKeyArnnextTokenslotTypesv2BotNamev2Bo" +
+	"tRoleBOTALIASBUILDINGDETECTEDFACEBOOKOPTIONALPriorityREQUIREDSlotNameTagValuebotAliaschecksumcodeHoo" +
+	"kimportIdmessagesprioritysynonymsBooleanCREATEDLogTypeTagListV2BotIdbotNamedetailsintentslogTypepatt" +
+	"ernpayloadroleArntagKeysv2BotIdvoiceIdES_419FAILEDMISSEDUserIdalertslocalememberpromptuserIdAUDIOCou" +
+	"ntDE_DEEN_AUEN_GBEN_INEN_USERRORES_ESES_USFR_CAFR_FRIT_ITJA_JPKO_KRSLACKcountslotsBlobNONESAVESSMLUn" +
+	"itWARNbotstagstypeKIKkeyuriurlS3"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.lexmodelbuildingservice", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 904, Target: 0, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 334, Target: 1, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 194, Target: 2, Traits: 2, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 3, Traits: 3, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1629, Target: 4, Traits: 4, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 5, Traits: 5, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1117, Target: 6, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 575, Target: 7, Traits: 7, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 575, Target: 8, Traits: 8, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 251, Target: 9, Traits: 9, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 251, Target: 10, Traits: 10, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1140, Target: 11, Traits: 11, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 34, Target: 12, Traits: 12, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1671, Target: 13, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1671, Target: 14, Traits: 14, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 34, Target: 15, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 34, Target: 16, Traits: 16, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3452, Target: 17, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1323, Target: 18, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 781, Target: 19, Traits: 19, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 781, Target: 20, Traits: 20, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 388, Target: 21, Traits: 21, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2778, Target: 22, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2795, Target: 23, Traits: 23, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 806, Target: 24, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2492, Target: 25, Traits: 25, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 806, Target: 26, Traits: 26, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1713, Target: 27, Traits: 27, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1713, Target: 28, Traits: 28, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 415, Target: 29, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1940, Target: 30, Traits: 30, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 415, Target: 31, Traits: 31, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 831, Target: 32, Traits: 32, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 442, Target: 33, Traits: 33, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2230, Target: 34, Traits: 34, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2230, Target: 35, Traits: 35, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2948, Target: 36, Traits: 36, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2249, Target: 37, Traits: 37, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2287, Target: 38, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1477, Target: 39, Traits: 39, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2306, Target: 40, Traits: 40, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1797, Target: 41, Traits: 41, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 67, Target: 42, Traits: 42, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1587, Target: 43, Traits: 43, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3872, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2420, Target: 45, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2420, Target: 46, Traits: 42, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2438, Target: 47, Traits: 42, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2040, Target: 48, Traits: 44, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3872, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5282, Target: 50, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 5033, Target: 51, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1860, Target: 52, Traits: 42, StrLen: 16, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 45, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4416, Target: 428, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3310, Target: 132, Traits: 42, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1860, Target: 61, Traits: 42, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 52, Traits: 42, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6, Target: 63, Traits: 42, StrLen: 21, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 75, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 45, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5314, Target: 111, Traits: 42, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3294, Target: 104, Traits: 45, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4750, Target: 107, Traits: 42, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4085, Target: 398, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 731, Target: 73, Traits: 42, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 63, Traits: 42, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3662, Target: 75, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3422, Target: 76, Traits: 42, StrLen: 11, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4750, Target: 389, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3422, Target: 83, Traits: 42, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 76, Traits: 42, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3103, Target: 85, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1326, Target: 86, Traits: 42, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 428, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 756, Target: 88, Traits: 42, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3084, Target: 93, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 219, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 756, Target: 91, Traits: 42, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 88, Traits: 42, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1301, Target: 93, Traits: 42, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1608, Target: 94, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 398, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1608, Target: 96, Traits: 42, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 94, Traits: 42, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 307, Target: 98, Traits: 42, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3084, Target: 103, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 219, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 307, Target: 101, Traits: 42, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 98, Traits: 42, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 856, Target: 103, Traits: 42, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1048, Target: 104, Traits: 46, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 5321, Target: 398, Traits: 42, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1543, Target: 398, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3942, Target: 107, Traits: 42, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4350, Target: 883, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5040, Target: 883, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5144, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4295, Target: 111, Traits: 42, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4929, Target: 883, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5267, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4690, Target: 883, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5318, Target: 883, Traits: 42, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3850, Target: 116, Traits: 42, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5324, Target: 197, Traits: 42, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3872, Target: 249, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 288, Target: 119, Traits: 42, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 2744, Target: 120, Traits: 47, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3872, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3955, Target: 122, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4306, Target: 123, Traits: 42, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4660, Target: 883, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5294, Target: 883, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3676, Target: 883, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 523, Target: 127, Traits: 42, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2456, Target: 128, Traits: 42, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1071, Target: 129, Traits: 42, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4493, Target: 226, Traits: 42, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4720, Target: 163, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 880, Target: 132, Traits: 42, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4493, Target: 234, Traits: 42, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4720, Target: 163, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5197, Target: 135, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 361, Target: 136, Traits: 42, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4317, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4328, Target: 138, Traits: 42, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3437, Target: 883, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5330, Target: 883, Traits: 42, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2761, Target: 141, Traits: 42, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1543, Target: 427, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5025, Target: 401, Traits: 42, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2761, Target: 144, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 141, Traits: 42, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4163, Target: 146, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4350, Target: 883, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2268, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5144, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4600, Target: 150, Traits: 42, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3118, Target: 883, Traits: 42, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3119, Target: 883, Traits: 42, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3690, Target: 153, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5180, Target: 311, Traits: 42, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2726, Target: 386, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1163, Target: 156, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5314, Target: 159, Traits: 42, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4993, Target: 116, Traits: 42, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1163, Target: 159, Traits: 42, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4007, Target: 883, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4779, Target: 883, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4339, Target: 162, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4610, Target: 163, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4175, Target: 164, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4350, Target: 883, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4788, Target: 883, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5144, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3214, Target: 168, Traits: 42, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 172, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3214, Target: 170, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 168, Traits: 42, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3230, Target: 172, Traits: 42, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 282, Target: 173, Traits: 42, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4730, Target: 186, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4111, Target: 428, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4620, Target: 176, Traits: 42, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 173, Traits: 42, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 763, Target: 178, Traits: 42, StrLen: 14, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 763, Target: 184, Traits: 42, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 178, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4630, Target: 186, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2173, Target: 187, Traits: 42, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 414, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1024, Target: 189, Traits: 48, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3872, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2192, Target: 191, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4482, Target: 195, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3050, Target: 316, Traits: 42, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5110, Target: 336, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3732, Target: 195, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4797, Target: 196, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4806, Target: 197, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1345, Target: 198, Traits: 49, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3067, Target: 398, Traits: 50, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3872, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3467, Target: 201, Traits: 42, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 415, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2846, Target: 203, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 421, Traits: 42, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3415, Target: 205, Traits: 42, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5202, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5207, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5212, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5217, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5222, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5138, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5232, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5237, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5247, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5242, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5252, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5257, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5262, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4640, Target: 219, Traits: 42, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 205, Traits: 42, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1367, Target: 221, Traits: 42, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5089, Target: 236, Traits: 42, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4460, Target: 138, Traits: 42, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4860, Target: 196, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4526, Target: 323, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1367, Target: 226, Traits: 42, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 221, Traits: 42, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1209, Target: 228, Traits: 42, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5089, Target: 236, Traits: 42, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4460, Target: 138, Traits: 42, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4860, Target: 196, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4526, Target: 323, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3900, Target: 327, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1209, Target: 234, Traits: 42, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 228, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5047, Target: 236, Traits: 42, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5192, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4666, Target: 883, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4650, Target: 239, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3981, Target: 240, Traits: 42, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3262, Target: 883, Traits: 42, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3150, Target: 883, Traits: 42, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1769, Target: 243, Traits: 42, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4427, Target: 123, Traits: 42, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4427, Target: 122, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4471, Target: 162, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4361, Target: 247, Traits: 42, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 243, Traits: 42, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3746, Target: 249, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 469, Target: 250, Traits: 42, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5314, Target: 264, Traits: 42, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3872, Target: 258, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5075, Target: 256, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4150, Target: 260, Traits: 42, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1734, Target: 255, Traits: 42, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1734, Target: 256, Traits: 42, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 255, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1755, Target: 258, Traits: 42, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 469, Target: 259, Traits: 42, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 469, Target: 260, Traits: 42, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 259, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3482, Target: 262, Traits: 42, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 250, Traits: 42, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2528, Target: 264, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5227, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5302, Target: 883, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4372, Target: 267, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1389, Target: 268, Traits: 42, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4405, Target: 883, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2211, Target: 883, Traits: 42, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3497, Target: 271, Traits: 42, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4350, Target: 883, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4788, Target: 883, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5144, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2863, Target: 275, Traits: 42, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4580, Target: 883, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3527, Target: 883, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1960, Target: 278, Traits: 42, StrLen: 16, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4515, Target: 267, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3101, Target: 85, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4283, Target: 428, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4559, Target: 205, Traits: 42, StrLen: 11, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5124, Target: 425, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4896, Target: 163, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1818, Target: 271, Traits: 42, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3033, Target: 275, Traits: 42, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2672, Target: 412, Traits: 42, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1960, Target: 288, Traits: 42, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 278, Traits: 42, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 384, Target: 290, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4824, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2880, Target: 292, Traits: 51, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3872, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3246, Target: 294, Traits: 42, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2546, Target: 295, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5286, Target: 883, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2059, Target: 883, Traits: 42, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2897, Target: 298, Traits: 42, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 304, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2401, Target: 127, Traits: 42, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4548, Target: 128, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2897, Target: 302, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 298, Traits: 42, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2914, Target: 304, Traits: 42, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 496, Target: 305, Traits: 52, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3872, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4945, Target: 307, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 3512, Target: 308, Traits: 42, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5290, Target: 883, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4913, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1559, Target: 311, Traits: 42, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5009, Target: 247, Traits: 42, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4504, Target: 315, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4271, Target: 335, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2931, Target: 315, Traits: 42, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2965, Target: 316, Traits: 42, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4020, Target: 317, Traits: 42, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4014, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4408, Target: 883, Traits: 42, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4905, Target: 883, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4570, Target: 883, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4187, Target: 322, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4383, Target: 323, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1411, Target: 324, Traits: 44, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4137, Target: 317, Traits: 42, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3358, Target: 328, Traits: 42, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3788, Target: 327, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2982, Target: 328, Traits: 42, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 290, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4199, Target: 331, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4408, Target: 883, Traits: 42, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4014, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4833, Target: 883, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4211, Target: 335, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5110, Target: 336, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1259, Target: 337, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 200, Target: 338, Traits: 42, StrLen: 4, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 362, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3914, Target: 350, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1521, Target: 136, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3617, Target: 428, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1543, Target: 311, Traits: 42, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5017, Target: 307, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3390, Target: 378, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4271, Target: 335, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2690, Target: 295, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3342, Target: 357, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3802, Target: 350, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4953, Target: 883, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4937, Target: 883, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1433, Target: 353, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3326, Target: 359, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1980, Target: 355, Traits: 42, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 353, Traits: 42, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2000, Target: 357, Traits: 42, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3326, Target: 355, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1433, Target: 359, Traits: 42, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1621, Target: 360, Traits: 42, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 338, Traits: 42, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4961, Target: 362, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1455, Target: 363, Traits: 42, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2708, Target: 376, Traits: 42, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1455, Target: 365, Traits: 42, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 363, Traits: 42, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 314, Target: 367, Traits: 42, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 314, Target: 373, Traits: 42, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 367, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 376, Target: 375, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 679, Target: 376, Traits: 42, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5096, Target: 322, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2999, Target: 378, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 414, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 705, Target: 380, Traits: 42, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3760, Target: 883, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3816, Target: 883, Traits: 42, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4842, Target: 383, Traits: 42, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4770, Target: 883, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4590, Target: 883, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2354, Target: 386, Traits: 42, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5009, Target: 247, Traits: 42, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4271, Target: 335, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1827, Target: 389, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4913, Target: 883, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2268, Target: 883, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2268, Target: 883, Traits: 42, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5144, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4815, Target: 883, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4670, Target: 395, Traits: 42, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4921, Target: 883, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5150, Target: 883, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1449, Target: 398, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4680, Target: 399, Traits: 42, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 398, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4394, Target: 401, Traits: 42, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 427, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 446, Target: 403, Traits: 42, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5321, Target: 406, Traits: 42, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1543, Target: 411, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4700, Target: 406, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4700, Target: 407, Traits: 42, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 406, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5054, Target: 409, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5174, Target: 403, Traits: 42, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4969, Target: 411, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2681, Target: 412, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 5156, Target: 413, Traits: 42, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 834, Target: 414, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4033, Target: 415, Traits: 42, StrLen: 13, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3647, Target: 424, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5272, Target: 135, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4072, Target: 135, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3374, Target: 412, Traits: 42, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3587, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2179, Target: 421, Traits: 42, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4416, Target: 428, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4760, Target: 201, Traits: 42, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3542, Target: 424, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5061, Target: 425, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4851, Target: 426, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 709, Target: 427, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 208, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1094, Target: 429, Traits: 42, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 904, Target: 432, Traits: 42, StrLen: 24, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5082, Target: 176, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2325, Target: 311, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3830, Target: 386, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4750, Target: 389, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4085, Target: 398, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1255, Target: 337, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5131, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5168, Target: 205, Traits: 42, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4046, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1232, Target: 51, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3557, Target: 51, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 549, Target: 450, Traits: 42, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 334, Target: 453, Traits: 42, StrLen: 27, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5277, Target: 360, Traits: 42, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3390, Target: 187, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2636, Target: 311, Traits: 42, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2726, Target: 386, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3858, Target: 153, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2344, Target: 386, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3844, Target: 116, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2363, Target: 156, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1839, Target: 93, Traits: 42, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2382, Target: 191, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4098, Target: 170, Traits: 42, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3886, Target: 302, Traits: 42, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 223, Target: 472, Traits: 42, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 194, Target: 475, Traits: 42, StrLen: 29, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3016, Target: 144, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1565, Target: 380, Traits: 42, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1278, Target: 136, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 365, Traits: 42, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1629, Target: 486, Traits: 42, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 45, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 489, Traits: 42, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 75, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 45, Traits: 53, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3134, Target: 493, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1117, Target: 495, Traits: 42, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 294, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2078, Target: 498, Traits: 42, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 575, Target: 500, Traits: 42, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 294, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1650, Target: 503, Traits: 42, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 251, Target: 505, Traits: 42, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 294, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1140, Target: 508, Traits: 42, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5186, Target: 413, Traits: 53, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1880, Target: 511, Traits: 42, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4247, Target: 45, Traits: 56, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1671, Target: 516, Traits: 42, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1674, Target: 61, Traits: 42, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2474, Target: 519, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 45, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2097, Target: 522, Traits: 42, StrLen: 19, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 45, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4416, Target: 428, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3310, Target: 132, Traits: 42, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 163, Target: 531, Traits: 42, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 75, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 45, Traits: 53, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 99, Target: 535, Traits: 42, StrLen: 32, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 75, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 45, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5314, Target: 111, Traits: 42, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3294, Target: 104, Traits: 45, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4750, Target: 107, Traits: 42, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4085, Target: 398, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 131, Target: 545, Traits: 42, StrLen: 32, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4977, Target: 46, Traits: 53, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4247, Target: 75, Traits: 56, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 34, Target: 551, Traits: 42, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1499, Target: 73, Traits: 42, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3968, Target: 554, Traits: 42, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 398, Traits: 53, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3704, Target: 557, Traits: 42, StrLen: 14, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5082, Target: 176, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1232, Target: 51, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 279, Target: 119, Traits: 42, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2325, Target: 311, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3830, Target: 386, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4750, Target: 389, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4085, Target: 398, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1255, Target: 337, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5131, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5168, Target: 205, Traits: 42, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4046, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3557, Target: 51, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3718, Target: 576, Traits: 42, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4247, Target: 85, Traits: 56, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3452, Target: 580, Traits: 42, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5306, Target: 83, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1692, Target: 583, Traits: 42, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1323, Target: 587, Traits: 42, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5306, Target: 83, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1186, Target: 590, Traits: 42, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3084, Target: 93, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 928, Target: 592, Traits: 42, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3084, Target: 93, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3406, Target: 219, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5277, Target: 96, Traits: 42, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 952, Target: 596, Traits: 42, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5168, Target: 205, Traits: 57, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3084, Target: 398, Traits: 58, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 781, Target: 601, Traits: 42, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5082, Target: 91, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 601, Target: 604, Traits: 42, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5168, Target: 205, Traits: 57, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3084, Target: 398, Traits: 58, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 388, Target: 609, Traits: 42, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4878, Target: 101, Traits: 42, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3166, Target: 612, Traits: 42, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 290, Traits: 59, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 294, Traits: 60, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4259, Target: 331, Traits: 61, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4710, Target: 150, Traits: 62, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2778, Target: 617, Traits: 42, StrLen: 17, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 290, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 294, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4259, Target: 331, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4710, Target: 150, Traits: 42, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4223, Target: 146, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4085, Target: 398, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5327, Target: 398, Traits: 42, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3182, Target: 625, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5001, Target: 398, Traits: 53, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2795, Target: 627, Traits: 42, StrLen: 17, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 290, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4259, Target: 331, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4124, Target: 240, Traits: 42, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5001, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4235, Target: 164, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4085, Target: 399, Traits: 42, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3198, Target: 635, Traits: 42, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2812, Target: 638, Traits: 42, StrLen: 17, Count: 18, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5277, Target: 360, Traits: 42, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3390, Target: 187, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2636, Target: 311, Traits: 42, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2726, Target: 386, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3858, Target: 153, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2344, Target: 386, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3844, Target: 116, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2363, Target: 156, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1839, Target: 93, Traits: 42, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2382, Target: 191, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4098, Target: 170, Traits: 42, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3886, Target: 302, Traits: 42, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2829, Target: 657, Traits: 42, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4247, Target: 186, Traits: 56, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2492, Target: 661, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5082, Target: 184, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 976, Target: 664, Traits: 42, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 806, Target: 668, Traits: 42, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5082, Target: 184, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2116, Target: 671, Traits: 42, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4515, Target: 267, Traits: 53, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1900, Target: 673, Traits: 42, StrLen: 20, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4515, Target: 267, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3101, Target: 85, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4283, Target: 428, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4559, Target: 205, Traits: 42, StrLen: 11, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5124, Target: 425, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4896, Target: 163, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1818, Target: 271, Traits: 42, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3033, Target: 275, Traits: 42, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2672, Target: 412, Traits: 42, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5162, Target: 262, Traits: 42, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1920, Target: 684, Traits: 42, StrLen: 20, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3632, Target: 268, Traits: 63, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4537, Target: 383, Traits: 64, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3101, Target: 85, Traits: 65, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1818, Target: 271, Traits: 66, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1713, Target: 691, Traits: 42, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2654, Target: 288, Traits: 42, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2510, Target: 694, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2135, Target: 697, Traits: 42, StrLen: 19, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3016, Target: 144, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1565, Target: 380, Traits: 42, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1278, Target: 136, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 365, Traits: 42, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2154, Target: 708, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4247, Target: 375, Traits: 56, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1940, Target: 712, Traits: 42, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4878, Target: 373, Traits: 42, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 627, Target: 715, Traits: 42, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 54, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4740, Target: 239, Traits: 55, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 415, Target: 719, Traits: 42, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4878, Target: 373, Traits: 42, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4869, Target: 291, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1000, Target: 722, Traits: 42, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4416, Target: 86, Traits: 67, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4750, Target: 395, Traits: 68, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 831, Target: 726, Traits: 42, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5068, Target: 85, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4760, Target: 203, Traits: 42, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 653, Target: 729, Traits: 42, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4526, Target: 47, Traits: 53, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 442, Target: 731, Traits: 42, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5310, Target: 409, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2564, Target: 733, Traits: 42, StrLen: 18, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 45, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4416, Target: 428, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 53, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3310, Target: 129, Traits: 42, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5310, Target: 409, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2230, Target: 741, Traits: 42, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 45, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4416, Target: 428, Traits: 42, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5068, Target: 85, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3310, Target: 132, Traits: 42, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5310, Target: 409, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3994, Target: 751, Traits: 42, StrLen: 13, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5082, Target: 176, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1232, Target: 51, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 279, Target: 119, Traits: 42, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2325, Target: 311, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3830, Target: 386, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1255, Target: 337, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5131, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3602, Target: 308, Traits: 42, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5168, Target: 205, Traits: 42, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4046, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3557, Target: 51, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4059, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5310, Target: 409, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3774, Target: 768, Traits: 42, StrLen: 14, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 85, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5082, Target: 176, Traits: 42, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1232, Target: 51, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 279, Target: 119, Traits: 42, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2325, Target: 311, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3830, Target: 386, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4750, Target: 389, Traits: 42, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4085, Target: 398, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1255, Target: 337, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5131, Target: 398, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5168, Target: 205, Traits: 42, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4046, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4059, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3557, Target: 51, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5310, Target: 409, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3278, Target: 789, Traits: 42, StrLen: 16, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5277, Target: 360, Traits: 42, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3390, Target: 187, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2636, Target: 311, Traits: 42, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2726, Target: 386, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3858, Target: 153, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2344, Target: 386, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3844, Target: 116, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2363, Target: 156, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1839, Target: 93, Traits: 42, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4059, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2382, Target: 191, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4098, Target: 170, Traits: 42, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3886, Target: 302, Traits: 42, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2948, Target: 806, Traits: 42, StrLen: 17, Count: 19, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 186, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5277, Target: 360, Traits: 42, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3390, Target: 187, Traits: 42, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2636, Target: 311, Traits: 42, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2726, Target: 386, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3858, Target: 153, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2344, Target: 386, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3844, Target: 116, Traits: 42, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2363, Target: 156, Traits: 42, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1839, Target: 93, Traits: 42, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4059, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2382, Target: 191, Traits: 42, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4098, Target: 170, Traits: 42, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3886, Target: 302, Traits: 42, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2582, Target: 826, Traits: 42, StrLen: 18, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 53, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3016, Target: 144, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1565, Target: 380, Traits: 42, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4059, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1278, Target: 136, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 365, Traits: 42, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2249, Target: 835, Traits: 42, StrLen: 19, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 375, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4449, Target: 137, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3016, Target: 144, Traits: 42, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3572, Target: 412, Traits: 42, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3928, Target: 428, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4985, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1565, Target: 380, Traits: 42, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4059, Target: 51, Traits: 42, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1278, Target: 136, Traits: 42, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1521, Target: 365, Traits: 42, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2600, Target: 847, Traits: 42, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5103, Target: 50, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 4259, Target: 331, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4124, Target: 240, Traits: 42, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5310, Target: 409, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2287, Target: 852, Traits: 42, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4247, Target: 290, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4259, Target: 331, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4124, Target: 240, Traits: 42, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5001, Target: 398, Traits: 42, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4235, Target: 164, Traits: 42, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5310, Target: 409, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4438, Target: 412, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1776, Target: 860, Traits: 42, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3101, Target: 85, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4283, Target: 428, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4887, Target: 426, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4896, Target: 163, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3033, Target: 275, Traits: 42, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1477, Target: 866, Traits: 42, StrLen: 22, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3101, Target: 85, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4283, Target: 428, Traits: 42, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4559, Target: 205, Traits: 42, StrLen: 11, Count: 13, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5124, Target: 425, Traits: 42, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4896, Target: 163, Traits: 42, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4515, Target: 267, Traits: 42, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3033, Target: 275, Traits: 42, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2672, Target: 412, Traits: 42, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2618, Target: 875, Traits: 42, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4526, Target: 47, Traits: 53, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5310, Target: 409, Traits: 42, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2306, Target: 878, Traits: 42, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2020, Target: 879, Traits: 42, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4526, Target: 47, Traits: 53, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5117, Target: 407, Traits: 69, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1797, Target: 882, Traits: 42, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5298, Target: 883, Traits: 42, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/bots/{name}/versions",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/intents/{name}/versions",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/slottypes/{name}/versions",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/bots/{name}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/bots/{botName}/aliases/{name}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/bots/{botName}/aliases/{botAlias}/channels/{name}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/bots/{name}/versions/{version}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/intents/{name}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/intents/{name}/versions/{version}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/slottypes/{name}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/slottypes/{name}/version/{version}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/bots/{botName}/utterances/{userId}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/bots/{name}/versions/{versionOrAlias}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/bots/{botName}/aliases/{name}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/bots/{botName}/aliases",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/bots/{botName}/aliases/{botAlias}/channels/{name}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/bots/{botName}/aliases/{botAlias}/channels",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/bots",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/bots/{name}/versions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/builtins/intents/{signature}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/builtins/intents",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/builtins/slottypes",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/exports",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/imports/{importId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/intents/{name}/versions/{version}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/intents",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/intents/{name}/versions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/migrations/{migrationId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/migrations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/slottypes/{name}/versions/{version}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/slottypes",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/slottypes/{name}/versions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/bots/{botName}/utterances?view=aggregation",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/bots/{name}/versions/$LATEST",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/bots/{botName}/aliases/{name}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/intents/{name}/versions/$LATEST",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/slottypes/{name}/versions/$LATEST",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/imports",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/migrations",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 412}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nameContains"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "locale"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signatureContains"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "version"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceType"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "exportType"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortByAttribute"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortByOrder"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "v1BotNameContains"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "migrationStatusEquals"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "bot_versions"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status_type"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [884]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+}
+
+var CreateBotVersion = &handles[0]
+
+var CreateIntentVersion = &handles[1]
+
+var CreateSlotTypeVersion = &handles[2]
+
+var DeleteBot = &handles[3]
+
+var DeleteBotAlias = &handles[4]
+
+var DeleteBotChannelAssociation = &handles[5]
+
+var DeleteBotVersion = &handles[6]
+
+var DeleteIntent = &handles[7]
+
+var DeleteIntentVersion = &handles[8]
+
+var DeleteSlotType = &handles[9]
+
+var DeleteSlotTypeVersion = &handles[10]
+
+var DeleteUtterances = &handles[11]
+
+var GetBot = &handles[12]
+
+var GetBotAlias = &handles[13]
+
+var GetBotAliases = &handles[14]
+
+var GetBotChannelAssociation = &handles[15]
+
+var GetBotChannelAssociations = &handles[16]
+
+var GetBots = &handles[17]
+
+var GetBotVersions = &handles[18]
+
+var GetBuiltinIntent = &handles[19]
+
+var GetBuiltinIntents = &handles[20]
+
+var GetBuiltinSlotTypes = &handles[21]
+
+var GetExport = &handles[22]
+
+var GetImport = &handles[23]
+
+var GetIntent = &handles[24]
+
+var GetIntents = &handles[25]
+
+var GetIntentVersions = &handles[26]
+
+var GetMigration = &handles[27]
+
+var GetMigrations = &handles[28]
+
+var GetSlotType = &handles[29]
+
+var GetSlotTypes = &handles[30]
+
+var GetSlotTypeVersions = &handles[31]
+
+var GetUtterancesView = &handles[32]
+
+var ListTagsForResource = &handles[33]
+
+var PutBot = &handles[34]
+
+var PutBotAlias = &handles[35]
+
+var PutIntent = &handles[36]
+
+var PutSlotType = &handles[37]
+
+var StartImport = &handles[38]
+
+var StartMigration = &handles[39]
+
+var TagResource = &handles[40]
+
+var UntagResource = &handles[41]
+
+var _AWSDeepSenseModelBuildingService = &handles[42]
+
+var AccessDeniedException = &handles[43]
+var AccessDeniedException_message = &handles[44]
+
+var _AliasName = &handles[45]
+
+var _AliasNameOrListAll = &handles[46]
+
+var _AmazonResourceName = &handles[47]
+
+var BadRequestException = &handles[48]
+var BadRequestException_message = &handles[49]
+
+var _Blob = &handles[50]
+
+var _Boolean = &handles[51]
+
+var BotAliasMetadata = &handles[52]
+var BotAliasMetadata_name = &handles[53]
+var BotAliasMetadata_description = &handles[54]
+var BotAliasMetadata_botVersion = &handles[55]
+var BotAliasMetadata_botName = &handles[56]
+var BotAliasMetadata_lastUpdatedDate = &handles[57]
+var BotAliasMetadata_createdDate = &handles[58]
+var BotAliasMetadata_checksum = &handles[59]
+var BotAliasMetadata_conversationLogs = &handles[60]
+
+var _BotAliasMetadataList = &handles[61]
+var _BotAliasMetadataList_member = &handles[62]
+
+var BotChannelAssociation = &handles[63]
+var BotChannelAssociation_name = &handles[64]
+var BotChannelAssociation_description = &handles[65]
+var BotChannelAssociation_botAlias = &handles[66]
+var BotChannelAssociation_botName = &handles[67]
+var BotChannelAssociation_createdDate = &handles[68]
+var BotChannelAssociation_type = &handles[69]
+var BotChannelAssociation_botConfiguration = &handles[70]
+var BotChannelAssociation_status = &handles[71]
+var BotChannelAssociation_failureReason = &handles[72]
+
+var _BotChannelAssociationList = &handles[73]
+var _BotChannelAssociationList_member = &handles[74]
+
+var _BotChannelName = &handles[75]
+
+var BotMetadata = &handles[76]
+var BotMetadata_name = &handles[77]
+var BotMetadata_description = &handles[78]
+var BotMetadata_status = &handles[79]
+var BotMetadata_lastUpdatedDate = &handles[80]
+var BotMetadata_createdDate = &handles[81]
+var BotMetadata_version = &handles[82]
+
+var _BotMetadataList = &handles[83]
+var _BotMetadataList_member = &handles[84]
+
+var _BotName = &handles[85]
+
+var _BotVersions = &handles[86]
+var _BotVersions_member = &handles[87]
+
+var BuiltinIntentMetadata = &handles[88]
+var BuiltinIntentMetadata_signature = &handles[89]
+var BuiltinIntentMetadata_supportedLocales = &handles[90]
+
+var _BuiltinIntentMetadataList = &handles[91]
+var _BuiltinIntentMetadataList_member = &handles[92]
+
+var _BuiltinIntentSignature = &handles[93]
+
+var BuiltinIntentSlot = &handles[94]
+var BuiltinIntentSlot_name = &handles[95]
+
+var _BuiltinIntentSlotList = &handles[96]
+var _BuiltinIntentSlotList_member = &handles[97]
+
+var BuiltinSlotTypeMetadata = &handles[98]
+var BuiltinSlotTypeMetadata_signature = &handles[99]
+var BuiltinSlotTypeMetadata_supportedLocales = &handles[100]
+
+var _BuiltinSlotTypeMetadataList = &handles[101]
+var _BuiltinSlotTypeMetadataList_member = &handles[102]
+
+var _BuiltinSlotTypeSignature = &handles[103]
+
+var _ChannelConfigurationMap = &handles[104]
+var _ChannelConfigurationMap_key = &handles[105]
+var _ChannelConfigurationMap_value = &handles[106]
+
+var ChannelStatus = &handles[107]
+var ChannelStatus_IN_PROGRESS = &handles[108]
+var ChannelStatus_CREATED = &handles[109]
+var ChannelStatus_FAILED = &handles[110]
+
+var ChannelType = &handles[111]
+var ChannelType_FACEBOOK = &handles[112]
+var ChannelType_SLACK = &handles[113]
+var ChannelType_TWILIO_SMS = &handles[114]
+var ChannelType_KIK = &handles[115]
+
+var CodeHook = &handles[116]
+var CodeHook_uri = &handles[117]
+var CodeHook_messageVersion = &handles[118]
+
+var _ConfidenceThreshold = &handles[119]
+
+var ConflictException = &handles[120]
+var ConflictException_message = &handles[121]
+
+var _ContentString = &handles[122]
+
+var ContentType = &handles[123]
+var ContentType_PLAIN_TEXT = &handles[124]
+var ContentType_SSML = &handles[125]
+var ContentType_CUSTOM_PAYLOAD = &handles[126]
+
+var _ContextTimeToLiveInSeconds = &handles[127]
+
+var _ContextTurnsToLive = &handles[128]
+
+var ConversationLogsRequest = &handles[129]
+var ConversationLogsRequest_logSettings = &handles[130]
+var ConversationLogsRequest_iamRoleArn = &handles[131]
+
+var ConversationLogsResponse = &handles[132]
+var ConversationLogsResponse_logSettings = &handles[133]
+var ConversationLogsResponse_iamRoleArn = &handles[134]
+
+var _Count = &handles[135]
+
+var _CustomOrBuiltinSlotTypeName = &handles[136]
+
+var _Description = &handles[137]
+
+var Destination = &handles[138]
+var Destination_CLOUDWATCH_LOGS = &handles[139]
+var Destination_S3 = &handles[140]
+
+var EnumerationValue = &handles[141]
+var EnumerationValue_value = &handles[142]
+var EnumerationValue_synonyms = &handles[143]
+
+var _EnumerationValues = &handles[144]
+var _EnumerationValues_member = &handles[145]
+
+var ExportStatus = &handles[146]
+var ExportStatus_IN_PROGRESS = &handles[147]
+var ExportStatus_READY = &handles[148]
+var ExportStatus_FAILED = &handles[149]
+
+var ExportType = &handles[150]
+var ExportType_ALEXA_SKILLS_KIT = &handles[151]
+var ExportType_LEX = &handles[152]
+
+var FollowUpPrompt = &handles[153]
+var FollowUpPrompt_prompt = &handles[154]
+var FollowUpPrompt_rejectionStatement = &handles[155]
+
+var FulfillmentActivity = &handles[156]
+var FulfillmentActivity_type = &handles[157]
+var FulfillmentActivity_codeHook = &handles[158]
+
+var FulfillmentActivityType = &handles[159]
+var FulfillmentActivityType_RETURN_INTENT = &handles[160]
+var FulfillmentActivityType_CODE_HOOK = &handles[161]
+
+var _GroupNumber = &handles[162]
+
+var _IamRoleArn = &handles[163]
+
+var ImportStatus = &handles[164]
+var ImportStatus_IN_PROGRESS = &handles[165]
+var ImportStatus_COMPLETE = &handles[166]
+var ImportStatus_FAILED = &handles[167]
+
+var InputContext = &handles[168]
+var InputContext_name = &handles[169]
+
+var _InputContextList = &handles[170]
+var _InputContextList_member = &handles[171]
+
+var _InputContextName = &handles[172]
+
+var Intent = &handles[173]
+var Intent_intentName = &handles[174]
+var Intent_intentVersion = &handles[175]
+
+var _IntentList = &handles[176]
+var _IntentList_member = &handles[177]
+
+var IntentMetadata = &handles[178]
+var IntentMetadata_name = &handles[179]
+var IntentMetadata_description = &handles[180]
+var IntentMetadata_lastUpdatedDate = &handles[181]
+var IntentMetadata_createdDate = &handles[182]
+var IntentMetadata_version = &handles[183]
+
+var _IntentMetadataList = &handles[184]
+var _IntentMetadataList_member = &handles[185]
+
+var _IntentName = &handles[186]
+
+var _IntentUtteranceList = &handles[187]
+var _IntentUtteranceList_member = &handles[188]
+
+var InternalFailureException = &handles[189]
+var InternalFailureException_message = &handles[190]
+
+var KendraConfiguration = &handles[191]
+var KendraConfiguration_kendraIndex = &handles[192]
+var KendraConfiguration_queryFilterString = &handles[193]
+var KendraConfiguration_role = &handles[194]
+
+var _KendraIndexArn = &handles[195]
+
+var _KmsKeyArn = &handles[196]
+
+var _LambdaARN = &handles[197]
+
+var LimitExceededException = &handles[198]
+var LimitExceededException_retryAfterSeconds = &handles[199]
+var LimitExceededException_message = &handles[200]
+
+var _ListOfUtterance = &handles[201]
+var _ListOfUtterance_member = &handles[202]
+
+var _ListsOfUtterances = &handles[203]
+var _ListsOfUtterances_member = &handles[204]
+
+var Locale = &handles[205]
+var Locale_DE_DE = &handles[206]
+var Locale_EN_AU = &handles[207]
+var Locale_EN_GB = &handles[208]
+var Locale_EN_IN = &handles[209]
+var Locale_EN_US = &handles[210]
+var Locale_ES_419 = &handles[211]
+var Locale_ES_ES = &handles[212]
+var Locale_ES_US = &handles[213]
+var Locale_FR_FR = &handles[214]
+var Locale_FR_CA = &handles[215]
+var Locale_IT_IT = &handles[216]
+var Locale_JA_JP = &handles[217]
+var Locale_KO_KR = &handles[218]
+
+var _LocaleList = &handles[219]
+var _LocaleList_member = &handles[220]
+
+var LogSettingsRequest = &handles[221]
+var LogSettingsRequest_logType = &handles[222]
+var LogSettingsRequest_destination = &handles[223]
+var LogSettingsRequest_kmsKeyArn = &handles[224]
+var LogSettingsRequest_resourceArn = &handles[225]
+
+var _LogSettingsRequestList = &handles[226]
+var _LogSettingsRequestList_member = &handles[227]
+
+var LogSettingsResponse = &handles[228]
+var LogSettingsResponse_logType = &handles[229]
+var LogSettingsResponse_destination = &handles[230]
+var LogSettingsResponse_kmsKeyArn = &handles[231]
+var LogSettingsResponse_resourceArn = &handles[232]
+var LogSettingsResponse_resourcePrefix = &handles[233]
+
+var _LogSettingsResponseList = &handles[234]
+var _LogSettingsResponseList_member = &handles[235]
+
+var LogType = &handles[236]
+var LogType_AUDIO = &handles[237]
+var LogType_TEXT = &handles[238]
+
+var _MaxResults = &handles[239]
+
+var MergeStrategy = &handles[240]
+var MergeStrategy_OVERWRITE_LATEST = &handles[241]
+var MergeStrategy_FAIL_ON_CONFLICT = &handles[242]
+
+var Message = &handles[243]
+var Message_contentType = &handles[244]
+var Message_content = &handles[245]
+var Message_groupNumber = &handles[246]
+
+var _MessageList = &handles[247]
+var _MessageList_member = &handles[248]
+
+var _MessageVersion = &handles[249]
+
+var MigrationAlert = &handles[250]
+var MigrationAlert_type = &handles[251]
+var MigrationAlert_message = &handles[252]
+var MigrationAlert_details = &handles[253]
+var MigrationAlert_referenceURLs = &handles[254]
+
+var _MigrationAlertDetail = &handles[255]
+
+var _MigrationAlertDetails = &handles[256]
+var _MigrationAlertDetails_member = &handles[257]
+
+var _MigrationAlertMessage = &handles[258]
+
+var _MigrationAlertReferenceURL = &handles[259]
+
+var _MigrationAlertReferenceURLs = &handles[260]
+var _MigrationAlertReferenceURLs_member = &handles[261]
+
+var _MigrationAlerts = &handles[262]
+var _MigrationAlerts_member = &handles[263]
+
+var MigrationAlertType = &handles[264]
+var MigrationAlertType_ERROR = &handles[265]
+var MigrationAlertType_WARN = &handles[266]
+
+var _MigrationId = &handles[267]
+
+var MigrationSortAttribute = &handles[268]
+var MigrationSortAttribute_V1_BOT_NAME = &handles[269]
+var MigrationSortAttribute_MIGRATION_DATE_TIME = &handles[270]
+
+var MigrationStatus = &handles[271]
+var MigrationStatus_IN_PROGRESS = &handles[272]
+var MigrationStatus_COMPLETED = &handles[273]
+var MigrationStatus_FAILED = &handles[274]
+
+var MigrationStrategy = &handles[275]
+var MigrationStrategy_CREATE_NEW = &handles[276]
+var MigrationStrategy_UPDATE_EXISTING = &handles[277]
+
+var MigrationSummary = &handles[278]
+var MigrationSummary_migrationId = &handles[279]
+var MigrationSummary_v1BotName = &handles[280]
+var MigrationSummary_v1BotVersion = &handles[281]
+var MigrationSummary_v1BotLocale = &handles[282]
+var MigrationSummary_v2BotId = &handles[283]
+var MigrationSummary_v2BotRole = &handles[284]
+var MigrationSummary_migrationStatus = &handles[285]
+var MigrationSummary_migrationStrategy = &handles[286]
+var MigrationSummary_migrationTimestamp = &handles[287]
+
+var _MigrationSummaryList = &handles[288]
+var _MigrationSummaryList_member = &handles[289]
+
+var _Name = &handles[290]
+
+var _NextToken = &handles[291]
+
+var NotFoundException = &handles[292]
+var NotFoundException_message = &handles[293]
+
+var _NumericalVersion = &handles[294]
+
+var ObfuscationSetting = &handles[295]
+var ObfuscationSetting_NONE = &handles[296]
+var ObfuscationSetting_DEFAULT_OBFUSCATION = &handles[297]
+
+var OutputContext = &handles[298]
+var OutputContext_name = &handles[299]
+var OutputContext_timeToLiveInSeconds = &handles[300]
+var OutputContext_turnsToLive = &handles[301]
+
+var _OutputContextList = &handles[302]
+var _OutputContextList_member = &handles[303]
+
+var _OutputContextName = &handles[304]
+
+var PreconditionFailedException = &handles[305]
+var PreconditionFailedException_message = &handles[306]
+
+var _Priority = &handles[307]
+
+var ProcessBehavior = &handles[308]
+var ProcessBehavior_SAVE = &handles[309]
+var ProcessBehavior_BUILD = &handles[310]
+
+var Prompt = &handles[311]
+var Prompt_messages = &handles[312]
+var Prompt_maxAttempts = &handles[313]
+var Prompt_responseCard = &handles[314]
+
+var _PromptMaxAttempts = &handles[315]
+
+var _QueryFilterString = &handles[316]
+
+var ReferenceType = &handles[317]
+var ReferenceType_INTENT = &handles[318]
+var ReferenceType_BOT = &handles[319]
+var ReferenceType_BOTALIAS = &handles[320]
+var ReferenceType_BOTCHANNEL = &handles[321]
+
+var _RegexPattern = &handles[322]
+
+var _ResourceArn = &handles[323]
+
+var ResourceInUseException = &handles[324]
+var ResourceInUseException_referenceType = &handles[325]
+var ResourceInUseException_exampleReference = &handles[326]
+
+var _ResourcePrefix = &handles[327]
+
+var ResourceReference = &handles[328]
+var ResourceReference_name = &handles[329]
+var ResourceReference_version = &handles[330]
+
+var ResourceType = &handles[331]
+var ResourceType_BOT = &handles[332]
+var ResourceType_INTENT = &handles[333]
+var ResourceType_SLOT_TYPE = &handles[334]
+
+var _ResponseCard = &handles[335]
+
+var _roleArn = &handles[336]
+
+var _SessionTTL = &handles[337]
+
+var Slot = &handles[338]
+var Slot_name = &handles[339]
+var Slot_description = &handles[340]
+var Slot_slotConstraint = &handles[341]
+var Slot_slotType = &handles[342]
+var Slot_slotTypeVersion = &handles[343]
+var Slot_valueElicitationPrompt = &handles[344]
+var Slot_priority = &handles[345]
+var Slot_sampleUtterances = &handles[346]
+var Slot_responseCard = &handles[347]
+var Slot_obfuscationSetting = &handles[348]
+var Slot_defaultValueSpec = &handles[349]
+
+var SlotConstraint = &handles[350]
+var SlotConstraint_REQUIRED = &handles[351]
+var SlotConstraint_OPTIONAL = &handles[352]
+
+var SlotDefaultValue = &handles[353]
+var SlotDefaultValue_defaultValue = &handles[354]
+
+var _SlotDefaultValueList = &handles[355]
+var _SlotDefaultValueList_member = &handles[356]
+
+var SlotDefaultValueSpec = &handles[357]
+var SlotDefaultValueSpec_defaultValueList = &handles[358]
+
+var _SlotDefaultValueString = &handles[359]
+
+var _SlotList = &handles[360]
+var _SlotList_member = &handles[361]
+
+var _SlotName = &handles[362]
+
+var SlotTypeConfiguration = &handles[363]
+var SlotTypeConfiguration_regexConfiguration = &handles[364]
+
+var _SlotTypeConfigurations = &handles[365]
+var _SlotTypeConfigurations_member = &handles[366]
+
+var SlotTypeMetadata = &handles[367]
+var SlotTypeMetadata_name = &handles[368]
+var SlotTypeMetadata_description = &handles[369]
+var SlotTypeMetadata_lastUpdatedDate = &handles[370]
+var SlotTypeMetadata_createdDate = &handles[371]
+var SlotTypeMetadata_version = &handles[372]
+
+var _SlotTypeMetadataList = &handles[373]
+var _SlotTypeMetadataList_member = &handles[374]
+
+var _SlotTypeName = &handles[375]
+
+var SlotTypeRegexConfiguration = &handles[376]
+var SlotTypeRegexConfiguration_pattern = &handles[377]
+
+var _SlotUtteranceList = &handles[378]
+var _SlotUtteranceList_member = &handles[379]
+
+var SlotValueSelectionStrategy = &handles[380]
+var SlotValueSelectionStrategy_ORIGINAL_VALUE = &handles[381]
+var SlotValueSelectionStrategy_TOP_RESOLUTION = &handles[382]
+
+var SortOrder = &handles[383]
+var SortOrder_ASCENDING = &handles[384]
+var SortOrder_DESCENDING = &handles[385]
+
+var Statement = &handles[386]
+var Statement_messages = &handles[387]
+var Statement_responseCard = &handles[388]
+
+var Status = &handles[389]
+var Status_BUILDING = &handles[390]
+var Status_READY = &handles[391]
+var Status_READY_BASIC_TESTING = &handles[392]
+var Status_FAILED = &handles[393]
+var Status_NOT_BUILT = &handles[394]
+
+var StatusType = &handles[395]
+var StatusType_DETECTED = &handles[396]
+var StatusType_MISSED = &handles[397]
+
+var _String = &handles[398]
+
+var _StringList = &handles[399]
+var _StringList_member = &handles[400]
+
+var _SynonymList = &handles[401]
+var _SynonymList_member = &handles[402]
+
+var Tag = &handles[403]
+var Tag_key = &handles[404]
+var Tag_value = &handles[405]
+
+var _TagKey = &handles[406]
+
+var _TagKeyList = &handles[407]
+var _TagKeyList_member = &handles[408]
+
+var _TagList = &handles[409]
+var _TagList_member = &handles[410]
+
+var _TagValue = &handles[411]
+
+var _Timestamp = &handles[412]
+
+var _UserId = &handles[413]
+
+var _Utterance = &handles[414]
+
+var UtteranceData = &handles[415]
+var UtteranceData_utteranceString = &handles[416]
+var UtteranceData_count = &handles[417]
+var UtteranceData_distinctUsers = &handles[418]
+var UtteranceData_firstUtteredDate = &handles[419]
+var UtteranceData_lastUtteredDate = &handles[420]
+
+var UtteranceList = &handles[421]
+var UtteranceList_botVersion = &handles[422]
+var UtteranceList_utterances = &handles[423]
+
+var _UtteranceString = &handles[424]
+
+var _V2BotId = &handles[425]
+
+var _V2BotName = &handles[426]
+
+var _Value = &handles[427]
+
+var _Version = &handles[428]
+
+var CreateBotVersionRequest = &handles[429]
+var CreateBotVersionRequest_name = &handles[430]
+var CreateBotVersionRequest_checksum = &handles[431]
+
+var CreateBotVersionResponse = &handles[432]
+var CreateBotVersionResponse_name = &handles[433]
+var CreateBotVersionResponse_description = &handles[434]
+var CreateBotVersionResponse_intents = &handles[435]
+var CreateBotVersionResponse_clarificationPrompt = &handles[436]
+var CreateBotVersionResponse_abortStatement = &handles[437]
+var CreateBotVersionResponse_status = &handles[438]
+var CreateBotVersionResponse_failureReason = &handles[439]
+var CreateBotVersionResponse_lastUpdatedDate = &handles[440]
+var CreateBotVersionResponse_createdDate = &handles[441]
+var CreateBotVersionResponse_idleSessionTTLInSeconds = &handles[442]
+var CreateBotVersionResponse_voiceId = &handles[443]
+var CreateBotVersionResponse_checksum = &handles[444]
+var CreateBotVersionResponse_version = &handles[445]
+var CreateBotVersionResponse_locale = &handles[446]
+var CreateBotVersionResponse_childDirected = &handles[447]
+var CreateBotVersionResponse_enableModelImprovements = &handles[448]
+var CreateBotVersionResponse_detectSentiment = &handles[449]
+
+var CreateIntentVersionRequest = &handles[450]
+var CreateIntentVersionRequest_name = &handles[451]
+var CreateIntentVersionRequest_checksum = &handles[452]
+
+var CreateIntentVersionResponse = &handles[453]
+var CreateIntentVersionResponse_name = &handles[454]
+var CreateIntentVersionResponse_description = &handles[455]
+var CreateIntentVersionResponse_slots = &handles[456]
+var CreateIntentVersionResponse_sampleUtterances = &handles[457]
+var CreateIntentVersionResponse_confirmationPrompt = &handles[458]
+var CreateIntentVersionResponse_rejectionStatement = &handles[459]
+var CreateIntentVersionResponse_followUpPrompt = &handles[460]
+var CreateIntentVersionResponse_conclusionStatement = &handles[461]
+var CreateIntentVersionResponse_dialogCodeHook = &handles[462]
+var CreateIntentVersionResponse_fulfillmentActivity = &handles[463]
+var CreateIntentVersionResponse_parentIntentSignature = &handles[464]
+var CreateIntentVersionResponse_lastUpdatedDate = &handles[465]
+var CreateIntentVersionResponse_createdDate = &handles[466]
+var CreateIntentVersionResponse_version = &handles[467]
+var CreateIntentVersionResponse_checksum = &handles[468]
+var CreateIntentVersionResponse_kendraConfiguration = &handles[469]
+var CreateIntentVersionResponse_inputContexts = &handles[470]
+var CreateIntentVersionResponse_outputContexts = &handles[471]
+
+var CreateSlotTypeVersionRequest = &handles[472]
+var CreateSlotTypeVersionRequest_name = &handles[473]
+var CreateSlotTypeVersionRequest_checksum = &handles[474]
+
+var CreateSlotTypeVersionResponse = &handles[475]
+var CreateSlotTypeVersionResponse_name = &handles[476]
+var CreateSlotTypeVersionResponse_description = &handles[477]
+var CreateSlotTypeVersionResponse_enumerationValues = &handles[478]
+var CreateSlotTypeVersionResponse_lastUpdatedDate = &handles[479]
+var CreateSlotTypeVersionResponse_createdDate = &handles[480]
+var CreateSlotTypeVersionResponse_version = &handles[481]
+var CreateSlotTypeVersionResponse_checksum = &handles[482]
+var CreateSlotTypeVersionResponse_valueSelectionStrategy = &handles[483]
+var CreateSlotTypeVersionResponse_parentSlotTypeSignature = &handles[484]
+var CreateSlotTypeVersionResponse_slotTypeConfigurations = &handles[485]
+
+var DeleteBotAliasRequest = &handles[486]
+var DeleteBotAliasRequest_name = &handles[487]
+var DeleteBotAliasRequest_botName = &handles[488]
+
+var DeleteBotChannelAssociationRequest = &handles[489]
+var DeleteBotChannelAssociationRequest_name = &handles[490]
+var DeleteBotChannelAssociationRequest_botName = &handles[491]
+var DeleteBotChannelAssociationRequest_botAlias = &handles[492]
+
+var DeleteBotRequest = &handles[493]
+var DeleteBotRequest_name = &handles[494]
+
+var DeleteBotVersionRequest = &handles[495]
+var DeleteBotVersionRequest_name = &handles[496]
+var DeleteBotVersionRequest_version = &handles[497]
+
+var DeleteIntentRequest = &handles[498]
+var DeleteIntentRequest_name = &handles[499]
+
+var DeleteIntentVersionRequest = &handles[500]
+var DeleteIntentVersionRequest_name = &handles[501]
+var DeleteIntentVersionRequest_version = &handles[502]
+
+var DeleteSlotTypeRequest = &handles[503]
+var DeleteSlotTypeRequest_name = &handles[504]
+
+var DeleteSlotTypeVersionRequest = &handles[505]
+var DeleteSlotTypeVersionRequest_name = &handles[506]
+var DeleteSlotTypeVersionRequest_version = &handles[507]
+
+var DeleteUtterancesRequest = &handles[508]
+var DeleteUtterancesRequest_botName = &handles[509]
+var DeleteUtterancesRequest_userId = &handles[510]
+
+var GetBotAliasesRequest = &handles[511]
+var GetBotAliasesRequest_botName = &handles[512]
+var GetBotAliasesRequest_nextToken = &handles[513]
+var GetBotAliasesRequest_maxResults = &handles[514]
+var GetBotAliasesRequest_nameContains = &handles[515]
+
+var GetBotAliasesResponse = &handles[516]
+var GetBotAliasesResponse_BotAliases = &handles[517]
+var GetBotAliasesResponse_nextToken = &handles[518]
+
+var GetBotAliasRequest = &handles[519]
+var GetBotAliasRequest_name = &handles[520]
+var GetBotAliasRequest_botName = &handles[521]
+
+var GetBotAliasResponse = &handles[522]
+var GetBotAliasResponse_name = &handles[523]
+var GetBotAliasResponse_description = &handles[524]
+var GetBotAliasResponse_botVersion = &handles[525]
+var GetBotAliasResponse_botName = &handles[526]
+var GetBotAliasResponse_lastUpdatedDate = &handles[527]
+var GetBotAliasResponse_createdDate = &handles[528]
+var GetBotAliasResponse_checksum = &handles[529]
+var GetBotAliasResponse_conversationLogs = &handles[530]
+
+var GetBotChannelAssociationRequest = &handles[531]
+var GetBotChannelAssociationRequest_name = &handles[532]
+var GetBotChannelAssociationRequest_botName = &handles[533]
+var GetBotChannelAssociationRequest_botAlias = &handles[534]
+
+var GetBotChannelAssociationResponse = &handles[535]
+var GetBotChannelAssociationResponse_name = &handles[536]
+var GetBotChannelAssociationResponse_description = &handles[537]
+var GetBotChannelAssociationResponse_botAlias = &handles[538]
+var GetBotChannelAssociationResponse_botName = &handles[539]
+var GetBotChannelAssociationResponse_createdDate = &handles[540]
+var GetBotChannelAssociationResponse_type = &handles[541]
+var GetBotChannelAssociationResponse_botConfiguration = &handles[542]
+var GetBotChannelAssociationResponse_status = &handles[543]
+var GetBotChannelAssociationResponse_failureReason = &handles[544]
+
+var GetBotChannelAssociationsRequest = &handles[545]
+var GetBotChannelAssociationsRequest_botName = &handles[546]
+var GetBotChannelAssociationsRequest_botAlias = &handles[547]
+var GetBotChannelAssociationsRequest_nextToken = &handles[548]
+var GetBotChannelAssociationsRequest_maxResults = &handles[549]
+var GetBotChannelAssociationsRequest_nameContains = &handles[550]
+
+var GetBotChannelAssociationsResponse = &handles[551]
+var GetBotChannelAssociationsResponse_botChannelAssociations = &handles[552]
+var GetBotChannelAssociationsResponse_nextToken = &handles[553]
+
+var GetBotRequest = &handles[554]
+var GetBotRequest_name = &handles[555]
+var GetBotRequest_versionOrAlias = &handles[556]
+
+var GetBotResponse = &handles[557]
+var GetBotResponse_name = &handles[558]
+var GetBotResponse_description = &handles[559]
+var GetBotResponse_intents = &handles[560]
+var GetBotResponse_enableModelImprovements = &handles[561]
+var GetBotResponse_nluIntentConfidenceThreshold = &handles[562]
+var GetBotResponse_clarificationPrompt = &handles[563]
+var GetBotResponse_abortStatement = &handles[564]
+var GetBotResponse_status = &handles[565]
+var GetBotResponse_failureReason = &handles[566]
+var GetBotResponse_lastUpdatedDate = &handles[567]
+var GetBotResponse_createdDate = &handles[568]
+var GetBotResponse_idleSessionTTLInSeconds = &handles[569]
+var GetBotResponse_voiceId = &handles[570]
+var GetBotResponse_checksum = &handles[571]
+var GetBotResponse_version = &handles[572]
+var GetBotResponse_locale = &handles[573]
+var GetBotResponse_childDirected = &handles[574]
+var GetBotResponse_detectSentiment = &handles[575]
+
+var GetBotsRequest = &handles[576]
+var GetBotsRequest_nextToken = &handles[577]
+var GetBotsRequest_maxResults = &handles[578]
+var GetBotsRequest_nameContains = &handles[579]
+
+var GetBotsResponse = &handles[580]
+var GetBotsResponse_bots = &handles[581]
+var GetBotsResponse_nextToken = &handles[582]
+
+var GetBotVersionsRequest = &handles[583]
+var GetBotVersionsRequest_name = &handles[584]
+var GetBotVersionsRequest_nextToken = &handles[585]
+var GetBotVersionsRequest_maxResults = &handles[586]
+
+var GetBotVersionsResponse = &handles[587]
+var GetBotVersionsResponse_bots = &handles[588]
+var GetBotVersionsResponse_nextToken = &handles[589]
+
+var GetBuiltinIntentRequest = &handles[590]
+var GetBuiltinIntentRequest_signature = &handles[591]
+
+var GetBuiltinIntentResponse = &handles[592]
+var GetBuiltinIntentResponse_signature = &handles[593]
+var GetBuiltinIntentResponse_supportedLocales = &handles[594]
+var GetBuiltinIntentResponse_slots = &handles[595]
+
+var GetBuiltinIntentsRequest = &handles[596]
+var GetBuiltinIntentsRequest_locale = &handles[597]
+var GetBuiltinIntentsRequest_signatureContains = &handles[598]
+var GetBuiltinIntentsRequest_nextToken = &handles[599]
+var GetBuiltinIntentsRequest_maxResults = &handles[600]
+
+var GetBuiltinIntentsResponse = &handles[601]
+var GetBuiltinIntentsResponse_intents = &handles[602]
+var GetBuiltinIntentsResponse_nextToken = &handles[603]
+
+var GetBuiltinSlotTypesRequest = &handles[604]
+var GetBuiltinSlotTypesRequest_locale = &handles[605]
+var GetBuiltinSlotTypesRequest_signatureContains = &handles[606]
+var GetBuiltinSlotTypesRequest_nextToken = &handles[607]
+var GetBuiltinSlotTypesRequest_maxResults = &handles[608]
+
+var GetBuiltinSlotTypesResponse = &handles[609]
+var GetBuiltinSlotTypesResponse_slotTypes = &handles[610]
+var GetBuiltinSlotTypesResponse_nextToken = &handles[611]
+
+var GetExportRequest = &handles[612]
+var GetExportRequest_name = &handles[613]
+var GetExportRequest_version = &handles[614]
+var GetExportRequest_resourceType = &handles[615]
+var GetExportRequest_exportType = &handles[616]
+
+var GetExportResponse = &handles[617]
+var GetExportResponse_name = &handles[618]
+var GetExportResponse_version = &handles[619]
+var GetExportResponse_resourceType = &handles[620]
+var GetExportResponse_exportType = &handles[621]
+var GetExportResponse_exportStatus = &handles[622]
+var GetExportResponse_failureReason = &handles[623]
+var GetExportResponse_url = &handles[624]
+
+var GetImportRequest = &handles[625]
+var GetImportRequest_importId = &handles[626]
+
+var GetImportResponse = &handles[627]
+var GetImportResponse_name = &handles[628]
+var GetImportResponse_resourceType = &handles[629]
+var GetImportResponse_mergeStrategy = &handles[630]
+var GetImportResponse_importId = &handles[631]
+var GetImportResponse_importStatus = &handles[632]
+var GetImportResponse_failureReason = &handles[633]
+var GetImportResponse_createdDate = &handles[634]
+
+var GetIntentRequest = &handles[635]
+var GetIntentRequest_name = &handles[636]
+var GetIntentRequest_version = &handles[637]
+
+var GetIntentResponse = &handles[638]
+var GetIntentResponse_name = &handles[639]
+var GetIntentResponse_description = &handles[640]
+var GetIntentResponse_slots = &handles[641]
+var GetIntentResponse_sampleUtterances = &handles[642]
+var GetIntentResponse_confirmationPrompt = &handles[643]
+var GetIntentResponse_rejectionStatement = &handles[644]
+var GetIntentResponse_followUpPrompt = &handles[645]
+var GetIntentResponse_conclusionStatement = &handles[646]
+var GetIntentResponse_dialogCodeHook = &handles[647]
+var GetIntentResponse_fulfillmentActivity = &handles[648]
+var GetIntentResponse_parentIntentSignature = &handles[649]
+var GetIntentResponse_lastUpdatedDate = &handles[650]
+var GetIntentResponse_createdDate = &handles[651]
+var GetIntentResponse_version = &handles[652]
+var GetIntentResponse_checksum = &handles[653]
+var GetIntentResponse_kendraConfiguration = &handles[654]
+var GetIntentResponse_inputContexts = &handles[655]
+var GetIntentResponse_outputContexts = &handles[656]
+
+var GetIntentsRequest = &handles[657]
+var GetIntentsRequest_nextToken = &handles[658]
+var GetIntentsRequest_maxResults = &handles[659]
+var GetIntentsRequest_nameContains = &handles[660]
+
+var GetIntentsResponse = &handles[661]
+var GetIntentsResponse_intents = &handles[662]
+var GetIntentsResponse_nextToken = &handles[663]
+
+var GetIntentVersionsRequest = &handles[664]
+var GetIntentVersionsRequest_name = &handles[665]
+var GetIntentVersionsRequest_nextToken = &handles[666]
+var GetIntentVersionsRequest_maxResults = &handles[667]
+
+var GetIntentVersionsResponse = &handles[668]
+var GetIntentVersionsResponse_intents = &handles[669]
+var GetIntentVersionsResponse_nextToken = &handles[670]
+
+var GetMigrationRequest = &handles[671]
+var GetMigrationRequest_migrationId = &handles[672]
+
+var GetMigrationResponse = &handles[673]
+var GetMigrationResponse_migrationId = &handles[674]
+var GetMigrationResponse_v1BotName = &handles[675]
+var GetMigrationResponse_v1BotVersion = &handles[676]
+var GetMigrationResponse_v1BotLocale = &handles[677]
+var GetMigrationResponse_v2BotId = &handles[678]
+var GetMigrationResponse_v2BotRole = &handles[679]
+var GetMigrationResponse_migrationStatus = &handles[680]
+var GetMigrationResponse_migrationStrategy = &handles[681]
+var GetMigrationResponse_migrationTimestamp = &handles[682]
+var GetMigrationResponse_alerts = &handles[683]
+
+var GetMigrationsRequest = &handles[684]
+var GetMigrationsRequest_sortByAttribute = &handles[685]
+var GetMigrationsRequest_sortByOrder = &handles[686]
+var GetMigrationsRequest_v1BotNameContains = &handles[687]
+var GetMigrationsRequest_migrationStatusEquals = &handles[688]
+var GetMigrationsRequest_maxResults = &handles[689]
+var GetMigrationsRequest_nextToken = &handles[690]
+
+var GetMigrationsResponse = &handles[691]
+var GetMigrationsResponse_migrationSummaries = &handles[692]
+var GetMigrationsResponse_nextToken = &handles[693]
+
+var GetSlotTypeRequest = &handles[694]
+var GetSlotTypeRequest_name = &handles[695]
+var GetSlotTypeRequest_version = &handles[696]
+
+var GetSlotTypeResponse = &handles[697]
+var GetSlotTypeResponse_name = &handles[698]
+var GetSlotTypeResponse_description = &handles[699]
+var GetSlotTypeResponse_enumerationValues = &handles[700]
+var GetSlotTypeResponse_lastUpdatedDate = &handles[701]
+var GetSlotTypeResponse_createdDate = &handles[702]
+var GetSlotTypeResponse_version = &handles[703]
+var GetSlotTypeResponse_checksum = &handles[704]
+var GetSlotTypeResponse_valueSelectionStrategy = &handles[705]
+var GetSlotTypeResponse_parentSlotTypeSignature = &handles[706]
+var GetSlotTypeResponse_slotTypeConfigurations = &handles[707]
+
+var GetSlotTypesRequest = &handles[708]
+var GetSlotTypesRequest_nextToken = &handles[709]
+var GetSlotTypesRequest_maxResults = &handles[710]
+var GetSlotTypesRequest_nameContains = &handles[711]
+
+var GetSlotTypesResponse = &handles[712]
+var GetSlotTypesResponse_slotTypes = &handles[713]
+var GetSlotTypesResponse_nextToken = &handles[714]
+
+var GetSlotTypeVersionsRequest = &handles[715]
+var GetSlotTypeVersionsRequest_name = &handles[716]
+var GetSlotTypeVersionsRequest_nextToken = &handles[717]
+var GetSlotTypeVersionsRequest_maxResults = &handles[718]
+
+var GetSlotTypeVersionsResponse = &handles[719]
+var GetSlotTypeVersionsResponse_slotTypes = &handles[720]
+var GetSlotTypeVersionsResponse_nextToken = &handles[721]
+
+var GetUtterancesViewRequest = &handles[722]
+var GetUtterancesViewRequest_botName = &handles[723]
+var GetUtterancesViewRequest_botVersions = &handles[724]
+var GetUtterancesViewRequest_statusType = &handles[725]
+
+var GetUtterancesViewResponse = &handles[726]
+var GetUtterancesViewResponse_botName = &handles[727]
+var GetUtterancesViewResponse_utterances = &handles[728]
+
+var ListTagsForResourceRequest = &handles[729]
+var ListTagsForResourceRequest_resourceArn = &handles[730]
+
+var ListTagsForResourceResponse = &handles[731]
+var ListTagsForResourceResponse_tags = &handles[732]
+
+var PutBotAliasRequest = &handles[733]
+var PutBotAliasRequest_name = &handles[734]
+var PutBotAliasRequest_description = &handles[735]
+var PutBotAliasRequest_botVersion = &handles[736]
+var PutBotAliasRequest_botName = &handles[737]
+var PutBotAliasRequest_checksum = &handles[738]
+var PutBotAliasRequest_conversationLogs = &handles[739]
+var PutBotAliasRequest_tags = &handles[740]
+
+var PutBotAliasResponse = &handles[741]
+var PutBotAliasResponse_name = &handles[742]
+var PutBotAliasResponse_description = &handles[743]
+var PutBotAliasResponse_botVersion = &handles[744]
+var PutBotAliasResponse_botName = &handles[745]
+var PutBotAliasResponse_lastUpdatedDate = &handles[746]
+var PutBotAliasResponse_createdDate = &handles[747]
+var PutBotAliasResponse_checksum = &handles[748]
+var PutBotAliasResponse_conversationLogs = &handles[749]
+var PutBotAliasResponse_tags = &handles[750]
+
+var PutBotRequest = &handles[751]
+var PutBotRequest_name = &handles[752]
+var PutBotRequest_description = &handles[753]
+var PutBotRequest_intents = &handles[754]
+var PutBotRequest_enableModelImprovements = &handles[755]
+var PutBotRequest_nluIntentConfidenceThreshold = &handles[756]
+var PutBotRequest_clarificationPrompt = &handles[757]
+var PutBotRequest_abortStatement = &handles[758]
+var PutBotRequest_idleSessionTTLInSeconds = &handles[759]
+var PutBotRequest_voiceId = &handles[760]
+var PutBotRequest_checksum = &handles[761]
+var PutBotRequest_processBehavior = &handles[762]
+var PutBotRequest_locale = &handles[763]
+var PutBotRequest_childDirected = &handles[764]
+var PutBotRequest_detectSentiment = &handles[765]
+var PutBotRequest_createVersion = &handles[766]
+var PutBotRequest_tags = &handles[767]
+
+var PutBotResponse = &handles[768]
+var PutBotResponse_name = &handles[769]
+var PutBotResponse_description = &handles[770]
+var PutBotResponse_intents = &handles[771]
+var PutBotResponse_enableModelImprovements = &handles[772]
+var PutBotResponse_nluIntentConfidenceThreshold = &handles[773]
+var PutBotResponse_clarificationPrompt = &handles[774]
+var PutBotResponse_abortStatement = &handles[775]
+var PutBotResponse_status = &handles[776]
+var PutBotResponse_failureReason = &handles[777]
+var PutBotResponse_lastUpdatedDate = &handles[778]
+var PutBotResponse_createdDate = &handles[779]
+var PutBotResponse_idleSessionTTLInSeconds = &handles[780]
+var PutBotResponse_voiceId = &handles[781]
+var PutBotResponse_checksum = &handles[782]
+var PutBotResponse_version = &handles[783]
+var PutBotResponse_locale = &handles[784]
+var PutBotResponse_childDirected = &handles[785]
+var PutBotResponse_createVersion = &handles[786]
+var PutBotResponse_detectSentiment = &handles[787]
+var PutBotResponse_tags = &handles[788]
+
+var PutIntentRequest = &handles[789]
+var PutIntentRequest_name = &handles[790]
+var PutIntentRequest_description = &handles[791]
+var PutIntentRequest_slots = &handles[792]
+var PutIntentRequest_sampleUtterances = &handles[793]
+var PutIntentRequest_confirmationPrompt = &handles[794]
+var PutIntentRequest_rejectionStatement = &handles[795]
+var PutIntentRequest_followUpPrompt = &handles[796]
+var PutIntentRequest_conclusionStatement = &handles[797]
+var PutIntentRequest_dialogCodeHook = &handles[798]
+var PutIntentRequest_fulfillmentActivity = &handles[799]
+var PutIntentRequest_parentIntentSignature = &handles[800]
+var PutIntentRequest_checksum = &handles[801]
+var PutIntentRequest_createVersion = &handles[802]
+var PutIntentRequest_kendraConfiguration = &handles[803]
+var PutIntentRequest_inputContexts = &handles[804]
+var PutIntentRequest_outputContexts = &handles[805]
+
+var PutIntentResponse = &handles[806]
+var PutIntentResponse_name = &handles[807]
+var PutIntentResponse_description = &handles[808]
+var PutIntentResponse_slots = &handles[809]
+var PutIntentResponse_sampleUtterances = &handles[810]
+var PutIntentResponse_confirmationPrompt = &handles[811]
+var PutIntentResponse_rejectionStatement = &handles[812]
+var PutIntentResponse_followUpPrompt = &handles[813]
+var PutIntentResponse_conclusionStatement = &handles[814]
+var PutIntentResponse_dialogCodeHook = &handles[815]
+var PutIntentResponse_fulfillmentActivity = &handles[816]
+var PutIntentResponse_parentIntentSignature = &handles[817]
+var PutIntentResponse_lastUpdatedDate = &handles[818]
+var PutIntentResponse_createdDate = &handles[819]
+var PutIntentResponse_version = &handles[820]
+var PutIntentResponse_checksum = &handles[821]
+var PutIntentResponse_createVersion = &handles[822]
+var PutIntentResponse_kendraConfiguration = &handles[823]
+var PutIntentResponse_inputContexts = &handles[824]
+var PutIntentResponse_outputContexts = &handles[825]
+
+var PutSlotTypeRequest = &handles[826]
+var PutSlotTypeRequest_name = &handles[827]
+var PutSlotTypeRequest_description = &handles[828]
+var PutSlotTypeRequest_enumerationValues = &handles[829]
+var PutSlotTypeRequest_checksum = &handles[830]
+var PutSlotTypeRequest_valueSelectionStrategy = &handles[831]
+var PutSlotTypeRequest_createVersion = &handles[832]
+var PutSlotTypeRequest_parentSlotTypeSignature = &handles[833]
+var PutSlotTypeRequest_slotTypeConfigurations = &handles[834]
+
+var PutSlotTypeResponse = &handles[835]
+var PutSlotTypeResponse_name = &handles[836]
+var PutSlotTypeResponse_description = &handles[837]
+var PutSlotTypeResponse_enumerationValues = &handles[838]
+var PutSlotTypeResponse_lastUpdatedDate = &handles[839]
+var PutSlotTypeResponse_createdDate = &handles[840]
+var PutSlotTypeResponse_version = &handles[841]
+var PutSlotTypeResponse_checksum = &handles[842]
+var PutSlotTypeResponse_valueSelectionStrategy = &handles[843]
+var PutSlotTypeResponse_createVersion = &handles[844]
+var PutSlotTypeResponse_parentSlotTypeSignature = &handles[845]
+var PutSlotTypeResponse_slotTypeConfigurations = &handles[846]
+
+var StartImportRequest = &handles[847]
+var StartImportRequest_payload = &handles[848]
+var StartImportRequest_resourceType = &handles[849]
+var StartImportRequest_mergeStrategy = &handles[850]
+var StartImportRequest_tags = &handles[851]
+
+var StartImportResponse = &handles[852]
+var StartImportResponse_name = &handles[853]
+var StartImportResponse_resourceType = &handles[854]
+var StartImportResponse_mergeStrategy = &handles[855]
+var StartImportResponse_importId = &handles[856]
+var StartImportResponse_importStatus = &handles[857]
+var StartImportResponse_tags = &handles[858]
+var StartImportResponse_createdDate = &handles[859]
+
+var StartMigrationRequest = &handles[860]
+var StartMigrationRequest_v1BotName = &handles[861]
+var StartMigrationRequest_v1BotVersion = &handles[862]
+var StartMigrationRequest_v2BotName = &handles[863]
+var StartMigrationRequest_v2BotRole = &handles[864]
+var StartMigrationRequest_migrationStrategy = &handles[865]
+
+var StartMigrationResponse = &handles[866]
+var StartMigrationResponse_v1BotName = &handles[867]
+var StartMigrationResponse_v1BotVersion = &handles[868]
+var StartMigrationResponse_v1BotLocale = &handles[869]
+var StartMigrationResponse_v2BotId = &handles[870]
+var StartMigrationResponse_v2BotRole = &handles[871]
+var StartMigrationResponse_migrationId = &handles[872]
+var StartMigrationResponse_migrationStrategy = &handles[873]
+var StartMigrationResponse_migrationTimestamp = &handles[874]
+
+var TagResourceRequest = &handles[875]
+var TagResourceRequest_resourceArn = &handles[876]
+var TagResourceRequest_tags = &handles[877]
+
+var TagResourceResponse = &handles[878]
+
+var UntagResourceRequest = &handles[879]
+var UntagResourceRequest_resourceArn = &handles[880]
+var UntagResourceRequest_tagKeys = &handles[881]
+
+var UntagResourceResponse = &handles[882]
+
+var AWSDeepSenseModelBuildingService = &smithy.ServiceSchema{Schema: &handles[42], Version: "2017-04-19"}

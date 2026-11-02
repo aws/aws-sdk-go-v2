@@ -7,1252 +7,1076 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateChatToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateChatToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateChatToken",
-	Code: 200})
-
-var CreateLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateLoggingConfiguration",
-	Code: 200})
-
-var CreateRoom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateRoom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateRoom",
-	Code: 200})
-
-var DeleteLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DeleteLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DeleteLoggingConfiguration",
-	Code: 204})
-
-var DeleteMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DeleteMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DeleteMessage",
-	Code: 200})
-
-var DeleteRoom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DeleteRoom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DeleteRoom",
-	Code: 204})
-
-var DisconnectUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DisconnectUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DisconnectUser",
-	Code: 200})
-
-var GetLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "GetLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetLoggingConfiguration",
-	Code: 200})
-
-var GetRoom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "GetRoom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetRoom",
-	Code: 200})
-
-var ListLoggingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListLoggingConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListLoggingConfigurations",
-	Code: 200})
-
-var ListRooms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListRooms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListRooms",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var SendEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "SendEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/SendEvent",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UpdateLoggingConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UpdateLoggingConfiguration",
-	Code: 200})
-
-var UpdateRoom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UpdateRoom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UpdateRoom",
-	Code: 200})
-
-var _AmazonInteractiveVideoServiceChat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "AmazonInteractiveVideoServiceChat",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonInteractiveVideoServiceChat = smithy.NewServiceSchema(_AmazonInteractiveVideoServiceChat, "2020-07-14")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _ChatToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ChatToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ChatTokenAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ChatTokenAttributes",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ChatTokenAttributes_key *smithy.Schema
-
-var _ChatTokenAttributes_value *smithy.Schema
-
-var _ChatTokenCapabilities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ChatTokenCapabilities",
-}, smithy.ShapeTypeList, 1)
-var _ChatTokenCapabilities_member *smithy.Schema
-
-var _ChatTokenCapability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ChatTokenCapability",
-}, smithy.ShapeTypeString, 0)
-
-var CloudWatchLogsDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CloudWatchLogsDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CloudWatchLogsDestinationConfiguration_logGroupName *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _CreateLoggingConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateLoggingConfigurationState",
-}, smithy.ShapeTypeString, 0)
-
-var _DeliveryStreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DeliveryStreamName",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DestinationConfiguration",
-}, smithy.ShapeTypeUnion, 3)
-var DestinationConfiguration_s3 *smithy.Schema
-
-var DestinationConfiguration_cloudWatchLogs *smithy.Schema
-
-var DestinationConfiguration_firehose *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "EventAttributes",
-}, smithy.ShapeTypeMap, 2)
-var _EventAttributes_key *smithy.Schema
-
-var _EventAttributes_value *smithy.Schema
-
-var _EventName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "EventName",
-}, smithy.ShapeTypeString, 0)
-
-var _FallbackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "FallbackResult",
-}, smithy.ShapeTypeString, 0)
-
-var _FieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "FieldName",
-}, smithy.ShapeTypeString, 0)
-
-var FirehoseDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "FirehoseDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var FirehoseDestinationConfiguration_deliveryStreamName *smithy.Schema
-
-var _ID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ID",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _LambdaArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LambdaArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Limit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "Limit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LoggingConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LoggingConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LoggingConfigurationID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LoggingConfigurationID",
-}, smithy.ShapeTypeString, 0)
-
-var _LoggingConfigurationIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LoggingConfigurationIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _LoggingConfigurationIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LoggingConfigurationIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _LoggingConfigurationIdentifierList_member *smithy.Schema
-
-var _LoggingConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LoggingConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _LoggingConfigurationList_member *smithy.Schema
-
-var _LoggingConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LoggingConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var _LoggingConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LoggingConfigurationState",
-}, smithy.ShapeTypeString, 0)
-
-var LoggingConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LoggingConfigurationSummary",
-}, smithy.ShapeTypeStructure, 8)
-var LoggingConfigurationSummary_arn *smithy.Schema
-
-var LoggingConfigurationSummary_id *smithy.Schema
-
-var LoggingConfigurationSummary_createTime *smithy.Schema
-
-var LoggingConfigurationSummary_updateTime *smithy.Schema
-
-var LoggingConfigurationSummary_name *smithy.Schema
-
-var LoggingConfigurationSummary_destinationConfiguration *smithy.Schema
-
-var LoggingConfigurationSummary_state *smithy.Schema
-
-var LoggingConfigurationSummary_tags *smithy.Schema
-
-var _LogGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "LogGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxLoggingConfigurationResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "MaxLoggingConfigurationResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxRoomResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "MaxRoomResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MessageID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "MessageID",
-}, smithy.ShapeTypeString, 0)
-
-var MessageReviewHandler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "MessageReviewHandler",
-}, smithy.ShapeTypeStructure, 2)
-var MessageReviewHandler_uri *smithy.Schema
-
-var MessageReviewHandler_fallbackResult *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var PendingVerification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "PendingVerification",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var PendingVerification_message *smithy.Schema
-
-var _Reason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "Reason",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _RoomArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "RoomArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RoomID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "RoomID",
-}, smithy.ShapeTypeString, 0)
-
-var _RoomIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "RoomIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _RoomList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "RoomList",
-}, smithy.ShapeTypeList, 1)
-var _RoomList_member *smithy.Schema
-
-var _RoomMaxMessageLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "RoomMaxMessageLength",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RoomMaxMessageRatePerSecond = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "RoomMaxMessageRatePerSecond",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RoomName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "RoomName",
-}, smithy.ShapeTypeString, 0)
-
-var RoomSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "RoomSummary",
-}, smithy.ShapeTypeStructure, 8)
-var RoomSummary_arn *smithy.Schema
-
-var RoomSummary_id *smithy.Schema
-
-var RoomSummary_name *smithy.Schema
-
-var RoomSummary_messageReviewHandler *smithy.Schema
-
-var RoomSummary_createTime *smithy.Schema
-
-var RoomSummary_updateTime *smithy.Schema
-
-var RoomSummary_tags *smithy.Schema
-
-var RoomSummary_loggingConfigurationIdentifiers *smithy.Schema
-
-var S3DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "S3DestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var S3DestinationConfiguration_bucketName *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_limit *smithy.Schema
-
-var _SessionDurationInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "SessionDurationInMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_resourceId *smithy.Schema
-
-var ThrottlingException_resourceType *smithy.Schema
-
-var ThrottlingException_limit *smithy.Schema
-
-var _Time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "Time",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _UpdateLoggingConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UpdateLoggingConfigurationState",
-}, smithy.ShapeTypeString, 0)
-
-var _UserID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UserID",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var CreateChatTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateChatTokenRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateChatTokenRequest_roomIdentifier *smithy.Schema
-
-var CreateChatTokenRequest_userId *smithy.Schema
-
-var CreateChatTokenRequest_capabilities *smithy.Schema
-
-var CreateChatTokenRequest_sessionDurationInMinutes *smithy.Schema
-
-var CreateChatTokenRequest_attributes *smithy.Schema
-
-var CreateChatTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateChatTokenResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateChatTokenResponse_token *smithy.Schema
-
-var CreateChatTokenResponse_tokenExpirationTime *smithy.Schema
-
-var CreateChatTokenResponse_sessionExpirationTime *smithy.Schema
-
-var CreateLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateLoggingConfigurationRequest_name *smithy.Schema
-
-var CreateLoggingConfigurationRequest_destinationConfiguration *smithy.Schema
-
-var CreateLoggingConfigurationRequest_tags *smithy.Schema
-
-var CreateLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateLoggingConfigurationResponse_arn *smithy.Schema
-
-var CreateLoggingConfigurationResponse_id *smithy.Schema
-
-var CreateLoggingConfigurationResponse_createTime *smithy.Schema
-
-var CreateLoggingConfigurationResponse_updateTime *smithy.Schema
-
-var CreateLoggingConfigurationResponse_name *smithy.Schema
-
-var CreateLoggingConfigurationResponse_destinationConfiguration *smithy.Schema
-
-var CreateLoggingConfigurationResponse_state *smithy.Schema
-
-var CreateLoggingConfigurationResponse_tags *smithy.Schema
-
-var CreateRoomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateRoomRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateRoomRequest_name *smithy.Schema
-
-var CreateRoomRequest_maximumMessageRatePerSecond *smithy.Schema
-
-var CreateRoomRequest_maximumMessageLength *smithy.Schema
-
-var CreateRoomRequest_messageReviewHandler *smithy.Schema
-
-var CreateRoomRequest_tags *smithy.Schema
-
-var CreateRoomRequest_loggingConfigurationIdentifiers *smithy.Schema
-
-var CreateRoomResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "CreateRoomResponse",
-}, smithy.ShapeTypeStructure, 10)
-var CreateRoomResponse_arn *smithy.Schema
-
-var CreateRoomResponse_id *smithy.Schema
-
-var CreateRoomResponse_name *smithy.Schema
-
-var CreateRoomResponse_createTime *smithy.Schema
-
-var CreateRoomResponse_updateTime *smithy.Schema
-
-var CreateRoomResponse_maximumMessageRatePerSecond *smithy.Schema
-
-var CreateRoomResponse_maximumMessageLength *smithy.Schema
-
-var CreateRoomResponse_messageReviewHandler *smithy.Schema
-
-var CreateRoomResponse_tags *smithy.Schema
-
-var CreateRoomResponse_loggingConfigurationIdentifiers *smithy.Schema
-
-var DeleteLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DeleteLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLoggingConfigurationRequest_identifier *smithy.Schema
-
-var DeleteMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DeleteMessageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteMessageRequest_roomIdentifier *smithy.Schema
-
-var DeleteMessageRequest_id *smithy.Schema
-
-var DeleteMessageRequest_reason *smithy.Schema
-
-var DeleteMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DeleteMessageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMessageResponse_id *smithy.Schema
-
-var DeleteRoomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DeleteRoomRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRoomRequest_identifier *smithy.Schema
-
-var DisconnectUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DisconnectUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisconnectUserRequest_roomIdentifier *smithy.Schema
-
-var DisconnectUserRequest_userId *smithy.Schema
-
-var DisconnectUserRequest_reason *smithy.Schema
-
-var DisconnectUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "DisconnectUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "GetLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetLoggingConfigurationRequest_identifier *smithy.Schema
-
-var GetLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "GetLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetLoggingConfigurationResponse_arn *smithy.Schema
-
-var GetLoggingConfigurationResponse_id *smithy.Schema
-
-var GetLoggingConfigurationResponse_createTime *smithy.Schema
-
-var GetLoggingConfigurationResponse_updateTime *smithy.Schema
-
-var GetLoggingConfigurationResponse_name *smithy.Schema
-
-var GetLoggingConfigurationResponse_destinationConfiguration *smithy.Schema
-
-var GetLoggingConfigurationResponse_state *smithy.Schema
-
-var GetLoggingConfigurationResponse_tags *smithy.Schema
-
-var GetRoomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "GetRoomRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRoomRequest_identifier *smithy.Schema
-
-var GetRoomResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "GetRoomResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetRoomResponse_arn *smithy.Schema
-
-var GetRoomResponse_id *smithy.Schema
-
-var GetRoomResponse_name *smithy.Schema
-
-var GetRoomResponse_createTime *smithy.Schema
-
-var GetRoomResponse_updateTime *smithy.Schema
-
-var GetRoomResponse_maximumMessageRatePerSecond *smithy.Schema
-
-var GetRoomResponse_maximumMessageLength *smithy.Schema
-
-var GetRoomResponse_messageReviewHandler *smithy.Schema
-
-var GetRoomResponse_tags *smithy.Schema
-
-var GetRoomResponse_loggingConfigurationIdentifiers *smithy.Schema
-
-var ListLoggingConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListLoggingConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListLoggingConfigurationsRequest_nextToken *smithy.Schema
-
-var ListLoggingConfigurationsRequest_maxResults *smithy.Schema
-
-var ListLoggingConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListLoggingConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLoggingConfigurationsResponse_loggingConfigurations *smithy.Schema
-
-var ListLoggingConfigurationsResponse_nextToken *smithy.Schema
-
-var ListRoomsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListRoomsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListRoomsRequest_name *smithy.Schema
-
-var ListRoomsRequest_nextToken *smithy.Schema
-
-var ListRoomsRequest_maxResults *smithy.Schema
-
-var ListRoomsRequest_messageReviewHandlerUri *smithy.Schema
-
-var ListRoomsRequest_loggingConfigurationIdentifier *smithy.Schema
-
-var ListRoomsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListRoomsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRoomsResponse_rooms *smithy.Schema
-
-var ListRoomsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var SendEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "SendEventRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SendEventRequest_roomIdentifier *smithy.Schema
-
-var SendEventRequest_eventName *smithy.Schema
-
-var SendEventRequest_attributes *smithy.Schema
-
-var SendEventResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "SendEventResponse",
-}, smithy.ShapeTypeStructure, 1)
-var SendEventResponse_id *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLoggingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UpdateLoggingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLoggingConfigurationRequest_identifier *smithy.Schema
-
-var UpdateLoggingConfigurationRequest_name *smithy.Schema
-
-var UpdateLoggingConfigurationRequest_destinationConfiguration *smithy.Schema
-
-var UpdateLoggingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UpdateLoggingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateLoggingConfigurationResponse_arn *smithy.Schema
-
-var UpdateLoggingConfigurationResponse_id *smithy.Schema
-
-var UpdateLoggingConfigurationResponse_createTime *smithy.Schema
-
-var UpdateLoggingConfigurationResponse_updateTime *smithy.Schema
-
-var UpdateLoggingConfigurationResponse_name *smithy.Schema
-
-var UpdateLoggingConfigurationResponse_destinationConfiguration *smithy.Schema
-
-var UpdateLoggingConfigurationResponse_state *smithy.Schema
-
-var UpdateLoggingConfigurationResponse_tags *smithy.Schema
-
-var UpdateRoomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UpdateRoomRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateRoomRequest_identifier *smithy.Schema
-
-var UpdateRoomRequest_name *smithy.Schema
-
-var UpdateRoomRequest_maximumMessageRatePerSecond *smithy.Schema
-
-var UpdateRoomRequest_maximumMessageLength *smithy.Schema
-
-var UpdateRoomRequest_messageReviewHandler *smithy.Schema
-
-var UpdateRoomRequest_loggingConfigurationIdentifiers *smithy.Schema
-
-var UpdateRoomResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ivschat",
-	Name:      "UpdateRoomResponse",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateRoomResponse_arn *smithy.Schema
-
-var UpdateRoomResponse_id *smithy.Schema
-
-var UpdateRoomResponse_name *smithy.Schema
-
-var UpdateRoomResponse_createTime *smithy.Schema
-
-var UpdateRoomResponse_updateTime *smithy.Schema
-
-var UpdateRoomResponse_maximumMessageRatePerSecond *smithy.Schema
-
-var UpdateRoomResponse_maximumMessageLength *smithy.Schema
-
-var UpdateRoomResponse_messageReviewHandler *smithy.Schema
-
-var UpdateRoomResponse_tags *smithy.Schema
-
-var UpdateRoomResponse_loggingConfigurationIdentifiers *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	_ChatTokenAttributes_key = _ChatTokenAttributes.AddMember("key", _String)
-
-	_ChatTokenAttributes_value = _ChatTokenAttributes.AddMember("value", _String)
-
-	_ChatTokenCapabilities_member = _ChatTokenCapabilities.AddMember("member", _ChatTokenCapability)
-
-	CloudWatchLogsDestinationConfiguration_logGroupName = CloudWatchLogsDestinationConfiguration.AddMember("logGroupName", _LogGroupName)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _ResourceType)
-
-	S3DestinationConfiguration_bucketName = S3DestinationConfiguration.AddMember("bucketName", _BucketName)
-
-	FirehoseDestinationConfiguration_deliveryStreamName = FirehoseDestinationConfiguration.AddMember("deliveryStreamName", _DeliveryStreamName)
-
-	DestinationConfiguration_s3 = DestinationConfiguration.AddMember("s3", S3DestinationConfiguration)
-
-	DestinationConfiguration_cloudWatchLogs = DestinationConfiguration.AddMember("cloudWatchLogs", CloudWatchLogsDestinationConfiguration)
-
-	DestinationConfiguration_firehose = DestinationConfiguration.AddMember("firehose", FirehoseDestinationConfiguration)
-
-	_EventAttributes_key = _EventAttributes.AddMember("key", _String)
-
-	_EventAttributes_value = _EventAttributes.AddMember("value", _String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	_LoggingConfigurationIdentifierList_member = _LoggingConfigurationIdentifierList.AddMember("member", _LoggingConfigurationIdentifier)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	LoggingConfigurationSummary_arn = LoggingConfigurationSummary.AddMember("arn", _LoggingConfigurationArn)
-
-	LoggingConfigurationSummary_id = LoggingConfigurationSummary.AddMember("id", _LoggingConfigurationID)
-
-	LoggingConfigurationSummary_createTime = LoggingConfigurationSummary.AddMember("createTime", _Time)
-
-	LoggingConfigurationSummary_updateTime = LoggingConfigurationSummary.AddMember("updateTime", _Time)
-
-	LoggingConfigurationSummary_name = LoggingConfigurationSummary.AddMember("name", _LoggingConfigurationName)
-
-	LoggingConfigurationSummary_destinationConfiguration = LoggingConfigurationSummary.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	LoggingConfigurationSummary_state = LoggingConfigurationSummary.AddMember("state", _LoggingConfigurationState)
-
-	LoggingConfigurationSummary_tags = LoggingConfigurationSummary.AddMember("tags", _Tags)
-
-	_LoggingConfigurationList_member = _LoggingConfigurationList.AddMember("member", LoggingConfigurationSummary)
-
-	MessageReviewHandler_uri = MessageReviewHandler.AddMember("uri", _LambdaArn)
-
-	MessageReviewHandler_fallbackResult = MessageReviewHandler.AddMember("fallbackResult", _FallbackResult)
-
-	PendingVerification_message = PendingVerification.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _ResourceId)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _ResourceType)
-
-	RoomSummary_arn = RoomSummary.AddMember("arn", _RoomArn)
-
-	RoomSummary_id = RoomSummary.AddMember("id", _RoomID)
-
-	RoomSummary_name = RoomSummary.AddMember("name", _RoomName)
-
-	RoomSummary_messageReviewHandler = RoomSummary.AddMember("messageReviewHandler", MessageReviewHandler)
-
-	RoomSummary_createTime = RoomSummary.AddMember("createTime", _Time)
-
-	RoomSummary_updateTime = RoomSummary.AddMember("updateTime", _Time)
-
-	RoomSummary_tags = RoomSummary.AddMember("tags", _Tags)
-
-	RoomSummary_loggingConfigurationIdentifiers = RoomSummary.AddMember("loggingConfigurationIdentifiers", _LoggingConfigurationIdentifierList)
-
-	_RoomList_member = _RoomList.AddMember("member", RoomSummary)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _ResourceId)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_limit = ServiceQuotaExceededException.AddMember("limit", _Limit)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	ThrottlingException_resourceId = ThrottlingException.AddMember("resourceId", _ResourceId)
-
-	ThrottlingException_resourceType = ThrottlingException.AddMember("resourceType", _ResourceType)
-
-	ThrottlingException_limit = ThrottlingException.AddMember("limit", _Limit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _FieldName)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _ErrorMessage)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	CreateChatTokenRequest_roomIdentifier = CreateChatTokenRequest.AddMember("roomIdentifier", _RoomIdentifier)
-
-	CreateChatTokenRequest_userId = CreateChatTokenRequest.AddMember("userId", _UserID)
-
-	CreateChatTokenRequest_capabilities = CreateChatTokenRequest.AddMember("capabilities", _ChatTokenCapabilities)
-
-	CreateChatTokenRequest_sessionDurationInMinutes = CreateChatTokenRequest.AddMember("sessionDurationInMinutes", _SessionDurationInMinutes)
-
-	CreateChatTokenRequest_attributes = CreateChatTokenRequest.AddMember("attributes", _ChatTokenAttributes)
-
-	CreateChatTokenResponse_token = CreateChatTokenResponse.AddMember("token", _ChatToken)
-
-	CreateChatTokenResponse_tokenExpirationTime = CreateChatTokenResponse.AddMember("tokenExpirationTime", _Time)
-
-	CreateChatTokenResponse_sessionExpirationTime = CreateChatTokenResponse.AddMember("sessionExpirationTime", _Time)
-
-	CreateLoggingConfigurationRequest_name = CreateLoggingConfigurationRequest.AddMember("name", _LoggingConfigurationName)
-
-	CreateLoggingConfigurationRequest_destinationConfiguration = CreateLoggingConfigurationRequest.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	CreateLoggingConfigurationRequest_tags = CreateLoggingConfigurationRequest.AddMember("tags", _Tags)
-
-	CreateLoggingConfigurationResponse_arn = CreateLoggingConfigurationResponse.AddMember("arn", _LoggingConfigurationArn)
-
-	CreateLoggingConfigurationResponse_id = CreateLoggingConfigurationResponse.AddMember("id", _LoggingConfigurationID)
-
-	CreateLoggingConfigurationResponse_createTime = CreateLoggingConfigurationResponse.AddMember("createTime", _Time)
-
-	CreateLoggingConfigurationResponse_updateTime = CreateLoggingConfigurationResponse.AddMember("updateTime", _Time)
-
-	CreateLoggingConfigurationResponse_name = CreateLoggingConfigurationResponse.AddMember("name", _LoggingConfigurationName)
-
-	CreateLoggingConfigurationResponse_destinationConfiguration = CreateLoggingConfigurationResponse.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	CreateLoggingConfigurationResponse_state = CreateLoggingConfigurationResponse.AddMember("state", _CreateLoggingConfigurationState)
-
-	CreateLoggingConfigurationResponse_tags = CreateLoggingConfigurationResponse.AddMember("tags", _Tags)
-
-	CreateRoomRequest_name = CreateRoomRequest.AddMember("name", _RoomName)
-
-	CreateRoomRequest_maximumMessageRatePerSecond = CreateRoomRequest.AddMember("maximumMessageRatePerSecond", _RoomMaxMessageRatePerSecond)
-
-	CreateRoomRequest_maximumMessageLength = CreateRoomRequest.AddMember("maximumMessageLength", _RoomMaxMessageLength)
-
-	CreateRoomRequest_messageReviewHandler = CreateRoomRequest.AddMember("messageReviewHandler", MessageReviewHandler)
-
-	CreateRoomRequest_tags = CreateRoomRequest.AddMember("tags", _Tags)
-
-	CreateRoomRequest_loggingConfigurationIdentifiers = CreateRoomRequest.AddMember("loggingConfigurationIdentifiers", _LoggingConfigurationIdentifierList)
-
-	CreateRoomResponse_arn = CreateRoomResponse.AddMember("arn", _RoomArn)
-
-	CreateRoomResponse_id = CreateRoomResponse.AddMember("id", _RoomID)
-
-	CreateRoomResponse_name = CreateRoomResponse.AddMember("name", _RoomName)
-
-	CreateRoomResponse_createTime = CreateRoomResponse.AddMember("createTime", _Time)
-
-	CreateRoomResponse_updateTime = CreateRoomResponse.AddMember("updateTime", _Time)
-
-	CreateRoomResponse_maximumMessageRatePerSecond = CreateRoomResponse.AddMember("maximumMessageRatePerSecond", _RoomMaxMessageRatePerSecond)
-
-	CreateRoomResponse_maximumMessageLength = CreateRoomResponse.AddMember("maximumMessageLength", _RoomMaxMessageLength)
-
-	CreateRoomResponse_messageReviewHandler = CreateRoomResponse.AddMember("messageReviewHandler", MessageReviewHandler)
-
-	CreateRoomResponse_tags = CreateRoomResponse.AddMember("tags", _Tags)
-
-	CreateRoomResponse_loggingConfigurationIdentifiers = CreateRoomResponse.AddMember("loggingConfigurationIdentifiers", _LoggingConfigurationIdentifierList)
-
-	DeleteLoggingConfigurationRequest_identifier = DeleteLoggingConfigurationRequest.AddMember("identifier", _LoggingConfigurationIdentifier)
-
-	DeleteMessageRequest_roomIdentifier = DeleteMessageRequest.AddMember("roomIdentifier", _RoomIdentifier)
-
-	DeleteMessageRequest_id = DeleteMessageRequest.AddMember("id", _MessageID)
-
-	DeleteMessageRequest_reason = DeleteMessageRequest.AddMember("reason", _Reason)
-
-	DeleteMessageResponse_id = DeleteMessageResponse.AddMember("id", _ID)
-
-	DeleteRoomRequest_identifier = DeleteRoomRequest.AddMember("identifier", _RoomIdentifier)
-
-	DisconnectUserRequest_roomIdentifier = DisconnectUserRequest.AddMember("roomIdentifier", _RoomIdentifier)
-
-	DisconnectUserRequest_userId = DisconnectUserRequest.AddMember("userId", _UserID)
-
-	DisconnectUserRequest_reason = DisconnectUserRequest.AddMember("reason", _Reason)
-
-	GetLoggingConfigurationRequest_identifier = GetLoggingConfigurationRequest.AddMember("identifier", _LoggingConfigurationIdentifier)
-
-	GetLoggingConfigurationResponse_arn = GetLoggingConfigurationResponse.AddMember("arn", _LoggingConfigurationArn)
-
-	GetLoggingConfigurationResponse_id = GetLoggingConfigurationResponse.AddMember("id", _LoggingConfigurationID)
-
-	GetLoggingConfigurationResponse_createTime = GetLoggingConfigurationResponse.AddMember("createTime", _Time)
-
-	GetLoggingConfigurationResponse_updateTime = GetLoggingConfigurationResponse.AddMember("updateTime", _Time)
-
-	GetLoggingConfigurationResponse_name = GetLoggingConfigurationResponse.AddMember("name", _LoggingConfigurationName)
-
-	GetLoggingConfigurationResponse_destinationConfiguration = GetLoggingConfigurationResponse.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	GetLoggingConfigurationResponse_state = GetLoggingConfigurationResponse.AddMember("state", _LoggingConfigurationState)
-
-	GetLoggingConfigurationResponse_tags = GetLoggingConfigurationResponse.AddMember("tags", _Tags)
-
-	GetRoomRequest_identifier = GetRoomRequest.AddMember("identifier", _RoomIdentifier)
-
-	GetRoomResponse_arn = GetRoomResponse.AddMember("arn", _RoomArn)
-
-	GetRoomResponse_id = GetRoomResponse.AddMember("id", _RoomID)
-
-	GetRoomResponse_name = GetRoomResponse.AddMember("name", _RoomName)
-
-	GetRoomResponse_createTime = GetRoomResponse.AddMember("createTime", _Time)
-
-	GetRoomResponse_updateTime = GetRoomResponse.AddMember("updateTime", _Time)
-
-	GetRoomResponse_maximumMessageRatePerSecond = GetRoomResponse.AddMember("maximumMessageRatePerSecond", _RoomMaxMessageRatePerSecond)
-
-	GetRoomResponse_maximumMessageLength = GetRoomResponse.AddMember("maximumMessageLength", _RoomMaxMessageLength)
-
-	GetRoomResponse_messageReviewHandler = GetRoomResponse.AddMember("messageReviewHandler", MessageReviewHandler)
-
-	GetRoomResponse_tags = GetRoomResponse.AddMember("tags", _Tags)
-
-	GetRoomResponse_loggingConfigurationIdentifiers = GetRoomResponse.AddMember("loggingConfigurationIdentifiers", _LoggingConfigurationIdentifierList)
-
-	ListLoggingConfigurationsRequest_nextToken = ListLoggingConfigurationsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListLoggingConfigurationsRequest_maxResults = ListLoggingConfigurationsRequest.AddMember("maxResults", _MaxLoggingConfigurationResults)
-
-	ListLoggingConfigurationsResponse_loggingConfigurations = ListLoggingConfigurationsResponse.AddMember("loggingConfigurations", _LoggingConfigurationList)
-
-	ListLoggingConfigurationsResponse_nextToken = ListLoggingConfigurationsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListRoomsRequest_name = ListRoomsRequest.AddMember("name", _RoomName)
-
-	ListRoomsRequest_nextToken = ListRoomsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListRoomsRequest_maxResults = ListRoomsRequest.AddMember("maxResults", _MaxRoomResults)
-
-	ListRoomsRequest_messageReviewHandlerUri = ListRoomsRequest.AddMember("messageReviewHandlerUri", _LambdaArn)
-
-	ListRoomsRequest_loggingConfigurationIdentifier = ListRoomsRequest.AddMember("loggingConfigurationIdentifier", _LoggingConfigurationIdentifier)
-
-	ListRoomsResponse_rooms = ListRoomsResponse.AddMember("rooms", _RoomList)
-
-	ListRoomsResponse_nextToken = ListRoomsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	SendEventRequest_roomIdentifier = SendEventRequest.AddMember("roomIdentifier", _RoomIdentifier)
-
-	SendEventRequest_eventName = SendEventRequest.AddMember("eventName", _EventName)
-
-	SendEventRequest_attributes = SendEventRequest.AddMember("attributes", _EventAttributes)
-
-	SendEventResponse_id = SendEventResponse.AddMember("id", _ID)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateLoggingConfigurationRequest_identifier = UpdateLoggingConfigurationRequest.AddMember("identifier", _LoggingConfigurationIdentifier)
-
-	UpdateLoggingConfigurationRequest_name = UpdateLoggingConfigurationRequest.AddMember("name", _LoggingConfigurationName)
-
-	UpdateLoggingConfigurationRequest_destinationConfiguration = UpdateLoggingConfigurationRequest.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	UpdateLoggingConfigurationResponse_arn = UpdateLoggingConfigurationResponse.AddMember("arn", _LoggingConfigurationArn)
-
-	UpdateLoggingConfigurationResponse_id = UpdateLoggingConfigurationResponse.AddMember("id", _LoggingConfigurationID)
-
-	UpdateLoggingConfigurationResponse_createTime = UpdateLoggingConfigurationResponse.AddMember("createTime", _Time)
-
-	UpdateLoggingConfigurationResponse_updateTime = UpdateLoggingConfigurationResponse.AddMember("updateTime", _Time)
-
-	UpdateLoggingConfigurationResponse_name = UpdateLoggingConfigurationResponse.AddMember("name", _LoggingConfigurationName)
-
-	UpdateLoggingConfigurationResponse_destinationConfiguration = UpdateLoggingConfigurationResponse.AddMember("destinationConfiguration", DestinationConfiguration)
-
-	UpdateLoggingConfigurationResponse_state = UpdateLoggingConfigurationResponse.AddMember("state", _UpdateLoggingConfigurationState)
-
-	UpdateLoggingConfigurationResponse_tags = UpdateLoggingConfigurationResponse.AddMember("tags", _Tags)
-
-	UpdateRoomRequest_identifier = UpdateRoomRequest.AddMember("identifier", _RoomIdentifier)
-
-	UpdateRoomRequest_name = UpdateRoomRequest.AddMember("name", _RoomName)
-
-	UpdateRoomRequest_maximumMessageRatePerSecond = UpdateRoomRequest.AddMember("maximumMessageRatePerSecond", _RoomMaxMessageRatePerSecond)
-
-	UpdateRoomRequest_maximumMessageLength = UpdateRoomRequest.AddMember("maximumMessageLength", _RoomMaxMessageLength)
-
-	UpdateRoomRequest_messageReviewHandler = UpdateRoomRequest.AddMember("messageReviewHandler", MessageReviewHandler)
-
-	UpdateRoomRequest_loggingConfigurationIdentifiers = UpdateRoomRequest.AddMember("loggingConfigurationIdentifiers", _LoggingConfigurationIdentifierList)
-
-	UpdateRoomResponse_arn = UpdateRoomResponse.AddMember("arn", _RoomArn)
-
-	UpdateRoomResponse_id = UpdateRoomResponse.AddMember("id", _RoomID)
-
-	UpdateRoomResponse_name = UpdateRoomResponse.AddMember("name", _RoomName)
-
-	UpdateRoomResponse_createTime = UpdateRoomResponse.AddMember("createTime", _Time)
-
-	UpdateRoomResponse_updateTime = UpdateRoomResponse.AddMember("updateTime", _Time)
-
-	UpdateRoomResponse_maximumMessageRatePerSecond = UpdateRoomResponse.AddMember("maximumMessageRatePerSecond", _RoomMaxMessageRatePerSecond)
-
-	UpdateRoomResponse_maximumMessageLength = UpdateRoomResponse.AddMember("maximumMessageLength", _RoomMaxMessageLength)
-
-	UpdateRoomResponse_messageReviewHandler = UpdateRoomResponse.AddMember("messageReviewHandler", MessageReviewHandler)
-
-	UpdateRoomResponse_tags = UpdateRoomResponse.AddMember("tags", _Tags)
-
-	UpdateRoomResponse_loggingConfigurationIdentifiers = UpdateRoomResponse.AddMember("loggingConfigurationIdentifiers", _LoggingConfigurationIdentifierList)
-
+const blob = "" +
+	"CloudWatchLogsDestinationConfigurationCreateLoggingConfigurationResponseLoggingConfigurationIdentifi" +
+	"erListUpdateLoggingConfigurationResponseAmazonInteractiveVideoServiceChatCreateLoggingConfigurationR" +
+	"equestDeleteLoggingConfigurationRequestListLoggingConfigurationsResponseUpdateLoggingConfigurationRe" +
+	"questFirehoseDestinationConfigurationListLoggingConfigurationsRequestCreateLoggingConfigurationState" +
+	"GetLoggingConfigurationResponseUpdateLoggingConfigurationStateloggingConfigurationIdentifiersGetLogg" +
+	"ingConfigurationRequestMaxLoggingConfigurationResultsServiceQuotaExceededExceptionValidationExceptio" +
+	"nFieldListListTagsForResourceResponseLoggingConfigurationSummaryRoomMaxMessageRatePerSecondmaximumMe" +
+	"ssageRatePerSecondListTagsForResourceRequestS3DestinationConfigurationResourceNotFoundExceptionValid" +
+	"ationExceptionReasonLoggingConfigurationListLoggingConfigurationNameSessionDurationInMinutesdestinat" +
+	"ionConfigurationsessionDurationInMinutesCreateChatTokenResponseInternalServerExceptionLoggingConfigu" +
+	"rationArnmessageReviewHandlerUriCreateChatTokenRequestDisconnectUserResponseLoggingConfigurationIDAc" +
+	"cessDeniedExceptionChatTokenCapabilitiesDeleteMessageResponseDisconnectUserRequestUntagResourceRespo" +
+	"nseloggingConfigurationssessionExpirationTimeDeleteMessageRequestMessageReviewHandlerRoomMaxMessageL" +
+	"engthUntagResourceRequestmaximumMessageLengthChatTokenAttributesChatTokenCapabilityPendingVerificati" +
+	"onTagResourceResponseThrottlingExceptiontokenExpirationTimeCreateRoomResponseDeliveryStreamNameTagRe" +
+	"sourceRequestUpdateRoomResponsedeliveryStreamNameConflictExceptionCreateRoomRequestDeleteRoomRequest" +
+	"ListRoomsResponseSendEventResponseUpdateRoomRequestListRoomsRequestSendEventRequestEventAttributesGe" +
+	"tRoomResponsePaginationTokenFallbackResultGetRoomRequestMaxRoomResultsRoomIdentifiercloudWatchLogsfa" +
+	"llbackResultroomIdentifierErrorMessageLogGroupNameResourceTypecapabilitieslogGroupNameresourceTypeRe" +
+	"sourceArnRoomSummaryresourceArnBucketNameResourceIdTagKeyListattributesbucketNamecreateTimeidentifie" +
+	"rmaxResultsresourceIdupdateTimeEventNameFieldNameLambdaArnMessageIDeventNamefieldListnextTokenRoomLi" +
+	"stRoomNameTagValuefirehoseRoomArntagKeysRoomIDStringUserIDmemberreasonuserIdLimitlimitroomsstatevalu" +
+	"enametagsarnkeyuris3"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.ivschat"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 940, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 38, Target: 1, Traits: 1, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1459, Target: 2, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 206, Target: 3, Traits: 3, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1140, Target: 4, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1583, Target: 5, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1054, Target: 6, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 400, Target: 7, Traits: 7, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1698, Target: 8, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 239, Target: 9, Traits: 9, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1600, Target: 10, Traits: 10, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 610, Target: 11, Traits: 11, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1617, Target: 12, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1402, Target: 13, Traits: 13, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1182, Target: 14, Traits: 14, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 106, Target: 15, Traits: 15, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1513, Target: 16, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 140, Target: 17, Traits: 17, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1098, Target: 18, Traits: 18, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1931, Target: 20, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 946, Target: 21, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1345, Target: 22, Traits: 19, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2212, Target: 115, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2196, Target: 115, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1119, Target: 25, Traits: 17, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2158, Target: 27, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1364, Target: 27, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 28, Traits: 17, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1874, Target: 72, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1549, Target: 30, Traits: 20, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2011, Target: 84, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1886, Target: 89, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 369, Target: 34, Traits: 17, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1477, Target: 35, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 14, Target: 36, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 2218, Target: 107, Traits: 17, StrLen: 2, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1784, Target: 28, Traits: 17, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2118, Target: 47, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1826, Target: 40, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1683, Target: 41, Traits: 17, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2212, Target: 115, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2196, Target: 115, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 44, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1728, Target: 45, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2040, Target: 46, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 305, Target: 47, Traits: 17, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1531, Target: 35, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1096, Target: 49, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 963, Target: 50, Traits: 21, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2049, Target: 52, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2176, Target: 53, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 986, Target: 54, Traits: 17, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1076, Target: 55, Traits: 17, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 72, Target: 56, Traits: 17, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 72, Target: 57, Traits: 17, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2158, Target: 56, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 820, Target: 59, Traits: 17, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2158, Target: 63, Traits: 17, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 844, Target: 61, Traits: 17, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 375, Target: 62, Traits: 17, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 637, Target: 63, Traits: 17, StrLen: 27, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2209, Target: 54, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 55, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1981, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2021, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2201, Target: 61, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 892, Target: 36, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2191, Target: 62, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1838, Target: 72, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 523, Target: 73, Traits: 17, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1756, Target: 74, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2058, Target: 75, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1265, Target: 76, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2215, Target: 52, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1798, Target: 45, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1713, Target: 79, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1383, Target: 80, Traits: 18, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 814, Target: 82, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1898, Target: 83, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1941, Target: 84, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 770, Target: 85, Traits: 23, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2011, Target: 84, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1886, Target: 89, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1850, Target: 89, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2126, Target: 90, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2140, Target: 91, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1770, Target: 92, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2094, Target: 93, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2158, Target: 98, Traits: 17, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1285, Target: 95, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 664, Target: 96, Traits: 17, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2102, Target: 97, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1909, Target: 98, Traits: 17, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2209, Target: 90, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 91, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2201, Target: 97, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1009, Target: 76, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1981, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2021, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 462, Target: 57, Traits: 17, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 744, Target: 107, Traits: 17, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1971, Target: 20, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 553, Target: 109, Traits: 24, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2011, Target: 84, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1886, Target: 89, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2181, Target: 53, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 868, Target: 114, Traits: 17, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2146, Target: 115, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1951, Target: 116, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1951, Target: 117, Traits: 17, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2158, Target: 116, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 614, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2212, Target: 116, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2196, Target: 122, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2110, Target: 122, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1421, Target: 123, Traits: 25, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2011, Target: 84, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1886, Target: 89, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2181, Target: 53, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1241, Target: 128, Traits: 26, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 431, Target: 129, Traits: 17, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2152, Target: 130, Traits: 19, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 582, Target: 131, Traits: 27, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2164, Target: 140, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2076, Target: 138, Traits: 17, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 582, Target: 135, Traits: 17, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 46, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1009, Target: 40, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 582, Target: 138, Traits: 17, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2158, Target: 135, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 795, Target: 140, Traits: 17, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1032, Target: 141, Traits: 17, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1812, Target: 92, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2170, Target: 130, Traits: 28, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1862, Target: 25, Traits: 17, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 916, Target: 114, Traits: 17, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1961, Target: 22, Traits: 28, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 940, Target: 147, Traits: 17, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1440, Target: 21, Traits: 28, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1440, Target: 128, Traits: 22, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1224, Target: 128, Traits: 22, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 173, Target: 151, Traits: 17, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 61, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 892, Target: 36, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 38, Target: 155, Traits: 17, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2209, Target: 54, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 55, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1981, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2021, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2201, Target: 61, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 892, Target: 36, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2191, Target: 34, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1566, Target: 164, Traits: 17, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 97, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 691, Target: 96, Traits: 17, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1325, Target: 95, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1009, Target: 76, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 462, Target: 57, Traits: 17, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1459, Target: 171, Traits: 17, StrLen: 18, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2209, Target: 90, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 91, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2201, Target: 97, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1981, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2021, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 691, Target: 96, Traits: 17, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1325, Target: 95, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1009, Target: 76, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 462, Target: 57, Traits: 17, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 206, Target: 182, Traits: 17, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1991, Target: 56, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1245, Target: 184, Traits: 17, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1812, Target: 92, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 75, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2164, Target: 82, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1140, Target: 188, Traits: 17, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 158, Target: 49, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1583, Target: 190, Traits: 17, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1991, Target: 92, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1161, Target: 192, Traits: 17, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1812, Target: 92, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2170, Target: 130, Traits: 28, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2164, Target: 82, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1054, Target: 196, Traits: 17, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 493, Target: 197, Traits: 17, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1991, Target: 56, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 400, Target: 199, Traits: 17, StrLen: 31, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2209, Target: 54, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 55, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1981, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2021, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2201, Target: 61, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 892, Target: 36, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2191, Target: 62, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1742, Target: 208, Traits: 17, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1991, Target: 92, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1698, Target: 210, Traits: 17, StrLen: 15, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2209, Target: 90, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 91, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2201, Target: 97, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1981, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2021, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 691, Target: 96, Traits: 17, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1325, Target: 95, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1009, Target: 76, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 462, Target: 57, Traits: 17, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 337, Target: 221, Traits: 17, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2085, Target: 79, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2001, Target: 73, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 239, Target: 224, Traits: 17, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 59, Traits: 17, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2085, Target: 79, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1651, Target: 227, Traits: 17, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 97, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2085, Target: 79, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2001, Target: 74, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1009, Target: 52, Traits: 17, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 462, Target: 56, Traits: 17, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1600, Target: 233, Traits: 17, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2186, Target: 93, Traits: 17, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2085, Target: 79, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 718, Target: 236, Traits: 17, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 83, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 610, Target: 238, Traits: 17, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1667, Target: 240, Traits: 17, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1812, Target: 92, Traits: 17, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2067, Target: 44, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1961, Target: 41, Traits: 17, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1617, Target: 244, Traits: 17, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 158, Target: 49, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1495, Target: 246, Traits: 17, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 83, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1402, Target: 249, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1305, Target: 250, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1920, Target: 83, Traits: 29, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2133, Target: 117, Traits: 30, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1182, Target: 253, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 272, Target: 254, Traits: 17, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1991, Target: 56, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2201, Target: 61, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 892, Target: 36, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 106, Target: 258, Traits: 17, StrLen: 34, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2209, Target: 54, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 55, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1981, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2021, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2201, Target: 61, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 892, Target: 36, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2191, Target: 129, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1634, Target: 267, Traits: 17, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1991, Target: 92, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2201, Target: 97, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 691, Target: 96, Traits: 17, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1325, Target: 95, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1009, Target: 76, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 462, Target: 57, Traits: 17, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1513, Target: 274, Traits: 17, StrLen: 18, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2209, Target: 90, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 158, Target: 91, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2201, Target: 97, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1981, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2021, Target: 128, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 691, Target: 96, Traits: 17, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1325, Target: 95, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1009, Target: 76, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2205, Target: 119, Traits: 17, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 462, Target: 57, Traits: 17, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateChatToken",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateLoggingConfiguration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateRoom",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DeleteLoggingConfiguration",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DeleteMessage",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DeleteRoom",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DisconnectUser",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetLoggingConfiguration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetRoom",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListLoggingConfigurations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListRooms",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/SendEvent",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{resourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UpdateLoggingConfiguration",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UpdateRoom",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [285]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+}
+
+var CreateChatToken = &handles[0]
+
+var CreateLoggingConfiguration = &handles[1]
+
+var CreateRoom = &handles[2]
+
+var DeleteLoggingConfiguration = &handles[3]
+
+var DeleteMessage = &handles[4]
+
+var DeleteRoom = &handles[5]
+
+var DisconnectUser = &handles[6]
+
+var GetLoggingConfiguration = &handles[7]
+
+var GetRoom = &handles[8]
+
+var ListLoggingConfigurations = &handles[9]
+
+var ListRooms = &handles[10]
+
+var ListTagsForResource = &handles[11]
+
+var SendEvent = &handles[12]
+
+var TagResource = &handles[13]
+
+var UntagResource = &handles[14]
+
+var UpdateLoggingConfiguration = &handles[15]
+
+var UpdateRoom = &handles[16]
+
+var _AmazonInteractiveVideoServiceChat = &handles[17]
+
+var AccessDeniedException = &handles[18]
+var AccessDeniedException_message = &handles[19]
+
+var _BucketName = &handles[20]
+
+var _ChatToken = &handles[21]
+
+var _ChatTokenAttributes = &handles[22]
+var _ChatTokenAttributes_key = &handles[23]
+var _ChatTokenAttributes_value = &handles[24]
+
+var _ChatTokenCapabilities = &handles[25]
+var _ChatTokenCapabilities_member = &handles[26]
+
+var _ChatTokenCapability = &handles[27]
+
+var CloudWatchLogsDestinationConfiguration = &handles[28]
+var CloudWatchLogsDestinationConfiguration_logGroupName = &handles[29]
+
+var ConflictException = &handles[30]
+var ConflictException_message = &handles[31]
+var ConflictException_resourceId = &handles[32]
+var ConflictException_resourceType = &handles[33]
+
+var _CreateLoggingConfigurationState = &handles[34]
+
+var _DeliveryStreamName = &handles[35]
+
+var DestinationConfiguration = &handles[36]
+var DestinationConfiguration_s3 = &handles[37]
+var DestinationConfiguration_cloudWatchLogs = &handles[38]
+var DestinationConfiguration_firehose = &handles[39]
+
+var _ErrorMessage = &handles[40]
+
+var _EventAttributes = &handles[41]
+var _EventAttributes_key = &handles[42]
+var _EventAttributes_value = &handles[43]
+
+var _EventName = &handles[44]
+
+var _FallbackResult = &handles[45]
+
+var _FieldName = &handles[46]
+
+var FirehoseDestinationConfiguration = &handles[47]
+var FirehoseDestinationConfiguration_deliveryStreamName = &handles[48]
+
+var _ID = &handles[49]
+
+var InternalServerException = &handles[50]
+var InternalServerException_message = &handles[51]
+
+var _LambdaArn = &handles[52]
+
+var _Limit = &handles[53]
+
+var _LoggingConfigurationArn = &handles[54]
+
+var _LoggingConfigurationID = &handles[55]
+
+var _LoggingConfigurationIdentifier = &handles[56]
+
+var _LoggingConfigurationIdentifierList = &handles[57]
+var _LoggingConfigurationIdentifierList_member = &handles[58]
+
+var _LoggingConfigurationList = &handles[59]
+var _LoggingConfigurationList_member = &handles[60]
+
+var _LoggingConfigurationName = &handles[61]
+
+var _LoggingConfigurationState = &handles[62]
+
+var LoggingConfigurationSummary = &handles[63]
+var LoggingConfigurationSummary_arn = &handles[64]
+var LoggingConfigurationSummary_id = &handles[65]
+var LoggingConfigurationSummary_createTime = &handles[66]
+var LoggingConfigurationSummary_updateTime = &handles[67]
+var LoggingConfigurationSummary_name = &handles[68]
+var LoggingConfigurationSummary_destinationConfiguration = &handles[69]
+var LoggingConfigurationSummary_state = &handles[70]
+var LoggingConfigurationSummary_tags = &handles[71]
+
+var _LogGroupName = &handles[72]
+
+var _MaxLoggingConfigurationResults = &handles[73]
+
+var _MaxRoomResults = &handles[74]
+
+var _MessageID = &handles[75]
+
+var MessageReviewHandler = &handles[76]
+var MessageReviewHandler_uri = &handles[77]
+var MessageReviewHandler_fallbackResult = &handles[78]
+
+var _PaginationToken = &handles[79]
+
+var PendingVerification = &handles[80]
+var PendingVerification_message = &handles[81]
+
+var _Reason = &handles[82]
+
+var _ResourceArn = &handles[83]
+
+var _ResourceId = &handles[84]
+
+var ResourceNotFoundException = &handles[85]
+var ResourceNotFoundException_message = &handles[86]
+var ResourceNotFoundException_resourceId = &handles[87]
+var ResourceNotFoundException_resourceType = &handles[88]
+
+var _ResourceType = &handles[89]
+
+var _RoomArn = &handles[90]
+
+var _RoomID = &handles[91]
+
+var _RoomIdentifier = &handles[92]
+
+var _RoomList = &handles[93]
+var _RoomList_member = &handles[94]
+
+var _RoomMaxMessageLength = &handles[95]
+
+var _RoomMaxMessageRatePerSecond = &handles[96]
+
+var _RoomName = &handles[97]
+
+var RoomSummary = &handles[98]
+var RoomSummary_arn = &handles[99]
+var RoomSummary_id = &handles[100]
+var RoomSummary_name = &handles[101]
+var RoomSummary_messageReviewHandler = &handles[102]
+var RoomSummary_createTime = &handles[103]
+var RoomSummary_updateTime = &handles[104]
+var RoomSummary_tags = &handles[105]
+var RoomSummary_loggingConfigurationIdentifiers = &handles[106]
+
+var S3DestinationConfiguration = &handles[107]
+var S3DestinationConfiguration_bucketName = &handles[108]
+
+var ServiceQuotaExceededException = &handles[109]
+var ServiceQuotaExceededException_message = &handles[110]
+var ServiceQuotaExceededException_resourceId = &handles[111]
+var ServiceQuotaExceededException_resourceType = &handles[112]
+var ServiceQuotaExceededException_limit = &handles[113]
+
+var _SessionDurationInMinutes = &handles[114]
+
+var _String = &handles[115]
+
+var _TagKey = &handles[116]
+
+var _TagKeyList = &handles[117]
+var _TagKeyList_member = &handles[118]
+
+var _Tags = &handles[119]
+var _Tags_key = &handles[120]
+var _Tags_value = &handles[121]
+
+var _TagValue = &handles[122]
+
+var ThrottlingException = &handles[123]
+var ThrottlingException_message = &handles[124]
+var ThrottlingException_resourceId = &handles[125]
+var ThrottlingException_resourceType = &handles[126]
+var ThrottlingException_limit = &handles[127]
+
+var _Time = &handles[128]
+
+var _UpdateLoggingConfigurationState = &handles[129]
+
+var _UserID = &handles[130]
+
+var ValidationException = &handles[131]
+var ValidationException_message = &handles[132]
+var ValidationException_reason = &handles[133]
+var ValidationException_fieldList = &handles[134]
+
+var ValidationExceptionField = &handles[135]
+var ValidationExceptionField_name = &handles[136]
+var ValidationExceptionField_message = &handles[137]
+
+var _ValidationExceptionFieldList = &handles[138]
+var _ValidationExceptionFieldList_member = &handles[139]
+
+var _ValidationExceptionReason = &handles[140]
+
+var CreateChatTokenRequest = &handles[141]
+var CreateChatTokenRequest_roomIdentifier = &handles[142]
+var CreateChatTokenRequest_userId = &handles[143]
+var CreateChatTokenRequest_capabilities = &handles[144]
+var CreateChatTokenRequest_sessionDurationInMinutes = &handles[145]
+var CreateChatTokenRequest_attributes = &handles[146]
+
+var CreateChatTokenResponse = &handles[147]
+var CreateChatTokenResponse_token = &handles[148]
+var CreateChatTokenResponse_tokenExpirationTime = &handles[149]
+var CreateChatTokenResponse_sessionExpirationTime = &handles[150]
+
+var CreateLoggingConfigurationRequest = &handles[151]
+var CreateLoggingConfigurationRequest_name = &handles[152]
+var CreateLoggingConfigurationRequest_destinationConfiguration = &handles[153]
+var CreateLoggingConfigurationRequest_tags = &handles[154]
+
+var CreateLoggingConfigurationResponse = &handles[155]
+var CreateLoggingConfigurationResponse_arn = &handles[156]
+var CreateLoggingConfigurationResponse_id = &handles[157]
+var CreateLoggingConfigurationResponse_createTime = &handles[158]
+var CreateLoggingConfigurationResponse_updateTime = &handles[159]
+var CreateLoggingConfigurationResponse_name = &handles[160]
+var CreateLoggingConfigurationResponse_destinationConfiguration = &handles[161]
+var CreateLoggingConfigurationResponse_state = &handles[162]
+var CreateLoggingConfigurationResponse_tags = &handles[163]
+
+var CreateRoomRequest = &handles[164]
+var CreateRoomRequest_name = &handles[165]
+var CreateRoomRequest_maximumMessageRatePerSecond = &handles[166]
+var CreateRoomRequest_maximumMessageLength = &handles[167]
+var CreateRoomRequest_messageReviewHandler = &handles[168]
+var CreateRoomRequest_tags = &handles[169]
+var CreateRoomRequest_loggingConfigurationIdentifiers = &handles[170]
+
+var CreateRoomResponse = &handles[171]
+var CreateRoomResponse_arn = &handles[172]
+var CreateRoomResponse_id = &handles[173]
+var CreateRoomResponse_name = &handles[174]
+var CreateRoomResponse_createTime = &handles[175]
+var CreateRoomResponse_updateTime = &handles[176]
+var CreateRoomResponse_maximumMessageRatePerSecond = &handles[177]
+var CreateRoomResponse_maximumMessageLength = &handles[178]
+var CreateRoomResponse_messageReviewHandler = &handles[179]
+var CreateRoomResponse_tags = &handles[180]
+var CreateRoomResponse_loggingConfigurationIdentifiers = &handles[181]
+
+var DeleteLoggingConfigurationRequest = &handles[182]
+var DeleteLoggingConfigurationRequest_identifier = &handles[183]
+
+var DeleteMessageRequest = &handles[184]
+var DeleteMessageRequest_roomIdentifier = &handles[185]
+var DeleteMessageRequest_id = &handles[186]
+var DeleteMessageRequest_reason = &handles[187]
+
+var DeleteMessageResponse = &handles[188]
+var DeleteMessageResponse_id = &handles[189]
+
+var DeleteRoomRequest = &handles[190]
+var DeleteRoomRequest_identifier = &handles[191]
+
+var DisconnectUserRequest = &handles[192]
+var DisconnectUserRequest_roomIdentifier = &handles[193]
+var DisconnectUserRequest_userId = &handles[194]
+var DisconnectUserRequest_reason = &handles[195]
+
+var DisconnectUserResponse = &handles[196]
+
+var GetLoggingConfigurationRequest = &handles[197]
+var GetLoggingConfigurationRequest_identifier = &handles[198]
+
+var GetLoggingConfigurationResponse = &handles[199]
+var GetLoggingConfigurationResponse_arn = &handles[200]
+var GetLoggingConfigurationResponse_id = &handles[201]
+var GetLoggingConfigurationResponse_createTime = &handles[202]
+var GetLoggingConfigurationResponse_updateTime = &handles[203]
+var GetLoggingConfigurationResponse_name = &handles[204]
+var GetLoggingConfigurationResponse_destinationConfiguration = &handles[205]
+var GetLoggingConfigurationResponse_state = &handles[206]
+var GetLoggingConfigurationResponse_tags = &handles[207]
+
+var GetRoomRequest = &handles[208]
+var GetRoomRequest_identifier = &handles[209]
+
+var GetRoomResponse = &handles[210]
+var GetRoomResponse_arn = &handles[211]
+var GetRoomResponse_id = &handles[212]
+var GetRoomResponse_name = &handles[213]
+var GetRoomResponse_createTime = &handles[214]
+var GetRoomResponse_updateTime = &handles[215]
+var GetRoomResponse_maximumMessageRatePerSecond = &handles[216]
+var GetRoomResponse_maximumMessageLength = &handles[217]
+var GetRoomResponse_messageReviewHandler = &handles[218]
+var GetRoomResponse_tags = &handles[219]
+var GetRoomResponse_loggingConfigurationIdentifiers = &handles[220]
+
+var ListLoggingConfigurationsRequest = &handles[221]
+var ListLoggingConfigurationsRequest_nextToken = &handles[222]
+var ListLoggingConfigurationsRequest_maxResults = &handles[223]
+
+var ListLoggingConfigurationsResponse = &handles[224]
+var ListLoggingConfigurationsResponse_loggingConfigurations = &handles[225]
+var ListLoggingConfigurationsResponse_nextToken = &handles[226]
+
+var ListRoomsRequest = &handles[227]
+var ListRoomsRequest_name = &handles[228]
+var ListRoomsRequest_nextToken = &handles[229]
+var ListRoomsRequest_maxResults = &handles[230]
+var ListRoomsRequest_messageReviewHandlerUri = &handles[231]
+var ListRoomsRequest_loggingConfigurationIdentifier = &handles[232]
+
+var ListRoomsResponse = &handles[233]
+var ListRoomsResponse_rooms = &handles[234]
+var ListRoomsResponse_nextToken = &handles[235]
+
+var ListTagsForResourceRequest = &handles[236]
+var ListTagsForResourceRequest_resourceArn = &handles[237]
+
+var ListTagsForResourceResponse = &handles[238]
+var ListTagsForResourceResponse_tags = &handles[239]
+
+var SendEventRequest = &handles[240]
+var SendEventRequest_roomIdentifier = &handles[241]
+var SendEventRequest_eventName = &handles[242]
+var SendEventRequest_attributes = &handles[243]
+
+var SendEventResponse = &handles[244]
+var SendEventResponse_id = &handles[245]
+
+var TagResourceRequest = &handles[246]
+var TagResourceRequest_resourceArn = &handles[247]
+var TagResourceRequest_tags = &handles[248]
+
+var TagResourceResponse = &handles[249]
+
+var UntagResourceRequest = &handles[250]
+var UntagResourceRequest_resourceArn = &handles[251]
+var UntagResourceRequest_tagKeys = &handles[252]
+
+var UntagResourceResponse = &handles[253]
+
+var UpdateLoggingConfigurationRequest = &handles[254]
+var UpdateLoggingConfigurationRequest_identifier = &handles[255]
+var UpdateLoggingConfigurationRequest_name = &handles[256]
+var UpdateLoggingConfigurationRequest_destinationConfiguration = &handles[257]
+
+var UpdateLoggingConfigurationResponse = &handles[258]
+var UpdateLoggingConfigurationResponse_arn = &handles[259]
+var UpdateLoggingConfigurationResponse_id = &handles[260]
+var UpdateLoggingConfigurationResponse_createTime = &handles[261]
+var UpdateLoggingConfigurationResponse_updateTime = &handles[262]
+var UpdateLoggingConfigurationResponse_name = &handles[263]
+var UpdateLoggingConfigurationResponse_destinationConfiguration = &handles[264]
+var UpdateLoggingConfigurationResponse_state = &handles[265]
+var UpdateLoggingConfigurationResponse_tags = &handles[266]
+
+var UpdateRoomRequest = &handles[267]
+var UpdateRoomRequest_identifier = &handles[268]
+var UpdateRoomRequest_name = &handles[269]
+var UpdateRoomRequest_maximumMessageRatePerSecond = &handles[270]
+var UpdateRoomRequest_maximumMessageLength = &handles[271]
+var UpdateRoomRequest_messageReviewHandler = &handles[272]
+var UpdateRoomRequest_loggingConfigurationIdentifiers = &handles[273]
+
+var UpdateRoomResponse = &handles[274]
+var UpdateRoomResponse_arn = &handles[275]
+var UpdateRoomResponse_id = &handles[276]
+var UpdateRoomResponse_name = &handles[277]
+var UpdateRoomResponse_createTime = &handles[278]
+var UpdateRoomResponse_updateTime = &handles[279]
+var UpdateRoomResponse_maximumMessageRatePerSecond = &handles[280]
+var UpdateRoomResponse_maximumMessageLength = &handles[281]
+var UpdateRoomResponse_messageReviewHandler = &handles[282]
+var UpdateRoomResponse_tags = &handles[283]
+var UpdateRoomResponse_loggingConfigurationIdentifiers = &handles[284]
+
+var AmazonInteractiveVideoServiceChat = &smithy.ServiceSchema{Schema: &handles[17], Version: "2020-07-14"}

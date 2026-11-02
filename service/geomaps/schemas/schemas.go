@@ -4,782 +4,709 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetGlyphs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetGlyphs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v2/glyphs/{FontStack}/{FontUnicodeRange}",
-	Code: 200})
-
-var GetSprites = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetSprites",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v2/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}",
-	Code: 200})
-
-var GetStaticMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStaticMap",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v2/static/{FileName}",
-	Code: 200})
-
-var GetStyleDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStyleDescriptor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v2/styles/{Style}/descriptor",
-	Code: 200})
-
-var GetTile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetTile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v2/tiles/{Tileset}/{Z}/{X}/{Y}",
-	Code: 200})
-
-var _MapsService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "MapsService",
-}, smithy.ShapeTypeService, 0)
-
-var MapsService = smithy.NewServiceSchema(_MapsService, "2020-11-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _ApiKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ApiKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Buildings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Buildings",
-}, smithy.ShapeTypeEnum, 1)
-var Buildings_BUILDINGS_3D *smithy.Schema
-
-var ColorScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ColorScheme",
-}, smithy.ShapeTypeEnum, 2)
-var ColorScheme_LIGHT *smithy.Schema
-
-var ColorScheme_DARK *smithy.Schema
-
-var _CompactOverlay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "CompactOverlay",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ContourDensity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ContourDensity",
-}, smithy.ShapeTypeEnum, 3)
-var ContourDensity_LOW *smithy.Schema
-
-var ContourDensity_MEDIUM *smithy.Schema
-
-var ContourDensity_HIGH *smithy.Schema
-
-var _CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "CountryCode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DistanceMeters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "DistanceMeters",
-}, smithy.ShapeTypeLong, 0, &smithytraits.Sensitive{})
-
-var _GeoJsonOverlay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GeoJsonOverlay",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var LabelSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "LabelSize",
-}, smithy.ShapeTypeEnum, 2)
-var LabelSize_SMALL *smithy.Schema
-
-var LabelSize_LARGE *smithy.Schema
-
-var _LanguageTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "LanguageTag",
-}, smithy.ShapeTypeString, 0)
-
-var MapFeatureMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "MapFeatureMode",
-}, smithy.ShapeTypeEnum, 2)
-var MapFeatureMode_ENABLED *smithy.Schema
-
-var MapFeatureMode_DISABLED *smithy.Schema
-
-var MapStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "MapStyle",
-}, smithy.ShapeTypeEnum, 4)
-var MapStyle_STANDARD *smithy.Schema
-
-var MapStyle_MONOCHROME *smithy.Schema
-
-var MapStyle_HYBRID *smithy.Schema
-
-var MapStyle_SATELLITE *smithy.Schema
-
-var PoiCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PoiCategory",
-}, smithy.ShapeTypeEnum, 9)
-var PoiCategory_FOOD_AND_DRINK *smithy.Schema
-
-var PoiCategory_ENTERTAINMENT *smithy.Schema
-
-var PoiCategory_SIGHTS_AND_MUSEUMS *smithy.Schema
-
-var PoiCategory_TRANSPORTATION *smithy.Schema
-
-var PoiCategory_ACCOMMODATIONS *smithy.Schema
-
-var PoiCategory_LEISURE_AND_OUTDOOR *smithy.Schema
-
-var PoiCategory_SHOPPING *smithy.Schema
-
-var PoiCategory_BUSINESS_AND_SERVICES *smithy.Schema
-
-var PoiCategory_FACILITIES_AND_BUILDINGS *smithy.Schema
-
-var _PoiCategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PoiCategoryList",
-}, smithy.ShapeTypeList, 1)
-var _PoiCategoryList_member *smithy.Schema
-
-var PoiDensity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PoiDensity",
-}, smithy.ShapeTypeEnum, 6)
-var PoiDensity_OFF *smithy.Schema
-
-var PoiDensity_VERY_SPARSE *smithy.Schema
-
-var PoiDensity_SPARSE *smithy.Schema
-
-var PoiDensity_DEFAULT *smithy.Schema
-
-var PoiDensity_DENSE *smithy.Schema
-
-var PoiDensity_VERY_DENSE *smithy.Schema
-
-var _PositionListString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PositionListString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PositionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PositionString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ScaleBarUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ScaleBarUnit",
-}, smithy.ShapeTypeEnum, 4)
-var ScaleBarUnit_KILOMETERS *smithy.Schema
-
-var ScaleBarUnit_KILOMETERS_MILES *smithy.Schema
-
-var ScaleBarUnit_MILES *smithy.Schema
-
-var ScaleBarUnit_MILES_KILOMETERS *smithy.Schema
-
-var _SensitiveFloat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "SensitiveFloat",
-}, smithy.ShapeTypeFloat, 0, &smithytraits.Sensitive{})
-
-var _SensitiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "SensitiveInteger",
-}, smithy.ShapeTypeInteger, 0, &smithytraits.Sensitive{})
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var StaticMapStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "StaticMapStyle",
-}, smithy.ShapeTypeEnum, 2)
-var StaticMapStyle_SATELLITE *smithy.Schema
-
-var StaticMapStyle_STANDARD *smithy.Schema
-
-var Terrain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Terrain",
-}, smithy.ShapeTypeEnum, 2)
-var Terrain_HILLSHADE *smithy.Schema
-
-var Terrain_TERRAIN_3D *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var TileAdditionalFeature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "TileAdditionalFeature",
-}, smithy.ShapeTypeEnum, 4)
-var TileAdditionalFeature_CONTOUR_LINES *smithy.Schema
-
-var TileAdditionalFeature_HILLSHADE *smithy.Schema
-
-var TileAdditionalFeature_LOGISTICS *smithy.Schema
-
-var TileAdditionalFeature_TRANSIT *smithy.Schema
-
-var _TileAdditionalFeatureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "TileAdditionalFeatureList",
-}, smithy.ShapeTypeList, 1)
-var _TileAdditionalFeatureList_member *smithy.Schema
-
-var _Tileset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Tileset",
-}, smithy.ShapeTypeString, 0)
-
-var Traffic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Traffic",
-}, smithy.ShapeTypeEnum, 2)
-var Traffic_ALL *smithy.Schema
-
-var Traffic_CONGESTION *smithy.Schema
-
-var TravelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "TravelMode",
-}, smithy.ShapeTypeEnum, 2)
-var TravelMode_TRANSIT *smithy.Schema
-
-var TravelMode_TRUCK *smithy.Schema
-
-var _TravelModeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "TravelModeList",
-}, smithy.ShapeTypeList, 1)
-var _TravelModeList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_FieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 6)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_MISSING *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ValidationExceptionReason_UNKNOWN_FIELD *smithy.Schema
-
-var Variant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Variant",
-}, smithy.ShapeTypeEnum, 1)
-var Variant_DEFAULT *smithy.Schema
-
-var GetGlyphsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetGlyphsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetGlyphsRequest_FontStack *smithy.Schema
-
-var GetGlyphsRequest_FontUnicodeRange *smithy.Schema
-
-var GetGlyphsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetGlyphsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetGlyphsResponse_Blob *smithy.Schema
-
-var GetGlyphsResponse_ContentType *smithy.Schema
-
-var GetGlyphsResponse_CacheControl *smithy.Schema
-
-var GetGlyphsResponse_ETag *smithy.Schema
-
-var GetSpritesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetSpritesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetSpritesRequest_FileName *smithy.Schema
-
-var GetSpritesRequest_Style *smithy.Schema
-
-var GetSpritesRequest_ColorScheme *smithy.Schema
-
-var GetSpritesRequest_Variant *smithy.Schema
-
-var GetSpritesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetSpritesResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetSpritesResponse_Blob *smithy.Schema
-
-var GetSpritesResponse_ContentType *smithy.Schema
-
-var GetSpritesResponse_CacheControl *smithy.Schema
-
-var GetSpritesResponse_ETag *smithy.Schema
-
-var GetStaticMapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStaticMapRequest",
-}, smithy.ShapeTypeStructure, 20)
-var GetStaticMapRequest_BoundingBox *smithy.Schema
-
-var GetStaticMapRequest_BoundedPositions *smithy.Schema
-
-var GetStaticMapRequest_Center *smithy.Schema
-
-var GetStaticMapRequest_ColorScheme *smithy.Schema
-
-var GetStaticMapRequest_CompactOverlay *smithy.Schema
-
-var GetStaticMapRequest_CropLabels *smithy.Schema
-
-var GetStaticMapRequest_GeoJsonOverlay *smithy.Schema
-
-var GetStaticMapRequest_Height *smithy.Schema
-
-var GetStaticMapRequest_Key *smithy.Schema
-
-var GetStaticMapRequest_LabelSize *smithy.Schema
-
-var GetStaticMapRequest_Language *smithy.Schema
-
-var GetStaticMapRequest_Padding *smithy.Schema
-
-var GetStaticMapRequest_PoliticalView *smithy.Schema
-
-var GetStaticMapRequest_PointsOfInterests *smithy.Schema
-
-var GetStaticMapRequest_Radius *smithy.Schema
-
-var GetStaticMapRequest_FileName *smithy.Schema
-
-var GetStaticMapRequest_ScaleBarUnit *smithy.Schema
-
-var GetStaticMapRequest_Style *smithy.Schema
-
-var GetStaticMapRequest_Width *smithy.Schema
-
-var GetStaticMapRequest_Zoom *smithy.Schema
-
-var GetStaticMapResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStaticMapResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetStaticMapResponse_Blob *smithy.Schema
-
-var GetStaticMapResponse_ContentType *smithy.Schema
-
-var GetStaticMapResponse_CacheControl *smithy.Schema
-
-var GetStaticMapResponse_ETag *smithy.Schema
-
-var GetStaticMapResponse_PricingBucket *smithy.Schema
-
-var GetStyleDescriptorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStyleDescriptorRequest",
-}, smithy.ShapeTypeStructure, 11)
-var GetStyleDescriptorRequest_Style *smithy.Schema
-
-var GetStyleDescriptorRequest_ColorScheme *smithy.Schema
-
-var GetStyleDescriptorRequest_PoliticalView *smithy.Schema
-
-var GetStyleDescriptorRequest_Terrain *smithy.Schema
-
-var GetStyleDescriptorRequest_ContourDensity *smithy.Schema
-
-var GetStyleDescriptorRequest_Traffic *smithy.Schema
-
-var GetStyleDescriptorRequest_TravelModes *smithy.Schema
-
-var GetStyleDescriptorRequest_Buildings *smithy.Schema
-
-var GetStyleDescriptorRequest_PoiDensity *smithy.Schema
-
-var GetStyleDescriptorRequest_PoiCategories *smithy.Schema
-
-var GetStyleDescriptorRequest_Key *smithy.Schema
-
-var GetStyleDescriptorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStyleDescriptorResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetStyleDescriptorResponse_Blob *smithy.Schema
-
-var GetStyleDescriptorResponse_ContentType *smithy.Schema
-
-var GetStyleDescriptorResponse_CacheControl *smithy.Schema
-
-var GetStyleDescriptorResponse_ETag *smithy.Schema
-
-var GetTileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetTileRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetTileRequest_AdditionalFeatures *smithy.Schema
-
-var GetTileRequest_Tileset *smithy.Schema
-
-var GetTileRequest_Z *smithy.Schema
-
-var GetTileRequest_X *smithy.Schema
-
-var GetTileRequest_Y *smithy.Schema
-
-var GetTileRequest_Key *smithy.Schema
-
-var GetTileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetTileResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetTileResponse_Blob *smithy.Schema
-
-var GetTileResponse_ContentType *smithy.Schema
-
-var GetTileResponse_CacheControl *smithy.Schema
-
-var GetTileResponse_ETag *smithy.Schema
-
-var GetTileResponse_PricingBucket *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	Buildings_BUILDINGS_3D = Buildings.AddMember("BUILDINGS_3D", smithyprelude.Unit)
-
-	ColorScheme_LIGHT = ColorScheme.AddMember("LIGHT", smithyprelude.Unit)
-
-	ColorScheme_DARK = ColorScheme.AddMember("DARK", smithyprelude.Unit)
-
-	ContourDensity_LOW = ContourDensity.AddMember("LOW", smithyprelude.Unit)
-
-	ContourDensity_MEDIUM = ContourDensity.AddMember("MEDIUM", smithyprelude.Unit)
-
-	ContourDensity_HIGH = ContourDensity.AddMember("HIGH", smithyprelude.Unit)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	LabelSize_SMALL = LabelSize.AddMember("SMALL", smithyprelude.Unit)
-
-	LabelSize_LARGE = LabelSize.AddMember("LARGE", smithyprelude.Unit)
-
-	MapFeatureMode_ENABLED = MapFeatureMode.AddMember("ENABLED", smithyprelude.Unit)
-
-	MapFeatureMode_DISABLED = MapFeatureMode.AddMember("DISABLED", smithyprelude.Unit)
-
-	MapStyle_STANDARD = MapStyle.AddMember("STANDARD", smithyprelude.Unit)
-
-	MapStyle_MONOCHROME = MapStyle.AddMember("MONOCHROME", smithyprelude.Unit)
-
-	MapStyle_HYBRID = MapStyle.AddMember("HYBRID", smithyprelude.Unit)
-
-	MapStyle_SATELLITE = MapStyle.AddMember("SATELLITE", smithyprelude.Unit)
-
-	PoiCategory_FOOD_AND_DRINK = PoiCategory.AddMember("FOOD_AND_DRINK", smithyprelude.Unit)
-
-	PoiCategory_ENTERTAINMENT = PoiCategory.AddMember("ENTERTAINMENT", smithyprelude.Unit)
-
-	PoiCategory_SIGHTS_AND_MUSEUMS = PoiCategory.AddMember("SIGHTS_AND_MUSEUMS", smithyprelude.Unit)
-
-	PoiCategory_TRANSPORTATION = PoiCategory.AddMember("TRANSPORTATION", smithyprelude.Unit)
-
-	PoiCategory_ACCOMMODATIONS = PoiCategory.AddMember("ACCOMMODATIONS", smithyprelude.Unit)
-
-	PoiCategory_LEISURE_AND_OUTDOOR = PoiCategory.AddMember("LEISURE_AND_OUTDOOR", smithyprelude.Unit)
-
-	PoiCategory_SHOPPING = PoiCategory.AddMember("SHOPPING", smithyprelude.Unit)
-
-	PoiCategory_BUSINESS_AND_SERVICES = PoiCategory.AddMember("BUSINESS_AND_SERVICES", smithyprelude.Unit)
-
-	PoiCategory_FACILITIES_AND_BUILDINGS = PoiCategory.AddMember("FACILITIES_AND_BUILDINGS", smithyprelude.Unit)
-
-	_PoiCategoryList_member = _PoiCategoryList.AddMember("member", PoiCategory)
-
-	PoiDensity_OFF = PoiDensity.AddMember("OFF", smithyprelude.Unit)
-
-	PoiDensity_VERY_SPARSE = PoiDensity.AddMember("VERY_SPARSE", smithyprelude.Unit)
-
-	PoiDensity_SPARSE = PoiDensity.AddMember("SPARSE", smithyprelude.Unit)
-
-	PoiDensity_DEFAULT = PoiDensity.AddMember("DEFAULT", smithyprelude.Unit)
-
-	PoiDensity_DENSE = PoiDensity.AddMember("DENSE", smithyprelude.Unit)
-
-	PoiDensity_VERY_DENSE = PoiDensity.AddMember("VERY_DENSE", smithyprelude.Unit)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	ScaleBarUnit_KILOMETERS = ScaleBarUnit.AddMember("KILOMETERS", smithyprelude.Unit)
-
-	ScaleBarUnit_KILOMETERS_MILES = ScaleBarUnit.AddMember("KILOMETERS_MILES", smithyprelude.Unit)
-
-	ScaleBarUnit_MILES = ScaleBarUnit.AddMember("MILES", smithyprelude.Unit)
-
-	ScaleBarUnit_MILES_KILOMETERS = ScaleBarUnit.AddMember("MILES_KILOMETERS", smithyprelude.Unit)
-
-	StaticMapStyle_SATELLITE = StaticMapStyle.AddMember("SATELLITE", smithyprelude.Unit)
-
-	StaticMapStyle_STANDARD = StaticMapStyle.AddMember("STANDARD", smithyprelude.Unit)
-
-	Terrain_HILLSHADE = Terrain.AddMember("HILLSHADE", smithyprelude.Unit)
-
-	Terrain_TERRAIN_3D = Terrain.AddMember("TERRAIN_3D", smithyprelude.Unit)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	TileAdditionalFeature_CONTOUR_LINES = TileAdditionalFeature.AddMember("CONTOUR_LINES", smithyprelude.Unit)
-
-	TileAdditionalFeature_HILLSHADE = TileAdditionalFeature.AddMember("HILLSHADE", smithyprelude.Unit)
-
-	TileAdditionalFeature_LOGISTICS = TileAdditionalFeature.AddMember("LOGISTICS", smithyprelude.Unit)
-
-	TileAdditionalFeature_TRANSIT = TileAdditionalFeature.AddMember("TRANSIT", smithyprelude.Unit)
-
-	_TileAdditionalFeatureList_member = _TileAdditionalFeatureList.AddMember("member", TileAdditionalFeature)
-
-	Traffic_ALL = Traffic.AddMember("ALL", smithyprelude.Unit)
-
-	Traffic_CONGESTION = Traffic.AddMember("CONGESTION", smithyprelude.Unit)
-
-	TravelMode_TRANSIT = TravelMode.AddMember("TRANSIT", smithyprelude.Unit)
-
-	TravelMode_TRUCK = TravelMode.AddMember("TRUCK", smithyprelude.Unit)
-
-	_TravelModeList_member = _TravelModeList.AddMember("member", TravelMode)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_MISSING = ValidationExceptionReason.AddMember("MISSING", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNKNOWN_FIELD = ValidationExceptionReason.AddMember("UNKNOWN_FIELD", smithyprelude.Unit)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason, &smithytraits.JSONName{Name: "reason"})
-
-	ValidationException_FieldList = ValidationException.AddMember("FieldList", _ValidationExceptionFieldList, &smithytraits.JSONName{Name: "fieldList"})
-
-	Variant_DEFAULT = Variant.AddMember("DEFAULT", smithyprelude.Unit)
-
-	GetGlyphsRequest_FontStack = GetGlyphsRequest.AddMember("FontStack", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetGlyphsRequest_FontUnicodeRange = GetGlyphsRequest.AddMember("FontUnicodeRange", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetGlyphsResponse_Blob = GetGlyphsResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetGlyphsResponse_ContentType = GetGlyphsResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetGlyphsResponse_CacheControl = GetGlyphsResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetGlyphsResponse_ETag = GetGlyphsResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetSpritesRequest_FileName = GetSpritesRequest.AddMember("FileName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetSpritesRequest_Style = GetSpritesRequest.AddMember("Style", MapStyle, &smithytraits.HTTPLabel{})
-
-	GetSpritesRequest_ColorScheme = GetSpritesRequest.AddMember("ColorScheme", ColorScheme, &smithytraits.HTTPLabel{})
-
-	GetSpritesRequest_Variant = GetSpritesRequest.AddMember("Variant", Variant, &smithytraits.HTTPLabel{})
-
-	GetSpritesResponse_Blob = GetSpritesResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetSpritesResponse_ContentType = GetSpritesResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetSpritesResponse_CacheControl = GetSpritesResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetSpritesResponse_ETag = GetSpritesResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetStaticMapRequest_BoundingBox = GetStaticMapRequest.AddMember("BoundingBox", _PositionListString, &smithytraits.HTTPQuery{Name: "bounding-box"})
-
-	GetStaticMapRequest_BoundedPositions = GetStaticMapRequest.AddMember("BoundedPositions", _PositionListString, &smithytraits.HTTPQuery{Name: "bounded-positions"})
-
-	GetStaticMapRequest_Center = GetStaticMapRequest.AddMember("Center", _PositionString, &smithytraits.HTTPQuery{Name: "center"})
-
-	GetStaticMapRequest_ColorScheme = GetStaticMapRequest.AddMember("ColorScheme", ColorScheme, &smithytraits.HTTPQuery{Name: "color-scheme"})
-
-	GetStaticMapRequest_CompactOverlay = GetStaticMapRequest.AddMember("CompactOverlay", _CompactOverlay, &smithytraits.HTTPQuery{Name: "compact-overlay"})
-
-	GetStaticMapRequest_CropLabels = GetStaticMapRequest.AddMember("CropLabels", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "crop-labels"})
-
-	GetStaticMapRequest_GeoJsonOverlay = GetStaticMapRequest.AddMember("GeoJsonOverlay", _GeoJsonOverlay, &smithytraits.HTTPQuery{Name: "geojson-overlay"})
-
-	GetStaticMapRequest_Height = GetStaticMapRequest.AddMember("Height", _SensitiveInteger, &smithytraits.HTTPQuery{Name: "height"})
-
-	GetStaticMapRequest_Key = GetStaticMapRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	GetStaticMapRequest_LabelSize = GetStaticMapRequest.AddMember("LabelSize", LabelSize, &smithytraits.HTTPQuery{Name: "label-size"})
-
-	GetStaticMapRequest_Language = GetStaticMapRequest.AddMember("Language", _LanguageTag, &smithytraits.HTTPQuery{Name: "lang"})
-
-	GetStaticMapRequest_Padding = GetStaticMapRequest.AddMember("Padding", _SensitiveInteger, &smithytraits.HTTPQuery{Name: "padding"})
-
-	GetStaticMapRequest_PoliticalView = GetStaticMapRequest.AddMember("PoliticalView", _CountryCode, &smithytraits.HTTPQuery{Name: "political-view"})
-
-	GetStaticMapRequest_PointsOfInterests = GetStaticMapRequest.AddMember("PointsOfInterests", MapFeatureMode, &smithytraits.HTTPQuery{Name: "pois"})
-
-	GetStaticMapRequest_Radius = GetStaticMapRequest.AddMember("Radius", _DistanceMeters, &smithytraits.HTTPQuery{Name: "radius"})
-
-	GetStaticMapRequest_FileName = GetStaticMapRequest.AddMember("FileName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetStaticMapRequest_ScaleBarUnit = GetStaticMapRequest.AddMember("ScaleBarUnit", ScaleBarUnit, &smithytraits.HTTPQuery{Name: "scale-unit"})
-
-	GetStaticMapRequest_Style = GetStaticMapRequest.AddMember("Style", StaticMapStyle, &smithytraits.HTTPQuery{Name: "style"})
-
-	GetStaticMapRequest_Width = GetStaticMapRequest.AddMember("Width", _SensitiveInteger, &smithytraits.HTTPQuery{Name: "width"})
-
-	GetStaticMapRequest_Zoom = GetStaticMapRequest.AddMember("Zoom", _SensitiveFloat, &smithytraits.HTTPQuery{Name: "zoom"})
-
-	GetStaticMapResponse_Blob = GetStaticMapResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetStaticMapResponse_ContentType = GetStaticMapResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetStaticMapResponse_CacheControl = GetStaticMapResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetStaticMapResponse_ETag = GetStaticMapResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetStaticMapResponse_PricingBucket = GetStaticMapResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
-	GetStyleDescriptorRequest_Style = GetStyleDescriptorRequest.AddMember("Style", MapStyle, &smithytraits.HTTPLabel{})
-
-	GetStyleDescriptorRequest_ColorScheme = GetStyleDescriptorRequest.AddMember("ColorScheme", ColorScheme, &smithytraits.HTTPQuery{Name: "color-scheme"})
-
-	GetStyleDescriptorRequest_PoliticalView = GetStyleDescriptorRequest.AddMember("PoliticalView", _CountryCode, &smithytraits.HTTPQuery{Name: "political-view"})
-
-	GetStyleDescriptorRequest_Terrain = GetStyleDescriptorRequest.AddMember("Terrain", Terrain, &smithytraits.HTTPQuery{Name: "terrain"})
-
-	GetStyleDescriptorRequest_ContourDensity = GetStyleDescriptorRequest.AddMember("ContourDensity", ContourDensity, &smithytraits.HTTPQuery{Name: "contour-density"})
-
-	GetStyleDescriptorRequest_Traffic = GetStyleDescriptorRequest.AddMember("Traffic", Traffic, &smithytraits.HTTPQuery{Name: "traffic"})
-
-	GetStyleDescriptorRequest_TravelModes = GetStyleDescriptorRequest.AddMember("TravelModes", _TravelModeList, &smithytraits.HTTPQuery{Name: "travel-modes"})
-
-	GetStyleDescriptorRequest_Buildings = GetStyleDescriptorRequest.AddMember("Buildings", Buildings, &smithytraits.HTTPQuery{Name: "buildings"})
-
-	GetStyleDescriptorRequest_PoiDensity = GetStyleDescriptorRequest.AddMember("PoiDensity", PoiDensity, &smithytraits.HTTPQuery{Name: "poi-density"})
-
-	GetStyleDescriptorRequest_PoiCategories = GetStyleDescriptorRequest.AddMember("PoiCategories", _PoiCategoryList, &smithytraits.HTTPQuery{Name: "poi-categories"})
-
-	GetStyleDescriptorRequest_Key = GetStyleDescriptorRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	GetStyleDescriptorResponse_Blob = GetStyleDescriptorResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetStyleDescriptorResponse_ContentType = GetStyleDescriptorResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetStyleDescriptorResponse_CacheControl = GetStyleDescriptorResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetStyleDescriptorResponse_ETag = GetStyleDescriptorResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetTileRequest_AdditionalFeatures = GetTileRequest.AddMember("AdditionalFeatures", _TileAdditionalFeatureList, &smithytraits.HTTPQuery{Name: "additional-features"})
-
-	GetTileRequest_Tileset = GetTileRequest.AddMember("Tileset", _Tileset, &smithytraits.HTTPLabel{})
-
-	GetTileRequest_Z = GetTileRequest.AddMember("Z", _SensitiveString, &smithytraits.HTTPLabel{})
-
-	GetTileRequest_X = GetTileRequest.AddMember("X", _SensitiveString, &smithytraits.HTTPLabel{})
-
-	GetTileRequest_Y = GetTileRequest.AddMember("Y", _SensitiveString, &smithytraits.HTTPLabel{})
-
-	GetTileRequest_Key = GetTileRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	GetTileResponse_Blob = GetTileResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetTileResponse_ContentType = GetTileResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetTileResponse_CacheControl = GetTileResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetTileResponse_ETag = GetTileResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetTileResponse_PricingBucket = GetTileResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
+const blob = "" +
+	"ValidationExceptionFieldListGetStyleDescriptorResponseGetStyleDescriptorRequestResourceNotFoundExcep" +
+	"tionTileAdditionalFeatureListValidationExceptionReasonFACILITIES_AND_BUILDINGSFIELD_VALIDATION_FAILE" +
+	"DInternalServerExceptionAccessDeniedExceptionBUSINESS_AND_SERVICESGetStaticMapResponseGetStaticMapRe" +
+	"questLEISURE_AND_OUTDOORThrottlingExceptionAdditionalFeaturesGetSpritesResponsePositionListStringSIG" +
+	"HTS_AND_MUSEUMSGetGlyphsResponseGetSpritesRequestPointsOfInterestsUNKNOWN_OPERATIONBoundedPositionsF" +
+	"ontUnicodeRangeGetGlyphsRequestKILOMETERS_MILESMILES_KILOMETERSSensitiveIntegerGetTileResponsePoiCat" +
+	"egoryListSensitiveStringACCOMMODATIONSCompactOverlayContourDensityDistanceMetersFOOD_AND_DRINKGeoJso" +
+	"nOverlayGetTileRequestMapFeatureModePositionStringSensitiveFloatStaticMapStyleTRANSPORTATIONTravelMo" +
+	"deListCONTOUR_LINESENTERTAINMENTPoiCategoriesPoliticalViewPricingBucketUNKNOWN_FIELDBUILDINGS_3DCANN" +
+	"OT_PARSECacheControlScaleBarUnitBoundingBoxColorSchemeContentTypeCountryCodeLanguageTagMapsServiceTr" +
+	"avelModesVERY_SPARSECONGESTIONCropLabelsMONOCHROMEPoiDensityTERRAIN_3DVERY_DENSEBuildingsFontStackHI" +
+	"LLSHADELOGISTICSLabelSizeSATELLITEDISABLEDFileNameSHOPPINGSTANDARDBooleanDEFAULTENABLEDMISSINGMessag" +
+	"ePaddingTRANSITTerrainTilesetTrafficVariantApiKeyCenterHYBRIDHeightMEDIUMRadiusmemberLARGELIGHTOTHER" +
+	"SMALLTRUCKWidthBlobDARKETagHIGHZoomLOWOFFX"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.geomaps", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 415, Target: 0, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 361, Target: 1, Traits: 1, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 266, Target: 2, Traits: 2, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 28, Target: 3, Traits: 3, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 579, Target: 4, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 987, Target: 5, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 224, Target: 6, Traits: 6, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1194, Target: 184, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1243, Target: 8, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1080, Target: 9, Traits: 5, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 884, Target: 185, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 943, Target: 11, Traits: 5, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1290, Target: 185, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1319, Target: 185, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 638, Target: 14, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 652, Target: 15, Traits: 5, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1335, Target: 185, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1267, Target: 185, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1327, Target: 185, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 965, Target: 19, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 666, Target: 20, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 694, Target: 21, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 201, Target: 22, Traits: 9, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1194, Target: 184, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1116, Target: 24, Traits: 5, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1300, Target: 185, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1285, Target: 185, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 976, Target: 27, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 722, Target: 28, Traits: 5, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1180, Target: 185, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1134, Target: 185, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 770, Target: 31, Traits: 5, StrLen: 8, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1158, Target: 185, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1040, Target: 185, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1255, Target: 185, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1125, Target: 185, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 594, Target: 36, Traits: 5, StrLen: 11, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 680, Target: 185, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 819, Target: 185, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 397, Target: 185, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 778, Target: 185, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 624, Target: 185, Traits: 5, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 305, Target: 185, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1150, Target: 185, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 245, Target: 185, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 154, Target: 185, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 594, Target: 46, Traits: 5, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1279, Target: 36, Traits: 5, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1050, Target: 48, Traits: 5, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1338, Target: 185, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1009, Target: 185, Traits: 5, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1014, Target: 185, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1173, Target: 185, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1075, Target: 185, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1070, Target: 185, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 379, Target: 55, Traits: 8, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 736, Target: 56, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 79, Target: 57, Traits: 10, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1194, Target: 184, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 920, Target: 59, Traits: 5, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 531, Target: 185, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 531, Target: 185, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 542, Target: 185, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 547, Target: 185, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 750, Target: 64, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 0},
+		{StrOff: 563, Target: 65, Traits: 8, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 609, Target: 66, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 764, Target: 67, Traits: 5, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1125, Target: 185, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1158, Target: 185, Traits: 5, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1215, Target: 70, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1098, Target: 185, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1060, Target: 185, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 324, Target: 73, Traits: 11, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1194, Target: 184, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 104, Target: 75, Traits: 5, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 806, Target: 185, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1098, Target: 185, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1107, Target: 185, Traits: 5, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1208, Target: 185, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 104, Target: 80, Traits: 5, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1279, Target: 75, Traits: 5, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1222, Target: 82, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1229, Target: 83, Traits: 5, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1302, Target: 185, Traits: 5, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1020, Target: 185, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 792, Target: 86, Traits: 5, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1208, Target: 185, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1305, Target: 185, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 792, Target: 89, Traits: 5, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1279, Target: 86, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 0, Target: 91, Traits: 12, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1194, Target: 184, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 148, Target: 100, Traits: 13, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 19, Target: 98, Traits: 14, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 95, Traits: 5, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1146, Target: 184, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1194, Target: 184, Traits: 7, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 98, Traits: 5, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1279, Target: 95, Traits: 5, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 129, Target: 100, Traits: 5, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 466, Target: 185, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1187, Target: 185, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 896, Target: 185, Traits: 5, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 178, Target: 185, Traits: 5, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1295, Target: 185, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 871, Target: 185, Traits: 5, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1236, Target: 107, Traits: 5, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1173, Target: 185, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 515, Target: 109, Traits: 5, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1089, Target: 184, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 499, Target: 184, Traits: 16, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 415, Target: 112, Traits: 5, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 186, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 954, Target: 184, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 908, Target: 184, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1323, Target: 184, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 432, Target: 117, Traits: 5, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1142, Target: 184, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 31, Target: 31, Traits: 16, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 943, Target: 11, Traits: 16, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1236, Target: 107, Traits: 16, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 361, Target: 122, Traits: 5, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 186, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 954, Target: 184, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 908, Target: 184, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1323, Target: 184, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 286, Target: 127, Traits: 5, StrLen: 19, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 932, Target: 55, Traits: 21, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 483, Target: 55, Traits: 22, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1249, Target: 56, Traits: 23, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 943, Target: 11, Traits: 24, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 638, Target: 14, Traits: 25, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1030, Target: 187, Traits: 26, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 694, Target: 21, Traits: 27, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1261, Target: 65, Traits: 28, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1246, Target: 8, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1116, Target: 24, Traits: 30, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 976, Target: 27, Traits: 31, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1201, Target: 65, Traits: 32, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 845, Target: 19, Traits: 33, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 449, Target: 28, Traits: 34, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1273, Target: 20, Traits: 35, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1142, Target: 184, Traits: 16, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 920, Target: 59, Traits: 36, StrLen: 12, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 31, Target: 67, Traits: 37, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1310, Target: 65, Traits: 38, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1331, Target: 64, Traits: 39, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 266, Target: 148, Traits: 5, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 186, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 954, Target: 184, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 908, Target: 184, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1323, Target: 184, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 858, Target: 184, Traits: 40, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 54, Target: 154, Traits: 5, StrLen: 25, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 31, Target: 31, Traits: 16, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 943, Target: 11, Traits: 24, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 845, Target: 19, Traits: 33, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1215, Target: 70, Traits: 41, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 652, Target: 15, Traits: 42, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1229, Target: 83, Traits: 43, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 998, Target: 89, Traits: 44, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1080, Target: 9, Traits: 45, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1050, Target: 48, Traits: 46, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 832, Target: 46, Traits: 47, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1246, Target: 8, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 28, Target: 166, Traits: 5, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 186, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 954, Target: 184, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 908, Target: 184, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1323, Target: 184, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 708, Target: 171, Traits: 5, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 343, Target: 80, Traits: 48, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1222, Target: 82, Traits: 16, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1331, Target: 66, Traits: 49, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1341, Target: 66, Traits: 49, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1012, Target: 66, Traits: 49, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1246, Target: 8, Traits: 29, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 579, Target: 178, Traits: 5, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1315, Target: 186, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 954, Target: 184, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 908, Target: 184, Traits: 19, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1323, Target: 184, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 858, Target: 184, Traits: 40, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 391, Target: 184, Traits: 5, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 928, Target: 185, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 1315, Target: 186, Traits: 5, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 2},
+		{StrOff: 1166, Target: 187, Traits: 5, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v2/glyphs/{FontStack}/{FontUnicodeRange}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v2/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v2/static/{FileName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v2/styles/{Style}/descriptor",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v2/tiles/{Tileset}/{Z}/{X}/{Y}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "reason"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "fieldList"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "name"}}, DirectMask: 0x1},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Cache-Control"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "ETag"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "bounding-box"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "bounded-positions"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "center"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "color-scheme"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "compact-overlay"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "crop-labels"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "geojson-overlay"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "height"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "key"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "label-size"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "lang"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "padding"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "political-view"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "pois"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "radius"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "scale-unit"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "style"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "width"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "zoom"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "terrain"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "contour-density"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "traffic"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "travel-modes"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "buildings"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "poi-density"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "poi-categories"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "additional-features"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x4},
+	},
 }
+
+var handles = [188]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+}
+
+var GetGlyphs = &handles[0]
+
+var GetSprites = &handles[1]
+
+var GetStaticMap = &handles[2]
+
+var GetStyleDescriptor = &handles[3]
+
+var GetTile = &handles[4]
+
+var _MapsService = &handles[5]
+
+var AccessDeniedException = &handles[6]
+var AccessDeniedException_Message = &handles[7]
+
+var _ApiKey = &handles[8]
+
+var Buildings = &handles[9]
+var Buildings_BUILDINGS_3D = &handles[10]
+
+var ColorScheme = &handles[11]
+var ColorScheme_LIGHT = &handles[12]
+var ColorScheme_DARK = &handles[13]
+
+var _CompactOverlay = &handles[14]
+
+var ContourDensity = &handles[15]
+var ContourDensity_LOW = &handles[16]
+var ContourDensity_MEDIUM = &handles[17]
+var ContourDensity_HIGH = &handles[18]
+
+var _CountryCode = &handles[19]
+
+var _DistanceMeters = &handles[20]
+
+var _GeoJsonOverlay = &handles[21]
+
+var InternalServerException = &handles[22]
+var InternalServerException_Message = &handles[23]
+
+var LabelSize = &handles[24]
+var LabelSize_SMALL = &handles[25]
+var LabelSize_LARGE = &handles[26]
+
+var _LanguageTag = &handles[27]
+
+var MapFeatureMode = &handles[28]
+var MapFeatureMode_ENABLED = &handles[29]
+var MapFeatureMode_DISABLED = &handles[30]
+
+var MapStyle = &handles[31]
+var MapStyle_STANDARD = &handles[32]
+var MapStyle_MONOCHROME = &handles[33]
+var MapStyle_HYBRID = &handles[34]
+var MapStyle_SATELLITE = &handles[35]
+
+var PoiCategory = &handles[36]
+var PoiCategory_FOOD_AND_DRINK = &handles[37]
+var PoiCategory_ENTERTAINMENT = &handles[38]
+var PoiCategory_SIGHTS_AND_MUSEUMS = &handles[39]
+var PoiCategory_TRANSPORTATION = &handles[40]
+var PoiCategory_ACCOMMODATIONS = &handles[41]
+var PoiCategory_LEISURE_AND_OUTDOOR = &handles[42]
+var PoiCategory_SHOPPING = &handles[43]
+var PoiCategory_BUSINESS_AND_SERVICES = &handles[44]
+var PoiCategory_FACILITIES_AND_BUILDINGS = &handles[45]
+
+var _PoiCategoryList = &handles[46]
+var _PoiCategoryList_member = &handles[47]
+
+var PoiDensity = &handles[48]
+var PoiDensity_OFF = &handles[49]
+var PoiDensity_VERY_SPARSE = &handles[50]
+var PoiDensity_SPARSE = &handles[51]
+var PoiDensity_DEFAULT = &handles[52]
+var PoiDensity_DENSE = &handles[53]
+var PoiDensity_VERY_DENSE = &handles[54]
+
+var _PositionListString = &handles[55]
+
+var _PositionString = &handles[56]
+
+var ResourceNotFoundException = &handles[57]
+var ResourceNotFoundException_Message = &handles[58]
+
+var ScaleBarUnit = &handles[59]
+var ScaleBarUnit_KILOMETERS = &handles[60]
+var ScaleBarUnit_KILOMETERS_MILES = &handles[61]
+var ScaleBarUnit_MILES = &handles[62]
+var ScaleBarUnit_MILES_KILOMETERS = &handles[63]
+
+var _SensitiveFloat = &handles[64]
+
+var _SensitiveInteger = &handles[65]
+
+var _SensitiveString = &handles[66]
+
+var StaticMapStyle = &handles[67]
+var StaticMapStyle_SATELLITE = &handles[68]
+var StaticMapStyle_STANDARD = &handles[69]
+
+var Terrain = &handles[70]
+var Terrain_HILLSHADE = &handles[71]
+var Terrain_TERRAIN_3D = &handles[72]
+
+var ThrottlingException = &handles[73]
+var ThrottlingException_Message = &handles[74]
+
+var TileAdditionalFeature = &handles[75]
+var TileAdditionalFeature_CONTOUR_LINES = &handles[76]
+var TileAdditionalFeature_HILLSHADE = &handles[77]
+var TileAdditionalFeature_LOGISTICS = &handles[78]
+var TileAdditionalFeature_TRANSIT = &handles[79]
+
+var _TileAdditionalFeatureList = &handles[80]
+var _TileAdditionalFeatureList_member = &handles[81]
+
+var _Tileset = &handles[82]
+
+var Traffic = &handles[83]
+var Traffic_ALL = &handles[84]
+var Traffic_CONGESTION = &handles[85]
+
+var TravelMode = &handles[86]
+var TravelMode_TRANSIT = &handles[87]
+var TravelMode_TRUCK = &handles[88]
+
+var _TravelModeList = &handles[89]
+var _TravelModeList_member = &handles[90]
+
+var ValidationException = &handles[91]
+var ValidationException_Message = &handles[92]
+var ValidationException_Reason = &handles[93]
+var ValidationException_FieldList = &handles[94]
+
+var ValidationExceptionField = &handles[95]
+var ValidationExceptionField_Name = &handles[96]
+var ValidationExceptionField_Message = &handles[97]
+
+var _ValidationExceptionFieldList = &handles[98]
+var _ValidationExceptionFieldList_member = &handles[99]
+
+var ValidationExceptionReason = &handles[100]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[101]
+var ValidationExceptionReason_MISSING = &handles[102]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[103]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[104]
+var ValidationExceptionReason_OTHER = &handles[105]
+var ValidationExceptionReason_UNKNOWN_FIELD = &handles[106]
+
+var Variant = &handles[107]
+var Variant_DEFAULT = &handles[108]
+
+var GetGlyphsRequest = &handles[109]
+var GetGlyphsRequest_FontStack = &handles[110]
+var GetGlyphsRequest_FontUnicodeRange = &handles[111]
+
+var GetGlyphsResponse = &handles[112]
+var GetGlyphsResponse_Blob = &handles[113]
+var GetGlyphsResponse_ContentType = &handles[114]
+var GetGlyphsResponse_CacheControl = &handles[115]
+var GetGlyphsResponse_ETag = &handles[116]
+
+var GetSpritesRequest = &handles[117]
+var GetSpritesRequest_FileName = &handles[118]
+var GetSpritesRequest_Style = &handles[119]
+var GetSpritesRequest_ColorScheme = &handles[120]
+var GetSpritesRequest_Variant = &handles[121]
+
+var GetSpritesResponse = &handles[122]
+var GetSpritesResponse_Blob = &handles[123]
+var GetSpritesResponse_ContentType = &handles[124]
+var GetSpritesResponse_CacheControl = &handles[125]
+var GetSpritesResponse_ETag = &handles[126]
+
+var GetStaticMapRequest = &handles[127]
+var GetStaticMapRequest_BoundingBox = &handles[128]
+var GetStaticMapRequest_BoundedPositions = &handles[129]
+var GetStaticMapRequest_Center = &handles[130]
+var GetStaticMapRequest_ColorScheme = &handles[131]
+var GetStaticMapRequest_CompactOverlay = &handles[132]
+var GetStaticMapRequest_CropLabels = &handles[133]
+var GetStaticMapRequest_GeoJsonOverlay = &handles[134]
+var GetStaticMapRequest_Height = &handles[135]
+var GetStaticMapRequest_Key = &handles[136]
+var GetStaticMapRequest_LabelSize = &handles[137]
+var GetStaticMapRequest_Language = &handles[138]
+var GetStaticMapRequest_Padding = &handles[139]
+var GetStaticMapRequest_PoliticalView = &handles[140]
+var GetStaticMapRequest_PointsOfInterests = &handles[141]
+var GetStaticMapRequest_Radius = &handles[142]
+var GetStaticMapRequest_FileName = &handles[143]
+var GetStaticMapRequest_ScaleBarUnit = &handles[144]
+var GetStaticMapRequest_Style = &handles[145]
+var GetStaticMapRequest_Width = &handles[146]
+var GetStaticMapRequest_Zoom = &handles[147]
+
+var GetStaticMapResponse = &handles[148]
+var GetStaticMapResponse_Blob = &handles[149]
+var GetStaticMapResponse_ContentType = &handles[150]
+var GetStaticMapResponse_CacheControl = &handles[151]
+var GetStaticMapResponse_ETag = &handles[152]
+var GetStaticMapResponse_PricingBucket = &handles[153]
+
+var GetStyleDescriptorRequest = &handles[154]
+var GetStyleDescriptorRequest_Style = &handles[155]
+var GetStyleDescriptorRequest_ColorScheme = &handles[156]
+var GetStyleDescriptorRequest_PoliticalView = &handles[157]
+var GetStyleDescriptorRequest_Terrain = &handles[158]
+var GetStyleDescriptorRequest_ContourDensity = &handles[159]
+var GetStyleDescriptorRequest_Traffic = &handles[160]
+var GetStyleDescriptorRequest_TravelModes = &handles[161]
+var GetStyleDescriptorRequest_Buildings = &handles[162]
+var GetStyleDescriptorRequest_PoiDensity = &handles[163]
+var GetStyleDescriptorRequest_PoiCategories = &handles[164]
+var GetStyleDescriptorRequest_Key = &handles[165]
+
+var GetStyleDescriptorResponse = &handles[166]
+var GetStyleDescriptorResponse_Blob = &handles[167]
+var GetStyleDescriptorResponse_ContentType = &handles[168]
+var GetStyleDescriptorResponse_CacheControl = &handles[169]
+var GetStyleDescriptorResponse_ETag = &handles[170]
+
+var GetTileRequest = &handles[171]
+var GetTileRequest_AdditionalFeatures = &handles[172]
+var GetTileRequest_Tileset = &handles[173]
+var GetTileRequest_Z = &handles[174]
+var GetTileRequest_X = &handles[175]
+var GetTileRequest_Y = &handles[176]
+var GetTileRequest_Key = &handles[177]
+
+var GetTileResponse = &handles[178]
+var GetTileResponse_Blob = &handles[179]
+var GetTileResponse_ContentType = &handles[180]
+var GetTileResponse_CacheControl = &handles[181]
+var GetTileResponse_ETag = &handles[182]
+var GetTileResponse_PricingBucket = &handles[183]
+
+var MapsService = &smithy.ServiceSchema{Schema: &handles[5], Version: "2020-11-19"}

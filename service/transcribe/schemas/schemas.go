@@ -4,4226 +4,3529 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateCallAnalyticsCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateCallAnalyticsCategory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/callanalyticscategories/{CategoryName}",
-	Code: 200})
-
-var CreateLanguageModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateLanguageModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/languagemodels/{ModelName}",
-	Code: 200})
-
-var CreateMedicalVocabulary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateMedicalVocabulary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/medicalvocabularies/{VocabularyName}",
-	Code: 200})
-
-var CreateVocabulary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateVocabulary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/vocabularies/{VocabularyName}",
-	Code: 200})
-
-var CreateVocabularyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateVocabularyFilter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/vocabularyFilters/{VocabularyFilterName}",
-	Code: 201})
-
-var DeleteCallAnalyticsCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteCallAnalyticsCategory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/callanalyticscategories/{CategoryName}",
-	Code: 204})
-
-var DeleteCallAnalyticsJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteCallAnalyticsJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/callanalyticsjobs/{CallAnalyticsJobName}",
-	Code: 204})
-
-var DeleteLanguageModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteLanguageModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/languagemodels/{ModelName}",
-	Code: 204})
-
-var DeleteMedicalScribeJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteMedicalScribeJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/medicalscribejobs/{MedicalScribeJobName}",
-	Code: 204})
-
-var DeleteMedicalTranscriptionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteMedicalTranscriptionJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/medicaltranscriptionjobs/{MedicalTranscriptionJobName}",
-	Code: 204})
-
-var DeleteMedicalVocabulary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteMedicalVocabulary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/medicalvocabularies/{VocabularyName}",
-	Code: 204})
-
-var DeleteTranscriptionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteTranscriptionJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/transcriptionjobs/{TranscriptionJobName}",
-	Code: 204})
-
-var DeleteVocabulary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteVocabulary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/vocabularies/{VocabularyName}",
-	Code: 204})
-
-var DeleteVocabularyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteVocabularyFilter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/vocabularyFilters/{VocabularyFilterName}",
-	Code: 204})
-
-var DescribeLanguageModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DescribeLanguageModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/languagemodels/{ModelName}",
-	Code: 200})
-
-var GetCallAnalyticsCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetCallAnalyticsCategory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/callanalyticscategories/{CategoryName}",
-	Code: 200})
-
-var GetCallAnalyticsJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetCallAnalyticsJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/callanalyticsjobs/{CallAnalyticsJobName}",
-	Code: 200})
-
-var GetMedicalScribeJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalScribeJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/medicalscribejobs/{MedicalScribeJobName}",
-	Code: 200})
-
-var GetMedicalTranscriptionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalTranscriptionJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/medicaltranscriptionjobs/{MedicalTranscriptionJobName}",
-	Code: 200})
-
-var GetMedicalVocabulary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalVocabulary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/medicalvocabularies/{VocabularyName}",
-	Code: 200})
-
-var GetTranscriptionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetTranscriptionJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/transcriptionjobs/{TranscriptionJobName}",
-	Code: 200})
-
-var GetVocabulary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetVocabulary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/vocabularies/{VocabularyName}",
-	Code: 200})
-
-var GetVocabularyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetVocabularyFilter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/vocabularyFilters/{VocabularyFilterName}",
-	Code: 200})
-
-var ListCallAnalyticsCategories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListCallAnalyticsCategories",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/callanalyticscategories",
-	Code: 200})
-
-var ListCallAnalyticsJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListCallAnalyticsJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/callanalyticsjobs",
-	Code: 200})
-
-var ListLanguageModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListLanguageModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/languagemodels",
-	Code: 200})
-
-var ListMedicalScribeJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalScribeJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/medicalscribejobs",
-	Code: 200})
-
-var ListMedicalTranscriptionJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalTranscriptionJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/medicaltranscriptionjobs",
-	Code: 200})
-
-var ListMedicalVocabularies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalVocabularies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/medicalvocabularies",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var ListTranscriptionJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListTranscriptionJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/transcriptionjobs",
-	Code: 200})
-
-var ListVocabularies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListVocabularies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/vocabularies",
-	Code: 200})
-
-var ListVocabularyFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListVocabularyFilters",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/vocabularyFilters",
-	Code: 200})
-
-var StartCallAnalyticsJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartCallAnalyticsJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/callanalyticsjobs/{CallAnalyticsJobName}",
-	Code: 200})
-
-var StartMedicalScribeJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartMedicalScribeJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/medicalscribejobs/{MedicalScribeJobName}",
-	Code: 200})
-
-var StartMedicalTranscriptionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartMedicalTranscriptionJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/medicaltranscriptionjobs/{MedicalTranscriptionJobName}",
-	Code: 200})
-
-var StartTranscriptionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartTranscriptionJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/transcriptionjobs/{TranscriptionJobName}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateCallAnalyticsCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateCallAnalyticsCategory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/callanalyticscategories/{CategoryName}",
-	Code: 200})
-
-var UpdateLanguageModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateLanguageModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/languagemodels/{ModelName}",
-	Code: 200})
-
-var UpdateMedicalVocabulary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateMedicalVocabulary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/medicalvocabularies/{VocabularyName}",
-	Code: 200})
-
-var UpdateVocabulary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateVocabulary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/vocabularies/{VocabularyName}",
-	Code: 200})
-
-var UpdateVocabularyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateVocabularyFilter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/vocabularyFilters/{VocabularyFilterName}",
-	Code: 200})
-
-var _Transcribe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Transcribe",
-}, smithy.ShapeTypeService, 0)
-
-var Transcribe = smithy.NewServiceSchema(_Transcribe, "2017-10-26")
-
-var AbsoluteTimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "AbsoluteTimeRange",
-}, smithy.ShapeTypeStructure, 4)
-var AbsoluteTimeRange_StartTime *smithy.Schema
-
-var AbsoluteTimeRange_EndTime *smithy.Schema
-
-var AbsoluteTimeRange_First *smithy.Schema
-
-var AbsoluteTimeRange_Last *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
-
-var BaseModelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "BaseModelName",
-}, smithy.ShapeTypeEnum, 2)
-var BaseModelName_NARROW_BAND *smithy.Schema
-
-var BaseModelName_WIDE_BAND *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CallAnalyticsFeature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsFeature",
-}, smithy.ShapeTypeEnum, 1)
-var CallAnalyticsFeature_GENERATIVE_SUMMARIZATION *smithy.Schema
-
-var CallAnalyticsJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsJob",
-}, smithy.ShapeTypeStructure, 17)
-var CallAnalyticsJob_CallAnalyticsJobName *smithy.Schema
-
-var CallAnalyticsJob_CallAnalyticsJobStatus *smithy.Schema
-
-var CallAnalyticsJob_CallAnalyticsJobDetails *smithy.Schema
-
-var CallAnalyticsJob_LanguageCode *smithy.Schema
-
-var CallAnalyticsJob_MediaSampleRateHertz *smithy.Schema
-
-var CallAnalyticsJob_MediaFormat *smithy.Schema
-
-var CallAnalyticsJob_Media *smithy.Schema
-
-var CallAnalyticsJob_Transcript *smithy.Schema
-
-var CallAnalyticsJob_StartTime *smithy.Schema
-
-var CallAnalyticsJob_CreationTime *smithy.Schema
-
-var CallAnalyticsJob_CompletionTime *smithy.Schema
-
-var CallAnalyticsJob_FailureReason *smithy.Schema
-
-var CallAnalyticsJob_DataAccessRoleArn *smithy.Schema
-
-var CallAnalyticsJob_IdentifiedLanguageScore *smithy.Schema
-
-var CallAnalyticsJob_Settings *smithy.Schema
-
-var CallAnalyticsJob_ChannelDefinitions *smithy.Schema
-
-var CallAnalyticsJob_Tags *smithy.Schema
-
-var CallAnalyticsJobDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsJobDetails",
-}, smithy.ShapeTypeStructure, 1)
-var CallAnalyticsJobDetails_Skipped *smithy.Schema
-
-var _CallAnalyticsJobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsJobName",
-}, smithy.ShapeTypeString, 0)
-
-var CallAnalyticsJobSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsJobSettings",
-}, smithy.ShapeTypeStructure, 8)
-var CallAnalyticsJobSettings_VocabularyName *smithy.Schema
-
-var CallAnalyticsJobSettings_VocabularyFilterName *smithy.Schema
-
-var CallAnalyticsJobSettings_VocabularyFilterMethod *smithy.Schema
-
-var CallAnalyticsJobSettings_LanguageModelName *smithy.Schema
-
-var CallAnalyticsJobSettings_ContentRedaction *smithy.Schema
-
-var CallAnalyticsJobSettings_LanguageOptions *smithy.Schema
-
-var CallAnalyticsJobSettings_LanguageIdSettings *smithy.Schema
-
-var CallAnalyticsJobSettings_Summarization *smithy.Schema
-
-var CallAnalyticsJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsJobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var CallAnalyticsJobStatus_QUEUED *smithy.Schema
-
-var CallAnalyticsJobStatus_IN_PROGRESS *smithy.Schema
-
-var CallAnalyticsJobStatus_FAILED *smithy.Schema
-
-var CallAnalyticsJobStatus_COMPLETED *smithy.Schema
-
-var _CallAnalyticsJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CallAnalyticsJobSummaries_member *smithy.Schema
-
-var CallAnalyticsJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsJobSummary",
-}, smithy.ShapeTypeStructure, 8)
-var CallAnalyticsJobSummary_CallAnalyticsJobName *smithy.Schema
-
-var CallAnalyticsJobSummary_CreationTime *smithy.Schema
-
-var CallAnalyticsJobSummary_StartTime *smithy.Schema
-
-var CallAnalyticsJobSummary_CompletionTime *smithy.Schema
-
-var CallAnalyticsJobSummary_LanguageCode *smithy.Schema
-
-var CallAnalyticsJobSummary_CallAnalyticsJobStatus *smithy.Schema
-
-var CallAnalyticsJobSummary_CallAnalyticsJobDetails *smithy.Schema
-
-var CallAnalyticsJobSummary_FailureReason *smithy.Schema
-
-var CallAnalyticsSkippedFeature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsSkippedFeature",
-}, smithy.ShapeTypeStructure, 3)
-var CallAnalyticsSkippedFeature_Feature *smithy.Schema
-
-var CallAnalyticsSkippedFeature_ReasonCode *smithy.Schema
-
-var CallAnalyticsSkippedFeature_Message *smithy.Schema
-
-var _CallAnalyticsSkippedFeatureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsSkippedFeatureList",
-}, smithy.ShapeTypeList, 1)
-var _CallAnalyticsSkippedFeatureList_member *smithy.Schema
-
-var CallAnalyticsSkippedReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CallAnalyticsSkippedReasonCode",
-}, smithy.ShapeTypeEnum, 2)
-var CallAnalyticsSkippedReasonCode_INSUFFICIENT_CONVERSATION_CONTENT *smithy.Schema
-
-var CallAnalyticsSkippedReasonCode_FAILED_SAFETY_GUIDELINES *smithy.Schema
-
-var _CategoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CategoryName",
-}, smithy.ShapeTypeString, 0)
-
-var CategoryProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CategoryProperties",
-}, smithy.ShapeTypeStructure, 6)
-var CategoryProperties_CategoryName *smithy.Schema
-
-var CategoryProperties_Rules *smithy.Schema
-
-var CategoryProperties_CreateTime *smithy.Schema
-
-var CategoryProperties_LastUpdateTime *smithy.Schema
-
-var CategoryProperties_Tags *smithy.Schema
-
-var CategoryProperties_InputType *smithy.Schema
-
-var _CategoryPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CategoryPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _CategoryPropertiesList_member *smithy.Schema
-
-var ChannelDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ChannelDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelDefinition_ChannelId *smithy.Schema
-
-var ChannelDefinition_ParticipantRole *smithy.Schema
-
-var _ChannelDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ChannelDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _ChannelDefinitions_member *smithy.Schema
-
-var _ChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ChannelId",
-}, smithy.ShapeTypeInteger, 0)
-
-var ClinicalNoteGenerationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ClinicalNoteGenerationSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ClinicalNoteGenerationSettings_NoteTemplate *smithy.Schema
-
-var CLMLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CLMLanguageCode",
-}, smithy.ShapeTypeEnum, 7)
-var CLMLanguageCode_EN_US *smithy.Schema
-
-var CLMLanguageCode_HI_IN *smithy.Schema
-
-var CLMLanguageCode_ES_US *smithy.Schema
-
-var CLMLanguageCode_EN_GB *smithy.Schema
-
-var CLMLanguageCode_EN_AU *smithy.Schema
-
-var CLMLanguageCode_DE_DE *smithy.Schema
-
-var CLMLanguageCode_JA_JP *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ContentRedaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ContentRedaction",
-}, smithy.ShapeTypeStructure, 3)
-var ContentRedaction_RedactionType *smithy.Schema
-
-var ContentRedaction_RedactionOutput *smithy.Schema
-
-var ContentRedaction_PiiEntityTypes *smithy.Schema
-
-var _DataAccessRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DataAccessRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DurationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DurationInSeconds",
-}, smithy.ShapeTypeFloat, 0)
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionConfiguration_KMSEncryptionContext *smithy.Schema
-
-var EncryptionConfiguration_KMSKey *smithy.Schema
-
-var _FailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "FailureReason",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentifiedLanguageScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "IdentifiedLanguageScore",
-}, smithy.ShapeTypeFloat, 0)
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 3)
-var InputDataConfig_S3Uri *smithy.Schema
-
-var InputDataConfig_TuningDataS3Uri *smithy.Schema
-
-var InputDataConfig_DataAccessRoleArn *smithy.Schema
-
-var InputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "InputType",
-}, smithy.ShapeTypeEnum, 2)
-var InputType_REAL_TIME *smithy.Schema
-
-var InputType_POST_CALL *smithy.Schema
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalFailureException_Message *smithy.Schema
-
-var InterruptionFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "InterruptionFilter",
-}, smithy.ShapeTypeStructure, 5)
-var InterruptionFilter_Threshold *smithy.Schema
-
-var InterruptionFilter_ParticipantRole *smithy.Schema
-
-var InterruptionFilter_AbsoluteTimeRange *smithy.Schema
-
-var InterruptionFilter_RelativeTimeRange *smithy.Schema
-
-var InterruptionFilter_Negate *smithy.Schema
-
-var JobExecutionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "JobExecutionSettings",
-}, smithy.ShapeTypeStructure, 2)
-var JobExecutionSettings_AllowDeferredExecution *smithy.Schema
-
-var JobExecutionSettings_DataAccessRoleArn *smithy.Schema
-
-var _KMSEncryptionContextMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "KMSEncryptionContextMap",
-}, smithy.ShapeTypeMap, 2)
-var _KMSEncryptionContextMap_key *smithy.Schema
-
-var _KMSEncryptionContextMap_value *smithy.Schema
-
-var _KMSKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "KMSKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var LanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "LanguageCode",
-}, smithy.ShapeTypeEnum, 117)
-var LanguageCode_AF_ZA *smithy.Schema
-
-var LanguageCode_AR_AE *smithy.Schema
-
-var LanguageCode_AR_SA *smithy.Schema
-
-var LanguageCode_AM_ET *smithy.Schema
-
-var LanguageCode_CY_GB *smithy.Schema
-
-var LanguageCode_DA_DK *smithy.Schema
-
-var LanguageCode_DE_CH *smithy.Schema
-
-var LanguageCode_DE_DE *smithy.Schema
-
-var LanguageCode_EN_AB *smithy.Schema
-
-var LanguageCode_EN_AU *smithy.Schema
-
-var LanguageCode_EN_GB *smithy.Schema
-
-var LanguageCode_EN_IE *smithy.Schema
-
-var LanguageCode_EN_IN *smithy.Schema
-
-var LanguageCode_EN_US *smithy.Schema
-
-var LanguageCode_EN_WL *smithy.Schema
-
-var LanguageCode_ES_ES *smithy.Schema
-
-var LanguageCode_ES_MX *smithy.Schema
-
-var LanguageCode_ES_US *smithy.Schema
-
-var LanguageCode_FA_AF *smithy.Schema
-
-var LanguageCode_FA_IR *smithy.Schema
-
-var LanguageCode_FR_CA *smithy.Schema
-
-var LanguageCode_FR_FR *smithy.Schema
-
-var LanguageCode_GA_IE *smithy.Schema
-
-var LanguageCode_GD_GB *smithy.Schema
-
-var LanguageCode_HE_IL *smithy.Schema
-
-var LanguageCode_HI_IN *smithy.Schema
-
-var LanguageCode_HT_HT *smithy.Schema
-
-var LanguageCode_ID_ID *smithy.Schema
-
-var LanguageCode_IT_IT *smithy.Schema
-
-var LanguageCode_JA_JP *smithy.Schema
-
-var LanguageCode_JV_ID *smithy.Schema
-
-var LanguageCode_KM_KH *smithy.Schema
-
-var LanguageCode_KO_KR *smithy.Schema
-
-var LanguageCode_MY_MM *smithy.Schema
-
-var LanguageCode_MS_MY *smithy.Schema
-
-var LanguageCode_NL_NL *smithy.Schema
-
-var LanguageCode_PT_BR *smithy.Schema
-
-var LanguageCode_PT_PT *smithy.Schema
-
-var LanguageCode_RU_RU *smithy.Schema
-
-var LanguageCode_TA_IN *smithy.Schema
-
-var LanguageCode_TE_IN *smithy.Schema
-
-var LanguageCode_TR_TR *smithy.Schema
-
-var LanguageCode_ZH_CN *smithy.Schema
-
-var LanguageCode_ZH_TW *smithy.Schema
-
-var LanguageCode_TH_TH *smithy.Schema
-
-var LanguageCode_EN_ZA *smithy.Schema
-
-var LanguageCode_EN_NZ *smithy.Schema
-
-var LanguageCode_VI_VN *smithy.Schema
-
-var LanguageCode_SV_SE *smithy.Schema
-
-var LanguageCode_AB_GE *smithy.Schema
-
-var LanguageCode_AST_ES *smithy.Schema
-
-var LanguageCode_AZ_AZ *smithy.Schema
-
-var LanguageCode_BA_RU *smithy.Schema
-
-var LanguageCode_BE_BY *smithy.Schema
-
-var LanguageCode_BG_BG *smithy.Schema
-
-var LanguageCode_BN_IN *smithy.Schema
-
-var LanguageCode_BS_BA *smithy.Schema
-
-var LanguageCode_CA_ES *smithy.Schema
-
-var LanguageCode_CKB_IQ *smithy.Schema
-
-var LanguageCode_CKB_IR *smithy.Schema
-
-var LanguageCode_CS_CZ *smithy.Schema
-
-var LanguageCode_CY_WL *smithy.Schema
-
-var LanguageCode_EL_GR *smithy.Schema
-
-var LanguageCode_ET_EE *smithy.Schema
-
-var LanguageCode_ET_ET *smithy.Schema
-
-var LanguageCode_EU_ES *smithy.Schema
-
-var LanguageCode_FI_FI *smithy.Schema
-
-var LanguageCode_GL_ES *smithy.Schema
-
-var LanguageCode_GU_IN *smithy.Schema
-
-var LanguageCode_HA_NG *smithy.Schema
-
-var LanguageCode_HR_HR *smithy.Schema
-
-var LanguageCode_HU_HU *smithy.Schema
-
-var LanguageCode_HY_AM *smithy.Schema
-
-var LanguageCode_IS_IS *smithy.Schema
-
-var LanguageCode_KA_GE *smithy.Schema
-
-var LanguageCode_KAB_DZ *smithy.Schema
-
-var LanguageCode_KK_KZ *smithy.Schema
-
-var LanguageCode_KN_IN *smithy.Schema
-
-var LanguageCode_KY_KG *smithy.Schema
-
-var LanguageCode_LG_IN *smithy.Schema
-
-var LanguageCode_LT_LT *smithy.Schema
-
-var LanguageCode_LV_LV *smithy.Schema
-
-var LanguageCode_MHR_RU *smithy.Schema
-
-var LanguageCode_MI_NZ *smithy.Schema
-
-var LanguageCode_MK_MK *smithy.Schema
-
-var LanguageCode_ML_IN *smithy.Schema
-
-var LanguageCode_MN_MN *smithy.Schema
-
-var LanguageCode_MR_IN *smithy.Schema
-
-var LanguageCode_MT_MT *smithy.Schema
-
-var LanguageCode_NO_NO *smithy.Schema
-
-var LanguageCode_NE_NP *smithy.Schema
-
-var LanguageCode_OR_IN *smithy.Schema
-
-var LanguageCode_PA_IN *smithy.Schema
-
-var LanguageCode_PL_PL *smithy.Schema
-
-var LanguageCode_PS_AF *smithy.Schema
-
-var LanguageCode_RO_RO *smithy.Schema
-
-var LanguageCode_RW_RW *smithy.Schema
-
-var LanguageCode_SI_LK *smithy.Schema
-
-var LanguageCode_SK_SK *smithy.Schema
-
-var LanguageCode_SL_SI *smithy.Schema
-
-var LanguageCode_SO_SO *smithy.Schema
-
-var LanguageCode_SQ_AL *smithy.Schema
-
-var LanguageCode_SR_RS *smithy.Schema
-
-var LanguageCode_SU_ID *smithy.Schema
-
-var LanguageCode_SW_BI *smithy.Schema
-
-var LanguageCode_SW_KE *smithy.Schema
-
-var LanguageCode_SW_RW *smithy.Schema
-
-var LanguageCode_SW_TZ *smithy.Schema
-
-var LanguageCode_SW_UG *smithy.Schema
-
-var LanguageCode_TL_PH *smithy.Schema
-
-var LanguageCode_TT_RU *smithy.Schema
-
-var LanguageCode_UG_CN *smithy.Schema
-
-var LanguageCode_UK_UA *smithy.Schema
-
-var LanguageCode_UZ_UZ *smithy.Schema
-
-var LanguageCode_WO_SN *smithy.Schema
-
-var LanguageCode_ZH_HK *smithy.Schema
-
-var LanguageCode_ZU_ZA *smithy.Schema
-
-var LanguageCodeItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "LanguageCodeItem",
-}, smithy.ShapeTypeStructure, 2)
-var LanguageCodeItem_LanguageCode *smithy.Schema
-
-var LanguageCodeItem_DurationInSeconds *smithy.Schema
-
-var _LanguageCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "LanguageCodeList",
-}, smithy.ShapeTypeList, 1)
-var _LanguageCodeList_member *smithy.Schema
-
-var LanguageIdSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "LanguageIdSettings",
-}, smithy.ShapeTypeStructure, 3)
-var LanguageIdSettings_VocabularyName *smithy.Schema
-
-var LanguageIdSettings_VocabularyFilterName *smithy.Schema
-
-var LanguageIdSettings_LanguageModelName *smithy.Schema
-
-var _LanguageIdSettingsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "LanguageIdSettingsMap",
-}, smithy.ShapeTypeMap, 2)
-var _LanguageIdSettingsMap_key *smithy.Schema
-
-var _LanguageIdSettingsMap_value *smithy.Schema
-
-var LanguageModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "LanguageModel",
-}, smithy.ShapeTypeStructure, 10)
-var LanguageModel_ModelName *smithy.Schema
-
-var LanguageModel_CreateTime *smithy.Schema
-
-var LanguageModel_LastModifiedTime *smithy.Schema
-
-var LanguageModel_LanguageCode *smithy.Schema
-
-var LanguageModel_BaseModelName *smithy.Schema
-
-var LanguageModel_ModelStatus *smithy.Schema
-
-var LanguageModel_UpgradeAvailability *smithy.Schema
-
-var LanguageModel_FailureReason *smithy.Schema
-
-var LanguageModel_InputDataConfig *smithy.Schema
-
-var LanguageModel_EncryptionConfiguration *smithy.Schema
-
-var _LanguageOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "LanguageOptions",
-}, smithy.ShapeTypeList, 1)
-var _LanguageOptions_member *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var LimitExceededException_Message *smithy.Schema
-
-var _MaxAlternatives = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MaxAlternatives",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSpeakers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MaxSpeakers",
-}, smithy.ShapeTypeInteger, 0)
-
-var Media = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Media",
-}, smithy.ShapeTypeStructure, 2)
-var Media_MediaFileUri *smithy.Schema
-
-var Media_RedactedMediaFileUri *smithy.Schema
-
-var MediaFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MediaFormat",
-}, smithy.ShapeTypeEnum, 8)
-var MediaFormat_MP3 *smithy.Schema
-
-var MediaFormat_MP4 *smithy.Schema
-
-var MediaFormat_WAV *smithy.Schema
-
-var MediaFormat_FLAC *smithy.Schema
-
-var MediaFormat_OGG *smithy.Schema
-
-var MediaFormat_AMR *smithy.Schema
-
-var MediaFormat_WEBM *smithy.Schema
-
-var MediaFormat_M4A *smithy.Schema
-
-var _MediaSampleRateHertz = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MediaSampleRateHertz",
-}, smithy.ShapeTypeInteger, 0)
-
-var MedicalContentIdentificationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalContentIdentificationType",
-}, smithy.ShapeTypeEnum, 1)
-var MedicalContentIdentificationType_PHI *smithy.Schema
-
-var _MedicalMediaSampleRateHertz = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalMediaSampleRateHertz",
-}, smithy.ShapeTypeInteger, 0)
-
-var MedicalScribeChannelDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeChannelDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var MedicalScribeChannelDefinition_ChannelId *smithy.Schema
-
-var MedicalScribeChannelDefinition_ParticipantRole *smithy.Schema
-
-var _MedicalScribeChannelDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeChannelDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _MedicalScribeChannelDefinitions_member *smithy.Schema
-
-var _MedicalScribeChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeChannelId",
-}, smithy.ShapeTypeInteger, 0)
-
-var MedicalScribeContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeContext",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribeContext_PatientContext *smithy.Schema
-
-var MedicalScribeJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeJob",
-}, smithy.ShapeTypeStructure, 14)
-var MedicalScribeJob_MedicalScribeJobName *smithy.Schema
-
-var MedicalScribeJob_MedicalScribeJobStatus *smithy.Schema
-
-var MedicalScribeJob_LanguageCode *smithy.Schema
-
-var MedicalScribeJob_Media *smithy.Schema
-
-var MedicalScribeJob_MedicalScribeOutput *smithy.Schema
-
-var MedicalScribeJob_StartTime *smithy.Schema
-
-var MedicalScribeJob_CreationTime *smithy.Schema
-
-var MedicalScribeJob_CompletionTime *smithy.Schema
-
-var MedicalScribeJob_FailureReason *smithy.Schema
-
-var MedicalScribeJob_Settings *smithy.Schema
-
-var MedicalScribeJob_DataAccessRoleArn *smithy.Schema
-
-var MedicalScribeJob_ChannelDefinitions *smithy.Schema
-
-var MedicalScribeJob_MedicalScribeContextProvided *smithy.Schema
-
-var MedicalScribeJob_Tags *smithy.Schema
-
-var MedicalScribeJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeJobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var MedicalScribeJobStatus_QUEUED *smithy.Schema
-
-var MedicalScribeJobStatus_IN_PROGRESS *smithy.Schema
-
-var MedicalScribeJobStatus_FAILED *smithy.Schema
-
-var MedicalScribeJobStatus_COMPLETED *smithy.Schema
-
-var _MedicalScribeJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _MedicalScribeJobSummaries_member *smithy.Schema
-
-var MedicalScribeJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeJobSummary",
-}, smithy.ShapeTypeStructure, 7)
-var MedicalScribeJobSummary_MedicalScribeJobName *smithy.Schema
-
-var MedicalScribeJobSummary_CreationTime *smithy.Schema
-
-var MedicalScribeJobSummary_StartTime *smithy.Schema
-
-var MedicalScribeJobSummary_CompletionTime *smithy.Schema
-
-var MedicalScribeJobSummary_LanguageCode *smithy.Schema
-
-var MedicalScribeJobSummary_MedicalScribeJobStatus *smithy.Schema
-
-var MedicalScribeJobSummary_FailureReason *smithy.Schema
-
-var MedicalScribeLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeLanguageCode",
-}, smithy.ShapeTypeEnum, 1)
-var MedicalScribeLanguageCode_EN_US *smithy.Schema
-
-var MedicalScribeNoteTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeNoteTemplate",
-}, smithy.ShapeTypeEnum, 7)
-var MedicalScribeNoteTemplate_HISTORY_AND_PHYSICAL *smithy.Schema
-
-var MedicalScribeNoteTemplate_GIRPP *smithy.Schema
-
-var MedicalScribeNoteTemplate_BIRP *smithy.Schema
-
-var MedicalScribeNoteTemplate_SIRP *smithy.Schema
-
-var MedicalScribeNoteTemplate_DAP *smithy.Schema
-
-var MedicalScribeNoteTemplate_BEHAVIORAL_SOAP *smithy.Schema
-
-var MedicalScribeNoteTemplate_PHYSICAL_SOAP *smithy.Schema
-
-var MedicalScribeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeOutput",
-}, smithy.ShapeTypeStructure, 2)
-var MedicalScribeOutput_TranscriptFileUri *smithy.Schema
-
-var MedicalScribeOutput_ClinicalDocumentUri *smithy.Schema
-
-var MedicalScribeParticipantRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeParticipantRole",
-}, smithy.ShapeTypeEnum, 2)
-var MedicalScribeParticipantRole_PATIENT *smithy.Schema
-
-var MedicalScribeParticipantRole_CLINICIAN *smithy.Schema
-
-var MedicalScribePatientContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribePatientContext",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalScribePatientContext_Pronouns *smithy.Schema
-
-var MedicalScribeSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalScribeSettings",
-}, smithy.ShapeTypeStructure, 7)
-var MedicalScribeSettings_ShowSpeakerLabels *smithy.Schema
-
-var MedicalScribeSettings_MaxSpeakerLabels *smithy.Schema
-
-var MedicalScribeSettings_ChannelIdentification *smithy.Schema
-
-var MedicalScribeSettings_VocabularyName *smithy.Schema
-
-var MedicalScribeSettings_VocabularyFilterName *smithy.Schema
-
-var MedicalScribeSettings_VocabularyFilterMethod *smithy.Schema
-
-var MedicalScribeSettings_ClinicalNoteGenerationSettings *smithy.Schema
-
-var MedicalTranscript = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalTranscript",
-}, smithy.ShapeTypeStructure, 1)
-var MedicalTranscript_TranscriptFileUri *smithy.Schema
-
-var MedicalTranscriptionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalTranscriptionJob",
-}, smithy.ShapeTypeStructure, 16)
-var MedicalTranscriptionJob_MedicalTranscriptionJobName *smithy.Schema
-
-var MedicalTranscriptionJob_TranscriptionJobStatus *smithy.Schema
-
-var MedicalTranscriptionJob_LanguageCode *smithy.Schema
-
-var MedicalTranscriptionJob_MediaSampleRateHertz *smithy.Schema
-
-var MedicalTranscriptionJob_MediaFormat *smithy.Schema
-
-var MedicalTranscriptionJob_Media *smithy.Schema
-
-var MedicalTranscriptionJob_Transcript *smithy.Schema
-
-var MedicalTranscriptionJob_StartTime *smithy.Schema
-
-var MedicalTranscriptionJob_CreationTime *smithy.Schema
-
-var MedicalTranscriptionJob_CompletionTime *smithy.Schema
-
-var MedicalTranscriptionJob_FailureReason *smithy.Schema
-
-var MedicalTranscriptionJob_Settings *smithy.Schema
-
-var MedicalTranscriptionJob_ContentIdentificationType *smithy.Schema
-
-var MedicalTranscriptionJob_Specialty *smithy.Schema
-
-var MedicalTranscriptionJob_Type *smithy.Schema
-
-var MedicalTranscriptionJob_Tags *smithy.Schema
-
-var _MedicalTranscriptionJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalTranscriptionJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _MedicalTranscriptionJobSummaries_member *smithy.Schema
-
-var MedicalTranscriptionJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalTranscriptionJobSummary",
-}, smithy.ShapeTypeStructure, 11)
-var MedicalTranscriptionJobSummary_MedicalTranscriptionJobName *smithy.Schema
-
-var MedicalTranscriptionJobSummary_CreationTime *smithy.Schema
-
-var MedicalTranscriptionJobSummary_StartTime *smithy.Schema
-
-var MedicalTranscriptionJobSummary_CompletionTime *smithy.Schema
-
-var MedicalTranscriptionJobSummary_LanguageCode *smithy.Schema
-
-var MedicalTranscriptionJobSummary_TranscriptionJobStatus *smithy.Schema
-
-var MedicalTranscriptionJobSummary_FailureReason *smithy.Schema
-
-var MedicalTranscriptionJobSummary_OutputLocationType *smithy.Schema
-
-var MedicalTranscriptionJobSummary_Specialty *smithy.Schema
-
-var MedicalTranscriptionJobSummary_ContentIdentificationType *smithy.Schema
-
-var MedicalTranscriptionJobSummary_Type *smithy.Schema
-
-var MedicalTranscriptionSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "MedicalTranscriptionSetting",
-}, smithy.ShapeTypeStructure, 6)
-var MedicalTranscriptionSetting_ShowSpeakerLabels *smithy.Schema
-
-var MedicalTranscriptionSetting_MaxSpeakerLabels *smithy.Schema
-
-var MedicalTranscriptionSetting_ChannelIdentification *smithy.Schema
-
-var MedicalTranscriptionSetting_ShowAlternatives *smithy.Schema
-
-var MedicalTranscriptionSetting_MaxAlternatives *smithy.Schema
-
-var MedicalTranscriptionSetting_VocabularyName *smithy.Schema
-
-var _ModelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ModelName",
-}, smithy.ShapeTypeString, 0)
-
-var _Models = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Models",
-}, smithy.ShapeTypeList, 1)
-var _Models_member *smithy.Schema
-
-var ModelSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ModelSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ModelSettings_LanguageModelName *smithy.Schema
-
-var ModelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ModelStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ModelStatus_IN_PROGRESS *smithy.Schema
-
-var ModelStatus_FAILED *smithy.Schema
-
-var ModelStatus_COMPLETED *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var NonTalkTimeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "NonTalkTimeFilter",
-}, smithy.ShapeTypeStructure, 4)
-var NonTalkTimeFilter_Threshold *smithy.Schema
-
-var NonTalkTimeFilter_AbsoluteTimeRange *smithy.Schema
-
-var NonTalkTimeFilter_RelativeTimeRange *smithy.Schema
-
-var NonTalkTimeFilter_Negate *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Message *smithy.Schema
-
-var _OutputBucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "OutputBucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _OutputKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "OutputKey",
-}, smithy.ShapeTypeString, 0)
-
-var OutputLocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "OutputLocationType",
-}, smithy.ShapeTypeEnum, 2)
-var OutputLocationType_CUSTOMER_BUCKET *smithy.Schema
-
-var OutputLocationType_SERVICE_BUCKET *smithy.Schema
-
-var ParticipantRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ParticipantRole",
-}, smithy.ShapeTypeEnum, 2)
-var ParticipantRole_AGENT *smithy.Schema
-
-var ParticipantRole_CUSTOMER *smithy.Schema
-
-var _Percentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Percentage",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Phrase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Phrase",
-}, smithy.ShapeTypeString, 0)
-
-var _Phrases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Phrases",
-}, smithy.ShapeTypeList, 1)
-var _Phrases_member *smithy.Schema
-
-var PiiEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "PiiEntityType",
-}, smithy.ShapeTypeEnum, 30)
-var PiiEntityType_BANK_ACCOUNT_NUMBER *smithy.Schema
-
-var PiiEntityType_BANK_ROUTING *smithy.Schema
-
-var PiiEntityType_CREDIT_DEBIT_NUMBER *smithy.Schema
-
-var PiiEntityType_CREDIT_DEBIT_CVV *smithy.Schema
-
-var PiiEntityType_CREDIT_DEBIT_EXPIRY *smithy.Schema
-
-var PiiEntityType_PIN *smithy.Schema
-
-var PiiEntityType_EMAIL *smithy.Schema
-
-var PiiEntityType_ADDRESS *smithy.Schema
-
-var PiiEntityType_NAME *smithy.Schema
-
-var PiiEntityType_PHONE *smithy.Schema
-
-var PiiEntityType_SSN *smithy.Schema
-
-var PiiEntityType_DATE_TIME *smithy.Schema
-
-var PiiEntityType_PASSPORT_NUMBER *smithy.Schema
-
-var PiiEntityType_DRIVER_ID *smithy.Schema
-
-var PiiEntityType_URL *smithy.Schema
-
-var PiiEntityType_AGE *smithy.Schema
-
-var PiiEntityType_USERNAME *smithy.Schema
-
-var PiiEntityType_PASSWORD *smithy.Schema
-
-var PiiEntityType_AWS_ACCESS_KEY *smithy.Schema
-
-var PiiEntityType_AWS_SECRET_KEY *smithy.Schema
-
-var PiiEntityType_IP_ADDRESS *smithy.Schema
-
-var PiiEntityType_MAC_ADDRESS *smithy.Schema
-
-var PiiEntityType_LICENSE_PLATE *smithy.Schema
-
-var PiiEntityType_VEHICLE_IDENTIFICATION_NUMBER *smithy.Schema
-
-var PiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER *smithy.Schema
-
-var PiiEntityType_CA_HEALTH_NUMBER *smithy.Schema
-
-var PiiEntityType_CA_SOCIAL_INSURANCE_NUMBER *smithy.Schema
-
-var PiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER *smithy.Schema
-
-var PiiEntityType_SWIFT_CODE *smithy.Schema
-
-var PiiEntityType_ALL *smithy.Schema
-
-var _PiiEntityTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "PiiEntityTypes",
-}, smithy.ShapeTypeList, 1)
-var _PiiEntityTypes_member *smithy.Schema
-
-var _PrintableNonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "PrintableNonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var Pronouns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Pronouns",
-}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
-var Pronouns_HE_HIM *smithy.Schema
-
-var Pronouns_SHE_HER *smithy.Schema
-
-var Pronouns_THEY_THEM *smithy.Schema
-
-var RedactionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "RedactionOutput",
-}, smithy.ShapeTypeEnum, 2)
-var RedactionOutput_REDACTED *smithy.Schema
-
-var RedactionOutput_REDACTED_AND_UNREDACTED *smithy.Schema
-
-var RedactionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "RedactionType",
-}, smithy.ShapeTypeEnum, 1)
-var RedactionType_PII *smithy.Schema
-
-var RelativeTimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "RelativeTimeRange",
-}, smithy.ShapeTypeStructure, 4)
-var RelativeTimeRange_StartPercentage *smithy.Schema
-
-var RelativeTimeRange_EndPercentage *smithy.Schema
-
-var RelativeTimeRange_First *smithy.Schema
-
-var RelativeTimeRange_Last *smithy.Schema
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Rule",
-}, smithy.ShapeTypeUnion, 4)
-var Rule_NonTalkTimeFilter *smithy.Schema
-
-var Rule_InterruptionFilter *smithy.Schema
-
-var Rule_TranscriptFilter *smithy.Schema
-
-var Rule_SentimentFilter *smithy.Schema
-
-var _RuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "RuleList",
-}, smithy.ShapeTypeList, 1)
-var _RuleList_member *smithy.Schema
-
-var SentimentFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "SentimentFilter",
-}, smithy.ShapeTypeStructure, 5)
-var SentimentFilter_Sentiments *smithy.Schema
-
-var SentimentFilter_AbsoluteTimeRange *smithy.Schema
-
-var SentimentFilter_RelativeTimeRange *smithy.Schema
-
-var SentimentFilter_ParticipantRole *smithy.Schema
-
-var SentimentFilter_Negate *smithy.Schema
-
-var SentimentValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "SentimentValue",
-}, smithy.ShapeTypeEnum, 4)
-var SentimentValue_POSITIVE *smithy.Schema
-
-var SentimentValue_NEGATIVE *smithy.Schema
-
-var SentimentValue_NEUTRAL *smithy.Schema
-
-var SentimentValue_MIXED *smithy.Schema
-
-var _SentimentValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "SentimentValueList",
-}, smithy.ShapeTypeList, 1)
-var _SentimentValueList_member *smithy.Schema
-
-var Settings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Settings",
-}, smithy.ShapeTypeStructure, 8)
-var Settings_VocabularyName *smithy.Schema
-
-var Settings_ShowSpeakerLabels *smithy.Schema
-
-var Settings_MaxSpeakerLabels *smithy.Schema
-
-var Settings_ChannelIdentification *smithy.Schema
-
-var Settings_ShowAlternatives *smithy.Schema
-
-var Settings_MaxAlternatives *smithy.Schema
-
-var Settings_VocabularyFilterName *smithy.Schema
-
-var Settings_VocabularyFilterMethod *smithy.Schema
-
-var Specialty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Specialty",
-}, smithy.ShapeTypeEnum, 1)
-var Specialty_PRIMARYCARE *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringTargetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StringTargetList",
-}, smithy.ShapeTypeList, 1)
-var _StringTargetList_member *smithy.Schema
-
-var _SubtitleFileUris = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "SubtitleFileUris",
-}, smithy.ShapeTypeList, 1)
-var _SubtitleFileUris_member *smithy.Schema
-
-var SubtitleFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "SubtitleFormat",
-}, smithy.ShapeTypeEnum, 2)
-var SubtitleFormat_VTT *smithy.Schema
-
-var SubtitleFormat_SRT *smithy.Schema
-
-var _SubtitleFormats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "SubtitleFormats",
-}, smithy.ShapeTypeList, 1)
-var _SubtitleFormats_member *smithy.Schema
-
-var _SubtitleOutputStartIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "SubtitleOutputStartIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var Subtitles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Subtitles",
-}, smithy.ShapeTypeStructure, 2)
-var Subtitles_Formats *smithy.Schema
-
-var Subtitles_OutputStartIndex *smithy.Schema
-
-var SubtitlesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "SubtitlesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var SubtitlesOutput_Formats *smithy.Schema
-
-var SubtitlesOutput_SubtitleFileUris *smithy.Schema
-
-var SubtitlesOutput_OutputStartIndex *smithy.Schema
-
-var Summarization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Summarization",
-}, smithy.ShapeTypeStructure, 1)
-var Summarization_GenerateAbstractiveSummary *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TimestampMilliseconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TimestampMilliseconds",
-}, smithy.ShapeTypeLong, 0)
-
-var _ToxicityCategories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ToxicityCategories",
-}, smithy.ShapeTypeList, 1)
-var _ToxicityCategories_member *smithy.Schema
-
-var ToxicityCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ToxicityCategory",
-}, smithy.ShapeTypeEnum, 1)
-var ToxicityCategory_ALL *smithy.Schema
-
-var _ToxicityDetection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ToxicityDetection",
-}, smithy.ShapeTypeList, 1)
-var _ToxicityDetection_member *smithy.Schema
-
-var ToxicityDetectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ToxicityDetectionSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ToxicityDetectionSettings_ToxicityCategories *smithy.Schema
-
-var _TranscribeArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TranscribeArn",
-}, smithy.ShapeTypeString, 0)
-
-var Transcript = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Transcript",
-}, smithy.ShapeTypeStructure, 2)
-var Transcript_TranscriptFileUri *smithy.Schema
-
-var Transcript_RedactedTranscriptFileUri *smithy.Schema
-
-var TranscriptFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TranscriptFilter",
-}, smithy.ShapeTypeStructure, 6)
-var TranscriptFilter_TranscriptFilterType *smithy.Schema
-
-var TranscriptFilter_AbsoluteTimeRange *smithy.Schema
-
-var TranscriptFilter_RelativeTimeRange *smithy.Schema
-
-var TranscriptFilter_ParticipantRole *smithy.Schema
-
-var TranscriptFilter_Negate *smithy.Schema
-
-var TranscriptFilter_Targets *smithy.Schema
-
-var TranscriptFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TranscriptFilterType",
-}, smithy.ShapeTypeEnum, 1)
-var TranscriptFilterType_EXACT *smithy.Schema
-
-var TranscriptionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TranscriptionJob",
-}, smithy.ShapeTypeStructure, 24)
-var TranscriptionJob_TranscriptionJobName *smithy.Schema
-
-var TranscriptionJob_TranscriptionJobStatus *smithy.Schema
-
-var TranscriptionJob_LanguageCode *smithy.Schema
-
-var TranscriptionJob_MediaSampleRateHertz *smithy.Schema
-
-var TranscriptionJob_MediaFormat *smithy.Schema
-
-var TranscriptionJob_Media *smithy.Schema
-
-var TranscriptionJob_Transcript *smithy.Schema
-
-var TranscriptionJob_StartTime *smithy.Schema
-
-var TranscriptionJob_CreationTime *smithy.Schema
-
-var TranscriptionJob_CompletionTime *smithy.Schema
-
-var TranscriptionJob_FailureReason *smithy.Schema
-
-var TranscriptionJob_Settings *smithy.Schema
-
-var TranscriptionJob_ModelSettings *smithy.Schema
-
-var TranscriptionJob_JobExecutionSettings *smithy.Schema
-
-var TranscriptionJob_ContentRedaction *smithy.Schema
-
-var TranscriptionJob_IdentifyLanguage *smithy.Schema
-
-var TranscriptionJob_IdentifyMultipleLanguages *smithy.Schema
-
-var TranscriptionJob_LanguageOptions *smithy.Schema
-
-var TranscriptionJob_IdentifiedLanguageScore *smithy.Schema
-
-var TranscriptionJob_LanguageCodes *smithy.Schema
-
-var TranscriptionJob_Tags *smithy.Schema
-
-var TranscriptionJob_Subtitles *smithy.Schema
-
-var TranscriptionJob_LanguageIdSettings *smithy.Schema
-
-var TranscriptionJob_ToxicityDetection *smithy.Schema
-
-var _TranscriptionJobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TranscriptionJobName",
-}, smithy.ShapeTypeString, 0)
-
-var TranscriptionJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TranscriptionJobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var TranscriptionJobStatus_QUEUED *smithy.Schema
-
-var TranscriptionJobStatus_IN_PROGRESS *smithy.Schema
-
-var TranscriptionJobStatus_FAILED *smithy.Schema
-
-var TranscriptionJobStatus_COMPLETED *smithy.Schema
-
-var _TranscriptionJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TranscriptionJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _TranscriptionJobSummaries_member *smithy.Schema
-
-var TranscriptionJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TranscriptionJobSummary",
-}, smithy.ShapeTypeStructure, 15)
-var TranscriptionJobSummary_TranscriptionJobName *smithy.Schema
-
-var TranscriptionJobSummary_CreationTime *smithy.Schema
-
-var TranscriptionJobSummary_StartTime *smithy.Schema
-
-var TranscriptionJobSummary_CompletionTime *smithy.Schema
-
-var TranscriptionJobSummary_LanguageCode *smithy.Schema
-
-var TranscriptionJobSummary_TranscriptionJobStatus *smithy.Schema
-
-var TranscriptionJobSummary_FailureReason *smithy.Schema
-
-var TranscriptionJobSummary_OutputLocationType *smithy.Schema
-
-var TranscriptionJobSummary_ContentRedaction *smithy.Schema
-
-var TranscriptionJobSummary_ModelSettings *smithy.Schema
-
-var TranscriptionJobSummary_IdentifyLanguage *smithy.Schema
-
-var TranscriptionJobSummary_IdentifyMultipleLanguages *smithy.Schema
-
-var TranscriptionJobSummary_IdentifiedLanguageScore *smithy.Schema
-
-var TranscriptionJobSummary_LanguageCodes *smithy.Schema
-
-var TranscriptionJobSummary_ToxicityDetection *smithy.Schema
-
-var Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Type",
-}, smithy.ShapeTypeEnum, 2)
-var Type_CONVERSATION *smithy.Schema
-
-var Type_DICTATION *smithy.Schema
-
-var _Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _Vocabularies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Vocabularies",
-}, smithy.ShapeTypeList, 1)
-var _Vocabularies_member *smithy.Schema
-
-var VocabularyFilterInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "VocabularyFilterInfo",
-}, smithy.ShapeTypeStructure, 3)
-var VocabularyFilterInfo_VocabularyFilterName *smithy.Schema
-
-var VocabularyFilterInfo_LanguageCode *smithy.Schema
-
-var VocabularyFilterInfo_LastModifiedTime *smithy.Schema
-
-var VocabularyFilterMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "VocabularyFilterMethod",
-}, smithy.ShapeTypeEnum, 3)
-var VocabularyFilterMethod_REMOVE *smithy.Schema
-
-var VocabularyFilterMethod_MASK *smithy.Schema
-
-var VocabularyFilterMethod_TAG *smithy.Schema
-
-var _VocabularyFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "VocabularyFilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _VocabularyFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "VocabularyFilters",
-}, smithy.ShapeTypeList, 1)
-var _VocabularyFilters_member *smithy.Schema
-
-var VocabularyInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "VocabularyInfo",
-}, smithy.ShapeTypeStructure, 4)
-var VocabularyInfo_VocabularyName *smithy.Schema
-
-var VocabularyInfo_LanguageCode *smithy.Schema
-
-var VocabularyInfo_LastModifiedTime *smithy.Schema
-
-var VocabularyInfo_VocabularyState *smithy.Schema
-
-var _VocabularyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "VocabularyName",
-}, smithy.ShapeTypeString, 0)
-
-var VocabularyState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "VocabularyState",
-}, smithy.ShapeTypeEnum, 3)
-var VocabularyState_PENDING *smithy.Schema
-
-var VocabularyState_READY *smithy.Schema
-
-var VocabularyState_FAILED *smithy.Schema
-
-var _Word = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Word",
-}, smithy.ShapeTypeString, 0)
-
-var _Words = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "Words",
-}, smithy.ShapeTypeList, 1)
-var _Words_member *smithy.Schema
-
-var CreateCallAnalyticsCategoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateCallAnalyticsCategoryRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCallAnalyticsCategoryRequest_CategoryName *smithy.Schema
-
-var CreateCallAnalyticsCategoryRequest_Rules *smithy.Schema
-
-var CreateCallAnalyticsCategoryRequest_Tags *smithy.Schema
-
-var CreateCallAnalyticsCategoryRequest_InputType *smithy.Schema
-
-var CreateCallAnalyticsCategoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateCallAnalyticsCategoryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCallAnalyticsCategoryResponse_CategoryProperties *smithy.Schema
-
-var CreateLanguageModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateLanguageModelRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateLanguageModelRequest_LanguageCode *smithy.Schema
-
-var CreateLanguageModelRequest_BaseModelName *smithy.Schema
-
-var CreateLanguageModelRequest_ModelName *smithy.Schema
-
-var CreateLanguageModelRequest_InputDataConfig *smithy.Schema
-
-var CreateLanguageModelRequest_EncryptionConfiguration *smithy.Schema
-
-var CreateLanguageModelRequest_Tags *smithy.Schema
-
-var CreateLanguageModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateLanguageModelResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateLanguageModelResponse_LanguageCode *smithy.Schema
-
-var CreateLanguageModelResponse_BaseModelName *smithy.Schema
-
-var CreateLanguageModelResponse_ModelName *smithy.Schema
-
-var CreateLanguageModelResponse_InputDataConfig *smithy.Schema
-
-var CreateLanguageModelResponse_ModelStatus *smithy.Schema
-
-var CreateMedicalVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateMedicalVocabularyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMedicalVocabularyRequest_VocabularyName *smithy.Schema
-
-var CreateMedicalVocabularyRequest_LanguageCode *smithy.Schema
-
-var CreateMedicalVocabularyRequest_VocabularyFileUri *smithy.Schema
-
-var CreateMedicalVocabularyRequest_Tags *smithy.Schema
-
-var CreateMedicalVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateMedicalVocabularyResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateMedicalVocabularyResponse_VocabularyName *smithy.Schema
-
-var CreateMedicalVocabularyResponse_LanguageCode *smithy.Schema
-
-var CreateMedicalVocabularyResponse_VocabularyState *smithy.Schema
-
-var CreateMedicalVocabularyResponse_LastModifiedTime *smithy.Schema
-
-var CreateMedicalVocabularyResponse_FailureReason *smithy.Schema
-
-var CreateVocabularyFilterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateVocabularyFilterRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateVocabularyFilterRequest_VocabularyFilterName *smithy.Schema
-
-var CreateVocabularyFilterRequest_LanguageCode *smithy.Schema
-
-var CreateVocabularyFilterRequest_Words *smithy.Schema
-
-var CreateVocabularyFilterRequest_VocabularyFilterFileUri *smithy.Schema
-
-var CreateVocabularyFilterRequest_Tags *smithy.Schema
-
-var CreateVocabularyFilterRequest_DataAccessRoleArn *smithy.Schema
-
-var CreateVocabularyFilterRequest_EncryptionConfiguration *smithy.Schema
-
-var CreateVocabularyFilterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateVocabularyFilterResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateVocabularyFilterResponse_VocabularyFilterName *smithy.Schema
-
-var CreateVocabularyFilterResponse_LanguageCode *smithy.Schema
-
-var CreateVocabularyFilterResponse_LastModifiedTime *smithy.Schema
-
-var CreateVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateVocabularyRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateVocabularyRequest_VocabularyName *smithy.Schema
-
-var CreateVocabularyRequest_LanguageCode *smithy.Schema
-
-var CreateVocabularyRequest_Phrases *smithy.Schema
-
-var CreateVocabularyRequest_VocabularyFileUri *smithy.Schema
-
-var CreateVocabularyRequest_Tags *smithy.Schema
-
-var CreateVocabularyRequest_DataAccessRoleArn *smithy.Schema
-
-var CreateVocabularyRequest_EncryptionConfiguration *smithy.Schema
-
-var CreateVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "CreateVocabularyResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateVocabularyResponse_VocabularyName *smithy.Schema
-
-var CreateVocabularyResponse_LanguageCode *smithy.Schema
-
-var CreateVocabularyResponse_VocabularyState *smithy.Schema
-
-var CreateVocabularyResponse_LastModifiedTime *smithy.Schema
-
-var CreateVocabularyResponse_FailureReason *smithy.Schema
-
-var DeleteCallAnalyticsCategoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteCallAnalyticsCategoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCallAnalyticsCategoryRequest_CategoryName *smithy.Schema
-
-var DeleteCallAnalyticsCategoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteCallAnalyticsCategoryResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCallAnalyticsJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteCallAnalyticsJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCallAnalyticsJobRequest_CallAnalyticsJobName *smithy.Schema
-
-var DeleteCallAnalyticsJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteCallAnalyticsJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLanguageModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteLanguageModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLanguageModelRequest_ModelName *smithy.Schema
-
-var DeleteMedicalScribeJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteMedicalScribeJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMedicalScribeJobRequest_MedicalScribeJobName *smithy.Schema
-
-var DeleteMedicalTranscriptionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteMedicalTranscriptionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMedicalTranscriptionJobRequest_MedicalTranscriptionJobName *smithy.Schema
-
-var DeleteMedicalVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteMedicalVocabularyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMedicalVocabularyRequest_VocabularyName *smithy.Schema
-
-var DeleteTranscriptionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteTranscriptionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTranscriptionJobRequest_TranscriptionJobName *smithy.Schema
-
-var DeleteVocabularyFilterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteVocabularyFilterRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVocabularyFilterRequest_VocabularyFilterName *smithy.Schema
-
-var DeleteVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DeleteVocabularyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVocabularyRequest_VocabularyName *smithy.Schema
-
-var DescribeLanguageModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DescribeLanguageModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLanguageModelRequest_ModelName *smithy.Schema
-
-var DescribeLanguageModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "DescribeLanguageModelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLanguageModelResponse_LanguageModel *smithy.Schema
-
-var GetCallAnalyticsCategoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetCallAnalyticsCategoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCallAnalyticsCategoryRequest_CategoryName *smithy.Schema
-
-var GetCallAnalyticsCategoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetCallAnalyticsCategoryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCallAnalyticsCategoryResponse_CategoryProperties *smithy.Schema
-
-var GetCallAnalyticsJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetCallAnalyticsJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCallAnalyticsJobRequest_CallAnalyticsJobName *smithy.Schema
-
-var GetCallAnalyticsJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetCallAnalyticsJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCallAnalyticsJobResponse_CallAnalyticsJob *smithy.Schema
-
-var GetMedicalScribeJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalScribeJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMedicalScribeJobRequest_MedicalScribeJobName *smithy.Schema
-
-var GetMedicalScribeJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalScribeJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMedicalScribeJobResponse_MedicalScribeJob *smithy.Schema
-
-var GetMedicalTranscriptionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalTranscriptionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMedicalTranscriptionJobRequest_MedicalTranscriptionJobName *smithy.Schema
-
-var GetMedicalTranscriptionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalTranscriptionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMedicalTranscriptionJobResponse_MedicalTranscriptionJob *smithy.Schema
-
-var GetMedicalVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalVocabularyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMedicalVocabularyRequest_VocabularyName *smithy.Schema
-
-var GetMedicalVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetMedicalVocabularyResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetMedicalVocabularyResponse_VocabularyName *smithy.Schema
-
-var GetMedicalVocabularyResponse_LanguageCode *smithy.Schema
-
-var GetMedicalVocabularyResponse_VocabularyState *smithy.Schema
-
-var GetMedicalVocabularyResponse_LastModifiedTime *smithy.Schema
-
-var GetMedicalVocabularyResponse_FailureReason *smithy.Schema
-
-var GetMedicalVocabularyResponse_DownloadUri *smithy.Schema
-
-var GetTranscriptionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetTranscriptionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTranscriptionJobRequest_TranscriptionJobName *smithy.Schema
-
-var GetTranscriptionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetTranscriptionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTranscriptionJobResponse_TranscriptionJob *smithy.Schema
-
-var GetVocabularyFilterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetVocabularyFilterRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVocabularyFilterRequest_VocabularyFilterName *smithy.Schema
-
-var GetVocabularyFilterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetVocabularyFilterResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetVocabularyFilterResponse_VocabularyFilterName *smithy.Schema
-
-var GetVocabularyFilterResponse_LanguageCode *smithy.Schema
-
-var GetVocabularyFilterResponse_LastModifiedTime *smithy.Schema
-
-var GetVocabularyFilterResponse_DownloadUri *smithy.Schema
-
-var GetVocabularyFilterResponse_DataAccessRoleArn *smithy.Schema
-
-var GetVocabularyFilterResponse_EncryptionConfiguration *smithy.Schema
-
-var GetVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetVocabularyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVocabularyRequest_VocabularyName *smithy.Schema
-
-var GetVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "GetVocabularyResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetVocabularyResponse_VocabularyName *smithy.Schema
-
-var GetVocabularyResponse_LanguageCode *smithy.Schema
-
-var GetVocabularyResponse_VocabularyState *smithy.Schema
-
-var GetVocabularyResponse_LastModifiedTime *smithy.Schema
-
-var GetVocabularyResponse_FailureReason *smithy.Schema
-
-var GetVocabularyResponse_DownloadUri *smithy.Schema
-
-var GetVocabularyResponse_DataAccessRoleArn *smithy.Schema
-
-var GetVocabularyResponse_EncryptionConfiguration *smithy.Schema
-
-var ListCallAnalyticsCategoriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListCallAnalyticsCategoriesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCallAnalyticsCategoriesRequest_NextToken *smithy.Schema
-
-var ListCallAnalyticsCategoriesRequest_MaxResults *smithy.Schema
-
-var ListCallAnalyticsCategoriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListCallAnalyticsCategoriesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCallAnalyticsCategoriesResponse_NextToken *smithy.Schema
-
-var ListCallAnalyticsCategoriesResponse_Categories *smithy.Schema
-
-var ListCallAnalyticsJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListCallAnalyticsJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCallAnalyticsJobsRequest_Status *smithy.Schema
-
-var ListCallAnalyticsJobsRequest_JobNameContains *smithy.Schema
-
-var ListCallAnalyticsJobsRequest_NextToken *smithy.Schema
-
-var ListCallAnalyticsJobsRequest_MaxResults *smithy.Schema
-
-var ListCallAnalyticsJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListCallAnalyticsJobsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListCallAnalyticsJobsResponse_Status *smithy.Schema
-
-var ListCallAnalyticsJobsResponse_NextToken *smithy.Schema
-
-var ListCallAnalyticsJobsResponse_CallAnalyticsJobSummaries *smithy.Schema
-
-var ListLanguageModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListLanguageModelsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListLanguageModelsRequest_StatusEquals *smithy.Schema
-
-var ListLanguageModelsRequest_NameContains *smithy.Schema
-
-var ListLanguageModelsRequest_NextToken *smithy.Schema
-
-var ListLanguageModelsRequest_MaxResults *smithy.Schema
-
-var ListLanguageModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListLanguageModelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLanguageModelsResponse_NextToken *smithy.Schema
-
-var ListLanguageModelsResponse_Models *smithy.Schema
-
-var ListMedicalScribeJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalScribeJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMedicalScribeJobsRequest_Status *smithy.Schema
-
-var ListMedicalScribeJobsRequest_JobNameContains *smithy.Schema
-
-var ListMedicalScribeJobsRequest_NextToken *smithy.Schema
-
-var ListMedicalScribeJobsRequest_MaxResults *smithy.Schema
-
-var ListMedicalScribeJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalScribeJobsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListMedicalScribeJobsResponse_Status *smithy.Schema
-
-var ListMedicalScribeJobsResponse_NextToken *smithy.Schema
-
-var ListMedicalScribeJobsResponse_MedicalScribeJobSummaries *smithy.Schema
-
-var ListMedicalTranscriptionJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalTranscriptionJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMedicalTranscriptionJobsRequest_Status *smithy.Schema
-
-var ListMedicalTranscriptionJobsRequest_JobNameContains *smithy.Schema
-
-var ListMedicalTranscriptionJobsRequest_NextToken *smithy.Schema
-
-var ListMedicalTranscriptionJobsRequest_MaxResults *smithy.Schema
-
-var ListMedicalTranscriptionJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalTranscriptionJobsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListMedicalTranscriptionJobsResponse_Status *smithy.Schema
-
-var ListMedicalTranscriptionJobsResponse_NextToken *smithy.Schema
-
-var ListMedicalTranscriptionJobsResponse_MedicalTranscriptionJobSummaries *smithy.Schema
-
-var ListMedicalVocabulariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalVocabulariesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMedicalVocabulariesRequest_NextToken *smithy.Schema
-
-var ListMedicalVocabulariesRequest_MaxResults *smithy.Schema
-
-var ListMedicalVocabulariesRequest_StateEquals *smithy.Schema
-
-var ListMedicalVocabulariesRequest_NameContains *smithy.Schema
-
-var ListMedicalVocabulariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListMedicalVocabulariesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListMedicalVocabulariesResponse_Status *smithy.Schema
-
-var ListMedicalVocabulariesResponse_NextToken *smithy.Schema
-
-var ListMedicalVocabulariesResponse_Vocabularies *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTranscriptionJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListTranscriptionJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListTranscriptionJobsRequest_Status *smithy.Schema
-
-var ListTranscriptionJobsRequest_JobNameContains *smithy.Schema
-
-var ListTranscriptionJobsRequest_NextToken *smithy.Schema
-
-var ListTranscriptionJobsRequest_MaxResults *smithy.Schema
-
-var ListTranscriptionJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListTranscriptionJobsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListTranscriptionJobsResponse_Status *smithy.Schema
-
-var ListTranscriptionJobsResponse_NextToken *smithy.Schema
-
-var ListTranscriptionJobsResponse_TranscriptionJobSummaries *smithy.Schema
-
-var ListVocabulariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListVocabulariesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListVocabulariesRequest_NextToken *smithy.Schema
-
-var ListVocabulariesRequest_MaxResults *smithy.Schema
-
-var ListVocabulariesRequest_StateEquals *smithy.Schema
-
-var ListVocabulariesRequest_NameContains *smithy.Schema
-
-var ListVocabulariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListVocabulariesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListVocabulariesResponse_Status *smithy.Schema
-
-var ListVocabulariesResponse_NextToken *smithy.Schema
-
-var ListVocabulariesResponse_Vocabularies *smithy.Schema
-
-var ListVocabularyFiltersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListVocabularyFiltersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListVocabularyFiltersRequest_NextToken *smithy.Schema
-
-var ListVocabularyFiltersRequest_MaxResults *smithy.Schema
-
-var ListVocabularyFiltersRequest_NameContains *smithy.Schema
-
-var ListVocabularyFiltersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "ListVocabularyFiltersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVocabularyFiltersResponse_NextToken *smithy.Schema
-
-var ListVocabularyFiltersResponse_VocabularyFilters *smithy.Schema
-
-var StartCallAnalyticsJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartCallAnalyticsJobRequest",
-}, smithy.ShapeTypeStructure, 8)
-var StartCallAnalyticsJobRequest_CallAnalyticsJobName *smithy.Schema
-
-var StartCallAnalyticsJobRequest_Media *smithy.Schema
-
-var StartCallAnalyticsJobRequest_OutputLocation *smithy.Schema
-
-var StartCallAnalyticsJobRequest_OutputEncryptionKMSKeyId *smithy.Schema
-
-var StartCallAnalyticsJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartCallAnalyticsJobRequest_Settings *smithy.Schema
-
-var StartCallAnalyticsJobRequest_Tags *smithy.Schema
-
-var StartCallAnalyticsJobRequest_ChannelDefinitions *smithy.Schema
-
-var StartCallAnalyticsJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartCallAnalyticsJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartCallAnalyticsJobResponse_CallAnalyticsJob *smithy.Schema
-
-var StartMedicalScribeJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartMedicalScribeJobRequest",
-}, smithy.ShapeTypeStructure, 10)
-var StartMedicalScribeJobRequest_MedicalScribeJobName *smithy.Schema
-
-var StartMedicalScribeJobRequest_Media *smithy.Schema
-
-var StartMedicalScribeJobRequest_OutputBucketName *smithy.Schema
-
-var StartMedicalScribeJobRequest_OutputEncryptionKMSKeyId *smithy.Schema
-
-var StartMedicalScribeJobRequest_KMSEncryptionContext *smithy.Schema
-
-var StartMedicalScribeJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartMedicalScribeJobRequest_Settings *smithy.Schema
-
-var StartMedicalScribeJobRequest_ChannelDefinitions *smithy.Schema
-
-var StartMedicalScribeJobRequest_Tags *smithy.Schema
-
-var StartMedicalScribeJobRequest_MedicalScribeContext *smithy.Schema
-
-var StartMedicalScribeJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartMedicalScribeJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartMedicalScribeJobResponse_MedicalScribeJob *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartMedicalTranscriptionJobRequest",
-}, smithy.ShapeTypeStructure, 14)
-var StartMedicalTranscriptionJobRequest_MedicalTranscriptionJobName *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_LanguageCode *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_MediaSampleRateHertz *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_MediaFormat *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_Media *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_OutputBucketName *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_OutputKey *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_OutputEncryptionKMSKeyId *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_KMSEncryptionContext *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_Settings *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_ContentIdentificationType *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_Specialty *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_Type *smithy.Schema
-
-var StartMedicalTranscriptionJobRequest_Tags *smithy.Schema
-
-var StartMedicalTranscriptionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartMedicalTranscriptionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartMedicalTranscriptionJobResponse_MedicalTranscriptionJob *smithy.Schema
-
-var StartTranscriptionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartTranscriptionJobRequest",
-}, smithy.ShapeTypeStructure, 20)
-var StartTranscriptionJobRequest_TranscriptionJobName *smithy.Schema
-
-var StartTranscriptionJobRequest_LanguageCode *smithy.Schema
-
-var StartTranscriptionJobRequest_MediaSampleRateHertz *smithy.Schema
-
-var StartTranscriptionJobRequest_MediaFormat *smithy.Schema
-
-var StartTranscriptionJobRequest_Media *smithy.Schema
-
-var StartTranscriptionJobRequest_OutputBucketName *smithy.Schema
-
-var StartTranscriptionJobRequest_OutputKey *smithy.Schema
-
-var StartTranscriptionJobRequest_OutputEncryptionKMSKeyId *smithy.Schema
-
-var StartTranscriptionJobRequest_KMSEncryptionContext *smithy.Schema
-
-var StartTranscriptionJobRequest_Settings *smithy.Schema
-
-var StartTranscriptionJobRequest_ModelSettings *smithy.Schema
-
-var StartTranscriptionJobRequest_JobExecutionSettings *smithy.Schema
-
-var StartTranscriptionJobRequest_ContentRedaction *smithy.Schema
-
-var StartTranscriptionJobRequest_IdentifyLanguage *smithy.Schema
-
-var StartTranscriptionJobRequest_IdentifyMultipleLanguages *smithy.Schema
-
-var StartTranscriptionJobRequest_LanguageOptions *smithy.Schema
-
-var StartTranscriptionJobRequest_Subtitles *smithy.Schema
-
-var StartTranscriptionJobRequest_Tags *smithy.Schema
-
-var StartTranscriptionJobRequest_LanguageIdSettings *smithy.Schema
-
-var StartTranscriptionJobRequest_ToxicityDetection *smithy.Schema
-
-var StartTranscriptionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "StartTranscriptionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartTranscriptionJobResponse_TranscriptionJob *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateCallAnalyticsCategoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateCallAnalyticsCategoryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateCallAnalyticsCategoryRequest_CategoryName *smithy.Schema
-
-var UpdateCallAnalyticsCategoryRequest_Rules *smithy.Schema
-
-var UpdateCallAnalyticsCategoryRequest_InputType *smithy.Schema
-
-var UpdateCallAnalyticsCategoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateCallAnalyticsCategoryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCallAnalyticsCategoryResponse_CategoryProperties *smithy.Schema
-
-var UpdateLanguageModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateLanguageModelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLanguageModelRequest_ModelName *smithy.Schema
-
-var UpdateLanguageModelRequest_DataAccessRoleArn *smithy.Schema
-
-var UpdateLanguageModelRequest_EncryptionConfiguration *smithy.Schema
-
-var UpdateLanguageModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateLanguageModelResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateLanguageModelResponse_ModelName *smithy.Schema
-
-var UpdateLanguageModelResponse_ModelStatus *smithy.Schema
-
-var UpdateLanguageModelResponse_LastModifiedTime *smithy.Schema
-
-var UpdateMedicalVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateMedicalVocabularyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateMedicalVocabularyRequest_VocabularyName *smithy.Schema
-
-var UpdateMedicalVocabularyRequest_LanguageCode *smithy.Schema
-
-var UpdateMedicalVocabularyRequest_VocabularyFileUri *smithy.Schema
-
-var UpdateMedicalVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateMedicalVocabularyResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateMedicalVocabularyResponse_VocabularyName *smithy.Schema
-
-var UpdateMedicalVocabularyResponse_LanguageCode *smithy.Schema
-
-var UpdateMedicalVocabularyResponse_LastModifiedTime *smithy.Schema
-
-var UpdateMedicalVocabularyResponse_VocabularyState *smithy.Schema
-
-var UpdateVocabularyFilterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateVocabularyFilterRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateVocabularyFilterRequest_VocabularyFilterName *smithy.Schema
-
-var UpdateVocabularyFilterRequest_Words *smithy.Schema
-
-var UpdateVocabularyFilterRequest_VocabularyFilterFileUri *smithy.Schema
-
-var UpdateVocabularyFilterRequest_DataAccessRoleArn *smithy.Schema
-
-var UpdateVocabularyFilterRequest_EncryptionConfiguration *smithy.Schema
-
-var UpdateVocabularyFilterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateVocabularyFilterResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateVocabularyFilterResponse_VocabularyFilterName *smithy.Schema
-
-var UpdateVocabularyFilterResponse_LanguageCode *smithy.Schema
-
-var UpdateVocabularyFilterResponse_LastModifiedTime *smithy.Schema
-
-var UpdateVocabularyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateVocabularyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateVocabularyRequest_VocabularyName *smithy.Schema
-
-var UpdateVocabularyRequest_LanguageCode *smithy.Schema
-
-var UpdateVocabularyRequest_Phrases *smithy.Schema
-
-var UpdateVocabularyRequest_VocabularyFileUri *smithy.Schema
-
-var UpdateVocabularyRequest_DataAccessRoleArn *smithy.Schema
-
-var UpdateVocabularyRequest_EncryptionConfiguration *smithy.Schema
-
-var UpdateVocabularyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transcribe",
-	Name:      "UpdateVocabularyResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateVocabularyResponse_VocabularyName *smithy.Schema
-
-var UpdateVocabularyResponse_LanguageCode *smithy.Schema
-
-var UpdateVocabularyResponse_LastModifiedTime *smithy.Schema
-
-var UpdateVocabularyResponse_VocabularyState *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AbsoluteTimeRange_StartTime = AbsoluteTimeRange.AddMember("StartTime", _TimestampMilliseconds)
-
-	AbsoluteTimeRange_EndTime = AbsoluteTimeRange.AddMember("EndTime", _TimestampMilliseconds)
-
-	AbsoluteTimeRange_First = AbsoluteTimeRange.AddMember("First", _TimestampMilliseconds)
-
-	AbsoluteTimeRange_Last = AbsoluteTimeRange.AddMember("Last", _TimestampMilliseconds)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _FailureReason)
-
-	BaseModelName_NARROW_BAND = BaseModelName.AddMember("NARROW_BAND", smithyprelude.Unit)
-
-	BaseModelName_WIDE_BAND = BaseModelName.AddMember("WIDE_BAND", smithyprelude.Unit)
-
-	CallAnalyticsFeature_GENERATIVE_SUMMARIZATION = CallAnalyticsFeature.AddMember("GENERATIVE_SUMMARIZATION", smithyprelude.Unit)
-
-	CallAnalyticsJobStatus_QUEUED = CallAnalyticsJobStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	CallAnalyticsJobStatus_IN_PROGRESS = CallAnalyticsJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	CallAnalyticsJobStatus_FAILED = CallAnalyticsJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CallAnalyticsJobStatus_COMPLETED = CallAnalyticsJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	CallAnalyticsSkippedReasonCode_INSUFFICIENT_CONVERSATION_CONTENT = CallAnalyticsSkippedReasonCode.AddMember("INSUFFICIENT_CONVERSATION_CONTENT", smithyprelude.Unit)
-
-	CallAnalyticsSkippedReasonCode_FAILED_SAFETY_GUIDELINES = CallAnalyticsSkippedReasonCode.AddMember("FAILED_SAFETY_GUIDELINES", smithyprelude.Unit)
-
-	CallAnalyticsSkippedFeature_Feature = CallAnalyticsSkippedFeature.AddMember("Feature", CallAnalyticsFeature)
-
-	CallAnalyticsSkippedFeature_ReasonCode = CallAnalyticsSkippedFeature.AddMember("ReasonCode", CallAnalyticsSkippedReasonCode)
-
-	CallAnalyticsSkippedFeature_Message = CallAnalyticsSkippedFeature.AddMember("Message", _String)
-
-	_CallAnalyticsSkippedFeatureList_member = _CallAnalyticsSkippedFeatureList.AddMember("member", CallAnalyticsSkippedFeature)
-
-	CallAnalyticsJobDetails_Skipped = CallAnalyticsJobDetails.AddMember("Skipped", _CallAnalyticsSkippedFeatureList)
-
-	LanguageCode_AF_ZA = LanguageCode.AddMember("AF_ZA", smithyprelude.Unit)
-
-	LanguageCode_AR_AE = LanguageCode.AddMember("AR_AE", smithyprelude.Unit)
-
-	LanguageCode_AR_SA = LanguageCode.AddMember("AR_SA", smithyprelude.Unit)
-
-	LanguageCode_AM_ET = LanguageCode.AddMember("AM_ET", smithyprelude.Unit)
-
-	LanguageCode_CY_GB = LanguageCode.AddMember("CY_GB", smithyprelude.Unit)
-
-	LanguageCode_DA_DK = LanguageCode.AddMember("DA_DK", smithyprelude.Unit)
-
-	LanguageCode_DE_CH = LanguageCode.AddMember("DE_CH", smithyprelude.Unit)
-
-	LanguageCode_DE_DE = LanguageCode.AddMember("DE_DE", smithyprelude.Unit)
-
-	LanguageCode_EN_AB = LanguageCode.AddMember("EN_AB", smithyprelude.Unit)
-
-	LanguageCode_EN_AU = LanguageCode.AddMember("EN_AU", smithyprelude.Unit)
-
-	LanguageCode_EN_GB = LanguageCode.AddMember("EN_GB", smithyprelude.Unit)
-
-	LanguageCode_EN_IE = LanguageCode.AddMember("EN_IE", smithyprelude.Unit)
-
-	LanguageCode_EN_IN = LanguageCode.AddMember("EN_IN", smithyprelude.Unit)
-
-	LanguageCode_EN_US = LanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	LanguageCode_EN_WL = LanguageCode.AddMember("EN_WL", smithyprelude.Unit)
-
-	LanguageCode_ES_ES = LanguageCode.AddMember("ES_ES", smithyprelude.Unit)
-
-	LanguageCode_ES_MX = LanguageCode.AddMember("ES_MX", smithyprelude.Unit)
-
-	LanguageCode_ES_US = LanguageCode.AddMember("ES_US", smithyprelude.Unit)
-
-	LanguageCode_FA_AF = LanguageCode.AddMember("FA_AF", smithyprelude.Unit)
-
-	LanguageCode_FA_IR = LanguageCode.AddMember("FA_IR", smithyprelude.Unit)
-
-	LanguageCode_FR_CA = LanguageCode.AddMember("FR_CA", smithyprelude.Unit)
-
-	LanguageCode_FR_FR = LanguageCode.AddMember("FR_FR", smithyprelude.Unit)
-
-	LanguageCode_GA_IE = LanguageCode.AddMember("GA_IE", smithyprelude.Unit)
-
-	LanguageCode_GD_GB = LanguageCode.AddMember("GD_GB", smithyprelude.Unit)
-
-	LanguageCode_HE_IL = LanguageCode.AddMember("HE_IL", smithyprelude.Unit)
-
-	LanguageCode_HI_IN = LanguageCode.AddMember("HI_IN", smithyprelude.Unit)
-
-	LanguageCode_HT_HT = LanguageCode.AddMember("HT_HT", smithyprelude.Unit)
-
-	LanguageCode_ID_ID = LanguageCode.AddMember("ID_ID", smithyprelude.Unit)
-
-	LanguageCode_IT_IT = LanguageCode.AddMember("IT_IT", smithyprelude.Unit)
-
-	LanguageCode_JA_JP = LanguageCode.AddMember("JA_JP", smithyprelude.Unit)
-
-	LanguageCode_JV_ID = LanguageCode.AddMember("JV_ID", smithyprelude.Unit)
-
-	LanguageCode_KM_KH = LanguageCode.AddMember("KM_KH", smithyprelude.Unit)
-
-	LanguageCode_KO_KR = LanguageCode.AddMember("KO_KR", smithyprelude.Unit)
-
-	LanguageCode_MY_MM = LanguageCode.AddMember("MY_MM", smithyprelude.Unit)
-
-	LanguageCode_MS_MY = LanguageCode.AddMember("MS_MY", smithyprelude.Unit)
-
-	LanguageCode_NL_NL = LanguageCode.AddMember("NL_NL", smithyprelude.Unit)
-
-	LanguageCode_PT_BR = LanguageCode.AddMember("PT_BR", smithyprelude.Unit)
-
-	LanguageCode_PT_PT = LanguageCode.AddMember("PT_PT", smithyprelude.Unit)
-
-	LanguageCode_RU_RU = LanguageCode.AddMember("RU_RU", smithyprelude.Unit)
-
-	LanguageCode_TA_IN = LanguageCode.AddMember("TA_IN", smithyprelude.Unit)
-
-	LanguageCode_TE_IN = LanguageCode.AddMember("TE_IN", smithyprelude.Unit)
-
-	LanguageCode_TR_TR = LanguageCode.AddMember("TR_TR", smithyprelude.Unit)
-
-	LanguageCode_ZH_CN = LanguageCode.AddMember("ZH_CN", smithyprelude.Unit)
-
-	LanguageCode_ZH_TW = LanguageCode.AddMember("ZH_TW", smithyprelude.Unit)
-
-	LanguageCode_TH_TH = LanguageCode.AddMember("TH_TH", smithyprelude.Unit)
-
-	LanguageCode_EN_ZA = LanguageCode.AddMember("EN_ZA", smithyprelude.Unit)
-
-	LanguageCode_EN_NZ = LanguageCode.AddMember("EN_NZ", smithyprelude.Unit)
-
-	LanguageCode_VI_VN = LanguageCode.AddMember("VI_VN", smithyprelude.Unit)
-
-	LanguageCode_SV_SE = LanguageCode.AddMember("SV_SE", smithyprelude.Unit)
-
-	LanguageCode_AB_GE = LanguageCode.AddMember("AB_GE", smithyprelude.Unit)
-
-	LanguageCode_AST_ES = LanguageCode.AddMember("AST_ES", smithyprelude.Unit)
-
-	LanguageCode_AZ_AZ = LanguageCode.AddMember("AZ_AZ", smithyprelude.Unit)
-
-	LanguageCode_BA_RU = LanguageCode.AddMember("BA_RU", smithyprelude.Unit)
-
-	LanguageCode_BE_BY = LanguageCode.AddMember("BE_BY", smithyprelude.Unit)
-
-	LanguageCode_BG_BG = LanguageCode.AddMember("BG_BG", smithyprelude.Unit)
-
-	LanguageCode_BN_IN = LanguageCode.AddMember("BN_IN", smithyprelude.Unit)
-
-	LanguageCode_BS_BA = LanguageCode.AddMember("BS_BA", smithyprelude.Unit)
-
-	LanguageCode_CA_ES = LanguageCode.AddMember("CA_ES", smithyprelude.Unit)
-
-	LanguageCode_CKB_IQ = LanguageCode.AddMember("CKB_IQ", smithyprelude.Unit)
-
-	LanguageCode_CKB_IR = LanguageCode.AddMember("CKB_IR", smithyprelude.Unit)
-
-	LanguageCode_CS_CZ = LanguageCode.AddMember("CS_CZ", smithyprelude.Unit)
-
-	LanguageCode_CY_WL = LanguageCode.AddMember("CY_WL", smithyprelude.Unit)
-
-	LanguageCode_EL_GR = LanguageCode.AddMember("EL_GR", smithyprelude.Unit)
-
-	LanguageCode_ET_EE = LanguageCode.AddMember("ET_EE", smithyprelude.Unit)
-
-	LanguageCode_ET_ET = LanguageCode.AddMember("ET_ET", smithyprelude.Unit)
-
-	LanguageCode_EU_ES = LanguageCode.AddMember("EU_ES", smithyprelude.Unit)
-
-	LanguageCode_FI_FI = LanguageCode.AddMember("FI_FI", smithyprelude.Unit)
-
-	LanguageCode_GL_ES = LanguageCode.AddMember("GL_ES", smithyprelude.Unit)
-
-	LanguageCode_GU_IN = LanguageCode.AddMember("GU_IN", smithyprelude.Unit)
-
-	LanguageCode_HA_NG = LanguageCode.AddMember("HA_NG", smithyprelude.Unit)
-
-	LanguageCode_HR_HR = LanguageCode.AddMember("HR_HR", smithyprelude.Unit)
-
-	LanguageCode_HU_HU = LanguageCode.AddMember("HU_HU", smithyprelude.Unit)
-
-	LanguageCode_HY_AM = LanguageCode.AddMember("HY_AM", smithyprelude.Unit)
-
-	LanguageCode_IS_IS = LanguageCode.AddMember("IS_IS", smithyprelude.Unit)
-
-	LanguageCode_KA_GE = LanguageCode.AddMember("KA_GE", smithyprelude.Unit)
-
-	LanguageCode_KAB_DZ = LanguageCode.AddMember("KAB_DZ", smithyprelude.Unit)
-
-	LanguageCode_KK_KZ = LanguageCode.AddMember("KK_KZ", smithyprelude.Unit)
-
-	LanguageCode_KN_IN = LanguageCode.AddMember("KN_IN", smithyprelude.Unit)
-
-	LanguageCode_KY_KG = LanguageCode.AddMember("KY_KG", smithyprelude.Unit)
-
-	LanguageCode_LG_IN = LanguageCode.AddMember("LG_IN", smithyprelude.Unit)
-
-	LanguageCode_LT_LT = LanguageCode.AddMember("LT_LT", smithyprelude.Unit)
-
-	LanguageCode_LV_LV = LanguageCode.AddMember("LV_LV", smithyprelude.Unit)
-
-	LanguageCode_MHR_RU = LanguageCode.AddMember("MHR_RU", smithyprelude.Unit)
-
-	LanguageCode_MI_NZ = LanguageCode.AddMember("MI_NZ", smithyprelude.Unit)
-
-	LanguageCode_MK_MK = LanguageCode.AddMember("MK_MK", smithyprelude.Unit)
-
-	LanguageCode_ML_IN = LanguageCode.AddMember("ML_IN", smithyprelude.Unit)
-
-	LanguageCode_MN_MN = LanguageCode.AddMember("MN_MN", smithyprelude.Unit)
-
-	LanguageCode_MR_IN = LanguageCode.AddMember("MR_IN", smithyprelude.Unit)
-
-	LanguageCode_MT_MT = LanguageCode.AddMember("MT_MT", smithyprelude.Unit)
-
-	LanguageCode_NO_NO = LanguageCode.AddMember("NO_NO", smithyprelude.Unit)
-
-	LanguageCode_NE_NP = LanguageCode.AddMember("NE_NP", smithyprelude.Unit)
-
-	LanguageCode_OR_IN = LanguageCode.AddMember("OR_IN", smithyprelude.Unit)
-
-	LanguageCode_PA_IN = LanguageCode.AddMember("PA_IN", smithyprelude.Unit)
-
-	LanguageCode_PL_PL = LanguageCode.AddMember("PL_PL", smithyprelude.Unit)
-
-	LanguageCode_PS_AF = LanguageCode.AddMember("PS_AF", smithyprelude.Unit)
-
-	LanguageCode_RO_RO = LanguageCode.AddMember("RO_RO", smithyprelude.Unit)
-
-	LanguageCode_RW_RW = LanguageCode.AddMember("RW_RW", smithyprelude.Unit)
-
-	LanguageCode_SI_LK = LanguageCode.AddMember("SI_LK", smithyprelude.Unit)
-
-	LanguageCode_SK_SK = LanguageCode.AddMember("SK_SK", smithyprelude.Unit)
-
-	LanguageCode_SL_SI = LanguageCode.AddMember("SL_SI", smithyprelude.Unit)
-
-	LanguageCode_SO_SO = LanguageCode.AddMember("SO_SO", smithyprelude.Unit)
-
-	LanguageCode_SQ_AL = LanguageCode.AddMember("SQ_AL", smithyprelude.Unit)
-
-	LanguageCode_SR_RS = LanguageCode.AddMember("SR_RS", smithyprelude.Unit)
-
-	LanguageCode_SU_ID = LanguageCode.AddMember("SU_ID", smithyprelude.Unit)
-
-	LanguageCode_SW_BI = LanguageCode.AddMember("SW_BI", smithyprelude.Unit)
-
-	LanguageCode_SW_KE = LanguageCode.AddMember("SW_KE", smithyprelude.Unit)
-
-	LanguageCode_SW_RW = LanguageCode.AddMember("SW_RW", smithyprelude.Unit)
-
-	LanguageCode_SW_TZ = LanguageCode.AddMember("SW_TZ", smithyprelude.Unit)
-
-	LanguageCode_SW_UG = LanguageCode.AddMember("SW_UG", smithyprelude.Unit)
-
-	LanguageCode_TL_PH = LanguageCode.AddMember("TL_PH", smithyprelude.Unit)
-
-	LanguageCode_TT_RU = LanguageCode.AddMember("TT_RU", smithyprelude.Unit)
-
-	LanguageCode_UG_CN = LanguageCode.AddMember("UG_CN", smithyprelude.Unit)
-
-	LanguageCode_UK_UA = LanguageCode.AddMember("UK_UA", smithyprelude.Unit)
-
-	LanguageCode_UZ_UZ = LanguageCode.AddMember("UZ_UZ", smithyprelude.Unit)
-
-	LanguageCode_WO_SN = LanguageCode.AddMember("WO_SN", smithyprelude.Unit)
-
-	LanguageCode_ZH_HK = LanguageCode.AddMember("ZH_HK", smithyprelude.Unit)
-
-	LanguageCode_ZU_ZA = LanguageCode.AddMember("ZU_ZA", smithyprelude.Unit)
-
-	MediaFormat_MP3 = MediaFormat.AddMember("MP3", smithyprelude.Unit)
-
-	MediaFormat_MP4 = MediaFormat.AddMember("MP4", smithyprelude.Unit)
-
-	MediaFormat_WAV = MediaFormat.AddMember("WAV", smithyprelude.Unit)
-
-	MediaFormat_FLAC = MediaFormat.AddMember("FLAC", smithyprelude.Unit)
-
-	MediaFormat_OGG = MediaFormat.AddMember("OGG", smithyprelude.Unit)
-
-	MediaFormat_AMR = MediaFormat.AddMember("AMR", smithyprelude.Unit)
-
-	MediaFormat_WEBM = MediaFormat.AddMember("WEBM", smithyprelude.Unit)
-
-	MediaFormat_M4A = MediaFormat.AddMember("M4A", smithyprelude.Unit)
-
-	Media_MediaFileUri = Media.AddMember("MediaFileUri", _Uri)
-
-	Media_RedactedMediaFileUri = Media.AddMember("RedactedMediaFileUri", _Uri)
-
-	Transcript_TranscriptFileUri = Transcript.AddMember("TranscriptFileUri", _Uri)
-
-	Transcript_RedactedTranscriptFileUri = Transcript.AddMember("RedactedTranscriptFileUri", _Uri)
-
-	VocabularyFilterMethod_REMOVE = VocabularyFilterMethod.AddMember("REMOVE", smithyprelude.Unit)
-
-	VocabularyFilterMethod_MASK = VocabularyFilterMethod.AddMember("MASK", smithyprelude.Unit)
-
-	VocabularyFilterMethod_TAG = VocabularyFilterMethod.AddMember("TAG", smithyprelude.Unit)
-
-	RedactionType_PII = RedactionType.AddMember("PII", smithyprelude.Unit)
-
-	RedactionOutput_REDACTED = RedactionOutput.AddMember("REDACTED", smithyprelude.Unit)
-
-	RedactionOutput_REDACTED_AND_UNREDACTED = RedactionOutput.AddMember("REDACTED_AND_UNREDACTED", smithyprelude.Unit)
-
-	PiiEntityType_BANK_ACCOUNT_NUMBER = PiiEntityType.AddMember("BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
-
-	PiiEntityType_BANK_ROUTING = PiiEntityType.AddMember("BANK_ROUTING", smithyprelude.Unit)
-
-	PiiEntityType_CREDIT_DEBIT_NUMBER = PiiEntityType.AddMember("CREDIT_DEBIT_NUMBER", smithyprelude.Unit)
-
-	PiiEntityType_CREDIT_DEBIT_CVV = PiiEntityType.AddMember("CREDIT_DEBIT_CVV", smithyprelude.Unit)
-
-	PiiEntityType_CREDIT_DEBIT_EXPIRY = PiiEntityType.AddMember("CREDIT_DEBIT_EXPIRY", smithyprelude.Unit)
-
-	PiiEntityType_PIN = PiiEntityType.AddMember("PIN", smithyprelude.Unit)
-
-	PiiEntityType_EMAIL = PiiEntityType.AddMember("EMAIL", smithyprelude.Unit)
-
-	PiiEntityType_ADDRESS = PiiEntityType.AddMember("ADDRESS", smithyprelude.Unit)
-
-	PiiEntityType_NAME = PiiEntityType.AddMember("NAME", smithyprelude.Unit)
-
-	PiiEntityType_PHONE = PiiEntityType.AddMember("PHONE", smithyprelude.Unit)
-
-	PiiEntityType_SSN = PiiEntityType.AddMember("SSN", smithyprelude.Unit)
-
-	PiiEntityType_DATE_TIME = PiiEntityType.AddMember("DATE_TIME", smithyprelude.Unit)
-
-	PiiEntityType_PASSPORT_NUMBER = PiiEntityType.AddMember("PASSPORT_NUMBER", smithyprelude.Unit)
-
-	PiiEntityType_DRIVER_ID = PiiEntityType.AddMember("DRIVER_ID", smithyprelude.Unit)
-
-	PiiEntityType_URL = PiiEntityType.AddMember("URL", smithyprelude.Unit)
-
-	PiiEntityType_AGE = PiiEntityType.AddMember("AGE", smithyprelude.Unit)
-
-	PiiEntityType_USERNAME = PiiEntityType.AddMember("USERNAME", smithyprelude.Unit)
-
-	PiiEntityType_PASSWORD = PiiEntityType.AddMember("PASSWORD", smithyprelude.Unit)
-
-	PiiEntityType_AWS_ACCESS_KEY = PiiEntityType.AddMember("AWS_ACCESS_KEY", smithyprelude.Unit)
-
-	PiiEntityType_AWS_SECRET_KEY = PiiEntityType.AddMember("AWS_SECRET_KEY", smithyprelude.Unit)
-
-	PiiEntityType_IP_ADDRESS = PiiEntityType.AddMember("IP_ADDRESS", smithyprelude.Unit)
-
-	PiiEntityType_MAC_ADDRESS = PiiEntityType.AddMember("MAC_ADDRESS", smithyprelude.Unit)
-
-	PiiEntityType_LICENSE_PLATE = PiiEntityType.AddMember("LICENSE_PLATE", smithyprelude.Unit)
-
-	PiiEntityType_VEHICLE_IDENTIFICATION_NUMBER = PiiEntityType.AddMember("VEHICLE_IDENTIFICATION_NUMBER", smithyprelude.Unit)
-
-	PiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = PiiEntityType.AddMember("US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", smithyprelude.Unit)
-
-	PiiEntityType_CA_HEALTH_NUMBER = PiiEntityType.AddMember("CA_HEALTH_NUMBER", smithyprelude.Unit)
-
-	PiiEntityType_CA_SOCIAL_INSURANCE_NUMBER = PiiEntityType.AddMember("CA_SOCIAL_INSURANCE_NUMBER", smithyprelude.Unit)
-
-	PiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = PiiEntityType.AddMember("INTERNATIONAL_BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
-
-	PiiEntityType_SWIFT_CODE = PiiEntityType.AddMember("SWIFT_CODE", smithyprelude.Unit)
-
-	PiiEntityType_ALL = PiiEntityType.AddMember("ALL", smithyprelude.Unit)
-
-	_PiiEntityTypes_member = _PiiEntityTypes.AddMember("member", PiiEntityType)
-
-	ContentRedaction_RedactionType = ContentRedaction.AddMember("RedactionType", RedactionType)
-
-	ContentRedaction_RedactionOutput = ContentRedaction.AddMember("RedactionOutput", RedactionOutput)
-
-	ContentRedaction_PiiEntityTypes = ContentRedaction.AddMember("PiiEntityTypes", _PiiEntityTypes)
-
-	_LanguageOptions_member = _LanguageOptions.AddMember("member", LanguageCode)
-
-	LanguageIdSettings_VocabularyName = LanguageIdSettings.AddMember("VocabularyName", _VocabularyName)
-
-	LanguageIdSettings_VocabularyFilterName = LanguageIdSettings.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	LanguageIdSettings_LanguageModelName = LanguageIdSettings.AddMember("LanguageModelName", _ModelName)
-
-	_LanguageIdSettingsMap_key = _LanguageIdSettingsMap.AddMember("key", LanguageCode)
-
-	_LanguageIdSettingsMap_value = _LanguageIdSettingsMap.AddMember("value", LanguageIdSettings)
-
-	Summarization_GenerateAbstractiveSummary = Summarization.AddMember("GenerateAbstractiveSummary", _Boolean)
-
-	CallAnalyticsJobSettings_VocabularyName = CallAnalyticsJobSettings.AddMember("VocabularyName", _VocabularyName)
-
-	CallAnalyticsJobSettings_VocabularyFilterName = CallAnalyticsJobSettings.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	CallAnalyticsJobSettings_VocabularyFilterMethod = CallAnalyticsJobSettings.AddMember("VocabularyFilterMethod", VocabularyFilterMethod)
-
-	CallAnalyticsJobSettings_LanguageModelName = CallAnalyticsJobSettings.AddMember("LanguageModelName", _ModelName)
-
-	CallAnalyticsJobSettings_ContentRedaction = CallAnalyticsJobSettings.AddMember("ContentRedaction", ContentRedaction)
-
-	CallAnalyticsJobSettings_LanguageOptions = CallAnalyticsJobSettings.AddMember("LanguageOptions", _LanguageOptions)
-
-	CallAnalyticsJobSettings_LanguageIdSettings = CallAnalyticsJobSettings.AddMember("LanguageIdSettings", _LanguageIdSettingsMap)
-
-	CallAnalyticsJobSettings_Summarization = CallAnalyticsJobSettings.AddMember("Summarization", Summarization)
-
-	ParticipantRole_AGENT = ParticipantRole.AddMember("AGENT", smithyprelude.Unit)
-
-	ParticipantRole_CUSTOMER = ParticipantRole.AddMember("CUSTOMER", smithyprelude.Unit)
-
-	ChannelDefinition_ChannelId = ChannelDefinition.AddMember("ChannelId", _ChannelId)
-
-	ChannelDefinition_ParticipantRole = ChannelDefinition.AddMember("ParticipantRole", ParticipantRole)
-
-	_ChannelDefinitions_member = _ChannelDefinitions.AddMember("member", ChannelDefinition)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	CallAnalyticsJob_CallAnalyticsJobName = CallAnalyticsJob.AddMember("CallAnalyticsJobName", _CallAnalyticsJobName)
-
-	CallAnalyticsJob_CallAnalyticsJobStatus = CallAnalyticsJob.AddMember("CallAnalyticsJobStatus", CallAnalyticsJobStatus)
-
-	CallAnalyticsJob_CallAnalyticsJobDetails = CallAnalyticsJob.AddMember("CallAnalyticsJobDetails", CallAnalyticsJobDetails)
-
-	CallAnalyticsJob_LanguageCode = CallAnalyticsJob.AddMember("LanguageCode", LanguageCode)
-
-	CallAnalyticsJob_MediaSampleRateHertz = CallAnalyticsJob.AddMember("MediaSampleRateHertz", _MediaSampleRateHertz)
-
-	CallAnalyticsJob_MediaFormat = CallAnalyticsJob.AddMember("MediaFormat", MediaFormat)
-
-	CallAnalyticsJob_Media = CallAnalyticsJob.AddMember("Media", Media)
-
-	CallAnalyticsJob_Transcript = CallAnalyticsJob.AddMember("Transcript", Transcript)
-
-	CallAnalyticsJob_StartTime = CallAnalyticsJob.AddMember("StartTime", _DateTime)
-
-	CallAnalyticsJob_CreationTime = CallAnalyticsJob.AddMember("CreationTime", _DateTime)
-
-	CallAnalyticsJob_CompletionTime = CallAnalyticsJob.AddMember("CompletionTime", _DateTime)
-
-	CallAnalyticsJob_FailureReason = CallAnalyticsJob.AddMember("FailureReason", _FailureReason)
-
-	CallAnalyticsJob_DataAccessRoleArn = CallAnalyticsJob.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	CallAnalyticsJob_IdentifiedLanguageScore = CallAnalyticsJob.AddMember("IdentifiedLanguageScore", _IdentifiedLanguageScore)
-
-	CallAnalyticsJob_Settings = CallAnalyticsJob.AddMember("Settings", CallAnalyticsJobSettings)
-
-	CallAnalyticsJob_ChannelDefinitions = CallAnalyticsJob.AddMember("ChannelDefinitions", _ChannelDefinitions)
-
-	CallAnalyticsJob_Tags = CallAnalyticsJob.AddMember("Tags", _TagList)
-
-	CallAnalyticsJobSummary_CallAnalyticsJobName = CallAnalyticsJobSummary.AddMember("CallAnalyticsJobName", _CallAnalyticsJobName)
-
-	CallAnalyticsJobSummary_CreationTime = CallAnalyticsJobSummary.AddMember("CreationTime", _DateTime)
-
-	CallAnalyticsJobSummary_StartTime = CallAnalyticsJobSummary.AddMember("StartTime", _DateTime)
-
-	CallAnalyticsJobSummary_CompletionTime = CallAnalyticsJobSummary.AddMember("CompletionTime", _DateTime)
-
-	CallAnalyticsJobSummary_LanguageCode = CallAnalyticsJobSummary.AddMember("LanguageCode", LanguageCode)
-
-	CallAnalyticsJobSummary_CallAnalyticsJobStatus = CallAnalyticsJobSummary.AddMember("CallAnalyticsJobStatus", CallAnalyticsJobStatus)
-
-	CallAnalyticsJobSummary_CallAnalyticsJobDetails = CallAnalyticsJobSummary.AddMember("CallAnalyticsJobDetails", CallAnalyticsJobDetails)
-
-	CallAnalyticsJobSummary_FailureReason = CallAnalyticsJobSummary.AddMember("FailureReason", _FailureReason)
-
-	_CallAnalyticsJobSummaries_member = _CallAnalyticsJobSummaries.AddMember("member", CallAnalyticsJobSummary)
-
-	RelativeTimeRange_StartPercentage = RelativeTimeRange.AddMember("StartPercentage", _Percentage)
-
-	RelativeTimeRange_EndPercentage = RelativeTimeRange.AddMember("EndPercentage", _Percentage)
-
-	RelativeTimeRange_First = RelativeTimeRange.AddMember("First", _Percentage)
-
-	RelativeTimeRange_Last = RelativeTimeRange.AddMember("Last", _Percentage)
-
-	NonTalkTimeFilter_Threshold = NonTalkTimeFilter.AddMember("Threshold", _TimestampMilliseconds)
-
-	NonTalkTimeFilter_AbsoluteTimeRange = NonTalkTimeFilter.AddMember("AbsoluteTimeRange", AbsoluteTimeRange)
-
-	NonTalkTimeFilter_RelativeTimeRange = NonTalkTimeFilter.AddMember("RelativeTimeRange", RelativeTimeRange)
-
-	NonTalkTimeFilter_Negate = NonTalkTimeFilter.AddMember("Negate", _Boolean)
-
-	InterruptionFilter_Threshold = InterruptionFilter.AddMember("Threshold", _TimestampMilliseconds)
-
-	InterruptionFilter_ParticipantRole = InterruptionFilter.AddMember("ParticipantRole", ParticipantRole)
-
-	InterruptionFilter_AbsoluteTimeRange = InterruptionFilter.AddMember("AbsoluteTimeRange", AbsoluteTimeRange)
-
-	InterruptionFilter_RelativeTimeRange = InterruptionFilter.AddMember("RelativeTimeRange", RelativeTimeRange)
-
-	InterruptionFilter_Negate = InterruptionFilter.AddMember("Negate", _Boolean)
-
-	TranscriptFilterType_EXACT = TranscriptFilterType.AddMember("EXACT", smithyprelude.Unit)
-
-	_StringTargetList_member = _StringTargetList.AddMember("member", _NonEmptyString)
-
-	TranscriptFilter_TranscriptFilterType = TranscriptFilter.AddMember("TranscriptFilterType", TranscriptFilterType)
-
-	TranscriptFilter_AbsoluteTimeRange = TranscriptFilter.AddMember("AbsoluteTimeRange", AbsoluteTimeRange)
-
-	TranscriptFilter_RelativeTimeRange = TranscriptFilter.AddMember("RelativeTimeRange", RelativeTimeRange)
-
-	TranscriptFilter_ParticipantRole = TranscriptFilter.AddMember("ParticipantRole", ParticipantRole)
-
-	TranscriptFilter_Negate = TranscriptFilter.AddMember("Negate", _Boolean)
-
-	TranscriptFilter_Targets = TranscriptFilter.AddMember("Targets", _StringTargetList)
-
-	SentimentValue_POSITIVE = SentimentValue.AddMember("POSITIVE", smithyprelude.Unit)
-
-	SentimentValue_NEGATIVE = SentimentValue.AddMember("NEGATIVE", smithyprelude.Unit)
-
-	SentimentValue_NEUTRAL = SentimentValue.AddMember("NEUTRAL", smithyprelude.Unit)
-
-	SentimentValue_MIXED = SentimentValue.AddMember("MIXED", smithyprelude.Unit)
-
-	_SentimentValueList_member = _SentimentValueList.AddMember("member", SentimentValue)
-
-	SentimentFilter_Sentiments = SentimentFilter.AddMember("Sentiments", _SentimentValueList)
-
-	SentimentFilter_AbsoluteTimeRange = SentimentFilter.AddMember("AbsoluteTimeRange", AbsoluteTimeRange)
-
-	SentimentFilter_RelativeTimeRange = SentimentFilter.AddMember("RelativeTimeRange", RelativeTimeRange)
-
-	SentimentFilter_ParticipantRole = SentimentFilter.AddMember("ParticipantRole", ParticipantRole)
-
-	SentimentFilter_Negate = SentimentFilter.AddMember("Negate", _Boolean)
-
-	Rule_NonTalkTimeFilter = Rule.AddMember("NonTalkTimeFilter", NonTalkTimeFilter)
-
-	Rule_InterruptionFilter = Rule.AddMember("InterruptionFilter", InterruptionFilter)
-
-	Rule_TranscriptFilter = Rule.AddMember("TranscriptFilter", TranscriptFilter)
-
-	Rule_SentimentFilter = Rule.AddMember("SentimentFilter", SentimentFilter)
-
-	_RuleList_member = _RuleList.AddMember("member", Rule)
-
-	InputType_REAL_TIME = InputType.AddMember("REAL_TIME", smithyprelude.Unit)
-
-	InputType_POST_CALL = InputType.AddMember("POST_CALL", smithyprelude.Unit)
-
-	CategoryProperties_CategoryName = CategoryProperties.AddMember("CategoryName", _CategoryName)
-
-	CategoryProperties_Rules = CategoryProperties.AddMember("Rules", _RuleList)
-
-	CategoryProperties_CreateTime = CategoryProperties.AddMember("CreateTime", _DateTime)
-
-	CategoryProperties_LastUpdateTime = CategoryProperties.AddMember("LastUpdateTime", _DateTime)
-
-	CategoryProperties_Tags = CategoryProperties.AddMember("Tags", _TagList)
-
-	CategoryProperties_InputType = CategoryProperties.AddMember("InputType", InputType)
-
-	_CategoryPropertiesList_member = _CategoryPropertiesList.AddMember("member", CategoryProperties)
-
-	MedicalScribeNoteTemplate_HISTORY_AND_PHYSICAL = MedicalScribeNoteTemplate.AddMember("HISTORY_AND_PHYSICAL", smithyprelude.Unit)
-
-	MedicalScribeNoteTemplate_GIRPP = MedicalScribeNoteTemplate.AddMember("GIRPP", smithyprelude.Unit)
-
-	MedicalScribeNoteTemplate_BIRP = MedicalScribeNoteTemplate.AddMember("BIRP", smithyprelude.Unit)
-
-	MedicalScribeNoteTemplate_SIRP = MedicalScribeNoteTemplate.AddMember("SIRP", smithyprelude.Unit)
-
-	MedicalScribeNoteTemplate_DAP = MedicalScribeNoteTemplate.AddMember("DAP", smithyprelude.Unit)
-
-	MedicalScribeNoteTemplate_BEHAVIORAL_SOAP = MedicalScribeNoteTemplate.AddMember("BEHAVIORAL_SOAP", smithyprelude.Unit)
-
-	MedicalScribeNoteTemplate_PHYSICAL_SOAP = MedicalScribeNoteTemplate.AddMember("PHYSICAL_SOAP", smithyprelude.Unit)
-
-	ClinicalNoteGenerationSettings_NoteTemplate = ClinicalNoteGenerationSettings.AddMember("NoteTemplate", MedicalScribeNoteTemplate)
-
-	CLMLanguageCode_EN_US = CLMLanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	CLMLanguageCode_HI_IN = CLMLanguageCode.AddMember("HI_IN", smithyprelude.Unit)
-
-	CLMLanguageCode_ES_US = CLMLanguageCode.AddMember("ES_US", smithyprelude.Unit)
-
-	CLMLanguageCode_EN_GB = CLMLanguageCode.AddMember("EN_GB", smithyprelude.Unit)
-
-	CLMLanguageCode_EN_AU = CLMLanguageCode.AddMember("EN_AU", smithyprelude.Unit)
-
-	CLMLanguageCode_DE_DE = CLMLanguageCode.AddMember("DE_DE", smithyprelude.Unit)
-
-	CLMLanguageCode_JA_JP = CLMLanguageCode.AddMember("JA_JP", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	_KMSEncryptionContextMap_key = _KMSEncryptionContextMap.AddMember("key", _PrintableNonEmptyString)
-
-	_KMSEncryptionContextMap_value = _KMSEncryptionContextMap.AddMember("value", _PrintableNonEmptyString)
-
-	EncryptionConfiguration_KMSEncryptionContext = EncryptionConfiguration.AddMember("KMSEncryptionContext", _KMSEncryptionContextMap)
-
-	EncryptionConfiguration_KMSKey = EncryptionConfiguration.AddMember("KMSKey", _KMSKeyId)
-
-	InputDataConfig_S3Uri = InputDataConfig.AddMember("S3Uri", _Uri)
-
-	InputDataConfig_TuningDataS3Uri = InputDataConfig.AddMember("TuningDataS3Uri", _Uri)
-
-	InputDataConfig_DataAccessRoleArn = InputDataConfig.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	InternalFailureException_Message = InternalFailureException.AddMember("Message", _String)
-
-	JobExecutionSettings_AllowDeferredExecution = JobExecutionSettings.AddMember("AllowDeferredExecution", _Boolean)
-
-	JobExecutionSettings_DataAccessRoleArn = JobExecutionSettings.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	LanguageCodeItem_LanguageCode = LanguageCodeItem.AddMember("LanguageCode", LanguageCode)
-
-	LanguageCodeItem_DurationInSeconds = LanguageCodeItem.AddMember("DurationInSeconds", _DurationInSeconds)
-
-	_LanguageCodeList_member = _LanguageCodeList.AddMember("member", LanguageCodeItem)
-
-	ModelStatus_IN_PROGRESS = ModelStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ModelStatus_FAILED = ModelStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ModelStatus_COMPLETED = ModelStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	LanguageModel_ModelName = LanguageModel.AddMember("ModelName", _ModelName)
-
-	LanguageModel_CreateTime = LanguageModel.AddMember("CreateTime", _DateTime)
-
-	LanguageModel_LastModifiedTime = LanguageModel.AddMember("LastModifiedTime", _DateTime)
-
-	LanguageModel_LanguageCode = LanguageModel.AddMember("LanguageCode", CLMLanguageCode)
-
-	LanguageModel_BaseModelName = LanguageModel.AddMember("BaseModelName", BaseModelName)
-
-	LanguageModel_ModelStatus = LanguageModel.AddMember("ModelStatus", ModelStatus)
-
-	LanguageModel_UpgradeAvailability = LanguageModel.AddMember("UpgradeAvailability", _Boolean)
-
-	LanguageModel_FailureReason = LanguageModel.AddMember("FailureReason", _FailureReason)
-
-	LanguageModel_InputDataConfig = LanguageModel.AddMember("InputDataConfig", InputDataConfig)
-
-	LanguageModel_EncryptionConfiguration = LanguageModel.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _String)
-
-	MedicalContentIdentificationType_PHI = MedicalContentIdentificationType.AddMember("PHI", smithyprelude.Unit)
-
-	MedicalScribeParticipantRole_PATIENT = MedicalScribeParticipantRole.AddMember("PATIENT", smithyprelude.Unit)
-
-	MedicalScribeParticipantRole_CLINICIAN = MedicalScribeParticipantRole.AddMember("CLINICIAN", smithyprelude.Unit)
-
-	MedicalScribeChannelDefinition_ChannelId = MedicalScribeChannelDefinition.AddMember("ChannelId", _MedicalScribeChannelId)
-
-	MedicalScribeChannelDefinition_ParticipantRole = MedicalScribeChannelDefinition.AddMember("ParticipantRole", MedicalScribeParticipantRole)
-
-	_MedicalScribeChannelDefinitions_member = _MedicalScribeChannelDefinitions.AddMember("member", MedicalScribeChannelDefinition)
-
-	Pronouns_HE_HIM = Pronouns.AddMember("HE_HIM", smithyprelude.Unit)
-
-	Pronouns_SHE_HER = Pronouns.AddMember("SHE_HER", smithyprelude.Unit)
-
-	Pronouns_THEY_THEM = Pronouns.AddMember("THEY_THEM", smithyprelude.Unit)
-
-	MedicalScribePatientContext_Pronouns = MedicalScribePatientContext.AddMember("Pronouns", Pronouns)
-
-	MedicalScribeContext_PatientContext = MedicalScribeContext.AddMember("PatientContext", MedicalScribePatientContext)
-
-	MedicalScribeJobStatus_QUEUED = MedicalScribeJobStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	MedicalScribeJobStatus_IN_PROGRESS = MedicalScribeJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	MedicalScribeJobStatus_FAILED = MedicalScribeJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	MedicalScribeJobStatus_COMPLETED = MedicalScribeJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	MedicalScribeLanguageCode_EN_US = MedicalScribeLanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	MedicalScribeOutput_TranscriptFileUri = MedicalScribeOutput.AddMember("TranscriptFileUri", _Uri)
-
-	MedicalScribeOutput_ClinicalDocumentUri = MedicalScribeOutput.AddMember("ClinicalDocumentUri", _Uri)
-
-	MedicalScribeSettings_ShowSpeakerLabels = MedicalScribeSettings.AddMember("ShowSpeakerLabels", _Boolean)
-
-	MedicalScribeSettings_MaxSpeakerLabels = MedicalScribeSettings.AddMember("MaxSpeakerLabels", _MaxSpeakers)
-
-	MedicalScribeSettings_ChannelIdentification = MedicalScribeSettings.AddMember("ChannelIdentification", _Boolean)
-
-	MedicalScribeSettings_VocabularyName = MedicalScribeSettings.AddMember("VocabularyName", _VocabularyName)
-
-	MedicalScribeSettings_VocabularyFilterName = MedicalScribeSettings.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	MedicalScribeSettings_VocabularyFilterMethod = MedicalScribeSettings.AddMember("VocabularyFilterMethod", VocabularyFilterMethod)
-
-	MedicalScribeSettings_ClinicalNoteGenerationSettings = MedicalScribeSettings.AddMember("ClinicalNoteGenerationSettings", ClinicalNoteGenerationSettings)
-
-	MedicalScribeJob_MedicalScribeJobName = MedicalScribeJob.AddMember("MedicalScribeJobName", _TranscriptionJobName)
-
-	MedicalScribeJob_MedicalScribeJobStatus = MedicalScribeJob.AddMember("MedicalScribeJobStatus", MedicalScribeJobStatus)
-
-	MedicalScribeJob_LanguageCode = MedicalScribeJob.AddMember("LanguageCode", MedicalScribeLanguageCode)
-
-	MedicalScribeJob_Media = MedicalScribeJob.AddMember("Media", Media)
-
-	MedicalScribeJob_MedicalScribeOutput = MedicalScribeJob.AddMember("MedicalScribeOutput", MedicalScribeOutput)
-
-	MedicalScribeJob_StartTime = MedicalScribeJob.AddMember("StartTime", _DateTime)
-
-	MedicalScribeJob_CreationTime = MedicalScribeJob.AddMember("CreationTime", _DateTime)
-
-	MedicalScribeJob_CompletionTime = MedicalScribeJob.AddMember("CompletionTime", _DateTime)
-
-	MedicalScribeJob_FailureReason = MedicalScribeJob.AddMember("FailureReason", _FailureReason)
-
-	MedicalScribeJob_Settings = MedicalScribeJob.AddMember("Settings", MedicalScribeSettings)
-
-	MedicalScribeJob_DataAccessRoleArn = MedicalScribeJob.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	MedicalScribeJob_ChannelDefinitions = MedicalScribeJob.AddMember("ChannelDefinitions", _MedicalScribeChannelDefinitions)
-
-	MedicalScribeJob_MedicalScribeContextProvided = MedicalScribeJob.AddMember("MedicalScribeContextProvided", _Boolean)
-
-	MedicalScribeJob_Tags = MedicalScribeJob.AddMember("Tags", _TagList)
-
-	MedicalScribeJobSummary_MedicalScribeJobName = MedicalScribeJobSummary.AddMember("MedicalScribeJobName", _TranscriptionJobName)
-
-	MedicalScribeJobSummary_CreationTime = MedicalScribeJobSummary.AddMember("CreationTime", _DateTime)
-
-	MedicalScribeJobSummary_StartTime = MedicalScribeJobSummary.AddMember("StartTime", _DateTime)
-
-	MedicalScribeJobSummary_CompletionTime = MedicalScribeJobSummary.AddMember("CompletionTime", _DateTime)
-
-	MedicalScribeJobSummary_LanguageCode = MedicalScribeJobSummary.AddMember("LanguageCode", MedicalScribeLanguageCode)
-
-	MedicalScribeJobSummary_MedicalScribeJobStatus = MedicalScribeJobSummary.AddMember("MedicalScribeJobStatus", MedicalScribeJobStatus)
-
-	MedicalScribeJobSummary_FailureReason = MedicalScribeJobSummary.AddMember("FailureReason", _FailureReason)
-
-	_MedicalScribeJobSummaries_member = _MedicalScribeJobSummaries.AddMember("member", MedicalScribeJobSummary)
-
-	MedicalTranscript_TranscriptFileUri = MedicalTranscript.AddMember("TranscriptFileUri", _Uri)
-
-	TranscriptionJobStatus_QUEUED = TranscriptionJobStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	TranscriptionJobStatus_IN_PROGRESS = TranscriptionJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	TranscriptionJobStatus_FAILED = TranscriptionJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	TranscriptionJobStatus_COMPLETED = TranscriptionJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	MedicalTranscriptionSetting_ShowSpeakerLabels = MedicalTranscriptionSetting.AddMember("ShowSpeakerLabels", _Boolean)
-
-	MedicalTranscriptionSetting_MaxSpeakerLabels = MedicalTranscriptionSetting.AddMember("MaxSpeakerLabels", _MaxSpeakers)
-
-	MedicalTranscriptionSetting_ChannelIdentification = MedicalTranscriptionSetting.AddMember("ChannelIdentification", _Boolean)
-
-	MedicalTranscriptionSetting_ShowAlternatives = MedicalTranscriptionSetting.AddMember("ShowAlternatives", _Boolean)
-
-	MedicalTranscriptionSetting_MaxAlternatives = MedicalTranscriptionSetting.AddMember("MaxAlternatives", _MaxAlternatives)
-
-	MedicalTranscriptionSetting_VocabularyName = MedicalTranscriptionSetting.AddMember("VocabularyName", _VocabularyName)
-
-	Specialty_PRIMARYCARE = Specialty.AddMember("PRIMARYCARE", smithyprelude.Unit)
-
-	Type_CONVERSATION = Type.AddMember("CONVERSATION", smithyprelude.Unit)
-
-	Type_DICTATION = Type.AddMember("DICTATION", smithyprelude.Unit)
-
-	MedicalTranscriptionJob_MedicalTranscriptionJobName = MedicalTranscriptionJob.AddMember("MedicalTranscriptionJobName", _TranscriptionJobName)
-
-	MedicalTranscriptionJob_TranscriptionJobStatus = MedicalTranscriptionJob.AddMember("TranscriptionJobStatus", TranscriptionJobStatus)
-
-	MedicalTranscriptionJob_LanguageCode = MedicalTranscriptionJob.AddMember("LanguageCode", LanguageCode)
-
-	MedicalTranscriptionJob_MediaSampleRateHertz = MedicalTranscriptionJob.AddMember("MediaSampleRateHertz", _MedicalMediaSampleRateHertz)
-
-	MedicalTranscriptionJob_MediaFormat = MedicalTranscriptionJob.AddMember("MediaFormat", MediaFormat)
-
-	MedicalTranscriptionJob_Media = MedicalTranscriptionJob.AddMember("Media", Media)
-
-	MedicalTranscriptionJob_Transcript = MedicalTranscriptionJob.AddMember("Transcript", MedicalTranscript)
-
-	MedicalTranscriptionJob_StartTime = MedicalTranscriptionJob.AddMember("StartTime", _DateTime)
-
-	MedicalTranscriptionJob_CreationTime = MedicalTranscriptionJob.AddMember("CreationTime", _DateTime)
-
-	MedicalTranscriptionJob_CompletionTime = MedicalTranscriptionJob.AddMember("CompletionTime", _DateTime)
-
-	MedicalTranscriptionJob_FailureReason = MedicalTranscriptionJob.AddMember("FailureReason", _FailureReason)
-
-	MedicalTranscriptionJob_Settings = MedicalTranscriptionJob.AddMember("Settings", MedicalTranscriptionSetting)
-
-	MedicalTranscriptionJob_ContentIdentificationType = MedicalTranscriptionJob.AddMember("ContentIdentificationType", MedicalContentIdentificationType)
-
-	MedicalTranscriptionJob_Specialty = MedicalTranscriptionJob.AddMember("Specialty", Specialty)
-
-	MedicalTranscriptionJob_Type = MedicalTranscriptionJob.AddMember("Type", Type)
-
-	MedicalTranscriptionJob_Tags = MedicalTranscriptionJob.AddMember("Tags", _TagList)
-
-	OutputLocationType_CUSTOMER_BUCKET = OutputLocationType.AddMember("CUSTOMER_BUCKET", smithyprelude.Unit)
-
-	OutputLocationType_SERVICE_BUCKET = OutputLocationType.AddMember("SERVICE_BUCKET", smithyprelude.Unit)
-
-	MedicalTranscriptionJobSummary_MedicalTranscriptionJobName = MedicalTranscriptionJobSummary.AddMember("MedicalTranscriptionJobName", _TranscriptionJobName)
-
-	MedicalTranscriptionJobSummary_CreationTime = MedicalTranscriptionJobSummary.AddMember("CreationTime", _DateTime)
-
-	MedicalTranscriptionJobSummary_StartTime = MedicalTranscriptionJobSummary.AddMember("StartTime", _DateTime)
-
-	MedicalTranscriptionJobSummary_CompletionTime = MedicalTranscriptionJobSummary.AddMember("CompletionTime", _DateTime)
-
-	MedicalTranscriptionJobSummary_LanguageCode = MedicalTranscriptionJobSummary.AddMember("LanguageCode", LanguageCode)
-
-	MedicalTranscriptionJobSummary_TranscriptionJobStatus = MedicalTranscriptionJobSummary.AddMember("TranscriptionJobStatus", TranscriptionJobStatus)
-
-	MedicalTranscriptionJobSummary_FailureReason = MedicalTranscriptionJobSummary.AddMember("FailureReason", _FailureReason)
-
-	MedicalTranscriptionJobSummary_OutputLocationType = MedicalTranscriptionJobSummary.AddMember("OutputLocationType", OutputLocationType)
-
-	MedicalTranscriptionJobSummary_Specialty = MedicalTranscriptionJobSummary.AddMember("Specialty", Specialty)
-
-	MedicalTranscriptionJobSummary_ContentIdentificationType = MedicalTranscriptionJobSummary.AddMember("ContentIdentificationType", MedicalContentIdentificationType)
-
-	MedicalTranscriptionJobSummary_Type = MedicalTranscriptionJobSummary.AddMember("Type", Type)
-
-	_MedicalTranscriptionJobSummaries_member = _MedicalTranscriptionJobSummaries.AddMember("member", MedicalTranscriptionJobSummary)
-
-	_Models_member = _Models.AddMember("member", LanguageModel)
-
-	ModelSettings_LanguageModelName = ModelSettings.AddMember("LanguageModelName", _ModelName)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _String)
-
-	_Phrases_member = _Phrases.AddMember("member", _Phrase)
-
-	Settings_VocabularyName = Settings.AddMember("VocabularyName", _VocabularyName)
-
-	Settings_ShowSpeakerLabels = Settings.AddMember("ShowSpeakerLabels", _Boolean)
-
-	Settings_MaxSpeakerLabels = Settings.AddMember("MaxSpeakerLabels", _MaxSpeakers)
-
-	Settings_ChannelIdentification = Settings.AddMember("ChannelIdentification", _Boolean)
-
-	Settings_ShowAlternatives = Settings.AddMember("ShowAlternatives", _Boolean)
-
-	Settings_MaxAlternatives = Settings.AddMember("MaxAlternatives", _MaxAlternatives)
-
-	Settings_VocabularyFilterName = Settings.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	Settings_VocabularyFilterMethod = Settings.AddMember("VocabularyFilterMethod", VocabularyFilterMethod)
-
-	_SubtitleFileUris_member = _SubtitleFileUris.AddMember("member", _Uri)
-
-	SubtitleFormat_VTT = SubtitleFormat.AddMember("VTT", smithyprelude.Unit)
-
-	SubtitleFormat_SRT = SubtitleFormat.AddMember("SRT", smithyprelude.Unit)
-
-	_SubtitleFormats_member = _SubtitleFormats.AddMember("member", SubtitleFormat)
-
-	Subtitles_Formats = Subtitles.AddMember("Formats", _SubtitleFormats)
-
-	Subtitles_OutputStartIndex = Subtitles.AddMember("OutputStartIndex", _SubtitleOutputStartIndex)
-
-	SubtitlesOutput_Formats = SubtitlesOutput.AddMember("Formats", _SubtitleFormats)
-
-	SubtitlesOutput_SubtitleFileUris = SubtitlesOutput.AddMember("SubtitleFileUris", _SubtitleFileUris)
-
-	SubtitlesOutput_OutputStartIndex = SubtitlesOutput.AddMember("OutputStartIndex", _SubtitleOutputStartIndex)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ToxicityCategory_ALL = ToxicityCategory.AddMember("ALL", smithyprelude.Unit)
-
-	_ToxicityCategories_member = _ToxicityCategories.AddMember("member", ToxicityCategory)
-
-	ToxicityDetectionSettings_ToxicityCategories = ToxicityDetectionSettings.AddMember("ToxicityCategories", _ToxicityCategories)
-
-	_ToxicityDetection_member = _ToxicityDetection.AddMember("member", ToxicityDetectionSettings)
-
-	TranscriptionJob_TranscriptionJobName = TranscriptionJob.AddMember("TranscriptionJobName", _TranscriptionJobName)
-
-	TranscriptionJob_TranscriptionJobStatus = TranscriptionJob.AddMember("TranscriptionJobStatus", TranscriptionJobStatus)
-
-	TranscriptionJob_LanguageCode = TranscriptionJob.AddMember("LanguageCode", LanguageCode)
-
-	TranscriptionJob_MediaSampleRateHertz = TranscriptionJob.AddMember("MediaSampleRateHertz", _MediaSampleRateHertz)
-
-	TranscriptionJob_MediaFormat = TranscriptionJob.AddMember("MediaFormat", MediaFormat)
-
-	TranscriptionJob_Media = TranscriptionJob.AddMember("Media", Media)
-
-	TranscriptionJob_Transcript = TranscriptionJob.AddMember("Transcript", Transcript)
-
-	TranscriptionJob_StartTime = TranscriptionJob.AddMember("StartTime", _DateTime)
-
-	TranscriptionJob_CreationTime = TranscriptionJob.AddMember("CreationTime", _DateTime)
-
-	TranscriptionJob_CompletionTime = TranscriptionJob.AddMember("CompletionTime", _DateTime)
-
-	TranscriptionJob_FailureReason = TranscriptionJob.AddMember("FailureReason", _FailureReason)
-
-	TranscriptionJob_Settings = TranscriptionJob.AddMember("Settings", Settings)
-
-	TranscriptionJob_ModelSettings = TranscriptionJob.AddMember("ModelSettings", ModelSettings)
-
-	TranscriptionJob_JobExecutionSettings = TranscriptionJob.AddMember("JobExecutionSettings", JobExecutionSettings)
-
-	TranscriptionJob_ContentRedaction = TranscriptionJob.AddMember("ContentRedaction", ContentRedaction)
-
-	TranscriptionJob_IdentifyLanguage = TranscriptionJob.AddMember("IdentifyLanguage", _Boolean)
-
-	TranscriptionJob_IdentifyMultipleLanguages = TranscriptionJob.AddMember("IdentifyMultipleLanguages", _Boolean)
-
-	TranscriptionJob_LanguageOptions = TranscriptionJob.AddMember("LanguageOptions", _LanguageOptions)
-
-	TranscriptionJob_IdentifiedLanguageScore = TranscriptionJob.AddMember("IdentifiedLanguageScore", _IdentifiedLanguageScore)
-
-	TranscriptionJob_LanguageCodes = TranscriptionJob.AddMember("LanguageCodes", _LanguageCodeList)
-
-	TranscriptionJob_Tags = TranscriptionJob.AddMember("Tags", _TagList)
-
-	TranscriptionJob_Subtitles = TranscriptionJob.AddMember("Subtitles", SubtitlesOutput)
-
-	TranscriptionJob_LanguageIdSettings = TranscriptionJob.AddMember("LanguageIdSettings", _LanguageIdSettingsMap)
-
-	TranscriptionJob_ToxicityDetection = TranscriptionJob.AddMember("ToxicityDetection", _ToxicityDetection)
-
-	TranscriptionJobSummary_TranscriptionJobName = TranscriptionJobSummary.AddMember("TranscriptionJobName", _TranscriptionJobName)
-
-	TranscriptionJobSummary_CreationTime = TranscriptionJobSummary.AddMember("CreationTime", _DateTime)
-
-	TranscriptionJobSummary_StartTime = TranscriptionJobSummary.AddMember("StartTime", _DateTime)
-
-	TranscriptionJobSummary_CompletionTime = TranscriptionJobSummary.AddMember("CompletionTime", _DateTime)
-
-	TranscriptionJobSummary_LanguageCode = TranscriptionJobSummary.AddMember("LanguageCode", LanguageCode)
-
-	TranscriptionJobSummary_TranscriptionJobStatus = TranscriptionJobSummary.AddMember("TranscriptionJobStatus", TranscriptionJobStatus)
-
-	TranscriptionJobSummary_FailureReason = TranscriptionJobSummary.AddMember("FailureReason", _FailureReason)
-
-	TranscriptionJobSummary_OutputLocationType = TranscriptionJobSummary.AddMember("OutputLocationType", OutputLocationType)
-
-	TranscriptionJobSummary_ContentRedaction = TranscriptionJobSummary.AddMember("ContentRedaction", ContentRedaction)
-
-	TranscriptionJobSummary_ModelSettings = TranscriptionJobSummary.AddMember("ModelSettings", ModelSettings)
-
-	TranscriptionJobSummary_IdentifyLanguage = TranscriptionJobSummary.AddMember("IdentifyLanguage", _Boolean)
-
-	TranscriptionJobSummary_IdentifyMultipleLanguages = TranscriptionJobSummary.AddMember("IdentifyMultipleLanguages", _Boolean)
-
-	TranscriptionJobSummary_IdentifiedLanguageScore = TranscriptionJobSummary.AddMember("IdentifiedLanguageScore", _IdentifiedLanguageScore)
-
-	TranscriptionJobSummary_LanguageCodes = TranscriptionJobSummary.AddMember("LanguageCodes", _LanguageCodeList)
-
-	TranscriptionJobSummary_ToxicityDetection = TranscriptionJobSummary.AddMember("ToxicityDetection", _ToxicityDetection)
-
-	_TranscriptionJobSummaries_member = _TranscriptionJobSummaries.AddMember("member", TranscriptionJobSummary)
-
-	VocabularyState_PENDING = VocabularyState.AddMember("PENDING", smithyprelude.Unit)
-
-	VocabularyState_READY = VocabularyState.AddMember("READY", smithyprelude.Unit)
-
-	VocabularyState_FAILED = VocabularyState.AddMember("FAILED", smithyprelude.Unit)
-
-	VocabularyInfo_VocabularyName = VocabularyInfo.AddMember("VocabularyName", _VocabularyName)
-
-	VocabularyInfo_LanguageCode = VocabularyInfo.AddMember("LanguageCode", LanguageCode)
-
-	VocabularyInfo_LastModifiedTime = VocabularyInfo.AddMember("LastModifiedTime", _DateTime)
-
-	VocabularyInfo_VocabularyState = VocabularyInfo.AddMember("VocabularyState", VocabularyState)
-
-	_Vocabularies_member = _Vocabularies.AddMember("member", VocabularyInfo)
-
-	VocabularyFilterInfo_VocabularyFilterName = VocabularyFilterInfo.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	VocabularyFilterInfo_LanguageCode = VocabularyFilterInfo.AddMember("LanguageCode", LanguageCode)
-
-	VocabularyFilterInfo_LastModifiedTime = VocabularyFilterInfo.AddMember("LastModifiedTime", _DateTime)
-
-	_VocabularyFilters_member = _VocabularyFilters.AddMember("member", VocabularyFilterInfo)
-
-	_Words_member = _Words.AddMember("member", _Word)
-
-	CreateCallAnalyticsCategoryRequest_CategoryName = CreateCallAnalyticsCategoryRequest.AddMember("CategoryName", _CategoryName, &smithytraits.HTTPLabel{})
-
-	CreateCallAnalyticsCategoryRequest_Rules = CreateCallAnalyticsCategoryRequest.AddMember("Rules", _RuleList)
-
-	CreateCallAnalyticsCategoryRequest_Tags = CreateCallAnalyticsCategoryRequest.AddMember("Tags", _TagList)
-
-	CreateCallAnalyticsCategoryRequest_InputType = CreateCallAnalyticsCategoryRequest.AddMember("InputType", InputType)
-
-	CreateCallAnalyticsCategoryResponse_CategoryProperties = CreateCallAnalyticsCategoryResponse.AddMember("CategoryProperties", CategoryProperties)
-
-	CreateLanguageModelRequest_LanguageCode = CreateLanguageModelRequest.AddMember("LanguageCode", CLMLanguageCode)
-
-	CreateLanguageModelRequest_BaseModelName = CreateLanguageModelRequest.AddMember("BaseModelName", BaseModelName)
-
-	CreateLanguageModelRequest_ModelName = CreateLanguageModelRequest.AddMember("ModelName", _ModelName, &smithytraits.HTTPLabel{})
-
-	CreateLanguageModelRequest_InputDataConfig = CreateLanguageModelRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	CreateLanguageModelRequest_EncryptionConfiguration = CreateLanguageModelRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	CreateLanguageModelRequest_Tags = CreateLanguageModelRequest.AddMember("Tags", _TagList)
-
-	CreateLanguageModelResponse_LanguageCode = CreateLanguageModelResponse.AddMember("LanguageCode", CLMLanguageCode)
-
-	CreateLanguageModelResponse_BaseModelName = CreateLanguageModelResponse.AddMember("BaseModelName", BaseModelName)
-
-	CreateLanguageModelResponse_ModelName = CreateLanguageModelResponse.AddMember("ModelName", _ModelName)
-
-	CreateLanguageModelResponse_InputDataConfig = CreateLanguageModelResponse.AddMember("InputDataConfig", InputDataConfig)
-
-	CreateLanguageModelResponse_ModelStatus = CreateLanguageModelResponse.AddMember("ModelStatus", ModelStatus)
-
-	CreateMedicalVocabularyRequest_VocabularyName = CreateMedicalVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
-
-	CreateMedicalVocabularyRequest_LanguageCode = CreateMedicalVocabularyRequest.AddMember("LanguageCode", LanguageCode)
-
-	CreateMedicalVocabularyRequest_VocabularyFileUri = CreateMedicalVocabularyRequest.AddMember("VocabularyFileUri", _Uri)
-
-	CreateMedicalVocabularyRequest_Tags = CreateMedicalVocabularyRequest.AddMember("Tags", _TagList)
-
-	CreateMedicalVocabularyResponse_VocabularyName = CreateMedicalVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
-
-	CreateMedicalVocabularyResponse_LanguageCode = CreateMedicalVocabularyResponse.AddMember("LanguageCode", LanguageCode)
-
-	CreateMedicalVocabularyResponse_VocabularyState = CreateMedicalVocabularyResponse.AddMember("VocabularyState", VocabularyState)
-
-	CreateMedicalVocabularyResponse_LastModifiedTime = CreateMedicalVocabularyResponse.AddMember("LastModifiedTime", _DateTime)
-
-	CreateMedicalVocabularyResponse_FailureReason = CreateMedicalVocabularyResponse.AddMember("FailureReason", _FailureReason)
-
-	CreateVocabularyFilterRequest_VocabularyFilterName = CreateVocabularyFilterRequest.AddMember("VocabularyFilterName", _VocabularyFilterName, &smithytraits.HTTPLabel{})
-
-	CreateVocabularyFilterRequest_LanguageCode = CreateVocabularyFilterRequest.AddMember("LanguageCode", LanguageCode)
-
-	CreateVocabularyFilterRequest_Words = CreateVocabularyFilterRequest.AddMember("Words", _Words)
-
-	CreateVocabularyFilterRequest_VocabularyFilterFileUri = CreateVocabularyFilterRequest.AddMember("VocabularyFilterFileUri", _Uri)
-
-	CreateVocabularyFilterRequest_Tags = CreateVocabularyFilterRequest.AddMember("Tags", _TagList)
-
-	CreateVocabularyFilterRequest_DataAccessRoleArn = CreateVocabularyFilterRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	CreateVocabularyFilterRequest_EncryptionConfiguration = CreateVocabularyFilterRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	CreateVocabularyFilterResponse_VocabularyFilterName = CreateVocabularyFilterResponse.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	CreateVocabularyFilterResponse_LanguageCode = CreateVocabularyFilterResponse.AddMember("LanguageCode", LanguageCode)
-
-	CreateVocabularyFilterResponse_LastModifiedTime = CreateVocabularyFilterResponse.AddMember("LastModifiedTime", _DateTime)
-
-	CreateVocabularyRequest_VocabularyName = CreateVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
-
-	CreateVocabularyRequest_LanguageCode = CreateVocabularyRequest.AddMember("LanguageCode", LanguageCode)
-
-	CreateVocabularyRequest_Phrases = CreateVocabularyRequest.AddMember("Phrases", _Phrases)
-
-	CreateVocabularyRequest_VocabularyFileUri = CreateVocabularyRequest.AddMember("VocabularyFileUri", _Uri)
-
-	CreateVocabularyRequest_Tags = CreateVocabularyRequest.AddMember("Tags", _TagList)
-
-	CreateVocabularyRequest_DataAccessRoleArn = CreateVocabularyRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	CreateVocabularyRequest_EncryptionConfiguration = CreateVocabularyRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	CreateVocabularyResponse_VocabularyName = CreateVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
-
-	CreateVocabularyResponse_LanguageCode = CreateVocabularyResponse.AddMember("LanguageCode", LanguageCode)
-
-	CreateVocabularyResponse_VocabularyState = CreateVocabularyResponse.AddMember("VocabularyState", VocabularyState)
-
-	CreateVocabularyResponse_LastModifiedTime = CreateVocabularyResponse.AddMember("LastModifiedTime", _DateTime)
-
-	CreateVocabularyResponse_FailureReason = CreateVocabularyResponse.AddMember("FailureReason", _FailureReason)
-
-	DeleteCallAnalyticsCategoryRequest_CategoryName = DeleteCallAnalyticsCategoryRequest.AddMember("CategoryName", _CategoryName, &smithytraits.HTTPLabel{})
-
-	DeleteCallAnalyticsJobRequest_CallAnalyticsJobName = DeleteCallAnalyticsJobRequest.AddMember("CallAnalyticsJobName", _CallAnalyticsJobName, &smithytraits.HTTPLabel{})
-
-	DeleteLanguageModelRequest_ModelName = DeleteLanguageModelRequest.AddMember("ModelName", _ModelName, &smithytraits.HTTPLabel{})
-
-	DeleteMedicalScribeJobRequest_MedicalScribeJobName = DeleteMedicalScribeJobRequest.AddMember("MedicalScribeJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	DeleteMedicalTranscriptionJobRequest_MedicalTranscriptionJobName = DeleteMedicalTranscriptionJobRequest.AddMember("MedicalTranscriptionJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	DeleteMedicalVocabularyRequest_VocabularyName = DeleteMedicalVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
-
-	DeleteTranscriptionJobRequest_TranscriptionJobName = DeleteTranscriptionJobRequest.AddMember("TranscriptionJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	DeleteVocabularyFilterRequest_VocabularyFilterName = DeleteVocabularyFilterRequest.AddMember("VocabularyFilterName", _VocabularyFilterName, &smithytraits.HTTPLabel{})
-
-	DeleteVocabularyRequest_VocabularyName = DeleteVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
-
-	DescribeLanguageModelRequest_ModelName = DescribeLanguageModelRequest.AddMember("ModelName", _ModelName, &smithytraits.HTTPLabel{})
-
-	DescribeLanguageModelResponse_LanguageModel = DescribeLanguageModelResponse.AddMember("LanguageModel", LanguageModel)
-
-	GetCallAnalyticsCategoryRequest_CategoryName = GetCallAnalyticsCategoryRequest.AddMember("CategoryName", _CategoryName, &smithytraits.HTTPLabel{})
-
-	GetCallAnalyticsCategoryResponse_CategoryProperties = GetCallAnalyticsCategoryResponse.AddMember("CategoryProperties", CategoryProperties)
-
-	GetCallAnalyticsJobRequest_CallAnalyticsJobName = GetCallAnalyticsJobRequest.AddMember("CallAnalyticsJobName", _CallAnalyticsJobName, &smithytraits.HTTPLabel{})
-
-	GetCallAnalyticsJobResponse_CallAnalyticsJob = GetCallAnalyticsJobResponse.AddMember("CallAnalyticsJob", CallAnalyticsJob)
-
-	GetMedicalScribeJobRequest_MedicalScribeJobName = GetMedicalScribeJobRequest.AddMember("MedicalScribeJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	GetMedicalScribeJobResponse_MedicalScribeJob = GetMedicalScribeJobResponse.AddMember("MedicalScribeJob", MedicalScribeJob)
-
-	GetMedicalTranscriptionJobRequest_MedicalTranscriptionJobName = GetMedicalTranscriptionJobRequest.AddMember("MedicalTranscriptionJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	GetMedicalTranscriptionJobResponse_MedicalTranscriptionJob = GetMedicalTranscriptionJobResponse.AddMember("MedicalTranscriptionJob", MedicalTranscriptionJob)
-
-	GetMedicalVocabularyRequest_VocabularyName = GetMedicalVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
-
-	GetMedicalVocabularyResponse_VocabularyName = GetMedicalVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
-
-	GetMedicalVocabularyResponse_LanguageCode = GetMedicalVocabularyResponse.AddMember("LanguageCode", LanguageCode)
-
-	GetMedicalVocabularyResponse_VocabularyState = GetMedicalVocabularyResponse.AddMember("VocabularyState", VocabularyState)
-
-	GetMedicalVocabularyResponse_LastModifiedTime = GetMedicalVocabularyResponse.AddMember("LastModifiedTime", _DateTime)
-
-	GetMedicalVocabularyResponse_FailureReason = GetMedicalVocabularyResponse.AddMember("FailureReason", _FailureReason)
-
-	GetMedicalVocabularyResponse_DownloadUri = GetMedicalVocabularyResponse.AddMember("DownloadUri", _Uri)
-
-	GetTranscriptionJobRequest_TranscriptionJobName = GetTranscriptionJobRequest.AddMember("TranscriptionJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	GetTranscriptionJobResponse_TranscriptionJob = GetTranscriptionJobResponse.AddMember("TranscriptionJob", TranscriptionJob)
-
-	GetVocabularyFilterRequest_VocabularyFilterName = GetVocabularyFilterRequest.AddMember("VocabularyFilterName", _VocabularyFilterName, &smithytraits.HTTPLabel{})
-
-	GetVocabularyFilterResponse_VocabularyFilterName = GetVocabularyFilterResponse.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	GetVocabularyFilterResponse_LanguageCode = GetVocabularyFilterResponse.AddMember("LanguageCode", LanguageCode)
-
-	GetVocabularyFilterResponse_LastModifiedTime = GetVocabularyFilterResponse.AddMember("LastModifiedTime", _DateTime)
-
-	GetVocabularyFilterResponse_DownloadUri = GetVocabularyFilterResponse.AddMember("DownloadUri", _Uri)
-
-	GetVocabularyFilterResponse_DataAccessRoleArn = GetVocabularyFilterResponse.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	GetVocabularyFilterResponse_EncryptionConfiguration = GetVocabularyFilterResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	GetVocabularyRequest_VocabularyName = GetVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
-
-	GetVocabularyResponse_VocabularyName = GetVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
-
-	GetVocabularyResponse_LanguageCode = GetVocabularyResponse.AddMember("LanguageCode", LanguageCode)
-
-	GetVocabularyResponse_VocabularyState = GetVocabularyResponse.AddMember("VocabularyState", VocabularyState)
-
-	GetVocabularyResponse_LastModifiedTime = GetVocabularyResponse.AddMember("LastModifiedTime", _DateTime)
-
-	GetVocabularyResponse_FailureReason = GetVocabularyResponse.AddMember("FailureReason", _FailureReason)
-
-	GetVocabularyResponse_DownloadUri = GetVocabularyResponse.AddMember("DownloadUri", _Uri)
-
-	GetVocabularyResponse_DataAccessRoleArn = GetVocabularyResponse.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	GetVocabularyResponse_EncryptionConfiguration = GetVocabularyResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	ListCallAnalyticsCategoriesRequest_NextToken = ListCallAnalyticsCategoriesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListCallAnalyticsCategoriesRequest_MaxResults = ListCallAnalyticsCategoriesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListCallAnalyticsCategoriesResponse_NextToken = ListCallAnalyticsCategoriesResponse.AddMember("NextToken", _NextToken)
-
-	ListCallAnalyticsCategoriesResponse_Categories = ListCallAnalyticsCategoriesResponse.AddMember("Categories", _CategoryPropertiesList)
-
-	ListCallAnalyticsJobsRequest_Status = ListCallAnalyticsJobsRequest.AddMember("Status", CallAnalyticsJobStatus, &smithytraits.HTTPQuery{Name: "Status"})
-
-	ListCallAnalyticsJobsRequest_JobNameContains = ListCallAnalyticsJobsRequest.AddMember("JobNameContains", _CallAnalyticsJobName, &smithytraits.HTTPQuery{Name: "JobNameContains"})
-
-	ListCallAnalyticsJobsRequest_NextToken = ListCallAnalyticsJobsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListCallAnalyticsJobsRequest_MaxResults = ListCallAnalyticsJobsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListCallAnalyticsJobsResponse_Status = ListCallAnalyticsJobsResponse.AddMember("Status", CallAnalyticsJobStatus)
-
-	ListCallAnalyticsJobsResponse_NextToken = ListCallAnalyticsJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListCallAnalyticsJobsResponse_CallAnalyticsJobSummaries = ListCallAnalyticsJobsResponse.AddMember("CallAnalyticsJobSummaries", _CallAnalyticsJobSummaries)
-
-	ListLanguageModelsRequest_StatusEquals = ListLanguageModelsRequest.AddMember("StatusEquals", ModelStatus, &smithytraits.HTTPQuery{Name: "         StatusEquals"})
-
-	ListLanguageModelsRequest_NameContains = ListLanguageModelsRequest.AddMember("NameContains", _ModelName, &smithytraits.HTTPQuery{Name: "NameContains"})
-
-	ListLanguageModelsRequest_NextToken = ListLanguageModelsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListLanguageModelsRequest_MaxResults = ListLanguageModelsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListLanguageModelsResponse_NextToken = ListLanguageModelsResponse.AddMember("NextToken", _NextToken)
-
-	ListLanguageModelsResponse_Models = ListLanguageModelsResponse.AddMember("Models", _Models)
-
-	ListMedicalScribeJobsRequest_Status = ListMedicalScribeJobsRequest.AddMember("Status", MedicalScribeJobStatus, &smithytraits.HTTPQuery{Name: "Status"})
-
-	ListMedicalScribeJobsRequest_JobNameContains = ListMedicalScribeJobsRequest.AddMember("JobNameContains", _TranscriptionJobName, &smithytraits.HTTPQuery{Name: "JobNameContains"})
-
-	ListMedicalScribeJobsRequest_NextToken = ListMedicalScribeJobsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListMedicalScribeJobsRequest_MaxResults = ListMedicalScribeJobsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListMedicalScribeJobsResponse_Status = ListMedicalScribeJobsResponse.AddMember("Status", MedicalScribeJobStatus)
-
-	ListMedicalScribeJobsResponse_NextToken = ListMedicalScribeJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListMedicalScribeJobsResponse_MedicalScribeJobSummaries = ListMedicalScribeJobsResponse.AddMember("MedicalScribeJobSummaries", _MedicalScribeJobSummaries)
-
-	ListMedicalTranscriptionJobsRequest_Status = ListMedicalTranscriptionJobsRequest.AddMember("Status", TranscriptionJobStatus, &smithytraits.HTTPQuery{Name: "Status"})
-
-	ListMedicalTranscriptionJobsRequest_JobNameContains = ListMedicalTranscriptionJobsRequest.AddMember("JobNameContains", _TranscriptionJobName, &smithytraits.HTTPQuery{Name: "JobNameContains"})
-
-	ListMedicalTranscriptionJobsRequest_NextToken = ListMedicalTranscriptionJobsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListMedicalTranscriptionJobsRequest_MaxResults = ListMedicalTranscriptionJobsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListMedicalTranscriptionJobsResponse_Status = ListMedicalTranscriptionJobsResponse.AddMember("Status", TranscriptionJobStatus)
-
-	ListMedicalTranscriptionJobsResponse_NextToken = ListMedicalTranscriptionJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListMedicalTranscriptionJobsResponse_MedicalTranscriptionJobSummaries = ListMedicalTranscriptionJobsResponse.AddMember("MedicalTranscriptionJobSummaries", _MedicalTranscriptionJobSummaries)
-
-	ListMedicalVocabulariesRequest_NextToken = ListMedicalVocabulariesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListMedicalVocabulariesRequest_MaxResults = ListMedicalVocabulariesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListMedicalVocabulariesRequest_StateEquals = ListMedicalVocabulariesRequest.AddMember("StateEquals", VocabularyState, &smithytraits.HTTPQuery{Name: "StateEquals"})
-
-	ListMedicalVocabulariesRequest_NameContains = ListMedicalVocabulariesRequest.AddMember("NameContains", _VocabularyName, &smithytraits.HTTPQuery{Name: "NameContains"})
-
-	ListMedicalVocabulariesResponse_Status = ListMedicalVocabulariesResponse.AddMember("Status", VocabularyState)
-
-	ListMedicalVocabulariesResponse_NextToken = ListMedicalVocabulariesResponse.AddMember("NextToken", _NextToken)
-
-	ListMedicalVocabulariesResponse_Vocabularies = ListMedicalVocabulariesResponse.AddMember("Vocabularies", _Vocabularies)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _TranscribeArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_ResourceArn = ListTagsForResourceResponse.AddMember("ResourceArn", _TranscribeArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListTranscriptionJobsRequest_Status = ListTranscriptionJobsRequest.AddMember("Status", TranscriptionJobStatus, &smithytraits.HTTPQuery{Name: "Status"})
-
-	ListTranscriptionJobsRequest_JobNameContains = ListTranscriptionJobsRequest.AddMember("JobNameContains", _TranscriptionJobName, &smithytraits.HTTPQuery{Name: "JobNameContains"})
-
-	ListTranscriptionJobsRequest_NextToken = ListTranscriptionJobsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListTranscriptionJobsRequest_MaxResults = ListTranscriptionJobsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListTranscriptionJobsResponse_Status = ListTranscriptionJobsResponse.AddMember("Status", TranscriptionJobStatus)
-
-	ListTranscriptionJobsResponse_NextToken = ListTranscriptionJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListTranscriptionJobsResponse_TranscriptionJobSummaries = ListTranscriptionJobsResponse.AddMember("TranscriptionJobSummaries", _TranscriptionJobSummaries)
-
-	ListVocabulariesRequest_NextToken = ListVocabulariesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListVocabulariesRequest_MaxResults = ListVocabulariesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListVocabulariesRequest_StateEquals = ListVocabulariesRequest.AddMember("StateEquals", VocabularyState, &smithytraits.HTTPQuery{Name: "StateEquals"})
-
-	ListVocabulariesRequest_NameContains = ListVocabulariesRequest.AddMember("NameContains", _VocabularyName, &smithytraits.HTTPQuery{Name: "NameContains"})
-
-	ListVocabulariesResponse_Status = ListVocabulariesResponse.AddMember("Status", VocabularyState)
-
-	ListVocabulariesResponse_NextToken = ListVocabulariesResponse.AddMember("NextToken", _NextToken)
-
-	ListVocabulariesResponse_Vocabularies = ListVocabulariesResponse.AddMember("Vocabularies", _Vocabularies)
-
-	ListVocabularyFiltersRequest_NextToken = ListVocabularyFiltersRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListVocabularyFiltersRequest_MaxResults = ListVocabularyFiltersRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListVocabularyFiltersRequest_NameContains = ListVocabularyFiltersRequest.AddMember("NameContains", _VocabularyFilterName, &smithytraits.HTTPQuery{Name: "NameContains"})
-
-	ListVocabularyFiltersResponse_NextToken = ListVocabularyFiltersResponse.AddMember("NextToken", _NextToken)
-
-	ListVocabularyFiltersResponse_VocabularyFilters = ListVocabularyFiltersResponse.AddMember("VocabularyFilters", _VocabularyFilters)
-
-	StartCallAnalyticsJobRequest_CallAnalyticsJobName = StartCallAnalyticsJobRequest.AddMember("CallAnalyticsJobName", _CallAnalyticsJobName, &smithytraits.HTTPLabel{})
-
-	StartCallAnalyticsJobRequest_Media = StartCallAnalyticsJobRequest.AddMember("Media", Media)
-
-	StartCallAnalyticsJobRequest_OutputLocation = StartCallAnalyticsJobRequest.AddMember("OutputLocation", _Uri)
-
-	StartCallAnalyticsJobRequest_OutputEncryptionKMSKeyId = StartCallAnalyticsJobRequest.AddMember("OutputEncryptionKMSKeyId", _KMSKeyId)
-
-	StartCallAnalyticsJobRequest_DataAccessRoleArn = StartCallAnalyticsJobRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	StartCallAnalyticsJobRequest_Settings = StartCallAnalyticsJobRequest.AddMember("Settings", CallAnalyticsJobSettings)
-
-	StartCallAnalyticsJobRequest_Tags = StartCallAnalyticsJobRequest.AddMember("Tags", _TagList)
-
-	StartCallAnalyticsJobRequest_ChannelDefinitions = StartCallAnalyticsJobRequest.AddMember("ChannelDefinitions", _ChannelDefinitions)
-
-	StartCallAnalyticsJobResponse_CallAnalyticsJob = StartCallAnalyticsJobResponse.AddMember("CallAnalyticsJob", CallAnalyticsJob)
-
-	StartMedicalScribeJobRequest_MedicalScribeJobName = StartMedicalScribeJobRequest.AddMember("MedicalScribeJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	StartMedicalScribeJobRequest_Media = StartMedicalScribeJobRequest.AddMember("Media", Media)
-
-	StartMedicalScribeJobRequest_OutputBucketName = StartMedicalScribeJobRequest.AddMember("OutputBucketName", _OutputBucketName)
-
-	StartMedicalScribeJobRequest_OutputEncryptionKMSKeyId = StartMedicalScribeJobRequest.AddMember("OutputEncryptionKMSKeyId", _KMSKeyId)
-
-	StartMedicalScribeJobRequest_KMSEncryptionContext = StartMedicalScribeJobRequest.AddMember("KMSEncryptionContext", _KMSEncryptionContextMap)
-
-	StartMedicalScribeJobRequest_DataAccessRoleArn = StartMedicalScribeJobRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	StartMedicalScribeJobRequest_Settings = StartMedicalScribeJobRequest.AddMember("Settings", MedicalScribeSettings)
-
-	StartMedicalScribeJobRequest_ChannelDefinitions = StartMedicalScribeJobRequest.AddMember("ChannelDefinitions", _MedicalScribeChannelDefinitions)
-
-	StartMedicalScribeJobRequest_Tags = StartMedicalScribeJobRequest.AddMember("Tags", _TagList)
-
-	StartMedicalScribeJobRequest_MedicalScribeContext = StartMedicalScribeJobRequest.AddMember("MedicalScribeContext", MedicalScribeContext)
-
-	StartMedicalScribeJobResponse_MedicalScribeJob = StartMedicalScribeJobResponse.AddMember("MedicalScribeJob", MedicalScribeJob)
-
-	StartMedicalTranscriptionJobRequest_MedicalTranscriptionJobName = StartMedicalTranscriptionJobRequest.AddMember("MedicalTranscriptionJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	StartMedicalTranscriptionJobRequest_LanguageCode = StartMedicalTranscriptionJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartMedicalTranscriptionJobRequest_MediaSampleRateHertz = StartMedicalTranscriptionJobRequest.AddMember("MediaSampleRateHertz", _MedicalMediaSampleRateHertz)
-
-	StartMedicalTranscriptionJobRequest_MediaFormat = StartMedicalTranscriptionJobRequest.AddMember("MediaFormat", MediaFormat)
-
-	StartMedicalTranscriptionJobRequest_Media = StartMedicalTranscriptionJobRequest.AddMember("Media", Media)
-
-	StartMedicalTranscriptionJobRequest_OutputBucketName = StartMedicalTranscriptionJobRequest.AddMember("OutputBucketName", _OutputBucketName)
-
-	StartMedicalTranscriptionJobRequest_OutputKey = StartMedicalTranscriptionJobRequest.AddMember("OutputKey", _OutputKey)
-
-	StartMedicalTranscriptionJobRequest_OutputEncryptionKMSKeyId = StartMedicalTranscriptionJobRequest.AddMember("OutputEncryptionKMSKeyId", _KMSKeyId)
-
-	StartMedicalTranscriptionJobRequest_KMSEncryptionContext = StartMedicalTranscriptionJobRequest.AddMember("KMSEncryptionContext", _KMSEncryptionContextMap)
-
-	StartMedicalTranscriptionJobRequest_Settings = StartMedicalTranscriptionJobRequest.AddMember("Settings", MedicalTranscriptionSetting)
-
-	StartMedicalTranscriptionJobRequest_ContentIdentificationType = StartMedicalTranscriptionJobRequest.AddMember("ContentIdentificationType", MedicalContentIdentificationType)
-
-	StartMedicalTranscriptionJobRequest_Specialty = StartMedicalTranscriptionJobRequest.AddMember("Specialty", Specialty)
-
-	StartMedicalTranscriptionJobRequest_Type = StartMedicalTranscriptionJobRequest.AddMember("Type", Type)
-
-	StartMedicalTranscriptionJobRequest_Tags = StartMedicalTranscriptionJobRequest.AddMember("Tags", _TagList)
-
-	StartMedicalTranscriptionJobResponse_MedicalTranscriptionJob = StartMedicalTranscriptionJobResponse.AddMember("MedicalTranscriptionJob", MedicalTranscriptionJob)
-
-	StartTranscriptionJobRequest_TranscriptionJobName = StartTranscriptionJobRequest.AddMember("TranscriptionJobName", _TranscriptionJobName, &smithytraits.HTTPLabel{})
-
-	StartTranscriptionJobRequest_LanguageCode = StartTranscriptionJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartTranscriptionJobRequest_MediaSampleRateHertz = StartTranscriptionJobRequest.AddMember("MediaSampleRateHertz", _MediaSampleRateHertz)
-
-	StartTranscriptionJobRequest_MediaFormat = StartTranscriptionJobRequest.AddMember("MediaFormat", MediaFormat)
-
-	StartTranscriptionJobRequest_Media = StartTranscriptionJobRequest.AddMember("Media", Media)
-
-	StartTranscriptionJobRequest_OutputBucketName = StartTranscriptionJobRequest.AddMember("OutputBucketName", _OutputBucketName)
-
-	StartTranscriptionJobRequest_OutputKey = StartTranscriptionJobRequest.AddMember("OutputKey", _OutputKey)
-
-	StartTranscriptionJobRequest_OutputEncryptionKMSKeyId = StartTranscriptionJobRequest.AddMember("OutputEncryptionKMSKeyId", _KMSKeyId)
-
-	StartTranscriptionJobRequest_KMSEncryptionContext = StartTranscriptionJobRequest.AddMember("KMSEncryptionContext", _KMSEncryptionContextMap)
-
-	StartTranscriptionJobRequest_Settings = StartTranscriptionJobRequest.AddMember("Settings", Settings)
-
-	StartTranscriptionJobRequest_ModelSettings = StartTranscriptionJobRequest.AddMember("ModelSettings", ModelSettings)
-
-	StartTranscriptionJobRequest_JobExecutionSettings = StartTranscriptionJobRequest.AddMember("JobExecutionSettings", JobExecutionSettings)
-
-	StartTranscriptionJobRequest_ContentRedaction = StartTranscriptionJobRequest.AddMember("ContentRedaction", ContentRedaction)
-
-	StartTranscriptionJobRequest_IdentifyLanguage = StartTranscriptionJobRequest.AddMember("IdentifyLanguage", _Boolean)
-
-	StartTranscriptionJobRequest_IdentifyMultipleLanguages = StartTranscriptionJobRequest.AddMember("IdentifyMultipleLanguages", _Boolean)
-
-	StartTranscriptionJobRequest_LanguageOptions = StartTranscriptionJobRequest.AddMember("LanguageOptions", _LanguageOptions)
-
-	StartTranscriptionJobRequest_Subtitles = StartTranscriptionJobRequest.AddMember("Subtitles", Subtitles)
-
-	StartTranscriptionJobRequest_Tags = StartTranscriptionJobRequest.AddMember("Tags", _TagList)
-
-	StartTranscriptionJobRequest_LanguageIdSettings = StartTranscriptionJobRequest.AddMember("LanguageIdSettings", _LanguageIdSettingsMap)
-
-	StartTranscriptionJobRequest_ToxicityDetection = StartTranscriptionJobRequest.AddMember("ToxicityDetection", _ToxicityDetection)
-
-	StartTranscriptionJobResponse_TranscriptionJob = StartTranscriptionJobResponse.AddMember("TranscriptionJob", TranscriptionJob)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TranscribeArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TranscribeArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateCallAnalyticsCategoryRequest_CategoryName = UpdateCallAnalyticsCategoryRequest.AddMember("CategoryName", _CategoryName, &smithytraits.HTTPLabel{})
-
-	UpdateCallAnalyticsCategoryRequest_Rules = UpdateCallAnalyticsCategoryRequest.AddMember("Rules", _RuleList)
-
-	UpdateCallAnalyticsCategoryRequest_InputType = UpdateCallAnalyticsCategoryRequest.AddMember("InputType", InputType)
-
-	UpdateCallAnalyticsCategoryResponse_CategoryProperties = UpdateCallAnalyticsCategoryResponse.AddMember("CategoryProperties", CategoryProperties)
-
-	UpdateLanguageModelRequest_ModelName = UpdateLanguageModelRequest.AddMember("ModelName", _ModelName, &smithytraits.HTTPLabel{})
-
-	UpdateLanguageModelRequest_DataAccessRoleArn = UpdateLanguageModelRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	UpdateLanguageModelRequest_EncryptionConfiguration = UpdateLanguageModelRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	UpdateLanguageModelResponse_ModelName = UpdateLanguageModelResponse.AddMember("ModelName", _ModelName)
-
-	UpdateLanguageModelResponse_ModelStatus = UpdateLanguageModelResponse.AddMember("ModelStatus", ModelStatus)
-
-	UpdateLanguageModelResponse_LastModifiedTime = UpdateLanguageModelResponse.AddMember("LastModifiedTime", _DateTime)
-
-	UpdateMedicalVocabularyRequest_VocabularyName = UpdateMedicalVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
-
-	UpdateMedicalVocabularyRequest_LanguageCode = UpdateMedicalVocabularyRequest.AddMember("LanguageCode", LanguageCode)
-
-	UpdateMedicalVocabularyRequest_VocabularyFileUri = UpdateMedicalVocabularyRequest.AddMember("VocabularyFileUri", _Uri)
-
-	UpdateMedicalVocabularyResponse_VocabularyName = UpdateMedicalVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
-
-	UpdateMedicalVocabularyResponse_LanguageCode = UpdateMedicalVocabularyResponse.AddMember("LanguageCode", LanguageCode)
-
-	UpdateMedicalVocabularyResponse_LastModifiedTime = UpdateMedicalVocabularyResponse.AddMember("LastModifiedTime", _DateTime)
-
-	UpdateMedicalVocabularyResponse_VocabularyState = UpdateMedicalVocabularyResponse.AddMember("VocabularyState", VocabularyState)
-
-	UpdateVocabularyFilterRequest_VocabularyFilterName = UpdateVocabularyFilterRequest.AddMember("VocabularyFilterName", _VocabularyFilterName, &smithytraits.HTTPLabel{})
-
-	UpdateVocabularyFilterRequest_Words = UpdateVocabularyFilterRequest.AddMember("Words", _Words)
-
-	UpdateVocabularyFilterRequest_VocabularyFilterFileUri = UpdateVocabularyFilterRequest.AddMember("VocabularyFilterFileUri", _Uri)
-
-	UpdateVocabularyFilterRequest_DataAccessRoleArn = UpdateVocabularyFilterRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	UpdateVocabularyFilterRequest_EncryptionConfiguration = UpdateVocabularyFilterRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	UpdateVocabularyFilterResponse_VocabularyFilterName = UpdateVocabularyFilterResponse.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	UpdateVocabularyFilterResponse_LanguageCode = UpdateVocabularyFilterResponse.AddMember("LanguageCode", LanguageCode)
-
-	UpdateVocabularyFilterResponse_LastModifiedTime = UpdateVocabularyFilterResponse.AddMember("LastModifiedTime", _DateTime)
-
-	UpdateVocabularyRequest_VocabularyName = UpdateVocabularyRequest.AddMember("VocabularyName", _VocabularyName, &smithytraits.HTTPLabel{})
-
-	UpdateVocabularyRequest_LanguageCode = UpdateVocabularyRequest.AddMember("LanguageCode", LanguageCode)
-
-	UpdateVocabularyRequest_Phrases = UpdateVocabularyRequest.AddMember("Phrases", _Phrases)
-
-	UpdateVocabularyRequest_VocabularyFileUri = UpdateVocabularyRequest.AddMember("VocabularyFileUri", _Uri)
-
-	UpdateVocabularyRequest_DataAccessRoleArn = UpdateVocabularyRequest.AddMember("DataAccessRoleArn", _DataAccessRoleArn)
-
-	UpdateVocabularyRequest_EncryptionConfiguration = UpdateVocabularyRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	UpdateVocabularyResponse_VocabularyName = UpdateVocabularyResponse.AddMember("VocabularyName", _VocabularyName)
-
-	UpdateVocabularyResponse_LanguageCode = UpdateVocabularyResponse.AddMember("LanguageCode", LanguageCode)
-
-	UpdateVocabularyResponse_LastModifiedTime = UpdateVocabularyResponse.AddMember("LastModifiedTime", _DateTime)
-
-	UpdateVocabularyResponse_VocabularyState = UpdateVocabularyResponse.AddMember("VocabularyState", VocabularyState)
-
+const blob = "" +
+	"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBERDeleteMedicalTranscriptionJobRequestListMedicalTranscriptionJ" +
+	"obsResponseStartMedicalTranscriptionJobResponseCreateCallAnalyticsCategoryResponseDeleteCallAnalytic" +
+	"sCategoryResponseListCallAnalyticsCategoriesResponseListMedicalTranscriptionJobsRequestStartMedicalT" +
+	"ranscriptionJobRequestUpdateCallAnalyticsCategoryResponseCreateCallAnalyticsCategoryRequestDeleteCal" +
+	"lAnalyticsCategoryRequestGetMedicalTranscriptionJobResponseListCallAnalyticsCategoriesRequestUpdateC" +
+	"allAnalyticsCategoryRequestGetMedicalTranscriptionJobRequestINSUFFICIENT_CONVERSATION_CONTENTINTERNA" +
+	"TIONAL_BANK_ACCOUNT_NUMBERGetCallAnalyticsCategoryResponseMedicalContentIdentificationTypeMedicalTra" +
+	"nscriptionJobSummariesCallAnalyticsSkippedFeatureListCreateMedicalVocabularyResponseGetCallAnalytics" +
+	"CategoryRequestListMedicalVocabulariesResponseMedicalScribeChannelDefinitionsUpdateMedicalVocabulary" +
+	"ResponseCallAnalyticsSkippedReasonCodeClinicalNoteGenerationSettingsCreateMedicalVocabularyRequestCr" +
+	"eateVocabularyFilterResponseDeleteCallAnalyticsJobResponseDeleteMedicalVocabularyRequestListMedicalV" +
+	"ocabulariesRequestMedicalTranscriptionJobSummaryUpdateMedicalVocabularyRequestUpdateVocabularyFilter" +
+	"ResponseCreateVocabularyFilterRequestDeleteCallAnalyticsJobRequestDeleteMedicalScribeJobRequestDelet" +
+	"eTranscriptionJobRequestDeleteVocabularyFilterRequestDescribeLanguageModelResponseListCallAnalyticsJ" +
+	"obsResponseListMedicalScribeJobsResponseListTranscriptionJobsResponseListVocabularyFiltersResponseSt" +
+	"artCallAnalyticsJobResponseStartMedicalScribeJobResponseStartTranscriptionJobResponseUpdateVocabular" +
+	"yFilterRequestVEHICLE_IDENTIFICATION_NUMBERDescribeLanguageModelRequestGetMedicalVocabularyResponseL" +
+	"istCallAnalyticsJobsRequestListMedicalScribeJobsRequestListTranscriptionJobsRequestListVocabularyFil" +
+	"tersRequestMedicalScribeContextProvidedMedicalScribeParticipantRoleStartCallAnalyticsJobRequestStart" +
+	"MedicalScribeJobRequestStartTranscriptionJobRequestCreateLanguageModelResponseGetCallAnalyticsJobRes" +
+	"ponseGetMedicalScribeJobResponseGetMedicalVocabularyRequestGetTranscriptionJobResponseGetVocabularyF" +
+	"ilterResponseListTagsForResourceResponseMedicalMediaSampleRateHertzMedicalScribePatientContextMedica" +
+	"lTranscriptionJobNameMedicalTranscriptionSettingUpdateLanguageModelResponseCA_SOCIAL_INSURANCE_NUMBE" +
+	"RCreateLanguageModelRequestDeleteLanguageModelRequestGenerateAbstractiveSummaryGetCallAnalyticsJobRe" +
+	"questGetMedicalScribeJobRequestGetTranscriptionJobRequestGetVocabularyFilterRequestListLanguageModel" +
+	"sResponseListTagsForResourceRequestUpdateLanguageModelRequestCallAnalyticsJobSummariesIdentifyMultip" +
+	"leLanguagesListLanguageModelsRequestMedicalScribeJobSummariesMedicalScribeLanguageCodeMedicalScribeN" +
+	"oteTemplateRedactedTranscriptFileUriToxicityDetectionSettingsCallAnalyticsJobSettingsCreateVocabular" +
+	"yResponseFAILED_SAFETY_GUIDELINESGENERATIVE_SUMMARIZATIONInternalFailureExceptionListVocabulariesRes" +
+	"ponseOutputEncryptionKMSKeyIdSubtitleOutputStartIndexUpdateVocabularyResponseCallAnalyticsJobDetails" +
+	"CallAnalyticsJobSummaryCreateVocabularyRequestDeleteVocabularyRequestEncryptionConfigurationIdentifi" +
+	"edLanguageScoreKMSEncryptionContextMapListVocabulariesRequestMedicalScribeJobSummaryPrintableNonEmpt" +
+	"yStringREDACTED_AND_UNREDACTEDUpdateVocabularyRequestVocabularyFilterFileUriAllowDeferredExecutionCa" +
+	"llAnalyticsJobStatusCategoryPropertiesListLimitExceededExceptionMedicalScribeChannelIdMedicalScribeJ" +
+	"obStatusTranscriptionJobStatusVocabularyFilterMethodChannelIdentificationGetVocabularyResponseLangua" +
+	"geIdSettingsMapMedicalScribeSettingsTimestampMillisecondsUntagResourceResponseCallAnalyticsFeatureCa" +
+	"llAnalyticsJobNameGetVocabularyRequestHISTORY_AND_PHYSICALJobExecutionSettingsMedicalScribeJobNameRe" +
+	"dactedMediaFileUriTranscriptFilterTypeUntagResourceRequestVocabularyFilterInfoVocabularyFilterNameBa" +
+	"dRequestExceptionCREDIT_DEBIT_EXPIRYCREDIT_DEBIT_NUMBERClinicalDocumentUriMedicalScribeOutputTagReso" +
+	"urceResponseUpgradeAvailabilityInterruptionFilterOutputLocationTypeSentimentValueListTagResourceRequ" +
+	"estToxicityCategoriesAbsoluteTimeRangeConflictExceptionDataAccessRoleArnDurationInSecondsLanguageMod" +
+	"elNameNonTalkTimeFilterNotFoundExceptionRelativeTimeRangeShowSpeakerLabelsVocabularyFileUriCA_HEALTH" +
+	"_NUMBERCREDIT_DEBIT_CVVContentRedactionIdentifyLanguageLanguageCodeItemLanguageCodeListLastModifiedT" +
+	"imeMaxSpeakerLabelsOutputBucketNameShowAlternativesStringTargetListSubtitleFileUrisToxicityCategoryB" +
+	"EHAVIORAL_SOAPCLMLanguageCodeCUSTOMER_BUCKETInputDataConfigJobNameContainsLanguageOptionsMaxAlternat" +
+	"ivesPASSPORT_NUMBERRedactionOutputSentimentFilterStartPercentageSubtitleFormatsSubtitlesOutputTuning" +
+	"DataS3UriVocabularyStateAWS_ACCESS_KEYAWS_SECRET_KEYCompletionTimeLastUpdateTimePiiEntityTypesSERVIC" +
+	"E_BUCKETVocabularyInfoVocabularyNameBaseModelNameEndPercentageFailureReasonLICENSE_PLATELanguageCode" +
+	"sModelSettingsPHYSICAL_SOAPRedactionTypeSummarizationTranscribeArnBANK_ROUTINGCategoryNameCreationTi" +
+	"meStatusEqualsDownloadUriIN_PROGRESSMAC_ADDRESSMaxSpeakersMediaFormatModelStatusNARROW_BANDPRIMARYCA" +
+	"REResourceArnStateEqualsCreateTimeIP_ADDRESSMaxResultsSWIFT_CODESentimentsTagKeyListCLINICIANCOMPLET" +
+	"EDDATE_TIMEDICTATIONDRIVER_IDInputTypeNextTokenOutputKeyPOST_CALLREAL_TIMESpecialtyStartTimeTHEY_THE" +
+	"MThresholdWIDE_BANDDateTimeNEGATIVEPASSWORDPOSITIVEPronounsRuleListTagValueUSERNAMEBooleanEndTimeMes" +
+	"sageNEUTRALPATIENTPENDINGPhrasesSHE_HERTagKeysTagListTargetsAST_ESCKB_IQCKB_IRHE_HIMKAB_DZMHR_RUNega" +
+	"teQUEUEDREMOVEmemberAB_GEAF_ZAAGENTAM_ETAR_AEAR_SAAZ_AZBA_RUBE_BYBG_BGBN_INBS_BACA_ESCS_CZCY_GBCY_WL" +
+	"DA_DKDE_CHDE_DEEL_GREMAILEN_ABEN_AUEN_GBEN_IEEN_INEN_NZEN_USEN_WLEN_ZAES_ESES_MXES_USET_EEET_ETEU_ES" +
+	"EXACTFA_AFFA_IRFI_FIFR_CAFR_FRFirstGA_IEGD_GBGIRPPGL_ESGU_INHA_NGHE_ILHI_INHR_HRHT_HTHU_HUHY_AMID_ID" +
+	"IS_ISIT_ITJA_JPJV_IDKA_GEKK_KZKM_KHKN_INKO_KRKY_KGLG_INLT_LTLV_LVMIXEDMI_NZMK_MKML_INMN_MNMR_INMS_MY" +
+	"MT_MTMY_MMNE_NPNL_NLNO_NOOR_INPA_INPHONEPL_PLPS_AFPT_BRPT_PTREADYRO_RORU_RURW_RWRulesSI_LKSK_SKSL_SI" +
+	"SO_SOSQ_ALSR_RSSU_IDSV_SESW_BISW_KESW_RWSW_TZSW_UGTA_INTE_INTH_THTL_PHTR_TRTT_RUUG_CNUK_UAUZ_UZVI_VN" +
+	"WO_SNWordsZH_CNZH_HKZH_TWZU_ZAvalueBIRPFLACMASKSIRPUnitWEBMAMRDAPM4AMP3MP4OGGPHIPIIPINSRTSSNTAGURLVT" +
+	"TWAVkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.transcribe", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 147, Target: 0, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1951, Target: 1, Traits: 1, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 753, Target: 2, Traits: 2, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 998, Target: 3, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 998, Target: 4, Traits: 4, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 182, Target: 5, Traits: 5, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1028, Target: 6, Traits: 6, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2327, Target: 7, Traits: 7, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1266, Target: 8, Traits: 8, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 39, Target: 9, Traits: 9, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1058, Target: 10, Traits: 10, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1295, Target: 11, Traits: 11, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1324, Target: 12, Traits: 12, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1324, Target: 13, Traits: 13, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1353, Target: 14, Traits: 14, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 626, Target: 15, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1978, Target: 16, Traits: 16, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2005, Target: 17, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 425, Target: 18, Traits: 18, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1671, Target: 19, Traits: 19, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2059, Target: 20, Traits: 20, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2086, Target: 21, Traits: 21, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2086, Target: 22, Traits: 22, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 217, Target: 23, Traits: 23, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1382, Target: 24, Traits: 24, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2483, Target: 25, Traits: 25, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1411, Target: 26, Traits: 26, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 75, Target: 27, Traits: 27, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 815, Target: 28, Traits: 28, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2113, Target: 29, Traits: 29, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1440, Target: 30, Traits: 30, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2881, Target: 31, Traits: 31, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1469, Target: 32, Traits: 32, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1498, Target: 33, Traits: 33, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1527, Target: 34, Traits: 34, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 111, Target: 35, Traits: 35, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1556, Target: 36, Traits: 36, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3893, Target: 37, Traits: 37, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3557, Target: 38, Traits: 38, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 322, Target: 39, Traits: 39, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2248, Target: 40, Traits: 40, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 877, Target: 41, Traits: 41, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1178, Target: 42, Traits: 42, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1178, Target: 43, Traits: 43, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 4853, Target: 44, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 4021, Target: 45, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5183, Target: 581, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5290, Target: 581, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 5630, Target: 581, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4287, Target: 581, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 3798, Target: 50, Traits: 45, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5297, Target: 151, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4736, Target: 52, Traits: 44, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4980, Target: 1009, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5210, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5283, Target: 55, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 3578, Target: 56, Traits: 44, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2833, Target: 1009, Traits: 44, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1034, Target: 58, Traits: 44, StrLen: 16, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3598, Target: 78, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3298, Target: 88, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2977, Target: 76, Traits: 44, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 335, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4958, Target: 326, Traits: 44, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 52, Target: 591, Traits: 44, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5183, Target: 146, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4890, Target: 146, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4652, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3092, Target: 152, Traits: 44, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 960, Target: 79, Traits: 44, StrLen: 8, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 859, Target: 126, Traits: 44, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2977, Target: 76, Traits: 44, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 735, Target: 108, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3598, Target: 78, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2761, Target: 79, Traits: 44, StrLen: 24, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3430, Target: 662, Traits: 44, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4089, Target: 443, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4223, Target: 141, Traits: 44, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4474, Target: 316, Traits: 44, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3494, Target: 302, Traits: 44, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4840, Target: 570, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3298, Target: 88, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5402, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4925, Target: 1009, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2809, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5093, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2561, Target: 93, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 95, Traits: 44, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3000, Target: 95, Traits: 44, StrLen: 23, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3598, Target: 78, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4890, Target: 146, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5183, Target: 146, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4652, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3298, Target: 88, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2977, Target: 76, Traits: 44, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 722, Target: 104, Traits: 44, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 742, Target: 56, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 928, Target: 110, Traits: 44, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5297, Target: 552, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 722, Target: 108, Traits: 44, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 104, Traits: 44, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 908, Target: 110, Traits: 44, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 560, Target: 1009, Traits: 44, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2809, Target: 1009, Traits: 44, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4878, Target: 113, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3320, Target: 114, Traits: 44, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4878, Target: 113, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5880, Target: 526, Traits: 44, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5024, Target: 146, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4666, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5129, Target: 157, Traits: 44, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3320, Target: 121, Traits: 44, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 114, Traits: 44, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 859, Target: 123, Traits: 44, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3377, Target: 128, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1852, Target: 466, Traits: 44, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 859, Target: 126, Traits: 44, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 123, Traits: 44, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3377, Target: 128, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 938, Target: 129, Traits: 44, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2699, Target: 379, Traits: 44, StrLen: 12, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4414, Target: 131, Traits: 44, StrLen: 15, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5555, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5670, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5580, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5535, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5530, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5510, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5710, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4038, Target: 139, Traits: 46, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5297, Target: 552, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4223, Target: 141, Traits: 44, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4827, Target: 514, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4519, Target: 511, Traits: 44, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4680, Target: 504, Traits: 44, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5219, Target: 146, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 4072, Target: 147, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 0},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3115, Target: 171, Traits: 44, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2921, Target: 174, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3092, Target: 152, Traits: 44, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 0},
+		{StrOff: 4444, Target: 153, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4604, Target: 655, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4594, Target: 655, Traits: 44, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5129, Target: 157, Traits: 44, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5165, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5156, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2857, Target: 160, Traits: 47, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5297, Target: 552, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3931, Target: 162, Traits: 44, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5201, Target: 581, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1852, Target: 466, Traits: 44, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4021, Target: 45, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4140, Target: 516, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5396, Target: 55, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3658, Target: 168, Traits: 44, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3276, Target: 55, Traits: 44, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3115, Target: 171, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6104, Target: 506, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6030, Target: 506, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2921, Target: 174, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5425, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5440, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5445, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5435, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5490, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5500, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5505, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5510, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5525, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5530, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5535, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5540, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5545, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5555, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5560, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5570, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5575, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5580, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5605, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5610, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5620, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5625, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5635, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5640, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5665, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5670, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5680, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5695, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5705, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5710, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5715, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5730, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5740, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5805, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5795, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5815, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5850, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5855, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5870, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5950, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5955, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5970, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6010, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6020, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5960, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5565, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5550, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5995, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5920, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5420, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5360, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5450, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5455, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5460, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5465, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5470, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5475, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5480, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5366, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5372, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5485, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5495, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5515, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5585, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5590, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5595, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5615, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5650, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5655, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5660, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5675, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5685, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5690, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5700, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5720, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5384, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5725, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5735, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5745, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5750, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5755, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5760, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5390, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5770, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5775, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5780, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5785, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5790, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5800, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5820, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5810, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5825, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5830, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5840, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5845, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5865, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5875, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5885, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5890, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5895, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5900, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5905, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5910, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5915, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5925, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5930, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5935, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5940, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5945, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5965, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5975, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5980, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5985, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5990, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6000, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6015, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6025, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4255, Target: 293, Traits: 44, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4072, Target: 147, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 4271, Target: 296, Traits: 44, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 293, Traits: 44, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3494, Target: 298, Traits: 44, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4089, Target: 443, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3494, Target: 302, Traits: 44, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 6104, Target: 175, Traits: 44, StrLen: 3, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6030, Target: 298, Traits: 44, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1361, Target: 305, Traits: 44, StrLen: 13, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4097, Target: 443, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5024, Target: 146, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2674, Target: 131, Traits: 44, StrLen: 12, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4736, Target: 52, Traits: 44, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4969, Target: 448, Traits: 44, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3912, Target: 55, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4444, Target: 153, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4474, Target: 316, Traits: 44, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 175, Traits: 44, StrLen: 6, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3342, Target: 318, Traits: 48, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5297, Target: 552, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4489, Target: 320, Traits: 44, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 5044, Target: 321, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4947, Target: 322, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3706, Target: 655, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3698, Target: 655, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4958, Target: 326, Traits: 44, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6068, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6071, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6101, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6039, Target: 1009, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6074, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6059, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6055, Target: 1009, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6065, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2147, Target: 335, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 658, Target: 336, Traits: 44, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6077, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2140, Target: 338, Traits: 44, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 846, Target: 339, Traits: 44, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3377, Target: 344, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1852, Target: 390, Traits: 44, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 846, Target: 342, Traits: 44, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 339, Traits: 44, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3364, Target: 344, Traits: 44, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1811, Target: 345, Traits: 44, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2180, Target: 393, Traits: 44, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1272, Target: 347, Traits: 44, StrLen: 16, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3678, Target: 628, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3386, Target: 362, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2674, Target: 377, Traits: 44, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3874, Target: 387, Traits: 44, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5183, Target: 146, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4890, Target: 146, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4652, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 960, Target: 395, Traits: 44, StrLen: 8, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 859, Target: 342, Traits: 44, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1811, Target: 55, Traits: 44, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3386, Target: 362, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5402, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4925, Target: 1009, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2809, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5093, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2636, Target: 367, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 369, Traits: 44, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3161, Target: 369, Traits: 44, StrLen: 23, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3678, Target: 628, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4890, Target: 146, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5183, Target: 146, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4652, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2674, Target: 377, Traits: 44, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3386, Target: 362, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2661, Target: 377, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5555, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2686, Target: 379, Traits: 44, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3638, Target: 1009, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5645, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6035, Target: 1009, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6047, Target: 1009, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6062, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4399, Target: 1009, Traits: 44, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4814, Target: 1009, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3874, Target: 387, Traits: 44, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2719, Target: 655, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3855, Target: 655, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1839, Target: 390, Traits: 44, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5311, Target: 1009, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5084, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2167, Target: 393, Traits: 44, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5251, Target: 507, Traits: 49, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3515, Target: 395, Traits: 44, StrLen: 21, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4157, Target: 55, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4303, Target: 322, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3452, Target: 55, Traits: 44, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3430, Target: 662, Traits: 44, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 938, Target: 129, Traits: 44, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 45, Target: 403, Traits: 44, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2719, Target: 655, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 45, Target: 405, Traits: 44, StrLen: 23, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2194, Target: 628, Traits: 44, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3408, Target: 629, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 338, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4958, Target: 326, Traits: 44, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 52, Target: 403, Traits: 44, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5183, Target: 146, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4890, Target: 146, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4652, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 960, Target: 436, Traits: 44, StrLen: 8, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 665, Target: 336, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5174, Target: 550, Traits: 44, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 686, Target: 652, Traits: 44, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 690, Target: 422, Traits: 44, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 424, Traits: 44, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1118, Target: 424, Traits: 44, StrLen: 30, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2194, Target: 628, Traits: 44, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4890, Target: 146, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5183, Target: 146, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4652, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3408, Target: 629, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3949, Target: 463, Traits: 44, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5174, Target: 550, Traits: 44, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 665, Target: 336, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 686, Target: 652, Traits: 44, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2221, Target: 436, Traits: 44, StrLen: 27, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4157, Target: 55, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4303, Target: 322, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3452, Target: 55, Traits: 44, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4335, Target: 55, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4489, Target: 320, Traits: 44, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4097, Target: 443, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2495, Target: 444, Traits: 44, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 305, Traits: 44, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4801, Target: 446, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4089, Target: 443, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4969, Target: 448, Traits: 44, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4925, Target: 1009, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2809, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5093, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3193, Target: 453, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4106, Target: 454, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5201, Target: 581, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 4021, Target: 45, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4140, Target: 516, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5396, Target: 55, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4123, Target: 459, Traits: 50, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5297, Target: 552, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4319, Target: 461, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5147, Target: 462, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3949, Target: 463, Traits: 44, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4429, Target: 1009, Traits: 44, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4694, Target: 1009, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1852, Target: 466, Traits: 44, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5430, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4429, Target: 1009, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4554, Target: 469, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 5325, Target: 470, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5325, Target: 471, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 470, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4680, Target: 473, Traits: 44, StrLen: 13, Count: 30, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 607, Target: 1009, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4866, Target: 1009, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3836, Target: 1009, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4207, Target: 1009, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3817, Target: 1009, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6083, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5520, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4940, Target: 1009, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5279, Target: 1009, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5835, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6089, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5102, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4504, Target: 1009, Traits: 44, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5120, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6095, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5430, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5275, Target: 1009, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5235, Target: 1009, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4624, Target: 1009, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4638, Target: 1009, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5034, Target: 1009, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4936, Target: 1009, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4775, Target: 1009, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1614, Target: 1009, Traits: 44, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 1009, Traits: 44, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4191, Target: 1009, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2275, Target: 1009, Traits: 44, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 593, Target: 1009, Traits: 44, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5054, Target: 1009, Traits: 44, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5162, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4680, Target: 504, Traits: 44, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 473, Traits: 44, StrLen: 6, Count: 30, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3184, Target: 506, Traits: 44, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5251, Target: 507, Traits: 51, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5378, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5332, Target: 1009, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5192, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4519, Target: 511, Traits: 44, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3207, Target: 1009, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3207, Target: 1009, Traits: 44, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4827, Target: 514, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6080, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4140, Target: 516, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4549, Target: 469, Traits: 44, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4749, Target: 469, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5630, Target: 469, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4287, Target: 469, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5259, Target: 521, Traits: 44, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 4106, Target: 454, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3931, Target: 162, Traits: 44, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3718, Target: 594, Traits: 44, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4534, Target: 528, Traits: 44, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5259, Target: 526, Traits: 44, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 521, Traits: 44, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 4534, Target: 528, Traits: 44, StrLen: 15, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5064, Target: 539, Traits: 44, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4021, Target: 45, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4140, Target: 516, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1852, Target: 466, Traits: 44, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5396, Target: 55, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3967, Target: 534, Traits: 44, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5243, Target: 1009, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5227, Target: 1009, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5304, Target: 1009, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5765, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3967, Target: 539, Traits: 44, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 534, Traits: 44, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 960, Target: 541, Traits: 44, StrLen: 8, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4157, Target: 55, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4303, Target: 322, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3452, Target: 55, Traits: 44, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4335, Target: 55, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4489, Target: 320, Traits: 44, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3430, Target: 662, Traits: 44, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5174, Target: 550, Traits: 44, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 4991, Target: 1009, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3201, Target: 552, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4351, Target: 553, Traits: 44, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 453, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4367, Target: 555, Traits: 44, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 655, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4564, Target: 557, Traits: 44, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 6098, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6086, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4564, Target: 560, Traits: 44, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 557, Traits: 44, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2929, Target: 562, Traits: 44, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 4579, Target: 563, Traits: 44, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4572, Target: 560, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2937, Target: 562, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4579, Target: 566, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4572, Target: 560, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4367, Target: 555, Traits: 44, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2937, Target: 562, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4840, Target: 570, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2353, Target: 55, Traits: 44, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2117, Target: 572, Traits: 44, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2924, Target: 575, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3976, Target: 580, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5074, Target: 575, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 5074, Target: 576, Traits: 44, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 575, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5346, Target: 578, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 572, Traits: 44, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5267, Target: 580, Traits: 44, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3536, Target: 581, Traits: 44, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 4003, Target: 582, Traits: 44, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 584, Traits: 44, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4383, Target: 584, Traits: 44, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5162, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2736, Target: 586, Traits: 44, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 588, Traits: 44, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2736, Target: 588, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4003, Target: 582, Traits: 44, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4853, Target: 590, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 52, Target: 591, Traits: 44, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2719, Target: 655, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2711, Target: 655, Traits: 44, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3718, Target: 594, Traits: 44, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3718, Target: 601, Traits: 44, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4021, Target: 45, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4140, Target: 516, Traits: 44, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1852, Target: 466, Traits: 44, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5396, Target: 55, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 5353, Target: 553, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3718, Target: 601, Traits: 44, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5600, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 52, Target: 603, Traits: 44, StrLen: 16, Count: 24, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 628, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3408, Target: 629, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 335, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4958, Target: 326, Traits: 44, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 52, Target: 591, Traits: 44, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5183, Target: 146, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4890, Target: 146, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4652, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 960, Target: 541, Traits: 44, StrLen: 8, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4801, Target: 446, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3658, Target: 168, Traits: 44, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4223, Target: 141, Traits: 44, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4239, Target: 55, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2586, Target: 55, Traits: 44, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4474, Target: 316, Traits: 44, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3092, Target: 152, Traits: 44, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 4788, Target: 296, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4579, Target: 566, Traits: 44, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3494, Target: 302, Traits: 44, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2736, Target: 586, Traits: 44, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2201, Target: 628, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3408, Target: 629, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5402, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4925, Target: 1009, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2809, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5093, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 697, Target: 634, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 636, Traits: 44, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1125, Target: 636, Traits: 44, StrLen: 23, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 628, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4890, Target: 146, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 5183, Target: 146, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4652, Target: 146, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3408, Target: 629, Traits: 44, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3949, Target: 463, Traits: 44, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4223, Target: 141, Traits: 44, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4801, Target: 446, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4239, Target: 55, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2586, Target: 55, Traits: 44, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 3092, Target: 152, Traits: 44, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 4788, Target: 296, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2736, Target: 586, Traits: 44, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 686, Target: 652, Traits: 44, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 573, Target: 1009, Traits: 44, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5111, Target: 1009, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2733, Target: 655, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 826, Target: 656, Traits: 44, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 669, Traits: 44, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3758, Target: 658, Traits: 44, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3430, Target: 662, Traits: 44, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5408, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6043, Target: 1009, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6092, Target: 1009, Traits: 44, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1473, Target: 667, Traits: 44, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 658, Traits: 44, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4708, Target: 669, Traits: 44, StrLen: 14, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4609, Target: 675, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 4609, Target: 675, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 5318, Target: 1009, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 5860, Target: 1009, Traits: 44, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2809, Target: 1009, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 6005, Target: 679, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 6005, Target: 680, Traits: 44, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 5414, Target: 679, Traits: 44, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 357, Target: 682, Traits: 44, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4878, Target: 113, Traits: 52, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5880, Target: 526, Traits: 44, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5129, Target: 157, Traits: 44, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 147, Target: 687, Traits: 44, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3320, Target: 114, Traits: 44, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2301, Target: 689, Traits: 44, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2674, Target: 131, Traits: 44, StrLen: 12, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4736, Target: 52, Traits: 44, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4097, Target: 443, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4444, Target: 153, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1951, Target: 696, Traits: 44, StrLen: 27, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2674, Target: 131, Traits: 44, StrLen: 12, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4736, Target: 52, Traits: 44, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4097, Target: 443, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4444, Target: 153, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4969, Target: 448, Traits: 44, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 968, Target: 702, Traits: 44, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4174, Target: 655, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 753, Target: 707, Traits: 44, StrLen: 31, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4609, Target: 675, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1208, Target: 713, Traits: 44, StrLen: 29, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3778, Target: 666, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6005, Target: 680, Traits: 44, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3253, Target: 655, Traits: 44, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 998, Target: 721, Traits: 44, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3023, Target: 725, Traits: 44, StrLen: 23, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5325, Target: 471, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4174, Target: 655, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2785, Target: 733, Traits: 44, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4609, Target: 675, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 391, Target: 739, Traits: 44, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4878, Target: 113, Traits: 52, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 182, Target: 741, Traits: 44, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1237, Target: 742, Traits: 44, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3598, Target: 78, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1028, Target: 744, Traits: 44, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2327, Target: 745, Traits: 44, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4097, Target: 443, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1266, Target: 747, Traits: 44, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3678, Target: 628, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 39, Target: 749, Traits: 44, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2194, Target: 628, Traits: 52, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1058, Target: 751, Traits: 44, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1295, Target: 753, Traits: 44, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 628, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1324, Target: 755, Traits: 44, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3778, Target: 666, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3046, Target: 757, Traits: 44, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1643, Target: 759, Traits: 44, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4097, Target: 443, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1353, Target: 761, Traits: 44, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1361, Target: 305, Traits: 44, StrLen: 13, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 784, Target: 763, Traits: 44, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4878, Target: 113, Traits: 52, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 626, Target: 765, Traits: 44, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3320, Target: 114, Traits: 44, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2379, Target: 767, Traits: 44, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3598, Target: 78, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1978, Target: 769, Traits: 44, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1034, Target: 58, Traits: 44, StrLen: 16, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2405, Target: 771, Traits: 44, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3678, Target: 628, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2005, Target: 773, Traits: 44, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1272, Target: 347, Traits: 44, StrLen: 16, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 527, Target: 775, Traits: 44, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2194, Target: 628, Traits: 52, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 425, Target: 777, Traits: 44, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 45, Target: 405, Traits: 44, StrLen: 23, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2032, Target: 779, Traits: 44, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1671, Target: 781, Traits: 44, StrLen: 28, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4609, Target: 675, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4914, Target: 655, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2431, Target: 788, Traits: 44, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 628, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 790, Traits: 44, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 52, Target: 603, Traits: 44, StrLen: 16, Count: 24, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2457, Target: 792, Traits: 44, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3778, Target: 666, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2086, Target: 794, Traits: 44, StrLen: 27, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4914, Target: 655, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3618, Target: 801, Traits: 44, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3473, Target: 803, Traits: 44, StrLen: 21, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4609, Target: 675, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4762, Target: 151, Traits: 44, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4914, Target: 655, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 459, Target: 812, Traits: 44, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 217, Target: 815, Traits: 44, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 234, Target: 121, Traits: 44, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1699, Target: 818, Traits: 44, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 88, Traits: 55, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4459, Target: 78, Traits: 56, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1382, Target: 823, Traits: 44, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 88, Traits: 44, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2561, Target: 93, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2611, Target: 827, Traits: 44, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4902, Target: 448, Traits: 57, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4462, Target: 443, Traits: 58, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2483, Target: 832, Traits: 44, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2495, Target: 444, Traits: 44, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1727, Target: 835, Traits: 44, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 362, Traits: 55, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4459, Target: 628, Traits: 56, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1411, Target: 840, Traits: 44, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 362, Traits: 44, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 367, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 252, Target: 844, Traits: 44, StrLen: 35, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 629, Traits: 55, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4459, Target: 628, Traits: 56, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 75, Target: 849, Traits: 44, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 629, Traits: 44, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 690, Target: 422, Traits: 44, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1088, Target: 853, Traits: 44, StrLen: 30, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5013, Target: 675, Traits: 59, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4462, Target: 674, Traits: 58, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 815, Target: 858, Traits: 44, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 675, Traits: 44, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 826, Target: 656, Traits: 44, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2509, Target: 862, Traits: 44, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5002, Target: 590, Traits: 52, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2113, Target: 864, Traits: 44, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5002, Target: 590, Traits: 44, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1755, Target: 867, Traits: 44, StrLen: 28, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 629, Traits: 55, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4459, Target: 628, Traits: 56, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1440, Target: 872, Traits: 44, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 629, Traits: 44, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 697, Target: 634, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3138, Target: 876, Traits: 44, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 5013, Target: 675, Traits: 59, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4462, Target: 674, Traits: 58, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2881, Target: 881, Traits: 44, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3314, Target: 675, Traits: 44, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 826, Target: 656, Traits: 44, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1783, Target: 885, Traits: 44, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5138, Target: 452, Traits: 53, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5044, Target: 321, Traits: 54, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4462, Target: 666, Traits: 58, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1469, Target: 889, Traits: 44, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5138, Target: 452, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1473, Target: 667, Traits: 44, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1867, Target: 892, Traits: 44, StrLen: 28, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3598, Target: 78, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3949, Target: 655, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2905, Target: 174, Traits: 44, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 960, Target: 79, Traits: 44, StrLen: 8, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 859, Target: 126, Traits: 44, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1498, Target: 901, Traits: 44, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1034, Target: 58, Traits: 44, StrLen: 16, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1895, Target: 903, Traits: 44, StrLen: 28, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3678, Target: 628, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4319, Target: 461, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2905, Target: 174, Traits: 44, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3115, Target: 171, Traits: 44, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 960, Target: 395, Traits: 44, StrLen: 8, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 859, Target: 342, Traits: 44, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1811, Target: 345, Traits: 44, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1527, Target: 914, Traits: 44, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1272, Target: 347, Traits: 44, StrLen: 16, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 287, Target: 916, Traits: 44, StrLen: 35, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2194, Target: 628, Traits: 52, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 338, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4958, Target: 326, Traits: 44, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4319, Target: 461, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5147, Target: 462, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2905, Target: 174, Traits: 44, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3115, Target: 171, Traits: 44, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 960, Target: 436, Traits: 44, StrLen: 8, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 665, Target: 336, Traits: 44, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5174, Target: 550, Traits: 44, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 686, Target: 652, Traits: 44, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 111, Target: 931, Traits: 44, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 45, Target: 405, Traits: 44, StrLen: 23, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1923, Target: 933, Traits: 44, StrLen: 28, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2201, Target: 628, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 335, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 4958, Target: 326, Traits: 44, StrLen: 11, Count: 8, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2147, Target: 323, Traits: 44, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4319, Target: 461, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5147, Target: 462, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2905, Target: 174, Traits: 44, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3115, Target: 171, Traits: 44, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 960, Target: 541, Traits: 44, StrLen: 8, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4801, Target: 446, Traits: 44, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3658, Target: 168, Traits: 44, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4223, Target: 141, Traits: 44, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 4239, Target: 55, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2586, Target: 55, Traits: 44, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 4474, Target: 316, Traits: 44, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4579, Target: 563, Traits: 44, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3494, Target: 302, Traits: 44, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2736, Target: 586, Traits: 44, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1556, Target: 954, Traits: 44, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 52, Target: 603, Traits: 44, StrLen: 16, Count: 24, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3985, Target: 956, Traits: 44, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5002, Target: 590, Traits: 52, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2117, Target: 578, Traits: 44, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3893, Target: 959, Traits: 44, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3738, Target: 960, Traits: 44, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5002, Target: 590, Traits: 52, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5339, Target: 576, Traits: 60, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3557, Target: 963, Traits: 44, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 493, Target: 964, Traits: 44, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4878, Target: 113, Traits: 52, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5880, Target: 526, Traits: 44, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5129, Target: 157, Traits: 44, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 322, Target: 968, Traits: 44, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3320, Target: 114, Traits: 44, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2535, Target: 970, Traits: 44, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4097, Target: 443, Traits: 52, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2248, Target: 974, Traits: 44, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4097, Target: 443, Traits: 44, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4969, Target: 448, Traits: 44, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1148, Target: 978, Traits: 44, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4174, Target: 655, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 877, Target: 982, Traits: 44, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4609, Target: 675, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1585, Target: 987, Traits: 44, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3778, Target: 666, Traits: 52, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 6005, Target: 680, Traits: 44, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3253, Target: 655, Traits: 44, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1178, Target: 993, Traits: 44, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3778, Target: 666, Traits: 44, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3230, Target: 997, Traits: 44, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 52, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 5325, Target: 471, Traits: 44, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 4174, Target: 655, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 4055, Target: 145, Traits: 44, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3069, Target: 148, Traits: 44, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2953, Target: 1004, Traits: 44, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 4722, Target: 674, Traits: 44, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 175, Traits: 44, StrLen: 12, Count: 117, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 4287, Target: 146, Traits: 44, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 4609, Target: 675, Traits: 44, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 6051, Target: 1009, Traits: 44, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/callanalyticscategories/{CategoryName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/languagemodels/{ModelName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/medicalvocabularies/{VocabularyName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/vocabularies/{VocabularyName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/vocabularyFilters/{VocabularyFilterName}",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/callanalyticscategories/{CategoryName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/callanalyticsjobs/{CallAnalyticsJobName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/languagemodels/{ModelName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/medicalscribejobs/{MedicalScribeJobName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/medicaltranscriptionjobs/{MedicalTranscriptionJobName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/medicalvocabularies/{VocabularyName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/transcriptionjobs/{TranscriptionJobName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/vocabularies/{VocabularyName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/vocabularyFilters/{VocabularyFilterName}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/languagemodels/{ModelName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/callanalyticscategories/{CategoryName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/callanalyticsjobs/{CallAnalyticsJobName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/medicalscribejobs/{MedicalScribeJobName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/medicaltranscriptionjobs/{MedicalTranscriptionJobName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/medicalvocabularies/{VocabularyName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/transcriptionjobs/{TranscriptionJobName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/vocabularies/{VocabularyName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/vocabularyFilters/{VocabularyFilterName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/callanalyticscategories",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/callanalyticsjobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/languagemodels",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/medicalscribejobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/medicaltranscriptionjobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/medicalvocabularies",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/transcriptionjobs",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/vocabularies",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/vocabularyFilters",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/callanalyticsjobs/{CallAnalyticsJobName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/medicalscribejobs/{MedicalScribeJobName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/medicaltranscriptionjobs/{MedicalTranscriptionJobName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/transcriptionjobs/{TranscriptionJobName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{ResourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/callanalyticscategories/{CategoryName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/languagemodels/{ModelName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/medicalvocabularies/{VocabularyName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/vocabularies/{VocabularyName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/vocabularyFilters/{VocabularyFilterName}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Status"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "JobNameContains"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "         StatusEquals"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NameContains"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "StateEquals"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [1010]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+	smithy.NewStaticSchema(&set, 532),
+	smithy.NewStaticSchema(&set, 533),
+	smithy.NewStaticSchema(&set, 534),
+	smithy.NewStaticSchema(&set, 535),
+	smithy.NewStaticSchema(&set, 536),
+	smithy.NewStaticSchema(&set, 537),
+	smithy.NewStaticSchema(&set, 538),
+	smithy.NewStaticSchema(&set, 539),
+	smithy.NewStaticSchema(&set, 540),
+	smithy.NewStaticSchema(&set, 541),
+	smithy.NewStaticSchema(&set, 542),
+	smithy.NewStaticSchema(&set, 543),
+	smithy.NewStaticSchema(&set, 544),
+	smithy.NewStaticSchema(&set, 545),
+	smithy.NewStaticSchema(&set, 546),
+	smithy.NewStaticSchema(&set, 547),
+	smithy.NewStaticSchema(&set, 548),
+	smithy.NewStaticSchema(&set, 549),
+	smithy.NewStaticSchema(&set, 550),
+	smithy.NewStaticSchema(&set, 551),
+	smithy.NewStaticSchema(&set, 552),
+	smithy.NewStaticSchema(&set, 553),
+	smithy.NewStaticSchema(&set, 554),
+	smithy.NewStaticSchema(&set, 555),
+	smithy.NewStaticSchema(&set, 556),
+	smithy.NewStaticSchema(&set, 557),
+	smithy.NewStaticSchema(&set, 558),
+	smithy.NewStaticSchema(&set, 559),
+	smithy.NewStaticSchema(&set, 560),
+	smithy.NewStaticSchema(&set, 561),
+	smithy.NewStaticSchema(&set, 562),
+	smithy.NewStaticSchema(&set, 563),
+	smithy.NewStaticSchema(&set, 564),
+	smithy.NewStaticSchema(&set, 565),
+	smithy.NewStaticSchema(&set, 566),
+	smithy.NewStaticSchema(&set, 567),
+	smithy.NewStaticSchema(&set, 568),
+	smithy.NewStaticSchema(&set, 569),
+	smithy.NewStaticSchema(&set, 570),
+	smithy.NewStaticSchema(&set, 571),
+	smithy.NewStaticSchema(&set, 572),
+	smithy.NewStaticSchema(&set, 573),
+	smithy.NewStaticSchema(&set, 574),
+	smithy.NewStaticSchema(&set, 575),
+	smithy.NewStaticSchema(&set, 576),
+	smithy.NewStaticSchema(&set, 577),
+	smithy.NewStaticSchema(&set, 578),
+	smithy.NewStaticSchema(&set, 579),
+	smithy.NewStaticSchema(&set, 580),
+	smithy.NewStaticSchema(&set, 581),
+	smithy.NewStaticSchema(&set, 582),
+	smithy.NewStaticSchema(&set, 583),
+	smithy.NewStaticSchema(&set, 584),
+	smithy.NewStaticSchema(&set, 585),
+	smithy.NewStaticSchema(&set, 586),
+	smithy.NewStaticSchema(&set, 587),
+	smithy.NewStaticSchema(&set, 588),
+	smithy.NewStaticSchema(&set, 589),
+	smithy.NewStaticSchema(&set, 590),
+	smithy.NewStaticSchema(&set, 591),
+	smithy.NewStaticSchema(&set, 592),
+	smithy.NewStaticSchema(&set, 593),
+	smithy.NewStaticSchema(&set, 594),
+	smithy.NewStaticSchema(&set, 595),
+	smithy.NewStaticSchema(&set, 596),
+	smithy.NewStaticSchema(&set, 597),
+	smithy.NewStaticSchema(&set, 598),
+	smithy.NewStaticSchema(&set, 599),
+	smithy.NewStaticSchema(&set, 600),
+	smithy.NewStaticSchema(&set, 601),
+	smithy.NewStaticSchema(&set, 602),
+	smithy.NewStaticSchema(&set, 603),
+	smithy.NewStaticSchema(&set, 604),
+	smithy.NewStaticSchema(&set, 605),
+	smithy.NewStaticSchema(&set, 606),
+	smithy.NewStaticSchema(&set, 607),
+	smithy.NewStaticSchema(&set, 608),
+	smithy.NewStaticSchema(&set, 609),
+	smithy.NewStaticSchema(&set, 610),
+	smithy.NewStaticSchema(&set, 611),
+	smithy.NewStaticSchema(&set, 612),
+	smithy.NewStaticSchema(&set, 613),
+	smithy.NewStaticSchema(&set, 614),
+	smithy.NewStaticSchema(&set, 615),
+	smithy.NewStaticSchema(&set, 616),
+	smithy.NewStaticSchema(&set, 617),
+	smithy.NewStaticSchema(&set, 618),
+	smithy.NewStaticSchema(&set, 619),
+	smithy.NewStaticSchema(&set, 620),
+	smithy.NewStaticSchema(&set, 621),
+	smithy.NewStaticSchema(&set, 622),
+	smithy.NewStaticSchema(&set, 623),
+	smithy.NewStaticSchema(&set, 624),
+	smithy.NewStaticSchema(&set, 625),
+	smithy.NewStaticSchema(&set, 626),
+	smithy.NewStaticSchema(&set, 627),
+	smithy.NewStaticSchema(&set, 628),
+	smithy.NewStaticSchema(&set, 629),
+	smithy.NewStaticSchema(&set, 630),
+	smithy.NewStaticSchema(&set, 631),
+	smithy.NewStaticSchema(&set, 632),
+	smithy.NewStaticSchema(&set, 633),
+	smithy.NewStaticSchema(&set, 634),
+	smithy.NewStaticSchema(&set, 635),
+	smithy.NewStaticSchema(&set, 636),
+	smithy.NewStaticSchema(&set, 637),
+	smithy.NewStaticSchema(&set, 638),
+	smithy.NewStaticSchema(&set, 639),
+	smithy.NewStaticSchema(&set, 640),
+	smithy.NewStaticSchema(&set, 641),
+	smithy.NewStaticSchema(&set, 642),
+	smithy.NewStaticSchema(&set, 643),
+	smithy.NewStaticSchema(&set, 644),
+	smithy.NewStaticSchema(&set, 645),
+	smithy.NewStaticSchema(&set, 646),
+	smithy.NewStaticSchema(&set, 647),
+	smithy.NewStaticSchema(&set, 648),
+	smithy.NewStaticSchema(&set, 649),
+	smithy.NewStaticSchema(&set, 650),
+	smithy.NewStaticSchema(&set, 651),
+	smithy.NewStaticSchema(&set, 652),
+	smithy.NewStaticSchema(&set, 653),
+	smithy.NewStaticSchema(&set, 654),
+	smithy.NewStaticSchema(&set, 655),
+	smithy.NewStaticSchema(&set, 656),
+	smithy.NewStaticSchema(&set, 657),
+	smithy.NewStaticSchema(&set, 658),
+	smithy.NewStaticSchema(&set, 659),
+	smithy.NewStaticSchema(&set, 660),
+	smithy.NewStaticSchema(&set, 661),
+	smithy.NewStaticSchema(&set, 662),
+	smithy.NewStaticSchema(&set, 663),
+	smithy.NewStaticSchema(&set, 664),
+	smithy.NewStaticSchema(&set, 665),
+	smithy.NewStaticSchema(&set, 666),
+	smithy.NewStaticSchema(&set, 667),
+	smithy.NewStaticSchema(&set, 668),
+	smithy.NewStaticSchema(&set, 669),
+	smithy.NewStaticSchema(&set, 670),
+	smithy.NewStaticSchema(&set, 671),
+	smithy.NewStaticSchema(&set, 672),
+	smithy.NewStaticSchema(&set, 673),
+	smithy.NewStaticSchema(&set, 674),
+	smithy.NewStaticSchema(&set, 675),
+	smithy.NewStaticSchema(&set, 676),
+	smithy.NewStaticSchema(&set, 677),
+	smithy.NewStaticSchema(&set, 678),
+	smithy.NewStaticSchema(&set, 679),
+	smithy.NewStaticSchema(&set, 680),
+	smithy.NewStaticSchema(&set, 681),
+	smithy.NewStaticSchema(&set, 682),
+	smithy.NewStaticSchema(&set, 683),
+	smithy.NewStaticSchema(&set, 684),
+	smithy.NewStaticSchema(&set, 685),
+	smithy.NewStaticSchema(&set, 686),
+	smithy.NewStaticSchema(&set, 687),
+	smithy.NewStaticSchema(&set, 688),
+	smithy.NewStaticSchema(&set, 689),
+	smithy.NewStaticSchema(&set, 690),
+	smithy.NewStaticSchema(&set, 691),
+	smithy.NewStaticSchema(&set, 692),
+	smithy.NewStaticSchema(&set, 693),
+	smithy.NewStaticSchema(&set, 694),
+	smithy.NewStaticSchema(&set, 695),
+	smithy.NewStaticSchema(&set, 696),
+	smithy.NewStaticSchema(&set, 697),
+	smithy.NewStaticSchema(&set, 698),
+	smithy.NewStaticSchema(&set, 699),
+	smithy.NewStaticSchema(&set, 700),
+	smithy.NewStaticSchema(&set, 701),
+	smithy.NewStaticSchema(&set, 702),
+	smithy.NewStaticSchema(&set, 703),
+	smithy.NewStaticSchema(&set, 704),
+	smithy.NewStaticSchema(&set, 705),
+	smithy.NewStaticSchema(&set, 706),
+	smithy.NewStaticSchema(&set, 707),
+	smithy.NewStaticSchema(&set, 708),
+	smithy.NewStaticSchema(&set, 709),
+	smithy.NewStaticSchema(&set, 710),
+	smithy.NewStaticSchema(&set, 711),
+	smithy.NewStaticSchema(&set, 712),
+	smithy.NewStaticSchema(&set, 713),
+	smithy.NewStaticSchema(&set, 714),
+	smithy.NewStaticSchema(&set, 715),
+	smithy.NewStaticSchema(&set, 716),
+	smithy.NewStaticSchema(&set, 717),
+	smithy.NewStaticSchema(&set, 718),
+	smithy.NewStaticSchema(&set, 719),
+	smithy.NewStaticSchema(&set, 720),
+	smithy.NewStaticSchema(&set, 721),
+	smithy.NewStaticSchema(&set, 722),
+	smithy.NewStaticSchema(&set, 723),
+	smithy.NewStaticSchema(&set, 724),
+	smithy.NewStaticSchema(&set, 725),
+	smithy.NewStaticSchema(&set, 726),
+	smithy.NewStaticSchema(&set, 727),
+	smithy.NewStaticSchema(&set, 728),
+	smithy.NewStaticSchema(&set, 729),
+	smithy.NewStaticSchema(&set, 730),
+	smithy.NewStaticSchema(&set, 731),
+	smithy.NewStaticSchema(&set, 732),
+	smithy.NewStaticSchema(&set, 733),
+	smithy.NewStaticSchema(&set, 734),
+	smithy.NewStaticSchema(&set, 735),
+	smithy.NewStaticSchema(&set, 736),
+	smithy.NewStaticSchema(&set, 737),
+	smithy.NewStaticSchema(&set, 738),
+	smithy.NewStaticSchema(&set, 739),
+	smithy.NewStaticSchema(&set, 740),
+	smithy.NewStaticSchema(&set, 741),
+	smithy.NewStaticSchema(&set, 742),
+	smithy.NewStaticSchema(&set, 743),
+	smithy.NewStaticSchema(&set, 744),
+	smithy.NewStaticSchema(&set, 745),
+	smithy.NewStaticSchema(&set, 746),
+	smithy.NewStaticSchema(&set, 747),
+	smithy.NewStaticSchema(&set, 748),
+	smithy.NewStaticSchema(&set, 749),
+	smithy.NewStaticSchema(&set, 750),
+	smithy.NewStaticSchema(&set, 751),
+	smithy.NewStaticSchema(&set, 752),
+	smithy.NewStaticSchema(&set, 753),
+	smithy.NewStaticSchema(&set, 754),
+	smithy.NewStaticSchema(&set, 755),
+	smithy.NewStaticSchema(&set, 756),
+	smithy.NewStaticSchema(&set, 757),
+	smithy.NewStaticSchema(&set, 758),
+	smithy.NewStaticSchema(&set, 759),
+	smithy.NewStaticSchema(&set, 760),
+	smithy.NewStaticSchema(&set, 761),
+	smithy.NewStaticSchema(&set, 762),
+	smithy.NewStaticSchema(&set, 763),
+	smithy.NewStaticSchema(&set, 764),
+	smithy.NewStaticSchema(&set, 765),
+	smithy.NewStaticSchema(&set, 766),
+	smithy.NewStaticSchema(&set, 767),
+	smithy.NewStaticSchema(&set, 768),
+	smithy.NewStaticSchema(&set, 769),
+	smithy.NewStaticSchema(&set, 770),
+	smithy.NewStaticSchema(&set, 771),
+	smithy.NewStaticSchema(&set, 772),
+	smithy.NewStaticSchema(&set, 773),
+	smithy.NewStaticSchema(&set, 774),
+	smithy.NewStaticSchema(&set, 775),
+	smithy.NewStaticSchema(&set, 776),
+	smithy.NewStaticSchema(&set, 777),
+	smithy.NewStaticSchema(&set, 778),
+	smithy.NewStaticSchema(&set, 779),
+	smithy.NewStaticSchema(&set, 780),
+	smithy.NewStaticSchema(&set, 781),
+	smithy.NewStaticSchema(&set, 782),
+	smithy.NewStaticSchema(&set, 783),
+	smithy.NewStaticSchema(&set, 784),
+	smithy.NewStaticSchema(&set, 785),
+	smithy.NewStaticSchema(&set, 786),
+	smithy.NewStaticSchema(&set, 787),
+	smithy.NewStaticSchema(&set, 788),
+	smithy.NewStaticSchema(&set, 789),
+	smithy.NewStaticSchema(&set, 790),
+	smithy.NewStaticSchema(&set, 791),
+	smithy.NewStaticSchema(&set, 792),
+	smithy.NewStaticSchema(&set, 793),
+	smithy.NewStaticSchema(&set, 794),
+	smithy.NewStaticSchema(&set, 795),
+	smithy.NewStaticSchema(&set, 796),
+	smithy.NewStaticSchema(&set, 797),
+	smithy.NewStaticSchema(&set, 798),
+	smithy.NewStaticSchema(&set, 799),
+	smithy.NewStaticSchema(&set, 800),
+	smithy.NewStaticSchema(&set, 801),
+	smithy.NewStaticSchema(&set, 802),
+	smithy.NewStaticSchema(&set, 803),
+	smithy.NewStaticSchema(&set, 804),
+	smithy.NewStaticSchema(&set, 805),
+	smithy.NewStaticSchema(&set, 806),
+	smithy.NewStaticSchema(&set, 807),
+	smithy.NewStaticSchema(&set, 808),
+	smithy.NewStaticSchema(&set, 809),
+	smithy.NewStaticSchema(&set, 810),
+	smithy.NewStaticSchema(&set, 811),
+	smithy.NewStaticSchema(&set, 812),
+	smithy.NewStaticSchema(&set, 813),
+	smithy.NewStaticSchema(&set, 814),
+	smithy.NewStaticSchema(&set, 815),
+	smithy.NewStaticSchema(&set, 816),
+	smithy.NewStaticSchema(&set, 817),
+	smithy.NewStaticSchema(&set, 818),
+	smithy.NewStaticSchema(&set, 819),
+	smithy.NewStaticSchema(&set, 820),
+	smithy.NewStaticSchema(&set, 821),
+	smithy.NewStaticSchema(&set, 822),
+	smithy.NewStaticSchema(&set, 823),
+	smithy.NewStaticSchema(&set, 824),
+	smithy.NewStaticSchema(&set, 825),
+	smithy.NewStaticSchema(&set, 826),
+	smithy.NewStaticSchema(&set, 827),
+	smithy.NewStaticSchema(&set, 828),
+	smithy.NewStaticSchema(&set, 829),
+	smithy.NewStaticSchema(&set, 830),
+	smithy.NewStaticSchema(&set, 831),
+	smithy.NewStaticSchema(&set, 832),
+	smithy.NewStaticSchema(&set, 833),
+	smithy.NewStaticSchema(&set, 834),
+	smithy.NewStaticSchema(&set, 835),
+	smithy.NewStaticSchema(&set, 836),
+	smithy.NewStaticSchema(&set, 837),
+	smithy.NewStaticSchema(&set, 838),
+	smithy.NewStaticSchema(&set, 839),
+	smithy.NewStaticSchema(&set, 840),
+	smithy.NewStaticSchema(&set, 841),
+	smithy.NewStaticSchema(&set, 842),
+	smithy.NewStaticSchema(&set, 843),
+	smithy.NewStaticSchema(&set, 844),
+	smithy.NewStaticSchema(&set, 845),
+	smithy.NewStaticSchema(&set, 846),
+	smithy.NewStaticSchema(&set, 847),
+	smithy.NewStaticSchema(&set, 848),
+	smithy.NewStaticSchema(&set, 849),
+	smithy.NewStaticSchema(&set, 850),
+	smithy.NewStaticSchema(&set, 851),
+	smithy.NewStaticSchema(&set, 852),
+	smithy.NewStaticSchema(&set, 853),
+	smithy.NewStaticSchema(&set, 854),
+	smithy.NewStaticSchema(&set, 855),
+	smithy.NewStaticSchema(&set, 856),
+	smithy.NewStaticSchema(&set, 857),
+	smithy.NewStaticSchema(&set, 858),
+	smithy.NewStaticSchema(&set, 859),
+	smithy.NewStaticSchema(&set, 860),
+	smithy.NewStaticSchema(&set, 861),
+	smithy.NewStaticSchema(&set, 862),
+	smithy.NewStaticSchema(&set, 863),
+	smithy.NewStaticSchema(&set, 864),
+	smithy.NewStaticSchema(&set, 865),
+	smithy.NewStaticSchema(&set, 866),
+	smithy.NewStaticSchema(&set, 867),
+	smithy.NewStaticSchema(&set, 868),
+	smithy.NewStaticSchema(&set, 869),
+	smithy.NewStaticSchema(&set, 870),
+	smithy.NewStaticSchema(&set, 871),
+	smithy.NewStaticSchema(&set, 872),
+	smithy.NewStaticSchema(&set, 873),
+	smithy.NewStaticSchema(&set, 874),
+	smithy.NewStaticSchema(&set, 875),
+	smithy.NewStaticSchema(&set, 876),
+	smithy.NewStaticSchema(&set, 877),
+	smithy.NewStaticSchema(&set, 878),
+	smithy.NewStaticSchema(&set, 879),
+	smithy.NewStaticSchema(&set, 880),
+	smithy.NewStaticSchema(&set, 881),
+	smithy.NewStaticSchema(&set, 882),
+	smithy.NewStaticSchema(&set, 883),
+	smithy.NewStaticSchema(&set, 884),
+	smithy.NewStaticSchema(&set, 885),
+	smithy.NewStaticSchema(&set, 886),
+	smithy.NewStaticSchema(&set, 887),
+	smithy.NewStaticSchema(&set, 888),
+	smithy.NewStaticSchema(&set, 889),
+	smithy.NewStaticSchema(&set, 890),
+	smithy.NewStaticSchema(&set, 891),
+	smithy.NewStaticSchema(&set, 892),
+	smithy.NewStaticSchema(&set, 893),
+	smithy.NewStaticSchema(&set, 894),
+	smithy.NewStaticSchema(&set, 895),
+	smithy.NewStaticSchema(&set, 896),
+	smithy.NewStaticSchema(&set, 897),
+	smithy.NewStaticSchema(&set, 898),
+	smithy.NewStaticSchema(&set, 899),
+	smithy.NewStaticSchema(&set, 900),
+	smithy.NewStaticSchema(&set, 901),
+	smithy.NewStaticSchema(&set, 902),
+	smithy.NewStaticSchema(&set, 903),
+	smithy.NewStaticSchema(&set, 904),
+	smithy.NewStaticSchema(&set, 905),
+	smithy.NewStaticSchema(&set, 906),
+	smithy.NewStaticSchema(&set, 907),
+	smithy.NewStaticSchema(&set, 908),
+	smithy.NewStaticSchema(&set, 909),
+	smithy.NewStaticSchema(&set, 910),
+	smithy.NewStaticSchema(&set, 911),
+	smithy.NewStaticSchema(&set, 912),
+	smithy.NewStaticSchema(&set, 913),
+	smithy.NewStaticSchema(&set, 914),
+	smithy.NewStaticSchema(&set, 915),
+	smithy.NewStaticSchema(&set, 916),
+	smithy.NewStaticSchema(&set, 917),
+	smithy.NewStaticSchema(&set, 918),
+	smithy.NewStaticSchema(&set, 919),
+	smithy.NewStaticSchema(&set, 920),
+	smithy.NewStaticSchema(&set, 921),
+	smithy.NewStaticSchema(&set, 922),
+	smithy.NewStaticSchema(&set, 923),
+	smithy.NewStaticSchema(&set, 924),
+	smithy.NewStaticSchema(&set, 925),
+	smithy.NewStaticSchema(&set, 926),
+	smithy.NewStaticSchema(&set, 927),
+	smithy.NewStaticSchema(&set, 928),
+	smithy.NewStaticSchema(&set, 929),
+	smithy.NewStaticSchema(&set, 930),
+	smithy.NewStaticSchema(&set, 931),
+	smithy.NewStaticSchema(&set, 932),
+	smithy.NewStaticSchema(&set, 933),
+	smithy.NewStaticSchema(&set, 934),
+	smithy.NewStaticSchema(&set, 935),
+	smithy.NewStaticSchema(&set, 936),
+	smithy.NewStaticSchema(&set, 937),
+	smithy.NewStaticSchema(&set, 938),
+	smithy.NewStaticSchema(&set, 939),
+	smithy.NewStaticSchema(&set, 940),
+	smithy.NewStaticSchema(&set, 941),
+	smithy.NewStaticSchema(&set, 942),
+	smithy.NewStaticSchema(&set, 943),
+	smithy.NewStaticSchema(&set, 944),
+	smithy.NewStaticSchema(&set, 945),
+	smithy.NewStaticSchema(&set, 946),
+	smithy.NewStaticSchema(&set, 947),
+	smithy.NewStaticSchema(&set, 948),
+	smithy.NewStaticSchema(&set, 949),
+	smithy.NewStaticSchema(&set, 950),
+	smithy.NewStaticSchema(&set, 951),
+	smithy.NewStaticSchema(&set, 952),
+	smithy.NewStaticSchema(&set, 953),
+	smithy.NewStaticSchema(&set, 954),
+	smithy.NewStaticSchema(&set, 955),
+	smithy.NewStaticSchema(&set, 956),
+	smithy.NewStaticSchema(&set, 957),
+	smithy.NewStaticSchema(&set, 958),
+	smithy.NewStaticSchema(&set, 959),
+	smithy.NewStaticSchema(&set, 960),
+	smithy.NewStaticSchema(&set, 961),
+	smithy.NewStaticSchema(&set, 962),
+	smithy.NewStaticSchema(&set, 963),
+	smithy.NewStaticSchema(&set, 964),
+	smithy.NewStaticSchema(&set, 965),
+	smithy.NewStaticSchema(&set, 966),
+	smithy.NewStaticSchema(&set, 967),
+	smithy.NewStaticSchema(&set, 968),
+	smithy.NewStaticSchema(&set, 969),
+	smithy.NewStaticSchema(&set, 970),
+	smithy.NewStaticSchema(&set, 971),
+	smithy.NewStaticSchema(&set, 972),
+	smithy.NewStaticSchema(&set, 973),
+	smithy.NewStaticSchema(&set, 974),
+	smithy.NewStaticSchema(&set, 975),
+	smithy.NewStaticSchema(&set, 976),
+	smithy.NewStaticSchema(&set, 977),
+	smithy.NewStaticSchema(&set, 978),
+	smithy.NewStaticSchema(&set, 979),
+	smithy.NewStaticSchema(&set, 980),
+	smithy.NewStaticSchema(&set, 981),
+	smithy.NewStaticSchema(&set, 982),
+	smithy.NewStaticSchema(&set, 983),
+	smithy.NewStaticSchema(&set, 984),
+	smithy.NewStaticSchema(&set, 985),
+	smithy.NewStaticSchema(&set, 986),
+	smithy.NewStaticSchema(&set, 987),
+	smithy.NewStaticSchema(&set, 988),
+	smithy.NewStaticSchema(&set, 989),
+	smithy.NewStaticSchema(&set, 990),
+	smithy.NewStaticSchema(&set, 991),
+	smithy.NewStaticSchema(&set, 992),
+	smithy.NewStaticSchema(&set, 993),
+	smithy.NewStaticSchema(&set, 994),
+	smithy.NewStaticSchema(&set, 995),
+	smithy.NewStaticSchema(&set, 996),
+	smithy.NewStaticSchema(&set, 997),
+	smithy.NewStaticSchema(&set, 998),
+	smithy.NewStaticSchema(&set, 999),
+	smithy.NewStaticSchema(&set, 1000),
+	smithy.NewStaticSchema(&set, 1001),
+	smithy.NewStaticSchema(&set, 1002),
+	smithy.NewStaticSchema(&set, 1003),
+	smithy.NewStaticSchema(&set, 1004),
+	smithy.NewStaticSchema(&set, 1005),
+	smithy.NewStaticSchema(&set, 1006),
+	smithy.NewStaticSchema(&set, 1007),
+	smithy.NewStaticSchema(&set, 1008),
+	smithy.NewStaticSchema(&set, 1009),
+}
+
+var CreateCallAnalyticsCategory = &handles[0]
+
+var CreateLanguageModel = &handles[1]
+
+var CreateMedicalVocabulary = &handles[2]
+
+var CreateVocabulary = &handles[3]
+
+var CreateVocabularyFilter = &handles[4]
+
+var DeleteCallAnalyticsCategory = &handles[5]
+
+var DeleteCallAnalyticsJob = &handles[6]
+
+var DeleteLanguageModel = &handles[7]
+
+var DeleteMedicalScribeJob = &handles[8]
+
+var DeleteMedicalTranscriptionJob = &handles[9]
+
+var DeleteMedicalVocabulary = &handles[10]
+
+var DeleteTranscriptionJob = &handles[11]
+
+var DeleteVocabulary = &handles[12]
+
+var DeleteVocabularyFilter = &handles[13]
+
+var DescribeLanguageModel = &handles[14]
+
+var GetCallAnalyticsCategory = &handles[15]
+
+var GetCallAnalyticsJob = &handles[16]
+
+var GetMedicalScribeJob = &handles[17]
+
+var GetMedicalTranscriptionJob = &handles[18]
+
+var GetMedicalVocabulary = &handles[19]
+
+var GetTranscriptionJob = &handles[20]
+
+var GetVocabulary = &handles[21]
+
+var GetVocabularyFilter = &handles[22]
+
+var ListCallAnalyticsCategories = &handles[23]
+
+var ListCallAnalyticsJobs = &handles[24]
+
+var ListLanguageModels = &handles[25]
+
+var ListMedicalScribeJobs = &handles[26]
+
+var ListMedicalTranscriptionJobs = &handles[27]
+
+var ListMedicalVocabularies = &handles[28]
+
+var ListTagsForResource = &handles[29]
+
+var ListTranscriptionJobs = &handles[30]
+
+var ListVocabularies = &handles[31]
+
+var ListVocabularyFilters = &handles[32]
+
+var StartCallAnalyticsJob = &handles[33]
+
+var StartMedicalScribeJob = &handles[34]
+
+var StartMedicalTranscriptionJob = &handles[35]
+
+var StartTranscriptionJob = &handles[36]
+
+var TagResource = &handles[37]
+
+var UntagResource = &handles[38]
+
+var UpdateCallAnalyticsCategory = &handles[39]
+
+var UpdateLanguageModel = &handles[40]
+
+var UpdateMedicalVocabulary = &handles[41]
+
+var UpdateVocabulary = &handles[42]
+
+var UpdateVocabularyFilter = &handles[43]
+
+var _Transcribe = &handles[44]
+
+var AbsoluteTimeRange = &handles[45]
+var AbsoluteTimeRange_StartTime = &handles[46]
+var AbsoluteTimeRange_EndTime = &handles[47]
+var AbsoluteTimeRange_First = &handles[48]
+var AbsoluteTimeRange_Last = &handles[49]
+
+var BadRequestException = &handles[50]
+var BadRequestException_Message = &handles[51]
+
+var BaseModelName = &handles[52]
+var BaseModelName_NARROW_BAND = &handles[53]
+var BaseModelName_WIDE_BAND = &handles[54]
+
+var _Boolean = &handles[55]
+
+var CallAnalyticsFeature = &handles[56]
+var CallAnalyticsFeature_GENERATIVE_SUMMARIZATION = &handles[57]
+
+var CallAnalyticsJob = &handles[58]
+var CallAnalyticsJob_CallAnalyticsJobName = &handles[59]
+var CallAnalyticsJob_CallAnalyticsJobStatus = &handles[60]
+var CallAnalyticsJob_CallAnalyticsJobDetails = &handles[61]
+var CallAnalyticsJob_LanguageCode = &handles[62]
+var CallAnalyticsJob_MediaSampleRateHertz = &handles[63]
+var CallAnalyticsJob_MediaFormat = &handles[64]
+var CallAnalyticsJob_Media = &handles[65]
+var CallAnalyticsJob_Transcript = &handles[66]
+var CallAnalyticsJob_StartTime = &handles[67]
+var CallAnalyticsJob_CreationTime = &handles[68]
+var CallAnalyticsJob_CompletionTime = &handles[69]
+var CallAnalyticsJob_FailureReason = &handles[70]
+var CallAnalyticsJob_DataAccessRoleArn = &handles[71]
+var CallAnalyticsJob_IdentifiedLanguageScore = &handles[72]
+var CallAnalyticsJob_Settings = &handles[73]
+var CallAnalyticsJob_ChannelDefinitions = &handles[74]
+var CallAnalyticsJob_Tags = &handles[75]
+
+var CallAnalyticsJobDetails = &handles[76]
+var CallAnalyticsJobDetails_Skipped = &handles[77]
+
+var _CallAnalyticsJobName = &handles[78]
+
+var CallAnalyticsJobSettings = &handles[79]
+var CallAnalyticsJobSettings_VocabularyName = &handles[80]
+var CallAnalyticsJobSettings_VocabularyFilterName = &handles[81]
+var CallAnalyticsJobSettings_VocabularyFilterMethod = &handles[82]
+var CallAnalyticsJobSettings_LanguageModelName = &handles[83]
+var CallAnalyticsJobSettings_ContentRedaction = &handles[84]
+var CallAnalyticsJobSettings_LanguageOptions = &handles[85]
+var CallAnalyticsJobSettings_LanguageIdSettings = &handles[86]
+var CallAnalyticsJobSettings_Summarization = &handles[87]
+
+var CallAnalyticsJobStatus = &handles[88]
+var CallAnalyticsJobStatus_QUEUED = &handles[89]
+var CallAnalyticsJobStatus_IN_PROGRESS = &handles[90]
+var CallAnalyticsJobStatus_FAILED = &handles[91]
+var CallAnalyticsJobStatus_COMPLETED = &handles[92]
+
+var _CallAnalyticsJobSummaries = &handles[93]
+var _CallAnalyticsJobSummaries_member = &handles[94]
+
+var CallAnalyticsJobSummary = &handles[95]
+var CallAnalyticsJobSummary_CallAnalyticsJobName = &handles[96]
+var CallAnalyticsJobSummary_CreationTime = &handles[97]
+var CallAnalyticsJobSummary_StartTime = &handles[98]
+var CallAnalyticsJobSummary_CompletionTime = &handles[99]
+var CallAnalyticsJobSummary_LanguageCode = &handles[100]
+var CallAnalyticsJobSummary_CallAnalyticsJobStatus = &handles[101]
+var CallAnalyticsJobSummary_CallAnalyticsJobDetails = &handles[102]
+var CallAnalyticsJobSummary_FailureReason = &handles[103]
+
+var CallAnalyticsSkippedFeature = &handles[104]
+var CallAnalyticsSkippedFeature_Feature = &handles[105]
+var CallAnalyticsSkippedFeature_ReasonCode = &handles[106]
+var CallAnalyticsSkippedFeature_Message = &handles[107]
+
+var _CallAnalyticsSkippedFeatureList = &handles[108]
+var _CallAnalyticsSkippedFeatureList_member = &handles[109]
+
+var CallAnalyticsSkippedReasonCode = &handles[110]
+var CallAnalyticsSkippedReasonCode_INSUFFICIENT_CONVERSATION_CONTENT = &handles[111]
+var CallAnalyticsSkippedReasonCode_FAILED_SAFETY_GUIDELINES = &handles[112]
+
+var _CategoryName = &handles[113]
+
+var CategoryProperties = &handles[114]
+var CategoryProperties_CategoryName = &handles[115]
+var CategoryProperties_Rules = &handles[116]
+var CategoryProperties_CreateTime = &handles[117]
+var CategoryProperties_LastUpdateTime = &handles[118]
+var CategoryProperties_Tags = &handles[119]
+var CategoryProperties_InputType = &handles[120]
+
+var _CategoryPropertiesList = &handles[121]
+var _CategoryPropertiesList_member = &handles[122]
+
+var ChannelDefinition = &handles[123]
+var ChannelDefinition_ChannelId = &handles[124]
+var ChannelDefinition_ParticipantRole = &handles[125]
+
+var _ChannelDefinitions = &handles[126]
+var _ChannelDefinitions_member = &handles[127]
+
+var _ChannelId = &handles[128]
+
+var ClinicalNoteGenerationSettings = &handles[129]
+var ClinicalNoteGenerationSettings_NoteTemplate = &handles[130]
+
+var CLMLanguageCode = &handles[131]
+var CLMLanguageCode_EN_US = &handles[132]
+var CLMLanguageCode_HI_IN = &handles[133]
+var CLMLanguageCode_ES_US = &handles[134]
+var CLMLanguageCode_EN_GB = &handles[135]
+var CLMLanguageCode_EN_AU = &handles[136]
+var CLMLanguageCode_DE_DE = &handles[137]
+var CLMLanguageCode_JA_JP = &handles[138]
+
+var ConflictException = &handles[139]
+var ConflictException_Message = &handles[140]
+
+var ContentRedaction = &handles[141]
+var ContentRedaction_RedactionType = &handles[142]
+var ContentRedaction_RedactionOutput = &handles[143]
+var ContentRedaction_PiiEntityTypes = &handles[144]
+
+var _DataAccessRoleArn = &handles[145]
+
+var _DateTime = &handles[146]
+
+var _DurationInSeconds = &handles[147]
+
+var EncryptionConfiguration = &handles[148]
+var EncryptionConfiguration_KMSEncryptionContext = &handles[149]
+var EncryptionConfiguration_KMSKey = &handles[150]
+
+var _FailureReason = &handles[151]
+
+var _IdentifiedLanguageScore = &handles[152]
+
+var InputDataConfig = &handles[153]
+var InputDataConfig_S3Uri = &handles[154]
+var InputDataConfig_TuningDataS3Uri = &handles[155]
+var InputDataConfig_DataAccessRoleArn = &handles[156]
+
+var InputType = &handles[157]
+var InputType_REAL_TIME = &handles[158]
+var InputType_POST_CALL = &handles[159]
+
+var InternalFailureException = &handles[160]
+var InternalFailureException_Message = &handles[161]
+
+var InterruptionFilter = &handles[162]
+var InterruptionFilter_Threshold = &handles[163]
+var InterruptionFilter_ParticipantRole = &handles[164]
+var InterruptionFilter_AbsoluteTimeRange = &handles[165]
+var InterruptionFilter_RelativeTimeRange = &handles[166]
+var InterruptionFilter_Negate = &handles[167]
+
+var JobExecutionSettings = &handles[168]
+var JobExecutionSettings_AllowDeferredExecution = &handles[169]
+var JobExecutionSettings_DataAccessRoleArn = &handles[170]
+
+var _KMSEncryptionContextMap = &handles[171]
+var _KMSEncryptionContextMap_key = &handles[172]
+var _KMSEncryptionContextMap_value = &handles[173]
+
+var _KMSKeyId = &handles[174]
+
+var LanguageCode = &handles[175]
+var LanguageCode_AF_ZA = &handles[176]
+var LanguageCode_AR_AE = &handles[177]
+var LanguageCode_AR_SA = &handles[178]
+var LanguageCode_AM_ET = &handles[179]
+var LanguageCode_CY_GB = &handles[180]
+var LanguageCode_DA_DK = &handles[181]
+var LanguageCode_DE_CH = &handles[182]
+var LanguageCode_DE_DE = &handles[183]
+var LanguageCode_EN_AB = &handles[184]
+var LanguageCode_EN_AU = &handles[185]
+var LanguageCode_EN_GB = &handles[186]
+var LanguageCode_EN_IE = &handles[187]
+var LanguageCode_EN_IN = &handles[188]
+var LanguageCode_EN_US = &handles[189]
+var LanguageCode_EN_WL = &handles[190]
+var LanguageCode_ES_ES = &handles[191]
+var LanguageCode_ES_MX = &handles[192]
+var LanguageCode_ES_US = &handles[193]
+var LanguageCode_FA_AF = &handles[194]
+var LanguageCode_FA_IR = &handles[195]
+var LanguageCode_FR_CA = &handles[196]
+var LanguageCode_FR_FR = &handles[197]
+var LanguageCode_GA_IE = &handles[198]
+var LanguageCode_GD_GB = &handles[199]
+var LanguageCode_HE_IL = &handles[200]
+var LanguageCode_HI_IN = &handles[201]
+var LanguageCode_HT_HT = &handles[202]
+var LanguageCode_ID_ID = &handles[203]
+var LanguageCode_IT_IT = &handles[204]
+var LanguageCode_JA_JP = &handles[205]
+var LanguageCode_JV_ID = &handles[206]
+var LanguageCode_KM_KH = &handles[207]
+var LanguageCode_KO_KR = &handles[208]
+var LanguageCode_MY_MM = &handles[209]
+var LanguageCode_MS_MY = &handles[210]
+var LanguageCode_NL_NL = &handles[211]
+var LanguageCode_PT_BR = &handles[212]
+var LanguageCode_PT_PT = &handles[213]
+var LanguageCode_RU_RU = &handles[214]
+var LanguageCode_TA_IN = &handles[215]
+var LanguageCode_TE_IN = &handles[216]
+var LanguageCode_TR_TR = &handles[217]
+var LanguageCode_ZH_CN = &handles[218]
+var LanguageCode_ZH_TW = &handles[219]
+var LanguageCode_TH_TH = &handles[220]
+var LanguageCode_EN_ZA = &handles[221]
+var LanguageCode_EN_NZ = &handles[222]
+var LanguageCode_VI_VN = &handles[223]
+var LanguageCode_SV_SE = &handles[224]
+var LanguageCode_AB_GE = &handles[225]
+var LanguageCode_AST_ES = &handles[226]
+var LanguageCode_AZ_AZ = &handles[227]
+var LanguageCode_BA_RU = &handles[228]
+var LanguageCode_BE_BY = &handles[229]
+var LanguageCode_BG_BG = &handles[230]
+var LanguageCode_BN_IN = &handles[231]
+var LanguageCode_BS_BA = &handles[232]
+var LanguageCode_CA_ES = &handles[233]
+var LanguageCode_CKB_IQ = &handles[234]
+var LanguageCode_CKB_IR = &handles[235]
+var LanguageCode_CS_CZ = &handles[236]
+var LanguageCode_CY_WL = &handles[237]
+var LanguageCode_EL_GR = &handles[238]
+var LanguageCode_ET_EE = &handles[239]
+var LanguageCode_ET_ET = &handles[240]
+var LanguageCode_EU_ES = &handles[241]
+var LanguageCode_FI_FI = &handles[242]
+var LanguageCode_GL_ES = &handles[243]
+var LanguageCode_GU_IN = &handles[244]
+var LanguageCode_HA_NG = &handles[245]
+var LanguageCode_HR_HR = &handles[246]
+var LanguageCode_HU_HU = &handles[247]
+var LanguageCode_HY_AM = &handles[248]
+var LanguageCode_IS_IS = &handles[249]
+var LanguageCode_KA_GE = &handles[250]
+var LanguageCode_KAB_DZ = &handles[251]
+var LanguageCode_KK_KZ = &handles[252]
+var LanguageCode_KN_IN = &handles[253]
+var LanguageCode_KY_KG = &handles[254]
+var LanguageCode_LG_IN = &handles[255]
+var LanguageCode_LT_LT = &handles[256]
+var LanguageCode_LV_LV = &handles[257]
+var LanguageCode_MHR_RU = &handles[258]
+var LanguageCode_MI_NZ = &handles[259]
+var LanguageCode_MK_MK = &handles[260]
+var LanguageCode_ML_IN = &handles[261]
+var LanguageCode_MN_MN = &handles[262]
+var LanguageCode_MR_IN = &handles[263]
+var LanguageCode_MT_MT = &handles[264]
+var LanguageCode_NO_NO = &handles[265]
+var LanguageCode_NE_NP = &handles[266]
+var LanguageCode_OR_IN = &handles[267]
+var LanguageCode_PA_IN = &handles[268]
+var LanguageCode_PL_PL = &handles[269]
+var LanguageCode_PS_AF = &handles[270]
+var LanguageCode_RO_RO = &handles[271]
+var LanguageCode_RW_RW = &handles[272]
+var LanguageCode_SI_LK = &handles[273]
+var LanguageCode_SK_SK = &handles[274]
+var LanguageCode_SL_SI = &handles[275]
+var LanguageCode_SO_SO = &handles[276]
+var LanguageCode_SQ_AL = &handles[277]
+var LanguageCode_SR_RS = &handles[278]
+var LanguageCode_SU_ID = &handles[279]
+var LanguageCode_SW_BI = &handles[280]
+var LanguageCode_SW_KE = &handles[281]
+var LanguageCode_SW_RW = &handles[282]
+var LanguageCode_SW_TZ = &handles[283]
+var LanguageCode_SW_UG = &handles[284]
+var LanguageCode_TL_PH = &handles[285]
+var LanguageCode_TT_RU = &handles[286]
+var LanguageCode_UG_CN = &handles[287]
+var LanguageCode_UK_UA = &handles[288]
+var LanguageCode_UZ_UZ = &handles[289]
+var LanguageCode_WO_SN = &handles[290]
+var LanguageCode_ZH_HK = &handles[291]
+var LanguageCode_ZU_ZA = &handles[292]
+
+var LanguageCodeItem = &handles[293]
+var LanguageCodeItem_LanguageCode = &handles[294]
+var LanguageCodeItem_DurationInSeconds = &handles[295]
+
+var _LanguageCodeList = &handles[296]
+var _LanguageCodeList_member = &handles[297]
+
+var LanguageIdSettings = &handles[298]
+var LanguageIdSettings_VocabularyName = &handles[299]
+var LanguageIdSettings_VocabularyFilterName = &handles[300]
+var LanguageIdSettings_LanguageModelName = &handles[301]
+
+var _LanguageIdSettingsMap = &handles[302]
+var _LanguageIdSettingsMap_key = &handles[303]
+var _LanguageIdSettingsMap_value = &handles[304]
+
+var LanguageModel = &handles[305]
+var LanguageModel_ModelName = &handles[306]
+var LanguageModel_CreateTime = &handles[307]
+var LanguageModel_LastModifiedTime = &handles[308]
+var LanguageModel_LanguageCode = &handles[309]
+var LanguageModel_BaseModelName = &handles[310]
+var LanguageModel_ModelStatus = &handles[311]
+var LanguageModel_UpgradeAvailability = &handles[312]
+var LanguageModel_FailureReason = &handles[313]
+var LanguageModel_InputDataConfig = &handles[314]
+var LanguageModel_EncryptionConfiguration = &handles[315]
+
+var _LanguageOptions = &handles[316]
+var _LanguageOptions_member = &handles[317]
+
+var LimitExceededException = &handles[318]
+var LimitExceededException_Message = &handles[319]
+
+var _MaxAlternatives = &handles[320]
+
+var _MaxResults = &handles[321]
+
+var _MaxSpeakers = &handles[322]
+
+var Media = &handles[323]
+var Media_MediaFileUri = &handles[324]
+var Media_RedactedMediaFileUri = &handles[325]
+
+var MediaFormat = &handles[326]
+var MediaFormat_MP3 = &handles[327]
+var MediaFormat_MP4 = &handles[328]
+var MediaFormat_WAV = &handles[329]
+var MediaFormat_FLAC = &handles[330]
+var MediaFormat_OGG = &handles[331]
+var MediaFormat_AMR = &handles[332]
+var MediaFormat_WEBM = &handles[333]
+var MediaFormat_M4A = &handles[334]
+
+var _MediaSampleRateHertz = &handles[335]
+
+var MedicalContentIdentificationType = &handles[336]
+var MedicalContentIdentificationType_PHI = &handles[337]
+
+var _MedicalMediaSampleRateHertz = &handles[338]
+
+var MedicalScribeChannelDefinition = &handles[339]
+var MedicalScribeChannelDefinition_ChannelId = &handles[340]
+var MedicalScribeChannelDefinition_ParticipantRole = &handles[341]
+
+var _MedicalScribeChannelDefinitions = &handles[342]
+var _MedicalScribeChannelDefinitions_member = &handles[343]
+
+var _MedicalScribeChannelId = &handles[344]
+
+var MedicalScribeContext = &handles[345]
+var MedicalScribeContext_PatientContext = &handles[346]
+
+var MedicalScribeJob = &handles[347]
+var MedicalScribeJob_MedicalScribeJobName = &handles[348]
+var MedicalScribeJob_MedicalScribeJobStatus = &handles[349]
+var MedicalScribeJob_LanguageCode = &handles[350]
+var MedicalScribeJob_Media = &handles[351]
+var MedicalScribeJob_MedicalScribeOutput = &handles[352]
+var MedicalScribeJob_StartTime = &handles[353]
+var MedicalScribeJob_CreationTime = &handles[354]
+var MedicalScribeJob_CompletionTime = &handles[355]
+var MedicalScribeJob_FailureReason = &handles[356]
+var MedicalScribeJob_Settings = &handles[357]
+var MedicalScribeJob_DataAccessRoleArn = &handles[358]
+var MedicalScribeJob_ChannelDefinitions = &handles[359]
+var MedicalScribeJob_MedicalScribeContextProvided = &handles[360]
+var MedicalScribeJob_Tags = &handles[361]
+
+var MedicalScribeJobStatus = &handles[362]
+var MedicalScribeJobStatus_QUEUED = &handles[363]
+var MedicalScribeJobStatus_IN_PROGRESS = &handles[364]
+var MedicalScribeJobStatus_FAILED = &handles[365]
+var MedicalScribeJobStatus_COMPLETED = &handles[366]
+
+var _MedicalScribeJobSummaries = &handles[367]
+var _MedicalScribeJobSummaries_member = &handles[368]
+
+var MedicalScribeJobSummary = &handles[369]
+var MedicalScribeJobSummary_MedicalScribeJobName = &handles[370]
+var MedicalScribeJobSummary_CreationTime = &handles[371]
+var MedicalScribeJobSummary_StartTime = &handles[372]
+var MedicalScribeJobSummary_CompletionTime = &handles[373]
+var MedicalScribeJobSummary_LanguageCode = &handles[374]
+var MedicalScribeJobSummary_MedicalScribeJobStatus = &handles[375]
+var MedicalScribeJobSummary_FailureReason = &handles[376]
+
+var MedicalScribeLanguageCode = &handles[377]
+var MedicalScribeLanguageCode_EN_US = &handles[378]
+
+var MedicalScribeNoteTemplate = &handles[379]
+var MedicalScribeNoteTemplate_HISTORY_AND_PHYSICAL = &handles[380]
+var MedicalScribeNoteTemplate_GIRPP = &handles[381]
+var MedicalScribeNoteTemplate_BIRP = &handles[382]
+var MedicalScribeNoteTemplate_SIRP = &handles[383]
+var MedicalScribeNoteTemplate_DAP = &handles[384]
+var MedicalScribeNoteTemplate_BEHAVIORAL_SOAP = &handles[385]
+var MedicalScribeNoteTemplate_PHYSICAL_SOAP = &handles[386]
+
+var MedicalScribeOutput = &handles[387]
+var MedicalScribeOutput_TranscriptFileUri = &handles[388]
+var MedicalScribeOutput_ClinicalDocumentUri = &handles[389]
+
+var MedicalScribeParticipantRole = &handles[390]
+var MedicalScribeParticipantRole_PATIENT = &handles[391]
+var MedicalScribeParticipantRole_CLINICIAN = &handles[392]
+
+var MedicalScribePatientContext = &handles[393]
+var MedicalScribePatientContext_Pronouns = &handles[394]
+
+var MedicalScribeSettings = &handles[395]
+var MedicalScribeSettings_ShowSpeakerLabels = &handles[396]
+var MedicalScribeSettings_MaxSpeakerLabels = &handles[397]
+var MedicalScribeSettings_ChannelIdentification = &handles[398]
+var MedicalScribeSettings_VocabularyName = &handles[399]
+var MedicalScribeSettings_VocabularyFilterName = &handles[400]
+var MedicalScribeSettings_VocabularyFilterMethod = &handles[401]
+var MedicalScribeSettings_ClinicalNoteGenerationSettings = &handles[402]
+
+var MedicalTranscript = &handles[403]
+var MedicalTranscript_TranscriptFileUri = &handles[404]
+
+var MedicalTranscriptionJob = &handles[405]
+var MedicalTranscriptionJob_MedicalTranscriptionJobName = &handles[406]
+var MedicalTranscriptionJob_TranscriptionJobStatus = &handles[407]
+var MedicalTranscriptionJob_LanguageCode = &handles[408]
+var MedicalTranscriptionJob_MediaSampleRateHertz = &handles[409]
+var MedicalTranscriptionJob_MediaFormat = &handles[410]
+var MedicalTranscriptionJob_Media = &handles[411]
+var MedicalTranscriptionJob_Transcript = &handles[412]
+var MedicalTranscriptionJob_StartTime = &handles[413]
+var MedicalTranscriptionJob_CreationTime = &handles[414]
+var MedicalTranscriptionJob_CompletionTime = &handles[415]
+var MedicalTranscriptionJob_FailureReason = &handles[416]
+var MedicalTranscriptionJob_Settings = &handles[417]
+var MedicalTranscriptionJob_ContentIdentificationType = &handles[418]
+var MedicalTranscriptionJob_Specialty = &handles[419]
+var MedicalTranscriptionJob_Type = &handles[420]
+var MedicalTranscriptionJob_Tags = &handles[421]
+
+var _MedicalTranscriptionJobSummaries = &handles[422]
+var _MedicalTranscriptionJobSummaries_member = &handles[423]
+
+var MedicalTranscriptionJobSummary = &handles[424]
+var MedicalTranscriptionJobSummary_MedicalTranscriptionJobName = &handles[425]
+var MedicalTranscriptionJobSummary_CreationTime = &handles[426]
+var MedicalTranscriptionJobSummary_StartTime = &handles[427]
+var MedicalTranscriptionJobSummary_CompletionTime = &handles[428]
+var MedicalTranscriptionJobSummary_LanguageCode = &handles[429]
+var MedicalTranscriptionJobSummary_TranscriptionJobStatus = &handles[430]
+var MedicalTranscriptionJobSummary_FailureReason = &handles[431]
+var MedicalTranscriptionJobSummary_OutputLocationType = &handles[432]
+var MedicalTranscriptionJobSummary_Specialty = &handles[433]
+var MedicalTranscriptionJobSummary_ContentIdentificationType = &handles[434]
+var MedicalTranscriptionJobSummary_Type = &handles[435]
+
+var MedicalTranscriptionSetting = &handles[436]
+var MedicalTranscriptionSetting_ShowSpeakerLabels = &handles[437]
+var MedicalTranscriptionSetting_MaxSpeakerLabels = &handles[438]
+var MedicalTranscriptionSetting_ChannelIdentification = &handles[439]
+var MedicalTranscriptionSetting_ShowAlternatives = &handles[440]
+var MedicalTranscriptionSetting_MaxAlternatives = &handles[441]
+var MedicalTranscriptionSetting_VocabularyName = &handles[442]
+
+var _ModelName = &handles[443]
+
+var _Models = &handles[444]
+var _Models_member = &handles[445]
+
+var ModelSettings = &handles[446]
+var ModelSettings_LanguageModelName = &handles[447]
+
+var ModelStatus = &handles[448]
+var ModelStatus_IN_PROGRESS = &handles[449]
+var ModelStatus_FAILED = &handles[450]
+var ModelStatus_COMPLETED = &handles[451]
+
+var _NextToken = &handles[452]
+
+var _NonEmptyString = &handles[453]
+
+var NonTalkTimeFilter = &handles[454]
+var NonTalkTimeFilter_Threshold = &handles[455]
+var NonTalkTimeFilter_AbsoluteTimeRange = &handles[456]
+var NonTalkTimeFilter_RelativeTimeRange = &handles[457]
+var NonTalkTimeFilter_Negate = &handles[458]
+
+var NotFoundException = &handles[459]
+var NotFoundException_Message = &handles[460]
+
+var _OutputBucketName = &handles[461]
+
+var _OutputKey = &handles[462]
+
+var OutputLocationType = &handles[463]
+var OutputLocationType_CUSTOMER_BUCKET = &handles[464]
+var OutputLocationType_SERVICE_BUCKET = &handles[465]
+
+var ParticipantRole = &handles[466]
+var ParticipantRole_AGENT = &handles[467]
+var ParticipantRole_CUSTOMER = &handles[468]
+
+var _Percentage = &handles[469]
+
+var _Phrase = &handles[470]
+
+var _Phrases = &handles[471]
+var _Phrases_member = &handles[472]
+
+var PiiEntityType = &handles[473]
+var PiiEntityType_BANK_ACCOUNT_NUMBER = &handles[474]
+var PiiEntityType_BANK_ROUTING = &handles[475]
+var PiiEntityType_CREDIT_DEBIT_NUMBER = &handles[476]
+var PiiEntityType_CREDIT_DEBIT_CVV = &handles[477]
+var PiiEntityType_CREDIT_DEBIT_EXPIRY = &handles[478]
+var PiiEntityType_PIN = &handles[479]
+var PiiEntityType_EMAIL = &handles[480]
+var PiiEntityType_ADDRESS = &handles[481]
+var PiiEntityType_NAME = &handles[482]
+var PiiEntityType_PHONE = &handles[483]
+var PiiEntityType_SSN = &handles[484]
+var PiiEntityType_DATE_TIME = &handles[485]
+var PiiEntityType_PASSPORT_NUMBER = &handles[486]
+var PiiEntityType_DRIVER_ID = &handles[487]
+var PiiEntityType_URL = &handles[488]
+var PiiEntityType_AGE = &handles[489]
+var PiiEntityType_USERNAME = &handles[490]
+var PiiEntityType_PASSWORD = &handles[491]
+var PiiEntityType_AWS_ACCESS_KEY = &handles[492]
+var PiiEntityType_AWS_SECRET_KEY = &handles[493]
+var PiiEntityType_IP_ADDRESS = &handles[494]
+var PiiEntityType_MAC_ADDRESS = &handles[495]
+var PiiEntityType_LICENSE_PLATE = &handles[496]
+var PiiEntityType_VEHICLE_IDENTIFICATION_NUMBER = &handles[497]
+var PiiEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = &handles[498]
+var PiiEntityType_CA_HEALTH_NUMBER = &handles[499]
+var PiiEntityType_CA_SOCIAL_INSURANCE_NUMBER = &handles[500]
+var PiiEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = &handles[501]
+var PiiEntityType_SWIFT_CODE = &handles[502]
+var PiiEntityType_ALL = &handles[503]
+
+var _PiiEntityTypes = &handles[504]
+var _PiiEntityTypes_member = &handles[505]
+
+var _PrintableNonEmptyString = &handles[506]
+
+var Pronouns = &handles[507]
+var Pronouns_HE_HIM = &handles[508]
+var Pronouns_SHE_HER = &handles[509]
+var Pronouns_THEY_THEM = &handles[510]
+
+var RedactionOutput = &handles[511]
+var RedactionOutput_REDACTED = &handles[512]
+var RedactionOutput_REDACTED_AND_UNREDACTED = &handles[513]
+
+var RedactionType = &handles[514]
+var RedactionType_PII = &handles[515]
+
+var RelativeTimeRange = &handles[516]
+var RelativeTimeRange_StartPercentage = &handles[517]
+var RelativeTimeRange_EndPercentage = &handles[518]
+var RelativeTimeRange_First = &handles[519]
+var RelativeTimeRange_Last = &handles[520]
+
+var Rule = &handles[521]
+var Rule_NonTalkTimeFilter = &handles[522]
+var Rule_InterruptionFilter = &handles[523]
+var Rule_TranscriptFilter = &handles[524]
+var Rule_SentimentFilter = &handles[525]
+
+var _RuleList = &handles[526]
+var _RuleList_member = &handles[527]
+
+var SentimentFilter = &handles[528]
+var SentimentFilter_Sentiments = &handles[529]
+var SentimentFilter_AbsoluteTimeRange = &handles[530]
+var SentimentFilter_RelativeTimeRange = &handles[531]
+var SentimentFilter_ParticipantRole = &handles[532]
+var SentimentFilter_Negate = &handles[533]
+
+var SentimentValue = &handles[534]
+var SentimentValue_POSITIVE = &handles[535]
+var SentimentValue_NEGATIVE = &handles[536]
+var SentimentValue_NEUTRAL = &handles[537]
+var SentimentValue_MIXED = &handles[538]
+
+var _SentimentValueList = &handles[539]
+var _SentimentValueList_member = &handles[540]
+
+var Settings = &handles[541]
+var Settings_VocabularyName = &handles[542]
+var Settings_ShowSpeakerLabels = &handles[543]
+var Settings_MaxSpeakerLabels = &handles[544]
+var Settings_ChannelIdentification = &handles[545]
+var Settings_ShowAlternatives = &handles[546]
+var Settings_MaxAlternatives = &handles[547]
+var Settings_VocabularyFilterName = &handles[548]
+var Settings_VocabularyFilterMethod = &handles[549]
+
+var Specialty = &handles[550]
+var Specialty_PRIMARYCARE = &handles[551]
+
+var _String = &handles[552]
+
+var _StringTargetList = &handles[553]
+var _StringTargetList_member = &handles[554]
+
+var _SubtitleFileUris = &handles[555]
+var _SubtitleFileUris_member = &handles[556]
+
+var SubtitleFormat = &handles[557]
+var SubtitleFormat_VTT = &handles[558]
+var SubtitleFormat_SRT = &handles[559]
+
+var _SubtitleFormats = &handles[560]
+var _SubtitleFormats_member = &handles[561]
+
+var _SubtitleOutputStartIndex = &handles[562]
+
+var Subtitles = &handles[563]
+var Subtitles_Formats = &handles[564]
+var Subtitles_OutputStartIndex = &handles[565]
+
+var SubtitlesOutput = &handles[566]
+var SubtitlesOutput_Formats = &handles[567]
+var SubtitlesOutput_SubtitleFileUris = &handles[568]
+var SubtitlesOutput_OutputStartIndex = &handles[569]
+
+var Summarization = &handles[570]
+var Summarization_GenerateAbstractiveSummary = &handles[571]
+
+var Tag = &handles[572]
+var Tag_Key = &handles[573]
+var Tag_Value = &handles[574]
+
+var _TagKey = &handles[575]
+
+var _TagKeyList = &handles[576]
+var _TagKeyList_member = &handles[577]
+
+var _TagList = &handles[578]
+var _TagList_member = &handles[579]
+
+var _TagValue = &handles[580]
+
+var _TimestampMilliseconds = &handles[581]
+
+var _ToxicityCategories = &handles[582]
+var _ToxicityCategories_member = &handles[583]
+
+var ToxicityCategory = &handles[584]
+var ToxicityCategory_ALL = &handles[585]
+
+var _ToxicityDetection = &handles[586]
+var _ToxicityDetection_member = &handles[587]
+
+var ToxicityDetectionSettings = &handles[588]
+var ToxicityDetectionSettings_ToxicityCategories = &handles[589]
+
+var _TranscribeArn = &handles[590]
+
+var Transcript = &handles[591]
+var Transcript_TranscriptFileUri = &handles[592]
+var Transcript_RedactedTranscriptFileUri = &handles[593]
+
+var TranscriptFilter = &handles[594]
+var TranscriptFilter_TranscriptFilterType = &handles[595]
+var TranscriptFilter_AbsoluteTimeRange = &handles[596]
+var TranscriptFilter_RelativeTimeRange = &handles[597]
+var TranscriptFilter_ParticipantRole = &handles[598]
+var TranscriptFilter_Negate = &handles[599]
+var TranscriptFilter_Targets = &handles[600]
+
+var TranscriptFilterType = &handles[601]
+var TranscriptFilterType_EXACT = &handles[602]
+
+var TranscriptionJob = &handles[603]
+var TranscriptionJob_TranscriptionJobName = &handles[604]
+var TranscriptionJob_TranscriptionJobStatus = &handles[605]
+var TranscriptionJob_LanguageCode = &handles[606]
+var TranscriptionJob_MediaSampleRateHertz = &handles[607]
+var TranscriptionJob_MediaFormat = &handles[608]
+var TranscriptionJob_Media = &handles[609]
+var TranscriptionJob_Transcript = &handles[610]
+var TranscriptionJob_StartTime = &handles[611]
+var TranscriptionJob_CreationTime = &handles[612]
+var TranscriptionJob_CompletionTime = &handles[613]
+var TranscriptionJob_FailureReason = &handles[614]
+var TranscriptionJob_Settings = &handles[615]
+var TranscriptionJob_ModelSettings = &handles[616]
+var TranscriptionJob_JobExecutionSettings = &handles[617]
+var TranscriptionJob_ContentRedaction = &handles[618]
+var TranscriptionJob_IdentifyLanguage = &handles[619]
+var TranscriptionJob_IdentifyMultipleLanguages = &handles[620]
+var TranscriptionJob_LanguageOptions = &handles[621]
+var TranscriptionJob_IdentifiedLanguageScore = &handles[622]
+var TranscriptionJob_LanguageCodes = &handles[623]
+var TranscriptionJob_Tags = &handles[624]
+var TranscriptionJob_Subtitles = &handles[625]
+var TranscriptionJob_LanguageIdSettings = &handles[626]
+var TranscriptionJob_ToxicityDetection = &handles[627]
+
+var _TranscriptionJobName = &handles[628]
+
+var TranscriptionJobStatus = &handles[629]
+var TranscriptionJobStatus_QUEUED = &handles[630]
+var TranscriptionJobStatus_IN_PROGRESS = &handles[631]
+var TranscriptionJobStatus_FAILED = &handles[632]
+var TranscriptionJobStatus_COMPLETED = &handles[633]
+
+var _TranscriptionJobSummaries = &handles[634]
+var _TranscriptionJobSummaries_member = &handles[635]
+
+var TranscriptionJobSummary = &handles[636]
+var TranscriptionJobSummary_TranscriptionJobName = &handles[637]
+var TranscriptionJobSummary_CreationTime = &handles[638]
+var TranscriptionJobSummary_StartTime = &handles[639]
+var TranscriptionJobSummary_CompletionTime = &handles[640]
+var TranscriptionJobSummary_LanguageCode = &handles[641]
+var TranscriptionJobSummary_TranscriptionJobStatus = &handles[642]
+var TranscriptionJobSummary_FailureReason = &handles[643]
+var TranscriptionJobSummary_OutputLocationType = &handles[644]
+var TranscriptionJobSummary_ContentRedaction = &handles[645]
+var TranscriptionJobSummary_ModelSettings = &handles[646]
+var TranscriptionJobSummary_IdentifyLanguage = &handles[647]
+var TranscriptionJobSummary_IdentifyMultipleLanguages = &handles[648]
+var TranscriptionJobSummary_IdentifiedLanguageScore = &handles[649]
+var TranscriptionJobSummary_LanguageCodes = &handles[650]
+var TranscriptionJobSummary_ToxicityDetection = &handles[651]
+
+var Type = &handles[652]
+var Type_CONVERSATION = &handles[653]
+var Type_DICTATION = &handles[654]
+
+var _Uri = &handles[655]
+
+var _Vocabularies = &handles[656]
+var _Vocabularies_member = &handles[657]
+
+var VocabularyFilterInfo = &handles[658]
+var VocabularyFilterInfo_VocabularyFilterName = &handles[659]
+var VocabularyFilterInfo_LanguageCode = &handles[660]
+var VocabularyFilterInfo_LastModifiedTime = &handles[661]
+
+var VocabularyFilterMethod = &handles[662]
+var VocabularyFilterMethod_REMOVE = &handles[663]
+var VocabularyFilterMethod_MASK = &handles[664]
+var VocabularyFilterMethod_TAG = &handles[665]
+
+var _VocabularyFilterName = &handles[666]
+
+var _VocabularyFilters = &handles[667]
+var _VocabularyFilters_member = &handles[668]
+
+var VocabularyInfo = &handles[669]
+var VocabularyInfo_VocabularyName = &handles[670]
+var VocabularyInfo_LanguageCode = &handles[671]
+var VocabularyInfo_LastModifiedTime = &handles[672]
+var VocabularyInfo_VocabularyState = &handles[673]
+
+var _VocabularyName = &handles[674]
+
+var VocabularyState = &handles[675]
+var VocabularyState_PENDING = &handles[676]
+var VocabularyState_READY = &handles[677]
+var VocabularyState_FAILED = &handles[678]
+
+var _Word = &handles[679]
+
+var _Words = &handles[680]
+var _Words_member = &handles[681]
+
+var CreateCallAnalyticsCategoryRequest = &handles[682]
+var CreateCallAnalyticsCategoryRequest_CategoryName = &handles[683]
+var CreateCallAnalyticsCategoryRequest_Rules = &handles[684]
+var CreateCallAnalyticsCategoryRequest_Tags = &handles[685]
+var CreateCallAnalyticsCategoryRequest_InputType = &handles[686]
+
+var CreateCallAnalyticsCategoryResponse = &handles[687]
+var CreateCallAnalyticsCategoryResponse_CategoryProperties = &handles[688]
+
+var CreateLanguageModelRequest = &handles[689]
+var CreateLanguageModelRequest_LanguageCode = &handles[690]
+var CreateLanguageModelRequest_BaseModelName = &handles[691]
+var CreateLanguageModelRequest_ModelName = &handles[692]
+var CreateLanguageModelRequest_InputDataConfig = &handles[693]
+var CreateLanguageModelRequest_EncryptionConfiguration = &handles[694]
+var CreateLanguageModelRequest_Tags = &handles[695]
+
+var CreateLanguageModelResponse = &handles[696]
+var CreateLanguageModelResponse_LanguageCode = &handles[697]
+var CreateLanguageModelResponse_BaseModelName = &handles[698]
+var CreateLanguageModelResponse_ModelName = &handles[699]
+var CreateLanguageModelResponse_InputDataConfig = &handles[700]
+var CreateLanguageModelResponse_ModelStatus = &handles[701]
+
+var CreateMedicalVocabularyRequest = &handles[702]
+var CreateMedicalVocabularyRequest_VocabularyName = &handles[703]
+var CreateMedicalVocabularyRequest_LanguageCode = &handles[704]
+var CreateMedicalVocabularyRequest_VocabularyFileUri = &handles[705]
+var CreateMedicalVocabularyRequest_Tags = &handles[706]
+
+var CreateMedicalVocabularyResponse = &handles[707]
+var CreateMedicalVocabularyResponse_VocabularyName = &handles[708]
+var CreateMedicalVocabularyResponse_LanguageCode = &handles[709]
+var CreateMedicalVocabularyResponse_VocabularyState = &handles[710]
+var CreateMedicalVocabularyResponse_LastModifiedTime = &handles[711]
+var CreateMedicalVocabularyResponse_FailureReason = &handles[712]
+
+var CreateVocabularyFilterRequest = &handles[713]
+var CreateVocabularyFilterRequest_VocabularyFilterName = &handles[714]
+var CreateVocabularyFilterRequest_LanguageCode = &handles[715]
+var CreateVocabularyFilterRequest_Words = &handles[716]
+var CreateVocabularyFilterRequest_VocabularyFilterFileUri = &handles[717]
+var CreateVocabularyFilterRequest_Tags = &handles[718]
+var CreateVocabularyFilterRequest_DataAccessRoleArn = &handles[719]
+var CreateVocabularyFilterRequest_EncryptionConfiguration = &handles[720]
+
+var CreateVocabularyFilterResponse = &handles[721]
+var CreateVocabularyFilterResponse_VocabularyFilterName = &handles[722]
+var CreateVocabularyFilterResponse_LanguageCode = &handles[723]
+var CreateVocabularyFilterResponse_LastModifiedTime = &handles[724]
+
+var CreateVocabularyRequest = &handles[725]
+var CreateVocabularyRequest_VocabularyName = &handles[726]
+var CreateVocabularyRequest_LanguageCode = &handles[727]
+var CreateVocabularyRequest_Phrases = &handles[728]
+var CreateVocabularyRequest_VocabularyFileUri = &handles[729]
+var CreateVocabularyRequest_Tags = &handles[730]
+var CreateVocabularyRequest_DataAccessRoleArn = &handles[731]
+var CreateVocabularyRequest_EncryptionConfiguration = &handles[732]
+
+var CreateVocabularyResponse = &handles[733]
+var CreateVocabularyResponse_VocabularyName = &handles[734]
+var CreateVocabularyResponse_LanguageCode = &handles[735]
+var CreateVocabularyResponse_VocabularyState = &handles[736]
+var CreateVocabularyResponse_LastModifiedTime = &handles[737]
+var CreateVocabularyResponse_FailureReason = &handles[738]
+
+var DeleteCallAnalyticsCategoryRequest = &handles[739]
+var DeleteCallAnalyticsCategoryRequest_CategoryName = &handles[740]
+
+var DeleteCallAnalyticsCategoryResponse = &handles[741]
+
+var DeleteCallAnalyticsJobRequest = &handles[742]
+var DeleteCallAnalyticsJobRequest_CallAnalyticsJobName = &handles[743]
+
+var DeleteCallAnalyticsJobResponse = &handles[744]
+
+var DeleteLanguageModelRequest = &handles[745]
+var DeleteLanguageModelRequest_ModelName = &handles[746]
+
+var DeleteMedicalScribeJobRequest = &handles[747]
+var DeleteMedicalScribeJobRequest_MedicalScribeJobName = &handles[748]
+
+var DeleteMedicalTranscriptionJobRequest = &handles[749]
+var DeleteMedicalTranscriptionJobRequest_MedicalTranscriptionJobName = &handles[750]
+
+var DeleteMedicalVocabularyRequest = &handles[751]
+var DeleteMedicalVocabularyRequest_VocabularyName = &handles[752]
+
+var DeleteTranscriptionJobRequest = &handles[753]
+var DeleteTranscriptionJobRequest_TranscriptionJobName = &handles[754]
+
+var DeleteVocabularyFilterRequest = &handles[755]
+var DeleteVocabularyFilterRequest_VocabularyFilterName = &handles[756]
+
+var DeleteVocabularyRequest = &handles[757]
+var DeleteVocabularyRequest_VocabularyName = &handles[758]
+
+var DescribeLanguageModelRequest = &handles[759]
+var DescribeLanguageModelRequest_ModelName = &handles[760]
+
+var DescribeLanguageModelResponse = &handles[761]
+var DescribeLanguageModelResponse_LanguageModel = &handles[762]
+
+var GetCallAnalyticsCategoryRequest = &handles[763]
+var GetCallAnalyticsCategoryRequest_CategoryName = &handles[764]
+
+var GetCallAnalyticsCategoryResponse = &handles[765]
+var GetCallAnalyticsCategoryResponse_CategoryProperties = &handles[766]
+
+var GetCallAnalyticsJobRequest = &handles[767]
+var GetCallAnalyticsJobRequest_CallAnalyticsJobName = &handles[768]
+
+var GetCallAnalyticsJobResponse = &handles[769]
+var GetCallAnalyticsJobResponse_CallAnalyticsJob = &handles[770]
+
+var GetMedicalScribeJobRequest = &handles[771]
+var GetMedicalScribeJobRequest_MedicalScribeJobName = &handles[772]
+
+var GetMedicalScribeJobResponse = &handles[773]
+var GetMedicalScribeJobResponse_MedicalScribeJob = &handles[774]
+
+var GetMedicalTranscriptionJobRequest = &handles[775]
+var GetMedicalTranscriptionJobRequest_MedicalTranscriptionJobName = &handles[776]
+
+var GetMedicalTranscriptionJobResponse = &handles[777]
+var GetMedicalTranscriptionJobResponse_MedicalTranscriptionJob = &handles[778]
+
+var GetMedicalVocabularyRequest = &handles[779]
+var GetMedicalVocabularyRequest_VocabularyName = &handles[780]
+
+var GetMedicalVocabularyResponse = &handles[781]
+var GetMedicalVocabularyResponse_VocabularyName = &handles[782]
+var GetMedicalVocabularyResponse_LanguageCode = &handles[783]
+var GetMedicalVocabularyResponse_VocabularyState = &handles[784]
+var GetMedicalVocabularyResponse_LastModifiedTime = &handles[785]
+var GetMedicalVocabularyResponse_FailureReason = &handles[786]
+var GetMedicalVocabularyResponse_DownloadUri = &handles[787]
+
+var GetTranscriptionJobRequest = &handles[788]
+var GetTranscriptionJobRequest_TranscriptionJobName = &handles[789]
+
+var GetTranscriptionJobResponse = &handles[790]
+var GetTranscriptionJobResponse_TranscriptionJob = &handles[791]
+
+var GetVocabularyFilterRequest = &handles[792]
+var GetVocabularyFilterRequest_VocabularyFilterName = &handles[793]
+
+var GetVocabularyFilterResponse = &handles[794]
+var GetVocabularyFilterResponse_VocabularyFilterName = &handles[795]
+var GetVocabularyFilterResponse_LanguageCode = &handles[796]
+var GetVocabularyFilterResponse_LastModifiedTime = &handles[797]
+var GetVocabularyFilterResponse_DownloadUri = &handles[798]
+var GetVocabularyFilterResponse_DataAccessRoleArn = &handles[799]
+var GetVocabularyFilterResponse_EncryptionConfiguration = &handles[800]
+
+var GetVocabularyRequest = &handles[801]
+var GetVocabularyRequest_VocabularyName = &handles[802]
+
+var GetVocabularyResponse = &handles[803]
+var GetVocabularyResponse_VocabularyName = &handles[804]
+var GetVocabularyResponse_LanguageCode = &handles[805]
+var GetVocabularyResponse_VocabularyState = &handles[806]
+var GetVocabularyResponse_LastModifiedTime = &handles[807]
+var GetVocabularyResponse_FailureReason = &handles[808]
+var GetVocabularyResponse_DownloadUri = &handles[809]
+var GetVocabularyResponse_DataAccessRoleArn = &handles[810]
+var GetVocabularyResponse_EncryptionConfiguration = &handles[811]
+
+var ListCallAnalyticsCategoriesRequest = &handles[812]
+var ListCallAnalyticsCategoriesRequest_NextToken = &handles[813]
+var ListCallAnalyticsCategoriesRequest_MaxResults = &handles[814]
+
+var ListCallAnalyticsCategoriesResponse = &handles[815]
+var ListCallAnalyticsCategoriesResponse_NextToken = &handles[816]
+var ListCallAnalyticsCategoriesResponse_Categories = &handles[817]
+
+var ListCallAnalyticsJobsRequest = &handles[818]
+var ListCallAnalyticsJobsRequest_Status = &handles[819]
+var ListCallAnalyticsJobsRequest_JobNameContains = &handles[820]
+var ListCallAnalyticsJobsRequest_NextToken = &handles[821]
+var ListCallAnalyticsJobsRequest_MaxResults = &handles[822]
+
+var ListCallAnalyticsJobsResponse = &handles[823]
+var ListCallAnalyticsJobsResponse_Status = &handles[824]
+var ListCallAnalyticsJobsResponse_NextToken = &handles[825]
+var ListCallAnalyticsJobsResponse_CallAnalyticsJobSummaries = &handles[826]
+
+var ListLanguageModelsRequest = &handles[827]
+var ListLanguageModelsRequest_StatusEquals = &handles[828]
+var ListLanguageModelsRequest_NameContains = &handles[829]
+var ListLanguageModelsRequest_NextToken = &handles[830]
+var ListLanguageModelsRequest_MaxResults = &handles[831]
+
+var ListLanguageModelsResponse = &handles[832]
+var ListLanguageModelsResponse_NextToken = &handles[833]
+var ListLanguageModelsResponse_Models = &handles[834]
+
+var ListMedicalScribeJobsRequest = &handles[835]
+var ListMedicalScribeJobsRequest_Status = &handles[836]
+var ListMedicalScribeJobsRequest_JobNameContains = &handles[837]
+var ListMedicalScribeJobsRequest_NextToken = &handles[838]
+var ListMedicalScribeJobsRequest_MaxResults = &handles[839]
+
+var ListMedicalScribeJobsResponse = &handles[840]
+var ListMedicalScribeJobsResponse_Status = &handles[841]
+var ListMedicalScribeJobsResponse_NextToken = &handles[842]
+var ListMedicalScribeJobsResponse_MedicalScribeJobSummaries = &handles[843]
+
+var ListMedicalTranscriptionJobsRequest = &handles[844]
+var ListMedicalTranscriptionJobsRequest_Status = &handles[845]
+var ListMedicalTranscriptionJobsRequest_JobNameContains = &handles[846]
+var ListMedicalTranscriptionJobsRequest_NextToken = &handles[847]
+var ListMedicalTranscriptionJobsRequest_MaxResults = &handles[848]
+
+var ListMedicalTranscriptionJobsResponse = &handles[849]
+var ListMedicalTranscriptionJobsResponse_Status = &handles[850]
+var ListMedicalTranscriptionJobsResponse_NextToken = &handles[851]
+var ListMedicalTranscriptionJobsResponse_MedicalTranscriptionJobSummaries = &handles[852]
+
+var ListMedicalVocabulariesRequest = &handles[853]
+var ListMedicalVocabulariesRequest_NextToken = &handles[854]
+var ListMedicalVocabulariesRequest_MaxResults = &handles[855]
+var ListMedicalVocabulariesRequest_StateEquals = &handles[856]
+var ListMedicalVocabulariesRequest_NameContains = &handles[857]
+
+var ListMedicalVocabulariesResponse = &handles[858]
+var ListMedicalVocabulariesResponse_Status = &handles[859]
+var ListMedicalVocabulariesResponse_NextToken = &handles[860]
+var ListMedicalVocabulariesResponse_Vocabularies = &handles[861]
+
+var ListTagsForResourceRequest = &handles[862]
+var ListTagsForResourceRequest_ResourceArn = &handles[863]
+
+var ListTagsForResourceResponse = &handles[864]
+var ListTagsForResourceResponse_ResourceArn = &handles[865]
+var ListTagsForResourceResponse_Tags = &handles[866]
+
+var ListTranscriptionJobsRequest = &handles[867]
+var ListTranscriptionJobsRequest_Status = &handles[868]
+var ListTranscriptionJobsRequest_JobNameContains = &handles[869]
+var ListTranscriptionJobsRequest_NextToken = &handles[870]
+var ListTranscriptionJobsRequest_MaxResults = &handles[871]
+
+var ListTranscriptionJobsResponse = &handles[872]
+var ListTranscriptionJobsResponse_Status = &handles[873]
+var ListTranscriptionJobsResponse_NextToken = &handles[874]
+var ListTranscriptionJobsResponse_TranscriptionJobSummaries = &handles[875]
+
+var ListVocabulariesRequest = &handles[876]
+var ListVocabulariesRequest_NextToken = &handles[877]
+var ListVocabulariesRequest_MaxResults = &handles[878]
+var ListVocabulariesRequest_StateEquals = &handles[879]
+var ListVocabulariesRequest_NameContains = &handles[880]
+
+var ListVocabulariesResponse = &handles[881]
+var ListVocabulariesResponse_Status = &handles[882]
+var ListVocabulariesResponse_NextToken = &handles[883]
+var ListVocabulariesResponse_Vocabularies = &handles[884]
+
+var ListVocabularyFiltersRequest = &handles[885]
+var ListVocabularyFiltersRequest_NextToken = &handles[886]
+var ListVocabularyFiltersRequest_MaxResults = &handles[887]
+var ListVocabularyFiltersRequest_NameContains = &handles[888]
+
+var ListVocabularyFiltersResponse = &handles[889]
+var ListVocabularyFiltersResponse_NextToken = &handles[890]
+var ListVocabularyFiltersResponse_VocabularyFilters = &handles[891]
+
+var StartCallAnalyticsJobRequest = &handles[892]
+var StartCallAnalyticsJobRequest_CallAnalyticsJobName = &handles[893]
+var StartCallAnalyticsJobRequest_Media = &handles[894]
+var StartCallAnalyticsJobRequest_OutputLocation = &handles[895]
+var StartCallAnalyticsJobRequest_OutputEncryptionKMSKeyId = &handles[896]
+var StartCallAnalyticsJobRequest_DataAccessRoleArn = &handles[897]
+var StartCallAnalyticsJobRequest_Settings = &handles[898]
+var StartCallAnalyticsJobRequest_Tags = &handles[899]
+var StartCallAnalyticsJobRequest_ChannelDefinitions = &handles[900]
+
+var StartCallAnalyticsJobResponse = &handles[901]
+var StartCallAnalyticsJobResponse_CallAnalyticsJob = &handles[902]
+
+var StartMedicalScribeJobRequest = &handles[903]
+var StartMedicalScribeJobRequest_MedicalScribeJobName = &handles[904]
+var StartMedicalScribeJobRequest_Media = &handles[905]
+var StartMedicalScribeJobRequest_OutputBucketName = &handles[906]
+var StartMedicalScribeJobRequest_OutputEncryptionKMSKeyId = &handles[907]
+var StartMedicalScribeJobRequest_KMSEncryptionContext = &handles[908]
+var StartMedicalScribeJobRequest_DataAccessRoleArn = &handles[909]
+var StartMedicalScribeJobRequest_Settings = &handles[910]
+var StartMedicalScribeJobRequest_ChannelDefinitions = &handles[911]
+var StartMedicalScribeJobRequest_Tags = &handles[912]
+var StartMedicalScribeJobRequest_MedicalScribeContext = &handles[913]
+
+var StartMedicalScribeJobResponse = &handles[914]
+var StartMedicalScribeJobResponse_MedicalScribeJob = &handles[915]
+
+var StartMedicalTranscriptionJobRequest = &handles[916]
+var StartMedicalTranscriptionJobRequest_MedicalTranscriptionJobName = &handles[917]
+var StartMedicalTranscriptionJobRequest_LanguageCode = &handles[918]
+var StartMedicalTranscriptionJobRequest_MediaSampleRateHertz = &handles[919]
+var StartMedicalTranscriptionJobRequest_MediaFormat = &handles[920]
+var StartMedicalTranscriptionJobRequest_Media = &handles[921]
+var StartMedicalTranscriptionJobRequest_OutputBucketName = &handles[922]
+var StartMedicalTranscriptionJobRequest_OutputKey = &handles[923]
+var StartMedicalTranscriptionJobRequest_OutputEncryptionKMSKeyId = &handles[924]
+var StartMedicalTranscriptionJobRequest_KMSEncryptionContext = &handles[925]
+var StartMedicalTranscriptionJobRequest_Settings = &handles[926]
+var StartMedicalTranscriptionJobRequest_ContentIdentificationType = &handles[927]
+var StartMedicalTranscriptionJobRequest_Specialty = &handles[928]
+var StartMedicalTranscriptionJobRequest_Type = &handles[929]
+var StartMedicalTranscriptionJobRequest_Tags = &handles[930]
+
+var StartMedicalTranscriptionJobResponse = &handles[931]
+var StartMedicalTranscriptionJobResponse_MedicalTranscriptionJob = &handles[932]
+
+var StartTranscriptionJobRequest = &handles[933]
+var StartTranscriptionJobRequest_TranscriptionJobName = &handles[934]
+var StartTranscriptionJobRequest_LanguageCode = &handles[935]
+var StartTranscriptionJobRequest_MediaSampleRateHertz = &handles[936]
+var StartTranscriptionJobRequest_MediaFormat = &handles[937]
+var StartTranscriptionJobRequest_Media = &handles[938]
+var StartTranscriptionJobRequest_OutputBucketName = &handles[939]
+var StartTranscriptionJobRequest_OutputKey = &handles[940]
+var StartTranscriptionJobRequest_OutputEncryptionKMSKeyId = &handles[941]
+var StartTranscriptionJobRequest_KMSEncryptionContext = &handles[942]
+var StartTranscriptionJobRequest_Settings = &handles[943]
+var StartTranscriptionJobRequest_ModelSettings = &handles[944]
+var StartTranscriptionJobRequest_JobExecutionSettings = &handles[945]
+var StartTranscriptionJobRequest_ContentRedaction = &handles[946]
+var StartTranscriptionJobRequest_IdentifyLanguage = &handles[947]
+var StartTranscriptionJobRequest_IdentifyMultipleLanguages = &handles[948]
+var StartTranscriptionJobRequest_LanguageOptions = &handles[949]
+var StartTranscriptionJobRequest_Subtitles = &handles[950]
+var StartTranscriptionJobRequest_Tags = &handles[951]
+var StartTranscriptionJobRequest_LanguageIdSettings = &handles[952]
+var StartTranscriptionJobRequest_ToxicityDetection = &handles[953]
+
+var StartTranscriptionJobResponse = &handles[954]
+var StartTranscriptionJobResponse_TranscriptionJob = &handles[955]
+
+var TagResourceRequest = &handles[956]
+var TagResourceRequest_ResourceArn = &handles[957]
+var TagResourceRequest_Tags = &handles[958]
+
+var TagResourceResponse = &handles[959]
+
+var UntagResourceRequest = &handles[960]
+var UntagResourceRequest_ResourceArn = &handles[961]
+var UntagResourceRequest_TagKeys = &handles[962]
+
+var UntagResourceResponse = &handles[963]
+
+var UpdateCallAnalyticsCategoryRequest = &handles[964]
+var UpdateCallAnalyticsCategoryRequest_CategoryName = &handles[965]
+var UpdateCallAnalyticsCategoryRequest_Rules = &handles[966]
+var UpdateCallAnalyticsCategoryRequest_InputType = &handles[967]
+
+var UpdateCallAnalyticsCategoryResponse = &handles[968]
+var UpdateCallAnalyticsCategoryResponse_CategoryProperties = &handles[969]
+
+var UpdateLanguageModelRequest = &handles[970]
+var UpdateLanguageModelRequest_ModelName = &handles[971]
+var UpdateLanguageModelRequest_DataAccessRoleArn = &handles[972]
+var UpdateLanguageModelRequest_EncryptionConfiguration = &handles[973]
+
+var UpdateLanguageModelResponse = &handles[974]
+var UpdateLanguageModelResponse_ModelName = &handles[975]
+var UpdateLanguageModelResponse_ModelStatus = &handles[976]
+var UpdateLanguageModelResponse_LastModifiedTime = &handles[977]
+
+var UpdateMedicalVocabularyRequest = &handles[978]
+var UpdateMedicalVocabularyRequest_VocabularyName = &handles[979]
+var UpdateMedicalVocabularyRequest_LanguageCode = &handles[980]
+var UpdateMedicalVocabularyRequest_VocabularyFileUri = &handles[981]
+
+var UpdateMedicalVocabularyResponse = &handles[982]
+var UpdateMedicalVocabularyResponse_VocabularyName = &handles[983]
+var UpdateMedicalVocabularyResponse_LanguageCode = &handles[984]
+var UpdateMedicalVocabularyResponse_LastModifiedTime = &handles[985]
+var UpdateMedicalVocabularyResponse_VocabularyState = &handles[986]
+
+var UpdateVocabularyFilterRequest = &handles[987]
+var UpdateVocabularyFilterRequest_VocabularyFilterName = &handles[988]
+var UpdateVocabularyFilterRequest_Words = &handles[989]
+var UpdateVocabularyFilterRequest_VocabularyFilterFileUri = &handles[990]
+var UpdateVocabularyFilterRequest_DataAccessRoleArn = &handles[991]
+var UpdateVocabularyFilterRequest_EncryptionConfiguration = &handles[992]
+
+var UpdateVocabularyFilterResponse = &handles[993]
+var UpdateVocabularyFilterResponse_VocabularyFilterName = &handles[994]
+var UpdateVocabularyFilterResponse_LanguageCode = &handles[995]
+var UpdateVocabularyFilterResponse_LastModifiedTime = &handles[996]
+
+var UpdateVocabularyRequest = &handles[997]
+var UpdateVocabularyRequest_VocabularyName = &handles[998]
+var UpdateVocabularyRequest_LanguageCode = &handles[999]
+var UpdateVocabularyRequest_Phrases = &handles[1000]
+var UpdateVocabularyRequest_VocabularyFileUri = &handles[1001]
+var UpdateVocabularyRequest_DataAccessRoleArn = &handles[1002]
+var UpdateVocabularyRequest_EncryptionConfiguration = &handles[1003]
+
+var UpdateVocabularyResponse = &handles[1004]
+var UpdateVocabularyResponse_VocabularyName = &handles[1005]
+var UpdateVocabularyResponse_LanguageCode = &handles[1006]
+var UpdateVocabularyResponse_LastModifiedTime = &handles[1007]
+var UpdateVocabularyResponse_VocabularyState = &handles[1008]
+
+var Transcribe = &smithy.ServiceSchema{Schema: &handles[44], Version: "2017-10-26"}

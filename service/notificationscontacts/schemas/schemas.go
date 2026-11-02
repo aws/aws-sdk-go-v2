@@ -4,516 +4,476 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ActivateEmailContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ActivateEmailContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/emailcontacts/{arn}/activate/{code}",
-	Code: 200})
-
-var CreateEmailContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "CreateEmailContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2022-09-19/emailcontacts",
-	Code: 201})
-
-var DeleteEmailContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "DeleteEmailContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/emailcontacts/{arn}",
-	Code: 200})
-
-var GetEmailContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "GetEmailContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/emailcontacts/{arn}",
-	Code: 200})
-
-var ListEmailContacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ListEmailContacts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/emailcontacts",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{arn}",
-	Code: 200})
-
-var SendActivationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "SendActivationCode",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/2022-10-31/emailcontacts/{arn}/activate/send",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{arn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{arn}",
-	Code: 200})
-
-var _NotificationsContacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "NotificationsContacts",
-}, smithy.ShapeTypeService, 0)
-
-var NotificationsContacts = smithy.NewServiceSchema(_NotificationsContacts, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _CreationTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "CreationTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var EmailContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "EmailContact",
-}, smithy.ShapeTypeStructure, 6)
-var EmailContact_arn *smithy.Schema
-
-var EmailContact_name *smithy.Schema
-
-var EmailContact_address *smithy.Schema
-
-var EmailContact_status *smithy.Schema
-
-var EmailContact_creationTime *smithy.Schema
-
-var EmailContact_updateTime *smithy.Schema
-
-var _EmailContactAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "EmailContactAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _EmailContactArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "EmailContactArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EmailContactName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "EmailContactName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EmailContacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "EmailContacts",
-}, smithy.ShapeTypeList, 1)
-var _EmailContacts_member *smithy.Schema
-
-var _EmailContactStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "EmailContactStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _QuotaCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "QuotaCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveEmailContactAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "SensitiveEmailContactAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _UpdateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "UpdateTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ActivateEmailContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ActivateEmailContactRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ActivateEmailContactRequest_arn *smithy.Schema
-
-var ActivateEmailContactRequest_code *smithy.Schema
-
-var ActivateEmailContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ActivateEmailContactResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateEmailContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "CreateEmailContactRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateEmailContactRequest_name *smithy.Schema
-
-var CreateEmailContactRequest_emailAddress *smithy.Schema
-
-var CreateEmailContactRequest_tags *smithy.Schema
-
-var CreateEmailContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "CreateEmailContactResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEmailContactResponse_arn *smithy.Schema
-
-var DeleteEmailContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "DeleteEmailContactRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEmailContactRequest_arn *smithy.Schema
-
-var DeleteEmailContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "DeleteEmailContactResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetEmailContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "GetEmailContactRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetEmailContactRequest_arn *smithy.Schema
-
-var GetEmailContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "GetEmailContactResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetEmailContactResponse_emailContact *smithy.Schema
-
-var ListEmailContactsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ListEmailContactsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListEmailContactsRequest_maxResults *smithy.Schema
-
-var ListEmailContactsRequest_nextToken *smithy.Schema
-
-var ListEmailContactsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ListEmailContactsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEmailContactsResponse_nextToken *smithy.Schema
-
-var ListEmailContactsResponse_emailContacts *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_arn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var SendActivationCodeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "SendActivationCodeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var SendActivationCodeRequest_arn *smithy.Schema
-
-var SendActivationCodeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "SendActivationCodeResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_arn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_arn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.notificationscontacts",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _ResourceType)
-
-	EmailContact_arn = EmailContact.AddMember("arn", _EmailContactArn)
-
-	EmailContact_name = EmailContact.AddMember("name", _EmailContactName)
-
-	EmailContact_address = EmailContact.AddMember("address", _SensitiveEmailContactAddress)
-
-	EmailContact_status = EmailContact.AddMember("status", _EmailContactStatus)
-
-	EmailContact_creationTime = EmailContact.AddMember("creationTime", _CreationTime)
-
-	EmailContact_updateTime = EmailContact.AddMember("updateTime", _UpdateTime)
-
-	_EmailContacts_member = _EmailContacts.AddMember("member", EmailContact)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _ResourceId)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _ResourceId)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _ServiceCode)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _QuotaCode)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _ServiceCode)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _QuotaCode)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	ActivateEmailContactRequest_arn = ActivateEmailContactRequest.AddMember("arn", _EmailContactArn, &smithytraits.HTTPLabel{})
-
-	ActivateEmailContactRequest_code = ActivateEmailContactRequest.AddMember("code", _Token, &smithytraits.HTTPLabel{})
-
-	CreateEmailContactRequest_name = CreateEmailContactRequest.AddMember("name", _EmailContactName)
-
-	CreateEmailContactRequest_emailAddress = CreateEmailContactRequest.AddMember("emailAddress", _EmailContactAddress)
-
-	CreateEmailContactRequest_tags = CreateEmailContactRequest.AddMember("tags", _TagMap)
-
-	CreateEmailContactResponse_arn = CreateEmailContactResponse.AddMember("arn", _EmailContactArn)
-
-	DeleteEmailContactRequest_arn = DeleteEmailContactRequest.AddMember("arn", _EmailContactArn, &smithytraits.HTTPLabel{})
-
-	GetEmailContactRequest_arn = GetEmailContactRequest.AddMember("arn", _EmailContactArn, &smithytraits.HTTPLabel{})
-
-	GetEmailContactResponse_emailContact = GetEmailContactResponse.AddMember("emailContact", EmailContact)
-
-	ListEmailContactsRequest_maxResults = ListEmailContactsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListEmailContactsRequest_nextToken = ListEmailContactsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListEmailContactsResponse_nextToken = ListEmailContactsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListEmailContactsResponse_emailContacts = ListEmailContactsResponse.AddMember("emailContacts", _EmailContacts)
-
-	ListTagsForResourceRequest_arn = ListTagsForResourceRequest.AddMember("arn", _EmailContactArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	SendActivationCodeRequest_arn = SendActivationCodeRequest.AddMember("arn", _EmailContactArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_arn = TagResourceRequest.AddMember("arn", _EmailContactArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_arn = UntagResourceRequest.AddMember("arn", _EmailContactArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
+const blob = "" +
+	"ServiceQuotaExceededExceptionActivateEmailContactResponseSensitiveEmailContactAddressValidationExcep" +
+	"tionFieldListActivateEmailContactRequestListTagsForResourceResponseCreateEmailContactResponseDeleteE" +
+	"mailContactResponseListTagsForResourceRequestSendActivationCodeResponseCreateEmailContactRequestDele" +
+	"teEmailContactRequestListEmailContactsResponseResourceNotFoundExceptionSendActivationCodeRequestVali" +
+	"dationExceptionReasonListEmailContactsRequestFIELD_VALIDATION_FAILEDGetEmailContactResponseInternalS" +
+	"erverExceptionGetEmailContactRequestAccessDeniedExceptionNotificationsContactsUntagResourceResponseU" +
+	"ntagResourceRequestTagResourceResponseThrottlingExceptionEmailContactStatusTagResourceRequestConflic" +
+	"tExceptionretryAfterSecondsEmailContactNameEmailContactArnemailContactsCreationTimeErrorMessageResou" +
+	"rceTypecreationTimeemailAddressresourceTypeServiceCodeserviceCodeResourceIdUpdateTimemaxResultsresou" +
+	"rceIdupdateTimeQuotaCodefieldListnextTokenquotaCodeTagValueIntegerTagKeysaddressmessagetagKeysString" +
+	"TagMapmemberreasonstatusOTHERvalueUnitcodenametagsarnkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.notificationscontacts", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 29, Target: 0, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 167, Target: 1, Traits: 1, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 193, Target: 2, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 468, Target: 3, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 321, Target: 4, Traits: 4, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 140, Target: 5, Traits: 5, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 245, Target: 6, Traits: 6, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 619, Target: 7, Traits: 7, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 578, Target: 8, Traits: 8, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 557, Target: 9, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 536, Target: 10, Traits: 10, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 980, Target: 30, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 693, Target: 12, Traits: 11, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 980, Target: 30, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 34, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 831, Target: 39, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 771, Target: 16, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 37, Target: 17, Traits: 9, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1042, Target: 26, Traits: 13, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 973, Target: 40, Traits: 13, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1018, Target: 29, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 807, Target: 16, Traits: 14, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 905, Target: 61, Traits: 14, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 66, Target: 24, Traits: 9, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 743, Target: 25, Traits: 9, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 727, Target: 26, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 325, Target: 27, Traits: 9, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1006, Target: 17, Traits: 9, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 657, Target: 29, Traits: 9, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 783, Target: 30, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 491, Target: 31, Traits: 16, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 980, Target: 30, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 915, Target: 33, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 865, Target: 34, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 346, Target: 35, Traits: 17, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 980, Target: 30, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 34, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 831, Target: 39, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 795, Target: 39, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 57, Target: 40, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 843, Target: 41, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 42, Traits: 18, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 980, Target: 30, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 34, Traits: 9, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 831, Target: 39, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 854, Target: 41, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 942, Target: 33, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 48, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 966, Target: 49, Traits: 9, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1006, Target: 48, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1000, Target: 51, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1053, Target: 48, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1029, Target: 54, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 951, Target: 54, Traits: 9, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 638, Target: 55, Traits: 19, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 980, Target: 30, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 854, Target: 41, Traits: 9, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 942, Target: 33, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 710, Target: 112, Traits: 20, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 937, Target: 60, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 875, Target: 61, Traits: 12, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 85, Target: 62, Traits: 21, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 980, Target: 30, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1012, Target: 71, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 924, Target: 69, Traits: 9, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 85, Target: 66, Traits: 9, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1042, Target: 113, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 980, Target: 113, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 85, Target: 69, Traits: 9, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1006, Target: 66, Traits: 9, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 396, Target: 71, Traits: 9, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 445, Target: 114, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1024, Target: 114, Traits: 9, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 113, Target: 74, Traits: 9, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1038, Target: 60, Traits: 23, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 29, Target: 77, Traits: 9, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 271, Target: 78, Traits: 9, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1042, Target: 26, Traits: 13, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 819, Target: 24, Traits: 9, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1046, Target: 51, Traits: 9, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 167, Target: 82, Traits: 9, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 9, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 296, Target: 84, Traits: 9, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 193, Target: 86, Traits: 9, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 514, Target: 87, Traits: 9, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 468, Target: 89, Traits: 9, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 758, Target: 17, Traits: 9, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 421, Target: 91, Traits: 9, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 885, Target: 112, Traits: 24, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 933, Target: 113, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 321, Target: 94, Traits: 9, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 933, Target: 113, Traits: 9, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 758, Target: 27, Traits: 9, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 219, Target: 97, Traits: 9, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 140, Target: 99, Traits: 9, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1046, Target: 51, Traits: 9, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 371, Target: 101, Traits: 9, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 245, Target: 103, Traits: 9, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 675, Target: 104, Traits: 9, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1046, Target: 51, Traits: 9, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 619, Target: 107, Traits: 9, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 599, Target: 108, Traits: 9, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1050, Target: 25, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 987, Target: 49, Traits: 26, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 578, Target: 111, Traits: 9, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 959, Target: 112, Traits: 9, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 994, Target: 113, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1034, Target: 114, Traits: 9, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/emailcontacts/{arn}/activate/{code}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2022-09-19/emailcontacts",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/emailcontacts/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/emailcontacts/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/emailcontacts",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/2022-10-31/emailcontacts/{arn}/activate/send",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [115]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+}
+
+var ActivateEmailContact = &handles[0]
+
+var CreateEmailContact = &handles[1]
+
+var DeleteEmailContact = &handles[2]
+
+var GetEmailContact = &handles[3]
+
+var ListEmailContacts = &handles[4]
+
+var ListTagsForResource = &handles[5]
+
+var SendActivationCode = &handles[6]
+
+var TagResource = &handles[7]
+
+var UntagResource = &handles[8]
+
+var _NotificationsContacts = &handles[9]
+
+var AccessDeniedException = &handles[10]
+var AccessDeniedException_message = &handles[11]
+
+var ConflictException = &handles[12]
+var ConflictException_message = &handles[13]
+var ConflictException_resourceId = &handles[14]
+var ConflictException_resourceType = &handles[15]
+
+var _CreationTime = &handles[16]
+
+var EmailContact = &handles[17]
+var EmailContact_arn = &handles[18]
+var EmailContact_name = &handles[19]
+var EmailContact_address = &handles[20]
+var EmailContact_status = &handles[21]
+var EmailContact_creationTime = &handles[22]
+var EmailContact_updateTime = &handles[23]
+
+var _EmailContactAddress = &handles[24]
+
+var _EmailContactArn = &handles[25]
+
+var _EmailContactName = &handles[26]
+
+var _EmailContacts = &handles[27]
+var _EmailContacts_member = &handles[28]
+
+var _EmailContactStatus = &handles[29]
+
+var _ErrorMessage = &handles[30]
+
+var InternalServerException = &handles[31]
+var InternalServerException_message = &handles[32]
+
+var _QuotaCode = &handles[33]
+
+var _ResourceId = &handles[34]
+
+var ResourceNotFoundException = &handles[35]
+var ResourceNotFoundException_message = &handles[36]
+var ResourceNotFoundException_resourceId = &handles[37]
+var ResourceNotFoundException_resourceType = &handles[38]
+
+var _ResourceType = &handles[39]
+
+var _SensitiveEmailContactAddress = &handles[40]
+
+var _ServiceCode = &handles[41]
+
+var ServiceQuotaExceededException = &handles[42]
+var ServiceQuotaExceededException_message = &handles[43]
+var ServiceQuotaExceededException_resourceId = &handles[44]
+var ServiceQuotaExceededException_resourceType = &handles[45]
+var ServiceQuotaExceededException_serviceCode = &handles[46]
+var ServiceQuotaExceededException_quotaCode = &handles[47]
+
+var _TagKey = &handles[48]
+
+var _TagKeys = &handles[49]
+var _TagKeys_member = &handles[50]
+
+var _TagMap = &handles[51]
+var _TagMap_key = &handles[52]
+var _TagMap_value = &handles[53]
+
+var _TagValue = &handles[54]
+
+var ThrottlingException = &handles[55]
+var ThrottlingException_message = &handles[56]
+var ThrottlingException_serviceCode = &handles[57]
+var ThrottlingException_quotaCode = &handles[58]
+var ThrottlingException_retryAfterSeconds = &handles[59]
+
+var _Token = &handles[60]
+
+var _UpdateTime = &handles[61]
+
+var ValidationException = &handles[62]
+var ValidationException_message = &handles[63]
+var ValidationException_reason = &handles[64]
+var ValidationException_fieldList = &handles[65]
+
+var ValidationExceptionField = &handles[66]
+var ValidationExceptionField_name = &handles[67]
+var ValidationExceptionField_message = &handles[68]
+
+var _ValidationExceptionFieldList = &handles[69]
+var _ValidationExceptionFieldList_member = &handles[70]
+
+var ValidationExceptionReason = &handles[71]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[72]
+var ValidationExceptionReason_OTHER = &handles[73]
+
+var ActivateEmailContactRequest = &handles[74]
+var ActivateEmailContactRequest_arn = &handles[75]
+var ActivateEmailContactRequest_code = &handles[76]
+
+var ActivateEmailContactResponse = &handles[77]
+
+var CreateEmailContactRequest = &handles[78]
+var CreateEmailContactRequest_name = &handles[79]
+var CreateEmailContactRequest_emailAddress = &handles[80]
+var CreateEmailContactRequest_tags = &handles[81]
+
+var CreateEmailContactResponse = &handles[82]
+var CreateEmailContactResponse_arn = &handles[83]
+
+var DeleteEmailContactRequest = &handles[84]
+var DeleteEmailContactRequest_arn = &handles[85]
+
+var DeleteEmailContactResponse = &handles[86]
+
+var GetEmailContactRequest = &handles[87]
+var GetEmailContactRequest_arn = &handles[88]
+
+var GetEmailContactResponse = &handles[89]
+var GetEmailContactResponse_emailContact = &handles[90]
+
+var ListEmailContactsRequest = &handles[91]
+var ListEmailContactsRequest_maxResults = &handles[92]
+var ListEmailContactsRequest_nextToken = &handles[93]
+
+var ListEmailContactsResponse = &handles[94]
+var ListEmailContactsResponse_nextToken = &handles[95]
+var ListEmailContactsResponse_emailContacts = &handles[96]
+
+var ListTagsForResourceRequest = &handles[97]
+var ListTagsForResourceRequest_arn = &handles[98]
+
+var ListTagsForResourceResponse = &handles[99]
+var ListTagsForResourceResponse_tags = &handles[100]
+
+var SendActivationCodeRequest = &handles[101]
+var SendActivationCodeRequest_arn = &handles[102]
+
+var SendActivationCodeResponse = &handles[103]
+
+var TagResourceRequest = &handles[104]
+var TagResourceRequest_arn = &handles[105]
+var TagResourceRequest_tags = &handles[106]
+
+var TagResourceResponse = &handles[107]
+
+var UntagResourceRequest = &handles[108]
+var UntagResourceRequest_arn = &handles[109]
+var UntagResourceRequest_tagKeys = &handles[110]
+
+var UntagResourceResponse = &handles[111]
+
+var NotificationsContacts = &smithy.ServiceSchema{Schema: &handles[9], Version: "2018-05-10"}

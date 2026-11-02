@@ -7,1931 +7,1615 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateFraudster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "AssociateFraudster",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "CreateDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWatchlist = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "CreateWatchlist",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DeleteDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteFraudster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DeleteFraudster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSpeaker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DeleteSpeaker",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWatchlist = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DeleteWatchlist",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFraudster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeFraudster",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFraudsterRegistrationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeFraudsterRegistrationJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSpeaker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeSpeaker",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSpeakerEnrollmentJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeSpeakerEnrollmentJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWatchlist = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeWatchlist",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateFraudster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DisassociateFraudster",
-}, smithy.ShapeTypeOperation, 0)
-
-var EvaluateSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "EvaluateSession",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListDomains",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFraudsterRegistrationJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListFraudsterRegistrationJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFraudsters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListFraudsters",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSpeakerEnrollmentJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListSpeakerEnrollmentJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSpeakers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListSpeakers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWatchlists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListWatchlists",
-}, smithy.ShapeTypeOperation, 0)
-
-var OptOutSpeaker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "OptOutSpeaker",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartFraudsterRegistrationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "StartFraudsterRegistrationJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSpeakerEnrollmentJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "StartSpeakerEnrollmentJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UpdateDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateWatchlist = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UpdateWatchlist",
-}, smithy.ShapeTypeOperation, 0)
-
-var _VoiceID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "VoiceID",
-}, smithy.ShapeTypeService, 0)
-
-var VoiceID = smithy.NewServiceSchema(_VoiceID, "2021-09-27")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var AuthenticationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "AuthenticationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AuthenticationConfiguration_AcceptanceThreshold *smithy.Schema
-
-var _AuthenticationDecision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "AuthenticationDecision",
-}, smithy.ShapeTypeString, 0)
-
-var AuthenticationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "AuthenticationResult",
-}, smithy.ShapeTypeStructure, 8)
-var AuthenticationResult_AuthenticationResultId *smithy.Schema
-
-var AuthenticationResult_AudioAggregationStartedAt *smithy.Schema
-
-var AuthenticationResult_AudioAggregationEndedAt *smithy.Schema
-
-var AuthenticationResult_CustomerSpeakerId *smithy.Schema
-
-var AuthenticationResult_GeneratedSpeakerId *smithy.Schema
-
-var AuthenticationResult_Decision *smithy.Schema
-
-var AuthenticationResult_Score *smithy.Schema
-
-var AuthenticationResult_Configuration *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ClientTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ConflictType *smithy.Schema
-
-var _ConflictType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ConflictType",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerSpeakerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "CustomerSpeakerId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Domain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Domain",
-}, smithy.ShapeTypeStructure, 10)
-var Domain_DomainId *smithy.Schema
-
-var Domain_Arn *smithy.Schema
-
-var Domain_Name *smithy.Schema
-
-var Domain_Description *smithy.Schema
-
-var Domain_DomainStatus *smithy.Schema
-
-var Domain_ServerSideEncryptionConfiguration *smithy.Schema
-
-var Domain_CreatedAt *smithy.Schema
-
-var Domain_UpdatedAt *smithy.Schema
-
-var Domain_ServerSideEncryptionUpdateDetails *smithy.Schema
-
-var Domain_WatchlistDetails *smithy.Schema
-
-var _DomainId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DomainId",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DomainStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DomainSummaries",
-}, smithy.ShapeTypeList, 1)
-var _DomainSummaries_member *smithy.Schema
-
-var DomainSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DomainSummary",
-}, smithy.ShapeTypeStructure, 10)
-var DomainSummary_DomainId *smithy.Schema
-
-var DomainSummary_Arn *smithy.Schema
-
-var DomainSummary_Name *smithy.Schema
-
-var DomainSummary_Description *smithy.Schema
-
-var DomainSummary_DomainStatus *smithy.Schema
-
-var DomainSummary_ServerSideEncryptionConfiguration *smithy.Schema
-
-var DomainSummary_CreatedAt *smithy.Schema
-
-var DomainSummary_UpdatedAt *smithy.Schema
-
-var DomainSummary_ServerSideEncryptionUpdateDetails *smithy.Schema
-
-var DomainSummary_WatchlistDetails *smithy.Schema
-
-var _DuplicateRegistrationAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DuplicateRegistrationAction",
-}, smithy.ShapeTypeString, 0)
-
-var EnrollmentConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "EnrollmentConfig",
-}, smithy.ShapeTypeStructure, 2)
-var EnrollmentConfig_ExistingEnrollmentAction *smithy.Schema
-
-var EnrollmentConfig_FraudDetectionConfig *smithy.Schema
-
-var EnrollmentJobFraudDetectionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "EnrollmentJobFraudDetectionConfig",
-}, smithy.ShapeTypeStructure, 3)
-var EnrollmentJobFraudDetectionConfig_FraudDetectionAction *smithy.Schema
-
-var EnrollmentJobFraudDetectionConfig_RiskThreshold *smithy.Schema
-
-var EnrollmentJobFraudDetectionConfig_WatchlistIds *smithy.Schema
-
-var _EnrollmentJobFraudDetectionConfigWatchlistIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "EnrollmentJobFraudDetectionConfigWatchlistIds",
-}, smithy.ShapeTypeList, 1)
-var _EnrollmentJobFraudDetectionConfigWatchlistIds_member *smithy.Schema
-
-var _ExistingEnrollmentAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ExistingEnrollmentAction",
-}, smithy.ShapeTypeString, 0)
-
-var FailureDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FailureDetails",
-}, smithy.ShapeTypeStructure, 2)
-var FailureDetails_StatusCode *smithy.Schema
-
-var FailureDetails_Message *smithy.Schema
-
-var _FraudDetectionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudDetectionAction",
-}, smithy.ShapeTypeString, 0)
-
-var FraudDetectionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudDetectionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var FraudDetectionConfiguration_RiskThreshold *smithy.Schema
-
-var FraudDetectionConfiguration_WatchlistId *smithy.Schema
-
-var _FraudDetectionDecision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudDetectionDecision",
-}, smithy.ShapeTypeString, 0)
-
-var _FraudDetectionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudDetectionReason",
-}, smithy.ShapeTypeString, 0)
-
-var _FraudDetectionReasons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudDetectionReasons",
-}, smithy.ShapeTypeList, 1)
-var _FraudDetectionReasons_member *smithy.Schema
-
-var FraudDetectionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudDetectionResult",
-}, smithy.ShapeTypeStructure, 7)
-var FraudDetectionResult_FraudDetectionResultId *smithy.Schema
-
-var FraudDetectionResult_AudioAggregationStartedAt *smithy.Schema
-
-var FraudDetectionResult_AudioAggregationEndedAt *smithy.Schema
-
-var FraudDetectionResult_Configuration *smithy.Schema
-
-var FraudDetectionResult_Decision *smithy.Schema
-
-var FraudDetectionResult_Reasons *smithy.Schema
-
-var FraudDetectionResult_RiskDetails *smithy.Schema
-
-var FraudRiskDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudRiskDetails",
-}, smithy.ShapeTypeStructure, 2)
-var FraudRiskDetails_KnownFraudsterRisk *smithy.Schema
-
-var FraudRiskDetails_VoiceSpoofingRisk *smithy.Schema
-
-var Fraudster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Fraudster",
-}, smithy.ShapeTypeStructure, 4)
-var Fraudster_DomainId *smithy.Schema
-
-var Fraudster_GeneratedFraudsterId *smithy.Schema
-
-var Fraudster_CreatedAt *smithy.Schema
-
-var Fraudster_WatchlistIds *smithy.Schema
-
-var _FraudsterId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudsterId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var FraudsterRegistrationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudsterRegistrationJob",
-}, smithy.ShapeTypeStructure, 12)
-var FraudsterRegistrationJob_JobName *smithy.Schema
-
-var FraudsterRegistrationJob_JobId *smithy.Schema
-
-var FraudsterRegistrationJob_JobStatus *smithy.Schema
-
-var FraudsterRegistrationJob_DomainId *smithy.Schema
-
-var FraudsterRegistrationJob_DataAccessRoleArn *smithy.Schema
-
-var FraudsterRegistrationJob_RegistrationConfig *smithy.Schema
-
-var FraudsterRegistrationJob_InputDataConfig *smithy.Schema
-
-var FraudsterRegistrationJob_OutputDataConfig *smithy.Schema
-
-var FraudsterRegistrationJob_CreatedAt *smithy.Schema
-
-var FraudsterRegistrationJob_EndedAt *smithy.Schema
-
-var FraudsterRegistrationJob_FailureDetails *smithy.Schema
-
-var FraudsterRegistrationJob_JobProgress *smithy.Schema
-
-var _FraudsterRegistrationJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudsterRegistrationJobStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _FraudsterRegistrationJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudsterRegistrationJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _FraudsterRegistrationJobSummaries_member *smithy.Schema
-
-var FraudsterRegistrationJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudsterRegistrationJobSummary",
-}, smithy.ShapeTypeStructure, 8)
-var FraudsterRegistrationJobSummary_JobName *smithy.Schema
-
-var FraudsterRegistrationJobSummary_JobId *smithy.Schema
-
-var FraudsterRegistrationJobSummary_JobStatus *smithy.Schema
-
-var FraudsterRegistrationJobSummary_DomainId *smithy.Schema
-
-var FraudsterRegistrationJobSummary_CreatedAt *smithy.Schema
-
-var FraudsterRegistrationJobSummary_EndedAt *smithy.Schema
-
-var FraudsterRegistrationJobSummary_FailureDetails *smithy.Schema
-
-var FraudsterRegistrationJobSummary_JobProgress *smithy.Schema
-
-var _FraudsterSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudsterSummaries",
-}, smithy.ShapeTypeList, 1)
-var _FraudsterSummaries_member *smithy.Schema
-
-var FraudsterSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "FraudsterSummary",
-}, smithy.ShapeTypeStructure, 4)
-var FraudsterSummary_DomainId *smithy.Schema
-
-var FraudsterSummary_GeneratedFraudsterId *smithy.Schema
-
-var FraudsterSummary_CreatedAt *smithy.Schema
-
-var FraudsterSummary_WatchlistIds *smithy.Schema
-
-var _GeneratedFraudsterId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "GeneratedFraudsterId",
-}, smithy.ShapeTypeString, 0)
-
-var _GeneratedSpeakerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "GeneratedSpeakerId",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 1)
-var InputDataConfig_S3Uri *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var JobProgress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "JobProgress",
-}, smithy.ShapeTypeStructure, 1)
-var JobProgress_PercentComplete *smithy.Schema
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var KnownFraudsterRisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "KnownFraudsterRisk",
-}, smithy.ShapeTypeStructure, 2)
-var KnownFraudsterRisk_RiskScore *smithy.Schema
-
-var KnownFraudsterRisk_GeneratedFraudsterId *smithy.Schema
-
-var _MaxResultsForList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "MaxResultsForList",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsForListDomainFe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "MaxResultsForListDomainFe",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "OutputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OutputDataConfig_S3Uri *smithy.Schema
-
-var OutputDataConfig_KmsKeyId *smithy.Schema
-
-var RegistrationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "RegistrationConfig",
-}, smithy.ShapeTypeStructure, 3)
-var RegistrationConfig_DuplicateRegistrationAction *smithy.Schema
-
-var RegistrationConfig_FraudsterSimilarityThreshold *smithy.Schema
-
-var RegistrationConfig_WatchlistIds *smithy.Schema
-
-var _RegistrationConfigWatchlistIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "RegistrationConfigWatchlistIds",
-}, smithy.ShapeTypeList, 1)
-var _RegistrationConfigWatchlistIds_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ResponseWatchlistIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ResponseWatchlistIds",
-}, smithy.ShapeTypeList, 1)
-var _ResponseWatchlistIds_member *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _Score = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Score",
-}, smithy.ShapeTypeInteger, 0)
-
-var ServerSideEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ServerSideEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ServerSideEncryptionConfiguration_KmsKeyId *smithy.Schema
-
-var ServerSideEncryptionUpdateDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ServerSideEncryptionUpdateDetails",
-}, smithy.ShapeTypeStructure, 3)
-var ServerSideEncryptionUpdateDetails_OldKmsKeyId *smithy.Schema
-
-var ServerSideEncryptionUpdateDetails_UpdateStatus *smithy.Schema
-
-var ServerSideEncryptionUpdateDetails_Message *smithy.Schema
-
-var _ServerSideEncryptionUpdateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ServerSideEncryptionUpdateStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var _SessionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SessionId",
-}, smithy.ShapeTypeString, 0)
-
-var _SessionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SessionName",
-}, smithy.ShapeTypeString, 0)
-
-var _SessionNameOrId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SessionNameOrId",
-}, smithy.ShapeTypeString, 0)
-
-var Speaker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Speaker",
-}, smithy.ShapeTypeStructure, 7)
-var Speaker_DomainId *smithy.Schema
-
-var Speaker_CustomerSpeakerId *smithy.Schema
-
-var Speaker_GeneratedSpeakerId *smithy.Schema
-
-var Speaker_Status *smithy.Schema
-
-var Speaker_CreatedAt *smithy.Schema
-
-var Speaker_UpdatedAt *smithy.Schema
-
-var Speaker_LastAccessedAt *smithy.Schema
-
-var SpeakerEnrollmentJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SpeakerEnrollmentJob",
-}, smithy.ShapeTypeStructure, 12)
-var SpeakerEnrollmentJob_JobName *smithy.Schema
-
-var SpeakerEnrollmentJob_JobId *smithy.Schema
-
-var SpeakerEnrollmentJob_JobStatus *smithy.Schema
-
-var SpeakerEnrollmentJob_DomainId *smithy.Schema
-
-var SpeakerEnrollmentJob_DataAccessRoleArn *smithy.Schema
-
-var SpeakerEnrollmentJob_EnrollmentConfig *smithy.Schema
-
-var SpeakerEnrollmentJob_InputDataConfig *smithy.Schema
-
-var SpeakerEnrollmentJob_OutputDataConfig *smithy.Schema
-
-var SpeakerEnrollmentJob_CreatedAt *smithy.Schema
-
-var SpeakerEnrollmentJob_EndedAt *smithy.Schema
-
-var SpeakerEnrollmentJob_FailureDetails *smithy.Schema
-
-var SpeakerEnrollmentJob_JobProgress *smithy.Schema
-
-var _SpeakerEnrollmentJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SpeakerEnrollmentJobStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _SpeakerEnrollmentJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SpeakerEnrollmentJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SpeakerEnrollmentJobSummaries_member *smithy.Schema
-
-var SpeakerEnrollmentJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SpeakerEnrollmentJobSummary",
-}, smithy.ShapeTypeStructure, 8)
-var SpeakerEnrollmentJobSummary_JobName *smithy.Schema
-
-var SpeakerEnrollmentJobSummary_JobId *smithy.Schema
-
-var SpeakerEnrollmentJobSummary_JobStatus *smithy.Schema
-
-var SpeakerEnrollmentJobSummary_DomainId *smithy.Schema
-
-var SpeakerEnrollmentJobSummary_CreatedAt *smithy.Schema
-
-var SpeakerEnrollmentJobSummary_EndedAt *smithy.Schema
-
-var SpeakerEnrollmentJobSummary_FailureDetails *smithy.Schema
-
-var SpeakerEnrollmentJobSummary_JobProgress *smithy.Schema
-
-var _SpeakerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SpeakerId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SpeakerStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SpeakerStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _SpeakerSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SpeakerSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SpeakerSummaries_member *smithy.Schema
-
-var SpeakerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "SpeakerSummary",
-}, smithy.ShapeTypeStructure, 7)
-var SpeakerSummary_DomainId *smithy.Schema
-
-var SpeakerSummary_CustomerSpeakerId *smithy.Schema
-
-var SpeakerSummary_GeneratedSpeakerId *smithy.Schema
-
-var SpeakerSummary_Status *smithy.Schema
-
-var SpeakerSummary_CreatedAt *smithy.Schema
-
-var SpeakerSummary_UpdatedAt *smithy.Schema
-
-var SpeakerSummary_LastAccessedAt *smithy.Schema
-
-var _StreamingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "StreamingStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _UniqueIdLarge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UniqueIdLarge",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var VoiceSpoofingRisk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "VoiceSpoofingRisk",
-}, smithy.ShapeTypeStructure, 1)
-var VoiceSpoofingRisk_RiskScore *smithy.Schema
-
-var Watchlist = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "Watchlist",
-}, smithy.ShapeTypeStructure, 7)
-var Watchlist_DomainId *smithy.Schema
-
-var Watchlist_WatchlistId *smithy.Schema
-
-var Watchlist_Name *smithy.Schema
-
-var Watchlist_Description *smithy.Schema
-
-var Watchlist_DefaultWatchlist *smithy.Schema
-
-var Watchlist_CreatedAt *smithy.Schema
-
-var Watchlist_UpdatedAt *smithy.Schema
-
-var _WatchlistDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "WatchlistDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var WatchlistDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "WatchlistDetails",
-}, smithy.ShapeTypeStructure, 1)
-var WatchlistDetails_DefaultWatchlistId *smithy.Schema
-
-var _WatchlistId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "WatchlistId",
-}, smithy.ShapeTypeString, 0)
-
-var _WatchlistName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "WatchlistName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _WatchlistSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "WatchlistSummaries",
-}, smithy.ShapeTypeList, 1)
-var _WatchlistSummaries_member *smithy.Schema
-
-var WatchlistSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "WatchlistSummary",
-}, smithy.ShapeTypeStructure, 7)
-var WatchlistSummary_DomainId *smithy.Schema
-
-var WatchlistSummary_WatchlistId *smithy.Schema
-
-var WatchlistSummary_Name *smithy.Schema
-
-var WatchlistSummary_Description *smithy.Schema
-
-var WatchlistSummary_DefaultWatchlist *smithy.Schema
-
-var WatchlistSummary_CreatedAt *smithy.Schema
-
-var WatchlistSummary_UpdatedAt *smithy.Schema
-
-var AssociateFraudsterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "AssociateFraudsterRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateFraudsterRequest_DomainId *smithy.Schema
-
-var AssociateFraudsterRequest_WatchlistId *smithy.Schema
-
-var AssociateFraudsterRequest_FraudsterId *smithy.Schema
-
-var AssociateFraudsterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "AssociateFraudsterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateFraudsterResponse_Fraudster *smithy.Schema
-
-var CreateDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "CreateDomainRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateDomainRequest_Name *smithy.Schema
-
-var CreateDomainRequest_Description *smithy.Schema
-
-var CreateDomainRequest_ServerSideEncryptionConfiguration *smithy.Schema
-
-var CreateDomainRequest_ClientToken *smithy.Schema
-
-var CreateDomainRequest_Tags *smithy.Schema
-
-var CreateDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "CreateDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDomainResponse_Domain *smithy.Schema
-
-var CreateWatchlistRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "CreateWatchlistRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWatchlistRequest_DomainId *smithy.Schema
-
-var CreateWatchlistRequest_Name *smithy.Schema
-
-var CreateWatchlistRequest_Description *smithy.Schema
-
-var CreateWatchlistRequest_ClientToken *smithy.Schema
-
-var CreateWatchlistResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "CreateWatchlistResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWatchlistResponse_Watchlist *smithy.Schema
-
-var DeleteDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DeleteDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainRequest_DomainId *smithy.Schema
-
-var DeleteFraudsterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DeleteFraudsterRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFraudsterRequest_DomainId *smithy.Schema
-
-var DeleteFraudsterRequest_FraudsterId *smithy.Schema
-
-var DeleteSpeakerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DeleteSpeakerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSpeakerRequest_DomainId *smithy.Schema
-
-var DeleteSpeakerRequest_SpeakerId *smithy.Schema
-
-var DeleteWatchlistRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DeleteWatchlistRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWatchlistRequest_DomainId *smithy.Schema
-
-var DeleteWatchlistRequest_WatchlistId *smithy.Schema
-
-var DescribeDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDomainRequest_DomainId *smithy.Schema
-
-var DescribeDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDomainResponse_Domain *smithy.Schema
-
-var DescribeFraudsterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeFraudsterRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFraudsterRequest_DomainId *smithy.Schema
-
-var DescribeFraudsterRequest_FraudsterId *smithy.Schema
-
-var DescribeFraudsterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeFraudsterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFraudsterResponse_Fraudster *smithy.Schema
-
-var DescribeFraudsterRegistrationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeFraudsterRegistrationJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFraudsterRegistrationJobRequest_DomainId *smithy.Schema
-
-var DescribeFraudsterRegistrationJobRequest_JobId *smithy.Schema
-
-var DescribeFraudsterRegistrationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeFraudsterRegistrationJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFraudsterRegistrationJobResponse_Job *smithy.Schema
-
-var DescribeSpeakerEnrollmentJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeSpeakerEnrollmentJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSpeakerEnrollmentJobRequest_DomainId *smithy.Schema
-
-var DescribeSpeakerEnrollmentJobRequest_JobId *smithy.Schema
-
-var DescribeSpeakerEnrollmentJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeSpeakerEnrollmentJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSpeakerEnrollmentJobResponse_Job *smithy.Schema
-
-var DescribeSpeakerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeSpeakerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSpeakerRequest_DomainId *smithy.Schema
-
-var DescribeSpeakerRequest_SpeakerId *smithy.Schema
-
-var DescribeSpeakerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeSpeakerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSpeakerResponse_Speaker *smithy.Schema
-
-var DescribeWatchlistRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeWatchlistRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeWatchlistRequest_DomainId *smithy.Schema
-
-var DescribeWatchlistRequest_WatchlistId *smithy.Schema
-
-var DescribeWatchlistResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DescribeWatchlistResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWatchlistResponse_Watchlist *smithy.Schema
-
-var DisassociateFraudsterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DisassociateFraudsterRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateFraudsterRequest_DomainId *smithy.Schema
-
-var DisassociateFraudsterRequest_WatchlistId *smithy.Schema
-
-var DisassociateFraudsterRequest_FraudsterId *smithy.Schema
-
-var DisassociateFraudsterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "DisassociateFraudsterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateFraudsterResponse_Fraudster *smithy.Schema
-
-var EvaluateSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "EvaluateSessionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EvaluateSessionRequest_DomainId *smithy.Schema
-
-var EvaluateSessionRequest_SessionNameOrId *smithy.Schema
-
-var EvaluateSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "EvaluateSessionResponse",
-}, smithy.ShapeTypeStructure, 6)
-var EvaluateSessionResponse_DomainId *smithy.Schema
-
-var EvaluateSessionResponse_SessionId *smithy.Schema
-
-var EvaluateSessionResponse_SessionName *smithy.Schema
-
-var EvaluateSessionResponse_StreamingStatus *smithy.Schema
-
-var EvaluateSessionResponse_AuthenticationResult *smithy.Schema
-
-var EvaluateSessionResponse_FraudDetectionResult *smithy.Schema
-
-var ListDomainsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListDomainsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsRequest_MaxResults *smithy.Schema
-
-var ListDomainsRequest_NextToken *smithy.Schema
-
-var ListDomainsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListDomainsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsResponse_DomainSummaries *smithy.Schema
-
-var ListDomainsResponse_NextToken *smithy.Schema
-
-var ListFraudsterRegistrationJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListFraudsterRegistrationJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListFraudsterRegistrationJobsRequest_DomainId *smithy.Schema
-
-var ListFraudsterRegistrationJobsRequest_JobStatus *smithy.Schema
-
-var ListFraudsterRegistrationJobsRequest_MaxResults *smithy.Schema
-
-var ListFraudsterRegistrationJobsRequest_NextToken *smithy.Schema
-
-var ListFraudsterRegistrationJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListFraudsterRegistrationJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFraudsterRegistrationJobsResponse_JobSummaries *smithy.Schema
-
-var ListFraudsterRegistrationJobsResponse_NextToken *smithy.Schema
-
-var ListFraudstersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListFraudstersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListFraudstersRequest_DomainId *smithy.Schema
-
-var ListFraudstersRequest_WatchlistId *smithy.Schema
-
-var ListFraudstersRequest_MaxResults *smithy.Schema
-
-var ListFraudstersRequest_NextToken *smithy.Schema
-
-var ListFraudstersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListFraudstersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFraudstersResponse_FraudsterSummaries *smithy.Schema
-
-var ListFraudstersResponse_NextToken *smithy.Schema
-
-var ListSpeakerEnrollmentJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListSpeakerEnrollmentJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSpeakerEnrollmentJobsRequest_DomainId *smithy.Schema
-
-var ListSpeakerEnrollmentJobsRequest_JobStatus *smithy.Schema
-
-var ListSpeakerEnrollmentJobsRequest_MaxResults *smithy.Schema
-
-var ListSpeakerEnrollmentJobsRequest_NextToken *smithy.Schema
-
-var ListSpeakerEnrollmentJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListSpeakerEnrollmentJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSpeakerEnrollmentJobsResponse_JobSummaries *smithy.Schema
-
-var ListSpeakerEnrollmentJobsResponse_NextToken *smithy.Schema
-
-var ListSpeakersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListSpeakersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSpeakersRequest_DomainId *smithy.Schema
-
-var ListSpeakersRequest_MaxResults *smithy.Schema
-
-var ListSpeakersRequest_NextToken *smithy.Schema
-
-var ListSpeakersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListSpeakersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSpeakersResponse_SpeakerSummaries *smithy.Schema
-
-var ListSpeakersResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListWatchlistsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListWatchlistsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWatchlistsRequest_DomainId *smithy.Schema
-
-var ListWatchlistsRequest_MaxResults *smithy.Schema
-
-var ListWatchlistsRequest_NextToken *smithy.Schema
-
-var ListWatchlistsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "ListWatchlistsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWatchlistsResponse_WatchlistSummaries *smithy.Schema
-
-var ListWatchlistsResponse_NextToken *smithy.Schema
-
-var OptOutSpeakerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "OptOutSpeakerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var OptOutSpeakerRequest_DomainId *smithy.Schema
-
-var OptOutSpeakerRequest_SpeakerId *smithy.Schema
-
-var OptOutSpeakerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "OptOutSpeakerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var OptOutSpeakerResponse_Speaker *smithy.Schema
-
-var StartFraudsterRegistrationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "StartFraudsterRegistrationJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartFraudsterRegistrationJobRequest_ClientToken *smithy.Schema
-
-var StartFraudsterRegistrationJobRequest_JobName *smithy.Schema
-
-var StartFraudsterRegistrationJobRequest_DomainId *smithy.Schema
-
-var StartFraudsterRegistrationJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartFraudsterRegistrationJobRequest_RegistrationConfig *smithy.Schema
-
-var StartFraudsterRegistrationJobRequest_InputDataConfig *smithy.Schema
-
-var StartFraudsterRegistrationJobRequest_OutputDataConfig *smithy.Schema
-
-var StartFraudsterRegistrationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "StartFraudsterRegistrationJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartFraudsterRegistrationJobResponse_Job *smithy.Schema
-
-var StartSpeakerEnrollmentJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "StartSpeakerEnrollmentJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartSpeakerEnrollmentJobRequest_ClientToken *smithy.Schema
-
-var StartSpeakerEnrollmentJobRequest_JobName *smithy.Schema
-
-var StartSpeakerEnrollmentJobRequest_DomainId *smithy.Schema
-
-var StartSpeakerEnrollmentJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartSpeakerEnrollmentJobRequest_EnrollmentConfig *smithy.Schema
-
-var StartSpeakerEnrollmentJobRequest_InputDataConfig *smithy.Schema
-
-var StartSpeakerEnrollmentJobRequest_OutputDataConfig *smithy.Schema
-
-var StartSpeakerEnrollmentJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "StartSpeakerEnrollmentJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSpeakerEnrollmentJobResponse_Job *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UpdateDomainRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateDomainRequest_DomainId *smithy.Schema
-
-var UpdateDomainRequest_Name *smithy.Schema
-
-var UpdateDomainRequest_Description *smithy.Schema
-
-var UpdateDomainRequest_ServerSideEncryptionConfiguration *smithy.Schema
-
-var UpdateDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UpdateDomainResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDomainResponse_Domain *smithy.Schema
-
-var UpdateWatchlistRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UpdateWatchlistRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateWatchlistRequest_DomainId *smithy.Schema
-
-var UpdateWatchlistRequest_WatchlistId *smithy.Schema
-
-var UpdateWatchlistRequest_Name *smithy.Schema
-
-var UpdateWatchlistRequest_Description *smithy.Schema
-
-var UpdateWatchlistResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.voiceid",
-	Name:      "UpdateWatchlistResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWatchlistResponse_Watchlist *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
-
-	AuthenticationConfiguration_AcceptanceThreshold = AuthenticationConfiguration.AddMember("AcceptanceThreshold", _Score)
-
-	AuthenticationResult_AuthenticationResultId = AuthenticationResult.AddMember("AuthenticationResultId", _UniqueIdLarge)
-
-	AuthenticationResult_AudioAggregationStartedAt = AuthenticationResult.AddMember("AudioAggregationStartedAt", _Timestamp)
-
-	AuthenticationResult_AudioAggregationEndedAt = AuthenticationResult.AddMember("AudioAggregationEndedAt", _Timestamp)
-
-	AuthenticationResult_CustomerSpeakerId = AuthenticationResult.AddMember("CustomerSpeakerId", _CustomerSpeakerId)
-
-	AuthenticationResult_GeneratedSpeakerId = AuthenticationResult.AddMember("GeneratedSpeakerId", _GeneratedSpeakerId)
-
-	AuthenticationResult_Decision = AuthenticationResult.AddMember("Decision", _AuthenticationDecision)
-
-	AuthenticationResult_Score = AuthenticationResult.AddMember("Score", _Score)
-
-	AuthenticationResult_Configuration = AuthenticationResult.AddMember("Configuration", AuthenticationConfiguration)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	ConflictException_ConflictType = ConflictException.AddMember("ConflictType", _ConflictType)
-
-	ServerSideEncryptionConfiguration_KmsKeyId = ServerSideEncryptionConfiguration.AddMember("KmsKeyId", _KmsKeyId)
-
-	ServerSideEncryptionUpdateDetails_OldKmsKeyId = ServerSideEncryptionUpdateDetails.AddMember("OldKmsKeyId", _KmsKeyId)
-
-	ServerSideEncryptionUpdateDetails_UpdateStatus = ServerSideEncryptionUpdateDetails.AddMember("UpdateStatus", _ServerSideEncryptionUpdateStatus)
-
-	ServerSideEncryptionUpdateDetails_Message = ServerSideEncryptionUpdateDetails.AddMember("Message", _String)
-
-	WatchlistDetails_DefaultWatchlistId = WatchlistDetails.AddMember("DefaultWatchlistId", _WatchlistId)
-
-	Domain_DomainId = Domain.AddMember("DomainId", _DomainId)
-
-	Domain_Arn = Domain.AddMember("Arn", _Arn)
-
-	Domain_Name = Domain.AddMember("Name", _DomainName)
-
-	Domain_Description = Domain.AddMember("Description", _Description)
-
-	Domain_DomainStatus = Domain.AddMember("DomainStatus", _DomainStatus)
-
-	Domain_ServerSideEncryptionConfiguration = Domain.AddMember("ServerSideEncryptionConfiguration", ServerSideEncryptionConfiguration)
-
-	Domain_CreatedAt = Domain.AddMember("CreatedAt", _Timestamp)
-
-	Domain_UpdatedAt = Domain.AddMember("UpdatedAt", _Timestamp)
-
-	Domain_ServerSideEncryptionUpdateDetails = Domain.AddMember("ServerSideEncryptionUpdateDetails", ServerSideEncryptionUpdateDetails)
-
-	Domain_WatchlistDetails = Domain.AddMember("WatchlistDetails", WatchlistDetails)
-
-	DomainSummary_DomainId = DomainSummary.AddMember("DomainId", _DomainId)
-
-	DomainSummary_Arn = DomainSummary.AddMember("Arn", _Arn)
-
-	DomainSummary_Name = DomainSummary.AddMember("Name", _DomainName)
-
-	DomainSummary_Description = DomainSummary.AddMember("Description", _Description)
-
-	DomainSummary_DomainStatus = DomainSummary.AddMember("DomainStatus", _DomainStatus)
-
-	DomainSummary_ServerSideEncryptionConfiguration = DomainSummary.AddMember("ServerSideEncryptionConfiguration", ServerSideEncryptionConfiguration)
-
-	DomainSummary_CreatedAt = DomainSummary.AddMember("CreatedAt", _Timestamp)
-
-	DomainSummary_UpdatedAt = DomainSummary.AddMember("UpdatedAt", _Timestamp)
-
-	DomainSummary_ServerSideEncryptionUpdateDetails = DomainSummary.AddMember("ServerSideEncryptionUpdateDetails", ServerSideEncryptionUpdateDetails)
-
-	DomainSummary_WatchlistDetails = DomainSummary.AddMember("WatchlistDetails", WatchlistDetails)
-
-	_DomainSummaries_member = _DomainSummaries.AddMember("member", DomainSummary)
-
-	_EnrollmentJobFraudDetectionConfigWatchlistIds_member = _EnrollmentJobFraudDetectionConfigWatchlistIds.AddMember("member", _WatchlistId)
-
-	EnrollmentJobFraudDetectionConfig_FraudDetectionAction = EnrollmentJobFraudDetectionConfig.AddMember("FraudDetectionAction", _FraudDetectionAction)
-
-	EnrollmentJobFraudDetectionConfig_RiskThreshold = EnrollmentJobFraudDetectionConfig.AddMember("RiskThreshold", _Score)
-
-	EnrollmentJobFraudDetectionConfig_WatchlistIds = EnrollmentJobFraudDetectionConfig.AddMember("WatchlistIds", _EnrollmentJobFraudDetectionConfigWatchlistIds)
-
-	EnrollmentConfig_ExistingEnrollmentAction = EnrollmentConfig.AddMember("ExistingEnrollmentAction", _ExistingEnrollmentAction)
-
-	EnrollmentConfig_FraudDetectionConfig = EnrollmentConfig.AddMember("FraudDetectionConfig", EnrollmentJobFraudDetectionConfig)
-
-	FailureDetails_StatusCode = FailureDetails.AddMember("StatusCode", _Integer)
-
-	FailureDetails_Message = FailureDetails.AddMember("Message", _String)
-
-	FraudDetectionConfiguration_RiskThreshold = FraudDetectionConfiguration.AddMember("RiskThreshold", _Score)
-
-	FraudDetectionConfiguration_WatchlistId = FraudDetectionConfiguration.AddMember("WatchlistId", _WatchlistId)
-
-	_FraudDetectionReasons_member = _FraudDetectionReasons.AddMember("member", _FraudDetectionReason)
-
-	KnownFraudsterRisk_RiskScore = KnownFraudsterRisk.AddMember("RiskScore", _Score)
-
-	KnownFraudsterRisk_GeneratedFraudsterId = KnownFraudsterRisk.AddMember("GeneratedFraudsterId", _GeneratedFraudsterId)
-
-	VoiceSpoofingRisk_RiskScore = VoiceSpoofingRisk.AddMember("RiskScore", _Score)
-
-	FraudRiskDetails_KnownFraudsterRisk = FraudRiskDetails.AddMember("KnownFraudsterRisk", KnownFraudsterRisk)
-
-	FraudRiskDetails_VoiceSpoofingRisk = FraudRiskDetails.AddMember("VoiceSpoofingRisk", VoiceSpoofingRisk)
-
-	FraudDetectionResult_FraudDetectionResultId = FraudDetectionResult.AddMember("FraudDetectionResultId", _UniqueIdLarge)
-
-	FraudDetectionResult_AudioAggregationStartedAt = FraudDetectionResult.AddMember("AudioAggregationStartedAt", _Timestamp)
-
-	FraudDetectionResult_AudioAggregationEndedAt = FraudDetectionResult.AddMember("AudioAggregationEndedAt", _Timestamp)
-
-	FraudDetectionResult_Configuration = FraudDetectionResult.AddMember("Configuration", FraudDetectionConfiguration)
-
-	FraudDetectionResult_Decision = FraudDetectionResult.AddMember("Decision", _FraudDetectionDecision)
-
-	FraudDetectionResult_Reasons = FraudDetectionResult.AddMember("Reasons", _FraudDetectionReasons)
-
-	FraudDetectionResult_RiskDetails = FraudDetectionResult.AddMember("RiskDetails", FraudRiskDetails)
-
-	_ResponseWatchlistIds_member = _ResponseWatchlistIds.AddMember("member", _WatchlistId)
-
-	Fraudster_DomainId = Fraudster.AddMember("DomainId", _DomainId)
-
-	Fraudster_GeneratedFraudsterId = Fraudster.AddMember("GeneratedFraudsterId", _GeneratedFraudsterId)
-
-	Fraudster_CreatedAt = Fraudster.AddMember("CreatedAt", _Timestamp)
-
-	Fraudster_WatchlistIds = Fraudster.AddMember("WatchlistIds", _ResponseWatchlistIds)
-
-	_RegistrationConfigWatchlistIds_member = _RegistrationConfigWatchlistIds.AddMember("member", _WatchlistId)
-
-	RegistrationConfig_DuplicateRegistrationAction = RegistrationConfig.AddMember("DuplicateRegistrationAction", _DuplicateRegistrationAction)
-
-	RegistrationConfig_FraudsterSimilarityThreshold = RegistrationConfig.AddMember("FraudsterSimilarityThreshold", _Score)
-
-	RegistrationConfig_WatchlistIds = RegistrationConfig.AddMember("WatchlistIds", _RegistrationConfigWatchlistIds)
-
-	InputDataConfig_S3Uri = InputDataConfig.AddMember("S3Uri", _S3Uri)
-
-	OutputDataConfig_S3Uri = OutputDataConfig.AddMember("S3Uri", _S3Uri)
-
-	OutputDataConfig_KmsKeyId = OutputDataConfig.AddMember("KmsKeyId", _KmsKeyId)
-
-	JobProgress_PercentComplete = JobProgress.AddMember("PercentComplete", _Score)
-
-	FraudsterRegistrationJob_JobName = FraudsterRegistrationJob.AddMember("JobName", _JobName)
-
-	FraudsterRegistrationJob_JobId = FraudsterRegistrationJob.AddMember("JobId", _JobId)
-
-	FraudsterRegistrationJob_JobStatus = FraudsterRegistrationJob.AddMember("JobStatus", _FraudsterRegistrationJobStatus)
-
-	FraudsterRegistrationJob_DomainId = FraudsterRegistrationJob.AddMember("DomainId", _DomainId)
-
-	FraudsterRegistrationJob_DataAccessRoleArn = FraudsterRegistrationJob.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	FraudsterRegistrationJob_RegistrationConfig = FraudsterRegistrationJob.AddMember("RegistrationConfig", RegistrationConfig)
-
-	FraudsterRegistrationJob_InputDataConfig = FraudsterRegistrationJob.AddMember("InputDataConfig", InputDataConfig)
-
-	FraudsterRegistrationJob_OutputDataConfig = FraudsterRegistrationJob.AddMember("OutputDataConfig", OutputDataConfig)
-
-	FraudsterRegistrationJob_CreatedAt = FraudsterRegistrationJob.AddMember("CreatedAt", _Timestamp)
-
-	FraudsterRegistrationJob_EndedAt = FraudsterRegistrationJob.AddMember("EndedAt", _Timestamp)
-
-	FraudsterRegistrationJob_FailureDetails = FraudsterRegistrationJob.AddMember("FailureDetails", FailureDetails)
-
-	FraudsterRegistrationJob_JobProgress = FraudsterRegistrationJob.AddMember("JobProgress", JobProgress)
-
-	FraudsterRegistrationJobSummary_JobName = FraudsterRegistrationJobSummary.AddMember("JobName", _JobName)
-
-	FraudsterRegistrationJobSummary_JobId = FraudsterRegistrationJobSummary.AddMember("JobId", _JobId)
-
-	FraudsterRegistrationJobSummary_JobStatus = FraudsterRegistrationJobSummary.AddMember("JobStatus", _FraudsterRegistrationJobStatus)
-
-	FraudsterRegistrationJobSummary_DomainId = FraudsterRegistrationJobSummary.AddMember("DomainId", _DomainId)
-
-	FraudsterRegistrationJobSummary_CreatedAt = FraudsterRegistrationJobSummary.AddMember("CreatedAt", _Timestamp)
-
-	FraudsterRegistrationJobSummary_EndedAt = FraudsterRegistrationJobSummary.AddMember("EndedAt", _Timestamp)
-
-	FraudsterRegistrationJobSummary_FailureDetails = FraudsterRegistrationJobSummary.AddMember("FailureDetails", FailureDetails)
-
-	FraudsterRegistrationJobSummary_JobProgress = FraudsterRegistrationJobSummary.AddMember("JobProgress", JobProgress)
-
-	_FraudsterRegistrationJobSummaries_member = _FraudsterRegistrationJobSummaries.AddMember("member", FraudsterRegistrationJobSummary)
-
-	FraudsterSummary_DomainId = FraudsterSummary.AddMember("DomainId", _DomainId)
-
-	FraudsterSummary_GeneratedFraudsterId = FraudsterSummary.AddMember("GeneratedFraudsterId", _GeneratedFraudsterId)
-
-	FraudsterSummary_CreatedAt = FraudsterSummary.AddMember("CreatedAt", _Timestamp)
-
-	FraudsterSummary_WatchlistIds = FraudsterSummary.AddMember("WatchlistIds", _ResponseWatchlistIds)
-
-	_FraudsterSummaries_member = _FraudsterSummaries.AddMember("member", FraudsterSummary)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", _ResourceType)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _String)
-
-	Speaker_DomainId = Speaker.AddMember("DomainId", _DomainId)
-
-	Speaker_CustomerSpeakerId = Speaker.AddMember("CustomerSpeakerId", _CustomerSpeakerId)
-
-	Speaker_GeneratedSpeakerId = Speaker.AddMember("GeneratedSpeakerId", _GeneratedSpeakerId)
-
-	Speaker_Status = Speaker.AddMember("Status", _SpeakerStatus)
-
-	Speaker_CreatedAt = Speaker.AddMember("CreatedAt", _Timestamp)
-
-	Speaker_UpdatedAt = Speaker.AddMember("UpdatedAt", _Timestamp)
-
-	Speaker_LastAccessedAt = Speaker.AddMember("LastAccessedAt", _Timestamp)
-
-	SpeakerEnrollmentJob_JobName = SpeakerEnrollmentJob.AddMember("JobName", _JobName)
-
-	SpeakerEnrollmentJob_JobId = SpeakerEnrollmentJob.AddMember("JobId", _JobId)
-
-	SpeakerEnrollmentJob_JobStatus = SpeakerEnrollmentJob.AddMember("JobStatus", _SpeakerEnrollmentJobStatus)
-
-	SpeakerEnrollmentJob_DomainId = SpeakerEnrollmentJob.AddMember("DomainId", _DomainId)
-
-	SpeakerEnrollmentJob_DataAccessRoleArn = SpeakerEnrollmentJob.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	SpeakerEnrollmentJob_EnrollmentConfig = SpeakerEnrollmentJob.AddMember("EnrollmentConfig", EnrollmentConfig)
-
-	SpeakerEnrollmentJob_InputDataConfig = SpeakerEnrollmentJob.AddMember("InputDataConfig", InputDataConfig)
-
-	SpeakerEnrollmentJob_OutputDataConfig = SpeakerEnrollmentJob.AddMember("OutputDataConfig", OutputDataConfig)
-
-	SpeakerEnrollmentJob_CreatedAt = SpeakerEnrollmentJob.AddMember("CreatedAt", _Timestamp)
-
-	SpeakerEnrollmentJob_EndedAt = SpeakerEnrollmentJob.AddMember("EndedAt", _Timestamp)
-
-	SpeakerEnrollmentJob_FailureDetails = SpeakerEnrollmentJob.AddMember("FailureDetails", FailureDetails)
-
-	SpeakerEnrollmentJob_JobProgress = SpeakerEnrollmentJob.AddMember("JobProgress", JobProgress)
-
-	SpeakerEnrollmentJobSummary_JobName = SpeakerEnrollmentJobSummary.AddMember("JobName", _JobName)
-
-	SpeakerEnrollmentJobSummary_JobId = SpeakerEnrollmentJobSummary.AddMember("JobId", _JobId)
-
-	SpeakerEnrollmentJobSummary_JobStatus = SpeakerEnrollmentJobSummary.AddMember("JobStatus", _SpeakerEnrollmentJobStatus)
-
-	SpeakerEnrollmentJobSummary_DomainId = SpeakerEnrollmentJobSummary.AddMember("DomainId", _DomainId)
-
-	SpeakerEnrollmentJobSummary_CreatedAt = SpeakerEnrollmentJobSummary.AddMember("CreatedAt", _Timestamp)
-
-	SpeakerEnrollmentJobSummary_EndedAt = SpeakerEnrollmentJobSummary.AddMember("EndedAt", _Timestamp)
-
-	SpeakerEnrollmentJobSummary_FailureDetails = SpeakerEnrollmentJobSummary.AddMember("FailureDetails", FailureDetails)
-
-	SpeakerEnrollmentJobSummary_JobProgress = SpeakerEnrollmentJobSummary.AddMember("JobProgress", JobProgress)
-
-	_SpeakerEnrollmentJobSummaries_member = _SpeakerEnrollmentJobSummaries.AddMember("member", SpeakerEnrollmentJobSummary)
-
-	SpeakerSummary_DomainId = SpeakerSummary.AddMember("DomainId", _DomainId)
-
-	SpeakerSummary_CustomerSpeakerId = SpeakerSummary.AddMember("CustomerSpeakerId", _CustomerSpeakerId)
-
-	SpeakerSummary_GeneratedSpeakerId = SpeakerSummary.AddMember("GeneratedSpeakerId", _GeneratedSpeakerId)
-
-	SpeakerSummary_Status = SpeakerSummary.AddMember("Status", _SpeakerStatus)
-
-	SpeakerSummary_CreatedAt = SpeakerSummary.AddMember("CreatedAt", _Timestamp)
-
-	SpeakerSummary_UpdatedAt = SpeakerSummary.AddMember("UpdatedAt", _Timestamp)
-
-	SpeakerSummary_LastAccessedAt = SpeakerSummary.AddMember("LastAccessedAt", _Timestamp)
-
-	_SpeakerSummaries_member = _SpeakerSummaries.AddMember("member", SpeakerSummary)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _String)
-
-	Watchlist_DomainId = Watchlist.AddMember("DomainId", _DomainId)
-
-	Watchlist_WatchlistId = Watchlist.AddMember("WatchlistId", _WatchlistId)
-
-	Watchlist_Name = Watchlist.AddMember("Name", _WatchlistName)
-
-	Watchlist_Description = Watchlist.AddMember("Description", _WatchlistDescription)
-
-	Watchlist_DefaultWatchlist = Watchlist.AddMember("DefaultWatchlist", _Boolean)
-
-	Watchlist_CreatedAt = Watchlist.AddMember("CreatedAt", _Timestamp)
-
-	Watchlist_UpdatedAt = Watchlist.AddMember("UpdatedAt", _Timestamp)
-
-	WatchlistSummary_DomainId = WatchlistSummary.AddMember("DomainId", _DomainId)
-
-	WatchlistSummary_WatchlistId = WatchlistSummary.AddMember("WatchlistId", _WatchlistId)
-
-	WatchlistSummary_Name = WatchlistSummary.AddMember("Name", _WatchlistName)
-
-	WatchlistSummary_Description = WatchlistSummary.AddMember("Description", _WatchlistDescription)
-
-	WatchlistSummary_DefaultWatchlist = WatchlistSummary.AddMember("DefaultWatchlist", _Boolean)
-
-	WatchlistSummary_CreatedAt = WatchlistSummary.AddMember("CreatedAt", _Timestamp)
-
-	WatchlistSummary_UpdatedAt = WatchlistSummary.AddMember("UpdatedAt", _Timestamp)
-
-	_WatchlistSummaries_member = _WatchlistSummaries.AddMember("member", WatchlistSummary)
-
-	AssociateFraudsterRequest_DomainId = AssociateFraudsterRequest.AddMember("DomainId", _DomainId)
-
-	AssociateFraudsterRequest_WatchlistId = AssociateFraudsterRequest.AddMember("WatchlistId", _WatchlistId)
-
-	AssociateFraudsterRequest_FraudsterId = AssociateFraudsterRequest.AddMember("FraudsterId", _FraudsterId)
-
-	AssociateFraudsterResponse_Fraudster = AssociateFraudsterResponse.AddMember("Fraudster", Fraudster)
-
-	CreateDomainRequest_Name = CreateDomainRequest.AddMember("Name", _DomainName)
-
-	CreateDomainRequest_Description = CreateDomainRequest.AddMember("Description", _Description)
-
-	CreateDomainRequest_ServerSideEncryptionConfiguration = CreateDomainRequest.AddMember("ServerSideEncryptionConfiguration", ServerSideEncryptionConfiguration)
-
-	CreateDomainRequest_ClientToken = CreateDomainRequest.AddMember("ClientToken", _ClientTokenString)
-
-	CreateDomainRequest_Tags = CreateDomainRequest.AddMember("Tags", _TagList)
-
-	CreateDomainResponse_Domain = CreateDomainResponse.AddMember("Domain", Domain)
-
-	CreateWatchlistRequest_DomainId = CreateWatchlistRequest.AddMember("DomainId", _DomainId)
-
-	CreateWatchlistRequest_Name = CreateWatchlistRequest.AddMember("Name", _WatchlistName)
-
-	CreateWatchlistRequest_Description = CreateWatchlistRequest.AddMember("Description", _WatchlistDescription)
-
-	CreateWatchlistRequest_ClientToken = CreateWatchlistRequest.AddMember("ClientToken", _ClientTokenString)
-
-	CreateWatchlistResponse_Watchlist = CreateWatchlistResponse.AddMember("Watchlist", Watchlist)
-
-	DeleteDomainRequest_DomainId = DeleteDomainRequest.AddMember("DomainId", _DomainId)
-
-	DeleteFraudsterRequest_DomainId = DeleteFraudsterRequest.AddMember("DomainId", _DomainId)
-
-	DeleteFraudsterRequest_FraudsterId = DeleteFraudsterRequest.AddMember("FraudsterId", _FraudsterId)
-
-	DeleteSpeakerRequest_DomainId = DeleteSpeakerRequest.AddMember("DomainId", _DomainId)
-
-	DeleteSpeakerRequest_SpeakerId = DeleteSpeakerRequest.AddMember("SpeakerId", _SpeakerId)
-
-	DeleteWatchlistRequest_DomainId = DeleteWatchlistRequest.AddMember("DomainId", _DomainId)
-
-	DeleteWatchlistRequest_WatchlistId = DeleteWatchlistRequest.AddMember("WatchlistId", _WatchlistId)
-
-	DescribeDomainRequest_DomainId = DescribeDomainRequest.AddMember("DomainId", _DomainId)
-
-	DescribeDomainResponse_Domain = DescribeDomainResponse.AddMember("Domain", Domain)
-
-	DescribeFraudsterRequest_DomainId = DescribeFraudsterRequest.AddMember("DomainId", _DomainId)
-
-	DescribeFraudsterRequest_FraudsterId = DescribeFraudsterRequest.AddMember("FraudsterId", _FraudsterId)
-
-	DescribeFraudsterResponse_Fraudster = DescribeFraudsterResponse.AddMember("Fraudster", Fraudster)
-
-	DescribeFraudsterRegistrationJobRequest_DomainId = DescribeFraudsterRegistrationJobRequest.AddMember("DomainId", _DomainId)
-
-	DescribeFraudsterRegistrationJobRequest_JobId = DescribeFraudsterRegistrationJobRequest.AddMember("JobId", _JobId)
-
-	DescribeFraudsterRegistrationJobResponse_Job = DescribeFraudsterRegistrationJobResponse.AddMember("Job", FraudsterRegistrationJob)
-
-	DescribeSpeakerEnrollmentJobRequest_DomainId = DescribeSpeakerEnrollmentJobRequest.AddMember("DomainId", _DomainId)
-
-	DescribeSpeakerEnrollmentJobRequest_JobId = DescribeSpeakerEnrollmentJobRequest.AddMember("JobId", _JobId)
-
-	DescribeSpeakerEnrollmentJobResponse_Job = DescribeSpeakerEnrollmentJobResponse.AddMember("Job", SpeakerEnrollmentJob)
-
-	DescribeSpeakerRequest_DomainId = DescribeSpeakerRequest.AddMember("DomainId", _DomainId)
-
-	DescribeSpeakerRequest_SpeakerId = DescribeSpeakerRequest.AddMember("SpeakerId", _SpeakerId)
-
-	DescribeSpeakerResponse_Speaker = DescribeSpeakerResponse.AddMember("Speaker", Speaker)
-
-	DescribeWatchlistRequest_DomainId = DescribeWatchlistRequest.AddMember("DomainId", _DomainId)
-
-	DescribeWatchlistRequest_WatchlistId = DescribeWatchlistRequest.AddMember("WatchlistId", _WatchlistId)
-
-	DescribeWatchlistResponse_Watchlist = DescribeWatchlistResponse.AddMember("Watchlist", Watchlist)
-
-	DisassociateFraudsterRequest_DomainId = DisassociateFraudsterRequest.AddMember("DomainId", _DomainId)
-
-	DisassociateFraudsterRequest_WatchlistId = DisassociateFraudsterRequest.AddMember("WatchlistId", _WatchlistId)
-
-	DisassociateFraudsterRequest_FraudsterId = DisassociateFraudsterRequest.AddMember("FraudsterId", _FraudsterId)
-
-	DisassociateFraudsterResponse_Fraudster = DisassociateFraudsterResponse.AddMember("Fraudster", Fraudster)
-
-	EvaluateSessionRequest_DomainId = EvaluateSessionRequest.AddMember("DomainId", _DomainId)
-
-	EvaluateSessionRequest_SessionNameOrId = EvaluateSessionRequest.AddMember("SessionNameOrId", _SessionNameOrId)
-
-	EvaluateSessionResponse_DomainId = EvaluateSessionResponse.AddMember("DomainId", _DomainId)
-
-	EvaluateSessionResponse_SessionId = EvaluateSessionResponse.AddMember("SessionId", _SessionId)
-
-	EvaluateSessionResponse_SessionName = EvaluateSessionResponse.AddMember("SessionName", _SessionName)
-
-	EvaluateSessionResponse_StreamingStatus = EvaluateSessionResponse.AddMember("StreamingStatus", _StreamingStatus)
-
-	EvaluateSessionResponse_AuthenticationResult = EvaluateSessionResponse.AddMember("AuthenticationResult", AuthenticationResult)
-
-	EvaluateSessionResponse_FraudDetectionResult = EvaluateSessionResponse.AddMember("FraudDetectionResult", FraudDetectionResult)
-
-	ListDomainsRequest_MaxResults = ListDomainsRequest.AddMember("MaxResults", _MaxResultsForListDomainFe)
-
-	ListDomainsRequest_NextToken = ListDomainsRequest.AddMember("NextToken", _NextToken)
-
-	ListDomainsResponse_DomainSummaries = ListDomainsResponse.AddMember("DomainSummaries", _DomainSummaries)
-
-	ListDomainsResponse_NextToken = ListDomainsResponse.AddMember("NextToken", _String)
-
-	ListFraudsterRegistrationJobsRequest_DomainId = ListFraudsterRegistrationJobsRequest.AddMember("DomainId", _DomainId)
-
-	ListFraudsterRegistrationJobsRequest_JobStatus = ListFraudsterRegistrationJobsRequest.AddMember("JobStatus", _FraudsterRegistrationJobStatus)
-
-	ListFraudsterRegistrationJobsRequest_MaxResults = ListFraudsterRegistrationJobsRequest.AddMember("MaxResults", _MaxResultsForList)
-
-	ListFraudsterRegistrationJobsRequest_NextToken = ListFraudsterRegistrationJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListFraudsterRegistrationJobsResponse_JobSummaries = ListFraudsterRegistrationJobsResponse.AddMember("JobSummaries", _FraudsterRegistrationJobSummaries)
-
-	ListFraudsterRegistrationJobsResponse_NextToken = ListFraudsterRegistrationJobsResponse.AddMember("NextToken", _String)
-
-	ListFraudstersRequest_DomainId = ListFraudstersRequest.AddMember("DomainId", _DomainId)
-
-	ListFraudstersRequest_WatchlistId = ListFraudstersRequest.AddMember("WatchlistId", _WatchlistId)
-
-	ListFraudstersRequest_MaxResults = ListFraudstersRequest.AddMember("MaxResults", _MaxResultsForList)
-
-	ListFraudstersRequest_NextToken = ListFraudstersRequest.AddMember("NextToken", _NextToken)
-
-	ListFraudstersResponse_FraudsterSummaries = ListFraudstersResponse.AddMember("FraudsterSummaries", _FraudsterSummaries)
-
-	ListFraudstersResponse_NextToken = ListFraudstersResponse.AddMember("NextToken", _String)
-
-	ListSpeakerEnrollmentJobsRequest_DomainId = ListSpeakerEnrollmentJobsRequest.AddMember("DomainId", _DomainId)
-
-	ListSpeakerEnrollmentJobsRequest_JobStatus = ListSpeakerEnrollmentJobsRequest.AddMember("JobStatus", _SpeakerEnrollmentJobStatus)
-
-	ListSpeakerEnrollmentJobsRequest_MaxResults = ListSpeakerEnrollmentJobsRequest.AddMember("MaxResults", _MaxResultsForList)
-
-	ListSpeakerEnrollmentJobsRequest_NextToken = ListSpeakerEnrollmentJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListSpeakerEnrollmentJobsResponse_JobSummaries = ListSpeakerEnrollmentJobsResponse.AddMember("JobSummaries", _SpeakerEnrollmentJobSummaries)
-
-	ListSpeakerEnrollmentJobsResponse_NextToken = ListSpeakerEnrollmentJobsResponse.AddMember("NextToken", _String)
-
-	ListSpeakersRequest_DomainId = ListSpeakersRequest.AddMember("DomainId", _DomainId)
-
-	ListSpeakersRequest_MaxResults = ListSpeakersRequest.AddMember("MaxResults", _MaxResultsForList)
-
-	ListSpeakersRequest_NextToken = ListSpeakersRequest.AddMember("NextToken", _NextToken)
-
-	ListSpeakersResponse_SpeakerSummaries = ListSpeakersResponse.AddMember("SpeakerSummaries", _SpeakerSummaries)
-
-	ListSpeakersResponse_NextToken = ListSpeakersResponse.AddMember("NextToken", _String)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListWatchlistsRequest_DomainId = ListWatchlistsRequest.AddMember("DomainId", _DomainId)
-
-	ListWatchlistsRequest_MaxResults = ListWatchlistsRequest.AddMember("MaxResults", _MaxResultsForList)
-
-	ListWatchlistsRequest_NextToken = ListWatchlistsRequest.AddMember("NextToken", _NextToken)
-
-	ListWatchlistsResponse_WatchlistSummaries = ListWatchlistsResponse.AddMember("WatchlistSummaries", _WatchlistSummaries)
-
-	ListWatchlistsResponse_NextToken = ListWatchlistsResponse.AddMember("NextToken", _String)
-
-	OptOutSpeakerRequest_DomainId = OptOutSpeakerRequest.AddMember("DomainId", _DomainId)
-
-	OptOutSpeakerRequest_SpeakerId = OptOutSpeakerRequest.AddMember("SpeakerId", _SpeakerId)
-
-	OptOutSpeakerResponse_Speaker = OptOutSpeakerResponse.AddMember("Speaker", Speaker)
-
-	StartFraudsterRegistrationJobRequest_ClientToken = StartFraudsterRegistrationJobRequest.AddMember("ClientToken", _ClientTokenString)
-
-	StartFraudsterRegistrationJobRequest_JobName = StartFraudsterRegistrationJobRequest.AddMember("JobName", _JobName)
-
-	StartFraudsterRegistrationJobRequest_DomainId = StartFraudsterRegistrationJobRequest.AddMember("DomainId", _DomainId)
-
-	StartFraudsterRegistrationJobRequest_DataAccessRoleArn = StartFraudsterRegistrationJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartFraudsterRegistrationJobRequest_RegistrationConfig = StartFraudsterRegistrationJobRequest.AddMember("RegistrationConfig", RegistrationConfig)
-
-	StartFraudsterRegistrationJobRequest_InputDataConfig = StartFraudsterRegistrationJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartFraudsterRegistrationJobRequest_OutputDataConfig = StartFraudsterRegistrationJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartFraudsterRegistrationJobResponse_Job = StartFraudsterRegistrationJobResponse.AddMember("Job", FraudsterRegistrationJob)
-
-	StartSpeakerEnrollmentJobRequest_ClientToken = StartSpeakerEnrollmentJobRequest.AddMember("ClientToken", _ClientTokenString)
-
-	StartSpeakerEnrollmentJobRequest_JobName = StartSpeakerEnrollmentJobRequest.AddMember("JobName", _JobName)
-
-	StartSpeakerEnrollmentJobRequest_DomainId = StartSpeakerEnrollmentJobRequest.AddMember("DomainId", _DomainId)
-
-	StartSpeakerEnrollmentJobRequest_DataAccessRoleArn = StartSpeakerEnrollmentJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartSpeakerEnrollmentJobRequest_EnrollmentConfig = StartSpeakerEnrollmentJobRequest.AddMember("EnrollmentConfig", EnrollmentConfig)
-
-	StartSpeakerEnrollmentJobRequest_InputDataConfig = StartSpeakerEnrollmentJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartSpeakerEnrollmentJobRequest_OutputDataConfig = StartSpeakerEnrollmentJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartSpeakerEnrollmentJobResponse_Job = StartSpeakerEnrollmentJobResponse.AddMember("Job", SpeakerEnrollmentJob)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateDomainRequest_DomainId = UpdateDomainRequest.AddMember("DomainId", _DomainId)
-
-	UpdateDomainRequest_Name = UpdateDomainRequest.AddMember("Name", _DomainName)
-
-	UpdateDomainRequest_Description = UpdateDomainRequest.AddMember("Description", _Description)
-
-	UpdateDomainRequest_ServerSideEncryptionConfiguration = UpdateDomainRequest.AddMember("ServerSideEncryptionConfiguration", ServerSideEncryptionConfiguration)
-
-	UpdateDomainResponse_Domain = UpdateDomainResponse.AddMember("Domain", Domain)
-
-	UpdateWatchlistRequest_DomainId = UpdateWatchlistRequest.AddMember("DomainId", _DomainId)
-
-	UpdateWatchlistRequest_WatchlistId = UpdateWatchlistRequest.AddMember("WatchlistId", _WatchlistId)
-
-	UpdateWatchlistRequest_Name = UpdateWatchlistRequest.AddMember("Name", _WatchlistName)
-
-	UpdateWatchlistRequest_Description = UpdateWatchlistRequest.AddMember("Description", _WatchlistDescription)
-
-	UpdateWatchlistResponse_Watchlist = UpdateWatchlistResponse.AddMember("Watchlist", Watchlist)
-
+const blob = "" +
+	"EnrollmentJobFraudDetectionConfigWatchlistIdsDescribeFraudsterRegistrationJobResponseDescribeFraudst" +
+	"erRegistrationJobRequestListFraudsterRegistrationJobsResponseStartFraudsterRegistrationJobResponseDe" +
+	"scribeSpeakerEnrollmentJobResponseListFraudsterRegistrationJobsRequestStartFraudsterRegistrationJobR" +
+	"equestDescribeSpeakerEnrollmentJobRequestFraudsterRegistrationJobSummariesListSpeakerEnrollmentJobsR" +
+	"esponseServerSideEncryptionConfigurationServerSideEncryptionUpdateDetailsStartSpeakerEnrollmentJobRe" +
+	"sponseListSpeakerEnrollmentJobsRequestServerSideEncryptionUpdateStatusStartSpeakerEnrollmentJobReque" +
+	"stFraudsterRegistrationJobSummaryFraudsterRegistrationJobStatusRegistrationConfigWatchlistIdsDisasso" +
+	"ciateFraudsterResponseServiceQuotaExceededExceptionSpeakerEnrollmentJobSummariesDisassociateFraudste" +
+	"rRequestFraudsterSimilarityThresholdAuthenticationConfigurationDuplicateRegistrationActionFraudDetec" +
+	"tionConfigurationListTagsForResourceResponseSpeakerEnrollmentJobSummaryAssociateFraudsterResponseLis" +
+	"tTagsForResourceRequestSpeakerEnrollmentJobStatusAssociateFraudsterRequestAudioAggregationStartedAtD" +
+	"escribeFraudsterResponseDescribeWatchlistResponseMaxResultsForListDomainFeResourceNotFoundExceptionD" +
+	"escribeFraudsterRequestDescribeWatchlistRequestExistingEnrollmentActionAudioAggregationEndedAtCreate" +
+	"WatchlistResponseDescribeSpeakerResponseEvaluateSessionResponseInternalServerExceptionUpdateWatchlis" +
+	"tResponseAuthenticationDecisionAuthenticationResultIdCreateWatchlistRequestDeleteFraudsterRequestDel" +
+	"eteWatchlistRequestDescribeDomainResponseDescribeSpeakerRequestEvaluateSessionRequestFraudDetectionD" +
+	"ecisionFraudDetectionResultIdListFraudstersResponseListWatchlistsResponseUpdateWatchlistRequestAcces" +
+	"sDeniedExceptionDescribeDomainRequestFraudDetectionReasonsListFraudstersRequestListWatchlistsRequest" +
+	"OptOutSpeakerResponseUntagResourceResponseCreateDomainResponseDeleteSpeakerRequestFraudDetectionActi" +
+	"onGeneratedFraudsterIdListSpeakersResponseOptOutSpeakerRequestResponseWatchlistIdsUntagResourceReque" +
+	"stUpdateDomainResponseWatchlistDescriptionAcceptanceThresholdCreateDomainRequestDeleteDomainRequestL" +
+	"istDomainsResponseListSpeakersRequestTagResourceResponseThrottlingExceptionUpdateDomainRequestValida" +
+	"tionExceptionAmazonResourceNameDefaultWatchlistIdFraudsterSummariesGeneratedSpeakerIdKnownFraudsterR" +
+	"iskListDomainsRequestTagResourceRequestWatchlistSummariesClientTokenStringConflictExceptionCustomerS" +
+	"peakerIdDataAccessRoleArnVoiceSpoofingRiskEnrollmentConfigFraudRiskDetailsFraudsterSummaryOutputData" +
+	"ConfigSpeakerSummariesWatchlistDetailsWatchlistSummaryDomainSummariesInputDataConfigPercentCompleteS" +
+	"essionNameOrIdStreamingStatusFailureDetailsLastAccessedAtSpeakerSummaryDomainSummaryRiskThresholdSpe" +
+	"akerStatusUniqueIdLargeWatchlistNameConflictTypeDomainStatusResourceTypeJobProgressOldKmsKeyIdResour" +
+	"ceArnDomainNameIamRoleArnStatusCodeTagKeyListCreatedAtNextTokenRiskScoreSessionIdTimestampUpdatedAtD" +
+	"omainIdTagValueBooleanIntegerJobNameMessageTagKeysTagListVoiceIDmemberJobIdS3Uri"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.voiceid"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 971, Target: 0, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1842, Target: 1, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1294, Target: 2, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2080, Target: 3, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1475, Target: 4, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1862, Target: 5, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1497, Target: 6, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1519, Target: 7, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 45, Target: 8, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 45, Target: 9, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 198, Target: 10, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 198, Target: 11, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1124, Target: 12, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 693, Target: 13, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1340, Target: 14, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2099, Target: 15, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 124, Target: 16, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1629, Target: 17, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 374, Target: 18, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1922, Target: 19, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 917, Target: 20, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1651, Target: 21, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1800, Target: 22, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 161, Target: 23, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 473, Target: 24, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2137, Target: 25, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1821, Target: 26, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2002, Target: 27, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1386, Target: 28, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2957, Target: 29, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1695, Target: 30, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2213, Target: 32, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2422, Target: 33, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 836, Target: 34, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2042, Target: 187, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1409, Target: 36, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1431, Target: 37, Traits: 0, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1431, Target: 259, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1074, Target: 258, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1271, Target: 258, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2391, Target: 52, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2267, Target: 153, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1423, Target: 36, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2867, Target: 187, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 427, Target: 34, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2915, Target: 46, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 2357, Target: 47, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2374, Target: 48, Traits: 3, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2736, Target: 51, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2736, Target: 51, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2391, Target: 52, Traits: 4, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2031, Target: 53, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1166, Target: 54, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2422, Target: 33, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2227, Target: 66, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 53, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2748, Target: 67, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 407, Target: 188, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2890, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 440, Target: 190, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2522, Target: 273, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2805, Target: 66, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2748, Target: 67, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2554, Target: 68, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 70, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2671, Target: 70, Traits: 0, StrLen: 13, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2422, Target: 33, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2227, Target: 66, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 53, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2748, Target: 67, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 407, Target: 188, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2890, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 440, Target: 190, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2522, Target: 273, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 863, Target: 81, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2442, Target: 82, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1247, Target: 91, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 13, Target: 85, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 85, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1882, Target: 95, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2684, Target: 187, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 33, Target: 89, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 89, Traits: 0, StrLen: 45, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 275, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1247, Target: 91, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2629, Target: 92, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2825, Target: 157, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1882, Target: 95, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 890, Target: 96, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2684, Target: 187, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1585, Target: 99, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1737, Target: 100, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1737, Target: 101, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 100, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1607, Target: 103, Traits: 0, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1607, Target: 259, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1074, Target: 258, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1271, Target: 258, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 427, Target: 96, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1423, Target: 99, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1751, Target: 101, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2463, Target: 111, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2458, Target: 111, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2285, Target: 165, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2425, Target: 262, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 53, Target: 114, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1902, Target: 152, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 33, Target: 184, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1911, Target: 119, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 53, Target: 120, Traits: 0, StrLen: 24, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2929, Target: 161, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2970, Target: 160, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 654, Target: 133, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2408, Target: 154, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 663, Target: 174, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2569, Target: 155, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2490, Target: 171, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1287, Target: 258, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2629, Target: 92, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2772, Target: 162, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 633, Target: 133, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 341, Target: 134, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 136, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 602, Target: 136, Traits: 0, StrLen: 31, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2929, Target: 161, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2970, Target: 160, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 654, Target: 133, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1287, Target: 258, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2629, Target: 92, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2772, Target: 162, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2249, Target: 145, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 147, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2474, Target: 147, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1902, Target: 152, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 33, Target: 184, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1902, Target: 152, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2267, Target: 153, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2815, Target: 154, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2569, Target: 155, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2975, Target: 186, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2922, Target: 157, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1363, Target: 158, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2970, Target: 160, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2929, Target: 161, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2772, Target: 162, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2584, Target: 187, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2786, Target: 164, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2285, Target: 165, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2863, Target: 187, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1902, Target: 152, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 168, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1149, Target: 169, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2854, Target: 170, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2490, Target: 171, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2975, Target: 186, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2786, Target: 164, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 663, Target: 174, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 863, Target: 81, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 808, Target: 187, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 33, Target: 178, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 663, Target: 178, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 275, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1174, Target: 180, Traits: 6, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2760, Target: 183, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2760, Target: 183, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1962, Target: 184, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 275, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2975, Target: 186, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2867, Target: 187, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 407, Target: 188, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2786, Target: 164, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 440, Target: 190, Traits: 0, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2783, Target: 164, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 558, Target: 194, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 538, Target: 194, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 722, Target: 195, Traits: 7, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2872, Target: 197, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2599, Target: 198, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2599, Target: 199, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 206, Target: 200, Traits: 0, StrLen: 7, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2391, Target: 52, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2267, Target: 153, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 564, Target: 234, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2890, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2643, Target: 258, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 206, Target: 208, Traits: 0, StrLen: 20, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2929, Target: 161, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2970, Target: 160, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 654, Target: 221, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2408, Target: 154, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2442, Target: 82, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2569, Target: 155, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2490, Target: 171, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1287, Target: 258, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2629, Target: 92, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2772, Target: 162, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1023, Target: 221, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 751, Target: 222, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 224, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 944, Target: 224, Traits: 0, StrLen: 27, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2929, Target: 161, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2970, Target: 160, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 654, Target: 221, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1287, Target: 258, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2629, Target: 92, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2772, Target: 162, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2276, Target: 233, Traits: 4, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2697, Target: 234, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2506, Target: 235, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 237, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2657, Target: 237, Traits: 0, StrLen: 14, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2391, Target: 52, Traits: 2, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2267, Target: 153, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 564, Target: 234, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2890, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2643, Target: 258, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2614, Target: 245, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2368, Target: 246, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 921, Target: 247, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2789, Target: 250, Traits: 2, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2910, Target: 255, Traits: 2, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2835, Target: 250, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2835, Target: 251, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 250, Traits: 2, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2950, Target: 253, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 247, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2907, Target: 255, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2156, Target: 256, Traits: 8, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2881, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 2710, Target: 259, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2194, Target: 260, Traits: 9, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2936, Target: 246, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2425, Target: 262, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2863, Target: 187, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 33, Target: 264, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2227, Target: 276, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 272, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2231, Target: 46, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2890, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2022, Target: 272, Traits: 4, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2522, Target: 273, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2231, Target: 275, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2723, Target: 276, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2339, Target: 277, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2964, Target: 279, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2538, Target: 279, Traits: 0, StrLen: 16, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2227, Target: 276, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 272, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2231, Target: 46, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2845, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2890, Target: 258, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1049, Target: 287, Traits: 0, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1911, Target: 119, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 971, Target: 291, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 53, Target: 114, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2061, Target: 293, Traits: 0, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2227, Target: 66, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 53, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 407, Target: 188, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2357, Target: 47, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 921, Target: 253, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1842, Target: 299, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1166, Target: 54, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1453, Target: 301, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2227, Target: 276, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 272, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2357, Target: 47, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1294, Target: 306, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 33, Target: 264, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2080, Target: 308, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1475, Target: 310, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1911, Target: 119, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1862, Target: 313, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2276, Target: 233, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1497, Target: 316, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1716, Target: 319, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1519, Target: 321, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1166, Target: 54, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1199, Target: 323, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1911, Target: 119, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1099, Target: 326, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 53, Target: 114, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 85, Target: 328, Traits: 0, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2970, Target: 160, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 45, Target: 331, Traits: 0, StrLen: 40, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10, Target: 120, Traits: 0, StrLen: 3, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 306, Target: 333, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2970, Target: 160, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 198, Target: 336, Traits: 0, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10, Target: 208, Traits: 0, StrLen: 3, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1541, Target: 338, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2276, Target: 233, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1317, Target: 341, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 206, Target: 200, Traits: 0, StrLen: 7, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1223, Target: 343, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1124, Target: 346, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 33, Target: 264, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 780, Target: 348, Traits: 0, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1911, Target: 119, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 693, Target: 352, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 53, Target: 114, Traits: 0, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1563, Target: 354, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2599, Target: 199, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1340, Target: 357, Traits: 0, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2872, Target: 197, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2599, Target: 198, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2614, Target: 245, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1431, Target: 37, Traits: 0, StrLen: 20, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1607, Target: 103, Traits: 0, StrLen: 20, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2303, Target: 364, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1149, Target: 169, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2854, Target: 170, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2099, Target: 367, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2554, Target: 68, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2854, Target: 246, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 234, Target: 370, Traits: 0, StrLen: 36, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 654, Target: 133, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 168, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2854, Target: 170, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 124, Target: 375, Traits: 0, StrLen: 37, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 362, Target: 134, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2854, Target: 246, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1758, Target: 378, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 168, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2854, Target: 170, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1629, Target: 383, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2249, Target: 145, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2854, Target: 246, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 506, Target: 386, Traits: 0, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 654, Target: 221, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 168, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2854, Target: 170, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 374, Target: 391, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 362, Target: 222, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2854, Target: 246, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2118, Target: 394, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 168, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2854, Target: 170, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1922, Target: 398, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2506, Target: 235, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2854, Target: 246, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 997, Target: 401, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2794, Target: 32, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 917, Target: 403, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 921, Target: 253, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1779, Target: 405, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 168, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2854, Target: 170, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1651, Target: 409, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2339, Target: 277, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2854, Target: 246, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1942, Target: 412, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2276, Target: 233, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1800, Target: 415, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 206, Target: 200, Traits: 0, StrLen: 7, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 270, Target: 417, Traits: 0, StrLen: 36, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2357, Target: 47, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2929, Target: 161, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2408, Target: 154, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 663, Target: 174, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2569, Target: 155, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2490, Target: 171, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 161, Target: 425, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10, Target: 120, Traits: 0, StrLen: 3, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 570, Target: 427, Traits: 0, StrLen: 32, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2357, Target: 47, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2929, Target: 161, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2408, Target: 154, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2442, Target: 82, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2569, Target: 155, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2490, Target: 171, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 473, Target: 435, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 10, Target: 208, Traits: 0, StrLen: 3, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2321, Target: 437, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2794, Target: 32, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 921, Target: 253, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2137, Target: 440, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1982, Target: 441, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2794, Target: 32, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2943, Target: 251, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1821, Target: 444, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2175, Target: 445, Traits: 0, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2227, Target: 66, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 53, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 407, Target: 188, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2002, Target: 450, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1166, Target: 54, Traits: 0, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1673, Target: 452, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2899, Target: 65, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 33, Target: 275, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2227, Target: 276, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2031, Target: 272, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1386, Target: 457, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 33, Target: 264, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [459]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+}
+
+var AssociateFraudster = &handles[0]
+
+var CreateDomain = &handles[1]
+
+var CreateWatchlist = &handles[2]
+
+var DeleteDomain = &handles[3]
+
+var DeleteFraudster = &handles[4]
+
+var DeleteSpeaker = &handles[5]
+
+var DeleteWatchlist = &handles[6]
+
+var DescribeDomain = &handles[7]
+
+var DescribeFraudster = &handles[8]
+
+var DescribeFraudsterRegistrationJob = &handles[9]
+
+var DescribeSpeaker = &handles[10]
+
+var DescribeSpeakerEnrollmentJob = &handles[11]
+
+var DescribeWatchlist = &handles[12]
+
+var DisassociateFraudster = &handles[13]
+
+var EvaluateSession = &handles[14]
+
+var ListDomains = &handles[15]
+
+var ListFraudsterRegistrationJobs = &handles[16]
+
+var ListFraudsters = &handles[17]
+
+var ListSpeakerEnrollmentJobs = &handles[18]
+
+var ListSpeakers = &handles[19]
+
+var ListTagsForResource = &handles[20]
+
+var ListWatchlists = &handles[21]
+
+var OptOutSpeaker = &handles[22]
+
+var StartFraudsterRegistrationJob = &handles[23]
+
+var StartSpeakerEnrollmentJob = &handles[24]
+
+var TagResource = &handles[25]
+
+var UntagResource = &handles[26]
+
+var UpdateDomain = &handles[27]
+
+var UpdateWatchlist = &handles[28]
+
+var _VoiceID = &handles[29]
+
+var AccessDeniedException = &handles[30]
+var AccessDeniedException_Message = &handles[31]
+
+var _AmazonResourceName = &handles[32]
+
+var _Arn = &handles[33]
+
+var AuthenticationConfiguration = &handles[34]
+var AuthenticationConfiguration_AcceptanceThreshold = &handles[35]
+
+var _AuthenticationDecision = &handles[36]
+
+var AuthenticationResult = &handles[37]
+var AuthenticationResult_AuthenticationResultId = &handles[38]
+var AuthenticationResult_AudioAggregationStartedAt = &handles[39]
+var AuthenticationResult_AudioAggregationEndedAt = &handles[40]
+var AuthenticationResult_CustomerSpeakerId = &handles[41]
+var AuthenticationResult_GeneratedSpeakerId = &handles[42]
+var AuthenticationResult_Decision = &handles[43]
+var AuthenticationResult_Score = &handles[44]
+var AuthenticationResult_Configuration = &handles[45]
+
+var _Boolean = &handles[46]
+
+var _ClientTokenString = &handles[47]
+
+var ConflictException = &handles[48]
+var ConflictException_Message = &handles[49]
+var ConflictException_ConflictType = &handles[50]
+
+var _ConflictType = &handles[51]
+
+var _CustomerSpeakerId = &handles[52]
+
+var _Description = &handles[53]
+
+var Domain = &handles[54]
+var Domain_DomainId = &handles[55]
+var Domain_Arn = &handles[56]
+var Domain_Name = &handles[57]
+var Domain_Description = &handles[58]
+var Domain_DomainStatus = &handles[59]
+var Domain_ServerSideEncryptionConfiguration = &handles[60]
+var Domain_CreatedAt = &handles[61]
+var Domain_UpdatedAt = &handles[62]
+var Domain_ServerSideEncryptionUpdateDetails = &handles[63]
+var Domain_WatchlistDetails = &handles[64]
+
+var _DomainId = &handles[65]
+
+var _DomainName = &handles[66]
+
+var _DomainStatus = &handles[67]
+
+var _DomainSummaries = &handles[68]
+var _DomainSummaries_member = &handles[69]
+
+var DomainSummary = &handles[70]
+var DomainSummary_DomainId = &handles[71]
+var DomainSummary_Arn = &handles[72]
+var DomainSummary_Name = &handles[73]
+var DomainSummary_Description = &handles[74]
+var DomainSummary_DomainStatus = &handles[75]
+var DomainSummary_ServerSideEncryptionConfiguration = &handles[76]
+var DomainSummary_CreatedAt = &handles[77]
+var DomainSummary_UpdatedAt = &handles[78]
+var DomainSummary_ServerSideEncryptionUpdateDetails = &handles[79]
+var DomainSummary_WatchlistDetails = &handles[80]
+
+var _DuplicateRegistrationAction = &handles[81]
+
+var EnrollmentConfig = &handles[82]
+var EnrollmentConfig_ExistingEnrollmentAction = &handles[83]
+var EnrollmentConfig_FraudDetectionConfig = &handles[84]
+
+var EnrollmentJobFraudDetectionConfig = &handles[85]
+var EnrollmentJobFraudDetectionConfig_FraudDetectionAction = &handles[86]
+var EnrollmentJobFraudDetectionConfig_RiskThreshold = &handles[87]
+var EnrollmentJobFraudDetectionConfig_WatchlistIds = &handles[88]
+
+var _EnrollmentJobFraudDetectionConfigWatchlistIds = &handles[89]
+var _EnrollmentJobFraudDetectionConfigWatchlistIds_member = &handles[90]
+
+var _ExistingEnrollmentAction = &handles[91]
+
+var FailureDetails = &handles[92]
+var FailureDetails_StatusCode = &handles[93]
+var FailureDetails_Message = &handles[94]
+
+var _FraudDetectionAction = &handles[95]
+
+var FraudDetectionConfiguration = &handles[96]
+var FraudDetectionConfiguration_RiskThreshold = &handles[97]
+var FraudDetectionConfiguration_WatchlistId = &handles[98]
+
+var _FraudDetectionDecision = &handles[99]
+
+var _FraudDetectionReason = &handles[100]
+
+var _FraudDetectionReasons = &handles[101]
+var _FraudDetectionReasons_member = &handles[102]
+
+var FraudDetectionResult = &handles[103]
+var FraudDetectionResult_FraudDetectionResultId = &handles[104]
+var FraudDetectionResult_AudioAggregationStartedAt = &handles[105]
+var FraudDetectionResult_AudioAggregationEndedAt = &handles[106]
+var FraudDetectionResult_Configuration = &handles[107]
+var FraudDetectionResult_Decision = &handles[108]
+var FraudDetectionResult_Reasons = &handles[109]
+var FraudDetectionResult_RiskDetails = &handles[110]
+
+var FraudRiskDetails = &handles[111]
+var FraudRiskDetails_KnownFraudsterRisk = &handles[112]
+var FraudRiskDetails_VoiceSpoofingRisk = &handles[113]
+
+var Fraudster = &handles[114]
+var Fraudster_DomainId = &handles[115]
+var Fraudster_GeneratedFraudsterId = &handles[116]
+var Fraudster_CreatedAt = &handles[117]
+var Fraudster_WatchlistIds = &handles[118]
+
+var _FraudsterId = &handles[119]
+
+var FraudsterRegistrationJob = &handles[120]
+var FraudsterRegistrationJob_JobName = &handles[121]
+var FraudsterRegistrationJob_JobId = &handles[122]
+var FraudsterRegistrationJob_JobStatus = &handles[123]
+var FraudsterRegistrationJob_DomainId = &handles[124]
+var FraudsterRegistrationJob_DataAccessRoleArn = &handles[125]
+var FraudsterRegistrationJob_RegistrationConfig = &handles[126]
+var FraudsterRegistrationJob_InputDataConfig = &handles[127]
+var FraudsterRegistrationJob_OutputDataConfig = &handles[128]
+var FraudsterRegistrationJob_CreatedAt = &handles[129]
+var FraudsterRegistrationJob_EndedAt = &handles[130]
+var FraudsterRegistrationJob_FailureDetails = &handles[131]
+var FraudsterRegistrationJob_JobProgress = &handles[132]
+
+var _FraudsterRegistrationJobStatus = &handles[133]
+
+var _FraudsterRegistrationJobSummaries = &handles[134]
+var _FraudsterRegistrationJobSummaries_member = &handles[135]
+
+var FraudsterRegistrationJobSummary = &handles[136]
+var FraudsterRegistrationJobSummary_JobName = &handles[137]
+var FraudsterRegistrationJobSummary_JobId = &handles[138]
+var FraudsterRegistrationJobSummary_JobStatus = &handles[139]
+var FraudsterRegistrationJobSummary_DomainId = &handles[140]
+var FraudsterRegistrationJobSummary_CreatedAt = &handles[141]
+var FraudsterRegistrationJobSummary_EndedAt = &handles[142]
+var FraudsterRegistrationJobSummary_FailureDetails = &handles[143]
+var FraudsterRegistrationJobSummary_JobProgress = &handles[144]
+
+var _FraudsterSummaries = &handles[145]
+var _FraudsterSummaries_member = &handles[146]
+
+var FraudsterSummary = &handles[147]
+var FraudsterSummary_DomainId = &handles[148]
+var FraudsterSummary_GeneratedFraudsterId = &handles[149]
+var FraudsterSummary_CreatedAt = &handles[150]
+var FraudsterSummary_WatchlistIds = &handles[151]
+
+var _GeneratedFraudsterId = &handles[152]
+
+var _GeneratedSpeakerId = &handles[153]
+
+var _IamRoleArn = &handles[154]
+
+var InputDataConfig = &handles[155]
+var InputDataConfig_S3Uri = &handles[156]
+
+var _Integer = &handles[157]
+
+var InternalServerException = &handles[158]
+var InternalServerException_Message = &handles[159]
+
+var _JobId = &handles[160]
+
+var _JobName = &handles[161]
+
+var JobProgress = &handles[162]
+var JobProgress_PercentComplete = &handles[163]
+
+var _KmsKeyId = &handles[164]
+
+var KnownFraudsterRisk = &handles[165]
+var KnownFraudsterRisk_RiskScore = &handles[166]
+var KnownFraudsterRisk_GeneratedFraudsterId = &handles[167]
+
+var _MaxResultsForList = &handles[168]
+
+var _MaxResultsForListDomainFe = &handles[169]
+
+var _NextToken = &handles[170]
+
+var OutputDataConfig = &handles[171]
+var OutputDataConfig_S3Uri = &handles[172]
+var OutputDataConfig_KmsKeyId = &handles[173]
+
+var RegistrationConfig = &handles[174]
+var RegistrationConfig_DuplicateRegistrationAction = &handles[175]
+var RegistrationConfig_FraudsterSimilarityThreshold = &handles[176]
+var RegistrationConfig_WatchlistIds = &handles[177]
+
+var _RegistrationConfigWatchlistIds = &handles[178]
+var _RegistrationConfigWatchlistIds_member = &handles[179]
+
+var ResourceNotFoundException = &handles[180]
+var ResourceNotFoundException_Message = &handles[181]
+var ResourceNotFoundException_ResourceType = &handles[182]
+
+var _ResourceType = &handles[183]
+
+var _ResponseWatchlistIds = &handles[184]
+var _ResponseWatchlistIds_member = &handles[185]
+
+var _S3Uri = &handles[186]
+
+var _Score = &handles[187]
+
+var ServerSideEncryptionConfiguration = &handles[188]
+var ServerSideEncryptionConfiguration_KmsKeyId = &handles[189]
+
+var ServerSideEncryptionUpdateDetails = &handles[190]
+var ServerSideEncryptionUpdateDetails_OldKmsKeyId = &handles[191]
+var ServerSideEncryptionUpdateDetails_UpdateStatus = &handles[192]
+var ServerSideEncryptionUpdateDetails_Message = &handles[193]
+
+var _ServerSideEncryptionUpdateStatus = &handles[194]
+
+var ServiceQuotaExceededException = &handles[195]
+var ServiceQuotaExceededException_Message = &handles[196]
+
+var _SessionId = &handles[197]
+
+var _SessionName = &handles[198]
+
+var _SessionNameOrId = &handles[199]
+
+var Speaker = &handles[200]
+var Speaker_DomainId = &handles[201]
+var Speaker_CustomerSpeakerId = &handles[202]
+var Speaker_GeneratedSpeakerId = &handles[203]
+var Speaker_Status = &handles[204]
+var Speaker_CreatedAt = &handles[205]
+var Speaker_UpdatedAt = &handles[206]
+var Speaker_LastAccessedAt = &handles[207]
+
+var SpeakerEnrollmentJob = &handles[208]
+var SpeakerEnrollmentJob_JobName = &handles[209]
+var SpeakerEnrollmentJob_JobId = &handles[210]
+var SpeakerEnrollmentJob_JobStatus = &handles[211]
+var SpeakerEnrollmentJob_DomainId = &handles[212]
+var SpeakerEnrollmentJob_DataAccessRoleArn = &handles[213]
+var SpeakerEnrollmentJob_EnrollmentConfig = &handles[214]
+var SpeakerEnrollmentJob_InputDataConfig = &handles[215]
+var SpeakerEnrollmentJob_OutputDataConfig = &handles[216]
+var SpeakerEnrollmentJob_CreatedAt = &handles[217]
+var SpeakerEnrollmentJob_EndedAt = &handles[218]
+var SpeakerEnrollmentJob_FailureDetails = &handles[219]
+var SpeakerEnrollmentJob_JobProgress = &handles[220]
+
+var _SpeakerEnrollmentJobStatus = &handles[221]
+
+var _SpeakerEnrollmentJobSummaries = &handles[222]
+var _SpeakerEnrollmentJobSummaries_member = &handles[223]
+
+var SpeakerEnrollmentJobSummary = &handles[224]
+var SpeakerEnrollmentJobSummary_JobName = &handles[225]
+var SpeakerEnrollmentJobSummary_JobId = &handles[226]
+var SpeakerEnrollmentJobSummary_JobStatus = &handles[227]
+var SpeakerEnrollmentJobSummary_DomainId = &handles[228]
+var SpeakerEnrollmentJobSummary_CreatedAt = &handles[229]
+var SpeakerEnrollmentJobSummary_EndedAt = &handles[230]
+var SpeakerEnrollmentJobSummary_FailureDetails = &handles[231]
+var SpeakerEnrollmentJobSummary_JobProgress = &handles[232]
+
+var _SpeakerId = &handles[233]
+
+var _SpeakerStatus = &handles[234]
+
+var _SpeakerSummaries = &handles[235]
+var _SpeakerSummaries_member = &handles[236]
+
+var SpeakerSummary = &handles[237]
+var SpeakerSummary_DomainId = &handles[238]
+var SpeakerSummary_CustomerSpeakerId = &handles[239]
+var SpeakerSummary_GeneratedSpeakerId = &handles[240]
+var SpeakerSummary_Status = &handles[241]
+var SpeakerSummary_CreatedAt = &handles[242]
+var SpeakerSummary_UpdatedAt = &handles[243]
+var SpeakerSummary_LastAccessedAt = &handles[244]
+
+var _StreamingStatus = &handles[245]
+
+var _String = &handles[246]
+
+var Tag = &handles[247]
+var Tag_Key = &handles[248]
+var Tag_Value = &handles[249]
+
+var _TagKey = &handles[250]
+
+var _TagKeyList = &handles[251]
+var _TagKeyList_member = &handles[252]
+
+var _TagList = &handles[253]
+var _TagList_member = &handles[254]
+
+var _TagValue = &handles[255]
+
+var ThrottlingException = &handles[256]
+var ThrottlingException_Message = &handles[257]
+
+var _Timestamp = &handles[258]
+
+var _UniqueIdLarge = &handles[259]
+
+var ValidationException = &handles[260]
+var ValidationException_Message = &handles[261]
+
+var VoiceSpoofingRisk = &handles[262]
+var VoiceSpoofingRisk_RiskScore = &handles[263]
+
+var Watchlist = &handles[264]
+var Watchlist_DomainId = &handles[265]
+var Watchlist_WatchlistId = &handles[266]
+var Watchlist_Name = &handles[267]
+var Watchlist_Description = &handles[268]
+var Watchlist_DefaultWatchlist = &handles[269]
+var Watchlist_CreatedAt = &handles[270]
+var Watchlist_UpdatedAt = &handles[271]
+
+var _WatchlistDescription = &handles[272]
+
+var WatchlistDetails = &handles[273]
+var WatchlistDetails_DefaultWatchlistId = &handles[274]
+
+var _WatchlistId = &handles[275]
+
+var _WatchlistName = &handles[276]
+
+var _WatchlistSummaries = &handles[277]
+var _WatchlistSummaries_member = &handles[278]
+
+var WatchlistSummary = &handles[279]
+var WatchlistSummary_DomainId = &handles[280]
+var WatchlistSummary_WatchlistId = &handles[281]
+var WatchlistSummary_Name = &handles[282]
+var WatchlistSummary_Description = &handles[283]
+var WatchlistSummary_DefaultWatchlist = &handles[284]
+var WatchlistSummary_CreatedAt = &handles[285]
+var WatchlistSummary_UpdatedAt = &handles[286]
+
+var AssociateFraudsterRequest = &handles[287]
+var AssociateFraudsterRequest_DomainId = &handles[288]
+var AssociateFraudsterRequest_WatchlistId = &handles[289]
+var AssociateFraudsterRequest_FraudsterId = &handles[290]
+
+var AssociateFraudsterResponse = &handles[291]
+var AssociateFraudsterResponse_Fraudster = &handles[292]
+
+var CreateDomainRequest = &handles[293]
+var CreateDomainRequest_Name = &handles[294]
+var CreateDomainRequest_Description = &handles[295]
+var CreateDomainRequest_ServerSideEncryptionConfiguration = &handles[296]
+var CreateDomainRequest_ClientToken = &handles[297]
+var CreateDomainRequest_Tags = &handles[298]
+
+var CreateDomainResponse = &handles[299]
+var CreateDomainResponse_Domain = &handles[300]
+
+var CreateWatchlistRequest = &handles[301]
+var CreateWatchlistRequest_DomainId = &handles[302]
+var CreateWatchlistRequest_Name = &handles[303]
+var CreateWatchlistRequest_Description = &handles[304]
+var CreateWatchlistRequest_ClientToken = &handles[305]
+
+var CreateWatchlistResponse = &handles[306]
+var CreateWatchlistResponse_Watchlist = &handles[307]
+
+var DeleteDomainRequest = &handles[308]
+var DeleteDomainRequest_DomainId = &handles[309]
+
+var DeleteFraudsterRequest = &handles[310]
+var DeleteFraudsterRequest_DomainId = &handles[311]
+var DeleteFraudsterRequest_FraudsterId = &handles[312]
+
+var DeleteSpeakerRequest = &handles[313]
+var DeleteSpeakerRequest_DomainId = &handles[314]
+var DeleteSpeakerRequest_SpeakerId = &handles[315]
+
+var DeleteWatchlistRequest = &handles[316]
+var DeleteWatchlistRequest_DomainId = &handles[317]
+var DeleteWatchlistRequest_WatchlistId = &handles[318]
+
+var DescribeDomainRequest = &handles[319]
+var DescribeDomainRequest_DomainId = &handles[320]
+
+var DescribeDomainResponse = &handles[321]
+var DescribeDomainResponse_Domain = &handles[322]
+
+var DescribeFraudsterRequest = &handles[323]
+var DescribeFraudsterRequest_DomainId = &handles[324]
+var DescribeFraudsterRequest_FraudsterId = &handles[325]
+
+var DescribeFraudsterResponse = &handles[326]
+var DescribeFraudsterResponse_Fraudster = &handles[327]
+
+var DescribeFraudsterRegistrationJobRequest = &handles[328]
+var DescribeFraudsterRegistrationJobRequest_DomainId = &handles[329]
+var DescribeFraudsterRegistrationJobRequest_JobId = &handles[330]
+
+var DescribeFraudsterRegistrationJobResponse = &handles[331]
+var DescribeFraudsterRegistrationJobResponse_Job = &handles[332]
+
+var DescribeSpeakerEnrollmentJobRequest = &handles[333]
+var DescribeSpeakerEnrollmentJobRequest_DomainId = &handles[334]
+var DescribeSpeakerEnrollmentJobRequest_JobId = &handles[335]
+
+var DescribeSpeakerEnrollmentJobResponse = &handles[336]
+var DescribeSpeakerEnrollmentJobResponse_Job = &handles[337]
+
+var DescribeSpeakerRequest = &handles[338]
+var DescribeSpeakerRequest_DomainId = &handles[339]
+var DescribeSpeakerRequest_SpeakerId = &handles[340]
+
+var DescribeSpeakerResponse = &handles[341]
+var DescribeSpeakerResponse_Speaker = &handles[342]
+
+var DescribeWatchlistRequest = &handles[343]
+var DescribeWatchlistRequest_DomainId = &handles[344]
+var DescribeWatchlistRequest_WatchlistId = &handles[345]
+
+var DescribeWatchlistResponse = &handles[346]
+var DescribeWatchlistResponse_Watchlist = &handles[347]
+
+var DisassociateFraudsterRequest = &handles[348]
+var DisassociateFraudsterRequest_DomainId = &handles[349]
+var DisassociateFraudsterRequest_WatchlistId = &handles[350]
+var DisassociateFraudsterRequest_FraudsterId = &handles[351]
+
+var DisassociateFraudsterResponse = &handles[352]
+var DisassociateFraudsterResponse_Fraudster = &handles[353]
+
+var EvaluateSessionRequest = &handles[354]
+var EvaluateSessionRequest_DomainId = &handles[355]
+var EvaluateSessionRequest_SessionNameOrId = &handles[356]
+
+var EvaluateSessionResponse = &handles[357]
+var EvaluateSessionResponse_DomainId = &handles[358]
+var EvaluateSessionResponse_SessionId = &handles[359]
+var EvaluateSessionResponse_SessionName = &handles[360]
+var EvaluateSessionResponse_StreamingStatus = &handles[361]
+var EvaluateSessionResponse_AuthenticationResult = &handles[362]
+var EvaluateSessionResponse_FraudDetectionResult = &handles[363]
+
+var ListDomainsRequest = &handles[364]
+var ListDomainsRequest_MaxResults = &handles[365]
+var ListDomainsRequest_NextToken = &handles[366]
+
+var ListDomainsResponse = &handles[367]
+var ListDomainsResponse_DomainSummaries = &handles[368]
+var ListDomainsResponse_NextToken = &handles[369]
+
+var ListFraudsterRegistrationJobsRequest = &handles[370]
+var ListFraudsterRegistrationJobsRequest_DomainId = &handles[371]
+var ListFraudsterRegistrationJobsRequest_JobStatus = &handles[372]
+var ListFraudsterRegistrationJobsRequest_MaxResults = &handles[373]
+var ListFraudsterRegistrationJobsRequest_NextToken = &handles[374]
+
+var ListFraudsterRegistrationJobsResponse = &handles[375]
+var ListFraudsterRegistrationJobsResponse_JobSummaries = &handles[376]
+var ListFraudsterRegistrationJobsResponse_NextToken = &handles[377]
+
+var ListFraudstersRequest = &handles[378]
+var ListFraudstersRequest_DomainId = &handles[379]
+var ListFraudstersRequest_WatchlistId = &handles[380]
+var ListFraudstersRequest_MaxResults = &handles[381]
+var ListFraudstersRequest_NextToken = &handles[382]
+
+var ListFraudstersResponse = &handles[383]
+var ListFraudstersResponse_FraudsterSummaries = &handles[384]
+var ListFraudstersResponse_NextToken = &handles[385]
+
+var ListSpeakerEnrollmentJobsRequest = &handles[386]
+var ListSpeakerEnrollmentJobsRequest_DomainId = &handles[387]
+var ListSpeakerEnrollmentJobsRequest_JobStatus = &handles[388]
+var ListSpeakerEnrollmentJobsRequest_MaxResults = &handles[389]
+var ListSpeakerEnrollmentJobsRequest_NextToken = &handles[390]
+
+var ListSpeakerEnrollmentJobsResponse = &handles[391]
+var ListSpeakerEnrollmentJobsResponse_JobSummaries = &handles[392]
+var ListSpeakerEnrollmentJobsResponse_NextToken = &handles[393]
+
+var ListSpeakersRequest = &handles[394]
+var ListSpeakersRequest_DomainId = &handles[395]
+var ListSpeakersRequest_MaxResults = &handles[396]
+var ListSpeakersRequest_NextToken = &handles[397]
+
+var ListSpeakersResponse = &handles[398]
+var ListSpeakersResponse_SpeakerSummaries = &handles[399]
+var ListSpeakersResponse_NextToken = &handles[400]
+
+var ListTagsForResourceRequest = &handles[401]
+var ListTagsForResourceRequest_ResourceArn = &handles[402]
+
+var ListTagsForResourceResponse = &handles[403]
+var ListTagsForResourceResponse_Tags = &handles[404]
+
+var ListWatchlistsRequest = &handles[405]
+var ListWatchlistsRequest_DomainId = &handles[406]
+var ListWatchlistsRequest_MaxResults = &handles[407]
+var ListWatchlistsRequest_NextToken = &handles[408]
+
+var ListWatchlistsResponse = &handles[409]
+var ListWatchlistsResponse_WatchlistSummaries = &handles[410]
+var ListWatchlistsResponse_NextToken = &handles[411]
+
+var OptOutSpeakerRequest = &handles[412]
+var OptOutSpeakerRequest_DomainId = &handles[413]
+var OptOutSpeakerRequest_SpeakerId = &handles[414]
+
+var OptOutSpeakerResponse = &handles[415]
+var OptOutSpeakerResponse_Speaker = &handles[416]
+
+var StartFraudsterRegistrationJobRequest = &handles[417]
+var StartFraudsterRegistrationJobRequest_ClientToken = &handles[418]
+var StartFraudsterRegistrationJobRequest_JobName = &handles[419]
+var StartFraudsterRegistrationJobRequest_DomainId = &handles[420]
+var StartFraudsterRegistrationJobRequest_DataAccessRoleArn = &handles[421]
+var StartFraudsterRegistrationJobRequest_RegistrationConfig = &handles[422]
+var StartFraudsterRegistrationJobRequest_InputDataConfig = &handles[423]
+var StartFraudsterRegistrationJobRequest_OutputDataConfig = &handles[424]
+
+var StartFraudsterRegistrationJobResponse = &handles[425]
+var StartFraudsterRegistrationJobResponse_Job = &handles[426]
+
+var StartSpeakerEnrollmentJobRequest = &handles[427]
+var StartSpeakerEnrollmentJobRequest_ClientToken = &handles[428]
+var StartSpeakerEnrollmentJobRequest_JobName = &handles[429]
+var StartSpeakerEnrollmentJobRequest_DomainId = &handles[430]
+var StartSpeakerEnrollmentJobRequest_DataAccessRoleArn = &handles[431]
+var StartSpeakerEnrollmentJobRequest_EnrollmentConfig = &handles[432]
+var StartSpeakerEnrollmentJobRequest_InputDataConfig = &handles[433]
+var StartSpeakerEnrollmentJobRequest_OutputDataConfig = &handles[434]
+
+var StartSpeakerEnrollmentJobResponse = &handles[435]
+var StartSpeakerEnrollmentJobResponse_Job = &handles[436]
+
+var TagResourceRequest = &handles[437]
+var TagResourceRequest_ResourceArn = &handles[438]
+var TagResourceRequest_Tags = &handles[439]
+
+var TagResourceResponse = &handles[440]
+
+var UntagResourceRequest = &handles[441]
+var UntagResourceRequest_ResourceArn = &handles[442]
+var UntagResourceRequest_TagKeys = &handles[443]
+
+var UntagResourceResponse = &handles[444]
+
+var UpdateDomainRequest = &handles[445]
+var UpdateDomainRequest_DomainId = &handles[446]
+var UpdateDomainRequest_Name = &handles[447]
+var UpdateDomainRequest_Description = &handles[448]
+var UpdateDomainRequest_ServerSideEncryptionConfiguration = &handles[449]
+
+var UpdateDomainResponse = &handles[450]
+var UpdateDomainResponse_Domain = &handles[451]
+
+var UpdateWatchlistRequest = &handles[452]
+var UpdateWatchlistRequest_DomainId = &handles[453]
+var UpdateWatchlistRequest_WatchlistId = &handles[454]
+var UpdateWatchlistRequest_Name = &handles[455]
+var UpdateWatchlistRequest_Description = &handles[456]
+
+var UpdateWatchlistResponse = &handles[457]
+var UpdateWatchlistResponse_Watchlist = &handles[458]
+
+var VoiceID = &smithy.ServiceSchema{Schema: &handles[29], Version: "2021-09-27"}

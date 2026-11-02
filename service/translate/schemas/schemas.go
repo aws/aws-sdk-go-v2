@@ -4,1638 +4,1371 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "CreateParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTerminology = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteTerminology",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTextTranslationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DescribeTextTranslationJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTerminology = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetTerminology",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportTerminology = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ImportTerminology",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLanguages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListLanguages",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTerminologies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTerminologies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTextTranslationJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTextTranslationJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartTextTranslationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StartTextTranslationJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopTextTranslationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StopTextTranslationJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TranslateDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateDocument",
-}, smithy.ShapeTypeOperation, 0)
-
-var TranslateText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateText",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateParallelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UpdateParallelData",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSShineFrontendService_20170701 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "AWSShineFrontendService_20170701",
-}, smithy.ShapeTypeService, 0)
-
-var AWSShineFrontendService_20170701 = smithy.NewServiceSchema(_AWSShineFrontendService_20170701, "2017-07-01")
-
-var AppliedTerminology = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "AppliedTerminology",
-}, smithy.ShapeTypeStructure, 2)
-var AppliedTerminology_Name *smithy.Schema
-
-var AppliedTerminology_Terms *smithy.Schema
-
-var _AppliedTerminologyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "AppliedTerminologyList",
-}, smithy.ShapeTypeList, 1)
-var _AppliedTerminologyList_member *smithy.Schema
-
-var _BoundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "BoundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var Brevity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Brevity",
-}, smithy.ShapeTypeEnum, 1)
-var Brevity_ON *smithy.Schema
-
-var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ClientTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DetectedLanguageLowConfidenceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DetectedLanguageLowConfidenceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DetectedLanguageLowConfidenceException_Message *smithy.Schema
-
-var DetectedLanguageLowConfidenceException_DetectedLanguageCode *smithy.Schema
-
-var Directionality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Directionality",
-}, smithy.ShapeTypeEnum, 2)
-var Directionality_UNI *smithy.Schema
-
-var Directionality_MULTI *smithy.Schema
-
-var DisplayLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DisplayLanguageCode",
-}, smithy.ShapeTypeEnum, 10)
-var DisplayLanguageCode_DE *smithy.Schema
-
-var DisplayLanguageCode_EN *smithy.Schema
-
-var DisplayLanguageCode_ES *smithy.Schema
-
-var DisplayLanguageCode_FR *smithy.Schema
-
-var DisplayLanguageCode_IT *smithy.Schema
-
-var DisplayLanguageCode_JA *smithy.Schema
-
-var DisplayLanguageCode_KO *smithy.Schema
-
-var DisplayLanguageCode_PT *smithy.Schema
-
-var DisplayLanguageCode_ZH *smithy.Schema
-
-var DisplayLanguageCode_ZH_TW *smithy.Schema
-
-var Document = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Document",
-}, smithy.ShapeTypeStructure, 2)
-var Document_Content *smithy.Schema
-
-var Document_ContentType *smithy.Schema
-
-var _DocumentContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DocumentContent",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var EncryptionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "EncryptionKey",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionKey_Type *smithy.Schema
-
-var EncryptionKey_Id *smithy.Schema
-
-var _EncryptionKeyID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "EncryptionKeyID",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "EncryptionKeyType",
-}, smithy.ShapeTypeEnum, 1)
-var EncryptionKeyType_KMS *smithy.Schema
-
-var Formality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Formality",
-}, smithy.ShapeTypeEnum, 2)
-var Formality_FORMAL *smithy.Schema
-
-var Formality_INFORMAL *smithy.Schema
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var InputDataConfig_S3Uri *smithy.Schema
-
-var InputDataConfig_ContentType *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidFilterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InvalidFilterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidFilterException_Message *smithy.Schema
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterValueException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var JobDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "JobDetails",
-}, smithy.ShapeTypeStructure, 3)
-var JobDetails_TranslatedDocumentsCount *smithy.Schema
-
-var JobDetails_DocumentsWithErrorsCount *smithy.Schema
-
-var JobDetails_InputDocumentsCount *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0)
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 7)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_COMPLETED *smithy.Schema
-
-var JobStatus_COMPLETED_WITH_ERROR *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_STOP_REQUESTED *smithy.Schema
-
-var JobStatus_STOPPED *smithy.Schema
-
-var Language = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Language",
-}, smithy.ShapeTypeStructure, 2)
-var Language_LanguageName *smithy.Schema
-
-var Language_LanguageCode *smithy.Schema
-
-var _LanguageCodeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LanguageCodeString",
-}, smithy.ShapeTypeString, 0)
-
-var _LanguageCodeStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LanguageCodeStringList",
-}, smithy.ShapeTypeList, 1)
-var _LanguageCodeStringList_member *smithy.Schema
-
-var _LanguagesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LanguagesList",
-}, smithy.ShapeTypeList, 1)
-var _LanguagesList_member *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var _LocalizedNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "LocalizedNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "MaxResultsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var MergeStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "MergeStrategy",
-}, smithy.ShapeTypeEnum, 1)
-var MergeStrategy_OVERWRITE *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "OutputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OutputDataConfig_S3Uri *smithy.Schema
-
-var OutputDataConfig_EncryptionKey *smithy.Schema
-
-var _ParallelDataArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataArn",
-}, smithy.ShapeTypeString, 0)
-
-var ParallelDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ParallelDataConfig_S3Uri *smithy.Schema
-
-var ParallelDataConfig_Format *smithy.Schema
-
-var ParallelDataDataLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataDataLocation",
-}, smithy.ShapeTypeStructure, 2)
-var ParallelDataDataLocation_RepositoryType *smithy.Schema
-
-var ParallelDataDataLocation_Location *smithy.Schema
-
-var ParallelDataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataFormat",
-}, smithy.ShapeTypeEnum, 3)
-var ParallelDataFormat_TSV *smithy.Schema
-
-var ParallelDataFormat_CSV *smithy.Schema
-
-var ParallelDataFormat_TMX *smithy.Schema
-
-var ParallelDataProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataProperties",
-}, smithy.ShapeTypeStructure, 17)
-var ParallelDataProperties_Name *smithy.Schema
-
-var ParallelDataProperties_Arn *smithy.Schema
-
-var ParallelDataProperties_Description *smithy.Schema
-
-var ParallelDataProperties_Status *smithy.Schema
-
-var ParallelDataProperties_SourceLanguageCode *smithy.Schema
-
-var ParallelDataProperties_TargetLanguageCodes *smithy.Schema
-
-var ParallelDataProperties_ParallelDataConfig *smithy.Schema
-
-var ParallelDataProperties_Message *smithy.Schema
-
-var ParallelDataProperties_ImportedDataSize *smithy.Schema
-
-var ParallelDataProperties_ImportedRecordCount *smithy.Schema
-
-var ParallelDataProperties_FailedRecordCount *smithy.Schema
-
-var ParallelDataProperties_SkippedRecordCount *smithy.Schema
-
-var ParallelDataProperties_EncryptionKey *smithy.Schema
-
-var ParallelDataProperties_CreatedAt *smithy.Schema
-
-var ParallelDataProperties_LastUpdatedAt *smithy.Schema
-
-var ParallelDataProperties_LatestUpdateAttemptStatus *smithy.Schema
-
-var ParallelDataProperties_LatestUpdateAttemptAt *smithy.Schema
-
-var _ParallelDataPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _ParallelDataPropertiesList_member *smithy.Schema
-
-var ParallelDataStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ParallelDataStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ParallelDataStatus_CREATING *smithy.Schema
-
-var ParallelDataStatus_UPDATING *smithy.Schema
-
-var ParallelDataStatus_ACTIVE *smithy.Schema
-
-var ParallelDataStatus_DELETING *smithy.Schema
-
-var ParallelDataStatus_FAILED *smithy.Schema
-
-var Profanity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Profanity",
-}, smithy.ShapeTypeEnum, 1)
-var Profanity_MASK *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ResourceNameList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceNameList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetLanguageCodeStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TargetLanguageCodeStringList",
-}, smithy.ShapeTypeList, 1)
-var _TargetLanguageCodeStringList_member *smithy.Schema
-
-var Term = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Term",
-}, smithy.ShapeTypeStructure, 2)
-var Term_SourceText *smithy.Schema
-
-var Term_TargetText *smithy.Schema
-
-var _TerminologyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyArn",
-}, smithy.ShapeTypeString, 0)
-
-var TerminologyData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyData",
-}, smithy.ShapeTypeStructure, 3)
-var TerminologyData_File *smithy.Schema
-
-var TerminologyData_Format *smithy.Schema
-
-var TerminologyData_Directionality *smithy.Schema
-
-var TerminologyDataFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyDataFormat",
-}, smithy.ShapeTypeEnum, 3)
-var TerminologyDataFormat_CSV *smithy.Schema
-
-var TerminologyDataFormat_TMX *smithy.Schema
-
-var TerminologyDataFormat_TSV *smithy.Schema
-
-var TerminologyDataLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyDataLocation",
-}, smithy.ShapeTypeStructure, 2)
-var TerminologyDataLocation_RepositoryType *smithy.Schema
-
-var TerminologyDataLocation_Location *smithy.Schema
-
-var _TerminologyFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyFile",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var TerminologyProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyProperties",
-}, smithy.ShapeTypeStructure, 14)
-var TerminologyProperties_Name *smithy.Schema
-
-var TerminologyProperties_Description *smithy.Schema
-
-var TerminologyProperties_Arn *smithy.Schema
-
-var TerminologyProperties_SourceLanguageCode *smithy.Schema
-
-var TerminologyProperties_TargetLanguageCodes *smithy.Schema
-
-var TerminologyProperties_EncryptionKey *smithy.Schema
-
-var TerminologyProperties_SizeBytes *smithy.Schema
-
-var TerminologyProperties_TermCount *smithy.Schema
-
-var TerminologyProperties_CreatedAt *smithy.Schema
-
-var TerminologyProperties_LastUpdatedAt *smithy.Schema
-
-var TerminologyProperties_Directionality *smithy.Schema
-
-var TerminologyProperties_Message *smithy.Schema
-
-var TerminologyProperties_SkippedTermCount *smithy.Schema
-
-var TerminologyProperties_Format *smithy.Schema
-
-var _TerminologyPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TerminologyPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _TerminologyPropertiesList_member *smithy.Schema
-
-var _TermList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TermList",
-}, smithy.ShapeTypeList, 1)
-var _TermList_member *smithy.Schema
-
-var TextSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TextSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TextSizeLimitExceededException_Message *smithy.Schema
-
-var TextTranslationJobFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TextTranslationJobFilter",
-}, smithy.ShapeTypeStructure, 4)
-var TextTranslationJobFilter_JobName *smithy.Schema
-
-var TextTranslationJobFilter_JobStatus *smithy.Schema
-
-var TextTranslationJobFilter_SubmittedBeforeTime *smithy.Schema
-
-var TextTranslationJobFilter_SubmittedAfterTime *smithy.Schema
-
-var TextTranslationJobProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TextTranslationJobProperties",
-}, smithy.ShapeTypeStructure, 15)
-var TextTranslationJobProperties_JobId *smithy.Schema
-
-var TextTranslationJobProperties_JobName *smithy.Schema
-
-var TextTranslationJobProperties_JobStatus *smithy.Schema
-
-var TextTranslationJobProperties_JobDetails *smithy.Schema
-
-var TextTranslationJobProperties_SourceLanguageCode *smithy.Schema
-
-var TextTranslationJobProperties_TargetLanguageCodes *smithy.Schema
-
-var TextTranslationJobProperties_TerminologyNames *smithy.Schema
-
-var TextTranslationJobProperties_ParallelDataNames *smithy.Schema
-
-var TextTranslationJobProperties_Message *smithy.Schema
-
-var TextTranslationJobProperties_SubmittedTime *smithy.Schema
-
-var TextTranslationJobProperties_EndTime *smithy.Schema
-
-var TextTranslationJobProperties_InputDataConfig *smithy.Schema
-
-var TextTranslationJobProperties_OutputDataConfig *smithy.Schema
-
-var TextTranslationJobProperties_DataAccessRoleArn *smithy.Schema
-
-var TextTranslationJobProperties_Settings *smithy.Schema
-
-var _TextTranslationJobPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TextTranslationJobPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _TextTranslationJobPropertiesList_member *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var TooManyTagsException_ResourceArn *smithy.Schema
-
-var TranslatedDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslatedDocument",
-}, smithy.ShapeTypeStructure, 1)
-var TranslatedDocument_Content *smithy.Schema
-
-var _TranslatedDocumentContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslatedDocumentContent",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _TranslatedTextString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslatedTextString",
-}, smithy.ShapeTypeString, 0)
-
-var TranslationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslationSettings",
-}, smithy.ShapeTypeStructure, 3)
-var TranslationSettings_Formality *smithy.Schema
-
-var TranslationSettings_Profanity *smithy.Schema
-
-var TranslationSettings_Brevity *smithy.Schema
-
-var _UnboundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UnboundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var UnsupportedDisplayLanguageCodeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UnsupportedDisplayLanguageCodeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedDisplayLanguageCodeException_Message *smithy.Schema
-
-var UnsupportedDisplayLanguageCodeException_DisplayLanguageCode *smithy.Schema
-
-var UnsupportedLanguagePairException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UnsupportedLanguagePairException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedLanguagePairException_Message *smithy.Schema
-
-var UnsupportedLanguagePairException_SourceLanguageCode *smithy.Schema
-
-var UnsupportedLanguagePairException_TargetLanguageCode *smithy.Schema
-
-var CreateParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "CreateParallelDataRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateParallelDataRequest_Name *smithy.Schema
-
-var CreateParallelDataRequest_Description *smithy.Schema
-
-var CreateParallelDataRequest_ParallelDataConfig *smithy.Schema
-
-var CreateParallelDataRequest_EncryptionKey *smithy.Schema
-
-var CreateParallelDataRequest_ClientToken *smithy.Schema
-
-var CreateParallelDataRequest_Tags *smithy.Schema
-
-var CreateParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "CreateParallelDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateParallelDataResponse_Name *smithy.Schema
-
-var CreateParallelDataResponse_Status *smithy.Schema
-
-var DeleteParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteParallelDataRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteParallelDataRequest_Name *smithy.Schema
-
-var DeleteParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteParallelDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteParallelDataResponse_Name *smithy.Schema
-
-var DeleteParallelDataResponse_Status *smithy.Schema
-
-var DeleteTerminologyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DeleteTerminologyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTerminologyRequest_Name *smithy.Schema
-
-var DescribeTextTranslationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DescribeTextTranslationJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTextTranslationJobRequest_JobId *smithy.Schema
-
-var DescribeTextTranslationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "DescribeTextTranslationJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTextTranslationJobResponse_TextTranslationJobProperties *smithy.Schema
-
-var GetParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetParallelDataRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetParallelDataRequest_Name *smithy.Schema
-
-var GetParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetParallelDataResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetParallelDataResponse_ParallelDataProperties *smithy.Schema
-
-var GetParallelDataResponse_DataLocation *smithy.Schema
-
-var GetParallelDataResponse_AuxiliaryDataLocation *smithy.Schema
-
-var GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation *smithy.Schema
-
-var GetTerminologyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetTerminologyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTerminologyRequest_Name *smithy.Schema
-
-var GetTerminologyRequest_TerminologyDataFormat *smithy.Schema
-
-var GetTerminologyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "GetTerminologyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetTerminologyResponse_TerminologyProperties *smithy.Schema
-
-var GetTerminologyResponse_TerminologyDataLocation *smithy.Schema
-
-var GetTerminologyResponse_AuxiliaryDataLocation *smithy.Schema
-
-var ImportTerminologyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ImportTerminologyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ImportTerminologyRequest_Name *smithy.Schema
-
-var ImportTerminologyRequest_MergeStrategy *smithy.Schema
-
-var ImportTerminologyRequest_Description *smithy.Schema
-
-var ImportTerminologyRequest_TerminologyData *smithy.Schema
-
-var ImportTerminologyRequest_EncryptionKey *smithy.Schema
-
-var ImportTerminologyRequest_Tags *smithy.Schema
-
-var ImportTerminologyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ImportTerminologyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ImportTerminologyResponse_TerminologyProperties *smithy.Schema
-
-var ImportTerminologyResponse_AuxiliaryDataLocation *smithy.Schema
-
-var ListLanguagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListLanguagesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLanguagesRequest_DisplayLanguageCode *smithy.Schema
-
-var ListLanguagesRequest_NextToken *smithy.Schema
-
-var ListLanguagesRequest_MaxResults *smithy.Schema
-
-var ListLanguagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListLanguagesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListLanguagesResponse_Languages *smithy.Schema
-
-var ListLanguagesResponse_DisplayLanguageCode *smithy.Schema
-
-var ListLanguagesResponse_NextToken *smithy.Schema
-
-var ListParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListParallelDataRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListParallelDataRequest_NextToken *smithy.Schema
-
-var ListParallelDataRequest_MaxResults *smithy.Schema
-
-var ListParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListParallelDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListParallelDataResponse_ParallelDataPropertiesList *smithy.Schema
-
-var ListParallelDataResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTerminologiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTerminologiesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTerminologiesRequest_NextToken *smithy.Schema
-
-var ListTerminologiesRequest_MaxResults *smithy.Schema
-
-var ListTerminologiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTerminologiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTerminologiesResponse_TerminologyPropertiesList *smithy.Schema
-
-var ListTerminologiesResponse_NextToken *smithy.Schema
-
-var ListTextTranslationJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTextTranslationJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTextTranslationJobsRequest_Filter *smithy.Schema
-
-var ListTextTranslationJobsRequest_NextToken *smithy.Schema
-
-var ListTextTranslationJobsRequest_MaxResults *smithy.Schema
-
-var ListTextTranslationJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "ListTextTranslationJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTextTranslationJobsResponse_TextTranslationJobPropertiesList *smithy.Schema
-
-var ListTextTranslationJobsResponse_NextToken *smithy.Schema
-
-var StartTextTranslationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StartTextTranslationJobRequest",
-}, smithy.ShapeTypeStructure, 10)
-var StartTextTranslationJobRequest_JobName *smithy.Schema
-
-var StartTextTranslationJobRequest_InputDataConfig *smithy.Schema
-
-var StartTextTranslationJobRequest_OutputDataConfig *smithy.Schema
-
-var StartTextTranslationJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartTextTranslationJobRequest_SourceLanguageCode *smithy.Schema
-
-var StartTextTranslationJobRequest_TargetLanguageCodes *smithy.Schema
-
-var StartTextTranslationJobRequest_TerminologyNames *smithy.Schema
-
-var StartTextTranslationJobRequest_ParallelDataNames *smithy.Schema
-
-var StartTextTranslationJobRequest_ClientToken *smithy.Schema
-
-var StartTextTranslationJobRequest_Settings *smithy.Schema
-
-var StartTextTranslationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StartTextTranslationJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartTextTranslationJobResponse_JobId *smithy.Schema
-
-var StartTextTranslationJobResponse_JobStatus *smithy.Schema
-
-var StopTextTranslationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StopTextTranslationJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopTextTranslationJobRequest_JobId *smithy.Schema
-
-var StopTextTranslationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "StopTextTranslationJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StopTextTranslationJobResponse_JobId *smithy.Schema
-
-var StopTextTranslationJobResponse_JobStatus *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TranslateDocumentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateDocumentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var TranslateDocumentRequest_Document *smithy.Schema
-
-var TranslateDocumentRequest_TerminologyNames *smithy.Schema
-
-var TranslateDocumentRequest_SourceLanguageCode *smithy.Schema
-
-var TranslateDocumentRequest_TargetLanguageCode *smithy.Schema
-
-var TranslateDocumentRequest_Settings *smithy.Schema
-
-var TranslateDocumentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateDocumentResponse",
-}, smithy.ShapeTypeStructure, 5)
-var TranslateDocumentResponse_TranslatedDocument *smithy.Schema
-
-var TranslateDocumentResponse_SourceLanguageCode *smithy.Schema
-
-var TranslateDocumentResponse_TargetLanguageCode *smithy.Schema
-
-var TranslateDocumentResponse_AppliedTerminologies *smithy.Schema
-
-var TranslateDocumentResponse_AppliedSettings *smithy.Schema
-
-var TranslateTextRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateTextRequest",
-}, smithy.ShapeTypeStructure, 5)
-var TranslateTextRequest_Text *smithy.Schema
-
-var TranslateTextRequest_TerminologyNames *smithy.Schema
-
-var TranslateTextRequest_SourceLanguageCode *smithy.Schema
-
-var TranslateTextRequest_TargetLanguageCode *smithy.Schema
-
-var TranslateTextRequest_Settings *smithy.Schema
-
-var TranslateTextResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "TranslateTextResponse",
-}, smithy.ShapeTypeStructure, 5)
-var TranslateTextResponse_TranslatedText *smithy.Schema
-
-var TranslateTextResponse_SourceLanguageCode *smithy.Schema
-
-var TranslateTextResponse_TargetLanguageCode *smithy.Schema
-
-var TranslateTextResponse_AppliedTerminologies *smithy.Schema
-
-var TranslateTextResponse_AppliedSettings *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateParallelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UpdateParallelDataRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateParallelDataRequest_Name *smithy.Schema
-
-var UpdateParallelDataRequest_Description *smithy.Schema
-
-var UpdateParallelDataRequest_ParallelDataConfig *smithy.Schema
-
-var UpdateParallelDataRequest_ClientToken *smithy.Schema
-
-var UpdateParallelDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.translate",
-	Name:      "UpdateParallelDataResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateParallelDataResponse_Name *smithy.Schema
-
-var UpdateParallelDataResponse_Status *smithy.Schema
-
-var UpdateParallelDataResponse_LatestUpdateAttemptStatus *smithy.Schema
-
-var UpdateParallelDataResponse_LatestUpdateAttemptAt *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Term_SourceText = Term.AddMember("SourceText", _String)
-
-	Term_TargetText = Term.AddMember("TargetText", _String)
-
-	_TermList_member = _TermList.AddMember("member", Term)
-
-	AppliedTerminology_Name = AppliedTerminology.AddMember("Name", _ResourceName)
-
-	AppliedTerminology_Terms = AppliedTerminology.AddMember("Terms", _TermList)
-
-	_AppliedTerminologyList_member = _AppliedTerminologyList.AddMember("member", AppliedTerminology)
-
-	Brevity_ON = Brevity.AddMember("ON", smithyprelude.Unit)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _String)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	DetectedLanguageLowConfidenceException_Message = DetectedLanguageLowConfidenceException.AddMember("Message", _String)
-
-	DetectedLanguageLowConfidenceException_DetectedLanguageCode = DetectedLanguageLowConfidenceException.AddMember("DetectedLanguageCode", _LanguageCodeString)
-
-	Directionality_UNI = Directionality.AddMember("UNI", smithyprelude.Unit)
-
-	Directionality_MULTI = Directionality.AddMember("MULTI", smithyprelude.Unit)
-
-	DisplayLanguageCode_DE = DisplayLanguageCode.AddMember("DE", smithyprelude.Unit)
-
-	DisplayLanguageCode_EN = DisplayLanguageCode.AddMember("EN", smithyprelude.Unit)
-
-	DisplayLanguageCode_ES = DisplayLanguageCode.AddMember("ES", smithyprelude.Unit)
-
-	DisplayLanguageCode_FR = DisplayLanguageCode.AddMember("FR", smithyprelude.Unit)
-
-	DisplayLanguageCode_IT = DisplayLanguageCode.AddMember("IT", smithyprelude.Unit)
-
-	DisplayLanguageCode_JA = DisplayLanguageCode.AddMember("JA", smithyprelude.Unit)
-
-	DisplayLanguageCode_KO = DisplayLanguageCode.AddMember("KO", smithyprelude.Unit)
-
-	DisplayLanguageCode_PT = DisplayLanguageCode.AddMember("PT", smithyprelude.Unit)
-
-	DisplayLanguageCode_ZH = DisplayLanguageCode.AddMember("ZH", smithyprelude.Unit)
-
-	DisplayLanguageCode_ZH_TW = DisplayLanguageCode.AddMember("ZH_TW", smithyprelude.Unit)
-
-	Document_Content = Document.AddMember("Content", _DocumentContent)
-
-	Document_ContentType = Document.AddMember("ContentType", _ContentType)
-
-	EncryptionKeyType_KMS = EncryptionKeyType.AddMember("KMS", smithyprelude.Unit)
-
-	EncryptionKey_Type = EncryptionKey.AddMember("Type", EncryptionKeyType)
-
-	EncryptionKey_Id = EncryptionKey.AddMember("Id", _EncryptionKeyID)
-
-	Formality_FORMAL = Formality.AddMember("FORMAL", smithyprelude.Unit)
-
-	Formality_INFORMAL = Formality.AddMember("INFORMAL", smithyprelude.Unit)
-
-	InputDataConfig_S3Uri = InputDataConfig.AddMember("S3Uri", _S3Uri)
-
-	InputDataConfig_ContentType = InputDataConfig.AddMember("ContentType", _ContentType)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	InvalidFilterException_Message = InvalidFilterException.AddMember("Message", _String)
-
-	InvalidParameterValueException_Message = InvalidParameterValueException.AddMember("Message", _String)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _String)
-
-	JobDetails_TranslatedDocumentsCount = JobDetails.AddMember("TranslatedDocumentsCount", _Integer)
-
-	JobDetails_DocumentsWithErrorsCount = JobDetails.AddMember("DocumentsWithErrorsCount", _Integer)
-
-	JobDetails_InputDocumentsCount = JobDetails.AddMember("InputDocumentsCount", _Integer)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_COMPLETED = JobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	JobStatus_COMPLETED_WITH_ERROR = JobStatus.AddMember("COMPLETED_WITH_ERROR", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_STOP_REQUESTED = JobStatus.AddMember("STOP_REQUESTED", smithyprelude.Unit)
-
-	JobStatus_STOPPED = JobStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	Language_LanguageName = Language.AddMember("LanguageName", _LocalizedNameString)
-
-	Language_LanguageCode = Language.AddMember("LanguageCode", _LanguageCodeString)
-
-	_LanguageCodeStringList_member = _LanguageCodeStringList.AddMember("member", _LanguageCodeString)
-
-	_LanguagesList_member = _LanguagesList.AddMember("member", Language)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _String)
-
-	MergeStrategy_OVERWRITE = MergeStrategy.AddMember("OVERWRITE", smithyprelude.Unit)
-
-	OutputDataConfig_S3Uri = OutputDataConfig.AddMember("S3Uri", _S3Uri)
-
-	OutputDataConfig_EncryptionKey = OutputDataConfig.AddMember("EncryptionKey", EncryptionKey)
-
-	ParallelDataFormat_TSV = ParallelDataFormat.AddMember("TSV", smithyprelude.Unit)
-
-	ParallelDataFormat_CSV = ParallelDataFormat.AddMember("CSV", smithyprelude.Unit)
-
-	ParallelDataFormat_TMX = ParallelDataFormat.AddMember("TMX", smithyprelude.Unit)
-
-	ParallelDataConfig_S3Uri = ParallelDataConfig.AddMember("S3Uri", _S3Uri)
-
-	ParallelDataConfig_Format = ParallelDataConfig.AddMember("Format", ParallelDataFormat)
-
-	ParallelDataDataLocation_RepositoryType = ParallelDataDataLocation.AddMember("RepositoryType", _String)
-
-	ParallelDataDataLocation_Location = ParallelDataDataLocation.AddMember("Location", _String)
-
-	ParallelDataStatus_CREATING = ParallelDataStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ParallelDataStatus_UPDATING = ParallelDataStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	ParallelDataStatus_ACTIVE = ParallelDataStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ParallelDataStatus_DELETING = ParallelDataStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ParallelDataStatus_FAILED = ParallelDataStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ParallelDataProperties_Name = ParallelDataProperties.AddMember("Name", _ResourceName)
-
-	ParallelDataProperties_Arn = ParallelDataProperties.AddMember("Arn", _ParallelDataArn)
-
-	ParallelDataProperties_Description = ParallelDataProperties.AddMember("Description", _Description)
-
-	ParallelDataProperties_Status = ParallelDataProperties.AddMember("Status", ParallelDataStatus)
-
-	ParallelDataProperties_SourceLanguageCode = ParallelDataProperties.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	ParallelDataProperties_TargetLanguageCodes = ParallelDataProperties.AddMember("TargetLanguageCodes", _LanguageCodeStringList)
-
-	ParallelDataProperties_ParallelDataConfig = ParallelDataProperties.AddMember("ParallelDataConfig", ParallelDataConfig)
-
-	ParallelDataProperties_Message = ParallelDataProperties.AddMember("Message", _UnboundedLengthString)
-
-	ParallelDataProperties_ImportedDataSize = ParallelDataProperties.AddMember("ImportedDataSize", _Long)
-
-	ParallelDataProperties_ImportedRecordCount = ParallelDataProperties.AddMember("ImportedRecordCount", _Long)
-
-	ParallelDataProperties_FailedRecordCount = ParallelDataProperties.AddMember("FailedRecordCount", _Long)
-
-	ParallelDataProperties_SkippedRecordCount = ParallelDataProperties.AddMember("SkippedRecordCount", _Long)
-
-	ParallelDataProperties_EncryptionKey = ParallelDataProperties.AddMember("EncryptionKey", EncryptionKey)
-
-	ParallelDataProperties_CreatedAt = ParallelDataProperties.AddMember("CreatedAt", _Timestamp)
-
-	ParallelDataProperties_LastUpdatedAt = ParallelDataProperties.AddMember("LastUpdatedAt", _Timestamp)
-
-	ParallelDataProperties_LatestUpdateAttemptStatus = ParallelDataProperties.AddMember("LatestUpdateAttemptStatus", ParallelDataStatus)
-
-	ParallelDataProperties_LatestUpdateAttemptAt = ParallelDataProperties.AddMember("LatestUpdateAttemptAt", _Timestamp)
-
-	_ParallelDataPropertiesList_member = _ParallelDataPropertiesList.AddMember("member", ParallelDataProperties)
-
-	Profanity_MASK = Profanity.AddMember("MASK", smithyprelude.Unit)
-
-	_ResourceNameList_member = _ResourceNameList.AddMember("member", _ResourceName)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _String)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	_TargetLanguageCodeStringList_member = _TargetLanguageCodeStringList.AddMember("member", _LanguageCodeString)
-
-	TerminologyDataFormat_CSV = TerminologyDataFormat.AddMember("CSV", smithyprelude.Unit)
-
-	TerminologyDataFormat_TMX = TerminologyDataFormat.AddMember("TMX", smithyprelude.Unit)
-
-	TerminologyDataFormat_TSV = TerminologyDataFormat.AddMember("TSV", smithyprelude.Unit)
-
-	TerminologyData_File = TerminologyData.AddMember("File", _TerminologyFile)
-
-	TerminologyData_Format = TerminologyData.AddMember("Format", TerminologyDataFormat)
-
-	TerminologyData_Directionality = TerminologyData.AddMember("Directionality", Directionality)
-
-	TerminologyDataLocation_RepositoryType = TerminologyDataLocation.AddMember("RepositoryType", _String)
-
-	TerminologyDataLocation_Location = TerminologyDataLocation.AddMember("Location", _String)
-
-	TerminologyProperties_Name = TerminologyProperties.AddMember("Name", _ResourceName)
-
-	TerminologyProperties_Description = TerminologyProperties.AddMember("Description", _Description)
-
-	TerminologyProperties_Arn = TerminologyProperties.AddMember("Arn", _TerminologyArn)
-
-	TerminologyProperties_SourceLanguageCode = TerminologyProperties.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TerminologyProperties_TargetLanguageCodes = TerminologyProperties.AddMember("TargetLanguageCodes", _LanguageCodeStringList)
-
-	TerminologyProperties_EncryptionKey = TerminologyProperties.AddMember("EncryptionKey", EncryptionKey)
-
-	TerminologyProperties_SizeBytes = TerminologyProperties.AddMember("SizeBytes", _Integer)
-
-	TerminologyProperties_TermCount = TerminologyProperties.AddMember("TermCount", _Integer)
-
-	TerminologyProperties_CreatedAt = TerminologyProperties.AddMember("CreatedAt", _Timestamp)
-
-	TerminologyProperties_LastUpdatedAt = TerminologyProperties.AddMember("LastUpdatedAt", _Timestamp)
-
-	TerminologyProperties_Directionality = TerminologyProperties.AddMember("Directionality", Directionality)
-
-	TerminologyProperties_Message = TerminologyProperties.AddMember("Message", _UnboundedLengthString)
-
-	TerminologyProperties_SkippedTermCount = TerminologyProperties.AddMember("SkippedTermCount", _Integer)
-
-	TerminologyProperties_Format = TerminologyProperties.AddMember("Format", TerminologyDataFormat)
-
-	_TerminologyPropertiesList_member = _TerminologyPropertiesList.AddMember("member", TerminologyProperties)
-
-	TextSizeLimitExceededException_Message = TextSizeLimitExceededException.AddMember("Message", _String)
-
-	TextTranslationJobFilter_JobName = TextTranslationJobFilter.AddMember("JobName", _JobName)
-
-	TextTranslationJobFilter_JobStatus = TextTranslationJobFilter.AddMember("JobStatus", JobStatus)
-
-	TextTranslationJobFilter_SubmittedBeforeTime = TextTranslationJobFilter.AddMember("SubmittedBeforeTime", _Timestamp)
-
-	TextTranslationJobFilter_SubmittedAfterTime = TextTranslationJobFilter.AddMember("SubmittedAfterTime", _Timestamp)
-
-	TranslationSettings_Formality = TranslationSettings.AddMember("Formality", Formality)
-
-	TranslationSettings_Profanity = TranslationSettings.AddMember("Profanity", Profanity)
-
-	TranslationSettings_Brevity = TranslationSettings.AddMember("Brevity", Brevity)
-
-	TextTranslationJobProperties_JobId = TextTranslationJobProperties.AddMember("JobId", _JobId)
-
-	TextTranslationJobProperties_JobName = TextTranslationJobProperties.AddMember("JobName", _JobName)
-
-	TextTranslationJobProperties_JobStatus = TextTranslationJobProperties.AddMember("JobStatus", JobStatus)
-
-	TextTranslationJobProperties_JobDetails = TextTranslationJobProperties.AddMember("JobDetails", JobDetails)
-
-	TextTranslationJobProperties_SourceLanguageCode = TextTranslationJobProperties.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TextTranslationJobProperties_TargetLanguageCodes = TextTranslationJobProperties.AddMember("TargetLanguageCodes", _TargetLanguageCodeStringList)
-
-	TextTranslationJobProperties_TerminologyNames = TextTranslationJobProperties.AddMember("TerminologyNames", _ResourceNameList)
-
-	TextTranslationJobProperties_ParallelDataNames = TextTranslationJobProperties.AddMember("ParallelDataNames", _ResourceNameList)
-
-	TextTranslationJobProperties_Message = TextTranslationJobProperties.AddMember("Message", _UnboundedLengthString)
-
-	TextTranslationJobProperties_SubmittedTime = TextTranslationJobProperties.AddMember("SubmittedTime", _Timestamp)
-
-	TextTranslationJobProperties_EndTime = TextTranslationJobProperties.AddMember("EndTime", _Timestamp)
-
-	TextTranslationJobProperties_InputDataConfig = TextTranslationJobProperties.AddMember("InputDataConfig", InputDataConfig)
-
-	TextTranslationJobProperties_OutputDataConfig = TextTranslationJobProperties.AddMember("OutputDataConfig", OutputDataConfig)
-
-	TextTranslationJobProperties_DataAccessRoleArn = TextTranslationJobProperties.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	TextTranslationJobProperties_Settings = TextTranslationJobProperties.AddMember("Settings", TranslationSettings)
-
-	_TextTranslationJobPropertiesList_member = _TextTranslationJobPropertiesList.AddMember("member", TextTranslationJobProperties)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _String)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _String)
-
-	TooManyTagsException_ResourceArn = TooManyTagsException.AddMember("ResourceArn", _ResourceArn)
-
-	TranslatedDocument_Content = TranslatedDocument.AddMember("Content", _TranslatedDocumentContent)
-
-	UnsupportedDisplayLanguageCodeException_Message = UnsupportedDisplayLanguageCodeException.AddMember("Message", _String)
-
-	UnsupportedDisplayLanguageCodeException_DisplayLanguageCode = UnsupportedDisplayLanguageCodeException.AddMember("DisplayLanguageCode", _LanguageCodeString)
-
-	UnsupportedLanguagePairException_Message = UnsupportedLanguagePairException.AddMember("Message", _String)
-
-	UnsupportedLanguagePairException_SourceLanguageCode = UnsupportedLanguagePairException.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	UnsupportedLanguagePairException_TargetLanguageCode = UnsupportedLanguagePairException.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	CreateParallelDataRequest_Name = CreateParallelDataRequest.AddMember("Name", _ResourceName)
-
-	CreateParallelDataRequest_Description = CreateParallelDataRequest.AddMember("Description", _Description)
-
-	CreateParallelDataRequest_ParallelDataConfig = CreateParallelDataRequest.AddMember("ParallelDataConfig", ParallelDataConfig)
-
-	CreateParallelDataRequest_EncryptionKey = CreateParallelDataRequest.AddMember("EncryptionKey", EncryptionKey)
-
-	CreateParallelDataRequest_ClientToken = CreateParallelDataRequest.AddMember("ClientToken", _ClientTokenString)
-
-	CreateParallelDataRequest_Tags = CreateParallelDataRequest.AddMember("Tags", _TagList)
-
-	CreateParallelDataResponse_Name = CreateParallelDataResponse.AddMember("Name", _ResourceName)
-
-	CreateParallelDataResponse_Status = CreateParallelDataResponse.AddMember("Status", ParallelDataStatus)
-
-	DeleteParallelDataRequest_Name = DeleteParallelDataRequest.AddMember("Name", _ResourceName)
-
-	DeleteParallelDataResponse_Name = DeleteParallelDataResponse.AddMember("Name", _ResourceName)
-
-	DeleteParallelDataResponse_Status = DeleteParallelDataResponse.AddMember("Status", ParallelDataStatus)
-
-	DeleteTerminologyRequest_Name = DeleteTerminologyRequest.AddMember("Name", _ResourceName)
-
-	DescribeTextTranslationJobRequest_JobId = DescribeTextTranslationJobRequest.AddMember("JobId", _JobId)
-
-	DescribeTextTranslationJobResponse_TextTranslationJobProperties = DescribeTextTranslationJobResponse.AddMember("TextTranslationJobProperties", TextTranslationJobProperties)
-
-	GetParallelDataRequest_Name = GetParallelDataRequest.AddMember("Name", _ResourceName)
-
-	GetParallelDataResponse_ParallelDataProperties = GetParallelDataResponse.AddMember("ParallelDataProperties", ParallelDataProperties)
-
-	GetParallelDataResponse_DataLocation = GetParallelDataResponse.AddMember("DataLocation", ParallelDataDataLocation)
-
-	GetParallelDataResponse_AuxiliaryDataLocation = GetParallelDataResponse.AddMember("AuxiliaryDataLocation", ParallelDataDataLocation)
-
-	GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation = GetParallelDataResponse.AddMember("LatestUpdateAttemptAuxiliaryDataLocation", ParallelDataDataLocation)
-
-	GetTerminologyRequest_Name = GetTerminologyRequest.AddMember("Name", _ResourceName)
-
-	GetTerminologyRequest_TerminologyDataFormat = GetTerminologyRequest.AddMember("TerminologyDataFormat", TerminologyDataFormat)
-
-	GetTerminologyResponse_TerminologyProperties = GetTerminologyResponse.AddMember("TerminologyProperties", TerminologyProperties)
-
-	GetTerminologyResponse_TerminologyDataLocation = GetTerminologyResponse.AddMember("TerminologyDataLocation", TerminologyDataLocation)
-
-	GetTerminologyResponse_AuxiliaryDataLocation = GetTerminologyResponse.AddMember("AuxiliaryDataLocation", TerminologyDataLocation)
-
-	ImportTerminologyRequest_Name = ImportTerminologyRequest.AddMember("Name", _ResourceName)
-
-	ImportTerminologyRequest_MergeStrategy = ImportTerminologyRequest.AddMember("MergeStrategy", MergeStrategy)
-
-	ImportTerminologyRequest_Description = ImportTerminologyRequest.AddMember("Description", _Description)
-
-	ImportTerminologyRequest_TerminologyData = ImportTerminologyRequest.AddMember("TerminologyData", TerminologyData)
-
-	ImportTerminologyRequest_EncryptionKey = ImportTerminologyRequest.AddMember("EncryptionKey", EncryptionKey)
-
-	ImportTerminologyRequest_Tags = ImportTerminologyRequest.AddMember("Tags", _TagList)
-
-	ImportTerminologyResponse_TerminologyProperties = ImportTerminologyResponse.AddMember("TerminologyProperties", TerminologyProperties)
-
-	ImportTerminologyResponse_AuxiliaryDataLocation = ImportTerminologyResponse.AddMember("AuxiliaryDataLocation", TerminologyDataLocation)
-
-	ListLanguagesRequest_DisplayLanguageCode = ListLanguagesRequest.AddMember("DisplayLanguageCode", DisplayLanguageCode)
-
-	ListLanguagesRequest_NextToken = ListLanguagesRequest.AddMember("NextToken", _NextToken)
-
-	ListLanguagesRequest_MaxResults = ListLanguagesRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListLanguagesResponse_Languages = ListLanguagesResponse.AddMember("Languages", _LanguagesList)
-
-	ListLanguagesResponse_DisplayLanguageCode = ListLanguagesResponse.AddMember("DisplayLanguageCode", DisplayLanguageCode)
-
-	ListLanguagesResponse_NextToken = ListLanguagesResponse.AddMember("NextToken", _NextToken)
-
-	ListParallelDataRequest_NextToken = ListParallelDataRequest.AddMember("NextToken", _NextToken)
-
-	ListParallelDataRequest_MaxResults = ListParallelDataRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListParallelDataResponse_ParallelDataPropertiesList = ListParallelDataResponse.AddMember("ParallelDataPropertiesList", _ParallelDataPropertiesList)
-
-	ListParallelDataResponse_NextToken = ListParallelDataResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListTerminologiesRequest_NextToken = ListTerminologiesRequest.AddMember("NextToken", _NextToken)
-
-	ListTerminologiesRequest_MaxResults = ListTerminologiesRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListTerminologiesResponse_TerminologyPropertiesList = ListTerminologiesResponse.AddMember("TerminologyPropertiesList", _TerminologyPropertiesList)
-
-	ListTerminologiesResponse_NextToken = ListTerminologiesResponse.AddMember("NextToken", _NextToken)
-
-	ListTextTranslationJobsRequest_Filter = ListTextTranslationJobsRequest.AddMember("Filter", TextTranslationJobFilter)
-
-	ListTextTranslationJobsRequest_NextToken = ListTextTranslationJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListTextTranslationJobsRequest_MaxResults = ListTextTranslationJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListTextTranslationJobsResponse_TextTranslationJobPropertiesList = ListTextTranslationJobsResponse.AddMember("TextTranslationJobPropertiesList", _TextTranslationJobPropertiesList)
-
-	ListTextTranslationJobsResponse_NextToken = ListTextTranslationJobsResponse.AddMember("NextToken", _NextToken)
-
-	StartTextTranslationJobRequest_JobName = StartTextTranslationJobRequest.AddMember("JobName", _JobName)
-
-	StartTextTranslationJobRequest_InputDataConfig = StartTextTranslationJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartTextTranslationJobRequest_OutputDataConfig = StartTextTranslationJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartTextTranslationJobRequest_DataAccessRoleArn = StartTextTranslationJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartTextTranslationJobRequest_SourceLanguageCode = StartTextTranslationJobRequest.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	StartTextTranslationJobRequest_TargetLanguageCodes = StartTextTranslationJobRequest.AddMember("TargetLanguageCodes", _TargetLanguageCodeStringList)
-
-	StartTextTranslationJobRequest_TerminologyNames = StartTextTranslationJobRequest.AddMember("TerminologyNames", _ResourceNameList)
-
-	StartTextTranslationJobRequest_ParallelDataNames = StartTextTranslationJobRequest.AddMember("ParallelDataNames", _ResourceNameList)
-
-	StartTextTranslationJobRequest_ClientToken = StartTextTranslationJobRequest.AddMember("ClientToken", _ClientTokenString)
-
-	StartTextTranslationJobRequest_Settings = StartTextTranslationJobRequest.AddMember("Settings", TranslationSettings)
-
-	StartTextTranslationJobResponse_JobId = StartTextTranslationJobResponse.AddMember("JobId", _JobId)
-
-	StartTextTranslationJobResponse_JobStatus = StartTextTranslationJobResponse.AddMember("JobStatus", JobStatus)
-
-	StopTextTranslationJobRequest_JobId = StopTextTranslationJobRequest.AddMember("JobId", _JobId)
-
-	StopTextTranslationJobResponse_JobId = StopTextTranslationJobResponse.AddMember("JobId", _JobId)
-
-	StopTextTranslationJobResponse_JobStatus = StopTextTranslationJobResponse.AddMember("JobStatus", JobStatus)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	TranslateDocumentRequest_Document = TranslateDocumentRequest.AddMember("Document", Document)
-
-	TranslateDocumentRequest_TerminologyNames = TranslateDocumentRequest.AddMember("TerminologyNames", _ResourceNameList)
-
-	TranslateDocumentRequest_SourceLanguageCode = TranslateDocumentRequest.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TranslateDocumentRequest_TargetLanguageCode = TranslateDocumentRequest.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	TranslateDocumentRequest_Settings = TranslateDocumentRequest.AddMember("Settings", TranslationSettings)
-
-	TranslateDocumentResponse_TranslatedDocument = TranslateDocumentResponse.AddMember("TranslatedDocument", TranslatedDocument)
-
-	TranslateDocumentResponse_SourceLanguageCode = TranslateDocumentResponse.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TranslateDocumentResponse_TargetLanguageCode = TranslateDocumentResponse.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	TranslateDocumentResponse_AppliedTerminologies = TranslateDocumentResponse.AddMember("AppliedTerminologies", _AppliedTerminologyList)
-
-	TranslateDocumentResponse_AppliedSettings = TranslateDocumentResponse.AddMember("AppliedSettings", TranslationSettings)
-
-	TranslateTextRequest_Text = TranslateTextRequest.AddMember("Text", _BoundedLengthString)
-
-	TranslateTextRequest_TerminologyNames = TranslateTextRequest.AddMember("TerminologyNames", _ResourceNameList)
-
-	TranslateTextRequest_SourceLanguageCode = TranslateTextRequest.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TranslateTextRequest_TargetLanguageCode = TranslateTextRequest.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	TranslateTextRequest_Settings = TranslateTextRequest.AddMember("Settings", TranslationSettings)
-
-	TranslateTextResponse_TranslatedText = TranslateTextResponse.AddMember("TranslatedText", _TranslatedTextString)
-
-	TranslateTextResponse_SourceLanguageCode = TranslateTextResponse.AddMember("SourceLanguageCode", _LanguageCodeString)
-
-	TranslateTextResponse_TargetLanguageCode = TranslateTextResponse.AddMember("TargetLanguageCode", _LanguageCodeString)
-
-	TranslateTextResponse_AppliedTerminologies = TranslateTextResponse.AddMember("AppliedTerminologies", _AppliedTerminologyList)
-
-	TranslateTextResponse_AppliedSettings = TranslateTextResponse.AddMember("AppliedSettings", TranslationSettings)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateParallelDataRequest_Name = UpdateParallelDataRequest.AddMember("Name", _ResourceName)
-
-	UpdateParallelDataRequest_Description = UpdateParallelDataRequest.AddMember("Description", _Description)
-
-	UpdateParallelDataRequest_ParallelDataConfig = UpdateParallelDataRequest.AddMember("ParallelDataConfig", ParallelDataConfig)
-
-	UpdateParallelDataRequest_ClientToken = UpdateParallelDataRequest.AddMember("ClientToken", _ClientTokenString)
-
-	UpdateParallelDataResponse_Name = UpdateParallelDataResponse.AddMember("Name", _ResourceName)
-
-	UpdateParallelDataResponse_Status = UpdateParallelDataResponse.AddMember("Status", ParallelDataStatus)
-
-	UpdateParallelDataResponse_LatestUpdateAttemptStatus = UpdateParallelDataResponse.AddMember("LatestUpdateAttemptStatus", ParallelDataStatus)
-
-	UpdateParallelDataResponse_LatestUpdateAttemptAt = UpdateParallelDataResponse.AddMember("LatestUpdateAttemptAt", _Timestamp)
-
+const blob = "" +
+	"LatestUpdateAttemptAuxiliaryDataLocationUnsupportedDisplayLanguageCodeExceptionDetectedLanguageLowCo" +
+	"nfidenceExceptionDescribeTextTranslationJobResponseDescribeTextTranslationJobRequestAWSShineFrontend" +
+	"Service_20170701TextTranslationJobPropertiesListUnsupportedLanguagePairExceptionConcurrentModificati" +
+	"onExceptionListTextTranslationJobsResponseStartTextTranslationJobResponseInvalidParameterValueExcept" +
+	"ionListTextTranslationJobsRequestStartTextTranslationJobRequestStopTextTranslationJobResponseTextSiz" +
+	"eLimitExceededExceptionStopTextTranslationJobRequestTargetLanguageCodeStringListListTagsForResourceR" +
+	"esponseServiceUnavailableExceptionCreateParallelDataResponseDeleteParallelDataResponseListTagsForRes" +
+	"ourceRequestParallelDataPropertiesListUpdateParallelDataResponseCreateParallelDataRequestDeleteParal" +
+	"lelDataRequestImportTerminologyResponseLatestUpdateAttemptStatusListTerminologiesResponseResourceNot" +
+	"FoundExceptionTerminologyPropertiesListTranslateDocumentResponseTranslatedDocumentContentUpdateParal" +
+	"lelDataRequestDeleteTerminologyRequestDocumentsWithErrorsCountImportTerminologyRequestListParallelDa" +
+	"taResponseListTerminologiesRequestParallelDataDataLocationTextTranslationJobFilterTooManyRequestsExc" +
+	"eptionTranslateDocumentRequestTranslatedDocumentsCountGetParallelDataResponseInternalServerException" +
+	"InvalidRequestExceptionListParallelDataRequestTerminologyDataLocationAppliedTerminologyListGetParall" +
+	"elDataRequestGetTerminologyResponseInvalidFilterExceptionGetTerminologyRequestLatestUpdateAttemptAtL" +
+	"istLanguagesResponseTerminologyDataFormatTranslateTextResponseUnboundedLengthStringUntagResourceResp" +
+	"onseAppliedTerminologiesCOMPLETED_WITH_ERRORDetectedLanguageCodeListLanguagesRequestTooManyTagsExcep" +
+	"tionTranslateTextRequestTranslatedTextStringUntagResourceRequestBoundedLengthStringImportedRecordCou" +
+	"ntInputDocumentsCountLocalizedNameStringSubmittedBeforeTimeTagResourceResponseTargetLanguageCodesTra" +
+	"nslationSettingsParallelDataConfigParallelDataFormatParallelDataStatusSkippedRecordCountSourceLangua" +
+	"geCodeSubmittedAfterTimeTagResourceRequestClientTokenStringConflictExceptionDataAccessRoleArnEncrypt" +
+	"ionKeyTypeFailedRecordCountMaxResultsIntegerParallelDataNamesImportedDataSizeOutputDataConfigResourc" +
+	"eNameListSkippedTermCountTerminologyNamesAppliedSettingsEncryptionKeyIDInputDataConfigParallelDataAr" +
+	"nTerminologyFileDirectionalityRepositoryTypeSTOP_REQUESTEDTerminologyArnLanguagesListLastUpdatedAtMe" +
+	"rgeStrategySubmittedTimeLanguageNameContentTypeDescriptionIN_PROGRESSResourceArnIamRoleArnJobDetails" +
+	"SourceTextTagKeyListTargetTextCreatedAtFormalityJobStatusNextTokenOVERWRITEProfanitySUBMITTEDSizeByt" +
+	"esTimestampCREATINGDELETINGINFORMALTagValueTermListUPDATINGBrevityEndTimeJobNameMessageSTOPPEDTagKey" +
+	"sTagListmessageACTIVEFAILEDmemberJobIdMULTIS3UriTermsZH_TWLongMASKUnitCSVKMSTMXTSVUNIENFRJAKOONPT"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.translate", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 634, Target: 0, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 660, Target: 1, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1014, Target: 2, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 117, Target: 3, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1254, Target: 4, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1413, Target: 5, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 814, Target: 6, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1499, Target: 7, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1086, Target: 8, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 580, Target: 9, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 864, Target: 10, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 311, Target: 11, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 342, Target: 12, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 463, Target: 13, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1859, Target: 14, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 939, Target: 15, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1541, Target: 16, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1583, Target: 17, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 738, Target: 18, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 184, Target: 19, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1369, Target: 20, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2748, Target: 204, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1369, Target: 23, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 20, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1764, Target: 25, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2659, Target: 26, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2793, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2042, Target: 28, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 280, Target: 29, Traits: 1, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2059, Target: 31, Traits: 1, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2436, Target: 33, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2447, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 79, Target: 35, Traits: 2, StrLen: 38, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1644, Target: 95, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2316, Target: 38, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2782, Target: 390, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2738, Target: 390, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 51, Target: 41, Traits: 0, StrLen: 19, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2619, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2785, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2353, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2787, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1635, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2789, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2791, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2795, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2753, Target: 390, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2753, Target: 390, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 948, Target: 52, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 982, Target: 55, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 2436, Target: 33, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 974, Target: 55, Traits: 4, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 2093, Target: 56, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2106, Target: 60, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2736, Target: 59, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2256, Target: 59, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2093, Target: 60, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2773, Target: 390, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2539, Target: 62, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2629, Target: 390, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2627, Target: 390, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2480, Target: 65, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2271, Target: 66, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2743, Target: 156, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2436, Target: 33, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2137, Target: 69, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1277, Target: 70, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1435, Target: 72, Traits: 2, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 373, Target: 74, Traits: 2, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1300, Target: 76, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2490, Target: 78, Traits: 0, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1230, Target: 69, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1038, Target: 69, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1802, Target: 69, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2733, Target: 82, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2673, Target: 83, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2548, Target: 84, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2584, Target: 390, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2458, Target: 390, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1624, Target: 390, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1624, Target: 390, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2721, Target: 390, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2344, Target: 390, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2687, Target: 390, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 58, Target: 92, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2424, Target: 102, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 58, Target: 95, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 558, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 558, Target: 96, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 95, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2372, Target: 98, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 92, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 501, Target: 100, Traits: 2, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1821, Target: 102, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2758, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 2127, Target: 104, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2398, Target: 105, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2566, Target: 390, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2177, Target: 108, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2743, Target: 156, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2093, Target: 56, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2286, Target: 111, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1916, Target: 112, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2743, Target: 156, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1535, Target: 118, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1134, Target: 115, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2330, Target: 159, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 32, Target: 159, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1934, Target: 118, Traits: 0, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2779, Target: 390, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2770, Target: 390, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2776, Target: 390, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 712, Target: 122, Traits: 0, StrLen: 22, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2090, Target: 111, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2447, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 858, Target: 142, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1878, Target: 96, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1916, Target: 112, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2680, Target: 245, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2161, Target: 103, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1783, Target: 103, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2110, Target: 103, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1970, Target: 103, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2093, Target: 56, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2530, Target: 231, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2385, Target: 231, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 839, Target: 142, Traits: 0, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1478, Target: 231, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 712, Target: 140, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 122, Traits: 0, StrLen: 6, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1952, Target: 142, Traits: 0, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2611, Target: 390, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2651, Target: 390, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2715, Target: 390, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2619, Target: 390, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2721, Target: 390, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2575, Target: 148, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2762, Target: 390, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2469, Target: 150, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2193, Target: 151, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2193, Target: 152, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 151, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 889, Target: 154, Traits: 6, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2743, Target: 156, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 607, Target: 157, Traits: 7, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 570, Target: 159, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 584, Target: 160, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2103, Target: 163, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 389, Target: 168, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2510, Target: 163, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2510, Target: 164, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 163, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2701, Target: 166, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 160, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2635, Target: 168, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 552, Target: 169, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 95, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 820, Target: 171, Traits: 0, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2500, Target: 159, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2520, Target: 159, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2358, Target: 174, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1346, Target: 175, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2312, Target: 186, Traits: 3, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1535, Target: 179, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2316, Target: 38, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1520, Target: 179, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2770, Target: 390, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2776, Target: 390, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2779, Target: 390, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1346, Target: 183, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2330, Target: 159, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 32, Target: 159, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2301, Target: 186, Traits: 4, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 914, Target: 187, Traits: 0, StrLen: 21, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2447, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2090, Target: 174, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1878, Target: 96, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2093, Target: 56, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2593, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2216, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2530, Target: 231, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2385, Target: 231, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2316, Target: 38, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2680, Target: 245, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2209, Target: 69, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1535, Target: 179, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 914, Target: 202, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 187, Traits: 0, StrLen: 6, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2643, Target: 204, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 171, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 493, Target: 206, Traits: 2, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1158, Target: 208, Traits: 0, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2673, Target: 83, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 84, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1840, Target: 231, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2006, Target: 231, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 216, Target: 213, Traits: 0, StrLen: 28, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2733, Target: 82, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2673, Target: 83, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 84, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2490, Target: 78, Traits: 0, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1878, Target: 169, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2225, Target: 152, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2144, Target: 152, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2680, Target: 245, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2411, Target: 231, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2666, Target: 231, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2271, Target: 66, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2177, Target: 108, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2076, Target: 65, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1908, Target: 241, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 216, Target: 229, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2727, Target: 213, Traits: 0, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2602, Target: 231, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1182, Target: 232, Traits: 8, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1684, Target: 234, Traits: 2, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2708, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2469, Target: 150, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 964, Target: 237, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 982, Target: 239, Traits: 3, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 964, Target: 239, Traits: 4, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 1724, Target: 240, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1897, Target: 241, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2539, Target: 62, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2575, Target: 148, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2659, Target: 26, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1562, Target: 245, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 40, Target: 246, Traits: 2, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 51, Target: 95, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 248, Target: 249, Traits: 2, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2680, Target: 159, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 552, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 764, Target: 253, Traits: 0, StrLen: 25, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2447, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1916, Target: 112, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2093, Target: 56, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2042, Target: 28, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 584, Target: 166, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 634, Target: 260, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 858, Target: 142, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 789, Target: 263, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 660, Target: 265, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 858, Target: 142, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1014, Target: 268, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 151, Target: 270, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2733, Target: 82, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 117, Target: 272, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 216, Target: 213, Traits: 0, StrLen: 28, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1391, Target: 274, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1254, Target: 276, Traits: 0, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 712, Target: 122, Traits: 0, StrLen: 22, Count: 17, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 28, Target: 115, Traits: 0, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19, Target: 115, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 115, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1457, Target: 281, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1520, Target: 179, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1413, Target: 284, Traits: 0, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 914, Target: 187, Traits: 0, StrLen: 21, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1346, Target: 183, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19, Target: 183, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1062, Target: 288, Traits: 0, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2398, Target: 105, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2447, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1346, Target: 175, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2093, Target: 56, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 584, Target: 166, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 814, Target: 295, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 914, Target: 187, Traits: 0, StrLen: 21, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 19, Target: 183, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1664, Target: 298, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 51, Target: 41, Traits: 0, StrLen: 19, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2127, Target: 104, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1499, Target: 302, Traits: 0, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1503, Target: 98, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 51, Target: 41, Traits: 0, StrLen: 19, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1323, Target: 306, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2127, Target: 104, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1086, Target: 309, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 712, Target: 140, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 686, Target: 312, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2469, Target: 150, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 580, Target: 314, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 584, Target: 166, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1110, Target: 316, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2127, Target: 104, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 864, Target: 319, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 914, Target: 202, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 403, Target: 322, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1176, Target: 208, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2127, Target: 104, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 311, Target: 326, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 216, Target: 229, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2557, Target: 107, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 433, Target: 329, Traits: 0, StrLen: 30, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2673, Target: 83, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2271, Target: 66, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2177, Target: 108, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2076, Target: 65, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1878, Target: 169, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2225, Target: 152, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2144, Target: 152, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2042, Target: 28, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1908, Target: 241, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 342, Target: 340, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2733, Target: 82, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 84, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 523, Target: 343, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2733, Target: 82, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 463, Target: 345, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2733, Target: 82, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2548, Target: 84, Traits: 0, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2024, Target: 348, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2469, Target: 150, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 584, Target: 166, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1859, Target: 351, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1206, Target: 352, Traits: 0, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 948, Target: 52, Traits: 0, StrLen: 8, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2225, Target: 152, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 552, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1908, Target: 241, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 939, Target: 358, Traits: 0, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 964, Target: 237, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 552, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1604, Target: 23, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2241, Target: 241, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1704, Target: 364, Traits: 0, StrLen: 20, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 125, Target: 25, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2225, Target: 152, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 552, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1908, Target: 241, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1541, Target: 370, Traits: 0, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1724, Target: 240, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1988, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 552, Target: 95, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1604, Target: 23, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2241, Target: 241, Traits: 0, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1744, Target: 376, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2469, Target: 150, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2694, Target: 164, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1583, Target: 379, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 989, Target: 380, Traits: 0, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2447, Target: 34, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1916, Target: 112, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2042, Target: 28, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 738, Target: 385, Traits: 0, StrLen: 26, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 151, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 858, Target: 142, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 839, Target: 142, Traits: 0, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1478, Target: 231, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2766, Target: 390, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [391]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+}
+
+var CreateParallelData = &handles[0]
+
+var DeleteParallelData = &handles[1]
+
+var DeleteTerminology = &handles[2]
+
+var DescribeTextTranslationJob = &handles[3]
+
+var GetParallelData = &handles[4]
+
+var GetTerminology = &handles[5]
+
+var ImportTerminology = &handles[6]
+
+var ListLanguages = &handles[7]
+
+var ListParallelData = &handles[8]
+
+var ListTagsForResource = &handles[9]
+
+var ListTerminologies = &handles[10]
+
+var ListTextTranslationJobs = &handles[11]
+
+var StartTextTranslationJob = &handles[12]
+
+var StopTextTranslationJob = &handles[13]
+
+var TagResource = &handles[14]
+
+var TranslateDocument = &handles[15]
+
+var TranslateText = &handles[16]
+
+var UntagResource = &handles[17]
+
+var UpdateParallelData = &handles[18]
+
+var _AWSShineFrontendService_20170701 = &handles[19]
+
+var AppliedTerminology = &handles[20]
+var AppliedTerminology_Name = &handles[21]
+var AppliedTerminology_Terms = &handles[22]
+
+var _AppliedTerminologyList = &handles[23]
+var _AppliedTerminologyList_member = &handles[24]
+
+var _BoundedLengthString = &handles[25]
+
+var Brevity = &handles[26]
+var Brevity_ON = &handles[27]
+
+var _ClientTokenString = &handles[28]
+
+var ConcurrentModificationException = &handles[29]
+var ConcurrentModificationException_Message = &handles[30]
+
+var ConflictException = &handles[31]
+var ConflictException_Message = &handles[32]
+
+var _ContentType = &handles[33]
+
+var _Description = &handles[34]
+
+var DetectedLanguageLowConfidenceException = &handles[35]
+var DetectedLanguageLowConfidenceException_Message = &handles[36]
+var DetectedLanguageLowConfidenceException_DetectedLanguageCode = &handles[37]
+
+var Directionality = &handles[38]
+var Directionality_UNI = &handles[39]
+var Directionality_MULTI = &handles[40]
+
+var DisplayLanguageCode = &handles[41]
+var DisplayLanguageCode_DE = &handles[42]
+var DisplayLanguageCode_EN = &handles[43]
+var DisplayLanguageCode_ES = &handles[44]
+var DisplayLanguageCode_FR = &handles[45]
+var DisplayLanguageCode_IT = &handles[46]
+var DisplayLanguageCode_JA = &handles[47]
+var DisplayLanguageCode_KO = &handles[48]
+var DisplayLanguageCode_PT = &handles[49]
+var DisplayLanguageCode_ZH = &handles[50]
+var DisplayLanguageCode_ZH_TW = &handles[51]
+
+var Document = &handles[52]
+var Document_Content = &handles[53]
+var Document_ContentType = &handles[54]
+
+var _DocumentContent = &handles[55]
+
+var EncryptionKey = &handles[56]
+var EncryptionKey_Type = &handles[57]
+var EncryptionKey_Id = &handles[58]
+
+var _EncryptionKeyID = &handles[59]
+
+var EncryptionKeyType = &handles[60]
+var EncryptionKeyType_KMS = &handles[61]
+
+var Formality = &handles[62]
+var Formality_FORMAL = &handles[63]
+var Formality_INFORMAL = &handles[64]
+
+var _IamRoleArn = &handles[65]
+
+var InputDataConfig = &handles[66]
+var InputDataConfig_S3Uri = &handles[67]
+var InputDataConfig_ContentType = &handles[68]
+
+var _Integer = &handles[69]
+
+var InternalServerException = &handles[70]
+var InternalServerException_Message = &handles[71]
+
+var InvalidFilterException = &handles[72]
+var InvalidFilterException_Message = &handles[73]
+
+var InvalidParameterValueException = &handles[74]
+var InvalidParameterValueException_Message = &handles[75]
+
+var InvalidRequestException = &handles[76]
+var InvalidRequestException_Message = &handles[77]
+
+var JobDetails = &handles[78]
+var JobDetails_TranslatedDocumentsCount = &handles[79]
+var JobDetails_DocumentsWithErrorsCount = &handles[80]
+var JobDetails_InputDocumentsCount = &handles[81]
+
+var _JobId = &handles[82]
+
+var _JobName = &handles[83]
+
+var JobStatus = &handles[84]
+var JobStatus_SUBMITTED = &handles[85]
+var JobStatus_IN_PROGRESS = &handles[86]
+var JobStatus_COMPLETED = &handles[87]
+var JobStatus_COMPLETED_WITH_ERROR = &handles[88]
+var JobStatus_FAILED = &handles[89]
+var JobStatus_STOP_REQUESTED = &handles[90]
+var JobStatus_STOPPED = &handles[91]
+
+var Language = &handles[92]
+var Language_LanguageName = &handles[93]
+var Language_LanguageCode = &handles[94]
+
+var _LanguageCodeString = &handles[95]
+
+var _LanguageCodeStringList = &handles[96]
+var _LanguageCodeStringList_member = &handles[97]
+
+var _LanguagesList = &handles[98]
+var _LanguagesList_member = &handles[99]
+
+var LimitExceededException = &handles[100]
+var LimitExceededException_Message = &handles[101]
+
+var _LocalizedNameString = &handles[102]
+
+var _Long = &handles[103]
+
+var _MaxResultsInteger = &handles[104]
+
+var MergeStrategy = &handles[105]
+var MergeStrategy_OVERWRITE = &handles[106]
+
+var _NextToken = &handles[107]
+
+var OutputDataConfig = &handles[108]
+var OutputDataConfig_S3Uri = &handles[109]
+var OutputDataConfig_EncryptionKey = &handles[110]
+
+var _ParallelDataArn = &handles[111]
+
+var ParallelDataConfig = &handles[112]
+var ParallelDataConfig_S3Uri = &handles[113]
+var ParallelDataConfig_Format = &handles[114]
+
+var ParallelDataDataLocation = &handles[115]
+var ParallelDataDataLocation_RepositoryType = &handles[116]
+var ParallelDataDataLocation_Location = &handles[117]
+
+var ParallelDataFormat = &handles[118]
+var ParallelDataFormat_TSV = &handles[119]
+var ParallelDataFormat_CSV = &handles[120]
+var ParallelDataFormat_TMX = &handles[121]
+
+var ParallelDataProperties = &handles[122]
+var ParallelDataProperties_Name = &handles[123]
+var ParallelDataProperties_Arn = &handles[124]
+var ParallelDataProperties_Description = &handles[125]
+var ParallelDataProperties_Status = &handles[126]
+var ParallelDataProperties_SourceLanguageCode = &handles[127]
+var ParallelDataProperties_TargetLanguageCodes = &handles[128]
+var ParallelDataProperties_ParallelDataConfig = &handles[129]
+var ParallelDataProperties_Message = &handles[130]
+var ParallelDataProperties_ImportedDataSize = &handles[131]
+var ParallelDataProperties_ImportedRecordCount = &handles[132]
+var ParallelDataProperties_FailedRecordCount = &handles[133]
+var ParallelDataProperties_SkippedRecordCount = &handles[134]
+var ParallelDataProperties_EncryptionKey = &handles[135]
+var ParallelDataProperties_CreatedAt = &handles[136]
+var ParallelDataProperties_LastUpdatedAt = &handles[137]
+var ParallelDataProperties_LatestUpdateAttemptStatus = &handles[138]
+var ParallelDataProperties_LatestUpdateAttemptAt = &handles[139]
+
+var _ParallelDataPropertiesList = &handles[140]
+var _ParallelDataPropertiesList_member = &handles[141]
+
+var ParallelDataStatus = &handles[142]
+var ParallelDataStatus_CREATING = &handles[143]
+var ParallelDataStatus_UPDATING = &handles[144]
+var ParallelDataStatus_ACTIVE = &handles[145]
+var ParallelDataStatus_DELETING = &handles[146]
+var ParallelDataStatus_FAILED = &handles[147]
+
+var Profanity = &handles[148]
+var Profanity_MASK = &handles[149]
+
+var _ResourceArn = &handles[150]
+
+var _ResourceName = &handles[151]
+
+var _ResourceNameList = &handles[152]
+var _ResourceNameList_member = &handles[153]
+
+var ResourceNotFoundException = &handles[154]
+var ResourceNotFoundException_Message = &handles[155]
+
+var _S3Uri = &handles[156]
+
+var ServiceUnavailableException = &handles[157]
+var ServiceUnavailableException_Message = &handles[158]
+
+var _String = &handles[159]
+
+var Tag = &handles[160]
+var Tag_Key = &handles[161]
+var Tag_Value = &handles[162]
+
+var _TagKey = &handles[163]
+
+var _TagKeyList = &handles[164]
+var _TagKeyList_member = &handles[165]
+
+var _TagList = &handles[166]
+var _TagList_member = &handles[167]
+
+var _TagValue = &handles[168]
+
+var _TargetLanguageCodeStringList = &handles[169]
+var _TargetLanguageCodeStringList_member = &handles[170]
+
+var Term = &handles[171]
+var Term_SourceText = &handles[172]
+var Term_TargetText = &handles[173]
+
+var _TerminologyArn = &handles[174]
+
+var TerminologyData = &handles[175]
+var TerminologyData_File = &handles[176]
+var TerminologyData_Format = &handles[177]
+var TerminologyData_Directionality = &handles[178]
+
+var TerminologyDataFormat = &handles[179]
+var TerminologyDataFormat_CSV = &handles[180]
+var TerminologyDataFormat_TMX = &handles[181]
+var TerminologyDataFormat_TSV = &handles[182]
+
+var TerminologyDataLocation = &handles[183]
+var TerminologyDataLocation_RepositoryType = &handles[184]
+var TerminologyDataLocation_Location = &handles[185]
+
+var _TerminologyFile = &handles[186]
+
+var TerminologyProperties = &handles[187]
+var TerminologyProperties_Name = &handles[188]
+var TerminologyProperties_Description = &handles[189]
+var TerminologyProperties_Arn = &handles[190]
+var TerminologyProperties_SourceLanguageCode = &handles[191]
+var TerminologyProperties_TargetLanguageCodes = &handles[192]
+var TerminologyProperties_EncryptionKey = &handles[193]
+var TerminologyProperties_SizeBytes = &handles[194]
+var TerminologyProperties_TermCount = &handles[195]
+var TerminologyProperties_CreatedAt = &handles[196]
+var TerminologyProperties_LastUpdatedAt = &handles[197]
+var TerminologyProperties_Directionality = &handles[198]
+var TerminologyProperties_Message = &handles[199]
+var TerminologyProperties_SkippedTermCount = &handles[200]
+var TerminologyProperties_Format = &handles[201]
+
+var _TerminologyPropertiesList = &handles[202]
+var _TerminologyPropertiesList_member = &handles[203]
+
+var _TermList = &handles[204]
+var _TermList_member = &handles[205]
+
+var TextSizeLimitExceededException = &handles[206]
+var TextSizeLimitExceededException_Message = &handles[207]
+
+var TextTranslationJobFilter = &handles[208]
+var TextTranslationJobFilter_JobName = &handles[209]
+var TextTranslationJobFilter_JobStatus = &handles[210]
+var TextTranslationJobFilter_SubmittedBeforeTime = &handles[211]
+var TextTranslationJobFilter_SubmittedAfterTime = &handles[212]
+
+var TextTranslationJobProperties = &handles[213]
+var TextTranslationJobProperties_JobId = &handles[214]
+var TextTranslationJobProperties_JobName = &handles[215]
+var TextTranslationJobProperties_JobStatus = &handles[216]
+var TextTranslationJobProperties_JobDetails = &handles[217]
+var TextTranslationJobProperties_SourceLanguageCode = &handles[218]
+var TextTranslationJobProperties_TargetLanguageCodes = &handles[219]
+var TextTranslationJobProperties_TerminologyNames = &handles[220]
+var TextTranslationJobProperties_ParallelDataNames = &handles[221]
+var TextTranslationJobProperties_Message = &handles[222]
+var TextTranslationJobProperties_SubmittedTime = &handles[223]
+var TextTranslationJobProperties_EndTime = &handles[224]
+var TextTranslationJobProperties_InputDataConfig = &handles[225]
+var TextTranslationJobProperties_OutputDataConfig = &handles[226]
+var TextTranslationJobProperties_DataAccessRoleArn = &handles[227]
+var TextTranslationJobProperties_Settings = &handles[228]
+
+var _TextTranslationJobPropertiesList = &handles[229]
+var _TextTranslationJobPropertiesList_member = &handles[230]
+
+var _Timestamp = &handles[231]
+
+var TooManyRequestsException = &handles[232]
+var TooManyRequestsException_Message = &handles[233]
+
+var TooManyTagsException = &handles[234]
+var TooManyTagsException_message = &handles[235]
+var TooManyTagsException_ResourceArn = &handles[236]
+
+var TranslatedDocument = &handles[237]
+var TranslatedDocument_Content = &handles[238]
+
+var _TranslatedDocumentContent = &handles[239]
+
+var _TranslatedTextString = &handles[240]
+
+var TranslationSettings = &handles[241]
+var TranslationSettings_Formality = &handles[242]
+var TranslationSettings_Profanity = &handles[243]
+var TranslationSettings_Brevity = &handles[244]
+
+var _UnboundedLengthString = &handles[245]
+
+var UnsupportedDisplayLanguageCodeException = &handles[246]
+var UnsupportedDisplayLanguageCodeException_Message = &handles[247]
+var UnsupportedDisplayLanguageCodeException_DisplayLanguageCode = &handles[248]
+
+var UnsupportedLanguagePairException = &handles[249]
+var UnsupportedLanguagePairException_Message = &handles[250]
+var UnsupportedLanguagePairException_SourceLanguageCode = &handles[251]
+var UnsupportedLanguagePairException_TargetLanguageCode = &handles[252]
+
+var CreateParallelDataRequest = &handles[253]
+var CreateParallelDataRequest_Name = &handles[254]
+var CreateParallelDataRequest_Description = &handles[255]
+var CreateParallelDataRequest_ParallelDataConfig = &handles[256]
+var CreateParallelDataRequest_EncryptionKey = &handles[257]
+var CreateParallelDataRequest_ClientToken = &handles[258]
+var CreateParallelDataRequest_Tags = &handles[259]
+
+var CreateParallelDataResponse = &handles[260]
+var CreateParallelDataResponse_Name = &handles[261]
+var CreateParallelDataResponse_Status = &handles[262]
+
+var DeleteParallelDataRequest = &handles[263]
+var DeleteParallelDataRequest_Name = &handles[264]
+
+var DeleteParallelDataResponse = &handles[265]
+var DeleteParallelDataResponse_Name = &handles[266]
+var DeleteParallelDataResponse_Status = &handles[267]
+
+var DeleteTerminologyRequest = &handles[268]
+var DeleteTerminologyRequest_Name = &handles[269]
+
+var DescribeTextTranslationJobRequest = &handles[270]
+var DescribeTextTranslationJobRequest_JobId = &handles[271]
+
+var DescribeTextTranslationJobResponse = &handles[272]
+var DescribeTextTranslationJobResponse_TextTranslationJobProperties = &handles[273]
+
+var GetParallelDataRequest = &handles[274]
+var GetParallelDataRequest_Name = &handles[275]
+
+var GetParallelDataResponse = &handles[276]
+var GetParallelDataResponse_ParallelDataProperties = &handles[277]
+var GetParallelDataResponse_DataLocation = &handles[278]
+var GetParallelDataResponse_AuxiliaryDataLocation = &handles[279]
+var GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation = &handles[280]
+
+var GetTerminologyRequest = &handles[281]
+var GetTerminologyRequest_Name = &handles[282]
+var GetTerminologyRequest_TerminologyDataFormat = &handles[283]
+
+var GetTerminologyResponse = &handles[284]
+var GetTerminologyResponse_TerminologyProperties = &handles[285]
+var GetTerminologyResponse_TerminologyDataLocation = &handles[286]
+var GetTerminologyResponse_AuxiliaryDataLocation = &handles[287]
+
+var ImportTerminologyRequest = &handles[288]
+var ImportTerminologyRequest_Name = &handles[289]
+var ImportTerminologyRequest_MergeStrategy = &handles[290]
+var ImportTerminologyRequest_Description = &handles[291]
+var ImportTerminologyRequest_TerminologyData = &handles[292]
+var ImportTerminologyRequest_EncryptionKey = &handles[293]
+var ImportTerminologyRequest_Tags = &handles[294]
+
+var ImportTerminologyResponse = &handles[295]
+var ImportTerminologyResponse_TerminologyProperties = &handles[296]
+var ImportTerminologyResponse_AuxiliaryDataLocation = &handles[297]
+
+var ListLanguagesRequest = &handles[298]
+var ListLanguagesRequest_DisplayLanguageCode = &handles[299]
+var ListLanguagesRequest_NextToken = &handles[300]
+var ListLanguagesRequest_MaxResults = &handles[301]
+
+var ListLanguagesResponse = &handles[302]
+var ListLanguagesResponse_Languages = &handles[303]
+var ListLanguagesResponse_DisplayLanguageCode = &handles[304]
+var ListLanguagesResponse_NextToken = &handles[305]
+
+var ListParallelDataRequest = &handles[306]
+var ListParallelDataRequest_NextToken = &handles[307]
+var ListParallelDataRequest_MaxResults = &handles[308]
+
+var ListParallelDataResponse = &handles[309]
+var ListParallelDataResponse_ParallelDataPropertiesList = &handles[310]
+var ListParallelDataResponse_NextToken = &handles[311]
+
+var ListTagsForResourceRequest = &handles[312]
+var ListTagsForResourceRequest_ResourceArn = &handles[313]
+
+var ListTagsForResourceResponse = &handles[314]
+var ListTagsForResourceResponse_Tags = &handles[315]
+
+var ListTerminologiesRequest = &handles[316]
+var ListTerminologiesRequest_NextToken = &handles[317]
+var ListTerminologiesRequest_MaxResults = &handles[318]
+
+var ListTerminologiesResponse = &handles[319]
+var ListTerminologiesResponse_TerminologyPropertiesList = &handles[320]
+var ListTerminologiesResponse_NextToken = &handles[321]
+
+var ListTextTranslationJobsRequest = &handles[322]
+var ListTextTranslationJobsRequest_Filter = &handles[323]
+var ListTextTranslationJobsRequest_NextToken = &handles[324]
+var ListTextTranslationJobsRequest_MaxResults = &handles[325]
+
+var ListTextTranslationJobsResponse = &handles[326]
+var ListTextTranslationJobsResponse_TextTranslationJobPropertiesList = &handles[327]
+var ListTextTranslationJobsResponse_NextToken = &handles[328]
+
+var StartTextTranslationJobRequest = &handles[329]
+var StartTextTranslationJobRequest_JobName = &handles[330]
+var StartTextTranslationJobRequest_InputDataConfig = &handles[331]
+var StartTextTranslationJobRequest_OutputDataConfig = &handles[332]
+var StartTextTranslationJobRequest_DataAccessRoleArn = &handles[333]
+var StartTextTranslationJobRequest_SourceLanguageCode = &handles[334]
+var StartTextTranslationJobRequest_TargetLanguageCodes = &handles[335]
+var StartTextTranslationJobRequest_TerminologyNames = &handles[336]
+var StartTextTranslationJobRequest_ParallelDataNames = &handles[337]
+var StartTextTranslationJobRequest_ClientToken = &handles[338]
+var StartTextTranslationJobRequest_Settings = &handles[339]
+
+var StartTextTranslationJobResponse = &handles[340]
+var StartTextTranslationJobResponse_JobId = &handles[341]
+var StartTextTranslationJobResponse_JobStatus = &handles[342]
+
+var StopTextTranslationJobRequest = &handles[343]
+var StopTextTranslationJobRequest_JobId = &handles[344]
+
+var StopTextTranslationJobResponse = &handles[345]
+var StopTextTranslationJobResponse_JobId = &handles[346]
+var StopTextTranslationJobResponse_JobStatus = &handles[347]
+
+var TagResourceRequest = &handles[348]
+var TagResourceRequest_ResourceArn = &handles[349]
+var TagResourceRequest_Tags = &handles[350]
+
+var TagResourceResponse = &handles[351]
+
+var TranslateDocumentRequest = &handles[352]
+var TranslateDocumentRequest_Document = &handles[353]
+var TranslateDocumentRequest_TerminologyNames = &handles[354]
+var TranslateDocumentRequest_SourceLanguageCode = &handles[355]
+var TranslateDocumentRequest_TargetLanguageCode = &handles[356]
+var TranslateDocumentRequest_Settings = &handles[357]
+
+var TranslateDocumentResponse = &handles[358]
+var TranslateDocumentResponse_TranslatedDocument = &handles[359]
+var TranslateDocumentResponse_SourceLanguageCode = &handles[360]
+var TranslateDocumentResponse_TargetLanguageCode = &handles[361]
+var TranslateDocumentResponse_AppliedTerminologies = &handles[362]
+var TranslateDocumentResponse_AppliedSettings = &handles[363]
+
+var TranslateTextRequest = &handles[364]
+var TranslateTextRequest_Text = &handles[365]
+var TranslateTextRequest_TerminologyNames = &handles[366]
+var TranslateTextRequest_SourceLanguageCode = &handles[367]
+var TranslateTextRequest_TargetLanguageCode = &handles[368]
+var TranslateTextRequest_Settings = &handles[369]
+
+var TranslateTextResponse = &handles[370]
+var TranslateTextResponse_TranslatedText = &handles[371]
+var TranslateTextResponse_SourceLanguageCode = &handles[372]
+var TranslateTextResponse_TargetLanguageCode = &handles[373]
+var TranslateTextResponse_AppliedTerminologies = &handles[374]
+var TranslateTextResponse_AppliedSettings = &handles[375]
+
+var UntagResourceRequest = &handles[376]
+var UntagResourceRequest_ResourceArn = &handles[377]
+var UntagResourceRequest_TagKeys = &handles[378]
+
+var UntagResourceResponse = &handles[379]
+
+var UpdateParallelDataRequest = &handles[380]
+var UpdateParallelDataRequest_Name = &handles[381]
+var UpdateParallelDataRequest_Description = &handles[382]
+var UpdateParallelDataRequest_ParallelDataConfig = &handles[383]
+var UpdateParallelDataRequest_ClientToken = &handles[384]
+
+var UpdateParallelDataResponse = &handles[385]
+var UpdateParallelDataResponse_Name = &handles[386]
+var UpdateParallelDataResponse_Status = &handles[387]
+var UpdateParallelDataResponse_LatestUpdateAttemptStatus = &handles[388]
+var UpdateParallelDataResponse_LatestUpdateAttemptAt = &handles[389]
+
+var AWSShineFrontendService_20170701 = &smithy.ServiceSchema{Schema: &handles[19], Version: "2017-07-01"}

@@ -4,267 +4,256 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CompleteRollout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "CompleteRollout",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/complete-rollout",
-	Code: 200})
-
-var Sample = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "Sample",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/sample",
-	Code: 200})
-
-var SampleWithResponseStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "SampleWithResponseStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/sample-with-response-stream",
-	Code: 200})
-
-var UpdateReward = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "UpdateReward",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/update-reward",
-	Code: 200})
-
-var _AgenticRFTRuntimeService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "AgenticRFTRuntimeService",
-}, smithy.ShapeTypeService, 0)
-
-var AgenticRFTRuntimeService = smithy.NewServiceSchema(_AgenticRFTRuntimeService, "2026-02-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var CompletionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "CompletionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CompletionStatus_READY *smithy.Schema
-
-var CompletionStatus_FAILED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _DoubleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "DoubleList",
-}, smithy.ShapeTypeList, 1)
-var _DoubleList_member *smithy.Schema
-
-var _FailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "FailureReason",
-}, smithy.ShapeTypeString, 0)
-
-var _InferenceRequestBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "InferenceRequestBody",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _InferenceResponseBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "InferenceResponseBody",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceError_Message *smithy.Schema
-
-var _JobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "JobArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResponseStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "ResponseStream",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{},
-
-	&smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _TrajectoryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "TrajectoryId",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CompleteRolloutRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "CompleteRolloutRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CompleteRolloutRequest_JobArn *smithy.Schema
-
-var CompleteRolloutRequest_TrajectoryId *smithy.Schema
-
-var CompleteRolloutRequest_Status *smithy.Schema
-
-var CompleteRolloutRequest_ClientToken *smithy.Schema
-
-var CompleteRolloutResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "CompleteRolloutResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var SampleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "SampleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SampleRequest_JobArn *smithy.Schema
-
-var SampleRequest_TrajectoryId *smithy.Schema
-
-var SampleRequest_Body *smithy.Schema
-
-var SampleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "SampleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SampleResponse_ContentType *smithy.Schema
-
-var SampleResponse_Body *smithy.Schema
-
-var SampleWithResponseStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "SampleWithResponseStreamRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SampleWithResponseStreamRequest_JobArn *smithy.Schema
-
-var SampleWithResponseStreamRequest_TrajectoryId *smithy.Schema
-
-var SampleWithResponseStreamRequest_Body *smithy.Schema
-
-var SampleWithResponseStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "SampleWithResponseStreamResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SampleWithResponseStreamResponse_ContentType *smithy.Schema
-
-var SampleWithResponseStreamResponse_Body *smithy.Schema
-
-var UpdateRewardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "UpdateRewardRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateRewardRequest_JobArn *smithy.Schema
-
-var UpdateRewardRequest_TrajectoryId *smithy.Schema
-
-var UpdateRewardRequest_Rewards *smithy.Schema
-
-var UpdateRewardRequest_ClientToken *smithy.Schema
-
-var UpdateRewardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerjobruntime",
-	Name:      "UpdateRewardResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _FailureReason)
-
-	CompletionStatus_READY = CompletionStatus.AddMember("READY", smithyprelude.Unit)
-
-	CompletionStatus_FAILED = CompletionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _FailureReason)
-
-	_DoubleList_member = _DoubleList.AddMember("member", smithyprelude.Double)
-
-	InternalServiceError_Message = InternalServiceError.AddMember("Message", _FailureReason)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _FailureReason)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _FailureReason)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _FailureReason)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _FailureReason)
-
-	CompleteRolloutRequest_JobArn = CompleteRolloutRequest.AddMember("JobArn", _JobArn, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Job-Arn"})
-
-	CompleteRolloutRequest_TrajectoryId = CompleteRolloutRequest.AddMember("TrajectoryId", _TrajectoryId)
-
-	CompleteRolloutRequest_Status = CompleteRolloutRequest.AddMember("Status", CompletionStatus)
-
-	CompleteRolloutRequest_ClientToken = CompleteRolloutRequest.AddMember("ClientToken", smithyprelude.String)
-
-	SampleRequest_JobArn = SampleRequest.AddMember("JobArn", _JobArn, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Job-Arn"})
-
-	SampleRequest_TrajectoryId = SampleRequest.AddMember("TrajectoryId", _TrajectoryId, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Trajectory-Id"})
-
-	SampleRequest_Body = SampleRequest.AddMember("Body", _InferenceRequestBody, &smithytraits.HTTPPayload{})
-
-	SampleResponse_ContentType = SampleResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	SampleResponse_Body = SampleResponse.AddMember("Body", _InferenceResponseBody, &smithytraits.HTTPPayload{})
-
-	SampleWithResponseStreamRequest_JobArn = SampleWithResponseStreamRequest.AddMember("JobArn", _JobArn, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Job-Arn"})
-
-	SampleWithResponseStreamRequest_TrajectoryId = SampleWithResponseStreamRequest.AddMember("TrajectoryId", _TrajectoryId, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Trajectory-Id"})
-
-	SampleWithResponseStreamRequest_Body = SampleWithResponseStreamRequest.AddMember("Body", _InferenceRequestBody, &smithytraits.HTTPPayload{})
-
-	SampleWithResponseStreamResponse_ContentType = SampleWithResponseStreamResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	SampleWithResponseStreamResponse_Body = SampleWithResponseStreamResponse.AddMember("Body", _ResponseStream, &smithytraits.HTTPPayload{})
-
-	UpdateRewardRequest_JobArn = UpdateRewardRequest.AddMember("JobArn", _JobArn, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Job-Arn"})
-
-	UpdateRewardRequest_TrajectoryId = UpdateRewardRequest.AddMember("TrajectoryId", _TrajectoryId)
-
-	UpdateRewardRequest_Rewards = UpdateRewardRequest.AddMember("Rewards", _DoubleList)
-
-	UpdateRewardRequest_ClientToken = UpdateRewardRequest.AddMember("ClientToken", smithyprelude.String)
-
+const blob = "" +
+	"SampleWithResponseStreamResponseSampleWithResponseStreamRequestServiceQuotaExceededExceptionResource" +
+	"NotFoundExceptionAgenticRFTRuntimeServiceCompleteRolloutResponseCompleteRolloutRequestAccessDeniedEx" +
+	"ceptionInferenceResponseBodyInferenceRequestBodyInternalServiceErrorUpdateRewardResponseThrottlingEx" +
+	"ceptionUpdateRewardRequestValidationExceptionConflictExceptionCompletionStatusSampleResponseFailureR" +
+	"easonSampleRequestTrajectoryIdClientTokenContentTypeDoubleListMessageRewardsFAILEDJobArnStringmember" +
+	"READYUnit"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.sagemakerjobruntime", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 141, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 1, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 2, Traits: 2, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 268, Target: 3, Traits: 3, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 117, Target: 4, Traits: 4, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 186, Target: 5, Traits: 5, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 14, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 362, Target: 7, Traits: 4, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 500, Target: 56, Traits: 4, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 476, Target: 56, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 345, Target: 10, Traits: 6, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 14, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 452, Target: 12, Traits: 4, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 494, Target: 57, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 392, Target: 14, Traits: 4, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 228, Target: 15, Traits: 7, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 207, Target: 16, Traits: 7, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 248, Target: 17, Traits: 8, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 14, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 482, Target: 19, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 92, Target: 20, Traits: 9, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 14, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 10, Target: 22, Traits: 10, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 63, Target: 23, Traits: 11, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 14, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 288, Target: 25, Traits: 12, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 14, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 418, Target: 27, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 326, Target: 28, Traits: 13, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 14, Traits: 4, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 164, Target: 30, Traits: 4, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 482, Target: 19, Traits: 14, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 418, Target: 27, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 372, Target: 7, Traits: 4, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 430, Target: 58, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 141, Target: 35, Traits: 4, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 405, Target: 36, Traits: 4, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 482, Target: 19, Traits: 14, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 418, Target: 27, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 15, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 378, Target: 40, Traits: 4, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 441, Target: 58, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 16, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 32, Target: 43, Traits: 4, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 482, Target: 19, Traits: 14, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 418, Target: 27, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 15, Traits: 16, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 0, Target: 47, Traits: 4, StrLen: 32, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 441, Target: 58, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 224, Target: 22, Traits: 18, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 307, Target: 50, Traits: 4, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 482, Target: 19, Traits: 14, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 418, Target: 27, Traits: 4, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 469, Target: 12, Traits: 4, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 430, Target: 58, Traits: 4, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 268, Target: 55, Traits: 4, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 505, Target: 56, Traits: 4, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 452, Target: 57, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 2},
+		{StrOff: 488, Target: 58, Traits: 4, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/complete-rollout",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/sample",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/sample-with-response-stream",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/update-reward",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Job-Arn"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Trajectory-Id"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800},
+	},
 }
+
+var handles = [59]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+}
+
+var CompleteRollout = &handles[0]
+
+var Sample = &handles[1]
+
+var SampleWithResponseStream = &handles[2]
+
+var UpdateReward = &handles[3]
+
+var _AgenticRFTRuntimeService = &handles[4]
+
+var AccessDeniedException = &handles[5]
+var AccessDeniedException_Message = &handles[6]
+
+var CompletionStatus = &handles[7]
+var CompletionStatus_READY = &handles[8]
+var CompletionStatus_FAILED = &handles[9]
+
+var ConflictException = &handles[10]
+var ConflictException_Message = &handles[11]
+
+var _DoubleList = &handles[12]
+var _DoubleList_member = &handles[13]
+
+var _FailureReason = &handles[14]
+
+var _InferenceRequestBody = &handles[15]
+
+var _InferenceResponseBody = &handles[16]
+
+var InternalServiceError = &handles[17]
+var InternalServiceError_Message = &handles[18]
+
+var _JobArn = &handles[19]
+
+var ResourceNotFoundException = &handles[20]
+var ResourceNotFoundException_Message = &handles[21]
+
+var _ResponseStream = &handles[22]
+
+var ServiceQuotaExceededException = &handles[23]
+var ServiceQuotaExceededException_Message = &handles[24]
+
+var ThrottlingException = &handles[25]
+var ThrottlingException_Message = &handles[26]
+
+var _TrajectoryId = &handles[27]
+
+var ValidationException = &handles[28]
+var ValidationException_Message = &handles[29]
+
+var CompleteRolloutRequest = &handles[30]
+var CompleteRolloutRequest_JobArn = &handles[31]
+var CompleteRolloutRequest_TrajectoryId = &handles[32]
+var CompleteRolloutRequest_Status = &handles[33]
+var CompleteRolloutRequest_ClientToken = &handles[34]
+
+var CompleteRolloutResponse = &handles[35]
+
+var SampleRequest = &handles[36]
+var SampleRequest_JobArn = &handles[37]
+var SampleRequest_TrajectoryId = &handles[38]
+var SampleRequest_Body = &handles[39]
+
+var SampleResponse = &handles[40]
+var SampleResponse_ContentType = &handles[41]
+var SampleResponse_Body = &handles[42]
+
+var SampleWithResponseStreamRequest = &handles[43]
+var SampleWithResponseStreamRequest_JobArn = &handles[44]
+var SampleWithResponseStreamRequest_TrajectoryId = &handles[45]
+var SampleWithResponseStreamRequest_Body = &handles[46]
+
+var SampleWithResponseStreamResponse = &handles[47]
+var SampleWithResponseStreamResponse_ContentType = &handles[48]
+var SampleWithResponseStreamResponse_Body = &handles[49]
+
+var UpdateRewardRequest = &handles[50]
+var UpdateRewardRequest_JobArn = &handles[51]
+var UpdateRewardRequest_TrajectoryId = &handles[52]
+var UpdateRewardRequest_Rewards = &handles[53]
+var UpdateRewardRequest_ClientToken = &handles[54]
+
+var UpdateRewardResponse = &handles[55]
+
+var AgenticRFTRuntimeService = &smithy.ServiceSchema{Schema: &handles[4], Version: "2026-02-01"}

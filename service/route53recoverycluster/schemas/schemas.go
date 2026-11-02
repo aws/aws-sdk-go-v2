@@ -4,404 +4,356 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetRoutingControlState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "GetRoutingControlState",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRoutingControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ListRoutingControls",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRoutingControlState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "UpdateRoutingControlState",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRoutingControlStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "UpdateRoutingControlStates",
-}, smithy.ShapeTypeOperation, 0)
-
-var _ToggleCustomerAPI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ToggleCustomerAPI",
-}, smithy.ShapeTypeService, 0)
-
-var ToggleCustomerAPI = smithy.NewServiceSchema(_ToggleCustomerAPI, "2019-12-02")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _Arns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "Arns",
-}, smithy.ShapeTypeList, 1)
-var _Arns_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _ControlPanelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ControlPanelName",
-}, smithy.ShapeTypeString, 0)
-
-var EndpointTemporarilyUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "EndpointTemporarilyUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var EndpointTemporarilyUnavailableException_message *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Owner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "Owner",
-}, smithy.ShapeTypeString, 0)
-
-var _PageToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "PageToken",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var RoutingControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "RoutingControl",
-}, smithy.ShapeTypeStructure, 6)
-var RoutingControl_ControlPanelArn *smithy.Schema
-
-var RoutingControl_ControlPanelName *smithy.Schema
-
-var RoutingControl_RoutingControlArn *smithy.Schema
-
-var RoutingControl_RoutingControlName *smithy.Schema
-
-var RoutingControl_RoutingControlState *smithy.Schema
-
-var RoutingControl_Owner *smithy.Schema
-
-var _RoutingControlName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "RoutingControlName",
-}, smithy.ShapeTypeString, 0)
-
-var _RoutingControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "RoutingControls",
-}, smithy.ShapeTypeList, 1)
-var _RoutingControls_member *smithy.Schema
-
-var RoutingControlState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "RoutingControlState",
-}, smithy.ShapeTypeEnum, 2)
-var RoutingControlState_On *smithy.Schema
-
-var RoutingControlState_Off *smithy.Schema
-
-var ServiceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ServiceLimitExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceLimitExceededException_message *smithy.Schema
-
-var ServiceLimitExceededException_resourceId *smithy.Schema
-
-var ServiceLimitExceededException_resourceType *smithy.Schema
-
-var ServiceLimitExceededException_limitCode *smithy.Schema
-
-var ServiceLimitExceededException_serviceCode *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _UpdateRoutingControlStateEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "UpdateRoutingControlStateEntries",
-}, smithy.ShapeTypeList, 1)
-var _UpdateRoutingControlStateEntries_member *smithy.Schema
-
-var UpdateRoutingControlStateEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "UpdateRoutingControlStateEntry",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateRoutingControlStateEntry_RoutingControlArn *smithy.Schema
-
-var UpdateRoutingControlStateEntry_RoutingControlState *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var GetRoutingControlStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "GetRoutingControlStateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRoutingControlStateRequest_RoutingControlArn *smithy.Schema
-
-var GetRoutingControlStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "GetRoutingControlStateResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetRoutingControlStateResponse_RoutingControlArn *smithy.Schema
-
-var GetRoutingControlStateResponse_RoutingControlState *smithy.Schema
-
-var GetRoutingControlStateResponse_RoutingControlName *smithy.Schema
-
-var ListRoutingControlsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ListRoutingControlsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRoutingControlsRequest_ControlPanelArn *smithy.Schema
-
-var ListRoutingControlsRequest_NextToken *smithy.Schema
-
-var ListRoutingControlsRequest_MaxResults *smithy.Schema
-
-var ListRoutingControlsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "ListRoutingControlsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRoutingControlsResponse_RoutingControls *smithy.Schema
-
-var ListRoutingControlsResponse_NextToken *smithy.Schema
-
-var UpdateRoutingControlStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "UpdateRoutingControlStateRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRoutingControlStateRequest_RoutingControlArn *smithy.Schema
-
-var UpdateRoutingControlStateRequest_RoutingControlState *smithy.Schema
-
-var UpdateRoutingControlStateRequest_SafetyRulesToOverride *smithy.Schema
-
-var UpdateRoutingControlStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "UpdateRoutingControlStateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRoutingControlStatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "UpdateRoutingControlStatesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries *smithy.Schema
-
-var UpdateRoutingControlStatesRequest_SafetyRulesToOverride *smithy.Schema
-
-var UpdateRoutingControlStatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.route53recoverycluster",
-	Name:      "UpdateRoutingControlStatesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	_Arns_member = _Arns.AddMember("member", _Arn)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _String)
-
-	EndpointTemporarilyUnavailableException_message = EndpointTemporarilyUnavailableException.AddMember("message", _String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _String)
-
-	RoutingControlState_On = RoutingControlState.AddMember("On", smithyprelude.Unit)
-
-	RoutingControlState_Off = RoutingControlState.AddMember("Off", smithyprelude.Unit)
-
-	RoutingControl_ControlPanelArn = RoutingControl.AddMember("ControlPanelArn", _Arn)
-
-	RoutingControl_ControlPanelName = RoutingControl.AddMember("ControlPanelName", _ControlPanelName)
-
-	RoutingControl_RoutingControlArn = RoutingControl.AddMember("RoutingControlArn", _Arn)
-
-	RoutingControl_RoutingControlName = RoutingControl.AddMember("RoutingControlName", _RoutingControlName)
-
-	RoutingControl_RoutingControlState = RoutingControl.AddMember("RoutingControlState", RoutingControlState)
-
-	RoutingControl_Owner = RoutingControl.AddMember("Owner", _Owner)
-
-	_RoutingControls_member = _RoutingControls.AddMember("member", RoutingControl)
-
-	ServiceLimitExceededException_message = ServiceLimitExceededException.AddMember("message", _String)
-
-	ServiceLimitExceededException_resourceId = ServiceLimitExceededException.AddMember("resourceId", _String)
-
-	ServiceLimitExceededException_resourceType = ServiceLimitExceededException.AddMember("resourceType", _String)
-
-	ServiceLimitExceededException_limitCode = ServiceLimitExceededException.AddMember("limitCode", _String)
-
-	ServiceLimitExceededException_serviceCode = ServiceLimitExceededException.AddMember("serviceCode", _String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	UpdateRoutingControlStateEntry_RoutingControlArn = UpdateRoutingControlStateEntry.AddMember("RoutingControlArn", _Arn)
-
-	UpdateRoutingControlStateEntry_RoutingControlState = UpdateRoutingControlStateEntry.AddMember("RoutingControlState", RoutingControlState)
-
-	_UpdateRoutingControlStateEntries_member = _UpdateRoutingControlStateEntries.AddMember("member", UpdateRoutingControlStateEntry)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fields = ValidationException.AddMember("fields", _ValidationExceptionFieldList)
-
-	GetRoutingControlStateRequest_RoutingControlArn = GetRoutingControlStateRequest.AddMember("RoutingControlArn", _Arn)
-
-	GetRoutingControlStateResponse_RoutingControlArn = GetRoutingControlStateResponse.AddMember("RoutingControlArn", _Arn)
-
-	GetRoutingControlStateResponse_RoutingControlState = GetRoutingControlStateResponse.AddMember("RoutingControlState", RoutingControlState)
-
-	GetRoutingControlStateResponse_RoutingControlName = GetRoutingControlStateResponse.AddMember("RoutingControlName", _RoutingControlName)
-
-	ListRoutingControlsRequest_ControlPanelArn = ListRoutingControlsRequest.AddMember("ControlPanelArn", _Arn)
-
-	ListRoutingControlsRequest_NextToken = ListRoutingControlsRequest.AddMember("NextToken", _PageToken)
-
-	ListRoutingControlsRequest_MaxResults = ListRoutingControlsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRoutingControlsResponse_RoutingControls = ListRoutingControlsResponse.AddMember("RoutingControls", _RoutingControls)
-
-	ListRoutingControlsResponse_NextToken = ListRoutingControlsResponse.AddMember("NextToken", _PageToken)
-
-	UpdateRoutingControlStateRequest_RoutingControlArn = UpdateRoutingControlStateRequest.AddMember("RoutingControlArn", _Arn)
-
-	UpdateRoutingControlStateRequest_RoutingControlState = UpdateRoutingControlStateRequest.AddMember("RoutingControlState", RoutingControlState)
-
-	UpdateRoutingControlStateRequest_SafetyRulesToOverride = UpdateRoutingControlStateRequest.AddMember("SafetyRulesToOverride", _Arns)
-
-	UpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries = UpdateRoutingControlStatesRequest.AddMember("UpdateRoutingControlStateEntries", _UpdateRoutingControlStateEntries)
-
-	UpdateRoutingControlStatesRequest_SafetyRulesToOverride = UpdateRoutingControlStatesRequest.AddMember("SafetyRulesToOverride", _Arns)
-
+const blob = "" +
+	"EndpointTemporarilyUnavailableExceptionUpdateRoutingControlStatesResponseUpdateRoutingControlStateRe" +
+	"sponseUpdateRoutingControlStatesRequestUpdateRoutingControlStateEntriesUpdateRoutingControlStateRequ" +
+	"estGetRoutingControlStateResponseUpdateRoutingControlStateEntryGetRoutingControlStateRequestServiceL" +
+	"imitExceededExceptionValidationExceptionFieldListListRoutingControlsResponseListRoutingControlsReque" +
+	"stResourceNotFoundExceptionValidationExceptionReasonFIELD_VALIDATION_FAILEDInternalServerExceptionAc" +
+	"cessDeniedExceptionSafetyRulesToOverrideThrottlingExceptionRoutingControlNameConflictExceptionRetryA" +
+	"fterSecondsRoutingControlArnToggleCustomerAPIUNKNOWN_OPERATIONretryAfterSecondsControlPanelNameContr" +
+	"olPanelArnCANNOT_PARSEresourceTypeserviceCodeMaxResultsresourceIdNextTokenPageTokenlimitCodemessageS" +
+	"tringfieldsmemberreasonOTHEROwnerArnsUnitnameOffOn"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.route53recoverycluster", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 203, Target: 0, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 349, Target: 1, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 39, Target: 2, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 39, Target: 3, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 628, Target: 4, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 498, Target: 5, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 625, Target: 7, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 833, Target: 8, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 811, Target: 7, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 577, Target: 10, Traits: 2, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 755, Target: 47, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 722, Target: 47, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 679, Target: 14, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 0, Target: 15, Traits: 3, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 475, Target: 17, Traits: 4, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 662, Target: 27, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 745, Target: 20, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 828, Target: 21, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 774, Target: 22, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 402, Target: 23, Traits: 6, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 755, Target: 47, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 722, Target: 47, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 594, Target: 27, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 45, Target: 28, Traits: 0, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 695, Target: 7, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 679, Target: 14, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 611, Target: 7, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 559, Target: 35, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 45, Target: 38, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 828, Target: 21, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 559, Target: 35, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 353, Target: 36, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 811, Target: 28, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 45, Target: 38, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 848, Target: 92, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 845, Target: 92, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 292, Target: 41, Traits: 7, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 755, Target: 47, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 722, Target: 47, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 783, Target: 47, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 734, Target: 47, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 799, Target: 47, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 540, Target: 48, Traits: 8, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 662, Target: 27, Traits: 5, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 139, Target: 51, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 811, Target: 53, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 233, Target: 53, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 611, Target: 7, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 45, Target: 38, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 321, Target: 56, Traits: 9, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 817, Target: 65, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 805, Target: 63, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 321, Target: 60, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 841, Target: 47, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 792, Target: 47, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 321, Target: 63, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 811, Target: 60, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 427, Target: 65, Traits: 0, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 645, Target: 92, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 710, Target: 92, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 452, Target: 92, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 823, Target: 92, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 263, Target: 70, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 611, Target: 7, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 203, Target: 72, Traits: 0, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 611, Target: 7, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 45, Target: 38, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 559, Target: 35, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 376, Target: 76, Traits: 0, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 695, Target: 7, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 765, Target: 22, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 745, Target: 20, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 349, Target: 80, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 353, Target: 36, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 765, Target: 22, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 171, Target: 83, Traits: 0, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 611, Target: 7, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 45, Target: 38, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 519, Target: 8, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 73, Target: 87, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 106, Target: 88, Traits: 0, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 139, Target: 51, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 519, Target: 8, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 39, Target: 91, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 837, Target: 92, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [93]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+}
+
+var GetRoutingControlState = &handles[0]
+
+var ListRoutingControls = &handles[1]
+
+var UpdateRoutingControlState = &handles[2]
+
+var UpdateRoutingControlStates = &handles[3]
+
+var _ToggleCustomerAPI = &handles[4]
+
+var AccessDeniedException = &handles[5]
+var AccessDeniedException_message = &handles[6]
+
+var _Arn = &handles[7]
+
+var _Arns = &handles[8]
+var _Arns_member = &handles[9]
+
+var ConflictException = &handles[10]
+var ConflictException_message = &handles[11]
+var ConflictException_resourceId = &handles[12]
+var ConflictException_resourceType = &handles[13]
+
+var _ControlPanelName = &handles[14]
+
+var EndpointTemporarilyUnavailableException = &handles[15]
+var EndpointTemporarilyUnavailableException_message = &handles[16]
+
+var InternalServerException = &handles[17]
+var InternalServerException_message = &handles[18]
+var InternalServerException_retryAfterSeconds = &handles[19]
+
+var _MaxResults = &handles[20]
+
+var _Owner = &handles[21]
+
+var _PageToken = &handles[22]
+
+var ResourceNotFoundException = &handles[23]
+var ResourceNotFoundException_message = &handles[24]
+var ResourceNotFoundException_resourceId = &handles[25]
+var ResourceNotFoundException_resourceType = &handles[26]
+
+var _RetryAfterSeconds = &handles[27]
+
+var RoutingControl = &handles[28]
+var RoutingControl_ControlPanelArn = &handles[29]
+var RoutingControl_ControlPanelName = &handles[30]
+var RoutingControl_RoutingControlArn = &handles[31]
+var RoutingControl_RoutingControlName = &handles[32]
+var RoutingControl_RoutingControlState = &handles[33]
+var RoutingControl_Owner = &handles[34]
+
+var _RoutingControlName = &handles[35]
+
+var _RoutingControls = &handles[36]
+var _RoutingControls_member = &handles[37]
+
+var RoutingControlState = &handles[38]
+var RoutingControlState_On = &handles[39]
+var RoutingControlState_Off = &handles[40]
+
+var ServiceLimitExceededException = &handles[41]
+var ServiceLimitExceededException_message = &handles[42]
+var ServiceLimitExceededException_resourceId = &handles[43]
+var ServiceLimitExceededException_resourceType = &handles[44]
+var ServiceLimitExceededException_limitCode = &handles[45]
+var ServiceLimitExceededException_serviceCode = &handles[46]
+
+var _String = &handles[47]
+
+var ThrottlingException = &handles[48]
+var ThrottlingException_message = &handles[49]
+var ThrottlingException_retryAfterSeconds = &handles[50]
+
+var _UpdateRoutingControlStateEntries = &handles[51]
+var _UpdateRoutingControlStateEntries_member = &handles[52]
+
+var UpdateRoutingControlStateEntry = &handles[53]
+var UpdateRoutingControlStateEntry_RoutingControlArn = &handles[54]
+var UpdateRoutingControlStateEntry_RoutingControlState = &handles[55]
+
+var ValidationException = &handles[56]
+var ValidationException_message = &handles[57]
+var ValidationException_reason = &handles[58]
+var ValidationException_fields = &handles[59]
+
+var ValidationExceptionField = &handles[60]
+var ValidationExceptionField_name = &handles[61]
+var ValidationExceptionField_message = &handles[62]
+
+var _ValidationExceptionFieldList = &handles[63]
+var _ValidationExceptionFieldList_member = &handles[64]
+
+var ValidationExceptionReason = &handles[65]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[66]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[67]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[68]
+var ValidationExceptionReason_OTHER = &handles[69]
+
+var GetRoutingControlStateRequest = &handles[70]
+var GetRoutingControlStateRequest_RoutingControlArn = &handles[71]
+
+var GetRoutingControlStateResponse = &handles[72]
+var GetRoutingControlStateResponse_RoutingControlArn = &handles[73]
+var GetRoutingControlStateResponse_RoutingControlState = &handles[74]
+var GetRoutingControlStateResponse_RoutingControlName = &handles[75]
+
+var ListRoutingControlsRequest = &handles[76]
+var ListRoutingControlsRequest_ControlPanelArn = &handles[77]
+var ListRoutingControlsRequest_NextToken = &handles[78]
+var ListRoutingControlsRequest_MaxResults = &handles[79]
+
+var ListRoutingControlsResponse = &handles[80]
+var ListRoutingControlsResponse_RoutingControls = &handles[81]
+var ListRoutingControlsResponse_NextToken = &handles[82]
+
+var UpdateRoutingControlStateRequest = &handles[83]
+var UpdateRoutingControlStateRequest_RoutingControlArn = &handles[84]
+var UpdateRoutingControlStateRequest_RoutingControlState = &handles[85]
+var UpdateRoutingControlStateRequest_SafetyRulesToOverride = &handles[86]
+
+var UpdateRoutingControlStateResponse = &handles[87]
+
+var UpdateRoutingControlStatesRequest = &handles[88]
+var UpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries = &handles[89]
+var UpdateRoutingControlStatesRequest_SafetyRulesToOverride = &handles[90]
+
+var UpdateRoutingControlStatesResponse = &handles[91]
+
+var ToggleCustomerAPI = &smithy.ServiceSchema{Schema: &handles[4], Version: "2019-12-02"}

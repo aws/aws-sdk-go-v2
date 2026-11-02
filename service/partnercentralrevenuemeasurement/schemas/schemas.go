@@ -4,2024 +4,1700 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateMarketplaceRevenueShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateMarketplaceRevenueShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateMarketplaceRevenueShare",
-	Code: 200})
-
-var CreateMarketplaceRevenueShareAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateMarketplaceRevenueShareAllocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateMarketplaceRevenueShareAllocation",
-	Code: 200})
-
-var CreateRevenueAttribution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateRevenueAttribution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateRevenueAttribution",
-	Code: 200})
-
-var GetMarketplaceRevenueShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetMarketplaceRevenueShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetMarketplaceRevenueShare",
-	Code: 200})
-
-var GetMarketplaceRevenueShareAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetMarketplaceRevenueShareAllocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetMarketplaceRevenueShareAllocation",
-	Code: 200})
-
-var GetRevenueAttribution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttribution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetRevenueAttribution",
-	Code: 200})
-
-var GetRevenueAttributionAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttributionAllocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetRevenueAttributionAllocation",
-	Code: 200})
-
-var GetRevenueAttributionAllocationsTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttributionAllocationsTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetRevenueAttributionAllocationsTask",
-	Code: 200})
-
-var ListMarketplaceRevenueShareAllocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListMarketplaceRevenueShareAllocations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListMarketplaceRevenueShareAllocations",
-	Code: 200})
-
-var ListMarketplaceRevenueShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListMarketplaceRevenueShares",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListMarketplaceRevenueShares",
-	Code: 200})
-
-var ListRevenueAttributionAllocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListRevenueAttributionAllocations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListRevenueAttributionAllocations",
-	Code: 200})
-
-var ListRevenueAttributions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListRevenueAttributions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListRevenueAttributions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var StartRevenueAttributionAllocationsTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "StartRevenueAttributionAllocationsTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/StartRevenueAttributionAllocationsTask",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/TagResource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UntagResource",
-	Code: 200})
-
-var UpdateMarketplaceRevenueShareAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "UpdateMarketplaceRevenueShareAllocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UpdateMarketplaceRevenueShareAllocation",
-	Code: 200})
-
-var UpdateRevenueAttribution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "UpdateRevenueAttribution",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UpdateRevenueAttribution",
-	Code: 200})
-
-var _PartnerCentralRevenueMeasurement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "PartnerCentralRevenueMeasurement",
-}, smithy.ShapeTypeService, 0)
-
-var PartnerCentralRevenueMeasurement = smithy.NewServiceSchema(_PartnerCentralRevenueMeasurement, "2022-07-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessDeniedException_Reason *smithy.Schema
-
-var AccessDeniedExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "AccessDeniedExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var AccessDeniedExceptionReason_ACCESS_DENIED *smithy.Schema
-
-var _AllocationCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "AllocationCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AllocationEffectiveDateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "AllocationEffectiveDateString",
-}, smithy.ShapeTypeString, 0)
-
-var AllocationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "AllocationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AllocationStatus_ACTIVE *smithy.Schema
-
-var AllocationStatus_INACTIVE *smithy.Schema
-
-var AttributionSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "AttributionSortBy",
-}, smithy.ShapeTypeEnum, 1)
-var AttributionSortBy_LAST_MODIFIED_DATE *smithy.Schema
-
-var AttributionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "AttributionSummary",
-}, smithy.ShapeTypeStructure, 13)
-var AttributionSummary_Arn *smithy.Schema
-
-var AttributionSummary_Id *smithy.Schema
-
-var AttributionSummary_Catalog *smithy.Schema
-
-var AttributionSummary_Name *smithy.Schema
-
-var AttributionSummary_TenancyModel *smithy.Schema
-
-var AttributionSummary_MarketplaceProduct *smithy.Schema
-
-var AttributionSummary_CreatedDate *smithy.Schema
-
-var AttributionSummary_LastModifiedDate *smithy.Schema
-
-var AttributionSummary_LatestRevision *smithy.Schema
-
-var AttributionSummary_EffectiveFrom *smithy.Schema
-
-var AttributionSummary_EffectiveUntil *smithy.Schema
-
-var AttributionSummary_TotalActiveRevenueAttributionAllocationCount *smithy.Schema
-
-var AttributionSummary_TotalRevenueAttributionAllocationCount *smithy.Schema
-
-var CatalogName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CatalogName",
-}, smithy.ShapeTypeEnum, 2)
-var CatalogName_AWS *smithy.Schema
-
-var CatalogName_SANDBOX *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_Reason *smithy.Schema
-
-var ConflictExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ConflictExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ConflictExceptionReason_CONFLICT_CLIENT_TOKEN *smithy.Schema
-
-var ConflictExceptionReason_CONCURRENT_MODIFICATION *smithy.Schema
-
-var ConflictExceptionReason_RESOURCE_ALREADY_EXISTS *smithy.Schema
-
-var ConflictExceptionReason_REVISION_MISMATCH *smithy.Schema
-
-var _CustomerAwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CustomerAwsAccountId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CustomerAwsAccountIdFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CustomerAwsAccountIdFilterList",
-}, smithy.ShapeTypeList, 1)
-var _CustomerAwsAccountIdFilterList_member *smithy.Schema
-
-var _EntityIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "EntityIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityIdentifierFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "EntityIdentifierFilterList",
-}, smithy.ShapeTypeList, 1)
-var _EntityIdentifierFilterList_member *smithy.Schema
-
-var EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "EntityType",
-}, smithy.ShapeTypeEnum, 2)
-var EntityType_OFFER *smithy.Schema
-
-var EntityType_OPPORTUNITY *smithy.Schema
-
-var _EntityTypeFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "EntityTypeFilterList",
-}, smithy.ShapeTypeList, 1)
-var _EntityTypeFilterList_member *smithy.Schema
-
-var FieldValidationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "FieldValidationCode",
-}, smithy.ShapeTypeEnum, 9)
-var FieldValidationCode_REQUIRED_FIELD_MISSING *smithy.Schema
-
-var FieldValidationCode_DUPLICATE_VALUE *smithy.Schema
-
-var FieldValidationCode_INVALID_VALUE *smithy.Schema
-
-var FieldValidationCode_INVALID_STRING_FORMAT *smithy.Schema
-
-var FieldValidationCode_TOO_MANY_VALUES *smithy.Schema
-
-var FieldValidationCode_ACTION_NOT_PERMITTED *smithy.Schema
-
-var FieldValidationCode_INVALID_ENUM_VALUE *smithy.Schema
-
-var FieldValidationCode_INVALID_NUMBER_FORMAT *smithy.Schema
-
-var FieldValidationCode_INVALID_STRING_LENGTH *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _MarketplaceProductId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceProductId",
-}, smithy.ShapeTypeString, 0)
-
-var _MarketplaceProductIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceProductIdList",
-}, smithy.ShapeTypeList, 1)
-var _MarketplaceProductIdList_member *smithy.Schema
-
-var MarketplaceProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceProductSummary",
-}, smithy.ShapeTypeStructure, 3)
-var MarketplaceProductSummary_ProductId *smithy.Schema
-
-var MarketplaceProductSummary_ProductCode *smithy.Schema
-
-var MarketplaceProductSummary_ProductName *smithy.Schema
-
-var _MarketplaceRevenueShareAllocationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareAllocationId",
-}, smithy.ShapeTypeString, 0)
-
-var MarketplaceRevenueShareAllocationSortField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareAllocationSortField",
-}, smithy.ShapeTypeEnum, 1)
-var MarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareAllocationSummary",
-}, smithy.ShapeTypeStructure, 10)
-var MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_ProductId *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_ProductName *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_Arn *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_EffectiveFrom *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_EffectiveUntil *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_RevenueSharePercent *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_Status *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_CreatedDate *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_LastModifiedDate *smithy.Schema
-
-var _MarketplaceRevenueShareAllocationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareAllocationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MarketplaceRevenueShareAllocationSummaryList_member *smithy.Schema
-
-var MarketplaceRevenueShareSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareSortBy",
-}, smithy.ShapeTypeEnum, 1)
-var MarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE *smithy.Schema
-
-var MarketplaceRevenueShareSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareSummary",
-}, smithy.ShapeTypeStructure, 10)
-var MarketplaceRevenueShareSummary_ProductId *smithy.Schema
-
-var MarketplaceRevenueShareSummary_Arn *smithy.Schema
-
-var MarketplaceRevenueShareSummary_Catalog *smithy.Schema
-
-var MarketplaceRevenueShareSummary_ProductCode *smithy.Schema
-
-var MarketplaceRevenueShareSummary_ProductName *smithy.Schema
-
-var MarketplaceRevenueShareSummary_CreatedDate *smithy.Schema
-
-var MarketplaceRevenueShareSummary_LastModifiedDate *smithy.Schema
-
-var MarketplaceRevenueShareSummary_LatestRevision *smithy.Schema
-
-var MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount *smithy.Schema
-
-var MarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount *smithy.Schema
-
-var _MarketplaceRevenueShareSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MarketplaceRevenueShareSummaryList_member *smithy.Schema
-
-var _MarketplaceRevenueShareTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareTagList",
-}, smithy.ShapeTypeList, 1)
-var _MarketplaceRevenueShareTagList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ProductCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ProductCodeList",
-}, smithy.ShapeTypeList, 1)
-var _ProductCodeList_member *smithy.Schema
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_Reason *smithy.Schema
-
-var ResourceNotFoundExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ResourceNotFoundExceptionReason",
-}, smithy.ShapeTypeEnum, 1)
-var ResourceNotFoundExceptionReason_RESOURCE_NOT_FOUND *smithy.Schema
-
-var RevenueAttributionAllocationAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationAction",
-}, smithy.ShapeTypeEnum, 2)
-var RevenueAttributionAllocationAction_CREATE *smithy.Schema
-
-var RevenueAttributionAllocationAction_UPDATE *smithy.Schema
-
-var RevenueAttributionAllocationErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationErrorCode",
-}, smithy.ShapeTypeEnum, 7)
-var RevenueAttributionAllocationErrorCode_ALLOCATION_CAP_EXCEEDED *smithy.Schema
-
-var RevenueAttributionAllocationErrorCode_RESOURCE_NOT_FOUND *smithy.Schema
-
-var RevenueAttributionAllocationErrorCode_IMMUTABLE_ALLOCATION *smithy.Schema
-
-var RevenueAttributionAllocationErrorCode_ACCESS_DENIED *smithy.Schema
-
-var RevenueAttributionAllocationErrorCode_INVALID_VALUE *smithy.Schema
-
-var RevenueAttributionAllocationErrorCode_CONCURRENT_MODIFICATION *smithy.Schema
-
-var RevenueAttributionAllocationErrorCode_INTERNAL_ERROR *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationErrorDetail",
-}, smithy.ShapeTypeStructure, 9)
-var RevenueAttributionAllocationErrorDetail_RevenueAttributionAllocationId *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail_EntityType *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail_EntityId *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail_CustomerAwsAccountId *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail_EffectiveFrom *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail_EffectiveUntil *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail_Action *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail_ErrorCode *smithy.Schema
-
-var RevenueAttributionAllocationErrorDetail_ErrorMessage *smithy.Schema
-
-var _RevenueAttributionAllocationErrorDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationErrorDetailList",
-}, smithy.ShapeTypeList, 1)
-var _RevenueAttributionAllocationErrorDetailList_member *smithy.Schema
-
-var _RevenueAttributionAllocationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationId",
-}, smithy.ShapeTypeString, 0)
-
-var RevenueAttributionAllocationSortField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationSortField",
-}, smithy.ShapeTypeEnum, 1)
-var RevenueAttributionAllocationSortField_EFFECTIVE_FROM *smithy.Schema
-
-var RevenueAttributionAllocationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationSummary",
-}, smithy.ShapeTypeStructure, 10)
-var RevenueAttributionAllocationSummary_RevenueAttributionAllocationId *smithy.Schema
-
-var RevenueAttributionAllocationSummary_RevenueAttributionIdentifier *smithy.Schema
-
-var RevenueAttributionAllocationSummary_EntityType *smithy.Schema
-
-var RevenueAttributionAllocationSummary_EntityIdentifier *smithy.Schema
-
-var RevenueAttributionAllocationSummary_EntityName *smithy.Schema
-
-var RevenueAttributionAllocationSummary_CustomerAwsAccountId *smithy.Schema
-
-var RevenueAttributionAllocationSummary_RevenueSharePercent *smithy.Schema
-
-var RevenueAttributionAllocationSummary_EffectiveFrom *smithy.Schema
-
-var RevenueAttributionAllocationSummary_EffectiveUntil *smithy.Schema
-
-var RevenueAttributionAllocationSummary_Status *smithy.Schema
-
-var _RevenueAttributionAllocationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RevenueAttributionAllocationSummaryList_member *smithy.Schema
-
-var _RevenueAttributionAllocationTaskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationTaskId",
-}, smithy.ShapeTypeString, 0)
-
-var RevenueAttributionAllocationTaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionAllocationTaskStatus",
-}, smithy.ShapeTypeEnum, 3)
-var RevenueAttributionAllocationTaskStatus_IN_PROGRESS *smithy.Schema
-
-var RevenueAttributionAllocationTaskStatus_COMPLETE *smithy.Schema
-
-var RevenueAttributionAllocationTaskStatus_FAILED *smithy.Schema
-
-var _RevenueAttributionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionId",
-}, smithy.ShapeTypeString, 0)
-
-var _RevenueAttributionIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _RevenueAttributionIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _RevenueAttributionIdentifierList_member *smithy.Schema
-
-var _RevenueAttributionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueAttributionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RevenueAttributionSummaries_member *smithy.Schema
-
-var RevenueShareAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueShareAllocation",
-}, smithy.ShapeTypeStructure, 9)
-var RevenueShareAllocation_Action *smithy.Schema
-
-var RevenueShareAllocation_RevenueAttributionAllocationId *smithy.Schema
-
-var RevenueShareAllocation_EntityType *smithy.Schema
-
-var RevenueShareAllocation_EntityIdentifier *smithy.Schema
-
-var RevenueShareAllocation_CustomerAwsAccountId *smithy.Schema
-
-var RevenueShareAllocation_RevenueSharePercent *smithy.Schema
-
-var RevenueShareAllocation_EffectiveFrom *smithy.Schema
-
-var RevenueShareAllocation_EffectiveUntil *smithy.Schema
-
-var RevenueShareAllocation_Status *smithy.Schema
-
-var _RevenueShareAllocationChangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueShareAllocationChangeList",
-}, smithy.ShapeTypeList, 1)
-var _RevenueShareAllocationChangeList_member *smithy.Schema
-
-var _RevenueSharePercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevenueSharePercent",
-}, smithy.ShapeTypeString, 0)
-
-var _RevisionToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "RevisionToken",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_Reason *smithy.Schema
-
-var ServiceQuotaExceededExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ServiceQuotaExceededExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var ServiceQuotaExceededExceptionReason_ATTRIBUTION_LIMIT_EXCEEDED *smithy.Schema
-
-var ServiceQuotaExceededExceptionReason_TAG_LIMIT_EXCEEDED *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TenancyModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "TenancyModel",
-}, smithy.ShapeTypeEnum, 2)
-var TenancyModel_MULTI_TENANT *smithy.Schema
-
-var TenancyModel_SINGLE_TENANT *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_ServiceCode *smithy.Schema
-
-var ThrottlingException_QuotaCode *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_FieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 3)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var ValidationExceptionField_Code *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var ValidationExceptionReason_REQUEST_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateMarketplaceRevenueShareAllocationInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateMarketplaceRevenueShareAllocationInput_Catalog *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationInput_ProductId *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationInput_ClientToken *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationInput_EffectiveFrom *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationInput_EffectiveUntil *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationInput_RevenueSharePercent *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateMarketplaceRevenueShareAllocationOutput",
-}, smithy.ShapeTypeStructure, 11)
-var CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_ProductId *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_ProductName *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_Arn *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_EffectiveUntil *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_Status *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_CreatedDate *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision *smithy.Schema
-
-var CreateMarketplaceRevenueShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateMarketplaceRevenueShareInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMarketplaceRevenueShareInput_Catalog *smithy.Schema
-
-var CreateMarketplaceRevenueShareInput_ClientToken *smithy.Schema
-
-var CreateMarketplaceRevenueShareInput_ProductId *smithy.Schema
-
-var CreateMarketplaceRevenueShareInput_Tags *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateMarketplaceRevenueShareOutput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateMarketplaceRevenueShareOutput_ProductId *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput_Arn *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput_Catalog *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput_ProductCode *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput_ProductName *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput_CreatedDate *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput_LastModifiedDate *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput_Revision *smithy.Schema
-
-var CreateRevenueAttributionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateRevenueAttributionInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateRevenueAttributionInput_Catalog *smithy.Schema
-
-var CreateRevenueAttributionInput_ClientToken *smithy.Schema
-
-var CreateRevenueAttributionInput_Name *smithy.Schema
-
-var CreateRevenueAttributionInput_Description *smithy.Schema
-
-var CreateRevenueAttributionInput_TenancyModel *smithy.Schema
-
-var CreateRevenueAttributionInput_ProductIdentifier *smithy.Schema
-
-var CreateRevenueAttributionInput_Tags *smithy.Schema
-
-var CreateRevenueAttributionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "CreateRevenueAttributionOutput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateRevenueAttributionOutput_Id *smithy.Schema
-
-var CreateRevenueAttributionOutput_Arn *smithy.Schema
-
-var CreateRevenueAttributionOutput_Name *smithy.Schema
-
-var CreateRevenueAttributionOutput_Description *smithy.Schema
-
-var CreateRevenueAttributionOutput_TenancyModel *smithy.Schema
-
-var CreateRevenueAttributionOutput_MarketplaceProduct *smithy.Schema
-
-var CreateRevenueAttributionOutput_Revision *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetMarketplaceRevenueShareAllocationInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetMarketplaceRevenueShareAllocationInput_Catalog *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationInput_ProductId *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetMarketplaceRevenueShareAllocationOutput",
-}, smithy.ShapeTypeStructure, 11)
-var GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_ProductId *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_ProductName *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_Arn *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_EffectiveFrom *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_EffectiveUntil *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_Status *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_CreatedDate *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision *smithy.Schema
-
-var GetMarketplaceRevenueShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetMarketplaceRevenueShareInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMarketplaceRevenueShareInput_Catalog *smithy.Schema
-
-var GetMarketplaceRevenueShareInput_ProductId *smithy.Schema
-
-var GetMarketplaceRevenueShareInput_Revision *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetMarketplaceRevenueShareOutput",
-}, smithy.ShapeTypeStructure, 11)
-var GetMarketplaceRevenueShareOutput_ProductId *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_Arn *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_Catalog *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_ProductCode *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_ProductName *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_CreatedDate *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_LastModifiedDate *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_Revision *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_LatestRevision *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount *smithy.Schema
-
-var GetRevenueAttributionAllocationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttributionAllocationInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetRevenueAttributionAllocationInput_Catalog *smithy.Schema
-
-var GetRevenueAttributionAllocationInput_RevenueAttributionIdentifier *smithy.Schema
-
-var GetRevenueAttributionAllocationInput_RevenueAttributionAllocationId *smithy.Schema
-
-var GetRevenueAttributionAllocationInput_RevenueAttributionRevision *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttributionAllocationOutput",
-}, smithy.ShapeTypeStructure, 14)
-var GetRevenueAttributionAllocationOutput_RevenueAttributionAllocationId *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_RevenueAttributionIdentifier *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_EntityType *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_EntityIdentifier *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_EntityName *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_CustomerAwsAccountId *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_RevenueSharePercent *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_EffectiveFrom *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_EffectiveUntil *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_Status *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_CreatedDate *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_LastModifiedDate *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_RevenueAttributionRevision *smithy.Schema
-
-var GetRevenueAttributionAllocationOutput_RevenueAttributionLatestRevision *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttributionAllocationsTaskInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetRevenueAttributionAllocationsTaskInput_Catalog *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttributionAllocationsTaskOutput",
-}, smithy.ShapeTypeStructure, 10)
-var GetRevenueAttributionAllocationsTaskOutput_TaskId *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_Status *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_Catalog *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_StartedAt *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_EndedAt *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_Description *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionLatestRevision *smithy.Schema
-
-var GetRevenueAttributionAllocationsTaskOutput_ErrorDetailList *smithy.Schema
-
-var GetRevenueAttributionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttributionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetRevenueAttributionInput_Catalog *smithy.Schema
-
-var GetRevenueAttributionInput_Identifier *smithy.Schema
-
-var GetRevenueAttributionInput_Revision *smithy.Schema
-
-var GetRevenueAttributionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "GetRevenueAttributionOutput",
-}, smithy.ShapeTypeStructure, 15)
-var GetRevenueAttributionOutput_Arn *smithy.Schema
-
-var GetRevenueAttributionOutput_Id *smithy.Schema
-
-var GetRevenueAttributionOutput_Catalog *smithy.Schema
-
-var GetRevenueAttributionOutput_Name *smithy.Schema
-
-var GetRevenueAttributionOutput_Description *smithy.Schema
-
-var GetRevenueAttributionOutput_TenancyModel *smithy.Schema
-
-var GetRevenueAttributionOutput_MarketplaceProduct *smithy.Schema
-
-var GetRevenueAttributionOutput_CreatedDate *smithy.Schema
-
-var GetRevenueAttributionOutput_LastModifiedDate *smithy.Schema
-
-var GetRevenueAttributionOutput_Revision *smithy.Schema
-
-var GetRevenueAttributionOutput_LatestRevision *smithy.Schema
-
-var GetRevenueAttributionOutput_EffectiveFrom *smithy.Schema
-
-var GetRevenueAttributionOutput_EffectiveUntil *smithy.Schema
-
-var GetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount *smithy.Schema
-
-var GetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListMarketplaceRevenueShareAllocationsInput",
-}, smithy.ShapeTypeStructure, 10)
-var ListMarketplaceRevenueShareAllocationsInput_Catalog *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_ProductId *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_Status *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_SortBy *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_SortOrder *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_MaxResults *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_NextToken *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareRevision *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListMarketplaceRevenueShareAllocationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries *smithy.Schema
-
-var ListMarketplaceRevenueShareAllocationsOutput_NextToken *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListMarketplaceRevenueSharesInput",
-}, smithy.ShapeTypeStructure, 9)
-var ListMarketplaceRevenueSharesInput_Catalog *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput_ProductIds *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput_ProductCodes *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput_MaxResults *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput_NextToken *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput_SortBy *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput_SortOrder *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput_CreatedAfter *smithy.Schema
-
-var ListMarketplaceRevenueSharesInput_CreatedBefore *smithy.Schema
-
-var ListMarketplaceRevenueSharesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListMarketplaceRevenueSharesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries *smithy.Schema
-
-var ListMarketplaceRevenueSharesOutput_NextToken *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListRevenueAttributionAllocationsInput",
-}, smithy.ShapeTypeStructure, 15)
-var ListRevenueAttributionAllocationsInput_Catalog *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_RevenueAttributionIdentifier *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_EntityTypeFilters *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_EntityIdentifierFilters *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_StatusFilter *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_AfterEffectiveFrom *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_BeforeEffectiveFrom *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_AfterEffectiveUntil *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_BeforeEffectiveUntil *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_SortBy *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_SortOrder *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_RevenueAttributionRevision *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_MaxResults *smithy.Schema
-
-var ListRevenueAttributionAllocationsInput_NextToken *smithy.Schema
-
-var ListRevenueAttributionAllocationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListRevenueAttributionAllocationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries *smithy.Schema
-
-var ListRevenueAttributionAllocationsOutput_NextToken *smithy.Schema
-
-var ListRevenueAttributionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListRevenueAttributionsInput",
-}, smithy.ShapeTypeStructure, 8)
-var ListRevenueAttributionsInput_Catalog *smithy.Schema
-
-var ListRevenueAttributionsInput_Identifiers *smithy.Schema
-
-var ListRevenueAttributionsInput_CreatedAfter *smithy.Schema
-
-var ListRevenueAttributionsInput_CreatedBefore *smithy.Schema
-
-var ListRevenueAttributionsInput_SortBy *smithy.Schema
-
-var ListRevenueAttributionsInput_SortOrder *smithy.Schema
-
-var ListRevenueAttributionsInput_MaxResults *smithy.Schema
-
-var ListRevenueAttributionsInput_NextToken *smithy.Schema
-
-var ListRevenueAttributionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListRevenueAttributionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRevenueAttributionsOutput_RevenueAttributionSummaries *smithy.Schema
-
-var ListRevenueAttributionsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "StartRevenueAttributionAllocationsTaskInput",
-}, smithy.ShapeTypeStructure, 6)
-var StartRevenueAttributionAllocationsTaskInput_Catalog *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskInput_RevenueAttributionRevision *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskInput_ClientToken *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskInput_Description *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "StartRevenueAttributionAllocationsTaskOutput",
-}, smithy.ShapeTypeStructure, 6)
-var StartRevenueAttributionAllocationsTaskOutput_TaskId *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskOutput_Status *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskOutput_Catalog *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskOutput_StartedAt *smithy.Schema
-
-var StartRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "UpdateMarketplaceRevenueShareAllocationInput",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateMarketplaceRevenueShareAllocationInput_Catalog *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_ProductId *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_ClientToken *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_Status *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "UpdateMarketplaceRevenueShareAllocationOutput",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_ProductId *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_ProductName *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_Arn *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_EffectiveUntil *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_Status *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_CreatedDate *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision *smithy.Schema
-
-var UpdateRevenueAttributionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "UpdateRevenueAttributionInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRevenueAttributionInput_Catalog *smithy.Schema
-
-var UpdateRevenueAttributionInput_Identifier *smithy.Schema
-
-var UpdateRevenueAttributionInput_ClientToken *smithy.Schema
-
-var UpdateRevenueAttributionInput_Description *smithy.Schema
-
-var UpdateRevenueAttributionInput_Revision *smithy.Schema
-
-var UpdateRevenueAttributionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "UpdateRevenueAttributionOutput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRevenueAttributionOutput_Id *smithy.Schema
-
-var UpdateRevenueAttributionOutput_Arn *smithy.Schema
-
-var UpdateRevenueAttributionOutput_Description *smithy.Schema
-
-var UpdateRevenueAttributionOutput_LastModifiedDate *smithy.Schema
-
-var UpdateRevenueAttributionOutput_LatestRevision *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedExceptionReason_ACCESS_DENIED = AccessDeniedExceptionReason.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	AccessDeniedException_Reason = AccessDeniedException.AddMember("Reason", AccessDeniedExceptionReason)
-
-	AllocationStatus_ACTIVE = AllocationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AllocationStatus_INACTIVE = AllocationStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	AttributionSortBy_LAST_MODIFIED_DATE = AttributionSortBy.AddMember("LAST_MODIFIED_DATE", smithyprelude.Unit)
-
-	CatalogName_AWS = CatalogName.AddMember("AWS", smithyprelude.Unit)
-
-	CatalogName_SANDBOX = CatalogName.AddMember("SANDBOX", smithyprelude.Unit)
-
-	TenancyModel_MULTI_TENANT = TenancyModel.AddMember("MULTI_TENANT", smithyprelude.Unit)
-
-	TenancyModel_SINGLE_TENANT = TenancyModel.AddMember("SINGLE_TENANT", smithyprelude.Unit)
-
-	MarketplaceProductSummary_ProductId = MarketplaceProductSummary.AddMember("ProductId", smithyprelude.String)
-
-	MarketplaceProductSummary_ProductCode = MarketplaceProductSummary.AddMember("ProductCode", smithyprelude.String)
-
-	MarketplaceProductSummary_ProductName = MarketplaceProductSummary.AddMember("ProductName", smithyprelude.String)
-
-	AttributionSummary_Arn = AttributionSummary.AddMember("Arn", smithyprelude.String)
-
-	AttributionSummary_Id = AttributionSummary.AddMember("Id", _RevenueAttributionId)
-
-	AttributionSummary_Catalog = AttributionSummary.AddMember("Catalog", CatalogName)
-
-	AttributionSummary_Name = AttributionSummary.AddMember("Name", smithyprelude.String)
-
-	AttributionSummary_TenancyModel = AttributionSummary.AddMember("TenancyModel", TenancyModel)
-
-	AttributionSummary_MarketplaceProduct = AttributionSummary.AddMember("MarketplaceProduct", MarketplaceProductSummary)
-
-	AttributionSummary_CreatedDate = AttributionSummary.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	AttributionSummary_LastModifiedDate = AttributionSummary.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	AttributionSummary_LatestRevision = AttributionSummary.AddMember("LatestRevision", _RevisionToken)
-
-	AttributionSummary_EffectiveFrom = AttributionSummary.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	AttributionSummary_EffectiveUntil = AttributionSummary.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	AttributionSummary_TotalActiveRevenueAttributionAllocationCount = AttributionSummary.AddMember("TotalActiveRevenueAttributionAllocationCount", _AllocationCount)
-
-	AttributionSummary_TotalRevenueAttributionAllocationCount = AttributionSummary.AddMember("TotalRevenueAttributionAllocationCount", _AllocationCount)
-
-	ConflictExceptionReason_CONFLICT_CLIENT_TOKEN = ConflictExceptionReason.AddMember("CONFLICT_CLIENT_TOKEN", smithyprelude.Unit)
-
-	ConflictExceptionReason_CONCURRENT_MODIFICATION = ConflictExceptionReason.AddMember("CONCURRENT_MODIFICATION", smithyprelude.Unit)
-
-	ConflictExceptionReason_RESOURCE_ALREADY_EXISTS = ConflictExceptionReason.AddMember("RESOURCE_ALREADY_EXISTS", smithyprelude.Unit)
-
-	ConflictExceptionReason_REVISION_MISMATCH = ConflictExceptionReason.AddMember("REVISION_MISMATCH", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ConflictException_Reason = ConflictException.AddMember("Reason", ConflictExceptionReason)
-
-	_CustomerAwsAccountIdFilterList_member = _CustomerAwsAccountIdFilterList.AddMember("member", _CustomerAwsAccountId)
-
-	_EntityIdentifierFilterList_member = _EntityIdentifierFilterList.AddMember("member", _EntityIdentifier)
-
-	EntityType_OFFER = EntityType.AddMember("OFFER", smithyprelude.Unit)
-
-	EntityType_OPPORTUNITY = EntityType.AddMember("OPPORTUNITY", smithyprelude.Unit)
-
-	_EntityTypeFilterList_member = _EntityTypeFilterList.AddMember("member", EntityType)
-
-	FieldValidationCode_REQUIRED_FIELD_MISSING = FieldValidationCode.AddMember("REQUIRED_FIELD_MISSING", smithyprelude.Unit)
-
-	FieldValidationCode_DUPLICATE_VALUE = FieldValidationCode.AddMember("DUPLICATE_VALUE", smithyprelude.Unit)
-
-	FieldValidationCode_INVALID_VALUE = FieldValidationCode.AddMember("INVALID_VALUE", smithyprelude.Unit)
-
-	FieldValidationCode_INVALID_STRING_FORMAT = FieldValidationCode.AddMember("INVALID_STRING_FORMAT", smithyprelude.Unit)
-
-	FieldValidationCode_TOO_MANY_VALUES = FieldValidationCode.AddMember("TOO_MANY_VALUES", smithyprelude.Unit)
-
-	FieldValidationCode_ACTION_NOT_PERMITTED = FieldValidationCode.AddMember("ACTION_NOT_PERMITTED", smithyprelude.Unit)
-
-	FieldValidationCode_INVALID_ENUM_VALUE = FieldValidationCode.AddMember("INVALID_ENUM_VALUE", smithyprelude.Unit)
-
-	FieldValidationCode_INVALID_NUMBER_FORMAT = FieldValidationCode.AddMember("INVALID_NUMBER_FORMAT", smithyprelude.Unit)
-
-	FieldValidationCode_INVALID_STRING_LENGTH = FieldValidationCode.AddMember("INVALID_STRING_LENGTH", smithyprelude.Unit)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	_MarketplaceProductIdList_member = _MarketplaceProductIdList.AddMember("member", _MarketplaceProductId)
-
-	MarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM = MarketplaceRevenueShareAllocationSortField.AddMember("EFFECTIVE_FROM", smithyprelude.Unit)
-
-	MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId = MarketplaceRevenueShareAllocationSummary.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
-
-	MarketplaceRevenueShareAllocationSummary_ProductId = MarketplaceRevenueShareAllocationSummary.AddMember("ProductId", _MarketplaceProductId)
-
-	MarketplaceRevenueShareAllocationSummary_ProductName = MarketplaceRevenueShareAllocationSummary.AddMember("ProductName", smithyprelude.String)
-
-	MarketplaceRevenueShareAllocationSummary_Arn = MarketplaceRevenueShareAllocationSummary.AddMember("Arn", smithyprelude.String)
-
-	MarketplaceRevenueShareAllocationSummary_EffectiveFrom = MarketplaceRevenueShareAllocationSummary.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	MarketplaceRevenueShareAllocationSummary_EffectiveUntil = MarketplaceRevenueShareAllocationSummary.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	MarketplaceRevenueShareAllocationSummary_RevenueSharePercent = MarketplaceRevenueShareAllocationSummary.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	MarketplaceRevenueShareAllocationSummary_Status = MarketplaceRevenueShareAllocationSummary.AddMember("Status", AllocationStatus)
-
-	MarketplaceRevenueShareAllocationSummary_CreatedDate = MarketplaceRevenueShareAllocationSummary.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	MarketplaceRevenueShareAllocationSummary_LastModifiedDate = MarketplaceRevenueShareAllocationSummary.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	_MarketplaceRevenueShareAllocationSummaryList_member = _MarketplaceRevenueShareAllocationSummaryList.AddMember("member", MarketplaceRevenueShareAllocationSummary)
-
-	MarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE = MarketplaceRevenueShareSortBy.AddMember("LAST_MODIFIED_DATE", smithyprelude.Unit)
-
-	MarketplaceRevenueShareSummary_ProductId = MarketplaceRevenueShareSummary.AddMember("ProductId", _MarketplaceProductId)
-
-	MarketplaceRevenueShareSummary_Arn = MarketplaceRevenueShareSummary.AddMember("Arn", smithyprelude.String)
-
-	MarketplaceRevenueShareSummary_Catalog = MarketplaceRevenueShareSummary.AddMember("Catalog", CatalogName)
-
-	MarketplaceRevenueShareSummary_ProductCode = MarketplaceRevenueShareSummary.AddMember("ProductCode", smithyprelude.String)
-
-	MarketplaceRevenueShareSummary_ProductName = MarketplaceRevenueShareSummary.AddMember("ProductName", smithyprelude.String)
-
-	MarketplaceRevenueShareSummary_CreatedDate = MarketplaceRevenueShareSummary.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	MarketplaceRevenueShareSummary_LastModifiedDate = MarketplaceRevenueShareSummary.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	MarketplaceRevenueShareSummary_LatestRevision = MarketplaceRevenueShareSummary.AddMember("LatestRevision", smithyprelude.Integer)
-
-	MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount = MarketplaceRevenueShareSummary.AddMember("TotalActiveMarketplaceRevenueShareAllocationCount", smithyprelude.Integer)
-
-	MarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount = MarketplaceRevenueShareSummary.AddMember("TotalMarketplaceRevenueShareAllocationCount", smithyprelude.Integer)
-
-	_MarketplaceRevenueShareSummaryList_member = _MarketplaceRevenueShareSummaryList.AddMember("member", MarketplaceRevenueShareSummary)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_MarketplaceRevenueShareTagList_member = _MarketplaceRevenueShareTagList.AddMember("member", Tag)
-
-	_ProductCodeList_member = _ProductCodeList.AddMember("member", smithyprelude.String)
-
-	ResourceNotFoundExceptionReason_RESOURCE_NOT_FOUND = ResourceNotFoundExceptionReason.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_Reason = ResourceNotFoundException.AddMember("Reason", ResourceNotFoundExceptionReason)
-
-	RevenueAttributionAllocationAction_CREATE = RevenueAttributionAllocationAction.AddMember("CREATE", smithyprelude.Unit)
-
-	RevenueAttributionAllocationAction_UPDATE = RevenueAttributionAllocationAction.AddMember("UPDATE", smithyprelude.Unit)
-
-	RevenueAttributionAllocationErrorCode_ALLOCATION_CAP_EXCEEDED = RevenueAttributionAllocationErrorCode.AddMember("ALLOCATION_CAP_EXCEEDED", smithyprelude.Unit)
-
-	RevenueAttributionAllocationErrorCode_RESOURCE_NOT_FOUND = RevenueAttributionAllocationErrorCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	RevenueAttributionAllocationErrorCode_IMMUTABLE_ALLOCATION = RevenueAttributionAllocationErrorCode.AddMember("IMMUTABLE_ALLOCATION", smithyprelude.Unit)
-
-	RevenueAttributionAllocationErrorCode_ACCESS_DENIED = RevenueAttributionAllocationErrorCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	RevenueAttributionAllocationErrorCode_INVALID_VALUE = RevenueAttributionAllocationErrorCode.AddMember("INVALID_VALUE", smithyprelude.Unit)
-
-	RevenueAttributionAllocationErrorCode_CONCURRENT_MODIFICATION = RevenueAttributionAllocationErrorCode.AddMember("CONCURRENT_MODIFICATION", smithyprelude.Unit)
-
-	RevenueAttributionAllocationErrorCode_INTERNAL_ERROR = RevenueAttributionAllocationErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	RevenueAttributionAllocationErrorDetail_RevenueAttributionAllocationId = RevenueAttributionAllocationErrorDetail.AddMember("RevenueAttributionAllocationId", _RevenueAttributionAllocationId)
-
-	RevenueAttributionAllocationErrorDetail_EntityType = RevenueAttributionAllocationErrorDetail.AddMember("EntityType", EntityType)
-
-	RevenueAttributionAllocationErrorDetail_EntityId = RevenueAttributionAllocationErrorDetail.AddMember("EntityId", _EntityIdentifier)
-
-	RevenueAttributionAllocationErrorDetail_CustomerAwsAccountId = RevenueAttributionAllocationErrorDetail.AddMember("CustomerAwsAccountId", _CustomerAwsAccountId)
-
-	RevenueAttributionAllocationErrorDetail_EffectiveFrom = RevenueAttributionAllocationErrorDetail.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	RevenueAttributionAllocationErrorDetail_EffectiveUntil = RevenueAttributionAllocationErrorDetail.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	RevenueAttributionAllocationErrorDetail_Action = RevenueAttributionAllocationErrorDetail.AddMember("Action", RevenueAttributionAllocationAction)
-
-	RevenueAttributionAllocationErrorDetail_ErrorCode = RevenueAttributionAllocationErrorDetail.AddMember("ErrorCode", RevenueAttributionAllocationErrorCode)
-
-	RevenueAttributionAllocationErrorDetail_ErrorMessage = RevenueAttributionAllocationErrorDetail.AddMember("ErrorMessage", smithyprelude.String)
-
-	_RevenueAttributionAllocationErrorDetailList_member = _RevenueAttributionAllocationErrorDetailList.AddMember("member", RevenueAttributionAllocationErrorDetail)
-
-	RevenueAttributionAllocationSortField_EFFECTIVE_FROM = RevenueAttributionAllocationSortField.AddMember("EFFECTIVE_FROM", smithyprelude.Unit)
-
-	RevenueAttributionAllocationSummary_RevenueAttributionAllocationId = RevenueAttributionAllocationSummary.AddMember("RevenueAttributionAllocationId", _RevenueAttributionAllocationId)
-
-	RevenueAttributionAllocationSummary_RevenueAttributionIdentifier = RevenueAttributionAllocationSummary.AddMember("RevenueAttributionIdentifier", _RevenueAttributionIdentifier)
-
-	RevenueAttributionAllocationSummary_EntityType = RevenueAttributionAllocationSummary.AddMember("EntityType", EntityType)
-
-	RevenueAttributionAllocationSummary_EntityIdentifier = RevenueAttributionAllocationSummary.AddMember("EntityIdentifier", _EntityIdentifier)
-
-	RevenueAttributionAllocationSummary_EntityName = RevenueAttributionAllocationSummary.AddMember("EntityName", smithyprelude.String)
-
-	RevenueAttributionAllocationSummary_CustomerAwsAccountId = RevenueAttributionAllocationSummary.AddMember("CustomerAwsAccountId", _CustomerAwsAccountId)
-
-	RevenueAttributionAllocationSummary_RevenueSharePercent = RevenueAttributionAllocationSummary.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	RevenueAttributionAllocationSummary_EffectiveFrom = RevenueAttributionAllocationSummary.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	RevenueAttributionAllocationSummary_EffectiveUntil = RevenueAttributionAllocationSummary.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	RevenueAttributionAllocationSummary_Status = RevenueAttributionAllocationSummary.AddMember("Status", AllocationStatus)
-
-	_RevenueAttributionAllocationSummaryList_member = _RevenueAttributionAllocationSummaryList.AddMember("member", RevenueAttributionAllocationSummary)
-
-	RevenueAttributionAllocationTaskStatus_IN_PROGRESS = RevenueAttributionAllocationTaskStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	RevenueAttributionAllocationTaskStatus_COMPLETE = RevenueAttributionAllocationTaskStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	RevenueAttributionAllocationTaskStatus_FAILED = RevenueAttributionAllocationTaskStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	_RevenueAttributionIdentifierList_member = _RevenueAttributionIdentifierList.AddMember("member", _RevenueAttributionIdentifier)
-
-	_RevenueAttributionSummaries_member = _RevenueAttributionSummaries.AddMember("member", AttributionSummary)
-
-	RevenueShareAllocation_Action = RevenueShareAllocation.AddMember("Action", RevenueAttributionAllocationAction)
-
-	RevenueShareAllocation_RevenueAttributionAllocationId = RevenueShareAllocation.AddMember("RevenueAttributionAllocationId", _RevenueAttributionAllocationId)
-
-	RevenueShareAllocation_EntityType = RevenueShareAllocation.AddMember("EntityType", EntityType)
-
-	RevenueShareAllocation_EntityIdentifier = RevenueShareAllocation.AddMember("EntityIdentifier", _EntityIdentifier)
-
-	RevenueShareAllocation_CustomerAwsAccountId = RevenueShareAllocation.AddMember("CustomerAwsAccountId", _CustomerAwsAccountId)
-
-	RevenueShareAllocation_RevenueSharePercent = RevenueShareAllocation.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	RevenueShareAllocation_EffectiveFrom = RevenueShareAllocation.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	RevenueShareAllocation_EffectiveUntil = RevenueShareAllocation.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	RevenueShareAllocation_Status = RevenueShareAllocation.AddMember("Status", AllocationStatus)
-
-	_RevenueShareAllocationChangeList_member = _RevenueShareAllocationChangeList.AddMember("member", RevenueShareAllocation)
-
-	ServiceQuotaExceededExceptionReason_ATTRIBUTION_LIMIT_EXCEEDED = ServiceQuotaExceededExceptionReason.AddMember("ATTRIBUTION_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ServiceQuotaExceededExceptionReason_TAG_LIMIT_EXCEEDED = ServiceQuotaExceededExceptionReason.AddMember("TAG_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_Reason = ServiceQuotaExceededException.AddMember("Reason", ServiceQuotaExceededExceptionReason)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ThrottlingException_ServiceCode = ThrottlingException.AddMember("ServiceCode", smithyprelude.String)
-
-	ThrottlingException_QuotaCode = ThrottlingException.AddMember("QuotaCode", smithyprelude.String)
-
-	ValidationExceptionReason_REQUEST_VALIDATION_FAILED = ValidationExceptionReason.AddMember("REQUEST_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_BUSINESS_VALIDATION_FAILED = ValidationExceptionReason.AddMember("BUSINESS_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", smithyprelude.String)
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", smithyprelude.String)
-
-	ValidationExceptionField_Code = ValidationExceptionField.AddMember("Code", FieldValidationCode)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	ValidationException_FieldList = ValidationException.AddMember("FieldList", _ValidationExceptionFieldList)
-
-	CreateMarketplaceRevenueShareAllocationInput_Catalog = CreateMarketplaceRevenueShareAllocationInput.AddMember("Catalog", CatalogName)
-
-	CreateMarketplaceRevenueShareAllocationInput_ProductId = CreateMarketplaceRevenueShareAllocationInput.AddMember("ProductId", _MarketplaceProductId)
-
-	CreateMarketplaceRevenueShareAllocationInput_ClientToken = CreateMarketplaceRevenueShareAllocationInput.AddMember("ClientToken", _ClientToken)
-
-	CreateMarketplaceRevenueShareAllocationInput_EffectiveFrom = CreateMarketplaceRevenueShareAllocationInput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	CreateMarketplaceRevenueShareAllocationInput_EffectiveUntil = CreateMarketplaceRevenueShareAllocationInput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	CreateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = CreateMarketplaceRevenueShareAllocationInput.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = CreateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
-
-	CreateMarketplaceRevenueShareAllocationOutput_ProductId = CreateMarketplaceRevenueShareAllocationOutput.AddMember("ProductId", _MarketplaceProductId)
-
-	CreateMarketplaceRevenueShareAllocationOutput_ProductName = CreateMarketplaceRevenueShareAllocationOutput.AddMember("ProductName", smithyprelude.String)
-
-	CreateMarketplaceRevenueShareAllocationOutput_Arn = CreateMarketplaceRevenueShareAllocationOutput.AddMember("Arn", smithyprelude.String)
-
-	CreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = CreateMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	CreateMarketplaceRevenueShareAllocationOutput_EffectiveUntil = CreateMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	CreateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = CreateMarketplaceRevenueShareAllocationOutput.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	CreateMarketplaceRevenueShareAllocationOutput_Status = CreateMarketplaceRevenueShareAllocationOutput.AddMember("Status", AllocationStatus)
-
-	CreateMarketplaceRevenueShareAllocationOutput_CreatedDate = CreateMarketplaceRevenueShareAllocationOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	CreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = CreateMarketplaceRevenueShareAllocationOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	CreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = CreateMarketplaceRevenueShareAllocationOutput.AddMember("LatestMarketplaceRevenueShareRevision", _RevisionToken)
-
-	CreateMarketplaceRevenueShareInput_Catalog = CreateMarketplaceRevenueShareInput.AddMember("Catalog", CatalogName)
-
-	CreateMarketplaceRevenueShareInput_ClientToken = CreateMarketplaceRevenueShareInput.AddMember("ClientToken", _ClientToken)
-
-	CreateMarketplaceRevenueShareInput_ProductId = CreateMarketplaceRevenueShareInput.AddMember("ProductId", _MarketplaceProductId)
-
-	CreateMarketplaceRevenueShareInput_Tags = CreateMarketplaceRevenueShareInput.AddMember("Tags", _MarketplaceRevenueShareTagList)
-
-	CreateMarketplaceRevenueShareOutput_ProductId = CreateMarketplaceRevenueShareOutput.AddMember("ProductId", _MarketplaceProductId)
-
-	CreateMarketplaceRevenueShareOutput_Arn = CreateMarketplaceRevenueShareOutput.AddMember("Arn", smithyprelude.String)
-
-	CreateMarketplaceRevenueShareOutput_Catalog = CreateMarketplaceRevenueShareOutput.AddMember("Catalog", CatalogName)
-
-	CreateMarketplaceRevenueShareOutput_ProductCode = CreateMarketplaceRevenueShareOutput.AddMember("ProductCode", smithyprelude.String)
-
-	CreateMarketplaceRevenueShareOutput_ProductName = CreateMarketplaceRevenueShareOutput.AddMember("ProductName", smithyprelude.String)
-
-	CreateMarketplaceRevenueShareOutput_CreatedDate = CreateMarketplaceRevenueShareOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	CreateMarketplaceRevenueShareOutput_LastModifiedDate = CreateMarketplaceRevenueShareOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	CreateMarketplaceRevenueShareOutput_Revision = CreateMarketplaceRevenueShareOutput.AddMember("Revision", smithyprelude.Integer)
-
-	CreateRevenueAttributionInput_Catalog = CreateRevenueAttributionInput.AddMember("Catalog", CatalogName)
-
-	CreateRevenueAttributionInput_ClientToken = CreateRevenueAttributionInput.AddMember("ClientToken", _ClientToken)
-
-	CreateRevenueAttributionInput_Name = CreateRevenueAttributionInput.AddMember("Name", smithyprelude.String)
-
-	CreateRevenueAttributionInput_Description = CreateRevenueAttributionInput.AddMember("Description", smithyprelude.String)
-
-	CreateRevenueAttributionInput_TenancyModel = CreateRevenueAttributionInput.AddMember("TenancyModel", TenancyModel)
-
-	CreateRevenueAttributionInput_ProductIdentifier = CreateRevenueAttributionInput.AddMember("ProductIdentifier", smithyprelude.String)
-
-	CreateRevenueAttributionInput_Tags = CreateRevenueAttributionInput.AddMember("Tags", _TagList)
-
-	CreateRevenueAttributionOutput_Id = CreateRevenueAttributionOutput.AddMember("Id", _RevenueAttributionId)
-
-	CreateRevenueAttributionOutput_Arn = CreateRevenueAttributionOutput.AddMember("Arn", smithyprelude.String)
-
-	CreateRevenueAttributionOutput_Name = CreateRevenueAttributionOutput.AddMember("Name", smithyprelude.String)
-
-	CreateRevenueAttributionOutput_Description = CreateRevenueAttributionOutput.AddMember("Description", smithyprelude.String)
-
-	CreateRevenueAttributionOutput_TenancyModel = CreateRevenueAttributionOutput.AddMember("TenancyModel", TenancyModel)
-
-	CreateRevenueAttributionOutput_MarketplaceProduct = CreateRevenueAttributionOutput.AddMember("MarketplaceProduct", MarketplaceProductSummary)
-
-	CreateRevenueAttributionOutput_Revision = CreateRevenueAttributionOutput.AddMember("Revision", _RevisionToken)
-
-	GetMarketplaceRevenueShareAllocationInput_Catalog = GetMarketplaceRevenueShareAllocationInput.AddMember("Catalog", CatalogName)
-
-	GetMarketplaceRevenueShareAllocationInput_ProductId = GetMarketplaceRevenueShareAllocationInput.AddMember("ProductId", _MarketplaceProductId)
-
-	GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = GetMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
-
-	GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = GetMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareRevision", _RevisionToken)
-
-	GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = GetMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
-
-	GetMarketplaceRevenueShareAllocationOutput_ProductId = GetMarketplaceRevenueShareAllocationOutput.AddMember("ProductId", _MarketplaceProductId)
-
-	GetMarketplaceRevenueShareAllocationOutput_ProductName = GetMarketplaceRevenueShareAllocationOutput.AddMember("ProductName", smithyprelude.String)
-
-	GetMarketplaceRevenueShareAllocationOutput_Arn = GetMarketplaceRevenueShareAllocationOutput.AddMember("Arn", smithyprelude.String)
-
-	GetMarketplaceRevenueShareAllocationOutput_EffectiveFrom = GetMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	GetMarketplaceRevenueShareAllocationOutput_EffectiveUntil = GetMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	GetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = GetMarketplaceRevenueShareAllocationOutput.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	GetMarketplaceRevenueShareAllocationOutput_Status = GetMarketplaceRevenueShareAllocationOutput.AddMember("Status", AllocationStatus)
-
-	GetMarketplaceRevenueShareAllocationOutput_CreatedDate = GetMarketplaceRevenueShareAllocationOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate = GetMarketplaceRevenueShareAllocationOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = GetMarketplaceRevenueShareAllocationOutput.AddMember("LatestMarketplaceRevenueShareRevision", _RevisionToken)
-
-	GetMarketplaceRevenueShareInput_Catalog = GetMarketplaceRevenueShareInput.AddMember("Catalog", CatalogName)
-
-	GetMarketplaceRevenueShareInput_ProductId = GetMarketplaceRevenueShareInput.AddMember("ProductId", _MarketplaceProductId)
-
-	GetMarketplaceRevenueShareInput_Revision = GetMarketplaceRevenueShareInput.AddMember("Revision", smithyprelude.Integer)
-
-	GetMarketplaceRevenueShareOutput_ProductId = GetMarketplaceRevenueShareOutput.AddMember("ProductId", _MarketplaceProductId)
-
-	GetMarketplaceRevenueShareOutput_Arn = GetMarketplaceRevenueShareOutput.AddMember("Arn", smithyprelude.String)
-
-	GetMarketplaceRevenueShareOutput_Catalog = GetMarketplaceRevenueShareOutput.AddMember("Catalog", CatalogName)
-
-	GetMarketplaceRevenueShareOutput_ProductCode = GetMarketplaceRevenueShareOutput.AddMember("ProductCode", smithyprelude.String)
-
-	GetMarketplaceRevenueShareOutput_ProductName = GetMarketplaceRevenueShareOutput.AddMember("ProductName", smithyprelude.String)
-
-	GetMarketplaceRevenueShareOutput_CreatedDate = GetMarketplaceRevenueShareOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	GetMarketplaceRevenueShareOutput_LastModifiedDate = GetMarketplaceRevenueShareOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	GetMarketplaceRevenueShareOutput_Revision = GetMarketplaceRevenueShareOutput.AddMember("Revision", smithyprelude.Integer)
-
-	GetMarketplaceRevenueShareOutput_LatestRevision = GetMarketplaceRevenueShareOutput.AddMember("LatestRevision", smithyprelude.Integer)
-
-	GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount = GetMarketplaceRevenueShareOutput.AddMember("TotalActiveMarketplaceRevenueShareAllocationCount", smithyprelude.Integer)
-
-	GetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount = GetMarketplaceRevenueShareOutput.AddMember("TotalMarketplaceRevenueShareAllocationCount", smithyprelude.Integer)
-
-	GetRevenueAttributionAllocationInput_Catalog = GetRevenueAttributionAllocationInput.AddMember("Catalog", CatalogName)
-
-	GetRevenueAttributionAllocationInput_RevenueAttributionIdentifier = GetRevenueAttributionAllocationInput.AddMember("RevenueAttributionIdentifier", _RevenueAttributionIdentifier)
-
-	GetRevenueAttributionAllocationInput_RevenueAttributionAllocationId = GetRevenueAttributionAllocationInput.AddMember("RevenueAttributionAllocationId", _RevenueAttributionAllocationId)
-
-	GetRevenueAttributionAllocationInput_RevenueAttributionRevision = GetRevenueAttributionAllocationInput.AddMember("RevenueAttributionRevision", _RevisionToken)
-
-	GetRevenueAttributionAllocationOutput_RevenueAttributionAllocationId = GetRevenueAttributionAllocationOutput.AddMember("RevenueAttributionAllocationId", _RevenueAttributionAllocationId)
-
-	GetRevenueAttributionAllocationOutput_RevenueAttributionIdentifier = GetRevenueAttributionAllocationOutput.AddMember("RevenueAttributionIdentifier", _RevenueAttributionIdentifier)
-
-	GetRevenueAttributionAllocationOutput_EntityType = GetRevenueAttributionAllocationOutput.AddMember("EntityType", EntityType)
-
-	GetRevenueAttributionAllocationOutput_EntityIdentifier = GetRevenueAttributionAllocationOutput.AddMember("EntityIdentifier", _EntityIdentifier)
-
-	GetRevenueAttributionAllocationOutput_EntityName = GetRevenueAttributionAllocationOutput.AddMember("EntityName", smithyprelude.String)
-
-	GetRevenueAttributionAllocationOutput_CustomerAwsAccountId = GetRevenueAttributionAllocationOutput.AddMember("CustomerAwsAccountId", _CustomerAwsAccountId)
-
-	GetRevenueAttributionAllocationOutput_RevenueSharePercent = GetRevenueAttributionAllocationOutput.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	GetRevenueAttributionAllocationOutput_EffectiveFrom = GetRevenueAttributionAllocationOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	GetRevenueAttributionAllocationOutput_EffectiveUntil = GetRevenueAttributionAllocationOutput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	GetRevenueAttributionAllocationOutput_Status = GetRevenueAttributionAllocationOutput.AddMember("Status", AllocationStatus)
-
-	GetRevenueAttributionAllocationOutput_CreatedDate = GetRevenueAttributionAllocationOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	GetRevenueAttributionAllocationOutput_LastModifiedDate = GetRevenueAttributionAllocationOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	GetRevenueAttributionAllocationOutput_RevenueAttributionRevision = GetRevenueAttributionAllocationOutput.AddMember("RevenueAttributionRevision", _RevisionToken)
-
-	GetRevenueAttributionAllocationOutput_RevenueAttributionLatestRevision = GetRevenueAttributionAllocationOutput.AddMember("RevenueAttributionLatestRevision", _RevisionToken)
-
-	GetRevenueAttributionAllocationsTaskInput_Catalog = GetRevenueAttributionAllocationsTaskInput.AddMember("Catalog", CatalogName)
-
-	GetRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier = GetRevenueAttributionAllocationsTaskInput.AddMember("RevenueAttributionIdentifier", _RevenueAttributionIdentifier)
-
-	GetRevenueAttributionAllocationsTaskOutput_TaskId = GetRevenueAttributionAllocationsTaskOutput.AddMember("TaskId", _RevenueAttributionAllocationTaskId)
-
-	GetRevenueAttributionAllocationsTaskOutput_Status = GetRevenueAttributionAllocationsTaskOutput.AddMember("Status", RevenueAttributionAllocationTaskStatus)
-
-	GetRevenueAttributionAllocationsTaskOutput_Catalog = GetRevenueAttributionAllocationsTaskOutput.AddMember("Catalog", CatalogName)
-
-	GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn = GetRevenueAttributionAllocationsTaskOutput.AddMember("RevenueAttributionArn", smithyprelude.String)
-
-	GetRevenueAttributionAllocationsTaskOutput_StartedAt = GetRevenueAttributionAllocationsTaskOutput.AddMember("StartedAt", smithyprelude.Timestamp)
-
-	GetRevenueAttributionAllocationsTaskOutput_EndedAt = GetRevenueAttributionAllocationsTaskOutput.AddMember("EndedAt", smithyprelude.Timestamp)
-
-	GetRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords = GetRevenueAttributionAllocationsTaskOutput.AddMember("TotalRevenueAttributionAllocationRecords", smithyprelude.Integer)
-
-	GetRevenueAttributionAllocationsTaskOutput_Description = GetRevenueAttributionAllocationsTaskOutput.AddMember("Description", smithyprelude.String)
-
-	GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionLatestRevision = GetRevenueAttributionAllocationsTaskOutput.AddMember("RevenueAttributionLatestRevision", _RevisionToken)
-
-	GetRevenueAttributionAllocationsTaskOutput_ErrorDetailList = GetRevenueAttributionAllocationsTaskOutput.AddMember("ErrorDetailList", _RevenueAttributionAllocationErrorDetailList)
-
-	GetRevenueAttributionInput_Catalog = GetRevenueAttributionInput.AddMember("Catalog", CatalogName)
-
-	GetRevenueAttributionInput_Identifier = GetRevenueAttributionInput.AddMember("Identifier", _RevenueAttributionIdentifier)
-
-	GetRevenueAttributionInput_Revision = GetRevenueAttributionInput.AddMember("Revision", _RevisionToken)
-
-	GetRevenueAttributionOutput_Arn = GetRevenueAttributionOutput.AddMember("Arn", smithyprelude.String)
-
-	GetRevenueAttributionOutput_Id = GetRevenueAttributionOutput.AddMember("Id", _RevenueAttributionId)
-
-	GetRevenueAttributionOutput_Catalog = GetRevenueAttributionOutput.AddMember("Catalog", CatalogName)
-
-	GetRevenueAttributionOutput_Name = GetRevenueAttributionOutput.AddMember("Name", smithyprelude.String)
-
-	GetRevenueAttributionOutput_Description = GetRevenueAttributionOutput.AddMember("Description", smithyprelude.String)
-
-	GetRevenueAttributionOutput_TenancyModel = GetRevenueAttributionOutput.AddMember("TenancyModel", TenancyModel)
-
-	GetRevenueAttributionOutput_MarketplaceProduct = GetRevenueAttributionOutput.AddMember("MarketplaceProduct", MarketplaceProductSummary)
-
-	GetRevenueAttributionOutput_CreatedDate = GetRevenueAttributionOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	GetRevenueAttributionOutput_LastModifiedDate = GetRevenueAttributionOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	GetRevenueAttributionOutput_Revision = GetRevenueAttributionOutput.AddMember("Revision", _RevisionToken)
-
-	GetRevenueAttributionOutput_LatestRevision = GetRevenueAttributionOutput.AddMember("LatestRevision", _RevisionToken)
-
-	GetRevenueAttributionOutput_EffectiveFrom = GetRevenueAttributionOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	GetRevenueAttributionOutput_EffectiveUntil = GetRevenueAttributionOutput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	GetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount = GetRevenueAttributionOutput.AddMember("TotalActiveRevenueAttributionAllocationCount", _AllocationCount)
-
-	GetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount = GetRevenueAttributionOutput.AddMember("TotalRevenueAttributionAllocationCount", _AllocationCount)
-
-	ListMarketplaceRevenueShareAllocationsInput_Catalog = ListMarketplaceRevenueShareAllocationsInput.AddMember("Catalog", CatalogName)
-
-	ListMarketplaceRevenueShareAllocationsInput_ProductId = ListMarketplaceRevenueShareAllocationsInput.AddMember("ProductId", _MarketplaceProductId)
-
-	ListMarketplaceRevenueShareAllocationsInput_Status = ListMarketplaceRevenueShareAllocationsInput.AddMember("Status", AllocationStatus)
-
-	ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom = ListMarketplaceRevenueShareAllocationsInput.AddMember("AfterEffectiveFrom", _AllocationEffectiveDateString)
-
-	ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom = ListMarketplaceRevenueShareAllocationsInput.AddMember("BeforeEffectiveFrom", _AllocationEffectiveDateString)
-
-	ListMarketplaceRevenueShareAllocationsInput_SortBy = ListMarketplaceRevenueShareAllocationsInput.AddMember("SortBy", MarketplaceRevenueShareAllocationSortField)
-
-	ListMarketplaceRevenueShareAllocationsInput_SortOrder = ListMarketplaceRevenueShareAllocationsInput.AddMember("SortOrder", SortOrder)
-
-	ListMarketplaceRevenueShareAllocationsInput_MaxResults = ListMarketplaceRevenueShareAllocationsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListMarketplaceRevenueShareAllocationsInput_NextToken = ListMarketplaceRevenueShareAllocationsInput.AddMember("NextToken", _NextToken)
-
-	ListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareRevision = ListMarketplaceRevenueShareAllocationsInput.AddMember("MarketplaceRevenueShareRevision", _RevisionToken)
-
-	ListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries = ListMarketplaceRevenueShareAllocationsOutput.AddMember("MarketplaceRevenueShareAllocationSummaries", _MarketplaceRevenueShareAllocationSummaryList)
-
-	ListMarketplaceRevenueShareAllocationsOutput_NextToken = ListMarketplaceRevenueShareAllocationsOutput.AddMember("NextToken", _NextToken)
-
-	ListMarketplaceRevenueSharesInput_Catalog = ListMarketplaceRevenueSharesInput.AddMember("Catalog", CatalogName)
-
-	ListMarketplaceRevenueSharesInput_ProductIds = ListMarketplaceRevenueSharesInput.AddMember("ProductIds", _MarketplaceProductIdList)
-
-	ListMarketplaceRevenueSharesInput_ProductCodes = ListMarketplaceRevenueSharesInput.AddMember("ProductCodes", _ProductCodeList)
-
-	ListMarketplaceRevenueSharesInput_MaxResults = ListMarketplaceRevenueSharesInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListMarketplaceRevenueSharesInput_NextToken = ListMarketplaceRevenueSharesInput.AddMember("NextToken", _NextToken)
-
-	ListMarketplaceRevenueSharesInput_SortBy = ListMarketplaceRevenueSharesInput.AddMember("SortBy", MarketplaceRevenueShareSortBy)
-
-	ListMarketplaceRevenueSharesInput_SortOrder = ListMarketplaceRevenueSharesInput.AddMember("SortOrder", SortOrder)
-
-	ListMarketplaceRevenueSharesInput_CreatedAfter = ListMarketplaceRevenueSharesInput.AddMember("CreatedAfter", smithyprelude.Timestamp)
-
-	ListMarketplaceRevenueSharesInput_CreatedBefore = ListMarketplaceRevenueSharesInput.AddMember("CreatedBefore", smithyprelude.Timestamp)
-
-	ListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries = ListMarketplaceRevenueSharesOutput.AddMember("MarketplaceRevenueShareSummaries", _MarketplaceRevenueShareSummaryList)
-
-	ListMarketplaceRevenueSharesOutput_NextToken = ListMarketplaceRevenueSharesOutput.AddMember("NextToken", _NextToken)
-
-	ListRevenueAttributionAllocationsInput_Catalog = ListRevenueAttributionAllocationsInput.AddMember("Catalog", CatalogName)
-
-	ListRevenueAttributionAllocationsInput_RevenueAttributionIdentifier = ListRevenueAttributionAllocationsInput.AddMember("RevenueAttributionIdentifier", _RevenueAttributionIdentifier)
-
-	ListRevenueAttributionAllocationsInput_EntityTypeFilters = ListRevenueAttributionAllocationsInput.AddMember("EntityTypeFilters", _EntityTypeFilterList)
-
-	ListRevenueAttributionAllocationsInput_EntityIdentifierFilters = ListRevenueAttributionAllocationsInput.AddMember("EntityIdentifierFilters", _EntityIdentifierFilterList)
-
-	ListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters = ListRevenueAttributionAllocationsInput.AddMember("CustomerAwsAccountIdFilters", _CustomerAwsAccountIdFilterList)
-
-	ListRevenueAttributionAllocationsInput_StatusFilter = ListRevenueAttributionAllocationsInput.AddMember("StatusFilter", AllocationStatus)
-
-	ListRevenueAttributionAllocationsInput_AfterEffectiveFrom = ListRevenueAttributionAllocationsInput.AddMember("AfterEffectiveFrom", _AllocationEffectiveDateString)
-
-	ListRevenueAttributionAllocationsInput_BeforeEffectiveFrom = ListRevenueAttributionAllocationsInput.AddMember("BeforeEffectiveFrom", _AllocationEffectiveDateString)
-
-	ListRevenueAttributionAllocationsInput_AfterEffectiveUntil = ListRevenueAttributionAllocationsInput.AddMember("AfterEffectiveUntil", _AllocationEffectiveDateString)
-
-	ListRevenueAttributionAllocationsInput_BeforeEffectiveUntil = ListRevenueAttributionAllocationsInput.AddMember("BeforeEffectiveUntil", _AllocationEffectiveDateString)
-
-	ListRevenueAttributionAllocationsInput_SortBy = ListRevenueAttributionAllocationsInput.AddMember("SortBy", RevenueAttributionAllocationSortField)
-
-	ListRevenueAttributionAllocationsInput_SortOrder = ListRevenueAttributionAllocationsInput.AddMember("SortOrder", SortOrder)
-
-	ListRevenueAttributionAllocationsInput_RevenueAttributionRevision = ListRevenueAttributionAllocationsInput.AddMember("RevenueAttributionRevision", _RevisionToken)
-
-	ListRevenueAttributionAllocationsInput_MaxResults = ListRevenueAttributionAllocationsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListRevenueAttributionAllocationsInput_NextToken = ListRevenueAttributionAllocationsInput.AddMember("NextToken", _NextToken)
-
-	ListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries = ListRevenueAttributionAllocationsOutput.AddMember("RevenueAttributionAllocationSummaries", _RevenueAttributionAllocationSummaryList)
-
-	ListRevenueAttributionAllocationsOutput_NextToken = ListRevenueAttributionAllocationsOutput.AddMember("NextToken", _NextToken)
-
-	ListRevenueAttributionsInput_Catalog = ListRevenueAttributionsInput.AddMember("Catalog", CatalogName)
-
-	ListRevenueAttributionsInput_Identifiers = ListRevenueAttributionsInput.AddMember("Identifiers", _RevenueAttributionIdentifierList)
-
-	ListRevenueAttributionsInput_CreatedAfter = ListRevenueAttributionsInput.AddMember("CreatedAfter", smithyprelude.Timestamp)
-
-	ListRevenueAttributionsInput_CreatedBefore = ListRevenueAttributionsInput.AddMember("CreatedBefore", smithyprelude.Timestamp)
-
-	ListRevenueAttributionsInput_SortBy = ListRevenueAttributionsInput.AddMember("SortBy", AttributionSortBy)
-
-	ListRevenueAttributionsInput_SortOrder = ListRevenueAttributionsInput.AddMember("SortOrder", SortOrder)
-
-	ListRevenueAttributionsInput_MaxResults = ListRevenueAttributionsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListRevenueAttributionsInput_NextToken = ListRevenueAttributionsInput.AddMember("NextToken", _NextToken)
-
-	ListRevenueAttributionsOutput_RevenueAttributionSummaries = ListRevenueAttributionsOutput.AddMember("RevenueAttributionSummaries", _RevenueAttributionSummaries)
-
-	ListRevenueAttributionsOutput_NextToken = ListRevenueAttributionsOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _ResourceARN)
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagList)
-
-	StartRevenueAttributionAllocationsTaskInput_Catalog = StartRevenueAttributionAllocationsTaskInput.AddMember("Catalog", CatalogName)
-
-	StartRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier = StartRevenueAttributionAllocationsTaskInput.AddMember("RevenueAttributionIdentifier", _RevenueAttributionIdentifier)
-
-	StartRevenueAttributionAllocationsTaskInput_RevenueAttributionRevision = StartRevenueAttributionAllocationsTaskInput.AddMember("RevenueAttributionRevision", _RevisionToken)
-
-	StartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations = StartRevenueAttributionAllocationsTaskInput.AddMember("RevenueShareAllocations", _RevenueShareAllocationChangeList)
-
-	StartRevenueAttributionAllocationsTaskInput_ClientToken = StartRevenueAttributionAllocationsTaskInput.AddMember("ClientToken", _ClientToken)
-
-	StartRevenueAttributionAllocationsTaskInput_Description = StartRevenueAttributionAllocationsTaskInput.AddMember("Description", smithyprelude.String)
-
-	StartRevenueAttributionAllocationsTaskOutput_TaskId = StartRevenueAttributionAllocationsTaskOutput.AddMember("TaskId", _RevenueAttributionAllocationTaskId)
-
-	StartRevenueAttributionAllocationsTaskOutput_Status = StartRevenueAttributionAllocationsTaskOutput.AddMember("Status", RevenueAttributionAllocationTaskStatus)
-
-	StartRevenueAttributionAllocationsTaskOutput_Catalog = StartRevenueAttributionAllocationsTaskOutput.AddMember("Catalog", CatalogName)
-
-	StartRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn = StartRevenueAttributionAllocationsTaskOutput.AddMember("RevenueAttributionArn", smithyprelude.String)
-
-	StartRevenueAttributionAllocationsTaskOutput_StartedAt = StartRevenueAttributionAllocationsTaskOutput.AddMember("StartedAt", smithyprelude.Timestamp)
-
-	StartRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords = StartRevenueAttributionAllocationsTaskOutput.AddMember("TotalRevenueAttributionAllocationRecords", smithyprelude.Integer)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _ResourceARN)
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagList)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _ResourceARN)
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList)
-
-	UpdateMarketplaceRevenueShareAllocationInput_Catalog = UpdateMarketplaceRevenueShareAllocationInput.AddMember("Catalog", CatalogName)
-
-	UpdateMarketplaceRevenueShareAllocationInput_ProductId = UpdateMarketplaceRevenueShareAllocationInput.AddMember("ProductId", _MarketplaceProductId)
-
-	UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = UpdateMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
-
-	UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = UpdateMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareRevision", _RevisionToken)
-
-	UpdateMarketplaceRevenueShareAllocationInput_ClientToken = UpdateMarketplaceRevenueShareAllocationInput.AddMember("ClientToken", _ClientToken)
-
-	UpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom = UpdateMarketplaceRevenueShareAllocationInput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	UpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil = UpdateMarketplaceRevenueShareAllocationInput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	UpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = UpdateMarketplaceRevenueShareAllocationInput.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	UpdateMarketplaceRevenueShareAllocationInput_Status = UpdateMarketplaceRevenueShareAllocationInput.AddMember("Status", AllocationStatus)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_ProductId = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("ProductId", _MarketplaceProductId)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_ProductName = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("ProductName", smithyprelude.String)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_Arn = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("Arn", smithyprelude.String)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_EffectiveUntil = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("RevenueSharePercent", _RevenueSharePercent)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_Status = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("Status", AllocationStatus)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_CreatedDate = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("LatestMarketplaceRevenueShareRevision", _RevisionToken)
-
-	UpdateRevenueAttributionInput_Catalog = UpdateRevenueAttributionInput.AddMember("Catalog", CatalogName)
-
-	UpdateRevenueAttributionInput_Identifier = UpdateRevenueAttributionInput.AddMember("Identifier", _RevenueAttributionIdentifier)
-
-	UpdateRevenueAttributionInput_ClientToken = UpdateRevenueAttributionInput.AddMember("ClientToken", _ClientToken)
-
-	UpdateRevenueAttributionInput_Description = UpdateRevenueAttributionInput.AddMember("Description", smithyprelude.String)
-
-	UpdateRevenueAttributionInput_Revision = UpdateRevenueAttributionInput.AddMember("Revision", _RevisionToken)
-
-	UpdateRevenueAttributionOutput_Id = UpdateRevenueAttributionOutput.AddMember("Id", _RevenueAttributionId)
-
-	UpdateRevenueAttributionOutput_Arn = UpdateRevenueAttributionOutput.AddMember("Arn", smithyprelude.String)
-
-	UpdateRevenueAttributionOutput_Description = UpdateRevenueAttributionOutput.AddMember("Description", smithyprelude.String)
-
-	UpdateRevenueAttributionOutput_LastModifiedDate = UpdateRevenueAttributionOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
-
-	UpdateRevenueAttributionOutput_LatestRevision = UpdateRevenueAttributionOutput.AddMember("LatestRevision", _RevisionToken)
-
+const blob = "" +
+	"TotalActiveMarketplaceRevenueShareAllocationCountCreateMarketplaceRevenueShareAllocationOutputUpdate" +
+	"MarketplaceRevenueShareAllocationOutputCreateMarketplaceRevenueShareAllocationInputListMarketplaceRe" +
+	"venueShareAllocationsOutputMarketplaceRevenueShareAllocationSummaryListStartRevenueAttributionAlloca" +
+	"tionsTaskOutputTotalActiveRevenueAttributionAllocationCountUpdateMarketplaceRevenueShareAllocationIn" +
+	"putListMarketplaceRevenueShareAllocationsInputRevenueAttributionAllocationErrorDetailListStartRevenu" +
+	"eAttributionAllocationsTaskInputTotalMarketplaceRevenueShareAllocationCountGetMarketplaceRevenueShar" +
+	"eAllocationOutputGetRevenueAttributionAllocationsTaskOutputMarketplaceRevenueShareAllocationSortFiel" +
+	"dMarketplaceRevenueShareAllocationSummariesGetMarketplaceRevenueShareAllocationInputGetRevenueAttrib" +
+	"utionAllocationsTaskInputTotalRevenueAttributionAllocationRecordsListRevenueAttributionAllocationsOu" +
+	"tputRevenueAttributionAllocationSummaryListListRevenueAttributionAllocationsInputRevenueAttributionA" +
+	"llocationTaskStatusTotalRevenueAttributionAllocationCountGetRevenueAttributionAllocationOutputLatest" +
+	"MarketplaceRevenueShareRevisionRevenueAttributionAllocationErrorCodeRevenueAttributionAllocationSort" +
+	"FieldRevenueAttributionAllocationSummariesGetRevenueAttributionAllocationInputCreateMarketplaceReven" +
+	"ueShareOutputMarketplaceRevenueShareAllocationIdServiceQuotaExceededExceptionReasonCreateMarketplace" +
+	"RevenueShareInputListMarketplaceRevenueSharesOutputMarketplaceRevenueShareSummaryListRevenueAttribut" +
+	"ionAllocationActionRevenueAttributionAllocationTaskIdListMarketplaceRevenueSharesInputGetMarketplace" +
+	"RevenueShareOutputMarketplaceRevenueShareSummariesPartnerCentralRevenueMeasurementRevenueAttribution" +
+	"IdentifierListRevenueAttributionLatestRevisionRevenueShareAllocationChangeListGetMarketplaceRevenueS" +
+	"hareInputResourceNotFoundExceptionReasonCreateRevenueAttributionOutputCustomerAwsAccountIdFilterList" +
+	"MarketplaceRevenueShareTagListRevenueAttributionAllocationIdUpdateRevenueAttributionOutputAllocation" +
+	"EffectiveDateStringCreateRevenueAttributionInputListRevenueAttributionsOutputMarketplaceRevenueShare" +
+	"SortByUpdateRevenueAttributionInputListRevenueAttributionsInputValidationExceptionFieldListAccessDen" +
+	"iedExceptionReasonCustomerAwsAccountIdFiltersGetRevenueAttributionOutputRevenueAttributionSummariesA" +
+	"TTRIBUTION_LIMIT_EXCEEDEDBUSINESS_VALIDATION_FAILEDEntityIdentifierFilterListGetRevenueAttributionIn" +
+	"putRevenueAttributionRevisionListTagsForResourceOutputMarketplaceProductSummaryREQUEST_VALIDATION_FA" +
+	"ILEDValidationExceptionReasonListTagsForResourceInputMarketplaceProductIdListALLOCATION_CAP_EXCEEDED" +
+	"CONCURRENT_MODIFICATIONConflictExceptionReasonEntityIdentifierFiltersInternalServerExceptionRESOURCE" +
+	"_ALREADY_EXISTSREQUIRED_FIELD_MISSINGCONFLICT_CLIENT_TOKENINVALID_NUMBER_FORMATINVALID_STRING_FORMAT" +
+	"INVALID_STRING_LENGTHRevenueAttributionArnACTION_NOT_PERMITTEDBeforeEffectiveUntilEntityTypeFilterLi" +
+	"stIMMUTABLE_ALLOCATIONAfterEffectiveUntilBeforeEffectiveFromFieldValidationCodeRevenueSharePercentTh" +
+	"rottlingExceptionAfterEffectiveFromAttributionSummaryINVALID_ENUM_VALUELAST_MODIFIED_DATERESOURCE_NO" +
+	"T_FOUNDTAG_LIMIT_EXCEEDEDUntagResourceInputAttributionSortByEntityTypeFiltersProductIdentifierREVISI" +
+	"ON_MISMATCHAllocationStatusLastModifiedDateTagResourceInputDUPLICATE_VALUEProductCodeListTOO_MANY_VA" +
+	"LUESEFFECTIVE_FROMINTERNAL_ERRORACCESS_DENIEDCreatedBeforeINVALID_VALUERevisionTokenSINGLE_TENANTCre" +
+	"atedAfterErrorMessageMULTI_TENANTProductCodesStatusFilterTenancyModelCatalogNameClientTokenCreatedDa" +
+	"teDescriptionIN_PROGRESSIdentifiersOPPORTUNITYProductNameResourceARNServiceCoderesourceArnDESCENDING" +
+	"EntityNameMaxResultsProductIdsTagKeyListASCENDINGNextTokenQuotaCodeSortOrderStartedAtTimestampCOMPLE" +
+	"TEINACTIVETagValueEndedAtIntegerSANDBOXtagKeysCREATEUPDATEmemberOFFERUnittagsAWS"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.partnercentralrevenuemeasurement", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 49, Target: 0, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 49, Target: 1, Traits: 1, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1840, Target: 2, Traits: 2, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 575, Target: 3, Traits: 3, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 575, Target: 4, Traits: 4, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 617, Target: 5, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 617, Target: 6, Traits: 6, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 617, Target: 7, Traits: 7, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 183, Target: 8, Traits: 8, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1417, Target: 9, Traits: 9, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 865, Target: 10, Traits: 10, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2048, Target: 11, Traits: 11, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2429, Target: 12, Traits: 12, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 271, Target: 13, Traits: 13, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3243, Target: 14, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 3125, Target: 15, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 94, Target: 16, Traits: 16, StrLen: 39, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1960, Target: 17, Traits: 17, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1650, Target: 18, Traits: 18, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 2191, Target: 19, Traits: 19, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 483, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1377, Target: 22, Traits: 18, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2191, Target: 22, Traits: 18, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3332, Target: 484, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 34, Target: 24, Traits: 18, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1990, Target: 25, Traits: 18, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3211, Target: 26, Traits: 18, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3704, Target: 484, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3702, Target: 484, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3143, Target: 29, Traits: 18, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3071, Target: 484, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3035, Target: 31, Traits: 18, StrLen: 18, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1346, Target: 173, Traits: 18, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3476, Target: 483, Traits: 18, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3457, Target: 211, Traits: 18, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2454, Target: 83, Traits: 18, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1732, Target: 192, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 315, Target: 24, Traits: 18, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1019, Target: 24, Traits: 18, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3777, Target: 484, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3732, Target: 484, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3480, Target: 48, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2623, Target: 49, Traits: 20, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 483, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1377, Target: 52, Traits: 18, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2623, Target: 52, Traits: 18, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2737, Target: 484, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2600, Target: 484, Traits: 18, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2692, Target: 484, Traits: 18, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3194, Target: 484, Traits: 18, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1870, Target: 57, Traits: 21, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1870, Target: 58, Traits: 18, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 57, Traits: 22, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2351, Target: 60, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2351, Target: 61, Traits: 18, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 60, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2882, Target: 63, Traits: 18, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3764, Target: 484, Traits: 18, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3535, Target: 484, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2882, Target: 66, Traits: 18, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 63, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2960, Target: 68, Traits: 18, StrLen: 19, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2715, Target: 484, Traits: 18, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3259, Target: 484, Traits: 18, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3358, Target: 484, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2779, Target: 484, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3289, Target: 484, Traits: 18, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2842, Target: 484, Traits: 18, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3053, Target: 484, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2758, Target: 484, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2800, Target: 484, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2669, Target: 78, Traits: 23, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 483, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2553, Target: 80, Traits: 18, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2553, Target: 81, Traits: 18, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 80, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2454, Target: 83, Traits: 18, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2564, Target: 483, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3274, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3546, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1313, Target: 87, Traits: 18, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 659, Target: 88, Traits: 18, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3304, Target: 484, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 227, Target: 90, Traits: 18, StrLen: 40, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1313, Target: 87, Traits: 18, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3546, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 227, Target: 101, Traits: 18, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 90, Traits: 18, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2077, Target: 103, Traits: 18, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3071, Target: 484, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1451, Target: 105, Traits: 18, StrLen: 30, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3274, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3546, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1732, Target: 486, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 0, Target: 486, Traits: 18, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 532, Target: 486, Traits: 18, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1451, Target: 116, Traits: 18, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 105, Traits: 18, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1900, Target: 118, Traits: 18, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 202, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3274, Target: 121, Traits: 18, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 483, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3557, Target: 123, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1809, Target: 124, Traits: 24, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 483, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1377, Target: 127, Traits: 18, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1809, Target: 127, Traits: 18, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3089, Target: 484, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1485, Target: 129, Traits: 18, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3746, Target: 484, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3752, Target: 484, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1131, Target: 132, Traits: 18, StrLen: 37, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2577, Target: 484, Traits: 18, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3089, Target: 484, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2902, Target: 484, Traits: 18, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3332, Target: 484, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3358, Target: 484, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2600, Target: 484, Traits: 18, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3318, Target: 484, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 446, Target: 140, Traits: 18, StrLen: 39, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1930, Target: 152, Traits: 18, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2882, Target: 63, Traits: 18, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2351, Target: 60, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 57, Traits: 22, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1513, Target: 129, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1159, Target: 132, Traits: 18, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3409, Target: 483, Traits: 18, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 446, Target: 150, Traits: 18, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 140, Traits: 18, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1930, Target: 152, Traits: 18, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1168, Target: 153, Traits: 18, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3304, Target: 484, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 904, Target: 155, Traits: 18, StrLen: 35, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1930, Target: 152, Traits: 18, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 174, Traits: 18, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2882, Target: 63, Traits: 18, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2351, Target: 60, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3600, Target: 483, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 57, Traits: 22, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 904, Target: 166, Traits: 18, StrLen: 39, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 155, Traits: 18, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1519, Target: 168, Traits: 18, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 981, Target: 169, Traits: 18, StrLen: 38, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3513, Target: 484, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3694, Target: 484, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2345, Target: 484, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1682, Target: 173, Traits: 18, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1682, Target: 174, Traits: 18, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1682, Target: 175, Traits: 18, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 174, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2272, Target: 177, Traits: 18, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 31, Traits: 18, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 22, Target: 179, Traits: 18, StrLen: 22, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1513, Target: 129, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1930, Target: 152, Traits: 18, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2882, Target: 63, Traits: 18, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2351, Target: 60, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 57, Traits: 22, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1746, Target: 189, Traits: 18, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 179, Traits: 18, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3371, Target: 192, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1348, Target: 193, Traits: 25, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 483, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1377, Target: 196, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1348, Target: 196, Traits: 18, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2299, Target: 484, Traits: 18, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3107, Target: 484, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3667, Target: 199, Traits: 18, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3640, Target: 484, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3590, Target: 484, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1923, Target: 202, Traits: 18, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3633, Target: 205, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3713, Target: 210, Traits: 18, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3630, Target: 205, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3630, Target: 206, Traits: 18, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 205, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1923, Target: 208, Traits: 18, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 202, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3710, Target: 210, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 3457, Target: 211, Traits: 18, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 3421, Target: 484, Traits: 18, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3384, Target: 484, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2998, Target: 214, Traits: 26, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 483, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3568, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3658, Target: 483, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2163, Target: 218, Traits: 27, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3414, Target: 483, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1377, Target: 228, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2182, Target: 226, Traits: 18, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2163, Target: 222, Traits: 18, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3476, Target: 483, Traits: 18, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3414, Target: 483, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1164, Target: 68, Traits: 18, StrLen: 4, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2163, Target: 226, Traits: 18, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 3758, Target: 222, Traits: 18, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2504, Target: 228, Traits: 18, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2479, Target: 484, Traits: 18, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2325, Target: 484, Traits: 18, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 139, Target: 231, Traits: 18, StrLen: 44, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3480, Target: 48, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 49, Target: 238, Traits: 18, StrLen: 45, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1313, Target: 87, Traits: 18, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3546, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1094, Target: 192, Traits: 18, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 250, Traits: 18, StrLen: 34, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3480, Target: 48, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2433, Target: 118, Traits: 18, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1278, Target: 255, Traits: 18, StrLen: 35, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3274, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3546, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1123, Target: 486, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2019, Target: 264, Traits: 18, StrLen: 29, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3480, Target: 48, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 483, Traits: 18, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3502, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3457, Target: 211, Traits: 18, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3177, Target: 483, Traits: 18, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2433, Target: 208, Traits: 18, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1840, Target: 272, Traits: 18, StrLen: 30, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1346, Target: 173, Traits: 18, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3476, Target: 483, Traits: 18, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3502, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3457, Target: 211, Traits: 18, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2454, Target: 83, Traits: 18, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1123, Target: 192, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 743, Target: 280, Traits: 18, StrLen: 41, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1313, Target: 87, Traits: 18, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 192, Traits: 18, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 575, Target: 285, Traits: 18, StrLen: 42, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1313, Target: 87, Traits: 18, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3546, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1094, Target: 192, Traits: 18, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1778, Target: 297, Traits: 18, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1123, Target: 486, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1586, Target: 301, Traits: 18, StrLen: 32, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3274, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3546, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1123, Target: 486, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1732, Target: 486, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 0, Target: 486, Traits: 18, StrLen: 49, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 532, Target: 486, Traits: 18, StrLen: 43, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1242, Target: 313, Traits: 18, StrLen: 36, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1682, Target: 174, Traits: 18, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1930, Target: 152, Traits: 18, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2403, Target: 192, Traits: 18, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1057, Target: 318, Traits: 18, StrLen: 37, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1930, Target: 152, Traits: 18, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1682, Target: 174, Traits: 18, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2882, Target: 63, Traits: 18, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2351, Target: 60, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3600, Target: 483, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1870, Target: 57, Traits: 22, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2403, Target: 192, Traits: 18, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1714, Target: 192, Traits: 18, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 784, Target: 333, Traits: 18, StrLen: 41, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1682, Target: 174, Traits: 18, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 617, Target: 336, Traits: 18, StrLen: 42, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1547, Target: 168, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 169, Traits: 18, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2821, Target: 483, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3676, Target: 485, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3718, Target: 485, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 825, Target: 486, Traits: 18, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3502, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1714, Target: 192, Traits: 18, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 474, Target: 150, Traits: 18, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2377, Target: 347, Traits: 18, StrLen: 26, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1700, Target: 174, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1123, Target: 192, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2245, Target: 351, Traits: 18, StrLen: 27, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1346, Target: 173, Traits: 18, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3476, Target: 483, Traits: 18, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3502, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3457, Target: 211, Traits: 18, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2454, Target: 83, Traits: 18, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1123, Target: 192, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1732, Target: 192, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 315, Target: 24, Traits: 18, StrLen: 44, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1019, Target: 24, Traits: 18, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 403, Target: 367, Traits: 18, StrLen: 43, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3017, Target: 25, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2941, Target: 25, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2100, Target: 88, Traits: 18, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3667, Target: 199, Traits: 18, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3610, Target: 486, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 192, Traits: 18, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 183, Target: 378, Traits: 18, StrLen: 44, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 701, Target: 101, Traits: 18, StrLen: 42, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1553, Target: 381, Traits: 18, StrLen: 33, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3620, Target: 81, Traits: 18, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3433, Target: 121, Traits: 18, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3610, Target: 486, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2100, Target: 103, Traits: 18, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3667, Target: 199, Traits: 18, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3397, Target: 485, Traits: 18, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3345, Target: 485, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1417, Target: 391, Traits: 18, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1618, Target: 116, Traits: 18, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 943, Target: 394, Traits: 18, StrLen: 38, Count: 15, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1682, Target: 174, Traits: 18, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3160, Target: 66, Traits: 18, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2646, Target: 61, Traits: 18, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2218, Target: 58, Traits: 18, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3445, Target: 26, Traits: 18, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3017, Target: 25, Traits: 18, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2941, Target: 25, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2922, Target: 25, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2862, Target: 25, Traits: 18, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2100, Target: 153, Traits: 18, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3667, Target: 199, Traits: 18, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2403, Target: 192, Traits: 18, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3610, Target: 486, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 865, Target: 410, Traits: 18, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1205, Target: 166, Traits: 18, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2135, Target: 413, Traits: 18, StrLen: 28, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3524, Target: 175, Traits: 18, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3397, Target: 485, Traits: 18, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3345, Target: 485, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2100, Target: 29, Traits: 18, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3667, Target: 199, Traits: 18, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3610, Target: 486, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2048, Target: 422, Traits: 18, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2272, Target: 177, Traits: 18, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3649, Target: 120, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2529, Target: 425, Traits: 18, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3579, Target: 123, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2429, Target: 427, Traits: 18, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3773, Target: 208, Traits: 18, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 489, Target: 429, Traits: 18, StrLen: 43, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1682, Target: 174, Traits: 18, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2403, Target: 192, Traits: 18, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 198, Target: 189, Traits: 18, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3480, Target: 48, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3502, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 271, Target: 436, Traits: 18, StrLen: 44, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1547, Target: 168, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 169, Traits: 18, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2821, Target: 483, Traits: 18, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3676, Target: 485, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 825, Target: 486, Traits: 18, StrLen: 40, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 3243, Target: 443, Traits: 18, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3579, Target: 123, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3773, Target: 208, Traits: 18, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 3125, Target: 446, Traits: 18, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3579, Target: 123, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3739, Target: 206, Traits: 18, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 359, Target: 449, Traits: 18, StrLen: 44, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1313, Target: 87, Traits: 18, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1100, Target: 192, Traits: 18, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3480, Target: 48, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 94, Target: 459, Traits: 18, StrLen: 45, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1313, Target: 87, Traits: 18, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2564, Target: 80, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3546, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2947, Target: 25, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2868, Target: 25, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2979, Target: 191, Traits: 18, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1013, Target: 26, Traits: 18, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 3491, Target: 485, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1094, Target: 192, Traits: 18, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2106, Target: 471, Traits: 18, StrLen: 29, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 3469, Target: 45, Traits: 18, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1700, Target: 174, Traits: 18, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3480, Target: 48, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3502, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1123, Target: 192, Traits: 18, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1960, Target: 477, Traits: 18, StrLen: 30, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1346, Target: 173, Traits: 18, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2839, Target: 483, Traits: 18, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3502, Target: 483, Traits: 18, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 3227, Target: 485, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1732, Target: 192, Traits: 18, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2013, Target: 483, Traits: 18, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 3769, Target: 484, Traits: 18, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 3685, Target: 485, Traits: 18, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 3725, Target: 486, Traits: 18, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateMarketplaceRevenueShare",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateMarketplaceRevenueShareAllocation",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateRevenueAttribution",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetMarketplaceRevenueShare",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetMarketplaceRevenueShareAllocation",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetRevenueAttribution",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetRevenueAttributionAllocation",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetRevenueAttributionAllocationsTask",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListMarketplaceRevenueShareAllocations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListMarketplaceRevenueShares",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListRevenueAttributionAllocations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListRevenueAttributions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListTagsForResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/StartRevenueAttributionAllocationsTask",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/TagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UntagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UpdateMarketplaceRevenueShareAllocation",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UpdateRevenueAttribution",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [487]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+}
+
+var CreateMarketplaceRevenueShare = &handles[0]
+
+var CreateMarketplaceRevenueShareAllocation = &handles[1]
+
+var CreateRevenueAttribution = &handles[2]
+
+var GetMarketplaceRevenueShare = &handles[3]
+
+var GetMarketplaceRevenueShareAllocation = &handles[4]
+
+var GetRevenueAttribution = &handles[5]
+
+var GetRevenueAttributionAllocation = &handles[6]
+
+var GetRevenueAttributionAllocationsTask = &handles[7]
+
+var ListMarketplaceRevenueShareAllocations = &handles[8]
+
+var ListMarketplaceRevenueShares = &handles[9]
+
+var ListRevenueAttributionAllocations = &handles[10]
+
+var ListRevenueAttributions = &handles[11]
+
+var ListTagsForResource = &handles[12]
+
+var StartRevenueAttributionAllocationsTask = &handles[13]
+
+var TagResource = &handles[14]
+
+var UntagResource = &handles[15]
+
+var UpdateMarketplaceRevenueShareAllocation = &handles[16]
+
+var UpdateRevenueAttribution = &handles[17]
+
+var _PartnerCentralRevenueMeasurement = &handles[18]
+
+var AccessDeniedException = &handles[19]
+var AccessDeniedException_Message = &handles[20]
+var AccessDeniedException_Reason = &handles[21]
+
+var AccessDeniedExceptionReason = &handles[22]
+var AccessDeniedExceptionReason_ACCESS_DENIED = &handles[23]
+
+var _AllocationCount = &handles[24]
+
+var _AllocationEffectiveDateString = &handles[25]
+
+var AllocationStatus = &handles[26]
+var AllocationStatus_ACTIVE = &handles[27]
+var AllocationStatus_INACTIVE = &handles[28]
+
+var AttributionSortBy = &handles[29]
+var AttributionSortBy_LAST_MODIFIED_DATE = &handles[30]
+
+var AttributionSummary = &handles[31]
+var AttributionSummary_Arn = &handles[32]
+var AttributionSummary_Id = &handles[33]
+var AttributionSummary_Catalog = &handles[34]
+var AttributionSummary_Name = &handles[35]
+var AttributionSummary_TenancyModel = &handles[36]
+var AttributionSummary_MarketplaceProduct = &handles[37]
+var AttributionSummary_CreatedDate = &handles[38]
+var AttributionSummary_LastModifiedDate = &handles[39]
+var AttributionSummary_LatestRevision = &handles[40]
+var AttributionSummary_EffectiveFrom = &handles[41]
+var AttributionSummary_EffectiveUntil = &handles[42]
+var AttributionSummary_TotalActiveRevenueAttributionAllocationCount = &handles[43]
+var AttributionSummary_TotalRevenueAttributionAllocationCount = &handles[44]
+
+var CatalogName = &handles[45]
+var CatalogName_AWS = &handles[46]
+var CatalogName_SANDBOX = &handles[47]
+
+var _ClientToken = &handles[48]
+
+var ConflictException = &handles[49]
+var ConflictException_Message = &handles[50]
+var ConflictException_Reason = &handles[51]
+
+var ConflictExceptionReason = &handles[52]
+var ConflictExceptionReason_CONFLICT_CLIENT_TOKEN = &handles[53]
+var ConflictExceptionReason_CONCURRENT_MODIFICATION = &handles[54]
+var ConflictExceptionReason_RESOURCE_ALREADY_EXISTS = &handles[55]
+var ConflictExceptionReason_REVISION_MISMATCH = &handles[56]
+
+var _CustomerAwsAccountId = &handles[57]
+
+var _CustomerAwsAccountIdFilterList = &handles[58]
+var _CustomerAwsAccountIdFilterList_member = &handles[59]
+
+var _EntityIdentifier = &handles[60]
+
+var _EntityIdentifierFilterList = &handles[61]
+var _EntityIdentifierFilterList_member = &handles[62]
+
+var EntityType = &handles[63]
+var EntityType_OFFER = &handles[64]
+var EntityType_OPPORTUNITY = &handles[65]
+
+var _EntityTypeFilterList = &handles[66]
+var _EntityTypeFilterList_member = &handles[67]
+
+var FieldValidationCode = &handles[68]
+var FieldValidationCode_REQUIRED_FIELD_MISSING = &handles[69]
+var FieldValidationCode_DUPLICATE_VALUE = &handles[70]
+var FieldValidationCode_INVALID_VALUE = &handles[71]
+var FieldValidationCode_INVALID_STRING_FORMAT = &handles[72]
+var FieldValidationCode_TOO_MANY_VALUES = &handles[73]
+var FieldValidationCode_ACTION_NOT_PERMITTED = &handles[74]
+var FieldValidationCode_INVALID_ENUM_VALUE = &handles[75]
+var FieldValidationCode_INVALID_NUMBER_FORMAT = &handles[76]
+var FieldValidationCode_INVALID_STRING_LENGTH = &handles[77]
+
+var InternalServerException = &handles[78]
+var InternalServerException_Message = &handles[79]
+
+var _MarketplaceProductId = &handles[80]
+
+var _MarketplaceProductIdList = &handles[81]
+var _MarketplaceProductIdList_member = &handles[82]
+
+var MarketplaceProductSummary = &handles[83]
+var MarketplaceProductSummary_ProductId = &handles[84]
+var MarketplaceProductSummary_ProductCode = &handles[85]
+var MarketplaceProductSummary_ProductName = &handles[86]
+
+var _MarketplaceRevenueShareAllocationId = &handles[87]
+
+var MarketplaceRevenueShareAllocationSortField = &handles[88]
+var MarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM = &handles[89]
+
+var MarketplaceRevenueShareAllocationSummary = &handles[90]
+var MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId = &handles[91]
+var MarketplaceRevenueShareAllocationSummary_ProductId = &handles[92]
+var MarketplaceRevenueShareAllocationSummary_ProductName = &handles[93]
+var MarketplaceRevenueShareAllocationSummary_Arn = &handles[94]
+var MarketplaceRevenueShareAllocationSummary_EffectiveFrom = &handles[95]
+var MarketplaceRevenueShareAllocationSummary_EffectiveUntil = &handles[96]
+var MarketplaceRevenueShareAllocationSummary_RevenueSharePercent = &handles[97]
+var MarketplaceRevenueShareAllocationSummary_Status = &handles[98]
+var MarketplaceRevenueShareAllocationSummary_CreatedDate = &handles[99]
+var MarketplaceRevenueShareAllocationSummary_LastModifiedDate = &handles[100]
+
+var _MarketplaceRevenueShareAllocationSummaryList = &handles[101]
+var _MarketplaceRevenueShareAllocationSummaryList_member = &handles[102]
+
+var MarketplaceRevenueShareSortBy = &handles[103]
+var MarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE = &handles[104]
+
+var MarketplaceRevenueShareSummary = &handles[105]
+var MarketplaceRevenueShareSummary_ProductId = &handles[106]
+var MarketplaceRevenueShareSummary_Arn = &handles[107]
+var MarketplaceRevenueShareSummary_Catalog = &handles[108]
+var MarketplaceRevenueShareSummary_ProductCode = &handles[109]
+var MarketplaceRevenueShareSummary_ProductName = &handles[110]
+var MarketplaceRevenueShareSummary_CreatedDate = &handles[111]
+var MarketplaceRevenueShareSummary_LastModifiedDate = &handles[112]
+var MarketplaceRevenueShareSummary_LatestRevision = &handles[113]
+var MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount = &handles[114]
+var MarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount = &handles[115]
+
+var _MarketplaceRevenueShareSummaryList = &handles[116]
+var _MarketplaceRevenueShareSummaryList_member = &handles[117]
+
+var _MarketplaceRevenueShareTagList = &handles[118]
+var _MarketplaceRevenueShareTagList_member = &handles[119]
+
+var _NextToken = &handles[120]
+
+var _ProductCodeList = &handles[121]
+var _ProductCodeList_member = &handles[122]
+
+var _ResourceARN = &handles[123]
+
+var ResourceNotFoundException = &handles[124]
+var ResourceNotFoundException_Message = &handles[125]
+var ResourceNotFoundException_Reason = &handles[126]
+
+var ResourceNotFoundExceptionReason = &handles[127]
+var ResourceNotFoundExceptionReason_RESOURCE_NOT_FOUND = &handles[128]
+
+var RevenueAttributionAllocationAction = &handles[129]
+var RevenueAttributionAllocationAction_CREATE = &handles[130]
+var RevenueAttributionAllocationAction_UPDATE = &handles[131]
+
+var RevenueAttributionAllocationErrorCode = &handles[132]
+var RevenueAttributionAllocationErrorCode_ALLOCATION_CAP_EXCEEDED = &handles[133]
+var RevenueAttributionAllocationErrorCode_RESOURCE_NOT_FOUND = &handles[134]
+var RevenueAttributionAllocationErrorCode_IMMUTABLE_ALLOCATION = &handles[135]
+var RevenueAttributionAllocationErrorCode_ACCESS_DENIED = &handles[136]
+var RevenueAttributionAllocationErrorCode_INVALID_VALUE = &handles[137]
+var RevenueAttributionAllocationErrorCode_CONCURRENT_MODIFICATION = &handles[138]
+var RevenueAttributionAllocationErrorCode_INTERNAL_ERROR = &handles[139]
+
+var RevenueAttributionAllocationErrorDetail = &handles[140]
+var RevenueAttributionAllocationErrorDetail_RevenueAttributionAllocationId = &handles[141]
+var RevenueAttributionAllocationErrorDetail_EntityType = &handles[142]
+var RevenueAttributionAllocationErrorDetail_EntityId = &handles[143]
+var RevenueAttributionAllocationErrorDetail_CustomerAwsAccountId = &handles[144]
+var RevenueAttributionAllocationErrorDetail_EffectiveFrom = &handles[145]
+var RevenueAttributionAllocationErrorDetail_EffectiveUntil = &handles[146]
+var RevenueAttributionAllocationErrorDetail_Action = &handles[147]
+var RevenueAttributionAllocationErrorDetail_ErrorCode = &handles[148]
+var RevenueAttributionAllocationErrorDetail_ErrorMessage = &handles[149]
+
+var _RevenueAttributionAllocationErrorDetailList = &handles[150]
+var _RevenueAttributionAllocationErrorDetailList_member = &handles[151]
+
+var _RevenueAttributionAllocationId = &handles[152]
+
+var RevenueAttributionAllocationSortField = &handles[153]
+var RevenueAttributionAllocationSortField_EFFECTIVE_FROM = &handles[154]
+
+var RevenueAttributionAllocationSummary = &handles[155]
+var RevenueAttributionAllocationSummary_RevenueAttributionAllocationId = &handles[156]
+var RevenueAttributionAllocationSummary_RevenueAttributionIdentifier = &handles[157]
+var RevenueAttributionAllocationSummary_EntityType = &handles[158]
+var RevenueAttributionAllocationSummary_EntityIdentifier = &handles[159]
+var RevenueAttributionAllocationSummary_EntityName = &handles[160]
+var RevenueAttributionAllocationSummary_CustomerAwsAccountId = &handles[161]
+var RevenueAttributionAllocationSummary_RevenueSharePercent = &handles[162]
+var RevenueAttributionAllocationSummary_EffectiveFrom = &handles[163]
+var RevenueAttributionAllocationSummary_EffectiveUntil = &handles[164]
+var RevenueAttributionAllocationSummary_Status = &handles[165]
+
+var _RevenueAttributionAllocationSummaryList = &handles[166]
+var _RevenueAttributionAllocationSummaryList_member = &handles[167]
+
+var _RevenueAttributionAllocationTaskId = &handles[168]
+
+var RevenueAttributionAllocationTaskStatus = &handles[169]
+var RevenueAttributionAllocationTaskStatus_IN_PROGRESS = &handles[170]
+var RevenueAttributionAllocationTaskStatus_COMPLETE = &handles[171]
+var RevenueAttributionAllocationTaskStatus_FAILED = &handles[172]
+
+var _RevenueAttributionId = &handles[173]
+
+var _RevenueAttributionIdentifier = &handles[174]
+
+var _RevenueAttributionIdentifierList = &handles[175]
+var _RevenueAttributionIdentifierList_member = &handles[176]
+
+var _RevenueAttributionSummaries = &handles[177]
+var _RevenueAttributionSummaries_member = &handles[178]
+
+var RevenueShareAllocation = &handles[179]
+var RevenueShareAllocation_Action = &handles[180]
+var RevenueShareAllocation_RevenueAttributionAllocationId = &handles[181]
+var RevenueShareAllocation_EntityType = &handles[182]
+var RevenueShareAllocation_EntityIdentifier = &handles[183]
+var RevenueShareAllocation_CustomerAwsAccountId = &handles[184]
+var RevenueShareAllocation_RevenueSharePercent = &handles[185]
+var RevenueShareAllocation_EffectiveFrom = &handles[186]
+var RevenueShareAllocation_EffectiveUntil = &handles[187]
+var RevenueShareAllocation_Status = &handles[188]
+
+var _RevenueShareAllocationChangeList = &handles[189]
+var _RevenueShareAllocationChangeList_member = &handles[190]
+
+var _RevenueSharePercent = &handles[191]
+
+var _RevisionToken = &handles[192]
+
+var ServiceQuotaExceededException = &handles[193]
+var ServiceQuotaExceededException_Message = &handles[194]
+var ServiceQuotaExceededException_Reason = &handles[195]
+
+var ServiceQuotaExceededExceptionReason = &handles[196]
+var ServiceQuotaExceededExceptionReason_ATTRIBUTION_LIMIT_EXCEEDED = &handles[197]
+var ServiceQuotaExceededExceptionReason_TAG_LIMIT_EXCEEDED = &handles[198]
+
+var SortOrder = &handles[199]
+var SortOrder_ASCENDING = &handles[200]
+var SortOrder_DESCENDING = &handles[201]
+
+var Tag = &handles[202]
+var Tag_Key = &handles[203]
+var Tag_Value = &handles[204]
+
+var _TagKey = &handles[205]
+
+var _TagKeyList = &handles[206]
+var _TagKeyList_member = &handles[207]
+
+var _TagList = &handles[208]
+var _TagList_member = &handles[209]
+
+var _TagValue = &handles[210]
+
+var TenancyModel = &handles[211]
+var TenancyModel_MULTI_TENANT = &handles[212]
+var TenancyModel_SINGLE_TENANT = &handles[213]
+
+var ThrottlingException = &handles[214]
+var ThrottlingException_Message = &handles[215]
+var ThrottlingException_ServiceCode = &handles[216]
+var ThrottlingException_QuotaCode = &handles[217]
+
+var ValidationException = &handles[218]
+var ValidationException_Message = &handles[219]
+var ValidationException_Reason = &handles[220]
+var ValidationException_FieldList = &handles[221]
+
+var ValidationExceptionField = &handles[222]
+var ValidationExceptionField_Name = &handles[223]
+var ValidationExceptionField_Message = &handles[224]
+var ValidationExceptionField_Code = &handles[225]
+
+var _ValidationExceptionFieldList = &handles[226]
+var _ValidationExceptionFieldList_member = &handles[227]
+
+var ValidationExceptionReason = &handles[228]
+var ValidationExceptionReason_REQUEST_VALIDATION_FAILED = &handles[229]
+var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED = &handles[230]
+
+var CreateMarketplaceRevenueShareAllocationInput = &handles[231]
+var CreateMarketplaceRevenueShareAllocationInput_Catalog = &handles[232]
+var CreateMarketplaceRevenueShareAllocationInput_ProductId = &handles[233]
+var CreateMarketplaceRevenueShareAllocationInput_ClientToken = &handles[234]
+var CreateMarketplaceRevenueShareAllocationInput_EffectiveFrom = &handles[235]
+var CreateMarketplaceRevenueShareAllocationInput_EffectiveUntil = &handles[236]
+var CreateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = &handles[237]
+
+var CreateMarketplaceRevenueShareAllocationOutput = &handles[238]
+var CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = &handles[239]
+var CreateMarketplaceRevenueShareAllocationOutput_ProductId = &handles[240]
+var CreateMarketplaceRevenueShareAllocationOutput_ProductName = &handles[241]
+var CreateMarketplaceRevenueShareAllocationOutput_Arn = &handles[242]
+var CreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = &handles[243]
+var CreateMarketplaceRevenueShareAllocationOutput_EffectiveUntil = &handles[244]
+var CreateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = &handles[245]
+var CreateMarketplaceRevenueShareAllocationOutput_Status = &handles[246]
+var CreateMarketplaceRevenueShareAllocationOutput_CreatedDate = &handles[247]
+var CreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = &handles[248]
+var CreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = &handles[249]
+
+var CreateMarketplaceRevenueShareInput = &handles[250]
+var CreateMarketplaceRevenueShareInput_Catalog = &handles[251]
+var CreateMarketplaceRevenueShareInput_ClientToken = &handles[252]
+var CreateMarketplaceRevenueShareInput_ProductId = &handles[253]
+var CreateMarketplaceRevenueShareInput_Tags = &handles[254]
+
+var CreateMarketplaceRevenueShareOutput = &handles[255]
+var CreateMarketplaceRevenueShareOutput_ProductId = &handles[256]
+var CreateMarketplaceRevenueShareOutput_Arn = &handles[257]
+var CreateMarketplaceRevenueShareOutput_Catalog = &handles[258]
+var CreateMarketplaceRevenueShareOutput_ProductCode = &handles[259]
+var CreateMarketplaceRevenueShareOutput_ProductName = &handles[260]
+var CreateMarketplaceRevenueShareOutput_CreatedDate = &handles[261]
+var CreateMarketplaceRevenueShareOutput_LastModifiedDate = &handles[262]
+var CreateMarketplaceRevenueShareOutput_Revision = &handles[263]
+
+var CreateRevenueAttributionInput = &handles[264]
+var CreateRevenueAttributionInput_Catalog = &handles[265]
+var CreateRevenueAttributionInput_ClientToken = &handles[266]
+var CreateRevenueAttributionInput_Name = &handles[267]
+var CreateRevenueAttributionInput_Description = &handles[268]
+var CreateRevenueAttributionInput_TenancyModel = &handles[269]
+var CreateRevenueAttributionInput_ProductIdentifier = &handles[270]
+var CreateRevenueAttributionInput_Tags = &handles[271]
+
+var CreateRevenueAttributionOutput = &handles[272]
+var CreateRevenueAttributionOutput_Id = &handles[273]
+var CreateRevenueAttributionOutput_Arn = &handles[274]
+var CreateRevenueAttributionOutput_Name = &handles[275]
+var CreateRevenueAttributionOutput_Description = &handles[276]
+var CreateRevenueAttributionOutput_TenancyModel = &handles[277]
+var CreateRevenueAttributionOutput_MarketplaceProduct = &handles[278]
+var CreateRevenueAttributionOutput_Revision = &handles[279]
+
+var GetMarketplaceRevenueShareAllocationInput = &handles[280]
+var GetMarketplaceRevenueShareAllocationInput_Catalog = &handles[281]
+var GetMarketplaceRevenueShareAllocationInput_ProductId = &handles[282]
+var GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = &handles[283]
+var GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = &handles[284]
+
+var GetMarketplaceRevenueShareAllocationOutput = &handles[285]
+var GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = &handles[286]
+var GetMarketplaceRevenueShareAllocationOutput_ProductId = &handles[287]
+var GetMarketplaceRevenueShareAllocationOutput_ProductName = &handles[288]
+var GetMarketplaceRevenueShareAllocationOutput_Arn = &handles[289]
+var GetMarketplaceRevenueShareAllocationOutput_EffectiveFrom = &handles[290]
+var GetMarketplaceRevenueShareAllocationOutput_EffectiveUntil = &handles[291]
+var GetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = &handles[292]
+var GetMarketplaceRevenueShareAllocationOutput_Status = &handles[293]
+var GetMarketplaceRevenueShareAllocationOutput_CreatedDate = &handles[294]
+var GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate = &handles[295]
+var GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = &handles[296]
+
+var GetMarketplaceRevenueShareInput = &handles[297]
+var GetMarketplaceRevenueShareInput_Catalog = &handles[298]
+var GetMarketplaceRevenueShareInput_ProductId = &handles[299]
+var GetMarketplaceRevenueShareInput_Revision = &handles[300]
+
+var GetMarketplaceRevenueShareOutput = &handles[301]
+var GetMarketplaceRevenueShareOutput_ProductId = &handles[302]
+var GetMarketplaceRevenueShareOutput_Arn = &handles[303]
+var GetMarketplaceRevenueShareOutput_Catalog = &handles[304]
+var GetMarketplaceRevenueShareOutput_ProductCode = &handles[305]
+var GetMarketplaceRevenueShareOutput_ProductName = &handles[306]
+var GetMarketplaceRevenueShareOutput_CreatedDate = &handles[307]
+var GetMarketplaceRevenueShareOutput_LastModifiedDate = &handles[308]
+var GetMarketplaceRevenueShareOutput_Revision = &handles[309]
+var GetMarketplaceRevenueShareOutput_LatestRevision = &handles[310]
+var GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount = &handles[311]
+var GetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount = &handles[312]
+
+var GetRevenueAttributionAllocationInput = &handles[313]
+var GetRevenueAttributionAllocationInput_Catalog = &handles[314]
+var GetRevenueAttributionAllocationInput_RevenueAttributionIdentifier = &handles[315]
+var GetRevenueAttributionAllocationInput_RevenueAttributionAllocationId = &handles[316]
+var GetRevenueAttributionAllocationInput_RevenueAttributionRevision = &handles[317]
+
+var GetRevenueAttributionAllocationOutput = &handles[318]
+var GetRevenueAttributionAllocationOutput_RevenueAttributionAllocationId = &handles[319]
+var GetRevenueAttributionAllocationOutput_RevenueAttributionIdentifier = &handles[320]
+var GetRevenueAttributionAllocationOutput_EntityType = &handles[321]
+var GetRevenueAttributionAllocationOutput_EntityIdentifier = &handles[322]
+var GetRevenueAttributionAllocationOutput_EntityName = &handles[323]
+var GetRevenueAttributionAllocationOutput_CustomerAwsAccountId = &handles[324]
+var GetRevenueAttributionAllocationOutput_RevenueSharePercent = &handles[325]
+var GetRevenueAttributionAllocationOutput_EffectiveFrom = &handles[326]
+var GetRevenueAttributionAllocationOutput_EffectiveUntil = &handles[327]
+var GetRevenueAttributionAllocationOutput_Status = &handles[328]
+var GetRevenueAttributionAllocationOutput_CreatedDate = &handles[329]
+var GetRevenueAttributionAllocationOutput_LastModifiedDate = &handles[330]
+var GetRevenueAttributionAllocationOutput_RevenueAttributionRevision = &handles[331]
+var GetRevenueAttributionAllocationOutput_RevenueAttributionLatestRevision = &handles[332]
+
+var GetRevenueAttributionAllocationsTaskInput = &handles[333]
+var GetRevenueAttributionAllocationsTaskInput_Catalog = &handles[334]
+var GetRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier = &handles[335]
+
+var GetRevenueAttributionAllocationsTaskOutput = &handles[336]
+var GetRevenueAttributionAllocationsTaskOutput_TaskId = &handles[337]
+var GetRevenueAttributionAllocationsTaskOutput_Status = &handles[338]
+var GetRevenueAttributionAllocationsTaskOutput_Catalog = &handles[339]
+var GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn = &handles[340]
+var GetRevenueAttributionAllocationsTaskOutput_StartedAt = &handles[341]
+var GetRevenueAttributionAllocationsTaskOutput_EndedAt = &handles[342]
+var GetRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords = &handles[343]
+var GetRevenueAttributionAllocationsTaskOutput_Description = &handles[344]
+var GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionLatestRevision = &handles[345]
+var GetRevenueAttributionAllocationsTaskOutput_ErrorDetailList = &handles[346]
+
+var GetRevenueAttributionInput = &handles[347]
+var GetRevenueAttributionInput_Catalog = &handles[348]
+var GetRevenueAttributionInput_Identifier = &handles[349]
+var GetRevenueAttributionInput_Revision = &handles[350]
+
+var GetRevenueAttributionOutput = &handles[351]
+var GetRevenueAttributionOutput_Arn = &handles[352]
+var GetRevenueAttributionOutput_Id = &handles[353]
+var GetRevenueAttributionOutput_Catalog = &handles[354]
+var GetRevenueAttributionOutput_Name = &handles[355]
+var GetRevenueAttributionOutput_Description = &handles[356]
+var GetRevenueAttributionOutput_TenancyModel = &handles[357]
+var GetRevenueAttributionOutput_MarketplaceProduct = &handles[358]
+var GetRevenueAttributionOutput_CreatedDate = &handles[359]
+var GetRevenueAttributionOutput_LastModifiedDate = &handles[360]
+var GetRevenueAttributionOutput_Revision = &handles[361]
+var GetRevenueAttributionOutput_LatestRevision = &handles[362]
+var GetRevenueAttributionOutput_EffectiveFrom = &handles[363]
+var GetRevenueAttributionOutput_EffectiveUntil = &handles[364]
+var GetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount = &handles[365]
+var GetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount = &handles[366]
+
+var ListMarketplaceRevenueShareAllocationsInput = &handles[367]
+var ListMarketplaceRevenueShareAllocationsInput_Catalog = &handles[368]
+var ListMarketplaceRevenueShareAllocationsInput_ProductId = &handles[369]
+var ListMarketplaceRevenueShareAllocationsInput_Status = &handles[370]
+var ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom = &handles[371]
+var ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom = &handles[372]
+var ListMarketplaceRevenueShareAllocationsInput_SortBy = &handles[373]
+var ListMarketplaceRevenueShareAllocationsInput_SortOrder = &handles[374]
+var ListMarketplaceRevenueShareAllocationsInput_MaxResults = &handles[375]
+var ListMarketplaceRevenueShareAllocationsInput_NextToken = &handles[376]
+var ListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareRevision = &handles[377]
+
+var ListMarketplaceRevenueShareAllocationsOutput = &handles[378]
+var ListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries = &handles[379]
+var ListMarketplaceRevenueShareAllocationsOutput_NextToken = &handles[380]
+
+var ListMarketplaceRevenueSharesInput = &handles[381]
+var ListMarketplaceRevenueSharesInput_Catalog = &handles[382]
+var ListMarketplaceRevenueSharesInput_ProductIds = &handles[383]
+var ListMarketplaceRevenueSharesInput_ProductCodes = &handles[384]
+var ListMarketplaceRevenueSharesInput_MaxResults = &handles[385]
+var ListMarketplaceRevenueSharesInput_NextToken = &handles[386]
+var ListMarketplaceRevenueSharesInput_SortBy = &handles[387]
+var ListMarketplaceRevenueSharesInput_SortOrder = &handles[388]
+var ListMarketplaceRevenueSharesInput_CreatedAfter = &handles[389]
+var ListMarketplaceRevenueSharesInput_CreatedBefore = &handles[390]
+
+var ListMarketplaceRevenueSharesOutput = &handles[391]
+var ListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries = &handles[392]
+var ListMarketplaceRevenueSharesOutput_NextToken = &handles[393]
+
+var ListRevenueAttributionAllocationsInput = &handles[394]
+var ListRevenueAttributionAllocationsInput_Catalog = &handles[395]
+var ListRevenueAttributionAllocationsInput_RevenueAttributionIdentifier = &handles[396]
+var ListRevenueAttributionAllocationsInput_EntityTypeFilters = &handles[397]
+var ListRevenueAttributionAllocationsInput_EntityIdentifierFilters = &handles[398]
+var ListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters = &handles[399]
+var ListRevenueAttributionAllocationsInput_StatusFilter = &handles[400]
+var ListRevenueAttributionAllocationsInput_AfterEffectiveFrom = &handles[401]
+var ListRevenueAttributionAllocationsInput_BeforeEffectiveFrom = &handles[402]
+var ListRevenueAttributionAllocationsInput_AfterEffectiveUntil = &handles[403]
+var ListRevenueAttributionAllocationsInput_BeforeEffectiveUntil = &handles[404]
+var ListRevenueAttributionAllocationsInput_SortBy = &handles[405]
+var ListRevenueAttributionAllocationsInput_SortOrder = &handles[406]
+var ListRevenueAttributionAllocationsInput_RevenueAttributionRevision = &handles[407]
+var ListRevenueAttributionAllocationsInput_MaxResults = &handles[408]
+var ListRevenueAttributionAllocationsInput_NextToken = &handles[409]
+
+var ListRevenueAttributionAllocationsOutput = &handles[410]
+var ListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries = &handles[411]
+var ListRevenueAttributionAllocationsOutput_NextToken = &handles[412]
+
+var ListRevenueAttributionsInput = &handles[413]
+var ListRevenueAttributionsInput_Catalog = &handles[414]
+var ListRevenueAttributionsInput_Identifiers = &handles[415]
+var ListRevenueAttributionsInput_CreatedAfter = &handles[416]
+var ListRevenueAttributionsInput_CreatedBefore = &handles[417]
+var ListRevenueAttributionsInput_SortBy = &handles[418]
+var ListRevenueAttributionsInput_SortOrder = &handles[419]
+var ListRevenueAttributionsInput_MaxResults = &handles[420]
+var ListRevenueAttributionsInput_NextToken = &handles[421]
+
+var ListRevenueAttributionsOutput = &handles[422]
+var ListRevenueAttributionsOutput_RevenueAttributionSummaries = &handles[423]
+var ListRevenueAttributionsOutput_NextToken = &handles[424]
+
+var ListTagsForResourceInput = &handles[425]
+var ListTagsForResourceInput_resourceArn = &handles[426]
+
+var ListTagsForResourceOutput = &handles[427]
+var ListTagsForResourceOutput_tags = &handles[428]
+
+var StartRevenueAttributionAllocationsTaskInput = &handles[429]
+var StartRevenueAttributionAllocationsTaskInput_Catalog = &handles[430]
+var StartRevenueAttributionAllocationsTaskInput_RevenueAttributionIdentifier = &handles[431]
+var StartRevenueAttributionAllocationsTaskInput_RevenueAttributionRevision = &handles[432]
+var StartRevenueAttributionAllocationsTaskInput_RevenueShareAllocations = &handles[433]
+var StartRevenueAttributionAllocationsTaskInput_ClientToken = &handles[434]
+var StartRevenueAttributionAllocationsTaskInput_Description = &handles[435]
+
+var StartRevenueAttributionAllocationsTaskOutput = &handles[436]
+var StartRevenueAttributionAllocationsTaskOutput_TaskId = &handles[437]
+var StartRevenueAttributionAllocationsTaskOutput_Status = &handles[438]
+var StartRevenueAttributionAllocationsTaskOutput_Catalog = &handles[439]
+var StartRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn = &handles[440]
+var StartRevenueAttributionAllocationsTaskOutput_StartedAt = &handles[441]
+var StartRevenueAttributionAllocationsTaskOutput_TotalRevenueAttributionAllocationRecords = &handles[442]
+
+var TagResourceInput = &handles[443]
+var TagResourceInput_resourceArn = &handles[444]
+var TagResourceInput_tags = &handles[445]
+
+var UntagResourceInput = &handles[446]
+var UntagResourceInput_resourceArn = &handles[447]
+var UntagResourceInput_tagKeys = &handles[448]
+
+var UpdateMarketplaceRevenueShareAllocationInput = &handles[449]
+var UpdateMarketplaceRevenueShareAllocationInput_Catalog = &handles[450]
+var UpdateMarketplaceRevenueShareAllocationInput_ProductId = &handles[451]
+var UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = &handles[452]
+var UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = &handles[453]
+var UpdateMarketplaceRevenueShareAllocationInput_ClientToken = &handles[454]
+var UpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom = &handles[455]
+var UpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil = &handles[456]
+var UpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = &handles[457]
+var UpdateMarketplaceRevenueShareAllocationInput_Status = &handles[458]
+
+var UpdateMarketplaceRevenueShareAllocationOutput = &handles[459]
+var UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = &handles[460]
+var UpdateMarketplaceRevenueShareAllocationOutput_ProductId = &handles[461]
+var UpdateMarketplaceRevenueShareAllocationOutput_ProductName = &handles[462]
+var UpdateMarketplaceRevenueShareAllocationOutput_Arn = &handles[463]
+var UpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = &handles[464]
+var UpdateMarketplaceRevenueShareAllocationOutput_EffectiveUntil = &handles[465]
+var UpdateMarketplaceRevenueShareAllocationOutput_RevenueSharePercent = &handles[466]
+var UpdateMarketplaceRevenueShareAllocationOutput_Status = &handles[467]
+var UpdateMarketplaceRevenueShareAllocationOutput_CreatedDate = &handles[468]
+var UpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = &handles[469]
+var UpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = &handles[470]
+
+var UpdateRevenueAttributionInput = &handles[471]
+var UpdateRevenueAttributionInput_Catalog = &handles[472]
+var UpdateRevenueAttributionInput_Identifier = &handles[473]
+var UpdateRevenueAttributionInput_ClientToken = &handles[474]
+var UpdateRevenueAttributionInput_Description = &handles[475]
+var UpdateRevenueAttributionInput_Revision = &handles[476]
+
+var UpdateRevenueAttributionOutput = &handles[477]
+var UpdateRevenueAttributionOutput_Id = &handles[478]
+var UpdateRevenueAttributionOutput_Arn = &handles[479]
+var UpdateRevenueAttributionOutput_Description = &handles[480]
+var UpdateRevenueAttributionOutput_LastModifiedDate = &handles[481]
+var UpdateRevenueAttributionOutput_LatestRevision = &handles[482]
+
+var PartnerCentralRevenueMeasurement = &smithy.ServiceSchema{Schema: &handles[18], Version: "2022-07-26"}

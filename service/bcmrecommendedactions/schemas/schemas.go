@@ -4,444 +4,385 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ListRecommendedActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ListRecommendedActions",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSBillingAndCostManagementRecommendedActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "AWSBillingAndCostManagementRecommendedActions",
-}, smithy.ShapeTypeService, 0)
-
-var AWSBillingAndCostManagementRecommendedActions = smithy.NewServiceSchema(_AWSBillingAndCostManagementRecommendedActions, "2024-11-14")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsAccessDenied",
-		StatusCode: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var ActionFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ActionFilter",
-}, smithy.ShapeTypeStructure, 3)
-var ActionFilter_key *smithy.Schema
-
-var ActionFilter_matchOption *smithy.Schema
-
-var ActionFilter_values *smithy.Schema
-
-var _ActionFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ActionFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ActionFilterList_member *smithy.Schema
-
-var ActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ActionType",
-}, smithy.ShapeTypeEnum, 20)
-var ActionType_ADD_ALTERNATE_BILLING_CONTACT *smithy.Schema
-
-var ActionType_CREATE_ANOMALY_MONITOR *smithy.Schema
-
-var ActionType_CREATE_BUDGET *smithy.Schema
-
-var ActionType_ENABLE_COST_OPTIMIZATION_HUB *smithy.Schema
-
-var ActionType_MIGRATE_TO_GRANULAR_PERMISSIONS *smithy.Schema
-
-var ActionType_PAYMENTS_DUE *smithy.Schema
-
-var ActionType_PAYMENTS_PAST_DUE *smithy.Schema
-
-var ActionType_REVIEW_ANOMALIES *smithy.Schema
-
-var ActionType_REVIEW_BUDGET_ALERTS *smithy.Schema
-
-var ActionType_REVIEW_BUDGETS_EXCEEDED *smithy.Schema
-
-var ActionType_REVIEW_EXPIRING_RI *smithy.Schema
-
-var ActionType_REVIEW_EXPIRING_SP *smithy.Schema
-
-var ActionType_REVIEW_FREETIER_USAGE_ALERTS *smithy.Schema
-
-var ActionType_REVIEW_FREETIER_CREDITS_REMAINING *smithy.Schema
-
-var ActionType_REVIEW_FREETIER_DAYS_REMAINING *smithy.Schema
-
-var ActionType_REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS *smithy.Schema
-
-var ActionType_UPDATE_EXPIRED_PAYMENT_METHOD *smithy.Schema
-
-var ActionType_UPDATE_INVALID_PAYMENT_METHOD *smithy.Schema
-
-var ActionType_UPDATE_TAX_EXEMPTION_CERTIFICATE *smithy.Schema
-
-var ActionType_UPDATE_TAX_REGISTRATION_NUMBER *smithy.Schema
-
-var _Context = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "Context",
-}, smithy.ShapeTypeMap, 2)
-var _Context_key *smithy.Schema
-
-var _Context_value *smithy.Schema
-
-var Feature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "Feature",
-}, smithy.ShapeTypeEnum, 10)
-var Feature_ACCOUNT *smithy.Schema
-
-var Feature_BUDGETS *smithy.Schema
-
-var Feature_COST_ANOMALY_DETECTION *smithy.Schema
-
-var Feature_COST_OPTIMIZATION_HUB *smithy.Schema
-
-var Feature_FREE_TIER *smithy.Schema
-
-var Feature_IAM *smithy.Schema
-
-var Feature_PAYMENTS *smithy.Schema
-
-var Feature_RESERVATIONS *smithy.Schema
-
-var Feature_SAVINGS_PLANS *smithy.Schema
-
-var Feature_TAX_SETTINGS *smithy.Schema
-
-var FilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "FilterName",
-}, smithy.ShapeTypeEnum, 3)
-var FilterName_FEATURE *smithy.Schema
-
-var FilterName_SEVERITY *smithy.Schema
-
-var FilterName_TYPE *smithy.Schema
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsInternalServer",
-		StatusCode: 500})
-var InternalServerException_message *smithy.Schema
-
-var MatchOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "MatchOption",
-}, smithy.ShapeTypeEnum, 2)
-var MatchOption_EQUALS *smithy.Schema
-
-var MatchOption_NOT_EQUALS *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "NextStep",
-}, smithy.ShapeTypeString, 0)
-
-var _NextSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "NextSteps",
-}, smithy.ShapeTypeList, 1)
-var _NextSteps_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var RecommendedAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "RecommendedAction",
-}, smithy.ShapeTypeStructure, 8)
-var RecommendedAction_id *smithy.Schema
-
-var RecommendedAction_type *smithy.Schema
-
-var RecommendedAction_accountId *smithy.Schema
-
-var RecommendedAction_severity *smithy.Schema
-
-var RecommendedAction_feature *smithy.Schema
-
-var RecommendedAction_context *smithy.Schema
-
-var RecommendedAction_nextSteps *smithy.Schema
-
-var RecommendedAction_lastUpdatedTimeStamp *smithy.Schema
-
-var _RecommendedActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "RecommendedActions",
-}, smithy.ShapeTypeList, 1)
-var _RecommendedActions_member *smithy.Schema
-
-var RequestFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "RequestFilter",
-}, smithy.ShapeTypeStructure, 1)
-var RequestFilter_actions *smithy.Schema
-
-var Severity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "Severity",
-}, smithy.ShapeTypeEnum, 3)
-var Severity_INFO *smithy.Schema
-
-var Severity_WARNING *smithy.Schema
-
-var Severity_CRITICAL *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsThrottling",
-		StatusCode: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsValidation",
-		StatusCode: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ListRecommendedActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ListRecommendedActionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRecommendedActionsRequest_filter *smithy.Schema
-
-var ListRecommendedActionsRequest_maxResults *smithy.Schema
-
-var ListRecommendedActionsRequest_nextToken *smithy.Schema
-
-var ListRecommendedActionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmrecommendedactions",
-	Name:      "ListRecommendedActionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecommendedActionsResponse_recommendedActions *smithy.Schema
-
-var ListRecommendedActionsResponse_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	FilterName_FEATURE = FilterName.AddMember("FEATURE", smithyprelude.Unit)
-
-	FilterName_SEVERITY = FilterName.AddMember("SEVERITY", smithyprelude.Unit)
-
-	FilterName_TYPE = FilterName.AddMember("TYPE", smithyprelude.Unit)
-
-	MatchOption_EQUALS = MatchOption.AddMember("EQUALS", smithyprelude.Unit)
-
-	MatchOption_NOT_EQUALS = MatchOption.AddMember("NOT_EQUALS", smithyprelude.Unit)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
-
-	ActionFilter_key = ActionFilter.AddMember("key", FilterName)
-
-	ActionFilter_matchOption = ActionFilter.AddMember("matchOption", MatchOption)
-
-	ActionFilter_values = ActionFilter.AddMember("values", _FilterValues)
-
-	_ActionFilterList_member = _ActionFilterList.AddMember("member", ActionFilter)
-
-	ActionType_ADD_ALTERNATE_BILLING_CONTACT = ActionType.AddMember("ADD_ALTERNATE_BILLING_CONTACT", smithyprelude.Unit)
-
-	ActionType_CREATE_ANOMALY_MONITOR = ActionType.AddMember("CREATE_ANOMALY_MONITOR", smithyprelude.Unit)
-
-	ActionType_CREATE_BUDGET = ActionType.AddMember("CREATE_BUDGET", smithyprelude.Unit)
-
-	ActionType_ENABLE_COST_OPTIMIZATION_HUB = ActionType.AddMember("ENABLE_COST_OPTIMIZATION_HUB", smithyprelude.Unit)
-
-	ActionType_MIGRATE_TO_GRANULAR_PERMISSIONS = ActionType.AddMember("MIGRATE_TO_GRANULAR_PERMISSIONS", smithyprelude.Unit)
-
-	ActionType_PAYMENTS_DUE = ActionType.AddMember("PAYMENTS_DUE", smithyprelude.Unit)
-
-	ActionType_PAYMENTS_PAST_DUE = ActionType.AddMember("PAYMENTS_PAST_DUE", smithyprelude.Unit)
-
-	ActionType_REVIEW_ANOMALIES = ActionType.AddMember("REVIEW_ANOMALIES", smithyprelude.Unit)
-
-	ActionType_REVIEW_BUDGET_ALERTS = ActionType.AddMember("REVIEW_BUDGET_ALERTS", smithyprelude.Unit)
-
-	ActionType_REVIEW_BUDGETS_EXCEEDED = ActionType.AddMember("REVIEW_BUDGETS_EXCEEDED", smithyprelude.Unit)
-
-	ActionType_REVIEW_EXPIRING_RI = ActionType.AddMember("REVIEW_EXPIRING_RI", smithyprelude.Unit)
-
-	ActionType_REVIEW_EXPIRING_SP = ActionType.AddMember("REVIEW_EXPIRING_SP", smithyprelude.Unit)
-
-	ActionType_REVIEW_FREETIER_USAGE_ALERTS = ActionType.AddMember("REVIEW_FREETIER_USAGE_ALERTS", smithyprelude.Unit)
-
-	ActionType_REVIEW_FREETIER_CREDITS_REMAINING = ActionType.AddMember("REVIEW_FREETIER_CREDITS_REMAINING", smithyprelude.Unit)
-
-	ActionType_REVIEW_FREETIER_DAYS_REMAINING = ActionType.AddMember("REVIEW_FREETIER_DAYS_REMAINING", smithyprelude.Unit)
-
-	ActionType_REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS = ActionType.AddMember("REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS", smithyprelude.Unit)
-
-	ActionType_UPDATE_EXPIRED_PAYMENT_METHOD = ActionType.AddMember("UPDATE_EXPIRED_PAYMENT_METHOD", smithyprelude.Unit)
-
-	ActionType_UPDATE_INVALID_PAYMENT_METHOD = ActionType.AddMember("UPDATE_INVALID_PAYMENT_METHOD", smithyprelude.Unit)
-
-	ActionType_UPDATE_TAX_EXEMPTION_CERTIFICATE = ActionType.AddMember("UPDATE_TAX_EXEMPTION_CERTIFICATE", smithyprelude.Unit)
-
-	ActionType_UPDATE_TAX_REGISTRATION_NUMBER = ActionType.AddMember("UPDATE_TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
-
-	_Context_key = _Context.AddMember("key", smithyprelude.String)
-
-	_Context_value = _Context.AddMember("value", smithyprelude.String)
-
-	Feature_ACCOUNT = Feature.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	Feature_BUDGETS = Feature.AddMember("BUDGETS", smithyprelude.Unit)
-
-	Feature_COST_ANOMALY_DETECTION = Feature.AddMember("COST_ANOMALY_DETECTION", smithyprelude.Unit)
-
-	Feature_COST_OPTIMIZATION_HUB = Feature.AddMember("COST_OPTIMIZATION_HUB", smithyprelude.Unit)
-
-	Feature_FREE_TIER = Feature.AddMember("FREE_TIER", smithyprelude.Unit)
-
-	Feature_IAM = Feature.AddMember("IAM", smithyprelude.Unit)
-
-	Feature_PAYMENTS = Feature.AddMember("PAYMENTS", smithyprelude.Unit)
-
-	Feature_RESERVATIONS = Feature.AddMember("RESERVATIONS", smithyprelude.Unit)
-
-	Feature_SAVINGS_PLANS = Feature.AddMember("SAVINGS_PLANS", smithyprelude.Unit)
-
-	Feature_TAX_SETTINGS = Feature.AddMember("TAX_SETTINGS", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	_NextSteps_member = _NextSteps.AddMember("member", _NextStep)
-
-	Severity_INFO = Severity.AddMember("INFO", smithyprelude.Unit)
-
-	Severity_WARNING = Severity.AddMember("WARNING", smithyprelude.Unit)
-
-	Severity_CRITICAL = Severity.AddMember("CRITICAL", smithyprelude.Unit)
-
-	RecommendedAction_id = RecommendedAction.AddMember("id", smithyprelude.String)
-
-	RecommendedAction_type = RecommendedAction.AddMember("type", ActionType)
-
-	RecommendedAction_accountId = RecommendedAction.AddMember("accountId", _AccountId)
-
-	RecommendedAction_severity = RecommendedAction.AddMember("severity", Severity)
-
-	RecommendedAction_feature = RecommendedAction.AddMember("feature", Feature)
-
-	RecommendedAction_context = RecommendedAction.AddMember("context", _Context)
-
-	RecommendedAction_nextSteps = RecommendedAction.AddMember("nextSteps", _NextSteps)
-
-	RecommendedAction_lastUpdatedTimeStamp = RecommendedAction.AddMember("lastUpdatedTimeStamp", smithyprelude.String)
-
-	_RecommendedActions_member = _RecommendedActions.AddMember("member", RecommendedAction)
-
-	RequestFilter_actions = RequestFilter.AddMember("actions", _ActionFilterList)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	ListRecommendedActionsRequest_filter = ListRecommendedActionsRequest.AddMember("filter", RequestFilter)
-
-	ListRecommendedActionsRequest_maxResults = ListRecommendedActionsRequest.AddMember("maxResults", _MaxResults)
-
-	ListRecommendedActionsRequest_nextToken = ListRecommendedActionsRequest.AddMember("nextToken", _NextToken)
-
-	ListRecommendedActionsResponse_recommendedActions = ListRecommendedActionsResponse.AddMember("recommendedActions", _RecommendedActions)
-
-	ListRecommendedActionsResponse_nextToken = ListRecommendedActionsResponse.AddMember("nextToken", _NextToken)
-
+const blob = "" +
+	"AWSBillingAndCostManagementRecommendedActionsREVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONSREVIEW_FREETI" +
+	"ER_CREDITS_REMAININGUPDATE_TAX_EXEMPTION_CERTIFICATEMIGRATE_TO_GRANULAR_PERMISSIONSListRecommendedAc" +
+	"tionsResponseREVIEW_FREETIER_DAYS_REMAININGUPDATE_TAX_REGISTRATION_NUMBERADD_ALTERNATE_BILLING_CONTA" +
+	"CTListRecommendedActionsRequestUPDATE_EXPIRED_PAYMENT_METHODUPDATE_INVALID_PAYMENT_METHODENABLE_COST" +
+	"_OPTIMIZATION_HUBREVIEW_FREETIER_USAGE_ALERTSValidationExceptionFieldListValidationExceptionReasonFI" +
+	"ELD_VALIDATION_FAILEDInternalServerExceptionREVIEW_BUDGETS_EXCEEDEDCOST_ANOMALY_DETECTIONCREATE_ANOM" +
+	"ALY_MONITORAccessDeniedExceptionREVIEW_BUDGET_ALERTSlastUpdatedTimeStampThrottlingExceptionREVIEW_EX" +
+	"PIRING_RIREVIEW_EXPIRING_SPrecommendedActionsPAYMENTS_PAST_DUEUNKNOWN_OPERATIONActionFilterListREVIE" +
+	"W_ANOMALIESCREATE_BUDGETRequestFilterSAVINGS_PLANSCANNOT_PARSEFilterValuesPAYMENTS_DUERESERVATIONSTA" +
+	"X_SETTINGSMatchOptionmatchOptionActionTypeFilterNameMaxResultsNOT_EQUALSmaxResultsAccountIdFREE_TIER" +
+	"NextStepsNextTokenaccountIdfieldListnextStepsnextTokenCRITICALSEVERITYSeverityseverityACCOUNTContext" +
+	"FEATUREFeatureWARNINGactionscontextfeaturemessageStringfiltermemberreasonvaluesOTHERINFOTYPEUnitname" +
+	"typeIAMkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.bcmrecommendedactions", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 183, Target: 0, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 0, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 611, Target: 2, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1142, Target: 103, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 982, Target: 4, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 779, Target: 5, Traits: 0, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1207, Target: 46, Traits: 0, StrLen: 3, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 921, Target: 55, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1173, Target: 51, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 779, Target: 9, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1161, Target: 5, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 932, Target: 11, Traits: 0, StrLen: 10, Count: 20, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 273, Target: 104, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 589, Target: 104, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 811, Target: 104, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 389, Target: 104, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 152, Target: 104, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 874, Target: 104, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 745, Target: 104, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 795, Target: 104, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 632, Target: 104, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 544, Target: 104, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 691, Target: 104, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 709, Target: 104, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 417, Target: 104, Traits: 0, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 87, Target: 104, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 213, Target: 104, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 45, Target: 104, Traits: 0, StrLen: 42, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 331, Target: 104, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 360, Target: 104, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 120, Target: 104, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 243, Target: 104, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1093, Target: 32, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1207, Target: 103, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1173, Target: 103, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1107, Target: 35, Traits: 0, StrLen: 7, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1086, Target: 104, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 551, Target: 104, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 567, Target: 104, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 396, Target: 104, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 991, Target: 104, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1204, Target: 104, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 745, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 886, Target: 104, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 837, Target: 104, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 898, Target: 104, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 942, Target: 46, Traits: 0, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1100, Target: 104, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1062, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1188, Target: 104, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 862, Target: 50, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 862, Target: 51, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1161, Target: 50, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 521, Target: 53, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1142, Target: 103, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 910, Target: 55, Traits: 0, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 966, Target: 104, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 962, Target: 104, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 952, Target: 58, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1000, Target: 59, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1000, Target: 60, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1161, Target: 59, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1009, Target: 62, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 27, Target: 63, Traits: 0, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 448, Target: 103, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1200, Target: 11, Traits: 0, StrLen: 4, Count: 20, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1018, Target: 4, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1078, Target: 76, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1135, Target: 35, Traits: 0, StrLen: 7, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1128, Target: 32, Traits: 0, StrLen: 7, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1036, Target: 60, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 652, Target: 103, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 27, Target: 72, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1161, Target: 63, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 824, Target: 74, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1121, Target: 9, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1070, Target: 76, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1184, Target: 104, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1114, Target: 104, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1054, Target: 104, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 672, Target: 80, Traits: 3, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1142, Target: 103, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 445, Target: 82, Traits: 4, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1142, Target: 103, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1167, Target: 91, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1027, Target: 89, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 445, Target: 86, Traits: 0, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1196, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1142, Target: 103, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 445, Target: 89, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1161, Target: 86, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 473, Target: 91, Traits: 0, StrLen: 25, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 762, Target: 104, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 850, Target: 104, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 498, Target: 104, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1179, Target: 104, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 302, Target: 96, Traits: 0, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1155, Target: 74, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 972, Target: 58, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1045, Target: 62, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 183, Target: 100, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 727, Target: 72, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1045, Target: 62, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 103, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1192, Target: 104, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsAccessDenied",
+			StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsInternalServer",
+			StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsThrottling",
+			StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "BCMRecommendedActionsValidation",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+	},
 }
+
+var handles = [105]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+}
+
+var ListRecommendedActions = &handles[0]
+
+var _AWSBillingAndCostManagementRecommendedActions = &handles[1]
+
+var AccessDeniedException = &handles[2]
+var AccessDeniedException_message = &handles[3]
+
+var _AccountId = &handles[4]
+
+var ActionFilter = &handles[5]
+var ActionFilter_key = &handles[6]
+var ActionFilter_matchOption = &handles[7]
+var ActionFilter_values = &handles[8]
+
+var _ActionFilterList = &handles[9]
+var _ActionFilterList_member = &handles[10]
+
+var ActionType = &handles[11]
+var ActionType_ADD_ALTERNATE_BILLING_CONTACT = &handles[12]
+var ActionType_CREATE_ANOMALY_MONITOR = &handles[13]
+var ActionType_CREATE_BUDGET = &handles[14]
+var ActionType_ENABLE_COST_OPTIMIZATION_HUB = &handles[15]
+var ActionType_MIGRATE_TO_GRANULAR_PERMISSIONS = &handles[16]
+var ActionType_PAYMENTS_DUE = &handles[17]
+var ActionType_PAYMENTS_PAST_DUE = &handles[18]
+var ActionType_REVIEW_ANOMALIES = &handles[19]
+var ActionType_REVIEW_BUDGET_ALERTS = &handles[20]
+var ActionType_REVIEW_BUDGETS_EXCEEDED = &handles[21]
+var ActionType_REVIEW_EXPIRING_RI = &handles[22]
+var ActionType_REVIEW_EXPIRING_SP = &handles[23]
+var ActionType_REVIEW_FREETIER_USAGE_ALERTS = &handles[24]
+var ActionType_REVIEW_FREETIER_CREDITS_REMAINING = &handles[25]
+var ActionType_REVIEW_FREETIER_DAYS_REMAINING = &handles[26]
+var ActionType_REVIEW_SAVINGS_OPPORTUNITY_RECOMMENDATIONS = &handles[27]
+var ActionType_UPDATE_EXPIRED_PAYMENT_METHOD = &handles[28]
+var ActionType_UPDATE_INVALID_PAYMENT_METHOD = &handles[29]
+var ActionType_UPDATE_TAX_EXEMPTION_CERTIFICATE = &handles[30]
+var ActionType_UPDATE_TAX_REGISTRATION_NUMBER = &handles[31]
+
+var _Context = &handles[32]
+var _Context_key = &handles[33]
+var _Context_value = &handles[34]
+
+var Feature = &handles[35]
+var Feature_ACCOUNT = &handles[36]
+var Feature_BUDGETS = &handles[37]
+var Feature_COST_ANOMALY_DETECTION = &handles[38]
+var Feature_COST_OPTIMIZATION_HUB = &handles[39]
+var Feature_FREE_TIER = &handles[40]
+var Feature_IAM = &handles[41]
+var Feature_PAYMENTS = &handles[42]
+var Feature_RESERVATIONS = &handles[43]
+var Feature_SAVINGS_PLANS = &handles[44]
+var Feature_TAX_SETTINGS = &handles[45]
+
+var FilterName = &handles[46]
+var FilterName_FEATURE = &handles[47]
+var FilterName_SEVERITY = &handles[48]
+var FilterName_TYPE = &handles[49]
+
+var _FilterValue = &handles[50]
+
+var _FilterValues = &handles[51]
+var _FilterValues_member = &handles[52]
+
+var InternalServerException = &handles[53]
+var InternalServerException_message = &handles[54]
+
+var MatchOption = &handles[55]
+var MatchOption_EQUALS = &handles[56]
+var MatchOption_NOT_EQUALS = &handles[57]
+
+var _MaxResults = &handles[58]
+
+var _NextStep = &handles[59]
+
+var _NextSteps = &handles[60]
+var _NextSteps_member = &handles[61]
+
+var _NextToken = &handles[62]
+
+var RecommendedAction = &handles[63]
+var RecommendedAction_id = &handles[64]
+var RecommendedAction_type = &handles[65]
+var RecommendedAction_accountId = &handles[66]
+var RecommendedAction_severity = &handles[67]
+var RecommendedAction_feature = &handles[68]
+var RecommendedAction_context = &handles[69]
+var RecommendedAction_nextSteps = &handles[70]
+var RecommendedAction_lastUpdatedTimeStamp = &handles[71]
+
+var _RecommendedActions = &handles[72]
+var _RecommendedActions_member = &handles[73]
+
+var RequestFilter = &handles[74]
+var RequestFilter_actions = &handles[75]
+
+var Severity = &handles[76]
+var Severity_INFO = &handles[77]
+var Severity_WARNING = &handles[78]
+var Severity_CRITICAL = &handles[79]
+
+var ThrottlingException = &handles[80]
+var ThrottlingException_message = &handles[81]
+
+var ValidationException = &handles[82]
+var ValidationException_message = &handles[83]
+var ValidationException_reason = &handles[84]
+var ValidationException_fieldList = &handles[85]
+
+var ValidationExceptionField = &handles[86]
+var ValidationExceptionField_name = &handles[87]
+var ValidationExceptionField_message = &handles[88]
+
+var _ValidationExceptionFieldList = &handles[89]
+var _ValidationExceptionFieldList_member = &handles[90]
+
+var ValidationExceptionReason = &handles[91]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[92]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[93]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[94]
+var ValidationExceptionReason_OTHER = &handles[95]
+
+var ListRecommendedActionsRequest = &handles[96]
+var ListRecommendedActionsRequest_filter = &handles[97]
+var ListRecommendedActionsRequest_maxResults = &handles[98]
+var ListRecommendedActionsRequest_nextToken = &handles[99]
+
+var ListRecommendedActionsResponse = &handles[100]
+var ListRecommendedActionsResponse_recommendedActions = &handles[101]
+var ListRecommendedActionsResponse_nextToken = &handles[102]
+
+var AWSBillingAndCostManagementRecommendedActions = &smithy.ServiceSchema{Schema: &handles[1], Version: "2024-11-14"}

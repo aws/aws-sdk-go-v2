@@ -4,345 +4,305 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "BatchGetMetrics",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/BatchGetMetrics",
-	Code: 200})
-
-var BatchPutMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "BatchPutMetrics",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/BatchPutMetrics",
-	Code: 200})
-
-var _SageMakerMetricsService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "SageMakerMetricsService",
-}, smithy.ShapeTypeService, 0)
-
-var SageMakerMetricsService = smithy.NewServiceSchema(_SageMakerMetricsService, "2022-09-30")
-
-var BatchPutMetricsError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "BatchPutMetricsError",
-}, smithy.ShapeTypeStructure, 2)
-var BatchPutMetricsError_Code *smithy.Schema
-
-var BatchPutMetricsError_MetricIndex *smithy.Schema
-
-var _BatchPutMetricsErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "BatchPutMetricsErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchPutMetricsErrorList_member *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _ExperimentEntityName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "ExperimentEntityName",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var MetricQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "MetricQuery",
-}, smithy.ShapeTypeStructure, 7)
-var MetricQuery_MetricName *smithy.Schema
-
-var MetricQuery_ResourceArn *smithy.Schema
-
-var MetricQuery_MetricStat *smithy.Schema
-
-var MetricQuery_Period *smithy.Schema
-
-var MetricQuery_XAxisType *smithy.Schema
-
-var MetricQuery_Start *smithy.Schema
-
-var MetricQuery_End *smithy.Schema
-
-var _MetricQueryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "MetricQueryList",
-}, smithy.ShapeTypeList, 1)
-var _MetricQueryList_member *smithy.Schema
-
-var MetricQueryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "MetricQueryResult",
-}, smithy.ShapeTypeStructure, 4)
-var MetricQueryResult_Status *smithy.Schema
-
-var MetricQueryResult_Message *smithy.Schema
-
-var MetricQueryResult_XAxisValues *smithy.Schema
-
-var MetricQueryResult_MetricValues *smithy.Schema
-
-var _MetricQueryResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "MetricQueryResultList",
-}, smithy.ShapeTypeList, 1)
-var _MetricQueryResultList_member *smithy.Schema
-
-var MetricQueryResultStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "MetricQueryResultStatus",
-}, smithy.ShapeTypeEnum, 4)
-var MetricQueryResultStatus_COMPLETE *smithy.Schema
-
-var MetricQueryResultStatus_TRUNCATED *smithy.Schema
-
-var MetricQueryResultStatus_INTERNAL_ERROR *smithy.Schema
-
-var MetricQueryResultStatus_VALIDATION_ERROR *smithy.Schema
-
-var MetricStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "MetricStatistic",
-}, smithy.ShapeTypeEnum, 6)
-var MetricStatistic_MIN *smithy.Schema
-
-var MetricStatistic_MAX *smithy.Schema
-
-var MetricStatistic_AVG *smithy.Schema
-
-var MetricStatistic_COUNT *smithy.Schema
-
-var MetricStatistic_STD_DEV *smithy.Schema
-
-var MetricStatistic_LAST *smithy.Schema
-
-var _MetricValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "MetricValues",
-}, smithy.ShapeTypeList, 1)
-var _MetricValues_member *smithy.Schema
-
-var Period = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "Period",
-}, smithy.ShapeTypeEnum, 4)
-var Period_ONE_MINUTE *smithy.Schema
-
-var Period_FIVE_MINUTE *smithy.Schema
-
-var Period_ONE_HOUR *smithy.Schema
-
-var Period_ITERATION_NUMBER *smithy.Schema
-
-var PutMetricsErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "PutMetricsErrorCode",
-}, smithy.ShapeTypeEnum, 4)
-var PutMetricsErrorCode_METRIC_LIMIT_EXCEEDED *smithy.Schema
-
-var PutMetricsErrorCode_INTERNAL_ERROR *smithy.Schema
-
-var PutMetricsErrorCode_VALIDATION_ERROR *smithy.Schema
-
-var PutMetricsErrorCode_CONFLICT_ERROR *smithy.Schema
-
-var RawMetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "RawMetricData",
-}, smithy.ShapeTypeStructure, 4)
-var RawMetricData_MetricName *smithy.Schema
-
-var RawMetricData_Timestamp *smithy.Schema
-
-var RawMetricData_Step *smithy.Schema
-
-var RawMetricData_Value *smithy.Schema
-
-var _RawMetricDataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "RawMetricDataList",
-}, smithy.ShapeTypeList, 1)
-var _RawMetricDataList_member *smithy.Schema
-
-var _SageMakerResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "SageMakerResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Step = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "Step",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var XAxisType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "XAxisType",
-}, smithy.ShapeTypeEnum, 2)
-var XAxisType_ITERATION_NUMBER *smithy.Schema
-
-var XAxisType_TIMESTAMP *smithy.Schema
-
-var _XAxisValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "XAxisValues",
-}, smithy.ShapeTypeList, 1)
-var _XAxisValues_member *smithy.Schema
-
-var BatchGetMetricsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "BatchGetMetricsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetMetricsRequest_MetricQueries *smithy.Schema
-
-var BatchGetMetricsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "BatchGetMetricsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetMetricsResponse_MetricQueryResults *smithy.Schema
-
-var BatchPutMetricsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "BatchPutMetricsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchPutMetricsRequest_TrialComponentName *smithy.Schema
-
-var BatchPutMetricsRequest_MetricData *smithy.Schema
-
-var BatchPutMetricsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakermetrics",
-	Name:      "BatchPutMetricsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchPutMetricsResponse_Errors *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	PutMetricsErrorCode_METRIC_LIMIT_EXCEEDED = PutMetricsErrorCode.AddMember("METRIC_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	PutMetricsErrorCode_INTERNAL_ERROR = PutMetricsErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	PutMetricsErrorCode_VALIDATION_ERROR = PutMetricsErrorCode.AddMember("VALIDATION_ERROR", smithyprelude.Unit)
-
-	PutMetricsErrorCode_CONFLICT_ERROR = PutMetricsErrorCode.AddMember("CONFLICT_ERROR", smithyprelude.Unit)
-
-	BatchPutMetricsError_Code = BatchPutMetricsError.AddMember("Code", PutMetricsErrorCode)
-
-	BatchPutMetricsError_MetricIndex = BatchPutMetricsError.AddMember("MetricIndex", _Integer)
-
-	_BatchPutMetricsErrorList_member = _BatchPutMetricsErrorList.AddMember("member", BatchPutMetricsError)
-
-	MetricStatistic_MIN = MetricStatistic.AddMember("MIN", smithyprelude.Unit)
-
-	MetricStatistic_MAX = MetricStatistic.AddMember("MAX", smithyprelude.Unit)
-
-	MetricStatistic_AVG = MetricStatistic.AddMember("AVG", smithyprelude.Unit)
-
-	MetricStatistic_COUNT = MetricStatistic.AddMember("COUNT", smithyprelude.Unit)
-
-	MetricStatistic_STD_DEV = MetricStatistic.AddMember("STD_DEV", smithyprelude.Unit)
-
-	MetricStatistic_LAST = MetricStatistic.AddMember("LAST", smithyprelude.Unit)
-
-	Period_ONE_MINUTE = Period.AddMember("ONE_MINUTE", smithyprelude.Unit)
-
-	Period_FIVE_MINUTE = Period.AddMember("FIVE_MINUTE", smithyprelude.Unit)
-
-	Period_ONE_HOUR = Period.AddMember("ONE_HOUR", smithyprelude.Unit)
-
-	Period_ITERATION_NUMBER = Period.AddMember("ITERATION_NUMBER", smithyprelude.Unit)
-
-	XAxisType_ITERATION_NUMBER = XAxisType.AddMember("ITERATION_NUMBER", smithyprelude.Unit)
-
-	XAxisType_TIMESTAMP = XAxisType.AddMember("TIMESTAMP", smithyprelude.Unit)
-
-	MetricQuery_MetricName = MetricQuery.AddMember("MetricName", _MetricName)
-
-	MetricQuery_ResourceArn = MetricQuery.AddMember("ResourceArn", _SageMakerResourceArn)
-
-	MetricQuery_MetricStat = MetricQuery.AddMember("MetricStat", MetricStatistic)
-
-	MetricQuery_Period = MetricQuery.AddMember("Period", Period)
-
-	MetricQuery_XAxisType = MetricQuery.AddMember("XAxisType", XAxisType)
-
-	MetricQuery_Start = MetricQuery.AddMember("Start", _Long)
-
-	MetricQuery_End = MetricQuery.AddMember("End", _Long)
-
-	_MetricQueryList_member = _MetricQueryList.AddMember("member", MetricQuery)
-
-	MetricQueryResultStatus_COMPLETE = MetricQueryResultStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	MetricQueryResultStatus_TRUNCATED = MetricQueryResultStatus.AddMember("TRUNCATED", smithyprelude.Unit)
-
-	MetricQueryResultStatus_INTERNAL_ERROR = MetricQueryResultStatus.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	MetricQueryResultStatus_VALIDATION_ERROR = MetricQueryResultStatus.AddMember("VALIDATION_ERROR", smithyprelude.Unit)
-
-	_XAxisValues_member = _XAxisValues.AddMember("member", _Long)
-
-	_MetricValues_member = _MetricValues.AddMember("member", _Double)
-
-	MetricQueryResult_Status = MetricQueryResult.AddMember("Status", MetricQueryResultStatus)
-
-	MetricQueryResult_Message = MetricQueryResult.AddMember("Message", _Message)
-
-	MetricQueryResult_XAxisValues = MetricQueryResult.AddMember("XAxisValues", _XAxisValues)
-
-	MetricQueryResult_MetricValues = MetricQueryResult.AddMember("MetricValues", _MetricValues)
-
-	_MetricQueryResultList_member = _MetricQueryResultList.AddMember("member", MetricQueryResult)
-
-	RawMetricData_MetricName = RawMetricData.AddMember("MetricName", _MetricName)
-
-	RawMetricData_Timestamp = RawMetricData.AddMember("Timestamp", _Timestamp)
-
-	RawMetricData_Step = RawMetricData.AddMember("Step", _Step)
-
-	RawMetricData_Value = RawMetricData.AddMember("Value", _Double)
-
-	_RawMetricDataList_member = _RawMetricDataList.AddMember("member", RawMetricData)
-
-	BatchGetMetricsRequest_MetricQueries = BatchGetMetricsRequest.AddMember("MetricQueries", _MetricQueryList)
-
-	BatchGetMetricsResponse_MetricQueryResults = BatchGetMetricsResponse.AddMember("MetricQueryResults", _MetricQueryResultList)
-
-	BatchPutMetricsRequest_TrialComponentName = BatchPutMetricsRequest.AddMember("TrialComponentName", _ExperimentEntityName)
-
-	BatchPutMetricsRequest_MetricData = BatchPutMetricsRequest.AddMember("MetricData", _RawMetricDataList)
-
-	BatchPutMetricsResponse_Errors = BatchPutMetricsResponse.AddMember("Errors", _BatchPutMetricsErrorList)
-
+const blob = "" +
+	"BatchPutMetricsErrorListBatchGetMetricsResponseBatchPutMetricsResponseMetricQueryResultStatusSageMak" +
+	"erMetricsServiceBatchGetMetricsRequestBatchPutMetricsRequestMETRIC_LIMIT_EXCEEDEDMetricQueryResultLi" +
+	"stExperimentEntityNameSageMakerResourceArnPutMetricsErrorCodeMetricQueryResultsTrialComponentNameRaw" +
+	"MetricDataListITERATION_NUMBERVALIDATION_ERRORMetricQueryListMetricStatisticCONFLICT_ERRORINTERNAL_E" +
+	"RRORMetricQueriesMetricValuesFIVE_MINUTEMetricIndexXAxisValuesMetricNameONE_MINUTETIMESTAMPTRUNCATED" +
+	"TimestampXAxisTypeCOMPLETEONE_HOURIntegerMessageSTD_DEVDoubleErrorsPeriodmemberCOUNTStartLASTLongSte" +
+	"pUnitAVGEndMAX"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.sagemakermetrics", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 24, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 93, Target: 2, Traits: 2, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 0, Target: 3, Traits: 2, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 257, Target: 50, Traits: 2, StrLen: 4, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 440, Target: 10, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 0, Target: 6, Traits: 2, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 573, Target: 3, Traits: 2, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 555, Target: 8, Traits: 2, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 202, Target: 9, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 534, Target: 10, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 593, Target: 11, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 541, Target: 12, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 462, Target: 13, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 70, Target: 14, Traits: 2, StrLen: 11, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 13, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 231, Target: 62, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 361, Target: 36, Traits: 2, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 567, Target: 45, Traits: 2, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 509, Target: 65, Traits: 2, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 584, Target: 11, Traits: 2, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 608, Target: 11, Traits: 2, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 346, Target: 22, Traits: 2, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 573, Target: 14, Traits: 2, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 70, Target: 24, Traits: 2, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 87, Target: 31, Traits: 2, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 541, Target: 12, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 451, Target: 68, Traits: 2, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 417, Target: 43, Traits: 2, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 181, Target: 29, Traits: 2, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 573, Target: 24, Traits: 2, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 70, Target: 31, Traits: 2, StrLen: 23, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 518, Target: 79, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 491, Target: 79, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 390, Target: 79, Traits: 2, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 330, Target: 79, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 361, Target: 36, Traits: 2, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 434, Target: 79, Traits: 2, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 611, Target: 79, Traits: 2, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 605, Target: 79, Traits: 2, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 579, Target: 79, Traits: 2, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 548, Target: 79, Traits: 2, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 589, Target: 79, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 417, Target: 43, Traits: 2, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 573, Target: 8, Traits: 2, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 567, Target: 45, Traits: 2, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 472, Target: 79, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 429, Target: 79, Traits: 2, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 526, Target: 79, Traits: 2, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 314, Target: 79, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 242, Target: 50, Traits: 2, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 160, Target: 79, Traits: 2, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 390, Target: 79, Traits: 2, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 330, Target: 79, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 376, Target: 79, Traits: 2, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 297, Target: 55, Traits: 2, StrLen: 13, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 13, Traits: 2, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 500, Target: 64, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 597, Target: 63, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 423, Target: 8, Traits: 2, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 297, Target: 60, Traits: 2, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 573, Target: 55, Traits: 2, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 222, Target: 62, Traits: 2, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 597, Target: 63, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 500, Target: 64, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 509, Target: 65, Traits: 2, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 314, Target: 79, Traits: 2, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 482, Target: 79, Traits: 2, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 451, Target: 68, Traits: 2, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 573, Target: 11, Traits: 2, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 116, Target: 70, Traits: 2, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 404, Target: 22, Traits: 2, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 24, Target: 72, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 261, Target: 29, Traits: 2, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 138, Target: 74, Traits: 2, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 279, Target: 9, Traits: 2, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 300, Target: 60, Traits: 2, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 47, Target: 77, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 561, Target: 6, Traits: 2, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 601, Target: 79, Traits: 2, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/BatchGetMetrics",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/BatchPutMetrics",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+	},
 }
+
+var handles = [80]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+}
+
+var BatchGetMetrics = &handles[0]
+
+var BatchPutMetrics = &handles[1]
+
+var _SageMakerMetricsService = &handles[2]
+
+var BatchPutMetricsError = &handles[3]
+var BatchPutMetricsError_Code = &handles[4]
+var BatchPutMetricsError_MetricIndex = &handles[5]
+
+var _BatchPutMetricsErrorList = &handles[6]
+var _BatchPutMetricsErrorList_member = &handles[7]
+
+var _Double = &handles[8]
+
+var _ExperimentEntityName = &handles[9]
+
+var _Integer = &handles[10]
+
+var _Long = &handles[11]
+
+var _Message = &handles[12]
+
+var _MetricName = &handles[13]
+
+var MetricQuery = &handles[14]
+var MetricQuery_MetricName = &handles[15]
+var MetricQuery_ResourceArn = &handles[16]
+var MetricQuery_MetricStat = &handles[17]
+var MetricQuery_Period = &handles[18]
+var MetricQuery_XAxisType = &handles[19]
+var MetricQuery_Start = &handles[20]
+var MetricQuery_End = &handles[21]
+
+var _MetricQueryList = &handles[22]
+var _MetricQueryList_member = &handles[23]
+
+var MetricQueryResult = &handles[24]
+var MetricQueryResult_Status = &handles[25]
+var MetricQueryResult_Message = &handles[26]
+var MetricQueryResult_XAxisValues = &handles[27]
+var MetricQueryResult_MetricValues = &handles[28]
+
+var _MetricQueryResultList = &handles[29]
+var _MetricQueryResultList_member = &handles[30]
+
+var MetricQueryResultStatus = &handles[31]
+var MetricQueryResultStatus_COMPLETE = &handles[32]
+var MetricQueryResultStatus_TRUNCATED = &handles[33]
+var MetricQueryResultStatus_INTERNAL_ERROR = &handles[34]
+var MetricQueryResultStatus_VALIDATION_ERROR = &handles[35]
+
+var MetricStatistic = &handles[36]
+var MetricStatistic_MIN = &handles[37]
+var MetricStatistic_MAX = &handles[38]
+var MetricStatistic_AVG = &handles[39]
+var MetricStatistic_COUNT = &handles[40]
+var MetricStatistic_STD_DEV = &handles[41]
+var MetricStatistic_LAST = &handles[42]
+
+var _MetricValues = &handles[43]
+var _MetricValues_member = &handles[44]
+
+var Period = &handles[45]
+var Period_ONE_MINUTE = &handles[46]
+var Period_FIVE_MINUTE = &handles[47]
+var Period_ONE_HOUR = &handles[48]
+var Period_ITERATION_NUMBER = &handles[49]
+
+var PutMetricsErrorCode = &handles[50]
+var PutMetricsErrorCode_METRIC_LIMIT_EXCEEDED = &handles[51]
+var PutMetricsErrorCode_INTERNAL_ERROR = &handles[52]
+var PutMetricsErrorCode_VALIDATION_ERROR = &handles[53]
+var PutMetricsErrorCode_CONFLICT_ERROR = &handles[54]
+
+var RawMetricData = &handles[55]
+var RawMetricData_MetricName = &handles[56]
+var RawMetricData_Timestamp = &handles[57]
+var RawMetricData_Step = &handles[58]
+var RawMetricData_Value = &handles[59]
+
+var _RawMetricDataList = &handles[60]
+var _RawMetricDataList_member = &handles[61]
+
+var _SageMakerResourceArn = &handles[62]
+
+var _Step = &handles[63]
+
+var _Timestamp = &handles[64]
+
+var XAxisType = &handles[65]
+var XAxisType_ITERATION_NUMBER = &handles[66]
+var XAxisType_TIMESTAMP = &handles[67]
+
+var _XAxisValues = &handles[68]
+var _XAxisValues_member = &handles[69]
+
+var BatchGetMetricsRequest = &handles[70]
+var BatchGetMetricsRequest_MetricQueries = &handles[71]
+
+var BatchGetMetricsResponse = &handles[72]
+var BatchGetMetricsResponse_MetricQueryResults = &handles[73]
+
+var BatchPutMetricsRequest = &handles[74]
+var BatchPutMetricsRequest_TrialComponentName = &handles[75]
+var BatchPutMetricsRequest_MetricData = &handles[76]
+
+var BatchPutMetricsResponse = &handles[77]
+var BatchPutMetricsResponse_Errors = &handles[78]
+
+var SageMakerMetricsService = &smithy.ServiceSchema{Schema: &handles[2], Version: "2022-09-30"}

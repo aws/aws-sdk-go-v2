@@ -4,1144 +4,1021 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CreateCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/campaigns",
-	Code: 200})
-
-var DeleteCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DeleteCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/campaigns/{id}",
-	Code: 200})
-
-var DeleteConnectInstanceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DeleteConnectInstanceConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/connect-instance/{connectInstanceId}/config",
-	Code: 200})
-
-var DeleteInstanceOnboardingJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DeleteInstanceOnboardingJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/connect-instance/{connectInstanceId}/onboarding",
-	Code: 200})
-
-var DescribeCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DescribeCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/campaigns/{id}",
-	Code: 200})
-
-var GetCampaignState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetCampaignState",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/campaigns/{id}/state",
-	Code: 200})
-
-var GetCampaignStateBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetCampaignStateBatch",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns-state",
-	Code: 200})
-
-var GetConnectInstanceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetConnectInstanceConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/connect-instance/{connectInstanceId}/config",
-	Code: 200})
-
-var GetInstanceOnboardingJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetInstanceOnboardingJobStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/connect-instance/{connectInstanceId}/onboarding",
-	Code: 200})
-
-var ListCampaigns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ListCampaigns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns-summary",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{arn}",
-	Code: 200})
-
-var PauseCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "PauseCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns/{id}/pause",
-	Code: 200})
-
-var PutDialRequestBatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "PutDialRequestBatch",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/campaigns/{id}/dial-requests",
-	Code: 200})
-
-var ResumeCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ResumeCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns/{id}/resume",
-	Code: 200})
-
-var StartCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "StartCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns/{id}/start",
-	Code: 200})
-
-var StartInstanceOnboardingJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "StartInstanceOnboardingJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/connect-instance/{connectInstanceId}/onboarding",
-	Code: 200})
-
-var StopCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "StopCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns/{id}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{arn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{arn}",
-	Code: 200})
-
-var UpdateCampaignDialerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "UpdateCampaignDialerConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns/{id}/dialer-config",
-	Code: 200})
-
-var UpdateCampaignName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "UpdateCampaignName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns/{id}/name",
-	Code: 200})
-
-var UpdateCampaignOutboundCallConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "UpdateCampaignOutboundCallConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/campaigns/{id}/outbound-call-config",
-	Code: 200})
-
-var _AmazonConnectCampaignService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "AmazonConnectCampaignService",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonConnectCampaignService = smithy.NewServiceSchema(_AmazonConnectCampaignService, "2021-01-30")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessDeniedException_xAmzErrorType *smithy.Schema
-
-var AgentlessDialerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "AgentlessDialerConfig",
-}, smithy.ShapeTypeStructure, 1)
-var AgentlessDialerConfig_dialingCapacity *smithy.Schema
-
-var AnswerMachineDetectionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "AnswerMachineDetectionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var AnswerMachineDetectionConfig_enableAnswerMachineDetection *smithy.Schema
-
-var AnswerMachineDetectionConfig_awaitAnswerMachinePrompt *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _Attributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "Attributes",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _Attributes_key *smithy.Schema
-
-var _Attributes_value *smithy.Schema
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _BandwidthAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "BandwidthAllocation",
-}, smithy.ShapeTypeDouble, 0)
-
-var Campaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "Campaign",
-}, smithy.ShapeTypeStructure, 7)
-var Campaign_id *smithy.Schema
-
-var Campaign_arn *smithy.Schema
-
-var Campaign_name *smithy.Schema
-
-var Campaign_connectInstanceId *smithy.Schema
-
-var Campaign_dialerConfig *smithy.Schema
-
-var Campaign_outboundCallConfig *smithy.Schema
-
-var Campaign_tags *smithy.Schema
-
-var _CampaignArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CampaignArn",
-}, smithy.ShapeTypeString, 0)
-
-var CampaignFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CampaignFilters",
-}, smithy.ShapeTypeStructure, 1)
-var CampaignFilters_instanceIdFilter *smithy.Schema
-
-var _CampaignId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CampaignId",
-}, smithy.ShapeTypeString, 0)
-
-var _CampaignIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CampaignIdList",
-}, smithy.ShapeTypeList, 1)
-var _CampaignIdList_member *smithy.Schema
-
-var _CampaignName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CampaignName",
-}, smithy.ShapeTypeString, 0)
-
-var _CampaignState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CampaignState",
-}, smithy.ShapeTypeString, 0)
-
-var CampaignSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CampaignSummary",
-}, smithy.ShapeTypeStructure, 4)
-var CampaignSummary_id *smithy.Schema
-
-var CampaignSummary_arn *smithy.Schema
-
-var CampaignSummary_name *smithy.Schema
-
-var CampaignSummary_connectInstanceId *smithy.Schema
-
-var _CampaignSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CampaignSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _CampaignSummaryList_member *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_xAmzErrorType *smithy.Schema
-
-var _ContactFlowId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ContactFlowId",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DestinationPhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var DialerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DialerConfig",
-}, smithy.ShapeTypeUnion, 3)
-var DialerConfig_progressiveDialerConfig *smithy.Schema
-
-var DialerConfig_predictiveDialerConfig *smithy.Schema
-
-var DialerConfig_agentlessDialerConfig *smithy.Schema
-
-var _DialingCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DialingCapacity",
-}, smithy.ShapeTypeDouble, 0)
-
-var DialRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DialRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DialRequest_clientToken *smithy.Schema
-
-var DialRequest_phoneNumber *smithy.Schema
-
-var DialRequest_expirationTime *smithy.Schema
-
-var DialRequest_attributes *smithy.Schema
-
-var _DialRequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DialRequestId",
-}, smithy.ShapeTypeString, 0)
-
-var _DialRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DialRequestList",
-}, smithy.ShapeTypeList, 1)
-var _DialRequestList_member *smithy.Schema
-
-var _Enabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "Enabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var EncryptionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "EncryptionConfig",
-}, smithy.ShapeTypeStructure, 3)
-var EncryptionConfig_enabled *smithy.Schema
-
-var EncryptionConfig_encryptionType *smithy.Schema
-
-var EncryptionConfig_keyArn *smithy.Schema
-
-var _EncryptionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "EncryptionKey",
-}, smithy.ShapeTypeString, 0)
-
-var _EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeString, 0)
-
-var FailedCampaignStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "FailedCampaignStateResponse",
-}, smithy.ShapeTypeStructure, 2)
-var FailedCampaignStateResponse_campaignId *smithy.Schema
-
-var FailedCampaignStateResponse_failureCode *smithy.Schema
-
-var _FailedCampaignStateResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "FailedCampaignStateResponseList",
-}, smithy.ShapeTypeList, 1)
-var _FailedCampaignStateResponseList_member *smithy.Schema
-
-var FailedRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "FailedRequest",
-}, smithy.ShapeTypeStructure, 3)
-var FailedRequest_clientToken *smithy.Schema
-
-var FailedRequest_id *smithy.Schema
-
-var FailedRequest_failureCode *smithy.Schema
-
-var _FailedRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "FailedRequestList",
-}, smithy.ShapeTypeList, 1)
-var _FailedRequestList_member *smithy.Schema
-
-var _FailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "FailureCode",
-}, smithy.ShapeTypeString, 0)
-
-var _GetCampaignStateBatchFailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetCampaignStateBatchFailureCode",
-}, smithy.ShapeTypeString, 0)
-
-var InstanceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InstanceConfig",
-}, smithy.ShapeTypeStructure, 3)
-var InstanceConfig_connectInstanceId *smithy.Schema
-
-var InstanceConfig_serviceLinkedRoleArn *smithy.Schema
-
-var InstanceConfig_encryptionConfig *smithy.Schema
-
-var _InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var InstanceIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InstanceIdFilter",
-}, smithy.ShapeTypeStructure, 2)
-var InstanceIdFilter_value *smithy.Schema
-
-var InstanceIdFilter_operator *smithy.Schema
-
-var _InstanceIdFilterOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InstanceIdFilterOperator",
-}, smithy.ShapeTypeString, 0)
-
-var _InstanceOnboardingJobFailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InstanceOnboardingJobFailureCode",
-}, smithy.ShapeTypeString, 0)
-
-var InstanceOnboardingJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InstanceOnboardingJobStatus",
-}, smithy.ShapeTypeStructure, 3)
-var InstanceOnboardingJobStatus_connectInstanceId *smithy.Schema
-
-var InstanceOnboardingJobStatus_status *smithy.Schema
-
-var InstanceOnboardingJobStatus_failureCode *smithy.Schema
-
-var _InstanceOnboardingJobStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InstanceOnboardingJobStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_xAmzErrorType *smithy.Schema
-
-var InvalidCampaignStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InvalidCampaignStateException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var InvalidCampaignStateException_state *smithy.Schema
-
-var InvalidCampaignStateException_message *smithy.Schema
-
-var InvalidCampaignStateException_xAmzErrorType *smithy.Schema
-
-var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var InvalidStateException_message *smithy.Schema
-
-var InvalidStateException_xAmzErrorType *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OutboundCallConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "OutboundCallConfig",
-}, smithy.ShapeTypeStructure, 4)
-var OutboundCallConfig_connectContactFlowId *smithy.Schema
-
-var OutboundCallConfig_connectSourcePhoneNumber *smithy.Schema
-
-var OutboundCallConfig_connectQueueId *smithy.Schema
-
-var OutboundCallConfig_answerMachineDetectionConfig *smithy.Schema
-
-var PredictiveDialerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "PredictiveDialerConfig",
-}, smithy.ShapeTypeStructure, 2)
-var PredictiveDialerConfig_bandwidthAllocation *smithy.Schema
-
-var PredictiveDialerConfig_dialingCapacity *smithy.Schema
-
-var ProgressiveDialerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ProgressiveDialerConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ProgressiveDialerConfig_bandwidthAllocation *smithy.Schema
-
-var ProgressiveDialerConfig_dialingCapacity *smithy.Schema
-
-var _QueueId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "QueueId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_xAmzErrorType *smithy.Schema
-
-var _ServiceLinkedRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ServiceLinkedRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_xAmzErrorType *smithy.Schema
-
-var _SourcePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "SourcePhoneNumber",
-}, smithy.ShapeTypeString, 0)
-
-var SuccessfulCampaignStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "SuccessfulCampaignStateResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SuccessfulCampaignStateResponse_campaignId *smithy.Schema
-
-var SuccessfulCampaignStateResponse_state *smithy.Schema
-
-var _SuccessfulCampaignStateResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "SuccessfulCampaignStateResponseList",
-}, smithy.ShapeTypeList, 1)
-var _SuccessfulCampaignStateResponseList_member *smithy.Schema
-
-var SuccessfulRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "SuccessfulRequest",
-}, smithy.ShapeTypeStructure, 2)
-var SuccessfulRequest_clientToken *smithy.Schema
-
-var SuccessfulRequest_id *smithy.Schema
-
-var _SuccessfulRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "SuccessfulRequestList",
-}, smithy.ShapeTypeList, 1)
-var _SuccessfulRequestList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_xAmzErrorType *smithy.Schema
-
-var _TimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "TimeStamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_xAmzErrorType *smithy.Schema
-
-var _XAmazonErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "XAmazonErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var CreateCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CreateCampaignRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateCampaignRequest_name *smithy.Schema
-
-var CreateCampaignRequest_connectInstanceId *smithy.Schema
-
-var CreateCampaignRequest_dialerConfig *smithy.Schema
-
-var CreateCampaignRequest_outboundCallConfig *smithy.Schema
-
-var CreateCampaignRequest_tags *smithy.Schema
-
-var CreateCampaignResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "CreateCampaignResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateCampaignResponse_id *smithy.Schema
-
-var CreateCampaignResponse_arn *smithy.Schema
-
-var CreateCampaignResponse_tags *smithy.Schema
-
-var DeleteCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DeleteCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCampaignRequest_id *smithy.Schema
-
-var DeleteConnectInstanceConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DeleteConnectInstanceConfigRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectInstanceConfigRequest_connectInstanceId *smithy.Schema
-
-var DeleteInstanceOnboardingJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DeleteInstanceOnboardingJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInstanceOnboardingJobRequest_connectInstanceId *smithy.Schema
-
-var DescribeCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DescribeCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCampaignRequest_id *smithy.Schema
-
-var DescribeCampaignResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "DescribeCampaignResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCampaignResponse_campaign *smithy.Schema
-
-var GetCampaignStateBatchRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetCampaignStateBatchRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCampaignStateBatchRequest_campaignIds *smithy.Schema
-
-var GetCampaignStateBatchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetCampaignStateBatchResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetCampaignStateBatchResponse_successfulRequests *smithy.Schema
-
-var GetCampaignStateBatchResponse_failedRequests *smithy.Schema
-
-var GetCampaignStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetCampaignStateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCampaignStateRequest_id *smithy.Schema
-
-var GetCampaignStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetCampaignStateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCampaignStateResponse_state *smithy.Schema
-
-var GetConnectInstanceConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetConnectInstanceConfigRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectInstanceConfigRequest_connectInstanceId *smithy.Schema
-
-var GetConnectInstanceConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetConnectInstanceConfigResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectInstanceConfigResponse_connectInstanceConfig *smithy.Schema
-
-var GetInstanceOnboardingJobStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetInstanceOnboardingJobStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetInstanceOnboardingJobStatusRequest_connectInstanceId *smithy.Schema
-
-var GetInstanceOnboardingJobStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "GetInstanceOnboardingJobStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetInstanceOnboardingJobStatusResponse_connectInstanceOnboardingJobStatus *smithy.Schema
-
-var ListCampaignsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ListCampaignsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCampaignsRequest_maxResults *smithy.Schema
-
-var ListCampaignsRequest_nextToken *smithy.Schema
-
-var ListCampaignsRequest_filters *smithy.Schema
-
-var ListCampaignsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ListCampaignsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCampaignsResponse_nextToken *smithy.Schema
-
-var ListCampaignsResponse_campaignSummaryList *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_arn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PauseCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "PauseCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PauseCampaignRequest_id *smithy.Schema
-
-var PutDialRequestBatchRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "PutDialRequestBatchRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutDialRequestBatchRequest_id *smithy.Schema
-
-var PutDialRequestBatchRequest_dialRequests *smithy.Schema
-
-var PutDialRequestBatchResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "PutDialRequestBatchResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutDialRequestBatchResponse_successfulRequests *smithy.Schema
-
-var PutDialRequestBatchResponse_failedRequests *smithy.Schema
-
-var ResumeCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "ResumeCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResumeCampaignRequest_id *smithy.Schema
-
-var StartCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "StartCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartCampaignRequest_id *smithy.Schema
-
-var StartInstanceOnboardingJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "StartInstanceOnboardingJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartInstanceOnboardingJobRequest_connectInstanceId *smithy.Schema
-
-var StartInstanceOnboardingJobRequest_encryptionConfig *smithy.Schema
-
-var StartInstanceOnboardingJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "StartInstanceOnboardingJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus *smithy.Schema
-
-var StopCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "StopCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopCampaignRequest_id *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_arn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_arn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UpdateCampaignDialerConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "UpdateCampaignDialerConfigRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCampaignDialerConfigRequest_id *smithy.Schema
-
-var UpdateCampaignDialerConfigRequest_dialerConfig *smithy.Schema
-
-var UpdateCampaignNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "UpdateCampaignNameRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCampaignNameRequest_id *smithy.Schema
-
-var UpdateCampaignNameRequest_name *smithy.Schema
-
-var UpdateCampaignOutboundCallConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcampaigns",
-	Name:      "UpdateCampaignOutboundCallConfigRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCampaignOutboundCallConfigRequest_id *smithy.Schema
-
-var UpdateCampaignOutboundCallConfigRequest_connectContactFlowId *smithy.Schema
-
-var UpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber *smithy.Schema
-
-var UpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AccessDeniedException_xAmzErrorType = AccessDeniedException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	AgentlessDialerConfig_dialingCapacity = AgentlessDialerConfig.AddMember("dialingCapacity", _DialingCapacity)
-
-	AnswerMachineDetectionConfig_enableAnswerMachineDetection = AnswerMachineDetectionConfig.AddMember("enableAnswerMachineDetection", smithyprelude.Boolean)
-
-	AnswerMachineDetectionConfig_awaitAnswerMachinePrompt = AnswerMachineDetectionConfig.AddMember("awaitAnswerMachinePrompt", smithyprelude.Boolean)
-
-	_Attributes_key = _Attributes.AddMember("key", _AttributeName)
-
-	_Attributes_value = _Attributes.AddMember("value", _AttributeValue)
-
-	ProgressiveDialerConfig_bandwidthAllocation = ProgressiveDialerConfig.AddMember("bandwidthAllocation", _BandwidthAllocation)
-
-	ProgressiveDialerConfig_dialingCapacity = ProgressiveDialerConfig.AddMember("dialingCapacity", _DialingCapacity)
-
-	PredictiveDialerConfig_bandwidthAllocation = PredictiveDialerConfig.AddMember("bandwidthAllocation", _BandwidthAllocation)
-
-	PredictiveDialerConfig_dialingCapacity = PredictiveDialerConfig.AddMember("dialingCapacity", _DialingCapacity)
-
-	DialerConfig_progressiveDialerConfig = DialerConfig.AddMember("progressiveDialerConfig", ProgressiveDialerConfig)
-
-	DialerConfig_predictiveDialerConfig = DialerConfig.AddMember("predictiveDialerConfig", PredictiveDialerConfig)
-
-	DialerConfig_agentlessDialerConfig = DialerConfig.AddMember("agentlessDialerConfig", AgentlessDialerConfig)
-
-	OutboundCallConfig_connectContactFlowId = OutboundCallConfig.AddMember("connectContactFlowId", _ContactFlowId)
-
-	OutboundCallConfig_connectSourcePhoneNumber = OutboundCallConfig.AddMember("connectSourcePhoneNumber", _SourcePhoneNumber)
-
-	OutboundCallConfig_connectQueueId = OutboundCallConfig.AddMember("connectQueueId", _QueueId)
-
-	OutboundCallConfig_answerMachineDetectionConfig = OutboundCallConfig.AddMember("answerMachineDetectionConfig", AnswerMachineDetectionConfig)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	Campaign_id = Campaign.AddMember("id", _CampaignId)
-
-	Campaign_arn = Campaign.AddMember("arn", _CampaignArn)
-
-	Campaign_name = Campaign.AddMember("name", _CampaignName)
-
-	Campaign_connectInstanceId = Campaign.AddMember("connectInstanceId", _InstanceId)
-
-	Campaign_dialerConfig = Campaign.AddMember("dialerConfig", DialerConfig)
-
-	Campaign_outboundCallConfig = Campaign.AddMember("outboundCallConfig", OutboundCallConfig)
-
-	Campaign_tags = Campaign.AddMember("tags", _TagMap)
-
-	InstanceIdFilter_value = InstanceIdFilter.AddMember("value", _InstanceId)
-
-	InstanceIdFilter_operator = InstanceIdFilter.AddMember("operator", _InstanceIdFilterOperator)
-
-	CampaignFilters_instanceIdFilter = CampaignFilters.AddMember("instanceIdFilter", InstanceIdFilter)
-
-	_CampaignIdList_member = _CampaignIdList.AddMember("member", _CampaignId)
-
-	CampaignSummary_id = CampaignSummary.AddMember("id", _CampaignId)
-
-	CampaignSummary_arn = CampaignSummary.AddMember("arn", _CampaignArn)
-
-	CampaignSummary_name = CampaignSummary.AddMember("name", _CampaignName)
-
-	CampaignSummary_connectInstanceId = CampaignSummary.AddMember("connectInstanceId", _InstanceId)
-
-	_CampaignSummaryList_member = _CampaignSummaryList.AddMember("member", CampaignSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_xAmzErrorType = ConflictException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	DialRequest_clientToken = DialRequest.AddMember("clientToken", _ClientToken)
-
-	DialRequest_phoneNumber = DialRequest.AddMember("phoneNumber", _DestinationPhoneNumber)
-
-	DialRequest_expirationTime = DialRequest.AddMember("expirationTime", _TimeStamp)
-
-	DialRequest_attributes = DialRequest.AddMember("attributes", _Attributes)
-
-	_DialRequestList_member = _DialRequestList.AddMember("member", DialRequest)
-
-	EncryptionConfig_enabled = EncryptionConfig.AddMember("enabled", _Enabled)
-
-	EncryptionConfig_encryptionType = EncryptionConfig.AddMember("encryptionType", _EncryptionType)
-
-	EncryptionConfig_keyArn = EncryptionConfig.AddMember("keyArn", _EncryptionKey)
-
-	FailedCampaignStateResponse_campaignId = FailedCampaignStateResponse.AddMember("campaignId", _CampaignId)
-
-	FailedCampaignStateResponse_failureCode = FailedCampaignStateResponse.AddMember("failureCode", _GetCampaignStateBatchFailureCode)
-
-	_FailedCampaignStateResponseList_member = _FailedCampaignStateResponseList.AddMember("member", FailedCampaignStateResponse)
-
-	FailedRequest_clientToken = FailedRequest.AddMember("clientToken", _ClientToken)
-
-	FailedRequest_id = FailedRequest.AddMember("id", _DialRequestId)
-
-	FailedRequest_failureCode = FailedRequest.AddMember("failureCode", _FailureCode)
-
-	_FailedRequestList_member = _FailedRequestList.AddMember("member", FailedRequest)
-
-	InstanceConfig_connectInstanceId = InstanceConfig.AddMember("connectInstanceId", _InstanceId)
-
-	InstanceConfig_serviceLinkedRoleArn = InstanceConfig.AddMember("serviceLinkedRoleArn", _ServiceLinkedRoleArn)
-
-	InstanceConfig_encryptionConfig = InstanceConfig.AddMember("encryptionConfig", EncryptionConfig)
-
-	InstanceOnboardingJobStatus_connectInstanceId = InstanceOnboardingJobStatus.AddMember("connectInstanceId", _InstanceId)
-
-	InstanceOnboardingJobStatus_status = InstanceOnboardingJobStatus.AddMember("status", _InstanceOnboardingJobStatusCode)
-
-	InstanceOnboardingJobStatus_failureCode = InstanceOnboardingJobStatus.AddMember("failureCode", _InstanceOnboardingJobFailureCode)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_xAmzErrorType = InternalServerException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	InvalidCampaignStateException_state = InvalidCampaignStateException.AddMember("state", _CampaignState)
-
-	InvalidCampaignStateException_message = InvalidCampaignStateException.AddMember("message", smithyprelude.String)
-
-	InvalidCampaignStateException_xAmzErrorType = InvalidCampaignStateException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	InvalidStateException_message = InvalidStateException.AddMember("message", smithyprelude.String)
-
-	InvalidStateException_xAmzErrorType = InvalidStateException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_xAmzErrorType = ResourceNotFoundException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_xAmzErrorType = ServiceQuotaExceededException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	SuccessfulCampaignStateResponse_campaignId = SuccessfulCampaignStateResponse.AddMember("campaignId", _CampaignId)
-
-	SuccessfulCampaignStateResponse_state = SuccessfulCampaignStateResponse.AddMember("state", _CampaignState)
-
-	_SuccessfulCampaignStateResponseList_member = _SuccessfulCampaignStateResponseList.AddMember("member", SuccessfulCampaignStateResponse)
-
-	SuccessfulRequest_clientToken = SuccessfulRequest.AddMember("clientToken", _ClientToken)
-
-	SuccessfulRequest_id = SuccessfulRequest.AddMember("id", _DialRequestId)
-
-	_SuccessfulRequestList_member = _SuccessfulRequestList.AddMember("member", SuccessfulRequest)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_xAmzErrorType = ThrottlingException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_xAmzErrorType = ValidationException.AddMember("xAmzErrorType", _XAmazonErrorType, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	CreateCampaignRequest_name = CreateCampaignRequest.AddMember("name", _CampaignName)
-
-	CreateCampaignRequest_connectInstanceId = CreateCampaignRequest.AddMember("connectInstanceId", _InstanceId)
-
-	CreateCampaignRequest_dialerConfig = CreateCampaignRequest.AddMember("dialerConfig", DialerConfig)
-
-	CreateCampaignRequest_outboundCallConfig = CreateCampaignRequest.AddMember("outboundCallConfig", OutboundCallConfig)
-
-	CreateCampaignRequest_tags = CreateCampaignRequest.AddMember("tags", _TagMap)
-
-	CreateCampaignResponse_id = CreateCampaignResponse.AddMember("id", _CampaignId)
-
-	CreateCampaignResponse_arn = CreateCampaignResponse.AddMember("arn", _CampaignArn)
-
-	CreateCampaignResponse_tags = CreateCampaignResponse.AddMember("tags", _TagMap)
-
-	DeleteCampaignRequest_id = DeleteCampaignRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	DeleteConnectInstanceConfigRequest_connectInstanceId = DeleteConnectInstanceConfigRequest.AddMember("connectInstanceId", _InstanceId, &smithytraits.HTTPLabel{})
-
-	DeleteInstanceOnboardingJobRequest_connectInstanceId = DeleteInstanceOnboardingJobRequest.AddMember("connectInstanceId", _InstanceId, &smithytraits.HTTPLabel{})
-
-	DescribeCampaignRequest_id = DescribeCampaignRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	DescribeCampaignResponse_campaign = DescribeCampaignResponse.AddMember("campaign", Campaign)
-
-	GetCampaignStateBatchRequest_campaignIds = GetCampaignStateBatchRequest.AddMember("campaignIds", _CampaignIdList)
-
-	GetCampaignStateBatchResponse_successfulRequests = GetCampaignStateBatchResponse.AddMember("successfulRequests", _SuccessfulCampaignStateResponseList)
-
-	GetCampaignStateBatchResponse_failedRequests = GetCampaignStateBatchResponse.AddMember("failedRequests", _FailedCampaignStateResponseList)
-
-	GetCampaignStateRequest_id = GetCampaignStateRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	GetCampaignStateResponse_state = GetCampaignStateResponse.AddMember("state", _CampaignState)
-
-	GetConnectInstanceConfigRequest_connectInstanceId = GetConnectInstanceConfigRequest.AddMember("connectInstanceId", _InstanceId, &smithytraits.HTTPLabel{})
-
-	GetConnectInstanceConfigResponse_connectInstanceConfig = GetConnectInstanceConfigResponse.AddMember("connectInstanceConfig", InstanceConfig)
-
-	GetInstanceOnboardingJobStatusRequest_connectInstanceId = GetInstanceOnboardingJobStatusRequest.AddMember("connectInstanceId", _InstanceId, &smithytraits.HTTPLabel{})
-
-	GetInstanceOnboardingJobStatusResponse_connectInstanceOnboardingJobStatus = GetInstanceOnboardingJobStatusResponse.AddMember("connectInstanceOnboardingJobStatus", InstanceOnboardingJobStatus)
-
-	ListCampaignsRequest_maxResults = ListCampaignsRequest.AddMember("maxResults", _MaxResults)
-
-	ListCampaignsRequest_nextToken = ListCampaignsRequest.AddMember("nextToken", _NextToken)
-
-	ListCampaignsRequest_filters = ListCampaignsRequest.AddMember("filters", CampaignFilters)
-
-	ListCampaignsResponse_nextToken = ListCampaignsResponse.AddMember("nextToken", _NextToken)
-
-	ListCampaignsResponse_campaignSummaryList = ListCampaignsResponse.AddMember("campaignSummaryList", _CampaignSummaryList)
-
-	ListTagsForResourceRequest_arn = ListTagsForResourceRequest.AddMember("arn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	PauseCampaignRequest_id = PauseCampaignRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	PutDialRequestBatchRequest_id = PutDialRequestBatchRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	PutDialRequestBatchRequest_dialRequests = PutDialRequestBatchRequest.AddMember("dialRequests", _DialRequestList)
-
-	PutDialRequestBatchResponse_successfulRequests = PutDialRequestBatchResponse.AddMember("successfulRequests", _SuccessfulRequestList)
-
-	PutDialRequestBatchResponse_failedRequests = PutDialRequestBatchResponse.AddMember("failedRequests", _FailedRequestList)
-
-	ResumeCampaignRequest_id = ResumeCampaignRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	StartCampaignRequest_id = StartCampaignRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	StartInstanceOnboardingJobRequest_connectInstanceId = StartInstanceOnboardingJobRequest.AddMember("connectInstanceId", _InstanceId, &smithytraits.HTTPLabel{})
-
-	StartInstanceOnboardingJobRequest_encryptionConfig = StartInstanceOnboardingJobRequest.AddMember("encryptionConfig", EncryptionConfig)
-
-	StartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus = StartInstanceOnboardingJobResponse.AddMember("connectInstanceOnboardingJobStatus", InstanceOnboardingJobStatus)
-
-	StopCampaignRequest_id = StopCampaignRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_arn = TagResourceRequest.AddMember("arn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_arn = UntagResourceRequest.AddMember("arn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateCampaignDialerConfigRequest_id = UpdateCampaignDialerConfigRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	UpdateCampaignDialerConfigRequest_dialerConfig = UpdateCampaignDialerConfigRequest.AddMember("dialerConfig", DialerConfig)
-
-	UpdateCampaignNameRequest_id = UpdateCampaignNameRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	UpdateCampaignNameRequest_name = UpdateCampaignNameRequest.AddMember("name", _CampaignName)
-
-	UpdateCampaignOutboundCallConfigRequest_id = UpdateCampaignOutboundCallConfigRequest.AddMember("id", _CampaignId, &smithytraits.HTTPLabel{})
-
-	UpdateCampaignOutboundCallConfigRequest_connectContactFlowId = UpdateCampaignOutboundCallConfigRequest.AddMember("connectContactFlowId", _ContactFlowId)
-
-	UpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber = UpdateCampaignOutboundCallConfigRequest.AddMember("connectSourcePhoneNumber", _SourcePhoneNumber)
-
-	UpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig = UpdateCampaignOutboundCallConfigRequest.AddMember("answerMachineDetectionConfig", AnswerMachineDetectionConfig)
-
+const blob = "" +
+	"UpdateCampaignOutboundCallConfigRequestGetInstanceOnboardingJobStatusResponseGetInstanceOnboardingJo" +
+	"bStatusRequestSuccessfulCampaignStateResponseListDeleteConnectInstanceConfigRequestDeleteInstanceOnb" +
+	"oardingJobRequestStartInstanceOnboardingJobResponseconnectInstanceOnboardingJobStatusStartInstanceOn" +
+	"boardingJobRequestUpdateCampaignDialerConfigRequestGetCampaignStateBatchFailureCodeGetConnectInstanc" +
+	"eConfigResponseInstanceOnboardingJobFailureCodeFailedCampaignStateResponseListGetConnectInstanceConf" +
+	"igRequestInstanceOnboardingJobStatusCodeGetCampaignStateBatchResponseInvalidCampaignStateExceptionSe" +
+	"rviceQuotaExceededExceptionAmazonConnectCampaignServiceAnswerMachineDetectionConfigGetCampaignStateB" +
+	"atchRequestanswerMachineDetectionConfigenableAnswerMachineDetectionListTagsForResourceResponsePutDia" +
+	"lRequestBatchResponseListTagsForResourceRequestPutDialRequestBatchRequestResourceNotFoundExceptionUp" +
+	"dateCampaignNameRequestDescribeCampaignResponseGetCampaignStateResponseInstanceIdFilterOperatorawait" +
+	"AnswerMachinePromptconnectSourcePhoneNumberDescribeCampaignRequestGetCampaignStateRequestInternalSer" +
+	"verExceptionProgressiveDialerConfigprogressiveDialerConfigCreateCampaignResponseDestinationPhoneNumb" +
+	"erPredictiveDialerConfigpredictiveDialerConfigAccessDeniedExceptionAgentlessDialerConfigCreateCampai" +
+	"gnRequestDeleteCampaignRequestInvalidStateExceptionListCampaignsResponseResumeCampaignRequestSuccess" +
+	"fulRequestListagentlessDialerConfigconnectInstanceConfigListCampaignsRequestPauseCampaignRequestServ" +
+	"iceLinkedRoleArnStartCampaignRequestUntagResourceRequestconnectContactFlowIdserviceLinkedRoleArnBand" +
+	"widthAllocationCampaignSummaryListStopCampaignRequestThrottlingExceptionValidationExceptionbandwidth" +
+	"AllocationcampaignSummaryListTagResourceRequestoutboundCallConfigsuccessfulRequestsConflictException" +
+	"FailedRequestListconnectInstanceIdEncryptionConfigXAmazonErrorTypeencryptionConfiginstanceIdFilterCa" +
+	"mpaignFiltersDialRequestListDialingCapacitydialingCapacityAttributeValueCampaignIdListEncryptionType" +
+	"connectQueueIdencryptionTypeexpirationTimefailedRequestsAttributeNameDialRequestIdEncryptionKeyxAmzE" +
+	"rrorTypedialRequestsdialerConfigCampaignArnClientTokencampaignIdsclientTokenfailureCodephoneNumberAt" +
+	"tributesMaxResultsTagKeyListattributesmaxResultsNextTokenTimeStampnextTokenTagValueoperatorBooleanEn" +
+	"abledenabledfiltersmessagetagKeysStringTagMapkeyArnmemberstatusstatevaluenametagsarn"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.connectcampaigns", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1158, Target: 0, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1309, Target: 1, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 149, Target: 2, Traits: 2, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 183, Target: 3, Traits: 3, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 923, Target: 4, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 351, Target: 5, Traits: 5, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 351, Target: 6, Traits: 6, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 383, Target: 7, Traits: 7, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 39, Target: 8, Traits: 8, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1351, Target: 9, Traits: 9, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 767, Target: 10, Traits: 10, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1476, Target: 11, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 794, Target: 12, Traits: 12, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1372, Target: 13, Traits: 13, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1516, Target: 14, Traits: 14, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 217, Target: 15, Traits: 15, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1634, Target: 16, Traits: 16, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1729, Target: 17, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1536, Target: 18, Traits: 18, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 318, Target: 19, Traits: 19, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 898, Target: 20, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 21, Traits: 21, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 627, Target: 22, Traits: 22, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1246, Target: 23, Traits: 23, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1267, Target: 26, Traits: 22, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1943, Target: 71, Traits: 22, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 655, Target: 28, Traits: 22, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 739, Target: 257, Traits: 22, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 995, Target: 257, Traits: 22, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1513, Target: 31, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2056, Target: 32, Traits: 22, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2198, Target: 33, Traits: 25, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2345, Target: 32, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2368, Target: 36, Traits: 22, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1958, Target: 36, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1596, Target: 37, Traits: 22, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 6, Target: 38, Traits: 22, StrLen: 8, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 22, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2381, Target: 46, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2373, Target: 52, Traits: 22, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1817, Target: 104, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2120, Target: 67, Traits: 22, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1747, Target: 127, Traits: 22, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2377, Target: 160, Traits: 22, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2132, Target: 46, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1898, Target: 47, Traits: 22, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1882, Target: 105, Traits: 22, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1972, Target: 49, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1972, Target: 50, Traits: 22, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2351, Target: 49, Traits: 22, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 904, Target: 52, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 124, Target: 53, Traits: 22, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1615, Target: 54, Traits: 22, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 22, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2381, Target: 46, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2373, Target: 52, Traits: 22, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1817, Target: 104, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1615, Target: 59, Traits: 22, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2351, Target: 54, Traits: 22, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2143, Target: 61, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1783, Target: 62, Traits: 26, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1563, Target: 65, Traits: 22, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1180, Target: 66, Traits: 25, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 332, Target: 67, Traits: 22, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1135, Target: 135, Traits: 22, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1224, Target: 132, Traits: 22, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1414, Target: 26, Traits: 22, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1928, Target: 71, Traits: 22, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 797, Target: 72, Traits: 22, StrLen: 11, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2165, Target: 61, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2187, Target: 66, Traits: 27, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2028, Target: 167, Traits: 28, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2228, Target: 33, Traits: 27, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2069, Target: 77, Traits: 22, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1913, Target: 78, Traits: 22, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2351, Target: 72, Traits: 22, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2298, Target: 80, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1834, Target: 81, Traits: 22, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2305, Target: 80, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2014, Target: 86, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2345, Target: 85, Traits: 22, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2082, Target: 85, Traits: 22, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1986, Target: 86, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 447, Target: 87, Traits: 22, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2154, Target: 49, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2176, Target: 99, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 447, Target: 90, Traits: 22, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2351, Target: 87, Traits: 22, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1800, Target: 92, Traits: 22, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2165, Target: 61, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 574, Target: 77, Traits: 22, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2176, Target: 98, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1800, Target: 96, Traits: 22, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2351, Target: 92, Traits: 22, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 372, Target: 98, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 351, Target: 99, Traits: 22, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 162, Target: 100, Traits: 22, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 104, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1576, Target: 142, Traits: 22, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1866, Target: 81, Traits: 22, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 971, Target: 104, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 971, Target: 105, Traits: 22, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2368, Target: 104, Traits: 22, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2283, Target: 108, Traits: 22, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 971, Target: 108, Traits: 22, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 415, Target: 109, Traits: 22, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 42, Target: 110, Traits: 22, StrLen: 27, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 104, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2357, Target: 114, Traits: 22, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2176, Target: 109, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 509, Target: 114, Traits: 22, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1089, Target: 115, Traits: 29, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 569, Target: 118, Traits: 26, StrLen: 29, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2363, Target: 53, Traits: 22, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1330, Target: 122, Traits: 26, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2208, Target: 125, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2248, Target: 126, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 14, Target: 127, Traits: 22, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1556, Target: 65, Traits: 22, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1019, Target: 146, Traits: 22, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2000, Target: 138, Traits: 22, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 711, Target: 28, Traits: 22, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1202, Target: 132, Traits: 22, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1691, Target: 37, Traits: 22, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1943, Target: 71, Traits: 22, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1112, Target: 135, Traits: 22, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1691, Target: 37, Traits: 22, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1943, Target: 71, Traits: 22, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2007, Target: 138, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 873, Target: 139, Traits: 30, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1496, Target: 142, Traits: 22, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 598, Target: 143, Traits: 31, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1026, Target: 146, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 114, Target: 147, Traits: 22, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2154, Target: 49, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2363, Target: 53, Traits: 22, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 114, Target: 150, Traits: 22, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2351, Target: 147, Traits: 22, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1393, Target: 152, Traits: 22, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2165, Target: 61, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 574, Target: 77, Traits: 22, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1393, Target: 155, Traits: 22, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2351, Target: 152, Traits: 22, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2218, Target: 157, Traits: 22, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2218, Target: 158, Traits: 22, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2351, Target: 157, Traits: 22, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2339, Target: 160, Traits: 22, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2345, Target: 157, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2368, Target: 163, Traits: 22, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2275, Target: 163, Traits: 22, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1653, Target: 164, Traits: 32, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2257, Target: 167, Traits: 33, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1672, Target: 168, Traits: 34, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2319, Target: 256, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2095, Target: 171, Traits: 24, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1850, Target: 171, Traits: 22, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1288, Target: 172, Traits: 22, StrLen: 21, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2373, Target: 52, Traits: 22, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1817, Target: 104, Traits: 22, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2120, Target: 67, Traits: 22, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1747, Target: 127, Traits: 22, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2377, Target: 160, Traits: 22, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1158, Target: 178, Traits: 22, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 22, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2381, Target: 46, Traits: 22, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2377, Target: 160, Traits: 22, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1309, Target: 182, Traits: 22, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 149, Target: 184, Traits: 22, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 104, Traits: 35, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 183, Target: 186, Traits: 22, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 104, Traits: 35, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1043, Target: 188, Traits: 22, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 923, Target: 190, Traits: 22, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1710, Target: 38, Traits: 22, StrLen: 8, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 683, Target: 192, Traits: 22, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2154, Target: 50, Traits: 22, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 540, Target: 194, Traits: 22, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1765, Target: 150, Traits: 22, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2042, Target: 90, Traits: 22, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1066, Target: 197, Traits: 22, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 947, Target: 199, Traits: 22, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2363, Target: 53, Traits: 22, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 478, Target: 201, Traits: 22, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 104, Traits: 35, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 383, Target: 203, Traits: 22, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1435, Target: 100, Traits: 22, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 77, Target: 205, Traits: 22, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 104, Traits: 35, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 39, Target: 207, Traits: 22, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 251, Target: 110, Traits: 22, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1456, Target: 209, Traits: 22, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2238, Target: 125, Traits: 22, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2266, Target: 126, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2312, Target: 47, Traits: 22, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1351, Target: 213, Traits: 22, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2266, Target: 126, Traits: 22, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1710, Target: 59, Traits: 22, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 821, Target: 216, Traits: 22, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2381, Target: 31, Traits: 35, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 767, Target: 218, Traits: 22, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2377, Target: 160, Traits: 22, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1476, Target: 220, Traits: 22, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 847, Target: 222, Traits: 22, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2108, Target: 78, Traits: 22, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 794, Target: 225, Traits: 22, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1765, Target: 155, Traits: 22, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2042, Target: 96, Traits: 22, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1372, Target: 228, Traits: 22, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1516, Target: 230, Traits: 22, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 285, Target: 232, Traits: 22, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1817, Target: 104, Traits: 35, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1866, Target: 81, Traits: 22, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 217, Target: 235, Traits: 22, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 251, Target: 110, Traits: 22, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1634, Target: 237, Traits: 22, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1729, Target: 239, Traits: 22, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2381, Target: 31, Traits: 35, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2377, Target: 160, Traits: 22, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1536, Target: 242, Traits: 22, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2381, Target: 31, Traits: 35, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2326, Target: 158, Traits: 36, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 318, Target: 245, Traits: 22, StrLen: 33, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2120, Target: 67, Traits: 22, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 898, Target: 248, Traits: 22, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2373, Target: 52, Traits: 22, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 251, Traits: 22, StrLen: 39, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 574, Target: 49, Traits: 35, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1556, Target: 65, Traits: 22, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1019, Target: 146, Traits: 22, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 711, Target: 28, Traits: 22, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2333, Target: 256, Traits: 22, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 2291, Target: 257, Traits: 22, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/campaigns",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/campaigns/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/connect-instance/{connectInstanceId}/config",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/connect-instance/{connectInstanceId}/onboarding",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/campaigns/{id}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/campaigns/{id}/state",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns-state",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/connect-instance/{connectInstanceId}/config",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/connect-instance/{connectInstanceId}/onboarding",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns-summary",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns/{id}/pause",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/campaigns/{id}/dial-requests",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns/{id}/resume",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns/{id}/start",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/connect-instance/{connectInstanceId}/onboarding",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns/{id}/stop",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{arn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns/{id}/dialer-config",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns/{id}/name",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/campaigns/{id}/outbound-call-config",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [258]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+}
+
+var CreateCampaign = &handles[0]
+
+var DeleteCampaign = &handles[1]
+
+var DeleteConnectInstanceConfig = &handles[2]
+
+var DeleteInstanceOnboardingJob = &handles[3]
+
+var DescribeCampaign = &handles[4]
+
+var GetCampaignState = &handles[5]
+
+var GetCampaignStateBatch = &handles[6]
+
+var GetConnectInstanceConfig = &handles[7]
+
+var GetInstanceOnboardingJobStatus = &handles[8]
+
+var ListCampaigns = &handles[9]
+
+var ListTagsForResource = &handles[10]
+
+var PauseCampaign = &handles[11]
+
+var PutDialRequestBatch = &handles[12]
+
+var ResumeCampaign = &handles[13]
+
+var StartCampaign = &handles[14]
+
+var StartInstanceOnboardingJob = &handles[15]
+
+var StopCampaign = &handles[16]
+
+var TagResource = &handles[17]
+
+var UntagResource = &handles[18]
+
+var UpdateCampaignDialerConfig = &handles[19]
+
+var UpdateCampaignName = &handles[20]
+
+var UpdateCampaignOutboundCallConfig = &handles[21]
+
+var _AmazonConnectCampaignService = &handles[22]
+
+var AccessDeniedException = &handles[23]
+var AccessDeniedException_message = &handles[24]
+var AccessDeniedException_xAmzErrorType = &handles[25]
+
+var AgentlessDialerConfig = &handles[26]
+var AgentlessDialerConfig_dialingCapacity = &handles[27]
+
+var AnswerMachineDetectionConfig = &handles[28]
+var AnswerMachineDetectionConfig_enableAnswerMachineDetection = &handles[29]
+var AnswerMachineDetectionConfig_awaitAnswerMachinePrompt = &handles[30]
+
+var _Arn = &handles[31]
+
+var _AttributeName = &handles[32]
+
+var _Attributes = &handles[33]
+var _Attributes_key = &handles[34]
+var _Attributes_value = &handles[35]
+
+var _AttributeValue = &handles[36]
+
+var _BandwidthAllocation = &handles[37]
+
+var Campaign = &handles[38]
+var Campaign_id = &handles[39]
+var Campaign_arn = &handles[40]
+var Campaign_name = &handles[41]
+var Campaign_connectInstanceId = &handles[42]
+var Campaign_dialerConfig = &handles[43]
+var Campaign_outboundCallConfig = &handles[44]
+var Campaign_tags = &handles[45]
+
+var _CampaignArn = &handles[46]
+
+var CampaignFilters = &handles[47]
+var CampaignFilters_instanceIdFilter = &handles[48]
+
+var _CampaignId = &handles[49]
+
+var _CampaignIdList = &handles[50]
+var _CampaignIdList_member = &handles[51]
+
+var _CampaignName = &handles[52]
+
+var _CampaignState = &handles[53]
+
+var CampaignSummary = &handles[54]
+var CampaignSummary_id = &handles[55]
+var CampaignSummary_arn = &handles[56]
+var CampaignSummary_name = &handles[57]
+var CampaignSummary_connectInstanceId = &handles[58]
+
+var _CampaignSummaryList = &handles[59]
+var _CampaignSummaryList_member = &handles[60]
+
+var _ClientToken = &handles[61]
+
+var ConflictException = &handles[62]
+var ConflictException_message = &handles[63]
+var ConflictException_xAmzErrorType = &handles[64]
+
+var _ContactFlowId = &handles[65]
+
+var _DestinationPhoneNumber = &handles[66]
+
+var DialerConfig = &handles[67]
+var DialerConfig_progressiveDialerConfig = &handles[68]
+var DialerConfig_predictiveDialerConfig = &handles[69]
+var DialerConfig_agentlessDialerConfig = &handles[70]
+
+var _DialingCapacity = &handles[71]
+
+var DialRequest = &handles[72]
+var DialRequest_clientToken = &handles[73]
+var DialRequest_phoneNumber = &handles[74]
+var DialRequest_expirationTime = &handles[75]
+var DialRequest_attributes = &handles[76]
+
+var _DialRequestId = &handles[77]
+
+var _DialRequestList = &handles[78]
+var _DialRequestList_member = &handles[79]
+
+var _Enabled = &handles[80]
+
+var EncryptionConfig = &handles[81]
+var EncryptionConfig_enabled = &handles[82]
+var EncryptionConfig_encryptionType = &handles[83]
+var EncryptionConfig_keyArn = &handles[84]
+
+var _EncryptionKey = &handles[85]
+
+var _EncryptionType = &handles[86]
+
+var FailedCampaignStateResponse = &handles[87]
+var FailedCampaignStateResponse_campaignId = &handles[88]
+var FailedCampaignStateResponse_failureCode = &handles[89]
+
+var _FailedCampaignStateResponseList = &handles[90]
+var _FailedCampaignStateResponseList_member = &handles[91]
+
+var FailedRequest = &handles[92]
+var FailedRequest_clientToken = &handles[93]
+var FailedRequest_id = &handles[94]
+var FailedRequest_failureCode = &handles[95]
+
+var _FailedRequestList = &handles[96]
+var _FailedRequestList_member = &handles[97]
+
+var _FailureCode = &handles[98]
+
+var _GetCampaignStateBatchFailureCode = &handles[99]
+
+var InstanceConfig = &handles[100]
+var InstanceConfig_connectInstanceId = &handles[101]
+var InstanceConfig_serviceLinkedRoleArn = &handles[102]
+var InstanceConfig_encryptionConfig = &handles[103]
+
+var _InstanceId = &handles[104]
+
+var InstanceIdFilter = &handles[105]
+var InstanceIdFilter_value = &handles[106]
+var InstanceIdFilter_operator = &handles[107]
+
+var _InstanceIdFilterOperator = &handles[108]
+
+var _InstanceOnboardingJobFailureCode = &handles[109]
+
+var InstanceOnboardingJobStatus = &handles[110]
+var InstanceOnboardingJobStatus_connectInstanceId = &handles[111]
+var InstanceOnboardingJobStatus_status = &handles[112]
+var InstanceOnboardingJobStatus_failureCode = &handles[113]
+
+var _InstanceOnboardingJobStatusCode = &handles[114]
+
+var InternalServerException = &handles[115]
+var InternalServerException_message = &handles[116]
+var InternalServerException_xAmzErrorType = &handles[117]
+
+var InvalidCampaignStateException = &handles[118]
+var InvalidCampaignStateException_state = &handles[119]
+var InvalidCampaignStateException_message = &handles[120]
+var InvalidCampaignStateException_xAmzErrorType = &handles[121]
+
+var InvalidStateException = &handles[122]
+var InvalidStateException_message = &handles[123]
+var InvalidStateException_xAmzErrorType = &handles[124]
+
+var _MaxResults = &handles[125]
+
+var _NextToken = &handles[126]
+
+var OutboundCallConfig = &handles[127]
+var OutboundCallConfig_connectContactFlowId = &handles[128]
+var OutboundCallConfig_connectSourcePhoneNumber = &handles[129]
+var OutboundCallConfig_connectQueueId = &handles[130]
+var OutboundCallConfig_answerMachineDetectionConfig = &handles[131]
+
+var PredictiveDialerConfig = &handles[132]
+var PredictiveDialerConfig_bandwidthAllocation = &handles[133]
+var PredictiveDialerConfig_dialingCapacity = &handles[134]
+
+var ProgressiveDialerConfig = &handles[135]
+var ProgressiveDialerConfig_bandwidthAllocation = &handles[136]
+var ProgressiveDialerConfig_dialingCapacity = &handles[137]
+
+var _QueueId = &handles[138]
+
+var ResourceNotFoundException = &handles[139]
+var ResourceNotFoundException_message = &handles[140]
+var ResourceNotFoundException_xAmzErrorType = &handles[141]
+
+var _ServiceLinkedRoleArn = &handles[142]
+
+var ServiceQuotaExceededException = &handles[143]
+var ServiceQuotaExceededException_message = &handles[144]
+var ServiceQuotaExceededException_xAmzErrorType = &handles[145]
+
+var _SourcePhoneNumber = &handles[146]
+
+var SuccessfulCampaignStateResponse = &handles[147]
+var SuccessfulCampaignStateResponse_campaignId = &handles[148]
+var SuccessfulCampaignStateResponse_state = &handles[149]
+
+var _SuccessfulCampaignStateResponseList = &handles[150]
+var _SuccessfulCampaignStateResponseList_member = &handles[151]
+
+var SuccessfulRequest = &handles[152]
+var SuccessfulRequest_clientToken = &handles[153]
+var SuccessfulRequest_id = &handles[154]
+
+var _SuccessfulRequestList = &handles[155]
+var _SuccessfulRequestList_member = &handles[156]
+
+var _TagKey = &handles[157]
+
+var _TagKeyList = &handles[158]
+var _TagKeyList_member = &handles[159]
+
+var _TagMap = &handles[160]
+var _TagMap_key = &handles[161]
+var _TagMap_value = &handles[162]
+
+var _TagValue = &handles[163]
+
+var ThrottlingException = &handles[164]
+var ThrottlingException_message = &handles[165]
+var ThrottlingException_xAmzErrorType = &handles[166]
+
+var _TimeStamp = &handles[167]
+
+var ValidationException = &handles[168]
+var ValidationException_message = &handles[169]
+var ValidationException_xAmzErrorType = &handles[170]
+
+var _XAmazonErrorType = &handles[171]
+
+var CreateCampaignRequest = &handles[172]
+var CreateCampaignRequest_name = &handles[173]
+var CreateCampaignRequest_connectInstanceId = &handles[174]
+var CreateCampaignRequest_dialerConfig = &handles[175]
+var CreateCampaignRequest_outboundCallConfig = &handles[176]
+var CreateCampaignRequest_tags = &handles[177]
+
+var CreateCampaignResponse = &handles[178]
+var CreateCampaignResponse_id = &handles[179]
+var CreateCampaignResponse_arn = &handles[180]
+var CreateCampaignResponse_tags = &handles[181]
+
+var DeleteCampaignRequest = &handles[182]
+var DeleteCampaignRequest_id = &handles[183]
+
+var DeleteConnectInstanceConfigRequest = &handles[184]
+var DeleteConnectInstanceConfigRequest_connectInstanceId = &handles[185]
+
+var DeleteInstanceOnboardingJobRequest = &handles[186]
+var DeleteInstanceOnboardingJobRequest_connectInstanceId = &handles[187]
+
+var DescribeCampaignRequest = &handles[188]
+var DescribeCampaignRequest_id = &handles[189]
+
+var DescribeCampaignResponse = &handles[190]
+var DescribeCampaignResponse_campaign = &handles[191]
+
+var GetCampaignStateBatchRequest = &handles[192]
+var GetCampaignStateBatchRequest_campaignIds = &handles[193]
+
+var GetCampaignStateBatchResponse = &handles[194]
+var GetCampaignStateBatchResponse_successfulRequests = &handles[195]
+var GetCampaignStateBatchResponse_failedRequests = &handles[196]
+
+var GetCampaignStateRequest = &handles[197]
+var GetCampaignStateRequest_id = &handles[198]
+
+var GetCampaignStateResponse = &handles[199]
+var GetCampaignStateResponse_state = &handles[200]
+
+var GetConnectInstanceConfigRequest = &handles[201]
+var GetConnectInstanceConfigRequest_connectInstanceId = &handles[202]
+
+var GetConnectInstanceConfigResponse = &handles[203]
+var GetConnectInstanceConfigResponse_connectInstanceConfig = &handles[204]
+
+var GetInstanceOnboardingJobStatusRequest = &handles[205]
+var GetInstanceOnboardingJobStatusRequest_connectInstanceId = &handles[206]
+
+var GetInstanceOnboardingJobStatusResponse = &handles[207]
+var GetInstanceOnboardingJobStatusResponse_connectInstanceOnboardingJobStatus = &handles[208]
+
+var ListCampaignsRequest = &handles[209]
+var ListCampaignsRequest_maxResults = &handles[210]
+var ListCampaignsRequest_nextToken = &handles[211]
+var ListCampaignsRequest_filters = &handles[212]
+
+var ListCampaignsResponse = &handles[213]
+var ListCampaignsResponse_nextToken = &handles[214]
+var ListCampaignsResponse_campaignSummaryList = &handles[215]
+
+var ListTagsForResourceRequest = &handles[216]
+var ListTagsForResourceRequest_arn = &handles[217]
+
+var ListTagsForResourceResponse = &handles[218]
+var ListTagsForResourceResponse_tags = &handles[219]
+
+var PauseCampaignRequest = &handles[220]
+var PauseCampaignRequest_id = &handles[221]
+
+var PutDialRequestBatchRequest = &handles[222]
+var PutDialRequestBatchRequest_id = &handles[223]
+var PutDialRequestBatchRequest_dialRequests = &handles[224]
+
+var PutDialRequestBatchResponse = &handles[225]
+var PutDialRequestBatchResponse_successfulRequests = &handles[226]
+var PutDialRequestBatchResponse_failedRequests = &handles[227]
+
+var ResumeCampaignRequest = &handles[228]
+var ResumeCampaignRequest_id = &handles[229]
+
+var StartCampaignRequest = &handles[230]
+var StartCampaignRequest_id = &handles[231]
+
+var StartInstanceOnboardingJobRequest = &handles[232]
+var StartInstanceOnboardingJobRequest_connectInstanceId = &handles[233]
+var StartInstanceOnboardingJobRequest_encryptionConfig = &handles[234]
+
+var StartInstanceOnboardingJobResponse = &handles[235]
+var StartInstanceOnboardingJobResponse_connectInstanceOnboardingJobStatus = &handles[236]
+
+var StopCampaignRequest = &handles[237]
+var StopCampaignRequest_id = &handles[238]
+
+var TagResourceRequest = &handles[239]
+var TagResourceRequest_arn = &handles[240]
+var TagResourceRequest_tags = &handles[241]
+
+var UntagResourceRequest = &handles[242]
+var UntagResourceRequest_arn = &handles[243]
+var UntagResourceRequest_tagKeys = &handles[244]
+
+var UpdateCampaignDialerConfigRequest = &handles[245]
+var UpdateCampaignDialerConfigRequest_id = &handles[246]
+var UpdateCampaignDialerConfigRequest_dialerConfig = &handles[247]
+
+var UpdateCampaignNameRequest = &handles[248]
+var UpdateCampaignNameRequest_id = &handles[249]
+var UpdateCampaignNameRequest_name = &handles[250]
+
+var UpdateCampaignOutboundCallConfigRequest = &handles[251]
+var UpdateCampaignOutboundCallConfigRequest_id = &handles[252]
+var UpdateCampaignOutboundCallConfigRequest_connectContactFlowId = &handles[253]
+var UpdateCampaignOutboundCallConfigRequest_connectSourcePhoneNumber = &handles[254]
+var UpdateCampaignOutboundCallConfigRequest_answerMachineDetectionConfig = &handles[255]
+
+var AmazonConnectCampaignService = &smithy.ServiceSchema{Schema: &handles[22], Version: "2021-01-30"}

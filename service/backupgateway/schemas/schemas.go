@@ -7,1276 +7,1084 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateGatewayToServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AssociateGatewayToServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "CreateGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteHypervisor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteHypervisor",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateGatewayFromServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DisassociateGatewayFromServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetBandwidthRateLimitSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetBandwidthRateLimitSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetHypervisor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisor",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetHypervisorPropertyMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorPropertyMappings",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetVirtualMachine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetVirtualMachine",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportHypervisorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ImportHypervisorConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListGateways",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListHypervisors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListHypervisors",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVirtualMachines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListVirtualMachines",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutBandwidthRateLimitSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutBandwidthRateLimitSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutHypervisorPropertyMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutHypervisorPropertyMappings",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutMaintenanceStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutMaintenanceStartTime",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartVirtualMachinesMetadataSync = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "StartVirtualMachinesMetadataSync",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TestHypervisorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TestHypervisorConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGatewayInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewayInformation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGatewaySoftwareNow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewaySoftwareNow",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateHypervisor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateHypervisor",
-}, smithy.ShapeTypeOperation, 0)
-
-var _BackupOnPremises_v20210101 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "BackupOnPremises_v20210101",
-}, smithy.ShapeTypeService, 0)
-
-var BackupOnPremises_v20210101 = smithy.NewServiceSchema(_BackupOnPremises_v20210101, "2021-01-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_ErrorCode *smithy.Schema
-
-var AccessDeniedException_Message *smithy.Schema
-
-var _ActivationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ActivationKey",
-}, smithy.ShapeTypeString, 0)
-
-var _AverageUploadRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AverageUploadRateLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var BandwidthRateLimitInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "BandwidthRateLimitInterval",
-}, smithy.ShapeTypeStructure, 6)
-var BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec *smithy.Schema
-
-var BandwidthRateLimitInterval_StartHourOfDay *smithy.Schema
-
-var BandwidthRateLimitInterval_EndHourOfDay *smithy.Schema
-
-var BandwidthRateLimitInterval_StartMinuteOfHour *smithy.Schema
-
-var BandwidthRateLimitInterval_EndMinuteOfHour *smithy.Schema
-
-var BandwidthRateLimitInterval_DaysOfWeek *smithy.Schema
-
-var _BandwidthRateLimitIntervals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "BandwidthRateLimitIntervals",
-}, smithy.ShapeTypeList, 1)
-var _BandwidthRateLimitIntervals_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_ErrorCode *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var _DayOfMonth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DayOfMonth",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DaysOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DaysOfWeek",
-}, smithy.ShapeTypeList, 1)
-var _DaysOfWeek_member *smithy.Schema
-
-var Gateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Gateway",
-}, smithy.ShapeTypeStructure, 5)
-var Gateway_GatewayArn *smithy.Schema
-
-var Gateway_GatewayDisplayName *smithy.Schema
-
-var Gateway_GatewayType *smithy.Schema
-
-var Gateway_HypervisorId *smithy.Schema
-
-var Gateway_LastSeenTime *smithy.Schema
-
-var _GatewayArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GatewayArn",
-}, smithy.ShapeTypeString, 0)
-
-var GatewayDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GatewayDetails",
-}, smithy.ShapeTypeStructure, 10)
-var GatewayDetails_GatewayArn *smithy.Schema
-
-var GatewayDetails_GatewayDisplayName *smithy.Schema
-
-var GatewayDetails_GatewayType *smithy.Schema
-
-var GatewayDetails_HypervisorId *smithy.Schema
-
-var GatewayDetails_LastSeenTime *smithy.Schema
-
-var GatewayDetails_MaintenanceStartTime *smithy.Schema
-
-var GatewayDetails_NextUpdateAvailabilityTime *smithy.Schema
-
-var GatewayDetails_VpcEndpoint *smithy.Schema
-
-var GatewayDetails_DeprecationDate *smithy.Schema
-
-var GatewayDetails_SoftwareVersion *smithy.Schema
-
-var _Gateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Gateways",
-}, smithy.ShapeTypeList, 1)
-var _Gateways_member *smithy.Schema
-
-var _GatewayType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GatewayType",
-}, smithy.ShapeTypeString, 0)
-
-var _Host = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Host",
-}, smithy.ShapeTypeString, 0)
-
-var _HourOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "HourOfDay",
-}, smithy.ShapeTypeInteger, 0)
-
-var Hypervisor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Hypervisor",
-}, smithy.ShapeTypeStructure, 5)
-var Hypervisor_Host *smithy.Schema
-
-var Hypervisor_HypervisorArn *smithy.Schema
-
-var Hypervisor_KmsKeyArn *smithy.Schema
-
-var Hypervisor_Name *smithy.Schema
-
-var Hypervisor_State *smithy.Schema
-
-var HypervisorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "HypervisorDetails",
-}, smithy.ShapeTypeStructure, 9)
-var HypervisorDetails_Host *smithy.Schema
-
-var HypervisorDetails_HypervisorArn *smithy.Schema
-
-var HypervisorDetails_KmsKeyArn *smithy.Schema
-
-var HypervisorDetails_Name *smithy.Schema
-
-var HypervisorDetails_LogGroupArn *smithy.Schema
-
-var HypervisorDetails_State *smithy.Schema
-
-var HypervisorDetails_LastSuccessfulMetadataSyncTime *smithy.Schema
-
-var HypervisorDetails_LatestMetadataSyncStatusMessage *smithy.Schema
-
-var HypervisorDetails_LatestMetadataSyncStatus *smithy.Schema
-
-var _HypervisorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "HypervisorId",
-}, smithy.ShapeTypeString, 0)
-
-var _Hypervisors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Hypervisors",
-}, smithy.ShapeTypeList, 1)
-var _Hypervisors_member *smithy.Schema
-
-var _HypervisorState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "HypervisorState",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_ErrorCode *smithy.Schema
-
-var InternalServerException_Message *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LogGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "LogGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var MaintenanceStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "MaintenanceStartTime",
-}, smithy.ShapeTypeStructure, 4)
-var MaintenanceStartTime_DayOfMonth *smithy.Schema
-
-var MaintenanceStartTime_DayOfWeek *smithy.Schema
-
-var MaintenanceStartTime_HourOfDay *smithy.Schema
-
-var MaintenanceStartTime_MinuteOfHour *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MinuteOfHour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "MinuteOfHour",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Password = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Password",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Path",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_ErrorCode *smithy.Schema
-
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ServerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ServerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var _SyncMetadataStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "SyncMetadataStatus",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_ErrorCode *smithy.Schema
-
-var ThrottlingException_Message *smithy.Schema
-
-var _Time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Time",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Username = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "Username",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_ErrorCode *smithy.Schema
-
-var ValidationException_Message *smithy.Schema
-
-var VirtualMachine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VirtualMachine",
-}, smithy.ShapeTypeStructure, 6)
-var VirtualMachine_HostName *smithy.Schema
-
-var VirtualMachine_HypervisorId *smithy.Schema
-
-var VirtualMachine_Name *smithy.Schema
-
-var VirtualMachine_Path *smithy.Schema
-
-var VirtualMachine_ResourceArn *smithy.Schema
-
-var VirtualMachine_LastBackupDate *smithy.Schema
-
-var VirtualMachineDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VirtualMachineDetails",
-}, smithy.ShapeTypeStructure, 7)
-var VirtualMachineDetails_HostName *smithy.Schema
-
-var VirtualMachineDetails_HypervisorId *smithy.Schema
-
-var VirtualMachineDetails_Name *smithy.Schema
-
-var VirtualMachineDetails_Path *smithy.Schema
-
-var VirtualMachineDetails_ResourceArn *smithy.Schema
-
-var VirtualMachineDetails_LastBackupDate *smithy.Schema
-
-var VirtualMachineDetails_VmwareTags *smithy.Schema
-
-var _VirtualMachines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VirtualMachines",
-}, smithy.ShapeTypeList, 1)
-var _VirtualMachines_member *smithy.Schema
-
-var _VmwareCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareCategory",
-}, smithy.ShapeTypeString, 0)
-
-var VmwareTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareTag",
-}, smithy.ShapeTypeStructure, 3)
-var VmwareTag_VmwareCategory *smithy.Schema
-
-var VmwareTag_VmwareTagName *smithy.Schema
-
-var VmwareTag_VmwareTagDescription *smithy.Schema
-
-var _VmwareTagName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareTagName",
-}, smithy.ShapeTypeString, 0)
-
-var _VmwareTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareTags",
-}, smithy.ShapeTypeList, 1)
-var _VmwareTags_member *smithy.Schema
-
-var VmwareToAwsTagMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareToAwsTagMapping",
-}, smithy.ShapeTypeStructure, 4)
-var VmwareToAwsTagMapping_VmwareCategory *smithy.Schema
-
-var VmwareToAwsTagMapping_VmwareTagName *smithy.Schema
-
-var VmwareToAwsTagMapping_AwsTagKey *smithy.Schema
-
-var VmwareToAwsTagMapping_AwsTagValue *smithy.Schema
-
-var _VmwareToAwsTagMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VmwareToAwsTagMappings",
-}, smithy.ShapeTypeList, 1)
-var _VmwareToAwsTagMappings_member *smithy.Schema
-
-var _VpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "VpcEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateGatewayToServerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AssociateGatewayToServerInput",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateGatewayToServerInput_GatewayArn *smithy.Schema
-
-var AssociateGatewayToServerInput_ServerArn *smithy.Schema
-
-var AssociateGatewayToServerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "AssociateGatewayToServerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateGatewayToServerOutput_GatewayArn *smithy.Schema
-
-var CreateGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "CreateGatewayInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateGatewayInput_ActivationKey *smithy.Schema
-
-var CreateGatewayInput_GatewayDisplayName *smithy.Schema
-
-var CreateGatewayInput_GatewayType *smithy.Schema
-
-var CreateGatewayInput_Tags *smithy.Schema
-
-var CreateGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "CreateGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGatewayOutput_GatewayArn *smithy.Schema
-
-var DeleteGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayInput_GatewayArn *smithy.Schema
-
-var DeleteGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayOutput_GatewayArn *smithy.Schema
-
-var DeleteHypervisorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteHypervisorInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHypervisorInput_HypervisorArn *smithy.Schema
-
-var DeleteHypervisorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DeleteHypervisorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHypervisorOutput_HypervisorArn *smithy.Schema
-
-var DisassociateGatewayFromServerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DisassociateGatewayFromServerInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateGatewayFromServerInput_GatewayArn *smithy.Schema
-
-var DisassociateGatewayFromServerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "DisassociateGatewayFromServerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateGatewayFromServerOutput_GatewayArn *smithy.Schema
-
-var GetBandwidthRateLimitScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetBandwidthRateLimitScheduleInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetBandwidthRateLimitScheduleInput_GatewayArn *smithy.Schema
-
-var GetBandwidthRateLimitScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetBandwidthRateLimitScheduleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetBandwidthRateLimitScheduleOutput_GatewayArn *smithy.Schema
-
-var GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals *smithy.Schema
-
-var GetGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetGatewayInput_GatewayArn *smithy.Schema
-
-var GetGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetGatewayOutput_Gateway *smithy.Schema
-
-var GetHypervisorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHypervisorInput_HypervisorArn *smithy.Schema
-
-var GetHypervisorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHypervisorOutput_Hypervisor *smithy.Schema
-
-var GetHypervisorPropertyMappingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorPropertyMappingsInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHypervisorPropertyMappingsInput_HypervisorArn *smithy.Schema
-
-var GetHypervisorPropertyMappingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetHypervisorPropertyMappingsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetHypervisorPropertyMappingsOutput_HypervisorArn *smithy.Schema
-
-var GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings *smithy.Schema
-
-var GetHypervisorPropertyMappingsOutput_IamRoleArn *smithy.Schema
-
-var GetVirtualMachineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetVirtualMachineInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetVirtualMachineInput_ResourceArn *smithy.Schema
-
-var GetVirtualMachineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "GetVirtualMachineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetVirtualMachineOutput_VirtualMachine *smithy.Schema
-
-var ImportHypervisorConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ImportHypervisorConfigurationInput",
-}, smithy.ShapeTypeStructure, 6)
-var ImportHypervisorConfigurationInput_Name *smithy.Schema
-
-var ImportHypervisorConfigurationInput_Host *smithy.Schema
-
-var ImportHypervisorConfigurationInput_Username *smithy.Schema
-
-var ImportHypervisorConfigurationInput_Password *smithy.Schema
-
-var ImportHypervisorConfigurationInput_KmsKeyArn *smithy.Schema
-
-var ImportHypervisorConfigurationInput_Tags *smithy.Schema
-
-var ImportHypervisorConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ImportHypervisorConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ImportHypervisorConfigurationOutput_HypervisorArn *smithy.Schema
-
-var ListGatewaysInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListGatewaysInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewaysInput_MaxResults *smithy.Schema
-
-var ListGatewaysInput_NextToken *smithy.Schema
-
-var ListGatewaysOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListGatewaysOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewaysOutput_Gateways *smithy.Schema
-
-var ListGatewaysOutput_NextToken *smithy.Schema
-
-var ListHypervisorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListHypervisorsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListHypervisorsInput_MaxResults *smithy.Schema
-
-var ListHypervisorsInput_NextToken *smithy.Schema
-
-var ListHypervisorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListHypervisorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListHypervisorsOutput_Hypervisors *smithy.Schema
-
-var ListHypervisorsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListVirtualMachinesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListVirtualMachinesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListVirtualMachinesInput_HypervisorArn *smithy.Schema
-
-var ListVirtualMachinesInput_MaxResults *smithy.Schema
-
-var ListVirtualMachinesInput_NextToken *smithy.Schema
-
-var ListVirtualMachinesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "ListVirtualMachinesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVirtualMachinesOutput_VirtualMachines *smithy.Schema
-
-var ListVirtualMachinesOutput_NextToken *smithy.Schema
-
-var PutBandwidthRateLimitScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutBandwidthRateLimitScheduleInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutBandwidthRateLimitScheduleInput_GatewayArn *smithy.Schema
-
-var PutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals *smithy.Schema
-
-var PutBandwidthRateLimitScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutBandwidthRateLimitScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutBandwidthRateLimitScheduleOutput_GatewayArn *smithy.Schema
-
-var PutHypervisorPropertyMappingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutHypervisorPropertyMappingsInput",
-}, smithy.ShapeTypeStructure, 3)
-var PutHypervisorPropertyMappingsInput_HypervisorArn *smithy.Schema
-
-var PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings *smithy.Schema
-
-var PutHypervisorPropertyMappingsInput_IamRoleArn *smithy.Schema
-
-var PutHypervisorPropertyMappingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutHypervisorPropertyMappingsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutHypervisorPropertyMappingsOutput_HypervisorArn *smithy.Schema
-
-var PutMaintenanceStartTimeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutMaintenanceStartTimeInput",
-}, smithy.ShapeTypeStructure, 5)
-var PutMaintenanceStartTimeInput_GatewayArn *smithy.Schema
-
-var PutMaintenanceStartTimeInput_HourOfDay *smithy.Schema
-
-var PutMaintenanceStartTimeInput_MinuteOfHour *smithy.Schema
-
-var PutMaintenanceStartTimeInput_DayOfWeek *smithy.Schema
-
-var PutMaintenanceStartTimeInput_DayOfMonth *smithy.Schema
-
-var PutMaintenanceStartTimeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "PutMaintenanceStartTimeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PutMaintenanceStartTimeOutput_GatewayArn *smithy.Schema
-
-var StartVirtualMachinesMetadataSyncInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "StartVirtualMachinesMetadataSyncInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartVirtualMachinesMetadataSyncInput_HypervisorArn *smithy.Schema
-
-var StartVirtualMachinesMetadataSyncOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "StartVirtualMachinesMetadataSyncOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartVirtualMachinesMetadataSyncOutput_HypervisorArn *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceARN *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var TagResourceOutput_ResourceARN *smithy.Schema
-
-var TestHypervisorConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TestHypervisorConfigurationInput",
-}, smithy.ShapeTypeStructure, 4)
-var TestHypervisorConfigurationInput_GatewayArn *smithy.Schema
-
-var TestHypervisorConfigurationInput_Host *smithy.Schema
-
-var TestHypervisorConfigurationInput_Username *smithy.Schema
-
-var TestHypervisorConfigurationInput_Password *smithy.Schema
-
-var TestHypervisorConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "TestHypervisorConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceARN *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UntagResourceOutput_ResourceARN *smithy.Schema
-
-var UpdateGatewayInformationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewayInformationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateGatewayInformationInput_GatewayArn *smithy.Schema
-
-var UpdateGatewayInformationInput_GatewayDisplayName *smithy.Schema
-
-var UpdateGatewayInformationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewayInformationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewayInformationOutput_GatewayArn *smithy.Schema
-
-var UpdateGatewaySoftwareNowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewaySoftwareNowInput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewaySoftwareNowInput_GatewayArn *smithy.Schema
-
-var UpdateGatewaySoftwareNowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateGatewaySoftwareNowOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewaySoftwareNowOutput_GatewayArn *smithy.Schema
-
-var UpdateHypervisorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateHypervisorInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateHypervisorInput_HypervisorArn *smithy.Schema
-
-var UpdateHypervisorInput_Host *smithy.Schema
-
-var UpdateHypervisorInput_Username *smithy.Schema
-
-var UpdateHypervisorInput_Password *smithy.Schema
-
-var UpdateHypervisorInput_Name *smithy.Schema
-
-var UpdateHypervisorInput_LogGroupArn *smithy.Schema
-
-var UpdateHypervisorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupgateway",
-	Name:      "UpdateHypervisorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateHypervisorOutput_HypervisorArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_ErrorCode = AccessDeniedException.AddMember("ErrorCode", _string)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _string)
-
-	_DaysOfWeek_member = _DaysOfWeek.AddMember("member", _DayOfWeek)
-
-	BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = BandwidthRateLimitInterval.AddMember("AverageUploadRateLimitInBitsPerSec", _AverageUploadRateLimit)
-
-	BandwidthRateLimitInterval_StartHourOfDay = BandwidthRateLimitInterval.AddMember("StartHourOfDay", _HourOfDay)
-
-	BandwidthRateLimitInterval_EndHourOfDay = BandwidthRateLimitInterval.AddMember("EndHourOfDay", _HourOfDay)
-
-	BandwidthRateLimitInterval_StartMinuteOfHour = BandwidthRateLimitInterval.AddMember("StartMinuteOfHour", _MinuteOfHour)
-
-	BandwidthRateLimitInterval_EndMinuteOfHour = BandwidthRateLimitInterval.AddMember("EndMinuteOfHour", _MinuteOfHour)
-
-	BandwidthRateLimitInterval_DaysOfWeek = BandwidthRateLimitInterval.AddMember("DaysOfWeek", _DaysOfWeek)
-
-	_BandwidthRateLimitIntervals_member = _BandwidthRateLimitIntervals.AddMember("member", BandwidthRateLimitInterval)
-
-	ConflictException_ErrorCode = ConflictException.AddMember("ErrorCode", _string)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _string)
-
-	Gateway_GatewayArn = Gateway.AddMember("GatewayArn", _GatewayArn)
-
-	Gateway_GatewayDisplayName = Gateway.AddMember("GatewayDisplayName", _Name)
-
-	Gateway_GatewayType = Gateway.AddMember("GatewayType", _GatewayType)
-
-	Gateway_HypervisorId = Gateway.AddMember("HypervisorId", _HypervisorId)
-
-	Gateway_LastSeenTime = Gateway.AddMember("LastSeenTime", _Time)
-
-	MaintenanceStartTime_DayOfMonth = MaintenanceStartTime.AddMember("DayOfMonth", _DayOfMonth)
-
-	MaintenanceStartTime_DayOfWeek = MaintenanceStartTime.AddMember("DayOfWeek", _DayOfWeek)
-
-	MaintenanceStartTime_HourOfDay = MaintenanceStartTime.AddMember("HourOfDay", _HourOfDay)
-
-	MaintenanceStartTime_MinuteOfHour = MaintenanceStartTime.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	GatewayDetails_GatewayArn = GatewayDetails.AddMember("GatewayArn", _GatewayArn)
-
-	GatewayDetails_GatewayDisplayName = GatewayDetails.AddMember("GatewayDisplayName", _Name)
-
-	GatewayDetails_GatewayType = GatewayDetails.AddMember("GatewayType", _GatewayType)
-
-	GatewayDetails_HypervisorId = GatewayDetails.AddMember("HypervisorId", _HypervisorId)
-
-	GatewayDetails_LastSeenTime = GatewayDetails.AddMember("LastSeenTime", _Time)
-
-	GatewayDetails_MaintenanceStartTime = GatewayDetails.AddMember("MaintenanceStartTime", MaintenanceStartTime)
-
-	GatewayDetails_NextUpdateAvailabilityTime = GatewayDetails.AddMember("NextUpdateAvailabilityTime", _Time)
-
-	GatewayDetails_VpcEndpoint = GatewayDetails.AddMember("VpcEndpoint", _VpcEndpoint)
-
-	GatewayDetails_DeprecationDate = GatewayDetails.AddMember("DeprecationDate", _Time)
-
-	GatewayDetails_SoftwareVersion = GatewayDetails.AddMember("SoftwareVersion", _Name)
-
-	_Gateways_member = _Gateways.AddMember("member", Gateway)
-
-	Hypervisor_Host = Hypervisor.AddMember("Host", _Host)
-
-	Hypervisor_HypervisorArn = Hypervisor.AddMember("HypervisorArn", _ServerArn)
-
-	Hypervisor_KmsKeyArn = Hypervisor.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	Hypervisor_Name = Hypervisor.AddMember("Name", _Name)
-
-	Hypervisor_State = Hypervisor.AddMember("State", _HypervisorState)
-
-	HypervisorDetails_Host = HypervisorDetails.AddMember("Host", _Host)
-
-	HypervisorDetails_HypervisorArn = HypervisorDetails.AddMember("HypervisorArn", _ServerArn)
-
-	HypervisorDetails_KmsKeyArn = HypervisorDetails.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	HypervisorDetails_Name = HypervisorDetails.AddMember("Name", _Name)
-
-	HypervisorDetails_LogGroupArn = HypervisorDetails.AddMember("LogGroupArn", _LogGroupArn)
-
-	HypervisorDetails_State = HypervisorDetails.AddMember("State", _HypervisorState)
-
-	HypervisorDetails_LastSuccessfulMetadataSyncTime = HypervisorDetails.AddMember("LastSuccessfulMetadataSyncTime", _Time)
-
-	HypervisorDetails_LatestMetadataSyncStatusMessage = HypervisorDetails.AddMember("LatestMetadataSyncStatusMessage", _string)
-
-	HypervisorDetails_LatestMetadataSyncStatus = HypervisorDetails.AddMember("LatestMetadataSyncStatus", _SyncMetadataStatus)
-
-	_Hypervisors_member = _Hypervisors.AddMember("member", Hypervisor)
-
-	InternalServerException_ErrorCode = InternalServerException.AddMember("ErrorCode", _string)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _string)
-
-	ResourceNotFoundException_ErrorCode = ResourceNotFoundException.AddMember("ErrorCode", _string)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _string)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	ThrottlingException_ErrorCode = ThrottlingException.AddMember("ErrorCode", _string)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _string)
-
-	ValidationException_ErrorCode = ValidationException.AddMember("ErrorCode", _string)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _string)
-
-	VirtualMachine_HostName = VirtualMachine.AddMember("HostName", _Name)
-
-	VirtualMachine_HypervisorId = VirtualMachine.AddMember("HypervisorId", _string)
-
-	VirtualMachine_Name = VirtualMachine.AddMember("Name", _Name)
-
-	VirtualMachine_Path = VirtualMachine.AddMember("Path", _Path)
-
-	VirtualMachine_ResourceArn = VirtualMachine.AddMember("ResourceArn", _ResourceArn)
-
-	VirtualMachine_LastBackupDate = VirtualMachine.AddMember("LastBackupDate", _Time)
-
-	VmwareTag_VmwareCategory = VmwareTag.AddMember("VmwareCategory", _VmwareCategory)
-
-	VmwareTag_VmwareTagName = VmwareTag.AddMember("VmwareTagName", _VmwareTagName)
-
-	VmwareTag_VmwareTagDescription = VmwareTag.AddMember("VmwareTagDescription", _string)
-
-	_VmwareTags_member = _VmwareTags.AddMember("member", VmwareTag)
-
-	VirtualMachineDetails_HostName = VirtualMachineDetails.AddMember("HostName", _Name)
-
-	VirtualMachineDetails_HypervisorId = VirtualMachineDetails.AddMember("HypervisorId", _string)
-
-	VirtualMachineDetails_Name = VirtualMachineDetails.AddMember("Name", _Name)
-
-	VirtualMachineDetails_Path = VirtualMachineDetails.AddMember("Path", _Path)
-
-	VirtualMachineDetails_ResourceArn = VirtualMachineDetails.AddMember("ResourceArn", _ResourceArn)
-
-	VirtualMachineDetails_LastBackupDate = VirtualMachineDetails.AddMember("LastBackupDate", _Time)
-
-	VirtualMachineDetails_VmwareTags = VirtualMachineDetails.AddMember("VmwareTags", _VmwareTags)
-
-	_VirtualMachines_member = _VirtualMachines.AddMember("member", VirtualMachine)
-
-	VmwareToAwsTagMapping_VmwareCategory = VmwareToAwsTagMapping.AddMember("VmwareCategory", _VmwareCategory)
-
-	VmwareToAwsTagMapping_VmwareTagName = VmwareToAwsTagMapping.AddMember("VmwareTagName", _VmwareTagName)
-
-	VmwareToAwsTagMapping_AwsTagKey = VmwareToAwsTagMapping.AddMember("AwsTagKey", _TagKey)
-
-	VmwareToAwsTagMapping_AwsTagValue = VmwareToAwsTagMapping.AddMember("AwsTagValue", _TagValue)
-
-	_VmwareToAwsTagMappings_member = _VmwareToAwsTagMappings.AddMember("member", VmwareToAwsTagMapping)
-
-	AssociateGatewayToServerInput_GatewayArn = AssociateGatewayToServerInput.AddMember("GatewayArn", _GatewayArn)
-
-	AssociateGatewayToServerInput_ServerArn = AssociateGatewayToServerInput.AddMember("ServerArn", _ServerArn)
-
-	AssociateGatewayToServerOutput_GatewayArn = AssociateGatewayToServerOutput.AddMember("GatewayArn", _GatewayArn)
-
-	CreateGatewayInput_ActivationKey = CreateGatewayInput.AddMember("ActivationKey", _ActivationKey)
-
-	CreateGatewayInput_GatewayDisplayName = CreateGatewayInput.AddMember("GatewayDisplayName", _Name)
-
-	CreateGatewayInput_GatewayType = CreateGatewayInput.AddMember("GatewayType", _GatewayType)
-
-	CreateGatewayInput_Tags = CreateGatewayInput.AddMember("Tags", _Tags)
-
-	CreateGatewayOutput_GatewayArn = CreateGatewayOutput.AddMember("GatewayArn", _GatewayArn)
-
-	DeleteGatewayInput_GatewayArn = DeleteGatewayInput.AddMember("GatewayArn", _GatewayArn)
-
-	DeleteGatewayOutput_GatewayArn = DeleteGatewayOutput.AddMember("GatewayArn", _GatewayArn)
-
-	DeleteHypervisorInput_HypervisorArn = DeleteHypervisorInput.AddMember("HypervisorArn", _ServerArn)
-
-	DeleteHypervisorOutput_HypervisorArn = DeleteHypervisorOutput.AddMember("HypervisorArn", _ServerArn)
-
-	DisassociateGatewayFromServerInput_GatewayArn = DisassociateGatewayFromServerInput.AddMember("GatewayArn", _GatewayArn)
-
-	DisassociateGatewayFromServerOutput_GatewayArn = DisassociateGatewayFromServerOutput.AddMember("GatewayArn", _GatewayArn)
-
-	GetBandwidthRateLimitScheduleInput_GatewayArn = GetBandwidthRateLimitScheduleInput.AddMember("GatewayArn", _GatewayArn)
-
-	GetBandwidthRateLimitScheduleOutput_GatewayArn = GetBandwidthRateLimitScheduleOutput.AddMember("GatewayArn", _GatewayArn)
-
-	GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = GetBandwidthRateLimitScheduleOutput.AddMember("BandwidthRateLimitIntervals", _BandwidthRateLimitIntervals)
-
-	GetGatewayInput_GatewayArn = GetGatewayInput.AddMember("GatewayArn", _GatewayArn)
-
-	GetGatewayOutput_Gateway = GetGatewayOutput.AddMember("Gateway", GatewayDetails)
-
-	GetHypervisorInput_HypervisorArn = GetHypervisorInput.AddMember("HypervisorArn", _ServerArn)
-
-	GetHypervisorOutput_Hypervisor = GetHypervisorOutput.AddMember("Hypervisor", HypervisorDetails)
-
-	GetHypervisorPropertyMappingsInput_HypervisorArn = GetHypervisorPropertyMappingsInput.AddMember("HypervisorArn", _ServerArn)
-
-	GetHypervisorPropertyMappingsOutput_HypervisorArn = GetHypervisorPropertyMappingsOutput.AddMember("HypervisorArn", _ServerArn)
-
-	GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings = GetHypervisorPropertyMappingsOutput.AddMember("VmwareToAwsTagMappings", _VmwareToAwsTagMappings)
-
-	GetHypervisorPropertyMappingsOutput_IamRoleArn = GetHypervisorPropertyMappingsOutput.AddMember("IamRoleArn", _IamRoleArn)
-
-	GetVirtualMachineInput_ResourceArn = GetVirtualMachineInput.AddMember("ResourceArn", _ResourceArn)
-
-	GetVirtualMachineOutput_VirtualMachine = GetVirtualMachineOutput.AddMember("VirtualMachine", VirtualMachineDetails)
-
-	ImportHypervisorConfigurationInput_Name = ImportHypervisorConfigurationInput.AddMember("Name", _Name)
-
-	ImportHypervisorConfigurationInput_Host = ImportHypervisorConfigurationInput.AddMember("Host", _Host)
-
-	ImportHypervisorConfigurationInput_Username = ImportHypervisorConfigurationInput.AddMember("Username", _Username)
-
-	ImportHypervisorConfigurationInput_Password = ImportHypervisorConfigurationInput.AddMember("Password", _Password)
-
-	ImportHypervisorConfigurationInput_KmsKeyArn = ImportHypervisorConfigurationInput.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	ImportHypervisorConfigurationInput_Tags = ImportHypervisorConfigurationInput.AddMember("Tags", _Tags)
-
-	ImportHypervisorConfigurationOutput_HypervisorArn = ImportHypervisorConfigurationOutput.AddMember("HypervisorArn", _ServerArn)
-
-	ListGatewaysInput_MaxResults = ListGatewaysInput.AddMember("MaxResults", _MaxResults)
-
-	ListGatewaysInput_NextToken = ListGatewaysInput.AddMember("NextToken", _NextToken)
-
-	ListGatewaysOutput_Gateways = ListGatewaysOutput.AddMember("Gateways", _Gateways)
-
-	ListGatewaysOutput_NextToken = ListGatewaysOutput.AddMember("NextToken", _NextToken)
-
-	ListHypervisorsInput_MaxResults = ListHypervisorsInput.AddMember("MaxResults", _MaxResults)
-
-	ListHypervisorsInput_NextToken = ListHypervisorsInput.AddMember("NextToken", _NextToken)
-
-	ListHypervisorsOutput_Hypervisors = ListHypervisorsOutput.AddMember("Hypervisors", _Hypervisors)
-
-	ListHypervisorsOutput_NextToken = ListHypervisorsOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceOutput_ResourceArn = ListTagsForResourceOutput.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _Tags)
-
-	ListVirtualMachinesInput_HypervisorArn = ListVirtualMachinesInput.AddMember("HypervisorArn", _ServerArn)
-
-	ListVirtualMachinesInput_MaxResults = ListVirtualMachinesInput.AddMember("MaxResults", _MaxResults)
-
-	ListVirtualMachinesInput_NextToken = ListVirtualMachinesInput.AddMember("NextToken", _NextToken)
-
-	ListVirtualMachinesOutput_VirtualMachines = ListVirtualMachinesOutput.AddMember("VirtualMachines", _VirtualMachines)
-
-	ListVirtualMachinesOutput_NextToken = ListVirtualMachinesOutput.AddMember("NextToken", _NextToken)
-
-	PutBandwidthRateLimitScheduleInput_GatewayArn = PutBandwidthRateLimitScheduleInput.AddMember("GatewayArn", _GatewayArn)
-
-	PutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = PutBandwidthRateLimitScheduleInput.AddMember("BandwidthRateLimitIntervals", _BandwidthRateLimitIntervals)
-
-	PutBandwidthRateLimitScheduleOutput_GatewayArn = PutBandwidthRateLimitScheduleOutput.AddMember("GatewayArn", _GatewayArn)
-
-	PutHypervisorPropertyMappingsInput_HypervisorArn = PutHypervisorPropertyMappingsInput.AddMember("HypervisorArn", _ServerArn)
-
-	PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings = PutHypervisorPropertyMappingsInput.AddMember("VmwareToAwsTagMappings", _VmwareToAwsTagMappings)
-
-	PutHypervisorPropertyMappingsInput_IamRoleArn = PutHypervisorPropertyMappingsInput.AddMember("IamRoleArn", _IamRoleArn)
-
-	PutHypervisorPropertyMappingsOutput_HypervisorArn = PutHypervisorPropertyMappingsOutput.AddMember("HypervisorArn", _ServerArn)
-
-	PutMaintenanceStartTimeInput_GatewayArn = PutMaintenanceStartTimeInput.AddMember("GatewayArn", _GatewayArn)
-
-	PutMaintenanceStartTimeInput_HourOfDay = PutMaintenanceStartTimeInput.AddMember("HourOfDay", _HourOfDay)
-
-	PutMaintenanceStartTimeInput_MinuteOfHour = PutMaintenanceStartTimeInput.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	PutMaintenanceStartTimeInput_DayOfWeek = PutMaintenanceStartTimeInput.AddMember("DayOfWeek", _DayOfWeek)
-
-	PutMaintenanceStartTimeInput_DayOfMonth = PutMaintenanceStartTimeInput.AddMember("DayOfMonth", _DayOfMonth)
-
-	PutMaintenanceStartTimeOutput_GatewayArn = PutMaintenanceStartTimeOutput.AddMember("GatewayArn", _GatewayArn)
-
-	StartVirtualMachinesMetadataSyncInput_HypervisorArn = StartVirtualMachinesMetadataSyncInput.AddMember("HypervisorArn", _ServerArn)
-
-	StartVirtualMachinesMetadataSyncOutput_HypervisorArn = StartVirtualMachinesMetadataSyncOutput.AddMember("HypervisorArn", _ServerArn)
-
-	TagResourceInput_ResourceARN = TagResourceInput.AddMember("ResourceARN", _ResourceArn)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _Tags)
-
-	TagResourceOutput_ResourceARN = TagResourceOutput.AddMember("ResourceARN", _ResourceArn)
-
-	TestHypervisorConfigurationInput_GatewayArn = TestHypervisorConfigurationInput.AddMember("GatewayArn", _GatewayArn)
-
-	TestHypervisorConfigurationInput_Host = TestHypervisorConfigurationInput.AddMember("Host", _Host)
-
-	TestHypervisorConfigurationInput_Username = TestHypervisorConfigurationInput.AddMember("Username", _Username)
-
-	TestHypervisorConfigurationInput_Password = TestHypervisorConfigurationInput.AddMember("Password", _Password)
-
-	UntagResourceInput_ResourceARN = UntagResourceInput.AddMember("ResourceARN", _ResourceArn)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeys)
-
-	UntagResourceOutput_ResourceARN = UntagResourceOutput.AddMember("ResourceARN", _ResourceArn)
-
-	UpdateGatewayInformationInput_GatewayArn = UpdateGatewayInformationInput.AddMember("GatewayArn", _GatewayArn)
-
-	UpdateGatewayInformationInput_GatewayDisplayName = UpdateGatewayInformationInput.AddMember("GatewayDisplayName", _Name)
-
-	UpdateGatewayInformationOutput_GatewayArn = UpdateGatewayInformationOutput.AddMember("GatewayArn", _GatewayArn)
-
-	UpdateGatewaySoftwareNowInput_GatewayArn = UpdateGatewaySoftwareNowInput.AddMember("GatewayArn", _GatewayArn)
-
-	UpdateGatewaySoftwareNowOutput_GatewayArn = UpdateGatewaySoftwareNowOutput.AddMember("GatewayArn", _GatewayArn)
-
-	UpdateHypervisorInput_HypervisorArn = UpdateHypervisorInput.AddMember("HypervisorArn", _ServerArn)
-
-	UpdateHypervisorInput_Host = UpdateHypervisorInput.AddMember("Host", _Host)
-
-	UpdateHypervisorInput_Username = UpdateHypervisorInput.AddMember("Username", _Username)
-
-	UpdateHypervisorInput_Password = UpdateHypervisorInput.AddMember("Password", _Password)
-
-	UpdateHypervisorInput_Name = UpdateHypervisorInput.AddMember("Name", _Name)
-
-	UpdateHypervisorInput_LogGroupArn = UpdateHypervisorInput.AddMember("LogGroupArn", _LogGroupArn)
-
-	UpdateHypervisorOutput_HypervisorArn = UpdateHypervisorOutput.AddMember("HypervisorArn", _ServerArn)
-
+const blob = "" +
+	"StartVirtualMachinesMetadataSyncOutputStartVirtualMachinesMetadataSyncInputDisassociateGatewayFromSe" +
+	"rverOutputGetBandwidthRateLimitScheduleOutputGetHypervisorPropertyMappingsOutputImportHypervisorConf" +
+	"igurationOutputPutBandwidthRateLimitScheduleOutputPutHypervisorPropertyMappingsOutputAverageUploadRa" +
+	"teLimitInBitsPerSecDisassociateGatewayFromServerInputGetBandwidthRateLimitScheduleInputGetHypervisor" +
+	"PropertyMappingsInputImportHypervisorConfigurationInputPutBandwidthRateLimitScheduleInputPutHypervis" +
+	"orPropertyMappingsInputTestHypervisorConfigurationOutputTestHypervisorConfigurationInputLatestMetada" +
+	"taSyncStatusMessageAssociateGatewayToServerOutputLastSuccessfulMetadataSyncTimeUpdateGatewayInformat" +
+	"ionOutputUpdateGatewaySoftwareNowOutputAssociateGatewayToServerInputPutMaintenanceStartTimeOutputUpd" +
+	"ateGatewayInformationInputUpdateGatewaySoftwareNowInputPutMaintenanceStartTimeInputBandwidthRateLimi" +
+	"tIntervalsBackupOnPremises_v20210101NextUpdateAvailabilityTimeListTagsForResourceOutputListVirtualMa" +
+	"chinesOutputResourceNotFoundExceptionListTagsForResourceInputListVirtualMachinesInputGetVirtualMachi" +
+	"neOutputInternalServerExceptionDeleteHypervisorOutputGetVirtualMachineInputUpdateHypervisorOutputVmw" +
+	"areToAwsTagMappingsAccessDeniedExceptionDeleteHypervisorInputListHypervisorsOutputUpdateHypervisorIn" +
+	"putVirtualMachineDetailsListHypervisorsInputVmwareTagDescriptionCreateGatewayOutputDeleteGatewayOutp" +
+	"utGetHypervisorOutputThrottlingExceptionUntagResourceOutputValidationExceptionCreateGatewayInputDele" +
+	"teGatewayInputGatewayDisplayNameGetHypervisorInputListGatewaysOutputSyncMetadataStatusUntagResourceI" +
+	"nputConflictExceptionHypervisorDetailsListGatewaysInputStartMinuteOfHourTagResourceOutputGetGatewayO" +
+	"utputTagResourceInputDeprecationDateEndMinuteOfHourGetGatewayInputHypervisorStateSoftwareVersionGate" +
+	"wayDetailsLastBackupDateStartHourOfDayVmwareCategoryActivationKeyHypervisorArnVmwareTagNameEndHourOf" +
+	"DayHypervisorIdLastSeenTimeAwsTagValueGatewayTypeLogGroupArnResourceARNResourceArnVpcEndpointDayOfMo" +
+	"nthDaysOfWeekGatewayArnIamRoleArnMaxResultsVmwareTagsAwsTagKeyDayOfWeekErrorCodeKmsKeyArnNextTokenSe" +
+	"rverArnHostNamePasswordUsernameTagKeysmemberstringPath"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.backupgateway"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 619, Target: 0, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1364, Target: 1, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1383, Target: 2, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1131, Target: 3, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 75, Target: 4, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 110, Target: 5, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1689, Target: 6, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 145, Target: 7, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 145, Target: 8, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1085, Target: 9, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 180, Target: 10, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1550, Target: 11, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1261, Target: 12, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 962, Target: 13, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 987, Target: 14, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 215, Target: 15, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 250, Target: 16, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 768, Target: 17, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 18, Traits: 0, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1672, Target: 19, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 523, Target: 20, Traits: 0, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1440, Target: 21, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 679, Target: 22, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 709, Target: 23, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1175, Target: 24, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 910, Target: 25, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1219, Target: 26, Traits: 1, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2071, Target: 112, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 112, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1852, Target: 29, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 285, Target: 30, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 883, Target: 31, Traits: 0, StrLen: 26, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 285, Target: 30, Traits: 0, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1824, Target: 69, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1891, Target: 69, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1655, Target: 102, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1736, Target: 102, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2003, Target: 45, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 883, Target: 38, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 31, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1604, Target: 40, Traits: 2, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2071, Target: 112, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 112, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1993, Target: 43, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2062, Target: 44, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2003, Target: 45, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 44, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 87, Target: 47, Traits: 0, StrLen: 7, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1514, Target: 103, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1938, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1903, Target: 86, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1915, Target: 126, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1796, Target: 54, Traits: 0, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1514, Target: 103, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1938, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1903, Target: 86, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1915, Target: 126, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 771, Target: 96, Traits: 0, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 936, Target: 126, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1982, Target: 163, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1721, Target: 126, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1781, Target: 103, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1554, Target: 65, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 47, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1938, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2107, Target: 68, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1829, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 148, Target: 70, Traits: 0, StrLen: 10, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2107, Target: 68, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2080, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1528, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1776, Target: 89, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1621, Target: 76, Traits: 0, StrLen: 17, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2107, Target: 68, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2080, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1528, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1949, Target: 95, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1776, Target: 89, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 649, Target: 126, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 588, Target: 112, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 588, Target: 113, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1903, Target: 86, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1265, Target: 87, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 70, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1766, Target: 89, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2023, Target: 90, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1108, Target: 91, Traits: 3, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2071, Target: 112, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 112, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2080, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1949, Target: 95, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 771, Target: 96, Traits: 0, StrLen: 20, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1993, Target: 43, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2062, Target: 44, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1829, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1660, Target: 102, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2033, Target: 101, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1660, Target: 102, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1528, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2089, Target: 104, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2115, Target: 105, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2150, Target: 106, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1971, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1012, Target: 108, Traits: 5, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2071, Target: 112, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 112, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2098, Target: 111, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2144, Target: 112, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1568, Target: 113, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 966, Target: 114, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1862, Target: 117, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1933, Target: 122, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2056, Target: 117, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2131, Target: 118, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 117, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 120, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 114, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1930, Target: 122, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1421, Target: 123, Traits: 6, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2071, Target: 112, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 112, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 675, Target: 126, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 2123, Target: 127, Traits: 4, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1459, Target: 128, Traits: 7, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2071, Target: 112, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 612, Target: 112, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 5, Target: 131, Traits: 0, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2107, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1903, Target: 112, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1528, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2150, Target: 106, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1971, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1810, Target: 126, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1303, Target: 138, Traits: 0, StrLen: 21, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2107, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1903, Target: 112, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1528, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2150, Target: 106, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1971, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1810, Target: 126, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2043, Target: 154, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 5, Target: 146, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 131, Traits: 0, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1838, Target: 148, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1344, Target: 149, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1838, Target: 148, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1878, Target: 153, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1344, Target: 112, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1878, Target: 153, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2043, Target: 154, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 149, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1197, Target: 156, Traits: 0, StrLen: 21, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1838, Target: 148, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1878, Target: 153, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2053, Target: 117, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1927, Target: 122, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1197, Target: 161, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2138, Target: 156, Traits: 0, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1982, Target: 163, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 739, Target: 164, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2098, Target: 111, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 619, Target: 167, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1478, Target: 169, Traits: 0, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1852, Target: 29, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1514, Target: 103, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1938, Target: 67, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 120, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1364, Target: 174, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1496, Target: 176, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 178, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1240, Target: 180, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1131, Target: 182, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 319, Target: 184, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 75, Target: 186, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 353, Target: 188, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 110, Target: 190, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 883, Target: 38, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1751, Target: 193, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1689, Target: 195, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 87, Target: 54, Traits: 0, StrLen: 7, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1532, Target: 197, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1402, Target: 199, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 148, Target: 76, Traits: 0, StrLen: 10, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 387, Target: 201, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 145, Target: 203, Traits: 0, StrLen: 35, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1197, Target: 161, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2023, Target: 90, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1153, Target: 207, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1971, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1085, Target: 209, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5, Target: 138, Traits: 0, StrLen: 14, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 421, Target: 211, Traits: 0, StrLen: 34, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1528, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2107, Target: 68, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2123, Target: 127, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2115, Target: 105, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2080, Target: 94, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 120, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 180, Target: 218, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1638, Target: 220, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2033, Target: 101, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2089, Target: 104, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1550, Target: 223, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1554, Target: 65, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2089, Target: 104, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1324, Target: 226, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2033, Target: 101, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2089, Target: 104, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1261, Target: 229, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1265, Target: 87, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2089, Target: 104, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1037, Target: 232, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1971, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 962, Target: 234, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1971, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 120, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1061, Target: 237, Traits: 0, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2033, Target: 101, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2089, Target: 104, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 987, Target: 241, Traits: 0, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 5, Target: 146, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2089, Target: 104, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 455, Target: 244, Traits: 0, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 883, Target: 38, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 215, Target: 247, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 489, Target: 249, Traits: 0, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1197, Target: 161, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2023, Target: 90, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 250, Target: 253, Traits: 0, StrLen: 35, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 855, Target: 255, Traits: 0, StrLen: 28, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1829, Target: 69, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1660, Target: 102, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2062, Target: 44, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1993, Target: 43, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 768, Target: 261, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 38, Target: 263, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 265, Traits: 0, StrLen: 38, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1705, Target: 267, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1960, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 966, Target: 120, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1672, Target: 270, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1960, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 556, Target: 272, Traits: 0, StrLen: 32, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2107, Target: 68, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2123, Target: 127, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2115, Target: 105, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 523, Target: 277, Traits: 0, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1586, Target: 278, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1960, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2131, Target: 118, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1440, Target: 281, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1960, Target: 107, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 797, Target: 283, Traits: 0, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1514, Target: 103, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 679, Target: 286, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 826, Target: 288, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 709, Target: 290, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2013, Target: 53, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1282, Target: 292, Traits: 0, StrLen: 21, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2107, Target: 68, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2123, Target: 127, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2115, Target: 105, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1528, Target: 103, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1949, Target: 95, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1175, Target: 299, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1865, Target: 111, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+	},
 }
+
+var handles = [301]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+}
+
+var AssociateGatewayToServer = &handles[0]
+
+var CreateGateway = &handles[1]
+
+var DeleteGateway = &handles[2]
+
+var DeleteHypervisor = &handles[3]
+
+var DisassociateGatewayFromServer = &handles[4]
+
+var GetBandwidthRateLimitSchedule = &handles[5]
+
+var GetGateway = &handles[6]
+
+var GetHypervisor = &handles[7]
+
+var GetHypervisorPropertyMappings = &handles[8]
+
+var GetVirtualMachine = &handles[9]
+
+var ImportHypervisorConfiguration = &handles[10]
+
+var ListGateways = &handles[11]
+
+var ListHypervisors = &handles[12]
+
+var ListTagsForResource = &handles[13]
+
+var ListVirtualMachines = &handles[14]
+
+var PutBandwidthRateLimitSchedule = &handles[15]
+
+var PutHypervisorPropertyMappings = &handles[16]
+
+var PutMaintenanceStartTime = &handles[17]
+
+var StartVirtualMachinesMetadataSync = &handles[18]
+
+var TagResource = &handles[19]
+
+var TestHypervisorConfiguration = &handles[20]
+
+var UntagResource = &handles[21]
+
+var UpdateGatewayInformation = &handles[22]
+
+var UpdateGatewaySoftwareNow = &handles[23]
+
+var UpdateHypervisor = &handles[24]
+
+var _BackupOnPremises_v20210101 = &handles[25]
+
+var AccessDeniedException = &handles[26]
+var AccessDeniedException_ErrorCode = &handles[27]
+var AccessDeniedException_Message = &handles[28]
+
+var _ActivationKey = &handles[29]
+
+var _AverageUploadRateLimit = &handles[30]
+
+var BandwidthRateLimitInterval = &handles[31]
+var BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = &handles[32]
+var BandwidthRateLimitInterval_StartHourOfDay = &handles[33]
+var BandwidthRateLimitInterval_EndHourOfDay = &handles[34]
+var BandwidthRateLimitInterval_StartMinuteOfHour = &handles[35]
+var BandwidthRateLimitInterval_EndMinuteOfHour = &handles[36]
+var BandwidthRateLimitInterval_DaysOfWeek = &handles[37]
+
+var _BandwidthRateLimitIntervals = &handles[38]
+var _BandwidthRateLimitIntervals_member = &handles[39]
+
+var ConflictException = &handles[40]
+var ConflictException_ErrorCode = &handles[41]
+var ConflictException_Message = &handles[42]
+
+var _DayOfMonth = &handles[43]
+
+var _DayOfWeek = &handles[44]
+
+var _DaysOfWeek = &handles[45]
+var _DaysOfWeek_member = &handles[46]
+
+var Gateway = &handles[47]
+var Gateway_GatewayArn = &handles[48]
+var Gateway_GatewayDisplayName = &handles[49]
+var Gateway_GatewayType = &handles[50]
+var Gateway_HypervisorId = &handles[51]
+var Gateway_LastSeenTime = &handles[52]
+
+var _GatewayArn = &handles[53]
+
+var GatewayDetails = &handles[54]
+var GatewayDetails_GatewayArn = &handles[55]
+var GatewayDetails_GatewayDisplayName = &handles[56]
+var GatewayDetails_GatewayType = &handles[57]
+var GatewayDetails_HypervisorId = &handles[58]
+var GatewayDetails_LastSeenTime = &handles[59]
+var GatewayDetails_MaintenanceStartTime = &handles[60]
+var GatewayDetails_NextUpdateAvailabilityTime = &handles[61]
+var GatewayDetails_VpcEndpoint = &handles[62]
+var GatewayDetails_DeprecationDate = &handles[63]
+var GatewayDetails_SoftwareVersion = &handles[64]
+
+var _Gateways = &handles[65]
+var _Gateways_member = &handles[66]
+
+var _GatewayType = &handles[67]
+
+var _Host = &handles[68]
+
+var _HourOfDay = &handles[69]
+
+var Hypervisor = &handles[70]
+var Hypervisor_Host = &handles[71]
+var Hypervisor_HypervisorArn = &handles[72]
+var Hypervisor_KmsKeyArn = &handles[73]
+var Hypervisor_Name = &handles[74]
+var Hypervisor_State = &handles[75]
+
+var HypervisorDetails = &handles[76]
+var HypervisorDetails_Host = &handles[77]
+var HypervisorDetails_HypervisorArn = &handles[78]
+var HypervisorDetails_KmsKeyArn = &handles[79]
+var HypervisorDetails_Name = &handles[80]
+var HypervisorDetails_LogGroupArn = &handles[81]
+var HypervisorDetails_State = &handles[82]
+var HypervisorDetails_LastSuccessfulMetadataSyncTime = &handles[83]
+var HypervisorDetails_LatestMetadataSyncStatusMessage = &handles[84]
+var HypervisorDetails_LatestMetadataSyncStatus = &handles[85]
+
+var _HypervisorId = &handles[86]
+
+var _Hypervisors = &handles[87]
+var _Hypervisors_member = &handles[88]
+
+var _HypervisorState = &handles[89]
+
+var _IamRoleArn = &handles[90]
+
+var InternalServerException = &handles[91]
+var InternalServerException_ErrorCode = &handles[92]
+var InternalServerException_Message = &handles[93]
+
+var _KmsKeyArn = &handles[94]
+
+var _LogGroupArn = &handles[95]
+
+var MaintenanceStartTime = &handles[96]
+var MaintenanceStartTime_DayOfMonth = &handles[97]
+var MaintenanceStartTime_DayOfWeek = &handles[98]
+var MaintenanceStartTime_HourOfDay = &handles[99]
+var MaintenanceStartTime_MinuteOfHour = &handles[100]
+
+var _MaxResults = &handles[101]
+
+var _MinuteOfHour = &handles[102]
+
+var _Name = &handles[103]
+
+var _NextToken = &handles[104]
+
+var _Password = &handles[105]
+
+var _Path = &handles[106]
+
+var _ResourceArn = &handles[107]
+
+var ResourceNotFoundException = &handles[108]
+var ResourceNotFoundException_ErrorCode = &handles[109]
+var ResourceNotFoundException_Message = &handles[110]
+
+var _ServerArn = &handles[111]
+
+var _string = &handles[112]
+
+var _SyncMetadataStatus = &handles[113]
+
+var Tag = &handles[114]
+var Tag_Key = &handles[115]
+var Tag_Value = &handles[116]
+
+var _TagKey = &handles[117]
+
+var _TagKeys = &handles[118]
+var _TagKeys_member = &handles[119]
+
+var _Tags = &handles[120]
+var _Tags_member = &handles[121]
+
+var _TagValue = &handles[122]
+
+var ThrottlingException = &handles[123]
+var ThrottlingException_ErrorCode = &handles[124]
+var ThrottlingException_Message = &handles[125]
+
+var _Time = &handles[126]
+
+var _Username = &handles[127]
+
+var ValidationException = &handles[128]
+var ValidationException_ErrorCode = &handles[129]
+var ValidationException_Message = &handles[130]
+
+var VirtualMachine = &handles[131]
+var VirtualMachine_HostName = &handles[132]
+var VirtualMachine_HypervisorId = &handles[133]
+var VirtualMachine_Name = &handles[134]
+var VirtualMachine_Path = &handles[135]
+var VirtualMachine_ResourceArn = &handles[136]
+var VirtualMachine_LastBackupDate = &handles[137]
+
+var VirtualMachineDetails = &handles[138]
+var VirtualMachineDetails_HostName = &handles[139]
+var VirtualMachineDetails_HypervisorId = &handles[140]
+var VirtualMachineDetails_Name = &handles[141]
+var VirtualMachineDetails_Path = &handles[142]
+var VirtualMachineDetails_ResourceArn = &handles[143]
+var VirtualMachineDetails_LastBackupDate = &handles[144]
+var VirtualMachineDetails_VmwareTags = &handles[145]
+
+var _VirtualMachines = &handles[146]
+var _VirtualMachines_member = &handles[147]
+
+var _VmwareCategory = &handles[148]
+
+var VmwareTag = &handles[149]
+var VmwareTag_VmwareCategory = &handles[150]
+var VmwareTag_VmwareTagName = &handles[151]
+var VmwareTag_VmwareTagDescription = &handles[152]
+
+var _VmwareTagName = &handles[153]
+
+var _VmwareTags = &handles[154]
+var _VmwareTags_member = &handles[155]
+
+var VmwareToAwsTagMapping = &handles[156]
+var VmwareToAwsTagMapping_VmwareCategory = &handles[157]
+var VmwareToAwsTagMapping_VmwareTagName = &handles[158]
+var VmwareToAwsTagMapping_AwsTagKey = &handles[159]
+var VmwareToAwsTagMapping_AwsTagValue = &handles[160]
+
+var _VmwareToAwsTagMappings = &handles[161]
+var _VmwareToAwsTagMappings_member = &handles[162]
+
+var _VpcEndpoint = &handles[163]
+
+var AssociateGatewayToServerInput = &handles[164]
+var AssociateGatewayToServerInput_GatewayArn = &handles[165]
+var AssociateGatewayToServerInput_ServerArn = &handles[166]
+
+var AssociateGatewayToServerOutput = &handles[167]
+var AssociateGatewayToServerOutput_GatewayArn = &handles[168]
+
+var CreateGatewayInput = &handles[169]
+var CreateGatewayInput_ActivationKey = &handles[170]
+var CreateGatewayInput_GatewayDisplayName = &handles[171]
+var CreateGatewayInput_GatewayType = &handles[172]
+var CreateGatewayInput_Tags = &handles[173]
+
+var CreateGatewayOutput = &handles[174]
+var CreateGatewayOutput_GatewayArn = &handles[175]
+
+var DeleteGatewayInput = &handles[176]
+var DeleteGatewayInput_GatewayArn = &handles[177]
+
+var DeleteGatewayOutput = &handles[178]
+var DeleteGatewayOutput_GatewayArn = &handles[179]
+
+var DeleteHypervisorInput = &handles[180]
+var DeleteHypervisorInput_HypervisorArn = &handles[181]
+
+var DeleteHypervisorOutput = &handles[182]
+var DeleteHypervisorOutput_HypervisorArn = &handles[183]
+
+var DisassociateGatewayFromServerInput = &handles[184]
+var DisassociateGatewayFromServerInput_GatewayArn = &handles[185]
+
+var DisassociateGatewayFromServerOutput = &handles[186]
+var DisassociateGatewayFromServerOutput_GatewayArn = &handles[187]
+
+var GetBandwidthRateLimitScheduleInput = &handles[188]
+var GetBandwidthRateLimitScheduleInput_GatewayArn = &handles[189]
+
+var GetBandwidthRateLimitScheduleOutput = &handles[190]
+var GetBandwidthRateLimitScheduleOutput_GatewayArn = &handles[191]
+var GetBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = &handles[192]
+
+var GetGatewayInput = &handles[193]
+var GetGatewayInput_GatewayArn = &handles[194]
+
+var GetGatewayOutput = &handles[195]
+var GetGatewayOutput_Gateway = &handles[196]
+
+var GetHypervisorInput = &handles[197]
+var GetHypervisorInput_HypervisorArn = &handles[198]
+
+var GetHypervisorOutput = &handles[199]
+var GetHypervisorOutput_Hypervisor = &handles[200]
+
+var GetHypervisorPropertyMappingsInput = &handles[201]
+var GetHypervisorPropertyMappingsInput_HypervisorArn = &handles[202]
+
+var GetHypervisorPropertyMappingsOutput = &handles[203]
+var GetHypervisorPropertyMappingsOutput_HypervisorArn = &handles[204]
+var GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings = &handles[205]
+var GetHypervisorPropertyMappingsOutput_IamRoleArn = &handles[206]
+
+var GetVirtualMachineInput = &handles[207]
+var GetVirtualMachineInput_ResourceArn = &handles[208]
+
+var GetVirtualMachineOutput = &handles[209]
+var GetVirtualMachineOutput_VirtualMachine = &handles[210]
+
+var ImportHypervisorConfigurationInput = &handles[211]
+var ImportHypervisorConfigurationInput_Name = &handles[212]
+var ImportHypervisorConfigurationInput_Host = &handles[213]
+var ImportHypervisorConfigurationInput_Username = &handles[214]
+var ImportHypervisorConfigurationInput_Password = &handles[215]
+var ImportHypervisorConfigurationInput_KmsKeyArn = &handles[216]
+var ImportHypervisorConfigurationInput_Tags = &handles[217]
+
+var ImportHypervisorConfigurationOutput = &handles[218]
+var ImportHypervisorConfigurationOutput_HypervisorArn = &handles[219]
+
+var ListGatewaysInput = &handles[220]
+var ListGatewaysInput_MaxResults = &handles[221]
+var ListGatewaysInput_NextToken = &handles[222]
+
+var ListGatewaysOutput = &handles[223]
+var ListGatewaysOutput_Gateways = &handles[224]
+var ListGatewaysOutput_NextToken = &handles[225]
+
+var ListHypervisorsInput = &handles[226]
+var ListHypervisorsInput_MaxResults = &handles[227]
+var ListHypervisorsInput_NextToken = &handles[228]
+
+var ListHypervisorsOutput = &handles[229]
+var ListHypervisorsOutput_Hypervisors = &handles[230]
+var ListHypervisorsOutput_NextToken = &handles[231]
+
+var ListTagsForResourceInput = &handles[232]
+var ListTagsForResourceInput_ResourceArn = &handles[233]
+
+var ListTagsForResourceOutput = &handles[234]
+var ListTagsForResourceOutput_ResourceArn = &handles[235]
+var ListTagsForResourceOutput_Tags = &handles[236]
+
+var ListVirtualMachinesInput = &handles[237]
+var ListVirtualMachinesInput_HypervisorArn = &handles[238]
+var ListVirtualMachinesInput_MaxResults = &handles[239]
+var ListVirtualMachinesInput_NextToken = &handles[240]
+
+var ListVirtualMachinesOutput = &handles[241]
+var ListVirtualMachinesOutput_VirtualMachines = &handles[242]
+var ListVirtualMachinesOutput_NextToken = &handles[243]
+
+var PutBandwidthRateLimitScheduleInput = &handles[244]
+var PutBandwidthRateLimitScheduleInput_GatewayArn = &handles[245]
+var PutBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = &handles[246]
+
+var PutBandwidthRateLimitScheduleOutput = &handles[247]
+var PutBandwidthRateLimitScheduleOutput_GatewayArn = &handles[248]
+
+var PutHypervisorPropertyMappingsInput = &handles[249]
+var PutHypervisorPropertyMappingsInput_HypervisorArn = &handles[250]
+var PutHypervisorPropertyMappingsInput_VmwareToAwsTagMappings = &handles[251]
+var PutHypervisorPropertyMappingsInput_IamRoleArn = &handles[252]
+
+var PutHypervisorPropertyMappingsOutput = &handles[253]
+var PutHypervisorPropertyMappingsOutput_HypervisorArn = &handles[254]
+
+var PutMaintenanceStartTimeInput = &handles[255]
+var PutMaintenanceStartTimeInput_GatewayArn = &handles[256]
+var PutMaintenanceStartTimeInput_HourOfDay = &handles[257]
+var PutMaintenanceStartTimeInput_MinuteOfHour = &handles[258]
+var PutMaintenanceStartTimeInput_DayOfWeek = &handles[259]
+var PutMaintenanceStartTimeInput_DayOfMonth = &handles[260]
+
+var PutMaintenanceStartTimeOutput = &handles[261]
+var PutMaintenanceStartTimeOutput_GatewayArn = &handles[262]
+
+var StartVirtualMachinesMetadataSyncInput = &handles[263]
+var StartVirtualMachinesMetadataSyncInput_HypervisorArn = &handles[264]
+
+var StartVirtualMachinesMetadataSyncOutput = &handles[265]
+var StartVirtualMachinesMetadataSyncOutput_HypervisorArn = &handles[266]
+
+var TagResourceInput = &handles[267]
+var TagResourceInput_ResourceARN = &handles[268]
+var TagResourceInput_Tags = &handles[269]
+
+var TagResourceOutput = &handles[270]
+var TagResourceOutput_ResourceARN = &handles[271]
+
+var TestHypervisorConfigurationInput = &handles[272]
+var TestHypervisorConfigurationInput_GatewayArn = &handles[273]
+var TestHypervisorConfigurationInput_Host = &handles[274]
+var TestHypervisorConfigurationInput_Username = &handles[275]
+var TestHypervisorConfigurationInput_Password = &handles[276]
+
+var TestHypervisorConfigurationOutput = &handles[277]
+
+var UntagResourceInput = &handles[278]
+var UntagResourceInput_ResourceARN = &handles[279]
+var UntagResourceInput_TagKeys = &handles[280]
+
+var UntagResourceOutput = &handles[281]
+var UntagResourceOutput_ResourceARN = &handles[282]
+
+var UpdateGatewayInformationInput = &handles[283]
+var UpdateGatewayInformationInput_GatewayArn = &handles[284]
+var UpdateGatewayInformationInput_GatewayDisplayName = &handles[285]
+
+var UpdateGatewayInformationOutput = &handles[286]
+var UpdateGatewayInformationOutput_GatewayArn = &handles[287]
+
+var UpdateGatewaySoftwareNowInput = &handles[288]
+var UpdateGatewaySoftwareNowInput_GatewayArn = &handles[289]
+
+var UpdateGatewaySoftwareNowOutput = &handles[290]
+var UpdateGatewaySoftwareNowOutput_GatewayArn = &handles[291]
+
+var UpdateHypervisorInput = &handles[292]
+var UpdateHypervisorInput_HypervisorArn = &handles[293]
+var UpdateHypervisorInput_Host = &handles[294]
+var UpdateHypervisorInput_Username = &handles[295]
+var UpdateHypervisorInput_Password = &handles[296]
+var UpdateHypervisorInput_Name = &handles[297]
+var UpdateHypervisorInput_LogGroupArn = &handles[298]
+
+var UpdateHypervisorOutput = &handles[299]
+var UpdateHypervisorOutput_HypervisorArn = &handles[300]
+
+var BackupOnPremises_v20210101 = &smithy.ServiceSchema{Schema: &handles[25], Version: "2021-01-01"}

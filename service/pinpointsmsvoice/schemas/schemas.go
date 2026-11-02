@@ -4,511 +4,462 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateConfigurationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "CreateConfigurationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/sms-voice/configuration-sets",
-	Code: 200})
-
-var CreateConfigurationSetEventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "CreateConfigurationSetEventDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations",
-	Code: 200})
-
-var DeleteConfigurationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "DeleteConfigurationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}",
-	Code: 200})
-
-var DeleteConfigurationSetEventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "DeleteConfigurationSetEventDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}",
-	Code: 200})
-
-var GetConfigurationSetEventDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "GetConfigurationSetEventDestinations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations",
-	Code: 200})
-
-var ListConfigurationSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "ListConfigurationSets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/v1/sms-voice/configuration-sets",
-	Code: 200})
-
-var SendVoiceMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "SendVoiceMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/sms-voice/voice/message",
-	Code: 200})
-
-var UpdateConfigurationSetEventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "UpdateConfigurationSetEventDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}",
-	Code: 200})
-
-var _PinpointSMSVoice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "PinpointSMSVoice",
-}, smithy.ShapeTypeService, 0)
-
-var PinpointSMSVoice = smithy.NewServiceSchema(_PinpointSMSVoice, "2018-09-05")
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var AlreadyExistsException_Message *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CallInstructionsMessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "CallInstructionsMessageType",
-}, smithy.ShapeTypeStructure, 1)
-var CallInstructionsMessageType_Text *smithy.Schema
-
-var CloudWatchLogsDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "CloudWatchLogsDestination",
-}, smithy.ShapeTypeStructure, 2)
-var CloudWatchLogsDestination_IamRoleArn *smithy.Schema
-
-var CloudWatchLogsDestination_LogGroupArn *smithy.Schema
-
-var _ConfigurationSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "ConfigurationSets",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationSets_member *smithy.Schema
-
-var EventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "EventDestination",
-}, smithy.ShapeTypeStructure, 6)
-var EventDestination_CloudWatchLogsDestination *smithy.Schema
-
-var EventDestination_Enabled *smithy.Schema
-
-var EventDestination_KinesisFirehoseDestination *smithy.Schema
-
-var EventDestination_MatchingEventTypes *smithy.Schema
-
-var EventDestination_Name *smithy.Schema
-
-var EventDestination_SnsDestination *smithy.Schema
-
-var EventDestinationDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "EventDestinationDefinition",
-}, smithy.ShapeTypeStructure, 5)
-var EventDestinationDefinition_CloudWatchLogsDestination *smithy.Schema
-
-var EventDestinationDefinition_Enabled *smithy.Schema
-
-var EventDestinationDefinition_KinesisFirehoseDestination *smithy.Schema
-
-var EventDestinationDefinition_MatchingEventTypes *smithy.Schema
-
-var EventDestinationDefinition_SnsDestination *smithy.Schema
-
-var _EventDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "EventDestinations",
-}, smithy.ShapeTypeList, 1)
-var _EventDestinations_member *smithy.Schema
-
-var EventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "EventType",
-}, smithy.ShapeTypeEnum, 7)
-var EventType_INITIATED_CALL *smithy.Schema
-
-var EventType_RINGING *smithy.Schema
-
-var EventType_ANSWERED *smithy.Schema
-
-var EventType_COMPLETED_CALL *smithy.Schema
-
-var EventType_BUSY *smithy.Schema
-
-var EventType_FAILED *smithy.Schema
-
-var EventType_NO_ANSWER *smithy.Schema
-
-var _EventTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "EventTypes",
-}, smithy.ShapeTypeList, 1)
-var _EventTypes_member *smithy.Schema
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceErrorException_Message *smithy.Schema
-
-var KinesisFirehoseDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "KinesisFirehoseDestination",
-}, smithy.ShapeTypeStructure, 2)
-var KinesisFirehoseDestination_DeliveryStreamArn *smithy.Schema
-
-var KinesisFirehoseDestination_IamRoleArn *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 412})
-var LimitExceededException_Message *smithy.Schema
-
-var _NextTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "NextTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Message *smithy.Schema
-
-var PlainTextMessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "PlainTextMessageType",
-}, smithy.ShapeTypeStructure, 3)
-var PlainTextMessageType_LanguageCode *smithy.Schema
-
-var PlainTextMessageType_Text *smithy.Schema
-
-var PlainTextMessageType_VoiceId *smithy.Schema
-
-var SnsDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "SnsDestination",
-}, smithy.ShapeTypeStructure, 1)
-var SnsDestination_TopicArn *smithy.Schema
-
-var SSMLMessageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "SSMLMessageType",
-}, smithy.ShapeTypeStructure, 3)
-var SSMLMessageType_LanguageCode *smithy.Schema
-
-var SSMLMessageType_Text *smithy.Schema
-
-var SSMLMessageType_VoiceId *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var VoiceMessageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "VoiceMessageContent",
-}, smithy.ShapeTypeStructure, 3)
-var VoiceMessageContent_CallInstructionsMessage *smithy.Schema
-
-var VoiceMessageContent_PlainTextMessage *smithy.Schema
-
-var VoiceMessageContent_SSMLMessage *smithy.Schema
-
-var _WordCharactersWithDelimiters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "WordCharactersWithDelimiters",
-}, smithy.ShapeTypeString, 0)
-
-var CreateConfigurationSetEventDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "CreateConfigurationSetEventDestinationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateConfigurationSetEventDestinationRequest_ConfigurationSetName *smithy.Schema
-
-var CreateConfigurationSetEventDestinationRequest_EventDestination *smithy.Schema
-
-var CreateConfigurationSetEventDestinationRequest_EventDestinationName *smithy.Schema
-
-var CreateConfigurationSetEventDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "CreateConfigurationSetEventDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateConfigurationSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "CreateConfigurationSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConfigurationSetRequest_ConfigurationSetName *smithy.Schema
-
-var CreateConfigurationSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "CreateConfigurationSetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteConfigurationSetEventDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "DeleteConfigurationSetEventDestinationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConfigurationSetEventDestinationRequest_ConfigurationSetName *smithy.Schema
-
-var DeleteConfigurationSetEventDestinationRequest_EventDestinationName *smithy.Schema
-
-var DeleteConfigurationSetEventDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "DeleteConfigurationSetEventDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteConfigurationSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "DeleteConfigurationSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfigurationSetRequest_ConfigurationSetName *smithy.Schema
-
-var DeleteConfigurationSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "DeleteConfigurationSetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetConfigurationSetEventDestinationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "GetConfigurationSetEventDestinationsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfigurationSetEventDestinationsRequest_ConfigurationSetName *smithy.Schema
-
-var GetConfigurationSetEventDestinationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "GetConfigurationSetEventDestinationsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfigurationSetEventDestinationsResponse_EventDestinations *smithy.Schema
-
-var ListConfigurationSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "ListConfigurationSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationSetsRequest_NextToken *smithy.Schema
-
-var ListConfigurationSetsRequest_PageSize *smithy.Schema
-
-var ListConfigurationSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "ListConfigurationSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationSetsResponse_ConfigurationSets *smithy.Schema
-
-var ListConfigurationSetsResponse_NextToken *smithy.Schema
-
-var SendVoiceMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "SendVoiceMessageRequest",
-}, smithy.ShapeTypeStructure, 5)
-var SendVoiceMessageRequest_CallerId *smithy.Schema
-
-var SendVoiceMessageRequest_ConfigurationSetName *smithy.Schema
-
-var SendVoiceMessageRequest_Content *smithy.Schema
-
-var SendVoiceMessageRequest_DestinationPhoneNumber *smithy.Schema
-
-var SendVoiceMessageRequest_OriginationPhoneNumber *smithy.Schema
-
-var SendVoiceMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "SendVoiceMessageResponse",
-}, smithy.ShapeTypeStructure, 1)
-var SendVoiceMessageResponse_MessageId *smithy.Schema
-
-var UpdateConfigurationSetEventDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "UpdateConfigurationSetEventDestinationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConfigurationSetEventDestinationRequest_ConfigurationSetName *smithy.Schema
-
-var UpdateConfigurationSetEventDestinationRequest_EventDestination *smithy.Schema
-
-var UpdateConfigurationSetEventDestinationRequest_EventDestinationName *smithy.Schema
-
-var UpdateConfigurationSetEventDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointsmsvoice",
-	Name:      "UpdateConfigurationSetEventDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AlreadyExistsException_Message = AlreadyExistsException.AddMember("Message", _String)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _String)
-
-	CallInstructionsMessageType_Text = CallInstructionsMessageType.AddMember("Text", _NonEmptyString)
-
-	CloudWatchLogsDestination_IamRoleArn = CloudWatchLogsDestination.AddMember("IamRoleArn", _String)
-
-	CloudWatchLogsDestination_LogGroupArn = CloudWatchLogsDestination.AddMember("LogGroupArn", _String)
-
-	_ConfigurationSets_member = _ConfigurationSets.AddMember("member", _WordCharactersWithDelimiters)
-
-	KinesisFirehoseDestination_DeliveryStreamArn = KinesisFirehoseDestination.AddMember("DeliveryStreamArn", _String)
-
-	KinesisFirehoseDestination_IamRoleArn = KinesisFirehoseDestination.AddMember("IamRoleArn", _String)
-
-	EventType_INITIATED_CALL = EventType.AddMember("INITIATED_CALL", smithyprelude.Unit)
-
-	EventType_RINGING = EventType.AddMember("RINGING", smithyprelude.Unit)
-
-	EventType_ANSWERED = EventType.AddMember("ANSWERED", smithyprelude.Unit)
-
-	EventType_COMPLETED_CALL = EventType.AddMember("COMPLETED_CALL", smithyprelude.Unit)
-
-	EventType_BUSY = EventType.AddMember("BUSY", smithyprelude.Unit)
-
-	EventType_FAILED = EventType.AddMember("FAILED", smithyprelude.Unit)
-
-	EventType_NO_ANSWER = EventType.AddMember("NO_ANSWER", smithyprelude.Unit)
-
-	_EventTypes_member = _EventTypes.AddMember("member", EventType)
-
-	SnsDestination_TopicArn = SnsDestination.AddMember("TopicArn", _String)
-
-	EventDestination_CloudWatchLogsDestination = EventDestination.AddMember("CloudWatchLogsDestination", CloudWatchLogsDestination)
-
-	EventDestination_Enabled = EventDestination.AddMember("Enabled", _Boolean)
-
-	EventDestination_KinesisFirehoseDestination = EventDestination.AddMember("KinesisFirehoseDestination", KinesisFirehoseDestination)
-
-	EventDestination_MatchingEventTypes = EventDestination.AddMember("MatchingEventTypes", _EventTypes)
-
-	EventDestination_Name = EventDestination.AddMember("Name", _String)
-
-	EventDestination_SnsDestination = EventDestination.AddMember("SnsDestination", SnsDestination)
-
-	EventDestinationDefinition_CloudWatchLogsDestination = EventDestinationDefinition.AddMember("CloudWatchLogsDestination", CloudWatchLogsDestination)
-
-	EventDestinationDefinition_Enabled = EventDestinationDefinition.AddMember("Enabled", _Boolean)
-
-	EventDestinationDefinition_KinesisFirehoseDestination = EventDestinationDefinition.AddMember("KinesisFirehoseDestination", KinesisFirehoseDestination)
-
-	EventDestinationDefinition_MatchingEventTypes = EventDestinationDefinition.AddMember("MatchingEventTypes", _EventTypes)
-
-	EventDestinationDefinition_SnsDestination = EventDestinationDefinition.AddMember("SnsDestination", SnsDestination)
-
-	_EventDestinations_member = _EventDestinations.AddMember("member", EventDestination)
-
-	InternalServiceErrorException_Message = InternalServiceErrorException.AddMember("Message", _String)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _String)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _String)
-
-	PlainTextMessageType_LanguageCode = PlainTextMessageType.AddMember("LanguageCode", _String)
-
-	PlainTextMessageType_Text = PlainTextMessageType.AddMember("Text", _NonEmptyString)
-
-	PlainTextMessageType_VoiceId = PlainTextMessageType.AddMember("VoiceId", _String)
-
-	SSMLMessageType_LanguageCode = SSMLMessageType.AddMember("LanguageCode", _String)
-
-	SSMLMessageType_Text = SSMLMessageType.AddMember("Text", _NonEmptyString)
-
-	SSMLMessageType_VoiceId = SSMLMessageType.AddMember("VoiceId", _String)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _String)
-
-	VoiceMessageContent_CallInstructionsMessage = VoiceMessageContent.AddMember("CallInstructionsMessage", CallInstructionsMessageType)
-
-	VoiceMessageContent_PlainTextMessage = VoiceMessageContent.AddMember("PlainTextMessage", PlainTextMessageType)
-
-	VoiceMessageContent_SSMLMessage = VoiceMessageContent.AddMember("SSMLMessage", SSMLMessageType)
-
-	CreateConfigurationSetEventDestinationRequest_ConfigurationSetName = CreateConfigurationSetEventDestinationRequest.AddMember("ConfigurationSetName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateConfigurationSetEventDestinationRequest_EventDestination = CreateConfigurationSetEventDestinationRequest.AddMember("EventDestination", EventDestinationDefinition)
-
-	CreateConfigurationSetEventDestinationRequest_EventDestinationName = CreateConfigurationSetEventDestinationRequest.AddMember("EventDestinationName", _NonEmptyString)
-
-	CreateConfigurationSetRequest_ConfigurationSetName = CreateConfigurationSetRequest.AddMember("ConfigurationSetName", _WordCharactersWithDelimiters)
-
-	DeleteConfigurationSetEventDestinationRequest_ConfigurationSetName = DeleteConfigurationSetEventDestinationRequest.AddMember("ConfigurationSetName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationSetEventDestinationRequest_EventDestinationName = DeleteConfigurationSetEventDestinationRequest.AddMember("EventDestinationName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationSetRequest_ConfigurationSetName = DeleteConfigurationSetRequest.AddMember("ConfigurationSetName", ___string, &smithytraits.HTTPLabel{})
-
-	GetConfigurationSetEventDestinationsRequest_ConfigurationSetName = GetConfigurationSetEventDestinationsRequest.AddMember("ConfigurationSetName", ___string, &smithytraits.HTTPLabel{})
-
-	GetConfigurationSetEventDestinationsResponse_EventDestinations = GetConfigurationSetEventDestinationsResponse.AddMember("EventDestinations", _EventDestinations)
-
-	ListConfigurationSetsRequest_NextToken = ListConfigurationSetsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListConfigurationSetsRequest_PageSize = ListConfigurationSetsRequest.AddMember("PageSize", ___string, &smithytraits.HTTPQuery{Name: "PageSize"})
-
-	ListConfigurationSetsResponse_ConfigurationSets = ListConfigurationSetsResponse.AddMember("ConfigurationSets", _ConfigurationSets)
-
-	ListConfigurationSetsResponse_NextToken = ListConfigurationSetsResponse.AddMember("NextToken", _NextTokenString)
-
-	SendVoiceMessageRequest_CallerId = SendVoiceMessageRequest.AddMember("CallerId", _String)
-
-	SendVoiceMessageRequest_ConfigurationSetName = SendVoiceMessageRequest.AddMember("ConfigurationSetName", _WordCharactersWithDelimiters)
-
-	SendVoiceMessageRequest_Content = SendVoiceMessageRequest.AddMember("Content", VoiceMessageContent)
-
-	SendVoiceMessageRequest_DestinationPhoneNumber = SendVoiceMessageRequest.AddMember("DestinationPhoneNumber", _NonEmptyString)
-
-	SendVoiceMessageRequest_OriginationPhoneNumber = SendVoiceMessageRequest.AddMember("OriginationPhoneNumber", _NonEmptyString)
-
-	SendVoiceMessageResponse_MessageId = SendVoiceMessageResponse.AddMember("MessageId", _String)
-
-	UpdateConfigurationSetEventDestinationRequest_ConfigurationSetName = UpdateConfigurationSetEventDestinationRequest.AddMember("ConfigurationSetName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationSetEventDestinationRequest_EventDestination = UpdateConfigurationSetEventDestinationRequest.AddMember("EventDestination", EventDestinationDefinition)
-
-	UpdateConfigurationSetEventDestinationRequest_EventDestinationName = UpdateConfigurationSetEventDestinationRequest.AddMember("EventDestinationName", ___string, &smithytraits.HTTPLabel{})
-
+const blob = "" +
+	"CreateConfigurationSetEventDestinationResponseDeleteConfigurationSetEventDestinationResponseUpdateCo" +
+	"nfigurationSetEventDestinationResponseCreateConfigurationSetEventDestinationRequestDeleteConfigurati" +
+	"onSetEventDestinationRequestUpdateConfigurationSetEventDestinationRequestGetConfigurationSetEventDes" +
+	"tinationsResponseGetConfigurationSetEventDestinationsRequestCreateConfigurationSetResponseDeleteConf" +
+	"igurationSetResponseCreateConfigurationSetRequestDeleteConfigurationSetRequestInternalServiceErrorEx" +
+	"ceptionListConfigurationSetsResponseListConfigurationSetsRequestWordCharactersWithDelimitersCallInst" +
+	"ructionsMessageTypeEventDestinationDefinitionKinesisFirehoseDestinationCloudWatchLogsDestinationSend" +
+	"VoiceMessageResponseTooManyRequestsExceptionSendVoiceMessageRequestAlreadyExistsExceptionDestination" +
+	"PhoneNumberLimitExceededExceptionOriginationPhoneNumberConfigurationSetNameEventDestinationNamePlain" +
+	"TextMessageTypeBadRequestExceptionVoiceMessageContentMatchingEventTypesDeliveryStreamArnNotFoundExce" +
+	"ptionPinpointSMSVoiceNextTokenStringSSMLMessageTypeCOMPLETED_CALLINITIATED_CALLNonEmptyStringSnsDest" +
+	"inationLanguageCodeLogGroupArnIamRoleArnMessageIdNO_ANSWERANSWEREDCallerIdPageSizeTopicArn__stringBo" +
+	"oleanEnabledRINGINGVoiceIdFAILEDmemberBUSYUnit"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.pinpointsmsvoice", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 1, Traits: 1, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 46, Target: 2, Traits: 2, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 46, Target: 3, Traits: 3, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 273, Target: 4, Traits: 4, StrLen: 36, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 507, Target: 5, Traits: 5, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 696, Target: 6, Traits: 6, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 92, Target: 7, Traits: 7, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1005, Target: 8, Traits: 8, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1190, Target: 9, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 767, Target: 10, Traits: 9, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 608, Target: 68, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 915, Target: 12, Traits: 10, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 608, Target: 68, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1198, Target: 14, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 592, Target: 15, Traits: 8, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 900, Target: 55, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 671, Target: 17, Traits: 8, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1130, Target: 68, Traits: 8, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1119, Target: 68, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 511, Target: 20, Traits: 8, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1232, Target: 75, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22, Target: 22, Traits: 8, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 671, Target: 17, Traits: 8, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1205, Target: 14, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 645, Target: 49, Traits: 8, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 953, Target: 45, Traits: 8, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 871, Target: 68, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1093, Target: 62, Traits: 8, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 619, Target: 29, Traits: 8, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 671, Target: 17, Traits: 8, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1205, Target: 14, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 645, Target: 49, Traits: 8, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 953, Target: 45, Traits: 8, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1093, Target: 62, Traits: 8, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 292, Target: 35, Traits: 8, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1232, Target: 22, Traits: 8, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 961, Target: 37, Traits: 8, StrLen: 9, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1065, Target: 114, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1212, Target: 114, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1158, Target: 114, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1051, Target: 114, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1238, Target: 114, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1226, Target: 114, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1149, Target: 114, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 961, Target: 45, Traits: 8, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1232, Target: 37, Traits: 8, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 478, Target: 47, Traits: 11, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 608, Target: 68, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 645, Target: 49, Traits: 8, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 971, Target: 68, Traits: 8, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1130, Target: 68, Traits: 8, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 811, Target: 52, Traits: 12, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 608, Target: 68, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1021, Target: 54, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1079, Target: 55, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 988, Target: 56, Traits: 13, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 608, Target: 68, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 58, Traits: 8, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1107, Target: 68, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 900, Target: 55, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1219, Target: 68, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1093, Target: 62, Traits: 8, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1182, Target: 68, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1036, Target: 64, Traits: 8, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1107, Target: 68, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 900, Target: 55, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1219, Target: 68, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1030, Target: 68, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 720, Target: 69, Traits: 14, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 608, Target: 68, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 934, Target: 71, Traits: 8, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 592, Target: 15, Traits: 8, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 895, Target: 58, Traits: 8, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1036, Target: 64, Traits: 8, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 564, Target: 75, Traits: 8, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 138, Target: 76, Traits: 8, StrLen: 45, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 855, Target: 9, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22, Target: 29, Traits: 8, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 875, Target: 55, Traits: 8, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 80, Traits: 8, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 420, Target: 81, Traits: 8, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 855, Target: 75, Traits: 8, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 360, Target: 83, Traits: 8, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 183, Target: 84, Traits: 8, StrLen: 45, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 855, Target: 9, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 875, Target: 9, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 46, Target: 87, Traits: 8, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 449, Target: 88, Traits: 8, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 855, Target: 9, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 390, Target: 90, Traits: 8, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 317, Target: 91, Traits: 8, StrLen: 43, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 855, Target: 9, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 273, Target: 93, Traits: 8, StrLen: 44, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 292, Target: 35, Traits: 8, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 536, Target: 95, Traits: 8, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1021, Target: 9, Traits: 16, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1174, Target: 9, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 507, Target: 98, Traits: 8, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 511, Target: 20, Traits: 8, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1021, Target: 54, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 744, Target: 101, Traits: 8, StrLen: 23, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1166, Target: 68, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 855, Target: 75, Traits: 8, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 946, Target: 71, Traits: 8, StrLen: 7, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 789, Target: 55, Traits: 8, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 833, Target: 55, Traits: 8, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 696, Target: 107, Traits: 8, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1140, Target: 68, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 228, Target: 109, Traits: 8, StrLen: 45, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 855, Target: 9, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 22, Target: 29, Traits: 8, StrLen: 16, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 875, Target: 9, Traits: 15, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 92, Target: 113, Traits: 8, StrLen: 46, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1242, Target: 114, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/sms-voice/configuration-sets",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/v1/sms-voice/configuration-sets",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/v1/sms-voice/voice/message",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 412}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "PageSize"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [115]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+}
+
+var CreateConfigurationSet = &handles[0]
+
+var CreateConfigurationSetEventDestination = &handles[1]
+
+var DeleteConfigurationSet = &handles[2]
+
+var DeleteConfigurationSetEventDestination = &handles[3]
+
+var GetConfigurationSetEventDestinations = &handles[4]
+
+var ListConfigurationSets = &handles[5]
+
+var SendVoiceMessage = &handles[6]
+
+var UpdateConfigurationSetEventDestination = &handles[7]
+
+var _PinpointSMSVoice = &handles[8]
+
+var ___string = &handles[9]
+
+var AlreadyExistsException = &handles[10]
+var AlreadyExistsException_Message = &handles[11]
+
+var BadRequestException = &handles[12]
+var BadRequestException_Message = &handles[13]
+
+var _Boolean = &handles[14]
+
+var CallInstructionsMessageType = &handles[15]
+var CallInstructionsMessageType_Text = &handles[16]
+
+var CloudWatchLogsDestination = &handles[17]
+var CloudWatchLogsDestination_IamRoleArn = &handles[18]
+var CloudWatchLogsDestination_LogGroupArn = &handles[19]
+
+var _ConfigurationSets = &handles[20]
+var _ConfigurationSets_member = &handles[21]
+
+var EventDestination = &handles[22]
+var EventDestination_CloudWatchLogsDestination = &handles[23]
+var EventDestination_Enabled = &handles[24]
+var EventDestination_KinesisFirehoseDestination = &handles[25]
+var EventDestination_MatchingEventTypes = &handles[26]
+var EventDestination_Name = &handles[27]
+var EventDestination_SnsDestination = &handles[28]
+
+var EventDestinationDefinition = &handles[29]
+var EventDestinationDefinition_CloudWatchLogsDestination = &handles[30]
+var EventDestinationDefinition_Enabled = &handles[31]
+var EventDestinationDefinition_KinesisFirehoseDestination = &handles[32]
+var EventDestinationDefinition_MatchingEventTypes = &handles[33]
+var EventDestinationDefinition_SnsDestination = &handles[34]
+
+var _EventDestinations = &handles[35]
+var _EventDestinations_member = &handles[36]
+
+var EventType = &handles[37]
+var EventType_INITIATED_CALL = &handles[38]
+var EventType_RINGING = &handles[39]
+var EventType_ANSWERED = &handles[40]
+var EventType_COMPLETED_CALL = &handles[41]
+var EventType_BUSY = &handles[42]
+var EventType_FAILED = &handles[43]
+var EventType_NO_ANSWER = &handles[44]
+
+var _EventTypes = &handles[45]
+var _EventTypes_member = &handles[46]
+
+var InternalServiceErrorException = &handles[47]
+var InternalServiceErrorException_Message = &handles[48]
+
+var KinesisFirehoseDestination = &handles[49]
+var KinesisFirehoseDestination_DeliveryStreamArn = &handles[50]
+var KinesisFirehoseDestination_IamRoleArn = &handles[51]
+
+var LimitExceededException = &handles[52]
+var LimitExceededException_Message = &handles[53]
+
+var _NextTokenString = &handles[54]
+
+var _NonEmptyString = &handles[55]
+
+var NotFoundException = &handles[56]
+var NotFoundException_Message = &handles[57]
+
+var PlainTextMessageType = &handles[58]
+var PlainTextMessageType_LanguageCode = &handles[59]
+var PlainTextMessageType_Text = &handles[60]
+var PlainTextMessageType_VoiceId = &handles[61]
+
+var SnsDestination = &handles[62]
+var SnsDestination_TopicArn = &handles[63]
+
+var SSMLMessageType = &handles[64]
+var SSMLMessageType_LanguageCode = &handles[65]
+var SSMLMessageType_Text = &handles[66]
+var SSMLMessageType_VoiceId = &handles[67]
+
+var _String = &handles[68]
+
+var TooManyRequestsException = &handles[69]
+var TooManyRequestsException_Message = &handles[70]
+
+var VoiceMessageContent = &handles[71]
+var VoiceMessageContent_CallInstructionsMessage = &handles[72]
+var VoiceMessageContent_PlainTextMessage = &handles[73]
+var VoiceMessageContent_SSMLMessage = &handles[74]
+
+var _WordCharactersWithDelimiters = &handles[75]
+
+var CreateConfigurationSetEventDestinationRequest = &handles[76]
+var CreateConfigurationSetEventDestinationRequest_ConfigurationSetName = &handles[77]
+var CreateConfigurationSetEventDestinationRequest_EventDestination = &handles[78]
+var CreateConfigurationSetEventDestinationRequest_EventDestinationName = &handles[79]
+
+var CreateConfigurationSetEventDestinationResponse = &handles[80]
+
+var CreateConfigurationSetRequest = &handles[81]
+var CreateConfigurationSetRequest_ConfigurationSetName = &handles[82]
+
+var CreateConfigurationSetResponse = &handles[83]
+
+var DeleteConfigurationSetEventDestinationRequest = &handles[84]
+var DeleteConfigurationSetEventDestinationRequest_ConfigurationSetName = &handles[85]
+var DeleteConfigurationSetEventDestinationRequest_EventDestinationName = &handles[86]
+
+var DeleteConfigurationSetEventDestinationResponse = &handles[87]
+
+var DeleteConfigurationSetRequest = &handles[88]
+var DeleteConfigurationSetRequest_ConfigurationSetName = &handles[89]
+
+var DeleteConfigurationSetResponse = &handles[90]
+
+var GetConfigurationSetEventDestinationsRequest = &handles[91]
+var GetConfigurationSetEventDestinationsRequest_ConfigurationSetName = &handles[92]
+
+var GetConfigurationSetEventDestinationsResponse = &handles[93]
+var GetConfigurationSetEventDestinationsResponse_EventDestinations = &handles[94]
+
+var ListConfigurationSetsRequest = &handles[95]
+var ListConfigurationSetsRequest_NextToken = &handles[96]
+var ListConfigurationSetsRequest_PageSize = &handles[97]
+
+var ListConfigurationSetsResponse = &handles[98]
+var ListConfigurationSetsResponse_ConfigurationSets = &handles[99]
+var ListConfigurationSetsResponse_NextToken = &handles[100]
+
+var SendVoiceMessageRequest = &handles[101]
+var SendVoiceMessageRequest_CallerId = &handles[102]
+var SendVoiceMessageRequest_ConfigurationSetName = &handles[103]
+var SendVoiceMessageRequest_Content = &handles[104]
+var SendVoiceMessageRequest_DestinationPhoneNumber = &handles[105]
+var SendVoiceMessageRequest_OriginationPhoneNumber = &handles[106]
+
+var SendVoiceMessageResponse = &handles[107]
+var SendVoiceMessageResponse_MessageId = &handles[108]
+
+var UpdateConfigurationSetEventDestinationRequest = &handles[109]
+var UpdateConfigurationSetEventDestinationRequest_ConfigurationSetName = &handles[110]
+var UpdateConfigurationSetEventDestinationRequest_EventDestination = &handles[111]
+var UpdateConfigurationSetEventDestinationRequest_EventDestinationName = &handles[112]
+
+var UpdateConfigurationSetEventDestinationResponse = &handles[113]
+
+var PinpointSMSVoice = &smithy.ServiceSchema{Schema: &handles[8], Version: "2018-09-05"}

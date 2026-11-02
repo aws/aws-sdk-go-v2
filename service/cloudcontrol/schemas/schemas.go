@@ -7,778 +7,659 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CancelResourceRequest",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CreateResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "DeleteResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourceRequestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceRequestStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResourceRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourceRequests",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "UpdateResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _CloudApiService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CloudApiService",
-}, smithy.ShapeTypeService, 0)
-
-var CloudApiService = smithy.NewServiceSchema(_CloudApiService, "2021-09-30")
-
-var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AlreadyExistsException",
-		StatusCode: 400})
-var AlreadyExistsException_Message *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ClientTokenConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ClientTokenConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ClientTokenConflictException",
-		StatusCode: 409})
-var ClientTokenConflictException_Message *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModificationException",
-		StatusCode: 500})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConcurrentOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ConcurrentOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentOperationException",
-		StatusCode: 409})
-var ConcurrentOperationException_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var GeneralServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GeneralServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "GeneralServiceException",
-		StatusCode: 400})
-var GeneralServiceException_Message *smithy.Schema
-
-var _HandlerErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HandlerErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var HandlerFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HandlerFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502},
-	&smithytraits.AWSQueryError{ErrorCode: "HandlerFailureException",
-		StatusCode: 502})
-var HandlerFailureException_Message *smithy.Schema
-
-var HandlerInternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HandlerInternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502},
-	&smithytraits.AWSQueryError{ErrorCode: "HandlerInternalFailureException",
-		StatusCode: 502})
-var HandlerInternalFailureException_Message *smithy.Schema
-
-var _HandlerNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HandlerNextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _HookFailureMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookFailureMode",
-}, smithy.ShapeTypeString, 0)
-
-var _HookInvocationPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookInvocationPoint",
-}, smithy.ShapeTypeString, 0)
-
-var HookProgressEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookProgressEvent",
-}, smithy.ShapeTypeStructure, 8)
-var HookProgressEvent_HookTypeName *smithy.Schema
-
-var HookProgressEvent_HookTypeVersionId *smithy.Schema
-
-var HookProgressEvent_HookTypeArn *smithy.Schema
-
-var HookProgressEvent_InvocationPoint *smithy.Schema
-
-var HookProgressEvent_HookStatus *smithy.Schema
-
-var HookProgressEvent_HookEventTime *smithy.Schema
-
-var HookProgressEvent_HookStatusMessage *smithy.Schema
-
-var HookProgressEvent_FailureMode *smithy.Schema
-
-var _HooksProgressEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HooksProgressEvent",
-}, smithy.ShapeTypeList, 1)
-var _HooksProgressEvent_member *smithy.Schema
-
-var _HookStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _HookTypeArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookTypeArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var InvalidCredentialsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "InvalidCredentialsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidCredentialsException",
-		StatusCode: 401})
-var InvalidCredentialsException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidRequestException",
-		StatusCode: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetworkFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "NetworkFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502},
-	&smithytraits.AWSQueryError{ErrorCode: "NetworkFailureException",
-		StatusCode: 502})
-var NetworkFailureException_Message *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotStabilizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "NotStabilizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "NotStabilizedException",
-		StatusCode: 400})
-var NotStabilizedException_Message *smithy.Schema
-
-var NotUpdatableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "NotUpdatableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "NotUpdatableException",
-		StatusCode: 400})
-var NotUpdatableException_Message *smithy.Schema
-
-var _Operation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Operation",
-}, smithy.ShapeTypeString, 0)
-
-var _Operations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Operations",
-}, smithy.ShapeTypeList, 1)
-var _Operations_member *smithy.Schema
-
-var _OperationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "OperationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _OperationStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "OperationStatuses",
-}, smithy.ShapeTypeList, 1)
-var _OperationStatuses_member *smithy.Schema
-
-var _PatchDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "PatchDocument",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PrivateTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "PrivateTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PrivateTypeException",
-		StatusCode: 400})
-var PrivateTypeException_Message *smithy.Schema
-
-var ProgressEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ProgressEvent",
-}, smithy.ShapeTypeStructure, 11)
-var ProgressEvent_TypeName *smithy.Schema
-
-var ProgressEvent_Identifier *smithy.Schema
-
-var ProgressEvent_RequestToken *smithy.Schema
-
-var ProgressEvent_HooksRequestToken *smithy.Schema
-
-var ProgressEvent_Operation *smithy.Schema
-
-var ProgressEvent_OperationStatus *smithy.Schema
-
-var ProgressEvent_EventTime *smithy.Schema
-
-var ProgressEvent_ResourceModel *smithy.Schema
-
-var ProgressEvent_StatusMessage *smithy.Schema
-
-var ProgressEvent_ErrorCode *smithy.Schema
-
-var ProgressEvent_RetryAfter *smithy.Schema
-
-var _Properties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Properties",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "RequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var RequestTokenNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "RequestTokenNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "RequestTokenNotFoundException",
-		StatusCode: 404})
-var RequestTokenNotFoundException_Message *smithy.Schema
-
-var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceConflictException",
-		StatusCode: 409})
-var ResourceConflictException_Message *smithy.Schema
-
-var ResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceDescription",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceDescription_Identifier *smithy.Schema
-
-var ResourceDescription_Properties *smithy.Schema
-
-var _ResourceDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _ResourceDescriptions_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceRequestStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceRequestStatusFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceRequestStatusFilter_Operations *smithy.Schema
-
-var ResourceRequestStatusFilter_OperationStatuses *smithy.Schema
-
-var _ResourceRequestStatusSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceRequestStatusSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ResourceRequestStatusSummaries_member *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceInternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ServiceInternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceInternalErrorException",
-		StatusCode: 502})
-var ServiceInternalErrorException_Message *smithy.Schema
-
-var ServiceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ServiceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceLimitExceededException",
-		StatusCode: 400})
-var ServiceLimitExceededException_Message *smithy.Schema
-
-var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "StatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
-		StatusCode: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "TypeName",
-}, smithy.ShapeTypeString, 0)
-
-var TypeNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "TypeNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "TypeNotFoundException",
-		StatusCode: 404})
-var TypeNotFoundException_Message *smithy.Schema
-
-var _TypeVersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "TypeVersionId",
-}, smithy.ShapeTypeString, 0)
-
-var UnsupportedActionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "UnsupportedActionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 405},
-	&smithytraits.AWSQueryError{ErrorCode: "UnsupportedActionException",
-		StatusCode: 405})
-var UnsupportedActionException_Message *smithy.Schema
-
-var CancelResourceRequestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CancelResourceRequestInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelResourceRequestInput_RequestToken *smithy.Schema
-
-var CancelResourceRequestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CancelResourceRequestOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelResourceRequestOutput_ProgressEvent *smithy.Schema
-
-var CreateResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CreateResourceInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateResourceInput_TypeName *smithy.Schema
-
-var CreateResourceInput_TypeVersionId *smithy.Schema
-
-var CreateResourceInput_RoleArn *smithy.Schema
-
-var CreateResourceInput_ClientToken *smithy.Schema
-
-var CreateResourceInput_DesiredState *smithy.Schema
-
-var CreateResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CreateResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateResourceOutput_ProgressEvent *smithy.Schema
-
-var DeleteResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "DeleteResourceInput",
-}, smithy.ShapeTypeStructure, 5)
-var DeleteResourceInput_TypeName *smithy.Schema
-
-var DeleteResourceInput_TypeVersionId *smithy.Schema
-
-var DeleteResourceInput_RoleArn *smithy.Schema
-
-var DeleteResourceInput_ClientToken *smithy.Schema
-
-var DeleteResourceInput_Identifier *smithy.Schema
-
-var DeleteResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "DeleteResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourceOutput_ProgressEvent *smithy.Schema
-
-var GetResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetResourceInput_TypeName *smithy.Schema
-
-var GetResourceInput_TypeVersionId *smithy.Schema
-
-var GetResourceInput_RoleArn *smithy.Schema
-
-var GetResourceInput_Identifier *smithy.Schema
-
-var GetResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceOutput_TypeName *smithy.Schema
-
-var GetResourceOutput_ResourceDescription *smithy.Schema
-
-var GetResourceRequestStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceRequestStatusInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceRequestStatusInput_RequestToken *smithy.Schema
-
-var GetResourceRequestStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceRequestStatusOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceRequestStatusOutput_ProgressEvent *smithy.Schema
-
-var GetResourceRequestStatusOutput_HooksProgressEvent *smithy.Schema
-
-var ListResourceRequestsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourceRequestsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourceRequestsInput_MaxResults *smithy.Schema
-
-var ListResourceRequestsInput_NextToken *smithy.Schema
-
-var ListResourceRequestsInput_ResourceRequestStatusFilter *smithy.Schema
-
-var ListResourceRequestsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourceRequestsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceRequestsOutput_ResourceRequestStatusSummaries *smithy.Schema
-
-var ListResourceRequestsOutput_NextToken *smithy.Schema
-
-var ListResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourcesInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListResourcesInput_TypeName *smithy.Schema
-
-var ListResourcesInput_TypeVersionId *smithy.Schema
-
-var ListResourcesInput_RoleArn *smithy.Schema
-
-var ListResourcesInput_NextToken *smithy.Schema
-
-var ListResourcesInput_MaxResults *smithy.Schema
-
-var ListResourcesInput_ResourceModel *smithy.Schema
-
-var ListResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourcesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourcesOutput_TypeName *smithy.Schema
-
-var ListResourcesOutput_ResourceDescriptions *smithy.Schema
-
-var ListResourcesOutput_NextToken *smithy.Schema
-
-var UpdateResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "UpdateResourceInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateResourceInput_TypeName *smithy.Schema
-
-var UpdateResourceInput_TypeVersionId *smithy.Schema
-
-var UpdateResourceInput_RoleArn *smithy.Schema
-
-var UpdateResourceInput_ClientToken *smithy.Schema
-
-var UpdateResourceInput_Identifier *smithy.Schema
-
-var UpdateResourceInput_PatchDocument *smithy.Schema
-
-var UpdateResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "UpdateResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateResourceOutput_ProgressEvent *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AlreadyExistsException_Message = AlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	ClientTokenConflictException_Message = ClientTokenConflictException.AddMember("Message", _ErrorMessage)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _ErrorMessage)
-
-	ConcurrentOperationException_Message = ConcurrentOperationException.AddMember("Message", _ErrorMessage)
-
-	GeneralServiceException_Message = GeneralServiceException.AddMember("Message", _ErrorMessage)
-
-	HandlerFailureException_Message = HandlerFailureException.AddMember("Message", _ErrorMessage)
-
-	HandlerInternalFailureException_Message = HandlerInternalFailureException.AddMember("Message", _ErrorMessage)
-
-	HookProgressEvent_HookTypeName = HookProgressEvent.AddMember("HookTypeName", _TypeName)
-
-	HookProgressEvent_HookTypeVersionId = HookProgressEvent.AddMember("HookTypeVersionId", _TypeVersionId)
-
-	HookProgressEvent_HookTypeArn = HookProgressEvent.AddMember("HookTypeArn", _HookTypeArn)
-
-	HookProgressEvent_InvocationPoint = HookProgressEvent.AddMember("InvocationPoint", _HookInvocationPoint)
-
-	HookProgressEvent_HookStatus = HookProgressEvent.AddMember("HookStatus", _HookStatus)
-
-	HookProgressEvent_HookEventTime = HookProgressEvent.AddMember("HookEventTime", _Timestamp)
-
-	HookProgressEvent_HookStatusMessage = HookProgressEvent.AddMember("HookStatusMessage", _StatusMessage)
-
-	HookProgressEvent_FailureMode = HookProgressEvent.AddMember("FailureMode", _HookFailureMode)
-
-	_HooksProgressEvent_member = _HooksProgressEvent.AddMember("member", HookProgressEvent)
-
-	InvalidCredentialsException_Message = InvalidCredentialsException.AddMember("Message", _ErrorMessage)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _ErrorMessage)
-
-	NetworkFailureException_Message = NetworkFailureException.AddMember("Message", _ErrorMessage)
-
-	NotStabilizedException_Message = NotStabilizedException.AddMember("Message", _ErrorMessage)
-
-	NotUpdatableException_Message = NotUpdatableException.AddMember("Message", _ErrorMessage)
-
-	_Operations_member = _Operations.AddMember("member", _Operation)
-
-	_OperationStatuses_member = _OperationStatuses.AddMember("member", _OperationStatus)
-
-	PrivateTypeException_Message = PrivateTypeException.AddMember("Message", _ErrorMessage)
-
-	ProgressEvent_TypeName = ProgressEvent.AddMember("TypeName", _TypeName)
-
-	ProgressEvent_Identifier = ProgressEvent.AddMember("Identifier", _Identifier)
-
-	ProgressEvent_RequestToken = ProgressEvent.AddMember("RequestToken", _RequestToken)
-
-	ProgressEvent_HooksRequestToken = ProgressEvent.AddMember("HooksRequestToken", _RequestToken)
-
-	ProgressEvent_Operation = ProgressEvent.AddMember("Operation", _Operation)
-
-	ProgressEvent_OperationStatus = ProgressEvent.AddMember("OperationStatus", _OperationStatus)
-
-	ProgressEvent_EventTime = ProgressEvent.AddMember("EventTime", _Timestamp)
-
-	ProgressEvent_ResourceModel = ProgressEvent.AddMember("ResourceModel", _Properties)
-
-	ProgressEvent_StatusMessage = ProgressEvent.AddMember("StatusMessage", _StatusMessage)
-
-	ProgressEvent_ErrorCode = ProgressEvent.AddMember("ErrorCode", _HandlerErrorCode)
-
-	ProgressEvent_RetryAfter = ProgressEvent.AddMember("RetryAfter", _Timestamp)
-
-	RequestTokenNotFoundException_Message = RequestTokenNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceConflictException_Message = ResourceConflictException.AddMember("Message", _ErrorMessage)
-
-	ResourceDescription_Identifier = ResourceDescription.AddMember("Identifier", _Identifier)
-
-	ResourceDescription_Properties = ResourceDescription.AddMember("Properties", _Properties)
-
-	_ResourceDescriptions_member = _ResourceDescriptions.AddMember("member", ResourceDescription)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceRequestStatusFilter_Operations = ResourceRequestStatusFilter.AddMember("Operations", _Operations)
-
-	ResourceRequestStatusFilter_OperationStatuses = ResourceRequestStatusFilter.AddMember("OperationStatuses", _OperationStatuses)
-
-	_ResourceRequestStatusSummaries_member = _ResourceRequestStatusSummaries.AddMember("member", ProgressEvent)
-
-	ServiceInternalErrorException_Message = ServiceInternalErrorException.AddMember("Message", _ErrorMessage)
-
-	ServiceLimitExceededException_Message = ServiceLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	TypeNotFoundException_Message = TypeNotFoundException.AddMember("Message", _ErrorMessage)
-
-	UnsupportedActionException_Message = UnsupportedActionException.AddMember("Message", _ErrorMessage)
-
-	CancelResourceRequestInput_RequestToken = CancelResourceRequestInput.AddMember("RequestToken", _RequestToken)
-
-	CancelResourceRequestOutput_ProgressEvent = CancelResourceRequestOutput.AddMember("ProgressEvent", ProgressEvent)
-
-	CreateResourceInput_TypeName = CreateResourceInput.AddMember("TypeName", _TypeName)
-
-	CreateResourceInput_TypeVersionId = CreateResourceInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	CreateResourceInput_RoleArn = CreateResourceInput.AddMember("RoleArn", _RoleArn)
-
-	CreateResourceInput_ClientToken = CreateResourceInput.AddMember("ClientToken", _ClientToken)
-
-	CreateResourceInput_DesiredState = CreateResourceInput.AddMember("DesiredState", _Properties)
-
-	CreateResourceOutput_ProgressEvent = CreateResourceOutput.AddMember("ProgressEvent", ProgressEvent)
-
-	DeleteResourceInput_TypeName = DeleteResourceInput.AddMember("TypeName", _TypeName)
-
-	DeleteResourceInput_TypeVersionId = DeleteResourceInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	DeleteResourceInput_RoleArn = DeleteResourceInput.AddMember("RoleArn", _RoleArn)
-
-	DeleteResourceInput_ClientToken = DeleteResourceInput.AddMember("ClientToken", _ClientToken)
-
-	DeleteResourceInput_Identifier = DeleteResourceInput.AddMember("Identifier", _Identifier)
-
-	DeleteResourceOutput_ProgressEvent = DeleteResourceOutput.AddMember("ProgressEvent", ProgressEvent)
-
-	GetResourceInput_TypeName = GetResourceInput.AddMember("TypeName", _TypeName)
-
-	GetResourceInput_TypeVersionId = GetResourceInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	GetResourceInput_RoleArn = GetResourceInput.AddMember("RoleArn", _RoleArn)
-
-	GetResourceInput_Identifier = GetResourceInput.AddMember("Identifier", _Identifier)
-
-	GetResourceOutput_TypeName = GetResourceOutput.AddMember("TypeName", _TypeName)
-
-	GetResourceOutput_ResourceDescription = GetResourceOutput.AddMember("ResourceDescription", ResourceDescription)
-
-	GetResourceRequestStatusInput_RequestToken = GetResourceRequestStatusInput.AddMember("RequestToken", _RequestToken)
-
-	GetResourceRequestStatusOutput_ProgressEvent = GetResourceRequestStatusOutput.AddMember("ProgressEvent", ProgressEvent)
-
-	GetResourceRequestStatusOutput_HooksProgressEvent = GetResourceRequestStatusOutput.AddMember("HooksProgressEvent", _HooksProgressEvent)
-
-	ListResourceRequestsInput_MaxResults = ListResourceRequestsInput.AddMember("MaxResults", _MaxResults)
-
-	ListResourceRequestsInput_NextToken = ListResourceRequestsInput.AddMember("NextToken", _NextToken)
-
-	ListResourceRequestsInput_ResourceRequestStatusFilter = ListResourceRequestsInput.AddMember("ResourceRequestStatusFilter", ResourceRequestStatusFilter)
-
-	ListResourceRequestsOutput_ResourceRequestStatusSummaries = ListResourceRequestsOutput.AddMember("ResourceRequestStatusSummaries", _ResourceRequestStatusSummaries)
-
-	ListResourceRequestsOutput_NextToken = ListResourceRequestsOutput.AddMember("NextToken", _NextToken)
-
-	ListResourcesInput_TypeName = ListResourcesInput.AddMember("TypeName", _TypeName)
-
-	ListResourcesInput_TypeVersionId = ListResourcesInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	ListResourcesInput_RoleArn = ListResourcesInput.AddMember("RoleArn", _RoleArn)
-
-	ListResourcesInput_NextToken = ListResourcesInput.AddMember("NextToken", _HandlerNextToken)
-
-	ListResourcesInput_MaxResults = ListResourcesInput.AddMember("MaxResults", _MaxResults)
-
-	ListResourcesInput_ResourceModel = ListResourcesInput.AddMember("ResourceModel", _Properties)
-
-	ListResourcesOutput_TypeName = ListResourcesOutput.AddMember("TypeName", _TypeName)
-
-	ListResourcesOutput_ResourceDescriptions = ListResourcesOutput.AddMember("ResourceDescriptions", _ResourceDescriptions)
-
-	ListResourcesOutput_NextToken = ListResourcesOutput.AddMember("NextToken", _HandlerNextToken)
-
-	UpdateResourceInput_TypeName = UpdateResourceInput.AddMember("TypeName", _TypeName)
-
-	UpdateResourceInput_TypeVersionId = UpdateResourceInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	UpdateResourceInput_RoleArn = UpdateResourceInput.AddMember("RoleArn", _RoleArn)
-
-	UpdateResourceInput_ClientToken = UpdateResourceInput.AddMember("ClientToken", _ClientToken)
-
-	UpdateResourceInput_Identifier = UpdateResourceInput.AddMember("Identifier", _Identifier)
-
-	UpdateResourceInput_PatchDocument = UpdateResourceInput.AddMember("PatchDocument", _PatchDocument)
-
-	UpdateResourceOutput_ProgressEvent = UpdateResourceOutput.AddMember("ProgressEvent", ProgressEvent)
-
+const blob = "" +
+	"ConcurrentModificationExceptionHandlerInternalFailureExceptionGetResourceRequestStatusOutputResource" +
+	"RequestStatusSummariesGetResourceRequestStatusInputRequestTokenNotFoundExceptionServiceInternalError" +
+	"ExceptionServiceLimitExceededExceptionClientTokenConflictExceptionConcurrentOperationExceptionCancel" +
+	"ResourceRequestOutputInvalidCredentialsExceptionResourceRequestStatusFilterCancelResourceRequestInpu" +
+	"tListResourceRequestsOutputUnsupportedActionExceptionListResourceRequestsInputResourceConflictExcept" +
+	"ionResourceNotFoundExceptionGeneralServiceExceptionHandlerFailureExceptionInvalidRequestExceptionNet" +
+	"workFailureExceptionAlreadyExistsExceptionNotStabilizedExceptionNotUpdatableExceptionTypeNotFoundExc" +
+	"eptionCreateResourceOutputDeleteResourceOutputPrivateTypeExceptionResourceDescriptionsUpdateResource" +
+	"OutputCreateResourceInputDeleteResourceInputHookInvocationPointListResourcesOutputThrottlingExceptio" +
+	"nUpdateResourceInputHooksProgressEventListResourcesInputGetResourceOutputHookProgressEventHookStatus" +
+	"MessageHookTypeVersionIdHooksRequestTokenOperationStatusesGetResourceInputHandlerErrorCodeHandlerNex" +
+	"tTokenCloudApiServiceHookFailureModeHookEventTimePatchDocumentResourceModelDesiredStateErrorMessageH" +
+	"ookTypeNameHookTypeArnIdentifierMaxResultsOperationsPropertiesRetryAfterTimestampRoleArnmember"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.cloudcontrol"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 294, Target: 0, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 706, Target: 1, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 726, Target: 2, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 62, Target: 3, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 62, Target: 4, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 401, Target: 5, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 863, Target: 6, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 786, Target: 7, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1106, Target: 8, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 620, Target: 9, Traits: 1, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 238, Target: 11, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 238, Target: 12, Traits: 2, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 14, Traits: 3, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 266, Target: 16, Traits: 4, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1187, Target: 18, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 528, Target: 19, Traits: 5, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1074, Target: 21, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 551, Target: 22, Traits: 6, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 31, Target: 24, Traits: 7, StrLen: 31, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1090, Target: 26, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1121, Target: 27, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 844, Target: 28, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 973, Target: 29, Traits: 0, StrLen: 17, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1199, Target: 103, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1007, Target: 106, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1211, Target: 41, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 848, Target: 28, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 990, Target: 40, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1136, Target: 102, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 990, Target: 99, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1125, Target: 27, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 920, Target: 38, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1288, Target: 29, Traits: 0, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 990, Target: 40, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1211, Target: 41, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1222, Target: 42, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 321, Target: 43, Traits: 8, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 574, Target: 45, Traits: 9, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1232, Target: 47, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 597, Target: 48, Traits: 10, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1097, Target: 50, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 642, Target: 51, Traits: 11, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 664, Target: 53, Traits: 12, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 276, Target: 55, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1242, Target: 56, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1288, Target: 55, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1041, Target: 58, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1041, Target: 59, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1288, Target: 58, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 61, Traits: 13, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 746, Target: 62, Traits: 14, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 925, Target: 64, Traits: 0, StrLen: 13, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1222, Target: 42, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 151, Target: 77, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1024, Target: 77, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 276, Target: 55, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1041, Target: 58, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1140, Target: 102, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1162, Target: 76, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 994, Target: 99, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1081, Target: 21, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1262, Target: 102, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1252, Target: 76, Traits: 13, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 151, Target: 77, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 151, Target: 78, Traits: 16, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 478, Target: 80, Traits: 17, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 766, Target: 82, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1222, Target: 42, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1252, Target: 76, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 766, Target: 85, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1288, Target: 82, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 503, Target: 87, Traits: 18, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 348, Target: 89, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1242, Target: 56, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1041, Target: 59, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 92, Target: 92, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1288, Target: 64, Traits: 0, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1281, Target: 94, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 180, Target: 95, Traits: 19, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 209, Target: 97, Traits: 20, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 994, Target: 99, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 882, Target: 100, Traits: 21, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1272, Target: 102, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 685, Target: 104, Traits: 22, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1011, Target: 106, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 427, Target: 107, Traits: 23, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1000, Target: 18, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 375, Target: 109, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 151, Target: 77, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 294, Target: 111, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 925, Target: 64, Traits: 0, StrLen: 13, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 806, Target: 113, Traits: 0, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1011, Target: 106, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1281, Target: 94, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 238, Target: 11, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1175, Target: 76, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 706, Target: 119, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 925, Target: 64, Traits: 0, StrLen: 13, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 825, Target: 121, Traits: 0, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1011, Target: 106, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1281, Target: 94, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 238, Target: 11, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1222, Target: 42, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 726, Target: 127, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 925, Target: 64, Traits: 0, StrLen: 13, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1058, Target: 129, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1011, Target: 106, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1281, Target: 94, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1222, Target: 42, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 956, Target: 134, Traits: 0, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 766, Target: 82, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 122, Target: 137, Traits: 0, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 151, Target: 77, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 62, Target: 139, Traits: 0, StrLen: 30, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 925, Target: 64, Traits: 0, StrLen: 13, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 920, Target: 38, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 453, Target: 142, Traits: 0, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1232, Target: 47, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1097, Target: 50, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 348, Target: 89, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 401, Target: 146, Traits: 0, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 92, Target: 92, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1097, Target: 50, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 938, Target: 149, Traits: 0, StrLen: 18, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1011, Target: 106, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1281, Target: 94, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1097, Target: 26, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1232, Target: 47, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1162, Target: 76, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 863, Target: 156, Traits: 0, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 766, Target: 85, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1097, Target: 26, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 901, Target: 160, Traits: 0, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1203, Target: 103, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1011, Target: 106, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1281, Target: 94, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 238, Target: 11, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1222, Target: 42, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1149, Target: 61, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 786, Target: 167, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 925, Target: 64, Traits: 0, StrLen: 13, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AlreadyExistsException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ClientTokenConflictException",
+			StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentModificationException",
+			StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentOperationException",
+			StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "GeneralServiceException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "HandlerFailureException",
+			StatusCode: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "HandlerInternalFailureException",
+			StatusCode: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidCredentialsException",
+			StatusCode: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidRequestException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NetworkFailureException",
+			StatusCode: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NotStabilizedException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NotUpdatableException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PrivateTypeException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "RequestTokenNotFoundException",
+			StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceConflictException",
+			StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+			StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceInternalErrorException",
+			StatusCode: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceLimitExceededException",
+			StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
+			StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TypeNotFoundException",
+			StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 405}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "UnsupportedActionException",
+			StatusCode: 405}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+	},
 }
+
+var handles = [169]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+}
+
+var CancelResourceRequest = &handles[0]
+
+var CreateResource = &handles[1]
+
+var DeleteResource = &handles[2]
+
+var GetResource = &handles[3]
+
+var GetResourceRequestStatus = &handles[4]
+
+var ListResourceRequests = &handles[5]
+
+var ListResources = &handles[6]
+
+var UpdateResource = &handles[7]
+
+var _CloudApiService = &handles[8]
+
+var AlreadyExistsException = &handles[9]
+var AlreadyExistsException_Message = &handles[10]
+
+var _ClientToken = &handles[11]
+
+var ClientTokenConflictException = &handles[12]
+var ClientTokenConflictException_Message = &handles[13]
+
+var ConcurrentModificationException = &handles[14]
+var ConcurrentModificationException_Message = &handles[15]
+
+var ConcurrentOperationException = &handles[16]
+var ConcurrentOperationException_Message = &handles[17]
+
+var _ErrorMessage = &handles[18]
+
+var GeneralServiceException = &handles[19]
+var GeneralServiceException_Message = &handles[20]
+
+var _HandlerErrorCode = &handles[21]
+
+var HandlerFailureException = &handles[22]
+var HandlerFailureException_Message = &handles[23]
+
+var HandlerInternalFailureException = &handles[24]
+var HandlerInternalFailureException_Message = &handles[25]
+
+var _HandlerNextToken = &handles[26]
+
+var _HookFailureMode = &handles[27]
+
+var _HookInvocationPoint = &handles[28]
+
+var HookProgressEvent = &handles[29]
+var HookProgressEvent_HookTypeName = &handles[30]
+var HookProgressEvent_HookTypeVersionId = &handles[31]
+var HookProgressEvent_HookTypeArn = &handles[32]
+var HookProgressEvent_InvocationPoint = &handles[33]
+var HookProgressEvent_HookStatus = &handles[34]
+var HookProgressEvent_HookEventTime = &handles[35]
+var HookProgressEvent_HookStatusMessage = &handles[36]
+var HookProgressEvent_FailureMode = &handles[37]
+
+var _HooksProgressEvent = &handles[38]
+var _HooksProgressEvent_member = &handles[39]
+
+var _HookStatus = &handles[40]
+
+var _HookTypeArn = &handles[41]
+
+var _Identifier = &handles[42]
+
+var InvalidCredentialsException = &handles[43]
+var InvalidCredentialsException_Message = &handles[44]
+
+var InvalidRequestException = &handles[45]
+var InvalidRequestException_Message = &handles[46]
+
+var _MaxResults = &handles[47]
+
+var NetworkFailureException = &handles[48]
+var NetworkFailureException_Message = &handles[49]
+
+var _NextToken = &handles[50]
+
+var NotStabilizedException = &handles[51]
+var NotStabilizedException_Message = &handles[52]
+
+var NotUpdatableException = &handles[53]
+var NotUpdatableException_Message = &handles[54]
+
+var _Operation = &handles[55]
+
+var _Operations = &handles[56]
+var _Operations_member = &handles[57]
+
+var _OperationStatus = &handles[58]
+
+var _OperationStatuses = &handles[59]
+var _OperationStatuses_member = &handles[60]
+
+var _PatchDocument = &handles[61]
+
+var PrivateTypeException = &handles[62]
+var PrivateTypeException_Message = &handles[63]
+
+var ProgressEvent = &handles[64]
+var ProgressEvent_TypeName = &handles[65]
+var ProgressEvent_Identifier = &handles[66]
+var ProgressEvent_RequestToken = &handles[67]
+var ProgressEvent_HooksRequestToken = &handles[68]
+var ProgressEvent_Operation = &handles[69]
+var ProgressEvent_OperationStatus = &handles[70]
+var ProgressEvent_EventTime = &handles[71]
+var ProgressEvent_ResourceModel = &handles[72]
+var ProgressEvent_StatusMessage = &handles[73]
+var ProgressEvent_ErrorCode = &handles[74]
+var ProgressEvent_RetryAfter = &handles[75]
+
+var _Properties = &handles[76]
+
+var _RequestToken = &handles[77]
+
+var RequestTokenNotFoundException = &handles[78]
+var RequestTokenNotFoundException_Message = &handles[79]
+
+var ResourceConflictException = &handles[80]
+var ResourceConflictException_Message = &handles[81]
+
+var ResourceDescription = &handles[82]
+var ResourceDescription_Identifier = &handles[83]
+var ResourceDescription_Properties = &handles[84]
+
+var _ResourceDescriptions = &handles[85]
+var _ResourceDescriptions_member = &handles[86]
+
+var ResourceNotFoundException = &handles[87]
+var ResourceNotFoundException_Message = &handles[88]
+
+var ResourceRequestStatusFilter = &handles[89]
+var ResourceRequestStatusFilter_Operations = &handles[90]
+var ResourceRequestStatusFilter_OperationStatuses = &handles[91]
+
+var _ResourceRequestStatusSummaries = &handles[92]
+var _ResourceRequestStatusSummaries_member = &handles[93]
+
+var _RoleArn = &handles[94]
+
+var ServiceInternalErrorException = &handles[95]
+var ServiceInternalErrorException_Message = &handles[96]
+
+var ServiceLimitExceededException = &handles[97]
+var ServiceLimitExceededException_Message = &handles[98]
+
+var _StatusMessage = &handles[99]
+
+var ThrottlingException = &handles[100]
+var ThrottlingException_Message = &handles[101]
+
+var _Timestamp = &handles[102]
+
+var _TypeName = &handles[103]
+
+var TypeNotFoundException = &handles[104]
+var TypeNotFoundException_Message = &handles[105]
+
+var _TypeVersionId = &handles[106]
+
+var UnsupportedActionException = &handles[107]
+var UnsupportedActionException_Message = &handles[108]
+
+var CancelResourceRequestInput = &handles[109]
+var CancelResourceRequestInput_RequestToken = &handles[110]
+
+var CancelResourceRequestOutput = &handles[111]
+var CancelResourceRequestOutput_ProgressEvent = &handles[112]
+
+var CreateResourceInput = &handles[113]
+var CreateResourceInput_TypeName = &handles[114]
+var CreateResourceInput_TypeVersionId = &handles[115]
+var CreateResourceInput_RoleArn = &handles[116]
+var CreateResourceInput_ClientToken = &handles[117]
+var CreateResourceInput_DesiredState = &handles[118]
+
+var CreateResourceOutput = &handles[119]
+var CreateResourceOutput_ProgressEvent = &handles[120]
+
+var DeleteResourceInput = &handles[121]
+var DeleteResourceInput_TypeName = &handles[122]
+var DeleteResourceInput_TypeVersionId = &handles[123]
+var DeleteResourceInput_RoleArn = &handles[124]
+var DeleteResourceInput_ClientToken = &handles[125]
+var DeleteResourceInput_Identifier = &handles[126]
+
+var DeleteResourceOutput = &handles[127]
+var DeleteResourceOutput_ProgressEvent = &handles[128]
+
+var GetResourceInput = &handles[129]
+var GetResourceInput_TypeName = &handles[130]
+var GetResourceInput_TypeVersionId = &handles[131]
+var GetResourceInput_RoleArn = &handles[132]
+var GetResourceInput_Identifier = &handles[133]
+
+var GetResourceOutput = &handles[134]
+var GetResourceOutput_TypeName = &handles[135]
+var GetResourceOutput_ResourceDescription = &handles[136]
+
+var GetResourceRequestStatusInput = &handles[137]
+var GetResourceRequestStatusInput_RequestToken = &handles[138]
+
+var GetResourceRequestStatusOutput = &handles[139]
+var GetResourceRequestStatusOutput_ProgressEvent = &handles[140]
+var GetResourceRequestStatusOutput_HooksProgressEvent = &handles[141]
+
+var ListResourceRequestsInput = &handles[142]
+var ListResourceRequestsInput_MaxResults = &handles[143]
+var ListResourceRequestsInput_NextToken = &handles[144]
+var ListResourceRequestsInput_ResourceRequestStatusFilter = &handles[145]
+
+var ListResourceRequestsOutput = &handles[146]
+var ListResourceRequestsOutput_ResourceRequestStatusSummaries = &handles[147]
+var ListResourceRequestsOutput_NextToken = &handles[148]
+
+var ListResourcesInput = &handles[149]
+var ListResourcesInput_TypeName = &handles[150]
+var ListResourcesInput_TypeVersionId = &handles[151]
+var ListResourcesInput_RoleArn = &handles[152]
+var ListResourcesInput_NextToken = &handles[153]
+var ListResourcesInput_MaxResults = &handles[154]
+var ListResourcesInput_ResourceModel = &handles[155]
+
+var ListResourcesOutput = &handles[156]
+var ListResourcesOutput_TypeName = &handles[157]
+var ListResourcesOutput_ResourceDescriptions = &handles[158]
+var ListResourcesOutput_NextToken = &handles[159]
+
+var UpdateResourceInput = &handles[160]
+var UpdateResourceInput_TypeName = &handles[161]
+var UpdateResourceInput_TypeVersionId = &handles[162]
+var UpdateResourceInput_RoleArn = &handles[163]
+var UpdateResourceInput_ClientToken = &handles[164]
+var UpdateResourceInput_Identifier = &handles[165]
+var UpdateResourceInput_PatchDocument = &handles[166]
+
+var UpdateResourceOutput = &handles[167]
+var UpdateResourceOutput_ProgressEvent = &handles[168]
+
+var CloudApiService = &smithy.ServiceSchema{Schema: &handles[8], Version: "2021-09-30"}

@@ -4,229 +4,208 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetEntitlements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "GetEntitlements",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSMPEntitlementService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "AWSMPEntitlementService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMPEntitlementService = smithy.NewServiceSchema(_AWSMPEntitlementService, "2017-01-11")
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var Entitlement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "Entitlement",
-}, smithy.ShapeTypeStructure, 7)
-var Entitlement_ProductCode *smithy.Schema
-
-var Entitlement_Dimension *smithy.Schema
-
-var Entitlement_CustomerIdentifier *smithy.Schema
-
-var Entitlement_CustomerAWSAccountId *smithy.Schema
-
-var Entitlement_Value *smithy.Schema
-
-var Entitlement_ExpirationDate *smithy.Schema
-
-var Entitlement_LicenseArn *smithy.Schema
-
-var _EntitlementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "EntitlementList",
-}, smithy.ShapeTypeList, 1)
-var _EntitlementList_member *smithy.Schema
-
-var EntitlementValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "EntitlementValue",
-}, smithy.ShapeTypeStructure, 4)
-var EntitlementValue_IntegerValue *smithy.Schema
-
-var EntitlementValue_DoubleValue *smithy.Schema
-
-var EntitlementValue_BooleanValue *smithy.Schema
-
-var EntitlementValue_StringValue *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "FilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _FilterValueList_member *smithy.Schema
-
-var GetEntitlementFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "GetEntitlementFilterName",
-}, smithy.ShapeTypeEnum, 4)
-var GetEntitlementFilterName_CUSTOMER_IDENTIFIER *smithy.Schema
-
-var GetEntitlementFilterName_DIMENSION *smithy.Schema
-
-var GetEntitlementFilterName_CUSTOMER_AWS_ACCOUNT_ID *smithy.Schema
-
-var GetEntitlementFilterName_LICENSE_ARN *smithy.Schema
-
-var _GetEntitlementFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "GetEntitlementFilters",
-}, smithy.ShapeTypeMap, 2)
-var _GetEntitlementFilters_key *smithy.Schema
-
-var _GetEntitlementFilters_value *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServiceErrorException_message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidParameterException_message *smithy.Schema
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _PageSizeInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "PageSizeInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProductCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "ProductCode",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ThrottlingException_message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var GetEntitlementsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "GetEntitlementsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetEntitlementsRequest_ProductCode *smithy.Schema
-
-var GetEntitlementsRequest_Filter *smithy.Schema
-
-var GetEntitlementsRequest_NextToken *smithy.Schema
-
-var GetEntitlementsRequest_MaxResults *smithy.Schema
-
-var GetEntitlementsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplaceentitlementservice",
-	Name:      "GetEntitlementsResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetEntitlementsResult_Entitlements *smithy.Schema
-
-var GetEntitlementsResult_NextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	EntitlementValue_IntegerValue = EntitlementValue.AddMember("IntegerValue", _Integer)
-
-	EntitlementValue_DoubleValue = EntitlementValue.AddMember("DoubleValue", _Double)
-
-	EntitlementValue_BooleanValue = EntitlementValue.AddMember("BooleanValue", _Boolean)
-
-	EntitlementValue_StringValue = EntitlementValue.AddMember("StringValue", _String)
-
-	Entitlement_ProductCode = Entitlement.AddMember("ProductCode", _ProductCode)
-
-	Entitlement_Dimension = Entitlement.AddMember("Dimension", _NonEmptyString)
-
-	Entitlement_CustomerIdentifier = Entitlement.AddMember("CustomerIdentifier", _NonEmptyString)
-
-	Entitlement_CustomerAWSAccountId = Entitlement.AddMember("CustomerAWSAccountId", _NonEmptyString)
-
-	Entitlement_Value = Entitlement.AddMember("Value", EntitlementValue)
-
-	Entitlement_ExpirationDate = Entitlement.AddMember("ExpirationDate", _Timestamp)
-
-	Entitlement_LicenseArn = Entitlement.AddMember("LicenseArn", _String)
-
-	_EntitlementList_member = _EntitlementList.AddMember("member", Entitlement)
-
-	_FilterValueList_member = _FilterValueList.AddMember("member", _FilterValue)
-
-	GetEntitlementFilterName_CUSTOMER_IDENTIFIER = GetEntitlementFilterName.AddMember("CUSTOMER_IDENTIFIER", smithyprelude.Unit)
-
-	GetEntitlementFilterName_DIMENSION = GetEntitlementFilterName.AddMember("DIMENSION", smithyprelude.Unit)
-
-	GetEntitlementFilterName_CUSTOMER_AWS_ACCOUNT_ID = GetEntitlementFilterName.AddMember("CUSTOMER_AWS_ACCOUNT_ID", smithyprelude.Unit)
-
-	GetEntitlementFilterName_LICENSE_ARN = GetEntitlementFilterName.AddMember("LICENSE_ARN", smithyprelude.Unit)
-
-	_GetEntitlementFilters_key = _GetEntitlementFilters.AddMember("key", GetEntitlementFilterName)
-
-	_GetEntitlementFilters_value = _GetEntitlementFilters.AddMember("value", _FilterValueList)
-
-	InternalServiceErrorException_message = InternalServiceErrorException.AddMember("message", _ErrorMessage)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", _ErrorMessage)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	GetEntitlementsRequest_ProductCode = GetEntitlementsRequest.AddMember("ProductCode", _ProductCode)
-
-	GetEntitlementsRequest_Filter = GetEntitlementsRequest.AddMember("Filter", _GetEntitlementFilters)
-
-	GetEntitlementsRequest_NextToken = GetEntitlementsRequest.AddMember("NextToken", _NonEmptyString)
-
-	GetEntitlementsRequest_MaxResults = GetEntitlementsRequest.AddMember("MaxResults", _PageSizeInteger)
-
-	GetEntitlementsResult_Entitlements = GetEntitlementsResult.AddMember("Entitlements", _EntitlementList)
-
-	GetEntitlementsResult_NextToken = GetEntitlementsResult.AddMember("NextToken", _NonEmptyString)
-
+const blob = "" +
+	"InternalServiceErrorExceptionInvalidParameterExceptionGetEntitlementFilterNameAWSMPEntitlementServic" +
+	"eCUSTOMER_AWS_ACCOUNT_IDGetEntitlementsRequestGetEntitlementFiltersGetEntitlementsResultCustomerAWSA" +
+	"ccountIdCUSTOMER_IDENTIFIERThrottlingExceptionCustomerIdentifierEntitlementValueEntitlementListFilte" +
+	"rValueListPageSizeIntegerExpirationDateNonEmptyStringBooleanValueErrorMessageIntegerValueDoubleValue" +
+	"LICENSE_ARNProductCodeStringValueLicenseArnMaxResultsDIMENSIONDimensionNextTokenTimestampmessagememb" +
+	"ervalueUnitkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.marketplaceentitlementservice", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 124, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 78, Target: 1, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 353, Target: 2, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 389, Target: 3, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 57, Target: 4, Traits: 0, StrLen: 11, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 411, Target: 38, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 462, Target: 36, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 246, Target: 36, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 188, Target: 36, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 275, Target: 14, Traits: 0, StrLen: 5, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 325, Target: 42, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 433, Target: 39, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 280, Target: 12, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 496, Target: 4, Traits: 0, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 264, Target: 14, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 377, Target: 31, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 389, Target: 3, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 353, Target: 2, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 422, Target: 39, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 365, Target: 19, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 295, Target: 20, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 295, Target: 21, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 496, Target: 20, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 54, Target: 23, Traits: 0, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 208, Target: 51, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 453, Target: 51, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 101, Target: 51, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 400, Target: 51, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 146, Target: 28, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 511, Target: 23, Traits: 0, StrLen: 3, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 502, Target: 21, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 318, Target: 31, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 0, Target: 32, Traits: 1, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 489, Target: 19, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 29, Target: 34, Traits: 2, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 489, Target: 19, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 339, Target: 36, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 310, Target: 37, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 411, Target: 38, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 347, Target: 39, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 227, Target: 40, Traits: 2, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 489, Target: 19, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 480, Target: 42, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 124, Target: 43, Traits: 0, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 411, Target: 38, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 68, Target: 28, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 471, Target: 36, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 443, Target: 37, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 167, Target: 48, Traits: 0, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 127, Target: 12, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 471, Target: 36, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 507, Target: 51, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+	},
 }
+
+var handles = [52]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+}
+
+var GetEntitlements = &handles[0]
+
+var _AWSMPEntitlementService = &handles[1]
+
+var _Boolean = &handles[2]
+
+var _Double = &handles[3]
+
+var Entitlement = &handles[4]
+var Entitlement_ProductCode = &handles[5]
+var Entitlement_Dimension = &handles[6]
+var Entitlement_CustomerIdentifier = &handles[7]
+var Entitlement_CustomerAWSAccountId = &handles[8]
+var Entitlement_Value = &handles[9]
+var Entitlement_ExpirationDate = &handles[10]
+var Entitlement_LicenseArn = &handles[11]
+
+var _EntitlementList = &handles[12]
+var _EntitlementList_member = &handles[13]
+
+var EntitlementValue = &handles[14]
+var EntitlementValue_IntegerValue = &handles[15]
+var EntitlementValue_DoubleValue = &handles[16]
+var EntitlementValue_BooleanValue = &handles[17]
+var EntitlementValue_StringValue = &handles[18]
+
+var _ErrorMessage = &handles[19]
+
+var _FilterValue = &handles[20]
+
+var _FilterValueList = &handles[21]
+var _FilterValueList_member = &handles[22]
+
+var GetEntitlementFilterName = &handles[23]
+var GetEntitlementFilterName_CUSTOMER_IDENTIFIER = &handles[24]
+var GetEntitlementFilterName_DIMENSION = &handles[25]
+var GetEntitlementFilterName_CUSTOMER_AWS_ACCOUNT_ID = &handles[26]
+var GetEntitlementFilterName_LICENSE_ARN = &handles[27]
+
+var _GetEntitlementFilters = &handles[28]
+var _GetEntitlementFilters_key = &handles[29]
+var _GetEntitlementFilters_value = &handles[30]
+
+var _Integer = &handles[31]
+
+var InternalServiceErrorException = &handles[32]
+var InternalServiceErrorException_message = &handles[33]
+
+var InvalidParameterException = &handles[34]
+var InvalidParameterException_message = &handles[35]
+
+var _NonEmptyString = &handles[36]
+
+var _PageSizeInteger = &handles[37]
+
+var _ProductCode = &handles[38]
+
+var _String = &handles[39]
+
+var ThrottlingException = &handles[40]
+var ThrottlingException_message = &handles[41]
+
+var _Timestamp = &handles[42]
+
+var GetEntitlementsRequest = &handles[43]
+var GetEntitlementsRequest_ProductCode = &handles[44]
+var GetEntitlementsRequest_Filter = &handles[45]
+var GetEntitlementsRequest_NextToken = &handles[46]
+var GetEntitlementsRequest_MaxResults = &handles[47]
+
+var GetEntitlementsResult = &handles[48]
+var GetEntitlementsResult_Entitlements = &handles[49]
+var GetEntitlementsResult_NextToken = &handles[50]
+
+var AWSMPEntitlementService = &smithy.ServiceSchema{Schema: &handles[1], Version: "2017-01-11"}

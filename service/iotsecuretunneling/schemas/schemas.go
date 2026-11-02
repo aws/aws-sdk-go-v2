@@ -4,546 +4,489 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CloseTunnel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "CloseTunnel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tunnels/{tunnelId}",
-	Code: 200})
-
-var DescribeTunnel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "DescribeTunnel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tunnels/{tunnelId}",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags",
-	Code: 200})
-
-var ListTunnels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ListTunnels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tunnels",
-	Code: 200})
-
-var OpenTunnel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "OpenTunnel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tunnels",
-	Code: 200})
-
-var RotateTunnelAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "RotateTunnelAccessToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tunnel/{tunnelId}/rotate",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/untag",
-	Code: 200})
-
-var _IoTSecuredTunneling = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "IoTSecuredTunneling",
-}, smithy.ShapeTypeService, 0)
-
-var IoTSecuredTunneling = smithy.NewServiceSchema(_IoTSecuredTunneling, "2018-10-05")
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ClientAccessToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ClientMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ClientMode",
-}, smithy.ShapeTypeEnum, 3)
-var ClientMode_SOURCE *smithy.Schema
-
-var ClientMode_DESTINATION *smithy.Schema
-
-var ClientMode_ALL *smithy.Schema
-
-var ConnectionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ConnectionState",
-}, smithy.ShapeTypeStructure, 2)
-var ConnectionState_status *smithy.Schema
-
-var ConnectionState_lastUpdatedAt *smithy.Schema
-
-var ConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ConnectionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectionStatus_CONNECTED *smithy.Schema
-
-var ConnectionStatus_DISCONNECTED *smithy.Schema
-
-var _DateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "DateType",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DeleteFlag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "DeleteFlag",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "DestinationConfig",
-}, smithy.ShapeTypeStructure, 2)
-var DestinationConfig_thingName *smithy.Schema
-
-var DestinationConfig_services *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
-		StatusCode: 403})
-var LimitExceededException_message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "Service",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ServiceList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ThingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ThingName",
-}, smithy.ShapeTypeString, 0)
-
-var TimeoutConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TimeoutConfig",
-}, smithy.ShapeTypeStructure, 1)
-var TimeoutConfig_maxLifetimeTimeoutMinutes *smithy.Schema
-
-var _TimeoutInMin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TimeoutInMin",
-}, smithy.ShapeTypeInteger, 0)
-
-var Tunnel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "Tunnel",
-}, smithy.ShapeTypeStructure, 11)
-var Tunnel_tunnelId *smithy.Schema
-
-var Tunnel_tunnelArn *smithy.Schema
-
-var Tunnel_status *smithy.Schema
-
-var Tunnel_sourceConnectionState *smithy.Schema
-
-var Tunnel_destinationConnectionState *smithy.Schema
-
-var Tunnel_description *smithy.Schema
-
-var Tunnel_destinationConfig *smithy.Schema
-
-var Tunnel_timeoutConfig *smithy.Schema
-
-var Tunnel_tags *smithy.Schema
-
-var Tunnel_createdAt *smithy.Schema
-
-var Tunnel_lastUpdatedAt *smithy.Schema
-
-var _TunnelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TunnelArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TunnelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TunnelId",
-}, smithy.ShapeTypeString, 0)
-
-var TunnelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TunnelStatus",
-}, smithy.ShapeTypeEnum, 2)
-var TunnelStatus_OPEN *smithy.Schema
-
-var TunnelStatus_CLOSED *smithy.Schema
-
-var TunnelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TunnelSummary",
-}, smithy.ShapeTypeStructure, 6)
-var TunnelSummary_tunnelId *smithy.Schema
-
-var TunnelSummary_tunnelArn *smithy.Schema
-
-var TunnelSummary_status *smithy.Schema
-
-var TunnelSummary_description *smithy.Schema
-
-var TunnelSummary_createdAt *smithy.Schema
-
-var TunnelSummary_lastUpdatedAt *smithy.Schema
-
-var _TunnelSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TunnelSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TunnelSummaryList_member *smithy.Schema
-
-var CloseTunnelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "CloseTunnelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CloseTunnelRequest_tunnelId *smithy.Schema
-
-var CloseTunnelRequest_delete *smithy.Schema
-
-var CloseTunnelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "CloseTunnelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeTunnelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "DescribeTunnelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTunnelRequest_tunnelId *smithy.Schema
-
-var DescribeTunnelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "DescribeTunnelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTunnelResponse_tunnel *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTunnelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ListTunnelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTunnelsRequest_thingName *smithy.Schema
-
-var ListTunnelsRequest_maxResults *smithy.Schema
-
-var ListTunnelsRequest_nextToken *smithy.Schema
-
-var ListTunnelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "ListTunnelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTunnelsResponse_tunnelSummaries *smithy.Schema
-
-var ListTunnelsResponse_nextToken *smithy.Schema
-
-var OpenTunnelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "OpenTunnelRequest",
-}, smithy.ShapeTypeStructure, 4)
-var OpenTunnelRequest_description *smithy.Schema
-
-var OpenTunnelRequest_tags *smithy.Schema
-
-var OpenTunnelRequest_destinationConfig *smithy.Schema
-
-var OpenTunnelRequest_timeoutConfig *smithy.Schema
-
-var OpenTunnelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "OpenTunnelResponse",
-}, smithy.ShapeTypeStructure, 4)
-var OpenTunnelResponse_tunnelId *smithy.Schema
-
-var OpenTunnelResponse_tunnelArn *smithy.Schema
-
-var OpenTunnelResponse_sourceAccessToken *smithy.Schema
-
-var OpenTunnelResponse_destinationAccessToken *smithy.Schema
-
-var RotateTunnelAccessTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "RotateTunnelAccessTokenRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RotateTunnelAccessTokenRequest_tunnelId *smithy.Schema
-
-var RotateTunnelAccessTokenRequest_clientMode *smithy.Schema
-
-var RotateTunnelAccessTokenRequest_destinationConfig *smithy.Schema
-
-var RotateTunnelAccessTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "RotateTunnelAccessTokenResponse",
-}, smithy.ShapeTypeStructure, 3)
-var RotateTunnelAccessTokenResponse_tunnelArn *smithy.Schema
-
-var RotateTunnelAccessTokenResponse_sourceAccessToken *smithy.Schema
-
-var RotateTunnelAccessTokenResponse_destinationAccessToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotsecuretunneling",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ClientMode_SOURCE = ClientMode.AddMember("SOURCE", smithyprelude.Unit)
-
-	ClientMode_DESTINATION = ClientMode.AddMember("DESTINATION", smithyprelude.Unit)
-
-	ClientMode_ALL = ClientMode.AddMember("ALL", smithyprelude.Unit)
-
-	ConnectionStatus_CONNECTED = ConnectionStatus.AddMember("CONNECTED", smithyprelude.Unit)
-
-	ConnectionStatus_DISCONNECTED = ConnectionStatus.AddMember("DISCONNECTED", smithyprelude.Unit)
-
-	ConnectionState_status = ConnectionState.AddMember("status", ConnectionStatus)
-
-	ConnectionState_lastUpdatedAt = ConnectionState.AddMember("lastUpdatedAt", _DateType)
-
-	_ServiceList_member = _ServiceList.AddMember("member", _Service)
-
-	DestinationConfig_thingName = DestinationConfig.AddMember("thingName", _ThingName)
-
-	DestinationConfig_services = DestinationConfig.AddMember("services", _ServiceList)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TimeoutConfig_maxLifetimeTimeoutMinutes = TimeoutConfig.AddMember("maxLifetimeTimeoutMinutes", _TimeoutInMin)
-
-	TunnelStatus_OPEN = TunnelStatus.AddMember("OPEN", smithyprelude.Unit)
-
-	TunnelStatus_CLOSED = TunnelStatus.AddMember("CLOSED", smithyprelude.Unit)
-
-	Tunnel_tunnelId = Tunnel.AddMember("tunnelId", _TunnelId)
-
-	Tunnel_tunnelArn = Tunnel.AddMember("tunnelArn", _TunnelArn)
-
-	Tunnel_status = Tunnel.AddMember("status", TunnelStatus)
-
-	Tunnel_sourceConnectionState = Tunnel.AddMember("sourceConnectionState", ConnectionState)
-
-	Tunnel_destinationConnectionState = Tunnel.AddMember("destinationConnectionState", ConnectionState)
-
-	Tunnel_description = Tunnel.AddMember("description", _Description)
-
-	Tunnel_destinationConfig = Tunnel.AddMember("destinationConfig", DestinationConfig)
-
-	Tunnel_timeoutConfig = Tunnel.AddMember("timeoutConfig", TimeoutConfig)
-
-	Tunnel_tags = Tunnel.AddMember("tags", _TagList)
-
-	Tunnel_createdAt = Tunnel.AddMember("createdAt", _DateType)
-
-	Tunnel_lastUpdatedAt = Tunnel.AddMember("lastUpdatedAt", _DateType)
-
-	TunnelSummary_tunnelId = TunnelSummary.AddMember("tunnelId", _TunnelId)
-
-	TunnelSummary_tunnelArn = TunnelSummary.AddMember("tunnelArn", _TunnelArn)
-
-	TunnelSummary_status = TunnelSummary.AddMember("status", TunnelStatus)
-
-	TunnelSummary_description = TunnelSummary.AddMember("description", _Description)
-
-	TunnelSummary_createdAt = TunnelSummary.AddMember("createdAt", _DateType)
-
-	TunnelSummary_lastUpdatedAt = TunnelSummary.AddMember("lastUpdatedAt", _DateType)
-
-	_TunnelSummaryList_member = _TunnelSummaryList.AddMember("member", TunnelSummary)
-
-	CloseTunnelRequest_tunnelId = CloseTunnelRequest.AddMember("tunnelId", _TunnelId, &smithytraits.HTTPLabel{})
-
-	CloseTunnelRequest_delete = CloseTunnelRequest.AddMember("delete", _DeleteFlag, &smithytraits.HTTPQuery{Name: "delete"})
-
-	DescribeTunnelRequest_tunnelId = DescribeTunnelRequest.AddMember("tunnelId", _TunnelId, &smithytraits.HTTPLabel{})
-
-	DescribeTunnelResponse_tunnel = DescribeTunnelResponse.AddMember("tunnel", Tunnel)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	ListTunnelsRequest_thingName = ListTunnelsRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPQuery{Name: "thingName"})
-
-	ListTunnelsRequest_maxResults = ListTunnelsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTunnelsRequest_nextToken = ListTunnelsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTunnelsResponse_tunnelSummaries = ListTunnelsResponse.AddMember("tunnelSummaries", _TunnelSummaryList)
-
-	ListTunnelsResponse_nextToken = ListTunnelsResponse.AddMember("nextToken", _NextToken)
-
-	OpenTunnelRequest_description = OpenTunnelRequest.AddMember("description", _Description)
-
-	OpenTunnelRequest_tags = OpenTunnelRequest.AddMember("tags", _TagList)
-
-	OpenTunnelRequest_destinationConfig = OpenTunnelRequest.AddMember("destinationConfig", DestinationConfig)
-
-	OpenTunnelRequest_timeoutConfig = OpenTunnelRequest.AddMember("timeoutConfig", TimeoutConfig)
-
-	OpenTunnelResponse_tunnelId = OpenTunnelResponse.AddMember("tunnelId", _TunnelId)
-
-	OpenTunnelResponse_tunnelArn = OpenTunnelResponse.AddMember("tunnelArn", _TunnelArn)
-
-	OpenTunnelResponse_sourceAccessToken = OpenTunnelResponse.AddMember("sourceAccessToken", _ClientAccessToken)
-
-	OpenTunnelResponse_destinationAccessToken = OpenTunnelResponse.AddMember("destinationAccessToken", _ClientAccessToken)
-
-	RotateTunnelAccessTokenRequest_tunnelId = RotateTunnelAccessTokenRequest.AddMember("tunnelId", _TunnelId, &smithytraits.HTTPLabel{})
-
-	RotateTunnelAccessTokenRequest_clientMode = RotateTunnelAccessTokenRequest.AddMember("clientMode", ClientMode)
-
-	RotateTunnelAccessTokenRequest_destinationConfig = RotateTunnelAccessTokenRequest.AddMember("destinationConfig", DestinationConfig)
-
-	RotateTunnelAccessTokenResponse_tunnelArn = RotateTunnelAccessTokenResponse.AddMember("tunnelArn", _TunnelArn)
-
-	RotateTunnelAccessTokenResponse_sourceAccessToken = RotateTunnelAccessTokenResponse.AddMember("sourceAccessToken", _ClientAccessToken)
-
-	RotateTunnelAccessTokenResponse_destinationAccessToken = RotateTunnelAccessTokenResponse.AddMember("destinationAccessToken", _ClientAccessToken)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _AmazonResourceName)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _AmazonResourceName)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
+const blob = "" +
+	"RotateTunnelAccessTokenResponseRotateTunnelAccessTokenRequestListTagsForResourceResponseListTagsForR" +
+	"esourceRequestdestinationConnectionStateResourceNotFoundExceptionmaxLifetimeTimeoutMinutesDescribeTu" +
+	"nnelResponseLimitExceededExceptiondestinationAccessTokenDescribeTunnelRequestUntagResourceResponseso" +
+	"urceConnectionStateUntagResourceRequestCloseTunnelResponseIoTSecuredTunnelingListTunnelsResponseTagR" +
+	"esourceResponseAmazonResourceNameCloseTunnelRequestListTunnelsRequestOpenTunnelResponseTagResourceRe" +
+	"questClientAccessTokenDestinationConfigOpenTunnelRequestTunnelSummaryListdestinationConfigsourceAcce" +
+	"ssTokenConnectionStatustunnelSummariesTimeoutConfiglastUpdatedAttimeoutConfigDISCONNECTEDErrorMessag" +
+	"eTimeoutInMinTunnelStatusDESTINATIONDescriptionServiceListdescriptionresourceArnClientModeDeleteFlag" +
+	"MaxResultsTagKeyListclientModemaxResultsNextTokenThingNameTunnelArncreatedAtnextTokenthingNametunnel" +
+	"ArnDateTypeTagValueTunnelIdservicestunnelIdTagListmessagetagKeysCLOSEDSOURCEdeletememberstatusvalueO" +
+	"PENUnittagsALLkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.iotsecuretunneling", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 339, Target: 0, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 190, Target: 1, Traits: 1, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 61, Target: 2, Traits: 2, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 377, Target: 3, Traits: 3, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 469, Target: 4, Traits: 4, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 5, Traits: 5, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 396, Target: 6, Traits: 6, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 277, Target: 7, Traits: 7, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 358, Target: 8, Traits: 8, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 415, Target: 9, Traits: 8, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 505, Target: 10, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 780, Target: 11, Traits: 8, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 970, Target: 121, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 725, Target: 121, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1011, Target: 121, Traits: 8, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 125, Target: 15, Traits: 8, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 988, Target: 18, Traits: 8, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 651, Target: 21, Traits: 8, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 607, Target: 18, Traits: 8, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 680, Target: 121, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 677, Target: 121, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 903, Target: 21, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 790, Target: 22, Traits: 8, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 736, Target: 23, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 522, Target: 24, Traits: 8, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 885, Target: 46, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 927, Target: 35, Traits: 8, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 689, Target: 27, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 212, Target: 28, Traits: 10, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 950, Target: 27, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 800, Target: 30, Traits: 8, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 840, Target: 31, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 140, Target: 32, Traits: 11, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 950, Target: 27, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 747, Target: 34, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 747, Target: 35, Traits: 8, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 982, Target: 34, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 65, Target: 37, Traits: 8, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1014, Target: 40, Traits: 8, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 994, Target: 45, Traits: 8, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 810, Target: 40, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 810, Target: 41, Traits: 8, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 982, Target: 40, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 943, Target: 43, Traits: 8, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 982, Target: 37, Traits: 8, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 911, Target: 45, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 849, Target: 46, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 638, Target: 47, Traits: 8, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 165, Target: 49, Traits: 8, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 701, Target: 49, Traits: 8, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 6, Target: 50, Traits: 8, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 935, Target: 63, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 894, Target: 62, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 988, Target: 64, Traits: 8, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 298, Target: 15, Traits: 8, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 114, Target: 15, Traits: 8, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 758, Target: 23, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 573, Target: 24, Traits: 8, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 664, Target: 47, Traits: 8, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1007, Target: 43, Traits: 8, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 867, Target: 21, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 651, Target: 21, Traits: 8, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 858, Target: 62, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 919, Target: 63, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 713, Target: 64, Traits: 8, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 999, Target: 121, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 964, Target: 121, Traits: 8, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 556, Target: 67, Traits: 8, StrLen: 13, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 935, Target: 63, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 894, Target: 62, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 988, Target: 64, Traits: 8, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 758, Target: 23, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 867, Target: 21, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 651, Target: 21, Traits: 8, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 556, Target: 74, Traits: 8, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 982, Target: 67, Traits: 8, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 433, Target: 76, Traits: 8, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 935, Target: 63, Traits: 12, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 976, Target: 22, Traits: 13, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 339, Target: 79, Traits: 8, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 256, Target: 80, Traits: 8, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 935, Target: 63, Traits: 12, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 190, Target: 82, Traits: 8, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 623, Target: 50, Traits: 8, StrLen: 6, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 88, Target: 84, Traits: 8, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 769, Target: 9, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 61, Target: 86, Traits: 8, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1007, Target: 43, Traits: 8, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 451, Target: 88, Traits: 8, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 885, Target: 46, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 830, Target: 30, Traits: 16, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 876, Target: 31, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 377, Target: 92, Traits: 8, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 623, Target: 74, Traits: 8, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 876, Target: 31, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 539, Target: 95, Traits: 8, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 758, Target: 23, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1007, Target: 43, Traits: 8, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 573, Target: 24, Traits: 8, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 664, Target: 47, Traits: 8, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 469, Target: 100, Traits: 8, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 935, Target: 63, Traits: 8, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 894, Target: 62, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 590, Target: 10, Traits: 18, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 234, Target: 10, Traits: 18, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 31, Target: 105, Traits: 8, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 935, Target: 63, Traits: 12, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 820, Target: 11, Traits: 8, StrLen: 10, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 573, Target: 24, Traits: 8, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 109, Traits: 8, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 894, Target: 62, Traits: 8, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 590, Target: 10, Traits: 18, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 234, Target: 10, Traits: 18, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 487, Target: 113, Traits: 8, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 769, Target: 9, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1007, Target: 43, Traits: 8, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 396, Target: 116, Traits: 8, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 319, Target: 117, Traits: 8, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 769, Target: 9, Traits: 8, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 957, Target: 41, Traits: 8, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 277, Target: 120, Traits: 8, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1003, Target: 121, Traits: 8, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tunnels/{tunnelId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tunnels/{tunnelId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tunnels",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tunnels",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tunnel/{tunnelId}/rotate",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/untag",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
+			StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+			StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "delete"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "thingName"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+	},
 }
+
+var handles = [122]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+}
+
+var CloseTunnel = &handles[0]
+
+var DescribeTunnel = &handles[1]
+
+var ListTagsForResource = &handles[2]
+
+var ListTunnels = &handles[3]
+
+var OpenTunnel = &handles[4]
+
+var RotateTunnelAccessToken = &handles[5]
+
+var TagResource = &handles[6]
+
+var UntagResource = &handles[7]
+
+var _IoTSecuredTunneling = &handles[8]
+
+var _AmazonResourceName = &handles[9]
+
+var _ClientAccessToken = &handles[10]
+
+var ClientMode = &handles[11]
+var ClientMode_SOURCE = &handles[12]
+var ClientMode_DESTINATION = &handles[13]
+var ClientMode_ALL = &handles[14]
+
+var ConnectionState = &handles[15]
+var ConnectionState_status = &handles[16]
+var ConnectionState_lastUpdatedAt = &handles[17]
+
+var ConnectionStatus = &handles[18]
+var ConnectionStatus_CONNECTED = &handles[19]
+var ConnectionStatus_DISCONNECTED = &handles[20]
+
+var _DateType = &handles[21]
+
+var _DeleteFlag = &handles[22]
+
+var _Description = &handles[23]
+
+var DestinationConfig = &handles[24]
+var DestinationConfig_thingName = &handles[25]
+var DestinationConfig_services = &handles[26]
+
+var _ErrorMessage = &handles[27]
+
+var LimitExceededException = &handles[28]
+var LimitExceededException_message = &handles[29]
+
+var _MaxResults = &handles[30]
+
+var _NextToken = &handles[31]
+
+var ResourceNotFoundException = &handles[32]
+var ResourceNotFoundException_message = &handles[33]
+
+var _Service = &handles[34]
+
+var _ServiceList = &handles[35]
+var _ServiceList_member = &handles[36]
+
+var Tag = &handles[37]
+var Tag_key = &handles[38]
+var Tag_value = &handles[39]
+
+var _TagKey = &handles[40]
+
+var _TagKeyList = &handles[41]
+var _TagKeyList_member = &handles[42]
+
+var _TagList = &handles[43]
+var _TagList_member = &handles[44]
+
+var _TagValue = &handles[45]
+
+var _ThingName = &handles[46]
+
+var TimeoutConfig = &handles[47]
+var TimeoutConfig_maxLifetimeTimeoutMinutes = &handles[48]
+
+var _TimeoutInMin = &handles[49]
+
+var Tunnel = &handles[50]
+var Tunnel_tunnelId = &handles[51]
+var Tunnel_tunnelArn = &handles[52]
+var Tunnel_status = &handles[53]
+var Tunnel_sourceConnectionState = &handles[54]
+var Tunnel_destinationConnectionState = &handles[55]
+var Tunnel_description = &handles[56]
+var Tunnel_destinationConfig = &handles[57]
+var Tunnel_timeoutConfig = &handles[58]
+var Tunnel_tags = &handles[59]
+var Tunnel_createdAt = &handles[60]
+var Tunnel_lastUpdatedAt = &handles[61]
+
+var _TunnelArn = &handles[62]
+
+var _TunnelId = &handles[63]
+
+var TunnelStatus = &handles[64]
+var TunnelStatus_OPEN = &handles[65]
+var TunnelStatus_CLOSED = &handles[66]
+
+var TunnelSummary = &handles[67]
+var TunnelSummary_tunnelId = &handles[68]
+var TunnelSummary_tunnelArn = &handles[69]
+var TunnelSummary_status = &handles[70]
+var TunnelSummary_description = &handles[71]
+var TunnelSummary_createdAt = &handles[72]
+var TunnelSummary_lastUpdatedAt = &handles[73]
+
+var _TunnelSummaryList = &handles[74]
+var _TunnelSummaryList_member = &handles[75]
+
+var CloseTunnelRequest = &handles[76]
+var CloseTunnelRequest_tunnelId = &handles[77]
+var CloseTunnelRequest_delete = &handles[78]
+
+var CloseTunnelResponse = &handles[79]
+
+var DescribeTunnelRequest = &handles[80]
+var DescribeTunnelRequest_tunnelId = &handles[81]
+
+var DescribeTunnelResponse = &handles[82]
+var DescribeTunnelResponse_tunnel = &handles[83]
+
+var ListTagsForResourceRequest = &handles[84]
+var ListTagsForResourceRequest_resourceArn = &handles[85]
+
+var ListTagsForResourceResponse = &handles[86]
+var ListTagsForResourceResponse_tags = &handles[87]
+
+var ListTunnelsRequest = &handles[88]
+var ListTunnelsRequest_thingName = &handles[89]
+var ListTunnelsRequest_maxResults = &handles[90]
+var ListTunnelsRequest_nextToken = &handles[91]
+
+var ListTunnelsResponse = &handles[92]
+var ListTunnelsResponse_tunnelSummaries = &handles[93]
+var ListTunnelsResponse_nextToken = &handles[94]
+
+var OpenTunnelRequest = &handles[95]
+var OpenTunnelRequest_description = &handles[96]
+var OpenTunnelRequest_tags = &handles[97]
+var OpenTunnelRequest_destinationConfig = &handles[98]
+var OpenTunnelRequest_timeoutConfig = &handles[99]
+
+var OpenTunnelResponse = &handles[100]
+var OpenTunnelResponse_tunnelId = &handles[101]
+var OpenTunnelResponse_tunnelArn = &handles[102]
+var OpenTunnelResponse_sourceAccessToken = &handles[103]
+var OpenTunnelResponse_destinationAccessToken = &handles[104]
+
+var RotateTunnelAccessTokenRequest = &handles[105]
+var RotateTunnelAccessTokenRequest_tunnelId = &handles[106]
+var RotateTunnelAccessTokenRequest_clientMode = &handles[107]
+var RotateTunnelAccessTokenRequest_destinationConfig = &handles[108]
+
+var RotateTunnelAccessTokenResponse = &handles[109]
+var RotateTunnelAccessTokenResponse_tunnelArn = &handles[110]
+var RotateTunnelAccessTokenResponse_sourceAccessToken = &handles[111]
+var RotateTunnelAccessTokenResponse_destinationAccessToken = &handles[112]
+
+var TagResourceRequest = &handles[113]
+var TagResourceRequest_resourceArn = &handles[114]
+var TagResourceRequest_tags = &handles[115]
+
+var TagResourceResponse = &handles[116]
+
+var UntagResourceRequest = &handles[117]
+var UntagResourceRequest_resourceArn = &handles[118]
+var UntagResourceRequest_tagKeys = &handles[119]
+
+var UntagResourceResponse = &handles[120]
+
+var IoTSecuredTunneling = &smithy.ServiceSchema{Schema: &handles[8], Version: "2018-10-05"}

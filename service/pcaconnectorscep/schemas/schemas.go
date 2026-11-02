@@ -4,784 +4,697 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateChallenge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "CreateChallenge",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/challenges",
-	Code: 202})
-
-var CreateConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "CreateConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/connectors",
-	Code: 202})
-
-var DeleteChallenge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "DeleteChallenge",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/challenges/{ChallengeArn}",
-	Code: 202})
-
-var DeleteConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "DeleteConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/connectors/{ConnectorArn}",
-	Code: 202})
-
-var GetChallengeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetChallengeMetadata",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/challengeMetadata/{ChallengeArn}",
-	Code: 200})
-
-var GetChallengePassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetChallengePassword",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/challengePasswords/{ChallengeArn}",
-	Code: 200})
-
-var GetConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/connectors/{ConnectorArn}",
-	Code: 200})
-
-var ListChallengeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListChallengeMetadata",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/challengeMetadata",
-	Code: 200})
-
-var ListConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListConnectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/connectors",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var _PcaConnectorScep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "PcaConnectorScep",
-}, smithy.ShapeTypeService, 0)
-
-var PcaConnectorScep = smithy.NewServiceSchema(_PcaConnectorScep, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AzureApplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "AzureApplicationId",
-}, smithy.ShapeTypeString, 0)
-
-var _AzureDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "AzureDomain",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
-
-var _CertificateAuthorityArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "CertificateAuthorityArn",
-}, smithy.ShapeTypeString, 0)
-
-var Challenge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "Challenge",
-}, smithy.ShapeTypeStructure, 5)
-var Challenge_Arn *smithy.Schema
-
-var Challenge_ConnectorArn *smithy.Schema
-
-var Challenge_CreatedAt *smithy.Schema
-
-var Challenge_UpdatedAt *smithy.Schema
-
-var Challenge_Password *smithy.Schema
-
-var _ChallengeArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ChallengeArn",
-}, smithy.ShapeTypeString, 0)
-
-var ChallengeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ChallengeMetadata",
-}, smithy.ShapeTypeStructure, 4)
-var ChallengeMetadata_Arn *smithy.Schema
-
-var ChallengeMetadata_ConnectorArn *smithy.Schema
-
-var ChallengeMetadata_CreatedAt *smithy.Schema
-
-var ChallengeMetadata_UpdatedAt *smithy.Schema
-
-var _ChallengeMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ChallengeMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _ChallengeMetadataList_member *smithy.Schema
-
-var ChallengeMetadataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ChallengeMetadataSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ChallengeMetadataSummary_Arn *smithy.Schema
-
-var ChallengeMetadataSummary_ConnectorArn *smithy.Schema
-
-var ChallengeMetadataSummary_CreatedAt *smithy.Schema
-
-var ChallengeMetadataSummary_UpdatedAt *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ResourceId *smithy.Schema
-
-var ConflictException_ResourceType *smithy.Schema
-
-var Connector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "Connector",
-}, smithy.ShapeTypeStructure, 10)
-var Connector_Arn *smithy.Schema
-
-var Connector_CertificateAuthorityArn *smithy.Schema
-
-var Connector_Type *smithy.Schema
-
-var Connector_MobileDeviceManagement *smithy.Schema
-
-var Connector_OpenIdConfiguration *smithy.Schema
-
-var Connector_Status *smithy.Schema
-
-var Connector_StatusReason *smithy.Schema
-
-var Connector_Endpoint *smithy.Schema
-
-var Connector_CreatedAt *smithy.Schema
-
-var Connector_UpdatedAt *smithy.Schema
-
-var _ConnectorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ConnectorArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ConnectorList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorList_member *smithy.Schema
-
-var ConnectorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ConnectorStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ConnectorStatus_CREATING *smithy.Schema
-
-var ConnectorStatus_ACTIVE *smithy.Schema
-
-var ConnectorStatus_DELETING *smithy.Schema
-
-var ConnectorStatus_FAILED *smithy.Schema
-
-var ConnectorStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ConnectorStatusReason",
-}, smithy.ShapeTypeEnum, 6)
-var ConnectorStatusReason_INTERNAL_FAILURE *smithy.Schema
-
-var ConnectorStatusReason_PRIVATECA_ACCESS_DENIED *smithy.Schema
-
-var ConnectorStatusReason_PRIVATECA_INVALID_STATE *smithy.Schema
-
-var ConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND *smithy.Schema
-
-var ConnectorStatusReason_VPC_ENDPOINT_RESOURCE_NOT_FOUND *smithy.Schema
-
-var ConnectorStatusReason_VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND *smithy.Schema
-
-var ConnectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ConnectorSummary",
-}, smithy.ShapeTypeStructure, 10)
-var ConnectorSummary_Arn *smithy.Schema
-
-var ConnectorSummary_CertificateAuthorityArn *smithy.Schema
-
-var ConnectorSummary_Type *smithy.Schema
-
-var ConnectorSummary_MobileDeviceManagement *smithy.Schema
-
-var ConnectorSummary_OpenIdConfiguration *smithy.Schema
-
-var ConnectorSummary_Status *smithy.Schema
-
-var ConnectorSummary_StatusReason *smithy.Schema
-
-var ConnectorSummary_Endpoint *smithy.Schema
-
-var ConnectorSummary_CreatedAt *smithy.Schema
-
-var ConnectorSummary_UpdatedAt *smithy.Schema
-
-var ConnectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ConnectorType",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectorType_GENERAL_PURPOSE *smithy.Schema
-
-var ConnectorType_INTUNE *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var IntuneConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "IntuneConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var IntuneConfiguration_AzureApplicationId *smithy.Schema
-
-var IntuneConfiguration_Domain *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MobileDeviceManagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "MobileDeviceManagement",
-}, smithy.ShapeTypeUnion, 1)
-var MobileDeviceManagement_Intune *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OpenIdConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "OpenIdConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var OpenIdConfiguration_Issuer *smithy.Schema
-
-var OpenIdConfiguration_Subject *smithy.Schema
-
-var OpenIdConfiguration_Audience *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceType *smithy.Schema
-
-var ServiceQuotaExceededException_ServiceCode *smithy.Schema
-
-var ServiceQuotaExceededException_QuotaCode *smithy.Schema
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 7)
-var ValidationExceptionReason_CA_CERT_VALIDITY_TOO_SHORT *smithy.Schema
-
-var ValidationExceptionReason_INVALID_CA_USAGE_MODE *smithy.Schema
-
-var ValidationExceptionReason_INVALID_CONNECTOR_TYPE *smithy.Schema
-
-var ValidationExceptionReason_INVALID_STATE *smithy.Schema
-
-var ValidationExceptionReason_NO_CLIENT_TOKEN *smithy.Schema
-
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "VpcEndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var CreateChallengeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "CreateChallengeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateChallengeRequest_ConnectorArn *smithy.Schema
-
-var CreateChallengeRequest_ClientToken *smithy.Schema
-
-var CreateChallengeRequest_Tags *smithy.Schema
-
-var CreateChallengeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "CreateChallengeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChallengeResponse_Challenge *smithy.Schema
-
-var CreateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "CreateConnectorRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateConnectorRequest_CertificateAuthorityArn *smithy.Schema
-
-var CreateConnectorRequest_MobileDeviceManagement *smithy.Schema
-
-var CreateConnectorRequest_VpcEndpointId *smithy.Schema
-
-var CreateConnectorRequest_ClientToken *smithy.Schema
-
-var CreateConnectorRequest_Tags *smithy.Schema
-
-var CreateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "CreateConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectorResponse_ConnectorArn *smithy.Schema
-
-var DeleteChallengeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "DeleteChallengeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChallengeRequest_ChallengeArn *smithy.Schema
-
-var DeleteConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "DeleteConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectorRequest_ConnectorArn *smithy.Schema
-
-var GetChallengeMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetChallengeMetadataRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetChallengeMetadataRequest_ChallengeArn *smithy.Schema
-
-var GetChallengeMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetChallengeMetadataResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChallengeMetadataResponse_ChallengeMetadata *smithy.Schema
-
-var GetChallengePasswordRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetChallengePasswordRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetChallengePasswordRequest_ChallengeArn *smithy.Schema
-
-var GetChallengePasswordResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetChallengePasswordResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetChallengePasswordResponse_Password *smithy.Schema
-
-var GetConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectorRequest_ConnectorArn *smithy.Schema
-
-var GetConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "GetConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectorResponse_Connector *smithy.Schema
-
-var ListChallengeMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListChallengeMetadataRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListChallengeMetadataRequest_MaxResults *smithy.Schema
-
-var ListChallengeMetadataRequest_NextToken *smithy.Schema
-
-var ListChallengeMetadataRequest_ConnectorArn *smithy.Schema
-
-var ListChallengeMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListChallengeMetadataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChallengeMetadataResponse_Challenges *smithy.Schema
-
-var ListChallengeMetadataResponse_NextToken *smithy.Schema
-
-var ListConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListConnectorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsRequest_MaxResults *smithy.Schema
-
-var ListConnectorsRequest_NextToken *smithy.Schema
-
-var ListConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsResponse_Connectors *smithy.Schema
-
-var ListConnectorsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorscep",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", smithyprelude.String)
-
-	Challenge_Arn = Challenge.AddMember("Arn", _ChallengeArn)
-
-	Challenge_ConnectorArn = Challenge.AddMember("ConnectorArn", _ConnectorArn)
-
-	Challenge_CreatedAt = Challenge.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	Challenge_UpdatedAt = Challenge.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	Challenge_Password = Challenge.AddMember("Password", _SensitiveString)
-
-	ChallengeMetadata_Arn = ChallengeMetadata.AddMember("Arn", _ChallengeArn)
-
-	ChallengeMetadata_ConnectorArn = ChallengeMetadata.AddMember("ConnectorArn", _ConnectorArn)
-
-	ChallengeMetadata_CreatedAt = ChallengeMetadata.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	ChallengeMetadata_UpdatedAt = ChallengeMetadata.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	ChallengeMetadataSummary_Arn = ChallengeMetadataSummary.AddMember("Arn", _ChallengeArn)
-
-	ChallengeMetadataSummary_ConnectorArn = ChallengeMetadataSummary.AddMember("ConnectorArn", _ConnectorArn)
-
-	ChallengeMetadataSummary_CreatedAt = ChallengeMetadataSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	ChallengeMetadataSummary_UpdatedAt = ChallengeMetadataSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_ChallengeMetadataList_member = _ChallengeMetadataList.AddMember("member", ChallengeMetadataSummary)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ConflictException_ResourceId = ConflictException.AddMember("ResourceId", smithyprelude.String)
-
-	ConflictException_ResourceType = ConflictException.AddMember("ResourceType", smithyprelude.String)
-
-	ConnectorType_GENERAL_PURPOSE = ConnectorType.AddMember("GENERAL_PURPOSE", smithyprelude.Unit)
-
-	ConnectorType_INTUNE = ConnectorType.AddMember("INTUNE", smithyprelude.Unit)
-
-	IntuneConfiguration_AzureApplicationId = IntuneConfiguration.AddMember("AzureApplicationId", _AzureApplicationId)
-
-	IntuneConfiguration_Domain = IntuneConfiguration.AddMember("Domain", _AzureDomain)
-
-	MobileDeviceManagement_Intune = MobileDeviceManagement.AddMember("Intune", IntuneConfiguration)
-
-	OpenIdConfiguration_Issuer = OpenIdConfiguration.AddMember("Issuer", smithyprelude.String)
-
-	OpenIdConfiguration_Subject = OpenIdConfiguration.AddMember("Subject", smithyprelude.String)
-
-	OpenIdConfiguration_Audience = OpenIdConfiguration.AddMember("Audience", smithyprelude.String)
-
-	ConnectorStatus_CREATING = ConnectorStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ConnectorStatus_ACTIVE = ConnectorStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ConnectorStatus_DELETING = ConnectorStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ConnectorStatus_FAILED = ConnectorStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ConnectorStatusReason_INTERNAL_FAILURE = ConnectorStatusReason.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
-
-	ConnectorStatusReason_PRIVATECA_ACCESS_DENIED = ConnectorStatusReason.AddMember("PRIVATECA_ACCESS_DENIED", smithyprelude.Unit)
-
-	ConnectorStatusReason_PRIVATECA_INVALID_STATE = ConnectorStatusReason.AddMember("PRIVATECA_INVALID_STATE", smithyprelude.Unit)
-
-	ConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND = ConnectorStatusReason.AddMember("PRIVATECA_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	ConnectorStatusReason_VPC_ENDPOINT_RESOURCE_NOT_FOUND = ConnectorStatusReason.AddMember("VPC_ENDPOINT_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	ConnectorStatusReason_VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND = ConnectorStatusReason.AddMember("VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND", smithyprelude.Unit)
-
-	Connector_Arn = Connector.AddMember("Arn", _ConnectorArn)
-
-	Connector_CertificateAuthorityArn = Connector.AddMember("CertificateAuthorityArn", _CertificateAuthorityArn)
-
-	Connector_Type = Connector.AddMember("Type", ConnectorType)
-
-	Connector_MobileDeviceManagement = Connector.AddMember("MobileDeviceManagement", MobileDeviceManagement)
-
-	Connector_OpenIdConfiguration = Connector.AddMember("OpenIdConfiguration", OpenIdConfiguration)
-
-	Connector_Status = Connector.AddMember("Status", ConnectorStatus)
-
-	Connector_StatusReason = Connector.AddMember("StatusReason", ConnectorStatusReason)
-
-	Connector_Endpoint = Connector.AddMember("Endpoint", smithyprelude.String)
-
-	Connector_CreatedAt = Connector.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	Connector_UpdatedAt = Connector.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	ConnectorSummary_Arn = ConnectorSummary.AddMember("Arn", _ConnectorArn)
-
-	ConnectorSummary_CertificateAuthorityArn = ConnectorSummary.AddMember("CertificateAuthorityArn", _CertificateAuthorityArn)
-
-	ConnectorSummary_Type = ConnectorSummary.AddMember("Type", ConnectorType)
-
-	ConnectorSummary_MobileDeviceManagement = ConnectorSummary.AddMember("MobileDeviceManagement", MobileDeviceManagement)
-
-	ConnectorSummary_OpenIdConfiguration = ConnectorSummary.AddMember("OpenIdConfiguration", OpenIdConfiguration)
-
-	ConnectorSummary_Status = ConnectorSummary.AddMember("Status", ConnectorStatus)
-
-	ConnectorSummary_StatusReason = ConnectorSummary.AddMember("StatusReason", ConnectorStatusReason)
-
-	ConnectorSummary_Endpoint = ConnectorSummary.AddMember("Endpoint", smithyprelude.String)
-
-	ConnectorSummary_CreatedAt = ConnectorSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	ConnectorSummary_UpdatedAt = ConnectorSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_ConnectorList_member = _ConnectorList.AddMember("member", ConnectorSummary)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", smithyprelude.String)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_ResourceType = ServiceQuotaExceededException.AddMember("ResourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_ServiceCode = ServiceQuotaExceededException.AddMember("ServiceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_QuotaCode = ServiceQuotaExceededException.AddMember("QuotaCode", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", smithyprelude.String)
-
-	_Tags_key = _Tags.AddMember("key", smithyprelude.String)
-
-	_Tags_value = _Tags.AddMember("value", smithyprelude.String)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ValidationExceptionReason_CA_CERT_VALIDITY_TOO_SHORT = ValidationExceptionReason.AddMember("CA_CERT_VALIDITY_TOO_SHORT", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_CA_USAGE_MODE = ValidationExceptionReason.AddMember("INVALID_CA_USAGE_MODE", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_CONNECTOR_TYPE = ValidationExceptionReason.AddMember("INVALID_CONNECTOR_TYPE", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_STATE = ValidationExceptionReason.AddMember("INVALID_STATE", smithyprelude.Unit)
-
-	ValidationExceptionReason_NO_CLIENT_TOKEN = ValidationExceptionReason.AddMember("NO_CLIENT_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	CreateChallengeRequest_ConnectorArn = CreateChallengeRequest.AddMember("ConnectorArn", _ConnectorArn)
-
-	CreateChallengeRequest_ClientToken = CreateChallengeRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateChallengeRequest_Tags = CreateChallengeRequest.AddMember("Tags", _Tags)
-
-	CreateChallengeResponse_Challenge = CreateChallengeResponse.AddMember("Challenge", Challenge)
-
-	CreateConnectorRequest_CertificateAuthorityArn = CreateConnectorRequest.AddMember("CertificateAuthorityArn", _CertificateAuthorityArn)
-
-	CreateConnectorRequest_MobileDeviceManagement = CreateConnectorRequest.AddMember("MobileDeviceManagement", MobileDeviceManagement)
-
-	CreateConnectorRequest_VpcEndpointId = CreateConnectorRequest.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	CreateConnectorRequest_ClientToken = CreateConnectorRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateConnectorRequest_Tags = CreateConnectorRequest.AddMember("Tags", _Tags)
-
-	CreateConnectorResponse_ConnectorArn = CreateConnectorResponse.AddMember("ConnectorArn", _ConnectorArn)
-
-	DeleteChallengeRequest_ChallengeArn = DeleteChallengeRequest.AddMember("ChallengeArn", _ChallengeArn, &smithytraits.HTTPLabel{})
-
-	DeleteConnectorRequest_ConnectorArn = DeleteConnectorRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPLabel{})
-
-	GetChallengeMetadataRequest_ChallengeArn = GetChallengeMetadataRequest.AddMember("ChallengeArn", _ChallengeArn, &smithytraits.HTTPLabel{})
-
-	GetChallengeMetadataResponse_ChallengeMetadata = GetChallengeMetadataResponse.AddMember("ChallengeMetadata", ChallengeMetadata)
-
-	GetChallengePasswordRequest_ChallengeArn = GetChallengePasswordRequest.AddMember("ChallengeArn", _ChallengeArn, &smithytraits.HTTPLabel{})
-
-	GetChallengePasswordResponse_Password = GetChallengePasswordResponse.AddMember("Password", _SensitiveString)
-
-	GetConnectorRequest_ConnectorArn = GetConnectorRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPLabel{})
-
-	GetConnectorResponse_Connector = GetConnectorResponse.AddMember("Connector", Connector)
-
-	ListChallengeMetadataRequest_MaxResults = ListChallengeMetadataRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListChallengeMetadataRequest_NextToken = ListChallengeMetadataRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListChallengeMetadataRequest_ConnectorArn = ListChallengeMetadataRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPQuery{Name: "ConnectorArn"})
-
-	ListChallengeMetadataResponse_Challenges = ListChallengeMetadataResponse.AddMember("Challenges", _ChallengeMetadataList)
-
-	ListChallengeMetadataResponse_NextToken = ListChallengeMetadataResponse.AddMember("NextToken", _NextToken)
-
-	ListConnectorsRequest_MaxResults = ListConnectorsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListConnectorsRequest_NextToken = ListConnectorsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListConnectorsResponse_Connectors = ListConnectorsResponse.AddMember("Connectors", _ConnectorList)
-
-	ListConnectorsResponse_NextToken = ListConnectorsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
+const blob = "" +
+	"VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUNDVPC_ENDPOINT_RESOURCE_NOT_FOUNDListChallengeMetadataResponseServic" +
+	"eQuotaExceededExceptionGetChallengeMetadataResponseGetChallengePasswordResponseListChallengeMetadata" +
+	"RequestPRIVATECA_RESOURCE_NOT_FOUNDGetChallengeMetadataRequestGetChallengePasswordRequestListTagsFor" +
+	"ResourceResponseCA_CERT_VALIDITY_TOO_SHORTListTagsForResourceRequestResourceNotFoundExceptionValidat" +
+	"ionExceptionReasonChallengeMetadataSummaryCertificateAuthorityArnCreateChallengeResponseCreateConnec" +
+	"torResponseInternalServerExceptionPRIVATECA_ACCESS_DENIEDPRIVATECA_INVALID_STATECreateChallengeReque" +
+	"stCreateConnectorRequestDeleteChallengeRequestDeleteConnectorRequestINVALID_CONNECTOR_TYPEListConnec" +
+	"torsResponseMobileDeviceManagementAccessDeniedExceptionChallengeMetadataListConnectorStatusReasonINV" +
+	"ALID_CA_USAGE_MODEListConnectorsRequestGetConnectorResponseUntagResourceRequestBadRequestExceptionGe" +
+	"tConnectorRequestIntuneConfigurationOpenIdConfigurationThrottlingExceptionAzureApplicationIdTagResou" +
+	"rceRequestConflictExceptionUNKNOWN_OPERATIONConnectorSummaryINTERNAL_FAILUREPcaConnectorScepGENERAL_" +
+	"PURPOSENO_CLIENT_TOKENSensitiveStringConnectorListConnectorTypeVpcEndpointIdChallengeArnConnectorArn" +
+	"ResourceTypeAzureDomainClientTokenResourceArnServiceCodeChallengesMaxResultsResourceIdTagKeyListCrea" +
+	"tedAtNextTokenQuotaCodeTimestampUpdatedAtAudienceCREATINGDELETINGMessageSubjectTagKeysACTIVEFAILEDIN" +
+	"TUNEIssuermemberOTHERvalueUnitkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.pcaconnectorscep", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 465, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 488, Target: 1, Traits: 1, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 624, Target: 2, Traits: 2, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 646, Target: 3, Traits: 3, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 123, Target: 4, Traits: 4, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 151, Target: 5, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 839, Target: 6, Traits: 6, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 65, Target: 7, Traits: 7, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 690, Target: 8, Traits: 8, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 289, Target: 9, Traits: 9, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 992, Target: 10, Traits: 10, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 859, Target: 11, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1076, Target: 12, Traits: 12, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 734, Target: 13, Traits: 13, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 974, Target: 15, Traits: 12, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1212, Target: 16, Traits: 12, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 879, Target: 17, Traits: 14, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 442, Target: 19, Traits: 12, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 69, Target: 20, Traits: 12, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 26, Traits: 12, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1188, Target: 55, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1296, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1332, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 163, Target: 101, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1176, Target: 26, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 69, Target: 27, Traits: 12, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 26, Traits: 12, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1188, Target: 55, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1296, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1332, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 755, Target: 32, Traits: 12, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1410, Target: 34, Traits: 12, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 418, Target: 34, Traits: 12, StrLen: 24, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 26, Traits: 12, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1188, Target: 55, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1296, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1332, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1223, Target: 39, Traits: 12, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1010, Target: 40, Traits: 16, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1276, Target: 179, Traits: 12, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1200, Target: 179, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 494, Target: 44, Traits: 12, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 55, Traits: 12, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 442, Target: 19, Traits: 12, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1159, Target: 81, Traits: 12, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 712, Target: 90, Traits: 12, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 936, Target: 93, Traits: 12, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 785, Target: 58, Traits: 12, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 785, Target: 63, Traits: 12, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1166, Target: 179, Traits: 12, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1296, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1332, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1188, Target: 55, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1137, Target: 56, Traits: 12, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1410, Target: 70, Traits: 12, StrLen: 6, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 776, Target: 58, Traits: 12, StrLen: 15, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1349, Target: 181, Traits: 12, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1386, Target: 181, Traits: 12, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1357, Target: 181, Traits: 12, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1392, Target: 181, Traits: 12, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 776, Target: 63, Traits: 12, StrLen: 21, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1060, Target: 181, Traits: 12, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 534, Target: 181, Traits: 12, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 557, Target: 181, Traits: 12, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 207, Target: 181, Traits: 12, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 34, Target: 181, Traits: 12, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 0, Target: 181, Traits: 12, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1044, Target: 70, Traits: 12, StrLen: 16, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 462, Target: 55, Traits: 12, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 442, Target: 19, Traits: 12, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1159, Target: 81, Traits: 12, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 712, Target: 90, Traits: 12, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 936, Target: 93, Traits: 12, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 785, Target: 58, Traits: 12, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 785, Target: 63, Traits: 12, StrLen: 12, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1166, Target: 179, Traits: 12, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1296, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1332, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1150, Target: 81, Traits: 12, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1092, Target: 181, Traits: 12, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1398, Target: 181, Traits: 12, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 511, Target: 84, Traits: 17, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 917, Target: 86, Traits: 12, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 974, Target: 15, Traits: 12, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1217, Target: 16, Traits: 12, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1266, Target: 89, Traits: 12, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 712, Target: 90, Traits: 12, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 917, Target: 86, Traits: 12, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1305, Target: 92, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 936, Target: 93, Traits: 12, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1404, Target: 179, Traits: 12, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1372, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1341, Target: 179, Traits: 12, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 368, Target: 97, Traits: 18, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1276, Target: 179, Traits: 12, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1200, Target: 179, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1122, Target: 101, Traits: 19, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 94, Target: 102, Traits: 20, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1200, Target: 179, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1245, Target: 179, Traits: 12, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1314, Target: 179, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1286, Target: 107, Traits: 12, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1410, Target: 179, Traits: 12, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 293, Target: 109, Traits: 12, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1430, Target: 179, Traits: 12, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1421, Target: 179, Traits: 12, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 955, Target: 112, Traits: 21, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 393, Target: 114, Traits: 14, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1365, Target: 179, Traits: 12, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 412, Target: 117, Traits: 12, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 393, Target: 117, Traits: 12, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 316, Target: 181, Traits: 12, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 797, Target: 181, Traits: 12, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 668, Target: 181, Traits: 12, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 567, Target: 181, Traits: 12, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1107, Target: 181, Traits: 12, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1027, Target: 181, Traits: 12, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1416, Target: 181, Traits: 12, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1163, Target: 125, Traits: 12, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 580, Target: 126, Traits: 12, StrLen: 22, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1188, Target: 55, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1223, Target: 39, Traits: 12, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 293, Target: 109, Traits: 12, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 465, Target: 130, Traits: 12, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 69, Target: 20, Traits: 12, StrLen: 9, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 602, Target: 132, Traits: 12, StrLen: 22, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 442, Target: 19, Traits: 12, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 712, Target: 90, Traits: 12, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 1163, Target: 125, Traits: 12, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1223, Target: 39, Traits: 12, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 293, Target: 109, Traits: 12, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 488, Target: 138, Traits: 12, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1188, Target: 55, Traits: 12, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 624, Target: 140, Traits: 12, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1176, Target: 26, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 646, Target: 142, Traits: 12, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1188, Target: 55, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 235, Target: 144, Traits: 12, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1176, Target: 26, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 123, Target: 146, Traits: 12, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 69, Target: 27, Traits: 12, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 262, Target: 148, Traits: 12, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1176, Target: 26, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 151, Target: 150, Traits: 12, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 163, Target: 101, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 898, Target: 152, Traits: 12, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1188, Target: 55, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 839, Target: 154, Traits: 12, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 494, Target: 44, Traits: 12, StrLen: 9, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 179, Target: 156, Traits: 12, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1266, Target: 89, Traits: 23, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1305, Target: 92, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1188, Target: 55, Traits: 25, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 65, Target: 160, Traits: 12, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1256, Target: 32, Traits: 12, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1305, Target: 92, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 818, Target: 163, Traits: 12, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1266, Target: 89, Traits: 23, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1305, Target: 92, Traits: 24, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 690, Target: 166, Traits: 12, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 694, Target: 56, Traits: 12, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1305, Target: 92, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 342, Target: 169, Traits: 12, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1234, Target: 179, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 289, Target: 171, Traits: 12, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 293, Target: 109, Traits: 12, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 992, Target: 173, Traits: 12, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1234, Target: 179, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 293, Target: 109, Traits: 12, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 859, Target: 176, Traits: 12, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1234, Target: 179, Traits: 22, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1379, Target: 107, Traits: 26, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1131, Target: 179, Traits: 12, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1323, Target: 180, Traits: 12, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 1426, Target: 181, Traits: 12, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/challenges",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/connectors",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/challenges/{ChallengeArn}",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/connectors/{ConnectorArn}",
+			Code: 202}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/challengeMetadata/{ChallengeArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/challengePasswords/{ChallengeArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/connectors/{ConnectorArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/challengeMetadata",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/connectors",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{ResourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{ResourceArn}",
+			Code: 204}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ConnectorArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [182]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+}
+
+var CreateChallenge = &handles[0]
+
+var CreateConnector = &handles[1]
+
+var DeleteChallenge = &handles[2]
+
+var DeleteConnector = &handles[3]
+
+var GetChallengeMetadata = &handles[4]
+
+var GetChallengePassword = &handles[5]
+
+var GetConnector = &handles[6]
+
+var ListChallengeMetadata = &handles[7]
+
+var ListConnectors = &handles[8]
+
+var ListTagsForResource = &handles[9]
+
+var TagResource = &handles[10]
+
+var UntagResource = &handles[11]
+
+var _PcaConnectorScep = &handles[12]
+
+var AccessDeniedException = &handles[13]
+var AccessDeniedException_Message = &handles[14]
+
+var _AzureApplicationId = &handles[15]
+
+var _AzureDomain = &handles[16]
+
+var BadRequestException = &handles[17]
+var BadRequestException_Message = &handles[18]
+
+var _CertificateAuthorityArn = &handles[19]
+
+var Challenge = &handles[20]
+var Challenge_Arn = &handles[21]
+var Challenge_ConnectorArn = &handles[22]
+var Challenge_CreatedAt = &handles[23]
+var Challenge_UpdatedAt = &handles[24]
+var Challenge_Password = &handles[25]
+
+var _ChallengeArn = &handles[26]
+
+var ChallengeMetadata = &handles[27]
+var ChallengeMetadata_Arn = &handles[28]
+var ChallengeMetadata_ConnectorArn = &handles[29]
+var ChallengeMetadata_CreatedAt = &handles[30]
+var ChallengeMetadata_UpdatedAt = &handles[31]
+
+var _ChallengeMetadataList = &handles[32]
+var _ChallengeMetadataList_member = &handles[33]
+
+var ChallengeMetadataSummary = &handles[34]
+var ChallengeMetadataSummary_Arn = &handles[35]
+var ChallengeMetadataSummary_ConnectorArn = &handles[36]
+var ChallengeMetadataSummary_CreatedAt = &handles[37]
+var ChallengeMetadataSummary_UpdatedAt = &handles[38]
+
+var _ClientToken = &handles[39]
+
+var ConflictException = &handles[40]
+var ConflictException_Message = &handles[41]
+var ConflictException_ResourceId = &handles[42]
+var ConflictException_ResourceType = &handles[43]
+
+var Connector = &handles[44]
+var Connector_Arn = &handles[45]
+var Connector_CertificateAuthorityArn = &handles[46]
+var Connector_Type = &handles[47]
+var Connector_MobileDeviceManagement = &handles[48]
+var Connector_OpenIdConfiguration = &handles[49]
+var Connector_Status = &handles[50]
+var Connector_StatusReason = &handles[51]
+var Connector_Endpoint = &handles[52]
+var Connector_CreatedAt = &handles[53]
+var Connector_UpdatedAt = &handles[54]
+
+var _ConnectorArn = &handles[55]
+
+var _ConnectorList = &handles[56]
+var _ConnectorList_member = &handles[57]
+
+var ConnectorStatus = &handles[58]
+var ConnectorStatus_CREATING = &handles[59]
+var ConnectorStatus_ACTIVE = &handles[60]
+var ConnectorStatus_DELETING = &handles[61]
+var ConnectorStatus_FAILED = &handles[62]
+
+var ConnectorStatusReason = &handles[63]
+var ConnectorStatusReason_INTERNAL_FAILURE = &handles[64]
+var ConnectorStatusReason_PRIVATECA_ACCESS_DENIED = &handles[65]
+var ConnectorStatusReason_PRIVATECA_INVALID_STATE = &handles[66]
+var ConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND = &handles[67]
+var ConnectorStatusReason_VPC_ENDPOINT_RESOURCE_NOT_FOUND = &handles[68]
+var ConnectorStatusReason_VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND = &handles[69]
+
+var ConnectorSummary = &handles[70]
+var ConnectorSummary_Arn = &handles[71]
+var ConnectorSummary_CertificateAuthorityArn = &handles[72]
+var ConnectorSummary_Type = &handles[73]
+var ConnectorSummary_MobileDeviceManagement = &handles[74]
+var ConnectorSummary_OpenIdConfiguration = &handles[75]
+var ConnectorSummary_Status = &handles[76]
+var ConnectorSummary_StatusReason = &handles[77]
+var ConnectorSummary_Endpoint = &handles[78]
+var ConnectorSummary_CreatedAt = &handles[79]
+var ConnectorSummary_UpdatedAt = &handles[80]
+
+var ConnectorType = &handles[81]
+var ConnectorType_GENERAL_PURPOSE = &handles[82]
+var ConnectorType_INTUNE = &handles[83]
+
+var InternalServerException = &handles[84]
+var InternalServerException_Message = &handles[85]
+
+var IntuneConfiguration = &handles[86]
+var IntuneConfiguration_AzureApplicationId = &handles[87]
+var IntuneConfiguration_Domain = &handles[88]
+
+var _MaxResults = &handles[89]
+
+var MobileDeviceManagement = &handles[90]
+var MobileDeviceManagement_Intune = &handles[91]
+
+var _NextToken = &handles[92]
+
+var OpenIdConfiguration = &handles[93]
+var OpenIdConfiguration_Issuer = &handles[94]
+var OpenIdConfiguration_Subject = &handles[95]
+var OpenIdConfiguration_Audience = &handles[96]
+
+var ResourceNotFoundException = &handles[97]
+var ResourceNotFoundException_Message = &handles[98]
+var ResourceNotFoundException_ResourceId = &handles[99]
+var ResourceNotFoundException_ResourceType = &handles[100]
+
+var _SensitiveString = &handles[101]
+
+var ServiceQuotaExceededException = &handles[102]
+var ServiceQuotaExceededException_Message = &handles[103]
+var ServiceQuotaExceededException_ResourceType = &handles[104]
+var ServiceQuotaExceededException_ServiceCode = &handles[105]
+var ServiceQuotaExceededException_QuotaCode = &handles[106]
+
+var _TagKeyList = &handles[107]
+var _TagKeyList_member = &handles[108]
+
+var _Tags = &handles[109]
+var _Tags_key = &handles[110]
+var _Tags_value = &handles[111]
+
+var ThrottlingException = &handles[112]
+var ThrottlingException_Message = &handles[113]
+
+var ValidationException = &handles[114]
+var ValidationException_Message = &handles[115]
+var ValidationException_Reason = &handles[116]
+
+var ValidationExceptionReason = &handles[117]
+var ValidationExceptionReason_CA_CERT_VALIDITY_TOO_SHORT = &handles[118]
+var ValidationExceptionReason_INVALID_CA_USAGE_MODE = &handles[119]
+var ValidationExceptionReason_INVALID_CONNECTOR_TYPE = &handles[120]
+var ValidationExceptionReason_INVALID_STATE = &handles[121]
+var ValidationExceptionReason_NO_CLIENT_TOKEN = &handles[122]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[123]
+var ValidationExceptionReason_OTHER = &handles[124]
+
+var _VpcEndpointId = &handles[125]
+
+var CreateChallengeRequest = &handles[126]
+var CreateChallengeRequest_ConnectorArn = &handles[127]
+var CreateChallengeRequest_ClientToken = &handles[128]
+var CreateChallengeRequest_Tags = &handles[129]
+
+var CreateChallengeResponse = &handles[130]
+var CreateChallengeResponse_Challenge = &handles[131]
+
+var CreateConnectorRequest = &handles[132]
+var CreateConnectorRequest_CertificateAuthorityArn = &handles[133]
+var CreateConnectorRequest_MobileDeviceManagement = &handles[134]
+var CreateConnectorRequest_VpcEndpointId = &handles[135]
+var CreateConnectorRequest_ClientToken = &handles[136]
+var CreateConnectorRequest_Tags = &handles[137]
+
+var CreateConnectorResponse = &handles[138]
+var CreateConnectorResponse_ConnectorArn = &handles[139]
+
+var DeleteChallengeRequest = &handles[140]
+var DeleteChallengeRequest_ChallengeArn = &handles[141]
+
+var DeleteConnectorRequest = &handles[142]
+var DeleteConnectorRequest_ConnectorArn = &handles[143]
+
+var GetChallengeMetadataRequest = &handles[144]
+var GetChallengeMetadataRequest_ChallengeArn = &handles[145]
+
+var GetChallengeMetadataResponse = &handles[146]
+var GetChallengeMetadataResponse_ChallengeMetadata = &handles[147]
+
+var GetChallengePasswordRequest = &handles[148]
+var GetChallengePasswordRequest_ChallengeArn = &handles[149]
+
+var GetChallengePasswordResponse = &handles[150]
+var GetChallengePasswordResponse_Password = &handles[151]
+
+var GetConnectorRequest = &handles[152]
+var GetConnectorRequest_ConnectorArn = &handles[153]
+
+var GetConnectorResponse = &handles[154]
+var GetConnectorResponse_Connector = &handles[155]
+
+var ListChallengeMetadataRequest = &handles[156]
+var ListChallengeMetadataRequest_MaxResults = &handles[157]
+var ListChallengeMetadataRequest_NextToken = &handles[158]
+var ListChallengeMetadataRequest_ConnectorArn = &handles[159]
+
+var ListChallengeMetadataResponse = &handles[160]
+var ListChallengeMetadataResponse_Challenges = &handles[161]
+var ListChallengeMetadataResponse_NextToken = &handles[162]
+
+var ListConnectorsRequest = &handles[163]
+var ListConnectorsRequest_MaxResults = &handles[164]
+var ListConnectorsRequest_NextToken = &handles[165]
+
+var ListConnectorsResponse = &handles[166]
+var ListConnectorsResponse_Connectors = &handles[167]
+var ListConnectorsResponse_NextToken = &handles[168]
+
+var ListTagsForResourceRequest = &handles[169]
+var ListTagsForResourceRequest_ResourceArn = &handles[170]
+
+var ListTagsForResourceResponse = &handles[171]
+var ListTagsForResourceResponse_Tags = &handles[172]
+
+var TagResourceRequest = &handles[173]
+var TagResourceRequest_ResourceArn = &handles[174]
+var TagResourceRequest_Tags = &handles[175]
+
+var UntagResourceRequest = &handles[176]
+var UntagResourceRequest_ResourceArn = &handles[177]
+var UntagResourceRequest_TagKeys = &handles[178]
+
+var PcaConnectorScep = &smithy.ServiceSchema{Schema: &handles[12], Version: "2018-05-10"}

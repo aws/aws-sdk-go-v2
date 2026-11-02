@@ -4,639 +4,574 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetDataAutomationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "GetDataAutomationStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var InvokeDataAutomation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InvokeDataAutomation",
-}, smithy.ShapeTypeOperation, 0)
-
-var InvokeDataAutomationAsync = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InvokeDataAutomationAsync",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AmazonBedrockKeystoneRuntimeService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "AmazonBedrockKeystoneRuntimeService",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonBedrockKeystoneRuntimeService = smithy.NewServiceSchema(_AmazonBedrockKeystoneRuntimeService, "2024-06-13")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AssetProcessingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "AssetProcessingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AssetProcessingConfiguration_video *smithy.Schema
-
-var AutomationJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "AutomationJobStatus",
-}, smithy.ShapeTypeEnum, 5)
-var AutomationJobStatus_CREATED *smithy.Schema
-
-var AutomationJobStatus_IN_PROGRESS *smithy.Schema
-
-var AutomationJobStatus_SUCCESS *smithy.Schema
-
-var AutomationJobStatus_SERVICE_ERROR *smithy.Schema
-
-var AutomationJobStatus_CLIENT_ERROR *smithy.Schema
-
-var Blueprint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "Blueprint",
-}, smithy.ShapeTypeStructure, 3)
-var Blueprint_blueprintArn *smithy.Schema
-
-var Blueprint_version *smithy.Schema
-
-var Blueprint_stage *smithy.Schema
-
-var _BlueprintArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "BlueprintArn",
-}, smithy.ShapeTypeString, 0)
-
-var _BlueprintList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "BlueprintList",
-}, smithy.ShapeTypeList, 1)
-var _BlueprintList_member *smithy.Schema
-
-var BlueprintStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "BlueprintStage",
-}, smithy.ShapeTypeEnum, 2)
-var BlueprintStage_DEVELOPMENT *smithy.Schema
-
-var BlueprintStage_LIVE *smithy.Schema
-
-var _BlueprintVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "BlueprintVersion",
-}, smithy.ShapeTypeString, 0)
-
-var CustomOutputStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "CustomOutputStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CustomOutputStatus_MATCH *smithy.Schema
-
-var CustomOutputStatus_NO_MATCH *smithy.Schema
-
-var _DataAutomationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "DataAutomationArn",
-}, smithy.ShapeTypeString, 0)
-
-var DataAutomationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "DataAutomationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DataAutomationConfiguration_dataAutomationProjectArn *smithy.Schema
-
-var DataAutomationConfiguration_stage *smithy.Schema
-
-var _DataAutomationProfileArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "DataAutomationProfileArn",
-}, smithy.ShapeTypeString, 0)
-
-var DataAutomationStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "DataAutomationStage",
-}, smithy.ShapeTypeEnum, 2)
-var DataAutomationStage_LIVE *smithy.Schema
-
-var DataAutomationStage_DEVELOPMENT *smithy.Schema
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionConfiguration_kmsKeyId *smithy.Schema
-
-var EncryptionConfiguration_kmsEncryptionContext *smithy.Schema
-
-var _EncryptionContextKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "EncryptionContextKey",
-}, smithy.ShapeTypeString, 0)
-
-var _EncryptionContextMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "EncryptionContextMap",
-}, smithy.ShapeTypeMap, 2)
-var _EncryptionContextMap_key *smithy.Schema
-
-var _EncryptionContextMap_value *smithy.Schema
-
-var _EncryptionContextValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "EncryptionContextValue",
-}, smithy.ShapeTypeString, 0)
-
-var EventBridgeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "EventBridgeConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EventBridgeConfiguration_eventBridgeEnabled *smithy.Schema
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var InputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var InputConfiguration_s3Uri *smithy.Schema
-
-var InputConfiguration_assetProcessingConfiguration *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _InvocationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InvocationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KMSKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "KMSKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _NonBlankString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "NonBlankString",
-}, smithy.ShapeTypeString, 0)
-
-var NotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "NotificationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NotificationConfiguration_eventBridgeConfiguration *smithy.Schema
-
-var OutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "OutputConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var OutputConfiguration_s3Uri *smithy.Schema
-
-var OutputSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "OutputSegment",
-}, smithy.ShapeTypeStructure, 3)
-var OutputSegment_customOutputStatus *smithy.Schema
-
-var OutputSegment_customOutput *smithy.Schema
-
-var OutputSegment_standardOutput *smithy.Schema
-
-var _OutputSegmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "OutputSegmentList",
-}, smithy.ShapeTypeList, 1)
-var _OutputSegmentList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var SemanticModality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "SemanticModality",
-}, smithy.ShapeTypeEnum, 4)
-var SemanticModality_DOCUMENT *smithy.Schema
-
-var SemanticModality_IMAGE *smithy.Schema
-
-var SemanticModality_AUDIO *smithy.Schema
-
-var SemanticModality_VIDEO *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var SyncInputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "SyncInputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SyncInputConfiguration_bytes *smithy.Schema
-
-var SyncInputConfiguration_s3Uri *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TaggableResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TaggableResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var TimestampSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TimestampSegment",
-}, smithy.ShapeTypeStructure, 2)
-var TimestampSegment_startTimeMillis *smithy.Schema
-
-var TimestampSegment_endTimeMillis *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var VideoAssetProcessingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "VideoAssetProcessingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var VideoAssetProcessingConfiguration_segmentConfiguration *smithy.Schema
-
-var VideoSegmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "VideoSegmentConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var VideoSegmentConfiguration_timestampSegment *smithy.Schema
-
-var GetDataAutomationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "GetDataAutomationStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataAutomationStatusRequest_invocationArn *smithy.Schema
-
-var GetDataAutomationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "GetDataAutomationStatusResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetDataAutomationStatusResponse_status *smithy.Schema
-
-var GetDataAutomationStatusResponse_errorType *smithy.Schema
-
-var GetDataAutomationStatusResponse_errorMessage *smithy.Schema
-
-var GetDataAutomationStatusResponse_outputConfiguration *smithy.Schema
-
-var GetDataAutomationStatusResponse_jobSubmissionTime *smithy.Schema
-
-var GetDataAutomationStatusResponse_jobCompletionTime *smithy.Schema
-
-var GetDataAutomationStatusResponse_jobDurationInSeconds *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InvokeDataAutomationAsyncRequest",
-}, smithy.ShapeTypeStructure, 9)
-var InvokeDataAutomationAsyncRequest_clientToken *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest_inputConfiguration *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest_outputConfiguration *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest_dataAutomationConfiguration *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest_encryptionConfiguration *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest_notificationConfiguration *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest_blueprints *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest_dataAutomationProfileArn *smithy.Schema
-
-var InvokeDataAutomationAsyncRequest_tags *smithy.Schema
-
-var InvokeDataAutomationAsyncResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InvokeDataAutomationAsyncResponse",
-}, smithy.ShapeTypeStructure, 1)
-var InvokeDataAutomationAsyncResponse_invocationArn *smithy.Schema
-
-var InvokeDataAutomationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InvokeDataAutomationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var InvokeDataAutomationRequest_inputConfiguration *smithy.Schema
-
-var InvokeDataAutomationRequest_dataAutomationConfiguration *smithy.Schema
-
-var InvokeDataAutomationRequest_blueprints *smithy.Schema
-
-var InvokeDataAutomationRequest_dataAutomationProfileArn *smithy.Schema
-
-var InvokeDataAutomationRequest_encryptionConfiguration *smithy.Schema
-
-var InvokeDataAutomationRequest_outputConfiguration *smithy.Schema
-
-var InvokeDataAutomationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "InvokeDataAutomationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var InvokeDataAutomationResponse_outputConfiguration *smithy.Schema
-
-var InvokeDataAutomationResponse_semanticModality *smithy.Schema
-
-var InvokeDataAutomationResponse_outputSegments *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceARN *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceARN *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bedrockdataautomationruntime",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _NonBlankString)
-
-	TimestampSegment_startTimeMillis = TimestampSegment.AddMember("startTimeMillis", smithyprelude.Long)
-
-	TimestampSegment_endTimeMillis = TimestampSegment.AddMember("endTimeMillis", smithyprelude.Long)
-
-	VideoSegmentConfiguration_timestampSegment = VideoSegmentConfiguration.AddMember("timestampSegment", TimestampSegment)
-
-	VideoAssetProcessingConfiguration_segmentConfiguration = VideoAssetProcessingConfiguration.AddMember("segmentConfiguration", VideoSegmentConfiguration)
-
-	AssetProcessingConfiguration_video = AssetProcessingConfiguration.AddMember("video", VideoAssetProcessingConfiguration)
-
-	AutomationJobStatus_CREATED = AutomationJobStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	AutomationJobStatus_IN_PROGRESS = AutomationJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	AutomationJobStatus_SUCCESS = AutomationJobStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	AutomationJobStatus_SERVICE_ERROR = AutomationJobStatus.AddMember("SERVICE_ERROR", smithyprelude.Unit)
-
-	AutomationJobStatus_CLIENT_ERROR = AutomationJobStatus.AddMember("CLIENT_ERROR", smithyprelude.Unit)
-
-	BlueprintStage_DEVELOPMENT = BlueprintStage.AddMember("DEVELOPMENT", smithyprelude.Unit)
-
-	BlueprintStage_LIVE = BlueprintStage.AddMember("LIVE", smithyprelude.Unit)
-
-	Blueprint_blueprintArn = Blueprint.AddMember("blueprintArn", _BlueprintArn)
-
-	Blueprint_version = Blueprint.AddMember("version", _BlueprintVersion)
-
-	Blueprint_stage = Blueprint.AddMember("stage", BlueprintStage)
-
-	_BlueprintList_member = _BlueprintList.AddMember("member", Blueprint)
-
-	CustomOutputStatus_MATCH = CustomOutputStatus.AddMember("MATCH", smithyprelude.Unit)
-
-	CustomOutputStatus_NO_MATCH = CustomOutputStatus.AddMember("NO_MATCH", smithyprelude.Unit)
-
-	DataAutomationStage_LIVE = DataAutomationStage.AddMember("LIVE", smithyprelude.Unit)
-
-	DataAutomationStage_DEVELOPMENT = DataAutomationStage.AddMember("DEVELOPMENT", smithyprelude.Unit)
-
-	DataAutomationConfiguration_dataAutomationProjectArn = DataAutomationConfiguration.AddMember("dataAutomationProjectArn", _DataAutomationArn)
-
-	DataAutomationConfiguration_stage = DataAutomationConfiguration.AddMember("stage", DataAutomationStage)
-
-	_EncryptionContextMap_key = _EncryptionContextMap.AddMember("key", _EncryptionContextKey)
-
-	_EncryptionContextMap_value = _EncryptionContextMap.AddMember("value", _EncryptionContextValue)
-
-	EncryptionConfiguration_kmsKeyId = EncryptionConfiguration.AddMember("kmsKeyId", _KMSKeyId)
-
-	EncryptionConfiguration_kmsEncryptionContext = EncryptionConfiguration.AddMember("kmsEncryptionContext", _EncryptionContextMap)
-
-	EventBridgeConfiguration_eventBridgeEnabled = EventBridgeConfiguration.AddMember("eventBridgeEnabled", smithyprelude.Boolean)
-
-	InputConfiguration_s3Uri = InputConfiguration.AddMember("s3Uri", _S3Uri)
-
-	InputConfiguration_assetProcessingConfiguration = InputConfiguration.AddMember("assetProcessingConfiguration", AssetProcessingConfiguration)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _NonBlankString)
-
-	NotificationConfiguration_eventBridgeConfiguration = NotificationConfiguration.AddMember("eventBridgeConfiguration", EventBridgeConfiguration)
-
-	OutputConfiguration_s3Uri = OutputConfiguration.AddMember("s3Uri", _S3Uri)
-
-	OutputSegment_customOutputStatus = OutputSegment.AddMember("customOutputStatus", CustomOutputStatus)
-
-	OutputSegment_customOutput = OutputSegment.AddMember("customOutput", smithyprelude.String)
-
-	OutputSegment_standardOutput = OutputSegment.AddMember("standardOutput", smithyprelude.String)
-
-	_OutputSegmentList_member = _OutputSegmentList.AddMember("member", OutputSegment)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _NonBlankString)
-
-	SemanticModality_DOCUMENT = SemanticModality.AddMember("DOCUMENT", smithyprelude.Unit)
-
-	SemanticModality_IMAGE = SemanticModality.AddMember("IMAGE", smithyprelude.Unit)
-
-	SemanticModality_AUDIO = SemanticModality.AddMember("AUDIO", smithyprelude.Unit)
-
-	SemanticModality_VIDEO = SemanticModality.AddMember("VIDEO", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _NonBlankString)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", _NonBlankString)
-
-	SyncInputConfiguration_bytes = SyncInputConfiguration.AddMember("bytes", smithyprelude.Blob)
-
-	SyncInputConfiguration_s3Uri = SyncInputConfiguration.AddMember("s3Uri", _S3Uri)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _NonBlankString)
-
-	ValidationException_message = ValidationException.AddMember("message", _NonBlankString)
-
-	GetDataAutomationStatusRequest_invocationArn = GetDataAutomationStatusRequest.AddMember("invocationArn", _InvocationArn, &smithytraits.HTTPLabel{})
-
-	GetDataAutomationStatusResponse_status = GetDataAutomationStatusResponse.AddMember("status", AutomationJobStatus)
-
-	GetDataAutomationStatusResponse_errorType = GetDataAutomationStatusResponse.AddMember("errorType", smithyprelude.String)
-
-	GetDataAutomationStatusResponse_errorMessage = GetDataAutomationStatusResponse.AddMember("errorMessage", smithyprelude.String)
-
-	GetDataAutomationStatusResponse_outputConfiguration = GetDataAutomationStatusResponse.AddMember("outputConfiguration", OutputConfiguration)
-
-	GetDataAutomationStatusResponse_jobSubmissionTime = GetDataAutomationStatusResponse.AddMember("jobSubmissionTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetDataAutomationStatusResponse_jobCompletionTime = GetDataAutomationStatusResponse.AddMember("jobCompletionTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetDataAutomationStatusResponse_jobDurationInSeconds = GetDataAutomationStatusResponse.AddMember("jobDurationInSeconds", smithyprelude.Integer)
-
-	InvokeDataAutomationAsyncRequest_clientToken = InvokeDataAutomationAsyncRequest.AddMember("clientToken", _IdempotencyToken)
-
-	InvokeDataAutomationAsyncRequest_inputConfiguration = InvokeDataAutomationAsyncRequest.AddMember("inputConfiguration", InputConfiguration)
-
-	InvokeDataAutomationAsyncRequest_outputConfiguration = InvokeDataAutomationAsyncRequest.AddMember("outputConfiguration", OutputConfiguration)
-
-	InvokeDataAutomationAsyncRequest_dataAutomationConfiguration = InvokeDataAutomationAsyncRequest.AddMember("dataAutomationConfiguration", DataAutomationConfiguration)
-
-	InvokeDataAutomationAsyncRequest_encryptionConfiguration = InvokeDataAutomationAsyncRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	InvokeDataAutomationAsyncRequest_notificationConfiguration = InvokeDataAutomationAsyncRequest.AddMember("notificationConfiguration", NotificationConfiguration)
-
-	InvokeDataAutomationAsyncRequest_blueprints = InvokeDataAutomationAsyncRequest.AddMember("blueprints", _BlueprintList)
-
-	InvokeDataAutomationAsyncRequest_dataAutomationProfileArn = InvokeDataAutomationAsyncRequest.AddMember("dataAutomationProfileArn", _DataAutomationProfileArn)
-
-	InvokeDataAutomationAsyncRequest_tags = InvokeDataAutomationAsyncRequest.AddMember("tags", _TagList)
-
-	InvokeDataAutomationAsyncResponse_invocationArn = InvokeDataAutomationAsyncResponse.AddMember("invocationArn", _InvocationArn)
-
-	InvokeDataAutomationRequest_inputConfiguration = InvokeDataAutomationRequest.AddMember("inputConfiguration", SyncInputConfiguration)
-
-	InvokeDataAutomationRequest_dataAutomationConfiguration = InvokeDataAutomationRequest.AddMember("dataAutomationConfiguration", DataAutomationConfiguration)
-
-	InvokeDataAutomationRequest_blueprints = InvokeDataAutomationRequest.AddMember("blueprints", _BlueprintList)
-
-	InvokeDataAutomationRequest_dataAutomationProfileArn = InvokeDataAutomationRequest.AddMember("dataAutomationProfileArn", _DataAutomationProfileArn)
-
-	InvokeDataAutomationRequest_encryptionConfiguration = InvokeDataAutomationRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
-
-	InvokeDataAutomationRequest_outputConfiguration = InvokeDataAutomationRequest.AddMember("outputConfiguration", OutputConfiguration)
-
-	InvokeDataAutomationResponse_outputConfiguration = InvokeDataAutomationResponse.AddMember("outputConfiguration", OutputConfiguration)
-
-	InvokeDataAutomationResponse_semanticModality = InvokeDataAutomationResponse.AddMember("semanticModality", SemanticModality)
-
-	InvokeDataAutomationResponse_outputSegments = InvokeDataAutomationResponse.AddMember("outputSegments", _OutputSegmentList)
-
-	ListTagsForResourceRequest_resourceARN = ListTagsForResourceRequest.AddMember("resourceARN", _TaggableResourceArn)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	TagResourceRequest_resourceARN = TagResourceRequest.AddMember("resourceARN", _TaggableResourceArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceARN = UntagResourceRequest.AddMember("resourceARN", _TaggableResourceArn)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
+const blob = "" +
+	"AmazonBedrockKeystoneRuntimeServiceInvokeDataAutomationAsyncResponseVideoAssetProcessingConfiguratio" +
+	"nInvokeDataAutomationAsyncRequestGetDataAutomationStatusResponseGetDataAutomationStatusRequestServic" +
+	"eQuotaExceededExceptionInvokeDataAutomationResponseassetProcessingConfigurationDataAutomationConfigu" +
+	"rationInvokeDataAutomationRequestListTagsForResourceResponseServiceUnavailableExceptiondataAutomatio" +
+	"nConfigurationListTagsForResourceRequestNotificationConfigurationResourceNotFoundExceptionVideoSegme" +
+	"ntConfigurationnotificationConfigurationDataAutomationProfileArnEventBridgeConfigurationdataAutomati" +
+	"onProfileArndataAutomationProjectArneventBridgeConfigurationEncryptionConfigurationInternalServerExc" +
+	"eptionencryptionConfigurationEncryptionContextValueSyncInputConfigurationAccessDeniedExceptionUntagR" +
+	"esourceResponseEncryptionContextKeyEncryptionContextMapUntagResourceRequestjobDurationInSecondskmsEn" +
+	"cryptionContextsegmentConfigurationAutomationJobStatusDataAutomationStageOutputConfigurationTagResou" +
+	"rceResponseTaggableResourceArnThrottlingExceptionValidationExceptionoutputConfigurationCustomOutputS" +
+	"tatusTagResourceRequestcustomOutputStatuseventBridgeEnabledinputConfigurationDataAutomationArnOutput" +
+	"SegmentListjobCompletionTimejobSubmissionTimeBlueprintVersionIdempotencyTokenSemanticModalityTimesta" +
+	"mpSegmentsemanticModalitytimestampSegmentstartTimeMillisBlueprintStageNonBlankStringoutputSegmentsst" +
+	"andardOutputBlueprintListInvocationArnSERVICE_ERRORendTimeMillisinvocationArnBlueprintArnCLIENT_ERRO" +
+	"RblueprintArnerrorMessageDEVELOPMENTIN_PROGRESSclientTokenresourceARNTagKeyListblueprintserrorTypeDO" +
+	"CUMENTKMSKeyIdNO_MATCHTagValuekmsKeyIdBooleanCREATEDIntegerSUCCESSTagListmessagetagKeysversionmember" +
+	"statusAUDIOIMAGES3UriVIDEObytess3UristagevaluevideoBlobLIVELongUnittagskey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.bedrockdataautomationruntime", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 133, Target: 0, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 35, Target: 1, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 35, Target: 2, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 333, Target: 3, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 992, Target: 4, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 794, Target: 5, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 6, Traits: 0, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 773, Target: 7, Traits: 1, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1673, Target: 57, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 73, Target: 9, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1746, Target: 100, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 935, Target: 11, Traits: 0, StrLen: 19, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1645, Target: 149, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1536, Target: 149, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1659, Target: 149, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1438, Target: 149, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1489, Target: 149, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1245, Target: 17, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1501, Target: 21, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1687, Target: 27, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1736, Target: 24, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1477, Target: 21, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1412, Target: 22, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1694, Target: 17, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1356, Target: 24, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1525, Target: 149, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1755, Target: 149, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1245, Target: 27, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1087, Target: 28, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1617, Target: 149, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1614, Target: 149, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1177, Target: 31, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 279, Target: 32, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 612, Target: 31, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1736, Target: 36, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 540, Target: 35, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 954, Target: 36, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1755, Target: 149, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1525, Target: 149, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 660, Target: 39, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1630, Target: 56, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 895, Target: 43, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 815, Target: 42, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 835, Target: 43, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 1771, Target: 42, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1741, Target: 46, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 729, Target: 46, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 564, Target: 47, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1141, Target: 150, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1261, Target: 49, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 755, Target: 50, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1731, Target: 70, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 251, Target: 9, Traits: 0, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 683, Target: 53, Traits: 2, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1673, Target: 57, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1425, Target: 55, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1606, Target: 56, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1370, Target: 57, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 440, Target: 58, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 636, Target: 47, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 973, Target: 60, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1731, Target: 70, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1194, Target: 62, Traits: 0, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1123, Target: 28, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1123, Target: 151, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1398, Target: 151, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1194, Target: 66, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1694, Target: 62, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 465, Target: 68, Traits: 3, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1673, Target: 57, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1716, Target: 70, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1277, Target: 71, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1598, Target: 149, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1711, Target: 149, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1706, Target: 149, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1721, Target: 149, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 194, Target: 76, Traits: 4, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1673, Target: 57, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 360, Target: 78, Traits: 5, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1673, Target: 57, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 751, Target: 80, Traits: 0, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1726, Target: 152, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1731, Target: 70, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 337, Target: 83, Traits: 0, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1771, Target: 87, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1741, Target: 92, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1011, Target: 86, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1569, Target: 87, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1569, Target: 88, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1694, Target: 87, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1666, Target: 90, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1694, Target: 83, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1622, Target: 92, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1030, Target: 93, Traits: 6, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1673, Target: 57, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1293, Target: 95, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1341, Target: 153, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1451, Target: 153, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1049, Target: 98, Traits: 7, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1673, Target: 57, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 68, Target: 100, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 915, Target: 102, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 490, Target: 102, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1325, Target: 95, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 164, Target: 104, Traits: 0, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1464, Target: 55, Traits: 8, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 133, Target: 106, Traits: 0, StrLen: 31, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1700, Target: 11, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1589, Target: 151, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1513, Target: 151, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1068, Target: 60, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1228, Target: 154, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1211, Target: 154, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 875, Target: 155, Traits: 0, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 101, Target: 114, Traits: 0, StrLen: 32, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1547, Target: 49, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1159, Target: 50, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1068, Target: 60, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 387, Target: 32, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 706, Target: 39, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 515, Target: 58, Traits: 0, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1579, Target: 22, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 588, Target: 35, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1767, Target: 90, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 35, Target: 124, Traits: 0, StrLen: 33, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1464, Target: 55, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 306, Target: 126, Traits: 0, StrLen: 27, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1159, Target: 80, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 387, Target: 32, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1579, Target: 22, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 588, Target: 35, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 706, Target: 39, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1068, Target: 60, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 223, Target: 133, Traits: 0, StrLen: 28, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1068, Target: 60, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1309, Target: 71, Traits: 0, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1384, Target: 66, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 414, Target: 137, Traits: 0, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1558, Target: 86, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 333, Target: 139, Traits: 0, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1767, Target: 90, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1105, Target: 141, Traits: 0, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1558, Target: 86, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1767, Target: 90, Traits: 0, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 992, Target: 144, Traits: 0, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 855, Target: 145, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1558, Target: 86, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1680, Target: 88, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 794, Target: 148, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1763, Target: 149, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 1638, Target: 150, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 1378, Target: 151, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 1751, Target: 152, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 2},
+		{StrOff: 1759, Target: 153, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 2},
+		{StrOff: 1293, Target: 154, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 1652, Target: 155, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+	},
 }
+
+var handles = [156]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+}
+
+var GetDataAutomationStatus = &handles[0]
+
+var InvokeDataAutomation = &handles[1]
+
+var InvokeDataAutomationAsync = &handles[2]
+
+var ListTagsForResource = &handles[3]
+
+var TagResource = &handles[4]
+
+var UntagResource = &handles[5]
+
+var _AmazonBedrockKeystoneRuntimeService = &handles[6]
+
+var AccessDeniedException = &handles[7]
+var AccessDeniedException_message = &handles[8]
+
+var AssetProcessingConfiguration = &handles[9]
+var AssetProcessingConfiguration_video = &handles[10]
+
+var AutomationJobStatus = &handles[11]
+var AutomationJobStatus_CREATED = &handles[12]
+var AutomationJobStatus_IN_PROGRESS = &handles[13]
+var AutomationJobStatus_SUCCESS = &handles[14]
+var AutomationJobStatus_SERVICE_ERROR = &handles[15]
+var AutomationJobStatus_CLIENT_ERROR = &handles[16]
+
+var Blueprint = &handles[17]
+var Blueprint_blueprintArn = &handles[18]
+var Blueprint_version = &handles[19]
+var Blueprint_stage = &handles[20]
+
+var _BlueprintArn = &handles[21]
+
+var _BlueprintList = &handles[22]
+var _BlueprintList_member = &handles[23]
+
+var BlueprintStage = &handles[24]
+var BlueprintStage_DEVELOPMENT = &handles[25]
+var BlueprintStage_LIVE = &handles[26]
+
+var _BlueprintVersion = &handles[27]
+
+var CustomOutputStatus = &handles[28]
+var CustomOutputStatus_MATCH = &handles[29]
+var CustomOutputStatus_NO_MATCH = &handles[30]
+
+var _DataAutomationArn = &handles[31]
+
+var DataAutomationConfiguration = &handles[32]
+var DataAutomationConfiguration_dataAutomationProjectArn = &handles[33]
+var DataAutomationConfiguration_stage = &handles[34]
+
+var _DataAutomationProfileArn = &handles[35]
+
+var DataAutomationStage = &handles[36]
+var DataAutomationStage_LIVE = &handles[37]
+var DataAutomationStage_DEVELOPMENT = &handles[38]
+
+var EncryptionConfiguration = &handles[39]
+var EncryptionConfiguration_kmsKeyId = &handles[40]
+var EncryptionConfiguration_kmsEncryptionContext = &handles[41]
+
+var _EncryptionContextKey = &handles[42]
+
+var _EncryptionContextMap = &handles[43]
+var _EncryptionContextMap_key = &handles[44]
+var _EncryptionContextMap_value = &handles[45]
+
+var _EncryptionContextValue = &handles[46]
+
+var EventBridgeConfiguration = &handles[47]
+var EventBridgeConfiguration_eventBridgeEnabled = &handles[48]
+
+var _IdempotencyToken = &handles[49]
+
+var InputConfiguration = &handles[50]
+var InputConfiguration_s3Uri = &handles[51]
+var InputConfiguration_assetProcessingConfiguration = &handles[52]
+
+var InternalServerException = &handles[53]
+var InternalServerException_message = &handles[54]
+
+var _InvocationArn = &handles[55]
+
+var _KMSKeyId = &handles[56]
+
+var _NonBlankString = &handles[57]
+
+var NotificationConfiguration = &handles[58]
+var NotificationConfiguration_eventBridgeConfiguration = &handles[59]
+
+var OutputConfiguration = &handles[60]
+var OutputConfiguration_s3Uri = &handles[61]
+
+var OutputSegment = &handles[62]
+var OutputSegment_customOutputStatus = &handles[63]
+var OutputSegment_customOutput = &handles[64]
+var OutputSegment_standardOutput = &handles[65]
+
+var _OutputSegmentList = &handles[66]
+var _OutputSegmentList_member = &handles[67]
+
+var ResourceNotFoundException = &handles[68]
+var ResourceNotFoundException_message = &handles[69]
+
+var _S3Uri = &handles[70]
+
+var SemanticModality = &handles[71]
+var SemanticModality_DOCUMENT = &handles[72]
+var SemanticModality_IMAGE = &handles[73]
+var SemanticModality_AUDIO = &handles[74]
+var SemanticModality_VIDEO = &handles[75]
+
+var ServiceQuotaExceededException = &handles[76]
+var ServiceQuotaExceededException_message = &handles[77]
+
+var ServiceUnavailableException = &handles[78]
+var ServiceUnavailableException_message = &handles[79]
+
+var SyncInputConfiguration = &handles[80]
+var SyncInputConfiguration_bytes = &handles[81]
+var SyncInputConfiguration_s3Uri = &handles[82]
+
+var Tag = &handles[83]
+var Tag_key = &handles[84]
+var Tag_value = &handles[85]
+
+var _TaggableResourceArn = &handles[86]
+
+var _TagKey = &handles[87]
+
+var _TagKeyList = &handles[88]
+var _TagKeyList_member = &handles[89]
+
+var _TagList = &handles[90]
+var _TagList_member = &handles[91]
+
+var _TagValue = &handles[92]
+
+var ThrottlingException = &handles[93]
+var ThrottlingException_message = &handles[94]
+
+var TimestampSegment = &handles[95]
+var TimestampSegment_startTimeMillis = &handles[96]
+var TimestampSegment_endTimeMillis = &handles[97]
+
+var ValidationException = &handles[98]
+var ValidationException_message = &handles[99]
+
+var VideoAssetProcessingConfiguration = &handles[100]
+var VideoAssetProcessingConfiguration_segmentConfiguration = &handles[101]
+
+var VideoSegmentConfiguration = &handles[102]
+var VideoSegmentConfiguration_timestampSegment = &handles[103]
+
+var GetDataAutomationStatusRequest = &handles[104]
+var GetDataAutomationStatusRequest_invocationArn = &handles[105]
+
+var GetDataAutomationStatusResponse = &handles[106]
+var GetDataAutomationStatusResponse_status = &handles[107]
+var GetDataAutomationStatusResponse_errorType = &handles[108]
+var GetDataAutomationStatusResponse_errorMessage = &handles[109]
+var GetDataAutomationStatusResponse_outputConfiguration = &handles[110]
+var GetDataAutomationStatusResponse_jobSubmissionTime = &handles[111]
+var GetDataAutomationStatusResponse_jobCompletionTime = &handles[112]
+var GetDataAutomationStatusResponse_jobDurationInSeconds = &handles[113]
+
+var InvokeDataAutomationAsyncRequest = &handles[114]
+var InvokeDataAutomationAsyncRequest_clientToken = &handles[115]
+var InvokeDataAutomationAsyncRequest_inputConfiguration = &handles[116]
+var InvokeDataAutomationAsyncRequest_outputConfiguration = &handles[117]
+var InvokeDataAutomationAsyncRequest_dataAutomationConfiguration = &handles[118]
+var InvokeDataAutomationAsyncRequest_encryptionConfiguration = &handles[119]
+var InvokeDataAutomationAsyncRequest_notificationConfiguration = &handles[120]
+var InvokeDataAutomationAsyncRequest_blueprints = &handles[121]
+var InvokeDataAutomationAsyncRequest_dataAutomationProfileArn = &handles[122]
+var InvokeDataAutomationAsyncRequest_tags = &handles[123]
+
+var InvokeDataAutomationAsyncResponse = &handles[124]
+var InvokeDataAutomationAsyncResponse_invocationArn = &handles[125]
+
+var InvokeDataAutomationRequest = &handles[126]
+var InvokeDataAutomationRequest_inputConfiguration = &handles[127]
+var InvokeDataAutomationRequest_dataAutomationConfiguration = &handles[128]
+var InvokeDataAutomationRequest_blueprints = &handles[129]
+var InvokeDataAutomationRequest_dataAutomationProfileArn = &handles[130]
+var InvokeDataAutomationRequest_encryptionConfiguration = &handles[131]
+var InvokeDataAutomationRequest_outputConfiguration = &handles[132]
+
+var InvokeDataAutomationResponse = &handles[133]
+var InvokeDataAutomationResponse_outputConfiguration = &handles[134]
+var InvokeDataAutomationResponse_semanticModality = &handles[135]
+var InvokeDataAutomationResponse_outputSegments = &handles[136]
+
+var ListTagsForResourceRequest = &handles[137]
+var ListTagsForResourceRequest_resourceARN = &handles[138]
+
+var ListTagsForResourceResponse = &handles[139]
+var ListTagsForResourceResponse_tags = &handles[140]
+
+var TagResourceRequest = &handles[141]
+var TagResourceRequest_resourceARN = &handles[142]
+var TagResourceRequest_tags = &handles[143]
+
+var TagResourceResponse = &handles[144]
+
+var UntagResourceRequest = &handles[145]
+var UntagResourceRequest_resourceARN = &handles[146]
+var UntagResourceRequest_tagKeys = &handles[147]
+
+var UntagResourceResponse = &handles[148]
+
+var AmazonBedrockKeystoneRuntimeService = &smithy.ServiceSchema{Schema: &handles[6], Version: "2024-06-13"}

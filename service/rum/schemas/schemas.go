@@ -4,1514 +4,1316 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchCreateRumMetricDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/rummetrics/{AppMonitorName}/metrics",
-	Code: 200})
-
-var BatchDeleteRumMetricDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/rummetrics/{AppMonitorName}/metrics",
-	Code: 200})
-
-var BatchGetRumMetricDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchGetRumMetricDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/rummetrics/{AppMonitorName}/metrics",
-	Code: 200})
-
-var CreateAppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CreateAppMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/appmonitor",
-	Code: 200})
-
-var DeleteAppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteAppMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/appmonitor/{Name}",
-	Code: 200})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/appmonitor/{Name}/policy",
-	Code: 200})
-
-var DeleteRumMetricsDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteRumMetricsDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
-	Code: 200})
-
-var GetAppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/appmonitor/{Name}",
-	Code: 200})
-
-var GetAppMonitorData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/appmonitor/{Name}/data",
-	Code: 200})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/appmonitor/{Name}/policy",
-	Code: 200})
-
-var ListAppMonitors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListAppMonitors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/appmonitors",
-	Code: 200})
-
-var ListRumMetricsDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListRumMetricsDestinations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/appmonitor/{Name}/policy",
-	Code: 200})
-
-var PutRumEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/appmonitors/{Id}/",
-	Code: 200})
-
-var PutRumMetricsDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumMetricsDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateAppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateAppMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/appmonitor/{Name}",
-	Code: 200})
-
-var UpdateRumMetricDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateRumMetricDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/rummetrics/{AppMonitorName}/metrics",
-	Code: 200})
-
-var _RUM = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "RUM",
-}, smithy.ShapeTypeService, 0)
-
-var RUM = smithy.NewServiceSchema(_RUM, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Alias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Alias",
-}, smithy.ShapeTypeString, 0)
-
-var AppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitor",
-}, smithy.ShapeTypeStructure, 13)
-var AppMonitor_Name *smithy.Schema
-
-var AppMonitor_Domain *smithy.Schema
-
-var AppMonitor_DomainList *smithy.Schema
-
-var AppMonitor_Id *smithy.Schema
-
-var AppMonitor_Created *smithy.Schema
-
-var AppMonitor_LastModified *smithy.Schema
-
-var AppMonitor_Tags *smithy.Schema
-
-var AppMonitor_State *smithy.Schema
-
-var AppMonitor_AppMonitorConfiguration *smithy.Schema
-
-var AppMonitor_DataStorage *smithy.Schema
-
-var AppMonitor_CustomEvents *smithy.Schema
-
-var AppMonitor_DeobfuscationConfiguration *smithy.Schema
-
-var AppMonitor_Platform *smithy.Schema
-
-var AppMonitorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var AppMonitorConfiguration_IdentityPoolId *smithy.Schema
-
-var AppMonitorConfiguration_ExcludedPages *smithy.Schema
-
-var AppMonitorConfiguration_IncludedPages *smithy.Schema
-
-var AppMonitorConfiguration_FavoritePages *smithy.Schema
-
-var AppMonitorConfiguration_SessionSampleRate *smithy.Schema
-
-var AppMonitorConfiguration_GuestRoleArn *smithy.Schema
-
-var AppMonitorConfiguration_AllowCookies *smithy.Schema
-
-var AppMonitorConfiguration_Telemetries *smithy.Schema
-
-var AppMonitorConfiguration_EnableXRay *smithy.Schema
-
-var AppMonitorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorDetails",
-}, smithy.ShapeTypeStructure, 3)
-var AppMonitorDetails_name *smithy.Schema
-
-var AppMonitorDetails_id *smithy.Schema
-
-var AppMonitorDetails_version *smithy.Schema
-
-var _AppMonitorDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorDomain",
-}, smithy.ShapeTypeString, 0)
-
-var _AppMonitorDomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorDomainList",
-}, smithy.ShapeTypeList, 1)
-var _AppMonitorDomainList_member *smithy.Schema
-
-var _AppMonitorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorId",
-}, smithy.ShapeTypeString, 0)
-
-var _AppMonitorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorName",
-}, smithy.ShapeTypeString, 0)
-
-var _AppMonitorPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorPlatform",
-}, smithy.ShapeTypeString, 0)
-
-var AppMonitorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorSummary",
-}, smithy.ShapeTypeStructure, 6)
-var AppMonitorSummary_Name *smithy.Schema
-
-var AppMonitorSummary_Id *smithy.Schema
-
-var AppMonitorSummary_Created *smithy.Schema
-
-var AppMonitorSummary_LastModified *smithy.Schema
-
-var AppMonitorSummary_State *smithy.Schema
-
-var AppMonitorSummary_Platform *smithy.Schema
-
-var _AppMonitorSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AppMonitorSummaryList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var BatchCreateRumMetricDefinitionsError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitionsError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateRumMetricDefinitionsError_MetricDefinition *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsError_ErrorCode *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsError_ErrorMessage *smithy.Schema
-
-var _BatchCreateRumMetricDefinitionsErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitionsErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchCreateRumMetricDefinitionsErrors_member *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitionsError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteRumMetricDefinitionsError_MetricDefinitionId *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsError_ErrorCode *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsError_ErrorMessage *smithy.Schema
-
-var _BatchDeleteRumMetricDefinitionsErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitionsErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteRumMetricDefinitionsErrors_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceName *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CustomEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CustomEvents",
-}, smithy.ShapeTypeStructure, 1)
-var CustomEvents_Status *smithy.Schema
-
-var _CustomEventsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CustomEventsStatus",
-}, smithy.ShapeTypeString, 0)
-
-var CwLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CwLog",
-}, smithy.ShapeTypeStructure, 2)
-var CwLog_CwLogEnabled *smithy.Schema
-
-var CwLog_CwLogGroup *smithy.Schema
-
-var DataStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DataStorage",
-}, smithy.ShapeTypeStructure, 1)
-var DataStorage_CwLog *smithy.Schema
-
-var DeobfuscationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeobfuscationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DeobfuscationConfiguration_JavaScriptSourceMaps *smithy.Schema
-
-var _DeobfuscationS3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeobfuscationS3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _DeobfuscationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeobfuscationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DestinationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DimensionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DimensionKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DimensionKeysMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DimensionKeysMap",
-}, smithy.ShapeTypeMap, 2)
-var _DimensionKeysMap_key *smithy.Schema
-
-var _DimensionKeysMap_value *smithy.Schema
-
-var _DimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _EventData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "EventData",
-}, smithy.ShapeTypeString, 0)
-
-var _EventDataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "EventDataList",
-}, smithy.ShapeTypeList, 1)
-var _EventDataList_member *smithy.Schema
-
-var _EventPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "EventPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _FavoritePages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "FavoritePages",
-}, smithy.ShapeTypeList, 1)
-var _FavoritePages_member *smithy.Schema
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityPoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "IdentityPoolId",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var InvalidPolicyRevisionIdException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "InvalidPolicyRevisionIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidPolicyRevisionIdException_message *smithy.Schema
-
-var _ISOTimestampString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ISOTimestampString",
-}, smithy.ShapeTypeString, 0)
-
-var JavaScriptSourceMaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "JavaScriptSourceMaps",
-}, smithy.ShapeTypeStructure, 2)
-var JavaScriptSourceMaps_Status *smithy.Schema
-
-var JavaScriptSourceMaps_S3Uri *smithy.Schema
-
-var _JsonValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "JsonValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var MalformedPolicyDocumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MalformedPolicyDocumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MalformedPolicyDocumentException_message *smithy.Schema
-
-var _MaxQueryResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MaxQueryResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MaxResultsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetricDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinition",
-}, smithy.ShapeTypeStructure, 7)
-var MetricDefinition_MetricDefinitionId *smithy.Schema
-
-var MetricDefinition_Name *smithy.Schema
-
-var MetricDefinition_ValueKey *smithy.Schema
-
-var MetricDefinition_UnitLabel *smithy.Schema
-
-var MetricDefinition_DimensionKeys *smithy.Schema
-
-var MetricDefinition_EventPattern *smithy.Schema
-
-var MetricDefinition_Namespace *smithy.Schema
-
-var _MetricDefinitionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitionId",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricDefinitionIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitionIds",
-}, smithy.ShapeTypeList, 1)
-var _MetricDefinitionIds_member *smithy.Schema
-
-var MetricDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var MetricDefinitionRequest_Name *smithy.Schema
-
-var MetricDefinitionRequest_ValueKey *smithy.Schema
-
-var MetricDefinitionRequest_UnitLabel *smithy.Schema
-
-var MetricDefinitionRequest_DimensionKeys *smithy.Schema
-
-var MetricDefinitionRequest_EventPattern *smithy.Schema
-
-var MetricDefinitionRequest_Namespace *smithy.Schema
-
-var _MetricDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _MetricDefinitions_member *smithy.Schema
-
-var _MetricDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitionsRequest",
-}, smithy.ShapeTypeList, 1)
-var _MetricDefinitionsRequest_member *smithy.Schema
-
-var _MetricDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDestination",
-}, smithy.ShapeTypeString, 0)
-
-var MetricDestinationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDestinationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var MetricDestinationSummary_Destination *smithy.Schema
-
-var MetricDestinationSummary_DestinationArn *smithy.Schema
-
-var MetricDestinationSummary_IamRoleArn *smithy.Schema
-
-var _MetricDestinationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDestinationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MetricDestinationSummaryList_member *smithy.Schema
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _Namespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Namespace",
-}, smithy.ShapeTypeString, 0)
-
-var _Pages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Pages",
-}, smithy.ShapeTypeList, 1)
-var _Pages_member *smithy.Schema
-
-var PolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var PolicyNotFoundException_message *smithy.Schema
-
-var _PolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PolicyRevisionId",
-}, smithy.ShapeTypeString, 0)
-
-var PolicySizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PolicySizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var PolicySizeLimitExceededException_message *smithy.Schema
-
-var QueryFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilter",
-}, smithy.ShapeTypeStructure, 2)
-var QueryFilter_Name *smithy.Schema
-
-var QueryFilter_Values *smithy.Schema
-
-var _QueryFilterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilters",
-}, smithy.ShapeTypeList, 1)
-var _QueryFilters_member *smithy.Schema
-
-var _QueryFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _QueryFilterValueList_member *smithy.Schema
-
-var _QueryTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryTimestamp",
-}, smithy.ShapeTypeLong, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceName *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var RumEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "RumEvent",
-}, smithy.ShapeTypeStructure, 5)
-var RumEvent_id *smithy.Schema
-
-var RumEvent_timestamp *smithy.Schema
-
-var RumEvent_type *smithy.Schema
-
-var RumEvent_metadata *smithy.Schema
-
-var RumEvent_details *smithy.Schema
-
-var _RumEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "RumEventList",
-}, smithy.ShapeTypeList, 1)
-var _RumEventList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _SessionSampleRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "SessionSampleRate",
-}, smithy.ShapeTypeDouble, 0)
-
-var _StateEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "StateEnum",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Telemetries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Telemetries",
-}, smithy.ShapeTypeList, 1)
-var _Telemetries_member *smithy.Schema
-
-var _Telemetry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Telemetry",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TimeRange",
-}, smithy.ShapeTypeStructure, 2)
-var TimeRange_After *smithy.Schema
-
-var TimeRange_Before *smithy.Schema
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var _UnitLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UnitLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var UserDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UserDetails",
-}, smithy.ShapeTypeStructure, 2)
-var UserDetails_userId *smithy.Schema
-
-var UserDetails_sessionId *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _ValueKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ValueKey",
-}, smithy.ShapeTypeString, 0)
-
-var BatchCreateRumMetricDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var BatchCreateRumMetricDefinitionsRequest_AppMonitorName *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsRequest_Destination *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsRequest_DestinationArn *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsRequest_MetricDefinitions *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchCreateRumMetricDefinitionsResponse_Errors *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsResponse_MetricDefinitions *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var BatchDeleteRumMetricDefinitionsRequest_AppMonitorName *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsRequest_Destination *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsRequest_DestinationArn *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDeleteRumMetricDefinitionsResponse_Errors *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchGetRumMetricDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var BatchGetRumMetricDefinitionsRequest_AppMonitorName *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest_Destination *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest_DestinationArn *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest_MaxResults *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest_NextToken *smithy.Schema
-
-var BatchGetRumMetricDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchGetRumMetricDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetRumMetricDefinitionsResponse_MetricDefinitions *smithy.Schema
-
-var BatchGetRumMetricDefinitionsResponse_NextToken *smithy.Schema
-
-var CreateAppMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CreateAppMonitorRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateAppMonitorRequest_Name *smithy.Schema
-
-var CreateAppMonitorRequest_Domain *smithy.Schema
-
-var CreateAppMonitorRequest_DomainList *smithy.Schema
-
-var CreateAppMonitorRequest_Tags *smithy.Schema
-
-var CreateAppMonitorRequest_AppMonitorConfiguration *smithy.Schema
-
-var CreateAppMonitorRequest_CwLogEnabled *smithy.Schema
-
-var CreateAppMonitorRequest_CustomEvents *smithy.Schema
-
-var CreateAppMonitorRequest_DeobfuscationConfiguration *smithy.Schema
-
-var CreateAppMonitorRequest_Platform *smithy.Schema
-
-var CreateAppMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CreateAppMonitorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAppMonitorResponse_Id *smithy.Schema
-
-var DeleteAppMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteAppMonitorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAppMonitorRequest_Name *smithy.Schema
-
-var DeleteAppMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteAppMonitorResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourcePolicyRequest_Name *smithy.Schema
-
-var DeleteResourcePolicyRequest_PolicyRevisionId *smithy.Schema
-
-var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyResponse_PolicyRevisionId *smithy.Schema
-
-var DeleteRumMetricsDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteRumMetricsDestinationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRumMetricsDestinationRequest_AppMonitorName *smithy.Schema
-
-var DeleteRumMetricsDestinationRequest_Destination *smithy.Schema
-
-var DeleteRumMetricsDestinationRequest_DestinationArn *smithy.Schema
-
-var DeleteRumMetricsDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteRumMetricsDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAppMonitorDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorDataRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetAppMonitorDataRequest_Name *smithy.Schema
-
-var GetAppMonitorDataRequest_TimeRange *smithy.Schema
-
-var GetAppMonitorDataRequest_Filters *smithy.Schema
-
-var GetAppMonitorDataRequest_MaxResults *smithy.Schema
-
-var GetAppMonitorDataRequest_NextToken *smithy.Schema
-
-var GetAppMonitorDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAppMonitorDataResponse_Events *smithy.Schema
-
-var GetAppMonitorDataResponse_NextToken *smithy.Schema
-
-var GetAppMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppMonitorRequest_Name *smithy.Schema
-
-var GetAppMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppMonitorResponse_AppMonitor *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_Name *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyResponse_PolicyDocument *smithy.Schema
-
-var GetResourcePolicyResponse_PolicyRevisionId *smithy.Schema
-
-var ListAppMonitorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListAppMonitorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppMonitorsRequest_MaxResults *smithy.Schema
-
-var ListAppMonitorsRequest_NextToken *smithy.Schema
-
-var ListAppMonitorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListAppMonitorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppMonitorsResponse_NextToken *smithy.Schema
-
-var ListAppMonitorsResponse_AppMonitorSummaries *smithy.Schema
-
-var ListRumMetricsDestinationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListRumMetricsDestinationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRumMetricsDestinationsRequest_AppMonitorName *smithy.Schema
-
-var ListRumMetricsDestinationsRequest_MaxResults *smithy.Schema
-
-var ListRumMetricsDestinationsRequest_NextToken *smithy.Schema
-
-var ListRumMetricsDestinationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListRumMetricsDestinationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRumMetricsDestinationsResponse_Destinations *smithy.Schema
-
-var ListRumMetricsDestinationsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyRequest_Name *smithy.Schema
-
-var PutResourcePolicyRequest_PolicyDocument *smithy.Schema
-
-var PutResourcePolicyRequest_PolicyRevisionId *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyResponse_PolicyDocument *smithy.Schema
-
-var PutResourcePolicyResponse_PolicyRevisionId *smithy.Schema
-
-var PutRumEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumEventsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var PutRumEventsRequest_Id *smithy.Schema
-
-var PutRumEventsRequest_BatchId *smithy.Schema
-
-var PutRumEventsRequest_AppMonitorDetails *smithy.Schema
-
-var PutRumEventsRequest_UserDetails *smithy.Schema
-
-var PutRumEventsRequest_RumEvents *smithy.Schema
-
-var PutRumEventsRequest_Alias *smithy.Schema
-
-var PutRumEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumEventsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutRumMetricsDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumMetricsDestinationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutRumMetricsDestinationRequest_AppMonitorName *smithy.Schema
-
-var PutRumMetricsDestinationRequest_Destination *smithy.Schema
-
-var PutRumMetricsDestinationRequest_DestinationArn *smithy.Schema
-
-var PutRumMetricsDestinationRequest_IamRoleArn *smithy.Schema
-
-var PutRumMetricsDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumMetricsDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAppMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateAppMonitorRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateAppMonitorRequest_Name *smithy.Schema
-
-var UpdateAppMonitorRequest_Domain *smithy.Schema
-
-var UpdateAppMonitorRequest_DomainList *smithy.Schema
-
-var UpdateAppMonitorRequest_AppMonitorConfiguration *smithy.Schema
-
-var UpdateAppMonitorRequest_CwLogEnabled *smithy.Schema
-
-var UpdateAppMonitorRequest_CustomEvents *smithy.Schema
-
-var UpdateAppMonitorRequest_DeobfuscationConfiguration *smithy.Schema
-
-var UpdateAppMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateAppMonitorResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRumMetricDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateRumMetricDefinitionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRumMetricDefinitionRequest_AppMonitorName *smithy.Schema
-
-var UpdateRumMetricDefinitionRequest_Destination *smithy.Schema
-
-var UpdateRumMetricDefinitionRequest_DestinationArn *smithy.Schema
-
-var UpdateRumMetricDefinitionRequest_MetricDefinition *smithy.Schema
-
-var UpdateRumMetricDefinitionRequest_MetricDefinitionId *smithy.Schema
-
-var UpdateRumMetricDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateRumMetricDefinitionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_AppMonitorDomainList_member = _AppMonitorDomainList.AddMember("member", _AppMonitorDomain)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	_Pages_member = _Pages.AddMember("member", _Url)
-
-	_FavoritePages_member = _FavoritePages.AddMember("member", smithyprelude.String)
-
-	_Telemetries_member = _Telemetries.AddMember("member", _Telemetry)
-
-	AppMonitorConfiguration_IdentityPoolId = AppMonitorConfiguration.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	AppMonitorConfiguration_ExcludedPages = AppMonitorConfiguration.AddMember("ExcludedPages", _Pages)
-
-	AppMonitorConfiguration_IncludedPages = AppMonitorConfiguration.AddMember("IncludedPages", _Pages)
-
-	AppMonitorConfiguration_FavoritePages = AppMonitorConfiguration.AddMember("FavoritePages", _FavoritePages)
-
-	AppMonitorConfiguration_SessionSampleRate = AppMonitorConfiguration.AddMember("SessionSampleRate", _SessionSampleRate)
-
-	AppMonitorConfiguration_GuestRoleArn = AppMonitorConfiguration.AddMember("GuestRoleArn", _Arn)
-
-	AppMonitorConfiguration_AllowCookies = AppMonitorConfiguration.AddMember("AllowCookies", smithyprelude.Boolean)
-
-	AppMonitorConfiguration_Telemetries = AppMonitorConfiguration.AddMember("Telemetries", _Telemetries)
-
-	AppMonitorConfiguration_EnableXRay = AppMonitorConfiguration.AddMember("EnableXRay", smithyprelude.Boolean)
-
-	CwLog_CwLogEnabled = CwLog.AddMember("CwLogEnabled", smithyprelude.Boolean)
-
-	CwLog_CwLogGroup = CwLog.AddMember("CwLogGroup", smithyprelude.String)
-
-	DataStorage_CwLog = DataStorage.AddMember("CwLog", CwLog)
-
-	CustomEvents_Status = CustomEvents.AddMember("Status", _CustomEventsStatus)
-
-	JavaScriptSourceMaps_Status = JavaScriptSourceMaps.AddMember("Status", _DeobfuscationStatus)
-
-	JavaScriptSourceMaps_S3Uri = JavaScriptSourceMaps.AddMember("S3Uri", _DeobfuscationS3Uri)
-
-	DeobfuscationConfiguration_JavaScriptSourceMaps = DeobfuscationConfiguration.AddMember("JavaScriptSourceMaps", JavaScriptSourceMaps)
-
-	AppMonitor_Name = AppMonitor.AddMember("Name", _AppMonitorName)
-
-	AppMonitor_Domain = AppMonitor.AddMember("Domain", _AppMonitorDomain)
-
-	AppMonitor_DomainList = AppMonitor.AddMember("DomainList", _AppMonitorDomainList)
-
-	AppMonitor_Id = AppMonitor.AddMember("Id", _AppMonitorId)
-
-	AppMonitor_Created = AppMonitor.AddMember("Created", _ISOTimestampString)
-
-	AppMonitor_LastModified = AppMonitor.AddMember("LastModified", _ISOTimestampString)
-
-	AppMonitor_Tags = AppMonitor.AddMember("Tags", _TagMap)
-
-	AppMonitor_State = AppMonitor.AddMember("State", _StateEnum)
-
-	AppMonitor_AppMonitorConfiguration = AppMonitor.AddMember("AppMonitorConfiguration", AppMonitorConfiguration)
-
-	AppMonitor_DataStorage = AppMonitor.AddMember("DataStorage", DataStorage)
-
-	AppMonitor_CustomEvents = AppMonitor.AddMember("CustomEvents", CustomEvents)
-
-	AppMonitor_DeobfuscationConfiguration = AppMonitor.AddMember("DeobfuscationConfiguration", DeobfuscationConfiguration)
-
-	AppMonitor_Platform = AppMonitor.AddMember("Platform", _AppMonitorPlatform)
-
-	AppMonitorDetails_name = AppMonitorDetails.AddMember("name", smithyprelude.String)
-
-	AppMonitorDetails_id = AppMonitorDetails.AddMember("id", smithyprelude.String)
-
-	AppMonitorDetails_version = AppMonitorDetails.AddMember("version", smithyprelude.String)
-
-	AppMonitorSummary_Name = AppMonitorSummary.AddMember("Name", _AppMonitorName)
-
-	AppMonitorSummary_Id = AppMonitorSummary.AddMember("Id", _AppMonitorId)
-
-	AppMonitorSummary_Created = AppMonitorSummary.AddMember("Created", _ISOTimestampString)
-
-	AppMonitorSummary_LastModified = AppMonitorSummary.AddMember("LastModified", _ISOTimestampString)
-
-	AppMonitorSummary_State = AppMonitorSummary.AddMember("State", _StateEnum)
-
-	AppMonitorSummary_Platform = AppMonitorSummary.AddMember("Platform", _AppMonitorPlatform)
-
-	_AppMonitorSummaryList_member = _AppMonitorSummaryList.AddMember("member", AppMonitorSummary)
-
-	_DimensionKeysMap_key = _DimensionKeysMap.AddMember("key", _DimensionKey)
-
-	_DimensionKeysMap_value = _DimensionKeysMap.AddMember("value", _DimensionName)
-
-	MetricDefinitionRequest_Name = MetricDefinitionRequest.AddMember("Name", _MetricName)
-
-	MetricDefinitionRequest_ValueKey = MetricDefinitionRequest.AddMember("ValueKey", _ValueKey)
-
-	MetricDefinitionRequest_UnitLabel = MetricDefinitionRequest.AddMember("UnitLabel", _UnitLabel)
-
-	MetricDefinitionRequest_DimensionKeys = MetricDefinitionRequest.AddMember("DimensionKeys", _DimensionKeysMap)
-
-	MetricDefinitionRequest_EventPattern = MetricDefinitionRequest.AddMember("EventPattern", _EventPattern)
-
-	MetricDefinitionRequest_Namespace = MetricDefinitionRequest.AddMember("Namespace", _Namespace)
-
-	BatchCreateRumMetricDefinitionsError_MetricDefinition = BatchCreateRumMetricDefinitionsError.AddMember("MetricDefinition", MetricDefinitionRequest)
-
-	BatchCreateRumMetricDefinitionsError_ErrorCode = BatchCreateRumMetricDefinitionsError.AddMember("ErrorCode", smithyprelude.String)
-
-	BatchCreateRumMetricDefinitionsError_ErrorMessage = BatchCreateRumMetricDefinitionsError.AddMember("ErrorMessage", smithyprelude.String)
-
-	_BatchCreateRumMetricDefinitionsErrors_member = _BatchCreateRumMetricDefinitionsErrors.AddMember("member", BatchCreateRumMetricDefinitionsError)
-
-	BatchDeleteRumMetricDefinitionsError_MetricDefinitionId = BatchDeleteRumMetricDefinitionsError.AddMember("MetricDefinitionId", _MetricDefinitionId)
-
-	BatchDeleteRumMetricDefinitionsError_ErrorCode = BatchDeleteRumMetricDefinitionsError.AddMember("ErrorCode", smithyprelude.String)
-
-	BatchDeleteRumMetricDefinitionsError_ErrorMessage = BatchDeleteRumMetricDefinitionsError.AddMember("ErrorMessage", smithyprelude.String)
-
-	_BatchDeleteRumMetricDefinitionsErrors_member = _BatchDeleteRumMetricDefinitionsErrors.AddMember("member", BatchDeleteRumMetricDefinitionsError)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceName = ConflictException.AddMember("resourceName", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	_EventDataList_member = _EventDataList.AddMember("member", _EventData)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	InvalidPolicyRevisionIdException_message = InvalidPolicyRevisionIdException.AddMember("message", smithyprelude.String)
-
-	MalformedPolicyDocumentException_message = MalformedPolicyDocumentException.AddMember("message", smithyprelude.String)
-
-	MetricDefinition_MetricDefinitionId = MetricDefinition.AddMember("MetricDefinitionId", _MetricDefinitionId)
-
-	MetricDefinition_Name = MetricDefinition.AddMember("Name", _MetricName)
-
-	MetricDefinition_ValueKey = MetricDefinition.AddMember("ValueKey", _ValueKey)
-
-	MetricDefinition_UnitLabel = MetricDefinition.AddMember("UnitLabel", _UnitLabel)
-
-	MetricDefinition_DimensionKeys = MetricDefinition.AddMember("DimensionKeys", _DimensionKeysMap)
-
-	MetricDefinition_EventPattern = MetricDefinition.AddMember("EventPattern", _EventPattern)
-
-	MetricDefinition_Namespace = MetricDefinition.AddMember("Namespace", _Namespace)
-
-	_MetricDefinitionIds_member = _MetricDefinitionIds.AddMember("member", _MetricDefinitionId)
-
-	_MetricDefinitions_member = _MetricDefinitions.AddMember("member", MetricDefinition)
-
-	_MetricDefinitionsRequest_member = _MetricDefinitionsRequest.AddMember("member", MetricDefinitionRequest)
-
-	MetricDestinationSummary_Destination = MetricDestinationSummary.AddMember("Destination", _MetricDestination)
-
-	MetricDestinationSummary_DestinationArn = MetricDestinationSummary.AddMember("DestinationArn", _DestinationArn)
-
-	MetricDestinationSummary_IamRoleArn = MetricDestinationSummary.AddMember("IamRoleArn", _IamRoleArn)
-
-	_MetricDestinationSummaryList_member = _MetricDestinationSummaryList.AddMember("member", MetricDestinationSummary)
-
-	PolicyNotFoundException_message = PolicyNotFoundException.AddMember("message", smithyprelude.String)
-
-	PolicySizeLimitExceededException_message = PolicySizeLimitExceededException.AddMember("message", smithyprelude.String)
-
-	_QueryFilterValueList_member = _QueryFilterValueList.AddMember("member", _QueryFilterValue)
-
-	QueryFilter_Name = QueryFilter.AddMember("Name", _QueryFilterKey)
-
-	QueryFilter_Values = QueryFilter.AddMember("Values", _QueryFilterValueList)
-
-	_QueryFilters_member = _QueryFilters.AddMember("member", QueryFilter)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceName = ResourceNotFoundException.AddMember("resourceName", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	RumEvent_id = RumEvent.AddMember("id", smithyprelude.String)
-
-	RumEvent_timestamp = RumEvent.AddMember("timestamp", smithyprelude.Timestamp)
-
-	RumEvent_type = RumEvent.AddMember("type", smithyprelude.String)
-
-	RumEvent_metadata = RumEvent.AddMember("metadata", _JsonValue)
-
-	RumEvent_details = RumEvent.AddMember("details", _JsonValue)
-
-	_RumEventList_member = _RumEventList.AddMember("member", RumEvent)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	TimeRange_After = TimeRange.AddMember("After", _QueryTimestamp)
-
-	TimeRange_Before = TimeRange.AddMember("Before", _QueryTimestamp)
-
-	UserDetails_userId = UserDetails.AddMember("userId", smithyprelude.String)
-
-	UserDetails_sessionId = UserDetails.AddMember("sessionId", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	BatchCreateRumMetricDefinitionsRequest_AppMonitorName = BatchCreateRumMetricDefinitionsRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	BatchCreateRumMetricDefinitionsRequest_Destination = BatchCreateRumMetricDefinitionsRequest.AddMember("Destination", _MetricDestination)
-
-	BatchCreateRumMetricDefinitionsRequest_DestinationArn = BatchCreateRumMetricDefinitionsRequest.AddMember("DestinationArn", _DestinationArn)
-
-	BatchCreateRumMetricDefinitionsRequest_MetricDefinitions = BatchCreateRumMetricDefinitionsRequest.AddMember("MetricDefinitions", _MetricDefinitionsRequest)
-
-	BatchCreateRumMetricDefinitionsResponse_Errors = BatchCreateRumMetricDefinitionsResponse.AddMember("Errors", _BatchCreateRumMetricDefinitionsErrors)
-
-	BatchCreateRumMetricDefinitionsResponse_MetricDefinitions = BatchCreateRumMetricDefinitionsResponse.AddMember("MetricDefinitions", _MetricDefinitions)
-
-	BatchDeleteRumMetricDefinitionsRequest_AppMonitorName = BatchDeleteRumMetricDefinitionsRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	BatchDeleteRumMetricDefinitionsRequest_Destination = BatchDeleteRumMetricDefinitionsRequest.AddMember("Destination", _MetricDestination, &smithytraits.HTTPQuery{Name: "destination"})
-
-	BatchDeleteRumMetricDefinitionsRequest_DestinationArn = BatchDeleteRumMetricDefinitionsRequest.AddMember("DestinationArn", _DestinationArn, &smithytraits.HTTPQuery{Name: "destinationArn"})
-
-	BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds = BatchDeleteRumMetricDefinitionsRequest.AddMember("MetricDefinitionIds", _MetricDefinitionIds, &smithytraits.HTTPQuery{Name: "metricDefinitionIds"})
-
-	BatchDeleteRumMetricDefinitionsResponse_Errors = BatchDeleteRumMetricDefinitionsResponse.AddMember("Errors", _BatchDeleteRumMetricDefinitionsErrors)
-
-	BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds = BatchDeleteRumMetricDefinitionsResponse.AddMember("MetricDefinitionIds", _MetricDefinitionIds)
-
-	BatchGetRumMetricDefinitionsRequest_AppMonitorName = BatchGetRumMetricDefinitionsRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	BatchGetRumMetricDefinitionsRequest_Destination = BatchGetRumMetricDefinitionsRequest.AddMember("Destination", _MetricDestination, &smithytraits.HTTPQuery{Name: "destination"})
-
-	BatchGetRumMetricDefinitionsRequest_DestinationArn = BatchGetRumMetricDefinitionsRequest.AddMember("DestinationArn", _DestinationArn, &smithytraits.HTTPQuery{Name: "destinationArn"})
-
-	BatchGetRumMetricDefinitionsRequest_MaxResults = BatchGetRumMetricDefinitionsRequest.AddMember("MaxResults", _MaxResultsInteger, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	BatchGetRumMetricDefinitionsRequest_NextToken = BatchGetRumMetricDefinitionsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	BatchGetRumMetricDefinitionsResponse_MetricDefinitions = BatchGetRumMetricDefinitionsResponse.AddMember("MetricDefinitions", _MetricDefinitions)
-
-	BatchGetRumMetricDefinitionsResponse_NextToken = BatchGetRumMetricDefinitionsResponse.AddMember("NextToken", smithyprelude.String)
-
-	CreateAppMonitorRequest_Name = CreateAppMonitorRequest.AddMember("Name", _AppMonitorName)
-
-	CreateAppMonitorRequest_Domain = CreateAppMonitorRequest.AddMember("Domain", _AppMonitorDomain)
-
-	CreateAppMonitorRequest_DomainList = CreateAppMonitorRequest.AddMember("DomainList", _AppMonitorDomainList)
-
-	CreateAppMonitorRequest_Tags = CreateAppMonitorRequest.AddMember("Tags", _TagMap)
-
-	CreateAppMonitorRequest_AppMonitorConfiguration = CreateAppMonitorRequest.AddMember("AppMonitorConfiguration", AppMonitorConfiguration)
-
-	CreateAppMonitorRequest_CwLogEnabled = CreateAppMonitorRequest.AddMember("CwLogEnabled", smithyprelude.Boolean)
-
-	CreateAppMonitorRequest_CustomEvents = CreateAppMonitorRequest.AddMember("CustomEvents", CustomEvents)
-
-	CreateAppMonitorRequest_DeobfuscationConfiguration = CreateAppMonitorRequest.AddMember("DeobfuscationConfiguration", DeobfuscationConfiguration)
-
-	CreateAppMonitorRequest_Platform = CreateAppMonitorRequest.AddMember("Platform", _AppMonitorPlatform)
-
-	CreateAppMonitorResponse_Id = CreateAppMonitorResponse.AddMember("Id", _AppMonitorId)
-
-	DeleteAppMonitorRequest_Name = DeleteAppMonitorRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	DeleteResourcePolicyRequest_Name = DeleteResourcePolicyRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	DeleteResourcePolicyRequest_PolicyRevisionId = DeleteResourcePolicyRequest.AddMember("PolicyRevisionId", _PolicyRevisionId, &smithytraits.HTTPQuery{Name: "policyRevisionId"})
-
-	DeleteResourcePolicyResponse_PolicyRevisionId = DeleteResourcePolicyResponse.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	DeleteRumMetricsDestinationRequest_AppMonitorName = DeleteRumMetricsDestinationRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	DeleteRumMetricsDestinationRequest_Destination = DeleteRumMetricsDestinationRequest.AddMember("Destination", _MetricDestination, &smithytraits.HTTPQuery{Name: "destination"})
-
-	DeleteRumMetricsDestinationRequest_DestinationArn = DeleteRumMetricsDestinationRequest.AddMember("DestinationArn", _DestinationArn, &smithytraits.HTTPQuery{Name: "destinationArn"})
-
-	GetAppMonitorDataRequest_Name = GetAppMonitorDataRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	GetAppMonitorDataRequest_TimeRange = GetAppMonitorDataRequest.AddMember("TimeRange", TimeRange)
-
-	GetAppMonitorDataRequest_Filters = GetAppMonitorDataRequest.AddMember("Filters", _QueryFilters)
-
-	GetAppMonitorDataRequest_MaxResults = GetAppMonitorDataRequest.AddMember("MaxResults", _MaxQueryResults)
-
-	GetAppMonitorDataRequest_NextToken = GetAppMonitorDataRequest.AddMember("NextToken", _Token)
-
-	GetAppMonitorDataResponse_Events = GetAppMonitorDataResponse.AddMember("Events", _EventDataList)
-
-	GetAppMonitorDataResponse_NextToken = GetAppMonitorDataResponse.AddMember("NextToken", _Token)
-
-	GetAppMonitorRequest_Name = GetAppMonitorRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	GetAppMonitorResponse_AppMonitor = GetAppMonitorResponse.AddMember("AppMonitor", AppMonitor)
-
-	GetResourcePolicyRequest_Name = GetResourcePolicyRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	GetResourcePolicyResponse_PolicyDocument = GetResourcePolicyResponse.AddMember("PolicyDocument", smithyprelude.String)
-
-	GetResourcePolicyResponse_PolicyRevisionId = GetResourcePolicyResponse.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	ListAppMonitorsRequest_MaxResults = ListAppMonitorsRequest.AddMember("MaxResults", _MaxResultsInteger, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAppMonitorsRequest_NextToken = ListAppMonitorsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAppMonitorsResponse_NextToken = ListAppMonitorsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListAppMonitorsResponse_AppMonitorSummaries = ListAppMonitorsResponse.AddMember("AppMonitorSummaries", _AppMonitorSummaryList)
-
-	ListRumMetricsDestinationsRequest_AppMonitorName = ListRumMetricsDestinationsRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	ListRumMetricsDestinationsRequest_MaxResults = ListRumMetricsDestinationsRequest.AddMember("MaxResults", _MaxResultsInteger, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRumMetricsDestinationsRequest_NextToken = ListRumMetricsDestinationsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRumMetricsDestinationsResponse_Destinations = ListRumMetricsDestinationsResponse.AddMember("Destinations", _MetricDestinationSummaryList)
-
-	ListRumMetricsDestinationsResponse_NextToken = ListRumMetricsDestinationsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_ResourceArn = ListTagsForResourceResponse.AddMember("ResourceArn", _Arn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	PutResourcePolicyRequest_Name = PutResourcePolicyRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	PutResourcePolicyRequest_PolicyDocument = PutResourcePolicyRequest.AddMember("PolicyDocument", smithyprelude.String)
-
-	PutResourcePolicyRequest_PolicyRevisionId = PutResourcePolicyRequest.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	PutResourcePolicyResponse_PolicyDocument = PutResourcePolicyResponse.AddMember("PolicyDocument", smithyprelude.String)
-
-	PutResourcePolicyResponse_PolicyRevisionId = PutResourcePolicyResponse.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	PutRumEventsRequest_Id = PutRumEventsRequest.AddMember("Id", _AppMonitorId, &smithytraits.HTTPLabel{})
-
-	PutRumEventsRequest_BatchId = PutRumEventsRequest.AddMember("BatchId", smithyprelude.String)
-
-	PutRumEventsRequest_AppMonitorDetails = PutRumEventsRequest.AddMember("AppMonitorDetails", AppMonitorDetails)
-
-	PutRumEventsRequest_UserDetails = PutRumEventsRequest.AddMember("UserDetails", UserDetails)
-
-	PutRumEventsRequest_RumEvents = PutRumEventsRequest.AddMember("RumEvents", _RumEventList)
-
-	PutRumEventsRequest_Alias = PutRumEventsRequest.AddMember("Alias", _Alias)
-
-	PutRumMetricsDestinationRequest_AppMonitorName = PutRumMetricsDestinationRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	PutRumMetricsDestinationRequest_Destination = PutRumMetricsDestinationRequest.AddMember("Destination", _MetricDestination)
-
-	PutRumMetricsDestinationRequest_DestinationArn = PutRumMetricsDestinationRequest.AddMember("DestinationArn", _DestinationArn)
-
-	PutRumMetricsDestinationRequest_IamRoleArn = PutRumMetricsDestinationRequest.AddMember("IamRoleArn", _IamRoleArn)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateAppMonitorRequest_Name = UpdateAppMonitorRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	UpdateAppMonitorRequest_Domain = UpdateAppMonitorRequest.AddMember("Domain", _AppMonitorDomain)
-
-	UpdateAppMonitorRequest_DomainList = UpdateAppMonitorRequest.AddMember("DomainList", _AppMonitorDomainList)
-
-	UpdateAppMonitorRequest_AppMonitorConfiguration = UpdateAppMonitorRequest.AddMember("AppMonitorConfiguration", AppMonitorConfiguration)
-
-	UpdateAppMonitorRequest_CwLogEnabled = UpdateAppMonitorRequest.AddMember("CwLogEnabled", smithyprelude.Boolean)
-
-	UpdateAppMonitorRequest_CustomEvents = UpdateAppMonitorRequest.AddMember("CustomEvents", CustomEvents)
-
-	UpdateAppMonitorRequest_DeobfuscationConfiguration = UpdateAppMonitorRequest.AddMember("DeobfuscationConfiguration", DeobfuscationConfiguration)
-
-	UpdateRumMetricDefinitionRequest_AppMonitorName = UpdateRumMetricDefinitionRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	UpdateRumMetricDefinitionRequest_Destination = UpdateRumMetricDefinitionRequest.AddMember("Destination", _MetricDestination)
-
-	UpdateRumMetricDefinitionRequest_DestinationArn = UpdateRumMetricDefinitionRequest.AddMember("DestinationArn", _DestinationArn)
-
-	UpdateRumMetricDefinitionRequest_MetricDefinition = UpdateRumMetricDefinitionRequest.AddMember("MetricDefinition", MetricDefinitionRequest)
-
-	UpdateRumMetricDefinitionRequest_MetricDefinitionId = UpdateRumMetricDefinitionRequest.AddMember("MetricDefinitionId", _MetricDefinitionId)
-
+const blob = "" +
+	"BatchCreateRumMetricDefinitionsResponseBatchDeleteRumMetricDefinitionsResponseBatchCreateRumMetricDe" +
+	"finitionsRequestBatchDeleteRumMetricDefinitionsRequestBatchCreateRumMetricDefinitionsErrorsBatchDele" +
+	"teRumMetricDefinitionsErrorsBatchGetRumMetricDefinitionsResponseBatchGetRumMetricDefinitionsRequestD" +
+	"eleteRumMetricsDestinationResponseDeleteRumMetricsDestinationRequestListRumMetricsDestinationsRespon" +
+	"seListRumMetricsDestinationsRequestUpdateRumMetricDefinitionResponseInvalidPolicyRevisionIdException" +
+	"MalformedPolicyDocumentExceptionPolicySizeLimitExceededExceptionPutRumMetricsDestinationResponseUpda" +
+	"teRumMetricDefinitionRequestPutRumMetricsDestinationRequestServiceQuotaExceededExceptionDeleteResour" +
+	"cePolicyResponseMetricDestinationSummaryListDeleteResourcePolicyRequestListTagsForResourceResponseDe" +
+	"obfuscationConfigurationListTagsForResourceRequestGetAppMonitorDataResponseGetResourcePolicyResponse" +
+	"PutResourcePolicyResponseResourceNotFoundExceptionCreateAppMonitorResponseDeleteAppMonitorResponseGe" +
+	"tAppMonitorDataRequestGetResourcePolicyRequestPutResourcePolicyRequestUpdateAppMonitorResponseAppMon" +
+	"itorConfigurationCreateAppMonitorRequestDeleteAppMonitorRequestInternalServerExceptionListAppMonitor" +
+	"sResponsePolicyNotFoundExceptionUpdateAppMonitorRequestListAppMonitorsRequestAccessDeniedExceptionAp" +
+	"pMonitorSummaryListGetAppMonitorResponseUntagResourceResponseAppMonitorDomainListGetAppMonitorReques" +
+	"tJavaScriptSourceMapsPutRumEventsResponseQueryFilterValueListUntagResourceRequestAppMonitorSummaries" +
+	"DeobfuscationStatusMetricDefinitionIdsPutRumEventsRequestTagResourceResponseThrottlingExceptionValid" +
+	"ationExceptionAppMonitorPlatformCustomEventsStatusDeobfuscationS3UriISOTimestampStringTagResourceReq" +
+	"uestAppMonitorDetailsConflictExceptionMaxResultsIntegerSessionSampleRateretryAfterSecondsDimensionKe" +
+	"ysMapMaxQueryResultsAppMonitorNameDestinationArnIdentityPoolIdQueryFilterKeyQueryTimestampDimensionN" +
+	"ameEventDataListExcludedPagesFavoritePagesIncludedPagesAllowCookiesAppMonitorIdCwLogEnabledErrorMess" +
+	"ageEventPatternGuestRoleArnLastModifiedQueryFiltersRumEventListresourceNameresourceTypeDataStorageRe" +
+	"sourceArnTelemetriesUserDetailsserviceCodeCwLogGroupEnableXRayIamRoleArnMetricNameTagKeyListErrorCod" +
+	"eJsonValueNamespaceNextTokenStateEnumTelemetryTimeRangeUnitLabelquotaCodesessionIdtimestampTagValueV" +
+	"alueKeymetadataBatchIdBooleanCreatedTagKeysdetailsmessageversionBeforeTagMapValuesmemberuserIdAliasv" +
+	"aluenametypeRUMUrlkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.rum", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 0, Target: 0, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 39, Target: 1, Traits: 1, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 228, Target: 2, Traits: 2, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 950, Target: 3, Traits: 3, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 974, Target: 4, Traits: 4, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 688, Target: 5, Traits: 5, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 299, Target: 6, Traits: 6, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 850, Target: 7, Traits: 7, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 850, Target: 8, Traits: 8, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 875, Target: 9, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1186, Target: 10, Traits: 10, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 368, Target: 11, Traits: 11, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 771, Target: 12, Traits: 12, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 900, Target: 13, Traits: 13, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1421, Target: 14, Traits: 14, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 564, Target: 15, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1557, Target: 16, Traits: 16, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1340, Target: 17, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1070, Target: 18, Traits: 18, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 435, Target: 19, Traits: 19, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2412, Target: 20, Traits: 20, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1277, Target: 21, Traits: 21, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2394, Target: 23, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 853, Target: 24, Traits: 20, StrLen: 10, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1371, Target: 52, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1371, Target: 53, Traits: 20, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 489, Target: 55, Traits: 20, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2329, Target: 115, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2027, Target: 115, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 775, Target: 191, Traits: 20, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2228, Target: 187, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1094, Target: 38, Traits: 20, StrLen: 23, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2087, Target: 90, Traits: 20, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1632, Target: 84, Traits: 20, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 798, Target: 92, Traits: 20, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1624, Target: 57, Traits: 20, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1094, Target: 38, Traits: 20, StrLen: 23, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1848, Target: 109, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1916, Target: 155, Traits: 20, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1942, Target: 155, Traits: 20, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1929, Target: 106, Traits: 20, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1755, Target: 186, Traits: 20, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2015, Target: 67, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1955, Target: 347, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2109, Target: 195, Traits: 20, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2152, Target: 347, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1704, Target: 48, Traits: 20, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2404, Target: 346, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 473, Target: 346, Traits: 20, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2357, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 52, Traits: 20, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1361, Target: 53, Traits: 20, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 52, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 55, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1820, Target: 56, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1614, Target: 57, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1298, Target: 58, Traits: 20, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 489, Target: 55, Traits: 20, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2329, Target: 115, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2027, Target: 115, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2228, Target: 187, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1624, Target: 57, Traits: 20, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1298, Target: 65, Traits: 20, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 58, Traits: 20, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1845, Target: 67, Traits: 20, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 154, Target: 68, Traits: 20, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 135, Traits: 20, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2192, Target: 346, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1991, Target: 346, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 154, Target: 72, Traits: 20, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 68, Traits: 20, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 191, Target: 74, Traits: 20, StrLen: 36, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1519, Target: 132, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2192, Target: 346, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1991, Target: 346, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 191, Target: 78, Traits: 20, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 74, Traits: 20, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1721, Target: 80, Traits: 22, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2063, Target: 346, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2075, Target: 346, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1632, Target: 84, Traits: 20, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1513, Target: 86, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1632, Target: 86, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1979, Target: 87, Traits: 20, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1979, Target: 347, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2142, Target: 346, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2087, Target: 90, Traits: 20, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1979, Target: 87, Traits: 20, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 798, Target: 92, Traits: 20, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1401, Target: 116, Traits: 20, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1650, Target: 94, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1500, Target: 95, Traits: 20, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1834, Target: 96, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1789, Target: 97, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1789, Target: 98, Traits: 20, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2418, Target: 97, Traits: 20, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2399, Target: 101, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1890, Target: 101, Traits: 20, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1903, Target: 102, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1903, Target: 103, Traits: 20, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 102, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2003, Target: 105, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1929, Target: 106, Traits: 20, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 346, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2162, Target: 108, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1848, Target: 109, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1163, Target: 110, Traits: 23, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 348, Traits: 24, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 468, Target: 113, Traits: 25, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1668, Target: 115, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1401, Target: 116, Traits: 20, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1513, Target: 95, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1663, Target: 94, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2201, Target: 119, Traits: 26, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 500, Target: 120, Traits: 25, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1805, Target: 122, Traits: 20, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1738, Target: 123, Traits: 20, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 14, Target: 124, Traits: 20, StrLen: 16, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1519, Target: 132, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1830, Target: 153, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2299, Target: 214, Traits: 20, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2255, Target: 207, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1789, Target: 98, Traits: 20, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2003, Target: 105, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2210, Target: 154, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1519, Target: 132, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1519, Target: 133, Traits: 20, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 132, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 605, Target: 135, Traits: 20, StrLen: 23, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 153, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2299, Target: 214, Traits: 20, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2255, Target: 207, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1789, Target: 98, Traits: 20, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2003, Target: 105, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2210, Target: 154, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14, Target: 142, Traits: 20, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 124, Traits: 20, StrLen: 6, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 92, Target: 144, Traits: 20, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 135, Traits: 20, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 716, Target: 146, Traits: 20, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 716, Target: 147, Traits: 20, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 315, Target: 146, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1834, Target: 96, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2162, Target: 108, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 716, Target: 151, Traits: 20, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 147, Traits: 20, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2172, Target: 153, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2210, Target: 154, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1924, Target: 155, Traits: 20, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 208, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1209, Target: 157, Traits: 27, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 475, Target: 159, Traits: 20, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 532, Target: 160, Traits: 25, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1441, Target: 162, Traits: 20, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 165, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2376, Target: 169, Traits: 20, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1862, Target: 165, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2039, Target: 166, Traits: 20, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 162, Traits: 20, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1441, Target: 168, Traits: 20, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1441, Target: 169, Traits: 20, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 168, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1876, Target: 171, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 925, Target: 172, Traits: 27, StrLen: 25, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2063, Target: 346, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2075, Target: 346, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1424, Target: 176, Traits: 20, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 473, Target: 346, Traits: 20, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2282, Target: 349, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2408, Target: 346, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2307, Target: 119, Traits: 28, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2343, Target: 119, Traits: 28, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2051, Target: 182, Traits: 20, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 176, Traits: 20, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 659, Target: 184, Traits: 29, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1755, Target: 186, Traits: 20, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 0},
+		{StrOff: 2228, Target: 187, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2182, Target: 188, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2182, Target: 189, Traits: 20, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 188, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2370, Target: 191, Traits: 20, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2418, Target: 188, Traits: 20, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2399, Target: 194, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2291, Target: 194, Traits: 20, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2109, Target: 195, Traits: 20, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2382, Target: 197, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2237, Target: 197, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1576, Target: 198, Traits: 30, StrLen: 19, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2131, Target: 346, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2264, Target: 346, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1772, Target: 348, Traits: 24, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2246, Target: 203, Traits: 20, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1777, Target: 171, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2364, Target: 171, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 2223, Target: 206, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2255, Target: 207, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2415, Target: 208, Traits: 20, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2120, Target: 209, Traits: 20, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2388, Target: 346, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2273, Target: 346, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1595, Target: 212, Traits: 25, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2350, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2299, Target: 214, Traits: 20, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 78, Target: 215, Traits: 20, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1820, Target: 56, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 315, Target: 146, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1834, Target: 96, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14, Target: 144, Traits: 20, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 0, Target: 220, Traits: 20, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 185, Target: 72, Traits: 20, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 14, Target: 142, Traits: 20, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 116, Target: 223, Traits: 20, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1820, Target: 56, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 315, Target: 146, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1834, Target: 96, Traits: 33, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1519, Target: 133, Traits: 34, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 39, Target: 228, Traits: 20, StrLen: 39, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 185, Target: 78, Traits: 20, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1519, Target: 133, Traits: 20, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 264, Target: 231, Traits: 20, StrLen: 35, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1820, Target: 56, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 315, Target: 146, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1834, Target: 96, Traits: 33, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1738, Target: 123, Traits: 35, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2219, Target: 346, Traits: 36, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 228, Target: 237, Traits: 20, StrLen: 36, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 14, Target: 142, Traits: 20, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2219, Target: 346, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1117, Target: 240, Traits: 20, StrLen: 23, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 20, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1371, Target: 52, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1371, Target: 53, Traits: 20, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 775, Target: 191, Traits: 20, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1094, Target: 38, Traits: 20, StrLen: 23, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1979, Target: 347, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1632, Target: 84, Traits: 20, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 798, Target: 92, Traits: 20, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1624, Target: 57, Traits: 20, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 950, Target: 250, Traits: 20, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 489, Target: 55, Traits: 20, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1140, Target: 252, Traits: 20, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 974, Target: 254, Traits: 20, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 744, Target: 255, Traits: 20, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 475, Target: 159, Traits: 37, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 688, Target: 258, Traits: 20, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 475, Target: 159, Traits: 20, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 334, Target: 260, Traits: 20, StrLen: 34, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1820, Target: 56, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 315, Target: 146, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1834, Target: 96, Traits: 33, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 299, Target: 264, Traits: 20, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 998, Target: 265, Traits: 20, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2246, Target: 203, Traits: 20, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2044, Target: 166, Traits: 20, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1738, Target: 122, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2219, Target: 206, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 850, Target: 271, Traits: 20, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1427, Target: 103, Traits: 20, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2219, Target: 206, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1381, Target: 274, Traits: 20, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1319, Target: 276, Traits: 20, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 853, Target: 24, Traits: 20, StrLen: 10, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1022, Target: 278, Traits: 20, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 875, Target: 280, Traits: 20, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 509, Target: 346, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 475, Target: 159, Traits: 20, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1255, Target: 283, Traits: 20, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1738, Target: 123, Traits: 35, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2219, Target: 346, Traits: 36, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1186, Target: 286, Traits: 20, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2219, Target: 346, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1481, Target: 65, Traits: 20, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 402, Target: 289, Traits: 20, StrLen: 33, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1820, Target: 56, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1738, Target: 123, Traits: 35, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2219, Target: 346, Traits: 36, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 368, Target: 293, Traits: 20, StrLen: 34, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 382, Target: 151, Traits: 20, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2219, Target: 346, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 824, Target: 296, Traits: 20, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2098, Target: 67, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 771, Target: 298, Traits: 20, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2098, Target: 67, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 775, Target: 191, Traits: 20, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1046, Target: 301, Traits: 20, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 509, Target: 346, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 475, Target: 159, Traits: 20, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 900, Target: 305, Traits: 20, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 509, Target: 346, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 475, Target: 159, Traits: 20, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1538, Target: 308, Traits: 20, StrLen: 19, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 489, Target: 55, Traits: 31, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2315, Target: 346, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1704, Target: 48, Traits: 20, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2120, Target: 209, Traits: 20, StrLen: 11, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1424, Target: 182, Traits: 20, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2394, Target: 23, Traits: 20, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1421, Target: 315, Traits: 20, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 628, Target: 316, Traits: 20, StrLen: 31, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1820, Target: 56, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 315, Target: 146, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1834, Target: 96, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2162, Target: 108, Traits: 20, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 564, Target: 321, Traits: 20, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1686, Target: 322, Traits: 20, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2098, Target: 67, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 775, Target: 191, Traits: 20, StrLen: 4, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1557, Target: 325, Traits: 20, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1461, Target: 326, Traits: 20, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2098, Target: 67, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2336, Target: 189, Traits: 38, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1340, Target: 329, Traits: 20, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1232, Target: 330, Traits: 20, StrLen: 23, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1830, Target: 56, Traits: 31, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1371, Target: 52, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1371, Target: 53, Traits: 20, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1094, Target: 38, Traits: 20, StrLen: 23, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1979, Target: 347, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1632, Target: 84, Traits: 20, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 798, Target: 92, Traits: 20, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1070, Target: 338, Traits: 20, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 596, Target: 339, Traits: 20, StrLen: 32, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1820, Target: 56, Traits: 31, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 315, Target: 146, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1834, Target: 96, Traits: 20, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 14, Target: 135, Traits: 20, StrLen: 16, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1519, Target: 132, Traits: 20, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 435, Target: 345, Traits: 20, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1680, Target: 346, Traits: 20, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 2322, Target: 347, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 2},
+		{StrOff: 1748, Target: 348, Traits: 20, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+		{StrOff: 1671, Target: 349, Traits: 20, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/rummetrics/{AppMonitorName}/metrics",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/rummetrics/{AppMonitorName}/metrics",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/rummetrics/{AppMonitorName}/metrics",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/appmonitor",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/appmonitor/{Name}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/appmonitor/{Name}/policy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/appmonitor/{Name}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/appmonitor/{Name}/data",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/appmonitor/{Name}/policy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/appmonitors",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/appmonitor/{Name}/policy",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/appmonitors/{Id}/",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/tags/{ResourceArn}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/appmonitor/{Name}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/rummetrics/{AppMonitorName}/metrics",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "destination"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "destinationArn"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "metricDefinitionIds"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "policyRevisionId"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [350]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+}
+
+var BatchCreateRumMetricDefinitions = &handles[0]
+
+var BatchDeleteRumMetricDefinitions = &handles[1]
+
+var BatchGetRumMetricDefinitions = &handles[2]
+
+var CreateAppMonitor = &handles[3]
+
+var DeleteAppMonitor = &handles[4]
+
+var DeleteResourcePolicy = &handles[5]
+
+var DeleteRumMetricsDestination = &handles[6]
+
+var GetAppMonitor = &handles[7]
+
+var GetAppMonitorData = &handles[8]
+
+var GetResourcePolicy = &handles[9]
+
+var ListAppMonitors = &handles[10]
+
+var ListRumMetricsDestinations = &handles[11]
+
+var ListTagsForResource = &handles[12]
+
+var PutResourcePolicy = &handles[13]
+
+var PutRumEvents = &handles[14]
+
+var PutRumMetricsDestination = &handles[15]
+
+var TagResource = &handles[16]
+
+var UntagResource = &handles[17]
+
+var UpdateAppMonitor = &handles[18]
+
+var UpdateRumMetricDefinition = &handles[19]
+
+var _RUM = &handles[20]
+
+var AccessDeniedException = &handles[21]
+var AccessDeniedException_message = &handles[22]
+
+var _Alias = &handles[23]
+
+var AppMonitor = &handles[24]
+var AppMonitor_Name = &handles[25]
+var AppMonitor_Domain = &handles[26]
+var AppMonitor_DomainList = &handles[27]
+var AppMonitor_Id = &handles[28]
+var AppMonitor_Created = &handles[29]
+var AppMonitor_LastModified = &handles[30]
+var AppMonitor_Tags = &handles[31]
+var AppMonitor_State = &handles[32]
+var AppMonitor_AppMonitorConfiguration = &handles[33]
+var AppMonitor_DataStorage = &handles[34]
+var AppMonitor_CustomEvents = &handles[35]
+var AppMonitor_DeobfuscationConfiguration = &handles[36]
+var AppMonitor_Platform = &handles[37]
+
+var AppMonitorConfiguration = &handles[38]
+var AppMonitorConfiguration_IdentityPoolId = &handles[39]
+var AppMonitorConfiguration_ExcludedPages = &handles[40]
+var AppMonitorConfiguration_IncludedPages = &handles[41]
+var AppMonitorConfiguration_FavoritePages = &handles[42]
+var AppMonitorConfiguration_SessionSampleRate = &handles[43]
+var AppMonitorConfiguration_GuestRoleArn = &handles[44]
+var AppMonitorConfiguration_AllowCookies = &handles[45]
+var AppMonitorConfiguration_Telemetries = &handles[46]
+var AppMonitorConfiguration_EnableXRay = &handles[47]
+
+var AppMonitorDetails = &handles[48]
+var AppMonitorDetails_name = &handles[49]
+var AppMonitorDetails_id = &handles[50]
+var AppMonitorDetails_version = &handles[51]
+
+var _AppMonitorDomain = &handles[52]
+
+var _AppMonitorDomainList = &handles[53]
+var _AppMonitorDomainList_member = &handles[54]
+
+var _AppMonitorId = &handles[55]
+
+var _AppMonitorName = &handles[56]
+
+var _AppMonitorPlatform = &handles[57]
+
+var AppMonitorSummary = &handles[58]
+var AppMonitorSummary_Name = &handles[59]
+var AppMonitorSummary_Id = &handles[60]
+var AppMonitorSummary_Created = &handles[61]
+var AppMonitorSummary_LastModified = &handles[62]
+var AppMonitorSummary_State = &handles[63]
+var AppMonitorSummary_Platform = &handles[64]
+
+var _AppMonitorSummaryList = &handles[65]
+var _AppMonitorSummaryList_member = &handles[66]
+
+var _Arn = &handles[67]
+
+var BatchCreateRumMetricDefinitionsError = &handles[68]
+var BatchCreateRumMetricDefinitionsError_MetricDefinition = &handles[69]
+var BatchCreateRumMetricDefinitionsError_ErrorCode = &handles[70]
+var BatchCreateRumMetricDefinitionsError_ErrorMessage = &handles[71]
+
+var _BatchCreateRumMetricDefinitionsErrors = &handles[72]
+var _BatchCreateRumMetricDefinitionsErrors_member = &handles[73]
+
+var BatchDeleteRumMetricDefinitionsError = &handles[74]
+var BatchDeleteRumMetricDefinitionsError_MetricDefinitionId = &handles[75]
+var BatchDeleteRumMetricDefinitionsError_ErrorCode = &handles[76]
+var BatchDeleteRumMetricDefinitionsError_ErrorMessage = &handles[77]
+
+var _BatchDeleteRumMetricDefinitionsErrors = &handles[78]
+var _BatchDeleteRumMetricDefinitionsErrors_member = &handles[79]
+
+var ConflictException = &handles[80]
+var ConflictException_message = &handles[81]
+var ConflictException_resourceName = &handles[82]
+var ConflictException_resourceType = &handles[83]
+
+var CustomEvents = &handles[84]
+var CustomEvents_Status = &handles[85]
+
+var _CustomEventsStatus = &handles[86]
+
+var CwLog = &handles[87]
+var CwLog_CwLogEnabled = &handles[88]
+var CwLog_CwLogGroup = &handles[89]
+
+var DataStorage = &handles[90]
+var DataStorage_CwLog = &handles[91]
+
+var DeobfuscationConfiguration = &handles[92]
+var DeobfuscationConfiguration_JavaScriptSourceMaps = &handles[93]
+
+var _DeobfuscationS3Uri = &handles[94]
+
+var _DeobfuscationStatus = &handles[95]
+
+var _DestinationArn = &handles[96]
+
+var _DimensionKey = &handles[97]
+
+var _DimensionKeysMap = &handles[98]
+var _DimensionKeysMap_key = &handles[99]
+var _DimensionKeysMap_value = &handles[100]
+
+var _DimensionName = &handles[101]
+
+var _EventData = &handles[102]
+
+var _EventDataList = &handles[103]
+var _EventDataList_member = &handles[104]
+
+var _EventPattern = &handles[105]
+
+var _FavoritePages = &handles[106]
+var _FavoritePages_member = &handles[107]
+
+var _IamRoleArn = &handles[108]
+
+var _IdentityPoolId = &handles[109]
+
+var InternalServerException = &handles[110]
+var InternalServerException_message = &handles[111]
+var InternalServerException_retryAfterSeconds = &handles[112]
+
+var InvalidPolicyRevisionIdException = &handles[113]
+var InvalidPolicyRevisionIdException_message = &handles[114]
+
+var _ISOTimestampString = &handles[115]
+
+var JavaScriptSourceMaps = &handles[116]
+var JavaScriptSourceMaps_Status = &handles[117]
+var JavaScriptSourceMaps_S3Uri = &handles[118]
+
+var _JsonValue = &handles[119]
+
+var MalformedPolicyDocumentException = &handles[120]
+var MalformedPolicyDocumentException_message = &handles[121]
+
+var _MaxQueryResults = &handles[122]
+
+var _MaxResultsInteger = &handles[123]
+
+var MetricDefinition = &handles[124]
+var MetricDefinition_MetricDefinitionId = &handles[125]
+var MetricDefinition_Name = &handles[126]
+var MetricDefinition_ValueKey = &handles[127]
+var MetricDefinition_UnitLabel = &handles[128]
+var MetricDefinition_DimensionKeys = &handles[129]
+var MetricDefinition_EventPattern = &handles[130]
+var MetricDefinition_Namespace = &handles[131]
+
+var _MetricDefinitionId = &handles[132]
+
+var _MetricDefinitionIds = &handles[133]
+var _MetricDefinitionIds_member = &handles[134]
+
+var MetricDefinitionRequest = &handles[135]
+var MetricDefinitionRequest_Name = &handles[136]
+var MetricDefinitionRequest_ValueKey = &handles[137]
+var MetricDefinitionRequest_UnitLabel = &handles[138]
+var MetricDefinitionRequest_DimensionKeys = &handles[139]
+var MetricDefinitionRequest_EventPattern = &handles[140]
+var MetricDefinitionRequest_Namespace = &handles[141]
+
+var _MetricDefinitions = &handles[142]
+var _MetricDefinitions_member = &handles[143]
+
+var _MetricDefinitionsRequest = &handles[144]
+var _MetricDefinitionsRequest_member = &handles[145]
+
+var _MetricDestination = &handles[146]
+
+var MetricDestinationSummary = &handles[147]
+var MetricDestinationSummary_Destination = &handles[148]
+var MetricDestinationSummary_DestinationArn = &handles[149]
+var MetricDestinationSummary_IamRoleArn = &handles[150]
+
+var _MetricDestinationSummaryList = &handles[151]
+var _MetricDestinationSummaryList_member = &handles[152]
+
+var _MetricName = &handles[153]
+
+var _Namespace = &handles[154]
+
+var _Pages = &handles[155]
+var _Pages_member = &handles[156]
+
+var PolicyNotFoundException = &handles[157]
+var PolicyNotFoundException_message = &handles[158]
+
+var _PolicyRevisionId = &handles[159]
+
+var PolicySizeLimitExceededException = &handles[160]
+var PolicySizeLimitExceededException_message = &handles[161]
+
+var QueryFilter = &handles[162]
+var QueryFilter_Name = &handles[163]
+var QueryFilter_Values = &handles[164]
+
+var _QueryFilterKey = &handles[165]
+
+var _QueryFilters = &handles[166]
+var _QueryFilters_member = &handles[167]
+
+var _QueryFilterValue = &handles[168]
+
+var _QueryFilterValueList = &handles[169]
+var _QueryFilterValueList_member = &handles[170]
+
+var _QueryTimestamp = &handles[171]
+
+var ResourceNotFoundException = &handles[172]
+var ResourceNotFoundException_message = &handles[173]
+var ResourceNotFoundException_resourceName = &handles[174]
+var ResourceNotFoundException_resourceType = &handles[175]
+
+var RumEvent = &handles[176]
+var RumEvent_id = &handles[177]
+var RumEvent_timestamp = &handles[178]
+var RumEvent_type = &handles[179]
+var RumEvent_metadata = &handles[180]
+var RumEvent_details = &handles[181]
+
+var _RumEventList = &handles[182]
+var _RumEventList_member = &handles[183]
+
+var ServiceQuotaExceededException = &handles[184]
+var ServiceQuotaExceededException_message = &handles[185]
+
+var _SessionSampleRate = &handles[186]
+
+var _StateEnum = &handles[187]
+
+var _TagKey = &handles[188]
+
+var _TagKeyList = &handles[189]
+var _TagKeyList_member = &handles[190]
+
+var _TagMap = &handles[191]
+var _TagMap_key = &handles[192]
+var _TagMap_value = &handles[193]
+
+var _TagValue = &handles[194]
+
+var _Telemetries = &handles[195]
+var _Telemetries_member = &handles[196]
+
+var _Telemetry = &handles[197]
+
+var ThrottlingException = &handles[198]
+var ThrottlingException_message = &handles[199]
+var ThrottlingException_serviceCode = &handles[200]
+var ThrottlingException_quotaCode = &handles[201]
+var ThrottlingException_retryAfterSeconds = &handles[202]
+
+var TimeRange = &handles[203]
+var TimeRange_After = &handles[204]
+var TimeRange_Before = &handles[205]
+
+var _Token = &handles[206]
+
+var _UnitLabel = &handles[207]
+
+var _Url = &handles[208]
+
+var UserDetails = &handles[209]
+var UserDetails_userId = &handles[210]
+var UserDetails_sessionId = &handles[211]
+
+var ValidationException = &handles[212]
+var ValidationException_message = &handles[213]
+
+var _ValueKey = &handles[214]
+
+var BatchCreateRumMetricDefinitionsRequest = &handles[215]
+var BatchCreateRumMetricDefinitionsRequest_AppMonitorName = &handles[216]
+var BatchCreateRumMetricDefinitionsRequest_Destination = &handles[217]
+var BatchCreateRumMetricDefinitionsRequest_DestinationArn = &handles[218]
+var BatchCreateRumMetricDefinitionsRequest_MetricDefinitions = &handles[219]
+
+var BatchCreateRumMetricDefinitionsResponse = &handles[220]
+var BatchCreateRumMetricDefinitionsResponse_Errors = &handles[221]
+var BatchCreateRumMetricDefinitionsResponse_MetricDefinitions = &handles[222]
+
+var BatchDeleteRumMetricDefinitionsRequest = &handles[223]
+var BatchDeleteRumMetricDefinitionsRequest_AppMonitorName = &handles[224]
+var BatchDeleteRumMetricDefinitionsRequest_Destination = &handles[225]
+var BatchDeleteRumMetricDefinitionsRequest_DestinationArn = &handles[226]
+var BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds = &handles[227]
+
+var BatchDeleteRumMetricDefinitionsResponse = &handles[228]
+var BatchDeleteRumMetricDefinitionsResponse_Errors = &handles[229]
+var BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds = &handles[230]
+
+var BatchGetRumMetricDefinitionsRequest = &handles[231]
+var BatchGetRumMetricDefinitionsRequest_AppMonitorName = &handles[232]
+var BatchGetRumMetricDefinitionsRequest_Destination = &handles[233]
+var BatchGetRumMetricDefinitionsRequest_DestinationArn = &handles[234]
+var BatchGetRumMetricDefinitionsRequest_MaxResults = &handles[235]
+var BatchGetRumMetricDefinitionsRequest_NextToken = &handles[236]
+
+var BatchGetRumMetricDefinitionsResponse = &handles[237]
+var BatchGetRumMetricDefinitionsResponse_MetricDefinitions = &handles[238]
+var BatchGetRumMetricDefinitionsResponse_NextToken = &handles[239]
+
+var CreateAppMonitorRequest = &handles[240]
+var CreateAppMonitorRequest_Name = &handles[241]
+var CreateAppMonitorRequest_Domain = &handles[242]
+var CreateAppMonitorRequest_DomainList = &handles[243]
+var CreateAppMonitorRequest_Tags = &handles[244]
+var CreateAppMonitorRequest_AppMonitorConfiguration = &handles[245]
+var CreateAppMonitorRequest_CwLogEnabled = &handles[246]
+var CreateAppMonitorRequest_CustomEvents = &handles[247]
+var CreateAppMonitorRequest_DeobfuscationConfiguration = &handles[248]
+var CreateAppMonitorRequest_Platform = &handles[249]
+
+var CreateAppMonitorResponse = &handles[250]
+var CreateAppMonitorResponse_Id = &handles[251]
+
+var DeleteAppMonitorRequest = &handles[252]
+var DeleteAppMonitorRequest_Name = &handles[253]
+
+var DeleteAppMonitorResponse = &handles[254]
+
+var DeleteResourcePolicyRequest = &handles[255]
+var DeleteResourcePolicyRequest_Name = &handles[256]
+var DeleteResourcePolicyRequest_PolicyRevisionId = &handles[257]
+
+var DeleteResourcePolicyResponse = &handles[258]
+var DeleteResourcePolicyResponse_PolicyRevisionId = &handles[259]
+
+var DeleteRumMetricsDestinationRequest = &handles[260]
+var DeleteRumMetricsDestinationRequest_AppMonitorName = &handles[261]
+var DeleteRumMetricsDestinationRequest_Destination = &handles[262]
+var DeleteRumMetricsDestinationRequest_DestinationArn = &handles[263]
+
+var DeleteRumMetricsDestinationResponse = &handles[264]
+
+var GetAppMonitorDataRequest = &handles[265]
+var GetAppMonitorDataRequest_Name = &handles[266]
+var GetAppMonitorDataRequest_TimeRange = &handles[267]
+var GetAppMonitorDataRequest_Filters = &handles[268]
+var GetAppMonitorDataRequest_MaxResults = &handles[269]
+var GetAppMonitorDataRequest_NextToken = &handles[270]
+
+var GetAppMonitorDataResponse = &handles[271]
+var GetAppMonitorDataResponse_Events = &handles[272]
+var GetAppMonitorDataResponse_NextToken = &handles[273]
+
+var GetAppMonitorRequest = &handles[274]
+var GetAppMonitorRequest_Name = &handles[275]
+
+var GetAppMonitorResponse = &handles[276]
+var GetAppMonitorResponse_AppMonitor = &handles[277]
+
+var GetResourcePolicyRequest = &handles[278]
+var GetResourcePolicyRequest_Name = &handles[279]
+
+var GetResourcePolicyResponse = &handles[280]
+var GetResourcePolicyResponse_PolicyDocument = &handles[281]
+var GetResourcePolicyResponse_PolicyRevisionId = &handles[282]
+
+var ListAppMonitorsRequest = &handles[283]
+var ListAppMonitorsRequest_MaxResults = &handles[284]
+var ListAppMonitorsRequest_NextToken = &handles[285]
+
+var ListAppMonitorsResponse = &handles[286]
+var ListAppMonitorsResponse_NextToken = &handles[287]
+var ListAppMonitorsResponse_AppMonitorSummaries = &handles[288]
+
+var ListRumMetricsDestinationsRequest = &handles[289]
+var ListRumMetricsDestinationsRequest_AppMonitorName = &handles[290]
+var ListRumMetricsDestinationsRequest_MaxResults = &handles[291]
+var ListRumMetricsDestinationsRequest_NextToken = &handles[292]
+
+var ListRumMetricsDestinationsResponse = &handles[293]
+var ListRumMetricsDestinationsResponse_Destinations = &handles[294]
+var ListRumMetricsDestinationsResponse_NextToken = &handles[295]
+
+var ListTagsForResourceRequest = &handles[296]
+var ListTagsForResourceRequest_ResourceArn = &handles[297]
+
+var ListTagsForResourceResponse = &handles[298]
+var ListTagsForResourceResponse_ResourceArn = &handles[299]
+var ListTagsForResourceResponse_Tags = &handles[300]
+
+var PutResourcePolicyRequest = &handles[301]
+var PutResourcePolicyRequest_Name = &handles[302]
+var PutResourcePolicyRequest_PolicyDocument = &handles[303]
+var PutResourcePolicyRequest_PolicyRevisionId = &handles[304]
+
+var PutResourcePolicyResponse = &handles[305]
+var PutResourcePolicyResponse_PolicyDocument = &handles[306]
+var PutResourcePolicyResponse_PolicyRevisionId = &handles[307]
+
+var PutRumEventsRequest = &handles[308]
+var PutRumEventsRequest_Id = &handles[309]
+var PutRumEventsRequest_BatchId = &handles[310]
+var PutRumEventsRequest_AppMonitorDetails = &handles[311]
+var PutRumEventsRequest_UserDetails = &handles[312]
+var PutRumEventsRequest_RumEvents = &handles[313]
+var PutRumEventsRequest_Alias = &handles[314]
+
+var PutRumEventsResponse = &handles[315]
+
+var PutRumMetricsDestinationRequest = &handles[316]
+var PutRumMetricsDestinationRequest_AppMonitorName = &handles[317]
+var PutRumMetricsDestinationRequest_Destination = &handles[318]
+var PutRumMetricsDestinationRequest_DestinationArn = &handles[319]
+var PutRumMetricsDestinationRequest_IamRoleArn = &handles[320]
+
+var PutRumMetricsDestinationResponse = &handles[321]
+
+var TagResourceRequest = &handles[322]
+var TagResourceRequest_ResourceArn = &handles[323]
+var TagResourceRequest_Tags = &handles[324]
+
+var TagResourceResponse = &handles[325]
+
+var UntagResourceRequest = &handles[326]
+var UntagResourceRequest_ResourceArn = &handles[327]
+var UntagResourceRequest_TagKeys = &handles[328]
+
+var UntagResourceResponse = &handles[329]
+
+var UpdateAppMonitorRequest = &handles[330]
+var UpdateAppMonitorRequest_Name = &handles[331]
+var UpdateAppMonitorRequest_Domain = &handles[332]
+var UpdateAppMonitorRequest_DomainList = &handles[333]
+var UpdateAppMonitorRequest_AppMonitorConfiguration = &handles[334]
+var UpdateAppMonitorRequest_CwLogEnabled = &handles[335]
+var UpdateAppMonitorRequest_CustomEvents = &handles[336]
+var UpdateAppMonitorRequest_DeobfuscationConfiguration = &handles[337]
+
+var UpdateAppMonitorResponse = &handles[338]
+
+var UpdateRumMetricDefinitionRequest = &handles[339]
+var UpdateRumMetricDefinitionRequest_AppMonitorName = &handles[340]
+var UpdateRumMetricDefinitionRequest_Destination = &handles[341]
+var UpdateRumMetricDefinitionRequest_DestinationArn = &handles[342]
+var UpdateRumMetricDefinitionRequest_MetricDefinition = &handles[343]
+var UpdateRumMetricDefinitionRequest_MetricDefinitionId = &handles[344]
+
+var UpdateRumMetricDefinitionResponse = &handles[345]
+
+var RUM = &smithy.ServiceSchema{Schema: &handles[20], Version: "2018-05-10"}

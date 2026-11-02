@@ -4,824 +4,741 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/connections/{clientId}",
-	Code: 200})
-
-var DeleteThingShadow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteThingShadow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/things/{thingName}/shadow",
-	Code: 200})
-
-var GetConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/connections/{clientId}",
-	Code: 200})
-
-var GetRetainedMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetRetainedMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/retainedMessage/{topic}",
-	Code: 200})
-
-var GetThingShadow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetThingShadow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/things/{thingName}/shadow",
-	Code: 200})
-
-var ListNamedShadowsForThing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListNamedShadowsForThing",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/api/things/shadow/ListNamedShadowsForThing/{thingName}",
-	Code: 200})
-
-var ListRetainedMessages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListRetainedMessages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/retainedMessage",
-	Code: 200})
-
-var ListSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListSubscriptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/connections/{clientId}/subscriptions",
-	Code: 200})
-
-var Publish = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Publish",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/topics/{topic}",
-	Code: 200})
-
-var SendDirectMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SendDirectMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/connections/{clientId}/messages",
-	Code: 200})
-
-var UpdateThingShadow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UpdateThingShadow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/things/{thingName}/shadow",
-	Code: 200})
-
-var _IotMoonrakerService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "IotMoonrakerService",
-}, smithy.ShapeTypeService, 0)
-
-var IotMoonrakerService = smithy.NewServiceSchema(_IotMoonrakerService, "2015-05-28")
-
-var _CleanSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "CleanSession",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0)
-
-var _Confirmation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Confirmation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _Connected = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Connected",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _CorrelationData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "CorrelationData",
-}, smithy.ShapeTypeString, 0)
-
-var _DisconnectReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DisconnectReason",
-}, smithy.ShapeTypeString, 0)
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var GatewayTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GatewayTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 504})
-var GatewayTimeoutException_message *smithy.Schema
-
-var _IncludeSocketInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "IncludeSocketInformation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalFailureException_message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_message *smithy.Schema
-
-var _JsonDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "JsonDocument",
-}, smithy.ShapeTypeBlob, 0)
-
-var _KeepAliveDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "KeepAliveDuration",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MessageExpiry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "MessageExpiry",
-}, smithy.ShapeTypeLong, 0)
-
-var MethodNotAllowedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "MethodNotAllowedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 405})
-var MethodNotAllowedException_message *smithy.Schema
-
-var _NamedShadowList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "NamedShadowList",
-}, smithy.ShapeTypeList, 1)
-var _NamedShadowList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Payload",
-}, smithy.ShapeTypeBlob, 0)
-
-var PayloadFormatIndicator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PayloadFormatIndicator",
-}, smithy.ShapeTypeEnum, 2)
-var PayloadFormatIndicator_UNSPECIFIED_BYTES *smithy.Schema
-
-var PayloadFormatIndicator_UTF8_DATA *smithy.Schema
-
-var _PayloadSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PayloadSize",
-}, smithy.ShapeTypeLong, 0)
-
-var _PreventWillMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PreventWillMessage",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Qos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Qos",
-}, smithy.ShapeTypeInteger, 0)
-
-var RequestEntityTooLargeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "RequestEntityTooLargeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 413})
-var RequestEntityTooLargeException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _ResponseMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ResponseMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ResponseTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ResponseTopic",
-}, smithy.ShapeTypeString, 0)
-
-var _Retain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Retain",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _RetainedMessageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "RetainedMessageList",
-}, smithy.ShapeTypeList, 1)
-var _RetainedMessageList_member *smithy.Schema
-
-var RetainedMessageSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "RetainedMessageSummary",
-}, smithy.ShapeTypeStructure, 4)
-var RetainedMessageSummary_topic *smithy.Schema
-
-var RetainedMessageSummary_payloadSize *smithy.Schema
-
-var RetainedMessageSummary_qos *smithy.Schema
-
-var RetainedMessageSummary_lastModifiedTime *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var _SessionExpiry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SessionExpiry",
-}, smithy.ShapeTypeLong, 0)
-
-var _ShadowName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ShadowName",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SourceIp",
-}, smithy.ShapeTypeString, 0)
-
-var _SourcePort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SourcePort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SubscriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SubscriptionList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionList_member *smithy.Schema
-
-var SubscriptionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SubscriptionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SubscriptionSummary_topicFilter *smithy.Schema
-
-var SubscriptionSummary_qos *smithy.Schema
-
-var _SynthesizedJsonUserProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SynthesizedJsonUserProperties",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var _TargetIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TargetIp",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TargetPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ThingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ThingName",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _TimeoutInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TimeoutInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeLong, 0)
-
-var _Topic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "Topic",
-}, smithy.ShapeTypeString, 0)
-
-var _TopicFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TopicFilter",
-}, smithy.ShapeTypeString, 0)
-
-var _TraceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "TraceId",
-}, smithy.ShapeTypeString, 0)
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
-
-var UnsupportedDocumentEncodingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UnsupportedDocumentEncodingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 415})
-var UnsupportedDocumentEncodingException_message *smithy.Schema
-
-var _UserPropertiesBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UserPropertiesBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "VpcEndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteConnectionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteConnectionRequest_clientId *smithy.Schema
-
-var DeleteConnectionRequest_cleanSession *smithy.Schema
-
-var DeleteConnectionRequest_preventWillMessage *smithy.Schema
-
-var DeleteThingShadowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteThingShadowRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteThingShadowRequest_thingName *smithy.Schema
-
-var DeleteThingShadowRequest_shadowName *smithy.Schema
-
-var DeleteThingShadowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "DeleteThingShadowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteThingShadowResponse_payload *smithy.Schema
-
-var GetConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetConnectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetConnectionRequest_clientId *smithy.Schema
-
-var GetConnectionRequest_includeSocketInformation *smithy.Schema
-
-var GetConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetConnectionResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetConnectionResponse_connected *smithy.Schema
-
-var GetConnectionResponse_thingName *smithy.Schema
-
-var GetConnectionResponse_cleanSession *smithy.Schema
-
-var GetConnectionResponse_sourceIp *smithy.Schema
-
-var GetConnectionResponse_sourcePort *smithy.Schema
-
-var GetConnectionResponse_targetIp *smithy.Schema
-
-var GetConnectionResponse_targetPort *smithy.Schema
-
-var GetConnectionResponse_keepAliveDuration *smithy.Schema
-
-var GetConnectionResponse_connectedSince *smithy.Schema
-
-var GetConnectionResponse_disconnectedSince *smithy.Schema
-
-var GetConnectionResponse_disconnectReason *smithy.Schema
-
-var GetConnectionResponse_sessionExpiry *smithy.Schema
-
-var GetConnectionResponse_clientId *smithy.Schema
-
-var GetConnectionResponse_vpcEndpointId *smithy.Schema
-
-var GetRetainedMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetRetainedMessageRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRetainedMessageRequest_topic *smithy.Schema
-
-var GetRetainedMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetRetainedMessageResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetRetainedMessageResponse_topic *smithy.Schema
-
-var GetRetainedMessageResponse_payload *smithy.Schema
-
-var GetRetainedMessageResponse_qos *smithy.Schema
-
-var GetRetainedMessageResponse_lastModifiedTime *smithy.Schema
-
-var GetRetainedMessageResponse_userProperties *smithy.Schema
-
-var GetThingShadowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetThingShadowRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetThingShadowRequest_thingName *smithy.Schema
-
-var GetThingShadowRequest_shadowName *smithy.Schema
-
-var GetThingShadowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "GetThingShadowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetThingShadowResponse_payload *smithy.Schema
-
-var ListNamedShadowsForThingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListNamedShadowsForThingRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListNamedShadowsForThingRequest_thingName *smithy.Schema
-
-var ListNamedShadowsForThingRequest_nextToken *smithy.Schema
-
-var ListNamedShadowsForThingRequest_pageSize *smithy.Schema
-
-var ListNamedShadowsForThingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListNamedShadowsForThingResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListNamedShadowsForThingResponse_results *smithy.Schema
-
-var ListNamedShadowsForThingResponse_nextToken *smithy.Schema
-
-var ListNamedShadowsForThingResponse_timestamp *smithy.Schema
-
-var ListRetainedMessagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListRetainedMessagesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRetainedMessagesRequest_nextToken *smithy.Schema
-
-var ListRetainedMessagesRequest_maxResults *smithy.Schema
-
-var ListRetainedMessagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListRetainedMessagesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRetainedMessagesResponse_retainedTopics *smithy.Schema
-
-var ListRetainedMessagesResponse_nextToken *smithy.Schema
-
-var ListSubscriptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListSubscriptionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSubscriptionsRequest_clientId *smithy.Schema
-
-var ListSubscriptionsRequest_nextToken *smithy.Schema
-
-var ListSubscriptionsRequest_maxResults *smithy.Schema
-
-var ListSubscriptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "ListSubscriptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscriptionsResponse_subscriptions *smithy.Schema
-
-var ListSubscriptionsResponse_nextToken *smithy.Schema
-
-var PublishRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "PublishRequest",
-}, smithy.ShapeTypeStructure, 10)
-var PublishRequest_topic *smithy.Schema
-
-var PublishRequest_qos *smithy.Schema
-
-var PublishRequest_retain *smithy.Schema
-
-var PublishRequest_payload *smithy.Schema
-
-var PublishRequest_userProperties *smithy.Schema
-
-var PublishRequest_payloadFormatIndicator *smithy.Schema
-
-var PublishRequest_contentType *smithy.Schema
-
-var PublishRequest_responseTopic *smithy.Schema
-
-var PublishRequest_correlationData *smithy.Schema
-
-var PublishRequest_messageExpiry *smithy.Schema
-
-var SendDirectMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SendDirectMessageRequest",
-}, smithy.ShapeTypeStructure, 10)
-var SendDirectMessageRequest_clientId *smithy.Schema
-
-var SendDirectMessageRequest_topic *smithy.Schema
-
-var SendDirectMessageRequest_contentType *smithy.Schema
-
-var SendDirectMessageRequest_responseTopic *smithy.Schema
-
-var SendDirectMessageRequest_confirmation *smithy.Schema
-
-var SendDirectMessageRequest_timeout *smithy.Schema
-
-var SendDirectMessageRequest_payload *smithy.Schema
-
-var SendDirectMessageRequest_userProperties *smithy.Schema
-
-var SendDirectMessageRequest_payloadFormatIndicator *smithy.Schema
-
-var SendDirectMessageRequest_correlationData *smithy.Schema
-
-var SendDirectMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "SendDirectMessageResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SendDirectMessageResponse_message *smithy.Schema
-
-var SendDirectMessageResponse_traceId *smithy.Schema
-
-var UpdateThingShadowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UpdateThingShadowRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateThingShadowRequest_thingName *smithy.Schema
-
-var UpdateThingShadowRequest_shadowName *smithy.Schema
-
-var UpdateThingShadowRequest_payload *smithy.Schema
-
-var UpdateThingShadowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iotdataplane",
-	Name:      "UpdateThingShadowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateThingShadowResponse_payload *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ConflictException_message = ConflictException.AddMember("message", _errorMessage)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", _errorMessage)
-
-	GatewayTimeoutException_message = GatewayTimeoutException.AddMember("message", _errorMessage)
-
-	InternalFailureException_message = InternalFailureException.AddMember("message", _errorMessage)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _errorMessage)
-
-	MethodNotAllowedException_message = MethodNotAllowedException.AddMember("message", _errorMessage)
-
-	_NamedShadowList_member = _NamedShadowList.AddMember("member", _ShadowName)
-
-	PayloadFormatIndicator_UNSPECIFIED_BYTES = PayloadFormatIndicator.AddMember("UNSPECIFIED_BYTES", smithyprelude.Unit)
-
-	PayloadFormatIndicator_UTF8_DATA = PayloadFormatIndicator.AddMember("UTF8_DATA", smithyprelude.Unit)
-
-	RequestEntityTooLargeException_message = RequestEntityTooLargeException.AddMember("message", _errorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _errorMessage)
-
-	RetainedMessageSummary_topic = RetainedMessageSummary.AddMember("topic", _Topic)
-
-	RetainedMessageSummary_payloadSize = RetainedMessageSummary.AddMember("payloadSize", _PayloadSize)
-
-	RetainedMessageSummary_qos = RetainedMessageSummary.AddMember("qos", _Qos)
-
-	RetainedMessageSummary_lastModifiedTime = RetainedMessageSummary.AddMember("lastModifiedTime", _Timestamp)
-
-	_RetainedMessageList_member = _RetainedMessageList.AddMember("member", RetainedMessageSummary)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", _errorMessage)
-
-	SubscriptionSummary_topicFilter = SubscriptionSummary.AddMember("topicFilter", _TopicFilter)
-
-	SubscriptionSummary_qos = SubscriptionSummary.AddMember("qos", _Qos)
-
-	_SubscriptionList_member = _SubscriptionList.AddMember("member", SubscriptionSummary)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _errorMessage)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", _errorMessage)
-
-	UnsupportedDocumentEncodingException_message = UnsupportedDocumentEncodingException.AddMember("message", _errorMessage)
-
-	DeleteConnectionRequest_clientId = DeleteConnectionRequest.AddMember("clientId", _ClientId, &smithytraits.HTTPLabel{})
-
-	DeleteConnectionRequest_cleanSession = DeleteConnectionRequest.AddMember("cleanSession", _CleanSession, &smithytraits.HTTPQuery{Name: "cleanSession"})
-
-	DeleteConnectionRequest_preventWillMessage = DeleteConnectionRequest.AddMember("preventWillMessage", _PreventWillMessage, &smithytraits.HTTPQuery{Name: "preventWillMessage"})
-
-	DeleteThingShadowRequest_thingName = DeleteThingShadowRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	DeleteThingShadowRequest_shadowName = DeleteThingShadowRequest.AddMember("shadowName", _ShadowName, &smithytraits.HTTPQuery{Name: "name"})
-
-	DeleteThingShadowResponse_payload = DeleteThingShadowResponse.AddMember("payload", _JsonDocument, &smithytraits.HTTPPayload{})
-
-	GetConnectionRequest_clientId = GetConnectionRequest.AddMember("clientId", _ClientId, &smithytraits.HTTPLabel{})
-
-	GetConnectionRequest_includeSocketInformation = GetConnectionRequest.AddMember("includeSocketInformation", _IncludeSocketInformation, &smithytraits.HTTPQuery{Name: "includeSocketInformation"})
-
-	GetConnectionResponse_connected = GetConnectionResponse.AddMember("connected", _Connected)
-
-	GetConnectionResponse_thingName = GetConnectionResponse.AddMember("thingName", _ThingName)
-
-	GetConnectionResponse_cleanSession = GetConnectionResponse.AddMember("cleanSession", _CleanSession)
-
-	GetConnectionResponse_sourceIp = GetConnectionResponse.AddMember("sourceIp", _SourceIp)
-
-	GetConnectionResponse_sourcePort = GetConnectionResponse.AddMember("sourcePort", _SourcePort)
-
-	GetConnectionResponse_targetIp = GetConnectionResponse.AddMember("targetIp", _TargetIp)
-
-	GetConnectionResponse_targetPort = GetConnectionResponse.AddMember("targetPort", _TargetPort)
-
-	GetConnectionResponse_keepAliveDuration = GetConnectionResponse.AddMember("keepAliveDuration", _KeepAliveDuration)
-
-	GetConnectionResponse_connectedSince = GetConnectionResponse.AddMember("connectedSince", _Timestamp)
-
-	GetConnectionResponse_disconnectedSince = GetConnectionResponse.AddMember("disconnectedSince", _Timestamp)
-
-	GetConnectionResponse_disconnectReason = GetConnectionResponse.AddMember("disconnectReason", _DisconnectReason)
-
-	GetConnectionResponse_sessionExpiry = GetConnectionResponse.AddMember("sessionExpiry", _SessionExpiry)
-
-	GetConnectionResponse_clientId = GetConnectionResponse.AddMember("clientId", _ClientId)
-
-	GetConnectionResponse_vpcEndpointId = GetConnectionResponse.AddMember("vpcEndpointId", _VpcEndpointId)
-
-	GetRetainedMessageRequest_topic = GetRetainedMessageRequest.AddMember("topic", _Topic, &smithytraits.HTTPLabel{})
-
-	GetRetainedMessageResponse_topic = GetRetainedMessageResponse.AddMember("topic", _Topic)
-
-	GetRetainedMessageResponse_payload = GetRetainedMessageResponse.AddMember("payload", _Payload)
-
-	GetRetainedMessageResponse_qos = GetRetainedMessageResponse.AddMember("qos", _Qos)
-
-	GetRetainedMessageResponse_lastModifiedTime = GetRetainedMessageResponse.AddMember("lastModifiedTime", _Timestamp)
-
-	GetRetainedMessageResponse_userProperties = GetRetainedMessageResponse.AddMember("userProperties", _UserPropertiesBlob)
-
-	GetThingShadowRequest_thingName = GetThingShadowRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	GetThingShadowRequest_shadowName = GetThingShadowRequest.AddMember("shadowName", _ShadowName, &smithytraits.HTTPQuery{Name: "name"})
-
-	GetThingShadowResponse_payload = GetThingShadowResponse.AddMember("payload", _JsonDocument, &smithytraits.HTTPPayload{})
-
-	ListNamedShadowsForThingRequest_thingName = ListNamedShadowsForThingRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	ListNamedShadowsForThingRequest_nextToken = ListNamedShadowsForThingRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNamedShadowsForThingRequest_pageSize = ListNamedShadowsForThingRequest.AddMember("pageSize", _PageSize, &smithytraits.HTTPQuery{Name: "pageSize"})
-
-	ListNamedShadowsForThingResponse_results = ListNamedShadowsForThingResponse.AddMember("results", _NamedShadowList)
-
-	ListNamedShadowsForThingResponse_nextToken = ListNamedShadowsForThingResponse.AddMember("nextToken", _NextToken)
-
-	ListNamedShadowsForThingResponse_timestamp = ListNamedShadowsForThingResponse.AddMember("timestamp", _Timestamp)
-
-	ListRetainedMessagesRequest_nextToken = ListRetainedMessagesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRetainedMessagesRequest_maxResults = ListRetainedMessagesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRetainedMessagesResponse_retainedTopics = ListRetainedMessagesResponse.AddMember("retainedTopics", _RetainedMessageList)
-
-	ListRetainedMessagesResponse_nextToken = ListRetainedMessagesResponse.AddMember("nextToken", _NextToken)
-
-	ListSubscriptionsRequest_clientId = ListSubscriptionsRequest.AddMember("clientId", _ClientId, &smithytraits.HTTPLabel{})
-
-	ListSubscriptionsRequest_nextToken = ListSubscriptionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSubscriptionsRequest_maxResults = ListSubscriptionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSubscriptionsResponse_subscriptions = ListSubscriptionsResponse.AddMember("subscriptions", _SubscriptionList)
-
-	ListSubscriptionsResponse_nextToken = ListSubscriptionsResponse.AddMember("nextToken", _NextToken)
-
-	PublishRequest_topic = PublishRequest.AddMember("topic", _Topic, &smithytraits.HTTPLabel{})
-
-	PublishRequest_qos = PublishRequest.AddMember("qos", _Qos, &smithytraits.HTTPQuery{Name: "qos"})
-
-	PublishRequest_retain = PublishRequest.AddMember("retain", _Retain, &smithytraits.HTTPQuery{Name: "retain"})
-
-	PublishRequest_payload = PublishRequest.AddMember("payload", _Payload, &smithytraits.HTTPPayload{})
-
-	PublishRequest_userProperties = PublishRequest.AddMember("userProperties", _SynthesizedJsonUserProperties, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-user-properties"})
-
-	PublishRequest_payloadFormatIndicator = PublishRequest.AddMember("payloadFormatIndicator", PayloadFormatIndicator, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-payload-format-indicator"})
-
-	PublishRequest_contentType = PublishRequest.AddMember("contentType", _ContentType, &smithytraits.HTTPQuery{Name: "contentType"})
-
-	PublishRequest_responseTopic = PublishRequest.AddMember("responseTopic", _ResponseTopic, &smithytraits.HTTPQuery{Name: "responseTopic"})
-
-	PublishRequest_correlationData = PublishRequest.AddMember("correlationData", _CorrelationData, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-correlation-data"})
-
-	PublishRequest_messageExpiry = PublishRequest.AddMember("messageExpiry", _MessageExpiry, &smithytraits.HTTPQuery{Name: "messageExpiry"})
-
-	SendDirectMessageRequest_clientId = SendDirectMessageRequest.AddMember("clientId", _ClientId, &smithytraits.HTTPLabel{})
-
-	SendDirectMessageRequest_topic = SendDirectMessageRequest.AddMember("topic", _Topic, &smithytraits.HTTPQuery{Name: "topic"})
-
-	SendDirectMessageRequest_contentType = SendDirectMessageRequest.AddMember("contentType", _ContentType, &smithytraits.HTTPQuery{Name: "contentType"})
-
-	SendDirectMessageRequest_responseTopic = SendDirectMessageRequest.AddMember("responseTopic", _ResponseTopic, &smithytraits.HTTPQuery{Name: "responseTopic"})
-
-	SendDirectMessageRequest_confirmation = SendDirectMessageRequest.AddMember("confirmation", _Confirmation, &smithytraits.HTTPQuery{Name: "confirmation"})
-
-	SendDirectMessageRequest_timeout = SendDirectMessageRequest.AddMember("timeout", _TimeoutInSeconds, &smithytraits.HTTPQuery{Name: "timeout"})
-
-	SendDirectMessageRequest_payload = SendDirectMessageRequest.AddMember("payload", _Payload, &smithytraits.HTTPPayload{})
-
-	SendDirectMessageRequest_userProperties = SendDirectMessageRequest.AddMember("userProperties", _SynthesizedJsonUserProperties, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-user-properties"})
-
-	SendDirectMessageRequest_payloadFormatIndicator = SendDirectMessageRequest.AddMember("payloadFormatIndicator", PayloadFormatIndicator, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-payload-format-indicator"})
-
-	SendDirectMessageRequest_correlationData = SendDirectMessageRequest.AddMember("correlationData", _CorrelationData, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-correlation-data"})
-
-	SendDirectMessageResponse_message = SendDirectMessageResponse.AddMember("message", _ResponseMessage)
-
-	SendDirectMessageResponse_traceId = SendDirectMessageResponse.AddMember("traceId", _TraceId)
-
-	UpdateThingShadowRequest_thingName = UpdateThingShadowRequest.AddMember("thingName", _ThingName, &smithytraits.HTTPLabel{})
-
-	UpdateThingShadowRequest_shadowName = UpdateThingShadowRequest.AddMember("shadowName", _ShadowName, &smithytraits.HTTPQuery{Name: "name"})
-
-	UpdateThingShadowRequest_payload = UpdateThingShadowRequest.AddMember("payload", _JsonDocument, &smithytraits.HTTPPayload{})
-
-	UpdateThingShadowResponse_payload = UpdateThingShadowResponse.AddMember("payload", _JsonDocument, &smithytraits.HTTPPayload{})
-
+const blob = "" +
+	"UnsupportedDocumentEncodingExceptionListNamedShadowsForThingResponseListNamedShadowsForThingRequestR" +
+	"equestEntityTooLargeExceptionSynthesizedJsonUserPropertiesListRetainedMessagesResponseListRetainedMe" +
+	"ssagesRequestServiceUnavailableExceptionGetRetainedMessageResponseDeleteThingShadowResponseGetRetain" +
+	"edMessageRequestListSubscriptionsResponseMethodNotAllowedExceptionResourceNotFoundExceptionSendDirec" +
+	"tMessageResponseUpdateThingShadowResponseDeleteThingShadowRequestIncludeSocketInformationInternalFai" +
+	"lureExceptionListSubscriptionsRequestSendDirectMessageRequestUpdateThingShadowRequestincludeSocketIn" +
+	"formationDeleteConnectionRequestGatewayTimeoutExceptionInvalidRequestExceptionGetThingShadowResponse" +
+	"PayloadFormatIndicatorRetainedMessageSummarypayloadFormatIndicatorGetConnectionResponseGetThingShado" +
+	"wRequestUnauthorizedExceptionGetConnectionRequestIotMoonrakerServiceRetainedMessageListSubscriptionS" +
+	"ummaryThrottlingExceptionForbiddenExceptionPreventWillMessageUserPropertiesBlobpreventWillMessageCon" +
+	"flictExceptionKeepAliveDurationUNSPECIFIED_BYTESdisconnectedSincekeepAliveDurationDisconnectReasonSu" +
+	"bscriptionListTimeoutInSecondsdisconnectReasonlastModifiedTimeCorrelationDataNamedShadowListResponse" +
+	"MessagecorrelationDataPublishRequestretainedTopicsuserPropertiesMessageExpiryResponseTopicSessionExp" +
+	"iryVpcEndpointIdmessageExpiryresponseTopicsessionExpirysubscriptionsvpcEndpointIdCleanSessionConfirm" +
+	"ationJsonDocumentcleanSessionconfirmationerrorMessageContentTypePayloadSizeTopicFiltercontentTypepay" +
+	"loadSizetopicFilterMaxResultsShadowNameSourcePortTargetPortmaxResultsshadowNamesourcePorttargetPortC" +
+	"onnectedNextTokenThingNameTimestampUTF8_DATAnextTokenthingNametimestampClientIdPageSizeSourceIpTarge" +
+	"tIpclientIdpageSizesourceIptargetIpTraceIdresultstimeouttraceIdmemberUnitQosqos"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.iotdataplane", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 609, Target: 0, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 266, Target: 1, Traits: 1, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 766, Target: 2, Traits: 2, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 240, Target: 3, Traits: 3, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 678, Target: 4, Traits: 4, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 36, Target: 5, Traits: 5, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 158, Target: 6, Traits: 6, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 316, Target: 7, Traits: 7, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1222, Target: 8, Traits: 8, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 391, Target: 9, Traits: 9, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 416, Target: 10, Traits: 10, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 849, Target: 11, Traits: 11, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1381, Target: 12, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1671, Target: 13, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1393, Target: 14, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 997, Target: 15, Traits: 12, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1599, Target: 17, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1453, Target: 18, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1162, Target: 19, Traits: 11, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1082, Target: 20, Traits: 11, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1441, Target: 21, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 925, Target: 22, Traits: 13, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 632, Target: 24, Traits: 14, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 465, Target: 26, Traits: 11, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 489, Target: 27, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 655, Target: 29, Traits: 16, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1405, Target: 31, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 1014, Target: 32, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1519, Target: 33, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1264, Target: 34, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 341, Target: 35, Traits: 17, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1177, Target: 37, Traits: 11, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1763, Target: 65, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1608, Target: 39, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1679, Target: 40, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 700, Target: 41, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 700, Target: 42, Traits: 11, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1031, Target: 182, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1635, Target: 182, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1464, Target: 45, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 943, Target: 46, Traits: 11, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 1773, Target: 47, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 99, Target: 48, Traits: 18, StrLen: 30, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 366, Target: 50, Traits: 19, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1192, Target: 52, Traits: 11, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1277, Target: 53, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 162, Target: 54, Traits: 11, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 0},
+		{StrOff: 868, Target: 55, Traits: 11, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1763, Target: 57, Traits: 11, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 722, Target: 57, Traits: 11, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1508, Target: 81, Traits: 11, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1497, Target: 45, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1776, Target: 47, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1146, Target: 80, Traits: 11, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 213, Target: 62, Traits: 20, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1290, Target: 64, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 1529, Target: 65, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1687, Target: 66, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1539, Target: 67, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1098, Target: 68, Traits: 11, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1763, Target: 70, Traits: 11, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 887, Target: 70, Traits: 11, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1508, Target: 82, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1776, Target: 47, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 129, Target: 73, Traits: 21, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1695, Target: 74, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1549, Target: 75, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1617, Target: 76, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 906, Target: 77, Traits: 22, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1114, Target: 79, Traits: 11, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 1626, Target: 80, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 0},
+		{StrOff: 1244, Target: 81, Traits: 11, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1475, Target: 82, Traits: 11, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1735, Target: 83, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 808, Target: 84, Traits: 23, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 86, Traits: 24, StrLen: 36, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 21, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 961, Target: 88, Traits: 11, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 0},
+		{StrOff: 1303, Target: 89, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 609, Target: 90, Traits: 11, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1703, Target: 13, Traits: 25, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1417, Target: 12, Traits: 26, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 979, Target: 46, Traits: 27, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 441, Target: 94, Traits: 11, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1653, Target: 76, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1569, Target: 65, Traits: 28, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 266, Target: 97, Traits: 11, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 744, Target: 31, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 829, Target: 99, Traits: 11, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1703, Target: 13, Traits: 25, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 585, Target: 26, Traits: 30, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 766, Target: 102, Traits: 11, StrLen: 21, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1051, Target: 17, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1653, Target: 76, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1417, Target: 12, Traits: 11, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1719, Target: 66, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1579, Target: 67, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1727, Target: 74, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1589, Target: 75, Traits: 11, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1065, Target: 32, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1051, Target: 80, Traits: 11, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1048, Target: 80, Traits: 11, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1130, Target: 20, Traits: 11, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1342, Target: 64, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1703, Target: 13, Traits: 11, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1368, Target: 89, Traits: 11, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 291, Target: 117, Traits: 11, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1508, Target: 81, Traits: 25, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 240, Target: 119, Traits: 11, StrLen: 26, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1508, Target: 81, Traits: 11, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 744, Target: 41, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1776, Target: 47, Traits: 11, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1146, Target: 80, Traits: 11, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1250, Target: 88, Traits: 11, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 787, Target: 125, Traits: 11, StrLen: 21, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1653, Target: 76, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1569, Target: 65, Traits: 28, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 678, Target: 128, Traits: 11, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 744, Target: 31, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 68, Target: 130, Traits: 11, StrLen: 31, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1653, Target: 76, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1644, Target: 39, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1711, Target: 40, Traits: 32, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 36, Target: 134, Traits: 11, StrLen: 32, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1742, Target: 37, Traits: 11, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1644, Target: 39, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1662, Target: 80, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 186, Target: 138, Traits: 11, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1644, Target: 39, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1559, Target: 33, Traits: 33, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 158, Target: 141, Traits: 11, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1236, Target: 55, Traits: 11, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1644, Target: 39, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 513, Target: 144, Traits: 11, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1703, Target: 13, Traits: 25, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1644, Target: 39, Traits: 31, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1559, Target: 33, Traits: 33, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 316, Target: 148, Traits: 11, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1355, Target: 68, Traits: 11, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1644, Target: 39, Traits: 11, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1222, Target: 151, Traits: 11, StrLen: 14, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1508, Target: 81, Traits: 25, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1776, Target: 47, Traits: 34, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1236, Target: 54, Traits: 35, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 744, Target: 41, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1250, Target: 73, Traits: 36, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 744, Target: 42, Traits: 37, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1486, Target: 18, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1329, Target: 53, Traits: 39, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1207, Target: 19, Traits: 40, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1316, Target: 34, Traits: 41, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 537, Target: 162, Traits: 11, StrLen: 24, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1703, Target: 13, Traits: 25, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1508, Target: 81, Traits: 42, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1486, Target: 18, Traits: 38, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1329, Target: 53, Traits: 39, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1429, Target: 14, Traits: 43, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1749, Target: 79, Traits: 44, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 744, Target: 41, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1250, Target: 73, Traits: 36, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 744, Target: 42, Traits: 37, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1207, Target: 19, Traits: 40, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 391, Target: 173, Traits: 11, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1316, Target: 52, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1756, Target: 83, Traits: 11, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 561, Target: 176, Traits: 11, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1653, Target: 76, Traits: 25, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1569, Target: 65, Traits: 28, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 744, Target: 31, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 416, Target: 180, Traits: 11, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 744, Target: 31, Traits: 29, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1769, Target: 182, Traits: 11, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/connections/{clientId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/things/{thingName}/shadow",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/connections/{clientId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/retainedMessage/{topic}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/things/{thingName}/shadow",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/api/things/shadow/ListNamedShadowsForThing/{thingName}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/retainedMessage",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/connections/{clientId}/subscriptions",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/topics/{topic}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/connections/{clientId}/messages",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/things/{thingName}/shadow",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 504}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 405}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 413}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 415}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "cleanSession"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "preventWillMessage"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeSocketInformation"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "pageSize"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "qos"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "retain"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-user-properties"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-payload-format-indicator"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "contentType"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "responseTopic"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-mqtt5-correlation-data"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "messageExpiry"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "topic"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "confirmation"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "timeout"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [183]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+}
+
+var DeleteConnection = &handles[0]
+
+var DeleteThingShadow = &handles[1]
+
+var GetConnection = &handles[2]
+
+var GetRetainedMessage = &handles[3]
+
+var GetThingShadow = &handles[4]
+
+var ListNamedShadowsForThing = &handles[5]
+
+var ListRetainedMessages = &handles[6]
+
+var ListSubscriptions = &handles[7]
+
+var Publish = &handles[8]
+
+var SendDirectMessage = &handles[9]
+
+var UpdateThingShadow = &handles[10]
+
+var _IotMoonrakerService = &handles[11]
+
+var _CleanSession = &handles[12]
+
+var _ClientId = &handles[13]
+
+var _Confirmation = &handles[14]
+
+var ConflictException = &handles[15]
+var ConflictException_message = &handles[16]
+
+var _Connected = &handles[17]
+
+var _ContentType = &handles[18]
+
+var _CorrelationData = &handles[19]
+
+var _DisconnectReason = &handles[20]
+
+var _errorMessage = &handles[21]
+
+var ForbiddenException = &handles[22]
+var ForbiddenException_message = &handles[23]
+
+var GatewayTimeoutException = &handles[24]
+var GatewayTimeoutException_message = &handles[25]
+
+var _IncludeSocketInformation = &handles[26]
+
+var InternalFailureException = &handles[27]
+var InternalFailureException_message = &handles[28]
+
+var InvalidRequestException = &handles[29]
+var InvalidRequestException_message = &handles[30]
+
+var _JsonDocument = &handles[31]
+
+var _KeepAliveDuration = &handles[32]
+
+var _MaxResults = &handles[33]
+
+var _MessageExpiry = &handles[34]
+
+var MethodNotAllowedException = &handles[35]
+var MethodNotAllowedException_message = &handles[36]
+
+var _NamedShadowList = &handles[37]
+var _NamedShadowList_member = &handles[38]
+
+var _NextToken = &handles[39]
+
+var _PageSize = &handles[40]
+
+var _Payload = &handles[41]
+
+var PayloadFormatIndicator = &handles[42]
+var PayloadFormatIndicator_UNSPECIFIED_BYTES = &handles[43]
+var PayloadFormatIndicator_UTF8_DATA = &handles[44]
+
+var _PayloadSize = &handles[45]
+
+var _PreventWillMessage = &handles[46]
+
+var _Qos = &handles[47]
+
+var RequestEntityTooLargeException = &handles[48]
+var RequestEntityTooLargeException_message = &handles[49]
+
+var ResourceNotFoundException = &handles[50]
+var ResourceNotFoundException_message = &handles[51]
+
+var _ResponseMessage = &handles[52]
+
+var _ResponseTopic = &handles[53]
+
+var _Retain = &handles[54]
+
+var _RetainedMessageList = &handles[55]
+var _RetainedMessageList_member = &handles[56]
+
+var RetainedMessageSummary = &handles[57]
+var RetainedMessageSummary_topic = &handles[58]
+var RetainedMessageSummary_payloadSize = &handles[59]
+var RetainedMessageSummary_qos = &handles[60]
+var RetainedMessageSummary_lastModifiedTime = &handles[61]
+
+var ServiceUnavailableException = &handles[62]
+var ServiceUnavailableException_message = &handles[63]
+
+var _SessionExpiry = &handles[64]
+
+var _ShadowName = &handles[65]
+
+var _SourceIp = &handles[66]
+
+var _SourcePort = &handles[67]
+
+var _SubscriptionList = &handles[68]
+var _SubscriptionList_member = &handles[69]
+
+var SubscriptionSummary = &handles[70]
+var SubscriptionSummary_topicFilter = &handles[71]
+var SubscriptionSummary_qos = &handles[72]
+
+var _SynthesizedJsonUserProperties = &handles[73]
+
+var _TargetIp = &handles[74]
+
+var _TargetPort = &handles[75]
+
+var _ThingName = &handles[76]
+
+var ThrottlingException = &handles[77]
+var ThrottlingException_message = &handles[78]
+
+var _TimeoutInSeconds = &handles[79]
+
+var _Timestamp = &handles[80]
+
+var _Topic = &handles[81]
+
+var _TopicFilter = &handles[82]
+
+var _TraceId = &handles[83]
+
+var UnauthorizedException = &handles[84]
+var UnauthorizedException_message = &handles[85]
+
+var UnsupportedDocumentEncodingException = &handles[86]
+var UnsupportedDocumentEncodingException_message = &handles[87]
+
+var _UserPropertiesBlob = &handles[88]
+
+var _VpcEndpointId = &handles[89]
+
+var DeleteConnectionRequest = &handles[90]
+var DeleteConnectionRequest_clientId = &handles[91]
+var DeleteConnectionRequest_cleanSession = &handles[92]
+var DeleteConnectionRequest_preventWillMessage = &handles[93]
+
+var DeleteThingShadowRequest = &handles[94]
+var DeleteThingShadowRequest_thingName = &handles[95]
+var DeleteThingShadowRequest_shadowName = &handles[96]
+
+var DeleteThingShadowResponse = &handles[97]
+var DeleteThingShadowResponse_payload = &handles[98]
+
+var GetConnectionRequest = &handles[99]
+var GetConnectionRequest_clientId = &handles[100]
+var GetConnectionRequest_includeSocketInformation = &handles[101]
+
+var GetConnectionResponse = &handles[102]
+var GetConnectionResponse_connected = &handles[103]
+var GetConnectionResponse_thingName = &handles[104]
+var GetConnectionResponse_cleanSession = &handles[105]
+var GetConnectionResponse_sourceIp = &handles[106]
+var GetConnectionResponse_sourcePort = &handles[107]
+var GetConnectionResponse_targetIp = &handles[108]
+var GetConnectionResponse_targetPort = &handles[109]
+var GetConnectionResponse_keepAliveDuration = &handles[110]
+var GetConnectionResponse_connectedSince = &handles[111]
+var GetConnectionResponse_disconnectedSince = &handles[112]
+var GetConnectionResponse_disconnectReason = &handles[113]
+var GetConnectionResponse_sessionExpiry = &handles[114]
+var GetConnectionResponse_clientId = &handles[115]
+var GetConnectionResponse_vpcEndpointId = &handles[116]
+
+var GetRetainedMessageRequest = &handles[117]
+var GetRetainedMessageRequest_topic = &handles[118]
+
+var GetRetainedMessageResponse = &handles[119]
+var GetRetainedMessageResponse_topic = &handles[120]
+var GetRetainedMessageResponse_payload = &handles[121]
+var GetRetainedMessageResponse_qos = &handles[122]
+var GetRetainedMessageResponse_lastModifiedTime = &handles[123]
+var GetRetainedMessageResponse_userProperties = &handles[124]
+
+var GetThingShadowRequest = &handles[125]
+var GetThingShadowRequest_thingName = &handles[126]
+var GetThingShadowRequest_shadowName = &handles[127]
+
+var GetThingShadowResponse = &handles[128]
+var GetThingShadowResponse_payload = &handles[129]
+
+var ListNamedShadowsForThingRequest = &handles[130]
+var ListNamedShadowsForThingRequest_thingName = &handles[131]
+var ListNamedShadowsForThingRequest_nextToken = &handles[132]
+var ListNamedShadowsForThingRequest_pageSize = &handles[133]
+
+var ListNamedShadowsForThingResponse = &handles[134]
+var ListNamedShadowsForThingResponse_results = &handles[135]
+var ListNamedShadowsForThingResponse_nextToken = &handles[136]
+var ListNamedShadowsForThingResponse_timestamp = &handles[137]
+
+var ListRetainedMessagesRequest = &handles[138]
+var ListRetainedMessagesRequest_nextToken = &handles[139]
+var ListRetainedMessagesRequest_maxResults = &handles[140]
+
+var ListRetainedMessagesResponse = &handles[141]
+var ListRetainedMessagesResponse_retainedTopics = &handles[142]
+var ListRetainedMessagesResponse_nextToken = &handles[143]
+
+var ListSubscriptionsRequest = &handles[144]
+var ListSubscriptionsRequest_clientId = &handles[145]
+var ListSubscriptionsRequest_nextToken = &handles[146]
+var ListSubscriptionsRequest_maxResults = &handles[147]
+
+var ListSubscriptionsResponse = &handles[148]
+var ListSubscriptionsResponse_subscriptions = &handles[149]
+var ListSubscriptionsResponse_nextToken = &handles[150]
+
+var PublishRequest = &handles[151]
+var PublishRequest_topic = &handles[152]
+var PublishRequest_qos = &handles[153]
+var PublishRequest_retain = &handles[154]
+var PublishRequest_payload = &handles[155]
+var PublishRequest_userProperties = &handles[156]
+var PublishRequest_payloadFormatIndicator = &handles[157]
+var PublishRequest_contentType = &handles[158]
+var PublishRequest_responseTopic = &handles[159]
+var PublishRequest_correlationData = &handles[160]
+var PublishRequest_messageExpiry = &handles[161]
+
+var SendDirectMessageRequest = &handles[162]
+var SendDirectMessageRequest_clientId = &handles[163]
+var SendDirectMessageRequest_topic = &handles[164]
+var SendDirectMessageRequest_contentType = &handles[165]
+var SendDirectMessageRequest_responseTopic = &handles[166]
+var SendDirectMessageRequest_confirmation = &handles[167]
+var SendDirectMessageRequest_timeout = &handles[168]
+var SendDirectMessageRequest_payload = &handles[169]
+var SendDirectMessageRequest_userProperties = &handles[170]
+var SendDirectMessageRequest_payloadFormatIndicator = &handles[171]
+var SendDirectMessageRequest_correlationData = &handles[172]
+
+var SendDirectMessageResponse = &handles[173]
+var SendDirectMessageResponse_message = &handles[174]
+var SendDirectMessageResponse_traceId = &handles[175]
+
+var UpdateThingShadowRequest = &handles[176]
+var UpdateThingShadowRequest_thingName = &handles[177]
+var UpdateThingShadowRequest_shadowName = &handles[178]
+var UpdateThingShadowRequest_payload = &handles[179]
+
+var UpdateThingShadowResponse = &handles[180]
+var UpdateThingShadowResponse_payload = &handles[181]
+
+var IotMoonrakerService = &smithy.ServiceSchema{Schema: &handles[11], Version: "2015-05-28"}

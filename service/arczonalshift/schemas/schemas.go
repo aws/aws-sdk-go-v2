@@ -4,1257 +4,1087 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelPracticeRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "CancelPracticeRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/practiceruns/{zonalShiftId}",
-	Code: 200})
-
-var CancelZonalShift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "CancelZonalShift",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/zonalshifts/{zonalShiftId}",
-	Code: 200})
-
-var CreatePracticeRunConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "CreatePracticeRunConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/configuration",
-	Code: 201})
-
-var DeletePracticeRunConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "DeletePracticeRunConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/configuration/{resourceIdentifier}",
-	Code: 200})
-
-var GetAutoshiftObserverNotificationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "GetAutoshiftObserverNotificationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/autoshift-observer-notification",
-	Code: 200})
-
-var GetManagedResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "GetManagedResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/managedresources/{resourceIdentifier}",
-	Code: 200})
-
-var ListAutoshifts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListAutoshifts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/autoshifts",
-	Code: 200})
-
-var ListManagedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListManagedResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/managedresources",
-	Code: 200})
-
-var ListZonalShifts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListZonalShifts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
-	URI:  "/zonalshifts",
-	Code: 200})
-
-var StartPracticeRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "StartPracticeRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/practiceruns",
-	Code: 200})
-
-var StartZonalShift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "StartZonalShift",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/zonalshifts",
-	Code: 201})
-
-var UpdateAutoshiftObserverNotificationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdateAutoshiftObserverNotificationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/autoshift-observer-notification",
-	Code: 200})
-
-var UpdatePracticeRunConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdatePracticeRunConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/configuration/{resourceIdentifier}",
-	Code: 200})
-
-var UpdateZonalAutoshiftConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdateZonalAutoshiftConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/managedresources/{resourceIdentifier}",
-	Code: 200})
-
-var UpdateZonalShift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdateZonalShift",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/zonalshifts/{zonalShiftId}",
-	Code: 200})
-
-var _PercDataPlane = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "PercDataPlane",
-}, smithy.ShapeTypeService, 0)
-
-var PercDataPlane = smithy.NewServiceSchema(_PercDataPlane, "2022-10-30")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AllowedWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AllowedWindow",
-}, smithy.ShapeTypeString, 0)
-
-var _AllowedWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AllowedWindows",
-}, smithy.ShapeTypeList, 1)
-var _AllowedWindows_member *smithy.Schema
-
-var AppliedStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AppliedStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AppliedStatus_APPLIED *smithy.Schema
-
-var AppliedStatus_NOT_APPLIED *smithy.Schema
-
-var _AppliedWeights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AppliedWeights",
-}, smithy.ShapeTypeMap, 2)
-var _AppliedWeights_key *smithy.Schema
-
-var _AppliedWeights_value *smithy.Schema
-
-var AutoshiftAppliedStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AutoshiftAppliedStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AutoshiftAppliedStatus_APPLIED *smithy.Schema
-
-var AutoshiftAppliedStatus_NOT_APPLIED *smithy.Schema
-
-var AutoshiftExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AutoshiftExecutionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AutoshiftExecutionStatus_ACTIVE *smithy.Schema
-
-var AutoshiftExecutionStatus_COMPLETED *smithy.Schema
-
-var AutoshiftInResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AutoshiftInResource",
-}, smithy.ShapeTypeStructure, 3)
-var AutoshiftInResource_appliedStatus *smithy.Schema
-
-var AutoshiftInResource_awayFrom *smithy.Schema
-
-var AutoshiftInResource_startTime *smithy.Schema
-
-var AutoshiftObserverNotificationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AutoshiftObserverNotificationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AutoshiftObserverNotificationStatus_ENABLED *smithy.Schema
-
-var AutoshiftObserverNotificationStatus_DISABLED *smithy.Schema
-
-var _AutoshiftsInResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AutoshiftsInResource",
-}, smithy.ShapeTypeList, 1)
-var _AutoshiftsInResource_member *smithy.Schema
-
-var _AutoshiftSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AutoshiftSummaries",
-}, smithy.ShapeTypeList, 1)
-var _AutoshiftSummaries_member *smithy.Schema
-
-var AutoshiftSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AutoshiftSummary",
-}, smithy.ShapeTypeStructure, 4)
-var AutoshiftSummary_awayFrom *smithy.Schema
-
-var AutoshiftSummary_endTime *smithy.Schema
-
-var AutoshiftSummary_startTime *smithy.Schema
-
-var AutoshiftSummary_status *smithy.Schema
-
-var _AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AvailabilityZone",
-}, smithy.ShapeTypeString, 0)
-
-var _AvailabilityZones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "AvailabilityZones",
-}, smithy.ShapeTypeList, 1)
-var _AvailabilityZones_member *smithy.Schema
-
-var _BlockedDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "BlockedDate",
-}, smithy.ShapeTypeString, 0)
-
-var _BlockedDates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "BlockedDates",
-}, smithy.ShapeTypeList, 1)
-var _BlockedDates_member *smithy.Schema
-
-var _BlockedWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "BlockedWindow",
-}, smithy.ShapeTypeString, 0)
-
-var _BlockedWindows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "BlockedWindows",
-}, smithy.ShapeTypeList, 1)
-var _BlockedWindows_member *smithy.Schema
-
-var _BlockingAlarms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "BlockingAlarms",
-}, smithy.ShapeTypeList, 1)
-var _BlockingAlarms_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_reason *smithy.Schema
-
-var ConflictException_zonalShiftId *smithy.Schema
-
-var ConflictExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ConflictExceptionReason",
-}, smithy.ShapeTypeEnum, 12)
-var ConflictExceptionReason_ZONAL_SHIFT_ALREADY_EXISTS *smithy.Schema
-
-var ConflictExceptionReason_ZONAL_SHIFT_STATUS_NOT_ACTIVE *smithy.Schema
-
-var ConflictExceptionReason_SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT *smithy.Schema
-
-var ConflictExceptionReason_PRACTICE_CONFIGURATION_ALREADY_EXISTS *smithy.Schema
-
-var ConflictExceptionReason_AUTOSHIFT_ENABLED *smithy.Schema
-
-var ConflictExceptionReason_PRACTICE_CONFIGURATION_DOES_NOT_EXIST *smithy.Schema
-
-var ConflictExceptionReason_ZONAL_AUTOSHIFT_ACTIVE *smithy.Schema
-
-var ConflictExceptionReason_PRACTICE_OUTCOME_ALARMS_RED *smithy.Schema
-
-var ConflictExceptionReason_PRACTICE_BLOCKING_ALARMS_RED *smithy.Schema
-
-var ConflictExceptionReason_PRACTICE_IN_BLOCKED_DATES *smithy.Schema
-
-var ConflictExceptionReason_PRACTICE_IN_BLOCKED_WINDOWS *smithy.Schema
-
-var ConflictExceptionReason_PRACTICE_OUTSIDE_ALLOWED_WINDOWS *smithy.Schema
-
-var ControlCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ControlCondition",
-}, smithy.ShapeTypeStructure, 2)
-var ControlCondition_type *smithy.Schema
-
-var ControlCondition_alarmIdentifier *smithy.Schema
-
-var ControlConditionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ControlConditionType",
-}, smithy.ShapeTypeEnum, 1)
-var ControlConditionType_CLOUDWATCH *smithy.Schema
-
-var _ExpiresIn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ExpiresIn",
-}, smithy.ShapeTypeString, 0)
-
-var _ExpiryTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ExpiryTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _ManagedResourceSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ManagedResourceSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ManagedResourceSummaries_member *smithy.Schema
-
-var ManagedResourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ManagedResourceSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ManagedResourceSummary_arn *smithy.Schema
-
-var ManagedResourceSummary_name *smithy.Schema
-
-var ManagedResourceSummary_availabilityZones *smithy.Schema
-
-var ManagedResourceSummary_appliedWeights *smithy.Schema
-
-var ManagedResourceSummary_zonalShifts *smithy.Schema
-
-var ManagedResourceSummary_autoshifts *smithy.Schema
-
-var ManagedResourceSummary_zonalAutoshiftStatus *smithy.Schema
-
-var ManagedResourceSummary_practiceRunStatus *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MetricIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "MetricIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _OutcomeAlarms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "OutcomeAlarms",
-}, smithy.ShapeTypeList, 1)
-var _OutcomeAlarms_member *smithy.Schema
-
-var PracticeRunConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "PracticeRunConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var PracticeRunConfiguration_blockingAlarms *smithy.Schema
-
-var PracticeRunConfiguration_outcomeAlarms *smithy.Schema
-
-var PracticeRunConfiguration_blockedWindows *smithy.Schema
-
-var PracticeRunConfiguration_allowedWindows *smithy.Schema
-
-var PracticeRunConfiguration_blockedDates *smithy.Schema
-
-var PracticeRunOutcome = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "PracticeRunOutcome",
-}, smithy.ShapeTypeEnum, 5)
-var PracticeRunOutcome_FAILED *smithy.Schema
-
-var PracticeRunOutcome_INTERRUPTED *smithy.Schema
-
-var PracticeRunOutcome_PENDING *smithy.Schema
-
-var PracticeRunOutcome_SUCCEEDED *smithy.Schema
-
-var PracticeRunOutcome_CAPACITY_CHECK_FAILED *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ShiftType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ShiftType",
-}, smithy.ShapeTypeEnum, 4)
-var ShiftType_ZONAL_SHIFT *smithy.Schema
-
-var ShiftType_PRACTICE_RUN *smithy.Schema
-
-var ShiftType_FIS_EXPERIMENT *smithy.Schema
-
-var ShiftType_ZONAL_AUTOSHIFT *smithy.Schema
-
-var _StartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "StartTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 15)
-var ValidationExceptionReason_INVALID_EXPIRES_IN *smithy.Schema
-
-var ValidationExceptionReason_INVALID_STATUS *smithy.Schema
-
-var ValidationExceptionReason_MISSING_VALUE *smithy.Schema
-
-var ValidationExceptionReason_INVALID_TOKEN *smithy.Schema
-
-var ValidationExceptionReason_INVALID_RESOURCE_IDENTIFIER *smithy.Schema
-
-var ValidationExceptionReason_INVALID_AZ *smithy.Schema
-
-var ValidationExceptionReason_UNSUPPORTED_AZ *smithy.Schema
-
-var ValidationExceptionReason_INVALID_ALARM_CONDITION *smithy.Schema
-
-var ValidationExceptionReason_INVALID_CONDITION_TYPE *smithy.Schema
-
-var ValidationExceptionReason_INVALID_PRACTICE_BLOCKER *smithy.Schema
-
-var ValidationExceptionReason_FIS_EXPERIMENT_UPDATE_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionReason_AUTOSHIFT_UPDATE_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionReason_UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE *smithy.Schema
-
-var ValidationExceptionReason_INVALID_PRACTICE_ALLOWED_WINDOW *smithy.Schema
-
-var ValidationExceptionReason_CONFLICTING_PRACTICE_WINDOWS *smithy.Schema
-
-var _Weight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "Weight",
-}, smithy.ShapeTypeFloat, 0)
-
-var ZonalAutoshiftStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalAutoshiftStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ZonalAutoshiftStatus_ENABLED *smithy.Schema
-
-var ZonalAutoshiftStatus_DISABLED *smithy.Schema
-
-var _ZonalShiftComment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalShiftComment",
-}, smithy.ShapeTypeString, 0)
-
-var _ZonalShiftId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalShiftId",
-}, smithy.ShapeTypeString, 0)
-
-var ZonalShiftInResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalShiftInResource",
-}, smithy.ShapeTypeStructure, 9)
-var ZonalShiftInResource_appliedStatus *smithy.Schema
-
-var ZonalShiftInResource_zonalShiftId *smithy.Schema
-
-var ZonalShiftInResource_resourceIdentifier *smithy.Schema
-
-var ZonalShiftInResource_awayFrom *smithy.Schema
-
-var ZonalShiftInResource_expiryTime *smithy.Schema
-
-var ZonalShiftInResource_startTime *smithy.Schema
-
-var ZonalShiftInResource_comment *smithy.Schema
-
-var ZonalShiftInResource_shiftType *smithy.Schema
-
-var ZonalShiftInResource_practiceRunOutcome *smithy.Schema
-
-var _ZonalShiftsInResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalShiftsInResource",
-}, smithy.ShapeTypeList, 1)
-var _ZonalShiftsInResource_member *smithy.Schema
-
-var ZonalShiftStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalShiftStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ZonalShiftStatus_ACTIVE *smithy.Schema
-
-var ZonalShiftStatus_EXPIRED *smithy.Schema
-
-var ZonalShiftStatus_CANCELED *smithy.Schema
-
-var _ZonalShiftSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalShiftSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ZonalShiftSummaries_member *smithy.Schema
-
-var ZonalShiftSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalShiftSummary",
-}, smithy.ShapeTypeStructure, 9)
-var ZonalShiftSummary_zonalShiftId *smithy.Schema
-
-var ZonalShiftSummary_resourceIdentifier *smithy.Schema
-
-var ZonalShiftSummary_awayFrom *smithy.Schema
-
-var ZonalShiftSummary_expiryTime *smithy.Schema
-
-var ZonalShiftSummary_startTime *smithy.Schema
-
-var ZonalShiftSummary_status *smithy.Schema
-
-var ZonalShiftSummary_comment *smithy.Schema
-
-var ZonalShiftSummary_shiftType *smithy.Schema
-
-var ZonalShiftSummary_practiceRunOutcome *smithy.Schema
-
-var CancelPracticeRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "CancelPracticeRunRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelPracticeRunRequest_zonalShiftId *smithy.Schema
-
-var CancelPracticeRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "CancelPracticeRunResponse",
-}, smithy.ShapeTypeStructure, 7)
-var CancelPracticeRunResponse_zonalShiftId *smithy.Schema
-
-var CancelPracticeRunResponse_resourceIdentifier *smithy.Schema
-
-var CancelPracticeRunResponse_awayFrom *smithy.Schema
-
-var CancelPracticeRunResponse_expiryTime *smithy.Schema
-
-var CancelPracticeRunResponse_startTime *smithy.Schema
-
-var CancelPracticeRunResponse_status *smithy.Schema
-
-var CancelPracticeRunResponse_comment *smithy.Schema
-
-var CancelZonalShiftRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "CancelZonalShiftRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelZonalShiftRequest_zonalShiftId *smithy.Schema
-
-var ZonalShift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ZonalShift",
-}, smithy.ShapeTypeStructure, 7)
-var ZonalShift_zonalShiftId *smithy.Schema
-
-var ZonalShift_resourceIdentifier *smithy.Schema
-
-var ZonalShift_awayFrom *smithy.Schema
-
-var ZonalShift_expiryTime *smithy.Schema
-
-var ZonalShift_startTime *smithy.Schema
-
-var ZonalShift_status *smithy.Schema
-
-var ZonalShift_comment *smithy.Schema
-
-var CreatePracticeRunConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "CreatePracticeRunConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreatePracticeRunConfigurationRequest_resourceIdentifier *smithy.Schema
-
-var CreatePracticeRunConfigurationRequest_blockedWindows *smithy.Schema
-
-var CreatePracticeRunConfigurationRequest_blockedDates *smithy.Schema
-
-var CreatePracticeRunConfigurationRequest_blockingAlarms *smithy.Schema
-
-var CreatePracticeRunConfigurationRequest_allowedWindows *smithy.Schema
-
-var CreatePracticeRunConfigurationRequest_outcomeAlarms *smithy.Schema
-
-var CreatePracticeRunConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "CreatePracticeRunConfigurationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePracticeRunConfigurationResponse_arn *smithy.Schema
-
-var CreatePracticeRunConfigurationResponse_name *smithy.Schema
-
-var CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus *smithy.Schema
-
-var CreatePracticeRunConfigurationResponse_practiceRunConfiguration *smithy.Schema
-
-var DeletePracticeRunConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "DeletePracticeRunConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePracticeRunConfigurationRequest_resourceIdentifier *smithy.Schema
-
-var DeletePracticeRunConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "DeletePracticeRunConfigurationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeletePracticeRunConfigurationResponse_arn *smithy.Schema
-
-var DeletePracticeRunConfigurationResponse_name *smithy.Schema
-
-var DeletePracticeRunConfigurationResponse_zonalAutoshiftStatus *smithy.Schema
-
-var GetAutoshiftObserverNotificationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "GetAutoshiftObserverNotificationStatusRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAutoshiftObserverNotificationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "GetAutoshiftObserverNotificationStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutoshiftObserverNotificationStatusResponse_status *smithy.Schema
-
-var GetManagedResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "GetManagedResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetManagedResourceRequest_resourceIdentifier *smithy.Schema
-
-var GetManagedResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "GetManagedResourceResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetManagedResourceResponse_arn *smithy.Schema
-
-var GetManagedResourceResponse_name *smithy.Schema
-
-var GetManagedResourceResponse_appliedWeights *smithy.Schema
-
-var GetManagedResourceResponse_zonalShifts *smithy.Schema
-
-var GetManagedResourceResponse_autoshifts *smithy.Schema
-
-var GetManagedResourceResponse_practiceRunConfiguration *smithy.Schema
-
-var GetManagedResourceResponse_zonalAutoshiftStatus *smithy.Schema
-
-var ListAutoshiftsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListAutoshiftsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAutoshiftsRequest_nextToken *smithy.Schema
-
-var ListAutoshiftsRequest_status *smithy.Schema
-
-var ListAutoshiftsRequest_maxResults *smithy.Schema
-
-var ListAutoshiftsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListAutoshiftsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutoshiftsResponse_items *smithy.Schema
-
-var ListAutoshiftsResponse_nextToken *smithy.Schema
-
-var ListManagedResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListManagedResourcesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedResourcesRequest_nextToken *smithy.Schema
-
-var ListManagedResourcesRequest_maxResults *smithy.Schema
-
-var ListManagedResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListManagedResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedResourcesResponse_items *smithy.Schema
-
-var ListManagedResourcesResponse_nextToken *smithy.Schema
-
-var ListZonalShiftsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListZonalShiftsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListZonalShiftsRequest_nextToken *smithy.Schema
-
-var ListZonalShiftsRequest_status *smithy.Schema
-
-var ListZonalShiftsRequest_maxResults *smithy.Schema
-
-var ListZonalShiftsRequest_resourceIdentifier *smithy.Schema
-
-var ListZonalShiftsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "ListZonalShiftsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListZonalShiftsResponse_items *smithy.Schema
-
-var ListZonalShiftsResponse_nextToken *smithy.Schema
-
-var StartPracticeRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "StartPracticeRunRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StartPracticeRunRequest_resourceIdentifier *smithy.Schema
-
-var StartPracticeRunRequest_awayFrom *smithy.Schema
-
-var StartPracticeRunRequest_comment *smithy.Schema
-
-var StartPracticeRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "StartPracticeRunResponse",
-}, smithy.ShapeTypeStructure, 7)
-var StartPracticeRunResponse_zonalShiftId *smithy.Schema
-
-var StartPracticeRunResponse_resourceIdentifier *smithy.Schema
-
-var StartPracticeRunResponse_awayFrom *smithy.Schema
-
-var StartPracticeRunResponse_expiryTime *smithy.Schema
-
-var StartPracticeRunResponse_startTime *smithy.Schema
-
-var StartPracticeRunResponse_status *smithy.Schema
-
-var StartPracticeRunResponse_comment *smithy.Schema
-
-var StartZonalShiftRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "StartZonalShiftRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartZonalShiftRequest_resourceIdentifier *smithy.Schema
-
-var StartZonalShiftRequest_awayFrom *smithy.Schema
-
-var StartZonalShiftRequest_expiresIn *smithy.Schema
-
-var StartZonalShiftRequest_comment *smithy.Schema
-
-var UpdateAutoshiftObserverNotificationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdateAutoshiftObserverNotificationStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAutoshiftObserverNotificationStatusRequest_status *smithy.Schema
-
-var UpdateAutoshiftObserverNotificationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdateAutoshiftObserverNotificationStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAutoshiftObserverNotificationStatusResponse_status *smithy.Schema
-
-var UpdatePracticeRunConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdatePracticeRunConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdatePracticeRunConfigurationRequest_resourceIdentifier *smithy.Schema
-
-var UpdatePracticeRunConfigurationRequest_blockedWindows *smithy.Schema
-
-var UpdatePracticeRunConfigurationRequest_blockedDates *smithy.Schema
-
-var UpdatePracticeRunConfigurationRequest_blockingAlarms *smithy.Schema
-
-var UpdatePracticeRunConfigurationRequest_allowedWindows *smithy.Schema
-
-var UpdatePracticeRunConfigurationRequest_outcomeAlarms *smithy.Schema
-
-var UpdatePracticeRunConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdatePracticeRunConfigurationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePracticeRunConfigurationResponse_arn *smithy.Schema
-
-var UpdatePracticeRunConfigurationResponse_name *smithy.Schema
-
-var UpdatePracticeRunConfigurationResponse_zonalAutoshiftStatus *smithy.Schema
-
-var UpdatePracticeRunConfigurationResponse_practiceRunConfiguration *smithy.Schema
-
-var UpdateZonalAutoshiftConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdateZonalAutoshiftConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateZonalAutoshiftConfigurationRequest_resourceIdentifier *smithy.Schema
-
-var UpdateZonalAutoshiftConfigurationRequest_zonalAutoshiftStatus *smithy.Schema
-
-var UpdateZonalAutoshiftConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdateZonalAutoshiftConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateZonalAutoshiftConfigurationResponse_resourceIdentifier *smithy.Schema
-
-var UpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus *smithy.Schema
-
-var UpdateZonalShiftRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.arczonalshift",
-	Name:      "UpdateZonalShiftRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateZonalShiftRequest_zonalShiftId *smithy.Schema
-
-var UpdateZonalShiftRequest_comment *smithy.Schema
-
-var UpdateZonalShiftRequest_expiresIn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_AllowedWindows_member = _AllowedWindows.AddMember("member", _AllowedWindow)
-
-	AppliedStatus_APPLIED = AppliedStatus.AddMember("APPLIED", smithyprelude.Unit)
-
-	AppliedStatus_NOT_APPLIED = AppliedStatus.AddMember("NOT_APPLIED", smithyprelude.Unit)
-
-	_AppliedWeights_key = _AppliedWeights.AddMember("key", _AvailabilityZone)
-
-	_AppliedWeights_value = _AppliedWeights.AddMember("value", _Weight)
-
-	AutoshiftAppliedStatus_APPLIED = AutoshiftAppliedStatus.AddMember("APPLIED", smithyprelude.Unit)
-
-	AutoshiftAppliedStatus_NOT_APPLIED = AutoshiftAppliedStatus.AddMember("NOT_APPLIED", smithyprelude.Unit)
-
-	AutoshiftExecutionStatus_ACTIVE = AutoshiftExecutionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AutoshiftExecutionStatus_COMPLETED = AutoshiftExecutionStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	AutoshiftInResource_appliedStatus = AutoshiftInResource.AddMember("appliedStatus", AutoshiftAppliedStatus)
-
-	AutoshiftInResource_awayFrom = AutoshiftInResource.AddMember("awayFrom", _AvailabilityZone)
-
-	AutoshiftInResource_startTime = AutoshiftInResource.AddMember("startTime", _StartTime)
-
-	AutoshiftObserverNotificationStatus_ENABLED = AutoshiftObserverNotificationStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	AutoshiftObserverNotificationStatus_DISABLED = AutoshiftObserverNotificationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	_AutoshiftsInResource_member = _AutoshiftsInResource.AddMember("member", AutoshiftInResource)
-
-	AutoshiftSummary_awayFrom = AutoshiftSummary.AddMember("awayFrom", _AvailabilityZone)
-
-	AutoshiftSummary_endTime = AutoshiftSummary.AddMember("endTime", _ExpiryTime)
-
-	AutoshiftSummary_startTime = AutoshiftSummary.AddMember("startTime", _StartTime)
-
-	AutoshiftSummary_status = AutoshiftSummary.AddMember("status", AutoshiftExecutionStatus)
-
-	_AutoshiftSummaries_member = _AutoshiftSummaries.AddMember("member", AutoshiftSummary)
-
-	_AvailabilityZones_member = _AvailabilityZones.AddMember("member", _AvailabilityZone)
-
-	_BlockedDates_member = _BlockedDates.AddMember("member", _BlockedDate)
-
-	_BlockedWindows_member = _BlockedWindows.AddMember("member", _BlockedWindow)
-
-	ControlConditionType_CLOUDWATCH = ControlConditionType.AddMember("CLOUDWATCH", smithyprelude.Unit)
-
-	ControlCondition_type = ControlCondition.AddMember("type", ControlConditionType)
-
-	ControlCondition_alarmIdentifier = ControlCondition.AddMember("alarmIdentifier", _MetricIdentifier)
-
-	_BlockingAlarms_member = _BlockingAlarms.AddMember("member", ControlCondition)
-
-	ConflictExceptionReason_ZONAL_SHIFT_ALREADY_EXISTS = ConflictExceptionReason.AddMember("ZONAL_SHIFT_ALREADY_EXISTS", smithyprelude.Unit)
-
-	ConflictExceptionReason_ZONAL_SHIFT_STATUS_NOT_ACTIVE = ConflictExceptionReason.AddMember("ZONAL_SHIFT_STATUS_NOT_ACTIVE", smithyprelude.Unit)
-
-	ConflictExceptionReason_SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT = ConflictExceptionReason.AddMember("SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT", smithyprelude.Unit)
-
-	ConflictExceptionReason_PRACTICE_CONFIGURATION_ALREADY_EXISTS = ConflictExceptionReason.AddMember("PRACTICE_CONFIGURATION_ALREADY_EXISTS", smithyprelude.Unit)
-
-	ConflictExceptionReason_AUTOSHIFT_ENABLED = ConflictExceptionReason.AddMember("AUTOSHIFT_ENABLED", smithyprelude.Unit)
-
-	ConflictExceptionReason_PRACTICE_CONFIGURATION_DOES_NOT_EXIST = ConflictExceptionReason.AddMember("PRACTICE_CONFIGURATION_DOES_NOT_EXIST", smithyprelude.Unit)
-
-	ConflictExceptionReason_ZONAL_AUTOSHIFT_ACTIVE = ConflictExceptionReason.AddMember("ZONAL_AUTOSHIFT_ACTIVE", smithyprelude.Unit)
-
-	ConflictExceptionReason_PRACTICE_OUTCOME_ALARMS_RED = ConflictExceptionReason.AddMember("PRACTICE_OUTCOME_ALARMS_RED", smithyprelude.Unit)
-
-	ConflictExceptionReason_PRACTICE_BLOCKING_ALARMS_RED = ConflictExceptionReason.AddMember("PRACTICE_BLOCKING_ALARMS_RED", smithyprelude.Unit)
-
-	ConflictExceptionReason_PRACTICE_IN_BLOCKED_DATES = ConflictExceptionReason.AddMember("PRACTICE_IN_BLOCKED_DATES", smithyprelude.Unit)
-
-	ConflictExceptionReason_PRACTICE_IN_BLOCKED_WINDOWS = ConflictExceptionReason.AddMember("PRACTICE_IN_BLOCKED_WINDOWS", smithyprelude.Unit)
-
-	ConflictExceptionReason_PRACTICE_OUTSIDE_ALLOWED_WINDOWS = ConflictExceptionReason.AddMember("PRACTICE_OUTSIDE_ALLOWED_WINDOWS", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_reason = ConflictException.AddMember("reason", ConflictExceptionReason)
-
-	ConflictException_zonalShiftId = ConflictException.AddMember("zonalShiftId", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	ShiftType_ZONAL_SHIFT = ShiftType.AddMember("ZONAL_SHIFT", smithyprelude.Unit)
-
-	ShiftType_PRACTICE_RUN = ShiftType.AddMember("PRACTICE_RUN", smithyprelude.Unit)
-
-	ShiftType_FIS_EXPERIMENT = ShiftType.AddMember("FIS_EXPERIMENT", smithyprelude.Unit)
-
-	ShiftType_ZONAL_AUTOSHIFT = ShiftType.AddMember("ZONAL_AUTOSHIFT", smithyprelude.Unit)
-
-	PracticeRunOutcome_FAILED = PracticeRunOutcome.AddMember("FAILED", smithyprelude.Unit)
-
-	PracticeRunOutcome_INTERRUPTED = PracticeRunOutcome.AddMember("INTERRUPTED", smithyprelude.Unit)
-
-	PracticeRunOutcome_PENDING = PracticeRunOutcome.AddMember("PENDING", smithyprelude.Unit)
-
-	PracticeRunOutcome_SUCCEEDED = PracticeRunOutcome.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	PracticeRunOutcome_CAPACITY_CHECK_FAILED = PracticeRunOutcome.AddMember("CAPACITY_CHECK_FAILED", smithyprelude.Unit)
-
-	ZonalShiftInResource_appliedStatus = ZonalShiftInResource.AddMember("appliedStatus", AppliedStatus)
-
-	ZonalShiftInResource_zonalShiftId = ZonalShiftInResource.AddMember("zonalShiftId", _ZonalShiftId)
-
-	ZonalShiftInResource_resourceIdentifier = ZonalShiftInResource.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	ZonalShiftInResource_awayFrom = ZonalShiftInResource.AddMember("awayFrom", _AvailabilityZone)
-
-	ZonalShiftInResource_expiryTime = ZonalShiftInResource.AddMember("expiryTime", _ExpiryTime)
-
-	ZonalShiftInResource_startTime = ZonalShiftInResource.AddMember("startTime", _StartTime)
-
-	ZonalShiftInResource_comment = ZonalShiftInResource.AddMember("comment", _ZonalShiftComment)
-
-	ZonalShiftInResource_shiftType = ZonalShiftInResource.AddMember("shiftType", ShiftType)
-
-	ZonalShiftInResource_practiceRunOutcome = ZonalShiftInResource.AddMember("practiceRunOutcome", PracticeRunOutcome)
-
-	_ZonalShiftsInResource_member = _ZonalShiftsInResource.AddMember("member", ZonalShiftInResource)
-
-	ZonalAutoshiftStatus_ENABLED = ZonalAutoshiftStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	ZonalAutoshiftStatus_DISABLED = ZonalAutoshiftStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ManagedResourceSummary_arn = ManagedResourceSummary.AddMember("arn", _ResourceArn)
-
-	ManagedResourceSummary_name = ManagedResourceSummary.AddMember("name", _ResourceName)
-
-	ManagedResourceSummary_availabilityZones = ManagedResourceSummary.AddMember("availabilityZones", _AvailabilityZones)
-
-	ManagedResourceSummary_appliedWeights = ManagedResourceSummary.AddMember("appliedWeights", _AppliedWeights)
-
-	ManagedResourceSummary_zonalShifts = ManagedResourceSummary.AddMember("zonalShifts", _ZonalShiftsInResource)
-
-	ManagedResourceSummary_autoshifts = ManagedResourceSummary.AddMember("autoshifts", _AutoshiftsInResource)
-
-	ManagedResourceSummary_zonalAutoshiftStatus = ManagedResourceSummary.AddMember("zonalAutoshiftStatus", ZonalAutoshiftStatus)
-
-	ManagedResourceSummary_practiceRunStatus = ManagedResourceSummary.AddMember("practiceRunStatus", ZonalAutoshiftStatus)
-
-	_ManagedResourceSummaries_member = _ManagedResourceSummaries.AddMember("member", ManagedResourceSummary)
-
-	_OutcomeAlarms_member = _OutcomeAlarms.AddMember("member", ControlCondition)
-
-	PracticeRunConfiguration_blockingAlarms = PracticeRunConfiguration.AddMember("blockingAlarms", _BlockingAlarms)
-
-	PracticeRunConfiguration_outcomeAlarms = PracticeRunConfiguration.AddMember("outcomeAlarms", _OutcomeAlarms)
-
-	PracticeRunConfiguration_blockedWindows = PracticeRunConfiguration.AddMember("blockedWindows", _BlockedWindows)
-
-	PracticeRunConfiguration_allowedWindows = PracticeRunConfiguration.AddMember("allowedWindows", _AllowedWindows)
-
-	PracticeRunConfiguration_blockedDates = PracticeRunConfiguration.AddMember("blockedDates", _BlockedDates)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationExceptionReason_INVALID_EXPIRES_IN = ValidationExceptionReason.AddMember("INVALID_EXPIRES_IN", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_STATUS = ValidationExceptionReason.AddMember("INVALID_STATUS", smithyprelude.Unit)
-
-	ValidationExceptionReason_MISSING_VALUE = ValidationExceptionReason.AddMember("MISSING_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_TOKEN = ValidationExceptionReason.AddMember("INVALID_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_RESOURCE_IDENTIFIER = ValidationExceptionReason.AddMember("INVALID_RESOURCE_IDENTIFIER", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_AZ = ValidationExceptionReason.AddMember("INVALID_AZ", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNSUPPORTED_AZ = ValidationExceptionReason.AddMember("UNSUPPORTED_AZ", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_ALARM_CONDITION = ValidationExceptionReason.AddMember("INVALID_ALARM_CONDITION", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_CONDITION_TYPE = ValidationExceptionReason.AddMember("INVALID_CONDITION_TYPE", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_PRACTICE_BLOCKER = ValidationExceptionReason.AddMember("INVALID_PRACTICE_BLOCKER", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIS_EXPERIMENT_UPDATE_NOT_ALLOWED = ValidationExceptionReason.AddMember("FIS_EXPERIMENT_UPDATE_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionReason_AUTOSHIFT_UPDATE_NOT_ALLOWED = ValidationExceptionReason.AddMember("AUTOSHIFT_UPDATE_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE = ValidationExceptionReason.AddMember("UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_PRACTICE_ALLOWED_WINDOW = ValidationExceptionReason.AddMember("INVALID_PRACTICE_ALLOWED_WINDOW", smithyprelude.Unit)
-
-	ValidationExceptionReason_CONFLICTING_PRACTICE_WINDOWS = ValidationExceptionReason.AddMember("CONFLICTING_PRACTICE_WINDOWS", smithyprelude.Unit)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ZonalShiftStatus_ACTIVE = ZonalShiftStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ZonalShiftStatus_EXPIRED = ZonalShiftStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	ZonalShiftStatus_CANCELED = ZonalShiftStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	ZonalShiftSummary_zonalShiftId = ZonalShiftSummary.AddMember("zonalShiftId", _ZonalShiftId)
-
-	ZonalShiftSummary_resourceIdentifier = ZonalShiftSummary.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	ZonalShiftSummary_awayFrom = ZonalShiftSummary.AddMember("awayFrom", _AvailabilityZone)
-
-	ZonalShiftSummary_expiryTime = ZonalShiftSummary.AddMember("expiryTime", _ExpiryTime)
-
-	ZonalShiftSummary_startTime = ZonalShiftSummary.AddMember("startTime", _StartTime)
-
-	ZonalShiftSummary_status = ZonalShiftSummary.AddMember("status", ZonalShiftStatus)
-
-	ZonalShiftSummary_comment = ZonalShiftSummary.AddMember("comment", _ZonalShiftComment)
-
-	ZonalShiftSummary_shiftType = ZonalShiftSummary.AddMember("shiftType", ShiftType)
-
-	ZonalShiftSummary_practiceRunOutcome = ZonalShiftSummary.AddMember("practiceRunOutcome", PracticeRunOutcome)
-
-	_ZonalShiftSummaries_member = _ZonalShiftSummaries.AddMember("member", ZonalShiftSummary)
-
-	CancelPracticeRunRequest_zonalShiftId = CancelPracticeRunRequest.AddMember("zonalShiftId", _ZonalShiftId, &smithytraits.HTTPLabel{})
-
-	CancelPracticeRunResponse_zonalShiftId = CancelPracticeRunResponse.AddMember("zonalShiftId", _ZonalShiftId)
-
-	CancelPracticeRunResponse_resourceIdentifier = CancelPracticeRunResponse.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	CancelPracticeRunResponse_awayFrom = CancelPracticeRunResponse.AddMember("awayFrom", _AvailabilityZone)
-
-	CancelPracticeRunResponse_expiryTime = CancelPracticeRunResponse.AddMember("expiryTime", _ExpiryTime)
-
-	CancelPracticeRunResponse_startTime = CancelPracticeRunResponse.AddMember("startTime", _StartTime)
-
-	CancelPracticeRunResponse_status = CancelPracticeRunResponse.AddMember("status", ZonalShiftStatus)
-
-	CancelPracticeRunResponse_comment = CancelPracticeRunResponse.AddMember("comment", _ZonalShiftComment)
-
-	CancelZonalShiftRequest_zonalShiftId = CancelZonalShiftRequest.AddMember("zonalShiftId", _ZonalShiftId, &smithytraits.HTTPLabel{})
-
-	ZonalShift_zonalShiftId = ZonalShift.AddMember("zonalShiftId", _ZonalShiftId)
-
-	ZonalShift_resourceIdentifier = ZonalShift.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	ZonalShift_awayFrom = ZonalShift.AddMember("awayFrom", _AvailabilityZone)
-
-	ZonalShift_expiryTime = ZonalShift.AddMember("expiryTime", _ExpiryTime)
-
-	ZonalShift_startTime = ZonalShift.AddMember("startTime", _StartTime)
-
-	ZonalShift_status = ZonalShift.AddMember("status", ZonalShiftStatus)
-
-	ZonalShift_comment = ZonalShift.AddMember("comment", _ZonalShiftComment)
-
-	CreatePracticeRunConfigurationRequest_resourceIdentifier = CreatePracticeRunConfigurationRequest.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	CreatePracticeRunConfigurationRequest_blockedWindows = CreatePracticeRunConfigurationRequest.AddMember("blockedWindows", _BlockedWindows)
-
-	CreatePracticeRunConfigurationRequest_blockedDates = CreatePracticeRunConfigurationRequest.AddMember("blockedDates", _BlockedDates)
-
-	CreatePracticeRunConfigurationRequest_blockingAlarms = CreatePracticeRunConfigurationRequest.AddMember("blockingAlarms", _BlockingAlarms)
-
-	CreatePracticeRunConfigurationRequest_allowedWindows = CreatePracticeRunConfigurationRequest.AddMember("allowedWindows", _AllowedWindows)
-
-	CreatePracticeRunConfigurationRequest_outcomeAlarms = CreatePracticeRunConfigurationRequest.AddMember("outcomeAlarms", _OutcomeAlarms)
-
-	CreatePracticeRunConfigurationResponse_arn = CreatePracticeRunConfigurationResponse.AddMember("arn", _ResourceArn)
-
-	CreatePracticeRunConfigurationResponse_name = CreatePracticeRunConfigurationResponse.AddMember("name", _ResourceName)
-
-	CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus = CreatePracticeRunConfigurationResponse.AddMember("zonalAutoshiftStatus", ZonalAutoshiftStatus)
-
-	CreatePracticeRunConfigurationResponse_practiceRunConfiguration = CreatePracticeRunConfigurationResponse.AddMember("practiceRunConfiguration", PracticeRunConfiguration)
-
-	DeletePracticeRunConfigurationRequest_resourceIdentifier = DeletePracticeRunConfigurationRequest.AddMember("resourceIdentifier", _ResourceIdentifier, &smithytraits.HTTPLabel{})
-
-	DeletePracticeRunConfigurationResponse_arn = DeletePracticeRunConfigurationResponse.AddMember("arn", _ResourceArn)
-
-	DeletePracticeRunConfigurationResponse_name = DeletePracticeRunConfigurationResponse.AddMember("name", _ResourceName)
-
-	DeletePracticeRunConfigurationResponse_zonalAutoshiftStatus = DeletePracticeRunConfigurationResponse.AddMember("zonalAutoshiftStatus", ZonalAutoshiftStatus)
-
-	GetAutoshiftObserverNotificationStatusResponse_status = GetAutoshiftObserverNotificationStatusResponse.AddMember("status", AutoshiftObserverNotificationStatus)
-
-	GetManagedResourceRequest_resourceIdentifier = GetManagedResourceRequest.AddMember("resourceIdentifier", _ResourceIdentifier, &smithytraits.HTTPLabel{})
-
-	GetManagedResourceResponse_arn = GetManagedResourceResponse.AddMember("arn", _ResourceArn)
-
-	GetManagedResourceResponse_name = GetManagedResourceResponse.AddMember("name", _ResourceName)
-
-	GetManagedResourceResponse_appliedWeights = GetManagedResourceResponse.AddMember("appliedWeights", _AppliedWeights)
-
-	GetManagedResourceResponse_zonalShifts = GetManagedResourceResponse.AddMember("zonalShifts", _ZonalShiftsInResource)
-
-	GetManagedResourceResponse_autoshifts = GetManagedResourceResponse.AddMember("autoshifts", _AutoshiftsInResource)
-
-	GetManagedResourceResponse_practiceRunConfiguration = GetManagedResourceResponse.AddMember("practiceRunConfiguration", PracticeRunConfiguration)
-
-	GetManagedResourceResponse_zonalAutoshiftStatus = GetManagedResourceResponse.AddMember("zonalAutoshiftStatus", ZonalAutoshiftStatus)
-
-	ListAutoshiftsRequest_nextToken = ListAutoshiftsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAutoshiftsRequest_status = ListAutoshiftsRequest.AddMember("status", AutoshiftExecutionStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListAutoshiftsRequest_maxResults = ListAutoshiftsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAutoshiftsResponse_items = ListAutoshiftsResponse.AddMember("items", _AutoshiftSummaries)
-
-	ListAutoshiftsResponse_nextToken = ListAutoshiftsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListManagedResourcesRequest_nextToken = ListManagedResourcesRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListManagedResourcesRequest_maxResults = ListManagedResourcesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListManagedResourcesResponse_items = ListManagedResourcesResponse.AddMember("items", _ManagedResourceSummaries)
-
-	ListManagedResourcesResponse_nextToken = ListManagedResourcesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListZonalShiftsRequest_nextToken = ListZonalShiftsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListZonalShiftsRequest_status = ListZonalShiftsRequest.AddMember("status", ZonalShiftStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListZonalShiftsRequest_maxResults = ListZonalShiftsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListZonalShiftsRequest_resourceIdentifier = ListZonalShiftsRequest.AddMember("resourceIdentifier", _ResourceIdentifier, &smithytraits.HTTPQuery{Name: "resourceIdentifier"})
-
-	ListZonalShiftsResponse_items = ListZonalShiftsResponse.AddMember("items", _ZonalShiftSummaries)
-
-	ListZonalShiftsResponse_nextToken = ListZonalShiftsResponse.AddMember("nextToken", smithyprelude.String)
-
-	StartPracticeRunRequest_resourceIdentifier = StartPracticeRunRequest.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	StartPracticeRunRequest_awayFrom = StartPracticeRunRequest.AddMember("awayFrom", _AvailabilityZone)
-
-	StartPracticeRunRequest_comment = StartPracticeRunRequest.AddMember("comment", _ZonalShiftComment)
-
-	StartPracticeRunResponse_zonalShiftId = StartPracticeRunResponse.AddMember("zonalShiftId", _ZonalShiftId)
-
-	StartPracticeRunResponse_resourceIdentifier = StartPracticeRunResponse.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	StartPracticeRunResponse_awayFrom = StartPracticeRunResponse.AddMember("awayFrom", _AvailabilityZone)
-
-	StartPracticeRunResponse_expiryTime = StartPracticeRunResponse.AddMember("expiryTime", _ExpiryTime)
-
-	StartPracticeRunResponse_startTime = StartPracticeRunResponse.AddMember("startTime", _StartTime)
-
-	StartPracticeRunResponse_status = StartPracticeRunResponse.AddMember("status", ZonalShiftStatus)
-
-	StartPracticeRunResponse_comment = StartPracticeRunResponse.AddMember("comment", _ZonalShiftComment)
-
-	StartZonalShiftRequest_resourceIdentifier = StartZonalShiftRequest.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	StartZonalShiftRequest_awayFrom = StartZonalShiftRequest.AddMember("awayFrom", _AvailabilityZone)
-
-	StartZonalShiftRequest_expiresIn = StartZonalShiftRequest.AddMember("expiresIn", _ExpiresIn)
-
-	StartZonalShiftRequest_comment = StartZonalShiftRequest.AddMember("comment", _ZonalShiftComment)
-
-	UpdateAutoshiftObserverNotificationStatusRequest_status = UpdateAutoshiftObserverNotificationStatusRequest.AddMember("status", AutoshiftObserverNotificationStatus)
-
-	UpdateAutoshiftObserverNotificationStatusResponse_status = UpdateAutoshiftObserverNotificationStatusResponse.AddMember("status", AutoshiftObserverNotificationStatus)
-
-	UpdatePracticeRunConfigurationRequest_resourceIdentifier = UpdatePracticeRunConfigurationRequest.AddMember("resourceIdentifier", _ResourceIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdatePracticeRunConfigurationRequest_blockedWindows = UpdatePracticeRunConfigurationRequest.AddMember("blockedWindows", _BlockedWindows)
-
-	UpdatePracticeRunConfigurationRequest_blockedDates = UpdatePracticeRunConfigurationRequest.AddMember("blockedDates", _BlockedDates)
-
-	UpdatePracticeRunConfigurationRequest_blockingAlarms = UpdatePracticeRunConfigurationRequest.AddMember("blockingAlarms", _BlockingAlarms)
-
-	UpdatePracticeRunConfigurationRequest_allowedWindows = UpdatePracticeRunConfigurationRequest.AddMember("allowedWindows", _AllowedWindows)
-
-	UpdatePracticeRunConfigurationRequest_outcomeAlarms = UpdatePracticeRunConfigurationRequest.AddMember("outcomeAlarms", _OutcomeAlarms)
-
-	UpdatePracticeRunConfigurationResponse_arn = UpdatePracticeRunConfigurationResponse.AddMember("arn", _ResourceArn)
-
-	UpdatePracticeRunConfigurationResponse_name = UpdatePracticeRunConfigurationResponse.AddMember("name", _ResourceName)
-
-	UpdatePracticeRunConfigurationResponse_zonalAutoshiftStatus = UpdatePracticeRunConfigurationResponse.AddMember("zonalAutoshiftStatus", ZonalAutoshiftStatus)
-
-	UpdatePracticeRunConfigurationResponse_practiceRunConfiguration = UpdatePracticeRunConfigurationResponse.AddMember("practiceRunConfiguration", PracticeRunConfiguration)
-
-	UpdateZonalAutoshiftConfigurationRequest_resourceIdentifier = UpdateZonalAutoshiftConfigurationRequest.AddMember("resourceIdentifier", _ResourceIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateZonalAutoshiftConfigurationRequest_zonalAutoshiftStatus = UpdateZonalAutoshiftConfigurationRequest.AddMember("zonalAutoshiftStatus", ZonalAutoshiftStatus)
-
-	UpdateZonalAutoshiftConfigurationResponse_resourceIdentifier = UpdateZonalAutoshiftConfigurationResponse.AddMember("resourceIdentifier", _ResourceIdentifier)
-
-	UpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus = UpdateZonalAutoshiftConfigurationResponse.AddMember("zonalAutoshiftStatus", ZonalAutoshiftStatus)
-
-	UpdateZonalShiftRequest_zonalShiftId = UpdateZonalShiftRequest.AddMember("zonalShiftId", _ZonalShiftId, &smithytraits.HTTPLabel{})
-
-	UpdateZonalShiftRequest_comment = UpdateZonalShiftRequest.AddMember("comment", _ZonalShiftComment)
-
-	UpdateZonalShiftRequest_expiresIn = UpdateZonalShiftRequest.AddMember("expiresIn", _ExpiresIn)
-
+const blob = "" +
+	"UpdateAutoshiftObserverNotificationStatusResponseUpdateAutoshiftObserverNotificationStatusRequestGet" +
+	"AutoshiftObserverNotificationStatusResponseGetAutoshiftObserverNotificationStatusRequestUpdateZonalA" +
+	"utoshiftConfigurationResponseUpdateZonalAutoshiftConfigurationRequestCreatePracticeRunConfigurationR" +
+	"esponseDeletePracticeRunConfigurationResponseUNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPEUpdatePracticeRun" +
+	"ConfigurationResponseCreatePracticeRunConfigurationRequestDeletePracticeRunConfigurationRequestPRACT" +
+	"ICE_CONFIGURATION_ALREADY_EXISTSPRACTICE_CONFIGURATION_DOES_NOT_EXISTUpdatePracticeRunConfigurationR" +
+	"equestSIMULTANEOUS_ZONAL_SHIFTS_CONFLICTFIS_EXPERIMENT_UPDATE_NOT_ALLOWEDPRACTICE_OUTSIDE_ALLOWED_WI" +
+	"NDOWSINVALID_PRACTICE_ALLOWED_WINDOWZONAL_SHIFT_STATUS_NOT_ACTIVEAUTOSHIFT_UPDATE_NOT_ALLOWEDCONFLIC" +
+	"TING_PRACTICE_WINDOWSListManagedResourcesResponsePRACTICE_BLOCKING_ALARMS_REDINVALID_RESOURCE_IDENTI" +
+	"FIERListManagedResourcesRequestPRACTICE_IN_BLOCKED_WINDOWSPRACTICE_OUTCOME_ALARMS_REDGetManagedResou" +
+	"rceResponseZONAL_SHIFT_ALREADY_EXISTSCancelPracticeRunResponseGetManagedResourceRequestPRACTICE_IN_B" +
+	"LOCKED_DATESResourceNotFoundExceptionValidationExceptionReasonAutoshiftExecutionStatusCancelPractice" +
+	"RunRequestINVALID_PRACTICE_BLOCKERManagedResourceSummariesStartPracticeRunResponsepracticeRunConfigu" +
+	"rationCancelZonalShiftRequestConflictExceptionReasonINVALID_ALARM_CONDITIONInternalServerExceptionLi" +
+	"stZonalShiftsResponseStartPracticeRunRequestUpdateZonalShiftRequestAutoshiftAppliedStatusINVALID_CON" +
+	"DITION_TYPEListAutoshiftsResponseListZonalShiftsRequestManagedResourceSummaryStartZonalShiftRequestZ" +
+	"ONAL_AUTOSHIFT_ACTIVEAccessDeniedExceptionCAPACITY_CHECK_FAILEDListAutoshiftsRequestZonalShiftsInRes" +
+	"ourceAutoshiftsInResourceControlConditionTypeZonalAutoshiftStatusZonalShiftInResourcezonalAutoshiftS" +
+	"tatusAutoshiftInResourceThrottlingExceptionZonalShiftSummariesAutoshiftSummariesINVALID_EXPIRES_INPr" +
+	"acticeRunOutcomeResourceIdentifierpracticeRunOutcomeresourceIdentifierAUTOSHIFT_ENABLEDAvailabilityZ" +
+	"onesZonalShiftCommentZonalShiftSummaryavailabilityZonespracticeRunStatusAutoshiftSummaryMetricIdenti" +
+	"fierZonalShiftStatusalarmIdentifierAllowedWindowsAppliedWeightsBlockedWindowsBlockingAlarmsINVALID_S" +
+	"TATUSUNSUPPORTED_AZallowedWindowsappliedWeightsblockedWindowsblockingAlarmsINVALID_TOKENMISSING_VALU" +
+	"EOutcomeAlarmsPercDataPlaneappliedStatusoutcomeAlarmsBlockedDatesPRACTICE_RUNResourceNameZonalShiftI" +
+	"dblockedDateszonalShiftIdINTERRUPTEDNOT_APPLIEDResourceArnzonalShiftsCLOUDWATCHExpiryTimeINVALID_AZM" +
+	"axResultsautoshiftsexpiryTimemaxResultsCOMPLETEDExpiresInSUCCEEDEDShiftTypeStartTimeexpiresInnextTok" +
+	"enshiftTypestartTimeCANCELEDDISABLEDawayFromEXPIREDPENDINGcommentendTimemessageStringmemberreasonsta" +
+	"tusitemsvalueUnitnametypearnkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.arczonalshift", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 1037, Target: 0, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1306, Target: 1, Traits: 1, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 269, Target: 2, Traits: 2, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 307, Target: 3, Traits: 3, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 97, Target: 4, Traits: 4, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 985, Target: 5, Traits: 5, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1511, Target: 6, Traits: 6, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 821, Target: 7, Traits: 7, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1398, Target: 8, Traits: 8, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1258, Target: 9, Traits: 9, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1577, Target: 10, Traits: 10, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 11, Traits: 11, StrLen: 41, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 383, Target: 12, Traits: 12, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 188, Target: 13, Traits: 13, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1444, Target: 14, Traits: 14, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 2314, Target: 15, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1621, Target: 16, Traits: 16, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2672, Target: 294, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2135, Target: 18, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2135, Target: 19, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 18, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1476, Target: 21, Traits: 15, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2440, Target: 295, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2436, Target: 295, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2149, Target: 24, Traits: 15, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2728, Target: 49, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2708, Target: 145, Traits: 15, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 1467, Target: 27, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2440, Target: 295, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2436, Target: 295, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1162, Target: 30, Traits: 15, StrLen: 24, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 759, Target: 295, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2539, Target: 295, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1805, Target: 33, Traits: 15, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2327, Target: 27, Traits: 15, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2611, Target: 123, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 6, Target: 37, Traits: 15, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1980, Target: 295, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2628, Target: 295, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1705, Target: 40, Traits: 15, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 33, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1862, Target: 42, Traits: 15, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 44, Traits: 15, StrLen: 6, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2072, Target: 44, Traits: 15, StrLen: 16, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2665, Target: 83, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2611, Target: 123, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2697, Target: 30, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1987, Target: 49, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1987, Target: 50, Traits: 15, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 49, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2353, Target: 52, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2353, Target: 53, Traits: 15, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 52, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2163, Target: 55, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2163, Target: 56, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 55, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2177, Target: 58, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 77, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1329, Target: 60, Traits: 17, StrLen: 17, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2672, Target: 294, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2691, Target: 64, Traits: 15, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2413, Target: 294, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1329, Target: 64, Traits: 15, StrLen: 23, Count: 12, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1011, Target: 295, Traits: 15, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 736, Target: 295, Traits: 15, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 606, Target: 295, Traits: 15, StrLen: 34, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 495, Target: 295, Traits: 15, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1970, Target: 295, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 532, Target: 295, Traits: 15, StrLen: 37, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1599, Target: 295, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 958, Target: 295, Traits: 15, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 849, Target: 295, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1087, Target: 295, Traits: 15, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 931, Target: 295, Traits: 15, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 673, Target: 295, Traits: 15, StrLen: 32, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1725, Target: 77, Traits: 15, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2721, Target: 80, Traits: 15, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2120, Target: 98, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1725, Target: 80, Traits: 15, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2469, Target: 295, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2548, Target: 82, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2479, Target: 83, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1375, Target: 84, Traits: 18, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2672, Target: 294, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1234, Target: 86, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 88, Traits: 15, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1555, Target: 88, Traits: 15, StrLen: 22, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2725, Target: 113, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2717, Target: 115, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2038, Target: 50, Traits: 15, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2233, Target: 24, Traits: 15, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2458, Target: 161, Traits: 15, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2509, Target: 40, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1785, Target: 146, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2055, Target: 146, Traits: 15, StrLen: 17, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2499, Target: 97, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 0},
+		{StrOff: 2088, Target: 98, Traits: 15, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2301, Target: 99, Traits: 15, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 77, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 275, Target: 101, Traits: 15, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2261, Target: 58, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2340, Target: 99, Traits: 15, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2247, Target: 56, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2219, Target: 19, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2401, Target: 53, Traits: 15, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1898, Target: 107, Traits: 15, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1657, Target: 295, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2425, Target: 295, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2651, Target: 295, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2557, Target: 295, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1642, Target: 295, Traits: 15, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2447, Target: 113, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1916, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2377, Target: 115, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1112, Target: 116, Traits: 19, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2672, Target: 294, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2566, Target: 118, Traits: 15, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 619, Target: 295, Traits: 15, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2365, Target: 295, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 640, Target: 295, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1599, Target: 295, Traits: 15, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2575, Target: 123, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 1824, Target: 124, Traits: 20, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2672, Target: 294, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1137, Target: 126, Traits: 21, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2672, Target: 294, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2691, Target: 129, Traits: 15, StrLen: 6, Count: 15, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1137, Target: 129, Traits: 15, StrLen: 25, Count: 15, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1880, Target: 295, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2191, Target: 295, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2288, Target: 295, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2275, Target: 295, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 877, Target: 295, Traits: 15, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2489, Target: 295, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2205, Target: 295, Traits: 15, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1352, Target: 295, Traits: 15, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1489, Target: 295, Traits: 15, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1210, Target: 295, Traits: 15, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 640, Target: 295, Traits: 15, StrLen: 33, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 765, Target: 295, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 345, Target: 295, Traits: 15, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 705, Target: 295, Traits: 15, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 793, Target: 295, Traits: 15, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2156, Target: 145, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 0},
+		{StrOff: 1745, Target: 146, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1980, Target: 295, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2628, Target: 295, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2004, Target: 149, Traits: 15, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2389, Target: 150, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1765, Target: 151, Traits: 15, StrLen: 20, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2327, Target: 21, Traits: 15, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2413, Target: 150, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2519, Target: 83, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2611, Target: 123, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2658, Target: 149, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2602, Target: 118, Traits: 15, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1934, Target: 107, Traits: 15, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1684, Target: 161, Traits: 15, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 151, Traits: 15, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2104, Target: 163, Traits: 15, StrLen: 16, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 759, Target: 295, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2644, Target: 295, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2620, Target: 295, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1843, Target: 167, Traits: 15, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2685, Target: 169, Traits: 15, StrLen: 6, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2021, Target: 169, Traits: 15, StrLen: 17, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2413, Target: 150, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2519, Target: 83, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2611, Target: 123, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2697, Target: 163, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2658, Target: 149, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2602, Target: 118, Traits: 15, StrLen: 9, Count: 4, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1934, Target: 107, Traits: 15, StrLen: 18, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1186, Target: 179, Traits: 15, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2413, Target: 150, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1037, Target: 181, Traits: 15, StrLen: 25, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2413, Target: 150, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2519, Target: 83, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2611, Target: 123, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2697, Target: 163, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2658, Target: 149, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1306, Target: 189, Traits: 15, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2413, Target: 150, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1312, Target: 191, Traits: 15, StrLen: 10, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2413, Target: 150, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2519, Target: 83, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2611, Target: 123, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2697, Target: 163, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2658, Target: 149, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 421, Target: 199, Traits: 15, StrLen: 37, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2247, Target: 56, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2401, Target: 53, Traits: 15, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2261, Target: 58, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2219, Target: 19, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2340, Target: 99, Traits: 15, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 269, Target: 206, Traits: 15, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2725, Target: 113, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2717, Target: 115, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1785, Target: 146, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1282, Target: 101, Traits: 15, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 458, Target: 211, Traits: 15, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 114, Traits: 22, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 307, Target: 213, Traits: 15, StrLen: 38, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2725, Target: 113, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2717, Target: 115, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1785, Target: 146, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 143, Target: 217, Traits: 15, StrLen: 45, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 97, Target: 218, Traits: 15, StrLen: 46, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2697, Target: 37, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1062, Target: 220, Traits: 15, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 114, Traits: 22, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 985, Target: 222, Traits: 15, StrLen: 26, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2725, Target: 113, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2717, Target: 115, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2233, Target: 24, Traits: 15, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 2458, Target: 161, Traits: 15, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2509, Target: 40, Traits: 15, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1282, Target: 101, Traits: 15, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1785, Target: 146, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1663, Target: 230, Traits: 15, StrLen: 21, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2593, Target: 294, Traits: 23, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2697, Target: 30, Traits: 24, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2529, Target: 97, Traits: 25, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1511, Target: 234, Traits: 15, StrLen: 22, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2703, Target: 42, Traits: 15, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2593, Target: 294, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 904, Target: 237, Traits: 15, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2593, Target: 294, Traits: 23, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2529, Target: 97, Traits: 25, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 821, Target: 240, Traits: 15, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2703, Target: 86, Traits: 15, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2593, Target: 294, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1533, Target: 243, Traits: 15, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2593, Target: 294, Traits: 23, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2697, Target: 163, Traits: 24, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2529, Target: 97, Traits: 25, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1952, Target: 114, Traits: 26, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1398, Target: 248, Traits: 15, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2703, Target: 167, Traits: 15, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2593, Target: 294, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1421, Target: 251, Traits: 15, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2658, Target: 149, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1258, Target: 255, Traits: 15, StrLen: 24, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2413, Target: 150, Traits: 15, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2519, Target: 83, Traits: 15, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2611, Target: 123, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2697, Target: 163, Traits: 15, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2658, Target: 149, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1577, Target: 263, Traits: 15, StrLen: 22, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2636, Target: 49, Traits: 15, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2584, Target: 82, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2658, Target: 149, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 49, Target: 268, Traits: 15, StrLen: 48, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2697, Target: 37, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 0, Target: 270, Traits: 15, StrLen: 49, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2697, Target: 37, Traits: 15, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 569, Target: 272, Traits: 15, StrLen: 37, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 114, Traits: 22, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2247, Target: 56, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2401, Target: 53, Traits: 15, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2261, Target: 58, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2219, Target: 19, Traits: 15, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2340, Target: 99, Traits: 15, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 383, Target: 279, Traits: 15, StrLen: 38, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2725, Target: 113, Traits: 15, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2717, Target: 115, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1785, Target: 146, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1282, Target: 101, Traits: 15, StrLen: 24, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 229, Target: 284, Traits: 15, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 114, Traits: 22, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1785, Target: 146, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 188, Target: 287, Traits: 15, StrLen: 41, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1952, Target: 114, Traits: 15, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1785, Target: 146, Traits: 15, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1444, Target: 290, Traits: 15, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2413, Target: 150, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2658, Target: 149, Traits: 15, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2584, Target: 82, Traits: 15, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2679, Target: 294, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 2713, Target: 295, Traits: 15, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/practiceruns/{zonalShiftId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/zonalshifts/{zonalShiftId}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/configuration",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
+			URI:  "/configuration/{resourceIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/autoshift-observer-notification",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/managedresources/{resourceIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/autoshifts",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/managedresources",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+			URI:  "/zonalshifts",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/practiceruns",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/zonalshifts",
+			Code: 201}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/autoshift-observer-notification",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/configuration/{resourceIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+			URI:  "/managedresources/{resourceIdentifier}",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+			URI:  "/zonalshifts/{zonalShiftId}",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceIdentifier"}}, DirectMask: 0x10},
+	},
 }
+
+var handles = [296]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+}
+
+var CancelPracticeRun = &handles[0]
+
+var CancelZonalShift = &handles[1]
+
+var CreatePracticeRunConfiguration = &handles[2]
+
+var DeletePracticeRunConfiguration = &handles[3]
+
+var GetAutoshiftObserverNotificationStatus = &handles[4]
+
+var GetManagedResource = &handles[5]
+
+var ListAutoshifts = &handles[6]
+
+var ListManagedResources = &handles[7]
+
+var ListZonalShifts = &handles[8]
+
+var StartPracticeRun = &handles[9]
+
+var StartZonalShift = &handles[10]
+
+var UpdateAutoshiftObserverNotificationStatus = &handles[11]
+
+var UpdatePracticeRunConfiguration = &handles[12]
+
+var UpdateZonalAutoshiftConfiguration = &handles[13]
+
+var UpdateZonalShift = &handles[14]
+
+var _PercDataPlane = &handles[15]
+
+var AccessDeniedException = &handles[16]
+var AccessDeniedException_message = &handles[17]
+
+var _AllowedWindow = &handles[18]
+
+var _AllowedWindows = &handles[19]
+var _AllowedWindows_member = &handles[20]
+
+var AppliedStatus = &handles[21]
+var AppliedStatus_APPLIED = &handles[22]
+var AppliedStatus_NOT_APPLIED = &handles[23]
+
+var _AppliedWeights = &handles[24]
+var _AppliedWeights_key = &handles[25]
+var _AppliedWeights_value = &handles[26]
+
+var AutoshiftAppliedStatus = &handles[27]
+var AutoshiftAppliedStatus_APPLIED = &handles[28]
+var AutoshiftAppliedStatus_NOT_APPLIED = &handles[29]
+
+var AutoshiftExecutionStatus = &handles[30]
+var AutoshiftExecutionStatus_ACTIVE = &handles[31]
+var AutoshiftExecutionStatus_COMPLETED = &handles[32]
+
+var AutoshiftInResource = &handles[33]
+var AutoshiftInResource_appliedStatus = &handles[34]
+var AutoshiftInResource_awayFrom = &handles[35]
+var AutoshiftInResource_startTime = &handles[36]
+
+var AutoshiftObserverNotificationStatus = &handles[37]
+var AutoshiftObserverNotificationStatus_ENABLED = &handles[38]
+var AutoshiftObserverNotificationStatus_DISABLED = &handles[39]
+
+var _AutoshiftsInResource = &handles[40]
+var _AutoshiftsInResource_member = &handles[41]
+
+var _AutoshiftSummaries = &handles[42]
+var _AutoshiftSummaries_member = &handles[43]
+
+var AutoshiftSummary = &handles[44]
+var AutoshiftSummary_awayFrom = &handles[45]
+var AutoshiftSummary_endTime = &handles[46]
+var AutoshiftSummary_startTime = &handles[47]
+var AutoshiftSummary_status = &handles[48]
+
+var _AvailabilityZone = &handles[49]
+
+var _AvailabilityZones = &handles[50]
+var _AvailabilityZones_member = &handles[51]
+
+var _BlockedDate = &handles[52]
+
+var _BlockedDates = &handles[53]
+var _BlockedDates_member = &handles[54]
+
+var _BlockedWindow = &handles[55]
+
+var _BlockedWindows = &handles[56]
+var _BlockedWindows_member = &handles[57]
+
+var _BlockingAlarms = &handles[58]
+var _BlockingAlarms_member = &handles[59]
+
+var ConflictException = &handles[60]
+var ConflictException_message = &handles[61]
+var ConflictException_reason = &handles[62]
+var ConflictException_zonalShiftId = &handles[63]
+
+var ConflictExceptionReason = &handles[64]
+var ConflictExceptionReason_ZONAL_SHIFT_ALREADY_EXISTS = &handles[65]
+var ConflictExceptionReason_ZONAL_SHIFT_STATUS_NOT_ACTIVE = &handles[66]
+var ConflictExceptionReason_SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT = &handles[67]
+var ConflictExceptionReason_PRACTICE_CONFIGURATION_ALREADY_EXISTS = &handles[68]
+var ConflictExceptionReason_AUTOSHIFT_ENABLED = &handles[69]
+var ConflictExceptionReason_PRACTICE_CONFIGURATION_DOES_NOT_EXIST = &handles[70]
+var ConflictExceptionReason_ZONAL_AUTOSHIFT_ACTIVE = &handles[71]
+var ConflictExceptionReason_PRACTICE_OUTCOME_ALARMS_RED = &handles[72]
+var ConflictExceptionReason_PRACTICE_BLOCKING_ALARMS_RED = &handles[73]
+var ConflictExceptionReason_PRACTICE_IN_BLOCKED_DATES = &handles[74]
+var ConflictExceptionReason_PRACTICE_IN_BLOCKED_WINDOWS = &handles[75]
+var ConflictExceptionReason_PRACTICE_OUTSIDE_ALLOWED_WINDOWS = &handles[76]
+
+var ControlCondition = &handles[77]
+var ControlCondition_type = &handles[78]
+var ControlCondition_alarmIdentifier = &handles[79]
+
+var ControlConditionType = &handles[80]
+var ControlConditionType_CLOUDWATCH = &handles[81]
+
+var _ExpiresIn = &handles[82]
+
+var _ExpiryTime = &handles[83]
+
+var InternalServerException = &handles[84]
+var InternalServerException_message = &handles[85]
+
+var _ManagedResourceSummaries = &handles[86]
+var _ManagedResourceSummaries_member = &handles[87]
+
+var ManagedResourceSummary = &handles[88]
+var ManagedResourceSummary_arn = &handles[89]
+var ManagedResourceSummary_name = &handles[90]
+var ManagedResourceSummary_availabilityZones = &handles[91]
+var ManagedResourceSummary_appliedWeights = &handles[92]
+var ManagedResourceSummary_zonalShifts = &handles[93]
+var ManagedResourceSummary_autoshifts = &handles[94]
+var ManagedResourceSummary_zonalAutoshiftStatus = &handles[95]
+var ManagedResourceSummary_practiceRunStatus = &handles[96]
+
+var _MaxResults = &handles[97]
+
+var _MetricIdentifier = &handles[98]
+
+var _OutcomeAlarms = &handles[99]
+var _OutcomeAlarms_member = &handles[100]
+
+var PracticeRunConfiguration = &handles[101]
+var PracticeRunConfiguration_blockingAlarms = &handles[102]
+var PracticeRunConfiguration_outcomeAlarms = &handles[103]
+var PracticeRunConfiguration_blockedWindows = &handles[104]
+var PracticeRunConfiguration_allowedWindows = &handles[105]
+var PracticeRunConfiguration_blockedDates = &handles[106]
+
+var PracticeRunOutcome = &handles[107]
+var PracticeRunOutcome_FAILED = &handles[108]
+var PracticeRunOutcome_INTERRUPTED = &handles[109]
+var PracticeRunOutcome_PENDING = &handles[110]
+var PracticeRunOutcome_SUCCEEDED = &handles[111]
+var PracticeRunOutcome_CAPACITY_CHECK_FAILED = &handles[112]
+
+var _ResourceArn = &handles[113]
+
+var _ResourceIdentifier = &handles[114]
+
+var _ResourceName = &handles[115]
+
+var ResourceNotFoundException = &handles[116]
+var ResourceNotFoundException_message = &handles[117]
+
+var ShiftType = &handles[118]
+var ShiftType_ZONAL_SHIFT = &handles[119]
+var ShiftType_PRACTICE_RUN = &handles[120]
+var ShiftType_FIS_EXPERIMENT = &handles[121]
+var ShiftType_ZONAL_AUTOSHIFT = &handles[122]
+
+var _StartTime = &handles[123]
+
+var ThrottlingException = &handles[124]
+var ThrottlingException_message = &handles[125]
+
+var ValidationException = &handles[126]
+var ValidationException_message = &handles[127]
+var ValidationException_reason = &handles[128]
+
+var ValidationExceptionReason = &handles[129]
+var ValidationExceptionReason_INVALID_EXPIRES_IN = &handles[130]
+var ValidationExceptionReason_INVALID_STATUS = &handles[131]
+var ValidationExceptionReason_MISSING_VALUE = &handles[132]
+var ValidationExceptionReason_INVALID_TOKEN = &handles[133]
+var ValidationExceptionReason_INVALID_RESOURCE_IDENTIFIER = &handles[134]
+var ValidationExceptionReason_INVALID_AZ = &handles[135]
+var ValidationExceptionReason_UNSUPPORTED_AZ = &handles[136]
+var ValidationExceptionReason_INVALID_ALARM_CONDITION = &handles[137]
+var ValidationExceptionReason_INVALID_CONDITION_TYPE = &handles[138]
+var ValidationExceptionReason_INVALID_PRACTICE_BLOCKER = &handles[139]
+var ValidationExceptionReason_FIS_EXPERIMENT_UPDATE_NOT_ALLOWED = &handles[140]
+var ValidationExceptionReason_AUTOSHIFT_UPDATE_NOT_ALLOWED = &handles[141]
+var ValidationExceptionReason_UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE = &handles[142]
+var ValidationExceptionReason_INVALID_PRACTICE_ALLOWED_WINDOW = &handles[143]
+var ValidationExceptionReason_CONFLICTING_PRACTICE_WINDOWS = &handles[144]
+
+var _Weight = &handles[145]
+
+var ZonalAutoshiftStatus = &handles[146]
+var ZonalAutoshiftStatus_ENABLED = &handles[147]
+var ZonalAutoshiftStatus_DISABLED = &handles[148]
+
+var _ZonalShiftComment = &handles[149]
+
+var _ZonalShiftId = &handles[150]
+
+var ZonalShiftInResource = &handles[151]
+var ZonalShiftInResource_appliedStatus = &handles[152]
+var ZonalShiftInResource_zonalShiftId = &handles[153]
+var ZonalShiftInResource_resourceIdentifier = &handles[154]
+var ZonalShiftInResource_awayFrom = &handles[155]
+var ZonalShiftInResource_expiryTime = &handles[156]
+var ZonalShiftInResource_startTime = &handles[157]
+var ZonalShiftInResource_comment = &handles[158]
+var ZonalShiftInResource_shiftType = &handles[159]
+var ZonalShiftInResource_practiceRunOutcome = &handles[160]
+
+var _ZonalShiftsInResource = &handles[161]
+var _ZonalShiftsInResource_member = &handles[162]
+
+var ZonalShiftStatus = &handles[163]
+var ZonalShiftStatus_ACTIVE = &handles[164]
+var ZonalShiftStatus_EXPIRED = &handles[165]
+var ZonalShiftStatus_CANCELED = &handles[166]
+
+var _ZonalShiftSummaries = &handles[167]
+var _ZonalShiftSummaries_member = &handles[168]
+
+var ZonalShiftSummary = &handles[169]
+var ZonalShiftSummary_zonalShiftId = &handles[170]
+var ZonalShiftSummary_resourceIdentifier = &handles[171]
+var ZonalShiftSummary_awayFrom = &handles[172]
+var ZonalShiftSummary_expiryTime = &handles[173]
+var ZonalShiftSummary_startTime = &handles[174]
+var ZonalShiftSummary_status = &handles[175]
+var ZonalShiftSummary_comment = &handles[176]
+var ZonalShiftSummary_shiftType = &handles[177]
+var ZonalShiftSummary_practiceRunOutcome = &handles[178]
+
+var CancelPracticeRunRequest = &handles[179]
+var CancelPracticeRunRequest_zonalShiftId = &handles[180]
+
+var CancelPracticeRunResponse = &handles[181]
+var CancelPracticeRunResponse_zonalShiftId = &handles[182]
+var CancelPracticeRunResponse_resourceIdentifier = &handles[183]
+var CancelPracticeRunResponse_awayFrom = &handles[184]
+var CancelPracticeRunResponse_expiryTime = &handles[185]
+var CancelPracticeRunResponse_startTime = &handles[186]
+var CancelPracticeRunResponse_status = &handles[187]
+var CancelPracticeRunResponse_comment = &handles[188]
+
+var CancelZonalShiftRequest = &handles[189]
+var CancelZonalShiftRequest_zonalShiftId = &handles[190]
+
+var ZonalShift = &handles[191]
+var ZonalShift_zonalShiftId = &handles[192]
+var ZonalShift_resourceIdentifier = &handles[193]
+var ZonalShift_awayFrom = &handles[194]
+var ZonalShift_expiryTime = &handles[195]
+var ZonalShift_startTime = &handles[196]
+var ZonalShift_status = &handles[197]
+var ZonalShift_comment = &handles[198]
+
+var CreatePracticeRunConfigurationRequest = &handles[199]
+var CreatePracticeRunConfigurationRequest_resourceIdentifier = &handles[200]
+var CreatePracticeRunConfigurationRequest_blockedWindows = &handles[201]
+var CreatePracticeRunConfigurationRequest_blockedDates = &handles[202]
+var CreatePracticeRunConfigurationRequest_blockingAlarms = &handles[203]
+var CreatePracticeRunConfigurationRequest_allowedWindows = &handles[204]
+var CreatePracticeRunConfigurationRequest_outcomeAlarms = &handles[205]
+
+var CreatePracticeRunConfigurationResponse = &handles[206]
+var CreatePracticeRunConfigurationResponse_arn = &handles[207]
+var CreatePracticeRunConfigurationResponse_name = &handles[208]
+var CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus = &handles[209]
+var CreatePracticeRunConfigurationResponse_practiceRunConfiguration = &handles[210]
+
+var DeletePracticeRunConfigurationRequest = &handles[211]
+var DeletePracticeRunConfigurationRequest_resourceIdentifier = &handles[212]
+
+var DeletePracticeRunConfigurationResponse = &handles[213]
+var DeletePracticeRunConfigurationResponse_arn = &handles[214]
+var DeletePracticeRunConfigurationResponse_name = &handles[215]
+var DeletePracticeRunConfigurationResponse_zonalAutoshiftStatus = &handles[216]
+
+var GetAutoshiftObserverNotificationStatusRequest = &handles[217]
+
+var GetAutoshiftObserverNotificationStatusResponse = &handles[218]
+var GetAutoshiftObserverNotificationStatusResponse_status = &handles[219]
+
+var GetManagedResourceRequest = &handles[220]
+var GetManagedResourceRequest_resourceIdentifier = &handles[221]
+
+var GetManagedResourceResponse = &handles[222]
+var GetManagedResourceResponse_arn = &handles[223]
+var GetManagedResourceResponse_name = &handles[224]
+var GetManagedResourceResponse_appliedWeights = &handles[225]
+var GetManagedResourceResponse_zonalShifts = &handles[226]
+var GetManagedResourceResponse_autoshifts = &handles[227]
+var GetManagedResourceResponse_practiceRunConfiguration = &handles[228]
+var GetManagedResourceResponse_zonalAutoshiftStatus = &handles[229]
+
+var ListAutoshiftsRequest = &handles[230]
+var ListAutoshiftsRequest_nextToken = &handles[231]
+var ListAutoshiftsRequest_status = &handles[232]
+var ListAutoshiftsRequest_maxResults = &handles[233]
+
+var ListAutoshiftsResponse = &handles[234]
+var ListAutoshiftsResponse_items = &handles[235]
+var ListAutoshiftsResponse_nextToken = &handles[236]
+
+var ListManagedResourcesRequest = &handles[237]
+var ListManagedResourcesRequest_nextToken = &handles[238]
+var ListManagedResourcesRequest_maxResults = &handles[239]
+
+var ListManagedResourcesResponse = &handles[240]
+var ListManagedResourcesResponse_items = &handles[241]
+var ListManagedResourcesResponse_nextToken = &handles[242]
+
+var ListZonalShiftsRequest = &handles[243]
+var ListZonalShiftsRequest_nextToken = &handles[244]
+var ListZonalShiftsRequest_status = &handles[245]
+var ListZonalShiftsRequest_maxResults = &handles[246]
+var ListZonalShiftsRequest_resourceIdentifier = &handles[247]
+
+var ListZonalShiftsResponse = &handles[248]
+var ListZonalShiftsResponse_items = &handles[249]
+var ListZonalShiftsResponse_nextToken = &handles[250]
+
+var StartPracticeRunRequest = &handles[251]
+var StartPracticeRunRequest_resourceIdentifier = &handles[252]
+var StartPracticeRunRequest_awayFrom = &handles[253]
+var StartPracticeRunRequest_comment = &handles[254]
+
+var StartPracticeRunResponse = &handles[255]
+var StartPracticeRunResponse_zonalShiftId = &handles[256]
+var StartPracticeRunResponse_resourceIdentifier = &handles[257]
+var StartPracticeRunResponse_awayFrom = &handles[258]
+var StartPracticeRunResponse_expiryTime = &handles[259]
+var StartPracticeRunResponse_startTime = &handles[260]
+var StartPracticeRunResponse_status = &handles[261]
+var StartPracticeRunResponse_comment = &handles[262]
+
+var StartZonalShiftRequest = &handles[263]
+var StartZonalShiftRequest_resourceIdentifier = &handles[264]
+var StartZonalShiftRequest_awayFrom = &handles[265]
+var StartZonalShiftRequest_expiresIn = &handles[266]
+var StartZonalShiftRequest_comment = &handles[267]
+
+var UpdateAutoshiftObserverNotificationStatusRequest = &handles[268]
+var UpdateAutoshiftObserverNotificationStatusRequest_status = &handles[269]
+
+var UpdateAutoshiftObserverNotificationStatusResponse = &handles[270]
+var UpdateAutoshiftObserverNotificationStatusResponse_status = &handles[271]
+
+var UpdatePracticeRunConfigurationRequest = &handles[272]
+var UpdatePracticeRunConfigurationRequest_resourceIdentifier = &handles[273]
+var UpdatePracticeRunConfigurationRequest_blockedWindows = &handles[274]
+var UpdatePracticeRunConfigurationRequest_blockedDates = &handles[275]
+var UpdatePracticeRunConfigurationRequest_blockingAlarms = &handles[276]
+var UpdatePracticeRunConfigurationRequest_allowedWindows = &handles[277]
+var UpdatePracticeRunConfigurationRequest_outcomeAlarms = &handles[278]
+
+var UpdatePracticeRunConfigurationResponse = &handles[279]
+var UpdatePracticeRunConfigurationResponse_arn = &handles[280]
+var UpdatePracticeRunConfigurationResponse_name = &handles[281]
+var UpdatePracticeRunConfigurationResponse_zonalAutoshiftStatus = &handles[282]
+var UpdatePracticeRunConfigurationResponse_practiceRunConfiguration = &handles[283]
+
+var UpdateZonalAutoshiftConfigurationRequest = &handles[284]
+var UpdateZonalAutoshiftConfigurationRequest_resourceIdentifier = &handles[285]
+var UpdateZonalAutoshiftConfigurationRequest_zonalAutoshiftStatus = &handles[286]
+
+var UpdateZonalAutoshiftConfigurationResponse = &handles[287]
+var UpdateZonalAutoshiftConfigurationResponse_resourceIdentifier = &handles[288]
+var UpdateZonalAutoshiftConfigurationResponse_zonalAutoshiftStatus = &handles[289]
+
+var UpdateZonalShiftRequest = &handles[290]
+var UpdateZonalShiftRequest_zonalShiftId = &handles[291]
+var UpdateZonalShiftRequest_comment = &handles[292]
+var UpdateZonalShiftRequest_expiresIn = &handles[293]
+
+var PercDataPlane = &smithy.ServiceSchema{Schema: &handles[15], Version: "2022-10-30"}

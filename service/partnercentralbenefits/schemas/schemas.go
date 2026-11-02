@@ -4,2213 +4,1841 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AmendBenefitApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AmendBenefitApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/AmendBenefitApplication",
-	Code: 200})
-
-var AssociateBenefitApplicationResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AssociateBenefitApplicationResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/AssociateBenefitApplicationResource",
-	Code: 200})
-
-var CancelBenefitApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CancelBenefitApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CancelBenefitApplication",
-	Code: 200})
-
-var CreateBenefitApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CreateBenefitApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/CreateBenefitApplication",
-	Code: 200})
-
-var DisassociateBenefitApplicationResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "DisassociateBenefitApplicationResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/DisassociateBenefitApplicationResource",
-	Code: 200})
-
-var GetBenefit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefit",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetBenefit",
-	Code: 200})
-
-var GetBenefitAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefitAllocation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetBenefitAllocation",
-	Code: 200})
-
-var GetBenefitApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefitApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/GetBenefitApplication",
-	Code: 200})
-
-var ListBenefitAllocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefitAllocations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListBenefitAllocations",
-	Code: 200})
-
-var ListBenefitApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefitApplications",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListBenefitApplications",
-	Code: 200})
-
-var ListBenefits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefits",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListBenefits",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var RecallBenefitApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "RecallBenefitApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/RecallBenefitApplication",
-	Code: 200})
-
-var SubmitBenefitApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "SubmitBenefitApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/SubmitBenefitApplication",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/TagResource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UntagResource",
-	Code: 200})
-
-var UpdateBenefitApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "UpdateBenefitApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/UpdateBenefitApplication",
-	Code: 200})
-
-var _PartnerCentralBenefitsService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "PartnerCentralBenefitsService",
-}, smithy.ShapeTypeService, 0)
-
-var PartnerCentralBenefitsService = smithy.NewServiceSchema(_PartnerCentralBenefitsService, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AccessDetails",
-}, smithy.ShapeTypeStructure, 1)
-var AccessDetails_Description *smithy.Schema
-
-var Amendment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Amendment",
-}, smithy.ShapeTypeStructure, 2)
-var Amendment_FieldPath *smithy.Schema
-
-var Amendment_NewValue *smithy.Schema
-
-var _AmendmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AmendmentList",
-}, smithy.ShapeTypeList, 1)
-var _AmendmentList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _Arns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Arns",
-}, smithy.ShapeTypeList, 1)
-var _Arns_member *smithy.Schema
-
-var AssociatedResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AssociatedResource",
-}, smithy.ShapeTypeStructure, 3)
-var AssociatedResource_ResourceType *smithy.Schema
-
-var AssociatedResource_ResourceIdentifier *smithy.Schema
-
-var AssociatedResource_ResourceArn *smithy.Schema
-
-var _AssociatedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AssociatedResources",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedResources_member *smithy.Schema
-
-var _Attributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Attributes",
-}, smithy.ShapeTypeMap, 2)
-var _Attributes_key *smithy.Schema
-
-var _Attributes_value *smithy.Schema
-
-var _BenefitAllocationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitAllocationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _BenefitAllocationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitAllocationId",
-}, smithy.ShapeTypeString, 0)
-
-var _BenefitAllocationIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitAllocationIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _BenefitAllocationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitAllocationName",
-}, smithy.ShapeTypeString, 0)
-
-var BenefitAllocationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitAllocationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var BenefitAllocationStatus_ACTIVE *smithy.Schema
-
-var BenefitAllocationStatus_INACTIVE *smithy.Schema
-
-var BenefitAllocationStatus_FULFILLED *smithy.Schema
-
-var _BenefitAllocationStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitAllocationStatusList",
-}, smithy.ShapeTypeList, 1)
-var _BenefitAllocationStatusList_member *smithy.Schema
-
-var _BenefitAllocationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitAllocationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _BenefitAllocationSummaries_member *smithy.Schema
-
-var BenefitAllocationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitAllocationSummary",
-}, smithy.ShapeTypeStructure, 12)
-var BenefitAllocationSummary_Id *smithy.Schema
-
-var BenefitAllocationSummary_Catalog *smithy.Schema
-
-var BenefitAllocationSummary_Arn *smithy.Schema
-
-var BenefitAllocationSummary_Status *smithy.Schema
-
-var BenefitAllocationSummary_StatusReason *smithy.Schema
-
-var BenefitAllocationSummary_Name *smithy.Schema
-
-var BenefitAllocationSummary_BenefitId *smithy.Schema
-
-var BenefitAllocationSummary_BenefitApplicationId *smithy.Schema
-
-var BenefitAllocationSummary_FulfillmentTypes *smithy.Schema
-
-var BenefitAllocationSummary_CreatedAt *smithy.Schema
-
-var BenefitAllocationSummary_ExpiresAt *smithy.Schema
-
-var BenefitAllocationSummary_ApplicableBenefitIds *smithy.Schema
-
-var _BenefitApplicationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _BenefitApplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationId",
-}, smithy.ShapeTypeString, 0)
-
-var _BenefitApplicationIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _BenefitApplicationIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _BenefitApplicationIdentifierList_member *smithy.Schema
-
-var _BenefitApplicationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationName",
-}, smithy.ShapeTypeString, 0)
-
-var _BenefitApplicationStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationStage",
-}, smithy.ShapeTypeString, 0)
-
-var BenefitApplicationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationStatus",
-}, smithy.ShapeTypeEnum, 6)
-var BenefitApplicationStatus_PENDING_SUBMISSION *smithy.Schema
-
-var BenefitApplicationStatus_IN_REVIEW *smithy.Schema
-
-var BenefitApplicationStatus_ACTION_REQUIRED *smithy.Schema
-
-var BenefitApplicationStatus_APPROVED *smithy.Schema
-
-var BenefitApplicationStatus_REJECTED *smithy.Schema
-
-var BenefitApplicationStatus_CANCELED *smithy.Schema
-
-var _BenefitApplicationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _BenefitApplicationSummaries_member *smithy.Schema
-
-var BenefitApplicationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitApplicationSummary",
-}, smithy.ShapeTypeStructure, 13)
-var BenefitApplicationSummary_Catalog *smithy.Schema
-
-var BenefitApplicationSummary_Name *smithy.Schema
-
-var BenefitApplicationSummary_Id *smithy.Schema
-
-var BenefitApplicationSummary_Arn *smithy.Schema
-
-var BenefitApplicationSummary_BenefitId *smithy.Schema
-
-var BenefitApplicationSummary_Programs *smithy.Schema
-
-var BenefitApplicationSummary_FulfillmentTypes *smithy.Schema
-
-var BenefitApplicationSummary_Status *smithy.Schema
-
-var BenefitApplicationSummary_Stage *smithy.Schema
-
-var BenefitApplicationSummary_CreatedAt *smithy.Schema
-
-var BenefitApplicationSummary_UpdatedAt *smithy.Schema
-
-var BenefitApplicationSummary_BenefitApplicationDetails *smithy.Schema
-
-var BenefitApplicationSummary_AssociatedResources *smithy.Schema
-
-var _BenefitId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitId",
-}, smithy.ShapeTypeString, 0)
-
-var _BenefitIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _BenefitIdentifiers_member *smithy.Schema
-
-var _BenefitIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitIds",
-}, smithy.ShapeTypeList, 1)
-var _BenefitIds_member *smithy.Schema
-
-var BenefitStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitStatus",
-}, smithy.ShapeTypeEnum, 2)
-var BenefitStatus_ACTIVE *smithy.Schema
-
-var BenefitStatus_INACTIVE *smithy.Schema
-
-var _BenefitStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitStatuses",
-}, smithy.ShapeTypeList, 1)
-var _BenefitStatuses_member *smithy.Schema
-
-var _BenefitSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitSummaries",
-}, smithy.ShapeTypeList, 1)
-var _BenefitSummaries_member *smithy.Schema
-
-var BenefitSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "BenefitSummary",
-}, smithy.ShapeTypeStructure, 8)
-var BenefitSummary_Id *smithy.Schema
-
-var BenefitSummary_Catalog *smithy.Schema
-
-var BenefitSummary_Arn *smithy.Schema
-
-var BenefitSummary_Name *smithy.Schema
-
-var BenefitSummary_Description *smithy.Schema
-
-var BenefitSummary_Programs *smithy.Schema
-
-var BenefitSummary_FulfillmentTypes *smithy.Schema
-
-var BenefitSummary_Status *smithy.Schema
-
-var _CatalogName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CatalogName",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConsumableDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ConsumableDetails",
-}, smithy.ShapeTypeStructure, 4)
-var ConsumableDetails_AllocatedAmount *smithy.Schema
-
-var ConsumableDetails_RemainingAmount *smithy.Schema
-
-var ConsumableDetails_UtilizedAmount *smithy.Schema
-
-var ConsumableDetails_IssuanceDetails *smithy.Schema
-
-var Contact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 5)
-var Contact_Email *smithy.Schema
-
-var Contact_FirstName *smithy.Schema
-
-var Contact_LastName *smithy.Schema
-
-var Contact_BusinessTitle *smithy.Schema
-
-var Contact_Phone *smithy.Schema
-
-var _ContactEmail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ContactEmail",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ContactFirstName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ContactFirstName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ContactLastName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ContactLastName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ContactPhone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ContactPhone",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Contacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Contacts",
-}, smithy.ShapeTypeList, 1)
-var _Contacts_member *smithy.Schema
-
-var CreditCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CreditCode",
-}, smithy.ShapeTypeStructure, 6)
-var CreditCode_AwsAccountId *smithy.Schema
-
-var CreditCode_Value *smithy.Schema
-
-var CreditCode_AwsCreditCode *smithy.Schema
-
-var CreditCode_Status *smithy.Schema
-
-var CreditCode_IssuedAt *smithy.Schema
-
-var CreditCode_ExpiresAt *smithy.Schema
-
-var _CreditCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CreditCodes",
-}, smithy.ShapeTypeList, 1)
-var _CreditCodes_member *smithy.Schema
-
-var CreditDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CreditDetails",
-}, smithy.ShapeTypeStructure, 3)
-var CreditDetails_AllocatedAmount *smithy.Schema
-
-var CreditDetails_IssuedAmount *smithy.Schema
-
-var CreditDetails_Codes *smithy.Schema
-
-var CurrencyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CurrencyCode",
-}, smithy.ShapeTypeEnum, 95)
-var CurrencyCode_AED *smithy.Schema
-
-var CurrencyCode_AMD *smithy.Schema
-
-var CurrencyCode_ARS *smithy.Schema
-
-var CurrencyCode_AUD *smithy.Schema
-
-var CurrencyCode_AWG *smithy.Schema
-
-var CurrencyCode_AZN *smithy.Schema
-
-var CurrencyCode_BBD *smithy.Schema
-
-var CurrencyCode_BDT *smithy.Schema
-
-var CurrencyCode_BGN *smithy.Schema
-
-var CurrencyCode_BMD *smithy.Schema
-
-var CurrencyCode_BND *smithy.Schema
-
-var CurrencyCode_BOB *smithy.Schema
-
-var CurrencyCode_BRL *smithy.Schema
-
-var CurrencyCode_BSD *smithy.Schema
-
-var CurrencyCode_BYR *smithy.Schema
-
-var CurrencyCode_BZD *smithy.Schema
-
-var CurrencyCode_CAD *smithy.Schema
-
-var CurrencyCode_CHF *smithy.Schema
-
-var CurrencyCode_CLP *smithy.Schema
-
-var CurrencyCode_CNY *smithy.Schema
-
-var CurrencyCode_COP *smithy.Schema
-
-var CurrencyCode_CRC *smithy.Schema
-
-var CurrencyCode_CZK *smithy.Schema
-
-var CurrencyCode_DKK *smithy.Schema
-
-var CurrencyCode_DOP *smithy.Schema
-
-var CurrencyCode_EEK *smithy.Schema
-
-var CurrencyCode_EGP *smithy.Schema
-
-var CurrencyCode_EUR *smithy.Schema
-
-var CurrencyCode_GBP *smithy.Schema
-
-var CurrencyCode_GEL *smithy.Schema
-
-var CurrencyCode_GHS *smithy.Schema
-
-var CurrencyCode_GTQ *smithy.Schema
-
-var CurrencyCode_GYD *smithy.Schema
-
-var CurrencyCode_HKD *smithy.Schema
-
-var CurrencyCode_HNL *smithy.Schema
-
-var CurrencyCode_HRK *smithy.Schema
-
-var CurrencyCode_HTG *smithy.Schema
-
-var CurrencyCode_HUF *smithy.Schema
-
-var CurrencyCode_IDR *smithy.Schema
-
-var CurrencyCode_ILS *smithy.Schema
-
-var CurrencyCode_INR *smithy.Schema
-
-var CurrencyCode_ISK *smithy.Schema
-
-var CurrencyCode_JMD *smithy.Schema
-
-var CurrencyCode_JPY *smithy.Schema
-
-var CurrencyCode_KES *smithy.Schema
-
-var CurrencyCode_KHR *smithy.Schema
-
-var CurrencyCode_KRW *smithy.Schema
-
-var CurrencyCode_KYD *smithy.Schema
-
-var CurrencyCode_KZT *smithy.Schema
-
-var CurrencyCode_LBP *smithy.Schema
-
-var CurrencyCode_LKR *smithy.Schema
-
-var CurrencyCode_LTL *smithy.Schema
-
-var CurrencyCode_LVL *smithy.Schema
-
-var CurrencyCode_MAD *smithy.Schema
-
-var CurrencyCode_MNT *smithy.Schema
-
-var CurrencyCode_MOP *smithy.Schema
-
-var CurrencyCode_MUR *smithy.Schema
-
-var CurrencyCode_MVR *smithy.Schema
-
-var CurrencyCode_MXN *smithy.Schema
-
-var CurrencyCode_MYR *smithy.Schema
-
-var CurrencyCode_NAD *smithy.Schema
-
-var CurrencyCode_NGN *smithy.Schema
-
-var CurrencyCode_NIO *smithy.Schema
-
-var CurrencyCode_NOK *smithy.Schema
-
-var CurrencyCode_NZD *smithy.Schema
-
-var CurrencyCode_PAB *smithy.Schema
-
-var CurrencyCode_PEN *smithy.Schema
-
-var CurrencyCode_PHP *smithy.Schema
-
-var CurrencyCode_PKR *smithy.Schema
-
-var CurrencyCode_PLN *smithy.Schema
-
-var CurrencyCode_PYG *smithy.Schema
-
-var CurrencyCode_QAR *smithy.Schema
-
-var CurrencyCode_RON *smithy.Schema
-
-var CurrencyCode_RUB *smithy.Schema
-
-var CurrencyCode_SAR *smithy.Schema
-
-var CurrencyCode_SEK *smithy.Schema
-
-var CurrencyCode_SGD *smithy.Schema
-
-var CurrencyCode_SIT *smithy.Schema
-
-var CurrencyCode_SKK *smithy.Schema
-
-var CurrencyCode_THB *smithy.Schema
-
-var CurrencyCode_TND *smithy.Schema
-
-var CurrencyCode_TRY *smithy.Schema
-
-var CurrencyCode_TTD *smithy.Schema
-
-var CurrencyCode_TWD *smithy.Schema
-
-var CurrencyCode_TZS *smithy.Schema
-
-var CurrencyCode_UAH *smithy.Schema
-
-var CurrencyCode_USD *smithy.Schema
-
-var CurrencyCode_UYU *smithy.Schema
-
-var CurrencyCode_UZS *smithy.Schema
-
-var CurrencyCode_VND *smithy.Schema
-
-var CurrencyCode_XAF *smithy.Schema
-
-var CurrencyCode_XCD *smithy.Schema
-
-var CurrencyCode_XOF *smithy.Schema
-
-var CurrencyCode_XPF *smithy.Schema
-
-var CurrencyCode_ZAR *smithy.Schema
-
-var DisbursementDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "DisbursementDetails",
-}, smithy.ShapeTypeStructure, 2)
-var DisbursementDetails_DisbursedAmount *smithy.Schema
-
-var DisbursementDetails_IssuanceDetails *smithy.Schema
-
-var FileDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FileDetail",
-}, smithy.ShapeTypeStructure, 8)
-var FileDetail_FileURI *smithy.Schema
-
-var FileDetail_BusinessUseCase *smithy.Schema
-
-var FileDetail_FileName *smithy.Schema
-
-var FileDetail_FileStatus *smithy.Schema
-
-var FileDetail_FileStatusReason *smithy.Schema
-
-var FileDetail_FileType *smithy.Schema
-
-var FileDetail_CreatedBy *smithy.Schema
-
-var FileDetail_CreatedAt *smithy.Schema
-
-var _FileDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FileDetails",
-}, smithy.ShapeTypeList, 1)
-var _FileDetails_member *smithy.Schema
-
-var FileInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FileInput",
-}, smithy.ShapeTypeStructure, 2)
-var FileInput_FileURI *smithy.Schema
-
-var FileInput_BusinessUseCase *smithy.Schema
-
-var _FileInputDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FileInputDetails",
-}, smithy.ShapeTypeList, 1)
-var _FileInputDetails_member *smithy.Schema
-
-var FileType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FileType",
-}, smithy.ShapeTypeEnum, 9)
-var FileType_DOC *smithy.Schema
-
-var FileType_DOCX *smithy.Schema
-
-var FileType_XLSX *smithy.Schema
-
-var FileType_PPTX *smithy.Schema
-
-var FileType_PDF *smithy.Schema
-
-var FileType_PNG *smithy.Schema
-
-var FileType_JPG *smithy.Schema
-
-var FileType_SVG *smithy.Schema
-
-var FileType_CSV *smithy.Schema
-
-var _FileURI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FileURI",
-}, smithy.ShapeTypeString, 0)
-
-var FulfillmentDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FulfillmentDetails",
-}, smithy.ShapeTypeUnion, 4)
-var FulfillmentDetails_DisbursementDetails *smithy.Schema
-
-var FulfillmentDetails_ConsumableDetails *smithy.Schema
-
-var FulfillmentDetails_CreditDetails *smithy.Schema
-
-var FulfillmentDetails_AccessDetails *smithy.Schema
-
-var FulfillmentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FulfillmentType",
-}, smithy.ShapeTypeEnum, 3)
-var FulfillmentType_CREDITS *smithy.Schema
-
-var FulfillmentType_CASH *smithy.Schema
-
-var FulfillmentType_ACCESS *smithy.Schema
-
-var _FulfillmentTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "FulfillmentTypes",
-}, smithy.ShapeTypeList, 1)
-var _FulfillmentTypes_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var IssuanceDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "IssuanceDetail",
-}, smithy.ShapeTypeStructure, 3)
-var IssuanceDetail_IssuanceId *smithy.Schema
-
-var IssuanceDetail_IssuanceAmount *smithy.Schema
-
-var IssuanceDetail_IssuedAt *smithy.Schema
-
-var MonetaryValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "MonetaryValue",
-}, smithy.ShapeTypeStructure, 2)
-var MonetaryValue_Amount *smithy.Schema
-
-var MonetaryValue_CurrencyCode *smithy.Schema
-
-var _Program = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Program",
-}, smithy.ShapeTypeString, 0)
-
-var _Programs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Programs",
-}, smithy.ShapeTypeList, 1)
-var _Programs_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceType_OPPORTUNITY *smithy.Schema
-
-var ResourceType_BENEFIT_ALLOCATION *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceId *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceType *smithy.Schema
-
-var ServiceQuotaExceededException_QuotaCode *smithy.Schema
-
-var _Stages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Stages",
-}, smithy.ShapeTypeList, 1)
-var _Stages_member *smithy.Schema
-
-var _Statuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Statuses",
-}, smithy.ShapeTypeList, 1)
-var _Statuses_member *smithy.Schema
-
-var _StatusReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "StatusReasonCode",
-}, smithy.ShapeTypeString, 0)
-
-var _StatusReasonCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "StatusReasonCodes",
-}, smithy.ShapeTypeList, 1)
-var _StatusReasonCodes_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TaggableResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "TaggableResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_FieldList *smithy.Schema
-
-var ValidationExceptionErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ValidationExceptionErrorCode",
-}, smithy.ShapeTypeEnum, 10)
-var ValidationExceptionErrorCode_REQUIRED_FIELD_MISSING *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_ENUM_VALUE *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_STRING_FORMAT *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_VALUE *smithy.Schema
-
-var ValidationExceptionErrorCode_NOT_ENOUGH_VALUES *smithy.Schema
-
-var ValidationExceptionErrorCode_TOO_MANY_VALUES *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_RESOURCE_STATE *smithy.Schema
-
-var ValidationExceptionErrorCode_DUPLICATE_KEY_VALUE *smithy.Schema
-
-var ValidationExceptionErrorCode_VALUE_OUT_OF_RANGE *smithy.Schema
-
-var ValidationExceptionErrorCode_ACTION_NOT_PERMITTED *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 3)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var ValidationExceptionField_Code *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 5)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED *smithy.Schema
-
-var AmendBenefitApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AmendBenefitApplicationInput",
-}, smithy.ShapeTypeStructure, 6)
-var AmendBenefitApplicationInput_Catalog *smithy.Schema
-
-var AmendBenefitApplicationInput_ClientToken *smithy.Schema
-
-var AmendBenefitApplicationInput_Revision *smithy.Schema
-
-var AmendBenefitApplicationInput_Identifier *smithy.Schema
-
-var AmendBenefitApplicationInput_AmendmentReason *smithy.Schema
-
-var AmendBenefitApplicationInput_Amendments *smithy.Schema
-
-var AmendBenefitApplicationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AmendBenefitApplicationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateBenefitApplicationResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AssociateBenefitApplicationResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateBenefitApplicationResourceInput_Catalog *smithy.Schema
-
-var AssociateBenefitApplicationResourceInput_BenefitApplicationIdentifier *smithy.Schema
-
-var AssociateBenefitApplicationResourceInput_ResourceArn *smithy.Schema
-
-var AssociateBenefitApplicationResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "AssociateBenefitApplicationResourceOutput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateBenefitApplicationResourceOutput_Id *smithy.Schema
-
-var AssociateBenefitApplicationResourceOutput_Arn *smithy.Schema
-
-var AssociateBenefitApplicationResourceOutput_Revision *smithy.Schema
-
-var CancelBenefitApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CancelBenefitApplicationInput",
-}, smithy.ShapeTypeStructure, 4)
-var CancelBenefitApplicationInput_Catalog *smithy.Schema
-
-var CancelBenefitApplicationInput_ClientToken *smithy.Schema
-
-var CancelBenefitApplicationInput_Identifier *smithy.Schema
-
-var CancelBenefitApplicationInput_Reason *smithy.Schema
-
-var CancelBenefitApplicationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CancelBenefitApplicationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateBenefitApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CreateBenefitApplicationInput",
-}, smithy.ShapeTypeStructure, 11)
-var CreateBenefitApplicationInput_Catalog *smithy.Schema
-
-var CreateBenefitApplicationInput_ClientToken *smithy.Schema
-
-var CreateBenefitApplicationInput_Name *smithy.Schema
-
-var CreateBenefitApplicationInput_Description *smithy.Schema
-
-var CreateBenefitApplicationInput_BenefitIdentifier *smithy.Schema
-
-var CreateBenefitApplicationInput_FulfillmentTypes *smithy.Schema
-
-var CreateBenefitApplicationInput_BenefitApplicationDetails *smithy.Schema
-
-var CreateBenefitApplicationInput_Tags *smithy.Schema
-
-var CreateBenefitApplicationInput_AssociatedResources *smithy.Schema
-
-var CreateBenefitApplicationInput_PartnerContacts *smithy.Schema
-
-var CreateBenefitApplicationInput_FileDetails *smithy.Schema
-
-var CreateBenefitApplicationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "CreateBenefitApplicationOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateBenefitApplicationOutput_Id *smithy.Schema
-
-var CreateBenefitApplicationOutput_Arn *smithy.Schema
-
-var CreateBenefitApplicationOutput_Revision *smithy.Schema
-
-var DisassociateBenefitApplicationResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "DisassociateBenefitApplicationResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateBenefitApplicationResourceInput_Catalog *smithy.Schema
-
-var DisassociateBenefitApplicationResourceInput_BenefitApplicationIdentifier *smithy.Schema
-
-var DisassociateBenefitApplicationResourceInput_ResourceArn *smithy.Schema
-
-var DisassociateBenefitApplicationResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "DisassociateBenefitApplicationResourceOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateBenefitApplicationResourceOutput_Id *smithy.Schema
-
-var DisassociateBenefitApplicationResourceOutput_Arn *smithy.Schema
-
-var DisassociateBenefitApplicationResourceOutput_Revision *smithy.Schema
-
-var GetBenefitAllocationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefitAllocationInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetBenefitAllocationInput_Catalog *smithy.Schema
-
-var GetBenefitAllocationInput_Identifier *smithy.Schema
-
-var GetBenefitAllocationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefitAllocationOutput",
-}, smithy.ShapeTypeStructure, 16)
-var GetBenefitAllocationOutput_Id *smithy.Schema
-
-var GetBenefitAllocationOutput_Catalog *smithy.Schema
-
-var GetBenefitAllocationOutput_Arn *smithy.Schema
-
-var GetBenefitAllocationOutput_Name *smithy.Schema
-
-var GetBenefitAllocationOutput_Description *smithy.Schema
-
-var GetBenefitAllocationOutput_Status *smithy.Schema
-
-var GetBenefitAllocationOutput_StatusReason *smithy.Schema
-
-var GetBenefitAllocationOutput_BenefitApplicationId *smithy.Schema
-
-var GetBenefitAllocationOutput_BenefitId *smithy.Schema
-
-var GetBenefitAllocationOutput_FulfillmentType *smithy.Schema
-
-var GetBenefitAllocationOutput_ApplicableBenefitIds *smithy.Schema
-
-var GetBenefitAllocationOutput_FulfillmentDetail *smithy.Schema
-
-var GetBenefitAllocationOutput_CreatedAt *smithy.Schema
-
-var GetBenefitAllocationOutput_UpdatedAt *smithy.Schema
-
-var GetBenefitAllocationOutput_StartsAt *smithy.Schema
-
-var GetBenefitAllocationOutput_ExpiresAt *smithy.Schema
-
-var GetBenefitApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefitApplicationInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetBenefitApplicationInput_Catalog *smithy.Schema
-
-var GetBenefitApplicationInput_Identifier *smithy.Schema
-
-var GetBenefitApplicationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefitApplicationOutput",
-}, smithy.ShapeTypeStructure, 20)
-var GetBenefitApplicationOutput_Id *smithy.Schema
-
-var GetBenefitApplicationOutput_Arn *smithy.Schema
-
-var GetBenefitApplicationOutput_Catalog *smithy.Schema
-
-var GetBenefitApplicationOutput_BenefitId *smithy.Schema
-
-var GetBenefitApplicationOutput_Name *smithy.Schema
-
-var GetBenefitApplicationOutput_Description *smithy.Schema
-
-var GetBenefitApplicationOutput_FulfillmentTypes *smithy.Schema
-
-var GetBenefitApplicationOutput_BenefitApplicationDetails *smithy.Schema
-
-var GetBenefitApplicationOutput_Programs *smithy.Schema
-
-var GetBenefitApplicationOutput_Status *smithy.Schema
-
-var GetBenefitApplicationOutput_Stage *smithy.Schema
-
-var GetBenefitApplicationOutput_StatusReason *smithy.Schema
-
-var GetBenefitApplicationOutput_StatusReasonCode *smithy.Schema
-
-var GetBenefitApplicationOutput_StatusReasonCodes *smithy.Schema
-
-var GetBenefitApplicationOutput_CreatedAt *smithy.Schema
-
-var GetBenefitApplicationOutput_UpdatedAt *smithy.Schema
-
-var GetBenefitApplicationOutput_Revision *smithy.Schema
-
-var GetBenefitApplicationOutput_AssociatedResources *smithy.Schema
-
-var GetBenefitApplicationOutput_PartnerContacts *smithy.Schema
-
-var GetBenefitApplicationOutput_FileDetails *smithy.Schema
-
-var GetBenefitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefitInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetBenefitInput_Catalog *smithy.Schema
-
-var GetBenefitInput_Identifier *smithy.Schema
-
-var GetBenefitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "GetBenefitOutput",
-}, smithy.ShapeTypeStructure, 9)
-var GetBenefitOutput_Id *smithy.Schema
-
-var GetBenefitOutput_Catalog *smithy.Schema
-
-var GetBenefitOutput_Arn *smithy.Schema
-
-var GetBenefitOutput_Name *smithy.Schema
-
-var GetBenefitOutput_Description *smithy.Schema
-
-var GetBenefitOutput_Programs *smithy.Schema
-
-var GetBenefitOutput_FulfillmentTypes *smithy.Schema
-
-var GetBenefitOutput_BenefitRequestSchema *smithy.Schema
-
-var GetBenefitOutput_Status *smithy.Schema
-
-var ListBenefitAllocationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefitAllocationsInput",
-}, smithy.ShapeTypeStructure, 7)
-var ListBenefitAllocationsInput_Catalog *smithy.Schema
-
-var ListBenefitAllocationsInput_FulfillmentTypes *smithy.Schema
-
-var ListBenefitAllocationsInput_BenefitIdentifiers *smithy.Schema
-
-var ListBenefitAllocationsInput_BenefitApplicationIdentifiers *smithy.Schema
-
-var ListBenefitAllocationsInput_Status *smithy.Schema
-
-var ListBenefitAllocationsInput_MaxResults *smithy.Schema
-
-var ListBenefitAllocationsInput_NextToken *smithy.Schema
-
-var ListBenefitAllocationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefitAllocationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBenefitAllocationsOutput_BenefitAllocationSummaries *smithy.Schema
-
-var ListBenefitAllocationsOutput_NextToken *smithy.Schema
-
-var ListBenefitApplicationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefitApplicationsInput",
-}, smithy.ShapeTypeStructure, 10)
-var ListBenefitApplicationsInput_Catalog *smithy.Schema
-
-var ListBenefitApplicationsInput_Programs *smithy.Schema
-
-var ListBenefitApplicationsInput_FulfillmentTypes *smithy.Schema
-
-var ListBenefitApplicationsInput_BenefitIdentifiers *smithy.Schema
-
-var ListBenefitApplicationsInput_Status *smithy.Schema
-
-var ListBenefitApplicationsInput_Stages *smithy.Schema
-
-var ListBenefitApplicationsInput_AssociatedResources *smithy.Schema
-
-var ListBenefitApplicationsInput_AssociatedResourceArns *smithy.Schema
-
-var ListBenefitApplicationsInput_MaxResults *smithy.Schema
-
-var ListBenefitApplicationsInput_NextToken *smithy.Schema
-
-var ListBenefitApplicationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefitApplicationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBenefitApplicationsOutput_BenefitApplicationSummaries *smithy.Schema
-
-var ListBenefitApplicationsOutput_NextToken *smithy.Schema
-
-var ListBenefitsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefitsInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListBenefitsInput_Catalog *smithy.Schema
-
-var ListBenefitsInput_Programs *smithy.Schema
-
-var ListBenefitsInput_FulfillmentTypes *smithy.Schema
-
-var ListBenefitsInput_Status *smithy.Schema
-
-var ListBenefitsInput_MaxResults *smithy.Schema
-
-var ListBenefitsInput_NextToken *smithy.Schema
-
-var ListBenefitsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListBenefitsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBenefitsOutput_BenefitSummaries *smithy.Schema
-
-var ListBenefitsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RecallBenefitApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "RecallBenefitApplicationInput",
-}, smithy.ShapeTypeStructure, 4)
-var RecallBenefitApplicationInput_Catalog *smithy.Schema
-
-var RecallBenefitApplicationInput_ClientToken *smithy.Schema
-
-var RecallBenefitApplicationInput_Identifier *smithy.Schema
-
-var RecallBenefitApplicationInput_Reason *smithy.Schema
-
-var RecallBenefitApplicationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "RecallBenefitApplicationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SubmitBenefitApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "SubmitBenefitApplicationInput",
-}, smithy.ShapeTypeStructure, 2)
-var SubmitBenefitApplicationInput_Catalog *smithy.Schema
-
-var SubmitBenefitApplicationInput_Identifier *smithy.Schema
-
-var SubmitBenefitApplicationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "SubmitBenefitApplicationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateBenefitApplicationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "UpdateBenefitApplicationInput",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateBenefitApplicationInput_Catalog *smithy.Schema
-
-var UpdateBenefitApplicationInput_ClientToken *smithy.Schema
-
-var UpdateBenefitApplicationInput_Name *smithy.Schema
-
-var UpdateBenefitApplicationInput_Description *smithy.Schema
-
-var UpdateBenefitApplicationInput_Identifier *smithy.Schema
-
-var UpdateBenefitApplicationInput_Revision *smithy.Schema
-
-var UpdateBenefitApplicationInput_BenefitApplicationDetails *smithy.Schema
-
-var UpdateBenefitApplicationInput_PartnerContacts *smithy.Schema
-
-var UpdateBenefitApplicationInput_FileDetails *smithy.Schema
-
-var UpdateBenefitApplicationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralbenefits",
-	Name:      "UpdateBenefitApplicationOutput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBenefitApplicationOutput_Id *smithy.Schema
-
-var UpdateBenefitApplicationOutput_Arn *smithy.Schema
-
-var UpdateBenefitApplicationOutput_Revision *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	AccessDetails_Description = AccessDetails.AddMember("Description", smithyprelude.String)
-
-	Amendment_FieldPath = Amendment.AddMember("FieldPath", smithyprelude.String)
-
-	Amendment_NewValue = Amendment.AddMember("NewValue", smithyprelude.String)
-
-	_AmendmentList_member = _AmendmentList.AddMember("member", Amendment)
-
-	_Arns_member = _Arns.AddMember("member", _Arn)
-
-	ResourceType_OPPORTUNITY = ResourceType.AddMember("OPPORTUNITY", smithyprelude.Unit)
-
-	ResourceType_BENEFIT_ALLOCATION = ResourceType.AddMember("BENEFIT_ALLOCATION", smithyprelude.Unit)
-
-	AssociatedResource_ResourceType = AssociatedResource.AddMember("ResourceType", ResourceType)
-
-	AssociatedResource_ResourceIdentifier = AssociatedResource.AddMember("ResourceIdentifier", smithyprelude.String)
-
-	AssociatedResource_ResourceArn = AssociatedResource.AddMember("ResourceArn", _Arn)
-
-	_AssociatedResources_member = _AssociatedResources.AddMember("member", AssociatedResource)
-
-	_Attributes_key = _Attributes.AddMember("key", smithyprelude.String)
-
-	_Attributes_value = _Attributes.AddMember("value", smithyprelude.String)
-
-	BenefitAllocationStatus_ACTIVE = BenefitAllocationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	BenefitAllocationStatus_INACTIVE = BenefitAllocationStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	BenefitAllocationStatus_FULFILLED = BenefitAllocationStatus.AddMember("FULFILLED", smithyprelude.Unit)
-
-	_BenefitAllocationStatusList_member = _BenefitAllocationStatusList.AddMember("member", BenefitAllocationStatus)
-
-	FulfillmentType_CREDITS = FulfillmentType.AddMember("CREDITS", smithyprelude.Unit)
-
-	FulfillmentType_CASH = FulfillmentType.AddMember("CASH", smithyprelude.Unit)
-
-	FulfillmentType_ACCESS = FulfillmentType.AddMember("ACCESS", smithyprelude.Unit)
-
-	_FulfillmentTypes_member = _FulfillmentTypes.AddMember("member", FulfillmentType)
-
-	_BenefitIds_member = _BenefitIds.AddMember("member", _BenefitId)
-
-	BenefitAllocationSummary_Id = BenefitAllocationSummary.AddMember("Id", _BenefitAllocationId)
-
-	BenefitAllocationSummary_Catalog = BenefitAllocationSummary.AddMember("Catalog", _CatalogName)
-
-	BenefitAllocationSummary_Arn = BenefitAllocationSummary.AddMember("Arn", smithyprelude.String)
-
-	BenefitAllocationSummary_Status = BenefitAllocationSummary.AddMember("Status", BenefitAllocationStatus)
-
-	BenefitAllocationSummary_StatusReason = BenefitAllocationSummary.AddMember("StatusReason", smithyprelude.String)
-
-	BenefitAllocationSummary_Name = BenefitAllocationSummary.AddMember("Name", _BenefitAllocationName)
-
-	BenefitAllocationSummary_BenefitId = BenefitAllocationSummary.AddMember("BenefitId", _BenefitId)
-
-	BenefitAllocationSummary_BenefitApplicationId = BenefitAllocationSummary.AddMember("BenefitApplicationId", _BenefitApplicationId)
-
-	BenefitAllocationSummary_FulfillmentTypes = BenefitAllocationSummary.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	BenefitAllocationSummary_CreatedAt = BenefitAllocationSummary.AddMember("CreatedAt", _Timestamp)
-
-	BenefitAllocationSummary_ExpiresAt = BenefitAllocationSummary.AddMember("ExpiresAt", _Timestamp)
-
-	BenefitAllocationSummary_ApplicableBenefitIds = BenefitAllocationSummary.AddMember("ApplicableBenefitIds", _BenefitIds)
-
-	_BenefitAllocationSummaries_member = _BenefitAllocationSummaries.AddMember("member", BenefitAllocationSummary)
-
-	_BenefitApplicationIdentifierList_member = _BenefitApplicationIdentifierList.AddMember("member", _BenefitApplicationIdentifier)
-
-	BenefitApplicationStatus_PENDING_SUBMISSION = BenefitApplicationStatus.AddMember("PENDING_SUBMISSION", smithyprelude.Unit)
-
-	BenefitApplicationStatus_IN_REVIEW = BenefitApplicationStatus.AddMember("IN_REVIEW", smithyprelude.Unit)
-
-	BenefitApplicationStatus_ACTION_REQUIRED = BenefitApplicationStatus.AddMember("ACTION_REQUIRED", smithyprelude.Unit)
-
-	BenefitApplicationStatus_APPROVED = BenefitApplicationStatus.AddMember("APPROVED", smithyprelude.Unit)
-
-	BenefitApplicationStatus_REJECTED = BenefitApplicationStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	BenefitApplicationStatus_CANCELED = BenefitApplicationStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	_Programs_member = _Programs.AddMember("member", _Program)
-
-	BenefitApplicationSummary_Catalog = BenefitApplicationSummary.AddMember("Catalog", _CatalogName)
-
-	BenefitApplicationSummary_Name = BenefitApplicationSummary.AddMember("Name", _BenefitApplicationName)
-
-	BenefitApplicationSummary_Id = BenefitApplicationSummary.AddMember("Id", _BenefitApplicationId)
-
-	BenefitApplicationSummary_Arn = BenefitApplicationSummary.AddMember("Arn", smithyprelude.String)
-
-	BenefitApplicationSummary_BenefitId = BenefitApplicationSummary.AddMember("BenefitId", _BenefitId)
-
-	BenefitApplicationSummary_Programs = BenefitApplicationSummary.AddMember("Programs", _Programs)
-
-	BenefitApplicationSummary_FulfillmentTypes = BenefitApplicationSummary.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	BenefitApplicationSummary_Status = BenefitApplicationSummary.AddMember("Status", BenefitApplicationStatus)
-
-	BenefitApplicationSummary_Stage = BenefitApplicationSummary.AddMember("Stage", _BenefitApplicationStage)
-
-	BenefitApplicationSummary_CreatedAt = BenefitApplicationSummary.AddMember("CreatedAt", _Timestamp)
-
-	BenefitApplicationSummary_UpdatedAt = BenefitApplicationSummary.AddMember("UpdatedAt", _Timestamp)
-
-	BenefitApplicationSummary_BenefitApplicationDetails = BenefitApplicationSummary.AddMember("BenefitApplicationDetails", _Attributes)
-
-	BenefitApplicationSummary_AssociatedResources = BenefitApplicationSummary.AddMember("AssociatedResources", _Arns)
-
-	_BenefitApplicationSummaries_member = _BenefitApplicationSummaries.AddMember("member", BenefitApplicationSummary)
-
-	_BenefitIdentifiers_member = _BenefitIdentifiers.AddMember("member", _BenefitId)
-
-	BenefitStatus_ACTIVE = BenefitStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	BenefitStatus_INACTIVE = BenefitStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	_BenefitStatuses_member = _BenefitStatuses.AddMember("member", BenefitStatus)
-
-	BenefitSummary_Id = BenefitSummary.AddMember("Id", smithyprelude.String)
-
-	BenefitSummary_Catalog = BenefitSummary.AddMember("Catalog", _CatalogName)
-
-	BenefitSummary_Arn = BenefitSummary.AddMember("Arn", smithyprelude.String)
-
-	BenefitSummary_Name = BenefitSummary.AddMember("Name", smithyprelude.String)
-
-	BenefitSummary_Description = BenefitSummary.AddMember("Description", smithyprelude.String)
-
-	BenefitSummary_Programs = BenefitSummary.AddMember("Programs", _Programs)
-
-	BenefitSummary_FulfillmentTypes = BenefitSummary.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	BenefitSummary_Status = BenefitSummary.AddMember("Status", BenefitStatus)
-
-	_BenefitSummaries_member = _BenefitSummaries.AddMember("member", BenefitSummary)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	CurrencyCode_AED = CurrencyCode.AddMember("AED", smithyprelude.Unit)
-
-	CurrencyCode_AMD = CurrencyCode.AddMember("AMD", smithyprelude.Unit)
-
-	CurrencyCode_ARS = CurrencyCode.AddMember("ARS", smithyprelude.Unit)
-
-	CurrencyCode_AUD = CurrencyCode.AddMember("AUD", smithyprelude.Unit)
-
-	CurrencyCode_AWG = CurrencyCode.AddMember("AWG", smithyprelude.Unit)
-
-	CurrencyCode_AZN = CurrencyCode.AddMember("AZN", smithyprelude.Unit)
-
-	CurrencyCode_BBD = CurrencyCode.AddMember("BBD", smithyprelude.Unit)
-
-	CurrencyCode_BDT = CurrencyCode.AddMember("BDT", smithyprelude.Unit)
-
-	CurrencyCode_BGN = CurrencyCode.AddMember("BGN", smithyprelude.Unit)
-
-	CurrencyCode_BMD = CurrencyCode.AddMember("BMD", smithyprelude.Unit)
-
-	CurrencyCode_BND = CurrencyCode.AddMember("BND", smithyprelude.Unit)
-
-	CurrencyCode_BOB = CurrencyCode.AddMember("BOB", smithyprelude.Unit)
-
-	CurrencyCode_BRL = CurrencyCode.AddMember("BRL", smithyprelude.Unit)
-
-	CurrencyCode_BSD = CurrencyCode.AddMember("BSD", smithyprelude.Unit)
-
-	CurrencyCode_BYR = CurrencyCode.AddMember("BYR", smithyprelude.Unit)
-
-	CurrencyCode_BZD = CurrencyCode.AddMember("BZD", smithyprelude.Unit)
-
-	CurrencyCode_CAD = CurrencyCode.AddMember("CAD", smithyprelude.Unit)
-
-	CurrencyCode_CHF = CurrencyCode.AddMember("CHF", smithyprelude.Unit)
-
-	CurrencyCode_CLP = CurrencyCode.AddMember("CLP", smithyprelude.Unit)
-
-	CurrencyCode_CNY = CurrencyCode.AddMember("CNY", smithyprelude.Unit)
-
-	CurrencyCode_COP = CurrencyCode.AddMember("COP", smithyprelude.Unit)
-
-	CurrencyCode_CRC = CurrencyCode.AddMember("CRC", smithyprelude.Unit)
-
-	CurrencyCode_CZK = CurrencyCode.AddMember("CZK", smithyprelude.Unit)
-
-	CurrencyCode_DKK = CurrencyCode.AddMember("DKK", smithyprelude.Unit)
-
-	CurrencyCode_DOP = CurrencyCode.AddMember("DOP", smithyprelude.Unit)
-
-	CurrencyCode_EEK = CurrencyCode.AddMember("EEK", smithyprelude.Unit)
-
-	CurrencyCode_EGP = CurrencyCode.AddMember("EGP", smithyprelude.Unit)
-
-	CurrencyCode_EUR = CurrencyCode.AddMember("EUR", smithyprelude.Unit)
-
-	CurrencyCode_GBP = CurrencyCode.AddMember("GBP", smithyprelude.Unit)
-
-	CurrencyCode_GEL = CurrencyCode.AddMember("GEL", smithyprelude.Unit)
-
-	CurrencyCode_GHS = CurrencyCode.AddMember("GHS", smithyprelude.Unit)
-
-	CurrencyCode_GTQ = CurrencyCode.AddMember("GTQ", smithyprelude.Unit)
-
-	CurrencyCode_GYD = CurrencyCode.AddMember("GYD", smithyprelude.Unit)
-
-	CurrencyCode_HKD = CurrencyCode.AddMember("HKD", smithyprelude.Unit)
-
-	CurrencyCode_HNL = CurrencyCode.AddMember("HNL", smithyprelude.Unit)
-
-	CurrencyCode_HRK = CurrencyCode.AddMember("HRK", smithyprelude.Unit)
-
-	CurrencyCode_HTG = CurrencyCode.AddMember("HTG", smithyprelude.Unit)
-
-	CurrencyCode_HUF = CurrencyCode.AddMember("HUF", smithyprelude.Unit)
-
-	CurrencyCode_IDR = CurrencyCode.AddMember("IDR", smithyprelude.Unit)
-
-	CurrencyCode_ILS = CurrencyCode.AddMember("ILS", smithyprelude.Unit)
-
-	CurrencyCode_INR = CurrencyCode.AddMember("INR", smithyprelude.Unit)
-
-	CurrencyCode_ISK = CurrencyCode.AddMember("ISK", smithyprelude.Unit)
-
-	CurrencyCode_JMD = CurrencyCode.AddMember("JMD", smithyprelude.Unit)
-
-	CurrencyCode_JPY = CurrencyCode.AddMember("JPY", smithyprelude.Unit)
-
-	CurrencyCode_KES = CurrencyCode.AddMember("KES", smithyprelude.Unit)
-
-	CurrencyCode_KHR = CurrencyCode.AddMember("KHR", smithyprelude.Unit)
-
-	CurrencyCode_KRW = CurrencyCode.AddMember("KRW", smithyprelude.Unit)
-
-	CurrencyCode_KYD = CurrencyCode.AddMember("KYD", smithyprelude.Unit)
-
-	CurrencyCode_KZT = CurrencyCode.AddMember("KZT", smithyprelude.Unit)
-
-	CurrencyCode_LBP = CurrencyCode.AddMember("LBP", smithyprelude.Unit)
-
-	CurrencyCode_LKR = CurrencyCode.AddMember("LKR", smithyprelude.Unit)
-
-	CurrencyCode_LTL = CurrencyCode.AddMember("LTL", smithyprelude.Unit)
-
-	CurrencyCode_LVL = CurrencyCode.AddMember("LVL", smithyprelude.Unit)
-
-	CurrencyCode_MAD = CurrencyCode.AddMember("MAD", smithyprelude.Unit)
-
-	CurrencyCode_MNT = CurrencyCode.AddMember("MNT", smithyprelude.Unit)
-
-	CurrencyCode_MOP = CurrencyCode.AddMember("MOP", smithyprelude.Unit)
-
-	CurrencyCode_MUR = CurrencyCode.AddMember("MUR", smithyprelude.Unit)
-
-	CurrencyCode_MVR = CurrencyCode.AddMember("MVR", smithyprelude.Unit)
-
-	CurrencyCode_MXN = CurrencyCode.AddMember("MXN", smithyprelude.Unit)
-
-	CurrencyCode_MYR = CurrencyCode.AddMember("MYR", smithyprelude.Unit)
-
-	CurrencyCode_NAD = CurrencyCode.AddMember("NAD", smithyprelude.Unit)
-
-	CurrencyCode_NGN = CurrencyCode.AddMember("NGN", smithyprelude.Unit)
-
-	CurrencyCode_NIO = CurrencyCode.AddMember("NIO", smithyprelude.Unit)
-
-	CurrencyCode_NOK = CurrencyCode.AddMember("NOK", smithyprelude.Unit)
-
-	CurrencyCode_NZD = CurrencyCode.AddMember("NZD", smithyprelude.Unit)
-
-	CurrencyCode_PAB = CurrencyCode.AddMember("PAB", smithyprelude.Unit)
-
-	CurrencyCode_PEN = CurrencyCode.AddMember("PEN", smithyprelude.Unit)
-
-	CurrencyCode_PHP = CurrencyCode.AddMember("PHP", smithyprelude.Unit)
-
-	CurrencyCode_PKR = CurrencyCode.AddMember("PKR", smithyprelude.Unit)
-
-	CurrencyCode_PLN = CurrencyCode.AddMember("PLN", smithyprelude.Unit)
-
-	CurrencyCode_PYG = CurrencyCode.AddMember("PYG", smithyprelude.Unit)
-
-	CurrencyCode_QAR = CurrencyCode.AddMember("QAR", smithyprelude.Unit)
-
-	CurrencyCode_RON = CurrencyCode.AddMember("RON", smithyprelude.Unit)
-
-	CurrencyCode_RUB = CurrencyCode.AddMember("RUB", smithyprelude.Unit)
-
-	CurrencyCode_SAR = CurrencyCode.AddMember("SAR", smithyprelude.Unit)
-
-	CurrencyCode_SEK = CurrencyCode.AddMember("SEK", smithyprelude.Unit)
-
-	CurrencyCode_SGD = CurrencyCode.AddMember("SGD", smithyprelude.Unit)
-
-	CurrencyCode_SIT = CurrencyCode.AddMember("SIT", smithyprelude.Unit)
-
-	CurrencyCode_SKK = CurrencyCode.AddMember("SKK", smithyprelude.Unit)
-
-	CurrencyCode_THB = CurrencyCode.AddMember("THB", smithyprelude.Unit)
-
-	CurrencyCode_TND = CurrencyCode.AddMember("TND", smithyprelude.Unit)
-
-	CurrencyCode_TRY = CurrencyCode.AddMember("TRY", smithyprelude.Unit)
-
-	CurrencyCode_TTD = CurrencyCode.AddMember("TTD", smithyprelude.Unit)
-
-	CurrencyCode_TWD = CurrencyCode.AddMember("TWD", smithyprelude.Unit)
-
-	CurrencyCode_TZS = CurrencyCode.AddMember("TZS", smithyprelude.Unit)
-
-	CurrencyCode_UAH = CurrencyCode.AddMember("UAH", smithyprelude.Unit)
-
-	CurrencyCode_USD = CurrencyCode.AddMember("USD", smithyprelude.Unit)
-
-	CurrencyCode_UYU = CurrencyCode.AddMember("UYU", smithyprelude.Unit)
-
-	CurrencyCode_UZS = CurrencyCode.AddMember("UZS", smithyprelude.Unit)
-
-	CurrencyCode_VND = CurrencyCode.AddMember("VND", smithyprelude.Unit)
-
-	CurrencyCode_XAF = CurrencyCode.AddMember("XAF", smithyprelude.Unit)
-
-	CurrencyCode_XCD = CurrencyCode.AddMember("XCD", smithyprelude.Unit)
-
-	CurrencyCode_XOF = CurrencyCode.AddMember("XOF", smithyprelude.Unit)
-
-	CurrencyCode_XPF = CurrencyCode.AddMember("XPF", smithyprelude.Unit)
-
-	CurrencyCode_ZAR = CurrencyCode.AddMember("ZAR", smithyprelude.Unit)
-
-	MonetaryValue_Amount = MonetaryValue.AddMember("Amount", smithyprelude.String)
-
-	MonetaryValue_CurrencyCode = MonetaryValue.AddMember("CurrencyCode", CurrencyCode)
-
-	IssuanceDetail_IssuanceId = IssuanceDetail.AddMember("IssuanceId", smithyprelude.String)
-
-	IssuanceDetail_IssuanceAmount = IssuanceDetail.AddMember("IssuanceAmount", MonetaryValue)
-
-	IssuanceDetail_IssuedAt = IssuanceDetail.AddMember("IssuedAt", _Timestamp)
-
-	ConsumableDetails_AllocatedAmount = ConsumableDetails.AddMember("AllocatedAmount", MonetaryValue)
-
-	ConsumableDetails_RemainingAmount = ConsumableDetails.AddMember("RemainingAmount", MonetaryValue)
-
-	ConsumableDetails_UtilizedAmount = ConsumableDetails.AddMember("UtilizedAmount", MonetaryValue)
-
-	ConsumableDetails_IssuanceDetails = ConsumableDetails.AddMember("IssuanceDetails", IssuanceDetail)
-
-	Contact_Email = Contact.AddMember("Email", _ContactEmail)
-
-	Contact_FirstName = Contact.AddMember("FirstName", _ContactFirstName)
-
-	Contact_LastName = Contact.AddMember("LastName", _ContactLastName)
-
-	Contact_BusinessTitle = Contact.AddMember("BusinessTitle", smithyprelude.String)
-
-	Contact_Phone = Contact.AddMember("Phone", _ContactPhone)
-
-	_Contacts_member = _Contacts.AddMember("member", Contact)
-
-	CreditCode_AwsAccountId = CreditCode.AddMember("AwsAccountId", smithyprelude.String)
-
-	CreditCode_Value = CreditCode.AddMember("Value", MonetaryValue)
-
-	CreditCode_AwsCreditCode = CreditCode.AddMember("AwsCreditCode", smithyprelude.String)
-
-	CreditCode_Status = CreditCode.AddMember("Status", BenefitAllocationStatus)
-
-	CreditCode_IssuedAt = CreditCode.AddMember("IssuedAt", _Timestamp)
-
-	CreditCode_ExpiresAt = CreditCode.AddMember("ExpiresAt", _Timestamp)
-
-	_CreditCodes_member = _CreditCodes.AddMember("member", CreditCode)
-
-	CreditDetails_AllocatedAmount = CreditDetails.AddMember("AllocatedAmount", MonetaryValue)
-
-	CreditDetails_IssuedAmount = CreditDetails.AddMember("IssuedAmount", MonetaryValue)
-
-	CreditDetails_Codes = CreditDetails.AddMember("Codes", _CreditCodes)
-
-	DisbursementDetails_DisbursedAmount = DisbursementDetails.AddMember("DisbursedAmount", MonetaryValue)
-
-	DisbursementDetails_IssuanceDetails = DisbursementDetails.AddMember("IssuanceDetails", IssuanceDetail)
-
-	FileType_DOC = FileType.AddMember("DOC", smithyprelude.Unit)
-
-	FileType_DOCX = FileType.AddMember("DOCX", smithyprelude.Unit)
-
-	FileType_XLSX = FileType.AddMember("XLSX", smithyprelude.Unit)
-
-	FileType_PPTX = FileType.AddMember("PPTX", smithyprelude.Unit)
-
-	FileType_PDF = FileType.AddMember("PDF", smithyprelude.Unit)
-
-	FileType_PNG = FileType.AddMember("PNG", smithyprelude.Unit)
-
-	FileType_JPG = FileType.AddMember("JPG", smithyprelude.Unit)
-
-	FileType_SVG = FileType.AddMember("SVG", smithyprelude.Unit)
-
-	FileType_CSV = FileType.AddMember("CSV", smithyprelude.Unit)
-
-	FileDetail_FileURI = FileDetail.AddMember("FileURI", _FileURI)
-
-	FileDetail_BusinessUseCase = FileDetail.AddMember("BusinessUseCase", smithyprelude.String)
-
-	FileDetail_FileName = FileDetail.AddMember("FileName", smithyprelude.String)
-
-	FileDetail_FileStatus = FileDetail.AddMember("FileStatus", smithyprelude.String)
-
-	FileDetail_FileStatusReason = FileDetail.AddMember("FileStatusReason", smithyprelude.String)
-
-	FileDetail_FileType = FileDetail.AddMember("FileType", FileType)
-
-	FileDetail_CreatedBy = FileDetail.AddMember("CreatedBy", smithyprelude.String)
-
-	FileDetail_CreatedAt = FileDetail.AddMember("CreatedAt", _Timestamp)
-
-	_FileDetails_member = _FileDetails.AddMember("member", FileDetail)
-
-	FileInput_FileURI = FileInput.AddMember("FileURI", _FileURI)
-
-	FileInput_BusinessUseCase = FileInput.AddMember("BusinessUseCase", smithyprelude.String)
-
-	_FileInputDetails_member = _FileInputDetails.AddMember("member", FileInput)
-
-	FulfillmentDetails_DisbursementDetails = FulfillmentDetails.AddMember("DisbursementDetails", DisbursementDetails)
-
-	FulfillmentDetails_ConsumableDetails = FulfillmentDetails.AddMember("ConsumableDetails", ConsumableDetails)
-
-	FulfillmentDetails_CreditDetails = FulfillmentDetails.AddMember("CreditDetails", CreditDetails)
-
-	FulfillmentDetails_AccessDetails = FulfillmentDetails.AddMember("AccessDetails", AccessDetails)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_ResourceId = ServiceQuotaExceededException.AddMember("ResourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_ResourceType = ServiceQuotaExceededException.AddMember("ResourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_QuotaCode = ServiceQuotaExceededException.AddMember("QuotaCode", smithyprelude.String)
-
-	_Stages_member = _Stages.AddMember("member", _BenefitApplicationStage)
-
-	_Statuses_member = _Statuses.AddMember("member", BenefitApplicationStatus)
-
-	_StatusReasonCodes_member = _StatusReasonCodes.AddMember("member", _StatusReasonCode)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionReason_BUSINESS_VALIDATION_FAILED = ValidationExceptionReason.AddMember("BUSINESS_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_REQUIRED_FIELD_MISSING = ValidationExceptionErrorCode.AddMember("REQUIRED_FIELD_MISSING", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_ENUM_VALUE = ValidationExceptionErrorCode.AddMember("INVALID_ENUM_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_STRING_FORMAT = ValidationExceptionErrorCode.AddMember("INVALID_STRING_FORMAT", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_VALUE = ValidationExceptionErrorCode.AddMember("INVALID_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_NOT_ENOUGH_VALUES = ValidationExceptionErrorCode.AddMember("NOT_ENOUGH_VALUES", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_TOO_MANY_VALUES = ValidationExceptionErrorCode.AddMember("TOO_MANY_VALUES", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_RESOURCE_STATE = ValidationExceptionErrorCode.AddMember("INVALID_RESOURCE_STATE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_DUPLICATE_KEY_VALUE = ValidationExceptionErrorCode.AddMember("DUPLICATE_KEY_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_VALUE_OUT_OF_RANGE = ValidationExceptionErrorCode.AddMember("VALUE_OUT_OF_RANGE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_ACTION_NOT_PERMITTED = ValidationExceptionErrorCode.AddMember("ACTION_NOT_PERMITTED", smithyprelude.Unit)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", smithyprelude.String)
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", smithyprelude.String)
-
-	ValidationExceptionField_Code = ValidationExceptionField.AddMember("Code", ValidationExceptionErrorCode)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	ValidationException_FieldList = ValidationException.AddMember("FieldList", _ValidationExceptionFieldList)
-
-	AmendBenefitApplicationInput_Catalog = AmendBenefitApplicationInput.AddMember("Catalog", _CatalogName)
-
-	AmendBenefitApplicationInput_ClientToken = AmendBenefitApplicationInput.AddMember("ClientToken", smithyprelude.String)
-
-	AmendBenefitApplicationInput_Revision = AmendBenefitApplicationInput.AddMember("Revision", smithyprelude.String)
-
-	AmendBenefitApplicationInput_Identifier = AmendBenefitApplicationInput.AddMember("Identifier", _BenefitApplicationIdentifier)
-
-	AmendBenefitApplicationInput_AmendmentReason = AmendBenefitApplicationInput.AddMember("AmendmentReason", smithyprelude.String)
-
-	AmendBenefitApplicationInput_Amendments = AmendBenefitApplicationInput.AddMember("Amendments", _AmendmentList)
-
-	AssociateBenefitApplicationResourceInput_Catalog = AssociateBenefitApplicationResourceInput.AddMember("Catalog", _CatalogName)
-
-	AssociateBenefitApplicationResourceInput_BenefitApplicationIdentifier = AssociateBenefitApplicationResourceInput.AddMember("BenefitApplicationIdentifier", _BenefitApplicationIdentifier)
-
-	AssociateBenefitApplicationResourceInput_ResourceArn = AssociateBenefitApplicationResourceInput.AddMember("ResourceArn", _Arn)
-
-	AssociateBenefitApplicationResourceOutput_Id = AssociateBenefitApplicationResourceOutput.AddMember("Id", _BenefitApplicationId)
-
-	AssociateBenefitApplicationResourceOutput_Arn = AssociateBenefitApplicationResourceOutput.AddMember("Arn", smithyprelude.String)
-
-	AssociateBenefitApplicationResourceOutput_Revision = AssociateBenefitApplicationResourceOutput.AddMember("Revision", smithyprelude.String)
-
-	CancelBenefitApplicationInput_Catalog = CancelBenefitApplicationInput.AddMember("Catalog", _CatalogName)
-
-	CancelBenefitApplicationInput_ClientToken = CancelBenefitApplicationInput.AddMember("ClientToken", smithyprelude.String)
-
-	CancelBenefitApplicationInput_Identifier = CancelBenefitApplicationInput.AddMember("Identifier", _BenefitApplicationIdentifier)
-
-	CancelBenefitApplicationInput_Reason = CancelBenefitApplicationInput.AddMember("Reason", smithyprelude.String)
-
-	CreateBenefitApplicationInput_Catalog = CreateBenefitApplicationInput.AddMember("Catalog", _CatalogName)
-
-	CreateBenefitApplicationInput_ClientToken = CreateBenefitApplicationInput.AddMember("ClientToken", smithyprelude.String)
-
-	CreateBenefitApplicationInput_Name = CreateBenefitApplicationInput.AddMember("Name", _BenefitApplicationName)
-
-	CreateBenefitApplicationInput_Description = CreateBenefitApplicationInput.AddMember("Description", _BenefitApplicationDescription)
-
-	CreateBenefitApplicationInput_BenefitIdentifier = CreateBenefitApplicationInput.AddMember("BenefitIdentifier", smithyprelude.String)
-
-	CreateBenefitApplicationInput_FulfillmentTypes = CreateBenefitApplicationInput.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	CreateBenefitApplicationInput_BenefitApplicationDetails = CreateBenefitApplicationInput.AddMember("BenefitApplicationDetails", smithyprelude.Document)
-
-	CreateBenefitApplicationInput_Tags = CreateBenefitApplicationInput.AddMember("Tags", _Tags)
-
-	CreateBenefitApplicationInput_AssociatedResources = CreateBenefitApplicationInput.AddMember("AssociatedResources", _Arns)
-
-	CreateBenefitApplicationInput_PartnerContacts = CreateBenefitApplicationInput.AddMember("PartnerContacts", _Contacts)
-
-	CreateBenefitApplicationInput_FileDetails = CreateBenefitApplicationInput.AddMember("FileDetails", _FileInputDetails)
-
-	CreateBenefitApplicationOutput_Id = CreateBenefitApplicationOutput.AddMember("Id", _BenefitApplicationId)
-
-	CreateBenefitApplicationOutput_Arn = CreateBenefitApplicationOutput.AddMember("Arn", smithyprelude.String)
-
-	CreateBenefitApplicationOutput_Revision = CreateBenefitApplicationOutput.AddMember("Revision", smithyprelude.String)
-
-	DisassociateBenefitApplicationResourceInput_Catalog = DisassociateBenefitApplicationResourceInput.AddMember("Catalog", _CatalogName)
-
-	DisassociateBenefitApplicationResourceInput_BenefitApplicationIdentifier = DisassociateBenefitApplicationResourceInput.AddMember("BenefitApplicationIdentifier", _BenefitApplicationIdentifier)
-
-	DisassociateBenefitApplicationResourceInput_ResourceArn = DisassociateBenefitApplicationResourceInput.AddMember("ResourceArn", _Arn)
-
-	DisassociateBenefitApplicationResourceOutput_Id = DisassociateBenefitApplicationResourceOutput.AddMember("Id", _BenefitApplicationId)
-
-	DisassociateBenefitApplicationResourceOutput_Arn = DisassociateBenefitApplicationResourceOutput.AddMember("Arn", smithyprelude.String)
-
-	DisassociateBenefitApplicationResourceOutput_Revision = DisassociateBenefitApplicationResourceOutput.AddMember("Revision", smithyprelude.String)
-
-	GetBenefitAllocationInput_Catalog = GetBenefitAllocationInput.AddMember("Catalog", _CatalogName)
-
-	GetBenefitAllocationInput_Identifier = GetBenefitAllocationInput.AddMember("Identifier", _BenefitAllocationIdentifier)
-
-	GetBenefitAllocationOutput_Id = GetBenefitAllocationOutput.AddMember("Id", _BenefitAllocationId)
-
-	GetBenefitAllocationOutput_Catalog = GetBenefitAllocationOutput.AddMember("Catalog", _CatalogName)
-
-	GetBenefitAllocationOutput_Arn = GetBenefitAllocationOutput.AddMember("Arn", _BenefitAllocationArn)
-
-	GetBenefitAllocationOutput_Name = GetBenefitAllocationOutput.AddMember("Name", smithyprelude.String)
-
-	GetBenefitAllocationOutput_Description = GetBenefitAllocationOutput.AddMember("Description", smithyprelude.String)
-
-	GetBenefitAllocationOutput_Status = GetBenefitAllocationOutput.AddMember("Status", BenefitAllocationStatus)
-
-	GetBenefitAllocationOutput_StatusReason = GetBenefitAllocationOutput.AddMember("StatusReason", smithyprelude.String)
-
-	GetBenefitAllocationOutput_BenefitApplicationId = GetBenefitAllocationOutput.AddMember("BenefitApplicationId", _BenefitApplicationId)
-
-	GetBenefitAllocationOutput_BenefitId = GetBenefitAllocationOutput.AddMember("BenefitId", _BenefitId)
-
-	GetBenefitAllocationOutput_FulfillmentType = GetBenefitAllocationOutput.AddMember("FulfillmentType", FulfillmentType)
-
-	GetBenefitAllocationOutput_ApplicableBenefitIds = GetBenefitAllocationOutput.AddMember("ApplicableBenefitIds", _BenefitIdentifiers)
-
-	GetBenefitAllocationOutput_FulfillmentDetail = GetBenefitAllocationOutput.AddMember("FulfillmentDetail", FulfillmentDetails)
-
-	GetBenefitAllocationOutput_CreatedAt = GetBenefitAllocationOutput.AddMember("CreatedAt", _Timestamp)
-
-	GetBenefitAllocationOutput_UpdatedAt = GetBenefitAllocationOutput.AddMember("UpdatedAt", _Timestamp)
-
-	GetBenefitAllocationOutput_StartsAt = GetBenefitAllocationOutput.AddMember("StartsAt", _Timestamp)
-
-	GetBenefitAllocationOutput_ExpiresAt = GetBenefitAllocationOutput.AddMember("ExpiresAt", _Timestamp)
-
-	GetBenefitApplicationInput_Catalog = GetBenefitApplicationInput.AddMember("Catalog", _CatalogName)
-
-	GetBenefitApplicationInput_Identifier = GetBenefitApplicationInput.AddMember("Identifier", _BenefitApplicationIdentifier)
-
-	GetBenefitApplicationOutput_Id = GetBenefitApplicationOutput.AddMember("Id", _BenefitApplicationId)
-
-	GetBenefitApplicationOutput_Arn = GetBenefitApplicationOutput.AddMember("Arn", _Arn)
-
-	GetBenefitApplicationOutput_Catalog = GetBenefitApplicationOutput.AddMember("Catalog", _CatalogName)
-
-	GetBenefitApplicationOutput_BenefitId = GetBenefitApplicationOutput.AddMember("BenefitId", _BenefitId)
-
-	GetBenefitApplicationOutput_Name = GetBenefitApplicationOutput.AddMember("Name", _BenefitApplicationName)
-
-	GetBenefitApplicationOutput_Description = GetBenefitApplicationOutput.AddMember("Description", _BenefitApplicationDescription)
-
-	GetBenefitApplicationOutput_FulfillmentTypes = GetBenefitApplicationOutput.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	GetBenefitApplicationOutput_BenefitApplicationDetails = GetBenefitApplicationOutput.AddMember("BenefitApplicationDetails", smithyprelude.Document)
-
-	GetBenefitApplicationOutput_Programs = GetBenefitApplicationOutput.AddMember("Programs", _Programs)
-
-	GetBenefitApplicationOutput_Status = GetBenefitApplicationOutput.AddMember("Status", BenefitApplicationStatus)
-
-	GetBenefitApplicationOutput_Stage = GetBenefitApplicationOutput.AddMember("Stage", _BenefitApplicationStage)
-
-	GetBenefitApplicationOutput_StatusReason = GetBenefitApplicationOutput.AddMember("StatusReason", smithyprelude.String)
-
-	GetBenefitApplicationOutput_StatusReasonCode = GetBenefitApplicationOutput.AddMember("StatusReasonCode", _StatusReasonCode)
-
-	GetBenefitApplicationOutput_StatusReasonCodes = GetBenefitApplicationOutput.AddMember("StatusReasonCodes", _StatusReasonCodes)
-
-	GetBenefitApplicationOutput_CreatedAt = GetBenefitApplicationOutput.AddMember("CreatedAt", _Timestamp)
-
-	GetBenefitApplicationOutput_UpdatedAt = GetBenefitApplicationOutput.AddMember("UpdatedAt", _Timestamp)
-
-	GetBenefitApplicationOutput_Revision = GetBenefitApplicationOutput.AddMember("Revision", smithyprelude.String)
-
-	GetBenefitApplicationOutput_AssociatedResources = GetBenefitApplicationOutput.AddMember("AssociatedResources", _Arns)
-
-	GetBenefitApplicationOutput_PartnerContacts = GetBenefitApplicationOutput.AddMember("PartnerContacts", _Contacts)
-
-	GetBenefitApplicationOutput_FileDetails = GetBenefitApplicationOutput.AddMember("FileDetails", _FileDetails)
-
-	GetBenefitInput_Catalog = GetBenefitInput.AddMember("Catalog", _CatalogName)
-
-	GetBenefitInput_Identifier = GetBenefitInput.AddMember("Identifier", smithyprelude.String)
-
-	GetBenefitOutput_Id = GetBenefitOutput.AddMember("Id", smithyprelude.String)
-
-	GetBenefitOutput_Catalog = GetBenefitOutput.AddMember("Catalog", _CatalogName)
-
-	GetBenefitOutput_Arn = GetBenefitOutput.AddMember("Arn", smithyprelude.String)
-
-	GetBenefitOutput_Name = GetBenefitOutput.AddMember("Name", smithyprelude.String)
-
-	GetBenefitOutput_Description = GetBenefitOutput.AddMember("Description", smithyprelude.String)
-
-	GetBenefitOutput_Programs = GetBenefitOutput.AddMember("Programs", _Programs)
-
-	GetBenefitOutput_FulfillmentTypes = GetBenefitOutput.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	GetBenefitOutput_BenefitRequestSchema = GetBenefitOutput.AddMember("BenefitRequestSchema", smithyprelude.Document)
-
-	GetBenefitOutput_Status = GetBenefitOutput.AddMember("Status", BenefitStatus)
-
-	ListBenefitAllocationsInput_Catalog = ListBenefitAllocationsInput.AddMember("Catalog", _CatalogName)
-
-	ListBenefitAllocationsInput_FulfillmentTypes = ListBenefitAllocationsInput.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	ListBenefitAllocationsInput_BenefitIdentifiers = ListBenefitAllocationsInput.AddMember("BenefitIdentifiers", _BenefitIdentifiers)
-
-	ListBenefitAllocationsInput_BenefitApplicationIdentifiers = ListBenefitAllocationsInput.AddMember("BenefitApplicationIdentifiers", _BenefitApplicationIdentifierList)
-
-	ListBenefitAllocationsInput_Status = ListBenefitAllocationsInput.AddMember("Status", _BenefitAllocationStatusList)
-
-	ListBenefitAllocationsInput_MaxResults = ListBenefitAllocationsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListBenefitAllocationsInput_NextToken = ListBenefitAllocationsInput.AddMember("NextToken", smithyprelude.String)
-
-	ListBenefitAllocationsOutput_BenefitAllocationSummaries = ListBenefitAllocationsOutput.AddMember("BenefitAllocationSummaries", _BenefitAllocationSummaries)
-
-	ListBenefitAllocationsOutput_NextToken = ListBenefitAllocationsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListBenefitApplicationsInput_Catalog = ListBenefitApplicationsInput.AddMember("Catalog", _CatalogName)
-
-	ListBenefitApplicationsInput_Programs = ListBenefitApplicationsInput.AddMember("Programs", _Programs)
-
-	ListBenefitApplicationsInput_FulfillmentTypes = ListBenefitApplicationsInput.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	ListBenefitApplicationsInput_BenefitIdentifiers = ListBenefitApplicationsInput.AddMember("BenefitIdentifiers", _BenefitIdentifiers)
-
-	ListBenefitApplicationsInput_Status = ListBenefitApplicationsInput.AddMember("Status", _Statuses)
-
-	ListBenefitApplicationsInput_Stages = ListBenefitApplicationsInput.AddMember("Stages", _Stages)
-
-	ListBenefitApplicationsInput_AssociatedResources = ListBenefitApplicationsInput.AddMember("AssociatedResources", _AssociatedResources)
-
-	ListBenefitApplicationsInput_AssociatedResourceArns = ListBenefitApplicationsInput.AddMember("AssociatedResourceArns", _Arns)
-
-	ListBenefitApplicationsInput_MaxResults = ListBenefitApplicationsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListBenefitApplicationsInput_NextToken = ListBenefitApplicationsInput.AddMember("NextToken", smithyprelude.String)
-
-	ListBenefitApplicationsOutput_BenefitApplicationSummaries = ListBenefitApplicationsOutput.AddMember("BenefitApplicationSummaries", _BenefitApplicationSummaries)
-
-	ListBenefitApplicationsOutput_NextToken = ListBenefitApplicationsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListBenefitsInput_Catalog = ListBenefitsInput.AddMember("Catalog", _CatalogName)
-
-	ListBenefitsInput_Programs = ListBenefitsInput.AddMember("Programs", _Programs)
-
-	ListBenefitsInput_FulfillmentTypes = ListBenefitsInput.AddMember("FulfillmentTypes", _FulfillmentTypes)
-
-	ListBenefitsInput_Status = ListBenefitsInput.AddMember("Status", _BenefitStatuses)
-
-	ListBenefitsInput_MaxResults = ListBenefitsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListBenefitsInput_NextToken = ListBenefitsInput.AddMember("NextToken", smithyprelude.String)
-
-	ListBenefitsOutput_BenefitSummaries = ListBenefitsOutput.AddMember("BenefitSummaries", _BenefitSummaries)
-
-	ListBenefitsOutput_NextToken = ListBenefitsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _TaggableResourceArn)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	RecallBenefitApplicationInput_Catalog = RecallBenefitApplicationInput.AddMember("Catalog", _CatalogName)
-
-	RecallBenefitApplicationInput_ClientToken = RecallBenefitApplicationInput.AddMember("ClientToken", smithyprelude.String)
-
-	RecallBenefitApplicationInput_Identifier = RecallBenefitApplicationInput.AddMember("Identifier", _BenefitApplicationIdentifier)
-
-	RecallBenefitApplicationInput_Reason = RecallBenefitApplicationInput.AddMember("Reason", smithyprelude.String)
-
-	SubmitBenefitApplicationInput_Catalog = SubmitBenefitApplicationInput.AddMember("Catalog", _CatalogName)
-
-	SubmitBenefitApplicationInput_Identifier = SubmitBenefitApplicationInput.AddMember("Identifier", _BenefitApplicationIdentifier)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _TaggableResourceArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _TaggableResourceArn)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-	UpdateBenefitApplicationInput_Catalog = UpdateBenefitApplicationInput.AddMember("Catalog", _CatalogName)
-
-	UpdateBenefitApplicationInput_ClientToken = UpdateBenefitApplicationInput.AddMember("ClientToken", smithyprelude.String)
-
-	UpdateBenefitApplicationInput_Name = UpdateBenefitApplicationInput.AddMember("Name", _BenefitApplicationName)
-
-	UpdateBenefitApplicationInput_Description = UpdateBenefitApplicationInput.AddMember("Description", _BenefitApplicationDescription)
-
-	UpdateBenefitApplicationInput_Identifier = UpdateBenefitApplicationInput.AddMember("Identifier", _BenefitApplicationIdentifier)
-
-	UpdateBenefitApplicationInput_Revision = UpdateBenefitApplicationInput.AddMember("Revision", smithyprelude.String)
-
-	UpdateBenefitApplicationInput_BenefitApplicationDetails = UpdateBenefitApplicationInput.AddMember("BenefitApplicationDetails", smithyprelude.Document)
-
-	UpdateBenefitApplicationInput_PartnerContacts = UpdateBenefitApplicationInput.AddMember("PartnerContacts", _Contacts)
-
-	UpdateBenefitApplicationInput_FileDetails = UpdateBenefitApplicationInput.AddMember("FileDetails", _FileInputDetails)
-
-	UpdateBenefitApplicationOutput_Id = UpdateBenefitApplicationOutput.AddMember("Id", _BenefitApplicationId)
-
-	UpdateBenefitApplicationOutput_Arn = UpdateBenefitApplicationOutput.AddMember("Arn", smithyprelude.String)
-
-	UpdateBenefitApplicationOutput_Revision = UpdateBenefitApplicationOutput.AddMember("Revision", smithyprelude.String)
-
+const blob = "" +
+	"DisassociateBenefitApplicationResourceOutputDisassociateBenefitApplicationResourceInputAssociateBene" +
+	"fitApplicationResourceOutputAssociateBenefitApplicationResourceInputBenefitApplicationIdentifierList" +
+	"CancelBenefitApplicationOutputCreateBenefitApplicationOutputRecallBenefitApplicationOutputSubmitBene" +
+	"fitApplicationOutputUpdateBenefitApplicationOutputAmendBenefitApplicationOutputBenefitApplicationDes" +
+	"criptionBenefitApplicationIdentifiersCancelBenefitApplicationInputCreateBenefitApplicationInputListB" +
+	"enefitApplicationsOutputPartnerCentralBenefitsServiceRecallBenefitApplicationInputServiceQuotaExceed" +
+	"edExceptionSubmitBenefitApplicationInputUpdateBenefitApplicationInputAmendBenefitApplicationInputLis" +
+	"tBenefitAllocationsOutputListBenefitApplicationsInputValidationExceptionErrorCodeValidationException" +
+	"FieldListBenefitAllocationIdentifierBenefitAllocationStatusListBenefitApplicationSummariesGetBenefit" +
+	"ApplicationOutputListBenefitAllocationsInputListTagsForResourceResponseBUSINESS_VALIDATION_FAILEDBen" +
+	"efitAllocationSummariesGetBenefitAllocationOutputGetBenefitApplicationInputListTagsForResourceReques" +
+	"tBenefitApplicationDetailsBenefitApplicationSummaryGetBenefitAllocationInputResourceNotFoundExceptio" +
+	"nValidationExceptionReasonBenefitAllocationSummaryBenefitApplicationStatusBenefitApplicationStageFIE" +
+	"LD_VALIDATION_FAILEDInternalServerExceptionAssociatedResourceArnsBenefitApplicationNameINVALID_RESOU" +
+	"RCE_STATEREQUIRED_FIELD_MISSINGAccessDeniedExceptionBenefitAllocationNameINVALID_STRING_FORMATUntagR" +
+	"esourceResponseACTION_NOT_PERMITTEDApplicableBenefitIdsBenefitAllocationArnBenefitRequestSchemaUntag" +
+	"ResourceRequestAssociatedResourcesDUPLICATE_KEY_VALUEDisbursementDetailsTagResourceResponseTaggableR" +
+	"esourceArnThrottlingExceptionBENEFIT_ALLOCATIONBenefitIdentifiersFulfillmentDetailsINVALID_ENUM_VALU" +
+	"EListBenefitsOutputPENDING_SUBMISSIONResourceIdentifierTagResourceRequestVALUE_OUT_OF_RANGEConflictE" +
+	"xceptionConsumableDetailsListBenefitsInputNOT_ENOUGH_VALUESStatusReasonCodesUNKNOWN_OPERATIONBenefit" +
+	"SummariesContactFirstNameFileInputDetailsFileStatusReasonFulfillmentTypesGetBenefitOutputACTION_REQU" +
+	"IREDAllocatedAmountAmendmentReasonBenefitStatusesBusinessUseCaseContactLastNameDisbursedAmountGetBen" +
+	"efitInputIssuanceDetailsPartnerContactsRemainingAmountTOO_MANY_VALUESBenefitSummaryIssuanceAmountUti" +
+	"lizedAmountAccessDetailsAmendmentListAwsCreditCodeBusinessTitleCreditDetailsINVALID_VALUEMonetaryVal" +
+	"ueAwsAccountIdCANNOT_PARSEContactEmailContactPhoneCurrencyCodeIssuedAmountResourceTypeCatalogNameCli" +
+	"entTokenCreditCodesFileDetailsOPPORTUNITYresourceArnAmendmentsAttributesIssuanceIdMaxResultsTagKeyLi" +
+	"stCreatedAtCreatedByExpiresAtFULFILLEDFieldPathIN_REVIEWNextTokenQuotaCodeTimestampUpdatedAtAPPROVED" +
+	"CANCELEDDocumentFileNameFileTypeINACTIVEIssuedAtNewValueProgramsREJECTEDRevisionStartsAtTagValueCRED" +
+	"ITSFileURIIntegerMessagetagKeysACCESSStagesStringmemberOTHERvalueCASHDOCXPPTXUnitXLSXtagsAEDAMDAUDAW" +
+	"GAZNBBDBDTBGNBMDBNDBOBBRLBSDBYRBZDCADCHFCLPCNYCOPCRCCSVCZKDKKDOPEEKEGPEURGBPGELGHSGTQGYDHKDHNLHRKHTG" +
+	"HUFIDRILSINRISKJMDJPGJPYKESKHRKRWKYDKZTLBPLKRLTLLVLMADMNTMOPMURMVRMXNMYRNADNGNNIONOKNZDPABPDFPHPPKRP" +
+	"LNPNGPYGQARRONRUBSARSEKSGDSITSKKSVGTHBTNDTRYTTDTWDTZSUAHUSDUYUUZSVNDXAFXCDXOFXPFZARkey"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"com.amazonaws.partnercentralbenefits", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 350, Target: 0, Traits: 0, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 87, Target: 1, Traits: 1, StrLen: 35, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 200, Target: 2, Traits: 2, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 230, Target: 3, Traits: 3, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 4, Traits: 4, StrLen: 38, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 890, Target: 5, Traits: 5, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1023, Target: 6, Traits: 6, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 890, Target: 7, Traits: 7, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 697, Target: 8, Traits: 8, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 495, Target: 9, Traits: 9, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1801, Target: 10, Traits: 10, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 944, Target: 11, Traits: 11, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 260, Target: 12, Traits: 12, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 290, Target: 13, Traits: 13, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1672, Target: 14, Traits: 14, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1494, Target: 15, Traits: 15, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 320, Target: 16, Traits: 16, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 524, Target: 17, Traits: 17, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1431, Target: 18, Traits: 18, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2817, Target: 528, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2311, Target: 20, Traits: 17, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 397, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2119, Target: 22, Traits: 17, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2638, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2748, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2324, Target: 25, Traits: 17, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 22, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1361, Target: 27, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1361, Target: 28, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 27, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1343, Target: 30, Traits: 17, StrLen: 18, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2474, Target: 299, Traits: 17, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1837, Target: 528, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1353, Target: 27, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1615, Target: 34, Traits: 17, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 30, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2562, Target: 36, Traits: 17, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 3183, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2860, Target: 528, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1555, Target: 39, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 809, Target: 40, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 809, Target: 41, Traits: 17, StrLen: 27, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1452, Target: 42, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 836, Target: 43, Traits: 17, StrLen: 23, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2734, Target: 529, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2732, Target: 529, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2629, Target: 529, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 836, Target: 47, Traits: 17, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 43, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 997, Target: 49, Traits: 17, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 51, Traits: 17, StrLen: 6, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1226, Target: 51, Traits: 17, StrLen: 24, Count: 12, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 40, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 853, Target: 43, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1959, Target: 528, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 42, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1545, Target: 94, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 168, Target: 65, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2602, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2620, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1535, Target: 97, Traits: 17, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 379, Target: 64, Traits: 17, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 168, Target: 65, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 168, Target: 66, Traits: 17, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 168, Target: 67, Traits: 17, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 66, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1365, Target: 69, Traits: 17, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1274, Target: 70, Traits: 17, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1250, Target: 71, Traits: 17, StrLen: 24, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1819, Target: 529, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2647, Target: 529, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2089, Target: 529, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2692, Target: 529, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2764, Target: 529, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2700, Target: 529, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 863, Target: 78, Traits: 17, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 80, Traits: 17, StrLen: 6, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1126, Target: 80, Traits: 17, StrLen: 25, Count: 13, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 69, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 65, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1545, Target: 94, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2756, Target: 295, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 853, Target: 71, Traits: 17, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1292, Target: 70, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2602, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2683, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1101, Target: 36, Traits: 17, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1615, Target: 28, Traits: 17, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1545, Target: 94, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1747, Target: 95, Traits: 17, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 94, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1545, Target: 97, Traits: 17, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 94, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2134, Target: 99, Traits: 17, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2734, Target: 529, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2732, Target: 529, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2134, Target: 102, Traits: 17, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 99, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1993, Target: 104, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 106, Traits: 17, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2269, Target: 106, Traits: 17, StrLen: 14, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 528, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 528, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 397, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2756, Target: 295, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 853, Target: 99, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1891, Target: 116, Traits: 20, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2817, Target: 528, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1908, Target: 118, Traits: 17, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2104, Target: 291, Traits: 17, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2239, Target: 291, Traits: 17, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2297, Target: 291, Traits: 17, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2209, Target: 287, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2009, Target: 123, Traits: 17, StrLen: 7, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2433, Target: 129, Traits: 21, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2016, Target: 130, Traits: 21, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2171, Target: 131, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2350, Target: 528, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2445, Target: 132, Traits: 21, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2426, Target: 129, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2009, Target: 130, Traits: 22, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2164, Target: 131, Traits: 22, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2438, Target: 132, Traits: 22, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2231, Target: 133, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 123, Traits: 17, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2340, Target: 135, Traits: 17, StrLen: 10, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2402, Target: 528, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2397, Target: 291, Traits: 17, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2337, Target: 528, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 853, Target: 43, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2740, Target: 326, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2620, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2508, Target: 142, Traits: 17, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 135, Traits: 17, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2363, Target: 144, Traits: 17, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2104, Target: 291, Traits: 17, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2462, Target: 291, Traits: 17, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1971, Target: 142, Traits: 17, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2450, Target: 148, Traits: 17, StrLen: 12, Count: 95, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2889, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2892, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2422, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2895, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2898, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2901, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2904, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2907, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2910, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2913, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2916, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2919, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2922, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2925, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2928, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2931, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2934, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2937, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2940, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2943, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2946, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2949, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2955, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2958, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2961, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2964, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2967, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2970, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2973, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2976, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2979, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2982, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2985, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2988, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2991, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2994, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2997, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3000, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3003, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3006, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3009, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3012, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3015, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3021, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3024, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3027, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3030, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3033, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3036, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3039, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3042, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3045, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3048, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3051, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3054, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3057, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3060, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3063, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3066, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3069, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3072, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3075, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3078, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3081, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3084, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3087, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1819, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3093, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3096, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3099, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3105, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3108, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3111, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3114, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3117, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3120, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3123, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3126, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3129, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3135, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3138, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3141, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3144, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3147, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3150, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3153, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3156, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3159, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3162, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3165, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3168, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3171, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3174, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3177, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3180, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1653, Target: 244, Traits: 17, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2179, Target: 291, Traits: 17, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2209, Target: 287, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2519, Target: 247, Traits: 17, StrLen: 10, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2803, Target: 273, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2149, Target: 528, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2716, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2041, Target: 528, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2041, Target: 528, Traits: 17, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2724, Target: 263, Traits: 17, StrLen: 8, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2611, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2602, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2519, Target: 256, Traits: 17, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 247, Traits: 17, StrLen: 6, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2025, Target: 258, Traits: 17, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2803, Target: 273, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2149, Target: 528, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2025, Target: 261, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 258, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2724, Target: 263, Traits: 17, StrLen: 8, Count: 9, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2869, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2869, Target: 529, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2881, Target: 529, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2873, Target: 529, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3090, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3102, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3018, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 3132, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2952, Target: 529, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2803, Target: 273, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1765, Target: 274, Traits: 17, StrLen: 18, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 0},
+		{StrOff: 1653, Target: 244, Traits: 17, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1908, Target: 118, Traits: 17, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2363, Target: 144, Traits: 17, StrLen: 13, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2311, Target: 20, Traits: 17, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2057, Target: 279, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2796, Target: 529, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2865, Target: 529, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2831, Target: 529, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 279, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1320, Target: 285, Traits: 23, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2817, Target: 528, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2209, Target: 287, Traits: 17, StrLen: 14, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2572, Target: 528, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2283, Target: 291, Traits: 17, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2740, Target: 326, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2389, Target: 291, Traits: 17, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2113, Target: 528, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2450, Target: 148, Traits: 17, StrLen: 12, Count: 95, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 2756, Target: 294, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2756, Target: 295, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 294, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1176, Target: 297, Traits: 24, StrLen: 25, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2817, Target: 528, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2474, Target: 299, Traits: 17, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 2530, Target: 529, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1729, Target: 529, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 582, Target: 302, Traits: 25, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2817, Target: 528, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1837, Target: 528, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2474, Target: 528, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2665, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2837, Target: 307, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 70, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2141, Target: 309, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 71, Traits: 17, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1959, Target: 311, Traits: 17, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1959, Target: 312, Traits: 17, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 311, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 948, Target: 314, Traits: 17, StrLen: 3, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2595, Target: 318, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2397, Target: 323, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1691, Target: 317, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2592, Target: 318, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 2592, Target: 319, Traits: 17, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 318, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 948, Target: 321, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 314, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2788, Target: 323, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 0},
+		{StrOff: 1710, Target: 324, Traits: 26, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2817, Target: 528, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2674, Target: 326, Traits: 27, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 0},
+		{StrOff: 753, Target: 327, Traits: 28, StrLen: 19, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2817, Target: 528, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1220, Target: 348, Traits: 17, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 800, Target: 346, Traits: 17, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 753, Target: 331, Traits: 17, StrLen: 28, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1409, Target: 529, Traits: 17, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1783, Target: 529, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1473, Target: 529, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2376, Target: 529, Traits: 17, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1942, Target: 529, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2254, Target: 529, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1387, Target: 529, Traits: 17, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1634, Target: 529, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1873, Target: 529, Traits: 17, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1515, Target: 529, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 781, Target: 342, Traits: 17, StrLen: 24, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1383, Target: 528, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2817, Target: 528, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 777, Target: 331, Traits: 17, StrLen: 4, Count: 10, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 781, Target: 346, Traits: 17, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 2849, Target: 342, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1201, Target: 348, Traits: 17, StrLen: 25, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 0},
+		{StrOff: 1976, Target: 529, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2414, Target: 529, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1297, Target: 529, Traits: 17, StrLen: 23, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2855, Target: 529, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 971, Target: 529, Traits: 17, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 669, Target: 354, Traits: 17, StrLen: 28, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2497, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2772, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 66, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2119, Target: 528, Traits: 17, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2552, Target: 25, Traits: 17, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 350, Target: 361, Traits: 17, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 128, Target: 362, Traits: 17, StrLen: 40, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 168, Target: 66, Traits: 17, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1353, Target: 27, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 87, Target: 366, Traits: 17, StrLen: 41, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 65, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2772, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 437, Target: 370, Traits: 17, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2497, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 66, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1220, Target: 528, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 200, Target: 375, Traits: 17, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 466, Target: 376, Traits: 17, StrLen: 29, Count: 11, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2497, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 69, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 397, Target: 64, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1747, Target: 528, Traits: 17, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1101, Target: 530, Traits: 17, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 948, Target: 321, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1615, Target: 28, Traits: 17, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2224, Target: 133, Traits: 17, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2519, Target: 261, Traits: 17, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 230, Target: 388, Traits: 17, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 65, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2772, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 44, Target: 392, Traits: 17, StrLen: 43, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 168, Target: 66, Traits: 17, StrLen: 28, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1353, Target: 27, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 396, Traits: 17, StrLen: 44, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 65, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2772, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1151, Target: 400, Traits: 17, StrLen: 25, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 41, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1023, Target: 403, Traits: 17, StrLen: 26, Count: 16, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 40, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 39, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 528, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 397, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 853, Target: 43, Traits: 17, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1959, Target: 528, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 168, Target: 65, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1545, Target: 94, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2057, Target: 279, Traits: 17, StrLen: 15, Count: 3, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1535, Target: 95, Traits: 17, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1765, Target: 274, Traits: 17, StrLen: 17, Count: 4, Type: uint8(smithy.ShapeTypeUnion), Flags: 1},
+		{StrOff: 2602, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2683, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2780, Target: 326, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2620, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1049, Target: 420, Traits: 17, StrLen: 26, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 66, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 890, Target: 423, Traits: 17, StrLen: 27, Count: 20, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 65, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 27, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1545, Target: 94, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 69, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 397, Target: 64, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1101, Target: 530, Traits: 17, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 2756, Target: 295, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 853, Target: 71, Traits: 17, StrLen: 6, Count: 6, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1292, Target: 70, Traits: 17, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1959, Target: 528, Traits: 17, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1959, Target: 311, Traits: 17, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1959, Target: 312, Traits: 17, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2602, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2683, Target: 326, Traits: 19, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 2772, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1615, Target: 28, Traits: 17, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2224, Target: 133, Traits: 17, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2519, Target: 256, Traits: 17, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2194, Target: 444, Traits: 17, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 528, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2073, Target: 447, Traits: 17, StrLen: 16, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 528, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 528, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 397, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2756, Target: 295, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1575, Target: 530, Traits: 17, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 853, Target: 99, Traits: 17, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 917, Target: 457, Traits: 17, StrLen: 27, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1747, Target: 95, Traits: 17, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 408, Target: 67, Traits: 17, StrLen: 29, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 853, Target: 47, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2582, Target: 531, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2656, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 697, Target: 465, Traits: 17, StrLen: 28, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 997, Target: 49, Traits: 17, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2656, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 725, Target: 468, Traits: 17, StrLen: 28, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2756, Target: 295, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1747, Target: 95, Traits: 17, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 853, Target: 309, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2837, Target: 307, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1615, Target: 34, Traits: 17, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1343, Target: 28, Traits: 17, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2582, Target: 531, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2656, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 495, Target: 479, Traits: 17, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 863, Target: 78, Traits: 17, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2656, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1925, Target: 482, Traits: 17, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2756, Target: 295, Traits: 17, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2057, Target: 283, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 853, Target: 102, Traits: 17, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2582, Target: 531, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 2656, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1801, Target: 489, Traits: 17, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1993, Target: 104, Traits: 17, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2656, Target: 528, Traits: 17, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1075, Target: 492, Traits: 17, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2541, Target: 317, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 944, Target: 494, Traits: 17, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2885, Target: 321, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 553, Target: 496, Traits: 17, StrLen: 29, Count: 4, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2497, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 66, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1220, Target: 528, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 260, Target: 501, Traits: 17, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 611, Target: 502, Traits: 17, StrLen: 29, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 66, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 290, Target: 505, Traits: 17, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1855, Target: 506, Traits: 17, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2541, Target: 317, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2885, Target: 321, Traits: 17, StrLen: 4, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1672, Target: 509, Traits: 17, StrLen: 19, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1595, Target: 510, Traits: 17, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2541, Target: 317, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2824, Target: 319, Traits: 17, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1494, Target: 513, Traits: 17, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 640, Target: 514, Traits: 17, StrLen: 29, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2486, Target: 115, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2497, Target: 528, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1383, Target: 69, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 397, Target: 64, Traits: 17, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 186, Target: 66, Traits: 17, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2772, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1101, Target: 530, Traits: 17, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 1},
+		{StrOff: 2224, Target: 133, Traits: 17, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 2519, Target: 261, Traits: 17, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 320, Target: 524, Traits: 17, StrLen: 30, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 186, Target: 65, Traits: 17, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1361, Target: 528, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2772, Target: 528, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2843, Target: 528, Traits: 17, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 2},
+		{StrOff: 2877, Target: 529, Traits: 17, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 2708, Target: 530, Traits: 17, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeDocument), Flags: 2},
+		{StrOff: 2810, Target: 531, Traits: 17, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 2},
+	},
+	Traits: []smithy.TraitSet{
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/AmendBenefitApplication",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/AssociateBenefitApplicationResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CancelBenefitApplication",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/CreateBenefitApplication",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/DisassociateBenefitApplicationResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetBenefit",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetBenefitAllocation",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/GetBenefitApplication",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListBenefitAllocations",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListBenefitApplications",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListBenefits",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/ListTagsForResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/RecallBenefitApplication",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/SubmitBenefitApplication",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/TagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UntagResource",
+			Code: 200}}, DirectMask: 0x2},
+		{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+			URI:  "/UpdateBenefitApplication",
+			Code: 200}}, DirectMask: 0x2},
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40},
+	},
 }
+
+var handles = [532]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+	smithy.NewStaticSchema(&set, 268),
+	smithy.NewStaticSchema(&set, 269),
+	smithy.NewStaticSchema(&set, 270),
+	smithy.NewStaticSchema(&set, 271),
+	smithy.NewStaticSchema(&set, 272),
+	smithy.NewStaticSchema(&set, 273),
+	smithy.NewStaticSchema(&set, 274),
+	smithy.NewStaticSchema(&set, 275),
+	smithy.NewStaticSchema(&set, 276),
+	smithy.NewStaticSchema(&set, 277),
+	smithy.NewStaticSchema(&set, 278),
+	smithy.NewStaticSchema(&set, 279),
+	smithy.NewStaticSchema(&set, 280),
+	smithy.NewStaticSchema(&set, 281),
+	smithy.NewStaticSchema(&set, 282),
+	smithy.NewStaticSchema(&set, 283),
+	smithy.NewStaticSchema(&set, 284),
+	smithy.NewStaticSchema(&set, 285),
+	smithy.NewStaticSchema(&set, 286),
+	smithy.NewStaticSchema(&set, 287),
+	smithy.NewStaticSchema(&set, 288),
+	smithy.NewStaticSchema(&set, 289),
+	smithy.NewStaticSchema(&set, 290),
+	smithy.NewStaticSchema(&set, 291),
+	smithy.NewStaticSchema(&set, 292),
+	smithy.NewStaticSchema(&set, 293),
+	smithy.NewStaticSchema(&set, 294),
+	smithy.NewStaticSchema(&set, 295),
+	smithy.NewStaticSchema(&set, 296),
+	smithy.NewStaticSchema(&set, 297),
+	smithy.NewStaticSchema(&set, 298),
+	smithy.NewStaticSchema(&set, 299),
+	smithy.NewStaticSchema(&set, 300),
+	smithy.NewStaticSchema(&set, 301),
+	smithy.NewStaticSchema(&set, 302),
+	smithy.NewStaticSchema(&set, 303),
+	smithy.NewStaticSchema(&set, 304),
+	smithy.NewStaticSchema(&set, 305),
+	smithy.NewStaticSchema(&set, 306),
+	smithy.NewStaticSchema(&set, 307),
+	smithy.NewStaticSchema(&set, 308),
+	smithy.NewStaticSchema(&set, 309),
+	smithy.NewStaticSchema(&set, 310),
+	smithy.NewStaticSchema(&set, 311),
+	smithy.NewStaticSchema(&set, 312),
+	smithy.NewStaticSchema(&set, 313),
+	smithy.NewStaticSchema(&set, 314),
+	smithy.NewStaticSchema(&set, 315),
+	smithy.NewStaticSchema(&set, 316),
+	smithy.NewStaticSchema(&set, 317),
+	smithy.NewStaticSchema(&set, 318),
+	smithy.NewStaticSchema(&set, 319),
+	smithy.NewStaticSchema(&set, 320),
+	smithy.NewStaticSchema(&set, 321),
+	smithy.NewStaticSchema(&set, 322),
+	smithy.NewStaticSchema(&set, 323),
+	smithy.NewStaticSchema(&set, 324),
+	smithy.NewStaticSchema(&set, 325),
+	smithy.NewStaticSchema(&set, 326),
+	smithy.NewStaticSchema(&set, 327),
+	smithy.NewStaticSchema(&set, 328),
+	smithy.NewStaticSchema(&set, 329),
+	smithy.NewStaticSchema(&set, 330),
+	smithy.NewStaticSchema(&set, 331),
+	smithy.NewStaticSchema(&set, 332),
+	smithy.NewStaticSchema(&set, 333),
+	smithy.NewStaticSchema(&set, 334),
+	smithy.NewStaticSchema(&set, 335),
+	smithy.NewStaticSchema(&set, 336),
+	smithy.NewStaticSchema(&set, 337),
+	smithy.NewStaticSchema(&set, 338),
+	smithy.NewStaticSchema(&set, 339),
+	smithy.NewStaticSchema(&set, 340),
+	smithy.NewStaticSchema(&set, 341),
+	smithy.NewStaticSchema(&set, 342),
+	smithy.NewStaticSchema(&set, 343),
+	smithy.NewStaticSchema(&set, 344),
+	smithy.NewStaticSchema(&set, 345),
+	smithy.NewStaticSchema(&set, 346),
+	smithy.NewStaticSchema(&set, 347),
+	smithy.NewStaticSchema(&set, 348),
+	smithy.NewStaticSchema(&set, 349),
+	smithy.NewStaticSchema(&set, 350),
+	smithy.NewStaticSchema(&set, 351),
+	smithy.NewStaticSchema(&set, 352),
+	smithy.NewStaticSchema(&set, 353),
+	smithy.NewStaticSchema(&set, 354),
+	smithy.NewStaticSchema(&set, 355),
+	smithy.NewStaticSchema(&set, 356),
+	smithy.NewStaticSchema(&set, 357),
+	smithy.NewStaticSchema(&set, 358),
+	smithy.NewStaticSchema(&set, 359),
+	smithy.NewStaticSchema(&set, 360),
+	smithy.NewStaticSchema(&set, 361),
+	smithy.NewStaticSchema(&set, 362),
+	smithy.NewStaticSchema(&set, 363),
+	smithy.NewStaticSchema(&set, 364),
+	smithy.NewStaticSchema(&set, 365),
+	smithy.NewStaticSchema(&set, 366),
+	smithy.NewStaticSchema(&set, 367),
+	smithy.NewStaticSchema(&set, 368),
+	smithy.NewStaticSchema(&set, 369),
+	smithy.NewStaticSchema(&set, 370),
+	smithy.NewStaticSchema(&set, 371),
+	smithy.NewStaticSchema(&set, 372),
+	smithy.NewStaticSchema(&set, 373),
+	smithy.NewStaticSchema(&set, 374),
+	smithy.NewStaticSchema(&set, 375),
+	smithy.NewStaticSchema(&set, 376),
+	smithy.NewStaticSchema(&set, 377),
+	smithy.NewStaticSchema(&set, 378),
+	smithy.NewStaticSchema(&set, 379),
+	smithy.NewStaticSchema(&set, 380),
+	smithy.NewStaticSchema(&set, 381),
+	smithy.NewStaticSchema(&set, 382),
+	smithy.NewStaticSchema(&set, 383),
+	smithy.NewStaticSchema(&set, 384),
+	smithy.NewStaticSchema(&set, 385),
+	smithy.NewStaticSchema(&set, 386),
+	smithy.NewStaticSchema(&set, 387),
+	smithy.NewStaticSchema(&set, 388),
+	smithy.NewStaticSchema(&set, 389),
+	smithy.NewStaticSchema(&set, 390),
+	smithy.NewStaticSchema(&set, 391),
+	smithy.NewStaticSchema(&set, 392),
+	smithy.NewStaticSchema(&set, 393),
+	smithy.NewStaticSchema(&set, 394),
+	smithy.NewStaticSchema(&set, 395),
+	smithy.NewStaticSchema(&set, 396),
+	smithy.NewStaticSchema(&set, 397),
+	smithy.NewStaticSchema(&set, 398),
+	smithy.NewStaticSchema(&set, 399),
+	smithy.NewStaticSchema(&set, 400),
+	smithy.NewStaticSchema(&set, 401),
+	smithy.NewStaticSchema(&set, 402),
+	smithy.NewStaticSchema(&set, 403),
+	smithy.NewStaticSchema(&set, 404),
+	smithy.NewStaticSchema(&set, 405),
+	smithy.NewStaticSchema(&set, 406),
+	smithy.NewStaticSchema(&set, 407),
+	smithy.NewStaticSchema(&set, 408),
+	smithy.NewStaticSchema(&set, 409),
+	smithy.NewStaticSchema(&set, 410),
+	smithy.NewStaticSchema(&set, 411),
+	smithy.NewStaticSchema(&set, 412),
+	smithy.NewStaticSchema(&set, 413),
+	smithy.NewStaticSchema(&set, 414),
+	smithy.NewStaticSchema(&set, 415),
+	smithy.NewStaticSchema(&set, 416),
+	smithy.NewStaticSchema(&set, 417),
+	smithy.NewStaticSchema(&set, 418),
+	smithy.NewStaticSchema(&set, 419),
+	smithy.NewStaticSchema(&set, 420),
+	smithy.NewStaticSchema(&set, 421),
+	smithy.NewStaticSchema(&set, 422),
+	smithy.NewStaticSchema(&set, 423),
+	smithy.NewStaticSchema(&set, 424),
+	smithy.NewStaticSchema(&set, 425),
+	smithy.NewStaticSchema(&set, 426),
+	smithy.NewStaticSchema(&set, 427),
+	smithy.NewStaticSchema(&set, 428),
+	smithy.NewStaticSchema(&set, 429),
+	smithy.NewStaticSchema(&set, 430),
+	smithy.NewStaticSchema(&set, 431),
+	smithy.NewStaticSchema(&set, 432),
+	smithy.NewStaticSchema(&set, 433),
+	smithy.NewStaticSchema(&set, 434),
+	smithy.NewStaticSchema(&set, 435),
+	smithy.NewStaticSchema(&set, 436),
+	smithy.NewStaticSchema(&set, 437),
+	smithy.NewStaticSchema(&set, 438),
+	smithy.NewStaticSchema(&set, 439),
+	smithy.NewStaticSchema(&set, 440),
+	smithy.NewStaticSchema(&set, 441),
+	smithy.NewStaticSchema(&set, 442),
+	smithy.NewStaticSchema(&set, 443),
+	smithy.NewStaticSchema(&set, 444),
+	smithy.NewStaticSchema(&set, 445),
+	smithy.NewStaticSchema(&set, 446),
+	smithy.NewStaticSchema(&set, 447),
+	smithy.NewStaticSchema(&set, 448),
+	smithy.NewStaticSchema(&set, 449),
+	smithy.NewStaticSchema(&set, 450),
+	smithy.NewStaticSchema(&set, 451),
+	smithy.NewStaticSchema(&set, 452),
+	smithy.NewStaticSchema(&set, 453),
+	smithy.NewStaticSchema(&set, 454),
+	smithy.NewStaticSchema(&set, 455),
+	smithy.NewStaticSchema(&set, 456),
+	smithy.NewStaticSchema(&set, 457),
+	smithy.NewStaticSchema(&set, 458),
+	smithy.NewStaticSchema(&set, 459),
+	smithy.NewStaticSchema(&set, 460),
+	smithy.NewStaticSchema(&set, 461),
+	smithy.NewStaticSchema(&set, 462),
+	smithy.NewStaticSchema(&set, 463),
+	smithy.NewStaticSchema(&set, 464),
+	smithy.NewStaticSchema(&set, 465),
+	smithy.NewStaticSchema(&set, 466),
+	smithy.NewStaticSchema(&set, 467),
+	smithy.NewStaticSchema(&set, 468),
+	smithy.NewStaticSchema(&set, 469),
+	smithy.NewStaticSchema(&set, 470),
+	smithy.NewStaticSchema(&set, 471),
+	smithy.NewStaticSchema(&set, 472),
+	smithy.NewStaticSchema(&set, 473),
+	smithy.NewStaticSchema(&set, 474),
+	smithy.NewStaticSchema(&set, 475),
+	smithy.NewStaticSchema(&set, 476),
+	smithy.NewStaticSchema(&set, 477),
+	smithy.NewStaticSchema(&set, 478),
+	smithy.NewStaticSchema(&set, 479),
+	smithy.NewStaticSchema(&set, 480),
+	smithy.NewStaticSchema(&set, 481),
+	smithy.NewStaticSchema(&set, 482),
+	smithy.NewStaticSchema(&set, 483),
+	smithy.NewStaticSchema(&set, 484),
+	smithy.NewStaticSchema(&set, 485),
+	smithy.NewStaticSchema(&set, 486),
+	smithy.NewStaticSchema(&set, 487),
+	smithy.NewStaticSchema(&set, 488),
+	smithy.NewStaticSchema(&set, 489),
+	smithy.NewStaticSchema(&set, 490),
+	smithy.NewStaticSchema(&set, 491),
+	smithy.NewStaticSchema(&set, 492),
+	smithy.NewStaticSchema(&set, 493),
+	smithy.NewStaticSchema(&set, 494),
+	smithy.NewStaticSchema(&set, 495),
+	smithy.NewStaticSchema(&set, 496),
+	smithy.NewStaticSchema(&set, 497),
+	smithy.NewStaticSchema(&set, 498),
+	smithy.NewStaticSchema(&set, 499),
+	smithy.NewStaticSchema(&set, 500),
+	smithy.NewStaticSchema(&set, 501),
+	smithy.NewStaticSchema(&set, 502),
+	smithy.NewStaticSchema(&set, 503),
+	smithy.NewStaticSchema(&set, 504),
+	smithy.NewStaticSchema(&set, 505),
+	smithy.NewStaticSchema(&set, 506),
+	smithy.NewStaticSchema(&set, 507),
+	smithy.NewStaticSchema(&set, 508),
+	smithy.NewStaticSchema(&set, 509),
+	smithy.NewStaticSchema(&set, 510),
+	smithy.NewStaticSchema(&set, 511),
+	smithy.NewStaticSchema(&set, 512),
+	smithy.NewStaticSchema(&set, 513),
+	smithy.NewStaticSchema(&set, 514),
+	smithy.NewStaticSchema(&set, 515),
+	smithy.NewStaticSchema(&set, 516),
+	smithy.NewStaticSchema(&set, 517),
+	smithy.NewStaticSchema(&set, 518),
+	smithy.NewStaticSchema(&set, 519),
+	smithy.NewStaticSchema(&set, 520),
+	smithy.NewStaticSchema(&set, 521),
+	smithy.NewStaticSchema(&set, 522),
+	smithy.NewStaticSchema(&set, 523),
+	smithy.NewStaticSchema(&set, 524),
+	smithy.NewStaticSchema(&set, 525),
+	smithy.NewStaticSchema(&set, 526),
+	smithy.NewStaticSchema(&set, 527),
+	smithy.NewStaticSchema(&set, 528),
+	smithy.NewStaticSchema(&set, 529),
+	smithy.NewStaticSchema(&set, 530),
+	smithy.NewStaticSchema(&set, 531),
+}
+
+var AmendBenefitApplication = &handles[0]
+
+var AssociateBenefitApplicationResource = &handles[1]
+
+var CancelBenefitApplication = &handles[2]
+
+var CreateBenefitApplication = &handles[3]
+
+var DisassociateBenefitApplicationResource = &handles[4]
+
+var GetBenefit = &handles[5]
+
+var GetBenefitAllocation = &handles[6]
+
+var GetBenefitApplication = &handles[7]
+
+var ListBenefitAllocations = &handles[8]
+
+var ListBenefitApplications = &handles[9]
+
+var ListBenefits = &handles[10]
+
+var ListTagsForResource = &handles[11]
+
+var RecallBenefitApplication = &handles[12]
+
+var SubmitBenefitApplication = &handles[13]
+
+var TagResource = &handles[14]
+
+var UntagResource = &handles[15]
+
+var UpdateBenefitApplication = &handles[16]
+
+var _PartnerCentralBenefitsService = &handles[17]
+
+var AccessDeniedException = &handles[18]
+var AccessDeniedException_Message = &handles[19]
+
+var AccessDetails = &handles[20]
+var AccessDetails_Description = &handles[21]
+
+var Amendment = &handles[22]
+var Amendment_FieldPath = &handles[23]
+var Amendment_NewValue = &handles[24]
+
+var _AmendmentList = &handles[25]
+var _AmendmentList_member = &handles[26]
+
+var _Arn = &handles[27]
+
+var _Arns = &handles[28]
+var _Arns_member = &handles[29]
+
+var AssociatedResource = &handles[30]
+var AssociatedResource_ResourceType = &handles[31]
+var AssociatedResource_ResourceIdentifier = &handles[32]
+var AssociatedResource_ResourceArn = &handles[33]
+
+var _AssociatedResources = &handles[34]
+var _AssociatedResources_member = &handles[35]
+
+var _Attributes = &handles[36]
+var _Attributes_key = &handles[37]
+var _Attributes_value = &handles[38]
+
+var _BenefitAllocationArn = &handles[39]
+
+var _BenefitAllocationId = &handles[40]
+
+var _BenefitAllocationIdentifier = &handles[41]
+
+var _BenefitAllocationName = &handles[42]
+
+var BenefitAllocationStatus = &handles[43]
+var BenefitAllocationStatus_ACTIVE = &handles[44]
+var BenefitAllocationStatus_INACTIVE = &handles[45]
+var BenefitAllocationStatus_FULFILLED = &handles[46]
+
+var _BenefitAllocationStatusList = &handles[47]
+var _BenefitAllocationStatusList_member = &handles[48]
+
+var _BenefitAllocationSummaries = &handles[49]
+var _BenefitAllocationSummaries_member = &handles[50]
+
+var BenefitAllocationSummary = &handles[51]
+var BenefitAllocationSummary_Id = &handles[52]
+var BenefitAllocationSummary_Catalog = &handles[53]
+var BenefitAllocationSummary_Arn = &handles[54]
+var BenefitAllocationSummary_Status = &handles[55]
+var BenefitAllocationSummary_StatusReason = &handles[56]
+var BenefitAllocationSummary_Name = &handles[57]
+var BenefitAllocationSummary_BenefitId = &handles[58]
+var BenefitAllocationSummary_BenefitApplicationId = &handles[59]
+var BenefitAllocationSummary_FulfillmentTypes = &handles[60]
+var BenefitAllocationSummary_CreatedAt = &handles[61]
+var BenefitAllocationSummary_ExpiresAt = &handles[62]
+var BenefitAllocationSummary_ApplicableBenefitIds = &handles[63]
+
+var _BenefitApplicationDescription = &handles[64]
+
+var _BenefitApplicationId = &handles[65]
+
+var _BenefitApplicationIdentifier = &handles[66]
+
+var _BenefitApplicationIdentifierList = &handles[67]
+var _BenefitApplicationIdentifierList_member = &handles[68]
+
+var _BenefitApplicationName = &handles[69]
+
+var _BenefitApplicationStage = &handles[70]
+
+var BenefitApplicationStatus = &handles[71]
+var BenefitApplicationStatus_PENDING_SUBMISSION = &handles[72]
+var BenefitApplicationStatus_IN_REVIEW = &handles[73]
+var BenefitApplicationStatus_ACTION_REQUIRED = &handles[74]
+var BenefitApplicationStatus_APPROVED = &handles[75]
+var BenefitApplicationStatus_REJECTED = &handles[76]
+var BenefitApplicationStatus_CANCELED = &handles[77]
+
+var _BenefitApplicationSummaries = &handles[78]
+var _BenefitApplicationSummaries_member = &handles[79]
+
+var BenefitApplicationSummary = &handles[80]
+var BenefitApplicationSummary_Catalog = &handles[81]
+var BenefitApplicationSummary_Name = &handles[82]
+var BenefitApplicationSummary_Id = &handles[83]
+var BenefitApplicationSummary_Arn = &handles[84]
+var BenefitApplicationSummary_BenefitId = &handles[85]
+var BenefitApplicationSummary_Programs = &handles[86]
+var BenefitApplicationSummary_FulfillmentTypes = &handles[87]
+var BenefitApplicationSummary_Status = &handles[88]
+var BenefitApplicationSummary_Stage = &handles[89]
+var BenefitApplicationSummary_CreatedAt = &handles[90]
+var BenefitApplicationSummary_UpdatedAt = &handles[91]
+var BenefitApplicationSummary_BenefitApplicationDetails = &handles[92]
+var BenefitApplicationSummary_AssociatedResources = &handles[93]
+
+var _BenefitId = &handles[94]
+
+var _BenefitIdentifiers = &handles[95]
+var _BenefitIdentifiers_member = &handles[96]
+
+var _BenefitIds = &handles[97]
+var _BenefitIds_member = &handles[98]
+
+var BenefitStatus = &handles[99]
+var BenefitStatus_ACTIVE = &handles[100]
+var BenefitStatus_INACTIVE = &handles[101]
+
+var _BenefitStatuses = &handles[102]
+var _BenefitStatuses_member = &handles[103]
+
+var _BenefitSummaries = &handles[104]
+var _BenefitSummaries_member = &handles[105]
+
+var BenefitSummary = &handles[106]
+var BenefitSummary_Id = &handles[107]
+var BenefitSummary_Catalog = &handles[108]
+var BenefitSummary_Arn = &handles[109]
+var BenefitSummary_Name = &handles[110]
+var BenefitSummary_Description = &handles[111]
+var BenefitSummary_Programs = &handles[112]
+var BenefitSummary_FulfillmentTypes = &handles[113]
+var BenefitSummary_Status = &handles[114]
+
+var _CatalogName = &handles[115]
+
+var ConflictException = &handles[116]
+var ConflictException_Message = &handles[117]
+
+var ConsumableDetails = &handles[118]
+var ConsumableDetails_AllocatedAmount = &handles[119]
+var ConsumableDetails_RemainingAmount = &handles[120]
+var ConsumableDetails_UtilizedAmount = &handles[121]
+var ConsumableDetails_IssuanceDetails = &handles[122]
+
+var Contact = &handles[123]
+var Contact_Email = &handles[124]
+var Contact_FirstName = &handles[125]
+var Contact_LastName = &handles[126]
+var Contact_BusinessTitle = &handles[127]
+var Contact_Phone = &handles[128]
+
+var _ContactEmail = &handles[129]
+
+var _ContactFirstName = &handles[130]
+
+var _ContactLastName = &handles[131]
+
+var _ContactPhone = &handles[132]
+
+var _Contacts = &handles[133]
+var _Contacts_member = &handles[134]
+
+var CreditCode = &handles[135]
+var CreditCode_AwsAccountId = &handles[136]
+var CreditCode_Value = &handles[137]
+var CreditCode_AwsCreditCode = &handles[138]
+var CreditCode_Status = &handles[139]
+var CreditCode_IssuedAt = &handles[140]
+var CreditCode_ExpiresAt = &handles[141]
+
+var _CreditCodes = &handles[142]
+var _CreditCodes_member = &handles[143]
+
+var CreditDetails = &handles[144]
+var CreditDetails_AllocatedAmount = &handles[145]
+var CreditDetails_IssuedAmount = &handles[146]
+var CreditDetails_Codes = &handles[147]
+
+var CurrencyCode = &handles[148]
+var CurrencyCode_AED = &handles[149]
+var CurrencyCode_AMD = &handles[150]
+var CurrencyCode_ARS = &handles[151]
+var CurrencyCode_AUD = &handles[152]
+var CurrencyCode_AWG = &handles[153]
+var CurrencyCode_AZN = &handles[154]
+var CurrencyCode_BBD = &handles[155]
+var CurrencyCode_BDT = &handles[156]
+var CurrencyCode_BGN = &handles[157]
+var CurrencyCode_BMD = &handles[158]
+var CurrencyCode_BND = &handles[159]
+var CurrencyCode_BOB = &handles[160]
+var CurrencyCode_BRL = &handles[161]
+var CurrencyCode_BSD = &handles[162]
+var CurrencyCode_BYR = &handles[163]
+var CurrencyCode_BZD = &handles[164]
+var CurrencyCode_CAD = &handles[165]
+var CurrencyCode_CHF = &handles[166]
+var CurrencyCode_CLP = &handles[167]
+var CurrencyCode_CNY = &handles[168]
+var CurrencyCode_COP = &handles[169]
+var CurrencyCode_CRC = &handles[170]
+var CurrencyCode_CZK = &handles[171]
+var CurrencyCode_DKK = &handles[172]
+var CurrencyCode_DOP = &handles[173]
+var CurrencyCode_EEK = &handles[174]
+var CurrencyCode_EGP = &handles[175]
+var CurrencyCode_EUR = &handles[176]
+var CurrencyCode_GBP = &handles[177]
+var CurrencyCode_GEL = &handles[178]
+var CurrencyCode_GHS = &handles[179]
+var CurrencyCode_GTQ = &handles[180]
+var CurrencyCode_GYD = &handles[181]
+var CurrencyCode_HKD = &handles[182]
+var CurrencyCode_HNL = &handles[183]
+var CurrencyCode_HRK = &handles[184]
+var CurrencyCode_HTG = &handles[185]
+var CurrencyCode_HUF = &handles[186]
+var CurrencyCode_IDR = &handles[187]
+var CurrencyCode_ILS = &handles[188]
+var CurrencyCode_INR = &handles[189]
+var CurrencyCode_ISK = &handles[190]
+var CurrencyCode_JMD = &handles[191]
+var CurrencyCode_JPY = &handles[192]
+var CurrencyCode_KES = &handles[193]
+var CurrencyCode_KHR = &handles[194]
+var CurrencyCode_KRW = &handles[195]
+var CurrencyCode_KYD = &handles[196]
+var CurrencyCode_KZT = &handles[197]
+var CurrencyCode_LBP = &handles[198]
+var CurrencyCode_LKR = &handles[199]
+var CurrencyCode_LTL = &handles[200]
+var CurrencyCode_LVL = &handles[201]
+var CurrencyCode_MAD = &handles[202]
+var CurrencyCode_MNT = &handles[203]
+var CurrencyCode_MOP = &handles[204]
+var CurrencyCode_MUR = &handles[205]
+var CurrencyCode_MVR = &handles[206]
+var CurrencyCode_MXN = &handles[207]
+var CurrencyCode_MYR = &handles[208]
+var CurrencyCode_NAD = &handles[209]
+var CurrencyCode_NGN = &handles[210]
+var CurrencyCode_NIO = &handles[211]
+var CurrencyCode_NOK = &handles[212]
+var CurrencyCode_NZD = &handles[213]
+var CurrencyCode_PAB = &handles[214]
+var CurrencyCode_PEN = &handles[215]
+var CurrencyCode_PHP = &handles[216]
+var CurrencyCode_PKR = &handles[217]
+var CurrencyCode_PLN = &handles[218]
+var CurrencyCode_PYG = &handles[219]
+var CurrencyCode_QAR = &handles[220]
+var CurrencyCode_RON = &handles[221]
+var CurrencyCode_RUB = &handles[222]
+var CurrencyCode_SAR = &handles[223]
+var CurrencyCode_SEK = &handles[224]
+var CurrencyCode_SGD = &handles[225]
+var CurrencyCode_SIT = &handles[226]
+var CurrencyCode_SKK = &handles[227]
+var CurrencyCode_THB = &handles[228]
+var CurrencyCode_TND = &handles[229]
+var CurrencyCode_TRY = &handles[230]
+var CurrencyCode_TTD = &handles[231]
+var CurrencyCode_TWD = &handles[232]
+var CurrencyCode_TZS = &handles[233]
+var CurrencyCode_UAH = &handles[234]
+var CurrencyCode_USD = &handles[235]
+var CurrencyCode_UYU = &handles[236]
+var CurrencyCode_UZS = &handles[237]
+var CurrencyCode_VND = &handles[238]
+var CurrencyCode_XAF = &handles[239]
+var CurrencyCode_XCD = &handles[240]
+var CurrencyCode_XOF = &handles[241]
+var CurrencyCode_XPF = &handles[242]
+var CurrencyCode_ZAR = &handles[243]
+
+var DisbursementDetails = &handles[244]
+var DisbursementDetails_DisbursedAmount = &handles[245]
+var DisbursementDetails_IssuanceDetails = &handles[246]
+
+var FileDetail = &handles[247]
+var FileDetail_FileURI = &handles[248]
+var FileDetail_BusinessUseCase = &handles[249]
+var FileDetail_FileName = &handles[250]
+var FileDetail_FileStatus = &handles[251]
+var FileDetail_FileStatusReason = &handles[252]
+var FileDetail_FileType = &handles[253]
+var FileDetail_CreatedBy = &handles[254]
+var FileDetail_CreatedAt = &handles[255]
+
+var _FileDetails = &handles[256]
+var _FileDetails_member = &handles[257]
+
+var FileInput = &handles[258]
+var FileInput_FileURI = &handles[259]
+var FileInput_BusinessUseCase = &handles[260]
+
+var _FileInputDetails = &handles[261]
+var _FileInputDetails_member = &handles[262]
+
+var FileType = &handles[263]
+var FileType_DOC = &handles[264]
+var FileType_DOCX = &handles[265]
+var FileType_XLSX = &handles[266]
+var FileType_PPTX = &handles[267]
+var FileType_PDF = &handles[268]
+var FileType_PNG = &handles[269]
+var FileType_JPG = &handles[270]
+var FileType_SVG = &handles[271]
+var FileType_CSV = &handles[272]
+
+var _FileURI = &handles[273]
+
+var FulfillmentDetails = &handles[274]
+var FulfillmentDetails_DisbursementDetails = &handles[275]
+var FulfillmentDetails_ConsumableDetails = &handles[276]
+var FulfillmentDetails_CreditDetails = &handles[277]
+var FulfillmentDetails_AccessDetails = &handles[278]
+
+var FulfillmentType = &handles[279]
+var FulfillmentType_CREDITS = &handles[280]
+var FulfillmentType_CASH = &handles[281]
+var FulfillmentType_ACCESS = &handles[282]
+
+var _FulfillmentTypes = &handles[283]
+var _FulfillmentTypes_member = &handles[284]
+
+var InternalServerException = &handles[285]
+var InternalServerException_Message = &handles[286]
+
+var IssuanceDetail = &handles[287]
+var IssuanceDetail_IssuanceId = &handles[288]
+var IssuanceDetail_IssuanceAmount = &handles[289]
+var IssuanceDetail_IssuedAt = &handles[290]
+
+var MonetaryValue = &handles[291]
+var MonetaryValue_Amount = &handles[292]
+var MonetaryValue_CurrencyCode = &handles[293]
+
+var _Program = &handles[294]
+
+var _Programs = &handles[295]
+var _Programs_member = &handles[296]
+
+var ResourceNotFoundException = &handles[297]
+var ResourceNotFoundException_Message = &handles[298]
+
+var ResourceType = &handles[299]
+var ResourceType_OPPORTUNITY = &handles[300]
+var ResourceType_BENEFIT_ALLOCATION = &handles[301]
+
+var ServiceQuotaExceededException = &handles[302]
+var ServiceQuotaExceededException_Message = &handles[303]
+var ServiceQuotaExceededException_ResourceId = &handles[304]
+var ServiceQuotaExceededException_ResourceType = &handles[305]
+var ServiceQuotaExceededException_QuotaCode = &handles[306]
+
+var _Stages = &handles[307]
+var _Stages_member = &handles[308]
+
+var _Statuses = &handles[309]
+var _Statuses_member = &handles[310]
+
+var _StatusReasonCode = &handles[311]
+
+var _StatusReasonCodes = &handles[312]
+var _StatusReasonCodes_member = &handles[313]
+
+var Tag = &handles[314]
+var Tag_Key = &handles[315]
+var Tag_Value = &handles[316]
+
+var _TaggableResourceArn = &handles[317]
+
+var _TagKey = &handles[318]
+
+var _TagKeyList = &handles[319]
+var _TagKeyList_member = &handles[320]
+
+var _Tags = &handles[321]
+var _Tags_member = &handles[322]
+
+var _TagValue = &handles[323]
+
+var ThrottlingException = &handles[324]
+var ThrottlingException_Message = &handles[325]
+
+var _Timestamp = &handles[326]
+
+var ValidationException = &handles[327]
+var ValidationException_Message = &handles[328]
+var ValidationException_Reason = &handles[329]
+var ValidationException_FieldList = &handles[330]
+
+var ValidationExceptionErrorCode = &handles[331]
+var ValidationExceptionErrorCode_REQUIRED_FIELD_MISSING = &handles[332]
+var ValidationExceptionErrorCode_INVALID_ENUM_VALUE = &handles[333]
+var ValidationExceptionErrorCode_INVALID_STRING_FORMAT = &handles[334]
+var ValidationExceptionErrorCode_INVALID_VALUE = &handles[335]
+var ValidationExceptionErrorCode_NOT_ENOUGH_VALUES = &handles[336]
+var ValidationExceptionErrorCode_TOO_MANY_VALUES = &handles[337]
+var ValidationExceptionErrorCode_INVALID_RESOURCE_STATE = &handles[338]
+var ValidationExceptionErrorCode_DUPLICATE_KEY_VALUE = &handles[339]
+var ValidationExceptionErrorCode_VALUE_OUT_OF_RANGE = &handles[340]
+var ValidationExceptionErrorCode_ACTION_NOT_PERMITTED = &handles[341]
+
+var ValidationExceptionField = &handles[342]
+var ValidationExceptionField_Name = &handles[343]
+var ValidationExceptionField_Message = &handles[344]
+var ValidationExceptionField_Code = &handles[345]
+
+var _ValidationExceptionFieldList = &handles[346]
+var _ValidationExceptionFieldList_member = &handles[347]
+
+var ValidationExceptionReason = &handles[348]
+var ValidationExceptionReason_UNKNOWN_OPERATION = &handles[349]
+var ValidationExceptionReason_CANNOT_PARSE = &handles[350]
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &handles[351]
+var ValidationExceptionReason_OTHER = &handles[352]
+var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED = &handles[353]
+
+var AmendBenefitApplicationInput = &handles[354]
+var AmendBenefitApplicationInput_Catalog = &handles[355]
+var AmendBenefitApplicationInput_ClientToken = &handles[356]
+var AmendBenefitApplicationInput_Revision = &handles[357]
+var AmendBenefitApplicationInput_Identifier = &handles[358]
+var AmendBenefitApplicationInput_AmendmentReason = &handles[359]
+var AmendBenefitApplicationInput_Amendments = &handles[360]
+
+var AmendBenefitApplicationOutput = &handles[361]
+
+var AssociateBenefitApplicationResourceInput = &handles[362]
+var AssociateBenefitApplicationResourceInput_Catalog = &handles[363]
+var AssociateBenefitApplicationResourceInput_BenefitApplicationIdentifier = &handles[364]
+var AssociateBenefitApplicationResourceInput_ResourceArn = &handles[365]
+
+var AssociateBenefitApplicationResourceOutput = &handles[366]
+var AssociateBenefitApplicationResourceOutput_Id = &handles[367]
+var AssociateBenefitApplicationResourceOutput_Arn = &handles[368]
+var AssociateBenefitApplicationResourceOutput_Revision = &handles[369]
+
+var CancelBenefitApplicationInput = &handles[370]
+var CancelBenefitApplicationInput_Catalog = &handles[371]
+var CancelBenefitApplicationInput_ClientToken = &handles[372]
+var CancelBenefitApplicationInput_Identifier = &handles[373]
+var CancelBenefitApplicationInput_Reason = &handles[374]
+
+var CancelBenefitApplicationOutput = &handles[375]
+
+var CreateBenefitApplicationInput = &handles[376]
+var CreateBenefitApplicationInput_Catalog = &handles[377]
+var CreateBenefitApplicationInput_ClientToken = &handles[378]
+var CreateBenefitApplicationInput_Name = &handles[379]
+var CreateBenefitApplicationInput_Description = &handles[380]
+var CreateBenefitApplicationInput_BenefitIdentifier = &handles[381]
+var CreateBenefitApplicationInput_FulfillmentTypes = &handles[382]
+var CreateBenefitApplicationInput_BenefitApplicationDetails = &handles[383]
+var CreateBenefitApplicationInput_Tags = &handles[384]
+var CreateBenefitApplicationInput_AssociatedResources = &handles[385]
+var CreateBenefitApplicationInput_PartnerContacts = &handles[386]
+var CreateBenefitApplicationInput_FileDetails = &handles[387]
+
+var CreateBenefitApplicationOutput = &handles[388]
+var CreateBenefitApplicationOutput_Id = &handles[389]
+var CreateBenefitApplicationOutput_Arn = &handles[390]
+var CreateBenefitApplicationOutput_Revision = &handles[391]
+
+var DisassociateBenefitApplicationResourceInput = &handles[392]
+var DisassociateBenefitApplicationResourceInput_Catalog = &handles[393]
+var DisassociateBenefitApplicationResourceInput_BenefitApplicationIdentifier = &handles[394]
+var DisassociateBenefitApplicationResourceInput_ResourceArn = &handles[395]
+
+var DisassociateBenefitApplicationResourceOutput = &handles[396]
+var DisassociateBenefitApplicationResourceOutput_Id = &handles[397]
+var DisassociateBenefitApplicationResourceOutput_Arn = &handles[398]
+var DisassociateBenefitApplicationResourceOutput_Revision = &handles[399]
+
+var GetBenefitAllocationInput = &handles[400]
+var GetBenefitAllocationInput_Catalog = &handles[401]
+var GetBenefitAllocationInput_Identifier = &handles[402]
+
+var GetBenefitAllocationOutput = &handles[403]
+var GetBenefitAllocationOutput_Id = &handles[404]
+var GetBenefitAllocationOutput_Catalog = &handles[405]
+var GetBenefitAllocationOutput_Arn = &handles[406]
+var GetBenefitAllocationOutput_Name = &handles[407]
+var GetBenefitAllocationOutput_Description = &handles[408]
+var GetBenefitAllocationOutput_Status = &handles[409]
+var GetBenefitAllocationOutput_StatusReason = &handles[410]
+var GetBenefitAllocationOutput_BenefitApplicationId = &handles[411]
+var GetBenefitAllocationOutput_BenefitId = &handles[412]
+var GetBenefitAllocationOutput_FulfillmentType = &handles[413]
+var GetBenefitAllocationOutput_ApplicableBenefitIds = &handles[414]
+var GetBenefitAllocationOutput_FulfillmentDetail = &handles[415]
+var GetBenefitAllocationOutput_CreatedAt = &handles[416]
+var GetBenefitAllocationOutput_UpdatedAt = &handles[417]
+var GetBenefitAllocationOutput_StartsAt = &handles[418]
+var GetBenefitAllocationOutput_ExpiresAt = &handles[419]
+
+var GetBenefitApplicationInput = &handles[420]
+var GetBenefitApplicationInput_Catalog = &handles[421]
+var GetBenefitApplicationInput_Identifier = &handles[422]
+
+var GetBenefitApplicationOutput = &handles[423]
+var GetBenefitApplicationOutput_Id = &handles[424]
+var GetBenefitApplicationOutput_Arn = &handles[425]
+var GetBenefitApplicationOutput_Catalog = &handles[426]
+var GetBenefitApplicationOutput_BenefitId = &handles[427]
+var GetBenefitApplicationOutput_Name = &handles[428]
+var GetBenefitApplicationOutput_Description = &handles[429]
+var GetBenefitApplicationOutput_FulfillmentTypes = &handles[430]
+var GetBenefitApplicationOutput_BenefitApplicationDetails = &handles[431]
+var GetBenefitApplicationOutput_Programs = &handles[432]
+var GetBenefitApplicationOutput_Status = &handles[433]
+var GetBenefitApplicationOutput_Stage = &handles[434]
+var GetBenefitApplicationOutput_StatusReason = &handles[435]
+var GetBenefitApplicationOutput_StatusReasonCode = &handles[436]
+var GetBenefitApplicationOutput_StatusReasonCodes = &handles[437]
+var GetBenefitApplicationOutput_CreatedAt = &handles[438]
+var GetBenefitApplicationOutput_UpdatedAt = &handles[439]
+var GetBenefitApplicationOutput_Revision = &handles[440]
+var GetBenefitApplicationOutput_AssociatedResources = &handles[441]
+var GetBenefitApplicationOutput_PartnerContacts = &handles[442]
+var GetBenefitApplicationOutput_FileDetails = &handles[443]
+
+var GetBenefitInput = &handles[444]
+var GetBenefitInput_Catalog = &handles[445]
+var GetBenefitInput_Identifier = &handles[446]
+
+var GetBenefitOutput = &handles[447]
+var GetBenefitOutput_Id = &handles[448]
+var GetBenefitOutput_Catalog = &handles[449]
+var GetBenefitOutput_Arn = &handles[450]
+var GetBenefitOutput_Name = &handles[451]
+var GetBenefitOutput_Description = &handles[452]
+var GetBenefitOutput_Programs = &handles[453]
+var GetBenefitOutput_FulfillmentTypes = &handles[454]
+var GetBenefitOutput_BenefitRequestSchema = &handles[455]
+var GetBenefitOutput_Status = &handles[456]
+
+var ListBenefitAllocationsInput = &handles[457]
+var ListBenefitAllocationsInput_Catalog = &handles[458]
+var ListBenefitAllocationsInput_FulfillmentTypes = &handles[459]
+var ListBenefitAllocationsInput_BenefitIdentifiers = &handles[460]
+var ListBenefitAllocationsInput_BenefitApplicationIdentifiers = &handles[461]
+var ListBenefitAllocationsInput_Status = &handles[462]
+var ListBenefitAllocationsInput_MaxResults = &handles[463]
+var ListBenefitAllocationsInput_NextToken = &handles[464]
+
+var ListBenefitAllocationsOutput = &handles[465]
+var ListBenefitAllocationsOutput_BenefitAllocationSummaries = &handles[466]
+var ListBenefitAllocationsOutput_NextToken = &handles[467]
+
+var ListBenefitApplicationsInput = &handles[468]
+var ListBenefitApplicationsInput_Catalog = &handles[469]
+var ListBenefitApplicationsInput_Programs = &handles[470]
+var ListBenefitApplicationsInput_FulfillmentTypes = &handles[471]
+var ListBenefitApplicationsInput_BenefitIdentifiers = &handles[472]
+var ListBenefitApplicationsInput_Status = &handles[473]
+var ListBenefitApplicationsInput_Stages = &handles[474]
+var ListBenefitApplicationsInput_AssociatedResources = &handles[475]
+var ListBenefitApplicationsInput_AssociatedResourceArns = &handles[476]
+var ListBenefitApplicationsInput_MaxResults = &handles[477]
+var ListBenefitApplicationsInput_NextToken = &handles[478]
+
+var ListBenefitApplicationsOutput = &handles[479]
+var ListBenefitApplicationsOutput_BenefitApplicationSummaries = &handles[480]
+var ListBenefitApplicationsOutput_NextToken = &handles[481]
+
+var ListBenefitsInput = &handles[482]
+var ListBenefitsInput_Catalog = &handles[483]
+var ListBenefitsInput_Programs = &handles[484]
+var ListBenefitsInput_FulfillmentTypes = &handles[485]
+var ListBenefitsInput_Status = &handles[486]
+var ListBenefitsInput_MaxResults = &handles[487]
+var ListBenefitsInput_NextToken = &handles[488]
+
+var ListBenefitsOutput = &handles[489]
+var ListBenefitsOutput_BenefitSummaries = &handles[490]
+var ListBenefitsOutput_NextToken = &handles[491]
+
+var ListTagsForResourceRequest = &handles[492]
+var ListTagsForResourceRequest_resourceArn = &handles[493]
+
+var ListTagsForResourceResponse = &handles[494]
+var ListTagsForResourceResponse_tags = &handles[495]
+
+var RecallBenefitApplicationInput = &handles[496]
+var RecallBenefitApplicationInput_Catalog = &handles[497]
+var RecallBenefitApplicationInput_ClientToken = &handles[498]
+var RecallBenefitApplicationInput_Identifier = &handles[499]
+var RecallBenefitApplicationInput_Reason = &handles[500]
+
+var RecallBenefitApplicationOutput = &handles[501]
+
+var SubmitBenefitApplicationInput = &handles[502]
+var SubmitBenefitApplicationInput_Catalog = &handles[503]
+var SubmitBenefitApplicationInput_Identifier = &handles[504]
+
+var SubmitBenefitApplicationOutput = &handles[505]
+
+var TagResourceRequest = &handles[506]
+var TagResourceRequest_resourceArn = &handles[507]
+var TagResourceRequest_tags = &handles[508]
+
+var TagResourceResponse = &handles[509]
+
+var UntagResourceRequest = &handles[510]
+var UntagResourceRequest_resourceArn = &handles[511]
+var UntagResourceRequest_tagKeys = &handles[512]
+
+var UntagResourceResponse = &handles[513]
+
+var UpdateBenefitApplicationInput = &handles[514]
+var UpdateBenefitApplicationInput_Catalog = &handles[515]
+var UpdateBenefitApplicationInput_ClientToken = &handles[516]
+var UpdateBenefitApplicationInput_Name = &handles[517]
+var UpdateBenefitApplicationInput_Description = &handles[518]
+var UpdateBenefitApplicationInput_Identifier = &handles[519]
+var UpdateBenefitApplicationInput_Revision = &handles[520]
+var UpdateBenefitApplicationInput_BenefitApplicationDetails = &handles[521]
+var UpdateBenefitApplicationInput_PartnerContacts = &handles[522]
+var UpdateBenefitApplicationInput_FileDetails = &handles[523]
+
+var UpdateBenefitApplicationOutput = &handles[524]
+var UpdateBenefitApplicationOutput_Id = &handles[525]
+var UpdateBenefitApplicationOutput_Arn = &handles[526]
+var UpdateBenefitApplicationOutput_Revision = &handles[527]
+
+var PartnerCentralBenefitsService = &smithy.ServiceSchema{Schema: &handles[17], Version: "2018-05-10"}

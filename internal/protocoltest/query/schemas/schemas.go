@@ -4,1093 +4,984 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DatetimeOffsets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "DatetimeOffsets",
-}, smithy.ShapeTypeOperation, 0)
-
-var EmptyInputAndEmptyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "EmptyInputAndEmptyOutput",
-}, smithy.ShapeTypeOperation, 0)
-
-var EndpointOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "EndpointOperation",
-}, smithy.ShapeTypeOperation, 0)
-
-var EndpointWithHostLabelOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "EndpointWithHostLabelOperation",
-}, smithy.ShapeTypeOperation, 0)
-
-var FlattenedXmlMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FlattenedXmlMap",
-}, smithy.ShapeTypeOperation, 0)
-
-var FlattenedXmlMapWithXmlName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FlattenedXmlMapWithXmlName",
-}, smithy.ShapeTypeOperation, 0)
-
-var FlattenedXmlMapWithXmlNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FlattenedXmlMapWithXmlNamespace",
-}, smithy.ShapeTypeOperation, 0)
-
-var FractionalSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FractionalSeconds",
-}, smithy.ShapeTypeOperation, 0)
-
-var GreetingWithErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "GreetingWithErrors",
-}, smithy.ShapeTypeOperation, 0)
-
-var HostWithPathOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "HostWithPathOperation",
-}, smithy.ShapeTypeOperation, 0)
-
-var IgnoresWrappingXmlName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "IgnoresWrappingXmlName",
-}, smithy.ShapeTypeOperation, 0)
-
-var NestedStructures = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "NestedStructures",
-}, smithy.ShapeTypeOperation, 0)
-
-var NoInputAndNoOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "NoInputAndNoOutput",
-}, smithy.ShapeTypeOperation, 0)
-
-var NoInputAndOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "NoInputAndOutput",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutWithContentEncoding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "PutWithContentEncoding",
-}, smithy.ShapeTypeOperation, 0)
-
-var QueryIdempotencyTokenAutoFill = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "QueryIdempotencyTokenAutoFill",
-}, smithy.ShapeTypeOperation, 0)
-
-var QueryLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "QueryLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var QueryMaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "QueryMaps",
-}, smithy.ShapeTypeOperation, 0)
-
-var QueryTimestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "QueryTimestamps",
-}, smithy.ShapeTypeOperation, 0)
-
-var RecursiveXmlShapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "RecursiveXmlShapes",
-}, smithy.ShapeTypeOperation, 0)
-
-var SimpleInputParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "SimpleInputParams",
-}, smithy.ShapeTypeOperation, 0)
-
-var SimpleScalarXmlProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "SimpleScalarXmlProperties",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlBlobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlBlobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlEmptyBlobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlEmptyBlobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlEmptyLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlEmptyLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlEmptyMaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlEmptyMaps",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlEnums = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlEnums",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlIntEnums = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlIntEnums",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlMaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlMaps",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlMapsXmlName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlMapsXmlName",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlNamespaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlNamespaces",
-}, smithy.ShapeTypeOperation, 0)
-
-var XmlTimestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlTimestamps",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AwsQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "AwsQuery",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "https://example.com/"})
-
-var AwsQuery = smithy.NewServiceSchema(_AwsQuery, "2020-01-08")
-
-var ComplexError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "ComplexError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ComplexError_TopLevel *smithy.Schema
-
-var ComplexError_Nested *smithy.Schema
-
-var _ComplexMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "ComplexMap",
-}, smithy.ShapeTypeMap, 2)
-var _ComplexMap_key *smithy.Schema
-
-var _ComplexMap_value *smithy.Schema
-
-var ComplexNestedErrorData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "ComplexNestedErrorData",
-}, smithy.ShapeTypeStructure, 1)
-var ComplexNestedErrorData_Foo *smithy.Schema
-
-var CustomCodeError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "CustomCodeError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.AWSQueryError{ErrorCode: "Customized",
-		StatusCode: 402})
-var CustomCodeError_Message *smithy.Schema
-
-var _FlattenedXmlMapWithXmlNameOutputMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FlattenedXmlMapWithXmlNameOutputMap",
-}, smithy.ShapeTypeMap, 2)
-var _FlattenedXmlMapWithXmlNameOutputMap_key *smithy.Schema
-
-var _FlattenedXmlMapWithXmlNameOutputMap_value *smithy.Schema
-
-var _FlattenedXmlMapWithXmlNamespaceOutputMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FlattenedXmlMapWithXmlNamespaceOutputMap",
-}, smithy.ShapeTypeMap, 2)
-var _FlattenedXmlMapWithXmlNamespaceOutputMap_key *smithy.Schema
-
-var _FlattenedXmlMapWithXmlNamespaceOutputMap_value *smithy.Schema
-
-var InvalidGreeting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "InvalidGreeting",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidGreeting_Message *smithy.Schema
-
-var _ListWithMemberNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "ListWithMemberNamespace",
-}, smithy.ShapeTypeList, 1, &smithytraits.XMLNamespace{URI: "https://xml-list.example.com"})
-var _ListWithMemberNamespace_member *smithy.Schema
-
-var _ListWithNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "ListWithNamespace",
-}, smithy.ShapeTypeList, 1, &smithytraits.XMLNamespace{URI: "https://xml-list.example.com"})
-var _ListWithNamespace_member *smithy.Schema
-
-var _ListWithXmlName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "ListWithXmlName",
-}, smithy.ShapeTypeList, 1)
-var _ListWithXmlName_member *smithy.Schema
-
-var _MapOfLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "MapOfLists",
-}, smithy.ShapeTypeMap, 2)
-var _MapOfLists_key *smithy.Schema
-
-var _MapOfLists_value *smithy.Schema
-
-var _MapWithXmlName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "MapWithXmlName",
-}, smithy.ShapeTypeMap, 2)
-var _MapWithXmlName_key *smithy.Schema
-
-var _MapWithXmlName_value *smithy.Schema
-
-var NestedStructWithList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "NestedStructWithList",
-}, smithy.ShapeTypeStructure, 1)
-var NestedStructWithList_ListArg *smithy.Schema
-
-var NestedStructWithMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "NestedStructWithMap",
-}, smithy.ShapeTypeStructure, 1)
-var NestedStructWithMap_MapArg *smithy.Schema
-
-var RecursiveXmlShapesOutputNested1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "RecursiveXmlShapesOutputNested1",
-}, smithy.ShapeTypeStructure, 2)
-var RecursiveXmlShapesOutputNested1_foo *smithy.Schema
-
-var RecursiveXmlShapesOutputNested1_nested *smithy.Schema
-
-var RecursiveXmlShapesOutputNested2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "RecursiveXmlShapesOutputNested2",
-}, smithy.ShapeTypeStructure, 2)
-var RecursiveXmlShapesOutputNested2_bar *smithy.Schema
-
-var RecursiveXmlShapesOutputNested2_recursiveMember *smithy.Schema
-
-var _RenamedListMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "RenamedListMembers",
-}, smithy.ShapeTypeList, 1)
-var _RenamedListMembers_member *smithy.Schema
-
-var StructArg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "StructArg",
-}, smithy.ShapeTypeStructure, 3)
-var StructArg_StringArg *smithy.Schema
-
-var StructArg_OtherArg *smithy.Schema
-
-var StructArg_RecursiveArg *smithy.Schema
-
-var _StructureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "StructureList",
-}, smithy.ShapeTypeList, 1)
-var _StructureList_member *smithy.Schema
-
-var StructureListMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "StructureListMember",
-}, smithy.ShapeTypeStructure, 2)
-var StructureListMember_a *smithy.Schema
-
-var StructureListMember_b *smithy.Schema
-
-var _XmlMapsOutputMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlMapsOutputMap",
-}, smithy.ShapeTypeMap, 2)
-var _XmlMapsOutputMap_key *smithy.Schema
-
-var _XmlMapsOutputMap_value *smithy.Schema
-
-var _XmlMapsXmlNameOutputMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlMapsXmlNameOutputMap",
-}, smithy.ShapeTypeMap, 2)
-var _XmlMapsXmlNameOutputMap_key *smithy.Schema
-
-var _XmlMapsXmlNameOutputMap_value *smithy.Schema
-
-var _XmlNamespacedList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlNamespacedList",
-}, smithy.ShapeTypeList, 1)
-var _XmlNamespacedList_member *smithy.Schema
-
-var XmlNamespaceNested = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlNamespaceNested",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.XMLNamespace{URI: "http://boo.com"})
-var XmlNamespaceNested_foo *smithy.Schema
-
-var XmlNamespaceNested_values *smithy.Schema
-
-var _BooleanList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "BooleanList",
-}, smithy.ShapeTypeList, 1)
-var _BooleanList_member *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _EpochSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "EpochSeconds",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
-
-var FooEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "FooEnum",
-}, smithy.ShapeTypeEnum, 5)
-var FooEnum_FOO *smithy.Schema
-
-var FooEnum_BAZ *smithy.Schema
-
-var FooEnum_BAR *smithy.Schema
-
-var FooEnum_ONE *smithy.Schema
-
-var FooEnum_ZERO *smithy.Schema
-
-var _FooEnumList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "FooEnumList",
-}, smithy.ShapeTypeList, 1)
-var _FooEnumList_member *smithy.Schema
-
-var _FooEnumMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "FooEnumMap",
-}, smithy.ShapeTypeMap, 2)
-var _FooEnumMap_key *smithy.Schema
-
-var _FooEnumMap_value *smithy.Schema
-
-var _FooEnumSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "FooEnumSet",
-}, smithy.ShapeTypeList, 1)
-var _FooEnumSet_member *smithy.Schema
-
-var _GreetingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "GreetingList",
-}, smithy.ShapeTypeList, 1)
-var _GreetingList_member *smithy.Schema
-
-var GreetingStruct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "GreetingStruct",
-}, smithy.ShapeTypeStructure, 1)
-var GreetingStruct_hi *smithy.Schema
-
-var _HttpDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "HttpDate",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "http-date"})
-
-var _IntegerEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "IntegerEnum",
-}, smithy.ShapeTypeIntEnum, 3)
-var _IntegerEnum_A *smithy.Schema
-
-var _IntegerEnum_B *smithy.Schema
-
-var _IntegerEnum_C *smithy.Schema
-
-var _IntegerEnumList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "IntegerEnumList",
-}, smithy.ShapeTypeList, 1)
-var _IntegerEnumList_member *smithy.Schema
-
-var _IntegerEnumMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "IntegerEnumMap",
-}, smithy.ShapeTypeMap, 2)
-var _IntegerEnumMap_key *smithy.Schema
-
-var _IntegerEnumMap_value *smithy.Schema
-
-var _IntegerEnumSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "IntegerEnumSet",
-}, smithy.ShapeTypeList, 1)
-var _IntegerEnumSet_member *smithy.Schema
-
-var _IntegerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "IntegerList",
-}, smithy.ShapeTypeList, 1)
-var _IntegerList_member *smithy.Schema
-
-var _NestedStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "NestedStringList",
-}, smithy.ShapeTypeList, 1)
-var _NestedStringList_member *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var _StringSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "StringSet",
-}, smithy.ShapeTypeList, 1)
-var _StringSet_member *smithy.Schema
-
-var _TimestampList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.shared",
-	Name:      "TimestampList",
-}, smithy.ShapeTypeList, 1)
-var _TimestampList_member *smithy.Schema
-
-var DatetimeOffsetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "DatetimeOffsetsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DatetimeOffsetsOutput_datetime *smithy.Schema
-
-var EmptyInputAndEmptyOutputInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "EmptyInputAndEmptyOutputInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var EmptyInputAndEmptyOutputOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "EmptyInputAndEmptyOutputOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var HostLabelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "HostLabelInput",
-}, smithy.ShapeTypeStructure, 1)
-var HostLabelInput_label *smithy.Schema
-
-var FlattenedXmlMapOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FlattenedXmlMapOutput",
-}, smithy.ShapeTypeStructure, 1)
-var FlattenedXmlMapOutput_myMap *smithy.Schema
-
-var FlattenedXmlMapWithXmlNameOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FlattenedXmlMapWithXmlNameOutput",
-}, smithy.ShapeTypeStructure, 1)
-var FlattenedXmlMapWithXmlNameOutput_myMap *smithy.Schema
-
-var FlattenedXmlMapWithXmlNamespaceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FlattenedXmlMapWithXmlNamespaceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var FlattenedXmlMapWithXmlNamespaceOutput_myMap *smithy.Schema
-
-var FractionalSecondsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "FractionalSecondsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var FractionalSecondsOutput_datetime *smithy.Schema
-
-var GreetingWithErrorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "GreetingWithErrorsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GreetingWithErrorsOutput_greeting *smithy.Schema
-
-var IgnoresWrappingXmlNameOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "IgnoresWrappingXmlNameOutput",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.XMLName{Name: "IgnoreMe"})
-var IgnoresWrappingXmlNameOutput_foo *smithy.Schema
-
-var NestedStructuresInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "NestedStructuresInput",
-}, smithy.ShapeTypeStructure, 1)
-var NestedStructuresInput_Nested *smithy.Schema
-
-var NoInputAndOutputInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "NoInputAndOutputInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var NoInputAndOutputOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "NoInputAndOutputOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutWithContentEncodingInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "PutWithContentEncodingInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutWithContentEncodingInput_encoding *smithy.Schema
-
-var PutWithContentEncodingInput_data *smithy.Schema
-
-var QueryIdempotencyTokenAutoFillInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "QueryIdempotencyTokenAutoFillInput",
-}, smithy.ShapeTypeStructure, 1)
-var QueryIdempotencyTokenAutoFillInput_token *smithy.Schema
-
-var QueryListsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "QueryListsInput",
-}, smithy.ShapeTypeStructure, 6)
-var QueryListsInput_ListArg *smithy.Schema
-
-var QueryListsInput_ComplexListArg *smithy.Schema
-
-var QueryListsInput_FlattenedListArg *smithy.Schema
-
-var QueryListsInput_ListArgWithXmlNameMember *smithy.Schema
-
-var QueryListsInput_FlattenedListArgWithXmlName *smithy.Schema
-
-var QueryListsInput_NestedWithList *smithy.Schema
-
-var QueryMapsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "QueryMapsInput",
-}, smithy.ShapeTypeStructure, 8)
-var QueryMapsInput_MapArg *smithy.Schema
-
-var QueryMapsInput_RenamedMapArg *smithy.Schema
-
-var QueryMapsInput_ComplexMapArg *smithy.Schema
-
-var QueryMapsInput_MapWithXmlMemberName *smithy.Schema
-
-var QueryMapsInput_FlattenedMap *smithy.Schema
-
-var QueryMapsInput_FlattenedMapWithXmlName *smithy.Schema
-
-var QueryMapsInput_MapOfLists *smithy.Schema
-
-var QueryMapsInput_NestedStructWithMap *smithy.Schema
-
-var QueryTimestampsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "QueryTimestampsInput",
-}, smithy.ShapeTypeStructure, 3)
-var QueryTimestampsInput_normalFormat *smithy.Schema
-
-var QueryTimestampsInput_epochMember *smithy.Schema
-
-var QueryTimestampsInput_epochTarget *smithy.Schema
-
-var RecursiveXmlShapesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "RecursiveXmlShapesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RecursiveXmlShapesOutput_nested *smithy.Schema
-
-var SimpleInputParamsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "SimpleInputParamsInput",
-}, smithy.ShapeTypeStructure, 9)
-var SimpleInputParamsInput_Foo *smithy.Schema
-
-var SimpleInputParamsInput_Bar *smithy.Schema
-
-var SimpleInputParamsInput_Baz *smithy.Schema
-
-var SimpleInputParamsInput_Bam *smithy.Schema
-
-var SimpleInputParamsInput_FloatValue *smithy.Schema
-
-var SimpleInputParamsInput_Boo *smithy.Schema
-
-var SimpleInputParamsInput_Qux *smithy.Schema
-
-var SimpleInputParamsInput_FooEnum *smithy.Schema
-
-var SimpleInputParamsInput_IntegerEnum *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "SimpleScalarXmlPropertiesOutput",
-}, smithy.ShapeTypeStructure, 10)
-var SimpleScalarXmlPropertiesOutput_stringValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_emptyStringValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_trueBooleanValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_falseBooleanValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_byteValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_shortValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_integerValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_longValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_floatValue *smithy.Schema
-
-var SimpleScalarXmlPropertiesOutput_doubleValue *smithy.Schema
-
-var XmlBlobsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlBlobsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var XmlBlobsOutput_data *smithy.Schema
-
-var XmlListsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlListsOutput",
-}, smithy.ShapeTypeStructure, 14)
-var XmlListsOutput_stringList *smithy.Schema
-
-var XmlListsOutput_stringSet *smithy.Schema
-
-var XmlListsOutput_integerList *smithy.Schema
-
-var XmlListsOutput_booleanList *smithy.Schema
-
-var XmlListsOutput_timestampList *smithy.Schema
-
-var XmlListsOutput_enumList *smithy.Schema
-
-var XmlListsOutput_intEnumList *smithy.Schema
-
-var XmlListsOutput_nestedStringList *smithy.Schema
-
-var XmlListsOutput_renamedListMembers *smithy.Schema
-
-var XmlListsOutput_flattenedList *smithy.Schema
-
-var XmlListsOutput_flattenedList2 *smithy.Schema
-
-var XmlListsOutput_flattenedListWithMemberNamespace *smithy.Schema
-
-var XmlListsOutput_flattenedListWithNamespace *smithy.Schema
-
-var XmlListsOutput_structureList *smithy.Schema
-
-var XmlMapsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlMapsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var XmlMapsOutput_myMap *smithy.Schema
-
-var XmlEnumsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlEnumsOutput",
-}, smithy.ShapeTypeStructure, 6)
-var XmlEnumsOutput_fooEnum1 *smithy.Schema
-
-var XmlEnumsOutput_fooEnum2 *smithy.Schema
-
-var XmlEnumsOutput_fooEnum3 *smithy.Schema
-
-var XmlEnumsOutput_fooEnumList *smithy.Schema
-
-var XmlEnumsOutput_fooEnumSet *smithy.Schema
-
-var XmlEnumsOutput_fooEnumMap *smithy.Schema
-
-var XmlIntEnumsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlIntEnumsOutput",
-}, smithy.ShapeTypeStructure, 6)
-var XmlIntEnumsOutput_intEnum1 *smithy.Schema
-
-var XmlIntEnumsOutput_intEnum2 *smithy.Schema
-
-var XmlIntEnumsOutput_intEnum3 *smithy.Schema
-
-var XmlIntEnumsOutput_intEnumList *smithy.Schema
-
-var XmlIntEnumsOutput_intEnumSet *smithy.Schema
-
-var XmlIntEnumsOutput_intEnumMap *smithy.Schema
-
-var XmlMapsXmlNameOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlMapsXmlNameOutput",
-}, smithy.ShapeTypeStructure, 1)
-var XmlMapsXmlNameOutput_myMap *smithy.Schema
-
-var XmlNamespacesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlNamespacesOutput",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.XMLNamespace{URI: "http://foo.com"})
-var XmlNamespacesOutput_nested *smithy.Schema
-
-var XmlTimestampsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.query",
-	Name:      "XmlTimestampsOutput",
-}, smithy.ShapeTypeStructure, 7)
-var XmlTimestampsOutput_normal *smithy.Schema
-
-var XmlTimestampsOutput_dateTime *smithy.Schema
-
-var XmlTimestampsOutput_dateTimeOnTarget *smithy.Schema
-
-var XmlTimestampsOutput_epochSeconds *smithy.Schema
-
-var XmlTimestampsOutput_epochSecondsOnTarget *smithy.Schema
-
-var XmlTimestampsOutput_httpDate *smithy.Schema
-
-var XmlTimestampsOutput_httpDateOnTarget *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ComplexNestedErrorData_Foo = ComplexNestedErrorData.AddMember("Foo", smithyprelude.String)
-
-	ComplexError_TopLevel = ComplexError.AddMember("TopLevel", smithyprelude.String)
-
-	ComplexError_Nested = ComplexError.AddMember("Nested", ComplexNestedErrorData)
-
-	GreetingStruct_hi = GreetingStruct.AddMember("hi", smithyprelude.String)
-
-	_ComplexMap_key = _ComplexMap.AddMember("key", smithyprelude.String)
-
-	_ComplexMap_value = _ComplexMap.AddMember("value", GreetingStruct)
-
-	CustomCodeError_Message = CustomCodeError.AddMember("Message", smithyprelude.String)
-
-	_FlattenedXmlMapWithXmlNameOutputMap_key = _FlattenedXmlMapWithXmlNameOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLName{Name: "K"})
-
-	_FlattenedXmlMapWithXmlNameOutputMap_value = _FlattenedXmlMapWithXmlNameOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"})
-
-	_FlattenedXmlMapWithXmlNamespaceOutputMap_key = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLName{Name: "K"},
-		&smithytraits.XMLNamespace{URI: "https://the-key.example.com"})
-
-	_FlattenedXmlMapWithXmlNamespaceOutputMap_value = _FlattenedXmlMapWithXmlNamespaceOutputMap.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"},
-		&smithytraits.XMLNamespace{URI: "https://the-value.example.com"})
-
-	InvalidGreeting_Message = InvalidGreeting.AddMember("Message", smithyprelude.String)
-
-	_ListWithMemberNamespace_member = _ListWithMemberNamespace.AddMember("member", smithyprelude.String, &smithytraits.XMLNamespace{URI: "https://xml-member.example.com"})
-
-	_ListWithNamespace_member = _ListWithNamespace.AddMember("member", smithyprelude.String)
-
-	_ListWithXmlName_member = _ListWithXmlName.AddMember("member", smithyprelude.String, &smithytraits.XMLName{Name: "item"})
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	_MapOfLists_key = _MapOfLists.AddMember("key", smithyprelude.String)
-
-	_MapOfLists_value = _MapOfLists.AddMember("value", _StringList)
-
-	_MapWithXmlName_key = _MapWithXmlName.AddMember("key", smithyprelude.String, &smithytraits.XMLName{Name: "K"})
-
-	_MapWithXmlName_value = _MapWithXmlName.AddMember("value", smithyprelude.String, &smithytraits.XMLName{Name: "V"})
-
-	NestedStructWithList_ListArg = NestedStructWithList.AddMember("ListArg", _StringList)
-
-	_StringMap_key = _StringMap.AddMember("key", smithyprelude.String)
-
-	_StringMap_value = _StringMap.AddMember("value", smithyprelude.String)
-
-	NestedStructWithMap_MapArg = NestedStructWithMap.AddMember("MapArg", _StringMap)
-
-	RecursiveXmlShapesOutputNested2_bar = RecursiveXmlShapesOutputNested2.AddMember("bar", smithyprelude.String)
-
-	RecursiveXmlShapesOutputNested2_recursiveMember = RecursiveXmlShapesOutputNested2.AddMember("recursiveMember", RecursiveXmlShapesOutputNested1)
-
-	RecursiveXmlShapesOutputNested1_foo = RecursiveXmlShapesOutputNested1.AddMember("foo", smithyprelude.String)
-
-	RecursiveXmlShapesOutputNested1_nested = RecursiveXmlShapesOutputNested1.AddMember("nested", RecursiveXmlShapesOutputNested2)
-
-	_RenamedListMembers_member = _RenamedListMembers.AddMember("member", smithyprelude.String, &smithytraits.XMLName{Name: "item"})
-
-	StructArg_StringArg = StructArg.AddMember("StringArg", smithyprelude.String)
-
-	StructArg_OtherArg = StructArg.AddMember("OtherArg", smithyprelude.Boolean)
-
-	StructArg_RecursiveArg = StructArg.AddMember("RecursiveArg", StructArg)
-
-	StructureListMember_a = StructureListMember.AddMember("a", smithyprelude.String, &smithytraits.XMLName{Name: "value"})
-
-	StructureListMember_b = StructureListMember.AddMember("b", smithyprelude.String, &smithytraits.XMLName{Name: "other"})
-
-	_StructureList_member = _StructureList.AddMember("member", StructureListMember, &smithytraits.XMLName{Name: "item"})
-
-	_XmlMapsOutputMap_key = _XmlMapsOutputMap.AddMember("key", smithyprelude.String)
-
-	_XmlMapsOutputMap_value = _XmlMapsOutputMap.AddMember("value", GreetingStruct)
-
-	_XmlMapsXmlNameOutputMap_key = _XmlMapsXmlNameOutputMap.AddMember("key", smithyprelude.String, &smithytraits.XMLName{Name: "Attribute"})
-
-	_XmlMapsXmlNameOutputMap_value = _XmlMapsXmlNameOutputMap.AddMember("value", GreetingStruct, &smithytraits.XMLName{Name: "Setting"})
-
-	_XmlNamespacedList_member = _XmlNamespacedList.AddMember("member", smithyprelude.String, &smithytraits.XMLNamespace{URI: "http://bux.com"})
-
-	XmlNamespaceNested_foo = XmlNamespaceNested.AddMember("foo", smithyprelude.String, &smithytraits.XMLNamespace{URI: "http://baz.com",
-		Prefix: "baz"})
-
-	XmlNamespaceNested_values = XmlNamespaceNested.AddMember("values", _XmlNamespacedList, &smithytraits.XMLNamespace{URI: "http://qux.com"})
-
-	_BooleanList_member = _BooleanList.AddMember("member", smithyprelude.Boolean)
-
-	FooEnum_FOO = FooEnum.AddMember("FOO", smithyprelude.Unit)
-
-	FooEnum_BAZ = FooEnum.AddMember("BAZ", smithyprelude.Unit)
-
-	FooEnum_BAR = FooEnum.AddMember("BAR", smithyprelude.Unit)
-
-	FooEnum_ONE = FooEnum.AddMember("ONE", smithyprelude.Unit)
-
-	FooEnum_ZERO = FooEnum.AddMember("ZERO", smithyprelude.Unit)
-
-	_FooEnumList_member = _FooEnumList.AddMember("member", FooEnum)
-
-	_FooEnumMap_key = _FooEnumMap.AddMember("key", smithyprelude.String)
-
-	_FooEnumMap_value = _FooEnumMap.AddMember("value", FooEnum)
-
-	_FooEnumSet_member = _FooEnumSet.AddMember("member", FooEnum)
-
-	_GreetingList_member = _GreetingList.AddMember("member", GreetingStruct)
-
-	_IntegerEnum_A = _IntegerEnum.AddMember("A", smithyprelude.Unit)
-
-	_IntegerEnum_B = _IntegerEnum.AddMember("B", smithyprelude.Unit)
-
-	_IntegerEnum_C = _IntegerEnum.AddMember("C", smithyprelude.Unit)
-
-	_IntegerEnumList_member = _IntegerEnumList.AddMember("member", _IntegerEnum)
-
-	_IntegerEnumMap_key = _IntegerEnumMap.AddMember("key", smithyprelude.String)
-
-	_IntegerEnumMap_value = _IntegerEnumMap.AddMember("value", _IntegerEnum)
-
-	_IntegerEnumSet_member = _IntegerEnumSet.AddMember("member", _IntegerEnum)
-
-	_IntegerList_member = _IntegerList.AddMember("member", smithyprelude.Integer)
-
-	_NestedStringList_member = _NestedStringList.AddMember("member", _StringList)
-
-	_StringSet_member = _StringSet.AddMember("member", smithyprelude.String)
-
-	_TimestampList_member = _TimestampList.AddMember("member", smithyprelude.Timestamp)
-
-	DatetimeOffsetsOutput_datetime = DatetimeOffsetsOutput.AddMember("datetime", _DateTime)
-
-	HostLabelInput_label = HostLabelInput.AddMember("label", smithyprelude.String, &smithytraits.HostLabel{})
-
-	FlattenedXmlMapOutput_myMap = FlattenedXmlMapOutput.AddMember("myMap", _FooEnumMap, &smithytraits.XMLFlattened{})
-
-	FlattenedXmlMapWithXmlNameOutput_myMap = FlattenedXmlMapWithXmlNameOutput.AddMember("myMap", _FlattenedXmlMapWithXmlNameOutputMap, &smithytraits.XMLName{Name: "KVP"},
-		&smithytraits.XMLFlattened{})
-
-	FlattenedXmlMapWithXmlNamespaceOutput_myMap = FlattenedXmlMapWithXmlNamespaceOutput.AddMember("myMap", _FlattenedXmlMapWithXmlNamespaceOutputMap, &smithytraits.XMLName{Name: "KVP"},
-		&smithytraits.XMLFlattened{},
-		&smithytraits.XMLNamespace{URI: "https://the-member.example.com"})
-
-	FractionalSecondsOutput_datetime = FractionalSecondsOutput.AddMember("datetime", _DateTime)
-
-	GreetingWithErrorsOutput_greeting = GreetingWithErrorsOutput.AddMember("greeting", smithyprelude.String)
-
-	IgnoresWrappingXmlNameOutput_foo = IgnoresWrappingXmlNameOutput.AddMember("foo", smithyprelude.String)
-
-	NestedStructuresInput_Nested = NestedStructuresInput.AddMember("Nested", StructArg)
-
-	PutWithContentEncodingInput_encoding = PutWithContentEncodingInput.AddMember("encoding", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Encoding"})
-
-	PutWithContentEncodingInput_data = PutWithContentEncodingInput.AddMember("data", smithyprelude.String)
-
-	QueryIdempotencyTokenAutoFillInput_token = QueryIdempotencyTokenAutoFillInput.AddMember("token", smithyprelude.String)
-
-	QueryListsInput_ListArg = QueryListsInput.AddMember("ListArg", _StringList)
-
-	QueryListsInput_ComplexListArg = QueryListsInput.AddMember("ComplexListArg", _GreetingList)
-
-	QueryListsInput_FlattenedListArg = QueryListsInput.AddMember("FlattenedListArg", _StringList, &smithytraits.XMLFlattened{})
-
-	QueryListsInput_ListArgWithXmlNameMember = QueryListsInput.AddMember("ListArgWithXmlNameMember", _ListWithXmlName)
-
-	QueryListsInput_FlattenedListArgWithXmlName = QueryListsInput.AddMember("FlattenedListArgWithXmlName", _ListWithXmlName, &smithytraits.XMLName{Name: "Hi"},
-		&smithytraits.XMLFlattened{})
-
-	QueryListsInput_NestedWithList = QueryListsInput.AddMember("NestedWithList", NestedStructWithList)
-
-	QueryMapsInput_MapArg = QueryMapsInput.AddMember("MapArg", _StringMap)
-
-	QueryMapsInput_RenamedMapArg = QueryMapsInput.AddMember("RenamedMapArg", _StringMap, &smithytraits.XMLName{Name: "Foo"})
-
-	QueryMapsInput_ComplexMapArg = QueryMapsInput.AddMember("ComplexMapArg", _ComplexMap)
-
-	QueryMapsInput_MapWithXmlMemberName = QueryMapsInput.AddMember("MapWithXmlMemberName", _MapWithXmlName)
-
-	QueryMapsInput_FlattenedMap = QueryMapsInput.AddMember("FlattenedMap", _StringMap, &smithytraits.XMLFlattened{})
-
-	QueryMapsInput_FlattenedMapWithXmlName = QueryMapsInput.AddMember("FlattenedMapWithXmlName", _MapWithXmlName, &smithytraits.XMLName{Name: "Hi"},
-		&smithytraits.XMLFlattened{})
-
-	QueryMapsInput_MapOfLists = QueryMapsInput.AddMember("MapOfLists", _MapOfLists)
-
-	QueryMapsInput_NestedStructWithMap = QueryMapsInput.AddMember("NestedStructWithMap", NestedStructWithMap)
-
-	QueryTimestampsInput_normalFormat = QueryTimestampsInput.AddMember("normalFormat", smithyprelude.Timestamp)
-
-	QueryTimestampsInput_epochMember = QueryTimestampsInput.AddMember("epochMember", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
-
-	QueryTimestampsInput_epochTarget = QueryTimestampsInput.AddMember("epochTarget", _EpochSeconds)
-
-	RecursiveXmlShapesOutput_nested = RecursiveXmlShapesOutput.AddMember("nested", RecursiveXmlShapesOutputNested1)
-
-	SimpleInputParamsInput_Foo = SimpleInputParamsInput.AddMember("Foo", smithyprelude.String)
-
-	SimpleInputParamsInput_Bar = SimpleInputParamsInput.AddMember("Bar", smithyprelude.String)
-
-	SimpleInputParamsInput_Baz = SimpleInputParamsInput.AddMember("Baz", smithyprelude.Boolean)
-
-	SimpleInputParamsInput_Bam = SimpleInputParamsInput.AddMember("Bam", smithyprelude.Integer)
-
-	SimpleInputParamsInput_FloatValue = SimpleInputParamsInput.AddMember("FloatValue", smithyprelude.Float)
-
-	SimpleInputParamsInput_Boo = SimpleInputParamsInput.AddMember("Boo", smithyprelude.Double)
-
-	SimpleInputParamsInput_Qux = SimpleInputParamsInput.AddMember("Qux", smithyprelude.Blob)
-
-	SimpleInputParamsInput_FooEnum = SimpleInputParamsInput.AddMember("FooEnum", FooEnum)
-
-	SimpleInputParamsInput_IntegerEnum = SimpleInputParamsInput.AddMember("IntegerEnum", _IntegerEnum)
-
-	SimpleScalarXmlPropertiesOutput_stringValue = SimpleScalarXmlPropertiesOutput.AddMember("stringValue", smithyprelude.String)
-
-	SimpleScalarXmlPropertiesOutput_emptyStringValue = SimpleScalarXmlPropertiesOutput.AddMember("emptyStringValue", smithyprelude.String)
-
-	SimpleScalarXmlPropertiesOutput_trueBooleanValue = SimpleScalarXmlPropertiesOutput.AddMember("trueBooleanValue", smithyprelude.Boolean)
-
-	SimpleScalarXmlPropertiesOutput_falseBooleanValue = SimpleScalarXmlPropertiesOutput.AddMember("falseBooleanValue", smithyprelude.Boolean)
-
-	SimpleScalarXmlPropertiesOutput_byteValue = SimpleScalarXmlPropertiesOutput.AddMember("byteValue", smithyprelude.Byte)
-
-	SimpleScalarXmlPropertiesOutput_shortValue = SimpleScalarXmlPropertiesOutput.AddMember("shortValue", smithyprelude.Short)
-
-	SimpleScalarXmlPropertiesOutput_integerValue = SimpleScalarXmlPropertiesOutput.AddMember("integerValue", smithyprelude.Integer)
-
-	SimpleScalarXmlPropertiesOutput_longValue = SimpleScalarXmlPropertiesOutput.AddMember("longValue", smithyprelude.Long)
-
-	SimpleScalarXmlPropertiesOutput_floatValue = SimpleScalarXmlPropertiesOutput.AddMember("floatValue", smithyprelude.Float)
-
-	SimpleScalarXmlPropertiesOutput_doubleValue = SimpleScalarXmlPropertiesOutput.AddMember("doubleValue", smithyprelude.Double, &smithytraits.XMLName{Name: "DoubleDribble"})
-
-	XmlBlobsOutput_data = XmlBlobsOutput.AddMember("data", smithyprelude.Blob)
-
-	XmlListsOutput_stringList = XmlListsOutput.AddMember("stringList", _StringList)
-
-	XmlListsOutput_stringSet = XmlListsOutput.AddMember("stringSet", _StringSet)
-
-	XmlListsOutput_integerList = XmlListsOutput.AddMember("integerList", _IntegerList)
-
-	XmlListsOutput_booleanList = XmlListsOutput.AddMember("booleanList", _BooleanList)
-
-	XmlListsOutput_timestampList = XmlListsOutput.AddMember("timestampList", _TimestampList)
-
-	XmlListsOutput_enumList = XmlListsOutput.AddMember("enumList", _FooEnumList)
-
-	XmlListsOutput_intEnumList = XmlListsOutput.AddMember("intEnumList", _IntegerEnumList)
-
-	XmlListsOutput_nestedStringList = XmlListsOutput.AddMember("nestedStringList", _NestedStringList)
-
-	XmlListsOutput_renamedListMembers = XmlListsOutput.AddMember("renamedListMembers", _RenamedListMembers, &smithytraits.XMLName{Name: "renamed"})
-
-	XmlListsOutput_flattenedList = XmlListsOutput.AddMember("flattenedList", _RenamedListMembers, &smithytraits.XMLFlattened{})
-
-	XmlListsOutput_flattenedList2 = XmlListsOutput.AddMember("flattenedList2", _RenamedListMembers, &smithytraits.XMLName{Name: "customName"},
-		&smithytraits.XMLFlattened{})
-
-	XmlListsOutput_flattenedListWithMemberNamespace = XmlListsOutput.AddMember("flattenedListWithMemberNamespace", _ListWithMemberNamespace, &smithytraits.XMLFlattened{})
-
-	XmlListsOutput_flattenedListWithNamespace = XmlListsOutput.AddMember("flattenedListWithNamespace", _ListWithNamespace, &smithytraits.XMLFlattened{})
-
-	XmlListsOutput_structureList = XmlListsOutput.AddMember("structureList", _StructureList, &smithytraits.XMLName{Name: "myStructureList"})
-
-	XmlMapsOutput_myMap = XmlMapsOutput.AddMember("myMap", _XmlMapsOutputMap)
-
-	XmlEnumsOutput_fooEnum1 = XmlEnumsOutput.AddMember("fooEnum1", FooEnum)
-
-	XmlEnumsOutput_fooEnum2 = XmlEnumsOutput.AddMember("fooEnum2", FooEnum)
-
-	XmlEnumsOutput_fooEnum3 = XmlEnumsOutput.AddMember("fooEnum3", FooEnum)
-
-	XmlEnumsOutput_fooEnumList = XmlEnumsOutput.AddMember("fooEnumList", _FooEnumList)
-
-	XmlEnumsOutput_fooEnumSet = XmlEnumsOutput.AddMember("fooEnumSet", _FooEnumSet)
-
-	XmlEnumsOutput_fooEnumMap = XmlEnumsOutput.AddMember("fooEnumMap", _FooEnumMap)
-
-	XmlIntEnumsOutput_intEnum1 = XmlIntEnumsOutput.AddMember("intEnum1", _IntegerEnum)
-
-	XmlIntEnumsOutput_intEnum2 = XmlIntEnumsOutput.AddMember("intEnum2", _IntegerEnum)
-
-	XmlIntEnumsOutput_intEnum3 = XmlIntEnumsOutput.AddMember("intEnum3", _IntegerEnum)
-
-	XmlIntEnumsOutput_intEnumList = XmlIntEnumsOutput.AddMember("intEnumList", _IntegerEnumList)
-
-	XmlIntEnumsOutput_intEnumSet = XmlIntEnumsOutput.AddMember("intEnumSet", _IntegerEnumSet)
-
-	XmlIntEnumsOutput_intEnumMap = XmlIntEnumsOutput.AddMember("intEnumMap", _IntegerEnumMap)
-
-	XmlMapsXmlNameOutput_myMap = XmlMapsXmlNameOutput.AddMember("myMap", _XmlMapsXmlNameOutputMap)
-
-	XmlNamespacesOutput_nested = XmlNamespacesOutput.AddMember("nested", XmlNamespaceNested)
-
-	XmlTimestampsOutput_normal = XmlTimestampsOutput.AddMember("normal", smithyprelude.Timestamp)
-
-	XmlTimestampsOutput_dateTime = XmlTimestampsOutput.AddMember("dateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	XmlTimestampsOutput_dateTimeOnTarget = XmlTimestampsOutput.AddMember("dateTimeOnTarget", _DateTime)
-
-	XmlTimestampsOutput_epochSeconds = XmlTimestampsOutput.AddMember("epochSeconds", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"})
-
-	XmlTimestampsOutput_epochSecondsOnTarget = XmlTimestampsOutput.AddMember("epochSecondsOnTarget", _EpochSeconds)
-
-	XmlTimestampsOutput_httpDate = XmlTimestampsOutput.AddMember("httpDate", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "http-date"})
-
-	XmlTimestampsOutput_httpDateOnTarget = XmlTimestampsOutput.AddMember("httpDateOnTarget", _HttpDate)
-
+const blob = "" +
+	"FlattenedXmlMapWithXmlNamespaceOutputMapFlattenedXmlMapWithXmlNameOutputMapQueryIdempotencyTokenAuto" +
+	"FillInputflattenedListWithMemberNamespaceRecursiveXmlShapesOutputNested1RecursiveXmlShapesOutputNest" +
+	"ed2SimpleScalarXmlPropertiesOutputEmptyInputAndEmptyOutputOutputEndpointWithHostLabelOperationEmptyI" +
+	"nputAndEmptyOutputInputIgnoresWrappingXmlNameOutputFlattenedListArgWithXmlNamePutWithContentEncoding" +
+	"InputflattenedListWithNamespaceGreetingWithErrorsOutputListArgWithXmlNameMemberFlattenedMapWithXmlNa" +
+	"meFractionalSecondsOutputXmlMapsXmlNameOutputMapComplexNestedErrorDataNoInputAndOutputOutputSimpleIn" +
+	"putParamsInputDatetimeOffsetsOutputFlattenedXmlMapOutputHostWithPathOperationNestedStructuresInputNo" +
+	"InputAndOutputInputMapWithXmlMemberNameNestedStructWithListQueryTimestampsInputepochSecondsOnTargetN" +
+	"estedStructWithMapStructureListMemberXmlNamespacesOutputXmlTimestampsOutputNoInputAndNoOutputRenamed" +
+	"ListMembersXmlNamespaceNestedrenamedListMembersEndpointOperationXmlIntEnumsOutputXmlNamespacedListfa" +
+	"lseBooleanValueNestedStringListXmlMapsOutputMapdateTimeOnTargetemptyStringValuehttpDateOnTargetneste" +
+	"dStringListtrueBooleanValueCustomCodeErrorIntegerEnumListInvalidGreetingListWithXmlNameQueryListsInp" +
+	"utrecursiveMemberComplexListArgGreetingStructHostLabelInputIntegerEnumMapIntegerEnumSetNestedWithLis" +
+	"tQueryMapsInputXmlBlobsOutputXmlEnumsOutputXmlListsOutputflattenedList2ComplexMapArgRenamedMapArgTim" +
+	"estampListXmlEmptyBlobsXmlEmptyListsstructureListtimestampListComplexErrorEpochSecondsRecursiveArgXm" +
+	"lEmptyMapsintegerValuenormalFormatBooleanListFooEnumListIntegerListbooleanListdoubleValueepochMember" +
+	"epochTargetfooEnumListintEnumListintegerListstringValueFloatValueFooEnumMapFooEnumSetMapOfListsfloat" +
+	"ValuefooEnumMapfooEnumSetintEnumMapintEnumSetshortValuestringListStringArgStringMapStringSetStructAr" +
+	"gbyteValuelongValuestringSetAwsQueryDateTimeHttpDateOtherArgTopLeveldatetimeencodingenumListfooEnum1" +
+	"fooEnum2fooEnum3greetingintEnum1intEnum2intEnum3MessageDoublemembervaluesShortlabelmyMaptokenByteLon" +
+	"gUnitZEROdataBARBAZBamBarBazFOOONEQuxbarkeyhi"
+
+var set = smithy.SchemaSet{
+	Blob:       blob,
+	Namespaces: []string{"aws.protocoltests.query", "aws.protocoltests.shared", "smithy.api"},
+	Records: []smithy.StaticRecord{
+		{StrOff: 614, Target: 0, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 234, Target: 1, Traits: 0, StrLen: 24, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 947, Target: 2, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 264, Target: 3, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 4, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 5, Traits: 0, StrLen: 26, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 0, Target: 6, Traits: 0, StrLen: 31, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 502, Target: 7, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 431, Target: 8, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 656, Target: 9, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 323, Target: 10, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 677, Target: 11, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 875, Target: 12, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 570, Target: 13, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 378, Target: 14, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 75, Target: 15, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1187, Target: 16, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1301, Target: 17, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 759, Target: 18, Traits: 0, StrLen: 15, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 141, Target: 19, Traits: 0, StrLen: 18, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 592, Target: 20, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 203, Target: 21, Traits: 0, StrLen: 25, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1315, Target: 22, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1410, Target: 23, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1423, Target: 24, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1498, Target: 25, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1329, Target: 26, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 964, Target: 27, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1343, Target: 28, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 525, Target: 29, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 525, Target: 30, Traits: 0, StrLen: 14, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 837, Target: 31, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 856, Target: 32, Traits: 0, StrLen: 13, Count: 0, Type: uint8(smithy.ShapeTypeOperation), Flags: 0},
+		{StrOff: 1828, Target: 33, Traits: 1, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeService), Flags: 0},
+		{StrOff: 1462, Target: 34, Traits: 2, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1860, Target: 257, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 165, Target: 40, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1371, Target: 37, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2040, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 115, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 548, Target: 40, Traits: 0, StrLen: 22, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1545, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1127, Target: 42, Traits: 3, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1948, Target: 257, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 40, Target: 44, Traits: 0, StrLen: 35, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2040, Target: 257, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 257, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 0, Target: 47, Traits: 0, StrLen: 40, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2040, Target: 257, Traits: 6, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 257, Traits: 7, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1157, Target: 50, Traits: 2, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1948, Target: 257, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 118, Target: 52, Traits: 8, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1961, Target: 257, Traits: 9, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 414, Target: 54, Traits: 8, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1961, Target: 257, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1172, Target: 56, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1961, Target: 257, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1685, Target: 58, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2040, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 133, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 12, Target: 61, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2040, Target: 257, Traits: 4, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 257, Traits: 5, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 739, Target: 64, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 360, Target: 133, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 799, Target: 66, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1378, Target: 135, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 141, Target: 68, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1611, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1095, Target: 71, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 172, Target: 71, Traits: 0, StrLen: 31, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2037, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1202, Target: 68, Traits: 0, StrLen: 15, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 893, Target: 74, Traits: 0, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1961, Target: 257, Traits: 10, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1792, Target: 76, Traits: 0, StrLen: 9, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1765, Target: 257, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1852, Target: 258, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1486, Target: 76, Traits: 0, StrLen: 12, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 818, Target: 80, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1961, Target: 82, Traits: 10, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 818, Target: 82, Traits: 0, StrLen: 19, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2, Target: 257, Traits: 11, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 129, Target: 257, Traits: 12, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1031, Target: 85, Traits: 0, StrLen: 16, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2040, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 115, Traits: 0, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 525, Target: 88, Traits: 0, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 0},
+		{StrOff: 2040, Target: 257, Traits: 13, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 115, Traits: 14, StrLen: 5, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 981, Target: 91, Traits: 0, StrLen: 17, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 0},
+		{StrOff: 1961, Target: 257, Traits: 15, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 911, Target: 93, Traits: 16, StrLen: 18, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1611, Target: 257, Traits: 17, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 91, Traits: 18, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1534, Target: 96, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 258, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1836, Target: 98, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 1474, Target: 99, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 1545, Target: 100, Traits: 0, StrLen: 7, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 2},
+		{StrOff: 2028, Target: 259, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2016, Target: 259, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2013, Target: 259, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2031, Target: 259, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 2005, Target: 259, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1545, Target: 106, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 100, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1665, Target: 108, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 2},
+		{StrOff: 2040, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 100, Traits: 0, StrLen: 5, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1675, Target: 111, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 100, Traits: 0, StrLen: 6, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1164, Target: 113, Traits: 0, StrLen: 12, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 115, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1231, Target: 115, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 2},
+		{StrOff: 2043, Target: 257, Traits: 0, StrLen: 2, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1844, Target: 117, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 2},
+		{StrOff: 1142, Target: 118, Traits: 0, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeIntEnum), Flags: 2},
+		{StrOff: 96, Target: 259, Traits: 0, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1003, Target: 259, Traits: 0, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 385, Target: 259, Traits: 0, StrLen: 1, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1142, Target: 122, Traits: 0, StrLen: 15, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 118, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeIntEnum), Flags: 1},
+		{StrOff: 1259, Target: 124, Traits: 0, StrLen: 14, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 2},
+		{StrOff: 2040, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 118, Traits: 0, StrLen: 5, Count: 3, Type: uint8(smithy.ShapeTypeIntEnum), Flags: 1},
+		{StrOff: 1273, Target: 127, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 118, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeIntEnum), Flags: 1},
+		{StrOff: 1556, Target: 129, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 260, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1015, Target: 131, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 133, Traits: 0, StrLen: 6, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1021, Target: 133, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 257, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1774, Target: 135, Traits: 0, StrLen: 9, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 2},
+		{StrOff: 2040, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1967, Target: 257, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1783, Target: 138, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 257, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1397, Target: 140, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 2},
+		{StrOff: 1961, Target: 261, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 614, Target: 142, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1868, Target: 98, Traits: 22, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 294, Target: 144, Traits: 0, StrLen: 29, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 234, Target: 145, Traits: 0, StrLen: 30, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1245, Target: 146, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1978, Target: 257, Traits: 23, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 635, Target: 148, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1983, Target: 108, Traits: 24, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 40, Target: 150, Traits: 0, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1983, Target: 44, Traits: 25, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 0, Target: 152, Traits: 0, StrLen: 37, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1983, Target: 47, Traits: 26, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 502, Target: 154, Traits: 0, StrLen: 23, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1868, Target: 98, Traits: 22, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 431, Target: 156, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1916, Target: 257, Traits: 0, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 323, Target: 158, Traits: 27, StrLen: 28, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1611, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 677, Target: 160, Traits: 0, StrLen: 21, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 165, Target: 76, Traits: 0, StrLen: 6, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 698, Target: 162, Traits: 0, StrLen: 21, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 570, Target: 163, Traits: 0, StrLen: 22, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 378, Target: 164, Traits: 0, StrLen: 27, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1876, Target: 257, Traits: 28, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2009, Target: 257, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 75, Target: 167, Traits: 0, StrLen: 34, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1988, Target: 257, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1187, Target: 169, Traits: 0, StrLen: 15, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 360, Target: 133, Traits: 0, StrLen: 7, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1217, Target: 113, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 351, Target: 133, Traits: 24, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 455, Target: 56, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 351, Target: 56, Traits: 29, StrLen: 27, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1287, Target: 64, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 1301, Target: 176, Traits: 0, StrLen: 14, Count: 8, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1378, Target: 135, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1384, Target: 135, Traits: 30, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1371, Target: 37, Traits: 0, StrLen: 13, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 719, Target: 61, Traits: 0, StrLen: 20, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 479, Target: 135, Traits: 24, StrLen: 12, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 479, Target: 61, Traits: 29, StrLen: 23, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1685, Target: 58, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 799, Target: 66, Traits: 0, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 759, Target: 185, Traits: 0, StrLen: 20, Count: 3, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1522, Target: 261, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1589, Target: 261, Traits: 20, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1600, Target: 99, Traits: 31, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 141, Target: 189, Traits: 0, StrLen: 24, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1095, Target: 68, Traits: 0, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 592, Target: 191, Traits: 0, StrLen: 22, Count: 9, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1545, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2022, Target: 257, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 2025, Target: 258, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 2019, Target: 260, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1655, Target: 262, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 1003, Target: 263, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 2034, Target: 264, Traits: 0, StrLen: 3, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1545, Target: 100, Traits: 0, StrLen: 7, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1142, Target: 118, Traits: 0, StrLen: 11, Count: 3, Type: uint8(smithy.ShapeTypeIntEnum), Flags: 1},
+		{StrOff: 203, Target: 201, Traits: 0, StrLen: 31, Count: 10, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1644, Target: 257, Traits: 0, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1063, Target: 257, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 1},
+		{StrOff: 1111, Target: 258, Traits: 0, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 998, Target: 258, Traits: 0, StrLen: 17, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 1},
+		{StrOff: 1801, Target: 265, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeByte), Flags: 1},
+		{StrOff: 1745, Target: 266, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeShort), Flags: 1},
+		{StrOff: 1510, Target: 260, Traits: 0, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 1},
+		{StrOff: 1810, Target: 267, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 1},
+		{StrOff: 1695, Target: 262, Traits: 0, StrLen: 10, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 1},
+		{StrOff: 1578, Target: 263, Traits: 32, StrLen: 11, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 1},
+		{StrOff: 1315, Target: 212, Traits: 0, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 2009, Target: 264, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 1},
+		{StrOff: 1343, Target: 214, Traits: 0, StrLen: 14, Count: 14, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1755, Target: 133, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1819, Target: 138, Traits: 0, StrLen: 9, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1633, Target: 129, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1567, Target: 96, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1449, Target: 140, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1884, Target: 106, Traits: 0, StrLen: 8, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1622, Target: 122, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1095, Target: 131, Traits: 0, StrLen: 16, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 929, Target: 74, Traits: 33, StrLen: 18, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 109, Target: 74, Traits: 24, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1357, Target: 74, Traits: 34, StrLen: 14, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 109, Target: 52, Traits: 35, StrLen: 32, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 405, Target: 54, Traits: 35, StrLen: 26, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1436, Target: 80, Traits: 36, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1031, Target: 229, Traits: 0, StrLen: 13, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1983, Target: 85, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 1329, Target: 231, Traits: 0, StrLen: 14, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1892, Target: 100, Traits: 0, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1900, Target: 100, Traits: 0, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1908, Target: 100, Traits: 0, StrLen: 8, Count: 5, Type: uint8(smithy.ShapeTypeEnum), Flags: 1},
+		{StrOff: 1611, Target: 106, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1715, Target: 111, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1705, Target: 108, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 964, Target: 238, Traits: 0, StrLen: 17, Count: 6, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1924, Target: 118, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeIntEnum), Flags: 1},
+		{StrOff: 1932, Target: 118, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeIntEnum), Flags: 1},
+		{StrOff: 1940, Target: 118, Traits: 0, StrLen: 8, Count: 3, Type: uint8(smithy.ShapeTypeIntEnum), Flags: 1},
+		{StrOff: 1622, Target: 122, Traits: 0, StrLen: 11, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1735, Target: 127, Traits: 0, StrLen: 10, Count: 1, Type: uint8(smithy.ShapeTypeList), Flags: 1},
+		{StrOff: 1725, Target: 124, Traits: 0, StrLen: 10, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 525, Target: 245, Traits: 0, StrLen: 20, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1983, Target: 88, Traits: 0, StrLen: 5, Count: 2, Type: uint8(smithy.ShapeTypeMap), Flags: 1},
+		{StrOff: 837, Target: 247, Traits: 37, StrLen: 19, Count: 1, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1095, Target: 93, Traits: 38, StrLen: 6, Count: 2, Type: uint8(smithy.ShapeTypeStructure), Flags: 1},
+		{StrOff: 856, Target: 249, Traits: 0, StrLen: 19, Count: 7, Type: uint8(smithy.ShapeTypeStructure), Flags: 0},
+		{StrOff: 1522, Target: 261, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1047, Target: 261, Traits: 19, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1047, Target: 98, Traits: 22, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 779, Target: 261, Traits: 20, StrLen: 12, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 779, Target: 99, Traits: 31, StrLen: 20, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1079, Target: 261, Traits: 21, StrLen: 8, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1079, Target: 117, Traits: 39, StrLen: 16, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 1},
+		{StrOff: 1021, Target: 257, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeString), Flags: 4},
+		{StrOff: 1003, Target: 258, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeBoolean), Flags: 4},
+		{StrOff: 2001, Target: 259, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeStructure), Flags: 4},
+		{StrOff: 1142, Target: 260, Traits: 0, StrLen: 7, Count: 0, Type: uint8(smithy.ShapeTypeInteger), Flags: 4},
+		{StrOff: 764, Target: 261, Traits: 0, StrLen: 9, Count: 0, Type: uint8(smithy.ShapeTypeTimestamp), Flags: 4},
+		{StrOff: 1655, Target: 262, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeFloat), Flags: 4},
+		{StrOff: 1955, Target: 263, Traits: 0, StrLen: 6, Count: 0, Type: uint8(smithy.ShapeTypeDouble), Flags: 4},
+		{StrOff: 1318, Target: 264, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeBlob), Flags: 4},
+		{StrOff: 1993, Target: 265, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeByte), Flags: 4},
+		{StrOff: 1973, Target: 266, Traits: 0, StrLen: 5, Count: 0, Type: uint8(smithy.ShapeTypeShort), Flags: 4},
+		{StrOff: 1997, Target: 267, Traits: 0, StrLen: 4, Count: 0, Type: uint8(smithy.ShapeTypeLong), Flags: 4},
+	},
+	Traits: []smithy.TraitSet{
+		{},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://example.com/"}}, DirectMask: 0x8000},
+		{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Customized",
+			StatusCode: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x200},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "K"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "V"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "K"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://the-key.example.com"}}, DirectMask: 0x8008},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "V"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://the-value.example.com"}}, DirectMask: 0x8008},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://xml-list.example.com"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://xml-member.example.com"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "item"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "value"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "other"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Attribute"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Setting"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://bux.com"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://boo.com"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://baz.com",
+			Prefix: "baz"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://qux.com"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "http-date"}}, DirectMask: 0x400},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HostLabel{}}, DirectMask: 0x4000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLFlattened{}}, DirectMask: 0x10000},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "KVP"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLFlattened{}}, DirectMask: 0x10008},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "KVP"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://the-member.example.com"}, &smithytraits.XMLFlattened{}}, DirectMask: 0x18008},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "IgnoreMe"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Encoding"}}, DirectMask: 0x80},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Hi"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLFlattened{}}, DirectMask: 0x10008},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Foo"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DoubleDribble"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "renamed"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "customName"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLFlattened{}}, DirectMask: 0x10008},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://xml-list.example.com"}, &smithytraits.XMLFlattened{}}, DirectMask: 0x10000},
+		{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "myStructureList"}}, DirectMask: 0x8},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://foo.com"}}, DirectMask: 0x8000},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://boo.com"}}},
+		{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "http-date"}}},
+	},
 }
+
+var handles = [268]smithy.Schema{
+	smithy.NewStaticSchema(&set, 0),
+	smithy.NewStaticSchema(&set, 1),
+	smithy.NewStaticSchema(&set, 2),
+	smithy.NewStaticSchema(&set, 3),
+	smithy.NewStaticSchema(&set, 4),
+	smithy.NewStaticSchema(&set, 5),
+	smithy.NewStaticSchema(&set, 6),
+	smithy.NewStaticSchema(&set, 7),
+	smithy.NewStaticSchema(&set, 8),
+	smithy.NewStaticSchema(&set, 9),
+	smithy.NewStaticSchema(&set, 10),
+	smithy.NewStaticSchema(&set, 11),
+	smithy.NewStaticSchema(&set, 12),
+	smithy.NewStaticSchema(&set, 13),
+	smithy.NewStaticSchema(&set, 14),
+	smithy.NewStaticSchema(&set, 15),
+	smithy.NewStaticSchema(&set, 16),
+	smithy.NewStaticSchema(&set, 17),
+	smithy.NewStaticSchema(&set, 18),
+	smithy.NewStaticSchema(&set, 19),
+	smithy.NewStaticSchema(&set, 20),
+	smithy.NewStaticSchema(&set, 21),
+	smithy.NewStaticSchema(&set, 22),
+	smithy.NewStaticSchema(&set, 23),
+	smithy.NewStaticSchema(&set, 24),
+	smithy.NewStaticSchema(&set, 25),
+	smithy.NewStaticSchema(&set, 26),
+	smithy.NewStaticSchema(&set, 27),
+	smithy.NewStaticSchema(&set, 28),
+	smithy.NewStaticSchema(&set, 29),
+	smithy.NewStaticSchema(&set, 30),
+	smithy.NewStaticSchema(&set, 31),
+	smithy.NewStaticSchema(&set, 32),
+	smithy.NewStaticSchema(&set, 33),
+	smithy.NewStaticSchema(&set, 34),
+	smithy.NewStaticSchema(&set, 35),
+	smithy.NewStaticSchema(&set, 36),
+	smithy.NewStaticSchema(&set, 37),
+	smithy.NewStaticSchema(&set, 38),
+	smithy.NewStaticSchema(&set, 39),
+	smithy.NewStaticSchema(&set, 40),
+	smithy.NewStaticSchema(&set, 41),
+	smithy.NewStaticSchema(&set, 42),
+	smithy.NewStaticSchema(&set, 43),
+	smithy.NewStaticSchema(&set, 44),
+	smithy.NewStaticSchema(&set, 45),
+	smithy.NewStaticSchema(&set, 46),
+	smithy.NewStaticSchema(&set, 47),
+	smithy.NewStaticSchema(&set, 48),
+	smithy.NewStaticSchema(&set, 49),
+	smithy.NewStaticSchema(&set, 50),
+	smithy.NewStaticSchema(&set, 51),
+	smithy.NewStaticSchema(&set, 52),
+	smithy.NewStaticSchema(&set, 53),
+	smithy.NewStaticSchema(&set, 54),
+	smithy.NewStaticSchema(&set, 55),
+	smithy.NewStaticSchema(&set, 56),
+	smithy.NewStaticSchema(&set, 57),
+	smithy.NewStaticSchema(&set, 58),
+	smithy.NewStaticSchema(&set, 59),
+	smithy.NewStaticSchema(&set, 60),
+	smithy.NewStaticSchema(&set, 61),
+	smithy.NewStaticSchema(&set, 62),
+	smithy.NewStaticSchema(&set, 63),
+	smithy.NewStaticSchema(&set, 64),
+	smithy.NewStaticSchema(&set, 65),
+	smithy.NewStaticSchema(&set, 66),
+	smithy.NewStaticSchema(&set, 67),
+	smithy.NewStaticSchema(&set, 68),
+	smithy.NewStaticSchema(&set, 69),
+	smithy.NewStaticSchema(&set, 70),
+	smithy.NewStaticSchema(&set, 71),
+	smithy.NewStaticSchema(&set, 72),
+	smithy.NewStaticSchema(&set, 73),
+	smithy.NewStaticSchema(&set, 74),
+	smithy.NewStaticSchema(&set, 75),
+	smithy.NewStaticSchema(&set, 76),
+	smithy.NewStaticSchema(&set, 77),
+	smithy.NewStaticSchema(&set, 78),
+	smithy.NewStaticSchema(&set, 79),
+	smithy.NewStaticSchema(&set, 80),
+	smithy.NewStaticSchema(&set, 81),
+	smithy.NewStaticSchema(&set, 82),
+	smithy.NewStaticSchema(&set, 83),
+	smithy.NewStaticSchema(&set, 84),
+	smithy.NewStaticSchema(&set, 85),
+	smithy.NewStaticSchema(&set, 86),
+	smithy.NewStaticSchema(&set, 87),
+	smithy.NewStaticSchema(&set, 88),
+	smithy.NewStaticSchema(&set, 89),
+	smithy.NewStaticSchema(&set, 90),
+	smithy.NewStaticSchema(&set, 91),
+	smithy.NewStaticSchema(&set, 92),
+	smithy.NewStaticSchema(&set, 93),
+	smithy.NewStaticSchema(&set, 94),
+	smithy.NewStaticSchema(&set, 95),
+	smithy.NewStaticSchema(&set, 96),
+	smithy.NewStaticSchema(&set, 97),
+	smithy.NewStaticSchema(&set, 98),
+	smithy.NewStaticSchema(&set, 99),
+	smithy.NewStaticSchema(&set, 100),
+	smithy.NewStaticSchema(&set, 101),
+	smithy.NewStaticSchema(&set, 102),
+	smithy.NewStaticSchema(&set, 103),
+	smithy.NewStaticSchema(&set, 104),
+	smithy.NewStaticSchema(&set, 105),
+	smithy.NewStaticSchema(&set, 106),
+	smithy.NewStaticSchema(&set, 107),
+	smithy.NewStaticSchema(&set, 108),
+	smithy.NewStaticSchema(&set, 109),
+	smithy.NewStaticSchema(&set, 110),
+	smithy.NewStaticSchema(&set, 111),
+	smithy.NewStaticSchema(&set, 112),
+	smithy.NewStaticSchema(&set, 113),
+	smithy.NewStaticSchema(&set, 114),
+	smithy.NewStaticSchema(&set, 115),
+	smithy.NewStaticSchema(&set, 116),
+	smithy.NewStaticSchema(&set, 117),
+	smithy.NewStaticSchema(&set, 118),
+	smithy.NewStaticSchema(&set, 119),
+	smithy.NewStaticSchema(&set, 120),
+	smithy.NewStaticSchema(&set, 121),
+	smithy.NewStaticSchema(&set, 122),
+	smithy.NewStaticSchema(&set, 123),
+	smithy.NewStaticSchema(&set, 124),
+	smithy.NewStaticSchema(&set, 125),
+	smithy.NewStaticSchema(&set, 126),
+	smithy.NewStaticSchema(&set, 127),
+	smithy.NewStaticSchema(&set, 128),
+	smithy.NewStaticSchema(&set, 129),
+	smithy.NewStaticSchema(&set, 130),
+	smithy.NewStaticSchema(&set, 131),
+	smithy.NewStaticSchema(&set, 132),
+	smithy.NewStaticSchema(&set, 133),
+	smithy.NewStaticSchema(&set, 134),
+	smithy.NewStaticSchema(&set, 135),
+	smithy.NewStaticSchema(&set, 136),
+	smithy.NewStaticSchema(&set, 137),
+	smithy.NewStaticSchema(&set, 138),
+	smithy.NewStaticSchema(&set, 139),
+	smithy.NewStaticSchema(&set, 140),
+	smithy.NewStaticSchema(&set, 141),
+	smithy.NewStaticSchema(&set, 142),
+	smithy.NewStaticSchema(&set, 143),
+	smithy.NewStaticSchema(&set, 144),
+	smithy.NewStaticSchema(&set, 145),
+	smithy.NewStaticSchema(&set, 146),
+	smithy.NewStaticSchema(&set, 147),
+	smithy.NewStaticSchema(&set, 148),
+	smithy.NewStaticSchema(&set, 149),
+	smithy.NewStaticSchema(&set, 150),
+	smithy.NewStaticSchema(&set, 151),
+	smithy.NewStaticSchema(&set, 152),
+	smithy.NewStaticSchema(&set, 153),
+	smithy.NewStaticSchema(&set, 154),
+	smithy.NewStaticSchema(&set, 155),
+	smithy.NewStaticSchema(&set, 156),
+	smithy.NewStaticSchema(&set, 157),
+	smithy.NewStaticSchema(&set, 158),
+	smithy.NewStaticSchema(&set, 159),
+	smithy.NewStaticSchema(&set, 160),
+	smithy.NewStaticSchema(&set, 161),
+	smithy.NewStaticSchema(&set, 162),
+	smithy.NewStaticSchema(&set, 163),
+	smithy.NewStaticSchema(&set, 164),
+	smithy.NewStaticSchema(&set, 165),
+	smithy.NewStaticSchema(&set, 166),
+	smithy.NewStaticSchema(&set, 167),
+	smithy.NewStaticSchema(&set, 168),
+	smithy.NewStaticSchema(&set, 169),
+	smithy.NewStaticSchema(&set, 170),
+	smithy.NewStaticSchema(&set, 171),
+	smithy.NewStaticSchema(&set, 172),
+	smithy.NewStaticSchema(&set, 173),
+	smithy.NewStaticSchema(&set, 174),
+	smithy.NewStaticSchema(&set, 175),
+	smithy.NewStaticSchema(&set, 176),
+	smithy.NewStaticSchema(&set, 177),
+	smithy.NewStaticSchema(&set, 178),
+	smithy.NewStaticSchema(&set, 179),
+	smithy.NewStaticSchema(&set, 180),
+	smithy.NewStaticSchema(&set, 181),
+	smithy.NewStaticSchema(&set, 182),
+	smithy.NewStaticSchema(&set, 183),
+	smithy.NewStaticSchema(&set, 184),
+	smithy.NewStaticSchema(&set, 185),
+	smithy.NewStaticSchema(&set, 186),
+	smithy.NewStaticSchema(&set, 187),
+	smithy.NewStaticSchema(&set, 188),
+	smithy.NewStaticSchema(&set, 189),
+	smithy.NewStaticSchema(&set, 190),
+	smithy.NewStaticSchema(&set, 191),
+	smithy.NewStaticSchema(&set, 192),
+	smithy.NewStaticSchema(&set, 193),
+	smithy.NewStaticSchema(&set, 194),
+	smithy.NewStaticSchema(&set, 195),
+	smithy.NewStaticSchema(&set, 196),
+	smithy.NewStaticSchema(&set, 197),
+	smithy.NewStaticSchema(&set, 198),
+	smithy.NewStaticSchema(&set, 199),
+	smithy.NewStaticSchema(&set, 200),
+	smithy.NewStaticSchema(&set, 201),
+	smithy.NewStaticSchema(&set, 202),
+	smithy.NewStaticSchema(&set, 203),
+	smithy.NewStaticSchema(&set, 204),
+	smithy.NewStaticSchema(&set, 205),
+	smithy.NewStaticSchema(&set, 206),
+	smithy.NewStaticSchema(&set, 207),
+	smithy.NewStaticSchema(&set, 208),
+	smithy.NewStaticSchema(&set, 209),
+	smithy.NewStaticSchema(&set, 210),
+	smithy.NewStaticSchema(&set, 211),
+	smithy.NewStaticSchema(&set, 212),
+	smithy.NewStaticSchema(&set, 213),
+	smithy.NewStaticSchema(&set, 214),
+	smithy.NewStaticSchema(&set, 215),
+	smithy.NewStaticSchema(&set, 216),
+	smithy.NewStaticSchema(&set, 217),
+	smithy.NewStaticSchema(&set, 218),
+	smithy.NewStaticSchema(&set, 219),
+	smithy.NewStaticSchema(&set, 220),
+	smithy.NewStaticSchema(&set, 221),
+	smithy.NewStaticSchema(&set, 222),
+	smithy.NewStaticSchema(&set, 223),
+	smithy.NewStaticSchema(&set, 224),
+	smithy.NewStaticSchema(&set, 225),
+	smithy.NewStaticSchema(&set, 226),
+	smithy.NewStaticSchema(&set, 227),
+	smithy.NewStaticSchema(&set, 228),
+	smithy.NewStaticSchema(&set, 229),
+	smithy.NewStaticSchema(&set, 230),
+	smithy.NewStaticSchema(&set, 231),
+	smithy.NewStaticSchema(&set, 232),
+	smithy.NewStaticSchema(&set, 233),
+	smithy.NewStaticSchema(&set, 234),
+	smithy.NewStaticSchema(&set, 235),
+	smithy.NewStaticSchema(&set, 236),
+	smithy.NewStaticSchema(&set, 237),
+	smithy.NewStaticSchema(&set, 238),
+	smithy.NewStaticSchema(&set, 239),
+	smithy.NewStaticSchema(&set, 240),
+	smithy.NewStaticSchema(&set, 241),
+	smithy.NewStaticSchema(&set, 242),
+	smithy.NewStaticSchema(&set, 243),
+	smithy.NewStaticSchema(&set, 244),
+	smithy.NewStaticSchema(&set, 245),
+	smithy.NewStaticSchema(&set, 246),
+	smithy.NewStaticSchema(&set, 247),
+	smithy.NewStaticSchema(&set, 248),
+	smithy.NewStaticSchema(&set, 249),
+	smithy.NewStaticSchema(&set, 250),
+	smithy.NewStaticSchema(&set, 251),
+	smithy.NewStaticSchema(&set, 252),
+	smithy.NewStaticSchema(&set, 253),
+	smithy.NewStaticSchema(&set, 254),
+	smithy.NewStaticSchema(&set, 255),
+	smithy.NewStaticSchema(&set, 256),
+	smithy.NewStaticSchema(&set, 257),
+	smithy.NewStaticSchema(&set, 258),
+	smithy.NewStaticSchema(&set, 259),
+	smithy.NewStaticSchema(&set, 260),
+	smithy.NewStaticSchema(&set, 261),
+	smithy.NewStaticSchema(&set, 262),
+	smithy.NewStaticSchema(&set, 263),
+	smithy.NewStaticSchema(&set, 264),
+	smithy.NewStaticSchema(&set, 265),
+	smithy.NewStaticSchema(&set, 266),
+	smithy.NewStaticSchema(&set, 267),
+}
+
+var DatetimeOffsets = &handles[0]
+
+var EmptyInputAndEmptyOutput = &handles[1]
+
+var EndpointOperation = &handles[2]
+
+var EndpointWithHostLabelOperation = &handles[3]
+
+var FlattenedXmlMap = &handles[4]
+
+var FlattenedXmlMapWithXmlName = &handles[5]
+
+var FlattenedXmlMapWithXmlNamespace = &handles[6]
+
+var FractionalSeconds = &handles[7]
+
+var GreetingWithErrors = &handles[8]
+
+var HostWithPathOperation = &handles[9]
+
+var IgnoresWrappingXmlName = &handles[10]
+
+var NestedStructures = &handles[11]
+
+var NoInputAndNoOutput = &handles[12]
+
+var NoInputAndOutput = &handles[13]
+
+var PutWithContentEncoding = &handles[14]
+
+var QueryIdempotencyTokenAutoFill = &handles[15]
+
+var QueryLists = &handles[16]
+
+var QueryMaps = &handles[17]
+
+var QueryTimestamps = &handles[18]
+
+var RecursiveXmlShapes = &handles[19]
+
+var SimpleInputParams = &handles[20]
+
+var SimpleScalarXmlProperties = &handles[21]
+
+var XmlBlobs = &handles[22]
+
+var XmlEmptyBlobs = &handles[23]
+
+var XmlEmptyLists = &handles[24]
+
+var XmlEmptyMaps = &handles[25]
+
+var XmlEnums = &handles[26]
+
+var XmlIntEnums = &handles[27]
+
+var XmlLists = &handles[28]
+
+var XmlMaps = &handles[29]
+
+var XmlMapsXmlName = &handles[30]
+
+var XmlNamespaces = &handles[31]
+
+var XmlTimestamps = &handles[32]
+
+var _AwsQuery = &handles[33]
+
+var ComplexError = &handles[34]
+var ComplexError_TopLevel = &handles[35]
+var ComplexError_Nested = &handles[36]
+
+var _ComplexMap = &handles[37]
+var _ComplexMap_key = &handles[38]
+var _ComplexMap_value = &handles[39]
+
+var ComplexNestedErrorData = &handles[40]
+var ComplexNestedErrorData_Foo = &handles[41]
+
+var CustomCodeError = &handles[42]
+var CustomCodeError_Message = &handles[43]
+
+var _FlattenedXmlMapWithXmlNameOutputMap = &handles[44]
+var _FlattenedXmlMapWithXmlNameOutputMap_key = &handles[45]
+var _FlattenedXmlMapWithXmlNameOutputMap_value = &handles[46]
+
+var _FlattenedXmlMapWithXmlNamespaceOutputMap = &handles[47]
+var _FlattenedXmlMapWithXmlNamespaceOutputMap_key = &handles[48]
+var _FlattenedXmlMapWithXmlNamespaceOutputMap_value = &handles[49]
+
+var InvalidGreeting = &handles[50]
+var InvalidGreeting_Message = &handles[51]
+
+var _ListWithMemberNamespace = &handles[52]
+var _ListWithMemberNamespace_member = &handles[53]
+
+var _ListWithNamespace = &handles[54]
+var _ListWithNamespace_member = &handles[55]
+
+var _ListWithXmlName = &handles[56]
+var _ListWithXmlName_member = &handles[57]
+
+var _MapOfLists = &handles[58]
+var _MapOfLists_key = &handles[59]
+var _MapOfLists_value = &handles[60]
+
+var _MapWithXmlName = &handles[61]
+var _MapWithXmlName_key = &handles[62]
+var _MapWithXmlName_value = &handles[63]
+
+var NestedStructWithList = &handles[64]
+var NestedStructWithList_ListArg = &handles[65]
+
+var NestedStructWithMap = &handles[66]
+var NestedStructWithMap_MapArg = &handles[67]
+
+var RecursiveXmlShapesOutputNested1 = &handles[68]
+var RecursiveXmlShapesOutputNested1_foo = &handles[69]
+var RecursiveXmlShapesOutputNested1_nested = &handles[70]
+
+var RecursiveXmlShapesOutputNested2 = &handles[71]
+var RecursiveXmlShapesOutputNested2_bar = &handles[72]
+var RecursiveXmlShapesOutputNested2_recursiveMember = &handles[73]
+
+var _RenamedListMembers = &handles[74]
+var _RenamedListMembers_member = &handles[75]
+
+var StructArg = &handles[76]
+var StructArg_StringArg = &handles[77]
+var StructArg_OtherArg = &handles[78]
+var StructArg_RecursiveArg = &handles[79]
+
+var _StructureList = &handles[80]
+var _StructureList_member = &handles[81]
+
+var StructureListMember = &handles[82]
+var StructureListMember_a = &handles[83]
+var StructureListMember_b = &handles[84]
+
+var _XmlMapsOutputMap = &handles[85]
+var _XmlMapsOutputMap_key = &handles[86]
+var _XmlMapsOutputMap_value = &handles[87]
+
+var _XmlMapsXmlNameOutputMap = &handles[88]
+var _XmlMapsXmlNameOutputMap_key = &handles[89]
+var _XmlMapsXmlNameOutputMap_value = &handles[90]
+
+var _XmlNamespacedList = &handles[91]
+var _XmlNamespacedList_member = &handles[92]
+
+var XmlNamespaceNested = &handles[93]
+var XmlNamespaceNested_foo = &handles[94]
+var XmlNamespaceNested_values = &handles[95]
+
+var _BooleanList = &handles[96]
+var _BooleanList_member = &handles[97]
+
+var _DateTime = &handles[98]
+
+var _EpochSeconds = &handles[99]
+
+var FooEnum = &handles[100]
+var FooEnum_FOO = &handles[101]
+var FooEnum_BAZ = &handles[102]
+var FooEnum_BAR = &handles[103]
+var FooEnum_ONE = &handles[104]
+var FooEnum_ZERO = &handles[105]
+
+var _FooEnumList = &handles[106]
+var _FooEnumList_member = &handles[107]
+
+var _FooEnumMap = &handles[108]
+var _FooEnumMap_key = &handles[109]
+var _FooEnumMap_value = &handles[110]
+
+var _FooEnumSet = &handles[111]
+var _FooEnumSet_member = &handles[112]
+
+var _GreetingList = &handles[113]
+var _GreetingList_member = &handles[114]
+
+var GreetingStruct = &handles[115]
+var GreetingStruct_hi = &handles[116]
+
+var _HttpDate = &handles[117]
+
+var _IntegerEnum = &handles[118]
+var _IntegerEnum_A = &handles[119]
+var _IntegerEnum_B = &handles[120]
+var _IntegerEnum_C = &handles[121]
+
+var _IntegerEnumList = &handles[122]
+var _IntegerEnumList_member = &handles[123]
+
+var _IntegerEnumMap = &handles[124]
+var _IntegerEnumMap_key = &handles[125]
+var _IntegerEnumMap_value = &handles[126]
+
+var _IntegerEnumSet = &handles[127]
+var _IntegerEnumSet_member = &handles[128]
+
+var _IntegerList = &handles[129]
+var _IntegerList_member = &handles[130]
+
+var _NestedStringList = &handles[131]
+var _NestedStringList_member = &handles[132]
+
+var _StringList = &handles[133]
+var _StringList_member = &handles[134]
+
+var _StringMap = &handles[135]
+var _StringMap_key = &handles[136]
+var _StringMap_value = &handles[137]
+
+var _StringSet = &handles[138]
+var _StringSet_member = &handles[139]
+
+var _TimestampList = &handles[140]
+var _TimestampList_member = &handles[141]
+
+var DatetimeOffsetsOutput = &handles[142]
+var DatetimeOffsetsOutput_datetime = &handles[143]
+
+var EmptyInputAndEmptyOutputInput = &handles[144]
+
+var EmptyInputAndEmptyOutputOutput = &handles[145]
+
+var HostLabelInput = &handles[146]
+var HostLabelInput_label = &handles[147]
+
+var FlattenedXmlMapOutput = &handles[148]
+var FlattenedXmlMapOutput_myMap = &handles[149]
+
+var FlattenedXmlMapWithXmlNameOutput = &handles[150]
+var FlattenedXmlMapWithXmlNameOutput_myMap = &handles[151]
+
+var FlattenedXmlMapWithXmlNamespaceOutput = &handles[152]
+var FlattenedXmlMapWithXmlNamespaceOutput_myMap = &handles[153]
+
+var FractionalSecondsOutput = &handles[154]
+var FractionalSecondsOutput_datetime = &handles[155]
+
+var GreetingWithErrorsOutput = &handles[156]
+var GreetingWithErrorsOutput_greeting = &handles[157]
+
+var IgnoresWrappingXmlNameOutput = &handles[158]
+var IgnoresWrappingXmlNameOutput_foo = &handles[159]
+
+var NestedStructuresInput = &handles[160]
+var NestedStructuresInput_Nested = &handles[161]
+
+var NoInputAndOutputInput = &handles[162]
+
+var NoInputAndOutputOutput = &handles[163]
+
+var PutWithContentEncodingInput = &handles[164]
+var PutWithContentEncodingInput_encoding = &handles[165]
+var PutWithContentEncodingInput_data = &handles[166]
+
+var QueryIdempotencyTokenAutoFillInput = &handles[167]
+var QueryIdempotencyTokenAutoFillInput_token = &handles[168]
+
+var QueryListsInput = &handles[169]
+var QueryListsInput_ListArg = &handles[170]
+var QueryListsInput_ComplexListArg = &handles[171]
+var QueryListsInput_FlattenedListArg = &handles[172]
+var QueryListsInput_ListArgWithXmlNameMember = &handles[173]
+var QueryListsInput_FlattenedListArgWithXmlName = &handles[174]
+var QueryListsInput_NestedWithList = &handles[175]
+
+var QueryMapsInput = &handles[176]
+var QueryMapsInput_MapArg = &handles[177]
+var QueryMapsInput_RenamedMapArg = &handles[178]
+var QueryMapsInput_ComplexMapArg = &handles[179]
+var QueryMapsInput_MapWithXmlMemberName = &handles[180]
+var QueryMapsInput_FlattenedMap = &handles[181]
+var QueryMapsInput_FlattenedMapWithXmlName = &handles[182]
+var QueryMapsInput_MapOfLists = &handles[183]
+var QueryMapsInput_NestedStructWithMap = &handles[184]
+
+var QueryTimestampsInput = &handles[185]
+var QueryTimestampsInput_normalFormat = &handles[186]
+var QueryTimestampsInput_epochMember = &handles[187]
+var QueryTimestampsInput_epochTarget = &handles[188]
+
+var RecursiveXmlShapesOutput = &handles[189]
+var RecursiveXmlShapesOutput_nested = &handles[190]
+
+var SimpleInputParamsInput = &handles[191]
+var SimpleInputParamsInput_Foo = &handles[192]
+var SimpleInputParamsInput_Bar = &handles[193]
+var SimpleInputParamsInput_Baz = &handles[194]
+var SimpleInputParamsInput_Bam = &handles[195]
+var SimpleInputParamsInput_FloatValue = &handles[196]
+var SimpleInputParamsInput_Boo = &handles[197]
+var SimpleInputParamsInput_Qux = &handles[198]
+var SimpleInputParamsInput_FooEnum = &handles[199]
+var SimpleInputParamsInput_IntegerEnum = &handles[200]
+
+var SimpleScalarXmlPropertiesOutput = &handles[201]
+var SimpleScalarXmlPropertiesOutput_stringValue = &handles[202]
+var SimpleScalarXmlPropertiesOutput_emptyStringValue = &handles[203]
+var SimpleScalarXmlPropertiesOutput_trueBooleanValue = &handles[204]
+var SimpleScalarXmlPropertiesOutput_falseBooleanValue = &handles[205]
+var SimpleScalarXmlPropertiesOutput_byteValue = &handles[206]
+var SimpleScalarXmlPropertiesOutput_shortValue = &handles[207]
+var SimpleScalarXmlPropertiesOutput_integerValue = &handles[208]
+var SimpleScalarXmlPropertiesOutput_longValue = &handles[209]
+var SimpleScalarXmlPropertiesOutput_floatValue = &handles[210]
+var SimpleScalarXmlPropertiesOutput_doubleValue = &handles[211]
+
+var XmlBlobsOutput = &handles[212]
+var XmlBlobsOutput_data = &handles[213]
+
+var XmlListsOutput = &handles[214]
+var XmlListsOutput_stringList = &handles[215]
+var XmlListsOutput_stringSet = &handles[216]
+var XmlListsOutput_integerList = &handles[217]
+var XmlListsOutput_booleanList = &handles[218]
+var XmlListsOutput_timestampList = &handles[219]
+var XmlListsOutput_enumList = &handles[220]
+var XmlListsOutput_intEnumList = &handles[221]
+var XmlListsOutput_nestedStringList = &handles[222]
+var XmlListsOutput_renamedListMembers = &handles[223]
+var XmlListsOutput_flattenedList = &handles[224]
+var XmlListsOutput_flattenedList2 = &handles[225]
+var XmlListsOutput_flattenedListWithMemberNamespace = &handles[226]
+var XmlListsOutput_flattenedListWithNamespace = &handles[227]
+var XmlListsOutput_structureList = &handles[228]
+
+var XmlMapsOutput = &handles[229]
+var XmlMapsOutput_myMap = &handles[230]
+
+var XmlEnumsOutput = &handles[231]
+var XmlEnumsOutput_fooEnum1 = &handles[232]
+var XmlEnumsOutput_fooEnum2 = &handles[233]
+var XmlEnumsOutput_fooEnum3 = &handles[234]
+var XmlEnumsOutput_fooEnumList = &handles[235]
+var XmlEnumsOutput_fooEnumSet = &handles[236]
+var XmlEnumsOutput_fooEnumMap = &handles[237]
+
+var XmlIntEnumsOutput = &handles[238]
+var XmlIntEnumsOutput_intEnum1 = &handles[239]
+var XmlIntEnumsOutput_intEnum2 = &handles[240]
+var XmlIntEnumsOutput_intEnum3 = &handles[241]
+var XmlIntEnumsOutput_intEnumList = &handles[242]
+var XmlIntEnumsOutput_intEnumSet = &handles[243]
+var XmlIntEnumsOutput_intEnumMap = &handles[244]
+
+var XmlMapsXmlNameOutput = &handles[245]
+var XmlMapsXmlNameOutput_myMap = &handles[246]
+
+var XmlNamespacesOutput = &handles[247]
+var XmlNamespacesOutput_nested = &handles[248]
+
+var XmlTimestampsOutput = &handles[249]
+var XmlTimestampsOutput_normal = &handles[250]
+var XmlTimestampsOutput_dateTime = &handles[251]
+var XmlTimestampsOutput_dateTimeOnTarget = &handles[252]
+var XmlTimestampsOutput_epochSeconds = &handles[253]
+var XmlTimestampsOutput_epochSecondsOnTarget = &handles[254]
+var XmlTimestampsOutput_httpDate = &handles[255]
+var XmlTimestampsOutput_httpDateOnTarget = &handles[256]
+
+var AwsQuery = &smithy.ServiceSchema{Schema: &handles[33], Version: "2020-01-08"}
